@@ -93443,9 +93443,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "e21bc07b8ee303918d7805ab69e7cd281b6632f2",
-    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "status": "merged",
+    "commit_sha": "9ec6156438eac17a3ddbab62885571ecefc35b3a",
+    "commit_sha_role": "squash_merge_commit_on_origin_main",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
       "dependency": {
@@ -93473,12 +93473,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T09:42:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -93540,9 +93540,14 @@
         "at": "2026-07-15T09:35:35Z",
         "status": "ready_to_merge",
         "note": "All nine checks passed on final ledger head a9e73801b. A valid review caught that a prior broad JSON status patch had changed ARTICLE-H1-04 instead of PR07; the unrelated entry was restored and PR07's top-level state was corrected to match its ready_to_merge manifest and transition. This bookkeeping-only correction requires one final check round."
+      },
+      {
+        "at": "2026-07-15T09:56:00Z",
+        "status": "merged",
+        "note": "PR #3111 merged at 2026-07-15T09:42:43Z as squash commit 9ec6156438eac17a3ddbab62885571ecefc35b3a after all nine required checks passed. origin/main containment, remote branch deletion, official local cleanup, clean main, and post-merge 13-test / 5095-assertion source-ledger regression plus Pint were verified before PR08 implementation."
       }
     ],
-    "updated_at": "2026-07-15T09:35:35Z"
+    "updated_at": "2026-07-15T09:56:00Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
@@ -93553,19 +93558,40 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "60ffc19e279c712ccea4ce741f6737eab33f946f",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR07 merged as 9ec6156438eac17a3ddbab62885571ecefc35b3a; GitHub MERGED state, origin/main containment, all nine green checks, remote/local branch cleanup, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first focused run exposed only a PHP PCRE fixture implementation error: JavaScript-style Unicode escapes were invalid in PCRE. The patterns were converted to native UTF-8 literals; no content-authority, claim-safety, review-truth, or mutation-boundary defect was involved."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites pass 48 tests / 2162 assertions; dash-led English/Chinese contrastive-negation regressions pass 2 tests / 322 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Spaced hyphen, en dash, em dash, double hyphen, and Chinese double em dash now terminate negation scope so following positive claims fail closed, while direct negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head b2e72a990. GitHub reports CLEAN/MERGEABLE, the Codex clean-review comment explicitly records Reviewed commit b2e72a9903 with no major issues, and GraphQL reports zero unresolved review threads."
+      },
+      "ci_fix": {
+        "status": "pass",
+        "evidence": "The repaired final diff uses only the existing registered IntegrityGate service/command paths. The exact failing runtime-path classifier plus its Enneagram allowlist regression pass 2 tests / 5 assertions; combined PR08 and PR02 feature suites pass 13 tests / 142 assertions; Pint and syntax remain green. Latest-head GitHub checks must rerun."
+      },
+      "review_fixes": {
+        "status": "pass",
+        "evidence": "All ninety-nine valid P2 findings are fixed. Dash-separated English and Chinese clauses terminate explicit-negation scope, preventing following positive claims from being blanked. The focused regressions pass 2 / 322, combined PR08+PR02 feature suites pass 48 / 2162, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93583,9 +93609,409 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
-      }
-    ],
-    "updated_at": "2026-07-15T01:12:16Z"
+      },
+      {
+        "at": "2026-07-15T09:56:00Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR07 merge and began the exact PR08 branch from clean latest origin/main. This scope adds a read-only 116-row editorial QA contract only; no CMS/database write, human-review completion, publication, deploy, indexability, sitemap, llms, search submission, or production action is authorized."
+      },
+      {
+        "at": "2026-07-15T09:57:00Z",
+        "status": "local_check_failed_implementation",
+        "note": "The first focused test run found invalid JavaScript-style Unicode escapes in PHP PCRE patterns. Native UTF-8 pattern literals replaced them before retry; the failure involved no authority data or runtime mutation."
+      },
+      {
+        "at": "2026-07-15T09:58:43Z",
+        "status": "local_checks_passed",
+        "note": "All PR08 manifest checks passed: PHP syntax, 7 tests / 83 assertions, Pint, YAML, JSON, diff check, and exact seven-file scope. The read-only service emits 116 keyed QA rows, catches all ten required negative fixture classes, and hard-closes human review, publish, CMS/database, discoverability, search, and deploy state."
+      },
+      {
+        "at": "2026-07-15T10:01:51Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact seven-file branch and opened the single authorized fap-api PR #3115 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE with initial checks queued/running and no reviews."
+      },
+      {
+        "at": "2026-07-15T10:13:17Z",
+        "status": "review_fixes_local_verified",
+        "note": "Eight checks passed; verify-bigfive failed solely because its freeze classifier rejected two newly added app paths after 1425 other tests passed. Without changing that out-of-scope classifier, the same PR08 service and command capabilities were consolidated into its already registered Enneagram Authority V2 integrity paths. The exact classifier regressions now pass 2 / 5 and PR08+PR02 pass 13 / 142; scope remains exactly seven allowlisted files and latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T10:21:36Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the CI-repair head, then five valid P2 review gaps were fixed in the gate: full visible-text safety coverage, visible-claim authorization, substantive limitations, same-page duplicate detection, and substantive normalized answerability questions. PR08+PR02 pass 14 / 150, freeze regressions 2 / 5, and Pint passes; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T10:28:42Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the five-fix head, then a sixth valid P2 was fixed: observation-exercise text now participates in duplicate/template detection while shared evidence limitations remain safety-scanned without false duplicate blocking. PR08+PR02 pass 15 / 156, freeze regressions 2 / 5, and Pint passes; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T10:36:32Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on final ledger head 66c0f3446, GitHub is CLEAN/MERGEABLE, all six valid P2 findings are fixed, and all review threads are resolved. Final diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action."
+      },
+      {
+        "at": "2026-07-15T10:44:16Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the ready-ledger head, then a seventh valid P2 was fixed: visible section headings now participate in claim-safety and duplicate scanning. PR08+PR02 pass 16 / 163, freeze regressions 2 / 5, and Pint passes; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T10:52:26Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on heading-fix ledger head 811f7df03, GitHub is CLEAN/MERGEABLE, all seven valid P2 findings are fixed, and all review threads are resolved. Final diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action."
+      },
+      {
+        "at": "2026-07-15T11:02:22Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior ready-ledger head, then two further valid P2 findings were fixed: source-ledger page limitations must remain visible, and prediction safety now catches pronoun and hyphenated career-success variants. The first retry exposed only outdated passing-fixture and issue-aggregation assumptions; after correcting those tests, PR08+PR02 pass 18 / 175, freeze regressions 2 / 5, Pint, syntax, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:10:20Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then three valid P2 findings were fixed: Chinese pronoun prediction wording, generic seven-day text with mismatched duration metadata, and Chinese-numeral type-substitution templates. PR08+PR02 pass 20 / 191, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:17:15Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: English spelled type labels Type One through Type Nine now participate in type-substitution template detection. PR08+PR02 pass 21 / 201, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:24:53Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: prediction safety now covers the PR07 blocked English and Chinese vocabulary for salary, turnover, health, admission, legal, and financial outcomes. PR08+PR02 pass 22 / 249, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:33:03Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then diagnosis/screening text safety and manifest/ledger pending-state consistency were fixed. A broad status patch initially touched an unrelated ARTICLE41 entry; it was detected before staging, restored, and the final manifest diff is PR08-only. PR08+PR02 pass 23 / 285, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:40:58Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed comprehensively against the claim-boundary examples: deterministic/best-career/perfect-match/salary-guarantee claims and direct diagnosis/treatment/cure wording in English and Chinese. PR08+PR02 pass 24 / 363, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:48:32Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: generic seven-day prompts now fail for word, ASCII numeric, full-width numeric, hyphenated, and Chinese numeric forms regardless of duration metadata. PR08+PR02 pass 25 / 381, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:58:10Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed with a negation-aware medical claim backstop. The first retry exposed the source-ledger's Chinese 不得把 negative form; after adding that exact bounded context, bare diagnosis/treatment/cure claims fail in English and Chinese while the complete candidate remains clean. PR08+PR02 pass 26 / 434, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:05:57Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 false positive was fixed: explicit English/Chinese negative limitations no longer trigger science, prediction, or deterministic-recommendation claims, while positive variants and competitor language remain blocked. PR08+PR02 pass 27 / 459, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:17:19Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed: visible human-review/release claims now fail closed, and negation handling removes only directly negated blocked matches instead of whole clauses. Contrastive not-only/but/semicolon fixtures remain blocked while explicit negative boundary copy remains allowed. PR08+PR02 pass 29 / 517, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:29:19Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed: medical claims now use the same match-scoped negation logic, and cannot/can't plus curly-apostrophe variants are accepted as explicit negative prefixes. The first focused retry exposed existing English list and Chinese multibyte-prefix cases; bounded no-contrast scopes and UTF-8-safe prefix extraction fixed them before commit. PR08+PR02 pass 29 / 560, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:38:24Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed: every visible section now requires substantive heading/body text, and composite diagnosis/screening phrases use the same explicit-negation handling as bare medical claims. PR08+PR02 pass 30 / 586, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:50:31Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: English and Chinese negation scopes stop at additive conjunctions such as and/also/并且/而且, preventing later affirmative claims from being erased. Another repository-wide ci_verify_mbti.sh was already running locally, so only focused PR08, PR02, and freeze-classifier checks were started under the concurrency guard; they pass 30 / 598 and 2 / 5, with Pint, syntax, diff, and exact seven-file scope also green. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:59:48Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: comma-led English/Chinese new clauses now terminate negation scope without rejecting source-ledger comma-separated negative claim lists. The first focused retry exposed that the Chinese claim match begins after the predicate token; a subject-led comma boundary fixed the exact multibyte fixture before commit. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 30 / 610, freeze regressions 2 / 5, and Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T13:16:12Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head and an explicitly requested current-head review completed, then one valid P2 was fixed: visible FermatMind reliability, validity, norms, and percentile claims now fail closed in English and Chinese even when claim IDs omit the blocked registry entry; explicit negative limitations remain allowed. Under the local concurrency guard only focused checks were started while another full ci_verify_mbti.sh ran: PR08+PR02 pass 31 / 644, freeze regressions 2 / 5, and Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T13:30:02Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed: every answerability question now maps to a substantive allowed visible answer path, and zh-CN duplicate thresholds align with valid 30-character exercise and 40-character section content. README/contract documentation and regressions freeze both rules. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 33 / 665, freeze regressions 2 / 5, and Pint, syntax, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T13:39:11Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed from documented claim-boundary vocabulary: Chinese noun-order career/turnover prediction forms and hiring-suitability/岗位胜任力 screening claims now fail closed, while explicit English/Chinese negative limitations remain allowed. PR08+PR02 pass 33 / 699, freeze regressions 2 / 5, and Pint, syntax, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T13:49:40Z",
+        "status": "review_fixes_local_verified",
+        "note": "The latest review on ledger head 56a25b2f added two valid in-scope P2 findings. Unsupported global first/best/most-accurate authority language and the documented Chinese Big Five职业精准匹配 / RIASEC推荐职业 claims now fail closed, while direct negative limitations remain allowed. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 34 / 761, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T13:58:37Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 33a2f1ca6, then one valid current-head P2 was fixed: review_truth and release_truth now reject every undeclared key, preventing extra fabricated human-review, approval, publication, or release metadata from accompanying otherwise pending/false truth fields. PR08+PR02 pass 35 / 772, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T14:08:14Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 6408d46c9, then one valid current-head P2 was fixed: affirmative forecast(s), forecast-of, and noun-order outcome-forecast language now fails prediction safety. The first retry exposed only that the existing compliant never-as list places forecast 94 characters after the negative prefix; the bounded scope was raised from 80 to 100 without weakening sentence, contrast, additive-conjunction, or subject-led comma stops. PR08+PR02 now pass 36 / 794, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T14:17:25Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 7d3d4b312, then two valid current-head P2 findings were fixed. Explicit-negation scope now terminates at temporal, causal, conditional, and relative-clause connectors, so an unrelated does-not clause cannot suppress a later positive prediction/science claim. Human review completed, completed human review, and has-been-completed wording now fails, while explicit not-completed wording remains allowed. PR08+PR02 pass 36 / 829, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T14:26:10Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 9864e3acc, then one valid current-head P2 was fixed: generic diagnostic tool/assessment/test/screen and hiring screen/screening wording now enters the negation-aware diagnosis/screening boundary. Direct not-a-diagnostic-tool and not-a-hiring-screen limitations remain allowed. PR08+PR02 pass 36 / 851, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T14:36:33Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head ce06b7c9a, then two valid current-head P2 findings were fixed. GEO answerability now accepts only rendered answer_first, sections.N.body, and faqs.N.answer paths, rejecting cross-product extra fields. zh-CN rendered title, answer-first, sections, FAQs, and exercise content must contain at least 80 Han characters and a 25% Han share of letters; the README and contract freeze these thresholds. PR08+PR02 pass 37 / 871, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T14:48:22Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 076ed76e6, then one valid current-head P2 was fixed against the explicit PR07 blocked-assumptions artifact. Centers presented as biological/diagnostic/neuroscience systems and guaranteed search-ranking, traffic-lift, or AI-citation outcomes now fail visible text safety in English and Chinese, while direct negative limitations remain allowed. README and contract add both negative fixtures. PR08+PR02 pass 38 / 922, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T14:56:56Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 004890c35, then one valid current-head P2 was fixed against the PR07 Unknown assumptions. One fixed Enneagram type per person and universal nine-factor recovery/structure/model claims now fail visible text safety in English and Chinese, while direct negative limitations remain allowed. README and contract add the negative fixture. PR08+PR02 pass 39 / 967, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T15:04:46Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head b909bcddd, then one valid current-head P2 was fixed: manual review completed, completed manual review, and manual review has been completed now enter the same negation-aware visible-review completion boundary as human/expert/editorial wording. Explicit manual review is not completed remains allowed. PR08+PR02 pass 39 / 990, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T15:15:01Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 276a4e33e, then two valid current-head P2 findings were fixed. Manual review approved/passed and 人工审核已通过 wording now fail closed, while direct negative review limitations remain allowed. Plural spelled type labels Ones/Twos through Nines now participate in type-substitution template detection. PR08+PR02 pass 40 / 1024, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T15:23:00Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 7e0a1a7e8, then one valid current-head P2 was fixed: manual review was/were completed, approved, passed, or cleared now enters the visible review-truth boundary. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 40 / 1048, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T15:32:16Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 667ee6a67, then one valid current-head P2 was fixed: direct adverb and bounded negation bridges now exclude not only / not merely, so immediately following positive science, prediction, or review claims remain visible to the safety gate. PR08+PR02 pass 40 / 1066, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T15:40:16Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 97dc6bafb, then one valid current-head P2 was fixed comprehensively: arbitrary -ly adverbs were removed from the direct negative bridge, and only/merely/just/simply/solely/exactly/necessarily are fail-closed contrastive limiters. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 40 / 1090, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T15:48:35Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 93f4910b8, then one valid current-head P2 was fixed: rendered EN title, answer-first, sections, FAQs, and exercise fields now require at least 120 Latin characters and a 60% Latin share of letters, preventing Chinese or other wrong-language content from passing the en route. README and contract freeze the thresholds. PR08+PR02 pass 41 / 1100, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:00:59Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 3f08c440d, then one valid current-head P2 was fixed: duplicate-template normalization now replaces frozen identity/code/path markers, UUIDs, and hexadecimal page tokens. The first focused retry correctly rejected the old marker-only synthetic passing fixture; it was repaired to include independently varying observable semantic contexts, and a dedicated slug/hash negative fixture remains fail-closed. PR08+PR02 pass 42 / 1110, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:08:55Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 1036e12f2, then one valid current-head P2 was fixed: scientifically/clinically proven/validated and the corresponding Chinese science/clinical proof/validation permutations now fail closed, while direct negative limitations remain allowed. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 43 / 1178, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:19:57Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head d59bd680f, then one valid P2 was fixed: comma-led English clauses with an unlisted noun subject or auxiliary construction now terminate the earlier explicit-negation scope. The first focused retry exposed a PCRE-too-large implementation and was replaced before commit. PR08+PR02 pass 43 / 1190, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:29:33Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head 2783a4232, then one valid P2 was fixed: proper-noun comma clauses now stop earlier negation, and all match decisions use original text before equal-length masking prevents one negated pattern from deleting context needed by another positive claim. The first focused retry exposed that exact cross-pattern context loss before correction. PR08+PR02 pass 43 / 1196, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:37:33Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head 4546bca35, then one valid P2 was fixed: visible ready-to-publish/release/index, published, indexable, release-ready and corresponding Chinese publish/indexability wording now fails closed, while explicit not-yet-published and not-indexable limitations remain allowed. PR08+PR02 pass 43 / 1242, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:47:17Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head 382dc2707, then two valid P2 findings were fixed: approved/cleared-to-publish/release/index and standalone manual/manually-reviewed wording now fail closed, while direct negative limitations remain allowed. PR08+PR02 pass 43 / 1276, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:56:58Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head 48f1b2681, then one valid P2 was fixed: multi-word protected outcome guarantees such as career success guarantee and job fit guarantee now fail closed across guarantee/guaranteed/guarantees variants, while direct negative limitations remain allowed. PR08+PR02 pass 43 / 1293, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T17:06:57Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head 0de512544, then one valid P2 was fixed: comma-led English or and Chinese 或/或者 clauses now terminate prior negation when they introduce a new subject or predicate. The first retry exposed that a global disjunction boundary rejected compliant coordinated negative objects; clause-aware boundaries replaced it before commit. PR08+PR02 pass 43 / 1305, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T17:17:19Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head c53330b8c, then three valid P2 findings were fixed together: guarantees/guaranteeing outcome verbs, active candidate screening for hiring/employment/admission, approved-for-public-release, and 已完成人工审核 now fail closed, while direct negative limitations remain allowed. PR08+PR02 pass 43 / 1356, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+        {
+          "at": "2026-07-15T17:26:01Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and a same-head Codex review completed on ledger head 0bc001262, then one valid P2 was fixed: title-cased standalone Enneagram type names One through Nine now normalize before whitespace/punctuation removal, so mechanical type-name substitutions fail closed without replacing ordinary lowercase substrings. PR08+PR02 pass 44 / 1366, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T17:37:19Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and a same-head Codex review completed on ledger head 3ddae1453, then two valid P2 findings were fixed: every public editorial asset now requires a non-empty visible title, and normalized FAQ questions must be distinct within each asset. PR08+PR02 pass 45 / 1376, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T17:45:39Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head a07b7ba3b, GitHub is CLEAN/MERGEABLE, Codex reviewed that same head without major findings, all sixty-seven valid P2 findings are fixed, and all review threads are resolved. Final diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action."
+        },
+        {
+          "at": "2026-07-15T17:54:10Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ready-ledger head e91f8d6bd, then one valid same-head P2 was fixed: editor reviewed/editor-reviewed and editor review completion wording now fails the visible review-truth gate, while explicit not-editor-reviewed limitations remain allowed. PR08+PR02 pass 45 / 1410, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:02:43Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head 7c66a8934, then two valid same-head P2 findings were fixed: scientifically-proven/clinically-validated hyphen variants and find-your/your-best-career wording now fail claim safety, while explicit negative limitations remain allowed. Another full ci_verify_mbti.sh was already running, so only focused checks were started: PR08+PR02 pass 45 / 1454, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:11:02Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head 4a855acca, then one valid same-head P2 was fixed: uncommaed English or and Chinese 或/或者 positive clauses now terminate prior negation only when they introduce a new subject or predicate. Coordinated negative objects remain allowed. PR08+PR02 pass 45 / 1476, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:21:27Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head e2aa33b34, then one valid same-head P2 was fixed: comma-led bare finite protected predicates now terminate prior negation using the current matched claim, while comma-separated negative outcome objects remain allowed. Another full ci_verify_mbti.sh was already running, so only focused checks were started: PR08+PR02 pass 45 / 1487, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:29:51Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head 7b57e97b5, then one valid same-head P2 was fixed: comma-led ready-to-publish/published and other closed review/release claims now terminate prior negation, while direct not-ready/not-published limitations remain allowed. PR08+PR02 pass 45 / 1504, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:40:03Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head e1b599184, then one valid same-head P2 was fixed: every GEO question now needs a substantive Latin/numeric term or Chinese bigram shared with its mapped visible answer, so off-topic questions cannot pass through arbitrary long answer paths. Another full ci_verify_mbti.sh was already running, so only focused checks were started: PR08+PR02 pass 45 / 1508, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:52:43Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head 09115c0ca, then one valid same-head P2 was fixed: GEO question-answer relevance now excludes shared identity, code, path, and hexadecimal markers, so an off-topic question cannot pass merely by repeating page markers. PR08+PR02 pass 45 / 1508, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:03:46Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 253ad836d, then one valid P2 was fixed: answerability now requires complete non-marker English content-term coverage or direct Chinese topic-phrase support, so railway-timetable questions cannot pass through generic working-hypothesis overlap. The regression preserves exact question/mapping equality to isolate relevance. PR08+PR02 pass 45 / 1508, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:18:13Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 1544b5ab7, then two valid P2 findings were fixed: source-ledger-blocked instrument equivalence, wing validity, subtype universality/cross-cultural equivalence, and visible sitemap/llms.txt/schema eligibility claims now fail closed in both locales while explicit negative limitations remain allowed. Another full ci_verify_mbti.sh was already running during the first focused replay, so no second full validation was started; PR08+PR02 pass 46 / 1630, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:29:34Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 905281fc5, then three valid P2 findings were fixed from the explicit PR07 source-registry limitations: FermatMind evidence transfer to scores/translations/individual interpretations, reversed universal subtype ontology, and center fixed capacities now fail closed in both locales. A focused retry exposed and fixed the shared negation grammar's do-not omission. PR08+PR02 pass 46 / 1707, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:41:50Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 4a99dc101, then three valid P2 findings were fixed: predicate-form equivalent-to and validated-subtype claims, fixed identity, indexed/eligible-to-publish, and Chinese search-indexed wording now fail closed while direct negative limitations remain allowed. PR08+PR02 pass 46 / 1802, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:50:26Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head db36c1eec, then one valid P2 was fixed: evidence-transfer verbs now enumerate correct transfer/transfers/transferred, apply/applies/applied, and generalize/generalizes/generalized forms instead of invalid mechanical suffixes. PR08+PR02 pass 46 / 1814, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:59:18Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 60b9c1ead, then one valid P2 was fixed: standalone human/expert/editor/editorial/editorially approved and Chinese editor-approved wording now fails visible review truth while direct negative limitations remain allowed. PR08+PR02 pass 46 / 1853, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T20:08:57Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head a125d46e2, then one valid P2 was fixed: type-template detection now runs at a 50-character English or 30-character zh-CN threshold independently of the longer paragraph duplicate threshold. A dedicated 60–79 character FAQ-answer fixture fails mechanical type substitution. PR08+PR02 pass 47 / 1862, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T20:18:03Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 73065c4d5, then one valid P2 was fixed: English since/as and Chinese 因为/所以/而是 now terminate an earlier explicit-negation scope so later positive prediction or diagnosis claims remain visible to safety checks. Another full ci_verify_mbti.sh was already running, so no second full validation was started; the focused causal-clause regression passes 1 / 216, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T20:28:36Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 99db39bf9, then one valid P2 was fixed: subject-led causal as clauses now terminate prior negation without truncating the standard never as diagnosis, fixed identity, hiring screen, or forecast prohibited-use list. The first focused retry exposed an oversized PCRE and was replaced by a small pre-check before commit. Paired positive/negative regressions pass 2 / 292, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T20:40:55Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head a95ddcb179, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit a95ddcb179, and all review threads are resolved. Final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. The ready-ledger head must complete one final CI and same-head review round before squash merge."
+        },
+        {
+          "at": "2026-07-15T20:50:50Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ready-ledger head 57a4d3c14, then final same-head review added two valid P2 findings. Publication-state matching now requires page/release context so published Enneagram research evidence remains allowed, and English/Chinese unsupported clinical-utility claims now fail closed while explicit limitations pass. Targeted regressions pass 2 / 442, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T20:59:20Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head review completed on ledger head 1ba79a3aa, then one valid P2 was fixed: diagnose, diagnoses, diagnosed, and diagnosing now fail the bare medical boundary without requiring you/your, while direct negative limitations remain allowed. The medical regression passes 1 / 155, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:08:18Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head review completed on ledger head 95ab39188, then one valid P2 was fixed: manual approved and manually approved now fail visible review truth, including comma-led clauses, while direct negative limitations remain allowed. The review/release regression passes 1 / 425, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:17:02Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head review completed on ledger head 94d961b07, then one valid P2 was fixed: predictive of protected career, relationship, and other outcomes now fails prediction safety, including comma-led clauses, while direct negative limitations remain allowed. The paired predictive-of regressions pass 2 / 99, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:25:46Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head review completed on ledger head 7a8f1cd2f, then one valid P2 was fixed: has/have/had not and contractions now preserve truthful completed-state human-review and clinical-validation limitations. The paired science/review regressions pass 2 / 535, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:32:25Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head 9e4b8306e, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit 9e4b8306e6, and all review threads are resolved. All ninety-five valid P2 findings are fixed; final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. The ready-ledger head must complete one final CI and same-head review round before squash merge."
+        },
+        {
+          "at": "2026-07-15T21:41:07Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ready-ledger head 16ac95c79, then final same-head review added one valid P2: clinical or mental-health screening outside hiring/admission contexts was not blocked. English/Chinese clinical-screening tools and screens-users-for wording now fail closed while direct negative limitations remain allowed. Targeted regressions pass 2 / 291, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:54:49Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head d5312708f, then same-head review added two valid P2 findings: noun-form prediction of/for protected outcomes and passed/cleared review claims were not blocked. Both patterns now fail closed with direct negative controls. Focused regressions pass 3 / 596, combined PR08+PR02 suites pass 48 / 2132, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T22:04:41Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head bdb85eebb, then same-head review added one valid P2 finding: dash-separated clauses could remain inside explicit-negation scope. Spaced hyphen, en dash, em dash, double hyphen, and Chinese double em dash now terminate scope. Focused regressions pass 2 / 322, combined PR08+PR02 suites pass 48 / 2162, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T22:11:27Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head b2e72a990, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit b2e72a9903, and all review threads are resolved. All ninety-nine valid P2 findings are fixed; final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. This ready-ledger head must complete one final CI and same-head review round before squash merge."
+        }
+      ],
+    "updated_at": "2026-07-15T22:11:27Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",

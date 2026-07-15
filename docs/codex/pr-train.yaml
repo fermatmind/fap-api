@@ -43834,7 +43834,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-source-ledger-07
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07: freeze bilingual source and claim ledger"
-    status: ready_to_merge
+    status: merged
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06
     scope:
@@ -43867,7 +43867,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-editorial-gate-08
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08: enforce bilingual originality, duplicate and manual-review gates"
-    status: pending_dependency
+    status: ready_to_merge
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07
     scope:

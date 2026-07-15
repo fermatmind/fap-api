@@ -1,0 +1,97 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_gate_contract.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
+  "candidate_schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "framework": "enneagram",
+  "source_authority": {
+    "source_registry": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "runtime_authority": false,
+    "publish_authority": false
+  },
+  "qa_row_contract": {
+    "expected_count": 116,
+    "unique_key": "locale|identity_key",
+    "entity_counts": {
+      "hub": 2,
+      "center": 6,
+      "core_type": 18,
+      "wing": 36,
+      "instinctual_subtype": 54
+    },
+    "gates": [
+      "schema_and_target_coverage",
+      "bilingual_independence",
+      "page_specific_information_gain",
+      "duplicate_template_risk",
+      "faq_depth",
+      "observation_exercise_specificity",
+      "geo_answerability",
+      "visible_evidence",
+      "manual_review_truth",
+      "claim_safety"
+    ]
+  },
+  "required_negative_fixtures": [
+    "sentence_or_paragraph_duplication",
+    "type_or_page_marker_substitution",
+    "identical_en_zh_cn_outline",
+    "repeated_faq_answers",
+    "generic_seven_day_exercise",
+    "unsupported_science_claim",
+    "career_or_relationship_prediction",
+    "centers_as_biological_or_diagnostic_systems",
+    "one_fixed_type_or_universal_nine_factor_recovery",
+    "guaranteed_search_traffic_or_ai_citation_outcome",
+    "model_qa_presented_as_human_review",
+    "hidden_evidence",
+    "competitor_copied_language"
+  ],
+  "duplicate_thresholds": {
+    "en": { "paragraph_characters": 80, "sentence_characters": 50 },
+    "zh-CN": { "paragraph_characters": 30, "sentence_characters": 24 }
+  },
+  "locale_script_contract": {
+    "en": {
+      "rendered_fields": ["title", "answer_first", "sections", "faqs", "observation_exercise"],
+      "minimum_latin_characters": 120,
+      "minimum_latin_share_of_letters": 0.60
+    },
+    "zh-CN": {
+      "rendered_fields": ["title", "answer_first", "sections", "faqs", "observation_exercise"],
+      "minimum_han_characters": 80,
+      "minimum_han_share_of_letters": 0.25
+    }
+  },
+  "geo_answerability_contract": {
+    "minimum_questions": 3,
+    "mapping_field": "question_answers",
+    "allowed_visible_paths": ["answer_first", "sections.N.body", "faqs.N.answer"],
+    "minimum_visible_answer_characters": { "en": 80, "zh-CN": 40 }
+  },
+  "automated_pass_means": "ready_for_human_review",
+  "manual_review_truth": {
+    "status": "pending_manual_review",
+    "reviewer": null,
+    "reviewed_at": null,
+    "human_review_completed": false,
+    "review_source": "unassigned"
+  },
+  "release_truth": {
+    "draft_only": true,
+    "publish_eligible": false,
+    "indexability_changed": false,
+    "sitemap_changed": false,
+    "llms_changed": false
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}
