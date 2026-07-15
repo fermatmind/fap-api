@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "356aa7a832f9b30a784436391236dd82a01688f4",
+    "commit_sha": "7458c8200bd8e07bb93f58d2aa087eaa338653eb",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 36 tests / 829 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file scope checks. Negation scope now stops at temporal, causal, conditional, and relative-clause connectors in addition to prior sentence, contrast, additive-conjunction, and subject-led comma boundaries. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 36 tests / 851 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file scope checks. Generic diagnostic tool/assessment/test/screen and hiring screen/screening wording now participates in the existing negation-aware medical boundary. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 7d3d4b312 before the latest current-head review added two valid in-scope P2 findings: unrelated negation could cross a subordinate-clause connector and erase a later positive claim, and common human-review-completed status wording was not covered. The locally verified substantive fix head 356aa7a83 requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 9864e3acc before the latest current-head review added one valid in-scope P2 finding: generic Diagnostic tool and Hiring screen wording bypassed narrower diagnostic/suitability patterns. The locally verified substantive fix head 7458c8200 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All forty valid P2 findings are fixed. Negation cannot cross before/after/because/conditional/relative-clause boundaries to suppress a later positive claim, and human review completed / completed human review / has been completed wording now fails while explicit not-completed language remains allowed. PR08+PR02 pass 36 tests / 829 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All forty-one valid P2 findings are fixed. Generic diagnostic tool/assessment/test/screen and hiring screen/screening claims now fail closed, while direct not-a-diagnostic-tool and not-a-hiring-screen limitations remain allowed. PR08+PR02 pass 36 tests / 851 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93545,9 +93545,14 @@
         "at": "2026-07-15T14:17:25Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on ledger head 7d3d4b312, then two valid current-head P2 findings were fixed. Explicit-negation scope now terminates at temporal, causal, conditional, and relative-clause connectors, so an unrelated does-not clause cannot suppress a later positive prediction/science claim. Human review completed, completed human review, and has-been-completed wording now fails, while explicit not-completed wording remains allowed. PR08+PR02 pass 36 / 829, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T14:26:10Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 9864e3acc, then one valid current-head P2 was fixed: generic diagnostic tool/assessment/test/screen and hiring screen/screening wording now enters the negation-aware diagnosis/screening boundary. Direct not-a-diagnostic-tool and not-a-hiring-screen limitations remain allowed. PR08+PR02 pass 36 / 851, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T14:17:25Z"
+    "updated_at": "2026-07-15T14:26:10Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
