@@ -92330,8 +92330,8 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "third_review_fix_local_verified",
-    "commit_sha": "f98f40714d2885c5d47014433706346b41c417ee",
+    "status": "ready_to_merge",
+    "commit_sha": "5b3bb3aedd922b41d4114ec5b5e782918050c843",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
       "manifest_registration": {
@@ -92351,14 +92351,14 @@
         "evidence": "PHP 8.4 executable manifest lint command passed; focused benchmark PHPUnit passed 6 tests / 3258 assertions; executable scoped Pint command and composer validate --strict passed; JSON/YAML parsing, frozen SHA256 checks, git diff --check, and exact seven-path allowlist validation passed."
       },
       "github_required_checks": {
-        "status": "rerun_required",
-        "evidence": "All nine checks passed on pre-third-review-fix head f98f40714d2885c5d47014433706346b41c417ee. The executable-command and canonical-deduplication fix head must rerun every required check before merge."
+        "status": "pass",
+        "evidence": "All nine required checks passed on third-review-fix head 5b3bb3aedd922b41d4114ec5b5e782918050c843; both actionable review threads are resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -92426,9 +92426,14 @@
         "at": "2026-07-15T01:58:39Z",
         "status": "third_review_fix_local_verified",
         "note": "Replaced five non-executable future PHP/Pint placeholders with copy-paste executable diff-scoped commands, removed the duplicate Truity canonical row, changed the unique registry count from 29 to 28, and added canonical-membership and manifest regression assertions. Focused PHPUnit passes 6 tests / 3258 assertions; executable lint/Pint commands, Composer, YAML/JSON, SHA256, and diff checks pass."
+      },
+      {
+        "at": "2026-07-15T02:05:22Z",
+        "status": "ready_to_merge",
+        "note": "All nine required GitHub checks passed on third-review-fix head 5b3bb3aedd922b41d4114ec5b5e782918050c843, both actionable review threads are resolved, and the PR remains within the exact seven-path allowlist."
       }
     ],
-    "updated_at": "2026-07-15T01:58:39Z"
+    "updated_at": "2026-07-15T02:05:22Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
