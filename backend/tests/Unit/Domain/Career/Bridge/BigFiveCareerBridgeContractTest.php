@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Bridge;
 
 use App\Domain\Career\Bridge\BigFiveCareerBridgeContract;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -66,6 +67,14 @@ final class BigFiveCareerBridgeContractTest extends TestCase
             $this->assertFalse($output['properties']['claim_boundary']['properties'][$field]['const']);
         }
 
+        $this->assertSame(CareerRuntimePublishProjectionService::LOCALES, BigFiveCareerBridgeContract::CAREER_PROJECTION_LOCALES);
+        $this->assertSame(['en', 'zh-CN'], $input['properties']['locale']['enum']);
+        $this->assertSame(['en', 'zh-CN'], $input['properties']['big_five_projection']['properties']['locale']['enum']);
+        $this->assertSame(BigFiveCareerBridgeContract::CAREER_PROJECTION_LOCALES, $input['properties']['career_projection']['properties']['locale']['enum']);
+        $this->assertSame(BigFiveCareerBridgeContract::CAREER_PROJECTION_LOCALES, $output['properties']['source_locks']['properties']['career_locale']['enum']);
+        $this->assertSame('zh-CN', $input['allOf'][1]['then']['properties']['big_five_projection']['properties']['locale']['const']);
+        $this->assertSame('zh', $input['allOf'][1]['then']['properties']['career_projection']['properties']['locale']['const']);
+
         $assetIdPatterns = [
             $input['properties']['big_five_asset_identity']['pattern'],
             $input['properties']['big_five_projection']['properties']['asset_id']['pattern'],
@@ -107,19 +116,19 @@ final class BigFiveCareerBridgeContractTest extends TestCase
     }
 
     #[Test]
-    public function zh_cn_authority_projections_keep_exact_locale_source_locks(): void
+    public function zh_cn_big_five_and_zh_career_projections_keep_exact_locale_source_locks(): void
     {
         $input = $this->validInput();
         $input['locale'] = 'zh-CN';
         $input['big_five_asset_identity'] = 'model_hub:zh-CN:/zh/personality/big-five';
         $input['big_five_projection']['locale'] = 'zh-CN';
         $input['big_five_projection']['asset_id'] = 'model_hub:zh-CN:/zh/personality/big-five';
-        $input['career_projection']['locale'] = 'zh-CN';
+        $input['career_projection']['locale'] = 'zh';
 
         $output = $this->validOutput();
         $output['source_locks']['big_five_asset_id'] = 'model_hub:zh-CN:/zh/personality/big-five';
         $output['source_locks']['big_five_locale'] = 'zh-CN';
-        $output['source_locks']['career_locale'] = 'zh-CN';
+        $output['source_locks']['career_locale'] = 'zh';
 
         $assessment = $this->contract->assess($input, $output);
 
