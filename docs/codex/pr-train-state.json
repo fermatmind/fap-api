@@ -92520,15 +92520,15 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-structured-data-45",
     "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43", "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44"],
-    "status": "committed",
+    "status": "github_checks_pending",
     "commit_sha": "a81d0f4ae0b5fd1017e99f646f55839d83f76960",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3110",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR45 id, branch, title, dependencies, nine FAQPage plus four Article/Breadcrumb scope, lifecycle, validation floor, and no-production-write boundary."},
       "dependency": {"status": "pass", "evidence": "PR43 is merged as 95578922e01125f7f4ed4087c407be83cd7e6af6 and PR44 is merged as 65a1d3b78da70511306ebd2867a157494e4e217f; origin/main contains both, and PR44 branch/worktree cleanup plus post-merge validation completed."},
       "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-structured-data-45 in an isolated worktree from exact clean origin/main 65a1d3b78da70511306ebd2867a157494e4e217f after confirming no local/remote branch and no competing heavy validation. PR38 source artifact SHA256 60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65 contains exactly nine faq_json_ld failures, four of which also fail Article/Breadcrumb json_ld."},
       "local": {"status": "pass", "evidence": "PASS: locked fixture validator (9 assets / 13 findings); BigFiveAuthorityV245Test plus ArticleSeoServiceTest (9 tests, 67 assertions); runtime freeze focus (2 tests, 5 assertions); Pint on all touched PHP files; PHP/JS/JSON/YAML syntax; git diff --check; exact scope audit; and bash backend/scripts/ci_verify_mbti.sh exit 0. The complete CI was repeated after the final SEO-meta/robots noindex gate and passed again; it included Big Five 1419 tests / 180973 assertions, Enneagram 10 / 369, personality full-32 71 / 5371, MBTI smoke, migration/security/OpenAPI/webhook gates. Initial attempts exposed only isolated-worktree vendor symlink resolution and an obsolete legacy assertion; vendor was clone-copied locally and the directly affected assertion was updated to the PR45 fail-closed contract before all checks passed. CI-generated BIG5 compiled timestamp/hash side effects were removed path-by-path and are not in scope."},
-      "github": {"status": "pending", "evidence": "No PR has been opened."}
+      "github": {"status": "pending", "evidence": "Opened PR #3110 from the exact scoped branch after both full local CI runs passed. Required GitHub checks and review remain pending on the final branch head."}
     },
     "failure_reason": null,
     "merged_at": null,
@@ -92543,7 +92543,8 @@
     "transitions": [
       {"at": "2026-07-15T07:24:53Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR45 from the exact merged PR44 base. Scope is limited to the 13 locked structured-data findings, a Big Five-only fail-closed projector, existing Article SEO backend projection wiring, focused contracts, and PR44 ledger reconciliation; no CMS/database write, promotion, indexability, sitemap/llms/hreflang, Search, frontend, cache, or deploy action is allowed."},
       {"at": "2026-07-15T07:42:35Z", "from": "in_progress", "to": "local_checks_passed", "note": "Implemented and validated the backend-only Big Five structured-data projection. All focused, compatibility, freeze, format, syntax, fixture, scope, and complete ci_verify_mbti checks pass. The exact nine FAQPage and four Article/Breadcrumb audit findings are locked without claiming a production deploy or readback."},
-      {"at": "2026-07-15T07:51:52Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact 11-file PR45 implementation and metadata scope as a81d0f4ae0b5fd1017e99f646f55839d83f76960 after the final noindex gate and repeated complete CI verification passed."}
+      {"at": "2026-07-15T07:51:52Z", "from": "local_checks_passed", "to": "committed", "note": "Committed the exact 11-file PR45 implementation and metadata scope as a81d0f4ae0b5fd1017e99f646f55839d83f76960 after the final noindex gate and repeated complete CI verification passed."},
+      {"at": "2026-07-15T07:53:14Z", "from": "committed", "to": "github_checks_pending", "note": "Pushed codex/big5-authority-v2-structured-data-45 and opened PR #3110 with the required what/why/validation/deferred-items and repository-rule-impact sections. No production or CMS mutation occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
