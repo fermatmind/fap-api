@@ -489,6 +489,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'This page can’t predict relationship outcomes.',
             'This content is not scientifically proven.',
             'This is not a precise career recommendation.',
+            'This page is not a career success guarantee.',
             '本页不能预测你的职业成功。',
             '本页并非精准职业推荐。',
         ] as $limitation) {
@@ -507,6 +508,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This page is not only a reflection prompt; it predicts your career success.', 'career_or_relationship_prediction'],
             ['This page does not establish clinical validity, but it is scientifically proven.', 'unsupported_science_claim'],
             ['This is not merely a draft; it is the best career for you.', 'deterministic_recommendation_claim'],
+            ['This page offers a career success guarantee.', 'deterministic_recommendation_claim'],
+            ['This page offers a job fit guarantee.', 'deterministic_recommendation_claim'],
             ['This page is not a diagnosis and is scientifically proven.', 'unsupported_science_claim'],
             ['This page is not a reflection prompt, it predicts your career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, the guide predicts career success.', 'career_or_relationship_prediction'],
