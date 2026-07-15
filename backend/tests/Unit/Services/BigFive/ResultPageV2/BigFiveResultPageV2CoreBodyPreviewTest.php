@@ -571,6 +571,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityMbtiFullCmsPromote.php',
             'backend/app/Console/Kernel.php',
             'backend/app/Services/Cms/MbtiFullCmsPromotionService.php',
+            'backend/app/Console/Commands/PersonalityMbtiFullIndexabilityPromote.php',
+            'backend/app/Services/Cms/MbtiFullIndexabilityPromotionService.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\PersonalityMbtiFullCmsPromote;',
@@ -7657,6 +7659,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/MbtiFullCmsImportService.php',
             'backend/app/Console/Commands/PersonalityMbtiFullCmsPromote.php',
             'backend/app/Services/Cms/MbtiFullCmsPromotionService.php',
+            'backend/app/Console/Commands/PersonalityMbtiFullIndexabilityPromote.php',
+            'backend/app/Services/Cms/MbtiFullIndexabilityPromotionService.php',
         ], true);
     }
 
