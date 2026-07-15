@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "97e133d5de552e5dac75d37455cf418c5ad99a35",
+    "commit_sha": "91926f89da93f5fc7cb551ad62f34da77f4bea01",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; the bare-medical-verb regression passes 1 test / 155 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Diagnose, diagnoses, diagnosed, and diagnosing now fail closed without requiring a pronoun, while direct does-not-diagnose limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; the manual-approval review-truth regression passes 1 test / 425 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Manual approved and manually approved now fail closed, including comma-led clauses, while direct negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 1ba79a3aa before the same-head review added one valid in-scope P2 finding: diagnose verbs without you/your could bypass both the structured and bare medical matchers. The locally verified substantive fix head 97e133d5d covers diagnose, diagnoses, diagnosed, and diagnosing while preserving bounded negative limitations; fresh GitHub checks are required."
+        "evidence": "All nine required checks passed on ledger head 95ab39188 before the same-head review added one valid in-scope P2 finding: manual approved and manually approved were omitted from the review-truth approval branch. The locally verified substantive fix head 91926f89d adds both variants with match-scoped negation and comma-clause handling; fresh GitHub checks are required."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All ninety-two valid P2 findings are fixed. Unbounded diagnose verb forms fail closed without requiring a pronoun, while direct negative limitations remain allowed. The medical regression passes 1 / 155, combined PR08+PR02 feature suites exit successfully, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All ninety-three valid P2 findings are fixed. Manual and manually approved wording fails visible review truth, including comma-led clauses, while direct negative limitations remain allowed. The review/release regression passes 1 / 425, combined PR08+PR02 feature suites exit successfully, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93750,9 +93750,14 @@
           "at": "2026-07-15T20:59:20Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed and same-head review completed on ledger head 1ba79a3aa, then one valid P2 was fixed: diagnose, diagnoses, diagnosed, and diagnosing now fail the bare medical boundary without requiring you/your, while direct negative limitations remain allowed. The medical regression passes 1 / 155, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:08:18Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head review completed on ledger head 95ab39188, then one valid P2 was fixed: manual approved and manually approved now fail visible review truth, including comma-led clauses, while direct negative limitations remain allowed. The review/release regression passes 1 / 425, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-    "updated_at": "2026-07-15T20:59:20Z"
+    "updated_at": "2026-07-15T21:08:18Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
