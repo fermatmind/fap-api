@@ -101,9 +101,14 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
         $this->assertSame('read_only_http_get', $registry['capture_mode'] ?? null);
         $this->assertSame('competitor/editorial', $registry['source_classification'] ?? null);
         $this->assertFalse($registry['empirical_evidence_eligible'] ?? true);
-        $this->assertSame(29, $registry['registry_count'] ?? null);
-        $this->assertCount(29, $rows);
-        $this->assertCount(29, array_unique(array_column($rows, 'url')));
+        $this->assertSame(28, $registry['registry_count'] ?? null);
+        $this->assertCount(28, $rows);
+        $this->assertCount(28, array_unique(array_column($rows, 'url')));
+        $canonicalMembership = array_map(
+            static fn (array $row): string => $row['canonical'] ?? $row['effective_url'] ?? $row['url'],
+            $rows,
+        );
+        $this->assertCount(28, array_unique($canonicalMembership));
         $this->assertStringContainsString('one..nine', $registry['deterministic_discovery_rule']['profile_search'] ?? '');
         $this->assertStringContainsString('Never store competitor body text', $registry['deterministic_discovery_rule']['body_policy'] ?? '');
 
@@ -134,6 +139,12 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
 
         $this->assertStringNotContainsString('cd backend && php artisan test backend/tests/', $manifest);
         $this->assertStringNotContainsString('cd backend && vendor/bin/pint --test backend/tests/', $manifest);
+        $this->assertStringNotContainsString('php -l touched PHP files', $manifest);
+        $this->assertStringNotContainsString('pint --test on touched PHP files', $manifest);
+        $this->assertStringContainsString(
+            "git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l \"\$file\" || exit 1; done",
+            $manifest
+        );
         $this->assertStringContainsString(
             'ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03: fap-web',
             $manifest

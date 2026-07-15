@@ -26,7 +26,7 @@ This packet freezes the read-only production and competitor benchmark captured a
 
 ## Competitor registry boundary
 
-`truity-url-registry.json` contains 29 metadata-only rows discovered by a deterministic rule:
+`truity-url-registry.json` contains 28 canonical-deduplicated metadata-only rows discovered by a deterministic rule:
 
 1. keep root-sitemap URLs containing `enneagram`;
 2. keep the exact Enneagram guide and topic roots from both declared blog sitemap children;

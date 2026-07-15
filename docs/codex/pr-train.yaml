@@ -43356,10 +43356,10 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - php -l touched PHP files
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php tests/Feature/SEO/EnneagramPublicAuthorityV204PublicContractTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV2*Test.php --filter=public_contract --no-ansi
-      - cd backend && vendor/bin/pint --test on touched PHP files
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
@@ -43396,9 +43396,9 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - php -l touched PHP files
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test on touched PHP files
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
@@ -43433,9 +43433,9 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - php -l touched PHP files
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test on touched PHP files
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
@@ -43939,9 +43939,9 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - php -l touched PHP files
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test on touched PHP files
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
@@ -43974,9 +43974,9 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - php -l touched PHP files
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
-      - cd backend && vendor/bin/pint --test on touched PHP files
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
