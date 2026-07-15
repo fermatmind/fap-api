@@ -377,6 +377,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['本页不能作为诊断，但能预测你的职业成功。', 'career_or_relationship_prediction'],
             ['本页不是诊断并且能预测你的职业成功。', 'career_or_relationship_prediction'],
             ['本页不是反思提示，它预测你的职业成功。', 'career_or_relationship_prediction'],
+            ['This page does not require signup before it predicts your career success.', 'career_or_relationship_prediction'],
+            ['This page is not a diagnosis because it is scientifically proven.', 'unsupported_science_claim'],
         ] as [$phrase, $expectedCode]) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -393,6 +395,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         foreach ([
             'Human reviewed by Jane and approved for publication',
             'Expert reviewed',
+            'Human review completed',
+            'Completed human review',
+            'Human review has been completed',
             '人工审核通过',
             '已获发布批准',
         ] as $phrase) {
@@ -405,7 +410,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not approved for publication.'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not approved for publication.', 'Human review is not completed.'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
