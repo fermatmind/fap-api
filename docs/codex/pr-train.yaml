@@ -383,6 +383,53 @@ prs:
     public_runtime_change: false
     content_authority: CMS/backend
 
+  - id: BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47: feat(content): add fail-closed Big Five review promotion gate"
+    base: main
+    branch: codex/big5-authority-v2-review-promotion-gate-47
+    depends_on: [BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41, BIG5-AUTHORITY-V2-VISIBLE-DATE-42, BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43, BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44, BIG5-AUTHORITY-V2-STRUCTURED-DATA-45, BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46]
+    train_scope: big5_authority_v2_review_and_promotion_preflight_gate
+    status: in_progress
+    goal: "Add a deterministic, fail-closed review and cohort-promotion preflight for exactly 229 working revisions and two preserved product shells, binding exact identities, revision pointers, source/package hashes, reviewer/date/source/media permissions, public-runtime baselines, rollback targets, and per-cohort authorization while keeping every checked-in artifact and command zero-write and non-executable for production promotion."
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php
+      - backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV247Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/**
+      - generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute or implement production promotion, CMS/database writes, publication, public release, indexability, sitemap, llms, schema, Search submission, cache operations, deployment, or frontend/Career consumer changes.
+      - Claim that any of the 231 assets has been manually reviewed, approved, promoted, published, media-cleared, or made indexable; checked-in review and authorization fields must remain pending, null, false, and non-executable.
+      - Allow a working revision to be selected by a public reader, accept missing or drifting primary/working/published identities, reuse stale preflight fingerprints, authorize an entire package without cohort locks, or continue after any mismatch.
+      - Invent reviewer identity, review date, source permission, media permission, rollback target, production record id, deployed SHA, or operator authorization.
+    validation:
+      - node generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/build-package.mjs
+      - node generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/validate-package.mjs
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/BigFiveAuthorityV247Test.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality:big-five-authority-v2-review-promotion-preflight --review-manifest=../generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/review-manifest.json --authorization-packet=../generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/authorization-packet-template.json --rollback-plan=../generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/rollback-plan.json --package-only --json
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_review_promotion_preflight|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFiveReviewPromotionPreflight.php tests/Feature/SEO/BigFiveAuthorityV247Test.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - bash backend/scripts/ci_verify_mbti.sh
+      - PHP/JSON/YAML/JS syntax checks for touched files
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: false
+    cms_mutation_allowed: false
+    promotion_execution_allowed: false
+    indexability_mutation_allowed: false
+    public_runtime_change: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01
     repo: fap-api
     depends_on: [ENNEAGRAM-SEARCH-RELEASE-READINESS-02]

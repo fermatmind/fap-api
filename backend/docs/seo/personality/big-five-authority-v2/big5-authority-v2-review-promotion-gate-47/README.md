@@ -1,0 +1,11 @@
+# Big Five Authority V2 PR47 review and promotion gate
+
+This package defines a fail-closed review and cohort-promotion preflight for exactly 231 backend-authoritative identities: 229 revision-managed assets and two preserved landing product shells. It retains the PR37 collision classification of 106 primary creates and 125 existing identities, then binds each candidate to its source/package hashes, primary and revision pointers, public-runtime baseline, manual reviewer/date record, source and media permission, rollback target, and a deterministic cohort of at most 25 assets.
+
+The checked-in review manifest is intentionally unreviewed. All production ids, revision pointers, runtime fingerprints, reviewer fields, permission references, rollback targets, deployed SHA values, preflight fingerprints, and exact cohort authorizations remain null, pending, false, and non-executable. PR41 currently proves that no operator-approved media group exists in repository authority, so this package reports zero promotion-eligible assets and must remain on hold.
+
+The Artisan command has only two read modes: package-only validation and a database read-only preflight. It has no write or promotion option. Database mode aborts on missing or drifting identity, source/package lineage, working/published pointers, public selection of a working revision, runtime baseline, rollback target, or exact cohort authorization. Authorization is per deterministic cohort and locks the deployed SHA, review manifest, rollback plan, live preflight fingerprint, cohort hash, and asset count.
+
+No production CMS/database write, promotion, publication, indexability, sitemap, llms, schema, Search submission, cache operation, frontend change, or deployment is implemented or executed. A future separately controlled operation would still require real manual review, approved media and sources, exact runtime readback, exact cohort authorization, and an independently approved promotion executor.
+
+Repository rule impact: CMS/backend remains the sole content and publication authority. PR47 adds a read-only fail-closed gate and pending authorization artifacts; it does not create a new publisher, change public API behavior, or authorize production promotion.

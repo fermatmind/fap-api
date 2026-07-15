@@ -1,0 +1,43 @@
+{
+  "schema_version": "big5-authority-v2-review-promotion-preflight-report.v1",
+  "generated_at": "2026-07-15T09:38:54Z",
+  "status": "HOLD_FAIL_CLOSED_PENDING_REVIEW_AND_AUTHORIZATION",
+  "mode": "package_only_zero_write",
+  "review_manifest_sha256": "54eaf64151a0a41e6a2feaa12ca2be607842e893243f6ee75f6ff78bb7ec096a",
+  "rollback_plan_sha256": "a7aea2af952b017468a182e0c2a8ab661e0eedfae1419133f2c7ef5c74c1db03",
+  "counts": {
+    "assets": 231,
+    "working_revisions": 229,
+    "product_shells_preserved": 2,
+    "primary_create": 106,
+    "existing_revision": 125,
+    "cohorts": 16,
+    "manually_reviewed": 0,
+    "runtime_bound": 0,
+    "rollback_targets_bound": 0,
+    "promotion_eligible": 0,
+    "cohorts_authorized": 0
+  },
+  "actions": {
+    "database_reads": 0,
+    "database_writes": 0,
+    "cms_writes": 0,
+    "promotions": 0,
+    "rollbacks": 0,
+    "public_release_changes": 0,
+    "indexability_changes": 0,
+    "sitemap_changes": 0,
+    "llms_changes": 0,
+    "search_submissions": 0,
+    "cache_operations": 0,
+    "deployments": 0
+  },
+  "blockers": [
+    "manual_review_missing",
+    "runtime_identity_unbound",
+    "source_permission_missing",
+    "media_permission_missing",
+    "rollback_target_unbound",
+    "exact_cohort_authorization_missing"
+  ]
+}

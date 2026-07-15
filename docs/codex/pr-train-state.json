@@ -92559,20 +92559,20 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-topic-authority-46",
     "depends_on": ["BIG5-AUTHORITY-V2-TOPIC-RUNTIME-40", "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43"],
-    "status": "ready_to_merge",
-    "commit_sha": "416f59ff7d52b81dad27088b1463ca62e84a4112",
+    "status": "merged",
+    "commit_sha": "f9e0f63072fa95bfadf38eb94022dc535bd16ae2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3113",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR46 id, branch, title, dependencies, Topic authority acceptance contract, serial lifecycle, and no-production-write boundary."},
       "dependency": {"status": "pass", "evidence": "PR40 is merged in fap-web as PR #1768 and PR43 is merged in fap-api as PR #3102 / 95578922e01125f7f4ed4087c407be83cd7e6af6; both origin/main histories contain their dependency result."},
       "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-topic-authority-46 from exact clean fap-api origin/main b590b639f84437da53641c84c2df895f87b8749f after confirming no same-name local/remote branch, then rebased the validated implementation onto latest origin/main 88fa860c5b523a3bea0ab291bbf5c94274fb4632, which contains the independent PR45 ledger repair from PR #3112. Source inspection found the backend Topic start-test contract selects the tests group and otherwise falls back to MBTI, while the legacy Big Five baseline places BIG5_OCEAN in featured; PR46 is restricted to a new backend-authoritative revision package and read-only preflight rather than public runtime or baseline mutation."},
       "local": {"status": "pass", "evidence": "PASS: deterministic package build and validator at SHA256 bb19149f44894959b1adf0ef88b02a118a0c1e66b5913fb80ec59f0e7261df9e; PR46 focused suite 5 tests / 58 assertions; runtime-freeze focus 2 tests / 5 assertions; package-only CLI zero-write dry-run; targeted Pint; PHP/JSON/YAML/JS syntax; git diff --check; exact scope validation; and the complete bash backend/scripts/ci_verify_mbti.sh gate. The complete gate passed Big Five 1427 tests / 181052 assertions, Personality 71 / 5371, MBTI smoke, migrations, security, OpenAPI, webhook/attempt, dependency, and queue gates. Generated BIG5 compile timestamp/hash side effects were removed path-by-path and are not in scope."},
-      "github": {"status": "pass", "evidence": "Reviewed head 416f59ff7d52b81dad27088b1463ca62e84a4112 passed all nine GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reports MERGEABLE/CLEAN; the exact diff contains 12 manifest-allowed paths and zero review threads. The ready-to-merge ledger-only head must pass fresh checks before squash merge."}
+      "github": {"status": "pass", "evidence": "Final ledger head f9e0f63072fa95bfadf38eb94022dc535bd16ae2 passed all nine GitHub checks after reviewed head 416f59ff7d52b81dad27088b1463ca62e84a4112 also passed all nine. GitHub reports PR #3113 squash-merged as 2a13cae76a68263db2849fcd8eb5118f346969f9; the exact diff contained 12 manifest-allowed paths and zero review threads."}
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T09:34:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "database_mutation": false,
@@ -92585,7 +92585,41 @@
       {"at": "2026-07-15T09:17:32Z", "from": "local_checks_passed", "to": "rebased_local_revalidation_pending", "note": "Rebased implementation commit 1ae05e82b5141e90e6127bf32885c7814490b42f onto latest origin/main 88fa860c5b523a3bea0ab291bbf5c94274fb4632. The only conflict was PR45 ledger wording: retained the already-merged independent repair facts and preserved the complete PR46 entry. Lightweight post-rebase validation is pending; the complete heavy gate is not being duplicated because the upstream delta is ledger-only and the full PR46 gate already passed."},
       {"at": "2026-07-15T09:19:11Z", "from": "rebased_local_revalidation_pending", "to": "local_checks_passed", "note": "Post-rebase validator, focused 5-test/58-assertion suite, zero-write package-only CLI, freeze 2-test/5-assertion suite, targeted Pint, PHP/JS/JSON/YAML syntax, git diff --check, and exact 12-path scope validation all passed. Latest upstream changed only PR45 ledger bookkeeping, so the previously green complete ci_verify_mbti gate was not duplicated."},
       {"at": "2026-07-15T09:20:18Z", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Pushed codex/big5-authority-v2-topic-authority-46 and opened PR #3113 with the required what, why, validation, deferred-items, and repository-rule-impact sections. Required GitHub checks and review threads are pending; no production/CMS/database/indexability/Search/cache/deploy action occurred."},
-      {"at": "2026-07-15T09:27:15Z", "from": "github_checks_pending", "to": "ready_to_merge", "note": "Reviewed head 416f59ff7d52b81dad27088b1463ca62e84a4112 passed all nine GitHub checks, is MERGEABLE/CLEAN, retains the exact 12 manifest paths, and has zero review threads. A ledger-only ready-to-merge commit will be pushed and must independently pass fresh required checks before squash merge."}
+      {"at": "2026-07-15T09:27:15Z", "from": "github_checks_pending", "to": "ready_to_merge", "note": "Reviewed head 416f59ff7d52b81dad27088b1463ca62e84a4112 passed all nine GitHub checks, is MERGEABLE/CLEAN, retains the exact 12 manifest paths, and has zero review threads. A ledger-only ready-to-merge commit will be pushed and must independently pass fresh required checks before squash merge."},
+      {"at": "2026-07-15T09:34:33Z", "from": "ready_to_merge", "to": "merged", "note": "Final ledger head f9e0f63072fa95bfadf38eb94022dc535bd16ae2 passed all nine checks and GitHub reports PR #3113 squash-merged as 2a13cae76a68263db2849fcd8eb5118f346969f9. origin/main containment, clean main sync, remote/local task-branch deletion, post-merge package hash, focused 5/58, zero-write CLI, and freeze 2/5 validation were verified."}
+    ]
+  },
+  "BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47": {
+    "id": "BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47: feat(content): add fail-closed Big Five review promotion gate",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-review-promotion-gate-47",
+    "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41", "BIG5-AUTHORITY-V2-VISIBLE-DATE-42", "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43", "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44", "BIG5-AUTHORITY-V2-STRUCTURED-DATA-45", "BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR47 id, title, branch, dependency chain, 229-revision plus two-shell acceptance contract, serial lifecycle, and explicit no-production-promotion boundary."},
+      "dependency": {"status": "pass", "evidence": "GitHub reports PR41 #3098, PR42 #3099, PR43 #3102, PR44 #3105, PR45 #3110, and PR46 #3113 all MERGED; origin/main 2a13cae76a68263db2849fcd8eb5118f346969f9 contains every recorded merge commit."},
+      "preflight": {"status": "pass", "evidence": "Started codex/big5-authority-v2-review-promotion-gate-47 from exact clean latest main 2a13cae76a68263db2849fcd8eb5118f346969f9 after fetch/pull, dependency containment checks, and confirming no same-name local or remote branch. Existing PR37 collision-safe authority locks 231 identities as 106 primary creates, 125 existing identities, 229 revision-managed assets, and two landing product shells; PR41 remains fail closed with zero approved media groups, so checked-in PR47 review/authorization artifacts must remain entirely pending and non-executable."},
+      "local": {"status": "pass", "evidence": "Deterministic builder and validator passed with review manifest SHA256 54eaf64151a0a41e6a2feaa12ca2be607842e893243f6ee75f6ff78bb7ec096a: exactly 231 assets, 229 revision-managed assets, two preserved product shells, 106 primary creates, 125 existing identities, 16 exact cohorts, zero authorizations, and zero writes. Focused PR47 PHPUnit passed 6 tests / 44 assertions; package-only CLI returned HOLD_FAIL_CLOSED_PENDING_REVIEW_AND_AUTHORIZATION with every action zero; runtime freeze passed 2 tests / 5 assertions; scoped Pint, PHP/JS/JSON/YAML syntax, git diff --check, and exact 14-path scope validation passed. The guarded full bash backend/scripts/ci_verify_mbti.sh suite exited 0, including Big Five, personality full-32 (71 tests / 5371 assertions), migration safety, auth, OpenAPI, order-security, dependency-security, webhook/attempt, and remaining repository gates."},
+      "github": {"status": "pending", "evidence": "PR not opened; required checks pending."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "database_mutation": false,
+    "cms_mutation_allowed": false,
+    "promotion_execution_allowed": false,
+    "indexability_mutation_allowed": false,
+    "public_runtime_change": false,
+    "transitions": [
+      {"at": "2026-07-15T09:38:54Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR47 from the exact merged PR46 base. Scope is restricted to deterministic pending review/rollback/authorization artifacts, a read-only package/database preflight, exact cohort and identity drift guards, focused tests, and PR46 ledger reconciliation; no promotion writer, production command, CMS/database mutation, public release, indexability, Search, cache, or deploy action is allowed."},
+      {"at": "2026-07-15T09:58:29Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local checks passed on the exact 14-path scope. The package remains fail closed with 231 assets, 229 working revisions, two preserved product shells, 16 cohorts, zero manual reviews, zero authorizations, zero promotion eligibility, and every database/CMS/public/indexability/Search/cache/deploy action fixed at zero; no production write or promotion occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
