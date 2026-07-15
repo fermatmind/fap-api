@@ -155,7 +155,7 @@ final class BigFiveVisibleProvenanceProjector
             'Topic',
             'topic:'.(int) $topic->id.':'.(string) $topic->locale.':'.(string) $topic->slug,
             $author,
-            $public ? $this->reviewer(data_get($metadata, 'visible_provenance.reviewer')) : null,
+            null,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $topic->is_public,
         );
@@ -170,7 +170,7 @@ final class BigFiveVisibleProvenanceProjector
         return $this->project(
             'LandingSurface',
             'landing_surface:'.(int) $surface->id.':'.(string) $surface->locale.':'.(string) $surface->surface_key,
-            $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null,
+            null,
             null,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $surface->is_public,

@@ -225,10 +225,13 @@ final class BigFiveAuthorityV243Test extends TestCase
         $this->assertCount(3, $assetProjection['visible_provenance']['sources']);
 
         $topicProjection = $this->projector->forTopic($topic, $revision);
-        $this->assertTrue($topicProjection['eligibility']['promotion_eligible']);
+        $this->assertSame('admin_user:41', $topicProjection['visible_provenance']['author']['identity']);
+        $this->assertNull($topicProjection['visible_provenance']['reviewer']);
+        $this->assertFalse($topicProjection['eligibility']['promotion_eligible']);
         $this->assertCount(3, $topicProjection['visible_provenance']['sources']);
 
         $landingProjection = $this->projector->forLandingSurface($landing);
+        $this->assertNull($landingProjection['visible_provenance']['author']);
         $this->assertNull($landingProjection['visible_provenance']['reviewer']);
         $this->assertFalse($landingProjection['eligibility']['promotion_eligible']);
         $this->assertCount(3, $landingProjection['visible_provenance']['sources']);
