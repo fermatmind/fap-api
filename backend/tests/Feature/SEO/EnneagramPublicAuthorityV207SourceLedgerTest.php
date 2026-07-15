@@ -48,6 +48,21 @@ final class EnneagramPublicAuthorityV207SourceLedgerTest extends TestCase
         }
     }
 
+    public function test_internal_source_paths_share_the_backend_root_and_resolve(): void
+    {
+        $sources = collect($this->readJson(self::PACKAGE_DIR.'/source-registry.json')['sources'])
+            ->whereNotNull('internal_path');
+
+        $this->assertNotEmpty($sources);
+
+        foreach ($sources as $source) {
+            $this->assertFileExists(
+                base_path($source['internal_path']),
+                "Internal source path does not resolve for {$source['id']}"
+            );
+        }
+    }
+
     public function test_truity_is_competitor_intent_only(): void
     {
         $registry = $this->readJson(self::PACKAGE_DIR.'/source-registry.json');

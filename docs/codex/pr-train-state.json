@@ -93039,7 +93039,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05"
     ],
     "status": "merged",
-    "commit_sha": "1ad58b0263639a889a1d9a45d0c04f8bcb9860f0",
+    "commit_sha": "7ff9df0eca65ca1071ba6565c201ca92b5a00575",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3109",
     "checks": {
       "dependency": {
@@ -93148,7 +93148,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "github_checks_pending",
+    "status": "review_fixes_local_verified",
     "commit_sha": "f1710e7988f60ffc9f3a70dec97573a1db65ccb9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
@@ -93166,7 +93166,11 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "Opened the single authorized fap-api PR #3111 from f1710e7988f60ffc9f3a70dec97573a1db65ccb9. GitHub reports MERGEABLE with initial hygiene and Semgrep checks queued; no reviews or review blockers are present."
+        "evidence": "All nine checks passed on 1ce93d2dd4786e4b978d53538e0fdcd575ea4381. Two valid automated P2 threads were then fixed in scope, so latest-head checks must rerun before merge."
+      },
+      "review_fixes": {
+        "status": "pass",
+        "evidence": "Validated both automated P2 findings: PR06 commit_sha now records the main-reachable squash merge 7ff9df0eca65ca1071ba6565c201ca92b5a00575, and all non-null registry internal_path values now use the backend root, with ../AGENTS.md resolving correctly. A new path-resolution regression brings the focused suite to 11 tests / 3960 assertions; Pint passes."
       }
     },
     "scope_validation": {
@@ -93210,9 +93214,14 @@
         "at": "2026-07-15T08:48:13Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact seven-file branch and opened the single authorized fap-api PR #3111 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE with initial checks queued and no reviews."
+      },
+      {
+        "at": "2026-07-15T08:55:26Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on 1ce93d2dd, then two valid P2 threads were fixed: the predecessor ledger now stores PR06's main-reachable squash commit, and registry internal paths share one backend-root base with a resolving-path regression. Focused validation passes 11 / 3960 plus Pint; latest-head checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T08:48:13Z"
+    "updated_at": "2026-07-15T08:55:26Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
