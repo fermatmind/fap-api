@@ -119,9 +119,11 @@ final class BigFiveAuthorityV245Test extends TestCase
 
         $jsonLd = app(ArticleSeoService::class)->generateJsonLd($article, $revision, true);
 
-        $this->assertSame('Article', $jsonLd['@type']);
-        $this->assertSame('FermatMind Editorial', data_get($jsonLd, 'author.name'));
-        $this->assertSame('FAQPage', data_get($jsonLd, 'hasPart.0.@type'));
+        $this->assertSame('https://schema.org', $jsonLd['@context']);
+        $this->assertSame('Article', data_get($jsonLd, '@graph.0.@type'));
+        $this->assertSame('FermatMind Editorial', data_get($jsonLd, '@graph.0.author.name'));
+        $this->assertSame('FAQPage', data_get($jsonLd, '@graph.0.hasPart.0.@type'));
+        $this->assertSame('BreadcrumbList', data_get($jsonLd, '@graph.1.@type'));
         $this->assertStringNotContainsString('FabricatedSchemaBypass', json_encode($jsonLd, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('Invented Author', json_encode($jsonLd, JSON_THROW_ON_ERROR));
     }
@@ -154,9 +156,10 @@ final class BigFiveAuthorityV245Test extends TestCase
         ]);
 
         $this->assertSame([], $runtime);
-        $this->assertSame('Article', data_get($candidate, '@type'));
-        $this->assertSame('FermatMind Editorial', data_get($candidate, 'author.name'));
-        $this->assertArrayNotHasKey('hasPart', $candidate);
+        $this->assertSame('Article', data_get($candidate, '@graph.0.@type'));
+        $this->assertSame('FermatMind Editorial', data_get($candidate, '@graph.0.author.name'));
+        $this->assertSame('BreadcrumbList', data_get($candidate, '@graph.1.@type'));
+        $this->assertStringNotContainsString('FAQPage', json_encode($candidate, JSON_THROW_ON_ERROR));
     }
 
     public function test_public_seo_payload_strips_internal_big_five_provenance_identifiers(): void

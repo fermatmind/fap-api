@@ -207,9 +207,28 @@ final class ArticleSeoService
             $bigFiveGateOverrides,
         );
         if ($bigFiveStructuredData !== null) {
+            $articleFragment = data_get($bigFiveStructuredData, 'fragments.article');
+            $breadcrumbFragment = data_get($bigFiveStructuredData, 'fragments.breadcrumb_list');
+            $faqFragment = data_get($bigFiveStructuredData, 'fragments.faq_page');
+            $publicFragments = [];
+            if (is_array($articleFragment)) {
+                $publicFragments[] = $articleFragment;
+            }
+            if (is_array($breadcrumbFragment)) {
+                $publicFragments[] = $breadcrumbFragment;
+            }
+            if (! is_array($articleFragment) && is_array($faqFragment)) {
+                $publicFragments[] = $faqFragment;
+            }
+            $jsonLd = match (count($publicFragments)) {
+                0 => [],
+                1 => $publicFragments[0],
+                default => ['@context' => 'https://schema.org', '@graph' => $publicFragments],
+            };
+
             return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
                 CanonicalFrontendUrl::normalizeNestedUrls(
-                    (array) data_get($bigFiveStructuredData, 'fragments.article', [])
+                    $jsonLd
                 )
             );
         }
