@@ -3865,7 +3865,7 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "sidecar_issues": [],
-    "status": "review_fixes_local_verified",
+    "status": "ready_to_merge",
     "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
     "train_scope": "article_h1_single_dom",
     "transitions": [
@@ -93166,18 +93166,18 @@
         "evidence": "Final manifest replay passed: focused source-ledger suite 10 tests / 3955 assertions; Pint test for the new feature file; YAML and all JSON parse; git diff check; and exact seven-file allowlist. The package contains one registry, 116 scorecard-matched maps, zero unmapped allowed factual claims, zero competitor-as-science mappings, explicit wing/subtype limitations, and explicit blocked assumptions."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on ledger-ready head c5fb4cb2c86f0544f51fbd90f53f5069488bed4e. One additional valid P2 then moved the boundary source to its direct authority and added semantic traceability coverage; latest-head checks must rerun."
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head cbfa16b824804d111877fcdf03a34383bd79a922 after the direct boundary-authority fix: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reports MERGEABLE."
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "Validated all six automated P2 findings: predecessor and current substantive SHAs are auditable; internal paths share the backend root and resolve; mapped claim sources support their page families; cross-family base claims use the systematic review rather than wider measurement scope; and the product boundary source now points directly to docs/seo/skills/fermat-claim-boundary.md, whose core rule explicitly forbids diagnosis, hiring-fit, and career-success prediction. Focused validation passes 13 tests / 5095 assertions plus Pint."
+        "evidence": "Validated and fixed all six applicable automated P2 findings: predecessor and current substantive SHAs are auditable; internal paths share the backend root and resolve; mapped claim sources support their page families; cross-family base claims use the systematic review rather than wider measurement scope; and the product boundary source points directly to docs/seo/skills/fermat-claim-boundary.md, whose core rule explicitly forbids diagnosis, hiring-fit, and career-success prediction. Focused validation passes 13 tests / 5095 assertions plus Pint. One later suggestion to record a pre-merge synthetic squash SHA was dismissed as inapplicable: an actual main-reachable squash commit does not exist until merge and will be reconciled by the next serial PR after GitHub MERGED and origin/main containment are verified."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93235,9 +93235,14 @@
         "at": "2026-07-15T09:18:31Z",
         "status": "review_fixes_local_verified",
         "note": "The ledger-ready head passed all nine checks, then a sixth valid P2 was fixed: the non-diagnostic/non-predictive boundary source now points to the direct Fermat Claim Boundary authority rather than root AGENTS.md. A semantic traceability regression passes within 13 tests / 5095 assertions plus Pint; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T09:26:17Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on cbfa16b82, GitHub is MERGEABLE, all six applicable P2 findings are fixed, and all review threads are resolved. The suggestion to pre-record a synthetic squash SHA was rejected because no actual main-reachable squash commit exists before merge; PR08 will reconcile the real merge commit after GitHub MERGED and origin/main containment."
       }
     ],
-    "updated_at": "2026-07-15T09:18:31Z"
+    "updated_at": "2026-07-15T09:26:17Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
