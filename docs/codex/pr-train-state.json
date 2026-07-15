@@ -93148,8 +93148,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "review_fixes_local_verified",
-    "commit_sha": "896f1cfd70ba2f605728df8ce6a8879797606d71",
+    "status": "ready_to_merge",
+    "commit_sha": "efba1231561cf91bb165be84d15dd7a2999b73f5",
+    "commit_sha_role": "latest_reviewed_substantive_head_before_ledger_only_ready_to_merge_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
       "dependency": {
@@ -93165,18 +93166,18 @@
         "evidence": "Final manifest replay passed: focused source-ledger suite 10 tests / 3955 assertions; Pint test for the new feature file; YAML and all JSON parse; git diff check; and exact seven-file allowlist. The package contains one registry, 116 scorecard-matched maps, zero unmapped allowed factual claims, zero competitor-as-science mappings, explicit wing/subtype limitations, and explicit blocked assumptions."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on 1ce93d2dd4786e4b978d53538e0fdcd575ea4381. Two valid automated P2 threads were then fixed in scope, so latest-head checks must rerun before merge."
+        "status": "pass",
+        "evidence": "All nine required checks passed on substantive head efba1231561cf91bb165be84d15dd7a2999b73f5: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reports MERGEABLE."
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "Validated all four automated P2 findings across two review rounds: PR06 commit_sha records the main-reachable squash merge; PR07 commit_sha records the reviewed fix head; all non-null registry internal paths share the backend root and resolve; and every mapped claim source now declares support for that page family. Cross-family base claims were narrowed to the systematic review rather than widening measurement-documentation scope. Focused validation passes 12 tests / 5091 assertions plus Pint."
+        "evidence": "Validated all five automated P2 findings across three review rounds: PR06 commit_sha records the main-reachable squash merge; PR07 commit_sha records efba1231561cf91bb165be84d15dd7a2999b73f5, the latest reviewed substantive head containing every content, test, and state fix before ledger-only ready-to-merge bookkeeping; all non-null registry internal paths share the backend root and resolve; and every mapped claim source declares support for that page family. Cross-family base claims were narrowed to the systematic review rather than widening measurement-documentation scope. Focused validation passes 12 tests / 5091 assertions plus Pint."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93224,9 +93225,14 @@
         "at": "2026-07-15T09:03:21Z",
         "status": "review_fixes_local_verified",
         "note": "The first review-fix head passed all nine checks, then two additional valid P2 threads were fixed: PR07 now records the reviewed fix head, and cross-family claims cite only sources whose declared page_families include the mapped page. The new family-compatibility regression passes within 12 tests / 5091 assertions; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T09:10:14Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on substantive head efba123156, GitHub is MERGEABLE, and all five automated P2 findings are fixed in scope. commit_sha intentionally records the latest reviewed substantive head containing all implementation, regression, and review-fix evidence; any following ready-to-merge commit is ledger-only bookkeeping and must pass final checks before merge."
       }
     ],
-    "updated_at": "2026-07-15T09:03:21Z"
+    "updated_at": "2026-07-15T09:10:14Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
