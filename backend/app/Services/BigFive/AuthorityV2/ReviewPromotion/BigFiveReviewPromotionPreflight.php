@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\BigFive\AuthorityV2\ReviewPromotion;
 
 use App\Models\Article;
+use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
@@ -598,7 +599,7 @@ final class BigFiveReviewPromotionPreflight
             ->withoutGlobalScopes()
             ->where('org_id', $article->getAttribute('org_id'))
             ->where('locale', $article->getAttribute('locale'))
-            ->where('visibility', 'public')
+            ->where('visibility', ArticleTestEdge::VISIBILITY_PUBLIC)
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get();
