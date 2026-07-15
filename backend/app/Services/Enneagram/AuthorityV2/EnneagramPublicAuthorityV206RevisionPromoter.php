@@ -388,6 +388,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 'expected_package_sha256' => $packageSha,
                 'expected_source_hash' => $sourceHash,
                 'expected_public_fingerprint_before' => $publicFingerprint,
+                'working_snapshot_sha256' => $this->fingerprint($snapshot),
                 'asset' => $asset,
                 'working_revision' => $revision,
                 'current_published_revision' => $currentPublishedRevision,
@@ -406,6 +407,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
             'expected_package_sha256' => $target['expected_package_sha256'],
             'expected_source_hash' => $target['expected_source_hash'],
             'expected_public_fingerprint_before' => $target['expected_public_fingerprint_before'],
+            'working_snapshot_sha256' => $target['working_snapshot_sha256'],
         ], $planned);
 
         return [

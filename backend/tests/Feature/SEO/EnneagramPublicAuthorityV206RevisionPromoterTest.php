@@ -146,6 +146,30 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
         }
     }
 
+    public function test_approved_snapshot_drift_invalidates_the_confirmed_preflight_before_any_promotion_write(): void
+    {
+        $targets = $this->seedRevisionEstate();
+        $plan = $this->promoter()->preflight($targets);
+        $revisionId = (int) $targets[0]['expected_working_revision_id'];
+        $snapshot = json_decode((string) DB::table('personality_public_content_asset_revisions')
+            ->where('id', $revisionId)
+            ->value('snapshot_json'), true, 512, JSON_THROW_ON_ERROR);
+        $snapshot['title'] = 'Unreviewed snapshot drift';
+        DB::table('personality_public_content_asset_revisions')->where('id', $revisionId)->update([
+            'snapshot_json' => json_encode($snapshot, JSON_THROW_ON_ERROR),
+        ]);
+        $before = $this->databaseFingerprint();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('preflight fingerprint changed');
+
+        try {
+            $this->promoter()->promote($targets, (string) $plan['preflight_fingerprint']);
+        } finally {
+            $this->assertSame($before, $this->databaseFingerprint());
+        }
+    }
+
     public function test_pending_manual_review_is_rejected_before_any_write(): void
     {
         $targets = $this->seedRevisionEstate();
