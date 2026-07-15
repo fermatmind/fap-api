@@ -92703,6 +92703,10 @@
       "static_validation": {
         "status": "pass",
         "evidence": "Four changed PHP files passed php -l and Pint; Composer validate --strict, YAML load and safe-load, state/fixture JSON parse, and git diff --check passed."
+      },
+      "manifest_head_validation": {
+        "status": "pass",
+        "evidence": "After replacing the zsh-incompatible Pint scalar with the established per-file loop, exact post-commit replay passed four-file PHP lint/Pint, 57 tests / 4096 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, and diff checks."
       }
     },
     "scope_validation": {
@@ -92736,9 +92740,19 @@
         "at": "2026-07-15T05:42:31Z",
         "status": "local_checks_passed",
         "note": "Enneagram V2 projection preserves V1 and passes 10 fixture coverage across five entity types and two locales; schema remains visible-evidence plus runtime gated, reviewer remains null without source evidence, and no revision workspace fields are public. All corrected manifest local checks and exact eight-path scope validation pass."
+      },
+      {
+        "at": "2026-07-15T05:43:58Z",
+        "status": "local_validation_contract_fix",
+        "note": "Post-commit exact-command replay passed four-file PHP lint, then found the PR04 Pint command depended on Bash word splitting and failed under the repository default zsh before tests restarted. Replaced only that manifest command with the established portable per-file loop; full replay is pending."
+      },
+      {
+        "at": "2026-07-15T05:44:46Z",
+        "status": "local_checks_passed",
+        "note": "Replayed the corrected manifest commands successfully: four-file PHP lint/Pint, 57 target tests / 4096 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, diff check, and exact eight-path scope all pass."
       }
     ],
-    "updated_at": "2026-07-15T05:42:31Z"
+    "updated_at": "2026-07-15T05:44:46Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05",
