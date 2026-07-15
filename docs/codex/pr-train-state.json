@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "28f3ceec28de895bfa9d6873f16636b719da3d6d",
+      "commit_sha": "9a5471d81debf9e93b10dcb6c4dc66c99730dc1c",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 44 tests / 1366 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Title-cased standalone Enneagram type names One through Nine are normalized before whitespace/punctuation removal, so mechanical type-name substitutions fail closed without replacing ordinary lowercase substrings. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+          "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 45 tests / 1376 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Empty public editorial titles and repeated FAQ questions within one asset now fail closed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 0bc001262 before the latest same-head review added one valid in-scope P2 finding: standalone title-cased One/Two through Nine type labels were not normalized for template substitution comparison. The locally verified substantive fix head 28f3ceec2 normalizes them before lossy text normalization and requires a fresh GitHub check round."
+          "evidence": "All nine required checks passed on ledger head 3ddae1453 before the same-head review added two valid in-scope P2 findings: empty titles passed key-presence validation and repeated FAQ questions could satisfy FAQ depth. The locally verified substantive fix head 9a5471d81 rejects both cases and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All sixty-five valid P2 findings are fixed. Title-cased standalone Enneagram type names One through Nine now participate in type-substitution template detection before whitespace/punctuation normalization. PR08+PR02 pass 44 tests / 1366 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+          "evidence": "All sixty-seven valid P2 findings are fixed. Empty public editorial titles fail the shape gate, and FAQ questions must be distinct within each asset after normalization. PR08+PR02 pass 45 tests / 1376 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93641,13 +93641,18 @@
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed and a same-head Codex review completed on ledger head c53330b8c, then three valid P2 findings were fixed together: guarantees/guaranteeing outcome verbs, active candidate screening for hiring/employment/admission, approved-for-public-release, and 已完成人工审核 now fail closed, while direct negative limitations remain allowed. PR08+PR02 pass 43 / 1356, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
       },
-      {
-        "at": "2026-07-15T17:26:01Z",
-        "status": "review_fixes_local_verified",
-        "note": "All nine checks passed and a same-head Codex review completed on ledger head 0bc001262, then one valid P2 was fixed: title-cased standalone Enneagram type names One through Nine now normalize before whitespace/punctuation removal, so mechanical type-name substitutions fail closed without replacing ordinary lowercase substrings. PR08+PR02 pass 44 / 1366, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
-      }
-    ],
-    "updated_at": "2026-07-15T17:26:01Z"
+        {
+          "at": "2026-07-15T17:26:01Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and a same-head Codex review completed on ledger head 0bc001262, then one valid P2 was fixed: title-cased standalone Enneagram type names One through Nine now normalize before whitespace/punctuation removal, so mechanical type-name substitutions fail closed without replacing ordinary lowercase substrings. PR08+PR02 pass 44 / 1366, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T17:37:19Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and a same-head Codex review completed on ledger head 3ddae1453, then two valid P2 findings were fixed: every public editorial asset now requires a non-empty visible title, and normalized FAQ questions must be distinct within each asset. PR08+PR02 pass 45 / 1376, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        }
+      ],
+      "updated_at": "2026-07-15T17:37:19Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
