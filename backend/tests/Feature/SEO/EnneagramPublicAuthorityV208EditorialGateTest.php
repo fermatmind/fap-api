@@ -256,6 +256,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '预测您的升学结果',
             '职业成功预测',
             '个人离职预测',
+            'Forecasts career and income outcomes',
+            'Career outcome forecast',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -264,6 +266,21 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
             $this->assertFalse($result['ok'], $phrase);
             $this->assertContains('career_or_relationship_prediction', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+    }
+
+    public function test_explicitly_negated_forecast_boundary_remains_allowed(): void
+    {
+        foreach ([
+            'This page does not forecast career and income outcomes.',
+            'This page is not a forecast of career and income outcomes.',
+        ] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
         }
     }
 
