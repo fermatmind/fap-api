@@ -776,6 +776,20 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_identity_slugs_and_hash_markers_are_normalized_for_template_detection(): void
+    {
+        $candidate = $this->candidate();
+        $gut = $this->localePairIndexes($candidate, 'center:gut')['en'];
+        $heart = $this->localePairIndexes($candidate, 'center:heart')['en'];
+        $candidate['assets'][$gut]['sections'][0]['body'] = 'The gut page marker a1b2c3d4e5f6 records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
+        $candidate['assets'][$heart]['sections'][0]['body'] = 'The heart page marker b2c3d4e5f6a1 records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
+    }
+
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void
     {
         $exit = Artisan::call('personality:enneagram-authority-v2-integrity-gate', [
@@ -846,6 +860,13 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $identity = $map['identity_key'];
             $token = substr(hash('sha256', $locale.'|'.$identity), 0, 12);
             $english = $locale === 'en';
+            $contexts = $english
+                ? ['budget handoff', 'vendor delay', 'peer critique', 'scope negotiation', 'customer escalation', 'shift change', 'planning review', 'quality incident', 'training session', 'resource conflict', 'deadline reset', 'role transition']
+                : ['预算交接', '供应商延误', '同事评议', '范围协商', '客户升级反馈', '轮班交接', '计划复盘', '质量事件', '培训讨论', '资源冲突', '期限重设', '角色转换'];
+            $moments = $english
+                ? ['before a decision', 'after new evidence', 'during disagreement', 'under time pressure', 'with unclear ownership', 'after direct feedback', 'during a priority change', 'when incentives conflict', 'after a failed attempt', 'while coordinating peers']
+                : ['做决定之前', '出现新证据之后', '发生分歧期间', '时间压力之下', '责任归属不清时', '收到直接反馈后', '优先级变化期间', '激励发生冲突时', '一次尝试失败后', '协调同事期间'];
+            $semanticCue = $contexts[$index % count($contexts)].' '.$moments[intdiv($index, count($contexts)) % count($moments)];
             $claimIds = collect($map['claim_ids'])
                 ->filter(fn (string $claimId): bool => ($claims->get($claimId)['allowed_as_public_claim'] ?? false) === true)
                 ->values()
@@ -856,10 +877,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
                 'entity_type' => $map['entity_type'],
                 'code' => $map['code'],
                 'path' => $map['path'],
-                'title' => $english ? "Observation guide {$identity} {$token}" : "观察指南 {$identity} {$token}",
+                'title' => $english ? "Observation guide {$identity} {$semanticCue} {$token}" : "观察指南 {$identity} {$semanticCue} {$token}",
                 'answer_first' => $english
-                    ? "The {$identity} page uses the unique marker {$token} to frame a limited self-observation hypothesis: compare motive with visible behavior, test a counterexample, and consider role, culture, context, and current demands before treating the pattern as useful."
-                    : "{$identity} 页面以唯一标记 {$token} 提出有限的自我观察假设：把动机与可见行为分开，主动寻找反例，并在认为模式有用之前检查角色、文化、具体情境和当下任务要求。",
+                    ? "The {$identity} page uses {$semanticCue} and marker {$token} to frame a limited self-observation hypothesis: compare motive with visible behavior, test a counterexample, and consider role, culture, context, and current demands before treating the pattern as useful."
+                    : "{$identity} 页面以 {$semanticCue} 和标记 {$token} 提出有限的自我观察假设：把动机与可见行为分开，主动寻找反例，并在认为模式有用之前检查角色、文化、具体情境和当下任务要求。",
                 'authoring' => [
                     'mode' => 'independent_original',
                     'source_locale' => null,
@@ -886,49 +907,49 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
                         'kind' => 'observable_pattern',
                         'heading' => $english ? "Pattern check {$token}" : "模式检查 {$token}",
                         'body' => $english
-                            ? "In the {$token} situation, record what drew attention first, which option was delayed, and what observable action followed; then separate the reported motive from the behavior another person could actually see."
-                            : "在 {$token} 情境中，先记录注意力最早落在哪里、哪个选项被推迟、随后出现了什么可观察行动，再把自述动机与他人实际可见的行为区分开。",
+                            ? "In {$semanticCue} with marker {$token}, record what drew attention first, which option was delayed, and what observable action followed; then separate the reported motive from the behavior another person could actually see."
+                            : "在 {$semanticCue} 的 {$token} 情境中，先记录注意力最早落在哪里、哪个选项被推迟、随后出现了什么可观察行动，再把自述动机与他人实际可见的行为区分开。",
                     ],
                     [
                         'kind' => 'counterexample',
                         'heading' => $english ? "Counterexample {$token}" : "反例 {$token}",
                         'body' => $english
-                            ? "A {$token} counterexample is a comparable moment in which the expected pattern did not appear; check whether authority, fatigue, incentives, safety, learned skill, or cultural norms better explain the difference."
-                            : "{$token} 的反例是在可比较时刻没有出现预期模式；应检查权力关系、疲劳、激励、安全感、已训练技能或文化规范是否更能解释差异。",
+                            ? "A {$semanticCue} counterexample for {$token} is a comparable moment in which the expected pattern did not appear; check whether authority, fatigue, incentives, safety, learned skill, or cultural norms better explain the difference."
+                            : "{$semanticCue} 中 {$token} 的反例是在可比较时刻没有出现预期模式；应检查权力关系、疲劳、激励、安全感、已训练技能或文化规范是否更能解释差异。",
                     ],
                     [
                         'kind' => 'boundary',
                         'heading' => $english ? "Use boundary {$token}" : "使用边界 {$token}",
                         'body' => $english
-                            ? "Treat the {$token} observation as a revisable working hypothesis, never as diagnosis, fixed identity, ability judgment, hiring screen, relationship verdict, or forecast of career and income outcomes."
-                            : "把 {$token} 观察当作可修正的工作假设，不把它当成诊断、固定身份、能力判断、录用筛选、关系结论，或对职业和收入结果的预测。",
+                            ? "Treat the {$semanticCue} observation for {$token} as a revisable working hypothesis, never as diagnosis, fixed identity, ability judgment, hiring screen, relationship verdict, or forecast of career and income outcomes."
+                            : "把 {$semanticCue} 中的 {$token} 观察当作可修正的工作假设，不把它当成诊断、固定身份、能力判断、录用筛选、关系结论，或对职业和收入结果的预测。",
                     ],
                 ],
                 'faqs' => collect(range(1, 3))->map(fn (int $faqIndex): array => [
                     'question' => $english
-                        ? "What should I check for {$identity} question {$faqIndex} {$token}?"
-                        : "观察 {$identity} 时，第 {$faqIndex} 个问题应检查什么 {$token}？",
+                        ? "What should I check for {$identity} in {$semanticCue}, question {$faqIndex} {$token}?"
+                        : "在 {$semanticCue} 中观察 {$identity} 时，第 {$faqIndex} 个问题应检查什么 {$token}？",
                     'answer' => $english
-                        ? "For {$token} FAQ {$faqIndex}, compare one concrete event with a counterexample, record the visible action separately from the inferred motive, and keep role, culture, incentives, fatigue, and current demands available as alternative explanations."
-                        : "针对 {$token} 的第 {$faqIndex} 个问答，请比较一个具体事件与一个反例，把可见行动和推测动机分开记录，并保留角色、文化、激励、疲劳和当下任务要求等替代解释。",
+                        ? "For {$semanticCue} marker {$token} FAQ {$faqIndex}, compare one concrete event with a counterexample, record the visible action separately from the inferred motive, and keep role, culture, incentives, fatigue, and current demands available as alternative explanations."
+                        : "针对 {$semanticCue} 中 {$token} 的第 {$faqIndex} 个问答，请比较一个具体事件与一个反例，把可见行动和推测动机分开记录，并保留角色、文化、激励、疲劳和当下任务要求等替代解释。",
                 ])->all(),
                 'observation_exercise' => [
                     'duration_days' => ($index % 5) + 2,
                     'context' => $english
-                        ? "Choose one recurring {$token} context with a clear request, deadline, and another person who can observe the resulting action."
-                        : "选择一个反复出现的 {$token} 情境，其中应有明确请求、时间限制，以及能够观察最终行动的另一位参与者。",
+                        ? "Choose one recurring {$semanticCue} context for {$token} with a clear request, deadline, and another person who can observe the resulting action."
+                        : "选择一个反复出现的 {$semanticCue} 情境来观察 {$token}，其中应有明确请求、时间限制，以及能够观察最终行动的另一位参与者。",
                     'observable_signal' => $english
-                        ? "Record the first visible {$token} action, the delayed option, and the words used before assigning any motive to the event."
-                        : "记录 {$token} 事件中最先出现的可见行动、被推迟的选项和当时使用的原话，再考虑可能的动机。",
+                        ? "During {$semanticCue}, record the first visible {$token} action, the delayed option, and the words used before assigning any motive to the event."
+                        : "在 {$semanticCue} 中记录 {$token} 事件最先出现的可见行动、被推迟的选项和当时使用的原话，再考虑可能的动机。",
                     'page_specific_signal' => $english
-                        ? "Test the unique {$token} decision-and-feedback cue named in this page rather than a generic personality journaling prompt."
-                        : "检验本页命名的 {$token} 决策与反馈线索，而不是套用任何人格页面都能使用的通用记录提示。",
+                        ? "Test the {$semanticCue} decision-and-feedback cue for {$token} rather than a generic personality journaling prompt."
+                        : "检验本页 {$semanticCue} 中的 {$token} 决策与反馈线索，而不是套用任何人格页面都能使用的通用记录提示。",
                     'alternative_explanation' => $english
-                        ? "Before interpreting {$token}, write one role, culture, incentive, fatigue, safety, skill, or situational explanation that could produce the same behavior."
-                        : "解释 {$token} 之前，先写出一种角色、文化、激励、疲劳、安全感、技能或具体情境因素，它也可能产生同样行为。",
+                        ? "Before interpreting {$token} in {$semanticCue}, write one role, culture, incentive, fatigue, safety, skill, or situational explanation that could produce the same behavior."
+                        : "解释 {$semanticCue} 中的 {$token} 之前，先写出一种角色、文化、激励、疲劳、安全感、技能或具体情境因素，它也可能产生同样行为。",
                     'reflection_prompt' => $english
-                        ? "Compare the {$token} hypothesis with the counterexample and state what evidence would make you revise or discard the interpretation."
-                        : "把 {$token} 假设与反例进行比较，并说明哪些证据会让你修正或放弃当前解释。",
+                        ? "Compare the {$token} hypothesis from {$semanticCue} with the counterexample and state what evidence would make you revise or discard the interpretation."
+                        : "把 {$semanticCue} 中的 {$token} 假设与反例进行比较，并说明哪些证据会让你修正或放弃当前解释。",
                 ],
                 'answerability' => [
                     'direct_answer_supported' => true,

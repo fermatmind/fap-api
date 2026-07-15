@@ -840,7 +840,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 }
                 $paragraphs[$normalized] = ['key' => $key, 'path' => "{$path}.text.{$index}"];
 
-                $template = preg_replace('/(?:type(?:[1-9]|one|two|three|four|five|six|seven|eight|nine)|ones|twos|threes|fours|fives|sixes|sevens|eights|nines|[1-9]w[1-9]|(?:sp|so|sx)[-_]?[1-9]|第?(?:[1-9]|[一二三四五六七八九])型)/iu', '{type}', $normalized) ?? $normalized;
+                $template = $this->normalizeTemplate($block, $asset);
                 if (isset($typeTemplates[$template])) {
                     $add(self::EDITORIAL_GATES[3], 'type_number_substitution_template', $key, "{$path}.text.{$index}", "Text differs from {$typeTemplates[$template]['path']} only by a type label or number.");
                 }
@@ -864,6 +864,40 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     private function normalize(mixed $value): string
     {
         return preg_replace('/[^\p{L}\p{N}]+/u', '', mb_strtolower(trim((string) $value))) ?? '';
+    }
+
+    /** @param array<string, mixed> $asset */
+    private function normalizeTemplate(string $value, array $asset): string
+    {
+        $prepared = preg_replace(
+            '/(?<![\p{L}\p{N}])(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|[0-9a-f]{8,64})(?![\p{L}\p{N}])/iu',
+            ' {marker} ',
+            $value,
+        ) ?? $value;
+        $markers = [];
+        foreach (['identity_key', 'code', 'path'] as $field) {
+            $marker = is_string($asset[$field] ?? null) ? trim($asset[$field]) : '';
+            if ($marker === '') {
+                continue;
+            }
+            $markers[] = $marker;
+            if ($field === 'path') {
+                $markers[] = basename($marker);
+            }
+            foreach (preg_split('/[^\p{L}\p{N}]+/u', $marker, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $component) {
+                if (mb_strlen($component) >= 3 && ! in_array(mb_strtolower($component), ['enneagram', 'personality', 'core', 'type', 'center', 'wing', 'instinctual', 'subtype', 'hub'], true)) {
+                    $markers[] = $component;
+                }
+            }
+        }
+        usort($markers, fn (string $left, string $right): int => mb_strlen($right) <=> mb_strlen($left));
+        foreach (array_unique($markers) as $marker) {
+            $prepared = preg_replace('/(?<![\p{L}\p{N}])'.preg_quote($marker, '/').'(?![\p{L}\p{N}])/iu', ' {marker} ', $prepared) ?? $prepared;
+        }
+
+        $normalized = $this->normalize($prepared);
+
+        return preg_replace('/(?:type(?:[1-9]|one|two|three|four|five|six|seven|eight|nine)|ones|twos|threes|fours|fives|sixes|sevens|eights|nines|[1-9]w[1-9]|(?:sp|so|sx)[-_]?[1-9]|第?(?:[1-9]|[一二三四五六七八九])型)/iu', '{type}', $normalized) ?? $normalized;
     }
 
     private function length(mixed $value): int

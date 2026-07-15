@@ -7,7 +7,7 @@ The aggregate candidate must contain exactly 116 locale assets: 2 hub pages, 6 c
 1. schema and frozen-target coverage;
 2. independently authored EN and zh-CN content with non-identical outlines; rendered EN fields must contain at least 120 Latin characters and a 60% Latin share of letters, while rendered zh-CN fields must contain at least 80 Han characters and a 25% Han share of letters;
 3. page-specific information gain;
-4. locale-calibrated sentence, paragraph, and type-number-substitution duplicate/template risk (EN 80/50 characters; zh-CN 30/24);
+4. locale-calibrated sentence, paragraph, and type/page-marker-substitution duplicate/template risk, normalizing type labels, frozen identity slugs, UUIDs, and hexadecimal page markers (EN 80/50 characters; zh-CN 30/24);
 5. page-specific FAQ depth and non-repeated answers;
 6. specific observable exercises rather than a generic seven-day prompt;
 7. visible GEO answerability, with every declared question mapped through `question_answers` only to a substantive `answer_first`, `sections.N.body`, or `faqs.N.answer` field;
@@ -15,7 +15,7 @@ The aggregate candidate must contain exactly 116 locale assets: 2 hub pages, 6 c
 9. truthful pending manual-review and closed release state;
 10. source-ledger claim safety, including unsupported science, centers-as-biological/diagnostic-system claims, one-fixed-type or universal-nine-factor claims, predictive outcomes, guaranteed search/traffic/AI-citation outcomes, and competitor-language blocks.
 
-The required negative fixtures cover sentence/paragraph duplication, numeric, singular-spelled, and plural-spelled type-label substitution, identical EN/zh-CN outlines, repeated FAQ answers, a generic seven-day exercise, unsupported science claims, centers presented as biological or diagnostic systems, one fixed type per person or universal nine-factor recovery, career or relationship prediction, guaranteed search/traffic/AI-citation outcomes, model QA or approval wording presented as completed human review, hidden evidence, and copied competitor language.
+The required negative fixtures cover sentence/paragraph duplication, numeric, singular-spelled, plural-spelled, identity-slug, and hash-marker substitution, identical EN/zh-CN outlines, repeated FAQ answers, a generic seven-day exercise, unsupported science claims, centers presented as biological or diagnostic systems, one fixed type per person or universal nine-factor recovery, career or relationship prediction, guaranteed search/traffic/AI-citation outcomes, model QA or approval wording presented as completed human review, hidden evidence, and copied competitor language.
 
 Run after PR09–PR18 have assembled the aggregate candidate:
 
