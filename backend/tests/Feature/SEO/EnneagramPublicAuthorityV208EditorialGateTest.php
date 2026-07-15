@@ -688,6 +688,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Wings are validated subtypes',
             'Cited evidence transfers automatically to FermatMind scores',
             'The study findings apply to FermatMind translations',
+            'This study applies directly to FermatMind translations',
+            'The cited result applied to FermatMind scores',
             '费马测试九型人格与 RHETI 具有工具等价性',
             '翼型效度得到研究支持',
             '本能副型具有跨文化等价性',

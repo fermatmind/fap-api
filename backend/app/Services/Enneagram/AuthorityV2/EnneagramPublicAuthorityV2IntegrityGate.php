@@ -329,7 +329,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const FERMATMIND_PSYCHOMETRICS_PATTERN = '/(?:(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,80}(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)|(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)[^.!?。！？\n]{0,80}(?:fermatmind|费马测试|费马测评))/iu';
 
-    private const FERMATMIND_EVIDENCE_TRANSFER_PATTERN = '/(?:(?:transfer|apply|generalize)(?:s|d)?[^.!?。！？\n]{0,50}(?:to\s+)?(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,30}(?:scores?|translations?|individual[\s-]+interpretations?)|(?:转移|适用|推广)到?(?:费马测试|费马测评)[^。！？\n]{0,30}(?:分数|得分|翻译|个体解释))/iu';
+    private const FERMATMIND_EVIDENCE_TRANSFER_PATTERN = '/(?:(?:transfer(?:s|red)?|appl(?:y|ies|ied)|generaliz(?:e|es|ed))[^.!?。！？\n]{0,50}(?:to\s+)?(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,30}(?:scores?|translations?|individual[\s-]+interpretations?)|(?:转移|适用|推广)到?(?:费马测试|费马测评)[^。！？\n]{0,30}(?:分数|得分|翻译|个体解释))/iu';
 
     private const UNSUPPORTED_EQUIVALENCE_PATTERN = '/(?:(?:instrument|scale)[\s-]*(?:equivalence|equivalent)|equivalent[\s-]+to[\s-]+(?:rheti|another[\s-]+instrument)|(?:工具|量表)(?:等价性?|等效性?)|等价于(?:rheti|其他量表)|(?:enneagram[\s-]+)?wings?[\s-]+validity|validated[\s-]+subtypes?|翼型效度|经过验证的副型|(?:instinctual[\s-]+)?subtypes?[^.!?。！？\n]{0,40}(?:universality|universal|cross[\s-]+cultural[\s-]+equivalence)|universal[\s-]+subtype[\s-]+ontology|(?:本能)?副型[^。！？\n]{0,30}(?:普遍性|普遍有效|跨文化等价性?)|普遍(?:性)?副型本体)/iu';
 
