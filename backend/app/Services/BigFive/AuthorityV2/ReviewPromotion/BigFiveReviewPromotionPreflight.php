@@ -26,6 +26,17 @@ final class BigFiveReviewPromotionPreflight
     private const DRAFT_IMPORT_PACKAGE_SHA256 = '80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154';
 
     /** @var list<string> */
+    private const SOURCE_ARTIFACT_PATHS = [
+        'generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json',
+        'generated/big-five-authority-v2/big5-authority-v2-media-authority-41/mapping-package.json',
+        'generated/big-five-authority-v2/big5-authority-v2-visible-date-42/visible-date-findings.json',
+        'generated/big-five-authority-v2/big5-authority-v2-visible-provenance-43/visible-provenance-findings.json',
+        'generated/big-five-authority-v2/big5-authority-v2-discoverability-parity-44/discoverability-parity-findings.json',
+        'generated/big-five-authority-v2/big5-authority-v2-structured-data-45/structured-data-findings.json',
+        'generated/big-five-authority-v2/big5-authority-v2-topic-authority-46/topic-draft-revision-package.json',
+    ];
+
+    /** @var list<string> */
     private const EXISTING_ARTICLE_SLUGS = [
         'big-five-conscientiousness-low-procrastination-task-plan',
         'big-five-emotional-stability-stress-recovery-communication',
@@ -192,7 +203,10 @@ final class BigFiveReviewPromotionPreflight
         $runtimeBound = collect($assessments)->where('runtime_bound', true)->count();
         $reviewed = collect($assessments)->where('manual_review_complete', true)->count();
         $rollbackBound = collect($assessments)->where('rollback_target_bound', true)->count();
-        $eligible = collect($assessments)->filter(static fn (array $row): bool => $row['issues'] === [] && $row['blockers'] === [] && $row['revision_create'])->count();
+        $eligible = collect($assessments)->filter(static fn (array $row): bool => $row['issues'] === []
+            && $row['blockers'] === []
+            && $row['revision_create']
+            && $row['promotion_eligible'])->count();
         $allReady = $issueCodes === []
             && $blockerCodes === []
             && $eligible === self::REVISION_COUNT
@@ -378,6 +392,10 @@ final class BigFiveReviewPromotionPreflight
         if (! $rollbackTargetBound) {
             $blockers[] = 'rollback_target_unbound';
         }
+        $promotionEligible = ($row['promotion']['eligible'] ?? false) === true;
+        if ($row['action_contract']['revision_create'] && ! $promotionEligible) {
+            $blockers[] = 'row_promotion_eligibility_missing';
+        }
 
         $issues = array_values(array_unique($issues));
         sort($issues);
@@ -387,6 +405,7 @@ final class BigFiveReviewPromotionPreflight
         return [
             'asset_id' => $row['asset_id'],
             'revision_create' => (bool) $row['action_contract']['revision_create'],
+            'promotion_eligible' => $promotionEligible,
             'runtime_bound' => $record instanceof Model && ! in_array('runtime_identity_unbound', $blockers, true),
             'manual_review_complete' => $manualReviewComplete,
             'rollback_target_bound' => $rollbackTargetBound,
@@ -574,7 +593,24 @@ final class BigFiveReviewPromotionPreflight
             $this->assertPendingReviewAndRollback($review, $rollback);
             $this->assertPendingAuthorizationPacket($authorization, $review);
         }
-        foreach ($review['source_artifacts'] ?? [] as $source) {
+        $sourceArtifacts = $review['source_artifacts'] ?? null;
+        if (! is_array($sourceArtifacts) || count($sourceArtifacts) !== count(self::SOURCE_ARTIFACT_PATHS)) {
+            throw new RuntimeException('Review source artifact identity contract mismatch.');
+        }
+        $sourcePaths = [];
+        foreach ($sourceArtifacts as $source) {
+            if (! is_array($source)) {
+                throw new RuntimeException('Review source artifact identity contract mismatch.');
+            }
+            $sourcePaths[] = (string) ($source['path'] ?? '');
+        }
+        sort($sourcePaths);
+        $expectedSourcePaths = self::SOURCE_ARTIFACT_PATHS;
+        sort($expectedSourcePaths);
+        if ($sourcePaths !== $expectedSourcePaths) {
+            throw new RuntimeException('Review source artifact identity contract mismatch.');
+        }
+        foreach ($sourceArtifacts as $source) {
             $path = $this->projectPath((string) ($source['path'] ?? ''));
             if (! File::isFile($path) || ! hash_equals((string) ($source['sha256'] ?? ''), hash_file('sha256', $path))) {
                 throw new RuntimeException('Review source artifact drift: '.($source['path'] ?? 'unknown').'.');

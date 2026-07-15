@@ -85,11 +85,37 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertFalse($result['ok']);
         $this->assertSame('FAIL_CLOSED_ABORT_RUNTIME_MISMATCH', $result['status']);
         $this->assertContains('identity_missing', $result['issue_codes']);
+        $this->assertContains('row_promotion_eligibility_missing', $result['blocker_codes']);
         $this->assertSame(0, $result['counts']['promotion_eligible']);
         $this->assertSame(0, $result['counts']['cohorts_authorized']);
         $this->assertSame(231, $result['actions']['database_reads']);
         $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
         $this->assertSame($before, $this->tableCounts());
+    }
+
+    public function test_package_only_rejects_incomplete_source_artifact_set_with_regenerated_artifact_locks(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        array_pop($review['source_artifacts']);
+        [$reviewPath, $reviewSha] = $this->writeTemporaryJson('pr47-review-missing-source-artifact.json', $review);
+
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['review_manifest_sha256'] = $reviewSha;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-missing-source-artifact.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['review_manifest_sha256'] = $reviewSha;
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-missing-source-artifact.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly($reviewPath, $authorizationPath, $rollbackPath);
+            $this->fail('Expected incomplete source artifact evidence to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('source artifact identity contract mismatch', $exception->getMessage());
+        } finally {
+            File::delete([$reviewPath, $rollbackPath, $authorizationPath]);
+        }
     }
 
     public function test_database_preflight_rejects_publicly_readable_primary_create_content_page_without_published_revision(): void
