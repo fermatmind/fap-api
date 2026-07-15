@@ -143,11 +143,18 @@ final class BigFiveVisibleProvenanceProjector
         $metadata = $revisionMatches && is_array(data_get($revision->snapshot_json, 'profile'))
             ? data_get($revision->snapshot_json, 'profile')
             : [];
+        $author = $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null;
+        if ($author !== null && (
+            $revision->created_by_admin_user_id === null
+            || $author['identity'] !== 'admin_user:'.(int) $revision->created_by_admin_user_id
+        )) {
+            $author = null;
+        }
 
         return $this->project(
             'Topic',
             'topic:'.(int) $topic->id.':'.(string) $topic->locale.':'.(string) $topic->slug,
-            $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null,
+            $author,
             $public ? $this->reviewer(data_get($metadata, 'visible_provenance.reviewer')) : null,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $topic->is_public,

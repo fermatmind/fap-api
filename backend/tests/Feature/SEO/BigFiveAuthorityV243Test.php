@@ -181,6 +181,7 @@ final class BigFiveAuthorityV243Test extends TestCase
         $topic->forceFill(['id' => 40, 'published_revision_id' => 401]);
         $revision = new TopicProfileRevision([
             'profile_id' => 40,
+            'created_by_admin_user_id' => 41,
             'snapshot_json' => ['profile' => $this->metadata('approved')],
         ]);
         $revision->forceFill(['id' => 401]);
@@ -212,6 +213,16 @@ final class BigFiveAuthorityV243Test extends TestCase
         $topic->published_at = now()->addDay();
         $this->assertFalse($this->projector->forTopic($topic, $revision)['eligibility']['promotion_eligible']);
         $topic->published_at = null;
+
+        $revision->created_by_admin_user_id = null;
+        $missingTopicAuthor = $this->projector->forTopic($topic, $revision);
+        $this->assertNull($missingTopicAuthor['visible_provenance']['author']);
+        $this->assertFalse($missingTopicAuthor['eligibility']['promotion_eligible']);
+        $revision->created_by_admin_user_id = 99;
+        $mismatchedTopicAuthor = $this->projector->forTopic($topic, $revision);
+        $this->assertNull($mismatchedTopicAuthor['visible_provenance']['author']);
+        $this->assertFalse($mismatchedTopicAuthor['eligibility']['promotion_eligible']);
+        $revision->created_by_admin_user_id = 41;
 
         $revision->snapshot_json = $this->metadata('approved');
         $rootMetadata = $this->projector->forTopic($topic, $revision);
