@@ -106,6 +106,7 @@ final class BigFiveAuthorityV247Test extends TestCase
             'status' => ContentPage::STATUS_PUBLISHED,
             'is_public' => true,
             'is_indexable' => false,
+            'canonical_path' => '/en/personality/big-five/methodology',
             'publish_allowed' => true,
             'review_state' => 'approved',
             'legal_review_required' => false,
@@ -171,6 +172,7 @@ final class BigFiveAuthorityV247Test extends TestCase
             'status' => ContentPage::STATUS_DRAFT,
             'is_public' => false,
             'is_indexable' => false,
+            'canonical_path' => '/en/personality/big-five/methodology',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -235,6 +237,7 @@ final class BigFiveAuthorityV247Test extends TestCase
             'status' => ContentPage::STATUS_DRAFT,
             'is_public' => false,
             'is_indexable' => false,
+            'canonical_path' => '/en/personality/big-five/methodology',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -248,6 +251,7 @@ final class BigFiveAuthorityV247Test extends TestCase
             'title' => 'Drifted personality route',
             'is_public' => false,
             'index_eligible' => false,
+            'canonical_json' => json_encode(['path' => '/en/personality/big-five'], JSON_THROW_ON_ERROR),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -272,6 +276,54 @@ final class BigFiveAuthorityV247Test extends TestCase
             'technical_trust:en:/en/personality/big-five/methodology',
             'model_hub:en:/en/personality/big-five',
             'topic_hub:en:/en/topics/big-five',
+        ] as $assetId) {
+            $observed = collect($result['observed_runtime'])->firstWhere('asset_id', $assetId);
+            $this->assertIsArray($observed);
+            $this->assertFalse($observed['public_route_matches']);
+        }
+    }
+
+    public function test_database_preflight_rejects_public_canonical_route_drift(): void
+    {
+        DB::table('content_pages')->insert([
+            'org_id' => 0,
+            'slug' => 'methodology',
+            'path' => '/en/personality/big-five/methodology',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'title' => 'Drifted content page canonical',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => false,
+            'canonical_path' => '/en/personality/big-five/wrong-canonical',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('personality_public_content_assets')->insert([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+            'entity_key' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Drifted personality canonical',
+            'is_public' => false,
+            'index_eligible' => false,
+            'canonical_json' => json_encode(['path' => '/en/personality/wrong-canonical'], JSON_THROW_ON_ERROR),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('public_route_mismatch', $result['issue_codes']);
+        foreach ([
+            'technical_trust:en:/en/personality/big-five/methodology',
+            'model_hub:en:/en/personality/big-five',
         ] as $assetId) {
             $observed = collect($result['observed_runtime'])->firstWhere('asset_id', $assetId);
             $this->assertIsArray($observed);

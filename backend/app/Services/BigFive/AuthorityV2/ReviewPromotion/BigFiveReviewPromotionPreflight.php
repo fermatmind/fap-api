@@ -454,11 +454,20 @@ final class BigFiveReviewPromotionPreflight
         }
 
         return match (true) {
-            $record instanceof ContentPage => $record->getAttribute('path') === ($attributes['path'] ?? null),
-            $record instanceof PersonalityPublicContentAsset,
+            $record instanceof ContentPage => $record->getAttribute('path') === ($attributes['path'] ?? null)
+                && $record->getAttribute('canonical_path') === ($attributes['canonical_path'] ?? null),
+            $record instanceof PersonalityPublicContentAsset => $record->getAttribute('slug') === ($attributes['slug'] ?? null)
+                && $this->canonicalPath($record->getAttribute('canonical_json')) === $this->canonicalPath($attributes['canonical_json'] ?? null),
             $record instanceof TopicProfile => $record->getAttribute('slug') === ($attributes['slug'] ?? null),
             default => true,
         };
+    }
+
+    private function canonicalPath(mixed $canonical): ?string
+    {
+        return is_array($canonical) && is_string($canonical['path'] ?? null)
+            ? $canonical['path']
+            : null;
     }
 
     private function recordFingerprint(Model $record): string
