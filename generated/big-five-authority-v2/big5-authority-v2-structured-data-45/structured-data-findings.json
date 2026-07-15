@@ -1,0 +1,95 @@
+{
+  "schema_version": "big5-structured-data-findings.v1",
+  "source": {
+    "repository": "fap-web",
+    "artifact": "docs/seo/personality/big5-authority-v2-runtime-closeout-38-report-2026-07-15.json",
+    "artifact_sha256": "60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65"
+  },
+  "counts": {
+    "findings": 13,
+    "unique_assets": 9,
+    "faq_json_ld_fail": 9,
+    "article_breadcrumb_fail": 4
+  },
+  "assets": [
+    {
+      "asset_id": "article:en:/en/articles/big-five-conscientiousness-low-procrastination-task-plan",
+      "route": "/en/articles/big-five-conscientiousness-low-procrastination-task-plan",
+      "locale": "en",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "PASS"}
+    },
+    {
+      "asset_id": "article:en:/en/articles/big-five-emotional-stability-stress-recovery-communication",
+      "route": "/en/articles/big-five-emotional-stability-stress-recovery-communication",
+      "locale": "en",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "PASS"}
+    },
+    {
+      "asset_id": "article:en:/en/articles/big-five-personality-test-vs-mbti",
+      "route": "/en/articles/big-five-personality-test-vs-mbti",
+      "locale": "en",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "FAIL"}
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-conscientiousness-low-procrastination-task-plan",
+      "route": "/zh/articles/big-five-conscientiousness-low-procrastination-task-plan",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "PASS"}
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-emotional-stability-stress-recovery-communication",
+      "route": "/zh/articles/big-five-emotional-stability-stress-recovery-communication",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "PASS"}
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-growth-guide",
+      "route": "/zh/articles/big-five-growth-guide",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "FAIL"}
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-narrative-portrait",
+      "route": "/zh/articles/big-five-narrative-portrait",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "FAIL"}
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-personality-test-vs-mbti",
+      "route": "/zh/articles/big-five-personality-test-vs-mbti",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "FAIL"}
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-tool-guide",
+      "route": "/zh/articles/big-five-tool-guide",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {"faq_json_ld": "FAIL", "json_ld": "PASS"}
+    }
+  ],
+  "runtime_policy": {
+    "article_and_breadcrumb": "current published, indexable, public-safe CMS revision plus explicit gates and visible date/provenance authority",
+    "faq_page": "visible editor-supplied FAQ items plus explicit FAQ schema gate and the same current reviewed authority",
+    "held_output": "no structured-data fragment",
+    "frontend_inference": false,
+    "production_resolution_claimed": false
+  }
+}

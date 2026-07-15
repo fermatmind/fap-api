@@ -90,7 +90,7 @@ final class ArticleSeoServiceTest extends TestCase
         $this->assertStringNotContainsString('www.fermatmind.com', json_encode($jsonLd, JSON_THROW_ON_ERROR));
     }
 
-    public function test_big_five_article_projection_removes_trailing_brand_from_metadata_and_headline(): void
+    public function test_big_five_article_projection_removes_trailing_brand_but_holds_json_ld_without_reviewed_revision(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
@@ -128,7 +128,7 @@ final class ArticleSeoServiceTest extends TestCase
 
         $this->assertSame('大五人格测试是什么？', $payload['title']);
         $this->assertSame('大五人格测试是什么？', data_get($payload, 'og.title'));
-        $this->assertSame('大五人格测试是什么？', data_get($jsonLd, 'headline'));
+        $this->assertSame([], $jsonLd);
     }
 
     public function test_generate_json_ld_filters_visible_faq_when_faq_schema_gate_is_held(): void
