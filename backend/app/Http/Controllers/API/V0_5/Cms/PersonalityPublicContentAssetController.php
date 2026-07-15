@@ -24,6 +24,8 @@ final class PersonalityPublicContentAssetController extends Controller
 
     private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
 
+    private const ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION = 'enneagram-authority-v2';
+
     public function __construct(
         private readonly PersonalityPublicAssetReadModelCache $readModelCache,
     ) {}
@@ -33,6 +35,15 @@ final class PersonalityPublicContentAssetController extends Controller
         $validated = $this->validateReadQuery($request);
         if ($validated instanceof JsonResponse) {
             return $validated;
+        }
+
+        if ($validated['code'] !== null) {
+            return $this->showByCode(
+                $request,
+                (string) $validated['framework'],
+                (string) $validated['entity_type'],
+                $validated['code'],
+            );
         }
 
         $framework = (string) ($validated['framework'] ?? '');
@@ -294,8 +305,9 @@ final class PersonalityPublicContentAssetController extends Controller
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
             'locale' => ['nullable', Rule::in(['en', 'zh', 'zh-CN'])],
-            'framework' => ['nullable', Rule::in(PersonalityPublicContentAsset::FRAMEWORKS)],
-            'entity_type' => ['nullable', Rule::in(PersonalityPublicContentAsset::ENTITY_TYPES)],
+            'framework' => ['nullable', 'required_with:code', Rule::in(PersonalityPublicContentAsset::FRAMEWORKS)],
+            'entity_type' => ['nullable', 'required_with:code', Rule::in(PersonalityPublicContentAsset::ENTITY_TYPES)],
+            'code' => ['nullable', 'string', 'max:128'],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
@@ -318,6 +330,9 @@ final class PersonalityPublicContentAssetController extends Controller
                 : null,
             'entity_type' => isset($validated['entity_type'])
                 ? PersonalityPublicContentAsset::normalizeToken((string) $validated['entity_type'])
+                : null,
+            'code' => isset($validated['code'])
+                ? PersonalityPublicContentAsset::normalizeEntityKey((string) $validated['code'])
                 : null,
             'page' => max(1, (int) ($validated['page'] ?? 1)),
             'per_page' => max(1, min(100, (int) ($validated['per_page'] ?? 50))),
@@ -389,7 +404,10 @@ final class PersonalityPublicContentAssetController extends Controller
             'personality_public_content_asset_v1' => $v1,
         ];
 
-        if ((string) $asset->framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
+        if (in_array((string) $asset->framework, [
+            PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+        ], true)) {
             $response['personality_public_content_asset_v2'] = $this->assetPayloadV2(
                 $asset,
                 (bool) ($v1['schema_runtime_eligible'] ?? false),
@@ -819,6 +837,9 @@ final class PersonalityPublicContentAssetController extends Controller
 
         try {
             $version = $this->readModelCache->versionFor($asset);
+            if ($framework === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM) {
+                $version .= ':projection:'.self::ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION;
+            }
             $cachedRead = $this->readModelCache->read(
                 $surface,
                 $framework,
@@ -990,6 +1011,27 @@ final class PersonalityPublicContentAssetController extends Controller
             $locale,
             $orgId,
         );
+        if ($this->isV1OnlyEnneagramDetailPayload($surface, $framework, $staleRead['payload'])) {
+            $this->readModelCache->discardActivePreservingLkg(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+            );
+            $staleRead = $this->readModelCache->stale(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+            );
+            if ($this->isV1OnlyEnneagramDetailPayload($surface, $framework, $staleRead['payload'])) {
+                $staleRead['payload'] = null;
+            }
+        }
         if (is_array($staleRead['payload'])) {
             if ($this->isOversizedDetailPayload($staleRead['payload'])) {
                 $this->readModelCache->discardActivePreservingLkg(
@@ -1023,6 +1065,18 @@ final class PersonalityPublicContentAssetController extends Controller
         }
 
         throw $throwable;
+    }
+
+    private function isV1OnlyEnneagramDetailPayload(
+        string $surface,
+        string $framework,
+        mixed $payload,
+    ): bool {
+        return in_array($surface, ['detail-code', 'detail-slug'], true)
+            && $framework === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM
+            && is_array($payload)
+            && is_array($payload['personality_public_content_asset_v1'] ?? null)
+            && ! is_array($payload['personality_public_content_asset_v2'] ?? null);
     }
 
     private function indexSelector(int $page, int $perPage): string

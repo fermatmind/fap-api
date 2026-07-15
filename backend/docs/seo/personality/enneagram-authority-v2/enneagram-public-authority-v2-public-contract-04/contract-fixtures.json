@@ -1,0 +1,28 @@
+{
+  "schema_version": "fermatmind.enneagram_public_authority_v2_public_contract_fixtures.v1",
+  "task_id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04",
+  "content_page_count": 0,
+  "fixture_count": 10,
+  "entity_types": ["hub", "center", "core_type", "wing", "instinctual_subtype"],
+  "locales": ["en", "zh-CN"],
+  "contract_fixtures": [
+    {"fixture_id": "hub-en", "entity_type": "hub", "entity_key": "enneagram", "slug": "enneagram", "locale": "en", "endpoint": "/api/v0.5/personality-content-assets/enneagram/hub/enneagram?locale=en", "canonical_path": "/en/personality/enneagram"},
+    {"fixture_id": "hub-zh-cn", "entity_type": "hub", "entity_key": "enneagram", "slug": "enneagram", "locale": "zh-CN", "endpoint": "/api/v0.5/personality-content-assets/enneagram/hub/enneagram?locale=zh-CN", "canonical_path": "/zh/personality/enneagram"},
+    {"fixture_id": "center-en", "entity_type": "center", "entity_key": "gut", "slug": "enneagram/centers/gut", "locale": "en", "endpoint": "/api/v0.5/personality-content-assets/enneagram/center/gut?locale=en", "canonical_path": "/en/personality/enneagram/centers/gut"},
+    {"fixture_id": "center-zh-cn", "entity_type": "center", "entity_key": "gut", "slug": "enneagram/centers/gut", "locale": "zh-CN", "endpoint": "/api/v0.5/personality-content-assets/enneagram/center/gut?locale=zh-CN", "canonical_path": "/zh/personality/enneagram/centers/gut"},
+    {"fixture_id": "core-type-en", "entity_type": "core_type", "entity_key": "type-1", "slug": "enneagram/type-1", "locale": "en", "endpoint": "/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en", "canonical_path": "/en/personality/enneagram/type-1"},
+    {"fixture_id": "core-type-zh-cn", "entity_type": "core_type", "entity_key": "type-1", "slug": "enneagram/type-1", "locale": "zh-CN", "endpoint": "/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=zh-CN", "canonical_path": "/zh/personality/enneagram/type-1"},
+    {"fixture_id": "wing-en", "entity_type": "wing", "entity_key": "5w4", "slug": "enneagram/wings/5w4", "locale": "en", "endpoint": "/api/v0.5/personality-content-assets/enneagram/wing/5w4?locale=en", "canonical_path": "/en/personality/enneagram/wings/5w4"},
+    {"fixture_id": "wing-zh-cn", "entity_type": "wing", "entity_key": "5w4", "slug": "enneagram/wings/5w4", "locale": "zh-CN", "endpoint": "/api/v0.5/personality-content-assets/enneagram/wing/5w4?locale=zh-CN", "canonical_path": "/zh/personality/enneagram/wings/5w4"},
+    {"fixture_id": "subtype-en", "entity_type": "instinctual_subtype", "entity_key": "type-2/self-preservation", "slug": "enneagram/type-2/instincts/self-preservation", "locale": "en", "endpoint": "/api/v0.5/personality-content-assets?framework=enneagram&entity_type=instinctual_subtype&code=type-2%2Fself-preservation&locale=en", "canonical_path": "/en/personality/enneagram/type-2/instincts/self-preservation"},
+    {"fixture_id": "subtype-zh-cn", "entity_type": "instinctual_subtype", "entity_key": "type-2/self-preservation", "slug": "enneagram/type-2/instincts/self-preservation", "locale": "zh-CN", "endpoint": "/api/v0.5/personality-content-assets?framework=enneagram&entity_type=instinctual_subtype&code=type-2%2Fself-preservation&locale=zh-CN", "canonical_path": "/zh/personality/enneagram/type-2/instincts/self-preservation"}
+  ],
+  "hard_gates": {
+    "v1_shape_unchanged": true,
+    "schema_requires_visible_evidence": true,
+    "schema_requires_runtime_eligibility": true,
+    "reviewer_synthesized": false,
+    "working_revision_fields_public": false,
+    "database_migration_count": 0
+  }
+}

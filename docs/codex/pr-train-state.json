@@ -92724,26 +92724,58 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03"
     ],
     "dependency_repository": "fap-web",
-    "dependency_pr_url": null,
-    "dependency_merge_sha": null,
+    "dependency_pr_url": "https://github.com/fermatmind/fap-web/pull/1770",
+    "dependency_merge_sha": "28afe5365d114ee72207cbcf426364355c88baa2",
     "dependency_verification": {
-      "github_merged": false,
-      "dependency_origin_main_contains_merge": false,
-      "evidence_required": "Verify the fap-web PR is MERGED and fap-web origin/main contains its merge SHA before PR04 starts."
+      "github_merged": true,
+      "dependency_origin_main_contains_merge": true,
+      "evidence": "fap-web PR #1770 is MERGED at 28afe5365d114ee72207cbcf426364355c88baa2; fap-web origin/main contains the merge commit, remote and local PR03 branches are deleted, and post-merge focused revalidation passed 7 files / 58 tests."
     },
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "997df50afb8c7c58e627b3919452a0013da9e34f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3104",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03 in fap-web. Record its PR URL and merge SHA, verify GitHub MERGED, and verify fap-web origin/main containment before PR04 starts."
+        "status": "pass",
+        "evidence": "Cross-repo GitHub MERGED and fap-web origin/main containment verified for PR03."
+      },
+      "targeted_contracts": {
+        "status": "pass",
+        "evidence": "PersonalityPublicApiTest, PersonalityPublicContentAssetContractTest, and EnneagramPublicAuthorityV204PublicContractTest passed 59 tests / 4107 assertions after all review fixes."
+      },
+      "big_five_v2_regression": {
+        "status": "pass",
+        "evidence": "The corrected manifest selector ran the existing Big Five V2 public-contract regression: 1 test / 15 assertions passed."
+      },
+      "static_validation": {
+        "status": "pass",
+        "evidence": "Four changed PHP files passed php -l and Pint; Composer validate --strict, YAML load and safe-load, state/fixture JSON parse, and git diff --check passed."
+      },
+      "manifest_head_validation": {
+        "status": "pass",
+        "evidence": "After replacing the zsh-incompatible Pint scalar with the established per-file loop, exact validation passed four-file PHP lint/Pint, 59 tests / 4107 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, and diff checks."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "All nine required checks passed on latest-main-integrated PR head 61bfddcdbd2f2e47380e9372306f32c036fdb268; GitHub reports CLEAN/MERGEABLE, behind 0, and all four review threads resolved."
+      },
+      "review_fix": {
+        "status": "pass",
+        "evidence": "Addressed the actionable P2 by exposing canonical slashed subtype codes through a real index-route exact-code query that reuses showByCode and its cache; real HTTP fixtures, 57 tests / 4096 assertions, Big Five V2 1 / 15, Pint, JSON, and diff checks pass."
+      },
+      "cache_projection_review_fix": {
+        "status": "pass",
+        "evidence": "Addressed the second actionable P2 with an Enneagram Authority V2 detail projection cache salt; a focused regression preloads the old unsalted V1-only version and proves the public request misses it and returns V2. The target group passes 58 tests / 4102 assertions and Big Five V2 remains 1 / 15."
+      },
+      "stale_projection_review_fix": {
+        "status": "pass",
+        "evidence": "Addressed the third actionable P2 by rejecting V1-only Enneagram detail active/LKG payloads before stale response projection. The regression forces an oversized V2 projection with an unsalted legacy fallback and proves fail-closed 503 instead of V1-only 200."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -92761,9 +92793,59 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T05:30:24Z",
+        "status": "in_progress",
+        "note": "Verified fap-web PR03 merged, origin/main containment, remote/local branch cleanup, and post-merge focused revalidation. Created the exact PR04 branch from clean latest fap-api origin/main cde2e35907d61dcaee5f4800afac121930288560. No migration, CMS mutation, publish, production, or deploy action is authorized."
+      },
+      {
+        "at": "2026-07-15T05:42:31Z",
+        "status": "local_checks_passed",
+        "note": "Enneagram V2 projection preserves V1 and passes 10 fixture coverage across five entity types and two locales; schema remains visible-evidence plus runtime gated, reviewer remains null without source evidence, and no revision workspace fields are public. All corrected manifest local checks and exact eight-path scope validation pass."
+      },
+      {
+        "at": "2026-07-15T05:43:58Z",
+        "status": "local_validation_contract_fix",
+        "note": "Post-commit exact-command replay passed four-file PHP lint, then found the PR04 Pint command depended on Bash word splitting and failed under the repository default zsh before tests restarted. Replaced only that manifest command with the established portable per-file loop; full replay is pending."
+      },
+      {
+        "at": "2026-07-15T05:44:46Z",
+        "status": "local_checks_passed",
+        "note": "Replayed the corrected manifest commands successfully: four-file PHP lint/Pint, 57 target tests / 4096 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, diff check, and exact eight-path scope all pass."
+      },
+      {
+        "at": "2026-07-15T05:45:21Z",
+        "status": "ready_to_push",
+        "note": "Recorded validated branch head a266b84a2af51134015d02fca4f83d488e3585b2 after clean metadata, diff, worktree, and exact-scope revalidation."
+      },
+      {
+        "at": "2026-07-15T05:46:24Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact eight-path branch and opened the single authorized fap-api PR #3104 with the exact manifest title and required change, reason, validation, deferred, repository-rule-impact, and safety sections."
+      },
+      {
+        "at": "2026-07-15T05:55:46Z",
+        "status": "review_fix_local_verified",
+        "note": "All nine initial GitHub checks passed, then Codex review identified one valid P2: subtype V2 fixtures bypassed routing while ordinary list responses remained V1-only. Added an explicit framework/entity_type/code detail lookup on the existing index route, converted subtype fixtures to real HTTP, and locally revalidated the exact PR04 contract and Big Five regression."
+      },
+      {
+        "at": "2026-07-15T06:04:42Z",
+        "status": "review_fix_local_verified",
+        "note": "All nine second-round checks passed, then a second valid P2 identified pre-deploy Enneagram V1-only detail caches sharing the DB-attribute version. Added an Enneagram Authority V2 projection cache salt and a regression proving the old unsalted payload misses; 58 target tests / 4102 assertions and Big Five V2 1 / 15 pass."
+      },
+      {
+        "at": "2026-07-15T06:14:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Integrated latest origin/main 95578922e after Big Five PR43 merged. All nine third-round checks passed, then Codex found V1-only Enneagram stale active/LKG could bypass the cache salt and the ledger head was stale. Added fail-closed stale filtering with regression, passed 59 target tests / 4107 assertions plus Big Five V2 1 / 15, and recorded validated runtime head 997df50afb8c7c58e627b3919452a0013da9e34f."
+      },
+      {
+        "at": "2026-07-15T06:21:54Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on final latest-main-integrated PR head 61bfddcdbd2f2e47380e9372306f32c036fdb268. GitHub is CLEAN/MERGEABLE, branch is behind 0, PR diff is exactly eight allowlist paths, all four review threads are resolved, and runtime commit_sha 997df50afb8c7c58e627b3919452a0013da9e34f contains every reviewed fix."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T06:21:54Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05",

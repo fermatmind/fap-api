@@ -943,7 +943,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', false);
     }
 
-    public function test_enneagram_detail_contract_remains_v1_only(): void
+    public function test_enneagram_detail_contract_preserves_v1_and_adds_fail_closed_v2(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([
             'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
@@ -958,7 +958,17 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertOk();
 
         $this->assertArrayHasKey('personality_public_content_asset_v1', $response->json());
-        $this->assertArrayNotHasKey('personality_public_content_asset_v2', $response->json());
+        $this->assertSame(
+            PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            $response->json('personality_public_content_asset_v1.contract_version')
+        );
+        $this->assertSame(
+            PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            $response->json('personality_public_content_asset_v2.contract_version')
+        );
+        $this->assertFalse((bool) $response->json('personality_public_content_asset_v2.visible_evidence.eligible'));
+        $this->assertNull($response->json('personality_public_content_asset_v2.editorial_authority.reviewer'));
+        $this->assertFalse((bool) $response->json('personality_public_content_asset_v2.schema_eligible'));
     }
 
     public function test_v2_contract_validates_structured_authority_without_enabling_gates_implicitly(): void

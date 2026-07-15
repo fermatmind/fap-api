@@ -1967,7 +1967,7 @@ final class PersonalityPublicApiTest extends TestCase
 
         foreach ([
             '/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en' => true,
-            '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en' => false,
+            '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en' => true,
         ] as $path => $expectsAuthorityV2) {
             $response = $this->getJson($path)->assertOk();
             $payload = $response->json();
@@ -2168,6 +2168,84 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
             ->assertJsonMissingPath('items.0.content_sections');
+    }
+
+    public function test_enneagram_authority_v2_detail_projection_busts_v1_only_cache_versions(): void
+    {
+        Cache::flush();
+        $asset = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-3',
+            'slug' => 'enneagram/type-3',
+        ]);
+        $path = '/api/v0.5/personality-content-assets/enneagram/core_type/type-3?locale=en';
+        $initial = $this->getJson($path)->assertOk();
+        $legacyPayload = $initial->json();
+        self::assertIsArray($legacyPayload);
+        unset($legacyPayload['personality_public_content_asset_v2']);
+
+        Cache::flush();
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $cache->put(
+            'detail-code',
+            PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'type-3',
+            'en',
+            0,
+            $cache->versionFor($asset),
+            $legacyPayload,
+        );
+
+        $this->getJson($path)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath(
+                'personality_public_content_asset_v2.contract_version',
+                PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            );
+    }
+
+    public function test_enneagram_authority_v2_rejects_v1_only_stale_fallbacks(): void
+    {
+        Cache::flush();
+        $asset = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-4',
+            'slug' => 'enneagram/type-4',
+            'content_sections_json' => [[
+                'key' => 'overview',
+                'title' => 'Overview',
+                'body_md' => str_repeat('x', PersonalityPublicContentAssetController::MAX_DETAIL_PAYLOAD_BYTES + 1024),
+            ]],
+        ]);
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $cache->put(
+            'detail-code',
+            PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'type-4',
+            'en',
+            0,
+            $cache->versionFor($asset),
+            [
+                'ok' => true,
+                'personality_public_content_asset_v1' => [
+                    'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+                    'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+                    'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+                    'code' => 'type-4',
+                ],
+            ],
+        );
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/core_type/type-4?locale=en')
+            ->assertStatus(503)
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonPath('error_code', 'PUBLIC_PAYLOAD_BUDGET_EXCEEDED')
+            ->assertJsonMissingPath('personality_public_content_asset_v1');
     }
 
     private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
