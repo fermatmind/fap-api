@@ -241,6 +241,41 @@ final class BigFiveAuthorityV247Test extends TestCase
         }
     }
 
+    public function test_package_only_rejects_unknown_cohort_asset_with_regenerated_artifact_locks(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        $omittedAssetId = $review['cohorts'][0]['asset_ids'][0];
+        $review['cohorts'][0]['asset_ids'][0] = 'unknown:en:/not-a-review-row';
+        $review['cohorts'][0]['cohort_sha256'] = hash('sha256', json_encode($review['cohorts'][0]['asset_ids'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        foreach ($review['rows'] as &$row) {
+            if ($row['asset_id'] === $omittedAssetId) {
+                $row['promotion']['cohort_id'] = null;
+                break;
+            }
+        }
+        unset($row);
+        [$reviewPath, $reviewSha] = $this->writeTemporaryJson('pr47-review-unknown-cohort-asset.json', $review);
+
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['review_manifest_sha256'] = $reviewSha;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-unknown-cohort-asset.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['review_manifest_sha256'] = $reviewSha;
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        $authorization['cohorts'][0]['cohort_sha256'] = $review['cohorts'][0]['cohort_sha256'];
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-unknown-cohort-asset.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly($reviewPath, $authorizationPath, $rollbackPath);
+            $this->fail('Expected unknown cohort asset identity to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('cohort references an unknown asset identity', $exception->getMessage());
+        } finally {
+            File::delete([$reviewPath, $rollbackPath, $authorizationPath]);
+        }
+    }
+
     public function test_package_only_rejects_review_state_drift_even_when_artifact_locks_are_regenerated(): void
     {
         $review = $this->readJson(self::REVIEW);
@@ -283,6 +318,27 @@ final class BigFiveAuthorityV247Test extends TestCase
         try {
             $this->preflight()->packageOnly(self::REVIEW, $authorizationPath, $rollbackPath);
             $this->fail('Expected bound rollback state to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('review and rollback artifacts must remain pending', $exception->getMessage());
+        } finally {
+            File::delete([$rollbackPath, $authorizationPath]);
+        }
+    }
+
+    public function test_package_only_rejects_offsetting_nonzero_rollback_effects(): void
+    {
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['effects']['database_writes'] = 1;
+        $rollback['effects']['rollbacks'] = -1;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-offsetting-effects.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-offsetting-effects.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly(self::REVIEW, $authorizationPath, $rollbackPath);
+            $this->fail('Expected offsetting nonzero rollback effects to fail closed.');
         } catch (RuntimeException $exception) {
             $this->assertStringContainsString('review and rollback artifacts must remain pending', $exception->getMessage());
         } finally {

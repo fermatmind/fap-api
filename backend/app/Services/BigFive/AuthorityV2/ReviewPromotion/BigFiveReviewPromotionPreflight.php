@@ -538,6 +538,9 @@ final class BigFiveReviewPromotionPreflight
             $cohortIds[$cohortId] = true;
             $cohortAssets = [...$cohortAssets, ...$ids];
             foreach ($ids as $assetId) {
+                if (! is_string($assetId) || ! isset($rowsByAsset[$assetId])) {
+                    throw new RuntimeException('Review manifest cohort references an unknown asset identity.');
+                }
                 $cohortByAsset[$assetId] = $cohortId;
             }
         }
@@ -545,7 +548,10 @@ final class BigFiveReviewPromotionPreflight
             throw new RuntimeException('Review manifest cohort coverage mismatch.');
         }
         foreach ($rowsByAsset as $assetId => $row) {
-            $expectedCohort = $row['action_contract']['revision_create'] ? ($cohortByAsset[$assetId] ?? null) : null;
+            if ($row['action_contract']['revision_create'] && ! isset($cohortByAsset[$assetId])) {
+                throw new RuntimeException('Review manifest cohort membership mismatch: '.$assetId.'.');
+            }
+            $expectedCohort = $row['action_contract']['revision_create'] ? $cohortByAsset[$assetId] : null;
             if (($row['promotion']['cohort_id'] ?? null) !== $expectedCohort) {
                 throw new RuntimeException('Review manifest cohort membership mismatch: '.$assetId.'.');
             }
@@ -606,12 +612,23 @@ final class BigFiveReviewPromotionPreflight
     /** @param array<string,mixed> $review @param array<string,mixed> $rollback */
     private function assertPendingReviewAndRollback(array $review, array $rollback): void
     {
+        $effects = $rollback['effects'] ?? null;
+        $expectedEffects = [
+            'database_writes' => 0,
+            'indexability_changes' => 0,
+            'promotions' => 0,
+            'public_release_changes' => 0,
+            'rollbacks' => 0,
+        ];
+        if (is_array($effects)) {
+            ksort($effects);
+        }
         if (($review['status'] ?? null) !== 'HOLD_PENDING_MANUAL_REVIEW_AND_RUNTIME_BINDING'
             || ($review['invariants']['production_promotion_currently_authorized'] ?? true) !== false
             || ($rollback['status'] ?? null) !== 'HOLD_PENDING_EXACT_RUNTIME_TARGETS'
             || ($rollback['abort_on_missing_target'] ?? false) !== true
             || ($rollback['execution_implemented'] ?? true) !== false
-            || array_sum($rollback['effects'] ?? [1]) !== 0) {
+            || $effects !== $expectedEffects) {
             throw new RuntimeException('Package-only review and rollback artifacts must remain pending and non-executable.');
         }
         foreach ($review['rows'] as $row) {
