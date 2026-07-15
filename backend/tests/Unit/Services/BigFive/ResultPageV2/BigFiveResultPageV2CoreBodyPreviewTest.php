@@ -208,13 +208,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_enneagram_public_authority_v2_integrity_gate_files(): void
+    public function test_runtime_freeze_classifier_ignores_only_registered_enneagram_public_authority_v2_non_runtime_files(): void
     {
         $allowed = [
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionWorkspace.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV205RevisionWorkspaceWriter.php',
             'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Personality/AuthorityV2/PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter.php',
         ];
-        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+        $blocked = [
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2RuntimePublisher.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
@@ -5992,7 +5998,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isEnneagramPublicAuthorityV2IntegrityGateFile($file)) {
+            if ($this->isEnneagramPublicAuthorityV2FrozenNonRuntimeFile($file)) {
                 continue;
             }
 
@@ -7861,11 +7867,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
-    private function isEnneagramPublicAuthorityV2IntegrityGateFile(string $file): bool
+    private function isEnneagramPublicAuthorityV2FrozenNonRuntimeFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionWorkspace.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV205RevisionWorkspaceWriter.php',
             'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Personality/AuthorityV2/PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter.php',
         ], true);
     }
 

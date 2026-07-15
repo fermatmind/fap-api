@@ -13,6 +13,7 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileRevision;
+use App\Services\Personality\AuthorityV2\PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -57,6 +58,7 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
 
     public function __construct(
         private readonly BigFiveAuthorityV2DraftImportWriter $packageWriter,
+        private readonly PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter $personalityRevisionWriter,
     ) {}
 
     /** @return array<string,mixed> */
@@ -419,24 +421,17 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
     /** @param array<string,mixed> $descriptor */
     private function createPersonalityRevision(PersonalityPublicContentAsset $asset, array $descriptor): int
     {
-        $currentWorkingId = $asset->working_revision_id ? (int) $asset->working_revision_id : null;
-        $next = ((int) PersonalityPublicContentAssetRevision::query()
-            ->where('asset_id', (int) $asset->id)
-            ->max('revision_no')) + 1;
-        $revision = PersonalityPublicContentAssetRevision::query()->create([
-            'asset_id' => (int) $asset->id,
-            'revision_no' => $next,
-            'authority_asset_key' => (string) $descriptor['asset_id'],
-            'source_package' => $this->sourcePackage($descriptor),
-            'source_hash' => $this->sourceHash($descriptor),
-            'authority_package_sha256' => BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
-            'workflow_state' => PersonalityPublicContentAssetRevision::STATE_DRAFT,
-            'snapshot_json' => $descriptor['attributes'],
-            'public_runtime_fingerprint_before' => $this->recordPublicRuntimeFingerprint($asset),
-        ]);
-        $this->setWorkingPointer($asset, (int) $revision->id, $currentWorkingId);
+        $result = $this->personalityRevisionWriter->createOrReuseWorkingRevision(
+            $asset,
+            PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            (string) $descriptor['asset_id'],
+            $this->sourcePackage($descriptor),
+            $this->sourceHash($descriptor),
+            BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+            $descriptor['attributes'],
+        );
 
-        return (int) $revision->id;
+        return $result['revision_id'];
     }
 
     /** @param array<string,mixed> $descriptor */
@@ -489,6 +484,17 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
             throw new RuntimeException('Existing identity is not the expected published/public authority record: '.$descriptor['asset_id'].'.');
         }
 
+        if ($record instanceof PersonalityPublicContentAsset) {
+            $this->personalityRevisionWriter->assertTargetCanReceiveWorkingRevision(
+                $record,
+                PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+                (string) $descriptor['asset_id'],
+                BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+            );
+
+            return;
+        }
+
         if ($record instanceof Article) {
             $working = $record->working_revision_id ? (int) $record->working_revision_id : null;
             $publishedRevision = $record->published_revision_id ? (int) $record->published_revision_id : null;
@@ -511,9 +517,10 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
             ContentPage::class => CmsTranslationRevision::query()->withoutGlobalScopes()
                 ->where('authority_package_sha256', BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256)
                 ->where('authority_asset_key', $assetKey)->exists(),
-            PersonalityPublicContentAsset::class => PersonalityPublicContentAssetRevision::query()
-                ->where('authority_package_sha256', BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256)
-                ->where('authority_asset_key', $assetKey)->exists(),
+            PersonalityPublicContentAsset::class => $this->personalityRevisionWriter->hasPackageRevision(
+                BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+                $assetKey,
+            ),
             TopicProfile::class => TopicProfileRevision::query()
                 ->where('authority_package_sha256', BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256)
                 ->where('authority_asset_key', $assetKey)->exists(),
@@ -568,6 +575,10 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
 
     private function recordPublicRuntimeFingerprint(Model $record): string
     {
+        if ($record instanceof PersonalityPublicContentAsset) {
+            return $this->personalityRevisionWriter->recordPublicRuntimeFingerprint($record);
+        }
+
         return $this->fingerprint($this->publicRuntimeAttributes($record));
     }
 
