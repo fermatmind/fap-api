@@ -992,11 +992,14 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $commaLedProperNounClause = '/,\s*(?:(?:and|or)\s+)?\p{Lu}[\p{L}\p{M}\p{N}_\'’\-]*(?:\s+\p{Lu}[\p{L}\p{M}\p{N}_\'’\-]*){0,3}\s*$/u';
         $commaLedPredicateClause = preg_match('/,\s*$/u', $prefix) === 1
             && preg_match('/^(?:predicts|forecasts|guarantees|determines|screens|diagnoses|treats|cures|ensures|delivers|boosts|increases|improves)\b/iu', ltrim($claim)) === 1;
+        $commaLedReviewOrReleaseClause = preg_match('/,\s*$/u', $prefix) === 1
+            && preg_match(self::HUMAN_REVIEW_RELEASE_PATTERN, ltrim($claim)) === 1;
         $disjunctiveEnglishClause = '/\bor\s+(?:(?:it|this|that|we|you|they|he|she|there)|(?:an?|the|this|that|these|those|our|your|their|its)\s+[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,3}|[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,2}\s+(?:is|are|was|were|has|have|had|does|do|did|can|could|will|would|should|must|may|might))\s*$/iu';
         $disjunctiveChineseClause = '/或(?:者)?\s*(?:(?:本页|本内容|该页|该内容|它|其|我们|你|您|他们)|(?:会|能|可以|能够|已经|已|将|预测|证明|提供|给出|批准|适合))\s*$/u';
         if (preg_match($commaLedEnglishClause, $prefix) === 1
             || preg_match($commaLedProperNounClause, $prefix) === 1
             || $commaLedPredicateClause
+            || $commaLedReviewOrReleaseClause
             || preg_match($disjunctiveEnglishClause, $prefix) === 1
             || preg_match($disjunctiveChineseClause, $prefix) === 1) {
             return false;

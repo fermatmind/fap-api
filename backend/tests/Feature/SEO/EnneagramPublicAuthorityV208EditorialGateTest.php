@@ -538,6 +538,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This page is not a reflection prompt, it predicts your career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, the guide predicts career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, predicts your career success.', 'career_or_relationship_prediction'],
+            ['This page is not a diagnosis, ready to publish.', 'visible_review_or_release_claim'],
+            ['This page is not a diagnosis, published.', 'visible_review_or_release_claim'],
             ['This page is not a diagnosis, independent experts have scientifically validated it.', 'unsupported_science_claim'],
             ['This page does not establish validity, FermatMind predicts career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, or it predicts your career success.', 'career_or_relationship_prediction'],
@@ -636,7 +638,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not yet published.', 'This page is not indexable.'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexable.'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
