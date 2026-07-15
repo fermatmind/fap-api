@@ -170,9 +170,58 @@ final class BigFiveAuthorityV247Test extends TestCase
             $this->preflight()->packageOnly(self::REVIEW, $authorizationPath, self::ROLLBACK);
             $this->fail('Expected duplicate pending cohort coverage to fail closed.');
         } catch (RuntimeException $exception) {
-            $this->assertStringContainsString('must remain pending and non-executable', $exception->getMessage());
+            $this->assertStringContainsString('cohort identity coverage mismatch', $exception->getMessage());
         } finally {
             File::delete($authorizationPath);
+        }
+    }
+
+    public function test_package_only_rejects_review_state_drift_even_when_artifact_locks_are_regenerated(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        $review['rows'][0]['manual_review']['status'] = 'approved';
+        $review['rows'][0]['manual_review']['reviewer_id'] = 1;
+        $review['rows'][0]['manual_review']['reviewed_at'] = '2026-07-15T00:00:00Z';
+        $review['rows'][0]['manual_review']['review_record_sha256'] = str_repeat('a', 64);
+        [$reviewPath, $reviewSha] = $this->writeTemporaryJson('pr47-review-state-drift.json', $review);
+
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['review_manifest_sha256'] = $reviewSha;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-review-state-drift.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['review_manifest_sha256'] = $reviewSha;
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-review-state-drift.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly($reviewPath, $authorizationPath, $rollbackPath);
+            $this->fail('Expected review state drift to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('review and rollback artifacts must remain pending', $exception->getMessage());
+        } finally {
+            File::delete([$reviewPath, $rollbackPath, $authorizationPath]);
+        }
+    }
+
+    public function test_package_only_rejects_bound_rollback_state_with_regenerated_authorization_lock(): void
+    {
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['rows'][0]['exact_target_bound'] = true;
+        $rollback['rows'][0]['primary_id'] = 1;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-bound.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-rollback-bound.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly(self::REVIEW, $authorizationPath, $rollbackPath);
+            $this->fail('Expected bound rollback state to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('review and rollback artifacts must remain pending', $exception->getMessage());
+        } finally {
+            File::delete([$rollbackPath, $authorizationPath]);
         }
     }
 

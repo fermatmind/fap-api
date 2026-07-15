@@ -439,7 +439,9 @@ final class BigFiveReviewPromotionPreflight
             || ($authorization['rollback_plan_sha256'] ?? null) !== $rollbackSha) {
             throw new RuntimeException('Authorization packet artifact locks mismatch.');
         }
+        $this->assertAuthorizationCohortIdentityContract($authorization, $review);
         if ($requirePendingAuthorization) {
+            $this->assertPendingReviewAndRollback($review, $rollback);
             $this->assertPendingAuthorizationPacket($authorization, $review);
         }
         foreach ($review['source_artifacts'] ?? [] as $source) {
@@ -544,14 +546,28 @@ final class BigFiveReviewPromotionPreflight
     private function assertPendingAuthorizationPacket(array $authorization, array $review): void
     {
         $authorizationCohorts = $authorization['cohorts'] ?? null;
-        $reviewCohorts = collect($review['cohorts'] ?? [])->keyBy('cohort_id');
         if (($authorization['production_promotion_currently_authorized'] ?? true) !== false
             || ($authorization['approval_phrases_currently_executable'] ?? true) !== false
             || ($authorization['deployed_sha'] ?? null) !== null
             || ($authorization['promotion_preflight_fingerprint'] ?? null) !== null
-            || ! is_array($authorizationCohorts)
-            || count($authorizationCohorts) !== $reviewCohorts->count()) {
+            || ! is_array($authorizationCohorts)) {
             throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
+        }
+        foreach ($authorizationCohorts as $cohort) {
+            if (($cohort['authorized'] ?? true) !== false
+                || ($cohort['exact_authorization'] ?? null) !== null) {
+                throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
+            }
+        }
+    }
+
+    /** @param array<string,mixed> $authorization @param array<string,mixed> $review */
+    private function assertAuthorizationCohortIdentityContract(array $authorization, array $review): void
+    {
+        $authorizationCohorts = $authorization['cohorts'] ?? null;
+        $reviewCohorts = collect($review['cohorts'] ?? [])->keyBy('cohort_id');
+        if (! is_array($authorizationCohorts) || count($authorizationCohorts) !== $reviewCohorts->count()) {
+            throw new RuntimeException('Authorization packet cohort identity coverage mismatch.');
         }
         $seenCohorts = [];
         foreach ($authorizationCohorts as $cohort) {
@@ -561,15 +577,50 @@ final class BigFiveReviewPromotionPreflight
                 || isset($seenCohorts[$cohortId])
                 || ! is_array($reviewCohort)
                 || ($cohort['cohort_sha256'] ?? null) !== ($reviewCohort['cohort_sha256'] ?? null)
-                || ($cohort['asset_count'] ?? null) !== ($reviewCohort['asset_count'] ?? null)
-                || ($cohort['authorized'] ?? true) !== false
-                || ($cohort['exact_authorization'] ?? null) !== null) {
-                throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
+                || ($cohort['asset_count'] ?? null) !== ($reviewCohort['asset_count'] ?? null)) {
+                throw new RuntimeException('Authorization packet cohort identity coverage mismatch.');
             }
             $seenCohorts[$cohortId] = true;
         }
         if (count($seenCohorts) !== $reviewCohorts->count()) {
-            throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
+            throw new RuntimeException('Authorization packet cohort identity coverage mismatch.');
+        }
+    }
+
+    /** @param array<string,mixed> $review @param array<string,mixed> $rollback */
+    private function assertPendingReviewAndRollback(array $review, array $rollback): void
+    {
+        if (($review['status'] ?? null) !== 'HOLD_PENDING_MANUAL_REVIEW_AND_RUNTIME_BINDING'
+            || ($review['invariants']['production_promotion_currently_authorized'] ?? true) !== false
+            || ($rollback['status'] ?? null) !== 'HOLD_PENDING_EXACT_RUNTIME_TARGETS'
+            || ($rollback['abort_on_missing_target'] ?? false) !== true
+            || ($rollback['execution_implemented'] ?? true) !== false
+            || array_sum($rollback['effects'] ?? [1]) !== 0) {
+            throw new RuntimeException('Package-only review and rollback artifacts must remain pending and non-executable.');
+        }
+        foreach ($review['rows'] as $row) {
+            if (($row['manual_review']['status'] ?? null) !== 'pending_manual_review'
+                || ($row['manual_review']['reviewer_id'] ?? null) !== null
+                || ($row['manual_review']['reviewed_at'] ?? null) !== null
+                || ($row['manual_review']['review_record_sha256'] ?? null) !== null
+                || ($row['permissions']['source']['approved'] ?? true) !== false
+                || ($row['permissions']['source']['approval_reference'] ?? null) !== null
+                || ($row['permissions']['media']['approved'] ?? true) !== false
+                || ($row['permissions']['media']['approval_reference'] ?? null) !== null
+                || ($row['expected_runtime']['bound'] ?? true) !== false
+                || collect($row['expected_runtime'] ?? [])->except('bound')->contains(static fn (mixed $value): bool => $value !== null)
+                || ($row['promotion']['eligible'] ?? true) !== false
+                || ($row['promotion']['exact_authorization_required'] ?? null) !== ($row['action_contract']['revision_create'] ?? null)) {
+                throw new RuntimeException('Package-only review and rollback artifacts must remain pending and non-executable.');
+            }
+        }
+        foreach ($rollback['rows'] as $row) {
+            if (($row['exact_target_bound'] ?? true) !== false
+                || ($row['primary_id'] ?? null) !== null
+                || ($row['restore_published_revision_id'] ?? null) !== null
+                || ($row['restore_public_runtime_baseline_sha256'] ?? null) !== null) {
+                throw new RuntimeException('Package-only review and rollback artifacts must remain pending and non-executable.');
+            }
         }
     }
 
