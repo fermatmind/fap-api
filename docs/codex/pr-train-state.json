@@ -92463,13 +92463,13 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-discoverability-parity-44",
     "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed_pending_push",
+    "commit_sha": "09c86fd258cc7180e1be07ebcdf95d5eaad352db",
     "pr_url": null,
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR44 id, branch, title, dependency, three hreflang plus three LLMS scope, lifecycle, validation floor, and no-production-write boundary."},
       "dependency": {"status": "pass", "evidence": "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43 is merged in PR #3102 as 95578922e01125f7f4ed4087c407be83cd7e6af6; origin/main contains the merge and branch/worktree cleanup plus post-merge validation completed."},
-      "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-discoverability-parity-44 in an isolated worktree from clean exact origin/main 95578922e01125f7f4ed4087c407be83cd7e6af6 after confirming no local/remote branch. PR38 source evidence SHA256 60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65 locks exactly three hreflang and three llms.txt failures across four published zh-CN Article routes."},
+      "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-discoverability-parity-44 in an isolated worktree from clean exact origin/main 95578922e01125f7f4ed4087c407be83cd7e6af6 after confirming no local/remote branch. Before push, rebased cleanly onto latest origin/main 8a386c2167e8499a817937163997ac32329dca85, which contains an unrelated Enneagram public-contract PR; the exact PR44 nine-file scope remained unchanged. PR38 source evidence SHA256 60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65 locks exactly three hreflang and three llms.txt failures across four published zh-CN Article routes."},
       "local": {"status": "pass", "evidence": "The deterministic package validator passed with exactly 6 findings at fixture SHA256 eb840591b44a0e9e433cc723fce61a3d29f86d55ceac9a386e85d3b83232551c; the PR44 focused suite passed 5 tests / 37 assertions; the Big Five runtime-freeze suite passed 353 tests / 730 assertions; targeted Pint and PHP/JSON/YAML/JS syntax passed; git diff --check and exact nine-file scope validation passed. After the read-only process guard confirmed no competing heavy validation, the complete bash backend/scripts/ci_verify_mbti.sh gate finished successfully through all blocking Big Five, personality, Enneagram, MBTI, migration, security, OpenAPI, dependency, webhook, attempt, schema, and queue-backlog gates. Known generated compile timestamp/hash side effects were removed path-by-path after the successful run."},
       "github": {"status": "pending", "evidence": null}
     },
@@ -92485,7 +92485,8 @@
     "public_runtime_change": false,
     "transitions": [
       {"at": "2026-07-15T06:20:12Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR44 from the exact merged PR43 base. Scope is a six-finding fixture plus a read-only fail-closed Article projector: real reciprocal published EN/ZH counterparts or explicit no_hreflang, and LLMS membership only from current published/public/indexable plus explicit backend eligibility. No sitemap, Search, draft discoverability, CMS/database write, production LLMS mutation, or deploy action is allowed."},
-      {"at": "2026-07-15T06:30:44Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed, including the sole complete ci_verify_mbti.sh run. The projector and six-row fixture remain read-only and fail closed; no sitemap, Search, CMS/database, publication, indexability, production LLMS, cache, or deploy action occurred."}
+      {"at": "2026-07-15T06:30:44Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed, including the sole complete ci_verify_mbti.sh run. The projector and six-row fixture remain read-only and fail closed; no sitemap, Search, CMS/database, publication, indexability, production LLMS, cache, or deploy action occurred."},
+      {"at": "2026-07-15T06:31:49Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact nine-file implementation as 09c86fd258cc7180e1be07ebcdf95d5eaad352db after rebasing cleanly onto latest origin/main. No scope drift or production-side action occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
