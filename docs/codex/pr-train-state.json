@@ -93339,7 +93339,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "review_fixes_local_verified",
+    "status": "ready_to_merge",
     "commit_sha": "420a09d9dcdb8c26a40fc08c7ca89ae5ad7b3668",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
@@ -93357,8 +93357,8 @@
         "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; the paired negated-list and causal-as regressions pass 2 tests / 292 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. A subject-led causal as clause terminates earlier negation, while never as diagnosis, fixed identity and other coordinated prohibited-use lists remain fully negated. The first focused retry exposed an oversized PCRE branch and the final implementation replaced it with a small pre-check before these passing validations. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 99db39bf9 before the same-head review added one valid in-scope P2 finding: treating every as token as a boundary caused the standard never as diagnosis, fixed identity, hiring screen and forecast limitation list to fail. The locally verified substantive fix head 420a09d9d distinguishes subject-led causal as clauses from coordinated prohibited-use lists and requires a fresh GitHub check round."
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head a95ddcb179. GitHub reports CLEAN/MERGEABLE, the Codex clean-review comment explicitly records Reviewed commit a95ddcb179 with no major issues, and GraphQL reports zero unresolved review threads."
       },
       "ci_fix": {
         "status": "pass",
@@ -93372,7 +93372,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93735,9 +93735,14 @@
           "at": "2026-07-15T20:28:36Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed and same-head Codex review completed on ledger head 99db39bf9, then one valid P2 was fixed: subject-led causal as clauses now terminate prior negation without truncating the standard never as diagnosis, fixed identity, hiring screen, or forecast prohibited-use list. The first focused retry exposed an oversized PCRE and was replaced by a small pre-check before commit. Paired positive/negative regressions pass 2 / 292, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T20:40:55Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head a95ddcb179, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit a95ddcb179, and all review threads are resolved. Final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. The ready-ledger head must complete one final CI and same-head review round before squash merge."
         }
       ],
-    "updated_at": "2026-07-15T20:28:36Z"
+    "updated_at": "2026-07-15T20:40:55Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
