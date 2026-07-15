@@ -1,0 +1,52 @@
+{
+  "schema_version": "enneagram_public_authority_v2_content_qa_report.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
+  "generation_mode": "codex_native_content_generation",
+  "external_model_sessions": [],
+  "raw_draft_audit": {
+    "status": "failed_repaired",
+    "asset_specific_issue_count": 11,
+    "issues": {
+      "geo_answerability_unverified": 6,
+      "unsupported_center_system_claim": 3,
+      "faq_item_too_shallow": 2
+    },
+    "critical_contract_violations_after_repair": 0,
+    "repair_summary": [
+      "Converted compound center-boundary language into match-scoped negative statements.",
+      "Aligned GEO questions with substantive visible answer wording in both locales.",
+      "Expanded two Chinese FAQ answers with observable comparison steps."
+    ]
+  },
+  "final_qa": {
+    "status": "pass_for_manual_review_handoff",
+    "asset_count": 8,
+    "locale_counts": {
+      "en": 4,
+      "zh-CN": 4
+    },
+    "entity_counts": {
+      "hub": 2,
+      "center": 6
+    },
+    "asset_specific_issue_count": 0,
+    "faq_count": 24,
+    "unique_faq_question_count": 24,
+    "unique_faq_answer_count": 24,
+    "deferred_target_count": 108,
+    "deferred_target_reason": "Type-family assets belong to PR10 through PR18 and are not fabricated in PR09.",
+    "manual_review_state": "pending_manual_review",
+    "human_review_completed": false,
+    "publish_eligible": false
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}

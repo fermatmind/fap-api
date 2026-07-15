@@ -93558,9 +93558,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "60ffc19e279c712ccea4ce741f6737eab33f946f",
-    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "status": "merged",
+    "commit_sha": "d920e999f85165a73ac4176c24fd791d83cd7e85",
+    "commit_sha_role": "squash_merge_commit_on_origin_main",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
       "dependency": {
@@ -93577,7 +93577,7 @@
       },
       "github_checks": {
         "status": "pass",
-        "evidence": "All nine required checks passed on ledger head b2e72a990. GitHub reports CLEAN/MERGEABLE, the Codex clean-review comment explicitly records Reviewed commit b2e72a9903 with no major issues, and GraphQL reports zero unresolved review threads."
+        "evidence": "All nine required checks passed on final ready-ledger head 2edc5bdc052d59c637b9af30c140991a1d54ef4a. GitHub reported CLEAN/MERGEABLE, the Codex clean-review comment explicitly recorded Reviewed commit 2edc5bdc05 with no major issues, and GraphQL reported zero unresolved review threads before squash merge."
       },
       "ci_fix": {
         "status": "pass",
@@ -93592,12 +93592,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T22:18:59Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -94009,9 +94009,14 @@
           "at": "2026-07-15T22:11:27Z",
           "status": "ready_to_merge",
           "note": "All nine required checks passed on ledger head b2e72a990, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit b2e72a9903, and all review threads are resolved. All ninety-nine valid P2 findings are fixed; final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. This ready-ledger head must complete one final CI and same-head review round before squash merge."
+        },
+        {
+          "at": "2026-07-15T22:23:11Z",
+          "status": "merged",
+          "note": "PR #3115 merged at 2026-07-15T22:18:59Z as squash commit d920e999f85165a73ac4176c24fd791d83cd7e85 after final head 2edc5bdc0 passed all nine required checks and same-head clean review. origin/main containment, remote branch deletion, official local cleanup, clean synced main, and post-merge 48-test / 2162-assertion PR08+PR02 regression, exact classifier 1 / 2, Pint, JSON, and PHP syntax were verified before PR09 implementation."
         }
       ],
-    "updated_at": "2026-07-15T22:11:27Z"
+    "updated_at": "2026-07-15T22:23:11Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
@@ -94022,19 +94027,44 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "33d3c6c185ba6ecadd020a0c2782acdd471f0243",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3120",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR08 merged as d920e999f85165a73ac4176c24fd791d83cd7e85; GitHub MERGED state, origin/main containment, all nine green checks, final same-head clean review, remote/local branch cleanup, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first PR08-gate replay found 11 asset-specific content issues: six GEO question-to-visible-answer term mismatches, three compound English center-boundary limitations whose later biological/neurological terms escaped the negation scope, and two Chinese FAQ answers below the depth threshold. No source-map, target identity, private-result, review-truth, release-truth, or mutation-boundary defect was found."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "After content repair, the PR09 focused suite passes 6 tests / 256 assertions; all eight real assets have zero asset-specific issues under the PR08 IntegrityGate, and the only aggregate signals are one expected target_count_invalid plus exactly 108 target_asset_missing rows reserved for PR10-PR18. Pint passes the focused PHP test; PHP syntax, YAML, all changed JSON, diff, and exact six-file allowlist pass."
+      },
+      "content_qa": {
+        "status": "pass",
+        "evidence": "The package contains exactly hub plus gut/heart/head centers in en and zh-CN, independently authored with distinct locale outlines, 24 unique FAQ questions and answers, within-center differences, counterexamples, alternative explanations, explicit non-medical/non-neurological boundaries, pending_manual_review, reviewer null, draft_only, zero publish eligibility, and zero CMS/database/search/deploy writes. The QA report preserves the raw 11-issue failure and repair evidence; no external model session was used."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head 3342c144babe99ce8263a11ea6c4ebb7b782e3f7: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reports CLEAN/MERGEABLE with zero unresolved review threads."
+      },
+      "automated_code_review": {
+        "status": "unavailable_non_required",
+        "evidence": "The GitHub Codex review connector reported account usage limits and produced no review conclusion. GitHub reports reviewDecision empty, main has no required pull-request review rule, all required checks pass, and there are zero unresolved threads. This is not represented as human review; every asset remains pending_manual_review with reviewer null and human_review_completed false."
+      },
+      "codex_skeptical_review": {
+        "status": "pass",
+        "evidence": "The repository-native QA report preserves the initial 11 asset-specific findings and scoped repairs. Final PR08-gate replay reports zero asset-specific issues for all eight assets; source maps, bilingual independence, duplicate risk, FAQ depth, center boundaries, review truth, release truth, and zero-write assertions pass in 6 tests / 256 assertions."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -94052,9 +94082,34 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T22:23:11Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR08 merge and began the exact PR09 branch from clean latest origin/main. This scope authors eight independent bilingual hub/center draft assets only; no CMS/database write, revision import, human-review completion, publication, indexability, sitemap, llms, search submission, deploy, or production action is authorized."
+      },
+      {
+        "at": "2026-07-15T22:30:00Z",
+        "status": "local_check_failed_content_gate",
+        "note": "The first PR08-gate replay found 11 asset-specific content issues: six GEO answer mappings used non-matching terms, three compound English boundary statements let later center-system terms escape explicit negation, and two Chinese FAQ answers were too short. The repair stayed entirely inside PR09 draft/test paths and changed no authority, review, release, or runtime behavior."
+      },
+      {
+        "at": "2026-07-15T22:33:39Z",
+        "status": "local_checks_passed",
+        "note": "All PR09 manifest checks pass after repair: 6 tests / 256 assertions, Pint, PHP syntax, YAML, all JSON, diff check, and exact six-file scope. All eight assets have zero asset-specific PR08-gate issues; 108 family targets remain explicitly deferred to PR10-PR18. Review is pending, release is draft-only, publish eligibility is false, and all execution boundaries remain false."
+      },
+      {
+        "at": "2026-07-15T22:35:02Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3120 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE with initial checks queued."
+      },
+      {
+        "at": "2026-07-15T22:42:26Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on ledger head 3342c144b, GitHub is CLEAN/MERGEABLE, exact six-file scope and eight-asset count are preserved, and reviewThreads reports zero unresolved. The optional Codex review connector hit its usage limit; reviewDecision is empty and main has no required review rule. This unavailable automated review is recorded without changing pending_manual_review truth. The ready-ledger head must complete one final required-check round before squash merge."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T22:42:26Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10",
