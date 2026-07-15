@@ -92436,8 +92436,8 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-visible-provenance-43",
     "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-DATE-42"],
-    "status": "ready_to_merge",
-    "commit_sha": "d39264ce59471f229ccb1b4f0abc6ffd4ef1934a",
+    "status": "merged",
+    "commit_sha": "95578922e01125f7f4ed4087c407be83cd7e6af6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3102",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR43 id, branch, title, dependency, provenance/reviewer contract, lifecycle, validation floor, and no-production-write boundary."},
@@ -92447,9 +92447,9 @@
       "github": {"status": "pass", "evidence": "Head 14898d3db3ef6ff6a7770c60e5bfb5ac31810a44 passed all nine required checks in CI run 29392819024 and code-scanning run 29392819069. GitHub reports MERGEABLE/CLEAN, the changed-file set is exactly the nine manifest-allowed paths, and all twelve actionable review threads are resolved with no unresolved thread remaining."}
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T06:10:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "database_mutation": false,
@@ -92471,7 +92471,45 @@
       {"at": "2026-07-15T05:32:58Z", "from": "ready_to_merge", "to": "github_checks_retry_pending", "note": "Reconciled the review race: thread 3584676575 requires Personality reviewer evidence to bind to backend review authority. Personality and Landing have no canonical reviewer actor in the current contract, so both now fail closed; Personality author binds to created_by_admin_user_id, and actor/source authority prefixes require non-empty identifiers. Focused validation passes, but complete final-head local and GitHub checks remain mandatory."},
       {"at": "2026-07-15T05:41:24Z", "from": "github_checks_retry_pending", "to": "github_checks_retry_pending", "note": "Final implementation head 7bcca3696afba51c958171e1750abfcda2bf3932 passed every manifest local gate: validator, PR42+PR43 10/310, runtime freeze 2/5, Pint, syntax, complete CI including Big Five 1408/180876 and Enneagram 10/369, diff, and exact nine-file scope. Fresh final-ledger-head GitHub checks and review resolution remain mandatory."},
       {"at": "2026-07-15T05:56:13Z", "from": "github_checks_retry_pending", "to": "github_checks_retry_pending", "note": "After head 04d9b2a967d0de63ba8c8c9f026970f0c5b4461b passed all nine required checks and was CLEAN, the twelfth review finding was repaired in d39264ce59471f229ccb1b4f0abc6ffd4ef1934a: Topic reviewer metadata now fails closed without a canonical backend reviewer actor, and Landing author metadata likewise fails closed without canonical author authority. PR42+PR43 passed 10/313, freeze 2/5, Pint/fixture/syntax/diff/exact scope passed, complete CI passed Big Five 1408/180879 and downstream gates, and compiled side effects were restored. Fresh GitHub checks and thread resolution remain mandatory."},
-      {"at": "2026-07-15T06:04:11Z", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "Head 14898d3db3ef6ff6a7770c60e5bfb5ac31810a44 passed all nine required checks. GitHub is MERGEABLE/CLEAN, the branch diff remains exactly nine manifest-allowed paths, and all twelve actionable review threads are resolved with none outstanding. Recording ready_to_merge before squash merge; no production, CMS, database, publication, indexability, or deploy action occurred."}
+      {"at": "2026-07-15T06:04:11Z", "from": "github_checks_retry_pending", "to": "ready_to_merge", "note": "Head 14898d3db3ef6ff6a7770c60e5bfb5ac31810a44 passed all nine required checks. GitHub is MERGEABLE/CLEAN, the branch diff remains exactly nine manifest-allowed paths, and all twelve actionable review threads are resolved with none outstanding. Recording ready_to_merge before squash merge; no production, CMS, database, publication, indexability, or deploy action occurred."},
+      {"at": "2026-07-15T06:10:52Z", "from": "ready_to_merge", "to": "merged", "note": "GitHub reports PR #3102 squash-merged as 95578922e01125f7f4ed4087c407be83cd7e6af6 after final ledger head bed41cc1e28bf0f1fde4fbb06e77d3f6f39ff65f passed all nine required checks. origin/main containment, remote/local branch removal, isolated worktree cleanup, clean main sync, and post-merge 356/797 plus fixture validation were verified."}
+    ]
+  },
+  "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44": {
+    "id": "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44: fix(seo): repair Big Five hreflang and LLMS parity",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-discoverability-parity-44",
+    "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43"],
+    "status": "ready_to_merge",
+    "commit_sha": "8fc8870329a3a1fbca18e4c345dd8f79d9baedb1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3105",
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR44 id, branch, title, dependency, three hreflang plus three LLMS scope, lifecycle, validation floor, and no-production-write boundary."},
+      "dependency": {"status": "pass", "evidence": "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43 is merged in PR #3102 as 95578922e01125f7f4ed4087c407be83cd7e6af6; origin/main contains the merge and branch/worktree cleanup plus post-merge validation completed."},
+      "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-discoverability-parity-44 in an isolated worktree from clean exact origin/main 95578922e01125f7f4ed4087c407be83cd7e6af6 after confirming no local/remote branch. Before push, rebased cleanly onto latest origin/main 8a386c2167e8499a817937163997ac32329dca85, which contains an unrelated Enneagram public-contract PR; the exact PR44 nine-file scope remained unchanged. PR38 source evidence SHA256 60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65 locks exactly three hreflang and three llms.txt failures across four published zh-CN Article routes."},
+      "local": {"status": "pass", "evidence": "The deterministic package validator passed with exactly 6 findings at fixture SHA256 eb840591b44a0e9e433cc723fce61a3d29f86d55ceac9a386e85d3b83232551c. After both canonical-URL review repairs, the PR44 focused suite passed 5 tests / 42 assertions; runtime-freeze passed 2 tests / 5 assertions; targeted Pint and PHP/JSON/YAML/JS syntax passed; git diff --check and exact nine-file scope validation passed. The complete bash backend/scripts/ci_verify_mbti.sh gate passed again after the shared CanonicalFrontendUrl repair, including all blocking Big Five, Personality 71 tests / 5371 assertions, Enneagram 10 tests / 369 assertions, MBTI, migration, security, OpenAPI, dependency, webhook, attempt, schema, and queue-backlog gates. Known generated compile timestamp/hash side effects were removed path-by-path after the successful run."},
+      "github": {"status": "pass", "evidence": "Head 1e4ba9de5252ce5202109a60de1daa44409dfc1a passed all nine required checks in CI run 29396103676 and code-scanning run 29396103669. GitHub reports MERGEABLE/CLEAN, the changed-file set is exactly the nine manifest-allowed paths, and all five review threads are resolved with none outstanding. The final runtime-wiring suggestion was verified as explicitly deferred by the manifest allowlist, public_runtime_change=false boundary, and PR body; production runtime remains truthfully unchanged."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "database_mutation": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "public_runtime_change": false,
+    "transitions": [
+      {"at": "2026-07-15T06:20:12Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR44 from the exact merged PR43 base. Scope is a six-finding fixture plus a read-only fail-closed Article projector: real reciprocal published EN/ZH counterparts or explicit no_hreflang, and LLMS membership only from current published/public/indexable plus explicit backend eligibility. No sitemap, Search, draft discoverability, CMS/database write, production LLMS mutation, or deploy action is allowed."},
+      {"at": "2026-07-15T06:30:44Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed, including the sole complete ci_verify_mbti.sh run. The projector and six-row fixture remain read-only and fail closed; no sitemap, Search, CMS/database, publication, indexability, production LLMS, cache, or deploy action occurred."},
+      {"at": "2026-07-15T06:31:49Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact nine-file implementation as 09c86fd258cc7180e1be07ebcdf95d5eaad352db after rebasing cleanly onto latest origin/main. No scope drift or production-side action occurred."},
+      {"at": "2026-07-15T06:33:03Z", "from": "committed_pending_push", "to": "github_checks_pending", "note": "Pushed the exact scoped branch and opened the single authorized GitHub PR #3105. Waiting for all required checks; no production, CMS/database, publication, indexability, Search, LLMS runtime, cache, or deploy action occurred."},
+      {"at": "2026-07-15T06:47:31Z", "from": "github_checks_pending", "to": "review_fix_local_verified", "note": "Accepted both automated review findings. Commit bf79b8a98b01e9101e3b8df487be6661b181f502 now emits absolute canonical frontend URLs for eligible reciprocal alternates, fails closed on an invalid canonical base, and is the ledger-bound reviewed implementation commit. Focused, syntax, Pint, fixture, diff, scope, and complete CI validation all passed; fresh final-head GitHub checks remain mandatory."},
+      {"at": "2026-07-15T07:02:43Z", "from": "review_fix_local_verified", "to": "second_review_fix_local_verified", "note": "Accepted the valid www-to-apex review finding in 8fc8870329a3a1fbca18e4c345dd8f79d9baedb1 by reusing CanonicalFrontendUrl::fromConfig; focused, Pint, syntax, fixture, diff, scope, and complete CI validation passed again. The separate requested SHA 2d8ee97384110d007fae92868f3f6f8cc56335d6 is a non-queryable synthetic review object rather than a repository commit, so ledger identity remains bound to the actual implementation commit. Fresh final-head GitHub checks remain mandatory."},
+      {"at": "2026-07-15T07:11:03Z", "from": "second_review_fix_local_verified", "to": "ready_to_merge", "note": "Head 1e4ba9de5252ce5202109a60de1daa44409dfc1a passed all nine required checks, GitHub is MERGEABLE/CLEAN, the branch diff remains exactly nine manifest-allowed paths, and all five review threads are resolved. The runtime-wiring suggestion was rejected as an explicit scope expansion because PR44 forbids public runtime changes and claims no production finding closure; no sitemap, Search, CMS/database, publication, indexability, LLMS runtime, cache, or deploy action occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
