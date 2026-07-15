@@ -1,0 +1,1840 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10",
+  "framework": "enneagram",
+  "asset_scope": {
+    "family": "type-1",
+    "expected_asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "counts_by_entity_type": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "identity_keys": [
+      "core_type:type-1",
+      "wing:1w9",
+      "wing:1w2",
+      "instinctual_subtype:type-1/self-preservation",
+      "instinctual_subtype:type-1/social",
+      "instinctual_subtype:type-1/one-to-one"
+    ]
+  },
+  "source_ledger_refs": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
+  },
+  "assets": [
+    {
+      "identity_key": "core_type:type-1",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "path": "/en/personality/enneagram/type-1",
+      "title": "Type One: standards, correction, and a revisable attention hypothesis",
+      "answer_first": "Type One is a traditional Enneagram hypothesis about attention returning to standards, discrepancies, and responsible correction. Observing Type One attention means comparing what a person notices, what they actually revise, and whether the same pattern survives different roles; it does not turn conscientious behavior into proof of a fixed type.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English Type One core page was composed around concrete revision, feedback, and conflict records, independently of the Chinese page and without translating its sequence.",
+        "outline": [
+          "answer_first",
+          "motivation_attention",
+          "behavior_motive",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "work_relationship_examples",
+          "wings_mistypes",
+          "counterexample",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "the first discrepancy named before a shared draft is revised",
+          "whether a proposed correction changes after new evidence arrives",
+          "a comparable decision where a good-enough option is accepted without repair"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "Track attention before inferring motive",
+          "body": "A Type One motivation hypothesis asks whether attention repeatedly returns to what should be corrected, made consistent, or completed responsibly. The visible behavior alone cannot reveal motive: the same careful edit may reflect fear of penalties, professional training, kindness to a reader, or a temporary deadline."
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "Separate correction behavior from motive",
+          "body": "To distinguish behavior from motive, compare the stated standard, the edit that was actually made, and the cost the person accepted. A neat document or firm rule is not enough; test whether improvement remains the organizing concern when praise, authority, and external monitoring are removed."
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "Compare decisions, feedback, and conflict",
+          "body": "In decisions, note whether error prevention outranks speed; in feedback, note whether specific corrections arrive before appreciation; in conflict, note whether the disagreement centers on method, responsibility, or fairness. Compare Type One feedback with role expectations because editors, auditors, caregivers, and new managers may all sound corrective for different reasons."
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "Hold strengths beside tradeoffs",
+          "body": "Careful standards can support dependable follow-through, error detection, and principled restraint. The tradeoff may appear when revision continues beyond the decision's value, when frustration leaks into tone, or when a workable alternative is rejected before its actual consequences are tested."
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "Use examples without forecasting outcomes",
+          "body": "At work, the hypothesis might fit a teammate who documents a defect and proposes a repair before assigning blame. In a close relationship, it might fit someone who renegotiates an agreement after noticing inconsistency. These examples offer no basis for conclusions about job performance, compatibility, income, or relationship outcomes."
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "Compare both wings and common mistypes",
+          "body": "The 1w9 wing hypothesis adds measured pacing and distance from open friction, while 1w2 adds direct involvement in helping or improving with others. Common mistypes include role-based conscientiousness, anxiety-driven checking, achievement discipline, learned compliance, and anger managed through professional etiquette."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use disconfirming cases",
+          "body": "A Type One counterexample weakens a correction hypothesis when the person repeatedly ignores known defects, changes standards to protect status, or chooses experimentation over consistency in comparable decisions. Ask whether fatigue, incentives, safety, culture, expertise, or another Enneagram hypothesis explains the observed pattern better."
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "Keep the page useful and bounded",
+          "body": "Use this page to form questions for self-observation and conversation, then revise them against evidence. Do not use it to diagnose health or personality, screen applicants, settle relationship disputes, assign ability, or make a permanent identity claim."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Is frequent proofreading enough to identify Type One?",
+          "answer": "No. Proofreading may come from job design, language learning, fear of criticism, client requirements, or practiced skill. A Type One hypothesis becomes more useful only when attention to standards recurs across comparable choices and meaningful counterexamples are actively considered."
+        },
+        {
+          "question": "How can someone test whether correction is the organizing concern?",
+          "answer": "Compare situations with and without external evaluation. Record the discrepancy noticed, the repair proposed, the cost accepted, and what happens when another person offers a credible alternative standard. The hypothesis should weaken if correction disappears when role pressure changes."
+        },
+        {
+          "question": "What is a useful Type One growth experiment?",
+          "answer": "Choose one reversible decision and define a sufficient stopping rule before work begins. After delivery, compare the feared consequence with the observed result, invite one specific piece of feedback, and decide whether another revision would create measurable value or merely relieve internal tension."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "Choose three recurring decisions that involve a shared standard, a visible deadline, and another person who can describe what happened.",
+        "observable_signal": "Record the first discrepancy named, the correction proposed, the time spent revising, and the other person's observable response.",
+        "page_specific_signal": "Mark when a sufficient stopping rule is accepted, renegotiated with evidence, or ignored in favor of another round of correction.",
+        "alternative_explanation": "For each event, compare professional training, role accountability, fear of criticism, fatigue, incentives, and situational risk with the Type One hypothesis.",
+        "reflection_prompt": "Identify the strongest counterexample, then state which future observation would support revising or discarding the standards-and-correction interpretation."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does Type One attention to standards appear?",
+          "Which Type One counterexample weakens a correction hypothesis?",
+          "Why compare Type One feedback with role expectations?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does Type One attention to standards appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which Type One counterexample weakens a correction hypothesis?",
+            "visible_path": "sections.6.body"
+          },
+          {
+            "question": "Why compare Type One feedback with role expectations?",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Research findings are mixed and instrument-specific, so this draft does not establish FermatMind reliability, validity, norms, percentiles, predictive power, or clinical utility."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-1",
+        "/en/personality/enneagram/wings/1w9",
+        "/en/personality/enneagram/wings/1w2",
+        "/en/personality/enneagram/type-1/instincts/self-preservation",
+        "/en/personality/enneagram/type-1/instincts/social",
+        "/en/personality/enneagram/type-1/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "core_type:type-1",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "path": "/zh/personality/enneagram/type-1",
+      "title": "一号观察假设：标准、责任与修订节奏",
+      "answer_first": "一号是九型人格传统中关于注意力反复落在标准、偏差与负责修订上的观察假设。观察一号标准修订，需要同时记录先看见了什么、实际改了什么、何时愿意停止，以及同样做法能否跨情境出现；认真、守规或挑错本身都不能证明固定类型。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文一号核心页从日常协作中的标准谈判、停止条件和反证切入，独立成稿，没有翻译英文页面的段落顺序或案例。",
+        "outline": [
+          "情境入口",
+          "use_boundary",
+          "counterexample",
+          "wings_mistypes",
+          "work_relationship_examples",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "motivation_attention",
+          "behavior_motive",
+          "反证练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "协作开始前主动提出的验收条件及其修改记录",
+          "发现偏差后选择修复、解释或暂缓的实际动作",
+          "同类任务中接受够用方案而没有继续挑错的反例"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "behavior_motive",
+          "heading": "先拆开行为与动机",
+          "body": "检验一号行为动机差别，要把可见的守规、挑错或返工，与当事人事后给出的理由分开记录。同一种细致行为可能来自岗位规范、怕被责备、照顾使用者、熟练习惯或临时风险，不能仅凭表面整齐推定内在动机。"
+        },
+        {
+          "kind": "motivation_attention",
+          "heading": "再看注意力停在哪里",
+          "body": "动机假设更关心注意力是否持续回到“哪里不合标准、谁应负责、怎样才算完成”。如果新证据出现后标准可以协商，说明关注点可能是负责改进；如果标准只在保护面子时改变，则需要考虑权力、奖励或防御等替代解释。"
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "把优势和代价放在一起",
+          "body": "这种关注有时支持可靠交付、发现错误与守住承诺，也可能让修订超过实际价值，让不满先通过语气流出，或让尚未测试的方案过早被否定。评价时要看结果和互动成本，而不是把“高标准”自动写成优点或缺点。"
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "观察选择、反馈和冲突",
+          "body": "做决定时可记录是否先防错再求快；给反馈时可记录是否先提修正再谈认可；发生冲突时可区分争的是方法、责任还是公平。岗位职责、组织文化和近期压力都可能制造相似表现，因此必须保留跨场景比较。"
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "使用情境例子但不作预测",
+          "body": "工作中，一号假设可能帮助理解某人为何先提交缺陷清单再讨论归责；亲密关系中，也可能帮助讨论某人为何在承诺不一致时要求重新约定。此类例子不能作为职业表现、收入、关系适配或未来结果的判断依据。"
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "对照两种翼型和误判来源",
+          "body": "1w9 假设强调较克制的推进和降低公开摩擦，1w2 假设强调更直接地参与帮助与改善。常见误判还包括焦虑引起的检查、三号式目标纪律、六号式风险确认、岗位合规以及从小训练出的礼貌自控。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "主动找能推翻解释的材料",
+          "body": "寻找一号反例证据，可以查看当事人在相似条件下是否明知有偏差仍不处理、是否为维护地位随意改标准，或是否持续优先试验而非一致性。若这些情况稳定出现，就应降低一号假设权重，并比较疲劳、激励、安全感和专业经验。"
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "限定使用范围",
+          "body": "本页适合生成可复盘的问题，不适合给人定性。不得用于医疗或人格诊断、招聘筛选、录用判断、关系裁决、能力结论，也不能把一次熟悉感写成永久身份。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "经常追求正确就能判断为一号吗？",
+          "answer": "不能。追求正确可能来自考试制度、职业责任、客户要求、害怕批评或长期训练。只有当对标准和修订的关注在多个可比选择中重复出现，并且经得住反例与其他解释检验时，这个假设才更有用途。"
+        },
+        {
+          "question": "怎样判断修订已经超过实际价值？",
+          "answer": "先在行动前写出够用标准、截止时间和可观察后果，再记录每次追加修改解决了什么问题。如果新增修订只降低当下紧张，却没有改善使用结果、风险或协作理解，就值得尝试停止并收集反馈。"
+        },
+        {
+          "question": "一号假设能说明一个人的道德水平吗？",
+          "answer": "不能。一号只是关于注意力与应对方式的传统观察语言，不衡量善恶、诚信或人格价值。是否负责应由具体承诺、可见行动、造成的影响和愿意修正错误的证据来判断。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择三个有明确截止时间、共同验收条件并且至少有一位协作者能复述过程的真实任务，避免只凭回忆概括性格。",
+        "observable_signal": "逐次记录最先指出的偏差、提出的修改、实际投入时间、停止时点，以及协作者看到的行为和影响。",
+        "page_specific_signal": "特别标注够用标准被接受、因证据而调整，或在没有新增价值时仍继续返工的节点。",
+        "alternative_explanation": "每个事件都另写岗位责任、害怕批评、奖励机制、专业训练、疲劳程度和风险环境等至少一种替代解释。",
+        "reflection_prompt": "选出最不符合标准修订假设的反例，说明什么后续证据会让你降低、保留或放弃一号解释。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察一号标准修订？",
+          "如何检验一号行为动机差别？",
+          "如何寻找一号反例证据？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察一号标准修订？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何检验一号行为动机差别？",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "如何寻找一号反例证据？",
+            "visible_path": "sections.6.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "现有研究结论混合且依赖具体工具；当前公开说明没有足够审查证据支持具体测量数值、个体结果推断或临床用途结论。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-1",
+        "/zh/personality/enneagram/wings/1w9",
+        "/zh/personality/enneagram/wings/1w2",
+        "/zh/personality/enneagram/type-1/instincts/self-preservation",
+        "/zh/personality/enneagram/type-1/instincts/social",
+        "/zh/personality/enneagram/type-1/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:1w9",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "1w9",
+      "path": "/en/personality/enneagram/wings/1w9",
+      "title": "1w9: a core-first hypothesis about quiet correction",
+      "answer_first": "The 1w9 wing is a core-first, evidence-limited hypothesis: Type One attention to standards may be modified by Nine-adjacent restraint, steadier pacing, lower visible friction, and time to settle before correction. This does not create an independent category or prove that calm behavior comes from a wing.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 1w9 page was authored from meeting pace, delayed objections, and repair follow-through, rather than translating the Chinese page's household and handoff examples.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "a discrepancy documented privately before it is raised in a meeting",
+          "an objection delayed until a lower-friction channel becomes available",
+          "whether quiet agreement is followed by correction, withdrawal, or no action"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep the core hypothesis first",
+          "body": "A 1w9 interpretation begins with Type One standards and correction, then asks whether Nine-adjacent restraint changes the delivery. The modifier should not replace the core concern: quiet speech without repeated attention to discrepancies may reflect temperament, hierarchy, culture, fatigue, or strategic timing."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Compare sibling wing and core behavior",
+          "body": "A sibling comparison contrasts 1w9 restraint with 1w2 direct involvement. Both may correct the same defect, while 1w9 may document and wait for a calm opening and 1w2 may enter the interaction to help immediately. Compared with Nine, the distinguishing hypothesis is sustained concern with correction rather than comfort alone."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Watch the handoff after disagreement",
+          "body": "Useful situations include a meeting where a flawed plan is accepted provisionally, a review comment delivered after reflection, and a household agreement revised without confrontation. Observe whether lower friction helps a concrete repair occur or merely postpones an uncomfortable decision."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Seek a counterexample to quiet correction",
+          "body": "A 1w9 counterexample weakens a calm correction hypothesis when apparent restraint repeatedly ends in disengagement, when standards disappear around authority, or when the person pursues harmony while leaving known defects untouched. Those cases invite a Nine hypothesis, role caution, low energy, or learned conflict avoidance."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test role and cultural alternatives",
+          "body": "A junior employee may delay objections because speaking costs status; a bilingual team may use slower written feedback to reduce ambiguity; a caregiver may conserve energy. Compare those explanations with the proposed wing by checking whether standards-and-repair attention persists when power, language, and fatigue change."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep wing evidence limited",
+          "body": "Wing research is sparse, so 1w9 should remain a secondary observation hypothesis rather than an independent personality category. It does not establish a biological system, diagnostic group, fixed capacity, or outcome forecast, and it requires concrete counterexamples before use."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does a calm Type One automatically indicate 1w9?",
+          "answer": "No. Calm delivery may reflect skill, safety, hierarchy, culture, low urgency, or deliberate conflict management. The 1w9 hypothesis is only useful when steady pacing repeatedly modifies a Type One correction pattern across comparable situations."
+        },
+        {
+          "question": "How is 1w9 restraint different from avoiding responsibility?",
+          "answer": "Look at follow-through. Restraint that preserves a workable channel and later produces a specific repair differs from silence that leaves the problem untouched. Record the timing, the correction proposed, and the consequence rather than rating the person's tone."
+        },
+        {
+          "question": "What observation separates 1w9 from 1w2?",
+          "answer": "Use one shared defect and compare the first response. A 1w9 hypothesis expects more space, documentation, or de-escalation before repair; a 1w2 hypothesis expects earlier relational involvement. Either pattern may reverse under role or safety pressure."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Choose two low-stakes disagreements and one delayed feedback exchange where a concrete standard and repair decision are visible.",
+        "observable_signal": "Record when the discrepancy is noticed, when it is voiced, which channel is chosen, and whether a specific repair follows the quieter delivery.",
+        "page_specific_signal": "Distinguish calm pacing that enables correction from calm pacing that ends in withdrawal, indefinite delay, or unchanged standards.",
+        "alternative_explanation": "Compare hierarchy, cultural politeness, language processing, conflict skill, energy limits, and immediate safety with the 1w9 modifier hypothesis.",
+        "reflection_prompt": "Name the event that best contradicts quiet correction and state whether it points toward Nine, 1w2, role caution, or another situational account."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does 1w9 core-first restraint appear?",
+          "Which 1w9 sibling comparison contrasts restraint?",
+          "Which 1w9 counterexample weakens a calm correction hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does 1w9 core-first restraint appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which 1w9 sibling comparison contrasts restraint?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which 1w9 counterexample weakens a calm correction hypothesis?",
+            "visible_path": "sections.3.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "A calm presentation must not be treated as proof of a Nine wing; role, culture, safety, and practiced de-escalation remain viable alternatives."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-1",
+        "/en/personality/enneagram/wings/1w2",
+        "/en/personality/enneagram/type-1/instincts/self-preservation"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:1w9",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "1w9",
+      "path": "/zh/personality/enneagram/wings/1w9",
+      "title": "1w9 观察页：克制表达是否服务于实际修正",
+      "answer_first": "1w9 是以一号为核心、以九号相邻特征为修饰的传统假设。观察1w9克制修正，要看平缓语气、延后表达或降低冲突是否最终带来具体改动，而不是把安静、随和或慢节奏直接当成独立翼型证据。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 1w9 页面围绕家庭约定、工作交接和沉默后的行动独立创作，没有沿用英文页的会议结构或句式。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "counterexample",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "core_first_modifier",
+          "observable_situations",
+          "反证练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "发现问题后先写下来而没有立即公开指出的时点",
+          "一次平静同意之后是否出现明确修复、持续拖延或撤回",
+          "权力差异降低后表达标准和异议的方式是否改变"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_situations",
+          "heading": "从沉默后的动作开始",
+          "body": "可选择家庭分工、项目交接和低风险意见不同三个情境。重点不是语气听起来多温和，而是当事人何时指出偏差、是否提出可执行修复、后来有没有跟进，以及沉默是否让问题继续存在。"
+        },
+        {
+          "kind": "core_first_modifier",
+          "heading": "先确认一号核心再谈修饰",
+          "body": "1w9 假设首先要求标准与修订关注重复出现，九号相邻特征只用来解释表达节奏或降低摩擦的方式。若一个人主要追求舒适、回避决定，且对已知偏差没有持续处理，就不应只因安静而归入该假设。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "比较环境带来的克制",
+          "body": "比较1w9环境克制，可以先看晚辈是否因权力关系不便当场反对、跨语言团队是否需要书面整理，以及照护者是否因精力有限延后沟通。要在地位、语言和疲劳变化后继续观察，才能判断克制是否稳定地服务于修正。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "并列比较 1w2 与九号",
+          "body": "1w9 可能先留出空间、整理材料再修复，1w2 可能更快进入关系并直接帮忙；两者仍以一号标准为核心。与九号相比，关键问题是降低摩擦之后是否持续回到具体偏差和责任，而非只维持表面平静。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "让没有修复的平静成为反证",
+          "body": "检验1w9平静修正反例，可以寻找表面克制却长期不行动、面对权威便放弃标准，或只求和气而不处理已知问题的事件。这些材料会削弱翼型解释，并提示考虑冲突回避、低能量、角色限制或九号假设。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "保留翼型证据边界",
+          "body": "翼型研究支持有限，1w9 只能作为次级观察假设，不是独立人格类别。它不能证明生物系统、固定能力、诊断类别或未来结果，任何解释都应由具体情境、反例与人工审核继续检验。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "说话温和的一号就是 1w9 吗？",
+          "answer": "不是。温和可能来自沟通训练、组织礼仪、风险判断、文化习惯或当下疲劳。只有当降低摩擦持续改变一号式修订的表达方式，并在不同情境仍留下可见行动，1w9 假设才值得保留。"
+        },
+        {
+          "question": "怎样区分克制和逃避责任？",
+          "answer": "记录克制之后是否出现明确提议、截止时间和实际跟进。若安静帮助双方保持沟通并完成修复，它与长期沉默、问题不处理不同；若没有后续行动，就应优先考虑回避或资源不足。"
+        },
+        {
+          "question": "1w9 与 1w2 最适合比较什么？",
+          "answer": "用同一个共同缺陷比较首次反应：1w9 假设可能先降温、整理或等待窗口，1w2 假设可能先进入互动并提供帮助。还要改变权力和安全条件，避免把岗位风格误当翼型。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "选择一次家庭约定、一次工作交接和一次低风险分歧，三者都要有明确标准与可观察的后续动作。",
+        "observable_signal": "逐次记录发现偏差、首次表达、选择沟通渠道、提出修复以及实际跟进的时间，不用“很温和”概括过程。",
+        "page_specific_signal": "区分降低摩擦后完成修正、降低摩擦后无限拖延，以及克制表达后完全撤回标准这三种结果。",
+        "alternative_explanation": "分别比较权力差异、文化礼貌、语言处理、冲突训练、精力不足和现实安全对同一行为的解释力。",
+        "reflection_prompt": "指出最不支持克制修正的事件，并说明它更接近九号、1w2、角色谨慎还是纯粹的情境限制。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察1w9克制修正？",
+          "如何比较1w9环境克制？",
+          "如何检验1w9平静修正反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察1w9克制修正？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何比较1w9环境克制？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何检验1w9平静修正反例？",
+            "visible_path": "sections.4.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "平静表达不能证明九号翼；岗位、文化、安全程度与后天沟通技能都必须作为替代解释保留。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-1",
+        "/zh/personality/enneagram/wings/1w2",
+        "/zh/personality/enneagram/type-1/instincts/self-preservation"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:1w2",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "1w2",
+      "path": "/en/personality/enneagram/wings/1w2",
+      "title": "1w2: a core-first hypothesis about involved improvement",
+      "answer_first": "The 1w2 wing is a core-first, evidence-limited hypothesis in which Type One attention to standards may be modified by a Two-adjacent pull toward direct involvement, practical help, and relational repair. It is not an independent category, and helpful correction may arise from role duty or learned service rather than a wing.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 1w2 asset was built around volunteered help, consent, and repair ownership; its argument and examples were not translated from the Chinese collaboration-boundary draft.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "whether help is offered before the affected person requests involvement",
+          "how a correction changes after the recipient declines assistance",
+          "whether relational repair continues when the helper receives no appreciation"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Begin with standards, then test involvement",
+          "body": "A 1w2 interpretation first asks whether Type One standards and correction organize attention, then whether Two-adjacent involvement changes how improvement is pursued. Helping alone is insufficient: professional duty, caregiving, reciprocity, status, or a clear request can produce the same action."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Contrast direct help with quieter restraint",
+          "body": "A sibling comparison places 1w2 direct involvement beside 1w9 measured distance. Faced with the same flawed handoff, 1w2 may offer to repair it alongside the owner, while 1w9 may document the issue and choose a calmer opening. Compared with Two, the proposed core remains the standard being corrected."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe consent and ownership",
+          "body": "Useful situations include editing a colleague's work, intervening in a family routine, and volunteering to fix a shared process. Record whether help was invited, whether the original owner retains a choice, and whether the correction improves the situation or creates obligation and resentment."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Look for involvement without standards",
+          "body": "A 1w2 counterexample weakens an involved improvement hypothesis when help tracks approval rather than a stable standard, disappears without gratitude, or protects closeness while known defects remain. Those events invite a Two hypothesis, role expectations, impression management, or fear of rejection."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test care roles and reciprocity",
+          "body": "Managers, parents, senior specialists, and community volunteers may intervene because their role assigns responsibility. Compare the wing hypothesis with explicit duty, reciprocal norms, gendered expectations, crisis urgency, and practiced mentoring by observing what changes when consent and recognition differ."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Do not turn service into wing proof",
+          "body": "Research provides little support for wings, so 1w2 remains a secondary, evidence-limited observation hypothesis. It cannot certify altruism, moral worth, diagnostic status, or relationship success, and it should be revised when concrete counterexamples fit another explanation."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does correcting other people kindly establish 1w2?",
+          "answer": "No. Kind correction may be part of management, teaching, parenting, customer support, or practiced diplomacy. The hypothesis needs repeated Type One attention to standards plus a distinct pattern of involved help, tested against consent and counterexamples."
+        },
+        {
+          "question": "Why record whether assistance was invited?",
+          "answer": "Consent reveals whether involvement responds to the other person's need or to the helper's own urgency to improve the situation. A declined offer also creates useful evidence about flexibility, ownership, and whether relationship pressure replaces collaboration."
+        },
+        {
+          "question": "What distinguishes 1w2 from a Two hypothesis?",
+          "answer": "Ask what remains central when appreciation is absent. A 1w2 hypothesis expects the standard and repair concern to persist, while a Two hypothesis may better explain attention organized around being needed or maintaining connection. Neither inference is automatic."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose three repair situations involving another person's work or routine, including one invited offer, one unsolicited impulse, and one declined offer.",
+        "observable_signal": "Record the standard named, who owns the decision, whether consent was requested, the help actually given, and the recipient's observable response.",
+        "page_specific_signal": "Track whether direct involvement becomes more flexible after refusal or whether urgency shifts into pressure, correction, or unrequested takeover.",
+        "alternative_explanation": "Compare formal duty, caregiving norms, reciprocal obligation, mentoring skill, crisis urgency, and desire for appreciation with the 1w2 modifier hypothesis.",
+        "reflection_prompt": "Identify the strongest event where involvement followed connection rather than standards, then state which alternative explanation now deserves more weight."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does 1w2 core-first involvement appear?",
+          "Which 1w2 sibling comparison places direct involvement?",
+          "Which 1w2 counterexample weakens involved improvement?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does 1w2 core-first involvement appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which 1w2 sibling comparison places direct involvement?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which 1w2 counterexample weakens involved improvement?",
+            "visible_path": "sections.3.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Direct help does not establish a Two wing; consent, role duty, reciprocity, urgency, and learned service remain plausible alternatives."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-1",
+        "/en/personality/enneagram/wings/1w9",
+        "/en/personality/enneagram/type-1/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:1w2",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "1w2",
+      "path": "/zh/personality/enneagram/wings/1w2",
+      "title": "1w2 观察页：直接帮助如何改变修订方式",
+      "answer_first": "1w2 是以一号标准与修订关注为核心、用二号相邻特征解释直接参与和关系修复的传统次级假设。观察1w2参与改善，不能只看是否热心，还要记录帮助是否受邀、标准是否清楚，以及被拒绝后能否把决定权交还对方。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 1w2 页从帮助边界、拒绝后的反应和共同决策出发独立写作，没有翻译英文页面的职业角色清单。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "counterexample",
+          "alternative_explanations",
+          "sibling_core_comparison",
+          "core_first_modifier",
+          "observable_situations",
+          "反证练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "主动介入前是否询问对方需要以及谁拥有决定权",
+          "帮助被拒绝后是调整方案、施加压力还是完全撤回",
+          "没有感谢或认可时仍持续关注的标准与修复内容"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_situations",
+          "heading": "从一次未受邀的帮忙观察",
+          "body": "选择修改同事材料、介入家庭流程或修复公共安排的事件，记录帮助何时提出、是否询问需要、原负责人能否拒绝，以及最终是问题改善还是关系中增加了负担。热心程度本身不能说明翼型。"
+        },
+        {
+          "kind": "core_first_modifier",
+          "heading": "把一号核心放在前面",
+          "body": "1w2 假设先要求标准与纠偏关注稳定出现，再讨论二号相邻特征是否让人更倾向直接参与。若行为主要围绕被需要、维持亲近或获取认可，而标准会随关系变化，就要考虑二号或其他解释。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "与 1w9 和二号并排比较",
+          "body": "面对相同缺陷，1w2 可能较早进入互动并一起修复，1w9 可能先整理问题、降低摩擦再提出；两者仍应回到一号核心。与二号相比，可观察没有感谢时标准关注是否仍然存在。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "检查照护和职责带来的介入",
+          "body": "比较1w2照护职责，可以观察父母、主管、资深员工或志愿者是否因明确职责而主动帮助，以及紧急事件是否缩短询问时间。应改变角色、互惠、紧迫性与认可条件，查看参与方式是否仍支持翼型假设。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "把只追随认可的帮助当作反例",
+          "body": "检验1w2参与改善反例，可寻找没有感谢就停止帮助、为了维持亲近而放弃已知标准，或在对方拒绝后完全转向取悦的事件。这些材料会削弱参与改善解释，并提高二号、角色义务或害怕被拒绝的可能性。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "不把服务精神当作翼型证明",
+          "body": "目前翼型研究很少，1w2 只能是证据有限的次级观察假设。它不能作为健康或人格结论，也不能用来评价利他程度、道德价值或关系结果；具体反例和替代解释必须能够修订该假设。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "温和地纠正别人就能说明 1w2 吗？",
+          "answer": "不能。教学、管理、客服、照护和沟通训练都可能产生温和纠正。需要同时看到一号式标准关注、较直接的参与方式，以及在同意、拒绝和没有认可时仍可比较的行为证据。"
+        },
+        {
+          "question": "为什么要记录帮助是否受邀？",
+          "answer": "是否受邀能区分回应真实需要与缓解自己想改善局面的急迫感。对方拒绝时的反应尤其重要，它显示当事人能否尊重所有权、调整方式，并避免用关系压力替代协作。"
+        },
+        {
+          "question": "怎样比较 1w2 与二号假设？",
+          "answer": "观察没有感谢、没有被需要感时什么仍然重要。若关注持续回到标准和修复，1w2 假设较值得测试；若注意力主要围绕连接、需要和认可，二号可能解释得更直接，但两者都不是定论。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择三次涉及他人工作或生活安排的改善事件，分别包含受邀帮助、未受邀冲动和明确被拒绝的情况。",
+        "observable_signal": "记录提出的标准、决定权归属、是否询问同意、实际提供的帮助，以及对方可以观察到的反应与后果。",
+        "page_specific_signal": "重点标注拒绝之后是变得更灵活、转为施压、接管任务，还是尊重边界并保留后续协作渠道。",
+        "alternative_explanation": "逐项比较岗位义务、照护规范、互惠期待、导师技能、危机紧迫性和希望被认可等替代解释。",
+        "reflection_prompt": "找出一次参与主要追随关系而非标准的事件，说明二号、角色责任或害怕拒绝是否比 1w2 更能解释。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察1w2参与改善？",
+          "如何比较1w2照护职责？",
+          "如何检验1w2参与改善反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察1w2参与改善？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何比较1w2照护职责？",
+            "visible_path": "sections.3.body"
+          },
+          {
+            "question": "如何检验1w2参与改善反例？",
+            "visible_path": "sections.4.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "直接帮助不能证明二号翼；同意程度、岗位责任、互惠、紧迫性与后天服务技能都应保留为替代解释。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-1",
+        "/zh/personality/enneagram/wings/1w9",
+        "/zh/personality/enneagram/type-1/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/self-preservation",
+      "path": "/en/personality/enneagram/type-1/instincts/self-preservation",
+      "title": "Self-preservation Type One: preparation under an evidence limit",
+      "answer_first": "Self-preservation Type One is a traditional type-by-instinct hypothesis in which One attention to standards may become especially visible in preparation, maintenance, error prevention, and resource stewardship. One preparation is an observation target, not proof of a biological drive or a universal subtype.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English self-preservation draft uses maintenance logs, contingency thresholds, and resource handoffs, independently of the Chinese page's home-systems emphasis.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "the maintenance threshold chosen before a preventable failure occurs",
+          "which reserve, checklist, or repair is prioritized when time is limited",
+          "a comparable event where improvisation replaces preparation without distress"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Frame preparation as a traditional hypothesis",
+          "body": "The subtype hypothesis combines Type One correction concerns with a self-preservation label for attention to upkeep, sufficiency, and preventable risk. It remains descriptive and provisional; careful preparation can arise from scarcity, professional safety rules, disability access, caregiving, or recent disruption."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Use the same task across three subtypes",
+          "body": "A matched comparison separates preparation from social standard-setting by asking whether attention first goes to supplies and maintenance or to shared rules and exemplars. It also contrasts one-to-one reform pressure by asking whether energy first targets a particular relationship or person."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Do not reify an instinct label",
+          "body": "Self-preservation here is traditional vocabulary for organizing observations. It is not a measurable biological drive. It is not a neurological system. It does not assign a fixed capacity, establish survival wiring, define health status, or impose one automatic priority on every person."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Expect tradition and countertype variation",
+          "body": "Subtype schools differ in descriptions and in which combinations appear countertypical. Rather than treating one presentation as canonical, record the specific preparation claim, the setting, and disconfirming events, then compare whether another school or plain environmental explanation fits better."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Compare material and role conditions",
+          "body": "Housing instability, medical routines, regulated work, caring for dependents, tight budgets, and recent equipment failure can all heighten preparation. Change the material condition or compare a safer period before attributing maintenance behavior to a subtype."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Let improvisation challenge the subtype",
+          "body": "An environmental counterexample weakens a self-preservation One hypothesis when the person repeatedly improvises comfortably, neglects routine upkeep despite clear standards, or prioritizes public rules and intense one-person reform over resources in matched situations."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep subtype evidence narrow",
+          "body": "Evidence is instrument-specific and cannot establish a universal subtype ontology or cross-cultural equivalence. The draft offers no product-specific measurement evidence and no basis for health, personality, or outcome conclusions; every declared review and release state remains unchanged."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does keeping detailed checklists establish self-preservation Type One?",
+          "answer": "No. Checklists may reflect regulated work, memory support, shared coordination, recent failure, or anxiety about consequences. Compare who created the checklist, what risk it addresses, and whether preparation persists when conditions become safer."
+        },
+        {
+          "question": "How should the three Type One subtypes be compared?",
+          "answer": "Hold the task constant. Observe whether attention first moves to resources and maintenance, shared standards and exemplary conduct, or direct reform of a particular person or bond. Repeat the comparison and retain mixed or contradictory events."
+        },
+        {
+          "question": "What would weaken the preparation hypothesis?",
+          "answer": "Repeated ease with improvisation, neglected upkeep, flexible reserves, or stronger attention to public rules or one-to-one reform would weaken it. Material security, role demands, and learned safety routines should be tested before a subtype explanation."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "Choose one household maintenance task, one work contingency, and one resource decision that each have a visible standard and consequence.",
+        "observable_signal": "Record the first risk named, the reserve or checklist chosen, the maintenance action completed, and what another participant observed.",
+        "page_specific_signal": "Compare whether attention first targets material sufficiency, shared rules, or direct reform of one person while the practical task stays similar.",
+        "alternative_explanation": "Test scarcity, regulated duties, access needs, caregiving, recent failure, budget pressure, and learned safety routines against the subtype hypothesis.",
+        "reflection_prompt": "Select the event with the least preparation and explain whether improvisation, security, social standards, or one-to-one urgency fits it better."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does self-preservation Type One preparation appear?",
+          "Which matched comparison separates preparation from social standard-setting?",
+          "Which environmental counterexample weakens a self-preservation Type One hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does self-preservation Type One preparation appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which matched comparison separates preparation from social standard-setting?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which environmental counterexample weakens a self-preservation Type One hypothesis?",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Preparation may be explained by material conditions, regulated duties, access needs, caregiving, or recent disruption rather than a subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-1",
+        "/en/personality/enneagram/type-1/instincts/social",
+        "/en/personality/enneagram/type-1/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/self-preservation",
+      "path": "/zh/personality/enneagram/type-1/instincts/self-preservation",
+      "title": "一号自保副型：准备、维护与资源条件的观察",
+      "answer_first": "一号自保副型是“类型 × 本能”的传统次级假设，用来观察一号式标准关注是否更多出现在准备、维护、防错和资源管理中。观察一号自保准备，必须同时比较物质条件、岗位规范和反例，不能把清单或储备写成生物驱力的确定证据。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文一号自保页从居家维护、预算变化和照护责任独立展开，没有翻译英文页的工作应急结构。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "alternative_environment",
+          "反证练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "安全时期与资源紧张时期准备行为的差异",
+          "同一任务中先处理储备、共同规则还是某个具体人的问题",
+          "计划被打乱后能否自在 improvisation 并保留基本标准"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "alternative_environment",
+          "heading": "先比较现实资源条件",
+          "body": "居住不稳定、预算紧张、照护责任、近期设备故障或受监管岗位，都可能让准备与维护显著增加。应比较条件改善前后，查看行为是否随现实风险变化，而不是直接推断副型。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "再描述传统组合假设",
+          "body": "该假设把一号对偏差和负责修订的关注，与自保标签下的充足、维护和可预防风险放在一起观察。它只提供问题框架；精细准备也可能来自记忆辅助、无障碍需要、专业训练或一次失败后的学习。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "用同一任务匹配三种副型",
+          "body": "匹配比较一号自保与社群标准时，可看注意力先到物资和维护，还是共同规范与示范；再与一对一副型比较，查看是否先把精力投向某段关系或某个人的改变。任务必须尽量相同。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "限定本能一词的含义",
+          "body": "这里的自保是传统观察词汇。它不是已测得的生物驱力。它不描述神经机制，也不分配恒定功能；这个标签不能证明生存线路、健康状态或每个人都有同样而稳定的优先顺序。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "保留传统差异与反型说法",
+          "body": "不同流派对副型和所谓反型的描述并不一致。记录时应写清具体主张、场景和反证，不把某一流派版本当作唯一标准；若环境解释更直接，就应降低传统标签权重。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "让轻松临场处理成为反证",
+          "body": "检验一号自保环境反例，可寻找当事人多次轻松临场应对、明知维护标准却长期忽略，或在匹配情境里持续把共同规则与某个人的改革置于资源之前的事件。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "收紧副型证据范围",
+          "body": "现有证据依赖具体工具和样本，不能证明普遍副型本体或跨文化等价。本页只提供观察问题，不作健康、人格或结果结论；所有既定审核、草稿与可发现性状态保持不变。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "保存很多物资就能判断为一号自保吗？",
+          "answer": "不能。储备可能来自短缺经历、家庭责任、工作规范、灾害准备或购买习惯。应记录储备解决的具体风险、谁制定标准，以及安全感和资源条件改善后行为是否发生变化。"
+        },
+        {
+          "question": "怎样在同一任务中比较三种副型？",
+          "answer": "固定一个实际任务，分别观察注意力是否先到物资维护、共同规则与示范，或某段一对一关系的改革。多次重复并保留混合结果，不要用一次选择决定标签。"
+        },
+        {
+          "question": "哪些材料会削弱准备维护假设？",
+          "answer": "多次自在临场处理、忽略日常维护、灵活调整储备，或更稳定地优先共同规范和特定关系改革，都会削弱假设。还要先检查预算、岗位、照护和近期故障等条件。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "选择一个居家维护任务、一次预算安排和一个照护责任事件，三者都要有明确标准、现实后果和可复述过程。",
+        "observable_signal": "记录最先提出的风险、选择的储备或清单、实际完成的维护动作，以及共同参与者看到的变化。",
+        "page_specific_signal": "在任务相近时比较注意力先投向物质充足、共同规范，还是某个具体人的改变与关系张力。",
+        "alternative_explanation": "逐项检验短缺经历、预算压力、岗位规定、无障碍需要、照护责任和近期故障等环境解释。",
+        "reflection_prompt": "选出准备最少的一次事件，说明轻松应变、资源安全、社群标准或一对一急迫是否解释得更好。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察一号自保准备？",
+          "如何匹配比较一号自保与社群标准？",
+          "如何检验一号自保环境反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察一号自保准备？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何匹配比较一号自保与社群标准？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何检验一号自保环境反例？",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "准备行为可能来自资源条件、岗位规范、无障碍需要、照护责任或近期中断，不能直接归入副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-1",
+        "/zh/personality/enneagram/type-1/instincts/social",
+        "/zh/personality/enneagram/type-1/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/social",
+      "path": "/en/personality/enneagram/type-1/instincts/social",
+      "title": "Social Type One: shared standards as a provisional subtype hypothesis",
+      "answer_first": "Social Type One is a traditional type-by-instinct hypothesis in which One attention to correction may be especially visible through shared standards, exemplary conduct, teaching, and responsibility to a group. One shared standards behavior is not proof of a biological social drive or a universal subtype.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English social subtype page uses committee rules, teaching choices, and public exceptions, independently of the Chinese page's community rota examples.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "whether a shared rule is applied to the speaker when it becomes costly",
+          "how an exception is explained to people with less authority",
+          "a matched task where private maintenance outranks public standard-setting"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Describe shared standards provisionally",
+          "body": "The hypothesis combines Type One correction attention with a social label for group norms, example-setting, and collective responsibility. Public rule language is not enough: governance roles, teaching duties, reputation, legal requirements, or organizational crisis can create similar conduct."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare three priorities in one group task",
+          "body": "This matched comparison asks about shared rules and maintenance by observing whether attention first moves toward exemplary conduct, self-preservation resources, or one-to-one pressure for a particular person to change. Hold the task, authority, and consequence as constant as possible."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep social instinct metaphorical",
+          "body": "Social is traditional organizing vocabulary, not a biological drive, neurological capacity, or fixed group orientation. It does not establish that a person naturally represents collective morality, and it cannot certify leadership, fairness, or civic value."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow competing subtype traditions",
+          "body": "Descriptions of social One and countertypical presentations vary across schools. State which observable claim is being tested and retain discordant cases; a tradition-specific narrative should not override stronger evidence from role, culture, or local incentives."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test institutions and public accountability",
+          "body": "Teachers, compliance staff, moderators, union representatives, and team leads may emphasize shared rules because others depend on consistency. Compare behavior in private, after authority changes, and when a fair exception costs reputation before using a subtype account."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use private exceptions as disconfirming evidence",
+          "body": "A social Type One counterexample weakens a shared standards hypothesis when rules apply mainly to lower-status people, exceptions protect the speaker's image, or private resource control consistently outranks collective consistency in matched decisions."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Avoid universal or predictive conclusions",
+          "body": "Instrument-specific findings cannot establish universal subtype ontology or cross-cultural equivalence. This page cannot diagnose, rank moral worth, predict leadership or group outcomes, complete human review, or authorize publication and indexing."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does enforcing team rules establish social Type One?",
+          "answer": "No. Enforcement may be a formal duty, a response to risk, a legal obligation, or a temporary leadership role. Test whether the same standard applies to the person enforcing it and whether fair exceptions remain possible."
+        },
+        {
+          "question": "How can exemplary conduct be observed without moral ranking?",
+          "answer": "Record the rule stated, the action taken when compliance costs something, and how exceptions are explained. Describe consistency and impact without declaring the person more ethical, mature, fit to lead, or valuable than others."
+        },
+        {
+          "question": "What weakens a shared standards subtype hypothesis?",
+          "answer": "Selective enforcement, image-protecting exceptions, weak concern outside public view, or stronger recurring attention to private maintenance or one relationship would weaken it. Role authority and institutional incentives should be compared first."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one committee decision, one teaching or mentoring moment, and one exception request where a shared rule and authority are visible.",
+        "observable_signal": "Record the stated rule, who bears its cost, how the speaker behaves under the same rule, and the reason given for any exception.",
+        "page_specific_signal": "Compare whether the first priority is collective consistency, material upkeep, or reform of a particular person while the group task remains similar.",
+        "alternative_explanation": "Test formal authority, legal duty, reputation, crisis management, teaching role, organizational incentives, and cultural expectations against the subtype.",
+        "reflection_prompt": "Identify the event where shared standards became most selective and state whether role power, image management, or another subtype priority fits better."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does social Type One shared standards behavior appear?",
+          "Which matched comparison asks about shared rules and maintenance?",
+          "Which social Type One counterexample weakens shared standards?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does social Type One shared standards behavior appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which matched comparison asks about shared rules and maintenance?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which social Type One counterexample weakens shared standards?",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Group-rule behavior may come from formal authority, public accountability, teaching duty, law, reputation, or organizational crisis."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-1",
+        "/en/personality/enneagram/type-1/instincts/self-preservation",
+        "/en/personality/enneagram/type-1/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/social",
+      "path": "/zh/personality/enneagram/type-1/instincts/social",
+      "title": "一号社群副型：共同标准、示范与制度情境",
+      "answer_first": "一号社群副型是传统的“类型 × 本能”假设，关注一号式纠偏是否更多通过共同标准、示范、教学和群体责任表现。观察一号社群共同标准，必须检查规则是否也约束提出者，并与岗位权力、制度要求和声誉激励比较。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文一号社群页从社区轮值、规则例外和低权力成员的体验独立组织，没有翻译英文委员会案例。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "alternative_environment",
+          "反证练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "规则给提出者带来成本时是否仍按同一标准执行",
+          "面对低权力成员与高权力成员时解释例外的差异",
+          "公开场合与私下场合对共同规范关注是否持续"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "alternative_environment",
+          "heading": "先检查制度和职位",
+          "body": "教师、合规人员、社区组织者或项目负责人可能因职责强调共同规则，危机时期也会增加一致性要求。应比较卸任、私下和风险下降后的表现，再决定社群副型是否比岗位解释更有用。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把共同标准写成暂定假设",
+          "body": "这个传统组合把一号的标准与修订关注，同社群标签下的规范、示范和集体责任联系起来。公开谈规则不等于副型；关键是标准如何落实、谁承担成本，以及是否允许透明而公平的例外。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "在同一公共任务里比较优先级",
+          "body": "匹配比较一号社群与资源维护时，可看注意力先到共同规则还是物资充足；再与一对一副型比较，观察是否先推动某个具体人改变。任务、权力和后果应尽量保持一致。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "不把社群理解成生物本能",
+          "body": "这里的社群是传统组织观察的词，不是生物驱力、神经能力或固定群体取向。它不能证明某人天然代表集体道德，也不认证领导力、公平性或公民价值。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许流派和反型描述不一致",
+          "body": "不同传统对社群一号及反型表现的说法可能不同。应明确本次检验的可观察主张，保留不一致事件；当文化、角色或局部激励解释更强时，不以流派叙事覆盖证据。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用选择性规则作为反证",
+          "body": "检验一号社群选择性规则反例，可寻找规则主要约束低权力者、例外只保护提出者形象，或在匹配决定中长期把私人资源置于共同一致性之前的事件。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "不推导普遍性与结果",
+          "body": "量表特定证据不能证明普遍副型本体或跨文化等价。本页只提供观察问题，不作健康或人格结论，也不排序道德价值或推断领导与群体结果；既定审核和草稿状态保持不变。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "严格执行团队规则就是一号社群吗？",
+          "answer": "不是。执行可能来自正式岗位、法律义务、事故风险或临时领导责任。应检查规则是否同样约束执行者、是否能公开解释合理例外，以及卸任之后关注是否仍然出现。"
+        },
+        {
+          "question": "怎样观察示范而不进行道德排名？",
+          "answer": "记录提出的规则、规则带来成本时的实际行动，以及如何向不同权力位置的人解释例外。只描述一致性、影响和修订，不据此宣布谁更成熟、更适合领导或更有价值。"
+        },
+        {
+          "question": "哪些事件会削弱共同标准假设？",
+          "answer": "选择性执行、保护形象的例外、只在公开场合关心规则，或更稳定地优先私人维护和某段关系改革，都会削弱假设。职位权力和制度激励应先被检查。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一次社区轮值、一次规则例外和一次教学或带教事件，确保共同标准、权力差异和实际后果都能被记录。",
+        "observable_signal": "写下提出的规则、谁承担成本、提出者受同一规则约束时的行动，以及对不同成员解释例外的方式。",
+        "page_specific_signal": "在公共任务相近时比较注意力先到集体一致性、资源维护，还是推动某个具体人的改变。",
+        "alternative_explanation": "分别检验正式职位、法律义务、声誉压力、危机管理、教学责任、组织奖励和文化规范。",
+        "reflection_prompt": "找出共同标准最具选择性的一次事件，说明职位权力、形象管理或其他副型优先级是否解释得更直接。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察一号社群共同标准？",
+          "如何匹配比较一号社群与资源维护？",
+          "如何检验一号社群选择性规则反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察一号社群共同标准？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何匹配比较一号社群与资源维护？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何检验一号社群选择性规则反例？",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "群体规则行为可能来自正式权力、公共问责、教学职责、法律要求、声誉或组织危机。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-1",
+        "/zh/personality/enneagram/type-1/instincts/self-preservation",
+        "/zh/personality/enneagram/type-1/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/one-to-one",
+      "path": "/en/personality/enneagram/type-1/instincts/one-to-one",
+      "title": "One-to-one Type One: focused reform as a traditional hypothesis",
+      "answer_first": "One-to-one Type One is a traditional type-by-instinct hypothesis in which One attention to correction may become especially concentrated in a particular relationship, commitment, or person's change. One focused reform is observable, but it is not proof of biological intensity, compatibility, or a universal subtype.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English one-to-one draft centers on consent, reciprocal standards, and focused reform, independently of the Chinese page's partnership-contract sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "whether one person's improvement receives more urgency than the same issue elsewhere",
+          "how correction changes after the other person withholds consent",
+          "whether reciprocal standards are applied when the speaker is challenged"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Treat focused reform as provisional",
+          "body": "The hypothesis combines Type One standards-and-correction attention with a one-to-one label for concentrated energy toward a particular bond or person. Intensity alone is ambiguous; attachment, conflict history, authority, attraction, caregiving, or immediate harm can focus the same behavior."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match one issue across three priorities",
+          "body": "A matched comparison contrasts focused reform with self-preservation upkeep and social rule-setting. Keep the problem similar, then observe whether attention first targets one person's change, practical maintenance and reserves, or a standard that should govern the wider group."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Reject biological certainty and compatibility claims",
+          "body": "One-to-one is traditional vocabulary, not a biological drive, neurological capacity, fixed intensity trait, or compatibility measure. The label cannot establish relationship quality, attraction, consent, safety, or who should remain together."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Name variation across traditions",
+          "body": "Subtype traditions differ about intensity, anger, and countertypical presentations. Specify the observable proposition rather than importing a whole portrait, and let contradictory events or a clearer relational explanation change the working hypothesis."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test relationship history and power",
+          "body": "A damaged agreement, unequal responsibility, mentoring duty, repeated boundary breach, or safety concern can concentrate correction on one person. Compare other relationships and observe what changes after power, consent, and immediate risk are addressed."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use reciprocal flexibility as a challenge",
+          "body": "A one-to-one Type One counterexample weakens focused reform when urgency vanishes after status changes, standards apply only to the other person, or the person consistently prioritizes private upkeep and public rules over changing a particular bond."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep relational inference modest",
+          "body": "Instrument-specific evidence does not establish universal subtype ontology or cross-cultural equivalence. This draft cannot diagnose either person, predict compatibility or relationship outcomes, certify consent, complete human review, or authorize release."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does intense criticism in a relationship prove one-to-one Type One?",
+          "answer": "No. Intensity may arise from unresolved harm, unequal labor, attachment threat, power, stress, or poor conflict skills. The subtype hypothesis requires repeated One correction attention plus matched comparisons and reciprocal standards."
+        },
+        {
+          "question": "Why is consent part of the observation?",
+          "answer": "Consent distinguishes collaborative change from pressure. Record whether the other person can decline, propose another standard, or end the discussion safely. A typology label never overrides boundaries, autonomy, or evidence of harm."
+        },
+        {
+          "question": "How can focused reform be compared with social Type One?",
+          "answer": "Use the same issue across settings. Focused reform directs urgency toward a particular person or bond; social Type One directs attention toward rules and examples for a group. Role authority and relationship history may still explain either pattern."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Choose one recurring disagreement with clear consent to reflect, plus two comparable issues involving a group rule and a practical maintenance task.",
+        "observable_signal": "Record whose change receives urgency, whether the standard is reciprocal, how refusal is handled, and which concrete repair follows.",
+        "page_specific_signal": "Compare focused reform of one bond with group-wide standard-setting and private upkeep while keeping the underlying issue as similar as possible.",
+        "alternative_explanation": "Test conflict history, unequal labor, attraction, mentoring duty, power, boundary breaches, immediate risk, and communication skill against the subtype.",
+        "reflection_prompt": "Identify the event where urgency followed power or history rather than reciprocal standards and state which explanation should replace or weaken the subtype."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does one-to-one Type One focused reform appear?",
+          "Which matched comparison contrasts focused reform with upkeep?",
+          "Which one-to-one Type One counterexample weakens focused reform?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does one-to-one Type One focused reform appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which matched comparison contrasts focused reform with upkeep?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which one-to-one Type One counterexample weakens focused reform?",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Focused correction may reflect conflict history, unequal responsibility, mentoring, attraction, boundary breaches, power, or immediate safety needs."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-1",
+        "/en/personality/enneagram/type-1/instincts/self-preservation",
+        "/en/personality/enneagram/type-1/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/one-to-one",
+      "path": "/zh/personality/enneagram/type-1/instincts/one-to-one",
+      "title": "一号一对一副型：特定关系中的集中改革假设",
+      "answer_first": "一号一对一副型是传统的“类型 × 本能”假设，观察一号式纠偏是否特别集中在某段关系、承诺或某个人的改变上。观察一号一对一集中改革，需要记录标准是否互惠、对方能否拒绝，以及同类问题在群体和维护情境中的优先级。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文一号一对一页由伙伴约定、互惠标准和拒绝后的处理独立展开，没有翻译英文页面的权力分析顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "countertype_variation",
+          "反证练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "同一个问题发生在不同关系时改革急迫度的差异",
+          "对方拒绝改变后是否尊重界限并调整标准",
+          "要求他人修正时能否接受对等反馈和同一约束"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "countertype_variation",
+          "heading": "先承认传统描述有分歧",
+          "body": "不同副型流派对强度、愤怒和所谓反型的说法并不一致。记录时要提出一个可观察命题，不把整套人物画像一次套入；相反事件或更清楚的关系解释应能改变假设。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "说明集中改革假设",
+          "body": "该传统组合把一号的标准与修订关注，同一对一标签下针对特定关系或个人的集中精力放在一起。强烈表达本身很含混，依恋威胁、旧冲突、照护责任、吸引、权力或现实伤害都可能造成类似集中。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配比较关系、群体和维护",
+          "body": "匹配比较一号一对一与群体规则时，可看注意力先到某个人的改变还是全体规范；再与自保比较，查看物资维护是否优先。应尽量保持问题性质、责任和后果相似。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "拒绝生物确定性与适配结论",
+          "body": "一对一在此是传统观察词，不是生物驱力、神经能力、固定强度或关系适配指标。它不能证明吸引、同意、安全、关系质量，也不能决定谁应该继续或结束一段关系。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检查关系历史和权力",
+          "body": "破损承诺、责任不对等、带教任务、反复越界或安全风险，都可能让纠偏集中在一个人身上。要比较其他关系，并观察权力、同意和即时风险改变后行为是否随之变化。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用互惠与灵活性制造反证",
+          "body": "检验一号一对一互惠反例，可寻找地位变化后急迫感消失、标准只约束对方，或在相似问题中长期优先私人维护和群体规则而非特定关系改革的事件。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "限制关系推断",
+          "body": "具体工具证据不能建立普遍副型本体或跨文化等价。本页不能诊断任何一方、预测关系适配或结果、认证同意、表示人工审核完成，也不授权发布与索引。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "关系中批评很强烈就能证明一号一对一吗？",
+          "answer": "不能。强烈可能来自旧伤、分工失衡、依恋威胁、权力、压力或不成熟的冲突技能。需要看到一号式标准关注、跨情境匹配比较和互惠约束，才能保留这个次级假设。"
+        },
+        {
+          "question": "为什么观察时必须记录同意？",
+          "answer": "同意能区分共同改变与施压。要记录对方是否能安全拒绝、提出其他标准或结束讨论；任何类型语言都不能越过自主权、边界或现实伤害证据。"
+        },
+        {
+          "question": "怎样比较一对一与社群一号？",
+          "answer": "用相同问题跨情境观察：一对一假设把急迫集中到某个人或关系，社群一号更关注群体规则和示范。岗位权力、关系历史和现实风险仍可能更直接地解释两种表现。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "选择一段双方同意复盘的反复分歧，再选一个相似的群体规则问题和一个实际维护问题进行匹配比较。",
+        "observable_signal": "记录谁的改变最急迫、标准是否互惠、拒绝如何被处理，以及最后发生了哪项可观察修复。",
+        "page_specific_signal": "在底层问题尽量相近时，比较特定关系改革、全体规范与私人维护三种优先级。",
+        "alternative_explanation": "逐项检查旧冲突、分工不等、吸引、带教责任、权力、越界、即时风险和沟通技能。",
+        "reflection_prompt": "找出急迫主要跟随权力或历史的一次事件，说明哪种解释应替代或降低一对一副型权重。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察一号一对一集中改革？",
+          "如何匹配比较一号一对一与群体规则？",
+          "如何检验一号一对一互惠反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察一号一对一集中改革？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何匹配比较一号一对一与群体规则？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何检验一号一对一互惠反例？",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "集中纠偏可能来自旧冲突、责任不等、带教、吸引、越界、权力或即时安全需要，不能直接归入副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-1",
+        "/zh/personality/enneagram/type-1/instincts/self-preservation",
+        "/zh/personality/enneagram/type-1/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ],
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}
