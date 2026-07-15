@@ -449,7 +449,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         foreach ([
             ['Gut, heart, and head are biological systems.', 'unsupported_center_system_claim'],
             ['The centers are neuroscience categories.', 'unsupported_center_system_claim'],
+            ['Each center is a fixed capacity.', 'unsupported_center_system_claim'],
             ['中心是生物系统。', 'unsupported_center_system_claim'],
+            ['每个中心都是固定能力。', 'unsupported_center_system_claim'],
             ['Guaranteed search ranking and AI citation outcome.', 'unsupported_discoverability_claim'],
             ['This guide ensures traffic lift.', 'unsupported_discoverability_claim'],
             ['保证搜索排名和AI引用。', 'unsupported_discoverability_claim'],
@@ -465,6 +467,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
         foreach ([
             'Centers are not biological systems.',
+            'Centers are not fixed capacities.',
+            '中心不是固定能力。',
             'This page does not guarantee search ranking or AI citation outcomes.',
             '本页不能保证搜索排名或AI引用。',
         ] as $limitation) {
@@ -671,9 +675,14 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'FermatMind Enneagram has instrument equivalence with RHETI',
             'Wing validity is supported by research',
             'Instinctual subtypes have cross-cultural equivalence',
+            'Universal subtype ontology is established',
+            'Cited evidence transfers automatically to FermatMind scores',
+            'The study findings apply to FermatMind translations',
             '费马测试九型人格与 RHETI 具有工具等价性',
             '翼型效度得到研究支持',
             '本能副型具有跨文化等价性',
+            '普遍副型本体已经成立',
+            '研究结果转移到费马测试分数',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -681,16 +690,24 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
 
             $this->assertFalse($result['ok'], $phrase);
-            $this->assertContains('unsupported_equivalence_or_validity_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+            $expectedCode = str_contains($phrase, 'FermatMind scores') || str_contains($phrase, 'FermatMind translations') || str_contains($phrase, '费马测试分数')
+                ? 'unsupported_fermatmind_evidence_transfer_claim'
+                : 'unsupported_equivalence_or_validity_claim';
+            $this->assertContains($expectedCode, collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
         foreach ([
             'FermatMind does not establish instrument equivalence with RHETI.',
             'Current research does not establish wing validity.',
             'One study does not establish instinctual subtype cross-cultural equivalence.',
+            'One study does not establish universal subtype ontology.',
+            'Cited evidence does not transfer to FermatMind scores.',
+            'Study findings do not apply to FermatMind translations.',
             '费马测试不能证明工具等价性。',
             '现有证据不能证明翼型效度。',
             '单一研究不能证明本能副型具有跨文化等价性。',
+            '单一研究不能证明普遍副型本体。',
+            '研究结果不能转移到费马测试分数。',
         ] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;

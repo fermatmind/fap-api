@@ -329,9 +329,11 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const FERMATMIND_PSYCHOMETRICS_PATTERN = '/(?:(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,80}(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)|(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)[^.!?。！？\n]{0,80}(?:fermatmind|费马测试|费马测评))/iu';
 
-    private const UNSUPPORTED_EQUIVALENCE_PATTERN = '/(?:(?:instrument|scale)[\s-]*(?:equivalence|equivalent)|(?:工具|量表)(?:等价性?|等效性?)|(?:enneagram[\s-]+)?wings?[\s-]+validity|翼型效度|(?:instinctual[\s-]+)?subtypes?[^.!?。！？\n]{0,40}(?:universality|universal|cross[\s-]+cultural[\s-]+equivalence)|(?:本能)?副型[^。！？\n]{0,30}(?:普遍性|普遍有效|跨文化等价性?))/iu';
+    private const FERMATMIND_EVIDENCE_TRANSFER_PATTERN = '/(?:(?:transfer|apply|generalize)(?:s|d)?[^.!?。！？\n]{0,50}(?:to\s+)?(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,30}(?:scores?|translations?|individual[\s-]+interpretations?)|(?:转移|适用|推广)到?(?:费马测试|费马测评)[^。！？\n]{0,30}(?:分数|得分|翻译|个体解释))/iu';
 
-    private const UNSUPPORTED_CENTER_SYSTEM_PATTERN = '/(?:(?:biological|diagnostic|neurological|neuroscience)[\s-]+(?:systems?|categories?|capacities?)|(?:生物|诊断|神经|神经科学)(?:系统|类别|能力))/iu';
+    private const UNSUPPORTED_EQUIVALENCE_PATTERN = '/(?:(?:instrument|scale)[\s-]*(?:equivalence|equivalent)|(?:工具|量表)(?:等价性?|等效性?)|(?:enneagram[\s-]+)?wings?[\s-]+validity|翼型效度|(?:instinctual[\s-]+)?subtypes?[^.!?。！？\n]{0,40}(?:universality|universal|cross[\s-]+cultural[\s-]+equivalence)|universal[\s-]+subtype[\s-]+ontology|(?:本能)?副型[^。！？\n]{0,30}(?:普遍性|普遍有效|跨文化等价性?)|普遍(?:性)?副型本体)/iu';
+
+    private const UNSUPPORTED_CENTER_SYSTEM_PATTERN = '/(?:(?:biological|diagnostic|neurological|neuroscience)[\s-]+(?:systems?|categories?|capacities?)|fixed[\s-]+capacit(?:y|ies)|(?:生物|诊断|神经|神经科学)(?:系统|类别|能力)|固定(?:能力|容量))/iu';
 
     private const UNSUPPORTED_DISCOVERABILITY_PATTERN = '/(?:(?:guarantee(?:d|s|ing)?|ensure[sd]?|deliver(?:s|ed)?|boost(?:s|ed)?|increase[sd]?|improve[sd]?)[^.!?。！？\n]{0,60}(?:search[\s-]+rankings?|traffic(?:[\s-]+lift)?|ai[\s-]+citations?|citation[\s-]+outcomes?)|(?:search[\s-]+rankings?|traffic[\s-]+lift|ai[\s-]+citations?|citation[\s-]+outcomes?)[^.!?。！？\n]{0,30}(?:guarantee(?:d)?|assured)|(?:保证|确保|提升|增加)[^。！？\n]{0,30}(?:搜索排名|流量(?:提升)?|AI引用|人工智能引用))/iu';
 
@@ -906,6 +908,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         foreach ([
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::FERMATMIND_PSYCHOMETRICS_PATTERN, 'unsupported_fermatmind_psychometrics_claim'],
+            [self::FERMATMIND_EVIDENCE_TRANSFER_PATTERN, 'unsupported_fermatmind_evidence_transfer_claim'],
             [self::UNSUPPORTED_EQUIVALENCE_PATTERN, 'unsupported_equivalence_or_validity_claim'],
             [self::UNSUPPORTED_CENTER_SYSTEM_PATTERN, 'unsupported_center_system_claim'],
             [self::UNSUPPORTED_DISCOVERABILITY_PATTERN, 'unsupported_discoverability_claim'],
@@ -1037,6 +1040,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         return $this->withoutExplicitlyNegatedMatches($text, [
             self::UNSUPPORTED_CLAIM_PATTERN,
             self::FERMATMIND_PSYCHOMETRICS_PATTERN,
+            self::FERMATMIND_EVIDENCE_TRANSFER_PATTERN,
             self::UNSUPPORTED_EQUIVALENCE_PATTERN,
             self::UNSUPPORTED_CENTER_SYSTEM_PATTERN,
             self::UNSUPPORTED_DISCOVERABILITY_PATTERN,
@@ -1089,7 +1093,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             return false;
         }
 
-        $englishNegative = '(?:\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bcan(?:not|[\'’]t)|\b(?:does|did|is|are|was|were|could|will|would|should|must|may|might)n[\'’]t|\bnever)';
+        $englishNegative = '(?:\b(?:do|does|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bcan(?:not|[\'’]t)|\b(?:does|did|is|are|was|were|could|will|would|should|must|may|might)n[\'’]t|\bnever)';
         $directBridge = '(?:\s+yet)?(?:\s+(?:an?|the))?\s*';
         $roleBridge = '\s+(?:(?:be\s+)?(?:used|treated|presented|described)|serve|function)\s+as(?:\s+(?:an?|the))?\s*';
         $claimBridge = '\s+(?:as|provide|offer)(?:\s+(?:an?|the))?\s*';
