@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "2955c8791f6ce1e33af4048e41bda4cefbaf9593",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -92619,7 +92619,8 @@
     "public_runtime_change": false,
     "transitions": [
       {"at": "2026-07-15T09:38:54Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR47 from the exact merged PR46 base. Scope is restricted to deterministic pending review/rollback/authorization artifacts, a read-only package/database preflight, exact cohort and identity drift guards, focused tests, and PR46 ledger reconciliation; no promotion writer, production command, CMS/database mutation, public release, indexability, Search, cache, or deploy action is allowed."},
-      {"at": "2026-07-15T09:58:29Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local checks passed on the exact 14-path scope. The package remains fail closed with 231 assets, 229 working revisions, two preserved product shells, 16 cohorts, zero manual reviews, zero authorizations, zero promotion eligibility, and every database/CMS/public/indexability/Search/cache/deploy action fixed at zero; no production write or promotion occurred."}
+      {"at": "2026-07-15T09:58:29Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local checks passed on the exact 14-path scope. The package remains fail closed with 231 assets, 229 working revisions, two preserved product shells, 16 cohorts, zero manual reviews, zero authorizations, zero promotion eligibility, and every database/CMS/public/indexability/Search/cache/deploy action fixed at zero; no production write or promotion occurred."},
+      {"at": "2026-07-15T09:59:29Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact 14-path implementation and train-registration scope as 2955c8791f6ce1e33af4048e41bda4cefbaf9593 after explicit staging and cached-diff validation. This ledger-only follow-up records the implementation commit before push; production/CMS/database/promotion actions remain zero."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
