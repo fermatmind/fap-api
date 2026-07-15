@@ -502,6 +502,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
     {
         foreach ([
             'This page does not predict your career success.',
+            'This page does not predict salary, turnover, health, admission, legal, or financial outcomes.',
             'This page cannot predict your career success.',
             "This page can't predict income.",
             'This page can’t predict relationship outcomes.',
@@ -536,6 +537,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This page is not a diagnosis and is scientifically proven.', 'unsupported_science_claim'],
             ['This page is not a reflection prompt, it predicts your career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, the guide predicts career success.', 'career_or_relationship_prediction'],
+            ['This page is not a diagnosis, predicts your career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, independent experts have scientifically validated it.', 'unsupported_science_claim'],
             ['This page does not establish validity, FermatMind predicts career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, or it predicts your career success.', 'career_or_relationship_prediction'],
