@@ -168,12 +168,39 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $candidate = $this->candidate();
         $candidate['assets'][0]['sections'][0]['heading'] = 'Predicts your career success';
         $candidate['assets'][1]['sections'][0]['heading'] = 'Career-success predictor';
+        $candidate['assets'][58]['sections'][0]['heading'] = '预测你的职业成功';
 
         $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
         $predictionIssues = collect($result['issues'])->where('code', 'career_or_relationship_prediction');
 
         $this->assertFalse($result['ok']);
-        $this->assertCount(2, $predictionIssues);
+        $this->assertCount(3, $predictionIssues);
+    }
+
+    public function test_generic_seven_day_text_cannot_bypass_the_gate_with_mismatched_duration(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['observation_exercise']['duration_days'] = 6;
+        $candidate['assets'][0]['observation_exercise']['context'] = 'For the next seven days, observe whatever happens during ordinary situations while keeping the metadata duration at six.';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('generic_seven_day_exercise', collect($result['issues'])->pluck('code')->all());
+    }
+
+    public function test_chinese_type_numerals_are_normalized_for_template_detection(): void
+    {
+        $candidate = $this->candidate();
+        $typeOne = $this->localePairIndexes($candidate, 'core_type:type-1')['zh-CN'];
+        $typeTwo = $this->localePairIndexes($candidate, 'core_type:type-2')['zh-CN'];
+        $candidate['assets'][$typeOne]['sections'][0]['body'] = '第一型在这段测试文本中记录一个具体请求发生时最先注意到的信息、被推迟的选项、随后能够被他人观察到的行动，并把推测动机与可见行为分开，再检查角色、文化、疲劳和当下任务是否提供更好的替代解释。';
+        $candidate['assets'][$typeTwo]['sections'][0]['body'] = '第二型在这段测试文本中记录一个具体请求发生时最先注意到的信息、被推迟的选项、随后能够被他人观察到的行动，并把推测动机与可见行为分开，再检查角色、文化、疲劳和当下任务是否提供更好的替代解释。';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
     }
 
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void

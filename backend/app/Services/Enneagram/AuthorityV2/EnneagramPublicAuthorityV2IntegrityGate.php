@@ -327,7 +327,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const UNSUPPORTED_CLAIM_PATTERN = '/(?:scientifically proven|neuroscience proves|clinically validated|absolute(?:ly)? accurate|most accurate personality test|科学(?:已)?证明|神经科学证明|临床验证|绝对准确)/iu';
 
-    private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring)(?:[\s-]+(?:success|outcome|fit))?|(?:career|job|relationship|partner|income|hiring)[\s-]+(?:success[\s-]+)?predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|outcome)|perfect\s+(?:career|job|partner)|预测(?:职业|收入|关系|录用|结果)|保证(?:职业|收入|关系|录用|结果)|最适合的职业|完美伴侣)/iu';
+    private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring)(?:[\s-]+(?:success|outcome|fit))?|(?:career|job|relationship|partner|income|hiring)[\s-]+(?:success[\s-]+)?predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|outcome)|perfect\s+(?:career|job|partner)|预测(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果)(?:成功|结果|适配)?|保证(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果)(?:成功|结果)?|最适合的职业|完美伴侣)/iu';
 
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
 
@@ -600,7 +600,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         if (! is_int($duration) || $duration < 1 || $duration > 14) {
             $add(self::EDITORIAL_GATES[5], 'exercise_duration_invalid', $key, "{$path}.observation_exercise.duration_days", 'Exercise duration must be an integer from 1 to 14 days.');
         }
-        if ($duration === 7 && preg_match(self::GENERIC_EXERCISE_PATTERN, json_encode($exercise, JSON_UNESCAPED_UNICODE) ?: '') === 1) {
+        if (preg_match(self::GENERIC_EXERCISE_PATTERN, json_encode($exercise, JSON_UNESCAPED_UNICODE) ?: '') === 1) {
             $add(self::EDITORIAL_GATES[5], 'generic_seven_day_exercise', $key, "{$path}.observation_exercise", 'A generic seven-day observation prompt is not page-specific.');
         }
     }
@@ -753,7 +753,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 }
                 $paragraphs[$normalized] = ['key' => $key, 'path' => "{$path}.text.{$index}"];
 
-                $template = preg_replace('/(?:type[1-9]|[1-9]w[1-9]|(?:sp|so|sx)[-_]?[1-9]|第?[1-9]型)/iu', '{type}', $normalized) ?? $normalized;
+                $template = preg_replace('/(?:type[1-9]|[1-9]w[1-9]|(?:sp|so|sx)[-_]?[1-9]|第?(?:[1-9]|[一二三四五六七八九])型)/iu', '{type}', $normalized) ?? $normalized;
                 if (isset($typeTemplates[$template])) {
                     $add(self::EDITORIAL_GATES[3], 'type_number_substitution_template', $key, "{$path}.text.{$index}", "Text differs from {$typeTemplates[$template]['path']} only by a type label or number.");
                 }
