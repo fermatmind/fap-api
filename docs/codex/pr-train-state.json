@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "bcda6ea0b8336b692a939c2e269dc818bb41e51c",
+    "commit_sha": "ecc8d4530cabba2e013bea107cf7bf52d5c3d300",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed under the concurrency guard: combined PR08 and PR02 feature suites 46 tests / 1814 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Evidence-transfer verbs now explicitly cover transfer/transfers/transferred, apply/applies/applied, and generalize/generalizes/generalized, while do-not-apply limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed under the concurrency guard: combined PR08 and PR02 feature suites 46 tests / 1853 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Standalone human, expert, editor, editorial, and editorially approved wording plus Chinese editor approval now fails closed while direct negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head db36c1eec before the same-head review added one valid in-scope P2 finding: the apply verb pattern used invalid applys/applyd forms and missed applies/applied. The locally verified substantive fix head bcda6ea0b enumerates correct inflections and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 60b9c1ead before the same-head review added one valid in-scope P2 finding: standalone editor/expert/editorially approved wording could pass pending manual review. The locally verified substantive fix head ecc8d4530 adds negation-aware bilingual standalone approval coverage and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All eighty-five valid P2 findings are fixed. Evidence-transfer claim safety now covers correct transfer, apply, and generalize inflections while retaining direct negation support. PR08+PR02 pass 46 tests / 1814 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All eighty-six valid P2 findings are fixed. Visible review truth now also blocks standalone editor, expert, editorial, and editorially approved claims in English plus editor approval in Chinese while retaining direct negation support. PR08+PR02 pass 46 tests / 1853 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93715,9 +93715,14 @@
           "at": "2026-07-15T19:50:26Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed and same-head Codex review completed on ledger head db36c1eec, then one valid P2 was fixed: evidence-transfer verbs now enumerate correct transfer/transfers/transferred, apply/applies/applied, and generalize/generalizes/generalized forms instead of invalid mechanical suffixes. PR08+PR02 pass 46 / 1814, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:59:18Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 60b9c1ead, then one valid P2 was fixed: standalone human/expert/editor/editorial/editorially approved and Chinese editor-approved wording now fails visible review truth while direct negative limitations remain allowed. PR08+PR02 pass 46 / 1853, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-      "updated_at": "2026-07-15T19:50:26Z"
+      "updated_at": "2026-07-15T19:59:18Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
