@@ -63,6 +63,17 @@ final class EnneagramPublicAuthorityV207SourceLedgerTest extends TestCase
         }
     }
 
+    public function test_product_boundary_source_directly_supports_non_diagnostic_and_non_predictive_use(): void
+    {
+        $source = collect($this->readJson(self::PACKAGE_DIR.'/source-registry.json')['sources'])
+            ->firstWhere('id', 'fermatmind_public_claim_boundary');
+        $contents = file_get_contents(base_path($source['internal_path'])) ?: '';
+
+        $this->assertStringContainsString('Do not present FermatMind as a diagnosis product', $contents);
+        $this->assertStringContainsString('career-success predictor', $contents);
+        $this->assertStringContainsString('hiring-fit product', $contents);
+    }
+
     public function test_truity_is_competitor_intent_only(): void
     {
         $registry = $this->readJson(self::PACKAGE_DIR.'/source-registry.json');
