@@ -19347,7 +19347,7 @@ prs:
       - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-event-taxonomy-01.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - php -r "require 'backend/vendor/autoload.php'; Symfony\\Component\\Yaml\\Yaml::parseFile('docs/codex/pr-train.yaml'); echo 'yaml ok'.PHP_EOL;"
       - git diff --check
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
@@ -21376,7 +21376,7 @@ prs:
     base: main
     title: "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema"
     train_scope: big5_career_bridge_schema
-    status: github_checks_pending
+    status: merged
     scope:
       - Define executable backend-owned Big Five-to-Career input and output JSON Schemas.
       - Enforce published Big Five revision selection, Career runtime projection eligibility, explanation-only claims, and private-data absence.
@@ -21422,6 +21422,63 @@ prs:
     discoverability_mutation_allowed: false
     content_authority: backend_published_public_projection_only
     next_task: BIG5-CAREER-BRIDGE-AUDITOR-02
+
+  - id: BIG5-CAREER-BRIDGE-AUDITOR-02
+    repo: fap-api
+    depends_on:
+      - BIG5-CAREER-BRIDGE-SCHEMA-01
+    branch: codex/big5-career-bridge-auditor-02
+    base: main
+    title: "BIG5-CAREER-BRIDGE-AUDITOR-02: feat(career): add read-only Big Five career bridge auditor"
+    train_scope: big5_career_bridge_auditor
+    status: github_checks_pending
+    scope:
+      - Add a read-only CLI that audits bridge candidates against explicit Big Five published/public and Career runtime publish projections.
+      - Emit deterministic JSON or Markdown counts, blocker breakdown, safe source provenance, and claim/private-data boundaries.
+      - Consume the isolated merged locale baseline repair while retaining en/zh-CN Big Five authority and en/zh Career runtime projection contracts.
+      - Reconcile the merged and cleaned PR12 dependency facts needed by this train.
+    allowed_paths:
+      - .agents/skills/fap-api-career-release-authority/SKILL.md
+      - backend/app/Console/Commands/CareerAuditBigFiveBridge.php
+      - backend/app/Domain/Career/Bridge/BigFiveCareerBridgeAuditor.php
+      - backend/docs/career/big-five-career-bridge-auditor-02.md
+      - backend/tests/Feature/Console/CareerAuditBigFiveBridgeCommandTest.php
+      - backend/tests/Fixtures/Career/BigFiveCareerBridgeAuditFixture.php
+      - backend/tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeAuditorTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a public route, API, frontend consumer, fallback copy, occupation ranking, best-career list, hiring use, outcome prediction, or pSEO surface.
+      - Select Big Five working/draft revisions or generated Authority V2 packages, or read private scores, percentiles, answers, selector traces, attempt/report links, users, orders, or payments.
+      - Write CMS/database/cache/search state, mutate sitemap/LLMS/indexability, deploy, migrate production schema, promote content, or publish a bridge candidate.
+    validation:
+      - php -l backend/app/Console/Commands/CareerAuditBigFiveBridge.php
+      - php -l backend/app/Domain/Career/Bridge/BigFiveCareerBridgeAuditor.php
+      - php -l backend/app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeAuditorTest.php tests/Feature/Console/CareerAuditBigFiveBridgeCommandTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_big_five_career_bridge_read_only_boundary' --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerAuditBigFiveBridge.php app/Domain/Career/Bridge/BigFiveCareerBridgeAuditor.php app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php tests/Feature/Console/CareerAuditBigFiveBridgeCommandTest.php tests/Fixtures/Career/BigFiveCareerBridgeAuditFixture.php tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeAuditorTest.php tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json >/dev/null
+      - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - php -r "require 'backend/vendor/autoload.php'; Symfony\\Component\\Yaml\\Yaml::parseFile('docs/codex/pr-train.yaml'); echo 'yaml ok'.PHP_EOL;"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: false
+    cms_mutation_allowed: false
+    public_runtime_change: false
+    discoverability_mutation_allowed: false
+    content_authority: backend_published_public_projection_only
+    next_task: null
 
   - id: RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01
     repo: fap-api
