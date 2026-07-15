@@ -509,8 +509,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'This is not a precise career recommendation.',
             'This page is not a career success guarantee.',
             'This page does not guarantee job fit.',
+            'This page is not a diagnosis or a hiring screen.',
             '本页不能预测你的职业成功。',
             '本页并非精准职业推荐。',
+            '本页不是诊断或招聘适配工具。',
         ] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
@@ -537,8 +539,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This page is not a diagnosis, independent experts have scientifically validated it.', 'unsupported_science_claim'],
             ['This page does not establish validity, FermatMind predicts career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, or it predicts your career success.', 'career_or_relationship_prediction'],
+            ['This page is not a diagnosis or it predicts your career success.', 'career_or_relationship_prediction'],
             ['本页不能作为诊断，但能预测你的职业成功。', 'career_or_relationship_prediction'],
             ['本页不是诊断，或能预测你的职业成功。', 'career_or_relationship_prediction'],
+            ['本页不是诊断或它预测你的职业成功。', 'career_or_relationship_prediction'],
             ['本页不是诊断并且能预测你的职业成功。', 'career_or_relationship_prediction'],
             ['本页不是反思提示，它预测你的职业成功。', 'career_or_relationship_prediction'],
             ['This page does not require signup before it predicts your career success.', 'career_or_relationship_prediction'],
