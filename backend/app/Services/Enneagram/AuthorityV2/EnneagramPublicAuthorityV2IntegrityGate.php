@@ -967,6 +967,11 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private function hasExplicitNegativePrefix(string $prefix): bool
     {
+        $commaLedEnglishClause = '/,\s*(?:(?:it|this|that|we|you|they|he|she|there)|(?:an?|the|this|that|these|those|our|your|their|its)\s+[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,3}|[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,2}\s+(?:is|are|was|were|has|have|had|does|do|did|can|could|will|would|should|must|may|might))\s*$/iu';
+        if (preg_match($commaLedEnglishClause, $prefix) === 1) {
+            return false;
+        }
+
         $englishNegative = '(?:\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bcan(?:not|[\'’]t)|\b(?:does|did|is|are|was|were|could|will|would|should|must|may|might)n[\'’]t|\bnever)';
         $directBridge = '(?:\s+(?:an?|the))?\s*';
         $roleBridge = '\s+(?:(?:be\s+)?(?:used|treated|presented|described)|serve|function)\s+as(?:\s+(?:an?|the))?\s*';
