@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "e0258e45fb13fcac741943c46e5f60a90c7737b7",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -42455,7 +42455,7 @@
     "id": "SECURITY-103-API-06",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3118",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -52363,7 +52363,7 @@
       },
       {
         "at": "2026-05-27T18:08:22+08:00",
-        "status": "local_checks_passed",
+    "status": "github_checks_pending",
         "summary": "Composer audit, route list, migrate pretend, Pint, backend MBTI CI, diff check, JSON parse, and YAML parse passed locally."
       },
       {
@@ -55971,10 +55971,10 @@
         "evidence": "Final executable input/output schemas parse and remain strict; focused BigFiveCareerBridgeContractTest passed 7 tests / 58 assertions. PHP syntax, touched-file Pint, route discovery (239 rows), Composer validate, Composer audit, JSON/YAML parse, git diff --check, and exact 8-path scope validation passed. After the contract was strengthened with exact source hashes, nested authority projections, recursive privacy/claim guards, and candidate/review denial, the guarded full bash backend/scripts/ci_verify_mbti.sh run completed every gate through the strict queue probe, including Big Five 1474 tests / 181299 assertions and personality full-32 71 tests / 5371 assertions. Its 13 generated compiled changes were restored after process exit.",
           "status": "pass"
         },
-        "github": {
-          "evidence": null,
-          "status": "pending"
-        }
+    "github": {
+      "evidence": "PR #3118 opened at implementation head e0258e45fb13fcac741943c46e5f60a90c7737b7; required GitHub checks are queued.",
+      "status": "pending"
+    }
       },
       "commit_sha": null,
       "depends_on": [
@@ -56015,6 +56015,12 @@
       "from": "local_checks_passed",
       "note": "Revalidated the strengthened final contract: focused 7/58, strict schema/PHP/Pint checks, exact 8-path scope, and guarded full CI through the strict queue probe with Big Five 1474/181299 and personality full-32 71/5371. Restored all 13 validation-generated compiled diffs; no production or public mutation occurred.",
       "to": "local_checks_passed_final"
+    },
+    {
+      "at": "2026-07-15T20:20:07Z",
+      "from": "local_checks_passed_final",
+      "note": "Committed exact 8-path scope at e0258e45fb13fcac741943c46e5f60a90c7737b7, pushed the scoped branch, and opened the single required PR #3118. GitHub required checks are queued.",
+      "to": "github_checks_pending"
     }
       ]
     },
