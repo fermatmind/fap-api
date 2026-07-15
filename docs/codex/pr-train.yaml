@@ -43451,7 +43451,7 @@ prs:
     validation:
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php tests/Feature/SEO/EnneagramPublicAuthorityV204PublicContractTest.php --no-ansi
-      - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV2*Test.php --filter=public_contract --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --filter=big_five_v2_public_contract --no-ansi
       - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

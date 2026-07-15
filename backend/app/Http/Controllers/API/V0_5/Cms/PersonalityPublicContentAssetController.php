@@ -389,7 +389,10 @@ final class PersonalityPublicContentAssetController extends Controller
             'personality_public_content_asset_v1' => $v1,
         ];
 
-        if ((string) $asset->framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
+        if (in_array((string) $asset->framework, [
+            PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+        ], true)) {
             $response['personality_public_content_asset_v2'] = $this->assetPayloadV2(
                 $asset,
                 (bool) ($v1['schema_runtime_eligible'] ?? false),

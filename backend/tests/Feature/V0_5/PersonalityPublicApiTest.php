@@ -1967,7 +1967,7 @@ final class PersonalityPublicApiTest extends TestCase
 
         foreach ([
             '/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en' => true,
-            '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en' => false,
+            '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en' => true,
         ] as $path => $expectsAuthorityV2) {
             $response = $this->getJson($path)->assertOk();
             $payload = $response->json();
