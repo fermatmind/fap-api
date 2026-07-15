@@ -124,12 +124,13 @@ prs:
     branch: codex/big5-authority-v2-media-authority-41
     depends_on: [BIG5-AUTHORITY-V2-TOPIC-RUNTIME-40]
     train_scope: big5_authority_v2_approved_media_intake_and_zero_write_mapping_preflight
-    status: github_checks_pending
+    status: github_checks_retry_pending
     goal: "Consume PR34's exact 231-page / 693-slot / 18-family-locale-group inventory; validate only operator-approved, public-safe Media Library identity, variant, locale, alt, rights/license, provenance, approval, and content identity; generate deterministic mapping/hash/dry-run artifacts; keep every slot missing_pending when approved assets are absent; perform zero uploads and zero CMS/Media Library writes."
     allowed_paths:
       - backend/app/Services/BigFive/AuthorityV2/MediaAuthority/**
       - backend/app/Console/Commands/PersonalityBigFiveAuthorityV241*.php
       - backend/tests/Feature/SEO/BigFiveAuthorityV241Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-media-authority-41/**
       - generated/big-five-authority-v2/big5-authority-v2-media-authority-41/**
       - generated/pr-train-sidecar-issues/BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41.*
@@ -144,7 +145,7 @@ prs:
       - node generated/big-five-authority-v2/big5-authority-v2-media-authority-41/build-package.mjs
       - node generated/big-five-authority-v2/big5-authority-v2-media-authority-41/validate-package.mjs
       - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV241Test.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/BigFive/AuthorityV2/MediaAuthority/BigFiveAuthorityV2MediaMappingPreflight.php app/Console/Commands/PersonalityBigFiveAuthorityV241MediaIntake.php tests/Feature/SEO/BigFiveAuthorityV241Test.php
+      - cd backend && vendor/bin/pint --test app/Services/BigFive/AuthorityV2/MediaAuthority/BigFiveAuthorityV2MediaMappingPreflight.php app/Console/Commands/PersonalityBigFiveAuthorityV241MediaIntake.php tests/Feature/SEO/BigFiveAuthorityV241Test.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan list --raw | grep '^personality:big-five-authority-v2-media-intake '
       - bash backend/scripts/ci_verify_mbti.sh
       - PHP/JSON/YAML/JS syntax checks for touched files
