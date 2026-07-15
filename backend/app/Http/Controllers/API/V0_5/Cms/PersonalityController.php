@@ -1712,7 +1712,7 @@ class PersonalityController extends Controller
             'answer_scope' => $isIndexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => 'personality_public_detail',
             'summary_blocks' => $summaryBlocks,
-            'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
+            'faq_blocks' => $this->profileFaqBlocks($sections),
             'compare_blocks' => $compareBlocks,
             'scene_summary_blocks' => $sceneSummaryBlocks,
             'next_step_blocks' => $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
@@ -1754,6 +1754,53 @@ class PersonalityController extends Controller
                 'scale_code' => $this->normalizedProfileScaleCode($profile),
             ],
         ]);
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $sections
+     * @return list<array<string,string|null>>
+     */
+    private function profileFaqBlocks(array $sections, int $limit = 4): array
+    {
+        $faqBlocks = $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections, $limit);
+        if ($faqBlocks !== [] || $limit <= 0) {
+            return $faqBlocks;
+        }
+
+        foreach ($sections as $section) {
+            if (! is_array($section) || strtolower((string) ($section['section_key'] ?? '')) !== 'mbti64_promotion_metadata') {
+                continue;
+            }
+
+            $items = data_get($section, 'payload_json.raw_row.faq', []);
+            if (! is_array($items)) {
+                continue;
+            }
+
+            foreach ($items as $index => $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                $question = $this->normalizedString($item['question'] ?? $item['q'] ?? null);
+                $answer = $this->normalizedString($item['answer'] ?? $item['a'] ?? null);
+                if ($question === null && $answer === null) {
+                    continue;
+                }
+
+                $faqBlocks[] = [
+                    'key' => $this->normalizedString($item['key'] ?? $item['id'] ?? null) ?? 'mbti64-promotion-faq-'.$index,
+                    'question' => $question,
+                    'answer' => $answer,
+                ];
+
+                if (count($faqBlocks) >= $limit) {
+                    return $faqBlocks;
+                }
+            }
+        }
+
+        return $faqBlocks;
     }
 
     /**
