@@ -93339,8 +93339,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "420a09d9dcdb8c26a40fc08c7ca89ae5ad7b3668",
+    "status": "review_fixes_local_verified",
+    "commit_sha": "cf7dda626030953b6282eab71c1811e352c06ed9",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; the paired negated-list and causal-as regressions pass 2 tests / 292 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. A subject-led causal as clause terminates earlier negation, while never as diagnosis, fixed identity and other coordinated prohibited-use lists remain fully negated. The first focused retry exposed an oversized PCRE branch and the final implementation replaced it with a small pre-check before these passing validations. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; publication-context and clinical-utility regressions pass 2 tests / 442 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Published-study evidence remains allowed while this-page publication state and English/Chinese unsupported clinical-utility claims fail closed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
-        "status": "pass",
-        "evidence": "All nine required checks passed on ledger head a95ddcb179. GitHub reports CLEAN/MERGEABLE, the Codex clean-review comment explicitly records Reviewed commit a95ddcb179 with no major issues, and GraphQL reports zero unresolved review threads."
+        "status": "pending",
+        "evidence": "All nine required checks passed on ready-ledger head 57a4d3c14 before the final same-head review added two valid in-scope P2 findings: standalone published overmatched source-study evidence, and unsupported clinical-utility claims were not blocked. The locally verified substantive fix head cf7dda626 qualifies publication context and adds English/Chinese clinical-utility safety coverage; fresh GitHub checks are required."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,13 +93366,13 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All eighty-nine valid P2 findings are fixed. Subject-led causal as clauses terminate earlier explicit-negation scope without truncating coordinated never as prohibited-use lists. The paired regressions pass 2 / 292, combined PR08+PR02 feature suites exit successfully, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All ninety-one valid P2 findings are fixed. Published research evidence no longer impersonates page release state, while this-page publication and unsupported English/Chinese clinical-utility claims fail closed. The paired regressions pass 2 / 442, combined PR08+PR02 feature suites exit successfully, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93740,9 +93740,14 @@
           "at": "2026-07-15T20:40:55Z",
           "status": "ready_to_merge",
           "note": "All nine required checks passed on ledger head a95ddcb179, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit a95ddcb179, and all review threads are resolved. Final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. The ready-ledger head must complete one final CI and same-head review round before squash merge."
+        },
+        {
+          "at": "2026-07-15T20:50:50Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ready-ledger head 57a4d3c14, then final same-head review added two valid P2 findings. Publication-state matching now requires page/release context so published Enneagram research evidence remains allowed, and English/Chinese unsupported clinical-utility claims now fail closed while explicit limitations pass. Targeted regressions pass 2 / 442, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-    "updated_at": "2026-07-15T20:40:55Z"
+    "updated_at": "2026-07-15T20:50:50Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
