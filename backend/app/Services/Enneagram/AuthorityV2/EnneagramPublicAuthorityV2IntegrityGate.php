@@ -667,10 +667,14 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $questionAnswers = is_array($answerability['question_answers'] ?? null) ? $answerability['question_answers'] : [];
         $minimumQuestionLength = ($asset['locale'] ?? null) === 'zh-CN' ? 8 : 12;
         $minimumAnswerLength = ($asset['locale'] ?? null) === 'zh-CN' ? 40 : 80;
-        $normalizedQuestions = array_values(array_unique(array_filter(array_map(
-            fn (mixed $question): string => $this->normalize($question),
-            $questions,
-        ))));
+        $questionTexts = [];
+        foreach ($questions as $question) {
+            $normalizedQuestion = $this->normalize($question);
+            if ($normalizedQuestion !== '' && ! isset($questionTexts[$normalizedQuestion])) {
+                $questionTexts[$normalizedQuestion] = trim((string) $question);
+            }
+        }
+        $normalizedQuestions = array_keys($questionTexts);
         if (($answerability['direct_answer_supported'] ?? null) !== true
             || count($normalizedQuestions) < 3
             || min(array_map('mb_strlen', $normalizedQuestions ?: [''])) < $minimumQuestionLength) {
@@ -691,7 +695,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $mappingInvalid = count($mappedAnswers) !== count($normalizedQuestions);
         foreach ($normalizedQuestions as $question) {
             $visibleAnswer = isset($mappedAnswers[$question]) ? $this->visibleAnswerAtPath($asset, $mappedAnswers[$question]) : null;
-            if ($this->length($visibleAnswer) < $minimumAnswerLength) {
+            if ($this->length($visibleAnswer) < $minimumAnswerLength
+                || ! $this->visibleAnswerSupportsQuestion($questionTexts[$question], (string) $visibleAnswer)) {
                 $mappingInvalid = true;
                 break;
             }
@@ -699,6 +704,30 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         if ($mappingInvalid) {
             $add(self::EDITORIAL_GATES[6], 'geo_answerability_unverified', $key, "{$path}.answerability.question_answers", 'Every declared question must map to a substantive visible answer-first, section body, or FAQ answer.');
         }
+    }
+
+    private function visibleAnswerSupportsQuestion(string $question, string $answer): bool
+    {
+        $questionTerms = [];
+        preg_match_all('/[\p{Latin}\p{N}]{3,}/u', mb_strtolower($question), $wordMatches);
+        $stopWords = ['what', 'which', 'when', 'where', 'who', 'whose', 'why', 'how', 'should', 'could', 'would', 'does', 'did', 'are', 'the', 'and', 'for', 'from', 'into', 'with', 'this', 'that', 'these', 'those', 'your', 'our', 'their', 'its', 'can'];
+        foreach ($wordMatches[0] ?? [] as $term) {
+            if (! in_array($term, $stopWords, true)) {
+                $questionTerms[] = $term;
+            }
+        }
+        preg_match_all('/\p{Han}{2,}/u', $question, $hanMatches);
+        foreach ($hanMatches[0] ?? [] as $sequence) {
+            for ($index = 0; $index < mb_strlen($sequence) - 1; $index++) {
+                $questionTerms[] = mb_substr($sequence, $index, 2);
+            }
+        }
+
+        $normalizedAnswer = mb_strtolower($answer);
+
+        return collect(array_unique($questionTerms))->contains(
+            static fn (string $term): bool => mb_strpos($normalizedAnswer, $term) !== false,
+        );
     }
 
     /** @param array<string, mixed>|null $map @param array<string, array<string, mixed>> $claims @param callable(string, string, ?string, string, string): void $add */

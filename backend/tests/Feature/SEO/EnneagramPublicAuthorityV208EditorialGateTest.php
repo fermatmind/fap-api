@@ -176,6 +176,17 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertFalse($result['ok']);
         $this->assertContains('geo_answerability_unverified', collect($result['issues'])->pluck('code')->all());
 
+        foreach ($candidate['assets'][0]['answerability']['question_answers'] as $index => &$mapping) {
+            $mapping['question'] = $candidate['assets'][0]['answerability']['questions'][$index];
+            $mapping['visible_path'] = ['answer_first', 'sections.0.body', 'faqs.0.answer'][$index];
+        }
+        unset($mapping);
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('geo_answerability_unverified', collect($result['issues'])->pluck('code')->all());
+
         $candidate = $this->candidate();
         $candidate['assets'][0]['answerability']['question_answers'][0]['visible_path'] = 'review_truth.status';
 
