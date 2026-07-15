@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:fermatmind:career:big-five-bridge-input:v1",
+  "title": "FermatMind Big Five to Career bridge input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bridge_contract_version",
+    "bridge_id",
+    "locale",
+    "big_five_asset_identity",
+    "big_five_primary_status",
+    "big_five_published_revision_id",
+    "big_five_public_projection_hash",
+    "big_five_claim_permissions",
+    "big_five_source_permission",
+    "big_five_reviewer_permission",
+    "big_five_date_permission",
+    "career_canonical_slug",
+    "career_runtime_projection_version",
+    "career_runtime_projection_hash",
+    "career_publish_eligibility",
+    "private_data_absent",
+    "big_five_projection",
+    "career_projection",
+    "signal_policy",
+    "privacy_boundary"
+  ],
+  "properties": {
+    "bridge_contract_version": {
+      "const": "big_five_career_bridge.input.v1"
+    },
+    "bridge_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"
+    },
+    "locale": {
+      "enum": ["en", "zh-CN"]
+    },
+    "big_five_asset_identity": {"type": "string", "pattern": "^(?!.*(?://|/\\./|/\\.\\./|/\\.$|/\\.\\.$|/$))[A-Za-z0-9][A-Za-z0-9_.:/-]{0,255}$"},
+    "big_five_primary_status": {"const": "published"},
+    "big_five_published_revision_id": {"type": "integer", "minimum": 1},
+    "big_five_public_projection_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "big_five_claim_permissions": {"const": true},
+    "big_five_source_permission": {"const": true},
+    "big_five_reviewer_permission": {"const": true},
+    "big_five_date_permission": {"const": true},
+    "career_canonical_slug": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "career_runtime_projection_version": {"const": "career.runtime_publish_projection.v1"},
+    "career_runtime_projection_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "career_publish_eligibility": {"const": true},
+    "private_data_absent": {"const": true},
+    "big_five_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_surface",
+        "source_kind",
+        "framework",
+        "asset_id",
+        "locale",
+        "primary_status",
+        "is_public",
+        "published_revision_id",
+        "selected_revision_id",
+        "selected_revision_source",
+        "public_projection_hash",
+        "working_revision_id",
+        "public_projection_ready",
+        "visible_evidence",
+        "working_or_draft_revision_used",
+        "generated_authority_package_used"
+      ],
+      "properties": {
+        "authority_surface": {
+          "const": "personality_public_content_asset"
+        },
+        "source_kind": {
+          "const": "backend_public_api_published_projection"
+        },
+        "framework": {
+          "const": "big_five"
+        },
+        "asset_id": {
+          "type": "string",
+          "pattern": "^(?!.*(?://|/\\./|/\\.\\./|/\\.$|/\\.\\.$|/$))[A-Za-z0-9][A-Za-z0-9_.:/-]{0,255}$"
+        },
+        "locale": {
+          "enum": ["en", "zh-CN"]
+        },
+        "primary_status": {
+          "const": "published"
+        },
+        "is_public": {
+          "const": true
+        },
+        "published_revision_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "selected_revision_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "selected_revision_source": {
+          "const": "published_revision"
+        },
+        "public_projection_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "working_revision_id": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "integer", "minimum": 1}
+          ]
+        },
+        "public_projection_ready": {
+          "const": true
+        },
+        "visible_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "claim_permission",
+            "source_permission",
+            "reviewer_permission",
+            "visible_date_permission"
+          ],
+          "properties": {
+            "claim_permission": {"const": true},
+            "source_permission": {"const": true},
+            "reviewer_permission": {"const": true},
+            "visible_date_permission": {"const": true}
+          }
+        },
+        "working_or_draft_revision_used": {
+          "const": false
+        },
+        "generated_authority_package_used": {
+          "const": false
+        }
+      }
+    },
+    "career_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projection_kind",
+        "projection_version",
+        "projection_hash",
+        "occupation_id",
+        "canonical_slug",
+        "locale",
+        "public_resolution_type",
+        "runtime_publish_state",
+        "detail_route_enabled",
+        "dataset_visible",
+        "release_gate_pass",
+        "publish_eligibility",
+        "public_projection_ready",
+        "blockers"
+      ],
+      "properties": {
+        "projection_kind": {
+          "const": "career_runtime_publish_projection"
+        },
+        "projection_version": {
+          "const": "career.runtime_publish_projection.v1"
+        },
+        "projection_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "occupation_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"
+        },
+        "canonical_slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "locale": {
+          "enum": ["en", "zh-CN"]
+        },
+        "public_resolution_type": {
+          "const": "public_canonical_job"
+        },
+        "runtime_publish_state": {
+          "const": "published"
+        },
+        "detail_route_enabled": {"const": true},
+        "dataset_visible": {"const": true},
+        "release_gate_pass": {"const": true},
+        "publish_eligibility": {"const": true},
+        "public_projection_ready": {"const": true},
+        "blockers": {
+          "type": "array",
+          "maxItems": 0
+        }
+      }
+    },
+    "signal_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_career_interest_signal",
+        "big_five_role",
+        "claim_mode",
+        "occupation_ranking_allowed",
+        "hiring_use_allowed",
+        "outcome_prediction_allowed",
+        "pseo_expansion_allowed"
+      ],
+      "properties": {
+        "primary_career_interest_signal": {"const": "riasec"},
+        "big_five_role": {"const": "supplementary_work_style_explanation"},
+        "claim_mode": {"const": "explanation_only"},
+        "occupation_ranking_allowed": {"const": false},
+        "hiring_use_allowed": {"const": false},
+        "outcome_prediction_allowed": {"const": false},
+        "pseo_expansion_allowed": {"const": false}
+      }
+    },
+    "privacy_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contains_private_assessment_data",
+        "contains_user_identifiers",
+        "contains_attempt_or_report_links",
+        "contains_order_or_payment_data"
+      ],
+      "properties": {
+        "contains_private_assessment_data": {"const": false},
+        "contains_user_identifiers": {"const": false},
+        "contains_attempt_or_report_links": {"const": false},
+        "contains_order_or_payment_data": {"const": false}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"locale": {"const": "en"}},
+        "required": ["locale"]
+      },
+      "then": {
+        "properties": {
+          "big_five_projection": {
+            "properties": {"locale": {"const": "en"}}
+          },
+          "career_projection": {
+            "properties": {"locale": {"const": "en"}}
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"locale": {"const": "zh-CN"}},
+        "required": ["locale"]
+      },
+      "then": {
+        "properties": {
+          "big_five_projection": {
+            "properties": {"locale": {"const": "zh-CN"}}
+          },
+          "career_projection": {
+            "properties": {"locale": {"const": "zh-CN"}}
+          }
+        }
+      }
+    }
+  ]
+}

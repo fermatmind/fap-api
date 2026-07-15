@@ -384,6 +384,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_career_bridge_contract(): void
+    {
+        $changed = [
+            'backend/app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_ai_impact_preview_route_readiness_changes(): void
     {
         $changed = [
@@ -5890,6 +5899,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveCareerBridgeContractFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerAiImpactPreviewRouteReadinessFile($file)) {
                 continue;
             }
@@ -7598,6 +7611,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerCliArtifactPathGuardFile(string $file): bool
     {
         return $file === 'backend/app/Services/Career/CareerCliArtifactPathGuard.php';
+    }
+
+    private function isBigFiveCareerBridgeContractFile(string $file): bool
+    {
+        return $file === 'backend/app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php';
     }
 
     private function isCareerAiImpactPreviewRouteReadinessFile(string $file): bool

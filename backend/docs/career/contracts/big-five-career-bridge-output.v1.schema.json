@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:fermatmind:career:big-five-bridge-output:v1",
+  "title": "FermatMind Big Five to Career bridge output v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "bridge_id",
+    "status",
+    "claim_mode",
+    "public_reader_allowed",
+    "source_locks",
+    "content",
+    "claim_boundary",
+    "privacy_boundary",
+    "discoverability_changes",
+    "blockers"
+  ],
+  "$defs": {
+    "boundedStringList": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    }
+  },
+  "properties": {
+    "contract_version": {
+      "const": "big_five_career_bridge.output.v1"
+    },
+    "bridge_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"
+    },
+    "status": {
+      "enum": ["blocked", "generated_candidate", "pending_manual_review", "published_projection_ready"]
+    },
+    "claim_mode": {
+      "const": "explanation_only"
+    },
+    "public_reader_allowed": {
+      "type": "boolean"
+    },
+    "source_locks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "big_five_asset_id",
+        "big_five_locale",
+        "big_five_published_revision_id",
+        "big_five_public_projection_hash",
+        "career_occupation_id",
+        "career_canonical_slug",
+        "career_locale",
+        "career_projection_version",
+        "career_runtime_projection_hash"
+      ],
+      "properties": {
+        "big_five_asset_id": {
+          "type": "string",
+          "pattern": "^(?!.*(?://|/\\./|/\\.\\./|/\\.$|/\\.\\.$|/$))[A-Za-z0-9][A-Za-z0-9_.:/-]{0,255}$"
+        },
+        "big_five_locale": {
+          "enum": ["en", "zh-CN"]
+        },
+        "big_five_published_revision_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "big_five_public_projection_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "career_occupation_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"
+        },
+        "career_canonical_slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "career_locale": {
+          "enum": ["en", "zh-CN"]
+        },
+        "career_projection_version": {
+          "const": "career.runtime_publish_projection.v1"
+        },
+        "career_runtime_projection_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reflection_signals",
+        "environment_questions",
+        "feedback_and_structure_preferences",
+        "possible_friction_cues",
+        "exploration_examples",
+        "boundary_copy"
+      ],
+      "properties": {
+        "reflection_signals": {"$ref": "#/$defs/boundedStringList"},
+        "environment_questions": {"$ref": "#/$defs/boundedStringList"},
+        "feedback_and_structure_preferences": {"$ref": "#/$defs/boundedStringList"},
+        "possible_friction_cues": {"$ref": "#/$defs/boundedStringList"},
+        "exploration_examples": {"$ref": "#/$defs/boundedStringList"},
+        "boundary_copy": {"$ref": "#/$defs/boundedStringList"}
+      }
+    },
+    "claim_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "big_five_role",
+        "primary_career_interest_signal",
+        "recommendation_authority",
+        "ranking_allowed",
+        "hiring_use_allowed",
+        "outcome_prediction_allowed",
+        "pseo_allowed"
+      ],
+      "properties": {
+        "big_five_role": {"const": "supplementary_work_style_explanation"},
+        "primary_career_interest_signal": {"const": "riasec"},
+        "recommendation_authority": {"const": false},
+        "ranking_allowed": {"const": false},
+        "hiring_use_allowed": {"const": false},
+        "outcome_prediction_allowed": {"const": false},
+        "pseo_allowed": {"const": false}
+      }
+    },
+    "privacy_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contains_private_assessment_data",
+        "contains_user_identifiers",
+        "contains_attempt_or_report_links",
+        "contains_order_or_payment_data"
+      ],
+      "properties": {
+        "contains_private_assessment_data": {"const": false},
+        "contains_user_identifiers": {"const": false},
+        "contains_attempt_or_report_links": {"const": false},
+        "contains_order_or_payment_data": {"const": false}
+      }
+    },
+    "discoverability_changes": {
+      "const": false
+    },
+    "blockers": {
+      "$ref": "#/$defs/boundedStringList"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"status": {"const": "blocked"}},
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "public_reader_allowed": {"const": false},
+          "blockers": {"minItems": 1}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"status": {"const": "published_projection_ready"}},
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "public_reader_allowed": {"const": true},
+          "blockers": {"maxItems": 0},
+          "content": {
+            "properties": {
+              "reflection_signals": {"minItems": 1},
+              "environment_questions": {"minItems": 1},
+              "feedback_and_structure_preferences": {"minItems": 1},
+              "possible_friction_cues": {"minItems": 1},
+              "exploration_examples": {"minItems": 1},
+              "boundary_copy": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"status": {"enum": ["generated_candidate", "pending_manual_review"]}},
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "public_reader_allowed": {"const": false}
+        }
+      }
+    }
+  ]
+}

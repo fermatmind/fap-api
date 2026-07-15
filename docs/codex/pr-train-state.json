@@ -55859,9 +55859,13 @@
           "command": "git diff --check && git diff --cached --check",
           "evidence": "Whitespace checks passed before and after path-limited staging.",
           "status": "pass"
+        },
+        "github_checks": {
+          "evidence": "GitHub PR #1814 is MERGED and all recorded hygiene, supply-chain, content-pack, MBTI legacy/v2, Big Five, and Semgrep checks completed successfully on its final head.",
+          "status": "pass"
         }
       },
-      "commit_sha": "944797b6b32b8a1e1f2fc74cc28dca81e5e18087",
+      "commit_sha": "46813b9f66d039b22caf64478d1cf7f79c13650b",
       "depends_on": [
         "CAREER-1046-FRONTEND-DISCOVERY-UX-01"
       ],
@@ -55873,17 +55877,18 @@
       },
       "failure_reason": null,
       "id": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01",
-      "local_cleanup_executed": false,
-      "merged_at": null,
-      "next_task": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01",
+      "local_cleanup_executed": true,
+      "merge_sha": "40b60ff32d523737003804d670d1443706010fdf",
+      "merged_at": "2026-05-31T15:51:30Z",
+      "next_task": "BIG5-CAREER-BRIDGE-SCHEMA-01",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1814",
-      "remote_branch_deleted": false,
+      "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_validation": {
         "allowed_paths_only": true,
-        "github_checks_green": null,
+        "github_checks_green": true,
         "local_validation_passed": true,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": true
       },
       "sidecars": [
         {
@@ -55905,7 +55910,7 @@
           "why_external_to_current_pr": "Current PR changes only CAREER-L3 dynamic-slot docs/generated/test/ledger; Eq60ReportComposer.php is outside scope and untouched."
         }
       ],
-      "status": "pr_open",
+      "status": "merged",
       "title": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01 dynamic slot architecture guardrails",
       "transitions": [
         {
@@ -55937,6 +55942,151 @@
           "from": "committed",
           "note": "Pushed branch and opened PR https://github.com/fermatmind/fap-api/pull/1814; GitHub checks pending.",
           "to": "pr_open"
+        },
+        {
+          "at": "2026-07-15T19:53:27Z",
+          "from": "pr_open",
+          "note": "Reconciled GitHub PR #1814 as MERGED at 2026-05-31T15:51:30Z with merge commit 40b60ff32d523737003804d670d1443706010fdf contained in origin/main, all recorded checks successful, focused dynamic-slot guard 4/4 passing on current main, and both task branches absent. The existing fap-api mirror already records PR10 #939 as merged with merge commit 7626b901d77a5191a1b9211fd0b9a91c854a6c4f.",
+          "to": "merged"
+        }
+      ]
+    },
+    "BIG5-CAREER-BRIDGE-SCHEMA-01": {
+      "base": "main",
+      "branch": "codex/big5-career-bridge-schema-01",
+      "checks": {
+        "authorization": {
+          "evidence": "The operator supplied a continuous-execution /goal with the exact PR12 id, title, branch, schema scope, dependency order, and no-production-action boundary.",
+          "status": "pass"
+        },
+        "dependency": {
+          "evidence": "PR10 #939 and PR11 #1814 are MERGED; their merge commits 7626b901d77a5191a1b9211fd0b9a91c854a6c4f and 40b60ff32d523737003804d670d1443706010fdf are contained in the current origin/main. PR47 #3114 is also MERGED as the preceding train item.",
+          "status": "pass"
+        },
+        "preflight": {
+          "evidence": "Created the exact scoped branch from clean origin/main df9261e5d7aa071323fb91b0f6b28d2288e389a2 after confirming no same-name local or remote branch. No production, CMS, database, media, cache, search, sitemap, LLMS, indexability, migration, or deploy action is authorized.",
+          "status": "pass"
+        },
+        "local": {
+          "evidence": "Final contract/schema tests passed 12 tests / 106 assertions, including canonical Authority V2 asset ids with schema/runtime parity for embedded and terminal traversal rejection, exact zh-CN Big Five/Career source locks, fail-closed private score/vector/answer/trace and link marker scanning, and non-diagnostic reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. One earlier verifier attempt collided on /tmp/fap-ci.sqlite with a validation process that started after the guard; subsequent clean latest-functional-head runs passed. The final schema-traversal-head bash backend/scripts/ci_verify_mbti.sh execution exited 0 through the strict queue probe, including Big Five 1480 tests / 181348 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after verifier exit.",
+          "status": "pass"
+        },
+        "github": {
+          "evidence": "PR #3118 exact functional head f00099cd75a6b323ae1e1f715b8e148db7cc2c27 passed all nine GitHub checks: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. Codex reviewed that exact head with no new findings, and all thirteen review threads are resolved. commit_sha remains pending_remote_pr_head to avoid self-referential bookkeeping churn; the bookkeeping-only ready-to-merge head must rerun required checks before merge.",
+          "status": "pass"
+        }
+      },
+      "commit_sha": "pending_remote_pr_head",
+      "depends_on": [
+        "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
+      ],
+      "failure_reason": null,
+      "id": "BIG5-CAREER-BRIDGE-SCHEMA-01",
+      "local_cleanup_executed": false,
+      "merged_at": null,
+      "next_task": "BIG5-CAREER-BRIDGE-AUDITOR-02",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3118",
+      "remote_branch_deleted": false,
+      "repo": "fap-api",
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "github_checks_green": true,
+        "local_validation_passed": true,
+        "post_merge_revalidated": null
+      },
+      "sidecars": [],
+      "status": "ready_to_merge",
+      "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
+      "transitions": [
+        {
+          "at": "2026-07-15T19:53:27Z",
+          "from": "pending",
+          "note": "Started PR12 from exact clean origin/main after reconciling PR10 and PR11 as merged. Scope is limited to backend-owned schemas, an executable fail-closed contract, focused tests/docs, the Career release skill, and train bookkeeping.",
+          "to": "implementing"
+        },
+    {
+      "at": "2026-07-15T20:04:40Z",
+      "from": "implementing",
+      "note": "Local validation passed: schema/PHP syntax, focused 6/40, touched Pint, route discovery, Composer validate/audit, JSON/YAML parse, exact 8-path scope, and guarded full CI through strict queue with Big Five 1473/181281 and personality full-32 71/5371. No production or public mutation occurred.",
+      "to": "local_checks_passed"
+    },
+    {
+      "at": "2026-07-15T20:17:42Z",
+      "from": "local_checks_passed",
+      "note": "Revalidated the strengthened final contract: focused 7/58, strict schema/PHP/Pint checks, exact 8-path scope, and guarded full CI through the strict queue probe with Big Five 1474/181299 and personality full-32 71/5371. Restored all 13 validation-generated compiled diffs; no production or public mutation occurred.",
+      "to": "local_checks_passed_final"
+    },
+    {
+      "at": "2026-07-15T20:20:07Z",
+      "from": "local_checks_passed_final",
+      "note": "Committed exact 8-path scope at e0258e45fb13fcac741943c46e5f60a90c7737b7, pushed the scoped branch, and opened the single required PR #3118. GitHub required checks are queued.",
+      "to": "github_checks_pending"
+    },
+        {
+          "at": "2026-07-15T20:25:22Z",
+          "from": "github_checks_pending",
+          "note": "Corrected unrelated ledger/manifest fields accidentally changed by the first GitHub-state bookkeeping commit, then revalidated the exact final contract with focused 8/59, 235-route discovery, strict schema/PHP/Pint/Composer/JSON/YAML checks, exact 8-path scope, and guarded full CI through the strict queue probe with Big Five 1475/181300 and personality full-32 71/5371. Verifier EXIT cleanup restored all 13 regenerated BIG5_OCEAN compiled files; no production or public mutation occurred.",
+          "to": "github_checks_pending_final"
+        },
+        {
+          "at": "2026-07-15T20:40:03Z",
+          "from": "github_checks_pending_final",
+          "note": "Addressed all three Codex P2 findings: corrected train-state association, added outcome_prediction_allowed=false to the output contract, and scanned boundary_copy for deterministic claims. The first full review-fix CI exposed a same-scope freeze-classifier omission (1 failed / 1474 passed); added an exact Career bridge classifier regression, then passed focused contract 8/61, freeze 2/4, touched Pint, and the guarded final full CI through strict queue with Big Five 1476/181303 and personality full-32 71/5371. Restored all 13 generated compiled diffs; no production or public mutation occurred.",
+          "to": "github_checks_pending_review_fix"
+        },
+        {
+          "at": "2026-07-15T20:47:02Z",
+          "from": "github_checks_pending_review_fix",
+          "note": "Addressed the second Codex review's canonical locale finding by using the backend authority value zh-CN consistently across the bridge, Big Five/Career projections, and output source locks. Focused contract tests passed 9/63 and the guarded final full CI passed through strict queue with Big Five 1477/181305 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_locale_fix"
+        },
+        {
+          "at": "2026-07-15T20:53:00Z",
+          "from": "github_checks_pending_locale_fix",
+          "note": "Addressed the exact-head private-reader-text finding by scanning all output content strings for private assessment, report, order, payment, and route markers; focused contract tests passed 10/66, PHP syntax and touched Pint passed. Updated commit_sha to the preceding pushed locale implementation head c03f22950a35f7162803da3580030c96df83b145 so the bookkeeping commit does not self-reference. Exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_private_text_fix"
+        },
+        {
+          "at": "2026-07-15T20:57:31Z",
+          "from": "github_checks_pending_private_text_fix",
+          "note": "Recorded latest functional head 4008e9daed00b0c32b94c9649d56685646c8127a. One attempted verifier collided on /tmp/fap-ci.sqlite with a validation process that started after the concurrency guard and failed during schema initialization; the surviving clean latest-head run then passed through strict queue with Big Five 1478/181308 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_final_head"
+        },
+        {
+          "at": "2026-07-15T21:06:02Z",
+          "from": "github_checks_pending_final_head",
+          "note": "Addressed the latest two Codex P2 findings by accepting canonical model_hub Authority V2 asset ids while rejecting traversal shapes, and by scanning all reader text for affirmative diagnostic claims. Focused contract tests passed 12/72, touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181314 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
+          "to": "github_checks_pending_authority_diagnostic_fix"
+        },
+        {
+          "at": "2026-07-15T21:08:04Z",
+          "from": "github_checks_pending_authority_diagnostic_fix",
+          "note": "Recorded functional head 8a1580aaa52851f5ec43719cdc69cfb6e8d2b0fe in GitHub evidence and set commit_sha to pending_remote_pr_head so later PR-train bookkeeping does not create self-referential hash churn. Exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_final_bookkeeping"
+        },
+        {
+          "at": "2026-07-15T21:21:03Z",
+          "from": "github_checks_pending_final_bookkeeping",
+          "note": "Addressed the final Codex P2 by rejecting Authority V2 asset ids ending in /. or /.. and extending traversal regression coverage. Focused contract tests passed 12/80, touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181322 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
+          "to": "github_checks_pending_terminal_traversal_fix"
+        },
+        {
+          "at": "2026-07-15T21:34:21Z",
+          "from": "github_checks_pending_terminal_traversal_fix",
+          "note": "Addressed the latest Codex P2 by scanning all reader text for private score vectors, percentiles, answers, and selector traces in English and Chinese. Focused contract tests passed 12/84, touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181326 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
+          "to": "github_checks_pending_private_score_fix"
+        },
+        {
+          "at": "2026-07-15T21:46:56Z",
+          "from": "github_checks_pending_private_score_fix",
+          "note": "Addressed the latest Codex P2 by aligning all three machine-readable Big Five asset-id schema patterns with the PHP fail-closed traversal rules. Focused contract/schema tests passed 12/106, JSON parse and touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181348 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
+          "to": "github_checks_pending_schema_traversal_fix"
+        },
+        {
+          "at": "2026-07-15T21:56:00Z",
+          "from": "github_checks_pending_schema_traversal_fix",
+          "note": "Exact functional head f00099cd75 passed all nine GitHub checks and received an exact-head Codex review with no new findings; all thirteen review threads are resolved. Final git diff --check and exact nine-path scope validation passed. This transition is bookkeeping-only and its new head must pass required checks before squash merge.",
+          "to": "ready_to_merge"
         }
       ]
     },
