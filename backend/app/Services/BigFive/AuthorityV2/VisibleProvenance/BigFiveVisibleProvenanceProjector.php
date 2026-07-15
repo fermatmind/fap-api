@@ -66,7 +66,7 @@ final class BigFiveVisibleProvenanceProjector
             && $article->published_revision_id !== null
             && (int) $revision->id === (int) $article->published_revision_id
             && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED
-            && $this->publicationIsEffective($revision->published_at);
+            && $this->publicationIsNullOrEffective($revision->published_at);
         $public = $articleIsPublic && $revisionMatches;
         $metadata = $revisionMatches && is_array($revision->authority_metadata_json)
             ? $revision->authority_metadata_json

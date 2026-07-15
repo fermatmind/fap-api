@@ -85,6 +85,12 @@ final class BigFiveAuthorityV243Test extends TestCase
         $this->assertTrue($projection['eligibility']['promotion_eligible']);
         $this->assertSame([], $projection['eligibility']['blocked_reasons']);
 
+        $revision->published_at = null;
+        $nullPublishedAt = $this->projector->forArticle($article, $revision);
+        $this->assertSame('admin_user:41', $nullPublishedAt['visible_provenance']['author']['identity']);
+        $this->assertTrue($nullPublishedAt['eligibility']['promotion_eligible']);
+        $revision->published_at = '2026-07-10T00:00:00Z';
+
         $article->published_revision_id = 102;
         $stale = $this->projector->forArticle($article, $revision);
         $this->assertSame(['author' => null, 'reviewer' => null, 'sources' => []], $stale['visible_provenance']);
