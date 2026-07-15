@@ -92684,8 +92684,8 @@
       "dependency_origin_main_contains_merge": true,
       "evidence": "fap-web PR #1770 is MERGED at 28afe5365d114ee72207cbcf426364355c88baa2; fap-web origin/main contains the merge commit, remote and local PR03 branches are deleted, and post-merge focused revalidation passed 7 files / 58 tests."
     },
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "a266b84a2af51134015d02fca4f83d488e3585b2",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -92750,9 +92750,14 @@
         "at": "2026-07-15T05:44:46Z",
         "status": "local_checks_passed",
         "note": "Replayed the corrected manifest commands successfully: four-file PHP lint/Pint, 57 target tests / 4096 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, diff check, and exact eight-path scope all pass."
+      },
+      {
+        "at": "2026-07-15T05:45:21Z",
+        "status": "ready_to_push",
+        "note": "Recorded validated branch head a266b84a2af51134015d02fca4f83d488e3585b2 after clean metadata, diff, worktree, and exact-scope revalidation."
       }
     ],
-    "updated_at": "2026-07-15T05:44:46Z"
+    "updated_at": "2026-07-15T05:45:21Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05",
