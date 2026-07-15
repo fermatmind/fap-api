@@ -216,19 +216,24 @@ final class BigFiveCareerBridgeContractTest extends TestCase
     #[Test]
     public function authority_asset_id_traversal_shapes_fail_closed(): void
     {
-        $invalidAssetId = 'model_hub:en:/en/personality/../private';
-        $input = $this->validInput();
-        $input['big_five_asset_identity'] = $invalidAssetId;
-        $input['big_five_projection']['asset_id'] = $invalidAssetId;
-        $output = $this->validOutput();
-        $output['source_locks']['big_five_asset_id'] = $invalidAssetId;
+        foreach ([
+            'model_hub:en:/en/personality/../private',
+            'model_hub:en:/en/personality/.',
+            'model_hub:en:/en/personality/..',
+        ] as $invalidAssetId) {
+            $input = $this->validInput();
+            $input['big_five_asset_identity'] = $invalidAssetId;
+            $input['big_five_projection']['asset_id'] = $invalidAssetId;
+            $output = $this->validOutput();
+            $output['source_locks']['big_five_asset_id'] = $invalidAssetId;
 
-        $assessment = $this->contract->assess($input, $output);
+            $assessment = $this->contract->assess($input, $output);
 
-        $this->assertFalse($assessment['public_reader_allowed']);
-        $this->assertContains('input.big_five_asset_identity_invalid', $assessment['blockers']);
-        $this->assertContains('input.big_five.asset_id_invalid', $assessment['blockers']);
-        $this->assertContains('output.source_locks.big_five_asset_id_invalid', $assessment['blockers']);
+            $this->assertFalse($assessment['public_reader_allowed']);
+            $this->assertContains('input.big_five_asset_identity_invalid', $assessment['blockers']);
+            $this->assertContains('input.big_five.asset_id_invalid', $assessment['blockers']);
+            $this->assertContains('output.source_locks.big_five_asset_id_invalid', $assessment['blockers']);
+        }
     }
 
     #[Test]

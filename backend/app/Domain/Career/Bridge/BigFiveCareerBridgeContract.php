@@ -709,6 +709,8 @@ final class BigFiveCareerBridgeContract
             || str_contains($value, '//')
             || str_contains($value, '/./')
             || str_contains($value, '/../')
+            || str_ends_with($value, '/.')
+            || str_ends_with($value, '/..')
             || str_ends_with($value, '/')) {
             $blockers[] = $blocker;
         }
