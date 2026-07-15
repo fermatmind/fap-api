@@ -21323,7 +21323,7 @@ prs:
     base: main
     title: "CAREER-1046-FRONTEND-DISCOVERY-UX-01 career discovery UX"
     train_scope: career_1046_growth_foundation
-    status: pending
+    status: merged
     scope:
       - Improve Career jobs index/detail discovery UX while consuming backend authority only.
       - Add contract/visual coverage for 1046 count, excluded slug safety, and no fallback-only Career cards.
@@ -21348,7 +21348,7 @@ prs:
     base: main
     title: "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01 dynamic slot architecture guardrails"
     train_scope: career_1046_growth_foundation
-    status: pending
+    status: merged
     scope:
       - Document and test dynamic-slot-only architecture for MBTI/Big Five/RIASEC x Career personalization.
       - Prevent static combinatorial pSEO pages and sitemap/llms exposure.
@@ -21366,7 +21366,60 @@ prs:
       - git diff --check
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
-    next_task: RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01
+    next_task: BIG5-CAREER-BRIDGE-SCHEMA-01
+
+  - id: BIG5-CAREER-BRIDGE-SCHEMA-01
+    repo: fap-api
+    depends_on:
+      - CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01
+    branch: codex/big5-career-bridge-schema-01
+    base: main
+    title: "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema"
+    train_scope: big5_career_bridge_schema
+    status: in_progress
+    scope:
+      - Define executable backend-owned Big Five-to-Career input and output JSON Schemas.
+      - Enforce published Big Five revision selection, Career runtime projection eligibility, explanation-only claims, and private-data absence.
+      - Keep every future public reader blocked unless the contract status is published_projection_ready.
+      - Reconcile the already-merged PR10 and PR11 dependency facts needed by this train.
+    allowed_paths:
+      - .agents/skills/fap-api-career-release-authority/SKILL.md
+      - backend/app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php
+      - backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json
+      - backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json
+      - backend/docs/career/big-five-career-bridge-schema-01.md
+      - backend/tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a public API, frontend consumer, public route, static trait-by-career page, occupation ranking, recommender, hiring use, or pSEO surface.
+      - Read Big Five working or draft revisions, generated Authority V2 packages, private scores, percentiles, answers, selector traces, attempt/report links, users, orders, or payments.
+      - Write CMS/database/cache/search state, change indexability/sitemap/LLMS, deploy, migrate production schema, promote content, or publish a bridge candidate.
+    validation:
+      - php -l backend/app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php
+      - php -l backend/tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json >/dev/null
+      - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: false
+    cms_mutation_allowed: false
+    public_runtime_change: false
+    discoverability_mutation_allowed: false
+    content_authority: backend_published_public_projection_only
+    next_task: BIG5-CAREER-BRIDGE-AUDITOR-02
 
   - id: RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01
     repo: fap-api

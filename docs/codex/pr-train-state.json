@@ -55859,9 +55859,13 @@
           "command": "git diff --check && git diff --cached --check",
           "evidence": "Whitespace checks passed before and after path-limited staging.",
           "status": "pass"
+        },
+        "github_checks": {
+          "evidence": "GitHub PR #1814 is MERGED and all recorded hygiene, supply-chain, content-pack, MBTI legacy/v2, Big Five, and Semgrep checks completed successfully on its final head.",
+          "status": "pass"
         }
       },
-      "commit_sha": "944797b6b32b8a1e1f2fc74cc28dca81e5e18087",
+      "commit_sha": "46813b9f66d039b22caf64478d1cf7f79c13650b",
       "depends_on": [
         "CAREER-1046-FRONTEND-DISCOVERY-UX-01"
       ],
@@ -55873,17 +55877,18 @@
       },
       "failure_reason": null,
       "id": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01",
-      "local_cleanup_executed": false,
-      "merged_at": null,
-      "next_task": "RELEASE-TRAIN-SIDECAR-SOFT-ALERT-01",
+      "local_cleanup_executed": true,
+      "merge_sha": "40b60ff32d523737003804d670d1443706010fdf",
+      "merged_at": "2026-05-31T15:51:30Z",
+      "next_task": "BIG5-CAREER-BRIDGE-SCHEMA-01",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1814",
-      "remote_branch_deleted": false,
+      "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_validation": {
         "allowed_paths_only": true,
-        "github_checks_green": null,
+        "github_checks_green": true,
         "local_validation_passed": true,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": true
       },
       "sidecars": [
         {
@@ -55905,7 +55910,7 @@
           "why_external_to_current_pr": "Current PR changes only CAREER-L3 dynamic-slot docs/generated/test/ledger; Eq60ReportComposer.php is outside scope and untouched."
         }
       ],
-      "status": "pr_open",
+      "status": "merged",
       "title": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01 dynamic slot architecture guardrails",
       "transitions": [
         {
@@ -55937,7 +55942,80 @@
           "from": "committed",
           "note": "Pushed branch and opened PR https://github.com/fermatmind/fap-api/pull/1814; GitHub checks pending.",
           "to": "pr_open"
+        },
+        {
+          "at": "2026-07-15T19:53:27Z",
+          "from": "pr_open",
+          "note": "Reconciled GitHub PR #1814 as MERGED at 2026-05-31T15:51:30Z with merge commit 40b60ff32d523737003804d670d1443706010fdf contained in origin/main, all recorded checks successful, focused dynamic-slot guard 4/4 passing on current main, and both task branches absent. The existing fap-api mirror already records PR10 #939 as merged with merge commit 7626b901d77a5191a1b9211fd0b9a91c854a6c4f.",
+          "to": "merged"
         }
+      ]
+    },
+    "BIG5-CAREER-BRIDGE-SCHEMA-01": {
+      "base": "main",
+      "branch": "codex/big5-career-bridge-schema-01",
+      "checks": {
+        "authorization": {
+          "evidence": "The operator supplied a continuous-execution /goal with the exact PR12 id, title, branch, schema scope, dependency order, and no-production-action boundary.",
+          "status": "pass"
+        },
+        "dependency": {
+          "evidence": "PR10 #939 and PR11 #1814 are MERGED; their merge commits 7626b901d77a5191a1b9211fd0b9a91c854a6c4f and 40b60ff32d523737003804d670d1443706010fdf are contained in the current origin/main. PR47 #3114 is also MERGED as the preceding train item.",
+          "status": "pass"
+        },
+        "preflight": {
+          "evidence": "Created the exact scoped branch from clean origin/main df9261e5d7aa071323fb91b0f6b28d2288e389a2 after confirming no same-name local or remote branch. No production, CMS, database, media, cache, search, sitemap, LLMS, indexability, migration, or deploy action is authorized.",
+          "status": "pass"
+        },
+        "local": {
+        "evidence": "Final executable input/output schemas parse and remain strict; focused BigFiveCareerBridgeContractTest passed 7 tests / 58 assertions. PHP syntax, touched-file Pint, route discovery (239 rows), Composer validate, Composer audit, JSON/YAML parse, git diff --check, and exact 8-path scope validation passed. After the contract was strengthened with exact source hashes, nested authority projections, recursive privacy/claim guards, and candidate/review denial, the guarded full bash backend/scripts/ci_verify_mbti.sh run completed every gate through the strict queue probe, including Big Five 1474 tests / 181299 assertions and personality full-32 71 tests / 5371 assertions. Its 13 generated compiled changes were restored after process exit.",
+          "status": "pass"
+        },
+        "github": {
+          "evidence": null,
+          "status": "pending"
+        }
+      },
+      "commit_sha": null,
+      "depends_on": [
+        "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
+      ],
+      "failure_reason": null,
+      "id": "BIG5-CAREER-BRIDGE-SCHEMA-01",
+      "local_cleanup_executed": false,
+      "merged_at": null,
+      "next_task": "BIG5-CAREER-BRIDGE-AUDITOR-02",
+      "pr_url": null,
+      "remote_branch_deleted": false,
+      "repo": "fap-api",
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "github_checks_green": null,
+        "local_validation_passed": true,
+        "post_merge_revalidated": null
+      },
+      "sidecars": [],
+      "status": "local_checks_passed",
+      "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
+      "transitions": [
+        {
+          "at": "2026-07-15T19:53:27Z",
+          "from": "pending",
+          "note": "Started PR12 from exact clean origin/main after reconciling PR10 and PR11 as merged. Scope is limited to backend-owned schemas, an executable fail-closed contract, focused tests/docs, the Career release skill, and train bookkeeping.",
+          "to": "implementing"
+        },
+    {
+      "at": "2026-07-15T20:04:40Z",
+      "from": "implementing",
+      "note": "Local validation passed: schema/PHP syntax, focused 6/40, touched Pint, route discovery, Composer validate/audit, JSON/YAML parse, exact 8-path scope, and guarded full CI through strict queue with Big Five 1473/181281 and personality full-32 71/5371. No production or public mutation occurred.",
+      "to": "local_checks_passed"
+    },
+    {
+      "at": "2026-07-15T20:17:42Z",
+      "from": "local_checks_passed",
+      "note": "Revalidated the strengthened final contract: focused 7/58, strict schema/PHP/Pint checks, exact 8-path scope, and guarded full CI through the strict queue probe with Big Five 1474/181299 and personality full-32 71/5371. Restored all 13 validation-generated compiled diffs; no production or public mutation occurred.",
+      "to": "local_checks_passed_final"
+    }
       ]
     },
     "CAREER-POLICY-CLAIM-GUARDS-01": {
