@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "2fe5e54e9c15ae7dcf82158981f52b24b997cae7",
+    "commit_sha": "d7be51da240fb6cc327057b2c10aada8a7c87b04",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93358,7 +93358,7 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior ledger head f3f61c70b, then the latest automated review added one valid in-scope English type-label P2 finding. The locally verified substantive fix head 2fe5e54e9 requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior ledger head 23cbee341, then the latest automated review added one valid in-scope predictive-vocabulary P2 finding. The locally verified substantive fix head d7be51da2 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All thirteen valid P2 findings are fixed. In addition to the prior twelve, English spelled type labels from Type One through Type Nine participate in type-substitution template detection. PR08+PR02 pass 21 tests / 201 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All fourteen valid P2 findings are fixed. In addition to the prior thirteen, prediction safety now covers the full PR07 blocked-outcome vocabulary in English and Chinese, including salary, turnover, health, admission, legal, and financial outcomes. PR08+PR02 pass 22 tests / 249 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93455,9 +93455,14 @@
         "at": "2026-07-15T11:17:15Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: English spelled type labels Type One through Type Nine now participate in type-substitution template detection. PR08+PR02 pass 21 / 201, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:24:53Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: prediction safety now covers the PR07 blocked English and Chinese vocabulary for salary, turnover, health, admission, legal, and financial outcomes. PR08+PR02 pass 22 / 249, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T11:17:15Z"
+    "updated_at": "2026-07-15T11:24:53Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
