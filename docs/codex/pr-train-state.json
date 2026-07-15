@@ -92520,9 +92520,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01"
     ],
-    "status": "committed_pending_push",
-    "commit_sha": "e5c742fb46d1759a8381b1268ec524e3415425fe",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "3d4118db7bd301ac22aa5eae9ad751c520e44f66",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3100",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -92579,9 +92579,14 @@
         "at": "2026-07-15T03:12:44Z",
         "status": "local_checks_passed",
         "note": "Replayed the corrected manifest commands successfully: three-file PHP lint, 6 focused tests / 59 assertions, portable three-file Pint, strict Composer, YAML/JSON, diff check, and exact six-path scope all pass."
+      },
+      {
+        "at": "2026-07-15T03:14:00Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-path branch and opened the single authorized PR #3100 with the exact manifest title and required authority, validation, deferred, repository-rule-impact, zero-write, and rollback sections."
       }
     ],
-    "updated_at": "2026-07-15T03:12:44Z"
+    "updated_at": "2026-07-15T03:14:00Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04",
