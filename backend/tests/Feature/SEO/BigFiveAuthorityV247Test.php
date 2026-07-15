@@ -513,6 +513,134 @@ final class BigFiveAuthorityV247Test extends TestCase
         }
     }
 
+    public function test_database_preflight_allows_row_backed_existing_assets_to_isolate_working_revision_without_published_pointer(): void
+    {
+        $rows = collect($this->readJson(self::REVIEW)['rows'])->keyBy('asset_id');
+        $personalityRow = $rows->get('model_hub:en:/en/personality/big-five');
+        $topicRow = $rows->get('topic_hub:en:/en/topics/big-five');
+        $this->assertIsArray($personalityRow);
+        $this->assertIsArray($topicRow);
+
+        $personalityId = DB::table('personality_public_content_assets')->insertGetId([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+            'entity_key' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Published row-backed personality authority',
+            'is_public' => true,
+            'index_eligible' => false,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'canonical_json' => json_encode(['path' => '/en/personality/big-five'], JSON_THROW_ON_ERROR),
+            'published_at' => now()->subDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $personalityRevisionId = DB::table('personality_public_content_asset_revisions')->insertGetId([
+            'asset_id' => $personalityId,
+            'revision_no' => 1,
+            'authority_asset_key' => $personalityRow['asset_id'],
+            'source_package' => $personalityRow['source_package'],
+            'source_hash' => $personalityRow['source_hash'],
+            'authority_package_sha256' => $personalityRow['authority_package_sha256'],
+            'workflow_state' => 'draft',
+            'snapshot_json' => '{}',
+            'public_runtime_fingerprint_before' => str_repeat('a', 64),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('personality_public_content_assets')->where('id', $personalityId)->update([
+            'working_revision_id' => $personalityRevisionId,
+            'published_revision_id' => null,
+        ]);
+
+        $topicId = DB::table('topic_profiles')->insertGetId([
+            'org_id' => 0,
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Published row-backed topic authority',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $topicRevisionId = DB::table('topic_profile_revisions')->insertGetId([
+            'profile_id' => $topicId,
+            'revision_no' => 1,
+            'authority_asset_key' => $topicRow['asset_id'],
+            'source_package' => $topicRow['source_package'],
+            'source_hash' => $topicRow['source_hash'],
+            'authority_package_sha256' => $topicRow['authority_package_sha256'],
+            'workflow_state' => 'draft',
+            'snapshot_json' => '{}',
+            'public_runtime_fingerprint_before' => str_repeat('b', 64),
+            'created_at' => now(),
+        ]);
+        DB::table('topic_profiles')->where('id', $topicId)->update([
+            'working_revision_id' => $topicRevisionId,
+            'published_revision_id' => null,
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertNotContains('existing_public_revision_isolation_mismatch', $result['issue_codes']);
+        foreach ([$personalityRow['asset_id'], $topicRow['asset_id']] as $assetId) {
+            $observed = collect($result['observed_runtime'])->firstWhere('asset_id', $assetId);
+            $this->assertIsArray($observed);
+            $this->assertTrue($observed['primary_publicly_readable']);
+            $this->assertNotNull($observed['working_revision_id']);
+            $this->assertNull($observed['published_revision_id']);
+        }
+    }
+
+    public function test_database_preflight_still_requires_published_revision_for_revision_backed_existing_article(): void
+    {
+        $row = collect($this->readJson(self::REVIEW)['rows'])
+            ->firstWhere('asset_id', 'article:en:/en/articles/big-five-personality-test-vs-mbti');
+        $this->assertIsArray($row);
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'translation_group_id' => 'article:big-five-personality-test-vs-mbti',
+            'title' => 'Published revision-backed article authority',
+            'content_md' => '# Published article',
+            'status' => 'published',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subDay(),
+        ]);
+        $workingRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => 'article:big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'authority_asset_key' => $row['asset_id'],
+            'authority_source_package' => $row['source_package'],
+            'authority_source_hash' => $row['source_hash'],
+            'authority_package_sha256' => $row['authority_package_sha256'],
+            'title' => 'Working article authority',
+            'content_md' => '# Working article',
+        ]);
+        $article->forceFill([
+            'working_revision_id' => (int) $workingRevision->id,
+            'published_revision_id' => null,
+        ])->save();
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertContains('existing_public_revision_isolation_mismatch', $result['issue_codes']);
+    }
+
     public function test_article_runtime_baseline_changes_when_published_revision_or_public_relation_changes(): void
     {
         $row = collect($this->readJson(self::REVIEW)['rows'])

@@ -351,7 +351,7 @@ final class BigFiveReviewPromotionPreflight
             if (! $publicRouteMatches) {
                 $issues[] = 'public_route_mismatch';
             }
-            if ($row['action_contract']['existing_revision'] && ($published === null || $working === null || (int) $published === (int) $working)) {
+            if ($row['action_contract']['existing_revision'] && $this->existingRevisionIsolationMismatch($record, $working, $published)) {
                 $issues[] = 'existing_public_revision_isolation_mismatch';
             }
             if ($row['action_contract']['existing_revision'] && ! $primaryPubliclyReadable) {
@@ -432,6 +432,19 @@ final class BigFiveReviewPromotionPreflight
             'blockers' => $blockers,
             'database_reads' => $databaseReads,
         ];
+    }
+
+    private function existingRevisionIsolationMismatch(Model $record, mixed $working, mixed $published): bool
+    {
+        if ($working === null || ($published !== null && (int) $published === (int) $working)) {
+            return true;
+        }
+
+        return match (true) {
+            $record instanceof Article, $record instanceof ContentPage => $published === null,
+            $record instanceof PersonalityPublicContentAsset, $record instanceof TopicProfile => false,
+            default => true,
+        };
     }
 
     /** @param array<string,mixed> $descriptor */
