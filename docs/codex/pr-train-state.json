@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "01575639527e0d19a1d4a04fd773dac45d247c33",
+    "commit_sha": "88b796a0042f2ee8d92f6ba357cc8fcad41955d1",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93358,7 +93358,7 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior ledger head 1da39581d, then the latest automated review added one valid in-scope bare medical noun P2 finding. The locally verified substantive fix head 015756395 requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior ledger head e3a8a08c0, then the latest automated review added one valid in-scope negated-prediction false-positive P2 finding. The locally verified substantive fix head 88b796a00 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All twenty valid P2 findings are fixed. In addition to the prior nineteen, bare diagnosis/treatment/cure claims in English and Chinese fail while explicit negative boundaries using not/never/不是/不把/不得/禁止 remain allowed. PR08+PR02 pass 26 tests / 434 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All twenty-one valid P2 findings are fixed. In addition to the prior twenty, unsupported-science, prediction, and deterministic-recommendation scans remove explicit English/Chinese negative clauses before matching, while competitor scanning remains raw and medical claims retain their stricter dedicated negation logic. PR08+PR02 pass 27 tests / 459 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93480,9 +93480,14 @@
         "at": "2026-07-15T11:58:10Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed with a negation-aware medical claim backstop. The first retry exposed the source-ledger's Chinese 不得把 negative form; after adding that exact bounded context, bare diagnosis/treatment/cure claims fail in English and Chinese while the complete candidate remains clean. PR08+PR02 pass 26 / 434, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:05:57Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 false positive was fixed: explicit English/Chinese negative limitations no longer trigger science, prediction, or deterministic-recommendation claims, while positive variants and competitor language remain blocked. PR08+PR02 pass 27 / 459, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T11:58:10Z"
+    "updated_at": "2026-07-15T12:05:57Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
