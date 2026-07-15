@@ -55972,30 +55972,31 @@
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 exact functional head f00099cd75a6b323ae1e1f715b8e148db7cc2c27 passed all nine GitHub checks: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. Codex reviewed that exact head with no new findings, and all thirteen review threads are resolved. commit_sha remains pending_remote_pr_head to avoid self-referential bookkeeping churn; the bookkeeping-only ready-to-merge head must rerun required checks before merge.",
+          "evidence": "PR #3118 final head bdefbc69da3c5a85db1e2927af2540b79fb9e7e2 passed all nine GitHub checks and squash-merged as 56d63e0db6626c6c98822df89fca4f67a8079e7d at 2026-07-15T22:01:25Z. A later exact-head review found the Career zh locale mismatch; isolated repair PR #3119 passed all nine checks, squash-merged as 705c70e84a63fa25971622b47647aef412afbb04 at 2026-07-15T22:26:39Z, and the original review thread is resolved.",
           "status": "pass"
         }
       },
-      "commit_sha": "pending_remote_pr_head",
+      "commit_sha": "56d63e0db6626c6c98822df89fca4f67a8079e7d",
       "depends_on": [
         "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01"
       ],
       "failure_reason": null,
       "id": "BIG5-CAREER-BRIDGE-SCHEMA-01",
-      "local_cleanup_executed": false,
-      "merged_at": null,
+      "local_cleanup_executed": true,
+      "merge_sha": "56d63e0db6626c6c98822df89fca4f67a8079e7d",
+      "merged_at": "2026-07-15T22:01:25Z",
       "next_task": "BIG5-CAREER-BRIDGE-AUDITOR-02",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3118",
-      "remote_branch_deleted": false,
+      "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_validation": {
         "allowed_paths_only": true,
         "github_checks_green": true,
         "local_validation_passed": true,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": true
       },
       "sidecars": [],
-      "status": "ready_to_merge",
+      "status": "merged",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56087,6 +56088,85 @@
           "from": "github_checks_pending_schema_traversal_fix",
           "note": "Exact functional head f00099cd75 passed all nine GitHub checks and received an exact-head Codex review with no new findings; all thirteen review threads are resolved. Final git diff --check and exact nine-path scope validation passed. This transition is bookkeeping-only and its new head must pass required checks before squash merge.",
           "to": "ready_to_merge"
+        },
+        {
+          "at": "2026-07-15T22:01:25Z",
+          "from": "ready_to_merge",
+          "note": "Final bookkeeping head bdefbc69d passed all nine required checks. PR #3118 squash-merged as 56d63e0db6626c6c98822df89fca4f67a8079e7d; origin/main and local main contain the merge, and standard cleanup deleted both task branches.",
+          "to": "merged"
+        },
+        {
+          "at": "2026-07-15T22:26:39Z",
+          "from": "merged",
+          "note": "Post-merge exact-head review found the Career runtime zh locale mismatch. The defect was isolated from PR13 in ad-hoc repair PR #3119, which passed focused and full local validation plus all nine GitHub checks, squash-merged as 705c70e84a63fa25971622b47647aef412afbb04, deleted its remote branch and clean local worktree, and resolved the original PR #3118 review thread.",
+          "to": "merged"
+        }
+      ]
+    },
+    "BIG5-CAREER-BRIDGE-AUDITOR-02": {
+      "base": "main",
+      "branch": "codex/big5-career-bridge-auditor-02",
+      "checks": {
+        "authorization": {
+          "evidence": "The operator supplied a continuous-execution /goal with the exact PR13 id, title, branch, read-only auditor scope, dependency order, and no-production-action boundary.",
+          "status": "pass"
+        },
+        "dependency": {
+          "evidence": "PR12 #3118 is MERGED as 56d63e0db6626c6c98822df89fca4f67a8079e7d. The isolated baseline repair PR #3119 is MERGED as 705c70e84a63fa25971622b47647aef412afbb04 after 9/9 checks passed; it aligned the existing en/zh Career runtime locale before PR13. Both merge commits are contained in origin/main, and both repair task branches are deleted.",
+          "status": "pass"
+        },
+        "preflight": {
+          "evidence": "Created the exact scoped branch after PR12, then cleanly rebased it to origin/main at isolated locale repair merge 705c70e84a63fa25971622b47647aef412afbb04. The four repaired locale files no longer appear in PR13 diff. No production, CMS, database, media, cache, search, sitemap, LLMS, indexability, migration, public route, or deploy action is authorized.",
+          "status": "pass"
+        },
+        "local": {
+          "evidence": "Final focused bridge/auditor/CLI tests passed 19 tests / 148 assertions; runtime-freeze exact classifier passed 2 tests / 4 assertions. The command is auto-registered, makes no database queries, emits deterministic JSON/Markdown, fails closed on source/hash/status/private/draft/ranking mismatches, omits candidate copy/private fields, and binds zh-CN Big Five authority to the existing zh Career runtime projection. Route discovery (239 lines), six touched-file Pint, PHP syntax, Composer strict validate/audit, JSON/YAML parse, git diff checks, and exact 10-path scope passed. Guarded bash backend/scripts/ci_verify_mbti.sh passed through strict queue with Big Five 1487 tests / 181390 assertions and personality full-32 71 tests / 5371 assertions; no compiled diffs remained.",
+          "status": "pass"
+        },
+        "github": {
+          "evidence": "PR not opened yet; local manifest checks must pass first.",
+          "status": "pending"
+        }
+      },
+      "commit_sha": null,
+      "depends_on": [
+        "BIG5-CAREER-BRIDGE-SCHEMA-01"
+      ],
+      "failure_reason": null,
+      "id": "BIG5-CAREER-BRIDGE-AUDITOR-02",
+      "local_cleanup_executed": false,
+      "merged_at": null,
+      "next_task": null,
+      "pr_url": null,
+      "remote_branch_deleted": false,
+      "repo": "fap-api",
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "github_checks_green": null,
+        "local_validation_passed": true,
+        "post_merge_revalidated": null
+      },
+      "sidecars": [],
+      "status": "local_checks_passed",
+      "title": "BIG5-CAREER-BRIDGE-AUDITOR-02: feat(career): add read-only Big Five career bridge auditor",
+      "transitions": [
+        {
+          "at": "2026-07-15T22:04:00Z",
+          "from": "pending",
+          "note": "Started PR13 from exact PR12 merge after verifying GitHub merge, main containment, and branch cleanup. Scope is limited to a deterministic read-only auditor/CLI, focused tests/docs/skill, runtime-freeze classification, and train bookkeeping; the later-discovered locale defect is isolated in the following baseline-repair transition.",
+          "to": "implementing"
+        },
+        {
+          "at": "2026-07-15T22:27:30Z",
+          "from": "implementing",
+          "note": "Isolated the pre-existing PR12-to-Career locale mismatch into ad-hoc baseline repair PR #3119. The repair passed focused 12/113, touched Pint, JSON/diff checks, guarded full CI with Big Five 1480/181355 and full32 71/5371, and all nine GitHub checks; it merged as 705c70e84a63fa25971622b47647aef412afbb04. PR13 was cleanly rebased to that merge and its diff is now exact auditor-only scope.",
+          "to": "implementing_after_baseline_repair"
+        },
+        {
+          "at": "2026-07-15T22:34:30Z",
+          "from": "implementing_after_baseline_repair",
+          "note": "Local manifest validation passed: focused bridge/auditor/CLI 19/148, runtime-freeze 2/4, 239-line route discovery, touched Pint, Composer validate/audit, JSON/YAML, exact 10-path scope, and guarded full CI through strict queue with Big Five 1487/181390 and full32 71/5371. No production or public mutation occurred.",
+          "to": "local_checks_passed"
         }
       ]
     },

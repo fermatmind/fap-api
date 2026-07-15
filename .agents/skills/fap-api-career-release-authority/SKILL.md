@@ -58,6 +58,7 @@ Keep fap-api as the authority for career content, release state, and public care
 - Read `docs/big5-v2-platform-summary/big5_authority_v2_career_integration_retrospective_2026-07-15.md` before changing a Big Five-to-Career adapter, public projection, importer, promotion gate, or release workflow.
 - Use `backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json` and `backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json` as the machine-readable bridge boundary.
 - Apply `App\Domain\Career\Bridge\BigFiveCareerBridgeContract` as the executable fail-closed gate: select exactly the published Big Five revision from the backend public projection, require all visible-evidence permissions, bind both public projection hashes, and lock the output to the exact published Career runtime projection.
+- Use `career:audit-big-five-bridge` for deterministic read-only JSON/Markdown audits. Supply the Big Five published/public projection, Career runtime publish projection, and bridge candidate artifacts explicitly; the auditor must not infer authority from a working revision, generated package, private result, or record existence.
 - Only `published_projection_ready` with zero blockers may reach a future public reader; every other state resolves to `blocked` with `public_reader_allowed=false`.
 - Keep RIASEC primary and Big Five supplementary under `claim_mode=explanation_only`; ranking, hiring/screening, outcome prediction, diagnosis, pSEO, and private assessment/user/order data must remain absent.
 
