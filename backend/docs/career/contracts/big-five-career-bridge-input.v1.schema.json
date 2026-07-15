@@ -181,7 +181,7 @@
           "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
         },
         "locale": {
-          "enum": ["en", "zh-CN"]
+          "enum": ["en", "zh"]
         },
         "public_resolution_type": {
           "const": "public_canonical_job"
@@ -267,7 +267,7 @@
             "properties": {"locale": {"const": "zh-CN"}}
           },
           "career_projection": {
-            "properties": {"locale": {"const": "zh-CN"}}
+            "properties": {"locale": {"const": "zh"}}
           }
         }
       }
