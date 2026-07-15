@@ -93339,7 +93339,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "review_fixes_local_verified",
+    "status": "ready_to_merge",
     "commit_sha": "60ffc19e279c712ccea4ce741f6737eab33f946f",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
@@ -93357,8 +93357,8 @@
         "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites pass 48 tests / 2162 assertions; dash-led English/Chinese contrastive-negation regressions pass 2 tests / 322 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Spaced hyphen, en dash, em dash, double hyphen, and Chinese double em dash now terminate negation scope so following positive claims fail closed, while direct negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "All nine required checks passed on ledger head bdb85eebb, then same-head review added one valid in-scope P2 finding: dash-separated clauses could remain inside explicit-negation scope. The locally verified substantive fix head 60ffc19e2 terminates English and Chinese negation scope at dash separators; fresh GitHub checks are required."
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head b2e72a990. GitHub reports CLEAN/MERGEABLE, the Codex clean-review comment explicitly records Reviewed commit b2e72a9903 with no major issues, and GraphQL reports zero unresolved review threads."
       },
       "ci_fix": {
         "status": "pass",
@@ -93372,7 +93372,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93785,9 +93785,14 @@
           "at": "2026-07-15T22:04:41Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed on ledger head bdb85eebb, then same-head review added one valid P2 finding: dash-separated clauses could remain inside explicit-negation scope. Spaced hyphen, en dash, em dash, double hyphen, and Chinese double em dash now terminate scope. Focused regressions pass 2 / 322, combined PR08+PR02 suites pass 48 / 2162, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T22:11:27Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head b2e72a990, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit b2e72a9903, and all review threads are resolved. All ninety-nine valid P2 findings are fixed; final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. This ready-ledger head must complete one final CI and same-head review round before squash merge."
         }
       ],
-    "updated_at": "2026-07-15T22:04:41Z"
+    "updated_at": "2026-07-15T22:11:27Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
