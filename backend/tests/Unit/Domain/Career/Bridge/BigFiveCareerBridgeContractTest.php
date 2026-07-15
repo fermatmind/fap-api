@@ -65,6 +65,26 @@ final class BigFiveCareerBridgeContractTest extends TestCase
         foreach (['recommendation_authority', 'ranking_allowed', 'hiring_use_allowed', 'outcome_prediction_allowed', 'pseo_allowed'] as $field) {
             $this->assertFalse($output['properties']['claim_boundary']['properties'][$field]['const']);
         }
+
+        $assetIdPatterns = [
+            $input['properties']['big_five_asset_identity']['pattern'],
+            $input['properties']['big_five_projection']['properties']['asset_id']['pattern'],
+            $output['properties']['source_locks']['properties']['big_five_asset_id']['pattern'],
+        ];
+        $this->assertCount(1, array_unique($assetIdPatterns));
+        foreach ($assetIdPatterns as $pattern) {
+            $this->assertSame(1, preg_match('~'.$pattern.'~', 'model_hub:en:/en/personality/big-five'));
+            foreach ([
+                'model_hub:en://en/personality/big-five',
+                'model_hub:en:/en/./personality/big-five',
+                'model_hub:en:/en/personality/../private',
+                'model_hub:en:/en/personality/big-five/.',
+                'model_hub:en:/en/personality/big-five/..',
+                'model_hub:en:/en/personality/big-five/',
+            ] as $traversalShapedAssetId) {
+                $this->assertSame(0, preg_match('~'.$pattern.'~', $traversalShapedAssetId));
+            }
+        }
     }
 
     #[Test]
