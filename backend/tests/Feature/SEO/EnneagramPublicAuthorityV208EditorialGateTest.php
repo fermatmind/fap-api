@@ -532,6 +532,28 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_science_proven_and_validated_permutations_fail_closed(): void
+    {
+        foreach (['Scientifically proven', 'Scientifically validated', 'Clinically proven', 'Clinically validated', '科学证明', '科学验证', '临床证明', '临床验证'] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('unsupported_science_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach (['This page is not scientifically validated.', 'This page is not clinically proven.', '本页并非科学验证。', '本页不是临床证明。'] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
     public function test_visible_human_review_and_release_claims_fail_claim_safety_gate(): void
     {
         foreach ([

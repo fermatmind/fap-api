@@ -325,7 +325,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         'claim_safety',
     ];
 
-    private const UNSUPPORTED_CLAIM_PATTERN = '/(?:scientifically proven|neuroscience proves|clinically validated|absolute(?:ly)? accurate|most accurate personality test|(?:global(?:ly)?|worldwide|world[\'’]?s)\s+(?:first|best|most\s+accurate)\b|科学(?:已)?证明|神经科学证明|临床验证|绝对准确|全球(?:第一|首个|最好|最佳|最准确))/iu';
+    private const UNSUPPORTED_CLAIM_PATTERN = '/(?:(?:scientifically|clinically)\s+(?:proven|validated)|neuroscience proves|absolute(?:ly)? accurate|most accurate personality test|(?:global(?:ly)?|worldwide|world[\'’]?s)\s+(?:first|best|most\s+accurate)\b|(?:科学|临床)(?:已)?(?:证明|验证)|神经科学证明|绝对准确|全球(?:第一|首个|最好|最佳|最准确))/iu';
 
     private const FERMATMIND_PSYCHOMETRICS_PATTERN = '/(?:(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,80}(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)|(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)[^.!?。！？\n]{0,80}(?:fermatmind|费马测试|费马测评))/iu';
 
