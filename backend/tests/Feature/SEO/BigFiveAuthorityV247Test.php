@@ -1322,6 +1322,26 @@ final class BigFiveAuthorityV247Test extends TestCase
         }
     }
 
+    public function test_database_preflight_rejects_rehashed_rollback_that_allows_missing_targets(): void
+    {
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['abort_on_missing_target'] = false;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-database-rollback-allows-missing-targets.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-database-authorization-allows-missing-targets.json', $authorization);
+
+        try {
+            $this->preflight()->databasePreflight(self::REVIEW, $authorizationPath, $rollbackPath);
+            $this->fail('Expected database preflight to reject rollback without abort-on-missing safety.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('Rollback plan identity/hold contract mismatch', $exception->getMessage());
+        } finally {
+            File::delete([$rollbackPath, $authorizationPath]);
+        }
+    }
+
     public function test_standalone_validator_rejects_rehashed_nonzero_rollback_effects(): void
     {
         $source = base_path('../generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47');

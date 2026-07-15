@@ -946,6 +946,7 @@ final class BigFiveReviewPromotionPreflight
         if (($rollback['schema_version'] ?? null) !== 'big5-authority-v2-promotion-rollback-plan.v1'
             || ($rollback['review_manifest_sha256'] ?? null) !== $reviewSha
             || count($rollback['rows'] ?? []) !== self::ASSET_COUNT
+            || ($rollback['abort_on_missing_target'] ?? false) !== true
             || ($rollback['execution_implemented'] ?? true) !== false
             || ! $this->rollbackEffectsMatchZeroContract($rollback['effects'] ?? null)) {
             throw new RuntimeException('Rollback plan identity/hold contract mismatch.');
