@@ -1,0 +1,126 @@
+{
+  "schema_version": "big5-authority-v2-cohort-promotion-authorization.v1",
+  "generated_at": "2026-07-15T09:38:54Z",
+  "status": "HOLD_PENDING_MANUAL_REVIEW_RUNTIME_PREFLIGHT_AND_EXACT_COHORT_AUTHORIZATION",
+  "review_manifest_sha256": "54eaf64151a0a41e6a2feaa12ca2be607842e893243f6ee75f6ff78bb7ec096a",
+  "rollback_plan_sha256": "a7aea2af952b017468a182e0c2a8ab661e0eedfae1419133f2c7ef5c74c1db03",
+  "authority_package_sha256": "fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162",
+  "deployed_sha": null,
+  "promotion_preflight_fingerprint": null,
+  "production_promotion_currently_authorized": false,
+  "approval_phrases_currently_executable": false,
+  "cohorts": [
+    {
+      "cohort_id": "cms_article_en_01",
+      "cohort_sha256": "25bdbbfef4c23edb39117b6216d2c335af7d5aa855e0440b3b5ffa27514498ef",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_article_en_02",
+      "cohort_sha256": "fb628f6b969c2251bddd7798c0c6873f65b3abfbc9eceeb5398fc676f48ee42b",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_article_en_03",
+      "cohort_sha256": "3a49a41047f5c0d70db08edb85e22d57b41dd80c868a14fbd3505a0770293f29",
+      "asset_count": 3,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_article_zh_cn_01",
+      "cohort_sha256": "0639fe307cbf9edb0f467e75cba41fb59763ebcd7779a844fd82ab781b686529",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_article_zh_cn_02",
+      "cohort_sha256": "558d12deb2f3670bacbf2a168a46a8c4ebb00fdfc90058bbf5fae119a01362a4",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_article_zh_cn_03",
+      "cohort_sha256": "39d3ece7886673e7e6518f651df62d65deea0f8ad0669660c33593108ac6d3e5",
+      "asset_count": 6,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_content_pages_en_01",
+      "cohort_sha256": "ee77a9cb48e0f20e9385a1141bd5d366db727b5b3e95e143396e3ef0d0a411c4",
+      "asset_count": 2,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_content_pages_zh_cn_01",
+      "cohort_sha256": "277295aa047fe0243ae59c67b8f5994038972c001ee5df42b5709de94e2c6753",
+      "asset_count": 2,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_personality_public_content_assets_en_01",
+      "cohort_sha256": "5ba8e4c47482e7a4be20319bfd550de8f3c75cbd6c5541338b605a1d5dfa5cff",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_personality_public_content_assets_en_02",
+      "cohort_sha256": "b9c116672a4130458cb2264dad7665c1a2ade633feeeca49706af375d0a506f2",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_personality_public_content_assets_en_03",
+      "cohort_sha256": "5d6cc8474cc82617eb0ab5d43267f953eed1f0a07ce829fcf853042f322f161d",
+      "asset_count": 12,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_personality_public_content_assets_zh_cn_01",
+      "cohort_sha256": "bec9376777373c899160eabd2b53dc7fd9194276b27755d993704e23a8bb56e7",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_personality_public_content_assets_zh_cn_02",
+      "cohort_sha256": "264db132d65e0e67b0e0c5fe3952e912707fab428eb241f1b92f5ba78e51c9ad",
+      "asset_count": 25,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_personality_public_content_assets_zh_cn_03",
+      "cohort_sha256": "9cd1f55d046c7a12c3d412f19df98994270fe6b8e41338686b7697f7bec2a15d",
+      "asset_count": 2,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_topic_profiles_en_01",
+      "cohort_sha256": "2c36c611c6b0bc628ffe292720b7d8dfdd9bf183dfd25fa9796c7b970ee1a705",
+      "asset_count": 1,
+      "authorized": false,
+      "exact_authorization": null
+    },
+    {
+      "cohort_id": "cms_topic_profiles_zh_cn_01",
+      "cohort_sha256": "2149f0c0c7d931d5fffe9dca2416961d6001d58c586f4ce2c250ba667fc49a92",
+      "asset_count": 1,
+      "authorized": false,
+      "exact_authorization": null
+    }
+  ]
+}

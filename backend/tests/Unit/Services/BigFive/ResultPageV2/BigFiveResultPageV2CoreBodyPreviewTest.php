@@ -294,6 +294,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_review_promotion_preflight(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFiveReviewPromotionPreflight.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFivePromotionWriter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -5988,6 +6002,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2ReviewPromotionPreflightFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7814,6 +7832,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV246TopicDraftPreflight.php',
             'backend/app/Services/BigFive/AuthorityV2/TopicAuthority/BigFiveTopicAuthorityDraftPreflight.php',
+        ], true);
+    }
+
+    private function isBigFiveAuthorityV2ReviewPromotionPreflightFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFiveReviewPromotionPreflight.php',
         ], true);
     }
 
