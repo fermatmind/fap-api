@@ -93052,7 +93052,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All three automated P2 threads were validated and fixed in scope: --promote requires --json so the signed rollback token is emitted; successful promote/rollback results report production_execution from the actual runtime environment; and both operations explicitly advance updated_at while rollback verifies restored content/pointer independently of freshness. Focused promoter tests pass 11 / 79, changed files pass syntax/Pint, exact classifier passes 1 / 2, actual branch-diff freeze passes 1 / 3, and YAML/JSON/diff checks pass."
+        "evidence": "All four automated P2 threads were validated and fixed in scope: --promote requires --json so the signed rollback token is emitted; successful promote/rollback results report production_execution from the actual runtime environment; both operations explicitly advance updated_at while rollback verifies restored content/pointer independently of freshness; and rollback locks and validates the prior published revision's asset/key/state/package/source lineage before restoring its pointer. Focused promoter tests pass 12 / 84, changed files pass syntax/Pint, exact classifier passes 1 / 2, actual branch-diff freeze passes 1 / 3, and YAML/JSON/diff checks pass."
       }
     },
     "scope_validation": {
@@ -93101,9 +93101,14 @@
         "at": "2026-07-15T07:48:03Z",
         "status": "review_fixes_local_verified",
         "note": "The second nine-check round passed on ba492daf9, then a third valid P2 was fixed: CAS promotion and rollback now advance public freshness timestamps while rollback restores and verifies the prior content/pointer state. Promoter regression is green at 11 / 79; no production command was executed."
+      },
+      {
+        "at": "2026-07-15T07:55:47Z",
+        "status": "review_fixes_local_verified",
+        "note": "The third nine-check round passed on a0c9a7d60, then a fourth valid P2 was fixed: rollback now locks and validates the previous published revision lineage before restoring its pointer. Promoter regression is green at 12 / 84 with drift causing a zero-additional-write failure; no production command was executed."
       }
     ],
-    "updated_at": "2026-07-15T07:48:03Z"
+    "updated_at": "2026-07-15T07:55:47Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",

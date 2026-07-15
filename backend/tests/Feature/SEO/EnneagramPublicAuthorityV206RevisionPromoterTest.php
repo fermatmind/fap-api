@@ -209,6 +209,26 @@ SQL);
         }
     }
 
+    public function test_rollback_rejects_previous_published_revision_lineage_drift_without_writes(): void
+    {
+        $targets = $this->seedRevisionEstate();
+        $plan = $this->promoter()->preflight($targets);
+        $promoted = $this->promoter()->promote($targets, (string) $plan['preflight_fingerprint']);
+        DB::table('personality_public_content_asset_revisions')
+            ->where('id', (int) $targets[0]['expected_current_published_revision_id'])
+            ->update(['source_hash' => str_repeat('f', 64)]);
+        $before = $this->databaseFingerprint();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('previous published revision identity changed');
+
+        try {
+            $this->promoter()->rollback((string) $promoted['rollback_token']);
+        } finally {
+            $this->assertSame($before, $this->databaseFingerprint());
+        }
+    }
+
     public function test_console_preflight_is_read_only_and_unapproved_promotion_fails_closed(): void
     {
         $targets = $this->seedRevisionEstate();

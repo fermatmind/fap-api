@@ -130,6 +130,8 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                     'asset_key' => (string) $target['asset_key'],
                     'promoted_revision_id' => (int) $revision->id,
                     'previous_published_revision_id' => $target['expected_current_published_revision_id'],
+                    'previous_published_revision_package_sha256' => $target['current_published_revision']?->authority_package_sha256,
+                    'previous_published_revision_source_hash' => $target['current_published_revision']?->source_hash,
                     'package_sha256' => (string) $revision->authority_package_sha256,
                     'source_hash' => (string) $revision->source_hash,
                     'before_public_fingerprint' => (string) $target['expected_public_fingerprint_before'],
@@ -190,6 +192,19 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                     || (string) $revision->authority_package_sha256 !== (string) $row['package_sha256']
                     || (string) $revision->source_hash !== (string) $row['source_hash']) {
                     throw new RuntimeException('Rollback promoted revision identity changed: '.(string) $row['asset_key'].'.');
+                }
+                if ($row['previous_published_revision_id'] !== null) {
+                    $previousRevision = PersonalityPublicContentAssetRevision::query()
+                        ->lockForUpdate()
+                        ->find((int) $row['previous_published_revision_id']);
+                    if (! $previousRevision instanceof PersonalityPublicContentAssetRevision
+                        || (int) $previousRevision->asset_id !== (int) $asset->id
+                        || (string) $previousRevision->authority_asset_key !== (string) $row['asset_key']
+                        || (string) $previousRevision->workflow_state !== self::STATE_PUBLISHED
+                        || (string) $previousRevision->authority_package_sha256 !== (string) $row['previous_published_revision_package_sha256']
+                        || (string) $previousRevision->source_hash !== (string) $row['previous_published_revision_source_hash']) {
+                        throw new RuntimeException('Rollback previous published revision identity changed: '.(string) $row['asset_key'].'.');
+                    }
                 }
 
                 $updates = [
@@ -311,6 +326,20 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 || (int) ($asset->working_revision_id ?? 0) !== $expectedWorkingId) {
                 throw new RuntimeException('Promotion pointer is stale: '.$assetKey.'.');
             }
+            $currentPublishedRevision = null;
+            if ($currentPublishedId !== null) {
+                $publishedRevisionQuery = PersonalityPublicContentAssetRevision::query();
+                if ($lock) {
+                    $publishedRevisionQuery->lockForUpdate();
+                }
+                $currentPublishedRevision = $publishedRevisionQuery->find($currentPublishedId);
+                if (! $currentPublishedRevision instanceof PersonalityPublicContentAssetRevision
+                    || (int) $currentPublishedRevision->asset_id !== $assetId
+                    || (string) $currentPublishedRevision->authority_asset_key !== $assetKey
+                    || (string) $currentPublishedRevision->workflow_state !== self::STATE_PUBLISHED) {
+                    throw new RuntimeException('Current published revision lineage is invalid: '.$assetKey.'.');
+                }
+            }
 
             $revisionQuery = PersonalityPublicContentAssetRevision::query();
             if ($lock) {
@@ -361,6 +390,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 'expected_public_fingerprint_before' => $publicFingerprint,
                 'asset' => $asset,
                 'working_revision' => $revision,
+                'current_published_revision' => $currentPublishedRevision,
                 'before_editorial_snapshot' => $this->editorialSnapshot($asset),
                 'before_restorable_fingerprint' => $this->restorableFingerprint($asset),
                 'promoted_editorial_snapshot' => $this->databaseEditorialSnapshot($promotedEditorial),
