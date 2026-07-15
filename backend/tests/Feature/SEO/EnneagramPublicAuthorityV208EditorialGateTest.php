@@ -588,6 +588,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         foreach ([
             'Human reviewed by Jane and approved for publication',
             'Expert reviewed',
+            'Editor reviewed',
+            'Editor-reviewed',
+            'Editor review completed',
+            'Completed editor review',
             'Human review completed',
             'Completed human review',
             'Human review has been completed',
@@ -626,7 +630,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Manual review is not completed.', 'This page is not yet published.', 'This page is not indexable.'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not yet published.', 'This page is not indexable.'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
