@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-      "commit_sha": "52ba47670ca91a47e4548355ea9b08355418b3b6",
+      "commit_sha": "0242d6257055a0a61d5cd4dd7fc55b729391f837",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-          "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 45 tests / 1410 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Editor reviewed/editor-reviewed and editor review completion claims now fail closed while explicit negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+          "evidence": "Latest review-fix replay passed under the concurrency guard while another full ci_verify_mbti.sh was already running: combined PR08 and PR02 feature suites 45 tests / 1454 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Hyphenated scientifically/clinically proven/validated claims and find-your/your-best-career variants now fail closed while explicit negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ready-ledger head e91f8d6bd before the same-head review added one valid in-scope P2 finding: editor reviewed/editor-reviewed wording bypassed the visible review-truth pattern. The locally verified substantive fix head 52ba47670 covers editor reviewer nouns and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 7c66a8934 before the same-head review added two valid in-scope P2 findings: hyphenated science-proof wording and common your-best-career variants bypassed claim safety. The locally verified substantive fix head 0242d6257 covers both variant families and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-          "evidence": "All sixty-eight valid P2 findings are fixed. Visible editor-reviewed/editor review completion wording now enters the same negation-aware closed review-truth boundary as human, expert, editorial, and manual review wording. PR08+PR02 pass 45 tests / 1410 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+          "evidence": "All seventy valid P2 findings are fixed. Hyphenated science-proof/validation wording and find-your/your-best-career variants now enter the existing negation-aware unsupported-science and deterministic-recommendation boundaries. PR08+PR02 pass 45 tests / 1454 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93660,9 +93660,14 @@
           "at": "2026-07-15T17:54:10Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed on ready-ledger head e91f8d6bd, then one valid same-head P2 was fixed: editor reviewed/editor-reviewed and editor review completion wording now fails the visible review-truth gate, while explicit not-editor-reviewed limitations remain allowed. PR08+PR02 pass 45 / 1410, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:02:43Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head 7c66a8934, then two valid same-head P2 findings were fixed: scientifically-proven/clinically-validated hyphen variants and find-your/your-best-career wording now fail claim safety, while explicit negative limitations remain allowed. Another full ci_verify_mbti.sh was already running, so only focused checks were started: PR08+PR02 pass 45 / 1454, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-      "updated_at": "2026-07-15T17:54:10Z"
+      "updated_at": "2026-07-15T18:02:43Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
