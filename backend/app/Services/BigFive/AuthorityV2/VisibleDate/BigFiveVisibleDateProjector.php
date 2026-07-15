@@ -22,23 +22,36 @@ final class BigFiveVisibleDateProjector
     /** @return array<string, mixed> */
     public function forArticle(Article $article, ?ArticleTranslationRevision $publishedRevision = null): array
     {
+        $articleIsPublic = $article->status === 'published'
+            && (bool) $article->is_public
+            && ! $article->trashed()
+            && ! in_array((string) $article->lifecycle_state, [
+                Article::LIFECYCLE_ARCHIVED,
+                Article::LIFECYCLE_SOFT_DELETED,
+            ], true);
         $revisionBelongs = $publishedRevision instanceof ArticleTranslationRevision
-            && (int) $publishedRevision->article_id === (int) $article->id;
+            && (int) $publishedRevision->article_id === (int) $article->id
+            && (int) $publishedRevision->org_id === (int) $article->org_id
+            && (string) $publishedRevision->locale === (string) $article->locale;
         $revisionMatches = $revisionBelongs
-            && $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED;
+            && $article->published_revision_id !== null
+            && (int) $publishedRevision->id === (int) $article->published_revision_id
+            && $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED
+            && $this->publicationIsEffective($publishedRevision->published_at);
         $published = null;
-        if ($article->status === 'published' && (bool) $article->is_public) {
+        if ($articleIsPublic && $revisionMatches) {
             $published = $this->directDate(
-                $revisionMatches && $publishedRevision->published_at !== null
+                $publishedRevision->published_at !== null
                     ? $publishedRevision->published_at
                     : $article->published_at,
-                $revisionMatches && $publishedRevision->published_at !== null
+                $publishedRevision->published_at !== null
                     ? 'article_translation_revisions.published_at'
                     : 'articles.published_at',
                 'cms_publication',
             );
         }
-        $reviewed = $revisionMatches
+        $reviewed = $articleIsPublic
+            && $revisionMatches
             && $publishedRevision->reviewed_at !== null
             && $publishedRevision->reviewed_by !== null
             ? $this->directDate(
@@ -51,7 +64,6 @@ final class BigFiveVisibleDateProjector
         $metadata = $revisionBelongs && is_array($publishedRevision->authority_metadata_json)
             ? $publishedRevision->authority_metadata_json
             : [];
-        $updatedCandidate = $revisionMatches ? $publishedRevision->updated_at : $article->updated_at;
 
         return $this->project(
             authoritySurface: 'Article',
@@ -59,13 +71,11 @@ final class BigFiveVisibleDateProjector
             published: $published,
             reviewed: $reviewed,
             updated: $this->metadataDate(
-                $revisionMatches ? $metadata : [],
+                $articleIsPublic && $revisionMatches ? $metadata : [],
                 'updated_at',
                 'editorial_update',
-                $updatedCandidate,
-                $revisionMatches
-                    ? 'article_translation_revisions.updated_at'
-                    : 'articles.updated_at',
+                $revisionMatches ? $publishedRevision->updated_at : null,
+                'article_translation_revisions.updated_at',
             ),
             revisionCreatedAt: $revisionBelongs ? $publishedRevision->created_at : null,
             metadata: $metadata,
@@ -78,25 +88,28 @@ final class BigFiveVisibleDateProjector
         ?PersonalityPublicContentAssetRevision $revision = null,
     ): array {
         $metadata = is_array($asset->authority_json) ? $asset->authority_json : [];
-        $published = $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
-            && (bool) $asset->is_public
+        $assetIsPublic = $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
+            && (bool) $asset->is_public;
+        $published = $assetIsPublic
             ? $this->directDate(
                 $asset->published_at,
                 'personality_public_content_assets.published_at',
                 'cms_publication',
             )
             : null;
-        $reviewed = $this->isCompletedReviewState((string) $asset->review_state)
+        $reviewed = $assetIsPublic && $this->isCompletedReviewState((string) $asset->review_state)
             ? $this->directDate(
                 $asset->last_reviewed_at,
                 'personality_public_content_assets.last_reviewed_at',
                 'manual_review',
             )
             : null;
-        $revisionCreatedAt = $revision instanceof PersonalityPublicContentAssetRevision
-            && (int) $revision->asset_id === (int) $asset->id
-            ? $revision->created_at
-            : null;
+        $revisionBelongs = $revision instanceof PersonalityPublicContentAssetRevision
+            && (int) $revision->asset_id === (int) $asset->id;
+        $revisionMatches = $revisionBelongs
+            && $asset->published_revision_id !== null
+            && (int) $revision->id === (int) $asset->published_revision_id
+            && $assetIsPublic;
 
         return $this->project(
             authoritySurface: 'PersonalityPublicContentAsset',
@@ -104,13 +117,13 @@ final class BigFiveVisibleDateProjector
             published: $published,
             reviewed: $reviewed,
             updated: $this->metadataDate(
-                $metadata,
+                $assetIsPublic ? $metadata : [],
                 'updated_at',
                 'editorial_update',
                 $asset->updated_at,
                 'personality_public_content_assets.updated_at',
             ),
-            revisionCreatedAt: $revisionCreatedAt,
+            revisionCreatedAt: $revisionBelongs ? $revision->created_at : null,
             metadata: $metadata,
         );
     }
@@ -118,12 +131,18 @@ final class BigFiveVisibleDateProjector
     /** @return array<string, mixed> */
     public function forTopic(TopicProfile $topic, ?TopicProfileRevision $revision = null): array
     {
-        $revisionMatches = $revision instanceof TopicProfileRevision
+        $topicIsPublic = $topic->status === TopicProfile::STATUS_PUBLISHED
+            && (bool) $topic->is_public;
+        $revisionBelongs = $revision instanceof TopicProfileRevision
             && (int) $revision->profile_id === (int) $topic->id;
-        $metadata = $revisionMatches && is_array($revision->snapshot_json)
+        $revisionMatches = $revisionBelongs
+            && $topic->published_revision_id !== null
+            && (int) $revision->id === (int) $topic->published_revision_id
+            && $topicIsPublic;
+        $metadata = $revisionBelongs && is_array($revision->snapshot_json)
             ? $revision->snapshot_json
             : [];
-        $published = $topic->status === TopicProfile::STATUS_PUBLISHED && (bool) $topic->is_public
+        $published = $topicIsPublic
             ? $this->directDate(
                 $topic->published_at,
                 'topic_profiles.published_at',
@@ -135,15 +154,15 @@ final class BigFiveVisibleDateProjector
             authoritySurface: 'Topic',
             identity: 'topic:'.(int) $topic->id.':'.(string) $topic->locale.':'.(string) $topic->slug,
             published: $published,
-            reviewed: $this->metadataDate($metadata, 'reviewed_at', 'manual_review'),
+            reviewed: $this->metadataDate($revisionMatches ? $metadata : [], 'reviewed_at', 'manual_review'),
             updated: $this->metadataDate(
-                $metadata,
+                $revisionMatches ? $metadata : [],
                 'updated_at',
                 'editorial_update',
                 $topic->updated_at,
                 'topic_profiles.updated_at',
             ),
-            revisionCreatedAt: $revisionMatches ? $revision->created_at : null,
+            revisionCreatedAt: $revisionBelongs ? $revision->created_at : null,
             metadata: $metadata,
         );
     }
@@ -152,7 +171,9 @@ final class BigFiveVisibleDateProjector
     public function forLandingSurface(LandingSurface $surface): array
     {
         $metadata = is_array($surface->payload_json) ? $surface->payload_json : [];
-        $published = $surface->status === LandingSurface::STATUS_PUBLISHED && (bool) $surface->is_public
+        $surfaceIsPublic = $surface->status === LandingSurface::STATUS_PUBLISHED
+            && (bool) $surface->is_public;
+        $published = $surfaceIsPublic
             ? $this->directDate(
                 $surface->published_at,
                 'landing_surfaces.published_at',
@@ -164,9 +185,9 @@ final class BigFiveVisibleDateProjector
             authoritySurface: 'LandingSurface',
             identity: 'landing_surface:'.(int) $surface->id.':'.(string) $surface->locale.':'.(string) $surface->surface_key,
             published: $published,
-            reviewed: $this->metadataDate($metadata, 'reviewed_at', 'manual_review'),
+            reviewed: $this->metadataDate($surfaceIsPublic ? $metadata : [], 'reviewed_at', 'manual_review'),
             updated: $this->metadataDate(
-                $metadata,
+                $surfaceIsPublic ? $metadata : [],
                 'updated_at',
                 'editorial_update',
                 $surface->updated_at,
@@ -282,8 +303,11 @@ final class BigFiveVisibleDateProjector
         if ($normalized === null) {
             return null;
         }
-        if ($canonicalValue !== null && $normalized !== $this->normalizeDate($canonicalValue)) {
-            return null;
+        if ($canonicalSourceField !== null) {
+            $canonical = $this->normalizeDate($canonicalValue);
+            if ($canonical === null || $normalized !== $canonical) {
+                return null;
+            }
         }
 
         return [
@@ -342,5 +366,17 @@ final class BigFiveVisibleDateProjector
             'published',
             'reviewed',
         ], true);
+    }
+
+    private function publicationIsEffective(mixed $value): bool
+    {
+        if ($value === null) {
+            return true;
+        }
+
+        $normalized = $this->normalizeDate($value);
+
+        return $normalized !== null
+            && CarbonImmutable::parse($normalized)->lessThanOrEqualTo(CarbonImmutable::now('UTC'));
     }
 }
