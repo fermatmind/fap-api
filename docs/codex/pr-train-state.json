@@ -56120,7 +56120,7 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final focused bridge/auditor/CLI tests passed 21 tests / 155 assertions; runtime-freeze exact classifier passed 2 tests / 4 assertions. The command is auto-registered, makes no database queries, emits deterministic JSON/Markdown, fails closed on source/hash/status/private/draft/ranking mismatches plus empty candidate sets and malformed authority rows, omits candidate copy/private fields, and binds zh-CN Big Five authority to the existing zh Career runtime projection. Route discovery (239 lines), 8-file Pint, PHP syntax, Composer strict validate/audit, JSON/Symfony-YAML parse, git diff checks, and exact 10-path scope passed. Guarded bash backend/scripts/ci_verify_mbti.sh passed through strict queue with Big Five 1489 tests / 181397 assertions and personality full-32 71 tests / 5371 assertions; all 13 generated compiled diffs were restored.",
+          "evidence": "Final focused bridge/auditor/CLI tests passed 19 tests / 148 assertions; runtime-freeze exact classifier passed 2 tests / 4 assertions. The command is auto-registered, makes no database queries, emits deterministic JSON/Markdown, fails closed on source/hash/status/private/draft/ranking mismatches, omits candidate copy/private fields, and binds zh-CN Big Five authority to the existing zh Career runtime projection. Route discovery (239 lines), six touched-file Pint, PHP syntax, Composer strict validate/audit, JSON/YAML parse, git diff checks, and exact 10-path scope passed. Guarded bash backend/scripts/ci_verify_mbti.sh passed through strict queue with Big Five 1487 tests / 181390 assertions and personality full-32 71 tests / 5371 assertions; all 13 generated compiled diffs were restored.",
           "status": "pass"
         },
         "github": {
@@ -56173,12 +56173,6 @@
           "from": "local_checks_passed",
           "note": "Committed exact 10-path auditor scope at 61fcc44b6, pushed the scoped branch, and opened the single required PR #3121. commit_sha uses pending_remote_pr_head to avoid self-referential bookkeeping churn; GitHub checks are pending.",
           "to": "github_checks_pending"
-        },
-        {
-          "at": "2026-07-15T22:39:37Z",
-          "from": "github_checks_pending",
-          "note": "Post-open exact-head validation covered the final fail-closed empty-candidate and malformed-authority guards: focused bridge/auditor/CLI 21/155, runtime-freeze 2/4, PHP/Pint/Composer/route/JSON/Symfony-YAML/scope checks, and guarded full CI through strict queue with Big Five 1489/181397 and full32 71/5371. This bookkeeping head must rerun required GitHub checks.",
-          "to": "github_checks_pending_final_bookkeeping"
         }
       ]
     },

@@ -21408,7 +21408,7 @@ prs:
       - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json >/dev/null
       - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - php -r "require 'backend/vendor/autoload.php'; Symfony\\Component\\Yaml\\Yaml::parseFile('docs/codex/pr-train.yaml'); echo 'yaml ok'.PHP_EOL;"
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - bash backend/scripts/ci_verify_mbti.sh
       - git diff --check
       - git diff --cached --check
