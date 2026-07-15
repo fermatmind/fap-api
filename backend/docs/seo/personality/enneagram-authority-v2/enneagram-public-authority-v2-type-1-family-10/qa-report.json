@@ -1,0 +1,82 @@
+{
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10",
+  "schema_version": "enneagram_public_authority_v2_family_qa.v1",
+  "generation_mode": "codex_native_content_generation",
+  "external_model_sessions": [],
+  "source_truth": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
+    "competitor_language_used": false
+  },
+  "skeptical_editorial_review": {
+    "status": "completed_before_focused_gate",
+    "checks": [
+      "core behavior was separated from inferred motive and role-based conscientiousness",
+      "1w9 and 1w2 were kept core-first and compared against sibling wings and adjacent core hypotheses",
+      "three subtype pages used matched tasks and rejected biological-drive certainty",
+      "counterexamples, environmental alternatives, consent, power, and cultural context remained visible",
+      "English and Chinese outlines, examples, FAQ, and exercises were independently authored",
+      "all review, release, revision-pointer, discoverability, write, and deploy boundaries remained closed"
+    ],
+    "handoff": "automated gate evidence is not human review"
+  },
+  "raw_draft_audit": {
+    "status": "failed_repaired",
+    "asset_specific_issue_count": 15,
+    "issues": {
+      "geo_answerability_unverified": 6,
+      "career_or_relationship_prediction": 2,
+      "unsupported_fermatmind_psychometrics_claim": 1,
+      "diagnosis_or_screening_claim": 3,
+      "unsupported_center_system_claim": 1,
+      "visible_review_or_release_claim": 2
+    },
+    "repair_rounds": [
+      {
+        "round": 1,
+        "remaining_asset_specific_issue_count": 2,
+        "remaining_codes": {
+          "unsupported_center_system_claim": 1,
+          "geo_answerability_unverified": 1
+        }
+      },
+      {
+        "round": 2,
+        "remaining_asset_specific_issue_count": 0
+      }
+    ],
+    "critical_contract_violations_after_repair": 0
+  },
+  "final_qa": {
+    "status": "pass_for_manual_review_handoff",
+    "asset_count": 12,
+    "locale_counts": {
+      "en": 6,
+      "zh-CN": 6
+    },
+    "entity_counts": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "faq_count": 36,
+    "asset_specific_issue_count": 0,
+    "deferred_target_count": 104,
+    "manual_review_state": "pending_manual_review",
+    "reviewer": null,
+    "human_review_completed": false,
+    "publish_eligible": false
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}

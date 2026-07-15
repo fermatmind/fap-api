@@ -94027,7 +94027,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "33d3c6c185ba6ecadd020a0c2782acdd471f0243",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3120",
@@ -94050,7 +94050,7 @@
       },
       "github_checks": {
         "status": "pass",
-        "evidence": "All nine required checks passed on ledger head 3342c144babe99ce8263a11ea6c4ebb7b782e3f7: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reports CLEAN/MERGEABLE with zero unresolved review threads."
+        "evidence": "All nine required checks passed again on final ready-ledger head 222df6a082bae0e78d7c387c26e0e2d5cc5206a2: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reported CLEAN/MERGEABLE with zero unresolved review threads."
       },
       "automated_code_review": {
         "status": "unavailable_non_required",
@@ -94065,12 +94065,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T22:49:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -94107,9 +94107,14 @@
         "at": "2026-07-15T22:42:26Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on ledger head 3342c144b, GitHub is CLEAN/MERGEABLE, exact six-file scope and eight-asset count are preserved, and reviewThreads reports zero unresolved. The optional Codex review connector hit its usage limit; reviewDecision is empty and main has no required review rule. This unavailable automated review is recorded without changing pending_manual_review truth. The ready-ledger head must complete one final required-check round before squash merge."
+      },
+      {
+        "at": "2026-07-15T23:00:34Z",
+        "status": "merged",
+        "note": "PR #3120 merged at 2026-07-15T22:49:37Z as squash commit e56f0d591853537f79661114f34bea4c5d7b130f after final head 222df6a08 passed all nine required checks. GitHub MERGED state, origin/main containment, exact six-file scope, eight draft assets, zero unresolved review threads, remote branch deletion, official local cleanup, clean synced main, focused 6-test / 256-assertion post-merge regression, Pint, and JSON parsing were verified before PR10 began."
       }
     ],
-    "updated_at": "2026-07-15T22:42:26Z"
+    "updated_at": "2026-07-15T23:00:34Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10",
@@ -94120,18 +94125,30 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR09 merged as e56f0d591853537f79661114f34bea4c5d7b130f; GitHub MERGED state, origin/main containment, all nine final-head checks, exact scope, remote/local cleanup, clean synced main, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first PR08-gate replay found 15 asset-specific issues: six GEO answerability mappings, two prediction-pattern scope findings, one FermatMind psychometrics wording finding, three diagnosis-pattern scope findings, one center-system negation-scope finding, and two visible review/release wording findings. The first repair left two residual issues; the second repair reduced all twelve real assets to zero asset-specific issues without changing identity, claims, review truth, release truth, or execution boundaries."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "The PR10 focused suite passes 8 tests / 428 assertions; all twelve Type 1 family assets have zero asset-specific PR08-gate issues, with only one expected aggregate target_count_invalid signal and exactly 104 target_asset_missing rows deferred to PR11-PR18. Pint, PHP syntax, YAML, all changed JSON, diff check, and the exact six-file allowlist pass."
+      },
+      "content_qa": {
+        "status": "pass",
+        "evidence": "The package contains exactly Type One core, 1w9, 1w2, and self-preservation/social/one-to-one subtype assets in en and zh-CN. Core, wing, and subtype coverage is structurally distinct; all 36 FAQ pairs are unique; locale outlines and examples are independent; counterexamples, environmental alternatives, exercises, internal links, wing/subtype evidence limits, consent and power boundaries are visible. All assets remain pending_manual_review with reviewer null, draft_only, publish_eligible false, and every write/revision/discoverability/deploy boundary false."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -94150,9 +94167,19 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T23:00:34Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR09 merge and began the exact PR10 branch from clean latest origin/main. This scope authors exactly 12 independently composed Type 1 core, wing, and instinctual-subtype locale assets; no CMS/database write, revision-pointer mutation, human-review completion, publication, indexability, sitemap, llms, search submission, deploy, or production action is authorized."
+      },
+      {
+        "at": "2026-07-15T23:05:51Z",
+        "status": "local_checks_passed",
+        "note": "After two truthfully recorded content-repair rounds, all PR10 manifest checks pass: 8 tests / 428 assertions, zero asset-specific PR08-gate issues for all twelve real assets, Pint, PHP syntax, YAML, all JSON, diff check, and exact six-file scope. The package remains a pending-manual-review, draft-only, publish-ineligible handoff with no CMS/database/revision/discoverability/search/deploy action."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T23:05:51Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11",
