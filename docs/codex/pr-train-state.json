@@ -94217,7 +94217,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "93dc4777eb29099bebf7baf5e97eeedb140a85b7",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3122",
@@ -94255,12 +94255,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T23:22:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -94292,9 +94292,14 @@
         "at": "2026-07-15T23:15:27Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on head b2338fccd, GitHub is CLEAN/MERGEABLE, exact six-file scope and twelve-asset count are preserved, and reviewThreads reports zero unresolved. Main has no required review rule and no submitted review exists; this is recorded without changing pending_manual_review truth. The ready-ledger head must complete one final required-check round before squash merge."
+      },
+      {
+        "at": "2026-07-15T23:23:56Z",
+        "status": "merged",
+        "note": "PR #3122 merged at 2026-07-15T23:22:02Z as squash commit 84333bda44d55af55da4d48849a1798488f91c5d after final ready-ledger head 4ad84da16 passed all nine required checks. GitHub MERGED state, origin/main containment, exact six-file scope, twelve draft assets, zero unresolved review threads, remote/local branch cleanup, clean synced main, focused 8-test / 428-assertion post-merge regression, Pint, and JSON parsing were verified before PR11 implementation."
       }
     ],
-    "updated_at": "2026-07-15T23:15:27Z"
+    "updated_at": "2026-07-15T23:23:56Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11",
@@ -94305,19 +94310,44 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "70efe37673e92b98337b9e8c6b5cc1ba29c31a10",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3123",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR10 merged as 84333bda44d55af55da4d48849a1798488f91c5d; GitHub MERGED state, origin/main containment, all nine final-head checks, exact scope, remote/local cleanup, clean synced main, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first PR08-gate replay found 10 asset-specific issues: three GEO answerability mappings, four center-system/mechanism wording findings, two short Chinese FAQ answers, and one short Chinese page-specific exercise signal. The repair reduced all twelve real assets to zero asset-specific issues without changing identity, claims, review truth, release truth, or execution boundaries."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "The PR11 focused suite passes 8 tests / 416 assertions; all twelve Type 2 family assets have zero asset-specific PR08-gate issues, with only one expected aggregate target_count_invalid signal and exactly 104 target_asset_missing rows deferred to PR12-PR18. Pint, PHP syntax, YAML, all changed JSON, diff check, and the exact six-file allowlist pass."
+      },
+      "content_qa": {
+        "status": "pass",
+        "evidence": "The package contains exactly Type Two core, 2w1, 2w3, and self-preservation/social/one-to-one subtype assets in en and zh-CN. Core, wing, and subtype coverage is structurally distinct; all 36 FAQ pairs are unique; locale outlines and examples are independent; consent, refusal, reciprocity, power, role duty, recognition, environmental alternatives, exercises, and internal links are visible. All assets remain pending_manual_review with reviewer null, draft_only, publish_eligible false, and every write/revision/discoverability/deploy boundary false."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All nine GitHub checks passed on immutable PR head 0f2c7dac4052dde724c0d67fd7f2427f8dc86fae: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. GitHub reports CLEAN/MERGEABLE."
+      },
+      "required_reviews": {
+        "status": "pass",
+        "evidence": "GitHub reports an empty reviewDecision, no submitted reviews, no branch-protection rule requiring reviews, and zero review threads. This is repository-policy evidence only and does not claim human content review; every asset remains pending_manual_review."
+      },
+      "codex_skeptical_review": {
+        "status": "pass",
+        "evidence": "The recorded PR08-gate audit found ten initial asset-specific issues and the single scoped repair round cleared all of them. Final focused validation passes 8 tests / 416 assertions, exactly twelve assets, independent en/zh-CN authoring, 36 unique FAQ pairs, pending manual review, draft-only release truth, and closed execution boundaries."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -94335,9 +94365,29 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T23:23:56Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR10 merge and began the exact PR11 branch from clean latest origin/main. This scope authors exactly 12 independently composed Type 2 core, wing, and instinctual-subtype locale assets; no CMS/database write, revision-pointer mutation, human-review completion, publication, indexability, sitemap, llms, search submission, deploy, or production action is authorized."
+      },
+      {
+        "at": "2026-07-15T23:34:56Z",
+        "status": "local_checks_passed",
+        "note": "After one truthfully recorded content-repair round, all PR11 manifest checks pass: 8 tests / 416 assertions, zero asset-specific PR08-gate issues for all twelve real assets, Pint, PHP syntax, YAML, all JSON, diff check, and exact six-file scope. The package remains a pending-manual-review, draft-only, publish-ineligible handoff with no CMS/database/revision/discoverability/search/deploy action."
+      },
+      {
+        "at": "2026-07-15T23:37:14Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3123 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
+      },
+      {
+        "at": "2026-07-15T23:45:32Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on immutable head 0f2c7dac4052dde724c0d67fd7f2427f8dc86fae. GitHub reports CLEAN/MERGEABLE, no required review rule, no reviews, and zero review threads; exact six-file scope, twelve assets, pending-manual-review truth, draft-only release truth, and every execution boundary were revalidated. This ledger-only ready transition must itself receive a fresh complete check cycle before squash merge."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T23:45:32Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12",

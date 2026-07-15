@@ -1,0 +1,1840 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11",
+  "framework": "enneagram",
+  "asset_scope": {
+    "family": "type-2",
+    "expected_asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "counts_by_entity_type": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "identity_keys": [
+      "core_type:type-2",
+      "wing:2w1",
+      "wing:2w3",
+      "instinctual_subtype:type-2/self-preservation",
+      "instinctual_subtype:type-2/social",
+      "instinctual_subtype:type-2/one-to-one"
+    ]
+  },
+  "source_ledger_refs": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
+  },
+  "assets": [
+    {
+      "identity_key": "core_type:type-2",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "path": "/en/personality/enneagram/type-2",
+      "title": "Type Two: needs, connection, and a revisable helping hypothesis",
+      "answer_first": "Type Two is a traditional Enneagram hypothesis about attention returning to other people's needs, connection, and opportunities to be useful. Type Two needs attention appears in what is noticed, offered, and expected in return; helpful behavior alone cannot establish motive or a fixed identity.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English Type Two core draft was composed from consent, reciprocity, and unmet-needs records, independently of the Chinese page's boundary and request sequence.",
+        "outline": [
+          "answer_first",
+          "motivation_attention",
+          "behavior_motive",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "work_relationship_examples",
+          "wings_mistypes",
+          "counterexample",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "the need inferred before the other person states a request",
+          "whether an offer changes after a clear no or different preference",
+          "what disappointment appears when help receives no response or recognition"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "Observe needs before inferring motive",
+          "body": "A Type Two motivation hypothesis asks whether attention repeatedly scans for needs, connection, and a useful role. The same meal, introduction, reminder, or emotional check-in may instead reflect friendship, paid duty, family custom, crisis response, or a clearly stated request."
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "Separate visible help from inferred need",
+          "body": "Record what the recipient asked for, what was offered, and what the helper later said they wanted. Generous behavior does not reveal whether the organizing concern was care, belonging, competence, reciprocity, reputation, avoiding conflict, or completing an assigned responsibility."
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "Compare choice, feedback, and conflict",
+          "body": "In decisions, note whose need is noticed first; in feedback, note whether appreciation affects willingness to continue; in conflict, note whether an unspoken contribution becomes part of the complaint. Compare Type Two feedback with role duty so ordinary caregiving or service work is not mistaken for motive."
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "Hold attunement beside its tradeoffs",
+          "body": "Attention to people can support timely help, social coordination, warmth, and noticing what others overlook. Tradeoffs may emerge when needs are assumed without asking, refusal feels personal, personal limits remain unstated, or giving creates an obligation the recipient never accepted."
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "Use examples without outcome claims",
+          "body": "At work, the hypothesis may organize questions about someone who connects a new colleague with resources before being asked. In a close relationship, it may help examine repeated offers followed by disappointment. These examples provide no basis for conclusions about performance, compatibility, or future results."
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "Compare wings and common mistypes",
+          "body": "The 2w1 hypothesis adds principled service, restraint, and standards; 2w3 adds visible effectiveness, adaptability, and attention to response. Common mistypes include role-based caregiving, Nine conflict avoidance, Six loyalty, Three impression management, cultural hospitality, and learned people-pleasing."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use refusal and non-recognition as tests",
+          "body": "A counterexample weakens a Type Two helping hypothesis when the person readily accepts refusal, states their own needs directly, helps only under formal duty, or shows no recurring attention to connection across comparable situations. Culture, role, safety, reciprocity, and current stress may fit better."
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "Keep observation voluntary and bounded",
+          "body": "Use this page to test questions about requests, consent, reciprocity, and limits. It is not a basis for moral ranking, health or personality conclusions, applicant screening, relationship verdicts, ability judgments, or permanent labels."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does frequent helping establish Type Two?",
+          "answer": "No. Helping can come from work, family duty, community norms, emergency conditions, reciprocal agreements, or practiced kindness. A useful hypothesis requires repeated attention patterns, explicit counterexamples, and comparison with the recipient's actual request."
+        },
+        {
+          "question": "Why distinguish an offered need from a stated request?",
+          "answer": "The distinction reveals whether help responds to evidence or to an assumption. Recording the request, consent, alternative preference, and response to refusal makes the observation more specific and protects the other person's ownership of their decision."
+        },
+        {
+          "question": "What is a useful Type Two boundary experiment?",
+          "answer": "Before offering help, ask one concrete question, name the time or energy available, and accept the answer without persuasion. Later record whether connection changed, whether disappointment appeared, and which unstated expectation needs a direct conversation."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose three interactions with a visible request, a real option to decline, and enough time to observe what happens after the offer.",
+        "observable_signal": "Record the need first inferred, the request actually stated, the help offered, the response to refusal, and any expectation expressed later.",
+        "page_specific_signal": "Mark whether usefulness is pursued before consent, adjusted after new information, or replaced by a direct statement of the helper's own need.",
+        "alternative_explanation": "Compare friendship norms, assigned duty, reciprocity, crisis urgency, hospitality, fear of conflict, and reputation with the Type Two hypothesis.",
+        "reflection_prompt": "Identify the strongest event where helping followed role rather than connection, then state what evidence would lower or discard the hypothesis."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does Type Two needs attention appear?",
+          "Which counterexample weakens a Type Two helping hypothesis?",
+          "Why compare Type Two feedback with role duty?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does Type Two needs attention appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which counterexample weakens a Type Two helping hypothesis?",
+            "visible_path": "sections.6.body"
+          },
+          {
+            "question": "Why compare Type Two feedback with role duty?",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Research is mixed and instrument-specific, so this draft supports observation questions rather than product measurement or outcome conclusions."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-2",
+        "/en/personality/enneagram/wings/2w1",
+        "/en/personality/enneagram/wings/2w3",
+        "/en/personality/enneagram/type-2/instincts/self-preservation",
+        "/en/personality/enneagram/type-2/instincts/social",
+        "/en/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "core_type:type-2",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "path": "/zh/personality/enneagram/type-2",
+      "title": "二号观察假设：需要、连接与帮助边界",
+      "answer_first": "二号是九型人格传统中关于注意力反复落在他人需要、连接和“成为有用的人”上的观察假设。观察二号需要注意，必须区分对方实际提出的请求、自己推测的需要、提供帮助后的期待，以及被拒绝时的反应；热心本身不能证明固定类型。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文二号核心页从请求、拒绝、互惠和个人需要表达独立成稿，没有翻译英文页面的职场案例或论证顺序。",
+        "outline": [
+          "情境入口",
+          "use_boundary",
+          "counterexample",
+          "wings_mistypes",
+          "work_relationship_examples",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "motivation_attention",
+          "behavior_motive",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "对方尚未开口时自己已经推测并准备回应的需要",
+          "明确被拒绝后能否停止、调整或把决定权交还对方",
+          "帮助没有回应时出现的失望、抱怨或直接需求表达"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "behavior_motive",
+          "heading": "先分开帮助行为与动机",
+          "body": "检验二号帮助动机，需要分别记录对方说了什么、自己做了什么，以及后来希望得到什么。送餐、介绍资源、安慰或提醒可能来自岗位、亲友习惯、危机需要、互惠约定或礼貌文化，不能只凭行为推定连接动机。"
+        },
+        {
+          "kind": "motivation_attention",
+          "heading": "再观察注意力反复去向",
+          "body": "若注意力持续扫描谁需要什么、自己能提供什么、关系是否仍亲近，二号假设才值得测试。还要观察当个人需要与他人需要冲突时会怎样选择，以及新信息是否能改变最初的帮助方案。"
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "把敏锐和代价一起看",
+          "body": "对人的关注有时支持及时响应、协调资源、营造温度和发现被忽略的困难。代价可能出现在未经询问便代替决定、把拒绝理解为关系否定、长期不说自己的限制，或让帮助附带对方并未同意的回报。"
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "记录选择、反馈和冲突",
+          "body": "做选择时可看先照顾谁；收到反馈时可看感谢是否影响继续投入；冲突时可看过去贡献是否被拿来说明委屈。比较二号反馈与角色职责，能避免把照护岗位、家庭分工或服务训练直接当成类型。"
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "用情境讨论但不推断结果",
+          "body": "工作中可观察某人是否在新人开口前主动连接资源；关系中可观察多次帮助后是否出现未说出的期待。此类材料只用于讨论请求和边界，不能作为工作表现、关系适配或未来结果的判断依据。"
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "对照两翼和常见误判",
+          "body": "2w1 假设加入原则性服务、克制与标准，2w3 假设加入可见成效、适应表达和对回应的关注。常见误判包括岗位照护、九号式避冲突、六号式忠诚、三号式形象管理、文化待客和后天讨好习惯。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用拒绝与无认可制造反证",
+          "body": "寻找二号帮助反例，可以观察当事人是否轻松接受拒绝、直接表达自己的需要、只在职责明确时帮助，或在可比情境中并不持续关注连接。若这些材料稳定出现，应提高角色、文化、安全、互惠和压力解释的权重。"
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "限定用途与决定权",
+          "body": "本页适合提出关于请求、同意、互惠和个人界限的复盘问题，不适合做道德排名、健康或人格结论、招聘筛选、关系裁决、能力判断或永久标签。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "经常照顾别人就能判断为二号吗？",
+          "answer": "不能。照顾可能来自家庭分工、职业职责、社区规范、紧急状况、互惠协议或练习出的善意。只有当需要与连接的关注跨可比情境重复出现，并经得住反例检验时，假设才有用。"
+        },
+        {
+          "question": "为什么要区分推测需要和明确请求？",
+          "answer": "区分能看出帮助是在回应证据，还是在回应自己的想象。记录请求、同意、替代偏好和被拒绝后的行动，可以保护对方决定权，也让动机假设更具体。"
+        },
+        {
+          "question": "二号适合做什么边界练习？",
+          "answer": "帮助前先问一个具体问题，说明自己可投入的时间或精力，并不劝说地接受答案。之后记录连接是否变化、失望是否出现，以及哪项个人需要应改为直接沟通。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择三次有明确请求、对方可以真实拒绝且事后结果能够被观察的互动，不用模糊的“我总是照顾人”概括。",
+        "observable_signal": "记录最先推测的需要、对方实际请求、提供的帮助、拒绝后的反应，以及后来是否表达回报期待。",
+        "page_specific_signal": "特别标注在同意之前追求有用、根据新信息调整帮助，或改为直接表达自己需要的节点。",
+        "alternative_explanation": "逐项比较亲友规范、岗位职责、互惠约定、危机紧迫、待客文化、害怕冲突和声誉管理。",
+        "reflection_prompt": "选出一次帮助主要跟随职责而非连接的事件，说明什么后续证据会降低或放弃二号假设。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察二号需要注意？",
+          "如何检验二号帮助动机？",
+          "如何寻找二号帮助反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察二号需要注意？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何检验二号帮助动机？",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "如何寻找二号帮助反例？",
+            "visible_path": "sections.6.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "现有研究结论混合且依赖具体工具；本草稿只支持观察问题，不提供产品测量数值或个体结果结论。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-2",
+        "/zh/personality/enneagram/wings/2w1",
+        "/zh/personality/enneagram/wings/2w3",
+        "/zh/personality/enneagram/type-2/instincts/self-preservation",
+        "/zh/personality/enneagram/type-2/instincts/social",
+        "/zh/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:2w1",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "2w1",
+      "path": "/en/personality/enneagram/wings/2w1",
+      "title": "2w1: responsible service as a core-first wing hypothesis",
+      "answer_first": "The 2w1 wing is a core-first, evidence-limited hypothesis: Type Two attention to needs and connection may be modified by One-adjacent standards, restraint, and responsible service. Responsible service is observable, but duty, ethics training, or formal care roles can produce the same pattern.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 2w1 page was authored around consent, service standards, and correction after refusal, independently of the Chinese page's community-duty examples.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "whether the helper names a service standard before offering assistance",
+          "how an offer changes when the recipient prefers another method",
+          "whether resentment follows when duty is fulfilled without appreciation"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep needs and connection at the core",
+          "body": "A 2w1 interpretation begins with Type Two attention to needs, then asks whether One-adjacent standards shape how help is delivered. Responsible conduct without recurring connection attention may be explained by ethics, profession, family rules, religious service, or learned discipline."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Contrast 2w1 with 2w3 and One",
+          "body": "A sibling comparison contrasts 2w1 measured, principled service with 2w3 visible effectiveness and adaptation. Compared with One, the proposed core remains attention to another person's need and the relationship, rather than correction of the standard itself."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe standards after a different preference",
+          "body": "Useful situations include a recipient requesting another method, a volunteer role with explicit limits, and help that receives no thanks. Record whether the standard protects consent and quality or becomes a reason to override the person receiving help."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use flexible, recognition-driven help as a test",
+          "body": "A 2w1 counterexample weakens a responsible service hypothesis when standards disappear around status, help changes mainly to gain approval, or duty remains while connection attention does not recur. Those cases invite role, One, Three, or reputation explanations."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test training and institutional duty",
+          "body": "Nurses, teachers, caseworkers, volunteers, and family caregivers may follow service standards because the role requires them. Compare behavior outside the role and after authority, risk, and accountability change before retaining the wing hypothesis."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep responsible service evidence limited",
+          "body": "Wing research is sparse, so 2w1 remains a secondary observation hypothesis rather than an independent category or measure of goodness. It assigns no moral rank, health status, fixed ability, or outcome conclusion."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does principled caregiving establish 2w1?",
+          "answer": "No. Professional codes, family values, community expectations, or religious commitments may explain principled care. The wing hypothesis needs Type Two connection attention plus repeated standards-shaped delivery and meaningful counterexamples."
+        },
+        {
+          "question": "How does 2w1 differ from a One hypothesis?",
+          "answer": "Hold the service task constant and observe what remains central. A 2w1 hypothesis keeps another person's need and connection in view; a One hypothesis may focus more directly on correctness, responsibility, and fixing the process."
+        },
+        {
+          "question": "What weakens the responsible service hypothesis?",
+          "answer": "Standards that vanish around authority, help driven mainly by public approval, or service that continues without any recurring connection attention would weaken it. Formal duty and ethics training should be compared first."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Choose one formal service task, one informal offer, and one declined suggestion where a quality standard and consent are visible.",
+        "observable_signal": "Record the need noticed, standard named, permission requested, method chosen, and response when the recipient asks for another approach.",
+        "page_specific_signal": "Distinguish a standard that protects care quality from a standard used to override preference or secure appreciation.",
+        "alternative_explanation": "Compare professional codes, family rules, religious or civic duty, risk management, authority, and reputation with the 2w1 hypothesis.",
+        "reflection_prompt": "Identify the event where duty explains the behavior without connection attention and state how much the wing hypothesis should weaken."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does 2w1 responsible service appear?",
+          "Which sibling comparison contrasts 2w1 with 2w3?",
+          "Which 2w1 counterexample weakens responsible service?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does 2w1 responsible service appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which sibling comparison contrasts 2w1 with 2w3?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which 2w1 counterexample weakens responsible service?",
+            "visible_path": "sections.3.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Responsible care may arise from professional codes, family rules, civic duty, risk management, or ethics training rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-2",
+        "/en/personality/enneagram/wings/2w3",
+        "/en/personality/enneagram/type-2/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:2w1",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "2w1",
+      "path": "/zh/personality/enneagram/wings/2w1",
+      "title": "2w1 观察页：原则性服务与同意边界",
+      "answer_first": "2w1 是以二号的需要与连接关注为核心、用一号相邻特征解释标准、克制和负责服务的传统次级假设。观察2w1原则服务，应记录标准是否保护同意和质量，而不是把有纪律的照护直接写成翼型证据。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 2w1 页从社区职责、服务标准和改变方法的能力独立组织，没有翻译英文页的职业清单。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "counterexample",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "core_first_modifier",
+          "observable_situations",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "帮助前是否说明标准、范围和对方可拒绝的选项",
+          "对方提出不同方法时能否调整而不降低尊重",
+          "完成职责却没有感谢时是否出现隐性不满"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_situations",
+          "heading": "从一次改方法的请求开始",
+          "body": "选择社区轮值、家庭照护或同事支持事件，观察对方要求换方法时发生什么。记录标准、范围、同意、实际调整和后续影响，避免只用“有原则”“很善良”概括。"
+        },
+        {
+          "kind": "core_first_modifier",
+          "heading": "先确认二号核心",
+          "body": "2w1 假设先要求需要与连接关注重复出现，再讨论一号相邻标准如何改变帮助方式。若行为主要来自职业规范、家庭规则、宗教服务或风险责任，而不持续关注连接，就应优先使用角色解释。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "检查制度和伦理训练",
+          "body": "教师、医护、社工、志愿者或家庭照护者可能因制度要求而遵守服务标准。比较离开角色、监督减少和风险降低后的行为，才能判断翼型是否增加解释力。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "比较 2w1、2w3 与一号",
+          "body": "比较2w1与2w3时，前者可能强调克制和原则服务，后者可能强调可见成效与适应表达。与一号相比，2w1 假设仍把他人需要和连接放在核心，而不是只修正标准本身。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用随认可变化的标准反证",
+          "body": "检验2w1原则服务反例，可以寻找标准在权威面前消失、帮助主要随公开认可调整，或只剩职责却没有持续连接关注的事件。这些材料会提高岗位、一号、三号或声誉解释的权重。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "限制翼型解释",
+          "body": "翼型研究支持很少，2w1 只能作为证据有限的次级观察假设，不是独立人格类别或善良程度。它不能用于道德排名、健康结论、固定能力或结果判断。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "有原则地照护别人就是 2w1 吗？",
+          "answer": "不是。职业守则、家庭价值、社区期待或宗教承诺都可能解释原则性照护。需要同时看到二号式连接关注、标准对帮助方式的稳定影响，以及能够削弱假设的反例。"
+        },
+        {
+          "question": "怎样区分 2w1 与一号假设？",
+          "answer": "固定同一项服务任务，观察什么持续占据核心。2w1 假设仍关注对方需要与关系，一号假设可能更直接关注正确性、责任和流程修复；角色规范也可能更简单。"
+        },
+        {
+          "question": "哪些事件会削弱原则服务假设？",
+          "answer": "标准只约束低权力者、帮助主要追随公开认可，或服务继续但连接关注不再出现，都会削弱假设。正式职责、伦理训练和风险管理应先被比较。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "选择一次正式服务、一次非正式帮助和一次建议被拒绝的事件，确保标准、同意和结果都能被记录。",
+        "observable_signal": "逐次写下看见的需要、说明的标准、询问的许可、选择的方法，以及对方要求改变方式后的反应。",
+        "page_specific_signal": "区分保护质量和同意的标准，与用来压过对方偏好或换取感谢的标准。",
+        "alternative_explanation": "分别比较职业守则、家庭规则、宗教或社区职责、风险管理、权力和声誉。",
+        "reflection_prompt": "找出一次职责足以解释行为而没有连接关注的事件，说明翼型假设应降低多少权重。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察2w1原则服务？",
+          "如何比较2w1与2w3？",
+          "如何检验2w1原则服务反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察2w1原则服务？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何比较2w1与2w3？",
+            "visible_path": "sections.3.body"
+          },
+          {
+            "question": "如何检验2w1原则服务反例？",
+            "visible_path": "sections.4.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "负责照护可能来自职业守则、家庭规则、社区职责、风险管理或伦理训练，不能直接证明翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-2",
+        "/zh/personality/enneagram/wings/2w3",
+        "/zh/personality/enneagram/type-2/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:2w3",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "2w3",
+      "path": "/en/personality/enneagram/wings/2w3",
+      "title": "2w3: visible effectiveness as a core-first wing hypothesis",
+      "answer_first": "The 2w3 wing is a core-first, evidence-limited hypothesis: Type Two attention to needs and connection may be modified by Three-adjacent adaptability, presentation, and visible effectiveness. Effective help can also reflect sales, leadership, hospitality, or performance incentives rather than a wing.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 2w3 draft uses public response, fast adaptation, and help without recognition, independently of the Chinese page's event-organizing sequence.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "how quickly an offer changes after reading the audience's response",
+          "whether usefulness remains important when the contribution is private",
+          "what happens when a visible helper role goes to someone else"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Start with connection, then test visibility",
+          "body": "A 2w3 interpretation begins with Type Two attention to needs, then asks whether Three-adjacent adaptation and visible impact shape delivery. Charisma or efficiency without recurring connection attention may reflect work skill, leadership, incentives, or audience training."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Contrast 2w3 with 2w1 and Three",
+          "body": "A sibling comparison contrasts 2w3 adaptive, visible effectiveness with 2w1 principled and restrained service. Compared with Three, the proposed core remains another person's need and relational response rather than achievement or image alone."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe private and public contribution",
+          "body": "Compare a public event, a private favor, and a task where someone else receives credit. Record whether the offer adapts to actual need, whether contribution continues without visibility, and whether recognition changes warmth or follow-through."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use private consistency as a challenge",
+          "body": "A 2w3 counterexample weakens a visible effectiveness hypothesis when help remains equally engaged without an audience, presentation does not shift with response, or achievement goals explain the action while connection attention is absent."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test performance and customer roles",
+          "body": "Sales, fundraising, community leadership, hospitality, and customer success reward adaptive warmth and visible results. Compare off-role behavior, private contribution, incentives, and status before attributing the style to a wing."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Do not turn effectiveness into identity proof",
+          "body": "Wing evidence is limited, so 2w3 remains a secondary observation hypothesis rather than an independent category. It establishes no charisma, leadership value, moral worth, fixed ability, or future result."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does charismatic helping establish 2w3?",
+          "answer": "No. Charisma may be trained, role-required, culturally expected, or rewarded by an audience. The wing hypothesis needs recurring Type Two connection attention plus visibility-shaped delivery that persists across matched settings."
+        },
+        {
+          "question": "How does 2w3 differ from a Three hypothesis?",
+          "answer": "Observe what remains central when credit disappears. A 2w3 hypothesis keeps another person's need and relational response in view; a Three hypothesis may organize attention more around achievement, effectiveness, and image."
+        },
+        {
+          "question": "What observation weakens visible effectiveness?",
+          "answer": "Private help that remains equally steady, little adaptation to audience response, or action fully explained by targets and incentives would weaken the modifier hypothesis. Off-role examples are especially useful."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one public contribution, one private favor, and one shared task where another person receives the visible credit.",
+        "observable_signal": "Record the need noticed, audience response, adaptation made, recognition available, and whether follow-through changes when visibility drops.",
+        "page_specific_signal": "Compare useful action that tracks real need with presentation that tracks applause, status, targets, or access to a visible role.",
+        "alternative_explanation": "Test sales training, leadership duty, hospitality norms, performance targets, fundraising skill, and reputation incentives against 2w3.",
+        "reflection_prompt": "Identify the event best explained by achievement or audience reward rather than connection and state how the wing hypothesis changes."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does 2w3 visible effectiveness appear?",
+          "Which sibling comparison contrasts 2w3 with 2w1?",
+          "Which 2w3 counterexample weakens visible effectiveness?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does 2w3 visible effectiveness appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which sibling comparison contrasts 2w3 with 2w1?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which 2w3 counterexample weakens visible effectiveness?",
+            "visible_path": "sections.3.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Adaptive warmth and visible results may come from sales, leadership, hospitality, fundraising, or performance incentives rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-2",
+        "/en/personality/enneagram/wings/2w1",
+        "/en/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:2w3",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "2w3",
+      "path": "/zh/personality/enneagram/wings/2w3",
+      "title": "2w3 观察页：可见成效、适应表达与连接",
+      "answer_first": "2w3 是以二号需要与连接关注为核心、用三号相邻特征解释适应表达、呈现和可见成效的传统次级假设。观察2w3可见成效，要比较公开与私下帮助、没有署名时的投入，以及回应变化后如何调整。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 2w3 页从活动组织、署名变化和私下跟进独立创作，没有翻译英文页的销售与客户角色框架。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "counterexample",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "core_first_modifier",
+          "observable_situations",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "公开活动中根据现场反应调整帮助方式的速度",
+          "贡献不被署名时投入和温度是否明显改变",
+          "他人取得可见角色后是否仍支持实际需要"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_situations",
+          "heading": "比较公开、私下与无署名",
+          "body": "选择一次活动组织、一次私下帮助和一次他人获得署名的任务。记录真正需要、表达调整、可见度、后续投入和情绪变化，避免只用“有魅力”或“会来事”作结论。"
+        },
+        {
+          "kind": "core_first_modifier",
+          "heading": "先保留二号核心",
+          "body": "2w3 假设先要求需要与连接关注持续出现，再讨论三号相邻的适应和呈现。若行为主要追随目标、排名、工作要求或受众奖励，而没有持续连接关注，就应优先考虑三号或角色解释。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "检验活动和绩效环境",
+          "body": "销售、募款、社群领导、待客和客户成功岗位都会奖励适应性温暖与可见结果。比较离开岗位、私下贡献、奖励减少和地位变化后的行为，才能判断翼型是否增加解释。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "对照 2w3、2w1 与三号",
+          "body": "比较2w3与2w1时，前者可能强调适应表达和可见成效，后者可能强调原则与克制服务。与三号相比，2w3 假设仍把他人需要和关系回应置于核心，而不是只追求成就或形象。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用稳定的私下投入反证",
+          "body": "检验2w3可见成效反例，可以寻找没有受众仍同样投入、表达不随回应改变，或行动完全由绩效目标解释而没有连接关注的事件。这些材料会削弱翼型修饰解释。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "不把有效与魅力写成身份",
+          "body": "翼型证据有限，2w3 只能作为次级观察假设，不是独立类别。它不能证明魅力、领导价值、道德水平、固定能力或未来结果。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "很会带动气氛的帮助者就是 2w3 吗？",
+          "answer": "不是。表现力可能来自训练、岗位、文化期待或受众奖励。需要同时看到二号式连接关注、可见度对帮助方式的稳定影响，以及公开和私下可比事件中的反例。"
+        },
+        {
+          "question": "怎样区分 2w3 与三号假设？",
+          "answer": "观察没有署名和掌声时什么仍然重要。2w3 假设仍关注他人实际需要与关系回应；三号假设可能更围绕成就、效率和形象，但岗位奖励也可能解释两者。"
+        },
+        {
+          "question": "哪些材料会削弱可见成效假设？",
+          "answer": "私下帮助始终稳定、表达很少随受众变化，或行为完全由指标与奖励解释，都会削弱修饰假设。离开岗位和没有署名的事件尤其有信息量。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一次公开活动、一次私下帮助和一次由他人获得署名的共同任务，确保实际需要和后续行动可见。",
+        "observable_signal": "记录看见的需要、现场回应、作出的调整、可获得的认可，以及可见度降低后跟进是否改变。",
+        "page_specific_signal": "比较真正跟随需要的有效行动，与主要跟随掌声、地位、指标或可见角色的呈现。",
+        "alternative_explanation": "逐项检验活动组织、销售训练、领导职责、待客规范、绩效指标、募款技能和声誉激励。",
+        "reflection_prompt": "选出最能由成就或受众奖励解释的事件，说明它如何降低 2w3 假设的权重。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察2w3可见成效？",
+          "如何比较2w3与2w1？",
+          "如何检验2w3可见成效反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察2w3可见成效？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何比较2w3与2w1？",
+            "visible_path": "sections.3.body"
+          },
+          {
+            "question": "如何检验2w3可见成效反例？",
+            "visible_path": "sections.4.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "适应性温暖和可见结果可能来自活动、销售、领导、待客、募款或绩效激励，不能直接证明翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-2",
+        "/zh/personality/enneagram/wings/2w1",
+        "/zh/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/self-preservation",
+      "path": "/en/personality/enneagram/type-2/instincts/self-preservation",
+      "title": "Self-preservation Type Two: receiving care as a traditional hypothesis",
+      "answer_first": "Self-preservation Type Two is a traditional type-by-instinct hypothesis in which Two attention to connection may appear through comfort, practical support, resource exchange, and indirect ways of receiving care. Two receiving care is an observation target, not evidence about bodily mechanisms or a universal subtype.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English self-preservation draft uses practical exchanges, resource limits, and indirect requests, independently of the Chinese page's household comfort sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "whether practical support is offered before an indirect request for care",
+          "how resource limits are stated when another person needs help",
+          "a matched event where group role or one bond receives more attention than comfort"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Frame practical connection provisionally",
+          "body": "The hypothesis combines Type Two needs-and-connection attention with a self-preservation label for comfort, support, and resource exchange. Practical warmth may instead reflect household custom, scarcity, disability access, hospitality, caregiving, or a direct agreement."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare three priorities in one exchange",
+          "body": "This matched comparison asks about practical comfort and group role by observing whether attention first moves toward receiving care, a useful place in the group, or concentrated connection with one person. Keep the request, resources, and relationship stakes as similar as possible."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep self-preservation descriptive",
+          "body": "Self-preservation is traditional organizing vocabulary. It is not evidence about bodily mechanisms. It makes no claims about neural organization or fixed functions, and it cannot establish health, universal priorities, or automatic needs shared by every person."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow indirect and countertypical descriptions to vary",
+          "body": "Subtype traditions differ about whether self-preservation Two looks more openly needy, playful, guarded, or countertypical. Test one observable proposition at a time and let direct communication or environmental facts replace the portrait."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test scarcity, access, and household norms",
+          "body": "Tight budgets, food traditions, chronic workload, disability access, caring for dependents, or recent instability can organize practical support. Compare safer periods and other households before assigning a subtype explanation."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use direct requests as disconfirming evidence",
+          "body": "A self-preservation Type Two counterexample weakens an indirect receiving-care hypothesis when needs are stated directly, practical exchange changes with resources, or matched situations consistently prioritize group contribution or one focused bond."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep subtype conclusions narrow",
+          "body": "Subtype findings are instrument-specific and do not justify broad cultural or individual conclusions. Retain mixed cases, explicit consent, direct requests, and environmental alternatives."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does offering food establish self-preservation Type Two?",
+          "answer": "No. Food may express culture, hospitality, caregiving, household routine, or available resources. Observe whether practical support repeatedly carries an indirect connection or receiving-care expectation across matched contexts."
+        },
+        {
+          "question": "How can receiving care be observed without mind-reading?",
+          "answer": "Record direct requests, offers, refusals, resource limits, and later statements. Treat an indirect expectation as a hypothesis only when the person confirms it or repeated behavior provides specific evidence."
+        },
+        {
+          "question": "What weakens the practical connection hypothesis?",
+          "answer": "Directly stated needs, support that changes mainly with budget, or stronger recurring attention to group roles or one intense bond would weaken it. Household and access conditions should be examined first."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one meal or comfort exchange, one resource-limited request, and one moment when the person needs support themselves.",
+        "observable_signal": "Record what was offered, what was requested directly, which resource limit was named, and how care was accepted, declined, or sought later.",
+        "page_specific_signal": "Compare practical comfort and indirect receiving with group contribution and focused one-person connection in similar requests.",
+        "alternative_explanation": "Test household culture, scarcity, disability access, caregiving, hospitality, workload, and recent instability against the subtype.",
+        "reflection_prompt": "Identify the clearest direct request and explain whether it weakens an indirect receiving-care interpretation or only refines it."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does self-preservation Type Two receiving care appear?",
+          "Which matched comparison asks about practical comfort and group role?",
+          "Which self-preservation Type Two counterexample weakens indirect receiving care?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does self-preservation Type Two receiving care appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which matched comparison asks about practical comfort and group role?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which self-preservation Type Two counterexample weakens indirect receiving care?",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Practical support may be shaped by household culture, scarcity, disability access, caregiving, hospitality, workload, or direct agreement."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-2",
+        "/en/personality/enneagram/type-2/instincts/social",
+        "/en/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/self-preservation",
+      "path": "/zh/personality/enneagram/type-2/instincts/self-preservation",
+      "title": "二号自保副型：实际照顾与接受关怀的观察",
+      "answer_first": "二号自保副型是传统的“类型 × 本能”假设，观察二号式连接是否更多通过舒适、实际支持、资源交换和间接接受关怀表现。观察二号自保接受关怀，需要记录直接请求、资源限制和环境条件，不能把照顾方式写成生物确定性。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文二号自保页从家庭舒适、预算限制和直接开口独立写作，没有翻译英文页的可及性案例顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "alternative_environment",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "提供食物或实际支持之后是否出现间接的关怀期待",
+          "资源有限时能否清楚说明自己的边界和需要",
+          "同一请求中先关注舒适、群体角色还是某段关系"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "alternative_environment",
+          "heading": "先看家庭和资源环境",
+          "body": "饮食文化、预算紧张、照护责任、长期工作量或近期不稳定，都可能让实际支持变得突出。应比较条件变化和其他家庭情境，再决定副型标签是否增加解释。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "再提出实际连接假设",
+          "body": "该传统组合把二号的需要与连接关注，同自保标签下的舒适、支持和资源交换放在一起。实际照顾也可能只是待客、无障碍需要、家庭分工或明确协议。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配比较三种优先级",
+          "body": "匹配比较二号自保与群体角色时，可看注意力先到实际舒适还是集体中的有用位置；再与一对一比较，观察是否更集中于某个人。请求、资源和关系风险应尽量相同。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "把自保限定为描述词",
+          "body": "这里的自保是传统观察词汇。它不描述身体机制，也不讨论神经组织或恒定功能。它不能证明健康状态、普遍优先顺序，也不能说明每个人都有相同的自动需要。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "保留流派与反型差异",
+          "body": "不同传统可能把自保二号描述为更公开需要、活泼、谨慎或反型。每次只检验一个可观察命题，让直接沟通和环境事实能够替代整套人物画像。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用直接请求作为反证",
+          "body": "检验二号自保直接请求反例，可以寻找需要被清楚说出、实际交换随预算变化，或匹配情境长期优先群体贡献和特定关系而非舒适的事件。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "限制副型推断",
+          "body": "副型研究依赖具体工具和样本，不支持宽泛文化或个体结论。应保留混合事件、明确同意、直接请求和环境替代解释。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "经常给人准备食物就是二号自保吗？",
+          "answer": "不是。食物可能表达文化、待客、照护、家庭习惯或现有资源。要观察实际支持是否反复带着具体的连接或接受关怀期待，并与相似情境中的反例比较。"
+        },
+        {
+          "question": "怎样观察接受关怀而不猜心？",
+          "answer": "记录直接请求、提供、拒绝、资源边界和后来明确说出的需要。只有当本人确认或重复行为提供具体证据时，才能把间接期待保留为工作假设。"
+        },
+        {
+          "question": "哪些材料会削弱实际连接假设？",
+          "answer": "需要总能直接说出、支持主要随预算变化，或注意力更稳定地落在群体角色和某段关系，都会削弱假设。家庭文化和可及性条件应先被检查。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一次食物或舒适交换、一次资源受限的请求，以及一次本人需要支持的事件，确保过程可以复述。",
+        "observable_signal": "记录提供了什么、直接请求了什么、说明了哪项资源边界，以及关怀后来如何被接受、拒绝或寻求。",
+        "page_specific_signal": "在相似请求中比较实际舒适与间接接受、群体贡献和针对某个人的连接。",
+        "alternative_explanation": "逐项检验家庭文化、预算短缺、无障碍需要、照护责任、待客习惯、工作量和近期不稳定。",
+        "reflection_prompt": "找出最清楚的一次直接请求，说明它是削弱间接接受解释，还是只让假设更具体。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察二号自保接受关怀？",
+          "如何匹配比较二号自保与群体角色？",
+          "如何检验二号自保直接请求反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察二号自保接受关怀？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何匹配比较二号自保与群体角色？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何检验二号自保直接请求反例？",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "实际支持可能受家庭文化、资源短缺、无障碍需要、照护责任、待客习惯、工作量或明确协议影响。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-2",
+        "/zh/personality/enneagram/type-2/instincts/social",
+        "/zh/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/social",
+      "path": "/en/personality/enneagram/type-2/instincts/social",
+      "title": "Social Type Two: group usefulness as a provisional subtype hypothesis",
+      "answer_first": "Social Type Two is a traditional type-by-instinct hypothesis in which Two attention to needs and connection may appear through group roles, networks, contribution, and being useful to a wider circle. Two group usefulness is observable, but position, leadership duty, or community incentives may explain it.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English social subtype draft uses network introductions, role loss, and unequal access, independently of the Chinese page's committee rota structure.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "who receives introductions, information, or access within a network",
+          "what happens when a useful group role transfers to someone else",
+          "whether contribution continues when status and public recognition decrease"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Describe group usefulness provisionally",
+          "body": "The hypothesis combines Type Two connection attention with a social label for networks, contribution, and a useful place in the group. Organizing people may instead reflect leadership duty, community norms, political skill, fundraising, or institutional incentives."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare group, practical, and focused connection",
+          "body": "This matched comparison asks about group role and practical comfort by observing whether attention first moves toward a useful place in the group, receiving care, or concentrated connection with one person. Hold the request and available resources as constant as possible."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep social language non-mechanistic",
+          "body": "Social is traditional organizing vocabulary rather than evidence about bodily mechanisms. It makes no claims about neural organization or unchanging social function, and it establishes no leadership value, popularity, fairness, or automatic group orientation."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Expect schools to describe status differently",
+          "body": "Subtype traditions vary in how they describe influence, ambition, visibility, and countertypical service. Test the specific group-usefulness claim and let low-status, private, or contradictory events revise it."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test leadership and network incentives",
+          "body": "Committee roles, community organizing, sales, fundraising, politics, and seniority can reward introductions and broad contribution. Compare behavior after role loss, lower visibility, and reduced access before retaining the subtype."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use role transfer as disconfirming evidence",
+          "body": "A social Type Two counterexample weakens a group usefulness hypothesis when contribution stops after status loss, access is shared only for recognition, or matched situations repeatedly prioritize private comfort or one bond."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep group conclusions modest",
+          "body": "Instrument-specific subtype evidence does not justify broad claims about culture, leadership, or personal value. Observe access, consent, reciprocity, and role incentives without turning contribution into identity."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does community leadership establish social Type Two?",
+          "answer": "No. Leadership may follow election, seniority, expertise, employment, or collective need. The subtype hypothesis requires recurring connection attention organized through group usefulness and evidence from role changes."
+        },
+        {
+          "question": "Why observe who receives network access?",
+          "answer": "Introductions and information show how usefulness operates in practice. Recording who benefits, who is excluded, and whether access depends on gratitude or status makes the hypothesis testable without moral ranking."
+        },
+        {
+          "question": "What weakens the group usefulness hypothesis?",
+          "answer": "Contribution that ends with role loss, selective access aimed at recognition, or stronger repeated attention to private comfort or one relationship would weaken it. Institutional incentives should be examined first."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one introduction, one group task, and one event where a useful role passes to another person while needs remain visible.",
+        "observable_signal": "Record who receives access, what contribution is made, which status or recognition is available, and what continues after the role changes.",
+        "page_specific_signal": "Compare group usefulness with practical comfort and focused one-person connection under a similar request.",
+        "alternative_explanation": "Test elected duty, seniority, employment, fundraising, political skill, institutional incentives, and community norms against the subtype.",
+        "reflection_prompt": "Identify the event where contribution followed status most closely and state whether role incentives now explain more than the subtype."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does social Type Two group usefulness appear?",
+          "Which matched comparison asks about group role and practical comfort?",
+          "Which social Type Two counterexample weakens group usefulness?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does social Type Two group usefulness appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which matched comparison asks about group role and practical comfort?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which social Type Two counterexample weakens group usefulness?",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Group contribution may follow elected duty, seniority, employment, fundraising, politics, institutional incentives, or community norms."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-2",
+        "/en/personality/enneagram/type-2/instincts/self-preservation",
+        "/en/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/social",
+      "path": "/zh/personality/enneagram/type-2/instincts/social",
+      "title": "二号社群副型：群体有用位置与网络贡献",
+      "answer_first": "二号社群副型是传统的“类型 × 本能”假设，观察二号式需要与连接是否更多通过群体角色、网络、贡献和“在更大范围有用”表现。观察二号社群群体有用，需要比较角色变化、资源分配和公开认可。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文二号社群页从委员会轮值、信息分享和角色交接独立展开，没有翻译英文页的募款与政治案例。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "alternative_environment",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "网络中的介绍、信息和机会实际流向哪些人",
+          "有用角色交给别人后是否仍继续支持共同需要",
+          "公开认可减少时贡献、温度和资源分享如何变化"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "alternative_environment",
+          "heading": "先检查角色和制度激励",
+          "body": "委员会职责、社区组织、资历、工作岗位或集体需要，都可能推动介绍和广泛贡献。比较卸任、可见度降低和资源减少后的行为，再判断副型是否增加解释。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "提出群体有用假设",
+          "body": "该传统组合把二号的连接关注，同社群标签下的网络、贡献和群体中的有用位置联系起来。组织人群也可能来自领导职责、筹款技能、组织规范或明确授权。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配比较三种连接优先级",
+          "body": "匹配比较二号社群与实际舒适时，可看注意力先到群体角色还是资源照顾；再与一对一比较，观察是否集中于某个人。请求和可用资源应尽量相同。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "不用机制语言解释社群",
+          "body": "这里的社群是传统观察词。它不描述身体机制，也不讨论神经组织或恒定社交功能。它不能证明领导价值、受欢迎程度、公平性或自动群体取向。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许流派对地位说法不同",
+          "body": "不同传统对影响力、野心、可见性和反型服务的描述会有差异。只检验具体的群体有用命题，让低地位、私下和矛盾事件能够修订假设。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用角色交接作为反证",
+          "body": "检验二号社群角色交接反例，可以寻找失去地位后贡献停止、资源只在有认可时分享，或匹配情境长期优先私人舒适和某段关系的事件。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "限制群体结论",
+          "body": "量表特定副型证据不支持宽泛文化、领导或个人价值结论。应观察资源可及、同意、互惠和角色激励，不把贡献写成身份。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "社区领导者就是二号社群吗？",
+          "answer": "不是。领导可能来自选举、资历、专业能力、工作安排或集体需要。需要看到连接关注通过群体有用位置反复组织，并比较角色改变后的具体证据。"
+        },
+        {
+          "question": "为什么要记录网络资源流向谁？",
+          "answer": "介绍、信息和机会能显示有用位置怎样运作。记录谁获益、谁被排除，以及资源是否依赖感谢或地位，可以让假设可检验，同时避免道德排名。"
+        },
+        {
+          "question": "哪些事件会削弱群体有用假设？",
+          "answer": "角色消失后贡献停止、为认可而选择性分享，或更稳定地优先私人舒适和某段关系，都会削弱假设。制度奖励和正式职责应先被检查，还要比较卸任前后相同需要是否得到持续回应。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一次介绍资源、一次群体任务和一次有用角色交给他人的事件，确保共同需要和后续行动可观察。",
+        "observable_signal": "记录谁获得信息或机会、作出什么贡献、有什么地位或认可，以及角色变化后哪些支持仍然继续。",
+        "page_specific_signal": "在责任、资源和请求尽量相似时，逐次比较群体有用、实际舒适和集中于某个人的连接优先级。",
+        "alternative_explanation": "逐项检验选举职责、资历、工作岗位、筹款技能、组织奖励和社区规范。",
+        "reflection_prompt": "找出贡献最跟随地位的一次事件，说明角色激励是否比副型解释得更直接。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察二号社群群体有用？",
+          "如何匹配比较二号社群与实际舒适？",
+          "如何检验二号社群角色交接反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察二号社群群体有用？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何匹配比较二号社群与实际舒适？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何检验二号社群角色交接反例？",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "群体贡献可能来自选举职责、资历、岗位、筹款、组织激励或社区规范，不能直接证明副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-2",
+        "/zh/personality/enneagram/type-2/instincts/self-preservation",
+        "/zh/personality/enneagram/type-2/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/one-to-one",
+      "path": "/en/personality/enneagram/type-2/instincts/one-to-one",
+      "title": "One-to-one Type Two: focused attunement as a traditional hypothesis",
+      "answer_first": "One-to-one Type Two is a traditional type-by-instinct hypothesis in which Two attention to needs and connection may become concentrated in one bond through focused attunement, availability, and involvement. Two focused attunement is observable, but it does not establish attraction, consent, compatibility, or a universal subtype.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English one-to-one draft centers on reciprocal attention, refusal, and uneven availability, independently of the Chinese page's partnership-boundary sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "whether one person's needs receive more attention than comparable requests",
+          "how availability changes after the other person sets a clear limit",
+          "whether care standards remain reciprocal when the helper needs support"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Frame focused attunement provisionally",
+          "body": "The hypothesis combines Type Two needs-and-connection attention with a one-to-one label for concentration in one bond. Intense availability may instead reflect attachment, attraction, caregiving, conflict history, crisis, unequal labor, or a direct promise."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match one request across three priorities",
+          "body": "This matched comparison asks about one bond and practical comfort by observing whether attention first moves toward focused connection, receiving care, or a useful role in the group. Keep the request, resources, and relationship risk comparable."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Protect consent and avoid mechanism claims",
+          "body": "One-to-one is traditional organizing vocabulary, not evidence about bodily mechanisms, nervous-system categories, fixed intensity, or compatibility. A label never establishes consent, safety, attraction, or who should remain in a relationship."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Expect intensity descriptions to differ",
+          "body": "Subtype traditions vary in how they describe attraction, pursuit, selectivity, and countertypical presentations. Test the specific focused-attunement proposition and let refusal, reciprocity, or calmer events revise it."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test attachment, power, and crisis",
+          "body": "New intimacy, old conflict, caregiving duty, unequal responsibility, authority, boundary breaches, or immediate risk can concentrate attention on one person. Compare other bonds and safer periods before retaining the subtype."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use reciprocal limits as a challenge",
+          "body": "A one-to-one Type Two counterexample weakens focused attunement when limits are accepted easily, availability tracks explicit agreements, or matched situations repeatedly prioritize practical comfort and group contribution over one bond."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep relationship inference narrow",
+          "body": "Instrument-specific subtype evidence does not justify conclusions about compatibility, attraction, consent, or relationship quality. Direct communication, autonomy, safety, and environmental explanations take priority."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does intense attention to one person establish this subtype?",
+          "answer": "No. Intensity may come from new closeness, unresolved conflict, caregiving, power, crisis, or attraction. The hypothesis needs repeated Type Two connection attention, matched comparisons, consent, and counterexamples."
+        },
+        {
+          "question": "Why test reciprocity in focused care?",
+          "answer": "Reciprocity shows whether standards apply when the helper needs support or when the other person says no. It makes hidden expectations observable without assuming that equal exchange is always required."
+        },
+        {
+          "question": "What weakens the focused attunement hypothesis?",
+          "answer": "Easy acceptance of limits, availability explained by explicit agreements, or stronger repeated attention to resources and group roles would weaken it. Attachment history and immediate safety should be checked first."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Choose one close bond with consent to reflect, plus comparable practical and group requests that involve similar time and responsibility.",
+        "observable_signal": "Record whose need receives urgency, how availability is negotiated, whether limits are accepted, and what reciprocity is requested directly.",
+        "page_specific_signal": "Compare focused attunement with practical comfort and group usefulness while keeping the underlying request similar.",
+        "alternative_explanation": "Test attachment, attraction, caregiving duty, unequal labor, conflict history, power, boundary breaches, and crisis against the subtype.",
+        "reflection_prompt": "Identify the event where explicit agreement explains availability better than focused attunement and state how the hypothesis changes."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does one-to-one Type Two focused attunement appear?",
+          "Which matched comparison asks about one bond and practical comfort?",
+          "Which one-to-one Type Two counterexample weakens focused attunement?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does one-to-one Type Two focused attunement appear?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Which matched comparison asks about one bond and practical comfort?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Which one-to-one Type Two counterexample weakens focused attunement?",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Focused availability may reflect attachment, attraction, caregiving, conflict history, unequal labor, power, direct promises, or immediate risk."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-2",
+        "/en/personality/enneagram/type-2/instincts/self-preservation",
+        "/en/personality/enneagram/type-2/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/one-to-one",
+      "path": "/zh/personality/enneagram/type-2/instincts/one-to-one",
+      "title": "二号一对一副型：集中关注、可用性与互惠",
+      "answer_first": "二号一对一副型是传统的“类型 × 本能”假设，观察二号式需要与连接是否集中在一段关系，通过专注、可用性和直接参与表现。观察二号一对一集中关注，必须记录同意、拒绝、互惠和其他关系中的可比事件。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文二号一对一页从伙伴边界、可用时间和互惠请求独立成稿，没有翻译英文页的危机与权力顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "countertype_variation",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "相似请求来自不同人时投入急迫度和可用性的差异",
+          "对方明确设限后能否停止、协商或继续施压",
+          "自己需要支持时是否直接请求并接受对方的限制"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "countertype_variation",
+          "heading": "先承认强度描述有差异",
+          "body": "不同副型传统对吸引、追求、选择性和反型表现的说法并不一致。每次只检验一个集中关注命题，让拒绝、互惠和较平静的事件能够修订假设。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "提出集中连接假设",
+          "body": "这个传统组合把二号的需要与连接关注，同一对一标签下集中于某段关系的精力放在一起。高可用性也可能来自依恋、吸引、照护、旧冲突、危机、责任不等或明确承诺。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配比较关系、舒适和群体角色",
+          "body": "匹配比较二号一对一与实际舒适时，可看注意力先到某段关系还是资源照顾；再与社群比较，观察是否先争取群体中的有用位置。请求、资源和风险应尽量一致。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "把同意和安全放在标签前",
+          "body": "一对一在此是传统观察词。它不描述身体机制，也不讨论神经组织、恒定强度或关系适配。类型语言不能证明吸引、同意、安全，也不能决定谁应继续一段关系。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检查依恋、权力和危机",
+          "body": "新亲密、旧冲突、照护职责、分工不等、权力、反复越界或即时风险，都可能让注意力集中到一个人。应比较其他关系和风险下降后的表现。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用互惠界限制造反证",
+          "body": "检验二号一对一互惠界限反例，可以寻找轻松接受拒绝、可用性完全随明确协议变化，或匹配情境长期优先实际舒适和群体贡献的事件。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "限制关系推断",
+          "body": "量表特定副型证据不支持关系适配、吸引、同意或关系质量结论。直接沟通、自主、安全和环境解释始终优先。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "强烈关注一个人就是二号一对一吗？",
+          "answer": "不是。强度可能来自新亲密、未解决冲突、照护、权力、危机或吸引。需要同时看到二号式连接关注、匹配比较、同意和能削弱假设的反例。"
+        },
+        {
+          "question": "为什么要观察集中照顾中的互惠？",
+          "answer": "互惠能显示当帮助者需要支持或对方拒绝时，标准是否仍然一致。它让隐性期待变得可观察，但不表示所有关系都必须进行完全相等的交换。"
+        },
+        {
+          "question": "哪些材料会削弱集中关注假设？",
+          "answer": "轻松接受界限、可用性可由明确协议解释，或注意力更稳定地落在资源和群体角色，都会削弱假设。依恋历史和即时安全应先被检查，并与其他关系中的相同请求进行匹配比较。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "选择一段双方同意复盘的亲近关系，再选时间和责任相似的实际请求与群体请求进行匹配比较。",
+        "observable_signal": "记录谁的需要最急迫、可用时间如何协商、界限是否被接受，以及互惠需要是否直接说出。",
+        "page_specific_signal": "在底层请求相近时比较集中关注、实际舒适和群体有用三种优先级。",
+        "alternative_explanation": "逐项检验依恋、吸引、照护职责、分工不等、旧冲突、权力、越界和危机。",
+        "reflection_prompt": "找出一次明确协议比集中关注更能解释可用性的事件，说明副型假设应如何改变。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察二号一对一集中关注？",
+          "如何匹配比较二号一对一与实际舒适？",
+          "如何检验二号一对一互惠界限反例？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察二号一对一集中关注？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "如何匹配比较二号一对一与实际舒适？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何检验二号一对一互惠界限反例？",
+            "visible_path": "sections.5.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "集中可用可能来自依恋、吸引、照护、旧冲突、责任不等、权力、明确承诺或即时风险。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-2",
+        "/zh/personality/enneagram/type-2/instincts/self-preservation",
+        "/zh/personality/enneagram/type-2/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ],
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}
