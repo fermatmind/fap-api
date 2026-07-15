@@ -93339,7 +93339,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "review_fixes_local_verified",
+    "status": "ready_to_merge",
       "commit_sha": "9a5471d81debf9e93b10dcb6c4dc66c99730dc1c",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
@@ -93357,8 +93357,8 @@
           "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 45 tests / 1376 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Empty public editorial titles and repeated FAQ questions within one asset now fail closed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
-        "status": "pending",
-          "evidence": "All nine required checks passed on ledger head 3ddae1453 before the same-head review added two valid in-scope P2 findings: empty titles passed key-presence validation and repeated FAQ questions could satisfy FAQ depth. The locally verified substantive fix head 9a5471d81 rejects both cases and requires a fresh GitHub check round."
+        "status": "pass",
+        "evidence": "All nine required checks passed on ledger head a07b7ba3b. GitHub reports CLEAN/MERGEABLE, Codex reviewed the same head without major findings, and all review threads are resolved."
       },
       "ci_fix": {
         "status": "pass",
@@ -93372,7 +93372,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93650,9 +93650,14 @@
           "at": "2026-07-15T17:37:19Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed and a same-head Codex review completed on ledger head 3ddae1453, then two valid P2 findings were fixed: every public editorial asset now requires a non-empty visible title, and normalized FAQ questions must be distinct within each asset. PR08+PR02 pass 45 / 1376, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T17:45:39Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on ledger head a07b7ba3b, GitHub is CLEAN/MERGEABLE, Codex reviewed that same head without major findings, all sixty-seven valid P2 findings are fixed, and all review threads are resolved. Final diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action."
         }
       ],
-      "updated_at": "2026-07-15T17:37:19Z"
+      "updated_at": "2026-07-15T17:45:39Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
