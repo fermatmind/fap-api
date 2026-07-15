@@ -93339,8 +93339,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "bb4e5555ad2dd760d0b850d32cb9e20d2efd70c9",
+    "status": "review_fixes_local_verified",
+    "commit_sha": "a8215cb5b16adf8d654b31fbe2329efed8c45ddb",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93357,8 +93357,12 @@
         "evidence": "Final manifest replay passed: PHP syntax for all three changed PHP files; focused editorial-gate suite 7 tests / 83 assertions; Pint for all three changed PHP files; YAML and both changed JSON artifacts parse; git diff check; and exact seven-file allowlist. The suite proves exactly 116 QA rows, all ten required negative fixture classes, command success/fail-closed paths, and zero human-review/release/write claims."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #3115 is OPEN and MERGEABLE on head 354be729459af628e1906dacd1e3ff71712ffa22; initial required checks are queued or running and no reviews are present."
+        "status": "fail_fix_pushed_pending_rerun",
+        "evidence": "Eight of nine checks passed on prior head 0bf6d581b. verify-bigfive failed only because its runtime-freeze classifier rejects newly added backend/app paths unless they are registered; the gate behavior and 1425 other Big Five tests passed. The same-scope repair moved PR08 logic into the already registered, frozen non-runtime Enneagram Authority V2 integrity service and command paths without modifying the classifier or expanding the seven-file allowlist."
+      },
+      "ci_fix": {
+        "status": "pass",
+        "evidence": "The repaired final diff uses only the existing registered IntegrityGate service/command paths. The exact failing runtime-path classifier plus its Enneagram allowlist regression pass 2 tests / 5 assertions; combined PR08 and PR02 feature suites pass 13 tests / 142 assertions; Pint and syntax remain green. Latest-head GitHub checks must rerun."
       }
     },
     "scope_validation": {
@@ -93402,9 +93406,14 @@
         "at": "2026-07-15T10:01:51Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact seven-file branch and opened the single authorized fap-api PR #3115 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE with initial checks queued/running and no reviews."
+      },
+      {
+        "at": "2026-07-15T10:13:17Z",
+        "status": "review_fixes_local_verified",
+        "note": "Eight checks passed; verify-bigfive failed solely because its freeze classifier rejected two newly added app paths after 1425 other tests passed. Without changing that out-of-scope classifier, the same PR08 service and command capabilities were consolidated into its already registered Enneagram Authority V2 integrity paths. The exact classifier regressions now pass 2 / 5 and PR08+PR02 pass 13 / 142; scope remains exactly seven allowlisted files and latest-head checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T10:01:51Z"
+    "updated_at": "2026-07-15T10:13:17Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
