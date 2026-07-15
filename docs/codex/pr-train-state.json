@@ -92552,6 +92552,38 @@
       {"at": "2026-07-15T08:45:09Z", "from": "ready_to_merge", "to": "merged", "note": "GitHub reports PR #3110 squash-merged as b590b639f84437da53641c84c2df895f87b8749f after final ledger head b95c35e499d9b32bfbee6b9e6bfae645c97535cb passed all nine checks. origin/main containment, remote/local branch deletion, isolated worktree cleanup, clean main sync, package 9/13, focused 20/148, runtime-freeze 2/5, Pint, syntax, and diff post-merge validation were verified. The later bookkeeping review is reconciled by binding commit_sha to final reviewed code head 48938cd977affa2cc4310550f17937144e5b440c in the minimal ad-hoc ledger repair."}
     ]
   },
+  "BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46": {
+    "id": "BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46: fix(content): repair Big Five topic authority",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-topic-authority-46",
+    "depends_on": ["BIG5-AUTHORITY-V2-TOPIC-RUNTIME-40", "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR46 id, branch, title, dependencies, Topic authority acceptance contract, serial lifecycle, and no-production-write boundary."},
+      "dependency": {"status": "pass", "evidence": "PR40 is merged in fap-web as PR #1768 and PR43 is merged in fap-api as PR #3102 / 95578922e01125f7f4ed4087c407be83cd7e6af6; both origin/main histories contain their dependency result."},
+      "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-topic-authority-46 from exact clean fap-api origin/main b590b639f84437da53641c84c2df895f87b8749f after confirming no same-name local/remote branch. Source inspection found the backend Topic start-test contract selects the tests group and otherwise falls back to MBTI, while the legacy Big Five baseline places BIG5_OCEAN in featured; PR46 is restricted to a new backend-authoritative revision package and read-only preflight rather than public runtime or baseline mutation."},
+      "local": {"status": "pass", "evidence": "PASS: deterministic package build and validator at SHA256 bb19149f44894959b1adf0ef88b02a118a0c1e66b5913fb80ec59f0e7261df9e; PR46 focused suite 5 tests / 58 assertions; runtime-freeze focus 2 tests / 5 assertions; package-only CLI zero-write dry-run; targeted Pint; PHP/JSON/YAML/JS syntax; git diff --check; exact scope validation; and the complete bash backend/scripts/ci_verify_mbti.sh gate. The complete gate passed Big Five 1427 tests / 181052 assertions, Personality 71 / 5371, MBTI smoke, migrations, security, OpenAPI, webhook/attempt, dependency, and queue gates. Generated BIG5 compile timestamp/hash side effects were removed path-by-path and are not in scope."},
+      "github": {"status": "pending", "evidence": "PR not opened; required checks pending."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "database_mutation": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "public_runtime_change": false,
+    "transitions": [
+      {"at": "2026-07-15T08:55:59Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR46 from the exact merged PR45 base. Scope is limited to a bilingual backend Topic working/draft revision package, exact source/date/media/canonical/claim-boundary validation, an executable zero-write preflight, focused tests, and PR45 dependency-ledger verification; no frontend, public runtime, CMS/database write, promotion, indexability, sitemap/llms/schema, Search, cache, or deploy action is allowed."},
+      {"at": "2026-07-15T09:14:40Z", "from": "in_progress", "to": "local_checks_passed", "note": "The two-candidate backend Topic package, source/date/media/canonical gates, executable read-only preflight, focused tests, freeze classification, formatting, syntax, deterministic hash, exact scope, and complete ci_verify_mbti validation all passed. No Topic/CMS/database write, working-revision creation, promotion, public runtime, indexability, sitemap/llms/schema, Search, cache, or deploy action occurred."}
+    ]
+  },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01",
     "repo": "fap-api",

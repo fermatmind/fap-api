@@ -1,0 +1,37 @@
+{
+  "schema_version": "big5-topic-authority-dry-run.v1",
+  "status": "PASS_DRAFT_REVISION_PACKAGE_BLOCKED_FOR_PROMOTION",
+  "mode": "package_only_zero_write",
+  "package_sha256": "bb19149f44894959b1adf0ef88b02a118a0c1e66b5913fb80ec59f0e7261df9e",
+  "counts": {
+    "topic_candidates": 2,
+    "working_revision_candidates": 2,
+    "promotion_eligible": 0,
+    "blocked": 2
+  },
+  "canonical_test_targets": {
+    "en": "/en/tests/big-five-personality-test-ocean-model",
+    "zh-CN": "/zh/tests/big-five-personality-test-ocean-model"
+  },
+  "blockers": [
+    "manual_review_missing",
+    "visible_dates_unresolved",
+    "reviewer_authority_missing",
+    "approved_media_missing",
+    "promotion_not_authorized"
+  ],
+  "actions": {
+    "database_reads": 0,
+    "database_writes": 0,
+    "cms_writes": 0,
+    "revision_writes": 0,
+    "promotion_changes": 0,
+    "public_release_changes": 0,
+    "indexability_changes": 0,
+    "sitemap_changes": 0,
+    "llms_changes": 0,
+    "search_submissions": 0,
+    "cache_operations": 0,
+    "deployments": 0
+  }
+}
