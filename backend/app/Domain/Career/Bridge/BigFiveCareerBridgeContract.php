@@ -223,6 +223,14 @@ final class BigFiveCareerBridgeContract
 
     /** @var list<string> */
     private const FORBIDDEN_PRIVATE_CONTENT_FRAGMENTS = [
+        'score_vector',
+        'score-vector',
+        'score vector',
+        'percentile',
+        'answers',
+        'selector_trace',
+        'selector-trace',
+        'selector trace',
         'attempt_id',
         'attempt-id',
         'attempt id',
@@ -242,6 +250,10 @@ final class BigFiveCareerBridgeContract
         '/reports/',
         '/orders/',
         '/payments/',
+        '得分向量',
+        '百分位',
+        '作答记录',
+        '选择器轨迹',
     ];
 
     /** @var list<string> */

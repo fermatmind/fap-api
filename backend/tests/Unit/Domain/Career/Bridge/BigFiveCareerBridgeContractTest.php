@@ -189,7 +189,7 @@ final class BigFiveCareerBridgeContractTest extends TestCase
     {
         $output = $this->validOutput();
         $output['content']['boundary_copy'] = [
-            'Continue at https://example.test/reports/private-report?attempt_id=attempt-001.',
+            'Continue at https://example.test/reports/private-report?attempt_id=attempt-001 with score vector and percentile answers from the selector trace.',
         ];
 
         $assessment = $this->contract->assess($this->validInput(), $output);
@@ -197,6 +197,10 @@ final class BigFiveCareerBridgeContractTest extends TestCase
         $this->assertFalse($assessment['public_reader_allowed']);
         $this->assertContains('output.private_reader_text:/reports/', $assessment['blockers']);
         $this->assertContains('output.private_reader_text:attempt_id', $assessment['blockers']);
+        $this->assertContains('output.private_reader_text:score vector', $assessment['blockers']);
+        $this->assertContains('output.private_reader_text:percentile', $assessment['blockers']);
+        $this->assertContains('output.private_reader_text:answers', $assessment['blockers']);
+        $this->assertContains('output.private_reader_text:selector trace', $assessment['blockers']);
     }
 
     #[Test]

@@ -55968,11 +55968,11 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final contract/schema tests passed 12 tests / 80 assertions, including canonical Authority V2 asset ids with embedded and terminal traversal rejection, exact zh-CN Big Five/Career source locks, fail-closed private marker/link scanning, and non-diagnostic reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. One earlier verifier attempt collided on /tmp/fap-ci.sqlite with a validation process that started after the guard; subsequent clean latest-functional-head runs passed. The final terminal-traversal-head bash backend/scripts/ci_verify_mbti.sh execution exited 0 through the strict queue probe, including Big Five 1480 tests / 181322 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after verifier exit.",
+          "evidence": "Final contract/schema tests passed 12 tests / 84 assertions, including canonical Authority V2 asset ids with embedded and terminal traversal rejection, exact zh-CN Big Five/Career source locks, fail-closed private score/vector/answer/trace and link marker scanning, and non-diagnostic reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. One earlier verifier attempt collided on /tmp/fap-ci.sqlite with a validation process that started after the guard; subsequent clean latest-functional-head runs passed. The final private-score-head bash backend/scripts/ci_verify_mbti.sh execution exited 0 through the strict queue probe, including Big Five 1480 tests / 181326 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after verifier exit.",
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 is open. Codex reviews reported ten P2 threads, including train-state association, outcome-prediction and deterministic-claim locks, canonical locale/asset identity, private reader text, diagnostic claims, and terminal asset-id traversal. All findings are fixed with regression coverage; commit_sha remains pending_remote_pr_head to avoid self-referential bookkeeping churn. Required checks and an exact-head no-new-findings review must rerun after push.",
+          "evidence": "PR #3118 is open. Codex reviews reported eleven P2 threads, including train-state association, outcome-prediction/deterministic-claim locks, canonical locale/asset identity, private links and private score data in reader text, diagnostic claims, and asset-id traversal. All findings are fixed with regression coverage; commit_sha remains pending_remote_pr_head to avoid self-referential bookkeeping churn. Required checks and an exact-head no-new-findings review must rerun after push.",
           "status": "pending"
         }
       },
@@ -55995,7 +55995,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "github_checks_pending_terminal_traversal_fix",
+      "status": "github_checks_pending_private_score_fix",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56069,6 +56069,12 @@
           "from": "github_checks_pending_final_bookkeeping",
           "note": "Addressed the final Codex P2 by rejecting Authority V2 asset ids ending in /. or /.. and extending traversal regression coverage. Focused contract tests passed 12/80, touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181322 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
           "to": "github_checks_pending_terminal_traversal_fix"
+        },
+        {
+          "at": "2026-07-15T21:34:21Z",
+          "from": "github_checks_pending_terminal_traversal_fix",
+          "note": "Addressed the latest Codex P2 by scanning all reader text for private score vectors, percentiles, answers, and selector traces in English and Chinese. Focused contract tests passed 12/84, touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181326 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
+          "to": "github_checks_pending_private_score_fix"
         }
       ]
     },
