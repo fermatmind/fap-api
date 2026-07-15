@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "b1a26723e93971adcd46dae5efba980d214c98be",
+    "commit_sha": "d59d104ebe60117ea71ec9fbd5bc2b809101c22b",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 42 tests / 1110 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Template comparison now normalizes frozen identity/code/path markers plus UUID and hexadecimal tokens. The first retry correctly rejected the old synthetic passing fixture because it was marker-only boilerplate; the fixture now carries independently varying observable semantic contexts. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 43 tests / 1178 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Scientifically/clinically × proven/validated and the corresponding Chinese science/clinical × proof/validation permutations now fail closed, while direct negative limitations remain allowed. Another full ci_verify_mbti.sh was already running, so only focused checks were started. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 3f08c440d before the latest current-head review added one valid in-scope P2 finding: duplicate-template keys retained per-page slugs, hashes, and markers. The locally verified substantive fix head b1a26723e normalizes structured and opaque page identifiers and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 1036e12f2 before the latest current-head review added one valid in-scope P2 finding: unsupported science safety covered scientifically proven and clinically validated but not their cross permutations. The locally verified substantive fix head d59d104eb covers the complete bilingual permutation set and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All fifty-three valid P2 findings are fixed. Frozen identity slugs/codes/paths, UUIDs, and hexadecimal page markers are normalized before template comparison, while independently varying semantic contexts remain distinct. PR08+PR02 pass 42 tests / 1110 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All fifty-four valid P2 findings are fixed. Scientifically/clinically proven/validated and 科学/临床证明/验证 permutations now fail closed, while explicit English/Chinese negative limitations remain allowed. PR08+PR02 pass 43 tests / 1178 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93600,9 +93600,14 @@
         "at": "2026-07-15T16:00:59Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on ledger head 3f08c440d, then one valid current-head P2 was fixed: duplicate-template normalization now replaces frozen identity/code/path markers, UUIDs, and hexadecimal page tokens. The first focused retry correctly rejected the old marker-only synthetic passing fixture; it was repaired to include independently varying observable semantic contexts, and a dedicated slug/hash negative fixture remains fail-closed. PR08+PR02 pass 42 / 1110, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:08:55Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on ledger head 1036e12f2, then one valid current-head P2 was fixed: scientifically/clinically proven/validated and the corresponding Chinese science/clinical proof/validation permutations now fail closed, while direct negative limitations remain allowed. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 43 / 1178, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and the exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T16:00:59Z"
+    "updated_at": "2026-07-15T16:08:55Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
