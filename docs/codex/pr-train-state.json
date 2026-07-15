@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "6f852a7e0fdb0b3c6220a3f5a765a39bf0050cc2",
+    "commit_sha": "1914d50e6fd80ac1578173347ce740a9bfe7827d",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 43 tests / 1196 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Negation decisions now use the original visible text before any equal-length masking, so a negated psychometric match cannot erase the proper-noun subject needed to preserve a later positive prediction claim. The first focused retry exposed that destructive cross-pattern context loss before the implementation was corrected. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 43 tests / 1242 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Visible ready-to-publish/release/index, published, indexable, and release-ready wording now fails closed in English and Chinese, while explicit not-yet-published and not-indexable draft limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 2783a4232 before the latest same-head review added one valid in-scope P2 finding: a proper-noun subject in a comma-led clause could be erased by an earlier negated cross-pattern match, then the later blocked prediction could inherit the old negative prefix. The locally verified substantive fix head 6f852a7e0 classifies every match against original text and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 4546bca35 before the latest same-head review added one valid in-scope P2 finding: common visible publication/indexability state wording was not included in the release-truth claim pattern. The locally verified substantive fix head 1914d50e6 covers the bilingual publish-state vocabulary and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All fifty-six valid P2 findings are fixed. Proper-noun comma clauses terminate the preceding negation scope, and all negation decisions use unmodified original text before equal-length masking prevents cross-pattern offset/context corruption. PR08+PR02 pass 43 tests / 1196 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All fifty-seven valid P2 findings are fixed. Visible ready-to-publish/release/index, published, indexable, release-ready and corresponding Chinese publish/indexability wording now fails closed; direct negative draft limitations remain allowed. PR08+PR02 pass 43 tests / 1242 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93615,9 +93615,14 @@
         "at": "2026-07-15T16:29:33Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed and a same-head Codex review completed on ledger head 2783a4232, then one valid P2 was fixed: proper-noun comma clauses now stop earlier negation, and all match decisions use original text before equal-length masking prevents one negated pattern from deleting context needed by another positive claim. The first focused retry exposed that exact cross-pattern context loss before correction. PR08+PR02 pass 43 / 1196, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:37:33Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head 4546bca35, then one valid P2 was fixed: visible ready-to-publish/release/index, published, indexable, release-ready and corresponding Chinese publish/indexability wording now fails closed, while explicit not-yet-published and not-indexable limitations remain allowed. PR08+PR02 pass 43 / 1242, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T16:29:33Z"
+    "updated_at": "2026-07-15T16:37:33Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
