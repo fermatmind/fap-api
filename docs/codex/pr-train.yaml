@@ -43558,7 +43558,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-revision-workspace-05
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05: add collision-safe Enneagram working-revision writer"
-    status: ready_to_merge
+    status: merged
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04
     scope:
@@ -43600,7 +43600,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-revision-promoter-06
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06: add pointer-safe Enneagram revision promotion and rollback"
-    status: pending_dependency
+    status: in_progress
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05
     scope:
@@ -43609,6 +43609,7 @@ prs:
       - backend/app/Services/Enneagram/AuthorityV2/**
       - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2*.php
       - backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-revision-promoter-06/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -43616,7 +43617,9 @@ prs:
     validation:
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php --no-ansi
-      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_freeze_classifier_ignores_only_registered_enneagram_public_authority_v2_non_runtime_files --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_paths_have_no_uncommitted_diff --no-ansi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do backend/vendor/bin/pint --test "$file" || exit 1; done
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
