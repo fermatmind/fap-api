@@ -17,6 +17,7 @@ use App\Models\TopicProfile;
 use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use App\Services\Cms\ArticleSeoService;
+use App\Services\Cms\ContentPageTranslationAdapter;
 use App\Services\Cms\TopicEntryResolverService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -65,6 +66,7 @@ final class BigFiveReviewPromotionPreflight
     public function __construct(
         private readonly BigFiveAuthorityV2DraftImportWriter $packageWriter,
         private readonly TopicEntryResolverService $topicEntryResolverService,
+        private readonly ContentPageTranslationAdapter $contentPageTranslationAdapter,
     ) {}
 
     /** @return array<string,mixed> */
@@ -491,7 +493,22 @@ final class BigFiveReviewPromotionPreflight
             && $sourcePackage === $row['source_package']
             && $sourceHash === $row['source_hash']
             && $packageHash === $row['authority_package_sha256']
+            && $this->revisionPromotionShapeMatches($revision, $record)
             && $this->revisionPayloadMatchesDescriptor($revision, $record, $descriptor);
+    }
+
+    private function revisionPromotionShapeMatches(Model $revision, Model $record): bool
+    {
+        return match (true) {
+            $record instanceof Article => $revision instanceof ArticleTranslationRevision
+                && $revision->getAttribute('revision_status') === ArticleTranslationRevision::STATUS_APPROVED
+                && $revision->isPublishableForArticle($record),
+            $record instanceof ContentPage => $revision instanceof CmsTranslationRevision
+                && $revision->getAttribute('revision_status') === CmsTranslationRevision::STATUS_APPROVED
+                && is_array($revision->getAttribute('payload_json'))
+                && $this->contentPageTranslationAdapter->requiredPayloadBlockers($revision->getAttribute('payload_json')) === [],
+            default => true,
+        };
     }
 
     /** @param array<string,mixed> $descriptor */
@@ -516,19 +533,7 @@ final class BigFiveReviewPromotionPreflight
                 'seo_title' => (string) $attributes['title'],
                 'seo_description' => $attributes['excerpt'],
             ],
-            $record instanceof ContentPage => [
-                'payload_json' => [
-                    ...$attributes,
-                    '_big_five_authority_v2_import' => [
-                        'asset_id' => (string) $descriptor['asset_id'],
-                        'route' => (string) $descriptor['route'],
-                        'source_package' => (string) $descriptor['source_package'],
-                        'source_hash' => (string) $descriptor['source_hash'],
-                        'authority_package_sha256' => BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
-                        'public_runtime_mutation_allowed' => false,
-                    ],
-                ],
-            ],
+            $record instanceof ContentPage => ['payload_json' => $this->contentPagePublishPayload($record, $descriptor, $attributes)],
             $record instanceof PersonalityPublicContentAsset => ['snapshot_json' => $attributes],
             $record instanceof TopicProfile => ['snapshot_json' => ['profile' => $attributes]],
             default => null,
@@ -545,6 +550,31 @@ final class BigFiveReviewPromotionPreflight
         return hash_equals($this->fingerprint($expected), $this->fingerprint($observed));
     }
 
+    /** @param array<string,mixed> $descriptor @param array<string,mixed> $attributes @return array<string,mixed> */
+    private function contentPagePublishPayload(ContentPage $record, array $descriptor, array $attributes): array
+    {
+        $candidate = $record->replicate();
+        $candidate->exists = true;
+        $candidate->setAttribute($record->getKeyName(), $record->getKey());
+        $candidate->forceFill($attributes);
+        $candidate->forceFill([
+            'seo_title' => $attributes['seo_title'] ?? $attributes['title'] ?? null,
+            'seo_description' => $attributes['seo_description'] ?? $attributes['summary'] ?? null,
+        ]);
+
+        return [
+            ...$this->contentPageTranslationAdapter->snapshotPayload($candidate),
+            '_big_five_authority_v2_import' => [
+                'asset_id' => (string) $descriptor['asset_id'],
+                'route' => (string) $descriptor['route'],
+                'source_package' => (string) $descriptor['source_package'],
+                'source_hash' => (string) $descriptor['source_hash'],
+                'authority_package_sha256' => BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+                'public_runtime_mutation_allowed' => false,
+            ],
+        ];
+    }
+
     private function revisionOwnedByRecord(Model $revision, Model $record): bool
     {
         $recordId = (int) $record->getKey();
@@ -552,11 +582,13 @@ final class BigFiveReviewPromotionPreflight
         return match (true) {
             $record instanceof Article => (int) $revision->getAttribute('article_id') === $recordId
                 && (int) $revision->getAttribute('org_id') === (int) $record->getAttribute('org_id')
-                && $revision->getAttribute('locale') === $record->getAttribute('locale'),
+                && $revision->getAttribute('locale') === $record->getAttribute('locale')
+                && $revision->getAttribute('translation_group_id') === $record->getAttribute('translation_group_id'),
             $record instanceof ContentPage => $revision->getAttribute('content_type') === 'content_page'
                 && (int) $revision->getAttribute('content_id') === $recordId
                 && (int) $revision->getAttribute('org_id') === (int) $record->getAttribute('org_id')
-                && $revision->getAttribute('locale') === $record->getAttribute('locale'),
+                && $revision->getAttribute('locale') === $record->getAttribute('locale')
+                && $revision->getAttribute('translation_group_id') === $record->getAttribute('translation_group_id'),
             $record instanceof PersonalityPublicContentAsset => (int) $revision->getAttribute('asset_id') === $recordId,
             $record instanceof TopicProfile => (int) $revision->getAttribute('profile_id') === $recordId,
             default => false,

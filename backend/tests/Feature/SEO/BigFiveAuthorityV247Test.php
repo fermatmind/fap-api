@@ -7,6 +7,7 @@ namespace Tests\Feature\SEO;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
@@ -16,6 +17,7 @@ use App\Models\TopicProfileRevision;
 use App\Models\TopicProfileSection;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
+use App\Services\Cms\ContentPageTranslationAdapter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -298,7 +300,7 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertIsArray($row);
 
         $page = ContentPage::query()->create($descriptor['attributes']);
-        $payload = [
+        $rawPayload = [
             ...$descriptor['attributes'],
             '_big_five_authority_v2_import' => [
                 'asset_id' => $descriptor['asset_id'],
@@ -317,8 +319,8 @@ final class BigFiveAuthorityV247Test extends TestCase
             'locale' => $page->locale,
             'source_locale' => $page->locale,
             'revision_number' => 1,
-            'revision_status' => 'approved',
-            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            'revision_status' => CmsTranslationRevision::STATUS_APPROVED,
+            'payload_json' => json_encode($rawPayload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
             'authority_asset_key' => $row['asset_id'],
             'authority_source_package' => $row['source_package'],
             'authority_source_hash' => $row['source_hash'],
@@ -327,13 +329,49 @@ final class BigFiveAuthorityV247Test extends TestCase
             'updated_at' => now(),
         ]);
         $page->forceFill(['working_revision_id' => $revisionId])->save();
+        $page->refresh();
+
+        $raw = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $rawObserved = collect($raw['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
+        $this->assertIsArray($rawObserved);
+        $this->assertFalse($rawObserved['revision_authority_matches']);
+
+        $candidate = $page->replicate();
+        $candidate->exists = true;
+        $candidate->setAttribute($page->getKeyName(), $page->getKey());
+        $candidate->forceFill($descriptor['attributes']);
+        $candidate->forceFill([
+            'seo_title' => $descriptor['attributes']['title'],
+            'seo_description' => $descriptor['attributes']['summary'],
+        ]);
+        $payload = [
+            ...app(ContentPageTranslationAdapter::class)->snapshotPayload($candidate),
+            '_big_five_authority_v2_import' => $rawPayload['_big_five_authority_v2_import'],
+        ];
+        DB::table('cms_translation_revisions')->where('id', $revisionId)->update([
+            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            'updated_at' => now(),
+        ]);
 
         $before = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
         $beforeObserved = collect($before['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
         $this->assertIsArray($beforeObserved);
         $this->assertTrue($beforeObserved['revision_authority_matches']);
 
-        $payload['content_md'] = '# Mutated after runtime and rollback binding';
+        DB::table('cms_translation_revisions')->where('id', $revisionId)->update([
+            'translation_group_id' => 'drifted-content-page-group',
+            'updated_at' => now(),
+        ]);
+        $identityDrift = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $identityDriftObserved = collect($identityDrift['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
+        $this->assertIsArray($identityDriftObserved);
+        $this->assertFalse($identityDriftObserved['revision_authority_matches']);
+        DB::table('cms_translation_revisions')->where('id', $revisionId)->update([
+            'translation_group_id' => $page->translation_group_id,
+            'updated_at' => now(),
+        ]);
+
+        $payload['body_md'] = '# Mutated after runtime and rollback binding';
         DB::table('cms_translation_revisions')->where('id', $revisionId)->update([
             'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
             'updated_at' => now(),
@@ -344,6 +382,95 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertIsArray($afterObserved);
         $this->assertFalse($afterObserved['revision_authority_matches']);
         $this->assertContains('working_revision_authority_mismatch', $after['issue_codes']);
+    }
+
+    public function test_database_preflight_requires_approved_article_working_revision(): void
+    {
+        $descriptor = collect(app(BigFiveAuthorityV2DraftImportWriter::class)->validatedPlan(
+            '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json',
+            '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/production-authorization-packet.json',
+        )['descriptors'])->firstWhere('asset_id', 'article:en:/en/articles/big-five-personality-test-vs-mbti');
+        $this->assertIsArray($descriptor);
+        $row = collect($this->readJson(self::REVIEW)['rows'])->firstWhere('asset_id', $descriptor['asset_id']);
+        $this->assertIsArray($row);
+        $attributes = $descriptor['attributes'];
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'translation_group_id' => $attributes['translation_group_id'],
+            'title' => 'Existing published authority',
+            'excerpt' => 'Existing published excerpt.',
+            'content_md' => '# Existing published body',
+            'status' => 'published',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subDay(),
+        ]);
+        $publishedRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => $attributes['translation_group_id'],
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => 'Existing published authority',
+            'excerpt' => 'Existing published excerpt.',
+            'content_md' => '# Existing published body',
+            'seo_title' => 'Existing published authority',
+            'seo_description' => 'Existing published excerpt.',
+            'published_at' => now()->subDay(),
+        ]);
+        $workingRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => $attributes['translation_group_id'],
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 2,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'authority_asset_key' => $row['asset_id'],
+            'authority_source_package' => $row['source_package'],
+            'authority_source_hash' => $row['source_hash'],
+            'authority_package_sha256' => $row['authority_package_sha256'],
+            'authority_metadata_json' => [
+                'route' => $descriptor['route'],
+                'authority_surface' => $descriptor['authority_surface'],
+                'draft_attributes' => $attributes,
+                'public_runtime_mutation_allowed' => false,
+            ],
+            'title' => $attributes['title'],
+            'excerpt' => $attributes['excerpt'],
+            'content_md' => $attributes['content_md'],
+            'seo_title' => $attributes['title'],
+            'seo_description' => $attributes['excerpt'],
+        ]);
+        $article->forceFill([
+            'working_revision_id' => (int) $workingRevision->id,
+            'published_revision_id' => (int) $publishedRevision->id,
+        ])->save();
+
+        $pending = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $pendingObserved = collect($pending['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
+        $this->assertIsArray($pendingObserved);
+        $this->assertFalse($pendingObserved['revision_authority_matches']);
+
+        $workingRevision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_APPROVED])->save();
+        $approved = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $approvedObserved = collect($approved['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
+        $this->assertIsArray($approvedObserved);
+        $this->assertTrue($approvedObserved['revision_authority_matches']);
+
+        $workingRevision->forceFill(['translation_group_id' => 'drifted-article-group'])->save();
+        $identityDrift = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $identityDriftObserved = collect($identityDrift['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
+        $this->assertIsArray($identityDriftObserved);
+        $this->assertFalse($identityDriftObserved['revision_authority_matches']);
     }
 
     public function test_database_preflight_rejects_public_route_drift_for_all_non_identity_route_fields(): void
