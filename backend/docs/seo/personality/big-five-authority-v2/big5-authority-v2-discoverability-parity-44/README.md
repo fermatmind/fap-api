@@ -6,6 +6,7 @@ The backend projector is read-only and fail-closed:
 
 - Hreflang output requires a non-empty shared translation group and two distinct current, published, public, indexable EN/ZH Article revisions.
 - Same-slug guessing is not counterpart authority. When no real counterpart exists, `no_hreflang` is the valid explicit policy and no alternate is emitted.
+- Eligible reciprocal pairs emit absolute canonical frontend URLs; an invalid public frontend base fails closed with withheld hreflang output.
 - `llms.txt` membership requires current published-revision authority, public/indexable state, and the explicit backend `llms_eligible` flag.
 - LLMS eligibility is intentionally independent from sitemap eligibility; this PR does not modify sitemap behavior.
 - Drafts, stale revisions, future publications, archived records, and disabled backend LLMS flags fail closed.

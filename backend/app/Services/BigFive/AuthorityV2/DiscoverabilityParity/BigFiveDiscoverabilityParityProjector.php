@@ -27,23 +27,29 @@ final class BigFiveDiscoverabilityParityProjector
         ?ArticleTranslationRevision $counterpartRevision = null,
     ): array {
         $currentPublicAuthority = $this->hasPublishedIndexableAuthority($article, $revision);
-        $reciprocalCounterpart = $currentPublicAuthority
+        $reciprocalCounterpartAuthority = $currentPublicAuthority
             && $counterpart instanceof Article
             && $this->isReciprocalCounterpart($article, $counterpart)
             && $this->hasPublishedIndexableAuthority($counterpart, $counterpartRevision);
+        $canonicalBaseUrl = $this->canonicalBaseUrl();
+        $reciprocalCounterpart = $reciprocalCounterpartAuthority && $canonicalBaseUrl !== null;
 
         $hreflangPolicy = ! $currentPublicAuthority
             ? 'withheld'
-            : ($reciprocalCounterpart ? 'reciprocal_bilingual_counterparts' : 'no_hreflang');
+            : ($reciprocalCounterpart
+                ? 'reciprocal_bilingual_counterparts'
+                : ($reciprocalCounterpartAuthority ? 'withheld' : 'no_hreflang'));
         $alternates = $reciprocalCounterpart
-            ? $this->alternates($article, $counterpart)
+            ? $this->alternates($article, $counterpart, $canonicalBaseUrl)
             : [];
         $llmsEligible = $currentPublicAuthority && (bool) $article->llms_eligible;
 
         $hreflangBlocked = [];
         if (! $currentPublicAuthority) {
             $hreflangBlocked[] = 'current_published_indexable_public_authority_missing';
-        } elseif (! $reciprocalCounterpart) {
+        } elseif ($reciprocalCounterpartAuthority && $canonicalBaseUrl === null) {
+            $hreflangBlocked[] = 'canonical_public_base_url_missing';
+        } elseif (! $reciprocalCounterpartAuthority) {
             $hreflangBlocked[] = 'reciprocal_published_counterpart_missing';
         }
 
@@ -128,7 +134,7 @@ final class BigFiveDiscoverabilityParityProjector
     }
 
     /** @return array<string, string> */
-    private function alternates(Article $article, Article $counterpart): array
+    private function alternates(Article $article, Article $counterpart, string $canonicalBaseUrl): array
     {
         $articleLocale = $this->normalizeLocale((string) $article->locale);
         $counterpartLocale = $this->normalizeLocale((string) $counterpart->locale);
@@ -139,8 +145,8 @@ final class BigFiveDiscoverabilityParityProjector
             $articleLocale => $article,
             $counterpartLocale => $counterpart,
         ];
-        $en = $this->canonicalPath($byLocale['en']);
-        $zh = $this->canonicalPath($byLocale['zh-CN']);
+        $en = $this->canonicalUrl($byLocale['en'], $canonicalBaseUrl);
+        $zh = $this->canonicalUrl($byLocale['zh-CN'], $canonicalBaseUrl);
 
         return [
             'en' => $en,
@@ -149,11 +155,29 @@ final class BigFiveDiscoverabilityParityProjector
         ];
     }
 
-    private function canonicalPath(Article $article): string
+    private function canonicalUrl(Article $article, string $canonicalBaseUrl): string
     {
         $segment = $this->normalizeLocale((string) $article->locale) === 'zh-CN' ? 'zh' : 'en';
 
-        return '/'.$segment.'/articles/'.rawurlencode(trim((string) $article->slug));
+        return $canonicalBaseUrl.'/'.$segment.'/articles/'.rawurlencode(trim((string) $article->slug));
+    }
+
+    private function canonicalBaseUrl(): ?string
+    {
+        $configured = rtrim(trim((string) config('app.frontend_url', 'https://fermatmind.com')), '/');
+        $parts = parse_url($configured);
+        if (! is_array($parts)
+            || ! in_array(strtolower((string) ($parts['scheme'] ?? '')), ['http', 'https'], true)
+            || trim((string) ($parts['host'] ?? '')) === ''
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || isset($parts['query'])
+            || isset($parts['fragment'])
+            || ! in_array((string) ($parts['path'] ?? ''), ['', '/'], true)) {
+            return null;
+        }
+
+        return $configured;
     }
 
     private function normalizeLocale(string $locale): ?string

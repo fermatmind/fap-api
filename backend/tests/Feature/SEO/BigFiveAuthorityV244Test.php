@@ -17,6 +17,7 @@ final class BigFiveAuthorityV244Test extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        config(['app.frontend_url' => 'https://fermatmind.com']);
         $this->projector = app(BigFiveDiscoverabilityParityProjector::class);
     }
 
@@ -54,10 +55,18 @@ final class BigFiveAuthorityV244Test extends TestCase
         $this->assertSame('reciprocal_bilingual_counterparts', $projection['hreflang']['policy']);
         $this->assertTrue($projection['hreflang']['output_eligible']);
         $this->assertSame([
-            'en' => '/en/articles/english-guide',
-            'zh-CN' => '/zh/articles/zh-guide',
-            'x-default' => '/en/articles/english-guide',
+            'en' => 'https://fermatmind.com/en/articles/english-guide',
+            'zh-CN' => 'https://fermatmind.com/zh/articles/zh-guide',
+            'x-default' => 'https://fermatmind.com/en/articles/english-guide',
         ], $projection['hreflang']['alternates']);
+
+        config(['app.frontend_url' => '/relative-host-is-not-canonical']);
+        $invalidCanonicalBase = $this->projector->forArticle($zh, $zhRevision, $en, $enRevision);
+        $this->assertSame('withheld', $invalidCanonicalBase['hreflang']['policy']);
+        $this->assertFalse($invalidCanonicalBase['hreflang']['output_eligible']);
+        $this->assertSame([], $invalidCanonicalBase['hreflang']['alternates']);
+        $this->assertContains('canonical_public_base_url_missing', $invalidCanonicalBase['hreflang']['blocked_reasons']);
+        config(['app.frontend_url' => 'https://fermatmind.com']);
 
         $en->translation_group_id = 'group:unrelated-same-slug';
         $en->slug = 'zh-guide';
