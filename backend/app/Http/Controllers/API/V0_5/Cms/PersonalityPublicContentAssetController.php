@@ -1011,6 +1011,27 @@ final class PersonalityPublicContentAssetController extends Controller
             $locale,
             $orgId,
         );
+        if ($this->isV1OnlyEnneagramDetailPayload($surface, $framework, $staleRead['payload'])) {
+            $this->readModelCache->discardActivePreservingLkg(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+            );
+            $staleRead = $this->readModelCache->stale(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+            );
+            if ($this->isV1OnlyEnneagramDetailPayload($surface, $framework, $staleRead['payload'])) {
+                $staleRead['payload'] = null;
+            }
+        }
         if (is_array($staleRead['payload'])) {
             if ($this->isOversizedDetailPayload($staleRead['payload'])) {
                 $this->readModelCache->discardActivePreservingLkg(
@@ -1044,6 +1065,18 @@ final class PersonalityPublicContentAssetController extends Controller
         }
 
         throw $throwable;
+    }
+
+    private function isV1OnlyEnneagramDetailPayload(
+        string $surface,
+        string $framework,
+        mixed $payload,
+    ): bool {
+        return in_array($surface, ['detail-code', 'detail-slug'], true)
+            && $framework === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM
+            && is_array($payload)
+            && is_array($payload['personality_public_content_asset_v1'] ?? null)
+            && ! is_array($payload['personality_public_content_asset_v2'] ?? null);
     }
 
     private function indexSelector(int $page, int $perPage): string

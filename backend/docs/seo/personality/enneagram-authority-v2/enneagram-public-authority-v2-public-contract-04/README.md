@@ -8,6 +8,6 @@ The fixture test exercises real public HTTP routes. Subtypes preserve the frozen
 
 Public output is limited to the existing V1 contract plus V2 visible evidence, editorial authority, media authority, and schema eligibility. Working revision data, revision pointers, and package SHA values remain private and absent.
 
-Enneagram detail cache versions include an Authority V2 projection salt, so V1-only payloads cached before this contract miss cleanly and cannot mask the V2 response after rollout.
+Enneagram detail cache versions include an Authority V2 projection salt, so V1-only payloads cached before this contract miss cleanly and cannot mask the V2 response after rollout. Detail fallback also rejects V1-only Enneagram active/LKG payloads; an unavailable V2 projection fails closed instead of silently serving the legacy shape.
 
 No route, migration, database, CMS content, publish, production, search, or deployment action is part of this task.
