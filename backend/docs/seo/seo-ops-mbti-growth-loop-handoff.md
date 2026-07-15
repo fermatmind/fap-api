@@ -2,74 +2,122 @@
 
 Task: SEO-OPS-SOP-01E
 
-Type: docs/generated/test only.
+Updated: 2026-07-15
 
-This contract defines the transition from SEO infrastructure mode to SEO-GROWTH-MBTI-00. It does not add runtime services, mutate CMS content, modify fap-web, mutate Search Channel Queue, send Digital PR, create pSEO, deploy, or scale beyond MBTI.
+Type: documentation and operating contract only.
 
-## Next Phase
+The initial MBTI authority and discoverability build is complete for the frozen Chinese 52-URL cohort: 32 A/T profiles, 16 A/T comparisons, and 4 hot cross-type comparisons. The authoritative technical closeout is:
 
-Next phase: `SEO-GROWTH-MBTI-00｜Baseline Snapshot and Telemetry Contract`.
+- `backend/docs/seo/mbti-full-personality-authority-closeout-2026-07-15.md`
 
-The first governed growth loop is MBTI only.
+This handoff now governs evidence-led growth after the content, CMS, API, indexability, sitemap, llms, schema, and readback gates have passed. It does not authorize CMS writes, deployment, GSC mutation, pSEO expansion, Digital PR, Search Channel mutation, or work outside MBTI.
 
-Do not scale to Big Five, RIASEC, or Career until the MBTI loop has completed baseline, telemetry, claim lint gate, Search Channel canary, Digital PR observation, human-only funnel review, and 7/14/28-day review.
+## Current state
 
-## Required Handoff Artifacts
+- 52/52 assets passed the full semantic, duplication, FAQ, and internal-link gate.
+- 43 repair records completed the exact draft, public-content, and discoverability authority chain.
+- 9 verify-only records remained unchanged after review and are included in the same release contract.
+- two consecutive release-gate runs passed 52/52 for CMS/API, HTTP, canonical, robots, JSON-LD, visible FAQ parity, sitemap, llms, and llms-full.
+- API timeouts and private URL leaks were zero in the accepted release evidence.
+- GSC-44 created a read-only 28-day baseline and monitoring cohort. It did not submit URLs or request indexing.
 
-SEO-GROWTH-MBTI-00 must define:
+The system is no longer waiting for an initial MBTI baseline contract. The next phase is observation, query-to-page diagnosis, and narrowly scoped repair when evidence supports it.
 
-- baseline snapshot requirements.
-- telemetry contract requirements.
-- entity map requirements.
-- URL Truth review.
-- Content/Internal Link Wave 1.
-- Claim Lint gate.
-- Search Channel canary wave.
-- Digital PR wave.
-- human-only funnel review.
-- 7/14/28-day review.
-- scale decision.
+## Growth loop
 
-## MBTI Growth Loop Core Path
+```text
+Search observation
+  -> query/page match review
+  -> visible content and claim review
+  -> test and product-path observation
+  -> backend truth review
+  -> scoped repair or hold decision
+  -> post-change release gate
+  -> next observation window
+```
 
-Search -> Content -> Test -> Result -> Report -> Revenue -> Observation -> Repair -> Next Action.
+Search -> Content -> Test -> Result -> Report -> Revenue remains the product path, but public search telemetry and private product truth must not be merged into one dataset without explicit privacy-safe contracts.
 
-## Telemetry Constraints
+## Baseline evidence
+
+The GSC-44 read-only baseline covers 2026-06-16 through 2026-07-13:
+
+| Metric | Value |
+| --- | ---: |
+| Clicks | 32 |
+| Impressions | 3106 |
+| CTR | 1.0% |
+| Average position | 9.1 |
+| Query rows | 106 |
+
+The baseline had no observed page-level rows for the 52-URL cohort. Do not assign aggregate query performance to a specific profile or comparison until GSC provides page/query evidence for that URL.
+
+Recorded review dates:
+
+- 7-day review: 2026-07-22.
+- 14-day review: 2026-07-29.
+- 28-day review: 2026-08-12.
+
+## Review questions
+
+### 7-day review
+
+- Are all 52 URLs still HTTP 200, canonical, indexable, and present in the authorized feeds?
+- Did any API timeout, noindex shell, schema mismatch, or private URL leak recur?
+- Are page-level GSC rows beginning to appear?
+- Is there a P0 product, privacy, or authority regression?
+
+### 14-day review
+
+- Which queries map to profiles, A/T comparisons, cross-type comparisons, the MBTI hub, or the test page?
+- Are impressions growing without clicks because title/description intent is mismatched?
+- Do visible answer blocks and FAQ answer the actual query without overclaiming?
+- Are internal links helping the user move between hub, profile, comparison, and test surfaces?
+
+### 28-day review
+
+- Repeat the cohort, repair selected records, or hold?
+- Which changes have page-level evidence rather than aggregate query speculation?
+- Did CTR, average position, and index coverage change without harming product conversion or claim boundaries?
+- Is there enough evidence to propose a separate expansion scope?
+
+## Telemetry constraints
 
 - frontend observation events are not backend truth.
-- backend payment, order, and report access events are truth.
+- backend payment, order, and authorized report access events are product truth but remain private.
 - bot and crawler traffic must be excluded from the product conversion funnel.
-- entity_key must be independent from URL slug.
-- brand lift proxy may track unlinked mentions and branded query lift when data exists.
-- Digital PR mention is not backlink proof.
-- crawler and search data are observation only.
+- entity keys must remain independent from URL slugs.
+- Digital PR mentions are not backlink proof.
+- GSC and crawler data are observation, not content or identity authority.
+- private result, report, attempt, history, order, checkout, and payment URLs must not enter public SEO/GEO datasets.
 
-## MBTI First Experiment Scope
+## Repair rules
 
-The first experiment must include:
+Every repair starts from the owner of the failed boundary:
 
-- MBTI test page.
-- MBTI topic/hub if available.
-- MBTI research page.
-- 16-type entity pages where governed.
-- MBTI result/report/paywall path.
-- Digital PR HRZone/HREC state.
-- Search Channel canary state.
-- /ops/seo review cadence.
+- CMS wording, FAQ, answer blocks, sections, and SEO fields: backend/CMS content task.
+- public profile or comparison projection: fap-api task.
+- frontend authority consumption/rendering: fap-web task, with no editorial fallback.
+- sitemap/llms eligibility: backend authority plus frontend enumeration contract.
+- GSC submission or URL Inspection: separate explicitly authorized operations task.
 
-## Scale Guards
+One repair PR must address one evidence-backed scope. Do not bulk rewrite the cohort because a single page or query underperforms.
 
-- do not scale to Big Five, RIASEC, or Career until MBTI loop is reviewed.
-- do not overclaim Big Five, RIASEC, or Career recommender depth.
-- do not generate pSEO.
-- do not bulk submit URLs.
-- do not bulk outreach.
-- do not use RIASEC, Big Five, or Career Graph as precise career recommender authority.
+## Scale guards
 
-## Review Windows
+- Do not expand beyond the frozen 52-URL cohort without a new inventory, content authority, QA, import, verification, and discoverability gate.
+- Do not turn the completed MBTI authority chain into permission for MBTI x career, Big Five, RIASEC, Enneagram, or Career pSEO.
+- Do not bulk submit URLs, bulk outreach, or promise ranking/AI citation outcomes.
+- Do not use hidden schema, frontend fallback content, or inferred claims to compensate for missing public evidence.
+- Preserve L1 MBTI runtime priority without weakening Big Five or Enneagram contract freezes.
 
-- 7-day review: check crawl/index/referral/issue safety and no P0 regressions.
-- 14-day review: check MBTI cluster content/internal link/Search Channel/Digital PR signals.
-- 28-day review: make scale, repeat, repair, or hold decision.
+## Decision outputs
 
-Next task after this PR: `SEO-OPS-SOP-01F`.
+Each review window ends in exactly one outcome:
+
+- `REPEAT_OBSERVATION`: evidence is insufficient; keep the cohort unchanged.
+- `OPEN_SCOPED_REPAIR`: evidence identifies a bounded content, API, rendering, or feed defect.
+- `HOLD_FOR_AUTHORITY`: a write, claim, permission, or data owner is missing.
+- `PROPOSE_NEW_COHORT`: evidence supports a separately planned expansion with a new full authority chain.
+
+Monitoring does not itself authorize a CMS write, deployment, indexability change, sitemap/llms mutation, GSC request, or search submission.
