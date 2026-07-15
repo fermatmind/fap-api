@@ -490,6 +490,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'This content is not scientifically proven.',
             'This is not a precise career recommendation.',
             'This page is not a career success guarantee.',
+            'This page does not guarantee job fit.',
             '本页不能预测你的职业成功。',
             '本页并非精准职业推荐。',
         ] as $limitation) {
@@ -510,6 +511,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This is not merely a draft; it is the best career for you.', 'deterministic_recommendation_claim'],
             ['This page offers a career success guarantee.', 'deterministic_recommendation_claim'],
             ['This page offers a job fit guarantee.', 'deterministic_recommendation_claim'],
+            ['This page guarantees job fit.', 'career_or_relationship_prediction'],
+            ['Guarantees career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis and is scientifically proven.', 'unsupported_science_claim'],
             ['This page is not a reflection prompt, it predicts your career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, the guide predicts career success.', 'career_or_relationship_prediction'],
@@ -585,6 +588,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '已获发布批准',
             'Ready to publish',
             'Approved to publish',
+            'Approved for public release',
             'Cleared to index',
             'Published and indexable',
             'Release ready',
@@ -593,6 +597,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '已发布',
             '可收录',
             '发布就绪',
+            '已完成人工审核',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -603,7 +608,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved to publish.', 'Human review is not completed.', 'Manual review is not completed.', 'This page is not yet published.', 'This page is not indexable.'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Manual review is not completed.', 'This page is not yet published.', 'This page is not indexable.'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
@@ -626,6 +631,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Hiring suitability',
             'Diagnostic tool',
             'Hiring screen',
+            'This assessment screens candidates for hiring',
+            'This assessment screens for employment suitability',
             'Job suitability guarantee',
             '诊断你的性格',
             '治愈你的焦虑',
@@ -694,6 +701,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'This page is not a hiring suitability assessment.',
             'This page is not a diagnostic tool.',
             'This page is not a hiring screen.',
+            'This assessment does not screen candidates for hiring.',
             '本页不是岗位胜任力测评。',
         ] as $limitation) {
             $candidate = $this->candidate();
