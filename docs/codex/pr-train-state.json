@@ -92330,9 +92330,9 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "committed_pending_push",
-    "commit_sha": "e238e00f178bc441f5be1000d69309d28f64c868",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "6a4a687bc59e355025250c556657f7a8e9c70162",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -92349,6 +92349,10 @@
       "required_local_checks": {
         "status": "pass",
         "evidence": "PHP 8.4 syntax passed; focused benchmark PHPUnit passed 5 tests / 3245 assertions; Pint and composer validate --strict passed; all JSON/YAML parses, checksum verification, git diff --check, and exact seven-path allowlist validation passed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3096 opened from the exact branch; all required GitHub checks must pass on the ledger-updated head before merge."
       }
     },
     "scope_validation": {
@@ -92387,9 +92391,14 @@
         "at": "2026-07-15T01:22:43Z",
         "status": "committed_pending_push",
         "note": "Committed the exact seven-path benchmark and train-registration scope as e238e00f178bc441f5be1000d69309d28f64c868 after explicit staging and cached diff validation."
+      },
+      {
+        "at": "2026-07-15T01:23:50Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact branch and opened PR #3096 with the exact title and required authority, review-truth, production-boundary, validation, deferred, and rollback sections."
       }
     ],
-    "updated_at": "2026-07-15T01:22:43Z"
+    "updated_at": "2026-07-15T01:23:50Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
