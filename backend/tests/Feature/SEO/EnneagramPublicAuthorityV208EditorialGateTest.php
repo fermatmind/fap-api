@@ -576,7 +576,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This page is not a diagnosis, the guide predicts career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, predicts your career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, ready to publish.', 'visible_review_or_release_claim'],
-            ['This page is not a diagnosis, published.', 'visible_review_or_release_claim'],
+            ['This page is not a diagnosis, this page is published.', 'visible_review_or_release_claim'],
             ['This page is not a diagnosis, independent experts have scientifically validated it.', 'unsupported_science_claim'],
             ['This page does not establish validity, FermatMind predicts career success.', 'career_or_relationship_prediction'],
             ['This page is not a diagnosis, or it predicts your career success.', 'career_or_relationship_prediction'],
@@ -668,6 +668,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Approved for public release',
             'Cleared to index',
             'Published and indexable',
+            'This page is published',
             'Already indexed by Google',
             'Eligible to publish',
             'Release ready',
@@ -695,6 +696,37 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
 
         foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not editor approved.', 'This page is not expert approved.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexed by Google.', 'This page is not eligible to publish.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称编辑已批准。', '本页不能声称已进入站点地图。', '本页不能声称已被搜索收录。'] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+
+        foreach (['Published Enneagram reliability studies report mixed evidence.', 'Published research on Enneagram reliability remains limited.'] as $sourceEvidence) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $sourceEvidence;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $sourceEvidence.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
+    public function test_source_ledger_clinical_utility_claims_fail_closed(): void
+    {
+        foreach (['FermatMind has clinical utility.', 'Clinical utility is established.', '费马测试具有临床效用。', '临床效用已经确立。'] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('unsupported_science_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach (['This page does not establish clinical utility.', '本页不能确立临床效用。'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
