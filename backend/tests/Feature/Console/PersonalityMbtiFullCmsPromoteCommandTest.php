@@ -10,6 +10,7 @@ use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Services\Cms\PersonalityPublicReadModelCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -115,6 +116,8 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
     public function test_exact_write_promotes_all_43_public_content_records_without_indexability_mutation_and_is_idempotent(): void
     {
         [$path, $profiles] = $this->seedAndStage();
+        $cache = app(PersonalityPublicReadModelCache::class);
+        $initialToken = $cache->versionToken('INTJ-A', 'zh-CN', 0, 'MBTI');
         $before = $profiles->mapWithKeys(fn (PersonalityProfile $profile): array => [(int) $profile->id => (bool) $profile->is_indexable])->all();
         $plan = $this->plan($path);
 
@@ -124,6 +127,9 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertSame(0, $firstExit);
         self::assertTrue($first['ok']);
         self::assertSame(43, $first['promoted_count']);
+        self::assertSame(28, $first['read_model_cache_invalidated_count']);
+        $firstToken = $cache->versionToken('INTJ-A', 'zh-CN', 0, 'MBTI');
+        self::assertNotSame($initialToken, $firstToken);
         self::assertFalse($first['indexability_mutated']);
         self::assertFalse($first['sitemap_mutated']);
         self::assertFalse($first['llms_mutated']);
@@ -147,6 +153,8 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertSame(0, $secondExit);
         self::assertSame(0, $second['promoted_count']);
         self::assertSame(43, $second['skipped_existing_count']);
+        self::assertSame(28, $second['read_model_cache_invalidated_count']);
+        self::assertNotSame($firstToken, $cache->versionToken('INTJ-A', 'zh-CN', 0, 'MBTI'));
     }
 
     public function test_a_newer_unapproved_revision_fails_closed_without_partial_live_writes(): void

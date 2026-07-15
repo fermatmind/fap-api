@@ -24,6 +24,10 @@ final class MbtiFullCmsPromotionService
 
     private const AT_SNAPSHOT_KEY = 'mbti_cms_import_40_at_comparison_draft_v1';
 
+    public function __construct(
+        private readonly PersonalityPublicReadModelCache $personalityPublicReadModelCache,
+    ) {}
+
     /** @param array<string,mixed> $package @param array<string,mixed> $options @return array<string,mixed> */
     public function plan(array $package, array $options): array
     {
@@ -33,7 +37,29 @@ final class MbtiFullCmsPromotionService
     /** @param array<string,mixed> $package @param array<string,mixed> $options @return array<string,mixed> */
     public function promote(array $package, array $options): array
     {
-        return DB::transaction(fn (): array => $this->buildSummary($package, $options, true));
+        $summary = DB::transaction(fn (): array => $this->buildSummary($package, $options, true));
+        if (($summary['ok'] ?? false) !== true) {
+            return $summary;
+        }
+
+        $invalidated = 0;
+        foreach ((array) ($summary['rows'] ?? []) as $row) {
+            if (! is_array($row) || ($row['entity_kind'] ?? null) !== 'profile') {
+                continue;
+            }
+            if ($this->personalityPublicReadModelCache->forgetType(
+                (string) ($row['slug'] ?? ''),
+                'zh-CN',
+                0,
+                PersonalityProfile::SCALE_CODE_MBTI,
+            )) {
+                $invalidated++;
+            }
+        }
+
+        $summary['read_model_cache_invalidated_count'] = $invalidated;
+
+        return $summary;
     }
 
     /** @param array<string,mixed> $package @param array<string,mixed> $options @return array<string,mixed> */
@@ -576,6 +602,7 @@ final class MbtiFullCmsPromotionService
             'llms_mutated' => false,
             'search_release_mutated' => false,
             'writes_committed' => false,
+            'read_model_cache_invalidated_count' => 0,
         ];
     }
 

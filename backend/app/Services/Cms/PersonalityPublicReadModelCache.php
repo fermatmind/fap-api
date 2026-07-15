@@ -16,6 +16,23 @@ final class PersonalityPublicReadModelCache
 
     public const LKG_TTL_SECONDS = 604800;
 
+    public function versionToken(string $type, string $locale, int $orgId, string $scaleCode): string
+    {
+        if (! $this->isCacheable('detail', $type, $locale, $orgId, $scaleCode)) {
+            return 'bypass';
+        }
+
+        try {
+            $token = Cache::get($this->generationKey($type, $locale));
+
+            return is_string($token) && $token !== '' ? $token : '0';
+        } catch (Throwable $throwable) {
+            $this->recordState('generation', $locale, 'bypass', $throwable);
+
+            return '0';
+        }
+    }
+
     /**
      * @return array{state:'fresh'|'miss'|'bypass',payload:array<string,mixed>|null}
      */
@@ -125,20 +142,35 @@ final class PersonalityPublicReadModelCache
         }
     }
 
-    public function forgetType(string $type, string $locale, int $orgId, string $scaleCode): void
+    public function forgetType(string $type, string $locale, int $orgId, string $scaleCode): bool
     {
-        foreach (['detail', 'seo'] as $surface) {
-            if (! $this->isCacheable($surface, $type, $locale, $orgId, $scaleCode)) {
-                continue;
-            }
+        if (! $this->isCacheable('detail', $type, $locale, $orgId, $scaleCode)) {
+            return false;
+        }
 
+        try {
+            Cache::forever(
+                $this->generationKey($type, $locale),
+                hash('xxh3', microtime(true).':'.random_int(PHP_INT_MIN, PHP_INT_MAX)),
+            );
+        } catch (Throwable $throwable) {
+            $this->recordState('generation', $locale, 'bypass', $throwable);
+
+            return false;
+        }
+
+        foreach (['detail', 'seo'] as $surface) {
             try {
                 Cache::forget($this->activeKey($surface, $type, $locale));
                 Cache::forget($this->lkgKey($surface, $type, $locale));
             } catch (Throwable $throwable) {
                 $this->recordState($surface, $locale, 'bypass', $throwable);
+
+                return false;
             }
         }
+
+        return true;
     }
 
     public function key(string $surface, string $type, string $locale, string $version): string
@@ -172,6 +204,16 @@ final class PersonalityPublicReadModelCache
             strtolower($locale),
             strtolower($type),
             'lkg',
+        ]);
+    }
+
+    public function generationKey(string $type, string $locale): string
+    {
+        return implode(':', [
+            self::CACHE_KEY_PREFIX,
+            strtolower($locale),
+            strtolower($type),
+            'generation',
         ]);
     }
 

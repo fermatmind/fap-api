@@ -153,7 +153,7 @@ class PersonalityController extends Controller
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
         try {
-            $cacheVersion = $this->publicReadModelVersion($profile, $variant);
+            $cacheVersion = $this->publicReadModelVersion($profile, $variant, $type, $validated);
         } catch (Throwable $throwable) {
             return $this->stalePublicReadResponseOrThrow('detail', $type, $validated, $throwable);
         }
@@ -263,7 +263,7 @@ class PersonalityController extends Controller
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
         try {
-            $cacheVersion = $this->publicReadModelVersion($profile, $variant);
+            $cacheVersion = $this->publicReadModelVersion($profile, $variant, $type, $validated);
         } catch (Throwable $throwable) {
             return $this->stalePublicReadResponseOrThrow('seo', $type, $validated, $throwable);
         }
@@ -2396,11 +2396,22 @@ class PersonalityController extends Controller
         ];
     }
 
-    private function publicReadModelVersion(PersonalityProfile $profile, ?PersonalityProfileVariant $variant): string
-    {
+    /** @param array{org_id:int,scale_code:string,locale:string} $validated */
+    private function publicReadModelVersion(
+        PersonalityProfile $profile,
+        ?PersonalityProfileVariant $variant,
+        string $type,
+        array $validated,
+    ): string {
         return hash('xxh3', json_encode([
             'profile' => $profile->getAttributes(),
             'variant' => $variant?->getAttributes(),
+            'content_generation' => $this->personalityPublicReadModelCache->versionToken(
+                $type,
+                $validated['locale'],
+                $validated['org_id'],
+                $validated['scale_code'],
+            ),
         ], JSON_THROW_ON_ERROR));
     }
 
