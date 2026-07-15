@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "ff9e01f607c777a752a423718f5b50449058d6ac",
+    "commit_sha": "01575639527e0d19a1d4a04fd773dac45d247c33",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93358,7 +93358,7 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior ledger head 05f80f99c, then the latest automated review added one valid in-scope numeric seven-day prompt P2 finding. The locally verified substantive fix head ff9e01f60 requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior ledger head 1da39581d, then the latest automated review added one valid in-scope bare medical noun P2 finding. The locally verified substantive fix head 015756395 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All nineteen valid P2 findings are fixed. In addition to the prior eighteen, generic exercise detection covers word, ASCII numeric, full-width numeric, and hyphenated seven-day forms in English plus Chinese numeric forms, independent of duration metadata. PR08+PR02 pass 25 tests / 381 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All twenty valid P2 findings are fixed. In addition to the prior nineteen, bare diagnosis/treatment/cure claims in English and Chinese fail while explicit negative boundaries using not/never/不是/不把/不得/禁止 remain allowed. PR08+PR02 pass 26 tests / 434 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93475,9 +93475,14 @@
         "at": "2026-07-15T11:48:32Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: generic seven-day prompts now fail for word, ASCII numeric, full-width numeric, hyphenated, and Chinese numeric forms regardless of duration metadata. PR08+PR02 pass 25 / 381, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:58:10Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed with a negation-aware medical claim backstop. The first retry exposed the source-ledger's Chinese 不得把 negative form; after adding that exact bounded context, bare diagnosis/treatment/cure claims fail in English and Chinese while the complete candidate remains clean. PR08+PR02 pass 26 / 434, freeze regressions 2 / 5, Pint, syntax, YAML, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T11:48:32Z"
+    "updated_at": "2026-07-15T11:58:10Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
