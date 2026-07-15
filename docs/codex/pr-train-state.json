@@ -92865,9 +92865,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04"
     ],
-    "status": "ready_to_push",
+    "status": "github_checks_pending",
     "commit_sha": "52a4334aa01da81b742ddc128909167463be2e72",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3107",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -92888,6 +92888,10 @@
       "scope": {
         "status": "pass",
         "evidence": "The exact seven-path change set is limited to the shared framework-safe writer, Big Five adapter, Enneagram writer and command, focused Enneagram test, and PR-train manifest/state. No migration, public contract, content package, production write, CMS publish, indexability, sitemap, or llms mutation is included."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "Pushed the exact branch and opened PR #3107 with the manifest title; required checks and review are pending."
       }
     },
     "scope_validation": {
@@ -92926,9 +92930,14 @@
         "at": "2026-07-15T06:44:30Z",
         "status": "ready_to_push",
         "note": "Committed runtime scope as 52a4334aa01da81b742ddc128909167463be2e72 and replayed every manifest command successfully. The branch remains exactly seven allowlisted paths with no migration, production write, CMS mutation, primary-content overwrite, or published-pointer update."
+      },
+      {
+        "at": "2026-07-15T06:45:46Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact branch and opened the single authorized fap-api PR #3107 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections."
       }
     ],
-    "updated_at": "2026-07-15T06:44:30Z"
+    "updated_at": "2026-07-15T06:45:46Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06",
