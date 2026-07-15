@@ -92367,15 +92367,51 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-visible-date-42",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41"],
-    "status": "ready_to_merge",
-    "commit_sha": "fde36ea24e5da6135d3e38c36ef925810ddb5521",
+    "status": "merged",
+    "commit_sha": "7cb885c1d30ec52d3e3eac60379036dbeacbc5e7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3099",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR42 id, branch, title, scope, dependency, lifecycle, validation floor, and no-production-write boundary."},
       "dependency": {"status": "pass", "evidence": "BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41 is merged in PR #3098 as ae7dfe5af2ce64ad6795942e18657b960bf159b1; origin/main contains the merge and PR41 branch cleanup and post-merge revalidation completed."},
       "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-visible-date-42 from clean origin/main ae7dfe5af2ce64ad6795942e18657b960bf159b1 after confirming no local/remote branch or existing PR, then fast-forwarded safely to latest origin/main cc550dd4c35c73820583f6029145f99fdab3a644 after an unrelated Enneagram docs/ledger merge. The 82 PR38 visible-date FAIL findings and Article, PersonalityPublicContentAsset, TopicProfile, LandingSurface, and revision date fields were inspected before implementation."},
       "local": {"status": "pass", "evidence": "The deterministic Node validator passed with 82 findings at fixture SHA256 8a51048e6d47d9bc52254aa5db2e122daec7671090986b7641c3757cb4b229f3; PR42 focused Laravel passed 4 tests / 218 assertions; runtime-freeze classifier and negative control passed 2 tests / 5 assertions; touched Pint and PHP/JSON/YAML/JS syntax passed; full bash backend/scripts/ci_verify_mbti.sh passed, including Big Five 1400 tests / 180780 assertions plus downstream personality, MBTI smoke, security, migration, dependency, and OpenAPI gates; generated timestamp-only compile side effects were removed; diff and exact-scope checks passed."},
-      "github": {"status": "pass", "evidence": "Head fde36ea24e5da6135d3e38c36ef925810ddb5521 passed all nine GitHub checks in CI run 29385914487 and Code Scanning run 29385914480: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF upload. GitHub reports CLEAN merge state and exactly nine allowed files."}
+      "github": {"status": "pass", "evidence": "Final head c474b8b0a26c2593a204178a5217269a5a8df56e passed all nine required GitHub checks in CI run 29386197315 and Code Scanning run 29386197313. GitHub reports PR #3099 merged as 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 and origin/main contains that merge commit."},
+      "post_merge": {"status": "pass_with_isolated_cleanup_pending", "evidence": "origin/main contains merge 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 and the remote task branch is deleted. Local task-branch deletion was deliberately not executed because another local workflow added three uncommitted PR42 hardening edits in the primary worktree after merge; those user-owned edits remain untouched while PR43 proceeds in an isolated clean worktree."}
+    },
+    "failure_reason": null,
+    "merged_at": "2026-07-15T03:24:13Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_deploy_allowed": false,
+    "database_mutation": false,
+    "cms_mutation_allowed": false,
+    "indexability_mutation_allowed": false,
+    "public_runtime_change": false,
+    "transitions": [
+      {"at": "2026-07-15T02:59:54Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR42 from the exact merged PR41 base. Scope is limited to the 82-finding fixture, a read-only fail-closed date projector, focused contracts, and required ledger reconciliation; no public controller or authority data mutation is allowed."},
+      {"at": "2026-07-15T03:08:30Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed. The projector keeps import/build/deploy/revision-created/raw-update timestamps audit-only, locks all 82 source findings, makes missing authority dates null and field-ineligible, and performs no writes or public runtime wiring."},
+      {"at": "2026-07-15T03:10:38Z", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact nine-file scope as 451b5d034c9eca4a68acd8dcf57fa0dd5ad1d29c and opened the single authorized GitHub PR #3099 with CLEAN merge state. Waiting for all required checks; no production/CMS/deploy action occurred."},
+      {"at": "2026-07-15T03:17:22Z", "from": "github_checks_pending", "to": "ready_to_merge", "note": "Head fde36ea24e5da6135d3e38c36ef925810ddb5521 passed all nine required GitHub checks. The PR remains CLEAN with exactly nine manifest-allowed files, the 82-finding fixture/hash is locked, and no public runtime, production CMS, publish, index, or deploy action occurred."},
+      {"at": "2026-07-15T03:24:13Z", "from": "ready_to_merge", "to": "merged", "note": "GitHub reports PR #3099 merged as 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7, origin/main contains the merge, and the remote branch is deleted. Local cleanup remains false because three user-owned uncommitted PR42 hardening edits appeared in the primary worktree after merge; they were preserved and isolated from PR43."}
+    ]
+  },
+  "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43": {
+    "id": "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43",
+    "repo": "fap-api",
+    "title": "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43: feat(content): add Big Five visible provenance and reviewer ledger",
+    "base": "main",
+    "branch": "codex/big5-authority-v2-visible-provenance-43",
+    "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-DATE-42"],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR43 id, branch, title, dependency, provenance/reviewer contract, lifecycle, validation floor, and no-production-write boundary."},
+      "dependency": {"status": "pass", "evidence": "BIG5-AUTHORITY-V2-VISIBLE-DATE-42 is merged in PR #3099 as 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 and origin/main contains the merge."},
+      "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-visible-provenance-43 from exact origin/main 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 after confirming no local/remote branch or existing PR. Work proceeds in an isolated worktree so three user-owned uncommitted PR42 hardening edits in the primary worktree remain untouched. The exact 11-row union from PR38 is locked to source SHA256 60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65."},
+      "local": {"status": "pass", "evidence": "The deterministic Node validator passed with 11 unique findings at fixture SHA256 acc50e56da08676ce6fc4497d1015af6ca01de8fceb951676f69b0cdbd1ce17b; PR43 focused Laravel passed 4 tests / 33 assertions; runtime-freeze classifier and negative control passed 2 tests / 5 assertions; touched Pint and PHP/JSON/YAML/JS syntax passed; full bash backend/scripts/ci_verify_mbti.sh passed, including Big Five 1405 tests / 180815 assertions plus Enneagram, MBTI smoke, security, migration, dependency, and OpenAPI gates; generated compile-time side effects were removed; diff and exact nine-file scope checks passed."},
+      "github": {"status": "pending", "evidence": null}
     },
     "failure_reason": null,
     "merged_at": null,
@@ -92388,10 +92424,8 @@
     "indexability_mutation_allowed": false,
     "public_runtime_change": false,
     "transitions": [
-      {"at": "2026-07-15T02:59:54Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR42 from the exact merged PR41 base. Scope is limited to the 82-finding fixture, a read-only fail-closed date projector, focused contracts, and required ledger reconciliation; no public controller or authority data mutation is allowed."},
-      {"at": "2026-07-15T03:08:30Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed. The projector keeps import/build/deploy/revision-created/raw-update timestamps audit-only, locks all 82 source findings, makes missing authority dates null and field-ineligible, and performs no writes or public runtime wiring."},
-      {"at": "2026-07-15T03:10:38Z", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact nine-file scope as 451b5d034c9eca4a68acd8dcf57fa0dd5ad1d29c and opened the single authorized GitHub PR #3099 with CLEAN merge state. Waiting for all required checks; no production/CMS/deploy action occurred."},
-      {"at": "2026-07-15T03:17:22Z", "from": "github_checks_pending", "to": "ready_to_merge", "note": "Head fde36ea24e5da6135d3e38c36ef925810ddb5521 passed all nine required GitHub checks. The PR remains CLEAN with exactly nine manifest-allowed files, the 82-finding fixture/hash is locked, and no public runtime, production CMS, publish, index, or deploy action occurred."}
+      {"at": "2026-07-15T03:35:42Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR43 from the exact merged PR42 base. Scope is limited to the 11-finding fixture, a read-only fail-closed author/reviewer/source projector, focused contracts, and required PR42 ledger reconciliation; no migration, public runtime wiring, CMS write, promotion, indexability, or deploy action is allowed."},
+      {"at": "2026-07-15T03:44:23Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed. The contract requires separately authoritative author, human reviewer, and source fields; generated identities, self-attested reviewer references, missing review timestamps/states, and endorsement-style labels fail closed without overwriting existing published content."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
