@@ -92330,8 +92330,8 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "fourth_review_fix_local_verified",
-    "commit_sha": "0716d4c6bcb88cdc6a983b27615c8a737ef1c7fe",
+    "status": "ready_to_merge",
+    "commit_sha": "5bbb1bcc4237cf8363142dfafce99ed963262177",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
       "manifest_registration": {
@@ -92351,14 +92351,14 @@
         "evidence": "PHP 8.4 executable manifest lint command passed; focused benchmark PHPUnit passed 6 tests / 3262 assertions; executable scoped Pint command and composer validate --strict passed; JSON/YAML parsing, frozen SHA256 checks, git diff --check, and exact seven-path allowlist validation passed."
       },
       "github_required_checks": {
-        "status": "rerun_required",
-        "evidence": "All nine checks passed on pre-fourth-review-fix head 0716d4c6bcb88cdc6a983b27615c8a737ef1c7fe. The local-plus-cross-repo dependency and README checksum fix head must rerun every required check before merge."
+        "status": "pass",
+        "evidence": "All nine required checks passed on fourth-review-fix head 5bbb1bcc4237cf8363142dfafce99ed963262177; all three dependency/checksum review threads are resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -92436,9 +92436,14 @@
         "at": "2026-07-15T02:13:52Z",
         "status": "fourth_review_fix_local_verified",
         "note": "PR04 now directly depends on both local PR02 and cross-repo PR03; PR22 directly depends on both local PR20 and cross-repo PR21. The README Truity SHA matches the canonical-deduplicated registry. Focused PHPUnit passes 6 tests / 3262 assertions; Pint, Composer, YAML/JSON, and diff checks pass."
+      },
+      {
+        "at": "2026-07-15T02:20:07Z",
+        "status": "ready_to_merge",
+        "note": "All nine required GitHub checks passed on fourth-review-fix head 5bbb1bcc4237cf8363142dfafce99ed963262177, the three review threads are resolved, and the exact seven-path PR scope remains intact."
       }
     ],
-    "updated_at": "2026-07-15T02:13:52Z"
+    "updated_at": "2026-07-15T02:20:07Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
