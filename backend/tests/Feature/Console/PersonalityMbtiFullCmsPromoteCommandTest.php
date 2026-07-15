@@ -260,6 +260,61 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertTrue($second['writes_committed']);
     }
 
+    public function test_full_indexability_release_uses_zh_cn_authority_when_runtime_codes_overlap_across_locales(): void
+    {
+        $englishProfile = $this->seedEnglishProfile('INTJ');
+        [$path] = $this->seedAndStage();
+        $this->promotePublicContent($path);
+
+        foreach ($englishProfile->variants as $variant) {
+            PersonalityProfileVariantSeoMeta::query()->create([
+                'personality_profile_variant_id' => $variant->id,
+                'seo_title' => $variant->runtime_type_code.' English',
+                'seo_description' => 'English authority must remain held.',
+                'canonical_url' => 'https://fermatmind.com/en/personality/'.strtolower($variant->runtime_type_code),
+                'robots' => 'noindex,follow',
+            ]);
+        }
+
+        $plan = $this->indexabilityPlan($path);
+        $intjRows = collect($plan['rows'])
+            ->where('entity_kind', 'profile')
+            ->whereIn('slug', ['intj-a', 'intj-t'])
+            ->values();
+        self::assertCount(2, $intjRows);
+        self::assertSame(
+            ['zh-CN'],
+            $intjRows->map(fn (array $row): string => (string) PersonalityProfile::query()
+                ->withoutGlobalScopes()
+                ->findOrFail($row['profile_id'])
+                ->locale)->unique()->values()->all()
+        );
+
+        [$exitCode, $summary] = $this->callIndexability($this->indexabilityOptions($path, false, $plan));
+        self::assertSame(0, $exitCode, (string) json_encode($summary, JSON_UNESCAPED_SLASHES));
+        self::assertFalse((bool) $englishProfile->fresh()->is_indexable);
+        self::assertSame(
+            2,
+            PersonalityProfileVariantSeoMeta::query()->withoutGlobalScopes()
+                ->whereIn('personality_profile_variant_id', $englishProfile->variants->pluck('id'))
+                ->where('robots', 'noindex,follow')
+                ->count()
+        );
+
+        $zhProfile = PersonalityProfile::query()->withoutGlobalScopes()
+            ->where('locale', 'zh-CN')
+            ->where('canonical_type_code', 'INTJ')
+            ->firstOrFail();
+        self::assertTrue((bool) $zhProfile->is_indexable);
+        self::assertSame(
+            2,
+            PersonalityProfileVariantSeoMeta::query()->withoutGlobalScopes()
+                ->whereIn('personality_profile_variant_id', $zhProfile->variants()->pluck('id'))
+                ->where('robots', 'index,follow')
+                ->count()
+        );
+    }
+
     /** @return array{string,\Illuminate\Database\Eloquent\Collection<int,PersonalityProfile>} */
     private function seedAndStage(): array
     {
@@ -406,6 +461,39 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         }
 
         return PersonalityProfile::query()->withoutGlobalScopes()->orderBy('id')->get();
+    }
+
+    private function seedEnglishProfile(string $type): PersonalityProfile
+    {
+        $profile = PersonalityProfile::query()->create([
+            'org_id' => 0,
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'type_code' => $type,
+            'canonical_type_code' => $type,
+            'slug' => strtolower($type),
+            'locale' => 'en',
+            'title' => $type,
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        foreach (['A', 'T'] as $variantCode) {
+            PersonalityProfileVariant::query()->create([
+                'org_id' => 0,
+                'personality_profile_id' => $profile->id,
+                'canonical_type_code' => $type,
+                'variant_code' => $variantCode,
+                'runtime_type_code' => $type.'-'.$variantCode,
+                'type_name' => $type.' '.$variantCode,
+                'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+                'is_published' => true,
+                'published_at' => now()->subMinute(),
+            ]);
+        }
+
+        return $profile->load('variants');
     }
 
     /** @return array<string,mixed> */

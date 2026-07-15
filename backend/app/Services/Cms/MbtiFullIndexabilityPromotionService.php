@@ -255,7 +255,11 @@ final class MbtiFullIndexabilityPromotionService
             if ($seo instanceof PersonalityProfileVariantSeoMeta && $robots !== '' && ! str_contains($robots, 'noindex')) {
                 continue;
             }
-            $variant = PersonalityProfileVariant::query()->withoutGlobalScopes()->where('runtime_type_code', $runtime)->first();
+            $variant = PersonalityProfileVariant::query()->withoutGlobalScopes()
+                ->where('personality_profile_id', $profile->id)
+                ->where('runtime_type_code', $runtime)
+                ->where('is_published', true)
+                ->first();
             if (! $variant instanceof PersonalityProfileVariant || ! (bool) $profile->is_indexable) {
                 throw new RuntimeException($field.' A/T comparison depends on a variant outside the release cohort that is not indexable.');
             }
@@ -277,18 +281,30 @@ final class MbtiFullIndexabilityPromotionService
     /** @return array{PersonalityProfile,PersonalityProfileVariant,?PersonalityProfileVariantSeoMeta} */
     private function profileRows(string $runtime, bool $requireSeo = true): array
     {
-        $variant = PersonalityProfileVariant::query()->withoutGlobalScopes()
-            ->where('runtime_type_code', $runtime)
-            ->where('is_published', true)
-            ->first();
-        if (! $variant instanceof PersonalityProfileVariant) {
-            throw new RuntimeException('Published Profile variant '.$runtime.' was not found.');
+        if (preg_match('/^(?<base>[EI][SN][TF][JP])-(?<variant>[AT])$/', $runtime, $matches) !== 1) {
+            throw new RuntimeException('Profile runtime identity '.$runtime.' is invalid.');
         }
-        $profile = PersonalityProfile::query()->withoutGlobalScopes()->whereKey($variant->personality_profile_id)->first();
+
+        $profile = $this->publishedProfile((string) $matches['base']);
+        $variants = PersonalityProfileVariant::query()->withoutGlobalScopes()
+            ->where('personality_profile_id', $profile->id)
+            ->where('runtime_type_code', $runtime)
+            ->where('canonical_type_code', (string) $matches['base'])
+            ->where('variant_code', (string) $matches['variant'])
+            ->where('is_published', true)
+            ->get();
+        if ($variants->count() !== 1) {
+            throw new RuntimeException('Exactly one published zh-CN Profile variant '.$runtime.' is required.');
+        }
+
+        $variant = $variants->first();
+        if (! $variant instanceof PersonalityProfileVariant) {
+            throw new RuntimeException('Published zh-CN Profile variant '.$runtime.' was not found.');
+        }
         $seo = PersonalityProfileVariantSeoMeta::query()->withoutGlobalScopes()
             ->where('personality_profile_variant_id', $variant->id)
             ->first();
-        if (! $profile instanceof PersonalityProfile || ($requireSeo && ! $seo instanceof PersonalityProfileVariantSeoMeta)) {
+        if ($requireSeo && ! $seo instanceof PersonalityProfileVariantSeoMeta) {
             throw new RuntimeException('Profile authority rows for '.$runtime.' are incomplete.');
         }
 
@@ -297,16 +313,21 @@ final class MbtiFullIndexabilityPromotionService
 
     private function publishedProfile(string $base): PersonalityProfile
     {
-        $profile = PersonalityProfile::query()->withoutGlobalScopes()
+        $profiles = PersonalityProfile::query()->withoutGlobalScopes()
             ->where('org_id', 0)
             ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
             ->where('locale', 'zh-CN')
             ->where('canonical_type_code', $base)
             ->where('status', 'published')
             ->where('is_public', true)
-            ->first();
+            ->get();
+        if ($profiles->count() !== 1) {
+            throw new RuntimeException('Exactly one published zh-CN Profile '.$base.' is required.');
+        }
+
+        $profile = $profiles->first();
         if (! $profile instanceof PersonalityProfile) {
-            throw new RuntimeException('Published A/T comparison Profile '.$base.' was not found.');
+            throw new RuntimeException('Published zh-CN Profile '.$base.' was not found.');
         }
 
         return $profile;
