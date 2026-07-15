@@ -199,6 +199,26 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_diagnosis_and_screening_claim_vocabulary_fails_claim_safety_gate(): void
+    {
+        foreach ([
+            'Medical diagnosis',
+            'Clinical diagnostic result',
+            'Diagnoses your personality',
+            'Hiring fit',
+            'Job suitability guarantee',
+            '岗位适配保证',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('diagnosis_or_screening_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+    }
+
     public function test_generic_seven_day_text_cannot_bypass_the_gate_with_mismatched_duration(): void
     {
         $candidate = $this->candidate();

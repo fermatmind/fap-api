@@ -329,6 +329,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?|(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?[\s-]+predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|hiring|salary|turnover|health|admission|legal|financial|outcome)|perfect\s+(?:career|job|partner)|预测(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果|适配)?|保证(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果)?|最适合的职业|完美伴侣)/iu';
 
+    private const DIAGNOSIS_SCREENING_PATTERN = '/(?:medical\s+diagnos(?:is|e|tic)|clinical\s+diagnos(?:is|e|tic)|diagnos(?:es|ed|ing)\s+(?:you|your)|hiring[\s-]+fit|job[\s-]+suitability(?:[\s-]+guarantee)?|(?:employment|admission)[\s-]+screening|医疗诊断|临床诊断|招聘适配|录用适配|岗位适配保证)/iu';
+
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
 
     private const GENERIC_EXERCISE_PATTERN = '/(?:for (?:the next )?seven days,? (?:notice|observe|journal)|连续七天(?:观察|记录|注意))/iu';
@@ -738,6 +740,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         foreach ([
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
+            [self::DIAGNOSIS_SCREENING_PATTERN, 'diagnosis_or_screening_claim'],
             [self::COMPETITOR_PATTERN, 'competitor_language_detected'],
         ] as [$pattern, $code]) {
             if (preg_match($pattern, $text) === 1) {
