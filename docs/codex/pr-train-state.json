@@ -94027,18 +94027,31 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
     ],
-    "status": "in_progress",
-    "commit_sha": null,
+    "status": "local_checks_passed",
+    "commit_sha": "33d3c6c185ba6ecadd020a0c2782acdd471f0243",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": null,
     "checks": {
       "dependency": {
         "status": "pass",
         "evidence": "PR08 merged as d920e999f85165a73ac4176c24fd791d83cd7e85; GitHub MERGED state, origin/main containment, all nine green checks, final same-head clean review, remote/local branch cleanup, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first PR08-gate replay found 11 asset-specific content issues: six GEO question-to-visible-answer term mismatches, three compound English center-boundary limitations whose later biological/neurological terms escaped the negation scope, and two Chinese FAQ answers below the depth threshold. No source-map, target identity, private-result, review-truth, release-truth, or mutation-boundary defect was found."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "After content repair, the PR09 focused suite passes 6 tests / 256 assertions; all eight real assets have zero asset-specific issues under the PR08 IntegrityGate, and the only aggregate signals are one expected target_count_invalid plus exactly 108 target_asset_missing rows reserved for PR10-PR18. Pint passes the focused PHP test; PHP syntax, YAML, all changed JSON, diff, and exact six-file allowlist pass."
+      },
+      "content_qa": {
+        "status": "pass",
+        "evidence": "The package contains exactly hub plus gut/heart/head centers in en and zh-CN, independently authored with distinct locale outlines, 24 unique FAQ questions and answers, within-center differences, counterexamples, alternative explanations, explicit non-medical/non-neurological boundaries, pending_manual_review, reviewer null, draft_only, zero publish eligibility, and zero CMS/database/search/deploy writes. The QA report preserves the raw 11-issue failure and repair evidence; no external model session was used."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -94062,9 +94075,19 @@
         "at": "2026-07-15T22:23:11Z",
         "status": "in_progress",
         "note": "Reconciled the verified PR08 merge and began the exact PR09 branch from clean latest origin/main. This scope authors eight independent bilingual hub/center draft assets only; no CMS/database write, revision import, human-review completion, publication, indexability, sitemap, llms, search submission, deploy, or production action is authorized."
+      },
+      {
+        "at": "2026-07-15T22:30:00Z",
+        "status": "local_check_failed_content_gate",
+        "note": "The first PR08-gate replay found 11 asset-specific content issues: six GEO answer mappings used non-matching terms, three compound English boundary statements let later center-system terms escape explicit negation, and two Chinese FAQ answers were too short. The repair stayed entirely inside PR09 draft/test paths and changed no authority, review, release, or runtime behavior."
+      },
+      {
+        "at": "2026-07-15T22:33:39Z",
+        "status": "local_checks_passed",
+        "note": "All PR09 manifest checks pass after repair: 6 tests / 256 assertions, Pint, PHP syntax, YAML, all JSON, diff check, and exact six-file scope. All eight assets have zero asset-specific PR08-gate issues; 108 family targets remain explicitly deferred to PR10-PR18. Review is pending, release is draft-only, publish eligibility is false, and all execution boundaries remain false."
       }
     ],
-    "updated_at": "2026-07-15T22:23:11Z"
+    "updated_at": "2026-07-15T22:33:39Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10",
