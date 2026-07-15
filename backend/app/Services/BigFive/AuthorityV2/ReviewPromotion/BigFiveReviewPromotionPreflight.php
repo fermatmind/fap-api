@@ -1219,7 +1219,6 @@ final class BigFiveReviewPromotionPreflight
      */
     private function expectedCohorts(array $lockedRowsByAsset): array
     {
-        $collator = new \Collator('en');
         $groups = [];
         foreach ($lockedRowsByAsset as $row) {
             $surface = (string) ($row['authority_surface'] ?? '');
@@ -1233,7 +1232,7 @@ final class BigFiveReviewPromotionPreflight
 
         $cohorts = [];
         foreach ($groups as $key => $assetIds) {
-            usort($assetIds, static fn (string $left, string $right): int => $collator->compare($left, $right));
+            $assetIds = $this->sortCohortAssetIds($assetIds);
             [$surface, $locale] = explode('|', $key, 2);
             foreach (array_chunk($assetIds, 25) as $index => $cohortAssetIds) {
                 $surfaceKey = trim((string) preg_replace('/[^a-z0-9]+/', '_', strtolower($surface)), '_');
@@ -1251,6 +1250,28 @@ final class BigFiveReviewPromotionPreflight
         }
 
         return $cohorts;
+    }
+
+    /** @param list<string> $assetIds @return list<string> */
+    private function sortCohortAssetIds(array $assetIds, bool $forceFallback = false): array
+    {
+        $collator = ! $forceFallback && class_exists(\Collator::class)
+            ? new \Collator('en')
+            : null;
+
+        usort($assetIds, static function (string $left, string $right) use ($collator): int {
+            if ($collator instanceof \Collator) {
+                $comparison = $collator->compare($left, $right);
+                if ($comparison !== false) {
+                    return $comparison;
+                }
+            }
+
+            // Locked asset ids are ASCII. ICU/Node order their underscore family prefix before the colon separator.
+            return strcmp(str_replace('_', "\x01", $left), str_replace('_', "\x01", $right));
+        });
+
+        return $assetIds;
     }
 
     /** @return array{0:array<string,mixed>,1:string} */

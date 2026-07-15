@@ -641,6 +641,30 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertContains('existing_public_revision_isolation_mismatch', $result['issue_codes']);
     }
 
+    public function test_cohort_order_fallback_matches_checked_in_node_builder_without_intl(): void
+    {
+        $lockedRows = $this->readJson('../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json')['assets'];
+        $expectedCohorts = $this->readJson(self::REVIEW)['cohorts'];
+        $expectedByGroup = collect($expectedCohorts)
+            ->groupBy(static fn (array $cohort): string => $cohort['authority_surface'].'|'.$cohort['locale'])
+            ->map(static fn ($cohorts): array => $cohorts->flatMap(
+                static fn (array $cohort): array => $cohort['asset_ids'],
+            )->values()->all());
+        $actualByGroup = collect($lockedRows)
+            ->reject(static fn (array $row): bool => $row['authority_surface'] === 'CMS landing_surfaces/page_blocks')
+            ->groupBy(static fn (array $row): string => $row['authority_surface'].'|'.$row['locale'])
+            ->map(static fn ($rows): array => $rows->pluck('asset_id')->values()->all());
+
+        $sort = new \ReflectionMethod(BigFiveReviewPromotionPreflight::class, 'sortCohortAssetIds');
+        foreach ($actualByGroup as $key => $assetIds) {
+            $this->assertSame(
+                $expectedByGroup->get($key),
+                $sort->invoke($this->preflight(), $assetIds, true),
+                'Fallback cohort order drifted for '.$key,
+            );
+        }
+    }
+
     public function test_article_runtime_baseline_changes_when_published_revision_or_public_relation_changes(): void
     {
         $row = collect($this->readJson(self::REVIEW)['rows'])
