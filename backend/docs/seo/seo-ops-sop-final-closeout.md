@@ -6,7 +6,14 @@ Train: SEO-OPS-SOP-PR-TRAIN-01
 
 Type: docs/generated/test/state only.
 
-This closeout confirms the final Daily / Weekly / Monthly SEO Ops SOP train is complete and hands off to `SEO-GROWTH-MBTI-00｜Baseline Snapshot and Telemetry Contract`.
+This closeout confirms the final Daily / Weekly / Monthly SEO Ops SOP train is complete. Its original handoff to `SEO-GROWTH-MBTI-00｜Baseline Snapshot and Telemetry Contract` has also completed.
+
+Current MBTI authority and operations status is documented in:
+
+- `backend/docs/seo/mbti-full-personality-authority-closeout-2026-07-15.md`
+- `backend/docs/seo/seo-ops-mbti-growth-loop-handoff.md`
+
+The current handoff is monitoring and evidence-led scoped repair for the released Chinese 52-URL cohort, not initial baseline construction.
 
 ## Completed PRs
 
@@ -36,7 +43,7 @@ Human approval is required for CMS publish/mutation, Search Channel enqueue/live
 
 MBTI Growth Loop handoff:
 
-The next phase is `SEO-GROWTH-MBTI-00`. MBTI remains the first governed growth loop. Big Five, RIASEC, and Career must not scale until MBTI baseline, telemetry, claim gate, Search Channel canary, Digital PR observation, human-only funnel review, and 7/14/28-day review are complete.
+The initial MBTI baseline and the full 52-URL authority chain are complete. MBTI remains the first governed growth loop. Monitoring must use page-level evidence when available, preserve claim and privacy boundaries, and open one scoped repair per demonstrated defect. This does not automatically unlock Big Five, RIASEC, Career, pSEO, CMS writes, deployment, or search submission.
 
 ## Safety Confirmation
 
@@ -73,8 +80,8 @@ The next phase is `SEO-GROWTH-MBTI-00`. MBTI remains the first governed growth l
 
 ## Final Decision
 
-`seo_ops_sop_completed_ready_for_mbti_growth_loop_00`
+`seo_ops_sop_completed_mbti_52_authority_released_monitoring_active`
 
 ## Next Task
 
-`SEO-GROWTH-MBTI-00｜Baseline Snapshot and Telemetry Contract`
+Run the recorded 7/14/28-day MBTI cohort reviews. Open a separate owner-scoped task only when monitoring evidence identifies a content, API, rendering, feed, or query-to-page defect.
