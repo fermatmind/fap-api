@@ -714,8 +714,10 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 $blocks[] = (string) ($faq['answer'] ?? '');
             }
         }
-        $safetyBlocks = $blocks;
-        foreach (['observation_exercise', 'answerability', 'visible_evidence'] as $visibleField) {
+        $duplicateBlocks = $blocks;
+        $this->appendVisibleStrings($duplicateBlocks, $asset['observation_exercise'] ?? null);
+        $safetyBlocks = $duplicateBlocks;
+        foreach (['answerability', 'visible_evidence'] as $visibleField) {
             $this->appendVisibleStrings($safetyBlocks, $asset[$visibleField] ?? null);
         }
         $text = implode("\n", $safetyBlocks);
@@ -729,7 +731,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             }
         }
 
-        foreach ($blocks as $index => $block) {
+        foreach ($duplicateBlocks as $index => $block) {
             $normalized = $this->normalize($block);
             if (mb_strlen($normalized) >= 80) {
                 if (isset($paragraphs[$normalized])) {

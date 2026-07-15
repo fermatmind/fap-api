@@ -125,6 +125,17 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('geo_answerability_insufficient', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_repeated_observation_exercise_text_fails_duplicate_gate(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][1]['observation_exercise']['context'] = $candidate['assets'][0]['observation_exercise']['context'];
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('duplicate_paragraph', collect($result['issues'])->pluck('code')->all());
+    }
+
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void
     {
         $exit = Artisan::call('personality:enneagram-authority-v2-integrity-gate', [
