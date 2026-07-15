@@ -184,6 +184,18 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->preflight()->approvalPhrase('main', str_repeat('b', 64), str_repeat('c', 64), str_repeat('d', 64), 'cms_article_en_01', str_repeat('e', 64), 25);
     }
 
+    public function test_database_authorization_requires_both_global_and_executable_approval_flags(): void
+    {
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $this->assertFalse($this->preflight()->authorizationPacketIsExecutable($authorization));
+
+        $authorization['production_promotion_currently_authorized'] = true;
+        $this->assertFalse($this->preflight()->authorizationPacketIsExecutable($authorization));
+
+        $authorization['approval_phrases_currently_executable'] = true;
+        $this->assertTrue($this->preflight()->authorizationPacketIsExecutable($authorization));
+    }
+
     public function test_console_package_only_is_zero_write_and_exposes_no_promotion_option(): void
     {
         $before = $this->tableCounts();

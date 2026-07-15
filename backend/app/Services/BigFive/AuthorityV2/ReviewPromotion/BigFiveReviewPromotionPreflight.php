@@ -153,7 +153,7 @@ final class BigFiveReviewPromotionPreflight
                     && ($supplied['asset_count'] ?? null) === $cohort['asset_count']
                     && ($supplied['exact_authorization'] ?? null) === $expectedPhrase
                     && ($artifacts['authorization']['promotion_preflight_fingerprint'] ?? null) === $preflightFingerprint
-                    && ($artifacts['authorization']['production_promotion_currently_authorized'] ?? false) === true;
+                    && $this->authorizationPacketIsExecutable($artifacts['authorization']);
             }
             $ready = $membersReady && $authorizationMatches;
             if ($ready) {
@@ -247,6 +247,13 @@ final class BigFiveReviewPromotionPreflight
             $cohortSha256,
             $assetCount,
         );
+    }
+
+    /** @param array<string,mixed> $authorization */
+    public function authorizationPacketIsExecutable(array $authorization): bool
+    {
+        return ($authorization['production_promotion_currently_authorized'] ?? false) === true
+            && ($authorization['approval_phrases_currently_executable'] ?? false) === true;
     }
 
     /** @param array<string,mixed> $row @param array<string,mixed> $descriptor @param array<string,mixed> $rollback @return array<string,mixed> */
