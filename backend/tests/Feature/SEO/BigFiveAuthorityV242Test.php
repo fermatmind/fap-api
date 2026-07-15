@@ -63,15 +63,22 @@ final class BigFiveAuthorityV242Test extends TestCase
     public function test_article_projects_only_publication_manual_review_and_explicit_editorial_update_dates(): void
     {
         $article = new Article([
+            'org_id' => 7,
             'slug' => 'big-five-overview',
             'locale' => 'en',
             'status' => 'published',
             'is_public' => true,
             'published_at' => '2026-07-01T00:00:00Z',
         ]);
-        $article->forceFill(['id' => 10, 'updated_at' => '2026-07-04T00:00:00Z']);
+        $article->forceFill([
+            'id' => 10,
+            'published_revision_id' => 20,
+            'updated_at' => '2026-07-04T00:00:00Z',
+        ]);
         $revision = new ArticleTranslationRevision([
+            'org_id' => 7,
             'article_id' => 10,
+            'locale' => 'en',
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
             'reviewed_by' => 42,
             'reviewed_at' => '2026-07-02T00:00:00Z',
@@ -112,9 +119,13 @@ final class BigFiveAuthorityV242Test extends TestCase
             'last_reviewed_at' => '2026-07-02T00:00:00Z',
             'authority_json' => $this->dateMetadata('2026-07-03T00:00:00Z'),
         ]);
-        $asset->forceFill(['id' => 30, 'updated_at' => '2026-07-03T00:00:00Z']);
+        $asset->forceFill([
+            'id' => 30,
+            'published_revision_id' => 31,
+            'updated_at' => '2026-07-03T00:00:00Z',
+        ]);
         $assetRevision = new PersonalityPublicContentAssetRevision(['asset_id' => 30]);
-        $assetRevision->forceFill(['created_at' => '2026-06-28T00:00:00Z']);
+        $assetRevision->forceFill(['id' => 31, 'created_at' => '2026-06-28T00:00:00Z']);
 
         $topic = new TopicProfile([
             'slug' => 'big-five',
@@ -123,12 +134,17 @@ final class BigFiveAuthorityV242Test extends TestCase
             'is_public' => true,
             'published_at' => '2026-07-05T00:00:00Z',
         ]);
-        $topic->forceFill(['id' => 40, 'updated_at' => '2026-07-07T00:00:00Z']);
+        $topic->forceFill([
+            'id' => 40,
+            'published_revision_id' => 41,
+            'updated_at' => '2026-07-07T00:00:00Z',
+        ]);
         $topicRevision = new TopicProfileRevision([
             'profile_id' => 40,
             'snapshot_json' => $this->dateMetadata('2026-07-07T00:00:00Z', '2026-07-06T00:00:00Z'),
             'created_at' => '2026-06-27T00:00:00Z',
         ]);
+        $topicRevision->forceFill(['id' => 41]);
 
         $landing = new LandingSurface([
             'surface_key' => 'big-five-test',
@@ -156,6 +172,177 @@ final class BigFiveAuthorityV242Test extends TestCase
         $this->assertSame('2026-07-10T00:00:00+00:00', $landingProjection['visible_dates']['updated_at']);
     }
 
+    public function test_stale_draft_foreign_tenant_and_foreign_locale_revisions_fail_closed(): void
+    {
+        $article = new Article([
+            'org_id' => 7,
+            'slug' => 'big-five-overview',
+            'locale' => 'en',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => '2026-07-01T00:00:00Z',
+        ]);
+        $article->forceFill([
+            'id' => 10,
+            'published_revision_id' => 20,
+            'updated_at' => '2026-07-04T00:00:00Z',
+        ]);
+
+        $revisionAttributes = [
+            'org_id' => 7,
+            'article_id' => 10,
+            'locale' => 'en',
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'reviewed_by' => 42,
+            'reviewed_at' => '2026-07-02T00:00:00Z',
+            'published_at' => '2026-07-03T00:00:00Z',
+            'authority_metadata_json' => $this->dateMetadata('2026-07-04T00:00:00Z'),
+        ];
+        $invalidRevisions = [
+            (new ArticleTranslationRevision($revisionAttributes))->forceFill(['id' => 21, 'updated_at' => '2026-07-04T00:00:00Z']),
+            (new ArticleTranslationRevision([...$revisionAttributes, 'org_id' => 8]))->forceFill(['id' => 20, 'updated_at' => '2026-07-04T00:00:00Z']),
+            (new ArticleTranslationRevision([...$revisionAttributes, 'locale' => 'zh-CN']))->forceFill(['id' => 20, 'updated_at' => '2026-07-04T00:00:00Z']),
+            (new ArticleTranslationRevision([
+                ...$revisionAttributes,
+                'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
+            ]))->forceFill(['id' => 20, 'updated_at' => '2026-07-04T00:00:00Z']),
+            (new ArticleTranslationRevision([
+                ...$revisionAttributes,
+                'published_at' => '2099-07-03T00:00:00Z',
+            ]))->forceFill(['id' => 20, 'updated_at' => '2026-07-04T00:00:00Z']),
+        ];
+
+        foreach ($invalidRevisions as $invalidRevision) {
+            $projection = $this->projector->forArticle($article, $invalidRevision);
+            $this->assertSame(
+                ['published_at' => null, 'reviewed_at' => null, 'updated_at' => null],
+                $projection['visible_dates'],
+            );
+            $this->assertNull($projection['audit_only_dates']['revision_created_at']);
+            $this->assertFalse($projection['eligibility']['visible_date_eligible']);
+        }
+
+        $asset = new PersonalityPublicContentAsset([
+            'slug' => 'agreeableness',
+            'locale' => 'en',
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'approved',
+            'is_public' => true,
+            'published_at' => '2026-07-01T00:00:00Z',
+            'last_reviewed_at' => '2026-07-02T00:00:00Z',
+            'authority_json' => $this->dateMetadata('2026-07-03T00:00:00Z'),
+        ]);
+        $asset->forceFill([
+            'id' => 30,
+            'published_revision_id' => 31,
+            'working_revision_id' => 32,
+            'updated_at' => '2026-07-03T00:00:00Z',
+        ]);
+        $assetDraftRevision = (new PersonalityPublicContentAssetRevision(['asset_id' => 30]))
+            ->forceFill(['id' => 32, 'created_at' => '2026-06-28T00:00:00Z']);
+        $assetProjection = $this->projector->forPersonalityAsset($asset, $assetDraftRevision);
+        $this->assertSame('2026-06-28T00:00:00+00:00', $assetProjection['audit_only_dates']['revision_created_at']);
+
+        $topic = new TopicProfile([
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => '2026-07-05T00:00:00Z',
+        ]);
+        $topic->forceFill([
+            'id' => 40,
+            'published_revision_id' => 41,
+            'working_revision_id' => 42,
+            'updated_at' => '2026-07-07T00:00:00Z',
+        ]);
+        $topicDraftRevision = new TopicProfileRevision([
+            'profile_id' => 40,
+            'snapshot_json' => $this->dateMetadata('2026-07-07T00:00:00Z', '2026-07-06T00:00:00Z'),
+            'created_at' => '2026-06-27T00:00:00Z',
+        ]);
+        $topicDraftRevision->forceFill(['id' => 42]);
+        $topicProjection = $this->projector->forTopic($topic, $topicDraftRevision);
+        $this->assertSame([
+            'published_at' => '2026-07-05T00:00:00+00:00',
+            'reviewed_at' => null,
+            'updated_at' => null,
+        ], $topicProjection['visible_dates']);
+        $this->assertSame('2026-06-27T00:00:00+00:00', $topicProjection['audit_only_dates']['revision_created_at']);
+    }
+
+    public function test_non_public_authority_records_never_project_visible_dates(): void
+    {
+        $article = new Article([
+            'org_id' => 7,
+            'slug' => 'private-article',
+            'locale' => 'en',
+            'status' => 'published',
+            'is_public' => false,
+            'published_at' => '2026-07-01T00:00:00Z',
+        ]);
+        $article->forceFill(['id' => 10, 'published_revision_id' => 20]);
+        $articleRevision = new ArticleTranslationRevision([
+            'org_id' => 7,
+            'article_id' => 10,
+            'locale' => 'en',
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'reviewed_by' => 42,
+            'reviewed_at' => '2026-07-02T00:00:00Z',
+            'published_at' => '2026-07-01T00:00:00Z',
+        ]);
+        $articleRevision->forceFill(['id' => 20]);
+
+        $asset = new PersonalityPublicContentAsset([
+            'slug' => 'private-asset',
+            'locale' => 'en',
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'approved',
+            'is_public' => false,
+            'published_at' => '2026-07-01T00:00:00Z',
+            'last_reviewed_at' => '2026-07-02T00:00:00Z',
+            'authority_json' => $this->dateMetadata('2026-07-03T00:00:00Z'),
+        ]);
+        $asset->forceFill(['id' => 30, 'updated_at' => '2026-07-03T00:00:00Z']);
+
+        $topic = new TopicProfile([
+            'slug' => 'private-topic',
+            'locale' => 'en',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => false,
+            'published_at' => '2026-07-01T00:00:00Z',
+        ]);
+        $topic->forceFill(['id' => 40, 'published_revision_id' => 41, 'updated_at' => '2026-07-03T00:00:00Z']);
+        $topicRevision = new TopicProfileRevision([
+            'profile_id' => 40,
+            'snapshot_json' => $this->dateMetadata('2026-07-03T00:00:00Z', '2026-07-02T00:00:00Z'),
+        ]);
+        $topicRevision->forceFill(['id' => 41]);
+
+        $landing = new LandingSurface([
+            'surface_key' => 'private-landing',
+            'locale' => 'en',
+            'status' => LandingSurface::STATUS_PUBLISHED,
+            'is_public' => false,
+            'published_at' => '2026-07-01T00:00:00Z',
+            'payload_json' => $this->dateMetadata('2026-07-03T00:00:00Z', '2026-07-02T00:00:00Z'),
+        ]);
+        $landing->forceFill(['id' => 50, 'updated_at' => '2026-07-03T00:00:00Z']);
+
+        foreach ([
+            $this->projector->forArticle($article, $articleRevision),
+            $this->projector->forPersonalityAsset($asset),
+            $this->projector->forTopic($topic, $topicRevision),
+            $this->projector->forLandingSurface($landing),
+        ] as $projection) {
+            $this->assertSame(
+                ['published_at' => null, 'reviewed_at' => null, 'updated_at' => null],
+                $projection['visible_dates'],
+            );
+            $this->assertFalse($projection['eligibility']['visible_date_eligible']);
+        }
+    }
+
     public function test_import_build_deploy_revision_and_raw_update_dates_never_backfill_visible_dates(): void
     {
         $metadata = [
@@ -170,7 +357,9 @@ final class BigFiveAuthorityV242Test extends TestCase
         $article = new Article(['slug' => 'draft', 'locale' => 'en', 'status' => 'draft', 'is_public' => false]);
         $article->forceFill(['id' => 1, 'updated_at' => '2026-07-06T00:00:00Z']);
         $articleRevision = new ArticleTranslationRevision([
+            'org_id' => 0,
             'article_id' => 1,
+            'locale' => 'en',
             'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
             'authority_metadata_json' => $metadata,
         ]);

@@ -4,11 +4,13 @@ This package closes the contract-design gap identified for 82 Big Five public-pa
 
 ## Authority rules
 
-- `published_at` is visible only from a published, public authority record or its matching published revision.
+- `published_at` is visible only from a published, public authority record or its matching current published revision. Article revisions must match the record's `published_revision_id`, tenant, locale, article identity, published state, and effective publication time.
 - `reviewed_at` requires a completed manual-review state and a dedicated review timestamp or explicit review provenance.
 - `updated_at` requires explicit `editorial_update` provenance, a non-empty authority reference, and an exact match to the authority record's canonical update timestamp.
 - `revision_created_at`, `imported_at`, `built_at`, and `deployed_at` remain audit-only. They can never backfill a visible publication date.
 - A missing or mismatched authority date stays `null`; the corresponding eligibility flag is false and includes a machine-readable blocked reason.
+- Every visible field requires a currently published, public authority record; private, draft, archived, or soft-deleted records remain field-ineligible even when their timestamps or provenance metadata are populated.
+- A stale or working draft revision cannot supply visible date evidence or eligibility. Its identity-matched revision-created/import/build/deploy lineage may remain audit-only and can never be promoted to a visible field. Personality and Topic visible revision evidence must match the record's `published_revision_id`; Article follows the stricter public-read contract above.
 
 The projector covers `Article`, `PersonalityPublicContentAsset`, `TopicProfile`, and `LandingSurface`. It is deliberately not wired into public controllers in this PR: later gated promotion work must supply real CMS/revision authority before a visible date can be released.
 

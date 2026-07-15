@@ -208,6 +208,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_public_authority_v2_integrity_gate_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2IntegrityGate.php',
+        ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_visible_date_projector(): void
     {
         $allowed = [
@@ -5978,6 +5990,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramPublicAuthorityV2IntegrityGateFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramRegistryValidatorFile($file)) {
                 continue;
             }
@@ -7838,6 +7854,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityEnneagramCmsPublishGate.php',
             'backend/app/Services/Cms/EnneagramCmsPublishGateService.php',
+        ], true);
+    }
+
+    private function isEnneagramPublicAuthorityV2IntegrityGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2IntegrityGate.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2IntegrityGate.php',
         ], true);
     }
 
