@@ -95,6 +95,24 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertFalse($result['publish_eligible']);
     }
 
+    public function test_review_and_release_truth_are_closed_schemas(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['review_truth']['human_review_passed'] = true;
+        $candidate['assets'][0]['release_truth']['published_at'] = '2026-07-15T00:00:00Z';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+        $codes = collect($result['issues'])->pluck('code')->all();
+
+        $this->assertFalse($result['ok']);
+        $this->assertSame('fail_closed', $result['status']);
+        $this->assertContains('manual_review_truth_invalid', $codes);
+        $this->assertContains('release_truth_invalid', $codes);
+        $this->assertFalse($result['human_review_completed']);
+        $this->assertFalse($result['publish_eligible']);
+        $this->assertFalse($result['writes_committed']);
+    }
+
     public function test_blocked_claim_and_missing_target_fail_claim_and_coverage_gates(): void
     {
         $candidate = $this->candidate();

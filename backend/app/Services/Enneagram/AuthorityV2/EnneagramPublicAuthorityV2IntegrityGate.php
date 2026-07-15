@@ -741,6 +741,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 $add(self::EDITORIAL_GATES[8], 'manual_review_truth_invalid', $key, "{$path}.review_truth.{$field}", 'Automated or model QA must not be presented as completed human review.');
             }
         }
+        foreach (array_diff(array_keys($review), array_keys($expectedReview)) as $field) {
+            $add(self::EDITORIAL_GATES[8], 'manual_review_truth_invalid', $key, "{$path}.review_truth.{$field}", 'Review truth is a closed schema; undeclared approval metadata is forbidden.');
+        }
         $release = is_array($asset['release_truth'] ?? null) ? $asset['release_truth'] : [];
         $expectedRelease = [
             'draft_only' => true,
@@ -753,6 +756,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             if (! array_key_exists($field, $release) || $release[$field] !== $expected) {
                 $add(self::EDITORIAL_GATES[8], 'release_truth_invalid', $key, "{$path}.release_truth.{$field}", 'Editorial QA must leave release and discoverability gates closed.');
             }
+        }
+        foreach (array_diff(array_keys($release), array_keys($expectedRelease)) as $field) {
+            $add(self::EDITORIAL_GATES[8], 'release_truth_invalid', $key, "{$path}.release_truth.{$field}", 'Release truth is a closed schema; undeclared publication metadata is forbidden.');
         }
     }
 
