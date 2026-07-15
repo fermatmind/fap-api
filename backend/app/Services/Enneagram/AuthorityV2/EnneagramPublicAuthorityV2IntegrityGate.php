@@ -327,7 +327,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const UNSUPPORTED_CLAIM_PATTERN = '/(?:scientifically proven|neuroscience proves|clinically validated|absolute(?:ly)? accurate|most accurate personality test|科学(?:已)?证明|神经科学证明|临床验证|绝对准确)/iu';
 
-    private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring)(?:[\s-]+(?:success|outcome|fit))?|(?:career|job|relationship|partner|income|hiring)[\s-]+(?:success[\s-]+)?predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|outcome)|perfect\s+(?:career|job|partner)|预测(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果)(?:成功|结果|适配)?|保证(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果)(?:成功|结果)?|最适合的职业|完美伴侣)/iu';
+    private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?|(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?[\s-]+predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|hiring|salary|turnover|health|admission|legal|financial|outcome)|perfect\s+(?:career|job|partner)|预测(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果|适配)?|保证(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果)?|最适合的职业|完美伴侣)/iu';
 
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
 

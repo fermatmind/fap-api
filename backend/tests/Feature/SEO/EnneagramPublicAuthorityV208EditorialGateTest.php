@@ -177,6 +177,28 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertCount(3, $predictionIssues);
     }
 
+    public function test_full_blocked_predictive_outcome_vocabulary_fails_claim_safety_gate(): void
+    {
+        foreach ([
+            'Salary predictor',
+            'Turnover predictor',
+            'Predicts your health outcome',
+            'Predicts your admission outcome',
+            'Legal outcome predictor',
+            'Financial outcome predictor',
+            '预测你的薪资结果',
+            '预测您的升学结果',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('career_or_relationship_prediction', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+    }
+
     public function test_generic_seven_day_text_cannot_bypass_the_gate_with_mismatched_duration(): void
     {
         $candidate = $this->candidate();
