@@ -93224,9 +93224,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "e21bc07b8ee303918d7805ab69e7cd281b6632f2",
-    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "status": "merged",
+    "commit_sha": "9ec6156438eac17a3ddbab62885571ecefc35b3a",
+    "commit_sha_role": "squash_merge_commit_on_origin_main",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
       "dependency": {
@@ -93254,12 +93254,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T09:42:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -93321,9 +93321,14 @@
         "at": "2026-07-15T09:35:35Z",
         "status": "ready_to_merge",
         "note": "All nine checks passed on final ledger head a9e73801b. A valid review caught that a prior broad JSON status patch had changed ARTICLE-H1-04 instead of PR07; the unrelated entry was restored and PR07's top-level state was corrected to match its ready_to_merge manifest and transition. This bookkeeping-only correction requires one final check round."
+      },
+      {
+        "at": "2026-07-15T09:56:00Z",
+        "status": "merged",
+        "note": "PR #3111 merged at 2026-07-15T09:42:43Z as squash commit 9ec6156438eac17a3ddbab62885571ecefc35b3a after all nine required checks passed. origin/main containment, remote branch deletion, official local cleanup, clean main, and post-merge 13-test / 5095-assertion source-ledger regression plus Pint were verified before PR08 implementation."
       }
     ],
-    "updated_at": "2026-07-15T09:35:35Z"
+    "updated_at": "2026-07-15T09:56:00Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
@@ -93334,18 +93339,26 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR07 merged as 9ec6156438eac17a3ddbab62885571ecefc35b3a; GitHub MERGED state, origin/main containment, all nine green checks, remote/local branch cleanup, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first focused run exposed only a PHP PCRE fixture implementation error: JavaScript-style Unicode escapes were invalid in PCRE. The patterns were converted to native UTF-8 literals; no content-authority, claim-safety, review-truth, or mutation-boundary defect was involved."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Final manifest replay passed: PHP syntax for all three changed PHP files; focused editorial-gate suite 7 tests / 83 assertions; Pint for all three changed PHP files; YAML and both changed JSON artifacts parse; git diff check; and exact seven-file allowlist. The suite proves exactly 116 QA rows, all ten required negative fixture classes, command success/fail-closed paths, and zero human-review/release/write claims."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -93364,9 +93377,24 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T09:56:00Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR07 merge and began the exact PR08 branch from clean latest origin/main. This scope adds a read-only 116-row editorial QA contract only; no CMS/database write, human-review completion, publication, deploy, indexability, sitemap, llms, search submission, or production action is authorized."
+      },
+      {
+        "at": "2026-07-15T09:57:00Z",
+        "status": "local_check_failed_implementation",
+        "note": "The first focused test run found invalid JavaScript-style Unicode escapes in PHP PCRE patterns. Native UTF-8 pattern literals replaced them before retry; the failure involved no authority data or runtime mutation."
+      },
+      {
+        "at": "2026-07-15T09:58:43Z",
+        "status": "local_checks_passed",
+        "note": "All PR08 manifest checks passed: PHP syntax, 7 tests / 83 assertions, Pint, YAML, JSON, diff check, and exact seven-file scope. The read-only service emits 116 keyed QA rows, catches all ten required negative fixture classes, and hard-closes human review, publish, CMS/database, discoverability, search, and deploy state."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T09:58:43Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",

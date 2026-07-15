@@ -1,0 +1,31 @@
+# Enneagram Public Authority V2 editorial gate
+
+`ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08` is the reusable, fail-closed, read-only QA gate for the 116 bilingual draft assets authored in PR09–PR18. It consumes the PR07 source registry and 116 page claim maps; it does not create content authority or mutate CMS, database, revision pointers, public content, indexability, sitemap, llms, search submission, or deployment state.
+
+The aggregate candidate must contain exactly 116 locale assets: 2 hub pages, 6 center pages, 18 core-type pages, 36 wing pages, and 54 instinctual-subtype pages. The report always emits exactly 116 QA rows keyed by `locale|identity_key`. Each row records the following ten gates:
+
+1. schema and frozen-target coverage;
+2. independently authored EN and zh-CN content with non-identical outlines;
+3. page-specific information gain;
+4. sentence, paragraph, and type-number-substitution duplicate/template risk;
+5. page-specific FAQ depth and non-repeated answers;
+6. specific observable exercises rather than a generic seven-day prompt;
+7. visible answer-first GEO answerability;
+8. visible evidence and limitations;
+9. truthful pending manual-review and closed release state;
+10. source-ledger claim safety, including unsupported science, predictive outcome, and competitor-language blocks.
+
+The required negative fixtures cover sentence/paragraph duplication, type-number substitution, identical EN/zh-CN outlines, repeated FAQ answers, a generic seven-day exercise, unsupported science claims, career or relationship prediction, model QA presented as human review, hidden evidence, and copied competitor language.
+
+Run after PR09–PR18 have assembled the aggregate candidate:
+
+```bash
+cd backend
+php artisan personality:enneagram-authority-v2-editorial-gate \
+  --source=/absolute/path/to/aggregate-candidate.json \
+  --json
+```
+
+A clean automated report has status `ready_for_human_review`; it is not a human approval or release decision. The service and command hard-code `human_review_completed=false`, `human_review_passed=false`, and `publish_eligible=false`. A model, agent, test, or automated reviewer may never be recorded as the named human reviewer.
+
+Repository rule impact: this establishes a backend/CMS content-production QA contract only. The content remains backend-authoritative, draft-only, and `pending_manual_review`; there is no frontend editorial fallback and no production action.
