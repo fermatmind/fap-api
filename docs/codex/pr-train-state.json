@@ -92367,7 +92367,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-visible-date-42",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41"],
-    "status": "post_merge_repair_github_checks_pending",
+    "status": "post_merge_repair_ready_to_merge",
     "commit_sha": "7cb885c1d30ec52d3e3eac60379036dbeacbc5e7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3099",
     "checks": {
@@ -92383,9 +92383,11 @@
     "local_cleanup_executed": false,
     "post_merge_repair": {
       "branch": "codex/big5-visible-date-published-pointer-repair",
-      "status": "github_checks_pending",
+      "status": "ready_to_merge",
       "commit_sha": "dcf55c1540a5f4f727d834b79fbf48a7ad6f82c8",
+      "github_head_sha": "a323763bbe3626b1b4ea15f9eeed3dbd56d78e27",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3101",
+      "github_checks": {"status": "pass", "evidence": "Head a323763bbe3626b1b4ea15f9eeed3dbd56d78e27 passed all nine checks in CI run 29386659370 and Code Scanning run 29386659378; GitHub reports CLEAN merge state."},
       "reason": "Post-merge authority audit proved that the original projector could accept a stale or working revision and could project reviewed/updated dates for a non-public record. The repair requires current published-revision pointers, Article tenant/locale/effective-publication parity, and published/public eligibility for every visible field while preserving identity-matched audit-only lineage.",
       "production_write_execution": false
     },
@@ -92402,7 +92404,8 @@
       {"at": "2026-07-15T03:17:22Z", "from": "github_checks_pending", "to": "ready_to_merge", "note": "Head fde36ea24e5da6135d3e38c36ef925810ddb5521 passed all nine required GitHub checks. The PR remains CLEAN with exactly nine manifest-allowed files, the 82-finding fixture/hash is locked, and no public runtime, production CMS, publish, index, or deploy action occurred."},
       {"at": "2026-07-15T03:24:13Z", "from": "ready_to_merge", "to": "merged", "note": "GitHub reports PR #3099 merged as 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 after final head c474b8b0a26c2593a204178a5217269a5a8df56e passed all nine checks."},
       {"at": "2026-07-15T03:27:20Z", "from": "merged", "to": "post_merge_repair_in_progress", "note": "A same-scope authority audit identified missing current-published-pointer and public-record gating before the parallel merge completed. The exact three-file runtime/docs/test repair plus this ledger reconciliation passed the 82-finding validator, focused 6/244 contract, freeze 2/5, Pint, syntax, scope checks, and the full local CI gate; no production/CMS/database/deploy action occurred."},
-      {"at": "2026-07-15T03:29:13Z", "from": "post_merge_repair_in_progress", "to": "post_merge_repair_github_checks_pending", "note": "Pushed implementation head dcf55c1540a5f4f727d834b79fbf48a7ad6f82c8 and opened the exact four-file same-scope repair PR #3101. Required GitHub checks must pass on the final ledger head before merge; no production/CMS/database/deploy action occurred."}
+      {"at": "2026-07-15T03:29:13Z", "from": "post_merge_repair_in_progress", "to": "post_merge_repair_github_checks_pending", "note": "Pushed implementation head dcf55c1540a5f4f727d834b79fbf48a7ad6f82c8 and opened the exact four-file same-scope repair PR #3101. Required GitHub checks must pass on the final ledger head before merge; no production/CMS/database/deploy action occurred."},
+      {"at": "2026-07-15T03:35:56Z", "from": "post_merge_repair_github_checks_pending", "to": "post_merge_repair_ready_to_merge", "note": "Repair head a323763bbe3626b1b4ea15f9eeed3dbd56d78e27 passed all nine GitHub checks in CI run 29386659370 and Code Scanning run 29386659378. GitHub reports CLEAN merge state; the repair remains exactly four allowed files with no production/CMS/database/deploy action."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
