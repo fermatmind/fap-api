@@ -148,6 +148,19 @@ for (const row of review.rows) {
 }
 
 if (rollback.schema_version !== 'big5-authority-v2-promotion-rollback-plan.v1' || rollback.status !== 'HOLD_PENDING_EXACT_RUNTIME_TARGETS' || rollback.rows?.length !== 231 || rollback.execution_implemented !== false) fail('rollback plan contract mismatch');
+const expectedRollbackEffects = {
+  database_writes: 0,
+  indexability_changes: 0,
+  promotions: 0,
+  public_release_changes: 0,
+  rollbacks: 0,
+};
+if (!rollback.effects
+  || Array.isArray(rollback.effects)
+  || JSON.stringify(Object.keys(rollback.effects).sort()) !== JSON.stringify(Object.keys(expectedRollbackEffects).sort())
+  || Object.entries(expectedRollbackEffects).some(([effect, expected]) => rollback.effects[effect] !== expected)) {
+  fail('rollback effects must match the exact zero-effect contract');
+}
 if (rollback.review_manifest_sha256 !== fileSha256(reviewPath)) fail('rollback review-manifest lock mismatch');
 if (new Set(rollback.rows.map((row) => row.asset_id)).size !== 231) fail('rollback identity coverage mismatch');
 const reviewRows = new Map(review.rows.map((row) => [row.asset_id, row]));

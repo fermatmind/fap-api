@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class BigFiveAuthorityV247Test extends TestCase
@@ -1135,6 +1136,44 @@ final class BigFiveAuthorityV247Test extends TestCase
             $this->assertStringContainsString('review and rollback artifacts must remain pending', $exception->getMessage());
         } finally {
             File::delete([$rollbackPath, $authorizationPath]);
+        }
+    }
+
+    public function test_standalone_validator_rejects_rehashed_nonzero_rollback_effects(): void
+    {
+        $source = base_path('../generated/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47');
+        $temporary = base_path('../generated/big-five-authority-v2/pr47-validator-test-'.bin2hex(random_bytes(8)));
+        $this->assertTrue(File::copyDirectory($source, $temporary));
+
+        try {
+            $rollbackPath = $temporary.'/rollback-plan.json';
+            $rollback = json_decode(File::get($rollbackPath), true, flags: JSON_THROW_ON_ERROR);
+            $rollback['effects']['database_writes'] = 1;
+            File::put($rollbackPath, json_encode($rollback, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL);
+
+            $authorizationPath = $temporary.'/authorization-packet-template.json';
+            $authorization = json_decode(File::get($authorizationPath), true, flags: JSON_THROW_ON_ERROR);
+            $authorization['rollback_plan_sha256'] = hash_file('sha256', $rollbackPath);
+            File::put($authorizationPath, json_encode($authorization, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL);
+
+            $hashesPath = $temporary.'/sha256sums.json';
+            $hashes = json_decode(File::get($hashesPath), true, flags: JSON_THROW_ON_ERROR);
+            foreach (array_keys($hashes['files']) as $name) {
+                $hashes['files'][$name] = hash_file('sha256', $temporary.'/'.$name);
+            }
+            File::put($hashesPath, json_encode($hashes, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL);
+
+            $process = new Process(['node', $temporary.'/validate-package.mjs'], dirname(base_path()));
+            $process->setTimeout(20);
+            $process->run();
+
+            $this->assertFalse($process->isSuccessful(), $process->getOutput());
+            $this->assertStringContainsString(
+                'rollback effects must match the exact zero-effect contract',
+                $process->getErrorOutput().$process->getOutput(),
+            );
+        } finally {
+            File::deleteDirectory($temporary);
         }
     }
 
