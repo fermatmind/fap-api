@@ -93148,9 +93148,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f1710e7988f60ffc9f3a70dec97573a1db65ccb9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -93163,6 +93163,10 @@
       "local_validation": {
         "status": "pass",
         "evidence": "Final manifest replay passed: focused source-ledger suite 10 tests / 3955 assertions; Pint test for the new feature file; YAML and all JSON parse; git diff check; and exact seven-file allowlist. The package contains one registry, 116 scorecard-matched maps, zero unmapped allowed factual claims, zero competitor-as-science mappings, explicit wing/subtype limitations, and explicit blocked assumptions."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "Opened the single authorized fap-api PR #3111 from f1710e7988f60ffc9f3a70dec97573a1db65ccb9. GitHub reports MERGEABLE with initial hygiene and Semgrep checks queued; no reviews or review blockers are present."
       }
     },
     "scope_validation": {
@@ -93201,9 +93205,14 @@
         "at": "2026-07-15T08:45:31Z",
         "status": "local_checks_passed",
         "note": "All PR07 manifest checks passed after the fixture-only correction: 10 tests / 3955 assertions, Pint, YAML, JSON, diff check, and exact seven-file scope. One registry and 116 scorecard-matched maps preserve bilingual limitations, competitor isolation, Unknown blocks, and non-mutation boundaries."
+      },
+      {
+        "at": "2026-07-15T08:48:13Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact seven-file branch and opened the single authorized fap-api PR #3111 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE with initial checks queued and no reviews."
       }
     ],
-    "updated_at": "2026-07-15T08:45:31Z"
+    "updated_at": "2026-07-15T08:48:13Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
