@@ -14,6 +14,7 @@ use App\Models\TopicProfile;
 use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileRevision;
 use App\Models\TopicProfileSection;
+use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -285,6 +286,65 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertFalse($observed['revision_authority_matches']);
     }
 
+    public function test_database_preflight_rejects_working_revision_payload_drift_with_unchanged_authority_metadata(): void
+    {
+        $descriptor = collect(app(BigFiveAuthorityV2DraftImportWriter::class)->validatedPlan(
+            '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json',
+            '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/production-authorization-packet.json',
+        )['descriptors'])->firstWhere('asset_id', 'technical_trust:en:/en/personality/big-five/methodology');
+        $this->assertIsArray($descriptor);
+        $row = collect($this->readJson(self::REVIEW)['rows'])->firstWhere('asset_id', $descriptor['asset_id']);
+        $this->assertIsArray($row);
+
+        $page = ContentPage::query()->create($descriptor['attributes']);
+        $payload = [
+            ...$descriptor['attributes'],
+            '_big_five_authority_v2_import' => [
+                'asset_id' => $descriptor['asset_id'],
+                'route' => $descriptor['route'],
+                'source_package' => $descriptor['source_package'],
+                'source_hash' => $descriptor['source_hash'],
+                'authority_package_sha256' => $row['authority_package_sha256'],
+                'public_runtime_mutation_allowed' => false,
+            ],
+        ];
+        $revisionId = DB::table('cms_translation_revisions')->insertGetId([
+            'org_id' => 0,
+            'content_type' => 'content_page',
+            'content_id' => (int) $page->id,
+            'translation_group_id' => $page->translation_group_id,
+            'locale' => $page->locale,
+            'source_locale' => $page->locale,
+            'revision_number' => 1,
+            'revision_status' => 'approved',
+            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            'authority_asset_key' => $row['asset_id'],
+            'authority_source_package' => $row['source_package'],
+            'authority_source_hash' => $row['source_hash'],
+            'authority_package_sha256' => $row['authority_package_sha256'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $page->forceFill(['working_revision_id' => $revisionId])->save();
+
+        $before = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $beforeObserved = collect($before['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
+        $this->assertIsArray($beforeObserved);
+        $this->assertTrue($beforeObserved['revision_authority_matches']);
+
+        $payload['content_md'] = '# Mutated after runtime and rollback binding';
+        DB::table('cms_translation_revisions')->where('id', $revisionId)->update([
+            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            'updated_at' => now(),
+        ]);
+
+        $after = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterObserved = collect($after['observed_runtime'])->firstWhere('asset_id', $row['asset_id']);
+        $this->assertIsArray($afterObserved);
+        $this->assertFalse($afterObserved['revision_authority_matches']);
+        $this->assertContains('working_revision_authority_mismatch', $after['issue_codes']);
+    }
+
     public function test_database_preflight_rejects_public_route_drift_for_all_non_identity_route_fields(): void
     {
         DB::table('content_pages')->insert([
@@ -538,6 +598,40 @@ final class BigFiveAuthorityV247Test extends TestCase
             ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
         $this->assertNotSame($afterBaseline, $afterRelationBaseline);
         $this->assertNotSame($after['promotion_preflight_fingerprint'], $afterRelation['promotion_preflight_fingerprint']);
+
+        $alternate = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'big-five-test-vs-mbti-zh',
+            'locale' => 'zh-CN',
+            'translation_group_id' => 'article:big-five-personality-test-vs-mbti',
+            'title' => 'Big Five 与 MBTI',
+            'content_md' => '# Alternate body',
+            'status' => 'published',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subDay(),
+        ]);
+        $alternateRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $alternate->id,
+            'source_article_id' => (int) $alternate->id,
+            'translation_group_id' => 'article:big-five-personality-test-vs-mbti',
+            'locale' => 'zh-CN',
+            'source_locale' => 'zh-CN',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => 'Big Five 与 MBTI',
+            'content_md' => '# Alternate body',
+            'published_at' => now()->subDay(),
+        ]);
+        $alternate->forceFill(['published_revision_id' => (int) $alternateRevision->id])->save();
+
+        $afterAlternate = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterAlternateBaseline = collect($afterAlternate['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+        $this->assertNotSame($afterRelationBaseline, $afterAlternateBaseline);
+        $this->assertNotSame($afterRelation['promotion_preflight_fingerprint'], $afterAlternate['promotion_preflight_fingerprint']);
     }
 
     public function test_topic_runtime_baseline_changes_when_public_section_relation_changes(): void

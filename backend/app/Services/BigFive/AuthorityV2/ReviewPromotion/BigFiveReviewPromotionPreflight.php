@@ -15,6 +15,7 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
+use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\TopicEntryResolverService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -315,7 +316,7 @@ final class BigFiveReviewPromotionPreflight
             $primaryPubliclyReadable = $this->primaryPubliclyReadable($record);
             $databaseReads++;
             $databaseReads += match (true) {
-                $record instanceof Article => ($published !== null ? 1 : 0) + 4,
+                $record instanceof Article => ($published !== null ? 1 : 0) + 6,
                 $record instanceof TopicProfile => 3,
                 default => 0,
             };
@@ -331,7 +332,7 @@ final class BigFiveReviewPromotionPreflight
                 'published_revision_id' => $published === null ? null : (int) $published,
                 'public_runtime_baseline_sha256' => $this->recordFingerprint($record),
                 'revision_authority_matches' => $row['action_contract']['revision_create']
-                    ? $this->revisionAuthorityMatches($record, $row)
+                    ? $this->revisionAuthorityMatches($record, $row, $descriptor)
                     : true,
                 'public_reader_selects_working_revision' => $working !== null && $published !== null && (int) $working === (int) $published,
                 'primary_publicly_readable' => $primaryPubliclyReadable,
@@ -449,8 +450,8 @@ final class BigFiveReviewPromotionPreflight
         return $query->first();
     }
 
-    /** @param array<string,mixed> $row */
-    private function revisionAuthorityMatches(Model $record, array $row): bool
+    /** @param array<string,mixed> $row @param array<string,mixed> $descriptor */
+    private function revisionAuthorityMatches(Model $record, array $row, array $descriptor): bool
     {
         $workingId = $record->getAttribute('working_revision_id');
         if ($workingId === null) {
@@ -469,13 +470,67 @@ final class BigFiveReviewPromotionPreflight
         }
 
         $assetKey = $revision->getAttribute('authority_asset_key');
+        $sourcePackage = $revision->getAttribute('authority_source_package') ?? $revision->getAttribute('source_package');
         $sourceHash = $revision->getAttribute('authority_source_hash') ?? $revision->getAttribute('source_hash');
         $packageHash = $revision->getAttribute('authority_package_sha256');
 
         return $this->revisionOwnedByRecord($revision, $record)
             && $assetKey === $row['asset_id']
+            && $sourcePackage === $row['source_package']
             && $sourceHash === $row['source_hash']
-            && $packageHash === $row['authority_package_sha256'];
+            && $packageHash === $row['authority_package_sha256']
+            && $this->revisionPayloadMatchesDescriptor($revision, $record, $descriptor);
+    }
+
+    /** @param array<string,mixed> $descriptor */
+    private function revisionPayloadMatchesDescriptor(Model $revision, Model $record, array $descriptor): bool
+    {
+        $attributes = $descriptor['attributes'] ?? null;
+        if (! is_array($attributes)) {
+            return false;
+        }
+
+        $expected = match (true) {
+            $record instanceof Article => [
+                'authority_metadata_json' => [
+                    'route' => (string) $descriptor['route'],
+                    'authority_surface' => (string) $descriptor['authority_surface'],
+                    'draft_attributes' => $attributes,
+                    'public_runtime_mutation_allowed' => false,
+                ],
+                'title' => (string) $attributes['title'],
+                'excerpt' => $attributes['excerpt'],
+                'content_md' => (string) $attributes['content_md'],
+                'seo_title' => (string) $attributes['title'],
+                'seo_description' => $attributes['excerpt'],
+            ],
+            $record instanceof ContentPage => [
+                'payload_json' => [
+                    ...$attributes,
+                    '_big_five_authority_v2_import' => [
+                        'asset_id' => (string) $descriptor['asset_id'],
+                        'route' => (string) $descriptor['route'],
+                        'source_package' => (string) $descriptor['source_package'],
+                        'source_hash' => (string) $descriptor['source_hash'],
+                        'authority_package_sha256' => BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+                        'public_runtime_mutation_allowed' => false,
+                    ],
+                ],
+            ],
+            $record instanceof PersonalityPublicContentAsset => ['snapshot_json' => $attributes],
+            $record instanceof TopicProfile => ['snapshot_json' => ['profile' => $attributes]],
+            default => null,
+        };
+        if (! is_array($expected)) {
+            return false;
+        }
+
+        $observed = [];
+        foreach (array_keys($expected) as $field) {
+            $observed[$field] = $revision->getAttribute($field);
+        }
+
+        return hash_equals($this->fingerprint($expected), $this->fingerprint($observed));
     }
 
     private function revisionOwnedByRecord(Model $revision, Model $record): bool
@@ -640,12 +695,30 @@ final class BigFiveReviewPromotionPreflight
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get();
+        $translationGroupAlternates = trim((string) $article->getAttribute('translation_group_id')) === ''
+            ? collect()
+            : Article::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $article->getAttribute('org_id'))
+                ->where('translation_group_id', $article->getAttribute('translation_group_id'))
+                ->publiclyIndexable()
+                ->whereIn('locale', ArticleSeoService::SUPPORTED_LOCALES)
+                ->get(['id', 'slug', 'locale']);
+        $legacySameSlugAlternates = Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', $article->getAttribute('org_id'))
+            ->where('slug', $article->getAttribute('slug'))
+            ->publiclyIndexable()
+            ->whereIn('locale', ArticleSeoService::SUPPORTED_LOCALES)
+            ->get(['id', 'slug', 'locale']);
 
         return [
             'category' => $this->modelSnapshot($category),
             'tags' => $this->modelSnapshots($tags),
             'test_edges' => $this->modelSnapshots($testEdges, preserveOrder: true),
             'seo_meta' => $this->modelSnapshot($article->seoMeta()->withoutGlobalScopes()->first()),
+            'alternate_translation_group_variants' => $this->modelSnapshots($translationGroupAlternates),
+            'alternate_legacy_same_slug_variants' => $this->modelSnapshots($legacySameSlugAlternates),
         ];
     }
 
