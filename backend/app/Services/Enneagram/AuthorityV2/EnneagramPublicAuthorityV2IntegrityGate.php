@@ -709,44 +709,76 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     /** @param array<string, mixed> $asset */
     private function visibleAnswerSupportsQuestion(string $question, string $answer, array $asset): bool
     {
-        $questionTerms = $this->answerabilityTerms($question);
-        $answerTerms = array_fill_keys($this->answerabilityTerms($answer), true);
+        $questionTerms = $this->answerabilityLatinTerms($question);
+        $answerTerms = array_fill_keys($this->answerabilityLatinTerms($answer), true);
         $markerText = implode(' ', array_map(
             static fn (string $field): string => (string) ($asset[$field] ?? ''),
             ['identity_key', 'code', 'path'],
         ));
-        $markerTerms = array_fill_keys($this->answerabilityTerms($markerText), true);
+        $markerTerms = array_fill_keys($this->answerabilityLatinTerms($markerText), true);
+        $relevantTerms = array_values(array_filter(
+            $questionTerms,
+            static fn (string $term): bool => ! isset($markerTerms[$term])
+                && preg_match('/^[0-9a-f]{8,64}$/i', $term) !== 1,
+        ));
+        $hanPhrases = $this->answerabilityHanPhrases($question, $asset);
 
-        foreach ($questionTerms as $term) {
-            if (isset($answerTerms[$term])
-                && ! isset($markerTerms[$term])
-                && preg_match('/^[0-9a-f]{8,64}$/i', $term) !== 1) {
-                return true;
+        if ($relevantTerms === [] && $hanPhrases === []) {
+            return false;
+        }
+
+        foreach ($relevantTerms as $term) {
+            if (! isset($answerTerms[$term])) {
+                return false;
             }
         }
 
-        return false;
+        foreach ($hanPhrases as $phrase) {
+            if (mb_strpos($answer, $phrase) === false) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @return list<string> */
-    private function answerabilityTerms(string $text): array
+    private function answerabilityLatinTerms(string $text): array
     {
         $terms = [];
         preg_match_all('/[\p{Latin}\p{N}]{3,}/u', mb_strtolower($text), $wordMatches);
-        $stopWords = ['what', 'which', 'when', 'where', 'who', 'whose', 'why', 'how', 'should', 'could', 'would', 'does', 'did', 'are', 'the', 'and', 'for', 'from', 'into', 'with', 'this', 'that', 'these', 'those', 'your', 'our', 'their', 'its', 'can'];
+        $stopWords = ['what', 'which', 'when', 'where', 'who', 'whose', 'why', 'how', 'should', 'could', 'would', 'does', 'did', 'are', 'the', 'and', 'for', 'from', 'into', 'with', 'this', 'that', 'these', 'those', 'your', 'our', 'their', 'its', 'can', 'appear', 'appears', 'apply', 'applies', 'define', 'defines'];
         foreach ($wordMatches[0] ?? [] as $term) {
             if (! in_array($term, $stopWords, true)) {
                 $terms[] = $term;
             }
         }
-        preg_match_all('/\p{Han}{2,}/u', $text, $hanMatches);
-        foreach ($hanMatches[0] ?? [] as $sequence) {
-            for ($index = 0; $index < mb_strlen($sequence) - 1; $index++) {
-                $terms[] = mb_substr($sequence, $index, 2);
+
+        return array_values(array_unique($terms));
+    }
+
+    /** @param array<string, mixed> $asset @return list<string> */
+    private function answerabilityHanPhrases(string $question, array $asset): array
+    {
+        foreach (['identity_key', 'code', 'path'] as $field) {
+            $marker = (string) ($asset[$field] ?? '');
+            if ($marker !== '') {
+                $question = str_ireplace($marker, ' ', $question);
             }
         }
 
-        return array_values(array_unique($terms));
+        preg_match_all('/\p{Han}{2,}/u', $question, $matches);
+        $phrases = [];
+        foreach ($matches[0] ?? [] as $phrase) {
+            $phrase = preg_replace('/^(?:什么是|如何记录|如何观察|如何|为什么|哪些|哪个|怎样|怎么|请说明|请解释)/u', '', $phrase) ?? $phrase;
+            $phrase = preg_replace('/(?:是什么|有哪些|为何|吗|呢)$/u', '', $phrase) ?? $phrase;
+            $phrase = preg_replace('/^的+/u', '', $phrase) ?? $phrase;
+            if ($this->length($phrase) >= 2) {
+                $phrases[] = $phrase;
+            }
+        }
+
+        return array_values(array_unique($phrases));
     }
 
     /** @param array<string, mixed>|null $map @param array<string, array<string, mixed>> $claims @param callable(string, string, ?string, string, string): void $add */

@@ -167,11 +167,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $candidate = $this->candidate();
         preg_match('/[0-9a-f]{12}/', $candidate['assets'][0]['answerability']['questions'][0], $markerMatch);
         $identityMarker = $candidate['assets'][0]['identity_key'].' '.($markerMatch[0] ?? 'abcdef123456');
-        $candidate['assets'][0]['answerability']['questions'] = [
-            "How should seasonal weather patterns change a grocery list for {$identityMarker}?",
-            "Which railway timetable is best for a distant holiday from {$identityMarker}?",
-            "Why do unrelated gardening tools need different storage near {$identityMarker}?",
-        ];
+        $question = "Which railway timetable working hypothesis applies to {$identityMarker}?";
+        $candidate['assets'][0]['answerability']['questions'][0] = $question;
+        $candidate['assets'][0]['answerability']['question_answers'][0]['question'] = $question;
 
         $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
 
@@ -1063,18 +1061,18 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
                 'answerability' => [
                     'direct_answer_supported' => true,
                     'questions' => $english
-                        ? ["What working hypothesis defines {$identity} {$token}?", "How can visible action for {$identity} {$token} be observed?", "Which working hypothesis limits apply to {$identity} {$token}?"]
-                        : ["{$identity} {$token} 的自我观察假设是什么？", "如何记录 {$identity} {$token} 的可观察行动？", "{$identity} {$token} 的工作假设有哪些使用边界？"],
+                        ? ["What limited self-observation hypothesis appears for {$identity} {$token}?", "Which observable action followed for {$identity} {$token}?", "What revisable working hypothesis applies to {$identity} {$token}?"]
+                        : ["{$identity} {$token} 的有限的自我观察假设是什么？", "如何记录 {$identity} {$token} 的可观察行动？", "{$identity} {$token} 的可修正的工作假设是什么？"],
                     'question_answers' => $english
                         ? [
-                            ['question' => "What working hypothesis defines {$identity} {$token}?", 'visible_path' => 'answer_first'],
-                            ['question' => "How can visible action for {$identity} {$token} be observed?", 'visible_path' => 'sections.0.body'],
-                            ['question' => "Which working hypothesis limits apply to {$identity} {$token}?", 'visible_path' => 'sections.2.body'],
+                            ['question' => "What limited self-observation hypothesis appears for {$identity} {$token}?", 'visible_path' => 'answer_first'],
+                            ['question' => "Which observable action followed for {$identity} {$token}?", 'visible_path' => 'sections.0.body'],
+                            ['question' => "What revisable working hypothesis applies to {$identity} {$token}?", 'visible_path' => 'sections.2.body'],
                         ]
                         : [
-                            ['question' => "{$identity} {$token} 的自我观察假设是什么？", 'visible_path' => 'answer_first'],
+                            ['question' => "{$identity} {$token} 的有限的自我观察假设是什么？", 'visible_path' => 'answer_first'],
                             ['question' => "如何记录 {$identity} {$token} 的可观察行动？", 'visible_path' => 'sections.0.body'],
-                            ['question' => "{$identity} {$token} 的工作假设有哪些使用边界？", 'visible_path' => 'sections.2.body'],
+                            ['question' => "{$identity} {$token} 的可修正的工作假设是什么？", 'visible_path' => 'sections.2.body'],
                         ],
                 ],
                 'claim_ids' => $claimIds,
