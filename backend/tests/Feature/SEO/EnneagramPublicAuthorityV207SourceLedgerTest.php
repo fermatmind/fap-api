@@ -142,6 +142,26 @@ final class EnneagramPublicAuthorityV207SourceLedgerTest extends TestCase
         }
     }
 
+    public function test_every_mapped_claim_source_supports_the_page_family(): void
+    {
+        $registry = $this->readJson(self::PACKAGE_DIR.'/source-registry.json');
+        $maps = $this->readJson(self::PACKAGE_DIR.'/page-claim-maps.json');
+        $claims = collect($registry['claims'])->keyBy('id');
+        $sources = collect($registry['sources'])->keyBy('id');
+
+        foreach ($maps['page_maps'] as $map) {
+            foreach ($map['claim_ids'] as $claimId) {
+                foreach ($claims->get($claimId)['source_ids'] as $sourceId) {
+                    $this->assertContains(
+                        $map['entity_type'],
+                        $sources->get($sourceId)['page_families'],
+                        "{$sourceId} does not support {$map['entity_type']} for {$claimId}"
+                    );
+                }
+            }
+        }
+    }
+
     public function test_zero_allowed_factual_claims_are_unmapped(): void
     {
         $registry = $this->readJson(self::PACKAGE_DIR.'/source-registry.json');

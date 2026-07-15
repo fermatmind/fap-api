@@ -93149,7 +93149,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "f1710e7988f60ffc9f3a70dec97573a1db65ccb9",
+    "commit_sha": "896f1cfd70ba2f605728df8ce6a8879797606d71",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
       "dependency": {
@@ -93170,7 +93170,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "Validated both automated P2 findings: PR06 commit_sha now records the main-reachable squash merge 7ff9df0eca65ca1071ba6565c201ca92b5a00575, and all non-null registry internal_path values now use the backend root, with ../AGENTS.md resolving correctly. A new path-resolution regression brings the focused suite to 11 tests / 3960 assertions; Pint passes."
+        "evidence": "Validated all four automated P2 findings across two review rounds: PR06 commit_sha records the main-reachable squash merge; PR07 commit_sha records the reviewed fix head; all non-null registry internal paths share the backend root and resolve; and every mapped claim source now declares support for that page family. Cross-family base claims were narrowed to the systematic review rather than widening measurement-documentation scope. Focused validation passes 12 tests / 5091 assertions plus Pint."
       }
     },
     "scope_validation": {
@@ -93219,9 +93219,14 @@
         "at": "2026-07-15T08:55:26Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on 1ce93d2dd, then two valid P2 threads were fixed: the predecessor ledger now stores PR06's main-reachable squash commit, and registry internal paths share one backend-root base with a resolving-path regression. Focused validation passes 11 / 3960 plus Pint; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T09:03:21Z",
+        "status": "review_fixes_local_verified",
+        "note": "The first review-fix head passed all nine checks, then two additional valid P2 threads were fixed: PR07 now records the reviewed fix head, and cross-family claims cite only sources whose declared page_families include the mapped page. The new family-compatibility regression passes within 12 tests / 5091 assertions; latest-head checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T08:55:26Z"
+    "updated_at": "2026-07-15T09:03:21Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
