@@ -390,6 +390,31 @@ final class BigFiveAuthorityV247Test extends TestCase
         }
     }
 
+    public function test_database_preflight_rejects_future_scheduled_topic_identity_that_public_reader_hides(): void
+    {
+        DB::table('topic_profiles')->insert([
+            'org_id' => 0,
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Future scheduled existing topic profile',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('existing_identity_not_publicly_readable', $result['issue_codes']);
+        $observed = collect($result['observed_runtime'])->firstWhere('asset_id', 'topic_hub:en:/en/topics/big-five');
+        $this->assertIsArray($observed);
+        $this->assertFalse($observed['primary_publicly_readable']);
+    }
+
     public function test_database_preflight_rejects_public_preserved_product_shell(): void
     {
         DB::table('landing_surfaces')->insert([
@@ -670,6 +695,34 @@ final class BigFiveAuthorityV247Test extends TestCase
 
         $authorization['approval_phrases_currently_executable'] = true;
         $this->assertTrue($this->preflight()->authorizationPacketIsExecutable($authorization));
+    }
+
+    public function test_database_preflight_rejects_authorization_deploy_sha_that_differs_from_runtime_revision(): void
+    {
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['production_promotion_currently_authorized'] = true;
+        $authorization['approval_phrases_currently_executable'] = true;
+        $authorization['deployed_sha'] = str_repeat('a', 40);
+        $authorization['promotion_preflight_fingerprint'] = str_repeat('b', 64);
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-stale-deploy.json', $authorization);
+        $revisionPath = base_path('../REVISION');
+        $file = File::partialMock();
+        $file->shouldReceive('isFile')->once()->with($revisionPath)->andReturnTrue();
+        $file->shouldReceive('get')->once()->with($revisionPath)->andReturn(str_repeat('c', 40).PHP_EOL);
+
+        try {
+            $result = $this->preflight()->databasePreflight(self::REVIEW, $authorizationPath, self::ROLLBACK);
+
+            $this->assertFalse($result['ok']);
+            $this->assertFalse($result['authorization_deploy_sha_matches_runtime']);
+            $this->assertContains('authorization_deploy_sha_mismatch', $result['blocker_codes']);
+            $this->assertTrue(collect($result['cohorts'])->every(
+                static fn (array $cohort): bool => $cohort['exact_authorization_template'] === null
+                    && $cohort['authorization_matches'] === false,
+            ));
+        } finally {
+            File::delete($authorizationPath);
+        }
     }
 
     public function test_console_package_only_is_zero_write_and_exposes_no_promotion_option(): void

@@ -14,6 +14,7 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
@@ -98,6 +99,14 @@ final class BigFiveReviewPromotionPreflight
         $issueCodes = [];
         $blockerCodes = [];
         $databaseReads = 0;
+        $deployedSha = $artifacts['authorization']['deployed_sha'] ?? null;
+        $authorizationExecutable = $this->authorizationPacketIsExecutable($artifacts['authorization']);
+        $deployedRevisionMatches = is_string($deployedSha)
+            && preg_match('/^[0-9a-f]{40}$/', $deployedSha) === 1
+            && $this->deployedRevisionMatches($deployedSha);
+        if (($deployedSha !== null || $authorizationExecutable) && ! $deployedRevisionMatches) {
+            $blockerCodes[] = 'authorization_deploy_sha_mismatch';
+        }
 
         foreach ($artifacts['review']['rows'] as $row) {
             $descriptor = $descriptors->get($row['asset_id']);
@@ -140,8 +149,7 @@ final class BigFiveReviewPromotionPreflight
             });
             $expectedPhrase = null;
             $authorizationMatches = false;
-            $deployedSha = $artifacts['authorization']['deployed_sha'] ?? null;
-            if (is_string($deployedSha) && preg_match('/^[0-9a-f]{40}$/', $deployedSha) === 1) {
+            if ($deployedRevisionMatches) {
                 $expectedPhrase = $this->approvalPhrase(
                     $deployedSha,
                     $artifacts['review_sha256'],
@@ -158,7 +166,7 @@ final class BigFiveReviewPromotionPreflight
                     && ($supplied['asset_count'] ?? null) === $cohort['asset_count']
                     && ($supplied['exact_authorization'] ?? null) === $expectedPhrase
                     && ($artifacts['authorization']['promotion_preflight_fingerprint'] ?? null) === $preflightFingerprint
-                    && $this->authorizationPacketIsExecutable($artifacts['authorization']);
+                    && $authorizationExecutable;
             }
             $ready = $membersReady && $authorizationMatches;
             if ($ready) {
@@ -199,6 +207,7 @@ final class BigFiveReviewPromotionPreflight
             'review_manifest_sha256' => $artifacts['review_sha256'],
             'rollback_plan_sha256' => $artifacts['rollback_sha256'],
             'promotion_preflight_fingerprint' => $preflightFingerprint,
+            'authorization_deploy_sha_matches_runtime' => $deployedRevisionMatches,
             'counts' => [
                 'assets' => self::ASSET_COUNT,
                 'working_revisions' => self::REVISION_COUNT,
@@ -504,9 +513,21 @@ final class BigFiveReviewPromotionPreflight
                 ->withoutGlobalScopes()
                 ->whereKey($recordId)
                 ->publishedPublic()
+                ->where(static function (Builder $query): void {
+                    $query->whereNull('published_at')
+                        ->orWhere('published_at', '<=', now());
+                })
                 ->exists(),
             default => false,
         };
+    }
+
+    private function deployedRevisionMatches(string $deployedSha): bool
+    {
+        $revisionPath = base_path('../REVISION');
+
+        return File::isFile($revisionPath)
+            && hash_equals($deployedSha, trim(File::get($revisionPath)));
     }
 
     private function recordFingerprint(Model $record): string
