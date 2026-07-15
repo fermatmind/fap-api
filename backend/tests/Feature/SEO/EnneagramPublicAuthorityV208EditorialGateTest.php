@@ -210,6 +210,36 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_fermatmind_psychometric_claims_fail_without_rejecting_explicit_limitations(): void
+    {
+        foreach ([
+            'FermatMind Enneagram has reliable norms and percentiles.',
+            'FermatMind Enneagram is validated and reliable.',
+            '费马测试九型人格具备可靠常模与百分位。',
+            '费马测试九型人格已经验证其信度和效度。',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('unsupported_fermatmind_psychometrics_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach ([
+            'This page does not establish FermatMind reliability, validity, norms, or percentiles.',
+            '本页不能证明费马测试的信度、效度、常模或百分位。',
+        ] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
     public function test_explicitly_negated_boundary_claims_remain_allowed(): void
     {
         foreach ([

@@ -327,6 +327,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const UNSUPPORTED_CLAIM_PATTERN = '/(?:scientifically proven|neuroscience proves|clinically validated|absolute(?:ly)? accurate|most accurate personality test|科学(?:已)?证明|神经科学证明|临床验证|绝对准确)/iu';
 
+    private const FERMATMIND_PSYCHOMETRICS_PATTERN = '/(?:(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,80}(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)|(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)[^.!?。！？\n]{0,80}(?:fermatmind|费马测试|费马测评))/iu';
+
     private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?|(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?[\s-]+predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|hiring|salary|turnover|health|admission|legal|financial|outcome)|perfect\s+(?:career|job|partner)|预测(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果|适配)?|保证(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果)?|最适合的职业|完美伴侣)/iu';
 
     private const DIAGNOSIS_SCREENING_PATTERN = '/(?:medical\s+diagnos(?:is|e|tic)|clinical\s+diagnos(?:is|e|tic)|diagnos(?:e|es|ed|ing)\s+(?:you|your)|(?:personality|type|ability|health)\s+diagnos(?:is|tic)|(?:treats?|cures?)\s+(?:your\s+)?(?:condition|disorder|anxiety|depression|health|personality)|hiring[\s-]+fit|job[\s-]+suitability(?:[\s-]+guarantee)?|(?:employment|admission)[\s-]+screening|医疗诊断|临床诊断|诊断(?:你(?:的)?|您(?:的)?|其)(?:性格|人格|类型|能力|健康|结果)?|(?:性格|人格|类型|能力|健康)诊断|(?:治疗|治愈)(?:你(?:的)?|您(?:的)?|其)?(?:疾病|焦虑|抑郁|健康|人格|性格)|招聘适配|录用适配|岗位适配保证)/iu';
@@ -755,6 +757,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $claimText = $this->withoutExplicitNegativeClaims($text);
         foreach ([
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
+            [self::FERMATMIND_PSYCHOMETRICS_PATTERN, 'unsupported_fermatmind_psychometrics_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
             [self::DETERMINISTIC_RECOMMENDATION_PATTERN, 'deterministic_recommendation_claim'],
             [self::HUMAN_REVIEW_RELEASE_PATTERN, 'visible_review_or_release_claim'],
@@ -823,6 +826,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     {
         return $this->withoutExplicitlyNegatedMatches($text, [
             self::UNSUPPORTED_CLAIM_PATTERN,
+            self::FERMATMIND_PSYCHOMETRICS_PATTERN,
             self::PREDICTION_PATTERN,
             self::DETERMINISTIC_RECOMMENDATION_PATTERN,
             self::HUMAN_REVIEW_RELEASE_PATTERN,
