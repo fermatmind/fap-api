@@ -532,6 +532,15 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         }
         if (! is_array($asset['sections'] ?? null) || $asset['sections'] === []) {
             $add(self::EDITORIAL_GATES[0], 'sections_missing', $key, "{$path}.sections", 'Visible sections must be non-empty.');
+        } else {
+            $minimumBodyLength = ($asset['locale'] ?? null) === 'zh-CN' ? 40 : 80;
+            foreach ($asset['sections'] as $index => $section) {
+                $heading = is_array($section) ? $section['heading'] ?? null : null;
+                $body = is_array($section) ? $section['body'] ?? null : null;
+                if ($this->length($heading) < 4 || $this->length($body) < $minimumBodyLength) {
+                    $add(self::EDITORIAL_GATES[0], 'section_text_missing', $key, "{$path}.sections.{$index}", 'Every visible section requires a substantive heading and body.');
+                }
+            }
         }
     }
 
@@ -757,7 +766,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         if (preg_match(self::COMPETITOR_PATTERN, $text) === 1) {
             $add(self::EDITORIAL_GATES[9], 'competitor_language_detected', $key, $path, 'Public candidate text crosses the declared evidence or competitor boundary.');
         }
-        if (preg_match(self::DIAGNOSIS_SCREENING_PATTERN, $text) === 1 || $this->containsUnboundedMedicalClaim($text)) {
+        if ($this->containsUnboundedMedicalClaim($text)) {
             $add(self::EDITORIAL_GATES[9], 'diagnosis_or_screening_claim', $key, $path, 'Public candidate text crosses the non-diagnostic and non-treatment product boundary.');
         }
 
@@ -801,9 +810,13 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private function containsUnboundedMedicalClaim(string $text): bool
     {
-        $bounded = $this->withoutExplicitlyNegatedMatches($text, [self::BARE_MEDICAL_CLAIM_PATTERN]);
+        $bounded = $this->withoutExplicitlyNegatedMatches($text, [
+            self::DIAGNOSIS_SCREENING_PATTERN,
+            self::BARE_MEDICAL_CLAIM_PATTERN,
+        ]);
 
-        return preg_match(self::BARE_MEDICAL_CLAIM_PATTERN, $bounded) === 1;
+        return preg_match(self::DIAGNOSIS_SCREENING_PATTERN, $bounded) === 1
+            || preg_match(self::BARE_MEDICAL_CLAIM_PATTERN, $bounded) === 1;
     }
 
     private function withoutExplicitNegativeClaims(string $text): string

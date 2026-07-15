@@ -125,6 +125,17 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('geo_answerability_insufficient', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_sections_require_substantive_visible_heading_and_body_text(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['sections'] = [[], ['heading' => '   ', 'body' => 'placeholder']];
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertSame(2, collect($result['issues'])->where('code', 'section_text_missing')->count());
+    }
+
     public function test_repeated_observation_exercise_text_fails_duplicate_gate(): void
     {
         $candidate = $this->candidate();
@@ -326,6 +337,20 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
 
         foreach (['This page should not be used as a diagnosis.', '本页不把它当成诊断。'] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+
+        foreach ([
+            'This page is not a medical diagnosis.',
+            'This page is not a job suitability guarantee.',
+            '本页不是医疗诊断。',
+            '本页不是岗位适配保证。',
+        ] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
