@@ -92403,15 +92403,15 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-visible-provenance-43",
     "depends_on": ["BIG5-AUTHORITY-V2-VISIBLE-DATE-42"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "5c016e7e088a6841a86fc2ba6310ad53b73e9f00",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3102",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR43 id, branch, title, dependency, provenance/reviewer contract, lifecycle, validation floor, and no-production-write boundary."},
       "dependency": {"status": "pass", "evidence": "BIG5-AUTHORITY-V2-VISIBLE-DATE-42 is merged in PR #3099 as 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 and origin/main contains the merge."},
       "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-visible-provenance-43 from exact origin/main 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 after confirming no local/remote branch or existing PR. Work proceeds in an isolated worktree so three user-owned uncommitted PR42 hardening edits in the primary worktree remain untouched. The exact 11-row union from PR38 is locked to source SHA256 60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65."},
       "local": {"status": "pass", "evidence": "The deterministic Node validator passed with 11 unique findings at fixture SHA256 acc50e56da08676ce6fc4497d1015af6ca01de8fceb951676f69b0cdbd1ce17b; PR43 focused Laravel passed 4 tests / 33 assertions; runtime-freeze classifier and negative control passed 2 tests / 5 assertions; touched Pint and PHP/JSON/YAML/JS syntax passed; full bash backend/scripts/ci_verify_mbti.sh passed, including Big Five 1405 tests / 180815 assertions plus Enneagram, MBTI smoke, security, migration, dependency, and OpenAPI gates; generated compile-time side effects were removed; diff and exact nine-file scope checks passed."},
-      "github": {"status": "pending", "evidence": null}
+      "github": {"status": "pending", "evidence": "Pushed exact nine-file scope and opened the single authorized GitHub PR #3102 at head 5c016e7e088a6841a86fc2ba6310ad53b73e9f00. Required checks are pending; merge remains blocked until all required checks pass."}
     },
     "failure_reason": null,
     "merged_at": null,
@@ -92425,7 +92425,8 @@
     "public_runtime_change": false,
     "transitions": [
       {"at": "2026-07-15T03:35:42Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR43 from the exact merged PR42 base. Scope is limited to the 11-finding fixture, a read-only fail-closed author/reviewer/source projector, focused contracts, and required PR42 ledger reconciliation; no migration, public runtime wiring, CMS write, promotion, indexability, or deploy action is allowed."},
-      {"at": "2026-07-15T03:44:23Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed. The contract requires separately authoritative author, human reviewer, and source fields; generated identities, self-attested reviewer references, missing review timestamps/states, and endorsement-style labels fail closed without overwriting existing published content."}
+      {"at": "2026-07-15T03:44:23Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local validation passed. The contract requires separately authoritative author, human reviewer, and source fields; generated identities, self-attested reviewer references, missing review timestamps/states, and endorsement-style labels fail closed without overwriting existing published content."},
+      {"at": "2026-07-15T03:45:37Z", "from": "local_checks_passed", "to": "github_checks_pending", "note": "Committed and pushed the exact nine-file scope as 5c016e7e088a6841a86fc2ba6310ad53b73e9f00 and opened the single authorized GitHub PR #3102. Waiting for all required checks; no production/CMS/publish/index/deploy action occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
