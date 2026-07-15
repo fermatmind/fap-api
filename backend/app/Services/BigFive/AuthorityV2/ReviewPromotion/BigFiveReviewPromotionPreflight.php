@@ -274,6 +274,7 @@ final class BigFiveReviewPromotionPreflight
             'revision_authority_matches' => false,
             'public_reader_selects_working_revision' => false,
             'primary_publicly_readable' => false,
+            'primary_record_live' => false,
         ];
         if (! $record instanceof Model) {
             $issues[] = 'identity_missing';
@@ -281,6 +282,11 @@ final class BigFiveReviewPromotionPreflight
             $working = $record->getAttribute('working_revision_id');
             $published = $record->getAttribute('published_revision_id');
             $primaryPubliclyReadable = $record instanceof ContentPage && $record->passesPublicReadinessGate();
+            $primaryRecordLive = ! $record instanceof Article || (! $record->trashed()
+                && ! in_array($record->getAttribute('lifecycle_state'), [
+                    Article::LIFECYCLE_ARCHIVED,
+                    Article::LIFECYCLE_SOFT_DELETED,
+                ], true));
             $observed = [
                 'primary_id' => (int) $record->getKey(),
                 'working_revision_id' => $working === null ? null : (int) $working,
@@ -291,6 +297,7 @@ final class BigFiveReviewPromotionPreflight
                     : true,
                 'public_reader_selects_working_revision' => $working !== null && $published !== null && (int) $working === (int) $published,
                 'primary_publicly_readable' => $primaryPubliclyReadable,
+                'primary_record_live' => $primaryRecordLive,
             ];
             $databaseReads += $row['action_contract']['revision_create'] ? 1 : 0;
             if ($row['action_contract']['revision_create'] && $working === null) {
@@ -298,6 +305,9 @@ final class BigFiveReviewPromotionPreflight
             }
             if ($row['action_contract']['revision_create'] && ! $observed['revision_authority_matches']) {
                 $issues[] = 'working_revision_authority_mismatch';
+            }
+            if (! $primaryRecordLive) {
+                $issues[] = 'article_identity_not_live';
             }
             if ($row['action_contract']['existing_revision'] && ($published === null || $working === null || (int) $published === (int) $working)) {
                 $issues[] = 'existing_public_revision_isolation_mismatch';
@@ -404,9 +414,28 @@ final class BigFiveReviewPromotionPreflight
         $sourceHash = $revision->getAttribute('authority_source_hash') ?? $revision->getAttribute('source_hash');
         $packageHash = $revision->getAttribute('authority_package_sha256');
 
-        return $assetKey === $row['asset_id']
+        return $this->revisionOwnedByRecord($revision, $record)
+            && $assetKey === $row['asset_id']
             && $sourceHash === $row['source_hash']
             && $packageHash === $row['authority_package_sha256'];
+    }
+
+    private function revisionOwnedByRecord(Model $revision, Model $record): bool
+    {
+        $recordId = (int) $record->getKey();
+
+        return match (true) {
+            $record instanceof Article => (int) $revision->getAttribute('article_id') === $recordId
+                && (int) $revision->getAttribute('org_id') === (int) $record->getAttribute('org_id')
+                && $revision->getAttribute('locale') === $record->getAttribute('locale'),
+            $record instanceof ContentPage => $revision->getAttribute('content_type') === 'content_page'
+                && (int) $revision->getAttribute('content_id') === $recordId
+                && (int) $revision->getAttribute('org_id') === (int) $record->getAttribute('org_id')
+                && $revision->getAttribute('locale') === $record->getAttribute('locale'),
+            $record instanceof PersonalityPublicContentAsset => (int) $revision->getAttribute('asset_id') === $recordId,
+            $record instanceof TopicProfile => (int) $revision->getAttribute('profile_id') === $recordId,
+            default => false,
+        };
     }
 
     private function recordFingerprint(Model $record): string

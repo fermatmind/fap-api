@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
+use App\Models\Article;
 use App\Models\ContentPage;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -125,6 +126,96 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertIsArray($observed);
         $this->assertTrue($observed['primary_publicly_readable']);
         $this->assertNull($observed['published_revision_id']);
+    }
+
+    public function test_database_preflight_rejects_soft_deleted_article_identity(): void
+    {
+        DB::table('articles')->insert([
+            'org_id' => 0,
+            'slug' => 'big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'title' => 'Deleted authority identity',
+            'content_md' => 'Deleted authority identity.',
+            'status' => 'draft',
+            'lifecycle_state' => Article::LIFECYCLE_SOFT_DELETED,
+            'is_public' => false,
+            'is_indexable' => false,
+            'deleted_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('article_identity_not_live', $result['issue_codes']);
+        $observed = collect($result['observed_runtime'])->firstWhere('asset_id', 'article:en:/en/articles/big-five-personality-test-vs-mbti');
+        $this->assertIsArray($observed);
+        $this->assertFalse($observed['primary_record_live']);
+    }
+
+    public function test_database_preflight_rejects_working_revision_owned_by_another_primary(): void
+    {
+        $primaryId = DB::table('content_pages')->insertGetId([
+            'org_id' => 0,
+            'slug' => 'methodology',
+            'path' => '/en/personality/big-five/methodology',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'title' => 'Authority identity',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $otherPrimaryId = DB::table('content_pages')->insertGetId([
+            'org_id' => 0,
+            'slug' => 'other-methodology',
+            'path' => '/en/personality/big-five/other-methodology',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'title' => 'Other authority identity',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $row = collect($this->readJson(self::REVIEW)['rows'])
+            ->firstWhere('asset_id', 'technical_trust:en:/en/personality/big-five/methodology');
+        $this->assertIsArray($row);
+        $revisionId = DB::table('cms_translation_revisions')->insertGetId([
+            'org_id' => 0,
+            'content_type' => 'content_page',
+            'content_id' => $otherPrimaryId,
+            'translation_group_id' => 'big-five-methodology',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 1,
+            'revision_status' => 'draft',
+            'payload_json' => '{}',
+            'authority_asset_key' => $row['asset_id'],
+            'authority_source_hash' => $row['source_hash'],
+            'authority_package_sha256' => $row['authority_package_sha256'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('content_pages')->where('id', $primaryId)->update(['working_revision_id' => $revisionId]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('working_revision_authority_mismatch', $result['issue_codes']);
+        $observed = collect($result['observed_runtime'])->firstWhere('asset_id', 'technical_trust:en:/en/personality/big-five/methodology');
+        $this->assertIsArray($observed);
+        $this->assertFalse($observed['revision_authority_matches']);
     }
 
     public function test_artifact_drift_fails_before_database_read_or_write(): void
