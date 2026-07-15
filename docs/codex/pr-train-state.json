@@ -92684,9 +92684,9 @@
       "dependency_origin_main_contains_merge": true,
       "evidence": "fap-web PR #1770 is MERGED at 28afe5365d114ee72207cbcf426364355c88baa2; fap-web origin/main contains the merge commit, remote and local PR03 branches are deleted, and post-merge focused revalidation passed 7 files / 58 tests."
     },
-    "status": "ready_to_push",
-    "commit_sha": "a266b84a2af51134015d02fca4f83d488e3585b2",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "46d7f3510d83104f6c25cd642985e18bd9d83009",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3104",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -92707,6 +92707,10 @@
       "manifest_head_validation": {
         "status": "pass",
         "evidence": "After replacing the zsh-incompatible Pint scalar with the established per-file loop, exact post-commit replay passed four-file PHP lint/Pint, 57 tests / 4096 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, and diff checks."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "Opened the single authorized fap-api PR #3104 with the exact manifest title from branch head 46d7f3510d83104f6c25cd642985e18bd9d83009."
       }
     },
     "scope_validation": {
@@ -92755,9 +92759,14 @@
         "at": "2026-07-15T05:45:21Z",
         "status": "ready_to_push",
         "note": "Recorded validated branch head a266b84a2af51134015d02fca4f83d488e3585b2 after clean metadata, diff, worktree, and exact-scope revalidation."
+      },
+      {
+        "at": "2026-07-15T05:46:24Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact eight-path branch and opened the single authorized fap-api PR #3104 with the exact manifest title and required change, reason, validation, deferred, repository-rule-impact, and safety sections."
       }
     ],
-    "updated_at": "2026-07-15T05:45:21Z"
+    "updated_at": "2026-07-15T05:46:24Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05",
