@@ -92367,7 +92367,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-visible-date-42",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41"],
-    "status": "post_merge_pointer_repair_github_checks_pending",
+    "status": "post_merge_pointer_repair_ready_to_merge",
     "commit_sha": "7cb885c1d30ec52d3e3eac60379036dbeacbc5e7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3099",
     "checks": {
@@ -92394,11 +92394,11 @@
     },
     "post_merge_pointer_repair": {
       "branch": "codex/big5-visible-date-personality-pointer-repair",
-      "status": "github_checks_pending",
+      "status": "ready_to_merge",
       "commit_sha": "159e6b139d1564d6815afbadb99a4c62d263eb5d",
-      "github_head_sha": "0a0d24cb10ec2c4d301fcf77fb6ad0cafa5305df",
+      "github_head_sha": "73a0ea510e2070829456a8e0d29239885f039792",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3106",
-      "github_checks": {"status": "pending", "evidence": "A fresh final-head GitHub run is required before this same-scope pointer repair may merge."},
+      "github_checks": {"status": "pass", "evidence": "Head 73a0ea510e2070829456a8e0d29239885f039792 passed all nine required checks in CI run 29395114697 and Code Scanning run 29395114730. GitHub reports MERGEABLE/CLEAN, the diff is exactly four manifest-allowed paths, and no review thread or comment is present."},
       "local_checks": {"status": "pass", "evidence": "The 82-finding validator passed at fixture SHA256 8a51048e6d47d9bc52254aa5db2e122daec7671090986b7641c3757cb4b229f3; PR42 focused Laravel passed 6 tests / 246 assertions; runtime freeze passed 2 tests / 5 assertions; Pint, PHP/JSON/YAML/JS syntax, git diff --check, and exact four-file scope passed. The complete bash backend/scripts/ci_verify_mbti.sh gate passed Big Five 1408 tests / 180881 assertions, Enneagram 10 / 369, and all downstream MBTI, personality, migration, security, OpenAPI, dependency, webhook/attempt, and queue-backlog gates. Known compiled timestamp/hash side effects were restored path-by-path after the successful run."},
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -92425,7 +92425,8 @@
       {"at": "2026-07-15T06:31:41Z", "from": "merged", "to": "post_merge_pointer_repair_in_progress", "note": "A second same-scope audit identified a dead revisionMatches guard in Personality visible-date projection. This exact service, focused contract, package README, and ledger repair makes an explicitly supplied stale or working revision fail closed for all visible dates while retaining identity-matched audit-only lineage; no production, CMS, database, public-controller, indexability, or deploy action is allowed."},
       {"at": "2026-07-15T06:41:53Z", "from": "post_merge_pointer_repair_in_progress", "to": "post_merge_pointer_repair_local_checks_passed", "note": "The exact four-file repair passed the frozen fixture validator, focused 6/246 contract, freeze 2/5, Pint, syntax, diff, scope, and the complete CI gate including Big Five 1408/180881 and downstream gates. Generated compile timestamp/hash side effects were restored; no production, CMS, database, public-controller, indexability, or deploy action occurred."},
       {"at": "2026-07-15T06:42:46Z", "from": "post_merge_pointer_repair_local_checks_passed", "to": "post_merge_pointer_repair_committed_pending_push", "note": "Committed the exact four-file implementation and local-validation ledger as 159e6b139d1564d6815afbadb99a4c62d263eb5d after explicit path staging and cached diff validation. A ledger-only head commit, push, single PR, final-head checks, and review resolution remain mandatory."},
-      {"at": "2026-07-15T06:44:13Z", "from": "post_merge_pointer_repair_committed_pending_push", "to": "post_merge_pointer_repair_github_checks_pending", "note": "Pushed implementation and ledger head 0a0d24cb10ec2c4d301fcf77fb6ad0cafa5305df and opened the single exact-scope repair PR #3106. GitHub reports MERGEABLE with required checks pending; no production, CMS, database, public-controller, indexability, or deploy action occurred."}
+      {"at": "2026-07-15T06:44:13Z", "from": "post_merge_pointer_repair_committed_pending_push", "to": "post_merge_pointer_repair_github_checks_pending", "note": "Pushed implementation and ledger head 0a0d24cb10ec2c4d301fcf77fb6ad0cafa5305df and opened the single exact-scope repair PR #3106. GitHub reports MERGEABLE with required checks pending; no production, CMS, database, public-controller, indexability, or deploy action occurred."},
+      {"at": "2026-07-15T06:51:52Z", "from": "post_merge_pointer_repair_github_checks_pending", "to": "post_merge_pointer_repair_ready_to_merge", "note": "Head 73a0ea510e2070829456a8e0d29239885f039792 passed all nine required checks, GitHub is MERGEABLE/CLEAN, the diff remains exactly four allowed paths, and no review thread or comment exists. Recording ready_to_merge before squash merge; the fresh ledger head must itself pass required checks."}
     ]
   },
   "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43": {
