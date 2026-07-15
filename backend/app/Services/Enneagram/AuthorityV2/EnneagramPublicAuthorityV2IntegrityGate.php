@@ -1100,9 +1100,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $directBridge = '(?:\s+yet)?(?:\s+(?:an?|the))?\s*';
         $roleBridge = '\s+(?:(?:be\s+)?(?:used|treated|presented|described)|serve|function)\s+as(?:\s+(?:an?|the))?\s*';
         $claimBridge = '\s+(?:as|provide|offer)(?:\s+(?:an?|the))?\s*';
-        $boundedEnglishScope = '(?!\s+(?:only|merely|just|simply|solely|exactly|necessarily)\b)(?:(?!\b(?:and|also|plus|additionally|furthermore|moreover|then|while|whereas|but|however|yet|before|after|because|although|though|unless|until|if|when|where|which|who|whose|that|so)\b|,\s*(?:(?:and|or)\s+)?(?:it|this|that|the\s+page|we|you|they|he|she|there)\b|[.!?;:\n]).){0,100}';
+        $boundedEnglishScope = '(?!\s+(?:only|merely|just|simply|solely|exactly|necessarily)\b)(?:(?!\b(?:and|also|plus|additionally|furthermore|moreover|then|while|whereas|but|however|yet|before|after|because|since|as|although|though|unless|until|if|when|where|which|who|whose|that|so)\b|,\s*(?:(?:and|or)\s+)?(?:it|this|that|the\s+page|we|you|they|he|she|there)\b|[.!?;:\n]).){0,100}';
         $chineseNegative = '(?:并非|不是|不能|不会|不应|不得把|不得|禁止|不把|不用于)';
-        $boundedChineseScope = '(?!只|仅|只是|仅仅)(?:(?!并且|而且|同时|也|还|又|此外|另外|然后|但|然而|却|可是|[，,]\s*(?:或(?:者)?)?\s*(?:(?:本页|本内容|该页|该内容|它|其|我们|你|您|他们)|(?:会|能|可以|能够|已经|已|将|预测|证明|提供|给出|批准|适合))|[。！？；：\n]).){0,40}';
+        $boundedChineseScope = '(?!只|仅|只是|仅仅)(?:(?!并且|而且|同时|也|还|又|此外|另外|然后|但|然而|却|可是|因为|所以|而是|[，,]\s*(?:或(?:者)?)?\s*(?:(?:本页|本内容|该页|该内容|它|其|我们|你|您|他们)|(?:会|能|可以|能够|已经|已|将|预测|证明|提供|给出|批准|适合))|[。！？；：\n]).){0,40}';
 
         return preg_match('/'.$englishNegative.'(?:'.$directBridge.'|'.$roleBridge.'|'.$claimBridge.'|'.$boundedEnglishScope.')$/iu', $prefix) === 1
             || preg_match('/'.$chineseNegative.$boundedChineseScope.'$/u', $prefix) === 1;
