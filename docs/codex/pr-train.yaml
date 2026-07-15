@@ -124,7 +124,7 @@ prs:
     branch: codex/big5-authority-v2-media-authority-41
     depends_on: [BIG5-AUTHORITY-V2-TOPIC-RUNTIME-40]
     train_scope: big5_authority_v2_approved_media_intake_and_zero_write_mapping_preflight
-    status: local_checks_passed
+    status: github_checks_pending
     goal: "Consume PR34's exact 231-page / 693-slot / 18-family-locale-group inventory; validate only operator-approved, public-safe Media Library identity, variant, locale, alt, rights/license, provenance, approval, and content identity; generate deterministic mapping/hash/dry-run artifacts; keep every slot missing_pending when approved assets are absent; perform zero uploads and zero CMS/Media Library writes."
     allowed_paths:
       - backend/app/Services/BigFive/AuthorityV2/MediaAuthority/**
