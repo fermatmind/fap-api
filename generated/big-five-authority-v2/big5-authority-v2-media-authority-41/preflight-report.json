@@ -1,0 +1,30 @@
+{
+  "schema_version": "big5-media-authority-preflight-report.v1",
+  "status": "PASS_FAIL_CLOSED_NO_APPROVED_ASSETS",
+  "mode": "preflight_only_zero_write",
+  "mapping_package_sha256": "3972afd1a3d7497ac2d1eb8f0ff6bd620caf6765031170027e0c71e0ef75b7e2",
+  "counts": {
+    "candidate_pages": 231,
+    "family_locale_requirement_groups": 18,
+    "grouped_slot_requirements": 54,
+    "approved_grouped_slot_requirements": 0,
+    "pending_grouped_slot_requirements": 54,
+    "total_page_slots": 693,
+    "mapped_page_slots": 0,
+    "missing_pending_page_slots": 693
+  },
+  "actions": {
+    "database_reads": 0,
+    "database_writes": 0,
+    "media_uploads": 0,
+    "media_library_writes": 0,
+    "cms_mapping_writes": 0,
+    "publish_state_changes": 0,
+    "indexability_changes": 0,
+    "deployments": 0
+  },
+  "blockers": [
+    "18 real family-locale approved media groups are not present in repository authority.",
+    "No grouped slot may map until Media Library identity, public-safe URL, exact hero/inline/og variant, locale alt, rights/license, provenance, operator approval reference, and content identity all match."
+  ]
+}

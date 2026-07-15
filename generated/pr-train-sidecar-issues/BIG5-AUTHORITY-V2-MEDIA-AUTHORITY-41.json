@@ -1,0 +1,15 @@
+{
+  "repo": "fap-api",
+  "pr_id": "BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41",
+  "branch": "codex/big5-authority-v2-media-authority-41",
+  "blocker_type": "approved_big_five_media_inputs_absent",
+  "evidence": [
+    "PR34's repository authority audit found zero Big Five-specific assets satisfying semantic fit, public safety, locale alt, rights/provenance, variant, and explicit Big Five operator approval gates.",
+    "PR41's approved-media-intake.json contains zero approved entries and operator_approval_claimed=false.",
+    "The deterministic PR41 package retains 18 family-locale groups, 54 grouped slot requirements, 231 pages, and 693 missing_pending page slots with zero mapped URLs."
+  ],
+  "why_not_current_pr_scope": "This PR implements the fail-closed intake, Media Library cross-check, deterministic mapping/hash, and zero-write preflight only. It is forbidden from uploading media, fabricating approvals or provenance, mutating CMS/Media Library records, or claiming public Media/OG findings are resolved.",
+  "required_checks_affected": false,
+  "recommended_follow_up": "After the operator separately approves real Big Five hero/inline/OG assets with explicit rights/license and provenance, populate the intake from authoritative Media Library identities and run the zero-write preflight before any separately authorized mapping workflow.",
+  "train_continued": true
+}

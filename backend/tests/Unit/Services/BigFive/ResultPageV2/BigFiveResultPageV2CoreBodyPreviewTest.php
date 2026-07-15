@@ -613,6 +613,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_authority_v2_media_preflight_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV241MediaIntake.php',
+            'backend/app/Services/BigFive/AuthorityV2/MediaAuthority/BigFiveAuthorityV2MediaMappingPreflight.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_cms_preview_render_qa_files(): void
     {
         $changed = [
@@ -5862,6 +5876,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2MediaPreflightFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7646,6 +7664,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2CollisionSafeDraftRevisionWriter.php',
             'backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2DraftImportWriter.php',
             'backend/database/migrations/2026_07_15_000100_add_big_five_authority_v2_draft_revision_workspaces.php',
+        ], true);
+    }
+
+    private function isBigFiveAuthorityV2MediaPreflightFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV241MediaIntake.php',
+            'backend/app/Services/BigFive/AuthorityV2/MediaAuthority/BigFiveAuthorityV2MediaMappingPreflight.php',
         ], true);
     }
 

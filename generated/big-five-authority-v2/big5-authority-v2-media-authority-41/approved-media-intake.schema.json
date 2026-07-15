@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/schemas/big5-approved-media-intake.v1.json",
+  "title": "FermatMind Big Five approved Media Library intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operator_approval_claimed",
+    "approved_assets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "big5-approved-media-intake.v1"
+    },
+    "operator_approval_claimed": {
+      "type": "boolean"
+    },
+    "approved_assets": {
+      "type": "array",
+      "maxItems": 54,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "approval_status",
+          "page_family",
+          "locale",
+          "slot",
+          "content_identity",
+          "media_asset_id",
+          "media_asset_key",
+          "variant_key",
+          "public_url",
+          "alt",
+          "rights",
+          "license",
+          "provenance",
+          "operator_approval_ref"
+        ],
+        "properties": {
+          "approval_status": {
+            "const": "operator_approved"
+          },
+          "page_family": {
+            "type": "string",
+            "minLength": 1
+          },
+          "locale": {
+            "enum": ["en", "zh-CN"]
+          },
+          "slot": {
+            "enum": ["hero", "inline", "og"]
+          },
+          "content_identity": {
+            "type": "string",
+            "pattern": "^big5:[a-z_]+:(en|zh-CN):(hero|inline|og)$"
+          },
+          "media_asset_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "media_asset_key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "variant_key": {
+            "enum": ["hero", "inline", "og"]
+          },
+          "public_url": {
+            "type": "string",
+            "pattern": "^https://(assets|api)\\.fermatmind\\.com/"
+          },
+          "alt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rights": {
+            "type": "string",
+            "minLength": 1
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provenance": {
+            "type": "string",
+            "minLength": 1
+          },
+          "operator_approval_ref": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "approved_assets": {
+            "maxItems": 0
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "operator_approval_claimed": {
+            "const": false
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "operator_approval_claimed": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}
