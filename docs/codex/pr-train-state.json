@@ -92330,8 +92330,8 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "second_review_fix_local_verified",
-    "commit_sha": "6a4a687bc59e355025250c556657f7a8e9c70162",
+    "status": "ready_to_merge",
+    "commit_sha": "19075b85e0b1106437bee8da3d67ef774f1e7726",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
       "manifest_registration": {
@@ -92351,14 +92351,14 @@
         "evidence": "PHP 8.4 syntax passed; focused benchmark PHPUnit passed 5 tests / 3245 assertions; Pint and composer validate --strict passed; all JSON/YAML parses, checksum verification, git diff --check, and exact seven-path allowlist validation passed."
       },
       "github_required_checks": {
-        "status": "rerun_required",
-        "evidence": "All nine checks passed on pre-review-fix head 3c588b5effd625148ba24f51eb6fc282a4475f1c. The review-fix head must rerun every required check before merge."
+        "status": "pass",
+        "evidence": "All nine required checks passed on second-review-fix head 19075b85e0b1106437bee8da3d67ef774f1e7726; all review threads are resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -92416,9 +92416,14 @@
         "at": "2026-07-15T01:40:35Z",
         "status": "second_review_fix_local_verified",
         "note": "PR04/05/06/22 now carry complete runtime-tier focused validation, including both Big Five and Enneagram workspace tests for PR05. PR04/22 state has explicit fap-web repository, PR URL/merge SHA slots, and GitHub plus dependency-origin/main verification. Focused contract passes 6 tests / 3261 assertions; Pint, Composer, YAML/JSON, and diff checks pass."
+      },
+      {
+        "at": "2026-07-15T01:49:30Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on 19075b85e0b1106437bee8da3d67ef774f1e7726. Four review threads are resolved; the final llms-full concern was disproven by the later release ledger and current production readback showing 116 unique Enneagram canonicals in both llms surfaces. Exact seven-path scope remains intact."
       }
     ],
-    "updated_at": "2026-07-15T01:40:35Z"
+    "updated_at": "2026-07-15T01:49:30Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
