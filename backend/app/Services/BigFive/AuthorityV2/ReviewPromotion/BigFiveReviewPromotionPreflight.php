@@ -713,6 +713,9 @@ final class BigFiveReviewPromotionPreflight
                 throw new RuntimeException('Review manifest cohort membership mismatch: '.$assetId.'.');
             }
         }
+        if (($review['cohorts'] ?? null) !== $this->expectedCohorts($lockedRowsByAsset)) {
+            throw new RuntimeException('Review manifest exact cohort identity contract mismatch.');
+        }
         $this->assertAuthorizationCohortIdentityContract($authorization, $review);
 
         return compact('review', 'authorization', 'rollback') + [
@@ -835,6 +838,46 @@ final class BigFiveReviewPromotionPreflight
         }
 
         return $rowsByAsset;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $lockedRowsByAsset
+     * @return list<array<string,mixed>>
+     */
+    private function expectedCohorts(array $lockedRowsByAsset): array
+    {
+        $collator = new \Collator('en');
+        $groups = [];
+        foreach ($lockedRowsByAsset as $row) {
+            $surface = (string) ($row['authority_surface'] ?? '');
+            if ($surface === 'CMS landing_surfaces/page_blocks') {
+                continue;
+            }
+            $locale = (string) ($row['locale'] ?? '');
+            $groups[$surface.'|'.$locale][] = (string) ($row['asset_id'] ?? '');
+        }
+        ksort($groups, SORT_STRING);
+
+        $cohorts = [];
+        foreach ($groups as $key => $assetIds) {
+            usort($assetIds, static fn (string $left, string $right): int => $collator->compare($left, $right));
+            [$surface, $locale] = explode('|', $key, 2);
+            foreach (array_chunk($assetIds, 25) as $index => $cohortAssetIds) {
+                $surfaceKey = trim((string) preg_replace('/[^a-z0-9]+/', '_', strtolower($surface)), '_');
+                $localeKey = trim((string) preg_replace('/[^a-z0-9]+/', '_', strtolower($locale)), '_');
+                $cohorts[] = [
+                    'cohort_id' => $surfaceKey.'_'.$localeKey.'_'.str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT),
+                    'authority_surface' => $surface,
+                    'locale' => $locale,
+                    'asset_count' => count($cohortAssetIds),
+                    'asset_ids' => $cohortAssetIds,
+                    'cohort_sha256' => hash('sha256', json_encode($cohortAssetIds, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)),
+                    'abort_on_any_mismatch' => true,
+                ];
+            }
+        }
+
+        return $cohorts;
     }
 
     /** @return array{0:array<string,mixed>,1:string} */

@@ -617,6 +617,48 @@ final class BigFiveAuthorityV247Test extends TestCase
         }
     }
 
+    public function test_package_only_rejects_repartitioned_cohorts_with_regenerated_artifact_locks(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        $firstAssetId = $review['cohorts'][0]['asset_ids'][0];
+        $secondAssetId = $review['cohorts'][1]['asset_ids'][0];
+        $review['cohorts'][0]['asset_ids'][0] = $secondAssetId;
+        $review['cohorts'][1]['asset_ids'][0] = $firstAssetId;
+        foreach ([0, 1] as $index) {
+            $review['cohorts'][$index]['cohort_sha256'] = hash('sha256', json_encode($review['cohorts'][$index]['asset_ids'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        }
+        foreach ($review['rows'] as &$row) {
+            if ($row['asset_id'] === $firstAssetId) {
+                $row['promotion']['cohort_id'] = $review['cohorts'][1]['cohort_id'];
+            } elseif ($row['asset_id'] === $secondAssetId) {
+                $row['promotion']['cohort_id'] = $review['cohorts'][0]['cohort_id'];
+            }
+        }
+        unset($row);
+        [$reviewPath, $reviewSha] = $this->writeTemporaryJson('pr47-review-repartitioned-cohorts.json', $review);
+
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['review_manifest_sha256'] = $reviewSha;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-repartitioned-cohorts.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['review_manifest_sha256'] = $reviewSha;
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        foreach ([0, 1] as $index) {
+            $authorization['cohorts'][$index]['cohort_sha256'] = $review['cohorts'][$index]['cohort_sha256'];
+        }
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-repartitioned-cohorts.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly($reviewPath, $authorizationPath, $rollbackPath);
+            $this->fail('Expected deterministic cohort repartitioning to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('exact cohort identity contract mismatch', $exception->getMessage());
+        } finally {
+            File::delete([$reviewPath, $rollbackPath, $authorizationPath]);
+        }
+    }
+
     public function test_package_only_rejects_review_state_drift_even_when_artifact_locks_are_regenerated(): void
     {
         $review = $this->readJson(self::REVIEW);
