@@ -431,6 +431,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Treats your anxiety',
             'Hiring fit',
             'Hiring suitability',
+            'Diagnostic tool',
+            'Hiring screen',
             'Job suitability guarantee',
             '诊断你的性格',
             '治愈你的焦虑',
@@ -497,6 +499,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '本页不是医疗诊断。',
             '本页不是岗位适配保证。',
             'This page is not a hiring suitability assessment.',
+            'This page is not a diagnostic tool.',
+            'This page is not a hiring screen.',
             '本页不是岗位胜任力测评。',
         ] as $limitation) {
             $candidate = $this->candidate();
