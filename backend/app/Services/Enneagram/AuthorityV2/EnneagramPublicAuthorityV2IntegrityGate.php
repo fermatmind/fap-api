@@ -341,7 +341,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const DETERMINISTIC_RECOMMENDATION_PATTERN = '/(?:precise\s+career\s+recommendation|best\s+career\s+for\s+you|perfect\s+job\s+match|complete\s+personalized\s+career\s+recommender|(?:riasec|enneagram|mbti|big\s+five)\s+(?:ranks?|determines?)\s+(?:your\s+)?(?:best\s+)?(?:career|job|income|identity|ability|future)|determines?\s+(?:your\s+)?(?:income|career|job|identity|ability|future)|(?:salary|career|hiring|job|relationship|income|outcome)[\s-]+guarantee|精准职业推荐|最适合(?:你(?:的)?|您(?:的)?|其)?职业|完美(?:工作|职业)匹配|决定(?:你(?:的)?|您(?:的)?|其)?(?:收入|职业|工作|身份|能力|未来)|(?:薪资|职业|录用|工作|关系|收入|结果)保证|(?:big\s*five|riasec|mbti|九型人格)\s*(?:职业)?(?:精准匹配|推荐职业))/iu';
 
-    private const HUMAN_REVIEW_RELEASE_PATTERN = '/(?:\b(?:human|expert|editorially)[\s-]+reviewed\b|\breviewed\s+by\s+[\p{L}][\p{L}\p{M}.\'-]*(?:\s+[\p{L}][\p{L}\p{M}.\'-]*){0,3}|\b(?:human|expert|editorial|manual)[\s-]+review\s+(?:(?:(?:has|had)\s+(?:been\s+)?)|(?:is|was|were)\s+)?(?:completed|approved|passed|cleared)\b|\bcompleted\s+(?:human|expert|editorial|manual)[\s-]+review\b|\b(?:approved|cleared|eligible|ready)\s+for\s+(?:publication|publishing|release|indexing|indexation)\b|\bpublication[\s-]+approved\b|(?:人工|专家|编辑)审核(?:已)?(?:通过|完成|批准)|已由[^。！？\n]{0,30}(?:人工|专家|编辑)审核|已获(?:发布|上线|收录)(?:批准|许可)|(?:发布|上线|收录)(?:获批|已批准|就绪))/iu';
+    private const HUMAN_REVIEW_RELEASE_PATTERN = '/(?:\b(?:human|expert|editorially)[\s-]+reviewed\b|\breviewed\s+by\s+[\p{L}][\p{L}\p{M}.\'-]*(?:\s+[\p{L}][\p{L}\p{M}.\'-]*){0,3}|\b(?:human|expert|editorial|manual)[\s-]+review\s+(?:(?:(?:has|had)\s+(?:been\s+)?)|(?:is|was|were)\s+)?(?:completed|approved|passed|cleared)\b|\bcompleted\s+(?:human|expert|editorial|manual)[\s-]+review\b|\b(?:approved|cleared|eligible|ready)\s+for\s+(?:publication|publishing|release|indexing|indexation)\b|\b(?:ready\s+to\s+(?:publish|release|index)|published|indexable|(?:publication|publishing|release|indexing|indexation)[\s-]+ready)\b|\bpublication[\s-]+approved\b|(?:人工|专家|编辑)审核(?:已)?(?:通过|完成|批准)|已由[^。！？\n]{0,30}(?:人工|专家|编辑)审核|已获(?:发布|上线|收录)(?:批准|许可)|(?:已发布|可收录|发布就绪)|(?:发布|上线|收录)(?:获批|已批准|就绪))/iu';
 
     private const BARE_MEDICAL_CLAIM_PATTERN = '/(?:\bdiagnos(?:is|es)\b|\btreatment\b|\bcure\b|诊断|确诊|治疗|治愈)/iu';
 
@@ -980,7 +980,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         }
 
         $englishNegative = '(?:\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bcan(?:not|[\'’]t)|\b(?:does|did|is|are|was|were|could|will|would|should|must|may|might)n[\'’]t|\bnever)';
-        $directBridge = '(?:\s+(?:an?|the))?\s*';
+        $directBridge = '(?:\s+yet)?(?:\s+(?:an?|the))?\s*';
         $roleBridge = '\s+(?:(?:be\s+)?(?:used|treated|presented|described)|serve|function)\s+as(?:\s+(?:an?|the))?\s*';
         $claimBridge = '\s+(?:as|provide|offer)(?:\s+(?:an?|the))?\s*';
         $boundedEnglishScope = '(?!\s+(?:only|merely|just|simply|solely|exactly|necessarily)\b)(?:(?!\b(?:and|also|plus|additionally|furthermore|moreover|then|while|whereas|but|however|yet|before|after|because|although|though|unless|until|if|when|where|which|who|whose|that|so)\b|,\s*(?:it|this|that|the\s+page|we|you|they|he|she|there)\b|[.!?;:\n]).){0,100}';
