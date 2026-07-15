@@ -56057,6 +56057,12 @@
           "from": "github_checks_pending_final_head",
           "note": "Addressed the latest two Codex P2 findings by accepting canonical model_hub Authority V2 asset ids while rejecting traversal shapes, and by scanning all reader text for affirmative diagnostic claims. Focused contract tests passed 12/72, touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181314 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
           "to": "github_checks_pending_authority_diagnostic_fix"
+        },
+        {
+          "at": "2026-07-15T21:08:04Z",
+          "from": "github_checks_pending_authority_diagnostic_fix",
+          "note": "Locked commit_sha to functional head 8a1580aaa52851f5ec43719cdc69cfb6e8d2b0fe; later commits are PR-train bookkeeping only. Exact-head GitHub checks and Codex review remain pending.",
+          "to": "github_checks_pending_final_bookkeeping"
         }
       ]
     },
