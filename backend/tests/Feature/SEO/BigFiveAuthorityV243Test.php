@@ -85,6 +85,16 @@ final class BigFiveAuthorityV243Test extends TestCase
         $this->assertTrue($projection['eligibility']['promotion_eligible']);
         $this->assertSame([], $projection['eligibility']['blocked_reasons']);
 
+        $metadata = $this->metadata('published');
+        data_set($metadata, 'visible_provenance.author.authority_ref', 'revision-author:');
+        $revision->authority_metadata_json = $metadata;
+        $this->assertNull($this->projector->forArticle($article, $revision)['visible_provenance']['author']);
+        $metadata = $this->metadata('published');
+        data_set($metadata, 'visible_provenance.reviewer.authority_ref', 'review-ledger:');
+        $revision->authority_metadata_json = $metadata;
+        $this->assertNull($this->projector->forArticle($article, $revision)['visible_provenance']['reviewer']);
+        $revision->authority_metadata_json = $this->metadata('published');
+
         $revision->published_at = null;
         $nullPublishedAt = $this->projector->forArticle($article, $revision);
         $this->assertSame('admin_user:41', $nullPublishedAt['visible_provenance']['author']['identity']);
@@ -135,7 +145,7 @@ final class BigFiveAuthorityV243Test extends TestCase
                 ],
             ],
         ]);
-        $asset->forceFill(['id' => 20]);
+        $asset->forceFill(['id' => 20, 'created_by_admin_user_id' => 41]);
 
         $projection = $this->projector->forPersonalityAsset($asset);
 
@@ -169,6 +179,17 @@ final class BigFiveAuthorityV243Test extends TestCase
         $selfAttestedSource = $this->projector->forPersonalityAsset($asset);
         $this->assertSame([], $selfAttestedSource['visible_provenance']['sources']);
         $this->assertFalse($selfAttestedSource['eligibility']['promotion_eligible']);
+
+        foreach ([
+            [0, 'source-ledger:academic:'],
+            [1, 'policy:'],
+            [2, 'product-contract:'],
+        ] as [$sourceIndex, $emptyAuthorityRef]) {
+            $metadata = $this->metadata('approved');
+            data_set($metadata, 'visible_provenance.sources.'.$sourceIndex.'.authority_ref', $emptyAuthorityRef);
+            $asset->authority_json = $metadata;
+            $this->assertSame([], $this->projector->forPersonalityAsset($asset)['visible_provenance']['sources']);
+        }
     }
 
     public function test_personality_topic_and_landing_reuse_metadata_but_drafts_expose_nothing(): void
@@ -179,7 +200,7 @@ final class BigFiveAuthorityV243Test extends TestCase
             'review_state' => 'approved', 'is_public' => true,
             'last_reviewed_at' => '2026-07-10T00:00:00Z', 'authority_json' => $this->metadata('approved'),
         ]);
-        $asset->forceFill(['id' => 30]);
+        $asset->forceFill(['id' => 30, 'created_by_admin_user_id' => 41]);
         $topic = new TopicProfile([
             'slug' => 'big-five', 'locale' => 'en', 'status' => TopicProfile::STATUS_PUBLISHED, 'is_public' => true,
             'published_revision_id' => 401,
@@ -197,21 +218,29 @@ final class BigFiveAuthorityV243Test extends TestCase
         ]);
         $landing->forceFill(['id' => 50]);
 
-        foreach ([
-            $this->projector->forPersonalityAsset($asset),
-            $this->projector->forTopic($topic, $revision),
-            $this->projector->forLandingSurface($landing),
-        ] as $projection) {
-            $this->assertTrue($projection['eligibility']['promotion_eligible']);
-            $this->assertCount(3, $projection['visible_provenance']['sources']);
-        }
+        $assetProjection = $this->projector->forPersonalityAsset($asset);
+        $this->assertSame('admin_user:41', $assetProjection['visible_provenance']['author']['identity']);
+        $this->assertNull($assetProjection['visible_provenance']['reviewer']);
+        $this->assertFalse($assetProjection['eligibility']['promotion_eligible']);
+        $this->assertCount(3, $assetProjection['visible_provenance']['sources']);
+
+        $topicProjection = $this->projector->forTopic($topic, $revision);
+        $this->assertTrue($topicProjection['eligibility']['promotion_eligible']);
+        $this->assertCount(3, $topicProjection['visible_provenance']['sources']);
+
+        $landingProjection = $this->projector->forLandingSurface($landing);
+        $this->assertNull($landingProjection['visible_provenance']['reviewer']);
+        $this->assertFalse($landingProjection['eligibility']['promotion_eligible']);
+        $this->assertCount(3, $landingProjection['visible_provenance']['sources']);
 
         $asset->launch_state = PersonalityPublicContentAsset::LAUNCH_CONTENT_READY;
-        $this->assertTrue($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
+        $this->assertFalse($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
         foreach (['operator_approved_content_ready', 'seo_discoverability_released'] as $releaseReviewState) {
             $asset->review_state = $releaseReviewState;
             $asset->authority_json = $this->metadata($releaseReviewState);
-            $this->assertTrue($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
+            $releaseProjection = $this->projector->forPersonalityAsset($asset);
+            $this->assertNull($releaseProjection['visible_provenance']['reviewer']);
+            $this->assertFalse($releaseProjection['eligibility']['promotion_eligible']);
         }
         $asset->published_at = now()->addDay();
         $this->assertFalse($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);

@@ -111,19 +111,19 @@ final class BigFiveVisibleProvenanceProjector
             ], true)
             && $this->publicationIsNullOrEffective($asset->published_at);
         $metadata = is_array($asset->authority_json) ? $asset->authority_json : [];
-        $reviewer = $public ? $this->reviewer(data_get($metadata, 'visible_provenance.reviewer')) : null;
-        if ($reviewer !== null && (
-            $reviewer['review_state'] !== strtolower(trim((string) $asset->review_state))
-            || $reviewer['reviewed_at'] !== $this->normalizeDate($asset->last_reviewed_at)
+        $author = $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null;
+        if ($author !== null && (
+            $asset->created_by_admin_user_id === null
+            || $author['identity'] !== 'admin_user:'.(int) $asset->created_by_admin_user_id
         )) {
-            $reviewer = null;
+            $author = null;
         }
 
         return $this->project(
             'PersonalityPublicContentAsset',
             'personality_public_content_asset:'.(int) $asset->id.':'.(string) $asset->locale.':'.(string) $asset->slug,
-            $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null,
-            $reviewer,
+            $author,
+            null,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $asset->is_public,
         );
@@ -171,7 +171,7 @@ final class BigFiveVisibleProvenanceProjector
             'LandingSurface',
             'landing_surface:'.(int) $surface->id.':'.(string) $surface->locale.':'.(string) $surface->surface_key,
             $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null,
-            $public ? $this->reviewer(data_get($metadata, 'visible_provenance.reviewer')) : null,
+            null,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $surface->is_public,
         );
@@ -259,8 +259,10 @@ final class BigFiveVisibleProvenanceProjector
         $actor = $this->actor($value, self::AUTHOR_ROLES);
         if ($actor === null
             || preg_match('/\Aadmin_user:[1-9][0-9]*\z/', $actor['identity']) !== 1
-            || (! str_starts_with($actor['authority_ref'], 'revision-author:')
-                && ! str_starts_with($actor['authority_ref'], 'author-ledger:'))) {
+            || ! $this->authorityRefHasIdentifier($actor['authority_ref'], [
+                'revision-author:',
+                'author-ledger:',
+            ])) {
             return null;
         }
 
@@ -275,7 +277,7 @@ final class BigFiveVisibleProvenanceProjector
             return null;
         }
         if (preg_match('/\Aadmin_user:[1-9][0-9]*\z/', $actor['identity']) !== 1
-            || ! str_starts_with($actor['authority_ref'], 'review-ledger:')) {
+            || ! $this->authorityRefHasIdentifier($actor['authority_ref'], ['review-ledger:'])) {
             return null;
         }
         $reviewedAt = $this->normalizeDate($value['reviewed_at'] ?? null);
@@ -318,12 +320,27 @@ final class BigFiveVisibleProvenanceProjector
 
     private function sourceAuthorityRefIsValid(string $category, string $authorityRef): bool
     {
-        return match ($category) {
-            'academic_evidence' => str_starts_with($authorityRef, 'source-ledger:academic:'),
-            'internal_policy' => str_starts_with($authorityRef, 'policy:'),
-            'product_authority' => str_starts_with($authorityRef, 'product-contract:'),
-            default => false,
+        $prefix = match ($category) {
+            'academic_evidence' => 'source-ledger:academic:',
+            'internal_policy' => 'policy:',
+            'product_authority' => 'product-contract:',
+            default => null,
         };
+
+        return $prefix !== null && $this->authorityRefHasIdentifier($authorityRef, [$prefix]);
+    }
+
+    /** @param list<string> $prefixes */
+    private function authorityRefHasIdentifier(string $authorityRef, array $prefixes): bool
+    {
+        foreach ($prefixes as $prefix) {
+            if (str_starts_with($authorityRef, $prefix)
+                && trim(substr($authorityRef, strlen($prefix))) !== '') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function normalizeDate(mixed $value): ?string

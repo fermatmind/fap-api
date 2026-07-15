@@ -213,7 +213,7 @@ prs:
     branch: codex/big5-authority-v2-visible-provenance-43
     depends_on: [BIG5-AUTHORITY-V2-VISIBLE-DATE-42]
     train_scope: big5_authority_v2_visible_author_reviewer_source_provenance
-    status: ready_to_merge
+    status: github_checks_retry_pending
     goal: "Lock the exact 11 visible author/reviewer/source failures; project author, human-reviewer, and source authority separately; require reviewer identity, label, role, reviewed_at, review state, and authority reference; fail closed without fabricating reviewers or overwriting existing published content."
     allowed_paths:
       - backend/app/Services/BigFive/AuthorityV2/VisibleProvenance/**
