@@ -92366,8 +92366,8 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "9ec7fe4a7106b3c3bef679ec5d146cdd8aaf2882",
+    "status": "merged",
+    "commit_sha": "cc550dd4c35c73820583f6029145f99fdab3a644",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
       "manifest_registration": {
@@ -92395,12 +92395,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T02:57:39Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -92497,9 +92497,19 @@
         "at": "2026-07-15T02:51:22Z",
         "status": "ready_to_merge",
         "note": "Integrated origin/main ae7dfe5af2ce64ad6795942e18657b960bf159b1 while preserving the merged Big Five PR41 ledger and manifest entries. Head 9ec7fe4a7106b3c3bef679ec5d146cdd8aaf2882 passed all nine required checks; GitHub is CLEAN, all review threads are resolved, and the PR diff remains exactly seven allowed paths."
+      },
+      {
+        "at": "2026-07-15T02:57:39Z",
+        "status": "merged",
+        "note": "GitHub reports PR #3096 MERGED with squash commit cc550dd4c35c73820583f6029145f99fdab3a644, and origin/main contains the merge commit."
+      },
+      {
+        "at": "2026-07-15T03:01:20Z",
+        "status": "post_merge_revalidated",
+        "note": "Remote branch deletion was verified, the local PR01 branch was deleted, the dedicated worktree was detached at latest origin/main because main is owned by another worktree, and the focused benchmark suite passed post-merge with 6 tests / 3264 assertions."
       }
     ],
-    "updated_at": "2026-07-15T02:51:22Z"
+    "updated_at": "2026-07-15T03:01:20Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
@@ -92510,18 +92520,22 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR #3096 is MERGED with squash commit cc550dd4c35c73820583f6029145f99fdab3a644; origin/main contains it, both predecessor branches are deleted, and the focused post-merge suite passed 6 tests / 3264 assertions."
+      },
+      "required_local_checks": {
+        "status": "pass",
+        "evidence": "PHP 8.4 syntax passed for all three PHP files; focused PHPUnit passed 6 tests / 59 assertions; scoped Pint, strict Composer validation, command discovery and JSON smoke, YAML/JSON parsing, git diff --check, and exact five-path scope validation passed."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -92540,9 +92554,19 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T03:08:51Z",
+        "status": "in_progress",
+        "note": "Verified PR01 merged and origin/main containment, reconciled its merge and cleanup facts, then created the exact PR02 branch from cc550dd4c35c73820583f6029145f99fdab3a644. Implementing only the deterministic zero-write 116-page integrity and QA-truth gate."
+      },
+      {
+        "at": "2026-07-15T03:10:36Z",
+        "status": "local_checks_passed",
+        "note": "The 116-row gate and fail-closed negative cases passed 6 focused tests / 59 assertions. PHP lint, scoped Pint, strict Composer validation, command discovery and JSON smoke, YAML/JSON parsing, diff check, and the exact five-path allowlist passed; all production/CMS/database/index/search side-effect flags remain false."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T03:10:36Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04",
