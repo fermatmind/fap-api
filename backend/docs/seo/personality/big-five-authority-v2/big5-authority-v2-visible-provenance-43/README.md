@@ -10,7 +10,7 @@ This package locks the 11 Big Five public-page candidates with a visible author,
 - Missing or fabricated reviewer evidence blocks promotion and visible-reviewer eligibility. The projector is read-only and never removes or overwrites existing published content.
 - Article provenance is eligible only from the live `published_revision_id`, matching tenant and locale, an effective publication timestamp, and a public non-archived Article. Stale, future, foreign, archived, and soft-deleted revisions expose no provenance. Topic provenance is read from the canonical `snapshot_json.profile` payload of its current published revision.
 - Personality assets mirror the backend public-read gate: `content_ready` or `published`, public, and not scheduled for the future. Published Topics likewise require a null-or-effective `published_at`.
-- Sources are explicitly classified as `academic_evidence`, `internal_policy`, or `product_authority`. Existing source-ledger aliases are normalized into those public categories.
+- Sources are explicitly classified as `academic_evidence`, `internal_policy`, or `product_authority`. Existing source-ledger aliases are normalized into those public categories, and authority references must use the matching `source-ledger:academic:`, `policy:`, or `product-contract:` namespace; self-attested or generated references fail closed.
 - Labels implying institutional certification, expert endorsement, clinical review, medical authority, or an official partnership fail closed.
 
 The contract covers `Article`, `PersonalityPublicContentAsset`, `TopicProfile`, and `LandingSurface`. It is not wired into public controllers in this PR; later promotion work must provide real CMS/revision authority before release.

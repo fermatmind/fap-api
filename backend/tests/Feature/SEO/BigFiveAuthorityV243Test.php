@@ -156,6 +156,13 @@ final class BigFiveAuthorityV243Test extends TestCase
         $generatedAuthor = $this->projector->forPersonalityAsset($asset);
         $this->assertNull($generatedAuthor['visible_provenance']['author']);
         $this->assertFalse($generatedAuthor['eligibility']['promotion_eligible']);
+
+        $metadata = $this->metadata('approved');
+        data_set($metadata, 'visible_provenance.sources.0.authority_ref', 'self-attested');
+        $asset->authority_json = $metadata;
+        $selfAttestedSource = $this->projector->forPersonalityAsset($asset);
+        $this->assertSame([], $selfAttestedSource['visible_provenance']['sources']);
+        $this->assertFalse($selfAttestedSource['eligibility']['promotion_eligible']);
     }
 
     public function test_personality_topic_and_landing_reuse_metadata_but_drafts_expose_nothing(): void

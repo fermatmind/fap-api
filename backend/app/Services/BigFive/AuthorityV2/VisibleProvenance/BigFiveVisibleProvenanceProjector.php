@@ -298,13 +298,25 @@ final class BigFiveVisibleProvenanceProjector
                 'category' => self::SOURCE_CATEGORY_MAP[$inputCategory] ?? '',
                 'authority_ref' => trim((string) ($source['authority_ref'] ?? '')),
             ];
-            if (in_array('', $entry, true) || $this->hasEndorsementClaim($entry['label'])) {
+            if (in_array('', $entry, true)
+                || ! $this->sourceAuthorityRefIsValid($entry['category'], $entry['authority_ref'])
+                || $this->hasEndorsementClaim($entry['label'])) {
                 return [];
             }
             $sources[] = $entry;
         }
 
         return $sources;
+    }
+
+    private function sourceAuthorityRefIsValid(string $category, string $authorityRef): bool
+    {
+        return match ($category) {
+            'academic_evidence' => str_starts_with($authorityRef, 'source-ledger:academic:'),
+            'internal_policy' => str_starts_with($authorityRef, 'policy:'),
+            'product_authority' => str_starts_with($authorityRef, 'product-contract:'),
+            default => false,
+        };
     }
 
     private function normalizeDate(mixed $value): ?string
