@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
@@ -414,6 +415,77 @@ final class BigFiveAuthorityV247Test extends TestCase
             $this->assertIsArray($observed);
             $this->assertFalse($observed['primary_publicly_readable']);
         }
+    }
+
+    public function test_article_runtime_baseline_changes_when_published_revision_content_changes_in_place(): void
+    {
+        $row = collect($this->readJson(self::REVIEW)['rows'])
+            ->firstWhere('asset_id', 'article:en:/en/articles/big-five-personality-test-vs-mbti');
+        $this->assertIsArray($row);
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'translation_group_id' => 'article:big-five-personality-test-vs-mbti',
+            'title' => 'Big Five vs MBTI',
+            'excerpt' => 'Published excerpt.',
+            'content_md' => '# Legacy primary body',
+            'status' => 'published',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subDay(),
+        ]);
+        $publishedRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => 'article:big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => 'Reviewed public title',
+            'excerpt' => 'Reviewed public excerpt.',
+            'content_md' => '# Reviewed public body',
+            'seo_title' => 'Reviewed SEO title',
+            'seo_description' => 'Reviewed SEO description.',
+            'published_at' => now()->subDay(),
+        ]);
+        $workingRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => 'article:big-five-personality-test-vs-mbti',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 2,
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'authority_asset_key' => $row['asset_id'],
+            'authority_source_hash' => $row['source_hash'],
+            'authority_package_sha256' => $row['authority_package_sha256'],
+            'title' => 'Reviewed working title',
+            'excerpt' => 'Reviewed working excerpt.',
+            'content_md' => '# Reviewed working body',
+        ]);
+        $article->forceFill([
+            'published_revision_id' => (int) $publishedRevision->id,
+            'working_revision_id' => (int) $workingRevision->id,
+        ])->save();
+
+        $before = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $beforeBaseline = collect($before['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) $beforeBaseline);
+
+        $publishedRevision->forceFill(['content_md' => '# Mutated public body'])->save();
+
+        $after = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterBaseline = collect($after['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) $afterBaseline);
+        $this->assertNotSame($beforeBaseline, $afterBaseline);
+        $this->assertNotSame($before['promotion_preflight_fingerprint'], $after['promotion_preflight_fingerprint']);
     }
 
     public function test_database_preflight_rejects_future_scheduled_topic_identity_that_public_reader_hides(): void

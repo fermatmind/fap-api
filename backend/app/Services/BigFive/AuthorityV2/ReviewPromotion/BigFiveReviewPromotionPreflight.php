@@ -309,6 +309,7 @@ final class BigFiveReviewPromotionPreflight
             $published = $record->getAttribute('published_revision_id');
             $primaryPubliclyReadable = $this->primaryPubliclyReadable($record);
             $databaseReads++;
+            $databaseReads += $record instanceof Article && $published !== null ? 1 : 0;
             $primaryRecordLive = ! $record instanceof Article || (! $record->trashed()
                 && ! in_array($record->getAttribute('lifecycle_state'), [
                     Article::LIFECYCLE_ARCHIVED,
@@ -555,7 +556,23 @@ final class BigFiveReviewPromotionPreflight
         unset($attributes['working_revision_id']);
         ksort($attributes);
 
-        return $this->fingerprint($attributes);
+        if (! $record instanceof Article) {
+            return $this->fingerprint($attributes);
+        }
+
+        $publishedRevisionId = $record->getAttribute('published_revision_id');
+        $publishedRevision = $publishedRevisionId === null
+            ? null
+            : ArticleTranslationRevision::query()->withoutGlobalScopes()->find($publishedRevisionId);
+        $publishedRevisionAttributes = $publishedRevision?->getAttributes();
+        if (is_array($publishedRevisionAttributes)) {
+            ksort($publishedRevisionAttributes);
+        }
+
+        return $this->fingerprint([
+            'primary' => $attributes,
+            'published_revision' => $publishedRevisionAttributes,
+        ]);
     }
 
     /** @return array{review:array<string,mixed>,authorization:array<string,mixed>,rollback:array<string,mixed>,review_sha256:string,rollback_sha256:string} */
