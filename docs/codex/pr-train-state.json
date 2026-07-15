@@ -92366,8 +92366,8 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "sixth_review_fix_local_verified",
-    "commit_sha": "2ee8e5da9c880fb3baa1853a19826153e9c79b93",
+    "status": "ready_to_merge",
+    "commit_sha": "9ec7fe4a7106b3c3bef679ec5d146cdd8aaf2882",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
       "manifest_registration": {
@@ -92387,14 +92387,14 @@
         "evidence": "PHP 8.4 executable manifest lint command passed; focused benchmark PHPUnit passed 6 tests / 3264 assertions; executable scoped Pint command and composer validate --strict passed; JSON/YAML parsing, frozen SHA256 checks, git diff --check, and exact seven-path allowlist validation passed."
       },
       "github_required_checks": {
-        "status": "rerun_required",
-        "evidence": "All nine checks passed on pre-sixth-review-fix head 2ee8e5da9c880fb3baa1853a19826153e9c79b93. The PR02/PR08 diff-scoped PHP validation fix and latest origin/main integration head must rerun every required check before merge."
+        "status": "pass",
+        "evidence": "All nine required checks passed on sixth-review-fix plus latest-origin/main integration head 9ec7fe4a7106b3c3bef679ec5d146cdd8aaf2882; all review threads are resolved and GitHub reports CLEAN."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -92492,9 +92492,14 @@
         "at": "2026-07-15T02:43:11Z",
         "status": "sixth_review_fix_local_verified",
         "note": "PR02 and PR08 now run executable diff-scoped PHP lint and Pint across every allowed touched PHP service, command, and test file. Focused PHPUnit passes 6 tests / 3264 assertions; Pint, YAML, and diff checks pass. Latest origin/main integration remains required before merge."
+      },
+      {
+        "at": "2026-07-15T02:51:22Z",
+        "status": "ready_to_merge",
+        "note": "Integrated origin/main ae7dfe5af2ce64ad6795942e18657b960bf159b1 while preserving the merged Big Five PR41 ledger and manifest entries. Head 9ec7fe4a7106b3c3bef679ec5d146cdd8aaf2882 passed all nine required checks; GitHub is CLEAN, all review threads are resolved, and the PR diff remains exactly seven allowed paths."
       }
     ],
-    "updated_at": "2026-07-15T02:43:11Z"
+    "updated_at": "2026-07-15T02:51:22Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
