@@ -92367,7 +92367,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-visible-date-42",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41"],
-    "status": "merged",
+    "status": "post_merge_pointer_repair_local_checks_passed",
     "commit_sha": "7cb885c1d30ec52d3e3eac60379036dbeacbc5e7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3099",
     "checks": {
@@ -92392,6 +92392,20 @@
       "reason": "Post-merge authority audit proved that the original projector could accept a stale or working revision and could project reviewed/updated dates for a non-public record. The repair requires current published-revision pointers, Article tenant/locale/effective-publication parity, and published/public eligibility for every visible field while preserving identity-matched audit-only lineage.",
       "production_write_execution": false
     },
+    "post_merge_pointer_repair": {
+      "branch": "codex/big5-visible-date-personality-pointer-repair",
+      "status": "local_checks_passed",
+      "commit_sha": null,
+      "github_head_sha": null,
+      "pr_url": null,
+      "github_checks": {"status": "pending", "evidence": "A fresh final-head GitHub run is required before this same-scope pointer repair may merge."},
+      "local_checks": {"status": "pass", "evidence": "The 82-finding validator passed at fixture SHA256 8a51048e6d47d9bc52254aa5db2e122daec7671090986b7641c3757cb4b229f3; PR42 focused Laravel passed 6 tests / 246 assertions; runtime freeze passed 2 tests / 5 assertions; Pint, PHP/JSON/YAML/JS syntax, git diff --check, and exact four-file scope passed. The complete bash backend/scripts/ci_verify_mbti.sh gate passed Big Five 1408 tests / 180881 assertions, Enneagram 10 / 369, and all downstream MBTI, personality, migration, security, OpenAPI, dependency, webhook/attempt, and queue-backlog gates. Known compiled timestamp/hash side effects were restored path-by-path after the successful run."},
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "reason": "A second same-scope audit proved that PersonalityPublicContentAsset computed revisionMatches but did not use it to gate parent visible dates, so an explicitly supplied stale or working revision could still expose published, reviewed, and updated dates. The repair binds visible projection to the current published_revision_id whenever a revision is supplied while preserving identity-matched revision_created_at as audit-only lineage.",
+      "production_write_execution": false
+    },
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "database_mutation": false,
@@ -92407,7 +92421,9 @@
       {"at": "2026-07-15T03:27:20Z", "from": "merged", "to": "post_merge_repair_in_progress", "note": "A same-scope authority audit identified missing current-published-pointer and public-record gating before the parallel merge completed. The exact three-file runtime/docs/test repair plus this ledger reconciliation passed the 82-finding validator, focused 6/244 contract, freeze 2/5, Pint, syntax, scope checks, and the full local CI gate; no production/CMS/database/deploy action occurred."},
       {"at": "2026-07-15T03:29:13Z", "from": "post_merge_repair_in_progress", "to": "post_merge_repair_github_checks_pending", "note": "Pushed implementation head dcf55c1540a5f4f727d834b79fbf48a7ad6f82c8 and opened the exact four-file same-scope repair PR #3101. Required GitHub checks must pass on the final ledger head before merge; no production/CMS/database/deploy action occurred."},
       {"at": "2026-07-15T03:35:56Z", "from": "post_merge_repair_github_checks_pending", "to": "post_merge_repair_ready_to_merge", "note": "Repair head a323763bbe3626b1b4ea15f9eeed3dbd56d78e27 passed all nine GitHub checks in CI run 29386659370 and Code Scanning run 29386659378. GitHub reports CLEAN merge state; the repair remains exactly four allowed files with no production/CMS/database/deploy action."},
-      {"at": "2026-07-15T03:43:37Z", "from": "post_merge_repair_ready_to_merge", "to": "merged", "note": "GitHub reports same-scope repair PR #3101 merged as a51e96378d15dd4fd88fc7e61ca38c2011f78f63 after final head dba1030c0a081a090df2608b19e4f33774cab90b passed all nine required checks."}
+      {"at": "2026-07-15T03:43:37Z", "from": "post_merge_repair_ready_to_merge", "to": "merged", "note": "GitHub reports same-scope repair PR #3101 merged as a51e96378d15dd4fd88fc7e61ca38c2011f78f63 after final head dba1030c0a081a090df2608b19e4f33774cab90b passed all nine required checks."},
+      {"at": "2026-07-15T06:31:41Z", "from": "merged", "to": "post_merge_pointer_repair_in_progress", "note": "A second same-scope audit identified a dead revisionMatches guard in Personality visible-date projection. This exact service, focused contract, package README, and ledger repair makes an explicitly supplied stale or working revision fail closed for all visible dates while retaining identity-matched audit-only lineage; no production, CMS, database, public-controller, indexability, or deploy action is allowed."},
+      {"at": "2026-07-15T06:41:53Z", "from": "post_merge_pointer_repair_in_progress", "to": "post_merge_pointer_repair_local_checks_passed", "note": "The exact four-file repair passed the frozen fixture validator, focused 6/246 contract, freeze 2/5, Pint, syntax, diff, scope, and the complete CI gate including Big Five 1408/180881 and downstream gates. Generated compile timestamp/hash side effects were restored; no production, CMS, database, public-controller, indexability, or deploy action occurred."}
     ]
   },
   "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43": {

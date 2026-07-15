@@ -241,7 +241,12 @@ final class BigFiveAuthorityV242Test extends TestCase
         $assetDraftRevision = (new PersonalityPublicContentAssetRevision(['asset_id' => 30]))
             ->forceFill(['id' => 32, 'created_at' => '2026-06-28T00:00:00Z']);
         $assetProjection = $this->projector->forPersonalityAsset($asset, $assetDraftRevision);
+        $this->assertSame(
+            ['published_at' => null, 'reviewed_at' => null, 'updated_at' => null],
+            $assetProjection['visible_dates'],
+        );
         $this->assertSame('2026-06-28T00:00:00+00:00', $assetProjection['audit_only_dates']['revision_created_at']);
+        $this->assertFalse($assetProjection['eligibility']['visible_date_eligible']);
 
         $topic = new TopicProfile([
             'slug' => 'big-five',

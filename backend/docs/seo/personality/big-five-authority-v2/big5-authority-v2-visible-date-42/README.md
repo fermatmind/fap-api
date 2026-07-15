@@ -11,6 +11,7 @@ This package closes the contract-design gap identified for 82 Big Five public-pa
 - A missing or mismatched authority date stays `null`; the corresponding eligibility flag is false and includes a machine-readable blocked reason.
 - Every visible field requires a currently published, public authority record; private, draft, archived, or soft-deleted records remain field-ineligible even when their timestamps or provenance metadata are populated.
 - A stale or working draft revision cannot supply visible date evidence or eligibility. Its identity-matched revision-created/import/build/deploy lineage may remain audit-only and can never be promoted to a visible field. Personality and Topic visible revision evidence must match the record's `published_revision_id`; Article follows the stricter public-read contract above.
+- When a Personality revision is supplied, parent visible dates project only when it is the asset's current `published_revision_id`; a working or stale revision leaves every visible field `null` while retaining identity-matched audit-only lineage.
 
 The projector covers `Article`, `PersonalityPublicContentAsset`, `TopicProfile`, and `LandingSurface`. It is deliberately not wired into public controllers in this PR: later gated promotion work must supply real CMS/revision authority before a visible date can be released.
 

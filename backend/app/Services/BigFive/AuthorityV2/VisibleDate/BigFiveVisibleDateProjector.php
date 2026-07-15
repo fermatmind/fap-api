@@ -90,26 +90,28 @@ final class BigFiveVisibleDateProjector
         $metadata = is_array($asset->authority_json) ? $asset->authority_json : [];
         $assetIsPublic = $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
             && (bool) $asset->is_public;
-        $published = $assetIsPublic
-            ? $this->directDate(
-                $asset->published_at,
-                'personality_public_content_assets.published_at',
-                'cms_publication',
-            )
-            : null;
-        $reviewed = $assetIsPublic && $this->isCompletedReviewState((string) $asset->review_state)
-            ? $this->directDate(
-                $asset->last_reviewed_at,
-                'personality_public_content_assets.last_reviewed_at',
-                'manual_review',
-            )
-            : null;
         $revisionBelongs = $revision instanceof PersonalityPublicContentAssetRevision
             && (int) $revision->asset_id === (int) $asset->id;
         $revisionMatches = $revisionBelongs
             && $asset->published_revision_id !== null
             && (int) $revision->id === (int) $asset->published_revision_id
             && $assetIsPublic;
+        $visibleAuthorityMatches = $assetIsPublic
+            && ($revision === null || $revisionMatches);
+        $published = $visibleAuthorityMatches
+            ? $this->directDate(
+                $asset->published_at,
+                'personality_public_content_assets.published_at',
+                'cms_publication',
+            )
+            : null;
+        $reviewed = $visibleAuthorityMatches && $this->isCompletedReviewState((string) $asset->review_state)
+            ? $this->directDate(
+                $asset->last_reviewed_at,
+                'personality_public_content_assets.last_reviewed_at',
+                'manual_review',
+            )
+            : null;
 
         return $this->project(
             authoritySurface: 'PersonalityPublicContentAsset',
@@ -117,7 +119,7 @@ final class BigFiveVisibleDateProjector
             published: $published,
             reviewed: $reviewed,
             updated: $this->metadataDate(
-                $assetIsPublic ? $metadata : [],
+                $visibleAuthorityMatches ? $metadata : [],
                 'updated_at',
                 'editorial_update',
                 $asset->updated_at,
