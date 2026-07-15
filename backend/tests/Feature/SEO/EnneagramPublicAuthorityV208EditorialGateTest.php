@@ -203,6 +203,20 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_english_spelled_type_numbers_are_normalized_for_template_detection(): void
+    {
+        $candidate = $this->candidate();
+        $typeOne = $this->localePairIndexes($candidate, 'core_type:type-1')['en'];
+        $typeTwo = $this->localePairIndexes($candidate, 'core_type:type-2')['en'];
+        $candidate['assets'][$typeOne]['sections'][0]['body'] = 'Type One in this regression paragraph records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
+        $candidate['assets'][$typeTwo]['sections'][0]['body'] = 'Type Two in this regression paragraph records which information drew attention first, which option was delayed, and which action another person could observe, then separates inferred motive from visible behavior and tests role, culture, fatigue, and current demands as alternative explanations.';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
+    }
+
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void
     {
         $exit = Artisan::call('personality:enneagram-authority-v2-integrity-gate', [

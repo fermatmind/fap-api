@@ -753,7 +753,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 }
                 $paragraphs[$normalized] = ['key' => $key, 'path' => "{$path}.text.{$index}"];
 
-                $template = preg_replace('/(?:type[1-9]|[1-9]w[1-9]|(?:sp|so|sx)[-_]?[1-9]|第?(?:[1-9]|[一二三四五六七八九])型)/iu', '{type}', $normalized) ?? $normalized;
+                $template = preg_replace('/(?:type(?:[1-9]|one|two|three|four|five|six|seven|eight|nine)|[1-9]w[1-9]|(?:sp|so|sx)[-_]?[1-9]|第?(?:[1-9]|[一二三四五六七八九])型)/iu', '{type}', $normalized) ?? $normalized;
                 if (isset($typeTemplates[$template])) {
                     $add(self::EDITORIAL_GATES[3], 'type_number_substitution_template', $key, "{$path}.text.{$index}", "Text differs from {$typeTemplates[$template]['path']} only by a type label or number.");
                 }
