@@ -1105,7 +1105,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             return false;
         }
 
-        $englishNegative = '(?:\b(?:do|does|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bcan(?:not|[\'’]t)|\b(?:does|did|is|are|was|were|could|will|would|should|must|may|might)n[\'’]t|\bnever)';
+        $englishNegative = '(?:\b(?:do|does|did|is|are|was|were|has|have|had|can|could|will|would|should|must|may|might)\s+not|\bcan(?:not|[\'’]t)|\b(?:does|did|is|are|was|were|has|have|had|could|will|would|should|must|may|might)n[\'’]t|\bnever)';
         $causalEnglishClause = '/'.$englishNegative.'.*\bas\s+(?:it|this|that|we|you|they|he|she|there|the\s+(?:page|guide|asset|content))\b[^.!?;:\n]*$/iu';
         if (preg_match($causalEnglishClause, $prefix) === 1) {
             return false;
