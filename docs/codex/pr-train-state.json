@@ -92596,15 +92596,15 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-review-promotion-gate-47",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41", "BIG5-AUTHORITY-V2-VISIBLE-DATE-42", "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43", "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44", "BIG5-AUTHORITY-V2-STRUCTURED-DATA-45", "BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46"],
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3114",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR47 id, title, branch, dependency chain, 229-revision plus two-shell acceptance contract, serial lifecycle, and explicit no-production-promotion boundary."},
       "dependency": {"status": "pass", "evidence": "GitHub reports PR41 #3098, PR42 #3099, PR43 #3102, PR44 #3105, PR45 #3110, and PR46 #3113 all MERGED; origin/main 2a13cae76a68263db2849fcd8eb5118f346969f9 contains every recorded merge commit."},
       "preflight": {"status": "pass", "evidence": "Started codex/big5-authority-v2-review-promotion-gate-47 from exact clean latest main 2a13cae76a68263db2849fcd8eb5118f346969f9 after fetch/pull, dependency containment checks, and confirming no same-name local or remote branch. Existing PR37 collision-safe authority locks 231 identities as 106 primary creates, 125 existing identities, 229 revision-managed assets, and two landing product shells; PR41 remains fail closed with zero approved media groups, so checked-in PR47 review/authorization artifacts must remain entirely pending and non-executable."},
       "local": {"status": "pass", "evidence": "Deterministic builder and validator passed with review manifest SHA256 54eaf64151a0a41e6a2feaa12ca2be607842e893243f6ee75f6ff78bb7ec096a: exactly 231 assets, 229 revision-managed assets, two preserved product shells, 106 primary creates, 125 existing identities, 16 exact cohorts, zero authorizations, and zero writes. Focused PR47 PHPUnit passed 6 tests / 44 assertions; package-only CLI returned HOLD_FAIL_CLOSED_PENDING_REVIEW_AND_AUTHORIZATION with every action zero; runtime freeze passed 2 tests / 5 assertions; scoped Pint, PHP/JS/JSON/YAML syntax, git diff --check, and exact 14-path scope validation passed. The guarded full bash backend/scripts/ci_verify_mbti.sh suite exited 0, including Big Five, personality full-32 (71 tests / 5371 assertions), migration safety, auth, OpenAPI, order-security, dependency-security, webhook/attempt, and remaining repository gates."},
-      "github": {"status": "pending", "evidence": "PR not opened; required checks pending."}
+      "github": {"status": "pending", "evidence": "Pushed codex/big5-authority-v2-review-promotion-gate-47 and opened PR #3114 with the exact manifest title and required what, why, validation, deferred-items, and repository-rule-impact sections. Required checks and review threads are pending."}
     },
     "failure_reason": null,
     "merged_at": null,
@@ -92620,7 +92620,8 @@
     "transitions": [
       {"at": "2026-07-15T09:38:54Z", "from": "planned", "to": "in_progress", "note": "Registered and started PR47 from the exact merged PR46 base. Scope is restricted to deterministic pending review/rollback/authorization artifacts, a read-only package/database preflight, exact cohort and identity drift guards, focused tests, and PR46 ledger reconciliation; no promotion writer, production command, CMS/database mutation, public release, indexability, Search, cache, or deploy action is allowed."},
       {"at": "2026-07-15T09:58:29Z", "from": "in_progress", "to": "local_checks_passed", "note": "All manifest-required local checks passed on the exact 14-path scope. The package remains fail closed with 231 assets, 229 working revisions, two preserved product shells, 16 cohorts, zero manual reviews, zero authorizations, zero promotion eligibility, and every database/CMS/public/indexability/Search/cache/deploy action fixed at zero; no production write or promotion occurred."},
-      {"at": "2026-07-15T09:59:29Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact 14-path implementation and train-registration scope as 2955c8791f6ce1e33af4048e41bda4cefbaf9593 after explicit staging and cached-diff validation. This ledger-only follow-up records the implementation commit before push; production/CMS/database/promotion actions remain zero."}
+      {"at": "2026-07-15T09:59:29Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact 14-path implementation and train-registration scope as 2955c8791f6ce1e33af4048e41bda4cefbaf9593 after explicit staging and cached-diff validation. This ledger-only follow-up records the implementation commit before push; production/CMS/database/promotion actions remain zero."},
+      {"at": "2026-07-15T10:00:36Z", "from": "committed_pending_push", "to": "github_checks_pending", "note": "Pushed the scoped branch and opened PR #3114 with the exact title and required boundary sections. Required GitHub checks and review threads are pending; no production/CMS/database/promotion/indexability/Search/cache/deploy action occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
