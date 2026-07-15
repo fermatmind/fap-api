@@ -160,6 +160,22 @@ final class BigFiveAuthorityV247Test extends TestCase
         }
     }
 
+    public function test_package_only_rejects_duplicate_and_incomplete_pending_cohort_coverage(): void
+    {
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['cohorts'][1] = $authorization['cohorts'][0];
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-duplicate-cohort.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly(self::REVIEW, $authorizationPath, self::ROLLBACK);
+            $this->fail('Expected duplicate pending cohort coverage to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('must remain pending and non-executable', $exception->getMessage());
+        } finally {
+            File::delete($authorizationPath);
+        }
+    }
+
     public function test_exact_authorization_phrase_locks_deploy_artifacts_runtime_cohort_and_count(): void
     {
         $phrase = $this->preflight()->approvalPhrase(

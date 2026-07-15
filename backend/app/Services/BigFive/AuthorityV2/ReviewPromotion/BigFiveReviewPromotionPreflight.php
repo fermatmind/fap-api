@@ -553,15 +553,23 @@ final class BigFiveReviewPromotionPreflight
             || count($authorizationCohorts) !== $reviewCohorts->count()) {
             throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
         }
+        $seenCohorts = [];
         foreach ($authorizationCohorts as $cohort) {
-            $reviewCohort = $reviewCohorts->get($cohort['cohort_id'] ?? null);
-            if (! is_array($reviewCohort)
+            $cohortId = is_array($cohort) ? (string) ($cohort['cohort_id'] ?? '') : '';
+            $reviewCohort = $reviewCohorts->get($cohortId);
+            if ($cohortId === ''
+                || isset($seenCohorts[$cohortId])
+                || ! is_array($reviewCohort)
                 || ($cohort['cohort_sha256'] ?? null) !== ($reviewCohort['cohort_sha256'] ?? null)
                 || ($cohort['asset_count'] ?? null) !== ($reviewCohort['asset_count'] ?? null)
                 || ($cohort['authorized'] ?? true) !== false
                 || ($cohort['exact_authorization'] ?? null) !== null) {
                 throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
             }
+            $seenCohorts[$cohortId] = true;
+        }
+        if (count($seenCohorts) !== $reviewCohorts->count()) {
+            throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
         }
     }
 
