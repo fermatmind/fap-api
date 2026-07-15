@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "8d77de81a5baa387c31c695a2ff7224e4990aeb6",
+    "commit_sha": "b3e7e9a1e1f673203e554fd2376f48cfc1d40766",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; English/Chinese diagnosis and clinical-screening regressions pass 2 tests / 291 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Clinical or mental-health screening tools and screens-users-for wording now fail closed in both locales, while direct negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites pass 48 tests / 2132 assertions; noun-form protected outcome predictions and past-tense review-pass regressions pass 3 tests / 596 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Prediction of/for protected outcomes and passed/cleared/approved review claims now fail closed, while direct negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ready-ledger head 16ac95c79 before the final same-head review added one valid in-scope P2 finding: clinical/mental-health screening claims outside hiring/admission contexts could bypass claim safety. The locally verified substantive fix head 8d77de81a adds English/Chinese clinical-screening coverage with match-scoped negation; fresh GitHub checks are required."
+        "evidence": "All nine required checks passed on ledger head d5312708f, then same-head review added two valid in-scope P2 findings: prediction of/for protected outcomes and passed/cleared review claims could bypass their truth guards. The locally verified substantive fix head b3e7e9a1e closes both gaps with direct negative controls; fresh GitHub checks are required."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All ninety-six valid P2 findings are fixed. Clinical and mental-health screening claims fail closed in English and Chinese, while direct negative limitations remain allowed. The paired regressions pass 2 / 291, combined PR08+PR02 feature suites exit successfully, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All ninety-eight valid P2 findings are fixed. Noun-form prediction of/for protected outcomes and past-tense passed/cleared/approved review claims fail closed, while direct negative limitations remain allowed. The focused regressions pass 3 / 596, combined PR08+PR02 feature suites pass 48 / 2132, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93775,9 +93775,14 @@
           "at": "2026-07-15T21:41:07Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed on ready-ledger head 16ac95c79, then final same-head review added one valid P2: clinical or mental-health screening outside hiring/admission contexts was not blocked. English/Chinese clinical-screening tools and screens-users-for wording now fail closed while direct negative limitations remain allowed. Targeted regressions pass 2 / 291, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T21:54:49Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head d5312708f, then same-head review added two valid P2 findings: noun-form prediction of/for protected outcomes and passed/cleared review claims were not blocked. Both patterns now fail closed with direct negative controls. Focused regressions pass 3 / 596, combined PR08+PR02 suites pass 48 / 2132, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-    "updated_at": "2026-07-15T21:41:07Z"
+    "updated_at": "2026-07-15T21:54:49Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
