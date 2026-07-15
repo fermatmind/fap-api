@@ -64,6 +64,22 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertFalse($result['writes_committed']);
     }
 
+    public function test_short_valid_faq_answers_still_enter_type_template_detection(): void
+    {
+        $candidate = $this->candidate();
+        $first = 'Type 1 repeats this visible decision cue with no independent context.';
+        $second = 'Type 2 repeats this visible decision cue with no independent context.';
+        $this->assertGreaterThanOrEqual(60, mb_strlen($first));
+        $this->assertLessThan(80, mb_strlen($first));
+        $candidate['assets'][0]['faqs'][0]['answer'] = $first;
+        $candidate['assets'][1]['faqs'][0]['answer'] = $second;
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('type_number_substitution_template', collect($result['issues'])->pluck('code')->all());
+    }
+
     public function test_empty_title_and_repeated_faq_questions_fail_closed(): void
     {
         $candidate = $this->candidate();

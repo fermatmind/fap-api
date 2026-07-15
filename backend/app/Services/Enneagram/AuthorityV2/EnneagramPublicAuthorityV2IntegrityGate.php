@@ -936,7 +936,10 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                     $add(self::EDITORIAL_GATES[3], 'duplicate_paragraph', $key, "{$path}.text.{$index}", "Paragraph duplicates {$paragraphs[$normalized]['path']}.");
                 }
                 $paragraphs[$normalized] = ['key' => $key, 'path' => "{$path}.text.{$index}"];
+            }
 
+            $templateThreshold = ($asset['locale'] ?? null) === 'zh-CN' ? 30 : 50;
+            if (mb_strlen($normalized) >= $templateThreshold) {
                 $template = $this->normalizeTemplate($block, $asset);
                 if (isset($typeTemplates[$template])) {
                     $add(self::EDITORIAL_GATES[3], 'type_number_substitution_template', $key, "{$path}.text.{$index}", "Text differs from {$typeTemplates[$template]['path']} only by a type label or number.");
