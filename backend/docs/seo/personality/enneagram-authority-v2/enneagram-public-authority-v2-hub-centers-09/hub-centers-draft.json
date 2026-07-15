@@ -1,0 +1,1010 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
+  "framework": "enneagram",
+  "asset_scope": "hub_and_three_centers_two_locales",
+  "source_ledger_refs": [
+    "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json"
+  ],
+  "assets": [
+    {
+      "identity_key": "hub:enneagram",
+      "locale": "en",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "path": "/en/personality/enneagram",
+      "title": "Enneagram overview: a nine-pattern observation map",
+      "answer_first": "This Enneagram overview presents nine patterns as a traditional map for noticing recurring attention, interpretation, and response. It also introduces three centers as interpretive labels for comparing patterns, while keeping any conclusion provisional and open to context, counterexamples, and other explanations.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English hub was composed from the frozen claim map around comparison choices and observable evidence, without translating or paraphrasing the Chinese draft.",
+        "outline": [
+          "answer_first",
+          "compare_nine_patterns",
+          "interpret_three_centers",
+          "challenge_with_counterexamples",
+          "observation_exercise"
+        ],
+        "page_specific_signals": [
+          "which concern receives attention before a shared decision is discussed",
+          "whether the stated motive matches the action visible to another participant",
+          "which comparable event contradicts the first nine-pattern interpretation"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_pattern",
+          "heading": "Compare patterns through one decision",
+          "body": "To compare nine patterns, begin with one decision that had a clear request, competing options, and a visible action. Record what received attention first, what concern shaped the explanation, and what another person could observe before attaching a type label."
+        },
+        {
+          "kind": "center_boundary",
+          "heading": "Treat three centers as interpretive labels",
+          "body": "The traditional model groups patterns into gut, heart, and head centers. Three centers are interpretive labels for organizing questions about action, connection, and anticipation; they do not define medical categories. They do not describe neurological systems or establish neuroscience findings."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Let a counterexample revise the pattern",
+          "body": "A counterexample is a comparable event in which the expected pattern did not appear. Use that counterexample to revise the pattern hypothesis, then test whether role expectations, culture, incentives, fatigue, practiced skill, safety, or the immediate situation explain the difference more directly."
+        },
+        {
+          "kind": "boundary",
+          "heading": "Keep the overview provisional",
+          "body": "Use the overview as a revisable vocabulary for self-observation. It cannot establish a fixed identity, ability, health status, relationship verdict, or future outcome, and one familiar description is not enough to decide which pattern is useful."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does the Enneagram overview assign one permanent type?",
+          "answer": "No. The overview offers nine comparison hypotheses, and a useful hypothesis should survive concrete examples, meaningful counterexamples, and competing explanations rather than becoming a permanent identity claim."
+        },
+        {
+          "question": "Why begin with a visible decision instead of a trait list?",
+          "answer": "A visible decision separates what happened from the motive later inferred. That distinction makes it easier to compare attention, explanation, and action without treating a familiar adjective as proof of a pattern."
+        },
+        {
+          "question": "What should change an initial Enneagram interpretation?",
+          "answer": "Revise it when comparable events show different priorities, when another explanation fits the behavior better, or when the interpretation depends mainly on role, culture, fatigue, incentives, learned skill, or current pressure."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one recurring decision with a clear request, two realistic options, and another participant who can describe the action they observed.",
+        "observable_signal": "For each event, record the first concern you voiced, the option you delayed, the action another person saw, and the explanation you gave afterward.",
+        "page_specific_signal": "Compare the event against two different Enneagram pattern hypotheses instead of searching immediately for one type label.",
+        "alternative_explanation": "Before choosing a pattern hypothesis, write one role, cultural, incentive, fatigue, safety, skill, or situational explanation for the same action.",
+        "reflection_prompt": "Name the counterexample that most weakens the initial interpretation and state what later evidence would make you revise or discard it."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How does the Enneagram overview define nine patterns?",
+          "Why are three centers interpretive labels?",
+          "How should a counterexample revise the pattern?"
+        ],
+        "question_answers": [
+          {
+            "question": "How does the Enneagram overview define nine patterns?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "Why are three centers interpretive labels?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "How should a counterexample revise the pattern?",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Research findings are mixed and instrument-specific, so this overview does not establish FermatMind reliability, validity, norms, percentiles, predictive power, or clinical utility."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "center:gut",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "gut",
+      "path": "/en/personality/enneagram/centers/gut",
+      "title": "Gut center: observe how action meets pressure",
+      "answer_first": "The gut center is a traditional Enneagram grouping for Types Eight, Nine, and One. A gut-center observation asks what happens when pressure calls for action, resistance, restraint, or correction; it does not mean that bodily instinct controls every choice, and the three types can respond quite differently.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English gut-center draft starts from boundary pressure and observable action sequences; it was not translated from the Chinese asset or a competitor page.",
+        "outline": [
+          "answer_first",
+          "pressure_sequence",
+          "eight_nine_one_differences",
+          "counterexample_and_context",
+          "short_observation_protocol"
+        ],
+        "page_specific_signals": [
+          "the first visible move when a boundary is challenged in a group decision",
+          "the difference between direct pushback, delayed engagement, and standards-based correction",
+          "a low-pressure counterexample in which the expected action tendency disappears"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_pattern",
+          "heading": "Notice the pressure-to-action sequence",
+          "body": "To observe gut center clues, choose a moment when a boundary, deadline, or unfair demand became salient. Note the first visible move, the words used to justify it, whether energy moved toward confrontation, delay, or correction, and what happened after the pressure changed."
+        },
+        {
+          "kind": "within_center_difference",
+          "heading": "Eight, Nine, and One differ within the center",
+          "body": "Eight, Nine, and One differ in the traditional account: Eight may test power through direct engagement, Nine may preserve steadiness by postponing friction, and One may compare action with an internal standard. These are prompts for observation, not rules, and any person may show another response."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use a calm counterexample",
+          "body": "A counterexample should match the original event in stakes and authority while showing a different response. Let the counterexample change the gut hypothesis if role permission, fatigue, safety, practiced negotiation, cultural expectations, or the specific relationship better accounts for the action."
+        },
+        {
+          "kind": "boundary",
+          "heading": "Do not turn instinct into anatomy",
+          "body": "The center label does not define a medical category. It does not identify a neurological system or a fixed bodily capacity. Bodily sensations may be useful observations, but they do not prove motive, type, competence, or a future result."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Is quick action enough to identify a gut-center pattern?",
+          "answer": "No. Quick action can reflect urgency, training, authority, habit, or safety demands. Compare the stated concern, the visible sequence, and at least one event in which similar pressure produced a different response."
+        },
+        {
+          "question": "Can a quiet response still belong in a gut-center comparison?",
+          "answer": "Yes. A quiet response may involve deliberate restraint, postponed conflict, uncertainty, or situational caution. The useful question is how pressure was handled, not whether the person looked forceful."
+        },
+        {
+          "question": "What distinguishes correction from direct resistance?",
+          "answer": "Correction usually refers to bringing action closer to a standard, while direct resistance focuses on contesting control or intrusion. In practice the same behavior can serve either motive, so the distinction needs examples and counterexamples."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Track four boundary or deadline moments with comparable stakes, including who had authority and whether direct disagreement was safe.",
+        "observable_signal": "Record the first visible action, the exact boundary or standard named, the time before responding, and whether the person confronted, deferred, corrected, or changed course.",
+        "page_specific_signal": "Compare direct pushback, delayed engagement, and standards-based correction rather than treating all decisive behavior as the same gut-center clue.",
+        "alternative_explanation": "For each event, note whether urgency, job role, fatigue, safety, culture, learned negotiation, or relationship history could explain the response without a center hypothesis.",
+        "reflection_prompt": "Identify one calm or low-pressure counterexample and explain whether it weakens the proposed Eight, Nine, or One comparison."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How to observe gut center clues?",
+          "How do Eight Nine and One differ?",
+          "How can a counterexample change a gut hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "How to observe gut center clues?",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "How do Eight Nine and One differ?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "How can a counterexample change a gut hypothesis?",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The gut center does not define a biological category. It does not identify a medical finding. It does not describe a neurological system. Bodily instinct does not determine behavior."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "center:heart",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "heart",
+      "path": "/en/personality/enneagram/centers/heart",
+      "title": "Heart center: examine connection and self-presentation",
+      "answer_first": "The heart center traditionally groups Types Two, Three, and Four. A heart-center observation compares how connection, recognition, and self-presentation become relevant in a social moment; it does not imply that emotion overrides thinking or action, and Two, Three, and Four may organize the same interaction in distinct ways.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English heart-center asset was developed around feedback, recognition, and visible presentation choices, independently of the Chinese structure and wording.",
+        "outline": [
+          "answer_first",
+          "social_feedback_event",
+          "two_three_four_contrasts",
+          "recognition_counterexample",
+          "feedback_log"
+        ],
+        "page_specific_signals": [
+          "what changes in self-presentation immediately after praise or correction",
+          "whether attention moves toward another person's need, a valued outcome, or personal distinctiveness",
+          "a private task counterexample where recognition is absent but the same behavior remains"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_pattern",
+          "heading": "Start with one feedback event",
+          "body": "For a heart-center observation, select a moment of praise, criticism, inclusion, or comparison. Record what changed in tone, self-description, helping behavior, goal emphasis, or withdrawal, and separate the visible adjustment from any inferred need for recognition."
+        },
+        {
+          "kind": "within_center_difference",
+          "heading": "Two, Three, and Four organize connection differently",
+          "body": "Two, Three, and Four differ in the traditional model: Two may orient toward being useful to another person, Three toward demonstrating valued effectiveness, and Four toward expressing a personally distinctive meaning. The same generous or polished action can still have another explanation."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Compare a setting without recognition",
+          "body": "Use a counterexample from a private or low-visibility task where recognition was unlikely. If the behavior remains unchanged, revise the heart-center hypothesis and consider care obligations, professional standards, habit, aesthetic preference, current mood, or the demands of the relationship."
+        },
+        {
+          "kind": "boundary",
+          "heading": "Emotion is not an exclusive channel",
+          "body": "The center label does not mean that a person only feels while others think or act. It is not a medical or neurological classification, and emotional expression alone cannot establish motive, identity, interpersonal capacity, or later outcomes."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does visible emotion prove a heart-center pattern?",
+          "answer": "No. Visible emotion can reflect temperament, culture, stress, relationship safety, or communication norms. A stronger observation compares what attention and presentation changed across similar social events."
+        },
+        {
+          "question": "Why can the same helpful act support different interpretations?",
+          "answer": "Helping may express care, duty, reciprocity, expertise, conflict avoidance, or a wish to be needed. The action becomes informative only when its context, explanation, alternatives, and counterexamples are recorded."
+        },
+        {
+          "question": "How should recognition be observed without mind-reading?",
+          "answer": "Track visible changes after praise, comparison, or exclusion, then ask what the person actually reported. Keep recognition as one hypothesis alongside goals, norms, mood, safety, habit, and relationship expectations."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "Select three feedback events and one private task, noting who was present, what kind of recognition was available, and what outcome the situation required.",
+        "observable_signal": "Record changes in tone, helping, pace, self-description, goal emphasis, or withdrawal before interpreting what connection or recognition meant.",
+        "page_specific_signal": "Contrast response to interpersonal need, valued performance, and personal distinctiveness instead of labeling every emotional reaction as one heart-center pattern.",
+        "alternative_explanation": "List a care obligation, professional norm, cultural display rule, safety concern, mood, habit, or relationship expectation that could produce the same presentation.",
+        "reflection_prompt": "Use the private-task counterexample to decide which heart-center interpretation became weaker and what evidence would justify revising it again."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What is a heart center observation?",
+          "How do Two Three and Four differ?",
+          "Why use a recognition counterexample?"
+        ],
+        "question_answers": [
+          {
+            "question": "What is a heart center observation?",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "How do Two Three and Four differ?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "Why use a recognition counterexample?",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The heart center does not define a clinical category. It does not describe a neurological system. Emotion does not determine every response."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "center:head",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "head",
+      "path": "/en/personality/enneagram/centers/head",
+      "title": "Head center: track how uncertainty is handled",
+      "answer_first": "The head center is the traditional grouping for Types Five, Six, and Seven. A head-center observation follows how someone gathers information, checks support, or opens options when uncertainty matters; it does not claim that thinking replaces emotion or action, and Five, Six, and Seven can manage the same unknown in contrasting ways.",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English head-center draft was authored around uncertainty sequences and observable information choices, not translated from the Chinese package or copied from another source.",
+        "outline": [
+          "answer_first",
+          "uncertainty_trace",
+          "five_six_seven_options",
+          "known_routine_counterexample",
+          "decision_window_exercise"
+        ],
+        "page_specific_signals": [
+          "which information source is consulted before acting under an unfamiliar constraint",
+          "whether uncertainty leads to conserving resources, checking support, or generating alternatives",
+          "a familiar-routine counterexample where no additional analysis or option search appears"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_pattern",
+          "heading": "Trace one uncertainty sequence",
+          "body": "To observe head center clues, use an unfamiliar decision with incomplete information. Record the first question asked, which source was consulted, what risk or possibility was named, how long action was delayed, and whether new evidence narrowed or expanded the available options."
+        },
+        {
+          "kind": "within_center_difference",
+          "heading": "Five, Six, and Seven use different routes",
+          "body": "Five, Six, and Seven differ in the traditional account: Five may conserve attention while building understanding, Six may test reliability and available support, and Seven may generate alternatives to keep movement possible. These routes can overlap and are not exclusive thinking styles."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Check a familiar routine",
+          "body": "A useful counterexample is a familiar task with similar consequences but little uncertainty. Let that counterexample change the head hypothesis when expertise, workload, prior failure, accountability, access to information, or the decision deadline better explains the observed checking or option-making."
+        },
+        {
+          "kind": "boundary",
+          "heading": "Thinking is not a fixed capacity",
+          "body": "The center label does not measure intelligence or identify a fixed mental capacity. It does not describe a neurological system or medical category, and an analytical, cautious, or imaginative response cannot by itself establish type or predict a result."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does extensive research always indicate a head-center pattern?",
+          "answer": "No. Research may be required by the task, professional standards, previous errors, accountability, or simple curiosity. Compare how information changes action and whether the same process appears when uncertainty is low."
+        },
+        {
+          "question": "How can caution and option-making appear in one event?",
+          "answer": "A person may verify risks and still generate alternatives before committing. Instead of forcing one label, record the sequence, what each step protected, and which step disappeared in a comparable counterexample."
+        },
+        {
+          "question": "What makes uncertainty more informative than general intelligence?",
+          "answer": "Uncertainty creates observable choices about questions, sources, support, time, and alternatives. Intelligence is not being measured here; the exercise only compares how one decision process changed across contexts."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 3,
+        "context": "Choose one unfamiliar decision and one familiar routine with similar consequences, recording the deadline, information access, and who shares responsibility.",
+        "observable_signal": "List the first question, the source consulted, the named risk or possibility, the time before action, and the evidence that changed the option set.",
+        "page_specific_signal": "Compare conserving attention, checking reliability and support, and generating alternatives rather than treating all thought or planning as identical.",
+        "alternative_explanation": "Note whether expertise, workload, accountability, a prior failure, information access, curiosity, or the deadline could explain the same sequence.",
+        "reflection_prompt": "Use the familiar routine as a counterexample and state which Five, Six, or Seven interpretation became less plausible after comparison."
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "How to observe head center clues?",
+          "How do Five Six and Seven differ?",
+          "How can a counterexample change a head hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "How to observe head center clues?",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "How do Five Six and Seven differ?",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "How can a counterexample change a head hypothesis?",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The head center does not measure intelligence. It does not define a biological category. It does not describe a neurological system. Thinking does not determine behavior."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "hub:enneagram",
+      "locale": "zh-CN",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "path": "/zh/personality/enneagram",
+      "title": "九型人格总览：从具体情境观察九种模式",
+      "answer_first": "这份九型人格总览把九种模式作为一种传统的观察地图，用来比较人在具体情境中先注意什么、如何解释以及怎样回应。三中心在这里是整理问题的解释性标签，而不是给人定型的结论；任何理解都需要结合反例、角色、文化和当下处境继续修正。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文总览从情境判断、可见行动与反例核对的阅读路径独立创作，没有把英文稿逐句翻译，也没有改写竞品正文。",
+        "outline": [
+          "先给出观察边界",
+          "用一次情境辨认注意顺序",
+          "用反例拆解最初判断",
+          "再介绍三中心的整理用途",
+          "完成短期比较练习"
+        ],
+        "page_specific_signals": [
+          "在共同决策开始前最先被提出的担忧或目标",
+          "事后自述动机与他人实际看到的行动是否一致",
+          "哪一次相近事件最能推翻最初的九种模式判断"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_pattern",
+          "heading": "先观察一次有分歧的决定",
+          "body": "观察九种模式时，可以选择一次请求明确、选项冲突且结果可见的决定。依次记录最先被注意的事项、被推迟的选项、当时给出的解释和他人实际看到的行动，暂时不要急着贴上类型标签。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用反例修正假设",
+          "body": "用反例修正假设，是寻找一件条件相近却没有出现预期模式的事件。若反例更符合角色要求、文化习惯、激励、安全感、疲劳、熟练技能或临时压力，就应降低原有解释的可信度。"
+        },
+        {
+          "kind": "center_boundary",
+          "heading": "三中心只是传统整理方式",
+          "body": "传统框架把相关模式归入腹中心、心中心和脑中心。理解三中心标签，可以帮助整理关于行动、连接和预判的问题；这些标签不能定义医学类别，也不能说明神经系统或证明神经科学结论。"
+        },
+        {
+          "kind": "boundary",
+          "heading": "把结论保留为可修改版本",
+          "body": "总览提供的是自我观察词汇，不是固定身份、能力高低、健康状态、关系结论或未来结果。一个熟悉的描述并不足以确认哪种模式最有用，仍需比较多个事件和替代解释。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "九型人格总览会给每个人确定永久类型吗？",
+          "answer": "不会。总览提供九种可比较的工作假设。只有当一个假设能解释多个具体事件、经得住重要反例，并且比角色或处境等替代解释更合适时，它才暂时具有参考价值。"
+        },
+        {
+          "question": "为什么先记录行为而不是先选性格形容词？",
+          "answer": "行为记录能把实际发生的事情与后来推测的动机分开。这样可以比较注意、解释和行动的顺序，避免把一个听起来熟悉的形容词误当成模式证据。"
+        },
+        {
+          "question": "什么证据应该改变最初的九型解释？",
+          "answer": "当相似事件出现不同优先顺序、另一种原因更贴近可见行为，或原判断主要由角色、文化、疲劳、激励、技能和临时压力造成时，就应修正或放弃最初解释。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一个反复出现的共同决定，要求其中有明确请求、两个现实选项，以及能够描述最终行动的另一位参与者。",
+        "observable_signal": "每次记录最先说出的担忧、被推迟的选项、他人看到的行动和事后解释，并把事实与推测分栏书写。",
+        "page_specific_signal": "同一事件至少比较两种九型模式假设，不要在第一次记录后就寻找唯一的类型结论。",
+        "alternative_explanation": "在保留任何模式假设之前，写出一种角色、文化、激励、疲劳、安全感、技能或具体处境造成相同行动的可能。",
+        "reflection_prompt": "指出最能削弱初步判断的反例，并写明以后出现什么证据时，你会继续修正或直接放弃这个解释。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察九种模式？",
+          "如何理解三中心标签？",
+          "如何用反例修正假设？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察九种模式？",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "如何理解三中心标签？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何用反例修正假设？",
+            "visible_path": "sections.1.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "现有研究结果并不一致，而且受具体工具影响；本页不能证明费马测试自身的信度、效度、常模、百分位、预测能力或临床用途。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "center:gut",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "gut",
+      "path": "/zh/personality/enneagram/centers/gut",
+      "title": "腹中心：观察压力出现时怎样进入行动",
+      "answer_first": "腹中心是九型人格传统框架中对八号、九号和一号的归组。观察腹中心线索，重点是压力、边界或纠偏要求出现后，行动如何启动、延迟或改变；这并不表示身体本能会控制所有选择，同一中心内部也可能出现很不一样的回应。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文腹中心稿从边界受压后的行动顺序展开，使用独立例证和问答结构，没有沿用英文稿的段落次序。",
+        "outline": [
+          "先界定腹中心用途",
+          "比较八九一的行动差异",
+          "记录边界事件",
+          "寻找低压力反例",
+          "回到身体线索的使用边界"
+        ],
+        "page_specific_signals": [
+          "群体决定中的边界受到挑战时最先出现的可见动作",
+          "直接顶回、延后介入与按标准纠偏三种路径的区别",
+          "压力降低后原先行动倾向是否在相近事件中消失"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "within_center_difference",
+          "heading": "先区分八号九号一号",
+          "body": "区分八号九号一号，可以从传统描述中的不同重点开始：八号可能直接测试权力和边界，九号可能先维持稳定并推迟摩擦，一号可能按照内在标准纠正行动。这些只是观察提示，并不是每个人都必须遵守的规则。"
+        },
+        {
+          "kind": "observable_pattern",
+          "heading": "记录压力到行动的完整顺序",
+          "body": "观察腹中心线索时，选择一次边界、期限或不公平要求变得突出的事件。记录最先出现的动作、当时使用的原话、回应前经过的时间，以及行动更接近正面抵抗、暂缓介入还是标准纠偏。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "寻找条件相近的平静反例",
+          "body": "用反例修正腹中心假设时，应选择与原事件具有相近后果和权力关系、却出现不同回应的情境。若角色许可、安全感、疲劳、文化期待、已训练的协商技能或具体关系更能解释差异，就要降低原判断的可信度。"
+        },
+        {
+          "kind": "boundary",
+          "heading": "不要把身体本能写成生理结论",
+          "body": "腹中心标签不能定义医学类别，也不能识别某个神经系统或固定身体能力。身体感受可以成为记录线索，却不能单独证明动机、类型、能力或未来结果。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "行动很快就能说明属于腹中心模式吗？",
+          "answer": "不能。快速行动也可能来自紧急程度、岗位训练、权限、习惯或安全要求。需要比较当时关注的问题、可见行动顺序，以及相同压力下出现不同回应的反例。"
+        },
+        {
+          "question": "安静或退让的回应还能用于腹中心比较吗？",
+          "answer": "可以。安静可能是有意克制、暂缓冲突、不确定或情境谨慎。真正需要观察的是压力如何被处理、行动何时发生，以及相近条件下是否出现另一种回应，而不是只看一个人是否显得强势。"
+        },
+        {
+          "question": "按标准纠偏与直接抵抗有什么区别？",
+          "answer": "按标准纠偏通常关注行动是否符合某项要求，直接抵抗则更关注控制或侵入本身。现实中同一行为可能服务不同动机，因此必须结合原话、背景和反例判断。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "选择四次后果相近的边界或期限事件，同时标明谁拥有权限，以及直接表达分歧在当时是否安全。",
+        "observable_signal": "记录第一项可见行动、被说出的边界或标准、回应前的等待时间，以及最后是抵抗、延后、纠偏还是改变方向。",
+        "page_specific_signal": "分别比较直接顶回、暂缓介入和按标准纠偏，不要把所有果断行为都合并成同一种腹中心线索。",
+        "alternative_explanation": "逐次检查紧急程度、岗位要求、疲劳、安全、文化习惯、协商训练或关系历史能否独立解释这次回应。",
+        "reflection_prompt": "找出一个低压力反例，并说明它如何削弱关于八号、九号或一号的初步比较。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察腹中心线索？",
+          "如何区分八号九号一号？",
+          "如何用反例修正腹中心假设？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察腹中心线索？",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "如何区分八号九号一号？",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "如何用反例修正腹中心假设？",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "腹中心只是传统解释性归组，不是生物类别、医学发现或神经系统，也不能说明身体本能必然决定行为。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "center:heart",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "heart",
+      "path": "/zh/personality/enneagram/centers/heart",
+      "title": "心中心：比较连接、认可与自我呈现",
+      "answer_first": "心中心在传统九型框架中归组二号、三号和四号。观察心中心线索，可以比较人在互动中如何回应连接、认可和自我呈现的问题；它并不表示情绪会排除思考或行动，而且二号、三号、四号可能用不同方式组织同一场互动。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文心中心稿以认可条件变化后的可见调整为主线独立创作，段落组织和问答切入点没有照搬英文版本。",
+        "outline": [
+          "说明心中心的有限用途",
+          "记录一次反馈后的变化",
+          "在无认可场景中寻找反例",
+          "比较二三四的不同关注",
+          "完成呈现变化日志"
+        ],
+        "page_specific_signals": [
+          "受到表扬或纠正后语气与自我描述发生的可见变化",
+          "注意力更靠近他人需要、受重视的成果还是个人独特意义",
+          "没有公开认可的私下任务中相同行为是否仍然保留"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "observable_pattern",
+          "heading": "从一次明确反馈开始",
+          "body": "观察心中心线索时，选择一次表扬、批评、被接纳或被比较的事件。记录语气、自我描述、帮助行为、目标强调或退开方式发生了什么变化，再把这些可见调整与推测的认可需要分开。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "加入没有认可条件的反例",
+          "body": "用无认可反例修正假设时，可以选择一项不容易被别人看到的私下任务。若相同行为仍然稳定出现，就要降低原有心中心解释的可信度，并考虑照顾责任、职业标准、习惯、审美偏好、当下情绪或关系要求。"
+        },
+        {
+          "kind": "within_center_difference",
+          "heading": "再比较二号三号四号",
+          "body": "比较二号三号四号时，传统描述分别提示：二号可能关注自己是否对他人有用，三号可能关注能否呈现被重视的成效，四号可能关注是否表达了个人独特意义。同一项帮助或精致呈现仍可能有其他原因。"
+        },
+        {
+          "kind": "boundary",
+          "heading": "情绪不是排他的处理通道",
+          "body": "心中心标签并不表示一个人只会感受而不会思考或行动。它不是医学或神经分类，情绪表达本身也不能确认动机、身份、人际能力或之后的结果。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "情绪表达明显就能证明心中心模式吗？",
+          "answer": "不能。明显情绪也可能来自气质、文化、压力、关系安全感或沟通习惯。更稳妥的做法是比较相似互动中注意重点和自我呈现如何变化。"
+        },
+        {
+          "question": "为什么同一项帮助行为会有多种解释？",
+          "answer": "帮助可能来自关心、责任、互惠、专业能力、避免冲突或希望被需要。只有把行动放回具体背景，并记录原话、替代原因和反例，才适合暂时形成解释。"
+        },
+        {
+          "question": "怎样观察认可而不替别人猜测内心？",
+          "answer": "记录表扬、比较或排斥之后实际出现的变化，再询问当事人如何描述。把认可保留为一个假设，同时考虑目标、规范、情绪、安全、习惯和关系期待。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "选择三次反馈事件和一项私下任务，标明当时有哪些人在场、可能获得什么认可，以及情境真正要求的结果。",
+        "observable_signal": "在解释连接或认可之前，记录语气、帮助、速度、自我描述、目标强调或退开方式的具体变化。",
+        "page_specific_signal": "分别比较回应他人需要、呈现被重视的成效和表达个人独特意义，不把所有情绪反应都归为同一模式。",
+        "alternative_explanation": "写下一项照顾责任、职业规范、文化表达规则、安全顾虑、当下情绪、习惯或关系期待，说明它如何产生相同行为。",
+        "reflection_prompt": "使用私下任务这个反例，判断哪一种心中心解释变弱，并说明以后什么证据会让你再次修改判断。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察心中心线索？",
+          "如何比较二号三号四号？",
+          "如何用无认可反例修正假设？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察心中心线索？",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "如何比较二号三号四号？",
+            "visible_path": "sections.2.body"
+          },
+          {
+            "question": "如何用无认可反例修正假设？",
+            "visible_path": "sections.1.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "心中心只是传统解释性归组，不是临床类别或神经系统，也不能说明情绪必然决定每一次回应。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "center:head",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "head",
+      "path": "/zh/personality/enneagram/centers/head",
+      "title": "脑中心：记录面对不确定时的信息选择",
+      "answer_first": "脑中心是传统九型框架中对五号、六号和七号的归组。观察脑中心线索，可以追踪不确定变重要时，人怎样收集信息、核对支持或打开选项；这不表示思考会取代情绪与行动，五号、六号、七号也可能用相反路径处理同一个未知问题。",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文脑中心稿从不确定情境中的提问、查证与选项变化独立展开，没有依照英文稿的章节顺序进行翻译。",
+        "outline": [
+          "界定脑中心不是能力测量",
+          "比较五六七的信息路径",
+          "追踪一次未知决定",
+          "用熟悉任务构造反例",
+          "复盘选项如何收窄或展开"
+        ],
+        "page_specific_signals": [
+          "陌生限制出现后采取行动前最先查询的具体信息来源",
+          "不确定使人更倾向保存资源、核对支持还是生成替代选项",
+          "熟悉任务中额外分析或寻找新选项是否完全消失"
+        ]
+      },
+      "sections": [
+        {
+          "kind": "within_center_difference",
+          "heading": "先比较五号六号七号",
+          "body": "比较五号六号七号时，传统描述提示不同路径：五号可能保存注意力并建立理解，六号可能核对可靠性与可用支持，七号可能生成多个选项以保持行动空间。这些路径可以重叠，也不是排他的思考风格。"
+        },
+        {
+          "kind": "observable_pattern",
+          "heading": "追踪一次不确定决定",
+          "body": "观察脑中心线索时，选择一项信息不完整的陌生决定。记录最先提出的问题、查询了哪个来源、说出了什么风险或可能、行动被延迟多久，以及新证据让可选方案收窄还是增加。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用熟悉任务检验原判断",
+          "body": "用反例修正脑中心假设时，可以选择后果相近但不确定程度较低的熟悉任务。若专业经验、工作量、问责要求、过去失败、信息权限或期限更能说明查证与扩展选项的行为，就应降低原判断的可信度。"
+        },
+        {
+          "kind": "boundary",
+          "heading": "思考线索不是固定能力",
+          "body": "脑中心标签不能测量智力，也不能识别固定心理能力。它不能说明某个神经系统或医学类别；分析、谨慎或想象丰富的表现本身，也不足以确认类型或推断结果。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "查很多资料一定属于脑中心模式吗？",
+          "answer": "不一定。查资料可能是任务要求、职业标准、过往错误、问责压力或普通好奇。需要继续观察信息怎样改变行动，以及不确定较低时相同流程是否仍然出现。"
+        },
+        {
+          "question": "谨慎核对和打开选项能同时出现吗？",
+          "answer": "可以。一个人可能先确认风险，再寻找替代方案。不要强迫只保留一个标签，而应记录先后顺序、每一步保护了什么，以及哪一步在相近反例中消失。"
+        },
+        {
+          "question": "为什么观察不确定比评价智力更合适？",
+          "answer": "不确定会带来可记录的提问、信息来源、支持、等待时间和选项变化。本练习不测量智力，只比较同一个决定过程如何随情境改变，并检查熟悉任务是否给出不同的反例。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 3,
+        "context": "选择一项陌生决定和一项后果相近的熟悉任务，记录期限、信息权限以及由谁共同承担责任。",
+        "observable_signal": "列出最先提出的问题、查询来源、被说出的风险或可能、行动前等待时间，以及改变选项范围的那条证据。",
+        "page_specific_signal": "分别比较保存注意力、核对可靠性与支持、生成替代选项，不要把所有思考或计划都视为同一种线索。",
+        "alternative_explanation": "检查专业经验、工作量、问责、过去失败、信息权限、好奇或期限是否能够解释同一信息处理顺序。",
+        "reflection_prompt": "把熟悉任务作为反例，说明关于五号、六号或七号的哪项初步解释在比较后变得较不可信。"
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "如何观察脑中心线索？",
+          "如何比较五号六号七号？",
+          "如何用反例修正脑中心假设？"
+        ],
+        "question_answers": [
+          {
+            "question": "如何观察脑中心线索？",
+            "visible_path": "sections.1.body"
+          },
+          {
+            "question": "如何比较五号六号七号？",
+            "visible_path": "sections.0.body"
+          },
+          {
+            "question": "如何用反例修正脑中心假设？",
+            "visible_path": "sections.2.body"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "脑中心只是传统解释性归组，不是智力测量、生物类别或神经系统，也不能说明思考必然决定行为。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ],
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}

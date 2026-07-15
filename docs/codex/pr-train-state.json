@@ -93558,9 +93558,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "60ffc19e279c712ccea4ce741f6737eab33f946f",
-    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "status": "merged",
+    "commit_sha": "d920e999f85165a73ac4176c24fd791d83cd7e85",
+    "commit_sha_role": "squash_merge_commit_on_origin_main",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
       "dependency": {
@@ -93577,7 +93577,7 @@
       },
       "github_checks": {
         "status": "pass",
-        "evidence": "All nine required checks passed on ledger head b2e72a990. GitHub reports CLEAN/MERGEABLE, the Codex clean-review comment explicitly records Reviewed commit b2e72a9903 with no major issues, and GraphQL reports zero unresolved review threads."
+        "evidence": "All nine required checks passed on final ready-ledger head 2edc5bdc052d59c637b9af30c140991a1d54ef4a. GitHub reported CLEAN/MERGEABLE, the Codex clean-review comment explicitly recorded Reviewed commit 2edc5bdc05 with no major issues, and GraphQL reported zero unresolved review threads before squash merge."
       },
       "ci_fix": {
         "status": "pass",
@@ -93592,12 +93592,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T22:18:59Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -94009,9 +94009,14 @@
           "at": "2026-07-15T22:11:27Z",
           "status": "ready_to_merge",
           "note": "All nine required checks passed on ledger head b2e72a990, GitHub is CLEAN/MERGEABLE, the same-head Codex clean-review comment reports no major issues for Reviewed commit b2e72a9903, and all review threads are resolved. All ninety-nine valid P2 findings are fixed; final merge-base diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action. This ready-ledger head must complete one final CI and same-head review round before squash merge."
+        },
+        {
+          "at": "2026-07-15T22:23:11Z",
+          "status": "merged",
+          "note": "PR #3115 merged at 2026-07-15T22:18:59Z as squash commit d920e999f85165a73ac4176c24fd791d83cd7e85 after final head 2edc5bdc0 passed all nine required checks and same-head clean review. origin/main containment, remote branch deletion, official local cleanup, clean synced main, and post-merge 48-test / 2162-assertion PR08+PR02 regression, exact classifier 1 / 2, Pint, JSON, and PHP syntax were verified before PR09 implementation."
         }
       ],
-    "updated_at": "2026-07-15T22:11:27Z"
+    "updated_at": "2026-07-15T22:23:11Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
@@ -94022,13 +94027,13 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
     ],
-    "status": "pending_dependency",
+    "status": "in_progress",
     "commit_sha": null,
     "pr_url": null,
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR08 merged as d920e999f85165a73ac4176c24fd791d83cd7e85; GitHub MERGED state, origin/main containment, all nine green checks, final same-head clean review, remote/local branch cleanup, and focused post-merge regression were verified."
       }
     },
     "scope_validation": {
@@ -94052,9 +94057,14 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T22:23:11Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR08 merge and began the exact PR09 branch from clean latest origin/main. This scope authors eight independent bilingual hub/center draft assets only; no CMS/database write, revision import, human-review completion, publication, indexability, sitemap, llms, search submission, deploy, or production action is authorized."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T22:23:11Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10",
