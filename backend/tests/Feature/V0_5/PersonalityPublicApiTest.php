@@ -2170,6 +2170,43 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonMissingPath('items.0.content_sections');
     }
 
+    public function test_enneagram_authority_v2_detail_projection_busts_v1_only_cache_versions(): void
+    {
+        Cache::flush();
+        $asset = $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-3',
+            'slug' => 'enneagram/type-3',
+        ]);
+        $path = '/api/v0.5/personality-content-assets/enneagram/core_type/type-3?locale=en';
+        $initial = $this->getJson($path)->assertOk();
+        $legacyPayload = $initial->json();
+        self::assertIsArray($legacyPayload);
+        unset($legacyPayload['personality_public_content_asset_v2']);
+
+        Cache::flush();
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $cache->put(
+            'detail-code',
+            PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'type-3',
+            'en',
+            0,
+            $cache->versionFor($asset),
+            $legacyPayload,
+        );
+
+        $this->getJson($path)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath(
+                'personality_public_content_asset_v2.contract_version',
+                PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            );
+    }
+
     private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
     {
         $typeLabel = trim($runtimeTypeCode.' '.$typeName);

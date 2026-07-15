@@ -92715,6 +92715,10 @@
       "review_fix": {
         "status": "pass",
         "evidence": "Addressed the actionable P2 by exposing canonical slashed subtype codes through a real index-route exact-code query that reuses showByCode and its cache; real HTTP fixtures, 57 tests / 4096 assertions, Big Five V2 1 / 15, Pint, JSON, and diff checks pass."
+      },
+      "cache_projection_review_fix": {
+        "status": "pass",
+        "evidence": "Addressed the second actionable P2 with an Enneagram Authority V2 detail projection cache salt; a focused regression preloads the old unsalted V1-only version and proves the public request misses it and returns V2. The target group passes 58 tests / 4102 assertions and Big Five V2 remains 1 / 15."
       }
     },
     "scope_validation": {
@@ -92773,9 +92777,14 @@
         "at": "2026-07-15T05:55:46Z",
         "status": "review_fix_local_verified",
         "note": "All nine initial GitHub checks passed, then Codex review identified one valid P2: subtype V2 fixtures bypassed routing while ordinary list responses remained V1-only. Added an explicit framework/entity_type/code detail lookup on the existing index route, converted subtype fixtures to real HTTP, and locally revalidated the exact PR04 contract and Big Five regression."
+      },
+      {
+        "at": "2026-07-15T06:04:42Z",
+        "status": "review_fix_local_verified",
+        "note": "All nine second-round checks passed, then a second valid P2 identified pre-deploy Enneagram V1-only detail caches sharing the DB-attribute version. Added an Enneagram Authority V2 projection cache salt and a regression proving the old unsalted payload misses; 58 target tests / 4102 assertions and Big Five V2 1 / 15 pass."
       }
     ],
-    "updated_at": "2026-07-15T05:55:46Z"
+    "updated_at": "2026-07-15T06:04:42Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05",

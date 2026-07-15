@@ -24,6 +24,8 @@ final class PersonalityPublicContentAssetController extends Controller
 
     private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
 
+    private const ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION = 'enneagram-authority-v2';
+
     public function __construct(
         private readonly PersonalityPublicAssetReadModelCache $readModelCache,
     ) {}
@@ -835,6 +837,9 @@ final class PersonalityPublicContentAssetController extends Controller
 
         try {
             $version = $this->readModelCache->versionFor($asset);
+            if ($framework === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM) {
+                $version .= ':projection:'.self::ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION;
+            }
             $cachedRead = $this->readModelCache->read(
                 $surface,
                 $framework,
