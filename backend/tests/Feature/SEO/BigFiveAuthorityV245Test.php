@@ -9,11 +9,14 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\BigFive\AuthorityV2\StructuredData\BigFiveStructuredDataProjector;
 use App\Services\Cms\ArticleSeoService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 final class BigFiveAuthorityV245Test extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_fixture_locks_exact_nine_faq_and_four_article_breadcrumb_findings(): void
     {
         $fixture = json_decode(File::get($this->fixturePath()), true, 512, JSON_THROW_ON_ERROR);
@@ -154,6 +157,38 @@ final class BigFiveAuthorityV245Test extends TestCase
         $this->assertSame('Article', data_get($candidate, '@type'));
         $this->assertSame('FermatMind Editorial', data_get($candidate, 'author.name'));
         $this->assertArrayNotHasKey('hasPart', $candidate);
+    }
+
+    public function test_public_seo_payload_strips_internal_big_five_provenance_identifiers(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        [$article, $revision] = $this->authorityArticle();
+        $article->setRelation('seoMeta', new ArticleSeoMeta([
+            'org_id' => 7,
+            'article_id' => 10,
+            'locale' => 'en',
+            'seo_title' => 'Big Five growth guide',
+            'seo_description' => 'Visible description.',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+            'schema_json' => ['editorial_package_v1' => $this->context()['editorial_package']],
+        ]));
+
+        $payload = app(ArticleSeoService::class)->buildSeoPayload($article, $revision);
+        $publicProjection = (array) $payload['big_five_structured_data_v1'];
+        $encoded = json_encode($publicProjection, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('FermatMind Editorial', data_get($publicProjection, 'visible_alignment.author.label'));
+        $this->assertSame('Content Review Desk', data_get($publicProjection, 'visible_alignment.reviewer_gate.label'));
+        $this->assertSame(
+            [['label' => 'Peer-reviewed research'], ['label' => 'FermatMind claim boundary']],
+            data_get($publicProjection, 'visible_alignment.sources'),
+        );
+        $this->assertSame('Article', data_get($publicProjection, 'fragments.article.@type'));
+        $this->assertStringNotContainsString('admin_user:', $encoded);
+        $this->assertStringNotContainsString('authority_ref', $encoded);
+        $this->assertStringNotContainsString('source_id', $encoded);
+        $this->assertArrayNotHasKey('identity', $publicProjection);
     }
 
     /** @return array{Article, ArticleTranslationRevision} */

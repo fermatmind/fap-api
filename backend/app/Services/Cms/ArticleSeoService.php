@@ -123,7 +123,7 @@ final class ArticleSeoService
                 $bigFiveStructuredData,
             ),
             ...($bigFiveStructuredData !== null
-                ? ['big_five_structured_data_v1' => $bigFiveStructuredData]
+                ? ['big_five_structured_data_v1' => $this->publicBigFiveStructuredDataProjection($bigFiveStructuredData)]
                 : []),
 
             'og' => [
@@ -504,6 +504,41 @@ final class ArticleSeoService
             'robots' => $seo?->robots,
             'editorial_package' => $editorialPackage,
         ]);
+    }
+
+    /**
+     * Keep public SEO metadata limited to visible labels, dates, canonical URLs, and schema fragments.
+     * Internal actor identities, source ids, and authority references remain backend-only.
+     *
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function publicBigFiveStructuredDataProjection(array $projection): array
+    {
+        $sourceLabels = collect((array) data_get($projection, 'visible_alignment.sources', []))
+            ->pluck('label')
+            ->filter(static fn (mixed $label): bool => is_string($label) && trim($label) !== '')
+            ->map(static fn (string $label): array => ['label' => trim($label)])
+            ->values()
+            ->all();
+        $authorLabel = $this->normalizeString(data_get($projection, 'visible_alignment.author.label'));
+        $reviewerLabel = $this->normalizeString(data_get($projection, 'visible_alignment.reviewer_gate.label'));
+
+        return [
+            'contract_version' => $projection['contract_version'] ?? null,
+            'authority_surface' => $projection['authority_surface'] ?? null,
+            'current_public_authority_eligible' => (bool) ($projection['current_public_authority_eligible'] ?? false),
+            'visible_alignment' => [
+                'canonical' => data_get($projection, 'visible_alignment.canonical'),
+                'author' => $authorLabel !== null ? ['label' => $authorLabel] : null,
+                'reviewer_gate' => $reviewerLabel !== null ? ['label' => $reviewerLabel] : null,
+                'sources' => $sourceLabels,
+                'dates' => (array) data_get($projection, 'visible_alignment.dates', []),
+            ],
+            'eligibility' => (array) ($projection['eligibility'] ?? []),
+            'fragments' => (array) ($projection['fragments'] ?? []),
+            'preservation' => (array) ($projection['preservation'] ?? []),
+        ];
     }
 
     /**
