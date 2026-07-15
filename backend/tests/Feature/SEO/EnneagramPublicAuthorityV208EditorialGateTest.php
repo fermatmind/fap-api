@@ -818,6 +818,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '治愈你的焦虑',
             '岗位适配保证',
             '岗位胜任力',
+            'This assessment screens users for anxiety',
+            'Anxiety screening tool',
+            '焦虑筛查工具',
+            '人格筛查测评',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -868,7 +872,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('diagnosis_or_screening_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page should not be used as a diagnosis.', 'This page does not diagnose anxiety.', '本页不把它当成诊断。'] as $limitation) {
+        foreach (['This page should not be used as a diagnosis.', 'This page does not diagnose anxiety.', 'This assessment does not screen users for anxiety.', '本页不把它当成诊断。', '本页不用于焦虑筛查。'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 

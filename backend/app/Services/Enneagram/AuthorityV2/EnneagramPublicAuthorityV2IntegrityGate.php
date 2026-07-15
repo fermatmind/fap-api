@@ -347,6 +347,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const HUMAN_REVIEW_RELEASE_PATTERN = '/(?:\b(?:human|expert|editor|editorial|manual|editorially|manually)[\s-]+reviewed\b|\b(?:human|expert|editor|editorial|editorially)[\s-]+approved\b|\breviewed\s+by\s+[\p{L}][\p{L}\p{M}.\'-]*(?:\s+[\p{L}][\p{L}\p{M}.\'-]*){0,3}|\b(?:human|expert|editor|editorial|manual)[\s-]+review\s+(?:(?:(?:has|had)\s+(?:been\s+)?)|(?:is|was|were)\s+)?(?:completed|approved|passed|cleared)\b|\bcompleted\s+(?:human|expert|editor|editorial|manual)[\s-]+review\b|\b(?:approved|cleared|eligible|ready)\s+for\s+(?:public\s+)?(?:publication|publishing|release|indexing|indexation)\b|\beligible\s+to\s+(?:publish|release|index)\b|\b(?:(?:approved|cleared|ready)\s+to\s+(?:publish|release|index)|(?:this|the)\s+(?:page|asset|content|draft|guide)\s+(?:is|was|has\s+been)\s+published|published\s+(?:online|publicly|to\s+production)|indexed(?:\s+by\s+[\p{L}\p{N}_-]+)?|indexable|(?:publication|publishing|release|indexing|indexation)[\s-]+ready)\b|\bpublication[\s-]+approved\b|\b(?:(?:already|currently)\s+)?(?:in|on)\s+(?:the\s+)?(?:sitemap|llms(?:\.txt)?)\b|\b(?:schema|sitemap|llms(?:\.txt)?)[\s-]+eligib(?:le|ility)\b|(?:人工|专家|编辑)审核(?:已)?(?:通过|完成|批准)|(?:人工|专家|编辑)(?:已)?批准|已完成(?:人工|专家|编辑)审核|已由[^。！？\n]{0,30}(?:人工|专家|编辑)审核|已获(?:发布|上线|收录)(?:批准|许可)|(?:已发布|可收录|发布就绪|已被(?:搜索|谷歌|Google)?收录)|(?:发布|上线|收录)(?:获批|已批准|就绪)|(?:已)?(?:进入|纳入|列入)\s*(?:站点地图|sitemap|llms(?:\.txt)?)|(?:schema|结构化数据|站点地图|sitemap|llms(?:\.txt)?)(?:已)?(?:具备资格|符合条件|可用|启用))/iu';
 
+    private const CLINICAL_SCREENING_PATTERN = '/(?:\bscreen(?:s|ed|ing)?(?:\s+(?:users?|people|clients?|patients?))?\s+for\s+(?:anxiety|depression|mental[\s-]+health|health|conditions?|disorders?|personality)\b|\b(?:anxiety|depression|mental[\s-]+health|health|clinical|medical|personality)[\s-]+screen(?:ing)?(?:[\s-]+(?:tool|assessment|test))?\b|(?:焦虑|抑郁|心理健康|健康|临床|医疗|人格|性格)(?:筛查|筛检)(?:工具|测评|测试)?)/iu';
+
     private const PREDICTIVE_OF_OUTCOME_PATTERN = '/\bpredictive\s+of\s+(?:(?:your|a|the)\s+)?(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcomes?|fit|performance))?\b/iu';
 
     private const MANUAL_APPROVAL_PATTERN = '/\bmanual(?:ly)?[\s-]+approved\b/iu';
@@ -1037,10 +1039,12 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     {
         $bounded = $this->withoutExplicitlyNegatedMatches($text, [
             self::DIAGNOSIS_SCREENING_PATTERN,
+            self::CLINICAL_SCREENING_PATTERN,
             self::BARE_MEDICAL_CLAIM_PATTERN,
         ]);
 
         return preg_match(self::DIAGNOSIS_SCREENING_PATTERN, $bounded) === 1
+            || preg_match(self::CLINICAL_SCREENING_PATTERN, $bounded) === 1
             || preg_match(self::BARE_MEDICAL_CLAIM_PATTERN, $bounded) === 1;
     }
 
