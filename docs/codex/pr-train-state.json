@@ -93148,9 +93148,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "efba1231561cf91bb165be84d15dd7a2999b73f5",
-    "commit_sha_role": "latest_reviewed_substantive_head_before_ledger_only_ready_to_merge_bookkeeping",
+    "status": "review_fixes_local_verified",
+    "commit_sha": "e21bc07b8ee303918d7805ab69e7cd281b6632f2",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
       "dependency": {
@@ -93166,18 +93166,18 @@
         "evidence": "Final manifest replay passed: focused source-ledger suite 10 tests / 3955 assertions; Pint test for the new feature file; YAML and all JSON parse; git diff check; and exact seven-file allowlist. The package contains one registry, 116 scorecard-matched maps, zero unmapped allowed factual claims, zero competitor-as-science mappings, explicit wing/subtype limitations, and explicit blocked assumptions."
       },
       "github_checks": {
-        "status": "pass",
-        "evidence": "All nine required checks passed on substantive head efba1231561cf91bb165be84d15dd7a2999b73f5: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reports MERGEABLE."
+        "status": "pending",
+        "evidence": "All nine checks passed on ledger-ready head c5fb4cb2c86f0544f51fbd90f53f5069488bed4e. One additional valid P2 then moved the boundary source to its direct authority and added semantic traceability coverage; latest-head checks must rerun."
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "Validated all five automated P2 findings across three review rounds: PR06 commit_sha records the main-reachable squash merge; PR07 commit_sha records efba1231561cf91bb165be84d15dd7a2999b73f5, the latest reviewed substantive head containing every content, test, and state fix before ledger-only ready-to-merge bookkeeping; all non-null registry internal paths share the backend root and resolve; and every mapped claim source declares support for that page family. Cross-family base claims were narrowed to the systematic review rather than widening measurement-documentation scope. Focused validation passes 12 tests / 5091 assertions plus Pint."
+        "evidence": "Validated all six automated P2 findings: predecessor and current substantive SHAs are auditable; internal paths share the backend root and resolve; mapped claim sources support their page families; cross-family base claims use the systematic review rather than wider measurement scope; and the product boundary source now points directly to docs/seo/skills/fermat-claim-boundary.md, whose core rule explicitly forbids diagnosis, hiring-fit, and career-success prediction. Focused validation passes 13 tests / 5095 assertions plus Pint."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93230,9 +93230,14 @@
         "at": "2026-07-15T09:10:14Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on substantive head efba123156, GitHub is MERGEABLE, and all five automated P2 findings are fixed in scope. commit_sha intentionally records the latest reviewed substantive head containing all implementation, regression, and review-fix evidence; any following ready-to-merge commit is ledger-only bookkeeping and must pass final checks before merge."
+      },
+      {
+        "at": "2026-07-15T09:18:31Z",
+        "status": "review_fixes_local_verified",
+        "note": "The ledger-ready head passed all nine checks, then a sixth valid P2 was fixed: the non-diagnostic/non-predictive boundary source now points to the direct Fermat Claim Boundary authority rather than root AGENTS.md. A semantic traceability regression passes within 13 tests / 5095 assertions plus Pint; latest-head checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T09:10:14Z"
+    "updated_at": "2026-07-15T09:18:31Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
