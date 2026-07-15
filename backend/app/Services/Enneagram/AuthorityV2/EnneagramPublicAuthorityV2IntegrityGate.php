@@ -335,7 +335,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
 
-    private const GENERIC_EXERCISE_PATTERN = '/(?:for (?:the next )?seven days,? (?:notice|observe|journal)|连续七天(?:观察|记录|注意))/iu';
+    private const GENERIC_EXERCISE_PATTERN = '/(?:for (?:the next )?(?:seven|7|７)[ -]?days?(?:\s+period)?,? (?:notice|observe|journal)|连续(?:七|7|７)天(?:观察|记录|注意))/iu';
 
     /**
      * @param  array<string, mixed>  $candidate

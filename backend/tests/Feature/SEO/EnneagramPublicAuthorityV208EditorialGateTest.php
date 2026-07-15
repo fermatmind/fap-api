@@ -258,6 +258,24 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('generic_seven_day_exercise', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_numeric_seven_day_exercise_prompts_fail_closed(): void
+    {
+        foreach ([
+            'For the next 7 days, observe whatever happens during ordinary situations while keeping this prompt generic.',
+            'For the next ７-day period, journal whatever happens during ordinary situations while keeping this prompt generic.',
+            '连续7天观察普通情境中发生的任何事情，同时保留这段可以复制到所有页面的通用提示文字。',
+        ] as $context) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['observation_exercise']['duration_days'] = 6;
+            $candidate['assets'][0]['observation_exercise']['context'] = $context;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $context);
+            $this->assertContains('generic_seven_day_exercise', collect($result['issues'])->pluck('code')->all(), $context);
+        }
+    }
+
     public function test_chinese_type_numerals_are_normalized_for_template_detection(): void
     {
         $candidate = $this->candidate();
