@@ -14,6 +14,7 @@ use App\Services\Cms\PersonalityPublicReadModelCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
 
 final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
@@ -181,6 +182,84 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_full_indexability_release_requires_all_exact_public_content_to_be_live(): void
+    {
+        [$path] = $this->seedAndStage();
+
+        [$exitCode, $summary] = $this->callIndexability($this->indexabilityOptions($path, true));
+
+        self::assertSame(1, $exitCode);
+        self::assertFalse($summary['ok']);
+        self::assertContains('prestate_mismatch', array_column($summary['errors'], 'code'));
+        self::assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        self::assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
+    public function test_full_indexability_release_dry_run_returns_exact_hashes_without_mutation(): void
+    {
+        self::assertArrayHasKey('personality:mbti-full-indexability-promote', Artisan::all());
+        [$path] = $this->seedAndStage();
+        $this->promotePublicContent($path);
+
+        [$exitCode, $summary] = $this->callIndexability($this->indexabilityOptions($path, true));
+
+        self::assertSame(0, $exitCode, (string) json_encode($summary, JSON_UNESCAPED_SLASHES));
+        self::assertTrue($summary['ok']);
+        self::assertSame(43, $summary['record_count']);
+        self::assertSame(28, $summary['profile_row_count']);
+        self::assertSame(15, $summary['at_comparison_row_count']);
+        self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $summary['promotion_package_sha256']);
+        self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $summary['authorization_payload_sha256']);
+        self::assertFalse($summary['writes_committed']);
+        self::assertFalse($summary['gsc_executed']);
+        self::assertFalse($summary['url_inspection_executed']);
+        self::assertSame(28, PersonalityProfileVariantSeoMeta::query()->where('robots', 'noindex,follow')->count());
+        self::assertSame(15, PersonalityProfileSection::query()
+            ->where('section_key', 'mbti64_comparison_a_vs_t')
+            ->get()
+            ->filter(static fn (PersonalityProfileSection $section): bool => data_get($section->payload_json, 'robots') === 'noindex,follow')
+            ->count());
+    }
+
+    public function test_full_indexability_release_requires_exact_guards_and_promotes_all_43_idempotently(): void
+    {
+        [$path] = $this->seedAndStage();
+        $this->promotePublicContent($path);
+        $plan = $this->indexabilityPlan($path);
+
+        $bad = $this->indexabilityOptions($path, false, $plan);
+        unset($bad['--no-search-submission']);
+        [$badExit, $badSummary] = $this->callIndexability($bad);
+        self::assertSame(1, $badExit);
+        self::assertStringContainsString('--no-search-submission is required', (string) data_get($badSummary, 'errors.0.message'));
+        self::assertSame(28, PersonalityProfileVariantSeoMeta::query()->where('robots', 'noindex,follow')->count());
+
+        [$firstExit, $first] = $this->callIndexability($this->indexabilityOptions($path, false, $plan));
+        self::assertSame(0, $firstExit, (string) json_encode($first, JSON_UNESCAPED_SLASHES));
+        self::assertTrue($first['ok']);
+        self::assertTrue($first['writes_committed']);
+        self::assertSame(43, $first['already_promoted_count']);
+        self::assertSame(28, $first['read_model_cache_invalidated_count']);
+        self::assertFalse($first['gsc_executed']);
+        self::assertFalse($first['url_inspection_executed']);
+        self::assertSame(28, PersonalityProfileVariantSeoMeta::query()->where('robots', 'index,follow')->count());
+        self::assertSame(14, PersonalityProfile::query()->withoutGlobalScopes()
+            ->whereIn('canonical_type_code', array_slice($this->baseTypes(), 0, 14))
+            ->where('is_indexable', true)
+            ->count());
+        self::assertSame(15, PersonalityProfileSection::query()
+            ->where('section_key', 'mbti64_comparison_a_vs_t')
+            ->get()
+            ->filter(static fn (PersonalityProfileSection $section): bool => data_get($section->payload_json, 'robots') === 'index,follow'
+                && data_get($section->payload_json, 'indexability_held') === false)
+            ->count());
+
+        [$secondExit, $second] = $this->callIndexability($this->indexabilityOptions($path, false, $plan));
+        self::assertSame(0, $secondExit, (string) json_encode($second, JSON_UNESCAPED_SLASHES));
+        self::assertSame(43, $second['already_promoted_count']);
+        self::assertTrue($second['writes_committed']);
+    }
+
     /** @return array{string,\Illuminate\Database\Eloquent\Collection<int,PersonalityProfile>} */
     private function seedAndStage(): array
     {
@@ -211,6 +290,60 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertSame(0, Artisan::call('personality:mbti-full-cms-promote', $this->promotionOptions($path, true)));
 
         return $this->jsonOutput();
+    }
+
+    private function promotePublicContent(string $path): void
+    {
+        $plan = $this->plan($path);
+        self::assertSame(0, Artisan::call('personality:mbti-full-cms-promote', $this->promotionOptions($path, false, $plan)), Artisan::output());
+    }
+
+    /** @return array<string,mixed> */
+    private function indexabilityPlan(string $path): array
+    {
+        [$exitCode, $summary] = $this->callIndexability($this->indexabilityOptions($path, true));
+        self::assertSame(0, $exitCode, (string) json_encode($summary, JSON_UNESCAPED_SLASHES));
+
+        return $summary;
+    }
+
+    /** @param array<string,mixed> $options @return array{int,array<string,mixed>} */
+    private function callIndexability(array $options): array
+    {
+        $output = new BufferedOutput;
+        $exitCode = Artisan::call('personality:mbti-full-indexability-promote', $options, $output);
+        $decoded = json_decode(trim($output->fetch()), true);
+        self::assertIsArray($decoded);
+
+        return [$exitCode, $decoded];
+    }
+
+    /** @param array<string,mixed> $plan @return array<string,mixed> */
+    private function indexabilityOptions(string $path, bool $dryRun, array $plan = []): array
+    {
+        $options = [
+            '--package' => $path,
+            '--source-package-sha256' => self::SOURCE_PACKAGE_SHA,
+            '--import-scope-mode' => 'full_chinese_mbti_repair_batch_only',
+            '--record-count' => '43',
+            $dryRun ? '--dry-run' : '--write' => true,
+            '--json' => true,
+        ];
+        if (! $dryRun) {
+            $options += [
+                '--promotion-package-sha256' => (string) ($plan['promotion_package_sha256'] ?? ''),
+                '--authorization-payload-sha256' => (string) ($plan['authorization_payload_sha256'] ?? ''),
+                '--production-promotion-authorized' => true,
+                '--release-indexability' => true,
+                '--release-sitemap' => true,
+                '--release-llms' => true,
+                '--no-gsc' => true,
+                '--no-url-inspection' => true,
+                '--no-search-submission' => true,
+            ];
+        }
+
+        return $options;
     }
 
     /** @param array<string,mixed> $plan @return array<string,mixed> */
@@ -389,8 +522,10 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
     /** @return array<string,mixed> */
     private function jsonOutput(): array
     {
-        $decoded = json_decode(trim(Artisan::output()), true);
-        self::assertIsArray($decoded);
+        $output = trim(Artisan::output());
+        self::assertNotSame('', $output, 'Artisan command did not emit JSON.');
+        $decoded = json_decode($output, true);
+        self::assertIsArray($decoded, 'Invalid JSON: '.$output.'; error='.json_last_error_msg());
 
         return $decoded;
     }
