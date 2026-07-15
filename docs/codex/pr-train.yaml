@@ -43472,7 +43472,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-public-contract-04
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04: expose Enneagram Authority V2 visible-evidence contract"
-    status: pending_dependency
+    status: merged
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03
@@ -43516,7 +43516,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-revision-workspace-05
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05: add collision-safe Enneagram working-revision writer"
-    status: pending_dependency
+    status: local_checks_passed
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04
     scope:
@@ -43534,7 +43534,7 @@ prs:
     validation:
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php --no-ansi
-      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do backend/vendor/bin/pint --test "$file" || exit 1; done
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
