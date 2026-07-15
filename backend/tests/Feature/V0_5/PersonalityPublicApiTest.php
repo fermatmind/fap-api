@@ -1640,6 +1640,53 @@ final class PersonalityPublicApiTest extends TestCase
         }
     }
 
+    public function test_variant_detail_maps_promoted_profile_faq_into_answer_surface(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'zh-CN',
+            'title' => 'INTJ 人格',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $variant = $this->createVariant($profile, [
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => '建筑师',
+        ]);
+        $this->createVariantSeoMeta($variant, [
+            'robots' => 'index,follow',
+            'canonical_url' => 'https://fermatmind.com/zh/personality/intj-a',
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'section_key' => 'mbti64_promotion_metadata',
+            'render_variant' => 'callout',
+            'payload_json' => [
+                'raw_row' => [
+                    'faq' => [
+                        [
+                            'id' => 'intj-a-meaning',
+                            'question' => 'INTJ-A 是什么意思？',
+                            'answer' => 'INTJ-A 是 INTJ 基础偏好与 A 型压力风格的组合。',
+                        ],
+                    ],
+                ],
+            ],
+            'sort_order' => 990,
+            'is_enabled' => true,
+        ]);
+
+        $this->getJson('/api/v0.5/personality/intj-a?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.key', 'intj-a-meaning')
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'INTJ-A 是什么意思？')
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.answer', 'INTJ-A 是 INTJ 基础偏好与 A 型压力风格的组合。');
+    }
+
     public function test_detail_excludes_disabled_and_premium_teaser_sections(): void
     {
         $profile = $this->createProfile([
