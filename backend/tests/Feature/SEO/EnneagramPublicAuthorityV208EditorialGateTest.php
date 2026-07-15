@@ -639,6 +639,12 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '可收录',
             '发布就绪',
             '已完成人工审核',
+            'Already in the sitemap',
+            'Currently in llms.txt',
+            'Schema eligibility',
+            '已进入站点地图',
+            '已纳入 llms.txt',
+            '结构化数据已具备资格',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -649,7 +655,43 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexable.'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称已进入站点地图。'] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
+    public function test_source_ledger_equivalence_and_validity_claims_fail_closed(): void
+    {
+        foreach ([
+            'FermatMind Enneagram has instrument equivalence with RHETI',
+            'Wing validity is supported by research',
+            'Instinctual subtypes have cross-cultural equivalence',
+            '费马测试九型人格与 RHETI 具有工具等价性',
+            '翼型效度得到研究支持',
+            '本能副型具有跨文化等价性',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('unsupported_equivalence_or_validity_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach ([
+            'FermatMind does not establish instrument equivalence with RHETI.',
+            'Current research does not establish wing validity.',
+            'One study does not establish instinctual subtype cross-cultural equivalence.',
+            '费马测试不能证明工具等价性。',
+            '现有证据不能证明翼型效度。',
+            '单一研究不能证明本能副型具有跨文化等价性。',
+        ] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
