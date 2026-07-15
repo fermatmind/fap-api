@@ -1133,7 +1133,27 @@ final class BigFiveAuthorityV247Test extends TestCase
             $this->preflight()->packageOnly(self::REVIEW, $authorizationPath, $rollbackPath);
             $this->fail('Expected offsetting nonzero rollback effects to fail closed.');
         } catch (RuntimeException $exception) {
-            $this->assertStringContainsString('review and rollback artifacts must remain pending', $exception->getMessage());
+            $this->assertStringContainsString('Rollback plan identity/hold contract mismatch', $exception->getMessage());
+        } finally {
+            File::delete([$rollbackPath, $authorizationPath]);
+        }
+    }
+
+    public function test_database_preflight_rejects_rehashed_nonzero_rollback_effects(): void
+    {
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['effects']['database_writes'] = 1;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-database-rollback-nonzero-effects.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-database-authorization-nonzero-effects.json', $authorization);
+
+        try {
+            $this->preflight()->databasePreflight(self::REVIEW, $authorizationPath, $rollbackPath);
+            $this->fail('Expected database preflight to reject nonzero rollback effects.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('Rollback plan identity/hold contract mismatch', $exception->getMessage());
         } finally {
             File::delete([$rollbackPath, $authorizationPath]);
         }

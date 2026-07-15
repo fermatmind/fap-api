@@ -928,7 +928,8 @@ final class BigFiveReviewPromotionPreflight
         if (($rollback['schema_version'] ?? null) !== 'big5-authority-v2-promotion-rollback-plan.v1'
             || ($rollback['review_manifest_sha256'] ?? null) !== $reviewSha
             || count($rollback['rows'] ?? []) !== self::ASSET_COUNT
-            || ($rollback['execution_implemented'] ?? true) !== false) {
+            || ($rollback['execution_implemented'] ?? true) !== false
+            || ! $this->rollbackEffectsMatchZeroContract($rollback['effects'] ?? null)) {
             throw new RuntimeException('Rollback plan identity/hold contract mismatch.');
         }
         if (($authorization['schema_version'] ?? null) !== 'big5-authority-v2-cohort-promotion-authorization.v1'
@@ -1120,22 +1121,12 @@ final class BigFiveReviewPromotionPreflight
     private function assertPendingReviewAndRollback(array $review, array $rollback): void
     {
         $effects = $rollback['effects'] ?? null;
-        $expectedEffects = [
-            'database_writes' => 0,
-            'indexability_changes' => 0,
-            'promotions' => 0,
-            'public_release_changes' => 0,
-            'rollbacks' => 0,
-        ];
-        if (is_array($effects)) {
-            ksort($effects);
-        }
         if (($review['status'] ?? null) !== 'HOLD_PENDING_MANUAL_REVIEW_AND_RUNTIME_BINDING'
             || ($review['invariants']['production_promotion_currently_authorized'] ?? true) !== false
             || ($rollback['status'] ?? null) !== 'HOLD_PENDING_EXACT_RUNTIME_TARGETS'
             || ($rollback['abort_on_missing_target'] ?? false) !== true
             || ($rollback['execution_implemented'] ?? true) !== false
-            || $effects !== $expectedEffects) {
+            || ! $this->rollbackEffectsMatchZeroContract($effects)) {
             throw new RuntimeException('Package-only review and rollback artifacts must remain pending and non-executable.');
         }
         foreach ($review['rows'] as $row) {
@@ -1162,6 +1153,23 @@ final class BigFiveReviewPromotionPreflight
                 throw new RuntimeException('Package-only review and rollback artifacts must remain pending and non-executable.');
             }
         }
+    }
+
+    private function rollbackEffectsMatchZeroContract(mixed $effects): bool
+    {
+        if (! is_array($effects)) {
+            return false;
+        }
+
+        ksort($effects);
+
+        return $effects === [
+            'database_writes' => 0,
+            'indexability_changes' => 0,
+            'promotions' => 0,
+            'public_release_changes' => 0,
+            'rollbacks' => 0,
+        ];
     }
 
     /** @return array<string,array<string,mixed>> */
