@@ -950,16 +950,21 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     /** @param list<string> $patterns */
     private function withoutExplicitlyNegatedMatches(string $text, array $patterns): string
     {
+        $negatedMatches = [];
         foreach ($patterns as $pattern) {
             preg_match_all($pattern, $text, $matches, PREG_OFFSET_CAPTURE);
-            foreach (array_reverse($matches[0] ?? []) as [$claim, $offset]) {
+            foreach ($matches[0] ?? [] as [$claim, $offset]) {
                 $prefix = mb_substr(substr($text, 0, $offset), -120);
                 if (! $this->hasExplicitNegativePrefix($prefix)) {
                     continue;
                 }
 
-                $text = substr_replace($text, '', $offset, strlen($claim));
+                $negatedMatches[] = [$offset, strlen($claim)];
             }
+        }
+
+        foreach ($negatedMatches as [$offset, $length]) {
+            $text = substr_replace($text, str_repeat(' ', $length), $offset, $length);
         }
 
         return $text;
@@ -968,7 +973,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     private function hasExplicitNegativePrefix(string $prefix): bool
     {
         $commaLedEnglishClause = '/,\s*(?:(?:it|this|that|we|you|they|he|she|there)|(?:an?|the|this|that|these|those|our|your|their|its)\s+[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,3}|[\p{L}\p{N}_\'’\-]+(?:\s+[\p{L}\p{N}_\'’\-]+){0,2}\s+(?:is|are|was|were|has|have|had|does|do|did|can|could|will|would|should|must|may|might))\s*$/iu';
-        if (preg_match($commaLedEnglishClause, $prefix) === 1) {
+        $commaLedProperNounClause = '/,\s*\p{Lu}[\p{L}\p{M}\p{N}_\'’\-]*(?:\s+\p{Lu}[\p{L}\p{M}\p{N}_\'’\-]*){0,3}\s*$/u';
+        if (preg_match($commaLedEnglishClause, $prefix) === 1
+            || preg_match($commaLedProperNounClause, $prefix) === 1) {
             return false;
         }
 
