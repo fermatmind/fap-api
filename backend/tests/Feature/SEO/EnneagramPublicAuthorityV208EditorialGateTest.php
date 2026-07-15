@@ -35,6 +35,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
     {
         $candidate = $this->candidate();
         $candidate['assets'][1]['answer_first'] = $candidate['assets'][0]['answer_first'];
+        $candidate['assets'][0]['sections'][1]['body'] = $candidate['assets'][0]['sections'][0]['body'];
         $candidate['assets'][2]['sections'][0]['body'] = 'Type 1 notices a recurring pressure signal in a specific meeting context, checks a concrete counterexample, and records a uniquely tagged alternative explanation before acting.';
         $candidate['assets'][3]['sections'][0]['body'] = 'Type 2 notices a recurring pressure signal in a specific meeting context, checks a concrete counterexample, and records a uniquely tagged alternative explanation before acting.';
         $pair = $this->localePairIndexes($candidate, 'hub:enneagram');
@@ -66,9 +67,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
     public function test_science_prediction_hidden_evidence_competitor_and_model_review_fixtures_fail_closed(): void
     {
         $candidate = $this->candidate();
-        $candidate['assets'][0]['sections'][0]['body'] = 'Truity wording is scientifically proven by neuroscience and predicts career success, relationship success, and the perfect partner.';
+        $candidate['assets'][0]['observation_exercise']['reflection_prompt'] = 'Truity wording is scientifically proven by neuroscience and predicts career success, relationship success, and the perfect partner.';
         $candidate['assets'][0]['visible_evidence']['visible'] = false;
-        $candidate['assets'][0]['visible_evidence']['claim_ids'] = [];
+        $candidate['assets'][0]['visible_evidence']['claim_ids'] = ['claim.blocked.predictive_outcomes'];
+        $candidate['assets'][0]['visible_evidence']['limitations'] = ['', 'placeholder'];
         $candidate['assets'][0]['review_truth'] = [
             'status' => 'approved',
             'reviewer' => 'Codex model QA',
@@ -86,6 +88,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('competitor_language_detected', $codes);
         $this->assertContains('visible_evidence_or_limitations_missing', $codes);
         $this->assertContains('factual_claim_hidden', $codes);
+        $this->assertContains('visible_claim_not_declared', $codes);
+        $this->assertContains('visible_claim_not_authorized', $codes);
         $this->assertContains('manual_review_truth_invalid', $codes);
         $this->assertFalse($result['human_review_completed']);
         $this->assertFalse($result['publish_eligible']);
@@ -105,6 +109,20 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('target_count_invalid', $codes);
         $this->assertContains('target_asset_missing', $codes);
         $this->assertSame(116, $result['qa_row_count']);
+    }
+
+    public function test_answerability_placeholders_fail_closed(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['answerability'] = [
+            'direct_answer_supported' => true,
+            'questions' => ['a', ' b ', 'c'],
+        ];
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('geo_answerability_insufficient', collect($result['issues'])->pluck('code')->all());
     }
 
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void

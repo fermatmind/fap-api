@@ -610,7 +610,14 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     {
         $answerability = is_array($asset['answerability'] ?? null) ? $asset['answerability'] : [];
         $questions = is_array($answerability['questions'] ?? null) ? $answerability['questions'] : [];
-        if (($answerability['direct_answer_supported'] ?? null) !== true || count(array_unique(array_map('strval', $questions))) < 3) {
+        $minimumQuestionLength = ($asset['locale'] ?? null) === 'zh-CN' ? 8 : 12;
+        $normalizedQuestions = array_values(array_unique(array_filter(array_map(
+            fn (mixed $question): string => $this->normalize($question),
+            $questions,
+        ))));
+        if (($answerability['direct_answer_supported'] ?? null) !== true
+            || count($normalizedQuestions) < 3
+            || min(array_map('mb_strlen', $normalizedQuestions ?: [''])) < $minimumQuestionLength) {
             $add(self::EDITORIAL_GATES[6], 'geo_answerability_insufficient', $key, "{$path}.answerability", 'Each page must declare at least three distinct questions supported by visible direct answers.');
         }
     }
@@ -621,7 +628,11 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $evidence = is_array($asset['visible_evidence'] ?? null) ? $asset['visible_evidence'] : [];
         $assetClaimIds = array_values(array_unique(array_map('strval', is_array($asset['claim_ids'] ?? null) ? $asset['claim_ids'] : [])));
         $visibleClaimIds = array_values(array_unique(array_map('strval', is_array($evidence['claim_ids'] ?? null) ? $evidence['claim_ids'] : [])));
-        if (($evidence['visible'] ?? null) !== true || count(is_array($evidence['limitations'] ?? null) ? $evidence['limitations'] : []) < 2) {
+        $limitations = array_values(array_filter(
+            is_array($evidence['limitations'] ?? null) ? $evidence['limitations'] : [],
+            fn (mixed $limitation): bool => $this->length($limitation) >= 30,
+        ));
+        if (($evidence['visible'] ?? null) !== true || count($limitations) < 2) {
             $add(self::EDITORIAL_GATES[7], 'visible_evidence_or_limitations_missing', $key, "{$path}.visible_evidence", 'Evidence and at least two limitations must be visible in the candidate content.');
         }
         if ($map === null) {
@@ -645,6 +656,14 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 $add(self::EDITORIAL_GATES[9], 'claim_unknown', $key, "{$path}.claim_ids", "Claim {$claimId} is not in the source registry.");
             } elseif (! in_array($claimId, $permitted, true)) {
                 $add(self::EDITORIAL_GATES[9], 'claim_not_authorized_for_page', $key, "{$path}.claim_ids", "Claim {$claimId} is blocked or not authorized for this page.");
+            }
+        }
+        foreach ($visibleClaimIds as $claimId) {
+            if (! in_array($claimId, $assetClaimIds, true)) {
+                $add(self::EDITORIAL_GATES[9], 'visible_claim_not_declared', $key, "{$path}.visible_evidence.claim_ids", "Visible evidence claim {$claimId} is absent from the page claim declaration.");
+            }
+            if (! isset($claims[$claimId]) || ! in_array($claimId, $permitted, true)) {
+                $add(self::EDITORIAL_GATES[9], 'visible_claim_not_authorized', $key, "{$path}.visible_evidence.claim_ids", "Visible evidence claim {$claimId} is unknown, blocked, or unauthorized for this page.");
             }
         }
     }
@@ -695,7 +714,11 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 $blocks[] = (string) ($faq['answer'] ?? '');
             }
         }
-        $text = implode("\n", $blocks);
+        $safetyBlocks = $blocks;
+        foreach (['observation_exercise', 'answerability', 'visible_evidence'] as $visibleField) {
+            $this->appendVisibleStrings($safetyBlocks, $asset[$visibleField] ?? null);
+        }
+        $text = implode("\n", $safetyBlocks);
         foreach ([
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
@@ -709,13 +732,13 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         foreach ($blocks as $index => $block) {
             $normalized = $this->normalize($block);
             if (mb_strlen($normalized) >= 80) {
-                if (isset($paragraphs[$normalized]) && $paragraphs[$normalized]['key'] !== $key) {
+                if (isset($paragraphs[$normalized])) {
                     $add(self::EDITORIAL_GATES[3], 'duplicate_paragraph', $key, "{$path}.text.{$index}", "Paragraph duplicates {$paragraphs[$normalized]['path']}.");
                 }
                 $paragraphs[$normalized] = ['key' => $key, 'path' => "{$path}.text.{$index}"];
 
                 $template = preg_replace('/(?:type[1-9]|[1-9]w[1-9]|(?:sp|so|sx)[-_]?[1-9]|第?[1-9]型)/iu', '{type}', $normalized) ?? $normalized;
-                if (isset($typeTemplates[$template]) && $typeTemplates[$template]['key'] !== $key) {
+                if (isset($typeTemplates[$template])) {
                     $add(self::EDITORIAL_GATES[3], 'type_number_substitution_template', $key, "{$path}.text.{$index}", "Text differs from {$typeTemplates[$template]['path']} only by a type label or number.");
                 }
                 $typeTemplates[$template] = ['key' => $key, 'path' => "{$path}.text.{$index}"];
@@ -726,7 +749,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
                 if (mb_strlen($normalizedSentence) < 50) {
                     continue;
                 }
-                if (isset($sentences[$normalizedSentence]) && $sentences[$normalizedSentence]['key'] !== $key) {
+                if (isset($sentences[$normalizedSentence])) {
                     $add(self::EDITORIAL_GATES[3], 'duplicate_sentence', $key, "{$path}.text.{$index}", "Sentence duplicates {$sentences[$normalizedSentence]['path']}.");
                 }
                 $sentences[$normalizedSentence] = ['key' => $key, 'path' => "{$path}.text.{$index}"];
@@ -742,5 +765,20 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     private function length(mixed $value): int
     {
         return mb_strlen(trim((string) $value));
+    }
+
+    /** @param list<string> $blocks */
+    private function appendVisibleStrings(array &$blocks, mixed $value): void
+    {
+        if (is_array($value)) {
+            foreach ($value as $child) {
+                $this->appendVisibleStrings($blocks, $child);
+            }
+
+            return;
+        }
+        if (is_string($value) && trim($value) !== '') {
+            $blocks[] = $value;
+        }
     }
 }
