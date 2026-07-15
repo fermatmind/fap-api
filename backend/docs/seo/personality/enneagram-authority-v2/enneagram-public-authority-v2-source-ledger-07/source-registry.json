@@ -1,0 +1,417 @@
+{
+  "artifact": "enneagram_public_authority_v2_source_registry",
+  "schema_version": "1.0.0",
+  "train_item": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",
+  "generated_at": "2026-07-15T09:00:00Z",
+  "access_date": "2026-07-15",
+  "locales": [
+    "en",
+    "zh-CN"
+  ],
+  "source_categories": [
+    "systematic_review",
+    "primary_empirical",
+    "measurement_documentation",
+    "traditional_theory",
+    "competitor_intent",
+    "editorial_synthesis",
+    "blocked_or_unverified"
+  ],
+  "authority": {
+    "owner": "fap-api CMS/backend",
+    "artifact_role": "evidence_preparation_only",
+    "runtime_authority": false,
+    "publish_authority": false,
+    "indexability_authority": false
+  },
+  "safety_boundaries": {
+    "cms_mutation_executed": false,
+    "production_write_executed": false,
+    "deploy_executed": false,
+    "indexability_mutation_executed": false,
+    "schema_activation_executed": false,
+    "search_submission_executed": false
+  },
+  "sources": [
+    {
+      "id": "hook_2021_systematic_review",
+      "category": "systematic_review",
+      "title": "The Enneagram: A systematic review of the literature and directions for future research",
+      "authors_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
+      "year": 2021,
+      "doi": "10.1002/jclp.23097",
+      "public_url": "https://doi.org/10.1002/jclp.23097",
+      "internal_path": null,
+      "isbn": null,
+      "accessed_at": "2026-07-15",
+      "supported_use": "Synthesize the empirical literature and identify mixed reliability/validity findings plus weak support for secondary constructs.",
+      "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
+      "page_families": [
+        "hub",
+        "center",
+        "core_type",
+        "wing",
+        "instinctual_subtype"
+      ],
+      "scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true,
+      "competitor": false
+    },
+    {
+      "id": "sutton_2013_work_outcomes",
+      "category": "primary_empirical",
+      "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
+      "authors_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
+      "year": 2013,
+      "doi": "10.1016/j.emj.2012.12.004",
+      "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
+      "internal_path": null,
+      "isbn": null,
+      "accessed_at": "2026-07-15",
+      "supported_use": "Document that exploratory empirical applications to work-related outcomes exist.",
+      "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
+      "page_families": [
+        "hub",
+        "core_type"
+      ],
+      "scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true,
+      "competitor": false
+    },
+    {
+      "id": "tastan_2019_inventory",
+      "category": "measurement_documentation",
+      "title": "Development and Validation of a Personality Type Inventory Based on Enneagram",
+      "authors_or_organization": "Kenan Tastan",
+      "year": 2019,
+      "doi": "10.18521/ktd.462049",
+      "public_url": "https://doi.org/10.18521/ktd.462049",
+      "internal_path": null,
+      "isbn": null,
+      "accessed_at": "2026-07-15",
+      "supported_use": "Document development of one Turkish-language Enneagram inventory.",
+      "limitation": "Evidence is instrument-, language-, sample-, and study-specific; it cannot transfer to FermatMind reliability, validity, norms, percentiles, or interpretation.",
+      "page_families": [
+        "hub",
+        "core_type"
+      ],
+      "scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true,
+      "competitor": false
+    },
+    {
+      "id": "yanartas_2022_types_subtypes",
+      "category": "measurement_documentation",
+      "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
+      "authors_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
+      "year": 2022,
+      "doi": "10.21673/anadoluklin.1104082",
+      "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
+      "internal_path": null,
+      "isbn": null,
+      "accessed_at": "2026-07-15",
+      "supported_use": "Document one Turkish self-report study operationalizing type and instinctual-subtype scales.",
+      "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
+      "page_families": [
+        "hub",
+        "core_type",
+        "instinctual_subtype"
+      ],
+      "scientific_evidence_eligible": true,
+      "sole_scientific_evidence_eligible": true,
+      "competitor": false
+    },
+    {
+      "id": "riso_hudson_1999_wisdom",
+      "category": "traditional_theory",
+      "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
+      "authors_or_organization": "Don Richard Riso; Russ Hudson",
+      "year": 1999,
+      "doi": null,
+      "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
+      "internal_path": null,
+      "isbn": "9780553378207",
+      "accessed_at": "2026-07-15",
+      "supported_use": "Trace traditional nine-type, center, and wing vocabulary.",
+      "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
+      "page_families": [
+        "hub",
+        "center",
+        "core_type",
+        "wing"
+      ],
+      "scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false,
+      "competitor": false
+    },
+    {
+      "id": "naranjo_1994_character_neurosis",
+      "category": "traditional_theory",
+      "title": "Character and Neurosis: An Integrative View",
+      "authors_or_organization": "Claudio Naranjo",
+      "year": 1994,
+      "doi": null,
+      "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
+      "internal_path": null,
+      "isbn": "9780895560667",
+      "accessed_at": "2026-07-15",
+      "supported_use": "Trace traditional type and subtype vocabulary as theory history.",
+      "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
+      "page_families": [
+        "hub",
+        "core_type",
+        "instinctual_subtype"
+      ],
+      "scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false,
+      "competitor": false
+    },
+    {
+      "id": "truity_benchmark_registry_2026",
+      "category": "competitor_intent",
+      "title": "Frozen Truity URL and intent registry",
+      "authors_or_organization": "FermatMind benchmark capture of public Truity surfaces",
+      "year": 2026,
+      "doi": null,
+      "public_url": null,
+      "internal_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-benchmark-01/truity-url-registry.json",
+      "isbn": null,
+      "accessed_at": "2026-07-15",
+      "supported_use": "Read-only comparison of public page types, intent clusters, and structural coverage.",
+      "limitation": "Competitor wording and self-reported claims are not scientific evidence, FermatMind authority, superiority evidence, or permission to copy.",
+      "page_families": [
+        "hub",
+        "center",
+        "core_type",
+        "wing",
+        "instinctual_subtype"
+      ],
+      "scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false,
+      "competitor": true
+    },
+    {
+      "id": "fermatmind_public_claim_boundary",
+      "category": "editorial_synthesis",
+      "title": "Fermat Claim Boundary",
+      "authors_or_organization": "FermatMind repository policy",
+      "year": 2026,
+      "doi": null,
+      "public_url": null,
+      "internal_path": "docs/seo/skills/fermat-claim-boundary.md",
+      "isbn": null,
+      "accessed_at": "2026-07-15",
+      "supported_use": "Apply non-diagnostic, non-deterministic, non-predictive, and authority-boundary language.",
+      "limitation": "Repository policy governs product claims but is not independent scientific evidence.",
+      "page_families": [
+        "hub",
+        "center",
+        "core_type",
+        "wing",
+        "instinctual_subtype"
+      ],
+      "scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false,
+      "competitor": false
+    },
+    {
+      "id": "blocked_enneagram_public_assumptions",
+      "category": "blocked_or_unverified",
+      "title": "Enneagram Public Authority V2 blocked or unverified assumptions",
+      "authors_or_organization": "FermatMind source-ledger gate",
+      "year": 2026,
+      "doi": null,
+      "public_url": null,
+      "internal_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/BLOCKED_OR_UNVERIFIED_ASSUMPTIONS.md",
+      "isbn": null,
+      "accessed_at": "2026-07-15",
+      "supported_use": "Keep unsupported psychometrics, prediction, review identity, and release eligibility explicitly blocked.",
+      "limitation": "A blocked record supplies no positive evidence; Unknown remains Unknown until direct evidence and accountable approval exist.",
+      "page_families": [
+        "hub",
+        "center",
+        "core_type",
+        "wing",
+        "instinctual_subtype"
+      ],
+      "scientific_evidence_eligible": false,
+      "sole_scientific_evidence_eligible": false,
+      "competitor": false
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim.framework.nine_type_observation",
+      "classification": "evidence_limited_scientific",
+      "factual": true,
+      "allowed_as_public_claim": true,
+      "requires_human_review": true,
+      "allowed_summary_en": "The Enneagram is commonly presented as a nine-type framework for structured self-observation.",
+      "allowed_summary_zh_cn": "九型人格通常被呈现为一种用于结构化自我观察的九类型框架。",
+      "source_ids": [
+        "hook_2021_systematic_review"
+      ],
+      "primary_source_ids": [
+        "hook_2021_systematic_review"
+      ],
+      "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered."
+    },
+    {
+      "id": "claim.evidence.mixed_and_instrument_specific",
+      "classification": "evidence_limited_scientific",
+      "factual": true,
+      "allowed_as_public_claim": true,
+      "requires_human_review": true,
+      "allowed_summary_en": "Published Enneagram reliability and validity findings are mixed and depend on instrument, sample, language, and design.",
+      "allowed_summary_zh_cn": "已发表的九型人格信度与效度结果并不一致，并取决于量表、样本、语言与研究设计。",
+      "source_ids": [
+        "hook_2021_systematic_review"
+      ],
+      "primary_source_ids": [
+        "hook_2021_systematic_review"
+      ],
+      "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations."
+    },
+    {
+      "id": "claim.application.exploratory_not_predictive",
+      "classification": "evidence_limited_scientific",
+      "factual": true,
+      "allowed_as_public_claim": true,
+      "requires_human_review": true,
+      "allowed_summary_en": "Some studies have explored associations between Enneagram types and work-related outcomes.",
+      "allowed_summary_zh_cn": "部分研究探索了九型人格类型与工作相关结果之间的关联。",
+      "source_ids": [
+        "sutton_2013_work_outcomes",
+        "hook_2021_systematic_review"
+      ],
+      "primary_source_ids": [
+        "sutton_2013_work_outcomes"
+      ],
+      "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes."
+    },
+    {
+      "id": "claim.center.traditional_model",
+      "classification": "traditional_theory_limited",
+      "factual": true,
+      "allowed_as_public_claim": true,
+      "requires_human_review": true,
+      "allowed_summary_en": "Center groupings are traditional organizing concepts within Enneagram theory.",
+      "allowed_summary_zh_cn": "中心分组是九型人格传统理论中的组织性概念。",
+      "source_ids": [
+        "riso_hudson_1999_wisdom",
+        "hook_2021_systematic_review"
+      ],
+      "primary_source_ids": [
+        "hook_2021_systematic_review"
+      ],
+      "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities."
+    },
+    {
+      "id": "claim.wing.traditional_secondary_hypothesis",
+      "classification": "traditional_theory_limited",
+      "factual": true,
+      "allowed_as_public_claim": true,
+      "requires_human_review": true,
+      "allowed_summary_en": "A wing is a traditional secondary hypothesis used to discuss variation around a core type.",
+      "allowed_summary_zh_cn": "翼型是传统理论中的次级假设，用来讨论核心类型周边的差异。",
+      "source_ids": [
+        "hook_2021_systematic_review",
+        "riso_hudson_1999_wisdom"
+      ],
+      "primary_source_ids": [
+        "hook_2021_systematic_review"
+      ],
+      "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity."
+    },
+    {
+      "id": "claim.subtype.traditional_secondary_hypothesis",
+      "classification": "traditional_theory_limited",
+      "factual": true,
+      "allowed_as_public_claim": true,
+      "requires_human_review": true,
+      "allowed_summary_en": "Instinctual subtypes are traditional secondary hypotheses that some instruments operationalize for study.",
+      "allowed_summary_zh_cn": "本能副型是传统理论中的次级假设，部分量表会将其操作化用于研究。",
+      "source_ids": [
+        "naranjo_1994_character_neurosis",
+        "yanartas_2022_types_subtypes",
+        "hook_2021_systematic_review"
+      ],
+      "primary_source_ids": [
+        "yanartas_2022_types_subtypes",
+        "hook_2021_systematic_review"
+      ],
+      "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity."
+    },
+    {
+      "id": "claim.boundary.non_diagnostic",
+      "classification": "editorial_boundary",
+      "factual": false,
+      "allowed_as_public_claim": true,
+      "requires_human_review": true,
+      "allowed_summary_en": "Use results as structured reflection prompts, not medical diagnoses or fixed judgments about identity, ability, or future outcomes.",
+      "allowed_summary_zh_cn": "把结果作为结构化反思提示，而不是医疗诊断，也不是对身份、能力或未来结果的固定判断。",
+      "source_ids": [
+        "fermatmind_public_claim_boundary"
+      ],
+      "primary_source_ids": [],
+      "limitation": "This product boundary does not establish scientific validity or clinical utility."
+    },
+    {
+      "id": "claim.competitor.intent_only",
+      "classification": "competitor_intent_only",
+      "factual": false,
+      "allowed_as_public_claim": false,
+      "requires_human_review": true,
+      "allowed_summary_en": "Competitor pages may inform intent comparison only.",
+      "allowed_summary_zh_cn": "竞品页面只能用于意图对比。",
+      "source_ids": [
+        "truity_benchmark_registry_2026"
+      ],
+      "primary_source_ids": [],
+      "limitation": "Never use competitor content as scientific evidence, FermatMind authority, endorsement, superiority evidence, or copied wording."
+    },
+    {
+      "id": "claim.blocked.fermatmind_psychometrics",
+      "classification": "blocked_or_unverified",
+      "factual": false,
+      "allowed_as_public_claim": false,
+      "requires_human_review": true,
+      "allowed_summary_en": "FermatMind-specific reliability, validity, norms, and percentiles remain Unknown.",
+      "allowed_summary_zh_cn": "费马测试自身的信度、效度、常模与百分位仍为 Unknown。",
+      "source_ids": [
+        "blocked_enneagram_public_assumptions"
+      ],
+      "primary_source_ids": [],
+      "limitation": "Do not publish validation claims without version-matched direct evidence and operator approval."
+    },
+    {
+      "id": "claim.blocked.predictive_outcomes",
+      "classification": "blocked_or_unverified",
+      "factual": false,
+      "allowed_as_public_claim": false,
+      "requires_human_review": true,
+      "allowed_summary_en": "Predictive career, hiring, relationship, health, admission, income, legal, and financial outcomes are blocked.",
+      "allowed_summary_zh_cn": "职业预测、录用、关系、健康、升学、收入、法律与金融结果主张均被阻断。",
+      "source_ids": [
+        "blocked_enneagram_public_assumptions",
+        "fermatmind_public_claim_boundary"
+      ],
+      "primary_source_ids": [],
+      "limitation": "No source in this ledger authorizes prediction, screening, diagnosis, or guaranteed outcomes."
+    },
+    {
+      "id": "claim.blocked.human_review_and_release",
+      "classification": "blocked_or_unverified",
+      "factual": false,
+      "allowed_as_public_claim": false,
+      "requires_human_review": true,
+      "allowed_summary_en": "Named human review and current release eligibility remain unverified.",
+      "allowed_summary_zh_cn": "具名人工审核与当前发布资格仍未验证。",
+      "source_ids": [
+        "blocked_enneagram_public_assumptions"
+      ],
+      "primary_source_ids": [],
+      "limitation": "Agent preparation is not human review, and a source map is not a publication or indexability gate."
+    }
+  ]
+}

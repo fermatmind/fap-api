@@ -93114,8 +93114,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "8868e8f3e8ca36372f1c0f27092be775a8f648d2",
+    "status": "merged",
+    "commit_sha": "7ff9df0eca65ca1071ba6565c201ca92b5a00575",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3109",
     "checks": {
       "dependency": {
@@ -93139,12 +93139,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T08:31:39Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -93206,9 +93206,14 @@
         "at": "2026-07-15T08:24:36Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on final code head 8868e8f3e, GitHub is CLEAN/MERGEABLE, all six automated review threads are resolved, and scope remains exactly six allowlisted paths. Ready for squash merge after this ledger-only head revalidates."
+      },
+      {
+        "at": "2026-07-15T08:43:42Z",
+        "status": "merged",
+        "note": "PR #3109 merged at 2026-07-15T08:31:39Z as 7ff9df0eca65ca1071ba6565c201ca92b5a00575 after all nine checks passed on final head 1ad58b0263639a889a1d9a45d0c04f8bcb9860f0. origin/main containment, remote branch deletion, safe local cleanup, clean worktrees, and focused promoter/classifier post-merge regressions were verified before PR07 implementation."
       }
     ],
-    "updated_at": "2026-07-15T08:24:36Z"
+    "updated_at": "2026-07-15T08:43:42Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",
@@ -93219,19 +93224,36 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "e21bc07b8ee303918d7805ab69e7cd281b6632f2",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3111",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR06 merged as 7ff9df0eca65ca1071ba6565c201ca92b5a00575; origin/main containment, all nine green checks, branch cleanup, and post-merge focused regressions were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "First focused run passed 9 of 10 tests and 3849 assertions except one fixture assertion: the zh-CN subtype limitation retained the intended English term with initial capitalization while the assertion was case-sensitive. No authority, mapping, or claim-boundary defect was found; the assertion was made case-insensitive before retry."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Final manifest replay passed: focused source-ledger suite 10 tests / 3955 assertions; Pint test for the new feature file; YAML and all JSON parse; git diff check; and exact seven-file allowlist. The package contains one registry, 116 scorecard-matched maps, zero unmapped allowed factual claims, zero competitor-as-science mappings, explicit wing/subtype limitations, and explicit blocked assumptions."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All nine required checks passed on final ready-to-merge ledger head a9e73801bcf2bb222b8ff4e6429401e29b2219aa: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS."
+      },
+      "review_fixes": {
+        "status": "pass",
+        "evidence": "Validated and fixed all six applicable automated P2 findings: predecessor and current substantive SHAs are auditable; internal paths share the backend root and resolve; mapped claim sources support their page families; cross-family base claims use the systematic review rather than wider measurement scope; and the product boundary source points directly to docs/seo/skills/fermat-claim-boundary.md, whose core rule explicitly forbids diagnosis, hiring-fit, and career-success prediction. Focused validation passes 13 tests / 5095 assertions plus Pint. One later suggestion to record a pre-merge synthetic squash SHA was dismissed as inapplicable: an actual main-reachable squash commit does not exist until merge and will be reconciled by the next serial PR after GitHub MERGED and origin/main containment are verified."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93249,9 +93271,59 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-15T08:43:42Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR06 merge and began the exact PR07 branch from clean latest origin/main. This scope freezes one bilingual source registry and 116 limited claim maps only; no CMS/database write, promotion, publication, deploy, schema, sitemap, llms, or indexability mutation is authorized."
+      },
+      {
+        "at": "2026-07-15T08:44:30Z",
+        "status": "local_check_failed_fixture",
+        "note": "The initial focused suite passed 9 / 10 tests and 3849 assertions; only a case-sensitive fixture check missed the capitalized English term in the zh-CN subtype limitation. The data and evidence boundary were correct, so the assertion was narrowed to a case-insensitive match before retry."
+      },
+      {
+        "at": "2026-07-15T08:45:31Z",
+        "status": "local_checks_passed",
+        "note": "All PR07 manifest checks passed after the fixture-only correction: 10 tests / 3955 assertions, Pint, YAML, JSON, diff check, and exact seven-file scope. One registry and 116 scorecard-matched maps preserve bilingual limitations, competitor isolation, Unknown blocks, and non-mutation boundaries."
+      },
+      {
+        "at": "2026-07-15T08:48:13Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact seven-file branch and opened the single authorized fap-api PR #3111 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE with initial checks queued and no reviews."
+      },
+      {
+        "at": "2026-07-15T08:55:26Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on 1ce93d2dd, then two valid P2 threads were fixed: the predecessor ledger now stores PR06's main-reachable squash commit, and registry internal paths share one backend-root base with a resolving-path regression. Focused validation passes 11 / 3960 plus Pint; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T09:03:21Z",
+        "status": "review_fixes_local_verified",
+        "note": "The first review-fix head passed all nine checks, then two additional valid P2 threads were fixed: PR07 now records the reviewed fix head, and cross-family claims cite only sources whose declared page_families include the mapped page. The new family-compatibility regression passes within 12 tests / 5091 assertions; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T09:10:14Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on substantive head efba123156, GitHub is MERGEABLE, and all five automated P2 findings are fixed in scope. commit_sha intentionally records the latest reviewed substantive head containing all implementation, regression, and review-fix evidence; any following ready-to-merge commit is ledger-only bookkeeping and must pass final checks before merge."
+      },
+      {
+        "at": "2026-07-15T09:18:31Z",
+        "status": "review_fixes_local_verified",
+        "note": "The ledger-ready head passed all nine checks, then a sixth valid P2 was fixed: the non-diagnostic/non-predictive boundary source now points to the direct Fermat Claim Boundary authority rather than root AGENTS.md. A semantic traceability regression passes within 13 tests / 5095 assertions plus Pint; latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T09:26:17Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on cbfa16b82, GitHub is MERGEABLE, all six applicable P2 findings are fixed, and all review threads are resolved. The suggestion to pre-record a synthetic squash SHA was rejected because no actual main-reachable squash commit exists before merge; PR08 will reconcile the real merge commit after GitHub MERGED and origin/main containment."
+      },
+      {
+        "at": "2026-07-15T09:35:35Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on final ledger head a9e73801b. A valid review caught that a prior broad JSON status patch had changed ARTICLE-H1-04 instead of PR07; the unrelated entry was restored and PR07's top-level state was corrected to match its ready_to_merge manifest and transition. This bookkeeping-only correction requires one final check round."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-15T09:35:35Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",

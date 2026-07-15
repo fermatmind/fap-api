@@ -1,0 +1,3762 @@
+{
+  "artifact": "enneagram_public_authority_v2_page_claim_maps",
+  "schema_version": "1.0.0",
+  "train_item": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",
+  "registry_file": "source-registry.json",
+  "benchmark_file": "../enneagram-public-authority-v2-benchmark-01/production-scorecard.json",
+  "target_count": 116,
+  "locale_counts": {
+    "en": 58,
+    "zh-CN": 58
+  },
+  "entity_counts": {
+    "hub": 2,
+    "center": 6,
+    "core_type": 18,
+    "wing": 36,
+    "instinctual_subtype": 54
+  },
+  "mapping_policy": {
+    "every_factual_claim_must_resolve": true,
+    "every_claim_must_have_limitation": true,
+    "competitor_as_science_allowed": false,
+    "wing_and_subtype_limitations_required": true,
+    "manual_review_required_before_public_use": true
+  },
+  "execution_boundaries": {
+    "cms_mutation_executed": false,
+    "production_write_executed": false,
+    "promotion_executed": false,
+    "publish_executed": false,
+    "indexability_mutation_executed": false,
+    "deploy_executed": false
+  },
+  "page_maps": [
+    {
+      "identity_key": "hub:enneagram",
+      "locale": "en",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "path": "/en/personality/enneagram",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "center:gut",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "gut",
+      "path": "/en/personality/enneagram/centers/gut",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "center:heart",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "heart",
+      "path": "/en/personality/enneagram/centers/heart",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "center:head",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "head",
+      "path": "/en/personality/enneagram/centers/head",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-1",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "path": "/en/personality/enneagram/type-1",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-2",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "path": "/en/personality/enneagram/type-2",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-3",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "path": "/en/personality/enneagram/type-3",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-4",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "path": "/en/personality/enneagram/type-4",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-5",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "path": "/en/personality/enneagram/type-5",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-6",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "path": "/en/personality/enneagram/type-6",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-7",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-7",
+      "path": "/en/personality/enneagram/type-7",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-8",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-8",
+      "path": "/en/personality/enneagram/type-8",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-9",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "path": "/en/personality/enneagram/type-9",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:1w9",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "1w9",
+      "path": "/en/personality/enneagram/wings/1w9",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:1w2",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "1w2",
+      "path": "/en/personality/enneagram/wings/1w2",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:2w1",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "2w1",
+      "path": "/en/personality/enneagram/wings/2w1",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:2w3",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "2w3",
+      "path": "/en/personality/enneagram/wings/2w3",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:3w2",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "3w2",
+      "path": "/en/personality/enneagram/wings/3w2",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:3w4",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "3w4",
+      "path": "/en/personality/enneagram/wings/3w4",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:4w3",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "4w3",
+      "path": "/en/personality/enneagram/wings/4w3",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:4w5",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "4w5",
+      "path": "/en/personality/enneagram/wings/4w5",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:5w4",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "5w4",
+      "path": "/en/personality/enneagram/wings/5w4",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:5w6",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "5w6",
+      "path": "/en/personality/enneagram/wings/5w6",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:6w5",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "6w5",
+      "path": "/en/personality/enneagram/wings/6w5",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:6w7",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "6w7",
+      "path": "/en/personality/enneagram/wings/6w7",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:7w6",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "7w6",
+      "path": "/en/personality/enneagram/wings/7w6",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:7w8",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "7w8",
+      "path": "/en/personality/enneagram/wings/7w8",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:8w7",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "8w7",
+      "path": "/en/personality/enneagram/wings/8w7",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:8w9",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "8w9",
+      "path": "/en/personality/enneagram/wings/8w9",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:9w8",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "9w8",
+      "path": "/en/personality/enneagram/wings/9w8",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:9w1",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "9w1",
+      "path": "/en/personality/enneagram/wings/9w1",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/self-preservation",
+      "path": "/en/personality/enneagram/type-1/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/social",
+      "path": "/en/personality/enneagram/type-1/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/one-to-one",
+      "path": "/en/personality/enneagram/type-1/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/self-preservation",
+      "path": "/en/personality/enneagram/type-2/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/social",
+      "path": "/en/personality/enneagram/type-2/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/one-to-one",
+      "path": "/en/personality/enneagram/type-2/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/self-preservation",
+      "path": "/en/personality/enneagram/type-3/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/social",
+      "path": "/en/personality/enneagram/type-3/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/one-to-one",
+      "path": "/en/personality/enneagram/type-3/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/self-preservation",
+      "path": "/en/personality/enneagram/type-4/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/social",
+      "path": "/en/personality/enneagram/type-4/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/one-to-one",
+      "path": "/en/personality/enneagram/type-4/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/self-preservation",
+      "path": "/en/personality/enneagram/type-5/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/social",
+      "path": "/en/personality/enneagram/type-5/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/one-to-one",
+      "path": "/en/personality/enneagram/type-5/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/self-preservation",
+      "path": "/en/personality/enneagram/type-6/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/social",
+      "path": "/en/personality/enneagram/type-6/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/one-to-one",
+      "path": "/en/personality/enneagram/type-6/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-7/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/self-preservation",
+      "path": "/en/personality/enneagram/type-7/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-7/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/social",
+      "path": "/en/personality/enneagram/type-7/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-7/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/one-to-one",
+      "path": "/en/personality/enneagram/type-7/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-8/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/self-preservation",
+      "path": "/en/personality/enneagram/type-8/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-8/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/social",
+      "path": "/en/personality/enneagram/type-8/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-8/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/one-to-one",
+      "path": "/en/personality/enneagram/type-8/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-9/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/self-preservation",
+      "path": "/en/personality/enneagram/type-9/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-9/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/social",
+      "path": "/en/personality/enneagram/type-9/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-9/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/one-to-one",
+      "path": "/en/personality/enneagram/type-9/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+        "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "hub:enneagram",
+      "locale": "zh-CN",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "path": "/zh/personality/enneagram",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "center:gut",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "gut",
+      "path": "/zh/personality/enneagram/centers/gut",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "center:heart",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "heart",
+      "path": "/zh/personality/enneagram/centers/heart",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "center:head",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "head",
+      "path": "/zh/personality/enneagram/centers/head",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-1",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "path": "/zh/personality/enneagram/type-1",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-2",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "path": "/zh/personality/enneagram/type-2",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-3",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "path": "/zh/personality/enneagram/type-3",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-4",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "path": "/zh/personality/enneagram/type-4",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-5",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "path": "/zh/personality/enneagram/type-5",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-6",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "path": "/zh/personality/enneagram/type-6",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-7",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-7",
+      "path": "/zh/personality/enneagram/type-7",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-8",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-8",
+      "path": "/zh/personality/enneagram/type-8",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "core_type:type-9",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "path": "/zh/personality/enneagram/type-9",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.center.traditional_model",
+        "claim.application.exploratory_not_predictive",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:1w9",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "1w9",
+      "path": "/zh/personality/enneagram/wings/1w9",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:1w2",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "1w2",
+      "path": "/zh/personality/enneagram/wings/1w2",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:2w1",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "2w1",
+      "path": "/zh/personality/enneagram/wings/2w1",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:2w3",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "2w3",
+      "path": "/zh/personality/enneagram/wings/2w3",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:3w2",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "3w2",
+      "path": "/zh/personality/enneagram/wings/3w2",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:3w4",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "3w4",
+      "path": "/zh/personality/enneagram/wings/3w4",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:4w3",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "4w3",
+      "path": "/zh/personality/enneagram/wings/4w3",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:4w5",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "4w5",
+      "path": "/zh/personality/enneagram/wings/4w5",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:5w4",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "5w4",
+      "path": "/zh/personality/enneagram/wings/5w4",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:5w6",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "5w6",
+      "path": "/zh/personality/enneagram/wings/5w6",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:6w5",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "6w5",
+      "path": "/zh/personality/enneagram/wings/6w5",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:6w7",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "6w7",
+      "path": "/zh/personality/enneagram/wings/6w7",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:7w6",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "7w6",
+      "path": "/zh/personality/enneagram/wings/7w6",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:7w8",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "7w8",
+      "path": "/zh/personality/enneagram/wings/7w8",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:8w7",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "8w7",
+      "path": "/zh/personality/enneagram/wings/8w7",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:8w9",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "8w9",
+      "path": "/zh/personality/enneagram/wings/8w9",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:9w8",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "9w8",
+      "path": "/zh/personality/enneagram/wings/9w8",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "wing:9w1",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "9w1",
+      "path": "/zh/personality/enneagram/wings/9w1",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/self-preservation",
+      "path": "/zh/personality/enneagram/type-1/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/social",
+      "path": "/zh/personality/enneagram/type-1/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-1/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-1/one-to-one",
+      "path": "/zh/personality/enneagram/type-1/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/self-preservation",
+      "path": "/zh/personality/enneagram/type-2/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/social",
+      "path": "/zh/personality/enneagram/type-2/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-2/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-2/one-to-one",
+      "path": "/zh/personality/enneagram/type-2/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/self-preservation",
+      "path": "/zh/personality/enneagram/type-3/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/social",
+      "path": "/zh/personality/enneagram/type-3/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/one-to-one",
+      "path": "/zh/personality/enneagram/type-3/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/self-preservation",
+      "path": "/zh/personality/enneagram/type-4/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/social",
+      "path": "/zh/personality/enneagram/type-4/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/one-to-one",
+      "path": "/zh/personality/enneagram/type-4/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/self-preservation",
+      "path": "/zh/personality/enneagram/type-5/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/social",
+      "path": "/zh/personality/enneagram/type-5/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/one-to-one",
+      "path": "/zh/personality/enneagram/type-5/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/self-preservation",
+      "path": "/zh/personality/enneagram/type-6/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/social",
+      "path": "/zh/personality/enneagram/type-6/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/one-to-one",
+      "path": "/zh/personality/enneagram/type-6/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-7/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/self-preservation",
+      "path": "/zh/personality/enneagram/type-7/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-7/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/social",
+      "path": "/zh/personality/enneagram/type-7/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-7/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-7/one-to-one",
+      "path": "/zh/personality/enneagram/type-7/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-8/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/self-preservation",
+      "path": "/zh/personality/enneagram/type-8/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-8/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/social",
+      "path": "/zh/personality/enneagram/type-8/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-8/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-8/one-to-one",
+      "path": "/zh/personality/enneagram/type-8/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-9/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/self-preservation",
+      "path": "/zh/personality/enneagram/type-9/instincts/self-preservation",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-9/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/social",
+      "path": "/zh/personality/enneagram/type-9/instincts/social",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    },
+    {
+      "identity_key": "instinctual_subtype:type-9/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/one-to-one",
+      "path": "/zh/personality/enneagram/type-9/instincts/one-to-one",
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis",
+        "claim.boundary.non_diagnostic",
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ],
+      "factual_claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "limitations": [
+        "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+        "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+      ],
+      "evidence_status": "evidence_limited_requires_human_review",
+      "competitor_source_ids": [],
+      "blocked_claim_ids": [
+        "claim.blocked.fermatmind_psychometrics",
+        "claim.blocked.predictive_outcomes",
+        "claim.blocked.human_review_and_release"
+      ]
+    }
+  ]
+}
