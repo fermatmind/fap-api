@@ -505,6 +505,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Human review completed',
             'Completed human review',
             'Human review has been completed',
+            'Manual review completed',
+            'Completed manual review',
+            'Manual review has been completed',
             '人工审核通过',
             '已获发布批准',
         ] as $phrase) {
@@ -517,7 +520,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not approved for publication.', 'Human review is not completed.'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not approved for publication.', 'Human review is not completed.', 'Manual review is not completed.'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
