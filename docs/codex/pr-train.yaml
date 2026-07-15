@@ -19347,7 +19347,7 @@ prs:
       - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-event-taxonomy-01.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - php -r "require 'backend/vendor/autoload.php'; Symfony\\Component\\Yaml\\Yaml::parseFile('docs/codex/pr-train.yaml'); echo 'yaml ok'.PHP_EOL;"
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - git diff --check
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
@@ -21465,7 +21465,7 @@ prs:
       - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json >/dev/null
       - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - php -r "require 'backend/vendor/autoload.php'; Symfony\\Component\\Yaml\\Yaml::parseFile('docs/codex/pr-train.yaml'); echo 'yaml ok'.PHP_EOL;"
       - bash backend/scripts/ci_verify_mbti.sh
       - git diff --check
       - git diff --cached --check
