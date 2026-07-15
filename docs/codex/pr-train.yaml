@@ -43263,3 +43263,721 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-benchmark-01
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth"
+    status: user_authorized
+    depends_on:
+      []
+    scope:
+      - Freeze exactly 116 read-only production page scorecards, 58 identities, a deterministic metadata-only Truity registry, checksums, review truth, and zero-write evidence.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-benchmark-01/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV201BenchmarkTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV201BenchmarkTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV201BenchmarkTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-integrity-gate-02
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02: add 116-page integrity and QA-truth gate"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01
+    scope:
+      - Add the deterministic zero-write 116-row route, canonical, hreflang, private, QA-conflict, review-truth, and taxonomy fail-closed gate.
+    allowed_paths:
+      - backend/app/Services/Enneagram/AuthorityV2/**
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2*.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-integrity-gate-02/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-public-contract-04
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04: expose Enneagram Authority V2 visible-evidence contract"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03
+    scope:
+      - Extend shared visible-evidence Authority V2 to Enneagram with V1 compatibility, ten entity/locale fixtures, eligible visible schema, and no synthesized reviewer.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/app/Services/Cms/PersonalityPublicContentAssetContract.php
+      - backend/app/DTO/Personality/PersonalityPublicContentAssetData.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV204PublicContractTest.php
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-public-contract-04/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - php -l touched PHP files
+      - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
+      - cd backend && vendor/bin/pint --test on touched PHP files
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-revision-workspace-05
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05: add collision-safe Enneagram working-revision writer"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04
+    scope:
+      - Generalize the collision-safe writer for 116 isolated Enneagram working revisions without migration, primary-row overwrite, or production execution.
+    allowed_paths:
+      - backend/app/Services/Personality/AuthorityV2/**
+      - backend/app/Services/BigFive/AuthorityV2/ReleaseGate/BigFiveAuthorityV2CollisionSafeDraftRevisionWriter.php
+      - backend/app/Services/Enneagram/AuthorityV2/**
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2*.php
+      - backend/tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-revision-promoter-06
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06: add pointer-safe Enneagram revision promotion and rollback"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05
+    scope:
+      - Add and test compare-and-swap promotion and rollback primitives for 116 targets; reject stale pointers, wrong hashes, pending manual review, and partial batches.
+    allowed_paths:
+      - backend/app/Services/Enneagram/AuthorityV2/**
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2*.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-revision-promoter-06/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-source-ledger-07
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07: freeze bilingual source and claim ledger"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06
+    scope:
+      - Freeze one source registry plus 116 limited claim maps; keep Truity competitor/editorial only and wing/subtype limitations explicit.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV207SourceLedgerTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV207SourceLedgerTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV207SourceLedgerTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-editorial-gate-08
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08: enforce bilingual originality, duplicate and manual-review gates"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07
+    scope:
+      - Add declared bilingual independence, duplicate/template, FAQ, exercise, answerability, visible-evidence, claim-safety, and manual-review truth gates.
+    allowed_paths:
+      - backend/app/Services/Enneagram/AuthorityV2/**
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2*.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-editorial-gate-08/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-hub-centers-09
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09: author 8 bilingual hub and center assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08
+    scope:
+      - Author eight independent bilingual hub/center draft assets with visible limitations, counterexamples, unique FAQ, and pending_manual_review truth.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV209HubCentersTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV209HubCentersTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV209HubCentersTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-1-family-10
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10: author 12 bilingual Type 1 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09
+    scope:
+      - Author exactly 12 independent bilingual Type 1 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV210Type1FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV210Type1FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV210Type1FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-2-family-11
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11: author 12 bilingual Type 2 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-1-FAMILY-10
+    scope:
+      - Author exactly 12 independent bilingual Type 2 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV211Type2FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV211Type2FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV211Type2FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-3-family-12
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12: author 12 bilingual Type 3 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11
+    scope:
+      - Author exactly 12 independent bilingual Type 3 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV212Type3FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV212Type3FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV212Type3FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-4-FAMILY-13
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-4-family-13
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-4-FAMILY-13: author 12 bilingual Type 4 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12
+    scope:
+      - Author exactly 12 independent bilingual Type 4 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-5-family-14
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14: author 12 bilingual Type 5 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-4-FAMILY-13
+    scope:
+      - Author exactly 12 independent bilingual Type 5 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV214Type5FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV214Type5FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV214Type5FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-6-FAMILY-15
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-6-family-15
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-6-FAMILY-15: author 12 bilingual Type 6 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14
+    scope:
+      - Author exactly 12 independent bilingual Type 6 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV215Type6FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV215Type6FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV215Type6FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-7-family-16
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16: author 12 bilingual Type 7 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-6-FAMILY-15
+    scope:
+      - Author exactly 12 independent bilingual Type 7 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV216Type7FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV216Type7FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV216Type7FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-8-family-17
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17: author 12 bilingual Type 8 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16
+    scope:
+      - Author exactly 12 independent bilingual Type 8 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV217Type8FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV217Type8FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV217Type8FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-type-9-family-18
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18: author 12 bilingual Type 9 family assets"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17
+    scope:
+      - Author exactly 12 independent bilingual Type 9 family drafts with counterexamples, exercises, evidence limits, unique FAQ, pending_manual_review, reviewer null, and no publish/indexability change.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-media-og-19
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19: define 116-page Media Library and OG authority"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18
+    scope:
+      - Define 58 locale-neutral original media specifications and 116 localized mappings without upload, production URL, or frontend/public editorial images.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-media-og-19/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV219MediaOgTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV219MediaOgTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV219MediaOgTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-link-graph-20
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20: define 116-page link, FAQ and locale graph"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19
+    scope:
+      - Define exactly 116 locale-preserving link, FAQ-intent, canonical/hreflang, and entity graph records without new or private URLs.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-link-graph-20/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-release-gate-22
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22: aggregate and validate the 116-page release package"
+    status: pending_dependency
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21
+    scope:
+      - Aggregate a zero-write 116-asset release gate, require 116/116 named human reviews, and perform no import, publish, deploy, media, cache, indexability, or search action.
+    allowed_paths:
+      - backend/app/Services/Enneagram/AuthorityV2/**
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2*.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-runtime-closeout-23
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23: record authorized rollout and 116-page public readback"
+    status: pending_production_authorization
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22
+      - separate_exact_sha_production_authorization
+    scope:
+      - REGISTER ONLY: do not create a branch/PR, execute, merge, deploy, import, write CMS/DB/media/cache/pointers, change indexability/search, or claim public readback under this goal.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-runtime-closeout-23/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - php -l touched PHP files
+      - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
+      - cd backend && vendor/bin/pint --test on touched PHP files
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: true
+    publish_allowed: true
+    deploy_allowed: true
+    content_authority: CMS/backend
+    current_authorization: register_only_do_not_start
