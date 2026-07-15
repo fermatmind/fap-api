@@ -43516,7 +43516,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-revision-workspace-05
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05: add collision-safe Enneagram working-revision writer"
-    status: github_checks_pending
+    status: ci_fix_local_verified
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04
     scope:
@@ -43528,12 +43528,15 @@ prs:
       - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2*.php
       - backend/tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php
       - backend/tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_only_registered_enneagram_public_authority_v2_non_runtime_files --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do backend/vendor/bin/pint --test "$file" || exit 1; done
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
