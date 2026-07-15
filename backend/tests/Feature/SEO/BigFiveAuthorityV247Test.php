@@ -739,6 +739,7 @@ final class BigFiveAuthorityV247Test extends TestCase
 
         $this->assertTrue($method->invoke($this->preflight(), $personalityRevision, new PersonalityPublicContentAsset));
         $this->assertTrue($method->invoke($this->preflight(), $topicRevision, new TopicProfile));
+        $this->assertFalse($method->invoke($this->preflight(), $topicRevision, new LandingSurface));
     }
 
     public function test_database_preflight_still_requires_published_revision_for_revision_backed_existing_article(): void
