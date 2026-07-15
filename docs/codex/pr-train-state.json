@@ -92330,7 +92330,7 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "review_fix_local_verified",
     "commit_sha": "6a4a687bc59e355025250c556657f7a8e9c70162",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
@@ -92351,8 +92351,8 @@
         "evidence": "PHP 8.4 syntax passed; focused benchmark PHPUnit passed 5 tests / 3245 assertions; Pint and composer validate --strict passed; all JSON/YAML parses, checksum verification, git diff --check, and exact seven-path allowlist validation passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3096 opened from the exact branch; all required GitHub checks must pass on the ledger-updated head before merge."
+        "status": "rerun_required",
+        "evidence": "All nine checks passed on pre-review-fix head 3c588b5effd625148ba24f51eb6fc282a4475f1c. The review-fix head must rerun every required check before merge."
       }
     },
     "scope_validation": {
@@ -92396,9 +92396,19 @@
         "at": "2026-07-15T01:23:50Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact branch and opened PR #3096 with the exact title and required authority, review-truth, production-boundary, validation, deferred, and rollback sections."
+      },
+      {
+        "at": "2026-07-15T01:31:12Z",
+        "status": "review_fix_in_progress",
+        "note": "All nine required checks passed, then automated review identified one valid P2 in future manifest validation paths and one cross-repository dependency-registration concern. The path bug is being repaired; PR03/21 remain correctly owned by fap-web, with explicit dependency repository metadata added in fap-api."
+      },
+      {
+        "at": "2026-07-15T01:31:54Z",
+        "status": "review_fix_local_verified",
+        "note": "Corrected all registered backend-relative test/Pint commands, annotated PR03/21 as fap-web-owned dependencies without duplicating their ledger entries, and added regression assertions. Focused PHPUnit passes 6 tests / 3249 assertions; Pint, strict Composer, YAML/JSON, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-15T01:23:50Z"
+    "updated_at": "2026-07-15T01:31:54Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",

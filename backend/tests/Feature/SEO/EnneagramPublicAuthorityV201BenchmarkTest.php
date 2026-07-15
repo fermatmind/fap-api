@@ -128,6 +128,22 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
         $this->assertFalse($checksums['production_writes_performed'] ?? true);
     }
 
+    public function test_registered_train_commands_and_cross_repo_dependencies_are_executable(): void
+    {
+        $manifest = (string) file_get_contents(dirname(__DIR__, 4).'/docs/codex/pr-train.yaml');
+
+        $this->assertStringNotContainsString('cd backend && php artisan test backend/tests/', $manifest);
+        $this->assertStringNotContainsString('cd backend && vendor/bin/pint --test backend/tests/', $manifest);
+        $this->assertStringContainsString(
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03: fap-web',
+            $manifest
+        );
+        $this->assertStringContainsString(
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21: fap-web',
+            $manifest
+        );
+    }
+
     /** @return array<string, mixed> */
     private function loadJson(string $file): array
     {

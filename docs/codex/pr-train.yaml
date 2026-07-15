@@ -43316,8 +43316,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV202IntegrityGateTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43340,6 +43340,8 @@ prs:
     status: pending_dependency
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03
+    dependency_repositories:
+      ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03: fap-web
     scope:
       - Extend shared visible-evidence Authority V2 to Enneagram with V1 compatibility, ten entity/locale fixtures, eligible visible schema, and no synthesized reviewer.
     allowed_paths:
@@ -43393,8 +43395,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php
+      - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43428,8 +43430,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43461,8 +43463,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV207SourceLedgerTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV207SourceLedgerTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV207SourceLedgerTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV207SourceLedgerTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43496,8 +43498,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV208EditorialGateTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43529,8 +43531,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV209HubCentersTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV209HubCentersTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV209HubCentersTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV209HubCentersTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43562,8 +43564,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV210Type1FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV210Type1FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV210Type1FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV210Type1FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43595,8 +43597,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV211Type2FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV211Type2FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV211Type2FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV211Type2FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43628,8 +43630,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV212Type3FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV212Type3FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV212Type3FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV212Type3FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43661,8 +43663,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43694,8 +43696,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV214Type5FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV214Type5FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV214Type5FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV214Type5FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43727,8 +43729,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV215Type6FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV215Type6FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV215Type6FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV215Type6FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43760,8 +43762,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV216Type7FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV216Type7FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV216Type7FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV216Type7FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43793,8 +43795,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV217Type8FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV217Type8FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV217Type8FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV217Type8FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43826,8 +43828,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43859,8 +43861,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV219MediaOgTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV219MediaOgTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV219MediaOgTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV219MediaOgTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43892,8 +43894,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
@@ -43916,6 +43918,8 @@ prs:
     status: pending_dependency
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21
+    dependency_repositories:
+      ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21: fap-web
     scope:
       - Aggregate a zero-write 116-asset release gate, require 116/116 named human reviews, and perform no import, publish, deploy, media, cache, indexability, or search action.
     allowed_paths:
@@ -43930,8 +43934,8 @@ prs:
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
-      - cd backend && php artisan test backend/tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test backend/tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check
