@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "a8215cb5b16adf8d654b31fbe2329efed8c45ddb",
+    "commit_sha": "d53b4437aad12934c1665c03e13287097b1aef90",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93357,12 +93357,16 @@
         "evidence": "Final manifest replay passed: PHP syntax for all three changed PHP files; focused editorial-gate suite 7 tests / 83 assertions; Pint for all three changed PHP files; YAML and both changed JSON artifacts parse; git diff check; and exact seven-file allowlist. The suite proves exactly 116 QA rows, all ten required negative fixture classes, command success/fail-closed paths, and zero human-review/release/write claims."
       },
       "github_checks": {
-        "status": "fail_fix_pushed_pending_rerun",
-        "evidence": "Eight of nine checks passed on prior head 0bf6d581b. verify-bigfive failed only because its runtime-freeze classifier rejects newly added backend/app paths unless they are registered; the gate behavior and 1425 other Big Five tests passed. The same-scope repair moved PR08 logic into the already registered, frozen non-runtime Enneagram Authority V2 integrity service and command paths without modifying the classifier or expanding the seven-file allowlist."
+        "status": "pass_on_prior_head_review_fix_rerun_pending",
+        "evidence": "All nine required checks passed on CI-repair head 007561dfd, including the previously failing verify-bigfive path classifier. Five valid automated P2 review findings were then fixed on substantive head d53b4437a; latest-head checks must rerun before merge."
       },
       "ci_fix": {
         "status": "pass",
         "evidence": "The repaired final diff uses only the existing registered IntegrityGate service/command paths. The exact failing runtime-path classifier plus its Enneagram allowlist regression pass 2 tests / 5 assertions; combined PR08 and PR02 feature suites pass 13 tests / 142 assertions; Pint and syntax remain green. Latest-head GitHub checks must rerun."
+      },
+      "review_fixes": {
+        "status": "pass",
+        "evidence": "All five valid P2 findings are fixed: safety scans cover exercise, answerability, and visible evidence text; visible evidence claim IDs must be declared and page-authorized; limitations require two substantive entries; same-asset repeated paragraphs/sentences/templates fail; and answerability requires three substantive normalized questions. PR08+PR02 pass 14 tests / 150 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93411,9 +93415,14 @@
         "at": "2026-07-15T10:13:17Z",
         "status": "review_fixes_local_verified",
         "note": "Eight checks passed; verify-bigfive failed solely because its freeze classifier rejected two newly added app paths after 1425 other tests passed. Without changing that out-of-scope classifier, the same PR08 service and command capabilities were consolidated into its already registered Enneagram Authority V2 integrity paths. The exact classifier regressions now pass 2 / 5 and PR08+PR02 pass 13 / 142; scope remains exactly seven allowlisted files and latest-head checks must rerun."
+      },
+      {
+        "at": "2026-07-15T10:21:36Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the CI-repair head, then five valid P2 review gaps were fixed in the gate: full visible-text safety coverage, visible-claim authorization, substantive limitations, same-page duplicate detection, and substantive normalized answerability questions. PR08+PR02 pass 14 / 150, freeze regressions 2 / 5, and Pint passes; latest-head checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T10:13:17Z"
+    "updated_at": "2026-07-15T10:21:36Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
