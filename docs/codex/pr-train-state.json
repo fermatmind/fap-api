@@ -92865,7 +92865,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04"
     ],
-    "status": "ci_fix_local_verified",
+    "status": "github_checks_pending",
     "commit_sha": "52a4334aa01da81b742ddc128909167463be2e72",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3107",
     "checks": {
@@ -92890,8 +92890,8 @@
         "evidence": "The exact seven-path change set is limited to the shared framework-safe writer, Big Five adapter, Enneagram writer and command, focused Enneagram test, and PR-train manifest/state. No migration, public contract, content package, production write, CMS publish, indexability, sitemap, or llms mutation is included."
       },
       "github": {
-        "status": "fail",
-        "evidence": "Eight checks passed. verify-bigfive failed only because its runtime-freeze classifier did not yet register the three new PR05 non-runtime workspace files; the PR05 and Big Five writer tests themselves passed inside that job."
+        "status": "pending",
+        "evidence": "The eight-green/one-classifier-failure head was fixed locally and pushed as 3da7638be5936a2794a5a01e80ae423a6e028390; the final required-check rerun is pending."
       },
       "ci_fix": {
         "status": "pass",
@@ -92949,9 +92949,14 @@
         "at": "2026-07-15T06:55:49Z",
         "status": "ci_fix_local_verified",
         "note": "Registered only the three PR05 non-runtime workspace files in the freeze classifier and added explicit blocked runtime fixtures. Focused classifier passes 1 / 2, actual branch diff passes 1 / 3, Big Five plus Enneagram workspace tests pass 12 / 152, and test syntax/Pint plus YAML/JSON/diff checks pass. Scope is now exactly eight allowlisted paths."
+      },
+      {
+        "at": "2026-07-15T06:57:11Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the verified classifier repair as 3da7638be5936a2794a5a01e80ae423a6e028390. The final GitHub check and review cycle is running on the exact eight-path branch."
       }
     ],
-    "updated_at": "2026-07-15T06:55:49Z"
+    "updated_at": "2026-07-15T06:57:11Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06",
