@@ -309,7 +309,11 @@ final class BigFiveReviewPromotionPreflight
             $published = $record->getAttribute('published_revision_id');
             $primaryPubliclyReadable = $this->primaryPubliclyReadable($record);
             $databaseReads++;
-            $databaseReads += $record instanceof Article && $published !== null ? 1 : 0;
+            $databaseReads += match (true) {
+                $record instanceof Article => ($published !== null ? 1 : 0) + 4,
+                $record instanceof TopicProfile => 3,
+                default => 0,
+            };
             $primaryRecordLive = ! $record instanceof Article || (! $record->trashed()
                 && ! in_array($record->getAttribute('lifecycle_state'), [
                     Article::LIFECYCLE_ARCHIVED,
@@ -556,23 +560,96 @@ final class BigFiveReviewPromotionPreflight
         unset($attributes['working_revision_id']);
         ksort($attributes);
 
-        if (! $record instanceof Article) {
+        if (! $record instanceof Article && ! $record instanceof TopicProfile) {
             return $this->fingerprint($attributes);
+        }
+
+        if ($record instanceof TopicProfile) {
+            return $this->fingerprint([
+                'primary' => $attributes,
+                'public_relations' => $this->topicPublicRelationsSnapshot($record),
+            ]);
         }
 
         $publishedRevisionId = $record->getAttribute('published_revision_id');
         $publishedRevision = $publishedRevisionId === null
             ? null
             : ArticleTranslationRevision::query()->withoutGlobalScopes()->find($publishedRevisionId);
-        $publishedRevisionAttributes = $publishedRevision?->getAttributes();
-        if (is_array($publishedRevisionAttributes)) {
-            ksort($publishedRevisionAttributes);
-        }
 
         return $this->fingerprint([
             'primary' => $attributes,
-            'published_revision' => $publishedRevisionAttributes,
+            'published_revision' => $this->modelSnapshot($publishedRevision),
+            'public_relations' => $this->articlePublicRelationsSnapshot($record),
         ]);
+    }
+
+    /** @return array<string,mixed> */
+    private function articlePublicRelationsSnapshot(Article $article): array
+    {
+        $category = $article->category()->withoutGlobalScopes()->first();
+        if ($category instanceof Model && (int) $category->getAttribute('org_id') !== (int) $article->getAttribute('org_id')) {
+            $category = null;
+        }
+        $tags = $article->tags()
+            ->withoutGlobalScopes()
+            ->get()
+            ->filter(static fn (Model $tag): bool => (int) $tag->getAttribute('org_id') === (int) $article->getAttribute('org_id'));
+        $testEdges = $article->testEdges()
+            ->withoutGlobalScopes()
+            ->where('org_id', $article->getAttribute('org_id'))
+            ->where('locale', $article->getAttribute('locale'))
+            ->where('visibility', 'public')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return [
+            'category' => $this->modelSnapshot($category),
+            'tags' => $this->modelSnapshots($tags),
+            'test_edges' => $this->modelSnapshots($testEdges, preserveOrder: true),
+            'seo_meta' => $this->modelSnapshot($article->seoMeta()->withoutGlobalScopes()->first()),
+        ];
+    }
+
+    /** @return array<string,mixed> */
+    private function topicPublicRelationsSnapshot(TopicProfile $profile): array
+    {
+        $sections = $profile->sections()
+            ->where('is_enabled', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+        $entries = $profile->entries()
+            ->where('is_enabled', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return [
+            'sections' => $this->modelSnapshots($sections, preserveOrder: true),
+            'entries' => $this->modelSnapshots($entries, preserveOrder: true),
+            'seo_meta' => $this->modelSnapshot($profile->seoMeta()->first()),
+        ];
+    }
+
+    /** @return array<string,mixed>|null */
+    private function modelSnapshot(?Model $model): ?array
+    {
+        return $model?->toArray();
+    }
+
+    /** @param iterable<int,Model> $models @return list<array<string,mixed>> */
+    private function modelSnapshots(iterable $models, bool $preserveOrder = false): array
+    {
+        $snapshots = collect($models);
+        if (! $preserveOrder) {
+            $snapshots = $snapshots->sortBy(static fn (Model $model): int => (int) $model->getKey());
+        }
+
+        return $snapshots
+            ->map(static fn (Model $model): array => $model->toArray())
+            ->values()
+            ->all();
     }
 
     /** @return array{review:array<string,mixed>,authorization:array<string,mixed>,rollback:array<string,mixed>,review_sha256:string,rollback_sha256:string} */

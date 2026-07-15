@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Models\Article;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
+use App\Models\TopicProfileRevision;
+use App\Models\TopicProfileSection;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -417,7 +420,7 @@ final class BigFiveAuthorityV247Test extends TestCase
         }
     }
 
-    public function test_article_runtime_baseline_changes_when_published_revision_content_changes_in_place(): void
+    public function test_article_runtime_baseline_changes_when_published_revision_or_public_relation_changes(): void
     {
         $row = collect($this->readJson(self::REVIEW)['rows'])
             ->firstWhere('asset_id', 'article:en:/en/articles/big-five-personality-test-vs-mbti');
@@ -484,6 +487,84 @@ final class BigFiveAuthorityV247Test extends TestCase
         $afterBaseline = collect($after['observed_runtime'])
             ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
         $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) $afterBaseline);
+        $this->assertNotSame($beforeBaseline, $afterBaseline);
+        $this->assertNotSame($before['promotion_preflight_fingerprint'], $after['promotion_preflight_fingerprint']);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Relation-backed SEO title',
+            'seo_description' => 'Relation-backed SEO description.',
+            'canonical_url' => 'https://www.fermatmind.com/en/articles/big-five-personality-test-vs-mbti',
+            'robots' => 'noindex,follow',
+            'is_indexable' => false,
+        ]);
+
+        $afterRelation = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterRelationBaseline = collect($afterRelation['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+        $this->assertNotSame($afterBaseline, $afterRelationBaseline);
+        $this->assertNotSame($after['promotion_preflight_fingerprint'], $afterRelation['promotion_preflight_fingerprint']);
+    }
+
+    public function test_topic_runtime_baseline_changes_when_public_section_relation_changes(): void
+    {
+        $row = collect($this->readJson(self::REVIEW)['rows'])
+            ->firstWhere('asset_id', 'topic_hub:en:/en/topics/big-five');
+        $this->assertIsArray($row);
+        $profile = TopicProfile::query()->create([
+            'org_id' => 0,
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'locale' => 'en',
+            'title' => 'Big Five topic',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subDay(),
+        ]);
+        $publishedRevision = TopicProfileRevision::query()->create([
+            'profile_id' => (int) $profile->id,
+            'revision_no' => 1,
+            'workflow_state' => 'published',
+            'snapshot_json' => ['title' => 'Published Big Five topic'],
+            'created_at' => now()->subDay(),
+        ]);
+        $workingRevision = TopicProfileRevision::query()->create([
+            'profile_id' => (int) $profile->id,
+            'revision_no' => 2,
+            'authority_asset_key' => $row['asset_id'],
+            'source_package' => $row['source_package'],
+            'source_hash' => $row['source_hash'],
+            'authority_package_sha256' => $row['authority_package_sha256'],
+            'workflow_state' => 'approved',
+            'snapshot_json' => ['title' => 'Working Big Five topic'],
+            'created_at' => now(),
+        ]);
+        $profile->forceFill([
+            'published_revision_id' => (int) $publishedRevision->id,
+            'working_revision_id' => (int) $workingRevision->id,
+        ])->save();
+
+        $before = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $beforeBaseline = collect($before['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) $beforeBaseline);
+
+        TopicProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'overview',
+            'title' => 'Public overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Relation-backed public topic body.',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+
+        $after = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterBaseline = collect($after['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
         $this->assertNotSame($beforeBaseline, $afterBaseline);
         $this->assertNotSame($before['promotion_preflight_fingerprint'], $after['promotion_preflight_fingerprint']);
     }
