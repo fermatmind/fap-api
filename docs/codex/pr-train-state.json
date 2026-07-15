@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "1914d50e6fd80ac1578173347ce740a9bfe7827d",
+    "commit_sha": "7a5ffc36c0c73411ec7cc0433f53f50323115dbe",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 43 tests / 1242 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Visible ready-to-publish/release/index, published, indexable, and release-ready wording now fails closed in English and Chinese, while explicit not-yet-published and not-indexable draft limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 43 tests / 1276 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Approved/cleared-to-publish/release/index and standalone manual/manually-reviewed wording now fails closed, while direct negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 4546bca35 before the latest same-head review added one valid in-scope P2 finding: common visible publication/indexability state wording was not included in the release-truth claim pattern. The locally verified substantive fix head 1914d50e6 covers the bilingual publish-state vocabulary and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 382dc2707 before the latest same-head review added two valid in-scope P2 findings: approval-to-publish/release/index variants and standalone manual/manually-reviewed claims were not covered. The locally verified substantive fix head 7a5ffc36c covers both vocabularies and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All fifty-seven valid P2 findings are fixed. Visible ready-to-publish/release/index, published, indexable, release-ready and corresponding Chinese publish/indexability wording now fails closed; direct negative draft limitations remain allowed. PR08+PR02 pass 43 tests / 1242 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All fifty-nine valid P2 findings are fixed. Approved/cleared-to-publish/release/index and standalone manual/manually-reviewed claims now fail closed, while direct negative review/release limitations remain allowed. PR08+PR02 pass 43 tests / 1276 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93620,9 +93620,14 @@
         "at": "2026-07-15T16:37:33Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed and a same-head Codex review completed on ledger head 4546bca35, then one valid P2 was fixed: visible ready-to-publish/release/index, published, indexable, release-ready and corresponding Chinese publish/indexability wording now fails closed, while explicit not-yet-published and not-indexable limitations remain allowed. PR08+PR02 pass 43 / 1242, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T16:47:17Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed and a same-head Codex review completed on ledger head 382dc2707, then two valid P2 findings were fixed: approved/cleared-to-publish/release/index and standalone manual/manually-reviewed wording now fail closed, while direct negative limitations remain allowed. PR08+PR02 pass 43 / 1276, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T16:37:33Z"
+    "updated_at": "2026-07-15T16:47:17Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
