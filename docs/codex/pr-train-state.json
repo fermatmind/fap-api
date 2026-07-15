@@ -92865,7 +92865,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "52a4334aa01da81b742ddc128909167463be2e72",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3107",
     "checks": {
@@ -92890,8 +92890,8 @@
         "evidence": "The exact seven-path change set is limited to the shared framework-safe writer, Big Five adapter, Enneagram writer and command, focused Enneagram test, and PR-train manifest/state. No migration, public contract, content package, production write, CMS publish, indexability, sitemap, or llms mutation is included."
       },
       "github": {
-        "status": "pending",
-        "evidence": "The eight-green/one-classifier-failure head was fixed locally and pushed as 3da7638be5936a2794a5a01e80ae423a6e028390; the final required-check rerun is pending."
+        "status": "pass",
+        "evidence": "All nine required checks passed on d875ae108e35d5027e6a8621a37f9443f5698591 after the classifier repair. GitHub reports CLEAN/MERGEABLE; there are zero review threads or review blockers."
       },
       "ci_fix": {
         "status": "pass",
@@ -92901,7 +92901,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -92954,9 +92954,14 @@
         "at": "2026-07-15T06:57:11Z",
         "status": "github_checks_pending",
         "note": "Pushed the verified classifier repair as 3da7638be5936a2794a5a01e80ae423a6e028390. The final GitHub check and review cycle is running on the exact eight-path branch."
+      },
+      {
+        "at": "2026-07-15T07:04:39Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on d875ae108e35d5027e6a8621a37f9443f5698591. GitHub is CLEAN/MERGEABLE, the PR remains exactly eight allowlisted paths, and there are zero review threads or review blockers."
       }
     ],
-    "updated_at": "2026-07-15T06:57:11Z"
+    "updated_at": "2026-07-15T07:04:39Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-PROMOTER-06",
