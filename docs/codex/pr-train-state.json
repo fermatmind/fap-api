@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-      "commit_sha": "cede5dddfe50243c74ca078bfa57a9c1fae071bf",
+      "commit_sha": "552c572021667aa7f34036dedf35a669e48ac8e8",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-          "evidence": "Latest review-fix replay passed under the concurrency guard while another full ci_verify_mbti.sh was already running: combined PR08 and PR02 feature suites 45 tests / 1487 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Comma-led bare finite predicate claims now terminate prior negation while comma-separated negative outcome objects remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+          "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 45 tests / 1504 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Comma-led review/release claims now terminate prior negation while directly negated not-ready/not-published limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head e2aa33b34 before the same-head review added one valid in-scope P2 finding: a comma-led bare predicate clause could be masked by prior explicit negation. The locally verified substantive fix head cede5dddf makes the claim-aware predicate distinction and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 7b57e97b5 before the same-head review added one valid in-scope P2 finding: comma-led ready-to-publish/published wording could be masked by prior explicit negation. The locally verified substantive fix head 552c57202 makes the claim-aware review/release distinction and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-          "evidence": "All seventy-two valid P2 findings are fixed. Negation detection now receives the current matched claim and stops at a trailing comma only when the claim begins a bare finite protected predicate; comma-separated negative objects remain allowed. PR08+PR02 pass 45 tests / 1487 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+          "evidence": "All seventy-three valid P2 findings are fixed. A comma-led claim matching the closed visible review/release pattern now stops earlier negation, while direct not-ready-to-publish and not-published limitations remain allowed. PR08+PR02 pass 45 tests / 1504 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93675,9 +93675,14 @@
           "at": "2026-07-15T18:21:27Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed on ledger head e2aa33b34, then one valid same-head P2 was fixed: comma-led bare finite protected predicates now terminate prior negation using the current matched claim, while comma-separated negative outcome objects remain allowed. Another full ci_verify_mbti.sh was already running, so only focused checks were started: PR08+PR02 pass 45 / 1487, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:29:51Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head 7b57e97b5, then one valid same-head P2 was fixed: comma-led ready-to-publish/published and other closed review/release claims now terminate prior negation, while direct not-ready/not-published limitations remain allowed. PR08+PR02 pass 45 / 1504, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-      "updated_at": "2026-07-15T18:21:27Z"
+      "updated_at": "2026-07-15T18:29:51Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
