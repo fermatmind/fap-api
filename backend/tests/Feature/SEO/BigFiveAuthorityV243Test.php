@@ -97,6 +97,12 @@ final class BigFiveAuthorityV243Test extends TestCase
         $revision->published_at = '2026-07-10T00:00:00Z';
         $article->lifecycle_state = Article::LIFECYCLE_ARCHIVED;
         $this->assertFalse($this->projector->forArticle($article, $revision)['eligibility']['promotion_eligible']);
+
+        $article->lifecycle_state = Article::LIFECYCLE_ACTIVE;
+        $revision->created_by = null;
+        $missingRevisionAuthor = $this->projector->forArticle($article, $revision);
+        $this->assertNull($missingRevisionAuthor['visible_provenance']['author']);
+        $this->assertFalse($missingRevisionAuthor['eligibility']['promotion_eligible']);
     }
 
     public function test_missing_or_fabricated_reviewer_fails_closed_without_overwriting_public_content(): void
@@ -166,7 +172,10 @@ final class BigFiveAuthorityV243Test extends TestCase
             'published_revision_id' => 401,
         ]);
         $topic->forceFill(['id' => 40, 'published_revision_id' => 401]);
-        $revision = new TopicProfileRevision(['profile_id' => 40, 'snapshot_json' => $this->metadata('approved')]);
+        $revision = new TopicProfileRevision([
+            'profile_id' => 40,
+            'snapshot_json' => ['profile' => $this->metadata('approved')],
+        ]);
         $revision->forceFill(['id' => 401]);
         $landing = new LandingSurface([
             'surface_key' => 'big-five', 'locale' => 'en', 'status' => LandingSurface::STATUS_PUBLISHED,
@@ -182,6 +191,11 @@ final class BigFiveAuthorityV243Test extends TestCase
             $this->assertTrue($projection['eligibility']['promotion_eligible']);
             $this->assertCount(3, $projection['visible_provenance']['sources']);
         }
+
+        $revision->snapshot_json = $this->metadata('approved');
+        $rootMetadata = $this->projector->forTopic($topic, $revision);
+        $this->assertSame(['author' => null, 'reviewer' => null, 'sources' => []], $rootMetadata['visible_provenance']);
+        $this->assertFalse($rootMetadata['eligibility']['promotion_eligible']);
 
         $landing->status = LandingSurface::STATUS_DRAFT;
         $draft = $this->projector->forLandingSurface($landing);

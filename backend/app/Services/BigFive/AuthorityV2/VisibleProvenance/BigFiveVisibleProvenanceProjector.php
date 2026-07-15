@@ -71,7 +71,8 @@ final class BigFiveVisibleProvenanceProjector
             : [];
         $author = $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null;
         if ($author !== null) {
-            if ($revision->created_by !== null && $author['identity'] !== 'admin_user:'.(int) $revision->created_by) {
+            if ($revision->created_by === null
+                || $author['identity'] !== 'admin_user:'.(int) $revision->created_by) {
                 $author = null;
             } elseif (filled($article->author_name) && $author['label'] !== trim((string) $article->author_name)) {
                 $author = null;
@@ -130,7 +131,9 @@ final class BigFiveVisibleProvenanceProjector
             && $topic->published_revision_id !== null
             && (int) $revision->id === (int) $topic->published_revision_id;
         $public = $topic->status === TopicProfile::STATUS_PUBLISHED && (bool) $topic->is_public && $revisionMatches;
-        $metadata = $revisionMatches && is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+        $metadata = $revisionMatches && is_array(data_get($revision->snapshot_json, 'profile'))
+            ? data_get($revision->snapshot_json, 'profile')
+            : [];
 
         return $this->project(
             'Topic',
