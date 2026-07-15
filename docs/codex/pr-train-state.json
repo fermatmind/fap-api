@@ -92732,7 +92732,7 @@
       "evidence": "fap-web PR #1770 is MERGED at 28afe5365d114ee72207cbcf426364355c88baa2; fap-web origin/main contains the merge commit, remote and local PR03 branches are deleted, and post-merge focused revalidation passed 7 files / 58 tests."
     },
     "status": "review_fix_local_verified",
-    "commit_sha": "46d7f3510d83104f6c25cd642985e18bd9d83009",
+    "commit_sha": "997df50afb8c7c58e627b3919452a0013da9e34f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3104",
     "checks": {
       "dependency": {
@@ -92741,7 +92741,7 @@
       },
       "targeted_contracts": {
         "status": "pass",
-        "evidence": "PersonalityPublicApiTest, PersonalityPublicContentAssetContractTest, and EnneagramPublicAuthorityV204PublicContractTest passed 57 tests / 4096 assertions."
+        "evidence": "PersonalityPublicApiTest, PersonalityPublicContentAssetContractTest, and EnneagramPublicAuthorityV204PublicContractTest passed 59 tests / 4107 assertions after all review fixes."
       },
       "big_five_v2_regression": {
         "status": "pass",
@@ -92753,11 +92753,11 @@
       },
       "manifest_head_validation": {
         "status": "pass",
-        "evidence": "After replacing the zsh-incompatible Pint scalar with the established per-file loop, exact post-commit replay passed four-file PHP lint/Pint, 57 tests / 4096 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, and diff checks."
+        "evidence": "After replacing the zsh-incompatible Pint scalar with the established per-file loop, exact validation passed four-file PHP lint/Pint, 59 tests / 4107 assertions, Big Five V2 regression 1 test / 15 assertions, strict Composer, YAML/JSON, and diff checks."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened the single authorized fap-api PR #3104 with the exact manifest title from branch head 46d7f3510d83104f6c25cd642985e18bd9d83009."
+        "status": "retry_pending",
+        "evidence": "Three successive nine-check GitHub runs passed through cache-salt head 057500ba9676cfe7c5a876dcad03618e91a05bbf. Final stale-fallback fix head 997df50afb8c7c58e627b3919452a0013da9e34f is locally green and pending push/recheck."
       },
       "review_fix": {
         "status": "pass",
@@ -92766,6 +92766,10 @@
       "cache_projection_review_fix": {
         "status": "pass",
         "evidence": "Addressed the second actionable P2 with an Enneagram Authority V2 detail projection cache salt; a focused regression preloads the old unsalted V1-only version and proves the public request misses it and returns V2. The target group passes 58 tests / 4102 assertions and Big Five V2 remains 1 / 15."
+      },
+      "stale_projection_review_fix": {
+        "status": "pass",
+        "evidence": "Addressed the third actionable P2 by rejecting V1-only Enneagram detail active/LKG payloads before stale response projection. The regression forces an oversized V2 projection with an unsalted legacy fallback and proves fail-closed 503 instead of V1-only 200."
       }
     },
     "scope_validation": {
@@ -92829,9 +92833,14 @@
         "at": "2026-07-15T06:04:42Z",
         "status": "review_fix_local_verified",
         "note": "All nine second-round checks passed, then a second valid P2 identified pre-deploy Enneagram V1-only detail caches sharing the DB-attribute version. Added an Enneagram Authority V2 projection cache salt and a regression proving the old unsalted payload misses; 58 target tests / 4102 assertions and Big Five V2 1 / 15 pass."
+      },
+      {
+        "at": "2026-07-15T06:14:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Integrated latest origin/main 95578922e after Big Five PR43 merged. All nine third-round checks passed, then Codex found V1-only Enneagram stale active/LKG could bypass the cache salt and the ledger head was stale. Added fail-closed stale filtering with regression, passed 59 target tests / 4107 assertions plus Big Five V2 1 / 15, and recorded validated runtime head 997df50afb8c7c58e627b3919452a0013da9e34f."
       }
     ],
-    "updated_at": "2026-07-15T06:04:42Z"
+    "updated_at": "2026-07-15T06:14:00Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05",
