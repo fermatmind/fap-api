@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "71cbba551c4204b43f56aa9cea2a05d801478c48",
+    "commit_sha": "420a09d9dcdb8c26a40fc08c7ca89ae5ad7b3668",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed under the concurrency guard: combined PR08 and PR02 feature suites exited successfully; the causal-clause regression passes 1 test / 216 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. English since/as and Chinese 因为/所以/而是 now terminate an earlier explicit-negation scope before later positive safety claims. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites exited successfully; the paired negated-list and causal-as regressions pass 2 tests / 292 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. A subject-led causal as clause terminates earlier negation, while never as diagnosis, fixed identity and other coordinated prohibited-use lists remain fully negated. The first focused retry exposed an oversized PCRE branch and the final implementation replaced it with a small pre-check before these passing validations. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 73065c4d5 before the same-head review added one valid in-scope P2 finding: causal connectors such as since/as and 因为/所以/而是 did not terminate prior explicit-negation scope, allowing later affirmative safety claims to be stripped before validation. The locally verified substantive fix head 71cbba551 bounds those clauses and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 99db39bf9 before the same-head review added one valid in-scope P2 finding: treating every as token as a boundary caused the standard never as diagnosis, fixed identity, hiring screen and forecast limitation list to fail. The locally verified substantive fix head 420a09d9d distinguishes subject-led causal as clauses from coordinated prohibited-use lists and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All eighty-eight valid P2 findings are fixed. Causal and contrastive English/Chinese connectors now terminate earlier explicit-negation scope before later affirmative claims. The causal-clause regression passes 1 / 216, combined PR08+PR02 feature suites exit successfully, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All eighty-nine valid P2 findings are fixed. Subject-led causal as clauses terminate earlier explicit-negation scope without truncating coordinated never as prohibited-use lists. The paired regressions pass 2 / 292, combined PR08+PR02 feature suites exit successfully, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93730,9 +93730,14 @@
           "at": "2026-07-15T20:18:03Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed and same-head Codex review completed on ledger head 73065c4d5, then one valid P2 was fixed: English since/as and Chinese 因为/所以/而是 now terminate an earlier explicit-negation scope so later positive prediction or diagnosis claims remain visible to safety checks. Another full ci_verify_mbti.sh was already running, so no second full validation was started; the focused causal-clause regression passes 1 / 216, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T20:28:36Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 99db39bf9, then one valid P2 was fixed: subject-led causal as clauses now terminate prior negation without truncating the standard never as diagnosis, fixed identity, hiring screen, or forecast prohibited-use list. The first focused retry exposed an oversized PCRE and was replaced by a small pre-check before commit. Paired positive/negative regressions pass 2 / 292, combined PR08+PR02 suites exit successfully, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-    "updated_at": "2026-07-15T20:18:03Z"
+    "updated_at": "2026-07-15T20:28:36Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
