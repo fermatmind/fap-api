@@ -93339,8 +93339,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "ready_to_merge",
-      "commit_sha": "9a5471d81debf9e93b10dcb6c4dc66c99730dc1c",
+    "status": "review_fixes_local_verified",
+      "commit_sha": "52ba47670ca91a47e4548355ea9b08355418b3b6",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-          "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 45 tests / 1376 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Empty public editorial titles and repeated FAQ questions within one asset now fail closed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+          "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 45 tests / 1410 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Editor reviewed/editor-reviewed and editor review completion claims now fail closed while explicit negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
-        "status": "pass",
-        "evidence": "All nine required checks passed on ledger head a07b7ba3b. GitHub reports CLEAN/MERGEABLE, Codex reviewed the same head without major findings, and all review threads are resolved."
+        "status": "pending",
+        "evidence": "All nine required checks passed on ready-ledger head e91f8d6bd before the same-head review added one valid in-scope P2 finding: editor reviewed/editor-reviewed wording bypassed the visible review-truth pattern. The locally verified substantive fix head 52ba47670 covers editor reviewer nouns and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,13 +93366,13 @@
       },
       "review_fixes": {
         "status": "pass",
-          "evidence": "All sixty-seven valid P2 findings are fixed. Empty public editorial titles fail the shape gate, and FAQ questions must be distinct within each asset after normalization. PR08+PR02 pass 45 tests / 1376 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+          "evidence": "All sixty-eight valid P2 findings are fixed. Visible editor-reviewed/editor review completion wording now enters the same negation-aware closed review-truth boundary as human, expert, editorial, and manual review wording. PR08+PR02 pass 45 tests / 1410 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93655,9 +93655,14 @@
           "at": "2026-07-15T17:45:39Z",
           "status": "ready_to_merge",
           "note": "All nine required checks passed on ledger head a07b7ba3b, GitHub is CLEAN/MERGEABLE, Codex reviewed that same head without major findings, all sixty-seven valid P2 findings are fixed, and all review threads are resolved. Final diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action."
+        },
+        {
+          "at": "2026-07-15T17:54:10Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ready-ledger head e91f8d6bd, then one valid same-head P2 was fixed: editor reviewed/editor-reviewed and editor review completion wording now fails the visible review-truth gate, while explicit not-editor-reviewed limitations remain allowed. PR08+PR02 pass 45 / 1410, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-      "updated_at": "2026-07-15T17:45:39Z"
+      "updated_at": "2026-07-15T17:54:10Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
