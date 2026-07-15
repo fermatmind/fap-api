@@ -94125,10 +94125,10 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09"
     ],
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "commit_sha": "93dc4777eb29099bebf7baf5e97eeedb140a85b7",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3122",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -94145,6 +94145,10 @@
       "content_qa": {
         "status": "pass",
         "evidence": "The package contains exactly Type One core, 1w9, 1w2, and self-preservation/social/one-to-one subtype assets in en and zh-CN. Core, wing, and subtype coverage is structurally distinct; all 36 FAQ pairs are unique; locale outlines and examples are independent; counterexamples, environmental alternatives, exercises, internal links, wing/subtype evidence limits, consent and power boundaries are visible. All assets remain pending_manual_review with reviewer null, draft_only, publish_eligible false, and every write/revision/discoverability/deploy boundary false."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #3122 is open at ledger head d806834c6859c370e4aad741d3f1d9b5c96e422c; GitHub reports MERGEABLE and required checks have started."
       }
     },
     "scope_validation": {
@@ -94178,9 +94182,14 @@
         "at": "2026-07-15T23:05:51Z",
         "status": "local_checks_passed",
         "note": "After two truthfully recorded content-repair rounds, all PR10 manifest checks pass: 8 tests / 428 assertions, zero asset-specific PR08-gate issues for all twelve real assets, Pint, PHP syntax, YAML, all JSON, diff check, and exact six-file scope. The package remains a pending-manual-review, draft-only, publish-ineligible handoff with no CMS/database/revision/discoverability/search/deploy action."
+      },
+      {
+        "at": "2026-07-15T23:08:05Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3122 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
       }
     ],
-    "updated_at": "2026-07-15T23:05:51Z"
+    "updated_at": "2026-07-15T23:08:05Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-2-FAMILY-11",
