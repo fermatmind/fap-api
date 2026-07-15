@@ -92330,8 +92330,8 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "fifth_review_fix_local_verified",
-    "commit_sha": "b8ff96dcc87040d2e5a3723d1637ab2c9e5b99e2",
+    "status": "ready_to_merge",
+    "commit_sha": "1fdfb65e50b0ad67f0f18ed6146f70c1957fb09b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3096",
     "checks": {
       "manifest_registration": {
@@ -92351,14 +92351,14 @@
         "evidence": "PHP 8.4 executable manifest lint command passed; focused benchmark PHPUnit passed 6 tests / 3262 assertions; executable scoped Pint command and composer validate --strict passed; JSON/YAML parsing, frozen SHA256 checks, git diff --check, and exact seven-path allowlist validation passed."
       },
       "github_required_checks": {
-        "status": "rerun_required",
-        "evidence": "All nine checks passed on pre-fifth-review-fix head b8ff96dcc87040d2e5a3723d1637ab2c9e5b99e2. The corrected canonical-deduplicated row-count evidence head must rerun every required check before merge."
+        "status": "pass",
+        "evidence": "All nine required checks passed on fifth-review-fix head 1fdfb65e50b0ad67f0f18ed6146f70c1957fb09b; the registry-count evidence review thread is resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -92446,9 +92446,14 @@
         "at": "2026-07-15T02:28:05Z",
         "status": "fifth_review_fix_local_verified",
         "note": "Aligned the production benchmark capture evidence with the canonical-deduplicated 28-row Truity registry. JSON parsing, focused PHPUnit 6 tests / 3262 assertions, and diff checks pass."
+      },
+      {
+        "at": "2026-07-15T02:34:39Z",
+        "status": "ready_to_merge",
+        "note": "All nine required GitHub checks passed on fifth-review-fix head 1fdfb65e50b0ad67f0f18ed6146f70c1957fb09b, all review threads are resolved, and the exact seven-path scope remains intact."
       }
     ],
-    "updated_at": "2026-07-15T02:28:05Z"
+    "updated_at": "2026-07-15T02:34:39Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
