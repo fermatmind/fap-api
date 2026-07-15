@@ -92556,7 +92556,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01"
     ],
     "status": "github_checks_retry_pending",
-    "commit_sha": "b90b55342dcc4e934a31255873ff2bf5e16ce6e6",
+    "commit_sha": "466861f51b7b23e91e4de42ee63b7da578067270",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3100",
     "checks": {
       "dependency": {
@@ -92633,9 +92633,14 @@
         "at": "2026-07-15T03:24:07Z",
         "status": "github_checks_retry_pending",
         "note": "The exact-file classifier regression passed 1 test / 2 assertions with a blocked Big Five runtime negative control; the PR02 feature suite passed 6 tests / 59 assertions, four-file PHP lint/Pint, strict Composer, YAML/JSON, diff check, and exact seven-path validation all pass."
+      },
+      {
+        "at": "2026-07-15T03:26:08Z",
+        "status": "github_checks_retry_pending",
+        "note": "Integrated latest origin/main 7cb885c1d after Big Five PR42 merged. Resolved the single shared classifier-test conflict by preserving both exact allowlists; both classifier regressions pass 1 test / 2 assertions each, PR02 passes 6 tests / 59 assertions, and the branch is ahead 5 / behind 0 with the PR diff still exactly seven allowed paths."
       }
     ],
-    "updated_at": "2026-07-15T03:24:07Z"
+    "updated_at": "2026-07-15T03:26:08Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04",
