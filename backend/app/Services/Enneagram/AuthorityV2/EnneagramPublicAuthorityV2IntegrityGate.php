@@ -333,6 +333,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const DETERMINISTIC_RECOMMENDATION_PATTERN = '/(?:precise\s+career\s+recommendation|best\s+career\s+for\s+you|perfect\s+job\s+match|complete\s+personalized\s+career\s+recommender|(?:riasec|enneagram|mbti|big\s+five)\s+(?:ranks?|determines?)\s+(?:your\s+)?(?:best\s+)?(?:career|job|income|identity|ability|future)|determines?\s+(?:your\s+)?(?:income|career|job|identity|ability|future)|(?:salary|career|hiring|job|relationship|income|outcome)[\s-]+guarantee|精准职业推荐|最适合(?:你(?:的)?|您(?:的)?|其)?职业|完美(?:工作|职业)匹配|决定(?:你(?:的)?|您(?:的)?|其)?(?:收入|职业|工作|身份|能力|未来)|(?:薪资|职业|录用|工作|关系|收入|结果)保证)/iu';
 
+    private const BARE_MEDICAL_CLAIM_PATTERN = '/(?:\bdiagnos(?:is|es)\b|\btreatment\b|\bcure\b|诊断|确诊|治疗|治愈)/iu';
+
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
 
     private const GENERIC_EXERCISE_PATTERN = '/(?:for (?:the next )?(?:seven|7|７)[ -]?days?(?:\s+period)?,? (?:notice|observe|journal)|连续(?:七|7|７)天(?:观察|记录|注意))/iu';
@@ -742,13 +744,15 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         foreach ([
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
-            [self::DIAGNOSIS_SCREENING_PATTERN, 'diagnosis_or_screening_claim'],
             [self::DETERMINISTIC_RECOMMENDATION_PATTERN, 'deterministic_recommendation_claim'],
             [self::COMPETITOR_PATTERN, 'competitor_language_detected'],
         ] as [$pattern, $code]) {
             if (preg_match($pattern, $text) === 1) {
                 $add(self::EDITORIAL_GATES[9], $code, $key, $path, 'Public candidate text crosses the declared evidence or competitor boundary.');
             }
+        }
+        if (preg_match(self::DIAGNOSIS_SCREENING_PATTERN, $text) === 1 || $this->containsUnboundedMedicalClaim($text)) {
+            $add(self::EDITORIAL_GATES[9], 'diagnosis_or_screening_claim', $key, $path, 'Public candidate text crosses the non-diagnostic and non-treatment product boundary.');
         }
 
         foreach ($duplicateBlocks as $index => $block) {
@@ -787,6 +791,16 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     private function length(mixed $value): int
     {
         return mb_strlen(trim((string) $value));
+    }
+
+    private function containsUnboundedMedicalClaim(string $text): bool
+    {
+        $bounded = preg_replace([
+            '/\b(?:not|never)\b[^.!?\n]{0,80}\b(?:diagnos(?:is|es)|treatment|cure)\b/iu',
+            '/(?:不是|不把|不用于|不能作为|不得把|不得|禁止)[^。！？\n]{0,40}(?:诊断|确诊|治疗|治愈)/u',
+        ], '', $text) ?? $text;
+
+        return preg_match(self::BARE_MEDICAL_CLAIM_PATTERN, $bounded) === 1;
     }
 
     /** @param list<string> $blocks */

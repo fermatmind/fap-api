@@ -224,6 +224,31 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_bare_medical_claims_fail_without_rejecting_bounded_negative_language(): void
+    {
+        foreach ([
+            'Unlock to know your diagnosis',
+            'Diagnosis',
+            'Treatment',
+            'Cure',
+            '诊断',
+            '确诊',
+            '治疗',
+            '治愈',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('diagnosis_or_screening_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        $bounded = $this->gate()->validateEditorial($this->candidate(), $this->registry(), $this->maps());
+        $this->assertTrue($bounded['ok'], json_encode($bounded['issues'], JSON_UNESCAPED_UNICODE));
+    }
+
     public function test_deterministic_recommendation_vocabulary_fails_claim_safety_gate(): void
     {
         foreach ([
