@@ -279,6 +279,37 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_unsupported_global_authority_claims_fail_without_rejecting_explicit_limitations(): void
+    {
+        foreach ([
+            'Global first Enneagram authority',
+            'Globally most accurate Enneagram guide',
+            'World\'s best Enneagram resource',
+            '全球第一九型人格权威指南',
+            '全球最准确的九型人格指南',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('unsupported_science_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach ([
+            'This page is not the globally most accurate Enneagram guide.',
+            '本页不是全球最准确的九型人格指南。',
+        ] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
     public function test_explicitly_negated_boundary_claims_remain_allowed(): void
     {
         foreach ([
@@ -451,6 +482,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Salary guarantee',
             '最适合你的职业',
             '决定你的能力',
+            'Big Five职业精准匹配',
+            'RIASEC推荐职业',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -459,6 +492,18 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
             $this->assertFalse($result['ok'], $phrase);
             $this->assertContains('deterministic_recommendation_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach ([
+            'This page does not offer a Big Five precise career match.',
+            '本页不能提供 RIASEC推荐职业。',
+        ] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
         }
     }
 

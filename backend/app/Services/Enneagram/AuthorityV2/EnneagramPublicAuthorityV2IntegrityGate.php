@@ -325,7 +325,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         'claim_safety',
     ];
 
-    private const UNSUPPORTED_CLAIM_PATTERN = '/(?:scientifically proven|neuroscience proves|clinically validated|absolute(?:ly)? accurate|most accurate personality test|科学(?:已)?证明|神经科学证明|临床验证|绝对准确)/iu';
+    private const UNSUPPORTED_CLAIM_PATTERN = '/(?:scientifically proven|neuroscience proves|clinically validated|absolute(?:ly)? accurate|most accurate personality test|(?:global(?:ly)?|worldwide|world[\'’]?s)\s+(?:first|best|most\s+accurate)\b|科学(?:已)?证明|神经科学证明|临床验证|绝对准确|全球(?:第一|首个|最好|最佳|最准确))/iu';
 
     private const FERMATMIND_PSYCHOMETRICS_PATTERN = '/(?:(?:fermatmind|费马测试|费马测评)[^.!?。！？\n]{0,80}(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)|(?:reliab(?:ility|le)|valid(?:ity|ated)|norms?|percentiles?|信度|效度|常模|百分位)[^.!?。！？\n]{0,80}(?:fermatmind|费马测试|费马测评))/iu';
 
@@ -333,7 +333,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const DIAGNOSIS_SCREENING_PATTERN = '/(?:medical\s+diagnos(?:is|e|tic)|clinical\s+diagnos(?:is|e|tic)|diagnos(?:e|es|ed|ing)\s+(?:you|your)|(?:personality|type|ability|health)\s+diagnos(?:is|tic)|(?:treats?|cures?)\s+(?:your\s+)?(?:condition|disorder|anxiety|depression|health|personality)|hiring[\s-]+(?:fit|suitability)|job[\s-]+suitability(?:[\s-]+guarantee)?|(?:employment|admission)[\s-]+screening|医疗诊断|临床诊断|诊断(?:你(?:的)?|您(?:的)?|其)(?:性格|人格|类型|能力|健康|结果)?|(?:性格|人格|类型|能力|健康)诊断|(?:治疗|治愈)(?:你(?:的)?|您(?:的)?|其)?(?:疾病|焦虑|抑郁|健康|人格|性格)|招聘适配|录用适配|岗位适配保证|(?:岗位|招聘|录用)胜任力)/iu';
 
-    private const DETERMINISTIC_RECOMMENDATION_PATTERN = '/(?:precise\s+career\s+recommendation|best\s+career\s+for\s+you|perfect\s+job\s+match|complete\s+personalized\s+career\s+recommender|(?:riasec|enneagram|mbti|big\s+five)\s+(?:ranks?|determines?)\s+(?:your\s+)?(?:best\s+)?(?:career|job|income|identity|ability|future)|determines?\s+(?:your\s+)?(?:income|career|job|identity|ability|future)|(?:salary|career|hiring|job|relationship|income|outcome)[\s-]+guarantee|精准职业推荐|最适合(?:你(?:的)?|您(?:的)?|其)?职业|完美(?:工作|职业)匹配|决定(?:你(?:的)?|您(?:的)?|其)?(?:收入|职业|工作|身份|能力|未来)|(?:薪资|职业|录用|工作|关系|收入|结果)保证)/iu';
+    private const DETERMINISTIC_RECOMMENDATION_PATTERN = '/(?:precise\s+career\s+recommendation|best\s+career\s+for\s+you|perfect\s+job\s+match|complete\s+personalized\s+career\s+recommender|(?:riasec|enneagram|mbti|big\s+five)\s+(?:ranks?|determines?)\s+(?:your\s+)?(?:best\s+)?(?:career|job|income|identity|ability|future)|determines?\s+(?:your\s+)?(?:income|career|job|identity|ability|future)|(?:salary|career|hiring|job|relationship|income|outcome)[\s-]+guarantee|精准职业推荐|最适合(?:你(?:的)?|您(?:的)?|其)?职业|完美(?:工作|职业)匹配|决定(?:你(?:的)?|您(?:的)?|其)?(?:收入|职业|工作|身份|能力|未来)|(?:薪资|职业|录用|工作|关系|收入|结果)保证|(?:big\s*five|riasec|mbti|九型人格)\s*(?:职业)?(?:精准匹配|推荐职业))/iu';
 
     private const HUMAN_REVIEW_RELEASE_PATTERN = '/(?:\b(?:human|expert|editorially)[\s-]+reviewed\b|\breviewed\s+by\s+[\p{L}][\p{L}\p{M}.\'-]*(?:\s+[\p{L}][\p{L}\p{M}.\'-]*){0,3}|\b(?:approved|cleared|eligible|ready)\s+for\s+(?:publication|publishing|release|indexing|indexation)\b|\bpublication[\s-]+approved\b|(?:人工|专家|编辑)审核(?:通过|完成)|已由[^。！？\n]{0,30}(?:人工|专家|编辑)审核|已获(?:发布|上线|收录)(?:批准|许可)|(?:发布|上线|收录)(?:获批|已批准|就绪))/iu';
 
