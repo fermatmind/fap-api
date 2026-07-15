@@ -153,6 +153,14 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
             'ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21: fap-web',
             $manifest
         );
+        $this->assertMatchesRegularExpression(
+            '/ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04.*?depends_on:\s+- ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02\s+- ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03/s',
+            $manifest
+        );
+        $this->assertMatchesRegularExpression(
+            '/ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22.*?depends_on:\s+- ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20\s+- ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21/s',
+            $manifest
+        );
         $this->assertStringContainsString(
             'php artisan test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php',
             $manifest
@@ -165,9 +173,16 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
         $this->assertIsArray($state);
 
         foreach ([
-            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04',
-            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22',
-        ] as $id) {
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04' => [
+                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02',
+                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03',
+            ],
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22' => [
+                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20',
+                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21',
+            ],
+        ] as $id => $expectedDependencies) {
+            $this->assertSame($expectedDependencies, $state[$id]['depends_on'] ?? null);
             $this->assertSame('fap-web', $state[$id]['dependency_repository'] ?? null);
             $this->assertNull($state[$id]['dependency_pr_url'] ?? null);
             $this->assertNull($state[$id]['dependency_merge_sha'] ?? null);

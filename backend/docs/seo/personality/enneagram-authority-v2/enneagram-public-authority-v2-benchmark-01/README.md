@@ -38,6 +38,6 @@ The registry stores only URL, title, lastmod, page/intent classification, numeri
 ## Integrity hashes
 
 - production scorecard SHA256: `321f7d5f42462e41cd32bd1972f6e634fbd1f2f7b44ba091e8ca05e7dd449101`
-- competitor URL registry SHA256: `af3509057994635c383a7f00a166a68db463ecf4ed5d0769b8425459333d753e`
+- competitor URL registry SHA256: `6cee73f9e9b51c454a2719db9ad607b4b295676706427fe788341b3928aef145`
 
 The machine-readable values are locked in `checksums.json` and verified by the focused PHPUnit contract.

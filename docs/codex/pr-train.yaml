@@ -43339,6 +43339,7 @@ prs:
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04: expose Enneagram Authority V2 visible-evidence contract"
     status: pending_dependency
     depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03
     dependency_repositories:
       ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03: fap-web
@@ -43922,6 +43923,7 @@ prs:
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22: aggregate and validate the 116-page release package"
     status: pending_dependency
     depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21
     dependency_repositories:
       ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21: fap-web
