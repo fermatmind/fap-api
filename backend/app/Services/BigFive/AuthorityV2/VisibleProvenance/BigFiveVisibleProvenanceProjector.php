@@ -102,8 +102,12 @@ final class BigFiveVisibleProvenanceProjector
     /** @return array<string, mixed> */
     public function forPersonalityAsset(PersonalityPublicContentAsset $asset): array
     {
-        $public = $asset->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
-            && (bool) $asset->is_public;
+        $public = (bool) $asset->is_public
+            && in_array($asset->launch_state, [
+                PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+                PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            ], true)
+            && $this->publicationIsNullOrEffective($asset->published_at);
         $metadata = is_array($asset->authority_json) ? $asset->authority_json : [];
         $reviewer = $public ? $this->reviewer(data_get($metadata, 'visible_provenance.reviewer')) : null;
         if ($reviewer !== null && (
@@ -130,7 +134,10 @@ final class BigFiveVisibleProvenanceProjector
             && (int) $revision->profile_id === (int) $topic->id
             && $topic->published_revision_id !== null
             && (int) $revision->id === (int) $topic->published_revision_id;
-        $public = $topic->status === TopicProfile::STATUS_PUBLISHED && (bool) $topic->is_public && $revisionMatches;
+        $public = $topic->status === TopicProfile::STATUS_PUBLISHED
+            && (bool) $topic->is_public
+            && $this->publicationIsNullOrEffective($topic->published_at)
+            && $revisionMatches;
         $metadata = $revisionMatches && is_array(data_get($revision->snapshot_json, 'profile'))
             ? data_get($revision->snapshot_json, 'profile')
             : [];
@@ -322,6 +329,11 @@ final class BigFiveVisibleProvenanceProjector
         }
 
         return CarbonImmutable::parse($normalized)->lessThanOrEqualTo(CarbonImmutable::now('UTC'));
+    }
+
+    private function publicationIsNullOrEffective(mixed $value): bool
+    {
+        return $value === null || $value === '' || $this->publicationIsEffective($value);
     }
 
     private function hasEndorsementClaim(string $label): bool

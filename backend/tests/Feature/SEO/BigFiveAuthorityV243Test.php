@@ -192,6 +192,15 @@ final class BigFiveAuthorityV243Test extends TestCase
             $this->assertCount(3, $projection['visible_provenance']['sources']);
         }
 
+        $asset->launch_state = PersonalityPublicContentAsset::LAUNCH_CONTENT_READY;
+        $this->assertTrue($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
+        $asset->published_at = now()->addDay();
+        $this->assertFalse($this->projector->forPersonalityAsset($asset)['eligibility']['promotion_eligible']);
+
+        $topic->published_at = now()->addDay();
+        $this->assertFalse($this->projector->forTopic($topic, $revision)['eligibility']['promotion_eligible']);
+        $topic->published_at = null;
+
         $revision->snapshot_json = $this->metadata('approved');
         $rootMetadata = $this->projector->forTopic($topic, $revision);
         $this->assertSame(['author' => null, 'reviewer' => null, 'sources' => []], $rootMetadata['visible_provenance']);
