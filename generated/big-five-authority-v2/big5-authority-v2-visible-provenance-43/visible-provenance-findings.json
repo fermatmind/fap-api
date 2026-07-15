@@ -1,0 +1,149 @@
+{
+  "schema_version": "big5-visible-provenance-findings.v1",
+  "source": {
+    "repo": "fap-web",
+    "artifact_path": "docs/seo/personality/big5-authority-v2-runtime-closeout-38-report-2026-07-15.json",
+    "artifact_sha256": "60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65",
+    "selection": "visible_author == FAIL || visible_reviewer == FAIL || visible_source == FAIL"
+  },
+  "counts": {
+    "unique_findings": 11,
+    "visible_author_fail": 3,
+    "visible_reviewer_fail": 7,
+    "visible_source_fail": 3
+  },
+  "findings": [
+    {
+      "asset_id": "article:en:/en/articles/big-five-conscientiousness-low-procrastination-task-plan",
+      "route": "/en/articles/big-five-conscientiousness-low-procrastination-task-plan",
+      "locale": "en",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "FAIL",
+        "visible_reviewer": "PASS",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "article:en:/en/articles/big-five-emotional-stability-stress-recovery-communication",
+      "route": "/en/articles/big-five-emotional-stability-stress-recovery-communication",
+      "locale": "en",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "FAIL",
+        "visible_reviewer": "FAIL",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "article:en:/en/articles/big-five-personality-test-vs-mbti",
+      "route": "/en/articles/big-five-personality-test-vs-mbti",
+      "locale": "en",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "FAIL",
+        "visible_reviewer": "FAIL",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "range:en:/en/personality/big-five/neuroticism-high",
+      "route": "/en/personality/big-five/neuroticism-high",
+      "locale": "en",
+      "page_family": "range",
+      "authority_surface": "CMS personality_public_content_assets",
+      "assessment": {
+        "visible_author": "UNKNOWN",
+        "visible_reviewer": "UNKNOWN",
+        "visible_source": "FAIL"
+      }
+    },
+    {
+      "asset_id": "topic_hub:en:/en/topics/big-five",
+      "route": "/en/topics/big-five",
+      "locale": "en",
+      "page_family": "topic_hub",
+      "authority_surface": "CMS topic_profiles",
+      "assessment": {
+        "visible_author": "UNKNOWN",
+        "visible_reviewer": "UNKNOWN",
+        "visible_source": "FAIL"
+      }
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-emotional-stability-stress-recovery-communication",
+      "route": "/zh/articles/big-five-emotional-stability-stress-recovery-communication",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "PASS",
+        "visible_reviewer": "FAIL",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-growth-guide",
+      "route": "/zh/articles/big-five-growth-guide",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "PASS",
+        "visible_reviewer": "FAIL",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-narrative-portrait",
+      "route": "/zh/articles/big-five-narrative-portrait",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "PASS",
+        "visible_reviewer": "FAIL",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-personality-test-vs-mbti",
+      "route": "/zh/articles/big-five-personality-test-vs-mbti",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "PASS",
+        "visible_reviewer": "FAIL",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "article:zh-CN:/zh/articles/big-five-tool-guide",
+      "route": "/zh/articles/big-five-tool-guide",
+      "locale": "zh-CN",
+      "page_family": "article",
+      "authority_surface": "CMS Article",
+      "assessment": {
+        "visible_author": "PASS",
+        "visible_reviewer": "FAIL",
+        "visible_source": "PASS"
+      }
+    },
+    {
+      "asset_id": "topic_hub:zh-CN:/zh/topics/big-five",
+      "route": "/zh/topics/big-five",
+      "locale": "zh-CN",
+      "page_family": "topic_hub",
+      "authority_surface": "CMS topic_profiles",
+      "assessment": {
+        "visible_author": "UNKNOWN",
+        "visible_reviewer": "UNKNOWN",
+        "visible_source": "FAIL"
+      }
+    }
+  ]
+}

@@ -170,7 +170,7 @@ prs:
     branch: codex/big5-authority-v2-visible-date-42
     depends_on: [BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41]
     train_scope: big5_authority_v2_visible_date_provenance_and_fail_closed_eligibility
-    status: ready_to_merge
+    status: merged
     goal: "Lock the exact 82 visible-date findings; distinguish publication, manual-review, editorial-update, revision-created, import, build, and deploy timestamps; project only real backend authority dates for Article, PersonalityPublicContentAsset, Topic, and LandingSurface; keep missing or mismatched dates null with field-level eligibility blocks."
     allowed_paths:
       - backend/app/Services/BigFive/AuthorityV2/VisibleDate/**
@@ -190,6 +190,49 @@ prs:
       - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV242Test.php --no-ansi
       - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_visible_date_projector|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
       - cd backend && vendor/bin/pint --test app/Services/BigFive/AuthorityV2/VisibleDate/BigFiveVisibleDateProjector.php tests/Feature/SEO/BigFiveAuthorityV242Test.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - bash backend/scripts/ci_verify_mbti.sh
+      - PHP/JSON/YAML/JS syntax checks for touched files
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: false
+    cms_mutation_allowed: false
+    indexability_mutation_allowed: false
+    public_runtime_change: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43: feat(content): add Big Five visible provenance and reviewer ledger"
+    base: main
+    branch: codex/big5-authority-v2-visible-provenance-43
+    depends_on: [BIG5-AUTHORITY-V2-VISIBLE-DATE-42]
+    train_scope: big5_authority_v2_visible_author_reviewer_source_provenance
+    status: ready_to_merge
+    goal: "Lock the exact 11 visible author/reviewer/source failures; project author, human-reviewer, and source authority separately; require reviewer identity, label, role, reviewed_at, review state, and authority reference; fail closed without fabricating reviewers or overwriting existing published content."
+    allowed_paths:
+      - backend/app/Services/BigFive/AuthorityV2/VisibleProvenance/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV243Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-visible-provenance-43/**
+      - generated/big-five-authority-v2/big5-authority-v2-visible-provenance-43/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change visible dates, media, discoverability, structured data, Topic runtime authority, public controllers, sitemap, llms, canonical, or frontend behavior.
+      - Fabricate a reviewer, infer human review from publication, or imply institutional certification, expert endorsement, clinical review, medical authority, or official partnership.
+      - Mutate CMS/database records, remove or overwrite existing published content, publish, promote, enable indexability, deploy, or claim that production findings are already resolved.
+      - Implement PR44 discoverability, PR45 structured data, PR46 Topic authority, or PR47 promotion-gate work.
+    validation:
+      - node generated/big-five-authority-v2/big5-authority-v2-visible-provenance-43/validate-package.mjs
+      - cd backend && php artisan test tests/Feature/SEO/BigFiveAuthorityV243Test.php --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_visible_provenance_projector|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/BigFive/AuthorityV2/VisibleProvenance/BigFiveVisibleProvenanceProjector.php tests/Feature/SEO/BigFiveAuthorityV243Test.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - bash backend/scripts/ci_verify_mbti.sh
       - PHP/JSON/YAML/JS syntax checks for touched files
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
