@@ -93339,8 +93339,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "31749ebe66dc952afc97b73fd9fc9b148e5c6858",
+    "status": "review_fixes_local_verified",
+    "commit_sha": "f93bf5be1e28c18e081fd291217c08b9eeef919b",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93357,8 +93357,8 @@
         "evidence": "Final manifest replay passed: PHP syntax for all three changed PHP files; focused editorial-gate suite 7 tests / 83 assertions; Pint for all three changed PHP files; YAML and both changed JSON artifacts parse; git diff check; and exact seven-file allowlist. The suite proves exactly 116 QA rows, all ten required negative fixture classes, command success/fail-closed paths, and zero human-review/release/write claims."
       },
       "github_checks": {
-        "status": "pass",
-        "evidence": "All nine required checks passed on heading-fix ledger head 811f7df03: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub is CLEAN/MERGEABLE and all seven review threads are resolved."
+        "status": "pending",
+        "evidence": "All nine required checks passed on prior ledger head 352f04953, then the latest automated review added two valid in-scope P2 findings. The locally verified substantive fix head f93bf5be1 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,13 +93366,13 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All seven valid P2 findings are fixed: safety scans cover section headings, exercise, answerability, and visible evidence text; visible evidence claim IDs must be declared and page-authorized; limitations require two substantive entries; same-asset repeated paragraphs/sentences/templates fail; answerability requires three substantive normalized questions; and observation-exercise text participates in duplicate/template detection without treating shared evidence limitations as page templates. PR08+PR02 pass 16 tests / 163 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All nine valid P2 findings are fixed. In addition to the prior seven, every page must visibly preserve each PR07-mapped limitation, and prediction safety catches pronoun and hyphenated career-success variants. PR08+PR02 pass 18 tests / 175 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93440,9 +93440,14 @@
         "at": "2026-07-15T10:52:26Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on heading-fix ledger head 811f7df03, GitHub is CLEAN/MERGEABLE, all seven valid P2 findings are fixed, and all review threads are resolved. Final diff remains exactly seven allowlisted files with zero production, CMS, database, publication, discoverability, search, or deploy action."
+      },
+      {
+        "at": "2026-07-15T11:02:22Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior ready-ledger head, then two further valid P2 findings were fixed: source-ledger page limitations must remain visible, and prediction safety now catches pronoun and hyphenated career-success variants. The first retry exposed only outdated passing-fixture and issue-aggregation assumptions; after correcting those tests, PR08+PR02 pass 18 / 175, freeze regressions 2 / 5, Pint, syntax, JSON, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T10:52:26Z"
+    "updated_at": "2026-07-15T11:02:22Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
