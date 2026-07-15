@@ -420,6 +420,38 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_source_ledger_fixed_type_and_universal_factor_assumptions_fail_closed(): void
+    {
+        foreach ([
+            'Everyone has one fixed Enneagram type.',
+            'One fixed type per person.',
+            'Universal nine-factor recovery.',
+            '每个人都有一个固定的九型人格类型。',
+            '普遍九因子结构。',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('unsupported_ontology_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach ([
+            'This page does not establish one fixed type per person.',
+            'Evidence does not establish universal nine-factor recovery.',
+            '本页不能证明每个人都有一个固定的九型人格类型。',
+        ] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
     public function test_explicitly_negated_boundary_claims_remain_allowed(): void
     {
         foreach ([
@@ -727,7 +759,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
         $this->assertSame(116, $contract['qa_row_contract']['expected_count']);
         $this->assertCount(10, $contract['qa_row_contract']['gates']);
-        $this->assertCount(12, $contract['required_negative_fixtures']);
+        $this->assertCount(13, $contract['required_negative_fixtures']);
         $this->assertSame(30, $contract['duplicate_thresholds']['zh-CN']['paragraph_characters']);
         $this->assertSame('question_answers', $contract['geo_answerability_contract']['mapping_field']);
         $this->assertSame('ready_for_human_review', $contract['automated_pass_means']);
