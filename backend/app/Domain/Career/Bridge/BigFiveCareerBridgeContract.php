@@ -244,6 +244,28 @@ final class BigFiveCareerBridgeContract
         '/payments/',
     ];
 
+    /** @var list<string> */
+    private const FORBIDDEN_DIAGNOSTIC_CONTENT_FRAGMENTS = [
+        'anxiety disorder',
+        'depressive disorder',
+        'personality disorder',
+        'mental disorder',
+        'clinical diagnosis',
+        'diagnosed with',
+        'diagnostic criteria',
+        'you have anxiety',
+        'you have depression',
+        '焦虑症',
+        '抑郁症',
+        '人格障碍',
+        '精神障碍',
+        '临床诊断',
+        '确诊',
+        '诊断标准',
+        '患有焦虑',
+        '患有抑郁',
+    ];
+
     /**
      * @return array{contract_version: string, status: string, public_reader_allowed: bool, claim_mode: string, blockers: list<string>}
      */
@@ -280,7 +302,7 @@ final class BigFiveCareerBridgeContract
         $this->requireSame($input['bridge_contract_version'] ?? null, self::INPUT_CONTRACT_VERSION, 'input.bridge_contract_version_invalid', $blockers);
         $this->requireSafeIdentity($input['bridge_id'] ?? null, 'input.bridge_id_invalid', $blockers);
         $this->requireOneOf($input['locale'] ?? null, ['en', 'zh-CN'], 'input.locale_invalid', $blockers);
-        $this->requireSafeIdentity($input['big_five_asset_identity'] ?? null, 'input.big_five_asset_identity_invalid', $blockers);
+        $this->requireAuthorityAssetIdentity($input['big_five_asset_identity'] ?? null, 'input.big_five_asset_identity_invalid', $blockers);
         $this->requireSame($input['big_five_primary_status'] ?? null, 'published', 'input.big_five_primary_status_invalid', $blockers);
         $this->requirePositiveInteger($input['big_five_published_revision_id'] ?? null, 'input.big_five_published_revision_id_invalid', $blockers);
         $this->requireSha256($input['big_five_public_projection_hash'] ?? null, 'input.big_five_public_projection_hash_invalid', $blockers);
@@ -369,6 +391,9 @@ final class BigFiveCareerBridgeContract
         foreach ($this->forbiddenPrivateContentFragments($content) as $fragment) {
             $blockers[] = 'output.private_reader_text:'.$fragment;
         }
+        foreach ($this->forbiddenDiagnosticContentFragments($content) as $fragment) {
+            $blockers[] = 'output.diagnostic_claim:'.$fragment;
+        }
 
         return $this->uniqueSorted($blockers);
     }
@@ -407,7 +432,7 @@ final class BigFiveCareerBridgeContract
         $this->requireSame($projection['authority_surface'] ?? null, 'personality_public_content_asset', 'input.big_five.authority_surface_invalid', $blockers);
         $this->requireSame($projection['source_kind'] ?? null, self::BIG_FIVE_SOURCE_KIND, 'input.big_five.source_kind_invalid', $blockers);
         $this->requireSame($projection['framework'] ?? null, 'big_five', 'input.big_five.framework_invalid', $blockers);
-        $this->requireSafeIdentity($projection['asset_id'] ?? null, 'input.big_five.asset_id_invalid', $blockers);
+        $this->requireAuthorityAssetIdentity($projection['asset_id'] ?? null, 'input.big_five.asset_id_invalid', $blockers);
         $this->requireOneOf($projection['locale'] ?? null, ['en', 'zh-CN'], 'input.big_five.locale_invalid', $blockers);
         $this->requireSame($projection['primary_status'] ?? null, 'published', 'input.big_five.primary_not_published', $blockers);
         $this->requireSame($projection['is_public'] ?? null, true, 'input.big_five.not_public', $blockers);
@@ -475,7 +500,7 @@ final class BigFiveCareerBridgeContract
     private function validateSourceLockShape(array $sourceLocks, array &$blockers): void
     {
         $this->validateExactKeys($sourceLocks, self::SOURCE_LOCK_KEYS, 'output.source_locks', $blockers);
-        $this->requireSafeIdentity($sourceLocks['big_five_asset_id'] ?? null, 'output.source_locks.big_five_asset_id_invalid', $blockers);
+        $this->requireAuthorityAssetIdentity($sourceLocks['big_five_asset_id'] ?? null, 'output.source_locks.big_five_asset_id_invalid', $blockers);
         $this->requireOneOf($sourceLocks['big_five_locale'] ?? null, ['en', 'zh-CN'], 'output.source_locks.big_five_locale_invalid', $blockers);
         $this->requirePositiveInteger($sourceLocks['big_five_published_revision_id'] ?? null, 'output.source_locks.big_five_published_revision_id_invalid', $blockers);
         $this->requireSha256($sourceLocks['big_five_public_projection_hash'] ?? null, 'output.source_locks.big_five_public_projection_hash_invalid', $blockers);
@@ -677,6 +702,19 @@ final class BigFiveCareerBridgeContract
     }
 
     /** @param list<string> $blockers */
+    private function requireAuthorityAssetIdentity(mixed $value, string $blocker, array &$blockers): void
+    {
+        if (! is_string($value)
+            || preg_match('/^[A-Za-z0-9][A-Za-z0-9_.:\/-]{0,255}$/', $value) !== 1
+            || str_contains($value, '//')
+            || str_contains($value, '/./')
+            || str_contains($value, '/../')
+            || str_ends_with($value, '/')) {
+            $blockers[] = $blocker;
+        }
+    }
+
+    /** @param list<string> $blockers */
     private function requireSlug(mixed $value, string $blocker, array &$blockers): void
     {
         if (! is_string($value) || preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $value) !== 1) {
@@ -766,6 +804,20 @@ final class BigFiveCareerBridgeContract
         $found = [];
         foreach (self::FORBIDDEN_PRIVATE_CONTENT_FRAGMENTS as $fragment) {
             if (str_contains($haystack, $fragment)) {
+                $found[] = $fragment;
+            }
+        }
+
+        return $this->uniqueSorted($found);
+    }
+
+    /** @return list<string> */
+    private function forbiddenDiagnosticContentFragments(array $content): array
+    {
+        $haystack = strtolower(implode("\n", $this->flattenStrings($content)));
+        $found = [];
+        foreach (self::FORBIDDEN_DIAGNOSTIC_CONTENT_FRAGMENTS as $fragment) {
+            if (str_contains($haystack, strtolower($fragment))) {
                 $found[] = $fragment;
             }
         }

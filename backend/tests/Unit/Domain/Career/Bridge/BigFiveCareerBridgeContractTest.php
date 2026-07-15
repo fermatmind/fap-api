@@ -91,10 +91,13 @@ final class BigFiveCareerBridgeContractTest extends TestCase
     {
         $input = $this->validInput();
         $input['locale'] = 'zh-CN';
+        $input['big_five_asset_identity'] = 'model_hub:zh-CN:/zh/personality/big-five';
         $input['big_five_projection']['locale'] = 'zh-CN';
+        $input['big_five_projection']['asset_id'] = 'model_hub:zh-CN:/zh/personality/big-five';
         $input['career_projection']['locale'] = 'zh-CN';
 
         $output = $this->validOutput();
+        $output['source_locks']['big_five_asset_id'] = 'model_hub:zh-CN:/zh/personality/big-five';
         $output['source_locks']['big_five_locale'] = 'zh-CN';
         $output['source_locks']['career_locale'] = 'zh-CN';
 
@@ -197,6 +200,38 @@ final class BigFiveCareerBridgeContractTest extends TestCase
     }
 
     #[Test]
+    public function diagnostic_claims_hidden_in_reader_text_fail_closed(): void
+    {
+        $output = $this->validOutput();
+        $output['content']['reflection_signals'] = [
+            'Your trait score means you have an anxiety disorder.',
+        ];
+
+        $assessment = $this->contract->assess($this->validInput(), $output);
+
+        $this->assertFalse($assessment['public_reader_allowed']);
+        $this->assertContains('output.diagnostic_claim:anxiety disorder', $assessment['blockers']);
+    }
+
+    #[Test]
+    public function authority_asset_id_traversal_shapes_fail_closed(): void
+    {
+        $invalidAssetId = 'model_hub:en:/en/personality/../private';
+        $input = $this->validInput();
+        $input['big_five_asset_identity'] = $invalidAssetId;
+        $input['big_five_projection']['asset_id'] = $invalidAssetId;
+        $output = $this->validOutput();
+        $output['source_locks']['big_five_asset_id'] = $invalidAssetId;
+
+        $assessment = $this->contract->assess($input, $output);
+
+        $this->assertFalse($assessment['public_reader_allowed']);
+        $this->assertContains('input.big_five_asset_identity_invalid', $assessment['blockers']);
+        $this->assertContains('input.big_five.asset_id_invalid', $assessment['blockers']);
+        $this->assertContains('output.source_locks.big_five_asset_id_invalid', $assessment['blockers']);
+    }
+
+    #[Test]
     public function candidate_and_manual_review_states_never_allow_a_public_reader(): void
     {
         foreach ([
@@ -225,7 +260,7 @@ final class BigFiveCareerBridgeContractTest extends TestCase
             'bridge_contract_version' => BigFiveCareerBridgeContract::INPUT_CONTRACT_VERSION,
             'bridge_id' => 'bridge-001',
             'locale' => 'en',
-            'big_five_asset_identity' => 'big5.openness.high.en',
+            'big_five_asset_identity' => 'model_hub:en:/en/personality/big-five',
             'big_five_primary_status' => 'published',
             'big_five_published_revision_id' => 123,
             'big_five_public_projection_hash' => $bigFiveHash,
@@ -242,7 +277,7 @@ final class BigFiveCareerBridgeContractTest extends TestCase
                 'authority_surface' => 'personality_public_content_asset',
                 'source_kind' => BigFiveCareerBridgeContract::BIG_FIVE_SOURCE_KIND,
                 'framework' => 'big_five',
-                'asset_id' => 'big5.openness.high.en',
+                'asset_id' => 'model_hub:en:/en/personality/big-five',
                 'locale' => 'en',
                 'primary_status' => 'published',
                 'is_public' => true,
@@ -300,7 +335,7 @@ final class BigFiveCareerBridgeContractTest extends TestCase
             'claim_mode' => BigFiveCareerBridgeContract::CLAIM_MODE,
             'public_reader_allowed' => true,
             'source_locks' => [
-                'big_five_asset_id' => 'big5.openness.high.en',
+                'big_five_asset_id' => 'model_hub:en:/en/personality/big-five',
                 'big_five_locale' => 'en',
                 'big_five_published_revision_id' => 123,
                 'big_five_public_projection_hash' => str_repeat('a', 64),

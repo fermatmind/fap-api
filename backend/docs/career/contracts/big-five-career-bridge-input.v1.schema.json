@@ -37,7 +37,7 @@
     "locale": {
       "enum": ["en", "zh-CN"]
     },
-    "big_five_asset_identity": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"},
+    "big_five_asset_identity": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,255}$"},
     "big_five_primary_status": {"const": "published"},
     "big_five_published_revision_id": {"type": "integer", "minimum": 1},
     "big_five_public_projection_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
@@ -83,7 +83,7 @@
         },
         "asset_id": {
           "type": "string",
-          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}$"
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,255}$"
         },
         "locale": {
           "enum": ["en", "zh-CN"]
