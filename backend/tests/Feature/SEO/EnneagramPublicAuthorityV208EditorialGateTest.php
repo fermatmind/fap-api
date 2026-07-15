@@ -237,7 +237,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This page is not only a reflection prompt; it predicts your career success.', 'career_or_relationship_prediction'],
             ['This page does not establish clinical validity, but it is scientifically proven.', 'unsupported_science_claim'],
             ['This is not merely a draft; it is the best career for you.', 'deterministic_recommendation_claim'],
+            ['This page is not a diagnosis and is scientifically proven.', 'unsupported_science_claim'],
             ['本页不能作为诊断，但能预测你的职业成功。', 'career_or_relationship_prediction'],
+            ['本页不是诊断并且能预测你的职业成功。', 'career_or_relationship_prediction'],
         ] as [$phrase, $expectedCode]) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;

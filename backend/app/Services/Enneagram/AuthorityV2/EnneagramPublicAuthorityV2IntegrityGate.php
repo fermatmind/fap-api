@@ -853,9 +853,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         $directBridge = '(?:\s+(?:an?|the))?(?:\s+\p{L}+ly){0,2}\s*';
         $roleBridge = '\s+(?:(?:be\s+)?(?:used|treated|presented|described)|serve|function)\s+as(?:\s+(?:an?|the))?\s*';
         $claimBridge = '\s+(?:as|provide|offer)(?:\s+(?:an?|the))?\s*';
-        $boundedEnglishScope = '(?!\s+only\b)(?:(?!\b(?:but|however|yet)\b|[.!?;:\n]).){0,80}';
+        $boundedEnglishScope = '(?!\s+only\b)(?:(?!\b(?:and|also|plus|additionally|furthermore|moreover|then|while|whereas|but|however|yet)\b|[.!?;:\n]).){0,80}';
         $chineseNegative = '(?:并非|不是|不能|不会|不应|不得把|不得|禁止|不把|不用于)';
-        $boundedChineseScope = '(?!只|仅|只是|仅仅)(?:(?!但|然而|却|可是|[。！？；：\n]).){0,40}';
+        $boundedChineseScope = '(?!只|仅|只是|仅仅)(?:(?!并且|而且|同时|也|还|又|此外|另外|然后|但|然而|却|可是|[。！？；：\n]).){0,40}';
 
         return preg_match('/'.$englishNegative.'(?:'.$directBridge.'|'.$roleBridge.'|'.$claimBridge.'|'.$boundedEnglishScope.')$/iu', $prefix) === 1
             || preg_match('/'.$chineseNegative.$boundedChineseScope.'$/u', $prefix) === 1;
