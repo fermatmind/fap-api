@@ -563,7 +563,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
     public function test_science_proven_and_validated_permutations_fail_closed(): void
     {
-        foreach (['Scientifically proven', 'Scientifically validated', 'Clinically proven', 'Clinically validated', '科学证明', '科学验证', '临床证明', '临床验证'] as $phrase) {
+        foreach (['Scientifically proven', 'Scientifically-proven', 'Scientifically validated', 'Clinically proven', 'Clinically-validated', 'Clinically validated', '科学证明', '科学验证', '临床证明', '临床验证'] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
 
@@ -573,7 +573,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('unsupported_science_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not scientifically validated.', 'This page is not clinically proven.', '本页并非科学验证。', '本页不是临床证明。'] as $limitation) {
+        foreach (['This page is not scientifically validated.', 'This page is not scientifically-proven.', 'This page is not clinically proven.', 'This page is not clinically-validated.', '本页并非科学验证。', '本页不是临床证明。'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
@@ -743,6 +743,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         foreach ([
             'Precise career recommendation',
             'Best career for you',
+            'Find your best career',
+            'Your best career',
             'Perfect job match',
             'RIASEC ranks your best career',
             'Determines your income',
@@ -763,6 +765,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
         foreach ([
             'This page does not offer a Big Five precise career match.',
+            'This page does not find your best career.',
+            'This page is not your best career.',
             '本页不能提供 RIASEC推荐职业。',
         ] as $limitation) {
             $candidate = $this->candidate();
