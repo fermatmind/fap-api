@@ -170,7 +170,7 @@ prs:
     branch: codex/big5-authority-v2-visible-date-42
     depends_on: [BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41]
     train_scope: big5_authority_v2_visible_date_provenance_and_fail_closed_eligibility
-    status: github_checks_pending
+    status: ready_to_merge
     goal: "Lock the exact 82 visible-date findings; distinguish publication, manual-review, editorial-update, revision-created, import, build, and deploy timestamps; project only real backend authority dates for Article, PersonalityPublicContentAsset, Topic, and LandingSurface; keep missing or mismatched dates null with field-level eligibility blocks."
     allowed_paths:
       - backend/app/Services/BigFive/AuthorityV2/VisibleDate/**
