@@ -119,6 +119,7 @@ final class BigFiveReviewPromotionPreflight
             'public_runtime_baseline_sha256' => $row['observed_runtime']['public_runtime_baseline_sha256'],
             'revision_authority_matches' => $row['observed_runtime']['revision_authority_matches'],
             'primary_publicly_readable' => $row['observed_runtime']['primary_publicly_readable'],
+            'public_route_matches' => $row['observed_runtime']['public_route_matches'],
         ], $assessments);
         $preflightFingerprint = $this->fingerprint([
             'review_manifest_sha256' => $artifacts['review_sha256'],
@@ -275,6 +276,7 @@ final class BigFiveReviewPromotionPreflight
             'public_reader_selects_working_revision' => false,
             'primary_publicly_readable' => false,
             'primary_record_live' => false,
+            'public_route_matches' => false,
         ];
         if (! $record instanceof Model) {
             $issues[] = 'identity_missing';
@@ -287,6 +289,7 @@ final class BigFiveReviewPromotionPreflight
                     Article::LIFECYCLE_ARCHIVED,
                     Article::LIFECYCLE_SOFT_DELETED,
                 ], true));
+            $publicRouteMatches = $this->publicRouteMatchesDescriptor($record, $descriptor);
             $observed = [
                 'primary_id' => (int) $record->getKey(),
                 'working_revision_id' => $working === null ? null : (int) $working,
@@ -298,6 +301,7 @@ final class BigFiveReviewPromotionPreflight
                 'public_reader_selects_working_revision' => $working !== null && $published !== null && (int) $working === (int) $published,
                 'primary_publicly_readable' => $primaryPubliclyReadable,
                 'primary_record_live' => $primaryRecordLive,
+                'public_route_matches' => $publicRouteMatches,
             ];
             $databaseReads += $row['action_contract']['revision_create'] ? 1 : 0;
             if ($row['action_contract']['revision_create'] && $working === null) {
@@ -308,6 +312,9 @@ final class BigFiveReviewPromotionPreflight
             }
             if (! $primaryRecordLive) {
                 $issues[] = 'article_identity_not_live';
+            }
+            if (! $publicRouteMatches) {
+                $issues[] = 'public_route_mismatch';
             }
             if ($row['action_contract']['existing_revision'] && ($published === null || $working === null || (int) $published === (int) $working)) {
                 $issues[] = 'existing_public_revision_isolation_mismatch';
@@ -435,6 +442,22 @@ final class BigFiveReviewPromotionPreflight
             $record instanceof PersonalityPublicContentAsset => (int) $revision->getAttribute('asset_id') === $recordId,
             $record instanceof TopicProfile => (int) $revision->getAttribute('profile_id') === $recordId,
             default => false,
+        };
+    }
+
+    /** @param array<string,mixed> $descriptor */
+    private function publicRouteMatchesDescriptor(Model $record, array $descriptor): bool
+    {
+        $attributes = $descriptor['attributes'] ?? [];
+        if (! is_array($attributes)) {
+            return false;
+        }
+
+        return match (true) {
+            $record instanceof ContentPage => $record->getAttribute('path') === ($attributes['path'] ?? null),
+            $record instanceof PersonalityPublicContentAsset,
+            $record instanceof TopicProfile => $record->getAttribute('slug') === ($attributes['slug'] ?? null),
+            default => true,
         };
     }
 

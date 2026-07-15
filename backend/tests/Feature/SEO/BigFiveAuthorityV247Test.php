@@ -6,6 +6,8 @@ namespace Tests\Feature\SEO;
 
 use App\Models\Article;
 use App\Models\ContentPage;
+use App\Models\PersonalityPublicContentAsset;
+use App\Models\TopicProfile;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -216,6 +218,65 @@ final class BigFiveAuthorityV247Test extends TestCase
         $observed = collect($result['observed_runtime'])->firstWhere('asset_id', 'technical_trust:en:/en/personality/big-five/methodology');
         $this->assertIsArray($observed);
         $this->assertFalse($observed['revision_authority_matches']);
+    }
+
+    public function test_database_preflight_rejects_public_route_drift_for_all_non_identity_route_fields(): void
+    {
+        DB::table('content_pages')->insert([
+            'org_id' => 0,
+            'slug' => 'methodology',
+            'path' => '/en/personality/big-five/wrong-methodology-path',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'title' => 'Drifted content page route',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('personality_public_content_assets')->insert([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+            'entity_key' => 'big-five',
+            'slug' => 'wrong-big-five-slug',
+            'locale' => 'en',
+            'title' => 'Drifted personality route',
+            'is_public' => false,
+            'index_eligible' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('topic_profiles')->insert([
+            'org_id' => 0,
+            'topic_code' => 'big-five',
+            'slug' => 'wrong-big-five-topic-slug',
+            'locale' => 'en',
+            'title' => 'Drifted topic route',
+            'status' => TopicProfile::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('public_route_mismatch', $result['issue_codes']);
+        foreach ([
+            'technical_trust:en:/en/personality/big-five/methodology',
+            'model_hub:en:/en/personality/big-five',
+            'topic_hub:en:/en/topics/big-five',
+        ] as $assetId) {
+            $observed = collect($result['observed_runtime'])->firstWhere('asset_id', $assetId);
+            $this->assertIsArray($observed);
+            $this->assertFalse($observed['public_route_matches']);
+        }
     }
 
     public function test_artifact_drift_fails_before_database_read_or_write(): void
