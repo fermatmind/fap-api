@@ -203,6 +203,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
     {
         foreach ([
             'This page does not predict your career success.',
+            'This page cannot predict your career success.',
+            "This page can't predict income.",
+            'This page can’t predict relationship outcomes.',
             'This content is not scientifically proven.',
             'This is not a precise career recommendation.',
             '本页不能预测你的职业成功。',
@@ -306,6 +309,29 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
             $this->assertFalse($result['ok'], $phrase);
             $this->assertContains('diagnosis_or_screening_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach ([
+            'This page is not only a reflection prompt; it gives a diagnosis.',
+            'This page does not describe a fixed identity, but it offers treatment.',
+            '本页不把它当成固定身份，但会给出诊断。',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('diagnosis_or_screening_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach (['This page should not be used as a diagnosis.', '本页不把它当成诊断。'] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
         }
 
         $bounded = $this->gate()->validateEditorial($this->candidate(), $this->registry(), $this->maps());

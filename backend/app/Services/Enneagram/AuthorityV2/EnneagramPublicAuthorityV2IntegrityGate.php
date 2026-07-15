@@ -801,25 +801,28 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private function containsUnboundedMedicalClaim(string $text): bool
     {
-        $bounded = preg_replace([
-            '/\b(?:not|never)\b[^.!?\n]{0,80}\b(?:diagnos(?:is|es)|treatment|cure)\b/iu',
-            '/(?:不是|不把|不用于|不能作为|不得把|不得|禁止)[^。！？\n]{0,40}(?:诊断|确诊|治疗|治愈)/u',
-        ], '', $text) ?? $text;
+        $bounded = $this->withoutExplicitlyNegatedMatches($text, [self::BARE_MEDICAL_CLAIM_PATTERN]);
 
         return preg_match(self::BARE_MEDICAL_CLAIM_PATTERN, $bounded) === 1;
     }
 
     private function withoutExplicitNegativeClaims(string $text): string
     {
-        foreach ([
+        return $this->withoutExplicitlyNegatedMatches($text, [
             self::UNSUPPORTED_CLAIM_PATTERN,
             self::PREDICTION_PATTERN,
             self::DETERMINISTIC_RECOMMENDATION_PATTERN,
             self::HUMAN_REVIEW_RELEASE_PATTERN,
-        ] as $pattern) {
+        ]);
+    }
+
+    /** @param list<string> $patterns */
+    private function withoutExplicitlyNegatedMatches(string $text, array $patterns): string
+    {
+        foreach ($patterns as $pattern) {
             preg_match_all($pattern, $text, $matches, PREG_OFFSET_CAPTURE);
             foreach (array_reverse($matches[0] ?? []) as [$claim, $offset]) {
-                $prefix = substr($text, max(0, $offset - 120), min(120, $offset));
+                $prefix = mb_substr(substr($text, 0, $offset), -120);
                 if (! $this->hasExplicitNegativePrefix($prefix)) {
                     continue;
                 }
@@ -833,8 +836,16 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private function hasExplicitNegativePrefix(string $prefix): bool
     {
-        return preg_match('/(?:\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bnever)(?:\s+(?:an?|the))?(?:\s+\p{L}+ly){0,2}\s*$/iu', $prefix) === 1
-            || preg_match('/(?:并非|不是|不能|不会|不应|不得|禁止|不把|不用于)(?:本页|本内容|该页|该内容)?\s*$/u', $prefix) === 1;
+        $englishNegative = '(?:\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bcan(?:not|[\'’]t)|\b(?:does|did|is|are|was|were|could|will|would|should|must|may|might)n[\'’]t|\bnever)';
+        $directBridge = '(?:\s+(?:an?|the))?(?:\s+\p{L}+ly){0,2}\s*';
+        $roleBridge = '\s+(?:(?:be\s+)?(?:used|treated|presented|described)|serve|function)\s+as(?:\s+(?:an?|the))?\s*';
+        $claimBridge = '\s+(?:as|provide|offer)(?:\s+(?:an?|the))?\s*';
+        $boundedEnglishScope = '(?!\s+only\b)(?:(?!\b(?:but|however|yet)\b|[.!?;:\n]).){0,80}';
+        $chineseNegative = '(?:并非|不是|不能|不会|不应|不得把|不得|禁止|不把|不用于)';
+        $boundedChineseScope = '(?!只|仅|只是|仅仅)(?:(?!但|然而|却|可是|[。！？；：\n]).){0,40}';
+
+        return preg_match('/'.$englishNegative.'(?:'.$directBridge.'|'.$roleBridge.'|'.$claimBridge.'|'.$boundedEnglishScope.')$/iu', $prefix) === 1
+            || preg_match('/'.$chineseNegative.$boundedChineseScope.'$/u', $prefix) === 1;
     }
 
     /** @param list<string> $blocks */
