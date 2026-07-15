@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "55a063d3bbf28e1e8ec431fa5be8c86649f71fdd",
+    "commit_sha": "a481007ce57b1fe284f7ca540c1d52fa60fb525f",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed under the concurrency guard: combined PR08 and PR02 feature suites 45 tests / 1508 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. English GEO questions now require every non-marker content term to appear in the mapped visible answer; Chinese questions require each topic phrase remaining after question-scaffold removal to be directly supported. The exact-mapping railway-timetable negative fixture proves that generic working-hypothesis overlap no longer passes. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed under the concurrency guard: combined PR08 and PR02 feature suites 46 tests / 1630 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Source-ledger-blocked instrument equivalence, wing validity, subtype universality/cross-cultural equivalence, sitemap, llms.txt, and schema eligibility claims now fail closed in English and Chinese while explicit negative limitations remain allowed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head 253ad836d before the same-head review added one valid in-scope P2 finding: one or two generic shared terms could still mask an unsupported question topic. The locally verified substantive fix head 55a063d3b requires complete non-marker English term coverage or direct Chinese topic-phrase support and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 1544b5ab7 before the same-head review added two valid in-scope P2 findings: source-ledger-blocked equivalence/validity claims and visible sitemap/llms/schema release claims could pass. The locally verified substantive fix head a481007ce adds negation-aware bilingual boundaries and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All seventy-six valid P2 findings are fixed. GEO answerability now requires every non-marker English content term or each Chinese topic phrase to be supported by the mapped visible answer, in addition to exact question coverage, allowed rendered paths, and minimum answer length. The negative regression keeps question and mapping synchronized so relevance is the only failing cause. PR08+PR02 pass 45 tests / 1508 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All seventy-eight valid P2 findings are fixed. Negation-aware bilingual safety now covers the PR07 Unknown/evidence-limited instrument-equivalence, wing-validity, subtype-universality/cross-cultural-equivalence assumptions and the blocked current sitemap, llms.txt, and schema eligibility states. PR08+PR02 pass 46 tests / 1630 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93695,9 +93695,14 @@
           "at": "2026-07-15T19:03:46Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed and same-head Codex review completed on ledger head 253ad836d, then one valid P2 was fixed: answerability now requires complete non-marker English content-term coverage or direct Chinese topic-phrase support, so railway-timetable questions cannot pass through generic working-hypothesis overlap. The regression preserves exact question/mapping equality to isolate relevance. PR08+PR02 pass 45 / 1508, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T19:18:13Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed and same-head Codex review completed on ledger head 1544b5ab7, then two valid P2 findings were fixed: source-ledger-blocked instrument equivalence, wing validity, subtype universality/cross-cultural equivalence, and visible sitemap/llms.txt/schema eligibility claims now fail closed in both locales while explicit negative limitations remain allowed. Another full ci_verify_mbti.sh was already running during the first focused replay, so no second full validation was started; PR08+PR02 pass 46 / 1630, the exact classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-      "updated_at": "2026-07-15T19:03:46Z"
+      "updated_at": "2026-07-15T19:18:13Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
