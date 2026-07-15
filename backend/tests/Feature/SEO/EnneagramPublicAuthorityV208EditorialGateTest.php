@@ -487,8 +487,11 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Everyone has one fixed Enneagram type.',
             'One fixed type per person.',
             'Universal nine-factor recovery.',
+            'Enneagram type is a fixed identity.',
+            'A wing is a fixed identity.',
             '每个人都有一个固定的九型人格类型。',
             '普遍九因子结构。',
+            '九型人格类型是固定身份。',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -502,6 +505,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         foreach ([
             'This page does not establish one fixed type per person.',
             'Evidence does not establish universal nine-factor recovery.',
+            'Enneagram type is not a fixed identity.',
+            '九型人格类型不是固定身份。',
             '本页不能证明每个人都有一个固定的九型人格类型。',
         ] as $limitation) {
             $candidate = $this->candidate();
@@ -636,6 +641,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Approved for public release',
             'Cleared to index',
             'Published and indexable',
+            'Already indexed by Google',
+            'Eligible to publish',
             'Release ready',
             'Manually reviewed',
             'Manual reviewed',
@@ -643,6 +650,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             '可收录',
             '发布就绪',
             '已完成人工审核',
+            '已被搜索收录',
             'Already in the sitemap',
             'Currently in llms.txt',
             'Schema eligibility',
@@ -659,7 +667,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称已进入站点地图。'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page is not editor reviewed.', 'This page is not manually reviewed.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexed by Google.', 'This page is not eligible to publish.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称已进入站点地图。', '本页不能声称已被搜索收录。'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
@@ -676,12 +684,16 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Wing validity is supported by research',
             'Instinctual subtypes have cross-cultural equivalence',
             'Universal subtype ontology is established',
+            'FermatMind instrument is equivalent to RHETI',
+            'Wings are validated subtypes',
             'Cited evidence transfers automatically to FermatMind scores',
             'The study findings apply to FermatMind translations',
             '费马测试九型人格与 RHETI 具有工具等价性',
             '翼型效度得到研究支持',
             '本能副型具有跨文化等价性',
             '普遍副型本体已经成立',
+            '费马测试工具等价于 RHETI',
+            '翼型是经过验证的副型',
             '研究结果转移到费马测试分数',
         ] as $phrase) {
             $candidate = $this->candidate();
@@ -701,6 +713,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Current research does not establish wing validity.',
             'One study does not establish instinctual subtype cross-cultural equivalence.',
             'One study does not establish universal subtype ontology.',
+            'FermatMind instrument is not equivalent to RHETI.',
+            'Wings are not validated subtypes.',
             'Cited evidence does not transfer to FermatMind scores.',
             'Study findings do not apply to FermatMind translations.',
             '费马测试不能证明工具等价性。',
