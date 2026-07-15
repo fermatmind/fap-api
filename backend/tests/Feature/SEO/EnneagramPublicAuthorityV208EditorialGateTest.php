@@ -123,6 +123,30 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
         $this->assertFalse($result['ok']);
         $this->assertContains('geo_answerability_insufficient', collect($result['issues'])->pluck('code')->all());
+        $this->assertContains('geo_answerability_unverified', collect($result['issues'])->pluck('code')->all());
+    }
+
+    public function test_answerability_questions_require_substantive_visible_path_mappings(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['answerability']['questions'] = [
+            'How should seasonal weather patterns change a grocery list?',
+            'Which railway timetable is best for a distant holiday?',
+            'Why do unrelated gardening tools need different storage?',
+        ];
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('geo_answerability_unverified', collect($result['issues'])->pluck('code')->all());
+
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['answerability']['question_answers'][0]['visible_path'] = 'review_truth.status';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('geo_answerability_unverified', collect($result['issues'])->pluck('code')->all());
     }
 
     public function test_sections_require_substantive_visible_heading_and_body_text(): void
@@ -140,6 +164,19 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
     {
         $candidate = $this->candidate();
         $candidate['assets'][1]['observation_exercise']['context'] = $candidate['assets'][0]['observation_exercise']['context'];
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('duplicate_paragraph', collect($result['issues'])->pluck('code')->all());
+    }
+
+    public function test_shorter_substantive_chinese_visible_text_fails_duplicate_gate(): void
+    {
+        $candidate = $this->candidate();
+        $shared = '在同一会议情境中记录可见行动、推迟选项、反例和替代解释，再比较不同角色要求。';
+        $candidate['assets'][58]['observation_exercise']['context'] = $shared;
+        $candidate['assets'][59]['observation_exercise']['context'] = $shared;
 
         $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
 
@@ -521,6 +558,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertSame(116, $contract['qa_row_contract']['expected_count']);
         $this->assertCount(10, $contract['qa_row_contract']['gates']);
         $this->assertCount(10, $contract['required_negative_fixtures']);
+        $this->assertSame(30, $contract['duplicate_thresholds']['zh-CN']['paragraph_characters']);
+        $this->assertSame('question_answers', $contract['geo_answerability_contract']['mapping_field']);
         $this->assertSame('ready_for_human_review', $contract['automated_pass_means']);
         $this->assertSame('pending_manual_review', $contract['manual_review_truth']['status']);
         $this->assertNull($contract['manual_review_truth']['reviewer']);
@@ -632,6 +671,17 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
                     'questions' => $english
                         ? ["What is {$identity} {$token}?", "How can {$identity} {$token} be observed?", "What are the limits of {$identity} {$token}?"]
                         : ["{$identity} {$token} 是什么？", "如何观察 {$identity} {$token}？", "{$identity} {$token} 有哪些边界？"],
+                    'question_answers' => $english
+                        ? [
+                            ['question' => "What is {$identity} {$token}?", 'visible_path' => 'answer_first'],
+                            ['question' => "How can {$identity} {$token} be observed?", 'visible_path' => 'sections.0.body'],
+                            ['question' => "What are the limits of {$identity} {$token}?", 'visible_path' => 'sections.2.body'],
+                        ]
+                        : [
+                            ['question' => "{$identity} {$token} 是什么？", 'visible_path' => 'answer_first'],
+                            ['question' => "如何观察 {$identity} {$token}？", 'visible_path' => 'sections.0.body'],
+                            ['question' => "{$identity} {$token} 有哪些边界？", 'visible_path' => 'sections.2.body'],
+                        ],
                 ],
                 'claim_ids' => $claimIds,
                 'visible_evidence' => [

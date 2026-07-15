@@ -7,10 +7,10 @@ The aggregate candidate must contain exactly 116 locale assets: 2 hub pages, 6 c
 1. schema and frozen-target coverage;
 2. independently authored EN and zh-CN content with non-identical outlines;
 3. page-specific information gain;
-4. sentence, paragraph, and type-number-substitution duplicate/template risk;
+4. locale-calibrated sentence, paragraph, and type-number-substitution duplicate/template risk (EN 80/50 characters; zh-CN 30/24);
 5. page-specific FAQ depth and non-repeated answers;
 6. specific observable exercises rather than a generic seven-day prompt;
-7. visible answer-first GEO answerability;
+7. visible GEO answerability, with every declared question mapped through `question_answers` to a substantive `answer_first`, section body, or FAQ answer;
 8. visible evidence and limitations;
 9. truthful pending manual-review and closed release state;
 10. source-ledger claim safety, including unsupported science, predictive outcome, and competitor-language blocks.

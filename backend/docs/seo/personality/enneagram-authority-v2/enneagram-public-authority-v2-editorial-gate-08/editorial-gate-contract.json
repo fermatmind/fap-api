@@ -44,6 +44,16 @@
     "hidden_evidence",
     "competitor_copied_language"
   ],
+  "duplicate_thresholds": {
+    "en": { "paragraph_characters": 80, "sentence_characters": 50 },
+    "zh-CN": { "paragraph_characters": 30, "sentence_characters": 24 }
+  },
+  "geo_answerability_contract": {
+    "minimum_questions": 3,
+    "mapping_field": "question_answers",
+    "allowed_visible_paths": ["answer_first", "sections.N.body", "faqs.N.answer"],
+    "minimum_visible_answer_characters": { "en": 80, "zh-CN": 40 }
+  },
   "automated_pass_means": "ready_for_human_review",
   "manual_review_truth": {
     "status": "pending_manual_review",

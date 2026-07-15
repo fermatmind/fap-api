@@ -629,7 +629,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     {
         $answerability = is_array($asset['answerability'] ?? null) ? $asset['answerability'] : [];
         $questions = is_array($answerability['questions'] ?? null) ? $answerability['questions'] : [];
+        $questionAnswers = is_array($answerability['question_answers'] ?? null) ? $answerability['question_answers'] : [];
         $minimumQuestionLength = ($asset['locale'] ?? null) === 'zh-CN' ? 8 : 12;
+        $minimumAnswerLength = ($asset['locale'] ?? null) === 'zh-CN' ? 40 : 80;
         $normalizedQuestions = array_values(array_unique(array_filter(array_map(
             fn (mixed $question): string => $this->normalize($question),
             $questions,
@@ -638,6 +640,29 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             || count($normalizedQuestions) < 3
             || min(array_map('mb_strlen', $normalizedQuestions ?: [''])) < $minimumQuestionLength) {
             $add(self::EDITORIAL_GATES[6], 'geo_answerability_insufficient', $key, "{$path}.answerability", 'Each page must declare at least three distinct questions supported by visible direct answers.');
+        }
+
+        $mappedAnswers = [];
+        foreach ($questionAnswers as $mapping) {
+            if (! is_array($mapping)) {
+                continue;
+            }
+            $questionKey = $this->normalize($mapping['question'] ?? null);
+            $visiblePath = trim((string) ($mapping['visible_path'] ?? ''));
+            if ($questionKey !== '' && $visiblePath !== '') {
+                $mappedAnswers[$questionKey] = $visiblePath;
+            }
+        }
+        $mappingInvalid = count($mappedAnswers) !== count($normalizedQuestions);
+        foreach ($normalizedQuestions as $question) {
+            $visibleAnswer = isset($mappedAnswers[$question]) ? $this->visibleAnswerAtPath($asset, $mappedAnswers[$question]) : null;
+            if ($this->length($visibleAnswer) < $minimumAnswerLength) {
+                $mappingInvalid = true;
+                break;
+            }
+        }
+        if ($mappingInvalid) {
+            $add(self::EDITORIAL_GATES[6], 'geo_answerability_unverified', $key, "{$path}.answerability.question_answers", 'Every declared question must map to a substantive visible answer-first, section body, or FAQ answer.');
         }
     }
 
@@ -775,7 +800,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
         foreach ($duplicateBlocks as $index => $block) {
             $normalized = $this->normalize($block);
-            if (mb_strlen($normalized) >= 80) {
+            $paragraphThreshold = ($asset['locale'] ?? null) === 'zh-CN' ? 30 : 80;
+            if (mb_strlen($normalized) >= $paragraphThreshold) {
                 if (isset($paragraphs[$normalized])) {
                     $add(self::EDITORIAL_GATES[3], 'duplicate_paragraph', $key, "{$path}.text.{$index}", "Paragraph duplicates {$paragraphs[$normalized]['path']}.");
                 }
@@ -790,7 +816,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
             foreach (preg_split('/(?<=[.!?。！？])\s*/u', $block, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $sentence) {
                 $normalizedSentence = $this->normalize($sentence);
-                if (mb_strlen($normalizedSentence) < 50) {
+                $sentenceThreshold = ($asset['locale'] ?? null) === 'zh-CN' ? 24 : 50;
+                if (mb_strlen($normalizedSentence) < $sentenceThreshold) {
                     continue;
                 }
                 if (isset($sentences[$normalizedSentence])) {
@@ -809,6 +836,22 @@ final class EnneagramPublicAuthorityV2IntegrityGate
     private function length(mixed $value): int
     {
         return mb_strlen(trim((string) $value));
+    }
+
+    /** @param array<string, mixed> $asset */
+    private function visibleAnswerAtPath(array $asset, string $path): ?string
+    {
+        if ($path === 'answer_first') {
+            return is_string($asset['answer_first'] ?? null) ? $asset['answer_first'] : null;
+        }
+        if (preg_match('/^(sections|faqs)\.(\d+)\.(body|answer)$/', $path, $matches) !== 1) {
+            return null;
+        }
+        $collection = is_array($asset[$matches[1]] ?? null) ? $asset[$matches[1]] : [];
+        $row = is_array($collection[(int) $matches[2]] ?? null) ? $collection[(int) $matches[2]] : [];
+        $value = $row[$matches[3]] ?? null;
+
+        return is_string($value) ? $value : null;
     }
 
     private function containsUnboundedMedicalClaim(string $text): bool
