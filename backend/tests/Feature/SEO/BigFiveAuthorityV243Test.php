@@ -54,6 +54,7 @@ final class BigFiveAuthorityV243Test extends TestCase
             'is_public' => true,
             'author_name' => 'FermatMind Editorial',
             'reviewer_name' => 'Content Review Desk',
+            'published_revision_id' => 101,
         ]);
         $article->forceFill(['id' => 10]);
         $revision = new ArticleTranslationRevision([
@@ -64,8 +65,10 @@ final class BigFiveAuthorityV243Test extends TestCase
             'created_by' => 41,
             'reviewed_by' => 42,
             'reviewed_at' => '2026-07-10T00:00:00Z',
+            'published_at' => '2026-07-10T00:00:00Z',
             'authority_metadata_json' => $this->metadata('published'),
         ]);
+        $revision->forceFill(['id' => 101]);
 
         $projection = $this->projector->forArticle($article, $revision);
 
@@ -81,6 +84,19 @@ final class BigFiveAuthorityV243Test extends TestCase
         );
         $this->assertTrue($projection['eligibility']['promotion_eligible']);
         $this->assertSame([], $projection['eligibility']['blocked_reasons']);
+
+        $article->published_revision_id = 102;
+        $stale = $this->projector->forArticle($article, $revision);
+        $this->assertSame(['author' => null, 'reviewer' => null, 'sources' => []], $stale['visible_provenance']);
+        $this->assertFalse($stale['eligibility']['promotion_eligible']);
+
+        $article->published_revision_id = 101;
+        $revision->published_at = now()->addDay();
+        $this->assertFalse($this->projector->forArticle($article, $revision)['eligibility']['promotion_eligible']);
+
+        $revision->published_at = '2026-07-10T00:00:00Z';
+        $article->lifecycle_state = Article::LIFECYCLE_ARCHIVED;
+        $this->assertFalse($this->projector->forArticle($article, $revision)['eligibility']['promotion_eligible']);
     }
 
     public function test_missing_or_fabricated_reviewer_fails_closed_without_overwriting_public_content(): void
@@ -127,6 +143,13 @@ final class BigFiveAuthorityV243Test extends TestCase
         data_set($metadata, 'visible_provenance.reviewer.authority_ref', 'self-attested');
         $asset->authority_json = $metadata;
         $this->assertNull($this->projector->forPersonalityAsset($asset)['visible_provenance']['reviewer']);
+
+        $metadata = $this->metadata('approved');
+        data_set($metadata, 'visible_provenance.author.identity', 'generated:author');
+        $asset->authority_json = $metadata;
+        $generatedAuthor = $this->projector->forPersonalityAsset($asset);
+        $this->assertNull($generatedAuthor['visible_provenance']['author']);
+        $this->assertFalse($generatedAuthor['eligibility']['promotion_eligible']);
     }
 
     public function test_personality_topic_and_landing_reuse_metadata_but_drafts_expose_nothing(): void
@@ -140,9 +163,11 @@ final class BigFiveAuthorityV243Test extends TestCase
         $asset->forceFill(['id' => 30]);
         $topic = new TopicProfile([
             'slug' => 'big-five', 'locale' => 'en', 'status' => TopicProfile::STATUS_PUBLISHED, 'is_public' => true,
+            'published_revision_id' => 401,
         ]);
-        $topic->forceFill(['id' => 40]);
+        $topic->forceFill(['id' => 40, 'published_revision_id' => 401]);
         $revision = new TopicProfileRevision(['profile_id' => 40, 'snapshot_json' => $this->metadata('approved')]);
+        $revision->forceFill(['id' => 401]);
         $landing = new LandingSurface([
             'surface_key' => 'big-five', 'locale' => 'en', 'status' => LandingSurface::STATUS_PUBLISHED,
             'is_public' => true, 'payload_json' => $this->metadata('approved'),

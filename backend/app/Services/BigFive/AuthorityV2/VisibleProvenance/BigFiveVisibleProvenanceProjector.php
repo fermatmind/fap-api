@@ -50,16 +50,26 @@ final class BigFiveVisibleProvenanceProjector
     /** @return array<string, mixed> */
     public function forArticle(Article $article, ?ArticleTranslationRevision $revision = null): array
     {
+        $articleIsPublic = $article->status === 'published'
+            && (bool) $article->is_public
+            && ! $article->trashed()
+            && ! in_array((string) $article->lifecycle_state, [
+                Article::LIFECYCLE_ARCHIVED,
+                Article::LIFECYCLE_SOFT_DELETED,
+            ], true);
         $revisionMatches = $revision instanceof ArticleTranslationRevision
             && (int) $revision->article_id === (int) $article->id
             && (int) $revision->org_id === (int) $article->org_id
             && (string) $revision->locale === (string) $article->locale
-            && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED;
-        $public = $article->status === 'published' && (bool) $article->is_public && $revisionMatches;
+            && $article->published_revision_id !== null
+            && (int) $revision->id === (int) $article->published_revision_id
+            && $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED
+            && $this->publicationIsEffective($revision->published_at);
+        $public = $articleIsPublic && $revisionMatches;
         $metadata = $revisionMatches && is_array($revision->authority_metadata_json)
             ? $revision->authority_metadata_json
             : [];
-        $author = $public ? $this->actor(data_get($metadata, 'visible_provenance.author'), self::AUTHOR_ROLES) : null;
+        $author = $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null;
         if ($author !== null) {
             if ($revision->created_by !== null && $author['identity'] !== 'admin_user:'.(int) $revision->created_by) {
                 $author = null;
@@ -105,7 +115,7 @@ final class BigFiveVisibleProvenanceProjector
         return $this->project(
             'PersonalityPublicContentAsset',
             'personality_public_content_asset:'.(int) $asset->id.':'.(string) $asset->locale.':'.(string) $asset->slug,
-            $public ? $this->actor(data_get($metadata, 'visible_provenance.author'), self::AUTHOR_ROLES) : null,
+            $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null,
             $reviewer,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $asset->is_public,
@@ -116,14 +126,16 @@ final class BigFiveVisibleProvenanceProjector
     public function forTopic(TopicProfile $topic, ?TopicProfileRevision $revision = null): array
     {
         $revisionMatches = $revision instanceof TopicProfileRevision
-            && (int) $revision->profile_id === (int) $topic->id;
+            && (int) $revision->profile_id === (int) $topic->id
+            && $topic->published_revision_id !== null
+            && (int) $revision->id === (int) $topic->published_revision_id;
         $public = $topic->status === TopicProfile::STATUS_PUBLISHED && (bool) $topic->is_public && $revisionMatches;
         $metadata = $revisionMatches && is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
 
         return $this->project(
             'Topic',
             'topic:'.(int) $topic->id.':'.(string) $topic->locale.':'.(string) $topic->slug,
-            $public ? $this->actor(data_get($metadata, 'visible_provenance.author'), self::AUTHOR_ROLES) : null,
+            $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null,
             $public ? $this->reviewer(data_get($metadata, 'visible_provenance.reviewer')) : null,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $topic->is_public,
@@ -139,7 +151,7 @@ final class BigFiveVisibleProvenanceProjector
         return $this->project(
             'LandingSurface',
             'landing_surface:'.(int) $surface->id.':'.(string) $surface->locale.':'.(string) $surface->surface_key,
-            $public ? $this->actor(data_get($metadata, 'visible_provenance.author'), self::AUTHOR_ROLES) : null,
+            $public ? $this->author(data_get($metadata, 'visible_provenance.author')) : null,
             $public ? $this->reviewer(data_get($metadata, 'visible_provenance.reviewer')) : null,
             $public ? $this->sources(data_get($metadata, 'visible_provenance.sources')) : [],
             (bool) $surface->is_public,
@@ -223,6 +235,20 @@ final class BigFiveVisibleProvenanceProjector
     }
 
     /** @return array<string, string>|null */
+    private function author(mixed $value): ?array
+    {
+        $actor = $this->actor($value, self::AUTHOR_ROLES);
+        if ($actor === null
+            || preg_match('/\Aadmin_user:[1-9][0-9]*\z/', $actor['identity']) !== 1
+            || (! str_starts_with($actor['authority_ref'], 'revision-author:')
+                && ! str_starts_with($actor['authority_ref'], 'author-ledger:'))) {
+            return null;
+        }
+
+        return $actor;
+    }
+
+    /** @return array<string, string>|null */
     private function reviewer(mixed $value): ?array
     {
         $actor = $this->actor($value, self::REVIEWER_ROLES);
@@ -283,6 +309,16 @@ final class BigFiveVisibleProvenanceProjector
         } catch (Throwable) {
             return null;
         }
+    }
+
+    private function publicationIsEffective(mixed $value): bool
+    {
+        $normalized = $this->normalizeDate($value);
+        if ($normalized === null) {
+            return false;
+        }
+
+        return CarbonImmutable::parse($normalized)->lessThanOrEqualTo(CarbonImmutable::now('UTC'));
     }
 
     private function hasEndorsementClaim(string $label): bool
