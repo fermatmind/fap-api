@@ -829,6 +829,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         foreach ([
             'Unlock to know your diagnosis',
             'Diagnosis',
+            'Diagnose anxiety',
+            'Diagnose personality',
+            'Diagnosed personality',
+            'Diagnosing anxiety',
             'Treatment',
             'Cure',
             '诊断',
@@ -859,7 +863,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('diagnosis_or_screening_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page should not be used as a diagnosis.', '本页不把它当成诊断。'] as $limitation) {
+        foreach (['This page should not be used as a diagnosis.', 'This page does not diagnose anxiety.', '本页不把它当成诊断。'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
