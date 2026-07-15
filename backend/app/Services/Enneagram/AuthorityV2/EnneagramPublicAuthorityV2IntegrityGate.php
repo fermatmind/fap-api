@@ -327,7 +327,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const UNSUPPORTED_CLAIM_PATTERN = '/(?:scientifically proven|neuroscience proves|clinically validated|absolute(?:ly)? accurate|most accurate personality test|科学(?:已)?证明|神经科学证明|临床验证|绝对准确)/iu';
 
-    private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive)?\s+(?:career|job|relationship|partner|income|hiring)|guaranteed?\s+(?:career|job|relationship|income|outcome)|perfect\s+(?:career|job|partner)|预测(?:职业|收入|关系|录用|结果)|保证(?:职业|收入|关系|录用|结果)|最适合的职业|完美伴侣)/iu';
+    private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring)(?:[\s-]+(?:success|outcome|fit))?|(?:career|job|relationship|partner|income|hiring)[\s-]+(?:success[\s-]+)?predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|outcome)|perfect\s+(?:career|job|partner)|预测(?:职业|收入|关系|录用|结果)|保证(?:职业|收入|关系|录用|结果)|最适合的职业|完美伴侣)/iu';
 
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
 
@@ -637,6 +637,19 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         }
         if ($map === null) {
             return;
+        }
+        $requiredLimitations = array_values(array_filter(array_map(
+            fn (mixed $limitation): string => $this->normalize($limitation),
+            is_array($map['limitations'] ?? null) ? $map['limitations'] : [],
+        )));
+        $visibleLimitations = array_map(
+            fn (mixed $limitation): string => $this->normalize($limitation),
+            $limitations,
+        );
+        foreach ($requiredLimitations as $requiredLimitation) {
+            if (! in_array($requiredLimitation, $visibleLimitations, true)) {
+                $add(self::EDITORIAL_GATES[7], 'mapped_limitation_hidden', $key, "{$path}.visible_evidence.limitations", 'A page limitation required by the source ledger is absent from visible evidence.');
+            }
         }
         $requiredFactual = array_values(array_map('strval', is_array($map['factual_claim_ids'] ?? null) ? $map['factual_claim_ids'] : []));
         foreach ($requiredFactual as $claimId) {

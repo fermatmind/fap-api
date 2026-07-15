@@ -149,6 +149,33 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('competitor_language_detected', $codes);
     }
 
+    public function test_mapped_limitation_must_remain_visible(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['visible_evidence']['limitations'] = [
+            'This generic limitation is long enough to satisfy the substantive text length requirement by itself.',
+            'This second generic limitation is also long enough but does not preserve the mapped page boundary.',
+        ];
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('mapped_limitation_hidden', collect($result['issues'])->pluck('code')->all());
+    }
+
+    public function test_pronoun_and_hyphenated_prediction_phrasing_fails_claim_safety_gate(): void
+    {
+        $candidate = $this->candidate();
+        $candidate['assets'][0]['sections'][0]['heading'] = 'Predicts your career success';
+        $candidate['assets'][1]['sections'][0]['heading'] = 'Career-success predictor';
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+        $predictionIssues = collect($result['issues'])->where('code', 'career_or_relationship_prediction');
+
+        $this->assertFalse($result['ok']);
+        $this->assertCount(2, $predictionIssues);
+    }
+
     public function test_command_is_read_only_and_fails_closed_without_a_source(): void
     {
         $exit = Artisan::call('personality:enneagram-authority-v2-integrity-gate', [
@@ -310,7 +337,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
                     'visible' => true,
                     'claim_ids' => $map['factual_claim_ids'],
                     'limitations' => [
-                        $map['limitations'][0],
+                        ...$map['limitations'],
                         $english
                             ? "The {$token} editorial example does not establish FermatMind reliability, validity, norms, percentiles, prediction, or clinical utility."
                             : "{$token} 编辑示例不能证明费马测试自身的信度、效度、常模、百分位、预测能力或临床用途。",
