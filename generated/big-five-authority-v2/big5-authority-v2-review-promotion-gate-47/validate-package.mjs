@@ -17,6 +17,15 @@ const existingArticleSlugs = new Set([
   'big-five-narrative-portrait',
   'big-five-tool-guide',
 ]);
+const sourceArtifactPaths = [
+  'generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json',
+  'generated/big-five-authority-v2/big5-authority-v2-media-authority-41/mapping-package.json',
+  'generated/big-five-authority-v2/big5-authority-v2-visible-date-42/visible-date-findings.json',
+  'generated/big-five-authority-v2/big5-authority-v2-visible-provenance-43/visible-provenance-findings.json',
+  'generated/big-five-authority-v2/big5-authority-v2-discoverability-parity-44/discoverability-parity-findings.json',
+  'generated/big-five-authority-v2/big5-authority-v2-structured-data-45/structured-data-findings.json',
+  'generated/big-five-authority-v2/big5-authority-v2-topic-authority-46/topic-draft-revision-package.json',
+];
 
 const reviewPath = resolve(directory, 'review-manifest.json');
 const rollbackPath = resolve(directory, 'rollback-plan.json');
@@ -33,7 +42,11 @@ for (const [name, expected] of Object.entries(hashes.files ?? {})) {
   if (actual !== expected) fail(`${name} SHA-256 mismatch`);
 }
 
-for (const source of review.source_artifacts ?? []) {
+const reviewSourceArtifactPaths = (review.source_artifacts ?? []).map((source) => source?.path).sort();
+if (JSON.stringify(reviewSourceArtifactPaths) !== JSON.stringify([...sourceArtifactPaths].sort())) {
+  fail('source artifact identity contract mismatch');
+}
+for (const source of review.source_artifacts) {
   if (fileSha256(resolve(root, source.path)) !== source.sha256) fail(`source artifact drift: ${source.path}`);
 }
 
