@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "ff81b50b0c4d1f9d8d72635592e506a48029a4b7",
+    "commit_sha": "c1adc317b383cbfbac434279436fb53caf0c6ad9",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 30 tests / 610 assertions; exact Big Five runtime-path and Enneagram allowlist regressions 2 tests / 5 assertions; Pint for all three changed PHP files; PHP syntax, YAML, JSON, diff, and exact seven-file scope checks. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 31 tests / 644 assertions; exact Big Five runtime-path and Enneagram allowlist regressions 2 tests / 5 assertions; Pint for all three changed PHP files; PHP syntax, YAML, JSON, diff, and exact seven-file scope checks. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior review-fix ledger head 69bfcf8ab, then the latest automated review added one valid in-scope P2 finding for comma-spliced affirmative clauses inheriting an earlier negation. The locally verified substantive fix head ff81b50b0 requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior review-fix ledger head ed3d34599, then the latest explicit current-head review added one valid in-scope P2 finding for unsupported FermatMind reliability, validity, norms, and percentile claims in visible copy. The locally verified substantive fix head c1adc317b requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All twenty-nine valid P2 findings are fixed. English and Chinese negation scope now stops at contrastive/additive conjunctions, punctuation, and comma-led new-subject or affirmative-predicate clauses, while comma-separated negative claim lists remain allowed. PR08+PR02 pass 30 tests / 610 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All thirty valid P2 findings are fixed. Visible English/Chinese FermatMind psychometrics claims about reliability, validity, norms, and percentiles now fail closed even with clean claim IDs, while explicit evidence limitations remain allowed through the bounded negation logic. PR08+PR02 pass 31 tests / 644 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93510,9 +93510,14 @@
         "at": "2026-07-15T12:59:48Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: comma-led English/Chinese new clauses now terminate negation scope without rejecting source-ledger comma-separated negative claim lists. The first focused retry exposed that the Chinese claim match begins after the predicate token; a subject-led comma boundary fixed the exact multibyte fixture before commit. With another full ci_verify_mbti.sh already running, only focused checks were started: PR08+PR02 pass 30 / 610, freeze regressions 2 / 5, and Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T13:16:12Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head and an explicitly requested current-head review completed, then one valid P2 was fixed: visible FermatMind reliability, validity, norms, and percentile claims now fail closed in English and Chinese even when claim IDs omit the blocked registry entry; explicit negative limitations remain allowed. Under the local concurrency guard only focused checks were started while another full ci_verify_mbti.sh ran: PR08+PR02 pass 31 / 644, freeze regressions 2 / 5, and Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T12:59:48Z"
+    "updated_at": "2026-07-15T13:16:12Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
