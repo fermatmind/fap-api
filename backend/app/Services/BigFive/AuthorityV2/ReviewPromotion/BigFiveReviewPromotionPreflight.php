@@ -10,6 +10,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
+use App\Models\PageBlock;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
@@ -315,11 +316,9 @@ final class BigFiveReviewPromotionPreflight
             $published = $record->getAttribute('published_revision_id');
             $primaryPubliclyReadable = $this->primaryPubliclyReadable($record);
             $databaseReads++;
-            $databaseReads += match (true) {
-                $record instanceof Article => ($published !== null ? 1 : 0) + 6,
-                $record instanceof TopicProfile => 3,
-                default => 0,
-            };
+            $fingerprintDatabaseReads = 0;
+            $publicRuntimeBaseline = $this->recordFingerprint($record, $fingerprintDatabaseReads);
+            $databaseReads += $fingerprintDatabaseReads;
             $primaryRecordLive = ! $record instanceof Article || (! $record->trashed()
                 && ! in_array($record->getAttribute('lifecycle_state'), [
                     Article::LIFECYCLE_ARCHIVED,
@@ -330,7 +329,7 @@ final class BigFiveReviewPromotionPreflight
                 'primary_id' => (int) $record->getKey(),
                 'working_revision_id' => $working === null ? null : (int) $working,
                 'published_revision_id' => $published === null ? null : (int) $published,
-                'public_runtime_baseline_sha256' => $this->recordFingerprint($record),
+                'public_runtime_baseline_sha256' => $publicRuntimeBaseline,
                 'revision_authority_matches' => $row['action_contract']['revision_create']
                     ? $this->revisionAuthorityMatches($record, $row, $descriptor)
                     : true,
@@ -647,17 +646,27 @@ final class BigFiveReviewPromotionPreflight
             && hash_equals($deployedSha, trim(File::get($revisionPath)));
     }
 
-    private function recordFingerprint(Model $record): string
+    private function recordFingerprint(Model $record, int &$databaseReads): string
     {
+        $databaseReads = 0;
         $attributes = $record->getAttributes();
         unset($attributes['working_revision_id']);
         ksort($attributes);
 
-        if (! $record instanceof Article && ! $record instanceof TopicProfile) {
+        if (! $record instanceof Article && ! $record instanceof LandingSurface && ! $record instanceof TopicProfile) {
             return $this->fingerprint($attributes);
         }
 
+        if ($record instanceof LandingSurface) {
+            return $this->fingerprint([
+                'primary' => $attributes,
+                'public_relations' => $this->landingPublicRelationsSnapshot($record, $databaseReads),
+            ]);
+        }
+
         if ($record instanceof TopicProfile) {
+            $databaseReads = 3;
+
             return $this->fingerprint([
                 'primary' => $attributes,
                 'public_relations' => $this->topicPublicRelationsSnapshot($record),
@@ -668,6 +677,7 @@ final class BigFiveReviewPromotionPreflight
         $publishedRevision = $publishedRevisionId === null
             ? null
             : ArticleTranslationRevision::query()->withoutGlobalScopes()->find($publishedRevisionId);
+        $databaseReads = ($publishedRevisionId === null ? 0 : 1) + 6;
 
         return $this->fingerprint([
             'primary' => $attributes,
@@ -720,6 +730,136 @@ final class BigFiveReviewPromotionPreflight
             'alternate_translation_group_variants' => $this->modelSnapshots($translationGroupAlternates),
             'alternate_legacy_same_slug_variants' => $this->modelSnapshots($legacySameSlugAlternates),
         ];
+    }
+
+    /** @return array<string,mixed> */
+    private function landingPublicRelationsSnapshot(LandingSurface $surface, int &$databaseReads): array
+    {
+        $blocks = $surface->blocks()
+            ->where('is_enabled', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+        $databaseReads++;
+
+        return [
+            'enabled_blocks' => $blocks
+                ->map(fn (PageBlock $block): array => [
+                    'block' => $this->modelSnapshot($block),
+                    'resolved_recommended_article_inputs' => $this->landingRecommendedArticleInputs($block, $surface, $databaseReads),
+                ])
+                ->values()
+                ->all(),
+        ];
+    }
+
+    /** @return list<array<string,mixed>> */
+    private function landingRecommendedArticleInputs(PageBlock $block, LandingSurface $surface, int &$databaseReads): array
+    {
+        if ((string) $block->getAttribute('block_key') !== 'recommended_articles') {
+            return [];
+        }
+        $payload = $block->getAttribute('payload_json');
+        $items = is_array($payload) ? ($payload['items'] ?? null) : null;
+        if (! is_array($items) || $items === []) {
+            return [];
+        }
+
+        $limitValue = $payload['limit'] ?? $payload['max_items'] ?? count($items);
+        $limit = max(1, min(12, is_numeric($limitValue) ? (int) $limitValue : count($items)));
+        $pinnedSlugs = collect($items)
+            ->filter(fn (mixed $item): bool => is_array($item) && $this->landingRecommendedItemIsPinned($item))
+            ->map(fn (array $item): ?string => $this->landingRecommendedArticleSlug($item))
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
+        $relations = [
+            'category' => fn ($query) => $query->withoutGlobalScopes(),
+            'tags' => fn ($query) => $query->withoutGlobalScopes(),
+            'seoMeta',
+            'publishedRevision',
+        ];
+        $latest = Article::query()
+            ->withoutGlobalScopes()
+            ->with($relations)
+            ->where('org_id', $surface->getAttribute('org_id'))
+            ->where('locale', $surface->getAttribute('locale'))
+            ->where('is_indexable', true)
+            ->publiclyReadable()
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->limit($limit + count($pinnedSlugs))
+            ->get();
+        $databaseReads += 5;
+        $pinned = $pinnedSlugs === []
+            ? collect()
+            : Article::query()
+                ->withoutGlobalScopes()
+                ->with($relations)
+                ->where('org_id', $surface->getAttribute('org_id'))
+                ->where('locale', $surface->getAttribute('locale'))
+                ->whereIn('slug', $pinnedSlugs)
+                ->where('is_indexable', true)
+                ->publiclyReadable()
+                ->get()
+                ->keyBy(fn (Article $article): string => (string) $article->getAttribute('slug'));
+        if ($pinnedSlugs !== []) {
+            $databaseReads += 5;
+        }
+
+        return collect($pinnedSlugs)
+            ->map(fn (string $slug): ?Article => $pinned->get($slug))
+            ->filter(fn (?Article $article): bool => $article instanceof Article)
+            ->concat($latest)
+            ->unique(fn (Article $article): string => (string) $article->getAttribute('slug'))
+            ->take($limit)
+            ->filter(fn (Article $article): bool => $article->publishedRevision instanceof ArticleTranslationRevision)
+            ->map(fn (Article $article): array => [
+                'primary' => $this->modelSnapshot($article),
+                'published_revision' => $this->modelSnapshot($article->publishedRevision),
+                'category' => $article->category instanceof Model
+                    && (int) $article->category->getAttribute('org_id') === (int) $article->getAttribute('org_id')
+                        ? $this->modelSnapshot($article->category)
+                        : null,
+                'tags' => $this->modelSnapshots($article->tags->filter(
+                    fn (Model $tag): bool => (int) $tag->getAttribute('org_id') === (int) $article->getAttribute('org_id')
+                )),
+                'seo_meta' => $this->modelSnapshot($article->seoMeta),
+            ])
+            ->values()
+            ->all();
+    }
+
+    private function landingRecommendedArticleSlug(array $item): ?string
+    {
+        $article = $item['article'] ?? null;
+        $slug = is_array($article) ? ($article['slug'] ?? null) : ($item['slug'] ?? null);
+        if (! is_scalar($slug)) {
+            return null;
+        }
+        $normalized = trim((string) $slug);
+
+        return $normalized !== ''
+            && strlen($normalized) <= 127
+            && preg_match('/\A[a-z0-9](?:[a-z0-9-]{0,125}[a-z0-9])?\z/', $normalized) === 1
+                ? $normalized
+                : null;
+    }
+
+    private function landingRecommendedItemIsPinned(array $item): bool
+    {
+        foreach (['pinned', 'is_pinned', 'pin_to_top', 'is_featured'] as $key) {
+            if (filter_var($item[$key] ?? null, FILTER_VALIDATE_BOOL)) {
+                return true;
+            }
+            $article = $item['article'] ?? null;
+            if (is_array($article) && filter_var($article[$key] ?? null, FILTER_VALIDATE_BOOL)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @return array<string,mixed> */

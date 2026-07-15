@@ -773,7 +773,7 @@ final class BigFiveAuthorityV247Test extends TestCase
 
     public function test_database_preflight_rejects_public_preserved_product_shell(): void
     {
-        DB::table('landing_surfaces')->insert([
+        $surfaceId = DB::table('landing_surfaces')->insertGetId([
             'org_id' => 0,
             'surface_key' => 'test_big_five_personality_test_ocean_model',
             'locale' => 'en',
@@ -796,6 +796,85 @@ final class BigFiveAuthorityV247Test extends TestCase
             ->firstWhere('asset_id', 'test_landing:en:/en/tests/big-five-personality-test-ocean-model');
         $this->assertIsArray($observed);
         $this->assertTrue($observed['primary_publicly_readable']);
+
+        DB::table('page_blocks')->insert([
+            'landing_surface_id' => $surfaceId,
+            'block_key' => 'hero',
+            'block_type' => 'hero',
+            'title' => 'Unexpected public shell block',
+            'payload_json' => json_encode(['body' => 'Runtime block drift'], JSON_THROW_ON_ERROR),
+            'sort_order' => 10,
+            'is_enabled' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $afterBlock = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterBlockObserved = collect($afterBlock['observed_runtime'])
+            ->firstWhere('asset_id', 'test_landing:en:/en/tests/big-five-personality-test-ocean-model');
+        $this->assertIsArray($afterBlockObserved);
+        $this->assertNotSame(
+            $observed['public_runtime_baseline_sha256'],
+            $afterBlockObserved['public_runtime_baseline_sha256'],
+        );
+        $this->assertNotSame($result['promotion_preflight_fingerprint'], $afterBlock['promotion_preflight_fingerprint']);
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'landing-runtime-target',
+            'locale' => 'en',
+            'translation_group_id' => 'article:landing-runtime-target',
+            'title' => 'Legacy landing target',
+            'content_md' => '# Legacy landing target',
+            'status' => 'published',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subDay(),
+        ]);
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => 'article:landing-runtime-target',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => 'Resolved landing target',
+            'content_md' => '# Resolved landing target',
+            'published_at' => now()->subDay(),
+        ]);
+        $article->forceFill(['published_revision_id' => (int) $revision->id])->save();
+        DB::table('page_blocks')->insert([
+            'landing_surface_id' => $surfaceId,
+            'block_key' => 'recommended_articles',
+            'block_type' => 'article_cards',
+            'title' => 'Resolved recommendations',
+            'payload_json' => json_encode([
+                'limit' => 1,
+                'items' => [['pinned' => true, 'article' => ['slug' => 'landing-runtime-target']]],
+            ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            'sort_order' => 20,
+            'is_enabled' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $beforeResolvedChange = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $beforeResolvedBaseline = collect($beforeResolvedChange['observed_runtime'])
+            ->firstWhere('asset_id', 'test_landing:en:/en/tests/big-five-personality-test-ocean-model')['public_runtime_baseline_sha256'] ?? null;
+
+        $revision->forceFill(['title' => 'Mutated resolved landing target'])->save();
+
+        $afterResolvedChange = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterResolvedBaseline = collect($afterResolvedChange['observed_runtime'])
+            ->firstWhere('asset_id', 'test_landing:en:/en/tests/big-five-personality-test-ocean-model')['public_runtime_baseline_sha256'] ?? null;
+        $this->assertNotSame($beforeResolvedBaseline, $afterResolvedBaseline);
+        $this->assertNotSame(
+            $beforeResolvedChange['promotion_preflight_fingerprint'],
+            $afterResolvedChange['promotion_preflight_fingerprint'],
+        );
     }
 
     public function test_artifact_drift_fails_before_database_read_or_write(): void
