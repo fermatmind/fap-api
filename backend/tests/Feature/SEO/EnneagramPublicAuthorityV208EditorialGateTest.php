@@ -375,6 +375,9 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Career outcome forecast',
             'Predictive of career success',
             'Predictive of relationship outcomes',
+            'Prediction of career success',
+            'A prediction of salary outcome',
+            'Predictions for financial outcomes',
         ] as $phrase) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
@@ -392,6 +395,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'This page does not forecast career and income outcomes.',
             'This page is not a forecast of career and income outcomes.',
             'This page is not predictive of career success.',
+            'This page is not a prediction of career success.',
+            'This page does not provide predictions for salary outcomes.',
         ] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
@@ -662,6 +667,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Manual review was approved',
             'Manual review was passed',
             'Manual review was cleared',
+            'Passed human review',
+            'Passed manual review',
+            'Cleared expert review',
+            'Approved editorial review',
             '人工审核通过',
             '人工审核已通过',
             '编辑已批准',
@@ -700,7 +709,7 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
 
-        foreach (['This page is not human reviewed.', 'This page has not been human reviewed.', "This page hasn't been human reviewed.", 'This page is not editor reviewed.', 'This page is not editor approved.', 'This page is not expert approved.', 'This page is not manually reviewed.', 'This page is not manually approved.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexed by Google.', 'This page is not eligible to publish.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称编辑已批准。', '本页不能声称已进入站点地图。', '本页不能声称已被搜索收录。'] as $limitation) {
+        foreach (['This page is not human reviewed.', 'This page has not been human reviewed.', "This page hasn't been human reviewed.", 'This page is not editor reviewed.', 'This page is not editor approved.', 'This page is not expert approved.', 'This page is not manually reviewed.', 'This page is not manually approved.', 'This page has not passed human review.', 'This page has not cleared expert review.', 'This page is not approved for publication.', 'This page is not approved for public release.', 'This page is not approved to publish.', 'Human review is not completed.', 'Editor review is not completed.', 'Manual review is not completed.', 'This page is not ready to publish.', 'This page is not yet published.', 'This page is not indexed by Google.', 'This page is not eligible to publish.', 'This page is not indexable.', 'This page is not in the sitemap.', 'This page is not in llms.txt.', 'This page is not schema eligible.', '本页不能声称编辑已批准。', '本页不能声称已进入站点地图。', '本页不能声称已被搜索收录。'] as $limitation) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
 
