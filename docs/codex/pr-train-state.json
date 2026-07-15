@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "93eb284cddd19ee92d6f2459beaba087ca829f13",
+    "commit_sha": "f8bf10868d0bda0adcd7f1976e098a277b5a4d9d",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 29 tests / 517 assertions; exact Big Five runtime-path and Enneagram allowlist regressions 2 tests / 5 assertions; Pint for all three changed PHP files; PHP syntax, YAML, JSON, diff, and exact seven-file scope checks. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed: combined PR08 and PR02 feature suites 29 tests / 560 assertions; exact Big Five runtime-path and Enneagram allowlist regressions 2 tests / 5 assertions; Pint for all three changed PHP files; PHP syntax, YAML, JSON, diff, and exact seven-file scope checks. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior review-fix ledger head 3347b20fc, then the latest automated review added two valid in-scope P2 findings for visible human-review/release claims and over-broad negative-clause stripping. The locally verified substantive fix head 93eb284cd requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior review-fix ledger head b0d37e6b0, then the latest automated review added two valid in-scope P2 findings for medical contrast clauses and cannot/can't negative prefixes. The locally verified substantive fix head f8bf10868 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All twenty-three valid P2 findings are fixed. Visible named-human-review and release-eligibility claims now fail closed; explicit negative handling removes only a blocked match directly governed by a negative prefix, so contrastive not-only/but/semicolon wording cannot hide an affirmative science, prediction, recommendation, review, or release claim. PR08+PR02 pass 29 tests / 517 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All twenty-five valid P2 findings are fixed. Science, prediction, recommendation, review/release, and bare medical checks share match-scoped negation handling with cannot/can't and bilingual bounded-list support; contrastive not-only/but/semicolon wording remains visible to safety scans. UTF-8 prefix extraction preserves Chinese negative scopes without splitting multibyte characters. PR08+PR02 pass 29 tests / 560 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93490,9 +93490,14 @@
         "at": "2026-07-15T12:17:19Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed: visible human-review/release claims now fail closed, and negation handling removes only directly negated blocked matches instead of whole clauses. Contrastive not-only/but/semicolon fixtures remain blocked while explicit negative boundary copy remains allowed. PR08+PR02 pass 29 / 517, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T12:29:19Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then two valid P2 findings were fixed: medical claims now use the same match-scoped negation logic, and cannot/can't plus curly-apostrophe variants are accepted as explicit negative prefixes. The first focused retry exposed existing English list and Chinese multibyte-prefix cases; bounded no-contrast scopes and UTF-8-safe prefix extraction fixed them before commit. PR08+PR02 pass 29 / 560, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T12:17:19Z"
+    "updated_at": "2026-07-15T12:29:19Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
