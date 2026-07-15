@@ -93038,9 +93038,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": "9fd3599a6ec5f3937a1e768a018c77b12518ac82",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f5bcc5b02c5cad3b0ec2b033a07b181559611cfc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3109",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -93082,9 +93082,14 @@
         "at": "2026-07-15T07:28:15Z",
         "status": "local_checks_passed",
         "note": "Rebased onto concurrently advanced origin/main, retained both exact runtime-freeze registrations, and replayed every manifest check successfully. The branch remains exactly six allowlisted paths; no production command, CMS/database mutation, public release, indexability, sitemap, or llms change was executed."
+      },
+      {
+        "at": "2026-07-15T07:30:20Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-path branch and opened the single authorized fap-api PR #3109 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reported the PR MERGEABLE with initial checks in progress and no reviews."
       }
     ],
-    "updated_at": "2026-07-15T07:28:15Z"
+    "updated_at": "2026-07-15T07:30:20Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",
