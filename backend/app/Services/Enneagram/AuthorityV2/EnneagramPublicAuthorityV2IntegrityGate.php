@@ -333,6 +333,8 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const DETERMINISTIC_RECOMMENDATION_PATTERN = '/(?:precise\s+career\s+recommendation|best\s+career\s+for\s+you|perfect\s+job\s+match|complete\s+personalized\s+career\s+recommender|(?:riasec|enneagram|mbti|big\s+five)\s+(?:ranks?|determines?)\s+(?:your\s+)?(?:best\s+)?(?:career|job|income|identity|ability|future)|determines?\s+(?:your\s+)?(?:income|career|job|identity|ability|future)|(?:salary|career|hiring|job|relationship|income|outcome)[\s-]+guarantee|精准职业推荐|最适合(?:你(?:的)?|您(?:的)?|其)?职业|完美(?:工作|职业)匹配|决定(?:你(?:的)?|您(?:的)?|其)?(?:收入|职业|工作|身份|能力|未来)|(?:薪资|职业|录用|工作|关系|收入|结果)保证)/iu';
 
+    private const HUMAN_REVIEW_RELEASE_PATTERN = '/(?:\b(?:human|expert|editorially)[\s-]+reviewed\b|\breviewed\s+by\s+[\p{L}][\p{L}\p{M}.\'-]*(?:\s+[\p{L}][\p{L}\p{M}.\'-]*){0,3}|\b(?:approved|cleared|eligible|ready)\s+for\s+(?:publication|publishing|release|indexing|indexation)\b|\bpublication[\s-]+approved\b|(?:人工|专家|编辑)审核(?:通过|完成)|已由[^。！？\n]{0,30}(?:人工|专家|编辑)审核|已获(?:发布|上线|收录)(?:批准|许可)|(?:发布|上线|收录)(?:获批|已批准|就绪))/iu';
+
     private const BARE_MEDICAL_CLAIM_PATTERN = '/(?:\bdiagnos(?:is|es)\b|\btreatment\b|\bcure\b|诊断|确诊|治疗|治愈)/iu';
 
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
@@ -746,6 +748,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
             [self::DETERMINISTIC_RECOMMENDATION_PATTERN, 'deterministic_recommendation_claim'],
+            [self::HUMAN_REVIEW_RELEASE_PATTERN, 'visible_review_or_release_claim'],
         ] as [$pattern, $code]) {
             if (preg_match($pattern, $claimText) === 1) {
                 $add(self::EDITORIAL_GATES[9], $code, $key, $path, 'Public candidate text crosses the declared evidence or competitor boundary.');
@@ -808,11 +811,30 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private function withoutExplicitNegativeClaims(string $text): string
     {
-        return preg_replace([
-            '/\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not\b[^.!?\n]{0,140}/iu',
-            '/\bnever\b[^.!?\n]{0,140}/iu',
-            '/(?:并非|不是|不能|不会|不应|不得|禁止|不把|不用于)[^。！？\n]{0,80}/u',
-        ], '', $text) ?? $text;
+        foreach ([
+            self::UNSUPPORTED_CLAIM_PATTERN,
+            self::PREDICTION_PATTERN,
+            self::DETERMINISTIC_RECOMMENDATION_PATTERN,
+            self::HUMAN_REVIEW_RELEASE_PATTERN,
+        ] as $pattern) {
+            preg_match_all($pattern, $text, $matches, PREG_OFFSET_CAPTURE);
+            foreach (array_reverse($matches[0] ?? []) as [$claim, $offset]) {
+                $prefix = substr($text, max(0, $offset - 120), min(120, $offset));
+                if (! $this->hasExplicitNegativePrefix($prefix)) {
+                    continue;
+                }
+
+                $text = substr_replace($text, '', $offset, strlen($claim));
+            }
+        }
+
+        return $text;
+    }
+
+    private function hasExplicitNegativePrefix(string $prefix): bool
+    {
+        return preg_match('/(?:\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not|\bnever)(?:\s+(?:an?|the))?(?:\s+\p{L}+ly){0,2}\s*$/iu', $prefix) === 1
+            || preg_match('/(?:并非|不是|不能|不会|不应|不得|禁止|不把|不用于)(?:本页|本内容|该页|该内容)?\s*$/u', $prefix) === 1;
     }
 
     /** @param list<string> $blocks */

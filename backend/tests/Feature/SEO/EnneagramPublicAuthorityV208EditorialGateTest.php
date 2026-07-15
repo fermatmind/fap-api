@@ -217,6 +217,51 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_contrastive_negation_does_not_hide_positive_boundary_claims(): void
+    {
+        foreach ([
+            ['This page is not only a reflection prompt; it predicts your career success.', 'career_or_relationship_prediction'],
+            ['This page does not establish clinical validity, but it is scientifically proven.', 'unsupported_science_claim'],
+            ['This is not merely a draft; it is the best career for you.', 'deterministic_recommendation_claim'],
+            ['本页不能作为诊断，但能预测你的职业成功。', 'career_or_relationship_prediction'],
+        ] as [$phrase, $expectedCode]) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains($expectedCode, collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+    }
+
+    public function test_visible_human_review_and_release_claims_fail_claim_safety_gate(): void
+    {
+        foreach ([
+            'Human reviewed by Jane and approved for publication',
+            'Expert reviewed',
+            '人工审核通过',
+            '已获发布批准',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('visible_review_or_release_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+
+        foreach (['This page is not human reviewed.', 'This page is not approved for publication.'] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
     public function test_diagnosis_and_screening_claim_vocabulary_fails_claim_safety_gate(): void
     {
         foreach ([
