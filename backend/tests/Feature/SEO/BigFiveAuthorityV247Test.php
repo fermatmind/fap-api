@@ -11,6 +11,7 @@ use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
+use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileRevision;
 use App\Models\TopicProfileSection;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
@@ -160,6 +161,37 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertIsArray($observed);
         $this->assertTrue($observed['primary_publicly_readable']);
         $this->assertNull($observed['published_revision_id']);
+    }
+
+    public function test_database_preflight_rejects_future_scheduled_primary_create_content_page(): void
+    {
+        DB::table('content_pages')->insert([
+            'org_id' => 0,
+            'slug' => 'methodology',
+            'path' => '/en/personality/big-five/methodology',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'title' => 'Future scheduled primary-create page',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => false,
+            'canonical_path' => '/en/personality/big-five/methodology',
+            'published_revision_id' => null,
+            'published_at' => now()->addDay(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('new_identity_publication_state_present', $result['issue_codes']);
+        $observed = collect($result['observed_runtime'])->firstWhere('asset_id', 'technical_trust:en:/en/personality/big-five/methodology');
+        $this->assertIsArray($observed);
+        $this->assertFalse($observed['primary_publicly_readable']);
     }
 
     public function test_database_preflight_rejects_soft_deleted_article_identity(): void
@@ -567,6 +599,57 @@ final class BigFiveAuthorityV247Test extends TestCase
             ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
         $this->assertNotSame($beforeBaseline, $afterBaseline);
         $this->assertNotSame($before['promotion_preflight_fingerprint'], $after['promotion_preflight_fingerprint']);
+
+        $targetArticle = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'topic-target-article',
+            'locale' => 'en',
+            'translation_group_id' => 'article:topic-target-article',
+            'title' => 'Legacy target title',
+            'content_md' => '# Legacy target body',
+            'status' => 'published',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => now()->subDay(),
+        ]);
+        $targetRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $targetArticle->id,
+            'source_article_id' => (int) $targetArticle->id,
+            'translation_group_id' => 'article:topic-target-article',
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => 'Resolved target title',
+            'excerpt' => 'Resolved target excerpt.',
+            'content_md' => '# Resolved target body',
+            'published_at' => now()->subDay(),
+        ]);
+        $targetArticle->forceFill(['published_revision_id' => (int) $targetRevision->id])->save();
+        TopicProfileEntry::query()->create([
+            'profile_id' => (int) $profile->id,
+            'entry_type' => 'article',
+            'group_key' => 'articles',
+            'target_key' => 'topic-target-article',
+            'target_locale' => 'en',
+            'sort_order' => 10,
+            'is_featured' => false,
+            'is_enabled' => true,
+        ]);
+
+        $beforeTargetChange = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $beforeTargetBaseline = collect($beforeTargetChange['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+
+        $targetRevision->forceFill(['title' => 'Mutated resolved target title'])->save();
+
+        $afterTargetChange = $this->preflight()->databasePreflight(self::REVIEW, self::AUTHORIZATION, self::ROLLBACK);
+        $afterTargetBaseline = collect($afterTargetChange['observed_runtime'])
+            ->firstWhere('asset_id', $row['asset_id'])['public_runtime_baseline_sha256'] ?? null;
+        $this->assertNotSame($beforeTargetBaseline, $afterTargetBaseline);
+        $this->assertNotSame($beforeTargetChange['promotion_preflight_fingerprint'], $afterTargetChange['promotion_preflight_fingerprint']);
     }
 
     public function test_database_preflight_rejects_future_scheduled_topic_identity_that_public_reader_hides(): void
@@ -916,6 +999,35 @@ final class BigFiveAuthorityV247Test extends TestCase
 
         $authorization['approval_phrases_currently_executable'] = true;
         $this->assertTrue($this->preflight()->authorizationPacketIsExecutable($authorization));
+    }
+
+    public function test_database_preflight_rejects_promotion_eligibility_on_preserved_product_shell(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        $shellIndex = collect($review['rows'])->search(
+            static fn (array $row): bool => ($row['action_contract']['product_shell_preserved'] ?? false) === true,
+        );
+        $this->assertIsInt($shellIndex);
+        $review['rows'][$shellIndex]['promotion']['eligible'] = true;
+        [$reviewPath, $reviewSha] = $this->writeTemporaryJson('pr47-review-shell-promotion-eligible.json', $review);
+
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['review_manifest_sha256'] = $reviewSha;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-shell-promotion-eligible.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['review_manifest_sha256'] = $reviewSha;
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-shell-promotion-eligible.json', $authorization);
+
+        try {
+            $result = $this->preflight()->databasePreflight($reviewPath, $authorizationPath, $rollbackPath);
+
+            $this->assertFalse($result['ok']);
+            $this->assertContains('product_shell_promotion_eligibility_forbidden', $result['blocker_codes']);
+        } finally {
+            File::delete([$reviewPath, $rollbackPath, $authorizationPath]);
+        }
     }
 
     public function test_database_preflight_rejects_authorization_deploy_sha_that_differs_from_runtime_revision(): void

@@ -15,6 +15,7 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
+use App\Services\Cms\TopicEntryResolverService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
@@ -59,7 +60,10 @@ final class BigFiveReviewPromotionPreflight
 
     public const COHORT_COUNT = 16;
 
-    public function __construct(private readonly BigFiveAuthorityV2DraftImportWriter $packageWriter) {}
+    public function __construct(
+        private readonly BigFiveAuthorityV2DraftImportWriter $packageWriter,
+        private readonly TopicEntryResolverService $topicEntryResolverService,
+    ) {}
 
     /** @return array<string,mixed> */
     public function packageOnly(string $reviewManifestPath, string $authorizationPacketPath, string $rollbackPlanPath): array
@@ -359,6 +363,11 @@ final class BigFiveReviewPromotionPreflight
             if ($row['action_contract']['primary_create'] && $primaryPubliclyReadable) {
                 $issues[] = 'new_identity_already_publicly_readable';
             }
+            if ($row['action_contract']['primary_create']
+                && ! $primaryPubliclyReadable
+                && $this->primaryHasPublicOrScheduledState($record)) {
+                $issues[] = 'new_identity_publication_state_present';
+            }
             if ($observed['public_reader_selects_working_revision']) {
                 $issues[] = 'public_reader_selects_working_revision';
             }
@@ -401,6 +410,9 @@ final class BigFiveReviewPromotionPreflight
         $promotionEligible = ($row['promotion']['eligible'] ?? false) === true;
         if ($row['action_contract']['revision_create'] && ! $promotionEligible) {
             $blockers[] = 'row_promotion_eligibility_missing';
+        }
+        if ($row['action_contract']['product_shell_preserved'] && $promotionEligible) {
+            $blockers[] = 'product_shell_promotion_eligibility_forbidden';
         }
 
         $issues = array_values(array_unique($issues));
@@ -547,6 +559,31 @@ final class BigFiveReviewPromotionPreflight
         };
     }
 
+    private function primaryHasPublicOrScheduledState(Model $record): bool
+    {
+        return match (true) {
+            $record instanceof Article => $record->getAttribute('status') === 'published'
+                || (bool) $record->getAttribute('is_public')
+                || $record->getAttribute('published_at') !== null
+                || $record->getAttribute('scheduled_at') !== null,
+            $record instanceof ContentPage => in_array($record->getAttribute('status'), [ContentPage::STATUS_SCHEDULED, ContentPage::STATUS_PUBLISHED], true)
+                || (bool) $record->getAttribute('is_public')
+                || $record->getAttribute('published_at') !== null,
+            $record instanceof LandingSurface => $record->getAttribute('status') === LandingSurface::STATUS_PUBLISHED
+                || (bool) $record->getAttribute('is_public')
+                || $record->getAttribute('published_at') !== null
+                || $record->getAttribute('scheduled_at') !== null,
+            $record instanceof PersonalityPublicContentAsset => $record->getAttribute('launch_state') === PersonalityPublicContentAsset::LAUNCH_PUBLISHED
+                || (bool) $record->getAttribute('is_public')
+                || $record->getAttribute('published_at') !== null,
+            $record instanceof TopicProfile => $record->getAttribute('status') === TopicProfile::STATUS_PUBLISHED
+                || (bool) $record->getAttribute('is_public')
+                || $record->getAttribute('published_at') !== null
+                || $record->getAttribute('scheduled_at') !== null,
+            default => false,
+        };
+    }
+
     private function deployedRevisionMatches(string $deployedSha): bool
     {
         $revisionPath = base_path('../REVISION');
@@ -625,10 +662,12 @@ final class BigFiveReviewPromotionPreflight
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get();
+        $profile->setRelation('entries', $entries);
 
         return [
             'sections' => $this->modelSnapshots($sections, preserveOrder: true),
             'entries' => $this->modelSnapshots($entries, preserveOrder: true),
+            'resolved_entry_groups' => $this->topicEntryResolverService->resolveGroupedEntries($profile, (string) $profile->getAttribute('locale')),
             'seo_meta' => $this->modelSnapshot($profile->seoMeta()->first()),
         ];
     }
