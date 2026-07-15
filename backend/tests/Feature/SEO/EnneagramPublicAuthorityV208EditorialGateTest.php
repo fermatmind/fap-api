@@ -199,6 +199,24 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         }
     }
 
+    public function test_explicitly_negated_boundary_claims_remain_allowed(): void
+    {
+        foreach ([
+            'This page does not predict your career success.',
+            'This content is not scientifically proven.',
+            'This is not a precise career recommendation.',
+            '本页不能预测你的职业成功。',
+            '本页并非精准职业推荐。',
+        ] as $limitation) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $limitation;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertTrue($result['ok'], $limitation.': '.json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
+        }
+    }
+
     public function test_diagnosis_and_screening_claim_vocabulary_fails_claim_safety_gate(): void
     {
         foreach ([

@@ -741,15 +741,18 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             $this->appendVisibleStrings($safetyBlocks, $asset[$visibleField] ?? null);
         }
         $text = implode("\n", $safetyBlocks);
+        $claimText = $this->withoutExplicitNegativeClaims($text);
         foreach ([
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
             [self::DETERMINISTIC_RECOMMENDATION_PATTERN, 'deterministic_recommendation_claim'],
-            [self::COMPETITOR_PATTERN, 'competitor_language_detected'],
         ] as [$pattern, $code]) {
-            if (preg_match($pattern, $text) === 1) {
+            if (preg_match($pattern, $claimText) === 1) {
                 $add(self::EDITORIAL_GATES[9], $code, $key, $path, 'Public candidate text crosses the declared evidence or competitor boundary.');
             }
+        }
+        if (preg_match(self::COMPETITOR_PATTERN, $text) === 1) {
+            $add(self::EDITORIAL_GATES[9], 'competitor_language_detected', $key, $path, 'Public candidate text crosses the declared evidence or competitor boundary.');
         }
         if (preg_match(self::DIAGNOSIS_SCREENING_PATTERN, $text) === 1 || $this->containsUnboundedMedicalClaim($text)) {
             $add(self::EDITORIAL_GATES[9], 'diagnosis_or_screening_claim', $key, $path, 'Public candidate text crosses the non-diagnostic and non-treatment product boundary.');
@@ -801,6 +804,15 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         ], '', $text) ?? $text;
 
         return preg_match(self::BARE_MEDICAL_CLAIM_PATTERN, $bounded) === 1;
+    }
+
+    private function withoutExplicitNegativeClaims(string $text): string
+    {
+        return preg_replace([
+            '/\b(?:does?|did|is|are|was|were|can|could|will|would|should|must|may|might)\s+not\b[^.!?\n]{0,140}/iu',
+            '/\bnever\b[^.!?\n]{0,140}/iu',
+            '/(?:并非|不是|不能|不会|不应|不得|禁止|不把|不用于)[^。！？\n]{0,80}/u',
+        ], '', $text) ?? $text;
     }
 
     /** @param list<string> $blocks */
