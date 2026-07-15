@@ -62,7 +62,7 @@ final class BigFiveCareerBridgeContractTest extends TestCase
         ] as $field) {
             $this->assertContains($field, $output['properties']['content']['required']);
         }
-        foreach (['recommendation_authority', 'ranking_allowed', 'hiring_use_allowed', 'pseo_allowed'] as $field) {
+        foreach (['recommendation_authority', 'ranking_allowed', 'hiring_use_allowed', 'outcome_prediction_allowed', 'pseo_allowed'] as $field) {
             $this->assertFalse($output['properties']['claim_boundary']['properties'][$field]['const']);
         }
     }
@@ -148,8 +148,9 @@ final class BigFiveCareerBridgeContractTest extends TestCase
         $output['claim_boundary']['recommendation_authority'] = true;
         $output['claim_boundary']['ranking_allowed'] = true;
         $output['claim_boundary']['hiring_use_allowed'] = true;
+        $output['claim_boundary']['outcome_prediction_allowed'] = true;
         $output['claim_boundary']['pseo_allowed'] = true;
-        $output['content']['reflection_signals'] = ['The best career for you is software engineering.'];
+        $output['content']['boundary_copy'] = ['The best career for you is software engineering.'];
 
         $assessment = $this->contract->assess($this->validInput(), $output);
 
@@ -157,6 +158,7 @@ final class BigFiveCareerBridgeContractTest extends TestCase
         $this->assertContains('output.claim_boundary.recommendation_authority_must_be_false', $assessment['blockers']);
         $this->assertContains('output.claim_boundary.ranking_allowed_must_be_false', $assessment['blockers']);
         $this->assertContains('output.claim_boundary.hiring_use_allowed_must_be_false', $assessment['blockers']);
+        $this->assertContains('output.claim_boundary.outcome_prediction_allowed_must_be_false', $assessment['blockers']);
         $this->assertContains('output.claim_boundary.pseo_allowed_must_be_false', $assessment['blockers']);
         $this->assertContains('output.deterministic_or_outcome_claim:the best career for you is', $assessment['blockers']);
     }
@@ -289,6 +291,7 @@ final class BigFiveCareerBridgeContractTest extends TestCase
                 'recommendation_authority' => false,
                 'ranking_allowed' => false,
                 'hiring_use_allowed' => false,
+                'outcome_prediction_allowed' => false,
                 'pseo_allowed' => false,
             ],
             'privacy_boundary' => $this->privacyBoundary(),

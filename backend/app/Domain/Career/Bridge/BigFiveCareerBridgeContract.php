@@ -177,6 +177,7 @@ final class BigFiveCareerBridgeContract
         'recommendation_authority',
         'ranking_allowed',
         'hiring_use_allowed',
+        'outcome_prediction_allowed',
         'pseo_allowed',
     ];
 
@@ -479,7 +480,7 @@ final class BigFiveCareerBridgeContract
         $this->validateExactKeys($boundary, self::CLAIM_BOUNDARY_KEYS, 'output.claim_boundary', $blockers);
         $this->requireSame($boundary['big_five_role'] ?? null, self::BIG_FIVE_ROLE, 'output.claim_boundary.big_five_role_invalid', $blockers);
         $this->requireSame($boundary['primary_career_interest_signal'] ?? null, self::PRIMARY_CAREER_SIGNAL, 'output.claim_boundary.riasec_not_primary', $blockers);
-        foreach (['recommendation_authority', 'ranking_allowed', 'hiring_use_allowed', 'pseo_allowed'] as $key) {
+        foreach (['recommendation_authority', 'ranking_allowed', 'hiring_use_allowed', 'outcome_prediction_allowed', 'pseo_allowed'] as $key) {
             $this->requireSame($boundary[$key] ?? null, false, 'output.claim_boundary.'.$key.'_must_be_false', $blockers);
         }
     }
@@ -720,6 +721,7 @@ final class BigFiveCareerBridgeContract
                 'feedback_and_structure_preferences',
                 'possible_friction_cues',
                 'exploration_examples',
+                'boundary_copy',
             ]),
         );
         $haystack = strtolower(implode("\n", $this->flattenStrings($claimBearingContent)));

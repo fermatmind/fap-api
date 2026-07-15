@@ -21389,6 +21389,7 @@ prs:
       - backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json
       - backend/docs/career/big-five-career-bridge-schema-01.md
       - backend/tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -21399,8 +21400,9 @@ prs:
       - php -l backend/app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php
       - php -l backend/tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_big_five_career_bridge_contract' --no-ansi
       - cd backend && php artisan route:list --no-ansi
-      - cd backend && vendor/bin/pint --test app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php
+      - cd backend && vendor/bin/pint --test app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php tests/Unit/Domain/Career/Bridge/BigFiveCareerBridgeContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - python3 -m json.tool backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json >/dev/null

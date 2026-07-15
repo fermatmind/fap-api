@@ -55968,11 +55968,11 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final executable input/output schemas parse and remain strict; focused BigFiveCareerBridgeContractTest passed 8 tests / 59 assertions. PHP syntax, touched-file Pint, route discovery (235 routes), Composer validate, Composer audit, JSON parse, managed-Python YAML parse, git diff checks, and exact 8-path scope validation passed. The final-head guarded bash backend/scripts/ci_verify_mbti.sh run exited 0 after its strict queue probe, including Big Five 1475 tests / 181300 assertions and personality full-32 71 tests / 5371 assertions. The verifier EXIT cleanup restored all 13 regenerated BIG5_OCEAN compiled files, leaving the exact 8-path PR scope.",
+          "evidence": "Final review-fix contract/schema tests passed 8 tests / 61 assertions; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. The first review-fix full CI correctly failed 1 of 1475 tests because the new Career bridge contract had not yet been registered as non-result-runtime in the Big Five freeze classifier. After adding an exact-path classifier regression, the guarded final bash backend/scripts/ci_verify_mbti.sh rerun exited 0 through the strict queue probe, including Big Five 1476 tests / 181303 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after each verifier exit.",
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 is open; required GitHub checks will rerun on the final same-scope follow-up head.",
+          "evidence": "PR #3118 is open. Codex review on head 12cb777e71d4b0f4365d9a9b56bc0787feb932e8 reported three P2 findings: stale train-state association, missing outcome-prediction output lock, and missing boundary-copy deterministic-claim scan. The ledger association is corrected and the two contract findings are fixed with regression coverage; required checks and exact-head review must rerun after push.",
           "status": "pending"
         }
       },
@@ -55995,7 +55995,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "github_checks_pending",
+      "status": "github_checks_pending_review_fix",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56022,12 +56022,18 @@
       "note": "Committed exact 8-path scope at e0258e45fb13fcac741943c46e5f60a90c7737b7, pushed the scoped branch, and opened the single required PR #3118. GitHub required checks are queued.",
       "to": "github_checks_pending"
     },
-    {
-      "at": "2026-07-15T20:25:22Z",
-      "from": "github_checks_pending",
-      "note": "Corrected unrelated ledger/manifest fields accidentally changed by the first GitHub-state bookkeeping commit, then revalidated the exact final contract with focused 8/59, 235-route discovery, strict schema/PHP/Pint/Composer/JSON/YAML checks, exact 8-path scope, and guarded full CI through the strict queue probe with Big Five 1475/181300 and personality full-32 71/5371. Verifier EXIT cleanup restored all 13 regenerated BIG5_OCEAN compiled files; no production or public mutation occurred.",
-      "to": "github_checks_pending_final"
-    }
+        {
+          "at": "2026-07-15T20:25:22Z",
+          "from": "github_checks_pending",
+          "note": "Corrected unrelated ledger/manifest fields accidentally changed by the first GitHub-state bookkeeping commit, then revalidated the exact final contract with focused 8/59, 235-route discovery, strict schema/PHP/Pint/Composer/JSON/YAML checks, exact 8-path scope, and guarded full CI through the strict queue probe with Big Five 1475/181300 and personality full-32 71/5371. Verifier EXIT cleanup restored all 13 regenerated BIG5_OCEAN compiled files; no production or public mutation occurred.",
+          "to": "github_checks_pending_final"
+        },
+        {
+          "at": "2026-07-15T20:40:03Z",
+          "from": "github_checks_pending_final",
+          "note": "Addressed all three Codex P2 findings: corrected train-state association, added outcome_prediction_allowed=false to the output contract, and scanned boundary_copy for deterministic claims. The first full review-fix CI exposed a same-scope freeze-classifier omission (1 failed / 1474 passed); added an exact Career bridge classifier regression, then passed focused contract 8/61, freeze 2/4, touched Pint, and the guarded final full CI through strict queue with Big Five 1476/181303 and personality full-32 71/5371. Restored all 13 generated compiled diffs; no production or public mutation occurred.",
+          "to": "github_checks_pending_review_fix"
+        }
       ]
     },
     "CAREER-POLICY-CLAIM-GUARDS-01": {

@@ -125,6 +125,7 @@
         "recommendation_authority",
         "ranking_allowed",
         "hiring_use_allowed",
+        "outcome_prediction_allowed",
         "pseo_allowed"
       ],
       "properties": {
@@ -133,6 +134,7 @@
         "recommendation_authority": {"const": false},
         "ranking_allowed": {"const": false},
         "hiring_use_allowed": {"const": false},
+        "outcome_prediction_allowed": {"const": false},
         "pseo_allowed": {"const": false}
       }
     },
