@@ -19,6 +19,10 @@ use RuntimeException;
 
 final class BigFiveReviewPromotionPreflight
 {
+    private const DRAFT_IMPORT_PACKAGE_PATH = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json';
+
+    private const DRAFT_IMPORT_PACKAGE_SHA256 = '80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154';
+
     /** @var list<string> */
     private const EXISTING_ARTICLE_SLUGS = [
         'big-five-conscientiousness-low-procrastination-task-plan',
@@ -44,7 +48,7 @@ final class BigFiveReviewPromotionPreflight
     /** @return array<string,mixed> */
     public function packageOnly(string $reviewManifestPath, string $authorizationPacketPath, string $rollbackPlanPath): array
     {
-        $artifacts = $this->artifacts($reviewManifestPath, $authorizationPacketPath, $rollbackPlanPath);
+        $artifacts = $this->artifacts($reviewManifestPath, $authorizationPacketPath, $rollbackPlanPath, true);
 
         return [
             'ok' => true,
@@ -80,7 +84,7 @@ final class BigFiveReviewPromotionPreflight
     /** @return array<string,mixed> */
     public function databasePreflight(string $reviewManifestPath, string $authorizationPacketPath, string $rollbackPlanPath): array
     {
-        $artifacts = $this->artifacts($reviewManifestPath, $authorizationPacketPath, $rollbackPlanPath);
+        $artifacts = $this->artifacts($reviewManifestPath, $authorizationPacketPath, $rollbackPlanPath, false);
         $legacy = $this->packageWriter->validatedPlan(
             '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json',
             '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/production-authorization-packet.json',
@@ -399,8 +403,12 @@ final class BigFiveReviewPromotionPreflight
     }
 
     /** @return array{review:array<string,mixed>,authorization:array<string,mixed>,rollback:array<string,mixed>,review_sha256:string,rollback_sha256:string} */
-    private function artifacts(string $reviewManifestPath, string $authorizationPacketPath, string $rollbackPlanPath): array
-    {
+    private function artifacts(
+        string $reviewManifestPath,
+        string $authorizationPacketPath,
+        string $rollbackPlanPath,
+        bool $requirePendingAuthorization,
+    ): array {
         [$review, $reviewSha] = $this->readJson($reviewManifestPath, 'review manifest');
         [$authorization] = $this->readJson($authorizationPacketPath, 'authorization packet');
         [$rollback, $rollbackSha] = $this->readJson($rollbackPlanPath, 'rollback plan');
@@ -424,6 +432,9 @@ final class BigFiveReviewPromotionPreflight
             || ($authorization['rollback_plan_sha256'] ?? null) !== $rollbackSha) {
             throw new RuntimeException('Authorization packet artifact locks mismatch.');
         }
+        if ($requirePendingAuthorization) {
+            $this->assertPendingAuthorizationPacket($authorization, $review);
+        }
         foreach ($review['source_artifacts'] ?? [] as $source) {
             $path = $this->projectPath((string) ($source['path'] ?? ''));
             if (! File::isFile($path) || ! hash_equals((string) ($source['sha256'] ?? ''), hash_file('sha256', $path))) {
@@ -432,6 +443,7 @@ final class BigFiveReviewPromotionPreflight
         }
         $assetIds = [];
         $rowsByAsset = [];
+        $lockedRowsByAsset = $this->lockedAuthorityRows();
         $actions = ['primary_create' => 0, 'existing_revision' => 0, 'revision_create' => 0, 'product_shell_preserved' => 0];
         foreach ($review['rows'] as $row) {
             $assetId = (string) ($row['asset_id'] ?? '');
@@ -448,8 +460,14 @@ final class BigFiveReviewPromotionPreflight
                     $actions[$action]++;
                 }
             }
-            if (($row['source_hash'] ?? null) === null
-                || preg_match('/^[0-9a-f]{64}$/', (string) $row['source_hash']) !== 1
+            $lockedRow = $lockedRowsByAsset[$assetId] ?? null;
+            if (! is_array($lockedRow)
+                || ($row['source_package'] ?? null) !== ($lockedRow['source_package'] ?? null)
+                || ($row['source_hash'] ?? null) !== ($lockedRow['source_hash'] ?? null)
+                || ($row['route'] ?? null) !== ($lockedRow['route'] ?? null)
+                || ($row['locale'] ?? null) !== ($lockedRow['locale'] ?? null)
+                || ($row['page_family'] ?? null) !== ($lockedRow['page_family'] ?? null)
+                || ($row['authority_surface'] ?? null) !== ($lockedRow['authority_surface'] ?? null)
                 || ($row['authority_package_sha256'] ?? null) !== BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256) {
                 throw new RuntimeException('Review manifest source/package authority mismatch: '.$assetId.'.');
             }
@@ -513,6 +531,54 @@ final class BigFiveReviewPromotionPreflight
             'review_sha256' => $reviewSha,
             'rollback_sha256' => $rollbackSha,
         ];
+    }
+
+    /** @param array<string,mixed> $authorization @param array<string,mixed> $review */
+    private function assertPendingAuthorizationPacket(array $authorization, array $review): void
+    {
+        $authorizationCohorts = $authorization['cohorts'] ?? null;
+        $reviewCohorts = collect($review['cohorts'] ?? [])->keyBy('cohort_id');
+        if (($authorization['production_promotion_currently_authorized'] ?? true) !== false
+            || ($authorization['approval_phrases_currently_executable'] ?? true) !== false
+            || ($authorization['deployed_sha'] ?? null) !== null
+            || ($authorization['promotion_preflight_fingerprint'] ?? null) !== null
+            || ! is_array($authorizationCohorts)
+            || count($authorizationCohorts) !== $reviewCohorts->count()) {
+            throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
+        }
+        foreach ($authorizationCohorts as $cohort) {
+            $reviewCohort = $reviewCohorts->get($cohort['cohort_id'] ?? null);
+            if (! is_array($reviewCohort)
+                || ($cohort['cohort_sha256'] ?? null) !== ($reviewCohort['cohort_sha256'] ?? null)
+                || ($cohort['asset_count'] ?? null) !== ($reviewCohort['asset_count'] ?? null)
+                || ($cohort['authorized'] ?? true) !== false
+                || ($cohort['exact_authorization'] ?? null) !== null) {
+                throw new RuntimeException('Package-only authorization packet must remain pending and non-executable.');
+            }
+        }
+    }
+
+    /** @return array<string,array<string,mixed>> */
+    private function lockedAuthorityRows(): array
+    {
+        [$package, $packageSha256] = $this->readJson(self::DRAFT_IMPORT_PACKAGE_PATH, 'locked PR37 draft import package');
+        $rows = $package['assets'] ?? null;
+        if (! hash_equals(self::DRAFT_IMPORT_PACKAGE_SHA256, $packageSha256)
+            || ! is_array($rows)
+            || count($rows) !== self::ASSET_COUNT) {
+            throw new RuntimeException('Locked PR37 draft import package identity or hash mismatch.');
+        }
+
+        $rowsByAsset = [];
+        foreach ($rows as $row) {
+            $assetId = is_array($row) ? (string) ($row['asset_id'] ?? '') : '';
+            if ($assetId === '' || isset($rowsByAsset[$assetId])) {
+                throw new RuntimeException('Locked PR37 draft import package asset identity mismatch.');
+            }
+            $rowsByAsset[$assetId] = $row;
+        }
+
+        return $rowsByAsset;
     }
 
     /** @return array{0:array<string,mixed>,1:string} */

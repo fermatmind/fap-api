@@ -108,6 +108,58 @@ final class BigFiveAuthorityV247Test extends TestCase
         $this->assertSame($before, $this->tableCounts());
     }
 
+    public function test_package_only_rejects_source_lineage_drift_even_when_artifact_locks_are_regenerated(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        foreach ($review['rows'] as &$row) {
+            if ($row['action_contract']['product_shell_preserved'] === true) {
+                $row['source_hash'] = str_repeat('0', 64);
+                break;
+            }
+        }
+        unset($row);
+        [$reviewPath, $reviewSha] = $this->writeTemporaryJson('pr47-review-source-drift.json', $review);
+
+        $rollback = $this->readJson(self::ROLLBACK);
+        $rollback['review_manifest_sha256'] = $reviewSha;
+        [$rollbackPath, $rollbackSha] = $this->writeTemporaryJson('pr47-rollback-source-drift.json', $rollback);
+
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['review_manifest_sha256'] = $reviewSha;
+        $authorization['rollback_plan_sha256'] = $rollbackSha;
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-source-drift.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly($reviewPath, $authorizationPath, $rollbackPath);
+            $this->fail('Expected source lineage drift to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('source/package authority mismatch', $exception->getMessage());
+        } finally {
+            File::delete([$reviewPath, $rollbackPath, $authorizationPath]);
+        }
+    }
+
+    public function test_package_only_rejects_executable_authorization_packet(): void
+    {
+        $authorization = $this->readJson(self::AUTHORIZATION);
+        $authorization['production_promotion_currently_authorized'] = true;
+        $authorization['approval_phrases_currently_executable'] = true;
+        $authorization['deployed_sha'] = str_repeat('a', 40);
+        $authorization['promotion_preflight_fingerprint'] = str_repeat('b', 64);
+        $authorization['cohorts'][0]['authorized'] = true;
+        $authorization['cohorts'][0]['exact_authorization'] = 'manually-made-executable';
+        [$authorizationPath] = $this->writeTemporaryJson('pr47-authorization-executable.json', $authorization);
+
+        try {
+            $this->preflight()->packageOnly(self::REVIEW, $authorizationPath, self::ROLLBACK);
+            $this->fail('Expected executable package-only authorization to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('must remain pending and non-executable', $exception->getMessage());
+        } finally {
+            File::delete($authorizationPath);
+        }
+    }
+
     public function test_exact_authorization_phrase_locks_deploy_artifacts_runtime_cohort_and_count(): void
     {
         $phrase = $this->preflight()->approvalPhrase(
@@ -160,6 +212,17 @@ final class BigFiveAuthorityV247Test extends TestCase
     private function readJson(string $path): array
     {
         return json_decode(File::get(base_path($path)), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /** @param array<string,mixed> $payload @return array{0:string,1:string} */
+    private function writeTemporaryJson(string $name, array $payload): array
+    {
+        $path = storage_path('framework/testing/'.$name);
+        $raw = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL;
+        File::ensureDirectoryExists(dirname($path));
+        File::put($path, $raw);
+
+        return [$path, hash('sha256', $raw)];
     }
 
     /** @return array<string,int> */
