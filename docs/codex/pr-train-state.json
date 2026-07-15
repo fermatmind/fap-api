@@ -93038,8 +93038,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-REVISION-WORKSPACE-05"
     ],
-    "status": "review_fixes_local_verified",
-    "commit_sha": "f5bcc5b02c5cad3b0ec2b033a07b181559611cfc",
+    "status": "ready_to_merge",
+    "commit_sha": "69130cd50fcf7e0afe847ed4499ced09153aaab1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3109",
     "checks": {
       "dependency": {
@@ -93053,12 +93053,16 @@
       "review_fixes": {
         "status": "pass",
         "evidence": "All four automated P2 threads were validated and fixed in scope: --promote requires --json so the signed rollback token is emitted; successful promote/rollback results report production_execution from the actual runtime environment; both operations explicitly advance updated_at while rollback verifies restored content/pointer independently of freshness; and rollback locks and validates the prior published revision's asset/key/state/package/source lineage before restoring its pointer. Focused promoter tests pass 12 / 84, changed files pass syntax/Pint, exact classifier passes 1 / 2, actual branch-diff freeze passes 1 / 3, and YAML/JSON/diff checks pass."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All nine required checks passed on final review-fix head 69130cd50fcf7e0afe847ed4499ced09153aaab1: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. GitHub reported CLEAN/MERGEABLE and all four review threads were resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93106,9 +93110,14 @@
         "at": "2026-07-15T07:55:47Z",
         "status": "review_fixes_local_verified",
         "note": "The third nine-check round passed on a0c9a7d60, then a fourth valid P2 was fixed: rollback now locks and validates the previous published revision lineage before restoring its pointer. Promoter regression is green at 12 / 84 with drift causing a zero-additional-write failure; no production command was executed."
+      },
+      {
+        "at": "2026-07-15T08:02:33Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on 69130cd50, GitHub is CLEAN/MERGEABLE, all four automated review threads are resolved, and the PR remains exactly six allowlisted paths. Ready for policy-compliant squash auto-merge after the ledger head revalidates."
       }
     ],
-    "updated_at": "2026-07-15T07:55:47Z"
+    "updated_at": "2026-07-15T08:02:33Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",
