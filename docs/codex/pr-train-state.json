@@ -3865,7 +3865,7 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "sidecar_issues": [],
-    "status": "ready_to_merge",
+    "status": "review_fixes_local_verified",
     "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
     "train_scope": "article_h1_single_dom",
     "transitions": [
@@ -93052,7 +93052,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All four automated P2 threads were validated and fixed in scope: --promote requires --json so the signed rollback token is emitted; successful promote/rollback results report production_execution from the actual runtime environment; both operations explicitly advance updated_at while rollback verifies restored content/pointer independently of freshness; and rollback locks and validates the prior published revision's asset/key/state/package/source lineage before restoring its pointer. Focused promoter tests pass 12 / 84, changed files pass syntax/Pint, exact classifier passes 1 / 2, actual branch-diff freeze passes 1 / 3, and YAML/JSON/diff checks pass."
+        "evidence": "All five automated P2 threads were validated and fixed in scope: --promote requires --json so the signed rollback token is emitted; successful promote/rollback results report production_execution from the actual runtime environment; both operations explicitly advance updated_at while rollback verifies restored content/pointer independently of freshness; rollback locks and validates the prior published revision lineage; and large signed tokens can be supplied through a mutually exclusive file path instead of argv. Focused promoter tests pass 13 / 89, changed files pass syntax/Pint, exact classifier passes 1 / 2, actual branch-diff freeze passes 1 / 3, and YAML/JSON/diff checks pass."
       },
       "github_checks": {
         "status": "pass",
@@ -93062,7 +93062,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -93115,9 +93115,14 @@
         "at": "2026-07-15T08:02:33Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on 69130cd50, GitHub is CLEAN/MERGEABLE, all four automated review threads are resolved, and the PR remains exactly six allowlisted paths. Ready for policy-compliant squash auto-merge after the ledger head revalidates."
+      },
+      {
+        "at": "2026-07-15T08:10:10Z",
+        "status": "review_fixes_local_verified",
+        "note": "The ledger head passed all nine checks, then a fifth valid P2 was fixed: rollback now accepts a mutually exclusive token file so content-rich 116-row signed tokens do not hit process argv limits. The real file-path rollback regression passes within the 13 / 89 promoter suite; latest-head checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T08:02:33Z"
+    "updated_at": "2026-07-15T08:10:10Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07",

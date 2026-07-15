@@ -17,6 +17,7 @@ final class PersonalityEnneagramAuthorityV2RevisionPromoter extends Command
         {--preflight : Run a read-only pointer, hash, review-state, and public-fingerprint preflight}
         {--promote : Atomically promote the complete approved 116-target working-revision batch}
         {--rollback-token= : Atomically restore the previous published revisions using a signed rollback token}
+        {--rollback-token-file= : Read a large signed rollback token from this file instead of process arguments}
         {--confirm-preflight-fingerprint= : Exact preflight fingerprint; required for promotion}
         {--confirm-writer-deploy-sha= : Exact deployed backend Git SHA; required for promotion or rollback}
         {--operator-approved= : Exact dynamic promotion or rollback authorization phrase}
@@ -49,7 +50,10 @@ final class PersonalityEnneagramAuthorityV2RevisionPromoter extends Command
     {
         $preflight = (bool) $this->option('preflight');
         $promote = (bool) $this->option('promote');
-        $rollbackToken = trim((string) $this->option('rollback-token'));
+        $rollbackToken = $this->rollbackToken(
+            trim((string) $this->option('rollback-token')),
+            trim((string) $this->option('rollback-token-file')),
+        );
         if (((int) $preflight + (int) $promote + (int) ($rollbackToken !== '')) !== 1) {
             throw new RuntimeException('Exactly one of --preflight, --promote, or --rollback-token is required.');
         }
@@ -102,6 +106,27 @@ final class PersonalityEnneagramAuthorityV2RevisionPromoter extends Command
         }
 
         return array_values($decoded['targets']);
+    }
+
+    private function rollbackToken(string $inlineToken, string $tokenFile): string
+    {
+        if ($inlineToken !== '' && $tokenFile !== '') {
+            throw new RuntimeException('--rollback-token and --rollback-token-file are mutually exclusive.');
+        }
+        if ($tokenFile === '') {
+            return $inlineToken;
+        }
+
+        $resolved = str_starts_with($tokenFile, DIRECTORY_SEPARATOR) ? $tokenFile : base_path($tokenFile);
+        if (! File::isFile($resolved)) {
+            throw new RuntimeException('Enneagram Authority V2 rollback token file not found.');
+        }
+        $token = trim(File::get($resolved));
+        if ($token === '') {
+            throw new RuntimeException('Enneagram Authority V2 rollback token file is empty.');
+        }
+
+        return $token;
     }
 
     private function assertWriteEnvironment(): void

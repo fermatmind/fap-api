@@ -295,6 +295,36 @@ SQL);
         @unlink($path);
     }
 
+    public function test_console_rollback_reads_large_signed_token_from_file(): void
+    {
+        $targets = $this->seedRevisionEstate();
+        $plan = $this->promoter()->preflight($targets);
+        $promoted = $this->promoter()->promote($targets, (string) $plan['preflight_fingerprint']);
+        $token = (string) $promoted['rollback_token'];
+        $path = storage_path('framework/testing/enneagram-authority-v2-large-rollback-token.txt');
+        if (! is_dir(dirname($path))) {
+            mkdir(dirname($path), 0777, true);
+        }
+        file_put_contents($path, $token."\n");
+
+        $this->artisan('personality:enneagram-authority-v2-revision-promoter', [
+            '--rollback-token-file' => $path,
+            '--confirm-writer-deploy-sha' => self::TEST_DEPLOY_SHA,
+            '--operator-approved' => $this->promoter()->rollbackApprovalPhrase(
+                self::TEST_DEPLOY_SHA,
+                hash('sha256', $token),
+            ),
+            '--allow-testing' => true,
+            '--json' => true,
+        ])
+            ->expectsOutputToContain('"status": "PASS_POINTER_SAFE_ROLLBACK"')
+            ->assertSuccessful();
+
+        $this->assertSame(116, PersonalityPublicContentAsset::query()
+            ->where('title', 'like', 'Published Enneagram authority %')->count());
+        @unlink($path);
+    }
+
     private function promoter(): EnneagramPublicAuthorityV206RevisionPromoter
     {
         return app(EnneagramPublicAuthorityV206RevisionPromoter::class);
