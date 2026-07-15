@@ -1,0 +1,78 @@
+{
+  "schema_version": "big5-discoverability-parity-findings.v1",
+  "source": {
+    "repository": "fap-web",
+    "artifact": "docs/seo/personality/big5-authority-v2-runtime-closeout-38-report-2026-07-15.json",
+    "artifact_sha256": "60ec72b708aa5876dbee90ec12fec6dade6387414ce845f2c5ef4e4795b4ac65",
+    "read_only_evidence": true
+  },
+  "counts": {
+    "findings": 6,
+    "unique_assets": 4,
+    "hreflang_fail": 3,
+    "llms_fail": 3
+  },
+  "findings": [
+    {
+      "finding_id": "hreflang:article:zh-CN:/zh/articles/big-five-growth-guide",
+      "asset_id": "article:zh-CN:/zh/articles/big-five-growth-guide",
+      "route": "/zh/articles/big-five-growth-guide",
+      "surface": "hreflang",
+      "observed_status": "FAIL",
+      "expected_policy": "no_hreflang",
+      "expected_alternates": {}
+    },
+    {
+      "finding_id": "hreflang:article:zh-CN:/zh/articles/big-five-narrative-portrait",
+      "asset_id": "article:zh-CN:/zh/articles/big-five-narrative-portrait",
+      "route": "/zh/articles/big-five-narrative-portrait",
+      "surface": "hreflang",
+      "observed_status": "FAIL",
+      "expected_policy": "no_hreflang",
+      "expected_alternates": {}
+    },
+    {
+      "finding_id": "hreflang:article:zh-CN:/zh/articles/big-five-tool-guide",
+      "asset_id": "article:zh-CN:/zh/articles/big-five-tool-guide",
+      "route": "/zh/articles/big-five-tool-guide",
+      "surface": "hreflang",
+      "observed_status": "FAIL",
+      "expected_policy": "no_hreflang",
+      "expected_alternates": {}
+    },
+    {
+      "finding_id": "llms:article:zh-CN:/zh/articles/big-five-growth-guide",
+      "asset_id": "article:zh-CN:/zh/articles/big-five-growth-guide",
+      "route": "/zh/articles/big-five-growth-guide",
+      "surface": "llms.txt",
+      "observed_status": "FAIL",
+      "expected_policy": "backend_published_indexable_public_safe_and_explicit_llms_flag",
+      "expected_membership": true
+    },
+    {
+      "finding_id": "llms:article:zh-CN:/zh/articles/big-five-narrative-portrait",
+      "asset_id": "article:zh-CN:/zh/articles/big-five-narrative-portrait",
+      "route": "/zh/articles/big-five-narrative-portrait",
+      "surface": "llms.txt",
+      "observed_status": "FAIL",
+      "expected_policy": "backend_published_indexable_public_safe_and_explicit_llms_flag",
+      "expected_membership": true
+    },
+    {
+      "finding_id": "llms:article:zh-CN:/zh/articles/big-five-personality-test-vs-mbti",
+      "asset_id": "article:zh-CN:/zh/articles/big-five-personality-test-vs-mbti",
+      "route": "/zh/articles/big-five-personality-test-vs-mbti",
+      "surface": "llms.txt",
+      "observed_status": "FAIL",
+      "expected_policy": "backend_published_indexable_public_safe_and_explicit_llms_flag",
+      "expected_membership": true
+    }
+  ],
+  "safety": {
+    "read_only_projection": true,
+    "sitemap_behavior_changed": false,
+    "search_urls_submitted": false,
+    "draft_discoverability_expanded": false,
+    "production_mutation_executed": false
+  }
+}

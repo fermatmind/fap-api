@@ -246,6 +246,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_discoverability_parity_projector(): void
+    {
+        $allowed = [
+            'backend/app/Services/BigFive/AuthorityV2/DiscoverabilityParity/BigFiveDiscoverabilityParityProjector.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/DiscoverabilityParity/UnexpectedRuntimeWriter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -5928,6 +5941,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2DiscoverabilityParityFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7737,6 +7754,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isBigFiveAuthorityV2VisibleProvenanceFile(string $file): bool
     {
         return $file === 'backend/app/Services/BigFive/AuthorityV2/VisibleProvenance/BigFiveVisibleProvenanceProjector.php';
+    }
+
+    private function isBigFiveAuthorityV2DiscoverabilityParityFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/BigFive/AuthorityV2/DiscoverabilityParity/BigFiveDiscoverabilityParityProjector.php';
     }
 
     private function isBigFiveCmsPreviewRenderQaFile(string $file): bool
