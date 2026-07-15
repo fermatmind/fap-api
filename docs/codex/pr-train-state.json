@@ -92565,7 +92565,7 @@
       },
       "required_local_checks": {
         "status": "pass",
-        "evidence": "PHP 8.4 syntax passed for all three PHP files; focused PHPUnit passed 6 tests / 59 assertions; portable diff-scoped Pint, strict Composer validation, command discovery and JSON smoke, YAML/JSON parsing, git diff --check, and exact six-path scope validation passed."
+        "evidence": "PHP 8.4 syntax and scoped Pint passed for all four touched PHP files; focused PR02 PHPUnit passed 6 tests / 59 assertions and the exact runtime-freeze classifier regression passed 1 test / 2 assertions with a blocked Big Five runtime negative control; strict Composer validation, command discovery and JSON smoke, YAML/JSON parsing, git diff --check, and exact seven-path scope validation passed."
       },
       "github_required_checks": {
         "status": "pass",
@@ -92643,9 +92643,14 @@
         "at": "2026-07-15T03:32:41Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on latest-main-integrated head 6501834331de556ce9a65c81ed229b9f2fb8ac7a. GitHub reports CLEAN, the only review thread is resolved and outdated, the branch is behind 0, and the PR diff remains exactly seven allowed paths."
+      },
+      {
+        "at": "2026-07-15T03:39:32Z",
+        "status": "review_fix_local_verified",
+        "note": "Updated the stale required-local-checks summary to the already-proven four PHP files, classifier regression 1 test / 2 assertions, PR02 suite 6 tests / 59 assertions, and exact seven-path scope. This is ledger-only evidence correction; JSON, diff, and exact scope checks pass."
       }
     ],
-    "updated_at": "2026-07-15T03:32:41Z"
+    "updated_at": "2026-07-15T03:39:32Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04",
