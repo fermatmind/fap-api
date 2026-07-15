@@ -92330,8 +92330,8 @@
     "branch": "codex/enneagram-public-authority-v2-benchmark-01",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01: freeze 116-page production and Truity benchmark truth",
     "depends_on": [],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed_pending_push",
+    "commit_sha": "e238e00f178bc441f5be1000d69309d28f64c868",
     "pr_url": null,
     "checks": {
       "manifest_registration": {
@@ -92382,9 +92382,14 @@
         "at": "2026-07-15T01:22:12Z",
         "status": "local_checks_passed",
         "note": "PHP 8.4 focused contract passed 5 tests / 3245 assertions; Pint, strict Composer validation, JSON/YAML parsing, frozen SHA256 checks, diff checks, and exact seven-path scope validation passed. No production or competitor body write occurred."
+      },
+      {
+        "at": "2026-07-15T01:22:43Z",
+        "status": "committed_pending_push",
+        "note": "Committed the exact seven-path benchmark and train-registration scope as e238e00f178bc441f5be1000d69309d28f64c868 after explicit staging and cached diff validation."
       }
     ],
-    "updated_at": "2026-07-15T01:22:12Z"
+    "updated_at": "2026-07-15T01:22:43Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02",
