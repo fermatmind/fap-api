@@ -209,6 +209,34 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertContains('locale_not_independently_authored', collect($result['issues'])->pluck('code')->all());
     }
 
+    public function test_en_assets_require_substantive_latin_visible_text(): void
+    {
+        $candidate = $this->candidate();
+        $index = $this->localePairIndexes($candidate, 'hub:enneagram')['en'];
+        $asset = &$candidate['assets'][$index];
+        $asset['title'] = '九型人格英文入口误写为中文';
+        $asset['answer_first'] = str_repeat('这段可见回答只有中文内容，因此不能作为英文路由的独立英文草稿。', 6);
+        foreach ($asset['sections'] as $sectionIndex => &$section) {
+            $section['heading'] = "中文章节{$sectionIndex}";
+            $section['body'] = str_repeat("这个章节{$sectionIndex}只有中文内容，没有为英文读者提供独立撰写的英文解释。", 6);
+        }
+        unset($section);
+        foreach ($asset['faqs'] as $faqIndex => &$faq) {
+            $faq['question'] = "这是第{$faqIndex}个只有中文内容的问题吗？";
+            $faq['answer'] = str_repeat("这个回答{$faqIndex}只有中文内容，不能证明英文页面具有实质英文正文。", 6);
+        }
+        unset($faq);
+        foreach (['context', 'observable_signal', 'page_specific_signal', 'alternative_explanation', 'reflection_prompt'] as $field) {
+            $asset['observation_exercise'][$field] = "这个{$field}字段只有中文内容，不能作为英文路由的可见练习文本。";
+        }
+        unset($asset);
+
+        $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+        $this->assertFalse($result['ok']);
+        $this->assertContains('locale_not_independently_authored', collect($result['issues'])->pluck('code')->all());
+    }
+
     public function test_sections_require_substantive_visible_heading_and_body_text(): void
     {
         $candidate = $this->candidate();
@@ -793,6 +821,8 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
         $this->assertCount(10, $contract['qa_row_contract']['gates']);
         $this->assertCount(13, $contract['required_negative_fixtures']);
         $this->assertSame(30, $contract['duplicate_thresholds']['zh-CN']['paragraph_characters']);
+        $this->assertSame(120, $contract['locale_script_contract']['en']['minimum_latin_characters']);
+        $this->assertSame(0.60, $contract['locale_script_contract']['en']['minimum_latin_share_of_letters']);
         $this->assertSame('question_answers', $contract['geo_answerability_contract']['mapping_field']);
         $this->assertSame('ready_for_human_review', $contract['automated_pass_means']);
         $this->assertSame('pending_manual_review', $contract['manual_review_truth']['status']);

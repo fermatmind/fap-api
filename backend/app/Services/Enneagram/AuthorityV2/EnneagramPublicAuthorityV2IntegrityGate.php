@@ -562,16 +562,22 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         if ($this->length($authoring['independence_note'] ?? null) < 40) {
             $add(self::EDITORIAL_GATES[1], 'independence_note_insufficient', $key, "{$path}.authoring.independence_note", 'Independent editorial intent must be explicit.');
         }
+        $visibleBlocks = [(string) ($asset['title'] ?? ''), (string) ($asset['answer_first'] ?? '')];
+        foreach (['sections', 'faqs', 'observation_exercise'] as $field) {
+            $this->appendVisibleStrings($visibleBlocks, $asset[$field] ?? null);
+        }
+        $visibleText = implode("\n", $visibleBlocks);
         if (($asset['locale'] ?? null) === 'zh-CN') {
-            $visibleBlocks = [(string) ($asset['title'] ?? ''), (string) ($asset['answer_first'] ?? '')];
-            foreach (['sections', 'faqs', 'observation_exercise'] as $field) {
-                $this->appendVisibleStrings($visibleBlocks, $asset[$field] ?? null);
-            }
-            $visibleText = implode("\n", $visibleBlocks);
             $hanCount = preg_match_all('/\p{Han}/u', $visibleText) ?: 0;
             $letterCount = preg_match_all('/\p{L}/u', $visibleText) ?: 0;
             if ($hanCount < 80 || $letterCount === 0 || ($hanCount / $letterCount) < 0.25) {
                 $add(self::EDITORIAL_GATES[1], 'locale_not_independently_authored', $key, $path, 'A zh-CN asset must contain substantive Chinese script across its rendered editorial fields.');
+            }
+        } elseif (($asset['locale'] ?? null) === 'en') {
+            $latinCount = preg_match_all('/\p{Latin}/u', $visibleText) ?: 0;
+            $letterCount = preg_match_all('/\p{L}/u', $visibleText) ?: 0;
+            if ($latinCount < 120 || $letterCount === 0 || ($latinCount / $letterCount) < 0.60) {
+                $add(self::EDITORIAL_GATES[1], 'locale_not_independently_authored', $key, $path, 'An en asset must contain substantive Latin-script English content across its rendered editorial fields.');
             }
         }
         $pairLocale = ($asset['locale'] ?? null) === 'en' ? 'zh-CN' : 'en';

@@ -52,6 +52,11 @@
     "zh-CN": { "paragraph_characters": 30, "sentence_characters": 24 }
   },
   "locale_script_contract": {
+    "en": {
+      "rendered_fields": ["title", "answer_first", "sections", "faqs", "observation_exercise"],
+      "minimum_latin_characters": 120,
+      "minimum_latin_share_of_letters": 0.60
+    },
     "zh-CN": {
       "rendered_fields": ["title", "answer_first", "sections", "faqs", "observation_exercise"],
       "minimum_han_characters": 80,
