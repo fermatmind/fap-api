@@ -329,7 +329,9 @@ final class EnneagramPublicAuthorityV2IntegrityGate
 
     private const PREDICTION_PATTERN = '/(?:predict(?:s|ed|ive|or)?(?:\s+(?:your|a|the))?[\s-]+(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?|(?:career|job|relationship|partner|income|hiring|salary|turnover|health|admission|legal|financial)(?:[\s-]+(?:success|outcome|fit|performance))?[\s-]+predict(?:or|ion|ive)|guaranteed?\s+(?:career|job|relationship|income|hiring|salary|turnover|health|admission|legal|financial|outcome)|perfect\s+(?:career|job|partner)|预测(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果|适配)?|保证(?:你(?:的)?|您(?:的)?|其)?(?:职业|收入|关系|录用|结果|健康|升学|法律|金融|薪资|离职|流失)(?:成功|结果)?|最适合的职业|完美伴侣)/iu';
 
-    private const DIAGNOSIS_SCREENING_PATTERN = '/(?:medical\s+diagnos(?:is|e|tic)|clinical\s+diagnos(?:is|e|tic)|diagnos(?:es|ed|ing)\s+(?:you|your)|hiring[\s-]+fit|job[\s-]+suitability(?:[\s-]+guarantee)?|(?:employment|admission)[\s-]+screening|医疗诊断|临床诊断|招聘适配|录用适配|岗位适配保证)/iu';
+    private const DIAGNOSIS_SCREENING_PATTERN = '/(?:medical\s+diagnos(?:is|e|tic)|clinical\s+diagnos(?:is|e|tic)|diagnos(?:e|es|ed|ing)\s+(?:you|your)|(?:personality|type|ability|health)\s+diagnos(?:is|tic)|(?:treats?|cures?)\s+(?:your\s+)?(?:condition|disorder|anxiety|depression|health|personality)|hiring[\s-]+fit|job[\s-]+suitability(?:[\s-]+guarantee)?|(?:employment|admission)[\s-]+screening|医疗诊断|临床诊断|诊断(?:你(?:的)?|您(?:的)?|其)(?:性格|人格|类型|能力|健康|结果)?|(?:性格|人格|类型|能力|健康)诊断|(?:治疗|治愈)(?:你(?:的)?|您(?:的)?|其)?(?:疾病|焦虑|抑郁|健康|人格|性格)|招聘适配|录用适配|岗位适配保证)/iu';
+
+    private const DETERMINISTIC_RECOMMENDATION_PATTERN = '/(?:precise\s+career\s+recommendation|best\s+career\s+for\s+you|perfect\s+job\s+match|complete\s+personalized\s+career\s+recommender|(?:riasec|enneagram|mbti|big\s+five)\s+(?:ranks?|determines?)\s+(?:your\s+)?(?:best\s+)?(?:career|job|income|identity|ability|future)|determines?\s+(?:your\s+)?(?:income|career|job|identity|ability|future)|(?:salary|career|hiring|job|relationship|income|outcome)[\s-]+guarantee|精准职业推荐|最适合(?:你(?:的)?|您(?:的)?|其)?职业|完美(?:工作|职业)匹配|决定(?:你(?:的)?|您(?:的)?|其)?(?:收入|职业|工作|身份|能力|未来)|(?:薪资|职业|录用|工作|关系|收入|结果)保证)/iu';
 
     private const COMPETITOR_PATTERN = '/(?:\btruity\b|enneagram\s+institute)/iu';
 
@@ -741,6 +743,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
             [self::UNSUPPORTED_CLAIM_PATTERN, 'unsupported_science_claim'],
             [self::PREDICTION_PATTERN, 'career_or_relationship_prediction'],
             [self::DIAGNOSIS_SCREENING_PATTERN, 'diagnosis_or_screening_claim'],
+            [self::DETERMINISTIC_RECOMMENDATION_PATTERN, 'deterministic_recommendation_claim'],
             [self::COMPETITOR_PATTERN, 'competitor_language_detected'],
         ] as [$pattern, $code]) {
             if (preg_match($pattern, $text) === 1) {

@@ -205,8 +205,13 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             'Medical diagnosis',
             'Clinical diagnostic result',
             'Diagnoses your personality',
+            'Diagnose your personality',
+            'Personality diagnosis',
+            'Treats your anxiety',
             'Hiring fit',
             'Job suitability guarantee',
+            '诊断你的性格',
+            '治愈你的焦虑',
             '岗位适配保证',
         ] as $phrase) {
             $candidate = $this->candidate();
@@ -216,6 +221,28 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
 
             $this->assertFalse($result['ok'], $phrase);
             $this->assertContains('diagnosis_or_screening_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
+        }
+    }
+
+    public function test_deterministic_recommendation_vocabulary_fails_claim_safety_gate(): void
+    {
+        foreach ([
+            'Precise career recommendation',
+            'Best career for you',
+            'Perfect job match',
+            'RIASEC ranks your best career',
+            'Determines your income',
+            'Salary guarantee',
+            '最适合你的职业',
+            '决定你的能力',
+        ] as $phrase) {
+            $candidate = $this->candidate();
+            $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
+
+            $result = $this->gate()->validateEditorial($candidate, $this->registry(), $this->maps());
+
+            $this->assertFalse($result['ok'], $phrase);
+            $this->assertContains('deterministic_recommendation_claim', collect($result['issues'])->pluck('code')->all(), $phrase);
         }
     }
 
