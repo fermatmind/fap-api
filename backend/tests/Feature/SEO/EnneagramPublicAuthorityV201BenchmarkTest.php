@@ -142,6 +142,29 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
             'ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21: fap-web',
             $manifest
         );
+        $this->assertStringContainsString(
+            'php artisan test tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php',
+            $manifest
+        );
+
+        $state = json_decode(
+            (string) file_get_contents(dirname(__DIR__, 4).'/docs/codex/pr-train-state.json'),
+            true
+        );
+        $this->assertIsArray($state);
+
+        foreach ([
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04',
+            'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22',
+        ] as $id) {
+            $this->assertSame('fap-web', $state[$id]['dependency_repository'] ?? null);
+            $this->assertNull($state[$id]['dependency_pr_url'] ?? null);
+            $this->assertNull($state[$id]['dependency_merge_sha'] ?? null);
+            $this->assertFalse($state[$id]['dependency_verification']['github_merged'] ?? true);
+            $this->assertFalse(
+                $state[$id]['dependency_verification']['dependency_origin_main_contains_merge'] ?? true
+            );
+        }
     }
 
     /** @return array<string, mixed> */
