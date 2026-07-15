@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-      "commit_sha": "ff03c3eb70caec9b98e27af8d89d18bb07ba66a8",
+    "commit_sha": "eb966523b2d325f1bcc0384bf8c7d954d4eac41a",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93354,11 +93354,11 @@
       },
       "local_validation": {
         "status": "pass",
-          "evidence": "Latest review-fix replay passed under the concurrency guard while another full ci_verify_mbti.sh was already running: combined PR08 and PR02 feature suites 45 tests / 1508 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Every declared GEO question now requires at least one substantive Latin/numeric term or Chinese bigram shared with its mapped visible answer, so off-topic questions cannot pass by pointing at arbitrary long content. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
+        "evidence": "Latest review-fix replay passed under the concurrency guard: combined PR08 and PR02 feature suites 45 tests / 1508 assertions; the exact registered Enneagram non-runtime path classifier 1 test / 2 assertions; Pint for all three changed PHP files; PHP syntax, YAML, both changed JSON artifacts, diff, and exact seven-file merge-base scope checks. Every declared GEO question now requires a substantive shared term or Chinese bigram with its mapped visible answer after identity, code, path, and hash markers are excluded, so marker-only off-topic questions remain fail-closed. The gate still emits exactly 116 QA rows with zero human-review, release, CMS/database, discoverability, search, deploy, or production-write claims."
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on ledger head e1b599184 before the same-head review added one valid in-scope P2 finding: unrelated GEO questions could map to arbitrary substantive visible answers. The locally verified substantive fix head ff03c3eb7 adds question-answer relevance verification and requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on ledger head 09115c0ca before the same-head review added one valid in-scope P2 finding: identity, code, path, or hash markers alone could satisfy GEO question-answer relevance. The locally verified substantive fix head eb966523b excludes those markers and requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-          "evidence": "All seventy-four valid P2 findings are fixed. GEO answerability now verifies that each mapped visible answer shares a substantive question term or Chinese bigram, in addition to exact question coverage, allowed rendered paths, and minimum answer length. PR08+PR02 pass 45 tests / 1508 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
+        "evidence": "All seventy-five valid P2 findings are fixed. GEO answerability now verifies that each mapped visible answer shares a substantive question term or Chinese bigram after excluding identity, code, path, and hexadecimal markers, in addition to exact question coverage, allowed rendered paths, and minimum answer length. PR08+PR02 pass 45 tests / 1508 assertions, the exact registered Enneagram non-runtime path classifier passes 1 / 2, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93685,9 +93685,14 @@
           "at": "2026-07-15T18:40:03Z",
           "status": "review_fixes_local_verified",
           "note": "All nine checks passed on ledger head e1b599184, then one valid same-head P2 was fixed: every GEO question now needs a substantive Latin/numeric term or Chinese bigram shared with its mapped visible answer, so off-topic questions cannot pass through arbitrary long answer paths. Another full ci_verify_mbti.sh was already running, so only focused checks were started: PR08+PR02 pass 45 / 1508, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
+        },
+        {
+          "at": "2026-07-15T18:52:43Z",
+          "status": "review_fixes_local_verified",
+          "note": "All nine checks passed on ledger head 09115c0ca, then one valid same-head P2 was fixed: GEO question-answer relevance now excludes shared identity, code, path, and hexadecimal markers, so an off-topic question cannot pass merely by repeating page markers. PR08+PR02 pass 45 / 1508, the exact registered Enneagram non-runtime classifier passes 1 / 2, and Pint, syntax, YAML, JSON, diff, and exact seven-file merge-base scope pass. Latest-head GitHub checks must rerun."
         }
       ],
-      "updated_at": "2026-07-15T18:40:03Z"
+      "updated_at": "2026-07-15T18:52:43Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
