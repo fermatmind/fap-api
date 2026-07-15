@@ -696,7 +696,7 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         foreach ($normalizedQuestions as $question) {
             $visibleAnswer = isset($mappedAnswers[$question]) ? $this->visibleAnswerAtPath($asset, $mappedAnswers[$question]) : null;
             if ($this->length($visibleAnswer) < $minimumAnswerLength
-                || ! $this->visibleAnswerSupportsQuestion($questionTexts[$question], (string) $visibleAnswer)) {
+                || ! $this->visibleAnswerSupportsQuestion($questionTexts[$question], (string) $visibleAnswer, $asset)) {
                 $mappingInvalid = true;
                 break;
             }
@@ -706,28 +706,47 @@ final class EnneagramPublicAuthorityV2IntegrityGate
         }
     }
 
-    private function visibleAnswerSupportsQuestion(string $question, string $answer): bool
+    /** @param array<string, mixed> $asset */
+    private function visibleAnswerSupportsQuestion(string $question, string $answer, array $asset): bool
     {
-        $questionTerms = [];
-        preg_match_all('/[\p{Latin}\p{N}]{3,}/u', mb_strtolower($question), $wordMatches);
+        $questionTerms = $this->answerabilityTerms($question);
+        $answerTerms = array_fill_keys($this->answerabilityTerms($answer), true);
+        $markerText = implode(' ', array_map(
+            static fn (string $field): string => (string) ($asset[$field] ?? ''),
+            ['identity_key', 'code', 'path'],
+        ));
+        $markerTerms = array_fill_keys($this->answerabilityTerms($markerText), true);
+
+        foreach ($questionTerms as $term) {
+            if (isset($answerTerms[$term])
+                && ! isset($markerTerms[$term])
+                && preg_match('/^[0-9a-f]{8,64}$/i', $term) !== 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @return list<string> */
+    private function answerabilityTerms(string $text): array
+    {
+        $terms = [];
+        preg_match_all('/[\p{Latin}\p{N}]{3,}/u', mb_strtolower($text), $wordMatches);
         $stopWords = ['what', 'which', 'when', 'where', 'who', 'whose', 'why', 'how', 'should', 'could', 'would', 'does', 'did', 'are', 'the', 'and', 'for', 'from', 'into', 'with', 'this', 'that', 'these', 'those', 'your', 'our', 'their', 'its', 'can'];
         foreach ($wordMatches[0] ?? [] as $term) {
             if (! in_array($term, $stopWords, true)) {
-                $questionTerms[] = $term;
+                $terms[] = $term;
             }
         }
-        preg_match_all('/\p{Han}{2,}/u', $question, $hanMatches);
+        preg_match_all('/\p{Han}{2,}/u', $text, $hanMatches);
         foreach ($hanMatches[0] ?? [] as $sequence) {
             for ($index = 0; $index < mb_strlen($sequence) - 1; $index++) {
-                $questionTerms[] = mb_substr($sequence, $index, 2);
+                $terms[] = mb_substr($sequence, $index, 2);
             }
         }
 
-        $normalizedAnswer = mb_strtolower($answer);
-
-        return collect(array_unique($questionTerms))->contains(
-            static fn (string $term): bool => mb_strpos($normalizedAnswer, $term) !== false,
-        );
+        return array_values(array_unique($terms));
     }
 
     /** @param array<string, mixed>|null $map @param array<string, array<string, mixed>> $claims @param callable(string, string, ?string, string, string): void $add */
