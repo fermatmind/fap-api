@@ -489,6 +489,10 @@ final class EnneagramPublicAuthorityV208EditorialGateTest extends TestCase
             ['This page is not only scientifically proven.', 'unsupported_science_claim'],
             ['This page is not merely a career success predictor.', 'career_or_relationship_prediction'],
             ['This page is not only human reviewed.', 'visible_review_or_release_claim'],
+            ['This page is not just scientifically proven.', 'unsupported_science_claim'],
+            ['This page is not simply a career success predictor.', 'career_or_relationship_prediction'],
+            ['This page is not solely human reviewed.', 'visible_review_or_release_claim'],
+            ['This page is not necessarily scientifically proven.', 'unsupported_science_claim'],
         ] as [$phrase, $expectedCode]) {
             $candidate = $this->candidate();
             $candidate['assets'][0]['sections'][0]['heading'] = $phrase;
