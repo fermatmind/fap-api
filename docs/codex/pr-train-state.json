@@ -93340,7 +93340,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-SOURCE-LEDGER-07"
     ],
     "status": "review_fixes_local_verified",
-    "commit_sha": "bdee0f25ae2fdc5dae8c8cb720a0f23c862d465a",
+    "commit_sha": "2fe5e54e9c15ae7dcf82158981f52b24b997cae7",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3115",
     "checks": {
@@ -93358,7 +93358,7 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine required checks passed on prior ledger head fa8532450, then the latest automated review added three valid in-scope bilingual and exercise-bypass P2 findings. The locally verified substantive fix head bdee0f25a requires a fresh GitHub check round."
+        "evidence": "All nine required checks passed on prior ledger head f3f61c70b, then the latest automated review added one valid in-scope English type-label P2 finding. The locally verified substantive fix head 2fe5e54e9 requires a fresh GitHub check round."
       },
       "ci_fix": {
         "status": "pass",
@@ -93366,7 +93366,7 @@
       },
       "review_fixes": {
         "status": "pass",
-        "evidence": "All twelve valid P2 findings are fixed. In addition to the prior nine, Chinese pronoun prediction wording is blocked, generic seven-day copy cannot bypass the gate through mismatched duration metadata, and Chinese type numerals participate in type-substitution template detection. PR08+PR02 pass 20 tests / 191 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
+        "evidence": "All thirteen valid P2 findings are fixed. In addition to the prior twelve, English spelled type labels from Type One through Type Nine participate in type-substitution template detection. PR08+PR02 pass 21 tests / 201 assertions, the exact freeze classifier regressions pass 2 / 5, and Pint passes three changed PHP files."
       }
     },
     "scope_validation": {
@@ -93450,9 +93450,14 @@
         "at": "2026-07-15T11:10:20Z",
         "status": "review_fixes_local_verified",
         "note": "All nine checks passed on the prior review-fix ledger head, then three valid P2 findings were fixed: Chinese pronoun prediction wording, generic seven-day text with mismatched duration metadata, and Chinese-numeral type-substitution templates. PR08+PR02 pass 20 / 191, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
+      },
+      {
+        "at": "2026-07-15T11:17:15Z",
+        "status": "review_fixes_local_verified",
+        "note": "All nine checks passed on the prior review-fix ledger head, then one valid P2 was fixed: English spelled type labels Type One through Type Nine now participate in type-substitution template detection. PR08+PR02 pass 21 / 201, freeze regressions 2 / 5, Pint, syntax, diff, and exact seven-file scope pass. Latest-head GitHub checks must rerun."
       }
     ],
-    "updated_at": "2026-07-15T11:10:20Z"
+    "updated_at": "2026-07-15T11:17:15Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-HUB-CENTERS-09",
