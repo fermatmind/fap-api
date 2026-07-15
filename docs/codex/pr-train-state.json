@@ -55968,11 +55968,11 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final contract/schema tests passed 10 tests / 66 assertions, including exact zh-CN Big Five/Career source locks and fail-closed private marker/link scanning across reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. One attempted final verifier collided with another validation process that started after the guard and both used /tmp/fap-ci.sqlite, producing a schema-baseline initialization failure before the bridge suite. After the competing run ended, its clean latest-functional-head bash backend/scripts/ci_verify_mbti.sh execution exited 0 through the strict queue probe, including Big Five 1478 tests / 181308 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after verifier exit.",
+          "evidence": "Final contract/schema tests passed 12 tests / 72 assertions, including canonical Authority V2 asset ids with traversal rejection, exact zh-CN Big Five/Career source locks, fail-closed private marker/link scanning, and non-diagnostic reader text; the Big Five runtime-freeze bridge classification gate passed 2 tests / 4 assertions. PHP syntax, touched-file Pint, JSON/YAML parse, git diff checks, and exact 9-path scope validation passed. One earlier verifier attempt collided on /tmp/fap-ci.sqlite with a validation process that started after the guard; subsequent clean latest-functional-head runs passed. The final authority-id/diagnostic-head bash backend/scripts/ci_verify_mbti.sh execution exited 0 through the strict queue probe, including Big Five 1480 tests / 181314 assertions and personality full-32 71 tests / 5371 assertions. All 13 regenerated BIG5_OCEAN compiled files were restored after verifier exit.",
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3118 is open. Codex reviews reported seven P2 threads: two train-state association findings, missing outcome-prediction output lock, two duplicate boundary-copy deterministic-claim scan findings, canonical zh-CN Career locale binding, and private markers or private links hidden in reader text. All findings are fixed with regression coverage. The latest functional head is 4008e9daed00b0c32b94c9649d56685646c8127a; required checks and exact-head review must rerun after this final bookkeeping push.",
+          "evidence": "PR #3118 is open. Codex reviews reported nine P2 threads: two train-state association findings, missing outcome-prediction output lock, two duplicate boundary-copy deterministic-claim scan findings, canonical zh-CN Career locale binding, private markers/links hidden in reader text, canonical Authority V2 asset-id shape, and diagnostic reader claims. All findings are fixed with regression coverage; required checks and an exact-head no-new-findings review must rerun after push.",
           "status": "pending"
         }
       },
@@ -55995,7 +55995,7 @@
         "post_merge_revalidated": null
       },
       "sidecars": [],
-      "status": "github_checks_pending_final_head",
+      "status": "github_checks_pending_authority_diagnostic_fix",
       "title": "BIG5-CAREER-BRIDGE-SCHEMA-01: feat(career): define fail-closed Big Five career bridge schema",
       "transitions": [
         {
@@ -56051,6 +56051,12 @@
           "from": "github_checks_pending_private_text_fix",
           "note": "Recorded latest functional head 4008e9daed00b0c32b94c9649d56685646c8127a. One attempted verifier collided on /tmp/fap-ci.sqlite with a validation process that started after the concurrency guard and failed during schema initialization; the surviving clean latest-head run then passed through strict queue with Big Five 1478/181308 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and Codex review remain pending.",
           "to": "github_checks_pending_final_head"
+        },
+        {
+          "at": "2026-07-15T21:06:02Z",
+          "from": "github_checks_pending_final_head",
+          "note": "Addressed the latest two Codex P2 findings by accepting canonical model_hub Authority V2 asset ids while rejecting traversal shapes, and by scanning all reader text for affirmative diagnostic claims. Focused contract tests passed 12/72, touched Pint passed, and guarded full CI passed through strict queue with Big Five 1480/181314 and personality full-32 71/5371. Restored all 13 generated compiled diffs; exact-head GitHub checks and review remain pending.",
+          "to": "github_checks_pending_authority_diagnostic_fix"
         }
       ]
     },
