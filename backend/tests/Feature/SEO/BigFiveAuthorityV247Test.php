@@ -11,6 +11,7 @@ use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
+use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileRevision;
@@ -722,6 +723,22 @@ final class BigFiveAuthorityV247Test extends TestCase
             $this->assertNotNull($observed['working_revision_id']);
             $this->assertNull($observed['published_revision_id']);
         }
+    }
+
+    public function test_row_backed_working_revisions_require_approved_workflow_state(): void
+    {
+        $method = new \ReflectionMethod(BigFiveReviewPromotionPreflight::class, 'revisionPromotionShapeMatches');
+        $personalityRevision = new PersonalityPublicContentAssetRevision(['workflow_state' => 'draft']);
+        $topicRevision = new TopicProfileRevision(['workflow_state' => 'draft']);
+
+        $this->assertFalse($method->invoke($this->preflight(), $personalityRevision, new PersonalityPublicContentAsset));
+        $this->assertFalse($method->invoke($this->preflight(), $topicRevision, new TopicProfile));
+
+        $personalityRevision->setAttribute('workflow_state', 'approved');
+        $topicRevision->setAttribute('workflow_state', 'approved');
+
+        $this->assertTrue($method->invoke($this->preflight(), $personalityRevision, new PersonalityPublicContentAsset));
+        $this->assertTrue($method->invoke($this->preflight(), $topicRevision, new TopicProfile));
     }
 
     public function test_database_preflight_still_requires_published_revision_for_revision_backed_existing_article(): void

@@ -26,6 +26,8 @@ use RuntimeException;
 
 final class BigFiveReviewPromotionPreflight
 {
+    private const APPROVED_WORKFLOW_STATE = 'approved';
+
     private const DRAFT_IMPORT_PACKAGE_PATH = '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json';
 
     private const DRAFT_IMPORT_PACKAGE_SHA256 = '80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154';
@@ -507,7 +509,11 @@ final class BigFiveReviewPromotionPreflight
                 && $revision->getAttribute('revision_status') === CmsTranslationRevision::STATUS_APPROVED
                 && is_array($revision->getAttribute('payload_json'))
                 && $this->contentPageTranslationAdapter->requiredPayloadBlockers($revision->getAttribute('payload_json')) === [],
-            default => true,
+            $record instanceof PersonalityPublicContentAsset => $revision instanceof PersonalityPublicContentAssetRevision
+                && $revision->getAttribute('workflow_state') === self::APPROVED_WORKFLOW_STATE,
+            $record instanceof TopicProfile => $revision instanceof TopicProfileRevision
+                && $revision->getAttribute('workflow_state') === self::APPROVED_WORKFLOW_STATE,
+            default => false,
         };
     }
 
