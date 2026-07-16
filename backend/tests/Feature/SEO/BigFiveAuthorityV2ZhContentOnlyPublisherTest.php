@@ -82,6 +82,8 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
 
     public function test_publish_releases_112_chinese_assets_with_full_content_and_is_idempotent(): void
     {
+        $this->assertLessThanOrEqual(32, strlen(BigFiveZhContentOnlyPublisher::REVISION_WORKFLOW_STATE));
+
         $publisher = app(BigFiveZhContentOnlyPublisher::class);
         $englishBefore = $this->englishRows();
 
@@ -102,6 +104,18 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
         $this->assertSame(2, ContentPage::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publiclyIndexable()->count());
         $this->assertSame(1, LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->where('is_indexable', true)->count());
         $this->assertSame(1, TopicProfile::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->where('is_indexable', true)->count());
+        $this->assertSame(
+            BigFiveZhContentOnlyPublisher::REVISION_WORKFLOW_STATE,
+            PersonalityPublicContentAssetRevision::query()
+                ->where('authority_package_sha256', BigFiveZhContentOnlyPublisher::RELEASE_PACKAGE_SHA256)
+                ->value('workflow_state'),
+        );
+        $this->assertSame(
+            BigFiveZhContentOnlyPublisher::REVISION_WORKFLOW_STATE,
+            TopicProfileRevision::query()
+                ->where('authority_package_sha256', BigFiveZhContentOnlyPublisher::RELEASE_PACKAGE_SHA256)
+                ->value('workflow_state'),
+        );
 
         $expectedSectionCounts = [
             PersonalityPublicContentAsset::ENTITY_HUB => 14,
