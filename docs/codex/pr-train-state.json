@@ -94714,7 +94714,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "c30e26f88185594c73ef397d95d17fc79798d972",
+    "commit_sha": "d6d09156891aa8b83c8ae998ec200e91f0569d05",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3127",
     "checks": {
@@ -94728,7 +94728,7 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "The PR15 focused suite passes 8 tests / 421 assertions; all twelve Type 6 family assets have zero asset-specific PR08-gate issues, with only one expected aggregate target_count_invalid signal and exactly 104 target_asset_missing rows deferred to PR16-PR18. During the fifth review repair, the first replay failed on one newly exposed duplicate wing sentence; differentiated page-specific openings cleared it on the retry. Pint, PHP syntax, YAML, all changed JSON, anomaly scan, diff check, and the exact six-file allowlist pass."
+        "evidence": "The PR15 focused suite passes 8 tests / 421 assertions; all twelve Type 6 family assets have zero asset-specific PR08-gate issues, with only one expected aggregate target_count_invalid signal and exactly 104 target_asset_missing rows deferred to PR16-PR18. During the fifth and sixth substantive review repairs, first replays each failed on one newly exposed duplicate wing sentence; page-specific rewrites cleared both retries. Pint, PHP syntax, YAML, all changed JSON, grammar/anomaly scan, diff check, and the exact six-file allowlist pass."
       },
       "content_qa": {
         "status": "pass",
@@ -94740,11 +94740,11 @@
       },
       "github_checks": {
         "status": "pending",
-        "evidence": "All nine checks passed on ledger head 4b38e37eea736373df947304bad3a8e7a4e45989, but final review found a new valid English wing agreement thread. All four affected passages were rewritten and locally validated; fresh required checks must pass on the fifth review-fix ledger head."
+        "evidence": "All nine checks passed on ledger head 3bd12c49e1e60c7e0907ea97754e971162ec46f8, but final review found a new valid English FAQ grammar and splice thread. All affected English wing and subtype FAQ and adjacent splice passages were rewritten and locally validated; fresh required checks must pass on the sixth review-fix ledger head."
       },
       "required_reviews": {
         "status": "pending_resolution",
-        "evidence": "The first five Codex review threads are resolved. Thread PRRT_kwDOQn6xoM6RTZOD correctly identified four residual English wing subject-verb agreement errors; all four affected passages were rewritten and locally validated. Resolve this sixth thread after push and re-read."
+        "evidence": "The first six Codex review threads are resolved. Thread PRRT_kwDOQn6xoM6RTeJN correctly identified plural-subject agreement errors and semicolon-imperative splice artifacts in English FAQ openers; all five affected FAQs and the remaining adjacent English wing/subtype splice passages were rewritten and locally validated. Resolve this seventh thread after push and re-read."
       }
     },
     "scope_validation": {
@@ -94818,9 +94818,14 @@
         "at": "2026-07-16T02:29:08Z",
         "status": "github_checks_pending",
         "note": "All nine checks passed on 4b38e37eea736373df947304bad3a8e7a4e45989, but final review found a sixth valid P2 thread covering four English wing agreement errors. The first local replay after correction failed on one newly exposed duplicate_sentence; differentiated 6w5 and 6w7 core-first openings then cleared the retry at 8 tests / 421 assertions, followed by Pint, JSON, targeted grammar/anomaly scan, and diff checks. Committed the fifth substantive review fix as c30e26f88185594c73ef397d95d17fc79798d972; fresh checks and thread resolution are required."
+      },
+      {
+        "at": "2026-07-16T02:39:07Z",
+        "status": "github_checks_pending",
+        "note": "All nine checks passed on 3bd12c49e1e60c7e0907ea97754e971162ec46f8, but final review found a seventh valid P2 thread covering plural-subject agreement and semicolon-imperative splice artifacts in English wing/subtype FAQs. Rewrote all five affected FAQ pairs plus the remaining adjacent English wing/subtype splice passages. The first replay failed on one shared sibling-comparison sentence; differentiated page-specific comparison methods then cleared the retry at 8 tests / 421 assertions, followed by Pint, JSON, grammar/anomaly scan, and diff checks. Committed the sixth substantive review fix as d6d09156891aa8b83c8ae998ec200e91f0569d05; fresh checks and thread resolution are required."
       }
     ],
-    "updated_at": "2026-07-16T02:29:08Z"
+    "updated_at": "2026-07-16T02:39:07Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16",
