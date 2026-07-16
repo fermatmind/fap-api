@@ -185,6 +185,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $changed);
     }
 
+    public function test_runtime_freeze_classifier_ignores_analytics_provider_freshness_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php',
+            'backend/app/Services/Analytics/ProviderFreshness/ProviderFreshnessService.php',
+            'backend/app/Services/Analytics/ProviderFreshness/ProviderSnapshotStore.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -317,6 +332,36 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
         $blocked = [
             'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFivePromotionWriter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_promotion_readiness_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV249PromotionReadiness.php',
+            'backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/BigFiveZh6PromotionReadiness.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/UnexpectedRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_zh_content_only_release_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2ZhContentOnlyPublish.php',
+            'backend/app/Services/BigFive/AuthorityV2/ContentOnlyRelease/BigFiveZhContentOnlyPublisher.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/ContentOnlyRelease/UnexpectedMbtiRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
@@ -6035,6 +6080,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2PromotionReadinessFile($file)) {
+                continue;
+            }
+
+            if ($this->isBigFiveAuthorityV2ZhContentOnlyReleaseFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7087,6 +7140,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isAnalyticsProviderFreshnessFile($file)) {
+                continue;
+            }
+
             if ($this->isTestMetricsDailyReadModelFile($file)) {
                 continue;
             }
@@ -7877,6 +7934,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php',
             'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFiveReviewPromotionPreflight.php',
+        ], true);
+    }
+
+    private function isBigFiveAuthorityV2PromotionReadinessFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV249PromotionReadiness.php',
+            'backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/BigFiveZh6PromotionReadiness.php',
+        ], true);
+    }
+
+    private function isBigFiveAuthorityV2ZhContentOnlyReleaseFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2ZhContentOnlyPublish.php',
+            'backend/app/Services/BigFive/AuthorityV2/ContentOnlyRelease/BigFiveZhContentOnlyPublisher.php',
         ], true);
     }
 
@@ -10592,6 +10665,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/FunnelConversionPage.php',
             'backend/app/Filament/Ops/Widgets/FunnelWidget.php',
         ], true);
+    }
+
+    private function isAnalyticsProviderFreshnessFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php'
+            || str_starts_with($file, 'backend/app/Services/Analytics/ProviderFreshness/');
     }
 
     private function isTestMetricsDailyReadModelFile(string $file): bool

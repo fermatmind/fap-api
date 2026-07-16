@@ -437,7 +437,7 @@ prs:
     branch: codex/big5-authority-v2-zh6-snapshot-48
     depends_on: [BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47]
     train_scope: big5_authority_v2_zh6_final_public_snapshot
-    status: in_progress
+    status: merged
     goal: "Lock the final public-content snapshot for exactly the zh-CN Big Five Hub and five domain pages, with reader-safe copy, one independent FAQ field containing 35 unique questions, exactly three visible public sources per page, deterministic public-field validation, and a new exact package SHA requiring human confirmation."
     allowed_paths:
       - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/**
@@ -478,7 +478,7 @@ prs:
     branch: codex/big5-authority-v2-zh6-promotion-readiness-49
     depends_on: [BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48]
     train_scope: big5_authority_v2_zh6_promotion_readiness
-    status: pending
+    status: ready_to_merge
     goal: "Before working-revision creation, bind the exact ZH6 snapshot to admin_user:1 author/reviewer authority, a narrow solo_operator review record, one uniquely eligible Hub hero/OG Media Library asset, release SHA and permissions, plus a rollback baseline; fail closed on zero or multiple media candidates."
     allowed_paths:
       - AGENTS.md
@@ -487,6 +487,7 @@ prs:
       - backend/app/Console/Commands/PersonalityBigFiveAuthorityV249PromotionReadiness.php
       - backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/**
       - backend/tests/Feature/SEO/BigFiveAuthorityV249Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/**
       - generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/**
       - docs/codex/pr-train.yaml
@@ -27408,7 +27409,7 @@ prs:
     branch: codex/seo-agent-article41-draft-claim-risk-qa-01
     title: "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01 Add article draft claim-risk QA"
     train_scope: seo_agent_gsc_draft_canary_closeout
-    status: pr_open_checks_pending
+    status: ready_to_merge
     scope:
       - Add a backend-only read-only claim-risk QA command for article CMS draft proposals.
       - Emit sanitized JSON evidence for title, meta, FAQ, and internal-link claim-risk verdicts.
@@ -44941,7 +44942,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-runtime-readback-22e
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E: add exact-SHA closeout, revalidation and rollback preflight"
-    status: ready_to_merge
+    status: pr_open_checks_pending
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D
@@ -45027,3 +45028,57 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     current_authorization: await_exact_sha_packet_do_not_start
+
+  - id: ANALYTICS-FRESHNESS-RECONCILE-03
+    repo: fap-api
+    base: main
+    branch: codex/analytics-freshness-reconcile-03
+    title: "ANALYTICS-FRESHNESS-RECONCILE-03: feat(analytics): reconcile provider data freshness"
+    status: ready_to_merge
+    depends_on:
+      - ANALYTICS-RUNTIME-MONITOR-02
+    dependency_repositories:
+      ANALYTICS-RUNTIME-MONITOR-02: fap-web
+    scope:
+      - Add read-only GA4 Data API and Baidu Tongji aggregate adapters with bounded retry, sanitized diagnostics, versioned cache snapshots, and last-known-good retention.
+      - Reconcile site-wide provider directionality only against backend-authoritative analytics_funnel_daily org_id=0 rows and surface the result in the existing authenticated Ops funnel page.
+      - Add an opt-in hourly scheduler and JSON/dry-run command without live provider execution, credential writes, database migrations, CMS, SEO, or deploy changes.
+    allowed_paths:
+      - backend/app/Services/Analytics/ProviderFreshness/**
+      - backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php
+      - backend/bootstrap/app.php
+      - backend/config/analytics.php
+      - backend/.env.example
+      - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
+      - backend/app/Filament/Ops/Widgets/FunnelWidget.php
+      - backend/resources/views/filament/ops/pages/funnel-conversion-page.blade.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Analytics/AnalyticsProviderFreshness*
+      - backend/tests/Unit/Services/Analytics/ProviderFreshness/**
+      - backend/tests/Feature/Ops/FunnelConversionPageTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/analytics/provider-data-freshness-runbook.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && php artisan test tests/Feature/Analytics/AnalyticsProviderFreshnessAdapterTest.php tests/Feature/Analytics/AnalyticsProviderFreshnessServiceTest.php tests/Feature/Analytics/AnalyticsProviderFreshnessCommandTest.php tests/Feature/Analytics/AnalyticsProviderFreshnessSchedulerTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Ops/FunnelConversionPageTest.php --no-ansi
+      - cd backend && php artisan schedule:list
+      - cd backend && php artisan route:list --path=ops --except-vendor
+      - cd backend && composer test
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend_business_truth_with_provider_browser_telemetry

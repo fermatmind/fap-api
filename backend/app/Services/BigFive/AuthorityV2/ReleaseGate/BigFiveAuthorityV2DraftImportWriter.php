@@ -9,10 +9,10 @@ use App\Models\ContentPage;
 use App\Models\LandingSurface;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
+use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 final class BigFiveAuthorityV2DraftImportWriter
@@ -557,7 +557,7 @@ final class BigFiveAuthorityV2DraftImportWriter
     private function assertRequiredTablesExist(): void
     {
         foreach (self::REQUIRED_TABLES as $table) {
-            if (! Schema::hasTable($table)) {
+            if (! SchemaBaseline::hasTable($table)) {
                 throw new RuntimeException('Required CMS authority table is missing: '.$table.'.');
             }
         }

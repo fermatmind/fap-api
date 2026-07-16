@@ -71,6 +71,64 @@
             </div>
         @endif
 
+        @php
+            $freshness = $providerFreshness ?? [];
+            $backendGlobal = $freshness['backend_global'] ?? [];
+            $providerRows = $freshness['providers'] ?? [];
+            $reconciliation = $freshness['reconciliation'] ?? ['status' => 'unknown', 'reason_code' => 'snapshot_unavailable'];
+        @endphp
+
+        <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
+            <div class="mb-4">
+                <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.pages.funnel_conversion.provider_freshness.title') }}</h2>
+                <p class="text-sm text-slate-500">{{ __('ops.pages.funnel_conversion.provider_freshness.description') }}</p>
+                <p class="mt-1 text-xs text-slate-500">{{ __('ops.pages.funnel_conversion.provider_freshness.scope_boundary') }}</p>
+            </div>
+
+            <div class="grid gap-4 xl:grid-cols-3">
+                <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
+                    <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.pages.funnel_conversion.provider_freshness.backend_global') }}</div>
+                    <div class="mt-3 text-lg font-semibold text-slate-950">{{ __('ops.pages.funnel_conversion.provider_freshness.statuses.'.($backendGlobal['status'] ?? 'unknown')) }}</div>
+                    <dl class="mt-3 space-y-2 text-sm text-slate-600">
+                        <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.activity') }}</dt><dd>{{ is_int($backendGlobal['activity'] ?? null) ? number_format($backendGlobal['activity']) : __('ops.pages.funnel_conversion.provider_freshness.unknown_value') }}</dd></div>
+                        <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.data_through') }}</dt><dd>{{ $backendGlobal['data_through'] ?? __('ops.pages.funnel_conversion.provider_freshness.unknown_value') }}</dd></div>
+                        <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.last_refresh') }}</dt><dd class="text-right">{{ $backendGlobal['last_refreshed_at'] ?? __('ops.pages.funnel_conversion.provider_freshness.unknown_value') }}</dd></div>
+                    </dl>
+                </article>
+
+                @foreach (['ga4', 'baidu'] as $providerName)
+                    @php
+                        $provider = $providerRows[$providerName] ?? [];
+                        $visibleMetrics = $providerName === 'ga4'
+                            ? ['event_count', 'active_users', 'page_view', 'view_landing']
+                            : ['page_views', 'visitors'];
+                    @endphp
+                    <article class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
+                        <div class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.pages.funnel_conversion.provider_freshness.providers.'.$providerName) }}</div>
+                        <div class="mt-3 text-lg font-semibold text-slate-950">{{ __('ops.pages.funnel_conversion.provider_freshness.statuses.'.($provider['status'] ?? 'unknown')) }}</div>
+                        <dl class="mt-3 space-y-2 text-sm text-slate-600">
+                            <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.last_attempt') }}</dt><dd class="text-right">{{ $provider['last_attempt_at'] ?? __('ops.pages.funnel_conversion.provider_freshness.unknown_value') }}</dd></div>
+                            <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.last_success') }}</dt><dd class="text-right">{{ $provider['last_success_at'] ?? __('ops.pages.funnel_conversion.provider_freshness.unknown_value') }}</dd></div>
+                            <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.data_through') }}</dt><dd>{{ $provider['data_through'] ?? __('ops.pages.funnel_conversion.provider_freshness.unknown_value') }}</dd></div>
+                            <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.lkg') }}</dt><dd>{{ ($provider['using_lkg'] ?? false) ? __('ops.pages.funnel_conversion.provider_freshness.yes') : __('ops.pages.funnel_conversion.provider_freshness.no') }}</dd></div>
+                            @foreach ($visibleMetrics as $metric)
+                                @if (array_key_exists($metric, $provider['metrics'] ?? []))
+                                    @php $value = $provider['metrics'][$metric]; @endphp
+                                    <div class="flex justify-between gap-3"><dt>{{ __('ops.pages.funnel_conversion.provider_freshness.metrics.'.$metric) }}</dt><dd>{{ is_numeric($value) ? number_format((int) $value) : __('ops.pages.funnel_conversion.provider_freshness.unknown_value') }}</dd></div>
+                                @endif
+                            @endforeach
+                        </dl>
+                    </article>
+                @endforeach
+            </div>
+
+            <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+                <strong>{{ __('ops.pages.funnel_conversion.provider_freshness.reconciliation') }}:</strong>
+                {{ __('ops.pages.funnel_conversion.provider_freshness.statuses.'.($reconciliation['status'] ?? 'unknown')) }} —
+                {{ __('ops.pages.funnel_conversion.provider_freshness.reasons.'.($reconciliation['reason_code'] ?? 'snapshot_unavailable')) }}
+            </div>
+        </section>
+
         <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
             <div class="mb-4 flex items-center justify-between gap-3">
                 <div>
