@@ -86,12 +86,21 @@ final class PersonalityEnneagramAuthorityV2RuntimeReadback extends Command
 
     private function requiredHttpsOrigin(string $name): string
     {
-        $value = rtrim($this->requiredOption($name), '/');
-        if (! filter_var($value, FILTER_VALIDATE_URL) || ! str_starts_with($value, 'https://')) {
-            throw new RuntimeException('--'.$name.' must be an HTTPS URL.');
+        $value = $this->requiredOption($name);
+        $parts = parse_url($value);
+        if (! filter_var($value, FILTER_VALIDATE_URL)
+            || ! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || trim((string) ($parts['host'] ?? '')) === ''
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || ! in_array((string) ($parts['path'] ?? ''), ['', '/'], true)
+            || str_contains($value, '?')
+            || str_contains($value, '#')) {
+            throw new RuntimeException('--'.$name.' must be an exact HTTPS origin without credentials, path, query, or fragment.');
         }
 
-        return $value;
+        return rtrim($value, '/');
     }
 
     /** @return list<string> */

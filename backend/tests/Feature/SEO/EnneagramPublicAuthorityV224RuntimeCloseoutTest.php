@@ -263,6 +263,39 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_standalone_readback_rejects_non_origin_api_and_frontend_base_urls_before_http(): void
+    {
+        $this->seedPublishedEstate();
+        Http::fake();
+        $invalidOrigins = [
+            ['api-base-url', 'https://api.test/api'],
+            ['api-base-url', 'https://api.test?preview=1'],
+            ['api-base-url', 'https://api.test#preview'],
+            ['frontend-base-url', 'https://frontend.test/personality'],
+            ['frontend-base-url', 'https://frontend.test?preview=1'],
+            ['frontend-base-url', 'https://frontend.test#preview'],
+        ];
+
+        foreach ($invalidOrigins as [$option, $invalidOrigin]) {
+            $arguments = [
+                '--phase' => 'pre',
+                '--batch' => 'canary-00',
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+            ];
+            $arguments['--'.$option] = $invalidOrigin;
+
+            $this->artisan('personality:enneagram-authority-v2-runtime-readback', $arguments)
+                ->expectsOutputToContain('--'.$option.' must be an exact HTTPS origin without credentials, path, query, or fragment.')
+                ->expectsOutputToContain('status=FAIL_CLOSED')
+                ->assertFailed();
+        }
+
+        Http::assertNothingSent();
+        $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+        $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+    }
+
     public function test_url_set_readback_rejects_wrong_origin_query_and_fragment_drift(): void
     {
         $this->seedPublishedEstate();
@@ -697,6 +730,38 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
         } finally {
             File::delete([$registerPath, $existingOutput]);
+        }
+    }
+
+    public function test_console_execute_requires_production_pre_readback_before_revision_http_or_write(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
+        Http::fake();
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                '--execute' => true,
+                '--review-register' => $registerPath,
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+            ])
+                ->expectsOutputToContain('--pre-readback is required for production preflight and execute.')
+                ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
+                ->expectsOutputToContain('writes_committed=0')
+                ->assertFailed();
+
+            Http::assertNothingSent();
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+        } finally {
+            File::delete($registerPath);
         }
     }
 

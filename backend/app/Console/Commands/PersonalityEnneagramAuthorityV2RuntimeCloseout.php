@@ -82,13 +82,14 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         $frontendSha = $this->requiredOption('frontend-deployed-sha');
         $apiBaseUrl = $this->requiredHttpsOrigin('api-base-url');
         $frontendBaseUrl = $this->requiredHttpsOrigin('frontend-base-url');
+        $testingOverride = app()->environment('testing') && (bool) $this->option('allow-testing');
+        if ($preReadback === null && ! $testingOverride) {
+            throw new RuntimeException('--pre-readback is required for production preflight and execute.');
+        }
         $this->assertDeployedRevisions($backendSha, $frontendSha, $frontendBaseUrl);
         $revalidationEndpoint = $this->revalidationEndpoint();
 
         if ($preflight) {
-            if (! app()->environment('testing') && $preReadback === null) {
-                throw new RuntimeException('--pre-readback is required for a production authorization packet.');
-            }
             $result = $closeout->preflight(
                 $releaseReport,
                 $releaseReportSha,
