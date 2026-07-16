@@ -6,8 +6,8 @@ namespace App\Services\Personality\AuthorityV2;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
@@ -449,7 +449,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
     private function assertSchema(): void
     {
         foreach (['personality_public_content_assets', 'personality_public_content_asset_revisions'] as $table) {
-            if (! Schema::hasTable($table)) {
+            if (! SchemaBaseline::hasTable($table)) {
                 throw new RuntimeException('Required shared personality revision table is missing: '.$table.'.');
             }
         }
@@ -463,7 +463,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
             ],
         ] as $table => $columns) {
             foreach ($columns as $column) {
-                if (! Schema::hasColumn($table, $column)) {
+                if (! SchemaBaseline::hasColumn($table, $column)) {
                     throw new RuntimeException('Required shared personality revision column is missing: '.$table.'.'.$column.'.');
                 }
             }

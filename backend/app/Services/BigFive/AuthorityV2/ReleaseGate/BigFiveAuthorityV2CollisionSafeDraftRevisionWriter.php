@@ -14,10 +14,10 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileRevision;
 use App\Services\Personality\AuthorityV2\PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter;
+use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
@@ -701,7 +701,7 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
     private function assertSchema(): void
     {
         foreach (self::REQUIRED_TABLES as $table) {
-            if (! Schema::hasTable($table)) {
+            if (! SchemaBaseline::hasTable($table)) {
                 throw new RuntimeException('Required collision-safe draft revision table is missing: '.$table.'.');
             }
         }
@@ -715,7 +715,7 @@ final class BigFiveAuthorityV2CollisionSafeDraftRevisionWriter
             'topic_profile_revisions' => ['authority_asset_key', 'authority_package_sha256', 'workflow_state'],
         ] as $table => $columns) {
             foreach ($columns as $column) {
-                if (! Schema::hasColumn($table, $column)) {
+                if (! SchemaBaseline::hasColumn($table, $column)) {
                     throw new RuntimeException('Required collision-safe draft revision column is missing: '.$table.'.'.$column.'.');
                 }
             }

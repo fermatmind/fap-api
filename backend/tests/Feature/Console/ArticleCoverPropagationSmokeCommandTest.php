@@ -129,7 +129,7 @@ final class ArticleCoverPropagationSmokeCommandTest extends TestCase
             'org_id' => 0,
             'category_id' => (int) $category->id,
             'author_name' => 'Fermat Institute',
-            'slug' => 'big-five-cover-smoke',
+            'slug' => 'article-cover-smoke',
             'locale' => 'zh-CN',
             'title' => 'Big Five cover smoke',
             'excerpt' => 'Cover smoke excerpt.',
@@ -178,13 +178,16 @@ final class ArticleCoverPropagationSmokeCommandTest extends TestCase
             'locale' => 'zh-CN',
             'seo_title' => 'Big Five cover smoke SEO',
             'seo_description' => 'Cover smoke SEO description.',
-            'canonical_url' => 'https://fermatmind.com/zh/articles/big-five-cover-smoke',
+            'canonical_url' => 'https://fermatmind.com/zh/articles/article-cover-smoke',
             'og_title' => 'Big Five cover smoke SEO',
             'og_description' => 'Cover smoke SEO description.',
             'og_image_url' => $coverUrl,
             'robots' => 'index,follow',
             'schema_json' => [
                 'image' => $coverUrl,
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => true,
+                ],
             ],
             'is_indexable' => true,
         ]);

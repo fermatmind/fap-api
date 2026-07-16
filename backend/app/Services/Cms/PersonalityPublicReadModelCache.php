@@ -63,8 +63,10 @@ final class PersonalityPublicReadModelCache
             if (! is_string(Cache::get($this->lkgKey($surface, $type, $locale)))) {
                 Cache::put($this->lkgKey($surface, $type, $locale), $version, self::LKG_TTL_SECONDS);
             }
-        } catch (Throwable) {
-            // The versioned payload is already usable. Pointer repair is best effort.
+        } catch (Throwable $throwable) {
+            $this->recordState($surface, $locale, 'fresh', $throwable);
+
+            return ['state' => 'fresh', 'payload' => $payload];
         }
 
         $this->recordState($surface, $locale, 'fresh');
@@ -236,7 +238,7 @@ final class PersonalityPublicReadModelCache
                 'error_class' => $throwable !== null ? $throwable::class : null,
             ]));
         } catch (Throwable) {
-            // Cache observability must never take down the public read path.
+            return;
         }
     }
 }

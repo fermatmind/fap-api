@@ -685,7 +685,7 @@ final class PersonalityPublicAssetReadModelCache
                 'error_class' => $throwable !== null ? $throwable::class : null,
             ]));
         } catch (Throwable) {
-            // Cache observability must never take down a public read.
+            return;
         }
     }
 }
