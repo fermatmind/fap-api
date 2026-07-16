@@ -116,7 +116,7 @@ final class EnneagramPublicAuthorityV219MediaOgTest extends TestCase
     {
         foreach (['media-specifications.json', 'localized-og-mappings.json'] as $file) {
             $document = $this->readJson(self::PACKAGE_DIR.'/'.$file);
-            $serialized = strtolower(json_encode($document, JSON_THROW_ON_ERROR));
+            $serialized = strtolower(json_encode($document, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
             $this->assertStringNotContainsString('http://', $serialized, $file);
             $this->assertStringNotContainsString('https://', $serialized, $file);
             $this->assertStringNotContainsString('frontend/public', $serialized, $file);

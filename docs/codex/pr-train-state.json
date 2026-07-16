@@ -95196,7 +95196,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18"
     ],
-    "status": "ready_to_merge",
+    "status": "review_fix_local_verified",
     "commit_sha": "ee738786cd63e5a2a8595fdb2daff43fe1ced328",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3133",
@@ -95228,12 +95228,16 @@
       "required_reviews": {
         "status": "pass",
         "evidence": "No required review rule applies to this planning-only PR; GitHub reports zero reviews and zero review threads. This does not represent or substitute for manual Media Library rights review, which remains pending for all 58 specifications."
+      },
+      "automated_review_fix": {
+        "status": "pass",
+        "evidence": "Accepted the exact-head P2 on discussion_r3592882206: the forbidden URL/frontend path scan now serializes with JSON_UNESCAPED_SLASHES, so standard URLs and frontend/public literals cannot evade the invariant through JSON slash escaping. Focused 6/3601, Pint, PHP syntax, YAML/JSON, and diff checks pass locally."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -95276,9 +95280,14 @@
         "at": "2026-07-16T05:30:57Z",
         "status": "ready_to_merge",
         "note": "All nine GitHub checks passed on immutable head 2ce8f475ad7862ea37dc496493080f097180551c. GitHub is CLEAN/MERGEABLE, the diff remains exactly seven allowed files, there are zero reviews and zero review threads, and the 58 unique specifications plus 116 unique locale mappings remain fail-closed for rights, upload, URL, publication, and every execution boundary. This ledger-only update must pass a fresh complete check cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T05:39:05Z",
+        "status": "review_fix_local_verified",
+        "note": "Final ledger head d5ff71ef5924cbff67a64693e1ec7fab7d7bd462 passed all nine checks, then exact-head automated review found one valid P2: default JSON slash escaping could let an unasserted standard URL or frontend/public path evade the forbidden-literal scan. The test now uses JSON_UNESCAPED_SLASHES; focused 6/3601, Pint, syntax, YAML/JSON, and diff validation pass. Fresh GitHub checks and resolution of discussion_r3592882206 remain required before merge."
       }
     ],
-    "updated_at": "2026-07-16T05:30:57Z"
+    "updated_at": "2026-07-16T05:39:05Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20",
