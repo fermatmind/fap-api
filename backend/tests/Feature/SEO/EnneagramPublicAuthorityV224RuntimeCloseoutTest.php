@@ -14,6 +14,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
@@ -249,8 +250,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--batch' => 'canary-00',
                 '--api-base-url' => 'https://api.test',
                 '--frontend-base-url' => 'https://frontend.test',
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
                 '--review-register' => $registerPath,
                 '--require-fresh-api-cache' => true,
+                '--allow-testing' => true,
             ])
                 ->expectsOutputToContain('status=PASS_POST_RUNTIME_READBACK')
                 ->expectsOutputToContain('target_count=8')
@@ -278,7 +282,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--batch' => 'all',
                 '--api-base-url' => 'https://api.test',
                 '--frontend-base-url' => 'https://frontend.test',
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
                 '--review-register' => $registerPath,
+                '--allow-testing' => true,
             ])
                 ->expectsOutputToContain('status=FAIL_CLOSED')
                 ->expectsOutputToContain('Private review register schema, source, package, or row count is invalid.')
@@ -311,6 +318,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--batch' => 'canary-00',
                 '--api-base-url' => 'https://api.test',
                 '--frontend-base-url' => 'https://frontend.test',
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--allow-testing' => true,
             ];
             $arguments['--'.$option] = $invalidOrigin;
 
@@ -323,6 +333,53 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         Http::assertNothingSent();
         $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
         $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+    }
+
+    public function test_standalone_production_readback_frontend_revision_probe_disables_redirects(): void
+    {
+        $this->seedPublishedEstate();
+        $revisionPath = base_path('../REVISION');
+        $previousEnvironment = app()->environment();
+        $revisionExisted = File::isFile($revisionPath);
+        $revisionContents = $revisionExisted ? File::get($revisionPath) : null;
+        File::put($revisionPath, self::BACKEND_SHA);
+        app()->detectEnvironment(static fn (): string => 'production');
+        $redirectsDisabled = false;
+        Http::fake(function (Request $request, array $options) use (&$redirectsDisabled): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+            if ($request->url() === 'https://frontend.test/revision') {
+                $redirectsDisabled = ($options['allow_redirects'] ?? null) === false;
+
+                return Http::response('', 302, ['Location' => 'https://staging-mirror.test/revision']);
+            }
+
+            return Http::response(['ok' => false], 404);
+        });
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-readback', [
+                '--phase' => 'pre',
+                '--batch' => 'all',
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--frontend-revision-url' => 'https://frontend.test/revision',
+            ])
+                ->expectsOutputToContain('Deployed frontend revision endpoint does not match the exact readback SHA.')
+                ->expectsOutputToContain('status=FAIL_CLOSED')
+                ->assertFailed();
+
+            $this->assertTrue($redirectsDisabled);
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        } finally {
+            app()->detectEnvironment(static fn (): string => $previousEnvironment);
+            if ($revisionExisted && is_string($revisionContents)) {
+                File::put($revisionPath, $revisionContents);
+            } else {
+                File::delete($revisionPath);
+            }
+        }
     }
 
     public function test_url_set_readback_rejects_wrong_origin_query_and_fragment_drift(): void
@@ -375,6 +432,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $report,
                     'https://api.test',
                     'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
                 );
                 $this->fail('Expected HTML canonical drift to fail closed: '.$invalidCanonical);
             } catch (\RuntimeException $exception) {
@@ -406,6 +465,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $report,
                     'https://api.test',
                     'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
                 );
                 $this->fail('Expected HTML hreflang drift to fail closed: '.$invalidHreflangUrl);
             } catch (\RuntimeException $exception) {
@@ -431,6 +492,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $report,
                 'https://api.test',
                 'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
                 false,
                 ['Private Human Reviewer 1'],
             );
@@ -442,6 +505,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
         $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
         $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+    }
+
+    public function test_html_readback_rejects_stale_rendered_section_content(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, omitSectionHtml: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected stale rendered section content to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_visible_section_mismatch', $exception->getMessage());
+        }
     }
 
     public function test_runtime_readback_rejects_api_redirect(): void
@@ -457,6 +542,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $report,
                 'https://api.test',
                 'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
             );
             $this->fail('Expected API redirect to fail closed.');
         } catch (\RuntimeException $exception) {
@@ -537,6 +624,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $report,
             'https://api.test',
             'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
         );
         $closeout = $this->closeout();
         $preflight = $closeout->preflight(
@@ -900,6 +989,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $report,
             'https://api.test',
             'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
         );
         $valid = $this->closeout()->preflight(
             $report,
@@ -919,6 +1010,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             'api_base_origin' => 'https://api.test',
             'frontend_base_origin' => 'https://frontend.test',
         ], data_get($valid, 'authorization_packet.pre_readback.runtime_origins'));
+        $this->assertSame([
+            'backend_deployed_sha' => self::BACKEND_SHA,
+            'frontend_deployed_sha' => self::FRONTEND_SHA,
+        ], data_get($valid, 'authorization_packet.pre_readback.deployed_revisions'));
 
         $invalidArtifacts = [
             'partial batch' => [...$readback, 'batch' => 'canary-00'],
@@ -936,6 +1031,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 'runtime_origins' => ['frontend_base_origin' => 'https://staging-frontend.test'],
             ]),
             'missing origins' => array_diff_key($readback, ['runtime_origins' => true]),
+            'backend deployed SHA drift' => array_replace_recursive($readback, [
+                'deployed_revisions' => ['backend_deployed_sha' => str_repeat('c', 40)],
+            ]),
+            'frontend deployed SHA drift' => array_replace_recursive($readback, [
+                'deployed_revisions' => ['frontend_deployed_sha' => str_repeat('d', 40)],
+            ]),
+            'missing deployed revisions' => array_diff_key($readback, ['deployed_revisions' => true]),
         ];
         foreach ($invalidArtifacts as $label => $invalid) {
             try {
@@ -1104,6 +1206,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $redirectSurface = null,
         ?object $discoverabilityState = null,
         bool $splitPrivateReviewerHtml = false,
+        bool $omitSectionHtml = false,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1111,7 +1214,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $privateReviewerLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitSectionHtml, $privateReviewerLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1175,6 +1278,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'locale' => (string) $asset->locale,
                         'title' => (string) $asset->title,
                         'summary' => (string) $asset->summary,
+                        'sections' => is_array($asset->content_sections_json) ? $asset->content_sections_json : [],
                         'seo' => ['description' => (string) $asset->summary],
                         'canonical_path' => (string) data_get($asset->canonical_json, 'path'),
                         'hreflang' => $hreflang,
@@ -1241,11 +1345,31 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     }
                 }
 
+                $sectionHtml = '<section>stale cached section content</section>';
+                if (! $omitSectionHtml) {
+                    $sectionHtml = '';
+                    foreach (is_array($asset->content_sections_json) ? $asset->content_sections_json : [] as $section) {
+                        if (! is_array($section)) {
+                            continue;
+                        }
+                        $sectionTitle = trim((string) ($section['title'] ?? $section['heading'] ?? ''));
+                        $sectionBody = trim((string) ($section['body_md'] ?? $section['body'] ?? ''));
+                        $sectionHtml .= '<section>';
+                        if ($sectionTitle !== '') {
+                            $sectionHtml .= '<h2>'.htmlspecialchars($sectionTitle, ENT_QUOTES | ENT_HTML5).'</h2>';
+                        }
+                        if ($sectionBody !== '') {
+                            $sectionHtml .= (string) Str::markdown($sectionBody);
+                        }
+                        $sectionHtml .= '</section>';
+                    }
+                }
+
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .implode('', $hreflang)
-                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.'</main>'.$privateValue.'</body></html>');
+                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.'</main>'.$privateValue.'</body></html>');
             }
 
             return Http::response(['ok' => false], 404);

@@ -222,11 +222,14 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
                 $publicProjectionFingerprint,
                 $stableFingerprint,
                 $runtimeEndpoints,
+                $backendDeployedSha,
+                $frontendDeployedSha,
             );
             $preReadbackBinding = [
                 'sha256' => $preReadbackSha256,
                 'observed_at' => (string) $preReadback['observed_at'],
                 'runtime_origins' => $preReadback['runtime_origins'],
+                'deployed_revisions' => $preReadback['deployed_revisions'],
                 'public_projection_fingerprint' => (string) ($preReadback['public_projection_fingerprint'] ?? ''),
                 'stable_identity_discoverability_fingerprint' => (string) ($preReadback['stable_identity_discoverability_fingerprint'] ?? ''),
                 'url_sets' => $preReadback['url_sets'] ?? null,
@@ -305,6 +308,8 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         string $publicProjectionFingerprint,
         string $stableFingerprint,
         array $runtimeEndpoints,
+        string $backendDeployedSha,
+        string $frontendDeployedSha,
     ): void {
         $observedAtRaw = trim((string) ($preReadback['observed_at'] ?? ''));
         if ($observedAtRaw === '') {
@@ -342,6 +347,13 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         ];
         if (($preReadback['runtime_origins'] ?? null) !== $expectedOrigins) {
             throw new RuntimeException('Exact pre-readback runtime origins do not match the authorization endpoints.');
+        }
+        $expectedRevisions = [
+            'backend_deployed_sha' => $backendDeployedSha,
+            'frontend_deployed_sha' => $frontendDeployedSha,
+        ];
+        if (($preReadback['deployed_revisions'] ?? null) !== $expectedRevisions) {
+            throw new RuntimeException('Exact pre-readback deployed revisions do not match the authorization SHAs.');
         }
 
         $expectedRows = [];

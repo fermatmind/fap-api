@@ -12,6 +12,7 @@ use DOMElement;
 use DOMXPath;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use RuntimeException;
 
 final class EnneagramPublicAuthorityV224RuntimeReadback
@@ -33,6 +34,8 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         array $releaseReport,
         string $apiBaseUrl,
         string $frontendBaseUrl,
+        string $backendDeployedSha,
+        string $frontendDeployedSha,
         bool $requireFreshApiCache = false,
         array $sensitiveValues = [],
     ): array {
@@ -42,6 +45,10 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $runtimeOrigins = [
             'api_base_origin' => $this->exactHttpsOrigin($apiBaseUrl, 'API base origin'),
             'frontend_base_origin' => $this->exactHttpsOrigin($frontendBaseUrl, 'frontend base origin'),
+        ];
+        $deployedRevisions = [
+            'backend_deployed_sha' => $this->exactGitSha($backendDeployedSha, 'backend deployed SHA'),
+            'frontend_deployed_sha' => $this->exactGitSha($frontendDeployedSha, 'frontend deployed SHA'),
         ];
         $apiBaseUrl = $runtimeOrigins['api_base_origin'];
         $frontendBaseUrl = $runtimeOrigins['frontend_base_origin'];
@@ -87,6 +94,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'phase' => $phase,
             'batch' => $batch,
             'runtime_origins' => $runtimeOrigins,
+            'deployed_revisions' => $deployedRevisions,
             'target_count' => count($targets),
             'api_read_count' => count($targets),
             'html_read_count' => count($targets),
@@ -301,6 +309,11 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if (! in_array('html_private_reviewer_exposed', $issues, true)) {
             $this->assertNoSensitiveValues($visible, $sensitiveValues, 'html', $issues);
         }
+        $this->validateVisibleSections(
+            is_array($v1['sections'] ?? null) ? $v1['sections'] : [],
+            $visible,
+            $issues,
+        );
         foreach (is_array($v1['faq'] ?? null) ? $v1['faq'] : [] as $faq) {
             $question = is_array($faq) ? trim((string) ($faq['question'] ?? $faq['q'] ?? '')) : '';
             if ($question !== '' && ! str_contains($visible, $this->normalizedVisibleText($question))) {
@@ -633,6 +646,56 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     private function normalizedVisibleText(string $value): string
     {
         return preg_replace('/\s+/u', ' ', trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5))) ?? '';
+    }
+
+    /** @param list<mixed> $sections @param list<string> $issues */
+    private function validateVisibleSections(array $sections, string $visible, array &$issues): void
+    {
+        if ($sections === []) {
+            $issues[] = 'html_visible_section_mismatch';
+
+            return;
+        }
+        foreach ($sections as $section) {
+            if (! is_array($section)) {
+                $issues[] = 'html_visible_section_mismatch';
+
+                return;
+            }
+            $expected = array_values(array_filter([
+                $this->normalizedVisibleText((string) ($section['title'] ?? $section['heading'] ?? '')),
+                $this->normalizedMarkdownText((string) ($section['body_md'] ?? $section['body'] ?? '')),
+            ], static fn (string $value): bool => $value !== ''));
+            if ($expected === []) {
+                $issues[] = 'html_visible_section_mismatch';
+
+                return;
+            }
+            foreach ($expected as $text) {
+                if (! str_contains($visible, $text)) {
+                    $issues[] = 'html_visible_section_mismatch';
+
+                    return;
+                }
+            }
+        }
+    }
+
+    private function normalizedMarkdownText(string $value): string
+    {
+        $html = (string) Str::markdown($value);
+        $text = preg_replace('/<[^>]+>/', ' ', $html) ?? $html;
+
+        return $this->normalizedVisibleText($text);
+    }
+
+    private function exactGitSha(string $value, string $label): string
+    {
+        if (preg_match('/^[0-9a-f]{40}$/', $value) !== 1) {
+            throw new RuntimeException($label.' must be an exact lowercase 40-character Git SHA.');
+        }
+
+        return $value;
     }
 
     /** @param list<string> $sensitiveValues @param list<string> $issues */

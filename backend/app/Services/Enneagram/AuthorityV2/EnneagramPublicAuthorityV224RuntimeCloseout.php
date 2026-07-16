@@ -207,6 +207,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
                 $releaseReport,
                 $apiBaseUrl,
                 $frontendBaseUrl,
+                $backendDeployedSha,
+                $frontendDeployedSha,
                 true,
                 $privateReviewerNames,
             );
