@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "cfa046421fee49f0b7c6d235f2b047af9472d2b0",
+    "commit_sha": "ee76f2f31cd3dacbf3bf12dee860b140916bcaac",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 54 tests / 884 assertions on latest main. Readback now compares the API title, summary, sections, SEO, canonical path, source package/hash, and review state directly to the current DB public asset before accepting pre or post evidence; stale API+HTML pairs fail closed. Private route detection covers slash, query, fragment, and bare-route boundaries. Rendered section, deployed-SHA, redirect, exact evidence/origin/URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 56 tests / 892 assertions on latest main. Post-readback now requires non-empty visible-evidence sources and claim mappings, eligible=true, and every source title in rendered HTML. API FAQ rows are bound to the current DB asset and both questions and answers must be visible. Payload/DB provenance, private-route, rendered-section, deployed-SHA, redirect, exact origin/URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 219 tests / 28890 assertions after requiring API payload/DB public-asset equality and closing query, fragment, and bare private-route boundaries."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 221 tests / 28898 assertions after fail-closing missing FAQ answers and incomplete post-readback visible evidence."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact ready-ledger head 0c3ac3fa00a7ad9fa3ab3d91d2f62d3b93e67fc6 passed all nine required GitHub checks and was CLEAN/MERGEABLE, but its exact-head review raised two valid same-scope P2 findings. Both are fixed and behavior-locked in cfa046421fee49f0b7c6d235f2b047af9472d2b0; require a fresh complete GitHub check and exact-head review cycle before squash merge."
+        "evidence": "Exact head fc392059e9ceb67ab2d5c01c346738ccde0fcd48 passed initial checks and its exact-head review raised two valid same-scope P2 findings. Both are fixed and behavior-locked in ee76f2f31cd3dacbf3bf12dee860b140916bcaac; require a fresh complete GitHub check and exact-head review cycle before squash merge."
       }
     },
     "scope_validation": {
@@ -96413,9 +96413,14 @@
         "at": "2026-07-16T19:24:00Z",
         "status": "review_fix_local_validation_passed",
         "note": "The exact review of ready-ledger head 0c3ac3fa0 found that pre-readback DB fingerprints were not directly tied to HTTP payload content/provenance and private-route matching missed query, fragment, and bare forms. Code commit cfa046421fee49f0b7c6d235f2b047af9472d2b0 now compares API title/summary/sections/SEO/canonical/source/review fields to the current DB public asset for every pre/post row and rejects all / ? # end private-route boundaries. Final focused 54/884, cache/API 8/72, classifier 1/2, full Enneagram V2 219/28890, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The initial focused run exposed only a new regex delimiter mistake and was fully rerun after correction. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T19:35:56Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The latest exact-head review found post-readback could accept a missing visible-evidence block and FAQ validation checked questions without answers. Code commit ee76f2f31cd3dacbf3bf12dee860b140916bcaac now requires non-empty sources and claim mappings, eligible=true, visible source titles, DB-bound FAQ rows, and visible question/answer pairs. Final focused 56/892, cache/API 8/72, classifier 1/2, full Enneagram V2 221/28898, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T19:24:00Z"
+    "updated_at": "2026-07-16T19:35:56Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
