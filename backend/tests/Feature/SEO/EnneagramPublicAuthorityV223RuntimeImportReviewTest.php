@@ -175,7 +175,7 @@ SQL);
             ->count());
     }
 
-    public function test_console_binder_preflight_is_redacted_and_unapproved_bind_writes_nothing(): void
+    public function test_console_binder_preflight_is_redacted_and_invalid_authorization_or_admin_id_writes_nothing(): void
     {
         $this->seedImportedWorkspace();
         $register = $this->reviewRegister();
@@ -208,6 +208,29 @@ SQL);
         ])
             ->expectsOutputToContain('"status": "FAIL_CLOSED"')
             ->assertFailed();
+
+        $approvalPhrase = $this->binder()->approvalPhrase(
+            self::TEST_DEPLOY_SHA,
+            (string) $plan['package_sha256'],
+            $registerSha,
+            (string) $plan['preflight_fingerprint'],
+        );
+        foreach (['abc', '12abc', '0', '-1', '999999999999999999999999999999999999'] as $invalidAdminUserId) {
+            $this->artisan('personality:enneagram-authority-v2-review-evidence-binder', [
+                '--review-register' => $path,
+                '--bind' => true,
+                '--confirm-package-sha256' => (string) $plan['package_sha256'],
+                '--confirm-review-register-sha256' => $registerSha,
+                '--confirm-preflight-fingerprint' => (string) $plan['preflight_fingerprint'],
+                '--confirm-writer-deploy-sha' => self::TEST_DEPLOY_SHA,
+                '--operator-approved' => $approvalPhrase,
+                '--bound-by-admin-user-id' => $invalidAdminUserId,
+                '--allow-testing' => true,
+                '--json' => true,
+            ])
+                ->expectsOutputToContain('"status": "FAIL_CLOSED"')
+                ->assertFailed();
+        }
 
         $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
         $this->assertSame(116, PersonalityPublicContentAssetRevision::query()

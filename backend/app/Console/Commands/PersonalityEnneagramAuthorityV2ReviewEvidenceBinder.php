@@ -83,16 +83,31 @@ final class PersonalityEnneagramAuthorityV2ReviewEvidenceBinder extends Command
             throw new RuntimeException('Operator human-review binder authorization phrase mismatch.');
         }
 
-        $boundByAdminUserId = trim((string) $this->option('bound-by-admin-user-id'));
-
         return $binder->bind(
             $releaseReport,
             $reviewRegister,
             $reviewRegisterSha256,
             $packageSha256,
             $preflightFingerprint,
-            $boundByAdminUserId !== '' ? (int) $boundByAdminUserId : null,
+            $this->optionalPositiveIntegerOption('bound-by-admin-user-id'),
         );
+    }
+
+    private function optionalPositiveIntegerOption(string $name): ?int
+    {
+        $value = trim((string) $this->option($name));
+        if ($value === '') {
+            return null;
+        }
+        if (preg_match('/^[1-9][0-9]*$/D', $value) !== 1) {
+            throw new RuntimeException('--'.$name.' must be a strict positive integer when provided.');
+        }
+        $parsed = filter_var($value, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+        if (! is_int($parsed)) {
+            throw new RuntimeException('--'.$name.' must be a strict positive integer within the supported integer range.');
+        }
+
+        return $parsed;
     }
 
     /** @return array{array<string, mixed>, string} */
