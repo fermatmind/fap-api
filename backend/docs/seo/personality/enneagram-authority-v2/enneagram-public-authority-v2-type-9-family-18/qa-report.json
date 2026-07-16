@@ -73,6 +73,19 @@
     "repair": "Aligned the visible instinct-boundary sentence to the canonical does-not-describe-bodily-mechanisms wording without changing its claim, evidence, manual-review, or release truth.",
     "final_status": "pass"
   },
+  "aggregate_duplicate_repair": {
+    "status": "pass",
+    "asset_key": "en|instinctual_subtype:type-9/one-to-one",
+    "asset_sha256": "ebb3c272d4856a70b66f6a21e4460527505fbc9086f224f2c1ce902485d42280",
+    "previous_duplicate_of_asset_key": "en|instinctual_subtype:type-5/social",
+    "changed_field": "sections[evidence_boundary].body:first_sentence",
+    "preserved_second_sentence": true,
+    "claim_boundary_unchanged": true,
+    "manual_review_state_unchanged": true,
+    "release_truth_unchanged": true,
+    "aggregate_duplicate_count_after_repair": 0,
+    "human_review_completed": false
+  },
   "final_qa": {
     "status": "pass_for_manual_review_handoff",
     "asset_count": 12,

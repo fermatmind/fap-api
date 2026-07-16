@@ -1,14 +1,14 @@
 {
     "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
     "schema_version": "enneagram_public_authority_v2_release_gate.v2",
-    "status": "fail_closed",
+    "status": "hold_missing_human_review",
     "decision": "HOLD",
     "ok": false,
-    "automated_gate_passed": false,
+    "automated_gate_passed": true,
     "human_review_passed": false,
     "media_boundary_passed": true,
     "release_eligible": false,
-    "package_sha256": "dc473a41cd8a0c7fe7aa51cc1d5d6d14e7cfcceaee5af13deb82047e4b5be187",
+    "package_sha256": "2526762097cb661630aad10076179f6171e568913c89a87c233941191ade2199",
     "counts": {
         "identities": 58,
         "assets": 116,
@@ -37,47 +37,17 @@
         "missing_human_reviews": 116
     },
     "collision_preflight": {
-        "status": "fail",
+        "status": "pass",
         "unique_asset_keys": 116,
         "unique_paths": 116,
-        "errors": [
-            {
-                "code": "editorial_integrity_duplicate_sentence",
-                "subject": "en|instinctual_subtype:type-4/social"
-            },
-            {
-                "code": "editorial_integrity_duplicate_sentence",
-                "subject": "en|instinctual_subtype:type-9/one-to-one"
-            },
-            {
-                "code": "editorial_integrity_gate_failed",
-                "subject": "aggregate"
-            }
-        ]
+        "errors": []
     },
     "editorial_integrity_gate": {
-        "status": "fail_closed",
-        "automated_gate_passed": false,
+        "status": "ready_for_human_review",
+        "automated_gate_passed": true,
         "qa_row_count": 116,
-        "issue_count": 2,
-        "issues": [
-            {
-                "gate": "duplicate_template_risk",
-                "code": "duplicate_sentence",
-                "asset_key": "en|instinctual_subtype:type-4/social",
-                "path": "assets.52.text.15",
-                "message": "Sentence duplicates assets.40.text.15.",
-                "duplicate_of_asset_key": "en|instinctual_subtype:type-3/social"
-            },
-            {
-                "gate": "duplicate_template_risk",
-                "code": "duplicate_sentence",
-                "asset_key": "en|instinctual_subtype:type-9/one-to-one",
-                "path": "assets.109.text.15",
-                "message": "Sentence duplicates assets.60.text.15.",
-                "duplicate_of_asset_key": "en|instinctual_subtype:type-5/social"
-            }
-        ],
+        "issue_count": 0,
+        "issues": [],
         "validates": [
             "unsupported_claims",
             "competitor_as_science",
@@ -343,7 +313,7 @@
             "code": "type-4/social",
             "path": "/en/personality/enneagram/type-4/instincts/social",
             "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
-            "asset_sha256": "3ebbe2f7db210f6f4067a909ea40b7fad7e82bd67c236317f15cc621ca101e1d"
+            "asset_sha256": "854afe6c6de5ffd72643013ad032c2104076a721def982d2814ae26dc1afdb84"
         },
         {
             "asset_key": "en|instinctual_subtype:type-5/one-to-one",
@@ -473,7 +443,7 @@
             "code": "type-9/one-to-one",
             "path": "/en/personality/enneagram/type-9/instincts/one-to-one",
             "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
-            "asset_sha256": "e77625153f84dbaa851345077278ea678e5b8301305034a14c057a48b5d3b914"
+            "asset_sha256": "ebb3c272d4856a70b66f6a21e4460527505fbc9086f224f2c1ce902485d42280"
         },
         {
             "asset_key": "en|instinctual_subtype:type-9/self-preservation",
@@ -2107,7 +2077,7 @@
         {
             "asset_key": "en|instinctual_subtype:type-4/social",
             "path": "/en/personality/enneagram/type-4/instincts/social",
-            "asset_sha256": "3ebbe2f7db210f6f4067a909ea40b7fad7e82bd67c236317f15cc621ca101e1d",
+            "asset_sha256": "854afe6c6de5ffd72643013ad032c2104076a721def982d2814ae26dc1afdb84",
             "required_fields": [
                 "reviewer",
                 "reviewed_at",
@@ -2250,7 +2220,7 @@
         {
             "asset_key": "en|instinctual_subtype:type-9/one-to-one",
             "path": "/en/personality/enneagram/type-9/instincts/one-to-one",
-            "asset_sha256": "e77625153f84dbaa851345077278ea678e5b8301305034a14c057a48b5d3b914",
+            "asset_sha256": "ebb3c272d4856a70b66f6a21e4460527505fbc9086f224f2c1ce902485d42280",
             "required_fields": [
                 "reviewer",
                 "reviewed_at",
@@ -3149,7 +3119,7 @@
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
-            "sha256": "1e3f884e17061ae453379e216f11e60f5d16647d5d55b253195f0841df10ec2d"
+            "sha256": "868fcf20048758118edd5ba3fa21ef76082ff3333fb27a687a84f943aca52ea0"
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
@@ -3169,7 +3139,7 @@
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
-            "sha256": "fe9873c4370d5d95b6d068c65b8f90488f598f94b2a4eac90fef1de901244e3e"
+            "sha256": "09b12f5cd6e0a2ff2b2fd31a2c3e901e71ee64d08df073e119bf66965336612a"
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/qa-report.json",
@@ -3189,7 +3159,7 @@
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/qa-report.json",
-            "sha256": "1eac3dc4504b8df54ed23589b0971895011a57fd055197f53b6fe61de18ba264"
+            "sha256": "8a5424ab133e70abce7c83c041f8f0a74317ecd8255b22a463ac933872214e19"
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/qa-report.json",
@@ -3209,7 +3179,7 @@
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/qa-report.json",
-            "sha256": "e32354cf3d495b12d1688d0ad2d158013b58fbddc6a206292874d94095f7c331"
+            "sha256": "305a10f10ff6f07b0db3c0c7771df7077eb2b24f60f724c617221edb39c42050"
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
@@ -3225,10 +3195,10 @@
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-link-graph-20/link-graph.json",
-            "sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd"
+            "sha256": "1049500c8a5a62772b959723a37d7827b5ccd50c184cadd6eaa626f9b7360fe1"
         }
     ],
-    "graph_manifest_sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd",
+    "graph_manifest_sha256": "1049500c8a5a62772b959723a37d7827b5ccd50c184cadd6eaa626f9b7360fe1",
     "qa_sources": [
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/qa-report.json",
@@ -3248,7 +3218,7 @@
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/qa-report.json",
-            "sha256": "1eac3dc4504b8df54ed23589b0971895011a57fd055197f53b6fe61de18ba264"
+            "sha256": "8a5424ab133e70abce7c83c041f8f0a74317ecd8255b22a463ac933872214e19"
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/qa-report.json",
@@ -3268,28 +3238,14 @@
         },
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/qa-report.json",
-            "sha256": "e32354cf3d495b12d1688d0ad2d158013b58fbddc6a206292874d94095f7c331"
+            "sha256": "305a10f10ff6f07b0db3c0c7771df7077eb2b24f60f724c617221edb39c42050"
         }
     ],
-    "errors": [
-        {
-            "code": "editorial_integrity_duplicate_sentence",
-            "subject": "en|instinctual_subtype:type-4/social"
-        },
-        {
-            "code": "editorial_integrity_duplicate_sentence",
-            "subject": "en|instinctual_subtype:type-9/one-to-one"
-        },
-        {
-            "code": "editorial_integrity_gate_failed",
-            "subject": "aggregate"
-        }
-    ],
+    "errors": [],
     "release_boundary": {
         "manual_review_requirement": "116/116 named human review records bound to exact asset SHA256",
         "media_requirement": "116/116 authority assets map to hero=null, inline=[], og=null with zero Media Library writes",
         "current_blockers": [
-            "automated_release_gate_failed",
             "missing_or_rejected_named_human_review_records"
         ],
         "next_authority": "operator_supplied_human_review_evidence_then_separate_exact_sha_production_authorization",

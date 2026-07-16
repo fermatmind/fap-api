@@ -40,6 +40,19 @@
     ],
     "critical_contract_violations_after_repair": 0
   },
+  "aggregate_duplicate_repair": {
+    "status": "pass",
+    "asset_key": "en|instinctual_subtype:type-4/social",
+    "asset_sha256": "854afe6c6de5ffd72643013ad032c2104076a721def982d2814ae26dc1afdb84",
+    "previous_duplicate_of_asset_key": "en|instinctual_subtype:type-3/social",
+    "changed_field": "sections[evidence_boundary].body:first_sentence",
+    "preserved_second_sentence": true,
+    "claim_boundary_unchanged": true,
+    "manual_review_state_unchanged": true,
+    "release_truth_unchanged": true,
+    "aggregate_duplicate_count_after_repair": 0,
+    "human_review_completed": false
+  },
   "final_qa": {
     "status": "pass_for_manual_review_handoff",
     "asset_count": 12,

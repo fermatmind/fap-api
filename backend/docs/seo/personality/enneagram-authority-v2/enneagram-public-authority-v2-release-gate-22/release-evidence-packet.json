@@ -1,7 +1,7 @@
 {
   "schema_version": "enneagram_public_authority_v2_release_evidence_packet.v2",
   "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
-  "status": "blocked_at_release_gate",
+  "status": "hold_missing_human_review",
   "decision": "HOLD",
   "dependencies": {
     "fap_api_link_graph_pr20_merge_sha": "8401e1c62d19007abbe89abe597352cfae5ec0a4",
@@ -11,9 +11,9 @@
     "fap_api_origin_main_contains_pr22_merge": true
   },
   "hashes": {
-    "package_sha256": "dc473a41cd8a0c7fe7aa51cc1d5d6d14e7cfcceaee5af13deb82047e4b5be187",
-    "release_gate_report_sha256": "2f3256f1898b9e2045df9d966ddd86cf9a7945c05ea53f7cf63789cd2ea5c6ae",
-    "graph_manifest_sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd"
+    "package_sha256": "2526762097cb661630aad10076179f6171e568913c89a87c233941191ade2199",
+    "release_gate_report_sha256": "2fe85386587bd45968ec41bb8db7b38f82d2f9d9b07bda594a47cbfc218bfc56",
+    "graph_manifest_sha256": "1049500c8a5a62772b959723a37d7827b5ccd50c184cadd6eaa626f9b7360fe1"
   },
   "evidence_counts": {
     "asset_hashes": 116,
@@ -29,12 +29,18 @@
     "llms_full_txt_enneagram_urls": 116
   },
   "automated_release_gate": {
-    "passed": false,
+    "passed": true,
     "collision_preflight_passed": true,
-    "aggregate_editorial_issue_count": 2,
-    "issue_codes": [
-      "duplicate_sentence",
-      "duplicate_sentence"
+    "aggregate_editorial_issue_count": 0,
+    "issue_codes": [],
+    "qa_rows_passed": 116,
+    "duplicate_count": 0,
+    "repaired_assets": {
+      "en|instinctual_subtype:type-4/social": "854afe6c6de5ffd72643013ad032c2104076a721def982d2814ae26dc1afdb84",
+      "en|instinctual_subtype:type-9/one-to-one": "ebb3c272d4856a70b66f6a21e4460527505fbc9086f224f2c1ce902485d42280"
+    },
+    "remaining_blockers": [
+      "missing_or_rejected_named_human_review_records"
     ]
   },
   "media_boundary": {

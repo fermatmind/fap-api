@@ -26,15 +26,15 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         'deployed',
     ];
 
-    public function test_release_gate_aggregates_the_exact_estate_and_fails_closed_on_real_blockers(): void
+    public function test_release_gate_aggregates_the_exact_estate_and_holds_only_for_human_review(): void
     {
         $report = $this->report();
 
         $this->assertSame('ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22', $report['artifact']);
-        $this->assertSame('fail_closed', $report['status']);
+        $this->assertSame('hold_missing_human_review', $report['status']);
         $this->assertSame('HOLD', $report['decision']);
         $this->assertFalse($report['ok']);
-        $this->assertFalse($report['automated_gate_passed']);
+        $this->assertTrue($report['automated_gate_passed']);
         $this->assertFalse($report['human_review_passed']);
         $this->assertTrue($report['media_boundary_passed']);
         $this->assertFalse($report['release_eligible']);
@@ -91,29 +91,16 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertSame([false], array_values(array_unique($report['execution_boundaries'])));
     }
 
-    public function test_full_aggregate_editorial_gate_exposes_the_two_cross_family_duplicate_blockers(): void
+    public function test_full_aggregate_editorial_gate_passes_all_116_assets_without_duplicates(): void
     {
         $report = $this->report();
         $issues = $report['editorial_integrity_gate']['issues'];
 
-        $this->assertSame('fail_closed', $report['editorial_integrity_gate']['status']);
-        $this->assertFalse($report['editorial_integrity_gate']['automated_gate_passed']);
+        $this->assertSame('ready_for_human_review', $report['editorial_integrity_gate']['status']);
+        $this->assertTrue($report['editorial_integrity_gate']['automated_gate_passed']);
         $this->assertSame(116, $report['editorial_integrity_gate']['qa_row_count']);
-        $this->assertCount(2, $issues);
-        $this->assertSame(['duplicate_sentence'], array_values(array_unique(array_column($issues, 'code'))));
-        $this->assertSame([
-            'en|instinctual_subtype:type-4/social',
-            'en|instinctual_subtype:type-9/one-to-one',
-        ], array_column($issues, 'asset_key'));
-        $this->assertSame([
-            'en|instinctual_subtype:type-3/social',
-            'en|instinctual_subtype:type-5/social',
-        ], array_column($issues, 'duplicate_of_asset_key'));
-        $this->assertSame([
-            'editorial_integrity_duplicate_sentence',
-            'editorial_integrity_duplicate_sentence',
-            'editorial_integrity_gate_failed',
-        ], array_column($report['errors'], 'code'));
+        $this->assertSame([], $issues);
+        $this->assertSame([], $report['errors']);
     }
 
     public function test_named_review_records_are_hash_bound_and_cannot_override_other_gates(): void
@@ -132,10 +119,10 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertSame(116, $reviewed['counts']['named_human_reviews']);
         $this->assertSame(116, $reviewed['counts']['approved_human_reviews']);
         $this->assertSame(0, $reviewed['counts']['missing_human_reviews']);
-        $this->assertFalse($reviewed['automated_gate_passed']);
+        $this->assertTrue($reviewed['automated_gate_passed']);
         $this->assertTrue($reviewed['media_boundary_passed']);
-        $this->assertFalse($reviewed['release_eligible']);
-        $this->assertSame('fail_closed', $reviewed['status']);
+        $this->assertTrue($reviewed['release_eligible']);
+        $this->assertSame('pass', $reviewed['status']);
         $this->assertSame($initial['package_sha256'], $reviewed['package_sha256']);
 
         $reviews[0]['asset_sha256'] = str_repeat('0', 64);

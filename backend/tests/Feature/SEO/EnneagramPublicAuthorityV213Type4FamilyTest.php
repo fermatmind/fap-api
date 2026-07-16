@@ -165,6 +165,15 @@ final class EnneagramPublicAuthorityV213Type4FamilyTest extends TestCase
                 $key,
             );
         }
+
+        $repaired = $subtypes->first(fn (array $asset): bool => $this->key($asset) === 'en|instinctual_subtype:type-4/social');
+        $this->assertIsArray($repaired);
+        $evidenceBoundary = collect($repaired['sections'])->firstWhere('kind', 'evidence_boundary');
+        $this->assertIsArray($evidenceBoundary);
+        $this->assertSame(
+            'Evidence from one subtype instrument cannot make belonging patterns universal across groups or cultures. This page cannot predict popularity, inclusion, loyalty, social skill, or group fit.',
+            $evidenceBoundary['body'],
+        );
     }
 
     public function test_positive_review_release_and_mechanism_mutations_fail_closed(): void
@@ -195,6 +204,10 @@ final class EnneagramPublicAuthorityV213Type4FamilyTest extends TestCase
         $this->assertSame(20, array_sum($report['raw_draft_audit']['issues']));
         $this->assertSame(0, $report['raw_draft_audit']['repair_rounds'][0]['remaining_asset_specific_issue_count']);
         $this->assertSame(0, $report['raw_draft_audit']['critical_contract_violations_after_repair']);
+        $this->assertSame('pass', $report['aggregate_duplicate_repair']['status']);
+        $this->assertSame('854afe6c6de5ffd72643013ad032c2104076a721def982d2814ae26dc1afdb84', $report['aggregate_duplicate_repair']['asset_sha256']);
+        $this->assertSame(0, $report['aggregate_duplicate_repair']['aggregate_duplicate_count_after_repair']);
+        $this->assertFalse($report['aggregate_duplicate_repair']['human_review_completed']);
         $this->assertSame('pass_for_manual_review_handoff', $report['final_qa']['status']);
         $this->assertSame(12, $report['final_qa']['asset_count']);
         $this->assertSame(0, $report['final_qa']['asset_specific_issue_count']);
