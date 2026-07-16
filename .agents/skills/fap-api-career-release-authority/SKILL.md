@@ -55,12 +55,14 @@ Keep fap-api as the authority for career content, release state, and public care
 - Confirm no indexability, sitemap, LLMS, schema, media, cache, or search mutation is bundled without its separately authorized gate.
 
 ## Required reference for Big Five bridges
+- Read `.agents/skills/fap-api-big-five-public-authority/SKILL.md` first when the work touches Authority V2 media, visible evidence, Topic, discoverability, review, promotion, or published-projection readiness. That skill owns the upstream Big Five public-authority gate; this skill owns the downstream Career release gate.
 - Read `docs/big5-v2-platform-summary/big5_authority_v2_career_integration_retrospective_2026-07-15.md` before changing a Big Five-to-Career adapter, public projection, importer, promotion gate, or release workflow.
 - Use `backend/docs/career/contracts/big-five-career-bridge-input.v1.schema.json` and `backend/docs/career/contracts/big-five-career-bridge-output.v1.schema.json` as the machine-readable bridge boundary.
 - Apply `App\Domain\Career\Bridge\BigFiveCareerBridgeContract` as the executable fail-closed gate: select exactly the published Big Five revision from the backend public projection, require all visible-evidence permissions, bind both public projection hashes, and lock the output to the exact published Career runtime projection.
 - Use `career:audit-big-five-bridge` for deterministic read-only JSON/Markdown audits. Supply the Big Five published/public projection, Career runtime publish projection, and bridge candidate artifacts explicitly; the auditor must not infer authority from a working revision, generated package, private result, or record existence.
 - Only `published_projection_ready` with zero blockers may reach a future public reader; every other state resolves to `blocked` with `public_reader_allowed=false`.
 - Keep RIASEC primary and Big Five supplementary under `claim_mode=explanation_only`; ranking, hiring/screening, outcome prediction, diagnosis, pSEO, and private assessment/user/order data must remain absent.
+- Treat PR12/13 as schema/auditor completion only. Do not report a public Big Five → Career reader as shipped unless a separate runtime consumer is implemented, validated, and explicitly released.
 
 ## Acceptance commands
 ```bash

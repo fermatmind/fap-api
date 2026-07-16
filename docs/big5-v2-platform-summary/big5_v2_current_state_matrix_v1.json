@@ -1,12 +1,15 @@
 {
   "schema_version": "big5_v2_current_state_matrix.v1",
   "generated_from_repo": "/Users/rainie/Desktop/GitHub/fap-api",
-  "source_head": "0814af350c5119994ff65fe7e965e68bc3decb35",
+  "source_head": "8401e1c62d19007abbe89abe597352cfae5ec0a4",
+  "evidence_verified_at": "2026-07-16",
   "overall_verdict": {
     "platform_foundation": "complete",
     "next_phase": "operations_plus_data_governance",
     "public_percentile_display": "NO_GO",
-    "production_rollout": "governance_ready_controlled_no_go_by_default"
+    "production_rollout": "governance_ready_controlled_no_go_by_default",
+    "public_authority_v2": "contracts_merged_authority_inputs_and_promotion_on_hold",
+    "big_five_career_bridge": "schema_and_read_only_auditor_ready_public_reader_no_go"
   },
   "layers": [
     {
@@ -80,6 +83,69 @@
       "constraints": ["CMS draft-only", "Git-backed release snapshot remains runtime source of truth"]
     },
     {
+      "layer": "Public Authority V2 consumer containment",
+      "status": "GO_FAIL_CLOSED",
+      "readiness": "web_repairs_merged_deployment_not_verified_here",
+      "evidence": [
+        "fap-web PR #1767 merge 3e1e97d25a1e2369ad498d7ca193ca0b1b267e5c",
+        "fap-web PR #1768 merge 7c97284e476a2e65ec7751e552925c4c635a36ce"
+      ],
+      "constraints": ["merge is not production deployment evidence", "no live runtime closeout was performed in this documentation refresh"]
+    },
+    {
+      "layer": "Public Authority V2 evidence contracts",
+      "status": "GO_FAIL_CLOSED",
+      "readiness": "media_date_provenance_discoverability_schema_topic_and_review_preflights_merged",
+      "evidence": [
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-media-authority-41/README.md",
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-visible-date-42/README.md",
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-visible-provenance-43/README.md",
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-discoverability-parity-44/README.md",
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-structured-data-45/README.md",
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-topic-authority-46/README.md",
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/README.md"
+      ],
+      "constraints": ["read-only or preflight-only", "no CMS/database/publication/indexability/deployment mutation"]
+    },
+    {
+      "layer": "Approved Big Five media authority",
+      "status": "HOLD_ZERO_APPROVED",
+      "readiness": "authority_contract_ready_inputs_missing",
+      "evidence": [
+        "generated/big-five-authority-v2/big5-authority-v2-media-authority-41/approved-media-intake.json",
+        "generated/big-five-authority-v2/big5-authority-v2-media-authority-41/mapping-package.json"
+      ],
+      "constraints": ["approved entries=0", "693 page slots remain missing_pending", "Media Library upload and operator approval remain separately controlled"]
+    },
+    {
+      "layer": "Human review and cohort promotion",
+      "status": "HOLD_ZERO_ELIGIBLE",
+      "readiness": "read_only_preflight_ready_manifest_unreviewed",
+      "evidence": [
+        "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/README.md"
+      ],
+      "constraints": ["all exact production references remain pending", "no publisher or write mode", "separate exact cohort authorization required"]
+    },
+    {
+      "layer": "Big Five to Career bridge",
+      "status": "GO_READ_ONLY_CONTRACT",
+      "readiness": "schema_and_auditor_merged",
+      "evidence": [
+        "backend/docs/career/big-five-career-bridge-schema-01.md",
+        "backend/docs/career/big-five-career-bridge-auditor-02.md"
+      ],
+      "constraints": ["published projections only", "claim_mode=explanation_only", "RIASEC remains primary", "no public reader, ranking, matcher, pSEO, or production write"]
+    },
+    {
+      "layer": "Public Big Five to Career reader",
+      "status": "NO_GO",
+      "readiness": "not_implemented_not_authorized",
+      "evidence": [
+        "backend/docs/career/big-five-career-bridge-auditor-02.md"
+      ],
+      "constraints": ["requires zero-blocker published Big Five and Career projections", "must not consume working revisions or private assessment data"]
+    },
+    {
       "layer": "Public percentile display",
       "status": "NO_GO",
       "readiness": "blocked_by_design",
@@ -137,7 +203,28 @@
       "governance_status": "all_surface_gate_pass"
     }
   },
+  "merged_pr_evidence": [
+    {"train_item": "PR39", "repository": "fap-web", "pr": 1767, "merge_sha": "3e1e97d25a1e2369ad498d7ca193ca0b1b267e5c", "checks": "7/7"},
+    {"train_item": "PR40", "repository": "fap-web", "pr": 1768, "merge_sha": "7c97284e476a2e65ec7751e552925c4c635a36ce", "checks": "7/7"},
+    {"train_item": "PR41", "repository": "fap-api", "pr": 3098, "merge_sha": "ae7dfe5af2ce64ad6795942e18657b960bf159b1", "checks": "9/9"},
+    {"train_item": "PR42", "repository": "fap-api", "pr": 3099, "merge_sha": "7cb885c1d30ec52d3e3eac60379036dbeacbc5e7", "checks": "9/9"},
+    {"train_item": "PR43", "repository": "fap-api", "pr": 3102, "merge_sha": "95578922e01125f7f4ed4087c407be83cd7e6af6", "checks": "9/9"},
+    {"train_item": "PR44", "repository": "fap-api", "pr": 3105, "merge_sha": "65a1d3b78da70511306ebd2867a157494e4e217f", "checks": "9/9"},
+    {"train_item": "PR45", "repository": "fap-api", "pr": 3110, "merge_sha": "b590b639f84437da53641c84c2df895f87b8749f", "checks": "9/9"},
+    {"train_item": "PR46", "repository": "fap-api", "pr": 3113, "merge_sha": "2a13cae76a68263db2849fcd8eb5118f346969f9", "checks": "9/9"},
+    {"train_item": "PR47", "repository": "fap-api", "pr": 3114, "merge_sha": "df9261e5d7aa071323fb91b0f6b28d2288e389a2", "checks": "9/9"},
+    {"train_item": "PR10", "repository": "fap-web", "pr": 939, "merge_sha": "7626b901d77a5191a1b9211fd0b9a91c854a6c4f", "checks": "6/6"},
+    {"train_item": "PR11", "repository": "fap-api", "pr": 1814, "merge_sha": "40b60ff32d523737003804d670d1443706010fdf", "checks": "15/15"},
+    {"train_item": "PR12", "repository": "fap-api", "pr": 3118, "merge_sha": "56d63e0db6626c6c98822df89fca4f67a8079e7d", "checks": "9/9"},
+    {"train_item": "PR13", "repository": "fap-api", "pr": 3121, "merge_sha": "a5ca257069ee9c88a85c3cd12ff94ad686a2455b", "checks": "9/9"}
+  ],
   "remaining_open_items": [
+    "approved original media, rights, provenance, locale alt, and exact operator approval",
+    "Media Library production upload and 693-slot authority mapping",
+    "named human review for 16 deterministic cohorts",
+    "exact-authorized production promotion",
+    "post-promotion production deployment readback and runtime closeout",
+    "future public Big Five to Career reader, if separately authorized",
     "public percentile display",
     "real production rollout scaling",
     "long-term norm accumulation",
