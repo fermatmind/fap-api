@@ -27408,7 +27408,7 @@ prs:
     branch: codex/seo-agent-article41-draft-claim-risk-qa-01
     title: "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01 Add article draft claim-risk QA"
     train_scope: seo_agent_gsc_draft_canary_closeout
-    status: ready_to_merge
+    status: pr_open_checks_pending
     scope:
       - Add a backend-only read-only claim-risk QA command for article CMS draft proposals.
       - Emit sanitized JSON evidence for title, meta, FAQ, and internal-link claim-risk verdicts.
