@@ -1,0 +1,1830 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18",
+  "framework": "enneagram",
+  "source_ledger_refs": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
+  },
+  "asset_scope": {
+    "family": "type-9",
+    "expected_asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "counts_by_entity_type": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "identity_keys": [
+      "core_type:type-9",
+      "wing:9w8",
+      "wing:9w1",
+      "instinctual_subtype:type-9/self-preservation",
+      "instinctual_subtype:type-9/social",
+      "instinctual_subtype:type-9/one-to-one"
+    ]
+  },
+  "assets": [
+    {
+      "locale": "en",
+      "identity_key": "core_type:type-9",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "path": "/en/personality/enneagram/type-9",
+      "title": "Type Nine: stability, priority, and a revisable conflict-delay hypothesis",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "This English core page is organized around priority recovery, explicit disagreement, and follow-through after accommodation; it was composed independently from the Chinese page’s cost ledger.",
+        "outline": [
+          "answer_first",
+          "motivation_attention",
+          "behavior_motive",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "work_relationship_examples",
+          "wings_mistypes",
+          "counterexample",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "time between privately noticing a preference and stating it to the affected person",
+          "which promised task loses a calendar slot after another request enters the conversation",
+          "whether a clear disagreement is followed by a proposal deadline and completed next action"
+        ]
+      },
+      "answer_first": "Type Nine is a traditional Enneagram hypothesis about attention returning to stability, connection, competing priorities, conflict delay, and the cost of losing contact with one’s own agenda. Calm behavior alone does not establish motive: mediation duty, low authority, cultural restraint, fatigue, disability, trauma safety, or actual danger can produce similar choices, so alternative explanations need explicit checking.",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "Locate the priority before interpreting calm",
+          "body": "When a request arrives, record the person’s first preference, the competing agenda that becomes louder, and the moment their own priority is postponed. The sequence matters more than a peaceful tone."
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "Separate accommodation from inferred motive",
+          "body": "Agreement can reflect consent, professional mediation, scarce bargaining power, language access, or a realistic safety calculation. Ask what options and consequences were actually available before inferring conflict avoidance."
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "Follow decisions through disagreement and repair",
+          "body": "Compare the private decision with the statement made to others, then track whether a deadline, refusal, or counterproposal follows. If resentment appears later, record the missed decision point and any repair."
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "Hold steadiness beside eroded agency",
+          "body": "Stability attention may support patience, broad perspective, de-escalation, and durable cooperation. Costs arise when urgent differences are blurred, commitments drift, or other people must guess what consent really means."
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "Use role and power as comparison controls",
+          "body": "At work, distinguish a facilitator pausing debate from an employee staying silent under retaliation risk. In a relationship, distinguish a chosen compromise from repeatedly surrendering plans without discussion."
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "Compare 9w8 and 9w1 without fixing identity",
+          "body": "The 9w8 hypothesis adds grounded resistance, territorial steadiness, and delayed force; 9w1 adds orderly restraint, fairness standards, and quiet correction. Also compare Type Two helpfulness, Type Six caution, burnout, and learned diplomacy."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Search for timely preference and clean refusal",
+          "body": "Confidence should fall when the person names a priority early, tolerates another person’s disappointment, gives a bounded no, and completes the chosen task without needing conflict to disappear first."
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "Keep the hypothesis limited to observation",
+          "body": "Use this page to examine stability, connection, priority, and conflict-delay patterns. It cannot rank virtue, passivity, leadership, employability, relationship quality, health, or future outcomes."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, choose one shared schedule decision, one low-stakes disagreement, and one request that competes with an existing commitment.",
+        "observable_signal": "Record the first private preference, exact words communicated, available refusal, calendar placement, later irritation, and the next completed action.",
+        "page_specific_signal": "Compare how quickly a personal priority receives time when another person is disappointed versus when everyone readily agrees.",
+        "alternative_explanation": "Check formal role, retaliation risk, cultural communication, language access, fatigue, disability, caregiving load, and actual danger.",
+        "reflection_prompt": "Identify one event where stating a preference promptly improved coordination, then revise the conflict-delay hypothesis upward or downward."
+      },
+      "faqs": [
+        {
+          "question": "Does calm mediation prove Type Nine?",
+          "answer": "Calm mediation does not prove Type Nine. A designated facilitator, a person with less power, or someone managing real danger may use the same behavior; compare private preference, available refusal, and follow-through after the meeting."
+        },
+        {
+          "question": "How should delayed conflict be distinguished from consent?",
+          "answer": "Delayed conflict should be distinguished from consent by checking whether a clear preference was stated, whether refusal was safe, and whether later resentment or task drift reveals an agreement that was never freely chosen."
+        },
+        {
+          "question": "Which evidence should reduce a priority-blurring hypothesis?",
+          "answer": "Evidence should reduce a priority-blurring hypothesis when the person schedules their own agenda, states disagreement before pressure builds, accepts another person’s disappointment, and completes the selected next step."
+        }
+      ],
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/wings/9w8",
+        "/en/personality/enneagram/wings/9w1",
+        "/en/personality/enneagram/type-9/instincts/self-preservation",
+        "/en/personality/enneagram/type-9/instincts/social",
+        "/en/personality/enneagram/type-9/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "Does calm mediation prove Type Nine?",
+          "How should delayed conflict be distinguished from consent?",
+          "Which evidence should reduce a priority-blurring hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "Does calm mediation prove Type Nine?",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "How should delayed conflict be distinguished from consent?",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "Which evidence should reduce a priority-blurring hypothesis?",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Calm, accommodation, or delayed disagreement may reflect role, culture, disability, power, fatigue, or actual danger rather than type."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "en",
+      "identity_key": "wing:9w8",
+      "entity_type": "wing",
+      "code": "9w8",
+      "path": "/en/personality/enneagram/wings/9w8",
+      "title": "9w8: a core-Nine hypothesis modified by grounded boundary force",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 9w8 page uses delayed-force timing, territorial agreements, and post-refusal repair as its own editorial frame, independent of the Chinese page’s resource-boundary comparison.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "faqs"
+        ],
+        "page_specific_signals": [
+          "time from a crossed boundary to the first direct statement and the force used after delay",
+          "difference between defending a negotiated territory and controlling space without agreement",
+          "whether steadiness returns after refusal through repair or through silent entrenchment"
+        ]
+      },
+      "answer_first": "9w8 is an evidence-limited wing hypothesis that keeps Type Nine’s attention to stability and connection primary while using Eight-like grounded resistance, boundary force, and protection as possible modifiers. A quiet person who becomes firm is not therefore 9w8; role authority, property responsibility, danger, training, or unequal power may explain the same sequence.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep stability primary and force secondary",
+          "body": "Test whether the person first tries to preserve continuity or shared ground, then becomes direct when a boundary is repeatedly crossed. Immediate dominance without a stability pattern weakens a core-Nine reading."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Compare Nine with Eight rather than blending labels",
+          "body": "A Nine-centered hypothesis expects delayed mobilization and a wish to restore workable calm; an Eight-centered hypothesis may test autonomy and power earlier. Observe timing and repair, not surface volume."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Track territory, refusal, and re-entry",
+          "body": "Use a workspace boundary, household agreement, or project ownership dispute. Record the prior agreement, number of indirect signals, exact refusal, force used, and whether cooperation resumes afterward."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Look for early escalation without accommodation",
+          "body": "Confidence should fall when the person consistently seeks control before shared ground is tested, treats compromise as surrender, or expands authority beyond the agreed boundary without later correction."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Control for duty, threat, and access to recourse",
+          "body": "Security work, union representation, caregiving responsibility, prior violations, discrimination, physical risk, and lack of formal recourse can require grounded resistance without indicating a wing pattern."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Treat 9w8 as secondary and evidence limited",
+          "body": "The wing label is a traditional comparison and does not establish an enduring identity or verified capacity. Use it only after a core-Nine pattern is independently plausible and retain ordinary situational explanations."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Over four days, select one boundary request, one shared-space dispute, and one protective action involving an explicit prior agreement.",
+        "observable_signal": "Record when the boundary was noticed, indirect cues, exact direct statement, legitimate authority, force level, other party’s response, and completed repair.",
+        "page_specific_signal": "Compare delayed grounded resistance with an event where the same person states a limit before irritation accumulates.",
+        "alternative_explanation": "Check assigned duty, ownership, safety risk, discrimination, prior breach, communication training, and access to neutral review.",
+        "reflection_prompt": "Name one incident where earlier low-force clarity protected both stability and consent, and adjust the 9w8 modifier hypothesis."
+      },
+      "faqs": [
+        {
+          "question": "Does grounded boundary force prove 9w8?",
+          "answer": "Grounded boundary force does not prove 9w8. Property duty, safety responsibility, advocacy, or a repeated breach may require firmness; test whether stability seeking reliably precedes force and whether repair restores shared ground."
+        },
+        {
+          "question": "How can 9w8 be compared with core Eight?",
+          "answer": "9w8 can be compared with core Eight by tracking timing: the Nine-centered hypothesis often delays mobilization to preserve continuity, while an Eight-centered hypothesis may address autonomy and power sooner; neither pattern is established by volume."
+        },
+        {
+          "question": "Which counterexample weakens a delayed-force reading?",
+          "answer": "A counterexample weakens a delayed-force reading when the person states boundaries early, negotiates territory without entrenchment, or repeatedly seeks control before any accommodation attempt; record authority and consequences as controls."
+        }
+      ],
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-9",
+        "/en/personality/enneagram/wings/9w1",
+        "/en/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "Does grounded boundary force prove 9w8?",
+          "How can 9w8 be compared with core Eight?",
+          "Which counterexample weakens a delayed-force reading?"
+        ],
+        "question_answers": [
+          {
+            "question": "Does grounded boundary force prove 9w8?",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "How can 9w8 be compared with core Eight?",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "Which counterexample weakens a delayed-force reading?",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "en",
+      "identity_key": "wing:9w1",
+      "entity_type": "wing",
+      "code": "9w1",
+      "path": "/en/personality/enneagram/wings/9w1",
+      "title": "9w1: a core-Nine hypothesis modified by orderly standards",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "This English 9w1 draft centers on silent standards, procedural calm, and the timing of corrective speech rather than translating the Chinese page’s fairness-cost structure.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "observable_situations",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "counterexample",
+          "wing_boundary",
+          "observation_exercise",
+          "faqs"
+        ],
+        "page_specific_signals": [
+          "whether a privately held standard is stated before or after the group settles on a plan",
+          "difference between preserving orderly process and suppressing a necessary objection",
+          "form of correction after irritation appears: specific request, self-criticism, or quiet withdrawal"
+        ]
+      },
+      "answer_first": "9w1 is an evidence-limited wing hypothesis that keeps Type Nine’s stability and connection pattern primary while using One-like order, fairness standards, restraint, and quiet correction as possible modifiers. Courtesy, conscientiousness, or procedural care does not establish 9w1 because role expectations, culture, perfectionism, compliance risk, or fear of retaliation may look similar.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Start with continuity before evaluating standards",
+          "body": "Ask whether the person uses standards to keep participation workable and conflict contained, or whether correctness itself organizes attention. A core-Nine interpretation requires more than tidy behavior."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Compare Nine with One using decision timing",
+          "body": "A Nine-centered reading may postpone correction until tension threatens stability; a One-centered reading may correct earlier because error violates an internal standard. Test repeated sequences across equal-power contexts."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe process objections and hidden irritation",
+          "body": "Use a planning review, household routine, or fairness dispute. Record the rule cited, when concern was voiced, what compromise was accepted, and whether unspoken resentment later changes participation."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Seek visible disagreement without self-erasure",
+          "body": "Confidence should fall when the person routinely names an unpopular standard early, tolerates procedural friction, revises their own rule after evidence, and preserves connection without muting the objection."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Check compliance, training, and cultural restraint",
+          "body": "Regulated work, religious practice, quality assurance, junior status, language norms, disability accommodation, and retaliation risk may produce orderly restraint without a wing explanation."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep 9w1 provisional and core first",
+          "body": "Wing research is sparse, so 9w1 remains a secondary observation hypothesis. It cannot certify morality, fairness, conscientiousness, self-control, or suitability for any role."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "Across six days, choose one procedural disagreement, one fairness concern, and one routine where your preferred standard differs from the group’s.",
+        "observable_signal": "Record the standard, first moment of concern, exact objection, authority level, accepted compromise, later irritation, and any correction or repair.",
+        "page_specific_signal": "Compare an orderly silence that protects timing with a silence that leaves a preventable error or hidden resentment.",
+        "alternative_explanation": "Check compliance duty, professional training, cultural courtesy, junior status, language access, fatigue, and realistic retaliation risk.",
+        "reflection_prompt": "Describe one occasion when voicing a standard earlier improved both accuracy and connection, then revise the 9w1 hypothesis."
+      },
+      "faqs": [
+        {
+          "question": "Does orderly mediation prove 9w1?",
+          "answer": "Orderly mediation does not prove 9w1. Professional facilitation, compliance duties, cultural courtesy, or junior status can produce the same restraint; examine whether stability remains primary and when standards are voiced."
+        },
+        {
+          "question": "How should 9w1 be compared with core One?",
+          "answer": "9w1 should be compared with core One through decision timing: a Nine-centered pattern may delay correction to preserve continuity, while a One-centered pattern may act sooner because an error violates an internal standard."
+        },
+        {
+          "question": "Which evidence weakens a quiet-correction hypothesis?",
+          "answer": "Evidence weakens a quiet-correction hypothesis when the person states unpopular standards promptly, tolerates open procedural friction, revises a rule after new facts, and does not require calm before acting."
+        }
+      ],
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-9",
+        "/en/personality/enneagram/wings/9w8",
+        "/en/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "Does orderly mediation prove 9w1?",
+          "How should 9w1 be compared with core One?",
+          "Which evidence weakens a quiet-correction hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "Does orderly mediation prove 9w1?",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "How should 9w1 be compared with core One?",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "Which evidence weakens a quiet-correction hypothesis?",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "en",
+      "identity_key": "instinctual_subtype:type-9/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/self-preservation",
+      "path": "/en/personality/enneagram/type-9/instincts/self-preservation",
+      "title": "Type Nine self-preservation: routine comfort as a secondary hypothesis",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English self-preservation page is independently structured around routine interruption, resource sufficiency, and re-entry into chosen priorities, apart from the Chinese page’s comfort-cost ledger.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "alternative_environment",
+          "countertype_variation",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise"
+        ],
+        "page_specific_signals": [
+          "which familiar routine continues after an explicitly chosen priority receives a deadline",
+          "response to the same interruption under adequate resources versus genuine scarcity",
+          "time needed to resume a self-directed task after comfort or maintenance activity ends"
+        ]
+      },
+      "answer_first": "Type Nine self-preservation is a traditional secondary hypothesis linking a core-Nine stability pattern with attention to routine, comfort, familiar activity, maintenance, and material continuity. It does not describe bodily mechanisms. Repetition may instead reflect poverty, disability, chronic workload, caregiving, recovery, sensory needs, or a rational need for predictable access.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Frame comfort as a secondary observation",
+          "body": "The hypothesis asks whether familiar activity helps postpone a personally important priority while preserving immediate steadiness. Comfort by itself is ordinary and provides no type evidence."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare the same person across resource conditions",
+          "body": "Observe one routine when food, money, time, and rest are adequate, then compare it during real scarcity. A subtype reading should weaken when behavior tracks resource constraints more closely than conflict or priority."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Use attention language, not bodily mechanism claims",
+          "body": "Self-preservation here names a traditional attention comparison rather than evidence about bodily mechanisms, physiology, or a universal survival system. Material needs remain real regardless of typology."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow visible activity and practical competence",
+          "body": "A person may be highly productive in maintenance tasks while still delaying a chosen conversation or direction. Visible busyness neither confirms nor refutes the secondary hypothesis without priority data."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Account for necessity and accessibility",
+          "body": "Shift work, insecure housing, disability, pain, caregiving, sensory regulation, food access, and financial volatility can make routine or comfort protective and necessary rather than avoidant."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Look for comfort followed by deliberate re-entry",
+          "body": "Confidence should fall when rest or routine has a clear endpoint, restores capacity, and is followed by the planned difficult task without external pressure or concealed resentment."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep subtype inference modest",
+          "body": "Instrument-specific findings cannot establish a universal subtype ontology or cross-cultural equivalence. Treat routine, comfort, and priority records as local observations requiring human review."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "For five days, choose one comfort routine, one maintenance task, and one personally important action that competes for the same time block.",
+        "observable_signal": "Record resource sufficiency, physical access needs, chosen priority, routine start and stop, interruption response, and whether the important action resumes.",
+        "page_specific_signal": "Compare the same comfort pattern on a well-resourced day with a day shaped by scarcity, pain, caregiving, or sleep loss.",
+        "alternative_explanation": "Check poverty, disability, sensory regulation, recovery, shift work, household duty, food access, and unstable housing before inferring motive.",
+        "reflection_prompt": "Identify one routine that restored capacity and one that displaced a chosen priority, then revise the secondary hypothesis separately for each."
+      },
+      "faqs": [
+        {
+          "question": "Does preferring familiar routine prove self-preservation Nine?",
+          "answer": "Preferring familiar routine does not prove self-preservation Nine. Accessibility, scarcity, pain, caregiving, sensory regulation, or recovery can require predictability; compare resource conditions and whether chosen priorities resume."
+        },
+        {
+          "question": "How should comfort be separated from priority avoidance?",
+          "answer": "Comfort should be separated from priority avoidance by recording its endpoint and consequence: restorative comfort supports re-entry into a chosen task, while displacement repeatedly consumes the protected time without a deliberate decision."
+        },
+        {
+          "question": "Which matched comparison is useful for this subtype?",
+          "answer": "A useful matched comparison observes the same routine under adequate resources and genuine scarcity, while holding the task and available time as constant; behavior that follows necessity weakens the subtype interpretation."
+        }
+      ],
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-9",
+        "/en/personality/enneagram/type-9/instincts/social",
+        "/en/personality/enneagram/type-9/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "Does preferring familiar routine prove self-preservation Nine?",
+          "How should comfort be separated from priority avoidance?",
+          "Which matched comparison is useful for this subtype?"
+        ],
+        "question_answers": [
+          {
+            "question": "Does preferring familiar routine prove self-preservation Nine?",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "How should comfort be separated from priority avoidance?",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "Which matched comparison is useful for this subtype?",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "en",
+      "identity_key": "instinctual_subtype:type-9/social",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/social",
+      "path": "/en/personality/enneagram/type-9/instincts/social",
+      "title": "Type Nine social: belonging through participation as a secondary hypothesis",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "This English social page follows workload allocation, dissent visibility, and belonging after role refusal, independently from the Chinese page’s contribution-and-voice audit.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "countertype_variation",
+          "instinct_boundary",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise"
+        ],
+        "page_specific_signals": [
+          "share of group maintenance work accepted before a personal priority receives protected time",
+          "whether dissent becomes visible when belonging is secure versus when exclusion is credible",
+          "what happens to membership and voice after a nonessential group task is respectfully declined"
+        ]
+      },
+      "answer_first": "Type Nine social is a traditional secondary hypothesis linking a core-Nine stability pattern with participation, shared workload, group rhythm, belonging, and the risk of muting a personal agenda. It does not describe bodily mechanisms. Service may instead reflect job duty, collective culture, mutual aid, exclusion risk, minority stress, or unequal access to voice.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Observe belonging through contribution",
+          "body": "Test whether participation protects connection while personal priorities repeatedly become less visible. High contribution alone is not evidence because groups often depend on legitimate shared labor."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare secure membership with exclusion risk",
+          "body": "Observe the same person in one group where dissent is safe and another where membership, income, or support may be lost. If silence follows risk, power explains more than subtype language."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep social attention conceptual",
+          "body": "Social instinct here is a traditional attention comparison and does not describe bodily mechanisms or a fixed group-response system. Belonging needs and institutional consequences remain concrete."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow public energy and leadership",
+          "body": "A socially active organizer may still postpone their own agenda by carrying collective needs. Visibility, competence, and enthusiasm do not rule the hypothesis in or out."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Check role, culture, and unequal voice",
+          "body": "Employment duties, family obligation, mutual-aid norms, migration, discrimination, language status, accessibility, and dependency can make participation necessary rather than identity-driven."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Test belonging after a bounded refusal",
+          "body": "Confidence should fall when the person declines nonessential group work, keeps a personal commitment, states dissent, and remains connected without compensating through hidden extra labor."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Limit claims to revisable observations",
+          "body": "Instrument-specific evidence does not prove universal subtype structure or cross-cultural equivalence. Use contribution, voice, and membership records only as tentative comparisons."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "Across six days, select one group task, one meeting dissent, and one request that conflicts with a protected personal commitment.",
+        "observable_signal": "Record role duty, volunteered labor, speaking time, stated preference, exclusion risk, response to refusal, and whether personal time remains protected.",
+        "page_specific_signal": "Compare contribution and dissent in a secure group with behavior where income, care, status, or community access depends on compliance.",
+        "alternative_explanation": "Check job description, collective norms, minority stress, migration, language access, disability, family duty, and credible exclusion.",
+        "reflection_prompt": "Name one refusal that preserved belonging and one silence shaped by real power, then adjust the social hypothesis without blaming the person."
+      },
+      "faqs": [
+        {
+          "question": "Does heavy group contribution prove social Nine?",
+          "answer": "Heavy group contribution does not prove social Nine. Paid duties, mutual aid, family obligation, or exclusion risk may require service; compare whether personal priorities disappear even when membership and voice are secure."
+        },
+        {
+          "question": "How can belonging be tested without blaming accommodation?",
+          "answer": "Belonging can be tested without blaming accommodation by recording power, duty, and consequences of refusal. Silence under credible exclusion is a safety response, while safe dissent provides a cleaner comparison."
+        },
+        {
+          "question": "Which counterexample weakens the participation hypothesis?",
+          "answer": "A counterexample weakens the participation hypothesis when the person declines optional labor, protects a personal commitment, states disagreement, and stays connected without later compensating through invisible work."
+        }
+      ],
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-9",
+        "/en/personality/enneagram/type-9/instincts/self-preservation",
+        "/en/personality/enneagram/type-9/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "Does heavy group contribution prove social Nine?",
+          "How can belonging be tested without blaming accommodation?",
+          "Which counterexample weakens the participation hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "Does heavy group contribution prove social Nine?",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "How can belonging be tested without blaming accommodation?",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "Which counterexample weakens the participation hypothesis?",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "en",
+      "identity_key": "instinctual_subtype:type-9/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/one-to-one",
+      "path": "/en/personality/enneagram/type-9/instincts/one-to-one",
+      "title": "Type Nine one-to-one: attunement and preference merging as a secondary hypothesis",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English one-to-one draft is built around preference provenance, separateness after closeness, and consent under asymmetric influence, not the Chinese page’s joint-decision reconstruction.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "counterexample",
+          "alternative_environment",
+          "evidence_boundary",
+          "observation_exercise"
+        ],
+        "page_specific_signals": [
+          "ability to name a preference before hearing the close other person’s proposed choice",
+          "difference between chosen attunement and agreement produced by dependence or coercion",
+          "whether separate plans remain available after an intense shared experience or conflict repair"
+        ]
+      },
+      "answer_first": "Type Nine one-to-one is a traditional secondary hypothesis linking a core-Nine stability pattern with attunement, shared identity, intense connection, and difficulty locating a separate preference. It does not describe bodily mechanisms. Similar agreement can arise from care, language brokerage, disability support, financial dependence, coercion, or a realistic need for safety.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Track preference before attunement",
+          "body": "Ask what the person wanted before a close other expressed a plan, then observe whether the preference stays available during connection. Affection and compromise are ordinary and not subtype evidence."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare equal and unequal influence",
+          "body": "Use one decision where both people have money, exit, and speaking power, then compare a decision shaped by dependency. Agreement under unequal consequences cannot establish preference merging."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Describe relational attention without mechanism",
+          "body": "One-to-one instinct is a traditional attention comparison rather than evidence about bodily mechanisms, chemistry, or a universal pair-bond system. Consent and access to exit remain primary."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow intensity and visible initiative",
+          "body": "A person may initiate contact, advocate strongly for the relationship, or enjoy intense shared activity while still losing track of a separate agenda in specific decisions."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Control for care and coercion",
+          "body": "Translation duty, caregiving, disability assistance, migration status, financial dependence, abuse, housing insecurity, and cultural expectations may constrain separate choices."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Look for closeness with intact separateness",
+          "body": "Confidence should fall when the person names a preference first, sustains a separate plan, tolerates temporary disconnection, refuses pressure, and reconnects without erasing the disagreement."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep relational inference provisional",
+          "body": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence. Observations must never excuse coercion or treat another person’s consent as typology data."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Over four days, choose one shared purchase, one social plan, and one disagreement with a close person where each party can state a preference.",
+        "observable_signal": "Record each preference before discussion, money and exit access, first proposal, changes made, pressure cues, final agreement, and separate follow-through.",
+        "page_specific_signal": "Compare attunement in an equal-power decision with agreement where housing, care, language, or finances make refusal costly.",
+        "alternative_explanation": "Check affection, cultural compromise, translation, disability support, migration status, coercion, financial dependence, and actual safety.",
+        "reflection_prompt": "Identify one close interaction where separateness improved trust, then revise the preference-merging hypothesis while preserving consent boundaries."
+      },
+      "faqs": [
+        {
+          "question": "Does intense attunement prove one-to-one Nine?",
+          "answer": "Intense attunement does not prove one-to-one Nine. Affection, collaborative skill, translation, caregiving, or safety dependence may produce close coordination; examine preference provenance and access to refusal."
+        },
+        {
+          "question": "How should preference merging be compared across power?",
+          "answer": "Preference merging should be compared across power by recording each choice before discussion, then checking money, housing, care, language, and exit access; agreement under costly refusal is not clean subtype evidence."
+        },
+        {
+          "question": "Which evidence challenges a shared-identity hypothesis?",
+          "answer": "Evidence challenges a shared-identity hypothesis when the person keeps a separate plan, names disagreement before attuning, tolerates temporary distance, and reconnects without surrendering consent or preference."
+        }
+      ],
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-9",
+        "/en/personality/enneagram/type-9/instincts/self-preservation",
+        "/en/personality/enneagram/type-9/instincts/social",
+        "/en/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "Does intense attunement prove one-to-one Nine?",
+          "How should preference merging be compared across power?",
+          "Which evidence challenges a shared-identity hypothesis?"
+        ],
+        "question_answers": [
+          {
+            "question": "Does intense attunement prove one-to-one Nine?",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "How should preference merging be compared across power?",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "Which evidence challenges a shared-identity hypothesis?",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "identity_key": "core_type:type-9",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "path": "/zh/personality/enneagram/type-9",
+      "title": "九号核心：从稳定连接到优先级回收的可修正假设",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文核心页以承诺成本、意见进入时间和冲突后的行动复盘为独立结构，并非沿用英文页的偏好时间线。",
+        "outline": [
+          "answer_first",
+          "work_relationship_examples",
+          "motivation_attention",
+          "strengths_tradeoffs",
+          "decision_feedback_conflict",
+          "behavior_motive",
+          "counterexample",
+          "wings_mistypes",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "已经答应的个人事项在新请求出现后是否仍保留明确日程位置",
+          "不同意见从心里形成到向相关人说出的具体间隔以及当时权力条件",
+          "表面同意之后是否出现拖延抱怨失联以及可核对的补救行动"
+        ]
+      },
+      "answer_first": "九号是九型人格传统框架中的观察假设，可关注稳定连接、优先级模糊、冲突推迟以及重新接触自身议程的过程。温和或配合本身不能证明动机；调停职责、低权力位置、文化礼仪、疲劳、残障、创伤安全策略或现实危险都可能造成相似表现，替代解释需要核对。",
+      "sections": [
+        {
+          "kind": "work_relationship_examples",
+          "heading": "先从承诺成本看工作与关系",
+          "body": "在工作中，区分主持人按职责缓和争论与员工因报复风险保持沉默；在关系中，区分经过讨论的让步与没有表达就反复放弃安排。"
+        },
+        {
+          "kind": "motivation_attention",
+          "heading": "找出自己的事项何时退出日程",
+          "body": "记录最初想做什么、新请求何时进入、原承诺是否被重新安排，以及谁承担延期成本；不要仅凭平静语气判断是否存在优先级模糊。"
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "同时保留稳定能力与主体成本",
+          "body": "耐心、全局感和降温能力可能支持长期合作；若紧急差异被抹平、承诺不断漂移或他人只能猜测真实同意，稳定也可能以主体性为代价。"
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "把决定反馈冲突放进同一条时间线",
+          "body": "对照心里决定、实际表达、对方回应和下一步完成情况；若后来出现怨气或失约，回到最早没有说清的决策点并记录补救。"
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "把配合行为与推断动机拆开",
+          "body": "同意可能来自真诚选择、岗位要求、语言障碍、照护责任或安全计算；先确认拒绝是否可行、后果由谁承担，再讨论避冲突假设。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "主动寻找及时拒绝与持续行动",
+          "body": "若一个人能尽早说出优先级、承受他人失望、给出有范围的拒绝，并在分歧未消失时继续完成选择，九号假设应降低。"
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "比较9w8和9w1及常见误判",
+          "body": "9w8假设加入扎根抵抗、领地与延后发力，9w1假设加入秩序、原则与克制纠正；还要比较二号帮助、六号谨慎、耗竭和习得性外交。"
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "把结论留在观察层",
+          "body": "本页只能帮助检查稳定、连接、优先级和冲突推迟，不能评价品德、勇气、领导力、就业能力、关系质量、健康或未来结果。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "五天内选择一次共同排期、一次低风险分歧和一次与既有承诺冲突的新请求，逐项保留当时背景。",
+        "observable_signal": "记录最初偏好、说出口的原话、可用拒绝方式、日程位置、后续不满以及真正完成的下一步。",
+        "page_specific_signal": "比较对方表示失望时个人事项获得时间的速度，与所有人轻易同意时是否存在明显差异。",
+        "alternative_explanation": "核对岗位职责、报复风险、文化表达、语言条件、疲劳、残障、照护负担和现实危险。",
+        "reflection_prompt": "找出一次及时表达让协作更清楚的事件，并依据具体结果上调或下调冲突推迟假设。"
+      },
+      "faqs": [
+        {
+          "question": "平静调停行为能够单独证明九号假设吗",
+          "answer": "平静调停行为能够单独证明九号假设吗？不能。主持职责、较低权力、现实危险或文化礼仪都可能要求温和处理；应比较当事人的原始偏好、拒绝是否安全、会后承诺是否落地、后续不满与谁承担实际代价。"
+        },
+        {
+          "question": "冲突推迟如何与真实同意区分",
+          "answer": "冲突推迟如何与真实同意区分？要核对是否说出清楚偏好、拒绝是否安全、承诺是否进入日程，以及后来是否出现怨气或任务漂移；单次口头答应并不足够。"
+        },
+        {
+          "question": "哪些证据会削弱优先级模糊假设",
+          "answer": "哪些证据会削弱优先级模糊假设？当事人能保护自己的日程、在压力累积前表达分歧、容纳他人失望，并持续完成所选行动时，就应降低该解释。"
+        }
+      ],
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/wings/9w8",
+        "/zh/personality/enneagram/wings/9w1",
+        "/zh/personality/enneagram/type-9/instincts/self-preservation",
+        "/zh/personality/enneagram/type-9/instincts/social",
+        "/zh/personality/enneagram/type-9/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+        "平静调停行为能够单独证明九号假设吗",
+          "冲突推迟如何与真实同意区分",
+          "哪些证据会削弱优先级模糊假设"
+        ],
+        "question_answers": [
+          {
+            "question": "平静调停行为能够单独证明九号假设吗",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "冲突推迟如何与真实同意区分",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "哪些证据会削弱优先级模糊假设",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "温和、配合或延后分歧可能来自职责、文化、残障、权力、疲劳或现实危险，而不是类型。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "identity_key": "wing:9w8",
+      "entity_type": "wing",
+      "code": "9w8",
+      "path": "/zh/personality/enneagram/wings/9w8",
+      "title": "9w8：以九号稳定为核心的边界发力观察",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文9w8页独立采用边界授权、延迟次数和修复质量三组证据，不照搬英文页的领地协议框架。",
+        "outline": [
+          "answer_first",
+          "observable_situations",
+          "core_first_modifier",
+          "alternative_explanations",
+          "sibling_core_comparison",
+          "counterexample",
+          "wing_boundary",
+          "observation_exercise",
+          "faqs"
+        ],
+        "page_specific_signals": [
+          "边界第一次被越过到明确说不之间累计了多少次间接提示",
+          "发力所保护的是双方已约定范围还是未经同意扩大的控制范围",
+          "拒绝之后能否说明影响完成修复并重新进入可合作状态"
+        ]
+      },
+      "answer_first": "9w8是证据有限的翼型观察假设，应先确认九号对稳定与连接的关注，再把八号式扎根抵抗、边界发力和保护倾向作为次要修饰。安静后变得强硬不能单独证明9w8；岗位授权、财产责任、危险、训练、反复侵害或权力不平等都可能产生相同顺序。",
+      "sections": [
+        {
+          "kind": "observable_situations",
+          "heading": "用一次边界事件还原发力顺序",
+          "body": "选择工作空间、家庭约定或项目归属争议，记录既有规则、间接提示次数、明确拒绝原话、使用力度以及之后是否重新合作。"
+        },
+        {
+          "kind": "core_first_modifier",
+          "heading": "先验证稳定再讨论力量修饰",
+          "body": "观察当事人是否先维持共同基础，边界反复被越过后才直接发力；若一开始就争夺控制而没有稳定取向，九号核心解释会减弱。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "先排除职责危险和申诉不足",
+          "body": "安保职责、工会代表、照护责任、歧视经历、实际风险以及缺少中立申诉渠道，都可能需要扎根抵抗而不指向翼型。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "按行动时点比较九号与八号",
+          "body": "九号核心假设可能延迟动员以保持连续性，八号核心假设可能更早测试自主与权力；需要看多次事件中的时点和修复。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "寻找早期低力度表达的反例",
+          "body": "若当事人通常能在不满累积前说清边界、协商范围而不固守，并在新证据出现后调整立场，延后发力假设应下降。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "保持翼型证据边界",
+          "body": "9w8只是传统次级比较，不能证明力量、勇气或领导能力；只有九号核心模式已具有独立证据时，才可暂时使用该修饰。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "四天内选择一次边界请求、一次共享空间争议和一次保护行动，并确认每件事是否已有明确约定。",
+        "observable_signal": "记录发现越界的时间、间接提示、直接原话、正式权限、力度、对方回应以及已经完成的修复。",
+        "page_specific_signal": "比较延后才出现的扎根抵抗，与同一人较早用低力度说清限制的一次事件。",
+        "alternative_explanation": "核对岗位授权、所有权、安全风险、歧视、既往违约、沟通训练和中立复核渠道。",
+        "reflection_prompt": "指出一次更早表达同时保护稳定与同意的事件，并据此修正9w8修饰假设。"
+      },
+      "faqs": [
+        {
+          "question": "扎根边界力量能证明9w8吗",
+          "answer": "扎根边界力量能证明9w8吗？不能。安全责任、所有权、倡导职责或反复违约都可能要求坚定；还要检查稳定取向是否先出现、发力是否有授权以及事后是否修复。"
+        },
+        {
+          "question": "9w8如何与八号核心比较",
+          "answer": "9w8如何与八号核心比较？重点看行动时点：九号核心假设常先维持连续性再动员，八号核心假设可能更早处理自主和权力；音量大小不能替代事件证据。"
+        },
+        {
+          "question": "什么反例会削弱延后发力解释",
+          "answer": "什么反例会削弱延后发力解释？若当事人能尽早说清边界、按约定协商领地、接受中立复核，并且不会在尚未尝试配合前扩大控制，该解释就应降低。"
+        }
+      ],
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-9",
+        "/zh/personality/enneagram/wings/9w1",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "扎根边界力量能证明9w8吗",
+          "9w8如何与八号核心比较",
+          "什么反例会削弱延后发力解释"
+        ],
+        "question_answers": [
+          {
+            "question": "扎根边界力量能证明9w8吗",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "9w8如何与八号核心比较",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "什么反例会削弱延后发力解释",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "identity_key": "wing:9w1",
+      "entity_type": "wing",
+      "code": "9w1",
+      "path": "/zh/personality/enneagram/wings/9w1",
+      "title": "9w1：稳定连接下的原则与秩序修饰假设",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文9w1页从规则提出时点、沉默成本和纠正后的关系质量展开，形成与英文决策时序不同的原创结构。",
+        "outline": [
+          "answer_first",
+          "alternative_explanations",
+          "observable_situations",
+          "core_first_modifier",
+          "counterexample",
+          "sibling_core_comparison",
+          "wing_boundary",
+          "observation_exercise",
+          "faqs"
+        ],
+        "page_specific_signals": [
+          "个人标准在团队方案确定之前还是之后才被清楚提出",
+          "保持有序流程是否造成可预防错误继续存在或让不满转入沉默",
+          "纠正发生后使用的是具体请求自我责备还是退出参与"
+        ]
+      },
+      "answer_first": "9w1是证据有限的翼型观察假设，以九号的稳定连接倾向为核心，把一号式秩序、公平标准、克制和安静纠正作为可能修饰。礼貌、尽责或重视流程不能证明9w1；合规要求、专业训练、文化表达、完美主义、低职位或报复风险也会造成类似表现。",
+      "sections": [
+        {
+          "kind": "alternative_explanations",
+          "heading": "先核对合规训练与权力位置",
+          "body": "受监管工作、质量控制、宗教实践、文化礼仪、语言条件、低职位和现实报复风险，都可能产生有序克制而无需翼型解释。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "观察规则何时进入共同讨论",
+          "body": "选择流程评审、家庭惯例或公平争议，记录引用的规则、提出担忧的时点、接受的折中，以及未说出的不满是否改变后续参与。"
+        },
+        {
+          "kind": "core_first_modifier",
+          "heading": "确认秩序是否服务于稳定",
+          "body": "询问当事人是用规则维持共同参与，还是由正确本身持续组织注意；只有整洁或克制行为，无法支持九号核心判断。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "寻找公开异议与规则修订",
+          "body": "若当事人能及早提出不受欢迎的标准、容纳程序摩擦、根据新证据修改自己的规则，并保持连接，安静纠正假设会减弱。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "用纠正时点比较九号与一号",
+          "body": "九号核心可能把纠正推迟到稳定受威胁之后，一号核心可能因错误违背内在标准而更早行动；需要在平等权力情境中重复比较。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "只把9w1当作次级观察",
+          "body": "翼型研究支持很少，因此9w1不能证明道德、公平、尽责或自控水平，也不能用于岗位筛选或任何结果判断。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "六天内选择一次程序分歧、一次公平担忧和一次个人标准与群体安排不同的日常事件。",
+        "observable_signal": "记录标准内容、最早发现时点、提出异议的原话、权限、接受折中、后续不满以及完成的纠正。",
+        "page_specific_signal": "比较一次为了选择时机而有序沉默，与一次沉默导致可预防错误或隐藏怨气的事件。",
+        "alternative_explanation": "核对合规职责、专业训练、文化礼貌、职位高低、语言条件、疲劳和真实报复风险。",
+        "reflection_prompt": "说明一次更早提出标准同时改善准确性与连接的经历，并重新评估9w1假设。"
+      },
+      "faqs": [
+        {
+          "question": "有序调停行为能够单独证明9w1翼型吗",
+          "answer": "有序调停行为能够单独证明9w1翼型吗？不能。专业主持、合规职责、文化礼貌或低职位都可能带来克制；要检查稳定是否始终优先、标准在方案形成前还是之后说出、沉默造成什么错误，以及当事人是否完成后续纠正。"
+        },
+        {
+          "question": "9w1如何与一号核心比较",
+          "answer": "9w1如何与一号核心比较？可以看纠正时点：九号核心可能为维持连续性而延后，一号核心可能因错误触犯内在标准而较早行动；需要跨事件复核。"
+        },
+        {
+          "question": "哪些证据削弱安静纠正假设",
+          "answer": "哪些证据削弱安静纠正假设？若当事人及时提出不受欢迎的标准、承受公开程序摩擦、依据新事实修改规则，并在不先恢复平静时继续行动，就应降低该解释。"
+        }
+      ],
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-9",
+        "/zh/personality/enneagram/wings/9w8",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+        "有序调停行为能够单独证明9w1翼型吗",
+          "9w1如何与一号核心比较",
+          "哪些证据削弱安静纠正假设"
+        ],
+        "question_answers": [
+          {
+            "question": "有序调停行为能够单独证明9w1翼型吗",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "9w1如何与一号核心比较",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "哪些证据削弱安静纠正假设",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "identity_key": "instinctual_subtype:type-9/self-preservation",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/self-preservation",
+      "path": "/zh/personality/enneagram/type-9/instincts/self-preservation",
+      "title": "九号自保副型：日常舒适与优先级的次级观察",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文自保页通过资源充足度、惯例终点和重要事项回归率进行独立审查，没有复制英文页的维护任务叙事。",
+        "outline": [
+          "answer_first",
+          "alternative_environment",
+          "traditional_hypothesis",
+          "countertype_variation",
+          "matched_comparison",
+          "instinct_boundary",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise"
+        ],
+        "page_specific_signals": [
+          "舒适惯例结束后个人选定的重要事项是否在约定时间重新启动",
+          "资源充足与真实匮乏两种条件下同一惯例持续时间是否明显变化",
+          "维护性忙碌是否占用困难对话或个人方向已经保留的时间块"
+        ]
+      },
+      "answer_first": "九号自保是传统次级观察假设，把九号稳定模式与日常惯例、舒适、熟悉活动、维护事务和物质连续性联系起来，但不描述身体机制。重复行为也可能来自贫困、残障、慢性负荷、照护、恢复、感官需要、轮班工作或对稳定资源的合理需求。",
+      "sections": [
+        {
+          "kind": "alternative_environment",
+          "heading": "先承认资源与无障碍现实",
+          "body": "住房不稳、疼痛、残障、照护、感官调节、食物获取、轮班和财务波动，都可能让惯例具有保护作用，不能轻率写成回避。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把舒适放回个人优先级检查",
+          "body": "观察熟悉活动是否在维持当下稳定的同时，反复推迟本人已选择的重要方向；舒适本身很普通，不提供类型证据。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许维护事务中的高行动力",
+          "body": "一个人可能高效完成家务、采购和日常维护，却仍推迟困难对话；可见忙碌既不能确认也不能否定副型。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "在资源不同的日子做同人比较",
+          "body": "用同一任务和相近时间，比较资源充足与真实匮乏时的惯例；若行为主要随必要条件变化，副型解释应明显降低。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "不用身体机制解释日常注意",
+          "body": "这里的自保只是传统注意比较，不描述身体机制、生理系统或普遍生存类别；实际物质需要始终应优先获得现实支持。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "寻找休息后主动回到选择",
+          "body": "若舒适或惯例有清楚终点、确实恢复能力，并且无需外部催促就回到计划中的困难事项，回避性解释应降低。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "限制副型证据推论",
+          "body": "量表特定证据不能证明普遍副型本体或跨文化等价；只能把惯例、资源和优先级记录交给后续人工审查。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "五天内各选一项舒适惯例、维护任务和与其竞争时间的个人重要行动，保证记录具体时段。",
+        "observable_signal": "记录资源是否充足、无障碍需要、已选优先级、惯例起止、被打断反应以及重要行动是否恢复。",
+        "page_specific_signal": "比较资源较充分的一天与受到匮乏疼痛照护或睡眠不足影响的一天里同一舒适模式。",
+        "alternative_explanation": "核对贫困、残障、感官调节、恢复、轮班、家庭责任、食物获取和住房不稳。",
+        "reflection_prompt": "分别指出一次真正恢复能力的惯例和一次挤掉选择的惯例，不要用单一结论覆盖两者。"
+      },
+      "faqs": [
+        {
+          "question": "偏好熟悉惯例能证明九号自保吗",
+          "answer": "偏好熟悉惯例能证明九号自保吗？不能。无障碍、匮乏、疼痛、照护、感官调节或恢复都可能要求可预测性；应比较资源条件以及个人重要事项是否重新启动。"
+        },
+        {
+          "question": "舒适如何与优先级回避区分",
+          "answer": "舒适如何与优先级回避区分？要记录它的终点和后果：恢复性舒适会支持当事人回到已选任务，挤占性惯例则反复消耗保留时间却没有明确决定。"
+        },
+        {
+          "question": "哪一种同人资源条件匹配比较更有解释力",
+          "answer": "哪一种同人资源条件匹配比较更有解释力？应在任务、可用时间和责任相近时，观察资源充足与真实匮乏下的同一惯例，并记录惯例终点与重要行动是否恢复；若行为主要跟随疼痛、照护、住房或物质必要条件变化，副型解释就应明显降低。"
+        }
+      ],
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-9",
+        "/zh/personality/enneagram/type-9/instincts/social",
+        "/zh/personality/enneagram/type-9/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "偏好熟悉惯例能证明九号自保吗",
+          "舒适如何与优先级回避区分",
+        "哪一种同人资源条件匹配比较更有解释力"
+        ],
+        "question_answers": [
+          {
+            "question": "偏好熟悉惯例能证明九号自保吗",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "舒适如何与优先级回避区分",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "哪一种同人资源条件匹配比较更有解释力",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "identity_key": "instinctual_subtype:type-9/social",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/social",
+      "path": "/zh/personality/enneagram/type-9/instincts/social",
+      "title": "九号社交副型：参与归属与个人议程的次级假设",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文社交页独立使用义务清单、发言资源与拒绝后的成员资格来检验归属，不沿用英文页的安全群体对照顺序。",
+        "outline": [
+          "answer_first",
+          "countertype_variation",
+          "alternative_environment",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "counterexample",
+          "instinct_boundary",
+          "evidence_boundary",
+          "observation_exercise"
+        ],
+        "page_specific_signals": [
+          "接受群体维护任务之前个人承诺是否已经获得不可挪用的日程保护",
+          "不同意见出现后当事人是否仍拥有持续发言资源和正式决策权",
+          "礼貌拒绝非必要集体劳动后成员资格关系支持和个人时间发生什么"
+        ]
+      },
+      "answer_first": "九号社交是传统次级观察假设，把九号稳定模式与参与、共同劳动、群体节奏、归属以及个人议程变得不清楚联系起来，但不描述身体机制。服务也可能来自岗位职责、集体文化、互助规范、排斥风险、少数压力、家庭义务或不平等的发言机会。",
+      "sections": [
+        {
+          "kind": "countertype_variation",
+          "heading": "允许活跃组织者形态",
+          "body": "公开活跃、善于组织或承担领导并不排除假设；关键是个人优先级是否因长期承接群体需要而持续失去可见位置。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "列出角色文化与不平等条件",
+          "body": "工作职责、家庭义务、互助传统、迁移经历、歧视、语言地位、残障条件和依赖关系，都可能让参与成为现实必要。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "检查贡献是否遮住个人议程",
+          "body": "观察参与是否帮助维持连接，却让本人承诺反复后退；高贡献本身不是证据，因为群体确实需要合理分工。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "比较安全归属与真实排斥风险",
+          "body": "在一个可以安全异议的群体和一个可能失去收入照护或社群的群体中比较同一人；沉默随风险变化时应优先解释权力。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "观察有范围拒绝后的归属",
+          "body": "若当事人拒绝非必要劳动、保护个人承诺、说出异议，并且无需暗中加班补偿仍保持连接，副型假设应降低。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "把社交保留为概念比较",
+          "body": "社交本能在此只是传统注意线索，不描述身体机制或固定群体反应系统；归属需求与制度后果必须按现实处理。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "不把工具证据扩大为普遍结构",
+          "body": "量表特定证据不能证明副型普遍有效或跨文化等价，只能支持有限观察，且仍需人工审核具体语境。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 6,
+        "context": "六天内选择一项群体任务、一次会议异议和一次与个人承诺冲突的请求，明确每项是否属于正式职责。",
+        "observable_signal": "记录岗位义务、自愿劳动、发言时间、本人偏好、排斥风险、拒绝后的回应以及个人时间是否保留。",
+        "page_specific_signal": "比较安全群体中的贡献与异议，以及收入照护地位或社群资源依赖服从时的行为。",
+        "alternative_explanation": "核对岗位说明、集体规范、少数压力、迁移、语言条件、残障、家庭责任和可信排斥。",
+        "reflection_prompt": "分别指出一次不损害归属的拒绝和一次由真实权力造成的沉默，再修正社交假设。"
+      },
+      "faqs": [
+        {
+          "question": "大量群体贡献能证明九号社交吗",
+          "answer": "大量群体贡献能证明九号社交吗？不能。受薪职责、互助传统、家庭义务或排斥风险都可能要求服务；要比较归属和发言安全时个人议程是否仍然消失。"
+        },
+        {
+          "question": "如何在不责怪配合者的前提下检验归属",
+          "answer": "如何在不责怪配合者的前提下检验归属？先记录权力、职责和拒绝后果；可信排斥下的沉默属于安全回应，而能够安全异议的情境才提供更清楚比较。"
+        },
+        {
+          "question": "什么可观察反例会明确削弱群体参与假设",
+          "answer": "什么可观察反例会明确削弱群体参与假设？当事人能在归属安全时拒绝可选劳动、保护已排定的个人承诺、公开表达分歧，并且不靠隐形加班或额外讨好进行补偿仍保持成员关系与发言资源时，就应降低该解释。"
+        }
+      ],
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-9",
+        "/zh/personality/enneagram/type-9/instincts/self-preservation",
+        "/zh/personality/enneagram/type-9/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "大量群体贡献能证明九号社交吗",
+          "如何在不责怪配合者的前提下检验归属",
+        "什么可观察反例会明确削弱群体参与假设"
+        ],
+        "question_answers": [
+          {
+            "question": "大量群体贡献能证明九号社交吗",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "如何在不责怪配合者的前提下检验归属",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "什么可观察反例会明确削弱群体参与假设",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "identity_key": "instinctual_subtype:type-9/one-to-one",
+      "entity_type": "instinctual_subtype",
+      "code": "type-9/one-to-one",
+      "path": "/zh/personality/enneagram/type-9/instincts/one-to-one",
+      "title": "九号一对一副型：调谐亲密与独立偏好的次级观察",
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文一对一页从选择来源、拒绝成本和亲密后的独立行动重建决策，独立于英文页的权力成对比较。",
+        "outline": [
+          "answer_first",
+          "alternative_environment",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "counterexample",
+          "countertype_variation",
+          "instinct_boundary",
+          "evidence_boundary",
+          "observation_exercise"
+        ],
+        "page_specific_signals": [
+          "听到亲密对象方案之前能否先写下并说出自己的具体偏好",
+          "共同决定中双方的资金住房照护语言资源和退出条件是否相当",
+          "高强度共同经历或冲突修复之后各自计划是否仍可独立继续"
+        ]
+      },
+      "answer_first": "九号一对一是传统次级观察假设，把九号稳定模式与调谐、共同身份、强连接以及难以定位独立偏好联系起来，但不描述身体机制。相似的一致也可能来自关怀、翻译协助、残障支持、经济依赖、文化妥协、胁迫或现实安全需要。",
+      "sections": [
+        {
+          "kind": "alternative_environment",
+          "heading": "先排除照护依赖与胁迫",
+          "body": "翻译职责、照护、残障协助、迁移身份、经济依赖、住房不稳、虐待和文化期待，都可能限制独立选择，不能当作类型证据。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "在权力相当与不相当时比较",
+          "body": "选择一次双方都有资金、退出和发言条件的决定，再比较依赖关系中的决定；拒绝代价很高的同意不能证明偏好融合。"
+        },
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "在调谐之前记录偏好来源",
+          "body": "先问亲密对象表达方案前本人想要什么，再观察连接过程中该偏好能否保留；亲密和妥协很普通，不等于副型。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "寻找亲密中的完整分离性",
+          "body": "若当事人能先说偏好、保留独立计划、承受短暂距离、拒绝压力，并在重连时不抹掉分歧，融合假设应降低。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许强烈主动与关系倡议",
+          "body": "一个人可能主动联系、强力维护关系或喜欢密集共同活动，同时只在某些决策里失去独立议程，需要按事件判断。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "不用身体机制解释亲密",
+          "body": "一对一本能只是传统注意比较，不描述身体机制、化学反应或普遍配对系统；同意和退出条件始终优先于类型语言。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "把关系推论保持为暂定",
+          "body": "量表特定证据不能证明普遍副型本体或跨文化等价，任何观察都不能为胁迫辩护，也不能把他人同意当作类型资料。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "四天内选择一次共同购买、一次社交安排和一次与亲密对象的分歧，确保双方都能先单独写下偏好。",
+        "observable_signal": "记录各自偏好、资金和退出条件、第一方案、变化过程、压力线索、最终同意以及独立后续行动。",
+        "page_specific_signal": "比较权力相当时的调谐，与住房照护语言或经济条件让拒绝昂贵时的一致。",
+        "alternative_explanation": "核对亲密、文化妥协、翻译、残障支持、迁移身份、胁迫、经济依赖和现实安全。",
+        "reflection_prompt": "找出一次保持独立反而提升信任的互动，并在不削弱同意边界的前提下修正融合假设。"
+      },
+      "faqs": [
+        {
+          "question": "强烈调谐能证明九号一对一吗",
+          "answer": "强烈调谐能证明九号一对一吗？不能。亲密、合作技巧、翻译、照护或安全依赖都可能产生密切协调；要检查偏好来源、拒绝条件以及独立计划是否保留。"
+        },
+        {
+          "question": "偏好融合如何跨权力条件比较",
+          "answer": "偏好融合如何跨权力条件比较？应在讨论前记录双方选择，再核对资金、住房、照护、语言与退出资源；拒绝代价高昂时的一致不是清楚的副型证据。"
+        },
+        {
+          "question": "哪些证据会挑战共同身份假设",
+          "answer": "哪些证据会挑战共同身份假设？当事人能保留独立计划、在调谐前说出分歧、承受短暂距离，并在重连时不牺牲同意和偏好，该假设就应下降。"
+        }
+      ],
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-9",
+        "/zh/personality/enneagram/type-9/instincts/self-preservation",
+        "/zh/personality/enneagram/type-9/instincts/social",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "强烈调谐能证明九号一对一吗",
+          "偏好融合如何跨权力条件比较",
+          "哪些证据会挑战共同身份假设"
+        ],
+        "question_answers": [
+          {
+            "question": "强烈调谐能证明九号一对一吗",
+            "visible_path": "faqs.0.answer"
+          },
+          {
+            "question": "偏好融合如何跨权力条件比较",
+            "visible_path": "faqs.1.answer"
+          },
+          {
+            "question": "哪些证据会挑战共同身份假设",
+            "visible_path": "faqs.2.answer"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
+        ]
+      },
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ],
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}

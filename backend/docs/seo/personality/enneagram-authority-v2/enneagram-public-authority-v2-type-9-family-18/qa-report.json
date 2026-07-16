@@ -1,0 +1,100 @@
+{
+  "schema_version": "enneagram_public_authority_v2_family_qa_report.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18",
+  "generation_mode": "codex_native_content_generation",
+  "external_model_sessions": [],
+  "review_scope": {
+    "family": "type-9",
+    "asset_count": 12,
+    "locales": ["en", "zh-CN"],
+    "identity_keys": [
+      "core_type:type-9",
+      "wing:9w8",
+      "wing:9w1",
+      "instinctual_subtype:type-9/self-preservation",
+      "instinctual_subtype:type-9/social",
+      "instinctual_subtype:type-9/one-to-one"
+    ]
+  },
+  "skeptical_review": {
+    "reviewer_mode": "codex_native_skeptical_audit",
+    "accepted_without_repair": false,
+    "checks": [
+      "frozen identity, locale, route, claim, and limitation mapping",
+      "answer-first and FAQ depth with exact visible answerability support",
+      "core-first wing and non-mechanistic subtype boundaries",
+      "power, scarcity, disability, exclusion, coercion, consent, and exit alternatives",
+      "manual-review and release truth plus zero execution actions"
+    ],
+    "content_notes": [
+      "Core pages separate calm behavior from priority loss by tracking explicit preference, refusal conditions, calendar placement, and completed action.",
+      "9w8 tests delayed boundary force and authorized territory; 9w1 tests when standards enter discussion and what orderly silence costs.",
+      "Self-preservation compares routine across resources, social compares contribution across belonging risk, and one-to-one compares preference across power and exit access."
+    ]
+  },
+  "raw_draft_audit": {
+    "status": "failed_repaired",
+    "asset_specific_issue_count": 5,
+    "issues": {
+      "unsupported_ontology_claim": 1,
+      "faq_item_too_shallow": 4
+    },
+    "repair_rounds": [
+      {
+        "round": 1,
+        "status": "failed",
+        "remaining_asset_specific_issue_count": 4,
+        "issues": {"geo_answerability_unverified": 4},
+        "note": "Reframed the 9w8 wing boundary to remove a lexical fixed-identity collision and expanded four Chinese FAQs with event-specific evidence. The visible FAQ questions changed, but their answerability question arrays still held the earlier wording."
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "remaining_asset_specific_issue_count": 0,
+        "issues": {},
+        "note": "Aligned the four answerability question arrays with the repaired visible FAQ questions. The complete family then passed with zero asset-specific issues."
+      }
+    ],
+    "critical_contract_violations_after_repair": 0
+  },
+  "second_layer_readback": {
+    "status": "pass",
+    "normalized_faq_question_duplicates": 0,
+    "normalized_faq_answer_duplicates": 0,
+    "normalized_signal_duplicates": 0,
+    "normalized_independence_note_duplicates": 0,
+    "generated_splice_or_agreement_anomalies": 0,
+    "note": "Structured uniqueness checks, answer-first readback, safety phrase scan, and locale-outline comparison found no duplicated family copy, mechanical translation outline, generated splice, or agreement anomaly."
+  },
+  "focused_contract_repair": {
+    "initial_status": "failed_repaired",
+    "failure_count": 1,
+    "failure": "The English social subtype used a semantically bounded but non-canonical bodily-mechanism phrase that did not match the focused contract allowlist.",
+    "repair": "Aligned the visible instinct-boundary sentence to the canonical does-not-describe-bodily-mechanisms wording without changing its claim, evidence, manual-review, or release truth.",
+    "final_status": "pass"
+  },
+  "final_qa": {
+    "status": "pass_for_manual_review_handoff",
+    "asset_count": 12,
+    "locale_counts": {"en": 6, "zh-CN": 6},
+    "entity_counts": {"core_type": 2, "wing": 4, "instinctual_subtype": 6},
+    "faq_count": 36,
+    "asset_specific_issue_count": 0,
+    "deferred_target_count": 104,
+    "manual_review_state": "pending_manual_review",
+    "reviewer": null,
+    "human_review_completed": false,
+    "publish_eligible": false
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}
