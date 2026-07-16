@@ -92984,8 +92984,8 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-promotion-readiness-49",
     "depends_on": ["BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48"],
-    "status": "review_fix_local_verified",
-    "commit_sha": "fa552b93a1f1bb4142aafb2f02a1cc74a728b0a7",
+    "status": "rebased_local_verified_github_checks_pending",
+    "commit_sha": "956a07e603f9247f0d6dceb28074ce991fbd7c6c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3141",
     "checks": {
       "dependency": {
@@ -93009,15 +93009,15 @@
         "evidence": "After the heavy-process guard found no competing FermatMind validation, the sole initial bash backend/scripts/ci_verify_mbti.sh run passed: Big Five 1506 tests / 181667 assertions plus Enneagram, MBTI smoke, Partner API, OpenAPI, migration safety, auth, order-security, dependency-security and downstream gates. After the GitHub-only branch-diff classifier exposed the missing registration, the corrected exact GitHub Big Five command passes 1506 tests / 181665 assertions with one existing skip; focused classifier coverage passes 2 / 5 and PR49 passes 9 / 140. Pint, PHP/JSON/YAML/JavaScript syntax, deterministic package hashes, git diff --check and exact 16-file allowed-path validation pass. Generated compile timestamp/hash side effects were restored; production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutations remain zero."
       },
       "github_verify_bigfive": {
-        "status": "pass_superseded_by_review_fix",
-        "evidence": "Rebased head e68378f547faef37bdd6af035032752a293b0504 passed all nine GitHub checks with merge state CLEAN, including verify-bigfive in 3m12s. Exact-head review then found one valid P2 in the package file constant; the locally verified fix requires a fresh complete GitHub cycle and exact-head review."
+        "status": "pass_superseded_by_rebase",
+        "evidence": "Head 246ee5edaac1cb1d39550c539f4425070b01fee0 passed all nine GitHub checks after both review fixes, including verify-bigfive in 3m34s, MBTI legacy in 3m18s and MBTI V2 in 3m31s. PR3143 then advanced main, so the clean rebase onto de038bea461ede440e1c6289f2af8e74930cbeb7 requires a fresh exact-head cycle."
       },
       "codex_review": {
         "status": "p2_fixes_local_verified",
         "evidence": "Thread PRRT_kwDOQn6xoM6RauOP found the unreachable unique-media rebuild and is resolved/outdated after the reviewed sidecar/observation/live-database fix. Thread PRRT_kwDOQn6xoM6Ra8fB then correctly found that source rows were not reconstructed from the locked PR48 snapshot. The second fix now reconstructs and exactly compares both review assets and source-permission rows from the immutable snapshot; a regression recomputes source, permission, release, payload and sidecar hashes and still proves rejection."
       }
     },
-    "failure_reason": "Two exact-head review P2s identified the unreachable unique-media rebuild and unbound source rows. Both fixes are locally verified; fresh GitHub checks and exact-head review are still required.",
+    "failure_reason": "PR3143 advanced main after both review fixes passed all nine checks. The clean rebase is locally verified; fresh GitHub checks and exact-head review are still required.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -93034,7 +93034,8 @@
       {"at": "2026-07-16T11:02:53Z", "from": "github_check_fix_local_verified", "to": "ready_to_merge", "note": "Fresh head 04f200cf3fcd9899e0091e76efcc9d19748755e8 passed all nine required GitHub checks with merge state CLEAN; verify-bigfive passed in 4m10s, exact-head Codex review reported no major issues, and reviewThreads is empty. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge. The package remains HOLD_FAIL_CLOSED_MEDIA_AUTHORITY, PR50 remains blocked, and controlled mutations remain zero."},
       {"at": "2026-07-16T11:05:25Z", "from": "ready_to_merge", "to": "rebased_local_verified_github_checks_pending", "note": "PR3142 advanced origin/main to 13182ffeb3bad72757776046b8f92d863b12318e after the ready-to-merge evidence was recorded. All eight PR49 commits rebased without conflict; the substantive implementation is now e108df550423501af224440e28fa79de98567b09 and the current pre-ledger head is aac8feee98c3b4848880bb3f97b0ee4018936dd6. Post-rebase PR49 passes 9 / 140, the complete runtime-freeze file passes 358 / 739, Pint and deterministic package validation pass, immutable package hashes are unchanged, and exact 16-file scope validation passes. Force-with-lease push, fresh nine-check GitHub cycle and exact-head review are required before merge; media readiness remains HOLD and controlled mutations remain zero."},
       {"at": "2026-07-16T11:17:35Z", "from": "rebased_local_verified_github_checks_pending", "to": "review_fix_local_verified", "note": "Rebased head e68378f547faef37bdd6af035032752a293b0504 passed all nine checks, then exact-head review raised one valid P2: the current zero-media package file SHA constant prevented the documented fresh unique-media rebuild. The fix keeps immutable snapshot/confirmation/OWNER hashes code-locked, uses a reviewed sibling package SHA sidecar, dynamically binds the sibling observation into media/release locks, validates observation/runtime/media semantics, and leaves the live database drift gate mandatory. PR49 passes 9 / 144, related PR41/43/47/48/49 passes 61 / 8619, Pint, syntax, package build/validation and git diff checks pass. Fresh GitHub checks and exact-head review remain required; current production media remains zero-candidate HOLD and controlled mutations remain zero."},
-      {"at": "2026-07-16T11:26:42Z", "from": "review_fix_local_verified", "to": "review_fix_local_verified", "note": "Head 49de7cc66c8ec09f0fcf95bab8d3488aa5f45e36 passed all nine checks, then exact-head review raised a second valid P2: rehashed source rows were not compared with the immutable PR48 snapshot. The service now reconstructs exact review/source rows from the locked snapshot file and rejects substitution even when source, permission, release, payload and sidecar hashes are all recomputed. PR49 passes 10 / 150 and related PR41/43/47/48/49 passes 62 / 8625; Pint, PHP syntax and git diff checks pass. Fresh checks/review remain required; package disposition and zero controlled mutations are unchanged."}
+      {"at": "2026-07-16T11:26:42Z", "from": "review_fix_local_verified", "to": "review_fix_local_verified", "note": "Head 49de7cc66c8ec09f0fcf95bab8d3488aa5f45e36 passed all nine checks, then exact-head review raised a second valid P2: rehashed source rows were not compared with the immutable PR48 snapshot. The service now reconstructs exact review/source rows from the locked snapshot file and rejects substitution even when source, permission, release, payload and sidecar hashes are all recomputed. PR49 passes 10 / 150 and related PR41/43/47/48/49 passes 62 / 8625; Pint, PHP syntax and git diff checks pass. Fresh checks/review remain required; package disposition and zero controlled mutations are unchanged."},
+      {"at": "2026-07-16T11:35:53Z", "from": "review_fix_local_verified", "to": "rebased_local_verified_github_checks_pending", "note": "Head 246ee5edaac1cb1d39550c539f4425070b01fee0 passed all nine checks after both P2 fixes, but PR3143 advanced main to de038bea461ede440e1c6289f2af8e74930cbeb7 before merge. All twelve PR49 commits rebased without conflict; the source-lock fix is now 956a07e603f9247f0d6dceb28074ce991fbd7c6c. Post-rebase PR49 plus the complete runtime-freeze classifier pass 368 / 889, Pint and deterministic package validation pass, exact 16-file scope remains unchanged, and the package remains zero-media HOLD with zero controlled mutations. Force-with-lease push, fresh nine checks and exact-head review are required."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50": {
