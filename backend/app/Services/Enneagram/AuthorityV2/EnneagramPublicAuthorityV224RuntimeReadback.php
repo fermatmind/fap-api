@@ -554,7 +554,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             }
         }
 
-        $visible = $this->normalizedVisibleText($dom->textContent ?? '');
+        $visible = $this->normalizedRenderableBodyText($xpath);
         if (! in_array('html_private_reviewer_exposed', $issues, true)) {
             $this->assertNoSensitiveValues($visible, $sensitiveValues, 'html', $issues);
         }
@@ -911,6 +911,34 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     private function normalizedVisibleText(string $value): string
     {
         return preg_replace('/\s+/u', ' ', trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5))) ?? '';
+    }
+
+    private function normalizedRenderableBodyText(DOMXPath $xpath): string
+    {
+        $nodes = $xpath->query(
+            '//body//text()['
+            .'not(ancestor::script)'
+            .' and not(ancestor::style)'
+            .' and not(ancestor::template)'
+            .' and not(ancestor::noscript)'
+            .' and not(ancestor::head)'
+            .' and not(ancestor::*[@hidden])'
+            .' and not(ancestor::*[translate(@aria-hidden,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="true"])'
+            .']',
+        );
+        if ($nodes === false) {
+            return '';
+        }
+
+        $text = [];
+        foreach ($nodes as $node) {
+            $value = trim((string) $node->nodeValue);
+            if ($value !== '') {
+                $text[] = $value;
+            }
+        }
+
+        return $this->normalizedVisibleText(implode(' ', $text));
     }
 
     /** @param list<mixed> $sections @param list<string> $issues */
