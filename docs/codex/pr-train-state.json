@@ -95812,8 +95812,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "8d670bae9281ee40ed6b208a12e9399e0201687d",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -95868,9 +95868,14 @@
         "at": "2026-07-16T10:40:31Z",
         "status": "local_validation_passed",
         "note": "Replaced the media-rights release blocker with the exact 116-page empty-media contract, removed PR19 media planning from package inputs, reconciled PR22, and passed focused 4/54 plus full 184/28158 after merging isolated baseline repair PR #3140. PHP lint, Pint, Composer, metadata, report hash, diff, and scope checks also pass."
+      },
+      {
+        "at": "2026-07-16T10:41:33Z",
+        "status": "ready_to_push",
+        "note": "Bound commit_sha to the exact locally verified implementation commit 8d670bae9281ee40ed6b208a12e9399e0201687d; only this ledger binding remains after the complete validation cycle."
       }
     ],
-    "updated_at": "2026-07-16T10:40:31Z"
+    "updated_at": "2026-07-16T10:41:33Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
