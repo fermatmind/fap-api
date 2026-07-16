@@ -133,13 +133,23 @@ invariant(packageJson.ready_for_working_revision === readinessReady, 'reviewer/m
 invariant(packageJson.blockers.includes('admin_user_1_totp_enrollment_missing') === !reviewerTotpReady, 'reviewer TOTP blocker mismatch');
 invariant(readinessReady ? packageJson.blockers.length === 0 : packageJson.blockers.length > 0, 'readiness blockers do not match the final disposition');
 invariant(packageJson.ready_for_promotion === false && packageJson.release_snapshot_executable === false, 'promotion/release execution must remain blocked');
-for (const [name, value] of Object.entries(packageJson.actions)) {
-  if (name === 'production_database_read_only_observation') {
-    invariant(value === true, 'production observation evidence missing');
-  } else {
-    invariant(value === 0, `${name} must remain zero`);
-  }
-}
+invariant(canonicalSha256(packageJson.actions) === canonicalSha256({
+  production_database_read_only_observation: true,
+  database_writes: 0,
+  cms_writes: 0,
+  media_library_writes: 0,
+  media_uploads: 0,
+  working_revisions_created: 0,
+  promotions: 0,
+  published_pointer_changes: 0,
+  indexability_changes: 0,
+  sitemap_changes: 0,
+  llms_changes: 0,
+  schema_changes: 0,
+  search_submissions: 0,
+  cache_operations: 0,
+  deployments: 0,
+}), 'action evidence must contain the exact read-only observation and zero-mutation fields');
 
 console.log('PASS: exact ZH6 snapshot is bound to admin_user:1 author/reviewer authority, a hash-locked solo_operator review record, 18 source permissions, six runtime rollback baselines, and a non-executable release snapshot.');
 console.log(`PASS: the Media Library observation found ${eligibleCount} authority-complete Hub hero/OG assets; uniqueness is enforced and no ambiguous or article media is repurposed.`);

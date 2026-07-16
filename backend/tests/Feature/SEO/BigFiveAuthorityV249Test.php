@@ -319,10 +319,21 @@ final class BigFiveAuthorityV249Test extends TestCase
     public function test_readiness_service_requires_the_complete_zero_mutation_action_evidence(): void
     {
         $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
-        unset($package['actions']);
+        unset($package['actions']['cms_writes']);
         $temporary = $this->writeTemporaryRehashedPackage($package, 'missing-actions-package');
 
         try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/missing-actions-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'action evidence must contain the exact read-only observation and zero-mutation fields',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
             app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
             $this->fail('Expected missing zero-mutation action evidence to fail closed.');
         } catch (RuntimeException $exception) {
