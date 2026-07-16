@@ -477,6 +477,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_discoverability_snapshot_hashes_non_enneagram_relative_llms_urls(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $discoverabilityState = (object) ['relative_llms_url' => '/en/articles/runtime-evidence'];
+        $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
+
+        $snapshot = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+            $report,
+            'https://frontend.test',
+        );
+
+        $this->assertSame(116, data_get($snapshot, 'url_sets.sitemap.url_count'));
+        $this->assertSame(117, data_get($snapshot, 'url_sets.llms.url_count'));
+        $this->assertSame(117, data_get($snapshot, 'url_sets.llms_full.url_count'));
+        $this->assertSame(116, data_get($snapshot, 'url_sets.llms.enneagram_url_count'));
+        $this->assertNotSame(
+            data_get($snapshot, 'url_sets.sitemap.url_set_sha256'),
+            data_get($snapshot, 'url_sets.llms.url_set_sha256'),
+        );
+    }
+
     public function test_execute_rejects_full_url_set_drift_before_any_runtime_write(): void
     {
         $this->seedPublishedEstate();
@@ -1070,6 +1092,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 ? trim($discoverabilityState->additional_url)
                 : '';
             $urlText = $additionalUrl === '' ? $baseUrlText : $baseUrlText."\n".$additionalUrl;
+            $relativeLlmsUrl = is_object($discoverabilityState) && is_string($discoverabilityState->relative_llms_url ?? null)
+                ? trim($discoverabilityState->relative_llms_url)
+                : '';
+            $llmsUrlText = $relativeLlmsUrl === '' ? $urlText : $urlText."\n".$relativeLlmsUrl;
             if (($redirectSurface === 'api' && str_starts_with($url, 'https://api.test/api/v0.5/personality-content-assets?'))
                 || ($redirectSurface === 'html' && str_starts_with($url, 'https://frontend.test/') && ! in_array($url, [
                     'https://frontend.test/sitemap.xml',
@@ -1149,7 +1175,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 )).'</urlset>', 200, ['Content-Type' => 'application/xml']);
             }
             if (in_array($url, ['https://frontend.test/llms.txt', 'https://frontend.test/llms-full.txt'], true)) {
-                return Http::response($urlText, 200, ['Content-Type' => 'text/plain']);
+                return Http::response($llmsUrlText, 200, ['Content-Type' => 'text/plain']);
             }
             if (str_starts_with($url, 'https://frontend.test/')) {
                 $path = (string) parse_url($url, PHP_URL_PATH);

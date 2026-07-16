@@ -445,7 +445,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     /** @return list<string> */
     private function textUrls(string $text, string $frontendBaseUrl): array
     {
-        preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9])/(?:en|zh)/personality/enneagram[^\s<>()"\']*#i', $text, $matches);
+        preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9:/])/(?!/)[^\s<>()"\']+#i', $text, $matches);
 
         return $this->normalizedUrlPaths($matches[0] ?? [], $frontendBaseUrl);
     }
