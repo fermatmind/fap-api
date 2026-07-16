@@ -80,9 +80,9 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         [$preReadback, $preReadbackSha] = $this->optionalJsonFileWithSha((string) $this->option('pre-readback'), 'pre-readback');
         $backendSha = $this->requiredOption('backend-deployed-sha');
         $frontendSha = $this->requiredOption('frontend-deployed-sha');
-        $this->assertDeployedRevisions($backendSha, $frontendSha);
         $apiBaseUrl = $this->requiredHttpsOrigin('api-base-url');
         $frontendBaseUrl = $this->requiredHttpsOrigin('frontend-base-url');
+        $this->assertDeployedRevisions($backendSha, $frontendSha, $frontendBaseUrl);
         $revalidationEndpoint = $this->revalidationEndpoint();
 
         if ($preflight) {
@@ -133,12 +133,16 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         return $result;
     }
 
-    private function assertDeployedRevisions(string $backendSha, string $frontendSha): void
+    private function assertDeployedRevisions(string $backendSha, string $frontendSha, string $frontendBaseUrl): void
     {
         foreach ([$backendSha, $frontendSha] as $sha) {
             if (preg_match('/^[0-9a-f]{40}$/', $sha) !== 1) {
                 throw new RuntimeException('Backend/frontend deployed SHAs must be exact lowercase 40-character Git SHAs.');
             }
+        }
+        $revisionUrl = trim((string) $this->option('frontend-revision-url'));
+        if ($revisionUrl !== '') {
+            $this->assertUrlUsesOrigin($revisionUrl, $frontendBaseUrl, 'frontend-revision-url');
         }
         if (app()->environment('testing') && (bool) $this->option('allow-testing')) {
             return;
@@ -148,9 +152,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
             throw new RuntimeException('Deployed backend REVISION does not match the exact authorization SHA.');
         }
         $url = $this->requiredOption('frontend-revision-url');
-        if (! filter_var($url, FILTER_VALIDATE_URL) || ! str_starts_with($url, 'https://')) {
-            throw new RuntimeException('--frontend-revision-url must be an HTTPS URL.');
-        }
+        $this->assertUrlUsesOrigin($url, $frontendBaseUrl, 'frontend-revision-url');
         $response = Http::acceptJson()->timeout(15)->get($url);
         $observed = trim((string) ($response->json('revision') ?? $response->header('X-Revision') ?? $response->body()));
         if (! $response->successful() || $observed !== $frontendSha) {
@@ -335,6 +337,38 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         }
 
         return rtrim($value, '/');
+    }
+
+    private function assertUrlUsesOrigin(string $url, string $expectedOrigin, string $name): void
+    {
+        $parts = parse_url($url);
+        if (! filter_var($url, FILTER_VALIDATE_URL)
+            || ! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || trim((string) ($parts['host'] ?? '')) === ''
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || array_key_exists('query', $parts)
+            || array_key_exists('fragment', $parts)) {
+            throw new RuntimeException('--'.$name.' must be an exact HTTPS URL without credentials, query, or fragment.');
+        }
+        if (! hash_equals($this->canonicalHttpsOrigin($expectedOrigin), $this->canonicalHttpsOrigin($url))) {
+            throw new RuntimeException('--'.$name.' must use the exact --frontend-base-url origin.');
+        }
+    }
+
+    private function canonicalHttpsOrigin(string $url): string
+    {
+        $parts = parse_url($url);
+        if (! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || trim((string) ($parts['host'] ?? '')) === '') {
+            throw new RuntimeException('HTTPS origin is invalid.');
+        }
+        $host = strtolower((string) $parts['host']);
+        $port = isset($parts['port']) ? (int) $parts['port'] : null;
+
+        return 'https://'.$host.($port !== null && $port !== 443 ? ':'.$port : '');
     }
 
     private function optionalPositiveIntegerOption(string $name): ?int

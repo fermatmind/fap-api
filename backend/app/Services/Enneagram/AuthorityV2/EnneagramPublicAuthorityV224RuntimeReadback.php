@@ -39,6 +39,12 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if (! in_array($phase, ['pre', 'post'], true)) {
             throw new RuntimeException('Runtime readback phase must be pre or post.');
         }
+        $runtimeOrigins = [
+            'api_base_origin' => $this->exactHttpsOrigin($apiBaseUrl, 'API base origin'),
+            'frontend_base_origin' => $this->exactHttpsOrigin($frontendBaseUrl, 'frontend base origin'),
+        ];
+        $apiBaseUrl = $runtimeOrigins['api_base_origin'];
+        $frontendBaseUrl = $runtimeOrigins['frontend_base_origin'];
         $batches = $this->manifest->readbackBatches($releaseReport);
         if ($batch === 'all') {
             $targets = array_merge(...array_values($batches));
@@ -80,6 +86,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'observed_at' => now()->utc()->toIso8601String(),
             'phase' => $phase,
             'batch' => $batch,
+            'runtime_origins' => $runtimeOrigins,
             'target_count' => count($targets),
             'api_read_count' => count($targets),
             'html_read_count' => count($targets),
@@ -494,6 +501,25 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $defaultPort = ($scheme === 'https' && $port === 443) || ($scheme === 'http' && $port === 80);
 
         return $scheme.'://'.$host.($port !== null && ! $defaultPort ? ':'.$port : '');
+    }
+
+    private function exactHttpsOrigin(string $value, string $label): string
+    {
+        $value = trim($value);
+        $parts = parse_url($value);
+        if (! filter_var($value, FILTER_VALIDATE_URL)
+            || ! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || trim((string) ($parts['host'] ?? '')) === ''
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || ! in_array((string) ($parts['path'] ?? ''), ['', '/'], true)
+            || array_key_exists('query', $parts)
+            || array_key_exists('fragment', $parts)) {
+            throw new RuntimeException($label.' must be an exact HTTPS origin without credentials, path, query, or fragment.');
+        }
+
+        return rtrim($value, '/');
     }
 
     private function isExactFrontendUrl(string $url, string $frontendBaseUrl, string $expectedPath): bool

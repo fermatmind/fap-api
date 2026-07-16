@@ -438,6 +438,40 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_console_rejects_frontend_revision_probe_on_a_different_origin_before_any_write(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                '--preflight' => true,
+                '--review-register' => $registerPath,
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--frontend-revision-url' => 'https://staging.test/revision',
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+                '--allow-testing' => true,
+            ])
+                ->expectsOutputToContain('--frontend-revision-url must use the exact --frontend-base-url origin.')
+                ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
+                ->expectsOutputToContain('writes_committed=0')
+                ->assertFailed();
+
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+            Http::assertNothingSent();
+        } finally {
+            File::delete($registerPath);
+        }
+    }
+
     public function test_late_execute_failure_reports_committed_writes_and_safe_rollback_evidence(): void
     {
         $this->seedPublishedEstate();
@@ -587,6 +621,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->fingerprintRaw($readback),
         );
         $this->assertSame($this->fingerprintRaw($readback), data_get($valid, 'authorization_packet.pre_readback.sha256'));
+        $this->assertSame([
+            'api_base_origin' => 'https://api.test',
+            'frontend_base_origin' => 'https://frontend.test',
+        ], data_get($valid, 'authorization_packet.pre_readback.runtime_origins'));
 
         $invalidArtifacts = [
             'partial batch' => [...$readback, 'batch' => 'canary-00'],
@@ -597,6 +635,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             'URL subset drift' => array_replace_recursive($readback, [
                 'url_sets' => ['sitemap' => ['enneagram_url_count' => 115]],
             ]),
+            'API origin drift' => array_replace_recursive($readback, [
+                'runtime_origins' => ['api_base_origin' => 'https://staging-api.test'],
+            ]),
+            'frontend origin drift' => array_replace_recursive($readback, [
+                'runtime_origins' => ['frontend_base_origin' => 'https://staging-frontend.test'],
+            ]),
+            'missing origins' => array_diff_key($readback, ['runtime_origins' => true]),
         ];
         foreach ($invalidArtifacts as $label => $invalid) {
             try {

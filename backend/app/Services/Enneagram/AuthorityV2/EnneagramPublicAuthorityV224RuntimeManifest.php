@@ -221,10 +221,12 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
                 $records,
                 $publicProjectionFingerprint,
                 $stableFingerprint,
+                $runtimeEndpoints,
             );
             $preReadbackBinding = [
                 'sha256' => $preReadbackSha256,
                 'observed_at' => (string) $preReadback['observed_at'],
+                'runtime_origins' => $preReadback['runtime_origins'],
                 'public_projection_fingerprint' => (string) ($preReadback['public_projection_fingerprint'] ?? ''),
                 'stable_identity_discoverability_fingerprint' => (string) ($preReadback['stable_identity_discoverability_fingerprint'] ?? ''),
                 'url_sets' => $preReadback['url_sets'] ?? null,
@@ -296,12 +298,13 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         ];
     }
 
-    /** @param array<string,mixed> $preReadback @param list<array<string,mixed>> $records */
+    /** @param array<string,mixed> $preReadback @param list<array<string,mixed>> $records @param array<string,string> $runtimeEndpoints */
     private function assertPreReadback(
         array $preReadback,
         array $records,
         string $publicProjectionFingerprint,
         string $stableFingerprint,
+        array $runtimeEndpoints,
     ): void {
         $observedAtRaw = trim((string) ($preReadback['observed_at'] ?? ''));
         if ($observedAtRaw === '') {
@@ -332,6 +335,13 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
             || ! hash_equals($publicProjectionFingerprint, (string) ($preReadback['public_projection_fingerprint'] ?? ''))
             || ! hash_equals($stableFingerprint, (string) ($preReadback['stable_identity_discoverability_fingerprint'] ?? ''))) {
             throw new RuntimeException('Exact pre-readback artifact is invalid, incomplete, or stale.');
+        }
+        $expectedOrigins = [
+            'api_base_origin' => (string) $runtimeEndpoints['api_base_origin'],
+            'frontend_base_origin' => (string) $runtimeEndpoints['frontend_base_origin'],
+        ];
+        if (($preReadback['runtime_origins'] ?? null) !== $expectedOrigins) {
+            throw new RuntimeException('Exact pre-readback runtime origins do not match the authorization endpoints.');
         }
 
         $expectedRows = [];
