@@ -75,6 +75,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
     public function test_authorized_execute_runs_import_bind_atomic_promotion_cache_and_nine_plus_canary_readbacks(): void
     {
         $this->seedPublishedEstate();
+        $nonReleaseAsset = $this->seedNonReleaseAsset();
         $report = $this->releaseReport();
         $register = $this->reviewRegister($report);
         $reportSha = $this->fingerprintRaw($report);
@@ -133,6 +134,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 ->where('review_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED)
                 ->whereNull('working_revision_id')
                 ->count());
+            $nonReleaseAsset->refresh();
+            $this->assertSame('Non-release Enneagram draft', $nonReleaseAsset->title);
+            $this->assertSame(PersonalityPublicContentAsset::LAUNCH_DRAFT, $nonReleaseAsset->launch_state);
+            $this->assertNull($nonReleaseAsset->working_revision_id);
+            $this->assertNull($nonReleaseAsset->published_revision_id);
             $this->assertStringNotContainsString('Private Human Reviewer', json_encode($result, JSON_THROW_ON_ERROR));
         } finally {
             @unlink($rollbackPath);
@@ -575,6 +581,41 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             ]);
         }
         $this->assertSame(116, PersonalityPublicContentAsset::query()->count());
+    }
+
+    private function seedNonReleaseAsset(): PersonalityPublicContentAsset
+    {
+        return PersonalityPublicContentAsset::query()->create([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-draft-extra',
+            'slug' => 'enneagram/type-draft-extra',
+            'locale' => 'en',
+            'title' => 'Non-release Enneagram draft',
+            'summary' => 'This CMS draft is intentionally outside the authorized 116-page release set.',
+            'content_sections_json' => [],
+            'seo_json' => [],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_NOFOLLOW,
+            'canonical_json' => [],
+            'hreflang_json' => [],
+            'faq_json' => [],
+            'media_json' => ['hero' => null, 'inline' => [], 'og' => null],
+            'schema_json' => [],
+            'method_boundary_json' => [],
+            'evidence_notes_json' => [],
+            'authority_json' => ['reviewer' => null],
+            'internal_links_json' => [],
+            'is_public' => false,
+            'index_eligible' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_DRAFT,
+            'review_state' => 'draft',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'cms-draft-outside-authorized-release',
+            'source_hash' => hash('sha256', 'non-release-enneagram-draft'),
+        ]);
     }
 
     /** @param array<string,mixed> $report @return array<string,mixed> */

@@ -143,7 +143,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         );
         $this->executionProgress['review_bind_committed'] = true;
         $this->executionProgress['failure_stage'] = 'promotion';
-        $targets = $this->promotionTargets((string) $releaseReport['package_sha256']);
+        $targets = $this->promotionTargets($releaseReport, (string) $releaseReport['package_sha256']);
         $promotionPlan = $this->promoter->preflight($targets);
         try {
             $promoted = $this->promoter->promote(
@@ -275,38 +275,49 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         return $result;
     }
 
-    /** @return list<array<string,mixed>> */
-    private function promotionTargets(string $packageSha256): array
+    /** @param array<string,mixed> $releaseReport @return list<array<string,mixed>> */
+    private function promotionTargets(array $releaseReport, string $packageSha256): array
     {
-        $targets = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
-            ->where('org_id', 0)
-            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
-            ->orderBy('id')
-            ->get()
-            ->map(function (PersonalityPublicContentAsset $asset) use ($packageSha256): array {
-                $revision = $asset->working_revision_id !== null
-                    ? PersonalityPublicContentAssetRevision::query()->find((int) $asset->working_revision_id)
-                    : null;
-                if (! $revision instanceof PersonalityPublicContentAssetRevision
-                    || (string) $revision->authority_package_sha256 !== $packageSha256) {
-                    throw new RuntimeException('Promotion target working revision is missing or package-bound incorrectly.');
-                }
-
-                return [
-                    'asset_id' => (int) $asset->id,
-                    'asset_key' => (string) $revision->authority_asset_key,
-                    'expected_current_published_revision_id' => $asset->published_revision_id !== null
-                        ? (int) $asset->published_revision_id
-                        : null,
-                    'expected_working_revision_id' => (int) $revision->id,
-                    'expected_package_sha256' => (string) $revision->authority_package_sha256,
-                    'expected_source_hash' => (string) $revision->source_hash,
-                    'expected_public_fingerprint_before' => (string) $revision->public_runtime_fingerprint_before,
-                ];
-            })
-            ->all();
+        $records = array_merge(...array_values($this->manifest->readbackBatches($releaseReport)));
+        $targets = [];
+        foreach ($records as $record) {
+            $revisionAssetKey = implode(':', [
+                PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+                (string) $record['entity_type'],
+                (string) $record['code'],
+                (string) $record['locale'],
+            ]);
+            $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
+                ->where('entity_type', (string) $record['entity_type'])
+                ->where('entity_key', (string) $record['code'])
+                ->where('locale', (string) $record['locale'])
+                ->first();
+            $revision = $asset instanceof PersonalityPublicContentAsset && $asset->working_revision_id !== null
+                ? PersonalityPublicContentAssetRevision::query()->find((int) $asset->working_revision_id)
+                : null;
+            if (! $asset instanceof PersonalityPublicContentAsset
+                || ! $revision instanceof PersonalityPublicContentAssetRevision
+                || (string) $revision->authority_asset_key !== $revisionAssetKey
+                || (string) $revision->authority_package_sha256 !== $packageSha256
+                || (string) $revision->source_hash !== (string) $record['asset_sha256']) {
+                throw new RuntimeException('Authorized promotion target is missing or package/source-bound incorrectly.');
+            }
+            $targets[] = [
+                'asset_id' => (int) $asset->id,
+                'asset_key' => $revisionAssetKey,
+                'expected_current_published_revision_id' => $asset->published_revision_id !== null
+                    ? (int) $asset->published_revision_id
+                    : null,
+                'expected_working_revision_id' => (int) $revision->id,
+                'expected_package_sha256' => (string) $revision->authority_package_sha256,
+                'expected_source_hash' => (string) $revision->source_hash,
+                'expected_public_fingerprint_before' => (string) $revision->public_runtime_fingerprint_before,
+            ];
+        }
         if (count($targets) !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT) {
-            throw new RuntimeException('Promotion target query did not resolve exactly 116 assets.');
+            throw new RuntimeException('Authorized release records did not resolve exactly 116 promotion targets.');
         }
 
         return $targets;
