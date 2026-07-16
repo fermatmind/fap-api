@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "6ddd5d044feb3fcd4edd2f7824468d11e65f7298",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -95519,9 +95519,14 @@
         "at": "2026-07-16T08:35:30Z",
         "status": "blocked_release_gate_local_verified",
         "note": "All manifest local checks pass: 53/4130 tests, four-file syntax and Pint, strict Composer validation, YAML/JSON/report-hash checks, diff check, and exact ten-file scope. The release decision remains fail_closed/HOLD on two aggregate duplicate-sentence blockers, 116 missing named human reviews, and 116 pending localized media-rights reviews. Prepare one Draft PR; do not merge or start PR23."
+      },
+      {
+        "at": "2026-07-16T08:37:08Z",
+        "status": "ready_to_push_blocked_release_gate",
+        "note": "Committed the exact ten-file PR22 scope as 6ddd5d044feb3fcd4edd2f7824468d11e65f7298 after all required local checks. Push and open exactly one Draft PR for review evidence; do not merge while the release decision remains HOLD."
       }
     ],
-    "updated_at": "2026-07-16T08:35:30Z"
+    "updated_at": "2026-07-16T08:37:08Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
