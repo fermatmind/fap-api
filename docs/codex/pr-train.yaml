@@ -430,6 +430,414 @@ prs:
     public_runtime_change: false
     content_authority: CMS/backend
 
+  - id: BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48: content(big5): lock clean ZH6 public snapshots"
+    base: main
+    branch: codex/big5-authority-v2-zh6-snapshot-48
+    depends_on: [BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47]
+    train_scope: big5_authority_v2_zh6_final_public_snapshot
+    status: in_progress
+    goal: "Lock the final public-content snapshot for exactly the zh-CN Big Five Hub and five domain pages, with reader-safe copy, one independent FAQ field containing 35 unique questions, exactly three visible public sources per page, deterministic public-field validation, and a new exact package SHA requiring human confirmation."
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV248Test.php
+      - generated/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write CMS/database working revisions, published pointers, production content, media, author/reviewer runtime rows, or promotion state.
+      - Change publication, indexability, robots, sitemap, llms, schema, cache, Search submission, frontend rendering, routes, APIs, deployment, or production runtime.
+      - Reuse the historical human attestation as approval for a newly hashed snapshot or scan internal provenance fields as public copy.
+    validation:
+      - node generated/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/build-package.mjs
+      - node generated/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/validate-package.mjs
+      - node generated/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/validate-confirmation.mjs
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/BigFiveAuthorityV248Test.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SEO/BigFiveAuthorityV248Test.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - JSON and JavaScript syntax checks for touched generated files
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: false
+    cms_mutation_allowed: false
+    promotion_execution_allowed: false
+    indexability_mutation_allowed: false
+    public_runtime_change: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49: feat(content): bind ZH6 editorial and media authority"
+    base: main
+    branch: codex/big5-authority-v2-zh6-promotion-readiness-49
+    depends_on: [BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48]
+    train_scope: big5_authority_v2_zh6_promotion_readiness
+    status: pending
+    goal: "Before working-revision creation, bind the exact ZH6 snapshot to admin_user:1 author/reviewer authority, a narrow solo_operator review record, one uniquely eligible Hub hero/OG Media Library asset, release SHA and permissions, plus a rollback baseline; fail closed on zero or multiple media candidates."
+    allowed_paths:
+      - AGENTS.md
+      - backend/AGENTS.md
+      - .agents/skills/fap-api-big-five-public-authority/SKILL.md
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV249PromotionReadiness.php
+      - backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV249Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/**
+      - generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create a working revision, move a published pointer, promote, publish, deploy, mutate indexability/discoverability, or upload/invent media authority.
+      - Relax global reviewer separation; solo_operator is limited to exact admin_user:1, explicit self-review, immutable snapshot hashes, and complete audit evidence.
+    validation:
+      - focused PR49 package validator and PHPUnit contract
+      - relevant visible-provenance and media-authority regression tests
+      - Pint, PHP/JSON/YAML/JavaScript syntax, git diff --check, and exact scope validation
+      - bash backend/scripts/ci_verify_mbti.sh after the heavy-process guard
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: false
+    cms_mutation_allowed: false
+    promotion_execution_allowed: false
+    indexability_mutation_allowed: false
+    public_runtime_change: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50: feat(content): write exact ZH6 working revisions"
+    base: main
+    branch: codex/big5-authority-v2-zh6-working-revision-50
+    depends_on: [BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49]
+    train_scope: big5_authority_v2_zh6_working_revision
+    status: pending
+    goal: "Add an exact six-asset descriptor builder and controlled command that reuses the shared collision-safe writer to create or idempotently reuse ZH6 working revisions, binds admin_user:1 and the exact EditorialReview rows, and proves the public projection remains unchanged."
+    allowed_paths:
+      - AGENTS.md
+      - backend/AGENTS.md
+      - .agents/skills/fap-api-big-five-public-authority/SKILL.md
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV2Zh6WorkingRevision.php
+      - backend/app/Services/BigFive/AuthorityV2/Zh6WorkingRevision/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV250Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-working-revision-50/**
+      - generated/big-five-authority-v2/big5-authority-v2-zh6-working-revision-50/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change published_revision_id, the public primary projection, robots, indexability, sitemap, llms, schema, cache, Search, frontend content, or deployment state.
+      - Accept any asset outside the exact six locked identities or any drifted package, author, reviewer, source, media, revision, or runtime fingerprint.
+    validation:
+      - focused PR50 command/writer PHPUnit contract and immutable readback
+      - collision-safe writer and Big Five/Enneagram shared-writer regressions
+      - Pint, syntax, git diff --check, and exact scope validation
+      - bash backend/scripts/ci_verify_mbti.sh after the heavy-process guard
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_control: exact_authorization_required
+    production_deploy_allowed: false
+    database_mutation: true
+    cms_mutation_allowed: true
+    promotion_execution_allowed: false
+    indexability_mutation_allowed: false
+    public_runtime_change: false
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ZH6-PREVIEW-QA-51
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ZH6-PREVIEW-QA-51: feat(ops): add authenticated ZH6 working-revision preview QA"
+    base: main
+    branch: codex/big5-authority-v2-zh6-preview-qa-51
+    depends_on: [BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50]
+    train_scope: big5_authority_v2_zh6_preview_qa
+    status: pending
+    goal: "Add an authenticated CMS administrator/TOTP/organization-scoped preview for exact ZH6 working revisions, with noindex/no-store/no-schema responses and immutable six-page readback QA whose human approval binds exact revision ids and snapshot SHA."
+    allowed_paths:
+      - AGENTS.md
+      - backend/AGENTS.md
+      - .agents/skills/fap-api-big-five-public-authority/SKILL.md
+      - backend/routes/web.php
+      - backend/app/Http/Controllers/Ops/PersonalityContentPreviewController.php
+      - backend/app/Services/BigFive/AuthorityV2/PreviewQa/**
+      - backend/resources/views/ops/personality-content-preview/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV251Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-preview-qa-51/**
+      - generated/big-five-authority-v2/big5-authority-v2-zh6-preview-qa-51/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a public preview API, expose drafts to anonymous users, emit indexable schema, or select a working revision in a public reader.
+      - Promote, publish, deploy, mutate CMS content, indexability, sitemap, llms, Search, or cache state.
+    validation:
+      - focused PR51 auth, TOTP, tenant, response-header, rendering, and readback PHPUnit contracts
+      - relevant CMS administrator and public-runtime isolation regressions
+      - route:list, Pint, syntax, git diff --check, and exact scope validation
+      - bash backend/scripts/ci_verify_mbti.sh after the heavy-process guard
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: false
+    cms_mutation_allowed: false
+    promotion_execution_allowed: false
+    indexability_mutation_allowed: false
+    public_runtime_change: true
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-COHORT-PROMOTER-52
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-COHORT-PROMOTER-52: feat(content): add pointer-safe Big Five cohort promotion"
+    base: main
+    branch: codex/big5-authority-v2-cohort-promoter-52
+    depends_on: [BIG5-AUTHORITY-V2-ZH6-PREVIEW-QA-51]
+    train_scope: big5_authority_v2_pointer_safe_cohort_promoter
+    status: pending
+    goal: "Implement a transactional compare-and-swap promoter for one to 25 PersonalityPublicContentAsset rows, locking cohort/deployed/package hashes, revision pointers, public fingerprints, review/source/media evidence, exact authorization, and a signed rollback token without changing discoverability eligibility."
+    allowed_paths:
+      - AGENTS.md
+      - backend/AGENTS.md
+      - .agents/skills/fap-api-big-five-public-authority/SKILL.md
+      - backend/app/Console/Commands/PersonalityBigFiveAuthorityV2CohortPromoter.php
+      - backend/app/Services/BigFive/AuthorityV2/CohortPromotion/**
+      - backend/database/migrations/*big_five*cohort*promotion*
+      - backend/tests/Feature/SEO/BigFiveAuthorityV252Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-cohort-promoter-52/**
+      - generated/big-five-authority-v2/big5-authority-v2-cohort-promoter-52/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Support Article writes, more than 25 assets, partial cohort success, stale authorization, drifted fingerprints, or public selection of an unapproved working revision.
+      - Change robots, indexability, sitemap, llms, schema eligibility, Search, cache, frontend content, or execute a production promotion in the implementation PR.
+    validation:
+      - focused PR52 transaction, compare-and-swap, rollback, signature, drift, and all-or-nothing PHPUnit contracts
+      - Big Five/Enneagram shared-writer and public-projection regressions
+      - fresh SQLite migration, Pint, syntax, git diff --check, and exact scope validation
+      - bash backend/scripts/ci_verify_mbti.sh after the heavy-process guard
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_deploy_allowed: false
+    database_mutation: true
+    cms_mutation_allowed: false
+    promotion_execution_allowed: false
+    indexability_mutation_allowed: false
+    public_runtime_change: true
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ZH6-RUNTIME-CLOSEOUT-53
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ZH6-RUNTIME-CLOSEOUT-53: ops(content): promote and verify the ZH6 cohort"
+    base: main
+    branch: codex/big5-authority-v2-zh6-runtime-closeout-53
+    depends_on: [BIG5-AUTHORITY-V2-COHORT-PROMOTER-52]
+    train_scope: big5_authority_v2_zh6_production_promotion_closeout
+    status: pending
+    goal: "Execute exact-authorized ZH6 production preflight and one cohort promotion, targeted six-route revalidation, public readback, sitemap/canonical/visible-evidence checks, and pre-authorized rollback on post-transaction failure."
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-runtime-closeout-53/**
+      - generated/big-five-authority-v2/big5-authority-v2-zh6-runtime-closeout-53/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Promote any identity outside ZH6, change indexability/robots/sitemap/llms/schema eligibility, upload media, submit Search URLs, or proceed without exact live preflight and promotion authorization.
+      - Continue to Task54 unless promotion, public readback, rollback readiness, and ledger closeout all pass.
+    validation:
+      - exact production preflight, promotion receipt, targeted cache revalidation, and six-route public readback artifacts
+      - internal-term zero, FAQ single-render, 18 visible source rows, author/media visibility, canonical, sitemap uniqueness, and visible-content schema parity
+      - JSON/YAML validation, git diff --check, and exact scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_control: exact_authorization_required
+    production_deploy_allowed: true
+    database_mutation: true
+    cms_mutation_allowed: true
+    promotion_execution_allowed: true
+    indexability_mutation_allowed: false
+    public_runtime_change: true
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACET-HUB-RELEASE-54
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACET-HUB-RELEASE-54: ops(content): release bilingual Big Five facet hubs"
+    base: main
+    branch: codex/big5-authority-v2-facet-hub-release-54
+    depends_on: [BIG5-AUTHORITY-V2-ZH6-RUNTIME-CLOSEOUT-53]
+    train_scope: big5_authority_v2_bilingual_facet_hub_release
+    status: pending
+    goal: "Upgrade and release the zh-CN and en Big Five Facet Hubs as one two-page bilingual cohort through the complete snapshot, review, source, media, working-revision, preview, promotion, rollback, and readback protocol."
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facet-hub-release-54/**
+      - generated/big-five-authority-v2/big5-authority-v2-facet-hub-release-54/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV254Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Include any facet detail, range, Article, landing, Topic, career/pSEO, Search submission, or unrelated personality asset.
+      - Change discoverability eligibility outside existing backend gates or proceed on partial bilingual cohort success.
+    validation:
+      - complete two-page cohort protocol, focused PHPUnit, package validators, public readback, rollback readiness, Pint, syntax, diff, and exact scope
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_control: exact_authorization_required
+    production_deploy_allowed: true
+    database_mutation: true
+    cms_mutation_allowed: true
+    promotion_execution_allowed: true
+    indexability_mutation_allowed: false
+    public_runtime_change: true
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-FACET-DETAIL-RELEASE-55
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-FACET-DETAIL-RELEASE-55: ops(content): release 60 Big Five facet detail assets"
+    base: main
+    branch: codex/big5-authority-v2-facet-detail-release-55
+    depends_on: [BIG5-AUTHORITY-V2-FACET-HUB-RELEASE-54]
+    train_scope: big5_authority_v2_facet_detail_release
+    status: pending
+    goal: "Release 60 facet detail assets in ten exact language-by-domain cohorts of six, ordered openness, conscientiousness, extraversion, agreeableness, and neuroticism with zh-CN before the corresponding en cohort, and close each cohort independently."
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-facet-detail-release-55/**
+      - generated/big-five-authority-v2/big5-authority-v2-facet-detail-release-55/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV255Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Combine cohorts, continue after a failed cohort, include facet hubs/ranges/Articles, or widen career/pSEO/discoverability scope.
+      - Reuse review approvals, rollback tokens, or live fingerprints across cohorts.
+    validation:
+      - ten independent six-page cohort protocol receipts, focused PHPUnit, validators, readbacks, rollback readiness, Pint, syntax, diff, and exact scope
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_control: exact_authorization_required_per_cohort
+    production_deploy_allowed: true
+    database_mutation: true
+    cms_mutation_allowed: true
+    promotion_execution_allowed: true
+    indexability_mutation_allowed: false
+    public_runtime_change: true
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-EN-RANGE-IA-56
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-EN-RANGE-IA-56: fix(seo): canonicalize English Big Five legacy ranges"
+    base: main
+    branch: codex/big5-authority-v2-en-range-ia-56
+    depends_on: [BIG5-AUTHORITY-V2-FACET-DETAIL-RELEASE-55]
+    train_scope: big5_authority_v2_en_range_ia_cleanup
+    status: pending
+    goal: "Convert exactly ten English legacy range identities to redirect-only or archived backend authority, remove them from canonical/hreflang/sitemap/llms enumeration, and bind their deterministic one-hop 301 targets before the dependent fap-web route PR."
+    allowed_paths:
+      - AGENTS.md
+      - backend/AGENTS.md
+      - .agents/skills/fap-api-big-five-public-authority/SKILL.md
+      - backend/app/Services/BigFive/AuthorityV2/RangeIa/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV256Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-en-range-ia-56/**
+      - generated/big-five-authority-v2/big5-authority-v2-en-range-ia-56/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Treat aliases as independent public content, add frontend fallback copy, use redirect chains, include any path outside the exact ten aliases, or publish the 30 canonical range pages.
+      - Continue to Task57 before BIG5-AUTHORITY-V2-EN-RANGE-IA-WEB-01 is merged and production redirect readback passes.
+    validation:
+      - exact ten-alias backend authority, enumeration removal, and redirect-target contracts
+      - focused PHPUnit and shared canonical/hreflang/sitemap/llms regressions
+      - Pint, syntax, diff, exact scope, and guarded complete CI
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_control: exact_authorization_required
+    production_deploy_allowed: true
+    database_mutation: true
+    cms_mutation_allowed: true
+    promotion_execution_allowed: false
+    indexability_mutation_allowed: true
+    public_runtime_change: true
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-RANGE-RELEASE-57
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-RANGE-RELEASE-57: ops(content): release 30 canonical Big Five ranges"
+    base: main
+    branch: codex/big5-authority-v2-range-release-57
+    depends_on: [BIG5-AUTHORITY-V2-EN-RANGE-IA-56]
+    external_dependency: BIG5-AUTHORITY-V2-EN-RANGE-IA-WEB-01
+    train_scope: big5_authority_v2_canonical_range_release
+    status: pending
+    goal: "Release exactly 30 canonical ranges in ten language-by-domain cohorts of high, mid, and low while keeping all ten English aliases redirect-only and excluded from content/discoverability enumeration."
+    allowed_paths:
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-range-release-57/**
+      - generated/big-five-authority-v2/big5-authority-v2-range-release-57/**
+      - backend/tests/Feature/SEO/BigFiveAuthorityV257Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Reactivate aliases, publish more than 30 canonical ranges, combine cohorts, or continue after any cohort/readback/rollback failure.
+    validation:
+      - ten independent three-page cohort protocol receipts plus alias non-reactivation proof
+      - focused PHPUnit, validators, readbacks, rollback readiness, Pint, syntax, diff, and exact scope
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_control: exact_authorization_required_per_cohort
+    production_deploy_allowed: true
+    database_mutation: true
+    cms_mutation_allowed: true
+    promotion_execution_allowed: true
+    indexability_mutation_allowed: false
+    public_runtime_change: true
+    content_authority: CMS/backend
+
+  - id: BIG5-AUTHORITY-V2-ARTICLE-RELEASE-58
+    repo: fap-api
+    title: "BIG5-AUTHORITY-V2-ARTICLE-RELEASE-58: ops(content): release 109 Big Five articles by source cohort"
+    base: main
+    branch: codex/big5-authority-v2-article-release-58
+    depends_on: [BIG5-AUTHORITY-V2-RANGE-RELEASE-57]
+    train_scope: big5_authority_v2_article_release
+    status: pending
+    goal: "Release 109 backend Article assets with an Article-specific revision adapter: nine existing working revisions as the canary cohort, followed by ten exact bilingual source-package cohorts of ten, locking article translation revisions, translation groups, slugs, canonicals, and existing published revisions."
+    allowed_paths:
+      - AGENTS.md
+      - backend/AGENTS.md
+      - .agents/skills/fap-api-big-five-public-authority/SKILL.md
+      - backend/app/Services/BigFive/AuthorityV2/ArticlePromotion/**
+      - backend/app/Console/Commands/ArticlesBigFiveAuthorityV2CohortPromoter.php
+      - backend/tests/Feature/SEO/BigFiveAuthorityV258Test.php
+      - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-article-release-58/**
+      - generated/big-five-authority-v2/big5-authority-v2-article-release-58/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Reuse the PersonalityPublicContentAsset write adapter for Article tables, publish outside the exact eleven cohorts, overwrite a drifted existing published revision, or continue after any cohort failure.
+      - Widen Topic, personality, landing, career/pSEO, Search submission, or unrelated Article scope.
+    validation:
+      - Article adapter identity/revision/translation/canonical/rollback PHPUnit contracts and shared revision regressions
+      - eleven independent cohort protocol receipts and public readbacks
+      - Pint, syntax, diff, exact scope, and guarded complete CI
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    production_write_control: exact_authorization_required_per_cohort
+    production_deploy_allowed: true
+    database_mutation: true
+    cms_mutation_allowed: true
+    promotion_execution_allowed: true
+    indexability_mutation_allowed: false
+    public_runtime_change: true
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-SEARCH-URL-TRUTH-REPAIR-01
     repo: fap-api
     depends_on: [ENNEAGRAM-SEARCH-RELEASE-READINESS-02]
