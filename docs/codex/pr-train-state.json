@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "dab7cfb9388b42f11a1510eb3b67f9876b5497d4",
+    "commit_sha": null,
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -95445,8 +95445,8 @@
       "fap_api_origin_main_contains_link_graph_merge": true,
       "verified_at": "2026-07-16T08:31:28Z"
     },
-    "status": "ci_fix_local_verified_blocked_release_gate",
-    "commit_sha": null,
+    "status": "ci_fix_rebased_local_verified_blocked_release_gate",
+    "commit_sha": "3cde43132c9e04c5b69978d03f7304f0ecb0f011",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3138",
     "checks": {
       "dependency": {
@@ -95467,7 +95467,7 @@
       },
       "pint": {
         "status": "passed",
-        "evidence": "Pint --test passed all four changed PHP files."
+        "evidence": "Pint --test passed all four changed PHP files under the manifest's Bash word-splitting semantics. The first local zsh invocation passed one newline-delimited argument and failed before inspecting code; the Bash retry passed all four files."
       },
       "composer_validate": {
         "status": "passed",
@@ -95478,8 +95478,12 @@
         "evidence": "Manifest YAML, ledger/package/report JSON, report SHA binding, git diff --check, and exact ten-file allowlist validation passed."
       },
       "github": {
-        "status": "fix_pending_push",
-        "evidence": "Head 3b470f9fcbb63146022d07804a357db5f1799243 passed eight checks; verify-bigfive failed only because its frozen non-runtime classifier rejected the two newly named PR22 PHP files. The scoped fix moves the same gate into already-registered Authority V2 integrity files and deletes those two paths."
+        "status": "rebased_fix_pending_force_with_lease_push",
+        "evidence": "Head 3b470f9fcbb63146022d07804a357db5f1799243 passed eight checks; verify-bigfive failed only because its frozen non-runtime classifier rejected the two newly named PR22 PHP files. The scoped fix moves the same gate into already-registered Authority V2 integrity files and deletes those two paths. The five PR22 commits were cleanly rebased onto origin/main 0d81790f5c581d4da8c979210c70334707034fac; the exact previously failing runtime freeze now passes 1/3 locally."
+      },
+      "runtime_freeze_regression": {
+        "status": "passed",
+        "evidence": "BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff passed 1 test / 3 assertions against the rebased committed diff."
       }
     },
     "scope_validation": {
@@ -95548,9 +95552,14 @@
         "at": "2026-07-16T08:51:00Z",
         "status": "ci_fix_ready_to_push_blocked_release_gate",
         "note": "Committed the non-runtime path fix as dab7cfb9388b42f11a1510eb3b67f9876b5497d4, then re-ran the exact previously failing runtime_paths_have_no_uncommitted_diff assertion: 1/3 passed. Bind the ledger to this implementation head and require a fresh complete GitHub cycle."
+      },
+      {
+        "at": "2026-07-16T08:55:28Z",
+        "status": "ci_fix_rebased_local_verified_blocked_release_gate",
+        "note": "Rebased all five PR22 commits onto origin/main 0d81790f5c581d4da8c979210c70334707034fac, which rewrote the substantive non-runtime fix to 3cde43132c9e04c5b69978d03f7304f0ecb0f011. The exact runtime freeze passes 1/3; manifest suite passes 53/4130; four-file php -l and Pint, strict Composer validation, YAML/JSON validation, git diff --check, and exact ten-file scope pass. The first local Pint invocation used zsh and failed only because newline file paths were not word-split; the Bash manifest-semantics retry passed. Also restored unrelated SECURITY-103-API-06.commit_sha to its origin/main null value after detecting the prior binding commit's over-broad replacement. Require a fresh complete GitHub cycle; release decision remains fail_closed/HOLD."
       }
     ],
-    "updated_at": "2026-07-16T08:51:00Z"
+    "updated_at": "2026-07-16T08:55:28Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
