@@ -5,7 +5,7 @@
   "status": "HOLD_FAIL_CLOSED_MEDIA_AUTHORITY",
   "ready_for_working_revision": false,
   "ready_for_promotion": false,
-  "release_snapshot_sha256": "cc562c87387fa337786f49bd5d1efb5d0c1d1381dd65e127c913bf259b300973",
+  "release_snapshot_sha256": "2d9d8aa21b00673e9d6ee5e9f118239d103e06be32a076f12318d868d08757d7",
   "release_snapshot_executable": false,
   "release_lock_material": {
     "cohort_snapshot_sha256": "f724913f5cdd5fcd33b7e899e3bd8c7f9f003919c12d5631572d5ddebc4265fa",
@@ -15,7 +15,7 @@
     "review_record_sha256": "faf7924ebd539091ed190c9aab037c7dd3b9b58d122a1f7d0f37f057ec821c30",
     "source_permission_sha256": "39bdd63fb64066c04c2a24875b82e66127667dd63302c15c04781de73b0906b8",
     "media_authority_sha256": "e26267594d2cb41b20de4db0040480148246918a530774b67af933d1ed849555",
-    "permissions_sha256": "cf1baff1c20e42bf3e457c34d46115f5da928aaaaca16c0ab7eb4d71e16f88e5",
+    "permissions_sha256": "f054deea02321c837ee9df8bf4c167104217fe76d97adbd811c8992a07725aa1",
     "rollback_baseline_sha256": "59fedf0528d7695d682ababb83781f4ddaf88e8e4b5674c4a5cfaac289da30c7",
     "production_observation_sha256": "d4ac447391eddd8005e925b05bfe109b63cc28b8083244f68baec57e0c05a3f6",
     "owner_authority_sha256": "6646dd8086d6e85a42539d8e77f4cda31649a903875825d7916d3023467134cf"
@@ -295,9 +295,11 @@
       "public_label": "FermatMind Editorial"
     },
     "reviewer": {
-      "approved": true,
-      "authority_reference": "solo_operator_review:faf7924ebd539091ed190c9aab037c7dd3b9b58d122a1f7d0f37f057ec821c30",
-      "admin_user_id": 1
+      "approved": false,
+      "authority_reference": null,
+      "admin_user_id": 1,
+      "totp_required": true,
+      "totp_enrolled": false
     },
     "sources": {
       "approved": true,
@@ -309,7 +311,7 @@
       "approved": false,
       "authority_reference": null
     },
-    "permissions_sha256": "cf1baff1c20e42bf3e457c34d46115f5da928aaaaca16c0ab7eb4d71e16f88e5"
+    "permissions_sha256": "f054deea02321c837ee9df8bf4c167104217fe76d97adbd811c8992a07725aa1"
   },
   "runtime_baseline": {
     "observed_at": "2026-07-16T10:05:30Z",
@@ -497,6 +499,7 @@
     "rollback_baseline_sha256": "59fedf0528d7695d682ababb83781f4ddaf88e8e4b5674c4a5cfaac289da30c7"
   },
   "blockers": [
+    "admin_user_1_totp_enrollment_missing",
     "unique_hub_hero_og_media_missing"
   ],
   "next_stage_gates": [
@@ -523,5 +526,5 @@
     "deployments": 0
   },
   "repository_rule_impact": "CMS/backend remains authoritative; this package adds a read-only fail-closed readiness gate and a narrow solo_operator record contract without changing global role separation or public runtime behavior.",
-  "package_payload_sha256": "46f25a5b30b770a61b57bbdb330076061ae847e23012f290dd1a6011a2beda28"
+  "package_payload_sha256": "2671d5d2df4b979dc8b2b34428ef66f7bb92ec9785175e6785e141d28d10f1a4"
 }

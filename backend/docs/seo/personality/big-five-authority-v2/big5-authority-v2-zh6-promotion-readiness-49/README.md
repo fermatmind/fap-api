@@ -6,6 +6,7 @@ PR49 binds the exact PR48 zh-CN Hub plus five-domain snapshot to repository and 
 
 - GitHub OWNER `fermatmind` supplied the exact PR48 three-SHA approval in PR3139 comment `4990228962` at `2026-07-16T09:24:18Z`; the package does not treat the earlier checked-in confirmation timestamp as independent human evidence.
 - The narrow `solo_operator` record binds `admin_user:1` as both author and reviewer for exactly six immutable snapshots. `explicit_self_review=true`; global role separation remains unchanged.
+- Operational reviewer approval additionally requires TOTP enrollment. The read-only production observation records `totp_enrolled=false`, so reviewer permission is fail-closed and a future unique media candidate would remain `HOLD_FAIL_CLOSED_REVIEWER_TOTP`. PR49 performs no administrator or MFA write.
 - All six assets retain exactly three visible sources and the PR48 source-permission boundary: public links, brief factual description and original paraphrase only.
 - A read-only production observation binds six primary ids, current working/published pointers, public-runtime fingerprints, deployed SHA and rollback targets. Each rollback row is reconstructed from the exact runtime baseline, and the complete read-only/zero-mutation action record is mandatory. Missing or drifted targets or audit evidence must abort later work.
 
@@ -19,19 +20,19 @@ Four Big Five-named Article assets have hero/OG variants, but all lack the requi
 - selected Hub media assets: 0;
 - `ready_for_working_revision=false`;
 - `ready_for_promotion=false`;
-- blocker: `unique_hub_hero_og_media_missing`.
+- blockers: `admin_user_1_totp_enrollment_missing` and `unique_hub_hero_og_media_missing`.
 
-Exactly one authority-complete Hub asset would clear the media uniqueness gate for later working-revision preparation. Zero or multiple candidates remain HOLD. Even the unique-candidate state never authorizes promotion, publication or a controlled write.
+Exactly one authority-complete Hub asset would clear the media uniqueness gate, but working-revision readiness additionally requires TOTP enrollment for the reviewer. Zero or multiple media candidates, or a reviewer without TOTP enrollment, remain HOLD. Even a fully ready state never authorizes promotion, publication or a controlled write.
 
 ## Locked readiness hashes
 
 | Lock | SHA-256 |
 | --- | --- |
-| release snapshot | `cc562c87387fa337786f49bd5d1efb5d0c1d1381dd65e127c913bf259b300973` |
-| package payload | `46f25a5b30b770a61b57bbdb330076061ae847e23012f290dd1a6011a2beda28` |
-| package file | `b85e7041c2292751e79d463fa292c863cc56b2c7a726d2568e65771ca1f4283c` |
+| release snapshot | `2d9d8aa21b00673e9d6ee5e9f118239d103e06be32a076f12318d868d08757d7` |
+| package payload | `2671d5d2df4b979dc8b2b34428ef66f7bb92ec9785175e6785e141d28d10f1a4` |
+| package file | `7743f0aff03ded62d8151ebef38b0b9b296328e00025f1725f9dbe4fcf123407` |
 
-These hashes describe the current fail-closed observation with zero eligible Hub media. They are not an authorization token. The immutable PR48 snapshot, exact confirmation and GitHub OWNER authority remain code-locked; review assets and source-permission rows are reconstructed from that locked snapshot, rollback rows are reconstructed from the observation-bound runtime baseline, and the exact read-only/zero-mutation action record is required. None can be replaced or omitted by recomputing downstream hashes. The production observation may be refreshed after a separately authorized Media Library intake; its SHA is then bound into the package media authority and release-lock material, while the rebuilt package file is verified by its reviewed `.sha256` sidecar and by a live read-only database preflight. No service-constant change is required for a legitimate fresh observation.
+These hashes describe the current fail-closed observation with zero eligible Hub media and no enrolled reviewer TOTP. They are not an authorization token. The immutable PR48 snapshot, exact confirmation and GitHub OWNER authority remain code-locked; review assets and source-permission rows are reconstructed from that locked snapshot, rollback rows are reconstructed from the observation-bound runtime baseline, reviewer permission is bound to the observed TOTP state, and the exact read-only/zero-mutation action record is required. None can be replaced or omitted by recomputing downstream hashes. The production observation may be refreshed after separately controlled Media Library or reviewer-enrollment work; its SHA is then bound into the package media authority and release-lock material, while the rebuilt package file is verified by its reviewed `.sha256` sidecar and by a live read-only database preflight. No service-constant change is required for a legitimate fresh observation.
 
 ## Validation
 

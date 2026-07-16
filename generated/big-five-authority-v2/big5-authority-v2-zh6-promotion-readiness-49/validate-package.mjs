@@ -82,6 +82,14 @@ invariant(packageJson.permissions.permissions_sha256 === canonicalSha256({
   sources: packageJson.permissions.sources,
   media: packageJson.permissions.media,
 }), 'permissions SHA mismatch');
+invariant(typeof observation.admin_user_1?.totp_enrolled === 'boolean', 'reviewer TOTP enrollment evidence is missing');
+const reviewerTotpReady = observation.admin_user_1.totp_enrolled === true;
+invariant(packageJson.permissions.reviewer.totp_required === true, 'reviewer TOTP must remain required');
+invariant(packageJson.permissions.reviewer.totp_enrolled === reviewerTotpReady, 'reviewer TOTP observation mismatch');
+invariant(packageJson.permissions.reviewer.approved === reviewerTotpReady, 'reviewer approval must fail closed on missing TOTP enrollment');
+invariant(packageJson.permissions.reviewer.authority_reference === (reviewerTotpReady
+  ? `solo_operator_review:${packageJson.editorial_authority.review_record_sha256}`
+  : null), 'reviewer authority reference does not match TOTP readiness');
 invariant(packageJson.rollback_baseline.rollback_baseline_sha256 === canonicalSha256(packageJson.rollback_baseline.rows), 'rollback baseline SHA mismatch');
 invariant(packageJson.rollback_baseline.rows.every((row) => row.exact_target_bound === true && row.abort_on_missing_or_drifted_target === true), 'rollback targets must fail closed');
 invariant(packageJson.media_authority.required_content_identity === 'big5:model_hub:zh-CN:hero-og', 'Hub media content identity mismatch');
@@ -99,22 +107,25 @@ const eligibleCount = observation.media_inventory.authority_complete_hero_og_cou
 invariant(eligibleCount === observation.media_inventory.authority_complete_hero_og.length, 'observation media candidate count mismatch');
 invariant(packageJson.media_authority.eligible_candidate_count === eligibleCount, 'package media candidate count mismatch');
 if (eligibleCount === 1) {
-  invariant(packageJson.status === 'PASS_PROMOTION_READINESS_ZERO_WRITE', 'one eligible media candidate must pass readiness');
-  invariant(packageJson.ready_for_working_revision === true, 'one eligible media candidate must allow later working-revision preparation');
   invariant(packageJson.counts.selected_hub_media_assets === 1 && packageJson.media_authority.selected_candidate !== null, 'unique media candidate must be selected');
   const selectedCandidate = structuredClone(packageJson.media_authority.selected_candidate);
   const selectedCandidateSha256 = selectedCandidate.candidate_sha256;
   delete selectedCandidate.candidate_sha256;
   invariant(selectedCandidateSha256 === canonicalSha256(selectedCandidate), 'unique media candidate SHA mismatch');
   invariant(packageJson.permissions.media.approved === true && typeof packageJson.permissions.media.authority_reference === 'string', 'unique media authority permission missing');
-  invariant(packageJson.blockers.length === 0, 'unique media candidate must clear readiness blockers');
 } else {
-  invariant(packageJson.status === 'HOLD_FAIL_CLOSED_MEDIA_AUTHORITY', 'zero or multiple eligible media must keep the package on HOLD');
-  invariant(packageJson.ready_for_working_revision === false, 'zero or multiple eligible media must block working revision');
   invariant(packageJson.counts.selected_hub_media_assets === 0 && packageJson.media_authority.selected_candidate === null, 'ambiguous media must not be selected');
   invariant(packageJson.permissions.media.approved === false && packageJson.permissions.media.authority_reference === null, 'ambiguous media permission must remain unapproved');
   invariant(packageJson.blockers.includes(eligibleCount === 0 ? 'unique_hub_hero_og_media_missing' : 'multiple_hub_hero_og_media_candidates'), 'media uniqueness blocker missing');
 }
+const readinessReady = eligibleCount === 1 && reviewerTotpReady;
+const expectedStatus = eligibleCount !== 1
+  ? 'HOLD_FAIL_CLOSED_MEDIA_AUTHORITY'
+  : (reviewerTotpReady ? 'PASS_PROMOTION_READINESS_ZERO_WRITE' : 'HOLD_FAIL_CLOSED_REVIEWER_TOTP');
+invariant(packageJson.status === expectedStatus, 'reviewer/media readiness status mismatch');
+invariant(packageJson.ready_for_working_revision === readinessReady, 'reviewer/media working-revision readiness mismatch');
+invariant(packageJson.blockers.includes('admin_user_1_totp_enrollment_missing') === !reviewerTotpReady, 'reviewer TOTP blocker mismatch');
+invariant(readinessReady ? packageJson.blockers.length === 0 : packageJson.blockers.length > 0, 'readiness blockers do not match the final disposition');
 invariant(packageJson.ready_for_promotion === false && packageJson.release_snapshot_executable === false, 'promotion/release execution must remain blocked');
 for (const [name, value] of Object.entries(packageJson.actions)) {
   if (name === 'production_database_read_only_observation') {

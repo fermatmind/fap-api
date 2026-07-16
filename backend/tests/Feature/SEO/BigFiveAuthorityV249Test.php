@@ -74,12 +74,16 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertSame(22, $observation['media_inventory']['with_verified_hero_and_og']);
         $this->assertSame(0, $observation['media_inventory']['authority_complete_hero_og_count']);
         $this->assertSame([], $observation['media_inventory']['authority_complete_hero_og']);
+        $this->assertFalse($observation['admin_user_1']['totp_enrolled']);
         $this->assertCount(4, $observation['media_inventory']['big_five_named_hero_og']);
         $this->assertSame(0, $package['counts']['eligible_hub_media_candidates']);
         $this->assertSame(0, $package['counts']['selected_hub_media_assets']);
         $this->assertFalse($package['ready_for_working_revision']);
         $this->assertFalse($package['ready_for_promotion']);
         $this->assertFalse($package['permissions']['media']['approved']);
+        $this->assertFalse($package['permissions']['reviewer']['approved']);
+        $this->assertTrue($package['permissions']['reviewer']['totp_required']);
+        $this->assertContains('admin_user_1_totp_enrollment_missing', $package['blockers']);
         $this->assertContains('unique_hub_hero_og_media_missing', $package['blockers']);
 
         foreach ($observation['media_inventory']['big_five_named_hero_og'] as $candidate) {
@@ -101,6 +105,7 @@ final class BigFiveAuthorityV249Test extends TestCase
     public function test_media_gate_selects_one_complete_candidate_and_holds_on_multiple(): void
     {
         $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $observation['admin_user_1']['totp_enrolled'] = true;
         $candidate = $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1');
 
         $unique = $this->buildTemporaryPackage($observation, [$candidate]);
@@ -124,6 +129,25 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertSame(0, $multiple['package']['counts']['selected_hub_media_assets']);
         $this->assertContains('multiple_hub_hero_og_media_candidates', $multiple['package']['blockers']);
         $this->cleanupTemporaryPackage($multiple['directory']);
+    }
+
+    public function test_unique_media_still_holds_when_reviewer_totp_is_not_enrolled(): void
+    {
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $package = $this->buildTemporaryPackage($observation, [
+            $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1'),
+        ]);
+
+        $this->assertSame('HOLD_FAIL_CLOSED_REVIEWER_TOTP', $package['package']['status']);
+        $this->assertFalse($package['package']['ready_for_working_revision']);
+        $this->assertFalse($package['package']['permissions']['reviewer']['approved']);
+        $this->assertTrue($package['package']['permissions']['media']['approved']);
+        $this->assertContains('admin_user_1_totp_enrollment_missing', $package['package']['blockers']);
+
+        $result = app(BigFiveZh6PromotionReadiness::class)->packageOnly($package['package_path']);
+        $this->assertFalse($result['ready']);
+        $this->assertSame('HOLD_FAIL_CLOSED_REVIEWER_TOTP', $result['status']);
+        $this->cleanupTemporaryPackage($package['directory']);
     }
 
     public function test_builder_rejects_a_self_asserted_or_tampered_owner_phrase(): void
@@ -279,6 +303,7 @@ final class BigFiveAuthorityV249Test extends TestCase
 
     public function test_database_preflight_fails_closed_on_missing_runtime_without_mutation(): void
     {
+        config()->set('admin.totp.enabled', true);
         $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(
             '../'.self::PACKAGE_DIR.'/promotion-readiness-package.json',
         );
@@ -287,6 +312,7 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertFalse($result['ready']);
         $this->assertSame('FAIL_CLOSED_RUNTIME_OR_AUTHORITY_DRIFT', $result['status']);
         $this->assertContains('admin_user_1_authority_mismatch', $result['drift_codes']);
+        $this->assertContains('admin_user_1_totp_enrollment_missing', $result['drift_codes']);
         $this->assertContains('runtime_baseline_drift', $result['drift_codes']);
         $this->assertSame(9, $result['actions']['database_reads']);
         $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));

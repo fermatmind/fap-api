@@ -66,6 +66,8 @@ invariant(Object.values(ownerAuthority.approval_scope).filter((value) => value =
 invariant(observation.schema_version === 'big5-zh6-promotion-readiness-production-observation.v1', 'production observation schema mismatch');
 invariant(observation.admin_user_1?.exists === true && observation.admin_user_1?.is_active === true, 'admin_user:1 is not active');
 invariant(observation.admin_user_1?.public_label === 'FermatMind Editorial', 'public editorial label drift');
+invariant(typeof observation.admin_user_1?.totp_enrolled === 'boolean', 'admin_user:1 TOTP enrollment evidence is missing');
+const reviewerTotpReady = observation.admin_user_1.totp_enrolled === true;
 invariant(Array.isArray(snapshot.assets) && snapshot.assets.length === 6, 'snapshot must contain exactly six assets');
 invariant(observation.runtime_assets?.count_found === 6 && observation.runtime_assets?.rows?.length === 6, 'runtime observation must bind exactly six assets');
 
@@ -193,9 +195,11 @@ const permissions = {
     public_label: 'FermatMind Editorial',
   },
   reviewer: {
-    approved: true,
-    authority_reference: `solo_operator_review:${reviewRecordSha256}`,
+    approved: reviewerTotpReady,
+    authority_reference: reviewerTotpReady ? `solo_operator_review:${reviewRecordSha256}` : null,
     admin_user_id: 1,
+    totp_required: true,
+    totp_enrolled: reviewerTotpReady,
   },
   sources: {
     approved: true,
@@ -225,16 +229,21 @@ const releaseLockMaterial = {
 };
 const releaseSnapshotSha256 = canonicalSha256(releaseLockMaterial);
 const mediaReady = eligibleMedia.length === 1;
-const blockers = mediaReady ? [] : [eligibleMedia.length === 0
+const readinessReady = mediaReady && reviewerTotpReady;
+const blockers = [];
+if (!reviewerTotpReady) blockers.push('admin_user_1_totp_enrollment_missing');
+if (!mediaReady) blockers.push(eligibleMedia.length === 0
   ? 'unique_hub_hero_og_media_missing'
-  : 'multiple_hub_hero_og_media_candidates'];
+  : 'multiple_hub_hero_og_media_candidates');
 
 const packagePayload = {
   schema_version: 'big5-zh6-promotion-readiness-package.v1',
   task_id: 'BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49',
   cohort_id: snapshot.cohort_id,
-  status: mediaReady ? 'PASS_PROMOTION_READINESS_ZERO_WRITE' : 'HOLD_FAIL_CLOSED_MEDIA_AUTHORITY',
-  ready_for_working_revision: mediaReady,
+  status: !mediaReady
+    ? 'HOLD_FAIL_CLOSED_MEDIA_AUTHORITY'
+    : (reviewerTotpReady ? 'PASS_PROMOTION_READINESS_ZERO_WRITE' : 'HOLD_FAIL_CLOSED_REVIEWER_TOTP'),
+  ready_for_working_revision: readinessReady,
   ready_for_promotion: false,
   release_snapshot_sha256: releaseSnapshotSha256,
   release_snapshot_executable: false,

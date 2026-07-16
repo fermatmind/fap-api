@@ -110,6 +110,11 @@ final class BigFiveZh6PromotionReadiness
             || ($expectedAdmin['public_label'] ?? null) !== self::PUBLIC_LABEL) {
             $drift[] = 'admin_user_1_authority_mismatch';
         }
+        if (($package['permissions']['reviewer']['totp_required'] ?? null) !== true
+            || ((bool) config('admin.totp.enabled', true)
+                && ($inspection['admin_user_1']['totp_enrolled'] ?? false) !== true)) {
+            $drift[] = 'admin_user_1_totp_enrollment_missing';
+        }
 
         $expectedRuntime = $package['runtime_baseline']['rows'] ?? null;
         if (! is_array($expectedRuntime)
@@ -135,6 +140,7 @@ final class BigFiveZh6PromotionReadiness
         $ready = $drift === []
             && $observedMediaCount === 1
             && ($package['ready_for_working_revision'] ?? false) === true
+            && ($package['permissions']['reviewer']['approved'] ?? false) === true
             && ($package['permissions']['media']['approved'] ?? false) === true;
         $status = match (true) {
             $drift !== [] => 'FAIL_CLOSED_RUNTIME_OR_AUTHORITY_DRIFT',
@@ -392,11 +398,20 @@ final class BigFiveZh6PromotionReadiness
             throw new RuntimeException('ZH6 source permissions are incomplete.');
         }
         $permissions = $package['permissions'] ?? null;
+        $reviewerApproved = is_array($permissions) ? ($permissions['reviewer']['approved'] ?? null) : null;
+        $reviewerTotpEnrolled = is_array($permissions) ? ($permissions['reviewer']['totp_enrolled'] ?? null) : null;
+        $expectedReviewerAuthority = $reviewerTotpEnrolled === true
+            ? 'solo_operator_review:'.(string) ($package['editorial_authority']['review_record_sha256'] ?? '')
+            : null;
         if (! is_array($permissions)
             || ($permissions['author']['approved'] ?? null) !== true
             || ($permissions['author']['authority_reference'] ?? null) !== 'admin_user:1'
             || ($permissions['author']['public_label'] ?? null) !== self::PUBLIC_LABEL
-            || ($permissions['reviewer']['approved'] ?? null) !== true
+            || ! is_bool($reviewerApproved)
+            || ! is_bool($reviewerTotpEnrolled)
+            || $reviewerApproved !== $reviewerTotpEnrolled
+            || ($permissions['reviewer']['totp_required'] ?? null) !== true
+            || ($permissions['reviewer']['authority_reference'] ?? null) !== $expectedReviewerAuthority
             || ($permissions['reviewer']['admin_user_id'] ?? null) !== self::REVIEWER_ADMIN_USER_ID
             || ($permissions['sources']['approved'] ?? null) !== true
             || ($permissions['sources']['asset_count'] ?? null) !== 6
@@ -463,6 +478,10 @@ final class BigFiveZh6PromotionReadiness
         $eligibleMediaCount = $package['media_authority']['eligible_candidate_count'] ?? null;
         $mediaApproved = $package['permissions']['media']['approved'] ?? null;
         $workingReady = $package['ready_for_working_revision'] ?? null;
+        $expectedWorkingReady = $eligibleMediaCount === 1 && $reviewerApproved === true;
+        $expectedStatus = $eligibleMediaCount !== 1
+            ? 'HOLD_FAIL_CLOSED_MEDIA_AUTHORITY'
+            : ($reviewerApproved === true ? 'PASS_PROMOTION_READINESS_ZERO_WRITE' : 'HOLD_FAIL_CLOSED_REVIEWER_TOTP');
         $mediaMaterial = array_intersect_key($package['media_authority'], array_flip([
             'required_content_identity',
             'required_variant_keys',
@@ -475,13 +494,13 @@ final class BigFiveZh6PromotionReadiness
         if (! is_int($eligibleMediaCount)
             || ! hash_equals((string) ($package['media_authority']['media_authority_sha256'] ?? ''), $this->canonicalSha256($mediaMaterial))
             || ($eligibleMediaCount === 1) !== ($mediaApproved === true)
-            || ($eligibleMediaCount === 1) !== ($workingReady === true)
-            || ($eligibleMediaCount === 1) !== (($package['status'] ?? null) === 'PASS_PROMOTION_READINESS_ZERO_WRITE')
-            || ($eligibleMediaCount !== 1) !== (($package['status'] ?? null) === 'HOLD_FAIL_CLOSED_MEDIA_AUTHORITY')
+            || $expectedWorkingReady !== ($workingReady === true)
+            || ($package['status'] ?? null) !== $expectedStatus
             || ($package['counts']['eligible_hub_media_candidates'] ?? null) !== $eligibleMediaCount
             || ($package['counts']['selected_hub_media_assets'] ?? null) !== ($eligibleMediaCount === 1 ? 1 : 0)
             || ($eligibleMediaCount !== 1 && ($package['media_authority']['selected_candidate'] ?? null) !== null)
-            || ($eligibleMediaCount === 1 && ($package['blockers'] ?? null) !== [])
+            || (($reviewerApproved === false) !== in_array('admin_user_1_totp_enrollment_missing', $package['blockers'] ?? [], true))
+            || ($expectedWorkingReady && ($package['blockers'] ?? null) !== [])
             || ($eligibleMediaCount === 0 && ! in_array('unique_hub_hero_og_media_missing', $package['blockers'] ?? [], true))
             || ($eligibleMediaCount > 1 && ! in_array('multiple_hub_hero_og_media_candidates', $package['blockers'] ?? [], true))) {
             throw new RuntimeException('ZH6 media readiness disposition is inconsistent.');
@@ -604,6 +623,8 @@ final class BigFiveZh6PromotionReadiness
         if (($observation['schema_version'] ?? null) !== 'big5-zh6-promotion-readiness-production-observation.v1'
             || ($observation['admin_user_1']['exists'] ?? null) !== true
             || ($observation['admin_user_1']['is_active'] ?? null) !== true
+            || ! is_bool($observation['admin_user_1']['totp_enrolled'] ?? null)
+            || ($observation['admin_user_1']['totp_enrolled'] ?? null) !== $reviewerTotpEnrolled
             || ($observation['admin_user_1']['public_label'] ?? null) !== self::PUBLIC_LABEL
             || ! is_array($observationRuntimeRows)
             || count($observationRuntimeRows) !== 6
