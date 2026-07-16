@@ -22,7 +22,7 @@ Four Big Five-named Article assets have hero/OG variants, but all lack the requi
 - `ready_for_promotion=false`;
 - blockers: `admin_user_1_totp_enrollment_missing` and `unique_hub_hero_og_media_missing`.
 
-Exactly one authority-complete Hub asset would clear the media uniqueness gate, but working-revision readiness additionally requires TOTP enrollment for the reviewer. Zero or multiple media candidates, or a reviewer without TOTP enrollment, remain HOLD. Even a fully ready state never authorizes promotion, publication or a controlled write.
+Exactly one authority-complete Hub asset would clear the media uniqueness gate, but all rights, license, provenance and operator-approval values must be non-empty strings and the media permission must reference the exact locked media-authority SHA. Working-revision readiness additionally requires TOTP enrollment for the reviewer. Zero or multiple media candidates, malformed authority fields, a drifted media permission reference, or a reviewer without TOTP enrollment remain HOLD. Even a fully ready state never authorizes promotion, publication or a controlled write.
 
 ## Locked readiness hashes
 
