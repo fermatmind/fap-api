@@ -1,0 +1,1269 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "big-five-authority-v2-zh6-review-source-candidate-package",
+  "framework": "big_five",
+  "locale": "zh-CN",
+  "cohort_id": "big_five_v2_zh_cn_hub_plus_five_domains_01",
+  "prepared_on": "2026-07-16",
+  "status": "ready_for_real_human_attestation",
+  "authority_boundary": {
+    "cms_backend_remains_public_authority": true,
+    "this_package_is_public_runtime_authority": false,
+    "production_or_cms_write_performed": false,
+    "publication_or_indexability_changed": false,
+    "historical_generated_packages_mutated": false
+  },
+  "input_hashes": {
+    "hub": "eeb9d07ff4337d53a0d75c1208567474d534d02db9b01d0b16a1c1a9924348d9",
+    "domains": "5f42a9bf5f4f51ea893d533a3d251e90bf9367c4367bb023cae6aa36821faf7d",
+    "sourceLedger": "859c83cfcd6ac06dec0ec6e1a0f2fd493fce0679558ade6714f4b54263bc0b09",
+    "reviewManifest": "54eaf64151a0a41e6a2feaa12ca2be607842e893243f6ee75f6ff78bb7ec096a"
+  },
+  "source_verification": {
+    "checked_on": "2026-07-16",
+    "method": "Crossref REST metadata for DOI records and direct official IPIP resource verification",
+    "status": "pass",
+    "sources": [
+      {
+        "id": "academic.goldberg-1990-big-five-structure",
+        "evidence_category": "academic_evidence",
+        "source_type": "peer_reviewed_original_research",
+        "title": "An alternative \"description of personality\": The Big-Five factor structure.",
+        "authors_or_organization": "Lewis R. Goldberg",
+        "year": 1990,
+        "doi": "10.1037/0022-3514.59.6.1216",
+        "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+        "access_date": "2026-07-14",
+        "supported_claim_ids": [
+          "claim.big_five.five_broad_dimensions"
+        ],
+        "supported_claim": "Lexical trait descriptors can be organized into a Big Five factor structure.",
+        "limitation": "The study supports a broad factor structure; it does not validate FermatMind scores, diagnose an individual, or establish a universal facet taxonomy.",
+        "applicable_page_families": [
+          "model_hub",
+          "domain",
+          "article",
+          "technical_trust"
+        ],
+        "core_scientific_evidence_eligible": true,
+        "sole_scientific_evidence_eligible": true,
+        "cohort_usage_decision": {
+          "applicable_page_families": [
+            "model_hub",
+            "domain"
+          ],
+          "purpose": "broad Big Five factor structure"
+        }
+      },
+      {
+        "id": "academic.soto-john-2017-bfi2",
+        "evidence_category": "academic_evidence",
+        "source_type": "peer_reviewed_original_research",
+        "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power.",
+        "authors_or_organization": "Christopher J. Soto and Oliver P. John",
+        "year": 2017,
+        "doi": "10.1037/pspp0000096",
+        "public_url": "https://doi.org/10.1037/pspp0000096",
+        "access_date": "2026-07-14",
+        "supported_claim_ids": [
+          "claim.big_five.five_broad_dimensions",
+          "claim.big_five.hierarchical_domains_and_facets",
+          "claim.big_five.taxonomies_not_interchangeable"
+        ],
+        "supported_claim": "The BFI-2 operationalizes five broad domains and 15 facets in a hierarchical measurement model.",
+        "limitation": "BFI-2's 15 facets must not be presented as identical to a 10-aspect or 30-facet taxonomy, and this source does not validate FermatMind's assessment implementation.",
+        "applicable_page_families": [
+          "test_landing",
+          "model_hub",
+          "domain",
+          "facet_hub",
+          "facet_detail",
+          "article",
+          "technical_trust"
+        ],
+        "core_scientific_evidence_eligible": true,
+        "sole_scientific_evidence_eligible": true,
+        "cohort_usage_decision": {
+          "applicable_page_families": [
+            "model_hub",
+            "domain"
+          ],
+          "purpose": "hierarchical domain/facet description and the explicit BFI-2 15-facet comparison boundary"
+        }
+      },
+      {
+        "id": "academic.roberts-walton-viechtbauer-2006-change",
+        "evidence_category": "academic_evidence",
+        "source_type": "peer_reviewed_meta_analysis",
+        "title": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies.",
+        "authors_or_organization": "Brent W. Roberts, Kate E. Walton, and Wolfgang Viechtbauer",
+        "year": 2006,
+        "doi": "10.1037/0033-2909.132.1.1",
+        "public_url": "https://doi.org/10.1037/0033-2909.132.1.1",
+        "access_date": "2026-07-14",
+        "supported_claim_ids": [
+          "claim.big_five.group_level_change_is_possible"
+        ],
+        "supported_claim": "Longitudinal evidence shows patterns of mean-level personality-trait change across the life course.",
+        "limitation": "Group-level mean change does not predict how, why, or whether a particular individual will change, and does not support a guaranteed intervention outcome.",
+        "applicable_page_families": [
+          "model_hub",
+          "range",
+          "article",
+          "result_explainer",
+          "technical_trust"
+        ],
+        "core_scientific_evidence_eligible": true,
+        "sole_scientific_evidence_eligible": true,
+        "cohort_usage_decision": {
+          "applicable_page_families": [
+            "model_hub"
+          ],
+          "purpose": "group-level mean change across the life course"
+        }
+      },
+      {
+        "id": "official.ipip-neo-facets-table",
+        "evidence_category": "official_product_evidence",
+        "source_type": "official_research_resource",
+        "title": "NEO Facets Table",
+        "authors_or_organization": "International Personality Item Pool, Oregon Research Institute",
+        "year": null,
+        "doi": null,
+        "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+        "access_date": "2026-07-14",
+        "supported_claim_ids": [
+          "claim.big_five.hierarchical_domains_and_facets",
+          "claim.big_five.taxonomies_not_interchangeable"
+        ],
+        "supported_claim": "The official IPIP resource documents corresponding public-domain scales for 30 NEO-style facet constructs.",
+        "limitation": "Correspondence does not establish identity with proprietary NEO instruments, BFI-2 facets, ten-aspect models, or FermatMind scores.",
+        "applicable_page_families": [
+          "facet_hub",
+          "facet_detail",
+          "technical_trust"
+        ],
+        "core_scientific_evidence_eligible": true,
+        "sole_scientific_evidence_eligible": false,
+        "cohort_usage_decision": {
+          "applicable_page_families": [
+            "domain"
+          ],
+          "purpose": "the names and domain placement of the IPIP/NEO-style 30-facet navigation shown on domain pages"
+        }
+      }
+    ]
+  },
+  "counts": {
+    "assets": 6,
+    "model_hubs": 1,
+    "domains": 5,
+    "automated_editorial_pass": 6,
+    "human_manual_review_complete": 0,
+    "source_authority_complete": 6,
+    "promotion_eligible": 0
+  },
+  "assets": [
+    {
+      "asset_id": "model_hub:zh-CN:/zh/personality/big-five",
+      "canonical_path": "/zh/personality/big-five",
+      "page_family": "model_hub",
+      "locale": "zh-CN",
+      "title": "大五人格是什么：从 OCEAN 五维度读懂行为倾向",
+      "candidate_content_sha256": "3670b27f705b14872f9295e1c81f0ab46e949077067813a0e4e1fc9793185ab6",
+      "upstream_review_manifest_state": {
+        "manual_review_status": "pending_manual_review",
+        "source_permission_approved": false,
+        "media_permission_approved": false,
+        "promotion_eligible": false
+      },
+      "automated_editorial_review": {
+        "status": "pass_ready_for_human_attestation",
+        "checks": [
+          "reader_intent_and_answerability",
+          "claim_and_limitation_alignment",
+          "non_diagnostic_and_non_predictive_boundaries",
+          "high_middle_low_tradeoff_balance",
+          "scenario_counterexample_or_context_controls",
+          "no_private_result_or_transaction_data",
+          "no_recruitment_admission_medical_or_outcome_decision_use",
+          "natural_zh_cn_editorial_read"
+        ],
+        "note": "No blocking editorial issue found. Three public research sources already map to structure, hierarchy, and group-level change claims."
+      },
+      "source_authority": {
+        "status": "approved_for_link_citation_and_original_paraphrase",
+        "visible_source_count": 3,
+        "visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "academic.roberts-walton-viechtbauer-2006-change"
+        ],
+        "expected_visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "academic.roberts-walton-viechtbauer-2006-change"
+        ],
+        "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
+        "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
+        "authority_reference": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision"
+      },
+      "human_manual_review": {
+        "status": "pending_real_human_attestation",
+        "reviewer_admin_user_id": null,
+        "reviewed_at": null,
+        "review_record_sha256": null
+      },
+      "media_permission": {
+        "status": "out_of_scope_pending"
+      },
+      "promotion": {
+        "eligible": false,
+        "blockers": [
+          "real_human_attestation_required",
+          "reviewer_admin_user_id_required",
+          "media_permission_out_of_scope",
+          "controlled_runtime_binding_and_rollback_not_executed"
+        ]
+      },
+      "content": {
+        "content_key": "big-five-hub",
+        "locale": "zh-CN",
+        "canonical_path": "/zh/personality/big-five",
+        "page_family": "model_hub",
+        "framework": "big_five",
+        "title": "大五人格是什么：从 OCEAN 五维度读懂行为倾向",
+        "summary": "用五个连续维度整理真实观察，把结果当作可以验证和修正的工作假设，而不是给自己贴上固定标签。",
+        "authoring_mode": "independent_editorial",
+        "source_locale": null,
+        "status": "draft_review_required",
+        "sections": [
+          {
+            "key": "direct-answer",
+            "kind": "direct_answer",
+            "heading": "先给结论：大五人格是什么",
+            "body": "大五人格是一种维度模型，把人格特质描述组织为开放性、尽责性、外向性、宜人性和神经质五个宽泛范围。它回答的是“某种倾向在多大程度上出现”，而不是“你属于哪一种人”；五个分数也不能概括一个人的全部经历、能力与选择。"
+          },
+          {
+            "key": "ocean-overview",
+            "kind": "ocean_overview",
+            "heading": "OCEAN 五维度各在观察什么",
+            "body": "开放性关注对新想法与新体验的接近方式；尽责性关注安排、坚持与执行；外向性关注社交活力和主动表达；宜人性关注合作、信任与对他人的体谅；神经质关注对压力和负面情绪的敏感程度。这些名称是观察入口，不是优劣排行。"
+          },
+          {
+            "key": "dimensional-model",
+            "kind": "dimensional_model",
+            "heading": "为什么要按连续维度理解",
+            "body": "连续维度允许“多一点、少一点、接近中间”同时成立，也允许同一倾向在不同环境中显得更强或更弱。中间分数并不等于没有特点，可能意味着两端行为都能出现，也可能包含测量误差。阅读时应关注相对组合，而不是把高低分直接改写成固定身份。"
+          },
+          {
+            "key": "result-reading",
+            "kind": "result_reading",
+            "heading": "读结果时先做三次核对",
+            "body": "第一遍看五维组合，找出真正影响当前问题的差异；第二遍回到两个以上具体情境，确认描述是否反复出现；第三遍再看相关侧面和反例。如果文字与经验不一致，保留不一致本身，不要为了让报告显得正确而倒推故事。"
+          },
+          {
+            "key": "facet-navigation",
+            "kind": "facet_navigation",
+            "heading": "何时需要从维度进入侧面",
+            "body": "宽泛维度适合建立地图，侧面适合追问“究竟是哪一种更具体的行为”。例如同样的总体分数，可能由不同侧面组合形成。先进入与你的问题相关的维度页，再通过侧面总览寻找更细入口；同时保留所用体系名称，因为不同测量模型的侧面数量和标签不能默认互换。"
+          },
+          {
+            "key": "use-cases",
+            "kind": "use_cases",
+            "heading": "哪些问题适合拿它来复盘",
+            "body": "你可以用这套结构检查学习节奏、任务安排、沟通习惯、面对变化的反应，以及压力下容易出现的模式；团队也可以在自愿前提下讨论更合适的协作条件。它不适合作为招聘筛选、升学录取、医疗诊断或关系成败的决定工具。"
+          },
+          {
+            "key": "misconceptions",
+            "kind": "misconceptions",
+            "heading": "避开三个常见误读",
+            "body": "第一，高分不自动代表更优秀；第二，低分不等于缺陷；第三，当前结果不是终身判决。纵向研究可以说明群体平均特质在生命历程中存在变化模式，却不能预测某个具体的人会不会改变，也不能保证一次训练就能改变分数。"
+          },
+          {
+            "key": "scenario",
+            "kind": "scenario",
+            "heading": "场景：计划周密的人也会临场调整",
+            "body": "林岚准备季度汇报时提前两周拆分材料、逐项确认负责人；到了用户访谈，她却愿意放下提纲，顺着意外线索追问。前一个场景体现对交付风险的管理，后一个场景需要探索空间。把两次行为放在一起，才比“她一向很有计划”更接近真实模式。"
+          },
+          {
+            "key": "counterexample",
+            "kind": "counterexample",
+            "heading": "反例：一次沉默不等于稳定倾向",
+            "body": "有人在跨部门会议里几乎不发言，却能在熟悉的小组中清楚地主持争论。第一次沉默可能与信息不足、角色权力、语言环境或准备时间有关。只有当相似行为跨场景重复出现，才值得把它暂时连接到更宽泛的特质假设。"
+          },
+          {
+            "key": "tradeoff",
+            "kind": "tradeoff",
+            "heading": "把优势和代价放在同一张表里",
+            "body": "反复检查能降低高风险交付的遗漏，也可能让可逆的小决定迟迟不动；快速接纳新方案能带来探索，也可能削弱收尾。更有用的复盘不是选择“高还是低”，而是判断当前目标、时间、可逆性和出错成本需要哪一种行为强度。"
+          },
+          {
+            "key": "action",
+            "kind": "action",
+            "heading": "做一个七天、低风险的观察实验",
+            "body": "从报告中选一个你最想验证的倾向，每次出现时记录情境、具体行为、直接后果和另一个可能解释。至少收集两个不同场合，并主动寻找一个反例。七天后再决定：保留这个假设、缩小它的适用范围，还是暂时放弃。"
+          },
+          {
+            "key": "method-boundary",
+            "kind": "method_boundary",
+            "heading": "方法与产品边界",
+            "body": "下列研究支持五维结构、层级描述和群体层面的变化发现，但不等于独立验证费马测试的某个分数，也没有证明存在一套可通用于所有量表的侧面分类。费马测试把结果用于结构化自我反思，不提供医疗诊断、录用结论或对未来表现的保证。"
+          },
+          {
+            "key": "visible-evidence",
+            "kind": "visible_evidence",
+            "heading": "这页使用了哪些可见证据",
+            "body": "五维结构对应 Goldberg 的因子结构研究与 Soto、John 的 BFI-2 研究；维度与侧面的层级说明只按 BFI-2 已声明的模型使用；关于变化的表述限定在 Roberts、Walton、Viechtbauer 的纵向研究元分析所报告的群体均值层面。每条来源的限制与链接都保留在下方。"
+          },
+          {
+            "key": "internal-links",
+            "kind": "internal_links",
+            "heading": "根据问题选择下一站",
+            "body": "如果需要理解某个宽泛维度，进入相应维度页；如果总体描述过粗，转到侧面总览；如果想先确认测评包含和不包含什么，查看测试说明页。所有链接保持中文语境，并从总览逐步收窄问题，不把导航包装成诊断建议。"
+          }
+        ],
+        "claims": [
+          {
+            "claim_id": "claim.big_five.five_broad_dimensions",
+            "source_ids": [
+              "academic.goldberg-1990-big-five-structure",
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.group_level_change_is_possible",
+            "source_ids": [
+              "academic.roberts-walton-viechtbauer-2006-change"
+            ]
+          },
+          {
+            "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+            "source_ids": [
+              "official.fermatmind-public-contract-v2",
+              "internal.public-claim-boundary-matrix"
+            ]
+          }
+        ],
+        "visible_sources": [
+          {
+            "source_id": "academic.goldberg-1990-big-five-structure",
+            "citation_label": "Goldberg（1990）：大五因子结构研究",
+            "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+            "limitation": "支持宽泛因子结构，不验证费马测试分数，也不定义通用侧面分类。"
+          },
+          {
+            "source_id": "academic.soto-john-2017-bfi2",
+            "citation_label": "Soto 与 John（2017）：BFI-2 层级模型",
+            "public_url": "https://doi.org/10.1037/pspp0000096",
+            "limitation": "描述五维度、15 侧面的特定模型，不能与其他侧面体系默认互换。"
+          },
+          {
+            "source_id": "academic.roberts-walton-viechtbauer-2006-change",
+            "citation_label": "Roberts、Walton、Viechtbauer（2006）：生命历程元分析",
+            "public_url": "https://doi.org/10.1037/0033-2909.132.1.1",
+            "limitation": "群体均值变化不能预测或保证某个个体的变化。"
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/big-five/openness",
+            "label": "开放性指南",
+            "intent": "domain"
+          },
+          {
+            "href": "/zh/personality/big-five/conscientiousness",
+            "label": "尽责性指南",
+            "intent": "domain"
+          },
+          {
+            "href": "/zh/personality/big-five/extraversion",
+            "label": "外向性指南",
+            "intent": "domain"
+          },
+          {
+            "href": "/zh/personality/big-five/agreeableness",
+            "label": "宜人性指南",
+            "intent": "domain"
+          },
+          {
+            "href": "/zh/personality/big-five/neuroticism",
+            "label": "神经质指南",
+            "intent": "domain"
+          },
+          {
+            "href": "/zh/personality/big-five/facets",
+            "label": "大五侧面总览",
+            "intent": "facet_navigation"
+          },
+          {
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "label": "大五人格测试说明",
+            "intent": "test_landing"
+          }
+        ]
+      }
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/openness",
+      "canonical_path": "/zh/personality/big-five/openness",
+      "page_family": "domain",
+      "locale": "zh-CN",
+      "title": "开放性：在新可能与熟悉经验之间怎样选择",
+      "candidate_content_sha256": "23b93f8053a62dabdc4ca2869c2f3ebf593ea8aa7d97f860175d7472812fc442",
+      "upstream_review_manifest_state": {
+        "manual_review_status": "pending_manual_review",
+        "source_permission_approved": false,
+        "media_permission_approved": false,
+        "promotion_eligible": false
+      },
+      "automated_editorial_review": {
+        "status": "pass_ready_for_human_attestation",
+        "checks": [
+          "reader_intent_and_answerability",
+          "claim_and_limitation_alignment",
+          "non_diagnostic_and_non_predictive_boundaries",
+          "high_middle_low_tradeoff_balance",
+          "scenario_counterexample_or_context_controls",
+          "no_private_result_or_transaction_data",
+          "no_recruitment_admission_medical_or_outcome_decision_use",
+          "natural_zh_cn_editorial_read"
+        ],
+        "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
+      },
+      "source_authority": {
+        "status": "approved_for_link_citation_and_original_paraphrase",
+        "visible_source_count": 3,
+        "visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "expected_visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
+        "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
+        "authority_reference": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision"
+      },
+      "human_manual_review": {
+        "status": "pending_real_human_attestation",
+        "reviewer_admin_user_id": null,
+        "reviewed_at": null,
+        "review_record_sha256": null
+      },
+      "media_permission": {
+        "status": "out_of_scope_pending"
+      },
+      "promotion": {
+        "eligible": false,
+        "blockers": [
+          "real_human_attestation_required",
+          "reviewer_admin_user_id_required",
+          "media_permission_out_of_scope",
+          "controlled_runtime_binding_and_rollback_not_executed"
+        ]
+      },
+      "content": {
+        "content_key": "domain:openness",
+        "locale": "zh-CN",
+        "canonical_path": "/zh/personality/big-five/openness",
+        "domain_code": "openness",
+        "domain_name": "开放性",
+        "page_family": "domain",
+        "framework": "big_five",
+        "title": "开放性：在新可能与熟悉经验之间怎样选择",
+        "summary": "从想象、审美、感受、行动、观念与价值六个侧面观察对新经验的接近方式，不把开放性等同于聪明、创意或见识。",
+        "authoring_mode": "independent_editorial",
+        "source_locale": null,
+        "status": "draft_review_required",
+        "editorial_claim_status": "inference_requires_human_review",
+        "definition": "开放性关注一个人如何接近陌生观念、体验、角度和内在感受。它描述的是倾向，不负责判断某个新方案是否正确，也不能说明一个人的知识、创造力或能力高低。",
+        "range": {
+          "high": "较高结果可能对应更常主动探索、愿意修改原有看法，或更留意想象与审美体验；代价可能是选项不断增加，难以及时收束。",
+          "middle": "中间结果可能表现为有条件地尝试：在熟悉领域保留稳定做法，面对真正的新问题再扩大探索。不同主题上的选择未必一致。",
+          "low": "较低结果可能对应偏好具体信息、经过检验的方法和可预期环境；这有助于积累与稳定，也可能让高度模糊的变化更消耗精力。"
+        },
+        "facets": [
+          {
+            "code": "imagination",
+            "label": "想象",
+            "focus": "构造画面、设想可能与进入虚构世界"
+          },
+          {
+            "code": "aesthetics",
+            "label": "审美",
+            "focus": "对艺术、设计和感官形式的留意与反应"
+          },
+          {
+            "code": "feelings",
+            "label": "感受",
+            "focus": "觉察、区分并探索自身情绪经验的方式"
+          },
+          {
+            "code": "actions",
+            "label": "行动",
+            "focus": "改变日常做法和尝试陌生活动的意愿"
+          },
+          {
+            "code": "ideas",
+            "label": "观念",
+            "focus": "对概念、论证和知识探索的投入"
+          },
+          {
+            "code": "values",
+            "label": "价值",
+            "focus": "检视惯例并重新评估既有假设的意愿"
+          }
+        ],
+        "scenario": "策展志愿者第一次布置社区展览时，坚持沿用往年的动线；发现儿童总在入口拥堵后，她邀请家长共同画出新路线并做半天试验。保留旧方案降低准备成本，小范围试验回应新证据。两种选择放在一起，比一句“她喜欢创新”更有解释力。",
+        "strengths_tradeoffs": "探索能够发现替代方案，熟悉经验能够减少不必要的重学。持续追新可能让注意力分散，过度依赖旧做法也可能错过环境变化。更重要的是判断什么时候值得打开选项、什么时候应该停止搜索。",
+        "combination_effects": "开放性较高且尽责性也较高时，新设想可能更容易变成可检验步骤；开放性较高而尽责性较低时，点子可能丰富但收尾较少。这只是待观察的组合假设，不是计算公式。",
+        "action_experiment": "连续七天记录六次选择：三次沿用熟悉方案，三次尝试新方法。写下不确定性、切换成本和实际结果，再判断你是在依据证据选择，还是只是在重复习惯。",
+        "misconceptions": "开放性不等于智力、艺术天赋、受教育程度或某种价值立场。较低并非思想封闭，较高也不保证原创。总体分数相近的人，六个侧面的组合仍可能不同。",
+        "method_boundary": "研究支持大五的宽泛维度与层级描述；本页列出的六个侧面采用与 IPIP/NEO 传统相近的 30 侧面导航，不等同于 BFI-2 的 15 个侧面、专有 NEO 量表分数或所有大五工具的通用分类。这里的场景化文字提供观察提示，不独立验证费马测试分数，也不用于诊断、录用或预测人生结果。",
+        "claims": [
+          {
+            "claim_id": "claim.big_five.five_broad_dimensions",
+            "source_ids": [
+              "academic.goldberg-1990-big-five-structure",
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+            "source_ids": [
+              "official.fermatmind-public-contract-v2",
+              "internal.public-claim-boundary-matrix"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2",
+              "official.ipip-neo-facets-table"
+            ]
+          }
+        ],
+        "visible_sources": [
+          {
+            "source_id": "academic.goldberg-1990-big-five-structure",
+            "citation_label": "Goldberg（1990）：大五因子结构研究",
+            "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+            "limitation": "支持宽泛因子结构，不验证费马测试分数，也不定义通用侧面体系。"
+          },
+          {
+            "source_id": "academic.soto-john-2017-bfi2",
+            "citation_label": "Soto 与 John（2017）：BFI-2 层级模型",
+            "public_url": "https://doi.org/10.1037/pspp0000096",
+            "limitation": "描述五维度、15 侧面的特定模型，不能与其他侧面体系默认互换。"
+          },
+          {
+            "source_id": "official.ipip-neo-facets-table",
+            "citation_label": "IPIP：NEO 30 侧面对应表",
+            "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+            "limitation": "支持本页 30 侧面导航的名称与维度归属，不代表专有 NEO 工具、BFI-2 侧面或费马测试分数与其等同。"
+          }
+        ]
+      }
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/conscientiousness",
+      "canonical_path": "/zh/personality/big-five/conscientiousness",
+      "page_family": "domain",
+      "locale": "zh-CN",
+      "title": "尽责性：计划、坚持与灵活调整之间的尺度",
+      "candidate_content_sha256": "cb5c594f9f47579a613a12f3d36b976f8b7daa6973be75472201608f9a80d616",
+      "upstream_review_manifest_state": {
+        "manual_review_status": "pending_manual_review",
+        "source_permission_approved": false,
+        "media_permission_approved": false,
+        "promotion_eligible": false
+      },
+      "automated_editorial_review": {
+        "status": "pass_ready_for_human_attestation",
+        "checks": [
+          "reader_intent_and_answerability",
+          "claim_and_limitation_alignment",
+          "non_diagnostic_and_non_predictive_boundaries",
+          "high_middle_low_tradeoff_balance",
+          "scenario_counterexample_or_context_controls",
+          "no_private_result_or_transaction_data",
+          "no_recruitment_admission_medical_or_outcome_decision_use",
+          "natural_zh_cn_editorial_read"
+        ],
+        "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
+      },
+      "source_authority": {
+        "status": "approved_for_link_citation_and_original_paraphrase",
+        "visible_source_count": 3,
+        "visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "expected_visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
+        "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
+        "authority_reference": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision"
+      },
+      "human_manual_review": {
+        "status": "pending_real_human_attestation",
+        "reviewer_admin_user_id": null,
+        "reviewed_at": null,
+        "review_record_sha256": null
+      },
+      "media_permission": {
+        "status": "out_of_scope_pending"
+      },
+      "promotion": {
+        "eligible": false,
+        "blockers": [
+          "real_human_attestation_required",
+          "reviewer_admin_user_id_required",
+          "media_permission_out_of_scope",
+          "controlled_runtime_binding_and_rollback_not_executed"
+        ]
+      },
+      "content": {
+        "content_key": "domain:conscientiousness",
+        "locale": "zh-CN",
+        "canonical_path": "/zh/personality/big-five/conscientiousness",
+        "domain_code": "conscientiousness",
+        "domain_name": "尽责性",
+        "page_family": "domain",
+        "framework": "big_five",
+        "title": "尽责性：计划、坚持与灵活调整之间的尺度",
+        "summary": "从胜任、秩序、责任、成就追求、自律和审慎六个侧面观察执行倾向，同时检查结构带来的收益与成本。",
+        "authoring_mode": "independent_editorial",
+        "source_locale": null,
+        "status": "draft_review_required",
+        "editorial_claim_status": "inference_requires_human_review",
+        "definition": "尽责性关注安排、履行承诺、追求目标、自我调节和行动前思考等倾向。它不是道德评分，也不能单凭一个结果判断谁更勤奋、更可靠，或某项任务是否值得坚持。",
+        "range": {
+          "high": "较高结果可能表现为提前规划、持续跟进和认真对待承诺；当目标已经改变时，原有标准若不调整，也可能带来僵化与额外成本。",
+          "middle": "中间结果可能意味着按后果配置结构：高风险任务使用清单，容易撤回的小事保留弹性，而不是所有事情都用同一种流程。",
+          "low": "较低结果可能对应更即兴、反应更快或愿意保留选项；当协作需要长期追踪时，也可能更容易发生遗漏和交接不清。"
+        },
+        "facets": [
+          {
+            "code": "competence",
+            "label": "胜任",
+            "focus": "对实际能力与有效解决问题的感受"
+          },
+          {
+            "code": "order",
+            "label": "秩序",
+            "focus": "对整理、系统和可预测摆放的偏好"
+          },
+          {
+            "code": "dutifulness",
+            "label": "责任",
+            "focus": "对承诺、规则和义务的重视"
+          },
+          {
+            "code": "achievement-striving",
+            "label": "成就追求",
+            "focus": "为较高标准和成果投入努力"
+          },
+          {
+            "code": "self-discipline",
+            "label": "自律",
+            "focus": "在无聊、疲倦或分心时继续推进既定任务"
+          },
+          {
+            "code": "deliberation",
+            "label": "审慎",
+            "focus": "行动前考虑后果、证据充分度与可逆性"
+          }
+        ],
+        "scenario": "备考小组里，陈默把十二周计划拆成每周目标；发现成员连续两周无法完成后，他删掉低价值环节，而不是要求大家补齐所有欠账。这里既有结构，也有重新排序。观察重点是他怎样根据反馈调整承诺，而不是只看表格做得多细。",
+        "strengths_tradeoffs": "结构能够减少遗忘并保护多人协作，即兴能够提高应变速度。流程过重会挤占真正工作，追踪不足则可能把成本转移给同伴。合适的程度取决于风险、协作人数和是否容易撤回。",
+        "combination_effects": "尽责性较高并伴随较高神经质时，准备可能更充分，也可能在不确定中反复确认；神经质较低时，相同的计划习惯可能显得更从容。仍需查看具体侧面与压力环境。",
+        "action_experiment": "选一个每周重复任务，只保留截止时间、负责人和一次核对，形成“最低可靠系统”。连续一周记录它避免了什么错误、花了多少维护时间，以及你是否能在信息变化时及时调整。",
+        "misconceptions": "尽责性不等于诚实、聪明、上进或整洁，也不能直接代表工作价值。看似拖延还可能来自负荷过高、目标含糊、健康状态或工具不合适，不能只用特质解释。",
+        "method_boundary": "研究支持大五的宽泛维度与层级描述；本页列出的六个侧面采用与 IPIP/NEO 传统相近的 30 侧面导航，不等同于 BFI-2 的 15 个侧面、专有 NEO 量表分数或所有大五工具的通用分类。具体行为解释仍需结合真实情境验证；结果不能用于招聘可靠性判断，不能单独解释一次延期，也不保证某种效率方法有效。",
+        "claims": [
+          {
+            "claim_id": "claim.big_five.five_broad_dimensions",
+            "source_ids": [
+              "academic.goldberg-1990-big-five-structure",
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+            "source_ids": [
+              "official.fermatmind-public-contract-v2",
+              "internal.public-claim-boundary-matrix"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2",
+              "official.ipip-neo-facets-table"
+            ]
+          }
+        ],
+        "visible_sources": [
+          {
+            "source_id": "academic.goldberg-1990-big-five-structure",
+            "citation_label": "Goldberg（1990）：大五因子结构研究",
+            "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+            "limitation": "支持宽泛结构，不支持个体工作表现判断。"
+          },
+          {
+            "source_id": "academic.soto-john-2017-bfi2",
+            "citation_label": "Soto 与 John（2017）：BFI-2 层级模型",
+            "public_url": "https://doi.org/10.1037/pspp0000096",
+            "limitation": "支持已命名的层级模型，不证明所有侧面体系等价。"
+          },
+          {
+            "source_id": "official.ipip-neo-facets-table",
+            "citation_label": "IPIP：NEO 30 侧面对应表",
+            "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+            "limitation": "支持本页 30 侧面导航的名称与维度归属，不代表专有 NEO 工具、BFI-2 侧面或费马测试分数与其等同。"
+          }
+        ]
+      }
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/extraversion",
+      "canonical_path": "/zh/personality/big-five/extraversion",
+      "page_family": "domain",
+      "locale": "zh-CN",
+      "title": "外向性：社交投入、表达主动性与刺激需求",
+      "candidate_content_sha256": "32d81b4634fcb399dbedafd2a8684df6fbdaae24a8bd73bd31cce0ddafdbe668",
+      "upstream_review_manifest_state": {
+        "manual_review_status": "pending_manual_review",
+        "source_permission_approved": false,
+        "media_permission_approved": false,
+        "promotion_eligible": false
+      },
+      "automated_editorial_review": {
+        "status": "pass_ready_for_human_attestation",
+        "checks": [
+          "reader_intent_and_answerability",
+          "claim_and_limitation_alignment",
+          "non_diagnostic_and_non_predictive_boundaries",
+          "high_middle_low_tradeoff_balance",
+          "scenario_counterexample_or_context_controls",
+          "no_private_result_or_transaction_data",
+          "no_recruitment_admission_medical_or_outcome_decision_use",
+          "natural_zh_cn_editorial_read"
+        ],
+        "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
+      },
+      "source_authority": {
+        "status": "approved_for_link_citation_and_original_paraphrase",
+        "visible_source_count": 3,
+        "visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "expected_visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
+        "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
+        "authority_reference": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision"
+      },
+      "human_manual_review": {
+        "status": "pending_real_human_attestation",
+        "reviewer_admin_user_id": null,
+        "reviewed_at": null,
+        "review_record_sha256": null
+      },
+      "media_permission": {
+        "status": "out_of_scope_pending"
+      },
+      "promotion": {
+        "eligible": false,
+        "blockers": [
+          "real_human_attestation_required",
+          "reviewer_admin_user_id_required",
+          "media_permission_out_of_scope",
+          "controlled_runtime_binding_and_rollback_not_executed"
+        ]
+      },
+      "content": {
+        "content_key": "domain:extraversion",
+        "locale": "zh-CN",
+        "canonical_path": "/zh/personality/big-five/extraversion",
+        "domain_code": "extraversion",
+        "domain_name": "外向性",
+        "page_family": "domain",
+        "framework": "big_five",
+        "title": "外向性：社交投入、表达主动性与刺激需求",
+        "summary": "从热情、合群、果断、活跃、寻求刺激和积极情绪六个侧面观察外向性，不把安静等同于胆怯或能力不足。",
+        "authoring_mode": "independent_editorial",
+        "source_locale": null,
+        "status": "draft_review_required",
+        "editorial_claim_status": "inference_requires_human_review",
+        "definition": "外向性关注社交接近、活动节奏、主动表达、刺激需求和积极情绪等倾向。它不直接衡量社交技巧、同理心、领导能力，也不表示一个人在所有场合都同样健谈或喜欢独处。",
+        "range": {
+          "high": "较高结果可能表现为更快加入互动、偏好活跃环境或愿意公开表达；在需要安静恢复和控制发言节奏时，可能要更主动地调节。",
+          "middle": "中间结果可能意味着根据熟悉程度和任务切换：在已有关系中积极，在陌生或高要求场景中先观察，再决定投入多少互动与刺激。",
+          "low": "较低结果可能对应更选择性地社交、较低刺激需求或需要准备时间；这有利于集中，也可能让连续高强度互动更疲惫。"
+        },
+        "facets": [
+          {
+            "code": "warmth",
+            "label": "热情",
+            "focus": "友好接近和建立亲近感的方式"
+          },
+          {
+            "code": "gregariousness",
+            "label": "合群",
+            "focus": "对陪伴、群体和共同活动的偏好"
+          },
+          {
+            "code": "assertiveness",
+            "label": "果断",
+            "focus": "发言、引导和施加影响的主动程度"
+          },
+          {
+            "code": "activity",
+            "label": "活跃",
+            "focus": "生活节奏、忙碌程度和行动能量"
+          },
+          {
+            "code": "excitement-seeking",
+            "label": "寻求刺激",
+            "focus": "对强度、新鲜与兴奋体验的兴趣"
+          },
+          {
+            "code": "positive-emotions",
+            "label": "积极情绪",
+            "focus": "热情、愉悦等情绪出现和表达的频率"
+          }
+        ],
+        "scenario": "远程项目第一次同步时，许安没有抢先发言，而是在聊天区整理大家的问题；进入熟悉的小组复盘后，她主动控场并推动决定。书面参与、关系熟悉度和角色授权共同影响表现，仅看第一次会议容易把准备偏好误写成稳定沉默。",
+        "strengths_tradeoffs": "外显能量有助于快速连接，较低刺激需求有利于深入思考。持续主动可能压缩他人空间，等待太久也可能让关键意见缺席。改变会议形式、提前材料和书面渠道，往往能改变可见行为。",
+        "combination_effects": "外向性较高且宜人性较高时，社交能量可能更包容；宜人性较低时，同样的主动表达可能更直接或竞争。组合只能提供观察方向，不能替代实际互动证据。",
+        "action_experiment": "选择三次互动，分别尝试开场发言、先提问再表达、会后书面回应。记录精力消耗、贡献质量以及是否给别人留下空间，再比较哪种形式更适合不同任务。",
+        "misconceptions": "外向性不是受欢迎程度、领导力、沟通能力、勇气或幸福感。较低外向性也不等于害羞；焦虑、语言、地位、感官负荷和准备偏好都可能形成相似表现。",
+        "method_boundary": "研究支持大五的宽泛维度与层级描述；本页列出的六个侧面采用与 IPIP/NEO 传统相近的 30 侧面导航，不等同于 BFI-2 的 15 个侧面、专有 NEO 量表分数或所有大五工具的通用分类。这里的文字不能诊断社交焦虑、判断团队适配或预测领导表现，仅作为自愿复盘的观察提示。",
+        "claims": [
+          {
+            "claim_id": "claim.big_five.five_broad_dimensions",
+            "source_ids": [
+              "academic.goldberg-1990-big-five-structure",
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+            "source_ids": [
+              "official.fermatmind-public-contract-v2",
+              "internal.public-claim-boundary-matrix"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2",
+              "official.ipip-neo-facets-table"
+            ]
+          }
+        ],
+        "visible_sources": [
+          {
+            "source_id": "academic.goldberg-1990-big-five-structure",
+            "citation_label": "Goldberg（1990）：大五因子结构研究",
+            "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+            "limitation": "支持宽泛结构，不支持社交技巧或领导力判断。"
+          },
+          {
+            "source_id": "academic.soto-john-2017-bfi2",
+            "citation_label": "Soto 与 John（2017）：BFI-2 层级模型",
+            "public_url": "https://doi.org/10.1037/pspp0000096",
+            "limitation": "支持一种层级操作化，不代表所有侧面体系通用。"
+          },
+          {
+            "source_id": "official.ipip-neo-facets-table",
+            "citation_label": "IPIP：NEO 30 侧面对应表",
+            "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+            "limitation": "支持本页 30 侧面导航的名称与维度归属，不代表专有 NEO 工具、BFI-2 侧面或费马测试分数与其等同。"
+          }
+        ]
+      }
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/agreeableness",
+      "canonical_path": "/zh/personality/big-five/agreeableness",
+      "page_family": "domain",
+      "locale": "zh-CN",
+      "title": "宜人性：合作、坦率与人际边界如何同时存在",
+      "candidate_content_sha256": "72654d84a2979768dca0e9236ab0c167b59942bfae27f8d08ef092ac745f7fc1",
+      "upstream_review_manifest_state": {
+        "manual_review_status": "pending_manual_review",
+        "source_permission_approved": false,
+        "media_permission_approved": false,
+        "promotion_eligible": false
+      },
+      "automated_editorial_review": {
+        "status": "pass_ready_for_human_attestation",
+        "checks": [
+          "reader_intent_and_answerability",
+          "claim_and_limitation_alignment",
+          "non_diagnostic_and_non_predictive_boundaries",
+          "high_middle_low_tradeoff_balance",
+          "scenario_counterexample_or_context_controls",
+          "no_private_result_or_transaction_data",
+          "no_recruitment_admission_medical_or_outcome_decision_use",
+          "natural_zh_cn_editorial_read"
+        ],
+        "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
+      },
+      "source_authority": {
+        "status": "approved_for_link_citation_and_original_paraphrase",
+        "visible_source_count": 3,
+        "visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "expected_visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
+        "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
+        "authority_reference": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision"
+      },
+      "human_manual_review": {
+        "status": "pending_real_human_attestation",
+        "reviewer_admin_user_id": null,
+        "reviewed_at": null,
+        "review_record_sha256": null
+      },
+      "media_permission": {
+        "status": "out_of_scope_pending"
+      },
+      "promotion": {
+        "eligible": false,
+        "blockers": [
+          "real_human_attestation_required",
+          "reviewer_admin_user_id_required",
+          "media_permission_out_of_scope",
+          "controlled_runtime_binding_and_rollback_not_executed"
+        ]
+      },
+      "content": {
+        "content_key": "domain:agreeableness",
+        "locale": "zh-CN",
+        "canonical_path": "/zh/personality/big-five/agreeableness",
+        "domain_code": "agreeableness",
+        "domain_name": "宜人性",
+        "page_family": "domain",
+        "framework": "big_five",
+        "title": "宜人性：合作、坦率与人际边界如何同时存在",
+        "summary": "从信任、坦率、利他、顺从、谦逊和同情六个侧面观察合作倾向，不把配合等同于善良，也不把质疑写成缺陷。",
+        "authoring_mode": "independent_editorial",
+        "source_locale": null,
+        "status": "draft_review_required",
+        "editorial_claim_status": "inference_requires_human_review",
+        "definition": "宜人性关注默认信任、合作、对他人的关切、冲突反应和自我呈现。它不能证明一个人善良、诚实或安全，也不能单凭分数判断某段关系的质量。",
+        "range": {
+          "high": "较高结果可能表现为更快配合、更关注他人感受或愿意维护关系；在需要明确拒绝和提出异议时，也可能更费力。",
+          "middle": "中间结果可能意味着有条件地合作：共同目标清楚时支持，证据或边界受到挑战时更直接，并根据对方回应调整信任与投入。",
+          "low": "较低结果可能对应更怀疑、偏好竞争性讨论或愿意面对冲突；这有助于审查，也可能在关切未被表达时增加摩擦。"
+        },
+        "facets": [
+          {
+            "code": "trust",
+            "label": "信任",
+            "focus": "信息不足时对他人意图与可靠性的默认预期"
+          },
+          {
+            "code": "straightforwardness",
+            "label": "坦率",
+            "focus": "直接表达以及不操纵呈现的倾向"
+          },
+          {
+            "code": "altruism",
+            "label": "利他",
+            "focus": "帮助他人并投入其需要的意愿"
+          },
+          {
+            "code": "compliance",
+            "label": "顺从",
+            "focus": "面对冲突、压力和相互竞争诉求的反应"
+          },
+          {
+            "code": "modesty",
+            "label": "谦逊",
+            "focus": "呈现个人重要性与成就的方式"
+          },
+          {
+            "code": "tender-mindedness",
+            "label": "同情",
+            "focus": "对痛苦、脆弱和他人处境的情感关切"
+          }
+        ],
+        "scenario": "家庭商量假期时，赵青先确认老人行动不便的限制，也明确自己无法承担全部照护。他建议缩短行程并轮换任务。这里既有体谅，也有边界；如果只记录最后的妥协，就会漏掉她如何保护可持续合作。",
+        "strengths_tradeoffs": "合作可以维护信任，怀疑可以暴露薄弱假设。过度迁就会隐藏负荷，持续对抗也会损害安全感和信息流动。有效做法常常是把对人的尊重与对方案的审查分开。",
+        "combination_effects": "宜人性较高且尽责性较高时，帮助意愿可能更容易兑现，也可能导致过度承诺；尽责性较低时，温和态度未必稳定转化为行动。仍应回到实际履约证据。",
+        "action_experiment": "选择一次低风险分歧，提前写出共同目标、不能退让的边界，以及一个可能改变你看法的问题。结束后复盘：你是否同时保护了关系和决策质量。",
+        "misconceptions": "宜人性不等于善良、诚实、同理心、被动或道德水平。较低不证明敌意，较高也不证明安全可靠。权力、文化和当前威胁都会改变可见的冲突行为。",
+        "method_boundary": "研究支持大五的宽泛维度与层级描述；本页列出的六个侧面采用与 IPIP/NEO 传统相近的 30 侧面导航，不等同于 BFI-2 的 15 个侧面、专有 NEO 量表分数或所有大五工具的通用分类。宜人性不是关系诊断或筛选规则；本页不能判断谁可信、合适或有道德，也不得用于人员决策。",
+        "claims": [
+          {
+            "claim_id": "claim.big_five.five_broad_dimensions",
+            "source_ids": [
+              "academic.goldberg-1990-big-five-structure",
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+            "source_ids": [
+              "official.fermatmind-public-contract-v2",
+              "internal.public-claim-boundary-matrix"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2",
+              "official.ipip-neo-facets-table"
+            ]
+          }
+        ],
+        "visible_sources": [
+          {
+            "source_id": "academic.goldberg-1990-big-five-structure",
+            "citation_label": "Goldberg（1990）：大五因子结构研究",
+            "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+            "limitation": "支持宽泛结构，不支持道德或关系判断。"
+          },
+          {
+            "source_id": "academic.soto-john-2017-bfi2",
+            "citation_label": "Soto 与 John（2017）：BFI-2 层级模型",
+            "public_url": "https://doi.org/10.1037/pspp0000096",
+            "limitation": "支持一种层级模型，不支持通用侧面等价或个体筛选。"
+          },
+          {
+            "source_id": "official.ipip-neo-facets-table",
+            "citation_label": "IPIP：NEO 30 侧面对应表",
+            "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+            "limitation": "支持本页 30 侧面导航的名称与维度归属，不代表专有 NEO 工具、BFI-2 侧面或费马测试分数与其等同。"
+          }
+        ]
+      }
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/neuroticism",
+      "canonical_path": "/zh/personality/big-five/neuroticism",
+      "page_family": "domain",
+      "locale": "zh-CN",
+      "title": "神经质：对压力与负面情绪的敏感倾向",
+      "candidate_content_sha256": "7096771bcad4600f86a3ed8d33cb0ff00042809f03ea5d805084397ca1e6f223",
+      "upstream_review_manifest_state": {
+        "manual_review_status": "pending_manual_review",
+        "source_permission_approved": false,
+        "media_permission_approved": false,
+        "promotion_eligible": false
+      },
+      "automated_editorial_review": {
+        "status": "pass_ready_for_human_attestation",
+        "checks": [
+          "reader_intent_and_answerability",
+          "claim_and_limitation_alignment",
+          "non_diagnostic_and_non_predictive_boundaries",
+          "high_middle_low_tradeoff_balance",
+          "scenario_counterexample_or_context_controls",
+          "no_private_result_or_transaction_data",
+          "no_recruitment_admission_medical_or_outcome_decision_use",
+          "natural_zh_cn_editorial_read"
+        ],
+        "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
+      },
+      "source_authority": {
+        "status": "approved_for_link_citation_and_original_paraphrase",
+        "visible_source_count": 3,
+        "visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "expected_visible_source_ids": [
+          "academic.goldberg-1990-big-five-structure",
+          "academic.soto-john-2017-bfi2",
+          "official.ipip-neo-facets-table"
+        ],
+        "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
+        "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
+        "authority_reference": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision"
+      },
+      "human_manual_review": {
+        "status": "pending_real_human_attestation",
+        "reviewer_admin_user_id": null,
+        "reviewed_at": null,
+        "review_record_sha256": null
+      },
+      "media_permission": {
+        "status": "out_of_scope_pending"
+      },
+      "promotion": {
+        "eligible": false,
+        "blockers": [
+          "real_human_attestation_required",
+          "reviewer_admin_user_id_required",
+          "media_permission_out_of_scope",
+          "controlled_runtime_binding_and_rollback_not_executed"
+        ]
+      },
+      "content": {
+        "content_key": "domain:neuroticism",
+        "locale": "zh-CN",
+        "canonical_path": "/zh/personality/big-five/neuroticism",
+        "domain_code": "neuroticism",
+        "domain_name": "神经质",
+        "page_family": "domain",
+        "framework": "big_five",
+        "title": "神经质：对压力与负面情绪的敏感倾向",
+        "summary": "从焦虑、愤怒、抑郁、自我意识、冲动和脆弱六个侧面整理压力反应的观察，同时明确这些特质语言不是心理健康诊断。",
+        "authoring_mode": "independent_editorial",
+        "source_locale": null,
+        "status": "draft_review_required",
+        "editorial_claim_status": "inference_requires_human_review",
+        "definition": "神经质描述对威胁、痛苦、挫折、被评价、压力下冲动和不堪重负的敏感倾向。这里的“神经质”是特质维度名称，不是疾病、症状清单，也不能概括一个人在所有处境中的韧性。",
+        "range": {
+          "high": "较高结果可能表现为更快发现潜在问题、负面情绪更强或压力后恢复更慢；敏感能够促使准备，也可能增加误报。",
+          "middle": "中间结果可能意味着反应随风险、睡眠、支持和熟悉程度变化，而不是始终强烈或始终平静；需要用多个场景比较触发与恢复。",
+          "low": "较低结果可能对应许多场景下更平稳或恢复更快；这有利于压力中行动，也可能较晚注意到微弱风险或他人的不安。"
+        },
+        "facets": [
+          {
+            "code": "anxiety",
+            "label": "焦虑",
+            "focus": "对威胁的预期、担忧和紧张"
+          },
+          {
+            "code": "anger",
+            "label": "愤怒",
+            "focus": "遭遇阻碍时挫折、恼怒与敌意情绪的强度"
+          },
+          {
+            "code": "depression",
+            "label": "抑郁",
+            "focus": "特质语言中的低落和泄气，不是临床诊断"
+          },
+          {
+            "code": "self-consciousness",
+            "label": "自我意识",
+            "focus": "对审视、尴尬和社会评价的敏感"
+          },
+          {
+            "code": "impulsiveness",
+            "label": "冲动",
+            "focus": "压力下抵抗即时欲望的困难"
+          },
+          {
+            "code": "vulnerability",
+            "label": "脆弱",
+            "focus": "压力持续累积时感到难以应对与恢复的程度"
+          }
+        ],
+        "scenario": "汇报前发现一处数字错误，唐薇立刻想到客户质疑、延期和返工三种后果。她先核对影响最大的口径，确认其余页面不受影响后停止搜索。敏感帮助她及时发现风险，预先设定的停止条件避免了整晚反复检查。",
+        "strengths_tradeoffs": "威胁敏感能够捕捉弱信号并推动准备，情绪平稳有助于压力下保持判断。持续警报会耗尽注意力，警报过低也可能错过早期提醒。睡眠、支持和真实危险程度都会改变表现。",
+        "combination_effects": "神经质较高且尽责性较高时，可能形成周密预案，也可能反复确认；宜人性较高时，可能为了不打扰他人而隐藏压力。这些都需要观察，不能从分数直接推出。",
+        "action_experiment": "低风险担忧出现时，写下最怕的结果、已有证据、一个可逆步骤和停止条件。二十分钟后复盘：行动是否减少了不确定，还是只是重复检查。",
+        "misconceptions": "神经质不是心理疾病、软弱、悲观、缺乏韧性或不稳定的证明；较低结果也不代表不会痛苦。急性压力、疾病、创伤、不安全环境和睡眠不足需要单独看待。",
+        "method_boundary": "研究支持大五的宽泛维度与层级描述；本页列出的六个侧面采用与 IPIP/NEO 传统相近的 30 侧面导航，不等同于 BFI-2 的 15 个侧面、专有 NEO 量表分数或所有大五工具的通用分类。本页不得用于诊断、替代临床评估或推断健康状态；持续或紧急的痛苦不在本内容的决策边界内。",
+        "claims": [
+          {
+            "claim_id": "claim.big_five.five_broad_dimensions",
+            "source_ids": [
+              "academic.goldberg-1990-big-five-structure",
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.hierarchical_domains_and_facets",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2"
+            ]
+          },
+          {
+            "claim_id": "claim.fermatmind.non_diagnostic_boundary",
+            "source_ids": [
+              "official.fermatmind-public-contract-v2",
+              "internal.public-claim-boundary-matrix"
+            ]
+          },
+          {
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "source_ids": [
+              "academic.soto-john-2017-bfi2",
+              "official.ipip-neo-facets-table"
+            ]
+          }
+        ],
+        "visible_sources": [
+          {
+            "source_id": "academic.goldberg-1990-big-five-structure",
+            "citation_label": "Goldberg（1990）：大五因子结构研究",
+            "public_url": "https://doi.org/10.1037/0022-3514.59.6.1216",
+            "limitation": "支持宽泛结构，不支持心理健康诊断或个体预后。"
+          },
+          {
+            "source_id": "academic.soto-john-2017-bfi2",
+            "citation_label": "Soto 与 John（2017）：BFI-2 层级模型",
+            "public_url": "https://doi.org/10.1037/pspp0000096",
+            "limitation": "支持一种特质层级，侧面名称不是临床症状结论。"
+          },
+          {
+            "source_id": "official.ipip-neo-facets-table",
+            "citation_label": "IPIP：NEO 30 侧面对应表",
+            "public_url": "https://ipip.ori.org/newNEO_FacetsTable.htm",
+            "limitation": "支持本页 30 侧面导航的名称与维度归属，不代表专有 NEO 工具、BFI-2 侧面或费马测试分数与其等同。"
+          }
+        ]
+      }
+    }
+  ]
+}
