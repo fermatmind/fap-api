@@ -96131,7 +96131,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "dbd4e9298bf12dc350e438065fc92b8d645c13fd",
+    "commit_sha": "cdcfec3fa0dc7671704269b49f6f9d61d86cde82",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96140,7 +96140,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 40 tests / 762 assertions. The exact-SHA packet binds the backend API origin, frontend origin, and frontend revalidation endpoint. The pre-readback artifact now records its actual API/frontend origins and preflight rejects provenance drift; the frontend revision probe must use the exact frontend public origin. Runtime endpoint drift, non-origin CLI values, pre-readback origin drift, and revision-probe origin drift all fail before writes. Existing exact 116 import/bind/promotion, private-register, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remains green."
+        "evidence": "V205/V206/V223/V224 pass 42 tests / 796 assertions. The exact-SHA packet binds the backend API origin, frontend origin, and frontend revalidation endpoint. Readback artifacts record their actual API/frontend origins and standalone readback accepts only exact origins. Production preflight and execute both require a complete pre-readback artifact outside the explicit SQLite testing override; revision-probe origin drift and every provenance mismatch fail before HTTP or writes. Existing exact 116 import/bind/promotion, private-register, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remains green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96148,7 +96148,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 205 tests / 28768 assertions after waiting for the existing full Composer validation in another worktree to release the local heavy-test concurrency guard."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 207 tests / 28802 assertions after waiting for the existing full Composer validation in another worktree to release the local heavy-test concurrency guard."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96156,7 +96156,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head 086e857bd86ea5d3fa9641b2c9006f433a4414a1 passed all nine required GitHub checks, then two new automated P2 findings were repaired in code commit dbd4e9298bf12dc350e438065fc92b8d645c13fd. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
+        "evidence": "Exact head 0d046fa06b5d127685ab20d7e72ab2fbf19276e7 passed all nine required GitHub checks, then two new automated P2 findings were repaired in code commit cdcfec3fa0dc7671704269b49f6f9d61d86cde82. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
       }
     },
     "scope_validation": {
@@ -96290,9 +96290,14 @@
         "at": "2026-07-16T17:06:56Z",
         "status": "review_fix_local_validation_passed",
         "note": "The final exact-head review found that pre-readback origin provenance and frontend revision-probe origin were not bound. Code commit dbd4e9298bf12dc350e438065fc92b8d645c13fd records and validates exact API/frontend origins in the pre-readback artifact and requires the frontend revision URL to share the exact public frontend origin before HTTP or writes. Focused 40/762, cache/API 8/72, classifier 1/2, full Enneagram V2 205/28768, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass; production and deployment actions remain zero."
+      },
+      {
+        "at": "2026-07-16T17:27:12Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The next exact-head review found standalone readback command parsing was weaker than the service and production execute could omit pre-readback. Code commit cdcfec3fa0dc7671704269b49f6f9d61d86cde82 mirrors strict exact-origin parsing in standalone readback and requires pre-readback for both production preflight and execute before revision HTTP or writes, preserving only the explicit testing/SQLite override. Focused 42/796, cache/API 8/72, classifier 1/2, full Enneagram V2 207/28802, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass; production and deployment actions remain zero."
       }
     ],
-    "updated_at": "2026-07-16T17:06:56Z"
+    "updated_at": "2026-07-16T17:27:12Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
