@@ -390,7 +390,7 @@ prs:
     branch: codex/big5-authority-v2-review-promotion-gate-47
     depends_on: [BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41, BIG5-AUTHORITY-V2-VISIBLE-DATE-42, BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43, BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44, BIG5-AUTHORITY-V2-STRUCTURED-DATA-45, BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46]
     train_scope: big5_authority_v2_review_and_promotion_preflight_gate
-    status: in_progress
+    status: merged
     goal: "Add a deterministic, fail-closed review and cohort-promotion preflight for exactly 229 working revisions and two preserved product shells, binding exact identities, revision pointers, source/package hashes, reviewer/date/source/media permissions, public-runtime baselines, rollback targets, and per-cohort authorization while keeping every checked-in artifact and command zero-write and non-executable for production promotion."
     allowed_paths:
       - backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php
@@ -21431,7 +21431,7 @@ prs:
     base: main
     title: "BIG5-CAREER-BRIDGE-AUDITOR-02: feat(career): add read-only Big Five career bridge auditor"
     train_scope: big5_career_bridge_auditor
-    status: github_checks_pending
+    status: merged
     scope:
       - Add a read-only CLI that audits bridge candidates against explicit Big Five published/public and Career runtime publish projections.
       - Emit deterministic JSON or Markdown counts, blocker breakdown, safe source provenance, and claim/private-data boundaries.
