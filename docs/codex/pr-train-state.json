@@ -94509,7 +94509,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "a9fd62ccbeeb0cd17693c76bd40a87ecaaf401d1",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3125",
@@ -94531,14 +94531,22 @@
         "evidence": "The package contains exactly Type Four core, 4w3, 4w5, and self-preservation/social/one-to-one subtype assets in en and zh-CN. Identity and meaning remain revisable hypotheses; craft, culture, grief, exclusion, training, safety, access, consent, resources, and power remain visible alternatives. All 36 FAQ pairs are unique, locale outlines and examples are independent, and every asset remains pending_manual_review with reviewer null, draft_only, publish_eligible false, and closed execution boundaries."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #3125 is open at ledger head 2f5e53e3b72dd86a3f827851d011968d19f6d82f; GitHub reports MERGEABLE and required checks have started."
+        "status": "pass",
+        "evidence": "All nine GitHub checks passed on immutable PR head 4a019525ae50ef2bbc3cb64ae08b9f642f272349: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. GitHub reports CLEAN/MERGEABLE."
+      },
+      "required_reviews": {
+        "status": "pass",
+        "evidence": "GitHub reports an empty reviewDecision, no submitted reviews, no branch-protection rule requiring reviews, and zero review threads. This is repository-policy evidence only and does not claim human content review; every asset remains pending_manual_review."
+      },
+      "codex_skeptical_review": {
+        "status": "pass",
+        "evidence": "The recorded PR08-gate audit found 20 initial asset-specific issues and the single scoped repair cleared all of them. Final focused validation passes 8 tests / 417 assertions, exactly twelve assets, independent en/zh-CN authoring, 36 unique FAQ pairs, pending manual review, draft-only release truth, and closed execution boundaries."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -94576,9 +94584,14 @@
         "at": "2026-07-16T00:31:06Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3125 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
+      },
+      {
+        "at": "2026-07-16T00:38:06Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on immutable head 4a019525ae50ef2bbc3cb64ae08b9f642f272349. GitHub reports CLEAN/MERGEABLE, no required review rule, no reviews, and zero review threads; exact six-file scope, twelve assets, pending-manual-review truth, draft-only release truth, 36 unique FAQ pairs, and every execution boundary were revalidated. This ledger-only ready transition must itself receive a fresh complete check cycle before squash merge."
       }
     ],
-    "updated_at": "2026-07-16T00:31:06Z"
+    "updated_at": "2026-07-16T00:38:06Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14",
