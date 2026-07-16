@@ -83,6 +83,7 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
     public function test_publish_releases_112_chinese_assets_with_full_content_and_is_idempotent(): void
     {
         $this->assertLessThanOrEqual(32, strlen(BigFiveZhContentOnlyPublisher::REVISION_WORKFLOW_STATE));
+        $this->assertLessThanOrEqual(32, strlen(BigFiveZhContentOnlyPublisher::LANDING_SCHEMA_VERSION));
 
         $publisher = app(BigFiveZhContentOnlyPublisher::class);
         $englishBefore = $this->englishRows();
@@ -103,6 +104,10 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
         $this->assertSame(52, PersonalityPublicContentAsset::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publiclyReadable()->where('index_eligible', true)->where('sitemap_eligible', true)->where('llms_eligible', true)->count());
         $this->assertSame(2, ContentPage::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publiclyIndexable()->count());
         $this->assertSame(1, LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->where('is_indexable', true)->count());
+        $this->assertSame(
+            BigFiveZhContentOnlyPublisher::LANDING_SCHEMA_VERSION,
+            LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->value('schema_version'),
+        );
         $this->assertSame(1, TopicProfile::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->where('is_indexable', true)->count());
         $this->assertSame(
             BigFiveZhContentOnlyPublisher::REVISION_WORKFLOW_STATE,
