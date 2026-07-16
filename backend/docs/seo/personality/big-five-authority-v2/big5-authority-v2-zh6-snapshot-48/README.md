@@ -20,7 +20,7 @@
 | package payload | `0c009c77310fb6ca8d67cf3fac2b85a56ecb892e5b6b20d56ee41de103e910d7` |
 | package file | `b8206a045e100aed1016e24d4266ee8d75fb82b38496213f892a9dff0ed7eb5d` |
 
-`package_payload_sha256` 是包核心对象的确定性 JSON hash；`package_file_sha256` 另外锁定带格式和换行的完整文件。人工确认必须同时绑定三者。
+`package_payload_sha256` 是包核心对象的确定性 JSON hash；`package_file_sha256` 另外锁定带格式和换行的完整文件。人工确认必须同时绑定三者。确认验证器会从这三个锁和固定的 `admin_user:1` 重新构造完整短语，不信任确认文件自带的 expected phrase。
 
 ## 精确人工确认
 

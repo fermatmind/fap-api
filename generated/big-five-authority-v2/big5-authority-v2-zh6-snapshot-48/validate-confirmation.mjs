@@ -25,7 +25,10 @@ invariant(confirmation.package_file_sha256 === sha256(packageText), 'confirmed p
 invariant(confirmation.requested_reviewer_admin_user_id === 1, 'requested reviewer must remain admin_user:1');
 invariant(Number.isInteger(confirmation.reviewer_admin_user_id) && confirmation.reviewer_admin_user_id === 1, 'confirmation must bind admin_user:1');
 invariant(typeof confirmation.confirmed_at === 'string' && !Number.isNaN(Date.parse(confirmation.confirmed_at)), 'confirmation timestamp is invalid');
-invariant(confirmation.confirmation_phrase === confirmation.expected_confirmation_phrase, 'confirmation phrase does not match the exact requested phrase');
+
+const exactConfirmationPhrase = `我已阅读并批准 BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48 最终公开 snapshot；cohort_snapshot_sha256=${packageJson.cohort_snapshot_sha256}；package_payload_sha256=${packageJson.package_payload_sha256}；package_file_sha256=${sha256(packageText)}；CMS reviewer_admin_user_id=1。`;
+invariant(confirmation.expected_confirmation_phrase === exactConfirmationPhrase, 'expected confirmation phrase does not match the locked package hashes and reviewer');
+invariant(confirmation.confirmation_phrase === exactConfirmationPhrase, 'confirmation phrase does not match the locked package hashes and reviewer');
 
 const expectedScope = {
   six_public_snapshots: true,
