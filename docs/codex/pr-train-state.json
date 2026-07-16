@@ -92984,7 +92984,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-promotion-readiness-49",
     "depends_on": ["BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48"],
-    "status": "github_check_fix_local_verified",
+    "status": "ready_to_merge",
     "commit_sha": "bfba7db0aafe46e57435eddbe8b50d3d96ec49f6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3141",
     "checks": {
@@ -93009,11 +93009,11 @@
         "evidence": "After the heavy-process guard found no competing FermatMind validation, the sole initial bash backend/scripts/ci_verify_mbti.sh run passed: Big Five 1506 tests / 181667 assertions plus Enneagram, MBTI smoke, Partner API, OpenAPI, migration safety, auth, order-security, dependency-security and downstream gates. After the GitHub-only branch-diff classifier exposed the missing registration, the corrected exact GitHub Big Five command passes 1506 tests / 181665 assertions with one existing skip; focused classifier coverage passes 2 / 5 and PR49 passes 9 / 140. Pint, PHP/JSON/YAML/JavaScript syntax, deterministic package hashes, git diff --check and exact 16-file allowed-path validation pass. Generated compile timestamp/hash side effects were restored; production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutations remain zero."
       },
       "github_verify_bigfive": {
-        "status": "fail_fix_local_verified",
-        "evidence": "GitHub head 7d45bdfe769065d6d09a9d4acb89ce7344f332c3 passed eight of nine checks and exact-head Codex review reported no major issues. verify-bigfive failed only because the runtime-freeze classifier had not yet registered the two exact read-only PR49 readiness paths; 1504 tests passed and the classifier rejected those two paths. The scoped fix allowlists only those two exact paths, proves unexpected writers and ResultPageV2 runtime remain blocked, and passes the corrected exact GitHub Big Five command at 1506 tests / 181665 assertions plus the 9-test PR49 contract. Fresh exact-head GitHub checks and review remain required."
+        "status": "pass",
+        "evidence": "Fresh head 04f200cf3fcd9899e0091e76efcc9d19748755e8 passed verify-bigfive in 4m10s after the exact-path classifier fix; all nine GitHub checks passed, merge state is CLEAN, exact-head Codex review reported no major issues, and reviewThreads is empty."
       }
     },
-    "failure_reason": "verify-bigfive failed on head 7d45bdfe769065d6d09a9d4acb89ce7344f332c3 because the branch-diff runtime-freeze classifier lacked the two exact read-only PR49 paths; the exact-path fix is locally verified and awaiting fresh GitHub checks.",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -93026,7 +93026,8 @@
       {"at": "2026-07-16T10:39:36Z", "from": "github_checks_pending", "to": "pr_open_rebased_pending_push", "note": "origin/main advanced by PR #3140 after the initial push. Both scoped commits rebased without conflict onto 9b13d93bbc3f6efb9ae8f4f3bf08f99f88763052; the substantive commit is now bfba7db0aafe46e57435eddbe8b50d3d96ec49f6. Deterministic package, focused 9/140, package-only zero-write command, Pint, syntax, YAML/JSON, git diff --check and exact 15-file scope pass after rebase. The first ad-hoc scope command falsely rejected allowed directory descendants because its regex omitted `.*`; the corrected exact-path matcher passed all 15 files. Require force-with-lease push and a fresh exact-head GitHub check cycle; the media HOLD and zero-mutation boundary are unchanged."},
       {"at": "2026-07-16T10:41:03Z", "from": "pr_open_rebased_pending_push", "to": "github_checks_pending", "note": "Force-with-lease updated PR #3141 to the verified rebased lineage through 7e22b522a5a36bdfba830a6463360ae9e265b617 without overwriting unknown remote work. A final ledger commit and fresh exact-head GitHub check/review cycle remain required; media readiness remains HOLD and controlled mutations remain zero."},
       {"at": "2026-07-16T10:49:30Z", "from": "github_checks_pending", "to": "github_check_fix_in_progress", "note": "Head 7d45bdfe769065d6d09a9d4acb89ce7344f332c3 passed eight of nine checks and exact-head Codex review reported no major issues. verify-bigfive failed only at the runtime-freeze classifier because the two exact read-only PR49 command/service paths were not registered. Scope is corrected to add the classifier test file; the fix allowlists only those exact paths and retains fail-closed rejection for unexpected writers/runtime services. Media readiness remains HOLD and controlled mutations remain zero."},
-      {"at": "2026-07-16T10:52:04Z", "from": "github_check_fix_in_progress", "to": "github_check_fix_local_verified", "note": "The exact-path runtime-freeze fix passes the corrected GitHub Big Five gate at 1506 tests / 181665 assertions with one existing skip, focused classifier coverage at 2 / 5, PR49 at 9 / 140, Pint, package build/validation, PHP/JSON/YAML syntax, git diff --check and exact 16-file manifest scope validation. Generated BIG5 compile side effects were inspected and restored. Fresh exact-head GitHub checks and Codex review are required before merge; media readiness remains HOLD and controlled mutations remain zero."}
+      {"at": "2026-07-16T10:52:04Z", "from": "github_check_fix_in_progress", "to": "github_check_fix_local_verified", "note": "The exact-path runtime-freeze fix passes the corrected GitHub Big Five gate at 1506 tests / 181665 assertions with one existing skip, focused classifier coverage at 2 / 5, PR49 at 9 / 140, Pint, package build/validation, PHP/JSON/YAML syntax, git diff --check and exact 16-file manifest scope validation. Generated BIG5 compile side effects were inspected and restored. Fresh exact-head GitHub checks and Codex review are required before merge; media readiness remains HOLD and controlled mutations remain zero."},
+      {"at": "2026-07-16T11:02:53Z", "from": "github_check_fix_local_verified", "to": "ready_to_merge", "note": "Fresh head 04f200cf3fcd9899e0091e76efcc9d19748755e8 passed all nine required GitHub checks with merge state CLEAN; verify-bigfive passed in 4m10s, exact-head Codex review reported no major issues, and reviewThreads is empty. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge. The package remains HOLD_FAIL_CLOSED_MEDIA_AUTHORITY, PR50 remains blocked, and controlled mutations remain zero."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50": {
