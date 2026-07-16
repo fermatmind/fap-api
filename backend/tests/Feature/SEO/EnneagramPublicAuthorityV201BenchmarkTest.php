@@ -183,21 +183,29 @@ class EnneagramPublicAuthorityV201BenchmarkTest extends TestCase
 
         foreach ([
             'ENNEAGRAM-PUBLIC-AUTHORITY-V2-PUBLIC-CONTRACT-04' => [
-                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02',
-                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03',
+                'depends_on' => [
+                    'ENNEAGRAM-PUBLIC-AUTHORITY-V2-INTEGRITY-GATE-02',
+                    'ENNEAGRAM-PUBLIC-AUTHORITY-V2-SKILL-ALIGNMENT-03',
+                ],
+                'pr_url' => 'https://github.com/fermatmind/fap-web/pull/1770',
+                'merge_sha' => '28afe5365d114ee72207cbcf426364355c88baa2',
             ],
             'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22' => [
-                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20',
-                'ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21',
+                'depends_on' => [
+                    'ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20',
+                    'ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21',
+                ],
+                'pr_url' => 'https://github.com/FermatMind/fap-web/pull/1775',
+                'merge_sha' => 'd92bd5caf2b7d69cf7724ae78d4731c137dd92e1',
             ],
-        ] as $id => $expectedDependencies) {
-            $this->assertSame($expectedDependencies, $state[$id]['depends_on'] ?? null);
+        ] as $id => $expected) {
+            $this->assertSame($expected['depends_on'], $state[$id]['depends_on'] ?? null);
             $this->assertSame('fap-web', $state[$id]['dependency_repository'] ?? null);
-            $this->assertNull($state[$id]['dependency_pr_url'] ?? null);
-            $this->assertNull($state[$id]['dependency_merge_sha'] ?? null);
-            $this->assertFalse($state[$id]['dependency_verification']['github_merged'] ?? true);
-            $this->assertFalse(
-                $state[$id]['dependency_verification']['dependency_origin_main_contains_merge'] ?? true
+            $this->assertSame($expected['pr_url'], $state[$id]['dependency_pr_url'] ?? null);
+            $this->assertSame($expected['merge_sha'], $state[$id]['dependency_merge_sha'] ?? null);
+            $this->assertTrue($state[$id]['dependency_verification']['github_merged'] ?? false);
+            $this->assertTrue(
+                $state[$id]['dependency_verification']['dependency_origin_main_contains_merge'] ?? false
             );
         }
     }
