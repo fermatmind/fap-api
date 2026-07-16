@@ -95094,9 +95094,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "2f4337664211b13553eba473af2296dcf25e0c6b",
-    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "status": "merged",
+    "commit_sha": "a967970734de48a06eac27a42e5c3c30e69d8b1f",
+    "commit_sha_role": "github_squash_merge_commit",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3132",
     "checks": {
       "dependency": {
@@ -95126,18 +95126,22 @@
       "required_reviews": {
         "status": "pass",
         "evidence": "GitHub reports no required review rule, no reviews, and zero review threads. This does not claim human content review; all assets remain pending_manual_review."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3132 MERGED at 2026-07-16T05:13:21Z as a967970734de48a06eac27a42e5c3c30e69d8b1f. origin/main containment, exact six-file scope, remote/local branch deletion, and focused 8-test / 419-assertion post-merge regression pass. The unrelated untracked Big Five document in the primary worktree was preserved unchanged."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-16T05:13:21Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -95174,9 +95178,14 @@
         "at": "2026-07-16T05:06:58Z",
         "status": "ready_to_merge",
         "note": "All nine GitHub checks passed on immutable head 33f0a6ebe1d0fe2b7089b2701faabad3d5adb2cc. GitHub reports CLEAN/MERGEABLE, no required review rule, no reviews, and zero review threads; exact six-file scope, twelve assets, 36 unique FAQ pairs, pending-manual-review truth, draft-only release truth, and every execution boundary were revalidated. This ledger-only ready transition must receive a fresh complete check cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T05:19:32Z",
+        "status": "merged",
+        "note": "Final ready-ledger head 92f3b940a5ac47bc892698208284d8c29744c5dc passed all nine checks and was squash-merged as a967970734de48a06eac27a42e5c3c30e69d8b1f at 2026-07-16T05:13:21Z. GitHub MERGED state, origin/main containment, exact six-file scope, zero review threads, remote/local branch cleanup, and focused 8-test / 419-assertion post-merge regression were verified before PR19 implementation."
       }
     ],
-    "updated_at": "2026-07-16T05:06:58Z"
+    "updated_at": "2026-07-16T05:19:32Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19",
@@ -95187,19 +95196,48 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18"
     ],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "ee738786cd63e5a2a8595fdb2daff43fe1ced328",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3133",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR18 is MERGED as a967970734de48a06eac27a42e5c3c30e69d8b1f; GitHub state, final-head 9/9 checks, zero review threads, origin/main containment, exact scope, remote/local branch cleanup, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first focused run exposed two test-only defects: a safe-concept minimum set above one valid center concept length and null-coalescing assertions that treated present null authority fields as missing. The test was corrected to retain substantive depth and use explicit key-presence plus null checks; no media specification or localized mapping data required repair."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "The PR19 focused suite passes 6 tests / 3601 assertions. Pint, PHP syntax, YAML, changed JSON, hardcoded-URL scan, rights/upload/publication fail-closed checks, diff check, and exact seven-file allowlist pass."
+      },
+      "media_qa": {
+        "status": "pass",
+        "evidence": "Exactly 58 frozen identities have unique locale-neutral original concept specifications and exactly 116 frozen routes have unique localized alt/OG mappings. Every Media Library id, key, and public URL is null; ownership, license, creator, and approval remain unassigned or pending; all upload, frontend-asset, CMS/database, publication, discoverability, deploy, and production actions remain false."
+      },
+      "codex_skeptical_review": {
+        "status": "pass",
+        "evidence": "Structured readback verified 58 unique identity-specific concepts, 58 unique EN alt values, 58 unique zh-CN alt values, 116 unique localized alt mappings, accessible composition constraints, prohibited stereotype/claim/competitor elements, exact dimensions, and no production URL or frontend/public asset literal."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All nine GitHub checks passed on review-fix head 6584ec880c4ab60f9ef223c2d5fad5aa96426389. GitHub reports CLEAN/MERGEABLE with exactly the seven allowed files; this ready-ledger update requires its own fresh check cycle."
+      },
+      "required_reviews": {
+        "status": "pass",
+        "evidence": "No required human review rule applies to this planning-only PR. Both valid automated findings are addressed in scope; their threads are resolved after the respective fixes are pushed. This does not represent or substitute for manual Media Library rights review, which remains pending for all 58 specifications."
+      },
+      "automated_review_fix": {
+        "status": "pass",
+        "evidence": "Accepted discussion_r3592882206: forbidden URL/frontend path scans use JSON_UNESCAPED_SLASHES, so literals cannot evade the invariant through JSON escaping. Accepted discussion_r3592912536: the stale 2ce8f475 check evidence is replaced only after all nine checks passed on review-fix head 6584ec880c4ab60f9ef223c2d5fad5aa96426389. Focused 6/3601, Pint, PHP syntax, YAML/JSON, and diff checks pass locally."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -95217,9 +95255,44 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-16T05:19:32Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR18 merge and began the exact PR19 branch from clean latest origin/main in the isolated worktree. This scope defines 58 locale-neutral original media specifications and 116 localized alt/OG mappings only; no artwork generation, upload, Media Library/CMS/database write, production URL, frontend asset, rights approval, publication, discoverability mutation, deploy, or production action is authorized."
+      },
+      {
+        "at": "2026-07-16T05:21:12Z",
+        "status": "local_checks_passed",
+        "note": "After correcting two test-only invariant defects, all PR19 manifest checks pass: 6 tests / 3601 assertions, Pint, PHP syntax, YAML, changed JSON, uniqueness and safe-brief readback, no-URL/no-upload/no-rights-approval checks, diff check, and exact seven-file scope. Media Library remains the sole authority and every execution boundary remains closed."
+      },
+      {
+        "at": "2026-07-16T05:22:03Z",
+        "status": "ready_to_push",
+        "note": "Committed the exact seven-file PR19 scope as ee738786cd63e5a2a8595fdb2daff43fe1ced328 after explicit path-limited staging and cached diff validation."
+      },
+      {
+        "at": "2026-07-16T05:23:03Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact seven-file branch and opened the single authorized fap-api PR #3133 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
+      },
+      {
+        "at": "2026-07-16T05:30:57Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on immutable head 2ce8f475ad7862ea37dc496493080f097180551c. GitHub is CLEAN/MERGEABLE, the diff remains exactly seven allowed files, there are zero reviews and zero review threads, and the 58 unique specifications plus 116 unique locale mappings remain fail-closed for rights, upload, URL, publication, and every execution boundary. This ledger-only update must pass a fresh complete check cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T05:39:05Z",
+        "status": "review_fix_local_verified",
+        "note": "Final ledger head d5ff71ef5924cbff67a64693e1ec7fab7d7bd462 passed all nine checks, then exact-head automated review found one valid P2: default JSON slash escaping could let an unasserted standard URL or frontend/public path evade the forbidden-literal scan. The test now uses JSON_UNESCAPED_SLASHES; focused 6/3601, Pint, syntax, YAML/JSON, and diff validation pass. Fresh GitHub checks and resolution of discussion_r3592882206 remain required before merge."
+      },
+      {
+        "at": "2026-07-16T05:46:15Z",
+        "status": "ready_to_merge",
+        "note": "Review-fix head 6584ec880c4ab60f9ef223c2d5fad5aa96426389 passed all nine checks, GitHub is CLEAN/MERGEABLE, and the URL-scan thread is resolved. A second valid ledger review noted that the earlier 2ce8f475 check evidence remained marked pass after the review fix; this update binds check evidence to 6584ec880, keeps the exact seven-file scope and 58/116 fail-closed invariants, and must independently pass fresh checks with both review threads resolved before merge."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-16T05:46:15Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20",
