@@ -95313,8 +95313,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19"
     ],
     "status": "ready_to_merge",
-    "commit_sha": "4bb24d56c556a6f6f2c50f09e386d5ca3db012ca",
-    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "commit_sha": "b91473f1965e6f6e5d0ee7bab5a2b687caf6ff7a",
+    "commit_sha_role": "latest_locally_verified_review_fix_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3134",
     "checks": {
       "dependency": {
@@ -95339,15 +95339,15 @@
       },
       "automated_review_fix": {
         "status": "pass",
-        "evidence": "Accepted discussion_r3593029471: both graph and QA tests now require the exact twelve-key execution-boundary set and assert strict false for every value, so missing, null, empty, reordered, or widened boundaries fail closed. Focused 8/9618, Pint, PHP syntax, YAML/JSON, and diff checks pass locally."
+        "evidence": "Accepted discussion_r3593029471: both graph and QA tests require the exact twelve-key execution-boundary set and strict false for every value. Accepted discussion_r3593087002: commit_sha now binds downstream dependency validation to the actual boundary-hardened review-fix head b91473f1965e6f6e5d0ee7bab5a2b687caf6ff7a instead of the pre-fix head. Focused 8/9618, Pint, PHP syntax, YAML/JSON, and diff checks pass locally."
       },
       "github_checks": {
         "status": "pass",
-        "evidence": "All nine canonical GitHub check contexts passed on review-fix head b91473f1965e6f6e5d0ee7bab5a2b687caf6ff7a. Two immediately superseded duplicate workflow runs were concurrency-cancelled before executing steps; the later exact-head contexts all succeeded and GitHub reports CLEAN/MERGEABLE with exactly six allowed files."
+        "evidence": "All nine GitHub check contexts passed on ready-ledger head a74e6cba360bd3237ee2d25669b04aeb10e74d14. GitHub reports CLEAN/MERGEABLE with exactly six allowed files; this commit-SHA correction must pass its own fresh cycle."
       },
       "required_reviews": {
         "status": "pass",
-        "evidence": "No required human review rule applies. The one valid automated review finding is fixed and its thread is resolved/outdated. This does not claim named human content review or release approval; those remain deferred to PR22."
+        "evidence": "No required human review rule applies. Both valid automated findings are addressed in scope; their threads are resolved after the corresponding fixes are pushed. This does not claim named human content review or release approval; those remain deferred to PR22."
       }
     },
     "scope_validation": {
@@ -95401,9 +95401,14 @@
         "at": "2026-07-16T06:19:58Z",
         "status": "ready_to_merge",
         "note": "Review-fix head b91473f1965e6f6e5d0ee7bab5a2b687caf6ff7a passed all nine canonical GitHub contexts, GitHub is CLEAN/MERGEABLE, the exact six-file scope remains intact, and the sole review thread is resolved/outdated. Two duplicate runs were concurrency-cancelled before steps and superseded by successful exact-head contexts. The 116/534/348 graph invariants and twelve strict false execution boundaries remain intact. This ledger-only update must pass its own fresh cycle before merge."
+      },
+      {
+        "at": "2026-07-16T06:27:28Z",
+        "status": "ready_to_merge",
+        "note": "Ready-ledger head a74e6cba360bd3237ee2d25669b04aeb10e74d14 passed all nine checks, then exact-head review found that commit_sha still referenced pre-fix implementation head 4bb24d56. This ledger-only correction binds dependency automation to the actual boundary-hardened review-fix head b91473f1965e6f6e5d0ee7bab5a2b687caf6ff7a; it must independently pass fresh checks with both review threads resolved before merge."
       }
     ],
-    "updated_at": "2026-07-16T06:19:58Z"
+    "updated_at": "2026-07-16T06:27:28Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
