@@ -1185,12 +1185,15 @@ final class EnneagramPublicAuthorityV222ReleaseGate
 
     private const LINK_GRAPH = 'docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-link-graph-20/link-graph.json';
 
-    private const MEDIA_SPECIFICATIONS = 'docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-media-og-19/media-specifications.json';
-
-    private const MEDIA_MAPPINGS = 'docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-media-og-19/localized-og-mappings.json';
-
     /** @var list<string> */
     private const HIDDEN_SCHEMA_KEYS = ['json_ld', 'schema', 'structured_data', 'faq_schema'];
+
+    /** @var array{hero:null,inline:array<never>,og:null} */
+    private const EMPTY_MEDIA_AUTHORITY = [
+        'hero' => null,
+        'inline' => [],
+        'og' => null,
+    ];
 
     /** @var array<string, int> */
     private const ENTITY_COUNTS = [
@@ -1232,6 +1235,8 @@ final class EnneagramPublicAuthorityV222ReleaseGate
         $paths = [];
         $entityCounts = [];
         $localeCounts = [];
+        $emptyMediaAuthorityCount = 0;
+        $nonEmptyMediaAssetKeys = [];
 
         foreach (self::ASSET_SOURCES as $sourcePath) {
             $source = $this->loadJson($basePath, $sourcePath);
@@ -1287,6 +1292,19 @@ final class EnneagramPublicAuthorityV222ReleaseGate
                 }
                 foreach ($this->hiddenSchemaPaths($asset) as $hiddenSchemaPath) {
                     $errors[] = $this->error('hidden_schema_detected', $assetKey.'.'.$hiddenSchemaPath);
+                }
+
+                $declaredMedia = self::EMPTY_MEDIA_AUTHORITY;
+                foreach (['media', 'media_json'] as $mediaField) {
+                    if (array_key_exists($mediaField, $asset)) {
+                        $declaredMedia = $asset[$mediaField];
+                    }
+                }
+                if ($declaredMedia !== self::EMPTY_MEDIA_AUTHORITY) {
+                    $nonEmptyMediaAssetKeys[] = $assetKey;
+                    $errors[] = $this->error('empty_media_authority_violation', $assetKey);
+                } else {
+                    $emptyMediaAuthorityCount++;
                 }
 
                 $assetRecords[] = [
@@ -1417,48 +1435,6 @@ final class EnneagramPublicAuthorityV222ReleaseGate
             $errors[] = $this->error('discoverability_inventory_mismatch', 'benchmark');
         }
 
-        $mediaSpecifications = $this->loadJson($basePath, self::MEDIA_SPECIFICATIONS);
-        $mediaRows = is_array($mediaSpecifications['media_specifications'] ?? null) ? $mediaSpecifications['media_specifications'] : [];
-        $mediaMappings = $this->loadJson($basePath, self::MEDIA_MAPPINGS);
-        $mappingRows = is_array($mediaMappings['mappings'] ?? null) ? $mediaMappings['mappings'] : [];
-        $mappingByKey = $this->keyRows($mappingRows, 'media_mapping', $errors);
-        if (count($mediaRows) !== 58 || count($mappingByKey) !== 116) {
-            $errors[] = $this->error('media_count_mismatch', 'aggregate');
-        }
-        $this->compareKeySets(array_keys($assetsByKey), array_keys($mappingByKey), 'media_mapping_key_mismatch', $errors);
-        $mediaManifestRecords = [];
-        foreach ($mediaRows as $index => $mediaRow) {
-            if (! is_array($mediaRow)) {
-                $errors[] = $this->error('media_manifest_record_invalid', 'media:'.$index);
-
-                continue;
-            }
-            $mediaManifestRecords[] = [
-                'identity_key' => (string) ($mediaRow['identity_key'] ?? ''),
-                'spec_id' => (string) ($mediaRow['spec_id'] ?? ''),
-                'record_sha256' => $this->hashValue($mediaRow),
-            ];
-        }
-        usort($mediaManifestRecords, fn (array $left, array $right): int => $left['identity_key'] <=> $right['identity_key']);
-        if (count(array_unique(array_column($mediaManifestRecords, 'identity_key'))) !== 58
-            || count(array_unique(array_column($mediaManifestRecords, 'spec_id'))) !== 58) {
-            $errors[] = $this->error('media_manifest_identity_mismatch', 'aggregate');
-        }
-
-        $pendingMediaRights = [];
-        foreach ($mappingByKey as $key => $mapping) {
-            $review = is_array($mapping['manual_rights_review'] ?? null) ? $mapping['manual_rights_review'] : [];
-            if (($review['status'] ?? null) !== 'approved'
-                || ($review['approved'] ?? null) !== true
-                || ! is_string($review['reviewer'] ?? null)
-                || trim((string) $review['reviewer']) === ''
-                || ! is_string($review['reviewed_at'] ?? null)
-                || trim((string) $review['reviewed_at']) === '') {
-                $pendingMediaRights[] = $key;
-            }
-        }
-        sort($pendingMediaRights);
-
         $manualReviews = $this->loadJson($basePath, $manualReviewsPath);
         $reviewEvidence = $this->validateManualReviews($manualReviews, $assetRecords, $errors);
         $missingReviews = [];
@@ -1477,7 +1453,7 @@ final class EnneagramPublicAuthorityV222ReleaseGate
         foreach (array_merge(
             self::ASSET_SOURCES,
             self::QA_SOURCES,
-            [self::PAGE_MAPS, self::SOURCE_REGISTRY, self::BENCHMARK, self::LINK_GRAPH, self::MEDIA_SPECIFICATIONS, self::MEDIA_MAPPINGS]
+            [self::PAGE_MAPS, self::SOURCE_REGISTRY, self::BENCHMARK, self::LINK_GRAPH]
         ) as $path) {
             $sourceHashes[] = ['path' => $path, 'sha256' => $this->hashFile($basePath, $path)];
         }
@@ -1486,35 +1462,40 @@ final class EnneagramPublicAuthorityV222ReleaseGate
         $humanReviewPassed = count($reviewEvidence['valid']) === 116
             && $missingReviews === []
             && $reviewEvidence['rejected'] === [];
-        $mediaRightsPassed = $pendingMediaRights === [];
-        $releaseEligible = $automatedGatePassed && $humanReviewPassed && $mediaRightsPassed;
+        $mediaBoundaryPassed = $emptyMediaAuthorityCount === 116 && $nonEmptyMediaAssetKeys === [];
+        $releaseEligible = $automatedGatePassed && $humanReviewPassed && $mediaBoundaryPassed;
         $packageSha = $this->hashValue([
             'asset_records' => $assetRecords,
             'pre_write_public_fingerprints' => array_values($fingerprints),
             'source_hashes' => $sourceHashes,
+            'empty_media_authority' => [
+                'contract' => self::EMPTY_MEDIA_AUTHORITY,
+                'target_count' => 116,
+                'media_write_count' => 0,
+            ],
         ]);
 
         $status = match (true) {
             ! $automatedGatePassed => 'fail_closed',
             ! $humanReviewPassed => 'hold_missing_human_review',
-            ! $mediaRightsPassed => 'hold_missing_media_rights_review',
+            ! $mediaBoundaryPassed => 'hold_media_boundary_violation',
             default => 'pass',
         };
         $currentBlockers = array_values(array_filter([
             $automatedGatePassed ? null : 'automated_release_gate_failed',
             $humanReviewPassed ? null : 'missing_or_rejected_named_human_review_records',
-            $mediaRightsPassed ? null : 'missing_media_rights_review_records',
+            $mediaBoundaryPassed ? null : 'non_empty_media_authority_detected',
         ]));
 
         return [
             'artifact' => self::ARTIFACT,
-            'schema_version' => 'enneagram_public_authority_v2_release_gate.v1',
+            'schema_version' => 'enneagram_public_authority_v2_release_gate.v2',
             'status' => $status,
             'decision' => $releaseEligible ? 'PASS' : 'HOLD',
             'ok' => $releaseEligible,
             'automated_gate_passed' => $automatedGatePassed,
             'human_review_passed' => $humanReviewPassed,
-            'media_rights_review_passed' => $mediaRightsPassed,
+            'media_boundary_passed' => $mediaBoundaryPassed,
             'release_eligible' => $releaseEligible,
             'package_sha256' => $packageSha,
             'counts' => [
@@ -1527,14 +1508,13 @@ final class EnneagramPublicAuthorityV222ReleaseGate
                 'editorial_integrity_qa_rows' => (int) ($editorialGate['qa_row_count'] ?? 0),
                 'graph_records' => count($graphByKey),
                 'unique_canonicals' => count(array_unique($canonicalPaths)),
-                'media_originals' => count($mediaRows),
-                'media_mappings' => count($mappingByKey),
+                'empty_media_authority_count' => $emptyMediaAuthorityCount,
+                'media_write_count' => 0,
                 'pre_write_public_fingerprints' => count($fingerprints),
                 'named_human_reviews' => count($reviewEvidence['valid']),
                 'approved_human_reviews' => count($reviewEvidence['approved']),
                 'rejected_human_reviews' => count($reviewEvidence['rejected']),
                 'missing_human_reviews' => count($missingReviews),
-                'pending_media_rights_reviews' => count($pendingMediaRights),
             ],
             'collision_preflight' => [
                 'status' => $automatedGatePassed ? 'pass' : 'fail',
@@ -1567,15 +1547,21 @@ final class EnneagramPublicAuthorityV222ReleaseGate
             'manual_review_records' => array_values($reviewEvidence['valid']),
             'missing_human_reviews' => $missingReviews,
             'rejected_human_review_asset_keys' => array_keys($reviewEvidence['rejected']),
-            'media_manifest_records' => $mediaManifestRecords,
-            'pending_media_rights_review_asset_keys' => $pendingMediaRights,
+            'empty_media_authority' => [
+                'contract' => self::EMPTY_MEDIA_AUTHORITY,
+                'target_count' => 116,
+                'valid_count' => $emptyMediaAuthorityCount,
+                'non_empty_asset_keys' => $nonEmptyMediaAssetKeys,
+                'media_write_count' => 0,
+                'media_library_write_performed' => false,
+            ],
             'source_hashes' => $sourceHashes,
             'graph_manifest_sha256' => $this->hashFile($basePath, self::LINK_GRAPH),
-            'media_manifest_sha256' => $this->hashFile($basePath, self::MEDIA_SPECIFICATIONS),
             'qa_sources' => $qaSources,
             'errors' => $errors,
             'release_boundary' => [
                 'manual_review_requirement' => '116/116 named human review records bound to exact asset SHA256',
+                'media_requirement' => '116/116 authority assets map to hero=null, inline=[], og=null with zero Media Library writes',
                 'current_blockers' => $currentBlockers,
                 'next_authority' => 'operator_supplied_human_review_evidence_then_separate_exact_sha_production_authorization',
                 'production_command_executed' => false,

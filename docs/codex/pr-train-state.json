@@ -35211,7 +35211,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1833",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "title": "docs(foundation): validate Daily Giving backend runtime"
   },
   "PR-FDN-SOCIAL-SYNC-MVP-01": {
@@ -95672,7 +95672,7 @@
       "fap_api_origin_main_contains_link_graph_merge": true,
       "verified_at": "2026-07-16T08:31:28Z"
     },
-    "status": "draft_open_ci_green_blocked_release_gate",
+    "status": "merged_and_cleaned",
     "commit_sha": "3cde43132c9e04c5b69978d03f7304f0ecb0f011",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3138",
     "checks": {
@@ -95711,18 +95711,23 @@
       "runtime_freeze_regression": {
         "status": "passed",
         "evidence": "BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff passed 1 test / 3 assertions against the rebased committed diff."
+      },
+      "post_merge_reconciliation": {
+        "status": "passed",
+        "evidence": "GitHub PR #3138 is MERGED at e71cf26de155ec5903a5020fcbcd4e4e4e757c9b; fap-api origin/main contains the merge commit; local and remote task branches are absent; the working tree was clean before 22A started."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
-    "failure_reason": "Release gate is truthfully HOLD: aggregate editorial QA found two cross-family duplicate_sentence blockers; 0/116 named human content reviews and 0/116 localized media-rights approvals are present. PR22 must remain draft/open and PR23 must not start.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "merge_commit": "e71cf26de155ec5903a5020fcbcd4e4e4e757c9b",
+    "merged_at": "2026-07-16T09:19:26Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -95789,9 +95794,102 @@
         "at": "2026-07-16T09:03:47Z",
         "status": "draft_open_ci_green_blocked_release_gate",
         "note": "Rebased head e7865c345454a33af83e4ad9ff472edc42a2192c passed all nine GitHub checks, GitHub is CLEAN, the exact ten-file scope remains intact, and there are no review comments or threads. Keep Draft PR #3138 open and unmerged: the release gate still fails closed on two aggregate duplicate-sentence blockers, 116 missing named human reviews, and 116 pending localized media-rights reviews. PR23 remains register-only and unstarted."
+      },
+      {
+        "at": "2026-07-16T10:24:39Z",
+        "status": "merged_and_cleaned",
+        "note": "Reconciled PR #3138 after the operator-approved merge: GitHub reports MERGED at e71cf26de155ec5903a5020fcbcd4e4e4e757c9b, origin/main contains the merge commit, and both local and remote task branches are absent. This bookkeeping does not change the truthful HOLD evidence captured by PR22."
       }
     ],
-    "updated_at": "2026-07-16T09:03:47Z"
+    "updated_at": "2026-07-16T10:24:39Z"
+  },
+  "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A": {
+    "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-public-authority-v2-media-boundary-22a",
+    "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A: replace media-rights gating with an empty-media contract",
+    "depends_on": [
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22"
+    ],
+    "status": "pr_open_checks_pending",
+    "commit_sha": "8d670bae9281ee40ed6b208a12e9399e0201687d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3142",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3138 is MERGED at e71cf26de155ec5903a5020fcbcd4e4e4e757c9b; origin/main contains the merge commit; local and remote task branches are absent."
+      },
+      "baseline_repair": {
+        "status": "passed",
+        "evidence": "The first full Enneagram V2 run exposed a stale PR01 test assertion already present on origin/main. Isolated PR #3140 updated only that test, passed all nine required checks, and merged at 9b13d93bbc3f6efb9ae8f4f3bf08f99f88763052 before 22A resumed."
+      },
+      "focused_release_gate": {
+        "status": "passed",
+        "evidence": "4 tests / 54 assertions pass. The gate remains truthful HOLD on two duplicate-sentence issues and 116 missing human reviews while media_boundary_passed=true, empty_media_authority_count=116, and media_write_count=0."
+      },
+      "full_enneagram_v2": {
+        "status": "passed",
+        "evidence": "After baseline repair merge, php artisan test --filter=EnneagramPublicAuthorityV2 passed 184 tests / 28158 assertions."
+      },
+      "static_and_metadata": {
+        "status": "passed",
+        "evidence": "Changed PHP files passed php -l and Pint; Composer validate --strict, YAML/JSON parsing, release report SHA binding, git diff --check, and exact nine-path scope validation passed."
+      },
+      "github": {
+        "status": "passed_requires_fresh_ledger_cycle",
+        "evidence": "Head 451dcd3e387259480f5906649ddd46eb158b0468 passed all nine required checks; GitHub reports CLEAN/MERGEABLE, exact nine-path scope, and no review comments. This ready-to-merge ledger commit must pass its own fresh cycle."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-16T10:24:39Z",
+        "status": "pending_dependency",
+        "note": "Registered from the explicit serial execution goal with PR22 as its only dependency."
+      },
+      {
+        "at": "2026-07-16T10:24:39Z",
+        "status": "implementation_in_progress",
+        "note": "Verified merged PR22, origin/main containment, clean worktree, and deleted predecessor branches; started the exact empty-media boundary scope from latest main."
+      },
+      {
+        "at": "2026-07-16T10:40:31Z",
+        "status": "local_validation_passed",
+        "note": "Replaced the media-rights release blocker with the exact 116-page empty-media contract, removed PR19 media planning from package inputs, reconciled PR22, and passed focused 4/54 plus full 184/28158 after merging isolated baseline repair PR #3140. PHP lint, Pint, Composer, metadata, report hash, diff, and scope checks also pass."
+      },
+      {
+        "at": "2026-07-16T10:41:33Z",
+        "status": "ready_to_push",
+        "note": "Bound commit_sha to the exact locally verified implementation commit 8d670bae9281ee40ed6b208a12e9399e0201687d; only this ledger binding remains after the complete validation cycle."
+      },
+      {
+        "at": "2026-07-16T10:42:39Z",
+        "status": "pr_open_checks_pending",
+        "note": "Pushed the exact nine-path scope and opened PR #3142; waiting for all required GitHub checks before merge."
+      },
+      {
+        "at": "2026-07-16T10:52:06Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 451dcd3e387259480f5906649ddd46eb158b0468 passed all nine required checks; GitHub is CLEAN/MERGEABLE, scope remains exactly nine allowed paths, and no comments or reviews exist. Push this ledger-only readiness record and require a fresh check cycle before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-16T10:52:06Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",

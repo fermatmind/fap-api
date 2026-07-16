@@ -44802,6 +44802,46 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-media-boundary-22a
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A: replace media-rights gating with an empty-media contract"
+    status: ready_to_merge
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22
+    scope:
+      - Replace the 116-page media-rights release blocker with an exact empty-media authority contract and remove media upload from the PR23 plan.
+      - Reconcile merged PR22 facts and document the backend-authoritative no-media boundary without importing, publishing, deploying, or writing Media Library state.
+    allowed_paths:
+      - AGENTS.md
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV2IntegrityGate.php
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2IntegrityGate.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php --no-ansi
+      - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23
     repo: fap-api
     base: main

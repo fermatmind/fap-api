@@ -130,3 +130,8 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - `proof_public_url` is the only public proof media field. It must point to the operator-approved public media URL for the original charity donation proof image and must be approved through the backend proof gate before a DailyGiving record can be public.
 - Backend authority may not be bypassed by frontend hardcoded URLs or CMS fallback copy.
 - DailyGiving records with `is_public=true` must remain `is_indexable=false` until a separate indexability gate explicitly approves sitemap and llms inclusion. Trust badges, official partnership/endorsement claims, and guaranteed-impact claims remain blocked unless separately source-backed and approved.
+
+### Enneagram Authority V2 Media Boundary
+- The current 116-page Enneagram Authority V2 release maps every authority asset to exactly `hero=null`, `inline=[]`, and `og=null`.
+- This release must not upload media, write Media Library records, add frontend media fallback, or hardcode public image URLs.
+- Any future Enneagram authority image requires a separate backend-authoritative, rights-reviewed PR before it can enter a release package.

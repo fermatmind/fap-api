@@ -36,7 +36,7 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertFalse($report['ok']);
         $this->assertFalse($report['automated_gate_passed']);
         $this->assertFalse($report['human_review_passed']);
-        $this->assertFalse($report['media_rights_review_passed']);
+        $this->assertTrue($report['media_boundary_passed']);
         $this->assertFalse($report['release_eligible']);
         $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $report['package_sha256']);
 
@@ -50,14 +50,13 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
             'editorial_integrity_qa_rows' => 116,
             'graph_records' => 116,
             'unique_canonicals' => 116,
-            'media_originals' => 58,
-            'media_mappings' => 116,
+            'empty_media_authority_count' => 116,
+            'media_write_count' => 0,
             'pre_write_public_fingerprints' => 116,
             'named_human_reviews' => 0,
             'approved_human_reviews' => 0,
             'rejected_human_reviews' => 0,
             'missing_human_reviews' => 116,
-            'pending_media_rights_reviews' => 116,
         ], $report['counts']);
 
         $this->assertCount(116, $report['asset_records']);
@@ -66,10 +65,19 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertCount(116, array_unique(array_column($report['asset_records'], 'asset_sha256')));
         $this->assertCount(116, $report['pre_write_public_fingerprints']);
         $this->assertCount(116, array_unique(array_column($report['pre_write_public_fingerprints'], 'pre_write_public_sha256')));
-        $this->assertCount(58, $report['media_manifest_records']);
-        $this->assertCount(58, array_unique(array_column($report['media_manifest_records'], 'record_sha256')));
         $this->assertCount(116, $report['missing_human_reviews']);
-        $this->assertCount(116, $report['pending_media_rights_review_asset_keys']);
+        $this->assertSame([
+            'contract' => ['hero' => null, 'inline' => [], 'og' => null],
+            'target_count' => 116,
+            'valid_count' => 116,
+            'non_empty_asset_keys' => [],
+            'media_write_count' => 0,
+            'media_library_write_performed' => false,
+        ], $report['empty_media_authority']);
+        $this->assertSame([], array_values(array_filter(
+            $report['source_hashes'],
+            static fn (array $source): bool => str_contains((string) $source['path'], 'enneagram-public-authority-v2-media-og-19'),
+        )));
 
         $this->assertSame(['sitemap' => 116, 'llms_txt' => 116, 'llms_full_txt' => 116], array_intersect_key(
             $report['discoverability_inventory'],
@@ -125,7 +133,7 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertSame(116, $reviewed['counts']['approved_human_reviews']);
         $this->assertSame(0, $reviewed['counts']['missing_human_reviews']);
         $this->assertFalse($reviewed['automated_gate_passed']);
-        $this->assertFalse($reviewed['media_rights_review_passed']);
+        $this->assertTrue($reviewed['media_boundary_passed']);
         $this->assertFalse($reviewed['release_eligible']);
         $this->assertSame('fail_closed', $reviewed['status']);
         $this->assertSame($initial['package_sha256'], $reviewed['package_sha256']);
