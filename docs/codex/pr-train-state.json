@@ -56120,34 +56120,35 @@
           "status": "pass"
         },
         "local": {
-          "evidence": "Final focused bridge/auditor/CLI tests passed 19 tests / 148 assertions; runtime-freeze exact classifier passed 2 tests / 4 assertions. The command is auto-registered, makes no database queries, emits deterministic JSON/Markdown, fails closed on source/hash/status/private/draft/ranking mismatches, omits candidate copy/private fields, and binds zh-CN Big Five authority to the existing zh Career runtime projection. Route discovery (239 lines), six touched-file Pint, PHP syntax, Composer strict validate/audit, JSON/YAML parse, git diff checks, and exact 10-path scope passed. Guarded bash backend/scripts/ci_verify_mbti.sh passed through strict queue with Big Five 1487 tests / 181390 assertions and personality full-32 71 tests / 5371 assertions; all 13 generated compiled diffs were restored.",
+          "evidence": "Pre-merge focused bridge/auditor/CLI tests passed 19 tests / 148 assertions; runtime-freeze exact classifier passed 2 tests / 4 assertions. Post-merge on the merged main, the full focused selection passed 21 tests / 155 assertions and runtime-freeze again passed 2 tests / 4 assertions. The command is auto-registered, makes no database queries, emits deterministic JSON/Markdown, fails closed on source/hash/status/private/draft/ranking mismatches, omits candidate copy/private fields, and binds zh-CN Big Five authority to the existing zh Career runtime projection. Route discovery (239 lines), six touched-file Pint, PHP syntax, Composer strict validate/audit, JSON/YAML parse, git diff checks, and exact 10-path scope passed. Guarded bash backend/scripts/ci_verify_mbti.sh passed through strict queue with Big Five 1487 tests / 181390 assertions and personality full-32 71 tests / 5371 assertions; all 13 generated compiled diffs were restored.",
           "status": "pass"
         },
         "github": {
-          "evidence": "PR #3121 exact head 077b7551bb38c52626de71f20db106cba883bc31 passed all nine GitHub checks, is mergeable, and has zero review threads. The following state-only ready_to_merge bookkeeping head must rerun the same required checks before squash merge.",
+          "evidence": "PR #3121 reviewed implementation head 077b7551bb38c52626de71f20db106cba883bc31 passed all nine GitHub checks and had zero review threads. Final PR head 2aa207e953067a6bba2c95b71b372e629be53fde passed all nine required checks and squash-merged as a5ca257069ee9c88a85c3cd12ff94ad686a2455b at 2026-07-15T23:06:48Z; origin/main contains the merge.",
           "status": "pass"
         }
       },
-      "commit_sha": "077b7551bb38c52626de71f20db106cba883bc31",
+      "commit_sha": "a5ca257069ee9c88a85c3cd12ff94ad686a2455b",
       "depends_on": [
         "BIG5-CAREER-BRIDGE-SCHEMA-01"
       ],
       "failure_reason": null,
       "id": "BIG5-CAREER-BRIDGE-AUDITOR-02",
-      "local_cleanup_executed": false,
-      "merged_at": null,
+      "local_cleanup_executed": true,
+      "merged_at": "2026-07-15T23:06:48Z",
       "next_task": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3121",
-      "remote_branch_deleted": false,
+      "github_head_sha": "2aa207e953067a6bba2c95b71b372e629be53fde",
+      "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_validation": {
         "allowed_paths_only": true,
         "github_checks_green": true,
         "local_validation_passed": true,
-        "post_merge_revalidated": null
+        "post_merge_revalidated": true
       },
       "sidecars": [],
-      "status": "ready_to_merge",
+      "status": "merged",
       "title": "BIG5-CAREER-BRIDGE-AUDITOR-02: feat(career): add read-only Big Five career bridge auditor",
       "transitions": [
         {
@@ -56179,6 +56180,12 @@
           "from": "github_checks_pending",
           "note": "Exact head 077b7551bb38c52626de71f20db106cba883bc31 passed all nine GitHub checks, remained exact 10-path scope and mergeable, and had zero review threads. Recorded ready_to_merge before the required final state-only bookkeeping check cycle.",
           "to": "ready_to_merge"
+        },
+        {
+          "at": "2026-07-15T23:06:48Z",
+          "from": "ready_to_merge",
+          "note": "Final PR head 2aa207e953067a6bba2c95b71b372e629be53fde passed all nine required checks and PR #3121 squash-merged as a5ca257069ee9c88a85c3cd12ff94ad686a2455b. origin/main contains the merge, local and remote task branches are absent, post-merge focused validation passed 21 tests / 155 assertions plus runtime-freeze 2 tests / 4 assertions, and no production, CMS, database, media, cache, Search, sitemap, LLMS, indexability, migration, public-route, or deploy action occurred.",
+          "to": "merged"
         }
       ]
     },
@@ -92609,7 +92616,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-visible-date-42",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41"],
-    "status": "post_merge_pointer_repair_ready_to_merge",
+    "status": "merged",
     "commit_sha": "7cb885c1d30ec52d3e3eac60379036dbeacbc5e7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3099",
     "checks": {
@@ -92617,12 +92624,12 @@
       "dependency": {"status": "pass", "evidence": "BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41 is merged in PR #3098 as ae7dfe5af2ce64ad6795942e18657b960bf159b1; origin/main contains the merge and PR41 branch cleanup and post-merge revalidation completed."},
       "preflight": {"status": "pass", "evidence": "Created codex/big5-authority-v2-visible-date-42 from clean origin/main ae7dfe5af2ce64ad6795942e18657b960bf159b1 after confirming no local/remote branch or existing PR, then fast-forwarded safely to latest origin/main cc550dd4c35c73820583f6029145f99fdab3a644 after an unrelated Enneagram docs/ledger merge. The 82 PR38 visible-date FAIL findings and Article, PersonalityPublicContentAsset, TopicProfile, LandingSurface, and revision date fields were inspected before implementation."},
       "local": {"status": "pass", "evidence": "The deterministic Node validator passed with 82 findings at fixture SHA256 8a51048e6d47d9bc52254aa5db2e122daec7671090986b7641c3757cb4b229f3; the repaired PR42 focused Laravel suite passed 6 tests / 244 assertions; runtime-freeze classifier and negative control passed 2 tests / 5 assertions; touched Pint and PHP/JSON/YAML/JS syntax passed; final full bash backend/scripts/ci_verify_mbti.sh completed every blocking gate, including Big Five 1402 tests / 180806 assertions plus downstream personality, Enneagram, MBTI smoke, security, migration, dependency, OpenAPI, and queue-backlog gates; generated timestamp-only compile side effects were removed; diff and exact-scope checks passed."},
-      "github": {"status": "pass", "evidence": "Original PR #3099 final head c474b8b0a26c2593a204178a5217269a5a8df56e passed all nine GitHub checks in CI run 29386197315 and Code Scanning run 29386197313, then merged as 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 at 2026-07-15T03:24:13Z. Same-scope repair PR #3101 final head dba1030c0a081a090df2608b19e4f33774cab90b passed all nine checks and merged as a51e96378d15dd4fd88fc7e61ca38c2011f78f63 at 2026-07-15T03:43:37Z."}
+      "github": {"status": "pass", "evidence": "Original PR #3099 final head c474b8b0a26c2593a204178a5217269a5a8df56e passed all nine GitHub checks and merged as 7cb885c1d30ec52d3e3eac60379036dbeacbc5e7 at 2026-07-15T03:24:13Z. Same-scope repair PR #3101 final head dba1030c0a081a090df2608b19e4f33774cab90b passed all nine checks and merged as a51e96378d15dd4fd88fc7e61ca38c2011f78f63 at 2026-07-15T03:43:37Z. Final pointer repair PR #3106 head 5b579c670e67210a467b9babb01e11dc1d65aad5 passed all nine checks and merged as 1c6364281ed6813918e362b6104318151047e7ab at 2026-07-15T06:58:20Z; origin/main contains all three merge commits."}
     },
     "failure_reason": null,
     "merged_at": "2026-07-15T03:24:13Z",
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "post_merge_repair": {
       "branch": "codex/big5-visible-date-published-pointer-repair",
       "status": "merged",
@@ -92636,15 +92643,15 @@
     },
     "post_merge_pointer_repair": {
       "branch": "codex/big5-visible-date-personality-pointer-repair",
-      "status": "ready_to_merge",
-      "commit_sha": "159e6b139d1564d6815afbadb99a4c62d263eb5d",
-      "github_head_sha": "73a0ea510e2070829456a8e0d29239885f039792",
+      "status": "merged",
+      "commit_sha": "1c6364281ed6813918e362b6104318151047e7ab",
+      "github_head_sha": "5b579c670e67210a467b9babb01e11dc1d65aad5",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3106",
-      "github_checks": {"status": "pass", "evidence": "Head 73a0ea510e2070829456a8e0d29239885f039792 passed all nine required checks in CI run 29395114697 and Code Scanning run 29395114730. GitHub reports MERGEABLE/CLEAN, the diff is exactly four manifest-allowed paths, and no review thread or comment is present."},
+      "github_checks": {"status": "pass", "evidence": "Final head 5b579c670e67210a467b9babb01e11dc1d65aad5 passed all nine required checks with zero unresolved review threads. GitHub reports PR #3106 merged as 1c6364281ed6813918e362b6104318151047e7ab at 2026-07-15T06:58:20Z, and origin/main contains the merge."},
       "local_checks": {"status": "pass", "evidence": "The 82-finding validator passed at fixture SHA256 8a51048e6d47d9bc52254aa5db2e122daec7671090986b7641c3757cb4b229f3; PR42 focused Laravel passed 6 tests / 246 assertions; runtime freeze passed 2 tests / 5 assertions; Pint, PHP/JSON/YAML/JS syntax, git diff --check, and exact four-file scope passed. The complete bash backend/scripts/ci_verify_mbti.sh gate passed Big Five 1408 tests / 180881 assertions, Enneagram 10 / 369, and all downstream MBTI, personality, migration, security, OpenAPI, dependency, webhook/attempt, and queue-backlog gates. Known compiled timestamp/hash side effects were restored path-by-path after the successful run."},
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-07-15T06:58:20Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "reason": "A second same-scope audit proved that PersonalityPublicContentAsset computed revisionMatches but did not use it to gate parent visible dates, so an explicitly supplied stale or working revision could still expose published, reviewed, and updated dates. The repair binds visible projection to the current published_revision_id whenever a revision is supplied while preserving identity-matched revision_created_at as audit-only lineage.",
       "production_write_execution": false
     },
@@ -92668,7 +92675,8 @@
       {"at": "2026-07-15T06:41:53Z", "from": "post_merge_pointer_repair_in_progress", "to": "post_merge_pointer_repair_local_checks_passed", "note": "The exact four-file repair passed the frozen fixture validator, focused 6/246 contract, freeze 2/5, Pint, syntax, diff, scope, and the complete CI gate including Big Five 1408/180881 and downstream gates. Generated compile timestamp/hash side effects were restored; no production, CMS, database, public-controller, indexability, or deploy action occurred."},
       {"at": "2026-07-15T06:42:46Z", "from": "post_merge_pointer_repair_local_checks_passed", "to": "post_merge_pointer_repair_committed_pending_push", "note": "Committed the exact four-file implementation and local-validation ledger as 159e6b139d1564d6815afbadb99a4c62d263eb5d after explicit path staging and cached diff validation. A ledger-only head commit, push, single PR, final-head checks, and review resolution remain mandatory."},
       {"at": "2026-07-15T06:44:13Z", "from": "post_merge_pointer_repair_committed_pending_push", "to": "post_merge_pointer_repair_github_checks_pending", "note": "Pushed implementation and ledger head 0a0d24cb10ec2c4d301fcf77fb6ad0cafa5305df and opened the single exact-scope repair PR #3106. GitHub reports MERGEABLE with required checks pending; no production, CMS, database, public-controller, indexability, or deploy action occurred."},
-      {"at": "2026-07-15T06:51:52Z", "from": "post_merge_pointer_repair_github_checks_pending", "to": "post_merge_pointer_repair_ready_to_merge", "note": "Head 73a0ea510e2070829456a8e0d29239885f039792 passed all nine required checks, GitHub is MERGEABLE/CLEAN, the diff remains exactly four allowed paths, and no review thread or comment exists. Recording ready_to_merge before squash merge; the fresh ledger head must itself pass required checks."}
+      {"at": "2026-07-15T06:51:52Z", "from": "post_merge_pointer_repair_github_checks_pending", "to": "post_merge_pointer_repair_ready_to_merge", "note": "Head 73a0ea510e2070829456a8e0d29239885f039792 passed all nine required checks, GitHub is MERGEABLE/CLEAN, the diff remains exactly four allowed paths, and no review thread or comment exists. Recording ready_to_merge before squash merge; the fresh ledger head must itself pass required checks."},
+      {"at": "2026-07-15T06:58:20Z", "from": "post_merge_pointer_repair_ready_to_merge", "to": "merged", "note": "Final head 5b579c670e67210a467b9babb01e11dc1d65aad5 passed all nine checks and pointer repair PR #3106 squash-merged as 1c6364281ed6813918e362b6104318151047e7ab. origin/main contains the merge, local and remote task branches are absent, and no production, CMS, database, public-controller, indexability, or deploy action occurred."}
     ]
   },
   "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43": {
@@ -92838,20 +92846,21 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-review-promotion-gate-47",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41", "BIG5-AUTHORITY-V2-VISIBLE-DATE-42", "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43", "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44", "BIG5-AUTHORITY-V2-STRUCTURED-DATA-45", "BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46"],
-    "status": "ready_to_merge",
-    "commit_sha": "0907e41282b1bb00ef2bbaf1067730c7aef2a2f5",
+    "status": "merged",
+    "commit_sha": "df9261e5d7aa071323fb91b0f6b28d2288e389a2",
+    "github_head_sha": "afb57a90df27ab956683a22387c626273ecd395d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3114",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR47 id, title, branch, dependency chain, 229-revision plus two-shell acceptance contract, serial lifecycle, and explicit no-production-promotion boundary."},
       "dependency": {"status": "pass", "evidence": "GitHub reports PR41 #3098, PR42 #3099, PR43 #3102, PR44 #3105, PR45 #3110, and PR46 #3113 all MERGED; origin/main 2a13cae76a68263db2849fcd8eb5118f346969f9 contains every recorded merge commit."},
       "preflight": {"status": "pass", "evidence": "Started codex/big5-authority-v2-review-promotion-gate-47 from exact clean latest main 2a13cae76a68263db2849fcd8eb5118f346969f9 after fetch/pull, dependency containment checks, and confirming no same-name local or remote branch. Existing PR37 collision-safe authority locks 231 identities as 106 primary creates, 125 existing identities, 229 revision-managed assets, and two landing product shells; PR41 remains fail closed with zero approved media groups, so checked-in PR47 review/authorization artifacts must remain entirely pending and non-executable."},
       "local": {"status": "pass", "evidence": "Deterministic builder and standalone Node validator passed with review manifest SHA256 54eaf64151a0a41e6a2feaa12ca2be607842e893243f6ee75f6ff78bb7ec096a: exactly 231 assets, 229 revision-managed assets, two preserved product shells, 16 exact cohorts, zero authorizations, and zero writes. After twenty-nine review/hardening cycles, Article and ContentPage candidates require their production approval states and publish shapes, the row-backed Personality and Topic candidates require approved working revisions rather than draft workflow state, and unknown authority models fail closed. Focused PR47 PHPUnit passed 39 tests / 187 assertions; package-only CLI remained HOLD with every action zero; runtime freeze passed 2 tests / 5 assertions; Pint, syntax, git diff --check, and exact 14-path scope validation passed. The final guarded bash backend/scripts/ci_verify_mbti.sh process exited 0 through the strict queue probe, including Big Five 1467 tests / 181241 assertions, personality full-32 71 tests / 5371 assertions, and all downstream gates. Its 13 generated compiled changes were restored after process exit, leaving only allowed PR47 paths."},
-      "github": {"status": "pass", "evidence": "Implementation and regression-hardening head 0907e41282b1bb00ef2bbaf1067730c7aef2a2f5 passed all nine GitHub checks with merge state CLEAN. Exact-head Codex review reported no major issues for reviewed commit 0907e41282, all forty review threads remained resolved after the delay-window recheck, and the exact 14-path manifest scope remained intact. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge."}
+      "github": {"status": "pass", "evidence": "Implementation and regression-hardening head 0907e41282b1bb00ef2bbaf1067730c7aef2a2f5 passed all nine GitHub checks with merge state CLEAN. Exact-head Codex review reported no major issues, all forty review threads remained resolved, and the exact 14-path manifest scope remained intact. Final PR head afb57a90df27ab956683a22387c626273ecd395d passed all nine required checks and squash-merged as df9261e5d7aa071323fb91b0f6b28d2288e389a2 at 2026-07-15T19:47:29Z; origin/main contains the merge."}
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-15T19:47:29Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_deploy_allowed": false,
     "database_mutation": false,
@@ -92896,7 +92905,8 @@
       {"at": "2026-07-15T18:44:29Z", "from": "twenty_seventh_review_fix_local_verified", "to": "twenty_eighth_review_fix_local_verified", "note": "Head 32ad0f9d5a07d75e9eba02112a9353a884ec5c63 passed all nine GitHub checks with merge state CLEAN, while delayed exact-head review left two valid P2s: Article rows could be declared ready before their working revision reached approved state, and ContentPage rows accepted raw import payloads that the production adapter cannot publish. Revision readiness now requires the exact production status and publish shape, payload comparison uses the adapter snapshot, and Article/ContentPage translation-group identities are locked to the primary. Focused 38/182, deterministic zero-write validation, package-only HOLD, freeze 2/5, Pint/syntax/scope, and final guarded full CI through strict queue probe with Big Five 1466/181236 and personality full-32 71/5371 all pass. Fresh GitHub checks and all thirty-nine thread resolutions remain required; no production/CMS/database/promotion action occurred."},
       {"at": "2026-07-15T19:00:23Z", "from": "twenty_eighth_review_fix_local_verified", "to": "ready_to_merge", "note": "Implementation head 72bdcb4c831ed4859e1a0ed2147debf4c6a3d20b passed all nine GitHub checks with merge state CLEAN, exact-head Codex review reported no major issues for reviewed commit 72bdcb4c83, all thirty-nine review threads are resolved, and the exact 14-path manifest scope remains intact. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge; production/CMS/database/promotion actions remain zero."},
       {"at": "2026-07-15T19:16:40Z", "from": "ready_to_merge", "to": "twenty_ninth_review_fix_local_verified", "note": "Ledger-only head ff70dbb6cab4998990b5f6ee5639d3d935f3777a passed all nine checks with merge state CLEAN, then exact-head review found one valid P2: row-backed Personality and Topic working revisions could remain draft while database preflight counted them as promotion-ready. Revision shape matching now requires approved workflow state for both row-backed stores and fails closed for unknown authority models. Focused 39/187, deterministic zero-write validation, package-only HOLD, freeze 2/5, Pint/syntax/scope, and guarded full CI through strict queue probe with Big Five 1467/181241 and personality full-32 71/5371 all pass. Fresh GitHub checks, all forty thread resolutions, and another exact-head review remain required; no production/CMS/database/promotion action occurred."},
-      {"at": "2026-07-15T19:39:39Z", "from": "twenty_ninth_review_fix_local_verified", "to": "ready_to_merge", "note": "Implementation and regression-hardening head 0907e41282b1bb00ef2bbaf1067730c7aef2a2f5 passed all nine GitHub checks with merge state CLEAN, exact-head Codex review reported no major issues, all forty review threads remained resolved after the delay window, and the exact 14-path manifest scope remained intact. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge; production/CMS/database/promotion actions remain zero."}
+      {"at": "2026-07-15T19:39:39Z", "from": "twenty_ninth_review_fix_local_verified", "to": "ready_to_merge", "note": "Implementation and regression-hardening head 0907e41282b1bb00ef2bbaf1067730c7aef2a2f5 passed all nine GitHub checks with merge state CLEAN, exact-head Codex review reported no major issues, all forty review threads remained resolved after the delay window, and the exact 14-path manifest scope remained intact. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge; production/CMS/database/promotion actions remain zero."},
+      {"at": "2026-07-15T19:47:29Z", "from": "ready_to_merge", "to": "merged", "note": "Final PR head afb57a90df27ab956683a22387c626273ecd395d passed all nine required checks and PR #3114 squash-merged as df9261e5d7aa071323fb91b0f6b28d2288e389a2. origin/main contains the merge, local and remote task branches are absent, and no production, CMS, database, promotion, indexability, Search, cache, or deploy action occurred."}
     ]
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-BENCHMARK-01": {
