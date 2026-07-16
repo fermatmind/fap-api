@@ -68,7 +68,16 @@ invariant(ownerAuthority.package_file_sha256 === sha256(snapshotText), 'OWNER au
 const expectedOwnerPhrase = `我已阅读并批准 BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48 最终公开 snapshot；cohort_snapshot_sha256=${snapshot.cohort_snapshot_sha256}；package_payload_sha256=${snapshot.package_payload_sha256}；package_file_sha256=${sha256(snapshotText)}；CMS reviewer_admin_user_id=1。`;
 invariant(ownerAuthority.confirmation_phrase === expectedOwnerPhrase, 'OWNER authority phrase does not match the locked three hashes');
 invariant(ownerAuthority.confirmed_at === '2026-07-16T09:24:18Z', 'OWNER authority timestamp mismatch');
-invariant(Object.values(ownerAuthority.approval_scope).filter((value) => value === true).length === 0, 'OWNER authority must not imply controlled action approval');
+const controlledOwnerApprovalFields = [
+  'cms_or_database_write',
+  'working_revision_write',
+  'media_authority',
+  'promotion_or_publication',
+  'indexability_sitemap_llms_schema',
+  'deployment_cache_or_search',
+];
+invariant(controlledOwnerApprovalFields.every((field) => ownerAuthority.approval_scope?.[field] === false),
+  'OWNER authority must not imply controlled action approval');
 invariant(observation.schema_version === 'big5-zh6-promotion-readiness-production-observation.v1', 'production observation schema mismatch');
 invariant(observation.admin_user_1?.exists === true && observation.admin_user_1?.is_active === true, 'admin_user:1 is not active');
 invariant(observation.admin_user_1?.public_label === 'FermatMind Editorial', 'public editorial label drift');

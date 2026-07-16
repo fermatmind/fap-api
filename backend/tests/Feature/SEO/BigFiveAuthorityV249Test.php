@@ -320,6 +320,65 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_standalone_tools_reject_rehashed_owner_authority_that_approves_controlled_actions(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $owner = $this->readJson(self::PACKAGE_DIR.'/pr48-owner-authority.json');
+        $owner['approval_scope']['promotion_or_publication'] = true;
+        $directory = $this->temporaryDirectory();
+        $ownerPath = $directory.'/owner-authority.json';
+        $observationPath = $directory.'/production-observation.json';
+        $packagePath = $directory.'/rewritten-owner-scope-package.json';
+        $packageHashPath = $directory.'/rewritten-owner-scope-package.sha256';
+        $this->writeJson($ownerPath, $owner);
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+        $ownerSha256 = hash_file('sha256', $ownerPath);
+        $this->assertIsString($ownerSha256);
+        $package['inputs']['owner_authority_path'] = $ownerPath;
+        $package['inputs']['owner_authority_sha256'] = $ownerSha256;
+        $package['inputs']['production_observation_path'] = $observationPath;
+        $package['release_lock_material']['owner_authority_sha256'] = $ownerSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $this->writeJson($packagePath, $package);
+        $this->assertNotFalse(file_put_contents(
+            $packageHashPath,
+            hash_file('sha256', $packagePath)."\n",
+        ));
+
+        try {
+            $builder = $this->nodeProcess('build-package.mjs', [
+                'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OUTPUT_PATH' => $directory.'/builder-output.json',
+                'PR49_OUTPUT_HASH_PATH' => $directory.'/builder-output.sha256',
+            ]);
+            $this->assertFalse($builder->isSuccessful());
+            $this->assertStringContainsString(
+                'OWNER authority must not imply controlled action approval',
+                $builder->getErrorOutput().$builder->getOutput(),
+            );
+
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $packagePath,
+                'PR49_PACKAGE_HASH_PATH' => $packageHashPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'OWNER authority must not approve controlled actions',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+        } finally {
+            $this->cleanupTemporaryPackage($directory);
+        }
+    }
+
     public function test_readiness_command_validates_the_hold_package_without_database_writes(): void
     {
         $assetCount = MediaAsset::query()->withoutGlobalScopes()->count();

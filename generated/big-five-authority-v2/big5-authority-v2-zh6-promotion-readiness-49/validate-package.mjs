@@ -65,6 +65,16 @@ invariant(ownerAuthority.comment_database_id === 4990228962 && ownerAuthority.au
 const expectedOwnerPhrase = `我已阅读并批准 BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48 最终公开 snapshot；cohort_snapshot_sha256=${ownerAuthority.cohort_snapshot_sha256}；package_payload_sha256=${ownerAuthority.package_payload_sha256}；package_file_sha256=${ownerAuthority.package_file_sha256}；CMS reviewer_admin_user_id=1。`;
 invariant(ownerAuthority.confirmation_phrase === expectedOwnerPhrase, 'OWNER authority phrase mismatch');
 invariant(ownerAuthority.confirmed_at === '2026-07-16T09:24:18Z' && ownerAuthority.reviewer_admin_user_id === 1, 'OWNER authority timestamp or reviewer mismatch');
+const controlledOwnerApprovalFields = [
+  'cms_or_database_write',
+  'working_revision_write',
+  'media_authority',
+  'promotion_or_publication',
+  'indexability_sitemap_llms_schema',
+  'deployment_cache_or_search',
+];
+invariant(controlledOwnerApprovalFields.every((field) => ownerAuthority.approval_scope?.[field] === false),
+  'OWNER authority must not approve controlled actions');
 invariant(packageJson.counts.assets === 6 && packageJson.counts.reviewed_assets === 6, 'exact six-asset review binding missing');
 invariant(packageJson.counts.source_permission_assets === 6 && packageJson.counts.visible_sources === 18, 'source permission counts mismatch');
 invariant(packageJson.counts.runtime_baselines === 6, 'rollback baseline count mismatch');
