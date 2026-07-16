@@ -106,6 +106,35 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
     }
 
     /**
+     * Validate the complete private review register before a standalone post-readback
+     * and return only the sensitive names needed for public leak detection.
+     *
+     * @param  array<string, mixed>  $releaseReport
+     * @param  array<string, mixed>  $reviewRegister
+     * @return list<string>
+     */
+    public function approvedPrivateReviewerNames(
+        array $releaseReport,
+        array $reviewRegister,
+        string $reviewRegisterSha256,
+    ): array {
+        $records = $this->releaseRecords($releaseReport);
+        $this->assertApprovedReviewRegister(
+            $reviewRegister,
+            $records,
+            $reviewRegisterSha256,
+            (string) $releaseReport['package_sha256'],
+        );
+
+        $names = [];
+        foreach ($reviewRegister['reviews'] as $review) {
+            $names[] = trim((string) $review['reviewer_name']);
+        }
+
+        return array_values(array_unique($names));
+    }
+
+    /**
      * @param  array<string, mixed>  $releaseReport
      * @param  array<string, mixed>  $reviewRegister
      * @param  array<string, mixed>|null  $preReadback

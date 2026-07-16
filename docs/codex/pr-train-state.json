@@ -85530,7 +85530,7 @@
     "depends_on": [
       "MBTI-CMS-29"
     ],
-    "status": "pr_open_checks_pending",
+    "status": "review_fix_local_validation_passed",
     "commit_sha": "e08f3a29f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2928",
     "failure_reason": null,
@@ -96140,7 +96140,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 33 tests / 656 assertions. Coverage includes exact 116 report-scoped import/bind/promotion with unrelated Enneagram drafts unchanged, rollback-token output reservation and transaction-bound durable persistence, sink-failure atomic rollback, late-failure redaction, complete current all-target pre-readback binding, execute-output pre-reservation plus redacted durable result persistence, cache warm/fresh, HMAC 116/0, and canary-00 plus nine 12-page readbacks."
+          "evidence": "V205/V206/V223/V224 pass 34 tests / 672 assertions. Coverage includes exact 116 report-scoped import/bind/promotion with unrelated Enneagram drafts unchanged, rollback-token output reservation and transaction-bound durable persistence, sink-failure atomic rollback, late-failure redaction, complete current all-target pre-readback binding, execute-output pre-reservation plus redacted durable result persistence, strict 116-row approved private-register validation before standalone post-readback HTTP, cache warm/fresh, HMAC 116/0, and canary-00 plus nine 12-page readbacks."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96148,7 +96148,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 198 tests / 28662 assertions after the local heavy-test concurrency guard was clear."
+          "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 199 tests / 28678 assertions after the local heavy-test concurrency guard was clear."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96232,13 +96232,18 @@
         "status": "review_fix_local_validation_passed",
         "note": "All nine fourth-cycle GitHub checks passed. Resolved the latest P2 by deriving promotion targets exclusively from the authorized release report's exact 116 identities instead of every org-0 Enneagram row. Added a non-release draft fixture proving it remains untouched and does not block promotion. The initial focused run exposed a release-key/revision-key representation mismatch; it was corrected to the writer's stable framework:entity_type:code:locale key before complete reruns. Focused 33/656, full Enneagram V2 198/28662, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
       },
-      {
-        "at": "2026-07-16T14:51:34Z",
-        "status": "pr_open_checks_pending",
-        "note": "Committed the report-scoped promotion-target repair at 23f28a39ab6629c42738bcfb2f5fb2598e32826b. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
-      }
-    ],
-    "updated_at": "2026-07-16T14:51:34Z"
+        {
+          "at": "2026-07-16T14:51:34Z",
+          "status": "pr_open_checks_pending",
+          "note": "Committed the report-scoped promotion-target repair at 23f28a39ab6629c42738bcfb2f5fb2598e32826b. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
+        },
+        {
+          "at": "2026-07-16T15:08:24Z",
+          "status": "review_fix_local_validation_passed",
+          "note": "All nine fifth-cycle GitHub checks passed. Resolved the latest P2 by requiring standalone post-readback to validate the exact 116-row approved private register against the release package and every asset SHA before any API/HTML request; incomplete register coverage now fails closed with zero HTTP and DB writes. Focused 34/672, full Enneagram V2 199/28678, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+        }
+      ],
+      "updated_at": "2026-07-16T15:08:24Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeManifest;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeReadback;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -25,15 +26,18 @@ final class PersonalityEnneagramAuthorityV2RuntimeReadback extends Command
 
     protected $description = 'Read-only Enneagram Authority V2 API/HTML pre/post readback for one batch or all 116 pages.';
 
-    public function handle(EnneagramPublicAuthorityV224RuntimeReadback $readback): int
-    {
+    public function handle(
+        EnneagramPublicAuthorityV224RuntimeReadback $readback,
+        EnneagramPublicAuthorityV224RuntimeManifest $manifest,
+    ): int {
         try {
             $phase = $this->requiredOption('phase');
-            $sensitiveValues = $this->privateReviewerNames($phase);
+            $releaseReport = $this->jsonFile((string) $this->option('source'));
+            $sensitiveValues = $this->privateReviewerNames($phase, $releaseReport, $manifest);
             $result = $readback->run(
                 $phase,
                 trim((string) $this->option('batch')),
-                $this->jsonFile((string) $this->option('source')),
+                $releaseReport,
                 $this->requiredHttpsOrigin('api-base-url'),
                 $this->requiredHttpsOrigin('frontend-base-url'),
                 (bool) $this->option('require-fresh-api-cache'),
@@ -91,25 +95,33 @@ final class PersonalityEnneagramAuthorityV2RuntimeReadback extends Command
     }
 
     /** @return list<string> */
-    private function privateReviewerNames(string $phase): array
-    {
+    private function privateReviewerNames(
+        string $phase,
+        array $releaseReport,
+        EnneagramPublicAuthorityV224RuntimeManifest $manifest,
+    ): array {
         $path = trim((string) $this->option('review-register'));
-        if ($phase === 'post' && ! app()->environment('testing') && $path === '') {
-            throw new RuntimeException('--review-register is required for production post-readback.');
+        if ($phase === 'post' && $path === '') {
+            throw new RuntimeException('--review-register is required for post-readback.');
         }
         if ($path === '') {
             return [];
         }
-        $register = $this->jsonFile($path);
-        $names = [];
-        foreach (is_array($register['reviews'] ?? null) ? $register['reviews'] : [] as $review) {
-            $name = is_array($review) ? trim((string) ($review['reviewer_name'] ?? '')) : '';
-            if ($name !== '') {
-                $names[] = $name;
-            }
+        $resolved = str_starts_with($path, DIRECTORY_SEPARATOR) ? $path : base_path($path);
+        if (! File::isFile($resolved)) {
+            throw new RuntimeException('Runtime readback JSON input not found.');
+        }
+        $raw = File::get($resolved);
+        $register = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+        if (! is_array($register)) {
+            throw new RuntimeException('Runtime readback JSON input must be an object.');
         }
 
-        return array_values(array_unique($names));
+        return $manifest->approvedPrivateReviewerNames(
+            $releaseReport,
+            $register,
+            hash('sha256', $raw),
+        );
     }
 
     /** @param array<string,mixed> $result */

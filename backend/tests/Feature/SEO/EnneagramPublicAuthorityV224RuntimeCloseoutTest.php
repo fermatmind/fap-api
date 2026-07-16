@@ -90,6 +90,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         );
         $this->fakeRuntimeHttp($report);
         $rollbackPath = '/tmp/enneagram-v224-rollback-'.bin2hex(random_bytes(8)).'.token';
+        $registerPath = storage_path('framework/testing/enneagram-v224-post-readback-register-'.bin2hex(random_bytes(4)).'.json');
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($register, JSON_THROW_ON_ERROR));
 
         try {
             $result = $this->closeout()->execute(
@@ -140,8 +143,52 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->assertNull($nonReleaseAsset->working_revision_id);
             $this->assertNull($nonReleaseAsset->published_revision_id);
             $this->assertStringNotContainsString('Private Human Reviewer', json_encode($result, JSON_THROW_ON_ERROR));
+
+            $this->artisan('personality:enneagram-authority-v2-runtime-readback', [
+                '--phase' => 'post',
+                '--batch' => 'canary-00',
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+                '--review-register' => $registerPath,
+                '--require-fresh-api-cache' => true,
+            ])
+                ->expectsOutputToContain('status=PASS_POST_RUNTIME_READBACK')
+                ->expectsOutputToContain('target_count=8')
+                ->assertSuccessful();
         } finally {
             @unlink($rollbackPath);
+            File::delete($registerPath);
+        }
+    }
+
+    public function test_standalone_post_readback_rejects_incomplete_review_register_before_http(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        array_pop($register['reviews']);
+        $registerPath = storage_path('framework/testing/enneagram-v224-incomplete-register-'.bin2hex(random_bytes(4)).'.json');
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($register, JSON_THROW_ON_ERROR));
+        Http::fake();
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-readback', [
+                '--phase' => 'post',
+                '--batch' => 'all',
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+                '--review-register' => $registerPath,
+            ])
+                ->expectsOutputToContain('status=FAIL_CLOSED')
+                ->expectsOutputToContain('Private review register schema, source, package, or row count is invalid.')
+                ->assertFailed();
+
+            Http::assertNothingSent();
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        } finally {
+            File::delete($registerPath);
         }
     }
 
