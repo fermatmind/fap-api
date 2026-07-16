@@ -165,6 +165,15 @@ final class EnneagramPublicAuthorityV218Type9FamilyTest extends TestCase
                 $key,
             );
         }
+
+        $repaired = $subtypes->first(fn (array $asset): bool => $this->key($asset) === 'en|instinctual_subtype:type-9/one-to-one');
+        $this->assertIsArray($repaired);
+        $evidenceBoundary = collect($repaired['sections'])->firstWhere('kind', 'evidence_boundary');
+        $this->assertIsArray($evidenceBoundary);
+        $this->assertSame(
+            'Evidence from one subtype measure cannot turn relational attunement into a universal category across cultures. Observations must never excuse coercion or treat another person’s consent as typology data.',
+            $evidenceBoundary['body'],
+        );
     }
 
     public function test_positive_review_release_and_mechanism_mutations_fail_closed(): void
@@ -196,6 +205,10 @@ final class EnneagramPublicAuthorityV218Type9FamilyTest extends TestCase
         $this->assertNotEmpty($report['raw_draft_audit']['repair_rounds']);
         $this->assertSame(0, $report['raw_draft_audit']['repair_rounds'][array_key_last($report['raw_draft_audit']['repair_rounds'])]['remaining_asset_specific_issue_count']);
         $this->assertSame(0, $report['raw_draft_audit']['critical_contract_violations_after_repair']);
+        $this->assertSame('pass', $report['aggregate_duplicate_repair']['status']);
+        $this->assertSame('ebb3c272d4856a70b66f6a21e4460527505fbc9086f224f2c1ce902485d42280', $report['aggregate_duplicate_repair']['asset_sha256']);
+        $this->assertSame(0, $report['aggregate_duplicate_repair']['aggregate_duplicate_count_after_repair']);
+        $this->assertFalse($report['aggregate_duplicate_repair']['human_review_completed']);
         $this->assertSame('pass_for_manual_review_handoff', $report['final_qa']['status']);
         $this->assertSame(12, $report['final_qa']['asset_count']);
         $this->assertSame(36, $report['final_qa']['faq_count']);

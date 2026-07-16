@@ -44842,6 +44842,49 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-editorial-duplicate-repair-22b
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B: repair two English evidence-boundary duplicates"
+    status: ready_to_push
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A
+    scope:
+      - Replace only the first evidence-boundary sentence for en type-4/social and en type-9/one-to-one, preserving all other content, review truth, and release truth.
+      - Regenerate only the affected family QA and aggregate release evidence so the automated 116-page duplicate/evidence gate passes with human review as the sole HOLD blocker.
+    allowed_paths:
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/qa-report.json
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/qa-report.json
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-link-graph-20/link-graph.json
+      - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/**
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV213Type4FamilyTest.php tests/Feature/SEO/EnneagramPublicAuthorityV218Type9FamilyTest.php tests/Feature/SEO/EnneagramPublicAuthorityV220LinkGraphTest.php tests/Feature/SEO/EnneagramPublicAuthorityV222ReleaseGateTest.php --no-ansi
+      - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23
     repo: fap-api
     base: main

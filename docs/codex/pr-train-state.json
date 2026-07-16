@@ -95812,7 +95812,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22"
     ],
-    "status": "pr_open_checks_pending",
+    "status": "merged_and_cleaned",
     "commit_sha": "8d670bae9281ee40ed6b208a12e9399e0201687d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3142",
     "checks": {
@@ -95837,20 +95837,25 @@
         "evidence": "Changed PHP files passed php -l and Pint; Composer validate --strict, YAML/JSON parsing, release report SHA binding, git diff --check, and exact nine-path scope validation passed."
       },
       "github": {
-        "status": "passed_requires_fresh_ledger_cycle",
-        "evidence": "Head 451dcd3e387259480f5906649ddd46eb158b0468 passed all nine required checks; GitHub reports CLEAN/MERGEABLE, exact nine-path scope, and no review comments. This ready-to-merge ledger commit must pass its own fresh cycle."
+        "status": "passed",
+        "evidence": "Final head 2e3f48ccce5bc0282640c172fb20cd4f114d4126 passed all nine required checks; GitHub reported CLEAN/MERGEABLE with no comments or reviews before squash merge."
+      },
+      "post_merge": {
+        "status": "passed",
+        "evidence": "PR #3142 merged at 13182ffeb3bad72757776046b8f92d863b12318e; origin/main contains the merge, local main equals origin/main, both task branches are absent, the worktree is clean, and focused release-gate revalidation passed 4 tests / 54 assertions."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merge_commit": "13182ffeb3bad72757776046b8f92d863b12318e",
+    "merged_at": "2026-07-16T10:58:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -95887,9 +95892,83 @@
         "at": "2026-07-16T10:52:06Z",
         "status": "ready_to_merge",
         "note": "Exact head 451dcd3e387259480f5906649ddd46eb158b0468 passed all nine required checks; GitHub is CLEAN/MERGEABLE, scope remains exactly nine allowed paths, and no comments or reviews exist. Push this ledger-only readiness record and require a fresh check cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T11:00:56Z",
+        "status": "merged_and_cleaned",
+        "note": "Final ledger head passed all nine checks; PR #3142 squash-merged at 13182ffeb3bad72757776046b8f92d863b12318e. origin/main containment, local/remote branch cleanup, clean worktree, and post-merge focused 4/54 revalidation are verified."
       }
     ],
-    "updated_at": "2026-07-16T10:52:06Z"
+    "updated_at": "2026-07-16T11:00:56Z"
+  },
+  "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B": {
+    "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-public-authority-v2-editorial-duplicate-repair-22b",
+    "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B: repair two English evidence-boundary duplicates",
+    "depends_on": [
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3142 is MERGED at 13182ffeb3bad72757776046b8f92d863b12318e; origin/main containment, branch cleanup, clean worktree, and post-merge focused verification passed."
+      },
+      "focused_editorial": {
+        "status": "passed",
+        "evidence": "28 tests / 10520 assertions pass across type-4, type-9, link graph, and aggregate release gate. Exact repaired sentences and asset SHAs are locked in family QA/tests."
+      },
+      "full_enneagram_v2": {
+        "status": "passed_after_lineage_repair",
+        "evidence": "Initial full run found one directly caused stale link-graph source-lineage SHA. Updating only the two changed draft hashes resolved it; final full run passed 184 tests / 28169 assertions."
+      },
+      "release_gate": {
+        "status": "passed_with_truthful_human_review_hold",
+        "evidence": "116/116 automated duplicate/evidence rows pass with zero issues; package SHA is 2526762097cb661630aad10076179f6171e568913c89a87c233941191ade2199. Release remains HOLD only for 0/116 named human reviews. Empty-media boundary remains 116/116 with zero writes."
+      },
+      "static_and_scope": {
+        "status": "passed",
+        "evidence": "Pint passed all three changed PHP tests; Composer validate, YAML/JSON parsing, frozen report SHA binding, git diff --check, and exact 13-path scope validation passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-16T11:00:56Z",
+        "status": "pending_dependency",
+        "note": "Registered from the explicit serial execution goal with 22A as its only dependency."
+      },
+      {
+        "at": "2026-07-16T11:00:56Z",
+        "status": "implementation_in_progress",
+        "note": "Verified merged and cleaned 22A, then started the exact two-sentence editorial repair scope from latest main."
+      },
+      {
+        "at": "2026-07-16T11:10:32Z",
+        "status": "local_validation_passed",
+        "note": "Repaired only the two requested evidence-boundary first sentences, regenerated both family QA records and aggregate evidence, updated the directly bound link-graph source hashes, and passed focused 28/10520 plus full 184/28169. Automated gate is 116/116 with zero duplicate issues; human review is the sole HOLD blocker."
+      }
+    ],
+    "updated_at": "2026-07-16T11:10:32Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
