@@ -393,6 +393,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             'https://frontend.test'.$firstPath.'#preview',
             'https://frontend.test'.$firstPath.'?',
             'https://frontend.test'.$firstPath.'#',
+            'https://frontend.test'.$firstPath.'/',
         ];
 
         foreach ($invalidUrls as $invalidUrl) {
@@ -576,6 +577,63 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_readback_requires_visible_faq_answers(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill(['faq_json' => [[
+                'question' => 'What does this page explain?',
+                'answer' => 'It explains a bounded observation pattern.',
+            ]]])->save();
+        }
+        $this->fakeRuntimeHttp($report, omitFaqAnswerHtml: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected a missing visible FAQ answer to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_visible_faq_mismatch', $exception->getMessage());
+        }
+    }
+
+    public function test_post_readback_requires_complete_visible_evidence(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill(['authority_json' => [
+                'sources' => [['id' => 'source-1', 'title' => 'Visible evidence source']],
+                'claim_mapping' => ['claim-1' => ['source-1']],
+                'visible_evidence_eligible' => true,
+            ]])->save();
+        }
+        $this->fakeRuntimeHttp($report, omitVisibleEvidence: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'post',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected missing post-readback visible evidence to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_visible_evidence_missing', $exception->getMessage());
+        }
+    }
+
     public function test_runtime_readback_rejects_api_redirect(): void
     {
         $this->seedPublishedEstate();
@@ -644,6 +702,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             'https://staging.example.com/en/articles/runtime-evidence',
             'https://frontend.test/en/articles/runtime-evidence?preview=1',
             'https://frontend.test/en/articles/runtime-evidence#preview',
+            'https://frontend.test/en/articles/runtime-evidence/',
+            '/en/articles/runtime-evidence/',
         ] as $invalidUrl) {
             $discoverabilityState->additional_llms_url = $invalidUrl;
             try {
@@ -1256,6 +1316,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $omitSectionHtml = false,
         ?string $privateRouteLeak = null,
         bool $stalePublicPayload = false,
+        bool $omitFaqAnswerHtml = false,
+        bool $omitVisibleEvidence = false,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1263,7 +1325,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitSectionHtml, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitSectionHtml, $omitVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1322,6 +1384,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $payloadSections = $stalePublicPayload
                     ? [['key' => 'stale', 'title' => 'Stale section', 'body_md' => 'Stale cached section body.']]
                     : (is_array($asset->content_sections_json) ? $asset->content_sections_json : []);
+                $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
+                $visibleSources = $omitVisibleEvidence ? [] : array_values((array) ($authority['sources'] ?? []));
+                $visibleClaimMapping = $omitVisibleEvidence ? [] : (array) ($authority['claim_mapping'] ?? []);
 
                 return Http::response([
                     'ok' => true,
@@ -1338,14 +1403,21 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                             : (is_array($asset->seo_json) ? $asset->seo_json : []),
                         'canonical_path' => (string) data_get($asset->canonical_json, 'path'),
                         'hreflang' => $hreflang,
-                        'faq' => [],
+                        'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
                         'media' => ['hero' => null, 'inline' => [], 'og' => null],
                         'review_state' => $stalePublicPayload ? 'stale_review_state' : (string) $asset->review_state,
                         'source_package' => $stalePublicPayload ? 'stale-public-package' : $asset->source_package,
                         'source_hash' => $stalePublicPayload ? str_repeat('f', 64) : $asset->source_hash,
                     ],
                     'personality_public_content_asset_v2' => [
-                        'visible_evidence' => ['sources' => []],
+                        'visible_evidence' => [
+                            'sources' => $visibleSources,
+                            'claim_mapping' => $visibleClaimMapping,
+                            'eligible' => ! $omitVisibleEvidence
+                                && ($authority['visible_evidence_eligible'] ?? false) === true
+                                && $visibleSources !== []
+                                && $visibleClaimMapping !== [],
+                        ],
                         'editorial_authority' => [
                             'review_state' => (string) $asset->review_state,
                             'reviewer' => null,
@@ -1378,6 +1450,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $renderedSections = $stalePublicPayload
                     ? [['key' => 'stale', 'title' => 'Stale section', 'body_md' => 'Stale cached section body.']]
                     : (is_array($asset->content_sections_json) ? $asset->content_sections_json : []);
+                $renderedFaq = is_array($asset->faq_json) ? $asset->faq_json : [];
+                $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
                 $title = htmlspecialchars($renderedTitle, ENT_QUOTES | ENT_HTML5);
                 $summary = htmlspecialchars($renderedSummary, ENT_QUOTES | ENT_HTML5);
                 $canonical = htmlspecialchars(
@@ -1430,12 +1504,33 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         $sectionHtml .= '</section>';
                     }
                 }
+                $faqHtml = '';
+                foreach ($renderedFaq as $faq) {
+                    if (! is_array($faq)) {
+                        continue;
+                    }
+                    $question = trim((string) ($faq['question'] ?? $faq['q'] ?? ''));
+                    $answer = trim((string) ($faq['answer'] ?? $faq['a'] ?? ''));
+                    $faqHtml .= '<section class="faq"><h2>'.htmlspecialchars($question, ENT_QUOTES | ENT_HTML5).'</h2>';
+                    if (! $omitFaqAnswerHtml) {
+                        $faqHtml .= (string) Str::markdown($answer);
+                    }
+                    $faqHtml .= '</section>';
+                }
+                $evidenceHtml = '';
+                if (! $omitVisibleEvidence) {
+                    foreach ((array) ($authority['sources'] ?? []) as $source) {
+                        if (is_array($source) && trim((string) ($source['title'] ?? '')) !== '') {
+                            $evidenceHtml .= '<cite>'.htmlspecialchars((string) $source['title'], ENT_QUOTES | ENT_HTML5).'</cite>';
+                        }
+                    }
+                }
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .implode('', $hreflang)
-                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$privateLink.'</main>'.$privateValue.'</body></html>');
+                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$faqHtml.$evidenceHtml.$privateLink.'</main>'.$privateValue.'</body></html>');
             }
 
             return Http::response(['ok' => false], 404);

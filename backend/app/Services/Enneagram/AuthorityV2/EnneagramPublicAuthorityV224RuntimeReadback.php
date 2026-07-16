@@ -255,6 +255,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'sections' => is_array($asset->content_sections_json) ? $asset->content_sections_json : [],
             'seo' => is_array($asset->seo_json) ? $asset->seo_json : [],
             'canonical_path' => (string) data_get($asset->canonical_json, 'path', ''),
+            'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
             'source_package' => $asset->source_package,
             'source_hash' => $asset->source_hash,
             'review_state' => (string) $asset->review_state,
@@ -265,6 +266,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'sections' => is_array($v1['sections'] ?? null) ? $v1['sections'] : [],
             'seo' => is_array($v1['seo'] ?? null) ? $v1['seo'] : [],
             'canonical_path' => (string) ($v1['canonical_path'] ?? ''),
+            'faq' => is_array($v1['faq'] ?? null) ? $v1['faq'] : [],
             'source_package' => $v1['source_package'] ?? null,
             'source_hash' => $v1['source_hash'] ?? null,
             'review_state' => (string) ($v1['review_state'] ?? ''),
@@ -357,15 +359,28 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         );
         foreach (is_array($v1['faq'] ?? null) ? $v1['faq'] : [] as $faq) {
             $question = is_array($faq) ? trim((string) ($faq['question'] ?? $faq['q'] ?? '')) : '';
-            if ($question !== '' && ! str_contains($visible, $this->normalizedVisibleText($question))) {
+            $answer = is_array($faq) ? trim((string) ($faq['answer'] ?? $faq['a'] ?? '')) : '';
+            if ($question === ''
+                || $answer === ''
+                || ! str_contains($visible, $this->normalizedVisibleText($question))
+                || ! str_contains($visible, $this->normalizedMarkdownText($answer))) {
                 $issues[] = 'html_visible_faq_mismatch';
                 break;
             }
         }
         if ($phase === 'post') {
-            foreach ((array) data_get($v2, 'visible_evidence.sources', []) as $source) {
+            $sources = is_array(data_get($v2, 'visible_evidence.sources'))
+                ? array_values(data_get($v2, 'visible_evidence.sources'))
+                : [];
+            $claimMapping = is_array(data_get($v2, 'visible_evidence.claim_mapping'))
+                ? data_get($v2, 'visible_evidence.claim_mapping')
+                : [];
+            if ($sources === [] || $claimMapping === [] || data_get($v2, 'visible_evidence.eligible') !== true) {
+                $issues[] = 'api_visible_evidence_missing';
+            }
+            foreach ($sources as $source) {
                 $sourceTitle = is_array($source) ? trim((string) ($source['title'] ?? '')) : '';
-                if ($sourceTitle !== '' && ! str_contains($visible, $this->normalizedVisibleText($sourceTitle))) {
+                if ($sourceTitle === '' || ! str_contains($visible, $this->normalizedVisibleText($sourceTitle))) {
                     $issues[] = 'html_visible_evidence_mismatch';
                     break;
                 }
@@ -520,6 +535,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 throw new RuntimeException('Discoverability URL is invalid.');
             }
             $path = (string) ($parts['path'] ?? '');
+            if ($path !== '/' && str_ends_with($path, '/')) {
+                throw new RuntimeException('Discoverability URL must not contain a trailing slash on a non-root path.');
+            }
             if ($expectedOrigin !== null) {
                 if (array_key_exists('query', $parts) || array_key_exists('fragment', $parts)) {
                     throw new RuntimeException('Discoverability URL must not contain a query or fragment.');
@@ -532,7 +550,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 }
             }
             if ($path !== '') {
-                $paths[] = rtrim($path, '/') ?: '/';
+                $paths[] = $path;
             }
         }
         $paths = array_values(array_unique($paths));
