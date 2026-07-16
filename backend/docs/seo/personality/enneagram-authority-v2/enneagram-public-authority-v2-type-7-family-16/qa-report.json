@@ -1,0 +1,101 @@
+{
+  "schema_version": "enneagram_public_authority_v2_family_qa_report.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16",
+  "generation_mode": "codex_native_content_generation",
+  "external_model_sessions": [],
+  "review_scope": {
+    "family": "type-7",
+    "asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "identity_keys": [
+      "core_type:type-7",
+      "wing:7w6",
+      "wing:7w8",
+      "instinctual_subtype:type-7/self-preservation",
+      "instinctual_subtype:type-7/social",
+      "instinctual_subtype:type-7/one-to-one"
+    ]
+  },
+  "skeptical_review": {
+    "reviewer_mode": "codex_native_skeptical_audit",
+    "accepted_without_repair": false,
+    "checks": [
+      "frozen identity, locale, route, claim, and limitation mapping",
+      "answer-first depth and answerability-to-visible-copy support",
+      "FAQ question and answer depth plus cross-package uniqueness",
+      "page-specific observations, counterexamples, and exercises",
+      "core-first wing and non-mechanistic subtype boundaries",
+      "alternative explanations involving access, scarcity, role, power, consent, and safety",
+      "manual-review and draft-only release truth",
+      "zero CMS, database, discoverability, search, deploy, or production action"
+    ],
+    "content_notes": [
+      "The core pages distinguish option generation from job-required ideation and test commitment closure after disappointment.",
+      "The 7w6 pages use ally consultation, evidence change, fallback triggers, and independent closure rather than sociability labels.",
+      "The 7w8 pages audit formal authority, resource leverage, refusal, consent, and unequal consequence rather than praising force.",
+      "Self-preservation comparisons hold duties stable while resource access changes; social comparisons separate group benefit from recognition and unpaid labor; one-to-one comparisons separate confirmed facts from projection and preserve consent and exit conditions."
+    ]
+  },
+  "raw_draft_audit": {
+    "status": "failed_repaired",
+    "asset_specific_issue_count": 25,
+    "issues": {
+      "geo_answerability_unverified": 9,
+      "faq_item_too_shallow": 15,
+      "exercise_not_page_specific": 1
+    },
+    "repair_rounds": [
+      {
+        "round": 1,
+        "status": "failed",
+        "remaining_asset_specific_issue_count": 2,
+        "issues": {
+          "geo_answerability_unverified": 2
+        },
+        "note": "Replaced unsupported English and Chinese answerability phrases with exact visible concepts, expanded every shallow Chinese FAQ using page-specific decision, resource, recognition, power, or consent evidence, and made the Chinese one-to-one comparison cue concrete. Two Chinese subtype answerability phrases still crossed punctuation boundaries in the visible summaries."
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "remaining_asset_specific_issue_count": 0,
+        "issues": {},
+        "note": "Mapped the social page to the exact visible group-ideal and recognition phrase and the one-to-one page to its exact projection phrase. The complete family then cleared every asset-specific PR08 gate without weakening mapped claims or release boundaries."
+      }
+    ],
+    "critical_contract_violations_after_repair": 0
+  },
+  "final_qa": {
+    "status": "pass_for_manual_review_handoff",
+    "asset_count": 12,
+    "locale_counts": {
+      "en": 6,
+      "zh-CN": 6
+    },
+    "entity_counts": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "faq_count": 36,
+    "asset_specific_issue_count": 0,
+    "deferred_target_count": 104,
+    "manual_review_state": "pending_manual_review",
+    "reviewer": null,
+    "human_review_completed": false,
+    "publish_eligible": false
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}
