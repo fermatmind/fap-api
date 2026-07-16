@@ -7,7 +7,7 @@ PR49 binds the exact PR48 zh-CN Hub plus five-domain snapshot to repository and 
 - GitHub OWNER `fermatmind` supplied the exact PR48 three-SHA approval in PR3139 comment `4990228962` at `2026-07-16T09:24:18Z`; the package does not treat the earlier checked-in confirmation timestamp as independent human evidence.
 - The narrow `solo_operator` record binds `admin_user:1` as both author and reviewer for exactly six immutable snapshots. `explicit_self_review=true`; global role separation remains unchanged.
 - All six assets retain exactly three visible sources and the PR48 source-permission boundary: public links, brief factual description and original paraphrase only.
-- A read-only production observation binds six primary ids, current working/published pointers, public-runtime fingerprints, deployed SHA and rollback targets. Missing or drifted targets must abort later work.
+- A read-only production observation binds six primary ids, current working/published pointers, public-runtime fingerprints, deployed SHA and rollback targets. Each rollback row is reconstructed from the exact runtime baseline, and the complete read-only/zero-mutation action record is mandatory. Missing or drifted targets or audit evidence must abort later work.
 
 ## Media HOLD
 
@@ -31,7 +31,7 @@ Exactly one authority-complete Hub asset would clear the media uniqueness gate f
 | package payload | `46f25a5b30b770a61b57bbdb330076061ae847e23012f290dd1a6011a2beda28` |
 | package file | `b85e7041c2292751e79d463fa292c863cc56b2c7a726d2568e65771ca1f4283c` |
 
-These hashes describe the current fail-closed observation with zero eligible Hub media. They are not an authorization token. The immutable PR48 snapshot, exact confirmation and GitHub OWNER authority remain code-locked; review assets and source-permission rows are reconstructed from that locked snapshot and cannot be replaced by recomputing downstream hashes. The production observation may be refreshed after a separately authorized Media Library intake; its SHA is then bound into the package media authority and release-lock material, while the rebuilt package file is verified by its reviewed `.sha256` sidecar and by a live read-only database preflight. No service-constant change is required for a legitimate fresh observation.
+These hashes describe the current fail-closed observation with zero eligible Hub media. They are not an authorization token. The immutable PR48 snapshot, exact confirmation and GitHub OWNER authority remain code-locked; review assets and source-permission rows are reconstructed from that locked snapshot, rollback rows are reconstructed from the observation-bound runtime baseline, and the exact read-only/zero-mutation action record is required. None can be replaced or omitted by recomputing downstream hashes. The production observation may be refreshed after a separately authorized Media Library intake; its SHA is then bound into the package media authority and release-lock material, while the rebuilt package file is verified by its reviewed `.sha256` sidecar and by a live read-only database preflight. No service-constant change is required for a legitimate fresh observation.
 
 ## Validation
 

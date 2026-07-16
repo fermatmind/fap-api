@@ -241,6 +241,42 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_readiness_service_rejects_rehashed_rollback_rows_not_bound_to_runtime(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['rollback_baseline']['rows'][0]['primary_id'] = 999999;
+        $rollbackSha256 = $this->canonicalSha256($package['rollback_baseline']['rows']);
+        $package['rollback_baseline']['rollback_baseline_sha256'] = $rollbackSha256;
+        $package['release_lock_material']['rollback_baseline_sha256'] = $rollbackSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-rollback-package');
+
+        try {
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected rehashed rollback rows outside the runtime baseline to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('rollback rows do not match the runtime baseline', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_readiness_service_requires_the_complete_zero_mutation_action_evidence(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        unset($package['actions']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'missing-actions-package');
+
+        try {
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected missing zero-mutation action evidence to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('action evidence must include the exact read-only observation', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
     public function test_database_preflight_fails_closed_on_missing_runtime_without_mutation(): void
     {
         $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(
@@ -446,6 +482,31 @@ final class BigFiveAuthorityV249Test extends TestCase
             $path,
             json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)."\n",
         ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $package
+     * @return array{directory:string,path:string}
+     */
+    private function writeTemporaryRehashedPackage(array $package, string $filename): array
+    {
+        $directory = $this->temporaryDirectory();
+        $observationPath = $directory.'/production-observation.json';
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+        $package['inputs']['production_observation_path'] = $observationPath;
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $path = $directory.'/'.$filename.'.json';
+        $this->writeJson($path, $package);
+        $this->assertNotFalse(file_put_contents(
+            $directory.'/'.$filename.'.sha256',
+            hash_file('sha256', $path)."\n",
+        ));
+
+        return ['directory' => $directory, 'path' => $path];
     }
 
     private function temporaryDirectory(): string

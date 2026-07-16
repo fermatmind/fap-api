@@ -411,6 +411,38 @@ final class BigFiveZh6PromotionReadiness
                 || ($row['abort_on_missing_or_drifted_target'] ?? null) !== true)) {
             throw new RuntimeException('ZH6 rollback baseline is incomplete.');
         }
+        $runtimeRows = $package['runtime_baseline']['rows'] ?? null;
+        if (! is_array($runtimeRows) || count($runtimeRows) !== 6) {
+            throw new RuntimeException('ZH6 runtime baseline is incomplete.');
+        }
+        $expectedRollbackRows = [];
+        foreach ($runtimeRows as $runtimeRow) {
+            if (! is_array($runtimeRow)
+                || trim((string) ($runtimeRow['asset_id'] ?? '')) === ''
+                || trim((string) ($runtimeRow['route'] ?? '')) === ''
+                || ! is_int($runtimeRow['primary_id'] ?? null)
+                || ($runtimeRow['primary_id'] ?? 0) < 1
+                || (! is_null($runtimeRow['working_revision_id'] ?? null)
+                    && (! is_int($runtimeRow['working_revision_id']) || $runtimeRow['working_revision_id'] < 1))
+                || (! is_null($runtimeRow['published_revision_id'] ?? null)
+                    && (! is_int($runtimeRow['published_revision_id']) || $runtimeRow['published_revision_id'] < 1))
+                || preg_match('/^[0-9a-f]{64}$/', (string) ($runtimeRow['public_runtime_baseline_sha256'] ?? '')) !== 1) {
+                throw new RuntimeException('ZH6 runtime baseline row is invalid.');
+            }
+            $expectedRollbackRows[] = [
+                'asset_id' => $runtimeRow['asset_id'],
+                'route' => $runtimeRow['route'],
+                'primary_id' => $runtimeRow['primary_id'],
+                'observed_working_revision_id' => $runtimeRow['working_revision_id'],
+                'restore_published_revision_id' => $runtimeRow['published_revision_id'],
+                'restore_public_runtime_baseline_sha256' => $runtimeRow['public_runtime_baseline_sha256'],
+                'exact_target_bound' => true,
+                'abort_on_missing_or_drifted_target' => true,
+            ];
+        }
+        if (! hash_equals($this->canonicalSha256($expectedRollbackRows), $this->canonicalSha256($rollbackRows))) {
+            throw new RuntimeException('ZH6 rollback rows do not match the runtime baseline.');
+        }
         if (($package['media_authority']['fail_closed_on_zero_or_multiple'] ?? null) !== true
             || ($package['media_authority']['required_content_identity'] ?? null) !== self::HUB_MEDIA_CONTENT_IDENTITY) {
             throw new RuntimeException('ZH6 media uniqueness contract is invalid.');
@@ -618,17 +650,27 @@ final class BigFiveZh6PromotionReadiness
                 throw new RuntimeException('ZH6 OWNER approval scope overclaims controlled authority: '.$field.'.');
             }
         }
-        foreach ($package['actions'] ?? [] as $name => $value) {
-            if ($name === 'production_database_read_only_observation') {
-                if ($value !== true) {
-                    throw new RuntimeException('Production read-only observation evidence is missing.');
-                }
-
-                continue;
-            }
-            if ($value !== 0) {
-                throw new RuntimeException('PR49 mutation action must remain zero: '.$name.'.');
-            }
+        $expectedActions = [
+            'production_database_read_only_observation' => true,
+            'database_writes' => 0,
+            'cms_writes' => 0,
+            'media_library_writes' => 0,
+            'media_uploads' => 0,
+            'working_revisions_created' => 0,
+            'promotions' => 0,
+            'published_pointer_changes' => 0,
+            'indexability_changes' => 0,
+            'sitemap_changes' => 0,
+            'llms_changes' => 0,
+            'schema_changes' => 0,
+            'search_submissions' => 0,
+            'cache_operations' => 0,
+            'deployments' => 0,
+        ];
+        $actions = $package['actions'] ?? null;
+        if (! is_array($actions)
+            || ! hash_equals($this->canonicalSha256($expectedActions), $this->canonicalSha256($actions))) {
+            throw new RuntimeException('PR49 action evidence must include the exact read-only observation and zero-mutation fields.');
         }
 
         return $package;
