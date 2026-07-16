@@ -96017,9 +96017,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B"
     ],
-    "status": "ready_to_push",
+    "status": "pr_open_checks_pending",
     "commit_sha": "9940514d72b55df2306c7516a8d95570eb510790",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3144",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -96078,9 +96078,14 @@
         "at": "2026-07-16T12:04:16Z",
         "status": "ready_to_push",
         "note": "Bound commit_sha to the exact locally verified 14-path implementation commit 9940514d72b55df2306c7516a8d95570eb510790; only this ledger/status binding follows the complete validation cycle."
+      },
+      {
+        "at": "2026-07-16T12:05:25Z",
+        "status": "pr_open_checks_pending",
+        "note": "Pushed the exact 14-path scope and opened PR #3144; wait for all required GitHub checks and review threads before merge."
       }
     ],
-    "updated_at": "2026-07-16T12:04:16Z"
+    "updated_at": "2026-07-16T12:05:25Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
