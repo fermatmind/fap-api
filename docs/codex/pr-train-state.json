@@ -96222,5 +96222,83 @@
       }
     ],
     "updated_at": "2026-07-15T01:12:16Z"
+  },
+  "ANALYTICS-FRESHNESS-RECONCILE-03": {
+    "id": "ANALYTICS-FRESHNESS-RECONCILE-03",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/analytics-freshness-reconcile-03",
+    "title": "ANALYTICS-FRESHNESS-RECONCILE-03: feat(analytics): reconcile provider data freshness",
+    "depends_on": [
+      "ANALYTICS-RUNTIME-MONITOR-02"
+    ],
+      "status": "local_validated",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "fap-web PR #1778 is merged and origin/main contains merge commit f67a04b98bc8ea68da8ddefbc9fe8ae6009ae5ea."
+      },
+      "focused_analytics_and_ops": {
+        "status": "passed",
+        "evidence": "Analytics provider freshness tests passed 22 tests / 118 assertions; Ops funnel tests passed 5 tests / 55 assertions. Schedule/config, route listing, Composer validation, touched-PHP Pint, PHP syntax, YAML/JSON parsing, and diff checks also passed before the full-suite run."
+      },
+        "composer_test": {
+          "status": "passed",
+          "evidence": "Full composer test passed on repaired main plus PR3: 7930 passed / 568535 assertions, 39 skipped, 1 deprecated, duration 1050.48s. After unrelated main PR #3149, the affected publisher test, schema architecture gate, and all PR3 focused tests passed 31 tests / 389 assertions."
+      },
+      "baseline_reproduction": {
+        "status": "failed",
+        "evidence": "A detached origin/main worktree with its own Composer autoload mapping reproduced CreateMigrationsMustConvergeTest, ArticleCoverPropagationSmokeCommandTest, NoEmptyThrowableCatchTest, SeoIntelSeoOpsMbtiGrowthLoopHandoffTest, and NoRuntimeSchemaIntrospectionTest: 5 failed / 10 passed. All offender paths were outside ANALYTICS-FRESHNESS-RECONCILE-03 allowlist and are now repaired by merged fap-api PR #3146."
+      },
+        "baseline_repair": {
+          "status": "passed",
+          "evidence": "Authorized ad-hoc fap-api PR #3146 merged at b3030cb22649d27374bbd33b0dab2117b84e4836 with all nine GitHub checks successful; PR3 fast-forwarded to that main baseline without stash or overlap."
+        },
+        "followup_baseline_repair": {
+          "status": "passed",
+          "evidence": "A later unrelated main PR #3147 introduced one new direct runtime schema probe. Minimal one-file PR #3148 replaced it with SchemaBaseline, passed all nine GitHub checks, and merged at 2f35da1ae367b4d8fd733cb0e3b6f06133ee5d03."
+        }
+      },
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-16T15:16:15Z",
+        "status": "implementation_in_progress",
+        "note": "Registered from the explicit serial execution goal after verifying merged dependency ANALYTICS-RUNTIME-MONITOR-02. Started in a new dedicated sibling worktree from latest fap-api origin/main; no provider live read, credential, production, CMS, or database write is authorized or executed."
+      },
+      {
+        "at": "2026-07-16T15:53:42Z",
+        "status": "blocked_external_baseline",
+        "note": "Stopped before commit after required composer test completed with five deterministic origin/main failures outside the exact PR3 allowlist. Detached origin/main reproduced all five. The one PR3-local architecture token failure was repaired; validation-generated compiled content outputs were safely restored. No fourth PR, scope expansion, provider live read, credential mutation, production action, CMS write, database write, push, or PR creation occurred."
+      },
+        {
+          "at": "2026-07-16T16:45:34Z",
+          "status": "validation_in_progress",
+          "note": "Authorized ad-hoc baseline repair PR #3146 merged green at b3030cb22649d27374bbd33b0dab2117b84e4836. PR3 fast-forwarded to the repaired main with zero file overlap and no stash; focused and full manifest validation resumed without provider live reads or any production, CMS, credential, or database write."
+        },
+        {
+          "at": "2026-07-16T17:50:28Z",
+          "status": "local_validated",
+          "note": "All manifest checks passed after both isolated baseline repairs: full composer 7930 passed / 568535 assertions, focused analytics and Ops tests green, scheduler and Ops routes listed, Pint/PHP syntax/Composer/YAML/JSON/diff/scope checks green. Exact scope remains 25 allowed files; no live provider read, credential mutation, production, CMS, database, publish, or deploy action occurred."
+        }
+      ],
+      "updated_at": "2026-07-16T17:50:28Z"
   }
 }

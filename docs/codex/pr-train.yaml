@@ -44972,3 +44972,56 @@ prs:
     deploy_allowed: true
     content_authority: CMS/backend
     current_authorization: register_only_do_not_start
+
+  - id: ANALYTICS-FRESHNESS-RECONCILE-03
+    repo: fap-api
+    base: main
+    branch: codex/analytics-freshness-reconcile-03
+    title: "ANALYTICS-FRESHNESS-RECONCILE-03: feat(analytics): reconcile provider data freshness"
+    status: local_validated
+    depends_on:
+      - ANALYTICS-RUNTIME-MONITOR-02
+    dependency_repositories:
+      ANALYTICS-RUNTIME-MONITOR-02: fap-web
+    scope:
+      - Add read-only GA4 Data API and Baidu Tongji aggregate adapters with bounded retry, sanitized diagnostics, versioned cache snapshots, and last-known-good retention.
+      - Reconcile site-wide provider directionality only against backend-authoritative analytics_funnel_daily org_id=0 rows and surface the result in the existing authenticated Ops funnel page.
+      - Add an opt-in hourly scheduler and JSON/dry-run command without live provider execution, credential writes, database migrations, CMS, SEO, or deploy changes.
+    allowed_paths:
+      - backend/app/Services/Analytics/ProviderFreshness/**
+      - backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php
+      - backend/bootstrap/app.php
+      - backend/config/analytics.php
+      - backend/.env.example
+      - backend/app/Filament/Ops/Pages/FunnelConversionPage.php
+      - backend/app/Filament/Ops/Widgets/FunnelWidget.php
+      - backend/resources/views/filament/ops/pages/funnel-conversion-page.blade.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/tests/Feature/Analytics/AnalyticsProviderFreshness*
+      - backend/tests/Unit/Services/Analytics/ProviderFreshness/**
+      - backend/tests/Feature/Ops/FunnelConversionPageTest.php
+      - docs/analytics/provider-data-freshness-runbook.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && php artisan test tests/Feature/Analytics/AnalyticsProviderFreshnessAdapterTest.php tests/Feature/Analytics/AnalyticsProviderFreshnessServiceTest.php tests/Feature/Analytics/AnalyticsProviderFreshnessCommandTest.php tests/Feature/Analytics/AnalyticsProviderFreshnessSchedulerTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Ops/FunnelConversionPageTest.php --no-ansi
+      - cd backend && php artisan schedule:list
+      - cd backend && php artisan route:list --path=ops --except-vendor
+      - cd backend && composer test
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend_business_truth_with_provider_browser_telemetry

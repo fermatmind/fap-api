@@ -10,13 +10,16 @@ use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Analytics\AnalyticsFunnelDailyBuilder;
+use App\Services\Analytics\ProviderFreshness\ProviderSnapshotStore;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Tests\Concerns\SeedsFunnelAnalyticsScenario;
 use Tests\TestCase;
@@ -56,6 +59,8 @@ final class FunnelConversionPageTest extends TestCase
                 ->get('/ops/funnel-conversion')
                 ->assertOk()
                 ->assertSee('漏斗与转化')
+                ->assertSee('全站 Provider 数据新鲜度')
+                ->assertSee('未配置')
                 ->assertSee('KPI Cards')
                 ->assertSee('Started attempts')
                 ->assertSee('Daily Funnel Trend')
@@ -74,6 +79,40 @@ final class FunnelConversionPageTest extends TestCase
         } finally {
             Carbon::setTestNow();
         }
+    }
+
+    public function test_funnel_page_stays_available_with_degraded_provider_lkg_snapshot(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_MENU_COMMERCE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Provider Failure Selected Org');
+        config()->set('analytics.provider_freshness.cache_store', 'array');
+        Cache::store('array')->flush();
+        Http::fake();
+
+        app(ProviderSnapshotStore::class)->write([
+            'schema_version' => ProviderSnapshotStore::SCHEMA_VERSION,
+            'generated_at' => '2026-07-16T12:00:00+08:00',
+            'target_date' => now('Asia/Shanghai')->subDay()->toDateString(),
+            'timezone' => 'Asia/Shanghai',
+            'providers' => [
+                'ga4' => $this->degradedProvider('ga4', ['event_count' => 18]),
+                'baidu' => $this->degradedProvider('baidu', ['page_views' => 16]),
+            ],
+        ]);
+
+        $this->withSession($this->opsSession($admin, $selectedOrg))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/funnel-conversion')
+            ->assertOk()
+            ->assertSee('全站 Provider 数据新鲜度')
+            ->assertSee('降级')
+            ->assertSee('18')
+            ->assertSee('16');
+
+        Http::assertNothingSent();
     }
 
     public function test_funnel_conversion_page_reads_global_org_zero_read_model_rows(): void
@@ -237,6 +276,21 @@ final class FunnelConversionPageTest extends TestCase
             'current_org',
             $normalizeScope->invoke(app(FunnelConversionPage::class), ['global_org0']),
         );
+    }
+
+    /** @param array<string,int> $metrics @return array<string,mixed> */
+    private function degradedProvider(string $provider, array $metrics): array
+    {
+        return [
+            'provider' => $provider,
+            'status' => 'degraded',
+            'last_attempt_at' => now('Asia/Shanghai')->toIso8601String(),
+            'last_success_at' => now('Asia/Shanghai')->subHour()->toIso8601String(),
+            'data_through' => now('Asia/Shanghai')->subDay()->toDateString(),
+            'metrics' => $metrics,
+            'using_lkg' => true,
+            'diagnostic_code' => 'provider_unavailable',
+        ];
     }
 
     private function createOrganization(string $name): Organization
