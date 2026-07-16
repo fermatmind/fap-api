@@ -23,8 +23,8 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
     {
         $this->seedPublishedEstate();
 
-        $first = $this->writer()->preflight($this->scorecard());
-        $second = $this->writer()->preflight($this->scorecard());
+        $first = $this->writer()->preflight($this->releaseReport());
+        $second = $this->writer()->preflight($this->releaseReport());
 
         $this->assertTrue($first['ok']);
         $this->assertSame('PASS_COLLISION_SAFE_WORKING_REVISION_PREFLIGHT', $first['status']);
@@ -37,7 +37,12 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
         $this->assertSame($first['preflight_fingerprint'], $second['preflight_fingerprint']);
         $this->assertFalse($first['writes_committed']);
         $this->assertFalse($first['production_command_executed']);
-        $this->assertFalse($first['database_migration_required']);
+        $this->assertTrue($first['database_migration_required']);
+        $this->assertSame((string) $this->releaseReport()['package_sha256'], $first['package_sha256']);
+        $this->assertSame(116, $first['candidate_snapshot_count']);
+        $this->assertSame(116, $first['pending_manual_review_count']);
+        $this->assertSame(116, $first['empty_media_authority_count']);
+        $this->assertSame(0, $first['media_write_count']);
         $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
         $this->assertSame(0, PersonalityPublicContentAsset::query()->whereNotNull('working_revision_id')->count());
     }
@@ -46,16 +51,16 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
     {
         $this->seedPublishedEstate();
         $before = $this->publishedPrimarySnapshots();
-        $plan = $this->writer()->preflight($this->scorecard());
+        $plan = $this->writer()->preflight($this->releaseReport());
 
         $first = $this->writer()->write(
-            $this->scorecard(),
+            $this->releaseReport(),
             (string) $plan['package_sha256'],
             (string) $plan['preflight_fingerprint'],
         );
-        $retryPlan = $this->writer()->preflight($this->scorecard());
+        $retryPlan = $this->writer()->preflight($this->releaseReport());
         $retry = $this->writer()->write(
-            $this->scorecard(),
+            $this->releaseReport(),
             (string) $retryPlan['package_sha256'],
             (string) $retryPlan['preflight_fingerprint'],
         );
@@ -72,6 +77,8 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
         );
         $this->assertSame($before, $this->publishedPrimarySnapshots());
         $this->assertSame(116, PersonalityPublicContentAssetRevision::query()->count());
+        $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
+            ->where('workflow_state', 'pending_manual_review')->count());
         $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNotNull('working_revision_id')->count());
         $this->assertSame(0, PersonalityPublicContentAsset::query()->whereNotNull('published_revision_id')->count());
 
@@ -83,6 +90,20 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
         $this->assertSame(116, $retry['revision_reused_count']);
         $this->assertSame(116, PersonalityPublicContentAssetRevision::query()->count());
         $this->assertSame($before, $this->publishedPrimarySnapshots());
+
+        $typeFourSocial = PersonalityPublicContentAssetRevision::query()
+            ->where('authority_asset_key', 'enneagram:instinctual_subtype:type-4/social:en')
+            ->firstOrFail();
+        $candidate = $this->candidate('en|instinctual_subtype:type-4/social');
+        $this->assertSame($candidate['title'], $typeFourSocial->snapshot_json['title']);
+        $this->assertSame($candidate['answer_first'], $typeFourSocial->snapshot_json['summary']);
+        $this->assertSame($candidate['answer_first'], $typeFourSocial->snapshot_json['seo_json']['description']);
+        $this->assertSame([], $typeFourSocial->snapshot_json['schema_json']);
+        $this->assertSame(['hero' => null, 'inline' => [], 'og' => null], $typeFourSocial->snapshot_json['media_json']);
+        $this->assertSame($typeFourSocial->source_hash, $typeFourSocial->snapshot_json['source_hash']);
+        $this->assertSame('pending_manual_review', $typeFourSocial->snapshot_json['review_state']);
+        $this->assertNull($typeFourSocial->snapshot_json['authority_json']['reviewer']);
+        $this->assertSame('observation_exercise', collect($typeFourSocial->snapshot_json['content_sections_json'])->last()['key']);
     }
 
     public function test_foreign_working_revision_collision_fails_before_any_package_write(): void
@@ -105,7 +126,7 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
         ]);
 
         try {
-            $this->writer()->preflight($this->scorecard());
+            $this->writer()->preflight($this->releaseReport());
             $this->fail('Expected a foreign working-revision collision.');
         } catch (RuntimeException $exception) {
             $this->assertStringContainsString('foreign isolated working revision', $exception->getMessage());
@@ -119,7 +140,7 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
     {
         $this->seedPublishedEstate();
         $before = $this->publishedPrimarySnapshots();
-        $plan = $this->writer()->preflight($this->scorecard());
+        $plan = $this->writer()->preflight($this->releaseReport());
         DB::unprepared(<<<'SQL'
 CREATE TRIGGER fail_enneagram_revision_workspace_insert
 BEFORE INSERT ON personality_public_content_asset_revisions
@@ -131,7 +152,7 @@ SQL);
 
         try {
             $this->writer()->write(
-                $this->scorecard(),
+                $this->releaseReport(),
                 (string) $plan['package_sha256'],
                 (string) $plan['preflight_fingerprint'],
             );
@@ -148,7 +169,7 @@ SQL);
     public function test_console_preflight_is_read_only_and_unapproved_write_fails_closed(): void
     {
         $this->seedPublishedEstate();
-        $plan = $this->writer()->preflight($this->scorecard());
+        $plan = $this->writer()->preflight($this->releaseReport());
 
         $this->artisan('personality:enneagram-authority-v2-revision-workspace', ['--preflight' => true])
             ->expectsOutputToContain('status=PASS_COLLISION_SAFE_WORKING_REVISION_PREFLIGHT')
@@ -184,6 +205,31 @@ SQL);
         $this->assertIsArray($scorecard);
 
         return $scorecard;
+    }
+
+    /** @return array<string, mixed> */
+    private function releaseReport(): array
+    {
+        $path = base_path('docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/release-gate-report.json');
+        $report = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertIsArray($report);
+
+        return $report;
+    }
+
+    /** @return array<string, mixed> */
+    private function candidate(string $assetKey): array
+    {
+        $record = collect($this->releaseReport()['asset_records'])->firstWhere('asset_key', $assetKey);
+        $this->assertIsArray($record);
+        $document = json_decode((string) file_get_contents(base_path((string) $record['source_path'])), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertIsArray($document);
+        $candidate = collect($document['assets'])->first(
+            static fn (array $row): bool => (string) $row['locale'].'|'.(string) $row['identity_key'] === $assetKey,
+        );
+        $this->assertIsArray($candidate);
+
+        return $candidate;
     }
 
     private function seedPublishedEstate(): void

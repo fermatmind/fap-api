@@ -85451,7 +85451,7 @@
     "depends_on": [
       "MBTI-CMS-27A"
     ],
-    "status": "pr_open_checks_pending",
+    "status": "review_fix_checks_pending",
     "commit_sha": "23833bfcca8cd1d015efb827271dcf2f60aa52f7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2860",
     "failure_reason": null,
@@ -95910,8 +95910,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "cc7a46b58c2548e3fc3bc5697b857ff6a3a257a1",
+    "status": "merged_and_cleaned",
+    "commit_sha": "7239a121fd07d2b6b1d152020210c03e29dab4b3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3143",
     "checks": {
       "dependency": {
@@ -95935,24 +95935,29 @@
         "evidence": "Pint passed all three changed PHP tests; Composer validate, YAML/JSON parsing, frozen report SHA binding, git diff --check, and exact 13-path scope validation passed."
       },
       "github": {
-        "status": "passed_requires_fresh_ledger_cycle",
-        "evidence": "Review-fix head cc7a46b58c2548e3fc3bc5697b857ff6a3a257a1 passed all nine required checks; GitHub is CLEAN/MERGEABLE. The dependency thread is resolved; this exact ready ledger binding must pass its own fresh cycle."
+        "status": "passed",
+        "evidence": "Final head 7239a121fd07d2b6b1d152020210c03e29dab4b3 passed all nine required checks; GitHub was CLEAN/MERGEABLE and all three review threads were resolved before squash merge."
       },
       "review_fix": {
         "status": "passed",
         "evidence": "Added 22B as a direct PR23 dependency so the closeout cannot use the pre-repair package hash; the review-fix head passed all checks, and commit_sha now binds that exact head. 22E will expand the final dependency set to 22A-22E as planned."
+      },
+      "post_merge": {
+        "status": "passed",
+        "evidence": "PR #3143 merged at de038bea461ede440e1c6289f2af8e74930cbeb7; origin/main contains the merge, local main equals origin/main, both task branches are absent, the worktree is clean, and focused post-merge revalidation passed 28 tests / 10520 assertions."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merge_commit": "de038bea461ede440e1c6289f2af8e74930cbeb7",
+    "merged_at": "2026-07-16T11:33:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -95994,9 +95999,121 @@
         "at": "2026-07-16T11:26:22Z",
         "status": "ready_to_merge",
         "note": "Review-fix head cc7a46b58c2548e3fc3bc5697b857ff6a3a257a1 passed all nine checks and is CLEAN/MERGEABLE. Bound commit_sha to that exact dependency-fix head, resolved the stale-binding P2, and require one final fresh ledger-only cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T11:40:10Z",
+        "status": "merged_and_cleaned",
+        "note": "Final head 7239a121fd07d2b6b1d152020210c03e29dab4b3 passed all nine required checks and all review threads were resolved. PR #3143 squash-merged at de038bea461ede440e1c6289f2af8e74930cbeb7; origin/main containment, local/remote branch cleanup, clean worktree, and post-merge focused 28/10520 revalidation are verified."
       }
     ],
-    "updated_at": "2026-07-16T11:26:22Z"
+    "updated_at": "2026-07-16T11:40:10Z"
+  },
+  "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C": {
+    "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-public-authority-v2-runtime-import-review-22c",
+    "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C: import exact candidate revisions and bind human review evidence",
+    "depends_on": [
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "2e13f24815fcec609acbcf40639f4be58883379b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3144",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3143 is MERGED at de038bea461ede440e1c6289f2af8e74930cbeb7; origin/main containment, local and remote branch cleanup, clean worktree, and post-merge focused verification are complete."
+      },
+      "focused_runtime_import_review": {
+        "status": "passed",
+        "evidence": "Exact candidate importer, private review binder, evidence-bound promoter, public redaction, failure atomicity, and command guards pass 24 tests / 494 assertions; review-fix V223 rerun passes 4 tests / 211 assertions, including five malformed or out-of-range admin actor IDs with zero writes."
+      },
+      "full_enneagram_v2": {
+        "status": "passed",
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 189 tests / 28517 assertions."
+      },
+      "fresh_sqlite_migration": {
+        "status": "passed",
+        "evidence": "A fresh temporary SQLite database migrated from zero through 2026_07_16_000100; the private revision-review table and all 16 expected columns were read back successfully."
+      },
+      "static_and_scope": {
+        "status": "passed",
+        "evidence": "All 12 implementation PHP files and the added classifier test pass php -l/Pint as applicable; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass."
+      },
+      "github_verify_bigfive": {
+        "status": "passed",
+        "evidence": "Exact review-fix head 2e13f24815fcec609acbcf40639f4be58883379b passed verify-bigfive and all nine required checks."
+      },
+      "automated_review": {
+        "status": "passed_resolved",
+        "evidence": "Accepted and resolved discussion PRRT_kwDOQn6xoM6RcBWe: binder admin actor IDs now require a strict positive in-range integer; abc, 12abc, 0, -1, and overflow inputs all fail closed with zero evidence or workflow writes."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-16T11:40:10Z",
+        "status": "pending_dependency",
+        "note": "Registered from the explicit serial execution goal with merged 22B as its dependency; SHA, PR, merge, and production execution facts start null/false."
+      },
+      {
+        "at": "2026-07-16T11:40:10Z",
+        "status": "implementation_in_progress",
+        "note": "Verified and reconciled merged 22B, then started exact-candidate working import and private human-review evidence binding from latest main. No production write is authorized or executed in this PR."
+      },
+      {
+        "at": "2026-07-16T12:03:11Z",
+        "status": "local_validation_passed",
+        "note": "Implemented exact final-report candidate snapshots, atomic pending-manual-review import, immutable private 116-row evidence storage, exact-SHA binder, and evidence-required promotion with public reviewer redaction. Focused 24/494, final V223 4/201, full Enneagram V2 189/28517, fresh SQLite migration, PHP lint/Pint, Composer, metadata, diff, and exact 14-path scope all pass. No production write or deploy occurred."
+      },
+      {
+        "at": "2026-07-16T12:04:16Z",
+        "status": "ready_to_push",
+        "note": "Bound commit_sha to the exact locally verified 14-path implementation commit 9940514d72b55df2306c7516a8d95570eb510790; only this ledger/status binding follows the complete validation cycle."
+      },
+      {
+        "at": "2026-07-16T12:05:25Z",
+        "status": "pr_open_checks_pending",
+        "note": "Pushed the exact 14-path scope and opened PR #3144; wait for all required GitHub checks and review threads before merge."
+      },
+      {
+        "at": "2026-07-16T12:16:42Z",
+        "status": "github_checks_failed_same_scope_fix_in_progress",
+        "note": "GitHub verify-bigfive found exactly one directly caused classifier failure after 1495 passing tests: the frozen-runtime classifier did not yet recognize the four new 22C private review-evidence files. Added only the classifier test to the manifest scope and began an exact-path allowlist plus lookalike-denial repair; all other completed checks remain passed."
+      },
+      {
+        "at": "2026-07-16T12:17:23Z",
+        "status": "pr_open_checks_pending",
+        "note": "The exact-path classifier repair passes 1/2 locally, including lookalike denials. The classifier test passes PHP lint and Pint; YAML/JSON, git diff, and exact 15-path scope checks pass. Push this same-scope fix and require a fresh complete GitHub cycle."
+      },
+      {
+        "at": "2026-07-16T12:26:43Z",
+        "status": "review_fix_checks_pending",
+        "note": "Head 74f1cbd99edd46dde161a14e91eb864a50f7f4fa passed all nine checks, then exact-head automated review found one valid P2: loose integer casting could persist an incorrect immutable admin actor ID. The command now accepts only strict positive in-range integers; V223 passes 4/211, PHP lint, Pint, and diff validation. Push and require fresh complete checks before merge."
+      },
+      {
+        "at": "2026-07-16T12:34:04Z",
+        "status": "ready_to_merge",
+        "note": "Exact review-fix head 2e13f24815fcec609acbcf40639f4be58883379b passed all nine required checks, PR is CLEAN/MERGEABLE, and the only automated review thread is resolved. Bind commit_sha to this exact head and require one final fresh ledger-only cycle before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-16T12:34:04Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",

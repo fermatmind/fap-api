@@ -13,7 +13,7 @@ use Throwable;
 final class PersonalityEnneagramAuthorityV2RevisionWorkspace extends Command
 {
     protected $signature = 'personality:enneagram-authority-v2-revision-workspace
-        {--source=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-benchmark-01/production-scorecard.json : Frozen 116-page target scorecard}
+        {--source=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/release-gate-report.json : Final exact-SHA 116-page release report}
         {--preflight : Run a read-only database preflight}
         {--write : Create or idempotently reuse the 116 isolated working revisions}
         {--confirm-package-sha256= : Exact preflight package SHA-256; required for write}
@@ -53,8 +53,8 @@ final class PersonalityEnneagramAuthorityV2RevisionWorkspace extends Command
             throw new RuntimeException('Exactly one of --preflight or --write is required.');
         }
 
-        $scorecard = $this->scorecard((string) $this->option('source'));
-        $plan = $writer->preflight($scorecard);
+        $releaseReport = $this->releaseReport((string) $this->option('source'));
+        $plan = $writer->preflight($releaseReport);
         if ($preflight) {
             return $plan;
         }
@@ -72,19 +72,19 @@ final class PersonalityEnneagramAuthorityV2RevisionWorkspace extends Command
             throw new RuntimeException('Operator isolated working-revision authorization phrase mismatch.');
         }
 
-        return $writer->write($scorecard, $packageSha256, $preflightFingerprint);
+        return $writer->write($releaseReport, $packageSha256, $preflightFingerprint);
     }
 
     /** @return array<string, mixed> */
-    private function scorecard(string $path): array
+    private function releaseReport(string $path): array
     {
         $resolved = str_starts_with($path, DIRECTORY_SEPARATOR) ? $path : base_path($path);
         if (! File::isFile($resolved)) {
-            throw new RuntimeException('Enneagram Authority V2 target scorecard not found.');
+            throw new RuntimeException('Enneagram Authority V2 final release report not found.');
         }
         $decoded = json_decode(File::get($resolved), true, 512, JSON_THROW_ON_ERROR);
-        if (! is_array($decoded) || ! is_array($decoded['rows'] ?? null)) {
-            throw new RuntimeException('Enneagram Authority V2 target scorecard must contain a rows array.');
+        if (! is_array($decoded) || ! is_array($decoded['asset_records'] ?? null)) {
+            throw new RuntimeException('Enneagram Authority V2 final release report must contain an asset_records array.');
         }
 
         return $decoded;
