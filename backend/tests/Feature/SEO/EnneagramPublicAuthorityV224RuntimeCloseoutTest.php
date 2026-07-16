@@ -80,6 +80,35 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
     }
 
+    public function test_preflight_rejects_review_evidence_sha_mismatch_without_writes(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        $register['reviews'][0]['evidence_sha256'] = str_repeat('f', 64);
+
+        try {
+            $this->closeout()->preflight(
+                $report,
+                $this->fingerprintRaw($report),
+                $register,
+                $this->fingerprintRaw($register),
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+                'https://api.test',
+                'https://frontend.test',
+                'https://frontend.test/api/content-release/revalidate',
+            );
+            $this->fail('Expected review evidence SHA mismatch to fail before authorization.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('Private review register evidence SHA-256 is invalid', $exception->getMessage());
+        }
+
+        $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+        $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+    }
+
     public function test_execute_rejects_runtime_endpoint_drift_before_any_write(): void
     {
         $this->seedPublishedEstate();
@@ -383,6 +412,32 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $this->assertStringContainsString('html_hreflang_mismatch', $exception->getMessage());
             }
         }
+    }
+
+    public function test_post_readback_rejects_case_folded_private_reviewer_name_leak(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, false, null, null, null, 'private human reviewer 1');
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'post',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                false,
+                ['Private Human Reviewer 1'],
+            );
+            $this->fail('Expected case-folded private reviewer leak to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_private_reviewer_exposed', $exception->getMessage());
+            $this->assertStringContainsString('html_private_reviewer_exposed', $exception->getMessage());
+        }
+
+        $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+        $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
     }
 
     public function test_console_preflight_generates_only_redacted_operator_artifacts(): void
@@ -839,6 +894,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $discoverabilityUrlOverride = null,
         ?string $canonicalUrlOverride = null,
         ?string $hreflangUrlOverride = null,
+        ?string $privateReviewerLeak = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -846,7 +902,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $urlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($canonicalUrlOverride, $hreflangUrlOverride, $rejectRevalidation, $urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($canonicalUrlOverride, $hreflangUrlOverride, $privateReviewerLeak, $rejectRevalidation, $urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             if ($url === 'https://frontend.test/api/content-release/revalidate') {
                 if ($rejectRevalidation) {
@@ -907,6 +963,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                             'review_state' => (string) $asset->review_state,
                             'reviewer' => null,
                         ],
+                        'operator_supplied_value' => $privateReviewerLeak,
                     ],
                 ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']);
             }
@@ -947,11 +1004,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         .'" href="'.htmlspecialchars($href, ENT_QUOTES | ENT_HTML5).'">';
                 }
 
+                $privateValue = $privateReviewerLeak === null
+                    ? ''
+                    : '<aside>'.htmlspecialchars($privateReviewerLeak, ENT_QUOTES | ENT_HTML5).'</aside>';
+
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .implode('', $hreflang)
-                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.'</main></body></html>');
+                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.'</main>'.$privateValue.'</body></html>');
             }
 
             return Http::response(['ok' => false], 404);

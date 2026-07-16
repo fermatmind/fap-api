@@ -637,9 +637,13 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     private function assertNoSensitiveValues(string $body, array $sensitiveValues, string $surface, array &$issues): void
     {
         $decodedBody = html_entity_decode($body, ENT_QUOTES | ENT_HTML5);
+        $caseFoldedBody = mb_strtolower($body, 'UTF-8');
+        $caseFoldedDecodedBody = mb_strtolower($decodedBody, 'UTF-8');
         foreach ($sensitiveValues as $value) {
             $value = trim($value);
-            if ($value !== '' && (str_contains($body, $value) || str_contains($decodedBody, $value))) {
+            $caseFoldedValue = mb_strtolower(html_entity_decode($value, ENT_QUOTES | ENT_HTML5), 'UTF-8');
+            if ($value !== '' && (str_contains($caseFoldedBody, $caseFoldedValue)
+                || str_contains($caseFoldedDecodedBody, $caseFoldedValue))) {
                 $issues[] = $surface.'_private_reviewer_exposed';
 
                 return;

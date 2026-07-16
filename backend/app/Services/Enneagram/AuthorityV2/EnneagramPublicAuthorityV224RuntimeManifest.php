@@ -567,11 +567,14 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         foreach ($register['reviews'] as $review) {
             $key = is_array($review) ? trim((string) ($review['asset_key'] ?? '')) : '';
             $record = $expected[$key] ?? null;
+            $reviewerName = is_array($review) ? trim((string) ($review['reviewer_name'] ?? '')) : '';
+            $decision = is_array($review) ? trim((string) ($review['decision'] ?? '')) : '';
+            $reviewSource = is_array($review) ? trim((string) ($review['review_source'] ?? '')) : '';
             if (! is_array($review) || ! is_array($record) || isset($seen[$key])
                 || ($review['asset_sha256'] ?? null) !== $record['asset_sha256']
-                || trim((string) ($review['reviewer_name'] ?? '')) === ''
-                || ($review['decision'] ?? null) !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED
-                || ($review['review_source'] ?? null) !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN) {
+                || $reviewerName === ''
+                || $decision !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED
+                || $reviewSource !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN) {
                 throw new RuntimeException('Private review register is missing an exact approved human-review row: '.$key.'.');
             }
             try {
@@ -579,9 +582,23 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
                 if ($reviewedAt === '') {
                     throw new RuntimeException('Private review register timestamp is missing: '.$key.'.');
                 }
-                CarbonImmutable::parse($reviewedAt);
+                $reviewedAt = CarbonImmutable::parse($reviewedAt)
+                    ->utc()
+                    ->format('Y-m-d H:i:s');
             } catch (\Throwable) {
                 throw new RuntimeException('Private review register timestamp is invalid: '.$key.'.');
+            }
+            $evidenceSha256 = $this->fingerprint([
+                'asset_key' => $key,
+                'asset_sha256' => (string) $record['asset_sha256'],
+                'package_sha256' => $releasePackageSha256,
+                'reviewer_name' => $reviewerName,
+                'reviewed_at' => $reviewedAt,
+                'decision' => $decision,
+                'review_source' => $reviewSource,
+            ]);
+            if (isset($review['evidence_sha256']) && ! hash_equals($evidenceSha256, (string) $review['evidence_sha256'])) {
+                throw new RuntimeException('Private review register evidence SHA-256 is invalid: '.$key.'.');
             }
             $seen[$key] = true;
         }
