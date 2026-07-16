@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "pr_open_checks_pending",
-    "commit_sha": "48c874143e1b5ec6d2ba9c1940a39a8638fff94b",
+    "status": "review_fix_local_validation_passed",
+    "commit_sha": "3190771e35f6ec06dea0385be0e884633b519400",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96140,7 +96140,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 35 tests / 678 assertions. Coverage includes exact 116 report-scoped import/bind/promotion with unrelated Enneagram drafts unchanged, rollback-token output reservation and transaction-bound durable persistence, sink-failure atomic rollback, late-failure redaction, complete current all-target pre-readback binding, execute-output pre-reservation plus redacted durable result persistence, strict 116-row approved private-register validation before standalone post-readback HTTP, exact frontend-origin/query/fragment URL-set rejection, cache warm/fresh, HMAC 116/0, and canary-00 plus nine 12-page readbacks."
+        "evidence": "V205/V206/V223/V224 pass 37 tests / 698 assertions. Coverage includes exact 116 report-scoped import/bind/promotion with unrelated Enneagram drafts unchanged, rollback-token output reservation and transaction-bound durable persistence, sink-failure atomic rollback, late-failure redaction, complete current all-target pre-readback binding, execute-output pre-reservation plus redacted durable result persistence, strict 116-row approved private-register validation before standalone post-readback HTTP, exact frontend-origin/query/fragment validation for discoverability URLs, canonical and hreflang, cache warm/fresh, HMAC 116/0, and canary-00 plus nine 12-page readbacks."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96148,7 +96148,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 200 tests / 28684 assertions after the local heavy-test concurrency guard was clear."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 202 tests / 28704 assertions after the local heavy-test concurrency guard was clear."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96256,9 +96256,14 @@
         "at": "2026-07-16T15:24:49Z",
         "status": "pr_open_checks_pending",
         "note": "Committed the discoverability exact-origin/query/fragment repair at 48c874143e1b5ec6d2ba9c1940a39a8638fff94b. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
+      },
+      {
+        "at": "2026-07-16T15:55:06Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine seventh-cycle GitHub checks passed, then the latest canonical-origin P2 and adjacent hreflang/readback URL drift boundary were fixed in scope. HTML canonical and hreflang now require the exact frontend origin and reject relative, query, fragment, empty-query and empty-fragment forms; isolated RuntimeManifest execution no longer depends on prior autoload order. Focused 37/698, full Enneagram V2 202/28704, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff and exact 15-path scope checks pass. Code commit 3190771e35f6ec06dea0385be0e884633b519400 requires a fresh complete GitHub check and latest-head review cycle before merge; no production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T15:24:49Z"
+    "updated_at": "2026-07-16T15:55:06Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
