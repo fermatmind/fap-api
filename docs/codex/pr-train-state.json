@@ -94509,10 +94509,10 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12"
     ],
-    "status": "ready_to_push",
+    "status": "github_checks_pending",
     "commit_sha": "a9fd62ccbeeb0cd17693c76bd40a87ecaaf401d1",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3125",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -94529,6 +94529,10 @@
       "content_qa": {
         "status": "pass",
         "evidence": "The package contains exactly Type Four core, 4w3, 4w5, and self-preservation/social/one-to-one subtype assets in en and zh-CN. Identity and meaning remain revisable hypotheses; craft, culture, grief, exclusion, training, safety, access, consent, resources, and power remain visible alternatives. All 36 FAQ pairs are unique, locale outlines and examples are independent, and every asset remains pending_manual_review with reviewer null, draft_only, publish_eligible false, and closed execution boundaries."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #3125 is open at ledger head 2f5e53e3b72dd86a3f827851d011968d19f6d82f; GitHub reports MERGEABLE and required checks have started."
       }
     },
     "scope_validation": {
@@ -94567,9 +94571,14 @@
         "at": "2026-07-16T00:30:14Z",
         "status": "ready_to_push",
         "note": "Committed the exact six-file PR13 scope as a9fd62ccbeeb0cd17693c76bd40a87ecaaf401d1 after explicit path-limited staging and cached diff validation."
+      },
+      {
+        "at": "2026-07-16T00:31:06Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3125 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
       }
     ],
-    "updated_at": "2026-07-16T00:30:14Z"
+    "updated_at": "2026-07-16T00:31:06Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14",
