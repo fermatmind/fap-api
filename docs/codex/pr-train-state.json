@@ -92985,7 +92985,7 @@
     "branch": "codex/big5-authority-v2-zh6-promotion-readiness-49",
     "depends_on": ["BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48"],
     "status": "review_fix_local_verified",
-    "commit_sha": "ec9f28b39de8eef2cbb43bb93e271bbad4766744",
+    "commit_sha": "3b0e307a911703eb41717bb23e351b72c10c4aef",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3141",
     "checks": {
       "dependency": {
@@ -93002,7 +93002,7 @@
       },
       "focused": {
         "status": "pass",
-        "evidence": "After five exact-head P2 repairs, focused PR49 passes 13 tests / 180 assertions and the full related PR41 media, PR43 provenance, PR47 review/promotion, PR48 snapshot and PR49 readiness regression set passes 65 tests / 8655 assertions. A unique-media package passes only with enrolled reviewer TOTP; missing TOTP remains HOLD. Semantic package tampering, fully rehashed source-row substitution, fully rehashed rollback-target substitution, and omitted zero-mutation action evidence all fail closed."
+        "evidence": "After six exact-head P2 repairs, focused PR49 passes 14 tests / 186 assertions and the full related PR41 media, PR43 provenance, PR47 review/promotion, PR48 snapshot and PR49 readiness regression set passes 66 tests / 8661 assertions. A unique-media package passes only with enrolled reviewer TOTP; missing TOTP remains HOLD. Semantic package tampering, fully rehashed source-row substitution, fully rehashed rollback-target substitution, rehashed external-human authority drift, and omitted zero-mutation action evidence all fail closed."
       },
       "complete_manifest_validation": {
         "status": "pass",
@@ -93010,14 +93010,14 @@
       },
       "github_verify_bigfive": {
         "status": "pass_superseded_by_review_fix",
-        "evidence": "Head 51c57762688afb73fe6235648b8d7e589ac6610c passed all nine GitHub checks with merge state CLEAN, including verify-bigfive in 4m16s, MBTI legacy in 3m33s and MBTI V2 in 3m22s. Exact-head review then found that reviewer TOTP enrollment was not enforced; the locally verified repair requires a fresh exact-head cycle."
+        "evidence": "Head 131a747b6a33532b5875e57b1066151cb4c2786e passed all nine GitHub checks with merge state CLEAN, including verify-bigfive in 4m06s, MBTI legacy in 3m18s and MBTI V2 in 3m16s. Exact-head review then found that four external-human authority fields were not compared with the immutable OWNER record; the locally verified repair requires a fresh exact-head cycle."
       },
       "codex_review": {
-        "status": "five_p2_fixes_local_verified",
-        "evidence": "Threads PRRT_kwDOQn6xoM6RauOP, PRRT_kwDOQn6xoM6Ra8fB, PRRT_kwDOQn6xoM6RbKDR and PRRT_kwDOQn6xoM6RbKDY are resolved after binding fresh observations, source rows, rollback rows and the exact zero-write action set. Thread PRRT_kwDOQn6xoM6RbYmX correctly found that active admin_user:1 had totp_enrolled=false but reviewer permission remained approved. The package now binds reviewer approval and working readiness to observed TOTP enrollment, while the live preflight adds the same fail-closed gate when admin TOTP is enabled."
+        "status": "six_p2_fixes_local_verified",
+        "evidence": "The five earlier review threads are resolved after binding fresh observations, source rows, rollback rows, zero-write actions and reviewer TOTP readiness. Thread PRRT_kwDOQn6xoM6RbofB correctly found that source, pull_request_number, author_login and author_association in the review record were not compared with the immutable OWNER authority. All external-human fields are now exact-bound, and a fully rehashed author-login substitution fails closed."
       }
     },
-    "failure_reason": "Exact-head review found that active admin_user:1 lacked TOTP enrollment while reviewer permission remained approved. The same-scope fail-closed TOTP repair is locally verified; fresh GitHub checks and exact-head review are still required.",
+    "failure_reason": "Exact-head review found four external-human authority fields were not exact-bound to the immutable OWNER record. The same-scope fail-closed repair is locally verified; fresh GitHub checks and exact-head review are still required.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -93037,7 +93037,8 @@
       {"at": "2026-07-16T11:26:42Z", "from": "review_fix_local_verified", "to": "review_fix_local_verified", "note": "Head 49de7cc66c8ec09f0fcf95bab8d3488aa5f45e36 passed all nine checks, then exact-head review raised a second valid P2: rehashed source rows were not compared with the immutable PR48 snapshot. The service now reconstructs exact review/source rows from the locked snapshot file and rejects substitution even when source, permission, release, payload and sidecar hashes are all recomputed. PR49 passes 10 / 150 and related PR41/43/47/48/49 passes 62 / 8625; Pint, PHP syntax and git diff checks pass. Fresh checks/review remain required; package disposition and zero controlled mutations are unchanged."},
       {"at": "2026-07-16T11:35:53Z", "from": "review_fix_local_verified", "to": "rebased_local_verified_github_checks_pending", "note": "Head 246ee5edaac1cb1d39550c539f4425070b01fee0 passed all nine checks after both P2 fixes, but PR3143 advanced main to de038bea461ede440e1c6289f2af8e74930cbeb7 before merge. All twelve PR49 commits rebased without conflict; the source-lock fix is now 956a07e603f9247f0d6dceb28074ce991fbd7c6c. Post-rebase PR49 plus the complete runtime-freeze classifier pass 368 / 889, Pint and deterministic package validation pass, exact 16-file scope remains unchanged, and the package remains zero-media HOLD with zero controlled mutations. Force-with-lease push, fresh nine checks and exact-head review are required."},
       {"at": "2026-07-16T11:40:03Z", "from": "rebased_local_verified_github_checks_pending", "to": "review_fix_local_verified", "note": "Exact-head review on 246ee5edaac1cb1d39550c539f4425070b01fee0 raised two further valid P2s: rollback rows were not reconstructed from runtime baselines, and a missing actions object could omit zero-write evidence. Commit 0ceb72b340b945e4ba6d36d86372cf3299c4d01e binds exact rollback targets to the observation-bound runtime rows and requires the complete read-only/zero-mutation action set. Fully rehashed regressions still fail closed; PR49 passes 12 / 162, related PR41/43/47/48/49 passes 64 / 8637, Pint, syntax, deterministic package hashes, git diff checks and exact 16-file scope pass. Fresh GitHub checks/review remain required; package disposition and controlled-mutation boundary are unchanged."},
-      {"at": "2026-07-16T11:53:49Z", "from": "review_fix_local_verified", "to": "review_fix_local_verified", "note": "Head 51c57762688afb73fe6235648b8d7e589ac6610c passed all nine checks, then exact-head review raised a fifth valid P2: production admin_user:1 is active but totp_enrolled=false, so the reviewer could not access TOTP-protected CMS/preview surfaces. Reviewer permission and readiness now require observed TOTP enrollment, and the live preflight applies the same gate when admin TOTP is enabled. Current package remains HOLD on both TOTP and missing unique media with new release 2d9d8aa21b00673e9d6ee5e9f118239d103e06be32a076f12318d868d08757d7, payload 2671d5d2df4b979dc8b2b34428ef66f7bb92ec9785175e6785e141d28d10f1a4 and file 7743f0aff03ded62d8151ebef38b0b9b296328e00025f1725f9dbe4fcf123407. PR49 passes 13 / 180 and related tests pass 65 / 8655; no administrator, MFA, CMS, media or public mutation occurred."}
+      {"at": "2026-07-16T11:53:49Z", "from": "review_fix_local_verified", "to": "review_fix_local_verified", "note": "Head 51c57762688afb73fe6235648b8d7e589ac6610c passed all nine checks, then exact-head review raised a fifth valid P2: production admin_user:1 is active but totp_enrolled=false, so the reviewer could not access TOTP-protected CMS/preview surfaces. Reviewer permission and readiness now require observed TOTP enrollment, and the live preflight applies the same gate when admin TOTP is enabled. Current package remains HOLD on both TOTP and missing unique media with new release 2d9d8aa21b00673e9d6ee5e9f118239d103e06be32a076f12318d868d08757d7, payload 2671d5d2df4b979dc8b2b34428ef66f7bb92ec9785175e6785e141d28d10f1a4 and file 7743f0aff03ded62d8151ebef38b0b9b296328e00025f1725f9dbe4fcf123407. PR49 passes 13 / 180 and related tests pass 65 / 8655; no administrator, MFA, CMS, media or public mutation occurred."},
+      {"at": "2026-07-16T12:04:56Z", "from": "review_fix_local_verified", "to": "review_fix_local_verified", "note": "Head 131a747b6a33532b5875e57b1066151cb4c2786e passed all nine checks, then exact-head review raised a sixth valid P2: the review record bound comment id, time and phrase hash but did not exact-compare source, PR number, author login or OWNER association. Commit 3b0e307a911703eb41717bb23e351b72c10c4aef binds all four fields to the immutable OWNER authority and adds a fully rehashed author-login substitution regression. PR49 passes 14 / 186 and related PR41/43/47/48/49 passes 66 / 8661; Pint, syntax, deterministic package validation, git diff and exact 16-file scope pass. Package hashes, dual HOLD blockers and zero controlled mutations are unchanged."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50": {
