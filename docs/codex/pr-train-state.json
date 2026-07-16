@@ -96017,8 +96017,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "2e13f24815fcec609acbcf40639f4be58883379b",
+    "status": "merged_and_cleaned",
+    "commit_sha": "105cc06faf88a66dfb9108491aaf2712d50f3b1a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3144",
     "checks": {
       "dependency": {
@@ -96054,12 +96054,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-16T12:41:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -96111,9 +96111,84 @@
         "at": "2026-07-16T12:34:04Z",
         "status": "ready_to_merge",
         "note": "Exact review-fix head 2e13f24815fcec609acbcf40639f4be58883379b passed all nine required checks, PR is CLEAN/MERGEABLE, and the only automated review thread is resolved. Bind commit_sha to this exact head and require one final fresh ledger-only cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T12:41:41Z",
+        "status": "merged_and_cleaned",
+        "note": "PR #3144 squash-merged at 105cc06faf88a66dfb9108491aaf2712d50f3b1a after all nine required checks passed. origin/main containment, clean main sync, local and remote task-branch deletion, and post-merge focused 24/521 revalidation are verified."
       }
     ],
-    "updated_at": "2026-07-16T12:34:04Z"
+    "updated_at": "2026-07-16T12:41:41Z"
+  },
+  "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E": {
+    "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-public-authority-v2-runtime-readback-22e",
+    "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E: add exact-SHA closeout, revalidation and rollback preflight",
+    "depends_on": [
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "Backend PR #3144 is MERGED at 105cc06faf88a66dfb9108491aaf2712d50f3b1a and frontend PR #1777 is MERGED at f6bc60ba70066ca04130cc5e55d950191d25742e; both repositories contain their merge commits and task branches are cleaned."
+      },
+      "focused_runtime_closeout": {
+        "status": "passed",
+        "evidence": "V205/V206/V223/V224 pass 27 tests / 591 assertions, including exact 116 import, private review bind, one atomic 116 promotion, zero-write rollback preflight with hypothetical restore fingerprint verification, cache warm/fresh, HMAC 116/0, canary-00 plus nine 12-page readbacks, command guards, and redacted artifact generation."
+      },
+      "cache_and_public_api": {
+        "status": "passed",
+        "evidence": "Read-model cache and Enneagram versioned active/LKG public API focused coverage pass 8 tests / 72 assertions; the exact Enneagram freeze-classifier case passes 1 test / 2 assertions."
+      },
+      "full_enneagram_v2": {
+        "status": "passed",
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 192 tests / 28597 assertions after the local heavy-test concurrency slot was free."
+      },
+      "static_and_scope": {
+        "status": "passed",
+        "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-16T13:09:18Z",
+        "status": "pending_dependency",
+        "note": "Registered from the explicit serial execution goal with 22C and cross-repository 22D as dependencies; SHA, PR, merge, and production execution facts start null/false."
+      },
+      {
+        "at": "2026-07-16T13:34:06Z",
+        "status": "implementation_in_progress",
+        "note": "Verified both dependencies merged and cleaned, then implemented only the formal 22E runtime capability. Focused runtime, cache, public API, and classifier checks pass; no deployment, production import, promotion, cache mutation, or PR23 action occurred."
+      },
+      {
+        "at": "2026-07-16T13:44:04Z",
+        "status": "local_validation_passed",
+        "note": "Final focused 27/591, cache/API 8/72, classifier 1/2, full Enneagram V2 192/28597, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks all pass. The only observed focused failure was corrected before this complete fail-fast rerun. No production or deploy action occurred."
+      }
+    ],
+    "updated_at": "2026-07-16T13:44:04Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
@@ -96122,8 +96197,11 @@
     "branch": "codex/enneagram-public-authority-v2-runtime-closeout-23",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23: record authorized rollout and 116-page public readback",
     "depends_on": [
-      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E",
       "separate_exact_sha_production_authorization"
     ],
     "status": "pending_production_authorization",
@@ -96132,7 +96210,7 @@
     "checks": {
       "dependency": {
         "status": "pending",
-        "evidence": "Requires merged PR22, merged 22B exact repaired package evidence, and separate exact-SHA production authorization; register-only."
+        "evidence": "22A-22D are merged and cleaned. Requires merged/green 22E, confirmed asynchronous backend/frontend deployments at exact SHAs, a completed private 116-row review register, a successful pre-readback, and separate authorization of the generated exact-SHA packet."
       }
     },
     "scope_validation": {
@@ -96150,14 +96228,19 @@
     "cms_mutation": true,
     "api_runtime_change": true,
     "publish_allowed": true,
-    "deploy_allowed": true,
+    "deploy_allowed": false,
     "transitions": [
       {
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_production_authorization",
         "note": "Registered only; do not start or perform production actions without separate exact-SHA authorization after PR22."
+      },
+      {
+        "at": "2026-07-16T13:34:06Z",
+        "status": "pending_production_authorization",
+        "note": "Dependency contract expanded to merged 22A-22D, pending 22E, and separate exact-SHA authorization. Allowed paths are now only runtime-closeout-23 artifacts and this state ledger. Manual deploy remains prohibited; GitHub Actions deployment is asynchronous."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-16T13:34:06Z"
   }
 }

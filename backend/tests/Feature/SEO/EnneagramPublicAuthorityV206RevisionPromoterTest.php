@@ -78,6 +78,15 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
                 ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.last_reviewed_at', '2026-07-15T12:00:00+00:00');
             $this->assertStringNotContainsString('Private Reviewer', (string) $public->getContent());
 
+            $databaseBeforeRollbackPreflight = $this->databaseFingerprint();
+            $rollbackPreflight = $this->promoter()->rollbackPreflight((string) $promoted['rollback_token']);
+            $this->assertSame('PASS_POINTER_SAFE_ROLLBACK_PREFLIGHT', $rollbackPreflight['status']);
+            $this->assertSame(116, $rollbackPreflight['current_pointer_verified_count']);
+            $this->assertSame(116, $rollbackPreflight['previous_pointer_verified_count']);
+            $this->assertSame(116, $rollbackPreflight['current_public_fingerprint_verified_count']);
+            $this->assertFalse($rollbackPreflight['writes_committed']);
+            $this->assertSame($databaseBeforeRollbackPreflight, $this->databaseFingerprint());
+
             $this->travelTo('2026-07-16 00:01:00');
             $rolledBack = $this->promoter()->rollback((string) $promoted['rollback_token']);
 

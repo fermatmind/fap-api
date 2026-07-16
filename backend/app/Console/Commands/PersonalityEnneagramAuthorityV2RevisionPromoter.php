@@ -16,6 +16,7 @@ final class PersonalityEnneagramAuthorityV2RevisionPromoter extends Command
         {--plan= : Reviewed JSON plan containing the complete 116-target targets array}
         {--preflight : Run a read-only pointer, hash, review-state, and public-fingerprint preflight}
         {--promote : Atomically promote the complete approved 116-target working-revision batch}
+        {--rollback-preflight : Validate a signed rollback token and all current/previous pointers without writing}
         {--rollback-token= : Atomically restore the previous published revisions using a signed rollback token}
         {--rollback-token-file= : Read a large signed rollback token from this file instead of process arguments}
         {--confirm-preflight-fingerprint= : Exact preflight fingerprint; required for promotion}
@@ -50,12 +51,21 @@ final class PersonalityEnneagramAuthorityV2RevisionPromoter extends Command
     {
         $preflight = (bool) $this->option('preflight');
         $promote = (bool) $this->option('promote');
+        $rollbackPreflight = (bool) $this->option('rollback-preflight');
         $rollbackToken = $this->rollbackToken(
             trim((string) $this->option('rollback-token')),
             trim((string) $this->option('rollback-token-file')),
         );
-        if (((int) $preflight + (int) $promote + (int) ($rollbackToken !== '')) !== 1) {
-            throw new RuntimeException('Exactly one of --preflight, --promote, or --rollback-token is required.');
+        $rollback = $rollbackToken !== '' && ! $rollbackPreflight;
+        if (((int) $preflight + (int) $promote + (int) $rollbackPreflight + (int) $rollback) !== 1) {
+            throw new RuntimeException('Exactly one of --preflight, --promote, --rollback-preflight, or rollback execution is required.');
+        }
+        if ($rollbackPreflight) {
+            if ($rollbackToken === '') {
+                throw new RuntimeException('--rollback-preflight requires --rollback-token or --rollback-token-file.');
+            }
+
+            return $promoter->rollbackPreflight($rollbackToken);
         }
 
         if ($rollbackToken !== '') {
@@ -186,6 +196,9 @@ final class PersonalityEnneagramAuthorityV2RevisionPromoter extends Command
             'target_count',
             'promoted_count',
             'rolled_back_count',
+            'current_pointer_verified_count',
+            'previous_pointer_verified_count',
+            'rollback_plan_fingerprint',
             'preflight_fingerprint',
             'rollback_token_sha256',
             'writes_committed',
