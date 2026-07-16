@@ -634,6 +634,54 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_visible_evidence_authority_projection_matches_public_v2_canonical_shape(): void
+    {
+        $projection = app(EnneagramPublicAuthorityV224RuntimeReadback::class)
+            ->canonicalVisibleEvidenceForAuthority([
+                'sources' => [[
+                    'id' => ' source-1 ',
+                    'title' => ' Evidence source ',
+                    'author_or_organization' => ' Evidence organization ',
+                    'year' => 2021,
+                    'source_type' => 'peer_reviewed_research',
+                    'doi' => '10.1000/test.1',
+                    'public_url' => 'https://example.com/evidence',
+                    'accessed_at' => '2026-07-15',
+                    'claim_ids' => [' claim-1 ', 'claim-1', ''],
+                    'limitation' => ' Instrument-specific evidence. ',
+                ]],
+                'claim_mapping' => [[
+                    'claim_id' => ' claim-1 ',
+                    'source_ids' => [' source-1 ', 'missing-source', 'source-1'],
+                    'limitation' => ' Bounded claim. ',
+                ]],
+                'limitations' => [' General limitation. ', '', 'General limitation.'],
+                'visible_evidence_eligible' => true,
+            ]);
+
+        $this->assertSame([
+            'sources' => [[
+                'id' => 'source-1',
+                'title' => 'Evidence source',
+                'author_or_organization' => 'Evidence organization',
+                'year' => 2021,
+                'source_type' => 'peer_reviewed_research',
+                'doi' => '10.1000/test.1',
+                'public_url' => 'https://example.com/evidence',
+                'accessed_at' => (new \DateTimeImmutable('2026-07-15'))->format(DATE_ATOM),
+                'claim_ids' => ['claim-1'],
+                'limitation' => 'Instrument-specific evidence.',
+            ]],
+            'claim_mapping' => [[
+                'claim_id' => 'claim-1',
+                'source_ids' => ['source-1'],
+                'limitation' => 'Bounded claim.',
+            ]],
+            'limitations' => ['General limitation.'],
+            'eligible' => true,
+        ], $projection);
+    }
+
     public function test_post_readback_rejects_partial_visible_evidence_against_current_authority(): void
     {
         $this->seedPublishedEstate();
@@ -641,8 +689,24 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
             $asset->forceFill(['authority_json' => [
                 'sources' => [
-                    ['id' => 'source-1', 'title' => 'First visible evidence source'],
-                    ['id' => 'source-2', 'title' => 'Second visible evidence source'],
+                    [
+                        'id' => 'source-1',
+                        'title' => 'First visible evidence source',
+                        'author_or_organization' => 'Evidence organization',
+                        'year' => 2021,
+                        'source_type' => 'peer_reviewed_research',
+                        'accessed_at' => '2026-07-15',
+                        'claim_ids' => ['claim-1'],
+                    ],
+                    [
+                        'id' => 'source-2',
+                        'title' => 'Second visible evidence source',
+                        'author_or_organization' => 'Evidence organization',
+                        'year' => 2022,
+                        'source_type' => 'official_documentation',
+                        'accessed_at' => '2026-07-15',
+                        'claim_ids' => ['claim-2'],
+                    ],
                 ],
                 'claim_mapping' => [
                     ['claim_id' => 'claim-1', 'source_ids' => ['source-1']],
@@ -677,7 +741,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $report = $this->releaseReport();
         foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
             $asset->forceFill(['authority_json' => [
-                'sources' => [['id' => 'source-1', 'title' => 'Visible evidence source']],
+                'sources' => [[
+                    'id' => 'source-1',
+                    'title' => 'Visible evidence source',
+                    'author_or_organization' => 'Evidence organization',
+                    'year' => 2021,
+                    'source_type' => 'peer_reviewed_research',
+                    'accessed_at' => '2026-07-15',
+                    'claim_ids' => ['claim-1'],
+                ]],
                 'claim_mapping' => [['claim_id' => 'claim-1', 'source_ids' => ['source-1']]],
                 'limitations' => [
                     'This evidence describes a bounded observation pattern.',
@@ -1486,14 +1558,22 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     ? [['key' => 'stale', 'title' => 'Stale section', 'body_md' => 'Stale cached section body.']]
                     : (is_array($asset->content_sections_json) ? $asset->content_sections_json : []);
                 $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
-                $visibleSources = $omitVisibleEvidence ? [] : array_values((array) ($authority['sources'] ?? []));
-                $visibleClaimMapping = $omitVisibleEvidence ? [] : (array) ($authority['claim_mapping'] ?? []);
-                $visibleLimitations = $omitVisibleEvidenceLimitations
-                    ? []
-                    : array_values((array) ($authority['limitations'] ?? []));
+                $visibleEvidence = app(EnneagramPublicAuthorityV224RuntimeReadback::class)
+                    ->canonicalVisibleEvidenceForAuthority($authority);
+                if ($omitVisibleEvidence) {
+                    $visibleEvidence = [
+                        'sources' => [],
+                        'claim_mapping' => [],
+                        'limitations' => [],
+                        'eligible' => false,
+                    ];
+                }
                 if ($partialVisibleEvidence) {
-                    $visibleSources = array_slice($visibleSources, 0, 1);
-                    $visibleClaimMapping = array_slice(array_values($visibleClaimMapping), 0, 1);
+                    $visibleEvidence['sources'] = array_slice((array) $visibleEvidence['sources'], 0, 1);
+                    $visibleEvidence['claim_mapping'] = array_slice((array) $visibleEvidence['claim_mapping'], 0, 1);
+                }
+                if ($omitVisibleEvidenceLimitations) {
+                    $visibleEvidence['limitations'] = [];
                 }
 
                 return Http::response([
@@ -1518,15 +1598,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'source_hash' => $stalePublicPayload ? str_repeat('f', 64) : $asset->source_hash,
                     ],
                     'personality_public_content_asset_v2' => [
-                        'visible_evidence' => [
-                            'sources' => $visibleSources,
-                            'claim_mapping' => $visibleClaimMapping,
-                            'limitations' => $visibleLimitations,
-                            'eligible' => ! $omitVisibleEvidence
-                                && ($authority['visible_evidence_eligible'] ?? false) === true
-                                && $visibleSources !== []
-                                && $visibleClaimMapping !== [],
-                        ],
+                        'visible_evidence' => $visibleEvidence,
                         'editorial_authority' => [
                             'review_state' => (string) $asset->review_state,
                             'reviewer' => null,

@@ -6,7 +6,9 @@ namespace App\Services\Enneagram\AuthorityV2;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\Personality\AuthorityV2\PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter;
+use DateTimeImmutable;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
@@ -293,16 +295,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             return;
         }
 
-        $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
-        $expectedSources = is_array($authority['sources'] ?? null)
-            ? array_values($authority['sources'])
-            : [];
-        $expectedClaimMapping = is_array($authority['claim_mapping'] ?? null)
-            ? array_values($authority['claim_mapping'])
-            : [];
-        $expectedLimitations = is_array($authority['limitations'] ?? null)
-            ? array_values($authority['limitations'])
-            : [];
+        $expected = $this->canonicalVisibleEvidenceForAuthority(
+            is_array($asset->authority_json) ? $asset->authority_json : [],
+        );
         $observedSources = is_array(data_get($v2, 'visible_evidence.sources'))
             ? array_values(data_get($v2, 'visible_evidence.sources'))
             : [];
@@ -312,14 +307,6 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $observedLimitations = is_array(data_get($v2, 'visible_evidence.limitations'))
             ? array_values(data_get($v2, 'visible_evidence.limitations'))
             : [];
-        $expected = [
-            'sources' => $expectedSources,
-            'claim_mapping' => $expectedClaimMapping,
-            'limitations' => $expectedLimitations,
-            'eligible' => ($authority['visible_evidence_eligible'] ?? false) === true
-                && $expectedSources !== []
-                && $expectedClaimMapping !== [],
-        ];
         $observed = [
             'sources' => $observedSources,
             'claim_mapping' => $observedClaimMapping,
@@ -329,6 +316,170 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if (! hash_equals($this->fingerprint($expected), $this->fingerprint($observed))) {
             $issues[] = 'api_visible_evidence_authority_mismatch';
         }
+    }
+
+    /** @internal @param array<string,mixed> $authority @return array<string,mixed> */
+    public function canonicalVisibleEvidenceForAuthority(array $authority): array
+    {
+        $sources = $this->canonicalEvidenceSources((array) ($authority['sources'] ?? []));
+        $claimMapping = $this->canonicalEvidenceClaimMapping(
+            (array) ($authority['claim_mapping'] ?? []),
+            array_fill_keys(array_column($sources, 'id'), true),
+        );
+
+        return [
+            'sources' => $sources,
+            'claim_mapping' => $claimMapping,
+            'limitations' => $this->canonicalEvidenceStringList((array) ($authority['limitations'] ?? [])),
+            'eligible' => ($authority['visible_evidence_eligible'] ?? false) === true
+                && $sources !== []
+                && $claimMapping !== [],
+        ];
+    }
+
+    /** @param array<int,mixed> $items @return list<array<string,mixed>> */
+    private function canonicalEvidenceSources(array $items): array
+    {
+        $sources = [];
+        $seen = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            $id = $this->firstNonEmptyEvidenceString($item['id'] ?? null);
+            $title = $this->firstNonEmptyEvidenceString($item['title'] ?? null);
+            $authorOrOrganization = $this->firstNonEmptyEvidenceString($item['author_or_organization'] ?? null);
+            $sourceType = $this->firstNonEmptyEvidenceString($item['source_type'] ?? null);
+            $year = (int) ($item['year'] ?? 0);
+            if ($id === null
+                || isset($seen[$id])
+                || $title === null
+                || $authorOrOrganization === null
+                || ! in_array($sourceType, PersonalityPublicContentAssetContract::SOURCE_TYPES, true)
+                || $year < 1800
+                || $year > (int) now()->year) {
+                continue;
+            }
+
+            $doi = $this->firstNonEmptyEvidenceString($item['doi'] ?? null);
+            if ($doi !== null && preg_match('/^10\.\d{4,9}\/[\-._;()\/:a-z0-9]+$/i', $doi) !== 1) {
+                $doi = null;
+            }
+            $seen[$id] = true;
+            $sources[] = [
+                'id' => $id,
+                'title' => $title,
+                'author_or_organization' => $authorOrOrganization,
+                'year' => $year,
+                'source_type' => $sourceType,
+                'doi' => $doi,
+                'public_url' => $this->publicEvidenceHttpsUrl($item['public_url'] ?? null),
+                'accessed_at' => $this->evidenceDateValue($item['accessed_at'] ?? null),
+                'claim_ids' => $this->canonicalEvidenceStringList((array) ($item['claim_ids'] ?? [])),
+                'limitation' => $this->firstNonEmptyEvidenceString($item['limitation'] ?? null),
+            ];
+        }
+
+        return $sources;
+    }
+
+    /**
+     * @param  array<int,mixed>  $items
+     * @param  array<string,bool>  $sourceIds
+     * @return list<array<string,mixed>>
+     */
+    private function canonicalEvidenceClaimMapping(array $items, array $sourceIds): array
+    {
+        $mapping = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            $claimId = $this->firstNonEmptyEvidenceString($item['claim_id'] ?? null);
+            $resolvedSourceIds = array_values(array_filter(
+                $this->canonicalEvidenceStringList((array) ($item['source_ids'] ?? [])),
+                static fn (string $sourceId): bool => isset($sourceIds[$sourceId]),
+            ));
+            if ($claimId === null || $resolvedSourceIds === []) {
+                continue;
+            }
+            $mapping[] = [
+                'claim_id' => $claimId,
+                'source_ids' => $resolvedSourceIds,
+                'limitation' => $this->firstNonEmptyEvidenceString($item['limitation'] ?? null),
+            ];
+        }
+
+        return $mapping;
+    }
+
+    /** @param array<int,mixed> $items @return list<string> */
+    private function canonicalEvidenceStringList(array $items): array
+    {
+        $values = [];
+        foreach ($items as $item) {
+            $value = $this->firstNonEmptyEvidenceString($item);
+            if ($value !== null) {
+                $values[] = $value;
+            }
+        }
+
+        return array_values(array_unique($values));
+    }
+
+    private function publicEvidenceHttpsUrl(mixed $value): ?string
+    {
+        $url = $this->firstNonEmptyEvidenceString($value);
+        if ($url === null || filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return null;
+        }
+        $parts = parse_url($url);
+        if (! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || (int) ($parts['port'] ?? 443) !== 443) {
+            return null;
+        }
+        $host = strtolower(trim((string) ($parts['host'] ?? '')));
+        if ($host === ''
+            || in_array($host, ['localhost', '127.0.0.1', '::1'], true)
+            || (filter_var($host, FILTER_VALIDATE_IP) !== false
+                && filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false)
+            || (filter_var($host, FILTER_VALIDATE_IP) === false
+                && filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === false)) {
+            return null;
+        }
+
+        return $url;
+    }
+
+    private function evidenceDateValue(mixed $value): ?string
+    {
+        $date = $this->firstNonEmptyEvidenceString($value);
+        if ($date === null) {
+            return null;
+        }
+        try {
+            return (new DateTimeImmutable($date))->format(DATE_ATOM);
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+
+    private function firstNonEmptyEvidenceString(mixed ...$values): ?string
+    {
+        foreach ($values as $value) {
+            if (! is_string($value) && ! is_numeric($value)) {
+                continue;
+            }
+            $normalized = trim((string) $value);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 
     /** @param array<string,mixed> $v1 @param array<string,mixed> $v2 @param list<string> $issues */
