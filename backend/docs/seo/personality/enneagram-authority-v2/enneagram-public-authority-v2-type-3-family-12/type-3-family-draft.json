@@ -1,0 +1,1842 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12",
+  "framework": "enneagram",
+  "asset_scope": {
+    "family": "type-3",
+    "expected_asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "counts_by_entity_type": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "identity_keys": [
+      "core_type:type-3",
+      "wing:3w2",
+      "wing:3w4",
+      "instinctual_subtype:type-3/self-preservation",
+      "instinctual_subtype:type-3/social",
+      "instinctual_subtype:type-3/one-to-one"
+    ]
+  },
+  "source_ledger_refs": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  },
+  "assets": [
+    {
+      "identity_key": "core_type:type-3",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "path": "/en/personality/enneagram/type-3",
+      "title": "Type Three: achievement, value, and a revisable adaptation hypothesis",
+      "answer_first": "Type Three is a traditional Enneagram hypothesis about attention returning to valued results, credible performance, and adapting presentation to what a setting rewards. Visible achievement cannot establish motive: targets, livelihood, competition, training, and assigned accountability can produce the same behavior.",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "Observe what counts as a valued result",
+          "body": "A Type Three hypothesis asks whether attention repeatedly moves toward the result, image, or standard that appears valuable in the current setting. Record who defines success and what changes when the audience changes; do not infer motive from speed, polish, ambition, or a job title alone."
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "Separate delivered performance from inferred worth",
+          "body": "List the task, formal incentive, private aim, and explanation given by the person. The same high-quality presentation may reflect craft, duty, financial pressure, competition, care for users, fear of penalties, or an achievement-and-value concern."
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "Compare choice, feedback, and setbacks",
+          "body": "In decisions, note which result becomes decisive; in feedback, note whether usefulness or recognition changes the response; after a setback, note whether the person revises the plan, hides the miss, seeks learning, or disengages. One event does not establish a stable pattern."
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "Hold execution strengths beside tradeoffs",
+          "body": "Result attention can support prioritization, momentum, clear communication, and translating goals into action. Tradeoffs may appear when inconvenient data is minimized, rest is treated as wasted time, presentation outruns substance, or self-evaluation narrows to the latest score."
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "Use work and relationship examples without prediction",
+          "body": "At work, compare a team lead who adjusts a proposal to the decision criteria with a colleague following an explicit rubric. In a relationship, compare sharing an accomplishment for connection with managing an impression. These examples predict neither performance nor compatibility."
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "Compare wings and common mistypes",
+          "body": "The 3w2 hypothesis adds relational visibility and useful connection; 3w4 adds distinctive craft and individual expression. Common mistypes include One standards, Two approval-seeking, Six duty, Seven opportunity scanning, status-conditioned behavior, and ordinary adaptation to competitive environments."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use private effort and unrewarded truth as tests",
+          "body": "A counterexample weakens the Type Three hypothesis when effort remains steady without an audience, the person reports failure plainly despite reputational cost, or metrics matter only because a role requires them. Craft, survival, values, accountability, or learning may explain more."
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "Keep the hypothesis voluntary and non-predictive",
+          "body": "Use this page to compare attention, incentives, feedback, and counterexamples. It is not a basis for applicant screening, performance ratings, income forecasts, moral rank, health conclusions, relationship verdicts, ability judgments, or a permanent identity."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does strong performance establish Type Three?",
+          "answer": "No. Skill, practice, role accountability, financial need, competition, or a clear rubric may explain strong performance. Retain the hypothesis only after repeated attention patterns and disconfirming cases are compared."
+        },
+        {
+          "question": "Why record who defines success?",
+          "answer": "A target set by a manager, client, family, market, or the person themselves creates different explanations. The source of the standard helps separate compliance and resource pressure from an inferred value-and-achievement concern."
+        },
+        {
+          "question": "What should happen after a missed target?",
+          "answer": "Observe the account given, the data retained, the help requested, and whether presentation changes across audiences. A single recovery style is not diagnostic; compare it with risk, authority, fatigue, and real consequences."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Select one public deliverable, one private task, and one missed target with different audiences.",
+        "observable_signal": "Record the stated goal, success owner, incentive, evidence kept, presentation choice, and response after feedback.",
+        "page_specific_signal": "Compare whether effort and candor change when recognition is absent but the underlying task remains.",
+        "alternative_explanation": "Compare role accountability, income pressure, competition, craft standards, fatigue, and power with the Type Three hypothesis.",
+        "reflection_prompt": "Name the event that most weakens an achievement-and-value explanation and state what alternative currently fits better."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English Type Three core draft was composed around metric ownership, audience shifts, and recovery after missed targets, independently of the Chinese page's role-transition sequence.",
+        "outline": [
+          "answer_first",
+          "motivation_attention",
+          "behavior_motive",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "work_relationship_examples",
+          "wings_mistypes",
+          "counterexample",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "who defines the score before work begins",
+          "whether presentation changes while the evidence stays constant",
+          "what is reported when a missed target carries reputational cost"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are valued results and credible performance?",
+          "What are targets livelihood and competition?",
+          "What are visible achievement and presentation?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are valued results and credible performance?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are targets livelihood and competition?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are visible achievement and presentation?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Achievement behavior may arise from incentives, livelihood, training, competition, or assigned accountability rather than type.",
+          "The traditional center language is a conceptual comparison only and does not establish a bodily mechanism."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/wings/3w2",
+        "/en/personality/enneagram/wings/3w4",
+        "/en/personality/enneagram/type-3/instincts/self-preservation",
+        "/en/personality/enneagram/type-3/instincts/social",
+        "/en/personality/enneagram/type-3/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "core_type:type-3",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "path": "/zh/personality/enneagram/type-3",
+      "title": "第三型：从目标、认可与情境适配提出可修正假设",
+      "answer_first": "第三型是一种传统九型观察假设：注意力可能反复回到可见成果、被认可的价值，以及如何适配当前情境的评价标准。完成目标本身不能证明动机；岗位责任、生计压力、训练、竞赛和资源限制都可能产生相同行为。",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "先追踪评价标准如何进入注意力",
+          "body": "记录一项任务开始前，谁定义了“做得好”、什么结果被优先看见、换了受众后哪些表达发生变化。第三型假设关注反复出现的取向，但不能从忙碌、精干、升职或表达流畅直接推断人格动机。"
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "把成绩与价值感推断分开",
+          "body": "同一份高分答卷可能来自兴趣、纪律、奖学金条件、家庭期待、同伴竞争或对失败成本的现实判断。分别记录任务要求、外部奖励、本人陈述和无人监督时的选择，再决定是否保留成就与价值假设。"
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "对照选择、反馈和受挫后的处理",
+          "body": "做决定时看哪个结果最终胜出；收到反馈时看对内容、认可和面子的反应是否不同；受挫后看是否如实保留数据、重新排序、寻求帮助或只调整说法。一次事件不足以建立稳定模式。"
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "同时呈现推进力与代价",
+          "body": "目标导向可能帮助拆解任务、协调资源、清楚汇报并及时交付。代价可能出现在忽略不利证据、把休息等同于落后、包装快于实质，或只用最近一次排名评价自己；这些都需要具体情境证据。"
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "用跨情境例子而非结果承诺",
+          "body": "工作中，可比较按评审标准重写方案与为了避免处罚而加班；亲密关系中，可比较分享成果以建立连接与根据对方反应管理形象。例子只用于提问，不能预测绩效、收入或关系结果。"
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "比较翼型与常见混淆",
+          "body": "3w2 假设强调关系可见度与对他人有用，3w4 假设强调独特作品与个人表达。还应比较第一型标准、第六型尽责、第七型机会导向、家庭上升压力、组织排名制度，以及任何人在竞争环境中的正常适配。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用无观众努力与如实报错反证",
+          "body": "若没有观众时仍按同一质量标准工作，声誉受损时仍主动呈现失败数据，或指标只在岗位要求内重要，第三型假设就应减弱。工艺、责任、生计、安全和学习目标可能解释得更好。"
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "保持自愿、可撤回和非预测",
+          "body": "本页只支持比较注意力、激励、反馈和反例，不用于招聘筛选、绩效定级、收入预测、道德排序、健康结论、伴侣判断、能力盖章或固定身份。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "会做目标管理就能判断第三型吗？",
+          "answer": "不能。项目制度、考试要求、经济压力和训练都能塑造目标管理。需要跨情境追踪评价标准、本人解释和反例，才能把类型当作暂时工作假设，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "为什么要区分公开任务和私下任务？",
+          "answer": "两者的受众、奖励和风险不同。保持任务难度接近，比较投入、如实程度和表达变化，能减少把监督效应或声誉成本误写成人格动机，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "面对失败时应该记录什么？",
+          "answer": "记录原始证据是否保留、向谁说明、是否寻求帮助、如何重新定目标，以及权力与现实损失。不要用一次隐藏或一次坦白给人定型，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一次公开汇报、一次无人关注的维护工作和一次未达目标，确保三件事的责任边界清楚，同时明确任务责任、受众、现实后果与可拒绝条件。",
+        "observable_signal": "逐项记录目标来源、现实奖励、原始数据、受众、表达方式、求助动作和后续修正，同时记录任务证据、受众变化、现实后果与一个反例。",
+        "page_specific_signal": "重点比较没有认可时是否仍投入，以及声誉受损时是否仍完整报告不利信息，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。",
+        "alternative_explanation": "对照岗位考核、生计压力、家庭期待、竞赛规则、专业训练、疲劳与资源差异，还要说明权力、资源、奖励和岗位约束如何改变观察。",
+        "reflection_prompt": "写出最能削弱第三型解释的一件事，并说明目前更合理的替代解释，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第三型核心页围绕换岗前后、公开汇报与无人看见的任务分别构思，没有翻译英文页的指标所有权顺序。",
+        "outline": [
+          "情境入口",
+          "use_boundary",
+          "counterexample",
+          "wings_mistypes",
+          "work_relationship_examples",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "motivation_attention",
+          "behavior_motive",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "换受众但证据不变时表达如何调整，并记录任务责任、现实后果与至少一个可反驳观察",
+          "没有排名与表扬时任务是否继续，并记录任务责任、现实后果与至少一个可反驳观察",
+          "目标未达且面临声誉成本时哪些数据被保留，并记录任务责任、现实后果与至少一个可反驳观察"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是可见成果吗？",
+          "什么是岗位责任吗？",
+          "什么是情境的评价标准吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是可见成果吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是岗位责任吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是情境的评价标准吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "目标行为也可能来自考核、生计、训练、竞赛或明确责任，不能直接归因为类型。",
+          "传统中心语言只用于概念比较，不描述身体机制。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/wings/3w2",
+        "/zh/personality/enneagram/wings/3w4",
+        "/zh/personality/enneagram/type-3/instincts/self-preservation",
+        "/zh/personality/enneagram/type-3/instincts/social",
+        "/zh/personality/enneagram/type-3/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:3w2",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "3w2",
+      "path": "/en/personality/enneagram/wings/3w2",
+      "title": "3w2: relational visibility as a core-first wing hypothesis",
+      "answer_first": "The 3w2 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Two-adjacent connection, usefulness, and audience response. Warm presentation or networking cannot establish a wing because service roles, sales incentives, and collaboration norms can look the same.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep valued results at the core",
+          "body": "Begin with Type Three attention to credible results, then ask whether connection and usefulness consistently shape how those results are pursued. Sociability without recurring result attention may reflect temperament, team norms, customer duty, or learned communication."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Contrast 3w2 with 3w4 and Two",
+          "body": "Compared with 3w4 distinctive craft, 3w2 may emphasize accessible presentation and relational reach. Compared with Two, the proposed core remains the result and its recognized value rather than another person's need or connection itself."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe credit, introductions, and no-response work",
+          "body": "Compare a shared win, an introduction that creates no return, and a deliverable whose audience gives no response. Record whether relationship effort supports the task, becomes the success measure, or disappears when it carries no visible value."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use quiet delivery and non-strategic warmth as tests",
+          "body": "The hypothesis weakens when the person consistently chooses quiet craft over relational reach, offers warmth without tracking usefulness or response, or networks only because the role requires it. A Two, role, or ordinary affiliation explanation may fit better."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test incentives and collaboration design",
+          "body": "Account management, fundraising, leadership, hospitality, and team-based rewards can require visible connection. Hold task and audience constant while comparing behavior outside the rewarded role and where credit allocation changes."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep relational visibility evidence limited",
+          "body": "Wing research is sparse, so 3w2 remains a secondary observation hypothesis. It cannot establish charisma, leadership ability, employability, moral worth, compatibility, or future success."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does persuasive networking establish 3w2?",
+          "answer": "No. Sales targets, fundraising duties, industry norms, or genuine sociability can explain networking. Look for Type Three result attention plus a recurring relational modifier and explicit counterexamples."
+        },
+        {
+          "question": "How does 3w2 differ from a Two hypothesis?",
+          "answer": "Hold the helpful act constant. A 3w2 hypothesis keeps the valued result and credible delivery central; a Two hypothesis may organize attention more directly around need, connection, and being useful."
+        },
+        {
+          "question": "What weakens the relational visibility hypothesis?",
+          "answer": "Warmth that continues without strategic value, networking limited to a job requirement, or a stable preference for private craft over audience reach would weaken it."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Choose one shared achievement, one useful introduction, and one contribution that receives no recognition.",
+        "observable_signal": "Record the success criterion, relationship action, credit distribution, audience response, and behavior after no return appears.",
+        "page_specific_signal": "Distinguish connection used to improve the result from connection pursued without performance value.",
+        "alternative_explanation": "Compare sales incentives, leadership duty, team rewards, hospitality norms, affiliation, and power differences.",
+        "reflection_prompt": "Identify where role design explains relational visibility better than a 3w2 modifier."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 3w2 page was authored around credit-sharing, useful introductions, and response after an unrewarded contribution, independently of the Chinese page's team-presentation sequence.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "how credit is shared after a visible team win",
+          "whether a useful introduction continues without return",
+          "what changes when an audience gives no response"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are valued results and audience response?",
+          "What are connection usefulness and presentation?",
+          "What are sales incentives and collaboration norms?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are valued results and audience response?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are connection usefulness and presentation?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are sales incentives and collaboration norms?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Relational visibility may arise from sales incentives, service duties, collaboration design, or ordinary sociability rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-3",
+        "/en/personality/enneagram/wings/3w4",
+        "/en/personality/enneagram/type-3/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:3w2",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "3w2",
+      "path": "/zh/personality/enneagram/wings/3w2",
+      "title": "3w2：以成果为核心、以关系可见度为修饰的翼型假设",
+      "answer_first": "3w2 是证据有限、以第三型为核心的传统翼型假设：对可见成果的关注，可能受到第二型相邻主题中的连接、对他人有用和受众回应所修饰。会经营关系并不能证明翼型，客户岗位、团队奖励和行业礼仪都可能产生相似表现。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "先确认成果取向，再观察关系修饰",
+          "body": "先看评价标准与交付结果是否反复进入注意力，再看连接和有用感如何改变推进方式。若只有热情、照顾或人脉行为，却没有稳定的成果取向，应优先考虑岗位、亲和性或第二型假设。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "比较 3w2、3w4 与第二型",
+          "body": "3w2 可能更重视受众能否理解、关系能否推动成果；3w4 更偏向作品辨识度与个人表达。与第二型相比，3w2 假设仍把被认可的结果放在核心，而不是把需要与连接本身放在核心。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "观察署名、引荐和无回报支持",
+          "body": "选择一次团队成果署名、一次跨部门引荐、一次没有感谢或回报的支持。记录关系动作是否服务任务、是否变成成功标准，以及回报消失后行为是否改变。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用不计价值的连接与安静交付反证",
+          "body": "若连接在没有可见价值时仍稳定存在，经营关系只发生于岗位要求，或当事人反复选择安静打磨而非扩大受众，3w2 假设应减弱。亲和性、职业礼仪或第二型可能更合适。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "检验团队制度与客户激励",
+          "body": "客户成功、销售、招聘、公益筹款和管理岗位会奖励可见连接。固定任务难度，比较岗位外行为、署名规则变化和权力差异，避免把制度塑形误写成翼型。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "把关系可见度保留为次级假设",
+          "body": "翼型研究有限，3w2 只能作为次级观察假设。它不能证明领导力、人缘、录用价值、道德水平、关系适配或未来成就。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "擅长维护客户就一定是 3w2 吗？",
+          "answer": "不一定。客户目标、服务规范、绩效提成和沟通训练都能解释这种行为。还需要看到第三型成果取向与稳定的关系修饰，并主动寻找反例，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "怎样区分 3w2 与第二型？",
+          "answer": "保持同一个帮助行为不变，比较注意力落点。3w2 假设仍围绕可信成果与评价标准；第二型假设更可能围绕对方需要、连接和有用角色，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "什么情况会削弱 3w2 假设？",
+          "answer": "关系经营只在岗位内出现、没有策略价值时温暖仍完全不变，或长期偏好无人关注的作品打磨，都应让关系修饰解释下降，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "选择一次团队署名、一次跨部门引荐和一次没有得到回应的支持行为，同时明确任务责任、受众、现实后果与可拒绝条件。",
+        "observable_signal": "记录成功标准、关系动作、署名分配、受众回应，以及没有回报后的后续选择，同时记录任务证据、受众变化、现实后果与一个反例。",
+        "page_specific_signal": "区分为了改善结果而建立连接，与不依赖成果价值的普通亲近，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。",
+        "alternative_explanation": "比较客户岗位、销售提成、团队奖励、组织礼仪、亲和性和权力差异，还要说明权力、资源、奖励和岗位约束如何改变观察。",
+        "reflection_prompt": "指出哪件事更像制度要求而不是 3w2 修饰，并下调假设强度，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 3w2 页从团队署名、跨部门引荐和无人回应的支持行为展开，独立于英文页的账户管理例子。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "counterexample",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "core_first_modifier",
+          "observable_situations",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "团队成果署名变化时如何回应，并记录任务责任、现实后果与至少一个可反驳观察",
+          "引荐没有回报后是否继续，并记录任务责任、现实后果与至少一个可反驳观察",
+          "受众不回应时关系动作是否改变，并记录任务责任、现实后果与至少一个可反驳观察"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是可见成果吗？",
+          "什么是受众回应吗？",
+          "什么是团队奖励吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是可见成果吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是受众回应吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是团队奖励吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "关系可见度也可能来自客户岗位、团队激励、行业礼仪或普通亲和性，而不是翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-3",
+        "/zh/personality/enneagram/wings/3w4",
+        "/zh/personality/enneagram/type-3/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:3w4",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "3w4",
+      "path": "/en/personality/enneagram/wings/3w4",
+      "title": "3w4: distinctive craft as a core-first wing hypothesis",
+      "answer_first": "The 3w4 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Four-adjacent distinctiveness, personal expression, and comparison with an ideal. A polished signature style cannot establish a wing because specialization, portfolio demands, and aesthetic training can produce it.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep valued delivery at the core",
+          "body": "Begin with Type Three result attention, then ask whether distinctiveness and personal expression repeatedly shape what counts as a credible result. Originality without result tracking may reflect craft interest, Four themes, expertise, or a field that rewards novelty."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Contrast 3w4 with 3w2 and Four",
+          "body": "Compared with 3w2 relational reach, 3w4 may emphasize a recognizable body of work. Compared with Four, the proposed core remains delivering and demonstrating value rather than preserving identity or emotional meaning as the central concern."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe revision under anonymous and named review",
+          "body": "Compare the same work under anonymous review, public attribution, and a restrictive brief. Record which revisions improve evidence, which preserve a signature, and which respond mainly to anticipated recognition."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use generic excellence and unmarketed exploration as tests",
+          "body": "The hypothesis weakens when the person prefers standardized excellence without distinctiveness, explores privately with no need to convert work into a valued result, or adopts a signature only because a portfolio brief requires it."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test field norms and specialization",
+          "body": "Design, research, writing, product, and performance fields may reward novelty and a recognizable portfolio. Compare other settings, access to resources, client constraints, training, and career stage before retaining a wing explanation."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep distinctive craft evidence limited",
+          "body": "Wing evidence is sparse. The 3w4 hypothesis assigns no creativity score, artistic identity, employability, superiority, mental-health meaning, or prediction about achievement."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does a signature style establish 3w4?",
+          "answer": "No. Training, specialization, branding requirements, or a client brief may create a signature style. The hypothesis needs Type Three result attention plus repeated distinctiveness and counterexamples."
+        },
+        {
+          "question": "How does 3w4 differ from a Four hypothesis?",
+          "answer": "Hold the expressive work constant. A 3w4 hypothesis keeps credible delivery and demonstrated value central; a Four hypothesis may emphasize identity, meaning, and emotional congruence more directly."
+        },
+        {
+          "question": "What weakens the distinctive-craft hypothesis?",
+          "answer": "Standardized work preferred across settings, private exploration with no conversion to a valued outcome, or distinctiveness appearing only under portfolio rules would weaken it."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "Choose one anonymous review, one named portfolio item, and one restrictive client brief involving comparable work.",
+        "observable_signal": "Record the success criterion, revision reason, evidence improved, signature retained, audience known, and attribution available.",
+        "page_specific_signal": "Separate revisions that improve the result from revisions mainly preserving recognizability.",
+        "alternative_explanation": "Compare professional training, portfolio rules, client demand, field novelty, resources, and career stage.",
+        "reflection_prompt": "Name where specialization explains distinctiveness without a 3w4 modifier."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 3w4 page was composed around revision choices, anonymous review, and signature work, independently of the Chinese page's portfolio and client-brief sequence.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "which revisions remain under anonymous review",
+          "whether a signature survives a restrictive brief",
+          "how private exploration becomes or does not become a valued deliverable"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are valued results and personal expression?",
+          "What are distinctiveness ideal and comparison?",
+          "What are specialization and aesthetic training?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are valued results and personal expression?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are distinctiveness ideal and comparison?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are specialization and aesthetic training?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Distinctive work may arise from specialization, portfolio requirements, aesthetic training, or client demand rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-3",
+        "/en/personality/enneagram/wings/3w2",
+        "/en/personality/enneagram/type-3/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:3w4",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "3w4",
+      "path": "/zh/personality/enneagram/wings/3w4",
+      "title": "3w4：以成果为核心、以独特作品为修饰的翼型假设",
+      "answer_first": "3w4 是证据有限、以第三型为核心的传统翼型假设：对可见成果的关注，可能受到第四型相邻主题中的独特性、个人表达和理想比较所修饰。作品有辨识度不能证明翼型，专业分工、作品集要求和审美训练也会产生相似结果。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "先保留成果核心，再检验独特修饰",
+          "body": "先观察交付和被认可的价值是否持续重要，再看独特表达如何改变成功标准。若只有审美探索而没有成果追踪，应优先比较专业兴趣、第四型主题、训练路径或行业创新要求。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "对照 3w4、3w2 与第四型",
+          "body": "3w4 可能更强调作品辨识度与个人表达，3w2 更强调受众连接和关系推动。与第四型相比，3w4 假设仍把交付并证明价值放在核心，而不是把身份意义本身放在核心。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "比较匿名评审、公开署名和客户限制",
+          "body": "选取难度接近的作品，分别观察匿名评审、公开署名和限制严格的客户要求。记录哪些修改改善证据，哪些保留个人印记，哪些主要回应预期认可。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用标准化优秀与不转化探索反证",
+          "body": "若当事人在不同场景都偏好标准化优秀，私人探索无需变成可见成果，或个人风格只在作品集规则下出现，3w4 假设就应减弱。专业化与行业规范可能更合适。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "检验专业训练、资源与职业阶段",
+          "body": "设计、研究、写作和表演领域会奖励新颖与辨识度。还要比较培训背景、客户约束、可用资源、职业阶段和平台算法，避免把环境奖励写成翼型。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "把独特作品限定为证据有限假设",
+          "body": "翼型支持证据有限。3w4 不能用于评定创造力、艺术身份、录用价值、优越性、心理健康或未来成就。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "作品很有个人风格就能判断 3w4 吗？",
+          "answer": "不能。专业训练、品牌规范、客户要求和长期分工都能形成风格。还需看到第三型成果核心、独特修饰的跨情境重复和明确反例，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "怎样区分 3w4 与第四型？",
+          "answer": "保持同一件表达性作品不变，比较什么最重要。3w4 假设仍重视可信交付与价值证明；第四型假设可能更直接围绕身份、意义和情感一致，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "哪些观察会削弱独特作品假设？",
+          "answer": "持续选择标准化方案、私人探索不需要转化为成果，或只有作品集要求出现辨识度，都会让 3w4 解释减弱，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 4,
+        "context": "选择一次匿名评审、一个公开作品集项目和一个限制严格的客户任务，控制难度尽量接近，同时明确任务责任、受众、现实后果与可拒绝条件。",
+        "observable_signal": "记录成功标准、每次修改的理由、改进的证据、保留的个人印记、受众和署名条件，同时记录任务证据、受众变化、现实后果与一个反例。",
+        "page_specific_signal": "区分提升结果质量的修改与主要维护辨识度的修改，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。",
+        "alternative_explanation": "比较专业训练、作品集规则、客户需求、平台奖励、资源和职业阶段，还要说明权力、资源、奖励和岗位约束如何改变观察。",
+        "reflection_prompt": "指出哪项独特性可由专业化充分解释，并据此下调 3w4 假设，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 3w4 页围绕作品集筛选、客户限制与匿名评审分别设计，未沿用英文页的署名修订顺序。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "counterexample",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "core_first_modifier",
+          "observable_situations",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "匿名评审时哪些个人印记仍保留，并记录任务责任、现实后果与至少一个可反驳观察",
+          "客户限制增加后成功标准如何改变，并记录任务责任、现实后果与至少一个可反驳观察",
+          "私人探索是否必须转化为可见成果，并记录任务责任、现实后果与至少一个可反驳观察"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是可见成果吗？",
+          "什么是个人表达吗？",
+          "什么是作品集要求吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是可见成果吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是个人表达吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是作品集要求吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "独特作品也可能来自专业分工、作品集要求、审美训练、客户需求或平台奖励，而不是翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-3",
+        "/zh/personality/enneagram/wings/3w2",
+        "/zh/personality/enneagram/type-3/instincts/one-to-one"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/self-preservation",
+      "path": "/en/personality/enneagram/type-3/instincts/self-preservation",
+      "title": "Self-preservation Type Three: reliable output as a matched-comparison hypothesis",
+      "answer_first": "Self-preservation Type Three is a traditional, evidence-limited hypothesis that achievement attention may appear through dependable output, material continuity, and reduced emphasis on public display. Reliability cannot establish subtype because workload, financial risk, caregiving, and operational roles can require the same pattern.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Treat reliable achievement as a traditional hypothesis",
+          "body": "The traditional description proposes that Type Three result attention may be expressed through keeping work, resources, and responsibilities functioning rather than displaying rank. This is a comparison prompt, not a discovered mechanism."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match task, risk, and visibility",
+          "body": "Compare two tasks with similar difficulty and consequence: one publicly credited and one operationally essential but unseen. Record delivery, error reporting, resource protection, and whether reliability remains valuable after recognition is removed."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Use instinct language without mechanism claims",
+          "body": "Self-preservation labels organize observable priorities such as continuity, workload, and tangible risk. They are not evidence about bodily mechanisms, biological categories, or a cause that determines behavior."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow less visible achievement presentation",
+          "body": "A person may downplay public ambition while tracking competence through uptime, savings, preparedness, or being the dependable one. That proposed countertype variation must be tested against real constraints rather than assumed."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test material constraints and role load",
+          "body": "Debt, unstable income, caregiving, operations work, migration, health access, and limited backup can make continuity rationally urgent. Compare periods where those constraints change before retaining subtype language."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use safe experimentation and visible recognition as tests",
+          "body": "The hypothesis weakens when reliability drops once no one sees it, resource attention appears only during a temporary crisis, or the person readily accepts operational uncertainty while consistently pursuing visible rank instead."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep matched observations non-predictive",
+          "body": "Instrument-specific evidence does not establish universal subtypes. This page cannot predict financial outcomes, job performance, health, risk tolerance, or suitability for responsibility."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does being dependable establish self-preservation Type Three?",
+          "answer": "No. Operations duty, caregiving, financial risk, or professional standards may require dependability. Use matched tasks and changed constraints before keeping the subtype hypothesis."
+        },
+        {
+          "question": "Why compare credited and uncredited work?",
+          "answer": "The comparison holds task value closer while changing visibility. It helps test whether reliable delivery remains central without recognition, though power, risk, and ownership still need separate recording."
+        },
+        {
+          "question": "What weakens this subtype hypothesis?",
+          "answer": "Reliability limited to a crisis, unseen maintenance that is repeatedly abandoned, or a stable preference for visible rank despite equal operational stakes would weaken it."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one credited deliverable and one unseen maintenance task with similar effort, plus a period when material risk changes.",
+        "observable_signal": "Record difficulty, consequence, ownership, visibility, resource exposure, error disclosure, and completion quality.",
+        "page_specific_signal": "Compare whether dependable output persists when public credit is removed but operational value stays constant.",
+        "alternative_explanation": "Compare workload, debt, caregiving, job design, migration, backup resources, and professional duty.",
+        "reflection_prompt": "State whether continuity attention survives the strongest environmental explanation and identify the clearest disconfirming event."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English self-preservation Type Three page was composed around maintenance work, resource continuity, and uncredited reliability, independently of the Chinese page's household-risk comparison.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "completion quality on unseen maintenance",
+          "error reporting when continuity is at risk",
+          "whether resource attention changes after material pressure eases"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are dependable output and material continuity?",
+          "What are public display and dependable output?",
+          "What are financial risk and operational roles?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are dependable output and material continuity?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are public display and dependable output?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are financial risk and operational roles?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Reliable output may arise from workload, financial risk, caregiving, operations duty, or limited backup rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-3",
+        "/en/personality/enneagram/wings/3w2",
+        "/en/personality/enneagram/wings/3w4"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/self-preservation",
+      "path": "/zh/personality/enneagram/type-3/instincts/self-preservation",
+      "title": "第三型自保副型：以稳定交付为线索的匹配比较假设",
+      "answer_first": "第三型自保副型是一种传统且证据有限的假设：成就注意力可能更多通过稳定交付、资源连续性和较少公开展示来表达。可靠不能证明副型；经济风险、照护责任、运维岗位和缺少替补都可能要求相同行为。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把稳定交付保留为传统描述",
+          "body": "传统描述提出，第三型成果取向可能通过维持工作、资源和责任的连续运行表达，而不是公开展示名次。这只是待比较的观察语言，不是已发现的原因。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配难度、后果和可见度",
+          "body": "选择难度与后果接近的一项公开成果和一项无人看见的后台维护，比较完成质量、报错方式、资源保护和署名移除后的投入。还要记录谁承担失败成本。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "让副型语言停留在可见优先级",
+          "body": "这里的自保是传统观察词汇。它不描述身体机制，也不讨论神经组织或恒定功能。它不能证明资源优先级、健康状态或每个人都有相同的自动需要。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "容纳不张扬的成就表达",
+          "body": "当事人可能不强调公开野心，却用稳定运行、储备、准备度或“不能出错的人”来衡量能力。这种反常见表达必须用约束变化和反例检验。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检验生计、照护与替补条件",
+          "body": "收入不稳、债务、照护、迁移、健康资源不足和岗位没有替补，都会让连续性具有现实优先级。比较压力减轻前后，避免把合理应对写成副型。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用风险缓解与公开排名反证",
+          "body": "若没有监督就放弃维护，资源关注只在短期危机出现，或风险相同时仍持续选择公开名次而非稳定运行，自保副型解释应减弱。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "保持匹配观察非预测",
+          "body": "量表特定证据不能证明普遍副型。本页不能预测财务结果、岗位绩效、健康、风险承受力或承担责任的适合度。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "很可靠就能判断第三型自保副型吗？",
+          "answer": "不能。运维责任、经济压力、照护任务和专业规范都能要求可靠。需要匹配公开与后台任务，并观察现实约束变化后的表现，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "为什么要观察压力缓解后的变化？",
+          "answer": "约束减弱提供自然对照。如果连续性关注随债务、照护或岗位风险明显下降，环境解释可能比副型更充分，但仍不能用单次变化定型，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "什么情况会削弱自保副型假设？",
+          "answer": "无人监督就反复放弃维护、资源关注只在临时危机出现，或相同风险下始终追逐公开排名，都会削弱该假设，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一项公开交付、一项无人注意的后台维护，并找到现实压力明显变化的一个时段，同时明确任务责任、受众、现实后果与可拒绝条件。",
+        "observable_signal": "记录任务难度、失败后果、责任归属、可见度、资源风险、报错方式和完成质量，同时记录任务证据、受众变化、现实后果与一个反例。",
+        "page_specific_signal": "重点比较取消署名后稳定交付是否持续，以及压力缓解后资源关注是否变化，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。",
+        "alternative_explanation": "对照债务、收入不稳、照护、运维岗位、迁移、可用替补和专业规范，还要说明权力、资源、奖励和岗位约束如何改变观察。",
+        "reflection_prompt": "写出最强环境解释与最清楚反例，再决定是否暂时保留副型假设，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第三型自保页从家庭风险、后台维护和压力缓解后的变化独立构思，没有翻译英文页的署名任务顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "后台维护无人看见时的完成质量，并记录任务责任、现实后果与至少一个可反驳观察",
+          "现实风险下降后资源关注如何变化，并记录任务责任、现实后果与至少一个可反驳观察",
+          "连续性受威胁时是否如实报错，并记录任务责任、现实后果与至少一个可反驳观察"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是稳定交付吗？",
+          "什么是资源连续性吗？",
+          "什么是运维岗位吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是稳定交付吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是资源连续性吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是运维岗位吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "稳定交付也可能来自生计压力、照护、运维责任、迁移或缺少替补，而不是副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-3",
+        "/zh/personality/enneagram/wings/3w2",
+        "/zh/personality/enneagram/wings/3w4"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/social",
+      "path": "/en/personality/enneagram/type-3/instincts/social",
+      "title": "Social Type Three: rank and group standards as a matched-comparison hypothesis",
+      "answer_first": "Social Type Three is a traditional, evidence-limited hypothesis that achievement attention may be expressed through rank, recognized contribution, and the standards of a valued group. Public leadership cannot establish subtype because hierarchy, promotion rules, representation duties, and unequal power can produce the same behavior.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Treat rank attention as a traditional hypothesis",
+          "body": "The traditional description proposes that Type Three result attention may track position, contribution, and what a group recognizes. It does not establish a social cause or make hierarchy a permanent trait."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match contribution while changing title and audience",
+          "body": "Compare equal contributions under a named leadership title, anonymous collaboration, and public representation. Record effort, credit claims, standard-setting, and response when the title rotates to another person."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep social language observational",
+          "body": "Social subtype language organizes observations about audience, rank, and group standards. It is not evidence about bodily mechanisms, a universal hierarchy drive, or a category that determines conduct."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow service to the group to mask visibility",
+          "body": "A person may frame ambition as protecting the team's reputation or meeting a shared standard. That less self-advertising variation still requires comparison with genuine duty, solidarity, and institutional accountability."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test promotion rules and unequal power",
+          "body": "Formal hierarchy, representation duty, sponsorship, discrimination, scarce promotion slots, and public accountability change how rank is handled. Record who can refuse visibility and who bears the cost of being overlooked."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use rotating status and private contribution as tests",
+          "body": "The hypothesis weakens when contribution remains unchanged after title and credit disappear, group standards are challenged despite status cost, or rank concern appears only during a formal promotion cycle."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep rank observations non-predictive",
+          "body": "Instrument-specific findings do not establish universal subtypes. This page cannot predict leadership, promotion, influence, group loyalty, employability, or social value."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does seeking promotion establish Social Type Three?",
+          "answer": "No. Pay, authority, safety, recognition of existing work, or limited career options may explain promotion seeking. Compare equal contributions under different titles and audiences."
+        },
+        {
+          "question": "Why rotate title in the comparison?",
+          "answer": "Changing title while holding contribution closer helps reveal whether rank itself changes attention. Sponsorship, power, and real compensation differences must still be recorded."
+        },
+        {
+          "question": "What weakens the social-subtype hypothesis?",
+          "answer": "Stable private contribution without credit, challenging a group standard despite status loss, or rank concern confined to a promotion window would weaken it."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one named leadership task, one anonymous group contribution, and one situation where a title rotates.",
+        "observable_signal": "Record contribution, decision authority, audience, credit, compensation, group standard, refusal cost, and behavior after rotation.",
+        "page_specific_signal": "Compare whether the same work changes meaning when rank and public recognition change.",
+        "alternative_explanation": "Compare promotion rules, representation duty, sponsorship, discrimination, solidarity, and unequal power.",
+        "reflection_prompt": "Identify the event where institutional incentives explain rank attention better than subtype."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English social Type Three page was composed around rotating titles, public credit, and group-standard conflict, independently of the Chinese page's committee and promotion examples.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "response when a title rotates to another person",
+          "credit claims on equal anonymous contribution",
+          "whether group standards are challenged at status cost"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are rank and recognized contribution?",
+          "What are group standards and public leadership?",
+          "What are promotion rules and unequal power?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are rank and recognized contribution?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are group standards and public leadership?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are promotion rules and unequal power?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Rank attention may arise from hierarchy, pay, representation duty, discrimination, or scarce promotion slots rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-3",
+        "/en/personality/enneagram/wings/3w2",
+        "/en/personality/enneagram/wings/3w4"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/social",
+      "path": "/zh/personality/enneagram/type-3/instincts/social",
+      "title": "第三型社交副型：以群体标准与位置为线索的匹配比较假设",
+      "answer_first": "第三型社交副型是一种传统且证据有限的假设：成就注意力可能通过群体认可、位置和被看见的贡献表达。公开带队不能证明副型；晋升制度、代表职责、薪酬差异和不平等权力都可能产生相同行为。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把位置与群体认可作为传统线索",
+          "body": "传统描述提出，第三型成果取向可能追踪群体认可什么、贡献如何被命名以及自己处于什么位置。这不证明存在普遍的社会原因，也不能把等级关注写成固定特征。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "保持贡献接近，改变头衔与受众",
+          "body": "比较贡献量接近的轮值负责人、匿名协作和公开代表任务。记录投入、署名诉求、标准设定，以及头衔交给别人之后行为是否改变。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "让社交语言保持观察性",
+          "body": "社交副型语言只组织受众、位置和群体标准等线索，不描述身体机制，也不代表决定行为的普遍等级驱力。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "容纳以团队名义呈现的可见度",
+          "body": "当事人可能把野心表述为维护团队声誉或达到共同标准。即使较少自我宣传，也必须与真实责任、集体认同和组织问责比较。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检验晋升规则、代表职责与权力",
+          "body": "晋升名额、薪酬、公开问责、赞助关系、歧视和代表职责都会改变位置行为。还要记录谁有权拒绝曝光、谁承担被忽略的实际成本。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用轮值结束与逆势质疑反证",
+          "body": "若头衔和署名消失后贡献仍稳定，为了证据而质疑群体标准并承担位置损失，或只在正式晋升期关注排名，社交副型假设应减弱。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "保持位置观察非预测",
+          "body": "量表特定发现不能证明普遍副型。本页不能预测领导力、晋升、影响力、忠诚度、录用价值或社会价值。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "想晋升就能判断第三型社交副型吗？",
+          "answer": "不能。薪酬、决策权限、安全、既有贡献得到承认和职业通道有限都能解释晋升诉求。应在贡献接近时比较头衔和受众变化，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "为什么要记录谁可以拒绝曝光？",
+          "answer": "公开代表对不同位置的人可能是机会，也可能是无法拒绝的责任。记录权力与拒绝成本，能减少把被迫可见误写成副型，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "哪些情况会削弱社交副型假设？",
+          "answer": "没有署名仍稳定贡献、承担位置损失也质疑群体标准，或只在晋升窗口关注排名，都会削弱该解释，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一次轮值负责人任务、一次匿名群体贡献和一次公开代表场景，尽量匹配贡献量，同时明确任务责任、受众、现实后果与可拒绝条件。",
+        "observable_signal": "记录贡献、决策权、受众、署名、薪酬、群体标准、拒绝成本和轮值结束后的行为，同时记录任务证据、受众变化、现实后果与一个反例。",
+        "page_specific_signal": "比较头衔和公开认可改变时，同一贡献是否被赋予不同意义，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。",
+        "alternative_explanation": "对照晋升制度、代表责任、赞助关系、歧视、集体认同和权力差异，还要说明权力、资源、奖励和岗位约束如何改变观察。",
+        "reflection_prompt": "指出制度激励比副型更能解释位置关注的一件事，并调整假设，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第三型社交页围绕委员会轮值、群体署名和质疑集体标准独立构思，没有沿用英文页的匿名协作次序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "头衔轮换给别人后的反应，并记录任务责任、现实后果与至少一个可反驳观察",
+          "匿名贡献与公开署名时投入是否不同，并记录任务责任、现实后果与至少一个可反驳观察",
+          "承担位置损失时是否仍质疑群体标准，并记录任务责任、现实后果与至少一个可反驳观察"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是群体认可吗？",
+          "什么是被看见的贡献吗？",
+          "什么是晋升制度吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是群体认可吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是被看见的贡献吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是晋升制度吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "位置关注也可能来自晋升规则、薪酬、代表职责、歧视、稀缺名额或权力差异，而不是副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-3",
+        "/zh/personality/enneagram/wings/3w2",
+        "/zh/personality/enneagram/wings/3w4"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/one-to-one",
+      "path": "/en/personality/enneagram/type-3/instincts/one-to-one",
+      "title": "One-to-one Type Three: persuasive appeal as a matched-comparison hypothesis",
+      "answer_first": "One-to-one Type Three is a traditional, evidence-limited hypothesis that achievement attention may be expressed through persuasive appeal, admired partnership, or becoming compelling to a specific person. Charisma or appearance cannot establish subtype because sales roles, attraction norms, performance training, and unequal stakes can look the same.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Treat persuasive appeal as a traditional hypothesis",
+          "body": "The traditional description proposes that Type Three result attention may focus on being compelling to a particular person or pair. It is a prompt for comparison, not a claim about attraction as a cause."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match the task while changing the focal person",
+          "body": "Compare the same pitch, performance, or collaboration for a preferred person, a neutral evaluator, and an anonymous audience. Record evidence, presentation, risk, reciprocity, and whether the result standard shifts."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep one-to-one language non-mechanistic",
+          "body": "One-to-one subtype language organizes observations about focal attention, appeal, and paired recognition. It is not evidence about bodily mechanisms, sexuality, chemistry, or a force that determines attraction or behavior."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow partnership success to carry achievement",
+          "body": "A person may emphasize a partner's success, a duo's image, or being the ideal collaborator rather than claiming individual credit. This variation must be compared with care, dependency, sponsorship, and role expectations."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test sales roles and attraction norms",
+          "body": "Sales, entertainment, dating norms, client work, sponsorship, and appearance-based penalties reward targeted appeal. Record consent, power, economic stakes, safety, and who controls the evaluation."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use neutral audiences and consent changes as tests",
+          "body": "The hypothesis weakens when presentation remains stable across focal and anonymous audiences, a preferred person's disapproval does not alter the result standard, or targeted appeal appears only under a paid role."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep appeal observations non-predictive",
+          "body": "Findings tied to one measure and sample remain bounded to that instrument and context. This page cannot predict attraction, relationship quality, persuasion, sales performance, desirability, or compatibility."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does charisma establish One-to-one Type Three?",
+          "answer": "No. Training, temperament, sales duty, safety, or attraction norms may shape charisma. Compare the same task across focal, neutral, and anonymous audiences."
+        },
+        {
+          "question": "Why record consent and power in this comparison?",
+          "answer": "Targeted presentation can be voluntary, rewarded, expected, or unsafe to refuse. Consent and evaluation power help separate strategic compliance from an inferred subtype pattern."
+        },
+        {
+          "question": "What weakens the persuasive-appeal hypothesis?",
+          "answer": "Stable presentation across audiences, unchanged standards after a preferred person's disapproval, or appeal limited to paid work would weaken it."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one comparable task presented to a preferred person, a neutral evaluator, and an anonymous audience.",
+        "observable_signal": "Record the result standard, evidence, presentation choices, reciprocity, consent, evaluation power, stakes, and response to disapproval.",
+        "page_specific_signal": "Compare whether the focal person's reaction changes the definition of success while task evidence stays constant.",
+        "alternative_explanation": "Compare sales duty, attraction norms, performance training, sponsorship, safety, economic stakes, and temperament.",
+        "reflection_prompt": "Name the audience condition that most clearly disconfirms targeted appeal as a subtype modifier."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English one-to-one Type Three page was composed around paired pitches, private collaboration, and loss of a preferred audience, independently of the Chinese page's partnership-credit sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "definition of success after a preferred person's disapproval",
+          "presentation choices for a neutral versus focal evaluator",
+          "whether targeted appeal remains outside rewarded roles"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are persuasive appeal and admired partnership?",
+          "What are charisma and appearance?",
+          "What are sales roles and performance training?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are persuasive appeal and admired partnership?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are charisma and appearance?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are sales roles and performance training?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Targeted appeal may arise from sales duty, attraction norms, performance training, sponsorship, safety, or economic stakes rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-3",
+        "/en/personality/enneagram/wings/3w2",
+        "/en/personality/enneagram/wings/3w4"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-3/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-3/one-to-one",
+      "path": "/zh/personality/enneagram/type-3/instincts/one-to-one",
+      "title": "第三型一对一副型：以定向吸引力为线索的匹配比较假设",
+      "answer_first": "第三型一对一副型是一种传统且证据有限的假设：成就注意力可能通过对特定对象有说服力、理想搭档形象或被某个人欣赏来表达。魅力和外表不能证明副型；销售岗位、吸引力规范、表演训练和不对等评价都可能产生相似表现。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把定向吸引力作为传统比较线索",
+          "body": "传统描述提出，第三型成果取向可能聚焦于对某个具体对象或搭档显得有价值。这只是用于比较的描述，不能声称吸引力是原因。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "保持任务不变，改变关键对象",
+          "body": "把同一份方案或合作任务分别交给重视的对象、中立评审和匿名受众。记录证据、呈现、风险、互惠，以及关键对象改变后成功标准是否移动。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "让一对一语言保持非机制化",
+          "body": "一对一副型语言只组织焦点注意、吸引力和搭档认可等观察，不描述身体机制，也不等同于性取向、化学反应或决定吸引与行为的力量。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "容纳通过搭档成果表达成就",
+          "body": "当事人可能强调搭档成功、组合形象或成为理想合作者，而不直接争取个人署名。必须与照顾、依赖、赞助关系和岗位期待比较。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检验销售、外貌规范与评价权",
+          "body": "销售、表演、约会规范、客户工作、赞助和外貌惩罚都会奖励定向吸引力。记录同意、拒绝安全、经济利益和谁掌握评价权。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用匿名受众与拒绝后的稳定性反证",
+          "body": "若面对关键对象和匿名受众时呈现稳定，特定对象不认可也不改变结果标准，或定向魅力只在付费岗位出现，该副型假设应减弱。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "保持吸引力观察非预测",
+          "body": "量表特定证据不能证明普遍副型。本页不能预测吸引力、关系质量、说服力、销售绩效、受欢迎程度或适配性。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "有魅力就能判断第三型一对一副型吗？",
+          "answer": "不能。沟通训练、气质、销售责任、安全考虑和外貌规范都能塑造呈现。应比较同一任务在关键、中立和匿名受众下的变化，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "为什么必须记录同意与评价权？",
+          "answer": "定向呈现可能是自愿选择，也可能由奖励、岗位或拒绝风险迫使。把评价权和现实成本写清楚，才能避免把策略性配合误写成副型，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        },
+        {
+          "question": "哪些情况会削弱定向吸引力假设？",
+          "answer": "跨受众呈现稳定、关键对象不认可也不改变成功标准，或魅力只在付费岗位出现，都会削弱该解释，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择同一类任务，分别面对一个重视的对象、中立评审和匿名受众，确保任务证据可比较，同时明确任务责任、受众、现实后果与可拒绝条件。",
+        "observable_signal": "记录成功标准、证据、呈现选择、互惠、同意、拒绝风险、评价权和对不认可的反应，同时记录任务证据、受众变化、现实后果与一个反例。",
+        "page_specific_signal": "比较任务证据不变时，关键对象的反应是否重新定义成功，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。",
+        "alternative_explanation": "对照销售责任、吸引力规范、表演训练、赞助、安全、经济利益和普通气质，还要说明权力、资源、奖励和岗位约束如何改变观察。",
+        "reflection_prompt": "写出最能反驳定向吸引力修饰的一种受众条件，并调整假设强度，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第三型一对一页从合作署名、特定评审与拒绝后的调整独立构思，没有翻译英文页的推介场景顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "关键对象不认可后成功标准是否改变，并记录任务责任、现实后果与至少一个可反驳观察",
+          "中立与关键评审下呈现如何不同，并记录任务责任、现实后果与至少一个可反驳观察",
+          "付费岗位之外定向魅力是否仍持续，并记录任务责任、现实后果与至少一个可反驳观察"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是理想搭档形象吗？",
+          "什么是销售岗位吗？",
+          "什么是不对等评价吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是理想搭档形象吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是销售岗位吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是不对等评价吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "定向吸引力也可能来自销售岗位、外貌规范、表演训练、赞助、安全或经济利益，而不是副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-3",
+        "/zh/personality/enneagram/wings/3w2",
+        "/zh/personality/enneagram/wings/3w4"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ]
+}
