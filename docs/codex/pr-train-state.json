@@ -96232,7 +96232,7 @@
     "depends_on": [
       "ANALYTICS-RUNTIME-MONITOR-02"
     ],
-      "status": "github_checks_pending",
+      "status": "ready_to_merge",
       "commit_sha": "f996fa622bcab5e35740708f995e95e2545d3c90",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3150",
     "checks": {
@@ -96261,14 +96261,14 @@
           "evidence": "A later unrelated main PR #3147 introduced one new direct runtime schema probe. Minimal one-file PR #3148 replaced it with SchemaBaseline, passed all nine GitHub checks, and merged at 2f35da1ae367b4d8fd733cb0e3b6f06133ee5d03."
         },
         "github_checks": {
-          "status": "retry_pending",
-          "evidence": "Eight checks passed. verify-bigfive failed only because its runtime-freeze classifier did not yet recognize the new Analytics ProviderFreshness namespace; all 1526 executed Big Five tests passed except that changed-path assertion. The narrow classifier contract fix passed both targeted assertions locally."
+          "status": "passed",
+          "evidence": "All nine required checks passed on scoped CI-fix head d3efefa572c3d0f3faf2aa54ef5ed2058b6020ad: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS."
         }
       },
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-      "github_checks_green": false,
+        "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96316,8 +96316,13 @@
           "at": "2026-07-16T18:01:51Z",
           "status": "github_checks_pending",
           "note": "The scoped classifier fix passed the branch-diff and positive/negative classifier tests locally (2 tests / 5 assertions), plus Pint and PHP syntax. Required GitHub checks will rerun before merge."
+        },
+        {
+          "at": "2026-07-16T18:09:14Z",
+          "status": "ready_to_merge",
+          "note": "All nine required GitHub checks passed on d3efefa572c3d0f3faf2aa54ef5ed2058b6020ad after the scoped classifier fix. Exact branch diff remains within the manifest allowlist and PR #3150 is ready for squash merge after this ledger-only transition revalidates."
         }
       ],
-      "updated_at": "2026-07-16T18:01:51Z"
+      "updated_at": "2026-07-16T18:09:14Z"
   }
 }
