@@ -12,6 +12,18 @@ The initial MBTI authority and discoverability build is complete for the frozen 
 
 This handoff now governs evidence-led growth after the content, CMS, API, indexability, sitemap, llms, schema, and readback gates have passed. It does not authorize CMS writes, deployment, GSC mutation, pSEO expansion, Digital PR, Search Channel mutation, or work outside MBTI.
 
+The first governed growth loop is MBTI only. Any later scale requires its own evidence, authority, review, and release gates.
+
+The frozen handoff contract also requires:
+
+- Baseline snapshot requirements and telemetry contract requirements remain explicit before any repair decision.
+- Search -> Content -> Test -> Result -> Report -> Revenue -> Observation -> Repair -> Next Action is the complete governed path.
+- Backend payment, order, and report access events are truth, while public telemetry remains observation only.
+- Digital PR mention is not backlink proof.
+- The MBTI test page and Digital PR HRZone/HREC state stay inside the first review cohort.
+- Do not generate pSEO, do not bulk submit URLs, and do not bulk outreach.
+- Next task after this PR: `SEO-OPS-SOP-01F`.
+
 ## Current state
 
 - 52/52 assets passed the full semantic, duplication, FAQ, and internal-link gate.

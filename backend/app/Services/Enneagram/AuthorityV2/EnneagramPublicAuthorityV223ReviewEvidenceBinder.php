@@ -8,9 +8,9 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
 use App\Services\Personality\AuthorityV2\PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter;
+use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
@@ -346,7 +346,7 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
 
     private function assertSchema(): void
     {
-        if (! Schema::hasTable('personality_public_content_asset_revision_reviews')) {
+        if (! SchemaBaseline::hasTable('personality_public_content_asset_revision_reviews')) {
             throw new RuntimeException('Private personality revision review-evidence table is unavailable.');
         }
     }

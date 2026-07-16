@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\BigFive\AuthorityV2\TopicAuthority;
 
+use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 final class BigFiveTopicAuthorityDraftPreflight
@@ -339,7 +339,7 @@ final class BigFiveTopicAuthorityDraftPreflight
     /** @return array<string,mixed> */
     private function assertCanonicalRegistryAuthority(): array
     {
-        if (! Schema::hasTable('scales_registry')) {
+        if (! SchemaBaseline::hasTable('scales_registry')) {
             throw new RuntimeException('scales_registry is required for canonical Topic CTA preflight.');
         }
         $row = DB::table('scales_registry')
