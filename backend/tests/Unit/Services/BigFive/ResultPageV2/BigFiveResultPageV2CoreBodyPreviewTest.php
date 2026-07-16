@@ -185,6 +185,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $changed);
     }
 
+    public function test_runtime_freeze_classifier_ignores_analytics_provider_freshness_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php',
+            'backend/app/Services/Analytics/ProviderFreshness/ProviderFreshnessService.php',
+            'backend/app/Services/Analytics/ProviderFreshness/ProviderSnapshotStore.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -7118,6 +7133,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isAnalyticsProviderFreshnessFile($file)) {
+                continue;
+            }
+
             if ($this->isTestMetricsDailyReadModelFile($file)) {
                 continue;
             }
@@ -10633,6 +10652,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/FunnelConversionPage.php',
             'backend/app/Filament/Ops/Widgets/FunnelWidget.php',
         ], true);
+    }
+
+    private function isAnalyticsProviderFreshnessFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php'
+            || str_starts_with($file, 'backend/app/Services/Analytics/ProviderFreshness/');
     }
 
     private function isTestMetricsDailyReadModelFile(string $file): bool

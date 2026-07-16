@@ -96259,6 +96259,10 @@
         "followup_baseline_repair": {
           "status": "passed",
           "evidence": "A later unrelated main PR #3147 introduced one new direct runtime schema probe. Minimal one-file PR #3148 replaced it with SchemaBaseline, passed all nine GitHub checks, and merged at 2f35da1ae367b4d8fd733cb0e3b6f06133ee5d03."
+        },
+        "github_checks": {
+          "status": "retry_pending",
+          "evidence": "Eight checks passed. verify-bigfive failed only because its runtime-freeze classifier did not yet recognize the new Analytics ProviderFreshness namespace; all 1526 executed Big Five tests passed except that changed-path assertion. The narrow classifier contract fix passed both targeted assertions locally."
         }
       },
       "scope_validation": {
@@ -96302,8 +96306,18 @@
           "at": "2026-07-16T17:53:15Z",
           "status": "github_checks_pending",
           "note": "Committed exact 25-file allowlist scope at f996fa622bcab5e35740708f995e95e2545d3c90, pushed the scoped branch, and opened fap-api PR #3150. Awaiting required GitHub checks before ready-to-merge transition."
+        },
+        {
+          "at": "2026-07-16T18:01:51Z",
+          "status": "github_checks_failed_scoped_fix",
+          "note": "verify-bigfive reported one changed-path classifier assertion for the new Analytics ProviderFreshness command/services; all other eight checks and all 1526 executed Big Five behavior tests passed. Added only the narrow analytics classifier contract and its test, and explicitly added that test path to the manifest allowlist."
+        },
+        {
+          "at": "2026-07-16T18:01:51Z",
+          "status": "github_checks_pending",
+          "note": "The scoped classifier fix passed the branch-diff and positive/negative classifier tests locally (2 tests / 5 assertions), plus Pint and PHP syntax. Required GitHub checks will rerun before merge."
         }
       ],
-      "updated_at": "2026-07-16T17:53:15Z"
+      "updated_at": "2026-07-16T18:01:51Z"
   }
 }
