@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "review_fix_local_validation_passed",
-    "commit_sha": "1e4ae6a92086e22d0dfb9082c86bfc1d4947d94c",
+    "status": "pr_open_checks_pending",
+    "commit_sha": "acef44dca81a32ae7f5997430dcfd023d8806013",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96211,9 +96211,14 @@
         "at": "2026-07-16T14:22:21Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine second-cycle GitHub checks passed, then two new automated review findings were fixed in scope. Rollback output is now exclusively reserved before runtime writes and durably persisted from inside the atomic promotion transaction; invalid output and sink failure are zero-promotion. Exact pre-readback now requires current observed_at, batch=all, 116 API/HTML rows, exact asset/path/SHA identities, matching public/stable DB fingerprints, and complete sitemap/llms URL-set evidence. Focused 31/629, full Enneagram V2 196/28635, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T14:22:56Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed both same-scope review repairs at acef44dca81a32ae7f5997430dcfd023d8806013. The exact 15-path scope remains unchanged; push and require another complete GitHub check and review cycle before merge."
       }
     ],
-    "updated_at": "2026-07-16T14:22:21Z"
+    "updated_at": "2026-07-16T14:22:56Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
