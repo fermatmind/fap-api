@@ -96193,8 +96193,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "8da0e7031699548ede0dd536686336112ab5d7c7",
+    "status": "review_fix_local_validation_passed",
+    "commit_sha": "cfa046421fee49f0b7c6d235f2b047af9472d2b0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 52 tests / 869 assertions on latest main. Readback now proves every API section title/body is present in normalized HTML-visible text and records exact backend/frontend deployed SHAs after production revision probes; the authorization packet rejects either SHA drifting from pre-readback evidence. Every runtime API/HTML/discoverability/cache/revalidation request and both frontend REVISION probes disable redirects. Exact evidence-SHA, origin, URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 54 tests / 884 assertions on latest main. Readback now compares the API title, summary, sections, SEO, canonical path, source package/hash, and review state directly to the current DB public asset before accepting pre or post evidence; stale API+HTML pairs fail closed. Private route detection covers slash, query, fragment, and bare-route boundaries. Rendered section, deployed-SHA, redirect, exact evidence/origin/URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,21 +96211,21 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 217 tests / 28875 assertions after binding pre-readback to deployed backend/frontend SHAs and requiring every API section title/body in normalized HTML-visible text."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 219 tests / 28890 assertions after requiring API payload/DB public-asset equality and closing query, fragment, and bare private-route boundaries."
       },
       "static_and_scope": {
         "status": "passed",
         "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
       },
       "github_required": {
-        "status": "passed",
-        "evidence": "Exact head 8da0e7031699548ede0dd536686336112ab5d7c7 passed all nine required GitHub checks, is MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope, and has a clean worktree."
+        "status": "pending",
+        "evidence": "Exact ready-ledger head 0c3ac3fa00a7ad9fa3ab3d91d2f62d3b93e67fc6 passed all nine required GitHub checks and was CLEAN/MERGEABLE, but its exact-head review raised two valid same-scope P2 findings. Both are fixed and behavior-locked in cfa046421fee49f0b7c6d235f2b047af9472d2b0; require a fresh complete GitHub check and exact-head review cycle before squash merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96408,9 +96408,14 @@
         "at": "2026-07-16T19:07:44Z",
         "status": "ready_to_merge",
         "note": "Exact review-fix head 8da0e7031699548ede0dd536686336112ab5d7c7 passed all nine required GitHub checks, is MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope, and has a clean worktree. This ready-to-merge ledger-only update must independently pass one final complete check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T19:24:00Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The exact review of ready-ledger head 0c3ac3fa0 found that pre-readback DB fingerprints were not directly tied to HTTP payload content/provenance and private-route matching missed query, fragment, and bare forms. Code commit cfa046421fee49f0b7c6d235f2b047af9472d2b0 now compares API title/summary/sections/SEO/canonical/source/review fields to the current DB public asset for every pre/post row and rejects all / ? # end private-route boundaries. Final focused 54/884, cache/API 8/72, classifier 1/2, full Enneagram V2 219/28890, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The initial focused run exposed only a new regex delimiter mistake and was fully rerun after correction. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T19:07:44Z"
+    "updated_at": "2026-07-16T19:24:00Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
