@@ -92916,8 +92916,8 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-snapshot-48",
     "depends_on": ["BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47"],
-    "status": "rebased_local_verified_github_checks_pending",
-    "commit_sha": "55894c7da69f6488128f267a1b5f3b4fb0adaa7f",
+    "status": "review_fix_local_verified",
+    "commit_sha": "96859bee6478f3599a9531213e894cbab22b0f30",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3139",
     "checks": {
       "dependency": {
@@ -92941,16 +92941,20 @@
         "evidence": "The valid P2 review finding is fixed. After rebasing onto origin/main e71cf26de155ec5903a5020fcbcd4e4e4e757c9b, the exact substantive PR48 implementation commit is 55894c7da69f6488128f267a1b5f3b4fb0adaa7f. git cat-file resolves the commit; JSON parsing, immutable package and confirmation validation, git diff --check, and exact scope validation pass. Snapshot and confirmation payloads are unchanged."
       },
       "github": {
-        "status": "fresh_checks_pending_after_rebase",
-        "evidence": "Pre-rebase head c848134beea1811c740fa050faf5a432988f1800 passed all nine required GitHub checks with merge state CLEAN. Fresh checks are required after rebasing the exact nine-file scope onto current origin/main e71cf26de155ec5903a5020fcbcd4e4e4e757c9b."
+        "status": "fresh_checks_pending_after_review_fix",
+        "evidence": "Rebased head 3bc21701d0e77b70424ffdb00f8259cde586cc68 passed all nine required GitHub checks with merge state CLEAN. Fresh checks are required after the exact-phrase reconstruction review fix."
       },
       "exact_head_review": {
-        "status": "fresh_review_pending_after_rebase",
-        "evidence": "Codex reviewed pre-rebase exact head c848134bee and reported no major issues; the single prior P2 thread is resolved and outdated. GitHub OWNER fermatmind supplied the exact three-SHA/admin_user:1 approval phrase in PR comment 4990228962. A fresh exact-head review is required after rebase."
+        "status": "review_fix_pending_fresh_review",
+        "evidence": "Codex reviewed rebased head 3bc21701d0 and found one valid P2: the validator trusted expected_confirmation_phrase from the confirmation file instead of reconstructing the mandated phrase from locked hashes and admin_user:1. The scoped fix is locally verified; fresh exact-head review is required. The prior implementation-SHA P2 remains resolved and outdated."
       },
       "rebase": {
         "status": "pass",
         "evidence": "The five PR48 commits rebased without conflict onto origin/main e71cf26de155ec5903a5020fcbcd4e4e4e757c9b. Deterministic builder, package and confirmation validators, 4 tests / 76 assertions, Pint, PHP/JavaScript/JSON/YAML syntax, package-file SHA, git diff --check, and exact nine-file scope validation pass; worktree is clean."
+      },
+      "exact_phrase_reconstruction_fix": {
+        "status": "pass",
+        "evidence": "Validator now reconstructs the mandated approval phrase from the locked cohort snapshot, package payload, package-file SHA, and fixed admin_user:1 instead of trusting either phrase field. A tamper regression changes both phrase fields to approved and recomputes the record hash; validation rejects it. Focused suite passes 5 tests / 83 assertions; Pint, PHP/JavaScript syntax, and git diff --check pass. The package, confirmation payload, and three approved hashes are unchanged."
       }
     },
     "failure_reason": null,
@@ -92967,7 +92971,8 @@
       {"at": "2026-07-16T09:07:02Z", "from": "committed_pending_push", "to": "github_checks_pending", "note": "Pushed the scoped branch and opened the single authorized PR #3139 with the exact manifest title and required what/why/validation/deferred/rule-impact sections. Required GitHub checks and exact-head review remain pending; no controlled external action occurred."},
       {"at": "2026-07-16T09:16:16Z", "from": "github_checks_pending", "to": "review_fix_local_verified", "note": "All nine GitHub checks passed on head 217b8e40c89269e9d82deda9fad84e3115daf7b4, then automated review found one valid P2: the hand-expanded PR48 implementation SHA in the ledger was not a resolvable Git object. Both ledger references now use the exact commit b2c5c95983d97688e683b5529f893dfe27177e7e; git cat-file, JSON parsing, package and confirmation validators, git diff --check, and exact scope validation pass. Fresh checks and exact-head review remain required; immutable snapshot/approval hashes and all public runtime surfaces are unchanged. No production/CMS/database/media/promotion/discoverability action occurred."},
       {"at": "2026-07-16T09:24:38Z", "from": "review_fix_local_verified", "to": "ready_to_merge", "note": "Head c848134beea1811c740fa050faf5a432988f1800 passed all nine required GitHub checks with merge state CLEAN, Codex exact-head review reported no major issues, the sole prior P2 thread is resolved and outdated, and the operator's exact three-SHA/admin_user:1 approval phrase is now present in the PR audit record. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge. Immutable package and approval hashes remain unchanged; no production/CMS/database/media/promotion/discoverability action occurred."},
-      {"at": "2026-07-16T09:29:15Z", "from": "ready_to_merge", "to": "rebased_local_verified_github_checks_pending", "note": "PR3138 externally squash-merged as e71cf26de155ec5903a5020fcbcd4e4e4e757c9b, advancing main after PR48 opened. Rebased all five PR48 commits without conflict onto that current origin/main. The substantive implementation is now 55894c7da69f6488128f267a1b5f3b4fb0adaa7f; all PR48 local manifest checks and exact nine-file scope pass with unchanged package and confirmation hashes. Require force-with-lease push, fresh nine-check GitHub cycle, and fresh exact-head review before merge; no production/CMS/database/media/promotion/discoverability action occurred."}
+      {"at": "2026-07-16T09:29:15Z", "from": "ready_to_merge", "to": "rebased_local_verified_github_checks_pending", "note": "PR3138 externally squash-merged as e71cf26de155ec5903a5020fcbcd4e4e4e757c9b, advancing main after PR48 opened. Rebased all five PR48 commits without conflict onto that current origin/main. The substantive implementation is now 55894c7da69f6488128f267a1b5f3b4fb0adaa7f; all PR48 local manifest checks and exact nine-file scope pass with unchanged package and confirmation hashes. Require force-with-lease push, fresh nine-check GitHub cycle, and fresh exact-head review before merge; no production/CMS/database/media/promotion/discoverability action occurred."},
+      {"at": "2026-07-16T09:38:39Z", "from": "rebased_local_verified_github_checks_pending", "to": "review_fix_local_verified", "note": "Rebased head 3bc21701d0e77b70424ffdb00f8259cde586cc68 passed all nine checks, then exact-head review found one valid P2: both confirmation phrase fields and record hash could be changed together because the validator did not reconstruct the mandated phrase. Commit 96859bee6478f3599a9531213e894cbab22b0f30 now derives the exact phrase from the locked three hashes and fixed admin_user:1; a tamper regression proves simultaneous phrase/hash replacement is rejected. Focused 5/83, Pint, syntax, and diff checks pass. Require fresh GitHub checks and exact-head review; no package hash or controlled runtime action changed."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49": {
