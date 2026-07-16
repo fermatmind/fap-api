@@ -35,6 +35,8 @@ final class BigFiveZhContentOnlyPublisher
 
     public const REVISION_WORKFLOW_STATE = 'published_content_override';
 
+    public const LANDING_SCHEMA_VERSION = 'big5-authority-v2-content.v1';
+
     /** @var array<string,int> */
     private const SURFACE_COUNTS = [
         'CMS Article' => 56,
@@ -341,7 +343,7 @@ final class BigFiveZhContentOnlyPublisher
             ...$descriptor['attributes'],
             'title' => $candidate['title'],
             'description' => $candidate['summary'],
-            'schema_version' => 'big5-authority-v2-content-only.v1',
+            'schema_version' => self::LANDING_SCHEMA_VERSION,
             'payload_json' => [
                 'authority_route' => (string) $rawAsset['route'],
                 'media_deferred_by_operator' => true,
