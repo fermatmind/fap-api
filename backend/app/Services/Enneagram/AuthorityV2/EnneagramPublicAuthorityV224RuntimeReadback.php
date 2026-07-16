@@ -175,6 +175,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 || data_get($v2, 'editorial_authority.reviewer') !== null) {
                 $issues[] = 'api_exact_candidate_or_review_mismatch';
             }
+            $this->assertApiVisibleEvidenceMatchesCurrentPublicAsset($target, $v2, $issues);
             $this->assertPublishedRevision($target, $packageSha256, $issues);
         }
 
@@ -273,6 +274,52 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         ];
         if (! hash_equals($this->fingerprint($expected), $this->fingerprint($observed))) {
             $issues[] = 'api_current_public_asset_mismatch';
+        }
+    }
+
+    /** @param array<string,mixed> $target @param array<string,mixed> $v2 @param list<string> $issues */
+    private function assertApiVisibleEvidenceMatchesCurrentPublicAsset(array $target, array $v2, array &$issues): void
+    {
+        $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
+            ->where('entity_type', (string) $target['entity_type'])
+            ->where('entity_key', (string) $target['code'])
+            ->where('locale', (string) $target['locale'])
+            ->first();
+        if (! $asset instanceof PersonalityPublicContentAsset) {
+            $issues[] = 'api_visible_evidence_authority_mismatch';
+
+            return;
+        }
+
+        $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
+        $expectedSources = is_array($authority['sources'] ?? null)
+            ? array_values($authority['sources'])
+            : [];
+        $expectedClaimMapping = is_array($authority['claim_mapping'] ?? null)
+            ? array_values($authority['claim_mapping'])
+            : [];
+        $observedSources = is_array(data_get($v2, 'visible_evidence.sources'))
+            ? array_values(data_get($v2, 'visible_evidence.sources'))
+            : [];
+        $observedClaimMapping = is_array(data_get($v2, 'visible_evidence.claim_mapping'))
+            ? array_values(data_get($v2, 'visible_evidence.claim_mapping'))
+            : [];
+        $expected = [
+            'sources' => $expectedSources,
+            'claim_mapping' => $expectedClaimMapping,
+            'eligible' => ($authority['visible_evidence_eligible'] ?? false) === true
+                && $expectedSources !== []
+                && $expectedClaimMapping !== [],
+        ];
+        $observed = [
+            'sources' => $observedSources,
+            'claim_mapping' => $observedClaimMapping,
+            'eligible' => data_get($v2, 'visible_evidence.eligible') === true,
+        ];
+        if (! hash_equals($this->fingerprint($expected), $this->fingerprint($observed))) {
+            $issues[] = 'api_visible_evidence_authority_mismatch';
         }
     }
 
