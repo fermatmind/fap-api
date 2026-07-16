@@ -6,6 +6,7 @@ namespace Tests\Feature\SEO;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Models\PersonalityPublicContentAssetRevisionReview;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +54,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
             $this->assertMatchesRegularExpression('/^[A-Za-z0-9_-]+\.[0-9a-f]{64}$/', (string) $promoted['rollback_token']);
             $this->assertSame(0, $promoted['public_release_count']);
             $this->assertSame(0, $promoted['indexability_change_count']);
-            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->withoutGlobalScopes()->whereNull('working_revision_id')->count());
             $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
                 ->where('source_package', 'enneagram-authority-v2-reviewed')
                 ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_PUBLISHED)->count());
@@ -61,6 +62,21 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
                 ->where('title', 'like', 'Promoted Enneagram authority %')->count());
             $this->assertSame(116, PersonalityPublicContentAsset::query()
                 ->where('updated_at', '2026-07-16 00:00:00')->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()
+                ->where('review_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED)
+                ->where('last_reviewed_at', '2026-07-15 12:00:00')->count());
+            PersonalityPublicContentAsset::query()->each(function (PersonalityPublicContentAsset $asset): void {
+                $this->assertNull(data_get($asset->authority_json, 'reviewer'));
+            });
+            $public = $this->getJson('/api/v0.5/personality-content-assets/enneagram/hub/enneagram?locale=en');
+            $public->assertOk()
+                ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null)
+                ->assertJsonPath(
+                    'personality_public_content_asset_v2.editorial_authority.review_state',
+                    EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED,
+                )
+                ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.last_reviewed_at', '2026-07-15T12:00:00+00:00');
+            $this->assertStringNotContainsString('Private Reviewer', (string) $public->getContent());
 
             $this->travelTo('2026-07-16 00:01:00');
             $rolledBack = $this->promoter()->rollback((string) $promoted['rollback_token']);
@@ -69,11 +85,11 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
             $this->assertSame(116, $rolledBack['rolled_back_count']);
             $this->assertFalse($rolledBack['production_execution']);
             $this->assertSame($before, $this->publishedSnapshots());
-            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->withoutGlobalScopes()->whereNull('working_revision_id')->count());
             $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
                 ->where('source_package', 'enneagram-authority-v2-reviewed')
                 ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_ROLLED_BACK)->count());
-            $this->assertSame(116, PersonalityPublicContentAsset::query()
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
                 ->where('updated_at', '2026-07-16 00:01:00')->count());
         } finally {
             $this->travelBack();
@@ -180,6 +196,24 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('completed manual review');
+
+        try {
+            $this->promoter()->preflight($targets);
+        } finally {
+            $this->assertSame($before, $this->databaseFingerprint());
+        }
+    }
+
+    public function test_missing_bound_review_evidence_is_rejected_before_any_write(): void
+    {
+        $targets = $this->seedRevisionEstate();
+        PersonalityPublicContentAssetRevisionReview::query()
+            ->where('revision_id', (int) $targets[0]['expected_working_revision_id'])
+            ->delete();
+        $before = $this->databaseFingerprint();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('exact bound human-review evidence');
 
         try {
             $this->promoter()->preflight($targets);
@@ -432,6 +466,30 @@ SQL);
                 'snapshot_json' => $snapshot,
                 'public_runtime_fingerprint_before' => $fingerprint,
             ]);
+            $reviewedAt = '2026-07-15 12:00:00';
+            $reviewerName = 'Private Reviewer '.$number;
+            PersonalityPublicContentAssetRevisionReview::query()->create([
+                'revision_id' => (int) $working->id,
+                'asset_id' => (int) $asset->id,
+                'authority_asset_key' => $assetKey,
+                'source_package' => 'enneagram-authority-v2-reviewed',
+                'asset_sha256' => $promotedSourceHash,
+                'authority_package_sha256' => $promotedPackageSha,
+                'review_register_sha256' => hash('sha256', 'private-review-register'),
+                'reviewer_name' => $reviewerName,
+                'reviewed_at' => $reviewedAt,
+                'decision' => PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED,
+                'review_source' => PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN,
+                'evidence_sha256' => $this->fingerprint([
+                    'asset_key' => (string) $asset->locale.'|'.(string) $asset->entity_type.':'.(string) $asset->entity_key,
+                    'asset_sha256' => $promotedSourceHash,
+                    'package_sha256' => $promotedPackageSha,
+                    'reviewer_name' => $reviewerName,
+                    'reviewed_at' => $reviewedAt,
+                    'decision' => PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED,
+                    'review_source' => PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN,
+                ]),
+            ]);
             DB::table('personality_public_content_assets')->where('id', $asset->id)->update([
                 'working_revision_id' => (int) $working->id,
             ]);
@@ -484,7 +542,7 @@ SQL);
     private function publishedSnapshots(): array
     {
         $snapshots = [];
-        PersonalityPublicContentAsset::query()->orderBy('id')->each(function (PersonalityPublicContentAsset $asset) use (&$snapshots): void {
+        PersonalityPublicContentAsset::query()->withoutGlobalScopes()->orderBy('id')->each(function (PersonalityPublicContentAsset $asset) use (&$snapshots): void {
             $attributes = $asset->getAttributes();
             unset($attributes['working_revision_id'], $attributes['updated_at']);
             $snapshots[(string) $asset->id] = $this->fingerprint($attributes);
@@ -498,6 +556,7 @@ SQL);
         return $this->fingerprint([
             'assets' => DB::table('personality_public_content_assets')->orderBy('id')->get()->map(fn (object $row): array => (array) $row)->all(),
             'revisions' => DB::table('personality_public_content_asset_revisions')->orderBy('id')->get()->map(fn (object $row): array => (array) $row)->all(),
+            'reviews' => DB::table('personality_public_content_asset_revision_reviews')->orderBy('id')->get()->map(fn (object $row): array => (array) $row)->all(),
         ]);
     }
 

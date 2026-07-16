@@ -6,6 +6,7 @@ namespace App\Services\Enneagram\AuthorityV2;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Models\PersonalityPublicContentAssetRevisionReview;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
@@ -258,7 +259,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
         }
 
         return sprintf(
-            'AUTHORIZE ENNEAGRAM AUTHORITY V2 POINTER-SAFE PROMOTION FOR DEPLOY_SHA=%s PREFLIGHT_FINGERPRINT=%s TARGET_COUNT=116 MANUAL_REVIEW_REQUIRED=1 ROLLBACK_TOKEN_REQUIRED=1 PUBLIC_RELEASE=0 INDEXABILITY=0 SITEMAP=0 LLMS=0; ABORT_ON_ANY_MISMATCH',
+            'AUTHORIZE ENNEAGRAM AUTHORITY V2 POINTER-SAFE PROMOTION FOR DEPLOY_SHA=%s PREFLIGHT_FINGERPRINT=%s TARGET_COUNT=116 BOUND_HUMAN_REVIEW_EVIDENCE_REQUIRED=116 ROLLBACK_TOKEN_REQUIRED=1 PUBLIC_REVIEWER_NAME_WRITE_COUNT=0 PUBLIC_RELEASE=0 INDEXABILITY=0 SITEMAP=0 LLMS=0; ABORT_ON_ANY_MISMATCH',
             $deploySha,
             $preflightFingerprint,
         );
@@ -356,6 +357,23 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
             if ((string) $revision->workflow_state !== self::STATE_HUMAN_REVIEW_APPROVED) {
                 throw new RuntimeException('Promotion requires completed manual review: '.$assetKey.'.');
             }
+            $reviewEvidenceQuery = PersonalityPublicContentAssetRevisionReview::query()
+                ->where('revision_id', (int) $revision->id);
+            if ($lock) {
+                $reviewEvidenceQuery->lockForUpdate();
+            }
+            $reviewEvidence = $reviewEvidenceQuery->first();
+            if (! $reviewEvidence instanceof PersonalityPublicContentAssetRevisionReview
+                || (int) $reviewEvidence->asset_id !== $assetId
+                || (string) $reviewEvidence->authority_asset_key !== $assetKey
+                || (string) $reviewEvidence->source_package !== (string) $revision->source_package
+                || (string) $reviewEvidence->asset_sha256 !== $sourceHash
+                || (string) $reviewEvidence->authority_package_sha256 !== $packageSha
+                || (string) $reviewEvidence->decision !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED
+                || (string) $reviewEvidence->review_source !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
+                || ! hash_equals((string) $reviewEvidence->evidence_sha256, $this->reviewEvidenceFingerprint($asset, $reviewEvidence))) {
+                throw new RuntimeException('Promotion requires exact bound human-review evidence: '.$assetKey.'.');
+            }
             if ((string) $revision->public_runtime_fingerprint_before !== $publicFingerprint
                 || ! hash_equals($publicFingerprint, $this->publicFingerprint($asset))) {
                 throw new RuntimeException('Promotion public fingerprint changed: '.$assetKey.'.');
@@ -378,6 +396,13 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 || (string) $promotedEditorial['source_hash'] !== $sourceHash) {
                 throw new RuntimeException('Promotion snapshot provenance does not match its immutable revision lineage: '.$assetKey.'.');
             }
+            $promotedEditorial['review_state'] = self::STATE_HUMAN_REVIEW_APPROVED;
+            $promotedEditorial['last_reviewed_at'] = $reviewEvidence->reviewed_at?->format('Y-m-d H:i:s');
+            $authority = is_array($promotedEditorial['authority_json'] ?? null)
+                ? $promotedEditorial['authority_json']
+                : [];
+            $authority['reviewer'] = null;
+            $promotedEditorial['authority_json'] = $authority;
 
             $planned[] = [
                 ...$target,
@@ -391,6 +416,7 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 'working_snapshot_sha256' => $this->fingerprint($snapshot),
                 'asset' => $asset,
                 'working_revision' => $revision,
+                'review_evidence' => $reviewEvidence,
                 'current_published_revision' => $currentPublishedRevision,
                 'before_editorial_snapshot' => $this->editorialSnapshot($asset),
                 'before_restorable_fingerprint' => $this->restorableFingerprint($asset),
@@ -408,6 +434,8 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
             'expected_source_hash' => $target['expected_source_hash'],
             'expected_public_fingerprint_before' => $target['expected_public_fingerprint_before'],
             'working_snapshot_sha256' => $target['working_snapshot_sha256'],
+            'review_evidence_sha256' => (string) $target['review_evidence']->evidence_sha256,
+            'review_register_sha256' => (string) $target['review_evidence']->review_register_sha256,
         ], $planned);
 
         return [
@@ -508,6 +536,21 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
         }
 
         return $key;
+    }
+
+    private function reviewEvidenceFingerprint(
+        PersonalityPublicContentAsset $asset,
+        PersonalityPublicContentAssetRevisionReview $review,
+    ): string {
+        return $this->fingerprint([
+            'asset_key' => (string) $asset->locale.'|'.(string) $asset->entity_type.':'.(string) $asset->entity_key,
+            'asset_sha256' => (string) $review->asset_sha256,
+            'package_sha256' => (string) $review->authority_package_sha256,
+            'reviewer_name' => (string) $review->reviewer_name,
+            'reviewed_at' => $review->reviewed_at?->utc()->format('Y-m-d H:i:s'),
+            'decision' => (string) $review->decision,
+            'review_source' => (string) $review->review_source,
+        ]);
     }
 
     private function normalizeComparable(string $field, mixed $value): string

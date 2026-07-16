@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use LogicException;
 
 final class PersonalityPublicContentAssetRevision extends Model
@@ -41,6 +42,11 @@ final class PersonalityPublicContentAssetRevision extends Model
         return $this->belongsTo(PersonalityPublicContentAsset::class, 'asset_id', 'id');
     }
 
+    public function reviewEvidence(): HasOne
+    {
+        return $this->hasOne(PersonalityPublicContentAssetRevisionReview::class, 'revision_id', 'id');
+    }
+
     public function isRuntimeMutable(): bool
     {
         return false;
@@ -60,7 +66,7 @@ final class PersonalityPublicContentAssetRevision extends Model
                 'public_runtime_fingerprint_before',
             ] as $immutable) {
                 if ($revision->isDirty($immutable)) {
-                    throw new LogicException('Big Five Authority V2 personality draft revision lineage is immutable.');
+                    throw new LogicException('Personality Authority V2 working revision lineage is immutable.');
                 }
             }
         });

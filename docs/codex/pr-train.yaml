@@ -44885,6 +44885,54 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-runtime-import-review-22c
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C: import exact candidate revisions and bind human review evidence"
+    status: local_validation_passed
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B
+    scope:
+      - Import the exact 116 candidate assets from the final release report into isolated pending-manual-review working revisions while preserving every current public identity and discoverability field.
+      - Add private exact-SHA human-review evidence storage and a fail-closed binder, then require bound evidence for promotion without exposing reviewer identity through the public contract.
+    allowed_paths:
+      - backend/database/migrations/2026_07_16_000100_create_personality_public_content_asset_revision_reviews_table.php
+      - backend/app/Models/PersonalityPublicContentAssetRevision.php
+      - backend/app/Models/PersonalityPublicContentAssetRevisionReview.php
+      - backend/app/Services/Personality/AuthorityV2/PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV205RevisionWorkspaceWriter.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV206RevisionPromoter.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV223ReviewEvidenceBinder.php
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionWorkspace.php
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2ReviewEvidenceBinder.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV223RuntimeImportReviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV223RuntimeImportReviewTest.php --no-ansi
+      - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
+      - fresh SQLite migration verification for personality_public_content_asset_revision_reviews
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23
     repo: fap-api
     base: main

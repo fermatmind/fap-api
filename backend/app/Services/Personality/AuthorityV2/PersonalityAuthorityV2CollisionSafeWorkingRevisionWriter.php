@@ -64,6 +64,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
                     (string) $descriptor['source_hash'],
                     $packageSha256,
                     $descriptor['snapshot'],
+                    (string) $descriptor['workflow_state'],
                 );
                 $written[] = [
                     'asset_key' => (string) $descriptor['asset_key'],
@@ -112,6 +113,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
         string $sourceHash,
         string $packageSha256,
         array $snapshot,
+        string $workflowState = PersonalityPublicContentAssetRevision::STATE_DRAFT,
     ): array {
         $this->assertFrameworkMatches($asset, $framework);
         $existing = $this->packageRevision($packageSha256, $assetKey, true);
@@ -119,6 +121,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
             if ((int) $existing->asset_id !== (int) $asset->id
                 || (string) $existing->source_package !== $sourcePackage
                 || (string) $existing->source_hash !== $sourceHash
+                || (string) $existing->workflow_state !== $workflowState
                 || ! hash_equals($this->fingerprint($existing->snapshot_json), $this->fingerprint($snapshot))
                 || (int) ($asset->working_revision_id ?? 0) !== (int) $existing->id) {
                 throw new RuntimeException('Existing package revision does not match its target, snapshot, or working pointer: '.$assetKey.'.');
@@ -141,7 +144,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
             'source_package' => $sourcePackage,
             'source_hash' => $sourceHash,
             'authority_package_sha256' => $packageSha256,
-            'workflow_state' => PersonalityPublicContentAssetRevision::STATE_DRAFT,
+            'workflow_state' => $workflowState,
             'snapshot_json' => $snapshot,
             'public_runtime_fingerprint_before' => $this->recordPublicRuntimeFingerprint($asset),
         ]);
@@ -217,12 +220,16 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
             $identity = is_array($descriptor['identity'] ?? null) ? $descriptor['identity'] : [];
             $sourcePackage = trim((string) ($descriptor['source_package'] ?? ''));
             $sourceHash = strtolower(trim((string) ($descriptor['source_hash'] ?? '')));
+            $workflowState = trim((string) ($descriptor['workflow_state'] ?? PersonalityPublicContentAssetRevision::STATE_DRAFT));
             if ($assetKey === '' || isset($seen[$assetKey])) {
                 throw new RuntimeException('Working-revision asset key is missing or duplicated at descriptor '.$index.'.');
             }
             $seen[$assetKey] = true;
             if ($sourcePackage === '' || preg_match('/^[0-9a-f]{64}$/', $sourceHash) !== 1) {
                 throw new RuntimeException('Working-revision source provenance is invalid for '.$assetKey.'.');
+            }
+            if (! in_array($workflowState, [PersonalityPublicContentAssetRevision::STATE_DRAFT, 'pending_manual_review'], true)) {
+                throw new RuntimeException('Working-revision initial workflow state is invalid for '.$assetKey.'.');
             }
 
             $asset = $this->findAsset($identity, $lock);
@@ -250,6 +257,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
             if ($revision instanceof PersonalityPublicContentAssetRevision
                 && ((string) $revision->source_package !== $sourcePackage
                     || (string) $revision->source_hash !== $sourceHash
+                    || (string) $revision->workflow_state !== $workflowState
                     || ! hash_equals($this->fingerprint($revision->snapshot_json), $this->fingerprint($snapshot)))) {
                 throw new RuntimeException('Existing package revision snapshot collision: '.$assetKey.'.');
             }
@@ -259,6 +267,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
                 'asset_key' => $assetKey,
                 'source_package' => $sourcePackage,
                 'source_hash' => $sourceHash,
+                'workflow_state' => $workflowState,
                 'snapshot' => $snapshot,
                 'asset' => $asset,
                 'asset_id' => (int) $asset->id,
@@ -274,6 +283,7 @@ final class PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter
             'identity' => $descriptor['identity'],
             'source_package' => (string) $descriptor['source_package'],
             'source_hash' => (string) $descriptor['source_hash'],
+            'workflow_state' => (string) $descriptor['workflow_state'],
             'snapshot_sha256' => $this->fingerprint($descriptor['snapshot']),
         ], $planned);
 
