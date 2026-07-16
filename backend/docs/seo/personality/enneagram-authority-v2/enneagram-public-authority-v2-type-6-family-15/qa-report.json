@@ -56,6 +56,13 @@
       "status": "applied_and_locally_validated",
       "finding": "Chinese wing boundaries retained an appended full-stop-plus-semicolon suffix.",
       "repair": "Rewrote both boundaries as natural two-sentence evidence limits tied to evidence review or option testing."
+    },
+    {
+      "source": "github_codex_review",
+      "thread_id": "PRRT_kwDOQn6xoM6RTZOD",
+      "status": "applied_and_locally_validated",
+      "finding": "Four English wing comparison passages retained plural-subject agreement errors.",
+      "repair": "Rewrote both core-first and both sibling comparisons with plural verbs and clean sentence boundaries. The first local gate replay rejected a newly exposed duplicate core-first sentence, so both openings were differentiated by their 6w5 or 6w7 comparison context before the passing replay."
     }
   ],
   "raw_draft_audit": {
