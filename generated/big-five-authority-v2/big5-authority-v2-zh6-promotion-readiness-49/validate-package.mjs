@@ -83,6 +83,27 @@ invariant(canonicalSha256(packageJson.editorial_authority.review_record.external
   author_association: ownerAuthority.author_association,
   confirmation_phrase_sha256: sha256(ownerAuthority.confirmation_phrase),
 }), 'review record OWNER external authority mismatch');
+const expectedReviewAssets = snapshot.assets.map((asset) => ({
+  asset_id: asset.asset_id,
+  canonical_path: asset.canonical_path,
+  snapshot_sha256: asset.snapshot_sha256,
+}));
+const expectedSourceRows = snapshot.assets.map((asset) => {
+  const visibleSources = asset.public_snapshot?.visible_sources;
+  invariant(Array.isArray(visibleSources) && visibleSources.length === 3, 'locked snapshot source rows are incomplete');
+  invariant(asset.source_authority?.status === 'approved_for_link_citation_and_original_paraphrase', 'locked snapshot source authority is invalid');
+  return {
+    asset_id: asset.asset_id,
+    snapshot_sha256: asset.snapshot_sha256,
+    approved: true,
+    permission_scope: 'public_link_citation_and_original_paraphrase_only',
+    approval_reference: `source-ledger:${asset.source_authority.locked_ledger_sha256}`,
+    source_ids: visibleSources.map((source) => source.source_id),
+  };
+});
+invariant(canonicalSha256(packageJson.editorial_authority.review_record.assets) === canonicalSha256(expectedReviewAssets)
+  && canonicalSha256(packageJson.source_permissions.rows) === canonicalSha256(expectedSourceRows),
+'review or source rows do not match the locked snapshot');
 invariant(packageJson.editorial_authority.review_record_sha256 === canonicalSha256(packageJson.editorial_authority.review_record), 'review record SHA mismatch');
 invariant(packageJson.source_permissions.source_permission_sha256 === canonicalSha256(packageJson.source_permissions.rows), 'source permission SHA mismatch');
 invariant(packageJson.source_permissions.rows.every((row) => row.approved === true && row.source_ids.length === 3), 'each asset must keep three approved sources');
@@ -107,6 +128,23 @@ invariant(packageJson.permissions.reviewer.authority_reference === (reviewerTotp
   : null), 'reviewer authority reference does not match TOTP readiness');
 invariant(packageJson.rollback_baseline.rollback_baseline_sha256 === canonicalSha256(packageJson.rollback_baseline.rows), 'rollback baseline SHA mismatch');
 invariant(packageJson.rollback_baseline.rows.every((row) => row.exact_target_bound === true && row.abort_on_missing_or_drifted_target === true), 'rollback targets must fail closed');
+invariant(Array.isArray(observation.runtime_assets?.rows), 'runtime observation rows are missing');
+invariant(packageJson.runtime_baseline.observed_at === observation.observed_at
+  && packageJson.runtime_baseline.observed_deployed_sha === observation.deployed_sha
+  && canonicalSha256(packageJson.runtime_baseline.rows) === canonicalSha256(observation.runtime_assets.rows),
+'runtime baseline does not match the production observation');
+const expectedRollbackRows = observation.runtime_assets.rows.map((row) => ({
+  asset_id: row.asset_id,
+  route: row.route,
+  primary_id: row.primary_id,
+  observed_working_revision_id: row.working_revision_id,
+  restore_published_revision_id: row.published_revision_id,
+  restore_public_runtime_baseline_sha256: row.public_runtime_baseline_sha256,
+  exact_target_bound: true,
+  abort_on_missing_or_drifted_target: true,
+}));
+invariant(canonicalSha256(packageJson.rollback_baseline.rows) === canonicalSha256(expectedRollbackRows),
+  'rollback rows do not match the observed runtime baseline');
 invariant(packageJson.media_authority.required_content_identity === 'big5:model_hub:zh-CN:hero-og', 'Hub media content identity mismatch');
 invariant(packageJson.media_authority.fail_closed_on_zero_or_multiple === true, 'media uniqueness gate missing');
 invariant(packageJson.media_authority.media_authority_sha256 === canonicalSha256({

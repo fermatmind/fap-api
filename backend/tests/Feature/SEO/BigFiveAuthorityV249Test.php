@@ -402,12 +402,60 @@ final class BigFiveAuthorityV249Test extends TestCase
         ));
 
         try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $path,
+                'PR49_PACKAGE_HASH_PATH' => $directory.'/rewritten-source-package.sha256',
+                'PR49_OBSERVATION_PATH' => $observationPath,
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'review or source rows do not match the locked snapshot',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
             app(BigFiveZh6PromotionReadiness::class)->packageOnly($path);
             $this->fail('Expected rehashed source rows outside the locked snapshot to fail closed.');
         } catch (RuntimeException $exception) {
             $this->assertStringContainsString('source rows do not match the locked snapshot', $exception->getMessage());
         } finally {
             $this->cleanupTemporaryPackage($directory);
+        }
+    }
+
+    public function test_artifact_validator_rejects_rehashed_review_assets_not_bound_to_the_snapshot(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['editorial_authority']['review_record']['assets'][0]['canonical_path'] = '/zh/personality/big-five/detached';
+        $reviewSha256 = $this->canonicalSha256($package['editorial_authority']['review_record']);
+        $package['editorial_authority']['review_record_sha256'] = $reviewSha256;
+        $package['permissions']['reviewer']['authority_reference'] = 'solo_operator_review:'.$reviewSha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['review_record_sha256'] = $reviewSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-review-assets-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-review-assets-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'review or source rows do not match the locked snapshot',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected rehashed review assets outside the locked snapshot to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('review or source rows do not match the locked snapshot', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
         }
     }
 
@@ -422,10 +470,48 @@ final class BigFiveAuthorityV249Test extends TestCase
         $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-rollback-package');
 
         try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-rollback-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'rollback rows do not match the observed runtime baseline',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
             app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
             $this->fail('Expected rehashed rollback rows outside the runtime baseline to fail closed.');
         } catch (RuntimeException $exception) {
             $this->assertStringContainsString('rollback rows do not match the runtime baseline', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_artifact_validator_rejects_rehashed_runtime_baseline_not_bound_to_the_observation(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['runtime_baseline']['rows'][0]['primary_id'] = 999999;
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-runtime-baseline-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-runtime-baseline-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'runtime baseline does not match the production observation',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed runtime baseline outside the observation to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('production observation content is inconsistent', $exception->getMessage());
         } finally {
             $this->cleanupTemporaryPackage($temporary['directory']);
         }
