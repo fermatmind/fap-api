@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "ee76f2f31cd3dacbf3bf12dee860b140916bcaac",
+    "commit_sha": "1e22d5817bde7eef33bff37281363953bfd24b06",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 56 tests / 892 assertions on latest main. Post-readback now requires non-empty visible-evidence sources and claim mappings, eligible=true, and every source title in rendered HTML. API FAQ rows are bound to the current DB asset and both questions and answers must be visible. Payload/DB provenance, private-route, rendered-section, deployed-SHA, redirect, exact origin/URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 56 tests / 895 assertions after the runtime fixes; final V224 passes 32 tests / 369 assertions including explicit sitemap, llms.txt, and llms-full.txt trailing-slash rejection. Post-readback requires non-empty visible-evidence sources and claim mappings, eligible=true, every source title in rendered HTML, DB-bound FAQ rows, and visible question/answer pairs. Payload/DB provenance, private-route, rendered-section, deployed-SHA, redirect, exact origin/URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 221 tests / 28898 assertions after fail-closing missing FAQ answers and incomplete post-readback visible evidence."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 221 tests / 28901 assertions after fail-closing missing FAQ answers, incomplete post-readback visible evidence, and non-root discoverability trailing slashes; the additional explicit three-surface test then passed in the final V224 run."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head fc392059e9ceb67ab2d5c01c346738ccde0fcd48 passed initial checks and its exact-head review raised two valid same-scope P2 findings. Both are fixed and behavior-locked in ee76f2f31cd3dacbf3bf12dee860b140916bcaac; require a fresh complete GitHub check and exact-head review cycle before squash merge."
+        "evidence": "Exact head fc392059e9ceb67ab2d5c01c346738ccde0fcd48 passed its checks and exact-head review raised three valid same-scope P2 findings. Visible evidence and FAQ fixes are behavior-locked in ee76f2f31cd3dacbf3bf12dee860b140916bcaac; exact non-root trailing-slash rejection plus per-surface coverage are complete at 1e22d5817bde7eef33bff37281363953bfd24b06. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
       }
     },
     "scope_validation": {
@@ -96418,9 +96418,14 @@
         "at": "2026-07-16T19:35:56Z",
         "status": "review_fix_local_validation_passed",
         "note": "The latest exact-head review found post-readback could accept a missing visible-evidence block and FAQ validation checked questions without answers. Code commit ee76f2f31cd3dacbf3bf12dee860b140916bcaac now requires non-empty sources and claim mappings, eligible=true, visible source titles, DB-bound FAQ rows, and visible question/answer pairs. Final focused 56/892, cache/API 8/72, classifier 1/2, full Enneagram V2 221/28898, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T19:40:26Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Resolved the remaining exact-head P2 by rejecting every non-root discoverability trailing slash before URL-set normalization or hashing. Commit 1e22d5817bde7eef33bff37281363953bfd24b06 explicitly proves fail-closed behavior independently for sitemap, llms.txt, and llms-full.txt. Final V224 32/369, service-code full Enneagram V2 221/28901, cache/API 8/72, classifier 1/2, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T19:35:56Z"
+    "updated_at": "2026-07-16T19:40:26Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
