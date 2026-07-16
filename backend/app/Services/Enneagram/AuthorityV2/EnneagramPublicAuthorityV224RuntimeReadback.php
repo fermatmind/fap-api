@@ -390,8 +390,8 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 throw new RuntimeException($name.' URL-set readback failed with HTTP '.$response->status().'.');
             }
             $urls = $name === 'sitemap'
-                ? $this->sitemapUrls($response)
-                : $this->textUrls($response->body());
+                ? $this->sitemapUrls($response, $frontendBaseUrl)
+                : $this->textUrls($response->body(), $frontendBaseUrl);
             $enneagram = array_values(array_filter(
                 $urls,
                 static fn (string $url): bool => str_contains($url, '/personality/enneagram'),
@@ -412,28 +412,49 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     }
 
     /** @return list<string> */
-    private function sitemapUrls(Response $response): array
+    private function sitemapUrls(Response $response, string $frontendBaseUrl): array
     {
         preg_match_all('#<loc>\s*([^<]+)\s*</loc>#i', $response->body(), $matches);
 
-        return $this->normalizedUrlPaths($matches[1] ?? []);
+        return $this->normalizedUrlPaths($matches[1] ?? [], $frontendBaseUrl, true);
     }
 
     /** @return list<string> */
-    private function textUrls(string $text): array
+    private function textUrls(string $text, string $frontendBaseUrl): array
     {
         preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9])/(?:en|zh)/personality/enneagram[^\s<>()"\']*#i', $text, $matches);
 
-        return $this->normalizedUrlPaths($matches[0] ?? []);
+        return $this->normalizedUrlPaths($matches[0] ?? [], $frontendBaseUrl);
     }
 
     /** @param list<string> $urls @return list<string> */
-    private function normalizedUrlPaths(array $urls): array
-    {
+    private function normalizedUrlPaths(
+        array $urls,
+        ?string $frontendBaseUrl = null,
+        bool $requireCanonicalSitemapUrl = false,
+    ): array {
+        $expectedOrigin = $frontendBaseUrl !== null ? $this->canonicalOrigin($frontendBaseUrl) : null;
         $paths = [];
         foreach ($urls as $url) {
             $url = rtrim(html_entity_decode(trim($url), ENT_QUOTES | ENT_HTML5), '.,;');
-            $path = str_starts_with($url, '/') ? $url : (string) parse_url($url, PHP_URL_PATH);
+            $isRelativePath = str_starts_with($url, '/') && ! str_starts_with($url, '//');
+            $parts = parse_url($url);
+            if (! is_array($parts)) {
+                throw new RuntimeException('Discoverability URL is invalid.');
+            }
+            $path = (string) ($parts['path'] ?? '');
+            $isEnneagram = str_contains($path, '/personality/enneagram');
+            if ($expectedOrigin !== null && ($requireCanonicalSitemapUrl || $isEnneagram)) {
+                if (($parts['query'] ?? '') !== '' || ($parts['fragment'] ?? '') !== '') {
+                    throw new RuntimeException('Discoverability URL must not contain a query or fragment.');
+                }
+                if ($requireCanonicalSitemapUrl && $isRelativePath) {
+                    throw new RuntimeException('Sitemap URL must be absolute on the exact frontend origin.');
+                }
+                if (! $isRelativePath && ! hash_equals($expectedOrigin, $this->canonicalOrigin($url))) {
+                    throw new RuntimeException('Discoverability URL origin does not match the exact frontend origin.');
+                }
+            }
             if ($path !== '') {
                 $paths[] = rtrim($path, '/') ?: '/';
             }
@@ -442,6 +463,24 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         sort($paths);
 
         return $paths;
+    }
+
+    private function canonicalOrigin(string $url): string
+    {
+        $parts = parse_url($url);
+        if (! is_array($parts)
+            || ! in_array(strtolower((string) ($parts['scheme'] ?? '')), ['http', 'https'], true)
+            || trim((string) ($parts['host'] ?? '')) === ''
+            || isset($parts['user'])
+            || isset($parts['pass'])) {
+            throw new RuntimeException('Discoverability URL must be an absolute HTTP(S) URL.');
+        }
+        $scheme = strtolower((string) $parts['scheme']);
+        $host = strtolower((string) $parts['host']);
+        $port = isset($parts['port']) ? (int) $parts['port'] : null;
+        $defaultPort = ($scheme === 'https' && $port === 443) || ($scheme === 'http' && $port === 80);
+
+        return $scheme.'://'.$host.($port !== null && ! $defaultPort ? ':'.$port : '');
     }
 
     /** @param array<string,mixed> $target */

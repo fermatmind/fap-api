@@ -192,6 +192,31 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_url_set_readback_rejects_wrong_origin_query_and_fragment_drift(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $firstPath = (string) $report['asset_records'][0]['path'];
+        $invalidUrls = [
+            'https://staging.example.com'.$firstPath,
+            'https://frontend.test'.$firstPath.'?preview=1',
+            'https://frontend.test'.$firstPath.'#preview',
+        ];
+
+        foreach ($invalidUrls as $invalidUrl) {
+            $this->fakeRuntimeHttp($report, false, $invalidUrl);
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+                    $report,
+                    'https://frontend.test',
+                );
+                $this->fail('Expected discoverability URL drift to fail closed: '.$invalidUrl);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('URL', $exception->getMessage());
+            }
+        }
+    }
+
     public function test_console_preflight_generates_only_redacted_operator_artifacts(): void
     {
         $this->seedPublishedEstate();
@@ -496,10 +521,17 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
     }
 
     /** @param array<string,mixed> $report */
-    private function fakeRuntimeHttp(array $report, bool $rejectRevalidation = false): void
-    {
+    private function fakeRuntimeHttp(
+        array $report,
+        bool $rejectRevalidation = false,
+        ?string $discoverabilityUrlOverride = null,
+    ): void {
         $paths = array_column($report['asset_records'], 'path');
-        $urlText = implode("\n", array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths));
+        $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
+        if ($discoverabilityUrlOverride !== null) {
+            $urls[0] = $discoverabilityUrlOverride;
+        }
+        $urlText = implode("\n", $urls);
         Http::fake(function (Request $request) use ($rejectRevalidation, $urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             if ($url === 'https://frontend.test/api/content-release/revalidate') {
