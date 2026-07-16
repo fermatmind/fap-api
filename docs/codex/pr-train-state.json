@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "f251f69654e5bf30e7cd09735a4383c16fd993f9",
+    "commit_sha": "161a4795ec3ac48fa23696c8f5a381aaa8696121",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 50 tests / 853 assertions on latest main. Every runtime API/HTML/discoverability/cache/revalidation request and the deployed frontend REVISION probe disables redirects, with production-command behavior explicitly asserting allow_redirects=false. Execute re-reads and compares all three complete authorized URL sets before rollback reservation or any runtime write. LLMS parsing hashes every absolute or relative public URL, including non-Enneagram paths; every absolute URL must use the exact frontend origin and every URL rejects query/fragment drift. Reviewer leak detection checks case-folded normalized DOM-visible text. Exact evidence-SHA, endpoint/pre-readback provenance, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 52 tests / 869 assertions on latest main. Readback now proves every API section title/body is present in normalized HTML-visible text and records exact backend/frontend deployed SHAs after production revision probes; the authorization packet rejects either SHA drifting from pre-readback evidence. Every runtime API/HTML/discoverability/cache/revalidation request and both frontend REVISION probes disable redirects. Exact evidence-SHA, origin, URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 215 tests / 28859 assertions after merging origin/main at 6f1746854 and enforcing exact-origin/query/fragment validation across every absolute or relative LLMS URL."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 217 tests / 28875 assertions after binding pre-readback to deployed backend/frontend SHAs and requiring every API section title/body in normalized HTML-visible text."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Previous head 7f6f5e4c3995cd50d57033c2310c8306240b5320 passed all nine required GitHub checks and was CLEAN/MERGEABLE. Subsequent exact-head reviews raised same-scope P2 findings, all fixed and behavior-locked through f251f69654e5bf30e7cd09735a4383c16fd993f9 on merged latest main; require a fresh complete GitHub check and exact-head review cycle before squash merge."
+        "evidence": "Head 178cd1699e631b54e61f2c93f7bd9567afb6d391 passed all nine required GitHub checks and was CLEAN/MERGEABLE. Its exact-head review raised two further same-scope P2 findings, fixed and behavior-locked in 161a4795ec3ac48fa23696c8f5a381aaa8696121; require a fresh complete GitHub check and exact-head review cycle before squash merge."
       }
     },
     "scope_validation": {
@@ -96398,9 +96398,14 @@
         "at": "2026-07-16T18:39:02Z",
         "status": "review_fix_local_validation_passed",
         "note": "The latest P2 showed absolute non-Enneagram LLMS URLs could be normalized before origin validation. Code commit f251f69654e5bf30e7cd09735a4383c16fd993f9 now requires every absolute LLMS URL to use the exact frontend origin and rejects query/fragment drift while retaining relative public paths in the full-set SHA. Final focused 50/853, cache/API 8/72, classifier 1/2, full Enneagram V2 215/28859, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:59:19Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After head 178cd1699 passed all nine checks, its exact-head review found main rendered sections and deployed revision provenance were not fully bound. Code commit 161a4795ec3ac48fa23696c8f5a381aaa8696121 now requires every API section title/body in HTML-visible text, makes standalone production readback verify and record exact backend/frontend deployed SHAs with redirects disabled, and rejects pre-readback SHA drift before authorization. Final focused 52/869, cache/API 8/72, classifier 1/2, full Enneagram V2 217/28875, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T18:39:02Z"
+    "updated_at": "2026-07-16T18:59:19Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
