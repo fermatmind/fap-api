@@ -63,6 +63,13 @@
       "status": "applied_and_locally_validated",
       "finding": "Four English wing comparison passages retained plural-subject agreement errors.",
       "repair": "Rewrote both core-first and both sibling comparisons with plural verbs and clean sentence boundaries. The first local gate replay rejected a newly exposed duplicate core-first sentence, so both openings were differentiated by their 6w5 or 6w7 comparison context before the passing replay."
+    },
+    {
+      "source": "github_codex_review",
+      "thread_id": "PRRT_kwDOQn6xoM6RTeJN",
+      "status": "applied_and_locally_validated",
+      "finding": "English wing and subtype FAQ openers retained plural-subject agreement errors and semicolon-imperative splice patterns.",
+      "repair": "Rewrote all five affected FAQ openers and answers, then expanded the repair across the remaining English wing and subtype semicolon-splice passages with page-specific evidence, governance, resource, and safety comparisons. The first gate replay exposed a shared sibling-comparison sentence, so the two wing FAQ methods were differentiated before the passing replay."
     }
   ],
   "raw_draft_audit": {
