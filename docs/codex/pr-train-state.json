@@ -95910,9 +95910,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A"
     ],
-    "status": "ready_to_push",
+    "status": "pr_open_checks_pending",
     "commit_sha": "93de45b3c606ce885b750c4b1debdfaca83645c0",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3143",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -95933,6 +95933,10 @@
       "static_and_scope": {
         "status": "passed",
         "evidence": "Pint passed all three changed PHP tests; Composer validate, YAML/JSON parsing, frozen report SHA binding, git diff --check, and exact 13-path scope validation passed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #3143 opened from the exact scoped branch; required checks are pending."
       }
     },
     "scope_validation": {
@@ -95971,9 +95975,14 @@
         "at": "2026-07-16T11:11:11Z",
         "status": "ready_to_push",
         "note": "Bound commit_sha to the exact locally verified content/evidence implementation commit 93de45b3c606ce885b750c4b1debdfaca83645c0."
+      },
+      {
+        "at": "2026-07-16T11:12:09Z",
+        "status": "pr_open_checks_pending",
+        "note": "Pushed the exact 13-path scope and opened PR #3143; waiting for all required GitHub checks before merge."
       }
     ],
-    "updated_at": "2026-07-16T11:11:11Z"
+    "updated_at": "2026-07-16T11:12:09Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
