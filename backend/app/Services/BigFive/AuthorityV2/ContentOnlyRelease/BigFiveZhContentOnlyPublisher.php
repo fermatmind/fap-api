@@ -33,6 +33,8 @@ final class BigFiveZhContentOnlyPublisher
 
     public const RELEASE_PACKAGE_SHA256 = '9d15f0da6fca3d9c317c35d00abf078aaf9d03f740ece6ed388f53ad05c89494';
 
+    public const REVISION_WORKFLOW_STATE = 'published_content_override';
+
     /** @var array<string,int> */
     private const SURFACE_COUNTS = [
         'CMS Article' => 56,
@@ -781,13 +783,13 @@ final class BigFiveZhContentOnlyPublisher
                 'source_package' => 'big5-authority-v2-zh-content-only-release',
                 'source_hash' => (string) $descriptor['target']['source_hash'],
                 'authority_package_sha256' => self::RELEASE_PACKAGE_SHA256,
-                'workflow_state' => 'published_content_only_operator_override',
+                'workflow_state' => self::REVISION_WORKFLOW_STATE,
                 'snapshot_json' => $snapshot,
                 'public_runtime_fingerprint_before' => str_repeat('0', 64),
                 'created_by_admin_user_id' => null,
             ]);
         } else {
-            $revision->forceFill(['workflow_state' => 'published_content_only_operator_override'])->save();
+            $revision->forceFill(['workflow_state' => self::REVISION_WORKFLOW_STATE])->save();
         }
         $asset->forceFill([
             ...$attributes,
@@ -817,7 +819,7 @@ final class BigFiveZhContentOnlyPublisher
                 'source_package' => 'big5-authority-v2-zh-content-only-release',
                 'source_hash' => (string) $target['source_hash'],
                 'authority_package_sha256' => self::RELEASE_PACKAGE_SHA256,
-                'workflow_state' => 'published_content_only_operator_override',
+                'workflow_state' => self::REVISION_WORKFLOW_STATE,
                 'snapshot_json' => [
                     'profile' => $target['profile'],
                     'sections' => $target['sections'],
@@ -831,7 +833,7 @@ final class BigFiveZhContentOnlyPublisher
                 'created_at' => $publishedAt,
             ]);
         } else {
-            $revision->forceFill(['workflow_state' => 'published_content_only_operator_override'])->save();
+            $revision->forceFill(['workflow_state' => self::REVISION_WORKFLOW_STATE])->save();
         }
         $profile->forceFill([
             ...$target['profile'],
