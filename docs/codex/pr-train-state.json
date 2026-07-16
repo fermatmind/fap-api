@@ -96232,9 +96232,9 @@
     "depends_on": [
       "ANALYTICS-RUNTIME-MONITOR-02"
     ],
-      "status": "local_validated",
-    "commit_sha": null,
-    "pr_url": null,
+      "status": "github_checks_pending",
+      "commit_sha": "f996fa622bcab5e35740708f995e95e2545d3c90",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3150",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -96297,8 +96297,13 @@
           "at": "2026-07-16T17:50:28Z",
           "status": "local_validated",
           "note": "All manifest checks passed after both isolated baseline repairs: full composer 7930 passed / 568535 assertions, focused analytics and Ops tests green, scheduler and Ops routes listed, Pint/PHP syntax/Composer/YAML/JSON/diff/scope checks green. Exact scope remains 25 allowed files; no live provider read, credential mutation, production, CMS, database, publish, or deploy action occurred."
+        },
+        {
+          "at": "2026-07-16T17:53:15Z",
+          "status": "github_checks_pending",
+          "note": "Committed exact 25-file allowlist scope at f996fa622bcab5e35740708f995e95e2545d3c90, pushed the scoped branch, and opened fap-api PR #3150. Awaiting required GitHub checks before ready-to-merge transition."
         }
       ],
-      "updated_at": "2026-07-16T17:50:28Z"
+      "updated_at": "2026-07-16T17:53:15Z"
   }
 }
