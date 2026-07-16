@@ -661,6 +661,64 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_console_production_frontend_revision_probe_disables_redirects(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
+        $preReadbackPath = storage_path('framework/testing/enneagram-v224-pre-readback-'.bin2hex(random_bytes(4)).'.json');
+        $revisionPath = base_path('../REVISION');
+        $previousEnvironment = app()->environment();
+        $revisionExisted = File::isFile($revisionPath);
+        $revisionContents = $revisionExisted ? File::get($revisionPath) : null;
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
+        File::put($preReadbackPath, '{}');
+        File::put($revisionPath, self::BACKEND_SHA);
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+        app()->detectEnvironment(static fn (): string => 'production');
+        $redirectsDisabled = false;
+        Http::fake(function (Request $request, array $options) use (&$redirectsDisabled): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+            if ($request->url() === 'https://frontend.test/revision') {
+                $redirectsDisabled = ($options['allow_redirects'] ?? null) === false;
+
+                return Http::response('', 302, ['Location' => 'https://staging-mirror.test/revision']);
+            }
+
+            return Http::response(['ok' => false], 404);
+        });
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                '--preflight' => true,
+                '--review-register' => $registerPath,
+                '--pre-readback' => $preReadbackPath,
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--frontend-revision-url' => 'https://frontend.test/revision',
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+            ])
+                ->expectsOutputToContain('Deployed frontend revision endpoint does not match the exact authorization SHA.')
+                ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
+                ->expectsOutputToContain('writes_committed=0')
+                ->assertFailed();
+
+            $this->assertTrue($redirectsDisabled);
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+        } finally {
+            app()->detectEnvironment(static fn (): string => $previousEnvironment);
+            File::delete([$registerPath, $preReadbackPath]);
+            if ($revisionExisted && is_string($revisionContents)) {
+                File::put($revisionPath, $revisionContents);
+            } else {
+                File::delete($revisionPath);
+            }
+        }
+    }
+
     public function test_late_execute_failure_reports_committed_writes_and_safe_rollback_evidence(): void
     {
         $this->seedPublishedEstate();
