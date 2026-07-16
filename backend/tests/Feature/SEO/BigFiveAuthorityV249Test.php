@@ -200,6 +200,47 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_readiness_service_rejects_rehashed_source_rows_not_bound_to_the_snapshot(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['source_permissions']['rows'][0]['source_ids'][0] = 'source:unrelated';
+        $sourceSha256 = $this->canonicalSha256($package['source_permissions']['rows']);
+        $package['source_permissions']['source_permission_sha256'] = $sourceSha256;
+        $package['permissions']['sources']['authority_reference'] = 'source_permissions:'.$sourceSha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['source_permission_sha256'] = $sourceSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+
+        $directory = $this->temporaryDirectory();
+        $observationPath = $directory.'/production-observation.json';
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+        $package['inputs']['production_observation_path'] = $observationPath;
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $path = $directory.'/rewritten-source-package.json';
+        $this->writeJson($path, $package);
+        $this->assertNotFalse(file_put_contents(
+            $directory.'/rewritten-source-package.sha256',
+            hash_file('sha256', $path)."\n",
+        ));
+
+        try {
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($path);
+            $this->fail('Expected rehashed source rows outside the locked snapshot to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('source rows do not match the locked snapshot', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($directory);
+        }
+    }
+
     public function test_database_preflight_fails_closed_on_missing_runtime_without_mutation(): void
     {
         $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(

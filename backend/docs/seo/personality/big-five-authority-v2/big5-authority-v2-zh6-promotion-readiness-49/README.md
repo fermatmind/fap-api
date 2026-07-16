@@ -31,7 +31,7 @@ Exactly one authority-complete Hub asset would clear the media uniqueness gate f
 | package payload | `46f25a5b30b770a61b57bbdb330076061ae847e23012f290dd1a6011a2beda28` |
 | package file | `b85e7041c2292751e79d463fa292c863cc56b2c7a726d2568e65771ca1f4283c` |
 
-These hashes describe the current fail-closed observation with zero eligible Hub media. They are not an authorization token. The immutable PR48 snapshot, exact confirmation and GitHub OWNER authority remain code-locked. The production observation may be refreshed after a separately authorized Media Library intake; its SHA is then bound into the package media authority and release-lock material, while the rebuilt package file is verified by its reviewed `.sha256` sidecar and by a live read-only database preflight. No service-constant change is required for a legitimate fresh observation.
+These hashes describe the current fail-closed observation with zero eligible Hub media. They are not an authorization token. The immutable PR48 snapshot, exact confirmation and GitHub OWNER authority remain code-locked; review assets and source-permission rows are reconstructed from that locked snapshot and cannot be replaced by recomputing downstream hashes. The production observation may be refreshed after a separately authorized Media Library intake; its SHA is then bound into the package media authority and release-lock material, while the rebuilt package file is verified by its reviewed `.sha256` sidecar and by a live read-only database preflight. No service-constant change is required for a legitimate fresh observation.
 
 ## Validation
 

@@ -387,6 +387,7 @@ final class BigFiveZh6PromotionReadiness
             || collect($sourceRows)->contains(static fn (mixed $row): bool => ! is_array($row)
                 || ($row['approved'] ?? null) !== true
                 || ($row['permission_scope'] ?? null) !== 'public_link_citation_and_original_paraphrase_only'
+                || ! is_array($row['source_ids'] ?? null)
                 || count($row['source_ids'] ?? []) !== 3)) {
             throw new RuntimeException('ZH6 source permissions are incomplete.');
         }
@@ -496,6 +497,56 @@ final class BigFiveZh6PromotionReadiness
                 || ! hash_equals($expectedSha256, hash_file('sha256', $inputPath))) {
                 throw new RuntimeException('ZH6 readiness input SHA mismatch: '.$field.'.');
             }
+        }
+        $snapshot = $this->readJson($resolvedInputs['snapshot_path']);
+        $snapshotAssets = $snapshot['assets'] ?? null;
+        if (($snapshot['cohort_id'] ?? null) !== self::COHORT_ID
+            || ($snapshot['cohort_snapshot_sha256'] ?? null) !== self::COHORT_SNAPSHOT_SHA256
+            || ($snapshot['package_payload_sha256'] ?? null) !== self::SNAPSHOT_PAYLOAD_SHA256
+            || ! is_array($snapshotAssets)
+            || count($snapshotAssets) !== 6) {
+            throw new RuntimeException('ZH6 locked snapshot content is invalid.');
+        }
+        $expectedReviewAssets = [];
+        $expectedSourceRows = [];
+        foreach ($snapshotAssets as $asset) {
+            $visibleSources = is_array($asset) ? ($asset['public_snapshot']['visible_sources'] ?? null) : null;
+            $sourceAuthority = is_array($asset) ? ($asset['source_authority'] ?? null) : null;
+            if (! is_array($asset)
+                || trim((string) ($asset['asset_id'] ?? '')) === ''
+                || trim((string) ($asset['canonical_path'] ?? '')) === ''
+                || preg_match('/^[0-9a-f]{64}$/', (string) ($asset['snapshot_sha256'] ?? '')) !== 1
+                || ! is_array($visibleSources)
+                || count($visibleSources) !== 3
+                || ! is_array($sourceAuthority)
+                || ($sourceAuthority['status'] ?? null) !== 'approved_for_link_citation_and_original_paraphrase'
+                || preg_match('/^[0-9a-f]{64}$/', (string) ($sourceAuthority['locked_ledger_sha256'] ?? '')) !== 1) {
+                throw new RuntimeException('ZH6 locked snapshot source authority is invalid.');
+            }
+            $sourceIds = array_map(
+                static fn (mixed $source): string => is_array($source) ? (string) ($source['source_id'] ?? '') : '',
+                $visibleSources,
+            );
+            if (collect($sourceIds)->contains(static fn (string $sourceId): bool => trim($sourceId) === '')) {
+                throw new RuntimeException('ZH6 locked snapshot source id is invalid.');
+            }
+            $expectedReviewAssets[] = [
+                'asset_id' => $asset['asset_id'],
+                'canonical_path' => $asset['canonical_path'],
+                'snapshot_sha256' => $asset['snapshot_sha256'],
+            ];
+            $expectedSourceRows[] = [
+                'asset_id' => $asset['asset_id'],
+                'snapshot_sha256' => $asset['snapshot_sha256'],
+                'approved' => true,
+                'permission_scope' => 'public_link_citation_and_original_paraphrase_only',
+                'approval_reference' => 'source-ledger:'.$sourceAuthority['locked_ledger_sha256'],
+                'source_ids' => $sourceIds,
+            ];
+        }
+        if (! hash_equals($this->canonicalSha256($expectedReviewAssets), $this->canonicalSha256($review['assets']))
+            || ! hash_equals($this->canonicalSha256($expectedSourceRows), $this->canonicalSha256($sourceRows))) {
+            throw new RuntimeException('ZH6 review or source rows do not match the locked snapshot.');
         }
         $observationPath = $package['inputs']['production_observation_path'] ?? null;
         $observationSha256 = $package['inputs']['production_observation_sha256'] ?? null;
