@@ -95910,8 +95910,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "93de45b3c606ce885b750c4b1debdfaca83645c0",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -95966,9 +95966,14 @@
         "at": "2026-07-16T11:10:32Z",
         "status": "local_validation_passed",
         "note": "Repaired only the two requested evidence-boundary first sentences, regenerated both family QA records and aggregate evidence, updated the directly bound link-graph source hashes, and passed focused 28/10520 plus full 184/28169. Automated gate is 116/116 with zero duplicate issues; human review is the sole HOLD blocker."
+      },
+      {
+        "at": "2026-07-16T11:11:11Z",
+        "status": "ready_to_push",
+        "note": "Bound commit_sha to the exact locally verified content/evidence implementation commit 93de45b3c606ce885b750c4b1debdfaca83645c0."
       }
     ],
-    "updated_at": "2026-07-16T11:10:32Z"
+    "updated_at": "2026-07-16T11:11:11Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
