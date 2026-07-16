@@ -18,6 +18,8 @@ const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 invariant(attestation.schema_version === '1.0.0', 'unexpected attestation schema version');
 invariant(attestation.cohort_id === candidatePackage.cohort_id, 'attestation cohort does not match candidate package');
 invariant(attestation.assets.length === candidatePackage.assets.length, 'attestation asset count does not match candidate package');
+invariant(candidatePackage.status === 'blocked_source_authority_repair_required', 'human attestation must not make a source-authority-blocked cohort release-ready');
+invariant(candidatePackage.authority_boundary.human_attestation_does_not_override_source_ledger === true, 'candidate package must preserve source-ledger precedence over human attestation');
 invariant(attestation.review_scope.content === true, 'content review scope must be explicit');
 invariant(attestation.review_scope.source_mapping === true, 'source-mapping review scope must be explicit');
 invariant(attestation.review_scope.claim_boundaries === true, 'claim-boundary review scope must be explicit');
@@ -71,4 +73,5 @@ const reviewRecord = {
 };
 invariant(attestation.review_record_sha256 === sha256(JSON.stringify(reviewRecord)), 'approved attestation review_record_sha256 mismatch');
 
-console.log('PASS: exact six-page cohort has a hash-bound real-human review attestation.');
+console.log('PASS: exact six-page cohort retains its hash-bound real-human review attestation.');
+console.log('PASS: the attestation does not override the candidate package source-authority quarantine.');

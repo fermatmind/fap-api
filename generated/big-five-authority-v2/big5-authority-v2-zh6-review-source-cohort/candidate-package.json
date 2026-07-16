@@ -5,13 +5,14 @@
   "locale": "zh-CN",
   "cohort_id": "big_five_v2_zh_cn_hub_plus_five_domains_01",
   "prepared_on": "2026-07-16",
-  "status": "ready_for_real_human_attestation",
+  "status": "blocked_source_authority_repair_required",
   "authority_boundary": {
     "cms_backend_remains_public_authority": true,
     "this_package_is_public_runtime_authority": false,
     "production_or_cms_write_performed": false,
     "publication_or_indexability_changed": false,
-    "historical_generated_packages_mutated": false
+    "historical_generated_packages_mutated": false,
+    "human_attestation_does_not_override_source_ledger": true
   },
   "input_hashes": {
     "hub": "eeb9d07ff4337d53a0d75c1208567474d534d02db9b01d0b16a1c1a9924348d9",
@@ -160,7 +161,8 @@
     "domains": 5,
     "automated_editorial_pass": 6,
     "human_manual_review_complete": 0,
-    "source_authority_complete": 6,
+    "source_authority_complete": 1,
+    "source_authority_blocked": 5,
     "promotion_eligible": 0
   },
   "assets": [
@@ -204,6 +206,7 @@
           "academic.soto-john-2017-bfi2",
           "academic.roberts-walton-viechtbauer-2006-change"
         ],
+        "claim_authority_issues": [],
         "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
         "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
         "authority_reference": "backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision"
@@ -438,7 +441,7 @@
         "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
       },
       "source_authority": {
-        "status": "approved_for_link_citation_and_original_paraphrase",
+        "status": "blocked_by_locked_source_ledger",
         "visible_source_count": 3,
         "visible_source_ids": [
           "academic.goldberg-1990-big-five-structure",
@@ -449,6 +452,18 @@
           "academic.goldberg-1990-big-five-structure",
           "academic.soto-john-2017-bfi2",
           "official.ipip-neo-facets-table"
+        ],
+        "claim_authority_issues": [
+          {
+            "code": "claim_not_allowed_as_public",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          },
+          {
+            "code": "claim_not_applicable_to_page_family",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          }
         ],
         "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
         "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
@@ -466,6 +481,7 @@
       "promotion": {
         "eligible": false,
         "blockers": [
+          "source_authority_blocked_by_locked_ledger",
           "real_human_attestation_required",
           "reviewer_admin_user_id_required",
           "media_permission_out_of_scope",
@@ -609,7 +625,7 @@
         "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
       },
       "source_authority": {
-        "status": "approved_for_link_citation_and_original_paraphrase",
+        "status": "blocked_by_locked_source_ledger",
         "visible_source_count": 3,
         "visible_source_ids": [
           "academic.goldberg-1990-big-five-structure",
@@ -620,6 +636,18 @@
           "academic.goldberg-1990-big-five-structure",
           "academic.soto-john-2017-bfi2",
           "official.ipip-neo-facets-table"
+        ],
+        "claim_authority_issues": [
+          {
+            "code": "claim_not_allowed_as_public",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          },
+          {
+            "code": "claim_not_applicable_to_page_family",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          }
         ],
         "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
         "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
@@ -637,6 +665,7 @@
       "promotion": {
         "eligible": false,
         "blockers": [
+          "source_authority_blocked_by_locked_ledger",
           "real_human_attestation_required",
           "reviewer_admin_user_id_required",
           "media_permission_out_of_scope",
@@ -780,7 +809,7 @@
         "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
       },
       "source_authority": {
-        "status": "approved_for_link_citation_and_original_paraphrase",
+        "status": "blocked_by_locked_source_ledger",
         "visible_source_count": 3,
         "visible_source_ids": [
           "academic.goldberg-1990-big-five-structure",
@@ -791,6 +820,18 @@
           "academic.goldberg-1990-big-five-structure",
           "academic.soto-john-2017-bfi2",
           "official.ipip-neo-facets-table"
+        ],
+        "claim_authority_issues": [
+          {
+            "code": "claim_not_allowed_as_public",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          },
+          {
+            "code": "claim_not_applicable_to_page_family",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          }
         ],
         "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
         "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
@@ -808,6 +849,7 @@
       "promotion": {
         "eligible": false,
         "blockers": [
+          "source_authority_blocked_by_locked_ledger",
           "real_human_attestation_required",
           "reviewer_admin_user_id_required",
           "media_permission_out_of_scope",
@@ -951,7 +993,7 @@
         "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
       },
       "source_authority": {
-        "status": "approved_for_link_citation_and_original_paraphrase",
+        "status": "blocked_by_locked_source_ledger",
         "visible_source_count": 3,
         "visible_source_ids": [
           "academic.goldberg-1990-big-five-structure",
@@ -962,6 +1004,18 @@
           "academic.goldberg-1990-big-five-structure",
           "academic.soto-john-2017-bfi2",
           "official.ipip-neo-facets-table"
+        ],
+        "claim_authority_issues": [
+          {
+            "code": "claim_not_allowed_as_public",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          },
+          {
+            "code": "claim_not_applicable_to_page_family",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          }
         ],
         "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
         "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
@@ -979,6 +1033,7 @@
       "promotion": {
         "eligible": false,
         "blockers": [
+          "source_authority_blocked_by_locked_ledger",
           "real_human_attestation_required",
           "reviewer_admin_user_id_required",
           "media_permission_out_of_scope",
@@ -1122,7 +1177,7 @@
         "note": "The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary."
       },
       "source_authority": {
-        "status": "approved_for_link_citation_and_original_paraphrase",
+        "status": "blocked_by_locked_source_ledger",
         "visible_source_count": 3,
         "visible_source_ids": [
           "academic.goldberg-1990-big-five-structure",
@@ -1133,6 +1188,18 @@
           "academic.goldberg-1990-big-five-structure",
           "academic.soto-john-2017-bfi2",
           "official.ipip-neo-facets-table"
+        ],
+        "claim_authority_issues": [
+          {
+            "code": "claim_not_allowed_as_public",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          },
+          {
+            "code": "claim_not_applicable_to_page_family",
+            "claim_id": "claim.big_five.taxonomies_not_interchangeable",
+            "page_family": "domain"
+          }
         ],
         "usage_scope": "bibliographic citation, public link, short factual description, and original paraphrase only",
         "excluded_use": "no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced",
@@ -1150,6 +1217,7 @@
       "promotion": {
         "eligible": false,
         "blockers": [
+          "source_authority_blocked_by_locked_ledger",
           "real_human_attestation_required",
           "reviewer_admin_user_id_required",
           "media_permission_out_of_scope",

@@ -83,6 +83,7 @@ const sourceLedger = readJson(paths.sourceLedger);
 const reviewManifest = readJson(paths.reviewManifest);
 
 const sourcesById = new Map(sourceLedger.sources.map((source) => [source.id, source]));
+const claimsById = new Map(sourceLedger.claims.map((claim) => [claim.id, claim]));
 const requiredSources = Object.values(sourceIds).map((id) => {
   const source = sourcesById.get(id);
   if (!source) throw new Error(`source ledger is missing ${id}`);
@@ -121,6 +122,56 @@ const domains = domainPackage.pages
 const candidatePages = [hub, ...domains];
 const reviewRowsByAssetId = new Map(reviewManifest.rows.map((row) => [row.asset_id, row]));
 
+const assessPublicClaimAuthority = (page) => page.claims.flatMap((mapping) => {
+  const authority = claimsById.get(mapping.claim_id);
+  if (!authority) {
+    return [{
+      code: 'claim_unknown',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    }];
+  }
+
+  const issues = [];
+  if (authority.allowed_as_public_claim !== true) {
+    issues.push({
+      code: 'claim_not_allowed_as_public',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    });
+  }
+  if (!authority.applicable_page_families.includes(page.page_family)) {
+    issues.push({
+      code: 'claim_not_applicable_to_page_family',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    });
+  }
+  for (const sourceId of mapping.source_ids) {
+    if (!authority.source_ids.includes(sourceId)) {
+      issues.push({
+        code: 'claim_source_not_authorized',
+        claim_id: mapping.claim_id,
+        page_family: page.page_family,
+        source_id: sourceId,
+      });
+    }
+  }
+  const hasPrimaryAcademicSource = mapping.source_ids.some((sourceId) => (
+    authority.primary_source_ids.includes(sourceId)
+    && sourcesById.get(sourceId)?.evidence_category === 'academic_evidence'
+  ));
+  if (authority.classification === 'core_scientific' && !hasPrimaryAcademicSource) {
+    issues.push({
+      code: 'primary_academic_source_missing',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    });
+  }
+
+  return issues;
+});
+
 const assets = candidatePages.map((page) => {
   const assetId = `${page.page_family}:zh-CN:${page.canonical_path}`;
   const reviewRow = reviewRowsByAssetId.get(assetId);
@@ -131,6 +182,8 @@ const assets = candidatePages.map((page) => {
   const expectedSources = isHub
     ? [sourceIds.goldberg, sourceIds.soto, sourceIds.roberts]
     : [sourceIds.goldberg, sourceIds.soto, sourceIds.ipip];
+  const claimAuthorityIssues = assessPublicClaimAuthority(page);
+  const sourceAuthorityComplete = claimAuthorityIssues.length === 0;
 
   return {
     asset_id: assetId,
@@ -162,10 +215,13 @@ const assets = candidatePages.map((page) => {
         : 'The prior BFI-2-only facet attribution gap is repaired by adding the official IPIP 30-facet correspondence source and an explicit taxonomy non-equivalence boundary.',
     },
     source_authority: {
-      status: 'approved_for_link_citation_and_original_paraphrase',
+      status: sourceAuthorityComplete
+        ? 'approved_for_link_citation_and_original_paraphrase'
+        : 'blocked_by_locked_source_ledger',
       visible_source_count: publicSourceIds.length,
       visible_source_ids: publicSourceIds,
       expected_visible_source_ids: expectedSources,
+      claim_authority_issues: claimAuthorityIssues,
       usage_scope: 'bibliographic citation, public link, short factual description, and original paraphrase only',
       excluded_use: 'no questionnaire items, tables, figures, abstracts, or substantial source text are reproduced',
       authority_reference: 'backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/README.md#source-authority-decision',
@@ -182,6 +238,7 @@ const assets = candidatePages.map((page) => {
     promotion: {
       eligible: false,
       blockers: [
+        ...(!sourceAuthorityComplete ? ['source_authority_blocked_by_locked_ledger'] : []),
         'real_human_attestation_required',
         'reviewer_admin_user_id_required',
         'media_permission_out_of_scope',
@@ -203,13 +260,16 @@ const output = {
   locale: 'zh-CN',
   cohort_id: 'big_five_v2_zh_cn_hub_plus_five_domains_01',
   prepared_on: '2026-07-16',
-  status: 'ready_for_real_human_attestation',
+  status: assets.every((asset) => asset.source_authority.status === 'approved_for_link_citation_and_original_paraphrase')
+    ? 'ready_for_real_human_attestation'
+    : 'blocked_source_authority_repair_required',
   authority_boundary: {
     cms_backend_remains_public_authority: true,
     this_package_is_public_runtime_authority: false,
     production_or_cms_write_performed: false,
     publication_or_indexability_changed: false,
     historical_generated_packages_mutated: false,
+    human_attestation_does_not_override_source_ledger: true,
   },
   input_hashes: expectedInputHashes,
   source_verification: {
@@ -225,6 +285,7 @@ const output = {
     automated_editorial_pass: assets.filter((asset) => asset.automated_editorial_review.status === 'pass_ready_for_human_attestation').length,
     human_manual_review_complete: 0,
     source_authority_complete: assets.filter((asset) => asset.source_authority.status === 'approved_for_link_citation_and_original_paraphrase').length,
+    source_authority_blocked: assets.filter((asset) => asset.source_authority.status === 'blocked_by_locked_source_ledger').length,
     promotion_eligible: 0,
   },
   assets,
@@ -232,4 +293,4 @@ const output = {
 
 writeFileSync(paths.output, `${JSON.stringify(output, null, 2)}\n`);
 console.log(`Wrote ${paths.output}`);
-console.log(`Assets: ${assets.length}; source authority complete: ${output.counts.source_authority_complete}; human attestations: 0`);
+console.log(`Assets: ${assets.length}; source authority complete: ${output.counts.source_authority_complete}; source authority blocked: ${output.counts.source_authority_blocked}; human attestations: 0`);
