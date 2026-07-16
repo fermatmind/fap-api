@@ -95445,9 +95445,9 @@
       "fap_api_origin_main_contains_link_graph_merge": true,
       "verified_at": "2026-07-16T08:31:28Z"
     },
-    "status": "blocked_release_gate_local_verified",
+    "status": "draft_open_blocked_release_gate",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3138",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -95476,6 +95476,10 @@
       "metadata_and_scope": {
         "status": "passed",
         "evidence": "Manifest YAML, ledger/package/report JSON, report SHA binding, git diff --check, and exact ten-file allowlist validation passed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "Draft PR #3138 is OPEN at head 00756a0311521b098429370d477107e82f82067a; initial required checks are pending."
       }
     },
     "scope_validation": {
@@ -95524,9 +95528,14 @@
         "at": "2026-07-16T08:37:08Z",
         "status": "ready_to_push_blocked_release_gate",
         "note": "Committed the exact ten-file PR22 scope as 6ddd5d044feb3fcd4edd2f7824468d11e65f7298 after all required local checks. Push and open exactly one Draft PR for review evidence; do not merge while the release decision remains HOLD."
+      },
+      {
+        "at": "2026-07-16T08:38:19Z",
+        "status": "draft_open_blocked_release_gate",
+        "note": "Pushed the exact PR22 branch and opened Draft PR #3138. GitHub reports OPEN/DRAFT at head 00756a0311521b098429370d477107e82f82067a with checks pending. Keep the PR unmerged and stop before PR23 while the release blockers remain."
       }
     ],
-    "updated_at": "2026-07-16T08:37:08Z"
+    "updated_at": "2026-07-16T08:38:19Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
