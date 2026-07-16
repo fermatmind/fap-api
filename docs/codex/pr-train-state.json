@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "7f6f5e4c3995cd50d57033c2310c8306240b5320",
+    "status": "review_fix_local_validation_passed",
+    "commit_sha": "247ae2726f0e20f541ed1d0137524312c4cc8d21",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96140,7 +96140,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 44 tests / 809 assertions. Manifest preflight now recomputes the V223 canonical evidence fingerprint for every supplied review evidence_sha256 and fails before workspace writes on mismatch. Readback leak detection UTF-8 case-folds raw and decoded public responses plus private reviewer values. Existing exact endpoint/pre-readback provenance, 116 import/bind/promotion, private-register, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remains green."
+        "evidence": "V205/V206/V223/V224 pass 47 tests / 828 assertions. Every runtime API/HTML/discoverability/cache/revalidation request disables redirects. Execute re-reads and compares all three complete authorized URL sets before rollback reservation or any runtime write, so pre-existing drift is FAIL_CLOSED_NO_WRITES. Exact evidence-SHA and UTF-8 case-folded private-reviewer leak protections remain green alongside endpoint/pre-readback provenance, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96148,21 +96148,21 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 209 tests / 28816 assertions after waiting for the existing full Composer validation in another worktree to release the local heavy-test concurrency guard."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 212 tests / 28834 assertions after the redirect and pre-write full URL-set drift repairs."
       },
       "static_and_scope": {
         "status": "passed",
         "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
       },
       "github_required": {
-        "status": "passed",
-        "evidence": "Exact review-fix plus pending-ledger head 7f6f5e4c3995cd50d57033c2310c8306240b5320 passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope, and has a clean worktree. The ready-to-merge ledger-only commit must pass one final fresh check and exact-head review cycle before squash merge."
+        "status": "pending",
+        "evidence": "Previous head 7f6f5e4c3995cd50d57033c2310c8306240b5320 passed all nine required GitHub checks and was CLEAN/MERGEABLE. Its exact-head review raised two later P2 findings, now fixed at code commit 247ae2726f0e20f541ed1d0137524312c4cc8d21; require a fresh complete GitHub check and exact-head review cycle before squash merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96310,9 +96310,14 @@
         "at": "2026-07-16T18:02:23Z",
         "status": "ready_to_merge",
         "note": "Exact review-fix plus pending-ledger head 7f6f5e4c3995cd50d57033c2310c8306240b5320 passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope, and has a clean worktree. This ready-to-merge ledger-only update must independently pass one final complete check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T18:11:23Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The next exact-head review found redirect-following readbacks and full URL-set comparison occurring only after writes. Code commit 247ae2726f0e20f541ed1d0137524312c4cc8d21 disables redirects for every 22E external request and compares the complete live sitemap/llms/llms-full sets against the authorized pre-readback before rollback reservation, import, bind, promotion, cache, or revalidation. The first focused run exposed two stacked-Http-fake fixture assumptions and one no-pre-readback SQLite expectation; these were corrected without weakening production behavior. Final focused 47/828, cache/API 8/72, classifier 1/2, full Enneagram V2 212/28834, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T18:02:23Z"
+    "updated_at": "2026-07-16T18:11:23Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
