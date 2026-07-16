@@ -27,6 +27,26 @@ final class EnneagramPublicAuthorityV220LinkGraphTest extends TestCase
         'deployed',
     ];
 
+    private const QA_CHECK_KEYS = [
+        'exact_pr07_116_route_inventory',
+        'exact_pr09_18_visible_faq_intents',
+        'exact_pr19_media_route_parity',
+        'unique_graph_ids_paths_and_canonicals',
+        'all_internal_targets_resolve',
+        'locale_preserving_internal_links',
+        'reciprocal_en_zh_cn_hreflang',
+        'consistent_en_x_default',
+        'no_private_route',
+        'bounded_entity_taxonomy_only',
+        'no_unregistered_matrix_expansion',
+        'no_dead_or_self_link',
+        'no_orphan_or_sink_record',
+        'backend_authority_only',
+        'no_frontend_invented_graph',
+        'release_deferred_to_pr22',
+        'no_runtime_or_production_mutation',
+    ];
+
     public function test_exact_graph_records_match_the_frozen_route_inventory(): void
     {
         $graph = $this->readJson(self::PACKAGE_DIR.'/link-graph.json');
@@ -199,8 +219,9 @@ final class EnneagramPublicAuthorityV220LinkGraphTest extends TestCase
         foreach (['dead_links', 'cross_locale_links', 'private_routes', 'self_links', 'orphan_records', 'sink_records'] as $field) {
             $this->assertSame(0, $qa['counts'][$field], $field);
         }
+        $this->assertSame(self::QA_CHECK_KEYS, array_keys($qa['checks']));
         foreach ($qa['checks'] as $field => $check) {
-            $this->assertTrue($check, $field);
+            $this->assertSame(true, $check, $field);
         }
         $this->assertExecutionBoundariesAreExactAndFalse($qa['execution_boundaries']);
     }
