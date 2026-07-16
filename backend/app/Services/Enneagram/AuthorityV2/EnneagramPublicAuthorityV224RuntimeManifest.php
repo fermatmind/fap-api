@@ -149,6 +149,9 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         string $reviewRegisterSha256,
         string $backendDeployedSha,
         string $frontendDeployedSha,
+        string $apiBaseUrl,
+        string $frontendBaseUrl,
+        string $revalidationEndpoint,
         string $workspacePreflightFingerprint,
         ?array $preReadback = null,
         ?string $preReadbackSha256 = null,
@@ -158,6 +161,7 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         $this->assertGitSha($backendDeployedSha, 'backend deployed SHA');
         $this->assertGitSha($frontendDeployedSha, 'frontend deployed SHA');
         $this->assertHash($workspacePreflightFingerprint, 'working import preflight fingerprint');
+        $runtimeEndpoints = $this->runtimeEndpoints($apiBaseUrl, $frontendBaseUrl, $revalidationEndpoint);
         $records = $this->releaseRecords($releaseReport);
         $this->assertApprovedReviewRegister(
             $reviewRegister,
@@ -230,6 +234,7 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         $runtimeFingerprint = $this->fingerprint([
             'backend_deployed_sha' => $backendDeployedSha,
             'frontend_deployed_sha' => $frontendDeployedSha,
+            'runtime_endpoints' => $runtimeEndpoints,
             'release_report_sha256' => $releaseReportSha256,
             'package_sha256' => (string) $releaseReport['package_sha256'],
             'review_register_sha256' => $reviewRegisterSha256,
@@ -253,6 +258,7 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
             'status' => 'AWAITING_SEPARATE_EXACT_SHA_PRODUCTION_AUTHORIZATION',
             'backend_deployed_sha' => $backendDeployedSha,
             'frontend_deployed_sha' => $frontendDeployedSha,
+            'runtime_endpoints' => $runtimeEndpoints,
             'release_report_sha256' => $releaseReportSha256,
             'package_sha256' => (string) $releaseReport['package_sha256'],
             'review_register_sha256' => $reviewRegisterSha256,
@@ -399,6 +405,58 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
             $reviewRegisterSha256,
             $runtimeFingerprint,
         );
+    }
+
+    /** @return array{api_base_origin:string,frontend_base_origin:string,frontend_revalidation_endpoint:string} */
+    private function runtimeEndpoints(
+        string $apiBaseUrl,
+        string $frontendBaseUrl,
+        string $revalidationEndpoint,
+    ): array {
+        return [
+            'api_base_origin' => $this->exactHttpsOrigin($apiBaseUrl, 'API base origin'),
+            'frontend_base_origin' => $this->exactHttpsOrigin($frontendBaseUrl, 'frontend base origin'),
+            'frontend_revalidation_endpoint' => $this->exactHttpsEndpoint(
+                $revalidationEndpoint,
+                'frontend revalidation endpoint',
+            ),
+        ];
+    }
+
+    private function exactHttpsOrigin(string $value, string $label): string
+    {
+        $value = rtrim(trim($value), '/');
+        $parts = parse_url($value);
+        if (! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || trim((string) ($parts['host'] ?? '')) === ''
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || isset($parts['query'])
+            || isset($parts['fragment'])
+            || (($parts['path'] ?? '') !== '')) {
+            throw new RuntimeException($label.' must be an exact HTTPS origin without credentials, path, query, or fragment.');
+        }
+
+        return $value;
+    }
+
+    private function exactHttpsEndpoint(string $value, string $label): string
+    {
+        $value = trim($value);
+        $parts = parse_url($value);
+        if (! is_array($parts)
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || trim((string) ($parts['host'] ?? '')) === ''
+            || trim((string) ($parts['path'] ?? '')) === ''
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || isset($parts['query'])
+            || isset($parts['fragment'])) {
+            throw new RuntimeException($label.' must be an exact HTTPS URL without credentials, query, or fragment.');
+        }
+
+        return $value;
     }
 
     /** @param list<array<string,mixed>> $records @return array<string,list<array<string,mixed>>> */

@@ -39,6 +39,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->fingerprintRaw($register),
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
         );
 
         $this->assertTrue($result['ok']);
@@ -49,6 +52,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->assertFalse($result['writes_committed']);
         $this->assertSame(116, count($result['artifacts']['checklist']['items']));
         $this->assertSame(116, count($result['artifacts']['review_register_template']['reviews']));
+        $this->assertSame([
+            'api_base_origin' => 'https://api.test',
+            'frontend_base_origin' => 'https://frontend.test',
+            'frontend_revalidation_endpoint' => 'https://frontend.test/api/content-release/revalidate',
+        ], $result['authorization_packet']['runtime_endpoints']);
         $batches = $result['artifacts']['readback_batches']['batches'];
         $this->assertSame([
             'en|hub:enneagram',
@@ -72,6 +80,66 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
     }
 
+    public function test_execute_rejects_runtime_endpoint_drift_before_any_write(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        $reportSha = $this->fingerprintRaw($report);
+        $registerSha = $this->fingerprintRaw($register);
+        $closeout = $this->closeout();
+        $preflight = $closeout->preflight(
+            $report,
+            $reportSha,
+            $register,
+            $registerSha,
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
+        );
+
+        $driftedEndpoints = [
+            ['https://mirror-api.test', 'https://frontend.test', 'https://frontend.test/api/content-release/revalidate'],
+            ['https://api.test', 'https://mirror-frontend.test', 'https://frontend.test/api/content-release/revalidate'],
+            ['https://api.test', 'https://frontend.test', 'https://mirror-frontend.test/api/content-release/revalidate'],
+        ];
+        foreach ($driftedEndpoints as [$apiBaseUrl, $frontendBaseUrl, $revalidationEndpoint]) {
+            $rollbackPath = '/tmp/enneagram-v224-endpoint-drift-'.bin2hex(random_bytes(8)).'.token';
+            try {
+                $closeout->execute(
+                    $report,
+                    $reportSha,
+                    $register,
+                    $registerSha,
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                    $preflight['authorization_packet'],
+                    (string) $preflight['authorization_packet_sha256'],
+                    (string) $preflight['authorization_packet']['authorization_phrase'],
+                    $rollbackPath,
+                    $apiBaseUrl,
+                    $frontendBaseUrl,
+                    $revalidationEndpoint,
+                    self::REVALIDATION_SECRET,
+                );
+                $this->fail('Expected runtime endpoint drift to fail closed before writes.');
+            } catch (\Throwable $throwable) {
+                $result = $closeout->failureResult($throwable);
+            }
+
+            $this->assertSame('FAIL_CLOSED_NO_WRITES', $result['status']);
+            $this->assertSame('authorization_validation', $result['failure_stage']);
+            $this->assertFalse($result['writes_committed']);
+            $this->assertFileDoesNotExist($rollbackPath);
+        }
+
+        $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+        $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+    }
+
     public function test_authorized_execute_runs_import_bind_atomic_promotion_cache_and_nine_plus_canary_readbacks(): void
     {
         $this->seedPublishedEstate();
@@ -87,6 +155,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $registerSha,
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
         );
         $this->fakeRuntimeHttp($report);
         $rollbackPath = '/tmp/enneagram-v224-rollback-'.bin2hex(random_bytes(8)).'.token';
@@ -288,6 +359,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $outputDirectory = storage_path('framework/testing/enneagram-v224-artifacts-'.bin2hex(random_bytes(4)));
         File::ensureDirectoryExists(dirname($registerPath));
         File::put($registerPath, json_encode($this->reviewRegister($this->releaseReport()), JSON_THROW_ON_ERROR));
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
 
         try {
             $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
@@ -295,6 +367,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--review-register' => $registerPath,
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
                 '--output-dir' => $outputDirectory,
                 '--allow-testing' => true,
             ])
@@ -333,6 +407,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $registerSha,
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
         );
         $this->fakeRuntimeHttp($report, true);
         $rollbackPath = '/tmp/enneagram-v224-rollback-'.bin2hex(random_bytes(8)).'.token';
@@ -393,6 +470,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $registerSha,
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
         );
         $existingPath = '/tmp/enneagram-v224-existing-'.bin2hex(random_bytes(8)).'.token';
         File::put($existingPath, 'operator-owned-sentinel');
@@ -454,6 +534,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->fingerprintRaw($register),
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
             $readback,
             $this->fingerprintRaw($readback),
         );
@@ -478,6 +561,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $this->fingerprintRaw($register),
                     self::BACKEND_SHA,
                     self::FRONTEND_SHA,
+                    'https://api.test',
+                    'https://frontend.test',
+                    'https://frontend.test/api/content-release/revalidate',
                     $invalid,
                     $this->fingerprintRaw($invalid),
                 );
@@ -497,6 +583,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         File::ensureDirectoryExists(dirname($registerPath));
         File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
         File::put($existingOutput, 'operator-owned-closeout-sentinel');
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
 
         try {
             $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
@@ -504,6 +591,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--review-register' => $registerPath,
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
                 '--output' => $existingOutput,
                 '--allow-testing' => true,
             ])
@@ -534,6 +623,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             hash('sha256', $registerRaw),
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
         );
         $suffix = bin2hex(random_bytes(4));
         $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.$suffix.'.json');

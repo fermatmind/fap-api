@@ -32,8 +32,8 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         {--operator-approved= : Separate exact dynamic production authorization phrase}
         {--rollback-token-output= : Absolute path outside Git for the signed rollback token}
         {--bound-by-admin-user-id= : Optional internal admin actor id}
-        {--api-base-url= : Public backend API origin; required for execute}
-        {--frontend-base-url= : Public frontend origin; required for execute}
+        {--api-base-url= : Exact public backend API origin; required for preflight and execute}
+        {--frontend-base-url= : Exact public frontend origin; required for preflight and execute}
         {--output-dir= : Preflight artifact directory}
         {--output= : Execute-mode redacted closeout artifact path}
         {--allow-testing : Permit execute only in APP_ENV=testing with SQLite}
@@ -81,6 +81,9 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         $backendSha = $this->requiredOption('backend-deployed-sha');
         $frontendSha = $this->requiredOption('frontend-deployed-sha');
         $this->assertDeployedRevisions($backendSha, $frontendSha);
+        $apiBaseUrl = $this->requiredHttpsOrigin('api-base-url');
+        $frontendBaseUrl = $this->requiredHttpsOrigin('frontend-base-url');
+        $revalidationEndpoint = $this->revalidationEndpoint();
 
         if ($preflight) {
             if (! app()->environment('testing') && $preReadback === null) {
@@ -93,6 +96,9 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
                 $reviewRegisterSha,
                 $backendSha,
                 $frontendSha,
+                $apiBaseUrl,
+                $frontendBaseUrl,
+                $revalidationEndpoint,
                 $preReadback,
                 $preReadbackSha,
             );
@@ -115,9 +121,9 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
             $this->requiredOption('confirm-authorization-packet-sha256'),
             $this->requiredOption('operator-approved'),
             $this->requiredOption('rollback-token-output'),
-            $this->requiredHttpsOrigin('api-base-url'),
-            $this->requiredHttpsOrigin('frontend-base-url'),
-            $this->revalidationEndpoint(),
+            $apiBaseUrl,
+            $frontendBaseUrl,
+            $revalidationEndpoint,
             $this->revalidationSecret(),
             $this->optionalPositiveIntegerOption('bound-by-admin-user-id'),
             $preReadback,
