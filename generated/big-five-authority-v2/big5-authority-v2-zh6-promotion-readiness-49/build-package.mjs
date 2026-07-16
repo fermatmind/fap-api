@@ -78,6 +78,8 @@ const controlledOwnerApprovalFields = [
 ];
 invariant(controlledOwnerApprovalFields.every((field) => ownerAuthority.approval_scope?.[field] === false),
   'OWNER authority must not imply controlled action approval');
+invariant(sha256(ownerAuthorityText) === '6646dd8086d6e85a42539d8e77f4cda31649a903875825d7916d3023467134cf',
+  'OWNER authority file SHA drift');
 invariant(observation.schema_version === 'big5-zh6-promotion-readiness-production-observation.v1', 'production observation schema mismatch');
 invariant(observation.admin_user_1?.exists === true && observation.admin_user_1?.is_active === true, 'admin_user:1 is not active');
 invariant(observation.admin_user_1?.public_label === 'FermatMind Editorial', 'public editorial label drift');

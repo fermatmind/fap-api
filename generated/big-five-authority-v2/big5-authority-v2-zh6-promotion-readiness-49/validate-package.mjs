@@ -61,8 +61,15 @@ invariant(packageJson.inputs.production_observation_sha256 === sha256(observatio
 invariant(packageJson.inputs.owner_authority_sha256 === sha256(ownerAuthorityText), 'OWNER authority SHA mismatch');
 invariant(packageJson.release_lock_material.owner_authority_sha256 === sha256(ownerAuthorityText), 'release lock OWNER authority SHA mismatch');
 invariant(ownerAuthority.schema_version === 'big5-zh6-pr48-owner-authority.v1', 'OWNER authority schema mismatch');
+invariant(ownerAuthority.source === 'github_pull_request_comment', 'OWNER authority source mismatch');
+invariant(ownerAuthority.repository === 'fermatmind/fap-api' && ownerAuthority.pull_request_number === 3139,
+  'OWNER authority repository or PR mismatch');
 invariant(ownerAuthority.comment_database_id === 4990228962 && ownerAuthority.author_login === 'fermatmind' && ownerAuthority.author_association === 'OWNER', 'OWNER authority identity mismatch');
-const expectedOwnerPhrase = `我已阅读并批准 BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48 最终公开 snapshot；cohort_snapshot_sha256=${ownerAuthority.cohort_snapshot_sha256}；package_payload_sha256=${ownerAuthority.package_payload_sha256}；package_file_sha256=${ownerAuthority.package_file_sha256}；CMS reviewer_admin_user_id=1。`;
+invariant(ownerAuthority.cohort_snapshot_sha256 === snapshot.cohort_snapshot_sha256
+  && ownerAuthority.package_payload_sha256 === snapshot.package_payload_sha256
+  && ownerAuthority.package_file_sha256 === sha256(snapshotText),
+'OWNER authority snapshot hashes mismatch');
+const expectedOwnerPhrase = `我已阅读并批准 BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48 最终公开 snapshot；cohort_snapshot_sha256=${snapshot.cohort_snapshot_sha256}；package_payload_sha256=${snapshot.package_payload_sha256}；package_file_sha256=${sha256(snapshotText)}；CMS reviewer_admin_user_id=1。`;
 invariant(ownerAuthority.confirmation_phrase === expectedOwnerPhrase, 'OWNER authority phrase mismatch');
 invariant(ownerAuthority.confirmed_at === '2026-07-16T09:24:18Z' && ownerAuthority.reviewer_admin_user_id === 1, 'OWNER authority timestamp or reviewer mismatch');
 const controlledOwnerApprovalFields = [
@@ -75,6 +82,8 @@ const controlledOwnerApprovalFields = [
 ];
 invariant(controlledOwnerApprovalFields.every((field) => ownerAuthority.approval_scope?.[field] === false),
   'OWNER authority must not approve controlled actions');
+invariant(sha256(ownerAuthorityText) === '6646dd8086d6e85a42539d8e77f4cda31649a903875825d7916d3023467134cf',
+  'OWNER authority file SHA drift');
 invariant(packageJson.counts.assets === 6 && packageJson.counts.reviewed_assets === 6, 'exact six-asset review binding missing');
 invariant(packageJson.counts.source_permission_assets === 6 && packageJson.counts.visible_sources === 18, 'source permission counts mismatch');
 invariant(packageJson.counts.runtime_baselines === 6, 'rollback baseline count mismatch');
