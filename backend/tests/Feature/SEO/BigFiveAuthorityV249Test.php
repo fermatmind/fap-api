@@ -1,0 +1,1120 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Feature\SEO;
+
+use App\Models\MediaAsset;
+use App\Models\MediaVariant;
+use App\Services\BigFive\AuthorityV2\PromotionReadiness\BigFiveZh6PromotionReadiness;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
+use RuntimeException;
+use Symfony\Component\Process\Process;
+use Tests\TestCase;
+
+final class BigFiveAuthorityV249Test extends TestCase
+{
+    use RefreshDatabase;
+
+    private const PACKAGE_DIR = 'generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49';
+
+    public function test_builder_is_deterministic_and_checked_in_hold_package_validates(): void
+    {
+        $packagePath = $this->repositoryPath(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $before = hash_file('sha256', $packagePath);
+
+        $this->runNode('build-package.mjs');
+
+        $this->assertSame($before, hash_file('sha256', $packagePath));
+        $this->runNode('validate-package.mjs');
+    }
+
+    public function test_exact_owner_editorial_source_runtime_and_rollback_authority_is_hash_bound(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $owner = $this->readJson(self::PACKAGE_DIR.'/pr48-owner-authority.json');
+        $review = $package['editorial_authority']['review_record'];
+
+        $this->assertSame('HOLD_FAIL_CLOSED_MEDIA_AUTHORITY', $package['status']);
+        $this->assertSame(6, $package['counts']['assets']);
+        $this->assertSame(6, $package['counts']['reviewed_assets']);
+        $this->assertSame(6, $package['counts']['source_permission_assets']);
+        $this->assertSame(18, $package['counts']['visible_sources']);
+        $this->assertSame(6, $package['counts']['runtime_baselines']);
+        $this->assertSame('solo_operator', $review['mode']);
+        $this->assertTrue($review['explicit_self_review']);
+        $this->assertSame(1, $review['author_admin_user_id']);
+        $this->assertSame(1, $review['reviewer_admin_user_id']);
+        $this->assertFalse($review['global_role_separation_relaxed']);
+        $this->assertSame('2026-07-16T09:24:18Z', $review['reviewed_at']);
+        $this->assertSame(4990228962, $review['external_human_authority']['comment_database_id']);
+        $this->assertSame('OWNER', $review['external_human_authority']['author_association']);
+        $this->assertSame(hash('sha256', $owner['confirmation_phrase']), $review['external_human_authority']['confirmation_phrase_sha256']);
+        $this->assertSame(6, $owner['approval_scope']['snapshot_assets']);
+        $this->assertFalse($owner['approval_scope']['media_authority']);
+        $this->assertFalse($owner['approval_scope']['working_revision_write']);
+
+        foreach ($package['source_permissions']['rows'] as $row) {
+            $this->assertTrue($row['approved']);
+            $this->assertCount(3, $row['source_ids']);
+        }
+        foreach ($package['rollback_baseline']['rows'] as $row) {
+            $this->assertTrue($row['exact_target_bound']);
+            $this->assertTrue($row['abort_on_missing_or_drifted_target']);
+        }
+    }
+
+    public function test_production_observation_keeps_zero_eligible_hub_media_and_every_mutation_zero(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+
+        $this->assertSame(49, $observation['media_inventory']['all_media_assets']);
+        $this->assertSame(23, $observation['media_inventory']['published_public_synced_cdn_verified']);
+        $this->assertSame(22, $observation['media_inventory']['with_verified_hero_and_og']);
+        $this->assertSame(0, $observation['media_inventory']['authority_complete_hero_og_count']);
+        $this->assertSame([], $observation['media_inventory']['authority_complete_hero_og']);
+        $this->assertFalse($observation['admin_user_1']['totp_policy_enabled']);
+        $this->assertSame('2026-07-16T13:16:30Z', $observation['admin_user_1']['totp_policy_observed_at']);
+        $this->assertFalse($observation['admin_user_1']['totp_enrolled']);
+        $this->assertCount(4, $observation['media_inventory']['big_five_named_hero_og']);
+        $this->assertSame(0, $package['counts']['eligible_hub_media_candidates']);
+        $this->assertSame(0, $package['counts']['selected_hub_media_assets']);
+        $this->assertFalse($package['ready_for_working_revision']);
+        $this->assertFalse($package['ready_for_promotion']);
+        $this->assertFalse($package['permissions']['media']['approved']);
+        $this->assertTrue($package['permissions']['reviewer']['approved']);
+        $this->assertFalse($package['permissions']['reviewer']['totp_required']);
+        $this->assertNotContains('admin_user_1_totp_enrollment_missing', $package['blockers']);
+        $this->assertContains('unique_hub_hero_og_media_missing', $package['blockers']);
+
+        foreach ($observation['media_inventory']['big_five_named_hero_og'] as $candidate) {
+            $this->assertSame(
+                ['locale', 'rights', 'license', 'provenance', 'operator_approval_ref', 'content_identity'],
+                $candidate['missing_authority_fields'],
+            );
+            $this->assertNotContains('hub', $candidate['declared_usage']);
+        }
+        foreach ($package['actions'] as $name => $value) {
+            if ($name === 'production_database_read_only_observation') {
+                $this->assertTrue($value);
+            } else {
+                $this->assertSame(0, $value, $name.' must remain zero');
+            }
+        }
+    }
+
+    public function test_media_gate_selects_one_complete_candidate_and_holds_on_multiple(): void
+    {
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $candidate = $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1');
+
+        $unique = $this->buildTemporaryPackage($observation, [$candidate]);
+        $this->assertSame('PASS_PROMOTION_READINESS_ZERO_WRITE', $unique['package']['status']);
+        $this->assertTrue($unique['package']['ready_for_working_revision']);
+        $this->assertSame(1, $unique['package']['counts']['selected_hub_media_assets']);
+        $this->assertTrue($unique['package']['permissions']['media']['approved']);
+        $this->assertSame([], $unique['package']['blockers']);
+        $uniqueResult = app(BigFiveZh6PromotionReadiness::class)->packageOnly($unique['package_path']);
+        $this->assertTrue($uniqueResult['contract_valid']);
+        $this->assertTrue($uniqueResult['ready']);
+        $this->assertSame('PASS_PROMOTION_READINESS_ZERO_WRITE', $uniqueResult['status']);
+        $this->cleanupTemporaryPackage($unique['directory']);
+
+        $multiple = $this->buildTemporaryPackage($observation, [
+            $candidate,
+            $this->completeMediaCandidate(9002, 'media.big-five.zh-hub.v2'),
+        ]);
+        $this->assertSame('HOLD_FAIL_CLOSED_MEDIA_AUTHORITY', $multiple['package']['status']);
+        $this->assertFalse($multiple['package']['ready_for_working_revision']);
+        $this->assertSame(0, $multiple['package']['counts']['selected_hub_media_assets']);
+        $this->assertContains('multiple_hub_hero_og_media_candidates', $multiple['package']['blockers']);
+        $this->cleanupTemporaryPackage($multiple['directory']);
+    }
+
+    public function test_unique_media_still_holds_when_reviewer_totp_is_not_enrolled(): void
+    {
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $observation['admin_user_1']['totp_policy_enabled'] = true;
+        $package = $this->buildTemporaryPackage($observation, [
+            $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1'),
+        ]);
+
+        $this->assertSame('HOLD_FAIL_CLOSED_REVIEWER_TOTP', $package['package']['status']);
+        $this->assertFalse($package['package']['ready_for_working_revision']);
+        $this->assertFalse($package['package']['permissions']['reviewer']['approved']);
+        $this->assertTrue($package['package']['permissions']['reviewer']['totp_required']);
+        $this->assertTrue($package['package']['permissions']['media']['approved']);
+        $this->assertContains('admin_user_1_totp_enrollment_missing', $package['package']['blockers']);
+
+        $result = app(BigFiveZh6PromotionReadiness::class)->packageOnly($package['package_path']);
+        $this->assertFalse($result['ready']);
+        $this->assertSame('HOLD_FAIL_CLOSED_REVIEWER_TOTP', $result['status']);
+        $this->cleanupTemporaryPackage($package['directory']);
+    }
+
+    public function test_unique_media_permission_must_reference_the_locked_authority_hash(): void
+    {
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $observation['admin_user_1']['totp_enrolled'] = true;
+        $temporary = $this->buildTemporaryPackage($observation, [
+            $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1'),
+        ]);
+        $package = $temporary['package'];
+        $package['permissions']['media']['authority_reference'] = 'media_authority:'.str_repeat('0', 64);
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $this->writeJson($temporary['package_path'], $package);
+        $this->assertNotFalse(file_put_contents(
+            $temporary['directory'].'/package.sha256',
+            hash_file('sha256', $temporary['package_path'])."\n",
+        ));
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+                'PR49_PACKAGE_PATH' => $temporary['package_path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/package.sha256',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'unique media authority permission does not match locked hash',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['package_path']);
+            $this->fail('Expected a rehashed media permission with the wrong authority reference to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('media readiness disposition is inconsistent', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_rehashed_selected_media_must_match_the_observed_unique_candidate(): void
+    {
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $observation['admin_user_1']['totp_enrolled'] = true;
+        $temporary = $this->buildTemporaryPackage($observation, [
+            $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1'),
+        ]);
+        $package = $temporary['package'];
+        $package['media_authority']['selected_candidate']['media_asset_id'] = 9002;
+        $package['media_authority']['selected_candidate']['media_asset_key'] = 'media.big-five.zh-hub.substituted';
+        $package['media_authority']['selected_candidate']['public_urls'] = [
+            'hero' => 'https://assets.fermatmind.com/media/9002/hero.webp',
+            'og' => 'https://assets.fermatmind.com/media/9002/og.webp',
+        ];
+        $candidateMaterial = $package['media_authority']['selected_candidate'];
+        unset($candidateMaterial['candidate_sha256']);
+        $package['media_authority']['selected_candidate']['candidate_sha256'] = $this->canonicalSha256($candidateMaterial);
+        $mediaMaterial = array_intersect_key($package['media_authority'], array_flip([
+            'required_content_identity',
+            'required_variant_keys',
+            'selection_status',
+            'eligible_candidate_count',
+            'selected_candidate',
+            'fail_closed_on_zero_or_multiple',
+            'observation_sha256',
+        ]));
+        $mediaAuthoritySha256 = $this->canonicalSha256($mediaMaterial);
+        $package['media_authority']['media_authority_sha256'] = $mediaAuthoritySha256;
+        $package['permissions']['media']['authority_reference'] = 'media_authority:'.$mediaAuthoritySha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['media_authority_sha256'] = $mediaAuthoritySha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $this->writeJson($temporary['package_path'], $package);
+        $this->assertNotFalse(file_put_contents(
+            $temporary['directory'].'/package.sha256',
+            hash_file('sha256', $temporary['package_path'])."\n",
+        ));
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+                'PR49_PACKAGE_PATH' => $temporary['package_path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/package.sha256',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'selected media candidate does not match production observation',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['package_path']);
+            $this->fail('Expected a rehashed selected media substitution to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('selected media candidate does not match the observation', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_builder_rejects_a_non_sibling_production_observation_before_writing(): void
+    {
+        $observationDirectory = $this->temporaryDirectory();
+        $outputDirectory = $this->temporaryDirectory();
+        $observationPath = $observationDirectory.'/production-observation.json';
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+
+        try {
+            $builder = $this->nodeProcess('build-package.mjs', [
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OUTPUT_PATH' => $outputDirectory.'/package.json',
+                'PR49_OUTPUT_HASH_PATH' => $outputDirectory.'/package.sha256',
+            ]);
+            $this->assertFalse($builder->isSuccessful());
+            $this->assertStringContainsString(
+                'production observation must be the reviewed package sibling',
+                $builder->getErrorOutput().$builder->getOutput(),
+            );
+            $this->assertFileDoesNotExist($outputDirectory.'/package.json');
+        } finally {
+            $this->cleanupTemporaryPackage($observationDirectory);
+            $this->cleanupTemporaryPackage($outputDirectory);
+        }
+    }
+
+    public function test_builder_rejects_a_self_asserted_or_tampered_owner_phrase(): void
+    {
+        $owner = $this->readJson(self::PACKAGE_DIR.'/pr48-owner-authority.json');
+        $owner['confirmation_phrase'] = 'approved';
+        $temporaryDirectory = $this->temporaryDirectory();
+        $ownerPath = $temporaryDirectory.'/owner.json';
+        $observationPath = $temporaryDirectory.'/production-observation.json';
+        $this->writeJson($ownerPath, $owner);
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+
+        try {
+            $process = $this->nodeProcess('build-package.mjs', [
+                'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OUTPUT_PATH' => $temporaryDirectory.'/package.json',
+                'PR49_OUTPUT_HASH_PATH' => $temporaryDirectory.'/package.sha256',
+            ]);
+            $this->assertFalse($process->isSuccessful());
+            $this->assertStringContainsString(
+                'OWNER authority phrase does not match the locked three hashes',
+                $process->getErrorOutput().$process->getOutput(),
+            );
+        } finally {
+            $this->cleanupTemporaryPackage($temporaryDirectory);
+        }
+    }
+
+    public function test_standalone_tools_reject_rehashed_owner_authority_that_approves_controlled_actions(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $owner = $this->readJson(self::PACKAGE_DIR.'/pr48-owner-authority.json');
+        $owner['approval_scope']['promotion_or_publication'] = true;
+        $directory = $this->temporaryDirectory();
+        $ownerPath = $directory.'/owner-authority.json';
+        $observationPath = $directory.'/production-observation.json';
+        $packagePath = $directory.'/rewritten-owner-scope-package.json';
+        $packageHashPath = $directory.'/rewritten-owner-scope-package.sha256';
+        $this->writeJson($ownerPath, $owner);
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+        $ownerSha256 = hash_file('sha256', $ownerPath);
+        $this->assertIsString($ownerSha256);
+        $package['inputs']['owner_authority_path'] = $ownerPath;
+        $package['inputs']['owner_authority_sha256'] = $ownerSha256;
+        $package['inputs']['production_observation_path'] = $observationPath;
+        $package['release_lock_material']['owner_authority_sha256'] = $ownerSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $this->writeJson($packagePath, $package);
+        $this->assertNotFalse(file_put_contents(
+            $packageHashPath,
+            hash_file('sha256', $packagePath)."\n",
+        ));
+
+        try {
+            $builder = $this->nodeProcess('build-package.mjs', [
+                'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OUTPUT_PATH' => $directory.'/builder-output.json',
+                'PR49_OUTPUT_HASH_PATH' => $directory.'/builder-output.sha256',
+            ]);
+            $this->assertFalse($builder->isSuccessful());
+            $this->assertStringContainsString(
+                'OWNER authority must not imply controlled action approval',
+                $builder->getErrorOutput().$builder->getOutput(),
+            );
+
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $packagePath,
+                'PR49_PACKAGE_HASH_PATH' => $packageHashPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'OWNER authority must not approve controlled actions',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+        } finally {
+            $this->cleanupTemporaryPackage($directory);
+        }
+    }
+
+    public function test_standalone_tools_reject_fully_rehashed_owner_authority_detached_from_pr48(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $owner = $this->readJson(self::PACKAGE_DIR.'/pr48-owner-authority.json');
+        $owner['pull_request_number'] = 3141;
+        $directory = $this->temporaryDirectory();
+        $ownerPath = $directory.'/owner-authority.json';
+        $observationPath = $directory.'/production-observation.json';
+        $packagePath = $directory.'/rewritten-owner-pr-package.json';
+        $packageHashPath = $directory.'/rewritten-owner-pr-package.sha256';
+        $this->writeJson($ownerPath, $owner);
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+        $ownerSha256 = hash_file('sha256', $ownerPath);
+        $this->assertIsString($ownerSha256);
+        $package['inputs']['owner_authority_path'] = $ownerPath;
+        $package['inputs']['owner_authority_sha256'] = $ownerSha256;
+        $package['inputs']['production_observation_path'] = $observationPath;
+        $package['editorial_authority']['review_record']['external_human_authority']['pull_request_number'] = 3141;
+        $reviewSha256 = $this->canonicalSha256($package['editorial_authority']['review_record']);
+        $package['editorial_authority']['review_record_sha256'] = $reviewSha256;
+        $package['permissions']['reviewer']['authority_reference'] = 'solo_operator_review:'.$reviewSha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['owner_authority_sha256'] = $ownerSha256;
+        $package['release_lock_material']['review_record_sha256'] = $reviewSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $this->writeJson($packagePath, $package);
+        $this->assertNotFalse(file_put_contents(
+            $packageHashPath,
+            hash_file('sha256', $packagePath)."\n",
+        ));
+
+        try {
+            $builder = $this->nodeProcess('build-package.mjs', [
+                'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OUTPUT_PATH' => $directory.'/builder-output.json',
+                'PR49_OUTPUT_HASH_PATH' => $directory.'/builder-output.sha256',
+            ]);
+            $this->assertFalse($builder->isSuccessful());
+            $this->assertStringContainsString(
+                'OWNER authority PR mismatch',
+                $builder->getErrorOutput().$builder->getOutput(),
+            );
+
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $packagePath,
+                'PR49_PACKAGE_HASH_PATH' => $packageHashPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'OWNER authority repository or PR mismatch',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+        } finally {
+            $this->cleanupTemporaryPackage($directory);
+        }
+    }
+
+    public function test_readiness_command_validates_the_hold_package_without_database_writes(): void
+    {
+        $assetCount = MediaAsset::query()->withoutGlobalScopes()->count();
+        $variantCount = MediaVariant::query()->count();
+        $packagePath = '../'.self::PACKAGE_DIR.'/promotion-readiness-package.json';
+        $result = app(BigFiveZh6PromotionReadiness::class)->packageOnly($packagePath);
+
+        $this->assertTrue($result['contract_valid']);
+        $this->assertFalse($result['ready']);
+        $this->assertSame('HOLD_FAIL_CLOSED_MEDIA_AUTHORITY', $result['status']);
+        $this->assertSame(0, $result['actions']['database_reads']);
+        $this->assertSame(0, $result['actions']['database_writes']);
+
+        $this->artisan('personality:big-five-authority-v2-zh6-promotion-readiness', [
+            '--package' => $packagePath,
+            '--package-only' => true,
+        ])
+            ->expectsOutputToContain('contract_valid=1')
+            ->expectsOutputToContain('ready=0')
+            ->expectsOutputToContain('status=HOLD_FAIL_CLOSED_MEDIA_AUTHORITY')
+            ->assertSuccessful();
+
+        $this->assertSame($assetCount, MediaAsset::query()->withoutGlobalScopes()->count());
+        $this->assertSame($variantCount, MediaVariant::query()->count());
+    }
+
+    public function test_readiness_service_rejects_a_self_consistent_but_unapproved_package_rewrite(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['status'] = 'PASS_PROMOTION_READINESS_ZERO_WRITE';
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $directory = $this->temporaryDirectory();
+        $path = $directory.'/rewritten-package.json';
+        $this->writeJson($path, $package);
+        $this->assertNotFalse(file_put_contents(
+            $directory.'/rewritten-package.sha256',
+            hash_file('sha256', $path)."\n",
+        ));
+
+        try {
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($path);
+            $this->fail('Expected an unapproved package rewrite to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('media readiness disposition is inconsistent', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($directory);
+        }
+    }
+
+    public function test_readiness_service_rejects_rehashed_source_rows_not_bound_to_the_snapshot(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['source_permissions']['rows'][0]['source_ids'][0] = 'source:unrelated';
+        $sourceSha256 = $this->canonicalSha256($package['source_permissions']['rows']);
+        $package['source_permissions']['source_permission_sha256'] = $sourceSha256;
+        $package['permissions']['sources']['authority_reference'] = 'source_permissions:'.$sourceSha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['source_permission_sha256'] = $sourceSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+
+        $directory = $this->temporaryDirectory();
+        $observationPath = $directory.'/production-observation.json';
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+        $package['inputs']['production_observation_path'] = $observationPath;
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $path = $directory.'/rewritten-source-package.json';
+        $this->writeJson($path, $package);
+        $this->assertNotFalse(file_put_contents(
+            $directory.'/rewritten-source-package.sha256',
+            hash_file('sha256', $path)."\n",
+        ));
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $path,
+                'PR49_PACKAGE_HASH_PATH' => $directory.'/rewritten-source-package.sha256',
+                'PR49_OBSERVATION_PATH' => $observationPath,
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'review or source rows do not match the locked snapshot',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($path);
+            $this->fail('Expected rehashed source rows outside the locked snapshot to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('source rows do not match the locked snapshot', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($directory);
+        }
+    }
+
+    public function test_artifact_validator_rejects_rehashed_review_assets_not_bound_to_the_snapshot(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['editorial_authority']['review_record']['assets'][0]['canonical_path'] = '/zh/personality/big-five/detached';
+        $reviewSha256 = $this->canonicalSha256($package['editorial_authority']['review_record']);
+        $package['editorial_authority']['review_record_sha256'] = $reviewSha256;
+        $package['permissions']['reviewer']['authority_reference'] = 'solo_operator_review:'.$reviewSha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['review_record_sha256'] = $reviewSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-review-assets-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-review-assets-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'review or source rows do not match the locked snapshot',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected rehashed review assets outside the locked snapshot to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('review or source rows do not match the locked snapshot', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_readiness_service_rejects_rehashed_rollback_rows_not_bound_to_runtime(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['rollback_baseline']['rows'][0]['primary_id'] = 999999;
+        $rollbackSha256 = $this->canonicalSha256($package['rollback_baseline']['rows']);
+        $package['rollback_baseline']['rollback_baseline_sha256'] = $rollbackSha256;
+        $package['release_lock_material']['rollback_baseline_sha256'] = $rollbackSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-rollback-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-rollback-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'rollback rows do not match the observed runtime baseline',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected rehashed rollback rows outside the runtime baseline to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('rollback rows do not match the runtime baseline', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_artifact_validator_rejects_rehashed_runtime_baseline_not_bound_to_the_observation(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['runtime_baseline']['rows'][0]['primary_id'] = 999999;
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-runtime-baseline-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-runtime-baseline-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'runtime baseline does not match the production observation',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed runtime baseline outside the observation to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('rollback rows do not match the runtime baseline', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_package_rejects_rehashed_deployed_sha_not_bound_to_the_observation(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['runtime_baseline']['observed_deployed_sha'] = str_repeat('a', 40);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-runtime-deployed-sha-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-runtime-deployed-sha-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'runtime baseline does not match the production observation',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed deployed SHA detached from the observation to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('production observation content is inconsistent', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_source_permission_reference_must_bind_the_locked_hash_after_full_rehash(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['permissions']['sources']['authority_reference'] = 'source_permissions:'.str_repeat('0', 64);
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-source-permission-reference-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-source-permission-reference-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'source permission authority reference is detached from the locked hash',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed detached source permission reference to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('editorial or source permission binding is invalid', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_readiness_service_rejects_rehashed_external_human_authority_drift(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['editorial_authority']['review_record']['external_human_authority']['author_login'] = 'unrelated-reviewer';
+        $reviewSha256 = $this->canonicalSha256($package['editorial_authority']['review_record']);
+        $package['editorial_authority']['review_record_sha256'] = $reviewSha256;
+        $package['permissions']['reviewer']['authority_reference'] = 'solo_operator_review:'.$reviewSha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['review_record_sha256'] = $reviewSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-human-authority-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-human-authority-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'review record OWNER external authority mismatch',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected rehashed external human authority drift to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('real-human OWNER authority binding is invalid', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_readiness_service_requires_the_complete_zero_mutation_action_evidence(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        unset($package['actions']['cms_writes']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'missing-actions-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/missing-actions-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'action evidence must contain the exact read-only observation and zero-mutation fields',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected missing zero-mutation action evidence to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('action evidence must include the exact read-only observation', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_release_lock_material_must_match_every_validated_subrecord(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['release_lock_material']['media_authority_sha256'] = str_repeat('0', 64);
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-release-lock-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-release-lock-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'release lock material does not match validated evidence',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed release lock detached from its evidence to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('release lock material does not match validated evidence', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_database_preflight_fails_closed_on_missing_runtime_without_mutation(): void
+    {
+        config()->set('admin.totp.enabled', true);
+        $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(
+            '../'.self::PACKAGE_DIR.'/promotion-readiness-package.json',
+        );
+
+        $this->assertFalse($result['ok']);
+        $this->assertFalse($result['ready']);
+        $this->assertSame('FAIL_CLOSED_RUNTIME_OR_AUTHORITY_DRIFT', $result['status']);
+        $this->assertContains('admin_user_1_authority_mismatch', $result['drift_codes']);
+        $this->assertContains('admin_user_1_totp_policy_drift', $result['drift_codes']);
+        $this->assertContains('admin_user_1_totp_enrollment_missing', $result['drift_codes']);
+        $this->assertContains('deployed_revision_drift', $result['drift_codes']);
+        $this->assertContains('runtime_baseline_drift', $result['drift_codes']);
+        $this->assertSame(9, $result['actions']['database_reads']);
+        $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
+    }
+
+    public function test_database_preflight_rejects_observation_deploy_sha_that_differs_from_runtime_revision(): void
+    {
+        $revisionPath = base_path('../REVISION');
+        $runtimeSha = str_repeat('c', 40);
+        $file = File::partialMock();
+        $file->shouldReceive('isFile')->once()->with($revisionPath)->andReturnTrue();
+        $file->shouldReceive('get')->once()->with($revisionPath)->andReturn($runtimeSha.PHP_EOL);
+
+        $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(
+            '../'.self::PACKAGE_DIR.'/promotion-readiness-package.json',
+        );
+
+        $this->assertFalse($result['ok']);
+        $this->assertFalse($result['ready']);
+        $this->assertSame('FAIL_CLOSED_RUNTIME_OR_AUTHORITY_DRIFT', $result['status']);
+        $this->assertSame($runtimeSha, $result['inspection']['deployed_sha']);
+        $this->assertContains('deployed_revision_drift', $result['drift_codes']);
+        $this->assertContains('deployed_revision_drift', $result['blockers']);
+        $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
+    }
+
+    public function test_database_preflight_accepts_the_exact_observed_runtime_revision_lock(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $revisionPath = base_path('../REVISION');
+        $runtimeSha = $package['runtime_baseline']['observed_deployed_sha'];
+        $file = File::partialMock();
+        $file->shouldReceive('isFile')->once()->with($revisionPath)->andReturnTrue();
+        $file->shouldReceive('get')->once()->with($revisionPath)->andReturn($runtimeSha.PHP_EOL);
+
+        $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(
+            '../'.self::PACKAGE_DIR.'/promotion-readiness-package.json',
+        );
+
+        $this->assertSame($runtimeSha, $result['inspection']['deployed_sha']);
+        $this->assertNotContains('deployed_revision_drift', $result['drift_codes']);
+        $this->assertNotContains('deployed_revision_drift', $result['blockers']);
+        $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
+    }
+
+    public function test_database_media_inventory_requires_one_complete_hub_identity_and_rejects_article_media(): void
+    {
+        config()->set('admin.totp.enabled', false);
+        $this->assertFalse(app(BigFiveZh6PromotionReadiness::class)->inspectDatabase()['admin_user_1']['totp_policy_enabled']);
+        config()->set('admin.totp.enabled', true);
+        $this->assertTrue(app(BigFiveZh6PromotionReadiness::class)->inspectDatabase()['admin_user_1']['totp_policy_enabled']);
+
+        $this->createMediaAsset('article.big-five.cover', [], true);
+        $this->createMediaAsset('big5.model-hub.zh-cn.hero-og.invalid-rights', [
+            'locale' => 'zh-CN',
+            'content_identity' => BigFiveZh6PromotionReadiness::HUB_MEDIA_CONTENT_IDENTITY,
+            'rights' => true,
+            'license' => 'internal-original-v1',
+            'provenance' => 'Media Library original upload BIG5-ZH6-HUB-INVALID-1',
+            'operator_approval_ref' => 'operator-approval:BIG5-ZH6-HUB-INVALID-1',
+        ], true);
+        $this->createMediaAsset('big5.model-hub.zh-cn.hero-og.invalid-approval', [
+            'locale' => 'zh-CN',
+            'content_identity' => BigFiveZh6PromotionReadiness::HUB_MEDIA_CONTENT_IDENTITY,
+            'rights' => 'FermatMind-owned original artwork',
+            'license' => 'internal-original-v1',
+            'provenance' => 'Media Library original upload BIG5-ZH6-HUB-INVALID-2',
+            'operator_approval_ref' => 123,
+        ], true);
+        $inspection = app(BigFiveZh6PromotionReadiness::class)->inspectDatabase();
+        $this->assertSame(0, $inspection['media_inventory']['eligible_candidate_count']);
+        $this->assertSame('blocked_zero_eligible_candidates', $inspection['media_inventory']['selection_status']);
+
+        $first = $this->createMediaAsset('big5.model-hub.zh-cn.hero-og.v1', [
+            'locale' => 'zh-CN',
+            'content_identity' => BigFiveZh6PromotionReadiness::HUB_MEDIA_CONTENT_IDENTITY,
+            'rights' => 'FermatMind-owned original artwork',
+            'license' => 'internal-original-v1',
+            'provenance' => 'Media Library original upload BIG5-ZH6-HUB-001',
+            'operator_approval_ref' => 'operator-approval:BIG5-ZH6-HUB-001',
+        ], true);
+        $inspection = app(BigFiveZh6PromotionReadiness::class)->inspectDatabase();
+        $this->assertSame(1, $inspection['media_inventory']['eligible_candidate_count']);
+        $this->assertSame('unique_eligible_candidate', $inspection['media_inventory']['selection_status']);
+        $candidate = $inspection['media_inventory']['eligible_candidates'][0];
+        $this->assertSame($first->getKey(), $candidate['media_asset_id']);
+        $this->assertSame(['hero', 'og'], $candidate['variant_keys']);
+        $candidateSha256 = $candidate['candidate_sha256'];
+        unset($candidate['candidate_sha256']);
+        $this->assertSame($this->canonicalSha256($candidate), $candidateSha256);
+
+        $this->createMediaAsset('big5.model-hub.zh-cn.hero-og.v2', [
+            'locale' => 'zh-CN',
+            'content_identity' => BigFiveZh6PromotionReadiness::HUB_MEDIA_CONTENT_IDENTITY,
+            'rights' => 'FermatMind-owned original artwork',
+            'license' => 'internal-original-v1',
+            'provenance' => 'Media Library original upload BIG5-ZH6-HUB-002',
+            'operator_approval_ref' => 'operator-approval:BIG5-ZH6-HUB-002',
+        ], true);
+        $inspection = app(BigFiveZh6PromotionReadiness::class)->inspectDatabase();
+        $this->assertSame(2, $inspection['media_inventory']['eligible_candidate_count']);
+        $this->assertSame('blocked_multiple_eligible_candidates', $inspection['media_inventory']['selection_status']);
+    }
+
+    /**
+     * @param  array<string, mixed>  $observation
+     * @param  list<array<string, mixed>>  $candidates
+     * @return array{directory:string,package_path:string,package:array<string,mixed>}
+     */
+    private function buildTemporaryPackage(array $observation, array $candidates): array
+    {
+        $directory = $this->temporaryDirectory();
+        $observation['media_inventory']['authority_complete_hero_og_count'] = count($candidates);
+        $observation['media_inventory']['authority_complete_hero_og'] = $candidates;
+        $observationPath = $directory.'/production-observation.json';
+        $packagePath = $directory.'/package.json';
+        $hashPath = $directory.'/package.sha256';
+        $this->writeJson($observationPath, $observation);
+
+        $environment = [
+            'PR49_OBSERVATION_PATH' => $observationPath,
+            'PR49_OUTPUT_PATH' => $packagePath,
+            'PR49_OUTPUT_HASH_PATH' => $hashPath,
+        ];
+        $builder = $this->nodeProcess('build-package.mjs', $environment);
+        $this->assertTrue($builder->isSuccessful(), $builder->getErrorOutput().$builder->getOutput());
+
+        $validator = $this->nodeProcess('validate-package.mjs', [
+            'PR49_OBSERVATION_PATH' => $observationPath,
+            'PR49_PACKAGE_PATH' => $packagePath,
+            'PR49_PACKAGE_HASH_PATH' => $hashPath,
+        ]);
+        $this->assertTrue($validator->isSuccessful(), $validator->getErrorOutput().$validator->getOutput());
+
+        return [
+            'directory' => $directory,
+            'package_path' => $packagePath,
+            'package' => $this->readAbsoluteJson($packagePath),
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function completeMediaCandidate(int $id, string $key): array
+    {
+        return [
+            'media_asset_id' => $id,
+            'media_asset_key' => $key,
+            'locale' => 'zh-CN',
+            'content_identity' => 'big5:model_hub:zh-CN:hero-og',
+            'status' => 'published_public_synced_cdn_verified',
+            'variant_keys' => ['hero', 'og'],
+            'public_urls' => [
+                'hero' => 'https://assets.fermatmind.com/media/'.$id.'/hero.webp',
+                'og' => 'https://assets.fermatmind.com/media/'.$id.'/og.webp',
+            ],
+            'alt' => '大五人格五维连续谱与复盘路径示意图',
+            'rights' => 'operator_owned',
+            'license' => 'FermatMind editorial use',
+            'provenance' => 'Media Library original upload',
+            'operator_approval_ref' => 'operator-approval:test-'.$id,
+        ];
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function createMediaAsset(string $key, array $payload, bool $withHeroAndOg): MediaAsset
+    {
+        $asset = MediaAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'asset_key' => $key,
+            'disk' => 'public',
+            'path' => 'media/big5/'.$key.'/source.webp',
+            'url' => 'https://assets.fermatmind.com/storage/media/big5/'.$key.'/source.webp',
+            'mime_type' => 'image/webp',
+            'alt' => '大五人格五维连续谱与复盘路径示意图',
+            'status' => MediaAsset::STATUS_PUBLISHED,
+            'is_public' => true,
+            'sync_status' => MediaAsset::SYNC_SYNCED,
+            'cdn_status' => MediaAsset::CDN_VERIFIED,
+            'payload_json' => $payload,
+        ]);
+        if ($withHeroAndOg) {
+            foreach (['hero', 'og'] as $variantKey) {
+                $asset->variants()->create([
+                    'variant_key' => $variantKey,
+                    'path' => 'media/big5/'.$key.'/'.$variantKey.'.webp',
+                    'url' => 'https://assets.fermatmind.com/storage/media/big5/'.$key.'/'.$variantKey.'.webp',
+                    'mime_type' => 'image/webp',
+                    'sync_status' => MediaAsset::SYNC_SYNCED,
+                    'cdn_status' => MediaAsset::CDN_VERIFIED,
+                ]);
+            }
+        }
+
+        return $asset->fresh('variants');
+    }
+
+    /** @param array<mixed> $value */
+    private function canonicalSha256(array $value): string
+    {
+        $sort = function (array &$items) use (&$sort): void {
+            foreach ($items as &$item) {
+                if (is_array($item)) {
+                    $sort($item);
+                }
+            }
+            unset($item);
+            if (! array_is_list($items)) {
+                ksort($items);
+            }
+        };
+        $sort($value);
+
+        return hash('sha256', json_encode(
+            $value,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
+        ));
+    }
+
+    /** @param array<string, string> $environment */
+    private function nodeProcess(string $filename, array $environment = []): Process
+    {
+        $process = new Process(['node', self::PACKAGE_DIR.'/'.$filename], $this->repositoryPath(), $environment + $_ENV);
+        $process->setTimeout(30);
+        $process->run();
+
+        return $process;
+    }
+
+    private function runNode(string $filename): void
+    {
+        $process = $this->nodeProcess($filename);
+        $this->assertTrue($process->isSuccessful(), $process->getErrorOutput().$process->getOutput());
+    }
+
+    /** @return array<string, mixed> */
+    private function readJson(string $path): array
+    {
+        return $this->readAbsoluteJson($this->repositoryPath($path));
+    }
+
+    /** @return array<string, mixed> */
+    private function readAbsoluteJson(string $path): array
+    {
+        $decoded = json_decode(file_get_contents($path) ?: '', true, flags: JSON_THROW_ON_ERROR);
+        $this->assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    /** @param array<string, mixed> $value */
+    private function writeJson(string $path, array $value): void
+    {
+        $this->assertNotFalse(file_put_contents(
+            $path,
+            json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)."\n",
+        ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $package
+     * @return array{directory:string,path:string}
+     */
+    private function writeTemporaryRehashedPackage(array $package, string $filename): array
+    {
+        $directory = $this->temporaryDirectory();
+        $observationPath = $directory.'/production-observation.json';
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+        $package['inputs']['production_observation_path'] = $observationPath;
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $path = $directory.'/'.$filename.'.json';
+        $this->writeJson($path, $package);
+        $this->assertNotFalse(file_put_contents(
+            $directory.'/'.$filename.'.sha256',
+            hash_file('sha256', $path)."\n",
+        ));
+
+        return ['directory' => $directory, 'path' => $path];
+    }
+
+    private function temporaryDirectory(): string
+    {
+        $directory = sys_get_temp_dir().'/big-five-pr49-'.bin2hex(random_bytes(8));
+        $this->assertTrue(mkdir($directory));
+
+        return $directory;
+    }
+
+    private function cleanupTemporaryPackage(string $directory): void
+    {
+        foreach (glob($directory.'/*') ?: [] as $file) {
+            @unlink($file);
+        }
+        @rmdir($directory);
+    }
+
+    private function repositoryPath(string $path = ''): string
+    {
+        $root = dirname(base_path());
+
+        return $path === '' ? $root : $root.'/'.$path;
+    }
+}
