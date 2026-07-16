@@ -1,0 +1,1858 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-6-FAMILY-15",
+  "framework": "enneagram",
+  "asset_scope": {
+    "family": "type-6",
+    "expected_asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "counts_by_entity_type": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "identity_keys": [
+      "core_type:type-6",
+      "wing:6w5",
+      "wing:6w7",
+      "instinctual_subtype:type-6/self-preservation",
+      "instinctual_subtype:type-6/social",
+      "instinctual_subtype:type-6/one-to-one"
+    ]
+  },
+  "source_ledger_refs": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  },
+  "assets": [
+    {
+      "identity_key": "core_type:type-6",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "path": "/en/personality/enneagram/type-6",
+      "title": "Type Six: uncertainty, support, and a revisable trust hypothesis",
+      "answer_first": "Type Six is a traditional Enneagram hypothesis about attention returning to uncertainty, trusted support, possible problems, and workable contingency plans. Questions, caution, loyalty, or doubt cannot establish motive because real risk, governance duties, discrimination, trauma-related safety, resource precarity, and recent failures can create the same behavior.",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "Observe uncertainty without turning caution into identity",
+          "body": "Track which unknown receives attention, what evidence permits action, whose support is consulted, and whether a contingency plan closes the question. Record changes across stakes rather than assuming a permanent vigilance style."
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "Separate questions and loyalty from inferred motive",
+          "body": "A colleague may ask for detail because the contract is unclear, the system failed before, or responsibility is unequal. Loyalty may reflect affection, ethics, livelihood, mutual aid, or a freely renewed commitment rather than type."
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "Compare checking, commitment, and repair",
+          "body": "In decisions, note whether alternatives clarify action or keep reopening it. During feedback, record how authority and evidence are weighed; in conflict, observe whether concerns are named, support is requested, and agreements are tested fairly."
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "Hold preparedness beside its coordination costs",
+          "body": "Uncertainty attention may support risk detection, accountable planning, solidarity, and noticing weak assumptions. Tradeoffs appear when low-probability threats dominate, reassurance expires immediately, or every disagreement becomes a test of trust."
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "Use stakes and power to interpret behavior",
+          "body": "At work, compare a safety officer escalating a required hazard with a teammate rechecking a reversible choice. In a relationship, compare clarifying an agreement with repeatedly testing commitment. Actual duties and consent change the meaning."
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "Compare modifiers and contextual alternatives",
+          "body": "The 6w5 hypothesis adds evidence, analysis, and private preparation; 6w7 adds options, social coordination, and active experimentation. Also compare Five research, Seven option seeking, anxiety, legal duty, unsafe environments, discrimination, and institutional mistrust."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Look for trust that updates with evidence",
+          "body": "The hypothesis weakens when adequate evidence ends checking, support is accepted without repeated tests, uncertainty is carried through a reversible action, and authority is questioned or followed according to transparent reasons rather than reflex."
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "Keep trust language non-diagnostic and voluntary",
+          "body": "Use this page to examine uncertainty, support, checking, and contingency planning. It cannot diagnose anxiety or trauma, certify loyalty, assess security clearance, screen applicants, predict conduct, or fix a person's identity."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does cautious questioning establish Type Six?",
+          "answer": "No. Legal duties, unsafe conditions, prior failures, unequal accountability, discrimination, or an unclear brief can require careful questions. Compare whether checking updates when evidence and responsibility change."
+        },
+        {
+          "question": "Why separate loyalty from a type hypothesis?",
+          "answer": "Loyalty can reflect love, ethics, livelihood, reciprocity, community survival, or a freely renewed promise. Observe consent, alternatives, and power before using a personality explanation."
+        },
+        {
+          "question": "What evidence should weaken the uncertainty hypothesis?",
+          "answer": "Checking that ends with sufficient evidence, comfortable reversible action, support accepted without repeated tests, and reason-based responses to authority should all reduce confidence."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, choose one low-stakes choice, one governed decision, and one trust conversation.",
+        "observable_signal": "Record actual consequence, missing evidence, consulted support, authority role, contingency plan, decision time, and later update.",
+        "page_specific_signal": "Compare whether checking stops when a named evidence threshold is met and the next step remains reversible.",
+        "alternative_explanation": "Check legal duty, resource precarity, discrimination, recent failure, trauma safety, power, and unclear ownership.",
+        "reflection_prompt": "Name the event where transparent reasons best explain action and revise the Type Six hypothesis downward."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English core page uses evidence thresholds and reason-based authority updates, independently of the Chinese page's risk ledger and renewed-agreement sequence.",
+        "outline": [
+          "answer_first",
+          "motivation_attention",
+          "behavior_motive",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "work_relationship_examples",
+          "wings_mistypes",
+          "counterexample",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "whether a named evidence threshold actually ends repeated checking",
+          "how support is used after responsibility and decision rights become clear",
+          "whether trust changes through reasons instead of repeated commitment tests"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are uncertainty trusted support and possible problems?",
+          "What are questions caution loyalty and doubt?",
+          "What are real risk governance duties and discrimination?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are uncertainty trusted support and possible problems?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are questions caution loyalty and doubt?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are real risk governance duties and discrimination?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Caution and loyalty may reflect real risk, duty, discrimination, precarity, or recent failure rather than type.",
+          "Traditional center language is a conceptual comparison only and provides no bodily-mechanism evidence."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/wings/6w5",
+        "/en/personality/enneagram/wings/6w7",
+        "/en/personality/enneagram/type-6/instincts/self-preservation",
+        "/en/personality/enneagram/type-6/instincts/social",
+        "/en/personality/enneagram/type-6/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:6w5",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "6w5",
+      "path": "/en/personality/enneagram/wings/6w5",
+      "title": "6w5: a core-first hypothesis about evidence, analysis, and private preparation",
+      "answer_first": "6w5 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward evidence, analysis, and private preparation. The pattern does not establish 6w5 because research training, technical review, confidentiality, regulated analysis, and specialist roles can require the same behavior.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep Type Six primary before adding a modifier",
+          "body": "Document a stable Type Six pattern of uncertainty checking and support seeking before interpreting the person's preference for source review or private preparation. Consider source quality, failure modes, and private preparation only as a secondary 6w5 modifier after research training, specialist work, audit duties, regulated analysis, and a recent technical failure no longer explain the behavior."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Compare 6w5 with 6w7 on one uncertain task",
+          "body": "Give 6w5 and 6w7 the same incomplete task with matched consequence, deadline, and decision rights. Compare how source quality, failure-mode review, and private preparation differ from 6w7 option testing and group coordination in moving the work forward."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe choices, handoffs, and stopping rules",
+          "body": "Across a technical review, confidential handoff, and low-stakes choice, record requested information, consulted people, option narrowing, action time, and stopping rule. Note separately whether policy required the source review or the person chose it without prompting."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use flexible low-stakes action as a challenge",
+          "body": "Reduce confidence when the person comfortably runs a timely group experiment, shares unfinished analysis, or accepts a competent colleague's conclusion. Count these events as real counterexamples rather than exceptions to 6w5."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Audit learned work and environmental demands",
+          "body": "Research training, specialist work, audit duties, regulated analysis, and a recent technical failure can all teach intensive source review. Audit accountability, resources, safety, culture, and recent events before retaining a 6w5 explanation."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep the modifier secondary and evidence-limited",
+          "body": "6w5 is not a separate type, competence rating, loyalty measure, or conduct forecast. Wing research remains limited, so this modifier stays secondary and disconfirmable."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Do evidence review, analysis, and private preparation prove 6w5?",
+          "answer": "No. Research training, specialist work, audit duties, regulated analysis, and a recent technical failure may require the same preparation. Compare what the person does after those role demands and consequences change instead of typing from one task."
+        },
+        {
+          "question": "How should 6w5 be compared with 6w7?",
+          "answer": "Use one incomplete task with fixed consequences, decision rights, and an agreed evidence threshold. Compare 6w5 source review and private preparation with 6w7 option testing and group coordination, recording whether the assigned role determines the difference."
+        },
+        {
+          "question": "What evidence weakens the 6w5 modifier?",
+          "answer": "Comfortably running a timely group experiment, sharing unfinished analysis, and accepting a competent colleague's conclusion, followed by stopping at a reasonable threshold, should lower confidence in the 6w5 modifier."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, use one technical review, one confidential handoff, and one low-stakes choice with a clear decision deadline.",
+        "observable_signal": "Record the source requested, private preparation time, person consulted, evidence threshold, action time, and whether the handoff reopens the analysis.",
+        "page_specific_signal": "Compare whether source validation ends at the agreed threshold or continues after a competent reviewer accepts the remaining uncertainty.",
+        "alternative_explanation": "Check research training, specialist responsibility, confidentiality, audit rules, regulated analysis, and recent technical failure.",
+        "reflection_prompt": "Identify one event where a group experiment or colleague's conclusion worked without extra private analysis, and reduce the 6w5 hypothesis."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 6w5 page follows source requests, private analysis, and evidence thresholds before a technical handoff; it is independent of the Chinese accountability ledger.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "observable_situations",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "counterexample",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "which source is requested before action on an incomplete technical task",
+          "whether private analysis stops at the evidence threshold agreed with a reviewer",
+          "response when a competent colleague accepts the remaining uncertainty at handoff"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are Type Six uncertainty support and trust?",
+          "What are evidence, analysis, and private preparation?",
+          "What are research training, technical review, confidentiality, regulated analysis, and specialist roles?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are Type Six uncertainty support and trust?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are evidence, analysis, and private preparation?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are research training, technical review, confidentiality, regulated analysis, and specialist roles?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "evidence, analysis, and private preparation may reflect research training, technical review, confidentiality, regulated analysis, and specialist roles rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-6",
+        "/en/personality/enneagram/wings/6w5",
+        "/en/personality/enneagram/wings/6w7",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:6w7",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "6w7",
+      "path": "/en/personality/enneagram/wings/6w7",
+      "title": "6w7: a core-first hypothesis about options, social coordination, and active experiments",
+      "answer_first": "6w7 is an evidence-limited wing hypothesis: Type Six uncertainty, support, trust, and contingency concerns remain primary, while the adjacent type may modify attention toward options, social coordination, and active experiments. The pattern does not establish 6w7 because facilitation duties, incident response, sales work, community organizing, and time pressure can require the same behavior.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep Type Six primary before adding a modifier",
+          "body": "Confirm that repeated contingency planning and trust checking support a Type Six account before interpreting the person's option generation or ally contact. Consider those coordination patterns only as a secondary 6w7 modifier after facilitation, sales work, community organizing, caregiving logistics, and short deadlines no longer explain the behavior."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Compare 6w7 with 6w5 on one uncertain task",
+          "body": "Give 6w7 and 6w5 the same incomplete task with matched consequence, deadline, and decision rights. Compare how option generation, ally contact, and reversible experiments differ from 6w5 source validation and quiet analysis in moving the work forward."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe choices, handoffs, and stopping rules",
+          "body": "Across an incident response, social plan, and individual choice, record requested information, consulted people, option narrowing, action time, and stopping rule. Distinguish coordination chosen under uncertainty from coordination required by the role."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use flexible low-stakes action as a challenge",
+          "body": "Reduce confidence when the person comfortably uses one supported route, sustains solitary review, or declines unnecessary coordination. Treat those choices as counterexamples rather than exceptions to 6w7."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Audit learned work and environmental demands",
+          "body": "Facilitation, sales work, community organizing, caregiving logistics, and short deadlines can all require rapid option generation and ally contact. Audit these demands before retaining a 6w7 explanation."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep the modifier secondary and evidence-limited",
+          "body": "Treat 6w7 only as an evidence-limited comparison beside the Type Six core. It neither measures extraversion or optimism nor forecasts social ability, loyalty, or conduct."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Do multiple options, social coordination, and active experiments prove 6w7?",
+          "answer": "No. Facilitation, sales work, community organizing, caregiving logistics, and short deadlines may require those strategies. Recheck the pattern after coordination duties and time pressure change instead of typing from one task."
+        },
+        {
+          "question": "How should 6w7 be compared with 6w5?",
+          "answer": "Hold the information gap and deadline steady while removing any duty to coordinate a group. Compare 6w7 option generation and ally contact with 6w5 source validation and quiet analysis, then record whether the voluntary strategy changes."
+        },
+        {
+          "question": "What evidence weakens the 6w7 modifier?",
+          "answer": "Comfortably using one supported route, sustaining solitary review, and declining unnecessary coordination, followed by stopping at a reasonable threshold, should lower confidence in the 6w7 modifier."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, observe one incident response, one collaborative plan, and one individual decision where several routes are available.",
+        "observable_signal": "Record who is contacted, options proposed, route selected, experiment size, deadline, decision owner, and what evidence closes the option search.",
+        "page_specific_signal": "Compare whether coordination produces a decision update or merely keeps more possibilities active after one reversible route is ready.",
+        "alternative_explanation": "Check facilitation duty, sales work, community organizing, caregiving logistics, emergency response, and time pressure.",
+        "reflection_prompt": "Find one event where a single written route or solitary review was sufficient, and use it to lower confidence in the 6w7 modifier."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 6w7 page follows option generation, ally contact, and closure of reversible experiments; it is independent of the Chinese coordination record.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "observable_situations",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "counterexample",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "number of viable routes kept open after one consequence becomes explicit",
+          "who is contacted before a reversible group experiment begins",
+          "whether coordination stops once one supported route meets the decision deadline"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are Type Six uncertainty support and trust?",
+          "What are options, social coordination, and active experiments?",
+          "What are facilitation duties, incident response, sales work, community organizing, and time pressure?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are Type Six uncertainty support and trust?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are options, social coordination, and active experiments?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are facilitation duties, incident response, sales work, community organizing, and time pressure?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "options, social coordination, and active experiments may reflect facilitation duties, incident response, sales work, community organizing, and time pressure rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-6",
+        "/en/personality/enneagram/wings/6w5",
+        "/en/personality/enneagram/wings/6w7",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/self-preservation",
+      "path": "/en/personality/enneagram/type-6/instincts/self-preservation",
+      "title": "Type Six self-preservation: a practical safety, warm alliances, and resource continuity hypothesis",
+      "answer_first": "Type Six self-preservation is a traditional subtype hypothesis about attention to practical safety, warm alliances, and resource continuity. This pattern does not establish subtype because scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs may shape the same behavior. Matched resource access, practical stakes, consent, and household power guide this comparison.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "State the tradition as a secondary testable idea",
+          "body": "Within a Type Six core hypothesis, the self-preservation subtype may emphasize practical safety, dependable resources, and warm alliances. Check material access and relationship conditions first, then keep the subtype idea secondary and revisable."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Use matched situations before interpreting the pattern",
+          "body": "Compare similar workloads during one resource-secure period and one period of constrained access. Record whether alliance seeking or contingency planning changes when supplies, housing, or reliable help are restored."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Reject bodily and neurological mechanism claims",
+          "body": "The self-preservation label organizes resource-continuity observations; it is not evidence about bodily mechanisms, neural systems, fixed functions, or a universal biological category."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow behavior that looks unlike the stereotype",
+          "body": "A person may host, share, or appear calm while managing real scarcity or caregiving duties. That visible style alone cannot prove or disprove a self-preservation subtype hypothesis."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Audit material, institutional, and relational conditions",
+          "body": "Scarcity, housing insecurity, disability access, caregiving, unsafe work, migration, and mutual-aid obligations can shape the same response. Address those material realities directly rather than translating them into personality essence."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use changed conditions as a disconfirmation test",
+          "body": "Lower confidence when the record shows flexible sharing after replenishment, support from several people, and relaxed limits when scarcity ends, and preserve the environmental account as a live alternative."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep subtype inference local and non-predictive",
+          "body": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence, and this page cannot forecast safety, resource sufficiency, or future conduct."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Do practical safety, warm alliances, and resource continuity prove this subtype?",
+          "answer": "No. Scarcity, housing insecurity, disability access, caregiving, unsafe work, migration, and mutual-aid obligations can produce the same priorities. Compare matched periods of access and responsibility before retaining a self-preservation subtype hypothesis."
+        },
+        {
+          "question": "What makes the self-preservation Type Six comparison fair?",
+          "answer": "Use similar workloads across a resource-secure period and an access-constrained period, and record whether observable behavior changes when the matched condition changes."
+        },
+        {
+          "question": "Which changed-resource counterexample weakens the safety-continuity hypothesis?",
+          "answer": "flexible sharing after replenishment, support from several people, and relaxed limits when scarcity ends are formal counterexamples that should reduce confidence rather than be dismissed as exceptions."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Compare one resource-secure week with one access-constrained week, then include a shared-supply decision under similar workload.",
+        "observable_signal": "Record housing and supply continuity, access needs, caregiving duty, who offers support, the boundary requested, and whether it changes after replenishment.",
+        "page_specific_signal": "Observe whether alliance seeking and contingency planning decrease when replacement supplies and reliable access are restored.",
+        "alternative_explanation": "Test scarcity, housing insecurity, disability access, unsafe work, caregiving, and mutual-aid obligations before retaining a subtype account.",
+        "reflection_prompt": "Identify the resource change that most clearly altered the safety plan, and lower the hypothesis if material continuity explains the shift."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English self-preservation page follows resource restoration, household access, and alliance boundaries; its sequence is independent of the Chinese resource ledger.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "alternative_environment",
+          "countertype_variation",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "alliance seeking after replacement supplies and reliable access are restored",
+          "boundary changes when caregiving load and household power stay visible",
+          "whether contingency planning ends once material continuity is documented"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What is practical safety, warm alliances, and resource continuity?",
+          "What are scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs?",
+          "How are resource access, practical stakes, consent, and household power matched?"
+        ],
+        "question_answers": [
+          {
+            "question": "What is practical safety, warm alliances, and resource continuity?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "How are resource access, practical stakes, consent, and household power matched?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "practical safety, warm alliances, and resource continuity may reflect scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-6",
+        "/en/personality/enneagram/type-6/instincts/self-preservation",
+        "/en/personality/enneagram/type-6/instincts/social",
+        "/en/personality/enneagram/type-6/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/social",
+      "path": "/en/personality/enneagram/type-6/instincts/social",
+      "title": "Type Six social: a duty, rules, authority, and role clarity hypothesis",
+      "answer_first": "Type Six social is a traditional subtype hypothesis about attention to duty, rules, authority, and role clarity. This pattern does not establish subtype because legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public responsibility may shape the same behavior. Matched institutional stakes, speaking access, consent, and decision power guide this comparison.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "State the tradition as a secondary testable idea",
+          "body": "Within a Type Six core hypothesis, the social subtype may emphasize clear duty, legitimate rules, and accountable authority. Check governance, rank, and unequal consequences first, then keep the subtype idea secondary and revisable."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Use matched situations before interpreting the pattern",
+          "body": "Present the same rule under transparent peer governance and opaque rank while holding consequences as similar as possible. Record whether compliance, clarification, or challenge changes with the authority structure."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Reject bodily and neurological mechanism claims",
+          "body": "The social label organizes rule-and-authority observations; it is not evidence about bodily mechanisms, neural hierarchy, fixed obedience, or an innate institutional system."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow behavior that looks unlike the stereotype",
+          "body": "A person may publicly challenge leaders, improvise, or enjoy informal groups while still tracking duty and legitimacy. Those visible choices alone cannot prove or disprove a social subtype hypothesis."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Audit material, institutional, and relational conditions",
+          "body": "Law, licensure, professional hierarchy, public responsibility, discrimination, whistleblower risk, and unequal accountability can shape rule responses. Address those governance realities directly rather than translating them into personality essence."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use changed conditions as a disconfirmation test",
+          "body": "Lower confidence when the record shows working without a formal role, changing rules for published reasons, and sharing authority, and preserve the environmental account as a live alternative."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep subtype inference local and non-predictive",
+          "body": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence, and this page cannot forecast obedience, leadership, civic conduct, or institutional fit."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Do duty, rules, authority, and role clarity prove this subtype?",
+          "answer": "No. Law, licensure, professional hierarchy, public responsibility, discrimination, whistleblower risk, and unequal accountability can create the same pattern. Compare responses under transparent peer governance and opaque rank before retaining a social subtype hypothesis."
+        },
+        {
+          "question": "What makes the social Type Six comparison fair?",
+          "answer": "Use the same rule under transparent peer governance and opaque rank with similar consequences, and record whether observable behavior changes when the matched condition changes."
+        },
+        {
+          "question": "Which role-free counterexample weakens the authority-duty hypothesis?",
+          "answer": "working without a formal role, changing rules for published reasons, and sharing authority are formal counterexamples that should reduce confidence rather than be dismissed as exceptions."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Use the same rule in a transparent peer group and a rank-based group with comparable consequences, then observe one responsibility handoff.",
+        "observable_signal": "Record who authored the rule, how reasons are published, who may question it, the sanction for refusal, and who carries the final consequence.",
+        "page_specific_signal": "Compare whether compliance, challenge, and responsibility follow publicly stated reasons or the status of the authority giving the instruction.",
+        "alternative_explanation": "Check legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public duty.",
+        "reflection_prompt": "Name the event where transparent reasons or rank best explained the response, and revise the social-subtype hypothesis accordingly."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English social page compares public reasons, positional rank, and refusal cost; it does not reuse the Chinese governance ledger's ordering.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "alternative_environment",
+          "countertype_variation",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "compliance or challenge when the same rule moves from peer governance to opaque rank",
+          "who keeps decision rights and who bears the cost of refusing an instruction",
+          "whether duty tracking persists after the formal role and title are removed"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What is duty, rules, authority, and role clarity?",
+          "What are legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public responsibility?",
+          "How are institutional stakes, speaking access, consent, and decision power matched?"
+        ],
+        "question_answers": [
+          {
+            "question": "What is duty, rules, authority, and role clarity?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public responsibility?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "How are institutional stakes, speaking access, consent, and decision power matched?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "duty, rules, authority, and role clarity may reflect legal requirements, professional hierarchy, institutional risk, unequal accountability, discrimination, and public responsibility rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-6",
+        "/en/personality/enneagram/type-6/instincts/self-preservation",
+        "/en/personality/enneagram/type-6/instincts/social",
+        "/en/personality/enneagram/type-6/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/one-to-one",
+      "path": "/en/personality/enneagram/type-6/instincts/one-to-one",
+      "title": "Type Six one-to-one: a direct challenge, courage displays, and testing a perceived threat hypothesis",
+      "answer_first": "Type Six one-to-one is a traditional subtype hypothesis about attention to direct challenge, courage displays, and testing a perceived threat. This pattern does not establish subtype because actual danger, self-defense training, discrimination, harassment, competition rules, trauma safety, and power imbalance may shape the same behavior. Matched danger, exit access, explicit consent, and interpersonal power guide this comparison.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "State the tradition as a secondary testable idea",
+          "body": "Within a Type Six core hypothesis, the one-to-one subtype may emphasize direct challenge, visible courage, and response to perceived threat. Check actual danger, consent, training, and exit access first, then keep the subtype idea secondary and revisable."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Use matched situations before interpreting the pattern",
+          "body": "Compare two tense encounters while matching danger, consent, exit access, power, and relevant training. Record whether the person seeks support, challenges directly, or leaves when those conditions remain stable."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Reject bodily and neurological mechanism claims",
+          "body": "The one-to-one label organizes direct-challenge observations; it is not evidence about bodily mechanisms, neural fight systems, attraction biology, or an inborn pairing response."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow behavior that looks unlike the stereotype",
+          "body": "A person may speak softly, leave, seek help, or use indirect resistance even when threat is salient. Those safer responses alone cannot prove or disprove a one-to-one subtype hypothesis."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Audit material, institutional, and relational conditions",
+          "body": "Actual danger, harassment, discrimination, self-defense training, competition rules, trauma-related safety, and power imbalance can shape direct challenge. Address those safety conditions directly rather than translating them into personality essence."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use changed conditions as a disconfirmation test",
+          "body": "Lower confidence when the record shows calm negotiation in safety, easy disengagement, and no repeated challenge after danger is matched, and preserve the environmental account as a live alternative."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep subtype inference local and non-predictive",
+          "body": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence, and this page cannot forecast courage, aggression, compatibility, loyalty, or relationship outcomes."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Do direct challenge, courage displays, and testing a perceived threat prove this subtype?",
+          "answer": "No. Actual danger, harassment, discrimination, self-defense training, competition rules, trauma-related safety, and power imbalance can produce similar behavior. Compare matched encounters and preserve safety before retaining a one-to-one subtype hypothesis."
+        },
+        {
+          "question": "What makes the one-to-one Type Six comparison fair?",
+          "answer": "Use two tense encounters with danger, consent, exit access, power, and training matched, and record whether observable behavior changes when the matched condition changes."
+        },
+        {
+          "question": "Which restored-safety counterexample weakens the direct-challenge hypothesis?",
+          "answer": "calm negotiation in safety, easy disengagement, and no repeated challenge after danger is matched are formal counterexamples that should reduce confidence rather than be dismissed as exceptions."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Select two similarly tense encounters and one safety-restored follow-up where direct challenge can be observed without creating new risk.",
+        "observable_signal": "Record actual danger, consent, exit options, power difference, relevant training, the challenge used, and what happens when the person can safely disengage.",
+        "page_specific_signal": "Compare directness only after danger, power, consent, and exit access are matched; note whether challenge softens when safety and choice return.",
+        "alternative_explanation": "Test actual danger, self-defense training, discrimination, harassment, competition rules, trauma-related safety, and power imbalance.",
+        "reflection_prompt": "Use the safest matched encounter to identify a non-subtype explanation for directness and reduce the hypothesis when that explanation fits better."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English one-to-one page centers on danger, consent, exit access, and post-threat change; its comparison is independent of the Chinese safety sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "alternative_environment",
+          "countertype_variation",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "challenge intensity after danger, training, and exit access are matched",
+          "choice among direct challenge, seeking help, and leaving under stable power conditions",
+          "whether restored safety permits negotiation without another threat test"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What is direct challenge, courage displays, and testing a perceived threat?",
+          "What are actual danger, self-defense training, discrimination, harassment, competition rules, trauma safety, and power imbalance?",
+          "How are danger, exit access, explicit consent, and interpersonal power matched?"
+        ],
+        "question_answers": [
+          {
+            "question": "What is direct challenge, courage displays, and testing a perceived threat?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are actual danger, self-defense training, discrimination, harassment, competition rules, trauma safety, and power imbalance?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "How are danger, exit access, explicit consent, and interpersonal power matched?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "direct challenge, courage displays, and testing a perceived threat may reflect actual danger, self-defense training, discrimination, harassment, competition rules, trauma safety, and power imbalance rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-6",
+        "/en/personality/enneagram/type-6/instincts/self-preservation",
+        "/en/personality/enneagram/type-6/instincts/social",
+        "/en/personality/enneagram/type-6/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "core_type:type-6",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "path": "/zh/personality/enneagram/type-6",
+      "title": "第六型：不确定性、支持与信任更新的可修正假设",
+      "answer_first": "第六型是九型人格中的传统观察假设，关注点可能反复落在不确定性、可信支持、潜在问题与可执行预案上。提问、谨慎、忠诚或怀疑不能证明动机，因为真实风险、治理职责、歧视处境、创伤安全、资源不稳与近期故障都可能形成相似表现。本页直接说明不确定支持问题如何观察、谨慎忠诚怀疑如何比较，以及真实风险治理歧视如何核对。",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "记录未知事项怎样获得优先级",
+          "body": "观察哪个未知最受关注、什么证据足以行动、向谁寻求支持，以及预案是否真的关闭问题。要跨不同后果比较，不把一次谨慎写成恒定警觉。"
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "把提问与忠诚放回具体责任",
+          "body": "合同不清、系统曾失败或责任不平等都会增加提问；忠诚也可能来自感情、伦理、生计、互助或自愿续订的承诺。必须记录当事人的理由与退出空间。"
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "比较核对、承诺与修复过程",
+          "body": "决定中观察备选方案是推动行动还是不断重开问题；反馈中记录怎样权衡权威和证据；冲突中核对是否明确担忧、请求支持并公平检验协议。"
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "同时看到准备能力与协调成本",
+          "body": "关注不确定性可能支持发现风险、负责规划、互助和识别薄弱假设。代价可能是低概率威胁占满注意、安慰很快失效，或把每次分歧都变成信任测试。"
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "用后果与权力区分同样动作",
+          "body": "工作中要区分安全负责人上报法定隐患与同事反复核对可逆选择；关系中要区分澄清协议与持续测试承诺。职责、同意和权力会改变解释。"
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "比较翼型修饰与现实替代项",
+          "body": "6w5 假设增加证据、分析和私下准备，6w7 假设增加选项、社交协调和主动试验。还应比较第五型研究、第七型寻路、现实焦虑、法律职责、不安全环境与制度失信。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "寻找证据到位后能够更新的信任",
+          "body": "如果充分证据能结束核对、支持被接受而不反复测试、当事人能带着未知做可逆行动，并依据透明理由回应权威，就应下调第六型假设。"
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "不把信任变成诊断或忠诚认证",
+          "body": "本页只能复盘不确定性、支持、核对与预案，不能诊断焦虑或创伤，不能认证忠诚、评定安全权限、筛选求职者、推断行为，也不能固定身份。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "谨慎提问可以直接判断第六型吗？",
+          "answer": "不能。法律职责、不安全条件、既往故障、不平等问责、歧视或模糊任务都会要求谨慎提问；应观察证据和责任变化后核对是否同步更新。"
+        },
+        {
+          "question": "为什么忠诚必须与类型假设分开？",
+          "answer": "忠诚可能来自感情、伦理、生计、互惠、社群生存或自愿承诺。比较时必须记录同意、可选方案、退出成本与权力，不能从持续关系反推动机。"
+        },
+        {
+          "question": "哪些反例会削弱不确定性假设？",
+          "answer": "证据充分后停止核对、能做可逆行动、接受支持而不反复测试，并依据清楚理由回应权威，都会削弱把谨慎归因于类型的判断；复盘时还应记录真实后果、决定权限与支持是否持续可用。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天选择一个低风险选择、一项受治理约束的决定和一次信任沟通事件。",
+        "observable_signal": "记录真实后果、缺失证据、支持来源、权威角色、预案、决定时间与后来更新。",
+        "page_specific_signal": "比较达到明确证据门槛而且下一步仍然可逆以后，反复核对的次数与持续时间是否真正下降。",
+        "alternative_explanation": "核对法律职责、资源不稳、歧视、近期故障、创伤安全、权力和责任归属。",
+        "reflection_prompt": "写出一次透明理由最能解释行动的事件，并据此明确下调第六型假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文核心页使用风险台账、协议续订与退出成本形成独立结构，不沿用英文页的证据阈值顺序。",
+        "outline": [
+          "answer_first",
+          "behavior_motive",
+          "motivation_attention",
+          "work_relationship_examples",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "counterexample",
+          "wings_mistypes",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "明确证据门槛达到以后反复核对是否真正停止",
+          "责任和决定权限说明以后支持来源怎样发生变化",
+          "信任是否依据透明理由更新而不是持续测试承诺"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "不确定支持问题如何观察",
+          "谨慎忠诚怀疑如何比较",
+          "真实风险治理歧视如何核对"
+        ],
+        "question_answers": [
+          {
+            "question": "不确定支持问题如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "谨慎忠诚怀疑如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "真实风险治理歧视如何核对",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "谨慎与忠诚也可能来自真实风险、职责、歧视、资源不稳或近期故障。",
+          "传统中心语言仅供概念比较，不构成身体机制证据。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/wings/6w5",
+        "/zh/personality/enneagram/wings/6w7",
+        "/zh/personality/enneagram/type-6/instincts/self-preservation",
+        "/zh/personality/enneagram/type-6/instincts/social",
+        "/zh/personality/enneagram/type-6/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:6w5",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "6w5",
+      "path": "/zh/personality/enneagram/wings/6w5",
+      "title": "6w5：以第六型为主、关注证据、分析与私下准备的翼型假设",
+      "answer_first": "6w5 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为证据、分析与私下准备。这种表现不能证明 6w5，因为研究训练、技术评审、保密要求、合规分析与专家岗位都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、证据、分析与私下准备如何作为修饰，以及研究训练、技术评审、保密要求、合规分析与专家岗位如何形成替代解释。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "先保持第六型核心再讨论修饰",
+          "body": "先确认不确定性、支持、信任与预案构成第六型核心，再观察来源质量、故障路径与私下准备是否为次要修饰；研究训练、专业岗位、审计职责、合规分析与近期技术故障已经解释行为时，不增加翼型标签。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "在同一任务中比较 6w5 与 6w7",
+          "body": "让 6w5 与 6w7 面对同一个信息不全任务并匹配后果、截止时间与决定权，比较来源质量、故障路径与私下准备和6w7 的选项试验和群体协调分别怎样推动行动。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "记录选择、交接与停止条件",
+          "body": "在技术评审、保密交接与低风险选择中记录请求的信息、咨询对象、选项收窄方式、开始行动的时点和停止条件，并区分自发选择与制度流程。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用低风险灵活行动主动检验",
+          "body": "若当事人能及时组织小组试验、分享未完成分析并接受胜任同事的结论，就应把这些事件作为正式反例并降低 6w5 修饰假设的置信度。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "先审计训练与环境要求",
+          "body": "研究训练、专业岗位、审计职责、合规分析与近期技术故障都会训练相似处理方式；核对问责、资源、安全、文化与近期事件以后，才考虑保留翼型解释。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "翼型始终是次要且证据有限的语言",
+          "body": "6w5 不是独立类型、能力评级、忠诚测量或行为推断。翼型研究支持有限，证据评审与私下准备只能作为次要修饰，并且必须接受反证。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "证据、分析与私下准备能够直接证明 6w5 吗？",
+          "answer": "不能。研究训练、专业岗位、审计职责、合规分析与近期技术故障都可能要求来源质量、故障路径与私下准备；应在职责与后果改变后再次比较，而不是从一次处理动作直接定型。"
+        },
+        {
+          "question": "怎样公平比较 6w5 与 6w7 的差异？",
+          "answer": "固定第六型核心、信息缺口、后果和截止时间，再比较来源质量、故障路径与私下准备与6w7 的选项试验和群体协调，同时记录岗位制度是否决定差异。"
+        },
+        {
+          "question": "哪些证据会削弱 6w5 的修饰假设？",
+          "answer": "能够及时组织小组试验、分享未完成分析并接受胜任同事的结论，并在合理门槛后停止核对，都会削弱 6w5 修饰假设。还要记录公开未完成分析与接受同事结论的具体情境，避免只保留支持翼型的事件。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天选择一次技术评审、一次保密交接和一个有明确截止时间的低风险选择。",
+        "observable_signal": "记录请求的来源、私下准备时长、咨询对象、证据门槛、行动时间，以及交接后是否重开分析。",
+        "page_specific_signal": "比较达到约定门槛且胜任评审者接受剩余不确定性以后，来源核验是否真正结束。",
+        "alternative_explanation": "核对研究训练、专业责任、保密、审计规则、合规分析与近期技术故障。",
+        "reflection_prompt": "找出一次小组试验或同事结论无需额外私下分析也能工作的事件，并据此下调 6w5 假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 6w5 页按资料来源、私下准备与技术交接的问责顺序组织，不沿用英文页的证据阈值记录顺序。",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "面对不完整技术任务时行动前具体请求哪一种资料来源",
+          "私下分析是否在评审者同意的证据阈值处停止",
+          "同事接受剩余不确定性后是否仍然重新开启技术审查"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "第六型不确定支持如何保持核心",
+          "证据、分析与私下准备如何作为修饰",
+          "研究训练、技术评审、保密要求、合规分析与专家岗位如何形成替代解释"
+        ],
+        "question_answers": [
+          {
+            "question": "第六型不确定支持如何保持核心",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "证据、分析与私下准备如何作为修饰",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "研究训练、技术评审、保密要求、合规分析与专家岗位如何形成替代解释",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "证据、分析与私下准备也可能由研究训练、技术评审、保密要求、合规分析与专家岗位造成，不能反推翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-6",
+        "/zh/personality/enneagram/wings/6w5",
+        "/zh/personality/enneagram/wings/6w7",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:6w7",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "6w7",
+      "path": "/zh/personality/enneagram/wings/6w7",
+      "title": "6w7：以第六型为主、关注选项、社交协调与主动试验的翼型假设",
+      "answer_first": "6w7 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为选项、社交协调与主动试验。这种表现不能证明 6w7，因为协调职责、事故响应、销售工作、社群组织与时间压力都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、选项、社交协调与主动试验如何作为修饰，以及协调职责、事故响应、销售工作、社群组织与时间压力如何形成替代解释。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "先保持第六型核心再讨论修饰",
+          "body": "先确认不确定性、支持、信任与预案构成第六型核心，再观察扩展选项、联系盟友与可逆试验是否为次要修饰；主持协调、销售工作、社群组织、照护安排与短截止时间已经解释行为时，不增加翼型标签。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "在同一任务中比较 6w7 与 6w5",
+          "body": "让 6w7 与 6w5 面对同一个信息不全任务并匹配后果、截止时间与决定权，比较扩展选项、联系盟友与可逆试验和6w5 的来源核验和安静分析分别怎样推动行动。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "记录选择、交接与停止条件",
+          "body": "在事故响应、社群计划与个人选择中记录请求的信息、咨询对象、选项收窄方式、开始行动的时点和停止条件，并区分自发选择与制度流程。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用低风险灵活行动主动检验",
+          "body": "若当事人能接受一条有支持的路线、持续独立评审并拒绝不必要协调，就应把这些事件作为正式反例并降低 6w7 修饰假设的置信度。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "先审计训练与环境要求",
+          "body": "主持协调、销售工作、社群组织、照护安排与短截止时间都会训练相似处理方式；核对问责、资源、安全、文化与近期事件以后，才考虑保留翼型解释。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "翼型始终是次要且证据有限的语言",
+          "body": "6w7 不是独立类型、能力评级、忠诚测量或行为推断。翼型研究支持有限，选项协调与可逆试验只能作为次要修饰，并且必须接受反证。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "选项、社交协调与主动试验能够直接证明 6w7 吗？",
+          "answer": "不能。主持协调、销售工作、社群组织、照护安排与短截止时间都可能要求扩展选项、联系盟友与可逆试验；应在职责与后果改变后再次比较，而不是从一次处理动作直接定型。"
+        },
+        {
+          "question": "怎样公平比较 6w7 与 6w5 的差异？",
+          "answer": "固定第六型核心、信息缺口、后果和截止时间，再比较扩展选项、联系盟友与可逆试验与6w5 的来源核验和安静分析，同时记录岗位制度是否决定差异。"
+        },
+        {
+          "question": "哪些证据会削弱 6w7 的修饰假设？",
+          "answer": "能够接受一条有支持的路线、持续独立评审并拒绝不必要协调，并在合理门槛后停止核对，都会削弱 6w7 修饰假设。还要记录独立评审与拒绝额外协调的具体情境，避免把所有灵活行动都归入翼型。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天观察一次事故响应、一次协作计划和一个存在多条路线的个人决定。",
+        "observable_signal": "记录联系对象、提出的选项、最终路线、试验规模、截止时间、决定负责人和关闭搜索的证据。",
+        "page_specific_signal": "比较一条可逆路线已经就绪以后，协调是带来决定更新，还是只让更多可能继续保持开放。",
+        "alternative_explanation": "核对主持职责、销售工作、社群组织、照护安排、应急响应与时间压力。",
+        "reflection_prompt": "找出一次单一书面路线或独立评审已经足够的事件，并用它下调 6w7 修饰假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 6w7 页按选项收敛、盟友联系与可逆试验关闭顺序组织，不沿用英文页的协调记录顺序。",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "真实后果明确以后仍然保留多少条可行行动路线",
+          "可逆小试验开始以前联系了哪些协作对象以及原因",
+          "一条有支持的路线满足期限以后是否停止继续协调"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "第六型不确定支持如何保持核心",
+          "选项、社交协调与主动试验如何作为修饰",
+          "协调职责、事故响应、销售工作、社群组织与时间压力如何形成替代解释"
+        ],
+        "question_answers": [
+          {
+            "question": "第六型不确定支持如何保持核心",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "选项、社交协调与主动试验如何作为修饰",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "协调职责、事故响应、销售工作、社群组织与时间压力如何形成替代解释",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "选项、社交协调与主动试验也可能由协调职责、事故响应、销售工作、社群组织与时间压力造成，不能反推翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-6",
+        "/zh/personality/enneagram/wings/6w5",
+        "/zh/personality/enneagram/wings/6w7",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/self-preservation",
+      "path": "/zh/personality/enneagram/type-6/instincts/self-preservation",
+      "title": "第六型自保副型：实际安全、温暖联盟与资源连续的假设",
+      "answer_first": "第六型自保副型是传统二级假设，关注点可能落在实际安全、温暖联盟与资源连续。这种表现不能证明副型，因为资源稀缺、住房不稳、无障碍需要、照护责任、危险工作与互助需要都可能塑造相同行为。本页直接说明实际安全、温暖联盟与资源连续如何观察、资源稀缺、住房不稳、无障碍需要、照护责任、危险工作与互助需要如何比较，以及资源可得性、照护责任与可靠支持如何匹配。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把传统说法转成可检验二级观察",
+          "body": "在第六型核心成立的前提下，该副型可能强调实际安全、可靠资源与温暖联盟；先核对现实条件，再把它作为次要且可撤销的观察。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "先匹配情境再解释表现",
+          "body": "对照工作量相近的资源稳定期与进入受限期，分别记录物资、住房、照护和可靠帮助。观察这些资源恢复后，结盟寻求与预案准备是否减少。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "拒绝身体与神经机制推断",
+          "body": "就资源连续与实际安全观察而言，它不描述身体机制，也不讨论神经组织或恒定功能；该标签不能证明普遍生物类别。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许不符合刻板印象的外显风格",
+          "body": "当事人可能表现为接待他人、主动共享或外显放松，因此外显风格不能单独证实或否定这个副型假设。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "先审计物质、制度与关系条件",
+          "body": "稀缺、住房不稳、无障碍需要、照护、危险工作、迁移与互助义务都会塑造相似反应；这些现实问题应先得到直接处理，不能被改写成人格本质。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用条件变化主动寻找反例",
+          "body": "如果出现补充后灵活共享、接受多来源支持并在稀缺结束后放松边界，就应降低该副型假设的信心，并保留环境解释。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "把副型推断限制在本地观察",
+          "body": "量表特定证据不能证明普遍副型本体或跨文化等价性，本页也不用于推断安全、资源充足或未来行为。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "实际安全、温暖联盟与资源连续能够直接证明这个副型吗？",
+          "answer": "不能。稀缺、住房不稳、无障碍需要、照护、危险工作、迁移与互助义务都会提高对连续资源和可靠帮助的关注。应先确认这些物质条件，并观察补充资源到位后，结盟寻求和边界是否随之放松。"
+        },
+        {
+          "question": "怎样设计第六型自保副型的公平比较？",
+          "answer": "选择工作量相近的资源稳定期与进入受限期，记录物资、住房、无障碍和照护负担。补充资源到位后，再看安全预案、共享意愿和求助对象是否发生可核对的变化。"
+        },
+        {
+          "question": "资源恢复后的哪些反例会削弱安全连续假设？",
+          "answer": "如果稀缺结束后能够灵活共享、接受多来源支持，并且不再反复准备备用方案，这些记录会削弱安全连续假设。注明哪项资源恢复、支持来自哪里，以及哪条边界实际放松。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "比较一段资源稳定期与一段进入受限期，再加入一次工作量相近的共享物资决定。",
+        "observable_signal": "记录住房与物资连续性、无障碍需要、照护职责、支持来源、表达的边界，以及补充资源到位后的调整。",
+        "page_specific_signal": "观察替代物资和可靠进入条件恢复以后，结盟需求与安全预案是否出现可核对的下降。",
+        "alternative_explanation": "先检验资源稀缺、住房不稳、无障碍限制、危险工作、照护和互助义务，再决定是否保留副型解释。",
+        "reflection_prompt": "找出最明显改变安全计划的资源变化；如果物质连续性解释更强，就明确下调自保副型假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文自保页按资源受限、补充到位与边界放松的顺序组织，不沿用英文页的家庭权力比较顺序。",
+        "outline": [
+          "answer_first",
+          "alternative_environment",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "countertype_variation",
+          "instinct_boundary",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "替代物资与可靠进入条件恢复以后结盟需求怎样变化",
+          "照护负担保持可见时共享边界是否随资源补充而放松",
+          "物质连续性恢复以后安全预案是否停止反复扩展"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "实际安全、温暖联盟与资源连续如何观察",
+          "资源稀缺、住房不稳、无障碍需要、照护责任、危险工作与互助需要如何比较",
+          "资源可得性、照护责任与可靠支持如何匹配"
+        ],
+        "question_answers": [
+          {
+            "question": "实际安全、温暖联盟与资源连续如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "资源稀缺、住房不稳、无障碍需要、照护责任、危险工作与互助需要如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "资源可得性、照护责任与可靠支持如何匹配",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "实际安全、温暖联盟与资源连续也可能来自资源稀缺、住房不稳、无障碍需要、照护责任、危险工作与互助需要，不能反推副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-6",
+        "/zh/personality/enneagram/type-6/instincts/self-preservation",
+        "/zh/personality/enneagram/type-6/instincts/social",
+        "/zh/personality/enneagram/type-6/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/social",
+      "path": "/zh/personality/enneagram/type-6/instincts/social",
+      "title": "第六型社群副型：职责、规则、权威与角色清晰的假设",
+      "answer_first": "第六型社群副型是传统二级假设，关注点可能落在职责、规则、权威与角色清晰。这种表现不能证明副型，因为法律要求、职业层级、制度风险、不平等问责、歧视与公共责任都可能塑造相同行为。本页直接说明职责、规则、权威与角色清晰如何观察、法律要求、职业层级、制度风险、不平等问责、歧视与公共责任如何比较，以及规则后果、职位权力与拒绝代价如何匹配。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把传统说法转成可检验二级观察",
+          "body": "在第六型核心成立的前提下，该副型可能强调清楚职责、正当规则与可问责权威；先核对现实条件，再把它作为次要且可撤销的观察。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "先匹配情境再解释表现",
+          "body": "让同一规则分别由理由公开的同伴治理与职位权力不透明的层级提出，并尽量匹配后果。记录遵循、质疑或拒绝究竟随公开理由改变，还是随发出指令者的职位改变。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "拒绝身体与神经机制推断",
+          "body": "就规则、职责与权威观察而言，它不描述身体机制，也不讨论神经组织或恒定功能；该标签不能证明天生服从系统。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许不符合刻板印象的外显风格",
+          "body": "当事人可能表现为公开质疑领导、灵活处理或参与非正式群体，因此外显风格不能单独证实或否定这个副型假设。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "先审计物质、制度与关系条件",
+          "body": "法律、执照、职业层级、公共职责、歧视、举报风险与不平等问责都会塑造相似反应；这些现实问题应先得到直接处理，不能被改写成人格本质。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用条件变化主动寻找反例",
+          "body": "如果出现没有正式角色也能工作、按公开理由调整规则并共享权威，就应降低该副型假设的信心，并保留环境解释。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "把副型推断限制在本地观察",
+          "body": "量表特定证据不能证明普遍副型本体或跨文化等价性，本页也不用于推断服从、领导、公民行为或制度适配。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "职责、规则、权威与角色清晰能够直接证明这个副型吗？",
+          "answer": "不能。法律、执照、职业层级、公共职责、歧视、举报风险与不平等问责都会改变人对规则和权威的回应。应比较规则理由是否公开、谁能质疑、拒绝的代价，以及最终由谁承担责任。"
+        },
+        {
+          "question": "怎样设计第六型社群副型的公平比较？",
+          "answer": "把同一规则放进理由公开的同伴治理和职位权力不透明的层级中，并尽量保持后果相近。分别记录遵循、质疑或拒绝是否跟随理由质量、职位等级和实际问责变化。"
+        },
+        {
+          "question": "取消正式角色后的哪些反例会削弱权威职责假设？",
+          "answer": "取消正式角色后仍能协作、依据公开理由修改规则，或愿意把决定权交给同伴，都会削弱权威职责假设。记录职位如何变化、理由是否公开，以及共享决定权后回应有什么不同。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "在后果相近的透明同伴群体与职位分层群体中使用同一规则，再观察一次责任交接。",
+        "observable_signal": "记录规则制定者、理由公开方式、谁能质疑、拒绝的代价，以及最终由谁承担实际后果。",
+        "page_specific_signal": "比较遵循、质疑与承担责任究竟跟随公开理由，还是跟随发出指令者的职位等级。",
+        "alternative_explanation": "核对法律要求、职业层级、制度风险、不平等问责、歧视和公共职责。",
+        "reflection_prompt": "指出一次由公开理由或职位等级更好解释的回应，并据此修正社群副型假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文社群页按规则理由公开度、职位等级与拒绝代价组织，不沿用英文页的职责撤除顺序。",
+        "outline": [
+          "answer_first",
+          "alternative_environment",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "countertype_variation",
+          "instinct_boundary",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "同一规则从同伴治理转入不透明层级后遵循或质疑怎样变化",
+          "拒绝指令的代价与最终问责者是否改变对权威的回应",
+          "正式职位取消以后职责追踪与共享决定权是否仍然存在"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "职责、规则、权威与角色清晰如何观察",
+          "法律要求、职业层级、制度风险、不平等问责、歧视与公共责任如何比较",
+          "规则后果、职位权力与拒绝代价如何匹配"
+        ],
+        "question_answers": [
+          {
+            "question": "职责、规则、权威与角色清晰如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "法律要求、职业层级、制度风险、不平等问责、歧视与公共责任如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "规则后果、职位权力与拒绝代价如何匹配",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "职责、规则、权威与角色清晰也可能来自法律要求、职业层级、制度风险、不平等问责、歧视与公共责任，不能反推副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-6",
+        "/zh/personality/enneagram/type-6/instincts/self-preservation",
+        "/zh/personality/enneagram/type-6/instincts/social",
+        "/zh/personality/enneagram/type-6/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-6/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-6/one-to-one",
+      "path": "/zh/personality/enneagram/type-6/instincts/one-to-one",
+      "title": "第六型一对一副型：直接挑战、勇气展示与检验威胁的假设",
+      "answer_first": "第六型一对一副型是传统二级假设，关注点可能落在直接挑战、勇气展示与检验威胁。这种表现不能证明副型，因为真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全与权力不平等都可能塑造相同行为。本页直接说明直接挑战、勇气展示与检验威胁如何观察、真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全与权力不平等如何比较，以及危险程度、同意、退出机会与训练如何匹配。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把传统说法转成可检验二级观察",
+          "body": "在第六型核心成立的前提下，该副型可能强调直接挑战、勇气展示与回应感知威胁；先核对现实条件，再把它作为次要且可撤销的观察。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "先匹配情境再解释表现",
+          "body": "比较两次在危险、同意、退出机会、权力与训练上相匹配的紧张互动。记录当这些安全条件稳定时，当事人选择直接挑战、寻求支持还是离开现场。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "拒绝身体与神经机制推断",
+          "body": "就直接挑战与感知威胁观察而言，它不描述身体机制，也不讨论神经组织或恒定功能；该标签不能证明天生战斗或配对反应。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许不符合刻板印象的外显风格",
+          "body": "当事人可能表现为轻声表达、离开、寻求帮助或间接抵抗，因此外显风格不能单独证实或否定这个副型假设。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "先审计物质、制度与关系条件",
+          "body": "真实危险、骚扰、歧视、自卫训练、竞赛规则、创伤安全与权力不平等都会塑造相似反应；这些现实问题应先得到直接处理，不能被改写成人格本质。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用条件变化主动寻找反例",
+          "body": "如果出现安全场景中平静协商、自然退出并在危险匹配后不重复挑战，就应降低该副型假设的信心，并保留环境解释。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "把副型推断限制在本地观察",
+          "body": "量表特定证据不能证明普遍副型本体或跨文化等价性，本页也不用于推断勇气、攻击性、匹配、忠诚或关系结果。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "直接挑战、勇气展示与检验威胁能够直接证明这个副型吗？",
+          "answer": "不能。真实危险、骚扰、歧视、自卫训练、竞赛规则、创伤安全与权力不平等都可能使直接挑战成为现实应对。应先保护安全，并核对危险程度、同意、退出机会、权力差和训练背景。"
+        },
+        {
+          "question": "怎样设计第六型一对一副型的公平比较？",
+          "answer": "选择两次紧张程度相近的互动，分别核对危险、同意、退出机会、权力差和相关训练。在不制造风险的前提下，比较当事人直接挑战、求助或离开的选择，并观察安全恢复后的变化。"
+        },
+        {
+          "question": "安全恢复后的哪些反例会削弱直接挑战假设？",
+          "answer": "在安全恢复后能够平静协商、自然退出，或在相同危险条件下不再重复挑战，都会削弱直接挑战假设。记录实际危险、权力差和退出机会，避免把安全策略误写成固定副型。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择两个紧张程度相近的互动，再加入一次安全恢复后的跟进，且不为观察制造新的风险。",
+        "observable_signal": "记录真实危险、同意、退出选择、权力差、相关训练、采取的挑战方式，以及能够安全离开后的变化。",
+        "page_specific_signal": "只在匹配危险、权力、同意与退出机会后比较直接程度，并观察安全与自主恢复时挑战是否缓和。",
+        "alternative_explanation": "检验真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全和权力不平等。",
+        "reflection_prompt": "用最安全的匹配互动寻找直接表现的非副型解释；若该解释更符合记录，就下调一对一副型假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文一对一页按危险匹配、退出机会与安全恢复组织，不沿用英文页的挑战强度记录顺序。",
+        "outline": [
+          "answer_first",
+          "alternative_environment",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "countertype_variation",
+          "instinct_boundary",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "危险与训练匹配以后直接挑战的强度是否仍然相同",
+          "退出机会恢复时当事人选择挑战、求助还是离开",
+          "安全恢复以后能否平静协商而不再进行威胁测试"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "直接挑战、勇气展示与检验威胁如何观察",
+          "真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全与权力不平等如何比较",
+          "危险程度、同意、退出机会与训练如何匹配"
+        ],
+        "question_answers": [
+          {
+            "question": "直接挑战、勇气展示与检验威胁如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全与权力不平等如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "危险程度、同意、退出机会与训练如何匹配",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "直接挑战、勇气展示与检验威胁也可能来自真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全与权力不平等，不能反推副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-6",
+        "/zh/personality/enneagram/type-6/instincts/self-preservation",
+        "/zh/personality/enneagram/type-6/instincts/social",
+        "/zh/personality/enneagram/type-6/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ]
+}
