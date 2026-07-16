@@ -511,7 +511,7 @@ final class BigFiveAuthorityV249Test extends TestCase
             app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
             $this->fail('Expected a rehashed runtime baseline outside the observation to fail closed.');
         } catch (RuntimeException $exception) {
-            $this->assertStringContainsString('production observation content is inconsistent', $exception->getMessage());
+            $this->assertStringContainsString('rollback rows do not match the runtime baseline', $exception->getMessage());
         } finally {
             $this->cleanupTemporaryPackage($temporary['directory']);
         }
