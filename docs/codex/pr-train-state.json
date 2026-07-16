@@ -95094,8 +95094,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "2f4337664211b13553eba473af2296dcf25e0c6b",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -95149,10 +95150,15 @@
       {
         "at": "2026-07-16T04:57:00Z",
         "status": "local_checks_passed",
-      "note": "After two truthfully recorded content-repair rounds and one focused-contract boundary-phrase repair, all PR18 manifest checks pass: 8 tests / 419 assertions, zero asset-specific PR08-gate issues, Pint, PHP syntax, YAML, changed JSON, normalized FAQ/signal/independence uniqueness, anomaly scan, diff checks, and exact six-file scope. All manual-review, release, discoverability, search, deploy, and production boundaries remain closed."
+        "note": "After two truthfully recorded content-repair rounds and one focused-contract boundary-phrase repair, all PR18 manifest checks pass: 8 tests / 419 assertions, zero asset-specific PR08-gate issues, Pint, PHP syntax, YAML, changed JSON, normalized FAQ/signal/independence uniqueness, anomaly scan, diff checks, and exact six-file scope. All manual-review, release, discoverability, search, deploy, and production boundaries remain closed."
+      },
+      {
+        "at": "2026-07-16T04:58:10Z",
+        "status": "ready_to_push",
+        "note": "Committed the exact six-file PR18 scope as 2f4337664211b13553eba473af2296dcf25e0c6b after explicit path-limited staging and cached diff validation."
       }
     ],
-    "updated_at": "2026-07-16T04:57:00Z"
+    "updated_at": "2026-07-16T04:58:10Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19",
