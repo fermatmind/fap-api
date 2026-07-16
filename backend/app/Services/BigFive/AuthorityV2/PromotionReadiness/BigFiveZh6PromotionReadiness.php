@@ -426,6 +426,7 @@ final class BigFiveZh6PromotionReadiness
             || ($permissions['reviewer']['authority_reference'] ?? null) !== $expectedReviewerAuthority
             || ($permissions['reviewer']['admin_user_id'] ?? null) !== self::REVIEWER_ADMIN_USER_ID
             || ($permissions['sources']['approved'] ?? null) !== true
+            || ($permissions['sources']['authority_reference'] ?? null) !== 'source_permissions:'.(string) ($package['source_permissions']['source_permission_sha256'] ?? '')
             || ($permissions['sources']['asset_count'] ?? null) !== 6
             || ($permissions['sources']['visible_source_count'] ?? null) !== 18) {
             throw new RuntimeException('ZH6 editorial or source permission binding is invalid.');

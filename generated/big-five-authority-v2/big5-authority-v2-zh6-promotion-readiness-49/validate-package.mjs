@@ -86,6 +86,7 @@ invariant(canonicalSha256(packageJson.editorial_authority.review_record.external
 invariant(packageJson.editorial_authority.review_record_sha256 === canonicalSha256(packageJson.editorial_authority.review_record), 'review record SHA mismatch');
 invariant(packageJson.source_permissions.source_permission_sha256 === canonicalSha256(packageJson.source_permissions.rows), 'source permission SHA mismatch');
 invariant(packageJson.source_permissions.rows.every((row) => row.approved === true && row.source_ids.length === 3), 'each asset must keep three approved sources');
+invariant(packageJson.permissions.sources.authority_reference === `source_permissions:${packageJson.source_permissions.source_permission_sha256}`, 'source permission authority reference is detached from the locked hash');
 invariant(packageJson.permissions.permissions_sha256 === canonicalSha256({
   author: packageJson.permissions.author,
   reviewer: packageJson.permissions.reviewer,

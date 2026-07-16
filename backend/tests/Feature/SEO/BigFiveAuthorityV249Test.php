@@ -431,6 +431,39 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_source_permission_reference_must_bind_the_locked_hash_after_full_rehash(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['permissions']['sources']['authority_reference'] = 'source_permissions:'.str_repeat('0', 64);
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-source-permission-reference-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-source-permission-reference-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'source permission authority reference is detached from the locked hash',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed detached source permission reference to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('editorial or source permission binding is invalid', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
     public function test_readiness_service_rejects_rehashed_external_human_authority_drift(): void
     {
         $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
