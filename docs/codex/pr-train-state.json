@@ -95313,7 +95313,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19"
     ],
     "status": "third_review_fix_local_verified",
-    "commit_sha": "b91473f1965e6f6e5d0ee7bab5a2b687caf6ff7a",
+    "commit_sha": "6a33af8b05c627b00b921174e792193c043ee58f",
     "commit_sha_role": "latest_locally_verified_review_fix_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3134",
     "checks": {
@@ -95339,7 +95339,7 @@
       },
       "automated_review_fix": {
         "status": "pass",
-        "evidence": "Accepted discussion_r3593029471: graph and QA require the exact twelve-key boundary set with strict false values. Accepted discussion_r3593087002: dependency validation binds to the boundary-hardened head. Accepted discussion_r3593118961: QA now requires the exact seventeen-key hard-gate set with strict true values. Accepted the timing concern in discussion_r3593146568 by returning GitHub evidence to pending and github_checks_green to false for the new review-fix head. Focused 8/9619, Pint, PHP syntax, YAML/JSON, and diff checks pass locally."
+        "evidence": "Accepted discussion_r3593029471: graph and QA require the exact twelve-key boundary set with strict false values. Accepted discussion_r3593087002: dependency validation binds to the actual latest review-fix head. Accepted discussion_r3593118961: QA requires the exact seventeen-key hard-gate set with strict true values. Accepted discussion_r3593146568 by keeping GitHub evidence pending and github_checks_green false for the new head. commit_sha now binds to exact-QA-key review-fix head 6a33af8b05c627b00b921174e792193c043ee58f. Focused 8/9619, Pint, PHP syntax, YAML/JSON, and diff checks pass locally."
       },
       "github_checks": {
         "status": "pending",
@@ -95411,9 +95411,14 @@
         "at": "2026-07-16T06:35:15Z",
         "status": "third_review_fix_local_verified",
         "note": "Commit-SHA correction head 27a37ed7caf696b39f837079d06b3ac2663b8ccf passed all nine checks, then exact-head review found that QA tests did not require the complete hard-gate key set and that the ledger had represented the prior fresh-cycle condition as already green. QA now freezes all seventeen required keys with strict true values; GitHub evidence and review status are returned to pending for the new head. Focused 8/9619, Pint, syntax, YAML/JSON, and diff checks pass."
+      },
+      {
+        "at": "2026-07-16T06:36:19Z",
+        "status": "third_review_fix_local_verified",
+        "note": "Bound commit_sha to exact-QA-key review-fix head 6a33af8b05c627b00b921174e792193c043ee58f before downstream validation. This ledger-only binding remains checks-pending and must pass the complete exact-head GitHub cycle before ready_to_merge."
       }
     ],
-    "updated_at": "2026-07-16T06:35:15Z"
+    "updated_at": "2026-07-16T06:36:19Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
