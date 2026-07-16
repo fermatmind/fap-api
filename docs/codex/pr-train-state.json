@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "c470a65609988e2d05f16ccbec8f38caf2a600e6",
+    "commit_sha": "d3617cf275fa4b78a9ce573286b844fbd9a7f8b9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 60 tests / 914 assertions on the final test head; V224 passes 35 tests / 382 assertions. Post-readback compares the exact public-v2-canonical sources, claim mapping, limitations, and eligibility against current authority_json; the canonical projection mirrors source validation, DOI/public URL filtering, DATE_ATOM accessed_at normalization, string-list deduplication, and source-bound claim mappings. The complete authorized 116-page execute/readback and an explicit raw-date canonical-shape regression pass, while partial sources/mappings or missing limitations fail closed. Payload/DB provenance, private-route, rendered-section, deployed-SHA, redirect, exact origin/URL-set, private-review, empty-media, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 61 tests / 920 assertions on the final test head; V224 passes 36 tests / 388 assertions. HTML readback derives visible text only from renderable body text nodes and excludes script, style, template, noscript, head, hidden, and aria-hidden ancestors. A hydration-script-only fixture contains the exact section, FAQ, and evidence text but now fails all three visible-content checks. Exact public-v2-canonical evidence comparison, the complete authorized 116-page execute/readback, payload/DB provenance, private-route, deployed-SHA, redirect, exact origin/URL-set, private-review, empty-media, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 225 tests / 28920 assertions after canonicalizing current authority visible evidence before exact post-readback comparison."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 226 tests / 28926 assertions after excluding structurally non-renderable nodes from HTML visible-text evidence."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head e561994c987431849285698de6cd4e978a9d2842 passed all nine checks, was CLEAN/MERGEABLE, and its exact-head review raised one valid same-scope P1: raw authority sources could differ from the public API canonical projection, especially accessed_at DATE_ATOM normalization, and cause a post-write false failure. The canonical expected projection and regression are complete at c470a65609988e2d05f16ccbec8f38caf2a600e6. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
+        "evidence": "Exact head 11c361910dd01d2203896c6aac6aa6e29bd7b41e passed all nine checks, was CLEAN/MERGEABLE, and its exact-head review raised one valid same-scope P1: whole-document textContent allowed JSON-LD or hydration scripts to satisfy visible section, FAQ, and evidence checks. Renderable-body-only extraction and the script-only regression are complete at d3617cf275fa4b78a9ce573286b844fbd9a7f8b9. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
       }
     },
     "scope_validation": {
@@ -96443,9 +96443,14 @@
         "at": "2026-07-16T20:43:29Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head e561994c987431849285698de6cd4e978a9d2842 passed all nine checks, its exact-head review found that comparing raw authority sources with the public API canonical projection could falsely fail after committed promotion, notably because accessed_at is emitted as DATE_ATOM. Code commit c470a65609988e2d05f16ccbec8f38caf2a600e6 now builds expected visible evidence with the public v2 source, mapping, limitation, URL, DOI, date, and deduplication rules; the complete authorized execute/readback plus an explicit canonical-shape regression pass. The first Pint check exposed only new-helper formatting and passed after mechanical formatting. Final V224 35/382, focused 60/914, cache/API 8/72, classifier 1/2, full Enneagram V2 225/28920, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T21:02:40Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 11c361910dd01d2203896c6aac6aa6e29bd7b41e passed all nine checks, its exact-head review found that whole-document textContent could let JSON-LD or hydration scripts satisfy visible section, FAQ, and evidence checks. Code commit d3617cf275fa4b78a9ce573286b844fbd9a7f8b9 now reads only renderable body text nodes and excludes script, style, template, noscript, head, hidden, and aria-hidden ancestors; a hydration-script-only regression fails all three visible-content checks. Final V224 36/388, focused 61/920, cache/API 8/72, classifier 1/2, full Enneagram V2 226/28926, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T20:43:29Z"
+    "updated_at": "2026-07-16T21:02:40Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
