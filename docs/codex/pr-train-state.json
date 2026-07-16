@@ -93006,7 +93006,7 @@
       },
       "complete_manifest_validation": {
         "status": "pass",
-        "evidence": "After the heavy-process guard found no competing FermatMind validation, the sole initial bash backend/scripts/ci_verify_mbti.sh run passed: Big Five 1506 tests / 181667 assertions plus Enneagram, MBTI smoke, Partner API, OpenAPI, migration safety, auth, order-security, dependency-security and downstream gates. After the GitHub-only branch-diff classifier exposed the missing registration, the corrected exact GitHub Big Five command passes 1506 tests / 181665 assertions with one existing skip; focused classifier coverage passes 2 / 5 and PR49 passes 9 / 140. Pint, PHP/JSON/YAML/JavaScript syntax, deterministic package hashes, git diff --check and exact 16-file allowed-path validation pass. Generated compile timestamp/hash side effects were restored; production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutations remain zero."
+        "evidence": "After the heavy-process guard found no competing FermatMind validation, the initial bash backend/scripts/ci_verify_mbti.sh run passed: Big Five 1506 tests / 181667 assertions plus Enneagram, MBTI smoke, Partner API, OpenAPI, migration safety, auth, order-security, dependency-security and downstream gates. After the GitHub-only branch-diff classifier exposed the missing registration, the corrected exact GitHub Big Five command passed 1506 tests / 181665 assertions with one existing skip. Following the thirteenth P2 repair, a fresh guarded complete ci_verify_mbti.sh run again exited 0 through Big Five, Personality 71 / 5373, MBTI, Partner API, migration, Auth guest, OpenAPI, order security, dependency security, webhook/attempt and strict queue gates. Focused PR49, related regressions, Pint, PHP/JSON/YAML/JavaScript syntax, deterministic package hashes, git diff --check and exact 16-file allowed-path validation pass. Generated compile timestamp/hash side effects were restored; production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutations remain zero."
       },
       "github_verify_bigfive": {
         "status": "pending",
@@ -93017,7 +93017,7 @@
         "evidence": "Exact-head review on 8683b36be806e38a44bf13c9fd0a5dc0047afb90 raised the thirteenth valid P2: hardcoded TOTP readiness contradicted the runtime policy. Commit 8fcc080d36bd4d2c15e0ad75c1aac57f202a368e fixes the mismatch and now requires a fresh exact-head review; the exact 16-file manifest scope remains intact."
       }
     },
-    "failure_reason": null,
+    "failure_reason": "The configured-TOTP-policy repair is locally and fully verified. Fresh exact-head GitHub checks and Codex review remain required before merge.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,

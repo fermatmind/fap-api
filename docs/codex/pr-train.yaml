@@ -478,7 +478,7 @@ prs:
     branch: codex/big5-authority-v2-zh6-promotion-readiness-49
     depends_on: [BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48]
     train_scope: big5_authority_v2_zh6_promotion_readiness
-    status: in_progress
+    status: review_fix_local_verified
     goal: "Before working-revision creation, bind the exact ZH6 snapshot to admin_user:1 author/reviewer authority, a narrow solo_operator review record, one uniquely eligible Hub hero/OG Media Library asset, release SHA and permissions, plus a rollback baseline; fail closed on zero or multiple media candidates."
     allowed_paths:
       - AGENTS.md
