@@ -94713,8 +94713,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "d6d09156891aa8b83c8ae998ec200e91f0569d05",
+    "status": "github_checks_pending",
+    "commit_sha": "29b461a53ca15b8fc5c3bbecc0e451338d8cc1ce",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3127",
     "checks": {
@@ -94739,18 +94739,18 @@
         "evidence": "The initial 178-finding template failure was rejected rather than accepted as content. Four recorded repair rounds made wings and subtypes page-specific and cleared residual FAQ uniqueness and template findings. Final focused validation passes 8 tests / 421 assertions, exactly twelve assets, independent en/zh-CN authoring, 36 unique FAQ pairs, pending manual review, draft-only release truth, and closed execution boundaries."
       },
       "github_checks": {
-        "status": "pass",
-        "evidence": "All nine GitHub checks passed on immutable ledger head afa147a771d919b1bcd9685407f94359f3255317 after the sixth substantive review fix. GitHub reports CLEAN/MERGEABLE with exactly the six allowed files."
+        "status": "pending",
+        "evidence": "All nine checks passed on ready-ledger head 2ebefa22b2fcf7b5ae1bf5eca6b1db34d9191032, but final pre-merge review found a new valid Chinese subtype comparison-template thread. All three matched comparisons were rewritten and locally validated; fresh required checks must pass on the seventh substantive review-fix ledger head."
       },
       "required_reviews": {
-        "status": "pass",
-        "evidence": "All seven Codex review threads are resolved and outdated. The final re-read after the afa147a771d919b1bcd9685407f94359f3255317 check cycle found no new thread, no required review rule, and no unresolved feedback."
+        "status": "pending_resolution",
+        "evidence": "The first seven Codex review threads are resolved. Thread PRRT_kwDOQn6xoM6RTnAK correctly identified a generic and mismatched Chinese subtype comparison clause repeated across all three subtype pages; each comparison was rewritten around its own resource, governance, or safety evidence. Resolve this eighth thread after push and re-read."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -94828,9 +94828,14 @@
         "at": "2026-07-16T02:45:34Z",
         "status": "ready_to_merge",
         "note": "All nine GitHub checks passed on immutable head afa147a771d919b1bcd9685407f94359f3255317. GitHub reports CLEAN/MERGEABLE; all seven Codex review threads are resolved and outdated with no new thread; exact six-file scope, twelve assets, 36 unique FAQ pairs, pending-manual-review truth, draft-only release truth, and every execution boundary were revalidated. This ledger-only ready transition must itself receive a fresh complete check cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T02:56:09Z",
+        "status": "github_checks_pending",
+        "note": "The ready-ledger head 2ebefa22b2fcf7b5ae1bf5eca6b1db34d9191032 passed all nine checks, but final pre-merge review found an eighth valid P2 thread: all three Chinese subtype matched-comparison sections still shared a generic clause, including a resource-mismatched self-preservation prompt. Rewrote self-preservation around restored resources and alliance planning, social around public reasons versus positional authority, and one-to-one around matched safety conditions and challenge, support, or exit choices. Revalidated 8 tests / 421 assertions, Pint, JSON, targeted template/anomaly scan, and diff checks; committed the seventh substantive review fix as 29b461a53ca15b8fc5c3bbecc0e451338d8cc1ce. Fresh checks and thread resolution are required."
       }
     ],
-    "updated_at": "2026-07-16T02:45:34Z"
+    "updated_at": "2026-07-16T02:56:09Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16",
