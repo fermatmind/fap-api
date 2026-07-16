@@ -154,7 +154,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         }
         $url = $this->requiredOption('frontend-revision-url');
         $this->assertUrlUsesOrigin($url, $frontendBaseUrl, 'frontend-revision-url');
-        $response = Http::acceptJson()->timeout(15)->get($url);
+        $response = Http::acceptJson()->withoutRedirecting()->timeout(15)->get($url);
         $observed = trim((string) ($response->json('revision') ?? $response->header('X-Revision') ?? $response->body()));
         if (! $response->successful() || $observed !== $frontendSha) {
             throw new RuntimeException('Deployed frontend revision endpoint does not match the exact authorization SHA.');

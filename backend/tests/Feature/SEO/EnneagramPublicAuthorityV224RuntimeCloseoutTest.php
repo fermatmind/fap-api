@@ -414,11 +414,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
-    public function test_post_readback_rejects_case_folded_private_reviewer_name_leak(): void
+    public function test_post_readback_rejects_case_folded_dom_split_private_reviewer_name_leak(): void
     {
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
-        $this->fakeRuntimeHttp($report, false, null, null, null, 'private human reviewer 1');
+        $this->fakeRuntimeHttp(
+            $report,
+            privateReviewerLeak: 'private human reviewer 1',
+            splitPrivateReviewerHtml: true,
+        );
 
         try {
             app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
@@ -994,6 +998,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $privateReviewerLeak = null,
         ?string $redirectSurface = null,
         ?object $discoverabilityState = null,
+        bool $splitPrivateReviewerHtml = false,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1001,7 +1006,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $privateReviewerLeak, $redirectSurface, $rejectRevalidation): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $privateReviewerLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1116,9 +1121,16 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         .'" href="'.htmlspecialchars($href, ENT_QUOTES | ENT_HTML5).'">';
                 }
 
-                $privateValue = $privateReviewerLeak === null
-                    ? ''
-                    : '<aside>'.htmlspecialchars($privateReviewerLeak, ENT_QUOTES | ENT_HTML5).'</aside>';
+                $privateValue = '';
+                if ($privateReviewerLeak !== null) {
+                    $escapedPrivateValue = htmlspecialchars($privateReviewerLeak, ENT_QUOTES | ENT_HTML5);
+                    if ($splitPrivateReviewerHtml && str_contains($escapedPrivateValue, ' ')) {
+                        [$prefix, $suffix] = explode(' ', $escapedPrivateValue, 2);
+                        $privateValue = '<aside>'.$prefix.' <span>'.$suffix.'</span></aside>';
+                    } else {
+                        $privateValue = '<aside>'.$escapedPrivateValue.'</aside>';
+                    }
+                }
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'

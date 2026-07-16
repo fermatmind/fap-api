@@ -298,6 +298,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         }
 
         $visible = $this->normalizedVisibleText($dom->textContent ?? '');
+        if (! in_array('html_private_reviewer_exposed', $issues, true)) {
+            $this->assertNoSensitiveValues($visible, $sensitiveValues, 'html', $issues);
+        }
         foreach (is_array($v1['faq'] ?? null) ? $v1['faq'] : [] as $faq) {
             $question = is_array($faq) ? trim((string) ($faq['question'] ?? $faq['q'] ?? '')) : '';
             if ($question !== '' && ! str_contains($visible, $this->normalizedVisibleText($question))) {
