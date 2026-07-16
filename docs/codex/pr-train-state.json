@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "review_fix_local_validation_passed",
-    "commit_sha": "acef44dca81a32ae7f5997430dcfd023d8806013",
+    "status": "pr_open_checks_pending",
+    "commit_sha": "ca10bd7e2e17543e65f53b0b06ca5112c25fe65f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96221,9 +96221,14 @@
         "at": "2026-07-16T14:38:16Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine third-cycle GitHub checks passed. Resolved the latest P2 in scope by exclusively reserving and fsyncing the redacted execute output before service execution; invalid/existing output now fails before runtime DB writes, while successful execute persists closeout_output_persisted=true without rollback token disclosure. Focused 33/652, full Enneagram V2 198/28658, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T14:38:53Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the closeout output reservation repair at ca10bd7e2e17543e65f53b0b06ca5112c25fe65f. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
       }
     ],
-    "updated_at": "2026-07-16T14:38:16Z"
+    "updated_at": "2026-07-16T14:38:53Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
