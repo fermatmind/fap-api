@@ -94992,10 +94992,10 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16"
     ],
-    "status": "ready_to_push",
+    "status": "github_checks_pending",
     "commit_sha": "20277717ab01d172d45625adf770692f13a4e49f",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3131",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -95016,6 +95016,10 @@
       "codex_skeptical_review": {
         "status": "pass",
         "evidence": "The initial 28 findings were rejected. Two recorded rounds repaired FAQ depth, exact answerability support, exercise specificity, a safety-pattern collision, and social information gain. Final readback found no normalized duplicate FAQ, signal, or independence note and no generated splice or agreement anomaly."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #3131 is OPEN at head 3a46add9e05cecf6d22e24f0fb47736acd3005d7 with exactly the six allowed files. GitHub reports MERGEABLE/UNSTABLE while required checks run."
       }
     },
     "scope_validation": {
@@ -95054,9 +95058,14 @@
         "at": "2026-07-16T04:27:26Z",
         "status": "ready_to_push",
         "note": "Committed the exact six-file PR17 scope as 20277717ab01d172d45625adf770692f13a4e49f after explicit path-limited staging and cached diff validation."
+      },
+      {
+        "at": "2026-07-16T04:28:35Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3131 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
       }
     ],
-    "updated_at": "2026-07-16T04:27:26Z"
+    "updated_at": "2026-07-16T04:28:35Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18",
