@@ -167,6 +167,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if ($this->normalizedMedia($v1['media'] ?? null) !== ['hero' => null, 'inline' => [], 'og' => null]) {
             $issues[] = 'api_media_not_empty';
         }
+        $this->assertApiPayloadMatchesCurrentPublicAsset($target, $v1, $issues);
         if ($phase === 'post') {
             if (($v1['source_hash'] ?? null) !== $target['asset_sha256']
                 || ($v1['source_package'] ?? null) !== EnneagramPublicAuthorityV205RevisionWorkspaceWriter::SOURCE_PACKAGE
@@ -230,6 +231,46 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             || (string) $revision->source_hash !== (string) $target['asset_sha256']
             || (string) $revision->workflow_state !== EnneagramPublicAuthorityV206RevisionPromoter::STATE_PUBLISHED) {
             $issues[] = 'database_published_package_or_pointer_mismatch';
+        }
+    }
+
+    /** @param array<string,mixed> $target @param array<string,mixed> $v1 @param list<string> $issues */
+    private function assertApiPayloadMatchesCurrentPublicAsset(array $target, array $v1, array &$issues): void
+    {
+        $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
+            ->where('entity_type', (string) $target['entity_type'])
+            ->where('entity_key', (string) $target['code'])
+            ->where('locale', (string) $target['locale'])
+            ->first();
+        if (! $asset instanceof PersonalityPublicContentAsset) {
+            $issues[] = 'api_current_public_asset_mismatch';
+
+            return;
+        }
+        $expected = [
+            'title' => (string) $asset->title,
+            'summary' => (string) $asset->summary,
+            'sections' => is_array($asset->content_sections_json) ? $asset->content_sections_json : [],
+            'seo' => is_array($asset->seo_json) ? $asset->seo_json : [],
+            'canonical_path' => (string) data_get($asset->canonical_json, 'path', ''),
+            'source_package' => $asset->source_package,
+            'source_hash' => $asset->source_hash,
+            'review_state' => (string) $asset->review_state,
+        ];
+        $observed = [
+            'title' => (string) ($v1['title'] ?? ''),
+            'summary' => (string) ($v1['summary'] ?? ''),
+            'sections' => is_array($v1['sections'] ?? null) ? $v1['sections'] : [],
+            'seo' => is_array($v1['seo'] ?? null) ? $v1['seo'] : [],
+            'canonical_path' => (string) ($v1['canonical_path'] ?? ''),
+            'source_package' => $v1['source_package'] ?? null,
+            'source_hash' => $v1['source_hash'] ?? null,
+            'review_state' => (string) ($v1['review_state'] ?? ''),
+        ];
+        if (! hash_equals($this->fingerprint($expected), $this->fingerprint($observed))) {
+            $issues[] = 'api_current_public_asset_mismatch';
         }
     }
 
@@ -299,7 +340,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 continue;
             }
             $href = $link->getAttribute('href');
-            if (preg_match('#/(?:results?|orders?|payments?|pay|share)/#i', $href) === 1) {
+            if (preg_match('~/(?:results?|orders?|payments?|pay|share)(?=[/?#]|$)~i', $href) === 1) {
                 $issues[] = 'html_private_link_present';
                 break;
             }
@@ -714,7 +755,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 return;
             }
         }
-        if (preg_match('#(?:"reviewer_name"|rollback[_-]?token|/results?/[^\s"<]+|/orders?/[^\s"<]+|/payments?/[^\s"<]+|/share/[^\s"<]+)#i', $body) === 1) {
+        if (preg_match('~(?:"reviewer_name"|rollback[_-]?token|/(?:results?|orders?|payments?|pay|share)(?=[/?#\s"\'<]|$))~i', $body) === 1) {
             $issues[] = $surface.'_private_data_marker_exposed';
         }
     }

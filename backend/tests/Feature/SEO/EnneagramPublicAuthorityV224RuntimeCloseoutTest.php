@@ -529,6 +529,53 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_pre_readback_rejects_stale_api_and_html_payload_against_current_database(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, stalePublicPayload: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected stale public API/HTML payload to fail against the current database.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_current_public_asset_mismatch', $exception->getMessage());
+        }
+    }
+
+    public function test_readback_rejects_query_fragment_and_bare_private_routes(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+
+        foreach (['/results?token=private', '/orders#private', '/pay?order=private', '/share'] as $privateRoute) {
+            $this->fakeRuntimeHttp($report, privateRouteLeak: $privateRoute);
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected private route leak to fail closed: '.$privateRoute);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('api_private_data_marker_exposed', $exception->getMessage());
+                $this->assertStringContainsString('html_private_link_present', $exception->getMessage());
+            }
+        }
+    }
+
     public function test_runtime_readback_rejects_api_redirect(): void
     {
         $this->seedPublishedEstate();
@@ -1207,6 +1254,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?object $discoverabilityState = null,
         bool $splitPrivateReviewerHtml = false,
         bool $omitSectionHtml = false,
+        ?string $privateRouteLeak = null,
+        bool $stalePublicPayload = false,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1214,7 +1263,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitSectionHtml, $privateReviewerLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitSectionHtml, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1268,6 +1317,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     }
                     $hreflang[$language] = 'https://frontend.test'.(string) parse_url((string) $url, PHP_URL_PATH);
                 }
+                $payloadTitle = $stalePublicPayload ? 'Stale cached Enneagram authority' : (string) $asset->title;
+                $payloadSummary = $stalePublicPayload ? 'Stale cached backend-authoritative public content.' : (string) $asset->summary;
+                $payloadSections = $stalePublicPayload
+                    ? [['key' => 'stale', 'title' => 'Stale section', 'body_md' => 'Stale cached section body.']]
+                    : (is_array($asset->content_sections_json) ? $asset->content_sections_json : []);
 
                 return Http::response([
                     'ok' => true,
@@ -1276,16 +1330,19 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'entity_type' => (string) $asset->entity_type,
                         'code' => (string) $asset->entity_key,
                         'locale' => (string) $asset->locale,
-                        'title' => (string) $asset->title,
-                        'summary' => (string) $asset->summary,
-                        'sections' => is_array($asset->content_sections_json) ? $asset->content_sections_json : [],
-                        'seo' => ['description' => (string) $asset->summary],
+                        'title' => $payloadTitle,
+                        'summary' => $payloadSummary,
+                        'sections' => $payloadSections,
+                        'seo' => $stalePublicPayload
+                            ? ['description' => $payloadSummary]
+                            : (is_array($asset->seo_json) ? $asset->seo_json : []),
                         'canonical_path' => (string) data_get($asset->canonical_json, 'path'),
                         'hreflang' => $hreflang,
                         'faq' => [],
                         'media' => ['hero' => null, 'inline' => [], 'og' => null],
-                        'source_package' => (string) $asset->source_package,
-                        'source_hash' => (string) $asset->source_hash,
+                        'review_state' => $stalePublicPayload ? 'stale_review_state' : (string) $asset->review_state,
+                        'source_package' => $stalePublicPayload ? 'stale-public-package' : $asset->source_package,
+                        'source_hash' => $stalePublicPayload ? str_repeat('f', 64) : $asset->source_hash,
                     ],
                     'personality_public_content_asset_v2' => [
                         'visible_evidence' => ['sources' => []],
@@ -1294,6 +1351,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                             'reviewer' => null,
                         ],
                         'operator_supplied_value' => $privateReviewerLeak,
+                        'private_route' => $privateRouteLeak,
                     ],
                 ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']);
             }
@@ -1315,8 +1373,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 if (! $asset instanceof PersonalityPublicContentAsset) {
                     return Http::response('not found', 404);
                 }
-                $title = htmlspecialchars((string) $asset->title, ENT_QUOTES | ENT_HTML5);
-                $summary = htmlspecialchars((string) $asset->summary, ENT_QUOTES | ENT_HTML5);
+                $renderedTitle = $stalePublicPayload ? 'Stale cached Enneagram authority' : (string) $asset->title;
+                $renderedSummary = $stalePublicPayload ? 'Stale cached backend-authoritative public content.' : (string) $asset->summary;
+                $renderedSections = $stalePublicPayload
+                    ? [['key' => 'stale', 'title' => 'Stale section', 'body_md' => 'Stale cached section body.']]
+                    : (is_array($asset->content_sections_json) ? $asset->content_sections_json : []);
+                $title = htmlspecialchars($renderedTitle, ENT_QUOTES | ENT_HTML5);
+                $summary = htmlspecialchars($renderedSummary, ENT_QUOTES | ENT_HTML5);
                 $canonical = htmlspecialchars(
                     $canonicalUrlOverride ?? 'https://frontend.test'.$path,
                     ENT_QUOTES | ENT_HTML5,
@@ -1344,11 +1407,14 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         $privateValue = '<aside>'.$escapedPrivateValue.'</aside>';
                     }
                 }
+                $privateLink = $privateRouteLeak === null
+                    ? ''
+                    : '<a href="'.htmlspecialchars($privateRouteLeak, ENT_QUOTES | ENT_HTML5).'">private route</a>';
 
                 $sectionHtml = '<section>stale cached section content</section>';
                 if (! $omitSectionHtml) {
                     $sectionHtml = '';
-                    foreach (is_array($asset->content_sections_json) ? $asset->content_sections_json : [] as $section) {
+                    foreach ($renderedSections as $section) {
                         if (! is_array($section)) {
                             continue;
                         }
@@ -1369,7 +1435,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     .'<meta name="description" content="'.$summary.'">'
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .implode('', $hreflang)
-                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.'</main>'.$privateValue.'</body></html>');
+                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$privateLink.'</main>'.$privateValue.'</body></html>');
             }
 
             return Http::response(['ok' => false], 404);
