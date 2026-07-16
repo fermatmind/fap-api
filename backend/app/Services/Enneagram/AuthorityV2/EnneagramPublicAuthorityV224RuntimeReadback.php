@@ -466,8 +466,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 throw new RuntimeException('Discoverability URL is invalid.');
             }
             $path = (string) ($parts['path'] ?? '');
-            $isEnneagram = str_contains($path, '/personality/enneagram');
-            if ($expectedOrigin !== null && ($requireCanonicalSitemapUrl || $isEnneagram)) {
+            if ($expectedOrigin !== null) {
                 if (array_key_exists('query', $parts) || array_key_exists('fragment', $parts)) {
                     throw new RuntimeException('Discoverability URL must not contain a query or fragment.');
                 }

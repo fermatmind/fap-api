@@ -481,7 +481,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
     {
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
-        $discoverabilityState = (object) ['relative_llms_url' => '/en/articles/runtime-evidence'];
+        $discoverabilityState = (object) ['additional_llms_url' => '/en/articles/runtime-evidence'];
         $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
 
         $snapshot = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
@@ -497,6 +497,31 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             data_get($snapshot, 'url_sets.sitemap.url_set_sha256'),
             data_get($snapshot, 'url_sets.llms.url_set_sha256'),
         );
+    }
+
+    public function test_discoverability_snapshot_rejects_non_enneagram_absolute_llms_origin_query_and_fragment_drift(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $discoverabilityState = (object) ['additional_llms_url' => null];
+        $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
+
+        foreach ([
+            'https://staging.example.com/en/articles/runtime-evidence',
+            'https://frontend.test/en/articles/runtime-evidence?preview=1',
+            'https://frontend.test/en/articles/runtime-evidence#preview',
+        ] as $invalidUrl) {
+            $discoverabilityState->additional_llms_url = $invalidUrl;
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+                    $report,
+                    'https://frontend.test',
+                );
+                $this->fail('Expected non-Enneagram LLMS URL drift to fail closed: '.$invalidUrl);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('Discoverability URL', $exception->getMessage());
+            }
+        }
     }
 
     public function test_execute_rejects_full_url_set_drift_before_any_runtime_write(): void
@@ -1092,8 +1117,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 ? trim($discoverabilityState->additional_url)
                 : '';
             $urlText = $additionalUrl === '' ? $baseUrlText : $baseUrlText."\n".$additionalUrl;
-            $relativeLlmsUrl = is_object($discoverabilityState) && is_string($discoverabilityState->relative_llms_url ?? null)
-                ? trim($discoverabilityState->relative_llms_url)
+            $relativeLlmsUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_llms_url ?? null)
+                ? trim($discoverabilityState->additional_llms_url)
                 : '';
             $llmsUrlText = $relativeLlmsUrl === '' ? $urlText : $urlText."\n".$relativeLlmsUrl;
             if (($redirectSurface === 'api' && str_starts_with($url, 'https://api.test/api/v0.5/personality-content-assets?'))
