@@ -95445,7 +95445,7 @@
       "fap_api_origin_main_contains_link_graph_merge": true,
       "verified_at": "2026-07-16T08:31:28Z"
     },
-    "status": "ci_fix_rebased_local_verified_blocked_release_gate",
+    "status": "draft_open_ci_green_blocked_release_gate",
     "commit_sha": "3cde43132c9e04c5b69978d03f7304f0ecb0f011",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3138",
     "checks": {
@@ -95478,8 +95478,8 @@
         "evidence": "Manifest YAML, ledger/package/report JSON, report SHA binding, git diff --check, and exact ten-file allowlist validation passed."
       },
       "github": {
-        "status": "rebased_fix_pending_force_with_lease_push",
-        "evidence": "Head 3b470f9fcbb63146022d07804a357db5f1799243 passed eight checks; verify-bigfive failed only because its frozen non-runtime classifier rejected the two newly named PR22 PHP files. The scoped fix moves the same gate into already-registered Authority V2 integrity files and deletes those two paths. The five PR22 commits were cleanly rebased onto origin/main 0d81790f5c581d4da8c979210c70334707034fac; the exact previously failing runtime freeze now passes 1/3 locally."
+        "status": "passed",
+        "evidence": "Rebased exact head e7865c345454a33af83e4ad9ff472edc42a2192c passed all nine GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and SARIF upload. GitHub reports CLEAN; no review comments or threads exist."
       },
       "runtime_freeze_regression": {
         "status": "passed",
@@ -95489,7 +95489,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": "Release gate is truthfully HOLD: aggregate editorial QA found two cross-family duplicate_sentence blockers; 0/116 named human content reviews and 0/116 localized media-rights approvals are present. PR22 must remain draft/open and PR23 must not start.",
@@ -95557,9 +95557,14 @@
         "at": "2026-07-16T08:55:28Z",
         "status": "ci_fix_rebased_local_verified_blocked_release_gate",
         "note": "Rebased all five PR22 commits onto origin/main 0d81790f5c581d4da8c979210c70334707034fac, which rewrote the substantive non-runtime fix to 3cde43132c9e04c5b69978d03f7304f0ecb0f011. The exact runtime freeze passes 1/3; manifest suite passes 53/4130; four-file php -l and Pint, strict Composer validation, YAML/JSON validation, git diff --check, and exact ten-file scope pass. The first local Pint invocation used zsh and failed only because newline file paths were not word-split; the Bash manifest-semantics retry passed. Also restored unrelated SECURITY-103-API-06.commit_sha to its origin/main null value after detecting the prior binding commit's over-broad replacement. Require a fresh complete GitHub cycle; release decision remains fail_closed/HOLD."
+      },
+      {
+        "at": "2026-07-16T09:03:47Z",
+        "status": "draft_open_ci_green_blocked_release_gate",
+        "note": "Rebased head e7865c345454a33af83e4ad9ff472edc42a2192c passed all nine GitHub checks, GitHub is CLEAN, the exact ten-file scope remains intact, and there are no review comments or threads. Keep Draft PR #3138 open and unmerged: the release gate still fails closed on two aggregate duplicate-sentence blockers, 116 missing named human reviews, and 116 pending localized media-rights reviews. PR23 remains register-only and unstarted."
       }
     ],
-    "updated_at": "2026-07-16T08:55:28Z"
+    "updated_at": "2026-07-16T09:03:47Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
