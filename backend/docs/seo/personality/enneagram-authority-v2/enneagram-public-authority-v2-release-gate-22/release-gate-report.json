@@ -1,14 +1,14 @@
 {
     "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
-    "schema_version": "enneagram_public_authority_v2_release_gate.v1",
+    "schema_version": "enneagram_public_authority_v2_release_gate.v2",
     "status": "fail_closed",
     "decision": "HOLD",
     "ok": false,
     "automated_gate_passed": false,
     "human_review_passed": false,
-    "media_rights_review_passed": false,
+    "media_boundary_passed": true,
     "release_eligible": false,
-    "package_sha256": "ebe1d718508aad886d1ec1cb92d463b5857c68f6edd7a17c7716f822ca6ca8d8",
+    "package_sha256": "dc473a41cd8a0c7fe7aa51cc1d5d6d14e7cfcceaee5af13deb82047e4b5be187",
     "counts": {
         "identities": 58,
         "assets": 116,
@@ -28,14 +28,13 @@
         "editorial_integrity_qa_rows": 116,
         "graph_records": 116,
         "unique_canonicals": 116,
-        "media_originals": 58,
-        "media_mappings": 116,
+        "empty_media_authority_count": 116,
+        "media_write_count": 0,
         "pre_write_public_fingerprints": 116,
         "named_human_reviews": 0,
         "approved_human_reviews": 0,
         "rejected_human_reviews": 0,
-        "missing_human_reviews": 116,
-        "pending_media_rights_reviews": 116
+        "missing_human_reviews": 116
     },
     "collision_preflight": {
         "status": "fail",
@@ -3119,416 +3118,18 @@
         }
     ],
     "rejected_human_review_asset_keys": [],
-    "media_manifest_records": [
-        {
-            "identity_key": "center:gut",
-            "spec_id": "enneagram-v2-original-center-gut",
-            "record_sha256": "6e26f4300cd6a308d629e3deccbbc01e6d74507b91d971f7d59626be0c1c263e"
+    "empty_media_authority": {
+        "contract": {
+            "hero": null,
+            "inline": [],
+            "og": null
         },
-        {
-            "identity_key": "center:head",
-            "spec_id": "enneagram-v2-original-center-head",
-            "record_sha256": "ab2a454d7977562e569c63cbff1b4ffa61d82e5f4b48490af5266ba384d987c8"
-        },
-        {
-            "identity_key": "center:heart",
-            "spec_id": "enneagram-v2-original-center-heart",
-            "record_sha256": "11f4135393c0a11abf061525af9efcd1a8665de5d9414193598d422cde6e45ba"
-        },
-        {
-            "identity_key": "core_type:type-1",
-            "spec_id": "enneagram-v2-original-core-type-type-1",
-            "record_sha256": "32475ec8b83609b0a8d6642b9eabb330e6398e3dc96ce7ae7dd001bd632a7096"
-        },
-        {
-            "identity_key": "core_type:type-2",
-            "spec_id": "enneagram-v2-original-core-type-type-2",
-            "record_sha256": "c7dc3e15c887ab6e82908d1020a07c07f3bd5af98f08d70066e08a13f78ca389"
-        },
-        {
-            "identity_key": "core_type:type-3",
-            "spec_id": "enneagram-v2-original-core-type-type-3",
-            "record_sha256": "00d5929cab2b18fd987deb25b3b14011752974d8700dc8701930b2c0fa161c05"
-        },
-        {
-            "identity_key": "core_type:type-4",
-            "spec_id": "enneagram-v2-original-core-type-type-4",
-            "record_sha256": "f2b54384abaebbafef898a3236f892daf0f4ac9aa8ad7e06a5bf2f28e0613df4"
-        },
-        {
-            "identity_key": "core_type:type-5",
-            "spec_id": "enneagram-v2-original-core-type-type-5",
-            "record_sha256": "eeaf1f7ca6cabb198c4eef82fbe0b46d59ecb0297bc39ea103bd55b02e74efc9"
-        },
-        {
-            "identity_key": "core_type:type-6",
-            "spec_id": "enneagram-v2-original-core-type-type-6",
-            "record_sha256": "f41e7f104b2e4bc56e03e92aa8ef5f93c6428a75d2a29bb79ae1b2ff51d8c5df"
-        },
-        {
-            "identity_key": "core_type:type-7",
-            "spec_id": "enneagram-v2-original-core-type-type-7",
-            "record_sha256": "e3dd731ca24380f7b3a61fba81f19136975767cce9656955dcafbb0d3108b915"
-        },
-        {
-            "identity_key": "core_type:type-8",
-            "spec_id": "enneagram-v2-original-core-type-type-8",
-            "record_sha256": "83d6ef6e4cd383004f4a0f00ae43f6b50c705274047eaea4018c831a70683c00"
-        },
-        {
-            "identity_key": "core_type:type-9",
-            "spec_id": "enneagram-v2-original-core-type-type-9",
-            "record_sha256": "6eee4c7cc56d925f5cea917223976ffc5b4966ab148dd259f33b96a87dc71e67"
-        },
-        {
-            "identity_key": "hub:enneagram",
-            "spec_id": "enneagram-v2-original-hub-enneagram",
-            "record_sha256": "d38227da90f6f510f557607e4b3abfd8e518a38b2fd600c4b12c530a28e9d637"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-1/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-1-one-to-one",
-            "record_sha256": "4104335be2c146fe72aefd85b2002c8e5b6717d631d8487cbd732bb2cbb8290a"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-1/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-1-self-preservation",
-            "record_sha256": "3b9b5aefcafb2b4d9dd779dd4e6dca4a613ccdf31d6b5530f1dce590f4c5afed"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-1/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-1-social",
-            "record_sha256": "7a9e9d41f5fe1abe83dc6b80d15ad82b5145e5e5ca78cb1e6838f3ec9f4d2945"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-2/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-2-one-to-one",
-            "record_sha256": "c7684e74a456bd54c3f6d5fa9dcc8b537fd77868aa85e6949edf1c2ffd03e8db"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-2/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-2-self-preservation",
-            "record_sha256": "f6bc90178179bcab5d95e308c436cfe77fdd3e127e4d7d4e763bf0df760eb5f9"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-2/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-2-social",
-            "record_sha256": "ef9184219b5e9140fab82ca992b4e102ea3a8c8892e905b276c9c9b83424b135"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-3/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-3-one-to-one",
-            "record_sha256": "4f391c81025ffb2d0015b1eee8b19428f3fcb3fbbbfeafbf41ed2d786566d799"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-3/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-3-self-preservation",
-            "record_sha256": "d0fac37ce17dcd424d5e1a84ef7de005f0280ecb1d682f1d2f48c03204056ff5"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-3/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-3-social",
-            "record_sha256": "8daba10b6100359750a5c2795a5924a2b24d393a6f461f6ecb65e8a0d2954c6e"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-4/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-4-one-to-one",
-            "record_sha256": "ee7dbe62c6915328bc6e48da57510387128b7e5d24896cf56aec41745cdaf713"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-4/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-4-self-preservation",
-            "record_sha256": "08ccdd06e19513b8861bc1db49e0d83e54e455b1de392dd29e759f4110a144d2"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-4/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-4-social",
-            "record_sha256": "bcfc67025c5f9dd7d9b92bcf08da6f1f8d634193a0f3486e80bf1fc53799c195"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-5/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-5-one-to-one",
-            "record_sha256": "7af67d439e95893099d61b7adb729b26cbfd09c84e3fb5b8f475f968c0d04281"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-5/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-5-self-preservation",
-            "record_sha256": "8c98c5a9089ad2cbbe2c57feea4c9786ab9d56b7503a0513aec4957174a1241c"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-5/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-5-social",
-            "record_sha256": "087478ef361f022925a103581634553b1b146ef263ffeb6062c7480223487dc5"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-6/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-6-one-to-one",
-            "record_sha256": "f655e081776f8b9e6b3dfeaf1636414ecb307a130a906c36acc7ca5e585d2933"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-6/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-6-self-preservation",
-            "record_sha256": "b7011679f0608cd22aabfa0d5ca91f0cd0e0baa764df371ee0b8921c739dec66"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-6/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-6-social",
-            "record_sha256": "1c170af48c7d6932641a35e05bae13319573011ada52d261b8b4efdf9cfe8cd5"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-7/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-7-one-to-one",
-            "record_sha256": "fccb65017886b69da86cf32df4ea20f1a4ae9b0f566ce2a8f2c3a45dc0607332"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-7/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-7-self-preservation",
-            "record_sha256": "b122903bb0551382d58a1562ac701775ba6eaa741dae0797d8fe11ade8251b8d"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-7/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-7-social",
-            "record_sha256": "e033373216924ac873a922e34dc096647e27ddcdffbf1b6dff5d2e8855e402a7"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-8/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-8-one-to-one",
-            "record_sha256": "9405c9ab0905e0d310b7e2311e03e6709778ebf3c7db067879bbac92120f6f2f"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-8/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-8-self-preservation",
-            "record_sha256": "159af722a175541e957c701c7b3b943fc105992932244cd9dd0b3ee75371bf3e"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-8/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-8-social",
-            "record_sha256": "ff77c8800785306d2758f6392a2fcbbd8b7d6312c5e414b621a0a15fbe5ef914"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-9/one-to-one",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-9-one-to-one",
-            "record_sha256": "4b93ccbe1b763a0841c2a48ee625545344776e73916ec7813d13d9fef49f7362"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-9/self-preservation",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-9-self-preservation",
-            "record_sha256": "8cba886bf8127786fb12de2f2adff8c3771a8b120d5c4950ac8cefbd015f389a"
-        },
-        {
-            "identity_key": "instinctual_subtype:type-9/social",
-            "spec_id": "enneagram-v2-original-instinctual-subtype-type-9-social",
-            "record_sha256": "b4cfb4bdfa32193c59bcec78428276b058c034073d5f9437ff6bab5398217bb8"
-        },
-        {
-            "identity_key": "wing:1w2",
-            "spec_id": "enneagram-v2-original-wing-1w2",
-            "record_sha256": "c37617313dca9f8bbd97462727abeda371949eecf446c45af0656ac3d274c1d3"
-        },
-        {
-            "identity_key": "wing:1w9",
-            "spec_id": "enneagram-v2-original-wing-1w9",
-            "record_sha256": "b863814c1ad98c00c03678d7d7e369e12902adefcf961e41e6f42f5881ff79d1"
-        },
-        {
-            "identity_key": "wing:2w1",
-            "spec_id": "enneagram-v2-original-wing-2w1",
-            "record_sha256": "3bff1501f9c5f33bf952a2dee90665885d273c2d32600944e321ae02cfe27bef"
-        },
-        {
-            "identity_key": "wing:2w3",
-            "spec_id": "enneagram-v2-original-wing-2w3",
-            "record_sha256": "497f2fc3fcddf58ba29c533abea25c1818a8502d3352a03f4ee7143f563cceb8"
-        },
-        {
-            "identity_key": "wing:3w2",
-            "spec_id": "enneagram-v2-original-wing-3w2",
-            "record_sha256": "5b4ebe2da22a5d26654ca6459c939134bf58012e8e3fd65be6e99dd9422ed262"
-        },
-        {
-            "identity_key": "wing:3w4",
-            "spec_id": "enneagram-v2-original-wing-3w4",
-            "record_sha256": "6ee008bfde7f2767d419bc3fa23fdbb98e3d6c43b1a589bb436ce82d75e4c6ce"
-        },
-        {
-            "identity_key": "wing:4w3",
-            "spec_id": "enneagram-v2-original-wing-4w3",
-            "record_sha256": "b91a5175f171c5ba3c11b4a3b246c5d3d7ee2a3ac1fbdbdc2e6df7e92e4c9f89"
-        },
-        {
-            "identity_key": "wing:4w5",
-            "spec_id": "enneagram-v2-original-wing-4w5",
-            "record_sha256": "0f0cf348018d4677598d5b7c96a38e330632dadb24185d72cb37c78fc7f51631"
-        },
-        {
-            "identity_key": "wing:5w4",
-            "spec_id": "enneagram-v2-original-wing-5w4",
-            "record_sha256": "58d4b43d961037b3515919a99d90b4427a1471ee5feb37d5c9b4cd441e3c07c6"
-        },
-        {
-            "identity_key": "wing:5w6",
-            "spec_id": "enneagram-v2-original-wing-5w6",
-            "record_sha256": "50c39d74a858a9c82ef5af9b2ab161566c8a93bff8a1fe09da3626616269be39"
-        },
-        {
-            "identity_key": "wing:6w5",
-            "spec_id": "enneagram-v2-original-wing-6w5",
-            "record_sha256": "52397c9c71e9f59461a413d14abc893bd41ef3f772a8c1a5cb0f09515923d61a"
-        },
-        {
-            "identity_key": "wing:6w7",
-            "spec_id": "enneagram-v2-original-wing-6w7",
-            "record_sha256": "1a89a36769435504482618d14f0e09bd92f155791dd624956973c7af3a17a9bf"
-        },
-        {
-            "identity_key": "wing:7w6",
-            "spec_id": "enneagram-v2-original-wing-7w6",
-            "record_sha256": "9658cb1ca0dd977d5117fa4dae948931b149126466616e86386c66e4468277af"
-        },
-        {
-            "identity_key": "wing:7w8",
-            "spec_id": "enneagram-v2-original-wing-7w8",
-            "record_sha256": "0f7337ba2e9ea8426ed2059013aebd259bd602dfe7e9967f6609b984727f1d5d"
-        },
-        {
-            "identity_key": "wing:8w7",
-            "spec_id": "enneagram-v2-original-wing-8w7",
-            "record_sha256": "d13ddafdde4f4baa9f5d34dce119d841e6549f1d10b7224c7f8328d48cfa4d0c"
-        },
-        {
-            "identity_key": "wing:8w9",
-            "spec_id": "enneagram-v2-original-wing-8w9",
-            "record_sha256": "3c994c9e6d478f5357b6db6f67e94c7611ffe09b87b1a3ad67483648203645bb"
-        },
-        {
-            "identity_key": "wing:9w1",
-            "spec_id": "enneagram-v2-original-wing-9w1",
-            "record_sha256": "aec4a442d38f965f234427ebeda4a7ac2919d06ff24469437f43e3657b5d6074"
-        },
-        {
-            "identity_key": "wing:9w8",
-            "spec_id": "enneagram-v2-original-wing-9w8",
-            "record_sha256": "3e8f6fc05e34b1e54ed3885896f550203e49e9d7d769a0df9a4106778630d13b"
-        }
-    ],
-    "pending_media_rights_review_asset_keys": [
-        "en|center:gut",
-        "en|center:head",
-        "en|center:heart",
-        "en|core_type:type-1",
-        "en|core_type:type-2",
-        "en|core_type:type-3",
-        "en|core_type:type-4",
-        "en|core_type:type-5",
-        "en|core_type:type-6",
-        "en|core_type:type-7",
-        "en|core_type:type-8",
-        "en|core_type:type-9",
-        "en|hub:enneagram",
-        "en|instinctual_subtype:type-1/one-to-one",
-        "en|instinctual_subtype:type-1/self-preservation",
-        "en|instinctual_subtype:type-1/social",
-        "en|instinctual_subtype:type-2/one-to-one",
-        "en|instinctual_subtype:type-2/self-preservation",
-        "en|instinctual_subtype:type-2/social",
-        "en|instinctual_subtype:type-3/one-to-one",
-        "en|instinctual_subtype:type-3/self-preservation",
-        "en|instinctual_subtype:type-3/social",
-        "en|instinctual_subtype:type-4/one-to-one",
-        "en|instinctual_subtype:type-4/self-preservation",
-        "en|instinctual_subtype:type-4/social",
-        "en|instinctual_subtype:type-5/one-to-one",
-        "en|instinctual_subtype:type-5/self-preservation",
-        "en|instinctual_subtype:type-5/social",
-        "en|instinctual_subtype:type-6/one-to-one",
-        "en|instinctual_subtype:type-6/self-preservation",
-        "en|instinctual_subtype:type-6/social",
-        "en|instinctual_subtype:type-7/one-to-one",
-        "en|instinctual_subtype:type-7/self-preservation",
-        "en|instinctual_subtype:type-7/social",
-        "en|instinctual_subtype:type-8/one-to-one",
-        "en|instinctual_subtype:type-8/self-preservation",
-        "en|instinctual_subtype:type-8/social",
-        "en|instinctual_subtype:type-9/one-to-one",
-        "en|instinctual_subtype:type-9/self-preservation",
-        "en|instinctual_subtype:type-9/social",
-        "en|wing:1w2",
-        "en|wing:1w9",
-        "en|wing:2w1",
-        "en|wing:2w3",
-        "en|wing:3w2",
-        "en|wing:3w4",
-        "en|wing:4w3",
-        "en|wing:4w5",
-        "en|wing:5w4",
-        "en|wing:5w6",
-        "en|wing:6w5",
-        "en|wing:6w7",
-        "en|wing:7w6",
-        "en|wing:7w8",
-        "en|wing:8w7",
-        "en|wing:8w9",
-        "en|wing:9w1",
-        "en|wing:9w8",
-        "zh-CN|center:gut",
-        "zh-CN|center:head",
-        "zh-CN|center:heart",
-        "zh-CN|core_type:type-1",
-        "zh-CN|core_type:type-2",
-        "zh-CN|core_type:type-3",
-        "zh-CN|core_type:type-4",
-        "zh-CN|core_type:type-5",
-        "zh-CN|core_type:type-6",
-        "zh-CN|core_type:type-7",
-        "zh-CN|core_type:type-8",
-        "zh-CN|core_type:type-9",
-        "zh-CN|hub:enneagram",
-        "zh-CN|instinctual_subtype:type-1/one-to-one",
-        "zh-CN|instinctual_subtype:type-1/self-preservation",
-        "zh-CN|instinctual_subtype:type-1/social",
-        "zh-CN|instinctual_subtype:type-2/one-to-one",
-        "zh-CN|instinctual_subtype:type-2/self-preservation",
-        "zh-CN|instinctual_subtype:type-2/social",
-        "zh-CN|instinctual_subtype:type-3/one-to-one",
-        "zh-CN|instinctual_subtype:type-3/self-preservation",
-        "zh-CN|instinctual_subtype:type-3/social",
-        "zh-CN|instinctual_subtype:type-4/one-to-one",
-        "zh-CN|instinctual_subtype:type-4/self-preservation",
-        "zh-CN|instinctual_subtype:type-4/social",
-        "zh-CN|instinctual_subtype:type-5/one-to-one",
-        "zh-CN|instinctual_subtype:type-5/self-preservation",
-        "zh-CN|instinctual_subtype:type-5/social",
-        "zh-CN|instinctual_subtype:type-6/one-to-one",
-        "zh-CN|instinctual_subtype:type-6/self-preservation",
-        "zh-CN|instinctual_subtype:type-6/social",
-        "zh-CN|instinctual_subtype:type-7/one-to-one",
-        "zh-CN|instinctual_subtype:type-7/self-preservation",
-        "zh-CN|instinctual_subtype:type-7/social",
-        "zh-CN|instinctual_subtype:type-8/one-to-one",
-        "zh-CN|instinctual_subtype:type-8/self-preservation",
-        "zh-CN|instinctual_subtype:type-8/social",
-        "zh-CN|instinctual_subtype:type-9/one-to-one",
-        "zh-CN|instinctual_subtype:type-9/self-preservation",
-        "zh-CN|instinctual_subtype:type-9/social",
-        "zh-CN|wing:1w2",
-        "zh-CN|wing:1w9",
-        "zh-CN|wing:2w1",
-        "zh-CN|wing:2w3",
-        "zh-CN|wing:3w2",
-        "zh-CN|wing:3w4",
-        "zh-CN|wing:4w3",
-        "zh-CN|wing:4w5",
-        "zh-CN|wing:5w4",
-        "zh-CN|wing:5w6",
-        "zh-CN|wing:6w5",
-        "zh-CN|wing:6w7",
-        "zh-CN|wing:7w6",
-        "zh-CN|wing:7w8",
-        "zh-CN|wing:8w7",
-        "zh-CN|wing:8w9",
-        "zh-CN|wing:9w1",
-        "zh-CN|wing:9w8"
-    ],
+        "target_count": 116,
+        "valid_count": 116,
+        "non_empty_asset_keys": [],
+        "media_write_count": 0,
+        "media_library_write_performed": false
+    },
     "source_hashes": [
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
@@ -3625,18 +3226,9 @@
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-link-graph-20/link-graph.json",
             "sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd"
-        },
-        {
-            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-media-og-19/media-specifications.json",
-            "sha256": "7fd157bf3e7cd90041eb3aa08f7666064673c31cf6559874d962c7483f85f8aa"
-        },
-        {
-            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-media-og-19/localized-og-mappings.json",
-            "sha256": "affa799f460794d017db06ed52064c3ae8da3b4c0f9a9feac64908e7e8534960"
         }
     ],
     "graph_manifest_sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd",
-    "media_manifest_sha256": "7fd157bf3e7cd90041eb3aa08f7666064673c31cf6559874d962c7483f85f8aa",
     "qa_sources": [
         {
             "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/qa-report.json",
@@ -3695,10 +3287,10 @@
     ],
     "release_boundary": {
         "manual_review_requirement": "116/116 named human review records bound to exact asset SHA256",
+        "media_requirement": "116/116 authority assets map to hero=null, inline=[], og=null with zero Media Library writes",
         "current_blockers": [
             "automated_release_gate_failed",
-            "missing_or_rejected_named_human_review_records",
-            "missing_media_rights_review_records"
+            "missing_or_rejected_named_human_review_records"
         ],
         "next_authority": "operator_supplied_human_review_evidence_then_separate_exact_sha_production_authorization",
         "production_command_executed": false

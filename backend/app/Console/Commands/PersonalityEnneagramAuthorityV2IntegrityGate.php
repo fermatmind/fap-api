@@ -127,7 +127,7 @@ final class PersonalityEnneagramAuthorityV2IntegrityGate extends Command
         }
 
         if (array_key_exists('release_eligible', $summary)) {
-            foreach (['status', 'decision', 'automated_gate_passed', 'human_review_passed', 'media_rights_review_passed', 'release_eligible', 'package_sha256'] as $field) {
+            foreach (['status', 'decision', 'automated_gate_passed', 'human_review_passed', 'media_boundary_passed', 'release_eligible', 'package_sha256'] as $field) {
                 $value = $summary[$field] ?? null;
                 $this->line($field.'='.(is_bool($value) ? ($value ? '1' : '0') : (string) $value));
             }
@@ -206,7 +206,7 @@ final class PersonalityEnneagramAuthorityV2IntegrityGate extends Command
             'ok' => false,
             'automated_gate_passed' => false,
             'human_review_passed' => false,
-            'media_rights_review_passed' => false,
+            'media_boundary_passed' => false,
             'release_eligible' => false,
             'errors' => [['code' => 'command_error', 'subject' => $exception->getMessage()]],
             'execution_boundaries' => [
