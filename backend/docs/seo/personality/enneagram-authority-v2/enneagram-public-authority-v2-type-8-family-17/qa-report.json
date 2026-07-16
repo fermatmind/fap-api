@@ -1,0 +1,87 @@
+{
+  "schema_version": "enneagram_public_authority_v2_family_qa_report.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17",
+  "generation_mode": "codex_native_content_generation",
+  "external_model_sessions": [],
+  "review_scope": {
+    "family": "type-8",
+    "asset_count": 12,
+    "locales": ["en", "zh-CN"],
+    "identity_keys": [
+      "core_type:type-8",
+      "wing:8w7",
+      "wing:8w9",
+      "instinctual_subtype:type-8/self-preservation",
+      "instinctual_subtype:type-8/social",
+      "instinctual_subtype:type-8/one-to-one"
+    ]
+  },
+  "skeptical_review": {
+    "reviewer_mode": "codex_native_skeptical_audit",
+    "accepted_without_repair": false,
+    "checks": [
+      "frozen identity, locale, route, claim, and limitation mapping",
+      "answer-first and FAQ depth with visible answerability support",
+      "core-first wing and non-mechanistic subtype boundaries",
+      "authority, scarcity, discrimination, coercion, consent, and exit alternatives",
+      "manual-review and release truth plus zero execution actions"
+    ],
+    "content_notes": [
+      "Core pages separate assigned authority and real danger from autonomy or invulnerability hypotheses.",
+      "8w7 tests option expansion and closure under resource ceilings; 8w9 tests territory, delay, and release under matched authority.",
+      "Self-preservation compares control after stable access, social compares requested versus self-appointed protection, and one-to-one compares influence under equal versus unequal power."
+    ]
+  },
+  "raw_draft_audit": {
+    "status": "failed_repaired",
+    "asset_specific_issue_count": 28,
+    "issues": {
+      "faq_item_too_shallow": 18,
+      "geo_answerability_unverified": 6,
+      "exercise_not_page_specific": 2,
+      "page_specific_information_insufficient": 1,
+      "deterministic_recommendation_claim": 1
+    },
+    "repair_rounds": [
+      {
+        "round": 1,
+        "status": "failed",
+        "remaining_asset_specific_issue_count": 1,
+        "issues": {"page_specific_information_insufficient": 1},
+        "note": "Expanded all eighteen Chinese FAQ answers with page-specific responsibility, resource, authority, governance, consent, and repair evidence; mapped every Chinese answerability phrase to exact visible copy; extended both one-to-one exercise cues; replaced a lexical safety-pattern collision; and expanded the social intervention signal. One social signal still normalized below the required length."
+      },
+      {
+        "round": 2,
+        "status": "pass",
+        "remaining_asset_specific_issue_count": 0,
+        "issues": {},
+        "note": "Reframed the final social signal around sustained speaking resources and formal decision power after confrontation, clearing the complete family without changing mapped claims or release truth."
+      }
+    ],
+    "critical_contract_violations_after_repair": 0
+  },
+  "final_qa": {
+    "status": "pass_for_manual_review_handoff",
+    "asset_count": 12,
+    "locale_counts": {"en": 6, "zh-CN": 6},
+    "entity_counts": {"core_type": 2, "wing": 4, "instinctual_subtype": 6},
+    "faq_count": 36,
+    "asset_specific_issue_count": 0,
+    "deferred_target_count": 104,
+    "manual_review_state": "pending_manual_review",
+    "reviewer": null,
+    "human_review_completed": false,
+    "publish_eligible": false
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}
