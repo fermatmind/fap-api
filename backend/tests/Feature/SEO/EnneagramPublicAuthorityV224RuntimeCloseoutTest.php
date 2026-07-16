@@ -346,6 +346,102 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_console_execute_rejects_invalid_closeout_output_before_any_runtime_write(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
+        $existingOutput = storage_path('framework/testing/enneagram-v224-existing-output-'.bin2hex(random_bytes(4)).'.json');
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
+        File::put($existingOutput, 'operator-owned-closeout-sentinel');
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                '--execute' => true,
+                '--review-register' => $registerPath,
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--output' => $existingOutput,
+                '--allow-testing' => true,
+            ])
+                ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
+                ->expectsOutputToContain('writes_committed=0')
+                ->assertFailed();
+
+            $this->assertSame('operator-owned-closeout-sentinel', File::get($existingOutput));
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+        } finally {
+            File::delete([$registerPath, $existingOutput]);
+        }
+    }
+
+    public function test_console_execute_persists_the_redacted_closeout_result_to_the_reserved_output(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $reportPath = base_path('docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/release-gate-report.json');
+        $register = $this->reviewRegister($report);
+        $registerRaw = json_encode($register, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $preflight = $this->closeout()->preflight(
+            $report,
+            hash('sha256', File::get($reportPath)),
+            $register,
+            hash('sha256', $registerRaw),
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+        $suffix = bin2hex(random_bytes(4));
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.$suffix.'.json');
+        $packetPath = storage_path('framework/testing/enneagram-v224-packet-'.$suffix.'.json');
+        $outputPath = storage_path('framework/testing/enneagram-v224-closeout-'.$suffix.'.json');
+        $rollbackPath = '/tmp/enneagram-v224-console-rollback-'.$suffix.'.token';
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, $registerRaw);
+        File::put($packetPath, json_encode(
+            $preflight['authorization_packet'],
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+        ));
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+        config()->set('ops.content_release_observability.hmac_revalidation_secret', self::REVALIDATION_SECRET);
+        $this->fakeRuntimeHttp($report);
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                '--execute' => true,
+                '--review-register' => $registerPath,
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--authorization-packet' => $packetPath,
+                '--confirm-authorization-packet-sha256' => (string) $preflight['authorization_packet_sha256'],
+                '--operator-approved' => (string) $preflight['authorization_packet']['authorization_phrase'],
+                '--rollback-token-output' => $rollbackPath,
+                '--api-base-url' => 'https://api.test',
+                '--frontend-base-url' => 'https://frontend.test',
+                '--output' => $outputPath,
+                '--allow-testing' => true,
+            ])
+                ->expectsOutputToContain('status=PASS_AUTHORIZED_RUNTIME_CLOSEOUT')
+                ->expectsOutputToContain('writes_committed=1')
+                ->assertSuccessful();
+
+            $result = json_decode(File::get($outputPath), true, 512, JSON_THROW_ON_ERROR);
+            $rollbackToken = trim(File::get($rollbackPath));
+            $this->assertTrue($result['ok']);
+            $this->assertTrue($result['writes_committed']);
+            $this->assertTrue($result['closeout_output_persisted']);
+            $this->assertSame(hash('sha256', $rollbackToken), $result['rollback_token_sha256']);
+            $this->assertStringNotContainsString($rollbackToken, File::get($outputPath));
+            $this->assertFalse($result['rollback_token_output']);
+            $this->assertSame(0600, fileperms($outputPath) & 0777);
+        } finally {
+            File::delete([$registerPath, $packetPath, $outputPath]);
+            @unlink($rollbackPath);
+        }
+    }
+
     /** @param array<string,mixed> $report */
     private function fakeRuntimeHttp(array $report, bool $rejectRevalidation = false): void
     {

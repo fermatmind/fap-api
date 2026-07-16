@@ -13,6 +13,11 @@ use Throwable;
 
 final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
 {
+    /** @var resource|null */
+    private $executeOutputHandle = null;
+
+    private ?string $executeOutputPath = null;
+
     protected $signature = 'personality:enneagram-authority-v2-runtime-closeout
         {--preflight : Build the no-write exact-SHA authorization packet and operator artifacts}
         {--execute : Execute only a separately authorized exact-SHA packet}
@@ -42,6 +47,20 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
             $result = $this->runGuarded($closeout);
         } catch (Throwable $throwable) {
             $result = $closeout->failureResult($throwable);
+        }
+        if (is_resource($this->executeOutputHandle)) {
+            try {
+                $result['closeout_output_persisted'] = true;
+                $this->persistReservedExecuteOutput($result);
+            } catch (Throwable $throwable) {
+                $this->releaseExecuteOutputReservation(false);
+                $result['ok'] = false;
+                $result['status'] = ($result['writes_committed'] ?? false) === true
+                    ? 'FAIL_CLOSED_PARTIAL_WRITES_COMMITTED'
+                    : 'FAIL_CLOSED_NO_WRITES';
+                $result['closeout_output_persisted'] = false;
+                $result['error'] = 'Reserved closeout output persistence failed: '.$throwable->getMessage();
+            }
         }
         $this->emit($result);
 
@@ -83,6 +102,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         }
 
         $this->assertWriteEnvironment();
+        $this->reserveExecuteOutput($this->requiredOption('output'));
         [$packet] = $this->jsonFileWithSha($this->requiredOption('authorization-packet'), 'authorization packet');
         $result = $closeout->execute(
             $releaseReport,
@@ -103,7 +123,6 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
             $preReadback,
             $preReadbackSha,
         );
-        $this->writeExecuteOutput($result);
 
         return $result;
     }
@@ -187,13 +206,71 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         }
     }
 
-    /** @param array<string,mixed> $result */
-    private function writeExecuteOutput(array $result): void
+    private function reserveExecuteOutput(string $path): void
     {
-        $path = $this->requiredOption('output');
         $resolved = str_starts_with($path, DIRECTORY_SEPARATOR) ? $path : base_path($path);
         File::ensureDirectoryExists(dirname($resolved));
-        File::put($resolved, $this->encode($result)."\n");
+        if (File::exists($resolved)) {
+            throw new RuntimeException('Runtime closeout output already exists; refusing to overwrite it.');
+        }
+        $handle = @fopen($resolved, 'x+b');
+        if (! is_resource($handle)) {
+            throw new RuntimeException('Unable to reserve runtime closeout output before execution.');
+        }
+        $this->executeOutputHandle = $handle;
+        $this->executeOutputPath = $resolved;
+        if (! @chmod($resolved, 0600)) {
+            $this->releaseExecuteOutputReservation(false);
+            throw new RuntimeException('Unable to protect reserved runtime closeout output.');
+        }
+        $placeholder = [
+            'schema_version' => 'enneagram_public_authority_v2_runtime_closeout.v1',
+            'artifact' => EnneagramPublicAuthorityV224RuntimeCloseout::ARTIFACT,
+            'ok' => false,
+            'status' => 'EXECUTION_RESERVED_NOT_STARTED',
+            'writes_committed' => false,
+            'automatic_rollback' => false,
+        ];
+        $this->writeReservedExecuteOutput($this->encode($placeholder)."\n");
+    }
+
+    /** @param array<string,mixed> $result */
+    private function persistReservedExecuteOutput(array $result): void
+    {
+        $this->writeReservedExecuteOutput($this->encode($result)."\n");
+        $this->releaseExecuteOutputReservation(true);
+    }
+
+    private function writeReservedExecuteOutput(string $payload): void
+    {
+        if (! is_resource($this->executeOutputHandle) || $this->executeOutputPath === null
+            || ! rewind($this->executeOutputHandle) || ! ftruncate($this->executeOutputHandle, 0)) {
+            throw new RuntimeException('Runtime closeout output reservation is unavailable.');
+        }
+        $written = 0;
+        while ($written < strlen($payload)) {
+            $chunk = fwrite($this->executeOutputHandle, substr($payload, $written));
+            if (! is_int($chunk) || $chunk < 1) {
+                throw new RuntimeException('Unable to persist reserved runtime closeout output.');
+            }
+            $written += $chunk;
+        }
+        if (! fflush($this->executeOutputHandle)
+            || (function_exists('fsync') && ! fsync($this->executeOutputHandle))) {
+            throw new RuntimeException('Unable to durably persist reserved runtime closeout output.');
+        }
+    }
+
+    private function releaseExecuteOutputReservation(bool $keepFile): void
+    {
+        if (is_resource($this->executeOutputHandle)) {
+            fclose($this->executeOutputHandle);
+        }
+        if (! $keepFile && $this->executeOutputPath !== null) {
+            File::delete($this->executeOutputPath);
+        }
+        $this->executeOutputHandle = null;
+        $this->executeOutputPath = null;
     }
 
     /** @param array<string,mixed> $result @return array<string,mixed> */
