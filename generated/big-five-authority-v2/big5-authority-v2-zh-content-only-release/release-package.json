@@ -1,0 +1,75 @@
+{
+  "schema_version": "big5-authority-v2-zh-content-only-release.v1",
+  "release_id": "big5-authority-v2-zh-content-only-release-2026-07-16",
+  "locale": "zh-CN",
+  "asset_count": 112,
+  "surface_counts": {
+    "CMS Article": 56,
+    "CMS content_pages": 2,
+    "CMS landing_surfaces/page_blocks": 1,
+    "CMS personality_public_content_assets": 52,
+    "CMS topic_profiles": 1
+  },
+  "source_packages": {
+    "base": {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json",
+      "file_sha256": "80f95a73d497f28a74197b5af7dc1849af35ec9c15958ac898b29b669b997154"
+    },
+    "zh6": {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/final-snapshot-package.json",
+      "file_sha256": "b8206a045e100aed1016e24d4266ee8d75fb82b38496213f892a9dff0ed7eb5d"
+    },
+    "topic": {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-topic-authority-46/topic-draft-revision-package.json",
+      "file_sha256": "a3895c7730d54d8dcb5cc9705b8021a08739bf5b6e727c93d4d006f30a9dba41"
+    },
+    "base_authorization": {
+      "path": "generated/big-five-authority-v2/big5-authority-v2-release-gate-37/production-authorization-packet.json"
+    }
+  },
+  "operator_override": {
+    "scope": "zh-CN Big Five Authority V2 content only",
+    "media_deferred_by_operator": true,
+    "media_library_writes": 0,
+    "frontend_fallback_writes": 0,
+    "non_blocking_fields": [
+      "author",
+      "reviewer",
+      "sources",
+      "editorial_dates",
+      "revision_fingerprint",
+      "preview_approval",
+      "rollback"
+    ]
+  },
+  "technical_trust_overrides": {
+    "technical_trust:zh-CN:/zh/personality/big-five/methodology": {
+      "title": "大五人格方法说明与测量边界",
+      "summary": "说明大五模型如何用于结构化自我反思、当前公开了哪些测量信息，以及结果不能得出什么结论。",
+      "headings_json": [
+        {"key": "purpose", "title": "目的与范围"},
+        {"key": "model", "title": "模型表达"},
+        {"key": "measurement", "title": "测量与计分公开边界"},
+        {"key": "unknowns", "title": "当前未知信息"},
+        {"key": "limitations", "title": "已知局限"},
+        {"key": "privacy", "title": "隐私边界"},
+        {"key": "evidence", "title": "公开证据索引"}
+      ],
+      "content_md": "## 目的与范围\n\n本页说明费马测试大五人格内容的公开方法边界。测评是结构化自陈工具，可用于自我理解、沟通与可逆行动实验；不是医疗诊断、招聘或录取筛选、法律或金融决策工具，也不预测个人未来。\n\n## 模型表达\n\n大五研究通常用宽泛的连续维度表达人格，而不是固定身份类型。不同工具组织较窄侧面的方式并不相同，因此阅读时需要保留具体模型名称，不能把任意两套侧面分类直接互换。\n\n## 测量与计分公开边界\n\n产品记录自陈作答，并由评分系统返回结构化画像。公开页面不展示题目答案键、权重、反向计分表、转换公式、常模表或百分位公式，也不从其他量表推断这些细节。\n\n## 当前未知信息\n\n- 产品信度系数：Unknown\n- 产品效度系数：Unknown\n- 常模人群与样本量：Unknown\n- 百分位校准方法：Unknown\n- 测量标准误：Unknown\n- 不同群体等值性：Unknown\n- 预测准确性：Unknown\n\n## 已知局限\n\n自陈作答可能受到题目理解、当前情境、参照群体、回应风格和理想自我呈现影响。结果是有时间边界的观察，不是能力、动机、诊断、匹配度、就业能力、领导力或未来结果的直接证明。复测差异可能来自测量波动、情境、回应差异或真实变化，本页不能为某个个人判定原因。\n\n## 隐私边界\n\n私人答案、测评记录、报告链接、结果找回数据、订单和支付信息不得进入公开页面、公开内链或可识别分析日志。公开方法内容不会把私人结果变成公开信息。\n\n## 公开证据索引\n\n- [Goldberg（1990）：大五因子结构](https://doi.org/10.1037/0022-3514.59.6.1216) — 支持宽泛五因素结构，不验证费马测试计分、常模、个人结果或结果预测。\n- [Soto 与 John（2017）：BFI-2 维度与侧面](https://doi.org/10.1037/pspp0000096) — 支持一种明确命名的层级模型，不代表费马测试实施了 BFI-2 或继承其测量结果。\n- [DeYoung、Quilty 与 Peterson（2007）：十个方面](https://doi.org/10.1037/0022-3514.93.5.880) — 支持一种方面层级，不代表所有大五侧面分类等价。\n- [Roberts、Walton 与 Viechtbauer（2006）：特质变化元分析](https://doi.org/10.1037/0033-2909.132.1.1) — 支持群体层面的变化模式，不能预测某个个人是否、为何或怎样变化。"
+    },
+    "technical_trust:zh-CN:/zh/personality/big-five/source-review-policy": {
+      "title": "大五人格来源选择与纠错说明",
+      "summary": "说明科学来源如何选择、主张如何对应证据、产品未知信息如何标示，以及内容出现分歧时如何纠正。",
+      "headings_json": [
+        {"key": "evidence_classes", "title": "证据类别"},
+        {"key": "selection", "title": "来源选择"},
+        {"key": "mapping", "title": "主张与来源对应"},
+        {"key": "limits", "title": "产品证据边界"},
+        {"key": "corrections", "title": "纠错与分歧"},
+        {"key": "privacy", "title": "证据与隐私边界"},
+        {"key": "evidence", "title": "当前公开证据索引"}
+      ],
+      "content_md": "## 证据类别\n\n原始研究和元分析可支持有边界的科学背景主张；官方研究资源可说明一个明确命名的分类体系；产品公开说明用于界定费马测试自身行为。竞品文案、评分、价格、背书与技术主张不作为费马测试证据。\n\n## 来源选择\n\n科学主张优先使用原始论文，并记录稳定公开链接、支持范围与限制。二手摘要可用于发现来源，但不单独支持核心科学主张。\n\n## 主张与来源对应\n\n每个重要科学主张应由直接相关的来源支持。关于一般大五模型的研究，不能自动验证费马测试的信度、效度、常模、计分或个人准确性。\n\n## 产品证据边界\n\n当前没有公开依据的产品数值保持 Unknown，不以一般人格研究、竞品资料或编辑推断代替。页面中的场景和行动建议用于形成可检验的问题，不构成诊断、筛选或结果保证。\n\n## 纠错与分歧\n\n当证据变化、链接失效或表述受到合理质疑时，应定位受影响的主张，核对原始来源，缩小或修正超出证据的部分，并保留清楚的更正说明。存在学术分歧时，应呈现适用范围和不确定性。\n\n## 证据与隐私边界\n\n内容核对只使用公开研究与公开安全的产品说明，不把私人答案、测评记录、报告、订单、找回数据、支付数据或可识别用户记录当作证明。\n\n## 当前公开证据索引\n\n- [Goldberg（1990）：大五因子结构](https://doi.org/10.1037/0022-3514.59.6.1216) — 不验证费马测试计分、常模、个人结果或结果预测。\n- [Soto 与 John（2017）：BFI-2 维度与侧面](https://doi.org/10.1037/pspp0000096) — 不代表费马测试实施了 BFI-2 或继承其测量结果。\n- [DeYoung、Quilty 与 Peterson（2007）：十个方面](https://doi.org/10.1037/0022-3514.93.5.880) — 支持一种分类，不代表所有大五侧面体系等价。\n- [Roberts、Walton 与 Viechtbauer（2006）：特质变化元分析](https://doi.org/10.1037/0033-2909.132.1.1) — 群体变化模式不能预测某个个人是否或怎样变化。"
+    }
+  }
+}

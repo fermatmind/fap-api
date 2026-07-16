@@ -331,6 +331,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_zh_content_only_release_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2ZhContentOnlyPublish.php',
+            'backend/app/Services/BigFive/AuthorityV2/ContentOnlyRelease/BigFiveZhContentOnlyPublisher.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/ContentOnlyRelease/UnexpectedMbtiRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -6047,6 +6062,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2ZhContentOnlyReleaseFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7897,6 +7916,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV249PromotionReadiness.php',
             'backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/BigFiveZh6PromotionReadiness.php',
+        ], true);
+    }
+
+    private function isBigFiveAuthorityV2ZhContentOnlyReleaseFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2ZhContentOnlyPublish.php',
+            'backend/app/Services/BigFive/AuthorityV2/ContentOnlyRelease/BigFiveZhContentOnlyPublisher.php',
         ], true);
     }
 
