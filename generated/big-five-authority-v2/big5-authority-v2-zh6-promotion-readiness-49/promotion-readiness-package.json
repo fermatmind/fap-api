@@ -5,7 +5,7 @@
   "status": "HOLD_FAIL_CLOSED_MEDIA_AUTHORITY",
   "ready_for_working_revision": false,
   "ready_for_promotion": false,
-  "release_snapshot_sha256": "2d9d8aa21b00673e9d6ee5e9f118239d103e06be32a076f12318d868d08757d7",
+  "release_snapshot_sha256": "f6eeb698b12111244c335e81425e2d2e83cf50af15a5c1a6e52df2155a0d1e76",
   "release_snapshot_executable": false,
   "release_lock_material": {
     "cohort_snapshot_sha256": "f724913f5cdd5fcd33b7e899e3bd8c7f9f003919c12d5631572d5ddebc4265fa",
@@ -14,10 +14,10 @@
     "confirmation_record_sha256": "d1f958579c8527a8cc6bf18200b7927274e135ab72e61e780e4e2f9c69539fb9",
     "review_record_sha256": "faf7924ebd539091ed190c9aab037c7dd3b9b58d122a1f7d0f37f057ec821c30",
     "source_permission_sha256": "39bdd63fb64066c04c2a24875b82e66127667dd63302c15c04781de73b0906b8",
-    "media_authority_sha256": "e26267594d2cb41b20de4db0040480148246918a530774b67af933d1ed849555",
-    "permissions_sha256": "f054deea02321c837ee9df8bf4c167104217fe76d97adbd811c8992a07725aa1",
+    "media_authority_sha256": "82033c0c9ba724241783ec9c41d86dd46568d66fdef7f87501b53ae1d684985e",
+    "permissions_sha256": "53f264e92c96613b0eaef541eed7351988fe30e12bf8076a96356385f40da409",
     "rollback_baseline_sha256": "59fedf0528d7695d682ababb83781f4ddaf88e8e4b5674c4a5cfaac289da30c7",
-    "production_observation_sha256": "d4ac447391eddd8005e925b05bfe109b63cc28b8083244f68baec57e0c05a3f6",
+    "production_observation_sha256": "506a22318bf5d976d0b3ab2d15f840d90bf8ac06219ba079c5bec2524f990b23",
     "owner_authority_sha256": "6646dd8086d6e85a42539d8e77f4cda31649a903875825d7916d3023467134cf"
   },
   "inputs": {
@@ -28,7 +28,7 @@
     "owner_authority_path": "generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/pr48-owner-authority.json",
     "owner_authority_sha256": "6646dd8086d6e85a42539d8e77f4cda31649a903875825d7916d3023467134cf",
     "production_observation_path": "generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/production-observation.json",
-    "production_observation_sha256": "d4ac447391eddd8005e925b05bfe109b63cc28b8083244f68baec57e0c05a3f6"
+    "production_observation_sha256": "506a22318bf5d976d0b3ab2d15f840d90bf8ac06219ba079c5bec2524f990b23"
   },
   "counts": {
     "assets": 6,
@@ -185,8 +185,8 @@
     "eligible_candidate_count": 0,
     "selected_candidate": null,
     "fail_closed_on_zero_or_multiple": true,
-    "observation_sha256": "d4ac447391eddd8005e925b05bfe109b63cc28b8083244f68baec57e0c05a3f6",
-    "media_authority_sha256": "e26267594d2cb41b20de4db0040480148246918a530774b67af933d1ed849555",
+    "observation_sha256": "506a22318bf5d976d0b3ab2d15f840d90bf8ac06219ba079c5bec2524f990b23",
+    "media_authority_sha256": "82033c0c9ba724241783ec9c41d86dd46568d66fdef7f87501b53ae1d684985e",
     "inventory_counts": {
       "all_media_assets": 49,
       "published_public_synced_cdn_verified": 23,
@@ -295,10 +295,10 @@
       "public_label": "FermatMind Editorial"
     },
     "reviewer": {
-      "approved": false,
-      "authority_reference": null,
+      "approved": true,
+      "authority_reference": "solo_operator_review:faf7924ebd539091ed190c9aab037c7dd3b9b58d122a1f7d0f37f057ec821c30",
       "admin_user_id": 1,
-      "totp_required": true,
+      "totp_required": false,
       "totp_enrolled": false
     },
     "sources": {
@@ -311,7 +311,7 @@
       "approved": false,
       "authority_reference": null
     },
-    "permissions_sha256": "f054deea02321c837ee9df8bf4c167104217fe76d97adbd811c8992a07725aa1"
+    "permissions_sha256": "53f264e92c96613b0eaef541eed7351988fe30e12bf8076a96356385f40da409"
   },
   "runtime_baseline": {
     "observed_at": "2026-07-16T10:05:30Z",
@@ -499,7 +499,6 @@
     "rollback_baseline_sha256": "59fedf0528d7695d682ababb83781f4ddaf88e8e4b5674c4a5cfaac289da30c7"
   },
   "blockers": [
-    "admin_user_1_totp_enrollment_missing",
     "unique_hub_hero_og_media_missing"
   ],
   "next_stage_gates": [
@@ -526,5 +525,5 @@
     "deployments": 0
   },
   "repository_rule_impact": "CMS/backend remains authoritative; this package adds a read-only fail-closed readiness gate and a narrow solo_operator record contract without changing global role separation or public runtime behavior.",
-  "package_payload_sha256": "2671d5d2df4b979dc8b2b34428ef66f7bb92ec9785175e6785e141d28d10f1a4"
+  "package_payload_sha256": "7e22eadb25f8ae9e2dc2765faef75d822054991b53a284e0d8a09fc69d15f134"
 }

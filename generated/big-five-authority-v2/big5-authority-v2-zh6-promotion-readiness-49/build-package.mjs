@@ -72,8 +72,12 @@ invariant(Object.values(ownerAuthority.approval_scope).filter((value) => value =
 invariant(observation.schema_version === 'big5-zh6-promotion-readiness-production-observation.v1', 'production observation schema mismatch');
 invariant(observation.admin_user_1?.exists === true && observation.admin_user_1?.is_active === true, 'admin_user:1 is not active');
 invariant(observation.admin_user_1?.public_label === 'FermatMind Editorial', 'public editorial label drift');
+invariant(typeof observation.admin_user_1?.totp_policy_enabled === 'boolean', 'admin_user:1 TOTP policy evidence is missing');
+invariant(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(observation.admin_user_1?.totp_policy_observed_at ?? ''), 'admin_user:1 TOTP policy observation time is missing');
 invariant(typeof observation.admin_user_1?.totp_enrolled === 'boolean', 'admin_user:1 TOTP enrollment evidence is missing');
-const reviewerTotpReady = observation.admin_user_1.totp_enrolled === true;
+const reviewerTotpRequired = observation.admin_user_1.totp_policy_enabled;
+const reviewerTotpEnrolled = observation.admin_user_1.totp_enrolled;
+const reviewerTotpReady = reviewerTotpRequired === false || reviewerTotpEnrolled === true;
 invariant(Array.isArray(snapshot.assets) && snapshot.assets.length === 6, 'snapshot must contain exactly six assets');
 invariant(observation.runtime_assets?.count_found === 6 && observation.runtime_assets?.rows?.length === 6, 'runtime observation must bind exactly six assets');
 
@@ -204,8 +208,8 @@ const permissions = {
     approved: reviewerTotpReady,
     authority_reference: reviewerTotpReady ? `solo_operator_review:${reviewRecordSha256}` : null,
     admin_user_id: 1,
-    totp_required: true,
-    totp_enrolled: reviewerTotpReady,
+    totp_required: reviewerTotpRequired,
+    totp_enrolled: reviewerTotpEnrolled,
   },
   sources: {
     approved: true,

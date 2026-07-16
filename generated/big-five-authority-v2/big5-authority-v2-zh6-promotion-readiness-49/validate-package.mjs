@@ -92,11 +92,15 @@ invariant(packageJson.permissions.permissions_sha256 === canonicalSha256({
   sources: packageJson.permissions.sources,
   media: packageJson.permissions.media,
 }), 'permissions SHA mismatch');
+invariant(typeof observation.admin_user_1?.totp_policy_enabled === 'boolean', 'reviewer TOTP policy evidence is missing');
+invariant(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(observation.admin_user_1?.totp_policy_observed_at ?? ''), 'reviewer TOTP policy observation time is missing');
 invariant(typeof observation.admin_user_1?.totp_enrolled === 'boolean', 'reviewer TOTP enrollment evidence is missing');
-const reviewerTotpReady = observation.admin_user_1.totp_enrolled === true;
-invariant(packageJson.permissions.reviewer.totp_required === true, 'reviewer TOTP must remain required');
-invariant(packageJson.permissions.reviewer.totp_enrolled === reviewerTotpReady, 'reviewer TOTP observation mismatch');
-invariant(packageJson.permissions.reviewer.approved === reviewerTotpReady, 'reviewer approval must fail closed on missing TOTP enrollment');
+const reviewerTotpRequired = observation.admin_user_1.totp_policy_enabled;
+const reviewerTotpEnrolled = observation.admin_user_1.totp_enrolled;
+const reviewerTotpReady = reviewerTotpRequired === false || reviewerTotpEnrolled === true;
+invariant(packageJson.permissions.reviewer.totp_required === reviewerTotpRequired, 'reviewer TOTP policy observation mismatch');
+invariant(packageJson.permissions.reviewer.totp_enrolled === reviewerTotpEnrolled, 'reviewer TOTP enrollment observation mismatch');
+invariant(packageJson.permissions.reviewer.approved === reviewerTotpReady, 'reviewer approval does not honor the observed TOTP policy');
 invariant(packageJson.permissions.reviewer.authority_reference === (reviewerTotpReady
   ? `solo_operator_review:${packageJson.editorial_authority.review_record_sha256}`
   : null), 'reviewer authority reference does not match TOTP readiness');

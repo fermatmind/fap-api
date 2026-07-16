@@ -74,6 +74,8 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertSame(22, $observation['media_inventory']['with_verified_hero_and_og']);
         $this->assertSame(0, $observation['media_inventory']['authority_complete_hero_og_count']);
         $this->assertSame([], $observation['media_inventory']['authority_complete_hero_og']);
+        $this->assertFalse($observation['admin_user_1']['totp_policy_enabled']);
+        $this->assertSame('2026-07-16T13:16:30Z', $observation['admin_user_1']['totp_policy_observed_at']);
         $this->assertFalse($observation['admin_user_1']['totp_enrolled']);
         $this->assertCount(4, $observation['media_inventory']['big_five_named_hero_og']);
         $this->assertSame(0, $package['counts']['eligible_hub_media_candidates']);
@@ -81,9 +83,9 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertFalse($package['ready_for_working_revision']);
         $this->assertFalse($package['ready_for_promotion']);
         $this->assertFalse($package['permissions']['media']['approved']);
-        $this->assertFalse($package['permissions']['reviewer']['approved']);
-        $this->assertTrue($package['permissions']['reviewer']['totp_required']);
-        $this->assertContains('admin_user_1_totp_enrollment_missing', $package['blockers']);
+        $this->assertTrue($package['permissions']['reviewer']['approved']);
+        $this->assertFalse($package['permissions']['reviewer']['totp_required']);
+        $this->assertNotContains('admin_user_1_totp_enrollment_missing', $package['blockers']);
         $this->assertContains('unique_hub_hero_og_media_missing', $package['blockers']);
 
         foreach ($observation['media_inventory']['big_five_named_hero_og'] as $candidate) {
@@ -105,7 +107,6 @@ final class BigFiveAuthorityV249Test extends TestCase
     public function test_media_gate_selects_one_complete_candidate_and_holds_on_multiple(): void
     {
         $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
-        $observation['admin_user_1']['totp_enrolled'] = true;
         $candidate = $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1');
 
         $unique = $this->buildTemporaryPackage($observation, [$candidate]);
@@ -134,6 +135,7 @@ final class BigFiveAuthorityV249Test extends TestCase
     public function test_unique_media_still_holds_when_reviewer_totp_is_not_enrolled(): void
     {
         $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $observation['admin_user_1']['totp_policy_enabled'] = true;
         $package = $this->buildTemporaryPackage($observation, [
             $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1'),
         ]);
@@ -141,6 +143,7 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertSame('HOLD_FAIL_CLOSED_REVIEWER_TOTP', $package['package']['status']);
         $this->assertFalse($package['package']['ready_for_working_revision']);
         $this->assertFalse($package['package']['permissions']['reviewer']['approved']);
+        $this->assertTrue($package['package']['permissions']['reviewer']['totp_required']);
         $this->assertTrue($package['package']['permissions']['media']['approved']);
         $this->assertContains('admin_user_1_totp_enrollment_missing', $package['package']['blockers']);
 
@@ -434,7 +437,13 @@ final class BigFiveAuthorityV249Test extends TestCase
         $package['editorial_authority']['review_record']['external_human_authority']['author_login'] = 'unrelated-reviewer';
         $reviewSha256 = $this->canonicalSha256($package['editorial_authority']['review_record']);
         $package['editorial_authority']['review_record_sha256'] = $reviewSha256;
+        $package['permissions']['reviewer']['authority_reference'] = 'solo_operator_review:'.$reviewSha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
         $package['release_lock_material']['review_record_sha256'] = $reviewSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
         $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
         $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-human-authority-package');
 
@@ -525,6 +534,7 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertFalse($result['ready']);
         $this->assertSame('FAIL_CLOSED_RUNTIME_OR_AUTHORITY_DRIFT', $result['status']);
         $this->assertContains('admin_user_1_authority_mismatch', $result['drift_codes']);
+        $this->assertContains('admin_user_1_totp_policy_drift', $result['drift_codes']);
         $this->assertContains('admin_user_1_totp_enrollment_missing', $result['drift_codes']);
         $this->assertContains('runtime_baseline_drift', $result['drift_codes']);
         $this->assertSame(9, $result['actions']['database_reads']);
@@ -533,6 +543,11 @@ final class BigFiveAuthorityV249Test extends TestCase
 
     public function test_database_media_inventory_requires_one_complete_hub_identity_and_rejects_article_media(): void
     {
+        config()->set('admin.totp.enabled', false);
+        $this->assertFalse(app(BigFiveZh6PromotionReadiness::class)->inspectDatabase()['admin_user_1']['totp_policy_enabled']);
+        config()->set('admin.totp.enabled', true);
+        $this->assertTrue(app(BigFiveZh6PromotionReadiness::class)->inspectDatabase()['admin_user_1']['totp_policy_enabled']);
+
         $this->createMediaAsset('article.big-five.cover', [], true);
         $this->createMediaAsset('big5.model-hub.zh-cn.hero-og.invalid-rights', [
             'locale' => 'zh-CN',

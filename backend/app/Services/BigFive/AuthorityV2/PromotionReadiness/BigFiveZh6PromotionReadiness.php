@@ -110,9 +110,15 @@ final class BigFiveZh6PromotionReadiness
             || ($expectedAdmin['public_label'] ?? null) !== self::PUBLIC_LABEL) {
             $drift[] = 'admin_user_1_authority_mismatch';
         }
-        if (($package['permissions']['reviewer']['totp_required'] ?? null) !== true
-            || ((bool) config('admin.totp.enabled', true)
-                && ($inspection['admin_user_1']['totp_enrolled'] ?? false) !== true)) {
+        $packageTotpPolicyEnabled = $package['permissions']['reviewer']['totp_required'] ?? null;
+        $runtimeTotpPolicyEnabled = $inspection['admin_user_1']['totp_policy_enabled'] ?? null;
+        if (! is_bool($packageTotpPolicyEnabled)
+            || ! is_bool($runtimeTotpPolicyEnabled)
+            || $packageTotpPolicyEnabled !== $runtimeTotpPolicyEnabled) {
+            $drift[] = 'admin_user_1_totp_policy_drift';
+        }
+        if ($runtimeTotpPolicyEnabled === true
+            && ($inspection['admin_user_1']['totp_enrolled'] ?? false) !== true) {
             $drift[] = 'admin_user_1_totp_enrollment_missing';
         }
 
@@ -184,6 +190,7 @@ final class BigFiveZh6PromotionReadiness
             'admin_user_1' => [
                 'exists' => $admin instanceof AdminUser,
                 'is_active' => $admin instanceof AdminUser && (int) $admin->is_active === 1,
+                'totp_policy_enabled' => (bool) config('admin.totp.enabled', true),
                 'totp_enrolled' => $admin instanceof AdminUser && $admin->totp_enabled_at !== null,
                 'public_label' => self::PUBLIC_LABEL,
             ],
@@ -400,8 +407,12 @@ final class BigFiveZh6PromotionReadiness
         }
         $permissions = $package['permissions'] ?? null;
         $reviewerApproved = is_array($permissions) ? ($permissions['reviewer']['approved'] ?? null) : null;
+        $reviewerTotpRequired = is_array($permissions) ? ($permissions['reviewer']['totp_required'] ?? null) : null;
         $reviewerTotpEnrolled = is_array($permissions) ? ($permissions['reviewer']['totp_enrolled'] ?? null) : null;
-        $expectedReviewerAuthority = $reviewerTotpEnrolled === true
+        $reviewerAccessReady = is_bool($reviewerTotpRequired)
+            && is_bool($reviewerTotpEnrolled)
+            && ($reviewerTotpRequired === false || $reviewerTotpEnrolled === true);
+        $expectedReviewerAuthority = $reviewerAccessReady
             ? 'solo_operator_review:'.(string) ($package['editorial_authority']['review_record_sha256'] ?? '')
             : null;
         if (! is_array($permissions)
@@ -409,9 +420,9 @@ final class BigFiveZh6PromotionReadiness
             || ($permissions['author']['authority_reference'] ?? null) !== 'admin_user:1'
             || ($permissions['author']['public_label'] ?? null) !== self::PUBLIC_LABEL
             || ! is_bool($reviewerApproved)
+            || ! is_bool($reviewerTotpRequired)
             || ! is_bool($reviewerTotpEnrolled)
-            || $reviewerApproved !== $reviewerTotpEnrolled
-            || ($permissions['reviewer']['totp_required'] ?? null) !== true
+            || $reviewerApproved !== $reviewerAccessReady
             || ($permissions['reviewer']['authority_reference'] ?? null) !== $expectedReviewerAuthority
             || ($permissions['reviewer']['admin_user_id'] ?? null) !== self::REVIEWER_ADMIN_USER_ID
             || ($permissions['sources']['approved'] ?? null) !== true
@@ -630,6 +641,9 @@ final class BigFiveZh6PromotionReadiness
         if (($observation['schema_version'] ?? null) !== 'big5-zh6-promotion-readiness-production-observation.v1'
             || ($observation['admin_user_1']['exists'] ?? null) !== true
             || ($observation['admin_user_1']['is_active'] ?? null) !== true
+            || ! is_bool($observation['admin_user_1']['totp_policy_enabled'] ?? null)
+            || ($observation['admin_user_1']['totp_policy_enabled'] ?? null) !== $reviewerTotpRequired
+            || preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/', (string) ($observation['admin_user_1']['totp_policy_observed_at'] ?? '')) !== 1
             || ! is_bool($observation['admin_user_1']['totp_enrolled'] ?? null)
             || ($observation['admin_user_1']['totp_enrolled'] ?? null) !== $reviewerTotpEnrolled
             || ($observation['admin_user_1']['public_label'] ?? null) !== self::PUBLIC_LABEL
