@@ -8,6 +8,7 @@ use App\Models\MediaAsset;
 use App\Models\MediaVariant;
 use App\Services\BigFive\AuthorityV2\PromotionReadiness\BigFiveZh6PromotionReadiness;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Symfony\Component\Process\Process;
 use Tests\TestCase;
@@ -645,6 +646,33 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_package_rejects_rehashed_deployed_sha_not_bound_to_the_observation(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['runtime_baseline']['observed_deployed_sha'] = str_repeat('a', 40);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-runtime-deployed-sha-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-runtime-deployed-sha-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'runtime baseline does not match the production observation',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed deployed SHA detached from the observation to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('production observation content is inconsistent', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
     public function test_source_permission_reference_must_bind_the_locked_hash_after_full_rehash(): void
     {
         $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
@@ -783,8 +811,49 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertContains('admin_user_1_authority_mismatch', $result['drift_codes']);
         $this->assertContains('admin_user_1_totp_policy_drift', $result['drift_codes']);
         $this->assertContains('admin_user_1_totp_enrollment_missing', $result['drift_codes']);
+        $this->assertContains('deployed_revision_drift', $result['drift_codes']);
         $this->assertContains('runtime_baseline_drift', $result['drift_codes']);
         $this->assertSame(9, $result['actions']['database_reads']);
+        $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
+    }
+
+    public function test_database_preflight_rejects_observation_deploy_sha_that_differs_from_runtime_revision(): void
+    {
+        $revisionPath = base_path('../REVISION');
+        $runtimeSha = str_repeat('c', 40);
+        $file = File::partialMock();
+        $file->shouldReceive('isFile')->once()->with($revisionPath)->andReturnTrue();
+        $file->shouldReceive('get')->once()->with($revisionPath)->andReturn($runtimeSha.PHP_EOL);
+
+        $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(
+            '../'.self::PACKAGE_DIR.'/promotion-readiness-package.json',
+        );
+
+        $this->assertFalse($result['ok']);
+        $this->assertFalse($result['ready']);
+        $this->assertSame('FAIL_CLOSED_RUNTIME_OR_AUTHORITY_DRIFT', $result['status']);
+        $this->assertSame($runtimeSha, $result['inspection']['deployed_sha']);
+        $this->assertContains('deployed_revision_drift', $result['drift_codes']);
+        $this->assertContains('deployed_revision_drift', $result['blockers']);
+        $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
+    }
+
+    public function test_database_preflight_accepts_the_exact_observed_runtime_revision_lock(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $revisionPath = base_path('../REVISION');
+        $runtimeSha = $package['runtime_baseline']['observed_deployed_sha'];
+        $file = File::partialMock();
+        $file->shouldReceive('isFile')->once()->with($revisionPath)->andReturnTrue();
+        $file->shouldReceive('get')->once()->with($revisionPath)->andReturn($runtimeSha.PHP_EOL);
+
+        $result = app(BigFiveZh6PromotionReadiness::class)->databasePreflight(
+            '../'.self::PACKAGE_DIR.'/promotion-readiness-package.json',
+        );
+
+        $this->assertSame($runtimeSha, $result['inspection']['deployed_sha']);
+        $this->assertNotContains('deployed_revision_drift', $result['drift_codes']);
+        $this->assertNotContains('deployed_revision_drift', $result['blockers']);
         $this->assertSame(0, array_sum(collect($result['actions'])->except('database_reads')->all()));
     }
 

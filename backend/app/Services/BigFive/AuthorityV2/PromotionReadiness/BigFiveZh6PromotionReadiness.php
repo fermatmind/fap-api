@@ -122,6 +122,14 @@ final class BigFiveZh6PromotionReadiness
             $drift[] = 'admin_user_1_totp_enrollment_missing';
         }
 
+        $expectedDeployedSha = $package['runtime_baseline']['observed_deployed_sha'] ?? null;
+        $runtimeDeployedSha = $inspection['deployed_sha'] ?? null;
+        if (! is_string($expectedDeployedSha)
+            || ! is_string($runtimeDeployedSha)
+            || ! hash_equals($expectedDeployedSha, $runtimeDeployedSha)) {
+            $drift[] = 'deployed_revision_drift';
+        }
+
         $expectedRuntime = $package['runtime_baseline']['rows'] ?? null;
         if (! is_array($expectedRuntime)
             || ! hash_equals($this->canonicalSha256($expectedRuntime), $this->canonicalSha256($inspection['runtime_assets']['rows']))) {
@@ -194,6 +202,7 @@ final class BigFiveZh6PromotionReadiness
                 'totp_enrolled' => $admin instanceof AdminUser && $admin->totp_enabled_at !== null,
                 'public_label' => self::PUBLIC_LABEL,
             ],
+            'deployed_sha' => $this->deployedSha(),
             'runtime_assets' => [
                 'count_found' => count(array_filter($runtimeRows, static fn (array $row): bool => ($row['found'] ?? false) === true)),
                 'rows' => array_map(static function (array $row): array {
@@ -214,6 +223,18 @@ final class BigFiveZh6PromotionReadiness
             ],
             'database_reads' => 9,
         ];
+    }
+
+    private function deployedSha(): ?string
+    {
+        $revisionPath = base_path('../REVISION');
+        if (! File::isFile($revisionPath)) {
+            return null;
+        }
+
+        $deployedSha = trim(File::get($revisionPath));
+
+        return preg_match('/^[0-9a-f]{40}$/', $deployedSha) === 1 ? $deployedSha : null;
     }
 
     /** @return list<array<string,mixed>> */
@@ -640,6 +661,9 @@ final class BigFiveZh6PromotionReadiness
         $observationCandidates = $observation['media_inventory']['authority_complete_hero_og'] ?? null;
         $observationCandidateCount = $observation['media_inventory']['authority_complete_hero_og_count'] ?? null;
         if (($observation['schema_version'] ?? null) !== 'big5-zh6-promotion-readiness-production-observation.v1'
+            || preg_match('/^[0-9a-f]{40}$/', (string) ($observation['deployed_sha'] ?? '')) !== 1
+            || ($package['runtime_baseline']['observed_at'] ?? null) !== ($observation['observed_at'] ?? null)
+            || ($package['runtime_baseline']['observed_deployed_sha'] ?? null) !== ($observation['deployed_sha'] ?? null)
             || ($observation['admin_user_1']['exists'] ?? null) !== true
             || ($observation['admin_user_1']['is_active'] ?? null) !== true
             || ! is_bool($observation['admin_user_1']['totp_policy_enabled'] ?? null)
