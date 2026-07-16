@@ -4,8 +4,12 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
+const repositoryRoot = resolve(here, '../../..');
 const packagePath = resolve(here, 'candidate-package.json');
 const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
+const sourceLedgerPath = resolve(repositoryRoot, 'generated/big-five-authority-v2/big5-authority-v2-source-ledger-05/source-ledger.json');
+const sourceLedgerText = readFileSync(sourceLedgerPath, 'utf8');
+const sourceLedger = JSON.parse(sourceLedgerText);
 
 const fail = (message) => {
   throw new Error(message);
@@ -53,10 +57,11 @@ const visibleWorkflowLanguagePatterns = [
 ];
 
 invariant(packageJson.schema_version === '1.0.0', 'unexpected schema version');
-invariant(packageJson.status === 'ready_for_real_human_attestation', 'candidate package must remain human-attestation ready');
+invariant(packageJson.status === 'blocked_source_authority_repair_required', 'candidate package must fail closed while locked source-ledger issues remain');
 invariant(packageJson.authority_boundary.cms_backend_remains_public_authority === true, 'CMS/backend authority boundary must be explicit');
 invariant(packageJson.authority_boundary.this_package_is_public_runtime_authority === false, 'candidate package must not claim runtime authority');
 invariant(packageJson.authority_boundary.production_or_cms_write_performed === false, 'candidate package must not claim a production write');
+invariant(packageJson.authority_boundary.human_attestation_does_not_override_source_ledger === true, 'human attestation must not override the locked source ledger');
 invariant(packageJson.source_verification.status === 'pass', 'source verification must pass');
 invariant(packageJson.assets.length === 6, 'cohort must contain exactly six assets');
 invariant(packageJson.assets.map((asset) => asset.asset_id).join('\n') === expectedAssetIds.join('\n'), 'cohort asset identity or order drifted');
@@ -64,8 +69,11 @@ invariant(packageJson.assets.map((asset) => asset.asset_id).join('\n') === expec
 for (const [inputName, expectedHash] of Object.entries(packageJson.input_hashes)) {
   invariant(/^[a-f0-9]{64}$/u.test(expectedHash), `${inputName} input hash is invalid`);
 }
+invariant(packageJson.input_hashes.sourceLedger === sha256(sourceLedgerText), 'locked source ledger input hash drifted');
 
 const verifiedSourcesById = new Map(packageJson.source_verification.sources.map((source) => [source.id, source]));
+const ledgerSourcesById = new Map(sourceLedger.sources.map((source) => [source.id, source]));
+const claimsById = new Map(sourceLedger.claims.map((claim) => [claim.id, claim]));
 for (const sourceId of Object.values(sourceIds)) {
   const source = verifiedSourcesById.get(sourceId);
   invariant(source, `verified source is missing ${sourceId}`);
@@ -77,17 +85,72 @@ for (const sourceId of Object.values(sourceIds)) {
 }
 invariant(verifiedSourcesById.get(sourceIds.ipip).cohort_usage_decision.applicable_page_families.join('\n') === 'domain', 'IPIP cohort usage must be limited to domain pages');
 
+const assessPublicClaimAuthority = (page) => page.claims.flatMap((mapping) => {
+  const authority = claimsById.get(mapping.claim_id);
+  if (!authority) {
+    return [{
+      code: 'claim_unknown',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    }];
+  }
+
+  const issues = [];
+  if (authority.allowed_as_public_claim !== true) {
+    issues.push({
+      code: 'claim_not_allowed_as_public',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    });
+  }
+  if (!authority.applicable_page_families.includes(page.page_family)) {
+    issues.push({
+      code: 'claim_not_applicable_to_page_family',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    });
+  }
+  for (const sourceId of mapping.source_ids) {
+    if (!authority.source_ids.includes(sourceId)) {
+      issues.push({
+        code: 'claim_source_not_authorized',
+        claim_id: mapping.claim_id,
+        page_family: page.page_family,
+        source_id: sourceId,
+      });
+    }
+  }
+  const hasPrimaryAcademicSource = mapping.source_ids.some((sourceId) => (
+    authority.primary_source_ids.includes(sourceId)
+    && ledgerSourcesById.get(sourceId)?.evidence_category === 'academic_evidence'
+  ));
+  if (authority.classification === 'core_scientific' && !hasPrimaryAcademicSource) {
+    issues.push({
+      code: 'primary_academic_source_missing',
+      claim_id: mapping.claim_id,
+      page_family: page.page_family,
+    });
+  }
+
+  return issues;
+});
+
 for (const asset of packageJson.assets) {
   const isHub = asset.page_family === 'model_hub';
   const expectedSources = isHub
     ? [sourceIds.goldberg, sourceIds.soto, sourceIds.roberts]
     : [sourceIds.goldberg, sourceIds.soto, sourceIds.ipip];
+  const claimAuthorityIssues = assessPublicClaimAuthority(asset.content);
+  const expectedSourceAuthorityStatus = claimAuthorityIssues.length === 0
+    ? 'approved_for_link_citation_and_original_paraphrase'
+    : 'blocked_by_locked_source_ledger';
 
   invariant(asset.locale === 'zh-CN', `${asset.asset_id} locale drifted`);
   invariant(asset.canonical_path.startsWith('/zh/personality/big-five'), `${asset.asset_id} canonical path drifted`);
   invariant(asset.candidate_content_sha256 === sha256(JSON.stringify(asset.content)), `${asset.asset_id} content hash mismatch`);
   invariant(asset.automated_editorial_review.status === 'pass_ready_for_human_attestation', `${asset.asset_id} automated editorial review did not pass`);
-  invariant(asset.source_authority.status === 'approved_for_link_citation_and_original_paraphrase', `${asset.asset_id} source authority is incomplete`);
+  invariant(asset.source_authority.status === expectedSourceAuthorityStatus, `${asset.asset_id} source-authority status does not match the locked ledger`);
+  invariant(JSON.stringify(asset.source_authority.claim_authority_issues) === JSON.stringify(claimAuthorityIssues), `${asset.asset_id} source-authority issues do not match the locked ledger`);
   invariant(asset.source_authority.visible_source_count === 3, `${asset.asset_id} must have three visible sources`);
   invariant(asset.source_authority.visible_source_ids.join('\n') === expectedSources.join('\n'), `${asset.asset_id} visible source set drifted`);
   invariant(asset.source_authority.expected_visible_source_ids.join('\n') === expectedSources.join('\n'), `${asset.asset_id} expected source set drifted`);
@@ -116,6 +179,8 @@ for (const asset of packageJson.assets) {
   }
 
   if (!isHub) {
+    invariant(asset.source_authority.status === 'blocked_by_locked_source_ledger', `${asset.asset_id} must remain quarantined until the domain claim mapping is repaired and re-reviewed`);
+    invariant(asset.promotion.blockers.includes('source_authority_blocked_by_locked_ledger'), `${asset.asset_id} promotion blockers must retain the locked-ledger failure`);
     invariant(asset.content.facets.length === 6, `${asset.asset_id} must retain six facet navigation labels`);
     invariant(asset.content.method_boundary.includes('IPIP/NEO'), `${asset.asset_id} must name the 30-facet navigation tradition`);
     invariant(asset.content.method_boundary.includes('BFI-2 的 15 个侧面'), `${asset.asset_id} must state BFI-2 non-equivalence`);
@@ -123,6 +188,10 @@ for (const asset of packageJson.assets) {
     const taxonomyClaim = asset.content.claims.find((claim) => claim.claim_id === 'claim.big_five.taxonomies_not_interchangeable');
     invariant(taxonomyClaim, `${asset.asset_id} taxonomy boundary claim is missing`);
     invariant(taxonomyClaim.source_ids.join('\n') === [sourceIds.soto, sourceIds.ipip].join('\n'), `${asset.asset_id} taxonomy claim source mapping drifted`);
+    invariant(claimAuthorityIssues.some((issue) => issue.code === 'claim_not_allowed_as_public' && issue.claim_id === taxonomyClaim.claim_id), `${asset.asset_id} must expose the frozen public-claim denial`);
+    invariant(claimAuthorityIssues.some((issue) => issue.code === 'claim_not_applicable_to_page_family' && issue.claim_id === taxonomyClaim.claim_id), `${asset.asset_id} must expose the frozen page-family denial`);
+  } else {
+    invariant(asset.source_authority.status === 'approved_for_link_citation_and_original_paraphrase', `${asset.asset_id} valid hub source authority regressed`);
   }
 }
 
@@ -130,9 +199,11 @@ invariant(packageJson.counts.assets === 6, 'asset count summary drifted');
 invariant(packageJson.counts.model_hubs === 1, 'hub count summary drifted');
 invariant(packageJson.counts.domains === 5, 'domain count summary drifted');
 invariant(packageJson.counts.automated_editorial_pass === 6, 'automated editorial count summary drifted');
-invariant(packageJson.counts.source_authority_complete === 6, 'source authority count summary drifted');
+invariant(packageJson.counts.source_authority_complete === 1, 'source authority complete count must include only the valid hub');
+invariant(packageJson.counts.source_authority_blocked === 5, 'source authority blocked count must include all five domains');
 invariant(packageJson.counts.human_manual_review_complete === 0, 'manual review must remain zero until a real human attests');
 invariant(packageJson.counts.promotion_eligible === 0, 'promotion eligibility must remain zero');
 
-console.log('PASS: exact zh-CN hub + five-domain cohort is source-authority complete and ready for real human attestation.');
+console.log('PASS: locked PR05 source-ledger validation keeps the valid hub source-authority complete and quarantines all five invalid domain claim mappings.');
+console.log('PASS: candidate content hashes and the existing human attestation remain unchanged; human review does not override source authority.');
 console.log('PASS: historical packages, CMS/public runtime, media permission, publication, and indexability remain unchanged.');
