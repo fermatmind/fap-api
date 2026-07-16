@@ -19,10 +19,10 @@ use App\Models\TopicProfileSeoMeta;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
+use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use RuntimeException;
 
 final class BigFiveZhContentOnlyPublisher
@@ -1111,7 +1111,7 @@ final class BigFiveZhContentOnlyPublisher
 
     private function assertTopicScaleTarget(): void
     {
-        if (! Schema::hasTable('scales_registry')) {
+        if (! SchemaBaseline::hasTable('scales_registry')) {
             throw new RuntimeException('scales_registry is required for the public Topic test entry.');
         }
         $row = DB::table('scales_registry')
@@ -1128,7 +1128,7 @@ final class BigFiveZhContentOnlyPublisher
     private function assertSchema(): void
     {
         foreach (self::REQUIRED_TABLES as $table) {
-            if (! Schema::hasTable($table)) {
+            if (! SchemaBaseline::hasTable($table)) {
                 throw new RuntimeException('Required content-only release table missing: '.$table.'.');
             }
         }
