@@ -1,7 +1,8 @@
 {
   "schema_version": "big5_v2_dependency_graph.v1",
-  "graph_name": "Big Five V2 runtime governance dependency graph",
-  "source_head": "0814af350c5119994ff65fe7e965e68bc3decb35",
+  "graph_name": "Big Five V2 runtime, public authority, and Career bridge dependency graph",
+  "source_head": "8401e1c62d19007abbe89abe597352cfae5ec0a4",
+  "evidence_verified_at": "2026-07-16",
   "nodes": [
     {"id": "content_assets", "label": "Content assets", "status": "GO"},
     {"id": "route_matrix", "label": "O1..O5 route matrix", "status": "GO"},
@@ -19,7 +20,21 @@
     {"id": "dynamic_norm_engine_internal", "label": "Internal dynamic norm engine", "status": "GO_INTERNAL"},
     {"id": "public_percentile_display", "label": "Public percentile display", "status": "NO_GO"},
     {"id": "cms_editorial_governance", "label": "CMS/editorial governance", "status": "GO"},
-    {"id": "production_rollout", "label": "Production rollout", "status": "CONTROLLED_NO_GO_BY_DEFAULT"}
+    {"id": "production_rollout", "label": "Production rollout", "status": "CONTROLLED_NO_GO_BY_DEFAULT"},
+    {"id": "authority_v2_working_revisions", "label": "Authority V2 working revisions", "status": "ISOLATED"},
+    {"id": "web_consumer_containment", "label": "Withheld-route and Topic consumer containment", "status": "GO_MERGED_DEPLOYMENT_UNVERIFIED"},
+    {"id": "media_authority_gate", "label": "PR41 Media authority gate", "status": "HOLD_ZERO_APPROVED"},
+    {"id": "visible_date_gate", "label": "PR42 Visible date gate", "status": "GO_FAIL_CLOSED"},
+    {"id": "visible_provenance_gate", "label": "PR43 Visible provenance gate", "status": "GO_FAIL_CLOSED"},
+    {"id": "discoverability_gate", "label": "PR44 Discoverability parity gate", "status": "GO_FAIL_CLOSED"},
+    {"id": "structured_data_gate", "label": "PR45 Structured data gate", "status": "GO_FAIL_CLOSED"},
+    {"id": "topic_draft_preflight", "label": "PR46 Topic draft preflight", "status": "GO_DRAFT_ONLY"},
+    {"id": "review_promotion_preflight", "label": "PR47 Review/promotion preflight", "status": "HOLD_ZERO_ELIGIBLE"},
+    {"id": "exact_authorized_promotion", "label": "Exact-authorized production promotion", "status": "NO_GO"},
+    {"id": "published_big_five_projection", "label": "Published Big Five public projection", "status": "AUTHORITY_INPUT"},
+    {"id": "career_runtime_projection", "label": "Career runtime publish projection", "status": "AUTHORITY_INPUT"},
+    {"id": "big_five_career_bridge", "label": "PR12/13 Big Five to Career contract and auditor", "status": "GO_READ_ONLY"},
+    {"id": "public_career_reader", "label": "Public Big Five to Career reader", "status": "NO_GO_NOT_IMPLEMENTED"}
   ],
   "edges": [
     ["content_assets", "route_matrix"],
@@ -38,16 +53,36 @@
     ["norm_foundation", "dynamic_norm_engine_internal"],
     ["dynamic_norm_engine_internal", "public_percentile_display"],
     ["cms_editorial_governance", "release_snapshots"],
-    ["cms_editorial_governance", "production_governance"]
+    ["cms_editorial_governance", "production_governance"],
+    ["authority_v2_working_revisions", "web_consumer_containment"],
+    ["authority_v2_working_revisions", "media_authority_gate"],
+    ["authority_v2_working_revisions", "visible_date_gate"],
+    ["authority_v2_working_revisions", "visible_provenance_gate"],
+    ["visible_date_gate", "structured_data_gate"],
+    ["visible_provenance_gate", "structured_data_gate"],
+    ["discoverability_gate", "review_promotion_preflight"],
+    ["structured_data_gate", "review_promotion_preflight"],
+    ["media_authority_gate", "review_promotion_preflight"],
+    ["topic_draft_preflight", "review_promotion_preflight"],
+    ["review_promotion_preflight", "exact_authorized_promotion"],
+    ["published_big_five_projection", "big_five_career_bridge"],
+    ["career_runtime_projection", "big_five_career_bridge"],
+    ["big_five_career_bridge", "public_career_reader"]
   ],
   "source_of_truth": {
     "runtime_source_of_truth": "Git-backed release snapshots plus import gate plus runtime gate",
     "cms_runtime_owner": false,
-    "cms_role": "editorial governance layer only"
+    "cms_role": "editorial governance for result/report assets and publication authority for public editorial surfaces",
+    "public_content_source_of_truth": "fap-api CMS/public API current published projection",
+    "career_source_of_truth": "fap-api Career runtime publish projection",
+    "working_revision_is_public_authority": false,
+    "generated_authority_package_is_runtime_authority": false
   },
   "blocked_nodes": [
     "public_percentile_display",
-    "production_rollout_full_scale"
+    "production_rollout",
+    "exact_authorized_promotion",
+    "public_career_reader"
   ],
   "must_not_bypass": [
     "release_snapshots",
@@ -56,6 +91,12 @@
     "all_surface_gate",
     "manual_approval",
     "drift_monitoring",
-    "small_cell_suppression"
+    "small_cell_suppression",
+    "approved_media_authority",
+    "visible_date_and_provenance",
+    "exact_cohort_authorization",
+    "published_big_five_projection",
+    "career_runtime_projection",
+    "private_assessment_data_boundary"
   ]
 }

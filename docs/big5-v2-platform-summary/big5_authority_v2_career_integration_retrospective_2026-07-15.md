@@ -1,10 +1,12 @@
 # Big Five Authority V2 × Career 后端技术复盘
 
-日期：2026-07-15
+首版日期：2026-07-15
+
+合并证据刷新：2026-07-16
 
 仓库：`fap-api`（公开内容、CMS、发布状态与 public API 权威）
 
-范围：Big Five Authority V2 的 38 个串行 PR、后续受控生产导入链路，以及职业板块的 Big Five 消费边界
+范围：Big Five Authority V2 的 38 个原始串行 PR、PR39–47 公开权威控制链、PR10–13 职业桥接依赖链，以及职业板块的 Big Five 消费边界
 
 状态：技术文档与 skill guardrail 复盘；本文件不授权任何部署、迁移、CMS 写入、内容 promotion、indexability、sitemap、LLMS、媒体、缓存或搜索动作
 
@@ -29,6 +31,8 @@ Big Five working/draft revision
 ```
 
 Big Five 在职业场景中只能作为补充的 trait/work-style 解释语言。RIASEC 仍是职业兴趣主信号；Big Five 不得成为精准职业匹配器、岗位筛选器或结果保证器。
+
+截至 2026-07-16，PR39–47 和 PR10–13 的代码与合同已合并，但生产权威状态仍是 fail-closed：approved media 为 0、693 个媒体槽位全部 `missing_pending`、review manifest 未审核、promotion eligible 为 0；职业桥接只有 schema 与只读 auditor，没有 public reader。
 
 ## 2. 两条 Big Five V2 链路必须分开
 
@@ -256,16 +260,41 @@ AND career runtime publish projection allows the occupation
 - career-fit skill 没有显式规定 revision selection，可能让 agent 把 working draft 当成已发布人格证据。
 - runtime closeout 对 soft-404、topic skeleton、OG/date/schema 可见性暴露了 package QA 与真实 consumer/render QA 之间的差距。
 
-## 9. 后续工作顺序
+## 9. PR39–47 与 PR10–13 合并后状态
 
-后续均需独立 scope，不属于本次文档 PR：
+以下合并 SHA 与 checks 已于 2026-07-16 通过 GitHub 核实。这里的“完成”只表示对应代码/合同已合并，不表示生产部署、媒体批准、人工审核或内容 promotion 已完成。
 
-1. 修复 draft route 200 soft-404，使 withheld content 返回明确 404/410 或同等 fail-closed contract。
-2. 修复 `/en/topics/big-five` loading skeleton 和 console errors。
-3. 分开处理 Media/OG、visible date、author/reviewer/source、hreflang、FAQ/Article/Breadcrumb JSON-LD findings。
-4. 完成人工 review 与 promotion 设计；任何 promotion/public release 仍需新的 exact production authorization。
-5. 在 Big Five × Career 独立 scan 中验证已发布 public projection、Career runtime publish projection 和 claim permissions；在此之前保持 `explanation_only`，不得启动 matcher/pSEO/recommender。
-6. 为 importer 增加可复用的三类 identity plan contract，避免后续大型内容包重复经历 231-vs-106/125 的建模偏差。
+| 链路 | PR | Merge SHA | Checks | 实际交付与当前判断 |
+| --- | --- | --- | ---: | --- |
+| Web containment | PR39 / fap-web #1767 | `3e1e97d25a1e2369ad498d7ca193ca0b1b267e5c` | 7/7 | withheld draft route fail-closed consumer contract 已合并；未在本轮验证生产部署 |
+| Web Topic runtime | PR40 / fap-web #1768 | `7c97284e476a2e65ec7751e552925c4c635a36ce` | 7/7 | Topic loading consumer repair 已合并；未在本轮验证线上 runtime |
+| Media authority | PR41 / fap-api #3098 | `ae7dfe5af2ce64ad6795942e18657b960bf159b1` | 9/9 | intake/preflight 已完成；approved entries=0，693 slots=`missing_pending` |
+| Visible date | PR42 / fap-api #3099 | `7cb885c1d30ec52d3e3eac60379036dbeacbc5e7` | 9/9 | 82 个 finding 的投影合同完成；无真实日期写入，缺失继续为 `null` |
+| Visible provenance | PR43 / fap-api #3102 | `95578922e01125f7f4ed4087c407be83cd7e6af6` | 9/9 | author/reviewer/source fail-closed 合同完成；不伪造 reviewer 或 source |
+| Discoverability parity | PR44 / fap-api #3105 | `65a1d3b78da70511306ebd2867a157494e4e217f` | 9/9 | hreflang/LLMS 投影合同完成；无 sitemap/LLMS production mutation |
+| Structured data | PR45 / fap-api #3110 | `b590b639f84437da53641c84c2df895f87b8749f` | 9/9 | visible-evidence gated schema 合同完成；raw schema 不得绕过 gate |
+| Topic authority | PR46 / fap-api #3113 | `2a13cae76a68263db2849fcd8eb5118f346969f9` | 9/9 | EN/ZH working-revision candidate 与只读 preflight 完成；所有 public gate=false |
+| Review/promotion gate | PR47 / fap-api #3114 | `df9261e5d7aa071323fb91b0f6b28d2288e389a2` | 9/9 | 231 identities 的只读 cohort preflight 完成；manifest 未审核，eligible=0 |
+| Career discovery dependency | PR10 / fap-web #939 | `7626b901d77a5191a1b9211fd0b9a91c854a6c4f` | 6/6 | Career discovery foundation；不是 Big Five 内容发布授权 |
+| Career slot dependency | PR11 / fap-api #1814 | `40b60ff32d523737003804d670d1443706010fdf` | 15/15 | Career dynamic slot authority；不是 Big Five matcher |
+| Career bridge schema | PR12 / fap-api #3118 | `56d63e0db6626c6c98822df89fca4f67a8079e7d` | 9/9 | published-projection-only、`explanation_only` 合同完成；无 public reader |
+| Career bridge auditor | PR13 / fap-api #3121 | `a5ca257069ee9c88a85c3cd12ff94ad686a2455b` | 9/9 | `career:audit-big-five-bridge` 只读 auditor 完成；不写入、不生成 fallback |
+
+### 已关闭的技术缺口
+
+1. PR38 暴露的 soft-404 与 Topic consumer 缺口已有聚焦修复并合并。
+2. Media、visible date、visible provenance、discoverability 和 structured-data findings 已有 backend-owned fail-closed contract。
+3. Topic draft authority 与 231-asset review/cohort promotion preflight 已有确定性、只读实现。
+4. Big Five → Career 已有 machine-readable schema、可执行 contract 和 read-only auditor。
+
+### 仍未完成且不能从 merge 推断的动作
+
+1. 18 个 family-locale 媒体组的精确成品批准、rights/license/provenance/locale alt、Media Library production upload 与 693-slot 映射；当前 approved=0。
+2. 16 个 deterministic review cohorts 的具名人工 review、日期/来源/媒体权限、rollback target、runtime fingerprint 与 exact cohort authorization；当前 eligible=0。
+3. 受控 production promotion、public/indexability 变更、cache/search/sitemap/LLMS 动作；PR47 没有 publisher 或 write mode。
+4. promotion 后的 production deploy/readback/runtime closeout；本次文档刷新没有验证线上部署。
+5. Big Five → Career public reader；若未来实现，仍须同时通过已发布 Big Five projection、Career runtime publish projection 和 PR12/13 gate，且保持 `explanation_only`。
+6. importer 三类 identity plan contract，避免后续大型内容包再次出现 231-vs-106/125 建模偏差。
 
 ## 10. 关联文档与证据
 
@@ -275,6 +304,15 @@ AND career runtime publish projection allows the occupation
 - `docs/runbooks/big-five-cms-staging-import.md`
 - `generated/big-five-authority-v2/big5-authority-v2-release-gate-37/`
 - `generated/big-five-authority-v2/big5-authority-v2-collision-safe-draft-revision-writer/`
+- `backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-media-authority-41/README.md`
+- `backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-visible-date-42/README.md`
+- `backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-visible-provenance-43/README.md`
+- `backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-discoverability-parity-44/README.md`
+- `backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-structured-data-45/README.md`
+- `backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-topic-authority-46/README.md`
+- `backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-review-promotion-gate-47/README.md`
+- `backend/docs/career/big-five-career-bridge-schema-01.md`
+- `backend/docs/career/big-five-career-bridge-auditor-02.md`
 - `backend/tests/Feature/SEO/BigFiveAuthorityV2CollisionSafeDraftRevisionWriterTest.php`
 
 前端/consumer 证据：

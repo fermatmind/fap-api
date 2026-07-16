@@ -1,11 +1,15 @@
 # Big Five V2 Platform Architecture & Governance Summary
 
 Source repo: `/Users/rainie/Desktop/GitHub/fap-api`  
-Source HEAD: `0814af350c5119994ff65fe7e965e68bc3decb35`  
-Mode: scan + summarize  
-Scope: documentation only, no repo changes
+Source HEAD: `8401e1c62d19007abbe89abe597352cfae5ec0a4`
 
-> 2026-07-15 authority clarification: this document primarily describes the
+Evidence refreshed: `2026-07-16`
+
+Mode: architecture + authority-state summary
+
+Scope: documentation only; no CMS/database/media/publish/deploy action
+
+> 2026-07-16 authority clarification: this document primarily describes the
 > private Big Five result/report selector and rollout platform. Public Big Five
 > editorial surfaces (personality, Article, Topic, test landing, methodology)
 > are separately backend/CMS authoritative and must resolve published public
@@ -14,6 +18,10 @@ Scope: documentation only, no repo changes
 > must not consume private result traces or act as deterministic career
 > matchers. See
 > `big5_authority_v2_career_integration_retrospective_2026-07-15.md`.
+> PR39–47 add fail-closed public-content consumer repairs and backend authority
+> contracts; PR12–13 add a Career bridge schema and read-only auditor. Those
+> merges do not prove production deployment, approved media, human review,
+> promotion, public Career rendering, or runtime closeout.
 
 ## 1. Executive Summary
 
@@ -60,6 +68,8 @@ pending statistical trust and governance approval.
 | Norm foundation | Added norm eligibility, append-only observation schema, capture writer, anonymization/privacy layer, aggregation dry-run, feasibility report. | Norm data collection foundation completed without display. |
 | Norm engine | Added immutable norm snapshots, recomputation engine, segmented aggregation, drift detection, internal percentile resolver, public percentile governance report. | Dynamic norm engine exists for internal use; public percentile remains NO-GO. |
 | CMS governance | Added read-only asset index, draft/review/version model, RBAC/approval, preview system, release publish linkage, rollback/audit, Git-backed sync policy. | CMS became an editorial governance layer, not a runtime owner. |
+| Public Authority V2 containment | Added withheld-route and Topic consumer repairs plus backend media, visible-date, provenance, discoverability, structured-data, Topic-draft, and review/promotion gates. | Control contracts are merged; mutable authority inputs and exact production promotion remain withheld. |
+| Big Five → Career bridge | Added a published-projection-only schema and read-only auditor on top of the Career discovery/runtime-publish foundation. | Bridge candidates can be assessed fail-closed; no public reader, ranking, matcher, pSEO, or production write was added. |
 
 ## 3. Runtime Architecture
 
@@ -352,6 +362,11 @@ Every surface has rendered QA, metadata leak checks, fail-closed coverage, must-
 | Dynamic norms foundation | GO |
 | Dynamic norm engine | GO internal-only |
 | CMS/editorial governance | GO |
+| Public Authority V2 control contracts | GO, fail-closed |
+| Approved Big Five media intake | HOLD — 0 approved entries; 693 slots `missing_pending` |
+| Human review / exact cohort promotion | HOLD — checked-in manifest unreviewed; 0 eligible assets |
+| Big Five → Career bridge contract/auditor | GO, read-only |
+| Public Big Five → Career reader | NO-GO — not implemented or authorized |
 | Public percentile display | NO-GO |
 | Production rollout | Governance-ready, controlled NO-GO by default |
 
@@ -359,6 +374,10 @@ Every surface has rendered QA, metadata leak checks, fail-closed coverage, must-
 
 Current open items are strategic and operational, not core platform foundation gaps:
 
+- Approved Media Library assets with exact rights, provenance, locale alt, content identity, and operator approval.
+- Named human review records and exact-authorized cohort promotion; the repository currently proves zero promotion-eligible assets.
+- Production deployment/readback and runtime closeout after a separately controlled promotion; merge status alone is not deployment evidence.
+- A future public Career reader, only if published Big Five and Career projections both pass the PR12/13 bridge gates.
 - Public percentile display.
 - Real production rollout scaling.
 - Long-term norm accumulation.
@@ -409,6 +428,12 @@ flowchart TD
   O --> P["Future public percentile display: NO-GO"]
   Q["CMS editorial governance"] --> G
   Q --> K
+  R["Authority V2 working revisions"] --> S["PR41–47 fail-closed evidence gates"]
+  S --> T["Manual review + approved media + exact cohort authorization"]
+  T --> U["Future controlled promotion: currently HOLD"]
+  V["Published Big Five public projection"] --> W["PR12/13 Career bridge contract + auditor"]
+  X["Career runtime publish projection"] --> W
+  W --> Y["Future public Career reader: currently NO-GO"]
 ```
 
 Core dependency rule:
@@ -437,6 +462,9 @@ Must not happen without a future explicit approval train:
 - Modify `BigFivePublicProjectionService`.
 - Generate frontend Big Five V2 prose fallback.
 - Expose internal metadata, selector basis, source reference, runtime use, production flags, review notes, QA notes, raw identifiers, or `[object Object]`.
+- Treat PR41–47 contracts as proof that media, dates, reviewers, promotion, deployment, or runtime closeout occurred.
+- Let a Career consumer select a Big Five working revision, generated Authority V2 package, or private assessment payload.
+- Turn the PR12/13 bridge into occupation ranking, hiring/screening, outcome prediction, or discoverability expansion.
 
 ## 17. Validation Commands
 
