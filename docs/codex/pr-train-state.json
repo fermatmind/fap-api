@@ -95196,8 +95196,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "ee738786cd63e5a2a8595fdb2daff43fe1ced328",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -95252,9 +95253,14 @@
         "at": "2026-07-16T05:21:12Z",
         "status": "local_checks_passed",
         "note": "After correcting two test-only invariant defects, all PR19 manifest checks pass: 6 tests / 3601 assertions, Pint, PHP syntax, YAML, changed JSON, uniqueness and safe-brief readback, no-URL/no-upload/no-rights-approval checks, diff check, and exact seven-file scope. Media Library remains the sole authority and every execution boundary remains closed."
+      },
+      {
+        "at": "2026-07-16T05:22:03Z",
+        "status": "ready_to_push",
+        "note": "Committed the exact seven-file PR19 scope as ee738786cd63e5a2a8595fdb2daff43fe1ced328 after explicit path-limited staging and cached diff validation."
       }
     ],
-    "updated_at": "2026-07-16T05:21:12Z"
+    "updated_at": "2026-07-16T05:22:03Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20",
