@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV222ReleaseGate;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV2IntegrityGate;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -18,6 +19,8 @@ final class PersonalityEnneagramAuthorityV2IntegrityGate extends Command
         {--editorial-source= : Aggregate 116-asset editorial candidate JSON}
         {--source-registry=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/source-registry.json : Frozen source registry}
         {--page-claim-maps=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json : Frozen 116-page claim maps}
+        {--release-gate : Aggregate the frozen 116-asset PR22 release package without writes}
+        {--manual-reviews=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/manual-review-register.json : Named human review evidence bound to exact asset hashes}
         {--json : Emit JSON output}';
 
     protected $description = 'Validate frozen Enneagram Authority V2 target or editorial truth without writing CMS or runtime state.';
@@ -25,18 +28,29 @@ final class PersonalityEnneagramAuthorityV2IntegrityGate extends Command
     public function handle(EnneagramPublicAuthorityV2IntegrityGate $gate): int
     {
         $editorialSource = trim((string) $this->option('editorial-source'));
+        $releaseGate = (bool) $this->option('release-gate');
         try {
-            $summary = $editorialSource === ''
-                ? $gate->validate($this->loadScorecard((string) $this->option('source')))
-                : $gate->validateEditorial(
+            if ($releaseGate && $editorialSource !== '') {
+                throw new RuntimeException('--release-gate and --editorial-source are mutually exclusive.');
+            }
+            $summary = match (true) {
+                $releaseGate => (new EnneagramPublicAuthorityV222ReleaseGate($gate))->evaluate(
+                    base_path(),
+                    (string) $this->option('manual-reviews'),
+                ),
+                $editorialSource !== '' => $gate->validateEditorial(
                     $this->loadJson($editorialSource),
                     $this->loadJson((string) $this->option('source-registry')),
                     $this->loadJson((string) $this->option('page-claim-maps')),
-                );
+                ),
+                default => $gate->validate($this->loadScorecard((string) $this->option('source'))),
+            };
         } catch (Throwable $exception) {
-            $summary = $editorialSource === ''
-                ? $this->integrityCommandError($exception)
-                : $this->editorialCommandError($exception);
+            $summary = match (true) {
+                $releaseGate => $this->releaseGateCommandError($exception),
+                $editorialSource !== '' => $this->editorialCommandError($exception),
+                default => $this->integrityCommandError($exception),
+            };
         }
 
         $this->emit($summary);
@@ -112,6 +126,18 @@ final class PersonalityEnneagramAuthorityV2IntegrityGate extends Command
             return;
         }
 
+        if (array_key_exists('release_eligible', $summary)) {
+            foreach (['status', 'decision', 'automated_gate_passed', 'human_review_passed', 'media_rights_review_passed', 'release_eligible', 'package_sha256'] as $field) {
+                $value = $summary[$field] ?? null;
+                $this->line($field.'='.(is_bool($value) ? ($value ? '1' : '0') : (string) $value));
+            }
+            $this->line('asset_count='.(string) ($summary['counts']['assets'] ?? 0));
+            $this->line('missing_human_review_count='.(string) ($summary['counts']['missing_human_reviews'] ?? 0));
+            $this->line('writes_committed=0');
+
+            return;
+        }
+
         $this->line('status='.(string) ($summary['status'] ?? 'fail'));
         $this->line('source_page_count='.(string) ($summary['source_page_count'] ?? 0));
         $this->line('unique_identity_locale_count='.(string) ($summary['unique_identity_locale_count'] ?? 0));
@@ -167,6 +193,35 @@ final class PersonalityEnneagramAuthorityV2IntegrityGate extends Command
                 'path' => 'command',
                 'message' => $exception->getMessage(),
             ]],
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function releaseGateCommandError(Throwable $exception): array
+    {
+        return [
+            'artifact' => EnneagramPublicAuthorityV222ReleaseGate::ARTIFACT,
+            'status' => 'fail_closed',
+            'decision' => 'HOLD',
+            'ok' => false,
+            'automated_gate_passed' => false,
+            'human_review_passed' => false,
+            'media_rights_review_passed' => false,
+            'release_eligible' => false,
+            'errors' => [['code' => 'command_error', 'subject' => $exception->getMessage()]],
+            'execution_boundaries' => [
+                'production_write_executed' => false,
+                'database_mutated' => false,
+                'cms_mutated' => false,
+                'revision_pointer_changed' => false,
+                'media_uploaded' => false,
+                'cache_revalidated' => false,
+                'indexability_changed' => false,
+                'sitemap_changed' => false,
+                'llms_changed' => false,
+                'search_submitted' => false,
+                'deployed' => false,
+            ],
         ];
     }
 }

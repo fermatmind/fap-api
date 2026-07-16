@@ -1,0 +1,67 @@
+{
+  "schema_version": "enneagram_public_authority_v2_release_evidence_packet.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
+  "status": "blocked_at_release_gate",
+  "decision": "HOLD",
+  "dependencies": {
+    "fap_api_link_graph_pr20_merge_sha": "8401e1c62d19007abbe89abe597352cfae5ec0a4",
+    "fap_web_frontend_consumer_pr21_merge_sha": "d92bd5caf2b7d69cf7724ae78d4731c137dd92e1",
+    "fap_api_evaluation_base_sha": "f52a3c17d7d1c91b950b2a98fd8bc45a8d123bd4",
+    "fap_api_pr22_merge_sha": null,
+    "pr22_merge_sha_absence_reason": "PR22 is fail-closed and must remain unmerged until all release blockers are resolved."
+  },
+  "hashes": {
+    "package_sha256": "ebe1d718508aad886d1ec1cb92d463b5857c68f6edd7a17c7716f822ca6ca8d8",
+    "release_gate_report_sha256": "9806506452bc621233d7761ed5767ebb5f9c65ec186c79d17aa12c4b5ca88510",
+    "graph_manifest_sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd",
+    "media_manifest_sha256": "7fd157bf3e7cd90041eb3aa08f7666064673c31cf6559874d962c7483f85f8aa"
+  },
+  "evidence_counts": {
+    "asset_hashes": 116,
+    "pre_write_public_fingerprints": 116,
+    "manual_review_records": 0,
+    "missing_manual_review_records": 116,
+    "media_manifest_records": 58,
+    "localized_media_mappings": 116,
+    "pending_localized_media_rights_reviews": 116,
+    "graph_records": 116,
+    "unique_canonicals": 116,
+    "sitemap_enneagram_urls": 116,
+    "llms_txt_enneagram_urls": 116,
+    "llms_full_txt_enneagram_urls": 116
+  },
+  "automated_release_gate": {
+    "passed": false,
+    "collision_preflight_passed": true,
+    "aggregate_editorial_issue_count": 2,
+    "issue_codes": [
+      "duplicate_sentence",
+      "duplicate_sentence"
+    ]
+  },
+  "rollback": {
+    "ready": true,
+    "token_format": "base64url(json).hmac_sha256; payload version, artifact, target_count=116, preflight_fingerprint, and 116 rollback rows",
+    "exact_token_sha256_authorization_required": true,
+    "token_created": false,
+    "rollback_executed": false
+  },
+  "production_command_plan": {
+    "preflight": "php artisan personality:enneagram-authority-v2-revision-promoter --plan=<reviewed-116-target-plan.json> --preflight --json",
+    "promote": "php artisan personality:enneagram-authority-v2-revision-promoter --plan=<reviewed-116-target-plan.json> --promote --confirm-preflight-fingerprint=<exact-preflight-sha256> --confirm-writer-deploy-sha=<exact-backend-git-sha> --operator-approved=<exact-dynamic-approval-phrase> --json",
+    "rollback": "php artisan personality:enneagram-authority-v2-revision-promoter --rollback-token-file=<retained-token-file> --confirm-writer-deploy-sha=<exact-backend-git-sha> --operator-approved=<exact-dynamic-rollback-approval-phrase> --json",
+    "separate_exact_sha_authorization_required": true,
+    "executed": false
+  },
+  "production_actions": {
+    "imported": false,
+    "published": false,
+    "deployed": false,
+    "media_uploaded": false,
+    "cache_revalidated": false,
+    "indexability_changed": false,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "search_queue_or_indexnow_action": false
+  }
+}

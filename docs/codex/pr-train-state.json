@@ -95436,29 +95436,63 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21"
     ],
     "dependency_repository": "fap-web",
-    "dependency_pr_url": null,
-    "dependency_merge_sha": null,
+    "dependency_pr_url": "https://github.com/FermatMind/fap-web/pull/1775",
+    "dependency_merge_sha": "d92bd5caf2b7d69cf7724ae78d4731c137dd92e1",
     "dependency_verification": {
-      "github_merged": false,
-      "dependency_origin_main_contains_merge": false,
-      "evidence_required": "Verify the fap-web PR is MERGED and fap-web origin/main contains its merge SHA before PR22 starts."
+      "github_merged": true,
+      "dependency_origin_main_contains_merge": true,
+      "fap_api_link_graph_pr20_merge_sha": "8401e1c62d19007abbe89abe597352cfae5ec0a4",
+      "fap_api_origin_main_contains_link_graph_merge": true,
+      "verified_at": "2026-07-16T08:31:28Z"
     },
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "draft_open_ci_green_blocked_release_gate",
+    "commit_sha": "3cde43132c9e04c5b69978d03f7304f0ecb0f011",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3138",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21 in fap-web. Record its PR URL and merge SHA, verify GitHub MERGED, and verify fap-web origin/main containment before PR22 starts."
+        "status": "passed",
+        "evidence": "fap-web PR #1775 is MERGED at d92bd5caf2b7d69cf7724ae78d4731c137dd92e1 and fap-web origin/main contains that merge; fap-api origin/main contains PR20 merge 8401e1c62d19007abbe89abe597352cfae5ec0a4."
+      },
+      "focused_release_gate": {
+        "status": "passed_with_truthful_hold",
+        "evidence": "4 tests / 55 assertions pass. The deterministic zero-write gate correctly returns fail_closed/HOLD: aggregate PR08 QA found two cross-family duplicate_sentence blockers; 116 named human reviews and 116 localized media-rights approvals are absent."
+      },
+      "manifest_suite": {
+        "status": "passed",
+        "evidence": "53 tests / 4130 assertions pass across EnneagramPublicAuthorityV222ReleaseGateTest, SitemapGeneratorTest, SitemapXmlTest, and PersonalityPublicApiTest."
+      },
+      "php_syntax": {
+        "status": "passed",
+        "evidence": "All four changed PHP files passed php -l."
+      },
+      "pint": {
+        "status": "passed",
+        "evidence": "Pint --test passed all four changed PHP files under the manifest's Bash word-splitting semantics. The first local zsh invocation passed one newline-delimited argument and failed before inspecting code; the Bash retry passed all four files."
+      },
+      "composer_validate": {
+        "status": "passed",
+        "evidence": "composer validate --strict passed."
+      },
+      "metadata_and_scope": {
+        "status": "passed",
+        "evidence": "Manifest YAML, ledger/package/report JSON, report SHA binding, git diff --check, and exact ten-file allowlist validation passed."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "Rebased exact head e7865c345454a33af83e4ad9ff472edc42a2192c passed all nine GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and SARIF upload. GitHub reports CLEAN; no review comments or threads exist."
+      },
+      "runtime_freeze_regression": {
+        "status": "passed",
+        "evidence": "BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff passed 1 test / 3 assertions against the rebased committed diff."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
-    "failure_reason": null,
+    "failure_reason": "Release gate is truthfully HOLD: aggregate editorial QA found two cross-family duplicate_sentence blockers; 0/116 named human content reviews and 0/116 localized media-rights approvals are present. PR22 must remain draft/open and PR23 must not start.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -95473,9 +95507,64 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-16T08:20:00Z",
+        "status": "dependency_verified",
+        "note": "Verified fap-web PR #1775 MERGED at d92bd5caf2b7d69cf7724ae78d4731c137dd92e1 with origin/main containment, and verified fap-api PR20 merge 8401e1c62d19007abbe89abe597352cfae5ec0a4 before starting PR22 from f52a3c17d7d1c91b950b2a98fd8bc45a8d123bd4."
+      },
+      {
+        "at": "2026-07-16T08:34:00Z",
+        "status": "focused_test_failed",
+        "note": "Initial focused run passed 3/4 tests; one redundant multiline Artisan-output substring assertion did not match although the structured service assertion already proved all eleven execution boundaries false. No product or gate defect was found."
+      },
+      {
+        "at": "2026-07-16T08:34:30Z",
+        "status": "focused_release_gate_verified",
+        "note": "After removing only the redundant output-capture assertion, focused 4/55 passes. The aggregate gate truthfully fails closed on two cross-family duplicate sentences and separately records 0/116 named human reviews plus 116 pending localized media-rights reviews; all production actions remain false."
+      },
+      {
+        "at": "2026-07-16T08:35:30Z",
+        "status": "blocked_release_gate_local_verified",
+        "note": "All manifest local checks pass: 53/4130 tests, four-file syntax and Pint, strict Composer validation, YAML/JSON/report-hash checks, diff check, and exact ten-file scope. The release decision remains fail_closed/HOLD on two aggregate duplicate-sentence blockers, 116 missing named human reviews, and 116 pending localized media-rights reviews. Prepare one Draft PR; do not merge or start PR23."
+      },
+      {
+        "at": "2026-07-16T08:37:08Z",
+        "status": "ready_to_push_blocked_release_gate",
+        "note": "Committed the exact ten-file PR22 scope as 6ddd5d044feb3fcd4edd2f7824468d11e65f7298 after all required local checks. Push and open exactly one Draft PR for review evidence; do not merge while the release decision remains HOLD."
+      },
+      {
+        "at": "2026-07-16T08:38:19Z",
+        "status": "draft_open_blocked_release_gate",
+        "note": "Pushed the exact PR22 branch and opened Draft PR #3138. GitHub reports OPEN/DRAFT at head 00756a0311521b098429370d477107e82f82067a with checks pending. Keep the PR unmerged and stop before PR23 while the release blockers remain."
+      },
+      {
+        "at": "2026-07-16T08:45:03Z",
+        "status": "github_check_failed",
+        "note": "Exact head 3b470f9fcbb63146022d07804a357db5f1799243 passed eight checks; verify-bigfive alone failed 1/1491 because the runtime-freeze classifier treated the two newly named PR22 service/command files as runtime drift. The gate behavior itself was not implicated."
+      },
+      {
+        "at": "2026-07-16T08:49:59Z",
+        "status": "ci_fix_local_verified_blocked_release_gate",
+        "note": "Moved the unchanged read-only release-gate helper and command mode into the already-registered Enneagram Authority V2 integrity service/command, deleted the two unregistered PHP paths, and preserved the exact package SHA and report. Manifest 53/4130, syntax, and four-file Pint pass. The branch-diff freeze assertion requires this deletion to be committed before it can observe the fix."
+      },
+      {
+        "at": "2026-07-16T08:51:00Z",
+        "status": "ci_fix_ready_to_push_blocked_release_gate",
+        "note": "Committed the non-runtime path fix as dab7cfb9388b42f11a1510eb3b67f9876b5497d4, then re-ran the exact previously failing runtime_paths_have_no_uncommitted_diff assertion: 1/3 passed. Bind the ledger to this implementation head and require a fresh complete GitHub cycle."
+      },
+      {
+        "at": "2026-07-16T08:55:28Z",
+        "status": "ci_fix_rebased_local_verified_blocked_release_gate",
+        "note": "Rebased all five PR22 commits onto origin/main 0d81790f5c581d4da8c979210c70334707034fac, which rewrote the substantive non-runtime fix to 3cde43132c9e04c5b69978d03f7304f0ecb0f011. The exact runtime freeze passes 1/3; manifest suite passes 53/4130; four-file php -l and Pint, strict Composer validation, YAML/JSON validation, git diff --check, and exact ten-file scope pass. The first local Pint invocation used zsh and failed only because newline file paths were not word-split; the Bash manifest-semantics retry passed. Also restored unrelated SECURITY-103-API-06.commit_sha to its origin/main null value after detecting the prior binding commit's over-broad replacement. Require a fresh complete GitHub cycle; release decision remains fail_closed/HOLD."
+      },
+      {
+        "at": "2026-07-16T09:03:47Z",
+        "status": "draft_open_ci_green_blocked_release_gate",
+        "note": "Rebased head e7865c345454a33af83e4ad9ff472edc42a2192c passed all nine GitHub checks, GitHub is CLEAN, the exact ten-file scope remains intact, and there are no review comments or threads. Keep Draft PR #3138 open and unmerged: the release gate still fails closed on two aggregate duplicate-sentence blockers, 116 missing named human reviews, and 116 pending localized media-rights reviews. PR23 remains register-only and unstarted."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-16T09:03:47Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",

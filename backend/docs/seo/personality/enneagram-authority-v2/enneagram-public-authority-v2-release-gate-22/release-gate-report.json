@@ -1,0 +1,3733 @@
+{
+    "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
+    "schema_version": "enneagram_public_authority_v2_release_gate.v1",
+    "status": "fail_closed",
+    "decision": "HOLD",
+    "ok": false,
+    "automated_gate_passed": false,
+    "human_review_passed": false,
+    "media_rights_review_passed": false,
+    "release_eligible": false,
+    "package_sha256": "ebe1d718508aad886d1ec1cb92d463b5857c68f6edd7a17c7716f822ca6ca8d8",
+    "counts": {
+        "identities": 58,
+        "assets": 116,
+        "locales": {
+            "en": 58,
+            "zh-CN": 58
+        },
+        "entities": {
+            "center": 6,
+            "core_type": 18,
+            "hub": 2,
+            "instinctual_subtype": 54,
+            "wing": 36
+        },
+        "source_mappings": 116,
+        "qa_rows": 116,
+        "editorial_integrity_qa_rows": 116,
+        "graph_records": 116,
+        "unique_canonicals": 116,
+        "media_originals": 58,
+        "media_mappings": 116,
+        "pre_write_public_fingerprints": 116,
+        "named_human_reviews": 0,
+        "approved_human_reviews": 0,
+        "rejected_human_reviews": 0,
+        "missing_human_reviews": 116,
+        "pending_media_rights_reviews": 116
+    },
+    "collision_preflight": {
+        "status": "fail",
+        "unique_asset_keys": 116,
+        "unique_paths": 116,
+        "errors": [
+            {
+                "code": "editorial_integrity_duplicate_sentence",
+                "subject": "en|instinctual_subtype:type-4/social"
+            },
+            {
+                "code": "editorial_integrity_duplicate_sentence",
+                "subject": "en|instinctual_subtype:type-9/one-to-one"
+            },
+            {
+                "code": "editorial_integrity_gate_failed",
+                "subject": "aggregate"
+            }
+        ]
+    },
+    "editorial_integrity_gate": {
+        "status": "fail_closed",
+        "automated_gate_passed": false,
+        "qa_row_count": 116,
+        "issue_count": 2,
+        "issues": [
+            {
+                "gate": "duplicate_template_risk",
+                "code": "duplicate_sentence",
+                "asset_key": "en|instinctual_subtype:type-4/social",
+                "path": "assets.52.text.15",
+                "message": "Sentence duplicates assets.40.text.15.",
+                "duplicate_of_asset_key": "en|instinctual_subtype:type-3/social"
+            },
+            {
+                "gate": "duplicate_template_risk",
+                "code": "duplicate_sentence",
+                "asset_key": "en|instinctual_subtype:type-9/one-to-one",
+                "path": "assets.109.text.15",
+                "message": "Sentence duplicates assets.60.text.15.",
+                "duplicate_of_asset_key": "en|instinctual_subtype:type-5/social"
+            }
+        ],
+        "validates": [
+            "unsupported_claims",
+            "competitor_as_science",
+            "duplicate_or_template_content",
+            "mechanical_translation",
+            "visible_evidence_and_claim_boundaries"
+        ]
+    },
+    "discoverability_inventory": {
+        "sitemap": 116,
+        "llms_txt": 116,
+        "llms_full_txt": 116,
+        "expected_each": 116,
+        "source": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-benchmark-01/production-scorecard.json",
+        "mutation_performed": false
+    },
+    "asset_records": [
+        {
+            "asset_key": "en|center:gut",
+            "identity_key": "center:gut",
+            "locale": "en",
+            "entity_type": "center",
+            "code": "gut",
+            "path": "/en/personality/enneagram/centers/gut",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "fceffd48a4077dcbbd574e0f29161c964a66130960c3155712396b073fd5fdae"
+        },
+        {
+            "asset_key": "en|center:head",
+            "identity_key": "center:head",
+            "locale": "en",
+            "entity_type": "center",
+            "code": "head",
+            "path": "/en/personality/enneagram/centers/head",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "b4dc993d58abf460a4f3aa77c0a3924cd8ef0e7f43d5b2e3df22d30c377deca1"
+        },
+        {
+            "asset_key": "en|center:heart",
+            "identity_key": "center:heart",
+            "locale": "en",
+            "entity_type": "center",
+            "code": "heart",
+            "path": "/en/personality/enneagram/centers/heart",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "73a500009574139e6aabb09fb600853e8fa732340995c062eedd5caa686e4bd0"
+        },
+        {
+            "asset_key": "en|core_type:type-1",
+            "identity_key": "core_type:type-1",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-1",
+            "path": "/en/personality/enneagram/type-1",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "0a1117425efe7ae94c36ab2ca81a160d754a7d1b095012b6a16361e02e1162e1"
+        },
+        {
+            "asset_key": "en|core_type:type-2",
+            "identity_key": "core_type:type-2",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-2",
+            "path": "/en/personality/enneagram/type-2",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "471d1f736f7f6cc39244f654e8c707e71f2e026bd12f2195900c7aba91063e8f"
+        },
+        {
+            "asset_key": "en|core_type:type-3",
+            "identity_key": "core_type:type-3",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-3",
+            "path": "/en/personality/enneagram/type-3",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "7b3b15aa6de600f6794d69e9989edc06604f5812abb511c8246061ac58e5fa8d"
+        },
+        {
+            "asset_key": "en|core_type:type-4",
+            "identity_key": "core_type:type-4",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-4",
+            "path": "/en/personality/enneagram/type-4",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "3a39fcac2cf2487a8ef6fcc41e8d74cf77728539732631b853a2d7ee371ffc8f"
+        },
+        {
+            "asset_key": "en|core_type:type-5",
+            "identity_key": "core_type:type-5",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-5",
+            "path": "/en/personality/enneagram/type-5",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "22222cd12cf832456e6336c41800de70c8d3458f8adad3dbaf59f36ca18595e0"
+        },
+        {
+            "asset_key": "en|core_type:type-6",
+            "identity_key": "core_type:type-6",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-6",
+            "path": "/en/personality/enneagram/type-6",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "e9b6ab25780022b4a5638784374e79d71f1f82f3d7f5e3f762313bebee67abfb"
+        },
+        {
+            "asset_key": "en|core_type:type-7",
+            "identity_key": "core_type:type-7",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-7",
+            "path": "/en/personality/enneagram/type-7",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "47455832e72ff49418f9229300756337b95ce72959885596a1468968994cc5b4"
+        },
+        {
+            "asset_key": "en|core_type:type-8",
+            "identity_key": "core_type:type-8",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-8",
+            "path": "/en/personality/enneagram/type-8",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "58f58838915538a83f874289339db5efb0e6e2243a67d268c44e3f5ba60810f2"
+        },
+        {
+            "asset_key": "en|core_type:type-9",
+            "identity_key": "core_type:type-9",
+            "locale": "en",
+            "entity_type": "core_type",
+            "code": "type-9",
+            "path": "/en/personality/enneagram/type-9",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "d4ee4d233e05220154208cb1b414490c756d1dd82796b169a949461ae8d35591"
+        },
+        {
+            "asset_key": "en|hub:enneagram",
+            "identity_key": "hub:enneagram",
+            "locale": "en",
+            "entity_type": "hub",
+            "code": "enneagram",
+            "path": "/en/personality/enneagram",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "edc9d1be84727dedc8450b6ec17c9080b9daf5988d3667d8cc2d745640c87e79"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/one-to-one",
+            "identity_key": "instinctual_subtype:type-1/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-1/one-to-one",
+            "path": "/en/personality/enneagram/type-1/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "478c6d960bd7a74940cdea3e68f99a5eeef9770b2c5e9ea691ec90166304512a"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/self-preservation",
+            "identity_key": "instinctual_subtype:type-1/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-1/self-preservation",
+            "path": "/en/personality/enneagram/type-1/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "373ab5415bf36cac0ecc3ecb7bef84470ac989b0f489e521184bacd6a8baa3be"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/social",
+            "identity_key": "instinctual_subtype:type-1/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-1/social",
+            "path": "/en/personality/enneagram/type-1/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "305263b1ddf1cf9b3e1d996c48948ee41834ee1794a02c042b3061ba12fa3b5c"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/one-to-one",
+            "identity_key": "instinctual_subtype:type-2/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-2/one-to-one",
+            "path": "/en/personality/enneagram/type-2/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "20d98f83a260801661f36548ad57152bb5768100042f26267f2b2d1c882b0412"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/self-preservation",
+            "identity_key": "instinctual_subtype:type-2/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-2/self-preservation",
+            "path": "/en/personality/enneagram/type-2/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "2cea1a8c0428ddf3311b617eed882534e8c0479ab2e3172bbb5ead5494f4626e"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/social",
+            "identity_key": "instinctual_subtype:type-2/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-2/social",
+            "path": "/en/personality/enneagram/type-2/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "54302b6212671590b3f9822f01c599bea3f2a77ed41a2ba59e08fc3c55d238af"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/one-to-one",
+            "identity_key": "instinctual_subtype:type-3/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-3/one-to-one",
+            "path": "/en/personality/enneagram/type-3/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "815dc86ce14bd04043b4b8cc5517b29d69c373abc481e6ab28199b7434535bfb"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/self-preservation",
+            "identity_key": "instinctual_subtype:type-3/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-3/self-preservation",
+            "path": "/en/personality/enneagram/type-3/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "edf16aaa9ad7ba366305b254a9ab187aa98c7e4d34d962e0b02b196ac7878c4a"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/social",
+            "identity_key": "instinctual_subtype:type-3/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-3/social",
+            "path": "/en/personality/enneagram/type-3/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "91b0afe7ea941a93c46f12399d7c7fdf0300ab23c85b1590658a4585dc6bca28"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/one-to-one",
+            "identity_key": "instinctual_subtype:type-4/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-4/one-to-one",
+            "path": "/en/personality/enneagram/type-4/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "1dbfc6fb3eb73b6db69c98365aaf7dabc52d79dbb6d1ab5dd70aeba6b3baf142"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/self-preservation",
+            "identity_key": "instinctual_subtype:type-4/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-4/self-preservation",
+            "path": "/en/personality/enneagram/type-4/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "9267f7152d7363c6d516645bf5a6bb71303c05e794b06d89e7bbe75e0fc6691d"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/social",
+            "identity_key": "instinctual_subtype:type-4/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-4/social",
+            "path": "/en/personality/enneagram/type-4/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "3ebbe2f7db210f6f4067a909ea40b7fad7e82bd67c236317f15cc621ca101e1d"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/one-to-one",
+            "identity_key": "instinctual_subtype:type-5/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-5/one-to-one",
+            "path": "/en/personality/enneagram/type-5/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "6104956a6179702e3952e03ffa6f3b115c8c54db7c08ef4f5ab33d5ed5c8246f"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/self-preservation",
+            "identity_key": "instinctual_subtype:type-5/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-5/self-preservation",
+            "path": "/en/personality/enneagram/type-5/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "e029d96670cb99528b986c0bc66dcb06060c30d97f9836fa835253fbc14d7f50"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/social",
+            "identity_key": "instinctual_subtype:type-5/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-5/social",
+            "path": "/en/personality/enneagram/type-5/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "15bf5b9ad13396f5e48c31f9e32ecad286b9dd61908d123ea3c0a42ee62f791d"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/one-to-one",
+            "identity_key": "instinctual_subtype:type-6/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-6/one-to-one",
+            "path": "/en/personality/enneagram/type-6/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "d7f28ffc5b489f88662eee25ca59907095ee67c5b029f97b2bd31b41e824d28a"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/self-preservation",
+            "identity_key": "instinctual_subtype:type-6/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-6/self-preservation",
+            "path": "/en/personality/enneagram/type-6/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "24b64a7b6647dc83bbc10ed70721f4fe6d980dec00665f449ebc8e5c5a65383d"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/social",
+            "identity_key": "instinctual_subtype:type-6/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-6/social",
+            "path": "/en/personality/enneagram/type-6/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "2e483b348c4ee4c3e6a77ff53c497a9d4610b11557ddaa404766d84f4dcda6c9"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/one-to-one",
+            "identity_key": "instinctual_subtype:type-7/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-7/one-to-one",
+            "path": "/en/personality/enneagram/type-7/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "4c1fc2b62243a78fa2b8f5bce543f8290abd4488dec9ad738620c3b5e64e14a5"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/self-preservation",
+            "identity_key": "instinctual_subtype:type-7/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-7/self-preservation",
+            "path": "/en/personality/enneagram/type-7/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "cb1a19d52f459ddcfb841ede9fcd6dda492acedea6bb34e10f9adcc17014ec20"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/social",
+            "identity_key": "instinctual_subtype:type-7/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-7/social",
+            "path": "/en/personality/enneagram/type-7/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "acc0603b201d8fb43284bfc0c274ba4375beb11ad4f899879ef35a57a214d621"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/one-to-one",
+            "identity_key": "instinctual_subtype:type-8/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-8/one-to-one",
+            "path": "/en/personality/enneagram/type-8/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "3a89b39132872ee56d200f94a65fef5adf2651880cf4e3f942d3a4aa963b29f7"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/self-preservation",
+            "identity_key": "instinctual_subtype:type-8/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-8/self-preservation",
+            "path": "/en/personality/enneagram/type-8/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "30c721322ced387d789760be0cf8bb0ed65c88ec4e0c4e976dfdeb7aaf341887"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/social",
+            "identity_key": "instinctual_subtype:type-8/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-8/social",
+            "path": "/en/personality/enneagram/type-8/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "49e9c335101fb552ae711587377dc1934548f373a727912290ba0bd66a44b399"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/one-to-one",
+            "identity_key": "instinctual_subtype:type-9/one-to-one",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-9/one-to-one",
+            "path": "/en/personality/enneagram/type-9/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "e77625153f84dbaa851345077278ea678e5b8301305034a14c057a48b5d3b914"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/self-preservation",
+            "identity_key": "instinctual_subtype:type-9/self-preservation",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-9/self-preservation",
+            "path": "/en/personality/enneagram/type-9/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "0cc138fb89132aef09bb0e96e12f736966ea21e8466f20580a0cd1a5f0d15652"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/social",
+            "identity_key": "instinctual_subtype:type-9/social",
+            "locale": "en",
+            "entity_type": "instinctual_subtype",
+            "code": "type-9/social",
+            "path": "/en/personality/enneagram/type-9/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "6346532b09b538f2edee6bdfa632c9f5c07a7b60e4956c710a584fb9c6153ee5"
+        },
+        {
+            "asset_key": "en|wing:1w2",
+            "identity_key": "wing:1w2",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "1w2",
+            "path": "/en/personality/enneagram/wings/1w2",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "dfb97d837b6ce187a8a1d2f5b42c3ff6ed856afcfd3b6e2cd1a10098abd92a1c"
+        },
+        {
+            "asset_key": "en|wing:1w9",
+            "identity_key": "wing:1w9",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "1w9",
+            "path": "/en/personality/enneagram/wings/1w9",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "c71e67061a1ed5e15392de91b3140e49b66194ddfd4a6eab909989d667c52343"
+        },
+        {
+            "asset_key": "en|wing:2w1",
+            "identity_key": "wing:2w1",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "2w1",
+            "path": "/en/personality/enneagram/wings/2w1",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "cc068d74da322b0f4f853081f8a8abd2a9dc0f90ba171804c727ef651e8a9eca"
+        },
+        {
+            "asset_key": "en|wing:2w3",
+            "identity_key": "wing:2w3",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "2w3",
+            "path": "/en/personality/enneagram/wings/2w3",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "5730b3538db1fc01d5c9845a98d364619e5f629a6c579063e8d796a7b18807b2"
+        },
+        {
+            "asset_key": "en|wing:3w2",
+            "identity_key": "wing:3w2",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "3w2",
+            "path": "/en/personality/enneagram/wings/3w2",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "07dc93e1be586628a7d978805f5fe268b23de9df6828ea9f0a3dd08a35d78495"
+        },
+        {
+            "asset_key": "en|wing:3w4",
+            "identity_key": "wing:3w4",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "3w4",
+            "path": "/en/personality/enneagram/wings/3w4",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "e1fde4f38c742da6f8d7720a8b359b7aabdda18dc5b67a2f3713a7a8a5985679"
+        },
+        {
+            "asset_key": "en|wing:4w3",
+            "identity_key": "wing:4w3",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "4w3",
+            "path": "/en/personality/enneagram/wings/4w3",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "abb947edac69148bbfbe28daca9b9a92a4b990be8292717a6cd8ac06ac300c54"
+        },
+        {
+            "asset_key": "en|wing:4w5",
+            "identity_key": "wing:4w5",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "4w5",
+            "path": "/en/personality/enneagram/wings/4w5",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "edf265da57d2176108b09360d31882d9786ea3a4c321498d81e39724b2211d83"
+        },
+        {
+            "asset_key": "en|wing:5w4",
+            "identity_key": "wing:5w4",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "5w4",
+            "path": "/en/personality/enneagram/wings/5w4",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "15f06c5ad4bdef747b3784452e656f12e3fcd884ed08694c2716385da69a2bf6"
+        },
+        {
+            "asset_key": "en|wing:5w6",
+            "identity_key": "wing:5w6",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "5w6",
+            "path": "/en/personality/enneagram/wings/5w6",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "d37b8f45c03c54fbe043aa61951f5cea26ed8144aa707173e5bf942334381d2d"
+        },
+        {
+            "asset_key": "en|wing:6w5",
+            "identity_key": "wing:6w5",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "6w5",
+            "path": "/en/personality/enneagram/wings/6w5",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "aac57f4dfd998d03778142ed06d093cb1dec9d438b27714d2447529d11b7a537"
+        },
+        {
+            "asset_key": "en|wing:6w7",
+            "identity_key": "wing:6w7",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "6w7",
+            "path": "/en/personality/enneagram/wings/6w7",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "64813b5d219ac8e5124b6e7f8d5c1314eb23b789fd056217ef1fdb9ba20df568"
+        },
+        {
+            "asset_key": "en|wing:7w6",
+            "identity_key": "wing:7w6",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "7w6",
+            "path": "/en/personality/enneagram/wings/7w6",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "e27768d0da2cc06db8c92ef94eaf93620dd462b51c1283e2686f6655bb0ea912"
+        },
+        {
+            "asset_key": "en|wing:7w8",
+            "identity_key": "wing:7w8",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "7w8",
+            "path": "/en/personality/enneagram/wings/7w8",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "e505fe94a3667841079aa653e77b33bd41097d59efae6b2ecb97b6c609cf64d8"
+        },
+        {
+            "asset_key": "en|wing:8w7",
+            "identity_key": "wing:8w7",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "8w7",
+            "path": "/en/personality/enneagram/wings/8w7",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "cd6b5c85e664d76051489c773c4d4392a32a516f7b77c4952fcacf3c1be2ba9c"
+        },
+        {
+            "asset_key": "en|wing:8w9",
+            "identity_key": "wing:8w9",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "8w9",
+            "path": "/en/personality/enneagram/wings/8w9",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "bebdffc44395193eb1bf73c5553d883b193b30c84bfd1c5c51f6515bd4c24ddd"
+        },
+        {
+            "asset_key": "en|wing:9w1",
+            "identity_key": "wing:9w1",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "9w1",
+            "path": "/en/personality/enneagram/wings/9w1",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "2047509d25289f3168230735ff88a0456b378572114968dc3397e69f5611bfcc"
+        },
+        {
+            "asset_key": "en|wing:9w8",
+            "identity_key": "wing:9w8",
+            "locale": "en",
+            "entity_type": "wing",
+            "code": "9w8",
+            "path": "/en/personality/enneagram/wings/9w8",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "b7199293d60cbbf06e4d5606e2ea178a9d8812901b8fea29c72dc5ff627eaf6c"
+        },
+        {
+            "asset_key": "zh-CN|center:gut",
+            "identity_key": "center:gut",
+            "locale": "zh-CN",
+            "entity_type": "center",
+            "code": "gut",
+            "path": "/zh/personality/enneagram/centers/gut",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "e5fa9f5debf7510a6ad45b0af6cd6885b8bd1ffe22f566a5ffee64295a0a0cc4"
+        },
+        {
+            "asset_key": "zh-CN|center:head",
+            "identity_key": "center:head",
+            "locale": "zh-CN",
+            "entity_type": "center",
+            "code": "head",
+            "path": "/zh/personality/enneagram/centers/head",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "5a2cfdd2fe98ad217d93db74662279928698c4b608486645952fea8d55fa27cc"
+        },
+        {
+            "asset_key": "zh-CN|center:heart",
+            "identity_key": "center:heart",
+            "locale": "zh-CN",
+            "entity_type": "center",
+            "code": "heart",
+            "path": "/zh/personality/enneagram/centers/heart",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "f5bd57950a9e6ef07efbfc7fafc54535cfb98c46ce24ce4bb103098ba315ae58"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-1",
+            "identity_key": "core_type:type-1",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-1",
+            "path": "/zh/personality/enneagram/type-1",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "849cfe385e1ce12d681967a4b9641f58181fc3f8ee072505726aac0a3450f5b4"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-2",
+            "identity_key": "core_type:type-2",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-2",
+            "path": "/zh/personality/enneagram/type-2",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "f6bdde8b7ca581e3d7b75b31621c17ee2242cfb7ca48bd50f5de6ca6a84db8e3"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-3",
+            "identity_key": "core_type:type-3",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-3",
+            "path": "/zh/personality/enneagram/type-3",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "35cf569d1d770c365462ee50b230983c9c60bb0e19666fde3dc8d57a6246fba4"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-4",
+            "identity_key": "core_type:type-4",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-4",
+            "path": "/zh/personality/enneagram/type-4",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "51573b956a304506876ba1ace449f9e448268b2d307fef0c1c6d99f4f6a8f138"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-5",
+            "identity_key": "core_type:type-5",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-5",
+            "path": "/zh/personality/enneagram/type-5",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "41d6c2e3eb6f09ddddc5d1fdbf71bbab89f128ba64af490ffee492c946b02379"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-6",
+            "identity_key": "core_type:type-6",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-6",
+            "path": "/zh/personality/enneagram/type-6",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "c5cedddf79a5059371c7da05db6c983be2f057794b7711e31b9d093f9985afa9"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-7",
+            "identity_key": "core_type:type-7",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-7",
+            "path": "/zh/personality/enneagram/type-7",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "2b9240cb066e71054b02122e446f959f546c901456484443dc057485a986afdf"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-8",
+            "identity_key": "core_type:type-8",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-8",
+            "path": "/zh/personality/enneagram/type-8",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "bc82b6cd2a6d657f1f4eefcee3a0f436751605f5adf5be323428004b6d2954e3"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-9",
+            "identity_key": "core_type:type-9",
+            "locale": "zh-CN",
+            "entity_type": "core_type",
+            "code": "type-9",
+            "path": "/zh/personality/enneagram/type-9",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "bd172abe9190dfed237b445f89e066e1b5b63a0f4f8705ccb327be18008aa612"
+        },
+        {
+            "asset_key": "zh-CN|hub:enneagram",
+            "identity_key": "hub:enneagram",
+            "locale": "zh-CN",
+            "entity_type": "hub",
+            "code": "enneagram",
+            "path": "/zh/personality/enneagram",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "asset_sha256": "d49806d8d46eaa8be28522c28a3d444075fba5b4ea273eca9f2c4cc6d0b46607"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/one-to-one",
+            "identity_key": "instinctual_subtype:type-1/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-1/one-to-one",
+            "path": "/zh/personality/enneagram/type-1/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "095a32bcb24a3289e4a4088cf70f58ada733f407e8bcbdfc86459cdaf279f222"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/self-preservation",
+            "identity_key": "instinctual_subtype:type-1/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-1/self-preservation",
+            "path": "/zh/personality/enneagram/type-1/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "6d7020b5627e44bd796c4a0661123255a59538ea00f6919740058b44a850cc7a"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/social",
+            "identity_key": "instinctual_subtype:type-1/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-1/social",
+            "path": "/zh/personality/enneagram/type-1/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "eced870326a81f55b6b4e33632a82301bae883fa97b2a711574ab23364f5259b"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/one-to-one",
+            "identity_key": "instinctual_subtype:type-2/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-2/one-to-one",
+            "path": "/zh/personality/enneagram/type-2/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "51008cd4c777ffa03baafd38585efb2f4116258f199519e1e598e67f1463fe24"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/self-preservation",
+            "identity_key": "instinctual_subtype:type-2/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-2/self-preservation",
+            "path": "/zh/personality/enneagram/type-2/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "47313db32bda48a7a34a04002840b870ded9b9e3b33697d77b7198b1d68c9d30"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/social",
+            "identity_key": "instinctual_subtype:type-2/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-2/social",
+            "path": "/zh/personality/enneagram/type-2/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "f6463eb8f499f00e706a7025285675f3dcc81be80a8c0a08f41cd5f9e1784b19"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/one-to-one",
+            "identity_key": "instinctual_subtype:type-3/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-3/one-to-one",
+            "path": "/zh/personality/enneagram/type-3/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "56e4ac49baea1430fdfc08369968531b0b2e7292298ab430083f8ac50384e4f9"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/self-preservation",
+            "identity_key": "instinctual_subtype:type-3/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-3/self-preservation",
+            "path": "/zh/personality/enneagram/type-3/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "0da75ca3d0d0aee419805fc286f6e7f12300cea4d4323c6c73e743399cdf839d"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/social",
+            "identity_key": "instinctual_subtype:type-3/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-3/social",
+            "path": "/zh/personality/enneagram/type-3/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "bf0faf03c3dd7dc1b0dd965cd4a44f12189c93daa641812f1e0f1670fecc9ba5"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/one-to-one",
+            "identity_key": "instinctual_subtype:type-4/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-4/one-to-one",
+            "path": "/zh/personality/enneagram/type-4/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "5ef041321401b73d69cea79b4fdeb8c4d7fd64690d4ddddfa1a53c71a4990aa8"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/self-preservation",
+            "identity_key": "instinctual_subtype:type-4/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-4/self-preservation",
+            "path": "/zh/personality/enneagram/type-4/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "32329c5718a6af1e8f212e8d2842a336b1bc527714535358a5c642690876041c"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/social",
+            "identity_key": "instinctual_subtype:type-4/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-4/social",
+            "path": "/zh/personality/enneagram/type-4/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "18f82da0257142cb96203aded516c9834de79434ea15bd2b6755bcec51e4468c"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/one-to-one",
+            "identity_key": "instinctual_subtype:type-5/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-5/one-to-one",
+            "path": "/zh/personality/enneagram/type-5/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "ee5a73d4d5407071ca6f846176371e6c0e02e0eeb8a9807692f5479c7fc9c46c"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/self-preservation",
+            "identity_key": "instinctual_subtype:type-5/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-5/self-preservation",
+            "path": "/zh/personality/enneagram/type-5/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "d051060229e7535e199c0917aa5d59189dd3bddd2448d2cda1680f12a7927efe"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/social",
+            "identity_key": "instinctual_subtype:type-5/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-5/social",
+            "path": "/zh/personality/enneagram/type-5/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "302408ec9619aed4b9e2900bac189b060d78f53706429fd2a6ff9c3dd124478a"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/one-to-one",
+            "identity_key": "instinctual_subtype:type-6/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-6/one-to-one",
+            "path": "/zh/personality/enneagram/type-6/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "c9fdbf5a2e132611fb05374c6d4d7881700fd92c221bbae53847a7e0feb77c6e"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/self-preservation",
+            "identity_key": "instinctual_subtype:type-6/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-6/self-preservation",
+            "path": "/zh/personality/enneagram/type-6/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "d33bd2658f42abe2a044ee84702092c9efa44f6e65c8d6b83f7b4937feb2d856"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/social",
+            "identity_key": "instinctual_subtype:type-6/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-6/social",
+            "path": "/zh/personality/enneagram/type-6/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "13efa7d4eb197dd149727c880295d5d9913fa8f932cbc40182d17d241eaa3aa1"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/one-to-one",
+            "identity_key": "instinctual_subtype:type-7/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-7/one-to-one",
+            "path": "/zh/personality/enneagram/type-7/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "7a6223dd3dcfae82d078f3c5616541da6c6bb8934dfab7d152d81421aa3152d8"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/self-preservation",
+            "identity_key": "instinctual_subtype:type-7/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-7/self-preservation",
+            "path": "/zh/personality/enneagram/type-7/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "c047cb711bd996b9ee2a657e9e0442c594793f414c9f29c28a91c6c929cfd5c1"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/social",
+            "identity_key": "instinctual_subtype:type-7/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-7/social",
+            "path": "/zh/personality/enneagram/type-7/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "e339d68522c26fbf7e54cf4070641df8cc01f92de0ef326f1c5b6b742c33353b"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/one-to-one",
+            "identity_key": "instinctual_subtype:type-8/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-8/one-to-one",
+            "path": "/zh/personality/enneagram/type-8/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "e23232291ad1edc39cd40824208415d92234564d5dccb974f6fd4971798a92d4"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/self-preservation",
+            "identity_key": "instinctual_subtype:type-8/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-8/self-preservation",
+            "path": "/zh/personality/enneagram/type-8/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "9c0f9b213f6af9e0e3a5345bb7df577bea59289a0a05146e40ec0a83a49e8073"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/social",
+            "identity_key": "instinctual_subtype:type-8/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-8/social",
+            "path": "/zh/personality/enneagram/type-8/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "97b15f38f8d147d2123125b6b986a4e548c60e47721d0339885388d8af0cbbbd"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/one-to-one",
+            "identity_key": "instinctual_subtype:type-9/one-to-one",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-9/one-to-one",
+            "path": "/zh/personality/enneagram/type-9/instincts/one-to-one",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "1a532e98d51cc7eab67ef20fc3f0b76030eb919c1edb1c63ca8694f69962eafd"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/self-preservation",
+            "identity_key": "instinctual_subtype:type-9/self-preservation",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-9/self-preservation",
+            "path": "/zh/personality/enneagram/type-9/instincts/self-preservation",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "e20dc7568fb2835eee42927afca965b9e83bd6d1b4c7e68e1c8d8e216b3e8274"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/social",
+            "identity_key": "instinctual_subtype:type-9/social",
+            "locale": "zh-CN",
+            "entity_type": "instinctual_subtype",
+            "code": "type-9/social",
+            "path": "/zh/personality/enneagram/type-9/instincts/social",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "e695e519fe9fbf456b02c6098acc77712a462d5c525af30584f4ef11395c8c3e"
+        },
+        {
+            "asset_key": "zh-CN|wing:1w2",
+            "identity_key": "wing:1w2",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "1w2",
+            "path": "/zh/personality/enneagram/wings/1w2",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "bb5bc4a731abc5e0c11218b32209d622160a637d491334b501a630216d89f5e6"
+        },
+        {
+            "asset_key": "zh-CN|wing:1w9",
+            "identity_key": "wing:1w9",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "1w9",
+            "path": "/zh/personality/enneagram/wings/1w9",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "asset_sha256": "5585064c6c3c1c85e5db83cd7adfa277c7c7788a1f7349ff3f52b14496f015f9"
+        },
+        {
+            "asset_key": "zh-CN|wing:2w1",
+            "identity_key": "wing:2w1",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "2w1",
+            "path": "/zh/personality/enneagram/wings/2w1",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "35984c88041309b2851f433173601e2d8f73d448014dcafa4b3d51151e9dd4ba"
+        },
+        {
+            "asset_key": "zh-CN|wing:2w3",
+            "identity_key": "wing:2w3",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "2w3",
+            "path": "/zh/personality/enneagram/wings/2w3",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "asset_sha256": "5d9f79281d68b8249e147490a727c1e941c69214f37fbdc4133f45fddf2f7ae0"
+        },
+        {
+            "asset_key": "zh-CN|wing:3w2",
+            "identity_key": "wing:3w2",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "3w2",
+            "path": "/zh/personality/enneagram/wings/3w2",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "4580d21ff7e99dfbe22841278bf71426b57f002cab0fdb6bc2791eea570b7332"
+        },
+        {
+            "asset_key": "zh-CN|wing:3w4",
+            "identity_key": "wing:3w4",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "3w4",
+            "path": "/zh/personality/enneagram/wings/3w4",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "asset_sha256": "83781bd1ba64990979cce890d9739a1d102a5f3eff13927f98c043b0d18b6c3f"
+        },
+        {
+            "asset_key": "zh-CN|wing:4w3",
+            "identity_key": "wing:4w3",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "4w3",
+            "path": "/zh/personality/enneagram/wings/4w3",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "4b3934152240ec86a832f9299802dfe1c4dbbce241e8330b4adc526fd8e24bce"
+        },
+        {
+            "asset_key": "zh-CN|wing:4w5",
+            "identity_key": "wing:4w5",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "4w5",
+            "path": "/zh/personality/enneagram/wings/4w5",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "asset_sha256": "b3cf720b360b9c7581a8f39a83b1796a078cf8fa2215b9ef8ed05c32c320e3fb"
+        },
+        {
+            "asset_key": "zh-CN|wing:5w4",
+            "identity_key": "wing:5w4",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "5w4",
+            "path": "/zh/personality/enneagram/wings/5w4",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "1347e522857b409cfdf09cb5771527e0df5c4c714250180ec321c4597629e276"
+        },
+        {
+            "asset_key": "zh-CN|wing:5w6",
+            "identity_key": "wing:5w6",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "5w6",
+            "path": "/zh/personality/enneagram/wings/5w6",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "asset_sha256": "1a899b06966ddaaf33e7810688cb0e186b82593ed7ef7f1111065a421815e828"
+        },
+        {
+            "asset_key": "zh-CN|wing:6w5",
+            "identity_key": "wing:6w5",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "6w5",
+            "path": "/zh/personality/enneagram/wings/6w5",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "a3f04c9fd18a3f6b2876d839110a842dff6b451136cf46142622c0afcbb2ce4e"
+        },
+        {
+            "asset_key": "zh-CN|wing:6w7",
+            "identity_key": "wing:6w7",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "6w7",
+            "path": "/zh/personality/enneagram/wings/6w7",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "asset_sha256": "9698864bb8a0a603ab21f01544219bc4609af0d80fa6e2131f9ab95ddabdcee1"
+        },
+        {
+            "asset_key": "zh-CN|wing:7w6",
+            "identity_key": "wing:7w6",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "7w6",
+            "path": "/zh/personality/enneagram/wings/7w6",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "d9b767a224b46c00810df3265b5d5f7d3ed2991eb1aa1fc2bd663584bae1d042"
+        },
+        {
+            "asset_key": "zh-CN|wing:7w8",
+            "identity_key": "wing:7w8",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "7w8",
+            "path": "/zh/personality/enneagram/wings/7w8",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "asset_sha256": "dbf70da9f929d26949fdcde8cd81eebfeae9789777809325c22646caf32ff96a"
+        },
+        {
+            "asset_key": "zh-CN|wing:8w7",
+            "identity_key": "wing:8w7",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "8w7",
+            "path": "/zh/personality/enneagram/wings/8w7",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "1b0cb25f9f1a69cbc7bd5af1bf417fa905673c8f67d1cf945650447f202ebdba"
+        },
+        {
+            "asset_key": "zh-CN|wing:8w9",
+            "identity_key": "wing:8w9",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "8w9",
+            "path": "/zh/personality/enneagram/wings/8w9",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "asset_sha256": "41bc9d246ca225970c9906e6a94f2953465181924c2efa1c2cabfb9883b9c542"
+        },
+        {
+            "asset_key": "zh-CN|wing:9w1",
+            "identity_key": "wing:9w1",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "9w1",
+            "path": "/zh/personality/enneagram/wings/9w1",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "eecd2ec508319f60555b5a7583042eafc55a37169bc25c5d33f60074f41e1063"
+        },
+        {
+            "asset_key": "zh-CN|wing:9w8",
+            "identity_key": "wing:9w8",
+            "locale": "zh-CN",
+            "entity_type": "wing",
+            "code": "9w8",
+            "path": "/zh/personality/enneagram/wings/9w8",
+            "source_path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "asset_sha256": "1b32fa600e000abe86399a5c3ff68f4ca2ac55265f33539e4ab9c1df695d1a1a"
+        }
+    ],
+    "pre_write_public_fingerprints": [
+        {
+            "asset_key": "en|center:gut",
+            "path": "/en/personality/enneagram/centers/gut",
+            "pre_write_public_sha256": "5ffc7f2f427e0acde3ccc8ae72746a04870481c175d3cb6b9e191abe5d6813b3"
+        },
+        {
+            "asset_key": "en|center:head",
+            "path": "/en/personality/enneagram/centers/head",
+            "pre_write_public_sha256": "3b3a8680f56dcd0ae644121c42276aa53aee21aecdb5c9157305c646db8ef6be"
+        },
+        {
+            "asset_key": "en|center:heart",
+            "path": "/en/personality/enneagram/centers/heart",
+            "pre_write_public_sha256": "24b793ea00409c591d66d99e3b5d82d351022737b96c6293c794c73e1d23ad94"
+        },
+        {
+            "asset_key": "en|core_type:type-1",
+            "path": "/en/personality/enneagram/type-1",
+            "pre_write_public_sha256": "7d8f1051cc32a8e1f701ab96de09fcb798bf272532f09619620d5e0e5b8377bb"
+        },
+        {
+            "asset_key": "en|core_type:type-2",
+            "path": "/en/personality/enneagram/type-2",
+            "pre_write_public_sha256": "e1f146a86b2e56cbd7aeb4226416f430e8d197e1d8057b23f6408581392fe3b1"
+        },
+        {
+            "asset_key": "en|core_type:type-3",
+            "path": "/en/personality/enneagram/type-3",
+            "pre_write_public_sha256": "bb4613f5a02a13754f4078c78bf21b0a52e145377d06150f0258f16bc1541880"
+        },
+        {
+            "asset_key": "en|core_type:type-4",
+            "path": "/en/personality/enneagram/type-4",
+            "pre_write_public_sha256": "a4034e96e58d2d1663e5b65e9cf0df42ed39c6918d4e7951ccec23afb7ec9a41"
+        },
+        {
+            "asset_key": "en|core_type:type-5",
+            "path": "/en/personality/enneagram/type-5",
+            "pre_write_public_sha256": "66e19e1e74a66ec400c5de024b037a5c7fec42d59d3ead8fa1ccf8e74a9c4ee1"
+        },
+        {
+            "asset_key": "en|core_type:type-6",
+            "path": "/en/personality/enneagram/type-6",
+            "pre_write_public_sha256": "df9145e8d65fb7d45c31d6f8d502ec66ece76d31320a468558ea5b9c2e20a70c"
+        },
+        {
+            "asset_key": "en|core_type:type-7",
+            "path": "/en/personality/enneagram/type-7",
+            "pre_write_public_sha256": "3ff17b594d2d5449d16dfd4af72379cc854e6b49747361b05d1e2f0462425059"
+        },
+        {
+            "asset_key": "en|core_type:type-8",
+            "path": "/en/personality/enneagram/type-8",
+            "pre_write_public_sha256": "43a0d91fc241ff99a0856ed8951f18e64411d5c350243e1896f047af1bf9b4e6"
+        },
+        {
+            "asset_key": "en|core_type:type-9",
+            "path": "/en/personality/enneagram/type-9",
+            "pre_write_public_sha256": "83ce2bd3ececaa89bdc31fdcfa9f0694db524c7a88ef02fd76e3fce577db9ac8"
+        },
+        {
+            "asset_key": "en|hub:enneagram",
+            "path": "/en/personality/enneagram",
+            "pre_write_public_sha256": "38258ad04e41019a107edbf130f26a57ff87bd2f8e0b585ab2754bde67a84af0"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/one-to-one",
+            "path": "/en/personality/enneagram/type-1/instincts/one-to-one",
+            "pre_write_public_sha256": "48ccb57629addad7364fed8411c31d52c51a479d00633505af21510d91007cc0"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/self-preservation",
+            "path": "/en/personality/enneagram/type-1/instincts/self-preservation",
+            "pre_write_public_sha256": "0af2835b41ebb84aff17c92e5b4d9b3ead71089a44d3d65fc9ed64bdc6136a63"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/social",
+            "path": "/en/personality/enneagram/type-1/instincts/social",
+            "pre_write_public_sha256": "69bc2b4f974fbb0c5c085af5d1c16446ec7c4198c0afcde373a2e22083c2166b"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/one-to-one",
+            "path": "/en/personality/enneagram/type-2/instincts/one-to-one",
+            "pre_write_public_sha256": "ee87f35fd59b10f83ee3f2b87768d399ef25fe2ebb2f2999b04f408d969ea49f"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/self-preservation",
+            "path": "/en/personality/enneagram/type-2/instincts/self-preservation",
+            "pre_write_public_sha256": "5f0066f25d92c003fd9460a3c60fa3ad6a8a631311e52b14e969753783a712c6"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/social",
+            "path": "/en/personality/enneagram/type-2/instincts/social",
+            "pre_write_public_sha256": "71b2c67476e98fb829a07bf4eedf99266b3ddd5f6edb711061b5c3c8bdb808d7"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/one-to-one",
+            "path": "/en/personality/enneagram/type-3/instincts/one-to-one",
+            "pre_write_public_sha256": "0082f1e4d490d6c23a8f7a36e8991d22ea5b4192a9fe229b2a8c3243dd90f248"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/self-preservation",
+            "path": "/en/personality/enneagram/type-3/instincts/self-preservation",
+            "pre_write_public_sha256": "163285014277b2c6a28cf305fca03d580687a7c9f3eeab898c6ab3337a14136f"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/social",
+            "path": "/en/personality/enneagram/type-3/instincts/social",
+            "pre_write_public_sha256": "6b459aa548f78c2e85730b7e2ed2bb69cbea73a2c0896b4034604d7e76255998"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/one-to-one",
+            "path": "/en/personality/enneagram/type-4/instincts/one-to-one",
+            "pre_write_public_sha256": "28e759cd8042f01dc2c802be3524b72da2f1f4772494d1fdde6354a92d42f1e4"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/self-preservation",
+            "path": "/en/personality/enneagram/type-4/instincts/self-preservation",
+            "pre_write_public_sha256": "d1f457577510dc640565699ae3a3f7131a1ffe1ae338aa7d3339cb1f364ef5be"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/social",
+            "path": "/en/personality/enneagram/type-4/instincts/social",
+            "pre_write_public_sha256": "945a0bb7627d20f8b5e57739dcfd217541b85ad3e3e113ae8599cf098cc60ab5"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/one-to-one",
+            "path": "/en/personality/enneagram/type-5/instincts/one-to-one",
+            "pre_write_public_sha256": "7469a7aee9b9841f3096c17e10d4057cd25b67ac97118a3d87be65b11f9a4fa4"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/self-preservation",
+            "path": "/en/personality/enneagram/type-5/instincts/self-preservation",
+            "pre_write_public_sha256": "6fe67aca289e5b71b533a8ceac120d2a9569a718c31660033a230e6ba5252987"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/social",
+            "path": "/en/personality/enneagram/type-5/instincts/social",
+            "pre_write_public_sha256": "e0e2b3d9fc07387f71aef40df86918ec237b9ce8446bd4a37ef1652839fb4e1c"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/one-to-one",
+            "path": "/en/personality/enneagram/type-6/instincts/one-to-one",
+            "pre_write_public_sha256": "64cec0e6e251e7868c2ea83852532fba752df04600a2a6ab66bc0c32953b50e3"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/self-preservation",
+            "path": "/en/personality/enneagram/type-6/instincts/self-preservation",
+            "pre_write_public_sha256": "cce7e7e35fdaac274f30e84c909c14b674e31368c85453253bf88478329ba36f"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/social",
+            "path": "/en/personality/enneagram/type-6/instincts/social",
+            "pre_write_public_sha256": "df75feb5df753df3add2f20763d1296b314eed68ecd029f5a21111b7c8de98e9"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/one-to-one",
+            "path": "/en/personality/enneagram/type-7/instincts/one-to-one",
+            "pre_write_public_sha256": "e8c7c3f94f2047a8a2088490a317b418c76ffbb7226e82aacd1261648a15fa45"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/self-preservation",
+            "path": "/en/personality/enneagram/type-7/instincts/self-preservation",
+            "pre_write_public_sha256": "a1d77f1bcc47de5b706e61ffa69c1f0db9cd30a29b7a6accfd0cebc65ea4d961"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/social",
+            "path": "/en/personality/enneagram/type-7/instincts/social",
+            "pre_write_public_sha256": "6dbefbec61cff0383a259bf9a4aca92156f5fc5de932ea1757552c7a20c06501"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/one-to-one",
+            "path": "/en/personality/enneagram/type-8/instincts/one-to-one",
+            "pre_write_public_sha256": "547f52fc34c884bce615fd51c068899057e1af136ab31ac03c3b2378bd965626"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/self-preservation",
+            "path": "/en/personality/enneagram/type-8/instincts/self-preservation",
+            "pre_write_public_sha256": "5392475725ce1a1c088e681f0ef0763c381fae73457b5a781d0a9a8cbcddaac9"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/social",
+            "path": "/en/personality/enneagram/type-8/instincts/social",
+            "pre_write_public_sha256": "55250b5fa1dc0e62eca344a3d8605a7d67e7ebbabfcef794a25cb8d450e0e9db"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/one-to-one",
+            "path": "/en/personality/enneagram/type-9/instincts/one-to-one",
+            "pre_write_public_sha256": "7d2e9e9d9a8207735a5c34d1dbf4937175ed12f0ba148858209a1cf5cdd13ce4"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/self-preservation",
+            "path": "/en/personality/enneagram/type-9/instincts/self-preservation",
+            "pre_write_public_sha256": "6b86293094a1f35d16362cacc8429944da086c7097b196c4510f58876b43b11c"
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/social",
+            "path": "/en/personality/enneagram/type-9/instincts/social",
+            "pre_write_public_sha256": "f446e645de0ca3846d3f6f39d6e2f40fd13f62095051f1ef2b249063787e9e90"
+        },
+        {
+            "asset_key": "en|wing:1w2",
+            "path": "/en/personality/enneagram/wings/1w2",
+            "pre_write_public_sha256": "1530efc73e11e3a6f95372f865f304ddede99eb1e5e98216c32b8412794099dc"
+        },
+        {
+            "asset_key": "en|wing:1w9",
+            "path": "/en/personality/enneagram/wings/1w9",
+            "pre_write_public_sha256": "86b69843453df0a41656a6df108bf623e0914c9a5219650afda2bcddc1ed8f0e"
+        },
+        {
+            "asset_key": "en|wing:2w1",
+            "path": "/en/personality/enneagram/wings/2w1",
+            "pre_write_public_sha256": "cb9e5de67a18688dd9e22326e05d8d8beaff0864fdf0a6a9f18a961279b676e0"
+        },
+        {
+            "asset_key": "en|wing:2w3",
+            "path": "/en/personality/enneagram/wings/2w3",
+            "pre_write_public_sha256": "36245ec04189993520acb5a6cb2f1bf2f7d98ac5c283a8d018d08df74d373b65"
+        },
+        {
+            "asset_key": "en|wing:3w2",
+            "path": "/en/personality/enneagram/wings/3w2",
+            "pre_write_public_sha256": "3a236e965dd8556d07492ceafd31c6e6952cbe841382b20db37e9447c1486129"
+        },
+        {
+            "asset_key": "en|wing:3w4",
+            "path": "/en/personality/enneagram/wings/3w4",
+            "pre_write_public_sha256": "a0d0cb9af3cd704b406e3f48225f57ced1c91cd5e96f723a0737778a7d496ca0"
+        },
+        {
+            "asset_key": "en|wing:4w3",
+            "path": "/en/personality/enneagram/wings/4w3",
+            "pre_write_public_sha256": "ee1e41ea0f3d30215535a875e5da8bfbd07a1db128d8be32fdbcf3b0043a42a7"
+        },
+        {
+            "asset_key": "en|wing:4w5",
+            "path": "/en/personality/enneagram/wings/4w5",
+            "pre_write_public_sha256": "3f87104777ff3da856fbc842e791037049c0c884740455e53e28154e62bb1403"
+        },
+        {
+            "asset_key": "en|wing:5w4",
+            "path": "/en/personality/enneagram/wings/5w4",
+            "pre_write_public_sha256": "f7a905710db4f3e6960aba5fdf942fe761d85ddcdada9337a81d15517e7b1423"
+        },
+        {
+            "asset_key": "en|wing:5w6",
+            "path": "/en/personality/enneagram/wings/5w6",
+            "pre_write_public_sha256": "bcc10064661f0327c0424324d15e9674eafff02c396f9859d13abef0f3938379"
+        },
+        {
+            "asset_key": "en|wing:6w5",
+            "path": "/en/personality/enneagram/wings/6w5",
+            "pre_write_public_sha256": "0c6da2f09cd9f54ffa0b72e08c97add535806ddd84d9dd967d53fec94a7c99ce"
+        },
+        {
+            "asset_key": "en|wing:6w7",
+            "path": "/en/personality/enneagram/wings/6w7",
+            "pre_write_public_sha256": "b5351a3b12e1f65b382d28eaeff7ba2597058cf2c14a67210854af7510a74fc2"
+        },
+        {
+            "asset_key": "en|wing:7w6",
+            "path": "/en/personality/enneagram/wings/7w6",
+            "pre_write_public_sha256": "5280fa056bc72714a4869846ef14592cbfde71324720c09cb110bdadf089a084"
+        },
+        {
+            "asset_key": "en|wing:7w8",
+            "path": "/en/personality/enneagram/wings/7w8",
+            "pre_write_public_sha256": "ede4000a76e474b1ea9577d15cd5431278008461b14b63b7042ddaf312542e96"
+        },
+        {
+            "asset_key": "en|wing:8w7",
+            "path": "/en/personality/enneagram/wings/8w7",
+            "pre_write_public_sha256": "927775f28bd20f9a6f706f6e089afb68dedbcbf6103d88e099d6596a72dafabb"
+        },
+        {
+            "asset_key": "en|wing:8w9",
+            "path": "/en/personality/enneagram/wings/8w9",
+            "pre_write_public_sha256": "69069c28aac0630990964e8e483751fc30608ebb98e4115c67ed43cb46004551"
+        },
+        {
+            "asset_key": "en|wing:9w1",
+            "path": "/en/personality/enneagram/wings/9w1",
+            "pre_write_public_sha256": "a32509372809136ca3d2b90cdbb5d21c84ae4b41062b166eedaa0843abf05150"
+        },
+        {
+            "asset_key": "en|wing:9w8",
+            "path": "/en/personality/enneagram/wings/9w8",
+            "pre_write_public_sha256": "d58e22351647317a013d8ee171d131c3ac4680bd99f5fdfb82cb84f506e74b4a"
+        },
+        {
+            "asset_key": "zh-CN|center:gut",
+            "path": "/zh/personality/enneagram/centers/gut",
+            "pre_write_public_sha256": "4b12bcc2757c1124b46799b3fa72e5ea8f184b60c21356a3a48a6d00e7688e3f"
+        },
+        {
+            "asset_key": "zh-CN|center:head",
+            "path": "/zh/personality/enneagram/centers/head",
+            "pre_write_public_sha256": "847f3e481126441f466262f2611857727fc4bdc6b583a759481d271cdb71ed8e"
+        },
+        {
+            "asset_key": "zh-CN|center:heart",
+            "path": "/zh/personality/enneagram/centers/heart",
+            "pre_write_public_sha256": "f4b0e57bdcc0775908631015d047ac25758f6eda903794bf9285d70305db0433"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-1",
+            "path": "/zh/personality/enneagram/type-1",
+            "pre_write_public_sha256": "283276979b1a6e985c8c640eb306f9b48db44ada6470aee9323f358b36e3b3aa"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-2",
+            "path": "/zh/personality/enneagram/type-2",
+            "pre_write_public_sha256": "215bd3941cd1d5cae8f1b230a8cb82202bf7e7892d9187b96760c672921827ea"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-3",
+            "path": "/zh/personality/enneagram/type-3",
+            "pre_write_public_sha256": "e8d621847ebb3ae29ad3f6f8b89d677fc806b49c422ad13f5580b31b9cb6c936"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-4",
+            "path": "/zh/personality/enneagram/type-4",
+            "pre_write_public_sha256": "ea7df606d47ac19fd3ba2abe160de53941696a55e033f169d654d37a5a226fbd"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-5",
+            "path": "/zh/personality/enneagram/type-5",
+            "pre_write_public_sha256": "d38ca41ef85e47a835ac310eae07ae8137498ac3ad6c99b13385bb6cfaa3018c"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-6",
+            "path": "/zh/personality/enneagram/type-6",
+            "pre_write_public_sha256": "dcf849f036c3c78cedea5e83e0cc3f7c07a2fd24d608d2e03c9b5dd2699bea11"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-7",
+            "path": "/zh/personality/enneagram/type-7",
+            "pre_write_public_sha256": "67587035c2a5406c786409cdf9d3050e94807a917415158d99920d5392059364"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-8",
+            "path": "/zh/personality/enneagram/type-8",
+            "pre_write_public_sha256": "a0f12cdffefaba116532023a56df829703dcd78531ec363a7d92d4f362f46b87"
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-9",
+            "path": "/zh/personality/enneagram/type-9",
+            "pre_write_public_sha256": "1cc1e1f318620f81eabdf5241a748ddb6300fdeec2648c05a12674398cf48477"
+        },
+        {
+            "asset_key": "zh-CN|hub:enneagram",
+            "path": "/zh/personality/enneagram",
+            "pre_write_public_sha256": "106e9ee94a53e04e9999c8febcd2f6d05eec4094de8b9d4fa6e6ed07416a6fb4"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/one-to-one",
+            "path": "/zh/personality/enneagram/type-1/instincts/one-to-one",
+            "pre_write_public_sha256": "5675959cd146363158e5051d83d16033528077d9814f6042fb69819b3a1a8091"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/self-preservation",
+            "path": "/zh/personality/enneagram/type-1/instincts/self-preservation",
+            "pre_write_public_sha256": "b5a5704f65a19a68c015f3dc7846d64c800c39d76c97898005043e47a8e38e74"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/social",
+            "path": "/zh/personality/enneagram/type-1/instincts/social",
+            "pre_write_public_sha256": "1acca2ce7b89eab85f14058bc7f9b06e713422a5a1f23c8825d641ab8c3e80bd"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/one-to-one",
+            "path": "/zh/personality/enneagram/type-2/instincts/one-to-one",
+            "pre_write_public_sha256": "9caba943d989dced02b7c6a807d2959c00bde0a61347cb882a690da739bc2f03"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/self-preservation",
+            "path": "/zh/personality/enneagram/type-2/instincts/self-preservation",
+            "pre_write_public_sha256": "40364870d1ccee9935f2cbc912f341bb4f6942cddf2cb0c5236fd183b8948e12"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/social",
+            "path": "/zh/personality/enneagram/type-2/instincts/social",
+            "pre_write_public_sha256": "2891a4a580198a1f8295c7164d70c2c5cf3be4be029fc20860efd77b18c1497f"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/one-to-one",
+            "path": "/zh/personality/enneagram/type-3/instincts/one-to-one",
+            "pre_write_public_sha256": "b2911571a3fc1fd01a57ccea57b5d56ae5d7dedca9dedc003cec3c356fa57ced"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/self-preservation",
+            "path": "/zh/personality/enneagram/type-3/instincts/self-preservation",
+            "pre_write_public_sha256": "dbf7b74898fd8d511cf0828ca6e3eb12f1bbe639e593d77fa754dfd50cf18b8e"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/social",
+            "path": "/zh/personality/enneagram/type-3/instincts/social",
+            "pre_write_public_sha256": "3fbf892adfac2cfed77132ca6022aa2af4a1637cc6ffddb67005a62dd51d6cfc"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/one-to-one",
+            "path": "/zh/personality/enneagram/type-4/instincts/one-to-one",
+            "pre_write_public_sha256": "f36064fba79196f1fa1fba403b5014bab176fd3f3f908f8803cb2c236f0f500a"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/self-preservation",
+            "path": "/zh/personality/enneagram/type-4/instincts/self-preservation",
+            "pre_write_public_sha256": "38b40d74a13e9bd08c53fe0b0884061f797e9aea8ddf024a66c345b2fb74e79f"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/social",
+            "path": "/zh/personality/enneagram/type-4/instincts/social",
+            "pre_write_public_sha256": "95b8a0b3f40d9d209289347f14e27a347c7b57951a13651e8b10cfd72c5b1a51"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/one-to-one",
+            "path": "/zh/personality/enneagram/type-5/instincts/one-to-one",
+            "pre_write_public_sha256": "19624c6dce7bbf1f22ab98a87ea3761972d39e3e7974669c00752070a4bb24b9"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/self-preservation",
+            "path": "/zh/personality/enneagram/type-5/instincts/self-preservation",
+            "pre_write_public_sha256": "a474a5cedb9baa7ea49bda1786fc41404f34cc09dfafde7c2bf85eb1a84c7c08"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/social",
+            "path": "/zh/personality/enneagram/type-5/instincts/social",
+            "pre_write_public_sha256": "95700df1ebf98ad200f4fa173717326cdb50e8db426f5fa4f41f3796dd283a97"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/one-to-one",
+            "path": "/zh/personality/enneagram/type-6/instincts/one-to-one",
+            "pre_write_public_sha256": "cce43ff9e01ddf376da8730938385ebc08348976e5aa2123fd7fc7f09b2bc0a2"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/self-preservation",
+            "path": "/zh/personality/enneagram/type-6/instincts/self-preservation",
+            "pre_write_public_sha256": "8f01a026ec40ec11c4b62460c213e572e72672a8bf9ab0a34d742aa813863180"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/social",
+            "path": "/zh/personality/enneagram/type-6/instincts/social",
+            "pre_write_public_sha256": "d3942df25cda832b94279f0789f9f8d8fe6a5c288079c18c711be701d6938067"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/one-to-one",
+            "path": "/zh/personality/enneagram/type-7/instincts/one-to-one",
+            "pre_write_public_sha256": "4ef47263707304432d603326bd31615bb3025423f7ea174e1459c1e806cb75dc"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/self-preservation",
+            "path": "/zh/personality/enneagram/type-7/instincts/self-preservation",
+            "pre_write_public_sha256": "9b282494b53fe212ef231b4af6860d9c8be921f92b94f96c71dd0ede292d445f"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/social",
+            "path": "/zh/personality/enneagram/type-7/instincts/social",
+            "pre_write_public_sha256": "2bb97aabd64655e3a8fe4afd3ea32c29ffd9f70ab3a3450fdd29c858919858d8"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/one-to-one",
+            "path": "/zh/personality/enneagram/type-8/instincts/one-to-one",
+            "pre_write_public_sha256": "778850861639b98c5167a501973e896124e942537fb3ad11ebc85377c726b391"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/self-preservation",
+            "path": "/zh/personality/enneagram/type-8/instincts/self-preservation",
+            "pre_write_public_sha256": "5a03729ad25a1b76fa572d5edfe0b05733ccb8d5dbeb8e7450982036c6c8d007"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/social",
+            "path": "/zh/personality/enneagram/type-8/instincts/social",
+            "pre_write_public_sha256": "ae6ca6dc519e5d658754e41d26210f01ec632a670b8622a1b6eae72693b61d9a"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/one-to-one",
+            "path": "/zh/personality/enneagram/type-9/instincts/one-to-one",
+            "pre_write_public_sha256": "bed84ceca7c93c8c32f377d4f919c8cac75363eb2ef6c62c8cf32d587f884131"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/self-preservation",
+            "path": "/zh/personality/enneagram/type-9/instincts/self-preservation",
+            "pre_write_public_sha256": "bbdd5d49c2979831a5204aa3c87df5ad01444655bc6702f680e0631c4289ad1c"
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/social",
+            "path": "/zh/personality/enneagram/type-9/instincts/social",
+            "pre_write_public_sha256": "bf8d4fd35a12ed17719413dd89f6c93f8b2ae478064940be549abf9c490c1776"
+        },
+        {
+            "asset_key": "zh-CN|wing:1w2",
+            "path": "/zh/personality/enneagram/wings/1w2",
+            "pre_write_public_sha256": "b212c0922eec6eb70c8c471f85e8531f4f3ee2e1d156e5e11808e38e8dc89049"
+        },
+        {
+            "asset_key": "zh-CN|wing:1w9",
+            "path": "/zh/personality/enneagram/wings/1w9",
+            "pre_write_public_sha256": "2069a43af8ebe09d4402219fa4c716a5a89eb4d7016c605c6c27ba094d5c706f"
+        },
+        {
+            "asset_key": "zh-CN|wing:2w1",
+            "path": "/zh/personality/enneagram/wings/2w1",
+            "pre_write_public_sha256": "5420c6034360ed53f688304f6ce34b4ef493e02e98da6b80a54e0ebca8d4d7ca"
+        },
+        {
+            "asset_key": "zh-CN|wing:2w3",
+            "path": "/zh/personality/enneagram/wings/2w3",
+            "pre_write_public_sha256": "b29524c1fed61e2df011a7ac6d8e19546cf2f1f6919ad2ffa4e33e3f966418ac"
+        },
+        {
+            "asset_key": "zh-CN|wing:3w2",
+            "path": "/zh/personality/enneagram/wings/3w2",
+            "pre_write_public_sha256": "6cfe2bd351bb17a3d5aaf17cc6d98b63a20ed7a55e3fe757d5f3b041d25ed76b"
+        },
+        {
+            "asset_key": "zh-CN|wing:3w4",
+            "path": "/zh/personality/enneagram/wings/3w4",
+            "pre_write_public_sha256": "262fbe2db75f9d618a1319e18b7a0c0cbdbf3aaf38f160a5b2c8f56d393e4c11"
+        },
+        {
+            "asset_key": "zh-CN|wing:4w3",
+            "path": "/zh/personality/enneagram/wings/4w3",
+            "pre_write_public_sha256": "6cc220b2f86b00049a81fa238a13b8f43599489fac4da8253bed03ba819b0402"
+        },
+        {
+            "asset_key": "zh-CN|wing:4w5",
+            "path": "/zh/personality/enneagram/wings/4w5",
+            "pre_write_public_sha256": "2397b3cba23035507b1cb4167ce2d1f33246167848a0a4167e1b253d8cc8e205"
+        },
+        {
+            "asset_key": "zh-CN|wing:5w4",
+            "path": "/zh/personality/enneagram/wings/5w4",
+            "pre_write_public_sha256": "6524a6c66fb3793d38aed6eedd650de085fca81478e609611337cc0ca6e5aba7"
+        },
+        {
+            "asset_key": "zh-CN|wing:5w6",
+            "path": "/zh/personality/enneagram/wings/5w6",
+            "pre_write_public_sha256": "067cd7fc9294d867b52495426bec00eff1d12fb74f6e8db034168d4881cae0b2"
+        },
+        {
+            "asset_key": "zh-CN|wing:6w5",
+            "path": "/zh/personality/enneagram/wings/6w5",
+            "pre_write_public_sha256": "3c57b533066eba4d394badd4594843a384bd2e8797027f9ea82d305ba636b868"
+        },
+        {
+            "asset_key": "zh-CN|wing:6w7",
+            "path": "/zh/personality/enneagram/wings/6w7",
+            "pre_write_public_sha256": "3b6be102eb8af17fd596d33eb08f5e594c42b9761568970cecd68ca2b1eca5bc"
+        },
+        {
+            "asset_key": "zh-CN|wing:7w6",
+            "path": "/zh/personality/enneagram/wings/7w6",
+            "pre_write_public_sha256": "147b6cfeed533838cb270244d3bb55bb2f3a8528dac79f3af0adbae091ed5818"
+        },
+        {
+            "asset_key": "zh-CN|wing:7w8",
+            "path": "/zh/personality/enneagram/wings/7w8",
+            "pre_write_public_sha256": "7408be5039ea42f317a649888e5bb2450df55650d2952085857cb05477eb466a"
+        },
+        {
+            "asset_key": "zh-CN|wing:8w7",
+            "path": "/zh/personality/enneagram/wings/8w7",
+            "pre_write_public_sha256": "0e02ae505fb85a8b545626776920785aff2b1868a4f7aba2330e7676a8a41d72"
+        },
+        {
+            "asset_key": "zh-CN|wing:8w9",
+            "path": "/zh/personality/enneagram/wings/8w9",
+            "pre_write_public_sha256": "f435063d237f38f84494939735cf3f08ee67e29d03ff80cc6d2aa8f684ad51f7"
+        },
+        {
+            "asset_key": "zh-CN|wing:9w1",
+            "path": "/zh/personality/enneagram/wings/9w1",
+            "pre_write_public_sha256": "db1e78749b955bba7c18ab187b5921613da43da5dfd2fbbe62304faa71d09e22"
+        },
+        {
+            "asset_key": "zh-CN|wing:9w8",
+            "path": "/zh/personality/enneagram/wings/9w8",
+            "pre_write_public_sha256": "7af104efbb4e17217f5b5a9a1a82f854a6f6275c5454c5e6e128f8e0355342c6"
+        }
+    ],
+    "manual_review_records": [],
+    "missing_human_reviews": [
+        {
+            "asset_key": "en|center:gut",
+            "path": "/en/personality/enneagram/centers/gut",
+            "asset_sha256": "fceffd48a4077dcbbd574e0f29161c964a66130960c3155712396b073fd5fdae",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|center:head",
+            "path": "/en/personality/enneagram/centers/head",
+            "asset_sha256": "b4dc993d58abf460a4f3aa77c0a3924cd8ef0e7f43d5b2e3df22d30c377deca1",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|center:heart",
+            "path": "/en/personality/enneagram/centers/heart",
+            "asset_sha256": "73a500009574139e6aabb09fb600853e8fa732340995c062eedd5caa686e4bd0",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-1",
+            "path": "/en/personality/enneagram/type-1",
+            "asset_sha256": "0a1117425efe7ae94c36ab2ca81a160d754a7d1b095012b6a16361e02e1162e1",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-2",
+            "path": "/en/personality/enneagram/type-2",
+            "asset_sha256": "471d1f736f7f6cc39244f654e8c707e71f2e026bd12f2195900c7aba91063e8f",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-3",
+            "path": "/en/personality/enneagram/type-3",
+            "asset_sha256": "7b3b15aa6de600f6794d69e9989edc06604f5812abb511c8246061ac58e5fa8d",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-4",
+            "path": "/en/personality/enneagram/type-4",
+            "asset_sha256": "3a39fcac2cf2487a8ef6fcc41e8d74cf77728539732631b853a2d7ee371ffc8f",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-5",
+            "path": "/en/personality/enneagram/type-5",
+            "asset_sha256": "22222cd12cf832456e6336c41800de70c8d3458f8adad3dbaf59f36ca18595e0",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-6",
+            "path": "/en/personality/enneagram/type-6",
+            "asset_sha256": "e9b6ab25780022b4a5638784374e79d71f1f82f3d7f5e3f762313bebee67abfb",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-7",
+            "path": "/en/personality/enneagram/type-7",
+            "asset_sha256": "47455832e72ff49418f9229300756337b95ce72959885596a1468968994cc5b4",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-8",
+            "path": "/en/personality/enneagram/type-8",
+            "asset_sha256": "58f58838915538a83f874289339db5efb0e6e2243a67d268c44e3f5ba60810f2",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|core_type:type-9",
+            "path": "/en/personality/enneagram/type-9",
+            "asset_sha256": "d4ee4d233e05220154208cb1b414490c756d1dd82796b169a949461ae8d35591",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|hub:enneagram",
+            "path": "/en/personality/enneagram",
+            "asset_sha256": "edc9d1be84727dedc8450b6ec17c9080b9daf5988d3667d8cc2d745640c87e79",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/one-to-one",
+            "path": "/en/personality/enneagram/type-1/instincts/one-to-one",
+            "asset_sha256": "478c6d960bd7a74940cdea3e68f99a5eeef9770b2c5e9ea691ec90166304512a",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/self-preservation",
+            "path": "/en/personality/enneagram/type-1/instincts/self-preservation",
+            "asset_sha256": "373ab5415bf36cac0ecc3ecb7bef84470ac989b0f489e521184bacd6a8baa3be",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-1/social",
+            "path": "/en/personality/enneagram/type-1/instincts/social",
+            "asset_sha256": "305263b1ddf1cf9b3e1d996c48948ee41834ee1794a02c042b3061ba12fa3b5c",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/one-to-one",
+            "path": "/en/personality/enneagram/type-2/instincts/one-to-one",
+            "asset_sha256": "20d98f83a260801661f36548ad57152bb5768100042f26267f2b2d1c882b0412",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/self-preservation",
+            "path": "/en/personality/enneagram/type-2/instincts/self-preservation",
+            "asset_sha256": "2cea1a8c0428ddf3311b617eed882534e8c0479ab2e3172bbb5ead5494f4626e",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-2/social",
+            "path": "/en/personality/enneagram/type-2/instincts/social",
+            "asset_sha256": "54302b6212671590b3f9822f01c599bea3f2a77ed41a2ba59e08fc3c55d238af",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/one-to-one",
+            "path": "/en/personality/enneagram/type-3/instincts/one-to-one",
+            "asset_sha256": "815dc86ce14bd04043b4b8cc5517b29d69c373abc481e6ab28199b7434535bfb",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/self-preservation",
+            "path": "/en/personality/enneagram/type-3/instincts/self-preservation",
+            "asset_sha256": "edf16aaa9ad7ba366305b254a9ab187aa98c7e4d34d962e0b02b196ac7878c4a",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-3/social",
+            "path": "/en/personality/enneagram/type-3/instincts/social",
+            "asset_sha256": "91b0afe7ea941a93c46f12399d7c7fdf0300ab23c85b1590658a4585dc6bca28",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/one-to-one",
+            "path": "/en/personality/enneagram/type-4/instincts/one-to-one",
+            "asset_sha256": "1dbfc6fb3eb73b6db69c98365aaf7dabc52d79dbb6d1ab5dd70aeba6b3baf142",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/self-preservation",
+            "path": "/en/personality/enneagram/type-4/instincts/self-preservation",
+            "asset_sha256": "9267f7152d7363c6d516645bf5a6bb71303c05e794b06d89e7bbe75e0fc6691d",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-4/social",
+            "path": "/en/personality/enneagram/type-4/instincts/social",
+            "asset_sha256": "3ebbe2f7db210f6f4067a909ea40b7fad7e82bd67c236317f15cc621ca101e1d",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/one-to-one",
+            "path": "/en/personality/enneagram/type-5/instincts/one-to-one",
+            "asset_sha256": "6104956a6179702e3952e03ffa6f3b115c8c54db7c08ef4f5ab33d5ed5c8246f",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/self-preservation",
+            "path": "/en/personality/enneagram/type-5/instincts/self-preservation",
+            "asset_sha256": "e029d96670cb99528b986c0bc66dcb06060c30d97f9836fa835253fbc14d7f50",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-5/social",
+            "path": "/en/personality/enneagram/type-5/instincts/social",
+            "asset_sha256": "15bf5b9ad13396f5e48c31f9e32ecad286b9dd61908d123ea3c0a42ee62f791d",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/one-to-one",
+            "path": "/en/personality/enneagram/type-6/instincts/one-to-one",
+            "asset_sha256": "d7f28ffc5b489f88662eee25ca59907095ee67c5b029f97b2bd31b41e824d28a",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/self-preservation",
+            "path": "/en/personality/enneagram/type-6/instincts/self-preservation",
+            "asset_sha256": "24b64a7b6647dc83bbc10ed70721f4fe6d980dec00665f449ebc8e5c5a65383d",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-6/social",
+            "path": "/en/personality/enneagram/type-6/instincts/social",
+            "asset_sha256": "2e483b348c4ee4c3e6a77ff53c497a9d4610b11557ddaa404766d84f4dcda6c9",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/one-to-one",
+            "path": "/en/personality/enneagram/type-7/instincts/one-to-one",
+            "asset_sha256": "4c1fc2b62243a78fa2b8f5bce543f8290abd4488dec9ad738620c3b5e64e14a5",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/self-preservation",
+            "path": "/en/personality/enneagram/type-7/instincts/self-preservation",
+            "asset_sha256": "cb1a19d52f459ddcfb841ede9fcd6dda492acedea6bb34e10f9adcc17014ec20",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-7/social",
+            "path": "/en/personality/enneagram/type-7/instincts/social",
+            "asset_sha256": "acc0603b201d8fb43284bfc0c274ba4375beb11ad4f899879ef35a57a214d621",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/one-to-one",
+            "path": "/en/personality/enneagram/type-8/instincts/one-to-one",
+            "asset_sha256": "3a89b39132872ee56d200f94a65fef5adf2651880cf4e3f942d3a4aa963b29f7",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/self-preservation",
+            "path": "/en/personality/enneagram/type-8/instincts/self-preservation",
+            "asset_sha256": "30c721322ced387d789760be0cf8bb0ed65c88ec4e0c4e976dfdeb7aaf341887",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-8/social",
+            "path": "/en/personality/enneagram/type-8/instincts/social",
+            "asset_sha256": "49e9c335101fb552ae711587377dc1934548f373a727912290ba0bd66a44b399",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/one-to-one",
+            "path": "/en/personality/enneagram/type-9/instincts/one-to-one",
+            "asset_sha256": "e77625153f84dbaa851345077278ea678e5b8301305034a14c057a48b5d3b914",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/self-preservation",
+            "path": "/en/personality/enneagram/type-9/instincts/self-preservation",
+            "asset_sha256": "0cc138fb89132aef09bb0e96e12f736966ea21e8466f20580a0cd1a5f0d15652",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|instinctual_subtype:type-9/social",
+            "path": "/en/personality/enneagram/type-9/instincts/social",
+            "asset_sha256": "6346532b09b538f2edee6bdfa632c9f5c07a7b60e4956c710a584fb9c6153ee5",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:1w2",
+            "path": "/en/personality/enneagram/wings/1w2",
+            "asset_sha256": "dfb97d837b6ce187a8a1d2f5b42c3ff6ed856afcfd3b6e2cd1a10098abd92a1c",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:1w9",
+            "path": "/en/personality/enneagram/wings/1w9",
+            "asset_sha256": "c71e67061a1ed5e15392de91b3140e49b66194ddfd4a6eab909989d667c52343",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:2w1",
+            "path": "/en/personality/enneagram/wings/2w1",
+            "asset_sha256": "cc068d74da322b0f4f853081f8a8abd2a9dc0f90ba171804c727ef651e8a9eca",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:2w3",
+            "path": "/en/personality/enneagram/wings/2w3",
+            "asset_sha256": "5730b3538db1fc01d5c9845a98d364619e5f629a6c579063e8d796a7b18807b2",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:3w2",
+            "path": "/en/personality/enneagram/wings/3w2",
+            "asset_sha256": "07dc93e1be586628a7d978805f5fe268b23de9df6828ea9f0a3dd08a35d78495",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:3w4",
+            "path": "/en/personality/enneagram/wings/3w4",
+            "asset_sha256": "e1fde4f38c742da6f8d7720a8b359b7aabdda18dc5b67a2f3713a7a8a5985679",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:4w3",
+            "path": "/en/personality/enneagram/wings/4w3",
+            "asset_sha256": "abb947edac69148bbfbe28daca9b9a92a4b990be8292717a6cd8ac06ac300c54",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:4w5",
+            "path": "/en/personality/enneagram/wings/4w5",
+            "asset_sha256": "edf265da57d2176108b09360d31882d9786ea3a4c321498d81e39724b2211d83",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:5w4",
+            "path": "/en/personality/enneagram/wings/5w4",
+            "asset_sha256": "15f06c5ad4bdef747b3784452e656f12e3fcd884ed08694c2716385da69a2bf6",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:5w6",
+            "path": "/en/personality/enneagram/wings/5w6",
+            "asset_sha256": "d37b8f45c03c54fbe043aa61951f5cea26ed8144aa707173e5bf942334381d2d",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:6w5",
+            "path": "/en/personality/enneagram/wings/6w5",
+            "asset_sha256": "aac57f4dfd998d03778142ed06d093cb1dec9d438b27714d2447529d11b7a537",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:6w7",
+            "path": "/en/personality/enneagram/wings/6w7",
+            "asset_sha256": "64813b5d219ac8e5124b6e7f8d5c1314eb23b789fd056217ef1fdb9ba20df568",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:7w6",
+            "path": "/en/personality/enneagram/wings/7w6",
+            "asset_sha256": "e27768d0da2cc06db8c92ef94eaf93620dd462b51c1283e2686f6655bb0ea912",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:7w8",
+            "path": "/en/personality/enneagram/wings/7w8",
+            "asset_sha256": "e505fe94a3667841079aa653e77b33bd41097d59efae6b2ecb97b6c609cf64d8",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:8w7",
+            "path": "/en/personality/enneagram/wings/8w7",
+            "asset_sha256": "cd6b5c85e664d76051489c773c4d4392a32a516f7b77c4952fcacf3c1be2ba9c",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:8w9",
+            "path": "/en/personality/enneagram/wings/8w9",
+            "asset_sha256": "bebdffc44395193eb1bf73c5553d883b193b30c84bfd1c5c51f6515bd4c24ddd",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:9w1",
+            "path": "/en/personality/enneagram/wings/9w1",
+            "asset_sha256": "2047509d25289f3168230735ff88a0456b378572114968dc3397e69f5611bfcc",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "en|wing:9w8",
+            "path": "/en/personality/enneagram/wings/9w8",
+            "asset_sha256": "b7199293d60cbbf06e4d5606e2ea178a9d8812901b8fea29c72dc5ff627eaf6c",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|center:gut",
+            "path": "/zh/personality/enneagram/centers/gut",
+            "asset_sha256": "e5fa9f5debf7510a6ad45b0af6cd6885b8bd1ffe22f566a5ffee64295a0a0cc4",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|center:head",
+            "path": "/zh/personality/enneagram/centers/head",
+            "asset_sha256": "5a2cfdd2fe98ad217d93db74662279928698c4b608486645952fea8d55fa27cc",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|center:heart",
+            "path": "/zh/personality/enneagram/centers/heart",
+            "asset_sha256": "f5bd57950a9e6ef07efbfc7fafc54535cfb98c46ce24ce4bb103098ba315ae58",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-1",
+            "path": "/zh/personality/enneagram/type-1",
+            "asset_sha256": "849cfe385e1ce12d681967a4b9641f58181fc3f8ee072505726aac0a3450f5b4",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-2",
+            "path": "/zh/personality/enneagram/type-2",
+            "asset_sha256": "f6bdde8b7ca581e3d7b75b31621c17ee2242cfb7ca48bd50f5de6ca6a84db8e3",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-3",
+            "path": "/zh/personality/enneagram/type-3",
+            "asset_sha256": "35cf569d1d770c365462ee50b230983c9c60bb0e19666fde3dc8d57a6246fba4",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-4",
+            "path": "/zh/personality/enneagram/type-4",
+            "asset_sha256": "51573b956a304506876ba1ace449f9e448268b2d307fef0c1c6d99f4f6a8f138",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-5",
+            "path": "/zh/personality/enneagram/type-5",
+            "asset_sha256": "41d6c2e3eb6f09ddddc5d1fdbf71bbab89f128ba64af490ffee492c946b02379",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-6",
+            "path": "/zh/personality/enneagram/type-6",
+            "asset_sha256": "c5cedddf79a5059371c7da05db6c983be2f057794b7711e31b9d093f9985afa9",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-7",
+            "path": "/zh/personality/enneagram/type-7",
+            "asset_sha256": "2b9240cb066e71054b02122e446f959f546c901456484443dc057485a986afdf",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-8",
+            "path": "/zh/personality/enneagram/type-8",
+            "asset_sha256": "bc82b6cd2a6d657f1f4eefcee3a0f436751605f5adf5be323428004b6d2954e3",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|core_type:type-9",
+            "path": "/zh/personality/enneagram/type-9",
+            "asset_sha256": "bd172abe9190dfed237b445f89e066e1b5b63a0f4f8705ccb327be18008aa612",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|hub:enneagram",
+            "path": "/zh/personality/enneagram",
+            "asset_sha256": "d49806d8d46eaa8be28522c28a3d444075fba5b4ea273eca9f2c4cc6d0b46607",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/one-to-one",
+            "path": "/zh/personality/enneagram/type-1/instincts/one-to-one",
+            "asset_sha256": "095a32bcb24a3289e4a4088cf70f58ada733f407e8bcbdfc86459cdaf279f222",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/self-preservation",
+            "path": "/zh/personality/enneagram/type-1/instincts/self-preservation",
+            "asset_sha256": "6d7020b5627e44bd796c4a0661123255a59538ea00f6919740058b44a850cc7a",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-1/social",
+            "path": "/zh/personality/enneagram/type-1/instincts/social",
+            "asset_sha256": "eced870326a81f55b6b4e33632a82301bae883fa97b2a711574ab23364f5259b",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/one-to-one",
+            "path": "/zh/personality/enneagram/type-2/instincts/one-to-one",
+            "asset_sha256": "51008cd4c777ffa03baafd38585efb2f4116258f199519e1e598e67f1463fe24",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/self-preservation",
+            "path": "/zh/personality/enneagram/type-2/instincts/self-preservation",
+            "asset_sha256": "47313db32bda48a7a34a04002840b870ded9b9e3b33697d77b7198b1d68c9d30",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-2/social",
+            "path": "/zh/personality/enneagram/type-2/instincts/social",
+            "asset_sha256": "f6463eb8f499f00e706a7025285675f3dcc81be80a8c0a08f41cd5f9e1784b19",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/one-to-one",
+            "path": "/zh/personality/enneagram/type-3/instincts/one-to-one",
+            "asset_sha256": "56e4ac49baea1430fdfc08369968531b0b2e7292298ab430083f8ac50384e4f9",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/self-preservation",
+            "path": "/zh/personality/enneagram/type-3/instincts/self-preservation",
+            "asset_sha256": "0da75ca3d0d0aee419805fc286f6e7f12300cea4d4323c6c73e743399cdf839d",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-3/social",
+            "path": "/zh/personality/enneagram/type-3/instincts/social",
+            "asset_sha256": "bf0faf03c3dd7dc1b0dd965cd4a44f12189c93daa641812f1e0f1670fecc9ba5",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/one-to-one",
+            "path": "/zh/personality/enneagram/type-4/instincts/one-to-one",
+            "asset_sha256": "5ef041321401b73d69cea79b4fdeb8c4d7fd64690d4ddddfa1a53c71a4990aa8",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/self-preservation",
+            "path": "/zh/personality/enneagram/type-4/instincts/self-preservation",
+            "asset_sha256": "32329c5718a6af1e8f212e8d2842a336b1bc527714535358a5c642690876041c",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-4/social",
+            "path": "/zh/personality/enneagram/type-4/instincts/social",
+            "asset_sha256": "18f82da0257142cb96203aded516c9834de79434ea15bd2b6755bcec51e4468c",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/one-to-one",
+            "path": "/zh/personality/enneagram/type-5/instincts/one-to-one",
+            "asset_sha256": "ee5a73d4d5407071ca6f846176371e6c0e02e0eeb8a9807692f5479c7fc9c46c",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/self-preservation",
+            "path": "/zh/personality/enneagram/type-5/instincts/self-preservation",
+            "asset_sha256": "d051060229e7535e199c0917aa5d59189dd3bddd2448d2cda1680f12a7927efe",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-5/social",
+            "path": "/zh/personality/enneagram/type-5/instincts/social",
+            "asset_sha256": "302408ec9619aed4b9e2900bac189b060d78f53706429fd2a6ff9c3dd124478a",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/one-to-one",
+            "path": "/zh/personality/enneagram/type-6/instincts/one-to-one",
+            "asset_sha256": "c9fdbf5a2e132611fb05374c6d4d7881700fd92c221bbae53847a7e0feb77c6e",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/self-preservation",
+            "path": "/zh/personality/enneagram/type-6/instincts/self-preservation",
+            "asset_sha256": "d33bd2658f42abe2a044ee84702092c9efa44f6e65c8d6b83f7b4937feb2d856",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-6/social",
+            "path": "/zh/personality/enneagram/type-6/instincts/social",
+            "asset_sha256": "13efa7d4eb197dd149727c880295d5d9913fa8f932cbc40182d17d241eaa3aa1",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/one-to-one",
+            "path": "/zh/personality/enneagram/type-7/instincts/one-to-one",
+            "asset_sha256": "7a6223dd3dcfae82d078f3c5616541da6c6bb8934dfab7d152d81421aa3152d8",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/self-preservation",
+            "path": "/zh/personality/enneagram/type-7/instincts/self-preservation",
+            "asset_sha256": "c047cb711bd996b9ee2a657e9e0442c594793f414c9f29c28a91c6c929cfd5c1",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-7/social",
+            "path": "/zh/personality/enneagram/type-7/instincts/social",
+            "asset_sha256": "e339d68522c26fbf7e54cf4070641df8cc01f92de0ef326f1c5b6b742c33353b",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/one-to-one",
+            "path": "/zh/personality/enneagram/type-8/instincts/one-to-one",
+            "asset_sha256": "e23232291ad1edc39cd40824208415d92234564d5dccb974f6fd4971798a92d4",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/self-preservation",
+            "path": "/zh/personality/enneagram/type-8/instincts/self-preservation",
+            "asset_sha256": "9c0f9b213f6af9e0e3a5345bb7df577bea59289a0a05146e40ec0a83a49e8073",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-8/social",
+            "path": "/zh/personality/enneagram/type-8/instincts/social",
+            "asset_sha256": "97b15f38f8d147d2123125b6b986a4e548c60e47721d0339885388d8af0cbbbd",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/one-to-one",
+            "path": "/zh/personality/enneagram/type-9/instincts/one-to-one",
+            "asset_sha256": "1a532e98d51cc7eab67ef20fc3f0b76030eb919c1edb1c63ca8694f69962eafd",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/self-preservation",
+            "path": "/zh/personality/enneagram/type-9/instincts/self-preservation",
+            "asset_sha256": "e20dc7568fb2835eee42927afca965b9e83bd6d1b4c7e68e1c8d8e216b3e8274",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|instinctual_subtype:type-9/social",
+            "path": "/zh/personality/enneagram/type-9/instincts/social",
+            "asset_sha256": "e695e519fe9fbf456b02c6098acc77712a462d5c525af30584f4ef11395c8c3e",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:1w2",
+            "path": "/zh/personality/enneagram/wings/1w2",
+            "asset_sha256": "bb5bc4a731abc5e0c11218b32209d622160a637d491334b501a630216d89f5e6",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:1w9",
+            "path": "/zh/personality/enneagram/wings/1w9",
+            "asset_sha256": "5585064c6c3c1c85e5db83cd7adfa277c7c7788a1f7349ff3f52b14496f015f9",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:2w1",
+            "path": "/zh/personality/enneagram/wings/2w1",
+            "asset_sha256": "35984c88041309b2851f433173601e2d8f73d448014dcafa4b3d51151e9dd4ba",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:2w3",
+            "path": "/zh/personality/enneagram/wings/2w3",
+            "asset_sha256": "5d9f79281d68b8249e147490a727c1e941c69214f37fbdc4133f45fddf2f7ae0",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:3w2",
+            "path": "/zh/personality/enneagram/wings/3w2",
+            "asset_sha256": "4580d21ff7e99dfbe22841278bf71426b57f002cab0fdb6bc2791eea570b7332",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:3w4",
+            "path": "/zh/personality/enneagram/wings/3w4",
+            "asset_sha256": "83781bd1ba64990979cce890d9739a1d102a5f3eff13927f98c043b0d18b6c3f",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:4w3",
+            "path": "/zh/personality/enneagram/wings/4w3",
+            "asset_sha256": "4b3934152240ec86a832f9299802dfe1c4dbbce241e8330b4adc526fd8e24bce",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:4w5",
+            "path": "/zh/personality/enneagram/wings/4w5",
+            "asset_sha256": "b3cf720b360b9c7581a8f39a83b1796a078cf8fa2215b9ef8ed05c32c320e3fb",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:5w4",
+            "path": "/zh/personality/enneagram/wings/5w4",
+            "asset_sha256": "1347e522857b409cfdf09cb5771527e0df5c4c714250180ec321c4597629e276",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:5w6",
+            "path": "/zh/personality/enneagram/wings/5w6",
+            "asset_sha256": "1a899b06966ddaaf33e7810688cb0e186b82593ed7ef7f1111065a421815e828",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:6w5",
+            "path": "/zh/personality/enneagram/wings/6w5",
+            "asset_sha256": "a3f04c9fd18a3f6b2876d839110a842dff6b451136cf46142622c0afcbb2ce4e",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:6w7",
+            "path": "/zh/personality/enneagram/wings/6w7",
+            "asset_sha256": "9698864bb8a0a603ab21f01544219bc4609af0d80fa6e2131f9ab95ddabdcee1",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:7w6",
+            "path": "/zh/personality/enneagram/wings/7w6",
+            "asset_sha256": "d9b767a224b46c00810df3265b5d5f7d3ed2991eb1aa1fc2bd663584bae1d042",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:7w8",
+            "path": "/zh/personality/enneagram/wings/7w8",
+            "asset_sha256": "dbf70da9f929d26949fdcde8cd81eebfeae9789777809325c22646caf32ff96a",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:8w7",
+            "path": "/zh/personality/enneagram/wings/8w7",
+            "asset_sha256": "1b0cb25f9f1a69cbc7bd5af1bf417fa905673c8f67d1cf945650447f202ebdba",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:8w9",
+            "path": "/zh/personality/enneagram/wings/8w9",
+            "asset_sha256": "41bc9d246ca225970c9906e6a94f2953465181924c2efa1c2cabfb9883b9c542",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:9w1",
+            "path": "/zh/personality/enneagram/wings/9w1",
+            "asset_sha256": "eecd2ec508319f60555b5a7583042eafc55a37169bc25c5d33f60074f41e1063",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        },
+        {
+            "asset_key": "zh-CN|wing:9w8",
+            "path": "/zh/personality/enneagram/wings/9w8",
+            "asset_sha256": "1b32fa600e000abe86399a5c3ff68f4ca2ac55265f33539e4ab9c1df695d1a1a",
+            "required_fields": [
+                "reviewer",
+                "reviewed_at",
+                "asset_sha256",
+                "decision"
+            ]
+        }
+    ],
+    "rejected_human_review_asset_keys": [],
+    "media_manifest_records": [
+        {
+            "identity_key": "center:gut",
+            "spec_id": "enneagram-v2-original-center-gut",
+            "record_sha256": "6e26f4300cd6a308d629e3deccbbc01e6d74507b91d971f7d59626be0c1c263e"
+        },
+        {
+            "identity_key": "center:head",
+            "spec_id": "enneagram-v2-original-center-head",
+            "record_sha256": "ab2a454d7977562e569c63cbff1b4ffa61d82e5f4b48490af5266ba384d987c8"
+        },
+        {
+            "identity_key": "center:heart",
+            "spec_id": "enneagram-v2-original-center-heart",
+            "record_sha256": "11f4135393c0a11abf061525af9efcd1a8665de5d9414193598d422cde6e45ba"
+        },
+        {
+            "identity_key": "core_type:type-1",
+            "spec_id": "enneagram-v2-original-core-type-type-1",
+            "record_sha256": "32475ec8b83609b0a8d6642b9eabb330e6398e3dc96ce7ae7dd001bd632a7096"
+        },
+        {
+            "identity_key": "core_type:type-2",
+            "spec_id": "enneagram-v2-original-core-type-type-2",
+            "record_sha256": "c7dc3e15c887ab6e82908d1020a07c07f3bd5af98f08d70066e08a13f78ca389"
+        },
+        {
+            "identity_key": "core_type:type-3",
+            "spec_id": "enneagram-v2-original-core-type-type-3",
+            "record_sha256": "00d5929cab2b18fd987deb25b3b14011752974d8700dc8701930b2c0fa161c05"
+        },
+        {
+            "identity_key": "core_type:type-4",
+            "spec_id": "enneagram-v2-original-core-type-type-4",
+            "record_sha256": "f2b54384abaebbafef898a3236f892daf0f4ac9aa8ad7e06a5bf2f28e0613df4"
+        },
+        {
+            "identity_key": "core_type:type-5",
+            "spec_id": "enneagram-v2-original-core-type-type-5",
+            "record_sha256": "eeaf1f7ca6cabb198c4eef82fbe0b46d59ecb0297bc39ea103bd55b02e74efc9"
+        },
+        {
+            "identity_key": "core_type:type-6",
+            "spec_id": "enneagram-v2-original-core-type-type-6",
+            "record_sha256": "f41e7f104b2e4bc56e03e92aa8ef5f93c6428a75d2a29bb79ae1b2ff51d8c5df"
+        },
+        {
+            "identity_key": "core_type:type-7",
+            "spec_id": "enneagram-v2-original-core-type-type-7",
+            "record_sha256": "e3dd731ca24380f7b3a61fba81f19136975767cce9656955dcafbb0d3108b915"
+        },
+        {
+            "identity_key": "core_type:type-8",
+            "spec_id": "enneagram-v2-original-core-type-type-8",
+            "record_sha256": "83d6ef6e4cd383004f4a0f00ae43f6b50c705274047eaea4018c831a70683c00"
+        },
+        {
+            "identity_key": "core_type:type-9",
+            "spec_id": "enneagram-v2-original-core-type-type-9",
+            "record_sha256": "6eee4c7cc56d925f5cea917223976ffc5b4966ab148dd259f33b96a87dc71e67"
+        },
+        {
+            "identity_key": "hub:enneagram",
+            "spec_id": "enneagram-v2-original-hub-enneagram",
+            "record_sha256": "d38227da90f6f510f557607e4b3abfd8e518a38b2fd600c4b12c530a28e9d637"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-1/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-1-one-to-one",
+            "record_sha256": "4104335be2c146fe72aefd85b2002c8e5b6717d631d8487cbd732bb2cbb8290a"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-1/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-1-self-preservation",
+            "record_sha256": "3b9b5aefcafb2b4d9dd779dd4e6dca4a613ccdf31d6b5530f1dce590f4c5afed"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-1/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-1-social",
+            "record_sha256": "7a9e9d41f5fe1abe83dc6b80d15ad82b5145e5e5ca78cb1e6838f3ec9f4d2945"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-2/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-2-one-to-one",
+            "record_sha256": "c7684e74a456bd54c3f6d5fa9dcc8b537fd77868aa85e6949edf1c2ffd03e8db"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-2/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-2-self-preservation",
+            "record_sha256": "f6bc90178179bcab5d95e308c436cfe77fdd3e127e4d7d4e763bf0df760eb5f9"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-2/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-2-social",
+            "record_sha256": "ef9184219b5e9140fab82ca992b4e102ea3a8c8892e905b276c9c9b83424b135"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-3/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-3-one-to-one",
+            "record_sha256": "4f391c81025ffb2d0015b1eee8b19428f3fcb3fbbbfeafbf41ed2d786566d799"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-3/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-3-self-preservation",
+            "record_sha256": "d0fac37ce17dcd424d5e1a84ef7de005f0280ecb1d682f1d2f48c03204056ff5"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-3/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-3-social",
+            "record_sha256": "8daba10b6100359750a5c2795a5924a2b24d393a6f461f6ecb65e8a0d2954c6e"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-4/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-4-one-to-one",
+            "record_sha256": "ee7dbe62c6915328bc6e48da57510387128b7e5d24896cf56aec41745cdaf713"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-4/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-4-self-preservation",
+            "record_sha256": "08ccdd06e19513b8861bc1db49e0d83e54e455b1de392dd29e759f4110a144d2"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-4/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-4-social",
+            "record_sha256": "bcfc67025c5f9dd7d9b92bcf08da6f1f8d634193a0f3486e80bf1fc53799c195"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-5/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-5-one-to-one",
+            "record_sha256": "7af67d439e95893099d61b7adb729b26cbfd09c84e3fb5b8f475f968c0d04281"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-5/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-5-self-preservation",
+            "record_sha256": "8c98c5a9089ad2cbbe2c57feea4c9786ab9d56b7503a0513aec4957174a1241c"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-5/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-5-social",
+            "record_sha256": "087478ef361f022925a103581634553b1b146ef263ffeb6062c7480223487dc5"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-6/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-6-one-to-one",
+            "record_sha256": "f655e081776f8b9e6b3dfeaf1636414ecb307a130a906c36acc7ca5e585d2933"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-6/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-6-self-preservation",
+            "record_sha256": "b7011679f0608cd22aabfa0d5ca91f0cd0e0baa764df371ee0b8921c739dec66"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-6/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-6-social",
+            "record_sha256": "1c170af48c7d6932641a35e05bae13319573011ada52d261b8b4efdf9cfe8cd5"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-7/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-7-one-to-one",
+            "record_sha256": "fccb65017886b69da86cf32df4ea20f1a4ae9b0f566ce2a8f2c3a45dc0607332"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-7/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-7-self-preservation",
+            "record_sha256": "b122903bb0551382d58a1562ac701775ba6eaa741dae0797d8fe11ade8251b8d"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-7/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-7-social",
+            "record_sha256": "e033373216924ac873a922e34dc096647e27ddcdffbf1b6dff5d2e8855e402a7"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-8/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-8-one-to-one",
+            "record_sha256": "9405c9ab0905e0d310b7e2311e03e6709778ebf3c7db067879bbac92120f6f2f"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-8/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-8-self-preservation",
+            "record_sha256": "159af722a175541e957c701c7b3b943fc105992932244cd9dd0b3ee75371bf3e"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-8/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-8-social",
+            "record_sha256": "ff77c8800785306d2758f6392a2fcbbd8b7d6312c5e414b621a0a15fbe5ef914"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-9/one-to-one",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-9-one-to-one",
+            "record_sha256": "4b93ccbe1b763a0841c2a48ee625545344776e73916ec7813d13d9fef49f7362"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-9/self-preservation",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-9-self-preservation",
+            "record_sha256": "8cba886bf8127786fb12de2f2adff8c3771a8b120d5c4950ac8cefbd015f389a"
+        },
+        {
+            "identity_key": "instinctual_subtype:type-9/social",
+            "spec_id": "enneagram-v2-original-instinctual-subtype-type-9-social",
+            "record_sha256": "b4cfb4bdfa32193c59bcec78428276b058c034073d5f9437ff6bab5398217bb8"
+        },
+        {
+            "identity_key": "wing:1w2",
+            "spec_id": "enneagram-v2-original-wing-1w2",
+            "record_sha256": "c37617313dca9f8bbd97462727abeda371949eecf446c45af0656ac3d274c1d3"
+        },
+        {
+            "identity_key": "wing:1w9",
+            "spec_id": "enneagram-v2-original-wing-1w9",
+            "record_sha256": "b863814c1ad98c00c03678d7d7e369e12902adefcf961e41e6f42f5881ff79d1"
+        },
+        {
+            "identity_key": "wing:2w1",
+            "spec_id": "enneagram-v2-original-wing-2w1",
+            "record_sha256": "3bff1501f9c5f33bf952a2dee90665885d273c2d32600944e321ae02cfe27bef"
+        },
+        {
+            "identity_key": "wing:2w3",
+            "spec_id": "enneagram-v2-original-wing-2w3",
+            "record_sha256": "497f2fc3fcddf58ba29c533abea25c1818a8502d3352a03f4ee7143f563cceb8"
+        },
+        {
+            "identity_key": "wing:3w2",
+            "spec_id": "enneagram-v2-original-wing-3w2",
+            "record_sha256": "5b4ebe2da22a5d26654ca6459c939134bf58012e8e3fd65be6e99dd9422ed262"
+        },
+        {
+            "identity_key": "wing:3w4",
+            "spec_id": "enneagram-v2-original-wing-3w4",
+            "record_sha256": "6ee008bfde7f2767d419bc3fa23fdbb98e3d6c43b1a589bb436ce82d75e4c6ce"
+        },
+        {
+            "identity_key": "wing:4w3",
+            "spec_id": "enneagram-v2-original-wing-4w3",
+            "record_sha256": "b91a5175f171c5ba3c11b4a3b246c5d3d7ee2a3ac1fbdbdc2e6df7e92e4c9f89"
+        },
+        {
+            "identity_key": "wing:4w5",
+            "spec_id": "enneagram-v2-original-wing-4w5",
+            "record_sha256": "0f0cf348018d4677598d5b7c96a38e330632dadb24185d72cb37c78fc7f51631"
+        },
+        {
+            "identity_key": "wing:5w4",
+            "spec_id": "enneagram-v2-original-wing-5w4",
+            "record_sha256": "58d4b43d961037b3515919a99d90b4427a1471ee5feb37d5c9b4cd441e3c07c6"
+        },
+        {
+            "identity_key": "wing:5w6",
+            "spec_id": "enneagram-v2-original-wing-5w6",
+            "record_sha256": "50c39d74a858a9c82ef5af9b2ab161566c8a93bff8a1fe09da3626616269be39"
+        },
+        {
+            "identity_key": "wing:6w5",
+            "spec_id": "enneagram-v2-original-wing-6w5",
+            "record_sha256": "52397c9c71e9f59461a413d14abc893bd41ef3f772a8c1a5cb0f09515923d61a"
+        },
+        {
+            "identity_key": "wing:6w7",
+            "spec_id": "enneagram-v2-original-wing-6w7",
+            "record_sha256": "1a89a36769435504482618d14f0e09bd92f155791dd624956973c7af3a17a9bf"
+        },
+        {
+            "identity_key": "wing:7w6",
+            "spec_id": "enneagram-v2-original-wing-7w6",
+            "record_sha256": "9658cb1ca0dd977d5117fa4dae948931b149126466616e86386c66e4468277af"
+        },
+        {
+            "identity_key": "wing:7w8",
+            "spec_id": "enneagram-v2-original-wing-7w8",
+            "record_sha256": "0f7337ba2e9ea8426ed2059013aebd259bd602dfe7e9967f6609b984727f1d5d"
+        },
+        {
+            "identity_key": "wing:8w7",
+            "spec_id": "enneagram-v2-original-wing-8w7",
+            "record_sha256": "d13ddafdde4f4baa9f5d34dce119d841e6549f1d10b7224c7f8328d48cfa4d0c"
+        },
+        {
+            "identity_key": "wing:8w9",
+            "spec_id": "enneagram-v2-original-wing-8w9",
+            "record_sha256": "3c994c9e6d478f5357b6db6f67e94c7611ffe09b87b1a3ad67483648203645bb"
+        },
+        {
+            "identity_key": "wing:9w1",
+            "spec_id": "enneagram-v2-original-wing-9w1",
+            "record_sha256": "aec4a442d38f965f234427ebeda4a7ac2919d06ff24469437f43e3657b5d6074"
+        },
+        {
+            "identity_key": "wing:9w8",
+            "spec_id": "enneagram-v2-original-wing-9w8",
+            "record_sha256": "3e8f6fc05e34b1e54ed3885896f550203e49e9d7d769a0df9a4106778630d13b"
+        }
+    ],
+    "pending_media_rights_review_asset_keys": [
+        "en|center:gut",
+        "en|center:head",
+        "en|center:heart",
+        "en|core_type:type-1",
+        "en|core_type:type-2",
+        "en|core_type:type-3",
+        "en|core_type:type-4",
+        "en|core_type:type-5",
+        "en|core_type:type-6",
+        "en|core_type:type-7",
+        "en|core_type:type-8",
+        "en|core_type:type-9",
+        "en|hub:enneagram",
+        "en|instinctual_subtype:type-1/one-to-one",
+        "en|instinctual_subtype:type-1/self-preservation",
+        "en|instinctual_subtype:type-1/social",
+        "en|instinctual_subtype:type-2/one-to-one",
+        "en|instinctual_subtype:type-2/self-preservation",
+        "en|instinctual_subtype:type-2/social",
+        "en|instinctual_subtype:type-3/one-to-one",
+        "en|instinctual_subtype:type-3/self-preservation",
+        "en|instinctual_subtype:type-3/social",
+        "en|instinctual_subtype:type-4/one-to-one",
+        "en|instinctual_subtype:type-4/self-preservation",
+        "en|instinctual_subtype:type-4/social",
+        "en|instinctual_subtype:type-5/one-to-one",
+        "en|instinctual_subtype:type-5/self-preservation",
+        "en|instinctual_subtype:type-5/social",
+        "en|instinctual_subtype:type-6/one-to-one",
+        "en|instinctual_subtype:type-6/self-preservation",
+        "en|instinctual_subtype:type-6/social",
+        "en|instinctual_subtype:type-7/one-to-one",
+        "en|instinctual_subtype:type-7/self-preservation",
+        "en|instinctual_subtype:type-7/social",
+        "en|instinctual_subtype:type-8/one-to-one",
+        "en|instinctual_subtype:type-8/self-preservation",
+        "en|instinctual_subtype:type-8/social",
+        "en|instinctual_subtype:type-9/one-to-one",
+        "en|instinctual_subtype:type-9/self-preservation",
+        "en|instinctual_subtype:type-9/social",
+        "en|wing:1w2",
+        "en|wing:1w9",
+        "en|wing:2w1",
+        "en|wing:2w3",
+        "en|wing:3w2",
+        "en|wing:3w4",
+        "en|wing:4w3",
+        "en|wing:4w5",
+        "en|wing:5w4",
+        "en|wing:5w6",
+        "en|wing:6w5",
+        "en|wing:6w7",
+        "en|wing:7w6",
+        "en|wing:7w8",
+        "en|wing:8w7",
+        "en|wing:8w9",
+        "en|wing:9w1",
+        "en|wing:9w8",
+        "zh-CN|center:gut",
+        "zh-CN|center:head",
+        "zh-CN|center:heart",
+        "zh-CN|core_type:type-1",
+        "zh-CN|core_type:type-2",
+        "zh-CN|core_type:type-3",
+        "zh-CN|core_type:type-4",
+        "zh-CN|core_type:type-5",
+        "zh-CN|core_type:type-6",
+        "zh-CN|core_type:type-7",
+        "zh-CN|core_type:type-8",
+        "zh-CN|core_type:type-9",
+        "zh-CN|hub:enneagram",
+        "zh-CN|instinctual_subtype:type-1/one-to-one",
+        "zh-CN|instinctual_subtype:type-1/self-preservation",
+        "zh-CN|instinctual_subtype:type-1/social",
+        "zh-CN|instinctual_subtype:type-2/one-to-one",
+        "zh-CN|instinctual_subtype:type-2/self-preservation",
+        "zh-CN|instinctual_subtype:type-2/social",
+        "zh-CN|instinctual_subtype:type-3/one-to-one",
+        "zh-CN|instinctual_subtype:type-3/self-preservation",
+        "zh-CN|instinctual_subtype:type-3/social",
+        "zh-CN|instinctual_subtype:type-4/one-to-one",
+        "zh-CN|instinctual_subtype:type-4/self-preservation",
+        "zh-CN|instinctual_subtype:type-4/social",
+        "zh-CN|instinctual_subtype:type-5/one-to-one",
+        "zh-CN|instinctual_subtype:type-5/self-preservation",
+        "zh-CN|instinctual_subtype:type-5/social",
+        "zh-CN|instinctual_subtype:type-6/one-to-one",
+        "zh-CN|instinctual_subtype:type-6/self-preservation",
+        "zh-CN|instinctual_subtype:type-6/social",
+        "zh-CN|instinctual_subtype:type-7/one-to-one",
+        "zh-CN|instinctual_subtype:type-7/self-preservation",
+        "zh-CN|instinctual_subtype:type-7/social",
+        "zh-CN|instinctual_subtype:type-8/one-to-one",
+        "zh-CN|instinctual_subtype:type-8/self-preservation",
+        "zh-CN|instinctual_subtype:type-8/social",
+        "zh-CN|instinctual_subtype:type-9/one-to-one",
+        "zh-CN|instinctual_subtype:type-9/self-preservation",
+        "zh-CN|instinctual_subtype:type-9/social",
+        "zh-CN|wing:1w2",
+        "zh-CN|wing:1w9",
+        "zh-CN|wing:2w1",
+        "zh-CN|wing:2w3",
+        "zh-CN|wing:3w2",
+        "zh-CN|wing:3w4",
+        "zh-CN|wing:4w3",
+        "zh-CN|wing:4w5",
+        "zh-CN|wing:5w4",
+        "zh-CN|wing:5w6",
+        "zh-CN|wing:6w5",
+        "zh-CN|wing:6w7",
+        "zh-CN|wing:7w6",
+        "zh-CN|wing:7w8",
+        "zh-CN|wing:8w7",
+        "zh-CN|wing:8w9",
+        "zh-CN|wing:9w1",
+        "zh-CN|wing:9w8"
+    ],
+    "source_hashes": [
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/hub-centers-draft.json",
+            "sha256": "e80ee3a62398729417a31bd0401bf2bf5c149def7127aa35e16146c5b1865ba1"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/type-1-family-draft.json",
+            "sha256": "64920706870a66a2ea42d1658f7d53f9197af455174ff503c66b6805a841ece9"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/type-2-family-draft.json",
+            "sha256": "b288ea11a41f4d905b76ca19d98e761103701b1bd0b5e0e73288779d42705b3d"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/type-3-family-draft.json",
+            "sha256": "8a7cfaa18b06b92eccf7bbc730cf8107aed203a361d3a28c01506c6555c90e75"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/type-4-family-draft.json",
+            "sha256": "1e3f884e17061ae453379e216f11e60f5d16647d5d55b253195f0841df10ec2d"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/type-5-family-draft.json",
+            "sha256": "c8c36320bf373e25a7b885d11465e12de9190ddca4f98d81f8e9e0e13cfacb22"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/type-6-family-draft.json",
+            "sha256": "354312c2182fff6752d0ecc89a695ad503bae46d27380ef33f89291ab00ab218"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/type-7-family-draft.json",
+            "sha256": "4f8e998f614aabf0d16893a0721f1a7d2050c33e21e5cf203ecd039113faf28d"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/type-8-family-draft.json",
+            "sha256": "7a80680798cc7bc96ae2a087b23908aa6739a1cd6d86c5db096457c8620271a4"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/type-9-family-draft.json",
+            "sha256": "fe9873c4370d5d95b6d068c65b8f90488f598f94b2a4eac90fef1de901244e3e"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/qa-report.json",
+            "sha256": "8781e7ed94561d785a820b232a0e3db344faa4dbe87d8ec4f9c50c25efc3b0d9"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/qa-report.json",
+            "sha256": "2cd8578f7fa0ced1240aeeadd3c09754093d1d630acd5c4b26bd9efc1d982ecb"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/qa-report.json",
+            "sha256": "b6de076fcf6d09295f03d5319df6067f30bb7dd11d2466d416040fcfc7fb030a"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/qa-report.json",
+            "sha256": "d702c398d219659c4186672ebcba4bf6e25555624aa5bd30ee7bc18406532210"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/qa-report.json",
+            "sha256": "1eac3dc4504b8df54ed23589b0971895011a57fd055197f53b6fe61de18ba264"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/qa-report.json",
+            "sha256": "331d6b9cd5a76333f8243a1fb3d8fd0e1451c0ecd3e6cff554464d7e0625859e"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/qa-report.json",
+            "sha256": "4a5887d7a26303934ccb7ddd5278f846bedd59fb78ad97d60a9196c9f58ea9df"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/qa-report.json",
+            "sha256": "18f2aa3b266daee6f54c2942339ab22a56dcf4612f2ce0f162f051eef6995aaf"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/qa-report.json",
+            "sha256": "af15e5587704e8af8c64ec6e24016143ac2b3c0d45d68a135c0b33f4fd9df6f6"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/qa-report.json",
+            "sha256": "e32354cf3d495b12d1688d0ad2d158013b58fbddc6a206292874d94095f7c331"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+            "sha256": "16384c81c561a4b3c62f0603ec05e69a19e1f63405bc097fe82acd82487a29d1"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+            "sha256": "36d0f27cb59a1de88055a3442ddb8361f0d4202b5858729db0c33192f7f3e850"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-benchmark-01/production-scorecard.json",
+            "sha256": "321f7d5f42462e41cd32bd1972f6e634fbd1f2f7b44ba091e8ca05e7dd449101"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-link-graph-20/link-graph.json",
+            "sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-media-og-19/media-specifications.json",
+            "sha256": "7fd157bf3e7cd90041eb3aa08f7666064673c31cf6559874d962c7483f85f8aa"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-media-og-19/localized-og-mappings.json",
+            "sha256": "affa799f460794d017db06ed52064c3ae8da3b4c0f9a9feac64908e7e8534960"
+        }
+    ],
+    "graph_manifest_sha256": "d2fde456f4c37ab25f01f02020dcb5c5089159a6a872a8b0186932d8e2d67fcd",
+    "media_manifest_sha256": "7fd157bf3e7cd90041eb3aa08f7666064673c31cf6559874d962c7483f85f8aa",
+    "qa_sources": [
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-hub-centers-09/qa-report.json",
+            "sha256": "8781e7ed94561d785a820b232a0e3db344faa4dbe87d8ec4f9c50c25efc3b0d9"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-1-family-10/qa-report.json",
+            "sha256": "2cd8578f7fa0ced1240aeeadd3c09754093d1d630acd5c4b26bd9efc1d982ecb"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-2-family-11/qa-report.json",
+            "sha256": "b6de076fcf6d09295f03d5319df6067f30bb7dd11d2466d416040fcfc7fb030a"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-3-family-12/qa-report.json",
+            "sha256": "d702c398d219659c4186672ebcba4bf6e25555624aa5bd30ee7bc18406532210"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-4-family-13/qa-report.json",
+            "sha256": "1eac3dc4504b8df54ed23589b0971895011a57fd055197f53b6fe61de18ba264"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-5-family-14/qa-report.json",
+            "sha256": "331d6b9cd5a76333f8243a1fb3d8fd0e1451c0ecd3e6cff554464d7e0625859e"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-6-family-15/qa-report.json",
+            "sha256": "4a5887d7a26303934ccb7ddd5278f846bedd59fb78ad97d60a9196c9f58ea9df"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-7-family-16/qa-report.json",
+            "sha256": "18f2aa3b266daee6f54c2942339ab22a56dcf4612f2ce0f162f051eef6995aaf"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-8-family-17/qa-report.json",
+            "sha256": "af15e5587704e8af8c64ec6e24016143ac2b3c0d45d68a135c0b33f4fd9df6f6"
+        },
+        {
+            "path": "docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-type-9-family-18/qa-report.json",
+            "sha256": "e32354cf3d495b12d1688d0ad2d158013b58fbddc6a206292874d94095f7c331"
+        }
+    ],
+    "errors": [
+        {
+            "code": "editorial_integrity_duplicate_sentence",
+            "subject": "en|instinctual_subtype:type-4/social"
+        },
+        {
+            "code": "editorial_integrity_duplicate_sentence",
+            "subject": "en|instinctual_subtype:type-9/one-to-one"
+        },
+        {
+            "code": "editorial_integrity_gate_failed",
+            "subject": "aggregate"
+        }
+    ],
+    "release_boundary": {
+        "manual_review_requirement": "116/116 named human review records bound to exact asset SHA256",
+        "current_blockers": [
+            "automated_release_gate_failed",
+            "missing_or_rejected_named_human_review_records",
+            "missing_media_rights_review_records"
+        ],
+        "next_authority": "operator_supplied_human_review_evidence_then_separate_exact_sha_production_authorization",
+        "production_command_executed": false
+    },
+    "rollback_readiness": {
+        "complete": true,
+        "implementation": "App\\Services\\Enneagram\\AuthorityV2\\EnneagramPublicAuthorityV206RevisionPromoter",
+        "token_format": "base64url(json).hmac_sha256; payload version, artifact, target_count=116, preflight_fingerprint, and 116 rollback rows",
+        "requires_exact_token_sha256_authorization": true,
+        "rollback_command_executed": false
+    },
+    "exact_production_command_plan": {
+        "authorization_boundary": "PR23 separate exact backend SHA, package SHA256, and operator authorization required",
+        "preflight": "php artisan personality:enneagram-authority-v2-revision-promoter --plan=<reviewed-116-target-plan.json> --preflight --json",
+        "promote": "php artisan personality:enneagram-authority-v2-revision-promoter --plan=<reviewed-116-target-plan.json> --promote --confirm-preflight-fingerprint=<exact-preflight-sha256> --confirm-writer-deploy-sha=<exact-backend-git-sha> --operator-approved=<exact-dynamic-approval-phrase> --json",
+        "rollback": "php artisan personality:enneagram-authority-v2-revision-promoter --rollback-token-file=<retained-token-file> --confirm-writer-deploy-sha=<exact-backend-git-sha> --operator-approved=<exact-dynamic-rollback-approval-phrase> --json",
+        "executed": false
+    },
+    "execution_boundaries": {
+        "production_write_executed": false,
+        "database_mutated": false,
+        "cms_mutated": false,
+        "revision_pointer_changed": false,
+        "media_uploaded": false,
+        "cache_revalidated": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false,
+        "search_submitted": false,
+        "deployed": false
+    }
+}
