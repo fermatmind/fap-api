@@ -44909,12 +44909,14 @@ prs:
       - backend/tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php
       - backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
       - backend/tests/Feature/SEO/EnneagramPublicAuthorityV223RuntimeImportReviewTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
     validation:
       - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV223RuntimeImportReviewTest.php --no-ansi
       - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_only_registered_enneagram_public_authority_v2_non_runtime_files --no-ansi
       - fresh SQLite migration verification for personality_public_content_asset_revision_reviews
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
