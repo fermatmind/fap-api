@@ -8,10 +8,14 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
+use Throwable;
 
 final class EnneagramPublicAuthorityV224RuntimeCloseout
 {
     public const ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E';
+
+    /** @var array<string,mixed> */
+    private array $executionProgress = [];
 
     public function __construct(
         private readonly EnneagramPublicAuthorityV205RevisionWorkspaceWriter $workspaceWriter,
@@ -85,6 +89,14 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         ?array $preReadback = null,
         ?string $preReadbackSha256 = null,
     ): array {
+        $this->executionProgress = [
+            'failure_stage' => 'authorization_validation',
+            'writes_committed' => false,
+            'working_import_committed' => false,
+            'review_bind_committed' => false,
+            'promotion_committed' => false,
+            'rollback_token_persisted' => false,
+        ];
         $current = $this->preflight(
             $releaseReport,
             $releaseReportSha256,
@@ -104,11 +116,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             throw new RuntimeException('Separate exact-SHA production authorization phrase mismatch.');
         }
 
+        $this->executionProgress['failure_stage'] = 'working_import';
         $workspace = $this->workspaceWriter->write(
             $releaseReport,
             (string) $releaseReport['package_sha256'],
             (string) $current['workspace_preflight_fingerprint'],
         );
+        $this->executionProgress['writes_committed'] = true;
+        $this->executionProgress['working_import_committed'] = true;
+        $this->executionProgress['failure_stage'] = 'review_bind';
         $binderPlan = $this->reviewBinder->preflight($releaseReport, $reviewRegister, $reviewRegisterSha256);
         $binder = $this->reviewBinder->bind(
             $releaseReport,
@@ -118,6 +134,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             (string) $binderPlan['preflight_fingerprint'],
             $boundByAdminUserId,
         );
+        $this->executionProgress['review_bind_committed'] = true;
+        $this->executionProgress['failure_stage'] = 'promotion';
         $targets = $this->promotionTargets((string) $releaseReport['package_sha256']);
         $promotionPlan = $this->promoter->preflight($targets);
         $promoted = $this->promoter->promote($targets, (string) $promotionPlan['preflight_fingerprint']);
@@ -125,12 +143,20 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         if ($rollbackToken === '') {
             throw new RuntimeException('Promotion did not return the required signed rollback token.');
         }
+        $this->executionProgress['promotion_committed'] = true;
+        $this->executionProgress['rollback_token_sha256'] = hash('sha256', $rollbackToken);
+        $this->executionProgress['failure_stage'] = 'rollback_token_persist';
         $this->writeRollbackTokenOutsideRepository($rollbackTokenOutput, $rollbackToken);
+        $this->executionProgress['rollback_token_persisted'] = true;
+        $this->executionProgress['failure_stage'] = 'rollback_preflight';
         $rollbackPreflight = $this->promoter->rollbackPreflight($rollbackToken);
         unset($promoted['rollback_token']);
 
+        $this->executionProgress['failure_stage'] = 'cache_invalidation';
         $cacheInvalidation = $this->cacheCoordinator->invalidatePreservingLkg($releaseReport);
+        $this->executionProgress['failure_stage'] = 'cache_readback';
         $cacheReadback = $this->cacheCoordinator->warmAndVerifyFresh($releaseReport, $apiBaseUrl);
+        $this->executionProgress['failure_stage'] = 'frontend_revalidation';
         $frontendRevalidation = $this->cacheCoordinator->revalidateFrontend(
             $releaseReport,
             $revalidationEndpoint,
@@ -140,6 +166,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         $batchResults = [];
         $privateReviewerNames = $this->privateReviewerNames($reviewRegister);
         foreach (array_keys($this->manifest->readbackBatches($releaseReport)) as $batch) {
+            $this->executionProgress['failure_stage'] = 'post_readback:'.$batch;
             $batchResults[$batch] = $this->readback->run(
                 'post',
                 $batch,
@@ -150,6 +177,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
                 $privateReviewerNames,
             );
         }
+        $this->executionProgress['failure_stage'] = 'post_fingerprint';
         $post = $this->readback->snapshot($releaseReport, $frontendBaseUrl);
         if ((string) $post['stable_identity_discoverability_fingerprint']
             !== (string) $authorizationPacket['stable_identity_discoverability_fingerprint']) {
@@ -197,6 +225,32 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             'writes_committed' => true,
             'production_execution' => app()->environment('production'),
         ];
+    }
+
+    /** @return array<string,mixed> */
+    public function failureResult(Throwable $throwable): array
+    {
+        $writesCommitted = ($this->executionProgress['writes_committed'] ?? false) === true;
+        $result = [
+            'schema_version' => 'enneagram_public_authority_v2_runtime_closeout.v1',
+            'artifact' => self::ARTIFACT,
+            'ok' => false,
+            'status' => $writesCommitted ? 'FAIL_CLOSED_PARTIAL_WRITES_COMMITTED' : 'FAIL_CLOSED_NO_WRITES',
+            'failure_stage' => (string) ($this->executionProgress['failure_stage'] ?? 'command_preflight'),
+            'writes_committed' => $writesCommitted,
+            'working_import_committed' => ($this->executionProgress['working_import_committed'] ?? false) === true,
+            'review_bind_committed' => ($this->executionProgress['review_bind_committed'] ?? false) === true,
+            'promotion_committed' => ($this->executionProgress['promotion_committed'] ?? false) === true,
+            'rollback_token_persisted' => ($this->executionProgress['rollback_token_persisted'] ?? false) === true,
+            'automatic_rollback' => false,
+            'error' => $throwable->getMessage(),
+            'production_execution' => app()->environment('production'),
+        ];
+        if (is_string($this->executionProgress['rollback_token_sha256'] ?? null)) {
+            $result['rollback_token_sha256'] = $this->executionProgress['rollback_token_sha256'];
+        }
+
+        return $result;
     }
 
     /** @return list<array<string,mixed>> */

@@ -41,14 +41,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         try {
             $result = $this->runGuarded($closeout);
         } catch (Throwable $throwable) {
-            $result = [
-                'artifact' => EnneagramPublicAuthorityV224RuntimeCloseout::ARTIFACT,
-                'ok' => false,
-                'status' => 'FAIL_CLOSED',
-                'writes_committed' => false,
-                'automatic_rollback' => false,
-                'error' => $throwable->getMessage(),
-            ];
+            $result = $closeout->failureResult($throwable);
         }
         $this->emit($result);
 

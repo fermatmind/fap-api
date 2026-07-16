@@ -175,14 +175,77 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_late_execute_failure_reports_committed_writes_and_safe_rollback_evidence(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        $reportSha = $this->fingerprintRaw($report);
+        $registerSha = $this->fingerprintRaw($register);
+        $closeout = $this->closeout();
+        $preflight = $closeout->preflight(
+            $report,
+            $reportSha,
+            $register,
+            $registerSha,
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+        $this->fakeRuntimeHttp($report, true);
+        $rollbackPath = '/tmp/enneagram-v224-rollback-'.bin2hex(random_bytes(8)).'.token';
+
+        try {
+            try {
+                $closeout->execute(
+                    $report,
+                    $reportSha,
+                    $register,
+                    $registerSha,
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                    $preflight['authorization_packet'],
+                    (string) $preflight['authorization_packet_sha256'],
+                    (string) $preflight['authorization_packet']['authorization_phrase'],
+                    $rollbackPath,
+                    'https://api.test',
+                    'https://frontend.test',
+                    'https://frontend.test/api/content-release/revalidate',
+                    self::REVALIDATION_SECRET,
+                );
+                $this->fail('Expected frontend revalidation to fail after promotion.');
+            } catch (\Throwable $throwable) {
+                $result = $closeout->failureResult($throwable);
+            }
+
+            $this->assertSame('FAIL_CLOSED_PARTIAL_WRITES_COMMITTED', $result['status']);
+            $this->assertSame('frontend_revalidation', $result['failure_stage']);
+            $this->assertTrue($result['writes_committed']);
+            $this->assertTrue($result['working_import_committed']);
+            $this->assertTrue($result['review_bind_committed']);
+            $this->assertTrue($result['promotion_committed']);
+            $this->assertTrue($result['rollback_token_persisted']);
+            $this->assertFalse($result['automatic_rollback']);
+            $this->assertFileExists($rollbackPath);
+            $rollbackToken = trim((string) file_get_contents($rollbackPath));
+            $this->assertSame(hash('sha256', $rollbackToken), $result['rollback_token_sha256']);
+            $this->assertStringNotContainsString($rollbackToken, json_encode($result, JSON_THROW_ON_ERROR));
+            $this->assertArrayNotHasKey('rollback_token_output', $result);
+        } finally {
+            @unlink($rollbackPath);
+        }
+    }
+
     /** @param array<string,mixed> $report */
-    private function fakeRuntimeHttp(array $report): void
+    private function fakeRuntimeHttp(array $report, bool $rejectRevalidation = false): void
     {
         $paths = array_column($report['asset_records'], 'path');
         $urlText = implode("\n", array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths));
-        Http::fake(function (Request $request) use ($urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($rejectRevalidation, $urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             if ($url === 'https://frontend.test/api/content-release/revalidate') {
+                if ($rejectRevalidation) {
+                    return Http::response(['ok' => false], 503);
+                }
                 $timestamp = (string) $request->header('X-FM-Content-Release-Timestamp')[0];
                 $nonce = (string) $request->header('X-FM-Content-Release-Nonce')[0];
                 $signature = (string) $request->header('X-FM-Content-Release-Signature')[0];
