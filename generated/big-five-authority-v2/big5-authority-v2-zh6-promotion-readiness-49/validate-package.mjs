@@ -71,8 +71,14 @@ invariant(packageJson.editorial_authority.review_record.explicit_self_review ===
 invariant(packageJson.editorial_authority.review_record.global_role_separation_relaxed === false, 'global role separation must remain unchanged');
 invariant(packageJson.editorial_authority.review_record.public_label === 'FermatMind Editorial', 'public editorial label mismatch');
 invariant(packageJson.editorial_authority.review_record.reviewed_at === ownerAuthority.confirmed_at, 'review record must use external OWNER confirmation time');
-invariant(packageJson.editorial_authority.review_record.external_human_authority.comment_database_id === ownerAuthority.comment_database_id, 'review record OWNER comment mismatch');
-invariant(packageJson.editorial_authority.review_record.external_human_authority.confirmation_phrase_sha256 === sha256(ownerAuthority.confirmation_phrase), 'review record OWNER phrase SHA mismatch');
+invariant(canonicalSha256(packageJson.editorial_authority.review_record.external_human_authority) === canonicalSha256({
+  source: ownerAuthority.source,
+  pull_request_number: ownerAuthority.pull_request_number,
+  comment_database_id: ownerAuthority.comment_database_id,
+  author_login: ownerAuthority.author_login,
+  author_association: ownerAuthority.author_association,
+  confirmation_phrase_sha256: sha256(ownerAuthority.confirmation_phrase),
+}), 'review record OWNER external authority mismatch');
 invariant(packageJson.editorial_authority.review_record_sha256 === canonicalSha256(packageJson.editorial_authority.review_record), 'review record SHA mismatch');
 invariant(packageJson.source_permissions.source_permission_sha256 === canonicalSha256(packageJson.source_permissions.rows), 'source permission SHA mismatch');
 invariant(packageJson.source_permissions.rows.every((row) => row.approved === true && row.source_ids.length === 3), 'each asset must keep three approved sources');

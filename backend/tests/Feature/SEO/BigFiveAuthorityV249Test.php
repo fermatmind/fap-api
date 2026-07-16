@@ -296,6 +296,17 @@ final class BigFiveAuthorityV249Test extends TestCase
         $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-human-authority-package');
 
         try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-human-authority-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'review record OWNER external authority mismatch',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
             app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
             $this->fail('Expected rehashed external human authority drift to fail closed.');
         } catch (RuntimeException $exception) {

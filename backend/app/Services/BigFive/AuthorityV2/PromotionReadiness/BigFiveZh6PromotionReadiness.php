@@ -650,6 +650,14 @@ final class BigFiveZh6PromotionReadiness
             .'package_payload_sha256='.self::SNAPSHOT_PAYLOAD_SHA256.'；'
             .'package_file_sha256='.self::SNAPSHOT_FILE_SHA256.'；'
             .'CMS reviewer_admin_user_id=1。';
+        $expectedExternalHumanAuthority = [
+            'source' => $ownerAuthority['source'] ?? null,
+            'pull_request_number' => $ownerAuthority['pull_request_number'] ?? null,
+            'comment_database_id' => $ownerAuthority['comment_database_id'] ?? null,
+            'author_login' => $ownerAuthority['author_login'] ?? null,
+            'author_association' => $ownerAuthority['author_association'] ?? null,
+            'confirmation_phrase_sha256' => hash('sha256', $expectedPhrase),
+        ];
         if (($confirmation['status'] ?? null) !== 'approved_by_real_human'
             || ($confirmation['reviewer_admin_user_id'] ?? null) !== self::REVIEWER_ADMIN_USER_ID
             || ($confirmation['confirmation_record_sha256'] ?? null) !== self::CONFIRMATION_RECORD_SHA256
@@ -662,12 +670,11 @@ final class BigFiveZh6PromotionReadiness
             || ($ownerAuthority['reviewer_admin_user_id'] ?? null) !== self::REVIEWER_ADMIN_USER_ID
             || ($ownerAuthority['confirmation_phrase'] ?? null) !== $expectedPhrase
             || ($review['reviewed_at'] ?? null) !== ($ownerAuthority['confirmed_at'] ?? null)
-            || ($review['external_human_authority']['source'] ?? null) !== ($ownerAuthority['source'] ?? null)
-            || ($review['external_human_authority']['pull_request_number'] ?? null) !== ($ownerAuthority['pull_request_number'] ?? null)
-            || ($review['external_human_authority']['comment_database_id'] ?? null) !== ($ownerAuthority['comment_database_id'] ?? null)
-            || ($review['external_human_authority']['author_login'] ?? null) !== ($ownerAuthority['author_login'] ?? null)
-            || ($review['external_human_authority']['author_association'] ?? null) !== ($ownerAuthority['author_association'] ?? null)
-            || ($review['external_human_authority']['confirmation_phrase_sha256'] ?? null) !== hash('sha256', $expectedPhrase)) {
+            || ! is_array($review['external_human_authority'] ?? null)
+            || ! hash_equals(
+                $this->canonicalSha256($expectedExternalHumanAuthority),
+                $this->canonicalSha256($review['external_human_authority']),
+            )) {
             throw new RuntimeException('ZH6 real-human OWNER authority binding is invalid.');
         }
         foreach (['cms_or_database_write', 'working_revision_write', 'media_authority', 'promotion_or_publication', 'indexability_sitemap_llms_schema', 'deployment_cache_or_search'] as $field) {
