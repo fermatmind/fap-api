@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "review_fix_local_validation_passed",
-    "commit_sha": "86c912f5eeb13c4feba53951e954b210490efd02",
+    "status": "ready_to_merge",
+    "commit_sha": "7f80dac04a7b05363376b7b33583e58c435a902c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96155,14 +96155,14 @@
         "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
       },
       "github_required": {
-        "status": "pending",
-        "evidence": "The previous exact head passed all nine required GitHub checks, then the latest automated P2 was repaired and CLI origin parsing was hardened in final code commit 86c912f5eeb13c4feba53951e954b210490efd02. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
+        "status": "passed",
+        "evidence": "Exact head 7f80dac04a7b05363376b7b33583e58c435a902c passed all nine required GitHub checks, is CLEAN/MERGEABLE, and has zero unresolved review threads. The ready-to-merge ledger-only commit must pass one final fresh check and exact-head review cycle before squash merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96280,9 +96280,14 @@
         "at": "2026-07-16T16:31:39Z",
         "status": "review_fix_local_validation_passed",
         "note": "Final code commit 86c912f5eeb13c4feba53951e954b210490efd02 additionally rejects non-origin API/frontend CLI values before service invocation. The repository concurrency guard observed an unrelated full Composer suite in another worktree, so only V224 focused validation ran until that suite exited; the final complete rerun then passed focused 39/747 and full Enneagram V2 204/28753 plus all static and exact 15-path scope checks. A fresh GitHub check and latest-head review cycle is required; production and deployment actions remain zero."
+      },
+      {
+        "at": "2026-07-16T16:39:13Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 7f80dac04a7b05363376b7b33583e58c435a902c passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, and retains the exact 15-path manifest scope. This ready-to-merge ledger-only update must independently pass a fresh final check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
       }
     ],
-    "updated_at": "2026-07-16T16:31:39Z"
+    "updated_at": "2026-07-16T16:39:13Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
