@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "review_fix_local_validation_passed",
-    "commit_sha": "104336c8bfe5fb93b1ed32b21dcb4f2eeda6333f",
+    "status": "pr_open_checks_pending",
+    "commit_sha": "48c874143e1b5ec6d2ba9c1940a39a8638fff94b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96251,9 +96251,14 @@
         "at": "2026-07-16T15:24:03Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine sixth-cycle GitHub checks passed. Resolved the latest P2 by rejecting sitemap URLs outside the exact frontend origin and rejecting query/fragment drift on every Enneagram discoverability URL before path-set comparison or hashing. Wrong-origin, query, and fragment regression cases fail closed. The concurrency guard initially observed another short-lived FermatMind PHPUnit process, so this task's pending command was interrupted and complete validation started only after the guard cleared. Focused 35/678, full Enneagram V2 200/28684, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T15:24:49Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the discoverability exact-origin/query/fragment repair at 48c874143e1b5ec6d2ba9c1940a39a8638fff94b. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
       }
     ],
-    "updated_at": "2026-07-16T15:24:03Z"
+    "updated_at": "2026-07-16T15:24:49Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
