@@ -109,6 +109,10 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->assertSame(1, $unique['package']['counts']['selected_hub_media_assets']);
         $this->assertTrue($unique['package']['permissions']['media']['approved']);
         $this->assertSame([], $unique['package']['blockers']);
+        $uniqueResult = app(BigFiveZh6PromotionReadiness::class)->packageOnly($unique['package_path']);
+        $this->assertTrue($uniqueResult['contract_valid']);
+        $this->assertTrue($uniqueResult['ready']);
+        $this->assertSame('PASS_PROMOTION_READINESS_ZERO_WRITE', $uniqueResult['status']);
         $this->cleanupTemporaryPackage($unique['directory']);
 
         $multiple = $this->buildTemporaryPackage($observation, [
@@ -181,12 +185,16 @@ final class BigFiveAuthorityV249Test extends TestCase
         $directory = $this->temporaryDirectory();
         $path = $directory.'/rewritten-package.json';
         $this->writeJson($path, $package);
+        $this->assertNotFalse(file_put_contents(
+            $directory.'/rewritten-package.sha256',
+            hash_file('sha256', $path)."\n",
+        ));
 
         try {
             app(BigFiveZh6PromotionReadiness::class)->packageOnly($path);
             $this->fail('Expected an unapproved package rewrite to fail closed.');
         } catch (RuntimeException $exception) {
-            $this->assertStringContainsString('package file SHA mismatch', $exception->getMessage());
+            $this->assertStringContainsString('media readiness disposition is inconsistent', $exception->getMessage());
         } finally {
             $this->cleanupTemporaryPackage($directory);
         }
@@ -248,14 +256,14 @@ final class BigFiveAuthorityV249Test extends TestCase
     /**
      * @param  array<string, mixed>  $observation
      * @param  list<array<string, mixed>>  $candidates
-     * @return array{directory:string,package:array<string,mixed>}
+     * @return array{directory:string,package_path:string,package:array<string,mixed>}
      */
     private function buildTemporaryPackage(array $observation, array $candidates): array
     {
         $directory = $this->temporaryDirectory();
         $observation['media_inventory']['authority_complete_hero_og_count'] = count($candidates);
         $observation['media_inventory']['authority_complete_hero_og'] = $candidates;
-        $observationPath = $directory.'/observation.json';
+        $observationPath = $directory.'/production-observation.json';
         $packagePath = $directory.'/package.json';
         $hashPath = $directory.'/package.sha256';
         $this->writeJson($observationPath, $observation);
@@ -275,7 +283,11 @@ final class BigFiveAuthorityV249Test extends TestCase
         ]);
         $this->assertTrue($validator->isSuccessful(), $validator->getErrorOutput().$validator->getOutput());
 
-        return ['directory' => $directory, 'package' => $this->readAbsoluteJson($packagePath)];
+        return [
+            'directory' => $directory,
+            'package_path' => $packagePath,
+            'package' => $this->readAbsoluteJson($packagePath),
+        ];
     }
 
     /** @return array<string, mixed> */

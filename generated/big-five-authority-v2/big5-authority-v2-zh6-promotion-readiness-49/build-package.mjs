@@ -9,6 +9,9 @@ const snapshotPath = path.join(repositoryRoot, 'generated/big-five-authority-v2/
 const confirmationPath = path.join(repositoryRoot, 'generated/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/exact-snapshot-confirmation.json');
 const ownerAuthorityPath = path.resolve(process.env.PR49_OWNER_AUTHORITY_PATH ?? path.join(directory, 'pr48-owner-authority.json'));
 const observationPath = path.resolve(process.env.PR49_OBSERVATION_PATH ?? path.join(directory, 'production-observation.json'));
+const observationInputPath = process.env.PR49_OBSERVATION_PATH
+  ? observationPath
+  : 'generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/production-observation.json';
 const outputPath = path.resolve(process.env.PR49_OUTPUT_PATH ?? path.join(directory, 'promotion-readiness-package.json'));
 const outputHashPath = path.resolve(process.env.PR49_OUTPUT_HASH_PATH ?? path.join(directory, 'promotion-readiness-package.sha256'));
 
@@ -243,7 +246,7 @@ const packagePayload = {
     confirmation_file_sha256: sha256(confirmationText),
     owner_authority_path: 'generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/pr48-owner-authority.json',
     owner_authority_sha256: sha256(ownerAuthorityText),
-    production_observation_path: 'generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/production-observation.json',
+    production_observation_path: observationInputPath,
     production_observation_sha256: sha256(observationText),
   },
   counts: {

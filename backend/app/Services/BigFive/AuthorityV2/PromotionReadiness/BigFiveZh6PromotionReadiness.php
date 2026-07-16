@@ -36,10 +36,6 @@ final class BigFiveZh6PromotionReadiness
 
     private const OWNER_AUTHORITY_SHA256 = '6646dd8086d6e85a42539d8e77f4cda31649a903875825d7916d3023467134cf';
 
-    private const PRODUCTION_OBSERVATION_SHA256 = 'd4ac447391eddd8005e925b05bfe109b63cc28b8083244f68baec57e0c05a3f6';
-
-    private const PACKAGE_FILE_SHA256 = 'b85e7041c2292751e79d463fa292c863cc56b2c7a726d2568e65771ca1f4283c';
-
     /** @var list<array{asset_id:string,route:string,entity_type:string,entity_key:string}> */
     private const ASSETS = [
         [
@@ -347,8 +343,14 @@ final class BigFiveZh6PromotionReadiness
     {
         $resolvedPath = $this->resolvePath($packagePath);
         $packageText = File::get($resolvedPath);
-        if (! hash_equals(self::PACKAGE_FILE_SHA256, hash('sha256', $packageText))) {
-            throw new RuntimeException('ZH6 promotion-readiness package file SHA mismatch.');
+        $packageHashPath = preg_replace('/\.json$/', '.sha256', $resolvedPath);
+        if (! is_string($packageHashPath) || $packageHashPath === $resolvedPath || ! File::isFile($packageHashPath)) {
+            throw new RuntimeException('ZH6 promotion-readiness package SHA sidecar is missing.');
+        }
+        $declaredPackageSha256 = trim(File::get($packageHashPath));
+        if (preg_match('/^[0-9a-f]{64}$/', $declaredPackageSha256) !== 1
+            || ! hash_equals($declaredPackageSha256, hash('sha256', $packageText))) {
+            throw new RuntimeException('ZH6 promotion-readiness package SHA sidecar mismatch.');
         }
         $package = json_decode($packageText, true, 512, JSON_THROW_ON_ERROR);
         if (! is_array($package)
@@ -441,7 +443,12 @@ final class BigFiveZh6PromotionReadiness
             || ! hash_equals((string) ($package['media_authority']['media_authority_sha256'] ?? ''), $this->canonicalSha256($mediaMaterial))
             || ($eligibleMediaCount === 1) !== ($mediaApproved === true)
             || ($eligibleMediaCount === 1) !== ($workingReady === true)
+            || ($eligibleMediaCount === 1) !== (($package['status'] ?? null) === 'PASS_PROMOTION_READINESS_ZERO_WRITE')
+            || ($eligibleMediaCount !== 1) !== (($package['status'] ?? null) === 'HOLD_FAIL_CLOSED_MEDIA_AUTHORITY')
+            || ($package['counts']['eligible_hub_media_candidates'] ?? null) !== $eligibleMediaCount
+            || ($package['counts']['selected_hub_media_assets'] ?? null) !== ($eligibleMediaCount === 1 ? 1 : 0)
             || ($eligibleMediaCount !== 1 && ($package['media_authority']['selected_candidate'] ?? null) !== null)
+            || ($eligibleMediaCount === 1 && ($package['blockers'] ?? null) !== [])
             || ($eligibleMediaCount === 0 && ! in_array('unique_hub_hero_og_media_missing', $package['blockers'] ?? [], true))
             || ($eligibleMediaCount > 1 && ! in_array('multiple_hub_hero_og_media_candidates', $package['blockers'] ?? [], true))) {
             throw new RuntimeException('ZH6 media readiness disposition is inconsistent.');
@@ -476,7 +483,6 @@ final class BigFiveZh6PromotionReadiness
             'snapshot_path' => ['snapshot_file_sha256', self::SNAPSHOT_FILE_SHA256],
             'confirmation_path' => ['confirmation_file_sha256', self::CONFIRMATION_FILE_SHA256],
             'owner_authority_path' => ['owner_authority_sha256', self::OWNER_AUTHORITY_SHA256],
-            'production_observation_path' => ['production_observation_sha256', self::PRODUCTION_OBSERVATION_SHA256],
         ];
         $resolvedInputs = [];
         foreach ($inputHashFields as $field => [$shaField, $expectedSha256]) {
@@ -489,6 +495,48 @@ final class BigFiveZh6PromotionReadiness
             if (! hash_equals($expectedSha256, (string) ($package['inputs'][$shaField] ?? ''))
                 || ! hash_equals($expectedSha256, hash_file('sha256', $inputPath))) {
                 throw new RuntimeException('ZH6 readiness input SHA mismatch: '.$field.'.');
+            }
+        }
+        $observationPath = $package['inputs']['production_observation_path'] ?? null;
+        $observationSha256 = $package['inputs']['production_observation_sha256'] ?? null;
+        if (! is_string($observationPath) || trim($observationPath) === ''
+            || ! is_string($observationSha256)
+            || preg_match('/^[0-9a-f]{64}$/', $observationSha256) !== 1) {
+            throw new RuntimeException('ZH6 production observation path or SHA is invalid.');
+        }
+        $resolvedInputs['production_observation_path'] = $this->resolvePath($observationPath);
+        if (dirname($resolvedInputs['production_observation_path']) !== dirname($resolvedPath)
+            || basename($resolvedInputs['production_observation_path']) !== 'production-observation.json') {
+            throw new RuntimeException('ZH6 production observation must be the reviewed package sibling.');
+        }
+        if (! hash_equals($observationSha256, hash_file('sha256', $resolvedInputs['production_observation_path']))
+            || ! hash_equals($observationSha256, (string) ($package['media_authority']['observation_sha256'] ?? ''))
+            || ! hash_equals($observationSha256, (string) ($package['release_lock_material']['production_observation_sha256'] ?? ''))) {
+            throw new RuntimeException('ZH6 production observation SHA binding is invalid.');
+        }
+        $observation = $this->readJson($resolvedInputs['production_observation_path']);
+        $observationRuntimeRows = $observation['runtime_assets']['rows'] ?? null;
+        $observationCandidates = $observation['media_inventory']['authority_complete_hero_og'] ?? null;
+        $observationCandidateCount = $observation['media_inventory']['authority_complete_hero_og_count'] ?? null;
+        if (($observation['schema_version'] ?? null) !== 'big5-zh6-promotion-readiness-production-observation.v1'
+            || ($observation['admin_user_1']['exists'] ?? null) !== true
+            || ($observation['admin_user_1']['is_active'] ?? null) !== true
+            || ($observation['admin_user_1']['public_label'] ?? null) !== self::PUBLIC_LABEL
+            || ! is_array($observationRuntimeRows)
+            || count($observationRuntimeRows) !== 6
+            || ! hash_equals($this->canonicalSha256($observationRuntimeRows), $this->canonicalSha256($package['runtime_baseline']['rows'] ?? []))
+            || ! is_array($observationCandidates)
+            || ! is_int($observationCandidateCount)
+            || $observationCandidateCount !== count($observationCandidates)
+            || $observationCandidateCount !== $eligibleMediaCount) {
+            throw new RuntimeException('ZH6 production observation content is inconsistent.');
+        }
+        if ($observationCandidateCount === 1) {
+            $observedCandidate = $this->observationMediaCandidate($observationCandidates[0]);
+            $selectedCandidate = $package['media_authority']['selected_candidate'];
+            unset($selectedCandidate['candidate_sha256']);
+            if (! hash_equals($this->canonicalSha256($observedCandidate), $this->canonicalSha256($selectedCandidate))) {
+                throw new RuntimeException('ZH6 selected media candidate does not match the observation.');
             }
         }
         $confirmation = $this->readJson($resolvedInputs['confirmation_path']);
@@ -559,6 +607,52 @@ final class BigFiveZh6PromotionReadiness
         }
 
         return $value;
+    }
+
+    /** @param array<string,mixed> $candidate
+     * @return array<string,mixed>
+     */
+    private function observationMediaCandidate(array $candidate): array
+    {
+        $publicUrls = $candidate['public_urls'] ?? null;
+        if (! is_int($candidate['media_asset_id'] ?? null)
+            || ($candidate['media_asset_id'] ?? 0) < 1
+            || trim((string) ($candidate['media_asset_key'] ?? '')) === ''
+            || ($candidate['locale'] ?? null) !== 'zh-CN'
+            || ($candidate['content_identity'] ?? null) !== self::HUB_MEDIA_CONTENT_IDENTITY
+            || ($candidate['status'] ?? null) !== 'published_public_synced_cdn_verified'
+            || ! is_array($candidate['variant_keys'] ?? null)
+            || ! in_array('hero', $candidate['variant_keys'], true)
+            || ! in_array('og', $candidate['variant_keys'], true)
+            || ! is_array($publicUrls)
+            || ! PublicMediaUrlGuard::isAllowedPublicMediaUrl((string) ($publicUrls['hero'] ?? ''))
+            || ! PublicMediaUrlGuard::isAllowedPublicMediaUrl((string) ($publicUrls['og'] ?? ''))
+            || trim((string) ($candidate['alt'] ?? '')) === '') {
+            throw new RuntimeException('ZH6 observed media candidate identity is invalid.');
+        }
+        foreach (['rights', 'license', 'provenance', 'operator_approval_ref'] as $field) {
+            if (trim((string) ($candidate[$field] ?? '')) === '') {
+                throw new RuntimeException('ZH6 observed media candidate authority is incomplete.');
+            }
+        }
+
+        return [
+            'media_asset_id' => $candidate['media_asset_id'],
+            'media_asset_key' => (string) $candidate['media_asset_key'],
+            'locale' => 'zh-CN',
+            'content_identity' => self::HUB_MEDIA_CONTENT_IDENTITY,
+            'status' => 'published_public_synced_cdn_verified',
+            'variant_keys' => ['hero', 'og'],
+            'public_urls' => [
+                'hero' => (string) $publicUrls['hero'],
+                'og' => (string) $publicUrls['og'],
+            ],
+            'alt' => (string) $candidate['alt'],
+            'rights' => (string) $candidate['rights'],
+            'license' => (string) $candidate['license'],
+            'provenance' => (string) $candidate['provenance'],
+            'operator_approval_ref' => (string) $candidate['operator_approval_ref'],
+        ];
     }
 
     /** @param array<mixed> $value */

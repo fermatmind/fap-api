@@ -92984,7 +92984,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-promotion-readiness-49",
     "depends_on": ["BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48"],
-    "status": "rebased_local_verified_github_checks_pending",
+    "status": "review_fix_local_verified",
     "commit_sha": "e108df550423501af224440e28fa79de98567b09",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3141",
     "checks": {
@@ -93002,18 +93002,22 @@
       },
       "focused": {
         "status": "pass",
-        "evidence": "Focused PR49 passes 9 tests / 140 assertions. The full related PR41 media, PR43 provenance, PR47 review/promotion, PR48 snapshot and PR49 readiness regression set passes 61 tests / 8615 assertions. PR49 covers deterministic package validation, exact external OWNER authority, zero-write HOLD, unique-versus-multiple media disposition, owner/package tamper rejection, command package-only mode, missing-runtime fail-closed behavior and database media eligibility."
+        "evidence": "After the exact-head P2 repair, focused PR49 passes 9 tests / 144 assertions and the full related PR41 media, PR43 provenance, PR47 review/promotion, PR48 snapshot and PR49 readiness regression set passes 61 tests / 8619 assertions. The unique-media rebuilt package now passes the Laravel gate without changing service constants, while semantic package tampering still fails closed even with a recomputed sidecar."
       },
       "complete_manifest_validation": {
         "status": "pass",
         "evidence": "After the heavy-process guard found no competing FermatMind validation, the sole initial bash backend/scripts/ci_verify_mbti.sh run passed: Big Five 1506 tests / 181667 assertions plus Enneagram, MBTI smoke, Partner API, OpenAPI, migration safety, auth, order-security, dependency-security and downstream gates. After the GitHub-only branch-diff classifier exposed the missing registration, the corrected exact GitHub Big Five command passes 1506 tests / 181665 assertions with one existing skip; focused classifier coverage passes 2 / 5 and PR49 passes 9 / 140. Pint, PHP/JSON/YAML/JavaScript syntax, deterministic package hashes, git diff --check and exact 16-file allowed-path validation pass. Generated compile timestamp/hash side effects were restored; production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutations remain zero."
       },
       "github_verify_bigfive": {
-        "status": "pass_superseded_by_rebase",
-        "evidence": "Pre-rebase head 04f200cf3fcd9899e0091e76efcc9d19748755e8 passed verify-bigfive in 4m10s after the exact-path classifier fix; all nine GitHub checks passed, merge state was CLEAN, exact-head Codex review reported no major issues, and reviewThreads was empty. PR3142 then advanced main, so the rebased head requires a fresh complete GitHub cycle and review."
+        "status": "pass_superseded_by_review_fix",
+        "evidence": "Rebased head e68378f547faef37bdd6af035032752a293b0504 passed all nine GitHub checks with merge state CLEAN, including verify-bigfive in 3m12s. Exact-head review then found one valid P2 in the package file constant; the locally verified fix requires a fresh complete GitHub cycle and exact-head review."
+      },
+      "codex_review": {
+        "status": "p2_fix_local_verified",
+        "evidence": "Exact-head review thread PRRT_kwDOQn6xoM6RauOP correctly found that the zero-media package-file constant made the documented future unique-media rebuild unreachable. The fix preserves immutable PR48/confirmation/OWNER locks, verifies the rebuilt package through its sibling SHA sidecar, binds the sibling production observation SHA into media and release locks, validates observation/runtime/media semantics, and still requires live database drift matching."
       }
     },
-    "failure_reason": null,
+    "failure_reason": "Exact-head review P2 found that the zero-media package-file constant blocked every legitimate fresh unique-media rebuild; the reviewed-artifact/live-database fix is locally verified and awaiting fresh GitHub checks and review.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -93028,7 +93032,8 @@
       {"at": "2026-07-16T10:49:30Z", "from": "github_checks_pending", "to": "github_check_fix_in_progress", "note": "Head 7d45bdfe769065d6d09a9d4acb89ce7344f332c3 passed eight of nine checks and exact-head Codex review reported no major issues. verify-bigfive failed only at the runtime-freeze classifier because the two exact read-only PR49 command/service paths were not registered. Scope is corrected to add the classifier test file; the fix allowlists only those exact paths and retains fail-closed rejection for unexpected writers/runtime services. Media readiness remains HOLD and controlled mutations remain zero."},
       {"at": "2026-07-16T10:52:04Z", "from": "github_check_fix_in_progress", "to": "github_check_fix_local_verified", "note": "The exact-path runtime-freeze fix passes the corrected GitHub Big Five gate at 1506 tests / 181665 assertions with one existing skip, focused classifier coverage at 2 / 5, PR49 at 9 / 140, Pint, package build/validation, PHP/JSON/YAML syntax, git diff --check and exact 16-file manifest scope validation. Generated BIG5 compile side effects were inspected and restored. Fresh exact-head GitHub checks and Codex review are required before merge; media readiness remains HOLD and controlled mutations remain zero."},
       {"at": "2026-07-16T11:02:53Z", "from": "github_check_fix_local_verified", "to": "ready_to_merge", "note": "Fresh head 04f200cf3fcd9899e0091e76efcc9d19748755e8 passed all nine required GitHub checks with merge state CLEAN; verify-bigfive passed in 4m10s, exact-head Codex review reported no major issues, and reviewThreads is empty. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge. The package remains HOLD_FAIL_CLOSED_MEDIA_AUTHORITY, PR50 remains blocked, and controlled mutations remain zero."},
-      {"at": "2026-07-16T11:05:25Z", "from": "ready_to_merge", "to": "rebased_local_verified_github_checks_pending", "note": "PR3142 advanced origin/main to 13182ffeb3bad72757776046b8f92d863b12318e after the ready-to-merge evidence was recorded. All eight PR49 commits rebased without conflict; the substantive implementation is now e108df550423501af224440e28fa79de98567b09 and the current pre-ledger head is aac8feee98c3b4848880bb3f97b0ee4018936dd6. Post-rebase PR49 passes 9 / 140, the complete runtime-freeze file passes 358 / 739, Pint and deterministic package validation pass, immutable package hashes are unchanged, and exact 16-file scope validation passes. Force-with-lease push, fresh nine-check GitHub cycle and exact-head review are required before merge; media readiness remains HOLD and controlled mutations remain zero."}
+      {"at": "2026-07-16T11:05:25Z", "from": "ready_to_merge", "to": "rebased_local_verified_github_checks_pending", "note": "PR3142 advanced origin/main to 13182ffeb3bad72757776046b8f92d863b12318e after the ready-to-merge evidence was recorded. All eight PR49 commits rebased without conflict; the substantive implementation is now e108df550423501af224440e28fa79de98567b09 and the current pre-ledger head is aac8feee98c3b4848880bb3f97b0ee4018936dd6. Post-rebase PR49 passes 9 / 140, the complete runtime-freeze file passes 358 / 739, Pint and deterministic package validation pass, immutable package hashes are unchanged, and exact 16-file scope validation passes. Force-with-lease push, fresh nine-check GitHub cycle and exact-head review are required before merge; media readiness remains HOLD and controlled mutations remain zero."},
+      {"at": "2026-07-16T11:17:35Z", "from": "rebased_local_verified_github_checks_pending", "to": "review_fix_local_verified", "note": "Rebased head e68378f547faef37bdd6af035032752a293b0504 passed all nine checks, then exact-head review raised one valid P2: the current zero-media package file SHA constant prevented the documented fresh unique-media rebuild. The fix keeps immutable snapshot/confirmation/OWNER hashes code-locked, uses a reviewed sibling package SHA sidecar, dynamically binds the sibling observation into media/release locks, validates observation/runtime/media semantics, and leaves the live database drift gate mandatory. PR49 passes 9 / 144, related PR41/43/47/48/49 passes 61 / 8619, Pint, syntax, package build/validation and git diff checks pass. Fresh GitHub checks and exact-head review remain required; current production media remains zero-candidate HOLD and controlled mutations remain zero."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50": {
