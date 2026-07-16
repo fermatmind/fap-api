@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "artifact": "big-five-authority-v2-zh6-human-review-attestation",
+  "cohort_id": "big_five_v2_zh_cn_hub_plus_five_domains_01",
+  "candidate_package": "generated/big-five-authority-v2/big5-authority-v2-zh6-review-source-cohort/candidate-package.json",
+  "status": "approved_by_real_human",
+  "review_scope": {
+    "content": true,
+    "source_mapping": true,
+    "claim_boundaries": true,
+    "media_permission": false,
+    "cms_or_production_write": false,
+    "publication_or_indexability": false
+  },
+  "attestation_statement": "我已阅读并批准 big_five_v2_zh_cn_hub_plus_five_domains_01 中 6 个锁定候选页，认可其中文内容、来源映射和边界说明，并同意把我的 CMS 管理员身份与本次审核记录绑定。媒体授权、CMS 写入、发布和索引状态不在本次批准范围内。",
+  "reviewer": {
+    "admin_user_id": 1,
+    "public_label": "费马测试操作者",
+    "role": "operator_reviewer",
+    "authority_reference": "admin_user:1"
+  },
+  "reviewed_at": "2026-07-16T07:42:19Z",
+  "assets": [
+    {
+      "asset_id": "model_hub:zh-CN:/zh/personality/big-five",
+      "candidate_content_sha256": "3670b27f705b14872f9295e1c81f0ab46e949077067813a0e4e1fc9793185ab6"
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/openness",
+      "candidate_content_sha256": "23b93f8053a62dabdc4ca2869c2f3ebf593ea8aa7d97f860175d7472812fc442"
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/conscientiousness",
+      "candidate_content_sha256": "cb5c594f9f47579a613a12f3d36b976f8b7daa6973be75472201608f9a80d616"
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/extraversion",
+      "candidate_content_sha256": "32d81b4634fcb399dbedafd2a8684df6fbdaae24a8bd73bd31cce0ddafdbe668"
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/agreeableness",
+      "candidate_content_sha256": "72654d84a2979768dca0e9236ab0c167b59942bfae27f8d08ef092ac745f7fc1"
+    },
+    {
+      "asset_id": "domain:zh-CN:/zh/personality/big-five/neuroticism",
+      "candidate_content_sha256": "7096771bcad4600f86a3ed8d33cb0ff00042809f03ea5d805084397ca1e6f223"
+    }
+  ],
+  "superseded_attestation": {
+    "status": "superseded_after_candidate_cleanup",
+    "reviewed_at": "2026-07-16T07:36:28Z",
+    "reviewer_authority_reference": "admin_user:1",
+    "review_record_sha256": "b205a685c06b37a935f1ca499703521dc77003e646f17c0052feaf0d11cff3f3",
+    "reason": "Four visible method-boundary strings still exposed internal pending-review/draft wording; removing that wording changed four candidate content hashes and correctly invalidated the prior attestation."
+  },
+  "review_record_sha256": "3ea9a9052e54c9595bda7c1289606f0d31269e728455a4f2124a9f7e0e58daa9"
+}
