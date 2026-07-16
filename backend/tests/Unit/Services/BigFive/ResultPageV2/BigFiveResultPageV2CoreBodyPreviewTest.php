@@ -316,6 +316,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_authority_v2_promotion_readiness_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV249PromotionReadiness.php',
+            'backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/BigFiveZh6PromotionReadiness.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/UnexpectedRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -6028,6 +6043,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveAuthorityV2PromotionReadinessFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7870,6 +7889,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php',
             'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFiveReviewPromotionPreflight.php',
+        ], true);
+    }
+
+    private function isBigFiveAuthorityV2PromotionReadinessFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV249PromotionReadiness.php',
+            'backend/app/Services/BigFive/AuthorityV2/PromotionReadiness/BigFiveZh6PromotionReadiness.php',
         ], true);
     }
 
