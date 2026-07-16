@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "review_fix_local_validation_passed",
-    "commit_sha": "489b531ceabf92879c86952357dfbe50aae5f2c3",
+    "status": "pr_open_checks_pending",
+    "commit_sha": "1e4ae6a92086e22d0dfb9082c86bfc1d4947d94c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96201,9 +96201,14 @@
         "at": "2026-07-16T13:59:10Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine first-cycle GitHub checks passed. Resolved the automated P1 within 22E scope by making execute failure output stage-aware after committed import/bind/promotion and retaining only rollback token SHA/persisted state. Focused 28/606, full Enneagram V2 193/28612, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass; a fresh GitHub cycle is required after push."
+      },
+      {
+        "at": "2026-07-16T14:00:32Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the reviewed same-scope repair at 1e4ae6a92086e22d0dfb9082c86bfc1d4947d94c. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check cycle before merge."
       }
     ],
-    "updated_at": "2026-07-16T13:59:10Z"
+    "updated_at": "2026-07-16T14:00:32Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
