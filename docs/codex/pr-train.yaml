@@ -345,7 +345,7 @@ prs:
     branch: codex/big5-authority-v2-topic-authority-46
     depends_on: [BIG5-AUTHORITY-V2-TOPIC-RUNTIME-40, BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43]
     train_scope: big5_authority_v2_backend_topic_draft_revision_authority
-    status: in_progress
+    status: merged
     goal: "Produce a backend-authoritative, bilingual Big Five Topic working/draft revision package whose explicit BIG5_OCEAN test entry resolves through scales_registry, whose visible copy removes internal SEO/recommendation language, and whose source/date/media authority remains evidence-backed and fail closed; provide an executable read-only dry-run without CMS or public-runtime mutation."
     allowed_paths:
       - backend/app/Console/Commands/PersonalityBigFiveAuthorityV246TopicDraftPreflight.php
