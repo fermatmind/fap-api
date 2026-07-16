@@ -94509,9 +94509,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-3-FAMILY-12"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "a9fd62ccbeeb0cd17693c76bd40a87ecaaf401d1",
-    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
+    "status": "merged",
+    "commit_sha": "14a48df1f41dbf47f82c104e8111655805798245",
+    "commit_sha_role": "github_squash_merge_commit",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3125",
     "checks": {
       "dependency": {
@@ -94541,18 +94541,22 @@
       "codex_skeptical_review": {
         "status": "pass",
         "evidence": "The recorded PR08-gate audit found 20 initial asset-specific issues and the single scoped repair cleared all of them. Final focused validation passes 8 tests / 417 assertions, exactly twelve assets, independent en/zh-CN authoring, 36 unique FAQ pairs, pending manual review, draft-only release truth, and closed execution boundaries."
+      },
+      "post_merge_revalidation": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #3125 MERGED at 2026-07-16T00:45:00Z as 14a48df1f41dbf47f82c104e8111655805798245. origin/main containment, clean synced main, remote/local branch deletion, focused 8 tests / 417 assertions, scoped Pint, and changed JSON parsing all pass."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-16T00:45:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -94589,9 +94593,14 @@
         "at": "2026-07-16T00:38:06Z",
         "status": "ready_to_merge",
         "note": "All nine GitHub checks passed on immutable head 4a019525ae50ef2bbc3cb64ae08b9f642f272349. GitHub reports CLEAN/MERGEABLE, no required review rule, no reviews, and zero review threads; exact six-file scope, twelve assets, pending-manual-review truth, draft-only release truth, 36 unique FAQ pairs, and every execution boundary were revalidated. This ledger-only ready transition must itself receive a fresh complete check cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T00:59:09Z",
+        "status": "merged",
+        "note": "Final ready-ledger head 873f51275b07fd10bfe11543a56106e477fb579f passed all nine checks and was squash-merged as 14a48df1f41dbf47f82c104e8111655805798245 at 2026-07-16T00:45:00Z. GitHub MERGED state, origin/main containment, exact six-file scope, zero review threads, remote/local cleanup, clean synced main, focused 8-test / 417-assertion post-merge regression, Pint, and JSON parsing were verified before PR14 implementation."
       }
     ],
-    "updated_at": "2026-07-16T00:38:06Z"
+    "updated_at": "2026-07-16T00:59:09Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14",
@@ -94602,18 +94611,34 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-4-FAMILY-13"
     ],
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for the declared predecessor merge and origin/main containment."
+        "status": "pass",
+        "evidence": "PR13 is MERGED as 14a48df1f41dbf47f82c104e8111655805798245; GitHub state, origin/main containment, final-head checks, exact scope, remote/local branch cleanup, clean synced main, and focused post-merge regression were verified."
+      },
+      "initial_local_validation": {
+        "status": "fail",
+        "evidence": "The first PR08-gate replay found 36 asset-specific issues: 1 diagnosis-boundary phrase, 6 short Chinese page-specific signal sets, 15 shallow Chinese FAQ items, 6 unverified Chinese answerability mappings, 5 short Chinese exercise fields, 1 short Chinese independence note, 1 relationship-prediction boundary phrase, and 1 duplicated evidence-boundary sentence. The first scoped repair left one duplicate sentence; the second differentiated it but exposed one unsupported-equivalence boundary; the third used a unique explicit cannot-prove statement and cleared all findings."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "The PR14 focused suite passes 8 tests / 420 assertions; all twelve Type 5 family assets have zero asset-specific PR08-gate issues, with only one expected aggregate target_count_invalid signal and exactly 104 target_asset_missing rows deferred to PR15-PR18. Pint, PHP syntax, YAML, all changed JSON, diff check, and the exact six-file allowlist pass."
+      },
+      "content_qa": {
+        "status": "pass",
+        "evidence": "The package contains exactly Type Five core, 5w4, 5w6, and self-preservation/social/one-to-one subtype assets in en and zh-CN. Knowledge, competence, preparation, privacy, capacity, verification, personal synthesis, resource boundaries, knowledge roles, and focused trust remain revisable hypotheses; workload, access, confidentiality, housing, scarcity, credentialing, unequal opportunity, safety, consent, power, culture, and role duties remain visible alternatives. All 36 FAQ pairs are unique, locale outlines and examples are independent, and every asset remains pending_manual_review with reviewer null, draft_only, publish_eligible false, and closed execution boundaries."
+      },
+      "codex_skeptical_review": {
+        "status": "pass",
+        "evidence": "The recorded PR08-gate audit found 36 initial asset-specific issues, one first-repair residual duplicate sentence, and one second-repair equivalence-boundary residual; three scoped repair rounds cleared all findings. Final focused validation passes 8 tests / 420 assertions, exactly twelve assets, independent en/zh-CN authoring, 36 unique FAQ pairs, pending manual review, draft-only release truth, and closed execution boundaries."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -94632,9 +94657,19 @@
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_dependency",
         "note": "Registered from explicit serial /goal; waiting for declared predecessor."
+      },
+      {
+        "at": "2026-07-16T00:59:09Z",
+        "status": "in_progress",
+        "note": "Reconciled the verified PR13 merge and began the exact PR14 branch from clean latest origin/main. This scope authors exactly 12 independently composed Type 5 core, wing, and instinctual-subtype locale assets; no CMS/database write, revision-pointer mutation, human-review completion, publication, indexability, sitemap, llms, search submission, deploy, or production action is authorized."
+      },
+      {
+        "at": "2026-07-16T01:00:23Z",
+        "status": "local_checks_passed",
+        "note": "After three truthfully recorded content-repair rounds, all PR14 manifest checks pass: 8 tests / 420 assertions, zero asset-specific PR08-gate issues for all twelve real assets, Pint, PHP syntax, YAML, all changed JSON, diff check, and exact six-file scope. The package remains a pending-manual-review, draft-only, publish-ineligible handoff with no CMS/database/revision/discoverability/search/deploy action."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-16T01:00:23Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-6-FAMILY-15": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-6-FAMILY-15",

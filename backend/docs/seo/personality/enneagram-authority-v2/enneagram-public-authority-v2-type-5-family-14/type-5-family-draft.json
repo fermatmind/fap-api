@@ -1,0 +1,1858 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14",
+  "framework": "enneagram",
+  "asset_scope": {
+    "family": "type-5",
+    "expected_asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "counts_by_entity_type": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "identity_keys": [
+      "core_type:type-5",
+      "wing:5w4",
+      "wing:5w6",
+      "instinctual_subtype:type-5/self-preservation",
+      "instinctual_subtype:type-5/social",
+      "instinctual_subtype:type-5/one-to-one"
+    ]
+  },
+  "source_ledger_refs": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  },
+  "assets": [
+    {
+      "identity_key": "core_type:type-5",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "path": "/en/personality/enneagram/type-5",
+      "title": "Type Five: knowledge, capacity, and a revisable preparation hypothesis",
+      "answer_first": "Type Five is a traditional Enneagram hypothesis about attention returning to knowledge, competence, preparation, privacy, and available capacity. Research, quiet work, or limited disclosure cannot establish motive because expertise, workload, disability access, confidentiality, remote work, culture, and safety may produce the same behavior.",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "Observe preparation and capacity without declaring an essence",
+          "body": "Track when more information is requested, what threshold makes participation feel sufficiently prepared, and how time, privacy, or energy is budgeted. Treat these as situational observations rather than proof of an inner type."
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "Separate research and solitude from inferred motive",
+          "body": "Reading before a meeting may serve accuracy, language access, a regulated role, anxiety reduction, or ordinary preparation. Working alone may reflect concentration, remote arrangements, sensory access, confidentiality, or a temporary deadline."
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "Compare decisions, feedback, and re-entry",
+          "body": "In decisions, note when gathering becomes a useful check and when action remains indefinitely deferred. During feedback or conflict, record whether the person asks for definitions, pauses to process, shares a partial view, or returns with a bounded proposal."
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "Hold careful understanding beside its costs",
+          "body": "Knowledge attention may support precise models, independent learning, careful questions, and respect for complexity. Tradeoffs can appear when preparation consumes the decision window, privacy blocks needed coordination, or conserving capacity becomes an untested assumption."
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "Use contextual examples without forecasting outcomes",
+          "body": "At work, compare an analyst protecting confidential data with a contributor withholding an unfinished idea. In a relationship, compare requesting processing time with avoiding an agreed conversation. The surrounding obligation and later follow-through matter more than the surface pause."
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "Compare modifiers and ordinary alternatives",
+          "body": "The 5w4 hypothesis adds personal synthesis, meaning, and originality; 5w6 adds verification, reliability, and risk checking. Also compare Four expression, Six vigilance, introversion, specialist training, fatigue, neurodivergent access needs, trauma-related safety, and role constraints."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Look for informed action and flexible availability",
+          "body": "The hypothesis weakens when the person acts with incomplete information, asks for help without treating it as lost competence, adjusts privacy to relationship needs, or spends capacity generously when the context is safe and responsibilities are clear."
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "Keep competence language exploratory",
+          "body": "Use this page to test observations about preparation, knowledge, privacy, and capacity. It cannot diagnose anxiety or neurodivergence, measure intelligence, rank expertise, screen applicants, predict performance, or assign a permanent identity."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does extensive research establish Type Five?",
+          "answer": "No. Professional standards, curiosity, study requirements, uncertainty, or language access can explain extensive research. Compare the repeated purpose of gathering information and whether contrary examples reduce the hypothesis."
+        },
+        {
+          "question": "Why treat privacy and capacity as contextual?",
+          "answer": "Privacy may be required by confidentiality, culture, safety, disability access, remote work, or simple preference. Capacity also changes with health, workload, care duties, resources, and the demands of a specific setting."
+        },
+        {
+          "question": "What evidence should weaken the preparation hypothesis?",
+          "answer": "Prompt action with incomplete information, comfortable help-seeking, flexible disclosure, and reliable re-entry after a pause should reduce confidence that preparation or capacity protection is the best explanation."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one research task, one collaborative decision, and one relationship conversation across five days.",
+        "observable_signal": "Record the decision deadline, information already available, questions asked, stated capacity, privacy need, and time of re-entry.",
+        "page_specific_signal": "Compare whether additional knowledge changes the decision or only delays exposure to an uncertain next step.",
+        "alternative_explanation": "Check workload, confidentiality, access needs, training, remote arrangements, cultural norms, and current safety.",
+        "reflection_prompt": "Name one event where an ordinary constraint explains the behavior better and revise the hypothesis downward."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English core page uses decision thresholds, re-entry, and confidentiality examples, independently of the Chinese page's task ledger and participation-cost sequence.",
+        "outline": [
+          "answer_first",
+          "motivation_attention",
+          "behavior_motive",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "work_relationship_examples",
+          "wings_mistypes",
+          "counterexample",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "information threshold before a time-bounded decision",
+          "whether a private pause includes a stated re-entry time",
+          "how capacity estimates change after responsibilities become explicit"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are knowledge competence and preparation?",
+          "What are privacy and available capacity?",
+          "What are expertise workload and confidentiality?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are knowledge competence and preparation?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are privacy and available capacity?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are expertise workload and confidentiality?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Research, privacy, and solitude may reflect expertise, workload, access, confidentiality, culture, or safety rather than type.",
+          "Traditional center language is a conceptual comparison only and provides no bodily-mechanism evidence."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/wings/5w4",
+        "/en/personality/enneagram/wings/5w6",
+        "/en/personality/enneagram/type-5/instincts/self-preservation",
+        "/en/personality/enneagram/type-5/instincts/social",
+        "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:5w4",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "5w4",
+      "path": "/en/personality/enneagram/wings/5w4",
+      "title": "5w4: a core-first hypothesis about personal synthesis and meaning",
+      "answer_first": "5w4 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Four may modify how ideas receive personal synthesis, meaning, and originality. Distinctive work does not establish 5w4 because creative training, specialization, culture, audience, and project ownership can look similar.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Start with Type Five before considering the modifier",
+          "body": "First test recurring preparation, knowledge, privacy, and capacity observations. Consider Four only as a possible secondary emphasis on personally coherent synthesis; an expressive surface cannot replace the core-first comparison."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Compare 5w4 with 5w6 on the same task",
+          "body": "Given one uncertain problem, 5w4 may test whether the account feels original and personally meaningful, while 5w6 may emphasize verification, reliable procedure, and risk coverage. Either pattern can reverse with role demands."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe authorship under revision and handoff",
+          "body": "Compare how a person names sources, integrates an unusual perspective, responds when a signature idea is removed, and hands work to a standard process. Record behavior across research, critique, and delivery rather than inferring motive from aesthetics."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use conventional and impersonal work as a challenge",
+          "body": "Confidence should fall when the person readily adopts a conventional method, accepts anonymous contribution, prioritizes reliability over personal signature, or treats an original idea as replaceable when evidence changes."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Keep craft and specialization visible",
+          "body": "Creative education, disciplinary niche, minority culture, portfolio incentives, intellectual property, grief, or a client brief may produce unusual synthesis. Compare these explanations before adding a wing label."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep the wing secondary and evidence-limited",
+          "body": "5w4 is not a separate type, diagnosis, ability measure, or creativity score. The systematic review found little research supporting wings, so this page offers only a revisable observation hypothesis."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does original analysis prove a 5w4 wing?",
+          "answer": "No. Specialist training, an unusual dataset, intellectual property, client needs, or creative practice may require original analysis. Compare how authorship is handled when a standard method works better."
+        },
+        {
+          "question": "How is 5w4 compared with 5w6?",
+          "answer": "Keep the same Type Five core and the same task. Then compare personal synthesis and meaning with verification, repeatability, and risk coverage while checking whether job requirements explain the difference."
+        },
+        {
+          "question": "What counterexample matters for 5w4?",
+          "answer": "Comfort with conventional methods, anonymous contribution, and replacing a signature idea when evidence changes should all reduce confidence in the personal-synthesis modifier hypothesis."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, select one research draft, one critique, and one handoff where authorship is visible.",
+        "observable_signal": "Record source use, unusual synthesis, requested revisions, emotional meaning stated, and willingness to use a standard method.",
+        "page_specific_signal": "Compare personal coherence with verification and reliability while holding the Type Five core constant.",
+        "alternative_explanation": "Check creative training, specialization, culture, portfolio incentives, ownership rules, and the client brief.",
+        "reflection_prompt": "Identify the strongest conventional-work counterexample and revise the 5w4 hypothesis accordingly."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 5w4 page centers on authorship removal and method replacement, independently of the Chinese page's source integration and anonymous delivery path.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "alternative_explanations",
+          "counterexample",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "response when a signature idea is removed from a draft",
+          "choice between personal synthesis and a proven standard method",
+          "willingness to hand an original concept into anonymous delivery"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are knowledge competence and privacy?",
+          "What are personal synthesis meaning and originality?",
+          "What are creative training specialization and culture?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are knowledge competence and privacy?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are personal synthesis meaning and originality?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are creative training specialization and culture?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Originality may reflect training, specialization, culture, audience, or ownership rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-5",
+        "/en/personality/enneagram/wings/5w4",
+        "/en/personality/enneagram/wings/5w6",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:5w6",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "5w6",
+      "path": "/en/personality/enneagram/wings/5w6",
+      "title": "5w6: a core-first hypothesis about verification and reliable method",
+      "answer_first": "5w6 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Six may modify how information is checked for verification, reliability, and risk. Careful procedure does not establish 5w6 because regulated work, quality assurance, security roles, team norms, and accountability can require the same behavior.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep Type Five primary and verification secondary",
+          "body": "Test preparation, knowledge, privacy, and capacity observations before adding a possible Six modifier. Rechecking is meaningful only when its purpose and context are known; compliance with a required procedure is not wing evidence by itself."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Compare 5w6 with 5w4 under one uncertainty",
+          "body": "On the same incomplete dataset, 5w6 may emphasize validation, reproducibility, and failure modes, while 5w4 may emphasize personal synthesis, meaning, and an original frame. Change the accountability structure and either response may change."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Observe checks, escalation, and stopping rules",
+          "body": "Record which source is trusted, how contradictory evidence is handled, when a second reviewer is requested, what risk triggers escalation, and what stopping rule permits action. Distinguish voluntary checking from mandated controls."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Test flexible action when stakes are low",
+          "body": "The modifier hypothesis weakens when the person moves promptly with reversible experiments, tolerates an unverified detail, trusts a competent collaborator, or drops redundant checks after the risk owner accepts them."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Compare regulated roles and learned methods",
+          "body": "Quality assurance, cybersecurity, laboratory practice, finance controls, aviation, incident response, or a recent failure may teach extensive verification. Unequal accountability or fear of blame may also explain repeated checking."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Do not convert reliability into a type claim",
+          "body": "5w6 is not a security clearance, risk score, competence rating, or forecast of loyalty. Wing research remains limited, so verification patterns stay contextual and open to disconfirmation."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does careful verification prove a 5w6 wing?",
+          "answer": "No. Regulation, quality assurance, security duties, team standards, prior incidents, and personal accountability can all require careful verification without revealing an Enneagram motive."
+        },
+        {
+          "question": "How should 5w6 be compared with 5w4?",
+          "answer": "Use the same uncertain task and Type Five core. Compare verification, repeatability, and failure-mode attention with personal synthesis and meaning, then test whether role demands explain the contrast."
+        },
+        {
+          "question": "Which evidence weakens the 5w6 modifier?",
+          "answer": "Fast reversible experiments, trust in a competent collaborator, comfort with a low-stakes unknown, and stopping redundant checks after risk acceptance should all lower confidence."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one low-stakes decision, one regulated task, and one peer review across five days.",
+        "observable_signal": "Record source authority, contradictory evidence, requested reviewers, escalation threshold, risk owner, and stopping rule.",
+        "page_specific_signal": "Compare verification with personal synthesis while keeping task uncertainty and the Type Five core constant.",
+        "alternative_explanation": "Check regulation, quality assurance, security duty, team norms, prior incidents, and unequal blame exposure.",
+        "reflection_prompt": "Use the low-stakes event to test whether checking decreases when accountability and consequence are reduced."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 5w6 page follows stopping rules and risk ownership, independently of the Chinese page's verification ledger and reversible-experiment sequence.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "observable_situations",
+          "sibling_core_comparison",
+          "alternative_explanations",
+          "counterexample",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "stopping rule used after contradictory evidence is reviewed",
+          "whether a risk owner accepting uncertainty ends repeated checks",
+          "change in verification when a decision becomes reversible and low stakes"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are knowledge competence and capacity?",
+          "What are verification reliability and risk?",
+          "What are regulated work quality assurance and security roles?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are knowledge competence and capacity?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are verification reliability and risk?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are regulated work quality assurance and security roles?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Verification may be required by regulation, quality assurance, security work, team norms, or accountability."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-5",
+        "/en/personality/enneagram/wings/5w4",
+        "/en/personality/enneagram/wings/5w6",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/self-preservation",
+      "path": "/en/personality/enneagram/type-5/instincts/self-preservation",
+      "title": "Type Five self-preservation: a space and resource boundary hypothesis",
+      "answer_first": "Type Five self-preservation is a traditional subtype hypothesis about attention to space, resources, low-demand arrangements, and protecting usable capacity. A private room, stocked supplies, or reduced contact does not establish subtype because scarcity, housing, disability access, caregiving, remote work, confidentiality, and safety may explain the same choices.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "State the tradition as a testable secondary idea",
+          "body": "Within a Type Five hypothesis, self-preservation may emphasize maintaining a workable base with sufficient space, supplies, time, and low-demand access. This remains secondary and must be tested against actual constraints."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare identical resources under different constraints",
+          "body": "Observe two similar weeks with the same workload: one with secure housing and predictable access, another with scarcity or interruption. Ask whether boundary protection persists after resources and demands become stable."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Avoid bodily-mechanism claims",
+          "body": "The self-preservation label organizes observations about resource and boundary attention; it is not evidence about bodily mechanisms, neurological systems, or a universal biological category."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow visible participation beside protected capacity",
+          "body": "A person may host others, lead a public project, or share resources while still using clear time and space limits. Visible generosity neither proves nor disproves the hypothesis; compare the boundary negotiation."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Audit material and access conditions first",
+          "body": "Housing insecurity, disability access, chronic workload, caregiving, poverty, migration, sensory needs, and unsafe environments can make space or supplies urgent. These conditions deserve direct support, not a subtype interpretation."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use stable access and flexible sharing as challenges",
+          "body": "Confidence should fall when secure resources lead to easy sharing, interruptions are handled without prolonged retreat, low-demand routines are not preferred, or boundaries shift readily after a specific constraint ends."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep the construct instrument-specific and revisable",
+          "body": "One measure and sample cannot establish universal subtype ontology or cross-cultural equivalence. Treat resource patterns as local observations, preserve alternatives, and require human review before any later use."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does wanting a private room prove self-preservation Type Five?",
+          "answer": "No. Housing arrangements, sensory access, remote work, confidentiality, family roles, study needs, and ordinary preference can all make private space useful without establishing subtype."
+        },
+        {
+          "question": "How can actual scarcity be separated from this hypothesis?",
+          "answer": "Compare behavior after resources, housing, and workload become reliably sufficient. If protection decreases with stable access, the material constraint explains more than a subtype label."
+        },
+        {
+          "question": "What counterexample weakens the resource-boundary hypothesis?",
+          "answer": "Flexible sharing when access is reliable, comfortable interruption, and rapid relaxation of limits after a constraint ends should all reduce confidence in the subtype account."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, compare one resource decision, one interruption, and one shared-space event.",
+        "observable_signal": "Record available supplies, housing security, access needs, workload, caregiving duty, stated boundary, and later adjustment.",
+        "page_specific_signal": "Hold the task constant while comparing a secure-resource period with a constrained-resource period.",
+        "alternative_explanation": "Check scarcity, housing, disability access, remote work, confidentiality, sensory demand, and current safety.",
+        "reflection_prompt": "Identify whether a boundary relaxes when the named constraint ends and revise the subtype hypothesis."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English self-preservation page uses secure-versus-constrained resource matching, independently of the Chinese page's shared-space and interruption ledger.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "alternative_environment",
+          "countertype_variation",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "boundary change after housing and resource access stabilizes",
+          "response to interruption in otherwise identical workload periods",
+          "willingness to share supplies when replacement is reliably available"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are space resources and low-demand arrangements?",
+          "What are scarcity housing and disability access?",
+          "What are caregiving remote work and confidentiality?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are space resources and low-demand arrangements?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are scarcity housing and disability access?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are caregiving remote work and confidentiality?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Space and resource protection may reflect scarcity, housing, access, care duties, confidentiality, or safety."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-5",
+        "/en/personality/enneagram/type-5/instincts/self-preservation",
+        "/en/personality/enneagram/type-5/instincts/social",
+        "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/social",
+      "path": "/en/personality/enneagram/type-5/instincts/social",
+      "title": "Type Five social: a knowledge-role and group expertise hypothesis",
+      "answer_first": "Type Five social is a traditional subtype hypothesis about attention to a knowledge role, valued expertise, and how understanding is exchanged within a group. Teaching, credentials, specialized language, or selective participation does not establish subtype because academic hierarchy, professional duties, credentialing, unequal access, status rules, and community norms may produce the same pattern.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Frame expertise as a secondary relational observation",
+          "body": "Within a Type Five hypothesis, the social subtype may emphasize contributing through a recognized field of knowledge or locating one's role through shared standards. This does not make expertise a personality essence."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare the same knowledge across equal and unequal groups",
+          "body": "Observe the same person sharing one topic with peers who have equal access and with a group structured by credentials or status. Compare participation after authority, invitation, and audience familiarity are matched."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep group language non-mechanistic",
+          "body": "The social label organizes observations about roles and knowledge exchange rather than evidence about bodily mechanisms, neural organization, or an inborn social system."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow ordinary sociability and broad participation",
+          "body": "A person may enjoy gatherings, ask beginner questions, or contribute outside formal expertise while still using knowledge as one route into a group. Sociability level alone is not the construct."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Examine credentialing and access before subtype",
+          "body": "Academic and professional hierarchies decide who may speak, whose knowledge counts, and which vocabulary signals membership. Education cost, language, disability access, discrimination, and seniority can shape participation."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Challenge the hypothesis with role-free contribution",
+          "body": "Confidence should fall when the person participates comfortably without expertise, shares unfinished knowledge among peers, accepts correction without role threat, and builds belonging through activities unrelated to credentials."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Limit inference to the observed group context",
+          "body": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence. Record who grants authority and who bears exclusion before using this reversible hypothesis."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Do credentials or teaching establish social Type Five?",
+          "answer": "No. Employment duties, academic rank, licensure, community need, and unequal access may determine who teaches or holds credentials. Compare participation where formal status is removed."
+        },
+        {
+          "question": "How should knowledge roles be compared across groups?",
+          "answer": "Use the same topic and person, then match invitation, audience familiarity, and decision authority. Differences that track hierarchy or access support an environmental explanation."
+        },
+        {
+          "question": "What counterexample weakens the knowledge-role hypothesis?",
+          "answer": "Comfortable role-free participation, sharing incomplete ideas, accepting correction, and finding belonging outside expertise should all reduce confidence in this subtype account."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, observe one peer group, one credentialed setting, and one informal community activity.",
+        "observable_signal": "Record invitation, formal role, topic familiarity, vocabulary, who may correct whom, access barriers, and contribution made.",
+        "page_specific_signal": "Compare the same knowledge exchange after authority and audience familiarity are held as constant as possible.",
+        "alternative_explanation": "Check credentialing, academic hierarchy, professional duty, language, seniority, discrimination, and unequal access.",
+        "reflection_prompt": "Find one role-free contribution that created belonging and use it to challenge the subtype hypothesis."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English social page matches equal and unequal group authority, independently of the Chinese page's speaking-rights and access-barrier sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "alternative_environment",
+          "instinct_boundary",
+          "countertype_variation",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "participation change after formal expertise status is removed",
+          "willingness to share unfinished knowledge among equal-access peers",
+          "response when a lower-status member corrects a specialized claim"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are knowledge role and valued expertise?",
+          "What are teaching credentials and specialized language?",
+          "What are academic hierarchy credentialing and unequal access?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are knowledge role and valued expertise?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are teaching credentials and specialized language?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are academic hierarchy credentialing and unequal access?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Knowledge roles may be produced by credentialing, professional duty, hierarchy, access, status, or community norms."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-5",
+        "/en/personality/enneagram/type-5/instincts/self-preservation",
+        "/en/personality/enneagram/type-5/instincts/social",
+        "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/one-to-one",
+      "path": "/en/personality/enneagram/type-5/instincts/one-to-one",
+      "title": "Type Five one-to-one: a selective depth and trusted disclosure hypothesis",
+      "answer_first": "Type Five one-to-one is a traditional subtype hypothesis about selective deep disclosure, focused trust, and exchanging an inner world with a particular person. Intense conversation, mentorship, confidentiality, or a small circle does not establish subtype because safety, attachment norms, role boundaries, consent, power, and shared expertise may shape the same pattern.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Describe focused trust as a secondary hypothesis",
+          "body": "Within a Type Five hypothesis, one-to-one may emphasize opening substantial thought or feeling through a carefully chosen relationship. Selectivity is an observation to compare, not proof of hidden intensity or a fixed bond style."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Compare disclosure with equal consent and power",
+          "body": "Use two similarly private topics and compare a trusted peer with another safe person after matching confidentiality, consent, power, and time known. Ask what changes when the same person controls pace and can decline."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Reject biological or neurological explanations",
+          "body": "The one-to-one label organizes observations about focused trust and disclosure; it is not evidence about bodily mechanisms, neurological wiring, attraction biology, or an innate pairing system."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow broad warmth and ordinary boundaries",
+          "body": "A person may be socially warm, maintain several close relationships, or share little in an intense conversation. Breadth and depth can coexist, so neither exclusivity nor visible intensity is required."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Audit confidentiality, mentorship, and safety",
+          "body": "Therapy, supervision, mentorship, research collaboration, minority safety, trauma history, family privacy, cultural etiquette, and unequal power can all narrow disclosure to one person. Consent must remain revocable."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use safe plural relationships as a challenge",
+          "body": "Confidence should fall when the person shares comparable depth across several safe relationships, uses transparent group support, changes confidants without identity threat, or declines intensity while preserving trust."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep trust language local and non-predictive",
+          "body": "A single instrument and sample cannot establish universal subtype ontology or cross-cultural equivalence. This hypothesis cannot predict compatibility, loyalty, intimacy, or relationship outcomes."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does one intense conversation prove one-to-one Type Five?",
+          "answer": "No. Confidentiality, mentorship, shared expertise, crisis, therapy, safety, or a rare opportunity may explain a deep conversation. Compare repeated choices with consent and power matched."
+        },
+        {
+          "question": "Why must power and consent be part of the comparison?",
+          "answer": "A supervisor, therapist, mentor, partner, or gatekeeper changes what can safely be disclosed. Consent and the ability to leave determine whether selectivity reflects choice or constraint."
+        },
+        {
+          "question": "What counterexample weakens the focused-trust hypothesis?",
+          "answer": "Comparable depth across several safe relationships, transparent group support, easy changes of confidant, and comfortable refusal of intensity should reduce confidence in the subtype account."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Across five days, select two private conversations and one group-support event with different relationship roles.",
+        "observable_signal": "Record confidentiality, invitation, consent, power difference, time known, topic depth, pace control, and ability to stop.",
+        "page_specific_signal": "Compare similarly private topics only after safety, consent, and power are matched as closely as possible.",
+        "alternative_explanation": "Check mentorship, therapy, shared expertise, attachment norms, family privacy, culture, trauma safety, and role duty.",
+        "reflection_prompt": "Identify one plural or group relationship that supports depth and use it to test the focused-trust hypothesis."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English one-to-one page matches consent and power across private topics, independently of the Chinese page's pace-control and confidant-change sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "alternative_environment",
+          "instinct_boundary",
+          "countertype_variation",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "disclosure change after consent and confidentiality are matched",
+          "whether the speaker controls pace and can stop without penalty",
+          "depth maintained across several safe relationships rather than one focal bond"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are selective deep disclosure and focused trust?",
+          "What are intense conversation mentorship and confidentiality?",
+          "What are safety attachment norms consent and power?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are selective deep disclosure and focused trust?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are intense conversation mentorship and confidentiality?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are safety attachment norms consent and power?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Selective disclosure may reflect safety, attachment norms, role boundaries, consent, power, or shared expertise."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-5",
+        "/en/personality/enneagram/type-5/instincts/self-preservation",
+        "/en/personality/enneagram/type-5/instincts/social",
+        "/en/personality/enneagram/type-5/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "core_type:type-5",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "path": "/zh/personality/enneagram/type-5",
+      "title": "第五型：知识、胜任准备与精力边界的可修正假设",
+      "answer_first": "第五型是九型人格中的传统观察假设，关注点可能反复落在知识、胜任准备、私人空间与可用精力上。查资料、独处或少表达并不能证明动机，因为专业训练、工作负荷、无障碍需求、保密规则、远程协作、文化习惯与安全处境都可能形成相似表现。本页直接说明知识胜任准备如何观察、私人空间可用精力如何比较，以及专业训练工作负荷保密规则如何核对。",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "先记录准备门槛与参与成本",
+          "body": "观察一个人何时认为资料已经够用、进入讨论前需要什么准备，以及时间、注意力和私人空间如何分配。把这些记录当作具体情境中的工作假设，不把节能或谨慎写成固定本质。"
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "把求知和独处分解为可核对行为",
+          "body": "会前阅读可能为了准确、岗位合规、语言理解或正常准备；单独工作也可能为了专注、照顾感官需求、遵守保密或适应远程安排。必须询问当事人的任务目的与现实约束。"
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "比较决定、反馈与重新进入",
+          "body": "记录补充信息是否真的改变选择，还是不断推迟行动；收到反馈时，观察其先澄清概念、暂停整理或提出局部方案。冲突后是否按约定时间回来，比一次沉默更有解释力。"
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "同时看见理解力与协调成本",
+          "body": "持续求证可能支持精确建模、自主学习、提出好问题和容纳复杂性。代价也可能出现：准备耗尽决策窗口、隐私阻断必要协作，或在没有核实的情况下高估参与所需精力。"
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "用责任和后续行动区分场景",
+          "body": "工作中要区分保护敏感资料的研究员与迟迟不分享草稿的同事；关系中要区分请求整理时间与逃避约定沟通。表面撤退相同，但职责、同意和后续履约不同。"
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "比较翼型修饰与常见替代解释",
+          "body": "5w4 假设强调个人综合、意义与原创性，5w6 假设强调验证、可靠性与风险核对。还应比较第四型表达、第六型警觉、内向偏好、专门训练、疲劳、无障碍需要、创伤安全与岗位限制。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "主动寻找有信息也能行动的反例",
+          "body": "如果一个人能在资料不完整时行动、自然求助、按关系需要调整披露程度，并在安全且责任明确时愿意投入精力，就应降低对第五型准备与容量保护假设的信心。"
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "不把胜任感变成能力判定",
+          "body": "本页只能帮助复盘准备、知识、隐私和精力分配，不能诊断焦虑或神经差异，不能衡量智力、评定专家水平、筛选求职者、预测绩效，也不能固定个人身份。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "查很多资料就能判断是第五型吗？",
+          "answer": "不能。职业标准、学习任务、好奇心、语言理解与现实不确定性都可能增加检索量。应比较资料收集的具体用途，并用相反事件主动降低假设置信度。"
+        },
+        {
+          "question": "为什么隐私和精力必须放回情境？",
+          "answer": "隐私可能来自保密义务、文化边界、安全顾虑、无障碍需求或普通偏好；精力也会随健康、工作量、照护责任、资源与场所要求变化，不能据此固定类型。"
+        },
+        {
+          "question": "哪些证据会削弱胜任准备假设？",
+          "answer": "能在信息不全时及时行动、自在求助、灵活披露，并在暂停后可靠返回协作，都会削弱把准备或容量保护视为首要解释的判断；复盘时还要记录这些反例发生的职责、时限与安全条件，避免只保留支持类型的事件。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天选择一次资料任务、一次协作决定和一次关系沟通，覆盖不同参与成本。",
+        "observable_signal": "记录截止时间、已有信息、实际提问、当事人陈述的精力、隐私需要与重新进入时间。",
+        "page_specific_signal": "比较补充知识是否改变决定，还是只把面对不确定下一步的时点继续后移。",
+        "alternative_explanation": "逐项核对工作负荷、保密要求、无障碍需要、专业训练、远程安排、文化规范与安全处境。",
+        "reflection_prompt": "写出一个普通约束解释力更强的事件，并明确下调第五型工作假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文核心页以任务台账、参与成本和暂停后的履约为主线，独立于英文页的决策阈值与关系披露顺序。",
+        "outline": [
+          "answer_first",
+          "behavior_motive",
+          "motivation_attention",
+          "work_relationship_examples",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "counterexample",
+          "wings_mistypes",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "增加资料以后是否真正改变已经设定的具体选择",
+          "暂停协作的时候有没有明确约定重新进入的时间",
+          "职责完全说明以后对可用精力的估计怎样变化"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "知识胜任准备如何观察",
+          "私人空间可用精力如何比较",
+          "专业训练工作负荷保密规则如何核对"
+        ],
+        "question_answers": [
+          {
+            "question": "知识胜任准备如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "私人空间可用精力如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "专业训练工作负荷保密规则如何核对",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "查资料、独处与少表达也可能来自训练、负荷、无障碍、保密、文化或安全处境。",
+          "传统中心语言仅供概念比较，不构成身体机制证据。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/wings/5w4",
+        "/zh/personality/enneagram/wings/5w6",
+        "/zh/personality/enneagram/type-5/instincts/self-preservation",
+        "/zh/personality/enneagram/type-5/instincts/social",
+        "/zh/personality/enneagram/type-5/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:5w4",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "5w4",
+      "path": "/zh/personality/enneagram/wings/5w4",
+      "title": "5w4：以第五型为主、关注个人综合与意义的翼型假设",
+      "answer_first": "5w4 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第四型只可能修饰为个人综合、意义感与原创表达。独特作品不能证明 5w4，因为创意训练、专业细分、文化语境、受众要求与项目署名也会产生相似结果。本页直接比较知识胜任准备隐私如何保持核心、个人综合意义原创如何作为修饰，以及创意训练专业细分文化如何形成替代解释。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "先核对第五型核心再谈修饰",
+          "body": "先观察准备、知识、隐私和精力分配是否反复出现，再把个人意义与原创综合作为可能的次要修饰。不能用审美风格替代核心动机，也不能从一次作品直接定型。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "在同一任务中比较 5w4 与 5w6",
+          "body": "面对同一个不确定问题，5w4 假设可能更在意观点是否形成个人综合与意义；5w6 假设可能更在意验证、可靠流程与风险覆盖。岗位规则改变时，两种表现都可能反转。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "从资料整合、修改与交付观察",
+          "body": "记录如何标注来源、组合非典型视角、回应删除标志性观点的建议，以及能否把成果交给标准流程。需要跨研究、反馈和交付观察，不从视觉风格猜测动机。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用常规方案与匿名贡献检验",
+          "body": "如果当事人能轻松采用通用方法、接受匿名交付、在证据变化时替换个人观点，并把可靠性放在署名感之前，就应明显降低 5w4 修饰假设。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "保留训练、文化与产权解释",
+          "body": "创意教育、细分学科、少数文化、作品集激励、知识产权、哀伤经历或客户任务都可能促成独特综合。应先核对这些现实来源，再考虑翼型语言。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "翼型始终是次要且证据有限的假设",
+          "body": "5w4 不是独立类型、诊断、能力指标或创造力分数。系统综述指出翼型支持研究很少，因此只能提供可修正的观察线索。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "原创分析能证明 5w4 吗？",
+          "answer": "不能。细分专业、特殊数据、知识产权、客户目标或创作训练都可能要求原创分析。应观察标准方法更有效时，当事人能否放下署名感并调整方案。"
+        },
+        {
+          "question": "怎样公平比较 5w4 和 5w6？",
+          "answer": "固定同一个第五型核心和同一项任务，再比较个人综合、意义与验证、可重复性、风险覆盖，同时核对岗位制度是否已经解释了差异；若更换受众或问责方式就发生反转，应优先保留情境解释。"
+        },
+        {
+          "question": "什么反例最能削弱 5w4？",
+          "answer": "自在采用常规方法、接受匿名贡献，并在证据改变时替换标志性观点，都会削弱个人综合修饰假设，不能被当作无关例外；还应记录当时是否存在署名、产权或作品集激励，防止把制度因素误当动机。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天选择一次研究草稿、一次修改和一次交付，确保署名与方法选择都可观察。",
+        "observable_signal": "记录引用方式、非典型综合、修改要求、当事人陈述的意义，以及采用通用方法的意愿。",
+        "page_specific_signal": "在第五型核心不变时，比较个人连贯感与验证可靠性分别怎样影响选择。",
+        "alternative_explanation": "核对创意训练、专业细分、文化、作品集激励、产权规则与客户任务书。",
+        "reflection_prompt": "找出最有力的常规工作反例，说明当时采用的标准方法、署名条件与修改结果，并据此明确下调 5w4 假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 5w4 页从资料整合、匿名交付与来源核对展开，独立于英文页的署名观点删除测试。",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "observable_situations",
+          "sibling_core_comparison",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "标志性观点从草稿中被删除时怎样回应具体修改",
+          "通用方法已经更有效时是否仍然坚持个人综合",
+          "原创成果进入匿名交付流程以后表现出的配合程度"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "知识胜任准备隐私如何保持核心",
+          "个人综合意义原创如何作为修饰",
+          "创意训练专业细分文化如何形成替代解释"
+        ],
+        "question_answers": [
+          {
+            "question": "知识胜任准备隐私如何保持核心",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "个人综合意义原创如何作为修饰",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "创意训练专业细分文化如何形成替代解释",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "原创表达也可能来自训练、专业、文化、受众与署名规则，不能反推翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-5",
+        "/zh/personality/enneagram/wings/5w4",
+        "/zh/personality/enneagram/wings/5w6",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:5w6",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "5w6",
+      "path": "/zh/personality/enneagram/wings/5w6",
+      "title": "5w6：以第五型为主、关注验证与可靠方法的翼型假设",
+      "answer_first": "5w6 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第六型只可能修饰为验证、可靠方法与风险核对。谨慎流程不能证明 5w6，因为合规工作、质量保证、安全岗位、团队规范与问责结构都可能要求同样行为。本页直接比较知识胜任准备精力如何保持核心、验证可靠方法风险如何作为修饰，以及合规质量保证安全岗位如何形成替代解释。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "保持第五型核心与第六型修饰的层级",
+          "body": "先检验准备、知识、隐私和容量边界，再考虑验证倾向是否构成次要修饰。重复检查只有在目的和情境明确时才有意义，执行强制流程本身不是翼型证据。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "让 5w6 与 5w4 面对同一不确定性",
+          "body": "对同一份不完整数据，5w6 假设可能强调验证、可重复性和故障路径；5w4 假设可能强调个人综合、意义与原创框架。问责主体变化后，选择也可能变化。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "记录核对、升级与停止条件",
+          "body": "观察信任哪类来源、怎样处理矛盾证据、何时请求复核、什么风险触发升级，以及什么停止条件允许行动。要区分自发核对与制度要求的控制步骤。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用低风险可逆行动寻找反例",
+          "body": "如果当事人在低风险时迅速做可逆实验、容忍一个未验证细节、信任胜任的协作者，或在风险负责人接受后停止重复核对，就应下调 5w6 修饰假设。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "比较合规岗位与习得方法",
+          "body": "质量保证、网络安全、实验室规范、财务控制、航空流程、事故响应或近期失败都会训练严密核验。不平等问责和被追责风险也可能造成反复检查。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "不把可靠方法变成身份或预测",
+          "body": "5w6 不是安全等级、风险分数、能力评级或忠诚预测。翼型研究支持有限，因此验证模式必须留在具体任务中，并接受反例修正。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "反复核验流程能够直接证明 5w6 吗？",
+          "answer": "不能。法规、质量保证、安全职责、团队标准、过往事故与个人问责都可能要求严密核验，这些现实条件并不揭示九型人格动机；还应比较低风险可逆任务中核验是否自然减少。"
+        },
+        {
+          "question": "怎样把 5w6 与 5w4 放在同一尺度？",
+          "answer": "使用同一个不确定任务与第五型核心，比较验证、复现和故障关注与个人综合、意义，再检查岗位要求是否已经足以解释差异；必须同时记录谁承担风险、谁制定停止条件以及结果能否撤回。"
+        },
+        {
+          "question": "哪些表现会削弱 5w6 修饰假设？",
+          "answer": "愿意做快速可逆实验、信任胜任同事、容忍低风险未知，并在风险被接受后停止冗余检查，都会降低对该修饰假设的信心；这些反例应与高风险任务分开记录，不能被严重后果场景覆盖。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天分别选择一个低风险可逆决定、一项具有明确问责的合规任务，以及一次能够观察停止条件的同伴复核。",
+        "observable_signal": "记录来源权威、矛盾证据、复核请求、升级阈值、风险负责人和明确停止条件。",
+        "page_specific_signal": "保持任务不确定性与第五型核心一致，比较验证可靠性与个人综合怎样影响行动。",
+        "alternative_explanation": "核对法规、质量保证、安全职责、团队规范、既往事故与不平等问责。",
+        "reflection_prompt": "用低风险事件检验问责和后果下降以后核对次数是否随之减少，并写出最能削弱 5w6 修饰假设的具体结果。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 5w6 页用核验台账、问责结构与可逆实验组织内容，独立于英文页的停止规则叙事。",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "矛盾证据完成处理以后实际采用什么停止条件",
+          "风险负责人接受不确定性以后是否仍然重复核对",
+          "决定变为低风险且可逆以后验证次数是否明显下降"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "知识胜任准备精力如何保持核心",
+          "验证可靠方法风险如何作为修饰",
+          "合规质量保证安全岗位如何形成替代解释"
+        ],
+        "question_answers": [
+          {
+            "question": "知识胜任准备精力如何保持核心",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "验证可靠方法风险如何作为修饰",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "合规质量保证安全岗位如何形成替代解释",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "验证行为也可能由合规、质量保证、安全职责、团队规范与问责结构造成。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-5",
+        "/zh/personality/enneagram/wings/5w4",
+        "/zh/personality/enneagram/wings/5w6",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/self-preservation",
+      "path": "/zh/personality/enneagram/type-5/instincts/self-preservation",
+      "title": "第五型自保副型：空间、资源与低需求边界的假设",
+      "answer_first": "第五型自保副型是传统二级假设，关注点可能落在空间、资源、低需求安排与保护可用精力上。独立房间、储备物品或减少接触不能证明副型，因为资源稀缺、住房条件、无障碍需要、照护责任、远程工作、保密义务与安全处境都可能解释同样选择。本页直接说明空间资源低需求如何观察、资源稀缺住房无障碍如何比较，以及照护远程工作保密义务如何核对。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把传统说法转成可检验观察",
+          "body": "在第五型工作假设下，自保副型可能强调维持可工作的基地，包括足够空间、用品、时间与低需求进入方式。它只是次要假设，必须先与实际资源条件比较。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配工作量后比较资源稳定性",
+          "body": "选择工作量相近的两段时间，一段住房与物资稳定，另一段存在稀缺或频繁打断。观察资源恢复后，空间保护与减少接触是否仍保持同样强度。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "拒绝身体机制与生物本体推断",
+          "body": "自保标签只是整理资源和边界注意点的语言。它不描述身体机制，也不讨论神经组织或恒定功能，更不能当作普遍生物类别。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许公开参与与明确边界并存",
+          "body": "当事人可能接待他人、负责公开项目或主动共享资源，同时清楚限定时间和空间。显眼的慷慨不能单独证实或否定假设，应观察边界如何协商。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "先审计物质条件与使用权",
+          "body": "住房不稳、无障碍限制、长期超负荷、照护、贫困、迁移、感官需求和不安全环境都会提高空间与物资的重要性。这些问题需要现实支持，不应被改写成副型。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用稳定资源下的灵活共享检验",
+          "body": "如果资源充足后可以自在共享、面对打断不需长期退出、不偏好低需求流程，或现实约束结束后快速放松边界，就应降低自保副型假设。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "保持量表特定与跨文化审慎",
+          "body": "单一量表和样本不能建立普遍副型本体或跨文化等价性。资源模式只能作为本地观察，必须保留替代解释，并在后续使用前接受人工审核。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "想要独立空间就能判断自保副型吗？",
+          "answer": "不能。住房布局、感官无障碍、远程办公、保密、家庭角色、学习任务与普通偏好都可能需要独立空间，不能据此推出副型；要等这些条件变化后再观察边界是否同步调整。"
+        },
+        {
+          "question": "怎样区分副型假设与真实资源稀缺？",
+          "answer": "应在住房、物资和工作量稳定以后再次比较。如果保护强度随着资源可得性改善而下降，现实约束就比副型标签更有解释力；还要核对照护、感官负担与安全风险是否同时改变。"
+        },
+        {
+          "question": "什么反例会削弱空间资源假设？",
+          "answer": "资源安全时愿意灵活共享、能应对普通打断，并在限制结束后迅速放松边界，都会削弱把资源保护归因于副型的判断；记录补充渠道和共享后果可以让这项反例更可核对。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天比较一次补充渠道明确的物资决定、一次工作量可匹配的被打断事件，以及一次能够记录边界协商的共享空间事件。",
+        "observable_signal": "记录物资可得性、住房稳定、无障碍需要、工作量、照护责任、边界表达与后续调整。",
+        "page_specific_signal": "在任务相同的前提下，比较资源稳定期与资源受限期的空间保护强度。",
+        "alternative_explanation": "核对稀缺、住房、无障碍、远程工作、保密、感官负担与当前安全。",
+        "reflection_prompt": "寻找现实限制结束以后空间或物资边界是否出现可观察的放松，写明替代解释，并据此修正自保副型假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文自保页用共享空间、物资可得性和打断台账展开，独立于英文页的安全资源时期匹配顺序。",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "alternative_environment",
+          "matched_comparison",
+          "countertype_variation",
+          "instinct_boundary",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "住房与物资恢复稳定以后空间边界是否明显放松",
+          "相同工作量条件下被打断以后的退出时长差异",
+          "物资补充渠道可靠以后是否愿意共享现有用品"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "空间资源低需求如何观察",
+          "资源稀缺住房无障碍如何比较",
+          "照护远程工作保密义务如何核对"
+        ],
+        "question_answers": [
+          {
+            "question": "空间资源低需求如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "资源稀缺住房无障碍如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "照护远程工作保密义务如何核对",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "空间与资源保护也可能来自稀缺、住房、无障碍、照护、保密与安全条件。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-5",
+        "/zh/personality/enneagram/type-5/instincts/self-preservation",
+        "/zh/personality/enneagram/type-5/instincts/social",
+        "/zh/personality/enneagram/type-5/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/social",
+      "path": "/zh/personality/enneagram/type-5/instincts/social",
+      "title": "第五型社群副型：知识角色、专长与群体交换的假设",
+      "answer_first": "第五型社群副型是传统二级假设，关注点可能落在知识角色、被认可的专长以及群体中的理解交换。教学、证书、专业术语或选择性参与不能证明副型，因为学术层级、职业职责、资质制度、不平等机会、地位规则与社群规范都会形成相似模式。本页直接说明知识角色认可专长如何观察、教学证书专业术语如何比较，以及学术层级资质机会如何核对。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把专长视为次要的群体关系线索",
+          "body": "在第五型假设下，社群副型可能通过某个知识领域贡献，或借共享标准定位群体角色。专长只是待验证的参与路径，不能被写成人格本质或高低排序。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "在平等与分层群体中匹配同一主题",
+          "body": "观察同一个人讨论同一主题：一次与机会平等的同伴交流，一次置于证书或地位分层中。尽量匹配邀请方式、熟悉度和决策权，再比较发言与退场。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "不把群体参与解释为身体机制",
+          "body": "社群标签只整理角色与知识交换的观察。它不描述身体机制，也不讨论神经组织或恒定功能，更不能证明天生的社交系统。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许广泛社交与初学者姿态",
+          "body": "当事人可能喜欢聚会、公开提基础问题，也可能在非专业活动中持续贡献。社交频率、人数与外向表现都不能单独证实或否定这个副型。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "先检查资质制度与发言机会",
+          "body": "学术和职业层级会规定谁能发言、什么知识算数、哪套词汇代表成员身份。教育成本、语言、无障碍、歧视和资历也会塑造参与程度。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用无专家身份的参与检验",
+          "body": "如果当事人不靠专长也能自在参与、愿意在同伴前分享未完成想法、被纠正时不担心角色，并能通过普通活动建立归属，就应下调假设。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "把推断限制在具体群体",
+          "body": "量表特定证据不能建立普遍副型本体或跨文化等价性。记录谁授予权威、谁承担排斥成本，再把知识角色作为可撤销的本地假设。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "有证书或负责教学就能判断社群副型吗？",
+          "answer": "不能。岗位职责、学术资历、执照制度、社群需要与机会不平等都会决定谁教学或持证。应在去除正式地位后比较参与方式，并记录发言邀请与纠正权是否也随之改变。"
+        },
+        {
+          "question": "怎样跨群体比较知识角色？",
+          "answer": "固定同一主题与同一个人，并尽量匹配邀请、受众熟悉度和决策权。如果差异跟随层级或机会变化，环境解释就更有力；教育成本、语言与无障碍条件也必须进入比较。"
+        },
+        {
+          "question": "什么反例会削弱知识角色假设？",
+          "answer": "不依靠专家身份也能参与、分享未完成想法、接受低资历成员纠正，并在非专业活动中建立归属，都会削弱副型解释；这些事件应作为正式反证进入记录，而不是被归为偶然社交。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天观察一次同伴讨论、一次资质分层场合和一次非专业社群活动。",
+        "observable_signal": "记录邀请方式、正式角色、主题熟悉度、使用词汇、纠正权、机会障碍与实际贡献。",
+        "page_specific_signal": "保持同一知识主题，并尽量匹配权威与受众熟悉度后比较交换方式。",
+        "alternative_explanation": "核对资质制度、学术层级、职业责任、语言、资历、歧视与机会不平等。",
+        "reflection_prompt": "找出一次没有专家身份也形成归属的贡献，用它检验并下调副型假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文社群页从发言资格、纠正权与机会障碍形成独立编辑结构，并且不沿用英文页的平等群体匹配顺序。",
+        "outline": [
+          "answer_first",
+          "alternative_environment",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "countertype_variation",
+          "instinct_boundary",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "取消正式专家身份以后实际参与程度怎样变化",
+          "机会平等的同伴面前是否愿意分享未完成知识",
+          "低资历成员纠正专业说法时当事人怎样回应"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "知识角色认可专长如何观察",
+          "教学证书专业术语如何比较",
+          "学术层级资质机会如何核对"
+        ],
+        "question_answers": [
+          {
+            "question": "知识角色认可专长如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "教学证书专业术语如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "学术层级资质机会如何核对",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "知识角色也可能由资质、职业责任、层级、机会、地位规则与社群规范塑造。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-5",
+        "/zh/personality/enneagram/type-5/instincts/self-preservation",
+        "/zh/personality/enneagram/type-5/instincts/social",
+        "/zh/personality/enneagram/type-5/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-5/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-5/one-to-one",
+      "path": "/zh/personality/enneagram/type-5/instincts/one-to-one",
+      "title": "第五型一对一副型：选择性深度披露与信任的假设",
+      "answer_first": "第五型一对一副型是传统二级假设，关注点可能落在选择性深度披露、聚焦信任与向特定对象交换内在想法。深谈、导师关系、保密场景或小圈子不能证明副型，因为安全条件、依恋规范、角色边界、同意、权力与共同专长都会塑造相似模式。本页直接说明选择深度披露信任如何观察、深谈导师保密场景如何比较，以及安全依恋同意权力如何核对。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把聚焦信任写成次要可撤销假设",
+          "body": "在第五型工作假设下，一对一副型可能通过谨慎选择的关系开放较深想法或感受。选择性只是待比较的观察，不证明隐藏强度、固定亲密方式或命定关系。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配同意与权力后比较披露",
+          "body": "选取两个私密程度相近的话题，在可信同伴与另一位安全对象之间比较，并尽量匹配保密、同意、权力与相识时间。重点观察当事人能否控制节奏和拒绝。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "拒绝吸引力与神经机制推断",
+          "body": "一对一标签只整理聚焦信任和披露方式。该标签不描述身体机制，也不涉及神经组织或恒定功能，更不能证明天生配对系统或吸引力生物学。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "允许广泛温暖与普通边界并存",
+          "body": "当事人可以对很多人友好、维持多段亲近关系，也可能在一次深谈中选择少说。关系广度与交流深度能够并存，不要求排他或外显强烈。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "先审计保密、导师关系与安全",
+          "body": "咨询、督导、导师、研究合作、少数群体安全、创伤经历、家庭隐私、文化礼仪和权力不平等都会把披露集中到一个人。同意必须可以撤回。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用多元安全关系检验聚焦假设",
+          "body": "如果当事人能在多段安全关系中保持相近深度、使用透明的小组支持、自然更换倾诉对象，或拒绝强度仍保持信任，就应下调副型假设。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "把信任模式限制在当前关系情境",
+          "body": "就一对一副型而言，单一样本只能提供量表特定观察，不能证明副型具有普遍本体或跨文化等价性。此假设只能描述具体互动中的观察；伴侣选择、忠诚判断、亲密程度与未来走向都属于本页边界之外。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "一次很深的谈话能证明一对一副型吗？",
+          "answer": "不能。保密、导师关系、共同专长、危机、咨询、安全需要或难得机会都可能促成深谈。应在同意与权力相近的条件下比较重复选择，并确认当事人可以控制节奏与随时停止。"
+        },
+        {
+          "question": "为什么比较时必须记录权力与同意？",
+          "answer": "主管、咨询师、导师、伴侣或资源把关者会改变安全披露的范围。能否拒绝、暂停和离开，决定选择性来自自主选择还是现实约束；因此必须记录拒绝是否带来资源或关系代价。"
+        },
+        {
+          "question": "什么反例会削弱聚焦信任假设？",
+          "answer": "在多段安全关系中保持相近深度、使用透明小组支持、自然更换倾诉对象，并能拒绝强度而不失去信任，都会削弱副型解释；关系角色和保密条件要分别记录，避免把安全差异混入判断。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "连续五天选择两次私人沟通和一次小组支持事件，确保关系角色不同。",
+        "observable_signal": "记录保密规则、邀请、同意、权力差、相识时间、话题深度、节奏控制和停止能力。",
+        "page_specific_signal": "只在安全、同意和权力尽量匹配后，比较私密程度相近的话题怎样披露。",
+        "alternative_explanation": "核对导师、咨询、共同专长、依恋规范、家庭隐私、文化、创伤安全与岗位责任。",
+        "reflection_prompt": "找到一段多元或小组关系也能承载深度的反例，用它修正聚焦信任假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文一对一页以节奏控制、拒绝权与更换倾诉对象为主线，独立于英文页的私密话题匹配顺序。",
+        "outline": [
+          "answer_first",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "alternative_environment",
+          "countertype_variation",
+          "instinct_boundary",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "保密条件与同意程度匹配以后披露深度怎样变化",
+          "当事人能否控制交流节奏并且无惩罚地停止",
+          "多段安全关系是否都能够承载相近的交流深度"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "选择深度披露信任如何观察",
+          "深谈导师保密场景如何比较",
+          "安全依恋同意权力如何核对"
+        ],
+        "question_answers": [
+          {
+            "question": "选择深度披露信任如何观察",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "深谈导师保密场景如何比较",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "安全依恋同意权力如何核对",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "选择性披露也可能来自安全、依恋规范、角色边界、同意、权力与共同专长。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-5",
+        "/zh/personality/enneagram/type-5/instincts/self-preservation",
+        "/zh/personality/enneagram/type-5/instincts/social",
+        "/zh/personality/enneagram/type-5/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ]
+}
