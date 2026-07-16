@@ -30,6 +30,8 @@ Keep Big Five public editorial content, publication state, media, visible eviden
 - PR44/45 gate discoverability and structured data from published, visible evidence. They do not authorize indexability or production enumeration.
 - PR46 supplies EN/ZH Topic working-revision candidates and a read-only preflight. Author/reviewer/dates/media remain absent and all public gates remain false.
 - PR47 supplies a read-only 231-identity cohort preflight. Its checked-in manifest is unreviewed, exact production fields are pending, and promotion-eligible assets remain 0.
+- PR48 locks the operator-approved ZH6 Hub-plus-five-domain public snapshot at exact cohort/package/file hashes; the package remains non-runtime and authorizes no controlled write.
+- PR49 binds that snapshot to exact `admin_user:1` solo-operator review evidence, 18 source permissions and six rollback baselines. Production has zero authority-complete `big5:model_hub:zh-CN:hero-og` candidates, so readiness is HOLD and working-revision preparation must not begin.
 - PR12/13 supply the Big Five → Career schema, executable contract, and read-only auditor. They add no public reader, matcher, ranking, pSEO surface, or write path.
 
 ## Standard workflow
@@ -37,7 +39,7 @@ Keep Big Five public editorial content, publication state, media, visible eviden
 2. Classify the requested action as read-only audit, draft preparation, authority-data intake, manual review, exact cohort authorization, promotion, deployment, or runtime closeout. Do not collapse stages.
 3. Resolve public content only from the current published/public projection. Never fall back to a working revision, generated package, local baseline, or frontend copy.
 4. Apply the exact gate required by the surface:
-   - media: public Media Library asset/variant, locale alt, rights, license, provenance, content identity, and exact operator approval;
+   - media: public Media Library asset/variant, locale alt, rights, license, provenance, content identity, and exact operator approval; ZH6 Hub readiness requires one and only one asset carrying verified hero and OG variants;
    - dates: canonical published/reviewed/editorial-update evidence only;
    - provenance: verified author, completed human reviewer evidence, and classified source authority;
    - discoverability/schema: public, indexable, effective, canonical, explicit CMS gates, and visible evidence;

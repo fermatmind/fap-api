@@ -437,7 +437,7 @@ prs:
     branch: codex/big5-authority-v2-zh6-snapshot-48
     depends_on: [BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47]
     train_scope: big5_authority_v2_zh6_final_public_snapshot
-    status: in_progress
+    status: merged
     goal: "Lock the final public-content snapshot for exactly the zh-CN Big Five Hub and five domain pages, with reader-safe copy, one independent FAQ field containing 35 unique questions, exactly three visible public sources per page, deterministic public-field validation, and a new exact package SHA requiring human confirmation."
     allowed_paths:
       - backend/docs/seo/personality/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/**
@@ -478,7 +478,7 @@ prs:
     branch: codex/big5-authority-v2-zh6-promotion-readiness-49
     depends_on: [BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48]
     train_scope: big5_authority_v2_zh6_promotion_readiness
-    status: pending
+    status: local_checks_passed
     goal: "Before working-revision creation, bind the exact ZH6 snapshot to admin_user:1 author/reviewer authority, a narrow solo_operator review record, one uniquely eligible Hub hero/OG Media Library asset, release SHA and permissions, plus a rollback baseline; fail closed on zero or multiple media candidates."
     allowed_paths:
       - AGENTS.md

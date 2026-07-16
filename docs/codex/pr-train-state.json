@@ -92916,7 +92916,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-snapshot-48",
     "depends_on": ["BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47"],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "96859bee6478f3599a9531213e894cbab22b0f30",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3139",
     "checks": {
@@ -92942,7 +92942,7 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "Final head 081768ab408dd1a3662dc12e3dbe5c884e58e572 passed all nine required GitHub checks with merge state CLEAN: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF upload, content-pack build/validate, MBTI legacy, MBTI V2, Big Five, and Semgrep OSS."
+        "evidence": "Final head 35cae2556cfcbb772ba75360069e4d9f7ee38674 passed all nine required GitHub checks: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF upload, content-pack build/validate, MBTI legacy, MBTI V2, Big Five, and Semgrep OSS. PR #3139 then squash-merged as f7bcb082145f6b1ce98dcef8959cafaa967fbdfa."
       },
       "exact_head_review": {
         "status": "pass",
@@ -92958,9 +92958,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-16T09:53:58Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {"at": "2026-07-16T08:42:06Z", "from": null, "to": "pending", "note": "Registered the operator-supplied PR48 item with the exact no-CMS-write and no-discoverability-mutation boundary."},
       {"at": "2026-07-16T08:42:06Z", "from": "pending", "to": "in_progress", "note": "Started the exact ZH6 snapshot scope from clean latest main after the isolated source-ledger baseline repair merged as 0d81790f5c581d4da8c979210c70334707034fac. New snapshot SHA confirmation remains a required human checkpoint."},
@@ -92973,7 +92973,8 @@
       {"at": "2026-07-16T09:24:38Z", "from": "review_fix_local_verified", "to": "ready_to_merge", "note": "Head c848134beea1811c740fa050faf5a432988f1800 passed all nine required GitHub checks with merge state CLEAN, Codex exact-head review reported no major issues, the sole prior P2 thread is resolved and outdated, and the operator's exact three-SHA/admin_user:1 approval phrase is now present in the PR audit record. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge. Immutable package and approval hashes remain unchanged; no production/CMS/database/media/promotion/discoverability action occurred."},
       {"at": "2026-07-16T09:29:15Z", "from": "ready_to_merge", "to": "rebased_local_verified_github_checks_pending", "note": "PR3138 externally squash-merged as e71cf26de155ec5903a5020fcbcd4e4e4e757c9b, advancing main after PR48 opened. Rebased all five PR48 commits without conflict onto that current origin/main. The substantive implementation is now 55894c7da69f6488128f267a1b5f3b4fb0adaa7f; all PR48 local manifest checks and exact nine-file scope pass with unchanged package and confirmation hashes. Require force-with-lease push, fresh nine-check GitHub cycle, and fresh exact-head review before merge; no production/CMS/database/media/promotion/discoverability action occurred."},
       {"at": "2026-07-16T09:38:39Z", "from": "rebased_local_verified_github_checks_pending", "to": "review_fix_local_verified", "note": "Rebased head 3bc21701d0e77b70424ffdb00f8259cde586cc68 passed all nine checks, then exact-head review found one valid P2: both confirmation phrase fields and record hash could be changed together because the validator did not reconstruct the mandated phrase. Commit 96859bee6478f3599a9531213e894cbab22b0f30 now derives the exact phrase from the locked three hashes and fixed admin_user:1; a tamper regression proves simultaneous phrase/hash replacement is rejected. Focused 5/83, Pint, syntax, and diff checks pass. Require fresh GitHub checks and exact-head review; no package hash or controlled runtime action changed."},
-      {"at": "2026-07-16T09:47:08Z", "from": "review_fix_local_verified", "to": "ready_to_merge", "note": "Final head 081768ab408dd1a3662dc12e3dbe5c884e58e572 passed all nine required GitHub checks with merge state CLEAN, Codex exact-head review reported no major issues, both valid P2 threads are resolved and outdated, and the exact nine-file scope remains intact. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge; immutable package and approval hashes remain unchanged, and no production/CMS/database/media/promotion/discoverability action occurred."}
+      {"at": "2026-07-16T09:47:08Z", "from": "review_fix_local_verified", "to": "ready_to_merge", "note": "Final head 081768ab408dd1a3662dc12e3dbe5c884e58e572 passed all nine required GitHub checks with merge state CLEAN, Codex exact-head review reported no major issues, both valid P2 threads are resolved and outdated, and the exact nine-file scope remains intact. This ledger-only ready-to-merge update must independently pass fresh checks and exact-head review before squash merge; immutable package and approval hashes remain unchanged, and no production/CMS/database/media/promotion/discoverability action occurred."},
+      {"at": "2026-07-16T09:53:58Z", "from": "ready_to_merge", "to": "merged", "note": "Final head 35cae2556cfcbb772ba75360069e4d9f7ee38674 passed all nine required checks and PR #3139 squash-merged as f7bcb082145f6b1ce98dcef8959cafaa967fbdfa. origin/main contains the merge, the remote and local PR48 branches are absent, and post-merge package, confirmation and focused contract checks passed. No production/CMS/database/media/promotion/discoverability action occurred."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49": {
@@ -92983,14 +92984,40 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-promotion-readiness-49",
     "depends_on": ["BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48"],
-    "status": "pending",
+    "status": "local_checks_passed",
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR48 is verified MERGED as f7bcb082145f6b1ce98dcef8959cafaa967fbdfa, origin/main contains the merge, all nine required checks passed on final head 35cae2556cfcbb772ba75360069e4d9f7ee38674, and its local/remote task branches are absent."
+      },
+      "production_read_only_observation": {
+        "status": "pass",
+        "evidence": "Read-only production observation at deployed SHA 65a1d3b78da70511306ebd2867a157494e4e217f verified active admin_user:1, exact six ZH6 primary/runtime baselines, 49 Media Library assets, 23 published/public/synced/CDN-verified assets, 22 with hero+OG, and zero authority-complete big5:model_hub:zh-CN:hero-og candidates. Four Big Five-named article assets were rejected because they lack locale, rights, license, provenance, operator approval and Hub content identity. Database/CMS/media/pointer/promotion/discoverability/cache/Search/deploy writes were zero."
+      },
+      "readiness_package": {
+        "status": "pass_hold",
+        "evidence": "Deterministic builder and standalone validator pass with exact admin_user:1 solo_operator evidence, 6 reviewed assets, 18 source permissions, six rollback baselines and fail-closed media uniqueness. Current disposition is HOLD_FAIL_CLOSED_MEDIA_AUTHORITY with release snapshot cc562c87387fa337786f49bd5d1efb5d0c1d1381dd65e127c913bf259b300973, payload 46f25a5b30b770a61b57bbdb330076061ae847e23012f290dd1a6011a2beda28 and file b85e7041c2292751e79d463fa292c863cc56b2c7a726d2568e65771ca1f4283c; ready_for_working_revision=false and ready_for_promotion=false."
+      },
+      "focused": {
+        "status": "pass",
+        "evidence": "Focused PR49 passes 9 tests / 140 assertions. The full related PR41 media, PR43 provenance, PR47 review/promotion, PR48 snapshot and PR49 readiness regression set passes 61 tests / 8615 assertions. PR49 covers deterministic package validation, exact external OWNER authority, zero-write HOLD, unique-versus-multiple media disposition, owner/package tamper rejection, command package-only mode, missing-runtime fail-closed behavior and database media eligibility."
+      },
+      "complete_manifest_validation": {
+        "status": "pass",
+        "evidence": "After the heavy-process guard found no competing FermatMind validation, the sole bash backend/scripts/ci_verify_mbti.sh run passed: Big Five 1506 tests / 181667 assertions plus Enneagram, MBTI smoke, Partner API, OpenAPI, migration safety, auth, order-security, dependency-security and downstream gates. Pint, PHP/JSON/YAML/JavaScript syntax, deterministic package hashes, git diff --check and exact 15-file allowed-path validation also pass. Generated compile timestamp/hash side effects were restored; production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutations remain zero."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
-    "local_cleanup_executed": false
+    "local_cleanup_executed": false,
+    "transitions": [
+      {"at": "2026-07-16T09:55:00Z", "from": "pending", "to": "in_progress", "note": "Started PR49 from current origin/main after verifying PR48 merge containment and cleanup. Scope is read-only promotion readiness; no working revision, media upload, production write or promotion is authorized."},
+      {"at": "2026-07-16T10:05:30Z", "from": "in_progress", "to": "in_progress", "note": "Production read-only authority scan found active admin_user:1 and exact six runtime rows, but zero authority-complete Hub hero/OG assets. PR49 therefore proceeds as a mergeable fail-closed HOLD contract while Task50 remains blocked; no production mutation occurred."},
+      {"at": "2026-07-16T10:29:54Z", "from": "in_progress", "to": "local_checks_passed", "note": "All PR49 manifest checks pass on the exact 15-file scope. The Laravel gate now locks the exact reviewed package, confirmation, OWNER authority and production observation hashes; focused 9/140, related 61/8615 and the sole complete ci_verify_mbti gate pass. The package remains HOLD_FAIL_CLOSED_MEDIA_AUTHORITY and Task50 remains blocked; no controlled write or runtime mutation occurred."}
+    ]
   },
   "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50": {
     "id": "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50",
