@@ -94992,8 +94992,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "20277717ab01d172d45625adf770692f13a4e49f",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -95048,9 +95049,14 @@
         "at": "2026-07-16T04:26:51Z",
         "status": "local_checks_passed",
         "note": "After two truthfully recorded content-repair rounds, all PR17 manifest checks pass: 8 tests / 419 assertions, zero asset-specific PR08-gate issues, Pint, PHP syntax, YAML, changed JSON, normalized FAQ/signal/independence uniqueness, anomaly scan, diff checks, and exact six-file scope. All manual-review, release, discoverability, search, deploy, and production boundaries remain closed."
+      },
+      {
+        "at": "2026-07-16T04:27:26Z",
+        "status": "ready_to_push",
+        "note": "Committed the exact six-file PR17 scope as 20277717ab01d172d45625adf770692f13a4e49f after explicit path-limited staging and cached diff validation."
       }
     ],
-    "updated_at": "2026-07-16T04:26:51Z"
+    "updated_at": "2026-07-16T04:27:26Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-9-FAMILY-18",
