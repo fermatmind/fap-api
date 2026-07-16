@@ -92916,8 +92916,8 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-snapshot-48",
     "depends_on": ["BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47"],
-    "status": "github_checks_pending",
-    "commit_sha": "b2c5c95984236ff790ecbc78084689671dde49a3",
+    "status": "review_fix_local_verified",
+    "commit_sha": "b2c5c95983d97688e683b5529f893dfe27177e7e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3139",
     "checks": {
       "dependency": {
@@ -92935,6 +92935,10 @@
       "local": {
         "status": "pass",
         "evidence": "Final exact-SHA builder, package validator, and confirmation validator pass; focused PHPUnit passes 4 tests / 76 assertions; Pint, PHP/JavaScript syntax, JSON/YAML parsing, package file SHA, git diff --check, and exact nine-file scope validation pass. The first combined command used the wrong working directory and exited before tests; the first scope comparator collapsed untracked directories. Both invocation-only issues were corrected and the exact manifest commands passed without code changes or out-of-scope files."
+      },
+      "review_fix": {
+        "status": "pass",
+        "evidence": "The valid P2 review finding is fixed by replacing the hand-expanded, non-resolvable PR48 implementation SHA with the exact Git commit b2c5c95983d97688e683b5529f893dfe27177e7e in both ledger locations. git cat-file resolves the commit; JSON parsing, immutable package and confirmation validation, git diff --check, and exact scope validation pass. Snapshot and confirmation payloads are unchanged."
       }
     },
     "failure_reason": null,
@@ -92947,8 +92951,9 @@
       {"at": "2026-07-16T08:52:45Z", "from": "in_progress", "to": "awaiting_exact_snapshot_confirmation", "note": "Built and locally validated the immutable six-page snapshot. The authority skill requires a real-human exact-SHA confirmation before the confirmation record, commit, push, PR, or any dependent task can proceed; no CMS/database/public runtime action occurred."},
       {"at": "2026-07-16T09:03:03Z", "from": "awaiting_exact_snapshot_confirmation", "to": "exact_snapshot_confirmed", "note": "The operator supplied the exact three-SHA confirmation and bound CMS reviewer admin_user:1. Confirmation record SHA256 is d1f958579c8527a8cc6bf18200b7927274e135ab72e61e780e4e2f9c69539fb9; the approval does not authorize any CMS, working-revision, media, promotion, publication, discoverability, deploy, cache, or Search action."},
       {"at": "2026-07-16T09:05:04Z", "from": "exact_snapshot_confirmed", "to": "local_checks_passed", "note": "All PR48 manifest checks pass on the exact nine-file scope after correcting two command-harness-only invocation issues. The content package remains non-runtime and promotion-ineligible; no production or CMS write occurred."},
-      {"at": "2026-07-16T09:05:51Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact nine-file PR48 implementation as b2c5c95984236ff790ecbc78084689671dde49a3 after explicit staging and cached-diff validation. Production/CMS/database/media/promotion/discoverability actions remain zero."},
-      {"at": "2026-07-16T09:07:02Z", "from": "committed_pending_push", "to": "github_checks_pending", "note": "Pushed the scoped branch and opened the single authorized PR #3139 with the exact manifest title and required what/why/validation/deferred/rule-impact sections. Required GitHub checks and exact-head review remain pending; no controlled external action occurred."}
+      {"at": "2026-07-16T09:05:51Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact nine-file PR48 implementation as b2c5c95983d97688e683b5529f893dfe27177e7e after explicit staging and cached-diff validation. Production/CMS/database/media/promotion/discoverability actions remain zero."},
+      {"at": "2026-07-16T09:07:02Z", "from": "committed_pending_push", "to": "github_checks_pending", "note": "Pushed the scoped branch and opened the single authorized PR #3139 with the exact manifest title and required what/why/validation/deferred/rule-impact sections. Required GitHub checks and exact-head review remain pending; no controlled external action occurred."},
+      {"at": "2026-07-16T09:16:16Z", "from": "github_checks_pending", "to": "review_fix_local_verified", "note": "All nine GitHub checks passed on head 217b8e40c89269e9d82deda9fad84e3115daf7b4, then automated review found one valid P2: the hand-expanded PR48 implementation SHA in the ledger was not a resolvable Git object. Both ledger references now use the exact commit b2c5c95983d97688e683b5529f893dfe27177e7e; git cat-file, JSON parsing, package and confirmation validators, git diff --check, and exact scope validation pass. Fresh checks and exact-head review remain required; immutable snapshot/approval hashes and all public runtime surfaces are unchanged. No production/CMS/database/media/promotion/discoverability action occurred."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49": {
