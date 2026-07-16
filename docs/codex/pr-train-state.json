@@ -96130,9 +96130,9 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "ready_to_push",
+    "status": "pr_open_checks_pending",
     "commit_sha": "489b531ceabf92879c86952357dfbe50aae5f2c3",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -96191,9 +96191,14 @@
         "at": "2026-07-16T13:45:19Z",
         "status": "ready_to_push",
         "note": "Bound commit_sha to the exact locally verified 15-path implementation commit 489b531ceabf92879c86952357dfbe50aae5f2c3; only this ledger/status binding follows the complete validation cycle."
+      },
+      {
+        "at": "2026-07-16T13:47:02Z",
+        "status": "pr_open_checks_pending",
+        "note": "Pushed the exact 15-path scope and opened PR #3145. The PR is MERGEABLE and the first GitHub checks have started; require all required checks and review threads green before squash merge."
       }
     ],
-    "updated_at": "2026-07-16T13:45:19Z"
+    "updated_at": "2026-07-16T13:47:02Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
