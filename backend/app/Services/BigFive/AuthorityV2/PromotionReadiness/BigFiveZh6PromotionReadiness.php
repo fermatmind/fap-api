@@ -689,6 +689,30 @@ final class BigFiveZh6PromotionReadiness
                 throw new RuntimeException('ZH6 OWNER approval scope overclaims controlled authority: '.$field.'.');
             }
         }
+        $expectedReleaseLockMaterial = [
+            'cohort_snapshot_sha256' => self::COHORT_SNAPSHOT_SHA256,
+            'package_payload_sha256' => self::SNAPSHOT_PAYLOAD_SHA256,
+            'package_file_sha256' => self::SNAPSHOT_FILE_SHA256,
+            'confirmation_record_sha256' => self::CONFIRMATION_RECORD_SHA256,
+            'review_record_sha256' => $this->canonicalSha256($review),
+            'source_permission_sha256' => $this->canonicalSha256($sourceRows),
+            'media_authority_sha256' => $mediaAuthoritySha256,
+            'permissions_sha256' => $permissionsSha256,
+            'rollback_baseline_sha256' => $this->canonicalSha256($rollbackRows),
+            'production_observation_sha256' => $observationSha256,
+            'owner_authority_sha256' => self::OWNER_AUTHORITY_SHA256,
+        ];
+        $releaseLockMaterial = $package['release_lock_material'] ?? null;
+        $releaseSnapshotSha256 = $package['release_snapshot_sha256'] ?? null;
+        if (! is_array($releaseLockMaterial)
+            || ! is_string($releaseSnapshotSha256)
+            || ! hash_equals(
+                $this->canonicalSha256($expectedReleaseLockMaterial),
+                $this->canonicalSha256($releaseLockMaterial),
+            )
+            || ! hash_equals($releaseSnapshotSha256, $this->canonicalSha256($expectedReleaseLockMaterial))) {
+            throw new RuntimeException('ZH6 release lock material does not match validated evidence.');
+        }
         $expectedActions = [
             'production_database_read_only_observation' => true,
             'database_writes' => 0,

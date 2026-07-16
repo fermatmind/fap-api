@@ -53,6 +53,10 @@ for (const [pathField, hashField] of Object.entries({
   const inputText = fs.readFileSync(overridePath ?? path.join(repositoryRoot, packageJson.inputs[pathField]));
   invariant(packageJson.inputs[hashField] === sha256(inputText), `${pathField} file SHA mismatch`);
 }
+const snapshotText = fs.readFileSync(path.join(repositoryRoot, packageJson.inputs.snapshot_path), 'utf8');
+const snapshot = JSON.parse(snapshotText);
+const confirmationText = fs.readFileSync(path.join(repositoryRoot, packageJson.inputs.confirmation_path), 'utf8');
+const confirmation = JSON.parse(confirmationText);
 invariant(packageJson.inputs.production_observation_sha256 === sha256(observationText), 'production observation SHA mismatch');
 invariant(packageJson.inputs.owner_authority_sha256 === sha256(ownerAuthorityText), 'OWNER authority SHA mismatch');
 invariant(packageJson.release_lock_material.owner_authority_sha256 === sha256(ownerAuthorityText), 'release lock OWNER authority SHA mismatch');
@@ -172,6 +176,22 @@ invariant(canonicalSha256(packageJson.actions) === canonicalSha256({
   cache_operations: 0,
   deployments: 0,
 }), 'action evidence must contain the exact read-only observation and zero-mutation fields');
+const expectedReleaseLockMaterial = {
+  cohort_snapshot_sha256: snapshot.cohort_snapshot_sha256,
+  package_payload_sha256: snapshot.package_payload_sha256,
+  package_file_sha256: sha256(snapshotText),
+  confirmation_record_sha256: confirmation.confirmation_record_sha256,
+  review_record_sha256: packageJson.editorial_authority.review_record_sha256,
+  source_permission_sha256: packageJson.source_permissions.source_permission_sha256,
+  media_authority_sha256: packageJson.media_authority.media_authority_sha256,
+  permissions_sha256: packageJson.permissions.permissions_sha256,
+  rollback_baseline_sha256: packageJson.rollback_baseline.rollback_baseline_sha256,
+  production_observation_sha256: sha256(observationText),
+  owner_authority_sha256: sha256(ownerAuthorityText),
+};
+invariant(canonicalSha256(packageJson.release_lock_material) === canonicalSha256(expectedReleaseLockMaterial)
+  && packageJson.release_snapshot_sha256 === canonicalSha256(expectedReleaseLockMaterial),
+'release lock material does not match validated evidence');
 
 console.log('PASS: exact ZH6 snapshot is bound to admin_user:1 author/reviewer authority, a hash-locked solo_operator review record, 18 source permissions, six runtime rollback baselines, and a non-executable release snapshot.');
 console.log(`PASS: the Media Library observation found ${eligibleCount} authority-complete Hub hero/OG assets; uniqueness is enforced and no ambiguous or article media is repurposed.`);

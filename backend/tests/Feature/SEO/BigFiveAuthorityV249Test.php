@@ -486,6 +486,34 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_release_lock_material_must_match_every_validated_subrecord(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['release_lock_material']['media_authority_sha256'] = str_repeat('0', 64);
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-release-lock-package');
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_PACKAGE_PATH' => $temporary['path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/rewritten-release-lock-package.sha256',
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'release lock material does not match validated evidence',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected a rehashed release lock detached from its evidence to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('release lock material does not match validated evidence', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
     public function test_database_preflight_fails_closed_on_missing_runtime_without_mutation(): void
     {
         config()->set('admin.totp.enabled', true);
