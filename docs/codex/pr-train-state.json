@@ -96131,7 +96131,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "bd5755cfa352b6ec17851de992ec2238318f7060",
+    "commit_sha": "51c309a11eabb1df2c04c9132128ea402fefabbd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96140,7 +96140,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 47 tests / 828 assertions. Every runtime API/HTML/discoverability/cache/revalidation request and the deployed frontend REVISION probe disables redirects. Execute re-reads and compares all three complete authorized URL sets before rollback reservation or any runtime write, so pre-existing drift is FAIL_CLOSED_NO_WRITES. Reviewer leak detection also checks case-folded normalized DOM-visible text, covering names split by tags or whitespace. Exact evidence-SHA, endpoint/pre-readback provenance, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 48 tests / 839 assertions. Every runtime API/HTML/discoverability/cache/revalidation request and the deployed frontend REVISION probe disables redirects, with production-command behavior explicitly asserting allow_redirects=false. Execute re-reads and compares all three complete authorized URL sets before rollback reservation or any runtime write, so pre-existing drift is FAIL_CLOSED_NO_WRITES. Reviewer leak detection also checks case-folded normalized DOM-visible text, covering names split by tags or whitespace. Exact evidence-SHA, endpoint/pre-readback provenance, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96148,7 +96148,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 212 tests / 28834 assertions after the redirect and pre-write full URL-set drift repairs."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 213 tests / 28845 assertions after adding the production frontend revision redirect regression."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96156,7 +96156,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Previous head 7f6f5e4c3995cd50d57033c2310c8306240b5320 passed all nine required GitHub checks and was CLEAN/MERGEABLE. Subsequent exact-head reviews raised four valid P2 findings, all fixed through code commit bd5755cfa352b6ec17851de992ec2238318f7060; require a fresh complete GitHub check and exact-head review cycle before squash merge."
+        "evidence": "Previous head 7f6f5e4c3995cd50d57033c2310c8306240b5320 passed all nine required GitHub checks and was CLEAN/MERGEABLE. Subsequent exact-head reviews raised four valid P2 findings, all fixed through code commit bd5755cfa352b6ec17851de992ec2238318f7060 and behavior-locked through test commit 51c309a11eabb1df2c04c9132128ea402fefabbd; require a fresh complete GitHub check and exact-head review cycle before squash merge."
       }
     },
     "scope_validation": {
@@ -96320,9 +96320,14 @@
         "at": "2026-07-16T18:18:09Z",
         "status": "review_fix_local_validation_passed",
         "note": "The latest exact-head review found the frontend REVISION probe still followed redirects and raw HTML checks could miss a reviewer name split across DOM tags. Code commit bd5755cfa352b6ec17851de992ec2238318f7060 disables redirects on the deployed frontend SHA probe and rechecks case-folded normalized DOM-visible text for private reviewer names. Final focused 47/828, cache/API 8/72, classifier 1/2, full Enneagram V2 212/28834, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:24:07Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Added an explicit production-command regression at 51c309a11eabb1df2c04c9132128ea402fefabbd proving the same-origin frontend REVISION probe sends allow_redirects=false, rejects a 302, and performs zero revision/review writes. Final focused 48/839, cache/API 8/72, classifier 1/2, full Enneagram V2 213/28845, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T18:18:09Z"
+    "updated_at": "2026-07-16T18:24:07Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
