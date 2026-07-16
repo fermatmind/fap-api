@@ -92916,8 +92916,8 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-snapshot-48",
     "depends_on": ["BIG5-AUTHORITY-V2-REVIEW-PROMOTION-GATE-47"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed_pending_push",
+    "commit_sha": "b2c5c95984236ff790ecbc78084689671dde49a3",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -92946,7 +92946,8 @@
       {"at": "2026-07-16T08:42:06Z", "from": "pending", "to": "in_progress", "note": "Started the exact ZH6 snapshot scope from clean latest main after the isolated source-ledger baseline repair merged as 0d81790f5c581d4da8c979210c70334707034fac. New snapshot SHA confirmation remains a required human checkpoint."},
       {"at": "2026-07-16T08:52:45Z", "from": "in_progress", "to": "awaiting_exact_snapshot_confirmation", "note": "Built and locally validated the immutable six-page snapshot. The authority skill requires a real-human exact-SHA confirmation before the confirmation record, commit, push, PR, or any dependent task can proceed; no CMS/database/public runtime action occurred."},
       {"at": "2026-07-16T09:03:03Z", "from": "awaiting_exact_snapshot_confirmation", "to": "exact_snapshot_confirmed", "note": "The operator supplied the exact three-SHA confirmation and bound CMS reviewer admin_user:1. Confirmation record SHA256 is d1f958579c8527a8cc6bf18200b7927274e135ab72e61e780e4e2f9c69539fb9; the approval does not authorize any CMS, working-revision, media, promotion, publication, discoverability, deploy, cache, or Search action."},
-      {"at": "2026-07-16T09:05:04Z", "from": "exact_snapshot_confirmed", "to": "local_checks_passed", "note": "All PR48 manifest checks pass on the exact nine-file scope after correcting two command-harness-only invocation issues. The content package remains non-runtime and promotion-ineligible; no production or CMS write occurred."}
+      {"at": "2026-07-16T09:05:04Z", "from": "exact_snapshot_confirmed", "to": "local_checks_passed", "note": "All PR48 manifest checks pass on the exact nine-file scope after correcting two command-harness-only invocation issues. The content package remains non-runtime and promotion-ineligible; no production or CMS write occurred."},
+      {"at": "2026-07-16T09:05:51Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact nine-file PR48 implementation as b2c5c95984236ff790ecbc78084689671dde49a3 after explicit staging and cached-diff validation. Production/CMS/database/media/promotion/discoverability actions remain zero."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-PROMOTION-READINESS-49": {
