@@ -95312,10 +95312,10 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19"
     ],
-    "status": "ready_to_push",
+    "status": "github_checks_pending",
     "commit_sha": "4bb24d56c556a6f6f2c50f09e386d5ca3db012ca",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3134",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -95374,9 +95374,14 @@
         "at": "2026-07-16T06:03:21Z",
         "status": "ready_to_push",
         "note": "Committed the exact six-file PR20 scope as 4bb24d56c556a6f6f2c50f09e386d5ca3db012ca after explicit path-limited staging and cached diff validation."
+      },
+      {
+        "at": "2026-07-16T06:04:26Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3134 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
       }
     ],
-    "updated_at": "2026-07-16T06:03:21Z"
+    "updated_at": "2026-07-16T06:04:26Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
