@@ -56128,7 +56128,7 @@
           "status": "pass"
         }
       },
-      "commit_sha": "077b7551bb38c52626de71f20db106cba883bc31",
+      "commit_sha": "a5ca257069ee9c88a85c3cd12ff94ad686a2455b",
       "depends_on": [
         "BIG5-CAREER-BRIDGE-SCHEMA-01"
       ],
@@ -56138,6 +56138,7 @@
       "merged_at": "2026-07-15T23:06:48Z",
       "next_task": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3121",
+      "github_head_sha": "2aa207e953067a6bba2c95b71b372e629be53fde",
       "remote_branch_deleted": true,
       "repo": "fap-api",
       "scope_validation": {
@@ -92846,7 +92847,8 @@
     "branch": "codex/big5-authority-v2-review-promotion-gate-47",
     "depends_on": ["BIG5-AUTHORITY-V2-MEDIA-AUTHORITY-41", "BIG5-AUTHORITY-V2-VISIBLE-DATE-42", "BIG5-AUTHORITY-V2-VISIBLE-PROVENANCE-43", "BIG5-AUTHORITY-V2-DISCOVERABILITY-PARITY-44", "BIG5-AUTHORITY-V2-STRUCTURED-DATA-45", "BIG5-AUTHORITY-V2-TOPIC-AUTHORITY-46"],
     "status": "merged",
-    "commit_sha": "0907e41282b1bb00ef2bbaf1067730c7aef2a2f5",
+    "commit_sha": "df9261e5d7aa071323fb91b0f6b28d2288e389a2",
+    "github_head_sha": "afb57a90df27ab956683a22387c626273ecd395d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3114",
     "checks": {
       "authorization": {"status": "pass", "evidence": "The operator supplied a continuous-execution /goal with the exact PR47 id, title, branch, dependency chain, 229-revision plus two-shell acceptance contract, serial lifecycle, and explicit no-production-promotion boundary."},
