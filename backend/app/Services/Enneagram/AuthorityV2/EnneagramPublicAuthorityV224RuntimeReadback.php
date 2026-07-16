@@ -169,7 +169,16 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if (! $htmlResponse->successful()) {
             $issues[] = 'html_http_'.(string) $htmlResponse->status();
         }
-        $this->validateHtml($html, $v1, $v2, (string) $target['path'], $phase, $sensitiveValues, $issues);
+        $this->validateHtml(
+            $html,
+            $v1,
+            $v2,
+            (string) $target['path'],
+            $frontendBaseUrl,
+            $phase,
+            $sensitiveValues,
+            $issues,
+        );
 
         return [
             'asset_key' => (string) $target['asset_key'],
@@ -215,6 +224,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         array $v1,
         array $v2,
         string $path,
+        string $frontendBaseUrl,
         string $phase,
         array $sensitiveValues,
         array &$issues,
@@ -260,12 +270,15 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if ($expectedDescription !== '' && $description !== $expectedDescription) {
             $issues[] = 'html_description_mismatch';
         }
-        if ($canonical === '' || parse_url($canonical, PHP_URL_PATH) !== $path) {
+        if (! $this->isExactFrontendUrl($canonical, $frontendBaseUrl, $path)) {
             $issues[] = 'html_canonical_mismatch';
         }
-        if ((int) $xpath->evaluate('count(//link[@hreflang])') < 2) {
-            $issues[] = 'html_hreflang_incomplete';
-        }
+        $this->validateHreflang(
+            $xpath,
+            is_array($v1['hreflang'] ?? null) ? $v1['hreflang'] : [],
+            $frontendBaseUrl,
+            $issues,
+        );
         foreach ($xpath->query('//a[@href]') ?: [] as $link) {
             if (! $link instanceof DOMElement) {
                 continue;
@@ -445,7 +458,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             $path = (string) ($parts['path'] ?? '');
             $isEnneagram = str_contains($path, '/personality/enneagram');
             if ($expectedOrigin !== null && ($requireCanonicalSitemapUrl || $isEnneagram)) {
-                if (($parts['query'] ?? '') !== '' || ($parts['fragment'] ?? '') !== '') {
+                if (array_key_exists('query', $parts) || array_key_exists('fragment', $parts)) {
                     throw new RuntimeException('Discoverability URL must not contain a query or fragment.');
                 }
                 if ($requireCanonicalSitemapUrl && $isRelativePath) {
@@ -481,6 +494,89 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $defaultPort = ($scheme === 'https' && $port === 443) || ($scheme === 'http' && $port === 80);
 
         return $scheme.'://'.$host.($port !== null && ! $defaultPort ? ':'.$port : '');
+    }
+
+    private function isExactFrontendUrl(string $url, string $frontendBaseUrl, string $expectedPath): bool
+    {
+        $parts = parse_url($url);
+        if ($url === ''
+            || ! is_array($parts)
+            || ! isset($parts['scheme'], $parts['host'])
+            || isset($parts['user'])
+            || isset($parts['pass'])
+            || array_key_exists('query', $parts)
+            || array_key_exists('fragment', $parts)
+            || ($parts['path'] ?? '') !== $expectedPath) {
+            return false;
+        }
+
+        try {
+            return hash_equals($this->canonicalOrigin($frontendBaseUrl), $this->canonicalOrigin($url));
+        } catch (RuntimeException) {
+            return false;
+        }
+    }
+
+    /** @param array<string,mixed> $expectedHreflang @param list<string> $issues */
+    private function validateHreflang(
+        DOMXPath $xpath,
+        array $expectedHreflang,
+        string $frontendBaseUrl,
+        array &$issues,
+    ): void {
+        $requiredLanguages = ['en', 'zh-cn', 'x-default'];
+        $expected = [];
+        foreach ($expectedHreflang as $language => $url) {
+            $language = strtolower(trim((string) $language));
+            if (! in_array($language, $requiredLanguages, true)) {
+                continue;
+            }
+            $url = trim((string) $url);
+            $parts = parse_url($url);
+            $path = is_array($parts) ? (string) ($parts['path'] ?? '') : '';
+            $isRelativePath = str_starts_with($url, '/') && ! str_starts_with($url, '//');
+            if ($language === ''
+                || isset($expected[$language])
+                || $path === ''
+                || ! is_array($parts)
+                || array_key_exists('query', $parts)
+                || array_key_exists('fragment', $parts)
+                || (! $isRelativePath && ! $this->isExactFrontendUrl($url, $frontendBaseUrl, $path))) {
+                $issues[] = 'html_hreflang_mismatch_expected_'.($language !== '' ? $language : 'missing');
+
+                return;
+            }
+            $expected[$language] = $path;
+        }
+        if (array_diff($requiredLanguages, array_keys($expected)) !== []) {
+            $issues[] = 'html_hreflang_incomplete';
+
+            return;
+        }
+
+        $actual = [];
+        foreach ($xpath->query('//link[translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="alternate"][@hreflang][@href]') ?: [] as $link) {
+            if (! $link instanceof DOMElement) {
+                continue;
+            }
+            $language = strtolower(trim($link->getAttribute('hreflang')));
+            if ($language === ''
+                || ! isset($expected[$language])
+                || isset($actual[$language])
+                || ! $this->isExactFrontendUrl(
+                    trim($link->getAttribute('href')),
+                    $frontendBaseUrl,
+                    $expected[$language],
+                )) {
+                $issues[] = 'html_hreflang_mismatch_actual_'.($language !== '' ? $language : 'missing');
+
+                return;
+            }
+            $actual[$language] = true;
+        }
+        if (count($actual) !== count($requiredLanguages) || array_diff_key($expected, $actual) !== []) {
+            $issues[] = 'html_hreflang_incomplete';
+        }
     }
 
     /** @param array<string,mixed> $target */

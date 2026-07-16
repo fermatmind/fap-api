@@ -14,6 +14,8 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
 {
     public const ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E';
 
+    private const RELEASE_GATE_ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22';
+
     public const TARGET_COUNT = 116;
 
     public const CANARY_COUNT = 8;
@@ -447,7 +449,7 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
     private function releaseRecords(array $releaseReport): array
     {
         $package = strtolower(trim((string) ($releaseReport['package_sha256'] ?? '')));
-        if (($releaseReport['artifact'] ?? null) !== EnneagramPublicAuthorityV222ReleaseGate::ARTIFACT
+        if (($releaseReport['artifact'] ?? null) !== self::RELEASE_GATE_ARTIFACT
             || ($releaseReport['schema_version'] ?? null) !== 'enneagram_public_authority_v2_release_gate.v2'
             || ($releaseReport['automated_gate_passed'] ?? false) !== true
             || ($releaseReport['media_boundary_passed'] ?? false) !== true

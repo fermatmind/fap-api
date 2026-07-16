@@ -201,6 +201,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             'https://staging.example.com'.$firstPath,
             'https://frontend.test'.$firstPath.'?preview=1',
             'https://frontend.test'.$firstPath.'#preview',
+            'https://frontend.test'.$firstPath.'?',
+            'https://frontend.test'.$firstPath.'#',
         ];
 
         foreach ($invalidUrls as $invalidUrl) {
@@ -213,6 +215,68 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $this->fail('Expected discoverability URL drift to fail closed: '.$invalidUrl);
             } catch (\RuntimeException $exception) {
                 $this->assertStringContainsString('URL', $exception->getMessage());
+            }
+        }
+    }
+
+    public function test_html_readback_rejects_canonical_origin_query_fragment_and_relative_drift(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $path = '/en/personality/enneagram';
+        $invalidCanonicals = [
+            'https://staging.example.com'.$path,
+            'https://frontend.test'.$path.'?preview=1',
+            'https://frontend.test'.$path.'#preview',
+            'https://frontend.test'.$path.'?',
+            'https://frontend.test'.$path.'#',
+            $path,
+        ];
+
+        foreach ($invalidCanonicals as $invalidCanonical) {
+            $this->fakeRuntimeHttp($report, false, null, $invalidCanonical);
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                );
+                $this->fail('Expected HTML canonical drift to fail closed: '.$invalidCanonical);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('html_canonical_mismatch', $exception->getMessage());
+            }
+        }
+    }
+
+    public function test_html_readback_rejects_hreflang_origin_query_fragment_and_relative_drift(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $path = '/en/personality/enneagram';
+        $invalidHreflangUrls = [
+            'https://staging.example.com'.$path,
+            'https://frontend.test'.$path.'?preview=1',
+            'https://frontend.test'.$path.'#preview',
+            'https://frontend.test'.$path.'?',
+            'https://frontend.test'.$path.'#',
+            $path,
+        ];
+
+        foreach ($invalidHreflangUrls as $invalidHreflangUrl) {
+            $this->fakeRuntimeHttp($report, false, null, null, $invalidHreflangUrl);
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                );
+                $this->fail('Expected HTML hreflang drift to fail closed: '.$invalidHreflangUrl);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('html_hreflang_mismatch', $exception->getMessage());
             }
         }
     }
@@ -525,6 +589,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         array $report,
         bool $rejectRevalidation = false,
         ?string $discoverabilityUrlOverride = null,
+        ?string $canonicalUrlOverride = null,
+        ?string $hreflangUrlOverride = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -532,7 +598,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $urlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($rejectRevalidation, $urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($canonicalUrlOverride, $hreflangUrlOverride, $rejectRevalidation, $urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             if ($url === 'https://frontend.test/api/content-release/revalidate') {
                 if ($rejectRevalidation) {
@@ -562,6 +628,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     ->where('entity_key', (string) $query['code'])
                     ->where('locale', (string) $query['locale'])
                     ->firstOrFail();
+                $hreflang = [];
+                foreach ((array) $asset->hreflang_json as $language => $url) {
+                    if (! in_array(strtolower((string) $language), ['en', 'zh-cn', 'x-default'], true)) {
+                        continue;
+                    }
+                    $hreflang[$language] = 'https://frontend.test'.(string) parse_url((string) $url, PHP_URL_PATH);
+                }
 
                 return Http::response([
                     'ok' => true,
@@ -574,6 +647,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'summary' => (string) $asset->summary,
                         'seo' => ['description' => (string) $asset->summary],
                         'canonical_path' => (string) data_get($asset->canonical_json, 'path'),
+                        'hreflang' => $hreflang,
                         'faq' => [],
                         'media' => ['hero' => null, 'inline' => [], 'og' => null],
                         'source_package' => (string) $asset->source_package,
@@ -608,12 +682,27 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 }
                 $title = htmlspecialchars((string) $asset->title, ENT_QUOTES | ENT_HTML5);
                 $summary = htmlspecialchars((string) $asset->summary, ENT_QUOTES | ENT_HTML5);
+                $canonical = htmlspecialchars(
+                    $canonicalUrlOverride ?? 'https://frontend.test'.$path,
+                    ENT_QUOTES | ENT_HTML5,
+                );
+                $hreflang = [];
+                foreach ((array) $asset->hreflang_json as $language => $url) {
+                    if (! in_array(strtolower((string) $language), ['en', 'zh-cn', 'x-default'], true)) {
+                        continue;
+                    }
+                    $href = $language === 'en' && $hreflangUrlOverride !== null
+                        ? $hreflangUrlOverride
+                        : 'https://frontend.test'.(string) parse_url((string) $url, PHP_URL_PATH);
+                    $hreflang[] = '<link rel="alternate" hreflang="'
+                        .htmlspecialchars((string) $language, ENT_QUOTES | ENT_HTML5)
+                        .'" href="'.htmlspecialchars($href, ENT_QUOTES | ENT_HTML5).'">';
+                }
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
-                    .'<link rel="canonical" href="https://frontend.test'.$path.'">'
-                    .'<link rel="alternate" hreflang="en" href="https://frontend.test/en/personality/enneagram">'
-                    .'<link rel="alternate" hreflang="zh-CN" href="https://frontend.test/zh/personality/enneagram">'
+                    .'<link rel="canonical" href="'.$canonical.'">'
+                    .implode('', $hreflang)
                     .'</head><body><h1>'.$title.'</h1><main>'.$summary.'</main></body></html>');
             }
 
