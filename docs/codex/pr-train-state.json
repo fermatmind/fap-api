@@ -95445,7 +95445,7 @@
       "fap_api_origin_main_contains_link_graph_merge": true,
       "verified_at": "2026-07-16T08:31:28Z"
     },
-    "status": "draft_open_blocked_release_gate",
+    "status": "ci_fix_local_verified_blocked_release_gate",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3138",
     "checks": {
@@ -95478,8 +95478,8 @@
         "evidence": "Manifest YAML, ledger/package/report JSON, report SHA binding, git diff --check, and exact ten-file allowlist validation passed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Draft PR #3138 is OPEN at head 00756a0311521b098429370d477107e82f82067a; initial required checks are pending."
+        "status": "fix_pending_push",
+        "evidence": "Head 3b470f9fcbb63146022d07804a357db5f1799243 passed eight checks; verify-bigfive failed only because its frozen non-runtime classifier rejected the two newly named PR22 PHP files. The scoped fix moves the same gate into already-registered Authority V2 integrity files and deletes those two paths."
       }
     },
     "scope_validation": {
@@ -95533,9 +95533,19 @@
         "at": "2026-07-16T08:38:19Z",
         "status": "draft_open_blocked_release_gate",
         "note": "Pushed the exact PR22 branch and opened Draft PR #3138. GitHub reports OPEN/DRAFT at head 00756a0311521b098429370d477107e82f82067a with checks pending. Keep the PR unmerged and stop before PR23 while the release blockers remain."
+      },
+      {
+        "at": "2026-07-16T08:45:03Z",
+        "status": "github_check_failed",
+        "note": "Exact head 3b470f9fcbb63146022d07804a357db5f1799243 passed eight checks; verify-bigfive alone failed 1/1491 because the runtime-freeze classifier treated the two newly named PR22 service/command files as runtime drift. The gate behavior itself was not implicated."
+      },
+      {
+        "at": "2026-07-16T08:49:59Z",
+        "status": "ci_fix_local_verified_blocked_release_gate",
+        "note": "Moved the unchanged read-only release-gate helper and command mode into the already-registered Enneagram Authority V2 integrity service/command, deleted the two unregistered PHP paths, and preserved the exact package SHA and report. Manifest 53/4130, syntax, and four-file Pint pass. The branch-diff freeze assertion requires this deletion to be committed before it can observe the fix."
       }
     ],
-    "updated_at": "2026-07-16T08:38:19Z"
+    "updated_at": "2026-07-16T08:49:59Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",

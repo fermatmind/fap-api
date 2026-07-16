@@ -9,7 +9,7 @@ The aggregate PR08 editorial gate also finds two cross-family duplicate-sentence
 Run the read-only gate from `backend/`:
 
 ```bash
-php artisan personality:enneagram-authority-v2-release-gate --json
+php artisan personality:enneagram-authority-v2-integrity-gate --release-gate --json
 ```
 
 An exit code of 1 with `status=fail_closed`, `automated_gate_passed=false`, and `release_eligible=false` is the expected truthful result while any blocker remains. The command never imports, publishes, deploys, uploads media, revalidates cache, changes indexability, or submits search actions.

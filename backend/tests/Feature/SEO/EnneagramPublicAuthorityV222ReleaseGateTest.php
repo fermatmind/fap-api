@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV222ReleaseGate;
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV2IntegrityGate;
 use Tests\TestCase;
 
 final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
@@ -141,7 +142,7 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
     {
         $this->assertSame($this->report(), $this->readJson(self::PACKAGE_DIR.'/release-gate-report.json'));
 
-        $this->artisan('personality:enneagram-authority-v2-release-gate', ['--json' => true])
+        $this->artisan('personality:enneagram-authority-v2-integrity-gate', ['--release-gate' => true, '--json' => true])
             ->expectsOutputToContain('"decision": "HOLD"')
             ->assertFailed();
     }
@@ -149,7 +150,7 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
     /** @return array<string, mixed> */
     private function report(): array
     {
-        return app(EnneagramPublicAuthorityV222ReleaseGate::class)->evaluate(
+        return $this->releaseGate()->evaluate(
             base_path(),
             self::PACKAGE_DIR.'/manual-review-register.json',
         );
@@ -163,7 +164,7 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         file_put_contents($path, json_encode(['reviews' => $reviews], JSON_THROW_ON_ERROR));
 
         try {
-            return app(EnneagramPublicAuthorityV222ReleaseGate::class)->evaluate(base_path(), $path);
+            return $this->releaseGate()->evaluate(base_path(), $path);
         } finally {
             @unlink($path);
         }
@@ -178,5 +179,12 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertIsArray($decoded);
 
         return $decoded;
+    }
+
+    private function releaseGate(): EnneagramPublicAuthorityV222ReleaseGate
+    {
+        $integrityGate = app(EnneagramPublicAuthorityV2IntegrityGate::class);
+
+        return new EnneagramPublicAuthorityV222ReleaseGate($integrityGate);
     }
 }
