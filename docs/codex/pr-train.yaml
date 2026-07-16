@@ -67,7 +67,7 @@ prs:
     base: main
     title: "CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01 career public authority cache resilience"
     train_scope: career_10k_stability
-    status: in_progress
+    status: blocked_release_gate
     scope:
       - Add single-flight locking, versioned atomic directory cache switching, and last-known-good reads for EN/ZH public Career directory authority.
       - Keep full directory authority rebuilds out of HTTP requests; warm explicitly and verify cache readiness on the scheduler.
@@ -44356,7 +44356,7 @@ prs:
     base: main
     branch: codex/enneagram-public-authority-v2-release-gate-22
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22: aggregate and validate the 116-page release package"
-    status: pending_dependency
+    status: in_progress
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-LINK-GRAPH-20
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-FRONTEND-CONSUMER-21

@@ -427,6 +427,13 @@ class SitemapGeneratorTest extends TestCase
         $payload = $this->generateSitemap();
         $xml = (string) ($payload['xml'] ?? '');
         $slugList = (array) ($payload['slug_list'] ?? []);
+        $enneagramSlugs = array_values(array_filter(
+            $slugList,
+            static fn (string $slug): bool => str_starts_with($slug, 'personality-public-content:enneagram:'),
+        ));
+
+        $this->assertCount(116, $enneagramSlugs);
+        $this->assertCount(116, array_unique($enneagramSlugs));
 
         foreach ($paths as $entityKey => $path) {
             $this->assertStringContainsString('https://fermatmind.com/en'.$path, $xml);
