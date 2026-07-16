@@ -392,6 +392,52 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_console_rejects_non_origin_api_and_frontend_base_urls_before_any_write(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+
+        $invalidOrigins = [
+            ['api-base-url', 'https://api.test/api'],
+            ['api-base-url', 'https://api.test?preview=1'],
+            ['api-base-url', 'https://api.test#preview'],
+            ['frontend-base-url', 'https://frontend.test/personality'],
+            ['frontend-base-url', 'https://frontend.test?preview=1'],
+            ['frontend-base-url', 'https://frontend.test#preview'],
+        ];
+
+        try {
+            foreach ($invalidOrigins as [$option, $invalidOrigin]) {
+                $arguments = [
+                    '--preflight' => true,
+                    '--review-register' => $registerPath,
+                    '--backend-deployed-sha' => self::BACKEND_SHA,
+                    '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                    '--api-base-url' => 'https://api.test',
+                    '--frontend-base-url' => 'https://frontend.test',
+                    '--allow-testing' => true,
+                ];
+                $arguments['--'.$option] = $invalidOrigin;
+
+                $this->artisan('personality:enneagram-authority-v2-runtime-closeout', $arguments)
+                    ->expectsOutputToContain('--'.$option.' must be an exact HTTPS origin without credentials, path, query, or fragment.')
+                    ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
+                    ->expectsOutputToContain('writes_committed=0')
+                    ->assertFailed();
+            }
+
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+        } finally {
+            File::delete($registerPath);
+        }
+    }
+
     public function test_late_execute_failure_reports_committed_writes_and_safe_rollback_evidence(): void
     {
         $this->seedPublishedEstate();
