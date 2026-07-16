@@ -94713,8 +94713,9 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "41d2a52e19b13d8746526b82fa151fca0c45244a",
+    "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -94769,9 +94770,14 @@
         "at": "2026-07-16T01:28:49Z",
         "status": "local_checks_passed",
         "note": "After four truthfully recorded content-repair rounds, all PR15 manifest checks pass: 8 tests / 421 assertions, zero asset-specific PR08-gate issues for all twelve real assets, Pint, PHP syntax, YAML, all changed JSON, diff check, and exact six-file scope. The package remains a pending-manual-review, draft-only, publish-ineligible handoff with no CMS/database/revision/discoverability/search/deploy action."
+      },
+      {
+        "at": "2026-07-16T01:29:46Z",
+        "status": "ready_to_push",
+        "note": "Committed the exact six-file PR15 scope as 41d2a52e19b13d8746526b82fa151fca0c45244a after explicit path-limited staging and cached diff validation."
       }
     ],
-    "updated_at": "2026-07-16T01:28:49Z"
+    "updated_at": "2026-07-16T01:29:46Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16",
