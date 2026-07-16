@@ -9,6 +9,7 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeCloseout;
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeReadback;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\File;
@@ -232,6 +233,116 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->assertArrayNotHasKey('rollback_token_output', $result);
         } finally {
             @unlink($rollbackPath);
+        }
+    }
+
+    public function test_invalid_rollback_output_is_rejected_before_any_runtime_write(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        $reportSha = $this->fingerprintRaw($report);
+        $registerSha = $this->fingerprintRaw($register);
+        $closeout = $this->closeout();
+        $preflight = $closeout->preflight(
+            $report,
+            $reportSha,
+            $register,
+            $registerSha,
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+        $existingPath = '/tmp/enneagram-v224-existing-'.bin2hex(random_bytes(8)).'.token';
+        File::put($existingPath, 'operator-owned-sentinel');
+
+        try {
+            try {
+                $closeout->execute(
+                    $report,
+                    $reportSha,
+                    $register,
+                    $registerSha,
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                    $preflight['authorization_packet'],
+                    (string) $preflight['authorization_packet_sha256'],
+                    (string) $preflight['authorization_packet']['authorization_phrase'],
+                    $existingPath,
+                    'https://api.test',
+                    'https://frontend.test',
+                    'https://frontend.test/api/content-release/revalidate',
+                    self::REVALIDATION_SECRET,
+                );
+                $this->fail('Expected an existing rollback output to fail closed.');
+            } catch (\Throwable $throwable) {
+                $result = $closeout->failureResult($throwable);
+            }
+
+            $this->assertSame('FAIL_CLOSED_NO_WRITES', $result['status']);
+            $this->assertSame('rollback_token_reservation', $result['failure_stage']);
+            $this->assertFalse($result['writes_committed']);
+            $this->assertFalse($result['promotion_committed']);
+            $this->assertFalse($result['rollback_token_persisted']);
+            $this->assertSame('operator-owned-sentinel', File::get($existingPath));
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+        } finally {
+            File::delete($existingPath);
+        }
+    }
+
+    public function test_preflight_binds_complete_current_all_target_readback_evidence(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        $this->fakeRuntimeHttp($report);
+        $readback = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'all',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+        );
+        $valid = $this->closeout()->preflight(
+            $report,
+            $this->fingerprintRaw($report),
+            $register,
+            $this->fingerprintRaw($register),
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+            $readback,
+            $this->fingerprintRaw($readback),
+        );
+        $this->assertSame($this->fingerprintRaw($readback), data_get($valid, 'authorization_packet.pre_readback.sha256'));
+
+        $invalidArtifacts = [
+            'partial batch' => [...$readback, 'batch' => 'canary-00'],
+            'stale fingerprint' => [...$readback, 'public_projection_fingerprint' => str_repeat('f', 64)],
+            'missing API read' => [...$readback, 'api_read_count' => 115],
+            'missing observation' => [...$readback, 'observed_at' => ''],
+            'stale observation' => [...$readback, 'observed_at' => now()->subHour()->utc()->toIso8601String()],
+            'URL subset drift' => array_replace_recursive($readback, [
+                'url_sets' => ['sitemap' => ['enneagram_url_count' => 115]],
+            ]),
+        ];
+        foreach ($invalidArtifacts as $label => $invalid) {
+            try {
+                $this->closeout()->preflight(
+                    $report,
+                    $this->fingerprintRaw($report),
+                    $register,
+                    $this->fingerprintRaw($register),
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                    $invalid,
+                    $this->fingerprintRaw($invalid),
+                );
+                $this->fail('Expected invalid pre-readback to fail: '.$label);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('pre-readback', $exception->getMessage());
+            }
         }
     }
 

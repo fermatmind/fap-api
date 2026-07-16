@@ -257,6 +257,28 @@ SQL);
             ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED)->count());
     }
 
+    public function test_rollback_token_sink_failure_rolls_back_the_atomic_promotion(): void
+    {
+        $targets = $this->seedRevisionEstate();
+        $plan = $this->promoter()->preflight($targets);
+        $before = $this->databaseFingerprint();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('simulated rollback token persistence failure');
+
+        try {
+            $this->promoter()->promote(
+                $targets,
+                (string) $plan['preflight_fingerprint'],
+                static function (string $_token): void {
+                    throw new RuntimeException('simulated rollback token persistence failure');
+                },
+            );
+        } finally {
+            $this->assertSame($before, $this->databaseFingerprint());
+        }
+    }
+
     public function test_tampered_rollback_token_fails_closed_without_writes(): void
     {
         $targets = $this->seedRevisionEstate();

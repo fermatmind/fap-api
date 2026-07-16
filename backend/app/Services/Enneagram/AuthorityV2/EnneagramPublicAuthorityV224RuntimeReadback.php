@@ -77,6 +77,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'artifact' => self::ARTIFACT,
             'ok' => true,
             'status' => 'PASS_'.strtoupper($phase).'_RUNTIME_READBACK',
+            'observed_at' => now()->utc()->toIso8601String(),
             'phase' => $phase,
             'batch' => $batch,
             'target_count' => count($targets),
@@ -366,6 +367,8 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 'published_at' => $asset->published_at?->utc()->toIso8601String(),
             ];
         }
+        usort($projection, static fn (array $left, array $right): int => $left['asset_key'] <=> $right['asset_key']);
+        usort($stable, static fn (array $left, array $right): int => $left['asset_key'] <=> $right['asset_key']);
 
         return [
             'public_projection_fingerprint' => $this->fingerprint($projection),

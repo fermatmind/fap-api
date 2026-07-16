@@ -87,10 +87,14 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
         return $this->publicPlan($this->buildPlan($targets, false));
     }
 
-    /** @param list<array<string, mixed>> $targets @return array<string, mixed> */
-    public function promote(array $targets, string $expectedPreflightFingerprint): array
+    /**
+     * @param  list<array<string, mixed>>  $targets
+     * @param  (callable(string):void)|null  $rollbackTokenSink
+     * @return array<string, mixed>
+     */
+    public function promote(array $targets, string $expectedPreflightFingerprint, ?callable $rollbackTokenSink = null): array
     {
-        return DB::transaction(function () use ($targets, $expectedPreflightFingerprint): array {
+        return DB::transaction(function () use ($targets, $expectedPreflightFingerprint, $rollbackTokenSink): array {
             $plan = $this->buildPlan($targets, true);
             if (! hash_equals((string) $plan['preflight_fingerprint'], $expectedPreflightFingerprint)) {
                 throw new RuntimeException('Promotion preflight fingerprint changed; transaction aborted.');
@@ -149,6 +153,9 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 'preflight_fingerprint' => (string) $plan['preflight_fingerprint'],
                 'rows' => $rollbackRows,
             ]);
+            if ($rollbackTokenSink !== null) {
+                $rollbackTokenSink($token);
+            }
 
             return [
                 ...$this->publicPlan($plan),

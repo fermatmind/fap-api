@@ -173,26 +173,29 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
                 'published_at' => $asset->published_at?->utc()->toIso8601String(),
             ];
         }
+        usort($projectionRows, static fn (array $left, array $right): int => $left['asset_key'] <=> $right['asset_key']);
+        usort($stableRows, static fn (array $left, array $right): int => $left['asset_key'] <=> $right['asset_key']);
+        $publicProjectionFingerprint = $this->fingerprint($projectionRows);
+        $stableFingerprint = $this->fingerprint($stableRows);
 
         $preReadbackBinding = null;
         if ($preReadback !== null) {
             $this->assertHash((string) $preReadbackSha256, 'pre-readback SHA-256');
-            if (($preReadback['artifact'] ?? null) !== EnneagramPublicAuthorityV224RuntimeReadback::ARTIFACT
-                || ($preReadback['phase'] ?? null) !== 'pre'
-                || (int) ($preReadback['target_count'] ?? 0) !== self::TARGET_COUNT
-                || ($preReadback['ok'] ?? false) !== true) {
-                throw new RuntimeException('Exact pre-readback artifact is invalid or incomplete.');
-            }
+            $this->assertPreReadback(
+                $preReadback,
+                $records,
+                $publicProjectionFingerprint,
+                $stableFingerprint,
+            );
             $preReadbackBinding = [
                 'sha256' => $preReadbackSha256,
+                'observed_at' => (string) $preReadback['observed_at'],
                 'public_projection_fingerprint' => (string) ($preReadback['public_projection_fingerprint'] ?? ''),
                 'stable_identity_discoverability_fingerprint' => (string) ($preReadback['stable_identity_discoverability_fingerprint'] ?? ''),
                 'url_sets' => $preReadback['url_sets'] ?? null,
             ];
         }
 
-        $publicProjectionFingerprint = $this->fingerprint($projectionRows);
-        $stableFingerprint = $this->fingerprint($stableRows);
         $runtimeFingerprint = $this->fingerprint([
             'backend_deployed_sha' => $backendDeployedSha,
             'frontend_deployed_sha' => $frontendDeployedSha,
@@ -254,6 +257,92 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
             'writes_committed' => false,
             'production_execution' => false,
         ];
+    }
+
+    /** @param array<string,mixed> $preReadback @param list<array<string,mixed>> $records */
+    private function assertPreReadback(
+        array $preReadback,
+        array $records,
+        string $publicProjectionFingerprint,
+        string $stableFingerprint,
+    ): void {
+        $observedAtRaw = trim((string) ($preReadback['observed_at'] ?? ''));
+        if ($observedAtRaw === '') {
+            throw new RuntimeException('Exact pre-readback observed_at is missing.');
+        }
+        try {
+            $observedAt = CarbonImmutable::parse($observedAtRaw)->utc();
+        } catch (\Throwable) {
+            throw new RuntimeException('Exact pre-readback observed_at is invalid.');
+        }
+        $now = CarbonImmutable::now('UTC');
+        if ($observedAt->isBefore($now->subMinutes(30)) || $observedAt->isAfter($now->addMinute())) {
+            throw new RuntimeException('Exact pre-readback is stale or has a future observed_at.');
+        }
+        if (($preReadback['schema_version'] ?? null) !== 'enneagram_public_authority_v2_runtime_readback.v1'
+            || ($preReadback['artifact'] ?? null) !== EnneagramPublicAuthorityV224RuntimeReadback::ARTIFACT
+            || ($preReadback['status'] ?? null) !== 'PASS_PRE_RUNTIME_READBACK'
+            || ($preReadback['phase'] ?? null) !== 'pre'
+            || ($preReadback['batch'] ?? null) !== 'all'
+            || (int) ($preReadback['target_count'] ?? 0) !== self::TARGET_COUNT
+            || (int) ($preReadback['api_read_count'] ?? 0) !== self::TARGET_COUNT
+            || (int) ($preReadback['html_read_count'] ?? 0) !== self::TARGET_COUNT
+            || (int) ($preReadback['private_data_exposed_count'] ?? -1) !== 0
+            || (int) ($preReadback['non_empty_media_count'] ?? -1) !== 0
+            || ($preReadback['writes_committed'] ?? true) !== false
+            || ($preReadback['production_execution'] ?? true) !== false
+            || ($preReadback['ok'] ?? false) !== true
+            || ! hash_equals($publicProjectionFingerprint, (string) ($preReadback['public_projection_fingerprint'] ?? ''))
+            || ! hash_equals($stableFingerprint, (string) ($preReadback['stable_identity_discoverability_fingerprint'] ?? ''))) {
+            throw new RuntimeException('Exact pre-readback artifact is invalid, incomplete, or stale.');
+        }
+
+        $expectedRows = [];
+        foreach ($records as $record) {
+            $expectedRows[(string) $record['asset_key']] = [
+                'path' => (string) $record['path'],
+                'asset_sha256' => (string) $record['asset_sha256'],
+            ];
+        }
+        $observedRows = is_array($preReadback['rows'] ?? null) ? $preReadback['rows'] : [];
+        if (count($observedRows) !== self::TARGET_COUNT) {
+            throw new RuntimeException('Exact pre-readback must contain all 116 row results.');
+        }
+        $seen = [];
+        foreach ($observedRows as $row) {
+            $assetKey = is_array($row) ? (string) ($row['asset_key'] ?? '') : '';
+            $expected = $expectedRows[$assetKey] ?? null;
+            if (! is_array($row) || ! is_array($expected) || isset($seen[$assetKey])
+                || ($row['ok'] ?? false) !== true
+                || (int) ($row['api_http_status'] ?? 0) !== 200
+                || (int) ($row['html_http_status'] ?? 0) !== 200
+                || ($row['media_empty'] ?? false) !== true
+                || ($row['reviewer_public'] ?? true) !== false
+                || ($row['issues'] ?? null) !== []
+                || (string) ($row['path'] ?? '') !== $expected['path']
+                || (string) ($row['asset_sha256'] ?? '') !== $expected['asset_sha256']) {
+                throw new RuntimeException('Exact pre-readback row identity or result drifted.');
+            }
+            $seen[$assetKey] = true;
+        }
+
+        $expectedPaths = array_values(array_column($expectedRows, 'path'));
+        sort($expectedPaths);
+        foreach (['sitemap', 'llms', 'llms_full'] as $surface) {
+            $set = data_get($preReadback, 'url_sets.'.$surface);
+            $urls = is_array($set) && is_array($set['enneagram_urls'] ?? null)
+                ? array_values($set['enneagram_urls'])
+                : [];
+            sort($urls);
+            if (! is_array($set)
+                || preg_match('/^[0-9a-f]{64}$/', (string) ($set['url_set_sha256'] ?? '')) !== 1
+                || (int) ($set['url_count'] ?? 0) < self::TARGET_COUNT
+                || (int) ($set['enneagram_url_count'] ?? 0) !== self::TARGET_COUNT
+                || $urls !== $expectedPaths
+                || ! hash_equals($this->fingerprint($urls), (string) ($set['enneagram_url_set_sha256'] ?? ''))) {
+                throw new RuntimeException('Exact pre-readback '.$surface.' URL-set evidence is invalid.');
+            }
+        }
     }
 
     public function authorizationPhrase(

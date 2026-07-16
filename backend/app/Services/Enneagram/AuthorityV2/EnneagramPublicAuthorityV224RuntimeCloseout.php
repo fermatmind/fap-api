@@ -17,6 +17,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
     /** @var array<string,mixed> */
     private array $executionProgress = [];
 
+    /** @var resource|null */
+    private $rollbackTokenHandle = null;
+
+    private ?string $rollbackTokenPath = null;
+
     public function __construct(
         private readonly EnneagramPublicAuthorityV205RevisionWorkspaceWriter $workspaceWriter,
         private readonly EnneagramPublicAuthorityV223ReviewEvidenceBinder $reviewBinder,
@@ -116,6 +121,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             throw new RuntimeException('Separate exact-SHA production authorization phrase mismatch.');
         }
 
+        $this->executionProgress['failure_stage'] = 'rollback_token_reservation';
+        $this->reserveRollbackTokenOutput($rollbackTokenOutput);
         $this->executionProgress['failure_stage'] = 'working_import';
         $workspace = $this->workspaceWriter->write(
             $releaseReport,
@@ -138,16 +145,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         $this->executionProgress['failure_stage'] = 'promotion';
         $targets = $this->promotionTargets((string) $releaseReport['package_sha256']);
         $promotionPlan = $this->promoter->preflight($targets);
-        $promoted = $this->promoter->promote($targets, (string) $promotionPlan['preflight_fingerprint']);
+        try {
+            $promoted = $this->promoter->promote(
+                $targets,
+                (string) $promotionPlan['preflight_fingerprint'],
+                function (string $token): void {
+                    $this->persistReservedRollbackToken($token);
+                },
+            );
+        } catch (Throwable $throwable) {
+            $this->releaseRollbackTokenReservation(false);
+            throw $throwable;
+        }
+        $this->executionProgress['promotion_committed'] = true;
         $rollbackToken = (string) ($promoted['rollback_token'] ?? '');
         if ($rollbackToken === '') {
             throw new RuntimeException('Promotion did not return the required signed rollback token.');
         }
-        $this->executionProgress['promotion_committed'] = true;
-        $this->executionProgress['rollback_token_sha256'] = hash('sha256', $rollbackToken);
-        $this->executionProgress['failure_stage'] = 'rollback_token_persist';
-        $this->writeRollbackTokenOutsideRepository($rollbackTokenOutput, $rollbackToken);
-        $this->executionProgress['rollback_token_persisted'] = true;
+        if (($this->executionProgress['rollback_token_persisted'] ?? false) !== true
+            || ! hash_equals((string) $this->executionProgress['rollback_token_sha256'], hash('sha256', $rollbackToken))) {
+            throw new RuntimeException('Promotion committed without matching persisted rollback-token evidence.');
+        }
+        $this->releaseRollbackTokenReservation(true);
         $this->executionProgress['failure_stage'] = 'rollback_preflight';
         $rollbackPreflight = $this->promoter->rollbackPreflight($rollbackToken);
         unset($promoted['rollback_token']);
@@ -230,6 +249,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
     /** @return array<string,mixed> */
     public function failureResult(Throwable $throwable): array
     {
+        if (($this->executionProgress['promotion_committed'] ?? false) !== true) {
+            $this->releaseRollbackTokenReservation(false);
+        }
         $writesCommitted = ($this->executionProgress['writes_committed'] ?? false) === true;
         $result = [
             'schema_version' => 'enneagram_public_authority_v2_runtime_closeout.v1',
@@ -290,8 +312,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         return $targets;
     }
 
-    private function writeRollbackTokenOutsideRepository(string $path, string $token): void
+    private function reserveRollbackTokenOutput(string $path): void
     {
+        $this->releaseRollbackTokenReservation(false);
         if (! str_starts_with($path, DIRECTORY_SEPARATOR)) {
             throw new RuntimeException('Rollback token output must be an absolute path outside the Git repository.');
         }
@@ -305,10 +328,55 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         if (File::exists($path)) {
             throw new RuntimeException('Rollback token output already exists; refusing to overwrite it.');
         }
-        if (File::put($path, $token."\n", true) === false) {
-            throw new RuntimeException('Unable to persist rollback token outside Git.');
+        $handle = @fopen($path, 'x+b');
+        if (! is_resource($handle)) {
+            throw new RuntimeException('Unable to reserve rollback token output outside Git.');
         }
-        chmod($path, 0600);
+        $this->rollbackTokenHandle = $handle;
+        $this->rollbackTokenPath = $path;
+        if (! @chmod($path, 0600)) {
+            $this->releaseRollbackTokenReservation(false);
+            throw new RuntimeException('Unable to protect reserved rollback token output.');
+        }
+    }
+
+    private function persistReservedRollbackToken(string $token): void
+    {
+        if (! is_resource($this->rollbackTokenHandle) || $this->rollbackTokenPath === null) {
+            throw new RuntimeException('Rollback token output was not reserved before promotion.');
+        }
+        $payload = $token."\n";
+        if (! rewind($this->rollbackTokenHandle) || ! ftruncate($this->rollbackTokenHandle, 0)) {
+            throw new RuntimeException('Unable to prepare reserved rollback token output.');
+        }
+        $written = 0;
+        while ($written < strlen($payload)) {
+            $chunk = fwrite($this->rollbackTokenHandle, substr($payload, $written));
+            if (! is_int($chunk) || $chunk < 1) {
+                throw new RuntimeException('Unable to persist rollback token before promotion commit.');
+            }
+            $written += $chunk;
+        }
+        if (! fflush($this->rollbackTokenHandle)
+            || (function_exists('fsync') && ! fsync($this->rollbackTokenHandle))) {
+            throw new RuntimeException('Unable to durably persist rollback token before promotion commit.');
+        }
+        $this->executionProgress['rollback_token_sha256'] = hash('sha256', $token);
+        $this->executionProgress['rollback_token_persisted'] = true;
+    }
+
+    private function releaseRollbackTokenReservation(bool $keepFile): void
+    {
+        if (is_resource($this->rollbackTokenHandle)) {
+            fclose($this->rollbackTokenHandle);
+        }
+        if (! $keepFile && $this->rollbackTokenPath !== null) {
+            File::delete($this->rollbackTokenPath);
+            $this->executionProgress['rollback_token_persisted'] = false;
+            unset($this->executionProgress['rollback_token_sha256']);
+        }
+        $this->rollbackTokenHandle = null;
+        $this->rollbackTokenPath = null;
     }
 
     /** @param array<string,mixed> $reviewRegister @return list<string> */
