@@ -94713,7 +94713,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "41d2a52e19b13d8746526b82fa151fca0c45244a",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3127",
@@ -94739,14 +94739,18 @@
         "evidence": "The initial 178-finding template failure was rejected rather than accepted as content. Four recorded repair rounds made wings and subtypes page-specific and cleared residual FAQ uniqueness and template findings. Final focused validation passes 8 tests / 421 assertions, exactly twelve assets, independent en/zh-CN authoring, 36 unique FAQ pairs, pending manual review, draft-only release truth, and closed execution boundaries."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "Pushed the exact six-file PR15 branch and opened the single authorized fap-api PR #3127. GitHub reports MERGEABLE while the required checks are in progress."
+        "status": "pass",
+        "evidence": "All nine GitHub checks passed on immutable PR head 035894c2cad57b7a7dd1a19273e9c916c98ea13b: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. GitHub reports CLEAN/MERGEABLE."
+      },
+      "required_reviews": {
+        "status": "pass",
+        "evidence": "GitHub reports an empty reviewDecision, no submitted reviews, no branch-protection rule requiring reviews, and zero review threads. This is repository-policy evidence only and does not claim human content review; every asset remains pending_manual_review."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -94784,9 +94788,14 @@
         "at": "2026-07-16T01:30:51Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3127 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
+      },
+      {
+        "at": "2026-07-16T01:38:07Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on immutable head 035894c2cad57b7a7dd1a19273e9c916c98ea13b. GitHub reports CLEAN/MERGEABLE, no required review rule, no reviews, and zero review threads; exact six-file scope, twelve assets, pending-manual-review truth, draft-only release truth, 36 unique FAQ pairs, and every execution boundary were revalidated. This ledger-only ready transition must itself receive a fresh complete check cycle before squash merge."
       }
     ],
-    "updated_at": "2026-07-16T01:30:51Z"
+    "updated_at": "2026-07-16T01:38:07Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16",
