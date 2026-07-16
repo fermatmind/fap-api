@@ -1,0 +1,74 @@
+{
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-4-FAMILY-13",
+  "schema_version": "enneagram_public_authority_v2_family_qa.v1",
+  "generation_mode": "codex_native_content_generation",
+  "external_model_sessions": [],
+  "source_truth": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08",
+    "competitor_language_used": false
+  },
+  "skeptical_editorial_review": {
+    "status": "completed_before_focused_gate",
+    "checks": [
+      "core identity, meaning, difference, and longing language remained revisable and separate from fixed identity or emotional diagnosis",
+      "4w3 and 4w5 remained core-first and were compared with sibling wings, adjacent cores, training, profession, and platform constraints",
+      "subtype pages used matched safety, access, audience, and focal-person comparisons without bodily-mechanism certainty",
+      "grief, exclusion, discrimination, culture, craft, safety, consent, resources, and power remained visible alternatives",
+      "English and Chinese outlines, examples, FAQ, answerability mappings, and exercises were independently authored",
+      "all review, release, revision-pointer, discoverability, write, and deploy boundaries remained closed"
+    ],
+    "handoff": "automated gate evidence is not human review"
+  },
+  "raw_draft_audit": {
+    "status": "failed_repaired",
+    "asset_specific_issue_count": 20,
+    "issues": {
+      "faq_item_too_shallow": 18,
+      "geo_answerability_insufficient": 1,
+      "section_text_missing": 1
+    },
+    "repair_rounds": [
+      {
+        "round": 1,
+        "status": "pass",
+        "remaining_asset_specific_issue_count": 0,
+        "issues": {},
+        "note": "Chinese FAQ depth, one social-subtype question set, and one one-to-one evidence boundary were expanded without changing identity, claims, review truth, release truth, or execution boundaries."
+      }
+    ],
+    "critical_contract_violations_after_repair": 0
+  },
+  "final_qa": {
+    "status": "pass_for_manual_review_handoff",
+    "asset_count": 12,
+    "locale_counts": {
+      "en": 6,
+      "zh-CN": 6
+    },
+    "entity_counts": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "faq_count": 36,
+    "asset_specific_issue_count": 0,
+    "deferred_target_count": 104,
+    "manual_review_state": "pending_manual_review",
+    "reviewer": null,
+    "human_review_completed": false,
+    "publish_eligible": false
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  }
+}

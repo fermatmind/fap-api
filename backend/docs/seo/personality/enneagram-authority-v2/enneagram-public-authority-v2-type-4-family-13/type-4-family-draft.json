@@ -1,0 +1,1842 @@
+{
+  "schema_version": "enneagram_public_authority_v2_editorial_candidate.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-4-FAMILY-13",
+  "framework": "enneagram",
+  "asset_scope": {
+    "family": "type-4",
+    "expected_asset_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "counts_by_entity_type": {
+      "core_type": 2,
+      "wing": 4,
+      "instinctual_subtype": 6
+    },
+    "identity_keys": [
+      "core_type:type-4",
+      "wing:4w3",
+      "wing:4w5",
+      "instinctual_subtype:type-4/self-preservation",
+      "instinctual_subtype:type-4/social",
+      "instinctual_subtype:type-4/one-to-one"
+    ]
+  },
+  "source_ledger_refs": {
+    "source_registry": "../enneagram-public-authority-v2-source-ledger-07/source-registry.json",
+    "page_claim_maps": "../enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json",
+    "editorial_gate": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-GATE-08"
+  },
+  "execution_boundaries": {
+    "writes_committed": false,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "revision_pointer_write_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_mutation_attempted": false,
+    "llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "deploy_attempted": false
+  },
+  "assets": [
+    {
+      "identity_key": "core_type:type-4",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "path": "/en/personality/enneagram/type-4",
+      "title": "Type Four: identity, meaning, and a revisable difference hypothesis",
+      "answer_first": "Type Four is a traditional Enneagram hypothesis about attention returning to identity, personal meaning, perceived difference, and what seems absent or longed for. Creative expression, sadness, unusual taste, or emotional language cannot establish motive because culture, craft, grief, exclusion, and current circumstances can look similar.",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "Observe identity and meaning without fixing either",
+          "body": "Track what becomes personally meaningful, which comparison creates a sense of difference, and whether an absent quality receives more attention than what is present. Treat identity as changing context, not a hidden essence inferred from style."
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "Separate expression from inferred motive",
+          "body": "A distinctive song, room, outfit, or story may reflect training, community codes, accessibility, protest, grief, fashion, or a client brief. Record the stated purpose and constraints before inferring an identity-and-meaning concern."
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "Compare choice, feedback, and repair",
+          "body": "In choices, note whether personal congruence, practical need, or audience requirement wins; in feedback, note whether critique of the work is heard as critique of self; in conflict, observe how difference and belonging are repaired."
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "Hold nuance beside its tradeoffs",
+          "body": "Meaning attention may support emotional vocabulary, aesthetic discrimination, honest complexity, and noticing overlooked experience. Tradeoffs may appear when comparison eclipses available options, ordinary routines feel inauthentic, or a temporary feeling becomes the whole account."
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "Use contextual examples without prediction",
+          "body": "At work, compare a writer defending an essential perspective with a designer following a brand brief. In a relationship, compare sharing a difficult feeling with testing whether another person will prove understanding. Neither example predicts outcomes."
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "Compare wings and common mistypes",
+          "body": "The 4w3 hypothesis adds visible delivery and recognition; 4w5 adds private depth and conceptual distance. Compare Three presentation, Five privacy, Nine withdrawal, grief, artistic training, minority stress, adolescence, and cultures that value symbolic expression."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use ordinary satisfaction and flexible authorship as tests",
+          "body": "The hypothesis weakens when the person comfortably uses standard solutions, receives critique without making it an identity verdict, or values connection without emphasizing difference. Role, craft, loss, exclusion, or a temporary transition may explain more."
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "Keep identity language voluntary and bounded",
+          "body": "Use this page for revisable observations about meaning, comparison, expression, and belonging. It cannot diagnose mood, rank authenticity, judge creativity, screen applicants, settle relationships, or assign a permanent identity."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does creative work establish Type Four?",
+          "answer": "No. Practice, profession, culture, protest, leisure, or a client requirement can explain creative work. Compare repeated attention to identity and meaning with explicit counterexamples."
+        },
+        {
+          "question": "Why separate sadness from a Type Four hypothesis?",
+          "answer": "Sadness is a common human state with many contexts, including loss, conflict, fatigue, and change. A feeling alone cannot reveal type, motive, health, or permanence."
+        },
+        {
+          "question": "What evidence should weaken the identity-and-difference hypothesis?",
+          "answer": "Comfort with ordinary solutions, flexible authorship after critique, and belonging that does not require emphasized difference should all reduce confidence in the hypothesis."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one creative choice, one routine choice, and one feedback event with different audiences.",
+        "observable_signal": "Record the stated purpose, constraint, comparison target, feeling named, authorship claim, and response to revision.",
+        "page_specific_signal": "Compare whether personal meaning remains decisive when a standard option works equally well and no audience sees the choice.",
+        "alternative_explanation": "Compare craft training, culture, grief, exclusion, role briefs, accessibility, and current transition.",
+        "reflection_prompt": "Name the event that most clearly supports an ordinary contextual explanation and reduce the type hypothesis accordingly."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English Type Four core page was composed around authorship, comparison, and ordinary-versus-symbolic choices, independently of the Chinese page's belonging and role-transition sequence.",
+        "outline": [
+          "answer_first",
+          "motivation_attention",
+          "behavior_motive",
+          "decision_feedback_conflict",
+          "strengths_tradeoffs",
+          "work_relationship_examples",
+          "wings_mistypes",
+          "counterexample",
+          "use_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "which absent quality receives attention beside what is present",
+          "whether critique of work becomes an identity verdict",
+          "how a standard solution is treated when it works equally well"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are identity personal meaning and perceived difference?",
+          "What are creative expression sadness and unusual taste?",
+          "What are culture craft grief and exclusion?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are identity personal meaning and perceived difference?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are creative expression sadness and unusual taste?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are culture craft grief and exclusion?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Creative expression or sadness may arise from craft, culture, grief, exclusion, or current circumstances rather than type.",
+          "Traditional center language is a conceptual comparison only and provides no bodily-mechanism evidence."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/wings/4w3",
+        "/en/personality/enneagram/wings/4w5",
+        "/en/personality/enneagram/type-4/instincts/self-preservation",
+        "/en/personality/enneagram/type-4/instincts/social",
+        "/en/personality/enneagram/type-4/instincts/one-to-one",
+        "/en/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "core_type:type-4",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "path": "/zh/personality/enneagram/type-4",
+      "title": "第四型：从身份、意义与差异感提出可修正假设",
+      "answer_first": "第四型是一种传统九型观察假设：注意力可能反复回到身份、个人意义、感到不同，以及尚未拥有或正在向往的部分。创作、悲伤、独特审美和情绪语言都不能证明动机；文化表达、专业训练、失去、排斥和当下处境可能产生相似表现。",
+      "sections": [
+        {
+          "kind": "motivation_attention",
+          "heading": "先观察差异感如何进入注意力",
+          "body": "记录何时开始强调“这是否像我”、什么缺失被反复比较，以及归属变化后哪些意义仍然重要。身份应被当作可变化的叙述，不能从风格推断隐藏本质。"
+        },
+        {
+          "kind": "behavior_motive",
+          "heading": "把表达行为与动机推断分开",
+          "body": "一件特别的作品、穿着或空间可能来自专业训练、群体传统、无障碍需要、纪念、抗议或客户要求。先写明目的、限制和本人解释，再考虑身份意义假设。"
+        },
+        {
+          "kind": "decision_feedback_conflict",
+          "heading": "对照选择、反馈与关系修复",
+          "body": "做选择时比较个人一致、现实需要和受众要求；收到反馈时看是否把作品修改等同于自我否定；冲突后记录如何重新协商差异、边界与归属。"
+        },
+        {
+          "kind": "strengths_tradeoffs",
+          "heading": "同时呈现细腻感受与可能代价",
+          "body": "意义关注可能帮助命名复杂体验、辨别审美差异并看见被忽略的经验。代价可能是比较遮住已有资源、日常安排被写成不真实，或短期情绪占据全部解释。"
+        },
+        {
+          "kind": "work_relationship_examples",
+          "heading": "使用具体情境而不是结果承诺",
+          "body": "工作中可比较维护关键观点与遵守品牌规范；关系中可比较如实分享难受与通过撤回来检验对方是否理解。例子只用于观察，不能预测创造力、绩效或关系结果。"
+        },
+        {
+          "kind": "wings_mistypes",
+          "heading": "比较翼型和常见混淆",
+          "body": "4w3 假设增加可见交付与认可，4w5 假设增加私人深度与概念距离。还应比较第三型呈现、第五型隐私、第九型退出、悲伤、艺术训练、少数处境压力和成长阶段。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用普通满足与可修改署名反证",
+          "body": "若当事人能自在采用标准方案、收到修改意见而不把它变成身份判决，或不靠强调差异也能体验归属，第四型假设应减弱。岗位、训练、失去或转型可能更充分。"
+        },
+        {
+          "kind": "use_boundary",
+          "heading": "让身份语言保持自愿与有限",
+          "body": "本页只支持观察意义、比较、表达和归属，不能诊断情绪、评定真实程度、判断创造力、筛选求职者、裁决关系或固定身份。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "经常创作就能判断第四型吗？",
+          "answer": "不能。职业训练、社群文化、纪念需要、客户任务和普通兴趣都能解释创作。还要比较跨情境的意义注意、本人说明和明确反例，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "为什么不能把悲伤直接解释成第四型？",
+          "answer": "悲伤是常见的人类体验，可能与失去、冲突、疲劳和生活变化有关。单一感受不能证明类型、动机、健康状态或持续时间，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "哪些记录会削弱身份与差异假设？",
+          "answer": "自在采用普通方案、修改作品时不形成身份判决，以及无需强调不同也能建立归属，都会让该假设下降，并应优先检验现实情境，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一次作品决定、一次日常安排和一次收到修改意见的事件，明确各自受众与责任边界。",
+        "observable_signal": "记录目的、限制、比较对象、感受名称、署名诉求、修改动作和关系后果，至少保留一条不支持记录。",
+        "page_specific_signal": "比较标准方案同样有效且无人看见时，个人意义是否仍成为决定条件，并写明可见行为。",
+        "alternative_explanation": "对照专业训练、文化表达、失去、排斥、岗位要求、资源与当前转型带来的影响。",
+        "reflection_prompt": "引用一条最支持普通情境解释的原始记录，说明为何要保留、减弱或撤回类型假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第四型核心页以归属变化、日常选择与作品署名为独立结构，没有翻译英文页的比较对象顺序。",
+        "outline": [
+          "情境入口",
+          "use_boundary",
+          "counterexample",
+          "wings_mistypes",
+          "work_relationship_examples",
+          "strengths_tradeoffs",
+          "decision_feedback_conflict",
+          "behavior_motive",
+          "motivation_attention",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "标准方案同样有效时如何说明个人意义并记录现实后果",
+          "作品被要求修改时是否形成身份判决并记录后续行动",
+          "不强调差异也能归属时比较对象如何变化并保留反例"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是个人意义吗？",
+          "什么是独特审美吗？",
+          "什么是文化表达吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是个人意义吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是独特审美吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是文化表达吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.application.exploratory_not_predictive",
+        "claim.center.traditional_model"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.application.exploratory_not_predictive",
+          "claim.center.traditional_model"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "创作、悲伤和独特审美也可能来自训练、文化、失去、排斥或当前处境，而不是类型。",
+          "传统中心语言只用于概念比较，不描述身体机制。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/wings/4w3",
+        "/zh/personality/enneagram/wings/4w5",
+        "/zh/personality/enneagram/type-4/instincts/self-preservation",
+        "/zh/personality/enneagram/type-4/instincts/social",
+        "/zh/personality/enneagram/type-4/instincts/one-to-one",
+        "/zh/personality/enneagram/evidence"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:4w3",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "4w3",
+      "path": "/en/personality/enneagram/wings/4w3",
+      "title": "4w3: visible expression as a core-first wing hypothesis",
+      "answer_first": "The 4w3 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Three-adjacent visible delivery, audience recognition, and adaptation. A polished personal brand cannot establish a wing because portfolio rules, promotion incentives, and communication training can look the same.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep identity and meaning at the core",
+          "body": "Begin with Type Four meaning attention, then ask whether visible delivery repeatedly modifies how expression is shaped. Public fluency without identity concern may reflect Three themes, profession, training, or platform rules."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Contrast 4w3 with 4w5 and Three",
+          "body": "Compared with 4w5 private depth, 4w3 may move expression toward an audience. Compared with Three, the proposed core remains personal meaning and authorship rather than the valued result itself."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Compare credited, anonymous, and revised work",
+          "body": "Use one credited work, one anonymous contribution, and one revision after weak audience response. Record which meaning is protected, which presentation changes, and how credit affects effort."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use private continuity and role-only visibility as tests",
+          "body": "The hypothesis weakens when expression stays private by preference, visible polish appears only for a job, or audience response does not alter presentation or authorship concerns."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test portfolio and promotion requirements",
+          "body": "Creative industries, fundraising, teaching, and online platforms can reward personal visibility. Compare behavior outside rewarded settings and when credit, pay, and audience access change."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep visible expression evidence limited",
+          "body": "Wing research is sparse. The hypothesis cannot establish charisma, creativity, authenticity, employability, influence, or future recognition."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does a personal brand establish 4w3?",
+          "answer": "No. Portfolio expectations, promotion, platform design, or communication training may require a personal brand. Compare core meaning attention and counterexamples."
+        },
+        {
+          "question": "How does 4w3 differ from a Three hypothesis?",
+          "answer": "Hold the polished delivery constant. A 4w3 hypothesis keeps personal meaning and authorship central; a Three hypothesis may center the valued result and credible performance."
+        },
+        {
+          "question": "What weakens visible-expression as a wing hypothesis?",
+          "answer": "Private expression that remains satisfying, polish limited to paid duty, or stable authorship concerns despite no audience response should weaken the modifier."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose a credited work, an anonymous contribution, and one revision after weak response with comparable effort.",
+        "observable_signal": "Record meaning protected, credit available, audience, revision, reward, authorship claim, and effort after no recognition.",
+        "page_specific_signal": "Compare the exact presentation change when authorship is visible versus anonymous while the underlying work stays similar.",
+        "alternative_explanation": "Compare portfolio rules, promotion incentives, platform design, communication training, pay, and access.",
+        "reflection_prompt": "Identify where professional visibility explains the pattern without a 4w3 modifier."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 4w3 page was authored around credited versus anonymous expression and revision after audience response, independently of the Chinese page's exhibition sequence.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "presentation changes after weak audience response",
+          "effort on anonymous expression without credit",
+          "which meaning remains protected during revision"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are identity meaning and visible delivery?",
+          "What are audience recognition and adaptation?",
+          "What are portfolio rules and promotion incentives?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are identity meaning and visible delivery?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are audience recognition and adaptation?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are portfolio rules and promotion incentives?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Visible expression may arise from portfolio rules, promotion incentives, platform design, or communication training rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-4",
+        "/en/personality/enneagram/wings/4w5",
+        "/en/personality/enneagram/type-4/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:4w3",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "4w3",
+      "path": "/zh/personality/enneagram/wings/4w3",
+      "title": "4w3：以意义为核心、以可见表达为修饰的翼型假设",
+      "answer_first": "4w3 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第三型相邻主题中的可见交付、受众认可与适配所修饰。个人品牌不能证明翼型，作品集规则、晋升激励和表达训练都可能形成相似表现。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "先保留身份意义核心",
+          "body": "先观察个人意义是否持续重要，再看公开交付如何修饰表达。只有舞台感而没有意义关注时，应优先比较第三型主题、岗位训练或平台规则。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "对照 4w3、4w5 与第三型",
+          "body": "4w3 可能把表达带向受众，4w5 更重私人深度。与第三型相比，4w3 假设仍把个人意义和署名放在核心，而不是把结果价值本身放在核心。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "比较署名、匿名与修改",
+          "body": "选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改。记录保护了什么意义、改变了什么呈现，以及署名是否影响投入。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用私人持续与岗位可见度反证",
+          "body": "若表达长期保持私人且满足，可见包装只在岗位内出现，或受众回应不改变呈现和署名关注，4w3 假设应减弱。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "检验作品集与晋升制度",
+          "body": "创意行业、教学、筹款和内容平台会奖励个人可见度。比较岗位外行为，以及署名、报酬和受众入口变化后的选择。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "把可见表达限制为次级假设",
+          "body": "翼型研究有限。4w3 不能证明魅力、创造力、真实程度、录用价值、影响力或未来认可。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "经营个人品牌就一定是 4w3 吗？",
+          "answer": "不一定。作品集要求、晋升、平台机制和表达训练都可能要求个人品牌。还要比较第四型意义核心、岗位外行为和明确反例，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "怎样区分 4w3 与第三型？",
+          "answer": "保持同一项精致交付不变，比较注意力中心。4w3 假设仍围绕个人意义与署名；第三型假设更可能围绕被认可的结果与可信表现，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "哪些记录会削弱可见表达假设？",
+          "answer": "私人表达持续带来满足、包装只在付费岗位出现，或受众不回应也不改变署名关注，都会削弱该修饰解释，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改，尽量匹配投入与难度。",
+        "observable_signal": "记录被保护的意义、署名、受众、修改、奖励、责任和没有认可后的投入变化。",
+        "page_specific_signal": "比较作品相近时，公开署名与匿名条件下哪一处呈现具体改变，并保留原始版本。",
+        "alternative_explanation": "对照作品集规则、晋升激励、平台机制、表达训练、报酬、资源和受众入口。",
+        "reflection_prompt": "指出职业可见度更能解释行为的一项记录，并说明如何下调 4w3 假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 4w3 页从展览署名、匿名贡献和受众回应后的修改独立构思，没有沿用英文页的职业平台顺序。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "alternative_explanations",
+          "counterexample",
+          "observable_situations",
+          "sibling_core_comparison",
+          "core_first_modifier",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "回应不佳后具体修改哪一处呈现并记录结果",
+          "匿名表达没有署名时投入如何变化并保留反例",
+          "修改过程中哪项个人意义持续被保护并说明限制"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是可见交付吗？",
+          "什么是受众认可吗？",
+          "什么是作品集规则吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是可见交付吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是受众认可吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是作品集规则吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "可见表达也可能来自作品集规则、晋升激励、平台机制或表达训练，而不是翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-4",
+        "/zh/personality/enneagram/wings/4w5",
+        "/zh/personality/enneagram/type-4/instincts/social"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:4w5",
+      "locale": "en",
+      "entity_type": "wing",
+      "code": "4w5",
+      "path": "/en/personality/enneagram/wings/4w5",
+      "title": "4w5: private depth as a core-first wing hypothesis",
+      "answer_first": "The 4w5 wing is a core-first, evidence-limited hypothesis: Type Four attention to identity and meaning may be modified by Five-adjacent privacy, conceptual depth, and selective disclosure. Solitary research or restrained expression cannot establish a wing because expertise, confidentiality, access needs, and work design can look the same.",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "Keep meaning before privacy",
+          "body": "Start with Type Four authorship and meaning, then ask whether privacy and conceptual distance shape expression. Solitude without recurring identity concern may reflect Five themes, concentration, fatigue, safety, or job design."
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "Contrast 4w5 with 4w3 and Five",
+          "body": "Compared with 4w3 visible delivery, 4w5 may protect incubation and selective disclosure. Compared with Five, personal meaning remains central rather than information sufficiency or resource conservation alone."
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "Compare private draft, expert review, and public release",
+          "body": "Track the same idea in a private notebook, a trusted expert review, and a public version. Record what is withheld for meaning, what is withheld for evidence, and what changes with safety."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use ordinary sharing and deadline-only privacy as tests",
+          "body": "The hypothesis weakens when sharing is easy across audiences, privacy appears only under confidentiality rules, or analysis continues without any authorship or identity concern."
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "Test expertise, safety, and access",
+          "body": "Research, therapy confidentiality, intellectual property, disability access, harassment risk, and remote work can require privacy. Compare safe voluntary settings before retaining wing language."
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "Keep private depth evidence limited",
+          "body": "Sparse wing evidence supports only a tentative observation. It cannot prove intelligence, originality, introversion, health, expertise, or relational capacity."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does solitary research establish 4w5?",
+          "answer": "No. Expertise, confidentiality, concentration, safety, or work design may require solitary research. Look for Type Four meaning attention and disconfirming cases."
+        },
+        {
+          "question": "How does 4w5 differ from a Five hypothesis?",
+          "answer": "Hold privacy constant. A 4w5 hypothesis keeps personal meaning and authorship central; a Five hypothesis may focus more directly on knowledge, energy, and sufficient preparation."
+        },
+        {
+          "question": "What weakens private depth as a wing hypothesis?",
+          "answer": "Easy sharing across audiences, privacy limited to formal rules, or analysis with no recurring authorship concern should reduce confidence in 4w5."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Follow one idea through a private draft, trusted expert review, and public version over five days.",
+        "observable_signal": "Record content withheld, reason given, evidence standard, safety condition, authorship concern, and change after feedback.",
+        "page_specific_signal": "Separate a detail withheld to protect personal meaning from one withheld for accuracy, law, or safety.",
+        "alternative_explanation": "Compare expertise, confidentiality, intellectual property, access needs, harassment risk, and work design.",
+        "reflection_prompt": "Name the stage where ordinary professional constraints fully explain privacy and adjust the wing hypothesis."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English 4w5 page was composed around private notebooks, expert review, and selective disclosure, independently of the Chinese page's studio and confidentiality comparison.",
+        "outline": [
+          "answer_first",
+          "core_first_modifier",
+          "sibling_core_comparison",
+          "observable_situations",
+          "counterexample",
+          "alternative_explanations",
+          "wing_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "what moves from private draft to expert review",
+          "which detail is withheld for meaning rather than evidence",
+          "how disclosure changes when safety and authorship change"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are identity meaning and privacy?",
+          "What are conceptual depth and selective disclosure?",
+          "What are expertise confidentiality and access needs?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are identity meaning and privacy?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are conceptual depth and selective disclosure?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are expertise confidentiality and access needs?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis.",
+          "Private depth may arise from expertise, confidentiality, access needs, safety, or work design rather than a wing."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-4",
+        "/en/personality/enneagram/wings/4w3",
+        "/en/personality/enneagram/type-4/instincts/self-preservation"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "wing:4w5",
+      "locale": "zh-CN",
+      "entity_type": "wing",
+      "code": "4w5",
+      "path": "/zh/personality/enneagram/wings/4w5",
+      "title": "4w5：以意义为核心、以私人深度为修饰的翼型假设",
+      "answer_first": "4w5 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第五型相邻主题中的隐私、概念深度和选择性披露所修饰。独处研究或克制表达不能证明翼型，专业分工、保密、安全和无障碍需要都可能产生相似表现。",
+      "sections": [
+        {
+          "kind": "core_first_modifier",
+          "heading": "先确认意义，再观察隐私修饰",
+          "body": "先看个人意义与署名是否持续进入注意力，再看隐私如何塑造表达。若只有独处而没有意义关注，应比较第五型主题、专注需要、疲劳、安全或岗位安排。"
+        },
+        {
+          "kind": "sibling_core_comparison",
+          "heading": "比较 4w5、4w3 与第五型",
+          "body": "4w5 可能保护酝酿与选择性披露，4w3 更趋向公开呈现。与第五型相比，4w5 仍把个人意义放在核心，而不只关注知识充分或精力保存。"
+        },
+        {
+          "kind": "observable_situations",
+          "heading": "追踪草稿、可信反馈和公开版本",
+          "body": "用同一想法比较私人草稿、可信反馈和公开版本。记录哪些内容为了意义保留，哪些为了证据、法律或安全保留。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用自在分享与制度保密反证",
+          "body": "若跨受众分享一直自在，隐私只在保密制度下出现，或分析持续进行却没有署名与身份关注，4w5 假设应减弱。"
+        },
+        {
+          "kind": "alternative_explanations",
+          "heading": "检验专业、安全和无障碍条件",
+          "body": "研究保密、知识产权、骚扰风险、无障碍需求和远程工作都会要求隐私。应比较安全且可自愿选择的场景。"
+        },
+        {
+          "kind": "wing_boundary",
+          "heading": "保持私人深度证据有限",
+          "body": "有限翼型证据只支持暂时观察。4w5 不能证明智力、原创性、内向、健康、专业度或关系能力。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "喜欢独处研究就一定是 4w5 吗？",
+          "answer": "不一定。专业任务、保密、专注、安全和工作设计都可能需要独处。还要观察第四型意义核心、跨情境重复和反例，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "怎样区分 4w5 与第五型？",
+          "answer": "保持隐私条件不变，比较注意力中心。4w5 假设仍围绕个人意义与署名；第五型假设可能更直接关注知识、精力和准备充分，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "哪些记录会削弱私人深度假设？",
+          "answer": "跨受众自在分享、隐私只在正式制度出现，或分析没有反复连接到署名与身份，都应降低 4w5 解释，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "用五天追踪同一想法的私人草稿、可信反馈和公开版本，明确每个阶段的安全条件。",
+        "observable_signal": "记录保留内容、本人理由、证据标准、保密要求、署名关注与反馈后的具体变化。",
+        "page_specific_signal": "区分为了个人意义保留的一个细节，与为了准确、法律或安全保留的另一个细节。",
+        "alternative_explanation": "对照专业分工、保密、知识产权、无障碍、骚扰风险、疲劳和工作安排。",
+        "reflection_prompt": "指出普通专业约束足以解释隐私的一个阶段，并据此保留、减弱或撤回假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文 4w5 页以工作室草稿、保密条件和安全变化为独立顺序，没有翻译英文页的专家评审结构。",
+        "outline": [
+          "情境入口",
+          "wing_boundary",
+          "alternative_explanations",
+          "counterexample",
+          "observable_situations",
+          "sibling_core_comparison",
+          "core_first_modifier",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "私人草稿进入可信反馈时哪项内容改变并记录原因",
+          "为了意义与为了证据保留的细节如何区分并留存版本",
+          "安全与署名条件变化后披露范围如何调整并保留反例"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是概念深度吗？",
+          "什么是选择性披露吗？",
+          "什么是无障碍需要吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是概念深度吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是选择性披露吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是无障碍需要吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.wing.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.wing.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。",
+          "私人深度也可能来自专业分工、保密、无障碍、安全或工作设计，而不是翼型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-4",
+        "/zh/personality/enneagram/wings/4w3",
+        "/zh/personality/enneagram/type-4/instincts/self-preservation"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/self-preservation",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/self-preservation",
+      "path": "/en/personality/enneagram/type-4/instincts/self-preservation",
+      "title": "Self-preservation Type Four: contained meaning under strain as a matched-comparison hypothesis",
+      "answer_first": "Self-preservation Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through contained expression, endurance, and personally significant effort under practical strain. Endurance cannot establish subtype because caregiving, unsafe settings, financial limits, and role duty can require the same restraint.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Treat contained effort as a traditional hypothesis",
+          "body": "The traditional description proposes that Type Four meaning may be carried through effort and restraint rather than overt expression. It is a prompt, not an explanation of why someone endures."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match strain while changing disclosure safety",
+          "body": "Compare similar difficult tasks in a safe voluntary setting and a setting where disclosure has costs. Record effort, meaning, help-seeking, available choice, and what changes when strain eases."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep self-preservation language non-mechanistic",
+          "body": "The label organizes observations about practical strain, continuity, and expression. It is not evidence about bodily mechanisms, a biological category, or fixed tolerance."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow restrained expression to differ from the stereotype",
+          "body": "Personally significant struggle may be kept private or converted into dependable action. That variation must be tested against necessity, learned restraint, and cultural expectations."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test duty, money, and safety",
+          "body": "Caregiving, poverty, discrimination, unsafe workplaces, migration, and lack of support can make endurance necessary. Record whether refusal and help are genuinely available."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use safer conditions and accepted help as tests",
+          "body": "The hypothesis weakens when contained expression disappears as soon as safety improves, effort has no recurring personal meaning, or support is readily accepted without identity concern."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep endurance observations non-predictive",
+          "body": "Evidence tied to one instrument cannot establish a universal subtype. This page cannot predict resilience, health, hardship, work capacity, or coping outcomes."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does enduring hardship establish self-preservation Type Four?",
+          "answer": "No. Duty, money, safety, discrimination, or limited support may require endurance. Compare meaning attention under matched strain and safer conditions."
+        },
+        {
+          "question": "Why record whether help is genuinely available?",
+          "answer": "A person cannot be interpreted as choosing restraint when asking for help carries punishment, cost, or no realistic response. Power and resources belong in the comparison."
+        },
+        {
+          "question": "What weakens the contained-meaning hypothesis?",
+          "answer": "Restraint that vanishes in safety, effort with no recurring personal meaning, or easy acceptance of support without identity concern should weaken it."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose two difficult tasks with similar stakes but different disclosure safety, plus one period when strain eases.",
+        "observable_signal": "Record effort, practical consequence, personal meaning, help available, refusal cost, disclosure, and change after conditions improve.",
+        "page_specific_signal": "Compare the exact expression and help-seeking change when safety improves while task difficulty stays similar.",
+        "alternative_explanation": "Compare caregiving, money, discrimination, migration, culture, role duty, and available support.",
+        "reflection_prompt": "Identify whether necessity explains contained effort better than subtype and cite one disconfirming observation."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English self-preservation page was authored around private-versus-safe disclosure and effort after strain changes, independently of the Chinese page's household-duty sequence.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "help-seeking when disclosure safety changes",
+          "personal meaning after practical strain eases",
+          "whether restraint persists when refusal has no cost"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are contained expression endurance and effort?",
+          "What are caregiving unsafe settings and financial limits?",
+          "What are identity meaning and practical strain?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are contained expression endurance and effort?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are caregiving unsafe settings and financial limits?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are identity meaning and practical strain?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Contained effort may arise from caregiving, unsafe settings, financial limits, discrimination, or role duty rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-4",
+        "/en/personality/enneagram/wings/4w3",
+        "/en/personality/enneagram/wings/4w5"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/self-preservation",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/self-preservation",
+      "path": "/zh/personality/enneagram/type-4/instincts/self-preservation",
+      "title": "第四型自保副型：在现实压力下观察克制意义的匹配假设",
+      "answer_first": "第四型自保副型是一种传统且证据有限的假设：身份与意义关注可能通过克制表达、承受和具有个人意义的努力出现。承受不能证明副型；照护、经济限制、不安全环境、歧视和岗位责任都可能要求相同克制。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把克制努力保留为传统描述",
+          "body": "传统描述提出，第四型意义关注可能借由努力与克制表达，而不是明显展示。这只是比较提示，不能解释一个人为何承受。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "匹配压力并改变表达安全",
+          "body": "比较难度与后果接近、但表达成本不同的两件事。记录努力、个人意义、求助、可选择程度，以及压力缓解后哪些行为变化。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "让自保语言保持非机制化",
+          "body": "自保标签只组织现实压力、连续性和表达等观察。它不描述身体机制，也不讨论神经组织或恒定承受能力。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "容纳克制而非外显表达",
+          "body": "具有个人意义的困难可能被保留在私人空间，或转化为可靠行动。必须与现实必要、习得克制和文化期待比较。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检验照护、经济与安全",
+          "body": "照护、贫困、歧视、迁移、不安全岗位和缺少支持都可能让承受成为必要。必须记录拒绝与求助是否真实可用。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用安全改善与接受帮助反证",
+          "body": "若环境安全后克制立即消失，努力没有反复连接到个人意义，或接受支持时没有身份关注，该副型假设应减弱。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "保持承受观察非预测",
+          "body": "单一量表证据不能建立普遍副型。本页不能预测韧性、健康、苦难、工作能力或应对结果。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "能承受困难就一定是第四型自保副型吗？",
+          "answer": "不能。照护责任、经济压力、安全风险、歧视和支持不足都可能要求承受。应匹配压力并比较环境改善后的变化，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "为什么必须记录求助是否真实可用？",
+          "answer": "若求助会带来惩罚、费用或根本没有回应，就不能把克制写成自由选择。权力、资源与现实后果必须进入比较，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "哪些观察会削弱克制意义假设？",
+          "answer": "安全改善后克制消失、努力没有持续连接个人意义，或接受支持时没有身份关注，都会降低该解释，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择两件后果接近但表达安全不同的困难任务，并加入一个现实压力明显缓解的时段。",
+        "observable_signal": "记录努力、现实后果、个人意义、可用帮助、拒绝成本、披露范围和条件改善后的变化。",
+        "page_specific_signal": "比较任务难度相近时，安全改善后表达与求助具体改变在哪里，并保留一条反例。",
+        "alternative_explanation": "对照照护、经济、歧视、迁移、文化、岗位责任、资源和可用支持。",
+        "reflection_prompt": "引用一条原始记录，判断现实必要是否比副型更能解释克制努力，并调整假设。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第四型自保页从家庭责任、求助成本与压力缓解后的变化独立构思，没有翻译英文页的双任务顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "表达安全改变后求助动作如何变化并记录现实后果",
+          "现实压力缓解后个人意义是否仍持续并保留反例",
+          "拒绝没有成本时克制是否继续并说明可选条件"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是克制表达吗？",
+          "什么是经济限制吗？",
+          "什么是不安全环境吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是克制表达吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是经济限制吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是不安全环境吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "克制努力也可能来自照护、不安全环境、经济限制、歧视或岗位责任，而不是副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-4",
+        "/zh/personality/enneagram/wings/4w3",
+        "/zh/personality/enneagram/wings/4w5"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/social",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/social",
+      "path": "/en/personality/enneagram/type-4/instincts/social",
+      "title": "Social Type Four: belonging comparison as a matched-comparison hypothesis",
+      "answer_first": "Social Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through comparison, belonging, and sensitivity to what a valued group seems to possess. Group discomfort cannot establish subtype because exclusion, discrimination, status rules, relocation, and unequal access can create the same experience.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Treat belonging comparison as a traditional hypothesis",
+          "body": "The description proposes that Type Four difference attention may become visible around groups and shared standards. It does not prove a stable social deficit or motive."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match contribution while changing inclusion",
+          "body": "Compare the same contribution when the person is invited, overlooked, and formally included. Record access, credit, interpretation of difference, and whether belonging changes after evidence of inclusion."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep social language observational",
+          "body": "The label organizes audience, belonging, and comparison observations. It is not evidence about bodily mechanisms, a universal social drive, or fixed group capacity."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow difference to be voiced as group critique",
+          "body": "Personal difference may be expressed through naming what a group excludes rather than seeking individual distinction. Compare evidence-based critique with identity comparison."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test exclusion and unequal access",
+          "body": "Discrimination, class, language, disability, relocation, informal networks, and status rules shape belonging. Do not psychologize a documented barrier."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use real inclusion and cross-group stability as tests",
+          "body": "The hypothesis weakens when documented inclusion resolves the comparison, difference attention does not recur across groups, or concern appears only where access is actually unequal."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep belonging observations non-predictive",
+          "body": "Instrument-specific findings do not establish universal subtypes. This page cannot predict popularity, inclusion, loyalty, social skill, or group fit."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does feeling excluded establish Social Type Four?",
+          "answer": "No. Exclusion may be real and produced by discrimination, access, language, status, or informal networks. Verify the environment before considering subtype."
+        },
+        {
+          "question": "Why compare formal inclusion with actual access?",
+          "answer": "A title or invitation may not provide information, credit, safety, or decision power. Concrete access evidence prevents a real barrier from becoming a personality claim."
+        },
+        {
+          "question": "What weakens the belonging-comparison hypothesis?",
+          "answer": "Comparison resolved by real inclusion, no recurrence across groups, or concern limited to demonstrably unequal settings should weaken the subtype explanation."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Choose one equal contribution across an invited, overlooked, and formally included group condition.",
+        "observable_signal": "Record access, information, credit, decision power, audience, stated meaning, barrier evidence, and response after inclusion changes.",
+        "page_specific_signal": "Compare whether difference attention persists after information, credit, and decision access become genuinely equal.",
+        "alternative_explanation": "Compare discrimination, class, language, disability, relocation, networks, and status rules.",
+        "reflection_prompt": "Identify the strongest documented barrier and state whether subtype language adds anything after that barrier is considered."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English social page was composed around equal contribution under included and excluded conditions, independently of the Chinese page's committee and relocation examples.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "difference attention after genuine access becomes equal",
+          "credit and decision power under formal inclusion",
+          "whether comparison recurs across unrelated groups"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are comparison belonging and sensitivity?",
+          "What are exclusion discrimination and status rules?",
+          "What are relocation and unequal access?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are comparison belonging and sensitivity?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are exclusion discrimination and status rules?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are relocation and unequal access?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Belonging discomfort may arise from exclusion, discrimination, status rules, relocation, or unequal access rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-4",
+        "/en/personality/enneagram/wings/4w3",
+        "/en/personality/enneagram/wings/4w5"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/social",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/social",
+      "path": "/zh/personality/enneagram/type-4/instincts/social",
+      "title": "第四型社交副型：围绕归属比较的匹配观察假设",
+      "answer_first": "第四型社交副型是一种传统且证据有限的假设：身份与意义关注可能通过比较、归属，以及感到重要群体拥有自己缺少的部分出现。群体不适不能证明副型；排斥、歧视、身份规则、迁移和不平等入口都可能产生相同体验。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把归属比较作为传统提示",
+          "body": "传统描述提出，第四型差异关注可能在群体与共同标准中变得明显。这不能证明稳定的社交缺陷或动机。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "保持贡献相近并改变实际入口",
+          "body": "比较贡献相近但被邀请、被忽略和正式纳入的场景。记录信息、署名、决策权与真实入口，而不只看名义身份。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "让社交语言停留在观察层",
+          "body": "社交标签只组织受众、归属和比较线索，不描述身体机制，也不代表普遍社交驱力或固定群体能力。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "容纳通过群体批评表达差异",
+          "body": "个人差异可能表现为指出群体排除了什么，而不是追求个人独特。应比较有证据的制度批评与身份比较。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检验排斥与不平等入口",
+          "body": "歧视、阶层、语言、残障、迁移、非正式网络和身份规则都会塑造归属。不能把有记录的障碍心理化。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用真实纳入与跨群体稳定性反证",
+          "body": "若真实入口改善后比较消退，差异关注不在其他群体重复，或只在客观不平等场景出现，副型假设应减弱。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "保持归属观察非预测",
+          "body": "量表特定发现不能建立普遍副型。本页不能预测受欢迎程度、归属、忠诚、社交技能或群体适配。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "感到被排斥就一定是第四型社交副型吗？",
+          "answer": "不能。歧视、语言、身份规则、无障碍缺口和非正式网络都可能造成真实排斥。必须先核实环境证据，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "为什么要区分正式纳入与实际入口？",
+          "answer": "一个头衔或邀请不一定带来信息、署名、安全和决策权。记录具体入口，能避免把真实障碍改写成人格问题，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "哪些记录会削弱归属比较假设？",
+          "answer": "真实纳入后比较消退、差异关注不跨群体重复，或只在客观不平等环境出现，都会降低该副型解释，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择贡献相近的被邀请、被忽略和正式纳入场景，并确认三者的任务责任可比较。",
+        "observable_signal": "记录信息入口、署名、决策权、受众、本人意义、障碍证据和真实纳入后的变化。",
+        "page_specific_signal": "比较信息、署名和决策入口真正相等后，差异关注是否仍持续，并保留反例。",
+        "alternative_explanation": "对照歧视、阶层、语言、残障、迁移、非正式网络、身份规则和现实安全。",
+        "reflection_prompt": "指出最强的已记录环境障碍，并判断考虑该障碍后副型语言是否仍增加解释。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第四型社交页围绕委员会入口、实际决策权和迁移前后独立设计，没有沿用英文页的邀请条件顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "实际入口相等后差异关注是否持续并记录群体变化",
+          "正式纳入时署名与决策权是否真正获得并保留证据",
+          "比较是否跨无关群体重复并写下一个不支持场景"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是身份与意义关注吗？",
+          "什么是重要群体吗？",
+          "什么是不平等入口吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是身份与意义关注吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是重要群体吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是不平等入口吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "群体不适也可能来自排斥、歧视、身份规则、迁移或不平等入口，而不是副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-4",
+        "/zh/personality/enneagram/wings/4w3",
+        "/zh/personality/enneagram/wings/4w5"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/one-to-one",
+      "locale": "en",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/one-to-one",
+      "path": "/en/personality/enneagram/type-4/instincts/one-to-one",
+      "title": "One-to-one Type Four: focal intensity as a matched-comparison hypothesis",
+      "answer_first": "One-to-one Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through focal comparison, intensity, and testing whether a specific relationship can hold difference. Intense expression cannot establish subtype because conflict, attraction norms, trauma history, competition, and unequal power can look similar.",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "Treat focal intensity as a traditional hypothesis",
+          "body": "The description proposes that Type Four difference attention may concentrate around a specific person or rivalry. It is not a claim that intensity causes attachment."
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "Match the topic while changing the focal person",
+          "body": "Compare the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator. Record intensity, evidence, consent, repair, and stakes."
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "Keep one-to-one language non-mechanistic",
+          "body": "The label organizes focal attention, comparison, and intensity. It is not evidence about bodily mechanisms, chemistry, sexuality, or a force determining attraction."
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "Allow competition to carry difference concerns",
+          "body": "Difference may appear as challenging another person, outperforming a rival, or demanding unmistakable engagement. Compare this with real competition and unsafe conflict."
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "Test conflict, power, and attraction norms",
+          "body": "Relationship conflict, competitive fields, trauma history, cultural scripts, harassment, and evaluation power can intensify expression. Consent and safety are mandatory context."
+        },
+        {
+          "kind": "counterexample",
+          "heading": "Use neutral response and respected limits as tests",
+          "body": "The hypothesis weakens when intensity follows objective stakes rather than focal identity, remains stable across audiences, or reliably decreases when another person sets a limit."
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "Keep focal observations non-predictive",
+          "body": "Results from one measure remain context-bound. This page cannot predict attraction, conflict, compatibility, creativity, or relationship quality."
+        }
+      ],
+      "faqs": [
+        {
+          "question": "Does intense expression establish One-to-one Type Four?",
+          "answer": "No. Conflict, competition, attraction norms, trauma history, or unequal power may intensify expression. Use matched topics and consent-aware comparisons."
+        },
+        {
+          "question": "Why must consent be recorded in a focal comparison?",
+          "answer": "A close person may welcome, tolerate, or fear intensity, and power can limit refusal. Recording limits prevents coercion from becoming a subtype example."
+        },
+        {
+          "question": "What weakens the focal-intensity hypothesis?",
+          "answer": "Intensity explained by objective stakes, stable expression across audiences, or reliable de-escalation after a clear limit should weaken it."
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "Use the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator.",
+        "observable_signal": "Record topic, stakes, evidence, intensity, consent, limit, evaluation power, repair, and change after refusal.",
+        "page_specific_signal": "Compare whether the same evidence produces different intensity only when a particular relationship or rivalry is present.",
+        "alternative_explanation": "Compare conflict, competition, trauma history, cultural scripts, harassment, attraction norms, and power.",
+        "reflection_prompt": "Identify the condition where stakes or safety explain intensity better than subtype and cite one respected limit."
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "The English one-to-one page was composed around consent changes, neutral partners, and non-relational competition, independently of the Chinese page's collaboration-boundary order.",
+        "outline": [
+          "answer_first",
+          "traditional_hypothesis",
+          "matched_comparison",
+          "instinct_boundary",
+          "countertype_variation",
+          "alternative_environment",
+          "counterexample",
+          "evidence_boundary",
+          "observation_exercise",
+          "internal_links"
+        ],
+        "page_specific_signals": [
+          "intensity after a clear relational limit",
+          "same disagreement with neutral and focal partners",
+          "whether objective stakes explain a competitive response"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "What are focal comparison intensity and testing?",
+          "What are conflict attraction norms and competition?",
+          "What are trauma history and unequal power?"
+        ],
+        "question_answers": [
+          {
+            "question": "What are focal comparison intensity and testing?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are conflict attraction norms and competition?",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "What are trauma history and unequal power?",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
+          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence.",
+          "Focal intensity may arise from conflict, attraction norms, trauma history, competition, or unequal power rather than subtype."
+        ]
+      },
+      "internal_links": [
+        "/en/personality/enneagram",
+        "/en/personality/enneagram/type-4",
+        "/en/personality/enneagram/wings/4w3",
+        "/en/personality/enneagram/wings/4w5"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    },
+    {
+      "identity_key": "instinctual_subtype:type-4/one-to-one",
+      "locale": "zh-CN",
+      "entity_type": "instinctual_subtype",
+      "code": "type-4/one-to-one",
+      "path": "/zh/personality/enneagram/type-4/instincts/one-to-one",
+      "title": "第四型一对一副型：围绕焦点强度的匹配观察假设",
+      "answer_first": "第四型一对一副型是一种传统且证据有限的假设：身份与意义关注可能通过焦点比较、强度，以及检验某段具体关系能否容纳差异出现。强烈表达不能证明副型；冲突、吸引力规范、创伤经历、竞争和不平等权力都可能形成相似表现。",
+      "sections": [
+        {
+          "kind": "traditional_hypothesis",
+          "heading": "把焦点强度保留为传统提示",
+          "body": "传统描述提出，第四型差异关注可能集中于具体对象或竞争。这不意味着强度造成依恋，也不能从冲突反推类型。"
+        },
+        {
+          "kind": "matched_comparison",
+          "heading": "保持议题相同并改变关键对象",
+          "body": "把相同分歧或创作挑战放在亲近对象、中立合作者和匿名评审中比较。记录强度、证据、同意、修复和现实利益。"
+        },
+        {
+          "kind": "instinct_boundary",
+          "heading": "让一对一语言保持非机制化",
+          "body": "一对一标签只组织焦点注意、比较和强度，不描述身体机制，也不等同于化学反应、性取向或决定吸引的力量。"
+        },
+        {
+          "kind": "countertype_variation",
+          "heading": "容纳通过竞争表达差异关注",
+          "body": "差异可能表现为挑战对方、超越竞争者或要求明确投入。应与真实竞争、岗位评价和不安全冲突比较。"
+        },
+        {
+          "kind": "alternative_environment",
+          "heading": "检验冲突、权力与吸引力规范",
+          "body": "关系冲突、竞争行业、创伤经历、文化脚本、骚扰和评价权都能增强表达。同意与拒绝安全必须进入记录。"
+        },
+        {
+          "kind": "counterexample",
+          "heading": "用中立回应与尊重界限反证",
+          "body": "若强度跟随客观利益而非焦点身份，跨受众一直稳定，或对方明确设限后可靠下降，该副型假设应减弱。"
+        },
+        {
+          "kind": "evidence_boundary",
+          "heading": "保持焦点观察非预测",
+          "body": "单一量表结果只能解释具体工具与样本中的观察，不能建立普遍副型。本页不能预测吸引、冲突、适配、创造力、关系质量或任何未来结果。"
+        }
+      ],
+      "faqs": [
+        {
+          "question": "表达很强烈就一定是第四型一对一副型吗？",
+          "answer": "不能。冲突、竞争、吸引力规范、创伤经历和不平等权力都可能增强表达。应保持议题相近并记录同意，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "为什么焦点比较必须记录同意？",
+          "answer": "亲近对象可能欢迎、忍受或害怕强度，权力还会限制拒绝。记录界限与现实成本，能避免把强迫写成副型，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        },
+        {
+          "question": "哪些观察会削弱焦点强度假设？",
+          "answer": "强度可由客观利益解释、跨受众一直稳定，或在明确设限后可靠下降，都会削弱该副型解释，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。"
+        }
+      ],
+      "observation_exercise": {
+        "duration_days": 5,
+        "context": "选择同一分歧或创作挑战，分别与亲近对象、中立合作者和匿名评审比较，控制议题证据。",
+        "observable_signal": "记录议题、现实利益、证据、强度、同意、界限、评价权、修复和明确拒绝后的变化。",
+        "page_specific_signal": "比较只有特定关系或竞争存在时，相同证据是否产生不同强度，并记录可见行为。",
+        "alternative_explanation": "对照冲突、竞争、创伤经历、文化脚本、骚扰、吸引力规范、岗位评价和权力。",
+        "reflection_prompt": "指出现实利益或安全更能解释强度的一项记录，并引用一个被尊重的明确界限。"
+      },
+      "authoring": {
+        "mode": "independent_original",
+        "source_locale": null,
+        "independence_note": "中文第四型一对一页从合作边界、明确拒绝与非关系竞争独立构思，没有翻译英文页的匿名评审顺序。",
+        "outline": [
+          "情境入口",
+          "evidence_boundary",
+          "counterexample",
+          "alternative_environment",
+          "countertype_variation",
+          "instinct_boundary",
+          "matched_comparison",
+          "traditional_hypothesis",
+          "反例练习",
+          "站内路径"
+        ],
+        "page_specific_signals": [
+          "明确关系界限后表达强度如何变化并记录修复结果",
+          "相同分歧在中立与关键对象之间如何不同并保留证据",
+          "客观利益是否足以解释竞争回应并写下反例"
+        ]
+      },
+      "answerability": {
+        "direct_answer_supported": true,
+        "questions": [
+          "什么是焦点比较吗？",
+          "什么是吸引力规范吗？",
+          "什么是不平等权力吗？"
+        ],
+        "question_answers": [
+          {
+            "question": "什么是焦点比较吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是吸引力规范吗？",
+            "visible_path": "answer_first"
+          },
+          {
+            "question": "什么是不平等权力吗？",
+            "visible_path": "answer_first"
+          }
+        ]
+      },
+      "claim_ids": [
+        "claim.framework.nine_type_observation",
+        "claim.evidence.mixed_and_instrument_specific",
+        "claim.subtype.traditional_secondary_hypothesis"
+      ],
+      "visible_evidence": {
+        "visible": true,
+        "claim_ids": [
+          "claim.framework.nine_type_observation",
+          "claim.evidence.mixed_and_instrument_specific",
+          "claim.subtype.traditional_secondary_hypothesis"
+        ],
+        "limitations": [
+          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
+          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。",
+          "焦点强度也可能来自冲突、吸引力规范、创伤经历、竞争或不平等权力，而不是副型。"
+        ]
+      },
+      "internal_links": [
+        "/zh/personality/enneagram",
+        "/zh/personality/enneagram/type-4",
+        "/zh/personality/enneagram/wings/4w3",
+        "/zh/personality/enneagram/wings/4w5"
+      ],
+      "review_truth": {
+        "status": "pending_manual_review",
+        "reviewer": null,
+        "reviewed_at": null,
+        "human_review_completed": false,
+        "review_source": "unassigned"
+      },
+      "release_truth": {
+        "draft_only": true,
+        "publish_eligible": false,
+        "indexability_changed": false,
+        "sitemap_changed": false,
+        "llms_changed": false
+      }
+    }
+  ]
+}
