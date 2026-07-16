@@ -500,5 +500,25 @@
     "affected_check": "cd backend && composer test",
     "recommended_follow_up": "Track the repository-wide single-process PHPUnit memory baseline separately; API-01 has completed the identical all-suite test selection under a temporary 2 GiB process ceiling, and GitHub required checks remain mandatory before merge.",
     "train_continued": true
+  },
+  {
+    "observed_at": "2026-07-16T15:53:42Z",
+    "repo": "fap-api",
+    "pr_id": "ANALYTICS-FRESHNESS-RECONCILE-03",
+    "branch": "codex/analytics-freshness-reconcile-03",
+    "blocker_type": "required_local_check_external_baseline_failure",
+    "evidence": [
+      "Full composer test completed with 7920 passing tests, 39 skipped tests, 1 existing deprecation, and 6 failures.",
+      "The sole PR3-origin failure was ServiceLayerBoundaryTest matching $request(); ProviderHttpClient was repaired by renaming the closure variable to $operation.",
+      "A detached, unmodified origin/main worktree at 4c6e4fa0850881cc7986d7665d935a86c3700121 with its own Composer autoload mapping reproduced the remaining five failures: CreateMigrationsMustConvergeTest, ArticleCoverPropagationSmokeCommandTest, NoEmptyThrowableCatchTest, SeoIntelSeoOpsMbtiGrowthLoopHandoffTest, and NoRuntimeSchemaIntrospectionTest.",
+      "The five reproduced offenders are confined to existing migration, Article cover smoke, personality cache, SEO handoff documentation, and Big Five/Enneagram/personality runtime-schema paths outside PR3's allowlist.",
+      "PR3 focused Analytics tests passed 22 tests / 118 assertions and Ops tests passed 5 tests / 55 assertions; touched-PHP Pint and other scoped static checks passed before the full suite."
+    ],
+    "why_not_current_pr_scope": "ANALYTICS-FRESHNESS-RECONCILE-03 is limited to provider freshness adapters, reconciliation, the existing Ops funnel surface, scheduler/config, focused tests, runbook, and train metadata. The reproduced failures require migration, CMS/personality cache, SEO documentation, Article schema behavior, and Big Five/Enneagram/personality service changes that the explicit goal forbids adding to PR3.",
+    "required_checks_affected": true,
+    "affected_check": "cd backend && composer test",
+    "recommended_follow_up": "Repair the five origin/main failures under their owning scopes, merge them to fap-api main, then resume PR3 by rebasing the preserved analytics worktree and rerunning every required local check. Do not bypass composer test or mix those repairs into PR3.",
+    "status": "blocked_external_baseline",
+    "train_continued": false
   }
 ]

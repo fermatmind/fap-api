@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Services\Analytics\ProviderFreshness\ProviderFreshnessService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use App\Support\SchemaBaseline;
@@ -117,6 +118,9 @@ class FunnelConversionPage extends Page
     /** @var list<string> */
     public array $warnings = [];
 
+    /** @var array<string,mixed> */
+    public array $providerFreshness = [];
+
     public bool $hasData = false;
 
     public function mount(): void
@@ -188,6 +192,7 @@ class FunnelConversionPage extends Page
     public function refreshPage(): void
     {
         $this->warnings = [];
+        $this->providerFreshness = $this->safeProviderFreshnessSnapshot();
         $this->loadFilterOptions();
 
         if (! SchemaBaseline::hasTable('analytics_funnel_daily')) {
@@ -243,6 +248,48 @@ class FunnelConversionPage extends Page
         $this->localeComparison = $this->buildLocaleComparison();
         $this->pdfPanel = $this->buildPdfPanel($totals, $dailyRows);
         $this->sharePanel = $this->buildSharePanel($totals, $dailyRows);
+    }
+
+    /** @return array<string,mixed> */
+    private function safeProviderFreshnessSnapshot(): array
+    {
+        try {
+            return app(ProviderFreshnessService::class)->snapshot();
+        } catch (\Throwable) {
+            return [
+                'schema_version' => 'analytics.provider_freshness.v1',
+                'backend_global' => [
+                    'status' => 'unknown',
+                    'row_exists' => false,
+                    'activity' => null,
+                    'last_refreshed_at' => null,
+                    'data_through' => null,
+                ],
+                'providers' => [
+                    'ga4' => $this->unavailableProviderSnapshot('ga4'),
+                    'baidu' => $this->unavailableProviderSnapshot('baidu'),
+                ],
+                'reconciliation' => [
+                    'status' => 'unknown',
+                    'reason_code' => 'snapshot_unavailable',
+                ],
+            ];
+        }
+    }
+
+    /** @return array<string,mixed> */
+    private function unavailableProviderSnapshot(string $provider): array
+    {
+        return [
+            'provider' => $provider,
+            'status' => 'unknown',
+            'last_attempt_at' => null,
+            'last_success_at' => null,
+            'data_through' => null,
+            'metrics' => [],
+            'using_lkg' => false,
+            'diagnostic_code' => 'snapshot_unavailable',
+        ];
     }
 
     public function formatInt(int $value): string

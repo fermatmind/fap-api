@@ -57,6 +57,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('analytics:refresh-test-metrics-daily --scheduled-current-day')->everyFifteenMinutes()->withoutOverlapping(20);
+        if ((bool) config('analytics.provider_freshness.enabled')) {
+            $schedule->command('analytics:refresh-provider-freshness --json')
+                ->hourly()
+                ->withoutOverlapping(20)
+                ->onOneServer();
+        }
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('eq60:psychometrics --window=last_90_days')->weeklyOn(1, '04:20')->withoutOverlapping();

@@ -565,3 +565,25 @@
   - Completed in independent baseline repair PR #3033, merged at `082a30f6e40173ee50de1110346d4c787c1dbf13` with all required checks green.
   - API-01 resumed from the repaired `main` and must rerun every required local and GitHub check.
 - whether train continued: `true`
+
+## ANALYTICS-FRESHNESS-RECONCILE-03 required Composer baseline failure
+
+- observed at: `2026-07-16T15:53:42Z`
+- repo: `fap-api`
+- PR id / branch: `ANALYTICS-FRESHNESS-RECONCILE-03` / `codex/analytics-freshness-reconcile-03`
+- blocker type: `required_local_check_external_baseline_failure`
+- evidence:
+  - Full `composer test` completed with 7920 passing tests, 39 skipped tests, 1 existing deprecation, and 6 failures.
+  - The sole PR3-origin failure was `ServiceLayerBoundaryTest` matching `$request()`; `ProviderHttpClient` was repaired by renaming the closure variable to `$operation`.
+  - A detached, unmodified `origin/main` worktree at `4c6e4fa0850881cc7986d7665d935a86c3700121`, with its own Composer autoload mapping, reproduced the remaining five failures: `CreateMigrationsMustConvergeTest`, `ArticleCoverPropagationSmokeCommandTest`, `NoEmptyThrowableCatchTest`, `SeoIntelSeoOpsMbtiGrowthLoopHandoffTest`, and `NoRuntimeSchemaIntrospectionTest`.
+  - The five reproduced offenders are confined to existing migration, Article cover smoke, personality cache, SEO handoff documentation, and Big Five/Enneagram/personality runtime-schema paths outside PR3's allowlist.
+  - PR3 focused Analytics tests passed 22 tests / 118 assertions and Ops tests passed 5 tests / 55 assertions; touched-PHP Pint and other scoped static checks passed before the full suite.
+- why not current PR scope:
+  - PR3 is limited to provider freshness adapters, reconciliation, the existing Ops funnel surface, scheduler/config, focused tests, runbook, and train metadata. The reproduced failures require paths explicitly forbidden by this goal.
+- whether required checks are affected: `true`
+  - affected check: `cd backend && composer test`
+- recommended follow-up:
+  - Repair the five `origin/main` failures under their owning scopes, merge them to `fap-api` main, then resume PR3 by rebasing the preserved analytics worktree and rerunning every required local check.
+  - Do not bypass `composer test` or mix those repairs into PR3.
+- status: `blocked_external_baseline`
+- whether train continued: `false`
