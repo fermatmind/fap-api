@@ -96130,8 +96130,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "4e940f10bfc4f89e418551832b5a2662eb261232",
+    "status": "review_fix_local_validation_passed",
+    "commit_sha": "0a42d65d8ba82a91f4dfb2033c7ef3b1c66ac158",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96140,7 +96140,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 42 tests / 796 assertions. The exact-SHA packet binds the backend API origin, frontend origin, and frontend revalidation endpoint. Readback artifacts record their actual API/frontend origins and standalone readback accepts only exact origins. Production preflight and execute both require a complete pre-readback artifact outside the explicit SQLite testing override; revision-probe origin drift and every provenance mismatch fail before HTTP or writes. Existing exact 116 import/bind/promotion, private-register, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remains green."
+        "evidence": "V205/V206/V223/V224 pass 44 tests / 809 assertions. Manifest preflight now recomputes the V223 canonical evidence fingerprint for every supplied review evidence_sha256 and fails before workspace writes on mismatch. Readback leak detection UTF-8 case-folds raw and decoded public responses plus private reviewer values. Existing exact endpoint/pre-readback provenance, 116 import/bind/promotion, private-register, rollback, cache, HMAC 116/0, and 8 + 9x12 readback coverage remains green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96148,21 +96148,21 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 207 tests / 28802 assertions after waiting for the existing full Composer validation in another worktree to release the local heavy-test concurrency guard."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 209 tests / 28816 assertions after waiting for the existing full Composer validation in another worktree to release the local heavy-test concurrency guard."
       },
       "static_and_scope": {
         "status": "passed",
         "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
       },
       "github_required": {
-        "status": "passed",
-        "evidence": "Exact head 4e940f10bfc4f89e418551832b5a2662eb261232 passed all nine required GitHub checks, is CLEAN/MERGEABLE, and has zero unresolved review threads. The ready-to-merge ledger-only commit must pass one final fresh check and exact-head review cycle before squash merge."
+        "status": "pending",
+        "evidence": "Previous head 8a8244640dd4ad2220bb0660b8d84ee0883d677e passed all nine required GitHub checks and was CLEAN/MERGEABLE. Two later P2 review findings are fixed locally at code commit 0a42d65d8ba82a91f4dfb2033c7ef3b1c66ac158; require a fresh complete GitHub check and exact-head review cycle before merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96300,9 +96300,14 @@
         "at": "2026-07-16T17:34:53Z",
         "status": "ready_to_merge",
         "note": "Exact head 4e940f10bfc4f89e418551832b5a2662eb261232 passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, and retains the exact 15-path manifest scope. This ready-to-merge ledger-only update must independently pass a fresh final check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T17:54:07Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 8a8244640dd4ad2220bb0660b8d84ee0883d677e passed all nine checks, two valid P2 review findings were fixed in scope at 0a42d65d8ba82a91f4dfb2033c7ef3b1c66ac158: optional review evidence_sha256 is recomputed against the V223 canonical fingerprint before any workspace write, and private reviewer leak checks are UTF-8 case-folded. Focused 44/809, cache/API 8/72, classifier 1/2, full Enneagram V2 209/28816, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. The first Pint aggregate attempt used zsh no-word-splitting and treated the list as one path; the same manifest command passed under Bash. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T17:34:53Z"
+    "updated_at": "2026-07-16T17:54:07Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
