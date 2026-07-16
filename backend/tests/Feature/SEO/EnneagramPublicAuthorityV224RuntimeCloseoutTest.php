@@ -671,6 +671,41 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_post_readback_rejects_missing_visible_evidence_limitations_against_current_authority(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill(['authority_json' => [
+                'sources' => [['id' => 'source-1', 'title' => 'Visible evidence source']],
+                'claim_mapping' => [['claim_id' => 'claim-1', 'source_ids' => ['source-1']]],
+                'limitations' => [
+                    'This evidence describes a bounded observation pattern.',
+                    'It does not predict an individual outcome.',
+                ],
+                'visible_evidence_eligible' => true,
+            ]])->save();
+        }
+        $this->fakeRuntimeHttp($report, omitVisibleEvidenceLimitations: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'post',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected missing post-readback visible-evidence limitations to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_visible_evidence_authority_mismatch', $exception->getMessage());
+            $this->assertStringNotContainsString('api_visible_evidence_missing', $exception->getMessage());
+            $this->assertStringNotContainsString('html_visible_evidence_mismatch', $exception->getMessage());
+        }
+    }
+
     public function test_runtime_readback_rejects_api_redirect(): void
     {
         $this->seedPublishedEstate();
@@ -1377,6 +1412,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $omitFaqAnswerHtml = false,
         bool $omitVisibleEvidence = false,
         bool $partialVisibleEvidence = false,
+        bool $omitVisibleEvidenceLimitations = false,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1384,7 +1420,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitSectionHtml, $omitVisibleEvidence, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1452,6 +1488,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
                 $visibleSources = $omitVisibleEvidence ? [] : array_values((array) ($authority['sources'] ?? []));
                 $visibleClaimMapping = $omitVisibleEvidence ? [] : (array) ($authority['claim_mapping'] ?? []);
+                $visibleLimitations = $omitVisibleEvidenceLimitations
+                    ? []
+                    : array_values((array) ($authority['limitations'] ?? []));
                 if ($partialVisibleEvidence) {
                     $visibleSources = array_slice($visibleSources, 0, 1);
                     $visibleClaimMapping = array_slice(array_values($visibleClaimMapping), 0, 1);
@@ -1482,6 +1521,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'visible_evidence' => [
                             'sources' => $visibleSources,
                             'claim_mapping' => $visibleClaimMapping,
+                            'limitations' => $visibleLimitations,
                             'eligible' => ! $omitVisibleEvidence
                                 && ($authority['visible_evidence_eligible'] ?? false) === true
                                 && $visibleSources !== []

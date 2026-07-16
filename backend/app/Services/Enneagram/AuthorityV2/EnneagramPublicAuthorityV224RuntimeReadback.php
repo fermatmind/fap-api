@@ -300,15 +300,22 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $expectedClaimMapping = is_array($authority['claim_mapping'] ?? null)
             ? array_values($authority['claim_mapping'])
             : [];
+        $expectedLimitations = is_array($authority['limitations'] ?? null)
+            ? array_values($authority['limitations'])
+            : [];
         $observedSources = is_array(data_get($v2, 'visible_evidence.sources'))
             ? array_values(data_get($v2, 'visible_evidence.sources'))
             : [];
         $observedClaimMapping = is_array(data_get($v2, 'visible_evidence.claim_mapping'))
             ? array_values(data_get($v2, 'visible_evidence.claim_mapping'))
             : [];
+        $observedLimitations = is_array(data_get($v2, 'visible_evidence.limitations'))
+            ? array_values(data_get($v2, 'visible_evidence.limitations'))
+            : [];
         $expected = [
             'sources' => $expectedSources,
             'claim_mapping' => $expectedClaimMapping,
+            'limitations' => $expectedLimitations,
             'eligible' => ($authority['visible_evidence_eligible'] ?? false) === true
                 && $expectedSources !== []
                 && $expectedClaimMapping !== [],
@@ -316,6 +323,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $observed = [
             'sources' => $observedSources,
             'claim_mapping' => $observedClaimMapping,
+            'limitations' => $observedLimitations,
             'eligible' => data_get($v2, 'visible_evidence.eligible') === true,
         ];
         if (! hash_equals($this->fingerprint($expected), $this->fingerprint($observed))) {
