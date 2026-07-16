@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "7d9f58db7b233e5bc19e26fc589fe45a53ef1804",
+    "commit_sha": "08d56339e13ac6e31c03ea93ee910d8ea3925c70",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 58 tests / 907 assertions on the final test head; V224 passes 33 tests / 375 assertions. Post-readback requires the exact current authority sources and claim mapping, non-empty evidence, eligible=true, every returned source title in rendered HTML, DB-bound FAQ rows, and visible question/answer pairs. A partial 1-of-2 API evidence projection remains non-empty, eligible, and HTML-visible but now fails closed against the current authority fingerprint. Payload/DB provenance, private-route, rendered-section, deployed-SHA, redirect, exact origin/URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 59 tests / 913 assertions on the final test head; V224 passes 34 tests / 381 assertions. Post-readback requires the exact current authority sources, claim mapping, limitations, and eligibility; non-empty evidence; every returned source title in rendered HTML; DB-bound FAQ rows; and visible question/answer pairs. A partial 1-of-2 API evidence projection and an API projection that drops all authority limitations both remain non-empty, eligible, and HTML-visible but now fail closed against the current authority fingerprint. Payload/DB provenance, private-route, rendered-section, deployed-SHA, redirect, exact origin/URL-set, private-review, empty-media, 116 import/bind/promotion, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 223 tests / 28913 assertions after binding post-readback sources and claim mapping to the exact current authority data."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 224 tests / 28919 assertions after binding post-readback sources, claim mapping, and limitations to the exact current authority data."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head 4896bccc85ef3a9bd534727a8ad4b1be56f53939 passed all nine checks, was CLEAN/MERGEABLE, and its exact-head review raised one valid same-scope P2: post-readback accepted a partial authority evidence projection. The exact sources/claim-mapping binding and regression are complete at 7d9f58db7b233e5bc19e26fc589fe45a53ef1804. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
+        "evidence": "Exact head 2711d18a5c9be10b05d79e872c66cb7d8da4be5b passed all nine checks, was CLEAN/MERGEABLE, and its exact-head review raised one valid same-scope P2: post-readback did not bind visible-evidence limitations. The limitations binding and regression are complete at 08d56339e13ac6e31c03ea93ee910d8ea3925c70. A fresh complete GitHub check and exact-head review cycle is required before squash merge."
       }
     },
     "scope_validation": {
@@ -96433,9 +96433,14 @@
         "at": "2026-07-16T20:05:22Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head 4896bccc85ef3a9bd534727a8ad4b1be56f53939 passed all nine checks, its exact-head review found that post-readback could accept a non-empty, eligible, HTML-visible subset of the current authority evidence. Code commit 7d9f58db7b233e5bc19e26fc589fe45a53ef1804 now binds the API v2 sources and claim mapping exactly to current authority_json and proves a partial 1-of-2 projection fails closed. Final V224 33/375, focused 58/907, cache/API 8/72, classifier 1/2, full Enneagram V2 223/28913, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T20:27:03Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 2711d18a5c9be10b05d79e872c66cb7d8da4be5b passed all nine checks, its exact-head review found that visible-evidence limitations were not included in the current-authority comparison. Code commit 08d56339e13ac6e31c03ea93ee910d8ea3925c70 now binds limitations alongside sources, claim mapping, and eligibility and proves an API projection that drops all authority limitations fails closed. Final V224 34/381, focused 59/913, cache/API 8/72, classifier 1/2, full Enneagram V2 224/28919, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-16T20:05:22Z"
+    "updated_at": "2026-07-16T20:27:03Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
