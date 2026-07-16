@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "6ddd5d044feb3fcd4edd2f7824468d11e65f7298",
+    "commit_sha": "dab7cfb9388b42f11a1510eb3b67f9876b5497d4",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -95543,9 +95543,14 @@
         "at": "2026-07-16T08:49:59Z",
         "status": "ci_fix_local_verified_blocked_release_gate",
         "note": "Moved the unchanged read-only release-gate helper and command mode into the already-registered Enneagram Authority V2 integrity service/command, deleted the two unregistered PHP paths, and preserved the exact package SHA and report. Manifest 53/4130, syntax, and four-file Pint pass. The branch-diff freeze assertion requires this deletion to be committed before it can observe the fix."
+      },
+      {
+        "at": "2026-07-16T08:51:00Z",
+        "status": "ci_fix_ready_to_push_blocked_release_gate",
+        "note": "Committed the non-runtime path fix as dab7cfb9388b42f11a1510eb3b67f9876b5497d4, then re-ran the exact previously failing runtime_paths_have_no_uncommitted_diff assertion: 1/3 passed. Bind the ledger to this implementation head and require a fresh complete GitHub cycle."
       }
     ],
-    "updated_at": "2026-07-16T08:49:59Z"
+    "updated_at": "2026-07-16T08:51:00Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
