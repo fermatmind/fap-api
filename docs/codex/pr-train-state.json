@@ -94713,7 +94713,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-5-FAMILY-14"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "8ee33a3daf9425ffaa328fe7c42b7bd3636acefe",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3127",
@@ -94739,18 +94739,18 @@
         "evidence": "The initial 178-finding template failure was rejected rather than accepted as content. Four recorded repair rounds made wings and subtypes page-specific and cleared residual FAQ uniqueness and template findings. Final focused validation passes 8 tests / 421 assertions, exactly twelve assets, independent en/zh-CN authoring, 36 unique FAQ pairs, pending manual review, draft-only release truth, and closed execution boundaries."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on ledger head 5c36b59572adbebda8d03d1e27e592bfe7330965, but final review found a new valid copied wing authoring-signal thread. All four English/Chinese wing independence notes and signal sets were rewritten and locally validated; fresh required checks must pass on the tenth substantive review-fix ledger head."
+        "status": "pass",
+        "evidence": "All nine GitHub checks passed on immutable ledger head e187ecfe7df52ca33424a7843e1ddb6f17de3517 after the tenth substantive review fix. GitHub reports CLEAN/MERGEABLE with exactly the six allowed files."
       },
       "required_reviews": {
-        "status": "pending_resolution",
-        "evidence": "The first eleven Codex review threads are resolved. Thread PRRT_kwDOQn6xoM6RT7do correctly identified copied 6w7 authoring signals in English and Chinese. Rewrote all four wing independence notes and signal sets so 6w5 tracks source requests, evidence thresholds, private analysis, and handoff, while 6w7 tracks option counts, ally contact, reversible experiments, and coordination closure. Resolve this twelfth thread after push and re-read."
+        "status": "pass",
+        "evidence": "All twelve Codex review threads are resolved and outdated. The final re-read after the e187ecfe7df52ca33424a7843e1ddb6f17de3517 check cycle found no new thread, no required review rule, and no unresolved feedback."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -94853,9 +94853,14 @@
         "at": "2026-07-16T03:25:27Z",
         "status": "github_checks_pending",
         "note": "All nine checks passed on 5c36b59572adbebda8d03d1e27e592bfe7330965, but final review found a twelfth valid P2 thread: 6w7 authoring signals copied 6w5 strategy, handoff, and sibling-shift skeletons in English and Chinese. Rewrote all four wing independence notes and signal sets so 6w5 observes source requests, evidence thresholds, private analysis, and technical handoff, while 6w7 observes option counts, ally contact, reversible experiments, and coordination closure. Revalidated 8 tests / 421 assertions, Pint, JSON, copied-phrase/anomaly scan, and diff checks; committed the tenth substantive review fix as 8ee33a3daf9425ffaa328fe7c42b7bd3636acefe. Fresh checks and thread resolution are required."
+      },
+      {
+        "at": "2026-07-16T03:32:34Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on immutable head e187ecfe7df52ca33424a7843e1ddb6f17de3517. GitHub reports CLEAN/MERGEABLE; all twelve Codex review threads are resolved and outdated with no new thread; exact six-file scope, twelve assets, 36 unique FAQ pairs, cross-page authoring-signal uniqueness, pending-manual-review truth, draft-only release truth, and every execution boundary were revalidated. This ledger-only ready transition must itself receive a fresh complete check cycle before squash merge."
       }
     ],
-    "updated_at": "2026-07-16T03:25:27Z"
+    "updated_at": "2026-07-16T03:32:34Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-7-FAMILY-16",
