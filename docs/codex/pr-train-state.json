@@ -94890,10 +94890,10 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-6-FAMILY-15"
     ],
-    "status": "ready_to_push",
+    "status": "github_checks_pending",
     "commit_sha": "3ab372ee7d6c76ea637c3f07b6eefe2d2c37041f",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3130",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -94914,6 +94914,10 @@
       "codex_skeptical_review": {
         "status": "pass",
         "evidence": "The initial 25 findings were rejected rather than represented as content-ready. Two recorded repairs made all FAQ answers substantive, aligned every answerability phrase to visible copy, and expanded the one-to-one comparison cue. A second-layer readback found no normalized FAQ, authoring-signal, or independence-note duplicates and no generated splice or agreement anomaly."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #3130 is OPEN at head 3ae6e21825e9afc59be3db297abdcc6f559d8d69 with exactly the six allowed files. GitHub reports MERGEABLE/UNSTABLE while the initial required checks run."
       }
     },
     "scope_validation": {
@@ -94952,9 +94956,14 @@
         "at": "2026-07-16T04:00:22Z",
         "status": "ready_to_push",
         "note": "Committed the exact six-file PR16 scope as 3ab372ee7d6c76ea637c3f07b6eefe2d2c37041f after explicit path-limited staging and cached diff validation."
+      },
+      {
+        "at": "2026-07-16T04:01:37Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3130 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
       }
     ],
-    "updated_at": "2026-07-16T04:00:22Z"
+    "updated_at": "2026-07-16T04:01:37Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-TYPE-8-FAMILY-17",
