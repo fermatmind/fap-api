@@ -35211,7 +35211,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1833",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "title": "docs(foundation): validate Daily Giving backend runtime"
   },
   "PR-FDN-SOCIAL-SYNC-MVP-01": {
@@ -95837,14 +95837,14 @@
         "evidence": "Changed PHP files passed php -l and Pint; Composer validate --strict, YAML/JSON parsing, release report SHA binding, git diff --check, and exact nine-path scope validation passed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #3142 opened from the exact scoped branch; required checks are pending."
+        "status": "passed_requires_fresh_ledger_cycle",
+        "evidence": "Head 451dcd3e387259480f5906649ddd46eb158b0468 passed all nine required checks; GitHub reports CLEAN/MERGEABLE, exact nine-path scope, and no review comments. This ready-to-merge ledger commit must pass its own fresh cycle."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -95882,9 +95882,14 @@
         "at": "2026-07-16T10:42:39Z",
         "status": "pr_open_checks_pending",
         "note": "Pushed the exact nine-path scope and opened PR #3142; waiting for all required GitHub checks before merge."
+      },
+      {
+        "at": "2026-07-16T10:52:06Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 451dcd3e387259480f5906649ddd46eb158b0468 passed all nine required checks; GitHub is CLEAN/MERGEABLE, scope remains exactly nine allowed paths, and no comments or reviews exist. Push this ledger-only readiness record and require a fresh check cycle before squash merge."
       }
     ],
-    "updated_at": "2026-07-16T10:42:39Z"
+    "updated_at": "2026-07-16T10:52:06Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
