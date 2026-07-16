@@ -9,15 +9,21 @@ const snapshotPath = path.join(repositoryRoot, 'generated/big-five-authority-v2/
 const confirmationPath = path.join(repositoryRoot, 'generated/big-five-authority-v2/big5-authority-v2-zh6-snapshot-48/exact-snapshot-confirmation.json');
 const ownerAuthorityPath = path.resolve(process.env.PR49_OWNER_AUTHORITY_PATH ?? path.join(directory, 'pr48-owner-authority.json'));
 const observationPath = path.resolve(process.env.PR49_OBSERVATION_PATH ?? path.join(directory, 'production-observation.json'));
+const outputPath = path.resolve(process.env.PR49_OUTPUT_PATH ?? path.join(directory, 'promotion-readiness-package.json'));
+const outputHashPath = path.resolve(process.env.PR49_OUTPUT_HASH_PATH ?? path.join(directory, 'promotion-readiness-package.sha256'));
 const observationInputPath = process.env.PR49_OBSERVATION_PATH
   ? observationPath
   : 'generated/big-five-authority-v2/big5-authority-v2-zh6-promotion-readiness-49/production-observation.json';
-const outputPath = path.resolve(process.env.PR49_OUTPUT_PATH ?? path.join(directory, 'promotion-readiness-package.json'));
-const outputHashPath = path.resolve(process.env.PR49_OUTPUT_HASH_PATH ?? path.join(directory, 'promotion-readiness-package.sha256'));
 
 const invariant = (condition, message) => {
   if (!condition) throw new Error(message);
 };
+
+invariant(path.basename(observationPath) === 'production-observation.json'
+  && path.dirname(observationPath) === path.dirname(outputPath),
+'production observation must be the reviewed package sibling named production-observation.json');
+invariant(outputPath.endsWith('.json') && outputHashPath === outputPath.replace(/\.json$/, '.sha256'),
+'package SHA sidecar must be colocated with and named after the package');
 
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 

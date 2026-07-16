@@ -194,17 +194,116 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_rehashed_selected_media_must_match_the_observed_unique_candidate(): void
+    {
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $observation['admin_user_1']['totp_enrolled'] = true;
+        $temporary = $this->buildTemporaryPackage($observation, [
+            $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1'),
+        ]);
+        $package = $temporary['package'];
+        $package['media_authority']['selected_candidate']['media_asset_id'] = 9002;
+        $package['media_authority']['selected_candidate']['media_asset_key'] = 'media.big-five.zh-hub.substituted';
+        $package['media_authority']['selected_candidate']['public_urls'] = [
+            'hero' => 'https://assets.fermatmind.com/media/9002/hero.webp',
+            'og' => 'https://assets.fermatmind.com/media/9002/og.webp',
+        ];
+        $candidateMaterial = $package['media_authority']['selected_candidate'];
+        unset($candidateMaterial['candidate_sha256']);
+        $package['media_authority']['selected_candidate']['candidate_sha256'] = $this->canonicalSha256($candidateMaterial);
+        $mediaMaterial = array_intersect_key($package['media_authority'], array_flip([
+            'required_content_identity',
+            'required_variant_keys',
+            'selection_status',
+            'eligible_candidate_count',
+            'selected_candidate',
+            'fail_closed_on_zero_or_multiple',
+            'observation_sha256',
+        ]));
+        $mediaAuthoritySha256 = $this->canonicalSha256($mediaMaterial);
+        $package['media_authority']['media_authority_sha256'] = $mediaAuthoritySha256;
+        $package['permissions']['media']['authority_reference'] = 'media_authority:'.$mediaAuthoritySha256;
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['media_authority_sha256'] = $mediaAuthoritySha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $this->writeJson($temporary['package_path'], $package);
+        $this->assertNotFalse(file_put_contents(
+            $temporary['directory'].'/package.sha256',
+            hash_file('sha256', $temporary['package_path'])."\n",
+        ));
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+                'PR49_PACKAGE_PATH' => $temporary['package_path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/package.sha256',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'selected media candidate does not match production observation',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['package_path']);
+            $this->fail('Expected a rehashed selected media substitution to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('selected media candidate does not match the observation', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
+    public function test_builder_rejects_a_non_sibling_production_observation_before_writing(): void
+    {
+        $observationDirectory = $this->temporaryDirectory();
+        $outputDirectory = $this->temporaryDirectory();
+        $observationPath = $observationDirectory.'/production-observation.json';
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
+
+        try {
+            $builder = $this->nodeProcess('build-package.mjs', [
+                'PR49_OBSERVATION_PATH' => $observationPath,
+                'PR49_OUTPUT_PATH' => $outputDirectory.'/package.json',
+                'PR49_OUTPUT_HASH_PATH' => $outputDirectory.'/package.sha256',
+            ]);
+            $this->assertFalse($builder->isSuccessful());
+            $this->assertStringContainsString(
+                'production observation must be the reviewed package sibling',
+                $builder->getErrorOutput().$builder->getOutput(),
+            );
+            $this->assertFileDoesNotExist($outputDirectory.'/package.json');
+        } finally {
+            $this->cleanupTemporaryPackage($observationDirectory);
+            $this->cleanupTemporaryPackage($outputDirectory);
+        }
+    }
+
     public function test_builder_rejects_a_self_asserted_or_tampered_owner_phrase(): void
     {
         $owner = $this->readJson(self::PACKAGE_DIR.'/pr48-owner-authority.json');
         $owner['confirmation_phrase'] = 'approved';
         $temporaryDirectory = $this->temporaryDirectory();
         $ownerPath = $temporaryDirectory.'/owner.json';
+        $observationPath = $temporaryDirectory.'/production-observation.json';
         $this->writeJson($ownerPath, $owner);
+        $this->assertTrue(copy(
+            $this->repositoryPath(self::PACKAGE_DIR.'/production-observation.json'),
+            $observationPath,
+        ));
 
         try {
             $process = $this->nodeProcess('build-package.mjs', [
                 'PR49_OWNER_AUTHORITY_PATH' => $ownerPath,
+                'PR49_OBSERVATION_PATH' => $observationPath,
                 'PR49_OUTPUT_PATH' => $temporaryDirectory.'/package.json',
                 'PR49_OUTPUT_HASH_PATH' => $temporaryDirectory.'/package.sha256',
             ]);

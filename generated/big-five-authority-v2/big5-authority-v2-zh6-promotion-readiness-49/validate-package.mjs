@@ -119,6 +119,25 @@ if (eligibleCount === 1) {
   delete selectedCandidate.candidate_sha256;
   invariant(selectedCandidateSha256 === canonicalSha256(selectedCandidate), 'unique media candidate SHA mismatch');
   invariant(['rights', 'license', 'provenance', 'operator_approval_ref'].every((key) => typeof selectedCandidate[key] === 'string' && selectedCandidate[key].trim().length > 0), 'unique media authority text is invalid');
+  const observedCandidate = observation.media_inventory.authority_complete_hero_og[0];
+  const observedCandidateMaterial = {
+    media_asset_id: observedCandidate.media_asset_id,
+    media_asset_key: observedCandidate.media_asset_key,
+    locale: observedCandidate.locale,
+    content_identity: observedCandidate.content_identity,
+    status: observedCandidate.status,
+    variant_keys: ['hero', 'og'],
+    public_urls: {
+      hero: observedCandidate.public_urls?.hero,
+      og: observedCandidate.public_urls?.og,
+    },
+    alt: observedCandidate.alt,
+    rights: observedCandidate.rights,
+    license: observedCandidate.license,
+    provenance: observedCandidate.provenance,
+    operator_approval_ref: observedCandidate.operator_approval_ref,
+  };
+  invariant(canonicalSha256(selectedCandidate) === canonicalSha256(observedCandidateMaterial), 'selected media candidate does not match production observation');
   invariant(packageJson.permissions.media.approved === true
     && packageJson.permissions.media.authority_reference === `media_authority:${packageJson.media_authority.media_authority_sha256}`,
   'unique media authority permission does not match locked hash');
