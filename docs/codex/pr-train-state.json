@@ -95937,6 +95937,10 @@
       "github": {
         "status": "pending",
         "evidence": "PR #3143 opened from the exact scoped branch; required checks are pending."
+      },
+      "review_fix": {
+        "status": "local_verified",
+        "evidence": "Added 22B as a direct PR23 dependency so the closeout cannot use the pre-repair package hash; 22E will expand the final dependency set to 22A-22E as planned."
       }
     },
     "scope_validation": {
@@ -95980,9 +95984,14 @@
         "at": "2026-07-16T11:12:09Z",
         "status": "pr_open_checks_pending",
         "note": "Pushed the exact 13-path scope and opened PR #3143; waiting for all required GitHub checks before merge."
+      },
+      {
+        "at": "2026-07-16T11:19:24Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the actionable P2 by adding 22B as a direct PR23 dependency, preventing closeout against stale pre-repair evidence. YAML/JSON and diff checks remain green; require a fresh GitHub cycle."
       }
     ],
-    "updated_at": "2026-07-16T11:12:09Z"
+    "updated_at": "2026-07-16T11:19:24Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
@@ -95992,6 +96001,7 @@
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23: record authorized rollout and 116-page public readback",
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B",
       "separate_exact_sha_production_authorization"
     ],
     "status": "pending_production_authorization",
@@ -96000,7 +96010,7 @@
     "checks": {
       "dependency": {
         "status": "pending",
-        "evidence": "Requires merged PR22 and separate exact-SHA production authorization; register-only."
+        "evidence": "Requires merged PR22, merged 22B exact repaired package evidence, and separate exact-SHA production authorization; register-only."
       }
     },
     "scope_validation": {

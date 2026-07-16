@@ -44893,6 +44893,7 @@ prs:
     status: pending_production_authorization
     depends_on:
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B
       - separate_exact_sha_production_authorization
     scope:
       - REGISTER ONLY: do not create a branch/PR, execute, merge, deploy, import, write CMS/DB/media/cache/pointers, change indexability/search, or claim public readback under this goal.
