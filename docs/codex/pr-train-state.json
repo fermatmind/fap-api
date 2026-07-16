@@ -92984,7 +92984,7 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-promotion-readiness-49",
     "depends_on": ["BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48"],
-    "status": "pr_open_rebased_pending_push",
+    "status": "github_checks_pending",
     "commit_sha": "bfba7db0aafe46e57435eddbe8b50d3d96ec49f6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3141",
     "checks": {
@@ -93019,7 +93019,8 @@
       {"at": "2026-07-16T10:29:54Z", "from": "in_progress", "to": "local_checks_passed", "note": "All PR49 manifest checks pass on the exact 15-file scope. The Laravel gate now locks the exact reviewed package, confirmation, OWNER authority and production observation hashes; focused 9/140, related 61/8615 and the sole complete ci_verify_mbti gate pass. The package remains HOLD_FAIL_CLOSED_MEDIA_AUTHORITY and Task50 remains blocked; no controlled write or runtime mutation occurred."},
       {"at": "2026-07-16T10:37:54Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact 15-file PR49 implementation and local-validation ledger as 8656edbe976d3d0d1660720480bfe94083df0800 after explicit staging and cached scope validation. The package remains fail-closed HOLD and no production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutation occurred."},
       {"at": "2026-07-16T10:39:02Z", "from": "committed_pending_push", "to": "github_checks_pending", "note": "Opened the single authorized PR #3141 with the exact manifest title and required what/why/validation/deferred/rule-impact/production-boundary sections. Required checks started on the initial head; no controlled external mutation occurred."},
-      {"at": "2026-07-16T10:39:36Z", "from": "github_checks_pending", "to": "pr_open_rebased_pending_push", "note": "origin/main advanced by PR #3140 after the initial push. Both scoped commits rebased without conflict onto 9b13d93bbc3f6efb9ae8f4f3bf08f99f88763052; the substantive commit is now bfba7db0aafe46e57435eddbe8b50d3d96ec49f6. Deterministic package, focused 9/140, package-only zero-write command, Pint, syntax, YAML/JSON, git diff --check and exact 15-file scope pass after rebase. The first ad-hoc scope command falsely rejected allowed directory descendants because its regex omitted `.*`; the corrected exact-path matcher passed all 15 files. Require force-with-lease push and a fresh exact-head GitHub check cycle; the media HOLD and zero-mutation boundary are unchanged."}
+      {"at": "2026-07-16T10:39:36Z", "from": "github_checks_pending", "to": "pr_open_rebased_pending_push", "note": "origin/main advanced by PR #3140 after the initial push. Both scoped commits rebased without conflict onto 9b13d93bbc3f6efb9ae8f4f3bf08f99f88763052; the substantive commit is now bfba7db0aafe46e57435eddbe8b50d3d96ec49f6. Deterministic package, focused 9/140, package-only zero-write command, Pint, syntax, YAML/JSON, git diff --check and exact 15-file scope pass after rebase. The first ad-hoc scope command falsely rejected allowed directory descendants because its regex omitted `.*`; the corrected exact-path matcher passed all 15 files. Require force-with-lease push and a fresh exact-head GitHub check cycle; the media HOLD and zero-mutation boundary are unchanged."},
+      {"at": "2026-07-16T10:41:03Z", "from": "pr_open_rebased_pending_push", "to": "github_checks_pending", "note": "Force-with-lease updated PR #3141 to the verified rebased lineage through 7e22b522a5a36bdfba830a6463360ae9e265b617 without overwriting unknown remote work. A final ledger commit and fresh exact-head GitHub check/review cycle remain required; media readiness remains HOLD and controlled mutations remain zero."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50": {
