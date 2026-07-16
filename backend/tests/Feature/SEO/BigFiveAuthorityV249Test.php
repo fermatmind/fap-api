@@ -150,6 +150,50 @@ final class BigFiveAuthorityV249Test extends TestCase
         $this->cleanupTemporaryPackage($package['directory']);
     }
 
+    public function test_unique_media_permission_must_reference_the_locked_authority_hash(): void
+    {
+        $observation = $this->readJson(self::PACKAGE_DIR.'/production-observation.json');
+        $observation['admin_user_1']['totp_enrolled'] = true;
+        $temporary = $this->buildTemporaryPackage($observation, [
+            $this->completeMediaCandidate(9001, 'media.big-five.zh-hub.v1'),
+        ]);
+        $package = $temporary['package'];
+        $package['permissions']['media']['authority_reference'] = 'media_authority:'.str_repeat('0', 64);
+        $permissionMaterial = $package['permissions'];
+        unset($permissionMaterial['permissions_sha256']);
+        $permissionsSha256 = $this->canonicalSha256($permissionMaterial);
+        $package['permissions']['permissions_sha256'] = $permissionsSha256;
+        $package['release_lock_material']['permissions_sha256'] = $permissionsSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        unset($package['package_payload_sha256']);
+        $package['package_payload_sha256'] = $this->canonicalSha256($package);
+        $this->writeJson($temporary['package_path'], $package);
+        $this->assertNotFalse(file_put_contents(
+            $temporary['directory'].'/package.sha256',
+            hash_file('sha256', $temporary['package_path'])."\n",
+        ));
+
+        try {
+            $validator = $this->nodeProcess('validate-package.mjs', [
+                'PR49_OBSERVATION_PATH' => $temporary['directory'].'/production-observation.json',
+                'PR49_PACKAGE_PATH' => $temporary['package_path'],
+                'PR49_PACKAGE_HASH_PATH' => $temporary['directory'].'/package.sha256',
+            ]);
+            $this->assertFalse($validator->isSuccessful());
+            $this->assertStringContainsString(
+                'unique media authority permission does not match locked hash',
+                $validator->getErrorOutput().$validator->getOutput(),
+            );
+
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['package_path']);
+            $this->fail('Expected a rehashed media permission with the wrong authority reference to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('media readiness disposition is inconsistent', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
     public function test_builder_rejects_a_self_asserted_or_tampered_owner_phrase(): void
     {
         $owner = $this->readJson(self::PACKAGE_DIR.'/pr48-owner-authority.json');
@@ -363,6 +407,22 @@ final class BigFiveAuthorityV249Test extends TestCase
     public function test_database_media_inventory_requires_one_complete_hub_identity_and_rejects_article_media(): void
     {
         $this->createMediaAsset('article.big-five.cover', [], true);
+        $this->createMediaAsset('big5.model-hub.zh-cn.hero-og.invalid-rights', [
+            'locale' => 'zh-CN',
+            'content_identity' => BigFiveZh6PromotionReadiness::HUB_MEDIA_CONTENT_IDENTITY,
+            'rights' => true,
+            'license' => 'internal-original-v1',
+            'provenance' => 'Media Library original upload BIG5-ZH6-HUB-INVALID-1',
+            'operator_approval_ref' => 'operator-approval:BIG5-ZH6-HUB-INVALID-1',
+        ], true);
+        $this->createMediaAsset('big5.model-hub.zh-cn.hero-og.invalid-approval', [
+            'locale' => 'zh-CN',
+            'content_identity' => BigFiveZh6PromotionReadiness::HUB_MEDIA_CONTENT_IDENTITY,
+            'rights' => 'FermatMind-owned original artwork',
+            'license' => 'internal-original-v1',
+            'provenance' => 'Media Library original upload BIG5-ZH6-HUB-INVALID-2',
+            'operator_approval_ref' => 123,
+        ], true);
         $inspection = app(BigFiveZh6PromotionReadiness::class)->inspectDatabase();
         $this->assertSame(0, $inspection['media_inventory']['eligible_candidate_count']);
         $this->assertSame('blocked_zero_eligible_candidates', $inspection['media_inventory']['selection_status']);

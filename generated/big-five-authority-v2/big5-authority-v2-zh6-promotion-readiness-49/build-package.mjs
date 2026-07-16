@@ -137,7 +137,7 @@ const eligibleMedia = observedEligibleMedia.map((candidate, index) => {
   invariant(candidate.status === 'published_public_synced_cdn_verified', `eligible media ${index} authority status mismatch`);
   invariant(Array.isArray(candidate.variant_keys) && requiredMediaVariantKeys.every((key) => candidate.variant_keys.includes(key)), `eligible media ${index} hero/og variants missing`);
   invariant(typeof candidate.alt === 'string' && candidate.alt.length > 0, `eligible media ${index} zh-CN alt missing`);
-  invariant(['rights', 'license', 'provenance', 'operator_approval_ref'].every((key) => typeof candidate[key] === 'string' && candidate[key].length > 0), `eligible media ${index} rights/provenance approval missing`);
+  invariant(['rights', 'license', 'provenance', 'operator_approval_ref'].every((key) => typeof candidate[key] === 'string' && candidate[key].trim().length > 0), `eligible media ${index} rights/provenance approval missing`);
   invariant(candidate.public_urls && /^https:\/\/(assets|api)\.fermatmind\.com\//.test(candidate.public_urls.hero ?? '') && /^https:\/\/(assets|api)\.fermatmind\.com\//.test(candidate.public_urls.og ?? ''), `eligible media ${index} public URLs invalid`);
   const material = {
     media_asset_id: candidate.media_asset_id,

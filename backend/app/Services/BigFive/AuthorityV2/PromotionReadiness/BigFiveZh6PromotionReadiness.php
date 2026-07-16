@@ -303,7 +303,8 @@ final class BigFiveZh6PromotionReadiness
             return null;
         }
         foreach (['rights', 'license', 'provenance', 'operator_approval_ref'] as $field) {
-            if (trim((string) ($payload[$field] ?? '')) === '') {
+            $value = $payload[$field] ?? null;
+            if (! is_string($value) || trim($value) === '') {
                 return null;
             }
         }
@@ -491,9 +492,15 @@ final class BigFiveZh6PromotionReadiness
             'fail_closed_on_zero_or_multiple',
             'observation_sha256',
         ]));
+        $mediaAuthoritySha256 = $package['media_authority']['media_authority_sha256'] ?? null;
+        $expectedMediaAuthorityReference = $eligibleMediaCount === 1 && is_string($mediaAuthoritySha256)
+            ? 'media_authority:'.$mediaAuthoritySha256
+            : null;
         if (! is_int($eligibleMediaCount)
-            || ! hash_equals((string) ($package['media_authority']['media_authority_sha256'] ?? ''), $this->canonicalSha256($mediaMaterial))
+            || ! is_string($mediaAuthoritySha256)
+            || ! hash_equals($mediaAuthoritySha256, $this->canonicalSha256($mediaMaterial))
             || ($eligibleMediaCount === 1) !== ($mediaApproved === true)
+            || ($package['permissions']['media']['authority_reference'] ?? null) !== $expectedMediaAuthorityReference
             || $expectedWorkingReady !== ($workingReady === true)
             || ($package['status'] ?? null) !== $expectedStatus
             || ($package['counts']['eligible_hub_media_candidates'] ?? null) !== $eligibleMediaCount
@@ -756,7 +763,8 @@ final class BigFiveZh6PromotionReadiness
             throw new RuntimeException('ZH6 observed media candidate identity is invalid.');
         }
         foreach (['rights', 'license', 'provenance', 'operator_approval_ref'] as $field) {
-            if (trim((string) ($candidate[$field] ?? '')) === '') {
+            $value = $candidate[$field] ?? null;
+            if (! is_string($value) || trim($value) === '') {
                 throw new RuntimeException('ZH6 observed media candidate authority is incomplete.');
             }
         }

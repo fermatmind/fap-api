@@ -118,7 +118,10 @@ if (eligibleCount === 1) {
   const selectedCandidateSha256 = selectedCandidate.candidate_sha256;
   delete selectedCandidate.candidate_sha256;
   invariant(selectedCandidateSha256 === canonicalSha256(selectedCandidate), 'unique media candidate SHA mismatch');
-  invariant(packageJson.permissions.media.approved === true && typeof packageJson.permissions.media.authority_reference === 'string', 'unique media authority permission missing');
+  invariant(['rights', 'license', 'provenance', 'operator_approval_ref'].every((key) => typeof selectedCandidate[key] === 'string' && selectedCandidate[key].trim().length > 0), 'unique media authority text is invalid');
+  invariant(packageJson.permissions.media.approved === true
+    && packageJson.permissions.media.authority_reference === `media_authority:${packageJson.media_authority.media_authority_sha256}`,
+  'unique media authority permission does not match locked hash');
 } else {
   invariant(packageJson.counts.selected_hub_media_assets === 0 && packageJson.media_authority.selected_candidate === null, 'ambiguous media must not be selected');
   invariant(packageJson.permissions.media.approved === false && packageJson.permissions.media.authority_reference === null, 'ambiguous media permission must remain unapproved');
