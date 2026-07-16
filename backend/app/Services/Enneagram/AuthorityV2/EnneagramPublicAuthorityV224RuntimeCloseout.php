@@ -130,6 +130,12 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             throw new RuntimeException('Separate exact-SHA production authorization phrase mismatch.');
         }
 
+        if (is_array(data_get($authorizationPacket, 'pre_readback.url_sets'))) {
+            $this->executionProgress['failure_stage'] = 'pre_execution_url_set_verification';
+            $preExecution = $this->readback->snapshot($releaseReport, $frontendBaseUrl);
+            $this->assertAuthorizedUrlSetsUnchanged($authorizationPacket, $preExecution, 'before runtime writes');
+        }
+
         $this->executionProgress['failure_stage'] = 'rollback_token_reservation';
         $this->reserveRollbackTokenOutput($rollbackTokenOutput);
         $this->executionProgress['failure_stage'] = 'working_import';
@@ -211,14 +217,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             !== (string) $authorizationPacket['stable_identity_discoverability_fingerprint']) {
             throw new RuntimeException('Stable identity/discoverability fingerprint changed after promotion.');
         }
-        $preUrlSets = data_get($authorizationPacket, 'pre_readback.url_sets');
-        if (is_array($preUrlSets)) {
-            foreach (['sitemap', 'llms', 'llms_full'] as $surface) {
-                if (data_get($preUrlSets, $surface.'.url_set_sha256') !== data_get($post, 'url_sets.'.$surface.'.url_set_sha256')) {
-                    throw new RuntimeException($surface.' URL set changed during runtime closeout.');
-                }
-            }
-        }
+        $this->assertAuthorizedUrlSetsUnchanged($authorizationPacket, $post, 'during runtime closeout');
 
         return [
             'schema_version' => 'enneagram_public_authority_v2_runtime_closeout.v1',
@@ -434,6 +433,20 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             'public_projection_fingerprint',
             'stable_identity_discoverability_fingerprint',
         ]));
+    }
+
+    /** @param array<string,mixed> $authorizationPacket @param array<string,mixed> $snapshot */
+    private function assertAuthorizedUrlSetsUnchanged(array $authorizationPacket, array $snapshot, string $phase): void
+    {
+        $preUrlSets = data_get($authorizationPacket, 'pre_readback.url_sets');
+        if (! is_array($preUrlSets)) {
+            return;
+        }
+        foreach (['sitemap', 'llms', 'llms_full'] as $surface) {
+            if (data_get($preUrlSets, $surface.'.url_set_sha256') !== data_get($snapshot, 'url_sets.'.$surface.'.url_set_sha256')) {
+                throw new RuntimeException($surface.' URL set changed '.$phase.'.');
+            }
+        }
     }
 
     private function fingerprint(mixed $value): string

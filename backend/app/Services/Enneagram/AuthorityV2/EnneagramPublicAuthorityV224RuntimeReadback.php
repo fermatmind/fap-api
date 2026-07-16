@@ -123,7 +123,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         array $sensitiveValues,
     ): array {
         $apiUrl = $this->apiUrl($apiBaseUrl, $target);
-        $api = Http::acceptJson()->timeout(20)->get($apiUrl);
+        $api = Http::acceptJson()->withoutRedirecting()->timeout(20)->get($apiUrl);
         $issues = [];
         if (! $api->successful()) {
             $issues[] = 'api_http_'.(string) $api->status();
@@ -169,7 +169,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             $this->assertPublishedRevision($target, $packageSha256, $issues);
         }
 
-        $htmlResponse = Http::accept('text/html')->timeout(20)->get(
+        $htmlResponse = Http::accept('text/html')->withoutRedirecting()->timeout(20)->get(
             rtrim($frontendBaseUrl, '/').(string) $target['path'],
         );
         $html = $htmlResponse->body();
@@ -405,7 +405,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         }
         $sets = [];
         foreach (['sitemap' => '/sitemap.xml', 'llms' => '/llms.txt', 'llms_full' => '/llms-full.txt'] as $name => $path) {
-            $response = Http::timeout(30)->get(rtrim($frontendBaseUrl, '/').$path);
+            $response = Http::withoutRedirecting()->timeout(30)->get(rtrim($frontendBaseUrl, '/').$path);
             if (! $response->successful()) {
                 throw new RuntimeException($name.' URL-set readback failed with HTTP '.$response->status().'.');
             }

@@ -65,11 +65,11 @@ final class EnneagramPublicAuthorityV224CacheCoordinator
         $targets = $this->targets($releaseReport);
         foreach ($targets as $target) {
             $url = $this->apiUrl($apiBaseUrl, $target);
-            $warm = Http::acceptJson()->timeout(20)->get($url);
+            $warm = Http::acceptJson()->withoutRedirecting()->timeout(20)->get($url);
             if (! $warm->successful() || ($warm->json('ok') ?? false) !== true) {
                 throw new RuntimeException('Backend cache warm failed: '.(string) $target['asset_key'].'.');
             }
-            $fresh = Http::acceptJson()->timeout(20)->get($url);
+            $fresh = Http::acceptJson()->withoutRedirecting()->timeout(20)->get($url);
             if (! $fresh->successful()
                 || ($fresh->json('ok') ?? false) !== true
                 || strtolower((string) $fresh->header('X-Fermat-Public-Read-Cache')) !== 'fresh') {
@@ -118,6 +118,7 @@ final class EnneagramPublicAuthorityV224CacheCoordinator
         $nonce = bin2hex(random_bytes(24));
         $signature = hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$body, $secret);
         $response = Http::acceptJson()
+            ->withoutRedirecting()
             ->timeout(30)
             ->withHeaders([
                 'X-FM-Content-Release-Timestamp' => $timestamp,

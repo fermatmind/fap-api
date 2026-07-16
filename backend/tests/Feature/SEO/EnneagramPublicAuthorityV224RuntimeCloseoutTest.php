@@ -440,6 +440,103 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
     }
 
+    public function test_runtime_readback_rejects_api_redirect(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, redirectSurface: 'api');
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+            );
+            $this->fail('Expected API redirect to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_http_302', $exception->getMessage());
+        }
+    }
+
+    public function test_discoverability_snapshot_rejects_sitemap_redirect(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, redirectSurface: 'sitemap');
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot($report, 'https://frontend.test');
+            $this->fail('Expected discoverability redirect to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('sitemap URL-set readback failed with HTTP 302', $exception->getMessage());
+        }
+    }
+
+    public function test_execute_rejects_full_url_set_drift_before_any_runtime_write(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        $discoverabilityState = (object) ['additional_url' => null];
+        $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
+        $preReadback = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'all',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+        );
+        $closeout = $this->closeout();
+        $preflight = $closeout->preflight(
+            $report,
+            $this->fingerprintRaw($report),
+            $register,
+            $this->fingerprintRaw($register),
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
+            $preReadback,
+            $this->fingerprintRaw($preReadback),
+        );
+        $discoverabilityState->additional_url = 'https://frontend.test/en/articles/runtime-drift';
+        $rollbackPath = '/tmp/enneagram-v224-url-set-drift-'.bin2hex(random_bytes(8)).'.token';
+
+        try {
+            $closeout->execute(
+                $report,
+                $this->fingerprintRaw($report),
+                $register,
+                $this->fingerprintRaw($register),
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+                $preflight['authorization_packet'],
+                (string) $preflight['authorization_packet_sha256'],
+                (string) $preflight['authorization_packet']['authorization_phrase'],
+                $rollbackPath,
+                'https://api.test',
+                'https://frontend.test',
+                'https://frontend.test/api/content-release/revalidate',
+                self::REVALIDATION_SECRET,
+                preReadback: $preReadback,
+                preReadbackSha256: $this->fingerprintRaw($preReadback),
+            );
+            $this->fail('Expected full discoverability URL-set drift to fail before writes.');
+        } catch (\Throwable $throwable) {
+            $result = $closeout->failureResult($throwable);
+        }
+
+        $this->assertSame('FAIL_CLOSED_NO_WRITES', $result['status']);
+        $this->assertSame('pre_execution_url_set_verification', $result['failure_stage']);
+        $this->assertFalse($result['writes_committed']);
+        $this->assertFileDoesNotExist($rollbackPath);
+        $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+        $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+    }
+
     public function test_console_preflight_generates_only_redacted_operator_artifacts(): void
     {
         $this->seedPublishedEstate();
@@ -895,15 +992,30 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $canonicalUrlOverride = null,
         ?string $hreflangUrlOverride = null,
         ?string $privateReviewerLeak = null,
+        ?string $redirectSurface = null,
+        ?object $discoverabilityState = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
         if ($discoverabilityUrlOverride !== null) {
             $urls[0] = $discoverabilityUrlOverride;
         }
-        $urlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($canonicalUrlOverride, $hreflangUrlOverride, $privateReviewerLeak, $rejectRevalidation, $urlText): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        $baseUrlText = implode("\n", $urls);
+        Http::fake(function (Request $request) use ($baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $privateReviewerLeak, $redirectSurface, $rejectRevalidation): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
+            $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
+                ? trim($discoverabilityState->additional_url)
+                : '';
+            $urlText = $additionalUrl === '' ? $baseUrlText : $baseUrlText."\n".$additionalUrl;
+            if (($redirectSurface === 'api' && str_starts_with($url, 'https://api.test/api/v0.5/personality-content-assets?'))
+                || ($redirectSurface === 'html' && str_starts_with($url, 'https://frontend.test/') && ! in_array($url, [
+                    'https://frontend.test/sitemap.xml',
+                    'https://frontend.test/llms.txt',
+                    'https://frontend.test/llms-full.txt',
+                ], true))
+                || ($redirectSurface === 'sitemap' && $url === 'https://frontend.test/sitemap.xml')) {
+                return Http::response('', 302, ['Location' => 'https://staging-mirror.test/redirected']);
+            }
             if ($url === 'https://frontend.test/api/content-release/revalidate') {
                 if ($rejectRevalidation) {
                     return Http::response(['ok' => false], 503);
