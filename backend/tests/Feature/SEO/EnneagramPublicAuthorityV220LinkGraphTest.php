@@ -12,6 +12,21 @@ final class EnneagramPublicAuthorityV220LinkGraphTest extends TestCase
 
     private const LEDGER = 'docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-source-ledger-07/page-claim-maps.json';
 
+    private const EXECUTION_BOUNDARY_KEYS = [
+        'production_write_executed',
+        'database_mutated',
+        'cms_mutated',
+        'api_runtime_changed',
+        'frontend_asset_or_content_created',
+        'url_created',
+        'published',
+        'indexability_changed',
+        'sitemap_changed',
+        'llms_changed',
+        'search_submitted',
+        'deployed',
+    ];
+
     public function test_exact_graph_records_match_the_frozen_route_inventory(): void
     {
         $graph = $this->readJson(self::PACKAGE_DIR.'/link-graph.json');
@@ -171,7 +186,7 @@ final class EnneagramPublicAuthorityV220LinkGraphTest extends TestCase
                 $this->assertFalse($record['release_truth'][$field], "{$record['graph_id']}.{$field}");
             }
         }
-        $this->assertSame([false], array_values(array_unique($graph['execution_boundaries'])));
+        $this->assertExecutionBoundariesAreExactAndFalse($graph['execution_boundaries']);
     }
 
     public function test_qa_report_proves_all_hard_gates_without_release_mutation(): void
@@ -187,7 +202,7 @@ final class EnneagramPublicAuthorityV220LinkGraphTest extends TestCase
         foreach ($qa['checks'] as $field => $check) {
             $this->assertTrue($check, $field);
         }
-        $this->assertSame([false], array_values(array_unique($qa['execution_boundaries'])));
+        $this->assertExecutionBoundariesAreExactAndFalse($qa['execution_boundaries']);
     }
 
     public function test_mutation_oracle_rejects_dead_cross_locale_canonical_and_hreflang_drift(): void
@@ -210,6 +225,15 @@ final class EnneagramPublicAuthorityV220LinkGraphTest extends TestCase
         $hreflang = $graph;
         $hreflang['graph_records'][0]['hreflang']['x-default'] = '/zh/personality/enneagram';
         $this->assertContains('hreflang_mismatch', $this->graphErrors($hreflang));
+    }
+
+    /** @param array<string, mixed> $boundaries */
+    private function assertExecutionBoundariesAreExactAndFalse(array $boundaries): void
+    {
+        $this->assertSame(self::EXECUTION_BOUNDARY_KEYS, array_keys($boundaries));
+        foreach ($boundaries as $key => $value) {
+            $this->assertSame(false, $value, $key);
+        }
     }
 
     /** @param array<string, mixed> $graph

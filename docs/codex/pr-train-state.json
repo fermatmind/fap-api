@@ -95312,7 +95312,7 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-OG-19"
     ],
-    "status": "github_checks_pending",
+    "status": "review_fix_local_verified",
     "commit_sha": "4bb24d56c556a6f6f2c50f09e386d5ca3db012ca",
     "commit_sha_role": "latest_locally_verified_substantive_head_before_ledger_only_bookkeeping",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3134",
@@ -95327,7 +95327,7 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "After formatting, the PR20 focused suite passes 8 tests / 9594 assertions. Pint, PHP syntax, YAML, all changed JSON, diff check, source-lineage hashes, forbidden URL/route scan, and exact six-file allowlist pass."
+        "evidence": "After formatting and review hardening, the PR20 focused suite passes 8 tests / 9618 assertions. Pint, PHP syntax, YAML, all changed JSON, diff check, source-lineage hashes, forbidden URL/route scan, and exact six-file allowlist pass."
       },
       "graph_qa": {
         "status": "pass",
@@ -95336,6 +95336,10 @@
       "codex_skeptical_review": {
         "status": "pass",
         "evidence": "Independent readback rederived 116/58/58 route counts, 534 unique link tuples, 348 unique FAQ intent ids, 116 unique canonicals, exact reciprocal hreflang parity, current SHA256 source lineage, bounded 1/3/9/18/27 identity taxonomy, and twelve false execution boundaries. No hardcoded web URL, frontend/public asset path, private attempt/report/order route, unsupported entity family, or new route was found."
+      },
+      "automated_review_fix": {
+        "status": "pass",
+        "evidence": "Accepted discussion_r3593029471: both graph and QA tests now require the exact twelve-key execution-boundary set and assert strict false for every value, so missing, null, empty, reordered, or widened boundaries fail closed. Focused 8/9618, Pint, PHP syntax, YAML/JSON, and diff checks pass locally."
       }
     },
     "scope_validation": {
@@ -95379,9 +95383,14 @@
         "at": "2026-07-16T06:04:26Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact six-file branch and opened the single authorized fap-api PR #3134 with the exact manifest title and required what, why, validation, deferred, repository-rule-impact, and safety sections. GitHub reports MERGEABLE and required checks are in progress."
+      },
+      {
+        "at": "2026-07-16T06:12:18Z",
+        "status": "review_fix_local_verified",
+        "note": "All nine checks passed on the pre-fix head, then exact-head automated review found one valid P2: array_unique could let missing or null execution boundaries collapse into false. Graph and QA contracts now require the exact twelve-key boundary set and strict false for each value. Focused 8/9618, Pint, syntax, YAML/JSON, and diff validation pass; fresh GitHub checks and resolution of discussion_r3593029471 remain required."
       }
     ],
-    "updated_at": "2026-07-16T06:04:26Z"
+    "updated_at": "2026-07-16T06:12:18Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
