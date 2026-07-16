@@ -4,7 +4,7 @@ PR49 binds the exact PR48 zh-CN Hub plus five-domain snapshot to repository and 
 
 ## Accepted authority
 
-- GitHub OWNER `fermatmind` supplied the exact PR48 three-SHA approval in PR3139 comment `4990228962` at `2026-07-16T09:24:18Z`; the package does not treat the earlier checked-in confirmation timestamp as independent human evidence.
+- GitHub OWNER `fermatmind` supplied the exact PR48 three-SHA approval in PR3139 comment `4990228962` at `2026-07-16T09:24:18Z`; source, PR number, comment id, author login, OWNER association, timestamp and phrase hash are all compared with the immutable authority record. The package does not treat the earlier checked-in confirmation timestamp as independent human evidence.
 - The narrow `solo_operator` record binds `admin_user:1` as both author and reviewer for exactly six immutable snapshots. `explicit_self_review=true`; global role separation remains unchanged.
 - Operational reviewer approval additionally requires TOTP enrollment. The read-only production observation records `totp_enrolled=false`, so reviewer permission is fail-closed and a future unique media candidate would remain `HOLD_FAIL_CLOSED_REVIEWER_TOTP`. PR49 performs no administrator or MFA write.
 - All six assets retain exactly three visible sources and the PR48 source-permission boundary: public links, brief factual description and original paraphrase only.

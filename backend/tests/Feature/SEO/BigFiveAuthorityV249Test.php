@@ -285,6 +285,26 @@ final class BigFiveAuthorityV249Test extends TestCase
         }
     }
 
+    public function test_readiness_service_rejects_rehashed_external_human_authority_drift(): void
+    {
+        $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
+        $package['editorial_authority']['review_record']['external_human_authority']['author_login'] = 'unrelated-reviewer';
+        $reviewSha256 = $this->canonicalSha256($package['editorial_authority']['review_record']);
+        $package['editorial_authority']['review_record_sha256'] = $reviewSha256;
+        $package['release_lock_material']['review_record_sha256'] = $reviewSha256;
+        $package['release_snapshot_sha256'] = $this->canonicalSha256($package['release_lock_material']);
+        $temporary = $this->writeTemporaryRehashedPackage($package, 'rewritten-human-authority-package');
+
+        try {
+            app(BigFiveZh6PromotionReadiness::class)->packageOnly($temporary['path']);
+            $this->fail('Expected rehashed external human authority drift to fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('real-human OWNER authority binding is invalid', $exception->getMessage());
+        } finally {
+            $this->cleanupTemporaryPackage($temporary['directory']);
+        }
+    }
+
     public function test_readiness_service_requires_the_complete_zero_mutation_action_evidence(): void
     {
         $package = $this->readJson(self::PACKAGE_DIR.'/promotion-readiness-package.json');
