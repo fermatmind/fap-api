@@ -92984,8 +92984,8 @@
     "base": "main",
     "branch": "codex/big5-authority-v2-zh6-promotion-readiness-49",
     "depends_on": ["BIG5-AUTHORITY-V2-ZH6-SNAPSHOT-48"],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "committed_pending_push",
+    "commit_sha": "8656edbe976d3d0d1660720480bfe94083df0800",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -93016,7 +93016,8 @@
     "transitions": [
       {"at": "2026-07-16T09:55:00Z", "from": "pending", "to": "in_progress", "note": "Started PR49 from current origin/main after verifying PR48 merge containment and cleanup. Scope is read-only promotion readiness; no working revision, media upload, production write or promotion is authorized."},
       {"at": "2026-07-16T10:05:30Z", "from": "in_progress", "to": "in_progress", "note": "Production read-only authority scan found active admin_user:1 and exact six runtime rows, but zero authority-complete Hub hero/OG assets. PR49 therefore proceeds as a mergeable fail-closed HOLD contract while Task50 remains blocked; no production mutation occurred."},
-      {"at": "2026-07-16T10:29:54Z", "from": "in_progress", "to": "local_checks_passed", "note": "All PR49 manifest checks pass on the exact 15-file scope. The Laravel gate now locks the exact reviewed package, confirmation, OWNER authority and production observation hashes; focused 9/140, related 61/8615 and the sole complete ci_verify_mbti gate pass. The package remains HOLD_FAIL_CLOSED_MEDIA_AUTHORITY and Task50 remains blocked; no controlled write or runtime mutation occurred."}
+      {"at": "2026-07-16T10:29:54Z", "from": "in_progress", "to": "local_checks_passed", "note": "All PR49 manifest checks pass on the exact 15-file scope. The Laravel gate now locks the exact reviewed package, confirmation, OWNER authority and production observation hashes; focused 9/140, related 61/8615 and the sole complete ci_verify_mbti gate pass. The package remains HOLD_FAIL_CLOSED_MEDIA_AUTHORITY and Task50 remains blocked; no controlled write or runtime mutation occurred."},
+      {"at": "2026-07-16T10:37:54Z", "from": "local_checks_passed", "to": "committed_pending_push", "note": "Committed the exact 15-file PR49 implementation and local-validation ledger as 8656edbe976d3d0d1660720480bfe94083df0800 after explicit staging and cached scope validation. The package remains fail-closed HOLD and no production/CMS/database/media/pointer/promotion/discoverability/cache/Search/deploy mutation occurred."}
     ]
   },
   "BIG5-AUTHORITY-V2-ZH6-WORKING-REVISION-50": {
