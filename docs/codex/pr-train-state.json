@@ -96787,11 +96787,11 @@
       },
       "github": {
         "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on b89a376fd7705544530805c24f9d3cb9d7a47640. Its exact-head review confirmed the nested contract repair, then found an exception-order documentation gap plus the expected stale checked-head ledger evidence; the scoped documentation repair requires a new full check run before merge."
+        "evidence": "All nine required and security checks passed on eeba4a5ca00f52520f0d8ad6b1cbe9dada5205ef. Its exact-head review confirmed the exception-order documentation repair, then found a shallow-checkout diff-base gap plus the expected stale checked-head ledger evidence; the scoped architecture repair requires a new full check run before merge."
       },
       "codex_review": {
         "status": "exact_head_findings_repaired_locally",
-        "evidence": "Eighteen valid P2 findings were repaired. The latest exact-head review confirmed the nested solo_owner contract repair and found that the protocol omitted the fingerprint builder's deterministic exception-list sort. The protocol now requires sorting top-level exceptions by target_identity before recursive object-key canonicalization and evidence hashing."
+        "evidence": "Nineteen valid P2 findings were repaired. The latest exact-head review confirmed exception-order documentation and found that the architecture gate assumed origin/main existed in shallow CI clones. Diff-base resolution now supports an explicit override, available remote base, exact GitHub event base SHA with a narrow fetch fallback, and HEAD parent; all scans compare the resolved base tree directly with HEAD."
       }
     },
     "scope_validation": {
@@ -96905,8 +96905,13 @@
         "at": "2026-07-17T18:08:00Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on b89a376fd7705544530805c24f9d3cb9d7a47640. Its exact-head Codex review confirmed the nested contract repair and found that the protocol's generic list-order statement omitted the fingerprint builder's required exception normalization. The protocol now explicitly sorts top-level exceptions by target_identity before canonical encoding and evidence hashing; JSON/YAML and diff validation remain required on the new head."
+      },
+      {
+        "at": "2026-07-17T18:19:38Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on eeba4a5ca00f52520f0d8ad6b1cbe9dada5205ef. Its exact-head Codex review confirmed the exception-order protocol repair and found that the architecture scanner hard-coded origin/main, which is not guaranteed in default shallow GitHub checkouts. Diff-base resolution now prefers an explicit override or available remote base, otherwise reads and narrowly fetches the exact GitHub pull-request base SHA, then falls back to HEAD parent; direct base-to-HEAD scans avoid a second shallow merge-base assumption. Focused architecture validation passed with 6 tests and 255 assertions plus PHP lint, Pint, and diff checks."
       }
     ],
-    "updated_at": "2026-07-17T18:08:00Z"
+    "updated_at": "2026-07-17T18:19:38Z"
   }
 }

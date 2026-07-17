@@ -118,9 +118,9 @@ final class ReviewPolicyRegistryTest extends TestCase
     public function test_new_or_modified_manual_review_gates_declare_a_registered_surface(): void
     {
         $repoRoot = dirname(__DIR__, 3);
-        $baseRef = $this->mergeBase($repoRoot);
+        $baseRef = $this->diffBaseRef($repoRoot);
         $command = sprintf(
-            'git -C %s diff --name-only --diff-filter=ACMR %s...HEAD -- backend/app backend/database/migrations',
+            'git -C %s diff --name-only --diff-filter=ACMR %s HEAD -- backend/app backend/database/migrations',
             escapeshellarg($repoRoot),
             escapeshellarg($baseRef),
         );
@@ -128,7 +128,7 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertSame(0, $exitCode, 'Unable to inspect branch diff for review gates.');
 
         $addedCommand = sprintf(
-            'git -C %s diff --name-only --diff-filter=A %s...HEAD -- backend/app backend/database/migrations',
+            'git -C %s diff --name-only --diff-filter=A %s HEAD -- backend/app backend/database/migrations',
             escapeshellarg($repoRoot),
             escapeshellarg($baseRef),
         );
@@ -145,7 +145,7 @@ final class ReviewPolicyRegistryTest extends TestCase
                 continue;
             }
             $diffCommand = sprintf(
-                'git -C %s diff --unified=0 %s...HEAD -- %s',
+                'git -C %s diff --unified=0 %s HEAD -- %s',
                 escapeshellarg($repoRoot),
                 escapeshellarg($baseRef),
                 escapeshellarg($file),
@@ -203,15 +203,93 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertFalse($this->containsReviewGateMarker('+    $record->title = $title;'));
     }
 
-    private function mergeBase(string $repoRoot): string
+    private function diffBaseRef(string $repoRoot): string
     {
-        $command = sprintf('git -C %s merge-base HEAD origin/main', escapeshellarg($repoRoot));
-        exec($command, $output, $exitCode);
-        $this->assertSame(0, $exitCode, 'Unable to resolve merge base with origin/main.');
-        $baseRef = trim((string) ($output[0] ?? ''));
-        $this->assertNotSame('', $baseRef, 'Merge base with origin/main is empty.');
+        $override = trim((string) getenv('REVIEW_POLICY_BASE_REF'));
+        if ($override !== '') {
+            $resolved = $this->resolveCommit($repoRoot, $override);
+            $this->assertNotNull($resolved, 'REVIEW_POLICY_BASE_REF does not resolve to a commit.');
 
-        return $baseRef;
+            return $this->resolveMergeBase($repoRoot, $resolved) ?? $resolved;
+        }
+
+        $githubBaseRef = trim((string) getenv('GITHUB_BASE_REF'));
+        foreach (array_filter([
+            $githubBaseRef === '' ? null : 'origin/'.$githubBaseRef,
+            'origin/main',
+        ]) as $candidate) {
+            $resolved = $this->resolveCommit($repoRoot, $candidate);
+            if ($resolved !== null) {
+                $mergeBase = $this->resolveMergeBase($repoRoot, $resolved);
+                if ($mergeBase !== null) {
+                    return $mergeBase;
+                }
+            }
+        }
+
+        $githubBaseSha = $this->githubEventBaseSha();
+        if ($githubBaseSha !== null) {
+            if ($this->resolveCommit($repoRoot, $githubBaseSha) === null) {
+                $fetchCommand = sprintf(
+                    'git -C %s fetch --no-tags --depth=1 origin %s',
+                    escapeshellarg($repoRoot),
+                    escapeshellarg($githubBaseSha),
+                );
+                $fetchOutput = [];
+                $fetchExitCode = 0;
+                exec($fetchCommand, $fetchOutput, $fetchExitCode);
+                $this->assertSame(0, $fetchExitCode, 'Unable to fetch the exact GitHub pull-request base commit.');
+            }
+            $resolved = $this->resolveCommit($repoRoot, $githubBaseSha);
+            $this->assertNotNull($resolved, 'GitHub pull-request base commit is unavailable after fetch.');
+
+            return $resolved;
+        }
+
+        $parent = $this->resolveCommit($repoRoot, 'HEAD^1');
+        $this->assertNotNull($parent, 'Unable to resolve a review-policy diff base from override, remote base, GitHub event, or HEAD parent.');
+
+        return $parent;
+    }
+
+    private function resolveCommit(string $repoRoot, string $ref): ?string
+    {
+        $command = sprintf(
+            'git -C %s rev-parse --verify --quiet %s',
+            escapeshellarg($repoRoot),
+            escapeshellarg($ref.'^{commit}'),
+        );
+        $output = [];
+        exec($command, $output, $exitCode);
+        $resolved = trim((string) ($output[0] ?? ''));
+
+        return $exitCode === 0 && preg_match('/^[0-9a-f]{40}$/', $resolved) === 1 ? $resolved : null;
+    }
+
+    private function resolveMergeBase(string $repoRoot, string $ref): ?string
+    {
+        $command = sprintf(
+            'git -C %s merge-base HEAD %s',
+            escapeshellarg($repoRoot),
+            escapeshellarg($ref),
+        );
+        $output = [];
+        exec($command, $output, $exitCode);
+        $resolved = trim((string) ($output[0] ?? ''));
+
+        return $exitCode === 0 && preg_match('/^[0-9a-f]{40}$/', $resolved) === 1 ? $resolved : null;
+    }
+
+    private function githubEventBaseSha(): ?string
+    {
+        $eventPath = trim((string) getenv('GITHUB_EVENT_PATH'));
+        if ($eventPath === '' || ! is_file($eventPath)) {
+            return null;
+        }
+        $event = json_decode((string) file_get_contents($eventPath), true);
+        $baseSha = is_array($event) ? ($event['pull_request']['base']['sha'] ?? null) : null;
+
+        return is_string($baseSha) && preg_match('/^[0-9a-f]{40}$/', $baseSha) === 1 ? $baseSha : null;
     }
 
     private function isReviewGovernanceFoundationPath(string $file): bool
