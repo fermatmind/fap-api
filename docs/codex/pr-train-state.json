@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "38583e9579778567d58dea7bdde1ba502f85c127",
+    "commit_sha": "3ef475ac2c88f1c487ba98333b781c4da090f7b8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 72 tests / 1048 assertions; V224 passes 47 tests / 516 assertions. The public API canonical object is now bound exactly to current canonical_json while canonical_path remains independently bound to the target route; wrong-origin, query, and fragment URL drift fail closed. Hreflang, standard image/CSS empty-media, private-route, and renderable-visible-content boundaries remain green alongside the complete authorized 116-page execute/readback, private-review, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage."
+        "evidence": "V205/V206/V223/V224 pass 73 tests / 1052 assertions; V224 passes 48 tests / 520 assertions. HTML readback now recognizes canonical as a rel token and requires exactly one canonical node with the exact frontend URL, so a correct first canonical cannot hide a later conflicting tag. The public API canonical object remains bound exactly to current canonical_json while canonical_path stays independently bound to the target route. Hreflang, standard image/CSS empty-media, private-route, and renderable-visible-content boundaries remain green alongside the complete authorized 116-page execute/readback, private-review, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 237 tests / 29054 assertions with exact DB/API canonical-object parity, DB/API hreflang parity, standard HTML/schema/inline/page-level CSS empty-media surfaces, admin/ops/tenant private-root rejection, CSS-hidden visible-content rejection, and a font-face-only non-media control enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 238 tests / 29058 assertions with exact single HTML canonical enforcement, DB/API canonical-object parity, DB/API hreflang parity, standard HTML/schema/inline/page-level CSS empty-media surfaces, admin/ops/tenant private-root rejection, CSS-hidden visible-content rejection, and a font-face-only non-media control enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head 51e984a1b09d3a17d10771dfffd89c5d3fc2f808 passed all nine required GitHub checks, then exact-head review raised one valid P2: the full public API canonical object was not compared with current backend authority. The gap is fixed and locally validated at code commit 38583e9579778567d58dea7bdde1ba502f85c127; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "evidence": "Exact head 1b7354babf4fdfbba5d5c4bde9554b0c9868f1a9 passed all nine required GitHub checks, then exact-head review raised one valid P2: HTML readback accepted multiple canonical tags when the first was correct. The gap is fixed and locally validated at code commit 3ef475ac2c88f1c487ba98333b781c4da090f7b8; a fresh complete GitHub check and exact-head review cycle is required before merge."
       }
     },
     "scope_validation": {
@@ -96508,9 +96508,14 @@
         "at": "2026-07-17T05:45:28Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head 51e984a1b09d3a17d10771dfffd89c5d3fc2f808 passed all nine checks, exact-head review found the full public API canonical object was not bound to current backend authority. Code commit 38583e9579778567d58dea7bdde1ba502f85c127 compares canonical exactly with canonical_json while retaining independent canonical_path validation, and proves wrong-origin, query, and fragment URL drift fail even when canonical_path matches. Final V224 47/516, focused 72/1048, cache/API 8/72, classifier 1/2, full Enneagram V2 237/29054, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred the complete Enneagram run until an existing repository-wide PHPUnit process exited. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T06:29:11Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 1b7354babf4fdfbba5d5c4bde9554b0c9868f1a9 passed all nine checks, exact-head review found that XPath string conversion accepted a correct first canonical while ignoring later conflicting tags. Code commit 3ef475ac2c88f1c487ba98333b781c4da090f7b8 recognizes canonical as a rel token, requires exactly one canonical node, and proves a correct first plus conflicting second tag fails closed. Final V224 48/520, focused 73/1052, cache/API 8/72, classifier 1/2, full Enneagram V2 238/29058, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred complete reruns until an existing repository-wide PHPUnit process exited; the interrupted wait did not alter the worktree and all final commands were rerun from a clear guard state. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T05:45:28Z"
+    "updated_at": "2026-07-17T06:29:11Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
