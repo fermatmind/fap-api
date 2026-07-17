@@ -164,6 +164,19 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertSame([], $missing, 'New or modified manual-review gates must declare @review-surface with a registered surface ID.');
     }
 
+    public function test_foundation_exemption_does_not_cover_future_review_governance_files(): void
+    {
+        $this->assertTrue($this->isReviewGovernanceFoundationPath(
+            'backend/app/Services/ReviewGovernance/ReviewAttestationValidator.php',
+        ));
+        $this->assertFalse($this->isReviewGovernanceFoundationPath(
+            'backend/app/Services/ReviewGovernance/FutureApprovalAdapter.php',
+        ));
+        $this->assertFalse($this->isReviewGovernanceFoundationPath(
+            'backend/app/DTO/ReviewGovernance/FutureReviewRequest.php',
+        ));
+    }
+
     private function mergeBase(string $repoRoot): string
     {
         $command = sprintf('git -C %s merge-base HEAD origin/main', escapeshellarg($repoRoot));
@@ -177,13 +190,22 @@ final class ReviewPolicyRegistryTest extends TestCase
 
     private function isReviewGovernanceFoundationPath(string $file): bool
     {
-        return $file === 'backend/app/Console/Commands/ReviewAttestationPreflight.php'
-            || str_starts_with($file, 'backend/app/DTO/ReviewGovernance/')
-            || in_array($file, [
-                'backend/app/Models/ReviewAttestation.php',
-                'backend/app/Models/ReviewAttestationTargetEvidence.php',
-                'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php',
-            ], true)
-            || str_starts_with($file, 'backend/app/Services/ReviewGovernance/');
+        return in_array($file, [
+            'backend/app/Console/Commands/ReviewAttestationPreflight.php',
+            'backend/app/DTO/ReviewGovernance/ReviewTarget.php',
+            'backend/app/DTO/ReviewGovernance/ReviewTargetSet.php',
+            'backend/app/DTO/ReviewGovernance/ValidatedReviewAttestation.php',
+            'backend/app/Models/ReviewAttestation.php',
+            'backend/app/Models/ReviewAttestationTargetEvidence.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationCanonicalizer.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationFactory.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationFingerprintBuilder.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationSchema.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationService.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationValidationException.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationValidator.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+            'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php',
+        ], true);
     }
 }
