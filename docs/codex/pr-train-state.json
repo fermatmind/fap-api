@@ -96757,8 +96757,8 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "review_fix_validated",
-    "commit_sha": "03afc3524d039da6dafd0ee19c6fa55c305b9ccd",
+    "status": "external_review_quota_hold",
+    "commit_sha": "f6b38296458018d09c335deb532d8768a56f618b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96786,21 +96786,21 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 28-file allowlist validation passed after the manifest explicitly added the required nested backend/AGENTS.md contract."
       },
       "github": {
-        "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on bb7bf065e20484c2b39da7f125aea45190abb7f6. Its exact-head review confirmed the shallow-checkout diff-base repair, then found a revision-status marker gap plus the expected stale checked-head ledger evidence; the scoped architecture repair requires a new full check run before merge."
+        "status": "passed",
+        "evidence": "All nine required and security checks passed on f6b38296458018d09c335deb532d8768a56f618b; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. These checks do not replace the missing exact-head Codex review."
       },
       "codex_review": {
-        "status": "exact_head_findings_repaired_locally",
-        "evidence": "Twenty valid P2 findings were repaired. The latest exact-head review confirmed shallow diff-base resolution and found that changed approval gates using revision_status or STATUS_APPROVED could evade the @review-surface scanner. Both tokens are now fail-closed review-gate markers with a focused regression assertion."
+        "status": "external_review_quota_hold",
+        "evidence": "The latest completed Codex review covers only bb7bf065e20484c2b39da7f125aea45190abb7f6. An explicit @codex review request for f6b38296458018d09c335deb532d8768a56f618b at 2026-07-17T18:37:05Z was rejected by chatgpt-codex-connector at 2026-07-17T18:37:14Z because code-review usage limits were exhausted. The old review is not treated as exact-head evidence, and merge remains prohibited."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
-    "failure_reason": null,
+    "failure_reason": "External Codex code-review quota exhausted: exact-head review is unavailable for f6b38296458018d09c335deb532d8768a56f618b. PR1 must remain unmerged and PR2 must not start until a completed exact-head review is independently verified and all current findings are resolved.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -96915,8 +96915,13 @@
         "at": "2026-07-17T18:28:35Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on bb7bf065e20484c2b39da7f125aea45190abb7f6. Its exact-head Codex review confirmed the shallow-checkout repair and found that changed gates using revision_status or STATUS_APPROVED were not classified as manual approval gates. Those tokens now trigger the changed-file @review-surface scanner with a regression assertion. An initial over-broad attempt also applied the tokens to the all-model inventory scan and exposed a future PR4 surface; that adjacent change was removed, and the scoped architecture suite passed with 6 tests and 256 assertions plus PHP lint, Pint, and diff checks."
+      },
+      {
+        "at": "2026-07-17T18:40:29Z",
+        "status": "external_review_quota_hold",
+        "note": "All nine GitHub checks passed on f6b38296458018d09c335deb532d8768a56f618b and the PR is CLEAN/MERGEABLE, but the latest completed Codex review still covers only bb7bf065e20484c2b39da7f125aea45190abb7f6. The connector rejected the exact-head review request because code-review usage limits were exhausted. The old review is not exact-head evidence; do not merge, resolve current threads as final, or start PR2 until the external review gate is restored."
       }
     ],
-    "updated_at": "2026-07-17T18:28:35Z"
+    "updated_at": "2026-07-17T18:40:29Z"
   }
 }
