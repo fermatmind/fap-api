@@ -247,11 +247,12 @@ PHP;
     #[Test]
     public function evidence_bound_retirement_migrations_have_non_destructive_down_methods(): void
     {
-        foreach ($this->migrationFiles() as $filePath) {
+        foreach ($this->evidenceByMigration() as $migration => $evidence) {
+            $filePath = base_path($migration);
+            $this->assertFileExists($filePath);
+
             $source = (string) file_get_contents($filePath);
-            if (! str_contains($source, 'RETIREMENT_EVIDENCE_ID')) {
-                continue;
-            }
+            $this->assertStringContainsString((string) $evidence['id'], $source);
 
             $upBody = $this->methodBody($source, 'up');
             $this->assertIsString($upBody, "Missing up() method in {$filePath}");
