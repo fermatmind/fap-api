@@ -612,7 +612,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
 
-        foreach (['og', 'twitter', 'schema', 'img'] as $standardMediaLeak) {
+        foreach (['og', 'twitter', 'schema', 'img', 'css-inline', 'css-style'] as $standardMediaLeak) {
             $this->fakeRuntimeHttp($report, standardMediaLeak: $standardMediaLeak);
             try {
                 app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
@@ -2236,9 +2236,12 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     'schema' => '<script type="application/ld+json">{"@type":"WebPage","image":"https://frontend.test/hardcoded-schema.png"}</script>',
                     default => '',
                 };
-                $standardMediaBody = $standardMediaLeak === 'img'
-                    ? '<img src="https://frontend.test/hardcoded-inline.png" alt="hardcoded inline">'
-                    : '';
+                $standardMediaBody = match ($standardMediaLeak) {
+                    'img' => '<img src="https://frontend.test/hardcoded-inline.png" alt="hardcoded inline">',
+                    'css-inline' => '<section style="background-image: URL(https://frontend.test/hardcoded-background.png)">hardcoded CSS image</section>',
+                    'css-style' => '<style>.authority-copy { background: url("https://frontend.test/hardcoded-style.png") }</style>',
+                    default => '',
+                };
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'

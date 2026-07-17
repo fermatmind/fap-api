@@ -537,6 +537,25 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             && ! in_array('html_authority_media_present', $issues, true)) {
             $issues[] = 'html_authority_media_present';
         }
+        if (! in_array('html_authority_media_present', $issues, true)) {
+            $cssMedia = $xpath->query(
+                '//main[@style] | //main//*[@style] | //main//style'
+                .' | //article[@style] | //article//*[@style] | //article//style'
+                .' | //*[@role="main"][@style] | //*[@role="main"]//*[@style] | //*[@role="main"]//style',
+            );
+            foreach ($cssMedia ?: [] as $node) {
+                if (! $node instanceof DOMElement) {
+                    continue;
+                }
+                $css = strtolower($node->tagName) === 'style'
+                    ? (string) $node->textContent
+                    : $node->getAttribute('style');
+                if (preg_match('/url\s*\(/i', $css) === 1) {
+                    $issues[] = 'html_authority_media_present';
+                    break;
+                }
+            }
+        }
         $title = trim((string) $xpath->evaluate('string(//title[1])'));
         $h1 = trim((string) $xpath->evaluate('string(//h1[1])'));
         $description = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="description"]/@content)'));
