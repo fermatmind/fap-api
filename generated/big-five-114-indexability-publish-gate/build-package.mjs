@@ -29,7 +29,7 @@ const assets = candidates.map((asset) => {
     ? new URL(rawCanonical).pathname
     : rawCanonical;
 
-  return ({
+  const promoted = {
   ...asset,
   canonical_path: canonicalPath,
   canonical: { ...(asset.canonical ?? {}), path: canonicalPath },
@@ -63,7 +63,11 @@ const assets = candidates.map((asset) => {
   ],
   source_package: 'big-five-93-indexability-promotion-2026-07-11',
   source_hash: sourceSha256,
-  });
+  };
+  delete promoted.media;
+  delete promoted.media_authority;
+
+  return promoted;
 });
 
 const promotion = {

@@ -13,6 +13,19 @@
       "operator_checklist_required": true,
       "production_execution_allowed_by_repository": false,
       "tested_by": "Tests\\Unit\\Migrations\\MigrationDestructiveRetirementEvidenceTest"
+    },
+    {
+      "id": "personality_public_content_media_retirement_2026_07_17",
+      "migration": "database/migrations/2026_07_17_000100_remove_media_from_personality_public_content_assets.php",
+      "operation": "drop_column",
+      "table": "media_json",
+      "repository_evidence_status": "retirement_evidence_recorded",
+      "production_archive_status": "not_asserted_by_repository",
+      "runbook": "docs/migrations/personality-public-content-media-retirement-runbook.md",
+      "rollback_strategy": "forward_only_restore_column_from_verified_backup_if_emergency_schema_recovery_is_required",
+      "operator_checklist_required": true,
+      "production_execution_allowed_by_repository": false,
+      "tested_by": "Tests\\Unit\\Migrations\\MigrationDestructiveRetirementEvidenceTest"
     }
   ]
 }

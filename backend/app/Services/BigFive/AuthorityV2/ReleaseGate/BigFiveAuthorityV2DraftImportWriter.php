@@ -420,7 +420,6 @@ final class BigFiveAuthorityV2DraftImportWriter
             'canonical_json' => ['path' => $route],
             'hreflang_json' => ['status' => (string) $asset['bilingual_identity']],
             'faq_json' => is_array($payload['faq'] ?? null) ? $payload['faq'] : [],
-            'media_json' => [],
             'schema_json' => [],
             'method_boundary_json' => $payload['method_boundary'] ?? $payload['claims'] ?? [],
             'evidence_notes_json' => $payload['visible_sources'] ?? $payload['source_mapping'] ?? [],

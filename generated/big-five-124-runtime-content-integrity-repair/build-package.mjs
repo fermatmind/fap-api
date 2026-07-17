@@ -9,11 +9,31 @@ const patchPath = "generated/big-five-124-runtime-content-integrity-repair/big_f
 const qaPath = "generated/big-five-124-runtime-content-integrity-repair/qa_report.json";
 const load = async (path) => JSON.parse(await readFile(path, "utf8"));
 const identity = (asset) => [asset.locale, asset.entity_type, asset.entity_key].join("|");
+const stripUnsupportedMedia = (value) => {
+  const asset = structuredClone(value);
+  delete asset.media;
+  delete asset.media_authority;
+  if (asset.authority && typeof asset.authority === "object") {
+    delete asset.authority.media;
+    delete asset.authority.media_authority;
+    delete asset.authority.media_deferred_by_operator;
+  }
+  if (asset.seo && typeof asset.seo === "object") {
+    for (const field of ["og_image_url", "twitter_image_url", "image", "image_url"]) delete asset.seo[field];
+    for (const field of ["og", "open_graph", "twitter", "twitter_card"]) {
+      if (asset.seo[field] && typeof asset.seo[field] === "object") {
+        delete asset.seo[field].image;
+        delete asset.seo[field].image_url;
+      }
+    }
+  }
+  return asset;
+};
 
 const [base, promotion, zhRepair] = await Promise.all([load(basePath), load(promotionPath), load(zhRepairPath)]);
-const rows = new Map(base.assets.map((asset) => [identity(asset), structuredClone(asset)]));
-for (const overlay of promotion.assets) rows.set(identity(overlay), structuredClone(overlay));
-for (const overlay of zhRepair.assets) rows.set(identity(overlay), structuredClone(overlay));
+const rows = new Map(base.assets.map((asset) => [identity(asset), stripUnsupportedMedia(asset)]));
+for (const overlay of promotion.assets) rows.set(identity(overlay), stripUnsupportedMedia(overlay));
+for (const overlay of zhRepair.assets) rows.set(identity(overlay), stripUnsupportedMedia(overlay));
 
 for (const locale of ["en", "zh-CN"]) {
   const key = `${locale}|hub|big-five`;

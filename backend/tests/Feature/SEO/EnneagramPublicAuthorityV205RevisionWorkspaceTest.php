@@ -99,7 +99,7 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceTest extends TestCase
         $this->assertSame($candidate['answer_first'], $typeFourSocial->snapshot_json['summary']);
         $this->assertSame($candidate['answer_first'], $typeFourSocial->snapshot_json['seo_json']['description']);
         $this->assertSame([], $typeFourSocial->snapshot_json['schema_json']);
-        $this->assertSame(['hero' => null, 'inline' => [], 'og' => null], $typeFourSocial->snapshot_json['media_json']);
+        $this->assertArrayNotHasKey('media_json', $typeFourSocial->snapshot_json);
         $this->assertSame($typeFourSocial->source_hash, $typeFourSocial->snapshot_json['source_hash']);
         $this->assertSame('pending_manual_review', $typeFourSocial->snapshot_json['review_state']);
         $this->assertNull($typeFourSocial->snapshot_json['authority_json']['reviewer']);

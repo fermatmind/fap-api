@@ -14,7 +14,6 @@ final readonly class PersonalityPublicContentAssetData
      * @param  array<string,mixed>  $canonical
      * @param  array<string,mixed>  $hreflang
      * @param  array<int,array<string,mixed>>  $faq
-     * @param  array<string,mixed>  $media
      * @param  array<string,mixed>  $schema
      * @param  array<string,mixed>  $methodBoundary
      * @param  array<int,array<string,mixed>>  $evidenceNotes
@@ -37,7 +36,6 @@ final readonly class PersonalityPublicContentAssetData
         public array $canonical,
         public array $hreflang,
         public array $faq,
-        public array $media,
         public array $schema,
         public array $methodBoundary,
         public array $evidenceNotes,
@@ -79,7 +77,6 @@ final readonly class PersonalityPublicContentAssetData
             canonical: is_array($payload['canonical'] ?? null) ? $payload['canonical'] : [],
             hreflang: is_array($payload['hreflang'] ?? null) ? $payload['hreflang'] : [],
             faq: array_values(is_array($payload['faq'] ?? null) ? $payload['faq'] : []),
-            media: is_array($payload['media'] ?? null) ? $payload['media'] : [],
             schema: is_array($payload['schema'] ?? null) ? $payload['schema'] : [],
             methodBoundary: is_array($payload['method_boundary'] ?? null) ? $payload['method_boundary'] : [],
             evidenceNotes: array_values(is_array($payload['evidence_notes'] ?? null) ? $payload['evidence_notes'] : []),
@@ -118,7 +115,6 @@ final readonly class PersonalityPublicContentAssetData
             'canonical_json' => $this->canonical,
             'hreflang_json' => $this->hreflang,
             'faq_json' => $this->faq,
-            'media_json' => $this->media,
             'schema_json' => $this->schema,
             'method_boundary_json' => $this->methodBoundary,
             'evidence_notes_json' => $this->evidenceNotes,

@@ -9,7 +9,6 @@
     "framework",
     "visible_evidence",
     "editorial_authority",
-    "media_authority",
     "schema_eligible"
   ],
   "properties": {
@@ -76,25 +75,6 @@
         "updated_at": {
           "type": ["string", "null"],
           "format": "date-time"
-        }
-      }
-    },
-    "media_authority": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["hero", "inline", "og"],
-      "properties": {
-        "hero": {
-          "$ref": "#/$defs/nullable_media"
-        },
-        "inline": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/media"
-          }
-        },
-        "og": {
-          "$ref": "#/$defs/nullable_media"
         }
       }
     },
@@ -209,35 +189,6 @@
       "oneOf": [
         {
           "$ref": "#/$defs/actor"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "media": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["media_asset_id", "url", "alt"],
-      "properties": {
-        "media_asset_id": {
-          "type": ["integer", "null"],
-          "minimum": 1
-        },
-        "url": {
-          "type": ["string", "null"],
-          "pattern": "^https://(?:api|assets)\\.fermatmind\\.com/"
-        },
-        "alt": {
-          "type": "string",
-          "minLength": 1
-        }
-      }
-    },
-    "nullable_media": {
-      "oneOf": [
-        {
-          "$ref": "#/$defs/media"
         },
         {
           "type": "null"

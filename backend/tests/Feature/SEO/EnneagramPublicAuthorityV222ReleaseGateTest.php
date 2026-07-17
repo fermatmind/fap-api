@@ -67,7 +67,7 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertCount(116, array_unique(array_column($report['pre_write_public_fingerprints'], 'pre_write_public_sha256')));
         $this->assertCount(116, $report['missing_human_reviews']);
         $this->assertSame([
-            'contract' => ['hero' => null, 'inline' => [], 'og' => null],
+            'contract' => 'media_fields_absent',
             'target_count' => 116,
             'valid_count' => 116,
             'non_empty_asset_keys' => [],
@@ -133,9 +133,16 @@ final class EnneagramPublicAuthorityV222ReleaseGateTest extends TestCase
         $this->assertContains('manual_review_invalid', array_column($invalid['errors'], 'code'));
     }
 
-    public function test_frozen_report_matches_the_read_only_gate_and_command_returns_hold(): void
+    public function test_frozen_report_remains_historical_while_current_gate_enforces_field_absence(): void
     {
-        $this->assertSame($this->report(), $this->readJson(self::PACKAGE_DIR.'/release-gate-report.json'));
+        $current = $this->report();
+        $historical = $this->readJson(self::PACKAGE_DIR.'/release-gate-report.json');
+
+        $this->assertSame(['hero' => null, 'inline' => [], 'og' => null], $historical['empty_media_authority']['contract']);
+        $this->assertSame('media_fields_absent', $current['empty_media_authority']['contract']);
+        $this->assertSame($historical['asset_records'], $current['asset_records']);
+        $this->assertSame($historical['source_hashes'], $current['source_hashes']);
+        $this->assertNotSame($historical['package_sha256'], $current['package_sha256']);
 
         $this->artisan('personality:enneagram-authority-v2-integrity-gate', ['--release-gate' => true, '--json' => true])
             ->expectsOutputToContain('"decision": "HOLD"')

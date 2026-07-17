@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
-use App\Support\PublicMediaUrlGuard;
+use App\Support\Personality\PersonalityPublicContentMediaPolicy;
 use App\Support\PublicSeoTitleNormalizer;
 use DateTimeImmutable;
 use Illuminate\Http\JsonResponse;
@@ -347,7 +347,7 @@ final class PersonalityPublicContentAssetController extends Controller
         $contentSections = is_array($asset->content_sections_json) ? $asset->content_sections_json : [];
         $canonical = is_array($asset->canonical_json) ? $asset->canonical_json : [];
         $schemaRuntimeEligible = $this->isSchemaRuntimeEligible($asset);
-        $seo = is_array($asset->seo_json) ? $asset->seo_json : [];
+        $seo = PersonalityPublicContentMediaPolicy::sanitizeSeo(is_array($asset->seo_json) ? $asset->seo_json : []);
         $title = (string) $asset->title;
         if ((string) $asset->framework === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
             $title = PublicSeoTitleNormalizer::withoutTrailingBrand($title);
@@ -373,7 +373,6 @@ final class PersonalityPublicContentAssetController extends Controller
             'canonical' => $canonical,
             'hreflang' => is_array($asset->hreflang_json) ? $asset->hreflang_json : [],
             'faq' => $this->canonicalFaq(is_array($asset->faq_json) ? $asset->faq_json : []),
-            'media' => is_array($asset->media_json) ? $asset->media_json : [],
             'schema' => $schemaRuntimeEligible && is_array($asset->schema_json) ? $asset->schema_json : [],
             'schema_runtime_eligible' => $schemaRuntimeEligible,
             'method_boundary' => is_array($asset->method_boundary_json) ? $asset->method_boundary_json : [],
@@ -455,9 +454,6 @@ final class PersonalityPublicContentAssetController extends Controller
                 'published_at' => $asset->published_at?->toAtomString(),
                 'updated_at' => $asset->updated_at?->toAtomString(),
             ],
-            'media_authority' => $this->canonicalMediaAuthority(
-                is_array($asset->media_json) ? $asset->media_json : []
-            ),
             'schema_eligible' => $schemaEligible,
         ];
     }
@@ -566,56 +562,6 @@ final class PersonalityPublicContentAssetController extends Controller
             'name' => $name,
             'organization' => $this->firstNonEmptyString($actor['organization'] ?? null),
             'role' => $this->firstNonEmptyString($actor['role'] ?? null),
-        ];
-    }
-
-    /**
-     * @param  array<string,mixed>  $media
-     * @return array{hero:array<string,mixed>|null,inline:list<array<string,mixed>>,og:array<string,mixed>|null}
-     */
-    private function canonicalMediaAuthority(array $media): array
-    {
-        $hero = $this->canonicalMediaRecord($media['hero'] ?? null);
-        if ($hero === null && (isset($media['image_url']) || isset($media['alt']))) {
-            $hero = $this->canonicalMediaRecord([
-                'url' => $media['image_url'] ?? null,
-                'alt' => $media['alt'] ?? null,
-            ]);
-        }
-
-        $inline = [];
-        foreach ((array) ($media['inline'] ?? []) as $item) {
-            $record = $this->canonicalMediaRecord($item);
-            if ($record !== null) {
-                $inline[] = $record;
-            }
-        }
-
-        return [
-            'hero' => $hero,
-            'inline' => $inline,
-            'og' => $this->canonicalMediaRecord($media['og'] ?? null),
-        ];
-    }
-
-    /** @return array<string,mixed>|null */
-    private function canonicalMediaRecord(mixed $record): ?array
-    {
-        if (! is_array($record)) {
-            return null;
-        }
-
-        $url = PublicMediaUrlGuard::sanitizeNullableUrl($record['url'] ?? null);
-        $mediaAssetId = max(0, (int) ($record['media_asset_id'] ?? 0));
-        $alt = $this->firstNonEmptyString($record['alt'] ?? null);
-        if (($url === null && $mediaAssetId === 0) || $alt === null) {
-            return null;
-        }
-
-        return [
-            'media_asset_id' => $mediaAssetId > 0 ? $mediaAssetId : null,
-            'url' => $url,
-            'alt' => $alt,
         ];
     }
 
@@ -963,7 +909,15 @@ final class PersonalityPublicContentAssetController extends Controller
         unset($payload['asset']);
 
         if (is_array($payload['personality_public_content_asset_v1'] ?? null)) {
-            unset($payload['personality_public_content_asset_v1']['content_sections']);
+            unset(
+                $payload['personality_public_content_asset_v1']['content_sections'],
+                $payload['personality_public_content_asset_v1']['media'],
+            );
+            if (is_array($payload['personality_public_content_asset_v1']['seo'] ?? null)) {
+                $payload['personality_public_content_asset_v1']['seo'] = PersonalityPublicContentMediaPolicy::sanitizeSeo(
+                    $payload['personality_public_content_asset_v1']['seo'],
+                );
+            }
         }
 
         if (is_array($payload['personality_public_content_asset_v2'] ?? null)) {
@@ -974,7 +928,6 @@ final class PersonalityPublicContentAssetController extends Controller
                     'compatible_v1_contract_version',
                     'visible_evidence',
                     'editorial_authority',
-                    'media_authority',
                     'schema_eligible',
                 ], true),
             );
@@ -986,7 +939,10 @@ final class PersonalityPublicContentAssetController extends Controller
                     continue;
                 }
 
-                unset($item['content_sections']);
+                unset($item['content_sections'], $item['media']);
+                if (is_array($item['seo'] ?? null)) {
+                    $item['seo'] = PersonalityPublicContentMediaPolicy::sanitizeSeo($item['seo']);
+                }
                 $payload['items'][$index] = $item;
             }
         }

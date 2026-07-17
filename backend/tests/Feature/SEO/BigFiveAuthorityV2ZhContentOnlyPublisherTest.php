@@ -73,7 +73,8 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
             'CMS personality_public_content_assets' => 52,
             'CMS topic_profiles' => 1,
         ], $result['surface_counts']);
-        $this->assertSame(112, $result['media_deferred_by_operator_count']);
+        $this->assertSame(60, $result['media_deferred_by_operator_count']);
+        $this->assertSame(52, $result['personality_no_media_field_count']);
         $this->assertSame(0, $result['media_library_write_count']);
         $this->assertSame(0, $result['english_write_count']);
         $this->assertFalse($result['writes_committed']);
@@ -153,8 +154,8 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
             ->where('entity_key', 'straightforwardness')->firstOrFail();
         $this->assertGreaterThanOrEqual(9, count($domain->content_sections_json));
         $this->assertGreaterThanOrEqual(9, count($facet->content_sections_json));
-        $this->assertSame('media_deferred_by_operator', data_get($domain->media_json, 'status'));
-        $this->assertTrue(data_get($domain->authority_json, 'media_deferred_by_operator'));
+        $this->assertArrayNotHasKey('media_json', $domain->getAttributes());
+        $this->assertNull(data_get($domain->authority_json, 'media_deferred_by_operator'));
 
         $hub = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('locale', 'zh-CN')->where('entity_type', PersonalityPublicContentAsset::ENTITY_HUB)->firstOrFail();

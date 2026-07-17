@@ -308,7 +308,6 @@ final class PersonalityEnneagramEvidenceRefreshCommandTest extends TestCase
             'canonical' => $asset->canonical_json,
             'hreflang' => $asset->hreflang_json,
             'faq' => $asset->faq_json,
-            'media' => $asset->media_json,
             'schema' => $asset->schema_json,
             'method_boundary' => $asset->method_boundary_json,
             'internal_links' => $asset->internal_links_json,
