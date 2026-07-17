@@ -9,6 +9,7 @@ use App\Models\ReviewAttestationTargetEvidence;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use App\Services\ReviewGovernance\ReviewAttestationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use RuntimeException;
 use Tests\TestCase;
@@ -93,6 +94,36 @@ final class ReviewAttestationBindingTest extends TestCase
 
         $this->assertSame(0, ReviewAttestation::query()->count());
         $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count());
+    }
+
+    public function test_idempotent_readback_ignores_database_json_object_key_order(): void
+    {
+        $targets = $this->targets();
+        $attestation = app(ReviewAttestationFactory::class)->make(
+            'package',
+            'cms:mysql-json-order',
+            'approved_with_exceptions',
+            $targets,
+            exceptions: [['target_identity' => 'article:2', 'reason' => 'private correction required']],
+        );
+        $service = app(ReviewAttestationService::class);
+        $first = $service->bind($attestation, $targets);
+
+        DB::table('review_attestation_target_evidences')
+            ->where('review_attestation_id', $first->id)
+            ->where('target_identity', 'article:2')
+            ->update([
+                'exception_json' => json_encode([
+                    'reason' => 'private correction required',
+                    'target_identity' => 'article:2',
+                ], JSON_THROW_ON_ERROR),
+            ]);
+
+        $second = $service->bind($attestation, array_reverse($targets));
+
+        $this->assertSame($first->id, $second->id);
+        $this->assertDatabaseCount('review_attestations', 1);
+        $this->assertDatabaseCount('review_attestation_target_evidences', 2);
     }
 
     /**

@@ -130,11 +130,11 @@ final readonly class ReviewAttestationService
         }
 
         $actual = $record->targetEvidences
-            ->mapWithKeys(static fn (ReviewAttestationTargetEvidence $evidence): array => [
+            ->mapWithKeys(fn (ReviewAttestationTargetEvidence $evidence): array => [
                 (string) $evidence->target_identity => [
                     'target_sha256' => (string) $evidence->target_sha256,
                     'target_decision' => (string) $evidence->target_decision,
-                    'exception' => $evidence->exception_json,
+                    'exception_canonical_json' => $this->canonicalizer->encode($evidence->exception_json),
                     'evidence_sha256' => (string) $evidence->evidence_sha256,
                 ],
             ])
@@ -146,7 +146,7 @@ final readonly class ReviewAttestationService
             $expected[$target->identity] = [
                 'target_sha256' => $target->sha256,
                 'target_decision' => $targetDecision,
-                'exception' => $exception,
+                'exception_canonical_json' => $this->canonicalizer->encode($exception),
                 'evidence_sha256' => $this->fingerprintBuilder->targetEvidenceSha256(
                     (string) $validated->payload['evidence_sha256'],
                     $target->identity,
