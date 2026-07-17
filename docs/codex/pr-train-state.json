@@ -96757,8 +96757,8 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "review_fix_validated",
-    "commit_sha": "a0c380a1e7358ba78aefbafb2219ebe226d7ad19",
+    "status": "ready_to_merge",
+    "commit_sha": "03afc3524d039da6dafd0ee19c6fa55c305b9ccd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96786,18 +96786,18 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
       },
       "github": {
-        "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on b92bac3f85014570e770ad085b3e42d079d75827. Its exact-head review found a future-modification gap in the foundation-file exemption; the scoped repair requires a new full check run before merge."
+        "status": "passed",
+        "evidence": "All nine required and security checks passed on 03afc3524d039da6dafd0ee19c6fa55c305b9ccd. This ledger-only ready-to-merge transition must revalidate before merge."
       },
       "codex_review": {
-        "status": "exact_head_finding_repaired_locally",
-        "evidence": "Twelve valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, added-lines-only review-gate marker inspection, missing compact-attestation bind markers, an accidental unrelated train-item status edit, premature ready-to-merge state, and an unconditional foundation-file exemption. Codex reviewed b92bac3f85014570e770ad085b3e42d079d75827 exactly; the exemption is now limited to exact foundation files added by the current PR, and future modifications are scanned."
+        "status": "exact_head_findings_repaired",
+        "evidence": "Thirteen valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, added-lines-only review-gate marker inspection, missing compact-attestation bind markers, an accidental unrelated train-item status edit, premature ready-to-merge state, an unconditional foundation-file exemption, and final stale checked-head evidence. Codex reviewed 03afc3524d039da6dafd0ee19c6fa55c305b9ccd exactly; only this ledger correction remained."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96885,8 +96885,13 @@
         "at": "2026-07-17T17:25:57Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on ledger-only head b92bac3f85014570e770ad085b3e42d079d75827. Its exact-head Codex review found that the exact foundation-file allowlist would also exempt future modifications. The exemption now requires the file to be both an exact PR1 foundation path and newly added in the current diff; focused architecture validation passed with 6 tests and 233 assertions, PHP lint, Pint, and diff checks passed, and a new full check run plus exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T17:34:09Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on 03afc3524d039da6dafd0ee19c6fa55c305b9ccd. Its exact-head Codex review confirmed the added-only foundation exemption and found only that the ledger still certified the pre-fix head. The ledger now certifies the actual checked implementation head; this final ledger-only transition must revalidate before squash merge."
       }
     ],
-    "updated_at": "2026-07-17T17:25:57Z"
+    "updated_at": "2026-07-17T17:34:09Z"
   }
 }
