@@ -96758,7 +96758,7 @@
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
     "status": "review_fix_validated",
-    "commit_sha": "688af0adf93600fb71d6207fdd059610d4b3a21e",
+    "commit_sha": "afeb12c16aaff374d0015009d9f39ead1967a51d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96786,12 +96786,12 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 28-file allowlist validation passed after the manifest explicitly added the required nested backend/AGENTS.md contract."
       },
       "github": {
-        "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on 688af0adf93600fb71d6207fdd059610d4b3a21e; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. Its exact-head review produced one valid JSON preflight redaction finding, so the scoped repair requires a new full check run before merge."
+        "status": "passed_then_ledger_revalidation_required",
+        "evidence": "All nine required and security checks passed on PR code head afeb12c16aaff374d0015009d9f39ead1967a51d; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. This ledger-only closeout must receive a new full check run before merge and intentionally does not self-reference its own commit SHA."
       },
       "codex_review": {
-        "status": "exact_head_finding_repaired_locally",
-        "evidence": "The Codex review submitted at 2026-07-17T19:10:38Z exactly covers 688af0adf93600fb71d6207fdd059610d4b3a21e. Its valid P2 found that JSON preflight failures copied lower-level exception text containing private target identities into CI-archivable output. JSON mode now emits only a stable redacted error code/message and safety flags, while non-JSON local diagnostics retain detail; focused regression coverage proves private identity and duplicate diagnostics do not appear in JSON."
+        "status": "exact_head_ledger_finding_repaired",
+        "evidence": "The Codex review submitted at 2026-07-17T19:24:53Z exactly covers PR code head afeb12c16aaff374d0015009d9f39ead1967a51d and confirmed the JSON preflight redaction repair. Its only new valid P2 was that the ledger still named 688af0adf93600fb71d6207fdd059610d4b3a21e. The ledger now binds the actual reviewed PR code head afeb12c16aaff374d0015009d9f39ead1967a51d; the e2938ed8 value quoted in the thread is a GitHub synthetic merge ref, not the PR head."
       }
     },
     "scope_validation": {
@@ -96930,8 +96930,13 @@
         "at": "2026-07-17T19:12:36Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed and Codex reviewed exact head 688af0adf93600fb71d6207fdd059610d4b3a21e. The review found one valid P2: JSON preflight failures exposed lower-level exception text that can contain private target identities. JSON failures now return only a stable redacted error code/message plus zero-write and no-production-authorization flags; detailed exception text remains local to non-JSON mode. Focused tests prove a malicious private identity and duplicate diagnostic are absent from JSON. A new head, full required checks, and exact-head review are required before merge."
+      },
+      {
+        "at": "2026-07-17T19:27:40Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed and Codex reviewed exact PR code head afeb12c16aaff374d0015009d9f39ead1967a51d. The JSON redaction fix was confirmed; the only new valid P2 was stale ledger commit_sha evidence. commit_sha now binds afeb12c16aaff374d0015009d9f39ead1967a51d, while the e2938ed8 value mentioned in the finding is recorded as GitHub's synthetic merge ref rather than PR head. This ledger-only closeout deliberately does not self-reference and remains pending a new full check run plus exact-head review before merge."
       }
     ],
-    "updated_at": "2026-07-17T19:12:36Z"
+    "updated_at": "2026-07-17T19:27:40Z"
   }
 }
