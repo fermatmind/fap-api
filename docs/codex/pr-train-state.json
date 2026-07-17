@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "39ee7e9dfae6260e3d491902d82d4ee84a5d1343",
+    "commit_sha": "412908dd7b81a104d2be863a5c6c6e49ca5b55af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 64 tests / 979 assertions; V224 passes 39 tests / 447 assertions. Every normalized sitemap, llms.txt, and llms-full.txt URL now fails closed on private API, attempt/report, result, order/payment, claim, answer-taking, account/history, and share routes before the full URL set can be accepted or hashed. A normal non-Enneagram article URL remains accepted and included in the full-set hash. The complete authorized 116-page execute/readback, private-review, empty-media, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 64 tests / 991 assertions; V224 passes 39 tests / 459 assertions. API body marker scanning, raw/visible HTML marker scanning, DOM anchor validation, and all three discoverability feeds now reuse the same private runtime path predicate, including escaped JSON slashes and absolute/relative URLs. The complete authorized 116-page execute/readback, private-review, empty-media, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 229 tests / 28985 assertions with private discoverability path rejection on all three public feed surfaces."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 229 tests / 28997 assertions with the full private runtime path predicate enforced across API, HTML, DOM links, sitemap, llms.txt, and llms-full.txt."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head 9f5468ece9a8ef36dcafdf230f8c90f68a005154 passed all nine required GitHub checks, then exact-head review raised one valid P2: non-Enneagram private runtime paths could remain in sitemap/llms full URL sets. It is fixed and locally validated at code commit 39ee7e9dfae6260e3d491902d82d4ee84a5d1343; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "evidence": "Exact head 55198c9dca4049b300ee27bfc22444d824a3fd92 passed all nine required GitHub checks, then exact-head review raised one valid P2: API/HTML marker scanning retained the older narrow private-route regex. It is fixed and locally validated at code commit 412908dd7b81a104d2be863a5c6c6e49ca5b55af; a fresh complete GitHub check and exact-head review cycle is required before merge."
       }
     },
     "scope_validation": {
@@ -96463,9 +96463,14 @@
         "at": "2026-07-17T01:11:32Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head 9f5468ece9a8ef36dcafdf230f8c90f68a005154 passed all nine checks, exact-head review found non-Enneagram private runtime paths could survive in the complete sitemap/llms URL sets. Code commit 39ee7e9dfae6260e3d491902d82d4ee84a5d1343 rejects private API, attempt/report, result, order/payment, claim, answer-taking, account/history, and share routes on all three feed surfaces before acceptance or hashing, while retaining ordinary public article paths. Final V224 39/447, focused 64/979, cache/API 8/72, classifier 1/2, full Enneagram V2 229/28985, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T01:29:17Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 55198c9dca4049b300ee27bfc22444d824a3fd92 passed all nine checks, exact-head review found API/HTML marker scanning still used the older narrow private-route regex. Code commit 412908dd7b81a104d2be863a5c6c6e49ca5b55af makes API body, raw/visible HTML, DOM anchor, and feed readback reuse the same full private runtime path predicate, including escaped JSON slashes. Final V224 39/459, focused 64/991, cache/API 8/72, classifier 1/2, full Enneagram V2 229/28997, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T01:11:32Z"
+    "updated_at": "2026-07-17T01:29:17Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
