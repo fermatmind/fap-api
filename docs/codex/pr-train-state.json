@@ -96757,8 +96757,8 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "review_fix_validated",
-    "commit_sha": "0e289aef5f16ee82b71bcd1f9ee0feab059648f2",
+    "status": "ready_to_merge",
+    "commit_sha": "a30f7798d1c4f72bded849ef16e7c46e837e2f8e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96786,18 +96786,18 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
       },
       "github": {
-        "status": "rerun_pending",
-        "evidence": "All nine checks passed through adcc27655d0c54fe676a46989b001bcc0d3db608. A fifth valid Codex P2 finding was then repaired in scope, so checks must rerun on the forthcoming review-fix head."
+        "status": "passed",
+        "evidence": "All nine required and security checks passed on a30f7798d1c4f72bded849ef16e7c46e837e2f8e. This ledger-only ready-to-merge transition must revalidate before merge."
       },
       "codex_review": {
-        "status": "findings_repaired",
-        "evidence": "Five valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, and a concurrent-bind unique-key race. The binder now uses Eloquent createOrFirst so a duplicate-key loser reloads on the write connection and undergoes exact evidence readback. Focused binding/contract tests passed (6 tests, 32 assertions), Pint and PHP lint passed, and git diff --check passed."
+        "status": "exact_head_findings_repaired",
+        "evidence": "Six valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, and stale ledger commit_sha. Codex reviewed a30f7798d1c4f72bded849ef16e7c46e837e2f8e exactly; only this ledger correction remained."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96855,8 +96855,13 @@
         "at": "2026-07-17T15:53:21Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on adcc27655d0c54fe676a46989b001bcc0d3db608. Its exact-head Codex review found a concurrent-bind idempotency race. Parent creation now uses createOrFirst, whose unique-conflict path reloads from the write connection before the existing exact target-evidence readback; focused binding and contract validation passed."
+      },
+      {
+        "at": "2026-07-17T16:07:31Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on a30f7798d1c4f72bded849ef16e7c46e837e2f8e. Its exact-head Codex review found only that commit_sha still pointed at the original implementation commit. The ledger now certifies a30f7798d1c4f72bded849ef16e7c46e837e2f8e; this ledger-only transition must revalidate before squash merge."
       }
     ],
-    "updated_at": "2026-07-17T15:53:21Z"
+    "updated_at": "2026-07-17T16:07:31Z"
   }
 }
