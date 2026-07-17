@@ -562,7 +562,15 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $title = trim((string) $xpath->evaluate('string(//title[1])'));
         $h1 = trim((string) $xpath->evaluate('string(//h1[1])'));
         $description = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="description"]/@content)'));
-        $robots = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="robots"]/@content)'));
+        $robotsNodes = $xpath->query(
+            '//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="robots"][@content]',
+        );
+        $robotsNode = $robotsNodes !== false && $robotsNodes->length === 1
+            ? $robotsNodes->item(0)
+            : null;
+        $robots = $robotsNode instanceof DOMElement
+            ? trim($robotsNode->getAttribute('content'))
+            : '';
         $canonicalNodes = $xpath->query(
             '//link[contains(concat(" ",normalize-space(translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"))," ")," canonical ")]',
         );
@@ -584,7 +592,10 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             $issues[] = 'html_description_mismatch';
         }
         $expectedRobots = $this->normalizedRobotsDirective((string) ($v1['robots'] ?? ''));
-        if ($expectedRobots === '' || $this->normalizedRobotsDirective($robots) !== $expectedRobots) {
+        if ($expectedRobots === ''
+            || $robotsNodes === false
+            || $robotsNodes->length !== 1
+            || $this->normalizedRobotsDirective($robots) !== $expectedRobots) {
             $issues[] = 'html_robots_mismatch';
         }
         if ($canonicalNodes === false
@@ -1049,7 +1060,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         }
 
         $actual = [];
-        foreach ($xpath->query('//link[translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="alternate"][@hreflang][@href]') ?: [] as $link) {
+        foreach ($xpath->query(
+            '//link[contains(concat(" ",normalize-space(translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"))," ")," alternate ")][@hreflang][@href]',
+        ) ?: [] as $link) {
             if (! $link instanceof DOMElement) {
                 continue;
             }

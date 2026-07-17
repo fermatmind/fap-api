@@ -586,6 +586,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_html_readback_rejects_duplicate_robots_tags_even_when_first_is_exact(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, duplicateRobotsMeta: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected duplicate HTML robots tags to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_robots_mismatch', $exception->getMessage());
+        }
+    }
+
     public function test_html_readback_rejects_hreflang_origin_query_fragment_and_relative_drift(): void
     {
         $this->seedPublishedEstate();
@@ -616,6 +638,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             } catch (\RuntimeException $exception) {
                 $this->assertStringContainsString('html_hreflang_mismatch', $exception->getMessage());
             }
+        }
+    }
+
+    public function test_html_readback_rejects_conflicting_hreflang_with_tokenized_alternate_rel(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, tokenizedHreflangConflict: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected conflicting tokenized HTML hreflang to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_hreflang_mismatch_actual_en', $exception->getMessage());
         }
     }
 
@@ -2153,7 +2197,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $omitFaqSchemaAnswer = false,
         ?string $faqSchemaAnswerOverride = null,
         ?string $robotsHtmlOverride = null,
+        bool $duplicateRobotsMeta = false,
         bool $staleHreflangPayload = false,
+        bool $tokenizedHreflangConflict = false,
         ?string $standardMediaLeak = null,
         ?string $authorityContentHiddenStyle = null,
         bool $authorityContentHiddenByStylesheet = false,
@@ -2167,7 +2213,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2372,6 +2418,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         .htmlspecialchars((string) $language, ENT_QUOTES | ENT_HTML5)
                         .'" href="'.htmlspecialchars($href, ENT_QUOTES | ENT_HTML5).'">';
                 }
+                if ($tokenizedHreflangConflict) {
+                    $hreflang[] = '<link rel="alternate stylesheet" hreflang="en" '
+                        .'href="https://staging-mirror.test/en/personality/enneagram">';
+                }
 
                 $privateValue = '';
                 if ($privateReviewerLeak !== null) {
@@ -2491,10 +2541,14 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $duplicateCanonical = $duplicateCanonicalUrl !== null
                     ? '<link rel="canonical" href="'.str_replace('{path}', $path, $duplicateCanonicalUrl).'">'
                     : '';
+                $duplicateRobots = $duplicateRobotsMeta
+                    ? '<meta name="robots" content="noindex,nofollow">'
+                    : '';
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
                     .'<meta name="robots" content="'.$robots.'">'
+                    .$duplicateRobots
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .$duplicateCanonical
                     .implode('', $hreflang)
