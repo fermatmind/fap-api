@@ -96757,7 +96757,7 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "review_fix_validated",
+    "status": "external_review_quota_hold",
     "commit_sha": "afeb12c16aaff374d0015009d9f39ead1967a51d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
@@ -96786,21 +96786,21 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 28-file allowlist validation passed after the manifest explicitly added the required nested backend/AGENTS.md contract."
       },
       "github": {
-        "status": "passed_then_ledger_revalidation_required",
-        "evidence": "All nine required and security checks passed on PR code head afeb12c16aaff374d0015009d9f39ead1967a51d; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. This ledger-only closeout must receive a new full check run before merge and intentionally does not self-reference its own commit SHA."
+        "status": "passed_on_ledger_head",
+        "evidence": "All nine required and security checks passed on ledger-only PR head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. Green checks do not replace the missing exact-head Codex review. commit_sha intentionally remains the reviewed PR code head afeb12c16aaff374d0015009d9f39ead1967a51d rather than self-referencing ledger-only commits."
       },
       "codex_review": {
-        "status": "exact_head_ledger_finding_repaired",
-        "evidence": "The Codex review submitted at 2026-07-17T19:24:53Z exactly covers PR code head afeb12c16aaff374d0015009d9f39ead1967a51d and confirmed the JSON preflight redaction repair. Its only new valid P2 was that the ledger still named 688af0adf93600fb71d6207fdd059610d4b3a21e. The ledger now binds the actual reviewed PR code head afeb12c16aaff374d0015009d9f39ead1967a51d; the e2938ed8 value quoted in the thread is a GitHub synthetic merge ref, not the PR head."
+        "status": "external_review_quota_hold",
+        "evidence": "The latest completed Codex review covers PR code head afeb12c16aaff374d0015009d9f39ead1967a51d and confirmed the JSON redaction repair plus the ledger alignment finding. An explicit @codex review request for ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae at 2026-07-17T19:34:59Z was rejected at 2026-07-17T19:35:06Z because code-review usage limits were exhausted. Observation through 2026-07-17T19:44:53Z produced no delayed automatic exact-head review; the old review is not treated as exact-head evidence."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
-    "failure_reason": null,
+    "failure_reason": "External Codex code-review quota exhausted: exact-head review is unavailable for ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae. PR1 must remain open and unmerged, its current resolved-state audit must not be finalized, and PR2 must not start until a completed exact-head review is independently verified.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -96935,8 +96935,13 @@
         "at": "2026-07-17T19:27:40Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed and Codex reviewed exact PR code head afeb12c16aaff374d0015009d9f39ead1967a51d. The JSON redaction fix was confirmed; the only new valid P2 was stale ledger commit_sha evidence. commit_sha now binds afeb12c16aaff374d0015009d9f39ead1967a51d, while the e2938ed8 value mentioned in the finding is recorded as GitHub's synthetic merge ref rather than PR head. This ledger-only closeout deliberately does not self-reference and remains pending a new full check run plus exact-head review before merge."
+      },
+      {
+        "at": "2026-07-17T19:44:53Z",
+        "status": "external_review_quota_hold",
+        "note": "All nine checks passed on ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae and GitHub reports CLEAN/MERGEABLE, but the latest completed Codex review still covers only PR code head afeb12c16aaff374d0015009d9f39ead1967a51d. The exact-head request was quota-rejected at 2026-07-17T19:35:06Z and no delayed automatic review appeared during observation through 2026-07-17T19:44:53Z. Keep PR1 open and unmerged, do not finalize thread resolution, and do not start PR2 until exact-head review becomes available."
       }
     ],
-    "updated_at": "2026-07-17T19:27:40Z"
+    "updated_at": "2026-07-17T19:44:53Z"
   }
 }
