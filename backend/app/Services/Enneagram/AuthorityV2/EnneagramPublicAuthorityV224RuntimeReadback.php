@@ -1115,15 +1115,12 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             return '';
         }
 
-        $text = [];
+        $text = '';
         foreach ($nodes as $node) {
-            $value = trim((string) $node->nodeValue);
-            if ($value !== '') {
-                $text[] = $value;
-            }
+            $text .= (string) $node->nodeValue;
         }
 
-        return $this->normalizedVisibleText(implode(' ', $text));
+        return $this->normalizedVisibleText($text);
     }
 
     /** @param list<mixed> $sections @param list<string> $issues */

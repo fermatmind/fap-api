@@ -2290,12 +2290,16 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
                 $privateValue = '';
                 if ($privateReviewerLeak !== null) {
-                    $escapedPrivateValue = htmlspecialchars($privateReviewerLeak, ENT_QUOTES | ENT_HTML5);
-                    if ($splitPrivateReviewerHtml && str_contains($escapedPrivateValue, ' ')) {
-                        [$prefix, $suffix] = explode(' ', $escapedPrivateValue, 2);
-                        $privateValue = '<aside>'.$prefix.' <span>'.$suffix.'</span></aside>';
+                    if ($splitPrivateReviewerHtml && mb_strlen($privateReviewerLeak, 'UTF-8') > 3) {
+                        $prefix = mb_substr($privateReviewerLeak, 0, 3, 'UTF-8');
+                        $suffix = mb_substr($privateReviewerLeak, 3, null, 'UTF-8');
+                        $privateValue = '<aside>'
+                            .htmlspecialchars($prefix, ENT_QUOTES | ENT_HTML5)
+                            .'<span>'.htmlspecialchars($suffix, ENT_QUOTES | ENT_HTML5).'</span></aside>';
                     } else {
-                        $privateValue = '<aside>'.$escapedPrivateValue.'</aside>';
+                        $privateValue = '<aside>'
+                            .htmlspecialchars($privateReviewerLeak, ENT_QUOTES | ENT_HTML5)
+                            .'</aside>';
                     }
                 }
                 $privateLink = $privateRouteLeak === null
