@@ -530,6 +530,31 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_html_readback_rejects_duplicate_canonical_tags_even_when_first_is_exact(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp(
+            $report,
+            duplicateCanonicalUrl: 'https://staging-mirror.test{path}?duplicate=1',
+        );
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected duplicate HTML canonical tags to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_canonical_mismatch', $exception->getMessage());
+        }
+    }
+
     public function test_html_readback_rejects_hreflang_origin_query_fragment_and_relative_drift(): void
     {
         $this->seedPublishedEstate();
@@ -1998,6 +2023,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $standardMediaLeak = null,
         ?string $authorityContentHiddenStyle = null,
         ?string $apiCanonicalUrlOverride = null,
+        ?string $duplicateCanonicalUrl = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -2005,7 +2031,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2301,11 +2327,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     'css-inline' => '<section style="background-image: URL(https://frontend.test/hardcoded-background.png)">hardcoded CSS image</section>',
                     default => '',
                 };
+                $duplicateCanonical = $duplicateCanonicalUrl !== null
+                    ? '<link rel="canonical" href="'.str_replace('{path}', $path, $duplicateCanonicalUrl).'">'
+                    : '';
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
                     .'<meta name="robots" content="'.$robots.'">'
                     .'<link rel="canonical" href="'.$canonical.'">'
+                    .$duplicateCanonical
                     .implode('', $hreflang)
                     .$faqSchemaHtml
                     .$standardMediaHead

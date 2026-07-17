@@ -562,7 +562,15 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $h1 = trim((string) $xpath->evaluate('string(//h1[1])'));
         $description = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="description"]/@content)'));
         $robots = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="robots"]/@content)'));
-        $canonical = trim((string) $xpath->evaluate('string(//link[translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="canonical"]/@href)'));
+        $canonicalNodes = $xpath->query(
+            '//link[contains(concat(" ",normalize-space(translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"))," ")," canonical ")]',
+        );
+        $canonicalNode = $canonicalNodes !== false && $canonicalNodes->length === 1
+            ? $canonicalNodes->item(0)
+            : null;
+        $canonical = $canonicalNode instanceof DOMElement
+            ? trim($canonicalNode->getAttribute('href'))
+            : '';
         if ($title === '' || $h1 === '' || $description === '') {
             $issues[] = 'html_title_description_or_h1_missing';
         }
@@ -578,7 +586,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if ($expectedRobots === '' || $this->normalizedRobotsDirective($robots) !== $expectedRobots) {
             $issues[] = 'html_robots_mismatch';
         }
-        if (! $this->isExactFrontendUrl($canonical, $frontendBaseUrl, $path)) {
+        if ($canonicalNodes === false
+            || $canonicalNodes->length !== 1
+            || ! $this->isExactFrontendUrl($canonical, $frontendBaseUrl, $path)) {
             $issues[] = 'html_canonical_mismatch';
         }
         $this->validateHreflang(
