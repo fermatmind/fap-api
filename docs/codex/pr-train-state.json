@@ -96757,8 +96757,8 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "local_validated",
-    "commit_sha": null,
+    "status": "ready_to_push",
+    "commit_sha": "0e289aef5f16ee82b71bcd1f9ee0feab059648f2",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -96817,8 +96817,13 @@
         "at": "2026-07-17T15:17:00Z",
         "status": "local_validated",
         "note": "All required PR1 checks passed after replacing the migration-safety-incompatible dropIfExists rollback with guarded drops. The complete backend verifier passed, the exact 27-file scope is clean, generated Big Five timestamp noise was removed, and no production or CMS action occurred."
+      },
+      {
+        "at": "2026-07-17T15:18:30Z",
+        "status": "ready_to_push",
+        "note": "The exact 27-file implementation and local-validation ledger were committed as 0e289aef5f16ee82b71bcd1f9ee0feab059648f2; only this ledger transition remains before push."
       }
     ],
-    "updated_at": "2026-07-17T15:17:00Z"
+    "updated_at": "2026-07-17T15:18:30Z"
   }
 }
