@@ -96193,7 +96193,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "review_fix_local_validation_passed",
+    "status": "ready_to_merge",
     "commit_sha": "3b6ef0bf69b9df96c52ec34ebb0ffbfd77d46b99",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
@@ -96218,14 +96218,14 @@
         "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
       },
       "github_required": {
-        "status": "pending",
-        "evidence": "Exact review of head b0eea5da9cb19b2211372ab5ec4036c8141e2dae raised one valid P2: DB and API could agree on canonical/hreflang values from an unauthorized old or staging origin while HTML remained correct. Code commit 3b6ef0bf69b9df96c52ec34ebb0ffbfd77d46b99 binds API discoverability to the authorized frontend origin and exact paths while preserving backend graph relative-path authority; complete local validation passes and a fresh complete GitHub check plus exact-head review cycle are required before merge."
+        "status": "passed",
+        "evidence": "Exact head 89c9ba893606228c57634014b99937ef508e5325 passed all nine required GitHub checks, is CLEAN and MERGEABLE, has zero unresolved review threads, and its exact-head Codex review reported no major issues."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96563,9 +96563,14 @@
         "at": "2026-07-17T08:58:21Z",
         "status": "review_fix_local_validation_passed",
         "note": "Exact review of head b0eea5da9cb19b2211372ab5ec4036c8141e2dae found that current DB/API parity alone could preserve canonical or hreflang values on an unauthorized origin. Code commit 3b6ef0bf69b9df96c52ec34ebb0ffbfd77d46b99 validates optional API canonical URLs as exact same-origin absolute URLs and validates graph hreflang references as exact bilingual relative paths or exact same-origin absolute URLs; old origin, HTTP, query, fragment, wrong path, and extra language fixtures fail closed. A first V224 rerun exposed only that successful promotion fixtures mixed production graph paths with frontend.test; the final fixture uses its authorized origin without changing runtime behavior. Final V224 57/577, focused V205/V206/V223/V224 82/1109, cache/API 8/72, classifier 1/2, full Enneagram V2 247/29115, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T09:08:24Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 89c9ba893606228c57634014b99937ef508e5325 passed all nine required GitHub checks, is CLEAN and MERGEABLE, retains the exact 15-path scope with a clean worktree, has zero unresolved review threads, and its exact-head Codex review reported no major issues. This final ready-to-merge metadata update must independently pass one last complete check and exact-head review cycle before squash merge; production, deploy, CMS, database, media, cache, publication, and search actions remain zero."
       }
     ],
-    "updated_at": "2026-07-17T08:58:21Z"
+    "updated_at": "2026-07-17T09:08:24Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
