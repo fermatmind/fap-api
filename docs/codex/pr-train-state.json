@@ -96757,7 +96757,7 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "review_fix_validated",
     "commit_sha": "0e289aef5f16ee82b71bcd1f9ee0feab059648f2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
@@ -96786,8 +96786,12 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #3160 is open for the exact scoped branch; required checks and exact-head review are pending."
+        "status": "rerun_pending",
+        "evidence": "All nine checks passed on 72887c87905b9da4bdee4dd38e7b23f288406a1b. Two valid Codex P2 findings were then repaired in scope, so checks must rerun on the forthcoming review-fix head."
+      },
+      "codex_review": {
+        "status": "findings_repaired",
+        "evidence": "The review found exec output accumulation in the architecture gate and silent scalar coercion in ReviewTarget. Both were fixed; targeted tests passed (8 tests, 239 assertions), Pint passed for 3 files, PHP lint passed, and git diff --check passed."
       }
     },
     "scope_validation": {
@@ -96831,8 +96835,13 @@
         "at": "2026-07-17T15:19:34Z",
         "status": "github_checks_pending",
         "note": "PR #3160 was opened with the required scope, validation, privacy, repository-rule, deferred-item, and no-production-execution sections. Required checks and exact-head review are pending."
+      },
+      {
+        "at": "2026-07-17T15:28:41Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on the prior head. Two valid same-scope Codex P2 findings were repaired and targeted validation passed; a new head, full check rerun, and exact-head Codex review are required before merge."
       }
     ],
-    "updated_at": "2026-07-17T15:19:34Z"
+    "updated_at": "2026-07-17T15:28:41Z"
   }
 }

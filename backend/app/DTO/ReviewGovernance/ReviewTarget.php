@@ -29,10 +29,16 @@ final readonly class ReviewTarget
         if ($unexpected !== []) {
             throw new InvalidArgumentException('Review target contains unexpected fields: '.implode(', ', $unexpected).'.');
         }
+        if (! isset($target['target_identity']) || ! is_string($target['target_identity'])) {
+            throw new InvalidArgumentException('Review target identity must be supplied as an exact string.');
+        }
+        if (! isset($target['target_sha256']) || ! is_string($target['target_sha256'])) {
+            throw new InvalidArgumentException('Review target SHA-256 must be supplied as an exact string.');
+        }
 
         return new self(
-            identity: (string) ($target['target_identity'] ?? ''),
-            sha256: (string) ($target['target_sha256'] ?? ''),
+            identity: $target['target_identity'],
+            sha256: $target['target_sha256'],
         );
     }
 

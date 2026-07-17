@@ -140,6 +140,8 @@ final class ReviewPolicyRegistryTest extends TestCase
                 escapeshellarg($baseRef),
                 escapeshellarg($file),
             );
+            $diffLines = [];
+            $diffExitCode = 0;
             exec($diffCommand, $diffLines, $diffExitCode);
             $this->assertSame(0, $diffExitCode, 'Unable to inspect changed review-gate lines for '.$file.'.');
             $added = implode("\n", array_filter(

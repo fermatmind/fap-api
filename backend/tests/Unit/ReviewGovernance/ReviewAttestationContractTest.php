@@ -83,6 +83,31 @@ final class ReviewAttestationContractTest extends TestCase
         }
     }
 
+    public function test_target_identity_and_hash_reject_non_string_values(): void
+    {
+        $canonicalizer = app(ReviewAttestationCanonicalizer::class);
+
+        foreach ([123, true, false] as $identity) {
+            try {
+                ReviewTargetSet::fromArray([
+                    ['target_identity' => $identity, 'target_sha256' => self::SHA_A],
+                ], $canonicalizer);
+                $this->fail('Non-string target identity was accepted.');
+            } catch (InvalidArgumentException $exception) {
+                $this->assertStringContainsString('exact string', $exception->getMessage());
+            }
+        }
+
+        try {
+            ReviewTargetSet::fromArray([
+                ['target_identity' => 'article:1', 'target_sha256' => 123],
+            ], $canonicalizer);
+            $this->fail('Non-string target SHA-256 was accepted.');
+        } catch (InvalidArgumentException $exception) {
+            $this->assertStringContainsString('exact string', $exception->getMessage());
+        }
+    }
+
     public function test_actor_package_evidence_and_exception_drift_fail_closed(): void
     {
         $factory = app(ReviewAttestationFactory::class);
