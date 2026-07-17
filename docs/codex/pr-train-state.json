@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "65d43491a5791e692a40b84e0cda61bc2f880d66",
+    "commit_sha": "6c61917bfbe0482a1d9a2946b3af05d388a1d63b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 69 tests / 1016 assertions; V224 passes 44 tests / 484 assertions. Hreflang locale/path plus graph metadata is bound from DB to API while HTML still requires the exact runtime frontend origin. Standard og:image, twitter:image, JSON-LD image, and main-content img/picture surfaces now fail the empty-media contract. The complete authorized 116-page execute/readback, private-review, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 69 tests / 1027 assertions; V224 passes 44 tests / 495 assertions. Hreflang locale/path plus graph metadata is bound from DB to API while HTML still requires the exact runtime frontend origin. Standard og:image, twitter:image, JSON-LD image, and main-content img/picture surfaces fail the empty-media contract. The shared private-route predicate now also rejects admin, ops, and tenant roots with or without locale prefixes across sitemap, llms, API, and HTML readback. The complete authorized 116-page execute/readback, private-review, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 234 tests / 29022 assertions with DB/API hreflang parity and standard HTML/schema empty-media surfaces enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 234 tests / 29033 assertions with DB/API hreflang parity, standard HTML/schema empty-media surfaces, and admin/ops/tenant private-root rejection enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head 25a38d0cf6d93e077af119351b89ad64bb5cab61 passed all nine required GitHub checks, then exact-head review raised two valid P2s: hreflang was not included in DB/API parity and standard image surfaces could bypass custom media markers. Both are fixed and locally validated at code commit 65d43491a5791e692a40b84e0cda61bc2f880d66; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "evidence": "Exact head 69bb26bba9cf7e43b896cd6278d730f8adc28339 passed all nine required GitHub checks, then exact-head review raised one valid P2: admin, ops, and tenant roots were absent from the shared private discoverability predicate. The gap is fixed and locally validated at code commit 6c61917bfbe0482a1d9a2946b3af05d388a1d63b; a fresh complete GitHub check and exact-head review cycle is required before merge."
       }
     },
     "scope_validation": {
@@ -96483,9 +96483,14 @@
         "at": "2026-07-17T02:27:54Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head 25a38d0cf6d93e077af119351b89ad64bb5cab61 passed all nine checks, exact-head review found DB/API hreflang parity and standard image-surface detection gaps. Code commit 65d43491a5791e692a40b84e0cda61bc2f880d66 compares the complete normalized hreflang locale/path and graph metadata map while HTML separately enforces exact runtime origin, and rejects og:image, twitter:image, image_src, main/article image markup, and JSON-LD image fields. The first V224 rerun exposed that the test fake dropped backend graph metadata after promotion; preserving real API shape fixed the fixture without weakening runtime checks. Final V224 44/484, focused 69/1016, cache/API 8/72, classifier 1/2, full Enneagram V2 234/29022, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T02:46:31Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 69bb26bba9cf7e43b896cd6278d730f8adc28339 passed all nine checks, exact-head review found admin, ops, and tenant roots missing from the shared private-path boundary. Code commit 6c61917bfbe0482a1d9a2946b3af05d388a1d63b rejects those roots, including locale-prefixed forms, across sitemap, llms, API, and HTML readback. Final V224 44/495, focused 69/1027, cache/API 8/72, classifier 1/2, full Enneagram V2 234/29033, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T02:27:54Z"
+    "updated_at": "2026-07-17T02:46:31Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
