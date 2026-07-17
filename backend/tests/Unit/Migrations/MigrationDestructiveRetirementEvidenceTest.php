@@ -194,6 +194,36 @@ PHP;
     }
 
     #[Test]
+    public function destructive_helper_calls_are_outside_direct_up_evidence(): void
+    {
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('personality_public_content_assets', fn (Blueprint $table) => $this->retireMedia($table));
+    }
+
+    private function retireMedia(Blueprint $table): void
+    {
+        $table->dropColumn('media_json');
+    }
+};
+PHP;
+        $upBody = $this->methodBody($source, 'up');
+
+        $this->assertIsString($upBody);
+        $this->assertSame(1, $this->destructiveCallCount($source));
+        $this->assertSame(0, $this->destructiveCallCount($upBody));
+    }
+
+    #[Test]
     public function current_destructive_migrations_have_bound_retirement_evidence(): void
     {
         $evidenceByMigration = $this->evidenceByMigration();
@@ -222,6 +252,14 @@ PHP;
             if (! str_contains($source, 'RETIREMENT_EVIDENCE_ID')) {
                 continue;
             }
+
+            $upBody = $this->methodBody($source, 'up');
+            $this->assertIsString($upBody, "Missing up() method in {$filePath}");
+            $this->assertSame(
+                $this->destructiveCallCount($source),
+                $this->destructiveCallCount($upBody),
+                "Evidence-bound retirement has a destructive call outside direct up(): {$filePath}",
+            );
 
             $downBody = $this->methodBody($source, 'down');
             $this->assertIsString($downBody, "Missing down() method in {$filePath}");
@@ -365,6 +403,16 @@ PHP;
         }
 
         return $operations;
+    }
+
+    private function destructiveCallCount(string $source): int
+    {
+        $clean = $this->stripComments($source);
+        $tableDrops = preg_match_all('/Schema\s*::\s*drop(?:IfExists)?\s*\(/s', $clean);
+        $columnDrops = preg_match_all('/->\s*dropColumn\s*\(/s', $clean);
+
+        return ($tableDrops === false ? 0 : $tableDrops)
+            + ($columnDrops === false ? 0 : $columnDrops);
     }
 
     /**
