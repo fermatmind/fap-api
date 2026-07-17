@@ -96757,9 +96757,9 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "ready_to_push",
+    "status": "github_checks_pending",
     "commit_sha": "0e289aef5f16ee82b71bcd1f9ee0feab059648f2",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -96784,6 +96784,10 @@
       "static_validation": {
         "status": "passed",
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #3160 is open for the exact scoped branch; required checks and exact-head review are pending."
       }
     },
     "scope_validation": {
@@ -96822,8 +96826,13 @@
         "at": "2026-07-17T15:18:30Z",
         "status": "ready_to_push",
         "note": "The exact 27-file implementation and local-validation ledger were committed as 0e289aef5f16ee82b71bcd1f9ee0feab059648f2; only this ledger transition remains before push."
+      },
+      {
+        "at": "2026-07-17T15:19:34Z",
+        "status": "github_checks_pending",
+        "note": "PR #3160 was opened with the required scope, validation, privacy, repository-rule, deferred-item, and no-production-execution sections. Required checks and exact-head review are pending."
       }
     ],
-    "updated_at": "2026-07-17T15:18:30Z"
+    "updated_at": "2026-07-17T15:19:34Z"
   }
 }
