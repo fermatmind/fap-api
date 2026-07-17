@@ -117,7 +117,7 @@ PHP;
         $this->assertSame(
             [
                 "{$migration} drops media_json without retirement evidence",
-                "{$migration} drops __dynamic_drop_column_expression__ without retirement evidence",
+                "{$migration} uses unresolved destructive target __dynamic_drop_column_expression__",
             ],
             $this->missingEvidence($operations, []),
         );
@@ -159,6 +159,41 @@ PHP;
     }
 
     #[Test]
+    public function dynamic_drop_targets_cannot_be_evidenced(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_dynamic_table.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        $tableName = 'retired_table';
+        Schema::drop($tableName);
+    }
+};
+PHP;
+        $operations = $this->destructiveUpOperations($migration, $source);
+        $evidence = [
+            $migration => [
+                'operation' => 'drop_table',
+                'table' => '__dynamic_drop_table_expression__',
+                'runbook' => 'docs/migrations/attempt-quality-retirement-runbook.md',
+                'production_archive_status' => 'not_asserted_by_repository',
+            ],
+        ];
+
+        $this->assertSame(
+            ["{$migration} uses unresolved destructive target __dynamic_drop_table_expression__"],
+            $this->missingEvidence($operations, $evidence),
+        );
+    }
+
+    #[Test]
     public function current_destructive_migrations_have_bound_retirement_evidence(): void
     {
         $evidenceByMigration = $this->evidenceByMigration();
@@ -175,7 +210,7 @@ PHP;
 
         foreach ($evidenceByMigration as $migration => $evidence) {
             $source = (string) file_get_contents(base_path($migration));
-            $this->assertStringContainsString((string) ($evidence['id'] ?? ''), $source);
+            $this->assertStringContainsString((string) $evidence['id'], $source);
         }
     }
 
@@ -260,6 +295,8 @@ PHP;
             $this->assertIsArray($entry);
             $migration = (string) ($entry['migration'] ?? '');
             $this->assertNotSame('', $migration);
+            $this->assertIsString($entry['id'] ?? null);
+            $this->assertNotSame('', $entry['id']);
             $this->assertArrayNotHasKey($migration, $byMigration, "Duplicate destructive migration evidence for {$migration}");
             $this->assertFalse((bool) ($entry['production_execution_allowed_by_repository'] ?? true));
             $this->assertTrue((bool) ($entry['operator_checklist_required'] ?? false));
@@ -368,6 +405,12 @@ PHP;
 
         foreach ($operations as $operation) {
             $migration = $operation['migration'];
+            if (str_starts_with($operation['table'], '__dynamic_drop_')) {
+                $missing[] = "{$migration} uses unresolved destructive target {$operation['table']}";
+
+                continue;
+            }
+
             $evidence = $evidenceByMigration[$migration] ?? null;
 
             if (! is_array($evidence)) {
