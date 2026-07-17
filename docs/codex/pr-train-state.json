@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "8011daf993b485fae501040dc1726d3d84a5d7f9",
+    "commit_sha": "23c2623b9c85b9ad6e069db09bde10f4695977c9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 75 tests / 1067 assertions; V224 passes 50 tests / 535 assertions. Preflight now requires the HMAC revalidation endpoint to use the exact frontend base origin and proves a different public origin is rejected before authorization with zero revision/review writes. Complete DB/API hreflang URL parity, exact single HTML canonical, authorized 116-page execute/readback, private-review, rollback, cache, empty-media, private-route, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 75 tests / 1067 assertions; V224 passes 50 tests / 535 assertions. Renderable HTML text now preserves inline text-node boundaries without injecting whitespace, and the reviewer-leak regression splits a private name inside one rendered word to prove the HTML readback fails closed. Exact frontend/revalidation origin binding, DB/API hreflang parity, canonical, authorized 116-page execute/readback, rollback, cache, empty-media, private-route, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 240 tests / 29073 assertions with exact frontend/revalidation origin binding, complete DB/API hreflang URL parity, exact single HTML canonical enforcement, DB/API canonical-object parity, standard HTML/schema/inline/page-level CSS empty-media surfaces, admin/ops/tenant private-root rejection, CSS-hidden visible-content rejection, and a font-face-only non-media control enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 240 tests / 29073 assertions with inline-boundary-safe private reviewer detection, exact frontend/revalidation origin binding, complete DB/API hreflang URL parity, exact single HTML canonical enforcement, DB/API canonical-object parity, standard HTML/schema/inline/page-level CSS empty-media surfaces, admin/ops/tenant private-root rejection, CSS-hidden visible-content rejection, and a font-face-only non-media control enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head b9bb5064d7842201d702117780a4bac331a3744c passed all nine required GitHub checks, then exact-head review raised one valid P2: preflight accepted a public HMAC revalidation endpoint on a different origin from the authorized frontend base. The gap is fixed and locally validated at code commit 8011daf993b485fae501040dc1726d3d84a5d7f9; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "evidence": "Exact head 690710c60d67aaa7329385a7d5c3a1b7cc25596a passed all nine required GitHub checks, then exact-head review raised one valid P1: renderable-text normalization inserted whitespace between inline text nodes and could miss an HTML-only reviewer name split inside a word. The gap is fixed and locally validated at code commit 23c2623b9c85b9ad6e069db09bde10f4695977c9; a fresh complete GitHub check and exact-head review cycle is required before merge."
       }
     },
     "scope_validation": {
@@ -96528,9 +96528,14 @@
         "at": "2026-07-17T07:22:35Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head b9bb5064d7842201d702117780a4bac331a3744c passed all nine checks, exact-head review found the HMAC revalidation endpoint was public-HTTPS validated but not bound to the authorized frontend base origin. Code commit 8011daf993b485fae501040dc1726d3d84a5d7f9 enforces exact same-origin preflight and proves a different public origin fails before authorization with zero revision/review writes. Final V224 50/535, focused 75/1067, cache/API 8/72, classifier 1/2, full Enneagram V2 240/29073, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred the full run until a same-scope four-file PHPUnit process exited. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T07:38:48Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 690710c60d67aaa7329385a7d5c3a1b7cc25596a passed all nine checks, exact-head review found per-node whitespace injection could hide a private reviewer name split inside inline markup. Code commit 23c2623b9c85b9ad6e069db09bde10f4695977c9 concatenates eligible DOM text nodes with their original boundaries before whitespace normalization, and the regression now splits the reviewer name inside one word so raw HTML and the old visible-text algorithm cannot satisfy the HTML leak check. Final V224 50/535, focused 75/1067, cache/API 8/72, classifier 1/2, full Enneagram V2 240/29073, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, exact 15-path scope, and unchanged Career scope checks pass. The concurrency guard reused the already-running same-scope focused/cache/classifier reports before the final full run. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T07:22:35Z"
+    "updated_at": "2026-07-17T07:38:48Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
