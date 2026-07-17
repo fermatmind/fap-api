@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "23c2623b94297c09acb5a2a19601903cff65c4d9",
+    "commit_sha": "cb5d292e539ceccbff3d9b0c68fa8920dea2bb6d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 75 tests / 1067 assertions; V224 passes 50 tests / 535 assertions. Renderable HTML text now preserves inline text-node boundaries without injecting whitespace, and the reviewer-leak regression splits a private name inside one rendered word to prove the HTML readback fails closed. Exact frontend/revalidation origin binding, DB/API hreflang parity, canonical, authorized 116-page execute/readback, rollback, cache, empty-media, private-route, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 76 tests / 1073 assertions; V224 passes 51 tests / 541 assertions. Renderable HTML excludes elements hidden by common hidden/invisible classes or matching inline stylesheet selectors with display:none, visibility:hidden, or visibility:collapse; unparseable hiding selectors fail closed. The stylesheet-class regression proves section, FAQ, and evidence cannot pass from hidden authority markup. Inline-boundary reviewer detection, exact frontend/revalidation origin binding, canonical/hreflang, HMAC 116/0, rollback, cache, empty-media, private-route, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 240 tests / 29073 assertions with inline-boundary-safe private reviewer detection, exact frontend/revalidation origin binding, complete DB/API hreflang URL parity, exact single HTML canonical enforcement, DB/API canonical-object parity, standard HTML/schema/inline/page-level CSS empty-media surfaces, admin/ops/tenant private-root rejection, CSS-hidden visible-content rejection, and a font-face-only non-media control enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 241 tests / 29079 assertions with stylesheet-selector and inline-style hidden-content rejection, inline-boundary-safe private reviewer detection, exact frontend/revalidation origin binding, complete DB/API hreflang URL parity, exact single HTML canonical enforcement, DB/API canonical-object parity, standard HTML/schema/inline/page-level CSS empty-media surfaces, admin/ops/tenant private-root rejection, and a font-face-only non-media control enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head 690710c60d67aaa7329385a7d5c3a1b7cc25596a passed all nine required GitHub checks, then exact-head review raised one valid P1: renderable-text normalization inserted whitespace between inline text nodes and could miss an HTML-only reviewer name split inside a word. The gap is fixed and locally validated at code commit 23c2623b94297c09acb5a2a19601903cff65c4d9; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "evidence": "Exact head d6a858390408b7434c446d190d22f9e72a9cdffb passed all nine required GitHub checks, then exact-head review raised one valid P2: authority section, FAQ, or evidence text hidden by an inline stylesheet class could still satisfy visible-content readback. The gap is fixed and locally validated at code commit cb5d292e539ceccbff3d9b0c68fa8920dea2bb6d; a fresh complete GitHub check and exact-head review cycle is required before merge."
       }
     },
     "scope_validation": {
@@ -96533,9 +96533,14 @@
         "at": "2026-07-17T07:38:48Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head 690710c60d67aaa7329385a7d5c3a1b7cc25596a passed all nine checks, exact-head review found per-node whitespace injection could hide a private reviewer name split inside inline markup. Code commit 23c2623b94297c09acb5a2a19601903cff65c4d9 concatenates eligible DOM text nodes with their original boundaries before whitespace normalization, and the regression now splits the reviewer name inside one word so raw HTML and the old visible-text algorithm cannot satisfy the HTML leak check. Final V224 50/535, focused 75/1067, cache/API 8/72, classifier 1/2, full Enneagram V2 240/29073, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, exact 15-path scope, and unchanged Career scope checks pass. The concurrency guard reused the already-running same-scope focused/cache/classifier reports before the final full run. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T07:58:32Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head d6a858390408b7434c446d190d22f9e72a9cdffb passed all nine checks, exact-head review found stylesheet-class hidden authority markup could still satisfy visible section, FAQ, and evidence checks. Code commit cb5d292e539ceccbff3d9b0c68fa8920dea2bb6d converts inline hiding selectors to XPath, marks matched body elements as non-renderable, recognizes common hidden/invisible classes, and fails closed when a hiding selector cannot be verified. The first focused regression used a noncanonical evidence fixture, so it was corrected to the current public v2 source/claim shape before complete reruns. Final V224 51/541, focused 76/1073, cache/API 8/72, classifier 1/2, full Enneagram V2 241/29079, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, exact 15-path scope, and unchanged Career scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T07:38:48Z"
+    "updated_at": "2026-07-17T07:58:32Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
