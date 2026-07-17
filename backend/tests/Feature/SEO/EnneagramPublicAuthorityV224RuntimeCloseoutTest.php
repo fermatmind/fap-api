@@ -563,6 +563,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_pre_readback_rejects_stale_api_and_html_hreflang_against_the_database(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, staleHreflangPayload: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected stale API and HTML hreflang to fail against the current database.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_current_public_asset_mismatch', $exception->getMessage());
+        }
+    }
+
     public function test_html_readback_rejects_robots_directive_drift(): void
     {
         $this->seedPublishedEstate();
@@ -582,6 +604,30 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->fail('Expected HTML robots directive drift to fail closed.');
         } catch (\RuntimeException $exception) {
             $this->assertStringContainsString('html_robots_mismatch', $exception->getMessage());
+        }
+    }
+
+    public function test_html_readback_rejects_standard_empty_media_contract_leaks(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+
+        foreach (['og', 'twitter', 'schema', 'img'] as $standardMediaLeak) {
+            $this->fakeRuntimeHttp($report, standardMediaLeak: $standardMediaLeak);
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected standard media leak to fail closed: '.$standardMediaLeak);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('html_authority_media_present', $exception->getMessage());
+            }
         }
     }
 
@@ -1841,6 +1887,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $omitFaqSchemaAnswer = false,
         ?string $faqSchemaAnswerOverride = null,
         ?string $robotsHtmlOverride = null,
+        bool $staleHreflangPayload = false,
+        ?string $standardMediaLeak = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1848,7 +1896,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1905,12 +1953,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     ->where('entity_key', (string) $query['code'])
                     ->where('locale', (string) $query['locale'])
                     ->firstOrFail();
-                $hreflang = [];
-                foreach ((array) $asset->hreflang_json as $language => $url) {
+                $hreflang = (array) $asset->hreflang_json;
+                foreach ($hreflang as $language => $url) {
                     if (! in_array(strtolower((string) $language), ['en', 'zh-cn', 'x-default'], true)) {
                         continue;
                     }
                     $hreflang[$language] = 'https://frontend.test'.(string) parse_url((string) $url, PHP_URL_PATH);
+                }
+                if ($staleHreflangPayload) {
+                    $hreflang['en'] = 'https://frontend.test/en/personality/enneagram/type-9';
                 }
                 $payloadTitle = $stalePublicPayload ? 'Stale cached Enneagram authority' : (string) $asset->title;
                 $payloadSummary = $stalePublicPayload ? 'Stale cached backend-authoritative public content.' : (string) $asset->summary;
@@ -2022,6 +2073,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $href = $language === 'en' && $hreflangUrlOverride !== null
                         ? $hreflangUrlOverride
                         : 'https://frontend.test'.(string) parse_url((string) $url, PHP_URL_PATH);
+                    if ($staleHreflangPayload && strtolower((string) $language) === 'en') {
+                        $href = 'https://frontend.test/en/personality/enneagram/type-9';
+                    }
                     $hreflang[] = '<link rel="alternate" hreflang="'
                         .htmlspecialchars((string) $language, ENT_QUOTES | ENT_HTML5)
                         .'" href="'.htmlspecialchars($href, ENT_QUOTES | ENT_HTML5).'">';
@@ -2109,6 +2163,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $faqHtml = '';
                     $evidenceHtml = '';
                 }
+                $standardMediaHead = match ($standardMediaLeak) {
+                    'og' => '<meta property="og:image" content="https://frontend.test/hardcoded-og.png">',
+                    'twitter' => '<meta name="twitter:image" content="https://frontend.test/hardcoded-twitter.png">',
+                    'schema' => '<script type="application/ld+json">{"@type":"WebPage","image":"https://frontend.test/hardcoded-schema.png"}</script>',
+                    default => '',
+                };
+                $standardMediaBody = $standardMediaLeak === 'img'
+                    ? '<img src="https://frontend.test/hardcoded-inline.png" alt="hardcoded inline">'
+                    : '';
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
@@ -2116,7 +2179,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .implode('', $hreflang)
                     .$faqSchemaHtml
-                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$faqHtml.$evidenceHtml.$privateLink.'</main>'.$hydrationScript.$privateValue.'</body></html>');
+                    .$standardMediaHead
+                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$faqHtml.$evidenceHtml.$privateLink.$standardMediaBody.'</main>'.$hydrationScript.$privateValue.'</body></html>');
             }
 
             return Http::response(['ok' => false], 404);

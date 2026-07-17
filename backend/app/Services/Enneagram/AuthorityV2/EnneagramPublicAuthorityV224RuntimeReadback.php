@@ -259,6 +259,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'seo' => is_array($asset->seo_json) ? $asset->seo_json : [],
             'robots' => (string) $asset->robots,
             'canonical_path' => (string) data_get($asset->canonical_json, 'path', ''),
+            'hreflang' => $this->normalizedHreflangPaths($asset->hreflang_json),
             'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
             'source_package' => $asset->source_package,
             'source_hash' => $asset->source_hash,
@@ -271,6 +272,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'seo' => is_array($v1['seo'] ?? null) ? $v1['seo'] : [],
             'robots' => (string) ($v1['robots'] ?? ''),
             'canonical_path' => (string) ($v1['canonical_path'] ?? ''),
+            'hreflang' => $this->normalizedHreflangPaths($v1['hreflang'] ?? null),
             'faq' => is_array($v1['faq'] ?? null) ? $v1['faq'] : [],
             'source_package' => $v1['source_package'] ?? null,
             'source_hash' => $v1['source_hash'] ?? null,
@@ -521,6 +523,20 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             return;
         }
         $xpath = new DOMXPath($dom);
+        $standardMedia = $xpath->query(
+            '//meta[@content and ('
+            .'starts-with(translate(@property,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"),"og:image")'
+            .' or starts-with(translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"),"twitter:image")'
+            .')]'
+            .' | //link[translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="image_src" and @href]'
+            .' | //main//img | //main//picture | //article//img | //article//picture'
+            .' | //*[@role="main"]//img | //*[@role="main"]//picture'
+        );
+        if ($standardMedia !== false
+            && $standardMedia->length > 0
+            && ! in_array('html_authority_media_present', $issues, true)) {
+            $issues[] = 'html_authority_media_present';
+        }
         $title = trim((string) $xpath->evaluate('string(//title[1])'));
         $h1 = trim((string) $xpath->evaluate('string(//h1[1])'));
         $description = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="description"]/@content)'));
@@ -612,6 +628,10 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
 
                 continue;
             }
+            if ($this->schemaContainsMedia($schema)
+                && ! in_array('html_authority_media_present', $issues, true)) {
+                $issues[] = 'html_authority_media_present';
+            }
             foreach ($this->faqEntriesFromSchema($schema) as $entry) {
                 $question = $this->normalizedVisibleText($entry['question']);
                 $answer = $this->normalizedMarkdownText($entry['answer']);
@@ -636,6 +656,52 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     private function normalizedRobotsDirective(string $value): string
     {
         return strtolower((string) preg_replace('/\s+/', '', trim($value)));
+    }
+
+    /** @return array<string,mixed> */
+    private function normalizedHreflangPaths(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+        $paths = [];
+        foreach ($value as $language => $url) {
+            $key = trim((string) $language);
+            $normalizedLanguage = strtolower($key);
+            if (! in_array($normalizedLanguage, ['en', 'zh-cn', 'x-default'], true)) {
+                $paths[$key] = $url;
+
+                continue;
+            }
+            if (! is_string($url) || trim($url) === '') {
+                $paths[$normalizedLanguage] = '';
+
+                continue;
+            }
+            $paths[$normalizedLanguage] = (string) parse_url($url, PHP_URL_PATH);
+        }
+        ksort($paths);
+
+        return $paths;
+    }
+
+    /** @param array<int|string,mixed> $schema */
+    private function schemaContainsMedia(array $schema): bool
+    {
+        foreach ($schema as $key => $value) {
+            $normalizedKey = strtolower((string) preg_replace('/[^a-z]/i', '', (string) $key));
+            if (in_array($normalizedKey, ['image', 'thumbnailurl', 'primaryimageofpage'], true)
+                && $value !== null
+                && $value !== ''
+                && $value !== []) {
+                return true;
+            }
+            if (is_array($value) && $this->schemaContainsMedia($value)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @param array<string,mixed> $schema @return list<array{question:string,answer:string}> */
