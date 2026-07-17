@@ -1070,6 +1070,8 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             .' and not(ancestor::head)'
             .' and not(ancestor::*[@hidden])'
             .' and not(ancestor::*[translate(@aria-hidden,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="true"])'
+            .' and not(ancestor::*[contains(translate(normalize-space(@style),"ABCDEFGHIJKLMNOPQRSTUVWXYZ ","abcdefghijklmnopqrstuvwxyz"),"display:none")])'
+            .' and not(ancestor::*[contains(translate(normalize-space(@style),"ABCDEFGHIJKLMNOPQRSTUVWXYZ ","abcdefghijklmnopqrstuvwxyz"),"visibility:hidden")])'
             .']',
         );
         if ($nodes === false) {

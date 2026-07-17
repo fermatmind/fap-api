@@ -889,6 +889,58 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_readback_rejects_authority_content_under_css_hidden_ancestors(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill([
+                'faq_json' => [[
+                    'question' => 'What does this page explain?',
+                    'answer' => 'It explains a bounded observation pattern.',
+                ]],
+                'authority_json' => [
+                    'sources' => [[
+                        'id' => 'source-1',
+                        'title' => 'Visible evidence source',
+                        'author_or_organization' => 'Evidence organization',
+                        'year' => 2021,
+                        'source_type' => 'peer_reviewed_research',
+                        'accessed_at' => '2026-07-15',
+                        'claim_ids' => ['claim-1'],
+                    ]],
+                    'claim_mapping' => [[
+                        'claim_id' => 'claim-1',
+                        'source_ids' => ['source-1'],
+                    ]],
+                    'limitations' => ['Instrument-specific evidence.'],
+                    'visible_evidence_eligible' => true,
+                ],
+            ])->save();
+        }
+
+        foreach (['DISPLAY : none !important', 'visibility: hidden'] as $style) {
+            $this->fakeRuntimeHttp($report, authorityContentHiddenStyle: $style);
+
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'post',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected CSS-hidden authority content to fail visible readback: '.$style);
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('html_visible_section_mismatch', $exception->getMessage());
+                $this->assertStringContainsString('html_visible_faq_mismatch', $exception->getMessage());
+                $this->assertStringContainsString('html_visible_evidence_mismatch', $exception->getMessage());
+            }
+        }
+    }
+
     public function test_post_readback_requires_complete_visible_evidence(): void
     {
         $this->seedPublishedEstate();
@@ -1896,6 +1948,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $robotsHtmlOverride = null,
         bool $staleHreflangPayload = false,
         ?string $standardMediaLeak = null,
+        ?string $authorityContentHiddenStyle = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1903,7 +1956,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2167,6 +2220,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         .$sectionHtml.$faqHtml.$evidenceHtml
                         .'</script>';
                     $sectionHtml = '';
+                    $faqHtml = '';
+                    $evidenceHtml = '';
+                }
+                if ($authorityContentHiddenStyle !== null) {
+                    $sectionHtml = '<div style="'.htmlspecialchars($authorityContentHiddenStyle, ENT_QUOTES | ENT_HTML5).'">'
+                        .$sectionHtml.$faqHtml.$evidenceHtml
+                        .'</div>';
                     $faqHtml = '';
                     $evidenceHtml = '';
                 }
