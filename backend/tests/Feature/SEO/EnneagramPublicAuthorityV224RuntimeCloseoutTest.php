@@ -610,6 +610,36 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_pre_readback_rejects_api_hreflang_url_drift_with_matching_paths(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+
+        foreach ([
+            'https://staging-mirror.test{path}',
+            'http://fermatmind.com{path}',
+            'https://fermatmind.com{path}?stale=1',
+            'https://fermatmind.com{path}#stale',
+            '{path}',
+        ] as $apiHreflangUrlOverride) {
+            $this->fakeRuntimeHttp($report, apiHreflangUrlOverride: $apiHreflangUrlOverride);
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected API hreflang URL drift to fail current-asset parity.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('api_current_public_asset_mismatch', $exception->getMessage());
+            }
+        }
+    }
+
     public function test_html_readback_rejects_robots_directive_drift(): void
     {
         $this->seedPublishedEstate();
@@ -2024,6 +2054,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $authorityContentHiddenStyle = null,
         ?string $apiCanonicalUrlOverride = null,
         ?string $duplicateCanonicalUrl = null,
+        ?string $apiHreflangUrlOverride = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -2031,7 +2062,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2089,11 +2120,12 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     ->where('locale', (string) $query['locale'])
                     ->firstOrFail();
                 $hreflang = (array) $asset->hreflang_json;
-                foreach ($hreflang as $language => $url) {
-                    if (! in_array(strtolower((string) $language), ['en', 'zh-cn', 'x-default'], true)) {
-                        continue;
-                    }
-                    $hreflang[$language] = 'https://frontend.test'.(string) parse_url((string) $url, PHP_URL_PATH);
+                if ($apiHreflangUrlOverride !== null) {
+                    $hreflang['en'] = str_replace(
+                        '{path}',
+                        (string) parse_url((string) ($hreflang['en'] ?? ''), PHP_URL_PATH),
+                        $apiHreflangUrlOverride,
+                    );
                 }
                 if ($staleHreflangPayload) {
                     $hreflang['en'] = 'https://frontend.test/en/personality/enneagram/type-9';

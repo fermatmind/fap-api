@@ -260,7 +260,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'robots' => (string) $asset->robots,
             'canonical_path' => (string) data_get($asset->canonical_json, 'path', ''),
             'canonical' => is_array($asset->canonical_json) ? $asset->canonical_json : [],
-            'hreflang' => $this->normalizedHreflangPaths($asset->hreflang_json),
+            'hreflang' => $this->normalizedHreflangUrls($asset->hreflang_json),
             'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
             'source_package' => $asset->source_package,
             'source_hash' => $asset->source_hash,
@@ -274,7 +274,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'robots' => (string) ($v1['robots'] ?? ''),
             'canonical_path' => (string) ($v1['canonical_path'] ?? ''),
             'canonical' => is_array($v1['canonical'] ?? null) ? $v1['canonical'] : [],
-            'hreflang' => $this->normalizedHreflangPaths($v1['hreflang'] ?? null),
+            'hreflang' => $this->normalizedHreflangUrls($v1['hreflang'] ?? null),
             'faq' => is_array($v1['faq'] ?? null) ? $v1['faq'] : [],
             'source_package' => $v1['source_package'] ?? null,
             'source_hash' => $v1['source_hash'] ?? null,
@@ -698,30 +698,30 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     }
 
     /** @return array<string,mixed> */
-    private function normalizedHreflangPaths(mixed $value): array
+    private function normalizedHreflangUrls(mixed $value): array
     {
         if (! is_array($value)) {
             return [];
         }
-        $paths = [];
+        $urls = [];
         foreach ($value as $language => $url) {
             $key = trim((string) $language);
             $normalizedLanguage = strtolower($key);
             if (! in_array($normalizedLanguage, ['en', 'zh-cn', 'x-default'], true)) {
-                $paths[$key] = $url;
+                $urls[$key] = $url;
 
                 continue;
             }
             if (! is_string($url) || trim($url) === '') {
-                $paths[$normalizedLanguage] = '';
+                $urls[$normalizedLanguage] = '';
 
                 continue;
             }
-            $paths[$normalizedLanguage] = (string) parse_url($url, PHP_URL_PATH);
+            $urls[$normalizedLanguage] = trim($url);
         }
-        ksort($paths);
+        ksort($urls);
 
-        return $paths;
+        return $urls;
     }
 
     /** @param array<int|string,mixed> $schema */
@@ -1025,14 +1025,12 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             $url = trim((string) $url);
             $parts = parse_url($url);
             $path = is_array($parts) ? (string) ($parts['path'] ?? '') : '';
-            $isRelativePath = str_starts_with($url, '/') && ! str_starts_with($url, '//');
             if ($language === ''
                 || isset($expected[$language])
                 || $path === ''
                 || ! is_array($parts)
                 || array_key_exists('query', $parts)
-                || array_key_exists('fragment', $parts)
-                || (! $isRelativePath && ! $this->isExactFrontendUrl($url, $frontendBaseUrl, $path))) {
+                || array_key_exists('fragment', $parts)) {
                 $issues[] = 'html_hreflang_mismatch_expected_'.($language !== '' ? $language : 'missing');
 
                 return;
