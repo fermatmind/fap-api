@@ -84,6 +84,41 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertArrayNotHasKey('media_authority', $asset->authority_json);
     }
 
+    public function test_contract_rejects_forbidden_media_fields_even_when_their_values_are_empty(): void
+    {
+        $contract = app(PersonalityPublicContentAssetContract::class);
+        $cases = [
+            'media' => [$this->contractPayload(['media' => []]), 'media'],
+            'media_json' => [$this->contractPayload(['media_json' => []]), 'media_json'],
+            'media_authority' => [$this->contractPayload(['media_authority' => []]), 'media_authority'],
+            'seo.og_image_url' => [$this->contractPayload([
+                'seo' => [
+                    'title' => 'Big Five Personality',
+                    'description' => 'Contract fixture.',
+                    'og_image_url' => null,
+                ],
+            ]), 'seo.og_image_url'],
+            'authority.media' => [$this->contractPayload([
+                'authority' => ['media' => []],
+            ]), 'authority.media'],
+            'authority.media_authority' => [$this->contractPayload([
+                'authority' => ['media_authority' => []],
+            ]), 'authority.media_authority'],
+            'authority.media_deferred_by_operator' => [$this->contractPayload([
+                'authority' => ['media_deferred_by_operator' => null],
+            ]), 'authority.media_deferred_by_operator'],
+        ];
+
+        foreach ($cases as $case => [$payload, $expectedErrorKey]) {
+            try {
+                $contract->validateAsset($payload);
+                $this->fail("Expected forbidden media field presence failure for {$case}.");
+            } catch (ValidationException $exception) {
+                $this->assertArrayHasKey($expectedErrorKey, $exception->errors(), $case);
+            }
+        }
+    }
+
     public function test_write_import_is_idempotent_and_exposes_only_render_candidates(): void
     {
         $this->artisan('personality-public-assets:import', [
