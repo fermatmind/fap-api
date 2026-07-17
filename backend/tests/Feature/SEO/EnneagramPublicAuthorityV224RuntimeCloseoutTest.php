@@ -992,6 +992,44 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         );
     }
 
+    public function test_discoverability_snapshot_rejects_private_runtime_paths_on_every_surface(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $discoverabilityState = (object) [
+            'additional_url' => null,
+            'additional_llms_url' => null,
+            'additional_llms_full_url' => null,
+        ];
+
+        foreach ([
+            ['sitemap', 'additional_url', 'https://frontend.test/api/v0.3/attempts/private-attempt/report'],
+            ['llms', 'additional_llms_url', '/claim/report'],
+            ['llms', 'additional_llms_url', '/zh-CN/tests/enneagram/take'],
+            ['llms_full', 'additional_llms_full_url', '/orders/private-order/recover/alipay-return'],
+            ['llms_full', 'additional_llms_full_url', '/og/share/private-share'],
+        ] as [$surface, $stateKey, $privatePath]) {
+            $discoverabilityState->additional_url = null;
+            $discoverabilityState->additional_llms_url = null;
+            $discoverabilityState->additional_llms_full_url = null;
+            $discoverabilityState->{$stateKey} = $privatePath;
+            $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
+
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+                    $report,
+                    'https://frontend.test',
+                );
+                $this->fail('Expected private discoverability path to fail closed: '.$surface);
+            } catch (\RuntimeException $exception) {
+                $this->assertSame(
+                    'Discoverability URL set contains a prohibited private path.',
+                    $exception->getMessage(),
+                );
+            }
+        }
+    }
+
     public function test_discoverability_snapshot_rejects_non_enneagram_absolute_llms_origin_query_and_fragment_drift(): void
     {
         $this->seedPublishedEstate();
@@ -1718,6 +1756,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 ? trim($discoverabilityState->additional_llms_url)
                 : '';
             $llmsUrlText = $relativeLlmsUrl === '' ? $urlText : $urlText."\n".$relativeLlmsUrl;
+            $relativeLlmsFullUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_llms_full_url ?? null)
+                ? trim($discoverabilityState->additional_llms_full_url)
+                : '';
+            $llmsFullUrlText = $relativeLlmsFullUrl === '' ? $llmsUrlText : $llmsUrlText."\n".$relativeLlmsFullUrl;
             $trailingSlashLines = explode("\n", $urlText);
             $trailingSlashLines[0] = rtrim($trailingSlashLines[0], '/').'/';
             $trailingSlashUrlText = implode("\n", $trailingSlashLines);
@@ -1836,7 +1878,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $surface = $url === 'https://frontend.test/llms-full.txt' ? 'llms_full' : 'llms';
 
                 return Http::response(
-                    $trailingSlashSurface === $surface ? $trailingSlashUrlText : $llmsUrlText,
+                    $trailingSlashSurface === $surface
+                        ? $trailingSlashUrlText
+                        : ($surface === 'llms_full' ? $llmsFullUrlText : $llmsUrlText),
                     200,
                     ['Content-Type' => 'text/plain'],
                 );

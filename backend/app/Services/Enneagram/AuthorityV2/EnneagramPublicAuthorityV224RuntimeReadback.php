@@ -741,6 +741,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 throw new RuntimeException('Discoverability URL is invalid.');
             }
             $path = (string) ($parts['path'] ?? '');
+            if ($this->isPrivateDiscoverabilityPath($path)) {
+                throw new RuntimeException('Discoverability URL set contains a prohibited private path.');
+            }
             if ($path !== '/' && str_ends_with($path, '/')) {
                 throw new RuntimeException('Discoverability URL must not contain a trailing slash on a non-root path.');
             }
@@ -763,6 +766,46 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         sort($paths);
 
         return $paths;
+    }
+
+    private function isPrivateDiscoverabilityPath(string $path): bool
+    {
+        $segments = array_values(array_filter(
+            explode('/', trim(strtolower(rawurldecode($path)), '/')),
+            static fn (string $segment): bool => $segment !== '',
+        ));
+        if (preg_match('/^[a-z]{2}(?:-[a-z]{2})?$/', (string) ($segments[0] ?? '')) === 1) {
+            array_shift($segments);
+        }
+
+        $root = (string) ($segments[0] ?? '');
+        if (in_array($root, [
+            'api',
+            'account',
+            'attempt',
+            'attempts',
+            'claim',
+            'checkout',
+            'history',
+            'lookup',
+            'me',
+            'order',
+            'orders',
+            'pay',
+            'payment',
+            'payments',
+            'report',
+            'reports',
+            'result',
+            'results',
+            'share',
+            'shares',
+        ], true)) {
+            return true;
+        }
+
+        return ($root === 'tests' && in_array('take', $segments, true))
+            || ($root === 'og' && in_array((string) ($segments[1] ?? ''), ['share', 'shares'], true));
     }
 
     private function canonicalOrigin(string $url): string
