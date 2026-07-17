@@ -36,6 +36,27 @@ final class PersonalityPublicContentAssetContract
         '/entitlement/i',
     ];
 
+    private const FORBIDDEN_MEDIA_FIELD_PATHS = [
+        'media',
+        'media_json',
+        'media_authority',
+        'seo.og_image_url',
+        'seo.twitter_image_url',
+        'seo.image',
+        'seo.image_url',
+        'seo.og.image',
+        'seo.og.image_url',
+        'seo.open_graph.image',
+        'seo.open_graph.image_url',
+        'seo.twitter.image',
+        'seo.twitter.image_url',
+        'seo.twitter_card.image',
+        'seo.twitter_card.image_url',
+        'authority.media',
+        'authority.media_authority',
+        'authority.media_deferred_by_operator',
+    ];
+
     /**
      * @param  array<string,mixed>  $payload
      *
@@ -79,6 +100,7 @@ final class PersonalityPublicContentAssetContract
             'hreflang' => ['present', 'array'],
             'faq' => ['present', 'array'],
             'media' => ['prohibited'],
+            'media_json' => ['prohibited'],
             'media_authority' => ['prohibited'],
             'schema' => ['present', 'array'],
             'method_boundary' => ['present', 'array'],
@@ -131,7 +153,8 @@ final class PersonalityPublicContentAssetContract
             'last_reviewed_at' => ['nullable', 'date'],
         ]);
 
-        $validator->after(function ($validator) use ($normalized): void {
+        $validator->after(function ($validator) use ($normalized, $payload): void {
+            $this->validateForbiddenMediaFieldPresence($validator, $payload);
             $this->validateFrameworkEntityPair($validator, $normalized);
             $this->validateLaunchGate($validator, $normalized);
             $this->validateForbiddenProgrammaticPages($validator, $normalized);
@@ -146,6 +169,41 @@ final class PersonalityPublicContentAssetContract
         }
 
         return PersonalityPublicContentAssetData::fromValidatedPayload($validator->validated());
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function validateForbiddenMediaFieldPresence($validator, array $payload): void
+    {
+        foreach (self::FORBIDDEN_MEDIA_FIELD_PATHS as $path) {
+            if ($this->payloadHasPath($payload, $path)) {
+                $validator->errors()->add($path, "The {$path} field must be absent.");
+            }
+        }
+    }
+
+    /** @param array<string,mixed> $payload */
+    private function payloadHasPath(array $payload, string $path): bool
+    {
+        $cursor = $payload;
+        $segments = explode('.', $path);
+
+        foreach ($segments as $index => $segment) {
+            if (! array_key_exists($segment, $cursor)) {
+                return false;
+            }
+
+            if ($index === array_key_last($segments)) {
+                return true;
+            }
+
+            if (! is_array($cursor[$segment])) {
+                return false;
+            }
+
+            $cursor = $cursor[$segment];
+        }
+
+        return false;
     }
 
     /**
