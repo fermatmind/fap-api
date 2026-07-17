@@ -44,32 +44,28 @@ final readonly class ReviewAttestationService
         $validated = $this->validate($attestation, $targets, $expectedPackageSha256);
 
         return DB::transaction(function () use ($validated): ReviewAttestation {
-            $existing = ReviewAttestation::query()
-                ->where('evidence_sha256', $validated->payload['evidence_sha256'])
-                ->first();
-            if ($existing instanceof ReviewAttestation) {
-                $this->assertIdempotentReadback($existing, $validated);
+            $record = ReviewAttestation::query()->createOrFirst(
+                ['evidence_sha256' => $validated->payload['evidence_sha256']],
+                ['schema_version' => $validated->payload['schema_version'],
+                    'review_mode' => $validated->payload['review_mode'],
+                    'review_source' => $validated->payload['review_source'],
+                    'scope_type' => $validated->payload['scope_type'],
+                    'scope_identity' => $validated->payload['scope_identity'],
+                    'decision' => $validated->payload['decision'],
+                    'target_count' => $validated->payload['target_count'],
+                    'target_set_sha256' => $validated->payload['target_set_sha256'],
+                    'package_sha256' => $validated->payload['package_sha256'],
+                    'exceptions_json' => $validated->payload['exceptions'],
+                    'statement_version' => $validated->payload['statement_version'],
+                    'attested_by_admin_user_id' => $validated->payload['attested_by_admin_user_id'],
+                    'attested_at' => $validated->payload['attested_at'],
+                    'canonical_evidence_json' => $validated->payload],
+            );
+            if (! $record->wasRecentlyCreated) {
+                $this->assertIdempotentReadback($record, $validated);
 
-                return $existing->load('targetEvidences');
+                return $record->load('targetEvidences');
             }
-
-            $record = ReviewAttestation::query()->create([
-                'schema_version' => $validated->payload['schema_version'],
-                'review_mode' => $validated->payload['review_mode'],
-                'review_source' => $validated->payload['review_source'],
-                'scope_type' => $validated->payload['scope_type'],
-                'scope_identity' => $validated->payload['scope_identity'],
-                'decision' => $validated->payload['decision'],
-                'target_count' => $validated->payload['target_count'],
-                'target_set_sha256' => $validated->payload['target_set_sha256'],
-                'package_sha256' => $validated->payload['package_sha256'],
-                'exceptions_json' => $validated->payload['exceptions'],
-                'statement_version' => $validated->payload['statement_version'],
-                'attested_by_admin_user_id' => $validated->payload['attested_by_admin_user_id'],
-                'attested_at' => $validated->payload['attested_at'],
-                'evidence_sha256' => $validated->payload['evidence_sha256'],
-                'canonical_evidence_json' => $validated->payload,
-            ]);
 
             foreach ($validated->targetSet->targets as $target) {
                 $exception = $validated->exceptionsByTarget[$target->identity] ?? null;

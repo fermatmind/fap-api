@@ -96787,11 +96787,11 @@
       },
       "github": {
         "status": "rerun_pending",
-        "evidence": "All nine checks passed on 72887c87905b9da4bdee4dd38e7b23f288406a1b, 6d17ef04b76c75a88fca32ef8ba0c98697b28943, and 2b719fef7163f37f70bd9ef07ef4b554661d044a. A fourth valid Codex P2 finding was then repaired in scope, so checks must rerun on the forthcoming review-fix head."
+        "evidence": "All nine checks passed through adcc27655d0c54fe676a46989b001bcc0d3db608. A fifth valid Codex P2 finding was then repaired in scope, so checks must rerun on the forthcoming review-fix head."
       },
       "codex_review": {
         "status": "findings_repaired",
-        "evidence": "The review found exec output accumulation in the architecture gate, silent scalar coercion in ReviewTarget, over-broad architecture namespace exemptions, and an over-broad runtime-freeze DTO namespace exemption. All four were fixed with regression coverage. The latest focused classifier test passed (1 test, 2 assertions), Pint and PHP lint passed, and git diff --check passed."
+        "evidence": "Five valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, and a concurrent-bind unique-key race. The binder now uses Eloquent createOrFirst so a duplicate-key loser reloads on the write connection and undergoes exact evidence readback. Focused binding/contract tests passed (6 tests, 32 assertions), Pint and PHP lint passed, and git diff --check passed."
       }
     },
     "scope_validation": {
@@ -96850,8 +96850,13 @@
         "at": "2026-07-17T15:45:38Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on 2b719fef7163f37f70bd9ef07ef4b554661d044a. Its exact-head Codex review found one additional valid P2: the Big Five runtime-freeze helper still exempted every future ReviewGovernance DTO. The helper now allows only the three PR1 DTOs and explicitly regression-blocks a future DTO; a new full check run and exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T15:53:21Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on adcc27655d0c54fe676a46989b001bcc0d3db608. Its exact-head Codex review found a concurrent-bind idempotency race. Parent creation now uses createOrFirst, whose unique-conflict path reloads from the write connection before the existing exact target-evidence readback; focused binding and contract validation passed."
       }
     ],
-    "updated_at": "2026-07-17T15:45:38Z"
+    "updated_at": "2026-07-17T15:53:21Z"
   }
 }
