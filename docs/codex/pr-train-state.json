@@ -96749,5 +96749,76 @@
         }
       ],
       "updated_at": "2026-07-16T18:09:14Z"
+  },
+  "SOLO-OWNER-REVIEW-FOUNDATION-01": {
+    "id": "SOLO-OWNER-REVIEW-FOUNDATION-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/solo-owner-review-foundation-01",
+    "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
+    "depends_on": [],
+    "status": "local_validated",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "This foundation PR has no dependencies; clean latest main and absent local/remote task branch were verified before branch creation."
+      },
+      "ci_verify_mbti_initial": {
+        "status": "failed_then_repaired",
+        "evidence": "The first complete backend/scripts/ci_verify_mbti.sh run failed only because the new down migration used dropIfExists, which violates the repository migration-safety gate. The migration was changed to guarded Schema::drop calls; focused migration-safety tests and the complete verifier then passed."
+      },
+      "ci_verify_mbti": {
+        "status": "passed",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh completed with exit 0 after the scoped migration-safety repair."
+      },
+      "focused_contracts": {
+        "status": "passed",
+        "evidence": "ReviewGovernance unit/feature/architecture tests plus the Big Five runtime-freeze classifier passed: 371 tests, 1001 assertions."
+      },
+      "migration_fresh_sqlite": {
+        "status": "passed",
+        "evidence": "Fresh temporary SQLite migration succeeded; one-step rollback removed only review_attestations and review_attestation_target_evidences while retaining the existing users table."
+      },
+      "static_validation": {
+        "status": "passed",
+        "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-17T14:40:19Z",
+        "status": "pending_dependency",
+        "note": "Initialized from the explicit seven-PR serial execution goal with the required no-production-write defaults."
+      },
+      {
+        "at": "2026-07-17T14:40:19Z",
+        "status": "implementation_in_progress",
+        "note": "PR1 has no dependency. Latest main parity, clean worktree, and absent local/remote task branch were verified before creating the exact scoped branch. No production, CMS, database, publish, deploy, or review-bind action occurred."
+      },
+      {
+        "at": "2026-07-17T15:17:00Z",
+        "status": "local_validated",
+        "note": "All required PR1 checks passed after replacing the migration-safety-incompatible dropIfExists rollback with guarded drops. The complete backend verifier passed, the exact 27-file scope is clean, generated Big Five timestamp noise was removed, and no production or CMS action occurred."
+      }
+    ],
+    "updated_at": "2026-07-17T15:17:00Z"
   }
 }
