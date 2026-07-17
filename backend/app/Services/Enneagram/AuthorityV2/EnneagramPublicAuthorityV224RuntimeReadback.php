@@ -16,6 +16,7 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use RuntimeException;
+use Symfony\Component\CssSelector\CssSelectorConverter;
 
 final class EnneagramPublicAuthorityV224RuntimeReadback
 {
@@ -608,6 +609,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             }
         }
 
+        $this->markStylesheetHiddenElements($xpath, $issues);
         $visible = $this->normalizedRenderableBodyText($xpath);
         if (! in_array('html_private_reviewer_exposed', $issues, true)) {
             $this->assertNoSensitiveValues($visible, $sensitiveValues, 'html', $issues);
@@ -1096,6 +1098,53 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         return preg_replace('/\s+/u', ' ', trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5))) ?? '';
     }
 
+    /** @param list<string> $issues */
+    private function markStylesheetHiddenElements(DOMXPath $xpath, array &$issues): void
+    {
+        foreach ($xpath->query(
+            '//*[contains(concat(" ",normalize-space(@class)," ")," hidden ")'
+            .' or contains(concat(" ",normalize-space(@class)," ")," invisible ")]',
+        ) ?: [] as $element) {
+            if ($element instanceof DOMElement) {
+                $element->setAttribute('data-fermat-runtime-stylesheet-hidden', 'true');
+            }
+        }
+
+        $converter = new CssSelectorConverter;
+        foreach ($xpath->query('//style') ?: [] as $style) {
+            $css = preg_replace('#/\*.*?\*/#s', '', (string) $style->textContent) ?? (string) $style->textContent;
+            preg_match_all('/([^{}]+)\{([^{}]*)\}/s', $css, $rules, PREG_SET_ORDER);
+            foreach ($rules as $rule) {
+                $declarations = (string) ($rule[2] ?? '');
+                if (preg_match('/(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*(?:hidden|collapse))(?:\s*!important)?\s*(?:;|$)/i', $declarations) !== 1) {
+                    continue;
+                }
+                $selector = trim((string) ($rule[1] ?? ''));
+                if ($selector === '' || str_starts_with($selector, '@')) {
+                    continue;
+                }
+                try {
+                    $hidden = $xpath->query($converter->toXPath($selector, '//'));
+                } catch (\Throwable) {
+                    $issues[] = 'html_stylesheet_visibility_unverifiable';
+
+                    return;
+                }
+                if ($hidden === false) {
+                    $issues[] = 'html_stylesheet_visibility_unverifiable';
+
+                    return;
+                }
+                foreach ($hidden as $element) {
+                    if ($element instanceof DOMElement
+                        && $xpath->evaluate('boolean(ancestor-or-self::body)', $element) === true) {
+                        $element->setAttribute('data-fermat-runtime-stylesheet-hidden', 'true');
+                    }
+                }
+            }
+        }
+    }
+
     private function normalizedRenderableBodyText(DOMXPath $xpath): string
     {
         $nodes = $xpath->query(
@@ -1106,6 +1155,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             .' and not(ancestor::noscript)'
             .' and not(ancestor::head)'
             .' and not(ancestor::*[@hidden])'
+            .' and not(ancestor::*[@data-fermat-runtime-stylesheet-hidden="true"])'
             .' and not(ancestor::*[translate(@aria-hidden,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="true"])'
             .' and not(ancestor::*[contains(translate(normalize-space(@style),"ABCDEFGHIJKLMNOPQRSTUVWXYZ ","abcdefghijklmnopqrstuvwxyz"),"display:none")])'
             .' and not(ancestor::*[contains(translate(normalize-space(@style),"ABCDEFGHIJKLMNOPQRSTUVWXYZ ","abcdefghijklmnopqrstuvwxyz"),"visibility:hidden")])'

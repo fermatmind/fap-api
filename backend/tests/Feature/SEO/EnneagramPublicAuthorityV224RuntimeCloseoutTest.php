@@ -1075,6 +1075,55 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_readback_rejects_authority_content_hidden_by_stylesheet_class(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill([
+                'faq_json' => [[
+                    'question' => 'What does this page explain?',
+                    'answer' => 'It explains a bounded observation pattern.',
+                ]],
+                'authority_json' => [
+                    'sources' => [[
+                        'id' => 'source-1',
+                        'title' => 'Visible evidence source',
+                        'author_or_organization' => 'Evidence organization',
+                        'year' => 2021,
+                        'source_type' => 'peer_reviewed_research',
+                        'accessed_at' => '2026-07-15',
+                        'claim_ids' => ['claim-1'],
+                    ]],
+                    'claim_mapping' => [[
+                        'claim_id' => 'claim-1',
+                        'source_ids' => ['source-1'],
+                    ]],
+                    'limitations' => ['Instrument-specific evidence.'],
+                    'visible_evidence_eligible' => true,
+                ],
+            ])->save();
+        }
+        $this->fakeRuntimeHttp($report, authorityContentHiddenByStylesheet: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'post',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected stylesheet-hidden authority content to fail visible readback.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_visible_section_mismatch', $exception->getMessage());
+            $this->assertStringContainsString('html_visible_faq_mismatch', $exception->getMessage());
+            $this->assertStringContainsString('html_visible_evidence_mismatch', $exception->getMessage());
+        }
+    }
+
     public function test_post_readback_requires_complete_visible_evidence(): void
     {
         $this->seedPublishedEstate();
@@ -2083,6 +2132,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $staleHreflangPayload = false,
         ?string $standardMediaLeak = null,
         ?string $authorityContentHiddenStyle = null,
+        bool $authorityContentHiddenByStylesheet = false,
         ?string $apiCanonicalUrlOverride = null,
         ?string $duplicateCanonicalUrl = null,
         ?string $apiHreflangUrlOverride = null,
@@ -2093,7 +2143,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2381,6 +2431,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $faqHtml = '';
                     $evidenceHtml = '';
                 }
+                $stylesheetVisibilityHead = '';
+                if ($authorityContentHiddenByStylesheet) {
+                    $sectionHtml = '<div class="authority-hidden-by-stylesheet">'
+                        .$sectionHtml.$faqHtml.$evidenceHtml
+                        .'</div>';
+                    $faqHtml = '';
+                    $evidenceHtml = '';
+                    $stylesheetVisibilityHead = '<style>.authority-hidden-by-stylesheet { display: none !important; }</style>';
+                }
                 $standardMediaHead = match ($standardMediaLeak) {
                     'og' => '<meta property="og:image" content="https://frontend.test/hardcoded-og.png">',
                     'twitter' => '<meta name="twitter:image" content="https://frontend.test/hardcoded-twitter.png">',
@@ -2405,6 +2464,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     .$duplicateCanonical
                     .implode('', $hreflang)
                     .$faqSchemaHtml
+                    .$stylesheetVisibilityHead
                     .$standardMediaHead
                     .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$faqHtml.$evidenceHtml.$privateLink.$standardMediaBody.'</main>'.$hydrationScript.$privateValue.'</body></html>');
             }
