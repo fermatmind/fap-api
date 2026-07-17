@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "7cd6aae516cff0a37e7d3a64e035ba735ed8310e",
+    "commit_sha": "3d1f8b384e0a1db4b2db95737b1a6e465524266a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 79 tests / 1087 assertions; V224 passes 54 tests / 555 assertions. HTML readback requires exactly one robots meta directive and scans hreflang links by rel token so conflicting alternate values cannot hide behind additional rel tokens. Duplicate discoverability URL, hidden-content, private-reviewer, exact-origin, canonical/hreflang, HMAC 116/0, rollback, cache, empty-media, private-route, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 80 tests / 1091 assertions; V224 passes 55 tests / 559 assertions. Nested CSS conditional at-rules with hiding declarations can no longer be skipped; unsupported at-rule visibility fails closed as html_stylesheet_visibility_unverifiable. Exact robots, tokenized hreflang, duplicate discoverability URL, hidden-content, private-reviewer, exact-origin, HMAC 116/0, rollback, cache, empty-media, private-route, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 244 tests / 29093 assertions with exact single robots meta enforcement and tokenized hreflang conflict rejection; duplicate normalized discoverability URL rejection on sitemap.xml, llms.txt, and llms-full.txt; hidden-content and private-reviewer rejection; exact origin/canonical/hreflang parity; empty-media and private-root boundaries; and FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime checks."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 245 tests / 29097 assertions with fail-closed nested CSS at-rule visibility; exact single robots meta enforcement; tokenized hreflang conflict rejection; duplicate normalized discoverability URL rejection; hidden-content and private-reviewer rejection; exact origin/canonical/hreflang parity; empty-media and private-root boundaries; and FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime checks."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "After duplicate-URL fix head d56d42df69cf6a0346626dbb66ce6033fa3ab766 started a fresh check/review cycle, exact review raised two valid P2 findings: duplicate robots meta tags could hide behind the first value and hreflang links with tokenized rel values were skipped. Code commit 7cd6aae516cff0a37e7d3a64e035ba735ed8310e fixes both and passes complete local validation; a fresh complete GitHub check plus exact-head review cycle are required before merge."
+        "evidence": "Exact review of head c84f99e0f37ed9786c12437479c3e1a449bd539b raised one valid P2: nested stylesheet at-rules with hiding declarations could be skipped before visible-authority evaluation. Code commit 3d1f8b384e0a1db4b2db95737b1a6e465524266a fails closed on unsupported at-rule visibility and passes complete local validation; a fresh complete GitHub check plus exact-head review cycle are required before merge."
       }
     },
     "scope_validation": {
@@ -96553,9 +96553,14 @@
         "at": "2026-07-17T08:29:23Z",
         "status": "review_fix_local_validation_passed",
         "note": "Exact review of head d56d42df69cf6a0346626dbb66ce6033fa3ab766 found two valid P2 readback gaps. Code commit 7cd6aae516cff0a37e7d3a64e035ba735ed8310e now requires exactly one robots meta directive and matches hreflang alternate as a rel token, with regressions for a correct-first duplicate noindex tag and rel=\"alternate stylesheet\" conflicting href. Final V224 54/555, focused V205/V206/V223/V224 79/1087, cache/API 8/72, classifier 1/2, full Enneagram V2 244/29093, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard waited for an existing same-scope focused run before starting full validation. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T08:40:16Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact review of head c84f99e0f37ed9786c12437479c3e1a449bd539b found that a nested stylesheet conditional at-rule with a direct hiding declaration was skipped. Code commit 3d1f8b384e0a1db4b2db95737b1a6e465524266a treats unsupported at-rule visibility as unverifiable and fails closed, with a nested @media regression. Final V224 55/559, focused V205/V206/V223/V224 80/1091, cache/API 8/72, classifier 1/2, full Enneagram V2 245/29097, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T08:29:23Z"
+    "updated_at": "2026-07-17T08:40:16Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
