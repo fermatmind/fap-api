@@ -96193,8 +96193,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "3b6ef0bf69b9df96c52ec34ebb0ffbfd77d46b99",
+    "status": "merged_and_cleaned",
+    "commit_sha": "cde7c452679da5ab7fab727db1c2cb05a2725ef4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96219,19 +96219,27 @@
       },
       "github_required": {
         "status": "passed",
-        "evidence": "Exact head 89c9ba893606228c57634014b99937ef508e5325 passed all nine required GitHub checks, is CLEAN and MERGEABLE, has zero unresolved review threads, and its exact-head Codex review reported no major issues."
+        "evidence": "Final PR head 4c871b9cd00d01c278b751b8b90bb051046fd03e passed all nine required GitHub checks before squash merge."
+      },
+      "post_merge": {
+        "status": "passed",
+        "evidence": "PR #3145 is MERGED at cde7c452679da5ab7fab727db1c2cb05a2725ef4; origin/main contains the merge, local main equals origin/main, both task branches are absent, and the worktree is clean."
+      },
+      "readiness_prerequisites": {
+        "status": "passed",
+        "evidence": "Artifacts-only review generator PR #3155 is MERGED at 25209eba74ed2eb4a60e425fe384116303e57f93 from final head 6e3da3fd05949b7f93160a636585c968deffee78, and frontend same-origin deployed-revision endpoint PR #1781 is MERGED at 979e56b6cfdb396259856886a8a49435f621c145 from final head 15edd927e0b184a1742029b580af7acd22b656b6. Required checks passed and task branches are cleaned. This reconciliation performed no deployment, PR23 execution, or production write."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-17T09:24:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -96568,9 +96576,19 @@
         "at": "2026-07-17T09:08:24Z",
         "status": "ready_to_merge",
         "note": "Exact head 89c9ba893606228c57634014b99937ef508e5325 passed all nine required GitHub checks, is CLEAN and MERGEABLE, retains the exact 15-path scope with a clean worktree, has zero unresolved review threads, and its exact-head Codex review reported no major issues. This final ready-to-merge metadata update must independently pass one last complete check and exact-head review cycle before squash merge; production, deploy, CMS, database, media, cache, publication, and search actions remain zero."
+      },
+      {
+        "at": "2026-07-17T14:03:30Z",
+        "status": "merged_and_cleaned",
+        "note": "Reconciled PR #3145 as MERGED at cde7c452679da5ab7fab727db1c2cb05a2725ef4 from final head 4c871b9cd00d01c278b751b8b90bb051046fd03e; origin/main containment, main parity, clean worktree, and local/remote branch cleanup are verified."
+      },
+      {
+        "at": "2026-07-17T14:03:30Z",
+        "status": "readiness_prerequisites_reconciled",
+        "note": "Recorded artifacts-only generator PR #3155 and frontend deployed-revision endpoint PR #1781 as merged, green, contained by their repositories' origin/main, and branch-cleaned. This is ledger-only readiness bookkeeping; deployment, PR23, CMS, database, cache, media, publication, and production writes remain zero."
       }
     ],
-    "updated_at": "2026-07-17T09:08:24Z"
+    "updated_at": "2026-07-17T14:03:30Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
@@ -96592,7 +96610,7 @@
     "checks": {
       "dependency": {
         "status": "pending",
-        "evidence": "22A-22D are merged and cleaned. Requires merged/green 22E, confirmed asynchronous backend/frontend deployments at exact SHAs, a completed private 116-row review register, a successful pre-readback, and separate authorization of the generated exact-SHA packet."
+        "evidence": "22A-22E are merged and cleaned. Artifacts-only review generator PR #3155 and frontend same-origin deployed-revision endpoint PR #1781 are merged, green, and cleaned. PR23 remains pending confirmed asynchronous backend/frontend deployed SHAs, a completed private 116-row review register, a successful pre-readback, and separate authorization of the generated exact-SHA packet."
       }
     },
     "scope_validation": {
@@ -96621,9 +96639,14 @@
         "at": "2026-07-16T13:34:06Z",
         "status": "pending_production_authorization",
         "note": "Dependency contract expanded to merged 22A-22D, pending 22E, and separate exact-SHA authorization. Allowed paths are now only runtime-closeout-23 artifacts and this state ledger. Manual deploy remains prohibited; GitHub Actions deployment is asynchronous."
+      },
+      {
+        "at": "2026-07-17T14:03:30Z",
+        "status": "readiness_prerequisites_reconciled",
+        "note": "Recorded merged-and-cleaned 22E plus merged, green, and cleaned artifacts-only PR #3155 and frontend revision-endpoint PR #1781. PR23 was not started: deployed-SHA confirmation, private review register, pre-readback, and separate exact-SHA authorization are still required; deployment and production writes remain zero."
       }
     ],
-    "updated_at": "2026-07-16T13:34:06Z"
+    "updated_at": "2026-07-17T14:03:30Z"
   },
   "ANALYTICS-FRESHNESS-RECONCILE-03": {
     "id": "ANALYTICS-FRESHNESS-RECONCILE-03",
