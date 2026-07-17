@@ -1353,6 +1353,30 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_discoverability_snapshot_rejects_duplicate_urls_on_every_surface(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $discoverabilityState = (object) ['duplicate_surface' => null];
+
+        foreach (['sitemap', 'llms', 'llms_full'] as $surface) {
+            $discoverabilityState->duplicate_surface = $surface;
+            $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+                    $report,
+                    'https://frontend.test',
+                );
+                $this->fail('Expected duplicate discoverability URL to fail: '.$surface);
+            } catch (\RuntimeException $exception) {
+                $this->assertSame(
+                    'Discoverability URL set contains a duplicate normalized public path.',
+                    $exception->getMessage(),
+                );
+            }
+        }
+    }
+
     public function test_discoverability_snapshot_hashes_non_enneagram_relative_llms_urls(): void
     {
         $this->seedPublishedEstate();
@@ -2163,6 +2187,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $trailingSlashSurface = is_object($discoverabilityState)
                 ? (string) ($discoverabilityState->trailing_slash_surface ?? '')
                 : '';
+            $duplicateSurface = is_object($discoverabilityState)
+                ? (string) ($discoverabilityState->duplicate_surface ?? '')
+                : '';
+            $duplicateUrl = trim((string) strtok($baseUrlText, "\n"));
             if (($redirectSurface === 'api' && str_starts_with($url, 'https://api.test/api/v0.5/personality-content-assets?'))
                 || ($redirectSurface === 'html' && str_starts_with($url, 'https://frontend.test/') && ! in_array($url, [
                     'https://frontend.test/sitemap.xml',
@@ -2279,6 +2307,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             }
             if ($url === 'https://frontend.test/sitemap.xml') {
                 $sitemapUrlText = $trailingSlashSurface === 'sitemap' ? $trailingSlashUrlText : $urlText;
+                if ($duplicateSurface === 'sitemap') {
+                    $sitemapUrlText .= "\n".$duplicateUrl;
+                }
 
                 return Http::response('<urlset>'.implode('', array_map(
                     static fn (string $line): string => '<url><loc>'.$line.'</loc></url>',
@@ -2287,11 +2318,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             }
             if (in_array($url, ['https://frontend.test/llms.txt', 'https://frontend.test/llms-full.txt'], true)) {
                 $surface = $url === 'https://frontend.test/llms-full.txt' ? 'llms_full' : 'llms';
+                $surfaceUrlText = $trailingSlashSurface === $surface
+                    ? $trailingSlashUrlText
+                    : ($surface === 'llms_full' ? $llmsFullUrlText : $llmsUrlText);
+                if ($duplicateSurface === $surface) {
+                    $surfaceUrlText .= "\n".$duplicateUrl;
+                }
 
                 return Http::response(
-                    $trailingSlashSurface === $surface
-                        ? $trailingSlashUrlText
-                        : ($surface === 'llms_full' ? $llmsFullUrlText : $llmsUrlText),
+                    $surfaceUrlText,
                     200,
                     ['Content-Type' => 'text/plain'],
                 );

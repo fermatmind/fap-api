@@ -903,6 +903,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 $paths[] = $path;
             }
         }
+        if (count($paths) !== count(array_unique($paths))) {
+            throw new RuntimeException('Discoverability URL set contains a duplicate normalized public path.');
+        }
         $paths = array_values(array_unique($paths));
         sort($paths);
 
