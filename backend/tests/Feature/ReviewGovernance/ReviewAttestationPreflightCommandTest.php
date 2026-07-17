@@ -50,4 +50,40 @@ final class ReviewAttestationPreflightCommandTest extends TestCase
         $this->assertDatabaseCount('review_attestations', 0);
         $this->assertDatabaseCount('review_attestation_target_evidences', 0);
     }
+
+    public function test_json_failure_redacts_private_target_identity_and_detailed_exception(): void
+    {
+        $privateIdentity = 'private/path/owner-only-review-package';
+        $directory = storage_path('framework/testing/review-governance');
+        if (! is_dir($directory)) {
+            mkdir($directory, 0775, true);
+        }
+        $attestationPath = $directory.'/invalid-attestation.json';
+        $targetsPath = $directory.'/duplicate-private-targets.json';
+        file_put_contents($attestationPath, '{}');
+        file_put_contents($targetsPath, json_encode(['targets' => [
+            ['target_identity' => $privateIdentity, 'target_sha256' => str_repeat('a', 64)],
+            ['target_identity' => $privateIdentity, 'target_sha256' => str_repeat('b', 64)],
+        ]], JSON_THROW_ON_ERROR));
+
+        $exitCode = Artisan::call('review:attestation-preflight', [
+            '--attestation' => $attestationPath,
+            '--targets' => $targetsPath,
+            '--json' => true,
+            '--no-ansi' => true,
+        ]);
+        $output = trim(Artisan::output());
+        $payload = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('FAIL_SOLO_OWNER_ATTESTATION_PREFLIGHT', $payload['status']);
+        $this->assertSame('INVALID_SOLO_OWNER_ATTESTATION_PREFLIGHT', $payload['error_code']);
+        $this->assertSame('Solo-owner attestation preflight validation failed.', $payload['error']);
+        $this->assertStringNotContainsString($privateIdentity, $output);
+        $this->assertStringNotContainsString('duplicate identity', $output);
+        $this->assertSame(0, $payload['database_writes']);
+        $this->assertFalse($payload['production_execution_authorized']);
+        $this->assertDatabaseCount('review_attestations', 0);
+        $this->assertDatabaseCount('review_attestation_target_evidences', 0);
+    }
 }

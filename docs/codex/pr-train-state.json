@@ -96758,7 +96758,7 @@
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
     "status": "review_fix_validated",
-    "commit_sha": "f6b38296458018d09c335deb532d8768a56f618b",
+    "commit_sha": "688af0adf93600fb71d6207fdd059610d4b3a21e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96787,11 +96787,11 @@
       },
       "github": {
         "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on 5c9360ee73bdf93b523bb06285c20fbb6091f26a; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. Its exact-head review produced one valid runtime-freeze finding, so the scoped repair requires a new full check run before merge."
+        "evidence": "All nine required and security checks passed on 688af0adf93600fb71d6207fdd059610d4b3a21e; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. Its exact-head review produced one valid JSON preflight redaction finding, so the scoped repair requires a new full check run before merge."
       },
       "codex_review": {
         "status": "exact_head_finding_repaired_locally",
-        "evidence": "The Codex review submitted at 2026-07-17T18:46:34Z exactly covers 5c9360ee73bdf93b523bb06285c20fbb6091f26a. Its valid P2 found that the Big Five runtime-freeze classifier unconditionally exempted exact foundation paths in future PRs. The exemption now applies only when the exact file is newly added in the current branch diff; focused regression coverage proves later modifications are scanned."
+        "evidence": "The Codex review submitted at 2026-07-17T19:10:38Z exactly covers 688af0adf93600fb71d6207fdd059610d4b3a21e. Its valid P2 found that JSON preflight failures copied lower-level exception text containing private target identities into CI-archivable output. JSON mode now emits only a stable redacted error code/message and safety flags, while non-JSON local diagnostics retain detail; focused regression coverage proves private identity and duplicate diagnostics do not appear in JSON."
       }
     },
     "scope_validation": {
@@ -96925,8 +96925,13 @@
         "at": "2026-07-17T18:52:35Z",
         "status": "review_fix_validated",
         "note": "The external review gate recovered: all nine checks passed and Codex reviewed exact head 5c9360ee73bdf93b523bb06285c20fbb6091f26a. The review found one valid P2 in the Big Five runtime-freeze classifier: exact PR1 foundation files were still exempted in future modification diffs. The exemption now requires each exact path to be newly added, and focused tests prove new files remain exempt while later Service/Validator modifications are classified as runtime-impacting. A new head, full required checks, and exact-head review are required before merge."
+      },
+      {
+        "at": "2026-07-17T19:12:36Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed and Codex reviewed exact head 688af0adf93600fb71d6207fdd059610d4b3a21e. The review found one valid P2: JSON preflight failures exposed lower-level exception text that can contain private target identities. JSON failures now return only a stable redacted error code/message plus zero-write and no-production-authorization flags; detailed exception text remains local to non-JSON mode. Focused tests prove a malicious private identity and duplicate diagnostic are absent from JSON. A new head, full required checks, and exact-head review are required before merge."
       }
     ],
-    "updated_at": "2026-07-17T18:52:35Z"
+    "updated_at": "2026-07-17T19:12:36Z"
   }
 }

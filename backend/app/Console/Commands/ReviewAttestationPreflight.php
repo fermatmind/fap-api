@@ -11,6 +11,10 @@ use Throwable;
 
 final class ReviewAttestationPreflight extends Command
 {
+    private const JSON_FAILURE_CODE = 'INVALID_SOLO_OWNER_ATTESTATION_PREFLIGHT';
+
+    private const JSON_FAILURE_MESSAGE = 'Solo-owner attestation preflight validation failed.';
+
     protected $signature = 'review:attestation-preflight
         {--attestation= : Path to the private compact attestation JSON}
         {--targets= : Path to the exact trusted target-set JSON}
@@ -47,16 +51,16 @@ final class ReviewAttestationPreflight extends Command
 
             return self::SUCCESS;
         } catch (Throwable $throwable) {
-            $result = [
-                'status' => 'FAIL_SOLO_OWNER_ATTESTATION_PREFLIGHT',
-                'error' => $throwable->getMessage(),
-                'database_writes' => 0,
-                'production_execution_authorized' => false,
-            ];
             if ((bool) $this->option('json')) {
-                $this->line(json_encode($result, JSON_UNESCAPED_SLASHES));
+                $this->line(json_encode([
+                    'status' => 'FAIL_SOLO_OWNER_ATTESTATION_PREFLIGHT',
+                    'error_code' => self::JSON_FAILURE_CODE,
+                    'error' => self::JSON_FAILURE_MESSAGE,
+                    'database_writes' => 0,
+                    'production_execution_authorized' => false,
+                ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
             } else {
-                $this->error((string) $result['error']);
+                $this->error($throwable->getMessage());
             }
 
             return self::FAILURE;
