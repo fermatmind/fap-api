@@ -40,7 +40,7 @@ The private compact payload is:
 
 Callers must derive the trusted target set from the exact package, release report, batch, revision set, or resource set. Each target contains a stable `target_identity` and exact lowercase `target_sha256`. Targets are sorted by identity and canonical JSON encoded before hashing. The validator recomputes count and SHA; handwritten count or hash values never define the authoritative target set.
 
-The canonicalizer recursively sorts object keys and preserves list order. `evidence_sha256` is computed over the complete payload excluding the `evidence_sha256` field itself. Missing, duplicate, unknown, extra, malformed, count-drifted, target-hash-drifted, package-drifted, actor-drifted, and canonical-evidence-drifted input fails closed.
+Before canonical JSON encoding, the top-level `exceptions` list is sorted by `target_identity`; callers must use that normalized order when computing evidence. The canonicalizer then recursively sorts object keys and preserves the order of every list, including the already-normalized `exceptions` list. `evidence_sha256` is computed over this normalized complete payload excluding the `evidence_sha256` field itself. Missing, duplicate, unknown, extra, malformed, count-drifted, target-hash-drifted, package-drifted, actor-drifted, and canonical-evidence-drifted input fails closed.
 
 `approved_with_exceptions` requires a non-empty proper subset of exact targets. Each exception has only `target_identity` and a private `reason`. `approved_all` and `rejected` do not accept exceptions.
 

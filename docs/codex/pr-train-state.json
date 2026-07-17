@@ -96787,11 +96787,11 @@
       },
       "github": {
         "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on 30c33487ec6f16bc0bf440b54be0314d7c17032c. Its exact-head review found a nested repository-rule conflict plus the expected stale checked-head ledger evidence; the scoped rule repair requires a new full check run before merge."
+        "evidence": "All nine required and security checks passed on b89a376fd7705544530805c24f9d3cb9d7a47640. Its exact-head review confirmed the nested contract repair, then found an exception-order documentation gap plus the expected stale checked-head ledger evidence; the scoped documentation repair requires a new full check run before merge."
       },
       "codex_review": {
         "status": "exact_head_findings_repaired_locally",
-        "evidence": "Seventeen valid P2 findings were repaired. The latest exact-head review confirmed the scope/storage and execution-separation fixes, then found stale checked-head evidence and a conflicting nested backend/AGENTS.md solo_operator rule. The nested contract now adopts global solo_owner semantics and the same @review-surface gate; the manifest explicitly permits that required rule file."
+        "evidence": "Eighteen valid P2 findings were repaired. The latest exact-head review confirmed the nested solo_owner contract repair and found that the protocol omitted the fingerprint builder's deterministic exception-list sort. The protocol now requires sorting top-level exceptions by target_identity before recursive object-key canonicalization and evidence hashing."
       }
     },
     "scope_validation": {
@@ -96900,8 +96900,13 @@
         "at": "2026-07-17T17:57:29Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on 30c33487ec6f16bc0bf440b54be0314d7c17032c. Its exact-head Codex review found that backend/AGENTS.md still described the historical Big Five ZH6 solo_operator cohort as a global role-separation exception, conflicting with the root solo_owner contract. The nested contract now makes solo_owner authoritative, keeps the historical label as cohort evidence only, repeats the @review-surface fail-closed rule, and the manifest explicitly adds backend/AGENTS.md to this PR scope. YAML and diff checks passed; a new full check run and exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T18:08:00Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on b89a376fd7705544530805c24f9d3cb9d7a47640. Its exact-head Codex review confirmed the nested contract repair and found that the protocol's generic list-order statement omitted the fingerprint builder's required exception normalization. The protocol now explicitly sorts top-level exceptions by target_identity before canonical encoding and evidence hashing; JSON/YAML and diff validation remain required on the new head."
       }
     ],
-    "updated_at": "2026-07-17T17:57:29Z"
+    "updated_at": "2026-07-17T18:08:00Z"
   }
 }
