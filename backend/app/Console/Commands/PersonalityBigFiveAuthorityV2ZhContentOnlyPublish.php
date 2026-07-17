@@ -102,8 +102,10 @@ final class PersonalityBigFiveAuthorityV2ZhContentOnlyPublish extends Command
             'media_library_write_count',
             'english_write_count',
             'writes_committed',
+            'cache_invalidation_ok',
+            'cache_invalidation_warning',
         ] as $field) {
-            if (! array_key_exists($field, $result)) {
+            if (! array_key_exists($field, $result) || $result[$field] === null) {
                 continue;
             }
             $value = is_bool($result[$field]) ? ($result[$field] ? '1' : '0') : (string) $result[$field];

@@ -8,6 +8,7 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use RuntimeException;
 use Tests\TestCase;
 
 final class PersonalityPublicAssetReadModelCacheTest extends TestCase
@@ -189,6 +190,31 @@ final class PersonalityPublicAssetReadModelCacheTest extends TestCase
         self::assertSame('miss', $cache->stale(
             'index', 'big_five', 'domain', 'page:201:per-page:1', 'en', 0
         )['state']);
+    }
+
+    public function test_asset_invalidation_reports_cache_failures_without_throwing(): void
+    {
+        $cacheManager = Cache::getFacadeRoot();
+
+        try {
+            Cache::partialMock()
+                ->shouldReceive('forget')
+                ->andThrow(new RuntimeException('simulated cache failure'));
+
+            $invalidated = app(PersonalityPublicAssetReadModelCache::class)->invalidateAsset(
+                'big_five',
+                'domain',
+                'openness',
+                'big-five/openness',
+                'en',
+                0,
+                false,
+            );
+
+            self::assertFalse($invalidated);
+        } finally {
+            Cache::swap($cacheManager);
+        }
     }
 
     public function test_versions_cover_all_persisted_asset_attributes_and_logs_are_low_cardinality(): void

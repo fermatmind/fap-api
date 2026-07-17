@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
+use Throwable;
 
 final class BigFiveZhContentOnlyPublisher
 {
@@ -148,7 +149,15 @@ final class BigFiveZhContentOnlyPublisher
             ];
         }, 1);
 
-        $this->flushPublicCaches($result['writes'] ?? []);
+        $result['cache_invalidation_ok'] = true;
+        $result['cache_invalidation_warning'] = null;
+
+        try {
+            $this->flushPublicCaches($result['writes'] ?? []);
+        } catch (Throwable) {
+            $result['cache_invalidation_ok'] = false;
+            $result['cache_invalidation_warning'] = 'PUBLIC_CACHE_INVALIDATION_FAILED_AFTER_COMMIT';
+        }
 
         return $result;
     }
@@ -1094,6 +1103,8 @@ final class BigFiveZhContentOnlyPublisher
     /** @param list<array<string,mixed>> $writes */
     private function flushPublicCaches(array $writes): void
     {
+        $personalityCacheInvalidationOk = true;
+
         foreach ($writes as $write) {
             if (($write['surface'] ?? null) !== 'CMS personality_public_content_assets') {
                 continue;
@@ -1102,7 +1113,7 @@ final class BigFiveZhContentOnlyPublisher
             if (! $asset instanceof PersonalityPublicContentAsset) {
                 continue;
             }
-            $this->personalityCache->invalidateAsset(
+            $assetInvalidated = $this->personalityCache->invalidateAsset(
                 (string) $asset->framework,
                 (string) $asset->entity_type,
                 (string) $asset->entity_key,
@@ -1111,13 +1122,19 @@ final class BigFiveZhContentOnlyPublisher
                 (int) $asset->org_id,
                 false,
             );
-            $this->personalityCache->invalidateCollections(
+            $collectionsInvalidated = $this->personalityCache->invalidateCollections(
                 (string) $asset->framework,
                 (string) $asset->entity_type,
                 (string) $asset->locale,
                 (int) $asset->org_id,
                 false,
             );
+            $personalityCacheInvalidationOk = $assetInvalidated
+                && $collectionsInvalidated
+                && $personalityCacheInvalidationOk;
+        }
+        if (! $personalityCacheInvalidationOk) {
+            throw new RuntimeException('Personality public cache invalidation failed.');
         }
         $this->discoverabilityCache->flushArticleDiscoverabilityCaches();
         $this->discoverabilityCache->flushPersonalityPublicContentDiscoverabilityCaches();
