@@ -29,13 +29,13 @@ echo "[PR71][VERIFY] start"
 
 BLOCKED_OUT="${ART_DIR}/blocked_patterns.txt"
 : > "${BLOCKED_OUT}"
-rg -n --glob '*.php' "dropIfExists\(|dropTable\(|renameColumn\(|->change\(" "${MIG_DIR}" >> "${BLOCKED_OUT}" || true
+rg -n -U --glob '*.php' "dropIfExists\s*\(|dropTable\s*\(|renameColumn\s*\(|->\s*change\s*\(" "${MIG_DIR}" >> "${BLOCKED_OUT}" || true
 
 while IFS= read -r migration; do
   if ! rg -q "RETIREMENT_EVIDENCE_ID" "${migration}"; then
-    rg -n "dropColumn\(" "${migration}" >> "${BLOCKED_OUT}"
+    rg -n -U "dropColumn\s*\(" "${migration}" >> "${BLOCKED_OUT}"
   fi
-done < <(rg -l --glob '*.php' "dropColumn\(" "${MIG_DIR}" || true)
+done < <(rg -l -U --glob '*.php' "dropColumn\s*\(" "${MIG_DIR}" || true)
 
 if [[ -s "${BLOCKED_OUT}" ]]; then
   fail "blocked migration pattern detected"

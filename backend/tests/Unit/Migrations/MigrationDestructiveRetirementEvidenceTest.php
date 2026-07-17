@@ -172,6 +172,11 @@ PHP;
 
         $this->assertNotEmpty($operations, 'Expected at least one destructive retirement migration to be evidence-gated.');
         $this->assertSame([], $this->missingEvidence($operations, $evidenceByMigration));
+
+        foreach ($evidenceByMigration as $migration => $evidence) {
+            $source = (string) file_get_contents(base_path($migration));
+            $this->assertStringContainsString((string) ($evidence['id'] ?? ''), $source);
+        }
     }
 
     #[Test]
@@ -188,12 +193,12 @@ PHP;
 
             $clean = $this->stripComments($downBody);
             $this->assertDoesNotMatchRegularExpression(
-                '/Schema::drop(?:IfExists)?\s*\(/',
+                '/Schema\s*::\s*drop(?:IfExists)?\s*\(/',
                 $clean,
                 "Evidence-bound retirement must not drop a table in down(): {$filePath}",
             );
             $this->assertDoesNotMatchRegularExpression(
-                '/->dropColumn\s*\(/',
+                '/->\s*dropColumn\s*\(/',
                 $clean,
                 "Evidence-bound retirement must not drop a column in down(): {$filePath}",
             );
@@ -231,8 +236,8 @@ PHP;
 
         $this->assertIsString($downBody);
         $clean = $this->stripComments($downBody);
-        $this->assertDoesNotMatchRegularExpression('/Schema::drop(?:IfExists)?\s*\(/', $clean);
-        $this->assertDoesNotMatchRegularExpression('/->dropColumn\s*\(/', $clean);
+        $this->assertDoesNotMatchRegularExpression('/Schema\s*::\s*drop(?:IfExists)?\s*\(/', $clean);
+        $this->assertDoesNotMatchRegularExpression('/->\s*dropColumn\s*\(/', $clean);
     }
 
     /**
@@ -256,6 +261,8 @@ PHP;
             $migration = (string) ($entry['migration'] ?? '');
             $this->assertNotSame('', $migration);
             $this->assertArrayNotHasKey($migration, $byMigration, "Duplicate destructive migration evidence for {$migration}");
+            $this->assertFalse((bool) ($entry['production_execution_allowed_by_repository'] ?? true));
+            $this->assertTrue((bool) ($entry['operator_checklist_required'] ?? false));
             $byMigration[$migration] = $entry;
         }
 
@@ -290,7 +297,7 @@ PHP;
         $clean = $this->stripComments($upBody);
         $operations = [];
 
-        if (preg_match_all('/Schema::drop(?:IfExists)?\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
+        if (preg_match_all('/Schema\s*::\s*drop(?:IfExists)?\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
             foreach ($matches[1] as $arguments) {
                 foreach ($this->destructiveArgumentValues(
                     (string) $arguments,
@@ -305,7 +312,7 @@ PHP;
             }
         }
 
-        if (preg_match_all('/->dropColumn\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
+        if (preg_match_all('/->\s*dropColumn\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
             foreach ($matches[1] as $arguments) {
                 foreach ($this->destructiveArgumentValues(
                     (string) $arguments,
