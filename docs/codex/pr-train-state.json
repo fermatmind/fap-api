@@ -5631,7 +5631,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2753",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "review_fix_validated",
+    "status": "ready_to_merge",
     "title": "B5-RESULT-RUNNER-SOP-RUNBOOK-01: Document Big Five V2 agent execution runner SOP",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "transitions": [
@@ -96758,7 +96758,7 @@
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
     "status": "ready_to_merge",
-    "commit_sha": "8cf2133f129abf9129af7a91f93a4623b462dd32",
+    "commit_sha": "a0c380a1e7358ba78aefbafb2219ebe226d7ad19",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96786,18 +96786,18 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
       },
       "github": {
-        "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on c2813d18e82dc412879c8f2e1a069481189a4fa6. Its exact-head review found an additional architecture-marker gap; the scoped repair requires a new full check run before merge."
+        "status": "passed",
+        "evidence": "All nine required and security checks passed on a0c380a1e7358ba78aefbafb2219ebe226d7ad19. This ledger-only ready-to-merge transition must revalidate before merge."
       },
       "codex_review": {
-        "status": "exact_head_finding_repaired_locally",
-        "evidence": "Nine valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, added-lines-only review-gate marker inspection, and missing compact-attestation bind markers. Codex reviewed c2813d18e82dc412879c8f2e1a069481189a4fa6 exactly; the new marker repair passed 6 architecture tests with 231 assertions and requires exact-head re-review."
+        "status": "exact_head_findings_repaired",
+        "evidence": "Eleven valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, added-lines-only review-gate marker inspection, missing compact-attestation bind markers, an accidental unrelated train-item status edit, and premature ready-to-merge state. Codex reviewed a0c380a1e7358ba78aefbafb2219ebe226d7ad19 exactly; only the two ledger-state corrections in this transition remained."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96875,8 +96875,13 @@
         "at": "2026-07-17T17:05:22Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on ledger-only head c2813d18e82dc412879c8f2e1a069481189a4fa6. Its exact-head Codex review found that future adapters using only the compact ReviewAttestation bind path could evade the review-surface scanner. ReviewAttestation service, validator, and payload markers are now covered with regression assertions; focused architecture validation, PHP lint, Pint, and diff checks passed, and a new full check run plus exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T17:14:55Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on a0c380a1e7358ba78aefbafb2219ebe226d7ad19. Its exact-head Codex review confirmed the attestation-marker repair and found two ledger-only issues: an unrelated B5 status was changed and this PR1 entry remained prematurely ready before revalidation. The unrelated status is restored and PR1 now certifies the checked implementation head; this final ledger-only transition must revalidate before squash merge."
       }
     ],
-    "updated_at": "2026-07-17T17:05:22Z"
+    "updated_at": "2026-07-17T17:14:55Z"
   }
 }
