@@ -96758,7 +96758,7 @@
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
     "status": "ready_to_merge",
-    "commit_sha": "a5e212f9d35dc4b825e4e4fdc2a189cb76638865",
+    "commit_sha": "8cf2133f129abf9129af7a91f93a4623b462dd32",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96787,11 +96787,11 @@
       },
       "github": {
         "status": "passed",
-        "evidence": "All nine required and security checks passed on a5e212f9d35dc4b825e4e4fdc2a189cb76638865. This ledger-only ready-to-merge transition must revalidate before merge."
+        "evidence": "All nine required and security checks passed on 8cf2133f129abf9129af7a91f93a4623b462dd32. This ledger-only ready-to-merge transition must revalidate before merge."
       },
       "codex_review": {
         "status": "exact_head_findings_repaired",
-        "evidence": "Seven valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, and stale ledger commit evidence. Codex reviewed a5e212f9d35dc4b825e4e4fdc2a189cb76638865 exactly; only this ledger correction remained."
+        "evidence": "Eight valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, and added-lines-only review-gate marker inspection. Codex reviewed 8cf2133f129abf9129af7a91f93a4623b462dd32 exactly; only this ledger correction remained."
       }
     },
     "scope_validation": {
@@ -96865,8 +96865,13 @@
         "at": "2026-07-17T16:22:40Z",
         "status": "ready_to_merge",
         "note": "All nine checks passed on a5e212f9d35dc4b825e4e4fdc2a189cb76638865. Its exact-head Codex review confirmed the exception-canonicalization fix and found only that the ledger still certified the pre-fix SHA. The ledger now certifies the actual checked implementation head; this final ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T16:38:19Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on 8cf2133f129abf9129af7a91f93a4623b462dd32. Its exact-head Codex review confirmed the modified/removed review-gate marker repair and found only that the ledger still certified the pre-fix SHA. The ledger now certifies the actual checked implementation head; this final ledger-only transition must revalidate before squash merge."
       }
     ],
-    "updated_at": "2026-07-17T16:22:40Z"
+    "updated_at": "2026-07-17T16:38:19Z"
   }
 }
