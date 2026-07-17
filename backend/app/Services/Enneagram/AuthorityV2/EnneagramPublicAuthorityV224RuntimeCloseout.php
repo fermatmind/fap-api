@@ -6,6 +6,8 @@ namespace App\Services\Enneagram\AuthorityV2;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Models\PersonalityPublicContentAssetRevisionReview;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
@@ -108,19 +110,57 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             'promotion_committed' => false,
             'rollback_token_persisted' => false,
         ];
-        $current = $this->preflight(
-            $releaseReport,
-            $releaseReportSha256,
-            $reviewRegister,
-            $reviewRegisterSha256,
-            $backendDeployedSha,
-            $frontendDeployedSha,
-            $apiBaseUrl,
-            $frontendBaseUrl,
-            $revalidationEndpoint,
-            $preReadback,
-            $preReadbackSha256,
-        );
+        $resumedReviewBind = null;
+        try {
+            $current = $this->preflight(
+                $releaseReport,
+                $releaseReportSha256,
+                $reviewRegister,
+                $reviewRegisterSha256,
+                $backendDeployedSha,
+                $frontendDeployedSha,
+                $apiBaseUrl,
+                $frontendBaseUrl,
+                $revalidationEndpoint,
+                $preReadback,
+                $preReadbackSha256,
+            );
+        } catch (RuntimeException $preflightFailure) {
+            $workspacePreflightFingerprint = strtolower(trim((string) ($authorizationPacket['workspace_preflight_fingerprint'] ?? '')));
+            if (preg_match('/^[0-9a-f]{64}$/', $workspacePreflightFingerprint) !== 1) {
+                throw $preflightFailure;
+            }
+            $current = $this->manifest->preflight(
+                $releaseReport,
+                $releaseReportSha256,
+                $reviewRegister,
+                $reviewRegisterSha256,
+                $backendDeployedSha,
+                $frontendDeployedSha,
+                $apiBaseUrl,
+                $frontendBaseUrl,
+                $revalidationEndpoint,
+                $workspacePreflightFingerprint,
+                $preReadback,
+                $preReadbackSha256,
+            );
+            $resumedReviewBind = $this->exactBoundReviewResume(
+                $releaseReport,
+                $reviewRegister,
+                $reviewRegisterSha256,
+            );
+            $current = [
+                ...$current,
+                'workspace_preflight_fingerprint' => $workspacePreflightFingerprint,
+                'workspace_new_revision_count' => 0,
+                'workspace_reuse_count' => EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT,
+            ];
+        }
+        if (is_array($resumedReviewBind)) {
+            $this->executionProgress['writes_committed'] = true;
+            $this->executionProgress['working_import_committed'] = true;
+            $this->executionProgress['review_bind_committed'] = true;
+        }
         if (! hash_equals((string) $current['authorization_packet_sha256'], $authorizationPacketSha256)
             || ! hash_equals($authorizationPacketSha256, $this->fingerprint($authorizationPacket))
             || $authorizationPacket !== $current['authorization_packet']) {
@@ -138,25 +178,41 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
 
         $this->executionProgress['failure_stage'] = 'rollback_token_reservation';
         $this->reserveRollbackTokenOutput($rollbackTokenOutput);
-        $this->executionProgress['failure_stage'] = 'working_import';
-        $workspace = $this->workspaceWriter->write(
-            $releaseReport,
-            (string) $releaseReport['package_sha256'],
-            (string) $current['workspace_preflight_fingerprint'],
-        );
-        $this->executionProgress['writes_committed'] = true;
-        $this->executionProgress['working_import_committed'] = true;
-        $this->executionProgress['failure_stage'] = 'review_bind';
-        $binderPlan = $this->reviewBinder->preflight($releaseReport, $reviewRegister, $reviewRegisterSha256);
-        $binder = $this->reviewBinder->bind(
-            $releaseReport,
-            $reviewRegister,
-            $reviewRegisterSha256,
-            (string) $releaseReport['package_sha256'],
-            (string) $binderPlan['preflight_fingerprint'],
-            $boundByAdminUserId,
-        );
-        $this->executionProgress['review_bind_committed'] = true;
+        if (is_array($resumedReviewBind)) {
+            $this->executionProgress['failure_stage'] = 'bound_review_resume';
+            $this->executionProgress['writes_committed'] = true;
+            $this->executionProgress['working_import_committed'] = true;
+            $this->executionProgress['review_bind_committed'] = true;
+            $workspace = [
+                'ok' => true,
+                'status' => 'PASS_EXACT_WORKING_IMPORT_RESUME',
+                'target_count' => EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT,
+                'revision_created_count' => 0,
+                'revision_reused_count' => EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT,
+                'writes_committed' => true,
+            ];
+            $binder = $resumedReviewBind;
+        } else {
+            $this->executionProgress['failure_stage'] = 'working_import';
+            $workspace = $this->workspaceWriter->write(
+                $releaseReport,
+                (string) $releaseReport['package_sha256'],
+                (string) $current['workspace_preflight_fingerprint'],
+            );
+            $this->executionProgress['writes_committed'] = true;
+            $this->executionProgress['working_import_committed'] = true;
+            $this->executionProgress['failure_stage'] = 'review_bind';
+            $binderPlan = $this->reviewBinder->preflight($releaseReport, $reviewRegister, $reviewRegisterSha256);
+            $binder = $this->reviewBinder->bind(
+                $releaseReport,
+                $reviewRegister,
+                $reviewRegisterSha256,
+                (string) $releaseReport['package_sha256'],
+                (string) $binderPlan['preflight_fingerprint'],
+                $boundByAdminUserId,
+            );
+            $this->executionProgress['review_bind_committed'] = true;
+        }
         $this->executionProgress['failure_stage'] = 'promotion';
         $targets = $this->promotionTargets($releaseReport, (string) $releaseReport['package_sha256']);
         $promotionPlan = $this->promoter->preflight($targets);
@@ -333,6 +389,153 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         return $targets;
     }
 
+    /**
+     * Resume only the exact pre-promotion state left by a previously committed
+     * working import and human-review bind. No private identity leaves this method.
+     *
+     * @param  array<string,mixed>  $releaseReport
+     * @param  array<string,mixed>  $reviewRegister
+     * @return array<string,mixed>
+     */
+    private function exactBoundReviewResume(
+        array $releaseReport,
+        array $reviewRegister,
+        string $reviewRegisterSha256,
+    ): array {
+        $packageSha256 = strtolower(trim((string) ($releaseReport['package_sha256'] ?? '')));
+        $records = is_array($releaseReport['asset_records'] ?? null) ? $releaseReport['asset_records'] : [];
+        $registerRows = is_array($reviewRegister['reviews'] ?? null) ? $reviewRegister['reviews'] : [];
+        if (preg_match('/^[0-9a-f]{64}$/', $packageSha256) !== 1
+            || preg_match('/^[0-9a-f]{64}$/', $reviewRegisterSha256) !== 1
+            || count($records) !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT
+            || count($registerRows) !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT) {
+            throw new RuntimeException('Bound-review resume requires the exact 116-row package and register.');
+        }
+        if (PersonalityPublicContentAssetRevision::query()
+            ->where('authority_package_sha256', $packageSha256)
+            ->exists()) {
+            $this->executionProgress['writes_committed'] = true;
+            $this->executionProgress['working_import_committed'] = true;
+        }
+        if (PersonalityPublicContentAssetRevisionReview::query()
+            ->where('authority_package_sha256', $packageSha256)
+            ->exists()) {
+            $this->executionProgress['writes_committed'] = true;
+            $this->executionProgress['review_bind_committed'] = true;
+        }
+
+        $reviewsByKey = [];
+        foreach ($registerRows as $review) {
+            $releaseAssetKey = is_array($review) ? trim((string) ($review['asset_key'] ?? '')) : '';
+            if ($releaseAssetKey === '' || isset($reviewsByKey[$releaseAssetKey])) {
+                throw new RuntimeException('Bound-review resume register identity is missing or duplicated.');
+            }
+            $reviewsByKey[$releaseAssetKey] = $review;
+        }
+
+        $promotionTargets = $this->promotionTargets($releaseReport, $packageSha256);
+        $promotionPlan = $this->promoter->preflight($promotionTargets);
+        if (($promotionPlan['ok'] ?? false) !== true
+            || (int) ($promotionPlan['target_count'] ?? 0) !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT) {
+            throw new RuntimeException('Bound-review resume promotion preflight is incomplete.');
+        }
+
+        $seenRevisionIds = [];
+        foreach ($records as $record) {
+            if (! is_array($record)) {
+                throw new RuntimeException('Bound-review resume release record is invalid.');
+            }
+            $releaseAssetKey = trim((string) ($record['asset_key'] ?? ''));
+            $review = $reviewsByKey[$releaseAssetKey] ?? null;
+            if (! is_array($review)) {
+                throw new RuntimeException('Bound-review resume register row is missing: '.$releaseAssetKey.'.');
+            }
+            $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM)
+                ->where('entity_type', (string) ($record['entity_type'] ?? ''))
+                ->where('entity_key', (string) ($record['code'] ?? ''))
+                ->where('locale', (string) ($record['locale'] ?? ''))
+                ->first();
+            $revision = $asset instanceof PersonalityPublicContentAsset && $asset->working_revision_id !== null
+                ? PersonalityPublicContentAssetRevision::query()->find((int) $asset->working_revision_id)
+                : null;
+            $evidence = $revision instanceof PersonalityPublicContentAssetRevision
+                ? PersonalityPublicContentAssetRevisionReview::query()->where('revision_id', (int) $revision->id)->first()
+                : null;
+            $authorityAssetKey = implode(':', [
+                PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+                (string) ($record['entity_type'] ?? ''),
+                (string) ($record['code'] ?? ''),
+                (string) ($record['locale'] ?? ''),
+            ]);
+            try {
+                $reviewedAt = CarbonImmutable::parse((string) ($review['reviewed_at'] ?? ''))
+                    ->utc()
+                    ->format('Y-m-d H:i:s');
+            } catch (Throwable) {
+                throw new RuntimeException('Bound-review resume timestamp is invalid: '.$releaseAssetKey.'.');
+            }
+            $evidenceSha256 = $this->fingerprint([
+                'asset_key' => $releaseAssetKey,
+                'asset_sha256' => (string) ($record['asset_sha256'] ?? ''),
+                'package_sha256' => $packageSha256,
+                'reviewer_name' => trim((string) ($review['reviewer_name'] ?? '')),
+                'reviewed_at' => $reviewedAt,
+                'decision' => trim((string) ($review['decision'] ?? '')),
+                'review_source' => trim((string) ($review['review_source'] ?? '')),
+            ]);
+            if (! $asset instanceof PersonalityPublicContentAsset
+                || ! $revision instanceof PersonalityPublicContentAssetRevision
+                || ! $evidence instanceof PersonalityPublicContentAssetRevisionReview
+                || isset($seenRevisionIds[(int) $revision->id])
+                || (string) $revision->authority_asset_key !== $authorityAssetKey
+                || (string) $revision->authority_package_sha256 !== $packageSha256
+                || (string) $revision->source_package !== EnneagramPublicAuthorityV205RevisionWorkspaceWriter::SOURCE_PACKAGE
+                || (string) $revision->source_hash !== (string) ($record['asset_sha256'] ?? '')
+                || (string) $revision->workflow_state !== EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED
+                || (int) $evidence->asset_id !== (int) $asset->id
+                || (string) $evidence->authority_asset_key !== $authorityAssetKey
+                || (string) $evidence->source_package !== (string) $revision->source_package
+                || (string) $evidence->asset_sha256 !== (string) $revision->source_hash
+                || (string) $evidence->authority_package_sha256 !== $packageSha256
+                || (string) $evidence->review_register_sha256 !== $reviewRegisterSha256
+                || (string) $evidence->reviewer_name !== trim((string) ($review['reviewer_name'] ?? ''))
+                || $evidence->reviewed_at?->utc()->format('Y-m-d H:i:s') !== $reviewedAt
+                || (string) $evidence->decision !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED
+                || (string) $evidence->review_source !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
+                || ! hash_equals((string) $evidence->evidence_sha256, $evidenceSha256)
+                || (isset($review['evidence_sha256']) && ! hash_equals((string) $review['evidence_sha256'], $evidenceSha256))) {
+                throw new RuntimeException('Bound-review resume evidence drifted: '.$releaseAssetKey.'.');
+            }
+            $seenRevisionIds[(int) $revision->id] = true;
+        }
+
+        $packageEvidenceCount = PersonalityPublicContentAssetRevisionReview::query()
+            ->where('authority_package_sha256', $packageSha256)
+            ->count();
+        $registerEvidenceCount = PersonalityPublicContentAssetRevisionReview::query()
+            ->where('authority_package_sha256', $packageSha256)
+            ->where('review_register_sha256', $reviewRegisterSha256)
+            ->count();
+        if (count($seenRevisionIds) !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT
+            || $packageEvidenceCount !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT
+            || $registerEvidenceCount !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT) {
+            throw new RuntimeException('Bound-review resume evidence count is not exactly 116.');
+        }
+
+        return [
+            'ok' => true,
+            'status' => 'PASS_EXACT_HUMAN_REVIEW_EVIDENCE_RESUME',
+            'target_count' => EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT,
+            'review_evidence_created_count' => 0,
+            'review_evidence_reused_count' => EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT,
+            'workflow_transition_count' => 0,
+            'human_review_approved_count' => EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT,
+            'writes_committed' => true,
+        ];
+    }
+
     private function reserveRollbackTokenOutput(string $path): void
     {
         $this->releaseRollbackTokenReservation(false);
@@ -424,6 +627,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
             'revision_created_count',
             'revision_reused_count',
             'review_evidence_created_count',
+            'review_evidence_reused_count',
             'workflow_transition_count',
             'promoted_count',
             'rollback_token_sha256',

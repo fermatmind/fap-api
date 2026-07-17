@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeCloseout;
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeManifest;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
@@ -41,10 +42,12 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
 
     protected $description = 'Exact-SHA Enneagram Authority V2 import, review bind, atomic promotion, cache revalidation, readback, and rollback preflight.';
 
-    public function handle(EnneagramPublicAuthorityV224RuntimeCloseout $closeout): int
-    {
+    public function handle(
+        EnneagramPublicAuthorityV224RuntimeCloseout $closeout,
+        EnneagramPublicAuthorityV224RuntimeManifest $manifest,
+    ): int {
         try {
-            $result = $this->runGuarded($closeout);
+            $result = $this->runGuarded($closeout, $manifest);
         } catch (Throwable $throwable) {
             $result = $closeout->failureResult($throwable);
         }
@@ -68,8 +71,10 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
     }
 
     /** @return array<string,mixed> */
-    private function runGuarded(EnneagramPublicAuthorityV224RuntimeCloseout $closeout): array
-    {
+    private function runGuarded(
+        EnneagramPublicAuthorityV224RuntimeCloseout $closeout,
+        EnneagramPublicAuthorityV224RuntimeManifest $manifest,
+    ): array {
         $preflight = (bool) $this->option('preflight');
         $execute = (bool) $this->option('execute');
         if ($preflight === $execute) {
@@ -80,9 +85,17 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         [$preReadback, $preReadbackSha] = $this->optionalJsonFileWithSha((string) $this->option('pre-readback'), 'pre-readback');
         $backendSha = $this->requiredOption('backend-deployed-sha');
         $frontendSha = $this->requiredOption('frontend-deployed-sha');
-        $apiBaseUrl = $this->requiredHttpsOrigin('api-base-url');
-        $frontendBaseUrl = $this->requiredHttpsOrigin('frontend-base-url');
         $testingOverride = app()->environment('testing') && (bool) $this->option('allow-testing');
+        $apiBaseUrl = $manifest->publicRuntimeOrigin(
+            $this->requiredHttpsOrigin('api-base-url'),
+            '--api-base-url',
+            $testingOverride ? null : (string) config('app.url', ''),
+        );
+        $frontendBaseUrl = $manifest->publicRuntimeOrigin(
+            $this->requiredHttpsOrigin('frontend-base-url'),
+            '--frontend-base-url',
+            $testingOverride ? null : (string) config('app.frontend_url', ''),
+        );
         if ($preReadback === null && ! $testingOverride) {
             throw new RuntimeException('--pre-readback is required for production preflight and execute.');
         }

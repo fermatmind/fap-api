@@ -39,8 +39,17 @@ final class PersonalityEnneagramAuthorityV2RuntimeReadback extends Command
             $phase = $this->requiredOption('phase');
             $releaseReport = $this->jsonFile((string) $this->option('source'));
             $sensitiveValues = $this->privateReviewerNames($phase, $releaseReport, $manifest);
-            $apiBaseUrl = $this->requiredHttpsOrigin('api-base-url');
-            $frontendBaseUrl = $this->requiredHttpsOrigin('frontend-base-url');
+            $testingOverride = app()->environment('testing') && (bool) $this->option('allow-testing');
+            $apiBaseUrl = $manifest->publicRuntimeOrigin(
+                $this->requiredHttpsOrigin('api-base-url'),
+                '--api-base-url',
+                $testingOverride ? null : (string) config('app.url', ''),
+            );
+            $frontendBaseUrl = $manifest->publicRuntimeOrigin(
+                $this->requiredHttpsOrigin('frontend-base-url'),
+                '--frontend-base-url',
+                $testingOverride ? null : (string) config('app.frontend_url', ''),
+            );
             $backendDeployedSha = $this->requiredOption('backend-deployed-sha');
             $frontendDeployedSha = $this->requiredOption('frontend-deployed-sha');
             $this->assertDeployedRevisions(

@@ -429,6 +429,27 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         );
     }
 
+    public function publicRuntimeOrigin(
+        string $value,
+        string $label,
+        ?string $configuredProductionOrigin = null,
+    ): string {
+        if ($configuredProductionOrigin === null) {
+            return $this->exactHttpsOrigin($value, $label);
+        }
+        try {
+            $origin = $this->exactHttpsOrigin($value, $label);
+            $configured = $this->exactHttpsOrigin($configuredProductionOrigin, $label.' configured origin');
+        } catch (RuntimeException) {
+            throw new RuntimeException($label.' must use the configured public production origin.');
+        }
+        if (! hash_equals($this->canonicalHttpsOrigin($configured), $this->canonicalHttpsOrigin($origin))) {
+            throw new RuntimeException($label.' must use the configured public production origin.');
+        }
+
+        return $origin;
+    }
+
     /** @return array{api_base_origin:string,frontend_base_origin:string,frontend_revalidation_endpoint:string} */
     private function runtimeEndpoints(
         string $apiBaseUrl,
@@ -459,6 +480,7 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
             || (($parts['path'] ?? '') !== '')) {
             throw new RuntimeException($label.' must be an exact HTTPS origin without credentials, path, query, or fragment.');
         }
+        $this->assertPublicRuntimeHost((string) $parts['host'], $label);
 
         return $value;
     }
@@ -477,8 +499,50 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
             || isset($parts['fragment'])) {
             throw new RuntimeException($label.' must be an exact HTTPS URL without credentials, query, or fragment.');
         }
+        $this->assertPublicRuntimeHost((string) $parts['host'], $label);
 
         return $value;
+    }
+
+    private function assertPublicRuntimeHost(string $host, string $label): void
+    {
+        $host = strtolower(trim($host, '[]'));
+        $ip = filter_var($host, FILTER_VALIDATE_IP);
+        if ($ip !== false) {
+            if (filter_var(
+                $host,
+                FILTER_VALIDATE_IP,
+                FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE,
+            ) === false) {
+                throw new RuntimeException($label.' must use a public, non-local, non-private HTTPS origin.');
+            }
+
+            return;
+        }
+
+        $reservedSuffixes = ['.localhost', '.local', '.internal', '.lan', '.home', '.invalid', '.example', '.onion'];
+        $reservedDomains = ['example.com', 'example.net', 'example.org'];
+        $testFixtureHost = app()->environment('testing') && str_ends_with($host, '.test');
+        if ($host === ''
+            || $host === 'localhost'
+            || ! str_contains($host, '.')
+            || str_ends_with($host, '.')
+            || filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === false
+            || preg_match('/^[0-9.]+$/', $host) === 1
+            || (! $testFixtureHost && str_ends_with($host, '.test'))
+            || array_any($reservedSuffixes, static fn (string $suffix): bool => str_ends_with($host, $suffix))
+            || array_any($reservedDomains, static fn (string $reserved): bool => $host === $reserved || str_ends_with($host, '.'.$reserved))) {
+            throw new RuntimeException($label.' must use a public, non-local, non-private HTTPS origin.');
+        }
+    }
+
+    private function canonicalHttpsOrigin(string $value): string
+    {
+        $parts = parse_url($value);
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        $port = isset($parts['port']) ? (int) $parts['port'] : null;
+
+        return 'https://'.$host.($port !== null && $port !== 443 ? ':'.$port : '');
     }
 
     /** @param list<array<string,mixed>> $records @return array<string,list<array<string,mixed>>> */

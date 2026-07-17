@@ -7,7 +7,9 @@ namespace Tests\Feature\SEO;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV205RevisionWorkspaceWriter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
+use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV223ReviewEvidenceBinder;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeCloseout;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeReadback;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -265,6 +267,85 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_authorized_execute_resumes_exact_bound_review_after_pre_promotion_failure_state(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+        $reportSha = $this->fingerprintRaw($report);
+        $registerSha = $this->fingerprintRaw($register);
+        $closeout = $this->closeout();
+        $preflight = $closeout->preflight(
+            $report,
+            $reportSha,
+            $register,
+            $registerSha,
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+            'https://api.test',
+            'https://frontend.test',
+            'https://frontend.test/api/content-release/revalidate',
+        );
+
+        $workspaceWriter = app(EnneagramPublicAuthorityV205RevisionWorkspaceWriter::class);
+        $workspacePlan = $workspaceWriter->preflight($report);
+        $workspaceWriter->write(
+            $report,
+            (string) $report['package_sha256'],
+            (string) $workspacePlan['preflight_fingerprint'],
+        );
+        $reviewBinder = app(EnneagramPublicAuthorityV223ReviewEvidenceBinder::class);
+        $binderPlan = $reviewBinder->preflight($report, $register, $registerSha);
+        $reviewBinder->bind(
+            $report,
+            $register,
+            $registerSha,
+            (string) $report['package_sha256'],
+            (string) $binderPlan['preflight_fingerprint'],
+        );
+        $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
+            ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED)
+            ->count());
+        $this->assertSame(116, PersonalityPublicContentAssetRevisionReview::query()->count());
+
+        $this->fakeRuntimeHttp($report);
+        $rollbackPath = '/tmp/enneagram-v224-resumed-rollback-'.bin2hex(random_bytes(8)).'.token';
+        try {
+            $result = $closeout->execute(
+                $report,
+                $reportSha,
+                $register,
+                $registerSha,
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+                $preflight['authorization_packet'],
+                (string) $preflight['authorization_packet_sha256'],
+                (string) $preflight['authorization_packet']['authorization_phrase'],
+                $rollbackPath,
+                'https://api.test',
+                'https://frontend.test',
+                'https://frontend.test/api/content-release/revalidate',
+                self::REVALIDATION_SECRET,
+            );
+
+            $this->assertSame('PASS_AUTHORIZED_RUNTIME_CLOSEOUT', $result['status']);
+            $this->assertSame('PASS_EXACT_WORKING_IMPORT_RESUME', $result['working_import']['status']);
+            $this->assertSame(116, $result['working_import']['revision_reused_count']);
+            $this->assertSame('PASS_EXACT_HUMAN_REVIEW_EVIDENCE_RESUME', $result['review_bind']['status']);
+            $this->assertSame(0, $result['review_bind']['review_evidence_created_count']);
+            $this->assertSame(116, $result['review_bind']['review_evidence_reused_count']);
+            $this->assertSame(0, $result['review_bind']['workflow_transition_count']);
+            $this->assertTrue($result['review_bind']['writes_committed']);
+            $this->assertSame(116, $result['promotion']['promoted_count']);
+            $this->assertSame(116, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
+                ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_PUBLISHED)
+                ->count());
+        } finally {
+            @unlink($rollbackPath);
+        }
+    }
+
     public function test_standalone_post_readback_rejects_incomplete_review_register_before_http(): void
     {
         $this->seedPublishedEstate();
@@ -342,11 +423,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $previousEnvironment = app()->environment();
         $revisionExisted = File::isFile($revisionPath);
         $revisionContents = $revisionExisted ? File::get($revisionPath) : null;
+        $previousApiUrl = config('app.url');
+        $previousFrontendUrl = config('app.frontend_url');
         File::put($revisionPath, self::BACKEND_SHA);
+        config()->set('app.url', 'https://api.fermatmind.com');
+        config()->set('app.frontend_url', 'https://fermatmind.com');
         app()->detectEnvironment(static fn (): string => 'production');
         $redirectsDisabled = false;
         Http::fake(function (Request $request, array $options) use (&$redirectsDisabled): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
-            if ($request->url() === 'https://frontend.test/revision') {
+            if ($request->url() === 'https://fermatmind.com/revision') {
                 $redirectsDisabled = ($options['allow_redirects'] ?? null) === false;
 
                 return Http::response('', 302, ['Location' => 'https://staging-mirror.test/revision']);
@@ -359,11 +444,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->artisan('personality:enneagram-authority-v2-runtime-readback', [
                 '--phase' => 'pre',
                 '--batch' => 'all',
-                '--api-base-url' => 'https://api.test',
-                '--frontend-base-url' => 'https://frontend.test',
+                '--api-base-url' => 'https://api.fermatmind.com',
+                '--frontend-base-url' => 'https://fermatmind.com',
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
-                '--frontend-revision-url' => 'https://frontend.test/revision',
+                '--frontend-revision-url' => 'https://fermatmind.com/revision',
             ])
                 ->expectsOutputToContain('Deployed frontend revision endpoint does not match the exact readback SHA.')
                 ->expectsOutputToContain('status=FAIL_CLOSED')
@@ -374,6 +459,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
         } finally {
             app()->detectEnvironment(static fn (): string => $previousEnvironment);
+            config()->set('app.url', $previousApiUrl);
+            config()->set('app.frontend_url', $previousFrontendUrl);
             if ($revisionExisted && is_string($revisionContents)) {
                 File::put($revisionPath, $revisionContents);
             } else {
@@ -1005,7 +1092,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $outputDirectory = storage_path('framework/testing/enneagram-v224-artifacts-'.bin2hex(random_bytes(4)));
         File::ensureDirectoryExists(dirname($registerPath));
         File::put($registerPath, json_encode($this->reviewRegister($this->releaseReport()), JSON_THROW_ON_ERROR));
-        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+        config()->set('app.url', 'https://api.fermatmind.com');
+        config()->set('app.frontend_url', 'https://fermatmind.com');
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://fermatmind.com/api/content-release/revalidate');
 
         try {
             $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
@@ -1084,6 +1173,71 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_production_runtime_commands_reject_non_public_or_unconfigured_origins_before_http_or_writes(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
+        $previousEnvironment = app()->environment();
+        $previousApiUrl = config('app.url');
+        $previousFrontendUrl = config('app.frontend_url');
+        File::ensureDirectoryExists(dirname($registerPath));
+        File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
+        config()->set('app.url', 'https://api.fermatmind.com');
+        config()->set('app.frontend_url', 'https://fermatmind.com');
+        app()->detectEnvironment(static fn (): string => 'production');
+        Http::fake();
+        $invalidOrigins = [
+            ['api-base-url', 'https://localhost'],
+            ['api-base-url', 'https://127.0.0.1'],
+            ['frontend-base-url', 'https://10.0.0.1'],
+            ['api-base-url', 'https://staging-api.fermatmind.com'],
+        ];
+
+        try {
+            foreach ($invalidOrigins as [$option, $invalidOrigin]) {
+                $origins = [
+                    '--api-base-url' => 'https://api.fermatmind.com',
+                    '--frontend-base-url' => 'https://fermatmind.com',
+                ];
+                $origins['--'.$option] = $invalidOrigin;
+
+                $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                    '--preflight' => true,
+                    '--review-register' => $registerPath,
+                    '--backend-deployed-sha' => self::BACKEND_SHA,
+                    '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                    ...$origins,
+                ])
+                    ->expectsOutputToContain('--'.$option.' must use the configured public production origin.')
+                    ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
+                    ->expectsOutputToContain('writes_committed=0')
+                    ->assertFailed();
+
+                $this->artisan('personality:enneagram-authority-v2-runtime-readback', [
+                    '--phase' => 'pre',
+                    '--batch' => 'canary-00',
+                    '--backend-deployed-sha' => self::BACKEND_SHA,
+                    '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                    ...$origins,
+                ])
+                    ->expectsOutputToContain('--'.$option.' must use the configured public production origin.')
+                    ->expectsOutputToContain('status=FAIL_CLOSED')
+                    ->assertFailed();
+            }
+
+            Http::assertNothingSent();
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+            $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+        } finally {
+            app()->detectEnvironment(static fn (): string => $previousEnvironment);
+            config()->set('app.url', $previousApiUrl);
+            config()->set('app.frontend_url', $previousFrontendUrl);
+            File::delete($registerPath);
+        }
+    }
+
     public function test_console_rejects_frontend_revision_probe_on_a_different_origin_before_any_write(): void
     {
         $this->seedPublishedEstate();
@@ -1128,15 +1282,19 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $previousEnvironment = app()->environment();
         $revisionExisted = File::isFile($revisionPath);
         $revisionContents = $revisionExisted ? File::get($revisionPath) : null;
+        $previousApiUrl = config('app.url');
+        $previousFrontendUrl = config('app.frontend_url');
         File::ensureDirectoryExists(dirname($registerPath));
         File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
         File::put($preReadbackPath, '{}');
         File::put($revisionPath, self::BACKEND_SHA);
-        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+        config()->set('app.url', 'https://api.fermatmind.com');
+        config()->set('app.frontend_url', 'https://fermatmind.com');
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://fermatmind.com/api/content-release/revalidate');
         app()->detectEnvironment(static fn (): string => 'production');
         $redirectsDisabled = false;
         Http::fake(function (Request $request, array $options) use (&$redirectsDisabled): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
-            if ($request->url() === 'https://frontend.test/revision') {
+            if ($request->url() === 'https://fermatmind.com/revision') {
                 $redirectsDisabled = ($options['allow_redirects'] ?? null) === false;
 
                 return Http::response('', 302, ['Location' => 'https://staging-mirror.test/revision']);
@@ -1152,9 +1310,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--pre-readback' => $preReadbackPath,
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
-                '--frontend-revision-url' => 'https://frontend.test/revision',
-                '--api-base-url' => 'https://api.test',
-                '--frontend-base-url' => 'https://frontend.test',
+                '--frontend-revision-url' => 'https://fermatmind.com/revision',
+                '--api-base-url' => 'https://api.fermatmind.com',
+                '--frontend-base-url' => 'https://fermatmind.com',
             ])
                 ->expectsOutputToContain('Deployed frontend revision endpoint does not match the exact authorization SHA.')
                 ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
@@ -1167,6 +1325,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
         } finally {
             app()->detectEnvironment(static fn (): string => $previousEnvironment);
+            config()->set('app.url', $previousApiUrl);
+            config()->set('app.frontend_url', $previousFrontendUrl);
             File::delete([$registerPath, $preReadbackPath]);
             if ($revisionExisted && is_string($revisionContents)) {
                 File::put($revisionPath, $revisionContents);
@@ -1422,8 +1582,12 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
         $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
+        $previousApiUrl = config('app.url');
+        $previousFrontendUrl = config('app.frontend_url');
         File::ensureDirectoryExists(dirname($registerPath));
         File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
+        config()->set('app.url', 'https://api.fermatmind.com');
+        config()->set('app.frontend_url', 'https://fermatmind.com');
         Http::fake();
 
         try {
@@ -1432,8 +1596,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--review-register' => $registerPath,
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
-                '--api-base-url' => 'https://api.test',
-                '--frontend-base-url' => 'https://frontend.test',
+                '--api-base-url' => 'https://api.fermatmind.com',
+                '--frontend-base-url' => 'https://fermatmind.com',
             ])
                 ->expectsOutputToContain('--pre-readback is required for production preflight and execute.')
                 ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
@@ -1445,6 +1609,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
             $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
         } finally {
+            config()->set('app.url', $previousApiUrl);
+            config()->set('app.frontend_url', $previousFrontendUrl);
             File::delete($registerPath);
         }
     }
