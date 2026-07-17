@@ -644,7 +644,18 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
 
-        foreach (['/results?token=private', '/orders#private', '/pay?order=private', '/share'] as $privateRoute) {
+        foreach ([
+            '/results?token=private',
+            '/orders#private',
+            '/pay?order=private',
+            '/share',
+            '/api/v0.3/attempts/private-attempt/report',
+            '/account',
+            '/attempts/private-attempt/report',
+            '/checkout',
+            '/zh-CN/tests/enneagram/take',
+            '/og/share/private-share',
+        ] as $privateRoute) {
             $this->fakeRuntimeHttp($report, privateRouteLeak: $privateRoute);
             try {
                 app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(

@@ -548,7 +548,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 continue;
             }
             $href = $link->getAttribute('href');
-            if (preg_match('~/(?:results?|orders?|payments?|pay|share)(?=[/?#]|$)~i', $href) === 1) {
+            if ($this->isPrivateRuntimeUrl($href)) {
                 $issues[] = 'html_private_link_present';
                 break;
             }
@@ -1050,9 +1050,32 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 return;
             }
         }
-        if (preg_match('~(?:"reviewer_name"|rollback[_-]?token|/(?:results?|orders?|payments?|pay|share)(?=[/?#\s"\'<]|$))~i', $body) === 1) {
+        if (preg_match('~(?:"reviewer_name"|rollback[_-]?token)~i', $body) === 1
+            || $this->containsPrivateRuntimePath($decodedBody)) {
             $issues[] = $surface.'_private_data_marker_exposed';
         }
+    }
+
+    private function containsPrivateRuntimePath(string $body): bool
+    {
+        $body = str_replace('\\/', '/', $body);
+        preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9:/])/(?!/)[^\s<>()"\']+#i', $body, $matches);
+        foreach ($matches[0] ?? [] as $url) {
+            if ($this->isPrivateRuntimeUrl((string) $url)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isPrivateRuntimeUrl(string $url): bool
+    {
+        $url = rtrim(html_entity_decode(trim($url), ENT_QUOTES | ENT_HTML5), '.,;:]}');
+        $parts = parse_url($url);
+
+        return is_array($parts)
+            && $this->isPrivateDiscoverabilityPath((string) ($parts['path'] ?? ''));
     }
 
     private function fingerprint(mixed $value): string
