@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "301a256c8c057a3f9d9dc22daaa109b7f68c509a",
+    "commit_sha": "b74acb6b87e2b951638f09a1da4f88ec4b81c0f7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 70 tests / 1036 assertions; V224 passes 45 tests / 504 assertions. Hreflang locale/path plus graph metadata is bound from DB to API while HTML still requires the exact runtime frontend origin. Standard image surfaces fail the empty-media contract, admin/ops/tenant roots fail the private-route contract, and inline display:none or visibility:hidden ancestors cannot satisfy visible section, FAQ, or evidence checks. The complete authorized 116-page execute/readback, private-review, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 70 tests / 1038 assertions; V224 passes 45 tests / 506 assertions. Hreflang locale/path plus graph metadata is bound from DB to API while HTML still requires the exact runtime frontend origin. Standard image and CSS url() surfaces fail the empty-media contract, admin/ops/tenant roots fail the private-route contract, and inline display:none or visibility:hidden ancestors cannot satisfy visible section, FAQ, or evidence checks. The complete authorized 116-page execute/readback, private-review, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 235 tests / 29042 assertions with DB/API hreflang parity, standard HTML/schema empty-media surfaces, admin/ops/tenant private-root rejection, and CSS-hidden visible-content rejection enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 235 tests / 29044 assertions with DB/API hreflang parity, standard HTML/schema/CSS empty-media surfaces, admin/ops/tenant private-root rejection, and CSS-hidden visible-content rejection enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head 6f3ded0bfc0556240a4df26f5c6877d49291792c passed all nine required GitHub checks, then exact-head review raised one valid P2: inline display:none or visibility:hidden ancestors could satisfy visible-content readback. The gap is fixed and locally validated at code commit 301a256c8c057a3f9d9dc22daaa109b7f68c509a; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "evidence": "Exact head c510dc1af3a958b865140c5d50198ba68e8346bc passed all nine required GitHub checks, then exact-head review raised one valid P2: main-content CSS url() images could bypass the empty-media readback. The gap is fixed and locally validated at code commit b74acb6b87e2b951638f09a1da4f88ec4b81c0f7; a fresh complete GitHub check and exact-head review cycle is required before merge."
       }
     },
     "scope_validation": {
@@ -96493,9 +96493,14 @@
         "at": "2026-07-17T03:03:34Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head 6f3ded0bfc0556240a4df26f5c6877d49291792c passed all nine checks, exact-head review found inline CSS-hidden ancestors missing from renderable visible-text filtering. Code commit 301a256c8c057a3f9d9dc22daaa109b7f68c509a rejects case-insensitive display:none and visibility:hidden styles, including whitespace and !important forms, before section, FAQ, or evidence acceptance. Final V224 45/504, focused 70/1036, cache/API 8/72, classifier 1/2, full Enneagram V2 235/29042, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred the full run until an existing same-scope V224 JUnit process exited. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T03:20:34Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head c510dc1af3a958b865140c5d50198ba68e8346bc passed all nine checks, exact-head review found main-content CSS url() images missing from the empty-media readback. Code commit b74acb6b87e2b951638f09a1da4f88ec4b81c0f7 rejects inline style and local style-node URL media beneath main, article, and role=main roots. Final V224 45/506, focused 70/1038, cache/API 8/72, classifier 1/2, full Enneagram V2 235/29044, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T03:03:34Z"
+    "updated_at": "2026-07-17T03:20:34Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
