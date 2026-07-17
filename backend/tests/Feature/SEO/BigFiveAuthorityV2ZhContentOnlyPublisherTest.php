@@ -16,7 +16,9 @@ use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ContentOnlyRelease\BigFiveZhContentOnlyPublisher;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
 use Tests\TestCase;
 
 final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
@@ -94,6 +96,8 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
         $this->assertTrue($result['ok']);
         $this->assertTrue($result['writes_committed']);
         $this->assertSame('PASS_ZH_CONTENT_ONLY_RELEASE', $result['status']);
+        $this->assertTrue($result['cache_invalidation_ok']);
+        $this->assertNull($result['cache_invalidation_warning']);
         $this->assertSame(112, $result['public_release_count']);
         $this->assertTrue($result['readback']['ok']);
         $this->assertSame(112, $result['readback']['public_count']);
@@ -178,6 +182,27 @@ final class BigFiveAuthorityV2ZhContentOnlyPublisherTest extends TestCase
         $this->assertTrue($second['ok']);
         $this->assertSame($revisionCounts, $this->releaseRevisionCounts());
         $this->assertSame($englishBefore, $this->englishRows());
+    }
+
+    public function test_publish_reports_cache_failure_as_a_post_commit_warning(): void
+    {
+        Cache::partialMock()
+            ->shouldReceive('forget')
+            ->andThrow(new RuntimeException('simulated cache failure'));
+
+        $result = app(BigFiveZhContentOnlyPublisher::class)->publish(self::RELEASE);
+
+        $this->assertTrue($result['ok']);
+        $this->assertSame('PASS_ZH_CONTENT_ONLY_RELEASE', $result['status']);
+        $this->assertTrue($result['writes_committed']);
+        $this->assertFalse($result['cache_invalidation_ok']);
+        $this->assertSame(
+            'PUBLIC_CACHE_INVALIDATION_FAILED_AFTER_COMMIT',
+            $result['cache_invalidation_warning'],
+        );
+        $this->assertSame(112, $result['public_release_count']);
+        $this->assertSame(111, array_sum($this->releaseRevisionCounts()));
+        $this->assertSame(1, LandingSurface::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->publishedPublic()->count());
     }
 
     public function test_console_defaults_to_preflight_and_execute_is_testing_guarded(): void

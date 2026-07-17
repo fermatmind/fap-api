@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
+use Throwable;
 
 final class BigFiveZhContentOnlyPublisher
 {
@@ -148,7 +149,15 @@ final class BigFiveZhContentOnlyPublisher
             ];
         }, 1);
 
-        $this->flushPublicCaches($result['writes'] ?? []);
+        $result['cache_invalidation_ok'] = true;
+        $result['cache_invalidation_warning'] = null;
+
+        try {
+            $this->flushPublicCaches($result['writes'] ?? []);
+        } catch (Throwable) {
+            $result['cache_invalidation_ok'] = false;
+            $result['cache_invalidation_warning'] = 'PUBLIC_CACHE_INVALIDATION_FAILED_AFTER_COMMIT';
+        }
 
         return $result;
     }
