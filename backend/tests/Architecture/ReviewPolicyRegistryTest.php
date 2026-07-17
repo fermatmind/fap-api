@@ -144,16 +144,16 @@ final class ReviewPolicyRegistryTest extends TestCase
             $diffExitCode = 0;
             exec($diffCommand, $diffLines, $diffExitCode);
             $this->assertSame(0, $diffExitCode, 'Unable to inspect changed review-gate lines for '.$file.'.');
-            $added = implode("\n", array_filter(
+            $changed = implode("\n", array_filter(
                 $diffLines,
-                static fn (string $line): bool => str_starts_with($line, '+') && ! str_starts_with($line, '+++'),
+                static fn (string $line): bool => (str_starts_with($line, '+') && ! str_starts_with($line, '+++'))
+                    || (str_starts_with($line, '-') && ! str_starts_with($line, '---')),
             ));
-            if (preg_match('/manual[ _-]?review|human[ _-]?review|reviewer_|review_state|review_status|reviewed_by|approval_state|approved_by|operator_approval/i', $added) !== 1) {
-                continue;
-            }
-
             $path = $repoRoot.'/'.$file;
             $source = is_file($path) ? (string) file_get_contents($path) : '';
+            if (! $this->containsReviewGateMarker($source) && ! $this->containsReviewGateMarker($changed)) {
+                continue;
+            }
             preg_match_all('/@review-surface\s+([a-z0-9_]+)/', $source, $matches);
             $surfaceIds = array_values(array_unique($matches[1] ?? []));
             if ($surfaceIds === [] || array_filter($surfaceIds, static fn (string $id): bool => ! isset($registered[$id])) !== []) {
@@ -175,6 +175,13 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertFalse($this->isReviewGovernanceFoundationPath(
             'backend/app/DTO/ReviewGovernance/FutureReviewRequest.php',
         ));
+    }
+
+    public function test_review_gate_marker_detection_covers_existing_and_removed_markers(): void
+    {
+        $this->assertTrue($this->containsReviewGateMarker('if ($record->approval_state === \'approved\') {}'));
+        $this->assertTrue($this->containsReviewGateMarker('-    $record->reviewed_at = now();'));
+        $this->assertFalse($this->containsReviewGateMarker('+    $record->title = $title;'));
     }
 
     private function mergeBase(string $repoRoot): string
@@ -207,5 +214,13 @@ final class ReviewPolicyRegistryTest extends TestCase
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
             'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php',
         ], true);
+    }
+
+    private function containsReviewGateMarker(string $source): bool
+    {
+        return preg_match(
+            '/manual[ _-]?review|human[ _-]?review|reviewer_|review_state|review_status|reviewed_by|reviewed_at|approval_state|approved_by|approved_at|operator_approval/i',
+            $source,
+        ) === 1;
     }
 }
