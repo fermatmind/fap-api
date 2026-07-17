@@ -1755,7 +1755,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
             $expectedFiles = [
                 'human-review-checklist.json',
-                'private-review-register-template.json',
+                'private-review-register-input.json',
                 'readback-batches.json',
                 'pr23-redacted-retrospective-template.json',
             ];
@@ -1766,8 +1766,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             }
             $this->assertFileDoesNotExist($outputDirectory.'/exact-sha-production-authorization-packet.json');
             $this->assertFileDoesNotExist($outputDirectory.'/runtime-preflight-summary.json');
+            $this->assertFileDoesNotExist($outputDirectory.'/private-review-register-template.json');
 
-            $template = json_decode(File::get($outputDirectory.'/private-review-register-template.json'), true, 512, JSON_THROW_ON_ERROR);
+            $template = json_decode(File::get($outputDirectory.'/private-review-register-input.json'), true, 512, JSON_THROW_ON_ERROR);
             $this->assertSame('private_internal_only_do_not_commit_when_completed', $template['classification']);
             $this->assertSame(116, count($template['reviews']));
             $this->assertSame([], array_values(array_filter(array_column($template['reviews'], 'reviewer_name'))));

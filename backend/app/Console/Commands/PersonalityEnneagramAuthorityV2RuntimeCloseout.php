@@ -262,7 +262,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         File::ensureDirectoryExists($resolved);
         $files = [
             'human-review-checklist.json' => $artifacts['checklist'],
-            'private-review-register-template.json' => $artifacts['review_register_template'],
+            'private-review-register-input.json' => $artifacts['review_register_template'],
             'readback-batches.json' => $artifacts['readback_batches'],
             'pr23-redacted-retrospective-template.json' => $artifacts['retrospective_template'],
         ];
