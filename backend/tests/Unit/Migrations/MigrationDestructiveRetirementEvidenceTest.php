@@ -124,6 +124,41 @@ PHP;
     }
 
     #[Test]
+    public function dynamic_table_and_interpolated_column_drops_fail_closed(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_dynamic_targets.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        $tableName = 'retired_table';
+        Schema::drop($tableName);
+
+        Schema::table('personality_public_content_assets', function (Blueprint $table): void {
+            $suffix = 'json';
+            $table->dropColumn(["media_$suffix"]);
+        });
+    }
+};
+PHP;
+        $operations = $this->destructiveUpOperations($migration, $source);
+
+        $this->assertSame([
+            ['migration' => $migration, 'operation' => 'drop_table', 'table' => '__dynamic_drop_table_expression__'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_$suffix'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => '__dynamic_drop_column_expression__'],
+        ], $operations);
+        $this->assertCount(3, $this->missingEvidence($operations, []));
+    }
+
+    #[Test]
     public function current_destructive_migrations_have_bound_retirement_evidence(): void
     {
         $evidenceByMigration = $this->evidenceByMigration();
@@ -255,39 +290,64 @@ PHP;
         $clean = $this->stripComments($upBody);
         $operations = [];
 
-        if (preg_match_all('/Schema::drop(?:IfExists)?\s*\(\s*[\'"]([^\'"]+)[\'"]\s*\)/', $clean, $matches) > 0) {
-            foreach ($matches[1] as $table) {
-                $operations[] = [
-                    'migration' => $migration,
-                    'operation' => 'drop_table',
-                    'table' => strtolower((string) $table),
-                ];
+        if (preg_match_all('/Schema::drop(?:IfExists)?\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
+            foreach ($matches[1] as $arguments) {
+                foreach ($this->destructiveArgumentValues(
+                    (string) $arguments,
+                    '__dynamic_drop_table_expression__',
+                ) as $table) {
+                    $operations[] = [
+                        'migration' => $migration,
+                        'operation' => 'drop_table',
+                        'table' => strtolower($table),
+                    ];
+                }
             }
         }
 
         if (preg_match_all('/->dropColumn\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
             foreach ($matches[1] as $arguments) {
-                $argumentSource = (string) $arguments;
-                $literalCount = preg_match_all('/[\'"]([^\'"]+)[\'"]/', $argumentSource, $columns);
-                $literalColumns = $literalCount === false ? [] : $columns[1];
-                $withoutLiterals = preg_replace('/[\'"][^\'"]+[\'"]/', '', $argumentSource);
-                $nonLiteralExpression = preg_replace('/[\s\[\],]/', '', $withoutLiterals ?? $argumentSource);
-
-                if ($literalColumns === [] || $nonLiteralExpression !== '') {
-                    $literalColumns[] = '__dynamic_drop_column_expression__';
-                }
-
-                foreach ($literalColumns as $column) {
+                foreach ($this->destructiveArgumentValues(
+                    (string) $arguments,
+                    '__dynamic_drop_column_expression__',
+                ) as $column) {
                     $operations[] = [
                         'migration' => $migration,
                         'operation' => 'drop_column',
-                        'table' => strtolower((string) $column),
+                        'table' => strtolower($column),
                     ];
                 }
             }
         }
 
         return $operations;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function destructiveArgumentValues(string $arguments, string $dynamicSentinel): array
+    {
+        $literalMatches = [];
+        $literalCount = preg_match_all('/([\'"])([^\'"]*)\1/', $arguments, $literalMatches, PREG_SET_ORDER);
+        $literalValues = [];
+        $hasInterpolatedLiteral = false;
+
+        if ($literalCount !== false) {
+            foreach ($literalMatches as $match) {
+                $literalValues[] = (string) $match[2];
+                $hasInterpolatedLiteral = $hasInterpolatedLiteral
+                    || ($match[1] === '"' && str_contains((string) $match[2], '$'));
+            }
+        }
+
+        $withoutLiterals = preg_replace('/([\'"])([^\'"]*)\1/', '', $arguments);
+        $nonLiteralExpression = preg_replace('/[\s\[\],]/', '', $withoutLiterals ?? $arguments);
+        if ($literalValues === [] || $nonLiteralExpression !== '' || $hasInterpolatedLiteral) {
+            $literalValues[] = $dynamicSentinel;
+        }
+
+        return $literalValues;
     }
 
     /**
