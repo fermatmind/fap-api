@@ -171,6 +171,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             $issues[] = 'api_media_not_empty';
         }
         $this->assertApiPayloadMatchesCurrentPublicAsset($target, $v1, $issues);
+        $this->validateApiDiscoverabilityUrls($target, $v1, $frontendBaseUrl, $issues);
         if ($phase === 'post') {
             if (($v1['source_hash'] ?? null) !== $target['asset_sha256']
                 || ($v1['source_package'] ?? null) !== EnneagramPublicAuthorityV205RevisionWorkspaceWriter::SOURCE_PACKAGE
@@ -283,6 +284,51 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         ];
         if (! hash_equals($this->fingerprint($expected), $this->fingerprint($observed))) {
             $issues[] = 'api_current_public_asset_mismatch';
+        }
+    }
+
+    /** @param array<string,mixed> $target @param array<string,mixed> $v1 @param list<string> $issues */
+    private function validateApiDiscoverabilityUrls(
+        array $target,
+        array $v1,
+        string $frontendBaseUrl,
+        array &$issues,
+    ): void {
+        $path = (string) $target['path'];
+        $canonical = is_array($v1['canonical'] ?? null) ? $v1['canonical'] : [];
+        if (trim((string) ($canonical['path'] ?? '')) !== $path
+            || (array_key_exists('url', $canonical)
+                && ! $this->isExactFrontendUrl(
+                    trim((string) $canonical['url']),
+                    $frontendBaseUrl,
+                    $path,
+                ))) {
+            $issues[] = 'api_canonical_url_mismatch';
+        }
+
+        $requiredLanguages = ['en', 'zh-cn', 'x-default'];
+        $hreflang = $this->normalizedHreflangUrls($v1['hreflang'] ?? null);
+        foreach (array_keys($hreflang) as $language) {
+            $normalizedLanguage = strtolower(trim((string) $language));
+            if (preg_match('/^[a-z]{2}(?:-[a-z]{2})?$/', $normalizedLanguage) === 1
+                && ! in_array($normalizedLanguage, $requiredLanguages, true)) {
+                $issues[] = 'api_hreflang_language_set_mismatch';
+                break;
+            }
+        }
+        $routeSuffix = preg_replace('#^/(?:en|zh)/#', '/', $path);
+        $expectedPaths = is_string($routeSuffix) ? [
+            'en' => '/en'.$routeSuffix,
+            'zh-cn' => '/zh'.$routeSuffix,
+            'x-default' => '/en'.$routeSuffix,
+        ] : [];
+        foreach ($requiredLanguages as $language) {
+            $reference = trim((string) ($hreflang[$language] ?? ''));
+            $expectedPath = (string) ($expectedPaths[$language] ?? '');
+            if ($expectedPath === ''
+                || ! $this->isExactFrontendReference($reference, $frontendBaseUrl, $expectedPath)) {
+                $issues[] = 'api_hreflang_url_mismatch_'.$language;
+            }
         }
     }
 
@@ -1022,6 +1068,23 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         } catch (RuntimeException) {
             return false;
         }
+    }
+
+    private function isExactFrontendReference(
+        string $reference,
+        string $frontendBaseUrl,
+        string $expectedPath,
+    ): bool {
+        $parts = parse_url($reference);
+        $isRelativePath = str_starts_with($reference, '/') && ! str_starts_with($reference, '//');
+        if ($isRelativePath) {
+            return is_array($parts)
+                && ! array_key_exists('query', $parts)
+                && ! array_key_exists('fragment', $parts)
+                && (string) ($parts['path'] ?? '') === $expectedPath;
+        }
+
+        return $this->isExactFrontendUrl($reference, $frontendBaseUrl, $expectedPath);
     }
 
     /** @param array<string,mixed> $expectedHreflang @param list<string> $issues */

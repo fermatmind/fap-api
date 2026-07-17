@@ -205,7 +205,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
     public function test_authorized_execute_runs_import_bind_atomic_promotion_cache_and_nine_plus_canary_readbacks(): void
     {
-        $this->seedPublishedEstate();
+        $this->seedPublishedEstate('https://fermatmind.com');
         $nonReleaseAsset = $this->seedNonReleaseAsset();
         $report = $this->releaseReport();
         $register = $this->reviewRegister($report);
@@ -219,10 +219,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
             'https://api.test',
-            'https://frontend.test',
-            'https://frontend.test/api/content-release/revalidate',
+            'https://fermatmind.com',
+            'https://fermatmind.com/api/content-release/revalidate',
         );
-        $this->fakeRuntimeHttp($report);
+        $this->fakeRuntimeHttp($report, frontendBaseUrl: 'https://fermatmind.com');
         $rollbackPath = '/tmp/enneagram-v224-rollback-'.bin2hex(random_bytes(8)).'.token';
         $registerPath = storage_path('framework/testing/enneagram-v224-post-readback-register-'.bin2hex(random_bytes(4)).'.json');
         File::ensureDirectoryExists(dirname($registerPath));
@@ -241,8 +241,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 (string) $preflight['authorization_packet']['authorization_phrase'],
                 $rollbackPath,
                 'https://api.test',
-                'https://frontend.test',
-                'https://frontend.test/api/content-release/revalidate',
+                'https://fermatmind.com',
+                'https://fermatmind.com/api/content-release/revalidate',
                 self::REVALIDATION_SECRET,
             );
 
@@ -282,7 +282,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--phase' => 'post',
                 '--batch' => 'canary-00',
                 '--api-base-url' => 'https://api.test',
-                '--frontend-base-url' => 'https://frontend.test',
+                '--frontend-base-url' => 'https://fermatmind.com',
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
                 '--review-register' => $registerPath,
@@ -300,7 +300,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
     public function test_authorized_execute_resumes_exact_bound_review_after_pre_promotion_failure_state(): void
     {
-        $this->seedPublishedEstate();
+        $this->seedPublishedEstate('https://fermatmind.com');
         $report = $this->releaseReport();
         $register = $this->reviewRegister($report);
         $reportSha = $this->fingerprintRaw($report);
@@ -314,8 +314,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
             'https://api.test',
-            'https://frontend.test',
-            'https://frontend.test/api/content-release/revalidate',
+            'https://fermatmind.com',
+            'https://fermatmind.com/api/content-release/revalidate',
         );
 
         $workspaceWriter = app(EnneagramPublicAuthorityV205RevisionWorkspaceWriter::class);
@@ -339,7 +339,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             ->count());
         $this->assertSame(116, PersonalityPublicContentAssetRevisionReview::query()->count());
 
-        $this->fakeRuntimeHttp($report);
+        $this->fakeRuntimeHttp($report, frontendBaseUrl: 'https://fermatmind.com');
         $rollbackPath = '/tmp/enneagram-v224-resumed-rollback-'.bin2hex(random_bytes(8)).'.token';
         try {
             $result = $closeout->execute(
@@ -354,8 +354,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 (string) $preflight['authorization_packet']['authorization_phrase'],
                 $rollbackPath,
                 'https://api.test',
-                'https://frontend.test',
-                'https://frontend.test/api/content-release/revalidate',
+                'https://fermatmind.com',
+                'https://fermatmind.com/api/content-release/revalidate',
                 self::REVALIDATION_SECRET,
             );
 
@@ -712,6 +712,103 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             } catch (\RuntimeException $exception) {
                 $this->assertStringContainsString('api_current_public_asset_mismatch', $exception->getMessage());
             }
+        }
+    }
+
+    public function test_pre_readback_rejects_database_backed_api_canonical_on_an_unauthorized_origin(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()->firstOrFail();
+        $canonical = is_array($asset->canonical_json) ? $asset->canonical_json : [];
+        $path = (string) ($canonical['path'] ?? '');
+        foreach ([
+            'https://staging-mirror.test{path}',
+            'http://frontend.test{path}',
+            'https://frontend.test{path}?stale=1',
+            'https://frontend.test{path}#stale',
+            '{path}',
+            'https://frontend.test/en/personality/enneagram/type-2',
+        ] as $invalidCanonical) {
+            $canonical['url'] = str_replace('{path}', $path, $invalidCanonical);
+            $asset->update(['canonical_json' => $canonical]);
+            $this->fakeRuntimeHttp($report);
+
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected a database-backed API canonical URL drift to fail closed.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('api_canonical_url_mismatch', $exception->getMessage());
+            }
+        }
+    }
+
+    public function test_pre_readback_rejects_database_backed_api_hreflang_on_an_unauthorized_origin(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()->firstOrFail();
+        $originalHreflang = is_array($asset->hreflang_json) ? $asset->hreflang_json : [];
+        foreach ([
+            'https://staging-mirror.test{path}',
+            'http://frontend.test{path}',
+            'https://frontend.test{path}?stale=1',
+            'https://frontend.test{path}#stale',
+            'https://frontend.test/en/personality/enneagram/type-2',
+        ] as $invalidHreflang) {
+            $hreflang = array_map(
+                static fn (mixed $url): string => str_replace(
+                    '{path}',
+                    (string) parse_url((string) $url, PHP_URL_PATH),
+                    $invalidHreflang,
+                ),
+                $originalHreflang,
+            );
+            $asset->update(['hreflang_json' => $hreflang]);
+            $this->fakeRuntimeHttp($report);
+
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected database-backed API hreflang URL drift to fail closed.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('api_hreflang_url_mismatch_', $exception->getMessage());
+            }
+        }
+
+        $asset->update(['hreflang_json' => [
+            ...$originalHreflang,
+            'fr' => 'https://frontend.test/fr/personality/enneagram',
+        ]]);
+        $this->fakeRuntimeHttp($report);
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected an extra API hreflang language to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_hreflang_language_set_mismatch', $exception->getMessage());
         }
     }
 
@@ -2131,7 +2228,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
     public function test_console_execute_persists_the_redacted_closeout_result_to_the_reserved_output(): void
     {
-        $this->seedPublishedEstate();
+        $this->seedPublishedEstate('https://fermatmind.com');
         $report = $this->releaseReport();
         $reportPath = base_path('docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/release-gate-report.json');
         $register = $this->reviewRegister($report);
@@ -2144,8 +2241,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             self::BACKEND_SHA,
             self::FRONTEND_SHA,
             'https://api.test',
-            'https://frontend.test',
-            'https://frontend.test/api/content-release/revalidate',
+            'https://fermatmind.com',
+            'https://fermatmind.com/api/content-release/revalidate',
         );
         $suffix = bin2hex(random_bytes(4));
         $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.$suffix.'.json');
@@ -2158,9 +2255,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $preflight['authorization_packet'],
             JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
         ));
-        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://fermatmind.com/api/content-release/revalidate');
         config()->set('ops.content_release_observability.hmac_revalidation_secret', self::REVALIDATION_SECRET);
-        $this->fakeRuntimeHttp($report);
+        $this->fakeRuntimeHttp($report, frontendBaseUrl: 'https://fermatmind.com');
 
         try {
             $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
@@ -2173,7 +2270,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--operator-approved' => (string) $preflight['authorization_packet']['authorization_phrase'],
                 '--rollback-token-output' => $rollbackPath,
                 '--api-base-url' => 'https://api.test',
-                '--frontend-base-url' => 'https://frontend.test',
+                '--frontend-base-url' => 'https://fermatmind.com',
                 '--output' => $outputPath,
                 '--allow-testing' => true,
             ])
@@ -2229,14 +2326,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $apiCanonicalUrlOverride = null,
         ?string $duplicateCanonicalUrl = null,
         ?string $apiHreflangUrlOverride = null,
+        string $frontendBaseUrl = 'https://frontend.test',
     ): void {
         $paths = array_column($report['asset_records'], 'path');
-        $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
+        $urls = array_map(static fn (string $path): string => $frontendBaseUrl.$path, $paths);
         if ($discoverabilityUrlOverride !== null) {
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByNestedAtRule, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByNestedAtRule, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $frontendBaseUrl, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2261,15 +2359,15 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 : '';
             $duplicateUrl = trim((string) strtok($baseUrlText, "\n"));
             if (($redirectSurface === 'api' && str_starts_with($url, 'https://api.test/api/v0.5/personality-content-assets?'))
-                || ($redirectSurface === 'html' && str_starts_with($url, 'https://frontend.test/') && ! in_array($url, [
-                    'https://frontend.test/sitemap.xml',
-                    'https://frontend.test/llms.txt',
-                    'https://frontend.test/llms-full.txt',
+                || ($redirectSurface === 'html' && str_starts_with($url, $frontendBaseUrl.'/') && ! in_array($url, [
+                    $frontendBaseUrl.'/sitemap.xml',
+                    $frontendBaseUrl.'/llms.txt',
+                    $frontendBaseUrl.'/llms-full.txt',
                 ], true))
-                || ($redirectSurface === 'sitemap' && $url === 'https://frontend.test/sitemap.xml')) {
+                || ($redirectSurface === 'sitemap' && $url === $frontendBaseUrl.'/sitemap.xml')) {
                 return Http::response('', 302, ['Location' => 'https://staging-mirror.test/redirected']);
             }
-            if ($url === 'https://frontend.test/api/content-release/revalidate') {
+            if ($url === $frontendBaseUrl.'/api/content-release/revalidate') {
                 if ($rejectRevalidation) {
                     return Http::response(['ok' => false], 503);
                 }
@@ -2306,7 +2404,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     );
                 }
                 if ($staleHreflangPayload) {
-                    $hreflang['en'] = 'https://frontend.test/en/personality/enneagram/type-9';
+                    $hreflang['en'] = $frontendBaseUrl.'/en/personality/enneagram/type-9';
                 }
                 $payloadTitle = $stalePublicPayload ? 'Stale cached Enneagram authority' : (string) $asset->title;
                 $payloadSummary = $stalePublicPayload ? 'Stale cached backend-authoritative public content.' : (string) $asset->summary;
@@ -2374,7 +2472,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     ],
                 ], 200, ['X-Fermat-Public-Read-Cache' => 'fresh']);
             }
-            if ($url === 'https://frontend.test/sitemap.xml') {
+            if ($url === $frontendBaseUrl.'/sitemap.xml') {
                 $sitemapUrlText = $trailingSlashSurface === 'sitemap' ? $trailingSlashUrlText : $urlText;
                 if ($duplicateSurface === 'sitemap') {
                     $sitemapUrlText .= "\n".$duplicateUrl;
@@ -2385,8 +2483,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     explode("\n", $sitemapUrlText),
                 )).'</urlset>', 200, ['Content-Type' => 'application/xml']);
             }
-            if (in_array($url, ['https://frontend.test/llms.txt', 'https://frontend.test/llms-full.txt'], true)) {
-                $surface = $url === 'https://frontend.test/llms-full.txt' ? 'llms_full' : 'llms';
+            if (in_array($url, [$frontendBaseUrl.'/llms.txt', $frontendBaseUrl.'/llms-full.txt'], true)) {
+                $surface = $url === $frontendBaseUrl.'/llms-full.txt' ? 'llms_full' : 'llms';
                 $surfaceUrlText = $trailingSlashSurface === $surface
                     ? $trailingSlashUrlText
                     : ($surface === 'llms_full' ? $llmsFullUrlText : $llmsUrlText);
@@ -2400,7 +2498,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     ['Content-Type' => 'text/plain'],
                 );
             }
-            if (str_starts_with($url, 'https://frontend.test/')) {
+            if (str_starts_with($url, $frontendBaseUrl.'/')) {
                 $path = (string) parse_url($url, PHP_URL_PATH);
                 $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
                     ->where('framework', 'enneagram')
@@ -2423,7 +2521,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     ENT_QUOTES | ENT_HTML5,
                 );
                 $canonical = htmlspecialchars(
-                    $canonicalUrlOverride ?? 'https://frontend.test'.$path,
+                    $canonicalUrlOverride ?? $frontendBaseUrl.$path,
                     ENT_QUOTES | ENT_HTML5,
                 );
                 $hreflang = [];
@@ -2433,9 +2531,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     }
                     $href = $language === 'en' && $hreflangUrlOverride !== null
                         ? $hreflangUrlOverride
-                        : 'https://frontend.test'.(string) parse_url((string) $url, PHP_URL_PATH);
+                        : $frontendBaseUrl.(string) parse_url((string) $url, PHP_URL_PATH);
                     if ($staleHreflangPayload && strtolower((string) $language) === 'en') {
-                        $href = 'https://frontend.test/en/personality/enneagram/type-9';
+                        $href = $frontendBaseUrl.'/en/personality/enneagram/type-9';
                     }
                     $hreflang[] = '<link rel="alternate" hreflang="'
                         .htmlspecialchars((string) $language, ENT_QUOTES | ENT_HTML5)
@@ -2595,7 +2693,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         });
     }
 
-    private function seedPublishedEstate(): void
+    private function seedPublishedEstate(string $frontendBaseUrl = 'https://frontend.test'): void
     {
         foreach ($this->scorecard()['rows'] as $index => $row) {
             $path = (string) $row['path'];
@@ -2612,8 +2710,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 'content_sections_json' => [['key' => 'existing', 'body_md' => 'Existing public content.']],
                 'seo_json' => ['title' => 'Published Enneagram authority '.($index + 1)],
                 'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
-                'canonical_json' => ['path' => $path, 'url' => (string) $row['canonical']],
-                'hreflang_json' => $row['hreflang'],
+                'canonical_json' => ['path' => $path, 'url' => $frontendBaseUrl.$path],
+                'hreflang_json' => array_map(
+                    static fn (mixed $url): string => $frontendBaseUrl.(string) parse_url((string) $url, PHP_URL_PATH),
+                    (array) $row['hreflang'],
+                ),
                 'faq_json' => [],
                 'media_json' => ['hero' => null, 'inline' => [], 'og' => null],
                 'schema_json' => [],
