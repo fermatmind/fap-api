@@ -2110,8 +2110,13 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertIsArray($v2);
         $legacyDetail['asset'] = $v1;
         $legacyDetail['personality_public_content_asset_v1']['content_sections'] = $v1['sections'];
+        $legacyDetail['personality_public_content_asset_v1']['media'] = [
+            'hero' => ['url' => 'https://assets.fermatmind.com/personality/big-five/legacy.webp'],
+        ];
+        $legacyDetail['personality_public_content_asset_v1']['seo']['og_image_url'] = 'https://assets.fermatmind.com/personality/big-five/legacy-og.webp';
         $legacyDetail['personality_public_content_asset_v2'] = array_replace($v1, $v2, [
             'content_sections' => $v1['sections'],
+            'media_authority' => ['hero' => ['url' => 'https://assets.fermatmind.com/personality/big-five/legacy.webp']],
         ]);
         $cache->put(
             'detail-code',
@@ -2129,6 +2134,8 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertIsArray($legacyIndex);
         self::assertIsArray($legacyIndex['items'][0] ?? null);
         $legacyIndex['items'][0]['content_sections'] = $legacyIndex['items'][0]['sections'];
+        $legacyIndex['items'][0]['media'] = ['hero' => ['url' => 'https://assets.fermatmind.com/personality/big-five/legacy.webp']];
+        $legacyIndex['items'][0]['seo']['twitter_image_url'] = 'https://assets.fermatmind.com/personality/big-five/legacy-twitter.webp';
         $pagination = ['current_page' => 1, 'per_page' => 100, 'total' => 1, 'last_page' => 1];
         $cache->put(
             'index',
@@ -2146,13 +2153,18 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
             ->assertJsonMissingPath('asset')
             ->assertJsonMissingPath('personality_public_content_asset_v1.content_sections')
+            ->assertJsonMissingPath('personality_public_content_asset_v1.media')
+            ->assertJsonMissingPath('personality_public_content_asset_v1.seo.og_image_url')
             ->assertJsonMissingPath('personality_public_content_asset_v2.title')
             ->assertJsonMissingPath('personality_public_content_asset_v2.sections')
-            ->assertJsonMissingPath('personality_public_content_asset_v2.content_sections');
+            ->assertJsonMissingPath('personality_public_content_asset_v2.content_sections')
+            ->assertJsonMissingPath('personality_public_content_asset_v2.media_authority');
         $this->getJson($indexPath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
-            ->assertJsonMissingPath('items.0.content_sections');
+            ->assertJsonMissingPath('items.0.content_sections')
+            ->assertJsonMissingPath('items.0.media')
+            ->assertJsonMissingPath('items.0.seo.twitter_image_url');
 
         DB::table('personality_public_content_assets')
             ->where('id', $asset->id)
@@ -2163,11 +2175,16 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
             ->assertJsonMissingPath('asset')
             ->assertJsonMissingPath('personality_public_content_asset_v1.content_sections')
-            ->assertJsonMissingPath('personality_public_content_asset_v2.title');
+            ->assertJsonMissingPath('personality_public_content_asset_v1.media')
+            ->assertJsonMissingPath('personality_public_content_asset_v1.seo.og_image_url')
+            ->assertJsonMissingPath('personality_public_content_asset_v2.title')
+            ->assertJsonMissingPath('personality_public_content_asset_v2.media_authority');
         $this->getJson($indexPath)
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertJsonMissingPath('items.0.content_sections');
+            ->assertJsonMissingPath('items.0.content_sections')
+            ->assertJsonMissingPath('items.0.media')
+            ->assertJsonMissingPath('items.0.seo.twitter_image_url');
     }
 
     public function test_enneagram_authority_v2_detail_projection_busts_v1_only_cache_versions(): void

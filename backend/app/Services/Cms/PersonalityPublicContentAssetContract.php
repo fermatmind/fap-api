@@ -6,7 +6,6 @@ namespace App\Services\Cms;
 
 use App\DTO\Personality\PersonalityPublicContentAssetData;
 use App\Models\PersonalityPublicContentAsset;
-use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -60,30 +59,34 @@ final class PersonalityPublicContentAssetContract
             'content_sections.*.key' => ['required_with:content_sections', 'string', 'max:96'],
             'content_sections.*.title' => ['nullable', 'string', 'max:255'],
             'content_sections.*.body_md' => ['nullable', 'string'],
+            'content_sections.*.body_html' => ['nullable', 'string'],
             'seo' => ['required', 'array'],
+            'seo.og_image_url' => ['prohibited'],
+            'seo.twitter_image_url' => ['prohibited'],
+            'seo.image' => ['prohibited'],
+            'seo.image_url' => ['prohibited'],
+            'seo.og.image' => ['prohibited'],
+            'seo.og.image_url' => ['prohibited'],
+            'seo.open_graph.image' => ['prohibited'],
+            'seo.open_graph.image_url' => ['prohibited'],
+            'seo.twitter.image' => ['prohibited'],
+            'seo.twitter.image_url' => ['prohibited'],
+            'seo.twitter_card.image' => ['prohibited'],
+            'seo.twitter_card.image_url' => ['prohibited'],
             'robots' => ['required', Rule::in(PersonalityPublicContentAsset::ROBOTS_VALUES)],
             'canonical_path' => ['nullable', 'string', 'max:255'],
             'canonical' => ['required', 'array'],
             'hreflang' => ['present', 'array'],
             'faq' => ['present', 'array'],
-            'media' => ['present', 'array'],
-            'media.hero' => ['nullable', 'array'],
-            'media.hero.media_asset_id' => ['nullable', 'integer', 'min:1'],
-            'media.hero.url' => ['nullable', 'string', 'max:2048'],
-            'media.hero.alt' => ['nullable', 'string', 'max:500'],
-            'media.inline' => ['nullable', 'array'],
-            'media.inline.*' => ['array'],
-            'media.inline.*.media_asset_id' => ['nullable', 'integer', 'min:1'],
-            'media.inline.*.url' => ['nullable', 'string', 'max:2048'],
-            'media.inline.*.alt' => ['nullable', 'string', 'max:500'],
-            'media.og' => ['nullable', 'array'],
-            'media.og.media_asset_id' => ['nullable', 'integer', 'min:1'],
-            'media.og.url' => ['nullable', 'string', 'max:2048'],
-            'media.og.alt' => ['nullable', 'string', 'max:500'],
+            'media' => ['prohibited'],
+            'media_authority' => ['prohibited'],
             'schema' => ['present', 'array'],
             'method_boundary' => ['present', 'array'],
             'evidence_notes' => ['present', 'array'],
             'authority' => ['present', 'array'],
+            'authority.media' => ['prohibited'],
+            'authority.media_authority' => ['prohibited'],
+            'authority.media_deferred_by_operator' => ['prohibited'],
             'authority.sources' => ['sometimes', 'array'],
             'authority.sources.*' => ['array'],
             'authority.sources.*.id' => ['required', 'string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_.-]*$/i'],
@@ -133,9 +136,9 @@ final class PersonalityPublicContentAssetContract
             $this->validateLaunchGate($validator, $normalized);
             $this->validateForbiddenProgrammaticPages($validator, $normalized);
             $this->validateNoPrivateResultModules($validator, $normalized);
+            $this->validateNoContentImages($validator, $normalized);
             $this->validateCanonicalForIndexable($validator, $normalized);
             $this->validateAuthorityV2($validator, $normalized);
-            $this->validateMediaAuthority($validator, $normalized);
         });
 
         if ($validator->fails()) {
@@ -196,7 +199,6 @@ final class PersonalityPublicContentAssetContract
         $payload['canonical_path'] = trim((string) ($payload['canonical_path'] ?? data_get($payload, 'canonical.path', '')));
         $payload['hreflang'] = is_array($payload['hreflang'] ?? null) ? $payload['hreflang'] : [];
         $payload['faq'] = is_array($payload['faq'] ?? null) ? $payload['faq'] : [];
-        $payload['media'] = is_array($payload['media'] ?? null) ? $payload['media'] : [];
         $payload['schema'] = is_array($payload['schema'] ?? null) ? $payload['schema'] : [];
         $payload['method_boundary'] = is_array($payload['method_boundary'] ?? null) ? $payload['method_boundary'] : [];
         $payload['evidence_notes'] = is_array($payload['evidence_notes'] ?? null) ? $payload['evidence_notes'] : [];
@@ -322,6 +324,26 @@ final class PersonalityPublicContentAssetContract
         }
     }
 
+    /** @param array<string,mixed> $payload */
+    private function validateNoContentImages($validator, array $payload): void
+    {
+        foreach ((array) ($payload['content_sections'] ?? []) as $index => $section) {
+            if (! is_array($section)) {
+                continue;
+            }
+
+            $bodyMd = (string) ($section['body_md'] ?? $section['bodyMd'] ?? $section['body'] ?? '');
+            if (preg_match('/!\[[^\]]*\]\s*\([^\)]*\)/u', $bodyMd) === 1 || preg_match('/<img\b/iu', $bodyMd) === 1) {
+                $validator->errors()->add("content_sections.{$index}.body_md", 'Personality public content does not support images.');
+            }
+
+            $bodyHtml = (string) ($section['body_html'] ?? $section['bodyHtml'] ?? '');
+            if (preg_match('/<img\b/iu', $bodyHtml) === 1) {
+                $validator->errors()->add("content_sections.{$index}.body_html", 'Personality public content does not support images.');
+            }
+        }
+    }
+
     /**
      * @param  array<string,mixed>  $payload
      */
@@ -415,40 +437,6 @@ final class PersonalityPublicContentAssetContract
                     'authority.schema_eligible',
                     'Schema eligibility requires explicit visible evidence plus the existing published/indexable/schema gates.'
                 );
-            }
-        }
-    }
-
-    /** @param array<string,mixed> $payload */
-    private function validateMediaAuthority($validator, array $payload): void
-    {
-        $media = is_array($payload['media'] ?? null) ? $payload['media'] : [];
-        $records = [];
-
-        foreach (['hero', 'og'] as $slot) {
-            if (is_array($media[$slot] ?? null) && $media[$slot] !== []) {
-                $records[] = [$slot, $media[$slot]];
-            }
-        }
-        foreach ((array) ($media['inline'] ?? []) as $index => $record) {
-            if (is_array($record) && $record !== []) {
-                $records[] = ["inline.{$index}", $record];
-            }
-        }
-
-        foreach ($records as [$slot, $record]) {
-            $url = trim((string) ($record['url'] ?? ''));
-            $mediaAssetId = (int) ($record['media_asset_id'] ?? 0);
-            $alt = trim((string) ($record['alt'] ?? ''));
-
-            if ($url === '' && $mediaAssetId <= 0) {
-                $validator->errors()->add("media.{$slot}", 'Media authority requires a public URL or media_asset_id.');
-            }
-            if ($url !== '' && PublicMediaUrlGuard::sanitizeNullableUrl($url) === null) {
-                $validator->errors()->add("media.{$slot}.url", 'Media authority URL must pass the public media allowlist.');
-            }
-            if ($alt === '') {
-                $validator->errors()->add("media.{$slot}.alt", 'Visible media authority requires non-empty alt text.');
             }
         }
     }

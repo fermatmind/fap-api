@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_5;
 
+use App\Console\Commands\PersonalityPublicAssetsRetireMediaFields;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
@@ -25,6 +28,8 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
 
     public function test_import_dry_run_validates_big_five_seed_without_writing(): void
     {
+        $this->assertFalse(Schema::hasColumn('personality_public_content_assets', 'media_json'));
+
         $this->artisan('personality-public-assets:import')
             ->expectsOutputToContain('dry_run=1')
             ->expectsOutputToContain('assets_found=94')
@@ -36,6 +41,47 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
+    }
+
+    public function test_retire_media_fields_command_is_dry_run_by_default_and_requires_exact_write_confirmation(): void
+    {
+        $asset = PersonalityPublicContentAsset::query()->create($this->assetAttributes());
+        DB::table('personality_public_content_assets')->where('id', $asset->id)->update([
+            'seo_json' => json_encode([
+                'title' => 'Big Five Personality',
+                'og_image_url' => 'https://assets.fermatmind.com/personality/big-five/legacy.webp',
+                'twitter_card' => ['image_url' => 'https://assets.fermatmind.com/personality/big-five/twitter.webp'],
+            ], JSON_THROW_ON_ERROR),
+            'authority_json' => json_encode([
+                'media_deferred_by_operator' => true,
+                'media_authority' => ['hero' => null],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+
+        $this->artisan('personality-public-assets:retire-media-fields')
+            ->expectsOutputToContain('dry_run=1')
+            ->expectsOutputToContain('cleanup_required_count=1')
+            ->expectsOutputToContain('updated_count=0')
+            ->assertExitCode(0);
+        $this->assertArrayHasKey('og_image_url', $asset->fresh()->seo_json);
+
+        $this->artisan('personality-public-assets:retire-media-fields', ['--write' => true])
+            ->expectsOutputToContain('Exact --confirm=')
+            ->assertExitCode(1);
+
+        $this->artisan('personality-public-assets:retire-media-fields', [
+            '--write' => true,
+            '--confirm' => PersonalityPublicAssetsRetireMediaFields::CONFIRMATION,
+        ])
+            ->expectsOutputToContain('dry_run=0')
+            ->expectsOutputToContain('updated_count=1')
+            ->assertExitCode(0);
+
+        $asset = $asset->fresh();
+        $this->assertArrayNotHasKey('og_image_url', $asset->seo_json);
+        $this->assertArrayNotHasKey('image_url', $asset->seo_json['twitter_card']);
+        $this->assertArrayNotHasKey('media_deferred_by_operator', $asset->authority_json);
+        $this->assertArrayNotHasKey('media_authority', $asset->authority_json);
     }
 
     public function test_write_import_is_idempotent_and_exposes_only_render_candidates(): void
@@ -842,6 +888,12 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             'index_eligible' => true,
             'published_at' => now()->subDay(),
             'last_reviewed_at' => now()->subHour(),
+            'seo_json' => [
+                'title' => 'Big Five Personality',
+                'description' => 'Published fixture.',
+                'og_image_url' => 'https://assets.fermatmind.com/personality/big-five/legacy-og.webp',
+                'twitter' => ['image' => 'https://assets.fermatmind.com/personality/big-five/legacy-twitter.webp'],
+            ],
             'authority_json' => [
                 'sources' => [[
                     'id' => 'bfi2-2017',
@@ -885,19 +937,6 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
                 'visible_evidence_eligible' => true,
                 'schema_eligible' => true,
             ],
-            'media_json' => [
-                'hero' => [
-                    'media_asset_id' => 101,
-                    'url' => 'https://assets.fermatmind.com/personality/big-five/hero.webp',
-                    'alt' => 'Five neutral markers representing the Big Five dimensions.',
-                ],
-                'inline' => [],
-                'og' => [
-                    'media_asset_id' => 102,
-                    'url' => 'https://assets.fermatmind.com/personality/big-five/og.webp',
-                    'alt' => 'Big Five evidence overview card.',
-                ],
-            ],
             'schema_json' => [
                 '@type' => 'WebPage',
                 'name' => 'Big Five Personality',
@@ -916,11 +955,13 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.claim_mapping.0.claim_id', 'claim.big_five_dimensions')
             ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.author.name', 'FermatMind Editorial Team')
             ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer.name', 'Named Reviewer')
-            ->assertJsonPath('personality_public_content_asset_v2.media_authority.hero.media_asset_id', 101)
-            ->assertJsonPath('personality_public_content_asset_v2.media_authority.og.media_asset_id', 102)
             ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', true);
 
         $this->assertArrayNotHasKey('visible_evidence', $response->json('personality_public_content_asset_v1'));
+        $this->assertArrayNotHasKey('media', $response->json('personality_public_content_asset_v1'));
+        $this->assertArrayNotHasKey('media_authority', $response->json('personality_public_content_asset_v2'));
+        $this->assertArrayNotHasKey('og_image_url', $response->json('personality_public_content_asset_v1.seo'));
+        $this->assertArrayNotHasKey('image', $response->json('personality_public_content_asset_v1.seo.twitter'));
     }
 
     public function test_big_five_v2_projection_fails_closed_for_legacy_authority_and_does_not_fabricate_people(): void
@@ -1008,7 +1049,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertFalse((bool) data_get($data->toModelAttributes(), 'authority_json.schema_eligible'));
     }
 
-    public function test_v2_contract_rejects_unmapped_visible_evidence_unsafe_urls_and_v1_authority(): void
+    public function test_v2_contract_rejects_unmapped_visible_evidence_unsupported_media_and_v1_authority(): void
     {
         $contract = app(PersonalityPublicContentAssetContract::class);
 
@@ -1051,6 +1092,25 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
                         'alt' => 'Unsafe host.',
                     ],
                 ],
+            ]),
+            $this->contractPayload([
+                'seo' => [
+                    'title' => 'Big Five Personality',
+                    'description' => 'Unsupported social image field.',
+                    'og_image_url' => 'https://assets.fermatmind.com/personality/big-five/og.webp',
+                ],
+            ]),
+            $this->contractPayload([
+                'content_sections' => [[
+                    'key' => 'unsupported_markdown_image',
+                    'body_md' => '![Unsupported](https://assets.fermatmind.com/personality/big-five/inline.webp)',
+                ]],
+            ]),
+            $this->contractPayload([
+                'content_sections' => [[
+                    'key' => 'unsupported_html_image',
+                    'body_html' => '<p>Copy</p><img src="https://assets.fermatmind.com/personality/big-five/inline.webp" alt="Unsupported">',
+                ]],
             ]),
         ] as $payload) {
             try {
@@ -1210,7 +1270,6 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ],
             'hreflang_json' => [],
             'faq_json' => [],
-            'media_json' => [],
             'schema_json' => [
                 '@type' => 'WebPage',
             ],
@@ -1266,7 +1325,6 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ],
             'hreflang' => [],
             'faq' => [],
-            'media' => [],
             'schema' => [
                 '@type' => 'WebPage',
             ],

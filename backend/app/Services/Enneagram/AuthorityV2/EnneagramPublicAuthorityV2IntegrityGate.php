@@ -1188,13 +1188,6 @@ final class EnneagramPublicAuthorityV222ReleaseGate
     /** @var list<string> */
     private const HIDDEN_SCHEMA_KEYS = ['json_ld', 'schema', 'structured_data', 'faq_schema'];
 
-    /** @var array{hero:null,inline:array<never>,og:null} */
-    private const EMPTY_MEDIA_AUTHORITY = [
-        'hero' => null,
-        'inline' => [],
-        'og' => null,
-    ];
-
     /** @var array<string, int> */
     private const ENTITY_COUNTS = [
         'center' => 6,
@@ -1294,15 +1287,13 @@ final class EnneagramPublicAuthorityV222ReleaseGate
                     $errors[] = $this->error('hidden_schema_detected', $assetKey.'.'.$hiddenSchemaPath);
                 }
 
-                $declaredMedia = self::EMPTY_MEDIA_AUTHORITY;
-                foreach (['media', 'media_json'] as $mediaField) {
-                    if (array_key_exists($mediaField, $asset)) {
-                        $declaredMedia = $asset[$mediaField];
-                    }
-                }
-                if ($declaredMedia !== self::EMPTY_MEDIA_AUTHORITY) {
+                $declaredMediaFields = array_values(array_filter(
+                    ['media', 'media_json'],
+                    static fn (string $field): bool => array_key_exists($field, $asset),
+                ));
+                if ($declaredMediaFields !== []) {
                     $nonEmptyMediaAssetKeys[] = $assetKey;
-                    $errors[] = $this->error('empty_media_authority_violation', $assetKey);
+                    $errors[] = $this->error('personality_media_field_not_supported', $assetKey);
                 } else {
                     $emptyMediaAuthorityCount++;
                 }
@@ -1469,7 +1460,7 @@ final class EnneagramPublicAuthorityV222ReleaseGate
             'pre_write_public_fingerprints' => array_values($fingerprints),
             'source_hashes' => $sourceHashes,
             'empty_media_authority' => [
-                'contract' => self::EMPTY_MEDIA_AUTHORITY,
+                'contract' => 'media_fields_absent',
                 'target_count' => 116,
                 'media_write_count' => 0,
             ],
@@ -1548,7 +1539,7 @@ final class EnneagramPublicAuthorityV222ReleaseGate
             'missing_human_reviews' => $missingReviews,
             'rejected_human_review_asset_keys' => array_keys($reviewEvidence['rejected']),
             'empty_media_authority' => [
-                'contract' => self::EMPTY_MEDIA_AUTHORITY,
+                'contract' => 'media_fields_absent',
                 'target_count' => 116,
                 'valid_count' => $emptyMediaAuthorityCount,
                 'non_empty_asset_keys' => $nonEmptyMediaAssetKeys,
@@ -1561,7 +1552,7 @@ final class EnneagramPublicAuthorityV222ReleaseGate
             'errors' => $errors,
             'release_boundary' => [
                 'manual_review_requirement' => '116/116 named human review records bound to exact asset SHA256',
-                'media_requirement' => '116/116 authority assets map to hero=null, inline=[], og=null with zero Media Library writes',
+                'media_requirement' => '116/116 authority assets omit media fields with zero Media Library writes',
                 'current_blockers' => $currentBlockers,
                 'next_authority' => 'operator_supplied_human_review_evidence_then_separate_exact_sha_production_authorization',
                 'production_command_executed' => false,

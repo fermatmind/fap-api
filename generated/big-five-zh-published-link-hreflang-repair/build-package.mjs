@@ -42,7 +42,7 @@ const assets = selected.map((item) => {
     internal_links: internalLinks(item), method_boundary: { claim_boundaries: item.claim_boundaries, indexability_gate: item.indexability_gate },
     schema: { recommendation: item.schema_recommendation }, launch_state: 'published', review_state: 'seo_discoverability_released',
     robots: 'index,follow', is_public: true, index_eligible: true, sitemap_eligible: true, llms_eligible: true,
-    source_package: 'big-five-zh-published-link-hreflang-repair.v1', evidence_notes: [{ source: 'BIG5-124-PUBLISH-READINESS-AUDIT-01', source_type: 'production_gap_baseline', repair_scope: 'internal_links_and_hreflang_only' }], media: [],
+    source_package: 'big-five-zh-published-link-hreflang-repair.v1', evidence_notes: [{ source: 'BIG5-124-PUBLISH-READINESS-AUDIT-01', source_type: 'production_gap_baseline', repair_scope: 'internal_links_and_hreflang_only' }],
   };
 });
 

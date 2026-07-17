@@ -773,7 +773,6 @@ final class EnneagramCmsDraftWriter
             ],
             'hreflang_json' => [],
             'faq_json' => array_values(is_array($recommendations['faq'] ?? null) ? $recommendations['faq'] : []),
-            'media_json' => [],
             'schema_json' => [],
             'method_boundary_json' => [
                 'summary' => 'Enneagram public profile drafts are reflective educational content only; they are not clinical diagnosis, hiring screening, official affiliation, or deterministic guidance.',

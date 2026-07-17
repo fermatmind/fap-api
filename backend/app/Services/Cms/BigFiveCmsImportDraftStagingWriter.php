@@ -177,7 +177,6 @@ final class BigFiveCmsImportDraftStagingWriter
             'canonical_json' => ['path' => $canonicalPath],
             'hreflang_json' => [],
             'faq_json' => $faq,
-            'media_json' => [],
             'schema_json' => [
                 'recommendation' => (string) ($row['schema_recommendation'] ?? ''),
                 'draft_only' => true,

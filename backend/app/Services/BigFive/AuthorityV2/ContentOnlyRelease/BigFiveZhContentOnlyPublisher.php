@@ -29,6 +29,10 @@ final class BigFiveZhContentOnlyPublisher
 {
     public const ASSET_COUNT = 112;
 
+    public const PERSONALITY_ASSET_COUNT = 52;
+
+    public const MEDIA_DEFERRED_ASSET_COUNT = 60;
+
     public const LOCALE = 'zh-CN';
 
     public const RELEASE_PACKAGE_SHA256 = '9d15f0da6fca3d9c317c35d00abf078aaf9d03f740ece6ed388f53ad05c89494';
@@ -134,7 +138,8 @@ final class BigFiveZhContentOnlyPublisher
                 'mode' => 'production_content_only_publish',
                 'writes_committed' => true,
                 'public_release_count' => self::ASSET_COUNT,
-                'media_deferred_by_operator_count' => self::ASSET_COUNT,
+                'media_deferred_by_operator_count' => self::MEDIA_DEFERRED_ASSET_COUNT,
+                'personality_no_media_field_count' => self::PERSONALITY_ASSET_COUNT,
                 'media_library_write_count' => 0,
                 'frontend_fallback_write_count' => 0,
                 'english_write_count' => 0,
@@ -228,7 +233,8 @@ final class BigFiveZhContentOnlyPublisher
             'locale' => self::LOCALE,
             'asset_count' => self::ASSET_COUNT,
             'surface_counts' => $surfaceCounts,
-            'media_deferred_by_operator_count' => self::ASSET_COUNT,
+            'media_deferred_by_operator_count' => self::MEDIA_DEFERRED_ASSET_COUNT,
+            'personality_no_media_field_count' => self::PERSONALITY_ASSET_COUNT,
             'media_library_write_count' => 0,
             'frontend_fallback_write_count' => 0,
             'english_write_count' => 0,
@@ -403,12 +409,6 @@ final class BigFiveZhContentOnlyPublisher
             'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
             'canonical_json' => ['path' => (string) $rawAsset['route']],
             'faq_json' => $faq,
-            'media_json' => [
-                'status' => 'media_deferred_by_operator',
-                'hero' => null,
-                'og' => null,
-                'inline' => [],
-            ],
             'schema_json' => [],
             'method_boundary_json' => $this->sanitizeArray($payload['method_boundary'] ?? []),
             'evidence_notes_json' => $evidenceNotes,
@@ -421,7 +421,6 @@ final class BigFiveZhContentOnlyPublisher
                 'claim_mapping' => [],
                 'visible_evidence_eligible' => false,
                 'schema_eligible' => false,
-                'media_deferred_by_operator' => true,
                 'operator_override_scope' => 'zh-CN Big Five Authority V2 content only',
             ],
             'internal_links_json' => $links,
@@ -867,6 +866,7 @@ final class BigFiveZhContentOnlyPublisher
         $issues = [];
         $faqCount = 0;
         $mediaDeferredCount = 0;
+        $personalityNoMediaFieldCount = 0;
         foreach ($descriptors as $descriptor) {
             $record = $this->existingRecord($descriptor, true);
             if (! $record instanceof Model) {
@@ -908,14 +908,20 @@ final class BigFiveZhContentOnlyPublisher
                     '_operator_override.media_deferred_by_operator',
                 ) === true,
                 $record instanceof LandingSurface => data_get($record->payload_json, 'media_deferred_by_operator') === true,
-                $record instanceof PersonalityPublicContentAsset => data_get($record->authority_json, 'media_deferred_by_operator') === true,
+                $record instanceof PersonalityPublicContentAsset => false,
                 $record instanceof TopicProfile => data_get(
                     TopicProfileRevision::query()->find($record->published_revision_id)?->snapshot_json,
                     'media_deferred_by_operator',
                 ) === true,
                 default => false,
             };
-            if ($mediaDeferred) {
+            if ($record instanceof PersonalityPublicContentAsset) {
+                if (! array_key_exists('media_deferred_by_operator', (array) $record->authority_json)) {
+                    $personalityNoMediaFieldCount++;
+                } else {
+                    $issues[] = $descriptor['asset_id'].':personality_media_field_present';
+                }
+            } elseif ($mediaDeferred) {
                 $mediaDeferredCount++;
             } else {
                 $issues[] = $descriptor['asset_id'].':media_defer_marker_missing';
@@ -933,8 +939,11 @@ final class BigFiveZhContentOnlyPublisher
         if ($faqCount !== 35) {
             $issues[] = 'zh6_faq_count_mismatch';
         }
-        if ($mediaDeferredCount !== self::ASSET_COUNT) {
+        if ($mediaDeferredCount !== self::MEDIA_DEFERRED_ASSET_COUNT) {
             $issues[] = 'media_deferred_count_mismatch';
+        }
+        if ($personalityNoMediaFieldCount !== self::PERSONALITY_ASSET_COUNT) {
+            $issues[] = 'personality_no_media_field_count_mismatch';
         }
 
         return [
@@ -943,6 +952,7 @@ final class BigFiveZhContentOnlyPublisher
             'surface_counts' => $counts,
             'zh6_faq_count' => $faqCount,
             'media_deferred_by_operator_count' => $mediaDeferredCount,
+            'personality_no_media_field_count' => $personalityNoMediaFieldCount,
             'media_library_write_count' => 0,
             'english_write_count' => 0,
             'issues' => $issues,

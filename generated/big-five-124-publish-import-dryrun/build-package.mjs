@@ -1,6 +1,26 @@
 import fs from 'node:fs'; import path from 'node:path';
 const here=path.dirname(new URL(import.meta.url).pathname); const root=path.resolve(here,'../..');
 const targetPath=path.join(here,'big_five_124_merged_v1_seed.json'); const target=JSON.parse(fs.readFileSync(targetPath,'utf8'));
+const stripUnsupportedMedia = (value) => {
+  const asset = structuredClone(value);
+  delete asset.media;
+  delete asset.media_authority;
+  if (asset.authority && typeof asset.authority === 'object') {
+    delete asset.authority.media;
+    delete asset.authority.media_authority;
+    delete asset.authority.media_deferred_by_operator;
+  }
+  if (asset.seo && typeof asset.seo === 'object') {
+    for (const field of ['og_image_url', 'twitter_image_url', 'image', 'image_url']) delete asset.seo[field];
+    for (const field of ['og', 'open_graph', 'twitter', 'twitter_card']) {
+      if (asset.seo[field] && typeof asset.seo[field] === 'object') {
+        delete asset.seo[field].image;
+        delete asset.seo[field].image_url;
+      }
+    }
+  }
+  return asset;
+};
 const packageFiles=['openness','conscientiousness','extraversion','agreeableness','neuroticism'].map(domain=>path.join(root,`generated/big-five-en-facet-${domain}-content-package/big_five_en_facet_${domain}_seed.json`));
 packageFiles.push(path.join(root,'generated/big-five-en-facet-hub-content-package/big_five_en_facet_hub_seed.json'));
 packageFiles.push(path.join(root,'generated/big-five-en-legacy-polarity-content-package/big_five_en_legacy_polarity_10_seed.json'));
@@ -8,7 +28,7 @@ const replacements=new Map();
 for(const file of packageFiles){const pkg=JSON.parse(fs.readFileSync(file,'utf8')); for(const asset of pkg.assets) replacements.set(`${asset.locale}:${asset.entity_type}:${asset.entity_key}`,asset);}
 const polished=JSON.parse(fs.readFileSync(path.join(root,'generated/big-five-content-polish/cms-import-draft.polished.json'),'utf8'));
 for(const locale of ['zh-CN','en-US']){const row=polished.find(x=>x.slug==='big-five'&&x.locale===locale); if(!row) throw new Error(`missing ${locale} hub source`); const key=`${locale==='en-US'?'en':locale}:hub:big-five`; const current=target.assets.find(a=>`${a.locale}:${a.entity_type}:${a.entity_key}`===key); replacements.set(key,{...current,sections:row.body_sections.map((s,i)=>({key:`section_${i+1}`,title:s.heading,body_md:s.body})),faq:row.faq,seo:row.seo,internal_links:row.internal_links.map((href,i)=>({label:`Related Big Five resource ${i+1}`,href,relationship:'related'}))});}
-target.assets=target.assets.map(asset=>{const replacement=replacements.get(`${asset.locale}:${asset.entity_type}:${asset.entity_key}`)??asset; const {content_sections,...clean}=replacement; return clean;});
+target.assets=target.assets.map(asset=>{const replacement=replacements.get(`${asset.locale}:${asset.entity_type}:${asset.entity_key}`)??asset; const {content_sections,...clean}=replacement; return stripUnsupportedMedia(clean);});
 target.package='big-five-124-publish-import-dryrun-2026-07-11'; target.contract_version='personality_public_asset.v1';
 fs.writeFileSync(targetPath,`${JSON.stringify(target,null,2)}\n`);
 const aliases=new Set(['emotional-stability','high-agreeableness','high-conscientiousness','high-extraversion','high-neuroticism','high-openness','low-agreeableness','low-conscientiousness','low-extraversion','low-openness']);

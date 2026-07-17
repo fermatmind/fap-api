@@ -14,7 +14,7 @@ ZH6 uses the approved Task 48 final snapshot. The Topic uses the Task 46 safe sn
 
 For this exact release, author, reviewer, source completeness, editorial dates, revision fingerprints, preview approval and rollback planning are non-blocking by explicit operator direction. This does not change the default publishing rules for other content.
 
-All 112 rows record `media_deferred_by_operator`. The release writes no Media Library row, no image URL and no frontend fallback. English content is out of scope.
+The 52 Personality rows are permanently text-only and carry no media field or deferred marker. The remaining 60 CMS rows retain `media_deferred_by_operator`. The release writes no Media Library row, no image URL and no frontend fallback. English content is out of scope.
 
 ## Command
 

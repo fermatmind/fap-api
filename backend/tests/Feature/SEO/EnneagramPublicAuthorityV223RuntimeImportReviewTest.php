@@ -87,9 +87,6 @@ final class EnneagramPublicAuthorityV223RuntimeImportReviewTest extends TestCase
         $public->assertOk()
             ->assertJsonPath('personality_public_content_asset_v1.title', $expectedHub['title'])
             ->assertJsonPath('personality_public_content_asset_v1.summary', $expectedHub['summary'])
-            ->assertJsonPath('personality_public_content_asset_v1.media.hero', null)
-            ->assertJsonPath('personality_public_content_asset_v1.media.inline', [])
-            ->assertJsonPath('personality_public_content_asset_v1.media.og', null)
             ->assertJsonPath('personality_public_content_asset_v1.schema', [])
             ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.eligible', true)
             ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null)
@@ -99,6 +96,8 @@ final class EnneagramPublicAuthorityV223RuntimeImportReviewTest extends TestCase
             )
             ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', true)
             ->assertJsonCount(count($expectedHub['internal_links_json']), 'personality_public_content_asset_v1.internal_links');
+        $this->assertArrayNotHasKey('media', $public->json('personality_public_content_asset_v1'));
+        $this->assertArrayNotHasKey('media_authority', $public->json('personality_public_content_asset_v2'));
         $this->assertStringNotContainsString('Private Human Reviewer', (string) $public->getContent());
     }
 

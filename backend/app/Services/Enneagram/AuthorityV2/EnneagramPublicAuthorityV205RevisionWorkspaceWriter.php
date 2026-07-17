@@ -24,12 +24,6 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceWriter
 
     private const LINK_GRAPH = 'docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-link-graph-20/link-graph.json';
 
-    private const EMPTY_MEDIA_AUTHORITY = [
-        'hero' => null,
-        'inline' => [],
-        'og' => null,
-    ];
-
     public function __construct(
         private readonly EnneagramPublicAuthorityV2IntegrityGate $integrityGate,
         private readonly PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter $writer,
@@ -305,7 +299,6 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceWriter
             'canonical_json' => $graph['canonical'],
             'hreflang_json' => $graph['hreflang'],
             'faq_json' => array_values(is_array($candidate['faqs'] ?? null) ? $candidate['faqs'] : []),
-            'media_json' => self::EMPTY_MEDIA_AUTHORITY,
             'schema_json' => [],
             'method_boundary_json' => [
                 'claim_ids' => array_values(is_array($pageMap['claim_ids'] ?? null) ? $pageMap['claim_ids'] : []),
@@ -354,7 +347,10 @@ final class EnneagramPublicAuthorityV205RevisionWorkspaceWriter
 
         $current = (new EnneagramPublicAuthorityV222ReleaseGate($this->integrityGate))
             ->evaluate(base_path(), self::MANUAL_REVIEW_REGISTER);
-        foreach (['package_sha256', 'asset_records', 'source_hashes', 'empty_media_authority'] as $field) {
+        // The reviewed release report keeps its original package SHA and empty-media
+        // audit envelope. Runtime revalidation instead proves that the same source
+        // records now satisfy the permanent field-absence policy.
+        foreach (['asset_records', 'source_hashes'] as $field) {
             if ($this->fingerprint($current[$field] ?? null) !== $this->fingerprint($releaseReport[$field] ?? null)) {
                 throw new RuntimeException('Enneagram final release report drifted from current package inputs: '.$field.'.');
             }

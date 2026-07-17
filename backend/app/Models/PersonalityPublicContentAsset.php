@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
+use App\Support\Personality\PersonalityPublicContentMediaPolicy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -140,7 +141,6 @@ final class PersonalityPublicContentAsset extends Model
         'canonical_json',
         'hreflang_json',
         'faq_json',
-        'media_json',
         'schema_json',
         'method_boundary_json',
         'evidence_notes_json',
@@ -168,7 +168,6 @@ final class PersonalityPublicContentAsset extends Model
         'canonical_json' => 'array',
         'hreflang_json' => 'array',
         'faq_json' => 'array',
-        'media_json' => 'array',
         'schema_json' => 'array',
         'method_boundary_json' => 'array',
         'evidence_notes_json' => 'array',
@@ -207,6 +206,13 @@ final class PersonalityPublicContentAsset extends Model
             $asset->contract_version = in_array($contractVersion, self::CONTRACT_VERSIONS, true)
                 ? $contractVersion
                 : self::CONTRACT_VERSION_V1;
+            if (is_array($asset->seo_json)) {
+                $asset->seo_json = PersonalityPublicContentMediaPolicy::sanitizeSeo($asset->seo_json);
+            }
+
+            if (is_array($asset->authority_json)) {
+                $asset->authority_json = PersonalityPublicContentMediaPolicy::sanitizeAuthority($asset->authority_json);
+            }
 
             if (
                 $asset->launch_state !== self::LAUNCH_PUBLISHED
