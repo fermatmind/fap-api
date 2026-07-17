@@ -1103,6 +1103,8 @@ final class BigFiveZhContentOnlyPublisher
     /** @param list<array<string,mixed>> $writes */
     private function flushPublicCaches(array $writes): void
     {
+        $personalityCacheInvalidationOk = true;
+
         foreach ($writes as $write) {
             if (($write['surface'] ?? null) !== 'CMS personality_public_content_assets') {
                 continue;
@@ -1111,7 +1113,7 @@ final class BigFiveZhContentOnlyPublisher
             if (! $asset instanceof PersonalityPublicContentAsset) {
                 continue;
             }
-            $this->personalityCache->invalidateAsset(
+            $assetInvalidated = $this->personalityCache->invalidateAsset(
                 (string) $asset->framework,
                 (string) $asset->entity_type,
                 (string) $asset->entity_key,
@@ -1120,13 +1122,19 @@ final class BigFiveZhContentOnlyPublisher
                 (int) $asset->org_id,
                 false,
             );
-            $this->personalityCache->invalidateCollections(
+            $collectionsInvalidated = $this->personalityCache->invalidateCollections(
                 (string) $asset->framework,
                 (string) $asset->entity_type,
                 (string) $asset->locale,
                 (int) $asset->org_id,
                 false,
             );
+            $personalityCacheInvalidationOk = $assetInvalidated
+                && $collectionsInvalidated
+                && $personalityCacheInvalidationOk;
+        }
+        if (! $personalityCacheInvalidationOk) {
+            throw new RuntimeException('Personality public cache invalidation failed.');
         }
         $this->discoverabilityCache->flushArticleDiscoverabilityCaches();
         $this->discoverabilityCache->flushPersonalityPublicContentDiscoverabilityCaches();

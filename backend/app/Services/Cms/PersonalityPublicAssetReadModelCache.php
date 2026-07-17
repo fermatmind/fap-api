@@ -253,9 +253,9 @@ final class PersonalityPublicAssetReadModelCache
         string $locale,
         int $orgId,
         bool $preserveLkg,
-    ): void {
+    ): bool {
         if (! $this->isCacheable($surface, $framework, $entityType, $selector, $locale, $orgId)) {
-            return;
+            return true;
         }
 
         try {
@@ -286,7 +286,11 @@ final class PersonalityPublicAssetReadModelCache
             );
         } catch (Throwable $throwable) {
             $this->recordState($surface, $framework, $entityType, $locale, 'bypass', $throwable);
+
+            return false;
         }
+
+        return true;
     }
 
     public function discardActivePreservingLkg(
@@ -327,9 +331,27 @@ final class PersonalityPublicAssetReadModelCache
         string $locale,
         int $orgId,
         bool $preserveLkg,
-    ): void {
-        $this->invalidate('detail-code', $framework, $entityType, $entityKey, $locale, $orgId, $preserveLkg);
-        $this->invalidate('detail-slug', $framework, 'slug', $slug, $locale, $orgId, $preserveLkg);
+    ): bool {
+        $codeInvalidated = $this->invalidate(
+            'detail-code',
+            $framework,
+            $entityType,
+            $entityKey,
+            $locale,
+            $orgId,
+            $preserveLkg,
+        );
+        $slugInvalidated = $this->invalidate(
+            'detail-slug',
+            $framework,
+            'slug',
+            $slug,
+            $locale,
+            $orgId,
+            $preserveLkg,
+        );
+
+        return $codeInvalidated && $slugInvalidated;
     }
 
     public function invalidateCollections(
@@ -338,9 +360,9 @@ final class PersonalityPublicAssetReadModelCache
         string $locale,
         int $orgId,
         bool $preserveLkg,
-    ): void {
+    ): bool {
         if ($orgId !== 0) {
-            return;
+            return true;
         }
 
         try {
@@ -389,7 +411,11 @@ final class PersonalityPublicAssetReadModelCache
             }
         } catch (Throwable $throwable) {
             $this->recordState('index', $framework, $entityType, $locale, 'bypass', $throwable);
+
+            return false;
         }
+
+        return true;
     }
 
     /** @throws JsonException */
