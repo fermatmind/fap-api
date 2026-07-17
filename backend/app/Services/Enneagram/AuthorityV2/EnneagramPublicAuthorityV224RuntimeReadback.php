@@ -539,9 +539,9 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         }
         if (! in_array('html_authority_media_present', $issues, true)) {
             $cssMedia = $xpath->query(
-                '//main[@style] | //main//*[@style] | //main//style'
-                .' | //article[@style] | //article//*[@style] | //article//style'
-                .' | //*[@role="main"][@style] | //*[@role="main"]//*[@style] | //*[@role="main"]//style',
+                '//style | //main[@style] | //main//*[@style]'
+                .' | //article[@style] | //article//*[@style]'
+                .' | //*[@role="main"][@style] | //*[@role="main"]//*[@style]',
             );
             foreach ($cssMedia ?: [] as $node) {
                 if (! $node instanceof DOMElement) {
@@ -550,7 +550,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 $css = strtolower($node->tagName) === 'style'
                     ? (string) $node->textContent
                     : $node->getAttribute('style');
-                if (preg_match('/url\s*\(/i', $css) === 1) {
+                if ($this->cssContainsMediaUrl($css)) {
                     $issues[] = 'html_authority_media_present';
                     break;
                 }
@@ -670,6 +670,14 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if ($faqSchemaInvalid || $expectedFaqAnswers !== $observedFaqAnswers) {
             $issues[] = 'html_schema_faq_mismatch';
         }
+    }
+
+    private function cssContainsMediaUrl(string $css): bool
+    {
+        $withoutComments = preg_replace('#/\*.*?\*/#s', '', $css) ?? $css;
+        $withoutFontFaces = preg_replace('/@font-face\s*\{[^}]*\}/is', '', $withoutComments) ?? $withoutComments;
+
+        return preg_match('/url\s*\(/i', $withoutFontFaces) === 1;
     }
 
     private function normalizedRobotsDirective(string $value): string

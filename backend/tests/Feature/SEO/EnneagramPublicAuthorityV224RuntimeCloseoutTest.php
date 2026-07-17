@@ -631,6 +631,25 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_html_readback_allows_font_face_urls_without_page_media(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, standardMediaLeak: 'css-font');
+
+        $result = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'canary-00',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+
+        $this->assertSame(8, $result['target_count']);
+    }
+
     public function test_post_readback_rejects_case_folded_dom_split_private_reviewer_name_leak(): void
     {
         $this->seedPublishedEstate();
@@ -2234,12 +2253,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     'og' => '<meta property="og:image" content="https://frontend.test/hardcoded-og.png">',
                     'twitter' => '<meta name="twitter:image" content="https://frontend.test/hardcoded-twitter.png">',
                     'schema' => '<script type="application/ld+json">{"@type":"WebPage","image":"https://frontend.test/hardcoded-schema.png"}</script>',
+                    'css-style' => '<style>@font-face { font-family: Fermat; src: url("/fonts/fermat.woff2") } main { background: url("https://frontend.test/hardcoded-style.png") }</style>',
+                    'css-font' => '<style>@font-face { font-family: Fermat; src: url("/fonts/fermat.woff2") format("woff2") }</style>',
                     default => '',
                 };
                 $standardMediaBody = match ($standardMediaLeak) {
                     'img' => '<img src="https://frontend.test/hardcoded-inline.png" alt="hardcoded inline">',
                     'css-inline' => '<section style="background-image: URL(https://frontend.test/hardcoded-background.png)">hardcoded CSS image</section>',
-                    'css-style' => '<style>.authority-copy { background: url("https://frontend.test/hardcoded-style.png") }</style>',
                     default => '',
                 };
 
