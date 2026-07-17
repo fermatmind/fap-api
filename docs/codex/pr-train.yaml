@@ -44936,6 +44936,59 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E
+    repo: fap-api
+    base: main
+    branch: codex/enneagram-public-authority-v2-runtime-readback-22e
+    title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E: add exact-SHA closeout, revalidation and rollback preflight"
+    status: ready_to_merge
+    depends_on:
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D
+    scope:
+      - Add formal pre/post API and HTML readback, exact canary-00 plus readback-01..09 batching, stable/public fingerprints, and exact sitemap/llms URL-set evidence.
+      - Add one exact-SHA runtime closeout controller for working import, private review bind, atomic 116 promotion, LKG-preserving cache invalidation, frontend HMAC revalidation, and fail-closed readback.
+      - Add a signed rollback-token preflight that validates all current and previous pointer/fingerprint state without writing, plus redacted PR23 authorization and retrospective artifacts.
+      - Reconcile merged 22C and bind PR23 to merged 22A-22E plus a separate exact-SHA production authorization.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionPromoter.php
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RuntimeCloseout.php
+      - backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RuntimeReadback.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV206RevisionPromoter.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV224CacheCoordinator.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV224RuntimeCloseout.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV224RuntimeManifest.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV224RuntimeReadback.php
+      - backend/.env.example
+      - backend/config/ops.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV224RuntimeCloseoutTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    validation:
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV205RevisionWorkspaceTest.php tests/Feature/SEO/EnneagramPublicAuthorityV206RevisionPromoterTest.php tests/Feature/SEO/EnneagramPublicAuthorityV223RuntimeImportReviewTest.php tests/Feature/SEO/EnneagramPublicAuthorityV224RuntimeCloseoutTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/Cms/PersonalityPublicAssetReadModelCacheTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php --filter='PersonalityPublicAssetReadModelCacheTest|big_five_and_enneagram_assets_use_versioned_active_and_lkg_reads' --no-ansi
+      - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_only_registered_enneagram_public_authority_v2_non_runtime_files --no-ansi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - php_files=$(git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php'); if [ -n "$php_files" ]; then backend/vendor/bin/pint --test $php_files; fi
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23
     repo: fap-api
     base: main
@@ -44943,16 +44996,18 @@ prs:
     title: "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23: record authorized rollout and 116-page public readback"
     status: pending_production_authorization
     depends_on:
-      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A
       - ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D
+      - ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E
       - separate_exact_sha_production_authorization
     scope:
-      - REGISTER ONLY: do not create a branch/PR, execute, merge, deploy, import, write CMS/DB/media/cache/pointers, change indexability/search, or claim public readback under this goal.
+      - Execute only the separately authorized exact-SHA packet after 22A-22E are merged, required checks are green, and asynchronous GitHub Actions deployment is confirmed complete.
+      - Commit only redacted runtime-closeout evidence and train state; never commit reviewer names, secrets, nonces, signatures, rollback tokens, or private URLs.
     allowed_paths:
       - backend/docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-runtime-closeout-23/**
-      - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
-      - generated/pr-train-sidecar-issues/**
     validation:
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && php artisan test --filter=EnneagramPublicAuthorityV2 --no-ansi
@@ -44969,9 +45024,9 @@ prs:
     cms_mutation: true
     api_runtime_change: true
     publish_allowed: true
-    deploy_allowed: true
+    deploy_allowed: false
     content_authority: CMS/backend
-    current_authorization: register_only_do_not_start
+    current_authorization: await_exact_sha_packet_do_not_start
 
   - id: ANALYTICS-FRESHNESS-RECONCILE-03
     repo: fap-api

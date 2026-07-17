@@ -85,10 +85,14 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
         return $this->publicPlan($this->buildPlan($targets, false));
     }
 
-    /** @param list<array<string, mixed>> $targets @return array<string, mixed> */
-    public function promote(array $targets, string $expectedPreflightFingerprint): array
+    /**
+     * @param  list<array<string, mixed>>  $targets
+     * @param  (callable(string):void)|null  $rollbackTokenSink
+     * @return array<string, mixed>
+     */
+    public function promote(array $targets, string $expectedPreflightFingerprint, ?callable $rollbackTokenSink = null): array
     {
-        return DB::transaction(function () use ($targets, $expectedPreflightFingerprint): array {
+        return DB::transaction(function () use ($targets, $expectedPreflightFingerprint, $rollbackTokenSink): array {
             $plan = $this->buildPlan($targets, true);
             if (! hash_equals((string) $plan['preflight_fingerprint'], $expectedPreflightFingerprint)) {
                 throw new RuntimeException('Promotion preflight fingerprint changed; transaction aborted.');
@@ -147,6 +151,9 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 'preflight_fingerprint' => (string) $plan['preflight_fingerprint'],
                 'rows' => $rollbackRows,
             ]);
+            if ($rollbackTokenSink !== null) {
+                $rollbackTokenSink($token);
+            }
 
             return [
                 ...$this->publicPlan($plan),
@@ -170,41 +177,11 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
         $payload = $this->decodeToken($token);
 
         return DB::transaction(function () use ($payload, $token): array {
-            $rows = $payload['rows'];
-            foreach ($rows as $row) {
-                $asset = PersonalityPublicContentAsset::query()
-                    ->withoutGlobalScopes()
-                    ->lockForUpdate()
-                    ->find((int) $row['asset_id']);
-                if (! $asset instanceof PersonalityPublicContentAsset
-                    || (string) $asset->framework !== PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM
-                    || (int) ($asset->published_revision_id ?? 0) !== (int) $row['promoted_revision_id']
-                    || $asset->working_revision_id !== null
-                    || ! hash_equals((string) $row['after_public_fingerprint'], $this->publicFingerprint($asset))) {
-                    throw new RuntimeException('Rollback pointer or public fingerprint changed: '.(string) $row['asset_key'].'.');
-                }
-                $revision = PersonalityPublicContentAssetRevision::query()
-                    ->lockForUpdate()
-                    ->find((int) $row['promoted_revision_id']);
-                if (! $revision instanceof PersonalityPublicContentAssetRevision
-                    || (string) $revision->workflow_state !== self::STATE_PUBLISHED
-                    || (string) $revision->authority_package_sha256 !== (string) $row['package_sha256']
-                    || (string) $revision->source_hash !== (string) $row['source_hash']) {
-                    throw new RuntimeException('Rollback promoted revision identity changed: '.(string) $row['asset_key'].'.');
-                }
-                if ($row['previous_published_revision_id'] !== null) {
-                    $previousRevision = PersonalityPublicContentAssetRevision::query()
-                        ->lockForUpdate()
-                        ->find((int) $row['previous_published_revision_id']);
-                    if (! $previousRevision instanceof PersonalityPublicContentAssetRevision
-                        || (int) $previousRevision->asset_id !== (int) $asset->id
-                        || (string) $previousRevision->authority_asset_key !== (string) $row['asset_key']
-                        || (string) $previousRevision->workflow_state !== self::STATE_PUBLISHED
-                        || (string) $previousRevision->authority_package_sha256 !== (string) $row['previous_published_revision_package_sha256']
-                        || (string) $previousRevision->source_hash !== (string) $row['previous_published_revision_source_hash']) {
-                        throw new RuntimeException('Rollback previous published revision identity changed: '.(string) $row['asset_key'].'.');
-                    }
-                }
+            $targets = $this->validatedRollbackTargets($payload, true);
+            foreach ($targets as $target) {
+                $row = $target['row'];
+                $asset = $target['asset'];
+                $revision = $target['promoted_revision'];
 
                 $updates = [
                     ...$row['before_editorial_snapshot'],
@@ -247,6 +224,42 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
                 'llms_change_count' => 0,
             ];
         }, 1);
+    }
+
+    /** @return array<string, mixed> */
+    public function rollbackPreflight(string $token): array
+    {
+        $payload = $this->decodeToken($token);
+        $targets = $this->validatedRollbackTargets($payload, false);
+        $previousPointerCount = count(array_filter(
+            $targets,
+            static fn (array $target): bool => $target['row']['previous_published_revision_id'] !== null,
+        ));
+
+        return [
+            'artifact' => self::ARTIFACT,
+            'ok' => true,
+            'status' => 'PASS_POINTER_SAFE_ROLLBACK_PREFLIGHT',
+            'target_count' => self::TARGET_COUNT,
+            'current_pointer_verified_count' => self::TARGET_COUNT,
+            'previous_pointer_verified_count' => $previousPointerCount,
+            'current_public_fingerprint_verified_count' => self::TARGET_COUNT,
+            'previous_restorable_fingerprint_verified_count' => self::TARGET_COUNT,
+            'rollback_plan_fingerprint' => $this->fingerprint(array_map(
+                static fn (array $target): array => [
+                    'asset_id' => (int) $target['row']['asset_id'],
+                    'asset_key' => (string) $target['row']['asset_key'],
+                    'promoted_revision_id' => (int) $target['row']['promoted_revision_id'],
+                    'previous_published_revision_id' => $target['row']['previous_published_revision_id'],
+                    'before_restorable_fingerprint' => (string) $target['row']['before_restorable_fingerprint'],
+                    'after_public_fingerprint' => (string) $target['row']['after_public_fingerprint'],
+                ],
+                $targets,
+            )),
+            'rollback_token_sha256' => hash('sha256', $token),
+            'writes_committed' => false,
+            'production_execution' => false,
+        ];
     }
 
     public function approvalPhrase(string $deploySha, string $preflightFingerprint): string
@@ -524,6 +537,85 @@ final class EnneagramPublicAuthorityV206RevisionPromoter
         }
 
         return $payload;
+    }
+
+    /**
+     * @param  array{version:string,artifact:string,target_count:int,preflight_fingerprint:string,rows:list<array<string,mixed>>}  $payload
+     * @return list<array{row:array<string,mixed>,asset:PersonalityPublicContentAsset,promoted_revision:PersonalityPublicContentAssetRevision}>
+     */
+    private function validatedRollbackTargets(array $payload, bool $lock): array
+    {
+        $targets = [];
+        foreach ($payload['rows'] as $row) {
+            $assetQuery = PersonalityPublicContentAsset::query()->withoutGlobalScopes();
+            $revisionQuery = PersonalityPublicContentAssetRevision::query();
+            if ($lock) {
+                $assetQuery->lockForUpdate();
+                $revisionQuery->lockForUpdate();
+            }
+            $asset = $assetQuery->find((int) $row['asset_id']);
+            if (! $asset instanceof PersonalityPublicContentAsset
+                || (string) $asset->framework !== PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM
+                || (int) ($asset->published_revision_id ?? 0) !== (int) $row['promoted_revision_id']
+                || $asset->working_revision_id !== null
+                || ! hash_equals((string) $row['after_public_fingerprint'], $this->publicFingerprint($asset))) {
+                throw new RuntimeException('Rollback pointer or public fingerprint changed: '.(string) $row['asset_key'].'.');
+            }
+            $revision = $revisionQuery->find((int) $row['promoted_revision_id']);
+            if (! $revision instanceof PersonalityPublicContentAssetRevision
+                || (string) $revision->workflow_state !== self::STATE_PUBLISHED
+                || (string) $revision->authority_package_sha256 !== (string) $row['package_sha256']
+                || (string) $revision->source_hash !== (string) $row['source_hash']) {
+                throw new RuntimeException('Rollback promoted revision identity changed: '.(string) $row['asset_key'].'.');
+            }
+            if ($row['previous_published_revision_id'] !== null) {
+                $previousQuery = PersonalityPublicContentAssetRevision::query();
+                if ($lock) {
+                    $previousQuery->lockForUpdate();
+                }
+                $previousRevision = $previousQuery->find((int) $row['previous_published_revision_id']);
+                if (! $previousRevision instanceof PersonalityPublicContentAssetRevision
+                    || (int) $previousRevision->asset_id !== (int) $asset->id
+                    || (string) $previousRevision->authority_asset_key !== (string) $row['asset_key']
+                    || (string) $previousRevision->workflow_state !== self::STATE_PUBLISHED
+                    || (string) $previousRevision->authority_package_sha256 !== (string) $row['previous_published_revision_package_sha256']
+                    || (string) $previousRevision->source_hash !== (string) $row['previous_published_revision_source_hash']) {
+                    throw new RuntimeException('Rollback previous published revision identity changed: '.(string) $row['asset_key'].'.');
+                }
+            }
+            foreach (['before_restorable_fingerprint', 'after_public_fingerprint'] as $field) {
+                if (preg_match('/^[0-9a-f]{64}$/', (string) ($row[$field] ?? '')) !== 1) {
+                    throw new RuntimeException('Rollback fingerprint is invalid: '.(string) $row['asset_key'].'.');
+                }
+            }
+            if (! is_array($row['before_editorial_snapshot'] ?? null)
+                || ! hash_equals(
+                    (string) $row['before_restorable_fingerprint'],
+                    $this->hypotheticalRestorableFingerprint($asset, $row),
+                )) {
+                throw new RuntimeException('Rollback previous restorable fingerprint changed: '.(string) $row['asset_key'].'.');
+            }
+            $targets[] = [
+                'row' => $row,
+                'asset' => $asset,
+                'promoted_revision' => $revision,
+            ];
+        }
+
+        return $targets;
+    }
+
+    /** @param array<string,mixed> $row */
+    private function hypotheticalRestorableFingerprint(PersonalityPublicContentAsset $asset, array $row): string
+    {
+        $attributes = $asset->getAttributes();
+        foreach ($row['before_editorial_snapshot'] as $field => $value) {
+            $attributes[(string) $field] = $value;
+        }
+        $attributes['published_revision_id'] = $row['previous_published_revision_id'];
+        unset($attributes['working_revision_id'], $attributes['updated_at']);
+
+        return $this->fingerprint($attributes);
     }
 
     private function signingKey(): string

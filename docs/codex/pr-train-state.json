@@ -96080,8 +96080,8 @@
     "depends_on": [
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "2e13f24815fcec609acbcf40639f4be58883379b",
+    "status": "merged_and_cleaned",
+    "commit_sha": "105cc06faf88a66dfb9108491aaf2712d50f3b1a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3144",
     "checks": {
       "dependency": {
@@ -96117,12 +96117,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-16T12:41:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -96174,9 +96174,403 @@
         "at": "2026-07-16T12:34:04Z",
         "status": "ready_to_merge",
         "note": "Exact review-fix head 2e13f24815fcec609acbcf40639f4be58883379b passed all nine required checks, PR is CLEAN/MERGEABLE, and the only automated review thread is resolved. Bind commit_sha to this exact head and require one final fresh ledger-only cycle before squash merge."
+      },
+      {
+        "at": "2026-07-16T12:41:41Z",
+        "status": "merged_and_cleaned",
+        "note": "PR #3144 squash-merged at 105cc06faf88a66dfb9108491aaf2712d50f3b1a after all nine required checks passed. origin/main containment, clean main sync, local and remote task-branch deletion, and post-merge focused 24/521 revalidation are verified."
       }
     ],
-    "updated_at": "2026-07-16T12:34:04Z"
+    "updated_at": "2026-07-16T12:41:41Z"
+  },
+  "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E": {
+    "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/enneagram-public-authority-v2-runtime-readback-22e",
+    "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E: add exact-SHA closeout, revalidation and rollback preflight",
+    "depends_on": [
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "3b6ef0bf69b9df96c52ec34ebb0ffbfd77d46b99",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "Backend PR #3144 is MERGED at 105cc06faf88a66dfb9108491aaf2712d50f3b1a and frontend PR #1777 is MERGED at f6bc60ba70066ca04130cc5e55d950191d25742e; both repositories contain their merge commits and task branches are cleaned."
+      },
+      "focused_runtime_closeout": {
+        "status": "passed",
+        "evidence": "V205/V206/V223/V224 pass 82 tests / 1109 assertions; V224 passes 57 tests / 577 assertions. Public API canonical and hreflang references are now bound to the authorized frontend origin and exact frozen bilingual paths: optional canonical URLs must be exact absolute URLs, graph hreflang may be exact relative paths or exact same-origin URLs, and old origin/HTTP/query/fragment/wrong path/extra language drift fails closed. Nested CSS, exact robots, tokenized hreflang HTML, duplicate discoverability URL, HMAC 116/0, rollback, cache, empty-media, private-route, and 8 + 9x12 coverage remain green."
+      },
+      "cache_and_public_api": {
+        "status": "passed",
+        "evidence": "Read-model cache and Enneagram versioned active/LKG public API focused coverage pass 8 tests / 72 assertions; the exact Enneagram freeze-classifier case passes 1 test / 2 assertions."
+      },
+      "full_enneagram_v2": {
+        "status": "passed",
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 247 tests / 29115 assertions with exact authorized-origin and path validation for API canonical/hreflang; fail-closed nested CSS at-rule visibility; exact single robots meta enforcement; tokenized HTML hreflang conflict rejection; duplicate discoverability URL rejection; hidden-content and private-reviewer rejection; empty-media and private-root boundaries; and FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime checks."
+      },
+      "static_and_scope": {
+        "status": "passed",
+        "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
+      },
+      "github_required": {
+        "status": "passed",
+        "evidence": "Exact head 89c9ba893606228c57634014b99937ef508e5325 passed all nine required GitHub checks, is CLEAN and MERGEABLE, has zero unresolved review threads, and its exact-head Codex review reported no major issues."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-16T13:09:18Z",
+        "status": "pending_dependency",
+        "note": "Registered from the explicit serial execution goal with 22C and cross-repository 22D as dependencies; SHA, PR, merge, and production execution facts start null/false."
+      },
+      {
+        "at": "2026-07-16T13:34:06Z",
+        "status": "implementation_in_progress",
+        "note": "Verified both dependencies merged and cleaned, then implemented only the formal 22E runtime capability. Focused runtime, cache, public API, and classifier checks pass; no deployment, production import, promotion, cache mutation, or PR23 action occurred."
+      },
+      {
+        "at": "2026-07-16T13:44:04Z",
+        "status": "local_validation_passed",
+        "note": "Final focused 27/591, cache/API 8/72, classifier 1/2, full Enneagram V2 192/28597, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks all pass. The only observed focused failure was corrected before this complete fail-fast rerun. No production or deploy action occurred."
+      },
+      {
+        "at": "2026-07-16T13:45:19Z",
+        "status": "ready_to_push",
+        "note": "Bound commit_sha to the exact locally verified 15-path implementation commit 489b531ceabf92879c86952357dfbe50aae5f2c3; only this ledger/status binding follows the complete validation cycle."
+      },
+      {
+        "at": "2026-07-16T13:47:02Z",
+        "status": "pr_open_checks_pending",
+        "note": "Pushed the exact 15-path scope and opened PR #3145. The PR is MERGEABLE and the first GitHub checks have started; require all required checks and review threads green before squash merge."
+      },
+      {
+        "at": "2026-07-16T13:59:10Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine first-cycle GitHub checks passed. Resolved the automated P1 within 22E scope by making execute failure output stage-aware after committed import/bind/promotion and retaining only rollback token SHA/persisted state. Focused 28/606, full Enneagram V2 193/28612, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass; a fresh GitHub cycle is required after push."
+      },
+      {
+        "at": "2026-07-16T14:00:32Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the reviewed same-scope repair at 1e4ae6a92086e22d0dfb9082c86bfc1d4947d94c. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check cycle before merge."
+      },
+      {
+        "at": "2026-07-16T14:22:21Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine second-cycle GitHub checks passed, then two new automated review findings were fixed in scope. Rollback output is now exclusively reserved before runtime writes and durably persisted from inside the atomic promotion transaction; invalid output and sink failure are zero-promotion. Exact pre-readback now requires current observed_at, batch=all, 116 API/HTML rows, exact asset/path/SHA identities, matching public/stable DB fingerprints, and complete sitemap/llms URL-set evidence. Focused 31/629, full Enneagram V2 196/28635, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T14:22:56Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed both same-scope review repairs at acef44dca81a32ae7f5997430dcfd023d8806013. The exact 15-path scope remains unchanged; push and require another complete GitHub check and review cycle before merge."
+      },
+      {
+        "at": "2026-07-16T14:38:16Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine third-cycle GitHub checks passed. Resolved the latest P2 in scope by exclusively reserving and fsyncing the redacted execute output before service execution; invalid/existing output now fails before runtime DB writes, while successful execute persists closeout_output_persisted=true without rollback token disclosure. Focused 33/652, full Enneagram V2 198/28658, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T14:38:53Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the closeout output reservation repair at ca10bd7e2e17543e65f53b0b06ca5112c25fe65f. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
+      },
+      {
+        "at": "2026-07-16T14:51:02Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine fourth-cycle GitHub checks passed. Resolved the latest P2 by deriving promotion targets exclusively from the authorized release report's exact 116 identities instead of every org-0 Enneagram row. Added a non-release draft fixture proving it remains untouched and does not block promotion. The initial focused run exposed a release-key/revision-key representation mismatch; it was corrected to the writer's stable framework:entity_type:code:locale key before complete reruns. Focused 33/656, full Enneagram V2 198/28662, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T14:51:34Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the report-scoped promotion-target repair at 23f28a39ab6629c42738bcfb2f5fb2598e32826b. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
+      },
+      {
+        "at": "2026-07-16T15:08:24Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine fifth-cycle GitHub checks passed. Resolved the latest P2 by requiring standalone post-readback to validate the exact 116-row approved private register against the release package and every asset SHA before any API/HTML request; incomplete register coverage now fails closed with zero HTTP and DB writes. Focused 34/672, full Enneagram V2 199/28678, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T15:09:03Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the standalone post-readback private-register fail-closed repair at 104336c8bfe5fb93b1ed32b21dcb4f2eeda6333f. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
+      },
+      {
+        "at": "2026-07-16T15:24:03Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine sixth-cycle GitHub checks passed. Resolved the latest P2 by rejecting sitemap URLs outside the exact frontend origin and rejecting query/fragment drift on every Enneagram discoverability URL before path-set comparison or hashing. Wrong-origin, query, and fragment regression cases fail closed. The concurrency guard initially observed another short-lived FermatMind PHPUnit process, so this task's pending command was interrupted and complete validation started only after the guard cleared. Focused 35/678, full Enneagram V2 200/28684, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass."
+      },
+      {
+        "at": "2026-07-16T15:24:49Z",
+        "status": "pr_open_checks_pending",
+        "note": "Committed the discoverability exact-origin/query/fragment repair at 48c874143e1b5ec6d2ba9c1940a39a8638fff94b. The exact 15-path scope remains unchanged; push and require a fresh complete GitHub check and latest-head review cycle before merge."
+      },
+      {
+        "at": "2026-07-16T15:55:06Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine seventh-cycle GitHub checks passed, then the latest canonical-origin P2 and adjacent hreflang/readback URL drift boundary were fixed in scope. HTML canonical and hreflang now require the exact frontend origin and reject relative, query, fragment, empty-query and empty-fragment forms; isolated RuntimeManifest execution no longer depends on prior autoload order. Focused 37/698, full Enneagram V2 202/28704, cache/API 8/72, classifier 1/2, PHP lint/Pint, Composer, YAML/JSON, diff and exact 15-path scope checks pass. Code commit 3190771e35f6ec06dea0385be0e884633b519400 requires a fresh complete GitHub check and latest-head review cycle before merge; no production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T16:03:05Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 448572288ebab9044733e6f4c690b29f938c3593 passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads and retains the exact 15-path manifest scope. This ready-to-merge ledger-only update must independently pass a fresh ninth check cycle and exact-head review before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T16:12:15Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The latest-head automated P2 identified that execute-time API/frontend/revalidation destinations were not packet-bound. Code commit 973b0d30044d21f445c631983e13ed63869c5d4f now includes exact runtime endpoints in the authorization packet and runtime fingerprint, and packet equality rejects any of the three destination drifts before rollback-token reservation or DB writes. Focused 38/717, full Enneagram V2 203/28723, PHP lint/Pint, Composer validate, diff and unchanged exact 15-path scope checks pass; no production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T16:31:39Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Final code commit 86c912f5eeb13c4feba53951e954b210490efd02 additionally rejects non-origin API/frontend CLI values before service invocation. The repository concurrency guard observed an unrelated full Composer suite in another worktree, so only V224 focused validation ran until that suite exited; the final complete rerun then passed focused 39/747 and full Enneagram V2 204/28753 plus all static and exact 15-path scope checks. A fresh GitHub check and latest-head review cycle is required; production and deployment actions remain zero."
+      },
+      {
+        "at": "2026-07-16T16:39:13Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 7f80dac04a7b05363376b7b33583e58c435a902c passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, and retains the exact 15-path manifest scope. This ready-to-merge ledger-only update must independently pass a fresh final check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T17:06:56Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The final exact-head review found that pre-readback origin provenance and frontend revision-probe origin were not bound. Code commit dbd4e9298bf12dc350e438065fc92b8d645c13fd records and validates exact API/frontend origins in the pre-readback artifact and requires the frontend revision URL to share the exact public frontend origin before HTTP or writes. Focused 40/762, cache/API 8/72, classifier 1/2, full Enneagram V2 205/28768, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass; production and deployment actions remain zero."
+      },
+      {
+        "at": "2026-07-16T17:27:12Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The next exact-head review found standalone readback command parsing was weaker than the service and production execute could omit pre-readback. Code commit cdcfec3fa0dc7671704269b49f6f9d61d86cde82 mirrors strict exact-origin parsing in standalone readback and requires pre-readback for both production preflight and execute before revision HTTP or writes, preserving only the explicit testing/SQLite override. Focused 42/796, cache/API 8/72, classifier 1/2, full Enneagram V2 207/28802, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass; production and deployment actions remain zero."
+      },
+      {
+        "at": "2026-07-16T17:34:53Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 4e940f10bfc4f89e418551832b5a2662eb261232 passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, and retains the exact 15-path manifest scope. This ready-to-merge ledger-only update must independently pass a fresh final check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T17:54:07Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 8a8244640dd4ad2220bb0660b8d84ee0883d677e passed all nine checks, two valid P2 review findings were fixed in scope at 0a42d65d8ba82a91f4dfb2033c7ef3b1c66ac158: optional review evidence_sha256 is recomputed against the V223 canonical fingerprint before any workspace write, and private reviewer leak checks are UTF-8 case-folded. Focused 44/809, cache/API 8/72, classifier 1/2, full Enneagram V2 209/28816, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. The first Pint aggregate attempt used zsh no-word-splitting and treated the list as one path; the same manifest command passed under Bash. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:02:23Z",
+        "status": "ready_to_merge",
+        "note": "Exact review-fix plus pending-ledger head 7f6f5e4c3995cd50d57033c2310c8306240b5320 passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope, and has a clean worktree. This ready-to-merge ledger-only update must independently pass one final complete check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T18:11:23Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The next exact-head review found redirect-following readbacks and full URL-set comparison occurring only after writes. Code commit 247ae2726f0e20f541ed1d0137524312c4cc8d21 disables redirects for every 22E external request and compares the complete live sitemap/llms/llms-full sets against the authorized pre-readback before rollback reservation, import, bind, promotion, cache, or revalidation. The first focused run exposed two stacked-Http-fake fixture assumptions and one no-pre-readback SQLite expectation; these were corrected without weakening production behavior. Final focused 47/828, cache/API 8/72, classifier 1/2, full Enneagram V2 212/28834, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:18:09Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The latest exact-head review found the frontend REVISION probe still followed redirects and raw HTML checks could miss a reviewer name split across DOM tags. Code commit bd5755cfa352b6ec17851de992ec2238318f7060 disables redirects on the deployed frontend SHA probe and rechecks case-folded normalized DOM-visible text for private reviewer names. Final focused 47/828, cache/API 8/72, classifier 1/2, full Enneagram V2 212/28834, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:24:07Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Added an explicit production-command regression at 51c309a11eabb1df2c04c9132128ea402fefabbd proving the same-origin frontend REVISION probe sends allow_redirects=false, rejects a 302, and performs zero revision/review writes. Final focused 48/839, cache/API 8/72, classifier 1/2, full Enneagram V2 213/28845, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:31:49Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Merged latest origin/main 6f1746854 without code conflicts, preserving main's new train entries and the stricter PR23 authorization state. The newest P2 showed non-Enneagram relative llms URLs were absent from full-set hashes; 58a5cc1e9aa439cd7c6883a245419f9e91993fe0 now parses every relative public URL and proves /en/articles/... changes the full llms and llms-full hashes while the exact 116 Enneagram subset stays fixed. Final focused 49/847, cache/API 8/72, classifier 1/2, full Enneagram V2 214/28853, all 12 PHP lint/Pint checks, Composer, YAML/JSON, diff, and exact 15-path scope pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:39:02Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The latest P2 showed absolute non-Enneagram LLMS URLs could be normalized before origin validation. Code commit f251f69654e5bf30e7cd09735a4383c16fd993f9 now requires every absolute LLMS URL to use the exact frontend origin and rejects query/fragment drift while retaining relative public paths in the full-set SHA. Final focused 50/853, cache/API 8/72, classifier 1/2, full Enneagram V2 215/28859, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T18:59:19Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After head 178cd1699 passed all nine checks, its exact-head review found main rendered sections and deployed revision provenance were not fully bound. Code commit 161a4795ec3ac48fa23696c8f5a381aaa8696121 now requires every API section title/body in HTML-visible text, makes standalone production readback verify and record exact backend/frontend deployed SHAs with redirects disabled, and rejects pre-readback SHA drift before authorization. Final focused 52/869, cache/API 8/72, classifier 1/2, full Enneagram V2 217/28875, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T19:07:44Z",
+        "status": "ready_to_merge",
+        "note": "Exact review-fix head 8da0e7031699548ede0dd536686336112ab5d7c7 passed all nine required GitHub checks, is MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope, and has a clean worktree. This ready-to-merge ledger-only update must independently pass one final complete check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-16T19:24:00Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The exact review of ready-ledger head 0c3ac3fa0 found that pre-readback DB fingerprints were not directly tied to HTTP payload content/provenance and private-route matching missed query, fragment, and bare forms. Code commit cfa046421fee49f0b7c6d235f2b047af9472d2b0 now compares API title/summary/sections/SEO/canonical/source/review fields to the current DB public asset for every pre/post row and rejects all / ? # end private-route boundaries. Final focused 54/884, cache/API 8/72, classifier 1/2, full Enneagram V2 219/28890, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The initial focused run exposed only a new regex delimiter mistake and was fully rerun after correction. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T19:35:56Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The latest exact-head review found post-readback could accept a missing visible-evidence block and FAQ validation checked questions without answers. Code commit ee76f2f31cd3dacbf3bf12dee860b140916bcaac now requires non-empty sources and claim mappings, eligible=true, visible source titles, DB-bound FAQ rows, and visible question/answer pairs. Final focused 56/892, cache/API 8/72, classifier 1/2, full Enneagram V2 221/28898, PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T19:40:26Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Resolved the remaining exact-head P2 by rejecting every non-root discoverability trailing slash before URL-set normalization or hashing. Commit 1e22d5817bde7eef33bff37281363953bfd24b06 explicitly proves fail-closed behavior independently for sitemap, llms.txt, and llms-full.txt. Final V224 32/369, service-code full Enneagram V2 221/28901, cache/API 8/72, classifier 1/2, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T19:42:55Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The final exact manifest rerun on test head 1e22d5817bde7eef33bff37281363953bfd24b06 supersedes the intermediate counts: focused V205/V206/V223/V224 passes 57/901 and full Enneagram V2 passes 222/28907; cache/API 8/72, classifier 1/2, static checks, and exact 15-path scope remain green. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T20:05:22Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 4896bccc85ef3a9bd534727a8ad4b1be56f53939 passed all nine checks, its exact-head review found that post-readback could accept a non-empty, eligible, HTML-visible subset of the current authority evidence. Code commit 7d9f58db7b233e5bc19e26fc589fe45a53ef1804 now binds the API v2 sources and claim mapping exactly to current authority_json and proves a partial 1-of-2 projection fails closed. Final V224 33/375, focused 58/907, cache/API 8/72, classifier 1/2, full Enneagram V2 223/28913, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T20:27:03Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 2711d18a5c9be10b05d79e872c66cb7d8da4be5b passed all nine checks, its exact-head review found that visible-evidence limitations were not included in the current-authority comparison. Code commit 08d56339e13ac6e31c03ea93ee910d8ea3925c70 now binds limitations alongside sources, claim mapping, and eligibility and proves an API projection that drops all authority limitations fails closed. Final V224 34/381, focused 59/913, cache/API 8/72, classifier 1/2, full Enneagram V2 224/28919, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T20:43:29Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head e561994c987431849285698de6cd4e978a9d2842 passed all nine checks, its exact-head review found that comparing raw authority sources with the public API canonical projection could falsely fail after committed promotion, notably because accessed_at is emitted as DATE_ATOM. Code commit c470a65609988e2d05f16ccbec8f38caf2a600e6 now builds expected visible evidence with the public v2 source, mapping, limitation, URL, DOI, date, and deduplication rules; the complete authorized execute/readback plus an explicit canonical-shape regression pass. The first Pint check exposed only new-helper formatting and passed after mechanical formatting. Final V224 35/382, focused 60/914, cache/API 8/72, classifier 1/2, full Enneagram V2 225/28920, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T21:02:40Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 11c361910dd01d2203896c6aac6aa6e29bd7b41e passed all nine checks, its exact-head review found that whole-document textContent could let JSON-LD or hydration scripts satisfy visible section, FAQ, and evidence checks. Code commit d3617cf275fa4b78a9ce573286b844fbd9a7f8b9 now reads only renderable body text nodes and excludes script, style, template, noscript, head, hidden, and aria-hidden ancestors; a hydration-script-only regression fails all three visible-content checks. Final V224 36/388, focused 61/920, cache/API 8/72, classifier 1/2, full Enneagram V2 226/28926, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-16T21:12:40Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 4c2de7a3a07a30eb62b18ad6e688d30427c7d779 passed all nine required GitHub checks, is MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope and clean worktree, and its exact-head Codex review reported no major issues. This ready-to-merge ledger-only update must independently pass one final complete check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
+      },
+      {
+        "at": "2026-07-17T00:52:46Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head ef16b67670a954a73042bc5b7afa7de18647cb39 passed all nine checks, exact-head review found retry after committed review bind was not resumable and runtime origins could target local/private destinations. Code commit 62eced50e4dfd07a00753dd5b1ad881af058042d now resumes only the exact verified 116-row bound state and restricts production commands to configured public origins before HTTP or writes. Final V224 38/439, focused 63/971, cache/API 8/72, classifier 1/2, full Enneagram V2 228/28977, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T01:11:32Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 9f5468ece9a8ef36dcafdf230f8c90f68a005154 passed all nine checks, exact-head review found non-Enneagram private runtime paths could survive in the complete sitemap/llms URL sets. Code commit 39ee7e9dfae6260e3d491902d82d4ee84a5d1343 rejects private API, attempt/report, result, order/payment, claim, answer-taking, account/history, and share routes on all three feed surfaces before acceptance or hashing, while retaining ordinary public article paths. Final V224 39/447, focused 64/979, cache/API 8/72, classifier 1/2, full Enneagram V2 229/28985, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T01:29:17Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 55198c9dca4049b300ee27bfc22444d824a3fd92 passed all nine checks, exact-head review found API/HTML marker scanning still used the older narrow private-route regex. Code commit 412908dd7b81a104d2be863a5c6c6e49ca5b55af makes API body, raw/visible HTML, DOM anchor, and feed readback reuse the same full private runtime path predicate, including escaped JSON slashes. Final V224 39/459, focused 64/991, cache/API 8/72, classifier 1/2, full Enneagram V2 229/28997, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T01:49:05Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 7d0edba42504216b0973980a8f704e7708cbf63b passed all nine checks, exact-head review found FAQPage JSON-LD acceptedAnswer.text was not validated. Code commit 5211e55b7e3d94950a00902b14bb644396d0ebaa pairs every schema question and answer to the exact public API FAQ and requires both to be renderably visible; valid Markdown, missing answer, and stale answer regressions pass. Final V224 41/468, focused 66/1000, cache/API 8/72, classifier 1/2, full Enneagram V2 231/29006, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The first Pint invocation used zsh no-word-splitting and treated the list as one path; the same exact 12-file list passed via explicit argument expansion. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T02:04:57Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head fd3fa89617cd140e82a995c19620652bc4b62fb7 passed all nine checks, exact-head review found public FAQ could omit FAQPage entirely and HTML robots was not compared with API/DB. Code commit a27c9fe89f3cc0a8d0cedb7156b9d85074ba3651 requires the complete normalized FAQ schema question/answer map to equal the public API FAQ map, binds API robots to the current DB asset, and requires exact normalized HTML robots parity. Missing schema, missing/stale answer, and noindex drift regressions pass. Final V224 42/473, focused 67/1005, cache/API 8/72, classifier 1/2, full Enneagram V2 232/29011, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T02:27:54Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 25a38d0cf6d93e077af119351b89ad64bb5cab61 passed all nine checks, exact-head review found DB/API hreflang parity and standard image-surface detection gaps. Code commit 65d43491a5791e692a40b84e0cda61bc2f880d66 compares the complete normalized hreflang locale/path and graph metadata map while HTML separately enforces exact runtime origin, and rejects og:image, twitter:image, image_src, main/article image markup, and JSON-LD image fields. The first V224 rerun exposed that the test fake dropped backend graph metadata after promotion; preserving real API shape fixed the fixture without weakening runtime checks. Final V224 44/484, focused 69/1016, cache/API 8/72, classifier 1/2, full Enneagram V2 234/29022, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T02:46:31Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 69bb26bba9cf7e43b896cd6278d730f8adc28339 passed all nine checks, exact-head review found admin, ops, and tenant roots missing from the shared private-path boundary. Code commit 6c61917bfbe0482a1d9a2946b3af05d388a1d63b rejects those roots, including locale-prefixed forms, across sitemap, llms, API, and HTML readback. Final V224 44/495, focused 69/1027, cache/API 8/72, classifier 1/2, full Enneagram V2 234/29033, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T03:03:34Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 6f3ded0bfc0556240a4df26f5c6877d49291792c passed all nine checks, exact-head review found inline CSS-hidden ancestors missing from renderable visible-text filtering. Code commit 301a256c8c057a3f9d9dc22daaa109b7f68c509a rejects case-insensitive display:none and visibility:hidden styles, including whitespace and !important forms, before section, FAQ, or evidence acceptance. Final V224 45/504, focused 70/1036, cache/API 8/72, classifier 1/2, full Enneagram V2 235/29042, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred the full run until an existing same-scope V224 JUnit process exited. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T03:20:34Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head c510dc1af3a958b865140c5d50198ba68e8346bc passed all nine checks, exact-head review found main-content CSS url() images missing from the empty-media readback. Code commit b74acb6b87e2b951638f09a1da4f88ec4b81c0f7 rejects inline style and local style-node URL media beneath main, article, and role=main roots. Final V224 45/506, focused 70/1038, cache/API 8/72, classifier 1/2, full Enneagram V2 235/29044, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T03:34:10Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 2d7a16a07b0648c1521ab9336e5627693c0149e2 passed all nine checks, exact-head review found head-level style rules targeting main content missing from the empty-media readback. Code commit 0d0fcc1fbfc9fa37cf8c7eae02b0b9f0c0341cb7 scans every inline style block for non-font URL media while preserving font-face-only URLs, and continues to scan inline styles beneath main, article, and role=main roots. Final V224 46/510, focused 71/1042, cache/API 8/72, classifier 1/2, full Enneagram V2 236/29048, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T05:45:28Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 51e984a1b09d3a17d10771dfffd89c5d3fc2f808 passed all nine checks, exact-head review found the full public API canonical object was not bound to current backend authority. Code commit 38583e9579778567d58dea7bdde1ba502f85c127 compares canonical exactly with canonical_json while retaining independent canonical_path validation, and proves wrong-origin, query, and fragment URL drift fail even when canonical_path matches. Final V224 47/516, focused 72/1048, cache/API 8/72, classifier 1/2, full Enneagram V2 237/29054, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred the complete Enneagram run until an existing repository-wide PHPUnit process exited. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T06:29:11Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 1b7354babf4fdfbba5d5c4bde9554b0c9868f1a9 passed all nine checks, exact-head review found that XPath string conversion accepted a correct first canonical while ignoring later conflicting tags. Code commit 3ef475ac2c88f1c487ba98333b781c4da090f7b8 recognizes canonical as a rel token, requires exactly one canonical node, and proves a correct first plus conflicting second tag fails closed. Final V224 48/520, focused 73/1052, cache/API 8/72, classifier 1/2, full Enneagram V2 238/29058, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred complete reruns until an existing repository-wide PHPUnit process exited; the interrupted wait did not alter the worktree and all final commands were rerun from a clear guard state. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T06:46:29Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head a62c819de7249d709395838dd4ab0bd1d01aa119 passed all nine checks, exact-head review found an unrelated Career PR-card allowed-path expansion inside this Enneagram PR. Scope-only commit f3f0fbf1d82f8ce52c7d4f9c73b45ccadb4510ca removes backend/.env.example from CAREER-RUNTIME-SLO-ALERTING-01 and leaves the 22E card plus runtime code unchanged. YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass; the prior V224 48/520, focused 73/1052, cache/API 8/72, classifier 1/2, full Enneagram V2 238/29058, and 12-file static evidence remains applicable. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T07:03:38Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 7ec8498fe3387b5813e3b8170ee9d152ade41040 passed all nine checks, exact-head review found API hreflang parity normalized both DB and API values down to paths. Code commit fc506f4a49e59d9e08ac5275c7f72fb0802816ad compares complete normalized DB/API URLs and graph metadata while HTML separately derives locale/path and requires exact runtime frontend URLs; wrong origin, HTTP scheme, query, fragment, and relative API values all fail closed. An initial V224 run exposed only the test environment's deliberate DB/API production host versus HTML runtime host mapping; separating API URL parity from HTML path/origin validation corrected the fixture boundary without weakening either check. Final V224 49/528, focused 74/1060, cache/API 8/72, classifier 1/2, full Enneagram V2 239/29066, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, exact 15-path scope, and unchanged Career scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T07:22:35Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head b9bb5064d7842201d702117780a4bac331a3744c passed all nine checks, exact-head review found the HMAC revalidation endpoint was public-HTTPS validated but not bound to the authorized frontend base origin. Code commit 8011daf993b485fae501040dc1726d3d84a5d7f9 enforces exact same-origin preflight and proves a different public origin fails before authorization with zero revision/review writes. Final V224 50/535, focused 75/1067, cache/API 8/72, classifier 1/2, full Enneagram V2 240/29073, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard deferred the full run until a same-scope four-file PHPUnit process exited. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T07:38:48Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 690710c60d67aaa7329385a7d5c3a1b7cc25596a passed all nine checks, exact-head review found per-node whitespace injection could hide a private reviewer name split inside inline markup. Code commit 23c2623b94297c09acb5a2a19601903cff65c4d9 concatenates eligible DOM text nodes with their original boundaries before whitespace normalization, and the regression now splits the reviewer name inside one word so raw HTML and the old visible-text algorithm cannot satisfy the HTML leak check. Final V224 50/535, focused 75/1067, cache/API 8/72, classifier 1/2, full Enneagram V2 240/29073, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, exact 15-path scope, and unchanged Career scope checks pass. The concurrency guard reused the already-running same-scope focused/cache/classifier reports before the final full run. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T07:58:32Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head d6a858390408b7434c446d190d22f9e72a9cdffb passed all nine checks, exact-head review found stylesheet-class hidden authority markup could still satisfy visible section, FAQ, and evidence checks. Code commit cb5d292e539ceccbff3d9b0c68fa8920dea2bb6d converts inline hiding selectors to XPath, marks matched body elements as non-renderable, recognizes common hidden/invisible classes, and fails closed when a hiding selector cannot be verified. The first focused regression used a noncanonical evidence fixture, so it was corrected to the current public v2 source/claim shape before complete reruns. Final V224 51/541, focused 76/1073, cache/API 8/72, classifier 1/2, full Enneagram V2 241/29079, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, exact 15-path scope, and unchanged Career scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T08:11:06Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The second exact review of head c33d57bc13f1d26ce09e2768835232bfd7db6f4a found one valid P2: duplicate normalized sitemap/llms/llms-full URLs were collapsed before counts, hashes, and exact Enneagram set comparison. Returned 22E from ready_to_merge to review-fix state; a same-scope code fix and fresh complete validation/check/review cycle are required. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T08:19:10Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Code commit b425cc3f6329354a270ac7e1ec64916902350316 rejects duplicate normalized public paths before sitemap/llms/llms-full URL-set counts, fingerprints, and exact Enneagram comparison; one regression iterates all three surfaces. Final V224 52/547, focused V205/V206/V223/V224 77/1079, cache/API 8/72, classifier 1/2, full Enneagram V2 242/29085, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrent premature ready-to-merge metadata transition was removed before this ledger commit. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T08:29:23Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact review of head d56d42df69cf6a0346626dbb66ce6033fa3ab766 found two valid P2 readback gaps. Code commit 7cd6aae516cff0a37e7d3a64e035ba735ed8310e now requires exactly one robots meta directive and matches hreflang alternate as a rel token, with regressions for a correct-first duplicate noindex tag and rel=\"alternate stylesheet\" conflicting href. Final V224 54/555, focused V205/V206/V223/V224 79/1087, cache/API 8/72, classifier 1/2, full Enneagram V2 244/29093, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. The concurrency guard waited for an existing same-scope focused run before starting full validation. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T08:40:16Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact review of head c84f99e0f37ed9786c12437479c3e1a449bd539b found that a nested stylesheet conditional at-rule with a direct hiding declaration was skipped. Code commit 3d1f8b384e0a1db4b2db95737b1a6e465524266a treats unsupported at-rule visibility as unverifiable and fails closed, with a nested @media regression. Final V224 55/559, focused V205/V206/V223/V224 80/1091, cache/API 8/72, classifier 1/2, full Enneagram V2 245/29097, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T08:58:21Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact review of head b0eea5da9cb19b2211372ab5ec4036c8141e2dae found that current DB/API parity alone could preserve canonical or hreflang values on an unauthorized origin. Code commit 3b6ef0bf69b9df96c52ec34ebb0ffbfd77d46b99 validates optional API canonical URLs as exact same-origin absolute URLs and validates graph hreflang references as exact bilingual relative paths or exact same-origin absolute URLs; old origin, HTTP, query, fragment, wrong path, and extra language fixtures fail closed. A first V224 rerun exposed only that successful promotion fixtures mixed production graph paths with frontend.test; the final fixture uses its authorized origin without changing runtime behavior. Final V224 57/577, focused V205/V206/V223/V224 82/1109, cache/API 8/72, classifier 1/2, full Enneagram V2 247/29115, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T09:08:24Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 89c9ba893606228c57634014b99937ef508e5325 passed all nine required GitHub checks, is CLEAN and MERGEABLE, retains the exact 15-path scope with a clean worktree, has zero unresolved review threads, and its exact-head Codex review reported no major issues. This final ready-to-merge metadata update must independently pass one last complete check and exact-head review cycle before squash merge; production, deploy, CMS, database, media, cache, publication, and search actions remain zero."
+      }
+    ],
+    "updated_at": "2026-07-17T09:08:24Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
@@ -96185,8 +96579,11 @@
     "branch": "codex/enneagram-public-authority-v2-runtime-closeout-23",
     "title": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23: record authorized rollout and 116-page public readback",
     "depends_on": [
-      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RELEASE-GATE-22",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-MEDIA-BOUNDARY-22A",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-EDITORIAL-DUPLICATE-REPAIR-22B",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D",
+      "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E",
       "separate_exact_sha_production_authorization"
     ],
     "status": "pending_production_authorization",
@@ -96195,7 +96592,7 @@
     "checks": {
       "dependency": {
         "status": "pending",
-        "evidence": "Requires merged PR22, merged 22B exact repaired package evidence, and separate exact-SHA production authorization; register-only."
+        "evidence": "22A-22D are merged and cleaned. Requires merged/green 22E, confirmed asynchronous backend/frontend deployments at exact SHAs, a completed private 116-row review register, a successful pre-readback, and separate authorization of the generated exact-SHA packet."
       }
     },
     "scope_validation": {
@@ -96213,15 +96610,20 @@
     "cms_mutation": true,
     "api_runtime_change": true,
     "publish_allowed": true,
-    "deploy_allowed": true,
+    "deploy_allowed": false,
     "transitions": [
       {
         "at": "2026-07-15T01:12:16Z",
         "status": "pending_production_authorization",
         "note": "Registered only; do not start or perform production actions without separate exact-SHA authorization after PR22."
+      },
+      {
+        "at": "2026-07-16T13:34:06Z",
+        "status": "pending_production_authorization",
+        "note": "Dependency contract expanded to merged 22A-22D, pending 22E, and separate exact-SHA authorization. Allowed paths are now only runtime-closeout-23 artifacts and this state ledger. Manual deploy remains prohibited; GitHub Actions deployment is asynchronous."
       }
     ],
-    "updated_at": "2026-07-15T01:12:16Z"
+    "updated_at": "2026-07-16T13:34:06Z"
   },
   "ANALYTICS-FRESHNESS-RECONCILE-03": {
     "id": "ANALYTICS-FRESHNESS-RECONCILE-03",

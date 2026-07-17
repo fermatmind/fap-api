@@ -45,6 +45,8 @@ return [
             explode(',', (string) env('OPS_CONTENT_RELEASE_CACHE_INVALIDATION_URLS', ''))
         ))),
         'cache_invalidation_secret' => env('OPS_CONTENT_RELEASE_CACHE_INVALIDATION_SECRET', ''),
+        'hmac_revalidation_url' => env('ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL', ''),
+        'hmac_revalidation_secret' => env('CONTENT_RELEASE_REVALIDATE_SECRET', ''),
         'broadcast_webhook' => env('OPS_CONTENT_RELEASE_BROADCAST_WEBHOOK', ''),
         'http_timeout_seconds' => (int) env('OPS_CONTENT_RELEASE_HTTP_TIMEOUT_SECONDS', 5),
     ],
