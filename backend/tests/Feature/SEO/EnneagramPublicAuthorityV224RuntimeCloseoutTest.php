@@ -112,6 +112,37 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
     }
 
+    public function test_preflight_rejects_revalidation_endpoint_on_different_public_origin_without_writes(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $register = $this->reviewRegister($report);
+
+        try {
+            $this->closeout()->preflight(
+                $report,
+                $this->fingerprintRaw($report),
+                $register,
+                $this->fingerprintRaw($register),
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+                'https://api.test',
+                'https://frontend.test',
+                'https://staging-frontend.test/api/content-release/revalidate',
+            );
+            $this->fail('Expected a cross-origin revalidation endpoint to fail before authorization.');
+        } catch (\RuntimeException $exception) {
+            $this->assertSame(
+                'frontend revalidation endpoint must use the exact frontend base origin.',
+                $exception->getMessage(),
+            );
+        }
+
+        $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+        $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        $this->assertSame(116, PersonalityPublicContentAsset::query()->whereNull('working_revision_id')->count());
+    }
+
     public function test_execute_rejects_runtime_endpoint_drift_before_any_write(): void
     {
         $this->seedPublishedEstate();
@@ -1438,7 +1469,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         File::put($registerPath, json_encode($this->reviewRegister($this->releaseReport()), JSON_THROW_ON_ERROR));
         config()->set('app.url', 'https://api.fermatmind.com');
         config()->set('app.frontend_url', 'https://fermatmind.com');
-        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://fermatmind.com/api/content-release/revalidate');
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
 
         try {
             $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [

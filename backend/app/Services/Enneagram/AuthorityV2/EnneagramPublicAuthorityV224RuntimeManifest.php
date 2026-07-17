@@ -456,13 +456,22 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         string $frontendBaseUrl,
         string $revalidationEndpoint,
     ): array {
+        $frontendBaseOrigin = $this->exactHttpsOrigin($frontendBaseUrl, 'frontend base origin');
+        $frontendRevalidationEndpoint = $this->exactHttpsEndpoint(
+            $revalidationEndpoint,
+            'frontend revalidation endpoint',
+        );
+        if (! hash_equals(
+            $this->canonicalHttpsOrigin($frontendBaseOrigin),
+            $this->canonicalHttpsOrigin($frontendRevalidationEndpoint),
+        )) {
+            throw new RuntimeException('frontend revalidation endpoint must use the exact frontend base origin.');
+        }
+
         return [
             'api_base_origin' => $this->exactHttpsOrigin($apiBaseUrl, 'API base origin'),
-            'frontend_base_origin' => $this->exactHttpsOrigin($frontendBaseUrl, 'frontend base origin'),
-            'frontend_revalidation_endpoint' => $this->exactHttpsEndpoint(
-                $revalidationEndpoint,
-                'frontend revalidation endpoint',
-            ),
+            'frontend_base_origin' => $frontendBaseOrigin,
+            'frontend_revalidation_endpoint' => $frontendRevalidationEndpoint,
         ];
     }
 
