@@ -726,6 +726,35 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_pre_readback_rejects_stale_api_canonical_object_with_matching_canonical_path(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+
+        foreach ([
+            'https://staging-mirror.test{path}',
+            'https://frontend.test{path}?stale=1',
+            'https://frontend.test{path}#stale',
+        ] as $apiCanonicalUrlOverride) {
+            $this->fakeRuntimeHttp($report, apiCanonicalUrlOverride: $apiCanonicalUrlOverride);
+
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected stale API canonical object to fail current-asset parity.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('api_current_public_asset_mismatch', $exception->getMessage());
+            }
+        }
+    }
+
     public function test_readback_rejects_query_fragment_and_bare_private_routes(): void
     {
         $this->seedPublishedEstate();
@@ -1968,6 +1997,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $staleHreflangPayload = false,
         ?string $standardMediaLeak = null,
         ?string $authorityContentHiddenStyle = null,
+        ?string $apiCanonicalUrlOverride = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1975,7 +2005,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2065,6 +2095,14 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 if ($omitVisibleEvidenceLimitations) {
                     $visibleEvidence['limitations'] = [];
                 }
+                $apiCanonical = is_array($asset->canonical_json) ? $asset->canonical_json : [];
+                if ($apiCanonicalUrlOverride !== null) {
+                    $apiCanonical['url'] = str_replace(
+                        '{path}',
+                        (string) data_get($asset->canonical_json, 'path', ''),
+                        $apiCanonicalUrlOverride,
+                    );
+                }
 
                 return Http::response([
                     'ok' => true,
@@ -2081,6 +2119,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                             : (is_array($asset->seo_json) ? $asset->seo_json : []),
                         'robots' => (string) $asset->robots,
                         'canonical_path' => (string) data_get($asset->canonical_json, 'path'),
+                        'canonical' => $apiCanonical,
                         'hreflang' => $hreflang,
                         'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
                         'media' => ['hero' => null, 'inline' => [], 'og' => null],
