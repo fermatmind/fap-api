@@ -96787,11 +96787,11 @@
       },
       "github": {
         "status": "rerun_pending",
-        "evidence": "All nine checks passed on both 72887c87905b9da4bdee4dd38e7b23f288406a1b and 6d17ef04b76c75a88fca32ef8ba0c98697b28943. A third valid Codex P2 finding was then repaired in scope, so checks must rerun on the forthcoming review-fix head."
+        "evidence": "All nine checks passed on 72887c87905b9da4bdee4dd38e7b23f288406a1b, 6d17ef04b76c75a88fca32ef8ba0c98697b28943, and 2b719fef7163f37f70bd9ef07ef4b554661d044a. A fourth valid Codex P2 finding was then repaired in scope, so checks must rerun on the forthcoming review-fix head."
       },
       "codex_review": {
         "status": "findings_repaired",
-        "evidence": "The review found exec output accumulation in the architecture gate, silent scalar coercion in ReviewTarget, and an over-broad namespace exemption for future review-governance adapters. All three were fixed. The narrowed exact-file exemption has a regression test; the architecture suite passed (5 tests, 225 assertions), Pint and PHP lint passed, and git diff --check passed."
+        "evidence": "The review found exec output accumulation in the architecture gate, silent scalar coercion in ReviewTarget, over-broad architecture namespace exemptions, and an over-broad runtime-freeze DTO namespace exemption. All four were fixed with regression coverage. The latest focused classifier test passed (1 test, 2 assertions), Pint and PHP lint passed, and git diff --check passed."
       }
     },
     "scope_validation": {
@@ -96845,8 +96845,13 @@
         "at": "2026-07-17T15:38:00Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on 6d17ef04b76c75a88fca32ef8ba0c98697b28943. Its Codex review found one additional valid P2: the architecture exemption was namespace-wide. The exemption is now an exact PR1 foundation file list with a regression test; a new full check run and exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T15:45:38Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on 2b719fef7163f37f70bd9ef07ef4b554661d044a. Its exact-head Codex review found one additional valid P2: the Big Five runtime-freeze helper still exempted every future ReviewGovernance DTO. The helper now allows only the three PR1 DTOs and explicitly regression-blocks a future DTO; a new full check run and exact-head review are required."
       }
     ],
-    "updated_at": "2026-07-17T15:38:00Z"
+    "updated_at": "2026-07-17T15:45:38Z"
   }
 }

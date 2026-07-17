@@ -212,6 +212,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php',
         ];
         $blocked = [
+            'backend/app/DTO/ReviewGovernance/FutureApprovalRequest.php',
             'backend/app/Services/ReviewGovernance/ReviewAttestationPublisher.php',
             'backend/database/migrations/2026_07_17_150100_publish_review_attestations.php',
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
@@ -7707,7 +7708,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSoloOwnerReviewFoundationFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/ReviewAttestationPreflight.php'
-            || str_starts_with($file, 'backend/app/DTO/ReviewGovernance/')
+            || in_array($file, [
+                'backend/app/DTO/ReviewGovernance/ReviewTarget.php',
+                'backend/app/DTO/ReviewGovernance/ReviewTargetSet.php',
+                'backend/app/DTO/ReviewGovernance/ValidatedReviewAttestation.php',
+            ], true)
             || in_array($file, [
                 'backend/app/Models/ReviewAttestation.php',
                 'backend/app/Models/ReviewAttestationTargetEvidence.php',
