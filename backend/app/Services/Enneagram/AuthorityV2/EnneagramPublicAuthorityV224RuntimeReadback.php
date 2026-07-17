@@ -563,16 +563,20 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             $visible,
             $issues,
         );
+        $expectedFaqAnswers = [];
         foreach (is_array($v1['faq'] ?? null) ? $v1['faq'] : [] as $faq) {
             $question = is_array($faq) ? trim((string) ($faq['question'] ?? $faq['q'] ?? '')) : '';
             $answer = is_array($faq) ? trim((string) ($faq['answer'] ?? $faq['a'] ?? '')) : '';
+            $normalizedQuestion = $this->normalizedVisibleText($question);
+            $normalizedAnswer = $this->normalizedMarkdownText($answer);
             if ($question === ''
                 || $answer === ''
-                || ! str_contains($visible, $this->normalizedVisibleText($question))
-                || ! str_contains($visible, $this->normalizedMarkdownText($answer))) {
+                || ! str_contains($visible, $normalizedQuestion)
+                || ! str_contains($visible, $normalizedAnswer)) {
                 $issues[] = 'html_visible_faq_mismatch';
                 break;
             }
+            $expectedFaqAnswers[$normalizedQuestion] = $normalizedAnswer;
         }
         if ($phase === 'post') {
             $sources = is_array(data_get($v2, 'visible_evidence.sources'))
@@ -599,19 +603,25 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
 
                 continue;
             }
-            foreach ($this->faqQuestionsFromSchema($schema) as $question) {
-                if (! str_contains($visible, $this->normalizedVisibleText($question))) {
-                    $issues[] = 'html_schema_not_visible';
+            foreach ($this->faqEntriesFromSchema($schema) as $entry) {
+                $question = $this->normalizedVisibleText($entry['question']);
+                $answer = $this->normalizedMarkdownText($entry['answer']);
+                if ($question === ''
+                    || $answer === ''
+                    || ($expectedFaqAnswers[$question] ?? null) !== $answer
+                    || ! str_contains($visible, $question)
+                    || ! str_contains($visible, $answer)) {
+                    $issues[] = 'html_schema_faq_mismatch';
                     break 2;
                 }
             }
         }
     }
 
-    /** @param array<string,mixed> $schema @return list<string> */
-    private function faqQuestionsFromSchema(array $schema): array
+    /** @param array<string,mixed> $schema @return list<array{question:string,answer:string}> */
+    private function faqEntriesFromSchema(array $schema): array
     {
-        $questions = [];
+        $entries = [];
         $nodes = array_is_list($schema) ? $schema : [$schema];
         foreach ($nodes as $node) {
             if (! is_array($node)) {
@@ -620,17 +630,21 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             if (($node['@type'] ?? null) === 'FAQPage') {
                 foreach ((array) ($node['mainEntity'] ?? []) as $entity) {
                     $name = is_array($entity) ? trim((string) ($entity['name'] ?? '')) : '';
-                    if ($name !== '') {
-                        $questions[] = $name;
-                    }
+                    $acceptedAnswer = is_array($entity) && is_array($entity['acceptedAnswer'] ?? null)
+                        ? $entity['acceptedAnswer']
+                        : [];
+                    $entries[] = [
+                        'question' => $name,
+                        'answer' => trim((string) ($acceptedAnswer['text'] ?? '')),
+                    ];
                 }
             }
             if (is_array($node['@graph'] ?? null)) {
-                $questions = [...$questions, ...$this->faqQuestionsFromSchema($node['@graph'])];
+                $entries = [...$entries, ...$this->faqEntriesFromSchema($node['@graph'])];
             }
         }
 
-        return $questions;
+        return $entries;
     }
 
     /** @param list<array<string,mixed>> $targets @return array<string,string> */

@@ -703,6 +703,70 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_readback_accepts_faq_schema_matching_the_public_faq(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill(['faq_json' => [[
+                'question' => 'What does this page explain?',
+                'answer' => 'It explains a **bounded** observation pattern.',
+            ]]])->save();
+        }
+        $this->fakeRuntimeHttp($report, emitFaqSchema: true);
+
+        $result = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'canary-00',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+
+        $this->assertSame(8, $result['target_count']);
+    }
+
+    public function test_readback_rejects_missing_or_stale_faq_schema_answers(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill(['faq_json' => [[
+                'question' => 'What does this page explain?',
+                'answer' => 'It explains a bounded observation pattern.',
+            ]]])->save();
+        }
+
+        foreach ([
+            ['omitFaqSchemaAnswer' => true, 'faqSchemaAnswerOverride' => null],
+            ['omitFaqSchemaAnswer' => false, 'faqSchemaAnswerOverride' => 'Stale structured answer.'],
+        ] as $case) {
+            $this->fakeRuntimeHttp(
+                $report,
+                emitFaqSchema: true,
+                omitFaqSchemaAnswer: $case['omitFaqSchemaAnswer'],
+                faqSchemaAnswerOverride: $case['faqSchemaAnswerOverride'],
+            );
+
+            try {
+                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                    'pre',
+                    'canary-00',
+                    $report,
+                    'https://api.test',
+                    'https://frontend.test',
+                    self::BACKEND_SHA,
+                    self::FRONTEND_SHA,
+                );
+                $this->fail('Expected an incomplete or stale FAQ schema answer to fail closed.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('html_schema_faq_mismatch', $exception->getMessage());
+            }
+        }
+    }
+
     public function test_readback_rejects_authority_content_present_only_in_hydration_script(): void
     {
         $this->seedPublishedEstate();
@@ -1750,6 +1814,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $partialVisibleEvidence = false,
         bool $omitVisibleEvidenceLimitations = false,
         bool $authorityContentOnlyInHydrationScript = false,
+        bool $emitFaqSchema = false,
+        bool $omitFaqSchemaAnswer = false,
+        ?string $faqSchemaAnswerOverride = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1757,7 +1824,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1965,6 +2032,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     }
                 }
                 $faqHtml = '';
+                $faqSchemaEntities = [];
                 foreach ($renderedFaq as $faq) {
                     if (! is_array($faq)) {
                         continue;
@@ -1976,7 +2044,25 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         $faqHtml .= (string) Str::markdown($answer);
                     }
                     $faqHtml .= '</section>';
+                    $schemaEntity = [
+                        '@type' => 'Question',
+                        'name' => $question,
+                    ];
+                    if (! $omitFaqSchemaAnswer) {
+                        $schemaEntity['acceptedAnswer'] = [
+                            '@type' => 'Answer',
+                            'text' => $faqSchemaAnswerOverride ?? $answer,
+                        ];
+                    }
+                    $faqSchemaEntities[] = $schemaEntity;
                 }
+                $faqSchemaHtml = $emitFaqSchema
+                    ? '<script type="application/ld+json">'.json_encode([
+                        '@context' => 'https://schema.org',
+                        '@type' => 'FAQPage',
+                        'mainEntity' => $faqSchemaEntities,
+                    ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).'</script>'
+                    : '';
                 $evidenceHtml = '';
                 if (! $omitVisibleEvidence) {
                     foreach ((array) ($authority['sources'] ?? []) as $source) {
@@ -1999,6 +2085,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     .'<meta name="description" content="'.$summary.'">'
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .implode('', $hreflang)
+                    .$faqSchemaHtml
                     .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$faqHtml.$evidenceHtml.$privateLink.'</main>'.$hydrationScript.$privateValue.'</body></html>');
             }
 
