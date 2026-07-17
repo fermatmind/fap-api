@@ -96783,15 +96783,15 @@
       },
       "static_validation": {
         "status": "passed",
-        "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
+        "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 28-file allowlist validation passed after the manifest explicitly added the required nested backend/AGENTS.md contract."
       },
       "github": {
         "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on 53f358ad205bdcc44e8428daad9bc3188c617c29. Its exact-head review found two contract gaps; the scoped repairs require a new full check run before merge."
+        "evidence": "All nine required and security checks passed on 30c33487ec6f16bc0bf440b54be0314d7c17032c. Its exact-head review found a nested repository-rule conflict plus the expected stale checked-head ledger evidence; the scoped rule repair requires a new full check run before merge."
       },
       "codex_review": {
         "status": "exact_head_findings_repaired_locally",
-        "evidence": "Fifteen valid P2 findings were repaired. The two latest exact-head findings aligned scope_type validation with its persisted 64-character column and made production execution separation true for every R1-R4 surface. Codex reviewed 53f358ad205bdcc44e8428daad9bc3188c617c29 exactly; both repairs and their regressions passed the full manifest-focused validation and require exact-head re-review."
+        "evidence": "Seventeen valid P2 findings were repaired. The latest exact-head review confirmed the scope/storage and execution-separation fixes, then found stale checked-head evidence and a conflicting nested backend/AGENTS.md solo_operator rule. The nested contract now adopts global solo_owner semantics and the same @review-surface gate; the manifest explicitly permits that required rule file."
       }
     },
     "scope_validation": {
@@ -96895,8 +96895,13 @@
         "at": "2026-07-17T17:47:19Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on ledger-only head 53f358ad205bdcc44e8428daad9bc3188c617c29. Its exact-head Codex review found that scope_type accepted values longer than its 64-character storage column and that R1 surfaces incorrectly disabled production execution separation. Validation now enforces scope_type <= 64 and scope_identity <= 191, every registered surface requires separate production execution, and the generated inventory was refreshed. The first focused rerun exposed only a test-return-type assertion mistake; after repair, 15 tests with 301 assertions, PHP lint, Pint, Composer, YAML/JSON, generated-inventory parity, and diff checks passed."
+      },
+      {
+        "at": "2026-07-17T17:57:29Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on 30c33487ec6f16bc0bf440b54be0314d7c17032c. Its exact-head Codex review found that backend/AGENTS.md still described the historical Big Five ZH6 solo_operator cohort as a global role-separation exception, conflicting with the root solo_owner contract. The nested contract now makes solo_owner authoritative, keeps the historical label as cohort evidence only, repeats the @review-surface fail-closed rule, and the manifest explicitly adds backend/AGENTS.md to this PR scope. YAML and diff checks passed; a new full check run and exact-head review are required."
       }
     ],
-    "updated_at": "2026-07-17T17:47:19Z"
+    "updated_at": "2026-07-17T17:57:29Z"
   }
 }
