@@ -96757,7 +96757,7 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "ready_to_merge",
+    "status": "review_fix_validated",
     "commit_sha": "a0c380a1e7358ba78aefbafb2219ebe226d7ad19",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
@@ -96786,18 +96786,18 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
       },
       "github": {
-        "status": "passed",
-        "evidence": "All nine required and security checks passed on a0c380a1e7358ba78aefbafb2219ebe226d7ad19. This ledger-only ready-to-merge transition must revalidate before merge."
+        "status": "passed_then_revalidation_required",
+        "evidence": "All nine required and security checks passed on b92bac3f85014570e770ad085b3e42d079d75827. Its exact-head review found a future-modification gap in the foundation-file exemption; the scoped repair requires a new full check run before merge."
       },
       "codex_review": {
-        "status": "exact_head_findings_repaired",
-        "evidence": "Eleven valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, added-lines-only review-gate marker inspection, missing compact-attestation bind markers, an accidental unrelated train-item status edit, and premature ready-to-merge state. Codex reviewed a0c380a1e7358ba78aefbafb2219ebe226d7ad19 exactly; only the two ledger-state corrections in this transition remained."
+        "status": "exact_head_finding_repaired_locally",
+        "evidence": "Twelve valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, added-lines-only review-gate marker inspection, missing compact-attestation bind markers, an accidental unrelated train-item status edit, premature ready-to-merge state, and an unconditional foundation-file exemption. Codex reviewed b92bac3f85014570e770ad085b3e42d079d75827 exactly; the exemption is now limited to exact foundation files added by the current PR, and future modifications are scanned."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96880,8 +96880,13 @@
         "at": "2026-07-17T17:14:55Z",
         "status": "ready_to_merge",
         "note": "All nine checks passed on a0c380a1e7358ba78aefbafb2219ebe226d7ad19. Its exact-head Codex review confirmed the attestation-marker repair and found two ledger-only issues: an unrelated B5 status was changed and this PR1 entry remained prematurely ready before revalidation. The unrelated status is restored and PR1 now certifies the checked implementation head; this final ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T17:25:57Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on ledger-only head b92bac3f85014570e770ad085b3e42d079d75827. Its exact-head Codex review found that the exact foundation-file allowlist would also exempt future modifications. The exemption now requires the file to be both an exact PR1 foundation path and newly added in the current diff; focused architecture validation passed with 6 tests and 233 assertions, PHP lint, Pint, and diff checks passed, and a new full check run plus exact-head review are required."
       }
     ],
-    "updated_at": "2026-07-17T17:14:55Z"
+    "updated_at": "2026-07-17T17:25:57Z"
   }
 }

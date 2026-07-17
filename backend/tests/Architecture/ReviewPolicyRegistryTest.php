@@ -128,10 +128,21 @@ final class ReviewPolicyRegistryTest extends TestCase
         exec($command, $files, $exitCode);
         $this->assertSame(0, $exitCode, 'Unable to inspect branch diff for review gates.');
 
+        $addedCommand = sprintf(
+            'git -C %s diff --name-only --diff-filter=A %s...HEAD -- backend/app backend/database/migrations',
+            escapeshellarg($repoRoot),
+            escapeshellarg($baseRef),
+        );
+        $addedFiles = [];
+        $addedExitCode = 0;
+        exec($addedCommand, $addedFiles, $addedExitCode);
+        $this->assertSame(0, $addedExitCode, 'Unable to inspect added review-governance foundation files.');
+        $addedFileSet = array_fill_keys(array_values(array_unique($addedFiles)), true);
+
         $registered = array_fill_keys(array_column(ReviewPolicyRegistry::all(), 'surface_id'), true);
         $missing = [];
         foreach (array_values(array_unique($files)) as $file) {
-            if ($this->isReviewGovernanceFoundationPath($file)) {
+            if ($this->shouldExemptReviewGovernanceFoundationPath($file, $addedFileSet)) {
                 continue;
             }
             $diffCommand = sprintf(
@@ -164,16 +175,22 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertSame([], $missing, 'New or modified manual-review gates must declare @review-surface with a registered surface ID.');
     }
 
-    public function test_foundation_exemption_does_not_cover_future_review_governance_files(): void
+    public function test_foundation_exemption_only_covers_added_pr1_files(): void
     {
-        $this->assertTrue($this->isReviewGovernanceFoundationPath(
-            'backend/app/Services/ReviewGovernance/ReviewAttestationValidator.php',
+        $foundationFile = 'backend/app/Services/ReviewGovernance/ReviewAttestationValidator.php';
+
+        $this->assertTrue($this->shouldExemptReviewGovernanceFoundationPath(
+            $foundationFile,
+            [$foundationFile => true],
         ));
-        $this->assertFalse($this->isReviewGovernanceFoundationPath(
+        $this->assertFalse($this->shouldExemptReviewGovernanceFoundationPath($foundationFile, []));
+        $this->assertFalse($this->shouldExemptReviewGovernanceFoundationPath(
             'backend/app/Services/ReviewGovernance/FutureApprovalAdapter.php',
+            ['backend/app/Services/ReviewGovernance/FutureApprovalAdapter.php' => true],
         ));
-        $this->assertFalse($this->isReviewGovernanceFoundationPath(
+        $this->assertFalse($this->shouldExemptReviewGovernanceFoundationPath(
             'backend/app/DTO/ReviewGovernance/FutureReviewRequest.php',
+            ['backend/app/DTO/ReviewGovernance/FutureReviewRequest.php' => true],
         ));
     }
 
@@ -217,6 +234,14 @@ final class ReviewPolicyRegistryTest extends TestCase
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
             'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php',
         ], true);
+    }
+
+    /**
+     * @param  array<string, bool>  $addedFileSet
+     */
+    private function shouldExemptReviewGovernanceFoundationPath(string $file, array $addedFileSet): bool
+    {
+        return isset($addedFileSet[$file]) && $this->isReviewGovernanceFoundationPath($file);
     }
 
     private function containsReviewGateMarker(string $source): bool
