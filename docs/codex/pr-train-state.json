@@ -96193,7 +96193,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C",
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
-    "status": "review_fix_local_validation_passed",
+    "status": "ready_to_merge",
     "commit_sha": "cb5d292e539ceccbff3d9b0c68fa8920dea2bb6d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
@@ -96218,14 +96218,14 @@
         "evidence": "All 12 changed PHP files pass php -l and Pint; Composer validate --strict, YAML/JSON parsing, git diff --check, and exact 15-path scope validation pass. No migration was added in 22E; the required private review migration was already fresh-SQLite verified and merged in 22C."
       },
       "github_required": {
-        "status": "pending",
-        "evidence": "Exact head d6a858390408b7434c446d190d22f9e72a9cdffb passed all nine required GitHub checks, then exact-head review raised one valid P2: authority section, FAQ, or evidence text hidden by an inline stylesheet class could still satisfy visible-content readback. The gap is fixed and locally validated at code commit cb5d292e539ceccbff3d9b0c68fa8920dea2bb6d; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "status": "passed",
+        "evidence": "Exact review-fix plus pending-ledger head c33d57bc13f1d26ce09e2768835232bfd7db6f4a passed all nine required GitHub checks, is CLEAN/MERGEABLE, retains the exact 15-path scope, has zero unresolved review threads, and exact-head Codex review completed without another finding. This ready-to-merge metadata head must independently pass one final complete check and exact-head review cycle before squash merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96538,9 +96538,14 @@
         "at": "2026-07-17T07:58:32Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head d6a858390408b7434c446d190d22f9e72a9cdffb passed all nine checks, exact-head review found stylesheet-class hidden authority markup could still satisfy visible section, FAQ, and evidence checks. Code commit cb5d292e539ceccbff3d9b0c68fa8920dea2bb6d converts inline hiding selectors to XPath, marks matched body elements as non-renderable, recognizes common hidden/invisible classes, and fails closed when a hiding selector cannot be verified. The first focused regression used a noncanonical evidence fixture, so it was corrected to the current public v2 source/claim shape before complete reruns. Final V224 51/541, focused 76/1073, cache/API 8/72, classifier 1/2, full Enneagram V2 241/29079, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, exact 15-path scope, and unchanged Career scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T08:09:01Z",
+        "status": "ready_to_merge",
+        "note": "Exact review-fix plus pending-ledger head c33d57bc13f1d26ce09e2768835232bfd7db6f4a passed all nine required GitHub checks, is CLEAN/MERGEABLE, has zero unresolved review threads, retains the exact 15-path scope, and its exact-head Codex review completed without another finding. This ready-to-merge metadata update must independently pass one final complete check and exact-head review cycle before squash merge; production/deploy/CMS/database/media/cache/publication/search actions remain zero."
       }
     ],
-    "updated_at": "2026-07-17T07:58:32Z"
+    "updated_at": "2026-07-17T08:09:01Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
