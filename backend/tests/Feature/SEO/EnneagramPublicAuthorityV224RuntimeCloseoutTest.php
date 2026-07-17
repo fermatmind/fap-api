@@ -721,6 +721,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             '/account',
             '/attempts/private-attempt/report',
             '/checkout',
+            '/ops',
+            '/tenant',
+            '/admin',
+            '/zh-CN/ops',
             '/zh-CN/tests/enneagram/take',
             '/og/share/private-share',
         ] as $privateRoute) {
@@ -1148,9 +1152,12 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
         foreach ([
             ['sitemap', 'additional_url', 'https://frontend.test/api/v0.3/attempts/private-attempt/report'],
+            ['sitemap', 'additional_url', 'https://frontend.test/ops'],
             ['llms', 'additional_llms_url', '/claim/report'],
+            ['llms', 'additional_llms_url', '/tenant'],
             ['llms', 'additional_llms_url', '/zh-CN/tests/enneagram/take'],
             ['llms_full', 'additional_llms_full_url', '/orders/private-order/recover/alipay-return'],
+            ['llms_full', 'additional_llms_full_url', '/zh-CN/admin'],
             ['llms_full', 'additional_llms_full_url', '/og/share/private-share'],
         ] as [$surface, $stateKey, $privatePath]) {
             $discoverabilityState->additional_url = null;

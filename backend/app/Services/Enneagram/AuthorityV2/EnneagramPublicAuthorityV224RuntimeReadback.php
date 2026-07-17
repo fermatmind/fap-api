@@ -880,6 +880,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
 
         $root = (string) ($segments[0] ?? '');
         if (in_array($root, [
+            'admin',
             'api',
             'account',
             'attempt',
@@ -891,6 +892,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'me',
             'order',
             'orders',
+            'ops',
             'pay',
             'payment',
             'payments',
@@ -900,6 +902,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'results',
             'share',
             'shares',
+            'tenant',
         ], true)) {
             return true;
         }
