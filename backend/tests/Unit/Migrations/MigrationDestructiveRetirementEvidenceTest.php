@@ -103,6 +103,32 @@ PHP;
     }
 
     #[Test]
+    public function evidence_bound_retirement_migrations_have_non_destructive_down_methods(): void
+    {
+        foreach ($this->migrationFiles() as $filePath) {
+            $source = (string) file_get_contents($filePath);
+            if (! str_contains($source, 'RETIREMENT_EVIDENCE_ID')) {
+                continue;
+            }
+
+            $downBody = $this->methodBody($source, 'down');
+            $this->assertIsString($downBody, "Missing down() method in {$filePath}");
+
+            $clean = $this->stripComments($downBody);
+            $this->assertDoesNotMatchRegularExpression(
+                '/Schema::drop(?:IfExists)?\s*\(/',
+                $clean,
+                "Evidence-bound retirement must not drop a table in down(): {$filePath}",
+            );
+            $this->assertDoesNotMatchRegularExpression(
+                '/->dropColumn\s*\(/',
+                $clean,
+                "Evidence-bound retirement must not drop a column in down(): {$filePath}",
+            );
+        }
+    }
+
+    #[Test]
     public function attempt_quality_retirement_has_structured_evidence_and_runbook(): void
     {
         $migration = 'database/migrations/2026_03_26_120000_drop_attempt_quality_table.php';
