@@ -77,10 +77,14 @@ final readonly class ReviewAttestationValidator
      */
     private function assertScope(array $payload): void
     {
-        foreach (['scope_type', 'scope_identity'] as $field) {
+        foreach (['scope_type' => 64, 'scope_identity' => 191] as $field => $maxLength) {
             $value = $payload[$field];
-            if (! is_string($value) || trim($value) !== $value || $value === '' || strlen($value) > 191) {
-                throw new ReviewAttestationValidationException('Attestation '.$field.' must be a non-empty trimmed string.');
+            if (! is_string($value) || trim($value) !== $value || $value === '' || strlen($value) > $maxLength) {
+                throw new ReviewAttestationValidationException(sprintf(
+                    'Attestation %s must be a non-empty trimmed string of at most %d characters.',
+                    $field,
+                    $maxLength,
+                ));
             }
         }
     }

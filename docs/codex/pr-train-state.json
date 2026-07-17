@@ -96757,7 +96757,7 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "ready_to_merge",
+    "status": "review_fix_validated",
     "commit_sha": "03afc3524d039da6dafd0ee19c6fa55c305b9ccd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
@@ -96774,8 +96774,8 @@
         "evidence": "bash backend/scripts/ci_verify_mbti.sh completed with exit 0 after the scoped migration-safety repair."
       },
       "focused_contracts": {
-        "status": "passed",
-        "evidence": "ReviewGovernance unit/feature/architecture tests plus the Big Five runtime-freeze classifier passed: 371 tests, 1001 assertions."
+        "status": "failed_then_repaired_and_passed",
+        "evidence": "The original ReviewGovernance unit/feature/architecture tests plus the Big Five runtime-freeze classifier passed: 371 tests, 1001 assertions. The post-review scope/storage and execution-separation suite initially exposed a test-only array/DTO assertion mistake; after correcting the assertion, the full manifest-focused suite passed: 15 tests, 301 assertions."
       },
       "migration_fresh_sqlite": {
         "status": "passed",
@@ -96786,18 +96786,18 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 27-file allowlist validation passed."
       },
       "github": {
-        "status": "passed",
-        "evidence": "All nine required and security checks passed on 03afc3524d039da6dafd0ee19c6fa55c305b9ccd. This ledger-only ready-to-merge transition must revalidate before merge."
+        "status": "passed_then_revalidation_required",
+        "evidence": "All nine required and security checks passed on 53f358ad205bdcc44e8428daad9bc3188c617c29. Its exact-head review found two contract gaps; the scoped repairs require a new full check run before merge."
       },
       "codex_review": {
-        "status": "exact_head_findings_repaired",
-        "evidence": "Thirteen valid P2 findings were repaired: exec output accumulation, scalar target coercion, two over-broad future-file exemptions, a concurrent-bind unique-key race, MySQL JSON key-order comparison, stale ledger commit evidence, added-lines-only review-gate marker inspection, missing compact-attestation bind markers, an accidental unrelated train-item status edit, premature ready-to-merge state, an unconditional foundation-file exemption, and final stale checked-head evidence. Codex reviewed 03afc3524d039da6dafd0ee19c6fa55c305b9ccd exactly; only this ledger correction remained."
+        "status": "exact_head_findings_repaired_locally",
+        "evidence": "Fifteen valid P2 findings were repaired. The two latest exact-head findings aligned scope_type validation with its persisted 64-character column and made production execution separation true for every R1-R4 surface. Codex reviewed 53f358ad205bdcc44e8428daad9bc3188c617c29 exactly; both repairs and their regressions passed the full manifest-focused validation and require exact-head re-review."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -96890,8 +96890,13 @@
         "at": "2026-07-17T17:34:09Z",
         "status": "ready_to_merge",
         "note": "All nine checks passed on 03afc3524d039da6dafd0ee19c6fa55c305b9ccd. Its exact-head Codex review confirmed the added-only foundation exemption and found only that the ledger still certified the pre-fix head. The ledger now certifies the actual checked implementation head; this final ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T17:47:19Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on ledger-only head 53f358ad205bdcc44e8428daad9bc3188c617c29. Its exact-head Codex review found that scope_type accepted values longer than its 64-character storage column and that R1 surfaces incorrectly disabled production execution separation. Validation now enforces scope_type <= 64 and scope_identity <= 191, every registered surface requires separate production execution, and the generated inventory was refreshed. The first focused rerun exposed only a test-return-type assertion mistake; after repair, 15 tests with 301 assertions, PHP lint, Pint, Composer, YAML/JSON, generated-inventory parity, and diff checks passed."
       }
     ],
-    "updated_at": "2026-07-17T17:34:09Z"
+    "updated_at": "2026-07-17T17:47:19Z"
   }
 }

@@ -66,15 +66,14 @@ final class ReviewPolicyRegistryTest extends TestCase
             $this->assertSame('solo_owner', $row['review_mode']);
             $this->assertTrue($row['compact_attestation_supported']);
             $this->assertTrue($row['same_actor_allowed']);
+            $this->assertTrue($row['production_execution_separate']);
             $this->assertNotSame('', $row['public_projection']);
             $this->assertNotSame('', $row['migration_pr']);
             if ($row['risk_tier'] === 'R3') {
                 $this->assertTrue($row['step_up_required']);
-                $this->assertTrue($row['production_execution_separate']);
             }
             if ($row['external_evidence_required']) {
                 $this->assertSame('R4', $row['risk_tier']);
-                $this->assertTrue($row['production_execution_separate']);
             }
         }
     }

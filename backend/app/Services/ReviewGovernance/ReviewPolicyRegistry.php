@@ -94,7 +94,7 @@ final class ReviewPolicyRegistry
                 'compact_attestation_supported' => true,
                 'same_actor_allowed' => true,
                 'step_up_required' => $riskTier === 'R3',
-                'production_execution_separate' => in_array($riskTier, ['R2', 'R3', 'R4'], true),
+                'production_execution_separate' => true,
                 'public_projection' => $publicProjection,
                 'external_evidence_required' => $externalEvidenceRequired,
                 'migration_pr' => $migrationPr,

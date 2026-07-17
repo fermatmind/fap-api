@@ -134,6 +134,21 @@ final class ReviewAttestationContractTest extends TestCase
         $this->expectValidationFailure(fn () => $service->preflight($invalidException, $this->targets()));
     }
 
+    public function test_scope_lengths_match_the_persisted_contract(): void
+    {
+        $factory = app(ReviewAttestationFactory::class);
+        $service = app(ReviewAttestationService::class);
+
+        $valid = $factory->make(str_repeat('s', 64), str_repeat('i', 191), 'approved_all', $this->targets());
+        $this->assertSame(str_repeat('s', 64), $service->preflight($valid, $this->targets())['scope_type']);
+
+        $tooLongScopeType = $factory->make(str_repeat('s', 65), 'cms:sample', 'approved_all', $this->targets());
+        $this->expectValidationFailure(fn () => $service->preflight($tooLongScopeType, $this->targets()));
+
+        $tooLongScopeIdentity = $factory->make('batch', str_repeat('i', 192), 'approved_all', $this->targets());
+        $this->expectValidationFailure(fn () => $service->preflight($tooLongScopeIdentity, $this->targets()));
+    }
+
     /**
      * @return list<array{target_identity: string, target_sha256: string}>
      */
