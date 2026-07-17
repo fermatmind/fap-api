@@ -200,7 +200,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_solo_owner_review_foundation_files(): void
+    public function test_runtime_freeze_classifier_ignores_only_new_solo_owner_review_foundation_files(): void
     {
         $allowed = [
             'backend/app/Console/Commands/ReviewAttestationPreflight.php',
@@ -217,8 +217,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_07_17_150100_publish_review_attestations.php',
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
         ];
+        $modifiedFoundationFiles = [
+            'backend/app/Services/ReviewGovernance/ReviewAttestationService.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationValidator.php',
+        ];
 
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $allowed,
+            '',
+            '',
+            soloOwnerReviewFoundationAddedFiles: $allowed,
+        ));
+        $this->assertSame(
+            $modifiedFoundationFiles,
+            $this->mbtiImpactingRuntimeChanges(
+                $modifiedFoundationFiles,
+                '',
+                '',
+                soloOwnerReviewFoundationAddedFiles: [],
+            ),
+        );
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
@@ -5924,7 +5942,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
         $this->assertSame(0, $exitCode);
 
-        return $this->mbtiImpactingRuntimeChanges(array_values(array_unique(array_filter($output))), $repoRoot, $baseRef);
+        $addedCommand = array_merge(
+            ['git', '-C', $repoRoot, 'diff', '--name-only', '--diff-filter=A', "{$baseRef}...HEAD", '--'],
+            $paths,
+        );
+        $addedOutput = [];
+        $addedExitCode = 0;
+        exec(implode(' ', array_map('escapeshellarg', $addedCommand)), $addedOutput, $addedExitCode);
+        $this->assertSame(0, $addedExitCode);
+
+        return $this->mbtiImpactingRuntimeChanges(
+            array_values(array_unique(array_filter($output))),
+            $repoRoot,
+            $baseRef,
+            soloOwnerReviewFoundationAddedFiles: array_values(array_unique(array_filter($addedOutput))),
+        );
     }
 
     /**
@@ -5953,11 +5985,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $shareControllerChangedLines = null,
         ?array $opsAccessControlChangedLines = null,
         ?array $scaleLookupControllerChangedLines = null,
+        ?array $soloOwnerReviewFoundationAddedFiles = null,
     ): array {
         $impacting = [];
+        $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
+            $soloOwnerReviewFoundationAddedFiles ?? [],
+            true,
+        );
 
         foreach ($changed as $file) {
-            if ($this->isSoloOwnerReviewFoundationFile($file)) {
+            if (
+                $this->isSoloOwnerReviewFoundationFile($file)
+                && isset($soloOwnerReviewFoundationAddedFileSet[$file])
+            ) {
                 continue;
             }
 
