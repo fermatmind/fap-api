@@ -87,6 +87,43 @@ PHP;
     }
 
     #[Test]
+    public function mixed_literal_and_dynamic_drop_columns_fail_closed(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_dynamic_media_column.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('personality_public_content_assets', function (Blueprint $table): void {
+            $column = 'media_authority';
+            $table->dropColumn(['media_json', $column]);
+        });
+    }
+};
+PHP;
+        $operations = $this->destructiveUpOperations($migration, $source);
+
+        $this->assertSame([
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_json'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => '__dynamic_drop_column_expression__'],
+        ], $operations);
+        $this->assertSame(
+            [
+                "{$migration} drops media_json without retirement evidence",
+                "{$migration} drops __dynamic_drop_column_expression__ without retirement evidence",
+            ],
+            $this->missingEvidence($operations, []),
+        );
+    }
+
+    #[Test]
     public function current_destructive_migrations_have_bound_retirement_evidence(): void
     {
         $evidenceByMigration = $this->evidenceByMigration();
@@ -230,11 +267,17 @@ PHP;
 
         if (preg_match_all('/->dropColumn\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
             foreach ($matches[1] as $arguments) {
-                if (preg_match_all('/[\'"]([^\'"]+)[\'"]/', (string) $arguments, $columns) === 0) {
-                    $columns[1] = ['__dynamic_drop_column_expression__'];
+                $argumentSource = (string) $arguments;
+                $literalCount = preg_match_all('/[\'"]([^\'"]+)[\'"]/', $argumentSource, $columns);
+                $literalColumns = $literalCount === false ? [] : $columns[1];
+                $withoutLiterals = preg_replace('/[\'"][^\'"]+[\'"]/', '', $argumentSource);
+                $nonLiteralExpression = preg_replace('/[\s\[\],]/', '', $withoutLiterals ?? $argumentSource);
+
+                if ($literalColumns === [] || $nonLiteralExpression !== '') {
+                    $literalColumns[] = '__dynamic_drop_column_expression__';
                 }
 
-                foreach ($columns[1] as $column) {
+                foreach ($literalColumns as $column) {
                     $operations[] = [
                         'migration' => $migration,
                         'operation' => 'drop_column',
