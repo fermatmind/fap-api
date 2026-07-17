@@ -28,7 +28,16 @@ fail() {
 echo "[PR71][VERIFY] start"
 
 BLOCKED_OUT="${ART_DIR}/blocked_patterns.txt"
-if rg -n --glob '*.php' "dropIfExists\(|dropColumn\(|dropTable\(|renameColumn\(|->change\(" "${MIG_DIR}" > "${BLOCKED_OUT}"; then
+: > "${BLOCKED_OUT}"
+rg -n -U --glob '*.php' "dropIfExists\s*\(|dropTable\s*\(|renameColumn\s*\(|->\s*change\s*\(" "${MIG_DIR}" >> "${BLOCKED_OUT}" || true
+
+while IFS= read -r migration; do
+  if ! rg -q "RETIREMENT_EVIDENCE_ID" "${migration}"; then
+    rg -n -U "dropColumn\s*\(" "${migration}" >> "${BLOCKED_OUT}"
+  fi
+done < <(rg -l -U --glob '*.php' "dropColumn\s*\(" "${MIG_DIR}" || true)
+
+if [[ -s "${BLOCKED_OUT}" ]]; then
   fail "blocked migration pattern detected"
 fi
 
@@ -38,6 +47,7 @@ fi
   php artisan test --filter MigrationRollbackSafetyTest
   php artisan test --filter MigrationsNoSilentCatchTest
   php artisan test --filter MigrationProtectedTablesNoDropTest
+  php artisan test --filter MigrationDestructiveRetirementEvidenceTest
 ) || fail "migration safety tests failed"
 
 echo "verify=pass" > "${ART_DIR}/verify_done.txt"

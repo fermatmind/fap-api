@@ -45,6 +45,185 @@ PHP;
     }
 
     #[Test]
+    public function array_drop_columns_require_bound_evidence_for_every_column(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_media_columns.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('personality_public_content_assets', function (Blueprint $table): void {
+            $table->dropColumn(['media_json', 'media_authority']);
+        });
+    }
+};
+PHP;
+        $evidence = [
+            $migration => [
+                'operation' => 'drop_column',
+                'table' => 'media_json',
+                'runbook' => 'docs/migrations/personality-public-content-media-retirement-runbook.md',
+                'production_archive_status' => 'not_asserted_by_repository',
+            ],
+        ];
+
+        $operations = $this->destructiveUpOperations($migration, $source);
+
+        $this->assertSame([
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_json'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_authority'],
+        ], $operations);
+        $this->assertSame(
+            ["{$migration} has incomplete retirement evidence for media_authority"],
+            $this->missingEvidence($operations, $evidence),
+        );
+    }
+
+    #[Test]
+    public function mixed_literal_and_dynamic_drop_columns_fail_closed(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_dynamic_media_column.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('personality_public_content_assets', function (Blueprint $table): void {
+            $column = 'media_authority';
+            $table->dropColumn(['media_json', $column]);
+        });
+    }
+};
+PHP;
+        $operations = $this->destructiveUpOperations($migration, $source);
+
+        $this->assertSame([
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_json'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => '__dynamic_drop_column_expression__'],
+        ], $operations);
+        $this->assertSame(
+            [
+                "{$migration} drops media_json without retirement evidence",
+                "{$migration} uses unresolved destructive target __dynamic_drop_column_expression__",
+            ],
+            $this->missingEvidence($operations, []),
+        );
+    }
+
+    #[Test]
+    public function dynamic_table_and_interpolated_column_drops_fail_closed(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_dynamic_targets.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        $tableName = 'retired_table';
+        Schema::drop($tableName);
+
+        Schema::table('personality_public_content_assets', function (Blueprint $table): void {
+            $suffix = 'json';
+            $table->dropColumn(["media_$suffix"]);
+        });
+    }
+};
+PHP;
+        $operations = $this->destructiveUpOperations($migration, $source);
+
+        $this->assertSame([
+            ['migration' => $migration, 'operation' => 'drop_table', 'table' => '__dynamic_drop_table_expression__'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_$suffix'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => '__dynamic_drop_column_expression__'],
+        ], $operations);
+        $this->assertCount(3, $this->missingEvidence($operations, []));
+    }
+
+    #[Test]
+    public function dynamic_drop_targets_cannot_be_evidenced(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_dynamic_table.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        $tableName = 'retired_table';
+        Schema::drop($tableName);
+    }
+};
+PHP;
+        $operations = $this->destructiveUpOperations($migration, $source);
+        $evidence = [
+            $migration => [
+                'operation' => 'drop_table',
+                'table' => '__dynamic_drop_table_expression__',
+                'runbook' => 'docs/migrations/attempt-quality-retirement-runbook.md',
+                'production_archive_status' => 'not_asserted_by_repository',
+            ],
+        ];
+
+        $this->assertSame(
+            ["{$migration} uses unresolved destructive target __dynamic_drop_table_expression__"],
+            $this->missingEvidence($operations, $evidence),
+        );
+    }
+
+    #[Test]
+    public function destructive_helper_calls_are_outside_direct_up_evidence(): void
+    {
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('personality_public_content_assets', fn (Blueprint $table) => $this->retireMedia($table));
+    }
+
+    private function retireMedia(Blueprint $table): void
+    {
+        $table->dropColumn('media_json');
+    }
+};
+PHP;
+        $upBody = $this->methodBody($source, 'up');
+
+        $this->assertIsString($upBody);
+        $this->assertSame(1, $this->destructiveCallCount($source));
+        $this->assertSame(0, $this->destructiveCallCount($upBody));
+    }
+
+    #[Test]
     public function current_destructive_migrations_have_bound_retirement_evidence(): void
     {
         $evidenceByMigration = $this->evidenceByMigration();
@@ -58,6 +237,46 @@ PHP;
 
         $this->assertNotEmpty($operations, 'Expected at least one destructive retirement migration to be evidence-gated.');
         $this->assertSame([], $this->missingEvidence($operations, $evidenceByMigration));
+
+        foreach ($evidenceByMigration as $migration => $evidence) {
+            $source = (string) file_get_contents(base_path($migration));
+            $this->assertStringContainsString((string) $evidence['id'], $source);
+        }
+    }
+
+    #[Test]
+    public function evidence_bound_retirement_migrations_have_non_destructive_down_methods(): void
+    {
+        foreach ($this->evidenceByMigration() as $migration => $evidence) {
+            $filePath = base_path($migration);
+            $this->assertFileExists($filePath);
+
+            $source = (string) file_get_contents($filePath);
+            $this->assertStringContainsString((string) $evidence['id'], $source);
+
+            $upBody = $this->methodBody($source, 'up');
+            $this->assertIsString($upBody, "Missing up() method in {$filePath}");
+            $this->assertSame(
+                $this->destructiveCallCount($source),
+                $this->destructiveCallCount($upBody),
+                "Evidence-bound retirement has a destructive call outside direct up(): {$filePath}",
+            );
+
+            $downBody = $this->methodBody($source, 'down');
+            $this->assertIsString($downBody, "Missing down() method in {$filePath}");
+
+            $clean = $this->stripComments($downBody);
+            $this->assertDoesNotMatchRegularExpression(
+                '/Schema\s*::\s*drop(?:IfExists)?\s*\(/',
+                $clean,
+                "Evidence-bound retirement must not drop a table in down(): {$filePath}",
+            );
+            $this->assertDoesNotMatchRegularExpression(
+                '/->\s*dropColumn\s*\(/',
+                $clean,
+                "Evidence-bound retirement must not drop a column in down(): {$filePath}",
+            );
+        }
     }
 
     #[Test]
@@ -91,8 +310,8 @@ PHP;
 
         $this->assertIsString($downBody);
         $clean = $this->stripComments($downBody);
-        $this->assertDoesNotMatchRegularExpression('/Schema::drop(?:IfExists)?\s*\(/', $clean);
-        $this->assertDoesNotMatchRegularExpression('/->dropColumn\s*\(/', $clean);
+        $this->assertDoesNotMatchRegularExpression('/Schema\s*::\s*drop(?:IfExists)?\s*\(/', $clean);
+        $this->assertDoesNotMatchRegularExpression('/->\s*dropColumn\s*\(/', $clean);
     }
 
     /**
@@ -115,7 +334,11 @@ PHP;
             $this->assertIsArray($entry);
             $migration = (string) ($entry['migration'] ?? '');
             $this->assertNotSame('', $migration);
+            $this->assertIsString($entry['id'] ?? null);
+            $this->assertNotSame('', $entry['id']);
             $this->assertArrayNotHasKey($migration, $byMigration, "Duplicate destructive migration evidence for {$migration}");
+            $this->assertFalse((bool) ($entry['production_execution_allowed_by_repository'] ?? true));
+            $this->assertTrue((bool) ($entry['operator_checklist_required'] ?? false));
             $byMigration[$migration] = $entry;
         }
 
@@ -150,27 +373,74 @@ PHP;
         $clean = $this->stripComments($upBody);
         $operations = [];
 
-        if (preg_match_all('/Schema::drop(?:IfExists)?\s*\(\s*[\'"]([^\'"]+)[\'"]\s*\)/', $clean, $matches) > 0) {
-            foreach ($matches[1] as $table) {
-                $operations[] = [
-                    'migration' => $migration,
-                    'operation' => 'drop_table',
-                    'table' => strtolower((string) $table),
-                ];
+        if (preg_match_all('/Schema\s*::\s*drop(?:IfExists)?\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
+            foreach ($matches[1] as $arguments) {
+                foreach ($this->destructiveArgumentValues(
+                    (string) $arguments,
+                    '__dynamic_drop_table_expression__',
+                ) as $table) {
+                    $operations[] = [
+                        'migration' => $migration,
+                        'operation' => 'drop_table',
+                        'table' => strtolower($table),
+                    ];
+                }
             }
         }
 
-        if (preg_match_all('/->dropColumn\s*\(\s*[\'"]([^\'"]+)[\'"]\s*\)/', $clean, $matches) > 0) {
-            foreach ($matches[1] as $column) {
-                $operations[] = [
-                    'migration' => $migration,
-                    'operation' => 'drop_column',
-                    'table' => strtolower((string) $column),
-                ];
+        if (preg_match_all('/->\s*dropColumn\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
+            foreach ($matches[1] as $arguments) {
+                foreach ($this->destructiveArgumentValues(
+                    (string) $arguments,
+                    '__dynamic_drop_column_expression__',
+                ) as $column) {
+                    $operations[] = [
+                        'migration' => $migration,
+                        'operation' => 'drop_column',
+                        'table' => strtolower($column),
+                    ];
+                }
             }
         }
 
         return $operations;
+    }
+
+    private function destructiveCallCount(string $source): int
+    {
+        $clean = $this->stripComments($source);
+        $tableDrops = preg_match_all('/Schema\s*::\s*drop(?:IfExists)?\s*\(/s', $clean);
+        $columnDrops = preg_match_all('/->\s*dropColumn\s*\(/s', $clean);
+
+        return ($tableDrops === false ? 0 : $tableDrops)
+            + ($columnDrops === false ? 0 : $columnDrops);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function destructiveArgumentValues(string $arguments, string $dynamicSentinel): array
+    {
+        $literalMatches = [];
+        $literalCount = preg_match_all('/([\'"])([^\'"]*)\1/', $arguments, $literalMatches, PREG_SET_ORDER);
+        $literalValues = [];
+        $hasInterpolatedLiteral = false;
+
+        if ($literalCount !== false) {
+            foreach ($literalMatches as $match) {
+                $literalValues[] = (string) $match[2];
+                $hasInterpolatedLiteral = $hasInterpolatedLiteral
+                    || ($match[1] === '"' && str_contains((string) $match[2], '$'));
+            }
+        }
+
+        $withoutLiterals = preg_replace('/([\'"])([^\'"]*)\1/', '', $arguments);
+        $nonLiteralExpression = preg_replace('/[\s\[\],]/', '', $withoutLiterals ?? $arguments);
+        if ($literalValues === [] || $nonLiteralExpression !== '' || $hasInterpolatedLiteral) {
+            $literalValues[] = $dynamicSentinel;
+        }
+
+        return $literalValues;
     }
 
     /**
@@ -184,6 +454,12 @@ PHP;
 
         foreach ($operations as $operation) {
             $migration = $operation['migration'];
+            if (str_starts_with($operation['table'], '__dynamic_drop_')) {
+                $missing[] = "{$migration} uses unresolved destructive target {$operation['table']}";
+
+                continue;
+            }
+
             $evidence = $evidenceByMigration[$migration] ?? null;
 
             if (! is_array($evidence)) {
