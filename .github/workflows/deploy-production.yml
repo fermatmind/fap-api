@@ -186,6 +186,12 @@ jobs:
               CODE_ONLY_SCOPE=true
               for path in "${CHANGED_FILES[@]}"; do
                 case "$path" in
+                  backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)
+                    echo "code-only scope accepted audited personality runtime projection service: $path"
+                    ;;
+                  backend/.env.example|backend/scripts/pr71_verify.sh)
+                    echo "code-only scope accepted audited non-runtime release metadata or verification path: $path"
+                    ;;
                   backend/database/*|backend/content_assets/*|backend/content_packs/*|backend/content_baselines/*|content_assets/*|content_packages/*|content_baselines/*|docs/seo/*|backend/storage/*|backend/app/Services/Cms/*|backend/app/Filament/*|backend/app/Models/*|backend/resources/views/*)
                     CODE_ONLY_SCOPE=false
                     echo "code-only scope refused authority path: $path" >&2

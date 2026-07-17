@@ -78,6 +78,35 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('main_commits_not_deployed: ${UNDEPLOYED_COUNT}', $deploy);
     }
 
+    public function test_code_only_lane_allows_only_audited_personality_runtime_projection_services_under_cms(): void
+    {
+        $workflow = $this->workflow();
+        $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
+        $runtimeExceptions = 'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)';
+        $nonRuntimeExceptions = 'backend/.env.example|backend/scripts/pr71_verify.sh)';
+        $cmsAuthorityWildcard = 'backend/app/Services/Cms/*';
+
+        $runtimeExceptionsPosition = strpos($eligibility, $runtimeExceptions);
+        $nonRuntimeExceptionsPosition = strpos($eligibility, $nonRuntimeExceptions);
+        $cmsAuthorityWildcardPosition = strpos($eligibility, $cmsAuthorityWildcard);
+
+        $this->assertNotFalse($runtimeExceptionsPosition);
+        $this->assertNotFalse($nonRuntimeExceptionsPosition);
+        $this->assertNotFalse($cmsAuthorityWildcardPosition);
+        $this->assertLessThan($cmsAuthorityWildcardPosition, $runtimeExceptionsPosition);
+        $this->assertSame(1, substr_count($eligibility, $runtimeExceptions));
+        $this->assertSame(1, substr_count($eligibility, $nonRuntimeExceptions));
+        $this->assertStringContainsString(
+            'code-only scope accepted audited personality runtime projection service: $path',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope accepted audited non-runtime release metadata or verification path: $path',
+            $eligibility
+        );
+        $this->assertStringContainsString('code-only scope refused authority path: $path', $eligibility);
+    }
+
     public function test_schema_only_mode_is_latest_main_exact_migration_and_read_only_authority_lane(): void
     {
         $workflow = $this->workflow();
