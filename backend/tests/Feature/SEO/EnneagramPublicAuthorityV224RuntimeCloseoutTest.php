@@ -563,6 +563,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_html_readback_rejects_robots_directive_drift(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, robotsHtmlOverride: 'noindex,nofollow');
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected HTML robots directive drift to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_robots_mismatch', $exception->getMessage());
+        }
+    }
+
     public function test_post_readback_rejects_case_folded_dom_split_private_reviewer_name_leak(): void
     {
         $this->seedPublishedEstate();
@@ -728,7 +750,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $this->assertSame(8, $result['target_count']);
     }
 
-    public function test_readback_rejects_missing_or_stale_faq_schema_answers(): void
+    public function test_readback_rejects_missing_incomplete_or_stale_faq_schema_answers(): void
     {
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
@@ -740,12 +762,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
 
         foreach ([
-            ['omitFaqSchemaAnswer' => true, 'faqSchemaAnswerOverride' => null],
-            ['omitFaqSchemaAnswer' => false, 'faqSchemaAnswerOverride' => 'Stale structured answer.'],
+            ['emitFaqSchema' => false, 'omitFaqSchemaAnswer' => false, 'faqSchemaAnswerOverride' => null],
+            ['emitFaqSchema' => true, 'omitFaqSchemaAnswer' => true, 'faqSchemaAnswerOverride' => null],
+            ['emitFaqSchema' => true, 'omitFaqSchemaAnswer' => false, 'faqSchemaAnswerOverride' => 'Stale structured answer.'],
         ] as $case) {
             $this->fakeRuntimeHttp(
                 $report,
-                emitFaqSchema: true,
+                emitFaqSchema: $case['emitFaqSchema'],
                 omitFaqSchemaAnswer: $case['omitFaqSchemaAnswer'],
                 faqSchemaAnswerOverride: $case['faqSchemaAnswerOverride'],
             );
@@ -1814,9 +1837,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         bool $partialVisibleEvidence = false,
         bool $omitVisibleEvidenceLimitations = false,
         bool $authorityContentOnlyInHydrationScript = false,
-        bool $emitFaqSchema = false,
+        bool $emitFaqSchema = true,
         bool $omitFaqSchemaAnswer = false,
         ?string $faqSchemaAnswerOverride = null,
+        ?string $robotsHtmlOverride = null,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => 'https://frontend.test'.$path, $paths);
@@ -1824,7 +1848,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $stalePublicPayload): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -1925,6 +1949,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'seo' => $stalePublicPayload
                             ? ['description' => $payloadSummary]
                             : (is_array($asset->seo_json) ? $asset->seo_json : []),
+                        'robots' => (string) $asset->robots,
                         'canonical_path' => (string) data_get($asset->canonical_json, 'path'),
                         'hreflang' => $hreflang,
                         'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
@@ -1981,6 +2006,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
                 $title = htmlspecialchars($renderedTitle, ENT_QUOTES | ENT_HTML5);
                 $summary = htmlspecialchars($renderedSummary, ENT_QUOTES | ENT_HTML5);
+                $robots = htmlspecialchars(
+                    $robotsHtmlOverride ?? (string) $asset->robots,
+                    ENT_QUOTES | ENT_HTML5,
+                );
                 $canonical = htmlspecialchars(
                     $canonicalUrlOverride ?? 'https://frontend.test'.$path,
                     ENT_QUOTES | ENT_HTML5,
@@ -2083,6 +2112,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
+                    .'<meta name="robots" content="'.$robots.'">'
                     .'<link rel="canonical" href="'.$canonical.'">'
                     .implode('', $hreflang)
                     .$faqSchemaHtml

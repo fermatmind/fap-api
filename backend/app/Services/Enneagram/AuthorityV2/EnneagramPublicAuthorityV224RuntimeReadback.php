@@ -257,6 +257,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'summary' => (string) $asset->summary,
             'sections' => is_array($asset->content_sections_json) ? $asset->content_sections_json : [],
             'seo' => is_array($asset->seo_json) ? $asset->seo_json : [],
+            'robots' => (string) $asset->robots,
             'canonical_path' => (string) data_get($asset->canonical_json, 'path', ''),
             'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
             'source_package' => $asset->source_package,
@@ -268,6 +269,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'summary' => (string) ($v1['summary'] ?? ''),
             'sections' => is_array($v1['sections'] ?? null) ? $v1['sections'] : [],
             'seo' => is_array($v1['seo'] ?? null) ? $v1['seo'] : [],
+            'robots' => (string) ($v1['robots'] ?? ''),
             'canonical_path' => (string) ($v1['canonical_path'] ?? ''),
             'faq' => is_array($v1['faq'] ?? null) ? $v1['faq'] : [],
             'source_package' => $v1['source_package'] ?? null,
@@ -522,6 +524,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $title = trim((string) $xpath->evaluate('string(//title[1])'));
         $h1 = trim((string) $xpath->evaluate('string(//h1[1])'));
         $description = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="description"]/@content)'));
+        $robots = trim((string) $xpath->evaluate('string(//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="robots"]/@content)'));
         $canonical = trim((string) $xpath->evaluate('string(//link[translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="canonical"]/@href)'));
         if ($title === '' || $h1 === '' || $description === '') {
             $issues[] = 'html_title_description_or_h1_missing';
@@ -533,6 +536,10 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         }
         if ($expectedDescription !== '' && $description !== $expectedDescription) {
             $issues[] = 'html_description_mismatch';
+        }
+        $expectedRobots = $this->normalizedRobotsDirective((string) ($v1['robots'] ?? ''));
+        if ($expectedRobots === '' || $this->normalizedRobotsDirective($robots) !== $expectedRobots) {
+            $issues[] = 'html_robots_mismatch';
         }
         if (! $this->isExactFrontendUrl($canonical, $frontendBaseUrl, $path)) {
             $issues[] = 'html_canonical_mismatch';
@@ -596,6 +603,8 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 }
             }
         }
+        $observedFaqAnswers = [];
+        $faqSchemaInvalid = false;
         foreach ($xpath->query('//script[@type="application/ld+json"]') ?: [] as $script) {
             $schema = json_decode((string) $script->textContent, true);
             if (! is_array($schema)) {
@@ -608,14 +617,25 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 $answer = $this->normalizedMarkdownText($entry['answer']);
                 if ($question === ''
                     || $answer === ''
-                    || ($expectedFaqAnswers[$question] ?? null) !== $answer
                     || ! str_contains($visible, $question)
-                    || ! str_contains($visible, $answer)) {
-                    $issues[] = 'html_schema_faq_mismatch';
-                    break 2;
+                    || ! str_contains($visible, $answer)
+                    || isset($observedFaqAnswers[$question])) {
+                    $faqSchemaInvalid = true;
+                    break;
                 }
+                $observedFaqAnswers[$question] = $answer;
             }
         }
+        ksort($expectedFaqAnswers);
+        ksort($observedFaqAnswers);
+        if ($faqSchemaInvalid || $expectedFaqAnswers !== $observedFaqAnswers) {
+            $issues[] = 'html_schema_faq_mismatch';
+        }
+    }
+
+    private function normalizedRobotsDirective(string $value): string
+    {
+        return strtolower((string) preg_replace('/\s+/', '', trim($value)));
     }
 
     /** @param array<string,mixed> $schema @return list<array{question:string,answer:string}> */
