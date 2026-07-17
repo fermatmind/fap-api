@@ -1168,6 +1168,28 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_readback_fails_closed_for_nested_stylesheet_at_rule_hiding_authority_content(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $this->fakeRuntimeHttp($report, authorityContentHiddenByNestedAtRule: true);
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'pre',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected nested stylesheet at-rule visibility to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('html_stylesheet_visibility_unverifiable', $exception->getMessage());
+        }
+    }
+
     public function test_post_readback_requires_complete_visible_evidence(): void
     {
         $this->seedPublishedEstate();
@@ -2203,6 +2225,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $standardMediaLeak = null,
         ?string $authorityContentHiddenStyle = null,
         bool $authorityContentHiddenByStylesheet = false,
+        bool $authorityContentHiddenByNestedAtRule = false,
         ?string $apiCanonicalUrlOverride = null,
         ?string $duplicateCanonicalUrl = null,
         ?string $apiHreflangUrlOverride = null,
@@ -2213,7 +2236,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByNestedAtRule, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2524,6 +2547,16 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $faqHtml = '';
                     $evidenceHtml = '';
                     $stylesheetVisibilityHead = '<style>.authority-hidden-by-stylesheet { display: none !important; }</style>';
+                }
+                if ($authorityContentHiddenByNestedAtRule) {
+                    $sectionHtml = '<div class="authority-hidden-by-nested-at-rule">'
+                        .$sectionHtml.$faqHtml.$evidenceHtml
+                        .'</div>';
+                    $faqHtml = '';
+                    $evidenceHtml = '';
+                    $stylesheetVisibilityHead = '<style>.authority-hidden-by-nested-at-rule {'
+                        .' @media all { display: none; }'
+                        .' }</style>';
                 }
                 $standardMediaHead = match ($standardMediaLeak) {
                     'og' => '<meta property="og:image" content="https://frontend.test/hardcoded-og.png">',

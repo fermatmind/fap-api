@@ -1136,8 +1136,13 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                     continue;
                 }
                 $selector = trim((string) ($rule[1] ?? ''));
-                if ($selector === '' || str_starts_with($selector, '@')) {
+                if ($selector === '') {
                     continue;
+                }
+                if (str_starts_with($selector, '@')) {
+                    $issues[] = 'html_stylesheet_visibility_unverifiable';
+
+                    return;
                 }
                 try {
                     $hidden = $xpath->query($converter->toXPath($selector, '//'));
