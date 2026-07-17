@@ -96194,7 +96194,7 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-CACHE-REVALIDATION-WEB-22D"
     ],
     "status": "review_fix_local_validation_passed",
-    "commit_sha": "a27c9fe89f3cc0a8d0cedb7156b9d85074ba3651",
+    "commit_sha": "65d43491a5791e692a40b84e0cda61bc2f880d66",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3145",
     "checks": {
       "dependency": {
@@ -96203,7 +96203,7 @@
       },
       "focused_runtime_closeout": {
         "status": "passed",
-        "evidence": "V205/V206/V223/V224 pass 67 tests / 1005 assertions; V224 passes 42 tests / 473 assertions. FAQPage JSON-LD is now an exact question/answer set match whenever the public API exposes FAQ, and HTML robots is bound to the current API/DB directive. Missing schema, missing/stale answer, and noindex drift regressions pass. The complete authorized 116-page execute/readback, private-review, empty-media, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
+        "evidence": "V205/V206/V223/V224 pass 69 tests / 1016 assertions; V224 passes 44 tests / 484 assertions. Hreflang locale/path plus graph metadata is bound from DB to API while HTML still requires the exact runtime frontend origin. Standard og:image, twitter:image, JSON-LD image, and main-content img/picture surfaces now fail the empty-media contract. The complete authorized 116-page execute/readback, private-review, rollback, cache, HMAC 116/0, and 8 + 9x12 coverage remain green."
       },
       "cache_and_public_api": {
         "status": "passed",
@@ -96211,7 +96211,7 @@
       },
       "full_enneagram_v2": {
         "status": "passed",
-        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 232 tests / 29011 assertions with complete FAQ schema-set and HTML robots parity enforced alongside the API, HTML, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
+        "evidence": "Final php artisan test --filter=EnneagramPublicAuthorityV2 passed 234 tests / 29022 assertions with DB/API hreflang parity and standard HTML/schema empty-media surfaces enforced alongside FAQ, robots, API, DOM, sitemap, llms.txt, and llms-full.txt runtime boundaries."
       },
       "static_and_scope": {
         "status": "passed",
@@ -96219,7 +96219,7 @@
       },
       "github_required": {
         "status": "pending",
-        "evidence": "Exact head fd3fa89617cd140e82a995c19620652bc4b62fb7 passed all nine required GitHub checks, then exact-head review raised two valid P2s: public FAQ could omit FAQPage entirely and HTML robots was not compared with API/DB. Both are fixed and locally validated at code commit a27c9fe89f3cc0a8d0cedb7156b9d85074ba3651; a fresh complete GitHub check and exact-head review cycle is required before merge."
+        "evidence": "Exact head 25a38d0cf6d93e077af119351b89ad64bb5cab61 passed all nine required GitHub checks, then exact-head review raised two valid P2s: hreflang was not included in DB/API parity and standard image surfaces could bypass custom media markers. Both are fixed and locally validated at code commit 65d43491a5791e692a40b84e0cda61bc2f880d66; a fresh complete GitHub check and exact-head review cycle is required before merge."
       }
     },
     "scope_validation": {
@@ -96478,9 +96478,14 @@
         "at": "2026-07-17T02:04:57Z",
         "status": "review_fix_local_validation_passed",
         "note": "After exact head fd3fa89617cd140e82a995c19620652bc4b62fb7 passed all nine checks, exact-head review found public FAQ could omit FAQPage entirely and HTML robots was not compared with API/DB. Code commit a27c9fe89f3cc0a8d0cedb7156b9d85074ba3651 requires the complete normalized FAQ schema question/answer map to equal the public API FAQ map, binds API robots to the current DB asset, and requires exact normalized HTML robots parity. Missing schema, missing/stale answer, and noindex drift regressions pass. Final V224 42/473, focused 67/1005, cache/API 8/72, classifier 1/2, full Enneagram V2 232/29011, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
+      },
+      {
+        "at": "2026-07-17T02:27:54Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "After exact head 25a38d0cf6d93e077af119351b89ad64bb5cab61 passed all nine checks, exact-head review found DB/API hreflang parity and standard image-surface detection gaps. Code commit 65d43491a5791e692a40b84e0cda61bc2f880d66 compares the complete normalized hreflang locale/path and graph metadata map while HTML separately enforces exact runtime origin, and rejects og:image, twitter:image, image_src, main/article image markup, and JSON-LD image fields. The first V224 rerun exposed that the test fake dropped backend graph metadata after promotion; preserving real API shape fixed the fixture without weakening runtime checks. Final V224 44/484, focused 69/1016, cache/API 8/72, classifier 1/2, full Enneagram V2 234/29022, all 12 PHP lint/Pint, Composer, YAML/JSON, diff, and exact 15-path scope checks pass. No production, deploy, CMS, database, media, cache, publication or search action occurred."
       }
     ],
-    "updated_at": "2026-07-17T02:04:57Z"
+    "updated_at": "2026-07-17T02:27:54Z"
   },
   "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23": {
     "id": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
