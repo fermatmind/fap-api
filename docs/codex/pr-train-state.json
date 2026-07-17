@@ -96787,11 +96787,11 @@
       },
       "github": {
         "status": "passed_then_revalidation_required",
-        "evidence": "All nine required and security checks passed on eeba4a5ca00f52520f0d8ad6b1cbe9dada5205ef. Its exact-head review confirmed the exception-order documentation repair, then found a shallow-checkout diff-base gap plus the expected stale checked-head ledger evidence; the scoped architecture repair requires a new full check run before merge."
+        "evidence": "All nine required and security checks passed on bb7bf065e20484c2b39da7f125aea45190abb7f6. Its exact-head review confirmed the shallow-checkout diff-base repair, then found a revision-status marker gap plus the expected stale checked-head ledger evidence; the scoped architecture repair requires a new full check run before merge."
       },
       "codex_review": {
         "status": "exact_head_findings_repaired_locally",
-        "evidence": "Nineteen valid P2 findings were repaired. The latest exact-head review confirmed exception-order documentation and found that the architecture gate assumed origin/main existed in shallow CI clones. Diff-base resolution now supports an explicit override, available remote base, exact GitHub event base SHA with a narrow fetch fallback, and HEAD parent; all scans compare the resolved base tree directly with HEAD."
+        "evidence": "Twenty valid P2 findings were repaired. The latest exact-head review confirmed shallow diff-base resolution and found that changed approval gates using revision_status or STATUS_APPROVED could evade the @review-surface scanner. Both tokens are now fail-closed review-gate markers with a focused regression assertion."
       }
     },
     "scope_validation": {
@@ -96910,8 +96910,13 @@
         "at": "2026-07-17T18:19:38Z",
         "status": "review_fix_validated",
         "note": "All nine checks passed on eeba4a5ca00f52520f0d8ad6b1cbe9dada5205ef. Its exact-head Codex review confirmed the exception-order protocol repair and found that the architecture scanner hard-coded origin/main, which is not guaranteed in default shallow GitHub checkouts. Diff-base resolution now prefers an explicit override or available remote base, otherwise reads and narrowly fetches the exact GitHub pull-request base SHA, then falls back to HEAD parent; direct base-to-HEAD scans avoid a second shallow merge-base assumption. Focused architecture validation passed with 6 tests and 255 assertions plus PHP lint, Pint, and diff checks."
+      },
+      {
+        "at": "2026-07-17T18:28:35Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on bb7bf065e20484c2b39da7f125aea45190abb7f6. Its exact-head Codex review confirmed the shallow-checkout repair and found that changed gates using revision_status or STATUS_APPROVED were not classified as manual approval gates. Those tokens now trigger the changed-file @review-surface scanner with a regression assertion. An initial over-broad attempt also applied the tokens to the all-model inventory scan and exposed a future PR4 surface; that adjacent change was removed, and the scoped architecture suite passed with 6 tests and 256 assertions plus PHP lint, Pint, and diff checks."
       }
     ],
-    "updated_at": "2026-07-17T18:19:38Z"
+    "updated_at": "2026-07-17T18:28:35Z"
   }
 }

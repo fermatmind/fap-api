@@ -200,6 +200,7 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertTrue($this->containsReviewGateMarker('$this->reviewAttestationService->bind($attestation);'));
         $this->assertTrue($this->containsReviewGateMarker('use App\\Services\\ReviewGovernance\\ReviewAttestationValidator;'));
         $this->assertTrue($this->containsReviewGateMarker('$payload[\'review_attestation\'] = $attestation;'));
+        $this->assertTrue($this->containsReviewGateMarker('$revision->revision_status === ArticleTranslationRevision::STATUS_APPROVED'));
         $this->assertFalse($this->containsReviewGateMarker('+    $record->title = $title;'));
     }
 
@@ -324,7 +325,7 @@ final class ReviewPolicyRegistryTest extends TestCase
     private function containsReviewGateMarker(string $source): bool
     {
         return preg_match(
-            '/manual[ _-]?review|human[ _-]?review|reviewer_|review_state|review_status|reviewed_by|reviewed_at|approval_state|approved_by|approved_at|operator_approval|review[ _-]?attestation|ReviewAttestation/i',
+            '/manual[ _-]?review|human[ _-]?review|reviewer_|review_state|review_status|revision_status|STATUS_APPROVED|reviewed_by|reviewed_at|approval_state|approved_by|approved_at|operator_approval|review[ _-]?attestation|ReviewAttestation/i',
             $source,
         ) === 1;
     }
