@@ -45,6 +45,48 @@ PHP;
     }
 
     #[Test]
+    public function array_drop_columns_require_bound_evidence_for_every_column(): void
+    {
+        $migration = 'database/migrations/2099_01_01_000000_drop_media_columns.php';
+        $source = <<<'PHP'
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('personality_public_content_assets', function (Blueprint $table): void {
+            $table->dropColumn(['media_json', 'media_authority']);
+        });
+    }
+};
+PHP;
+        $evidence = [
+            $migration => [
+                'operation' => 'drop_column',
+                'table' => 'media_json',
+                'runbook' => 'docs/migrations/personality-public-content-media-retirement-runbook.md',
+                'production_archive_status' => 'not_asserted_by_repository',
+            ],
+        ];
+
+        $operations = $this->destructiveUpOperations($migration, $source);
+
+        $this->assertSame([
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_json'],
+            ['migration' => $migration, 'operation' => 'drop_column', 'table' => 'media_authority'],
+        ], $operations);
+        $this->assertSame(
+            ["{$migration} has incomplete retirement evidence for media_authority"],
+            $this->missingEvidence($operations, $evidence),
+        );
+    }
+
+    #[Test]
     public function current_destructive_migrations_have_bound_retirement_evidence(): void
     {
         $evidenceByMigration = $this->evidenceByMigration();
@@ -160,13 +202,19 @@ PHP;
             }
         }
 
-        if (preg_match_all('/->dropColumn\s*\(\s*[\'"]([^\'"]+)[\'"]\s*\)/', $clean, $matches) > 0) {
-            foreach ($matches[1] as $column) {
-                $operations[] = [
-                    'migration' => $migration,
-                    'operation' => 'drop_column',
-                    'table' => strtolower((string) $column),
-                ];
+        if (preg_match_all('/->dropColumn\s*\(\s*([^)]*)\)/s', $clean, $matches) > 0) {
+            foreach ($matches[1] as $arguments) {
+                if (preg_match_all('/[\'"]([^\'"]+)[\'"]/', (string) $arguments, $columns) === 0) {
+                    $columns[1] = ['__dynamic_drop_column_expression__'];
+                }
+
+                foreach ($columns[1] as $column) {
+                    $operations[] = [
+                        'migration' => $migration,
+                        'operation' => 'drop_column',
+                        'table' => strtolower((string) $column),
+                    ];
+                }
             }
         }
 
