@@ -116,9 +116,10 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->where('landing_surface_id', $home->id)
             ->where('block_key', 'recommended_articles')
             ->firstOrFail();
+        $recommendedArticleItems = data_get($recommendedArticlesBlock->payload_json, 'items', []);
         $recommendedArticleSlugs = array_map(
             static fn ($item): string => (string) data_get($item, 'article.slug'),
-            data_get($recommendedArticlesBlock->payload_json, 'items', [])
+            $recommendedArticleItems
         );
 
         $this->assertSame(
@@ -131,6 +132,11 @@ final class LandingSurfacePublicApiTest extends TestCase
                 'are-infj-men-rare-or-socially-silenced',
             ],
             $recommendedArticleSlugs
+        );
+        $this->assertTrue(
+            collect($recommendedArticleItems)->every(
+                static fn (array $item): bool => data_get($item, 'is_pinned') === true
+            )
         );
         $this->assertNotContains('mbti-basics', $recommendedArticleSlugs);
         $this->assertNotContains('big-five-tool-guide', $recommendedArticleSlugs);
@@ -671,6 +677,11 @@ final class LandingSurfacePublicApiTest extends TestCase
         $items = data_get($recommendedBlock, 'payload_json.items');
         $this->assertIsArray($items);
         $this->assertCount(6, $items);
+        $this->assertTrue(
+            collect($items)->every(
+                static fn (array $item): bool => data_get($item, 'is_pinned') === true
+            )
+        );
 
         $slugs = array_map(static fn (array $item): string => (string) data_get($item, 'article.slug'), $items);
         $this->assertSame(
