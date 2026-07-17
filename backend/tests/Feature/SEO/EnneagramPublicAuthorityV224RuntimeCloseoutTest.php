@@ -1738,6 +1738,78 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_console_artifacts_only_bootstraps_exact_private_review_inputs_without_runtime_dependencies(): void
+    {
+        $outputDirectory = storage_path('framework/testing/enneagram-v224-review-bootstrap-'.bin2hex(random_bytes(4)));
+        Http::fake();
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                '--artifacts-only' => true,
+                '--output-dir' => $outputDirectory,
+            ])
+                ->expectsOutputToContain('status=PASS_REVIEW_ARTIFACTS_ONLY_GENERATED')
+                ->expectsOutputToContain('target_count=116')
+                ->expectsOutputToContain('writes_committed=0')
+                ->assertSuccessful();
+
+            $expectedFiles = [
+                'human-review-checklist.json',
+                'private-review-register-template.json',
+                'readback-batches.json',
+                'pr23-redacted-retrospective-template.json',
+            ];
+            foreach ($expectedFiles as $name) {
+                $path = $outputDirectory.'/'.$name;
+                $this->assertFileExists($path);
+                $this->assertSame(0600, fileperms($path) & 0777);
+            }
+            $this->assertFileDoesNotExist($outputDirectory.'/exact-sha-production-authorization-packet.json');
+            $this->assertFileDoesNotExist($outputDirectory.'/runtime-preflight-summary.json');
+
+            $template = json_decode(File::get($outputDirectory.'/private-review-register-template.json'), true, 512, JSON_THROW_ON_ERROR);
+            $this->assertSame('private_internal_only_do_not_commit_when_completed', $template['classification']);
+            $this->assertSame(116, count($template['reviews']));
+            $this->assertSame([], array_values(array_filter(array_column($template['reviews'], 'reviewer_name'))));
+            $this->assertSame([], array_values(array_filter(array_column($template['reviews'], 'reviewed_at'))));
+            $this->assertSame([], array_values(array_filter(array_column($template['reviews'], 'decision'))));
+
+            Http::assertNothingSent();
+            $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        } finally {
+            File::deleteDirectory($outputDirectory);
+        }
+    }
+
+    public function test_console_artifacts_only_refuses_to_overwrite_existing_review_input(): void
+    {
+        $outputDirectory = storage_path('framework/testing/enneagram-v224-review-bootstrap-existing-'.bin2hex(random_bytes(4)));
+        $existingPath = $outputDirectory.'/human-review-checklist.json';
+        File::ensureDirectoryExists($outputDirectory);
+        File::put($existingPath, 'operator-owned-review-progress');
+        Http::fake();
+
+        try {
+            $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
+                '--artifacts-only' => true,
+                '--output-dir' => $outputDirectory,
+            ])
+                ->expectsOutputToContain('Review artifact already exists; refusing to overwrite it: human-review-checklist.json.')
+                ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
+                ->assertFailed();
+
+            $this->assertSame('operator-owned-review-progress', File::get($existingPath));
+            $this->assertSame([$existingPath], array_map(static fn (\SplFileInfo $file): string => $file->getPathname(), File::files($outputDirectory)));
+            Http::assertNothingSent();
+            $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
+            $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count());
+        } finally {
+            File::deleteDirectory($outputDirectory);
+        }
+    }
+
     public function test_console_rejects_non_origin_api_and_frontend_base_urls_before_any_write(): void
     {
         $this->seedPublishedEstate();

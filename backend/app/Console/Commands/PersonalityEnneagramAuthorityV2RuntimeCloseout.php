@@ -20,6 +20,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
     private ?string $executeOutputPath = null;
 
     protected $signature = 'personality:enneagram-authority-v2-runtime-closeout
+        {--artifacts-only : Generate review bootstrap artifacts from the frozen release report without runtime preflight}
         {--preflight : Build the no-write exact-SHA authorization packet and operator artifacts}
         {--execute : Execute only a separately authorized exact-SHA packet}
         {--source=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/release-gate-report.json : Exact 116-page release report}
@@ -40,7 +41,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         {--allow-testing : Permit execute only in APP_ENV=testing with SQLite}
         {--json : Emit redacted JSON}';
 
-    protected $description = 'Exact-SHA Enneagram Authority V2 import, review bind, atomic promotion, cache revalidation, readback, and rollback preflight.';
+    protected $description = 'Generate review artifacts or run exact-SHA Enneagram Authority V2 runtime closeout controls.';
 
     public function handle(
         EnneagramPublicAuthorityV224RuntimeCloseout $closeout,
@@ -75,12 +76,37 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         EnneagramPublicAuthorityV224RuntimeCloseout $closeout,
         EnneagramPublicAuthorityV224RuntimeManifest $manifest,
     ): array {
+        $artifactsOnly = (bool) $this->option('artifacts-only');
         $preflight = (bool) $this->option('preflight');
         $execute = (bool) $this->option('execute');
-        if ($preflight === $execute) {
-            throw new RuntimeException('Exactly one of --preflight or --execute is required.');
+        if ((int) $artifactsOnly + (int) $preflight + (int) $execute !== 1) {
+            throw new RuntimeException('Exactly one of --artifacts-only, --preflight, or --execute is required.');
         }
         [$releaseReport, $releaseReportSha] = $this->jsonFileWithSha((string) $this->option('source'), 'release report');
+
+        if ($artifactsOnly) {
+            $artifacts = $manifest->artifacts($releaseReport);
+            $generatedFiles = $this->writeReviewBootstrapArtifacts($artifacts);
+
+            return [
+                'schema_version' => 'enneagram_public_authority_v2_review_artifacts_generation.v1',
+                'artifact' => EnneagramPublicAuthorityV224RuntimeCloseout::ARTIFACT,
+                'ok' => true,
+                'status' => 'PASS_REVIEW_ARTIFACTS_ONLY_GENERATED',
+                'target_count' => EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT,
+                'package_sha256' => (string) $releaseReport['package_sha256'],
+                'release_report_sha256' => $releaseReportSha,
+                'generated_file_count' => count($generatedFiles),
+                'generated_files' => $generatedFiles,
+                'private_review_register_completed' => false,
+                'authorization_packet_generated' => false,
+                'database_write_count' => 0,
+                'http_request_count' => 0,
+                'writes_committed' => false,
+                'production_execution' => false,
+            ];
+        }
+
         [$reviewRegister, $reviewRegisterSha] = $this->jsonFileWithSha($this->requiredOption('review-register'), 'private review register');
         [$preReadback, $preReadbackSha] = $this->optionalJsonFileWithSha((string) $this->option('pre-readback'), 'pre-readback');
         $backendSha = $this->requiredOption('backend-deployed-sha');
@@ -226,6 +252,70 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         foreach ($files as $name => $value) {
             File::put($resolved.DIRECTORY_SEPARATOR.$name, $this->encode($value)."\n");
         }
+    }
+
+    /** @param array<string,mixed> $artifacts @return list<string> */
+    private function writeReviewBootstrapArtifacts(array $artifacts): array
+    {
+        $directory = $this->requiredOption('output-dir');
+        $resolved = str_starts_with($directory, DIRECTORY_SEPARATOR) ? $directory : base_path($directory);
+        File::ensureDirectoryExists($resolved);
+        $files = [
+            'human-review-checklist.json' => $artifacts['checklist'],
+            'private-review-register-template.json' => $artifacts['review_register_template'],
+            'readback-batches.json' => $artifacts['readback_batches'],
+            'pr23-redacted-retrospective-template.json' => $artifacts['retrospective_template'],
+        ];
+        foreach (array_keys($files) as $name) {
+            if (File::exists($resolved.DIRECTORY_SEPARATOR.$name)) {
+                throw new RuntimeException('Review artifact already exists; refusing to overwrite it: '.$name.'.');
+            }
+        }
+
+        $created = [];
+        try {
+            foreach ($files as $name => $value) {
+                $path = $resolved.DIRECTORY_SEPARATOR.$name;
+                $this->writeExclusiveArtifact($path, $this->encode($value)."\n");
+                $created[] = $path;
+            }
+        } catch (Throwable $throwable) {
+            File::delete($created);
+
+            throw $throwable;
+        }
+
+        return array_keys($files);
+    }
+
+    private function writeExclusiveArtifact(string $path, string $payload): void
+    {
+        $handle = @fopen($path, 'x+b');
+        if (! is_resource($handle)) {
+            throw new RuntimeException('Unable to reserve review artifact output: '.basename($path).'.');
+        }
+        try {
+            if (! @chmod($path, 0600)) {
+                throw new RuntimeException('Unable to protect review artifact output: '.basename($path).'.');
+            }
+            $written = 0;
+            while ($written < strlen($payload)) {
+                $chunk = fwrite($handle, substr($payload, $written));
+                if (! is_int($chunk) || $chunk < 1) {
+                    throw new RuntimeException('Unable to persist review artifact output: '.basename($path).'.');
+                }
+                $written += $chunk;
+            }
+            if (! fflush($handle) || (function_exists('fsync') && ! fsync($handle))) {
+                throw new RuntimeException('Unable to durably persist review artifact output: '.basename($path).'.');
+            }
+        } catch (Throwable $throwable) {
+            fclose($handle);
+            File::delete($path);
+
+            throw $throwable;
+        }
+        fclose($handle);
     }
 
     private function reserveExecuteOutput(string $path): void
