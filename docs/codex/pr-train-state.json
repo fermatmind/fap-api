@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "6ba82275abfdaf7ca0051ccd2b23973b4a2a0959",
+    "status": "github_checks_pending",
+    "commit_sha": "0e6196e434b9d9d0698d786dbf0247d32054b384",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97259,8 +97259,8 @@
         "evidence": "After all fourteen review findings and both CI fixture repairs, the Career/authority manifest passed 102 tests / 859 assertions across projection/promotion gates, immutable payload plus exposure-snapshot staging, activation-time snapshot revalidation, nested-lock lease coverage, best-effort cleanup with guaranteed remediation progression, ready-only public directory/industry/sitemap consumption, the 10k readiness gate and sitemap fixture, snapshot-backed list preservation, atomic job-index/detail/directory activation and rollback, stale materialized projection reads, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 104 tests / 865 assertions total. The actual readiness path built 1046 and 10000 row directories in about 14ms and 143ms with one DB query. All 31 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact thirty-four-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "failed_repaired_locally",
-        "evidence": "On exact head 8a4a0cc35, verify-mbti-legacy and verify-mbti-v2 failed at the same SitemapXmlTest assertion because its Career fixture had runtime projection but no verified detail payloads. Big Five and the other six checks passed. The fixture now seeds verified EN/ZH detail authority, and the exact sitemap regression passes 1 test / 76 assertions locally."
+        "status": "pending",
+        "evidence": "Both MBTI failures were inspected and repaired in 0e6196e434b9d9d0698d786dbf0247d32054b384 by seeding verified EN/ZH detail authority in the test-only Career sitemap fixture. The exact regression passes locally; required checks are rerunning."
       }
     },
     "scope_validation": {
@@ -97454,8 +97454,13 @@
         "at": "2026-07-18T14:29:33Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "Inspected both failed MBTI jobs through their completed job logs. Both failed only at SitemapXmlTest because its Career fixture published runtime flags without verified EN/ZH detail payloads; Big Five and the other six checks passed. The test-only fixture now seeds explicit ready detail authority without changing SitemapGenerator or SEO runtime. The exact regression passes 1 test / 76 assertions, the full 104-test / 865-assertion local manifest remains green, and thirty-four-path scope validation has zero drift."
+      },
+      {
+        "at": "2026-07-18T14:30:27Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the test-only sitemap fixture repair as 0e6196e434b9d9d0698d786dbf0247d32054b384. No SitemapGenerator, SEO runtime, production enumeration authority, CMS, cache, database, staging, or deploy action changed. Exact-head required checks are rerunning."
       }
     ],
-    "updated_at": "2026-07-18T14:29:33Z"
+    "updated_at": "2026-07-18T14:30:27Z"
   }
 }
