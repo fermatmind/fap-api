@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "67bd30942945b1a3ebe5641261bdc4aed23a67ad",
+    "status": "github_checks_pending",
+    "commit_sha": "42dd2b6df161cdbd04f4b3183623454b89e78d3c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97354,8 +97354,13 @@
         "at": "2026-07-18T12:02:59Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on 542e865368ad44711c216ff273e3d8beb7db24a2, but final review found a sixth valid P2: pre-commit active pointers could be purged by a concurrent request still observing committed candidate authority. The repair stages only unreachable immutable versions, validates the explicit prepared batch in both promotion gates, commits DB exposure, atomically activates all prepared detail pointers under deterministic locks with full pointer restoration, then activates the directory. Candidate or stale-materialized reads remain 404 but no longer delete prepared/active pointers. Regressions prove candidate reads preserve staging and active cache, later-locale detail activation failure restores both locales, and the command completes the exact six-step sequence. The full 92-test / 669-assertion manifest and Big Five suites, 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope gate pass. No production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:04:36Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed immutable pre-exposure staging plus post-commit atomic detail pointer activation as 42dd2b6df161cdbd04f4b3183623454b89e78d3c. Replied to the sixth P2 with concurrency, stale-projection, and multi-locale pointer restoration evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, staging environment, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T12:02:59Z"
+    "updated_at": "2026-07-18T12:04:36Z"
   }
 }
