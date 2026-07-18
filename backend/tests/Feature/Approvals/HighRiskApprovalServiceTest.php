@@ -107,6 +107,23 @@ final class HighRiskApprovalServiceTest extends TestCase
             ->count());
     }
 
+    public function test_configured_solo_owner_can_reach_review_ui_without_review_permission(): void
+    {
+        $owner = $this->admin(totpEnabled: true);
+        $this->soloOwner($owner);
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'));
+
+        $canReview = new ReflectionMethod(AdminApprovalResource::class, 'canReview');
+        $canReview->setAccessible(true);
+
+        $this->assertTrue($canReview->invoke(null));
+        $this->assertTrue(AdminApprovalResource::canViewAny());
+
+        config()->set('review_governance.mode', 'team_separated');
+        $this->assertFalse($canReview->invoke(null));
+        $this->assertFalse(AdminApprovalResource::canViewAny());
+    }
+
     public function test_team_separated_mode_rejects_self_approval_but_accepts_distinct_step_up_actor(): void
     {
         config()->set('review_governance.mode', 'team_separated');

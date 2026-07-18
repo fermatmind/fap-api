@@ -324,9 +324,17 @@ class AdminApprovalResource extends BaseTenantResource
     private static function canReview(): bool
     {
         $user = static::currentAdmin();
+        if (! $user instanceof AdminUser) {
+            return false;
+        }
 
-        return $user instanceof AdminUser
-            && $user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW);
+        if ($user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW)) {
+            return true;
+        }
+
+        return (string) config('review_governance.mode') === 'solo_owner'
+            && (int) config('review_governance.solo_owner_admin_user_id') > 0
+            && (int) $user->getAuthIdentifier() === (int) config('review_governance.solo_owner_admin_user_id');
     }
 
     /** @return list<string> */
