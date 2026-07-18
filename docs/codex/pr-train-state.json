@@ -98016,7 +98016,7 @@
     "branch": "codex/big5-en52-translation-authority-01",
     "title": "BIG5-EN52-TRANSLATION-AUTHORITY-01: freeze English translation authority",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3181",
     "checks": {
@@ -98033,14 +98033,14 @@
         "evidence": "The reviewed external zh-CN source validator passed 52 pages, 170 verified claims, 261 FAQs, zero invalid source/link/duplicate/scientific/stale-report gates, and content SHA 056b10d3f640d0cf7da35ec7bc99b009408049e75c1e25aa8e760eb8641ea8d5. The current origin/main compiler rebuilt the checked-in V3 release byte-identically at file SHA 83536987f7edc73d668f481942c94f6bf549abf23a0e498941f47bc56726490d. The EN52 builder and validator passed 52 unique mappings, zero aliases/unknowns/duplicate slugs/unresolved terms/unresolved source identities, translated=0, pending=52, and zero writes. The focused controlled-release suite passed 2 tests / 6042 assertions; Node syntax, all generated JSON, YAML/state parsing, diff checks, and exact 13-path scope validation passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "All 9 GitHub checks passed on reviewed implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload. Both actionable Codex review threads were fixed and resolved; the final ledger-only head must repeat the same required-check gate before merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -98079,9 +98079,14 @@
         "at": "2026-07-18T18:55:00Z",
         "status": "github_review_fix_in_progress",
         "note": "All nine checks passed on f5a50041457d001fa4eb8422cbd73240dba9b4fd, then two valid P2 review findings were accepted. The authority builder now requires an explicit reviewed-date and records Asia/Shanghai instead of hiding date provenance in a constant; commit_sha remains null until the real squash merge SHA exists."
+      },
+      {
+        "at": "2026-07-18T19:06:00Z",
+        "status": "ready_to_merge",
+        "note": "The reviewed implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79 passed all 9 GitHub checks and has no unresolved review thread. This final ledger-only transition records that evidence; merge remains contingent on the same checks passing again on the resulting final head."
       }
     ],
-    "updated_at": "2026-07-18T18:55:00Z"
+    "updated_at": "2026-07-18T19:06:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
