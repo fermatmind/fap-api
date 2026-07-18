@@ -328,13 +328,13 @@ class AdminApprovalResource extends BaseTenantResource
             return false;
         }
 
-        if ($user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW)) {
-            return true;
+        if ((string) config('review_governance.mode') === 'solo_owner') {
+            return (int) config('review_governance.solo_owner_admin_user_id') > 0
+                && (int) $user->getAuthIdentifier() === (int) config('review_governance.solo_owner_admin_user_id');
         }
 
-        return (string) config('review_governance.mode') === 'solo_owner'
-            && (int) config('review_governance.solo_owner_admin_user_id') > 0
-            && (int) $user->getAuthIdentifier() === (int) config('review_governance.solo_owner_admin_user_id');
+        return (string) config('review_governance.mode') === 'team_separated'
+            && $user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW);
     }
 
     /** @return list<string> */

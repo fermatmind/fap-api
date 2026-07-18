@@ -114,6 +114,10 @@ final class HighRiskApprovalServiceTest extends TestCase
             totpEnabled: true,
             permissions: [PermissionNames::ADMIN_OPS_WRITE],
         );
+        $nonOwnerReviewer = $this->admin(
+            totpEnabled: true,
+            permissions: [PermissionNames::ADMIN_APPROVAL_REVIEW],
+        );
         $this->soloOwner($owner);
         $approval = $this->approval(AdminApproval::TYPE_REPROCESS_EVENT, $owner, [
             'payment_event_id' => (string) Str::uuid(),
@@ -139,7 +143,15 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertFalse(AdminApprovalResource::canViewAny());
         $this->assertSame([], $executableTypes->invoke(null));
 
+        $this->actingAs($nonOwnerReviewer, (string) config('admin.guard', 'admin'));
+        $this->assertFalse($canReview->invoke(null));
+        $this->assertFalse(AdminApprovalResource::canViewAny());
+
         config()->set('review_governance.mode', 'team_separated');
+        $this->assertTrue($canReview->invoke(null));
+        $this->assertTrue(AdminApprovalResource::canViewAny());
+
+        $this->actingAs($domainOperator, (string) config('admin.guard', 'admin'));
         $this->assertTrue(AdminApprovalResource::canViewAny());
         $this->assertSame(
             [AdminApproval::TYPE_MANUAL_GRANT, AdminApproval::TYPE_REVOKE_BENEFIT, AdminApproval::TYPE_REPROCESS_EVENT],
