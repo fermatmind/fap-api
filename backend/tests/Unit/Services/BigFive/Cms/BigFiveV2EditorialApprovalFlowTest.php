@@ -59,6 +59,8 @@ final class BigFiveV2EditorialApprovalFlowTest extends TestCase
     {
         $owner = $this->adminWithPermissions([
             PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
         $otherReviewer = $this->adminWithPermissions([
             PermissionNames::ADMIN_APPROVAL_REVIEW,
@@ -69,6 +71,11 @@ final class BigFiveV2EditorialApprovalFlowTest extends TestCase
             'review_governance.solo_owner_admin_user_id' => (int) $owner->id,
         ]);
         $review = $this->flow()->submitForReview($owner, $this->draftFor($owner));
+
+        $this->assertTrue($this->flow()->capabilityMap($owner, $review)['approve']);
+        $this->assertTrue($this->flow()->capabilityMap($owner, $review)['reject']);
+        $this->assertFalse($this->flow()->capabilityMap($otherReviewer, $review)['approve']);
+        $this->assertFalse($this->flow()->capabilityMap($otherReviewer, $review)['reject']);
 
         try {
             $this->flow()->approve($otherReviewer, $review);

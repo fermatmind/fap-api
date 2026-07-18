@@ -112,12 +112,15 @@ final class BigFiveV2EditorialApprovalFlow
      */
     public function capabilityMap(AdminUser $actor, BigFiveV2EditorialRevision $revision): array
     {
+        $reviewActorAllowed = ! $this->reviewAttestations()->usesSoloOwnerMode()
+            || $this->reviewAttestations()->isConfiguredSoloOwner((int) $actor->id);
+
         return [
             'view' => $this->policy->view($actor, $revision),
             'create_draft' => $this->policy->createDraft($actor),
             'submit_for_review' => $this->policy->submitForReview($actor, $revision),
-            'approve' => $this->policy->approve($actor, $revision),
-            'reject' => $this->policy->reject($actor, $revision),
+            'approve' => $reviewActorAllowed && $this->policy->approve($actor, $revision),
+            'reject' => $reviewActorAllowed && $this->policy->reject($actor, $revision),
             'rollback' => $this->policy->rollback($actor, $revision),
             'export_release_candidate' => $this->policy->exportReleaseCandidate($actor, $revision),
             'publish_to_runtime' => $this->policy->publishToRuntime($actor, $revision),
