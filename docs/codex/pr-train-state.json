@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed through same-origin link-normalization head 55b26ed631b750092ba66d5a698e66c50f20b343. Twenty-four actionable Codex review findings were accepted; the final registered-external-link/frozen-validator-scope head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub checks passed through registered-external-link/frozen-validator-scope head c651096c35144232ea5e2a9a73c13cfe1e50fd68. Twenty-five actionable Codex review findings were accepted; the final reference-definition visibility head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98144,9 +98144,14 @@
         "at": "2026-07-18T21:02:43Z",
         "status": "github_review_fixes_completed",
         "note": "All nine checks passed on same-origin link-normalization head 55b26ed631b750092ba66d5a698e66c50f20b343, then two valid P2 findings were accepted. External Markdown destinations must now exactly match a non-empty verified_public_url in the locked eleven-source registry; invented, competitor, protocol-variant, mailto, tel, and other unregistered body links fail closed. The frozen Task 1 validator was removed from the allowed paths of content-only PR2 through PR9 while remaining a required read-only gate; PR10 retains its explicit full-package final QA scope. Registry allowlist probes, exact manifest-scope inspection, and the reproducible translated=0 authority validation pass."
+      },
+      {
+        "at": "2026-07-18T21:11:50Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on registered-external-link/frozen-validator-scope head c651096c35144232ea5e2a9a73c13cfe1e50fd68, then one valid P2 finding was accepted. Completed pages now reject all non-footnote Markdown reference definitions and use inline links only; the reader-visible projection also removes each definition and all immediately indented continuation lines, so hidden multi-line titles cannot satisfy word, FAQ, duplicate, or claim visibility gates. Positive visible-text and negative hidden-continuation probes pass with the reproducible translated=0 authority validation."
       }
     ],
-    "updated_at": "2026-07-18T21:02:43Z"
+    "updated_at": "2026-07-18T21:11:50Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",

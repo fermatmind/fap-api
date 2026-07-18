@@ -75,10 +75,22 @@ function englishWordCount(body) {
   return body.match(/[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*/g)?.length ?? 0;
 }
 
+function stripReferenceDefinitions(markdown) {
+  const lines = markdown.split('\n');
+  const visible = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    if (!/^\s{0,3}\[(?!\^)[^\]]+\]:\s*/.test(lines[index])) {
+      visible.push(lines[index]);
+      continue;
+    }
+    while (index + 1 < lines.length && /^[ \t]+\S/.test(lines[index + 1])) index += 1;
+  }
+  return visible.join('\n');
+}
+
 function markdownVisibleText(markdown) {
-  return markdown
+  return stripReferenceDefinitions(markdown)
     .replace(/<!--[\s\S]*?-->/g, '')
-    .replace(/^\s{0,3}\[[^\]]+\]:\s*.*$/gm, '')
     .replace(/\[([^\]]+)\]\(\s*(?:<[^>]*>|[^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\s*\)/g, '$1')
     .replace(/\[([^\]]+)\]\s*\[[^\]]*\]/g, '$1');
 }
@@ -340,6 +352,8 @@ async function main() {
       fail('forbidden_media', completedEntry.target_path);
     if (/<!--|-->/.test(body)) fail('hidden_html_comment', completedEntry.target_path);
     if (/<\/?[A-Za-z][^>]*>/.test(body)) fail('forbidden_raw_html', completedEntry.target_path);
+    if (/^\s{0,3}\[(?!\^)[^\]]+\]:\s*/m.test(body))
+      fail('forbidden_reference_definition', completedEntry.target_path);
     const declaredWords = frontmatter.word_count_en;
     const actualWords = englishWordCount(visibleBody);
     if (declaredWords !== actualWords) {
