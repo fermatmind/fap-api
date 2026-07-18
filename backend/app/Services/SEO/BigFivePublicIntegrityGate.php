@@ -35,10 +35,10 @@ final class BigFivePublicIntegrityGate
      * @param  array<string,mixed>  $package
      * @return array<string,mixed>
      */
-    public function validate(array $package, string $baseUrl): array
+    public function validate(array $package, string $baseUrl, bool $requireReviewedAliases = false): array
     {
         $base = $this->normalizeBaseUrl($baseUrl);
-        $targets = $this->targets($package);
+        $targets = $this->targets($package, $requireReviewedAliases);
         $results = [];
         $errors = [];
 
@@ -68,6 +68,10 @@ final class BigFivePublicIntegrityGate
                 $results,
                 static fn (array $result): bool => ($result['resolution'] ?? null) === 'reviewed_301_alias'
             )),
+            'reviewed_301_alias_expected_count' => $requireReviewedAliases
+                ? count(self::REVIEWED_301_ALIASES)
+                : 0,
+            'reviewed_301_aliases_required' => $requireReviewedAliases,
             'results' => $results,
             'errors' => $errors,
             'writes_committed' => false,
@@ -81,7 +85,7 @@ final class BigFivePublicIntegrityGate
      * @param  array<string,mixed>  $package
      * @return list<string>
      */
-    private function targets(array $package): array
+    private function targets(array $package, bool $requireReviewedAliases): array
     {
         $assets = is_array($package['assets'] ?? null) ? array_values($package['assets']) : [];
         $targets = [];
@@ -114,6 +118,10 @@ final class BigFivePublicIntegrityGate
                     $targets[] = rtrim((string) $match, '.,;:!?，。；：！？');
                 }
             }
+        }
+
+        if ($requireReviewedAliases) {
+            $targets = array_merge($targets, array_keys(self::REVIEWED_301_ALIASES));
         }
 
         $targets = array_values(array_unique(array_filter(

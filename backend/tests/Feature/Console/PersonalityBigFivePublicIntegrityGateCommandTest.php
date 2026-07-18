@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Console\Commands\PersonalityBigFivePublicIntegrityGate;
+use App\Services\SEO\BigFivePublicIntegrityGate;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -68,6 +69,53 @@ final class PersonalityBigFivePublicIntegrityGateCommandTest extends TestCase
         $this->assertSame(1, $payload['reviewed_301_alias_count']);
         $this->assertFalse($payload['writes_committed']);
         $this->assertFalse($payload['cms_write_attempted']);
+    }
+
+    public function test_gate_requires_all_ten_reviewed_aliases_as_exact_single_hop_redirects(): void
+    {
+        $this->fakeReviewedAliases();
+        $source = $this->writePackage([]);
+
+        $exitCode = Artisan::call('personality-big-five:public-integrity-gate', [
+            '--source' => $source,
+            '--require-reviewed-aliases' => true,
+            '--json' => true,
+        ]);
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['reviewed_301_aliases_required']);
+        $this->assertSame(10, $payload['target_count']);
+        $this->assertSame(10, $payload['reviewed_301_alias_expected_count']);
+        $this->assertSame(10, $payload['reviewed_301_alias_count']);
+        $this->assertSame(0, $payload['canonical_200_count']);
+        Http::assertSentCount(20);
+    }
+
+    public function test_required_alias_gate_rejects_wrong_target_302_and_second_redirect(): void
+    {
+        $source = $this->writePackage([]);
+        $scenarios = [
+            ['alias_status' => 301, 'alias_location' => '/zh/personality/big-five/openness-mid'],
+            ['alias_status' => 302, 'alias_location' => '/zh/personality/big-five/openness-high'],
+            ['alias_status' => 301, 'alias_location' => '/zh/personality/big-five/openness-high', 'canonical_status' => 301],
+        ];
+
+        foreach ($scenarios as $scenario) {
+            $this->fakeReviewedAliases($scenario);
+
+            $exitCode = Artisan::call('personality-big-five:public-integrity-gate', [
+                '--source' => $source,
+                '--require-reviewed-aliases' => true,
+                '--json' => true,
+            ]);
+            $payload = $this->jsonOutput();
+
+            $this->assertSame(1, $exitCode);
+            $this->assertFalse($payload['ok']);
+            $this->assertLessThan(10, $payload['reviewed_301_alias_count']);
+        }
     }
 
     public function test_gate_rejects_404_unreviewed_redirect_private_cross_authority_and_canonical_mismatch(): void
@@ -180,6 +228,38 @@ final class PersonalityBigFivePublicIntegrityGateCommandTest extends TestCase
         ], JSON_THROW_ON_ERROR));
 
         return $path;
+    }
+
+    /** @param array<string,int|string> $highOpennessOverride */
+    private function fakeReviewedAliases(array $highOpennessOverride = []): void
+    {
+        Http::fake(function (Request $request) use ($highOpennessOverride) {
+            $path = (string) parse_url($request->url(), PHP_URL_PATH);
+            $target = BigFivePublicIntegrityGate::REVIEWED_301_ALIASES[$path] ?? null;
+            if (is_string($target)) {
+                $isHighOpenness = $path === '/zh/personality/big-five/high-openness';
+                $status = $isHighOpenness ? (int) ($highOpennessOverride['alias_status'] ?? 301) : 301;
+                $location = $isHighOpenness
+                    ? (string) ($highOpennessOverride['alias_location'] ?? $target)
+                    : $target;
+
+                return Http::response('', $status, ['Location' => $location]);
+            }
+
+            if (in_array($path, BigFivePublicIntegrityGate::REVIEWED_301_ALIASES, true)) {
+                $isHighOpennessCanonical = $path === '/zh/personality/big-five/openness-high';
+                if ($isHighOpennessCanonical && (int) ($highOpennessOverride['canonical_status'] ?? 200) === 301) {
+                    return Http::response('', 301, ['Location' => '/zh/personality/big-five/openness']);
+                }
+
+                return Http::response(
+                    '<html><head><link rel="canonical" href="'.$path.'"></head></html>',
+                    200,
+                );
+            }
+
+            return Http::response('', 404);
+        });
     }
 
     /** @return array<string,mixed> */
