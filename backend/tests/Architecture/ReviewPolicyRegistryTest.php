@@ -143,6 +143,37 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertTrue($byId['content_page_external_evidence_gate']['external_evidence_required']);
     }
 
+    public function test_pr4_career_and_seo_adapters_are_active_without_weakening_external_evidence(): void
+    {
+        $byId = collect(ReviewPolicyRegistry::all())->keyBy('surface_id');
+
+        foreach ([
+            'career_trust_manifest',
+            'career_editorial_patch',
+            'career_occupation_directory_review',
+            'career_salary_asset_review',
+            'career_ai_impact_asset_review',
+            'career_import_publish_readiness',
+            'seo_agent_draft_review',
+            'seo_canary_approval',
+            'search_submission_queue_approval',
+            'content_package_approval',
+        ] as $surfaceId) {
+            $this->assertSame('compact_attestation_adapter_active', $byId[$surfaceId]['adapter_status']);
+        }
+
+        foreach ([
+            'career_occupation_truth_metric_review',
+            'seo_claim_risk_review',
+        ] as $surfaceId) {
+            $this->assertSame(
+                'compact_attestation_adapter_active_external_evidence_still_required',
+                $byId[$surfaceId]['adapter_status'],
+            );
+            $this->assertTrue($byId[$surfaceId]['external_evidence_required']);
+        }
+    }
+
     public function test_new_or_modified_manual_review_gates_declare_a_registered_surface(): void
     {
         $repoRoot = dirname(__DIR__, 3);

@@ -287,6 +287,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_solo_owner_career_seo_review_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/CareerSeoReviewAttestationCommand.php',
+            'backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Career/CareerReviewAndImportExecutor.php',
+            'backend/app/Services/SeoAgent/SeoReviewAndPublishExecutor.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -6098,6 +6115,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSoloOwnerCareerSeoReviewFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -7907,6 +7928,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV223ReviewEvidenceBinder.php',
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
             'backend/app/Services/Riasec/RiasecContentReleaseReviewGate.php',
+        ], true);
+    }
+
+    private function isSoloOwnerCareerSeoReviewFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/CareerSeoReviewAttestationCommand.php',
+            'backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
         ], true);
     }
 
