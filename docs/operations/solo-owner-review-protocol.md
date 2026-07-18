@@ -100,6 +100,16 @@ An owner attestation may record `approved_all`, `approved_with_exceptions`, or `
 
 Binding Career/SEO review evidence has no domain-action capability. It does not publish or import Career/CMS content, approve a production import, change canonical/hreflang/robots/noindex/JSON-LD/sitemap/llms/discoverability state, enqueue or submit a search URL, or expose private reviewer identity. Publish, import, index, canary, and search-submission execution remain separate exact-authorized transitions that must consume one previously bound attestation over the exact current target set.
 
+## High-risk Ops approval adapter (PR5)
+
+`SOLO-OWNER-OPS-APPROVAL-05` activates the R3 adapter for registered `AdminApproval` operations: refund, manual benefit grant, benefit revoke, payment-event reprocess, release rollback, and data-lifecycle approval. In `solo_owner` mode, the configured owner may be both requester and approver. In `team_separated` mode, requester and approver must remain different administrators.
+
+Approval requires the current administrator's MFA/TOTP step-up session, a non-empty reason, a UUID correlation ID, and a supported registered operation type. It computes a deterministic fingerprint over the exact approval ID, operation surface, organization, requester, reason, correlation ID, and business payload. The approval record stores only versioned private governance metadata, the target fingerprint, reason hash, evidence SHA-256, actor IDs, review mode, approval timestamp, and the fact that step-up succeeded. TOTP values, recovery codes, tokens, secrets, passwords, authorization headers, cookies, and API keys are never stored in governance metadata or written to audit/error output.
+
+Approve and execute are separate transitions. Approving records evidence and never dispatches the operation. A later explicit execute action queues the existing worker; the worker recomputes and verifies the exact target fingerprint and evidence SHA before changing the approval to `EXECUTING`. Any payload, reason, correlation, actor, mode, schema, timestamp, or evidence drift fails closed before action dispatch. Duplicate approval is idempotent only when the existing immutable evidence still matches.
+
+The adapter does not add a generic data-lifecycle executor or bypass existing domain authorization. Registered data-lifecycle targets may bind approval evidence, but a concrete execution adapter remains separately required. Tests use local transactions and fake queues only; this train performs no refund, benefit, payment, rollback, or data-lifecycle production action.
+
 ## Registry and public projection
 
 `ReviewPolicyRegistry` inventories every known human-review surface and declares its domain, risk tier, authority, current implementation, solo-owner policy, step-up boundary, execution separation, public projection, external-evidence requirement, migration PR, and adapter status. Architecture tests enforce schema, uniqueness, required coverage, R3 step-up, R4 evidence classification, and registration of models with review/approval fields. The generated inventory is `docs/operations/generated/solo-owner-review-surface-registry.v1.json`.

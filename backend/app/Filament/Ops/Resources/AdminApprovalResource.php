@@ -9,6 +9,8 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Jobs\ExecuteApprovalJob;
 use App\Models\AdminApproval;
+use App\Services\Approvals\HighRiskApprovalService;
+use App\Services\Approvals\HighRiskApprovalValidationException;
 use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
@@ -19,6 +21,15 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @review-surface admin_approval
+ * @review-surface refund_approval
+ * @review-surface manual_benefit_grant_approval
+ * @review-surface benefit_revoke_approval
+ * @review-surface payment_event_reprocess_approval
+ * @review-surface rollback_release_approval
+ * @review-surface data_lifecycle_approval
+ */
 class AdminApprovalResource extends BaseTenantResource
 {
     protected static ?string $model = AdminApproval::class;
@@ -136,6 +147,7 @@ class AdminApprovalResource extends BaseTenantResource
                         AdminApproval::TYPE_REFUND => AdminApproval::TYPE_REFUND,
                         AdminApproval::TYPE_REPROCESS_EVENT => AdminApproval::TYPE_REPROCESS_EVENT,
                         AdminApproval::TYPE_ROLLBACK_RELEASE => AdminApproval::TYPE_ROLLBACK_RELEASE,
+                        AdminApproval::TYPE_DATA_LIFECYCLE => AdminApproval::TYPE_DATA_LIFECYCLE,
                     ]),
             ])
             ->actions([
@@ -147,45 +159,44 @@ class AdminApprovalResource extends BaseTenantResource
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_PENDING)
                     ->requiresConfirmation()
                     ->action(function (AdminApproval $record): void {
-                        $guard = (string) config('admin.guard', 'admin');
-                        $user = auth($guard)->user();
-                        $adminId = is_object($user) && method_exists($user, 'getAuthIdentifier')
-                            ? (int) $user->getAuthIdentifier()
-                            : null;
-
-                        DB::transaction(function () use ($record, $adminId): void {
-                            $locked = AdminApproval::query()->whereKey($record->id)->lockForUpdate()->first();
-                            if (! $locked || strtoupper((string) $locked->status) !== AdminApproval::STATUS_PENDING) {
-                                return;
-                            }
-
-                            $locked->status = AdminApproval::STATUS_APPROVED;
-                            $locked->approved_by_admin_user_id = $adminId;
-                            $locked->approved_at = now();
-                            $locked->save();
-
-                            app(AuditLogger::class)->log(
-                                request(),
-                                'approval_approved',
-                                'AdminApproval',
-                                (string) $locked->id,
-                                [
-                                    'actor' => $adminId,
-                                    'org_id' => (int) $locked->org_id,
-                                    'correlation_id' => (string) $locked->correlation_id,
-                                    'type' => (string) $locked->type,
-                                ],
-                                (string) $locked->reason,
-                                'approved',
+                        $adminId = static::currentAdminId();
+                        try {
+                            app(HighRiskApprovalService::class)->approve(
+                                (string) $record->id,
+                                $adminId,
+                                static::stepUpVerifiedAdminId(),
                             );
-                        });
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()
+                                ->title('High-risk approval validation failed')
+                                ->danger()
+                                ->send();
 
-                        ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
+                            return;
+                        }
 
                         Notification::make()
                             ->title(__('ops.resources.approvals.notifications.approved'))
                             ->success()
                             ->send();
+                    }),
+                Tables\Actions\Action::make('execute')
+                    ->label('Execute approved action')
+                    ->icon('heroicon-o-play')
+                    ->color('warning')
+                    ->visible(fn (AdminApproval $record): bool => static::canReview()
+                        && strtoupper((string) $record->status) === AdminApproval::STATUS_APPROVED
+                        && app(HighRiskApprovalService::class)->executionSupported($record))
+                    ->requiresConfirmation()
+                    ->action(function (AdminApproval $record): void {
+                        if (static::stepUpVerifiedAdminId() !== static::currentAdminId()) {
+                            Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
+
+                            return;
+                        }
+
+                        ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
+                        Notification::make()->title('Approved action queued for execution')->success()->send();
                     }),
                 Tables\Actions\Action::make('reject')
                     ->label(__('ops.resources.approvals.actions.reject'))
@@ -199,6 +210,11 @@ class AdminApprovalResource extends BaseTenantResource
                             ->maxLength(255),
                     ])
                     ->action(function (AdminApproval $record, array $data): void {
+                        if (static::stepUpVerifiedAdminId() !== static::currentAdminId()) {
+                            Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
+
+                            return;
+                        }
                         $guard = (string) config('admin.guard', 'admin');
                         $user = auth($guard)->user();
                         $adminId = is_object($user) && method_exists($user, 'getAuthIdentifier')
@@ -206,6 +222,11 @@ class AdminApprovalResource extends BaseTenantResource
                             : null;
 
                         $append = trim((string) ($data['reason_append'] ?? ''));
+                        if (preg_match('/\b(token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i', $append) === 1) {
+                            Notification::make()->title('Reject note must not contain credentials or secret material')->danger()->send();
+
+                            return;
+                        }
 
                         DB::transaction(function () use ($record, $adminId, $append): void {
                             $locked = AdminApproval::query()->whereKey($record->id)->lockForUpdate()->first();
@@ -232,7 +253,7 @@ class AdminApprovalResource extends BaseTenantResource
                                     'correlation_id' => (string) $locked->correlation_id,
                                     'type' => (string) $locked->type,
                                 ],
-                                (string) $locked->reason,
+                                'high-risk approval rejected',
                                 'rejected',
                             );
                         });
@@ -245,9 +266,26 @@ class AdminApprovalResource extends BaseTenantResource
                 Tables\Actions\Action::make('retryExecute')
                     ->label(__('ops.resources.approvals.actions.retry_execute'))
                     ->icon('heroicon-o-arrow-path')
-                    ->visible(fn (AdminApproval $record): bool => static::canReview() && in_array(strtoupper((string) $record->status), [AdminApproval::STATUS_FAILED, AdminApproval::STATUS_APPROVED], true))
+                    ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_FAILED)
                     ->requiresConfirmation()
                     ->action(function (AdminApproval $record): void {
+                        if (static::stepUpVerifiedAdminId() !== static::currentAdminId()) {
+                            Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
+
+                            return;
+                        }
+                        try {
+                            $fresh = $record->fresh();
+                            if (! $fresh instanceof AdminApproval) {
+                                throw new HighRiskApprovalValidationException('Approval record was not found.');
+                            }
+                            app(HighRiskApprovalService::class)->assertExecutable($fresh);
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()->title('Approval evidence is no longer executable')->danger()->send();
+
+                            return;
+                        }
+
                         DB::table('admin_approvals')
                             ->where('id', (string) $record->id)
                             ->update([
@@ -282,5 +320,20 @@ class AdminApprovalResource extends BaseTenantResource
         return is_object($user)
             && method_exists($user, 'hasPermission')
             && $user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW);
+    }
+
+    private static function currentAdminId(): int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user) && method_exists($user, 'getAuthIdentifier')
+            ? (int) $user->getAuthIdentifier()
+            : 0;
+    }
+
+    private static function stepUpVerifiedAdminId(): int
+    {
+        return (int) session('ops_admin_totp_verified_user_id', 0);
     }
 }

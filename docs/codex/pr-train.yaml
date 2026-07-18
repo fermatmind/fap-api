@@ -45335,6 +45335,65 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: SOLO-OWNER-OPS-APPROVAL-05
+    repo: fap-api
+    base: main
+    branch: codex/solo-owner-ops-approval-05
+    title: "SOLO-OWNER-OPS-APPROVAL-05: allow step-up solo-owner approval for high-risk operations"
+    status: user_authorized
+    depends_on:
+      - SOLO-OWNER-CAREER-SEO-REVIEW-04
+    train_scope: solo_owner_high_risk_ops_approval
+    scope:
+      - Activate the registered R3 AdminApproval adapter for refund, manual benefit grant, benefit revoke, payment-event reprocess, release rollback, and data-lifecycle approval evidence.
+      - Allow the configured solo owner to be requester and approver only with current MFA/TOTP step-up, while team_separated mode continues to require a distinct approver.
+      - Lock reason, correlation ID, exact target fingerprint, evidence SHA-256, actor, mode, schema, and approval timestamp into private governance metadata with idempotent readback and drift rejection.
+      - Separate approve from execute so approval never dispatches a domain action; explicit later execution must revalidate exact evidence before entering EXECUTING.
+      - Keep credentials and secret material out of governance metadata, audit/error output, and test artifacts; use local transactions and fake queues only.
+    allowed_paths:
+      - backend/app/Filament/Ops/Resources/AdminApprovalResource.php
+      - backend/app/Models/AdminApproval.php
+      - backend/app/Services/Approvals/ApprovalExecutor.php
+      - backend/app/Services/Approvals/HighRiskApprovalService.php
+      - backend/app/Services/Approvals/HighRiskApprovalValidationException.php
+      - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
+      - backend/tests/Architecture/ReviewPolicyRegistryTest.php
+      - backend/tests/Feature/Approvals/ApprovalFlowTest.php
+      - backend/tests/Feature/Approvals/HighRiskApprovalServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/operations/solo-owner-review-protocol.md
+      - docs/operations/generated/solo-owner-review-surface-registry.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Execute a real refund, benefit grant/revoke, payment reprocess, rollback, data-lifecycle action, production database mutation, deployment, or any other production operation.
+      - Add a generic data-lifecycle executor, weaken domain authorization, bypass MFA/TOTP, expose secret material, or combine approve and execute into one transition.
+      - Modify CMS, Career, SEO/Search, public review contracts, frontend, payment provider integration, user DSAR semantics, database schema, or unrelated Ops workflows.
+    validation:
+      - solo-owner self-approval, team-separated rejection, current step-up, exact fingerprint/evidence SHA, idempotency, drift, correlation, reason, secret-redaction, and approve/execute separation tests
+      - refund, benefit grant/revoke, payment reprocess, rollback, data-lifecycle approval, registered AdminApproval, fake queue, and zero-production-action tests
+      - cd backend && php artisan test tests/Feature/Approvals/HighRiskApprovalServiceTest.php tests/Feature/Approvals/ApprovalFlowTest.php tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && composer validate --strict
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool docs/operations/generated/solo-owner-review-surface-registry.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: CAREER-DETAIL-COLD-MISS-DEGRADE-01
     repo: fap-api
     base: main

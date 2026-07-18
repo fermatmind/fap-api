@@ -23,6 +23,13 @@ use LogicException;
  * @review-surface mbti_cross_type_comparison_authority
  * @review-surface enneagram_review_binder
  * @review-surface riasec_content_release_review
+ * @review-surface admin_approval
+ * @review-surface refund_approval
+ * @review-surface manual_benefit_grant_approval
+ * @review-surface benefit_revoke_approval
+ * @review-surface payment_event_reprocess_approval
+ * @review-surface rollback_release_approval
+ * @review-surface data_lifecycle_approval
  */
 final class ReviewPolicyRegistry
 {
@@ -104,6 +111,16 @@ final class ReviewPolicyRegistry
         'search_submission_queue_approval',
         'seo_claim_risk_review',
         'content_package_approval',
+    ];
+
+    private const OPS_ADAPTER_SURFACES = [
+        'admin_approval',
+        'refund_approval',
+        'manual_benefit_grant_approval',
+        'benefit_revoke_approval',
+        'payment_event_reprocess_approval',
+        'rollback_release_approval',
+        'data_lifecycle_approval',
     ];
 
     /**
@@ -259,6 +276,9 @@ final class ReviewPolicyRegistry
             return $externalEvidenceRequired
                 ? 'compact_attestation_adapter_active_external_evidence_still_required'
                 : 'compact_attestation_adapter_active';
+        }
+        if (in_array($surfaceId, self::OPS_ADAPTER_SURFACES, true)) {
+            return 'step_up_high_risk_approval_adapter_active';
         }
 
         return 'policy_registered_adapter_pending';
