@@ -180,13 +180,36 @@ class AdminApprovalResource extends BaseTenantResource
                             ->success()
                             ->send();
                     }),
+                Tables\Actions\Action::make('bindLegacyGovernance')
+                    ->label('Bind legacy governance evidence')
+                    ->icon('heroicon-o-shield-check')
+                    ->color('warning')
+                    ->visible(fn (AdminApproval $record): bool => static::canReview()
+                        && app(HighRiskApprovalService::class)->requiresLegacyGovernanceBinding($record))
+                    ->requiresConfirmation()
+                    ->action(function (AdminApproval $record): void {
+                        try {
+                            app(HighRiskApprovalService::class)->bindLegacyGovernance(
+                                (string) $record->id,
+                                static::currentAdminId(),
+                                static::stepUpVerifiedAdminId(),
+                            );
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()->title('Legacy governance binding failed')->danger()->send();
+
+                            return;
+                        }
+
+                        Notification::make()->title('Legacy governance evidence bound')->success()->send();
+                    }),
                 Tables\Actions\Action::make('execute')
                     ->label('Execute approved action')
                     ->icon('heroicon-o-play')
                     ->color('warning')
                     ->visible(fn (AdminApproval $record): bool => static::canReview()
                         && strtoupper((string) $record->status) === AdminApproval::STATUS_APPROVED
-                        && app(HighRiskApprovalService::class)->executionSupported($record))
+                        && app(HighRiskApprovalService::class)->executionSupported($record)
+                        && app(HighRiskApprovalService::class)->hasValidGovernanceEvidence($record))
                     ->requiresConfirmation()
                     ->action(function (AdminApproval $record): void {
                         if (static::stepUpVerifiedAdminId() !== static::currentAdminId()) {
@@ -222,7 +245,7 @@ class AdminApprovalResource extends BaseTenantResource
                             : null;
 
                         $append = trim((string) ($data['reason_append'] ?? ''));
-                        if (preg_match('/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i', $append) === 1) {
+                        if (AdminApproval::reasonContainsCredential($append)) {
                             Notification::make()->title('Reject note must not contain credentials or secret material')->danger()->send();
 
                             return;

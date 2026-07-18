@@ -70,6 +70,23 @@ class AdminApproval extends Model
         'retry_count' => 'integer',
     ];
 
+    protected static function booted(): void
+    {
+        static::saving(function (self $approval): void {
+            if (self::reasonContainsCredential((string) $approval->reason)) {
+                throw new \InvalidArgumentException('Approval reason must not contain credentials or secret material.');
+            }
+        });
+    }
+
+    public static function reasonContainsCredential(string $reason): bool
+    {
+        return preg_match(
+            '/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i',
+            $reason,
+        ) === 1;
+    }
+
     public function requestedBy(): BelongsTo
     {
         return $this->belongsTo(AdminUser::class, 'requested_by_admin_user_id');

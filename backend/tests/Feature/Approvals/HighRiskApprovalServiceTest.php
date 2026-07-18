@@ -117,8 +117,21 @@ final class HighRiskApprovalServiceTest extends TestCase
         }
 
         $privateCredential = Str::random(40);
+        $safeReason = (string) $approval->reason;
         foreach (['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey='] as $credentialPrefix) {
-            $approval->forceFill(['reason' => $credentialPrefix.$privateCredential])->save();
+            try {
+                $approval->forceFill(['reason' => $credentialPrefix.$privateCredential])->save();
+                $this->fail('Expected request creation boundary to reject credential-bearing reason.');
+            } catch (\InvalidArgumentException $exception) {
+                $this->assertStringNotContainsString($privateCredential, $exception->getMessage());
+            }
+            $approval->refresh();
+            $this->assertSame($safeReason, (string) $approval->reason);
+
+            DB::table('admin_approvals')->where('id', (string) $approval->id)->update([
+                'reason' => $credentialPrefix.$privateCredential,
+            ]);
+            $approval->refresh();
             try {
                 $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
                 $this->fail('Expected credential-bearing reason to fail.');
@@ -126,8 +139,9 @@ final class HighRiskApprovalServiceTest extends TestCase
                 $this->assertStringNotContainsString($privateCredential, $exception->getMessage());
             }
             $this->assertSame(AdminApproval::STATUS_PENDING, (string) $approval->fresh()->status);
+            DB::table('admin_approvals')->where('id', (string) $approval->id)->update(['reason' => $safeReason]);
+            $approval->refresh();
         }
-        $approval->forceFill(['reason' => 'operator confirmed exact high-risk target'])->save();
 
         $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
         $payload = (array) $approval->fresh()->payload_json;
@@ -140,6 +154,78 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertSame('approval governance validation failed.', $result->message);
         $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approval->fresh()->status);
         $this->assertSame(0, (int) $approval->fresh()->retry_count);
+        Queue::assertNothingPushed();
+    }
+
+    public function test_legacy_approved_and_failed_rows_can_bind_missing_governance_with_step_up_only(): void
+    {
+        Queue::fake();
+        $owner = $this->admin(totpEnabled: true);
+        $this->soloOwner($owner);
+        $service = app(HighRiskApprovalService::class);
+
+        foreach ([AdminApproval::STATUS_APPROVED, AdminApproval::STATUS_FAILED] as $status) {
+            $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
+                'order_no' => 'legacy-'.strtolower($status),
+            ]);
+            DB::table('admin_approvals')->where('id', (string) $approval->id)->update([
+                'status' => $status,
+                'approved_by_admin_user_id' => (int) $owner->id,
+                'approved_at' => now()->subMinute()->startOfSecond(),
+            ]);
+            $approval->refresh();
+
+            $this->assertTrue($service->requiresLegacyGovernanceBinding($approval));
+            $this->assertFalse($service->hasValidGovernanceEvidence($approval));
+
+            try {
+                $service->bindLegacyGovernance((string) $approval->id, (int) $owner->id, 0);
+                $this->fail('Expected current step-up to be required for legacy binding.');
+            } catch (HighRiskApprovalValidationException) {
+                $this->assertDatabaseMissing('audit_logs', [
+                    'target_id' => (string) $approval->id,
+                    'action' => 'approval_governance_rebound',
+                ]);
+            }
+
+            $bound = $status === AdminApproval::STATUS_APPROVED
+                ? $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id)
+                : $service->bindLegacyGovernance((string) $approval->id, (int) $owner->id, (int) $owner->id);
+
+            $this->assertSame($status, (string) $bound->status);
+            $this->assertFalse($service->requiresLegacyGovernanceBinding($bound));
+            $this->assertTrue($service->hasValidGovernanceEvidence($bound));
+            $this->assertDatabaseHas('audit_logs', [
+                'target_id' => (string) $approval->id,
+                'action' => 'approval_governance_rebound',
+                'reason' => 'legacy high-risk approval governance evidence rebound',
+            ]);
+        }
+
+        $malformed = $this->approval(AdminApproval::TYPE_REFUND, $owner, ['order_no' => 'legacy-malformed']);
+        DB::table('admin_approvals')->where('id', (string) $malformed->id)->update([
+            'status' => AdminApproval::STATUS_APPROVED,
+            'approved_by_admin_user_id' => (int) $owner->id,
+            'approved_at' => now()->subMinute()->startOfSecond(),
+            'payload_json' => json_encode([
+                'order_no' => 'legacy-malformed',
+                HighRiskApprovalService::METADATA_KEY => null,
+            ], JSON_THROW_ON_ERROR),
+        ]);
+        $malformed->refresh();
+        $this->assertFalse($service->requiresLegacyGovernanceBinding($malformed));
+
+        try {
+            $service->bindLegacyGovernance(
+                (string) $malformed->id,
+                (int) $owner->id,
+                (int) $owner->id,
+            );
+            $this->fail('Expected malformed existing governance evidence to remain fail closed.');
+        } catch (HighRiskApprovalValidationException) {
+            $this->assertFalse($service->hasValidGovernanceEvidence($malformed->fresh()));
+        }
+
         Queue::assertNothingPushed();
     }
 

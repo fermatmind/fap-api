@@ -70,10 +70,14 @@ final readonly class HighRiskApprovalService
             $this->assertActorPolicy($approval, $actorAdminUserId);
 
             if (strtoupper((string) $approval->status) === AdminApproval::STATUS_APPROVED) {
-                $this->assertExecutable($approval);
                 if ((int) $approval->approved_by_admin_user_id !== $actorAdminUserId) {
                     throw new HighRiskApprovalValidationException('Approval actor does not match the existing approval evidence.');
                 }
+                if ($this->requiresLegacyGovernanceBinding($approval)) {
+                    $this->bindLegacyGovernanceOnLockedApproval($approval, $actorAdminUserId);
+                }
+
+                $this->assertExecutable($approval);
 
                 return $approval;
             }
@@ -97,6 +101,28 @@ final readonly class HighRiskApprovalService
             $this->assertExecutable($approval);
 
             return $approval;
+        }, 3);
+    }
+
+    public function bindLegacyGovernance(
+        string $approvalId,
+        int $actorAdminUserId,
+        int $stepUpVerifiedAdminUserId,
+    ): AdminApproval {
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $stepUpVerifiedAdminUserId): AdminApproval {
+            $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
+            if (! $approval) {
+                throw new HighRiskApprovalValidationException('Approval record was not found.');
+            }
+
+            $this->assertStepUp($actorAdminUserId, $stepUpVerifiedAdminUserId);
+            $this->assertApprovalInputs($approval);
+            $this->assertActorPolicy($approval, $actorAdminUserId);
+            if (! $this->requiresLegacyGovernanceBinding($approval)) {
+                throw new HighRiskApprovalValidationException('Approval does not require legacy governance binding.');
+            }
+
+            return $this->bindLegacyGovernanceOnLockedApproval($approval, $actorAdminUserId);
         }, 3);
     }
 
@@ -158,6 +184,29 @@ final readonly class HighRiskApprovalService
         $type = $approval instanceof AdminApproval ? (string) $approval->type : $approval;
 
         return strtoupper(trim($type)) !== AdminApproval::TYPE_DATA_LIFECYCLE;
+    }
+
+    public function hasValidGovernanceEvidence(AdminApproval $approval): bool
+    {
+        try {
+            $this->assertExecutable($approval);
+
+            return true;
+        } catch (HighRiskApprovalValidationException) {
+            return false;
+        }
+    }
+
+    public function requiresLegacyGovernanceBinding(AdminApproval $approval): bool
+    {
+        $status = strtoupper((string) $approval->status);
+        if (! in_array($status, [AdminApproval::STATUS_APPROVED, AdminApproval::STATUS_FAILED], true)) {
+            return false;
+        }
+
+        $payload = is_array($approval->payload_json) ? $approval->payload_json : [];
+
+        return ! array_key_exists(self::METADATA_KEY, $payload);
     }
 
     public function surfaceIdFor(string $type): string
@@ -228,7 +277,7 @@ final readonly class HighRiskApprovalService
             || ! Str::isUuid((string) $approval->correlation_id)) {
             throw new HighRiskApprovalValidationException('Approval requester, reason, or correlation ID is invalid.');
         }
-        if (preg_match('/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i', (string) $approval->reason) === 1) {
+        if (AdminApproval::reasonContainsCredential((string) $approval->reason)) {
             throw new HighRiskApprovalValidationException('Approval reason must not contain credentials or secret material.');
         }
     }
@@ -265,14 +314,40 @@ final readonly class HighRiskApprovalService
         return $payload;
     }
 
-    /** @param array<string, mixed> $metadata */
-    private function writeApprovalAudit(AdminApproval $approval, array $metadata): void
+    private function bindLegacyGovernanceOnLockedApproval(AdminApproval $approval, int $actorAdminUserId): AdminApproval
     {
+        if ((int) $approval->approved_by_admin_user_id !== $actorAdminUserId) {
+            throw new HighRiskApprovalValidationException('Approval actor does not match the legacy approval record.');
+        }
+        $approvedAt = $approval->approved_at;
+        if (! $approvedAt instanceof Carbon) {
+            throw new HighRiskApprovalValidationException('Legacy approval timestamp is missing.');
+        }
+
+        $metadata = $this->evidence($approval, $actorAdminUserId, $approvedAt);
+        $payload = $this->businessPayload($approval);
+        $payload[self::METADATA_KEY] = $metadata;
+        $approval->payload_json = $payload;
+        $approval->save();
+
+        $this->writeApprovalAudit($approval, $metadata, 'approval_governance_rebound');
+        $approval->refresh();
+        $this->assertExecutable($approval);
+
+        return $approval;
+    }
+
+    /** @param array<string, mixed> $metadata */
+    private function writeApprovalAudit(
+        AdminApproval $approval,
+        array $metadata,
+        string $action = 'approval_approved',
+    ): void {
         $request = request();
         DB::table('audit_logs')->insert([
             'org_id' => (int) $approval->org_id,
             'actor_admin_id' => (int) $approval->approved_by_admin_user_id,
-            'action' => 'approval_approved',
+            'action' => $action,
             'target_type' => 'AdminApproval',
             'target_id' => (string) $approval->id,
             'meta_json' => json_encode([
@@ -288,7 +363,9 @@ final readonly class HighRiskApprovalService
             'ip' => $request->ip(),
             'user_agent' => mb_substr((string) $request->userAgent(), 0, 500),
             'request_id' => (string) ($request->headers->get('X-Request-ID') ?: $request->attributes->get('request_id') ?: ''),
-            'reason' => 'high-risk approval evidence recorded',
+            'reason' => $action === 'approval_governance_rebound'
+                ? 'legacy high-risk approval governance evidence rebound'
+                : 'high-risk approval evidence recorded',
             'result' => 'approved',
             'created_at' => now(),
         ]);
