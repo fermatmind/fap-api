@@ -98252,8 +98252,8 @@
     "branch": "codex/big5-en52-translation-authority-01",
     "title": "BIG5-EN52-TRANSLATION-AUTHORITY-01: freeze English translation authority",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "0505baedd97120d837ad4771874730d952028f64",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3181",
     "checks": {
       "authorization": {
@@ -98270,19 +98270,19 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed through reference-definition visibility head de56e497d82527c1ef0727cddb9f91470997ee6b. Twenty-six actionable Codex review findings were accepted; the final completed-page metadata-contract head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub required checks passed on final reviewed head 2463596979c43f87aaf5cf289d3723d72eb9fe78 with zero unresolved review threads. PR #3181 was squash-merged as 0505baedd97120d837ad4771874730d952028f64."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-18T21:28:07Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -98390,9 +98390,14 @@
         "at": "2026-07-18T21:21:13Z",
         "status": "github_review_fixes_completed",
         "note": "All nine checks passed on reference-definition visibility head de56e497d82527c1ef0727cddb9f91470997ee6b, then one valid P2 finding was accepted. Every completed page now locks package version, org, framework, source locale, parent identity, local-only lifecycle status, exact source IDs, editorial review boundary, and canonical identity fields; requires non-empty title, H1, SEO title/description, excerpt, intent, target questions, content/translation methods, and valid editorial dates; binds one body H1 exactly to frontmatter; and rejects cross-page duplicate public metadata. Block-list frontmatter parsing was added for target questions. The reproducible translated=0 authority validation remains green."
+      },
+      {
+        "at": "2026-07-18T21:28:07Z",
+        "status": "merged",
+        "note": "Final reviewed head 2463596979c43f87aaf5cf289d3723d72eb9fe78 passed all 9 required checks with zero unresolved review threads. PR #3181 was squash-merged as 0505baedd97120d837ad4771874730d952028f64; origin/main containment was verified and both local and remote feature branches were deleted before PR2 began."
       }
     ],
-    "updated_at": "2026-07-18T21:21:13Z"
+    "updated_at": "2026-07-18T21:28:07Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
@@ -98401,16 +98406,16 @@
     "branch": "codex/big5-en52-hubs-02",
     "title": "BIG5-EN52-HUBS-02: translate Big Five English hubs",
     "depends_on": ["BIG5-EN52-TRANSLATION-AUTHORITY-01"],
-    "status": "pending_dependency",
+    "status": "github_checks_pending",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3184",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
-      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-TRANSLATION-AUTHORITY-01 merge."},
-      "local_validation": {"status": "pending", "evidence": null},
+      "dependency": {"status": "passed", "evidence": "BIG5-EN52-TRANSLATION-AUTHORITY-01 merged as 0505baedd97120d837ad4771874730d952028f64; origin/main containment, required checks, review-thread closure, and branch cleanup were verified before this branch was created from that exact SHA."},
+      "local_validation": {"status": "passed", "evidence": "The frozen EN52 validator passed expected-translated=2 with pending=50; 31 ordered H2 mappings, 14 FAQ mappings, 13 locked claims, registered visible citations, canonical English links, exact word counts, no CJK, no duplicate substantive body, and zero CMS/production/database/media/search writes. Node syntax, both evidence JSON files, all generated JSON, train YAML/state parsing, git diff checks, and exact 7-path scope validation passed."},
       "github_required_checks": {"status": "pending", "evidence": null}
     },
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -98421,8 +98426,13 @@
     "api_runtime_change": false,
     "publish_allowed": false,
     "deploy_allowed": false,
-    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR2 scope; no page work starts before PR1 merges."}],
-    "updated_at": "2026-07-18T18:36:28Z"
+    "transitions": [
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR2 scope; no page work starts before PR1 merges."},
+      {"at": "2026-07-18T21:39:34Z", "status": "implementation_in_progress", "note": "Started from exact merged PR1 authority SHA 0505baedd97120d837ad4771874730d952028f64. Translating only the model hub and 30-facet hub with one-to-one section/FAQ maps and locked visible claims; CMS, runtime, production, database, media, search, deploy, and fap-web writes remain zero."},
+      {"at": "2026-07-18T21:43:43Z", "status": "local_validation_passed", "note": "Completed exactly two English hub pages and evidence sidecars: 31 ordered H2 mappings, 14 FAQ mappings, 13 locked claims, 4,939 reader-visible English words, canonical /en links, and zero public Chinese fragments. Frozen validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; all controlled write counters remain zero."},
+      {"at": "2026-07-18T21:47:00Z", "status": "github_checks_pending", "note": "Committed the exact seven-path PR2 scope as b1488b732 and opened PR #3184. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
+    ],
+    "updated_at": "2026-07-18T21:47:00Z"
   },
   "BIG5-EN52-DOMAINS-03": {
     "id": "BIG5-EN52-DOMAINS-03",
