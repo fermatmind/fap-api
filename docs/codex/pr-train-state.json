@@ -97839,7 +97839,7 @@
     "depends_on": [
       "CAREER-DETAIL-ATOMIC-EXPOSURE-01"
     ],
-    "status": "review_fix_local_validation_passed",
+    "status": "main_reconciliation_pending",
     "commit_sha": "b7a4e705c00b405749da73ed45895d813c81770e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3176",
     "checks": {
@@ -97853,7 +97853,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused Career coverage and observability tests passed (14 tests, 109 assertions); deploy guard tests passed initially (2 tests, 14 assertions); Big Five runtime freeze tests passed (2 tests, 5 assertions). After review, observability tests passed again (7 tests, 35 assertions), Big Five runtime freeze tests passed again (2 tests, 5 assertions), the opt-in schedule showed minimum-targets=2092 with batch-size=37, and the strict deploy-floor contract passed (2 tests, 16 assertions). Pint passed all review-touched PHP files, composer validate --strict passed, deploy.php lint passed, git diff checks passed, and exact 13-path scope validation passed."
+        "evidence": "Focused Career coverage and observability tests passed (14 tests, 109 assertions); deploy guard tests passed initially (2 tests, 14 assertions); Big Five runtime freeze tests passed (2 tests, 5 assertions). After review, observability tests passed again (7 tests, 35 assertions), Big Five runtime freeze tests passed again (2 tests, 5 assertions), the opt-in schedule showed minimum-targets=2092 with batch-size=37, and the strict deploy-floor contract passed (2 tests, 16 assertions). After the runtime-floor review, observability passed again (7 tests, 38 assertions) and Pint passed both touched PHP files. Composer validation, deploy.php lint, diff checks, and exact 13-path scope validation passed in the prior full local gate."
       },
       "github_required_checks": {
         "status": "pending",
@@ -97901,8 +97901,13 @@
         "at": "2026-07-18T16:45:41Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine checks passed on 5f69db6b4755dab4d060bcd12fefb355e94e6579 and the first two threads were resolved. A new valid same-scope review found that PHP integer casting could weaken a malformed deploy floor. The deploy guard now accepts only a strict positive base-10 integer and fails closed otherwise; focused deploy tests, Pint, PHP lint, and diff checks passed."
+      },
+      {
+        "at": "2026-07-18T16:54:18Z",
+        "status": "main_reconciliation_pending",
+        "note": "All nine checks passed on 869f10382ce1997be574197beb3b6b9527e04193 and the deploy-floor thread was resolved. A new valid review found the same malformed-integer risk in runtime config; config now rejects malformed or non-positive target floors before SLO or repair scheduling. Focused observability tests and Pint passed. GitHub reports main advanced to 781d1636b and the PR must reconcile that dependency before final checks."
       }
     ],
-    "updated_at": "2026-07-18T16:45:41Z"
+    "updated_at": "2026-07-18T16:54:18Z"
   }
 }

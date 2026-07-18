@@ -192,6 +192,9 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $this->assertStringContainsString('--resume-key=runtime-slo --confirm-production-write --json', $schedule);
         $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_REPAIR_MISSING_ENABLED', false)", $config);
         $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_REPAIR_BATCH_SIZE', 100)", $config);
+        $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT', 2092)", $config);
+        $this->assertStringContainsString("preg_match('/^[1-9][0-9]*$/D', \$careerDetailMinimumTargetsRaw) !== 1", $config);
+        $this->assertStringContainsString('CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT must be a positive base-10 integer.', $config);
     }
 
     private function seedReadyDirectoryCache(string $locale): void
