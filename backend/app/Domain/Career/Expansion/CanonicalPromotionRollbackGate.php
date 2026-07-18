@@ -88,8 +88,13 @@ final class CanonicalPromotionRollbackGate
     /**
      * @return array<string, mixed>
      */
-    public function validatePostPromotion(array $manifestPayload, array $truth, ?array $projection = null): array
-    {
+    /** @param list<array<string, mixed>> $preparedDetailCaches */
+    public function validatePostPromotion(
+        array $manifestPayload,
+        array $truth,
+        ?array $projection = null,
+        array $preparedDetailCaches = [],
+    ): array {
         $manifest = $this->manifest($manifestPayload);
         $transaction = CanonicalPromotionTransaction::fromManifest($manifest, CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED, false);
         $truthItems = $this->items($truth);
@@ -116,11 +121,15 @@ final class CanonicalPromotionRollbackGate
                 }
             }
 
-            $readiness = $this->detailExposureReadiness->jobDetailCacheReadiness(
+            $readiness = $this->preparedDetailReadiness(
+                $preparedDetailCaches,
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            ) ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
                 $expectedRow['slug'],
                 $expectedRow['locale'],
             );
-            if (! in_array($readiness['classification'], ['ready_active', 'ready_lkg', 'legacy_migratable'], true)) {
+            if (! in_array($readiness['classification'], ['ready_active', 'ready_lkg', 'legacy_migratable', 'ready_staged'], true)) {
                 $failures[] = $this->failure(
                     'post_promotion_detail_cache_not_ready',
                     $expectedRow['slug'],
@@ -424,6 +433,37 @@ final class CanonicalPromotionRollbackGate
     private function locale(array $item): string
     {
         return strtolower(trim((string) ($item['locale'] ?? '')));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $preparedDetailCaches
+     * @return array{classification: string, payload: array<string, mixed>|null, version: string|null}|null
+     */
+    private function preparedDetailReadiness(array $preparedDetailCaches, string $slug, string $locale): ?array
+    {
+        foreach ($preparedDetailCaches as $entry) {
+            if (
+                $this->slug($entry) === $slug
+                && $this->preparedLocale((string) ($entry['locale'] ?? '')) === $this->preparedLocale($locale)
+                && ($entry['status'] ?? null) === 'ready'
+                && ($entry['classification'] ?? null) === 'ready_staged'
+                && is_string($entry['version'] ?? null)
+                && trim((string) $entry['version']) !== ''
+            ) {
+                return [
+                    'classification' => 'ready_staged',
+                    'payload' => null,
+                    'version' => (string) $entry['version'],
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    private function preparedLocale(string $locale): string
+    {
+        return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
     }
 
     /**

@@ -168,8 +168,6 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         $projectionItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
         if (! $this->jobDetailProjectionItemIsPublished($projectionItem)) {
-            $this->forgetJobDetailPayload($normalizedSlug, $normalizedLocale);
-
             if (is_array($projectionItem)) {
                 Cache::put(
                     $this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale),
@@ -178,6 +176,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 );
             }
 
+            // Publication authority remains fail-closed (404), but a read path
+            // must not destroy immutable/pointer state prepared by an in-flight
+            // promotion or retained while a materialized projection catches up.
             return ['payload' => null, 'state' => 'not_found'];
         }
 
@@ -406,9 +407,10 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     }
 
     /**
-     * Build and publish one target-locale detail projection from an explicit
+     * Build and stage one target-locale detail projection from an explicit
      * post-promotion projection item while the exposure transaction is still
-     * uncommitted. The cache can exist safely before route flags become public.
+     * uncommitted. Only the immutable version payload is written; no public
+     * active/LKG pointer can be removed by a concurrent candidate request.
      *
      * @param  array<string, mixed>  $projectionItem
      * @return array<string, mixed>
@@ -447,20 +449,107 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             ];
         }
 
-        $version = $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $payload);
-        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+        $version = (string) Str::ulid();
+        $payloadKey = $this->jobDetailVersionPayloadKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $version,
+        );
+        Cache::forever($payloadKey, $payload);
+        $stagedPayload = Cache::get($payloadKey);
+        $ready = is_array($stagedPayload);
 
         return [
             'slug' => $normalizedSlug,
             'locale' => $normalizedLocale,
-            'status' => in_array(
-                $readiness['classification'],
-                ['ready_active', 'ready_lkg', 'legacy_migratable'],
-                true,
-            ) ? 'ready' : 'verification_failed',
-            'classification' => $readiness['classification'],
+            'status' => $ready ? 'ready' : 'verification_failed',
+            'classification' => $ready ? 'ready_staged' : 'missing_payload',
             'version' => $version,
         ];
+    }
+
+    /**
+     * Atomically activate an already verified batch of immutable detail payloads
+     * after database exposure commits. Pointer snapshots are restored if any
+     * target cannot be verified or switched.
+     *
+     * @param  list<array<string, mixed>>  $preparedEntries
+     * @return array{status: string, entries: list<array<string, mixed>>, failures: list<array<string, mixed>>}
+     */
+    public function activatePreparedJobDetailPayloadsForExposure(array $preparedEntries): array
+    {
+        $entries = [];
+        $failures = [];
+        if ($preparedEntries === []) {
+            return [
+                'status' => 'blocked',
+                'entries' => [],
+                'failures' => [['reason' => 'prepared_detail_entries_missing']],
+            ];
+        }
+
+        foreach ($preparedEntries as $entry) {
+            $slug = strtolower(trim((string) ($entry['slug'] ?? '')));
+            $rawLocale = trim((string) ($entry['locale'] ?? ''));
+            $locale = $this->normalizePublicLocale($rawLocale);
+            $version = trim((string) ($entry['version'] ?? ''));
+            if (
+                $slug === ''
+                || $rawLocale === ''
+                || $version === ''
+                || ($entry['status'] ?? null) !== 'ready'
+                || ($entry['classification'] ?? null) !== 'ready_staged'
+            ) {
+                $failures[] = [
+                    'reason' => 'prepared_detail_entry_invalid',
+                    'slug' => $slug,
+                    'locale' => $locale,
+                ];
+
+                continue;
+            }
+
+            $key = $slug.'|'.$locale;
+            if (isset($entries[$key])) {
+                $failures[] = [
+                    'reason' => 'prepared_detail_entry_duplicate',
+                    'slug' => $slug,
+                    'locale' => $locale,
+                ];
+
+                continue;
+            }
+
+            $entries[$key] = [
+                'slug' => $slug,
+                'locale' => $locale,
+                'version' => $version,
+            ];
+        }
+
+        if ($failures !== [] || count($entries) !== count($preparedEntries)) {
+            return ['status' => 'blocked', 'entries' => [], 'failures' => $failures];
+        }
+
+        ksort($entries, SORT_STRING);
+
+        try {
+            $activated = $this->withJobDetailExposureLocks(
+                array_keys($entries),
+                fn (): array => $this->activateStagedJobDetailReadModels(array_values($entries)),
+            );
+        } catch (\Throwable $throwable) {
+            return [
+                'status' => 'blocked',
+                'entries' => [],
+                'failures' => [[
+                    'reason' => 'prepared_detail_activation_failed',
+                    'context' => ['error_class' => $throwable::class],
+                ]],
+            ];
+        }
+
+        return ['status' => 'pass', 'entries' => $activated, 'failures' => []];
     }
 
     /** @param array<string, mixed> $payload */
@@ -481,6 +570,100 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         Cache::forget($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
 
         return $version;
+    }
+
+    /**
+     * @param  list<array{slug: string, locale: string, version: string}>  $entries
+     * @return list<array<string, mixed>>
+     */
+    private function activateStagedJobDetailReadModels(array $entries): array
+    {
+        $snapshots = [];
+        foreach ($entries as $entry) {
+            $slug = $entry['slug'];
+            $locale = $entry['locale'];
+            $version = $entry['version'];
+            $payload = Cache::get($this->jobDetailVersionPayloadKey($slug, $locale, $version));
+            if (! is_array($payload)) {
+                throw new \RuntimeException(sprintf(
+                    'Career detail staged payload verification failed for %s (%s).',
+                    $slug,
+                    $locale,
+                ));
+            }
+
+            $snapshots[$slug.'|'.$locale] = [
+                'active' => $this->cacheValueSnapshot($this->jobDetailActiveVersionKey($slug, $locale)),
+                'lkg' => $this->cacheValueSnapshot($this->jobDetailLkgVersionKey($slug, $locale)),
+                'negative' => $this->cacheValueSnapshot($this->jobDetailNegativeKey($slug, $locale)),
+                'legacy' => $this->cacheValueSnapshot($this->jobDetailCacheKey($slug, $locale)),
+            ];
+        }
+
+        $attempted = [];
+        try {
+            foreach ($entries as $entry) {
+                $slug = $entry['slug'];
+                $locale = $entry['locale'];
+                $version = $entry['version'];
+                $key = $slug.'|'.$locale;
+                $attempted[] = $key;
+                $previousVersion = $snapshots[$key]['active']['value'];
+                if (is_string($previousVersion) && $previousVersion !== '') {
+                    Cache::forever($this->jobDetailLkgVersionKey($slug, $locale), $previousVersion);
+                }
+                Cache::forever($this->jobDetailActiveVersionKey($slug, $locale), $version);
+                if (Cache::get($this->jobDetailActiveVersionKey($slug, $locale)) !== $version) {
+                    throw new \RuntimeException(sprintf(
+                        'Career detail active pointer verification failed for %s (%s).',
+                        $slug,
+                        $locale,
+                    ));
+                }
+                Cache::forget($this->jobDetailNegativeKey($slug, $locale));
+                Cache::forget($this->jobDetailCacheKey($slug, $locale));
+            }
+        } catch (\Throwable $throwable) {
+            foreach (array_reverse($attempted) as $key) {
+                [$slug, $locale] = explode('|', $key, 2);
+                $snapshot = $snapshots[$key];
+                $this->restoreCacheValue($this->jobDetailActiveVersionKey($slug, $locale), $snapshot['active']);
+                $this->restoreCacheValue($this->jobDetailLkgVersionKey($slug, $locale), $snapshot['lkg']);
+                $this->restoreCacheValue($this->jobDetailNegativeKey($slug, $locale), $snapshot['negative']);
+                $this->restoreCacheValue($this->jobDetailCacheKey($slug, $locale), $snapshot['legacy']);
+            }
+
+            throw $throwable;
+        }
+
+        return array_map(static fn (array $entry): array => [
+            'slug' => $entry['slug'],
+            'locale' => $entry['locale'],
+            'status' => 'ready',
+            'classification' => 'ready_active',
+            'version' => $entry['version'],
+        ], $entries);
+    }
+
+    /**
+     * @param  list<string>  $targets
+     * @param  callable(): list<array<string, mixed>>  $callback
+     * @return list<array<string, mixed>>
+     */
+    private function withJobDetailExposureLocks(array $targets, callable $callback, int $offset = 0): array
+    {
+        if (! isset($targets[$offset])) {
+            return $callback();
+        }
+
+        [$slug, $locale] = explode('|', $targets[$offset], 2);
+        $lock = Cache::lock($this->jobDetailExposureActivationLockKey($slug, $locale), 30);
+
+        return $lock->block(35, fn (): array => $this->withJobDetailExposureLocks(
+            $targets,
+            $callback,
+            $offset + 1,
+        ));
     }
 
     /**
@@ -1178,6 +1361,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     public function jobDetailNegativeKey(string $slug, string $publicLocale): string
     {
         return sprintf('%s:%s:%s:negative', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function jobDetailExposureActivationLockKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:exposure-lock', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale));
     }
 
     private function directoryReadModelCacheKey(string $publicLocale): string

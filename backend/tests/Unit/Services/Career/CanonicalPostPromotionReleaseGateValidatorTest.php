@@ -64,9 +64,10 @@ final class CanonicalPostPromotionReleaseGateValidatorTest extends TestCase
         $this->assertSame('missing_pointer', data_get($result, 'failures.0.context.classification'));
         $this->assertSame([
             'build_projection',
-            'publish_active_or_lkg_safe_detail_projection',
-            'verify_detail_pointer_and_payload',
+            'stage_immutable_detail_projection',
+            'verify_staged_detail_payload',
             'expose_runtime_projection_flags',
+            'activate_detail_pointer_batch',
             'rebuild_and_activate_directory_read_model',
         ], $result['required_exposure_sequence']);
     }

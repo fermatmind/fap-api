@@ -15,9 +15,19 @@ final class CanonicalPostPromotionReleaseGateService
     /**
      * @return array<string, mixed>
      */
-    public function evaluate(array $manifestPayload, array $truth, ?array $projection = null): array
-    {
-        $validation = $this->validator->validate($manifestPayload, $truth, $projection);
+    /** @param list<array<string, mixed>> $preparedDetailCaches */
+    public function evaluate(
+        array $manifestPayload,
+        array $truth,
+        ?array $projection = null,
+        array $preparedDetailCaches = [],
+    ): array {
+        $validation = $this->validator->validate(
+            $manifestPayload,
+            $truth,
+            $projection,
+            $preparedDetailCaches,
+        );
 
         $manifest = $this->manifest($manifestPayload);
         $transaction = CanonicalPromotionTransaction::fromManifest($manifest, CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED, false);

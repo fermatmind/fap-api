@@ -5,12 +5,13 @@ Career detail exposure is fail-closed against the same cache-readiness contract 
 The required release order is:
 
 1. build the detail projection;
-2. publish an active/LKG-safe detail projection;
-3. verify its pointer and payload;
-4. expose runtime projection flags such as `detail_route_enabled` and `dataset_visible`;
-5. rebuild and activate the locale directory read model.
+2. stage an immutable detail payload for every target slug and locale without exposing an active/LKG pointer;
+3. verify every staged payload and the post-promotion gates;
+4. commit runtime projection flags such as `detail_route_enabled` and `dataset_visible`;
+5. atomically activate the prepared detail pointer batch with pointer restoration on failure;
+6. rebuild and activate the locale directory read model.
 
-`CareerRuntimePublishProjectionValidator`, the canonical promotion rollback gate, and the post-promotion release gate reject exposure with `detail_cache_not_ready_for_exposure` or `post_promotion_detail_cache_not_ready` when the target locale is not ready. Apply prepares only the bounded promotion batch from its explicit post-promotion projection while database exposure remains uncommitted, verifies the resulting active pointer and payload, commits exposure, and then activates the directory. It never performs a synchronous full-corpus rebuild.
+`CareerRuntimePublishProjectionValidator`, the canonical promotion rollback gate, and the post-promotion release gate reject exposure with `detail_cache_not_ready_for_exposure` or `post_promotion_detail_cache_not_ready` when the target locale is not ready. Apply prepares only the bounded promotion batch from its explicit post-promotion projection while database exposure remains uncommitted. The prepared immutable versions are verified without publishing active pointers, so a concurrent candidate request cannot purge them. After database commit, the full prepared pointer batch is activated under deterministic locks with snapshot restoration on failure, and only then is the directory activated. Candidate or temporarily stale materialized-projection reads remain 404 but do not delete prepared/active cache state. It never performs a synchronous full-corpus rebuild.
 
 For ordinary targeted warming, detail payloads are warmed before the full directory/index warm so the newly activated directory observes the final locale readiness state. Promotion-driven directory activation overlays the exact validated post-promotion projection onto any older materialized lookup, so the new slug is present without waiting for a later artifact export. Multi-locale directory activation acquires every target-locale rebuild lock before building payloads or inspecting detail readiness, then stages and verifies every immutable locale payload before switching any active pointer. If a later pointer switch fails, all active/LKG/activation metadata touched by the batch is restored, so a partially activated directory cannot advertise a remediated promotion.
 

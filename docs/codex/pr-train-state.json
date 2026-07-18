@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "github_review_fix_ready_to_commit",
     "commit_sha": "67bd30942945b1a3ebe5641261bdc4aed23a67ad",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97256,11 +97256,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After inspecting all five automated review threads, the current same-scope manifest suite passed 90 tests / 655 assertions across projection and promotion gates, candidate-safe cache preparation, stale materialized projection overlay, post-promotion apply/rollback, atomic multi-locale activation/rollback, lock-scoped directory payload construction, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. The new regression proves detail-readiness reads occur only after both locale rebuild locks are held; the prior pointer-restore regression remains green. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 13ms and 135ms with one DB query. All 25 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-eight-path merge-base allowlist passed."
+        "evidence": "After inspecting all six automated review threads, the current Career manifest suite passed 90 tests / 663 assertions across projection/promotion gates, immutable pre-exposure staging, concurrent candidate/stale-projection reads, atomic detail-pointer activation/rollback, stale materialized directory overlay, atomic lock-scoped directory construction/rollback, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 92 tests / 669 assertions total. The actual readiness path built 1046 and 10000 row directories in about 14ms and 140ms with one DB query. All 26 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-nine-path merge-base allowlist passed."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine checks passed on exact head a2d56f79ebda6e5165abe58bcc75157915d8c0f8. Final review then found a fifth valid P2: directory payloads were captured before locale locks, allowing an older blocked warmer to overwrite newer readiness. The local repair acquires deterministic target-locale locks before authority/readiness reads and payload construction, then preserves the existing stage/verify/atomic activation and pointer restoration contract. Exact-head checks will restart after push."
+        "evidence": "All nine checks passed on exact head 542e865368ad44711c216ff273e3d8beb7db24a2. Final review then found a sixth valid P2: an uncommitted promotion published active detail pointers that a concurrent committed candidate read could purge. The local repair stages only immutable version payloads before commit, validates gates against the explicit prepared batch, atomically activates all detail pointers after commit with snapshot restoration, and keeps unpublished/stale-projection reads fail-closed without destructive pointer deletion. Exact-head checks will restart after push."
       }
     },
     "scope_validation": {
@@ -97349,8 +97349,13 @@
         "at": "2026-07-18T11:44:52Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed lock-scoped directory payload construction as 67bd30942945b1a3ebe5641261bdc4aed23a67ad. Replied to the fifth P2 with the nested-lock regression and full local evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:02:59Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on 542e865368ad44711c216ff273e3d8beb7db24a2, but final review found a sixth valid P2: pre-commit active pointers could be purged by a concurrent request still observing committed candidate authority. The repair stages only unreachable immutable versions, validates the explicit prepared batch in both promotion gates, commits DB exposure, atomically activates all prepared detail pointers under deterministic locks with full pointer restoration, then activates the directory. Candidate or stale-materialized reads remain 404 but no longer delete prepared/active pointers. Regressions prove candidate reads preserve staging and active cache, later-locale detail activation failure restores both locales, and the command completes the exact six-step sequence. The full 92-test / 669-assertion manifest and Big Five suites, 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope gate pass. No production cache, DB, CMS, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T11:44:52Z"
+    "updated_at": "2026-07-18T12:02:59Z"
   }
 }

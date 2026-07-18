@@ -180,6 +180,7 @@ final class CanonicalBatchPromotionExecutorService
                 $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
                 $postTruth,
                 $postProjection,
+                $cachePreparation['entries'],
             );
 
             if (($postPromotionValidation['status'] ?? null) !== 'pass') {
@@ -195,6 +196,7 @@ final class CanonicalBatchPromotionExecutorService
                 $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
                 $postTruth,
                 $postProjection,
+                $cachePreparation['entries'],
             );
 
             $closeoutAllowed = (bool) ($releaseGate['closeout_allowed'] ?? false);
@@ -209,6 +211,25 @@ final class CanonicalBatchPromotionExecutorService
             }
 
             DB::commit();
+
+            $detailCacheActivation = $this->responseCache->activatePreparedJobDetailPayloadsForExposure(
+                $cachePreparation['entries'],
+            );
+            if (($detailCacheActivation['status'] ?? null) !== 'pass') {
+                return $this->promotionValidationFailedResult(
+                    $transaction,
+                    $preStates,
+                    $promotedStates,
+                    [
+                        'status' => 'blocked',
+                        'failures' => [[
+                            'reason' => 'post_promotion_detail_cache_activation_failed',
+                            'context' => ['failures' => $detailCacheActivation['failures'] ?? []],
+                        ]],
+                    ],
+                    $releaseGate,
+                );
+            }
 
             try {
                 $directoryActivation = $this->responseCache->warmDirectoryReadModels(
@@ -234,7 +255,8 @@ final class CanonicalBatchPromotionExecutorService
 
             return $this->successResult(
                 $transaction, $preStates, $promotedStates, $releaseGate,
-                $postProjection, $postTruth, $cachePreparation, $directoryActivation,
+                $postProjection, $postTruth, $cachePreparation, $detailCacheActivation,
+                $directoryActivation,
             );
         } catch (\Throwable $e) {
             if (DB::transactionLevel() > 0) {
@@ -759,6 +781,7 @@ final class CanonicalBatchPromotionExecutorService
         array $projection,
         array $truth,
         array $cachePreparation,
+        array $detailCacheActivation,
         array $directoryActivation,
     ): array {
         $projectionCounts = is_array($projection['counts'] ?? null) ? $projection['counts'] : [];
@@ -787,12 +810,14 @@ final class CanonicalBatchPromotionExecutorService
             ],
             'release_gate' => $releaseGate,
             'cache_preparation' => $cachePreparation,
+            'detail_cache_activation' => $detailCacheActivation,
             'directory_activation' => $directoryActivation,
             'atomic_exposure_sequence' => [
                 'build_projection',
-                'publish_active_or_lkg_safe_detail_projection',
-                'verify_detail_pointer_and_payload',
+                'stage_immutable_detail_projection',
+                'verify_staged_detail_payload',
                 'expose_runtime_projection_flags',
+                'activate_detail_pointer_batch',
                 'rebuild_and_activate_directory_read_model',
             ],
             'closeout_allowed' => (bool) ($releaseGate['closeout_allowed'] ?? false),

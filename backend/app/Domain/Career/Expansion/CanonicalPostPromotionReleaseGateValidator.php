@@ -17,8 +17,13 @@ final class CanonicalPostPromotionReleaseGateValidator
     /**
      * @return list<array<string, mixed>>
      */
-    public function validate(array $manifestPayload, array $truth, ?array $projection = null): array
-    {
+    /** @param list<array<string, mixed>> $preparedDetailCaches */
+    public function validate(
+        array $manifestPayload,
+        array $truth,
+        ?array $projection = null,
+        array $preparedDetailCaches = [],
+    ): array {
         $manifest = $this->manifest($manifestPayload);
         $transaction = CanonicalPromotionTransaction::fromManifest($manifest, CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED, false);
         $truthItems = $this->items($truth);
@@ -56,7 +61,11 @@ final class CanonicalPostPromotionReleaseGateValidator
                 ]);
             }
 
-            $readiness = $this->detailExposureReadiness->jobDetailCacheReadiness(
+            $readiness = $this->preparedDetailReadiness(
+                $preparedDetailCaches,
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            ) ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
                 $expectedRow['slug'],
                 $expectedRow['locale'],
             );
@@ -95,9 +104,10 @@ final class CanonicalPostPromotionReleaseGateValidator
             ],
             'required_exposure_sequence' => [
                 'build_projection',
-                'publish_active_or_lkg_safe_detail_projection',
-                'verify_detail_pointer_and_payload',
+                'stage_immutable_detail_projection',
+                'verify_staged_detail_payload',
                 'expose_runtime_projection_flags',
+                'activate_detail_pointer_batch',
                 'rebuild_and_activate_directory_read_model',
             ],
             'failures' => $failures,
@@ -234,6 +244,37 @@ final class CanonicalPostPromotionReleaseGateValidator
     }
 
     /**
+     * @param  list<array<string, mixed>>  $preparedDetailCaches
+     * @return array{classification: string, payload: array<string, mixed>|null, version: string|null}|null
+     */
+    private function preparedDetailReadiness(array $preparedDetailCaches, string $slug, string $locale): ?array
+    {
+        foreach ($preparedDetailCaches as $entry) {
+            if (
+                $this->slug($entry) === $slug
+                && $this->preparedLocale((string) ($entry['locale'] ?? '')) === $this->preparedLocale($locale)
+                && ($entry['status'] ?? null) === 'ready'
+                && ($entry['classification'] ?? null) === 'ready_staged'
+                && is_string($entry['version'] ?? null)
+                && trim((string) $entry['version']) !== ''
+            ) {
+                return [
+                    'classification' => 'ready_staged',
+                    'payload' => null,
+                    'version' => (string) $entry['version'],
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    private function preparedLocale(string $locale): string
+    {
+        return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
+    }
+
+    /**
      * @param  array<string, mixed>  $context
      */
     private function failure(string $reason, ?string $slug = null, ?string $locale = null, array $context = []): array
@@ -253,7 +294,7 @@ final class CanonicalPostPromotionReleaseGateValidator
     {
         return in_array(
             $readiness['classification'],
-            ['ready_active', 'ready_lkg', 'legacy_migratable'],
+            ['ready_active', 'ready_lkg', 'legacy_migratable', 'ready_staged'],
             true,
         );
     }

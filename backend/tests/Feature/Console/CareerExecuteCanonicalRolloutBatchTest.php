@@ -12,6 +12,7 @@ use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -296,9 +297,10 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertFalse($payload['rollback_required'] ?? true);
         $this->assertSame([
             'build_projection',
-            'publish_active_or_lkg_safe_detail_projection',
-            'verify_detail_pointer_and_payload',
+            'stage_immutable_detail_projection',
+            'verify_staged_detail_payload',
             'expose_runtime_projection_flags',
+            'activate_detail_pointer_batch',
             'rebuild_and_activate_directory_read_model',
         ], $payload['atomic_exposure_sequence'] ?? null);
     }
@@ -332,6 +334,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame('promoted_success', $payload['status'] ?? null);
         $this->assertSame('pass', data_get($payload, 'cache_preparation.status'));
         $this->assertCount(2, data_get($payload, 'cache_preparation.entries'));
+        $this->assertSame('pass', data_get($payload, 'detail_cache_activation.status'));
         $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
         $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'zh'));
         $cachedPayload = $cache->jobDetailCacheReadiness('actuaries', 'en')['payload'];
@@ -345,6 +348,79 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
             'actuaries',
             array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
         );
+    }
+
+    public function test_candidate_request_cannot_purge_a_staged_pre_exposure_payload(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+
+        $this->assertSame('ready', $prepared['status']);
+        $this->assertSame('ready_staged', $prepared['classification']);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared]);
+
+        $this->assertSame('pass', $activation['status']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame($prepared['version'], $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
+        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+    }
+
+    public function test_prepared_detail_activation_restores_all_pointers_when_a_later_locale_fails(): void
+    {
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldEnVersion = $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'old-en']);
+        $oldZhVersion = $cache->publishJobDetailReadModel('actuaries', 'zh', ['fixture' => 'old-zh']);
+        $prepared = collect($publishedProjection['items'])
+            ->map(fn (array $item): array => $cache->prepareJobDetailPayloadForExposure(
+                'actuaries',
+                (string) $item['locale'],
+                $item,
+            ))
+            ->values()
+            ->all();
+        $cacheManager = Cache::getFacadeRoot();
+        $zhActiveKey = $cache->jobDetailActiveVersionKey('actuaries', 'zh');
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhActiveKey, $oldZhVersion): bool {
+                    if ($key === $zhActiveKey && $value !== $oldZhVersion) {
+                        throw new \RuntimeException('synthetic zh detail activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            $activation = $cache->activatePreparedJobDetailPayloadsForExposure($prepared);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame('blocked', $activation['status']);
+        $this->assertSame($oldEnVersion, $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
+        $this->assertSame($oldZhVersion, $cache->jobDetailCacheReadiness('actuaries', 'zh')['version']);
     }
 
     public function test_command_writes_audit_report(): void
