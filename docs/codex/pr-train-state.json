@@ -97381,8 +97381,8 @@
     "depends_on": [
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "cb6632ef47de8cf9b9ba097c9c9a7df8a96131df",
+    "status": "github_checks_pending",
+    "commit_sha": "2c21a828cfd37f29e6892b88353535c15d0a404a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
       "dependency": {
@@ -97391,17 +97391,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the fourteenth exact-head review repair, focused approval/registry validation passed 24 tests/516 assertions and the exact runtime-freeze contract remains covered by the prior 367/759 pass. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove JSON single/double-quoted credentials are rejected before Eloquent persistence and by the legacy/direct-row service boundary, while recovery-code audit and executor-redaction protections remain fail closed."
+        "evidence": "After the fifteenth exact-head review repair, focused approval/registry validation passed 25 tests/529 assertions and the exact runtime-freeze contract passed 367/759. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five, Enneagram 10/369, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove Basic Authorization values are fully removed from error/audit output and failed step-up attempts are limited per actor/action before verifier invocation, with success clearing only its own bucket."
       },
       "github": {
-        "status": "passed",
-        "evidence": "Exact fourteenth-repair ledger head db9a2fc6f98537d5e799decda1f98231abab37b7 passed all nine required CI/code-scanning checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Exact-head Codex review reported no major issues, every review thread is resolved, and GitHub reports MERGEABLE/CLEAN."
+        "status": "pending",
+        "evidence": "Ready-to-merge ledger head 12755f1dc154b3aa4266bb0587f779f5289ad450 passed all nine checks and exact-head review reported no major issues, but the final pre-merge thread audit exposed two earlier unresolved P2 findings that landed during ledger progression: multi-word Authorization values and unthrottled fresh step-up attempts. Both are repaired in implementation commit 2c21a828cfd37f29e6892b88353535c15d0a404a, local gates passed, and the push/check/review rerun is pending."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97534,9 +97534,24 @@
         "at": "2026-07-18T18:27:43Z",
         "status": "ready_to_merge",
         "note": "Exact implementation-plus-ledger head db9a2fc6f98537d5e799decda1f98231abab37b7 passed all nine required checks. Exact-head Codex review reported no major issues, all fourteen prior review findings are repaired and every thread is resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This ready_to_merge ledger-only commit must itself pass required checks and exact-head review before squash merge."
+      },
+      {
+        "at": "2026-07-18T18:51:24Z",
+        "status": "premerge_review_threads_found_fix_in_progress",
+        "note": "Final pre-merge GraphQL audit correctly stopped merge after finding two unresolved P2 threads that had landed while later ledger heads were progressing: Authorization: Basic values retained the credential after the scheme, and fresh high-risk step-up verification had no per-actor/action attempt limiter. No merge occurred."
+      },
+      {
+        "at": "2026-07-18T18:51:24Z",
+        "status": "local_check_failed_then_repaired",
+        "note": "The first combined post-repair check passed runtime-freeze 367/759, then Pint found one unary-operator spacing issue in HighRiskApprovalService and stopped the remaining chained checks. Pint repaired that single mechanical format issue; the full formatting, syntax, Composer strict, structured-file, scope, and diff checks then passed."
+      },
+      {
+        "at": "2026-07-18T18:51:24Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Fifteenth review repair now redacts an entire multi-word Authorization header value before generic scalar redaction, and privately enforces five failed step-up attempts per minute for each actor/action bucket before invoking TOTP/recovery verification. Success clears only the matching bucket; approve, reject, legacy bind, execute, and retry use fixed internal action names. Focused approval/registry tests passed 25/529, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
       }
     ],
-    "updated_at": "2026-07-18T18:27:43Z"
+    "updated_at": "2026-07-18T18:51:24Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
