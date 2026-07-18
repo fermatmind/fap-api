@@ -568,10 +568,14 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
      * broader job-index, dataset, or launch-governance cache families.
      *
      * @param  list<string>  $publicLocales
+     * @param  list<array<string, mixed>>|null  $exposureProjectionItems
      * @return array<string, array{locale: string, status: string, version: ?string, member_count: int}>
      */
-    public function warmDirectoryReadModels(array $publicLocales = ['en', 'zh-CN'], ?callable $reporter = null): array
-    {
+    public function warmDirectoryReadModels(
+        array $publicLocales = ['en', 'zh-CN'],
+        ?callable $reporter = null,
+        ?array $exposureProjectionItems = null,
+    ): array {
         $locales = array_values(array_unique(array_map(
             fn (string $locale): string => $this->normalizePublicLocale($locale),
             $publicLocales === [] ? ['en', 'zh-CN'] : $publicLocales,
@@ -591,6 +595,13 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 'bundle_version' => 'career.protocol.job_index.v1',
                 'items' => $sourceItems,
             ], $locale);
+            if ($exposureProjectionItems !== null) {
+                $jobIndex['items'] = $this->mergeExposureDirectoryItems(
+                    is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [],
+                    $exposureProjectionItems,
+                    $locale,
+                );
+            }
             $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
             $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
                 $items,
@@ -626,6 +637,44 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         return $summary;
+    }
+
+    /**
+     * @param  list<mixed>  $currentItems
+     * @param  list<array<string, mixed>>  $projectionItems
+     * @return list<array<string, mixed>>
+     */
+    private function mergeExposureDirectoryItems(
+        array $currentItems,
+        array $projectionItems,
+        string $publicLocale,
+    ): array {
+        $projectionLocale = $this->normalizePublicLocale($publicLocale) === 'zh-CN' ? 'zh' : 'en';
+        $localeItems = array_values(array_filter(
+            $projectionItems,
+            fn (array $item): bool => $this->projectionItemLocale($item) === $projectionLocale
+                && ($item['dataset_visible'] ?? false) === true
+                && $this->jobDetailProjectionItemIsPublished($item),
+        ));
+        $exposureItems = CareerJobListItemResource::collection(
+            $this->careerJobListBundleBuilder->buildFromRuntimeProjectionItems($localeItems),
+        )->resolve();
+
+        $itemsBySlug = [];
+        foreach (array_merge($currentItems, $exposureItems) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
+            if ($slug !== '') {
+                $itemsBySlug[$slug] = $item;
+            }
+        }
+
+        ksort($itemsBySlug, SORT_STRING);
+
+        return array_values($itemsBySlug);
     }
 
     /**
@@ -1058,6 +1107,14 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $normalized = strtolower(trim($publicLocale));
 
         return in_array($normalized, ['en', 'en-us'], true) ? 'en' : 'zh-CN';
+    }
+
+    /** @param array<string, mixed> $item */
+    private function projectionItemLocale(array $item): string
+    {
+        return str_starts_with(strtolower(trim((string) ($item['locale'] ?? 'en'))), 'zh')
+            ? 'zh'
+            : 'en';
     }
 
     private function cachePhaseLocale(string $publicLocale): string

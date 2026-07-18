@@ -211,7 +211,11 @@ final class CanonicalBatchPromotionExecutorService
             DB::commit();
 
             try {
-                $directoryActivation = $this->responseCache->warmDirectoryReadModels($locales);
+                $directoryActivation = $this->responseCache->warmDirectoryReadModels(
+                    $locales,
+                    null,
+                    $this->itemsFromPayload($postProjection),
+                );
             } catch (\Throwable $throwable) {
                 return $this->promotionValidationFailedResult(
                     $transaction,

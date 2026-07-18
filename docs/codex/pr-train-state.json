@@ -5631,7 +5631,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2753",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "github_review_fix_ready_to_commit",
     "title": "B5-RESULT-RUNNER-SOP-RUNBOOK-01: Document Big Five V2 agent execution runner SOP",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "transitions": [
@@ -97256,17 +97256,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After inspecting all three automated review threads, the same-scope repair suite passed 100 tests / 791 assertions across projection and promotion gates, candidate-safe cache preparation for runtime-shell and compiled authority paths, apply/rollback behavior, post-promotion command, atomic multi-locale directory activation/rollback, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 12ms and 133ms with one DB query. All 24 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-seven-path allowlist passed."
+        "evidence": "After inspecting all four automated review threads, the same-scope repair suite passed 100 tests / 793 assertions across projection and promotion gates, candidate-safe cache preparation for runtime-shell and compiled authority paths, apply/rollback behavior, stale materialized projection overlay, post-promotion command, atomic multi-locale directory activation/rollback, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 12ms and 136ms with one DB query. All 25 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-eight-path allowlist passed."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "All nine CI and code-scanning checks passed on exact repair-ledger head 24037e6f1dbebce6feb070d42f5bdf1386731cf6. GitHub reports MERGEABLE/CLEAN and all three automated review threads are resolved."
+        "status": "pending",
+        "evidence": "All nine checks passed on ready ledger head 6147ed9320231f9102ddb1563246e25683008b26, then a new valid P1 identified directory activation reading a stale materialized candidate projection instead of the validated post-promotion projection. The local repair overlays that exact validated locale projection during atomic directory activation. Exact-head checks will restart after push."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97329,8 +97329,13 @@
         "at": "2026-07-18T11:01:45Z",
         "status": "ready_to_merge",
         "note": "All nine required CI/code-scanning checks passed on exact head 24037e6f1dbebce6feb070d42f5bdf1386731cf6. All three review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-seven-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T11:17:25Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks also passed on ready-ledger head 6147ed9320231f9102ddb1563246e25683008b26. Final review found a fourth valid P1: directory activation could still omit the newly promoted slug when the materialized lookup remained on its pre-promotion candidate artifact. The repair passes the exact validated post-promotion items into directory warm, overlays only published/dataset-visible rows for the matching locale, and preserves the broader existing directory. A regression creates a newer stale candidate artifact, proves lookup still sees published_candidate before apply, and proves the activated en directory contains the promoted slug. The complete 100-test / 793-assertion suite, Big Five classifier, all 25 Pint paths, Composer/YAML/JSON, diff, and exact twenty-eight-path scope checks pass."
       }
     ],
-    "updated_at": "2026-07-18T11:01:45Z"
+    "updated_at": "2026-07-18T11:17:25Z"
   }
 }

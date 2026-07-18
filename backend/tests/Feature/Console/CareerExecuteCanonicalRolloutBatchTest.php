@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -18,6 +20,8 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     use RefreshDatabase;
 
     private string $tmpProjectionPath;
+
+    private ?string $materializedProjectionDir = null;
 
     protected function setUp(): void
     {
@@ -49,6 +53,9 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     {
         if (is_file($this->tmpProjectionPath)) {
             @unlink($this->tmpProjectionPath);
+        }
+        if ($this->materializedProjectionDir !== null && is_dir($this->materializedProjectionDir)) {
+            File::deleteDirectory($this->materializedProjectionDir);
         }
 
         parent::tearDown();
@@ -298,7 +305,13 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
 
     public function test_apply_prepares_a_cold_candidate_cache_before_public_exposure(): void
     {
-        $this->writeProjection($this->candidateProjection(['actuaries']));
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $this->assertSame(
+            CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+            app(CareerRuntimePublishProjectionVisibility::class)->itemForSlug('actuaries', 'en')['runtime_publish_state'] ?? null,
+        );
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
         $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'zh'));
@@ -328,6 +341,10 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         );
         $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_en.status'));
         $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_zh_cn.status'));
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+        );
     }
 
     public function test_command_writes_audit_report(): void
@@ -526,5 +543,17 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     private function writeRawProjection(array $projection): void
     {
         File::put($this->tmpProjectionPath, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    /** @param array<string, mixed> $projection */
+    private function writeMaterializedProjection(array $projection): void
+    {
+        $this->materializedProjectionDir = storage_path(
+            'app/private/career_runtime_publish_projection/test-stale-candidate-'.uniqid(),
+        );
+        File::ensureDirectoryExists($this->materializedProjectionDir);
+        $path = $this->materializedProjectionDir.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
+        File::put($path, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        touch($path, time() + 3600);
     }
 }

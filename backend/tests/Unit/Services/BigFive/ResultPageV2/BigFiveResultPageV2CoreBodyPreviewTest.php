@@ -4958,6 +4958,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
             'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ];
 
