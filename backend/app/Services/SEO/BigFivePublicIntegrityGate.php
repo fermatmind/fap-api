@@ -12,6 +12,16 @@ use InvalidArgumentException;
 final class BigFivePublicIntegrityGate
 {
     public const REVIEWED_301_ALIASES = [
+        '/en/personality/big-five/emotional-stability' => '/en/personality/big-five/neuroticism-low',
+        '/en/personality/big-five/high-agreeableness' => '/en/personality/big-five/agreeableness-high',
+        '/en/personality/big-five/high-conscientiousness' => '/en/personality/big-five/conscientiousness-high',
+        '/en/personality/big-five/high-extraversion' => '/en/personality/big-five/extraversion-high',
+        '/en/personality/big-five/high-neuroticism' => '/en/personality/big-five/neuroticism-high',
+        '/en/personality/big-five/high-openness' => '/en/personality/big-five/openness-high',
+        '/en/personality/big-five/low-agreeableness' => '/en/personality/big-five/agreeableness-low',
+        '/en/personality/big-five/low-conscientiousness' => '/en/personality/big-five/conscientiousness-low',
+        '/en/personality/big-five/low-extraversion' => '/en/personality/big-five/extraversion-low',
+        '/en/personality/big-five/low-openness' => '/en/personality/big-five/openness-low',
         '/zh/personality/big-five/emotional-stability' => '/zh/personality/big-five/neuroticism-low',
         '/zh/personality/big-five/high-agreeableness' => '/zh/personality/big-five/agreeableness-high',
         '/zh/personality/big-five/high-conscientiousness' => '/zh/personality/big-five/conscientiousness-high',
@@ -37,6 +47,9 @@ final class BigFivePublicIntegrityGate
      */
     public function validate(array $package, string $baseUrl, bool $requireReviewedAliases = false): array
     {
+        if (BigFiveCanonicalRouteCatalog::reviewedRedirectPaths() !== self::REVIEWED_301_ALIASES) {
+            throw new InvalidArgumentException('Reviewed Big Five redirect map drifted from the canonical route catalog.');
+        }
         $base = $this->normalizeBaseUrl($baseUrl);
         $targets = $this->targets($package, $requireReviewedAliases);
         $results = [];

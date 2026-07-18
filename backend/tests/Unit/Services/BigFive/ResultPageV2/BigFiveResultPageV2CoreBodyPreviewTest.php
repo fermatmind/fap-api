@@ -499,11 +499,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_only_big_five_en_legacy_range_retirement_files(): void
+    public function test_runtime_freeze_classifier_ignores_only_big_five_legacy_alias_hard_purge_files(): void
     {
         $allowed = [
             'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
+            'backend/app/Console/Commands/PersonalityBigFiveLegacyAliasesPurge.php',
             'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveLegacyAliasHardPurge.php',
             'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
         ];
         $blocked = [
@@ -6347,7 +6349,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isBigFiveEnLegacyRangeRetirementFile($file)) {
+            if ($this->isBigFiveLegacyAliasHardPurgeFile($file)) {
                 continue;
             }
 
@@ -8310,11 +8312,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
-    private function isBigFiveEnLegacyRangeRetirementFile(string $file): bool
+    private function isBigFiveLegacyAliasHardPurgeFile(string $file): bool
     {
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
+            'backend/app/Console/Commands/PersonalityBigFiveLegacyAliasesPurge.php',
             'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveLegacyAliasHardPurge.php',
             'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
         ], true);
     }

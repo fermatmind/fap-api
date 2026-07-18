@@ -16,7 +16,7 @@ final class PersonalityBigFivePublicIntegrityGate extends Command
     protected $signature = 'personality-big-five:public-integrity-gate
         {--source=../generated/big-five-authority-v2-integrity-gate-02/big_five_124_integrity_candidate_v2.json : Big Five V1 asset package}
         {--base-url=https://fermatmind.com : Declared public authority base URL}
-        {--require-reviewed-aliases : Require all ten reviewed zh-CN legacy aliases to resolve by exact single-hop 301}
+        {--require-reviewed-aliases : Require all twenty reviewed en/zh-CN legacy aliases to resolve by exact single-hop 301}
         {--json : Emit JSON output}';
 
     protected $description = 'Resolve Big Five public internal links and fail closed on invalid targets without writing CMS state.';
