@@ -343,8 +343,14 @@ before('deploy:symlink', 'guard:expected-release-revision');
  * runtime cache before activation.
  */
 task('guard:career-detail-cache-coverage', function () {
-    $minimumTargets = (int) (getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS') ?: 2092);
-    $minimumTargets = max(1, $minimumTargets);
+    $minimumTargetsRaw = getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS');
+    $minimumTargetsRaw = $minimumTargetsRaw === false || trim($minimumTargetsRaw) === ''
+        ? '2092'
+        : trim($minimumTargetsRaw);
+    if (preg_match('/^[1-9][0-9]*$/D', $minimumTargetsRaw) !== 1) {
+        throw new RuntimeException('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS must be a positive base-10 integer.');
+    }
+    $minimumTargets = (int) $minimumTargetsRaw;
     $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_DETAIL_COVERAGE_TIMEOUT') ?: 180);
     $timeoutSeconds = max(60, $timeoutSeconds);
 

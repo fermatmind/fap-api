@@ -97853,7 +97853,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused Career coverage and observability tests passed (14 tests, 109 assertions); deploy guard tests passed (2 tests, 14 assertions); Big Five runtime freeze tests passed (2 tests, 5 assertions). After review, observability tests passed again (7 tests, 35 assertions), Big Five runtime freeze tests passed again (2 tests, 5 assertions), the opt-in schedule showed minimum-targets=2092 with batch-size=37, Pint passed the 4 review-touched PHP files, composer validate --strict passed, git diff checks passed, and exact 13-path scope validation passed."
+        "evidence": "Focused Career coverage and observability tests passed (14 tests, 109 assertions); deploy guard tests passed initially (2 tests, 14 assertions); Big Five runtime freeze tests passed (2 tests, 5 assertions). After review, observability tests passed again (7 tests, 35 assertions), Big Five runtime freeze tests passed again (2 tests, 5 assertions), the opt-in schedule showed minimum-targets=2092 with batch-size=37, and the strict deploy-floor contract passed (2 tests, 16 assertions). Pint passed all review-touched PHP files, composer validate --strict passed, deploy.php lint passed, git diff checks passed, and exact 13-path scope validation passed."
       },
       "github_required_checks": {
         "status": "pending",
@@ -97896,8 +97896,13 @@
         "at": "2026-07-18T16:38:03Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine checks passed on 32d7d4084b0388ef1b6bc7817fe549aae4239c39, then two valid same-scope review findings were inspected. The fix retains a real detail-route HTTP smoke alongside full cache-key coverage and passes the configured 2092 floor into scheduled repair before cursor advancement. Focused tests, schedule contract, Pint, Composer validation, diff checks, and exact scope validation passed."
+      },
+      {
+        "at": "2026-07-18T16:45:41Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine checks passed on 5f69db6b4755dab4d060bcd12fefb355e94e6579 and the first two threads were resolved. A new valid same-scope review found that PHP integer casting could weaken a malformed deploy floor. The deploy guard now accepts only a strict positive base-10 integer and fails closed otherwise; focused deploy tests, Pint, PHP lint, and diff checks passed."
       }
     ],
-    "updated_at": "2026-07-18T16:38:03Z"
+    "updated_at": "2026-07-18T16:45:41Z"
   }
 }
