@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 
 final class CareerJobDetailCacheCoverageService
@@ -33,7 +34,10 @@ final class CareerJobDetailCacheCoverageService
     public function inspect(array $locales = ['en', 'zh-CN'], int $exampleLimit = self::DEFAULT_EXAMPLE_LIMIT): array
     {
         $normalizedLocales = $this->normalizeLocales($locales);
-        $slugs = $this->publishedSlugs();
+        $projectionSnapshot = $this->projectionSnapshot($normalizedLocales);
+        $slugs = $projectionSnapshot !== null
+            ? $this->publishedSlugsFromSnapshot($projectionSnapshot)
+            : $this->publishedSlugs();
         $counts = array_fill_keys([
             'ready_active',
             'ready_lkg',
@@ -50,7 +54,8 @@ final class CareerJobDetailCacheCoverageService
 
         foreach ($slugs as $slug) {
             foreach ($normalizedLocales as $locale) {
-                $projectionItem = $this->runtimeProjection->itemForSlug($slug, $locale);
+                $projectionItem = $projectionSnapshot[$slug.'|'.$locale]
+                    ?? ($projectionSnapshot === null ? $this->runtimeProjection->itemForSlug($slug, $locale) : null);
                 $classification = $this->responseCache->jobDetailProjectionItemIsPublished($projectionItem)
                     ? $this->responseCache->jobDetailCacheReadiness($slug, $locale)['classification']
                     : 'held_or_unpublished_excluded';
@@ -117,6 +122,43 @@ final class CareerJobDetailCacheCoverageService
             }
 
             $slug = strtolower(trim((string) ($item['slug'] ?? data_get($item, 'identity.canonical_slug', ''))));
+            if ($slug !== '') {
+                $slugs[$slug] = true;
+            }
+        }
+
+        $slugs = array_keys($slugs);
+        sort($slugs, SORT_STRING);
+
+        return $slugs;
+    }
+
+    /**
+     * @param  list<string>  $locales
+     * @return array<string, array<string, mixed>>|null
+     */
+    private function projectionSnapshot(array $locales): ?array
+    {
+        if (! $this->runtimeProjection instanceof CareerRuntimePublishProjectionCoverageSnapshot) {
+            return null;
+        }
+
+        return $this->runtimeProjection->jobDetailCoverageItems($locales);
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $items
+     * @return list<string>
+     */
+    private function publishedSlugsFromSnapshot(array $items): array
+    {
+        $slugs = [];
+        foreach ($items as $item) {
+            if (! $this->responseCache->jobDetailProjectionItemIsPublished($item)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) ($item['slug'] ?? '')));
             if ($slug !== '') {
                 $slugs[$slug] = true;
             }

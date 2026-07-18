@@ -97157,7 +97157,7 @@
     "depends_on": [
       "CAREER-DETAIL-COLD-MISS-DEGRADE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "github_review_fix_pending_push",
     "commit_sha": "a348b450224ecce6c937868a6d948aa47f495913",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3164",
     "checks": {
@@ -97171,11 +97171,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "CareerJobDetailCacheCoverageTest passed 6 tests / 60 assertions, including dynamic 1046×2=2092 targets, all required cache classifications, bounded examples, verify-only zero write/dispatch, missing/broken-only queue repair, healthy active/LKG preservation, stable resume idempotency, and production confirmation. CareerJobDetailReadModel10kTest passed 11 / 121; CareerWarmPublicAuthorityCacheCommandTest passed 14 / 143 against process-private SQLite; Career detail API passed 13 / 149; runtime-freeze focused tests passed 2 / 6. Changed-PHP Pint, Composer strict validation, command discovery, PHP/YAML/JSON syntax, diff checks, and the exact ten-path allowlist passed."
+        "evidence": "CareerJobDetailCacheCoverageTest passed 6 tests / 60 assertions, including dynamic 1046×2=2092 targets, all required cache classifications, bounded examples, verify-only zero write/dispatch, missing/broken-only queue repair, healthy active/LKG preservation, stable resume idempotency, and production confirmation. CareerRuntimePublishProjectionLookupTest passed 9 / 46, including a single bilingual coverage snapshot while preserving explicit reload behavior. CareerJobDetailReadModel10kTest passed 11 / 121; CareerWarmPublicAuthorityCacheCommandTest passed 14 / 143 against process-private SQLite; Career detail API passed 13 / 149; runtime-freeze focused tests passed 3 / 7. Changed-PHP Pint, Composer strict validation, command discovery, PHP/YAML/JSON syntax, diff checks, and the exact thirteen-path allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3164 is open on the exact scoped branch; complete CI and code-scanning checks will run on the ledger-bound head."
+        "status": "pending_review_fix",
+        "evidence": "All nine CI and code-scanning checks passed on head 843e7c3ce96f61ffdca9ed860cb6809d7a8871e6. Exact-head automated review then identified two same-scope issues: production coverage iteration needed one projection snapshot instead of per-target rehydration, and PR2 runtime impact was incorrectly marked false. Both are repaired locally and require complete exact-head revalidation after push."
       }
     },
     "scope_validation": {
@@ -97191,7 +97191,7 @@
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
-    "api_runtime_change": false,
+    "api_runtime_change": true,
     "publish_allowed": false,
     "deploy_allowed": false,
     "transitions": [
@@ -97214,8 +97214,13 @@
         "at": "2026-07-18T09:22:56Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact PR2 branch and opened PR #3164 with the manifest title plus what, why, validation, repository-rule impact, sidecar, and deferred-scope sections. No production repair, staging wait, or deploy action occurred; required checks are running."
+      },
+      {
+        "at": "2026-07-18T09:35:35Z",
+        "status": "github_review_fix_pending_push",
+        "note": "All nine checks passed on 843e7c3ce96f61ffdca9ed860cb6809d7a8871e6. Inspected two automated review threads and repaired only current-scope findings: production lookup now exposes one bilingual coverage snapshot so 2092 iteration does not rehydrate per target while normal lookup reload semantics remain intact, and manifest/state now truthfully mark api_runtime_change=true. Lookup, coverage, classifier, Pint, JSON/YAML, diff, and thirteen-path scope checks pass."
       }
     ],
-    "updated_at": "2026-07-18T09:22:56Z"
+    "updated_at": "2026-07-18T09:35:35Z"
   }
 }

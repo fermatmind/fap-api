@@ -10,7 +10,7 @@ use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
 use Throwable;
 
-final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublishProjectionVisibility
+final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublishProjectionCoverageSnapshot, CareerRuntimePublishProjectionVisibility
 {
     /**
      * @var array<string, array<string, mixed>>|null
@@ -57,6 +57,35 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
     {
         return $this->visibleItems(static fn (array $item): bool => ($item['detail_route_enabled'] ?? false) === true
             && ($item['release_gate_pass'] ?? false) === true);
+    }
+
+    /**
+     * @param  list<string>  $locales
+     * @return array<string, array<string, mixed>>
+     */
+    public function jobDetailCoverageItems(array $locales): array
+    {
+        $normalizedLocales = array_values(array_unique(array_map(
+            fn (string $locale): string => $this->normalizeLocale($locale),
+            $locales,
+        )));
+        $this->hydrate();
+        $items = [];
+
+        foreach ($this->itemsBySlugLocale ?? [] as $item) {
+            $slug = $this->normalizeSlug((string) ($item['slug'] ?? ''));
+            $locale = $this->normalizeLocale((string) ($item['locale'] ?? 'en'));
+            if ($slug === null || ! in_array($locale, $normalizedLocales, true)) {
+                continue;
+            }
+
+            $publicLocale = $locale === 'zh' ? 'zh-CN' : 'en';
+            $items[$slug.'|'.$publicLocale] = $item;
+        }
+
+        ksort($items, SORT_STRING);
+
+        return $items;
     }
 
     public function datasetVisible(string $slug): bool

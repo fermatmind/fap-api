@@ -45284,6 +45284,8 @@ prs:
       - Keep verification read-only by default and emit a stable bounded JSON coverage report.
       - Queue only missing/broken targets through unique jobs with bounded stable-target batching, resume, reset, and an explicit production-write confirmation boundary.
     allowed_paths:
+      - backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionCoverageSnapshot.php
+      - backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php
       - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
       - backend/app/Services/Career/CareerJobDetailCacheCoverageService.php
       - backend/app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php
@@ -45292,6 +45294,7 @@ prs:
       - backend/tests/Feature/Career/CareerJobDetailCacheCoverageTest.php
       - backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php
       - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
+      - backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/career/job-detail-cache-coverage.md
       - docs/codex/pr-train.yaml
@@ -45306,9 +45309,10 @@ prs:
       - cd backend && php artisan test tests/Feature/Career/CareerJobDetailCacheCoverageTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Career/CareerJobDetailReadModel10kTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php --filter='bilingual_snapshot_for_cache_coverage_iteration|reloads_projection_visibility' --no-ansi
       - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_detail_cache_coverage' --no-ansi
       - cd backend && php artisan list --raw | grep '^career:verify-job-detail-cache-coverage '
-      - cd backend && vendor/bin/pint --test app/Services/Career/PublicCareerAuthorityResponseCache.php app/Services/Career/CareerJobDetailCacheCoverageService.php app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php tests/Feature/Career/CareerJobDetailCacheCoverageTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && vendor/bin/pint --test app/Domain/Career/Publish/CareerRuntimePublishProjectionCoverageSnapshot.php app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php app/Services/Career/PublicCareerAuthorityResponseCache.php app/Services/Career/CareerJobDetailCacheCoverageService.php app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php tests/Feature/Career/CareerJobDetailCacheCoverageTest.php tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
@@ -45320,7 +45324,7 @@ prs:
     production_write_execution: false
     database_mutation: false
     cms_mutation: false
-    api_runtime_change: false
+    api_runtime_change: true
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend

@@ -85,6 +85,31 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertFalse($lookup->familyHubLive('computer-and-information-technology'));
     }
 
+    public function test_it_returns_one_bilingual_snapshot_for_cache_coverage_iteration(): void
+    {
+        $items = [];
+        foreach (['en', 'zh'] as $locale) {
+            $items[] = [
+                'slug' => 'actors',
+                'locale' => $locale,
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'search_visible' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ];
+        }
+        $this->writeProjection($this->projectionTimestamp, $items);
+
+        $snapshot = app(CareerRuntimePublishProjectionLookup::class)
+            ->jobDetailCoverageItems(['en', 'zh-CN']);
+
+        $this->assertSame(['actors|en', 'actors|zh-CN'], array_keys($snapshot));
+        $this->assertSame('en', $snapshot['actors|en']['locale']);
+        $this->assertSame('zh', $snapshot['actors|zh-CN']['locale']);
+    }
+
     public function test_it_requires_an_explicit_published_family_hub_projection_row(): void
     {
         $this->writeProjection($this->projectionTimestamp, [
