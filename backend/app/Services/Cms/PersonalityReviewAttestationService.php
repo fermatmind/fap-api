@@ -165,8 +165,13 @@ final readonly class PersonalityReviewAttestationService
     /** @param list<array{identity:string,sha256:string}> $authoritativeTargets */
     public function hasApprovedEvidence(string $surfaceId, array $authoritativeTargets): bool
     {
+        $currentOwnerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
+        if (! $this->usesSoloOwnerMode() || $currentOwnerAdminUserId <= 0) {
+            return false;
+        }
+
         foreach ($this->targets($surfaceId, $authoritativeTargets) as $target) {
-            if (! $this->hasApprovedTarget($target)) {
+            if (! $this->hasApprovedTarget($target, $currentOwnerAdminUserId)) {
                 return false;
             }
         }
@@ -185,16 +190,17 @@ final readonly class PersonalityReviewAttestationService
     }
 
     /** @param array{target_identity:string,target_sha256:string} $target */
-    private function hasApprovedTarget(array $target): bool
+    private function hasApprovedTarget(array $target, int $currentOwnerAdminUserId): bool
     {
         return ReviewAttestationTargetEvidence::query()
             ->where('target_identity', $target['target_identity'])
             ->where('target_sha256', $target['target_sha256'])
             ->where('target_decision', 'approved')
-            ->whereHas('attestation', static function ($query): void {
+            ->whereHas('attestation', static function ($query) use ($currentOwnerAdminUserId): void {
                 $query
                     ->where('review_mode', 'solo_owner')
                     ->where('review_source', (string) config('review_governance.attestation.review_source'))
+                    ->where('attested_by_admin_user_id', $currentOwnerAdminUserId)
                     ->where('decision', 'approved_all');
             })
             ->exists();

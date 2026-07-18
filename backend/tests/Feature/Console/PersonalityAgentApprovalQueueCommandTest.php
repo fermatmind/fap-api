@@ -677,6 +677,31 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(2, ReviewAttestationTargetEvidence::query()->count());
     }
 
+    public function test_approved_items_bind_fresh_evidence_after_solo_owner_rotation(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        $hashes = $this->approvalHashes();
+        $originalOwnerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
+
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes)));
+        config()->set('review_governance.solo_owner_admin_user_id', $originalOwnerAdminUserId + 1);
+        $secondExit = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $secondExit);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(0, $payload['approved_item_count']);
+        $this->assertSame(2, $payload['skipped_existing_approved_item_count']);
+        $this->assertSame(2, ReviewAttestation::query()->count());
+        $this->assertSame(4, ReviewAttestationTargetEvidence::query()->count());
+        $this->assertSame(
+            [$originalOwnerAdminUserId, $originalOwnerAdminUserId + 1],
+            ReviewAttestation::query()->orderBy('attested_by_admin_user_id')->pluck('attested_by_admin_user_id')->all(),
+        );
+    }
+
     public function test_approve_action_fails_closed_for_missing_items_without_partial_updates(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());

@@ -101,6 +101,48 @@ final class RiasecSoloOwnerReviewGateTest extends TestCase
         }
     }
 
+    public function test_bound_evidence_is_rejected_after_solo_owner_rotation(): void
+    {
+        $snapshotId = 'riasec-owner-rotation';
+        $snapshotSha = hash('sha256', $snapshotId);
+        $gate = app(RiasecContentReleaseReviewGate::class);
+        $ownerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
+        $gate->bindApproved($this->attestation($snapshotId, $snapshotSha), $snapshotId, $snapshotSha, $ownerAdminUserId);
+
+        config()->set('review_governance.solo_owner_admin_user_id', $ownerAdminUserId + 1);
+
+        try {
+            $gate->assertApproved($snapshotId, $snapshotSha);
+            $this->fail('Expected evidence from the previous configured owner to fail closed.');
+        } catch (ReviewAttestationValidationException) {
+            $this->assertSame(1, ReviewAttestation::query()->count());
+            $this->assertSame(1, ReviewAttestationTargetEvidence::query()->count());
+        }
+    }
+
+    public function test_bound_solo_owner_evidence_is_rejected_in_team_separated_mode(): void
+    {
+        $snapshotId = 'riasec-mode-change';
+        $snapshotSha = hash('sha256', $snapshotId);
+        $gate = app(RiasecContentReleaseReviewGate::class);
+        $gate->bindApproved(
+            $this->attestation($snapshotId, $snapshotSha),
+            $snapshotId,
+            $snapshotSha,
+            (int) config('review_governance.solo_owner_admin_user_id'),
+        );
+
+        config()->set('review_governance.mode', 'team_separated');
+
+        try {
+            $gate->assertApproved($snapshotId, $snapshotSha);
+            $this->fail('Expected solo-owner evidence reuse to fail closed in team-separated mode.');
+        } catch (ReviewAttestationValidationException) {
+            $this->assertSame(1, ReviewAttestation::query()->count());
+            $this->assertSame(1, ReviewAttestationTargetEvidence::query()->count());
+        }
+    }
+
     /** @return array<string,mixed> */
     private function attestation(string $snapshotId, string $snapshotSha): array
     {
