@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed on implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79, ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28, review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b, and source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f. Seven actionable Codex review findings were accepted; the final claim/media integrity head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub checks passed on implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79, ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28, review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b, source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f, and claim/media head fda2adfa0128024e5eadf576f630db90d6db5e45. Nine actionable Codex review findings were accepted; the final manifest/frontmatter fix head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98099,9 +98099,14 @@
         "at": "2026-07-18T19:38:00Z",
         "status": "github_review_fixes_completed",
         "note": "Two further valid P2 findings were accepted after source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f passed 9/9 checks. Completed claim sidecars must now preserve every locked per-page claim id, claim type, and source-id mapping, retain registry-exact visible citations, and expose the complete page-level translation evidence contract. Completed pages also fail on any hero, inline, OG, Twitter, image, media, or thumbnail frontmatter key in addition to Markdown/HTML body media."
+      },
+      {
+        "at": "2026-07-18T19:46:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two more valid P2 findings were accepted after claim/media head fda2adfa0128024e5eadf576f630db90d6db5e45 passed 9/9 checks. The canonical manifest now remains immutable at its initial pending assignment state while the translation ledger alone records dynamic completion, matching later PR path scopes. Frontmatter inspection now covers raw top-level and nested YAML keys with underscore, hyphen, or camel-style media prefixes, closing hero-image, og-image, twitter-image, and nested metadata bypasses."
       }
     ],
-    "updated_at": "2026-07-18T19:38:00Z"
+    "updated_at": "2026-07-18T19:46:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",

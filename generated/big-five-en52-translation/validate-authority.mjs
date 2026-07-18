@@ -42,8 +42,10 @@ function parseFrontmatter(markdown) {
   const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) throw new Error('Missing fixed frontmatter.');
   const frontmatter = {};
+  const frontmatterKeys = [...match[1].matchAll(/^\s*([A-Za-z0-9_-]+)\s*:/gm)]
+    .map((item) => item[1]);
   for (const line of match[1].split('\n')) {
-    const item = line.match(/^([A-Za-z0-9_]+):\s*(.*)$/);
+    const item = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
     if (!item) continue;
     const [, key, raw] = item;
     const value = raw.trim();
@@ -54,7 +56,7 @@ function parseFrontmatter(markdown) {
       frontmatter[key] = value.slice(1, -1).split(',').map((part) => part.trim()).filter(Boolean);
     } else frontmatter[key] = value.replace(/^['"]|['"]$/g, '');
   }
-  return { frontmatter, body: match[2] };
+  return { frontmatter, frontmatterKeys, body: match[2] };
 }
 
 function englishWordCount(body) {
@@ -112,6 +114,8 @@ async function main() {
     .map((type) => [type, entries.filter((entry) => entry.entity_type === type).length]));
   const expectedCounts = { hub: 1, domain: 5, polarity: 15, facet_hub: 1, facet_detail: 30 };
   if (JSON.stringify(counts) !== JSON.stringify(expectedCounts)) fail('family_counts', `${JSON.stringify(counts)} != ${JSON.stringify(expectedCounts)}`);
+  if (entries.some((entry) => entry.translation_status !== 'pending'))
+    fail('canonical_manifest_status', 'The frozen canonical manifest must retain its initial pending assignment status.');
   if ((glossary.facets ?? []).length !== 30
     || uniqueCount(glossary.facets.map((facet) => facet.entity_key)) !== 30
     || glossary.unresolved_terminology_count !== 0)
@@ -173,11 +177,6 @@ async function main() {
       fail('translation_ledger_status', `${entry.page_identity}: ${entry.status}`);
     }
   }
-  for (const entry of entries) {
-    const ledgerEntry = ledgerByIdentity.get(entry.page_identity);
-    if (!ledgerEntry || entry.translation_status !== ledgerEntry.status)
-      fail('manifest_ledger_status', entry.page_identity);
-  }
   if (expectedTranslated !== completed.length)
     fail('expected_translated_count', `Expected ${expectedTranslated}, ledger has ${completed.length}.`);
   if (pageFiles.length !== completed.length)
@@ -222,7 +221,7 @@ async function main() {
       fail('page_frontmatter', `${completedEntry.target_path}: ${error.message}`);
       continue;
     }
-    const { frontmatter, body } = parsed;
+    const { frontmatter, frontmatterKeys, body } = parsed;
     pageByIdentity.set(completedEntry.page_identity, { body, frontmatter, path: completedEntry.target_path });
     const fixedFields = {
       content_identity: locked.page_identity,
@@ -244,8 +243,12 @@ async function main() {
       if (frontmatter[key] !== expected) fail('page_identity_lock', `${completedEntry.target_path}: ${key}`);
     }
     if (frontmatter.translation_status !== 'completed') fail('page_translation_status', completedEntry.target_path);
-    const frontmatterMediaKeys = Object.keys(frontmatter).filter((key) => key !== 'media_supported'
-      && /(^|_)(hero|inline|og|open_graph|twitter|image|media|thumbnail)(_|$)/i.test(key));
+    const frontmatterMediaKeys = frontmatterKeys.filter((key) => {
+      if (key === 'media_supported') return false;
+      const normalized = key.replaceAll('_', '').replaceAll('-', '').toLowerCase();
+      return ['hero', 'inline', 'og', 'opengraph', 'twitter', 'image', 'media', 'thumbnail']
+        .some((prefix) => normalized.startsWith(prefix));
+    });
     if (frontmatterMediaKeys.length) fail(
       'forbidden_frontmatter_media',
       `${completedEntry.target_path}: ${frontmatterMediaKeys.join(',')}`,
