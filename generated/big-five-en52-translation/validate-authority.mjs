@@ -84,6 +84,8 @@ async function main() {
   const release = JSON.parse(releaseBytes.toString('utf8'));
   if (sha256(releaseBytes) !== EXPECTED_RELEASE_SHA) fail('source_release_file_sha', 'Locked release package SHA drifted.');
   if (release.source_content_sha256 !== EXPECTED_SOURCE_SHA) fail('source_content_sha', 'Locked source content SHA drifted.');
+  if (manifest.authority.source_registry_sha256 !== release.source_registry_sha256)
+    fail('source_registry_sha', 'Canonical manifest source registry SHA drifted from the locked release package.');
 
   const entries = manifest.entries ?? [];
   const identities = entries.map((entry) => entry.page_identity);
@@ -110,13 +112,6 @@ async function main() {
     .map((type) => [type, entries.filter((entry) => entry.entity_type === type).length]));
   const expectedCounts = { hub: 1, domain: 5, polarity: 15, facet_hub: 1, facet_detail: 30 };
   if (JSON.stringify(counts) !== JSON.stringify(expectedCounts)) fail('family_counts', `${JSON.stringify(counts)} != ${JSON.stringify(expectedCounts)}`);
-  if (entries.some((entry) => entry.translation_status !== 'pending')) fail('authority_page_placeholder', 'Task 1 must not mark any page translated.');
-
-  if ((ledger.entries ?? []).length !== 52
-    || ledger.translated_page_count !== 0
-    || ledger.pending_page_count !== 52
-    || ledger.entries.some((entry) => entry.status !== 'pending' || entry.output_sha256 !== null))
-    fail('translation_ledger', 'Task 1 ledger must contain 52 pending, ungenerated targets.');
   if ((glossary.facets ?? []).length !== 30
     || uniqueCount(glossary.facets.map((facet) => facet.entity_key)) !== 30
     || glossary.unresolved_terminology_count !== 0)
@@ -150,10 +145,38 @@ async function main() {
     : Number(args['expected-translated']);
   if (!Number.isInteger(expectedTranslated) || expectedTranslated < 0 || expectedTranslated > 52)
     fail('expected_translated_argument', '--expected-translated must be an integer from 0 to 52.');
+  const ledgerEntries = ledger.entries ?? [];
+  const ledgerByIdentity = new Map(ledgerEntries.map((entry) => [entry.page_identity, entry]));
+  if (ledgerEntries.length !== 52 || ledgerByIdentity.size !== 52)
+    fail('translation_ledger_identity_count', 'Ledger must contain 52 unique target identities.');
   if (ledger.translated_page_count !== completed.length
     || ledger.pending_page_count !== pending.length
     || completed.length + pending.length !== 52)
     fail('translation_ledger_counts', 'Ledger aggregate counts do not match entry statuses.');
+  for (const entry of ledgerEntries) {
+    const locked = entries.find((candidate) => candidate.page_identity === entry.page_identity);
+    if (!locked
+      || entry.target_path !== locked.en_output_path
+      || entry.claim_path !== locked.en_claim_output_path
+      || entry.assigned_pr !== locked.translation_pr)
+      fail('translation_ledger_target_lock', entry.page_identity);
+    if (entry.status === 'pending') {
+      if (entry.completed_at !== null || entry.output_sha256 !== null || entry.claim_sha256 !== null)
+        fail('pending_ledger_artifact', entry.page_identity);
+    } else if (entry.status === 'completed') {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(entry.completed_at ?? '')
+        || !/^[a-f0-9]{64}$/.test(entry.output_sha256 ?? '')
+        || !/^[a-f0-9]{64}$/.test(entry.claim_sha256 ?? ''))
+        fail('completed_ledger_artifact', entry.page_identity);
+    } else {
+      fail('translation_ledger_status', `${entry.page_identity}: ${entry.status}`);
+    }
+  }
+  for (const entry of entries) {
+    const ledgerEntry = ledgerByIdentity.get(entry.page_identity);
+    if (!ledgerEntry || entry.translation_status !== ledgerEntry.status)
+      fail('manifest_ledger_status', entry.page_identity);
+  }
   if (expectedTranslated !== completed.length)
     fail('expected_translated_count', `Expected ${expectedTranslated}, ledger has ${completed.length}.`);
   if (pageFiles.length !== completed.length)

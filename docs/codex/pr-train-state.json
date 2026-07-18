@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed on reviewed implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload. Both actionable Codex review threads were fixed and resolved; the final ledger-only head must repeat the same required-check gate before merge."
+        "evidence": "All 9 GitHub checks passed on implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79 and ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload. Four actionable Codex review findings were accepted; the final review-fix head must repeat the same required-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98084,9 +98084,14 @@
         "at": "2026-07-18T19:06:00Z",
         "status": "ready_to_merge",
         "note": "The reviewed implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79 passed all 9 GitHub checks and has no unresolved review thread. This final ledger-only transition records that evidence; merge remains contingent on the same checks passing again on the resulting final head."
+      },
+      {
+        "at": "2026-07-18T19:17:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two additional valid P2 findings were accepted after ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28 passed 9/9 checks. The reusable validator now accepts and integrity-checks pending/completed ledger mixtures for later train items, while the builder rejects any external source registry whose raw SHA differs from the locked zh-CN release. Focused validation passes; merge remains contingent on the final review-fix head passing all required checks and having zero unresolved threads."
       }
     ],
-    "updated_at": "2026-07-18T19:06:00Z"
+    "updated_at": "2026-07-18T19:17:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",

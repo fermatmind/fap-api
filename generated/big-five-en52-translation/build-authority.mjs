@@ -188,7 +188,12 @@ async function main() {
   if (sourceManifest.content_hash_sha256 !== SOURCE_CONTENT_SHA256 || sourceManifest.content_file_count !== 52) {
     throw new Error('External reviewed source tree is not the locked 52-page authority.');
   }
-  const sourceRegistry = JSON.parse(await readFile(path.join(sourceRoot, 'research/source-registry.json'), 'utf8'));
+  const sourceRegistryPath = path.join(sourceRoot, 'research/source-registry.json');
+  const sourceRegistryBytes = await readFile(sourceRegistryPath);
+  if (sha256(sourceRegistryBytes) !== release.source_registry_sha256) {
+    throw new Error('External source registry is not the registry locked by the zh-CN release package.');
+  }
+  const sourceRegistry = JSON.parse(sourceRegistryBytes.toString('utf8'));
   const byEntityKey = new Map(release.assets.map((entry) => [entry.asset.entity_key, entry]));
   const entries = [];
   for (const [index, entityKey] of orderedKeys().entries()) {
@@ -248,6 +253,7 @@ async function main() {
       source_release_package: 'generated/big-five-authority-v3/big5-zh-v3-52-page-release/release-package.json',
       source_release_payload_sha256: SOURCE_PACKAGE_PAYLOAD_SHA256,
       source_release_file_sha256: SOURCE_PACKAGE_FILE_SHA256,
+      source_registry_sha256: release.source_registry_sha256,
       source_registry_version: sourceRegistry.registry_version,
       terminology_version: 'big-five-en52-terminology.v1',
       claim_mapping_version: 'big-five-en52-claims.v1',
