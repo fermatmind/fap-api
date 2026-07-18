@@ -254,7 +254,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         );
 
         $batchResults = [];
-        $privateReviewerNames = $this->privateReviewerNames($reviewRegister);
+        $privateReviewerNames = $this->manifest->approvedPrivateReviewerNames(
+            $releaseReport,
+            $reviewRegister,
+            $reviewRegisterSha256,
+        );
         foreach (array_keys($this->manifest->readbackBatches($releaseReport)) as $batch) {
             $this->executionProgress['failure_stage'] = 'post_readback:'.$batch;
             $batchResults[$batch] = $this->readback->run(
@@ -404,7 +408,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
     ): array {
         $packageSha256 = strtolower(trim((string) ($releaseReport['package_sha256'] ?? '')));
         $records = is_array($releaseReport['asset_records'] ?? null) ? $releaseReport['asset_records'] : [];
-        $registerRows = is_array($reviewRegister['reviews'] ?? null) ? $reviewRegister['reviews'] : [];
+        $registerRows = $this->manifest->approvedPrivateReviewRows(
+            $releaseReport,
+            $reviewRegister,
+            $reviewRegisterSha256,
+        );
         if (preg_match('/^[0-9a-f]{64}$/', $packageSha256) !== 1
             || preg_match('/^[0-9a-f]{64}$/', $reviewRegisterSha256) !== 1
             || count($records) !== EnneagramPublicAuthorityV224RuntimeManifest::TARGET_COUNT
@@ -601,20 +609,6 @@ final class EnneagramPublicAuthorityV224RuntimeCloseout
         }
         $this->rollbackTokenHandle = null;
         $this->rollbackTokenPath = null;
-    }
-
-    /** @param array<string,mixed> $reviewRegister @return list<string> */
-    private function privateReviewerNames(array $reviewRegister): array
-    {
-        $names = [];
-        foreach (is_array($reviewRegister['reviews'] ?? null) ? $reviewRegister['reviews'] : [] as $review) {
-            $name = is_array($review) ? trim((string) ($review['reviewer_name'] ?? '')) : '';
-            if ($name !== '') {
-                $names[] = $name;
-            }
-        }
-
-        return array_values(array_unique($names));
     }
 
     /** @param array<string,mixed> $result @return array<string,mixed> */

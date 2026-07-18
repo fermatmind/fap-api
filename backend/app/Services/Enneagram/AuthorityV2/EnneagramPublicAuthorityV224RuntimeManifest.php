@@ -6,7 +6,9 @@ namespace App\Services\Enneagram\AuthorityV2;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
+use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\Personality\AuthorityV2\PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter;
+use App\Services\ReviewGovernance\ReviewAttestationSchema;
 use Carbon\CarbonImmutable;
 use RuntimeException;
 
@@ -41,6 +43,7 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
 
     public function __construct(
         private readonly PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter $revisionWriter,
+        private readonly PersonalityReviewAttestationService $reviewAttestations,
     ) {}
 
     /**
@@ -120,20 +123,64 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         array $reviewRegister,
         string $reviewRegisterSha256,
     ): array {
-        $records = $this->releaseRecords($releaseReport);
-        $this->assertApprovedReviewRegister(
-            $reviewRegister,
-            $records,
-            $reviewRegisterSha256,
-            (string) $releaseReport['package_sha256'],
-        );
-
         $names = [];
-        foreach ($reviewRegister['reviews'] as $review) {
+        foreach ($this->approvedPrivateReviewRows($releaseReport, $reviewRegister, $reviewRegisterSha256) as $review) {
             $names[] = trim((string) $review['reviewer_name']);
         }
 
         return array_values(array_unique($names));
+    }
+
+    /**
+     * Validate either the legacy 116-row register or the compact solo-owner
+     * attestation, then return the same private row shape used by the binder.
+     *
+     * @param  array<string, mixed>  $releaseReport
+     * @param  array<string, mixed>  $reviewRegister
+     * @return list<array<string, mixed>>
+     */
+    public function approvedPrivateReviewRows(
+        array $releaseReport,
+        array $reviewRegister,
+        string $reviewRegisterSha256,
+    ): array {
+        $records = $this->releaseRecords($releaseReport);
+        $packageSha256 = (string) $releaseReport['package_sha256'];
+        $this->assertApprovedReviewRegister(
+            $reviewRegister,
+            $records,
+            $reviewRegisterSha256,
+            $packageSha256,
+        );
+        if (($reviewRegister['schema_version'] ?? null) !== ReviewAttestationSchema::VERSION) {
+            return array_values($reviewRegister['reviews']);
+        }
+
+        $reviewedAt = CarbonImmutable::parse((string) $reviewRegister['attested_at'])
+            ->utc()
+            ->format('Y-m-d H:i:s');
+
+        return array_map(function (array $record) use ($packageSha256, $reviewedAt): array {
+            $row = [
+                'asset_key' => (string) $record['asset_key'],
+                'asset_sha256' => (string) $record['asset_sha256'],
+                'reviewer_name' => 'configured_solo_owner',
+                'reviewed_at' => $reviewedAt,
+                'decision' => PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED,
+                'review_source' => PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN,
+            ];
+            $row['evidence_sha256'] = $this->fingerprint([
+                'asset_key' => $row['asset_key'],
+                'asset_sha256' => $row['asset_sha256'],
+                'package_sha256' => $packageSha256,
+                'reviewer_name' => $row['reviewer_name'],
+                'reviewed_at' => $row['reviewed_at'],
+                'decision' => $row['decision'],
+                'review_source' => $row['review_source'],
+            ]);
+
+            return $row;
+        }, $records);
     }
 
     /**
@@ -640,6 +687,26 @@ final class EnneagramPublicAuthorityV224RuntimeManifest
         string $registerSha256,
         string $releasePackageSha256,
     ): void {
+        if (($register['schema_version'] ?? null) === ReviewAttestationSchema::VERSION) {
+            $this->reviewAttestations->preflightApproved(
+                $register,
+                'enneagram_review_binder',
+                array_map(static fn (array $record): array => [
+                    'identity' => 'asset:'.implode(':', [
+                        PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+                        (string) $record['entity_type'],
+                        (string) $record['code'],
+                        (string) $record['locale'],
+                    ]),
+                    'sha256' => (string) $record['asset_sha256'],
+                ], $records),
+                $releasePackageSha256,
+            );
+            $this->assertHash($registerSha256, 'review attestation SHA-256');
+
+            return;
+        }
+
         $expected = array_column($records, null, 'asset_key');
         if (($register['schema_version'] ?? null) !== 'enneagram_public_authority_v2_private_review_register.v1'
             || ($register['review_source'] ?? null) !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN

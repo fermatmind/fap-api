@@ -24,6 +24,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeReadback extends Command
         {--frontend-deployed-sha= : Exact deployed frontend Git SHA observed by this readback}
         {--frontend-revision-url= : Read-only frontend revision endpoint}
         {--review-register= : Optional private register; required for production post-readback reviewer-leak checks}
+        {--attestation= : Optional compact solo-owner attestation; alternative to --review-register for post-readback}
         {--require-fresh-api-cache : Require X-Fermat-Public-Read-Cache=fresh for every API read}
         {--output= : Optional JSON artifact path}
         {--allow-testing : Skip deployed revision probes only in APP_ENV=testing}
@@ -196,9 +197,14 @@ final class PersonalityEnneagramAuthorityV2RuntimeReadback extends Command
         array $releaseReport,
         EnneagramPublicAuthorityV224RuntimeManifest $manifest,
     ): array {
-        $path = trim((string) $this->option('review-register'));
+        $reviewRegister = trim((string) $this->option('review-register'));
+        $attestation = trim((string) $this->option('attestation'));
+        if ($reviewRegister !== '' && $attestation !== '') {
+            throw new RuntimeException('--review-register and --attestation are mutually exclusive.');
+        }
+        $path = $reviewRegister !== '' ? $reviewRegister : $attestation;
         if ($phase === 'post' && $path === '') {
-            throw new RuntimeException('--review-register is required for post-readback.');
+            throw new RuntimeException('Exactly one of --review-register or --attestation is required for post-readback.');
         }
         if ($path === '') {
             return [];
