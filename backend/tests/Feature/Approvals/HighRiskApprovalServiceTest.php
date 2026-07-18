@@ -9,6 +9,7 @@ use App\Models\AdminUser;
 use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Approvals\HighRiskApprovalService;
 use App\Services\Approvals\HighRiskApprovalValidationException;
+use App\Services\Auth\AdminTotpService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
@@ -30,7 +31,8 @@ final class HighRiskApprovalServiceTest extends TestCase
         ]);
 
         $service = app(HighRiskApprovalService::class);
-        $approved = $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
+        $freshStepUpCode = $this->freshStepUpCode($owner);
+        $approved = $service->approve((string) $approval->id, (int) $owner->id, $freshStepUpCode);
 
         $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approved->status);
         $this->assertSame((int) $owner->id, (int) $approved->approved_by_admin_user_id);
@@ -50,7 +52,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         $payload[HighRiskApprovalService::METADATA_KEY] = $reorderedMetadata;
         $approved->forceFill(['payload_json' => $payload])->save();
 
-        $again = $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
+        $again = $service->approve((string) $approval->id, (int) $owner->id, $freshStepUpCode);
         $this->assertSame((string) $approved->id, (string) $again->id);
         $this->assertSame(1, DB::table('audit_logs')
             ->where('target_type', 'AdminApproval')
@@ -61,10 +63,9 @@ final class HighRiskApprovalServiceTest extends TestCase
 
     public function test_team_separated_mode_rejects_self_approval_but_accepts_distinct_step_up_actor(): void
     {
-        config()->set('admin.totp.enabled', false);
         config()->set('review_governance.mode', 'team_separated');
-        $requester = $this->admin();
-        $reviewer = $this->admin();
+        $requester = $this->admin(totpEnabled: true);
+        $reviewer = $this->admin(totpEnabled: true);
         $approval = $this->approval(AdminApproval::TYPE_MANUAL_GRANT, $requester, [
             'order_no' => 'ord-team-separated',
             'attempt_id' => (string) Str::uuid(),
@@ -72,7 +73,7 @@ final class HighRiskApprovalServiceTest extends TestCase
 
         $service = app(HighRiskApprovalService::class);
         try {
-            $service->approve((string) $approval->id, (int) $requester->id, (int) $requester->id);
+            $service->approve((string) $approval->id, (int) $requester->id, $this->freshStepUpCode($requester));
             $this->fail('Expected team-separated self approval to fail.');
         } catch (HighRiskApprovalValidationException $exception) {
             $this->assertSame('Team-separated approval requires a distinct approver.', $exception->getMessage());
@@ -85,7 +86,7 @@ final class HighRiskApprovalServiceTest extends TestCase
             'action' => 'approval_approved',
         ]);
 
-        $approved = $service->approve((string) $approval->id, (int) $reviewer->id, (int) $reviewer->id);
+        $approved = $service->approve((string) $approval->id, (int) $reviewer->id, $this->freshStepUpCode($reviewer));
         $this->assertSame((int) $requester->id, (int) $approved->requested_by_admin_user_id);
         $this->assertSame((int) $reviewer->id, (int) $approved->approved_by_admin_user_id);
         $service->assertExecutable($approved);
@@ -102,13 +103,24 @@ final class HighRiskApprovalServiceTest extends TestCase
             'order_no' => 'ord-fingerprint',
         ]);
         $service = app(HighRiskApprovalService::class);
+        session(['ops_admin_totp_verified_user_id' => (int) $owner->id]);
+
+        config()->set('admin.totp.enabled', false);
+        try {
+            $service->approve((string) $approval->id, (int) $owner->id, '');
+            $this->fail('Expected the global TOTP switch not to bypass R3 step-up.');
+        } catch (HighRiskApprovalValidationException) {
+            $this->assertSame(AdminApproval::STATUS_PENDING, (string) $approval->fresh()->status);
+        } finally {
+            config()->set('admin.totp.enabled', true);
+        }
 
         foreach ([
-            [(int) $owner->id, 0],
-            [(int) $other->id, (int) $other->id],
-        ] as [$actorId, $stepUpId]) {
+            [(int) $owner->id, ''],
+            [(int) $other->id, $this->freshStepUpCode($other)],
+        ] as [$actorId, $freshStepUpCode]) {
             try {
-                $service->approve((string) $approval->id, $actorId, $stepUpId);
+                $service->approve((string) $approval->id, $actorId, $freshStepUpCode);
                 $this->fail('Expected high-risk approval validation to fail.');
             } catch (HighRiskApprovalValidationException $exception) {
                 $this->assertStringNotContainsString((string) $approval->correlation_id, $exception->getMessage());
@@ -133,7 +145,7 @@ final class HighRiskApprovalServiceTest extends TestCase
             ]);
             $approval->refresh();
             try {
-                $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
+                $service->approve((string) $approval->id, (int) $owner->id, $this->freshStepUpCode($owner));
                 $this->fail('Expected credential-bearing reason to fail.');
             } catch (HighRiskApprovalValidationException $exception) {
                 $this->assertStringNotContainsString($privateCredential, $exception->getMessage());
@@ -143,7 +155,7 @@ final class HighRiskApprovalServiceTest extends TestCase
             $approval->refresh();
         }
 
-        $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
+        $service->approve((string) $approval->id, (int) $owner->id, $this->freshStepUpCode($owner));
         $payload = (array) $approval->fresh()->payload_json;
         $payload['payment_event_id'] = (string) Str::uuid();
         $approval->forceFill(['payload_json' => $payload])->save();
@@ -179,7 +191,7 @@ final class HighRiskApprovalServiceTest extends TestCase
             $this->assertFalse($service->hasValidGovernanceEvidence($approval));
 
             try {
-                $service->bindLegacyGovernance((string) $approval->id, (int) $owner->id, 0);
+                $service->bindLegacyGovernance((string) $approval->id, (int) $owner->id, '');
                 $this->fail('Expected current step-up to be required for legacy binding.');
             } catch (HighRiskApprovalValidationException) {
                 $this->assertDatabaseMissing('audit_logs', [
@@ -189,8 +201,8 @@ final class HighRiskApprovalServiceTest extends TestCase
             }
 
             $bound = $status === AdminApproval::STATUS_APPROVED
-                ? $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id)
-                : $service->bindLegacyGovernance((string) $approval->id, (int) $owner->id, (int) $owner->id);
+                ? $service->approve((string) $approval->id, (int) $owner->id, $this->freshStepUpCode($owner))
+                : $service->bindLegacyGovernance((string) $approval->id, (int) $owner->id, $this->freshStepUpCode($owner));
 
             $this->assertSame($status, (string) $bound->status);
             $this->assertFalse($service->requiresLegacyGovernanceBinding($bound));
@@ -219,7 +231,7 @@ final class HighRiskApprovalServiceTest extends TestCase
             $service->bindLegacyGovernance(
                 (string) $malformed->id,
                 (int) $owner->id,
-                (int) $owner->id,
+                $this->freshStepUpCode($owner),
             );
             $this->fail('Expected malformed existing governance evidence to remain fail closed.');
         } catch (HighRiskApprovalValidationException) {
@@ -250,7 +262,7 @@ final class HighRiskApprovalServiceTest extends TestCase
                 'target_id' => (string) Str::uuid(),
                 'operator_private_value' => $privateValue,
             ]);
-            $approved = $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
+            $approved = $service->approve((string) $approval->id, (int) $owner->id, $this->freshStepUpCode($owner));
             $service->assertExecutable($approved);
 
             $audit = DB::table('audit_logs')
@@ -355,8 +367,20 @@ final class HighRiskApprovalServiceTest extends TestCase
             'password' => 'not-used-by-this-test',
             'is_active' => 1,
             'totp_enabled_at' => $totpEnabled ? now() : null,
-            'totp_secret' => $totpEnabled ? Str::random(32) : null,
+            'totp_secret' => $totpEnabled ? 'JBSWY3DPEHPK3PXP' : null,
         ]);
+    }
+
+    private function freshStepUpCode(AdminUser $admin): string
+    {
+        $totpAt = new ReflectionMethod(AdminTotpService::class, 'totpAt');
+        $totpAt->setAccessible(true);
+
+        return (string) $totpAt->invoke(
+            app(AdminTotpService::class),
+            (string) $admin->totp_secret,
+            (int) floor(time() / 30),
+        );
     }
 
     /** @param array<string, mixed> $payload */

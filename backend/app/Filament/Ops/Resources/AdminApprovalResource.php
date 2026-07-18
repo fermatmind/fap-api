@@ -158,13 +158,14 @@ class AdminApprovalResource extends BaseTenantResource
                     ->color('success')
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_PENDING)
                     ->requiresConfirmation()
-                    ->action(function (AdminApproval $record): void {
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
                         $adminId = static::currentAdminId();
                         try {
                             app(HighRiskApprovalService::class)->approve(
                                 (string) $record->id,
                                 $adminId,
-                                static::stepUpVerifiedAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
                             );
                         } catch (HighRiskApprovalValidationException) {
                             Notification::make()
@@ -187,12 +188,13 @@ class AdminApprovalResource extends BaseTenantResource
                     ->visible(fn (AdminApproval $record): bool => static::canReview()
                         && app(HighRiskApprovalService::class)->requiresLegacyGovernanceBinding($record))
                     ->requiresConfirmation()
-                    ->action(function (AdminApproval $record): void {
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
                         try {
                             app(HighRiskApprovalService::class)->bindLegacyGovernance(
                                 (string) $record->id,
                                 static::currentAdminId(),
-                                static::stepUpVerifiedAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
                             );
                         } catch (HighRiskApprovalValidationException) {
                             Notification::make()->title('Legacy governance binding failed')->danger()->send();
@@ -211,8 +213,14 @@ class AdminApprovalResource extends BaseTenantResource
                         && app(HighRiskApprovalService::class)->executionSupported($record)
                         && app(HighRiskApprovalService::class)->hasValidGovernanceEvidence($record))
                     ->requiresConfirmation()
-                    ->action(function (AdminApproval $record): void {
-                        if (static::stepUpVerifiedAdminId() !== static::currentAdminId()) {
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
+                        try {
+                            app(HighRiskApprovalService::class)->assertFreshStepUp(
+                                static::currentAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
+                            );
+                        } catch (HighRiskApprovalValidationException) {
                             Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
 
                             return;
@@ -228,12 +236,18 @@ class AdminApprovalResource extends BaseTenantResource
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_PENDING)
                     ->requiresConfirmation()
                     ->form([
+                        static::freshStepUpField(),
                         Forms\Components\Textarea::make('reason_append')
                             ->label(__('ops.resources.approvals.fields.reject_note'))
                             ->maxLength(255),
                     ])
                     ->action(function (AdminApproval $record, array $data): void {
-                        if (static::stepUpVerifiedAdminId() !== static::currentAdminId()) {
+                        try {
+                            app(HighRiskApprovalService::class)->assertFreshStepUp(
+                                static::currentAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
+                            );
+                        } catch (HighRiskApprovalValidationException) {
                             Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
 
                             return;
@@ -291,8 +305,14 @@ class AdminApprovalResource extends BaseTenantResource
                     ->icon('heroicon-o-arrow-path')
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_FAILED)
                     ->requiresConfirmation()
-                    ->action(function (AdminApproval $record): void {
-                        if (static::stepUpVerifiedAdminId() !== static::currentAdminId()) {
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
+                        try {
+                            app(HighRiskApprovalService::class)->assertFreshStepUp(
+                                static::currentAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
+                            );
+                        } catch (HighRiskApprovalValidationException) {
                             Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
 
                             return;
@@ -355,8 +375,14 @@ class AdminApprovalResource extends BaseTenantResource
             : 0;
     }
 
-    private static function stepUpVerifiedAdminId(): int
+    private static function freshStepUpField(): Forms\Components\TextInput
     {
-        return (int) session('ops_admin_totp_verified_user_id', 0);
+        return Forms\Components\TextInput::make('fresh_step_up_code')
+            ->label('Current TOTP or recovery code')
+            ->password()
+            ->autocomplete('one-time-code')
+            ->required()
+            ->minLength(6)
+            ->maxLength(32);
     }
 }

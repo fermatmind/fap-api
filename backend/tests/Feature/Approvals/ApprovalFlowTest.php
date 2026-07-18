@@ -10,6 +10,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Approvals\HighRiskApprovalService;
+use App\Services\Auth\AdminTotpService;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
 use App\Support\OrgContext;
@@ -18,6 +19,7 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use ReflectionMethod;
 use Tests\TestCase;
 
 class ApprovalFlowTest extends TestCase
@@ -86,12 +88,12 @@ class ApprovalFlowTest extends TestCase
             'created_at' => now(),
         ]);
 
-        config()->set('admin.totp.enabled', false);
         config()->set('review_governance.mode', 'team_separated');
+        $this->enableTotp($reviewer);
         app(HighRiskApprovalService::class)->approve(
             (string) $approval->id,
             (int) $reviewer->id,
-            (int) $reviewer->id,
+            $this->freshStepUpCode($reviewer),
         );
 
         $execution = app(ApprovalExecutor::class)->execute((string) $approval->id);
@@ -296,13 +298,33 @@ class ApprovalFlowTest extends TestCase
 
     private function approveAsSoloOwner(AdminApproval $approval, AdminUser $actor): void
     {
-        config()->set('admin.totp.enabled', false);
         config()->set('review_governance.mode', 'solo_owner');
         config()->set('review_governance.solo_owner_admin_user_id', (int) $actor->id);
+        $this->enableTotp($actor);
         app(HighRiskApprovalService::class)->approve(
             (string) $approval->id,
             (int) $actor->id,
-            (int) $actor->id,
+            $this->freshStepUpCode($actor),
+        );
+    }
+
+    private function enableTotp(AdminUser $admin): void
+    {
+        $admin->forceFill([
+            'totp_enabled_at' => now(),
+            'totp_secret' => 'JBSWY3DPEHPK3PXP',
+        ])->save();
+    }
+
+    private function freshStepUpCode(AdminUser $admin): string
+    {
+        $totpAt = new ReflectionMethod(AdminTotpService::class, 'totpAt');
+        $totpAt->setAccessible(true);
+
+        return (string) $totpAt->invoke(
+            app(AdminTotpService::class),
+            (string) $admin->totp_secret,
+            (int) floor(time() / 30),
         );
     }
 }

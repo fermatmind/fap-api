@@ -6,6 +6,7 @@ namespace App\Services\Approvals;
 
 use App\Models\AdminApproval;
 use App\Models\AdminUser;
+use App\Services\Auth\AdminTotpService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -52,20 +53,21 @@ final readonly class HighRiskApprovalService
 
     public function __construct(
         private ReviewAttestationCanonicalizer $canonicalizer,
+        private AdminTotpService $adminTotp,
     ) {}
 
     public function approve(
         string $approvalId,
         int $actorAdminUserId,
-        int $stepUpVerifiedAdminUserId,
+        string $freshStepUpCode,
     ): AdminApproval {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $stepUpVerifiedAdminUserId): AdminApproval {
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $freshStepUpCode): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
 
-            $this->assertStepUp($actorAdminUserId, $stepUpVerifiedAdminUserId);
+            $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
             $this->assertApprovalInputs($approval);
             $this->assertActorPolicy($approval, $actorAdminUserId);
 
@@ -107,15 +109,15 @@ final readonly class HighRiskApprovalService
     public function bindLegacyGovernance(
         string $approvalId,
         int $actorAdminUserId,
-        int $stepUpVerifiedAdminUserId,
+        string $freshStepUpCode,
     ): AdminApproval {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $stepUpVerifiedAdminUserId): AdminApproval {
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $freshStepUpCode): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
 
-            $this->assertStepUp($actorAdminUserId, $stepUpVerifiedAdminUserId);
+            $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
             $this->assertApprovalInputs($approval);
             $this->assertActorPolicy($approval, $actorAdminUserId);
             if (! $this->requiresLegacyGovernanceBinding($approval)) {
@@ -254,9 +256,9 @@ final readonly class HighRiskApprovalService
         return $metadata;
     }
 
-    private function assertStepUp(int $actorAdminUserId, int $stepUpVerifiedAdminUserId): void
+    public function assertFreshStepUp(int $actorAdminUserId, string $freshStepUpCode): void
     {
-        if ($actorAdminUserId <= 0 || $stepUpVerifiedAdminUserId !== $actorAdminUserId) {
+        if ($actorAdminUserId <= 0) {
             throw new HighRiskApprovalValidationException('Current MFA/TOTP step-up verification is required.');
         }
 
@@ -264,7 +266,7 @@ final readonly class HighRiskApprovalService
         if (! $actor) {
             throw new HighRiskApprovalValidationException('Approval actor was not found.');
         }
-        if ((bool) config('admin.totp.enabled', true) && $actor->totp_enabled_at === null) {
+        if ($actor->totp_enabled_at === null || ! $this->adminTotp->verify($actor, $freshStepUpCode)) {
             throw new HighRiskApprovalValidationException('Current MFA/TOTP step-up verification is required.');
         }
     }
