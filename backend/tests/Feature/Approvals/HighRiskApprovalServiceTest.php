@@ -46,7 +46,31 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertSame(0, (int) $approved->retry_count);
         Queue::assertNothingPushed();
 
-        $payload = (array) $approved->payload_json;
+        $unauthorizedExecution = app(ApprovalExecutor::class)->execute((string) $approval->id);
+        $this->assertFalse($unauthorizedExecution->ok);
+        $this->assertSame('APPROVAL_EXECUTION_AUTHORIZATION_INVALID', $unauthorizedExecution->code);
+        $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approval->fresh()->status);
+
+        $executionAuthorized = $service->authorizeExecution(
+            (string) $approval->id,
+            (int) $owner->id,
+            $freshStepUpCode,
+        );
+        $this->assertSame((int) $owner->id, (int) $service->executionActor($executionAuthorized)->id);
+        $executionMetadata = (array) data_get(
+            $executionAuthorized->payload_json,
+            HighRiskApprovalService::EXECUTION_METADATA_KEY,
+            [],
+        );
+        $this->assertSame(1, $executionMetadata['execution_attempt'] ?? null);
+        $this->assertArrayNotHasKey('fresh_step_up_code', $executionMetadata);
+        $this->assertDatabaseHas('audit_logs', [
+            'target_id' => (string) $approval->id,
+            'actor_admin_id' => (int) $owner->id,
+            'action' => 'approval_execution_authorized',
+        ]);
+
+        $payload = (array) $executionAuthorized->payload_json;
         $reorderedMetadata = (array) $payload[HighRiskApprovalService::METADATA_KEY];
         ksort($reorderedMetadata, SORT_STRING);
         $payload[HighRiskApprovalService::METADATA_KEY] = $reorderedMetadata;

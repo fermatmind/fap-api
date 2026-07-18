@@ -216,12 +216,13 @@ class AdminApprovalResource extends BaseTenantResource
                     ->form([static::freshStepUpField()])
                     ->action(function (AdminApproval $record, array $data): void {
                         try {
-                            app(HighRiskApprovalService::class)->assertFreshStepUp(
+                            app(HighRiskApprovalService::class)->authorizeExecution(
+                                (string) $record->id,
                                 static::currentAdminId(),
                                 (string) ($data['fresh_step_up_code'] ?? ''),
                             );
                         } catch (HighRiskApprovalValidationException) {
-                            Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
+                            Notification::make()->title('Execution authorization failed')->danger()->send();
 
                             return;
                         }
@@ -308,33 +309,17 @@ class AdminApprovalResource extends BaseTenantResource
                     ->form([static::freshStepUpField()])
                     ->action(function (AdminApproval $record, array $data): void {
                         try {
-                            app(HighRiskApprovalService::class)->assertFreshStepUp(
+                            app(HighRiskApprovalService::class)->authorizeExecution(
+                                (string) $record->id,
                                 static::currentAdminId(),
                                 (string) ($data['fresh_step_up_code'] ?? ''),
+                                retryFailed: true,
                             );
                         } catch (HighRiskApprovalValidationException) {
-                            Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
+                            Notification::make()->title('Retry execution authorization failed')->danger()->send();
 
                             return;
                         }
-                        try {
-                            $fresh = $record->fresh();
-                            if (! $fresh instanceof AdminApproval) {
-                                throw new HighRiskApprovalValidationException('Approval record was not found.');
-                            }
-                            app(HighRiskApprovalService::class)->assertExecutable($fresh);
-                        } catch (HighRiskApprovalValidationException) {
-                            Notification::make()->title('Approval evidence is no longer executable')->danger()->send();
-
-                            return;
-                        }
-
-                        DB::table('admin_approvals')
-                            ->where('id', (string) $record->id)
-                            ->update([
-                                'status' => AdminApproval::STATUS_APPROVED,
-                                'updated_at' => now(),
-                            ]);
 
                         ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
 

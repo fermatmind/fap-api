@@ -76,6 +76,14 @@ final class ApprovalExecutor
                     'approval execution adapter is not registered.',
                 );
             }
+            try {
+                $executionActor = $this->highRiskApprovalService->executionActor($approval);
+            } catch (HighRiskApprovalValidationException) {
+                return ActionResult::failure(
+                    'APPROVAL_EXECUTION_AUTHORIZATION_INVALID',
+                    'approval execution authorization validation failed.',
+                );
+            }
 
             $approval->status = AdminApproval::STATUS_EXECUTING;
             $approval->retry_count = (int) $approval->retry_count + 1;
@@ -83,6 +91,7 @@ final class ApprovalExecutor
 
             return ActionResult::success([
                 'approval' => $approval,
+                'execution_actor' => $executionActor,
             ]);
         });
 
@@ -97,15 +106,18 @@ final class ApprovalExecutor
 
         /** @var AdminApproval $approval */
         $approval = $payload['approval'];
+        /** @var AdminUser $executionActor */
+        $executionActor = $payload['execution_actor'];
+        $executionActorId = (int) $executionActor->id;
         $correlationId = trim((string) $approval->correlation_id);
         $reason = trim((string) $approval->reason);
         $orgId = max(0, (int) $approval->org_id);
 
         try {
-            $actionResult = $this->dispatchByTypeWithOrgContext($approval, $orgId);
+            $actionResult = $this->dispatchByTypeWithOrgContext($approval, $orgId, $executionActor);
 
             if ($actionResult->ok) {
-                DB::transaction(function () use ($approval, $actionResult, $correlationId, $reason): void {
+                DB::transaction(function () use ($approval, $actionResult, $correlationId, $reason, $executionActorId): void {
                     $locked = AdminApproval::query()->whereKey($approval->id)->lockForUpdate()->first();
                     if (! $locked) {
                         return;
@@ -119,7 +131,7 @@ final class ApprovalExecutor
 
                     $this->writeAudit(
                         orgId: (int) $locked->org_id,
-                        actorAdminId: $locked->approved_by_admin_user_id,
+                        actorAdminId: $executionActorId,
                         action: 'approval_executed_success',
                         targetId: (string) $locked->id,
                         reason: $reason,
@@ -141,7 +153,7 @@ final class ApprovalExecutor
             $code = (string) ($actionResult->code ?? 'APPROVAL_EXECUTE_FAILED');
             $message = $this->sanitizeErrorMessage((string) ($actionResult->message ?? 'approval execution failed.'));
 
-            DB::transaction(function () use ($approval, $code, $message, $correlationId, $reason): void {
+            DB::transaction(function () use ($approval, $code, $message, $correlationId, $reason, $executionActorId): void {
                 $locked = AdminApproval::query()->whereKey($approval->id)->lockForUpdate()->first();
                 if (! $locked) {
                     return;
@@ -154,7 +166,7 @@ final class ApprovalExecutor
 
                 $this->writeAudit(
                     orgId: (int) $locked->org_id,
-                    actorAdminId: $locked->approved_by_admin_user_id,
+                    actorAdminId: $executionActorId,
                     action: 'approval_executed_failed',
                     targetId: (string) $locked->id,
                     reason: $reason,
@@ -173,7 +185,7 @@ final class ApprovalExecutor
         } catch (\Throwable $e) {
             $message = $this->sanitizeErrorMessage($e->getMessage());
 
-            DB::transaction(function () use ($approval, $message, $correlationId, $reason): void {
+            DB::transaction(function () use ($approval, $message, $correlationId, $reason, $executionActorId): void {
                 $locked = AdminApproval::query()->whereKey($approval->id)->lockForUpdate()->first();
                 if (! $locked) {
                     return;
@@ -186,7 +198,7 @@ final class ApprovalExecutor
 
                 $this->writeAudit(
                     orgId: (int) $locked->org_id,
-                    actorAdminId: $locked->approved_by_admin_user_id,
+                    actorAdminId: $executionActorId,
                     action: 'approval_executed_failed',
                     targetId: (string) $locked->id,
                     reason: $reason,
@@ -205,15 +217,10 @@ final class ApprovalExecutor
         }
     }
 
-    private function dispatchByType(AdminApproval $approval): ActionResult
+    private function dispatchByType(AdminApproval $approval, AdminUser $actor): ActionResult
     {
         $payload = is_array($approval->payload_json) ? $approval->payload_json : [];
         $type = strtoupper((string) $approval->type);
-
-        $actor = $this->resolveActionActor($approval);
-        if (! $actor) {
-            return ActionResult::failure('ACTOR_NOT_FOUND', 'request actor not found.');
-        }
 
         return match ($type) {
             AdminApproval::TYPE_MANUAL_GRANT => $this->manualGrantAction->execute(
@@ -251,7 +258,7 @@ final class ApprovalExecutor
         };
     }
 
-    private function dispatchByTypeWithOrgContext(AdminApproval $approval, int $orgId): ActionResult
+    private function dispatchByTypeWithOrgContext(AdminApproval $approval, int $orgId, AdminUser $actor): ActionResult
     {
         $container = app();
         $hadContextBinding = $container->bound(OrgContext::class);
@@ -270,7 +277,7 @@ final class ApprovalExecutor
         $container->instance(OrgContext::class, $context);
 
         try {
-            return $this->dispatchByType($approval);
+            return $this->dispatchByType($approval, $actor);
         } finally {
             $context->set($previousOrgId, $previousUserId, $previousRole, $previousAnonId);
             if (! $hadContextBinding) {
@@ -337,24 +344,6 @@ final class ApprovalExecutor
             'approval_id' => (string) $approval->id,
             'type' => AdminApproval::TYPE_ROLLBACK_RELEASE,
         ]);
-    }
-
-    private function resolveActionActor(AdminApproval $approval): ?AdminUser
-    {
-        $requestedBy = (int) ($approval->requested_by_admin_user_id ?? 0);
-        if ($requestedBy > 0) {
-            $requested = AdminUser::query()->find($requestedBy);
-            if ($requested) {
-                return $requested;
-            }
-        }
-
-        $approvedBy = (int) ($approval->approved_by_admin_user_id ?? 0);
-        if ($approvedBy > 0) {
-            return AdminUser::query()->find($approvedBy);
-        }
-
-        return null;
     }
 
     private function sanitizeErrorMessage(string $message): string

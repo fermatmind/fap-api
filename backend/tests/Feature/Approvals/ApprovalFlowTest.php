@@ -10,6 +10,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Approvals\HighRiskApprovalService;
+use App\Services\Approvals\HighRiskApprovalValidationException;
 use App\Services\Auth\AdminTotpService;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
@@ -58,6 +59,12 @@ class ApprovalFlowTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_OPS_READ,
         ]);
+        $executor = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_OPS_WRITE,
+            PermissionNames::ADMIN_FINANCE_WRITE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
 
         $approval = AdminApproval::query()->create([
             'id' => (string) Str::uuid(),
@@ -95,6 +102,25 @@ class ApprovalFlowTest extends TestCase
             (int) $reviewer->id,
             $this->freshStepUpCode($reviewer),
         );
+        $this->enableTotp($executor);
+        app(HighRiskApprovalService::class)->authorizeExecution(
+            (string) $approval->id,
+            (int) $executor->id,
+            $this->freshStepUpCode($executor),
+        );
+        try {
+            app(HighRiskApprovalService::class)->authorizeExecution(
+                (string) $approval->id,
+                (int) $reviewer->id,
+                $this->freshStepUpCode($reviewer),
+            );
+            $this->fail('Expected the bound execution actor to remain immutable for the active attempt.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame(
+                'Execution is already authorized by a different administrator.',
+                $exception->getMessage(),
+            );
+        }
 
         $execution = app(ApprovalExecutor::class)->execute((string) $approval->id);
         $this->assertTrue($execution->ok);
@@ -104,6 +130,7 @@ class ApprovalFlowTest extends TestCase
 
         $this->assertDatabaseHas('audit_logs', [
             'org_id' => 0,
+            'actor_admin_id' => (int) $executor->id,
             'action' => 'approval_executed_success',
             'target_type' => 'AdminApproval',
             'target_id' => (string) $approval->id,
@@ -302,6 +329,11 @@ class ApprovalFlowTest extends TestCase
         config()->set('review_governance.solo_owner_admin_user_id', (int) $actor->id);
         $this->enableTotp($actor);
         app(HighRiskApprovalService::class)->approve(
+            (string) $approval->id,
+            (int) $actor->id,
+            $this->freshStepUpCode($actor),
+        );
+        app(HighRiskApprovalService::class)->authorizeExecution(
             (string) $approval->id,
             (int) $actor->id,
             $this->freshStepUpCode($actor),

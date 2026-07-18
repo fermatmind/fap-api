@@ -27,6 +27,12 @@ final readonly class HighRiskApprovalService
 
     public const METADATA_KEY = '_approval_governance';
 
+    public const EXECUTION_METADATA_KEY = '_approval_execution_authorization';
+
+    private const EXECUTION_SCHEMA_VERSION = 'solo-owner-ops-execution.v1';
+
+    private const EXECUTION_AUTHORIZATION_TTL_MINUTES = 10;
+
     /** @var array<string, string> */
     private const TYPE_SURFACES = [
         AdminApproval::TYPE_MANUAL_GRANT => 'manual_benefit_grant_approval',
@@ -49,6 +55,15 @@ final readonly class HighRiskApprovalService
         'step_up_verified',
         'approved_at',
         'evidence_sha256',
+    ];
+
+    private const EXECUTION_EVIDENCE_FIELDS = [
+        'schema_version',
+        'actor_admin_user_id',
+        'authorized_at',
+        'execution_attempt',
+        'approval_evidence_sha256',
+        'authorization_sha256',
     ];
 
     public function __construct(
@@ -173,6 +188,136 @@ final readonly class HighRiskApprovalService
         }
 
         $this->assertActorPolicy($approval, $approvedBy);
+    }
+
+    public function authorizeExecution(
+        string $approvalId,
+        int $actorAdminUserId,
+        string $freshStepUpCode,
+        bool $retryFailed = false,
+    ): AdminApproval {
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $freshStepUpCode, $retryFailed): AdminApproval {
+            $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
+            if (! $approval) {
+                throw new HighRiskApprovalValidationException('Approval record was not found.');
+            }
+
+            $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+            $this->assertExecutable($approval);
+            if (! $this->executionSupported($approval)) {
+                throw new HighRiskApprovalValidationException('Approval execution adapter is not registered.');
+            }
+
+            $requiredStatus = $retryFailed ? AdminApproval::STATUS_FAILED : AdminApproval::STATUS_APPROVED;
+            if (strtoupper((string) $approval->status) !== $requiredStatus) {
+                throw new HighRiskApprovalValidationException(
+                    $retryFailed
+                        ? 'Only failed approvals can be authorized for retry.'
+                        : 'Only approved approvals can be authorized for execution.',
+                );
+            }
+            $this->assertActorPolicy($approval, $actorAdminUserId);
+
+            if (! $retryFailed && $this->hasExecutionAuthorization($approval)) {
+                try {
+                    $existingActor = $this->executionActor($approval);
+                } catch (HighRiskApprovalValidationException) {
+                    // A fresh step-up may replace only transient execution authorization;
+                    // immutable approval governance evidence was already revalidated above.
+                    $existingActor = null;
+                }
+                if ($existingActor instanceof AdminUser) {
+                    if ((int) $existingActor->id !== $actorAdminUserId) {
+                        throw new HighRiskApprovalValidationException('Execution is already authorized by a different administrator.');
+                    }
+
+                    return $approval;
+                }
+            }
+
+            $payload = is_array($approval->payload_json) ? $approval->payload_json : [];
+            $governance = $payload[self::METADATA_KEY] ?? null;
+            $approvalEvidenceSha = is_array($governance)
+                ? (string) ($governance['evidence_sha256'] ?? '')
+                : '';
+            $authorizedAt = now()->startOfSecond();
+            $metadata = [
+                'schema_version' => self::EXECUTION_SCHEMA_VERSION,
+                'actor_admin_user_id' => $actorAdminUserId,
+                'authorized_at' => $authorizedAt->utc()->format('Y-m-d\TH:i:s\Z'),
+                'execution_attempt' => (int) $approval->retry_count + 1,
+                'approval_evidence_sha256' => $approvalEvidenceSha,
+            ];
+            $metadata['authorization_sha256'] = hash('sha256', $this->canonicalizer->encode($metadata));
+
+            $payload[self::EXECUTION_METADATA_KEY] = $metadata;
+            $approval->payload_json = $payload;
+            if ($retryFailed) {
+                $approval->status = AdminApproval::STATUS_APPROVED;
+            }
+            $approval->save();
+
+            $this->writeExecutionAuthorizationAudit($approval, $actorAdminUserId, $metadata);
+            $approval->refresh();
+            $this->executionActor($approval);
+
+            return $approval;
+        }, 3);
+    }
+
+    public function executionActor(AdminApproval $approval): AdminUser
+    {
+        $this->assertExecutable($approval);
+        $payload = is_array($approval->payload_json) ? $approval->payload_json : [];
+        $metadata = $payload[self::EXECUTION_METADATA_KEY] ?? null;
+        $actualFields = is_array($metadata) ? array_keys($metadata) : [];
+        $expectedFields = self::EXECUTION_EVIDENCE_FIELDS;
+        sort($actualFields, SORT_STRING);
+        sort($expectedFields, SORT_STRING);
+        if (! is_array($metadata) || $actualFields !== $expectedFields) {
+            throw new HighRiskApprovalValidationException('Execution authorization evidence is missing or malformed.');
+        }
+
+        $governance = $payload[self::METADATA_KEY] ?? null;
+        $approvalEvidenceSha = is_array($governance)
+            ? (string) ($governance['evidence_sha256'] ?? '')
+            : '';
+        $actorAdminUserId = (int) ($metadata['actor_admin_user_id'] ?? 0);
+        try {
+            $authorizedAt = Carbon::createFromFormat(
+                'Y-m-d\TH:i:s\Z',
+                (string) ($metadata['authorized_at'] ?? ''),
+                'UTC',
+            );
+        } catch (\Throwable) {
+            throw new HighRiskApprovalValidationException('Execution authorization evidence is invalid, stale, or drifted.');
+        }
+        $expectedAuthorizationSha = hash('sha256', $this->canonicalizer->encode(
+            array_diff_key($metadata, ['authorization_sha256' => true]),
+        ));
+        if ($metadata['schema_version'] !== self::EXECUTION_SCHEMA_VERSION
+            || ! is_int($metadata['actor_admin_user_id'])
+            || $actorAdminUserId <= 0
+            || ! is_int($metadata['execution_attempt'])
+            || (int) $metadata['execution_attempt'] !== (int) $approval->retry_count + 1
+            || ! hash_equals($approvalEvidenceSha, (string) $metadata['approval_evidence_sha256'])
+            || ! is_string($metadata['authorization_sha256'])
+            || preg_match('/^[0-9a-f]{64}$/', $metadata['authorization_sha256']) !== 1
+            || ! hash_equals($expectedAuthorizationSha, $metadata['authorization_sha256'])
+            || ! $authorizedAt
+            || $authorizedAt->isFuture()
+            || ($approval->approved_at instanceof Carbon && $authorizedAt->lt($approval->approved_at->utc()))
+            || $authorizedAt->lt(now()->utc()->subMinutes(self::EXECUTION_AUTHORIZATION_TTL_MINUTES))) {
+            throw new HighRiskApprovalValidationException('Execution authorization evidence is invalid, stale, or drifted.');
+        }
+
+        $this->assertActorPolicy($approval, $actorAdminUserId);
+        $actor = AdminUser::query()->find($actorAdminUserId);
+        if (! $actor) {
+            throw new HighRiskApprovalValidationException('Execution actor was not found.');
+        }
+
+        return $actor;
     }
 
     /** @return list<string> */
@@ -311,9 +456,16 @@ final readonly class HighRiskApprovalService
     private function businessPayload(AdminApproval $approval): array
     {
         $payload = is_array($approval->payload_json) ? $approval->payload_json : [];
-        unset($payload[self::METADATA_KEY]);
+        unset($payload[self::METADATA_KEY], $payload[self::EXECUTION_METADATA_KEY]);
 
         return $payload;
+    }
+
+    private function hasExecutionAuthorization(AdminApproval $approval): bool
+    {
+        $payload = is_array($approval->payload_json) ? $approval->payload_json : [];
+
+        return array_key_exists(self::EXECUTION_METADATA_KEY, $payload);
     }
 
     private function bindLegacyGovernanceOnLockedApproval(AdminApproval $approval, int $actorAdminUserId): AdminApproval
@@ -369,6 +521,35 @@ final readonly class HighRiskApprovalService
                 ? 'legacy high-risk approval governance evidence rebound'
                 : 'high-risk approval evidence recorded',
             'result' => 'approved',
+            'created_at' => now(),
+        ]);
+    }
+
+    /** @param array<string, mixed> $metadata */
+    private function writeExecutionAuthorizationAudit(
+        AdminApproval $approval,
+        int $actorAdminUserId,
+        array $metadata,
+    ): void {
+        DB::table('audit_logs')->insert([
+            'org_id' => (int) $approval->org_id,
+            'actor_admin_id' => $actorAdminUserId,
+            'action' => 'approval_execution_authorized',
+            'target_type' => 'AdminApproval',
+            'target_id' => (string) $approval->id,
+            'meta_json' => json_encode([
+                'actor' => $actorAdminUserId,
+                'org_id' => (int) $approval->org_id,
+                'correlation_id' => (string) $approval->correlation_id,
+                'execution_attempt' => (int) $metadata['execution_attempt'],
+                'approval_evidence_sha256' => (string) $metadata['approval_evidence_sha256'],
+                'authorization_sha256' => (string) $metadata['authorization_sha256'],
+            ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+            'ip' => request()->ip(),
+            'user_agent' => mb_substr((string) request()->userAgent(), 0, 255),
+            'request_id' => (string) request()->headers->get('X-Request-Id', ''),
+            'reason' => 'high-risk approval execution authorized after fresh step-up',
+            'result' => 'authorized',
             'created_at' => now(),
         ]);
     }
