@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "92184869ed9af952957b860240b0644253f9312d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97259,14 +97259,14 @@
         "evidence": "After the fifteenth and sixteenth review findings, the Career/authority manifest passed 106 tests / 892 assertions across projection/promotion gates, first-exposure authorization, published LKG/legacy recovery, snapshot-preserving targeted detail warm with and without forget, immutable payload plus exposure-snapshot staging, activation-time snapshot revalidation, nested-lock lease coverage, ready-only public directory/industry/sitemap consumption, the 10k readiness gate, atomic job-index/detail/directory activation and rollback, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 108 tests / 898 assertions total. The 1046 and 10000 row directories built in about 3ms and 39ms with one DB query. All 32 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact thirty-five-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All nine required CI/code-scanning checks passed on 463b56213aa7b624f0d6b7dc1b38ab60e5e1e122. The fifteenth and sixteenth same-scope review repairs were committed and pushed in 92184869ed9af952957b860240b0644253f9312d; exact-head checks are rerunning."
+        "status": "passed",
+        "evidence": "All nine required CI/code-scanning checks passed on exact ledger head 7584acb51e55982efe4a9c687bc2b43cf104fc9d after the fifteenth and sixteenth same-scope review repairs. GitHub reports OPEN/CLEAN and all sixteen review threads are resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97469,8 +97469,13 @@
         "at": "2026-07-18T15:00:53Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed shared first-exposure readiness plus snapshot-preserving targeted warm as 92184869ed9af952957b860240b0644253f9312d. Replied to the fifteenth and sixteenth review findings with exact implementation and regression evidence, then resolved both threads. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:08:25Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 7584acb51e55982efe4a9c687bc2b43cf104fc9d. All sixteen review threads are resolved, GitHub reports OPEN/CLEAN, the worktree is clean, and exact thirty-five-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T15:00:53Z"
+    "updated_at": "2026-07-18T15:08:25Z"
   }
 }
