@@ -166,7 +166,7 @@ final class PublicCareerAuthorityResponseCache
 
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         $projectionItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
-        if (! $this->detailProjectionItemIsPublished($projectionItem)) {
+        if (! $this->jobDetailProjectionItemIsPublished($projectionItem)) {
             $this->forgetJobDetailPayload($normalizedSlug, $normalizedLocale);
 
             if (is_array($projectionItem)) {
@@ -181,24 +181,22 @@ final class PublicCareerAuthorityResponseCache
         }
 
         Cache::forget($this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale));
-        foreach (['fresh' => $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale), 'stale' => $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale)] as $state => $pointerKey) {
-            $version = Cache::get($pointerKey);
-            $payload = is_string($version) && $version !== ''
-                ? Cache::get($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version))
-                : null;
-            if (is_array($payload)) {
-                $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, $state, $version);
+        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+        if ($readiness['classification'] === 'ready_active') {
+            $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'fresh', $readiness['version']);
 
-                return ['payload' => $payload, 'state' => $state];
-            }
+            return ['payload' => $readiness['payload'], 'state' => 'fresh'];
         }
+        if ($readiness['classification'] === 'ready_lkg') {
+            $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'stale', $readiness['version']);
 
-        $legacy = Cache::get($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
-        if (is_array($legacy)) {
-            $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $legacy);
+            return ['payload' => $readiness['payload'], 'state' => 'stale'];
+        }
+        if ($readiness['classification'] === 'legacy_migratable') {
+            $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $readiness['payload']);
             $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'stale', 'legacy-v1');
 
-            return ['payload' => $legacy, 'state' => 'stale'];
+            return ['payload' => $readiness['payload'], 'state' => 'stale'];
         }
 
         $this->dispatchJobDetailWarm($normalizedSlug, $normalizedLocale);
@@ -212,6 +210,76 @@ final class PublicCareerAuthorityResponseCache
             ),
             'state' => 'degraded',
         ];
+    }
+
+    /**
+     * Inspect the exact active -> LKG -> legacy cache chain without promoting,
+     * warming, forgetting, or reading content authority.
+     *
+     * @return array{
+     *   classification: 'broken_pointer'|'invalid_payload'|'legacy_migratable'|'missing_payload'|'missing_pointer'|'ready_active'|'ready_lkg',
+     *   payload: array<string, mixed>|null,
+     *   version: string|null
+     * }
+     */
+    public function jobDetailCacheReadiness(string $slug, string $publicLocale = 'zh-CN'): array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $issues = [];
+
+        foreach ([
+            'ready_active' => $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale),
+            'ready_lkg' => $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale),
+        ] as $classification => $pointerKey) {
+            $version = Cache::get($pointerKey);
+            if ($version === null) {
+                continue;
+            }
+            if (! is_string($version) || trim($version) === '') {
+                $issues[] = 'broken_pointer';
+
+                continue;
+            }
+
+            $payload = Cache::get($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version));
+            if ($payload === null) {
+                $issues[] = 'missing_payload';
+
+                continue;
+            }
+            if (! is_array($payload)) {
+                $issues[] = 'invalid_payload';
+
+                continue;
+            }
+
+            return [
+                'classification' => $classification,
+                'payload' => $payload,
+                'version' => $version,
+            ];
+        }
+
+        $legacy = Cache::get($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
+        if (is_array($legacy)) {
+            return [
+                'classification' => 'legacy_migratable',
+                'payload' => $legacy,
+                'version' => 'legacy-v1',
+            ];
+        }
+        if ($legacy !== null) {
+            $issues[] = 'invalid_payload';
+        }
+
+        foreach (['invalid_payload', 'missing_payload', 'broken_pointer'] as $issue) {
+            if (in_array($issue, $issues, true)) {
+                return ['classification' => $issue, 'payload' => null, 'version' => null];
+            }
+        }
+
+        return ['classification' => 'missing_pointer', 'payload' => null, 'version' => null];
     }
 
     private function dispatchJobDetailWarm(string $slug, string $publicLocale): void
@@ -707,11 +775,11 @@ final class PublicCareerAuthorityResponseCache
     {
         $item = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
 
-        return $this->detailProjectionItemIsPublished($item);
+        return $this->jobDetailProjectionItemIsPublished($item);
     }
 
     /** @param array<string, mixed>|null $item */
-    private function detailProjectionItemIsPublished(?array $item): bool
+    public function jobDetailProjectionItemIsPublished(?array $item): bool
     {
         $state = is_array($item)
             ? (string) (

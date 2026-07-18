@@ -45268,3 +45268,59 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: CAREER-DETAIL-CACHE-COVERAGE-01
+    repo: fap-api
+    base: main
+    branch: codex/career-detail-cache-coverage-01
+    title: "CAREER-DETAIL-CACHE-COVERAGE-01: audit and repair published Career detail cache coverage"
+    status: in_progress
+    depends_on:
+      - CAREER-DETAIL-COLD-MISS-DEGRADE-01
+    train_scope: career_detail_cache_coverage
+    scope:
+      - Derive every published Career slug from backend runtime publish projection authority and inspect the requested EN/ZH cache targets dynamically.
+      - Classify active, LKG, legacy-migratable, missing pointer/payload, broken pointer, invalid payload, and held/unpublished-excluded states through the PR1 cache-readiness contract.
+      - Keep verification read-only by default and emit a stable bounded JSON coverage report.
+      - Queue only missing/broken targets through unique jobs with bounded stable-target batching, resume, reset, and an explicit production-write confirmation boundary.
+    allowed_paths:
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/app/Services/Career/CareerJobDetailCacheCoverageService.php
+      - backend/app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php
+      - backend/app/Console/Commands/CareerQueueWarmJobDetails.php
+      - backend/app/Jobs/Career/WarmCareerJobDetailProjection.php
+      - backend/tests/Feature/Career/CareerJobDetailCacheCoverageTest.php
+      - backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php
+      - backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/career/job-detail-cache-coverage.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change the public Career API response, directory detail_ready, publication/promotion gates, deploy hooks, scheduler, or later SLO repair scope.
+      - Rebuild all detail payloads serially in the command process, forget healthy active/LKG caches, or use frontend lists or historical manifests as permanent authority.
+      - Modify frontend, sitemap, llms, canonical, noindex, JSON-LD, CMS/DB content authority, or publication state.
+      - Execute production cache repair, CMS/DB mutation, import, publish, staging wait, manual deploy, or production deploy.
+    validation:
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailCacheCoverageTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailReadModel10kTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_detail_cache_coverage' --no-ansi
+      - cd backend && php artisan list --raw | grep '^career:verify-job-detail-cache-coverage '
+      - cd backend && vendor/bin/pint --test app/Services/Career/PublicCareerAuthorityResponseCache.php app/Services/Career/CareerJobDetailCacheCoverageService.php app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php tests/Feature/Career/CareerJobDetailCacheCoverageTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

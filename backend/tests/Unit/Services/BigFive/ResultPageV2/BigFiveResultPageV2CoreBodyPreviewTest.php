@@ -4905,6 +4905,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_detail_cache_coverage(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php',
+            'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertNotSame([], $this->mbtiImpactingRuntimeChanges([
+            'backend/app/Services/BigFive/FutureCareerCoverageService.php',
+        ], '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_10k_capacity_chaos_gate(): void
     {
         $changed = [
@@ -6944,6 +6957,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareerDetailReadModel10kFile($file)) {
+                continue;
+            }
+
+            if ($this->isCareerDetailCacheCoverageFile($file)) {
                 continue;
             }
 
@@ -10126,6 +10143,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Jobs/Career/WarmCareerJobDetailProjection.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailDegradedShellBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+        ], true);
+    }
+
+    private function isCareerDetailCacheCoverageFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php',
+            'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
         ], true);
     }
 

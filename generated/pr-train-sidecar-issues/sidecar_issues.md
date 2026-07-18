@@ -587,3 +587,21 @@
   - Do not bypass `composer test` or mix those repairs into PR3.
 - status: `blocked_external_baseline`
 - whether train continued: `false`
+
+## CAREER-DETAIL-CACHE-COVERAGE-01 shared SQLite collision
+
+- observed at: `2026-07-18T09:16:00Z`
+- repo: `fap-api`
+- PR id / branch: `CAREER-DETAIL-CACHE-COVERAGE-01` / `codex/career-detail-cache-coverage-01`
+- blocker type: `external_concurrent_shared_sqlite_corruption`
+- evidence:
+  - The process guard found another repository `backend/scripts/ci_verify_mbti.sh` process already running.
+  - The first `CareerWarmPublicAuthorityCacheCommandTest` run failed in test setup with `SQLSTATE[HY000]: General error: 11 database disk image is malformed` while both processes used `/tmp/fap-ci.sqlite`.
+  - The exact unchanged 14-test file passed with 143 assertions when rerun against a process-private SQLite `:memory:` database.
+- why not current PR scope:
+  - PR2 changes Career detail cache coverage inspection/queue capability and does not own the repository-wide shared PHPUnit SQLite path or the concurrently running verification process.
+  - The failure occurred before a test assertion and disappeared without a code change when database isolation was applied.
+- whether required checks are affected: `false`; focused validation passes in an isolated database and GitHub required checks remain mandatory.
+- recommended follow-up:
+  - Give each local verification process a unique SQLite database path or serialize suites that currently share `/tmp/fap-ci.sqlite`.
+- whether train continued: `true`

@@ -97057,7 +97057,7 @@
     "branch": "codex/career-detail-cold-miss-degrade-01",
     "title": "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500",
     "depends_on": [],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "8d51a484ed1afc7b8ab58e770aa0a25f179ecec1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3163",
     "checks": {
@@ -97082,12 +97082,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-18T09:06:47Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -97139,8 +97139,73 @@
         "at": "2026-07-18T08:59:36Z",
         "status": "ready_to_merge",
         "note": "Exact implementation head 8d51a484ed1afc7b8ab58e770aa0a25f179ecec1 passed all nine CI/code-scanning checks. All review threads are resolved, GitHub reports mergeable/CLEAN, and exact changed-file scope revalidation remains eight paths within the manifest allowlist. This final ledger-only head must pass required checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T09:14:06Z",
+        "status": "merged",
+        "note": "Reconciled during the dependent PR2 metadata update: final ledger head 209e5c35b7ef0573c9e8f71bcfe194e63c340c3c passed all nine checks, PR #3163 squash merged at 2026-07-18T09:06:47Z as 6c2cabc9314473878643e6302bcc8c0d412cd35f, origin/main contains the merge, local main equals origin/main in a clean worktree, and both local and remote task branches are deleted. No staging wait or deploy occurred."
       }
     ],
-    "updated_at": "2026-07-18T08:59:36Z"
+    "updated_at": "2026-07-18T09:14:06Z"
+  },
+  "CAREER-DETAIL-CACHE-COVERAGE-01": {
+    "id": "CAREER-DETAIL-CACHE-COVERAGE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-detail-cache-coverage-01",
+    "title": "CAREER-DETAIL-CACHE-COVERAGE-01: audit and repair published Career detail cache coverage",
+    "depends_on": [
+      "CAREER-DETAIL-COLD-MISS-DEGRADE-01"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The explicit seven-PR continuous execution goal authorized this exact PR2 scope, manifest/state registration, and complete normal PR lifecycle."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR1 is merged as 6c2cabc9314473878643e6302bcc8c0d412cd35f; origin/main contains the merge and the clean PR2 branch was created from that exact main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "CareerJobDetailCacheCoverageTest passed 6 tests / 60 assertions, including dynamic 1046×2=2092 targets, all required cache classifications, bounded examples, verify-only zero write/dispatch, missing/broken-only queue repair, healthy active/LKG preservation, stable resume idempotency, and production confirmation. CareerJobDetailReadModel10kTest passed 11 / 121; CareerWarmPublicAuthorityCacheCommandTest passed 14 / 143 against process-private SQLite; Career detail API passed 13 / 149; runtime-freeze focused tests passed 2 / 6. Changed-PHP Pint, Composer strict validation, command discovery, PHP/YAML/JSON syntax, diff checks, and the exact ten-path allowlist passed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T09:14:06Z",
+        "status": "implementation_in_progress",
+        "note": "Verified PR1 merge containment and exact main parity, then created the isolated PR2 branch. Implementation is limited to dynamic backend-authority cache coverage inspection, read-only verification, and bounded resumable queue repair capability. No production cache repair, CMS/DB write, publication, deploy/scheduler, frontend, or later train scope is included."
+      },
+      {
+        "at": "2026-07-18T09:20:56Z",
+        "status": "local_checks_passed",
+        "note": "All PR2 manifest-focused tests and static gates passed. A concurrently running external ci_verify_mbti process corrupted the shared /tmp/fap-ci.sqlite before assertions; the unchanged warm-command suite passed 14/143 against process-private SQLite, and the external collision is recorded in both fixed sidecar files. Exact changed scope is ten allowlisted paths. No production repair, CMS/DB write, publication, staging wait, deploy, scheduler, public response, directory, or frontend change occurred."
+      }
+    ],
+    "updated_at": "2026-07-18T09:20:56Z"
   }
 }
