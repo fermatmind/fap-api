@@ -32,6 +32,7 @@ jobs:
   staging-cache-repair:
     name: Career detail staging cache repair (${{ inputs.mode }})
     runs-on: ubuntu-latest
+    environment: staging
     timeout-minutes: 15
     env:
       DEPLOY_HOST: "49.234.55.28"
