@@ -34,6 +34,32 @@ final class BigFiveCanonicalRouteCatalog
         'low-openness',
     ];
 
+    /** @return array<string,string> */
+    public static function redirectOnlyAliasTargets(string $locale): array
+    {
+        if (! in_array($locale, ['en', 'zh-CN'], true)) {
+            return [];
+        }
+
+        return self::EN_REDIRECT_ONLY_ALIAS_TARGETS;
+    }
+
+    /** @return array<string,string> */
+    public static function reviewedRedirectPaths(): array
+    {
+        $paths = [];
+        foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $segment) {
+            foreach (self::redirectOnlyAliasTargets($locale) as $alias => $target) {
+                $paths["/{$segment}/personality/big-five/{$alias}"] =
+                    "/{$segment}/personality/big-five/{$target}";
+            }
+        }
+
+        ksort($paths);
+
+        return $paths;
+    }
+
     public const DOMAINS = [
         'agreeableness',
         'conscientiousness',

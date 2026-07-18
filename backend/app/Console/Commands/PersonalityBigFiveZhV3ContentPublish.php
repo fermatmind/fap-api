@@ -99,7 +99,8 @@ final class PersonalityBigFiveZhV3ContentPublish extends Command
         foreach ([
             'ok', 'status', 'mode', 'release_id', 'source_content_sha256',
             'release_package_sha256', 'asset_count', 'claims_count', 'faq_count',
-            'alias_expected_count', 'alias_safe_count', 'alias_descriptor_overlap_count',
+            'alias_expected_count', 'alias_safe_count', 'alias_database_count', 'alias_absent',
+            'alias_descriptor_overlap_count',
             'alias_collision_count', 'alias_boundary_fingerprint_sha256', 'alias_boundary_unchanged',
             'created_revision_count', 'idempotent_unchanged_count', 'writes_committed',
             'cache_invalidation_ok', 'cache_invalidation_warning',

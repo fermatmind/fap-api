@@ -9,7 +9,6 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
-use App\Services\SEO\BigFivePublicIntegrityGate;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -53,7 +52,7 @@ final class BigFiveZhV3Publisher
     {
         $snapshotBefore = $this->databaseSnapshotFingerprint();
         $plan = $this->buildPlan($packagePath);
-        $aliasBoundaryAfter = $this->assertRedirectAliasesSafe($plan['descriptors']);
+        $aliasBoundaryAfter = $this->assertRedirectAliasesAbsent($plan['descriptors']);
         $snapshotAfter = $this->databaseSnapshotFingerprint();
         if (! hash_equals($snapshotBefore, $snapshotAfter)) {
             throw new RuntimeException('Read-only preflight changed the database snapshot.');
@@ -84,7 +83,7 @@ final class BigFiveZhV3Publisher
         $plan = $this->buildPlan($packagePath);
         $beforeBoundary = $this->nonTargetBoundaryFingerprint();
         $result = DB::transaction(function () use ($plan, $operatorAdminUserId, $beforeBoundary): array {
-            $lockedAliasBoundary = $this->assertRedirectAliasesSafe($plan['descriptors'], true);
+            $lockedAliasBoundary = $this->assertRedirectAliasesAbsent($plan['descriptors'], true);
             if (! hash_equals(
                 (string) $plan['alias_boundary']['fingerprint_sha256'],
                 (string) $lockedAliasBoundary['fingerprint_sha256'],
@@ -157,7 +156,7 @@ final class BigFiveZhV3Publisher
             if (! hash_equals($beforeBoundary, $afterBoundary)) {
                 throw new RuntimeException('English or non-target authority boundary changed during the 52-page transaction.');
             }
-            $afterAliasBoundary = $this->assertRedirectAliasesSafe($plan['descriptors']);
+            $afterAliasBoundary = $this->assertRedirectAliasesAbsent($plan['descriptors']);
             if (! hash_equals(
                 (string) $lockedAliasBoundary['fingerprint_sha256'],
                 (string) $afterAliasBoundary['fingerprint_sha256'],
@@ -307,7 +306,7 @@ final class BigFiveZhV3Publisher
         if (count($descriptors) !== BigFiveZhV3PackageCompiler::ASSET_COUNT || $familyCounts !== $expectedCounts) {
             throw new RuntimeException('Publisher target inventory is not exactly 1/5/15/1/30.');
         }
-        $aliasBoundary = $this->assertRedirectAliasesSafe($descriptors);
+        $aliasBoundary = $this->assertRedirectAliasesAbsent($descriptors);
 
         $existingRevisions = PersonalityPublicContentAssetRevision::query()
             ->where('authority_package_sha256', self::PACKAGE_FILE_SHA256)
@@ -371,6 +370,8 @@ final class BigFiveZhV3Publisher
             'alias_collision_count' => 0,
             'alias_expected_count' => $plan['alias_boundary']['expected_count'],
             'alias_safe_count' => $plan['alias_boundary']['safe_count'],
+            'alias_database_count' => $plan['alias_boundary']['database_count'],
+            'alias_absent' => $plan['alias_boundary']['database_count'] === 0,
             'alias_descriptor_overlap_count' => $plan['alias_boundary']['descriptor_overlap_count'],
             'alias_boundary_fingerprint_sha256' => $plan['alias_boundary']['fingerprint_sha256'],
             'search_submit_allowed' => false,
@@ -449,33 +450,12 @@ final class BigFiveZhV3Publisher
 
     /**
      * @param  list<array<string,mixed>>  $descriptors
-     * @return array{expected_count:int,safe_count:int,descriptor_overlap_count:int,fingerprint_sha256:string}
+     * @return array{expected_count:int,safe_count:int,database_count:int,descriptor_overlap_count:int,fingerprint_sha256:string}
      */
-    private function assertRedirectAliasesSafe(array $descriptors, bool $lockForUpdate = false): array
+    private function assertRedirectAliasesAbsent(array $descriptors, bool $lockForUpdate = false): array
     {
-        $expectedAliases = BigFiveCanonicalRouteCatalog::ZH_REDIRECT_ONLY_ALIASES;
-        $reviewedPaths = array_keys(BigFivePublicIntegrityGate::REVIEWED_301_ALIASES);
-        $expectedPaths = array_map(
-            static fn (string $alias): string => '/zh/personality/big-five/'.$alias,
-            $expectedAliases,
-        );
-        $catalogAliases = $expectedAliases;
-        $reviewedAliases = array_map(static fn (string $path): string => basename($path), $reviewedPaths);
-        sort($catalogAliases);
-        sort($reviewedAliases);
-        if ($catalogAliases !== $reviewedAliases) {
-            throw new RuntimeException('Redirect alias catalog and reviewed 301 map are inconsistent.');
-        }
-
-        foreach (BigFivePublicIntegrityGate::REVIEWED_301_ALIASES as $aliasPath => $canonicalPath) {
-            $alias = basename($aliasPath);
-            $expectedCanonical = $alias === 'emotional-stability'
-                ? '/zh/personality/big-five/neuroticism-low'
-                : '/zh/personality/big-five/'.substr($alias, strpos($alias, '-') + 1).'-'.strstr($alias, '-', true);
-            if ($canonicalPath !== $expectedCanonical) {
-                throw new RuntimeException('Reviewed redirect target is inconsistent for '.$alias.'.');
-            }
-        }
+        $expectedAliases = array_keys(BigFiveCanonicalRouteCatalog::EN_REDIRECT_ONLY_ALIAS_TARGETS);
+        $expectedPaths = array_keys(BigFiveCanonicalRouteCatalog::reviewedRedirectPaths());
 
         $descriptorOverlapCount = 0;
         foreach ($descriptors as $descriptor) {
@@ -492,21 +472,29 @@ final class BigFiveZhV3Publisher
             throw new RuntimeException('Redirect-only alias is forbidden in the 52-page write plan.');
         }
 
+        $aliasSlugs = array_map(
+            static fn (string $alias): string => 'big-five/'.$alias,
+            $expectedAliases,
+        );
         $query = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
-            ->where('org_id', 0)
-            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
-            ->where('locale', 'zh-CN')
-            ->where('entity_type', PersonalityPublicContentAsset::ENTITY_POLARITY)
+            ->where(function ($query) use ($aliasSlugs, $expectedAliases): void {
+                $query->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+                    ->orWhere(function ($query) use ($expectedAliases): void {
+                        $query->where('entity_type', PersonalityPublicContentAsset::ENTITY_POLARITY)
+                            ->whereIn('entity_key', $expectedAliases);
+                    })
+                    ->orWhereIn('slug', $aliasSlugs);
+            })
             ->orderBy('id');
         if ($lockForUpdate) {
             $query->lockForUpdate();
         }
-        $polarityRows = $query->get();
-        $aliases = $polarityRows->filter(function (PersonalityPublicContentAsset $asset) use ($expectedPaths): bool {
+        $aliases = $query->get()->filter(function (PersonalityPublicContentAsset $asset) use ($expectedPaths): bool {
             $keys = [
                 (string) $asset->entity_key,
                 basename((string) $asset->slug),
                 basename((string) data_get($asset->canonical_json, 'path', '')),
+                basename((string) data_get($asset->canonical_json, 'redirect_from', '')),
             ];
 
             return collect($keys)->contains(static fn (string $value): bool => (
@@ -515,52 +503,18 @@ final class BigFiveZhV3Publisher
             )) || in_array((string) data_get($asset->canonical_json, 'path', ''), $expectedPaths, true);
         })->values();
 
-        if ($aliases->count() !== count($expectedAliases)) {
-            throw new RuntimeException('Redirect alias inventory must contain exactly 10 safe rows.');
+        if ($aliases->isNotEmpty()) {
+            throw new RuntimeException('Legacy redirect alias database records must be physically absent before the 52-page publisher can run.');
         }
-
-        foreach ($expectedAliases as $expectedAlias) {
-            $matching = $aliases->filter(static fn (PersonalityPublicContentAsset $asset): bool => (
-                (string) $asset->entity_key === $expectedAlias
-            ));
-            if ($matching->count() !== 1) {
-                throw new RuntimeException('Redirect alias identity is missing, duplicated, or unknown: '.$expectedAlias.'.');
-            }
-            $alias = $matching->first();
-            if (! $alias instanceof PersonalityPublicContentAsset
-                || (string) $alias->slug !== 'big-five/'.$expectedAlias
-                || (string) data_get($alias->canonical_json, 'path', '') !== '/zh/personality/big-five/'.$expectedAlias
-                || (string) $alias->launch_state !== PersonalityPublicContentAsset::LAUNCH_CONTENT_READY
-                || ! (bool) $alias->is_public
-                || (bool) $alias->index_eligible
-                || (bool) $alias->sitemap_eligible
-                || (bool) $alias->llms_eligible
-                || (string) $alias->robots !== PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW) {
-                throw new RuntimeException('Redirect-only alias is not in the exact safe production state: '.$expectedAlias.'.');
-            }
-        }
-
-        $aliasIds = $aliases->pluck('id')->map(static fn (mixed $id): int => (int) $id)->sort()->values()->all();
-        $aliasRows = DB::table('personality_public_content_assets')
-            ->whereIn('id', $aliasIds)
-            ->orderBy('id')
-            ->get()
-            ->map(static fn (object $row): array => (array) $row)
-            ->all();
-        $revisionRows = DB::table('personality_public_content_asset_revisions')
-            ->whereIn('asset_id', $aliasIds)
-            ->orderBy('id')
-            ->get()
-            ->map(static fn (object $row): array => (array) $row)
-            ->all();
 
         return [
-            'expected_count' => count($expectedAliases),
-            'safe_count' => $aliases->count(),
+            'expected_count' => 0,
+            'safe_count' => 0,
+            'database_count' => 0,
             'descriptor_overlap_count' => $descriptorOverlapCount,
             'fingerprint_sha256' => hash('sha256', $this->stableJson([
-                'assets' => $aliasRows,
-                'revisions' => $revisionRows,
+                'assets' => [],
+                'revisions' => [],
             ])),
         ];
     }

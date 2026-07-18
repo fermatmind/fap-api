@@ -71,7 +71,7 @@ final class PersonalityBigFivePublicIntegrityGateCommandTest extends TestCase
         $this->assertFalse($payload['cms_write_attempted']);
     }
 
-    public function test_gate_requires_all_ten_reviewed_aliases_as_exact_single_hop_redirects(): void
+    public function test_gate_requires_all_twenty_reviewed_aliases_as_exact_single_hop_redirects(): void
     {
         $this->fakeReviewedAliases();
         $source = $this->writePackage([]);
@@ -86,11 +86,11 @@ final class PersonalityBigFivePublicIntegrityGateCommandTest extends TestCase
         $this->assertSame(0, $exitCode);
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['reviewed_301_aliases_required']);
-        $this->assertSame(10, $payload['target_count']);
-        $this->assertSame(10, $payload['reviewed_301_alias_expected_count']);
-        $this->assertSame(10, $payload['reviewed_301_alias_count']);
+        $this->assertSame(20, $payload['target_count']);
+        $this->assertSame(20, $payload['reviewed_301_alias_expected_count']);
+        $this->assertSame(20, $payload['reviewed_301_alias_count']);
         $this->assertSame(0, $payload['canonical_200_count']);
-        Http::assertSentCount(20);
+        Http::assertSentCount(40);
     }
 
     public function test_required_alias_gate_rejects_wrong_target_302_and_second_redirect(): void
@@ -114,7 +114,7 @@ final class PersonalityBigFivePublicIntegrityGateCommandTest extends TestCase
 
             $this->assertSame(1, $exitCode);
             $this->assertFalse($payload['ok']);
-            $this->assertLessThan(10, $payload['reviewed_301_alias_count']);
+            $this->assertLessThan(20, $payload['reviewed_301_alias_count']);
         }
     }
 
