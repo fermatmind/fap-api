@@ -60,6 +60,49 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-COMP-PROJECTION-45
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on: []
+    branch: codex/mbti-comp-projection-45
+    title: "MBTI-COMP-PROJECTION-45: repair A/T comparison public projection"
+    train_scope: mbti_at_comparison_public_projection_sections
+    status: user_authorized
+    mode: execute
+    scope:
+      - Project the backend-authoritative payload_json.sections written by the approved A/T promotion/import path into the public comparison API for all sixteen A/T pages.
+      - Preserve legacy DB-backed payload_json.content.sections compatibility for the already-complete INTP A/T page without introducing package or frontend runtime fallback.
+      - Prove exact nine-section order, keys, titles, bodies, FAQ, canonical, robots, JSON-LD, and explicit malformed/absent section behavior through real model-backed public API tests.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify cross-type draft publication, CMS/DB data, indexability, sitemap, llms, frontend fallback, routes, migrations, or unrelated personality/content surfaces.
+      - Execute production deploy, CMS/DB write, publication/indexability mutation, GSC action, sitemap submission, or search indexing request.
+      - Implement MBTI-COMP-RUNTIME-46 or any later train item.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter='projects_all_approved_sections_from_cms_authority|does_not_project_absent_or_malformed_authority_sections|prefers_promoted_mbti64_overlay_when_available|reads_agent_projection_overlay_without_comparison_blocks' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: MBTI-COMP-RUNTIME-46
+
   - id: CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01
     repo: fap-api
     depends_on: [CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01]
