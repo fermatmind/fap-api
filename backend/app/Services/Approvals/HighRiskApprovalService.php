@@ -8,6 +8,7 @@ use App\Models\AdminApproval;
 use App\Models\AdminUser;
 use App\Services\Auth\AdminTotpService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -216,7 +217,7 @@ final readonly class HighRiskApprovalService
                         : 'Only approved approvals can be authorized for execution.',
                 );
             }
-            $this->assertExecutionActorPolicy($actorAdminUserId);
+            $this->assertExecutionActorPolicy($approval, $actorAdminUserId);
 
             if (! $retryFailed && $this->hasExecutionAuthorization($approval)) {
                 try {
@@ -311,13 +312,7 @@ final readonly class HighRiskApprovalService
             throw new HighRiskApprovalValidationException('Execution authorization evidence is invalid, stale, or drifted.');
         }
 
-        $this->assertExecutionActorPolicy($actorAdminUserId);
-        $actor = AdminUser::query()->find($actorAdminUserId);
-        if (! $actor) {
-            throw new HighRiskApprovalValidationException('Execution actor was not found.');
-        }
-
-        return $actor;
+        return $this->assertExecutionActorPolicy($approval, $actorAdminUserId);
     }
 
     /** @return list<string> */
@@ -452,7 +447,7 @@ final readonly class HighRiskApprovalService
         throw new HighRiskApprovalValidationException('Review governance mode is not supported for high-risk approval.');
     }
 
-    private function assertExecutionActorPolicy(int $actorAdminUserId): void
+    private function assertExecutionActorPolicy(AdminApproval $approval, int $actorAdminUserId): AdminUser
     {
         $mode = (string) config('review_governance.mode');
         if ($mode === 'solo_owner') {
@@ -460,18 +455,38 @@ final readonly class HighRiskApprovalService
             if ($owner <= 0 || $actorAdminUserId !== $owner) {
                 throw new HighRiskApprovalValidationException('Execution actor is not the configured solo owner.');
             }
-
-            return;
-        }
-        if ($mode === 'team_separated') {
+        } elseif ($mode === 'team_separated') {
             if ($actorAdminUserId <= 0) {
                 throw new HighRiskApprovalValidationException('Team-separated execution requires a valid administrator.');
             }
-
-            return;
+        } else {
+            throw new HighRiskApprovalValidationException('Review governance mode is not supported for high-risk execution.');
         }
 
-        throw new HighRiskApprovalValidationException('Review governance mode is not supported for high-risk execution.');
+        $actor = AdminUser::query()->find($actorAdminUserId);
+        if (! $actor) {
+            throw new HighRiskApprovalValidationException('Execution actor was not found.');
+        }
+
+        $requiredPermissions = match (strtoupper(trim((string) $approval->type))) {
+            AdminApproval::TYPE_MANUAL_GRANT,
+            AdminApproval::TYPE_REVOKE_BENEFIT,
+            AdminApproval::TYPE_REPROCESS_EVENT => [PermissionNames::ADMIN_OPS_WRITE],
+            AdminApproval::TYPE_REFUND => [PermissionNames::ADMIN_FINANCE_WRITE],
+            AdminApproval::TYPE_ROLLBACK_RELEASE => [
+                PermissionNames::ADMIN_CONTENT_RELEASE,
+                PermissionNames::ADMIN_OWNER,
+            ],
+            default => [],
+        };
+        if ($requiredPermissions === []
+            || ! collect($requiredPermissions)->contains(
+                fn (string $permission): bool => $actor->hasPermission($permission),
+            )) {
+            throw new HighRiskApprovalValidationException('Execution actor lacks the required domain permission.');
+        }
+
+        return $actor;
     }
 
     /** @return array<string, mixed> */

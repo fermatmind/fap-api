@@ -60,6 +60,12 @@ class ApprovalFlowTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_OPS_READ,
         ]);
+        $alternateExecutor = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_OPS_WRITE,
+            PermissionNames::ADMIN_FINANCE_WRITE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
         $approval = AdminApproval::query()->create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -103,10 +109,11 @@ class ApprovalFlowTest extends TestCase
             $this->freshStepUpCode($requester),
         );
         try {
+            $this->enableTotp($alternateExecutor);
             app(HighRiskApprovalService::class)->authorizeExecution(
                 (string) $approval->id,
-                (int) $reviewer->id,
-                $this->freshStepUpCode($reviewer),
+                (int) $alternateExecutor->id,
+                $this->freshStepUpCode($alternateExecutor),
             );
             $this->fail('Expected the bound execution actor to remain immutable for the active attempt.');
         } catch (HighRiskApprovalValidationException $exception) {
@@ -288,7 +295,7 @@ class ApprovalFlowTest extends TestCase
         $this->assertSame('ord_rb_1', (string) ($meta['order_no'] ?? ''));
     }
 
-    public function test_review_only_execution_actor_cannot_execute_content_release_rollback(): void
+    public function test_review_only_execution_actor_cannot_authorize_content_release_rollback(): void
     {
         config(['queue.default' => 'sync']);
         config()->set('review_governance.mode', 'team_separated');
@@ -328,17 +335,24 @@ class ApprovalFlowTest extends TestCase
             $this->freshStepUpCode($reviewer),
         );
         $this->enableTotp($reviewOnlyExecutor);
-        app(HighRiskApprovalService::class)->authorizeExecution(
-            (string) $approval->id,
-            (int) $reviewOnlyExecutor->id,
-            $this->freshStepUpCode($reviewOnlyExecutor),
+        try {
+            app(HighRiskApprovalService::class)->authorizeExecution(
+                (string) $approval->id,
+                (int) $reviewOnlyExecutor->id,
+                $this->freshStepUpCode($reviewOnlyExecutor),
+            );
+            $this->fail('Expected review-only actor to fail before execution authorization is stored.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Execution actor lacks the required domain permission.', $exception->getMessage());
+        }
+
+        $approval->refresh();
+        $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approval->status);
+        $this->assertSame(0, (int) $approval->retry_count);
+        $this->assertArrayNotHasKey(
+            HighRiskApprovalService::EXECUTION_METADATA_KEY,
+            (array) $approval->payload_json,
         );
-
-        $result = app(ApprovalExecutor::class)->execute((string) $approval->id);
-
-        $this->assertFalse($result->ok);
-        $this->assertSame('ROLLBACK_RELEASE_FORBIDDEN', $result->code);
-        $this->assertSame(AdminApproval::STATUS_FAILED, (string) $approval->fresh()->status);
         $this->assertDatabaseMissing('content_pack_releases', [
             'action' => 'rollback',
             'dir_alias' => 'default',
@@ -347,10 +361,10 @@ class ApprovalFlowTest extends TestCase
             'target_id' => (string) $approval->id,
             'action' => 'content_release_rollback',
         ]);
-        $this->assertDatabaseHas('audit_logs', [
+        $this->assertDatabaseMissing('audit_logs', [
             'target_id' => (string) $approval->id,
             'actor_admin_id' => (int) $reviewOnlyExecutor->id,
-            'action' => 'approval_executed_failed',
+            'action' => 'approval_execution_authorized',
         ]);
     }
 

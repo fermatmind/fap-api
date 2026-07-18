@@ -81,10 +81,11 @@ class AdminApproval extends Model
 
     public static function reasonContainsCredential(string $reason): bool
     {
-        return preg_match(
-            '/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i',
-            $reason,
-        ) === 1;
+        return preg_match('/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/i', $reason) === 1
+            || preg_match(
+                '/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i',
+                $reason,
+            ) === 1;
     }
 
     public function requestedBy(): BelongsTo

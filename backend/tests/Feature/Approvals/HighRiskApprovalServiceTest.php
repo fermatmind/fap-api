@@ -6,11 +6,14 @@ namespace Tests\Feature\Approvals;
 
 use App\Models\AdminApproval;
 use App\Models\AdminUser;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Approvals\HighRiskApprovalService;
 use App\Services\Approvals\HighRiskApprovalValidationException;
 use App\Services\Audit\AuditLogger;
 use App\Services\Auth\AdminTotpService;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +29,10 @@ final class HighRiskApprovalServiceTest extends TestCase
     public function test_configured_solo_owner_can_self_approve_with_step_up_without_executing(): void
     {
         Queue::fake();
-        $owner = $this->admin(totpEnabled: true);
+        $owner = $this->admin(
+            totpEnabled: true,
+            permissions: [PermissionNames::ADMIN_FINANCE_WRITE],
+        );
         $this->soloOwner($owner);
         $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
             'order_no' => 'ord-safe-target',
@@ -156,7 +162,7 @@ final class HighRiskApprovalServiceTest extends TestCase
 
         $privateCredential = Str::random(40);
         $safeReason = (string) $approval->reason;
-        foreach (['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey='] as $credentialPrefix) {
+        foreach (['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey=', 'Bearer '] as $credentialPrefix) {
             try {
                 $approval->forceFill(['reason' => $credentialPrefix.$privateCredential])->save();
                 $this->fail('Expected request creation boundary to reject credential-bearing reason.');
@@ -331,11 +337,12 @@ final class HighRiskApprovalServiceTest extends TestCase
         $accessTokenCamel = Str::random(48);
         $clientSecret = Str::random(48);
         $apiKey = Str::random(48);
+        $bearerToken = Str::random(48);
         $sanitize = new ReflectionMethod($executor, 'sanitizeErrorMessage');
         $sanitize->setAccessible(true);
         $message = (string) $sanitize->invoke(
             $executor,
-            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' Authorization: Bearer '.$privateValue,
+            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' bare Bearer '.$bearerToken,
         );
         $this->assertStringNotContainsString($privateValue, $message);
         $this->assertStringNotContainsString($accessToken, $message);
@@ -343,6 +350,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringNotContainsString($accessTokenCamel, $message);
         $this->assertStringNotContainsString($clientSecret, $message);
         $this->assertStringNotContainsString($apiKey, $message);
+        $this->assertStringNotContainsString($bearerToken, $message);
         $this->assertStringContainsString('[REDACTED]', $message);
 
         $writeAudit = new ReflectionMethod($executor, 'writeAudit');
@@ -415,9 +423,10 @@ final class HighRiskApprovalServiceTest extends TestCase
         config()->set('review_governance.solo_owner_admin_user_id', (int) $owner->id);
     }
 
-    private function admin(bool $totpEnabled = false): AdminUser
+    /** @param list<string> $permissions */
+    private function admin(bool $totpEnabled = false, array $permissions = []): AdminUser
     {
-        return AdminUser::query()->create([
+        $admin = AdminUser::query()->create([
             'name' => 'approval-'.Str::random(8),
             'email' => 'approval-'.Str::random(10).'@example.test',
             'password' => 'not-used-by-this-test',
@@ -425,6 +434,25 @@ final class HighRiskApprovalServiceTest extends TestCase
             'totp_enabled_at' => $totpEnabled ? now() : null,
             'totp_secret' => $totpEnabled ? 'JBSWY3DPEHPK3PXP' : null,
         ]);
+
+        if ($permissions === []) {
+            return $admin;
+        }
+
+        $role = Role::query()->create([
+            'name' => 'approval-role-'.Str::random(8),
+            'description' => 'approval test role',
+        ]);
+        foreach ($permissions as $permissionName) {
+            $permission = Permission::query()->firstOrCreate(
+                ['name' => $permissionName],
+                ['description' => $permissionName],
+            );
+            $role->permissions()->syncWithoutDetaching([$permission->id]);
+        }
+        $admin->roles()->syncWithoutDetaching([$role->id]);
+
+        return $admin;
     }
 
     private function freshStepUpCode(AdminUser $admin): string
