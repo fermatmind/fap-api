@@ -97049,5 +97049,98 @@
       }
     ],
     "updated_at": "2026-07-18T05:51:13Z"
+  },
+  "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
+    "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-detail-cold-miss-degrade-01",
+    "title": "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "8d51a484ed1afc7b8ab58e770aa0a25f179ecec1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3163",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The explicit seven-PR continuous execution goal authorized this exact PR id, title, scope, manifest/state registration, and normal PR lifecycle."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "This first train item declares no dependency and started from origin/main 6ee71f2e63a21182dd05a5835588a1e6308bcde2 in an isolated clean worktree."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "CareerJobDetailReadModel10kTest passed 11 tests / 121 assertions; CareerJobDetailApiTest passed 13 / 149; CareerJobPublicApiTest passed 12 / 176 with a 1 GB local memory limit after its existing baseline reader exceeded the default 128 MB at 133 MB. After inspecting the first required-check failure, the exact runtime-freeze reproduction and Career detail classifier regression passed 2 tests / 5 assertions. The exact six-route inventory, scoped Pint, Composer strict validation, PHP syntax, YAML/JSON parsing, git diff check, and exact eight-path allowlist validation passed. The cold-miss tests also prove zero SQL queries on degradation, fresh/LKG/legacy state behavior, one queued warm across repeated misses, no warm for hidden/unknown projection states, dispatch failure remaining a restricted 200, legacy readiness accessors rejecting degraded shells, sync queues never executing a warm job on the request path, and explicit noindex robots policy."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All nine CI and code-scanning checks passed on exact implementation head 8d51a484ed1afc7b8ab58e770aa0a25f179ecec1: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. All three automated review threads were repaired in current scope, answered, and resolved; GitHub reports mergeable/CLEAN with no required approval decision."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T08:23:47Z",
+        "status": "implementation_in_progress",
+        "note": "Created the isolated task branch from current origin/main. Implementation is limited to published Career detail cold-miss degradation, safe cache-state metadata, and unique asynchronous recovery; no later PR, production cache, CMS, database, publication, staging wait, or deploy action is included."
+      },
+      {
+        "at": "2026-07-18T08:28:15Z",
+        "status": "local_checks_passed",
+        "note": "All PR1 manifest checks and the exact changed-file allowlist passed. Published active, LKG, and legacy reads remain projection-only; an all-cache miss returns the restricted non-indexable shell and dispatches a unique warm job without synchronous detail assembly. Hidden and locale-mismatched authority remains 404. No production cache warm, CMS/DB write, publication, staging wait, or deploy occurred."
+      },
+      {
+        "at": "2026-07-18T08:30:10Z",
+        "status": "implementation_committed",
+        "note": "Committed the exact seven-path implementation as 943cf071ea1b629092ff45e9733da5d2b377a9f6 after local checks and cached diff validation passed; this ledger-only follow-up binds the real implementation commit before push."
+      },
+      {
+        "at": "2026-07-18T08:31:55Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3163 against main with the manifest title and required what, why, validation, rule-impact, and deferred-scope sections. GitHub reports the PR open and mergeable; required checks are running."
+      },
+      {
+        "at": "2026-07-18T08:40:26Z",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "Inspected verify-bigfive job 88062758792 before editing. It passed 1504 tests / 181764 assertions and failed only BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because the PR-new CareerJobDetailDegradedShellBuilder was not included in the existing exact Career detail read-model classifier. Added only that exact path and regression assertion to the current PR scope; no Big Five runtime, later Career PR, production, CMS, DB, publish, staging, or deploy scope was added."
+      },
+      {
+        "at": "2026-07-18T08:41:49Z",
+        "status": "local_checks_passed_ci_fix_pending_commit",
+        "note": "The exact failing runtime-path test and its Career detail classifier regression now pass with 2 tests / 5 assertions. Pint, PHP syntax, YAML/JSON parsing, diff checks, and the updated exact eight-path scope gate pass. The repair adds only the new builder to the pre-existing Career detail read-model classifier and manifest allowlist."
+      },
+      {
+        "at": "2026-07-18T08:42:35Z",
+        "status": "github_checks_pending_retry",
+        "note": "Committed and pushed the scoped classifier repair as e59e4dd21e6a29b251b0c994dffd65f681d5af38. GitHub reports PR #3163 mergeable and the new complete CI plus Code Scanning runs in progress."
+      },
+      {
+        "at": "2026-07-18T08:52:17Z",
+        "status": "github_review_fix_pending_push",
+        "note": "All nine exact-head checks passed on f966668a39c7b86611394450fe5f5ab3aaa7e5d4. Inspected three automated review threads and repaired only current-scope issues: degraded shells no longer satisfy the legacy readiness accessor, sync queue configuration skips warm dispatch so the GET cannot assemble synchronously, and the shell emits noindex,follow. Focused tests, the complete CareerJobPublicApiTest with its required local memory allowance, Pint, and diff checks pass."
+      },
+      {
+        "at": "2026-07-18T08:59:36Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 8d51a484ed1afc7b8ab58e770aa0a25f179ecec1 passed all nine CI/code-scanning checks. All review threads are resolved, GitHub reports mergeable/CLEAN, and exact changed-file scope revalidation remains eight paths within the manifest allowlist. This final ledger-only head must pass required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-18T08:59:36Z"
   }
 }

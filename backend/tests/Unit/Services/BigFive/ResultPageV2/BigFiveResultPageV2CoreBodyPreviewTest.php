@@ -4898,6 +4898,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
             'backend/app/Jobs/Career/WarmCareerJobDetailProjection.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailDegradedShellBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ];
 
@@ -10123,6 +10124,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
             'backend/app/Jobs/Career/WarmCareerJobDetailProjection.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailDegradedShellBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ], true);
     }
