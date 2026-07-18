@@ -97382,7 +97382,7 @@
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "e9626c2a3e340ae7fef06a178730c198799e7b3a",
+    "commit_sha": "4bddbdc05d84941ca00d64180c15ca95599f9b40",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
       "dependency": {
@@ -97391,11 +97391,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the tenth exact-head review repair, focused approval/registry validation passed 22 tests/493 assertions and the exact Ops approval runtime-freeze contract passed 1/2. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Tests prove that reject enforces the same solo-owner/team-separated actor policy, recovery codes remain consumed and audited when later business validation rolls back, long user agents fit the audit schema, fresh per-action step-up and exact actor/domain authorization remain enforced, and submitted step-up codes never reach approval audit metadata."
+        "evidence": "After the eleventh exact-head review repair, focused approval/registry validation passed 23 tests/498 assertions and the exact Ops approval runtime-freeze contract passed 1/2. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed through Big Five, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Tests prove refund authorization requires both finance and order-write permission before evidence or dispatch, finance-only denial preserves APPROVED with retry_count zero and no authorization audit, reject enforces governance policy, recovery codes remain consumed after later business failure, and all private/audit boundaries remain fail closed."
       },
       "github": {
         "status": "pending",
-        "evidence": "PR #3172 is open. Ninth repair head 9a08101583e2ff86b1f3931c02b8c46c30cd3b2e passed all nine checks. Tenth exact-head review found three gaps: reject did not enforce the configured governance actor, recovery-code consumption was nested inside rollbackable approval transactions, and approval audit user agents exceeded the 255-character schema limit. Centralized reject governance, pre-transaction step-up, schema-safe audit fields, and regressions passed the full local gate and are pending push/check rerun."
+        "evidence": "PR #3172 is open. Tenth repair head 28bc9ca59bd27ff44e852d4bb51c2b9bca0b6a5f passed all nine checks. Eleventh exact-head review found one P2 gap: finance-only refund actors could bind execution authorization before the downstream order update gate rejected missing admin.ops.write. The pre-dispatch permission predicate now mirrors the downstream refund action and the focused plus full local gates passed; push/check rerun is pending."
       }
     },
     "scope_validation": {
@@ -97504,9 +97504,14 @@
         "at": "2026-07-18T17:00:15Z",
         "status": "review_fix_local_checks_passed",
         "note": "Tenth exact-head Codex review on 9a08101583e2ff86b1f3931c02b8c46c30cd3b2e found two P2 gaps and one P3 schema mismatch. Reject now runs through the centralized service and enforces the configured solo owner or distinct team reviewer before mutation. Approve, legacy bind, execution authorization, and reject consume one-time recovery codes before their rollbackable business transactions, so later policy or drift failures cannot restore the code or its audit. Approval and reject audit user agents are capped at the 255-character schema limit. Focused approval/registry tests passed 22/493, runtime-freeze 1/2, scoped Pint/PHP syntax, Composer/structured-file/diff checks, and the exact full ci_verify_mbti.sh gate all passed through final cleanup. Generated Big Five files were restored exactly, leaving only the manifest-approved scope. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T17:16:49Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Eleventh exact-head Codex review on 28bc9ca59bd27ff44e852d4bb51c2b9bca0b6a5f found one P2 mismatch between refund pre-dispatch authorization and the downstream order policy. Refund execution now requires both admin.finance.write and admin.ops.write before authorization evidence or queue dispatch; rollback retains content.release-or-owner semantics, while grant, revoke, and reprocess retain ops.write. A finance-only regression proves the approval remains APPROVED with retry_count zero and no execution metadata or authorization audit. Focused approval/registry tests passed 23/498, runtime-freeze 1/2, scoped Pint/PHP syntax, Composer/structured-file/diff checks, and the exact full ci_verify_mbti.sh gate all passed through final cleanup. Generated Big Five files were restored exactly. No real refund or production mutation occurred."
       }
     ],
-    "updated_at": "2026-07-18T17:00:15Z"
+    "updated_at": "2026-07-18T17:16:49Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
