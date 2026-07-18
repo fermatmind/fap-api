@@ -39,7 +39,7 @@ jobs:
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
           [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
-          [[ "$RELEASE_NAME" =~ ^[a-z0-9][a-z0-9._-]{0,127}$ ]]
+          [[ "$RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
           expected="I explicitly approve read-only backend production verification for SHA ${EXPECTED_RELEASE_SHA} release ${RELEASE_NAME}."
           test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
 
