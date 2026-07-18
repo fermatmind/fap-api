@@ -6,6 +6,7 @@ namespace Tests\Unit\Services\Riasec;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Services\Riasec\RiasecActivityExplorerService;
 use App\Services\Riasec\RiasecCompareGuardService;
 use App\Services\Riasec\RiasecDeepCopySlotRegistry;
@@ -197,6 +198,7 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
             new RiasecQualityRuleContract,
             new RiasecReportModuleSelector,
             new RiasecDeepCopySlotRegistry,
+            new PublicReviewContract,
         );
     }
 }

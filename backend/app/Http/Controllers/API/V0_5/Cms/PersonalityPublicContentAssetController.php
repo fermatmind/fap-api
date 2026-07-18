@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Support\Personality\PersonalityPublicContentMediaPolicy;
 use App\Support\PublicSeoTitleNormalizer;
 use DateTimeImmutable;
@@ -18,6 +19,7 @@ use Illuminate\Validation\Rule;
 use LengthException;
 use Throwable;
 
+/** @review-surface personality_public_content_asset */
 final class PersonalityPublicContentAssetController extends Controller
 {
     public const MAX_DETAIL_PAYLOAD_BYTES = 524288;
@@ -28,6 +30,7 @@ final class PersonalityPublicContentAssetController extends Controller
 
     public function __construct(
         private readonly PersonalityPublicAssetReadModelCache $readModelCache,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -354,7 +357,7 @@ final class PersonalityPublicContentAssetController extends Controller
             $seo = PublicSeoTitleNormalizer::normalizeSeoPayload($seo);
         }
 
-        return [
+        return array_merge([
             'id' => (int) $asset->id,
             'org_id' => (int) $asset->org_id,
             'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
@@ -385,13 +388,11 @@ final class PersonalityPublicContentAssetController extends Controller
             'sitemap_eligible' => (bool) $asset->sitemap_eligible,
             'llms_eligible' => (bool) $asset->llms_eligible,
             'launch_state' => (string) $asset->launch_state,
-            'review_state' => (string) $asset->review_state,
             'source_package' => $asset->source_package,
             'source_hash' => $asset->source_hash,
             'published_at' => $asset->published_at?->toAtomString(),
-            'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
             'updated_at' => $asset->updated_at?->toAtomString(),
-        ];
+        ], $this->publicReviewContract->project($asset->review_state, $asset->last_reviewed_at));
     }
 
     /** @return array<string,mixed> */
@@ -446,14 +447,11 @@ final class PersonalityPublicContentAssetController extends Controller
                 'limitations' => $this->canonicalStringList((array) ($authority['limitations'] ?? [])),
                 'eligible' => $visibleEvidenceEligible,
             ],
-            'editorial_authority' => [
+            'editorial_authority' => array_merge([
                 'author' => $this->canonicalEditorialActor($authority['author'] ?? null),
-                'reviewer' => $this->canonicalEditorialActor($authority['reviewer'] ?? null),
-                'review_state' => (string) $asset->review_state,
-                'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
                 'published_at' => $asset->published_at?->toAtomString(),
                 'updated_at' => $asset->updated_at?->toAtomString(),
-            ],
+            ], $this->publicReviewContract->project($asset->review_state, $asset->last_reviewed_at)),
             'schema_eligible' => $schemaEligible,
         ];
     }

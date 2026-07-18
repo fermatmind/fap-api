@@ -114,12 +114,26 @@ Legacy `APPROVED` or `FAILED` rows created before this adapter may bind missing 
 
 The adapter does not add a generic data-lifecycle executor or bypass existing domain authorization. Registered data-lifecycle targets may bind approval evidence, but a concrete execution adapter remains separately required. Tests use local transactions and fake queues only; this train performs no refund, benefit, payment, rollback, or data-lifecycle production action.
 
-## Registry and public projection
+## Registry and public projection (PR6)
 
 `ReviewPolicyRegistry` inventories every known human-review surface and declares its domain, risk tier, authority, current implementation, solo-owner policy, step-up boundary, execution separation, public projection, external-evidence requirement, migration PR, and adapter status. Architecture tests enforce schema, uniqueness, required coverage, R3 step-up, R4 evidence classification, and registration of models with review/approval fields. The generated inventory is `docs/operations/generated/solo-owner-review-surface-registry.v1.json`.
 
-The eventual public contract is limited to `review_state`, `last_reviewed_at`, and `reviewer: null`. Private owner identity, admin ID, evidence, exceptions, notes, attestation content, tokens, secrets, and private URLs must never be projected publicly. Public normalization belongs to `SOLO-OWNER-PUBLIC-REVIEW-CONTRACT-06`; this foundation does not change public APIs.
+`SOLO-OWNER-PUBLIC-REVIEW-CONTRACT-06` activates one normalized public review projection across registered CMS, Personality, Career, MBTI, RIASEC, Research, Support, and DailyGiving read surfaces:
+
+```json
+{
+  "review_state": "approved | pending | rejected | unknown",
+  "last_reviewed_at": "<UTC timestamp or null>",
+  "reviewer": null
+}
+```
+
+Known internal workflow states map to the four public states; unrecognized or malformed values fail closed to `unknown`, and invalid or absent timestamps become `null`. The public payload never contains reviewer name, ID, role, organization, private evidence, exceptions, notes, attestation content, tokens, secrets, or private URLs. Existing private database fields, internal CMS payloads, immutable attestation rows, and audit evidence remain available to authorized internal workflows.
+
+Existing non-identifying `review_status`, `reviewer_status`, or `reviewed_at` aliases remain temporarily on additive Career, MBTI, and RIASEC payloads so the backend rollout does not break current consumers before PR7. They are compatibility fields, not the public review authority; consumers must use the normalized three-field contract above. Removing those aliases is intentionally deferred until consumer migration is complete.
+
+This normalization changes neither publication/indexability decisions nor page body, metadata, canonical, hreflang, robots, JSON-LD, sitemap, llms, media, or URL enumeration. The registry derives and publishes zero legacy public-contract blockers and zero public reviewer-identity exposures from its complete declared surface set.
 
 ## Repository rule impact
 
-This protocol changes the internal reviewer-separation contract: one configured owner/operator may complete internal human review. Backend/CMS remains the authority. External evidence, production authorization, publication/indexability, automated verification, high-risk step-up, privacy, and deployment controls are unchanged.
+This protocol changes the internal reviewer-separation contract: one configured owner/operator may complete internal human review. Backend/CMS remains the authority. PR6 adds only the identity-redacted public review projection above; private audit authority remains backend-only. External evidence, production authorization, publication/indexability, automated verification, high-risk step-up, privacy, and deployment controls are unchanged.

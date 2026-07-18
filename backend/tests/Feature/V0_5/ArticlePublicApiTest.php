@@ -18,6 +18,32 @@ final class ArticlePublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_public_review_contract_redacts_private_article_reviewer_identity(): void
+    {
+        $this->createArticle([
+            'slug' => 'reviewed-public-article',
+            'reviewer_name' => 'Private Reviewer Name',
+        ], [
+            'reviewed_by' => 4242,
+            'reviewed_at' => Carbon::create(2026, 7, 18, 12, 0, 0, 'UTC'),
+            'approved_at' => Carbon::create(2026, 7, 18, 12, 5, 0, 'UTC'),
+        ]);
+
+        foreach ([
+            $this->getJson('/api/v0.5/articles?locale=en'),
+            $this->getJson('/api/v0.5/articles/reviewed-public-article?locale=en'),
+        ] as $response) {
+            $response->assertOk();
+            $payload = $response->json('article') ?? $response->json('items.0');
+            $this->assertSame('approved', data_get($payload, 'review_state'));
+            $this->assertSame('2026-07-18T12:00:00.000000Z', data_get($payload, 'last_reviewed_at'));
+            $this->assertNull(data_get($payload, 'reviewer'));
+            $this->assertArrayNotHasKey('reviewer_name', $payload);
+            $this->assertStringNotContainsString('Private Reviewer Name', (string) $response->getContent());
+            $this->assertStringNotContainsString('4242', (string) $response->getContent());
+        }
+    }
+
     public function test_list_locale_query_filters_items_and_pagination(): void
     {
         foreach (range(1, 21) as $index) {

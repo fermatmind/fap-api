@@ -29,6 +29,8 @@ final class CareerRecommendationDetailApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_recommendation_detail')
             ->assertJsonPath('recommendation_subject_meta.type_code', 'INTJ-A')
             ->assertJsonPath('claim_permissions.allow_salary_comparison', false)
+            ->assertJsonPath('trust_manifest.review_state', 'pending')
+            ->assertJsonPath('trust_manifest.reviewer', null)
             ->assertJsonPath('seo_contract.canonical_path', '/career/recommendations/mbti/intj')
             ->assertJsonPath('seo_contract.index_eligible', false)
             ->assertJsonCount(0, 'matched_jobs')

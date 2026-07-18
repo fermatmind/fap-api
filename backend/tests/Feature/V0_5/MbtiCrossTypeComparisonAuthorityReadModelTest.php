@@ -41,6 +41,9 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         self::assertFalse((bool) $authorityItem['is_indexable']);
         self::assertFalse((bool) $authorityItem['sitemap_eligible']);
         self::assertFalse((bool) $authorityItem['llms_eligible']);
+        self::assertSame('approved', $authorityItem['review_state']);
+        self::assertNull($authorityItem['last_reviewed_at']);
+        self::assertNull($authorityItem['reviewer']);
         self::assertStringNotContainsString('/zh/result', (string) $response->getContent());
         self::assertStringNotContainsString('token=', (string) $response->getContent());
     }
@@ -77,7 +80,10 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
             ->assertJsonPath('comparison_public_projection_v1.source_refs.0', 'mbti-content15-top-blocker-batch')
             ->assertJsonPath('comparison_public_projection_v1.is_indexable', false)
             ->assertJsonPath('comparison_public_projection_v1.sitemap_eligible', false)
-            ->assertJsonPath('comparison_public_projection_v1.llms_eligible', false);
+            ->assertJsonPath('comparison_public_projection_v1.llms_eligible', false)
+            ->assertJsonPath('comparison_public_projection_v1.review_state', 'approved')
+            ->assertJsonPath('comparison_public_projection_v1.last_reviewed_at', null)
+            ->assertJsonPath('comparison_public_projection_v1.reviewer', null);
 
         $response->assertJsonPath('seo_meta.robots', 'noindex,follow')
             ->assertJsonPath('seo_meta.canonical_url', 'https://fermatmind.com/zh/personality/istj-vs-isfj')

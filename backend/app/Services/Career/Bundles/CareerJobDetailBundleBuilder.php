@@ -18,8 +18,13 @@ use App\Models\Scopes\TenantScope;
 use App\Services\Analytics\CareerConversionClosureBuilder;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Arr;
 
+/**
+ * @review-surface career_trust_manifest
+ * @review-surface career_occupation_directory_review
+ */
 final class CareerJobDetailBundleBuilder
 {
     private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
@@ -47,6 +52,7 @@ final class CareerJobDetailBundleBuilder
         private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /** @param array<string, mixed>|null $exposureProjectionItem */
@@ -247,6 +253,7 @@ final class CareerJobDetailBundleBuilder
                 'methodology' => is_array($trustManifest?->methodology) ? $trustManifest->methodology : [],
                 'reviewer_status' => $trustManifest?->reviewer_status,
                 'reviewed_at' => optional($trustManifest?->reviewed_at)->toISOString(),
+                ...$this->publicReviewContract->project($trustManifest?->reviewer_status, $trustManifest?->reviewed_at),
                 'ai_assistance' => is_array($trustManifest?->ai_assistance) ? $trustManifest->ai_assistance : [],
                 'quality' => is_array($trustManifest?->quality) ? $trustManifest->quality : [],
                 'last_substantive_update_at' => optional($trustManifest?->last_substantive_update_at)->toISOString(),
@@ -412,6 +419,7 @@ final class CareerJobDetailBundleBuilder
                 ],
                 'reviewer_status' => 'runtime_projection_release_gate',
                 'reviewed_at' => null,
+                ...$this->publicReviewContract->project('runtime_projection_release_gate'),
                 'ai_assistance' => [],
                 'quality' => [
                     'complete' => false,
@@ -603,6 +611,7 @@ final class CareerJobDetailBundleBuilder
                 ],
                 'reviewer_status' => 'pilot_display_asset',
                 'reviewed_at' => null,
+                ...$this->publicReviewContract->project('pilot_display_asset'),
                 'ai_assistance' => [],
                 'quality' => [
                     'complete' => false,
@@ -789,13 +798,9 @@ final class CareerJobDetailBundleBuilder
                     'derivation_policy' => 'cms_docx_baseline_authority',
                     'notes' => ['Generated from the 342 occupation DOCX baseline imported into backend CMS.'],
                 ],
-                'reviewer' => [
-                    'reviewed' => true,
-                    'reviewer_id' => null,
-                    'reviewer_status' => 'approved',
-                ],
                 'reviewer_status' => 'approved',
                 'reviewed_at' => optional($job->updated_at)->toISOString(),
+                ...$this->publicReviewContract->project('approved', $job->updated_at),
                 'ai_assistance' => [
                     'used' => true,
                     'summary' => 'DOCX baseline content was generated before import and preserved as backend CMS authority.',

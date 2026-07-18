@@ -106,6 +106,8 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'backend-architect')
             ->assertJsonPath('trust_manifest.content_version', 'v4.1')
+            ->assertJsonPath('trust_manifest.review_state', 'approved')
+            ->assertJsonPath('trust_manifest.reviewer', null)
             ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/backend-architect')
             ->assertJsonPath('structured_data.occupation.@type', 'Occupation')
             ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')

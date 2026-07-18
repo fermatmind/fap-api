@@ -46,6 +46,7 @@ final class SupportTrustCmsApiTest extends TestCase
             'locale' => 'en',
             'status' => 'published',
             'review_state' => 'approved',
+            'last_reviewed_at' => '2026-07-18T08:30:00Z',
             'primary_cta_label' => 'Look up order',
             'primary_cta_url' => '/orders/lookup',
             'related_support_article_ids' => [],
@@ -63,6 +64,9 @@ final class SupportTrustCmsApiTest extends TestCase
             ->assertJsonPath('items.0.slug', 'recover-report')
             ->assertJsonPath('items.0.searchable_model', 'support_articles')
             ->assertJsonPath('items.0.support_intent', 'recover_report')
+            ->assertJsonPath('items.0.review_state', 'approved')
+            ->assertJsonPath('items.0.last_reviewed_at', '2026-07-18T08:30:00.000000Z')
+            ->assertJsonPath('items.0.reviewer', null)
             ->assertJsonPath('search_scope.excluded_models.0', 'articles');
 
         $this->assertStringNotContainsString('editorial-longform', (string) $response->getContent());
@@ -82,6 +86,7 @@ final class SupportTrustCmsApiTest extends TestCase
             'locale' => 'en',
             'status' => 'published',
             'review_state' => 'approved',
+            'last_reviewed_at' => '2026-07-18T01:45:00Z',
             'related_guide_ids' => [],
             'related_methodology_page_ids' => [],
             'seo_title' => 'Read your score',
@@ -96,7 +101,10 @@ final class SupportTrustCmsApiTest extends TestCase
             ->assertJsonPath('guide.slug', 'read-score')
             ->assertJsonPath('guide.searchable_model', 'interpretation_guides')
             ->assertJsonPath('guide.test_family', 'big_five')
-            ->assertJsonPath('guide.result_context', 'score_meaning');
+            ->assertJsonPath('guide.result_context', 'score_meaning')
+            ->assertJsonPath('guide.review_state', 'approved')
+            ->assertJsonPath('guide.last_reviewed_at', '2026-07-18T01:45:00.000000Z')
+            ->assertJsonPath('guide.reviewer', null);
 
         $aliasResponse = $this->getJson('/api/v0.5/support/guides/read-score?locale=en');
 

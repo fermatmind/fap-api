@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Services\Riasec;
 
 use App\Models\Result;
+use App\Services\ReviewGovernance\PublicReviewContract;
 
+/** @review-surface riasec_content_release_review */
 final class RiasecPublicProjectionService
 {
     private const LABELS = [
@@ -26,6 +28,7 @@ final class RiasecPublicProjectionService
         private readonly RiasecQualityRuleContract $qualityRuleContract,
         private readonly RiasecReportModuleSelector $moduleSelector,
         private readonly RiasecDeepCopySlotRegistry $deepCopySlots,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
@@ -636,6 +639,7 @@ final class RiasecPublicProjectionService
             'content_status' => (string) ($slot['content_status'] ?? 'unavailable'),
             'content_version' => (string) ($slot['content_version'] ?? ''),
             'review_status' => (string) ($slot['review_status'] ?? ''),
+            ...$this->publicReviewContract->project($slot['review_status'] ?? null),
             'source_status' => (string) ($slot['source_status'] ?? ''),
             'evidence_level' => (string) ($slot['evidence_level'] ?? ''),
             'locale' => (string) ($slot['locale'] ?? (str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en')),

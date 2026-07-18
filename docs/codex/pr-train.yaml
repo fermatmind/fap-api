@@ -45948,6 +45948,90 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: SOLO-OWNER-PUBLIC-REVIEW-CONTRACT-06
+    repo: fap-api
+    base: main
+    branch: codex/solo-owner-public-review-contract-06
+    title: "SOLO-OWNER-PUBLIC-REVIEW-CONTRACT-06: normalize public review status and redact private reviewer identity"
+    status: user_authorized
+    depends_on:
+      - SOLO-OWNER-OPS-APPROVAL-05
+    train_scope: solo_owner_public_review_contract
+    scope:
+      - Normalize registered CMS, Personality, MBTI, RIASEC, Career, Research, Support, and DailyGiving public review projections to review_state, UTC last_reviewed_at or null, and reviewer null.
+      - Map known workflow states to approved, pending, rejected, or unknown and fail closed for unrecognized states or invalid timestamps.
+      - Remove public reviewer name, ID, role, organization, private evidence, exception, note, attestation, and private URL projection while retaining authorized private database and audit evidence.
+      - Prove the registry has zero legacy reviewer-separation blockers and zero public reviewer-identity exposures without changing publication, indexability, content, metadata, SEO URLs, sitemap, llms, or media.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/InterpretationGuideController.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php
+      - backend/app/Models/DailyGivingRecord.php
+      - backend/app/Services/Career/Bundles/CareerCnProxyPublicOwnerSurfaceBuilder.php
+      - backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php
+      - backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php
+      - backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - backend/app/Services/ReviewGovernance/PublicReviewContract.php
+      - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/tests/Architecture/ReviewPolicyRegistryTest.php
+      - backend/tests/Feature/BigFive/BigFiveZhV3ControlledReleaseTest.php
+      - backend/tests/Feature/Career/CareerCnProxyPublicOwnerApiTest.php
+      - backend/tests/Feature/Career/CareerJobDetailApiTest.php
+      - backend/tests/Feature/Career/CareerRecommendationDetailApiTest.php
+      - backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
+      - backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php
+      - backend/tests/Feature/Foundation/DailyGivingRecordPublicationGateTest.php
+      - backend/tests/Feature/Research/ResearchAssetBackendMvpTest.php
+      - backend/tests/Feature/V0_5/ArticlePublicApiTest.php
+      - backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Feature/V0_5/SupportTrustCmsApiTest.php
+      - backend/tests/Unit/ReviewGovernance/PublicReviewContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php
+      - docs/operations/solo-owner-review-protocol.md
+      - docs/operations/generated/solo-owner-review-surface-registry.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Expose reviewer identity or private review evidence, create frontend/CMS fallback content, or change body, metadata, canonical, hreflang, robots, JSON-LD, sitemap, llms, media, publication, or indexability authority.
+      - Add a migration, mutate production/CMS/database/search/cache state, import, bind, publish, promote, roll back, submit, warm, purge, deploy, or wait for staging.
+      - Modify internal approval decisions, reviewer eligibility, objective evidence requirements, high-risk step-up, or production authorization.
+    validation:
+      - Run each manifest-listed focused public projection, registry, runtime-freeze, and private-redaction PHPUnit file serially under the heavy-process guard.
+      - cd backend && php artisan test tests/Unit/ReviewGovernance/PublicReviewContractTest.php tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/ContentPages/ContentPagePublicApiTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php tests/Feature/Research/ResearchAssetBackendMvpTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php tests/Feature/BigFive/BigFiveZhV3ControlledReleaseTest.php tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerCnProxyPublicOwnerApiTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Foundation/DailyGivingRecordPublicationGateTest.php tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|solo_owner_public_review_contract' --no-ansi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && composer validate --strict
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool docs/operations/generated/solo-owner-review-surface-registry.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: CAREER-DETAIL-COLD-MISS-DEGRADE-01
     repo: fap-api
     base: main

@@ -6,13 +6,19 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\ResearchReport;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+/** @review-surface research_report */
 final class ResearchReportController extends Controller
 {
+    public function __construct(
+        private readonly PublicReviewContract $publicReviewContract,
+    ) {}
+
     public function index(Request $request): JsonResponse
     {
         $validated = $this->validateReadQuery($request);
@@ -305,7 +311,7 @@ final class ResearchReportController extends Controller
      */
     private function publicPayload(ResearchReport $report): array
     {
-        return [
+        return array_merge([
             'id' => (int) $report->id,
             'slug' => (string) $report->slug,
             'locale' => (string) $report->locale,
@@ -318,7 +324,6 @@ final class ResearchReportController extends Controller
             'sample_disclaimer' => $report->sample_disclaimer,
             'claim_boundary' => $report->claim_boundary,
             'author_name' => $report->author_name,
-            'reviewer_name' => $report->reviewer_name,
             'references' => $report->references ?? [],
             'downloadable_asset_placeholder' => $report->downloadable_asset_placeholder,
             'last_reviewed_at' => $report->last_reviewed_at?->toAtomString(),
@@ -326,7 +331,7 @@ final class ResearchReportController extends Controller
             'seo_title' => $report->seo_title,
             'seo_description' => $report->seo_description,
             'canonical_path' => $report->canonical_path,
-        ];
+        ], $this->publicReviewContract->project($report->review_state, $report->last_reviewed_at));
     }
 
     /**
@@ -335,6 +340,7 @@ final class ResearchReportController extends Controller
     private function internalPayload(ResearchReport $report): array
     {
         return array_merge($this->publicPayload($report), [
+            'reviewer_name' => $report->reviewer_name,
             'status' => (string) $report->status,
             'review_state' => (string) $report->review_state,
             'is_public' => (bool) $report->is_public,

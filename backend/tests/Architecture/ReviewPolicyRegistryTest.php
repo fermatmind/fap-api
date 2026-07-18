@@ -113,6 +113,32 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertFalse($artifact['boundaries']['human_review_is_production_authorization']);
         $this->assertFalse($artifact['boundaries']['external_evidence_can_be_created_by_attestation']);
         $this->assertFalse($artifact['boundaries']['public_reviewer_identity_allowed']);
+        $this->assertSame(0, $artifact['boundaries']['legacy_internal_reviewer_separation_blocker_count']);
+        $this->assertSame(0, $artifact['boundaries']['public_reviewer_identity_exposure_count']);
+        $this->assertSame(
+            ['review_state', 'last_reviewed_at', 'reviewer'],
+            $artifact['public_review_contract']['fields'],
+        );
+        $this->assertNull($artifact['public_review_contract']['reviewer']);
+    }
+
+    public function test_pr6_public_surfaces_use_only_the_normalized_identity_redacted_contract(): void
+    {
+        $inventory = ReviewPolicyRegistry::inventory();
+        $byId = collect($inventory['surfaces'])->keyBy('surface_id');
+
+        foreach ($inventory['public_review_contract']['surface_ids'] as $surfaceId) {
+            $row = $byId->get($surfaceId);
+            $this->assertIsArray($row);
+            $this->assertSame('normalized_review_contract_v1', $row['public_projection']);
+        }
+
+        $this->assertSame(
+            ['approved', 'pending', 'rejected', 'unknown'],
+            $inventory['public_review_contract']['states'],
+        );
+        $this->assertSame(0, $inventory['boundaries']['legacy_internal_reviewer_separation_blocker_count']);
+        $this->assertSame(0, $inventory['boundaries']['public_reviewer_identity_exposure_count']);
     }
 
     public function test_pr2_cms_adapters_are_active_without_weakening_external_evidence(): void

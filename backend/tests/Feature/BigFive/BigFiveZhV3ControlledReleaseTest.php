@@ -275,9 +275,11 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
                 'personality_public_content_asset_v2.visible_evidence.claim_mapping',
             )
             ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.author.name', 'FermatMind Editorial')
-            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer.name', 'FermatMind Editorial')
-            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.last_reviewed_at', '2026-07-18T00:00:00+00:00')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.review_state', 'approved')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null)
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.last_reviewed_at', '2026-07-18T00:00:00.000000Z')
             ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', false);
+
     }
 
     public function test_release_enumerates_all_52_canonicals_once_and_no_redirect_alias(): void

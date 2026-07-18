@@ -331,6 +331,22 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         }
     }
 
+    public function test_public_deep_content_slots_use_the_identity_redacted_review_contract(): void
+    {
+        $projection = app(RiasecPublicProjectionService::class)
+            ->buildV2FromResult($this->resultForOrderedCode('RIA'), 'zh-CN');
+        $slots = (array) data_get($projection, 'deep_content_slots_v1.slots', []);
+
+        $this->assertNotEmpty($slots);
+        foreach ($slots as $slot) {
+            $this->assertContains($slot['review_state'] ?? null, ['approved', 'pending', 'rejected', 'unknown']);
+            $this->assertArrayHasKey('last_reviewed_at', $slot);
+            $this->assertNull($slot['last_reviewed_at']);
+            $this->assertArrayHasKey('reviewer', $slot);
+            $this->assertNull($slot['reviewer']);
+        }
+    }
+
     public function test_public_projection_propagates_locale_into_lifecycle_copy(): void
     {
         $projection = app(RiasecPublicProjectionService::class)

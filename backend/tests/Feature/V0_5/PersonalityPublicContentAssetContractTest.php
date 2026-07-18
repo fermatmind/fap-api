@@ -989,7 +989,8 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.sources.1.public_url', null)
             ->assertJsonPath('personality_public_content_asset_v2.visible_evidence.claim_mapping.0.claim_id', 'claim.big_five_dimensions')
             ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.author.name', 'FermatMind Editorial Team')
-            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer.name', 'Named Reviewer')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.review_state', 'approved')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null)
             ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', true);
 
         $this->assertArrayNotHasKey('visible_evidence', $response->json('personality_public_content_asset_v1'));
@@ -997,6 +998,8 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertArrayNotHasKey('media_authority', $response->json('personality_public_content_asset_v2'));
         $this->assertArrayNotHasKey('og_image_url', $response->json('personality_public_content_asset_v1.seo'));
         $this->assertArrayNotHasKey('image', $response->json('personality_public_content_asset_v1.seo.twitter'));
+        $this->assertStringNotContainsString('Named Reviewer', $response->getContent());
+        $this->assertStringNotContainsString('Independent Review', $response->getContent());
     }
 
     public function test_big_five_v2_projection_fails_closed_for_legacy_authority_and_does_not_fabricate_people(): void

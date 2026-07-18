@@ -75,6 +75,7 @@ final class ResearchAssetBackendMvpTest extends TestCase
             'is_public' => true,
             'is_indexable' => true,
             'references' => ['Internal aggregate methodology memo'],
+            'reviewer_name' => 'Private Claim Reviewer',
             'last_reviewed_at' => Carbon::create(2026, 5, 18, 0, 0, 0, 'UTC'),
             'published_at' => Carbon::create(2026, 5, 18, 1, 0, 0, 'UTC'),
         ]);
@@ -88,8 +89,13 @@ final class ResearchAssetBackendMvpTest extends TestCase
             ->assertJsonPath('report.references.0', 'Internal aggregate methodology memo')
             ->assertJsonPath('report.downloadable_asset_placeholder', 'asset pending')
             ->assertJsonMissingPath('report.status')
-            ->assertJsonMissingPath('report.review_state')
+            ->assertJsonPath('report.review_state', 'approved')
+            ->assertJsonPath('report.last_reviewed_at', '2026-05-18T00:00:00.000000Z')
+            ->assertJsonPath('report.reviewer', null)
+            ->assertJsonMissingPath('report.reviewer_name')
             ->assertJsonMissingPath('report.search_channel_eligible');
+
+        $this->assertStringNotContainsString('Private Claim Reviewer', (string) $response->getContent());
     }
 
     public function test_internal_cms_update_enforces_draft_publish_gate(): void
