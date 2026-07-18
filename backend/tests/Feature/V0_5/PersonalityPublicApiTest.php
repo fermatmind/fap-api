@@ -20,6 +20,7 @@ use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class PersonalityPublicApiTest extends TestCase
@@ -1338,6 +1339,190 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertStringNotContainsString('/en/results/lookup', (string) $response->getContent());
     }
 
+    #[DataProvider('atComparisonProjectionCases')]
+    public function test_personality_comparison_endpoint_projects_all_approved_sections_from_cms_authority(
+        string $baseTypeCode,
+        bool $usesTopLevelSections,
+    ): void {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $profile = $this->createProfile([
+            'type_code' => $baseTypeCode,
+            'slug' => strtolower($baseTypeCode),
+            'locale' => 'zh-CN',
+            'title' => $baseTypeCode.' 人格',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createSeoMeta($profile, [
+            'seo_title' => $baseTypeCode.' 人格',
+            'seo_description' => $baseTypeCode.' 人格说明。',
+            'robots' => 'index,follow',
+        ]);
+
+        foreach (['A', 'T'] as $variantCode) {
+            $variant = $this->createVariant($profile, [
+                'canonical_type_code' => $baseTypeCode,
+                'variant_code' => $variantCode,
+                'runtime_type_code' => $baseTypeCode.'-'.$variantCode,
+                'type_name' => $baseTypeCode.' '.$variantCode,
+            ]);
+            $this->createVariantSeoMeta($variant, [
+                'seo_title' => $baseTypeCode.'-'.$variantCode,
+                'seo_description' => $baseTypeCode.'-'.$variantCode.' 人格说明。',
+            ]);
+            PersonalityProfileVariantSection::query()->create([
+                'personality_profile_variant_id' => (int) $variant->id,
+                'section_key' => 'traits.at_difference',
+                'render_variant' => 'rich_text',
+                'body_md' => $baseTypeCode.'-'.$variantCode.' fallback difference.',
+                'sort_order' => 31,
+                'is_enabled' => true,
+            ]);
+        }
+
+        $sectionKeys = [
+            'biggest_difference',
+            'quick_judgment_table',
+            'easy_misread',
+            'work_scenarios',
+            'relationship_scenarios',
+            'stress_scenarios',
+            'do_not_misjudge',
+            'common_ground',
+            'usage_boundary',
+        ];
+        $approvedSections = array_map(
+            static fn (string $key, int $index): array => [
+                'key' => $key,
+                'title' => 'Approved section '.($index + 1),
+                'body' => $baseTypeCode.' approved body for '.$key.'.',
+                ...($key === 'quick_judgment_table' ? ['rows' => [[
+                    'dimension' => 'Feedback',
+                    'a' => 'A response',
+                    't' => 'T response',
+                ]]] : []),
+            ],
+            $sectionKeys,
+            array_keys($sectionKeys),
+        );
+        $canonical = 'https://fermatmind.com/zh/personality/'.strtolower($baseTypeCode).'-a-vs-'.strtolower($baseTypeCode).'-t';
+        $payload = [
+            'source' => $usesTopLevelSections ? 'mbti_full_cms_promotion' : 'mbti_content15_legacy_promotion',
+            'snapshot_key' => 'approved-'.$baseTypeCode,
+            'seo' => [
+                'seo_title' => $baseTypeCode.' A/T 对比',
+                'seo_description' => $baseTypeCode.' A/T 完整对比。',
+            ],
+            'content' => [
+                'quick_answer' => $baseTypeCode.' A/T direct answer.',
+                'sections' => $usesTopLevelSections ? [[
+                    'key' => 'stale_nested_section',
+                    'title' => 'Stale nested section',
+                    'body' => 'This legacy copy must not override top-level authority.',
+                ]] : $approvedSections,
+            ],
+            'faq' => [[
+                'question' => $baseTypeCode.'-A 和 '.$baseTypeCode.'-T 有什么区别？',
+                'answer' => '差异用于结构化自我观察，不代表能力高低。',
+            ]],
+            'indexability_held' => false,
+        ];
+        if ($usesTopLevelSections) {
+            $payload['sections'] = $approvedSections;
+        }
+
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'title' => $baseTypeCode.' A/T 对比',
+            'render_variant' => 'rich_text',
+            'body_md' => $baseTypeCode.' A/T direct answer.',
+            'payload_json' => $payload,
+            'sort_order' => 920,
+            'is_enabled' => true,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality/comparisons/'.strtolower($baseTypeCode).'-a-vs-'.strtolower($baseTypeCode).'-t?locale=zh-CN');
+
+        $response->assertOk()
+            ->assertJsonCount(9, 'comparison_public_projection_v1.sections')
+            ->assertJsonCount(9, 'comparison_public_projection_v1.comparison_blocks')
+            ->assertJsonPath('comparison_public_projection_v1.canonical_url', $canonical)
+            ->assertJsonPath('comparison_public_projection_v1.faq.0.question', $baseTypeCode.'-A 和 '.$baseTypeCode.'-T 有什么区别？')
+            ->assertJsonPath('seo_meta.canonical_url', $canonical)
+            ->assertJsonPath('seo_meta.robots', 'index,follow')
+            ->assertJsonPath('jsonld.@type', 'CollectionPage')
+            ->assertJsonPath('jsonld.hasPart.@type', 'FAQPage');
+
+        $projectedSections = (array) $response->json('comparison_public_projection_v1.sections');
+        self::assertSame($sectionKeys, array_column($projectedSections, 'id'));
+        foreach ($projectedSections as $index => $section) {
+            self::assertSame('Approved section '.($index + 1), $section['title'] ?? null);
+            self::assertSame([$baseTypeCode.' approved body for '.$sectionKeys[$index].'.'], $section['body'] ?? null);
+        }
+        self::assertStringNotContainsString('stale_nested_section', (string) $response->getContent());
+    }
+
+    #[DataProvider('invalidTopLevelAtComparisonSections')]
+    public function test_personality_comparison_endpoint_does_not_project_absent_or_malformed_authority_sections(mixed $invalidSections): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createSeoMeta($profile);
+        foreach (['A', 'T'] as $variantCode) {
+            $variant = $this->createVariant($profile, [
+                'variant_code' => $variantCode,
+                'runtime_type_code' => 'INTJ-'.$variantCode,
+            ]);
+            $this->createVariantSeoMeta($variant);
+            PersonalityProfileVariantSection::query()->create([
+                'personality_profile_variant_id' => (int) $variant->id,
+                'section_key' => 'traits.at_difference',
+                'render_variant' => 'rich_text',
+                'body_md' => 'INTJ-'.$variantCode.' fallback difference.',
+                'sort_order' => 31,
+                'is_enabled' => true,
+            ]);
+        }
+
+        $payload = [
+            'seo' => ['seo_title' => 'INTJ-A vs INTJ-T'],
+            'content' => ['quick_answer' => 'INTJ comparison answer.'],
+            'faq' => [],
+        ];
+        if ($invalidSections !== null) {
+            $payload['sections'] = $invalidSections;
+        }
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'title' => 'INTJ-A vs INTJ-T',
+            'render_variant' => 'rich_text',
+            'body_md' => 'INTJ comparison answer.',
+            'payload_json' => $payload,
+            'sort_order' => 920,
+            'is_enabled' => true,
+        ]);
+
+        $this->getJson('/api/v0.5/personality/comparisons/intj-a-vs-intj-t?locale=en')
+            ->assertOk()
+            ->assertJsonMissingPath('comparison_public_projection_v1.sections')
+            ->assertJsonPath('comparison_public_projection_v1.comparison_blocks.0.key', 'at_difference');
+    }
+
     public function test_personality_comparison_endpoint_requires_complete_published_pair(): void
     {
         $profile = $this->createProfile([
@@ -2313,6 +2498,26 @@ final class PersonalityPublicApiTest extends TestCase
         $variantCode = strtoupper(substr($runtimeTypeCode, -1));
 
         return $baseTypeCode.'-'.($variantCode === 'A' ? 'T' : 'A');
+    }
+
+    /** @return array<string,array{string,bool}> */
+    public static function atComparisonProjectionCases(): array
+    {
+        $cases = [];
+        foreach (['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'] as $baseTypeCode) {
+            $cases[$baseTypeCode] = [$baseTypeCode, $baseTypeCode !== 'INTP'];
+        }
+
+        return $cases;
+    }
+
+    /** @return array<string,array{mixed}> */
+    public static function invalidTopLevelAtComparisonSections(): array
+    {
+        return [
+            'absent' => [null],
+            'malformed string' => ['not-an-array'],
+        ];
     }
 
     /**
