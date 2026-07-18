@@ -52795,8 +52795,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": "d9b46f627afb695f34700d2dbf3038298d4fb298",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
+    "commit_sha": null,
+    "pr_url": null,
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -97065,8 +97065,8 @@
       "SOLO-OWNER-CMS-REVIEW-02"
     ],
     "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "676d6b9a8cfe62c77170cc2a6af6762cc58d36c6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -97137,8 +97137,13 @@
       "at": "2026-07-18T07:57:15Z",
       "status": "review_fix_local_checks_passed",
       "note": "Resolved Codex P1 review feedback by preserving compact Enneagram attestation compatibility through runtime closeout, exact bound-review resume, and standalone post-readback. Implementation commit d9b46f627afb695f34700d2dbf3038298d4fb298 passed the focused and complete local gates; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T08:16:04Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Resolved exact-head Codex P2 feedback by rejecting pending MBTI approval rows with stale approved_at timestamps before attestation binding and throwing on approval update-count mismatches so the transaction rolls back. The regression proved zero attestation/evidence writes and preserved pending items; the focused suite passed with 35 tests and 469 assertions, and the complete ci_verify_mbti.sh gate passed. Implementation commit 676d6b9a8cfe62c77170cc2a6af6762cc58d36c6; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-18T07:57:15Z"
+  "updated_at": "2026-07-18T08:16:04Z"
 }
 }
