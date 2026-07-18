@@ -431,6 +431,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_zh_v3_controlled_release_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveZhV3PackageBuild.php',
+            'backend/app/Console/Commands/PersonalityBigFiveZhV3ContentPublish.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3PackageCompiler.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3Publisher.php',
+            'backend/bootstrap/app.php',
+        ];
+        $bootstrapChangedLines = [
+            '+        \\App\\Console\\Commands\\PersonalityBigFiveZhV3PackageBuild::class,',
+            '+        \\App\\Console\\Commands\\PersonalityBigFiveZhV3ContentPublish::class,',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV3/Release/UnexpectedMbtiRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $allowed,
+            '',
+            '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -6185,6 +6212,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveZhV3ControlledReleaseFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7732,6 +7763,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->bootstrapDiffIsPublicContentDeliveryProbeOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->bootstrapDiffIsBigFiveZhV3ControlledReleaseCommandsOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                 )
             ) {
                 continue;
@@ -7749,6 +7783,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsPublicContentDeliveryProbeOnly($bootstrapAppChangedLines ?? [])
+                    || $this->bootstrapDiffIsBigFiveZhV3ControlledReleaseCommandsOnly($bootstrapAppChangedLines ?? [])
                 )
             ) {
                 continue;
@@ -8090,6 +8125,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveAuthorityV2ZhContentOnlyPublish.php',
             'backend/app/Services/BigFive/AuthorityV2/ContentOnlyRelease/BigFiveZhContentOnlyPublisher.php',
+        ], true);
+    }
+
+    private function isBigFiveZhV3ControlledReleaseFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveZhV3PackageBuild.php',
+            'backend/app/Console/Commands/PersonalityBigFiveZhV3ContentPublish.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3PackageCompiler.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3Publisher.php',
         ], true);
     }
 
@@ -13138,6 +13183,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
         $actual = [];
 
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ($line[0] ?? '') !== '+') {
+                return false;
+            }
+            $normalized = trim(substr($line, 1));
+            if ($normalized !== '') {
+                $actual[] = $normalized;
+            }
+        }
+
+        return $actual === $expected;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function bootstrapDiffIsBigFiveZhV3ControlledReleaseCommandsOnly(array $changedLines): bool
+    {
+        $expected = [
+            '\\App\\Console\\Commands\\PersonalityBigFiveZhV3PackageBuild::class,',
+            '\\App\\Console\\Commands\\PersonalityBigFiveZhV3ContentPublish::class,',
+        ];
+        $actual = [];
         foreach ($changedLines as $line) {
             if (! is_string($line) || ($line[0] ?? '') !== '+') {
                 return false;

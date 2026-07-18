@@ -78,6 +78,9 @@ final class PersonalityPublicContentAssetContract
             'summary' => ['nullable', 'string', 'max:2000'],
             'content_sections' => ['required', 'array'],
             'content_sections.*.key' => ['required_with:content_sections', 'string', 'max:96'],
+            'content_sections.*.kind' => ['nullable', 'string', 'max:64'],
+            'content_sections.*.heading' => ['nullable', 'string', 'max:255'],
+            'content_sections.*.body' => ['nullable', 'string'],
             'content_sections.*.title' => ['nullable', 'string', 'max:255'],
             'content_sections.*.body_md' => ['nullable', 'string'],
             'content_sections.*.body_html' => ['nullable', 'string'],
@@ -125,8 +128,9 @@ final class PersonalityPublicContentAssetContract
             'authority.claim_mapping' => ['sometimes', 'array'],
             'authority.claim_mapping.*' => ['array'],
             'authority.claim_mapping.*.claim_id' => ['required', 'string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_.-]*$/i'],
-            'authority.claim_mapping.*.source_ids' => ['present', 'array', 'min:1'],
+            'authority.claim_mapping.*.source_ids' => ['present', 'array'],
             'authority.claim_mapping.*.source_ids.*' => ['string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_.-]*$/i'],
+            'authority.claim_mapping.*.support_level' => ['sometimes', Rule::in(['direct', 'contextual', 'not_required'])],
             'authority.claim_mapping.*.limitation' => ['nullable', 'string', 'max:2000'],
             'authority.limitations' => ['sometimes', 'array'],
             'authority.limitations.*' => ['string', 'max:2000'],
@@ -465,7 +469,15 @@ final class PersonalityPublicContentAssetContract
                 continue;
             }
 
-            foreach ((array) ($mapping['source_ids'] ?? []) as $sourceId) {
+            $mappingSourceIds = (array) ($mapping['source_ids'] ?? []);
+            $supportLevel = (string) ($mapping['support_level'] ?? '');
+            if ($mappingSourceIds === [] && $supportLevel !== 'not_required') {
+                $validator->errors()->add(
+                    "authority.claim_mapping.{$index}.source_ids",
+                    'Research and measurement claim mappings require at least one visible source.'
+                );
+            }
+            foreach ($mappingSourceIds as $sourceId) {
                 if (! isset($sourceIds[(string) $sourceId])) {
                     $validator->errors()->add(
                         "authority.claim_mapping.{$index}.source_ids",
