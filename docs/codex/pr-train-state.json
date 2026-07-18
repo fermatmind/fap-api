@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "79920df10175bcd031f11a231c63164cb6881e50",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97259,14 +97259,14 @@
         "evidence": "After all ten review findings, the Career manifest suite passed 92 tests / 678 assertions across projection/promotion gates, immutable payload plus exposure-snapshot staging, activation-time snapshot revalidation, snapshot-backed directory/broad-warm preservation, atomic detail/directory pointer activation and rollback, stale materialized projection reads, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 94 tests / 684 assertions total. The actual readiness path built 1046 and 10000 row directories in about 13ms and 144ms with one DB query. All 26 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact twenty-nine-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on prior ledger head 6c885ea0c72cc90b97feeaae21de6a5545d94f59. The non-regressing snapshot-backed directory warm repair is committed as 79920df10175bcd031f11a231c63164cb6881e50, the tenth review thread is resolved, and exact-head checks are pending."
+        "status": "passed",
+        "evidence": "All nine required CI and code-scanning checks passed on exact head 177a0ba5753b2469f1c64906280c6ef34459191c. All ten automated review threads are resolved, GitHub reports MERGEABLE/CLEAN, and the exact twenty-nine-path scope gate passes. This ready-ledger transition must pass its own exact-head checks before squash merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97404,8 +97404,13 @@
         "at": "2026-07-18T13:07:43Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed non-regressing snapshot-backed directory and broad warm behavior as 79920df10175bcd031f11a231c63164cb6881e50. Replied to the tenth review finding with active-payload/same-version-snapshot proof and both warm-path regressions, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T13:14:55Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 177a0ba5753b2469f1c64906280c6ef34459191c. All ten review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-nine-path scope validation passes. This final ready-ledger commit must pass its own exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T13:07:43Z"
+    "updated_at": "2026-07-18T13:14:55Z"
   }
 }
