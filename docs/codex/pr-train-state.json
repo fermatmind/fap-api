@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "f285e3594f29409a4a47dc2cd99ba24f2ba528b1",
+    "status": "github_checks_pending",
+    "commit_sha": "28d0cb439c8b27db459ea3cebd987bc709657f25",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97260,7 +97260,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine required CI/code-scanning checks passed on exact ledger head c5fcd29a33169037c08bb4b9c40c7ffe40c1152d. The eighteenth same-scope review repair was committed and pushed in f285e3594f29409a4a47dc2cd99ba24f2ba528b1; exact-head checks are rerunning."
+        "evidence": "All nine required CI/code-scanning checks passed on exact ledger head 1429fda5e3b338c50889952e6c1937c61421dc39. The nineteenth same-scope review repair was committed and pushed in 28d0cb439c8b27db459ea3cebd987bc709657f25; exact-head checks are rerunning."
       }
     },
     "scope_validation": {
@@ -97499,8 +97499,13 @@
         "at": "2026-07-18T15:52:46Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on exact ledger head 1429fda5e3b338c50889952e6c1937c61421dc39, but final review found a nineteenth valid P2: legacy v1 directory cleanup ran after verified v2 pointer activation and could throw outside the multi-locale rollback guard, incorrectly turning successful activation into a promotion failure. The repair makes only that compatibility-key cleanup best-effort with a structured warning, so verified active pointers remain the truthful result and database remediation is not triggered. A synthetic legacy-cleanup outage proves both EN/ZH active versions and payloads stay committed. The full Career suite passes 110 tests / 929 assertions plus 2 / 6 Big Five freeze assertions; 33 Pint paths, Composer/YAML/JSON/diff, and exact thirty-six-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:53:53Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed best-effort legacy directory cleanup after verified v2 activation as 28d0cb439c8b27db459ea3cebd987bc709657f25. Replied to the nineteenth review finding with exact multi-locale active-pointer and payload evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T15:52:46Z"
+    "updated_at": "2026-07-18T15:53:53Z"
   }
 }
