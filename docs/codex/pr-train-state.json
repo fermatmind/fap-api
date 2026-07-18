@@ -97065,7 +97065,7 @@
       "SOLO-OWNER-CMS-REVIEW-02"
     ],
     "status": "local_checks_passed",
-    "commit_sha": "90978a9ed064bbb6520787a9cf175a257199c8d9",
+    "commit_sha": "f1316d75ff9701b23e00593aaa968f80a1c43068",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
     "checks": {
       "dependency": {
@@ -97078,7 +97078,7 @@
       },
     "github": {
       "status": "pending",
-      "evidence": "PR #3162 is open from codex/solo-owner-personality-review-03 to main. Exact-set evidence reuse repair 90978a9ed064bbb6520787a9cf175a257199c8d9 passed focused and complete local validation; required checks and exact-head Codex review are pending after push, and no merge is permitted until both pass on the final head."
+      "evidence": "PR #3162 is open from codex/solo-owner-personality-review-03 to main. Big Five solo-owner capability repair f1316d75ff9701b23e00593aaa968f80a1c43068 passed focused and complete local validation; required checks and exact-head Codex review are pending after push, and no merge is permitted until both pass on the final head."
       }
     },
     "scope_validation": {
@@ -97202,9 +97202,19 @@
       "at": "2026-07-18T09:50:43Z",
       "status": "review_fix_local_checks_passed",
       "note": "Resolved exact-head Codex P2 feedback in implementation commit 90978a9ed064bbb6520787a9cf175a257199c8d9 by requiring one current-owner approved_all attestation whose target_count, canonical target_set_sha256, and exact expanded evidence match the complete requested Personality target set. Two separate single-target attestations can no longer be combined as batch evidence. The MBTI/RIASEC/ReviewPolicy suite passed 49 tests/786 assertions; Big Five/Enneagram focused validation passed 126 tests/1179 assertions; Pint, Composer/YAML/JSON/diff checks and PR-semantic 27-path/zero-outside validation passed; and the complete ci_verify_mbti.sh gate exited zero. Validation-generated Big Five compiled timestamps and hashes were restored exactly. No production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T09:59:20Z",
+      "status": "local_checks_failed",
+      "note": "The first focused Big Five capability regression rerun failed one new assertion because the test-fixture permission patch matched the preceding owner setup instead of the intended non-owner rejection case. Production capability code did not fail; the fixture was corrected before any commit or push, and no production action occurred."
+    },
+    {
+      "at": "2026-07-18T10:07:06Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Resolved exact-head Codex P2 feedback in implementation commit f1316d75ff9701b23e00593aaa968f80a1c43068 by applying the configured solo-owner condition to Big Five approve/reject capability reporting as well as submit-time enforcement. The regression proves the configured owner retains both capabilities, an equally permissioned non-owner receives neither, and the existing team-separated reviewer behavior remains enabled. Focused validation passed 21 tests/121 assertions; Pint, Composer/YAML/JSON/diff checks and PR-semantic 27-path/zero-outside validation passed; and the complete ci_verify_mbti.sh gate exited zero with 1510 Big Five tests/181794 assertions. Validation-generated Big Five compiled timestamps and hashes were restored exactly. No production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-18T09:50:43Z"
+  "updated_at": "2026-07-18T10:07:06Z"
 },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
