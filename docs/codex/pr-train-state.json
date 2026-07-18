@@ -97157,8 +97157,8 @@
     "depends_on": [
       "CAREER-DETAIL-COLD-MISS-DEGRADE-01"
     ],
-    "status": "github_review_fix_pending_push",
-    "commit_sha": "a348b450224ecce6c937868a6d948aa47f495913",
+    "status": "ready_to_merge",
+    "commit_sha": "ff7b19d34b0a20e2ee99e82525e643d8e52eaac6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3164",
     "checks": {
       "authorization": {
@@ -97174,14 +97174,14 @@
         "evidence": "CareerJobDetailCacheCoverageTest passed 6 tests / 60 assertions, including dynamic 1046×2=2092 targets, all required cache classifications, bounded examples, verify-only zero write/dispatch, missing/broken-only queue repair, healthy active/LKG preservation, stable resume idempotency, and production confirmation. CareerRuntimePublishProjectionLookupTest passed 9 / 46, including a single bilingual coverage snapshot while preserving explicit reload behavior. CareerJobDetailReadModel10kTest passed 11 / 121; CareerWarmPublicAuthorityCacheCommandTest passed 14 / 143 against process-private SQLite; Career detail API passed 13 / 149; runtime-freeze focused tests passed 3 / 7. Changed-PHP Pint, Composer strict validation, command discovery, PHP/YAML/JSON syntax, diff checks, and the exact thirteen-path allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending_review_fix",
-        "evidence": "All nine CI and code-scanning checks passed on head 843e7c3ce96f61ffdca9ed860cb6809d7a8871e6. Exact-head automated review then identified two same-scope issues: production coverage iteration needed one projection snapshot instead of per-target rehydration, and PR2 runtime impact was incorrectly marked false. Both are repaired locally and require complete exact-head revalidation after push."
+        "status": "passed",
+        "evidence": "All nine CI and code-scanning checks passed on exact implementation head ff7b19d34b0a20e2ee99e82525e643d8e52eaac6. Both same-scope automated review findings were fixed, replied to, and resolved; the review threads are outdated and resolved. GitHub reports the PR mergeable and CLEAN."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97219,8 +97219,13 @@
         "at": "2026-07-18T09:35:35Z",
         "status": "github_review_fix_pending_push",
         "note": "All nine checks passed on 843e7c3ce96f61ffdca9ed860cb6809d7a8871e6. Inspected two automated review threads and repaired only current-scope findings: production lookup now exposes one bilingual coverage snapshot so 2092 iteration does not rehydrate per target while normal lookup reload semantics remain intact, and manifest/state now truthfully mark api_runtime_change=true. Lookup, coverage, classifier, Pint, JSON/YAML, diff, and thirteen-path scope checks pass."
+      },
+      {
+        "at": "2026-07-18T09:44:48Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact implementation head ff7b19d34b0a20e2ee99e82525e643d8e52eaac6. Both same-scope review threads are resolved and outdated, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and the exact thirteen-path allowlist remains valid. This ledger-only transition must itself pass exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T09:35:35Z"
+    "updated_at": "2026-07-18T09:44:48Z"
   }
 }
