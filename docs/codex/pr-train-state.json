@@ -96958,9 +96958,9 @@
     "depends_on": [
       "SOLO-OWNER-REVIEW-FOUNDATION-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "656f7beed8abd096969d5ec7b557371c1a1a93b1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3161",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -96969,6 +96969,10 @@
       "local_validation": {
         "status": "passed",
         "evidence": "Passed the manifest CMS/Ops/architecture suite (456 tests, 4536 assertions), the operator-authorized SeoIntel controlled-publish regression with the focused PR02 set (71 tests, 1162 assertions), changed-PHP syntax lint, Pint on 20 changed PHP files, Composer strict validation, YAML/JSON parsing, git diff checks, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first MBTI run exposed an over-broad ArticlePublishService gate that blocked the existing baseline importer; that out-of-scope global publish change and its fixture were removed, the exact failure then passed (1 test, 29 assertions), and the complete MBTI gate passed on rerun including personality full-32 (71 tests, 5383 assertions)."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #3161 is OPEN against main from codex/solo-owner-cms-review-02 at implementation commit 656f7beed8abd096969d5ec7b557371c1a1a93b1; required checks are pending after PR creation."
       }
     },
     "scope_validation": {
@@ -97012,8 +97016,13 @@
         "at": "2026-07-18T05:22:30Z",
         "status": "local_checks_passed",
         "note": "All PR02 local gates passed. The complete MBTI gate was rerun from scratch after removing an over-broad global ArticlePublishService evidence check that broke the existing baseline importer and exceeded the preserved controlled-publisher boundary. The final scope contains only manifest-authorized CMS review adapters, the operator-authorized SeoIntel regression path, tests, protocol/registry, and train metadata; no production write or deploy occurred."
+      },
+      {
+        "at": "2026-07-18T05:25:49Z",
+        "status": "github_checks_pending",
+        "note": "Implementation commit 656f7beed8abd096969d5ec7b557371c1a1a93b1 was pushed and PR #3161 was opened with the exact manifest title, base main, and scoped head branch. This ledger-only follow-up records the real PR identity before final required-check polling."
       }
     ],
-    "updated_at": "2026-07-18T05:22:30Z"
+    "updated_at": "2026-07-18T05:25:49Z"
   }
 }
