@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "e4a31d3daf556ed26ec93195ad386bd03daa6ae1",
+    "status": "github_checks_pending",
+    "commit_sha": "6ba82275abfdaf7ca0051ccd2b23973b4a2a0959",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97259,8 +97259,8 @@
         "evidence": "After all fourteen review findings and the resulting CI fixture repair, the Career manifest suite passed 101 tests / 783 assertions across projection/promotion gates, immutable payload plus exposure-snapshot staging, activation-time snapshot revalidation, nested-lock lease coverage, best-effort cleanup with guaranteed remediation progression, ready-only public directory/industry/sitemap consumption, the 10k readiness gate, snapshot-backed list preservation, atomic job-index/detail/directory activation and rollback, stale materialized projection reads, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 103 tests / 789 assertions total. The actual readiness path built 1046 and 10000 row directories in about 14ms and 143ms with one DB query. All 30 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact thirty-three-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "failed_repaired_locally",
-        "evidence": "On exact head 74a36de6a, content-pack-build-validate failed in CareerDirectory10kOpsWarmValidateCommandTest because its legacy fixture published runtime projection without verified EN/ZH detail payloads. The fixture now seeds the same ready detail authority required by production consumers, and the exact CI test passes 2 tests / 40 assertions locally."
+        "status": "pending",
+        "evidence": "The exact content-pack-build-validate failure was inspected and repaired in 6ba82275abfdaf7ca0051ccd2b23973b4a2a0959 by seeding verified EN/ZH detail authority in its legacy 10k fixture. The exact CI test passes locally; required checks are rerunning."
       }
     },
     "scope_validation": {
@@ -97444,8 +97444,13 @@
         "at": "2026-07-18T14:18:48Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "Inspected the failed content-pack-build-validate job and reproduced CareerDirectory10kOpsWarmValidateCommandTest locally. Its legacy fixture had runtime projection but no verified EN/ZH detail payloads, so the new ready-only public consumer correctly reported zero. The fixture now seeds explicit ready detail payloads, the exact CI gate passes 2 tests / 40 assertions, all 30 Pint paths and the full 103-test / 789-assertion manifest remain green, and the exact thirty-three-path allowlist has zero drift. No production or runtime cache mutation occurred."
+      },
+      {
+        "at": "2026-07-18T14:19:38Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the scoped 10k gate fixture repair as 6ba82275abfdaf7ca0051ccd2b23973b4a2a0959. The manifest now runs this exact required CI gate locally and allows its test path explicitly. Exact-head checks are rerunning; no production cache, DB, CMS, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T14:18:48Z"
+    "updated_at": "2026-07-18T14:19:38Z"
   }
 }
