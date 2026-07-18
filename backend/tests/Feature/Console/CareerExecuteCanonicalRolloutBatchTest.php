@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\Models\IndexState;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -525,6 +526,89 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertFalse(data_get($payload, 'remediation.succeeded', true));
         $this->assertSame('rollback_not_persisted', data_get($payload, 'remediation.status'));
         $this->assertGreaterThan(0, $snapshotCleanupAttempts);
+        $this->assertContains(
+            'post_promotion_exposure_snapshot_cleanup_failed',
+            array_column($payload['failures'] ?? [], 'reason'),
+        );
+    }
+
+    public function test_directory_failure_does_not_roll_back_database_when_active_snapshot_cleanup_is_unverified(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $enDirectoryActiveKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':en:active';
+        $snapshotCleanupAttempts = 0;
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static function (string $key) use ($cacheManager, &$snapshotCleanupAttempts): bool {
+                    if (str_contains($key, ':exposure-projections:')) {
+                        $snapshotCleanupAttempts++;
+
+                        throw new \RuntimeException('synthetic active snapshot cleanup failure');
+                    }
+
+                    return $cacheManager->forget($key);
+                });
+            $cacheMock->shouldReceive('put')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->put($key, $value, $ttl));
+            $cacheMock->shouldReceive('add')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->add($key, $value, $ttl));
+            $cacheMock->shouldReceive('store')
+                ->andReturnUsing(static fn (?string $name = null) => $cacheManager->store($name));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $enDirectoryActiveKey): bool {
+                    if ($key === $enDirectoryActiveKey) {
+                        throw new \RuntimeException('synthetic post-commit directory activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+                '--batch-id' => 'batch-actuaries-cache-revocation-unverified',
+                '--slugs' => 'actuaries',
+                '--locales' => 'en,zh',
+                '--rollback-group' => 'actuaries',
+                '--apply' => true,
+                '--projection' => $this->tmpProjectionPath,
+                '--json' => true,
+            ]);
+            $payload = json_decode(Artisan::output(), true);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertSame('post_commit_cache_revocation_unverified', $payload['status'] ?? null);
+        $this->assertTrue($payload['writes_database'] ?? false);
+        $this->assertTrue($payload['database_commit_succeeded'] ?? false);
+        $this->assertFalse($payload['automatic_database_remediation_allowed'] ?? true);
+        $this->assertFalse($payload['promotion_rolled_back'] ?? true);
+        $this->assertTrue($payload['rollback_required'] ?? false);
+        $this->assertFalse(data_get($payload, 'remediation.attempted', true));
+        $this->assertSame('blocked_cache_revocation_unverified', data_get($payload, 'remediation.status'));
+        $this->assertGreaterThan(0, $snapshotCleanupAttempts);
+        $this->assertSame(
+            'indexed',
+            IndexState::query()
+                ->where('occupation_id', Occupation::query()->where('canonical_slug', 'actuaries')->value('id'))
+                ->latest('changed_at')
+                ->latest('created_at')
+                ->value('index_state'),
+        );
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
         $this->assertContains(
             'post_promotion_exposure_snapshot_cleanup_failed',
             array_column($payload['failures'] ?? [], 'reason'),

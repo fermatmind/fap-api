@@ -77,6 +77,13 @@ final class CanonicalBatchPromotionExecutorService
             return $promotionResult;
         }
 
+        if (($promotionResult['automatic_database_remediation_allowed'] ?? true) !== true) {
+            return $this->cacheRevocationUnverifiedResult(
+                $promotionResult,
+                $quarantineOnFailure,
+            );
+        }
+
         $remediationResult = $this->executeRemediation(
             $slugs, $batchId, $transaction, $preStates,
             $promotionResult, $quarantineOnFailure,
@@ -267,6 +274,7 @@ final class CanonicalBatchPromotionExecutorService
                         'failures' => $failures,
                     ],
                     $releaseGate,
+                    $cleanupFailure === null,
                 );
             }
 
@@ -286,9 +294,10 @@ final class CanonicalBatchPromotionExecutorService
 
     /**
      * Snapshot cleanup is a fail-closed cache hardening step after the
-     * publication transaction has committed. A cache outage here must be
-     * recorded, but it must never prevent execute() from reaching the
-     * database remediation path.
+     * publication transaction has committed. The caller decides whether a
+     * failed cleanup is safe to continue: staged snapshots are unreachable
+     * after atomic detail activation rollback, but active snapshots left by a
+     * later directory failure must block database remediation.
      *
      * @param  list<array<string, mixed>>  $preparedEntries
      * @return array{reason: string, context: array{error_class: class-string<\Throwable>}}|null
@@ -392,6 +401,33 @@ final class CanonicalBatchPromotionExecutorService
         }
 
         return array_merge($promotionResult, $merged);
+    }
+
+    /**
+     * Do not roll database authority back while a previously activated cache
+     * snapshot could still authorize the public route. Keeping the committed
+     * published state is the only cross-authority-consistent result until cache
+     * revocation can be verified and remediation retried.
+     *
+     * @param  array<string, mixed>  $promotionResult
+     * @return array<string, mixed>
+     */
+    private function cacheRevocationUnverifiedResult(
+        array $promotionResult,
+        bool $quarantineOnFailure,
+    ): array {
+        return array_merge($promotionResult, [
+            'status' => 'post_commit_cache_revocation_unverified',
+            'promotion_rolled_back' => false,
+            'promotion_quarantined' => false,
+            'rollback_required' => ! $quarantineOnFailure,
+            'quarantine_required' => $quarantineOnFailure,
+            'remediation' => [
+                'attempted' => false,
+                'status' => 'blocked_cache_revocation_unverified',
+                'succeeded' => false,
+            ],
+        ]);
     }
 
     // ─── Projection / Authority ─────────────────────────────────────────────
@@ -1094,6 +1130,7 @@ final class CanonicalBatchPromotionExecutorService
         array $promotedStates,
         array $postPromotionValidation,
         ?array $releaseGate,
+        bool $automaticDatabaseRemediationAllowed = true,
     ): array {
         return [
             'status' => 'post_commit_activation_failed',
@@ -1105,6 +1142,7 @@ final class CanonicalBatchPromotionExecutorService
             'writes_database' => true,
             'write_verified' => true,
             'database_commit_succeeded' => true,
+            'automatic_database_remediation_allowed' => $automaticDatabaseRemediationAllowed,
             'promotion_rolled_back' => false,
             'pre_states' => $preStates,
             'promoted_states' => $promotedStates,
