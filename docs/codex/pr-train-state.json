@@ -98017,7 +98017,7 @@
     "title": "BIG5-EN52-TRANSLATION-AUTHORITY-01: freeze English translation authority",
     "depends_on": [],
     "status": "github_checks_pending",
-    "commit_sha": "11f70252e0fe1aa0def95a09a7cb47d871143e9e",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3181",
     "checks": {
       "authorization": {
@@ -98074,9 +98074,14 @@
         "at": "2026-07-18T18:45:00Z",
         "status": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #3181. GitHub required checks will be evaluated on the final ledger head before any merge or PR2 work; no staging or deployment workflow is awaited."
+      },
+      {
+        "at": "2026-07-18T18:55:00Z",
+        "status": "github_review_fix_in_progress",
+        "note": "All nine checks passed on f5a50041457d001fa4eb8422cbd73240dba9b4fd, then two valid P2 review findings were accepted. The authority builder now requires an explicit reviewed-date and records Asia/Shanghai instead of hiding date provenance in a constant; commit_sha remains null until the real squash merge SHA exists."
       }
     ],
-    "updated_at": "2026-07-18T18:45:00Z"
+    "updated_at": "2026-07-18T18:55:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",

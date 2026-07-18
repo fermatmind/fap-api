@@ -15,7 +15,6 @@ const RELEASE_PATH = path.join(
 const SOURCE_CONTENT_SHA256 = '056b10d3f640d0cf7da35ec7bc99b009408049e75c1e25aa8e760eb8641ea8d5';
 const SOURCE_PACKAGE_PAYLOAD_SHA256 = 'edfdaea72705e205c3e126dbf04b2d4b0a84da536a871be37f0c5e225f25f4fb';
 const SOURCE_PACKAGE_FILE_SHA256 = '83536987f7edc73d668f481942c94f6bf549abf23a0e498941f47bc56726490d';
-const GENERATED_AT = '2026-07-19';
 
 const DOMAINS = [
   ['openness', 'Openness to Experience'],
@@ -172,6 +171,10 @@ function targetPr(asset) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args['source-root']) throw new Error('--source-root=/absolute/path is required.');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(args['reviewed-date'] ?? '')) {
+    throw new Error('--reviewed-date=YYYY-MM-DD is required.');
+  }
+  const reviewedDate = args['reviewed-date'];
   const sourceRoot = path.resolve(args['source-root']);
   const releaseBytes = await readFile(RELEASE_PATH);
   if (sha256(releaseBytes) !== SOURCE_PACKAGE_FILE_SHA256) throw new Error('Locked zh-CN release package file SHA drifted.');
@@ -234,7 +237,8 @@ async function main() {
   const manifest = {
     schema_version: 'big-five-en52-canonical-manifest.v1',
     package_id: 'fermatmind-big-five-en52-translation',
-    generated_at: GENERATED_AT,
+    generated_at: reviewedDate,
+    review_timezone: 'Asia/Shanghai',
     target_editorial_locale: 'en-US',
     backend_locale_contract: 'en',
     canonical_locale_segment: 'en',
@@ -327,7 +331,8 @@ async function main() {
     schema_version: 'big-five-en52-source-registry.v1',
     locale: 'en-US',
     source_registry_version: sourceRegistry.registry_version,
-    generated_at: GENERATED_AT,
+    generated_at: reviewedDate,
+    review_timezone: 'Asia/Shanghai',
     status: 'verified_with_one_bibliographic_only_source',
     total_sources: sourceRegistry.sources.length,
     verified_public_source_count: sourceRegistry.verified_public_source_count,
@@ -338,7 +343,7 @@ async function main() {
       ...source,
       verification_note: SOURCE_NOTE_EN[source.source_id],
       translation_registry_status: 'formal_english_bibliography_preserved',
-      external_recheck_date: GENERATED_AT,
+      external_recheck_date: reviewedDate,
       external_recheck_status: source.source_id === 'S7'
         ? 'bibliographic_only_rechecked_against_official_publisher_metadata'
         : 'rechecked_against_primary_or_registration_metadata',
@@ -347,7 +352,8 @@ async function main() {
 
   await writeJson('manifests/translation-ledger.json', {
     schema_version: 'big-five-en52-translation-ledger.v1',
-    generated_at: GENERATED_AT,
+    generated_at: reviewedDate,
+    review_timezone: 'Asia/Shanghai',
     source_content_sha256: SOURCE_CONTENT_SHA256,
     target_page_count: 52,
     translated_page_count: 0,
@@ -403,6 +409,8 @@ async function main() {
     alias_target_count: 0,
     unresolved_terminology_count: 0,
     unresolved_source_identity_count: 0,
+    reviewed_date: reviewedDate,
+    review_timezone: 'Asia/Shanghai',
     source_content_sha256: SOURCE_CONTENT_SHA256,
   }, null, 2)}\n`);
 }

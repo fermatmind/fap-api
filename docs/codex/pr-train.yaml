@@ -99,7 +99,7 @@ prs:
       - cd /Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package && python3 qa/validate-authority-package.py
       - node --check generated/big-five-en52-translation/build-authority.mjs
       - node --check generated/big-five-en52-translation/validate-authority.mjs
-      - node generated/big-five-en52-translation/build-authority.mjs --source-root=/Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package
+      - node generated/big-five-en52-translation/build-authority.mjs --source-root=/Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package --reviewed-date=2026-07-19
       - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=0
       - cd backend && php artisan test tests/Feature/BigFive/BigFiveZhV3ControlledReleaseTest.php --filter='compiled_fixture_is_exact_deterministic_text_only_release|compiler_serialization_is_byte_stable' --no-ansi
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

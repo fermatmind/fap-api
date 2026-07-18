@@ -6,12 +6,13 @@ This repository package freezes the translation authority for exactly 52 en-US B
 
 ```bash
 node generated/big-five-en52-translation/build-authority.mjs \
-  --source-root=/Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package
+  --source-root=/Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package \
+  --reviewed-date=2026-07-19
 
 node generated/big-five-en52-translation/validate-authority.mjs
 ```
 
-The builder uses the operator-reviewed Markdown tree and the checked-in deterministic zh-CN release package. The validator is repository-contained and does not require the external Markdown tree.
+The builder uses the operator-reviewed Markdown tree and the checked-in deterministic zh-CN release package. The review date is an explicit deterministic Asia/Shanghai input rather than a build-time clock or hidden constant. The validator is repository-contained and does not require the external Markdown tree.
 
 ## Boundaries
 
