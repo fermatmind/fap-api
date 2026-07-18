@@ -97057,7 +97057,7 @@
     "branch": "codex/career-detail-cold-miss-degrade-01",
     "title": "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "local_checks_passed_ci_fix_pending_commit",
     "commit_sha": "943cf071ea1b629092ff45e9733da5d2b377a9f6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3163",
     "checks": {
@@ -97071,11 +97071,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "CareerJobDetailReadModel10kTest passed 10 tests / 114 assertions; CareerJobDetailApiTest passed 13 / 149; the filtered CareerJobPublicApiTest passed 5 / 68. The exact six-route inventory, scoped Pint, Composer strict validation, four PHP syntax checks, YAML/JSON parsing, git diff check, and exact seven-path allowlist validation passed. The cold-miss test also proves zero SQL queries on degradation, fresh/LKG/legacy state behavior, one queued warm across repeated misses, no warm for hidden/unknown projection states, and dispatch failure remaining a restricted 200."
+        "evidence": "CareerJobDetailReadModel10kTest passed 10 tests / 114 assertions; CareerJobDetailApiTest passed 13 / 149; the filtered CareerJobPublicApiTest passed 5 / 68. After inspecting the required-check failure, the exact runtime-freeze reproduction and Career detail classifier regression passed 2 tests / 5 assertions. The exact six-route inventory, scoped Pint on five PHP files, Composer strict validation, PHP syntax, YAML/JSON parsing, git diff check, and updated exact eight-path allowlist validation passed. The cold-miss test also proves zero SQL queries on degradation, fresh/LKG/legacy state behavior, one queued warm across repeated misses, no warm for hidden/unknown projection states, and dispatch failure remaining a restricted 200."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3163 is open and mergeable; required checks started on the pushed head and remain pending."
+        "status": "failed_fix_in_progress",
+        "evidence": "On final head 77c1d55f7016b391a368c65f4fdfc4f55c2db7a4, seven jobs passed and verify-bigfive failed only because the existing runtime-freeze classifier did not recognize the new exact CareerJobDetailDegradedShellBuilder path. The failure is introduced by this PR and is being repaired only in the existing Career detail read-model classifier plus its exact regression assertion."
       }
     },
     "scope_validation": {
@@ -97114,8 +97114,18 @@
         "at": "2026-07-18T08:31:55Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact scoped branch and opened PR #3163 against main with the manifest title and required what, why, validation, rule-impact, and deferred-scope sections. GitHub reports the PR open and mergeable; required checks are running."
+      },
+      {
+        "at": "2026-07-18T08:40:26Z",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "Inspected verify-bigfive job 88062758792 before editing. It passed 1504 tests / 181764 assertions and failed only BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because the PR-new CareerJobDetailDegradedShellBuilder was not included in the existing exact Career detail read-model classifier. Added only that exact path and regression assertion to the current PR scope; no Big Five runtime, later Career PR, production, CMS, DB, publish, staging, or deploy scope was added."
+      },
+      {
+        "at": "2026-07-18T08:41:49Z",
+        "status": "local_checks_passed_ci_fix_pending_commit",
+        "note": "The exact failing runtime-path test and its Career detail classifier regression now pass with 2 tests / 5 assertions. Pint, PHP syntax, YAML/JSON parsing, diff checks, and the updated exact eight-path scope gate pass. The repair adds only the new builder to the pre-existing Career detail read-model classifier and manifest allowlist."
       }
     ],
-    "updated_at": "2026-07-18T08:31:55Z"
+    "updated_at": "2026-07-18T08:41:49Z"
   }
 }
