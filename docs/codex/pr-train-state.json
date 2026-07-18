@@ -98016,8 +98016,8 @@
     "branch": "codex/big5-en52-translation-authority-01",
     "title": "BIG5-EN52-TRANSLATION-AUTHORITY-01: freeze English translation authority",
     "depends_on": [],
-    "status": "implementation_in_progress",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "11f70252e0fe1aa0def95a09a7cb47d871143e9e",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -98064,9 +98064,14 @@
         "at": "2026-07-18T18:42:01Z",
         "status": "local_validation_passed",
         "note": "Frozen the unique 52-page source authority, en-US editorial/backend-en route mapping, 30-facet terminology, eleven-source registry, style/claim boundaries, 52-entry pending ledger, and reusable page/claim/CJK/link/duplicate validator. All Task 1 gates and exact 13-path scope validation passed; complete English pages remain zero and CMS/runtime/production/media/search/deploy/fap-web changes remain zero."
+      },
+      {
+        "at": "2026-07-18T18:43:00Z",
+        "status": "committed",
+        "note": "Committed the exact 13-path Task 1 authority scope as 11f70252e0fe1aa0def95a09a7cb47d871143e9e after all required local and staged checks passed. The unrelated .workbuddy directory remains untracked and unstaged."
       }
     ],
-    "updated_at": "2026-07-18T18:42:01Z"
+    "updated_at": "2026-07-18T18:43:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
