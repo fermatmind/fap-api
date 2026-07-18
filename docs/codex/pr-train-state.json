@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "6c6399fdb6ae806881487455bbde20ada6eefd92",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -97391,7 +97391,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Post-commit high-risk approval, existing approval flow, and registry validation passed 18 tests/406 assertions. The branch-aware runtime freeze initially exposed the five exact approval-governance runtime paths; the manifest-predeclared classifier test was narrowed to those files and now passes 2 tests/6 assertions while continuing to block a generic data-lifecycle executor and Big Five runtime service. PHP syntax, Pint, composer validate --strict, YAML/JSON parsing, generated registry parity, exact allowlist scope, and git diff checks passed. The single guarded bash backend/scripts/ci_verify_mbti.sh run exited 0, including personality authority 71 tests/5383 assertions plus commerce, migration, auth, OpenAPI, ownership, dependency-security, webhook, and attempt regression gates. Generated Big Five timestamp/hash noise was restored to origin/main before staging."
+        "evidence": "Post-commit focused approval/registry validation passed 18 tests/406 assertions and the branch-aware runtime freeze passed 2/6. PHP syntax, Pint, composer validate --strict, YAML/JSON, generated registry parity, exact 14-path allowlist, and diff checks passed. After recording one shared /tmp/fap-ci.sqlite collision with a competing Codex task, an isolated final bash backend/scripts/ci_verify_mbti.sh retry exited 0, including the committed runtime-freeze classifier, Enneagram 10/369, personality authority 71/5383, and all later commerce, migration, auth, OpenAPI, ownership, dependency-security, webhook, attempt, queue, and schema gates. Generated Big Five timestamp/hash noise was restored to origin/main."
       },
       "github": {
         "status": "not_started",
@@ -97434,9 +97434,19 @@
         "at": "2026-07-18T13:54:04Z",
         "status": "local_checks_passed",
         "note": "Post-commit approval and registry validation passed 18 tests/406 assertions, including the committed-diff review-surface scan. The repaired runtime freeze and its narrow classifier contract passed 2/6, plus Pint and PHP syntax passed for the classifier file. No runtime implementation changed in this repair and no production action occurred."
+      },
+      {
+        "at": "2026-07-18T14:01:00Z",
+        "status": "local_check_failed_retriable",
+        "note": "The final full-gate retry failed during the Enneagram post-gate SQLite baseline check after migrations had printed success: /tmp/fap-ci.sqlite was zero bytes and all tables were missing. Read-only process inspection found another Codex task had started ci_verify_mbti.sh after this run began; both scripts hardcode the same /tmp/fap-ci.sqlite path. Recorded the deterministic shared-database collision and deferred retry until the competing process exits; no code change or production action is implicated."
+      },
+      {
+        "at": "2026-07-18T14:09:09Z",
+        "status": "local_checks_passed",
+        "note": "After the competing full gate exited, reran the exact manifest command in isolation. bash backend/scripts/ci_verify_mbti.sh exited 0 across the committed runtime-freeze classifier, Big Five, Enneagram 10/369, personality 71/5383, and all downstream security and regression gates. Restored deterministic Big Five generated files and retained only the exact 14 allowed PR05 paths. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T13:54:04Z"
+    "updated_at": "2026-07-18T14:09:09Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
