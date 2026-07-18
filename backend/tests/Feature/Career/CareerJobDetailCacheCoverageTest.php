@@ -101,6 +101,39 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         Queue::assertNothingPushed();
     }
 
+    public function test_rollout_floor_fails_closed_before_deploy_or_repair_when_target_count_is_too_small(): void
+    {
+        $this->bindProjection(['one']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $cache->publishJobDetailReadModel('one', $locale, ['slug' => 'one']);
+        }
+        Queue::fake();
+
+        $verifyExit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--verify-only' => true,
+            '--minimum-targets' => 2092,
+            '--json' => true,
+        ]);
+        $verifyReport = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $verifyExit);
+        $this->assertSame('incomplete', $verifyReport['status']);
+        $this->assertSame(2, $verifyReport['eligible_target_count']);
+        $this->assertSame(2092, $verifyReport['minimum_target_count']);
+        $this->assertFalse($verifyReport['minimum_target_count_met']);
+
+        $repairExit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing' => true,
+            '--minimum-targets' => 2092,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $repairExit);
+        Queue::assertNothingPushed();
+        $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
+    }
+
     public function test_repair_queues_only_missing_or_broken_targets_and_preserves_healthy_caches(): void
     {
         $this->bindProjection(['active', 'legacy', 'lkg', 'missing']);

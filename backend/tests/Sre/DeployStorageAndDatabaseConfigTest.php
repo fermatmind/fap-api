@@ -205,6 +205,19 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function career_detail_cache_coverage_is_read_only_complete_and_required_before_symlink_activation(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString("task('guard:career-detail-cache-coverage'", $source);
+        $this->assertStringContainsString('career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN', $source);
+        $this->assertStringContainsString('--minimum-targets=%d --json --no-interaction --no-ansi', $source);
+        $this->assertStringContainsString("getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS') ?: 2092", $source);
+        $this->assertStringContainsString("before('deploy:symlink', 'guard:career-detail-cache-coverage')", $source);
+        $this->assertStringNotContainsString('career:verify-job-detail-cache-coverage --repair-missing', $source);
+    }
+
+    #[Test]
     public function production_deploy_lock_guard_retries_the_full_script_and_only_removes_verified_stale_ci_locks(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');

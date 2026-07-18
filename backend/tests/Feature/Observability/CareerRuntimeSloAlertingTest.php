@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Observability;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Middleware\RecordCareerRuntimeSlo;
+use App\Services\Career\CareerJobDetailCacheCoverageService;
 use App\Services\Career\CareerRuntimeSloService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Http\Client\Request as ClientRequest;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerRuntimeSloAlertingTest extends TestCase
@@ -70,6 +73,10 @@ final class CareerRuntimeSloAlertingTest extends TestCase
             'locale_count_mismatch' => true,
             'cache_stale' => true,
             'smoke_failed' => true,
+            'detail_cache_missing_count' => 3,
+            'detail_cache_broken_count' => 2,
+            'detail_cache_target_count' => 2000,
+            'minimum_detail_target_count' => 2092,
         ]);
 
         $this->assertSame('alert', $evaluation['status']);
@@ -80,6 +87,9 @@ final class CareerRuntimeSloAlertingTest extends TestCase
             'career_locale_count_mismatch',
             'career_cache_age_exceeded',
             'career_release_smoke_failed',
+            'career_detail_cache_coverage_missing',
+            'career_detail_cache_coverage_broken',
+            'career_detail_cache_target_count_below_minimum',
         ], $evaluation['alerts']);
     }
 
@@ -89,14 +99,12 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         config()->set('ops.career_runtime_slo.api_url', 'https://api.test');
         $this->seedReadyDirectoryCache('en');
         $this->seedReadyDirectoryCache('zh-CN');
+        $this->seedReadyDetailCoverage(['software-developer']);
 
         Http::fake(function (ClientRequest $request) {
             $url = $request->url();
             if (str_contains($url, '/api/v0.5/career/directory')) {
                 return Http::response(['public_truth' => ['public_detail_indexable_count' => 1046], 'items' => [['slug' => 'software-developer']]]);
-            }
-            if (str_contains($url, '/api/v0.5/career/jobs/software-developer')) {
-                return Http::response(['slug' => 'software-developer']);
             }
             if (str_contains($url, '/career/jobs')) {
                 return Http::response('<html>1046 careers</html>');
@@ -111,8 +119,40 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $this->assertSame(0, $exit, $output);
         $this->assertStringContainsString('"status": "pass"', $output);
         $this->assertStringContainsString('"response_bytes"', $output);
+        $this->assertStringContainsString('"expected_target_count": 2', $output);
         $this->assertStringNotContainsString('<html>', $output);
-        Http::assertSentCount(8);
+        Http::assertSentCount(7);
+        Http::assertNotSent(static fn (ClientRequest $request): bool => str_contains($request->url(), '/api/v0.5/career/jobs/'));
+    }
+
+    public function test_scheduled_probe_alerts_from_every_published_detail_cache_key_without_sampling_one_slug(): void
+    {
+        config()->set('ops.career_runtime_slo.site_url', 'https://site.test');
+        config()->set('ops.career_runtime_slo.api_url', 'https://api.test');
+        $this->seedReadyDirectoryCache('en');
+        $this->seedReadyDirectoryCache('zh-CN');
+        $this->bindProjection(['ready', 'missing']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cache->publishJobDetailReadModel('ready', 'en', ['slug' => 'ready']);
+        $cache->publishJobDetailReadModel('ready', 'zh-CN', ['slug' => 'ready']);
+        config()->set('ops.career_runtime_slo.minimum_detail_target_count', 4);
+
+        Http::fake(static fn (ClientRequest $request) => str_contains($request->url(), '/api/v0.5/career/directory')
+            ? Http::response(['public_truth' => ['public_detail_indexable_count' => 2], 'items' => [['slug' => 'ready']]])
+            : (str_contains($request->url(), '/career/jobs')
+                ? Http::response('<html>2 careers</html>')
+                : Http::response("/career/jobs/ready\n"))
+        );
+
+        $exit = Artisan::call('career:runtime-slo-check', ['--json' => true]);
+        $output = Artisan::output();
+
+        $this->assertSame(1, $exit, $output);
+        $this->assertStringContainsString('"expected_target_count": 4', $output);
+        $this->assertStringContainsString('"missing_count": 2', $output);
+        $this->assertStringContainsString('career_detail_cache_coverage_missing', $output);
+        Http::assertSentCount(7);
+        Http::assertNotSent(static fn (ClientRequest $request): bool => str_contains($request->url(), '/api/v0.5/career/jobs/'));
     }
 
     public function test_failed_smoke_sends_the_existing_ops_webhook_and_fails_the_check(): void
@@ -122,6 +162,7 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         config()->set('ops.alert.webhook', 'https://alerts.test/career');
         $this->seedReadyDirectoryCache('en');
         $this->seedReadyDirectoryCache('zh-CN');
+        $this->seedReadyDetailCoverage(['software-developer']);
         Http::fake(static fn (ClientRequest $request) => str_starts_with($request->url(), 'https://alerts.test/')
             ? Http::response([], 202)
             : Http::response([], 503));
@@ -136,6 +177,20 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         );
     }
 
+    public function test_scheduled_repair_is_opt_in_bounded_and_uses_the_existing_resume_contract(): void
+    {
+        $schedule = file_get_contents(base_path('bootstrap/app.php'));
+        $config = file_get_contents(config_path('ops.php'));
+
+        $this->assertIsString($schedule);
+        $this->assertIsString($config);
+        $this->assertStringContainsString("config('ops.career_runtime_slo.repair_missing_enabled', false)", $schedule);
+        $this->assertStringContainsString('--repair-missing --locales=en,zh-CN --batch-size=', $schedule);
+        $this->assertStringContainsString('--resume-key=runtime-slo --confirm-production-write --json', $schedule);
+        $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_REPAIR_MISSING_ENABLED', false)", $config);
+        $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_REPAIR_BATCH_SIZE', 100)", $config);
+    }
+
     private function seedReadyDirectoryCache(string $locale): void
     {
         $prefix = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':'.$locale;
@@ -143,5 +198,43 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         Cache::forever($prefix.':versions:test-version', ['items' => []]);
         Cache::forever($prefix.':activated-at', now()->timestamp);
         Cache::forever($prefix.':last-rebuild-ms', 100.0);
+    }
+
+    /** @param list<string> $slugs */
+    private function seedReadyDetailCoverage(array $slugs): void
+    {
+        $this->bindProjection($slugs);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($slugs as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug]);
+            }
+        }
+        config()->set('ops.career_runtime_slo.minimum_detail_target_count', count($slugs) * 2);
+    }
+
+    /** @param list<string> $slugs */
+    private function bindProjection(array $slugs): void
+    {
+        $items = [];
+        foreach ($slugs as $slug) {
+            foreach (['en', 'zh'] as $locale) {
+                $items[$slug.'|'.$locale] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'runtime_publish_state' => 'published',
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ];
+            }
+        }
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(items: $items),
+        );
+        $this->app->forgetInstance(CareerJobDetailCacheCoverageService::class);
+        $this->app->forgetInstance(PublicCareerAuthorityResponseCache::class);
     }
 }

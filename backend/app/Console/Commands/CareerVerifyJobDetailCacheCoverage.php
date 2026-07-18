@@ -15,6 +15,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         {--verify-only : Explicitly select the default read-only verification mode}
         {--repair-missing : Queue only missing or broken published targets}
         {--locales=en,zh-CN : Comma-separated public locales}
+        {--minimum-targets=0 : Fail when the dynamic eligible target count is below this rollout floor}
         {--batch-size=250 : Maximum stable target rows inspected per repair invocation}
         {--resume-key=default : Durable repair cursor namespace}
         {--reset : Reset the repair cursor before queueing}
@@ -46,10 +47,22 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
 
         $inspection = $this->coverageService->inspect($locales);
         $report = $inspection['report'];
+        $minimumTargets = min(100000, max(0, (int) $this->option('minimum-targets')));
+        $report['minimum_target_count'] = $minimumTargets;
+        $report['minimum_target_count_met'] = (int) $report['eligible_target_count'] >= $minimumTargets;
+        if (! $report['minimum_target_count_met']) {
+            $report['status'] = 'incomplete';
+        }
         if (! $repair) {
             $this->emit($report);
 
             return $report['status'] === 'ready' ? self::SUCCESS : self::FAILURE;
+        }
+
+        if (! $report['minimum_target_count_met']) {
+            $this->emit($report);
+
+            return self::FAILURE;
         }
 
         if (app()->environment('production') && ! (bool) $this->option('confirm-production-write')) {

@@ -97829,5 +97829,65 @@
       }
     ],
     "updated_at": "2026-07-18T16:04:00Z"
+  },
+  "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01": {
+    "id": "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-detail-deploy-slo-repair-01",
+    "title": "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01: gate deploys and repair Career detail cache coverage",
+    "depends_on": [
+      "CAREER-DETAIL-ATOMIC-EXPOSURE-01"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The explicit seven-PR continuous execution goal authorized this exact PR4 deploy, SLO, alerting, and controlled-repair scope plus missing manifest/state registration."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR3 merged as 468591b9713cbecf83f906cc998b367ab15973f7; origin/main contains the merge and this isolated PR4 branch was created from that exact main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused Career coverage and observability tests passed (14 tests, 109 assertions); deploy guard tests passed (2 tests, 14 assertions); Big Five runtime freeze tests passed (2 tests, 5 assertions). Default and explicitly enabled schedule:list contracts passed, Pint passed 9 files, composer validate --strict passed, deploy.php lint passed, YAML/JSON parsed, git diff checks passed, and exact 13-path scope validation passed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T16:16:30Z",
+        "status": "implementation_in_progress",
+        "note": "Verified PR3 merge containment and cleanup, created the isolated PR4 branch from exact origin/main, and registered the user-supplied deploy/SLO/controlled-repair scope. This PR implements gates and opt-in scheduling only; it performs no deployment, production cache write, queue dispatch, CMS/DB mutation, or staging wait."
+      },
+      {
+        "at": "2026-07-18T16:26:55Z",
+        "status": "local_validation_passed",
+        "note": "All manifest checks and exact 13-path scope validation passed. The deploy gate is read-only, full coverage monitoring replaces sample-detail probing, and the bounded resumable repair schedule remains disabled by default; no production or deployment action was executed."
+      }
+    ],
+    "updated_at": "2026-07-18T16:26:55Z"
   }
 }

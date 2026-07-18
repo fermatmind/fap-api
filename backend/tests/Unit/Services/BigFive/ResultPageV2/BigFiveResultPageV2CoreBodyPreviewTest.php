@@ -4977,6 +4977,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_detail_deploy_slo_repair(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CareerRuntimeSloCheck.php',
+            'backend/app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php',
+            'backend/app/Services/Career/CareerRuntimeSloService.php',
+            'backend/bootstrap/app.php',
+            'backend/config/ops.php',
+        ];
+        $bootstrapChangedLines = [
+            '+        if ((bool) config(\'ops.career_runtime_slo.repair_missing_enabled\', false)) {',
+            '+            $repairBatchSize = min(500, max(1, (int) config(\'ops.career_runtime_slo.repair_batch_size\', 100)));',
+            '+            $schedule->command(\'career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --batch-size=\'.$repairBatchSize.\' --resume-key=runtime-slo --confirm-production-write --json\')',
+            '+                ->everyTenMinutes()',
+            '+                ->withoutOverlapping();',
+            '+        }',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_detail_read_model_10k(): void
     {
         $changed = [
@@ -7873,6 +7899,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->bootstrapDiffIsCareerDetailRepairScheduleOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                     || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
@@ -7897,6 +7926,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsIqMethodPagesCmsDraftImporterOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($bootstrapAppChangedLines ?? [])
                     || $this->kernelDiffIsCareerPublicAuthorityCacheVerifyOnly($bootstrapAppChangedLines ?? [])
+                    || $this->bootstrapDiffIsCareerDetailRepairScheduleOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsPublicContentDeliveryProbeOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsBigFiveZhV3ControlledReleaseCommandsOnly($bootstrapAppChangedLines ?? [])
@@ -10310,8 +10340,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerRuntimeSloObservabilityFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/CareerRuntimeSloCheck.php',
             'backend/app/Http/Middleware/RecordCareerRuntimeSlo.php',
             'backend/app/Services/Career/CareerRuntimeSloService.php',
+            'backend/config/ops.php',
         ], true);
     }
 
@@ -12702,6 +12734,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $changedLines === [
             "+        \$schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();",
         ];
+    }
+
+    /** @param list<string> $changedLines */
+    private function bootstrapDiffIsCareerDetailRepairScheduleOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/career_runtime_slo\.repair_|career:verify-job-detail-cache-coverage|repairBatchSize|everyTenMinutes|withoutOverlapping|^\+\s*[{}]\s*$/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

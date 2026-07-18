@@ -83,6 +83,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->onOneServer();
         }
         $schedule->command('career:runtime-slo-check --json')->everyFiveMinutes()->withoutOverlapping();
+        if ((bool) config('ops.career_runtime_slo.repair_missing_enabled', false)) {
+            $repairBatchSize = min(500, max(1, (int) config('ops.career_runtime_slo.repair_batch_size', 100)));
+            $schedule->command('career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --batch-size='.$repairBatchSize.' --resume-key=runtime-slo --confirm-production-write --json')
+                ->everyTenMinutes()
+                ->withoutOverlapping();
+        }
         $schedule->call(static function (): void {
             app(\App\Services\Ops\PublicContentRuntimeMetricsService::class)->rollupPending();
         })->name('public-content-runtime:aggregate-rollup')->everyMinute()->withoutOverlapping();

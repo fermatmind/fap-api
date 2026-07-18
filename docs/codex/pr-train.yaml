@@ -60,6 +60,65 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CAREER-DETAIL-DEPLOY-SLO-REPAIR-01
+    repo: fap-api
+    base: main
+    branch: codex/career-detail-deploy-slo-repair-01
+    title: "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01: gate deploys and repair Career detail cache coverage"
+    status: in_progress
+    depends_on:
+      - CAREER-DETAIL-ATOMIC-EXPOSURE-01
+    train_scope: career_detail_deploy_slo_repair
+    scope:
+      - Fail every release before deploy:symlink activation unless the complete backend-authoritative Career detail target set is 100 percent cache-ready and meets the 2092-target rollout floor.
+      - Replace single-detail SLO sampling with full published slug by EN and ZH cache-key coverage inspection on every scheduled runtime check.
+      - Alert separately for missing or broken coverage and for a target count below the configured rollout floor.
+      - Register an opt-in, bounded, resumable scheduled repair that reuses the PR2 missing/broken-only queue contract and remains disabled by default.
+      - Document deployment, monitoring, alerting, repair, rollback, and production authorization boundaries without executing a deployment or production write.
+    allowed_paths:
+      - deploy.php
+      - backend/app/Console/Commands/CareerRuntimeSloCheck.php
+      - backend/app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php
+      - backend/app/Services/Career/CareerRuntimeSloService.php
+      - backend/bootstrap/app.php
+      - backend/config/ops.php
+      - backend/tests/Feature/Career/CareerJobDetailCacheCoverageTest.php
+      - backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
+      - backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/career/job-detail-cache-coverage.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify frontend, public Career content, publication or promotion authority, directory exposure rules, sitemap, llms, canonical, noindex, JSON-LD, CMS content, or database schema.
+      - Rebuild full detail payloads synchronously, repair healthy active or LKG targets, bypass the resumable cursor, or enable repair by default.
+      - Execute production cache repair, queue dispatch, CMS or database mutation, import, publish, staging wait, manual deploy, or production deploy.
+      - Add a production environment value, secret, permission, migration, or workflow-triggered deploy.
+    validation:
+      - cd backend && DB_DATABASE=:memory: php artisan test tests/Feature/Career/CareerJobDetailCacheCoverageTest.php --no-ansi
+      - cd backend && DB_DATABASE=:memory: php artisan test tests/Feature/Observability/CareerRuntimeSloAlertingTest.php --no-ansi
+      - cd backend && php artisan test tests/Sre/DeployStorageAndDatabaseConfigTest.php --filter='career_detail_cache_coverage|production_deploy_validates_the_exact_release_revision_before_symlink_activation' --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_detail_deploy_slo_repair' --no-ansi
+      - cd backend && php artisan schedule:list --json --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerRuntimeSloCheck.php app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php app/Services/Career/CareerRuntimeSloService.php bootstrap/app.php config/ops.php tests/Feature/Career/CareerJobDetailCacheCoverageTest.php tests/Feature/Observability/CareerRuntimeSloAlertingTest.php tests/Sre/DeployStorageAndDatabaseConfigTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - php -l deploy.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: CAREER-PUBLIC-AUTHORITY-CACHE-RESILIENCE-01
     repo: fap-api
     depends_on: [CAREER-DIRECTORY-READ-MODEL-PERFORMANCE-01]

@@ -44,3 +44,34 @@ Production repair remains a controlled write boundary and additionally requires
 `--confirm-production-write`. This repository PR implements and tests the
 capability only; it does not authorize or execute a production repair, deployment,
 CMS/DB write, or publication change.
+
+## Deployment activation gate
+
+Every Deployer release runs the read-only coverage command before
+`deploy:symlink`. Activation requires `status=ready`, a coverage ratio of 1.0,
+and at least 2,092 eligible targets. The target floor can be increased with
+`DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS`; lowering it is an operator-controlled
+release decision and never repairs or republishes content. A failed gate leaves
+the current symlink unchanged. It must not be bypassed by warming one sampled
+detail URL.
+
+## Runtime SLO and controlled repair
+
+`career:runtime-slo-check` inspects the complete dynamic published slug × EN/ZH
+cache-key set on every scheduled run. It reports the coverage contract beside
+the existing page, directory, sitemap, and llms probes and emits distinct alerts
+for missing targets, broken targets, and an eligible target count below
+`CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT` (default 2,092). A single
+successful detail request is not accepted as coverage evidence.
+
+Bounded scheduled repair is disabled by default. Setting
+`CAREER_RUNTIME_SLO_REPAIR_MISSING_ENABLED=true` registers a ten-minute repair
+that reuses the existing `runtime-slo` resume cursor, asynchronous queue guard,
+production-write confirmation, and missing/broken-only classification. The batch
+size defaults to 100 and is capped at 500. Disable the flag to stop new repair
+dispatches; already queued jobs follow the normal queue operations policy.
+
+This PR does not set those production environment values, run the schedule,
+dispatch repair jobs, warm production caches, wait for staging, or deploy any
+release. Production execution still requires the separate exact-SHA deployment
+and environment authorization paths.

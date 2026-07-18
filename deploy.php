@@ -336,6 +336,28 @@ BASH);
 
 before('deploy:symlink', 'guard:expected-release-revision');
 
+/**
+ * The current symlink must never expose a Career directory whose published
+ * detail routes are not fully backed by verified active/LKG/legacy cache
+ * payloads. This is read-only and runs against the release code plus shared
+ * runtime cache before activation.
+ */
+task('guard:career-detail-cache-coverage', function () {
+    $minimumTargets = (int) (getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS') ?: 2092);
+    $minimumTargets = max(1, $minimumTargets);
+    $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_DETAIL_COVERAGE_TIMEOUT') ?: 180);
+    $timeoutSeconds = max(60, $timeoutSeconds);
+
+    run(sprintf(
+        'timeout %d {{bin/php}} %s career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=%d --json --no-interaction --no-ansi',
+        $timeoutSeconds,
+        deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
+        $minimumTargets,
+    ));
+});
+
+before('deploy:symlink', 'guard:career-detail-cache-coverage');
+
 task('guard:ops-theme-asset', function () {
     $asset = deployPlaceholderPathArg('{{release_path}}', 'backend/public/css/app/ops-theme.css');
 
