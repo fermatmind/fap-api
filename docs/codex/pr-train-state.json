@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "42dd2b6df161cdbd04f4b3183623454b89e78d3c",
+    "status": "github_checks_pending",
+    "commit_sha": "c53b56136205fb638742c6116faacd9d69562ed7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97369,8 +97369,13 @@
         "at": "2026-07-18T12:31:24Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on ready-ledger head 6f169b68540e60f4ceb8232b38b7142885fcfab2, but final review found a seventh valid P1 and eighth valid P2. The repair stages the exact validated exposure projection beside each immutable detail payload and resolves route authority from that snapshot only when it matches the active verified version, so a stale candidate artifact cannot leave a directory link returning 404. Post-commit cache/directory failures now record the committed database write, remove the transient exposure snapshot to fail closed, and claim rollback only after verified remediation. The full Career manifest suite passes 91 tests / 672 assertions plus 2 / 6 Big Five freeze assertions; all 26 Pint paths, Composer/YAML/JSON, diff, and the exact twenty-nine-path scope gate are green. No materialized SEO artifact, production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:33:22Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the shared versioned exposure-projection snapshot plus truthful post-commit failure reporting as c53b56136205fb638742c6116faacd9d69562ed7. Replied to both new review findings with exact regression evidence and resolved both threads. Exact-head required checks are running; no materialized SEO artifact, production cache, DB, CMS, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T12:31:24Z"
+    "updated_at": "2026-07-18T12:33:22Z"
   }
 }
