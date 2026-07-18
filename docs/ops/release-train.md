@@ -164,6 +164,30 @@ before production SSH credentials are loaded.
 
 If wrappers are invoked without explicit runtime intent flags they fail closed.
 
+`readiness.sh` and `post_deploy_validate.sh` use separate evidence surfaces and
+fail closed unless their required values are explicit:
+
+- `HEALTHCHECK_HOST=<target-node HTTPS vhost hostname>`
+- `PUBLIC_API_BASE_URL=<public API HTTPS origin>`
+- `PUBLIC_WEB_BASE_URL=<public Web HTTPS origin>` (`post_deploy_validate.sh`)
+- `BACKEND_SHA=<40-character release SHA>`
+- `RELEASE_NAME=<operator-approved release name>`
+- `PROBE_ID=<unique non-sensitive log correlation id>`
+
+The internal health check must run on the target node and resolves the named
+vhost to loopback for `GET /api/healthz`. It requires HTTP `200` and JSON
+`ok=true`. The scripts never print the internal hostname, loopback mapping, or
+raw configuration values. A non-allowlisted public request to `/api/healthz`
+continues to return `404` by design and is not a wrapper failure signal.
+
+Public backend evidence comes from `GET /api/v0.3/flags` and the zh-CN Big Five
+hub Personality API. Both must return `200`. The Personality request carries
+`User-Agent: FermatMindReleaseProbe/<PROBE_ID>` so a later read-only target-node
+check can prove that the public request reached the inspected node. Acceptance
+also requires the target node's current release SHA to equal `BACKEND_SHA`;
+these wrappers validate the supplied evidence contract but do not inspect or
+change the current symlink themselves.
+
 `deploy_backend.sh` is connected to the existing backend Deployer contract and
 does not accept an arbitrary `DEPLOY_COMMAND`. The guarded command shape is:
 
