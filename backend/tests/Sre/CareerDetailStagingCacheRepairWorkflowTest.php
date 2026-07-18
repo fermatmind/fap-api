@@ -22,6 +22,9 @@ final class CareerDetailStagingCacheRepairWorkflowTest extends TestCase
             $source,
         );
         $this->assertStringContainsString('TARGET_LOCALE: "zh-CN"', $source);
+        $this->assertStringContainsString('candidate_release_revision must be a lowercase 40-character revision.', $source);
+        $this->assertStringContainsString('candidate_release_name must use the exact run_id-attempt format.', $source);
+        $this->assertSame(3, substr_count($source, '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend'));
         $this->assertStringContainsString('--job-detail-only', $source);
         $this->assertStringNotContainsString('--forget-job-detail', $source);
         $this->assertStringNotContainsString('--repair-missing', $source);
@@ -34,6 +37,7 @@ final class CareerDetailStagingCacheRepairWorkflowTest extends TestCase
 
         $this->assertStringContainsString('verify_only refuses an operator approval phrase.', $source);
         $this->assertStringContainsString('expected_active_revision must be a lowercase 40-character revision.', $source);
+        $this->assertStringContainsString('using inactive candidate SHA ${CANDIDATE_RELEASE_REVISION}', $source);
         $this->assertStringContainsString('test ! -e \'$DEPLOY_PATH/.dep/deploy.lock\'', $source);
         $this->assertStringContainsString(
             'cache-only, no CMS/DB/publication/indexability/sitemap/llms/search.',
