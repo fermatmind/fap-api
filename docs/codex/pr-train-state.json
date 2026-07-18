@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "92184869ed9af952957b860240b0644253f9312d",
+    "status": "github_checks_pending",
+    "commit_sha": "10eb90679c2d2718ea953051fa4f2cfe1b00b6eb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97260,7 +97260,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine required CI/code-scanning checks passed on exact ready-ledger head 9d878a33a8956e23fbc14b14bb2513275b443cc9. The seventeenth same-scope review repair is locally green and awaiting commit/push before exact-head checks rerun."
+        "evidence": "All nine required CI/code-scanning checks passed on exact ready-ledger head 9d878a33a8956e23fbc14b14bb2513275b443cc9. The seventeenth same-scope review repair was committed and pushed in 10eb90679c2d2718ea953051fa4f2cfe1b00b6eb; exact-head checks are rerunning."
       }
     },
     "scope_validation": {
@@ -97479,8 +97479,13 @@
         "at": "2026-07-18T15:23:34Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on ready-ledger head 9d878a33a8956e23fbc14b14bb2513275b443cc9, but final review found a seventeenth valid P2: the public job-index filtered publication and dataset visibility without verified detail readiness. The repair applies the shared readiness predicate to both cached reads and rebuild writes while keeping a separate published/dataset authority item set for the internal directory, so transient detail loss hides public links without deleting internal membership. Regressions prove cached cold rows are suppressed dynamically, cold rebuilds stay suppressed until detail warm plus index rebuild, and internal directory rows remain with detail_ready=false. The full Career suite passes 108 tests / 910 assertions plus 2 / 6 Big Five freeze assertions; 33 Pint paths, Composer/YAML/JSON/diff, and exact thirty-six-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:24:47Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed ready-only public job-index filtering with separate internal directory authority as 10eb90679c2d2718ea953051fa4f2cfe1b00b6eb. Replied to the seventeenth review finding with exact cached-read, rebuild, recovery, and internal-authority regression evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T15:23:34Z"
+    "updated_at": "2026-07-18T15:24:47Z"
   }
 }
