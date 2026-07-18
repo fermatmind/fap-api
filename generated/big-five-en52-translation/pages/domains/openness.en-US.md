@@ -20,9 +20,9 @@ claim_mapping_version: big-five-en52-claims.v1
 cms_draft_created: false
 publish_allowed: false
 media_supported: false
-title: Openness to Experience: Curiosity, Imagination, and Flexibility
+title: "Openness to Experience: Curiosity, Imagination, and Flexibility"
 h1: What Does Openness to Experience Mean?
-seo_title: Openness to Experience: Meaning and Examples | FermatMind
+seo_title: "Openness to Experience: Meaning and Examples | FermatMind"
 seo_description: Learn what Openness to Experience describes, how it may appear across contexts, and why it does not measure intelligence, creativity, or personal worth.
 excerpt: Openness to Experience describes tendencies toward imagination, ideas, aesthetics, emotional awareness, novelty, and reconsidering assumptions. It is a continuum, not a measure of intelligence or value.
 primary_intent: Help readers interpret Openness to Experience through behavior, context, facets, trade-offs, and evidence boundaries without treating a score as intelligence or a fixed identity.

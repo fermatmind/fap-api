@@ -20,9 +20,9 @@ claim_mapping_version: big-five-en52-claims.v1
 cms_draft_created: false
 publish_allowed: false
 media_supported: false
-title: Extraversion: Social Engagement, Assertiveness, and Positive Emotion
+title: "Extraversion: Social Engagement, Assertiveness, and Positive Emotion"
 h1: What Does Extraversion Mean?
-seo_title: Extraversion: Meaning, Facets, and Examples | FermatMind
+seo_title: "Extraversion: Meaning, Facets, and Examples | FermatMind"
 seo_description: Learn how Extraversion describes social engagement, expression, activity, and positive emotion without treating introversion as shyness, weakness, or poor skill.
 excerpt: Extraversion describes tendencies around social engagement, assertiveness, activity, stimulation, and positive emotion. Lower Extraversion is not a social defect or diagnosis.
 primary_intent: Help readers interpret Extraversion across behavior, context, six facets, trade-offs, and evidence limits while protecting introversion from deficit framing.

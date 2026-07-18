@@ -20,9 +20,9 @@ claim_mapping_version: big-five-en52-claims.v1
 cms_draft_created: false
 publish_allowed: false
 media_supported: false
-title: Neuroticism: Emotional Sensitivity and Stress Response
+title: "Neuroticism: Emotional Sensitivity and Stress Response"
 h1: What Does Neuroticism Mean?
-seo_title: Neuroticism: Meaning, Facets, and Examples | FermatMind
+seo_title: "Neuroticism: Meaning, Facets, and Examples | FermatMind"
 seo_description: Understand Neuroticism as a non-diagnostic Big Five domain describing emotional sensitivity and stress response, with careful language, facets, and practical context.
 excerpt: Neuroticism describes tendencies in emotional sensitivity, threat attention, and stress response. It is a historical personality label, not a diagnosis or a verdict about stability.
 primary_intent: Help readers interpret Neuroticism with non-stigmatizing, non-diagnostic language through behavior, six facets, context, trade-offs, and evidence limits.

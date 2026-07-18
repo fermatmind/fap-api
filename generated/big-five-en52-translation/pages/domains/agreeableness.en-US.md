@@ -20,9 +20,9 @@ claim_mapping_version: big-five-en52-claims.v1
 cms_draft_created: false
 publish_allowed: false
 media_supported: false
-title: Agreeableness: Cooperation, Trust, and Interpersonal Concern
+title: "Agreeableness: Cooperation, Trust, and Interpersonal Concern"
 h1: What Does Agreeableness Mean?
-seo_title: Agreeableness: Meaning, Facets, and Examples | FermatMind
+seo_title: "Agreeableness: Meaning, Facets, and Examples | FermatMind"
 seo_description: Understand Agreeableness as a continuous Big Five domain involving cooperation, trust, and concern without turning a score into a judgment of kindness or morality.
 excerpt: Agreeableness describes tendencies around trust, directness, helping, conflict response, modesty, and humane concern. It does not measure whether someone is good or bad.
 primary_intent: Help readers interpret Agreeableness through observable behavior, six facets, relationship trade-offs, context, and evidence limits without moral ranking.

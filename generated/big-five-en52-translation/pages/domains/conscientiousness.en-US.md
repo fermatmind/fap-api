@@ -20,9 +20,9 @@ claim_mapping_version: big-five-en52-claims.v1
 cms_draft_created: false
 publish_allowed: false
 media_supported: false
-title: Conscientiousness: Organization, Follow-Through, and Deliberation
+title: "Conscientiousness: Organization, Follow-Through, and Deliberation"
 h1: What Does Conscientiousness Mean?
-seo_title: Conscientiousness: Meaning, Facets, and Examples | FermatMind
+seo_title: "Conscientiousness: Meaning, Facets, and Examples | FermatMind"
 seo_description: Understand Conscientiousness as a continuous Big Five domain, including organization, persistence, trade-offs, context, and why it cannot guarantee success.
 excerpt: Conscientiousness describes tendencies around organization, obligations, goal pursuit, follow-through, and deliberation. It is not a measure of ability, virtue, or guaranteed success.
 primary_intent: Help readers interpret Conscientiousness through observable behavior, six facets, context, costs, and evidence limits without treating it as ability or a success prediction.
