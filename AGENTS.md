@@ -91,6 +91,11 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - Run bash backend/scripts/ci_verify_mbti.sh locally only when the PR manifest, a security/high-risk skill, the changed runtime boundary, or the user explicitly requires it.
 - Pull requests still require the repository's complete GitHub required checks. A focused local check never permits merging with a failed or missing required check.
 
+### Deployment Smoke Retry Discipline
+- Public scale lookup deployment smoke may retry a complete HTTP and semantic assertion only through `backend/scripts/deploy/verify_scale_lookup.sh`, using the repository-bounded attempt, delay, connect-timeout, and request-timeout limits.
+- A recovered transient transport failure does not invalidate an otherwise healthy deploy. Persistent transport failure, malformed JSON, `ok != true`, or a mismatched `primary_slug` remains fail closed.
+- Retry behavior must not replace the public authority probe with a loopback-only probe, print private topology or response bodies, or authorize deploy, rollback, restart, unlock, migration, CMS mutation, or Search Channel activity.
+
 ### PR Train Manifest Discipline
 - Under a concrete execution goal, add an exact missing goal-supplied PR-train manifest/state entry under the standing authorization and continue. Outside an execution goal, stop and report the gap unless the user asks to update the train manifest and state ledger.
 - This stop rule applies only when the user requested a PR-train item. It must not block an explicitly requested ad-hoc PR whose scope does not modify PR-train metadata.

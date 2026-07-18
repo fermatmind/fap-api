@@ -1224,24 +1224,36 @@ task('healthcheck:public-static-media-assets', function () {
 
 task('healthcheck:scale-lookup', function () {
     $host = deploySafeHost((string) (get('scale_lookup_healthcheck_host') ?: get('healthcheck_host')), 'scale_lookup_healthcheck_host');
-    $resolveArg = deployCurlResolveArg($host, (bool) get('scale_lookup_healthcheck_use_resolve', false));
+    $useResolve = (bool) get('scale_lookup_healthcheck_use_resolve', false);
     $slugs = (array) get('required_public_scale_lookup_slugs', []);
-    $jq = deployShellArg('.ok==true and .primary_slug==$slug');
 
-    foreach ($slugs as $slug) {
-        $slug = trim((string) $slug);
+    within('{{current_path}}/backend', function () use ($host, $useResolve, $slugs) {
+        foreach ($slugs as $slug) {
+            $slug = trim((string) $slug);
 
-        if ($slug === '') {
-            continue;
+            if ($slug === '') {
+                continue;
+            }
+
+            $slug = deploySafeRelativePath($slug, 'scale lookup slug');
+            $environment = [
+                'SCALE_LOOKUP_BASE_URL' => "https://{$host}",
+                'SCALE_LOOKUP_SLUG' => $slug,
+                'SCALE_LOOKUP_USE_RESOLVE' => $useResolve ? 'true' : 'false',
+                'SCALE_LOOKUP_ATTEMPTS' => '3',
+                'SCALE_LOOKUP_RETRY_DELAY_SECONDS' => '2',
+                'SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS' => '5',
+                'SCALE_LOOKUP_MAX_TIME_SECONDS' => '40',
+            ];
+            $assignments = [];
+
+            foreach ($environment as $name => $value) {
+                $assignments[] = $name.'='.deployShellArg($value);
+            }
+
+            run(implode(' ', $assignments).' bash scripts/deploy/verify_scale_lookup.sh');
         }
-
-        $slug = deploySafeRelativePath($slug, 'scale lookup slug');
-        $query = http_build_query(['slug' => $slug, 'locale' => 'zh-CN'], '', '&', PHP_QUERY_RFC3986);
-        $url = deployHttpsUrlArg($host, "/api/v0.3/scales/lookup?{$query}");
-        $slugArg = escapeshellarg($slug);
-
-        run("curl -fsS {$resolveArg}{$url} | jq -e --arg slug {$slugArg} {$jq} >/dev/null");
-    }
+    });
 });
 
 task('healthcheck:ops-entry-contract', function () {
