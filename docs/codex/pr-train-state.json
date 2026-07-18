@@ -97236,7 +97236,7 @@
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
     "status": "ready_to_merge",
-    "commit_sha": "1ba21afee60134dda16247d3907971918c0c2789",
+    "commit_sha": "f5c88d211789f8f6c687bbfa12e2f6453d2040f7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3167",
     "checks": {
       "dependency": {
@@ -97313,9 +97313,14 @@
         "at": "2026-07-18T11:49:59Z",
         "status": "local_checks_passed",
         "note": "All nine checks passed on ready-to-merge head 747ad0a46d1bafeaf508487129a9b5e118bc0eb1, then exact-head Codex review found a second P2: package-scoped evidence reuse did not require and match package_sha256. The same-scope fix makes Career import readiness, SEO draft, canary, and content-package evidence require an exact valid package SHA; all evidence reuse now distinguishes null, changed, invalid, and exact package hashes. Focused validation passed 15 tests/364 assertions plus runtime-freeze 2/5, and the complete ci_verify_mbti.sh gate passed again. No production action occurred."
+      },
+      {
+        "at": "2026-07-18T11:50:53Z",
+        "status": "local_checks_passed",
+        "note": "Committed the exact package-hash P2 repair as f5c88d211789f8f6c687bbfa12e2f6453d2040f7 after all local checks passed. This ledger-only follow-up records the final implementation commit before push and fresh exact-head validation."
       }
     ],
-    "updated_at": "2026-07-18T11:49:59Z"
+    "updated_at": "2026-07-18T11:50:53Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
