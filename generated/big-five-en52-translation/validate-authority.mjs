@@ -22,7 +22,7 @@ const VALID_EQUIVALENCE_STATUSES = new Set([
   'scientifically_narrowed',
 ]);
 const ALLOWED_FRONTMATTER_KEYS = new Set([
-  'package_version', 'content_identity', 'source_content_identity', 'asset_type', 'locale',
+  'package_version', 'org_id', 'framework', 'content_identity', 'source_content_identity', 'asset_type', 'locale',
   'source_locale', 'backend_locale_contract', 'slug', 'canonical_path', 'parent_identity',
   'status', 'translation_status', 'source_page_sha256', 'source_registry_version',
   'terminology_version', 'claim_mapping_version', 'cms_draft_created', 'publish_allowed',
@@ -54,18 +54,28 @@ function parseFrontmatter(markdown) {
   const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) throw new Error('Missing fixed frontmatter.');
   const frontmatter = {};
+  let activeListKey = null;
   const frontmatterKeys = [...match[1].matchAll(/^\s*([A-Za-z0-9_-]+)\s*:/gm)]
     .map((item) => item[1]);
   for (const line of match[1].split('\n')) {
+    const listItem = line.match(/^\s+-\s+(.+)$/);
+    if (listItem && activeListKey) {
+      frontmatter[activeListKey].push(listItem[1].trim().replace(/^['"]|['"]$/g, ''));
+      continue;
+    }
     const item = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
     if (!item) continue;
     const [, key, raw] = item;
     const value = raw.trim();
+    activeListKey = null;
     if (value === 'true' || value === 'false') frontmatter[key] = value === 'true';
     else if (value === 'null') frontmatter[key] = null;
     else if (/^\d+$/.test(value)) frontmatter[key] = Number(value);
     else if (value.startsWith('[') && value.endsWith(']')) {
       frontmatter[key] = value.slice(1, -1).split(',').map((part) => part.trim()).filter(Boolean);
+    } else if (value === '') {
+      frontmatter[key] = [];
+      activeListKey = key;
     } else frontmatter[key] = value.replace(/^['"]|['"]$/g, '');
   }
   return { frontmatter, frontmatterKeys, body: match[2] };
@@ -265,6 +275,12 @@ async function main() {
 
   const manifestByIdentity = new Map(entries.map((entry) => [entry.page_identity, entry]));
   const paragraphOwners = new Map();
+  const metadataOwners = new Map([
+    ['title', new Map()],
+    ['h1', new Map()],
+    ['seo_title', new Map()],
+    ['seo_description', new Map()],
+  ]);
   let untranslatedChineseFragmentCount = 0;
   let invalidSourceIdCount = 0;
   let emptyClaimFileCount = 0;
@@ -304,12 +320,18 @@ async function main() {
     const { frontmatter, frontmatterKeys, body } = parsed;
     const visibleBody = markdownVisibleText(body);
     const fixedFields = {
+      package_version: 'personality_content_package.v3',
+      org_id: locked.org_id,
+      framework: locked.framework,
       content_identity: locked.page_identity,
       asset_type: locked.entity_type,
       locale: 'en-US',
+      source_locale: locked.source_locale,
       backend_locale_contract: 'en',
       slug: locked.en_slug,
       canonical_path: locked.en_canonical_path,
+      parent_identity: locked.parent_identity,
+      status: 'content_package_only',
       source_content_identity: locked.page_identity,
       source_page_sha256: locked.zh_source_sha256,
       source_registry_version: manifest.authority.source_registry_version,
@@ -329,6 +351,33 @@ async function main() {
       if (frontmatter[key] !== expected) fail('page_identity_lock', `${completedEntry.target_path}: ${key}`);
     }
     if (frontmatter.translation_status !== 'completed') fail('page_translation_status', completedEntry.target_path);
+    const requiredTextFields = [
+      'title', 'h1', 'seo_title', 'seo_description', 'excerpt', 'primary_intent',
+      'content_method', 'translation_method',
+    ];
+    for (const key of requiredTextFields) {
+      if (typeof frontmatter[key] !== 'string' || !frontmatter[key].trim())
+        fail('missing_public_metadata', `${completedEntry.target_path}: ${key}`);
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(frontmatter.substantive_updated_at ?? '')
+      || !/^\d{4}-\d{2}-\d{2}$/.test(frontmatter.translation_reviewed_at ?? ''))
+      fail('invalid_editorial_date', completedEntry.target_path);
+    if (!Array.isArray(frontmatter.target_questions) || frontmatter.target_questions.length === 0
+      || new Set(frontmatter.target_questions).size !== frontmatter.target_questions.length)
+      fail('target_questions', completedEntry.target_path);
+    if (!Array.isArray(frontmatter.source_ids)
+      || JSON.stringify([...frontmatter.source_ids].sort()) !== JSON.stringify([...locked.zh_source_ids].sort()))
+      fail('page_source_ids', completedEntry.target_path);
+    const bodyH1 = [...visibleBody.matchAll(/^#\s+(.+)$/gm)].map((match) => match[1]);
+    if (bodyH1.length !== 1 || bodyH1[0] !== frontmatter.h1)
+      fail('page_h1_contract', completedEntry.target_path);
+    for (const [key, ownersByValue] of metadataOwners) {
+      const value = frontmatter[key];
+      if (typeof value !== 'string' || !value.trim()) continue;
+      const owners = ownersByValue.get(value.trim()) ?? [];
+      owners.push(completedEntry.target_path);
+      ownersByValue.set(value.trim(), owners);
+    }
     const unknownFrontmatterKeys = frontmatterKeys.filter((key) => !ALLOWED_FRONTMATTER_KEYS.has(key));
     if (unknownFrontmatterKeys.length)
       fail('unknown_frontmatter_key', `${completedEntry.target_path}: ${unknownFrontmatterKeys.join(',')}`);
@@ -580,6 +629,11 @@ async function main() {
     if (new Set(owners).size > 1) {
       substantiveBodyExactDuplicateCount += 1;
       fail('substantive_body_exact_duplicate', [...new Set(owners)].join(','));
+    }
+  }
+  for (const [key, ownersByValue] of metadataOwners) {
+    for (const owners of ownersByValue.values()) {
+      if (new Set(owners).size > 1) fail('duplicate_public_metadata', `${key}: ${[...new Set(owners)].join(',')}`);
     }
   }
 

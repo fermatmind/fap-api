@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed through registered-external-link/frozen-validator-scope head c651096c35144232ea5e2a9a73c13cfe1e50fd68. Twenty-five actionable Codex review findings were accepted; the final reference-definition visibility head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub checks passed through reference-definition visibility head de56e497d82527c1ef0727cddb9f91470997ee6b. Twenty-six actionable Codex review findings were accepted; the final completed-page metadata-contract head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98149,9 +98149,14 @@
         "at": "2026-07-18T21:11:50Z",
         "status": "github_review_fixes_completed",
         "note": "All nine checks passed on registered-external-link/frozen-validator-scope head c651096c35144232ea5e2a9a73c13cfe1e50fd68, then one valid P2 finding was accepted. Completed pages now reject all non-footnote Markdown reference definitions and use inline links only; the reader-visible projection also removes each definition and all immediately indented continuation lines, so hidden multi-line titles cannot satisfy word, FAQ, duplicate, or claim visibility gates. Positive visible-text and negative hidden-continuation probes pass with the reproducible translated=0 authority validation."
+      },
+      {
+        "at": "2026-07-18T21:21:13Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on reference-definition visibility head de56e497d82527c1ef0727cddb9f91470997ee6b, then one valid P2 finding was accepted. Every completed page now locks package version, org, framework, source locale, parent identity, local-only lifecycle status, exact source IDs, editorial review boundary, and canonical identity fields; requires non-empty title, H1, SEO title/description, excerpt, intent, target questions, content/translation methods, and valid editorial dates; binds one body H1 exactly to frontmatter; and rejects cross-page duplicate public metadata. Block-list frontmatter parsing was added for target questions. The reproducible translated=0 authority validation remains green."
       }
     ],
-    "updated_at": "2026-07-18T21:11:50Z"
+    "updated_at": "2026-07-18T21:21:13Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
