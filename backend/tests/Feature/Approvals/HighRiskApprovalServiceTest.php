@@ -174,9 +174,16 @@ final class HighRiskApprovalServiceTest extends TestCase
 
         $privateCredential = Str::random(40);
         $safeReason = (string) $approval->reason;
-        foreach (['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey=', 'Bearer '] as $credentialPrefix) {
+        $credentialReasons = array_map(
+            static fn (string $prefix): string => $prefix.$privateCredential,
+            ['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey=', 'Bearer '],
+        );
+        $credentialReasons[] = '{"access_token":"'.$privateCredential.'"}';
+        $credentialReasons[] = "{'clientSecret':'".$privateCredential."'}";
+
+        foreach ($credentialReasons as $credentialReason) {
             try {
-                $approval->forceFill(['reason' => $credentialPrefix.$privateCredential])->save();
+                $approval->forceFill(['reason' => $credentialReason])->save();
                 $this->fail('Expected request creation boundary to reject credential-bearing reason.');
             } catch (\InvalidArgumentException $exception) {
                 $this->assertStringNotContainsString($privateCredential, $exception->getMessage());
@@ -185,7 +192,7 @@ final class HighRiskApprovalServiceTest extends TestCase
             $this->assertSame($safeReason, (string) $approval->reason);
 
             DB::table('admin_approvals')->where('id', (string) $approval->id)->update([
-                'reason' => $credentialPrefix.$privateCredential,
+                'reason' => $credentialReason,
             ]);
             $approval->refresh();
             try {
