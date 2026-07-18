@@ -98479,13 +98479,49 @@
     "branch": "codex/big5-en52-ranges-04",
     "title": "BIG5-EN52-RANGES-04: translate fifteen canonical Big Five ranges",
     "depends_on": ["BIG5-EN52-DOMAINS-03"],
-    "status": "github_checks_pending",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "c14c19e92797213aa245de44caa304bc9880bafa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3187",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-DOMAINS-03 merged as 5c520a55a6999df6b5f2083ccf6f993effd2152c after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
       "local_validation": {"status": "passed", "evidence": "Completed exactly 15 canonical high/mid/low range pages in five sequential domain cohorts, with 225 ordered H2 mappings, 65 FAQ mappings, 46 locked claims, and 11,649 reader-visible English words. The frozen expected-translated=22 validator passed with pending=30; all page frontmatter parsed under Ruby Psych after quoting one colon-bearing Openness excerpt; all JSON, state/YAML, link/source/claim, duplicate-body, word-count, CJK, diff, and exact-path gates passed. No legacy alias page was created and every controlled write counter remains zero."},
+      "github_required_checks": {"status": "passed", "evidence": "Final head a23ea8b420f1dd921085260d35994e81b3aa1fc4 passed all 9 required checks; PR #3187 was CLEAN/MERGEABLE with zero unresolved review threads."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "failure_reason": null,
+    "merged_at": "2026-07-18T23:03:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR4 scope; no range work starts before PR3 merges."},
+      {"at": "2026-07-18T22:31:00Z", "status": "implementation_in_progress", "note": "Started from exact merged PR3 SHA 5c520a55a6999df6b5f2083ccf6f993effd2152c. Scope is limited to the fifteen canonical range pages, their evidence, QA, ledger completions, and train closeout; aliases, facets, completed hubs/domains, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-18T22:55:07Z", "status": "local_validation_passed", "note": "Completed five sequential range cohorts with page-level validation after each cohort and final cumulative translated=22 validation. All 15 pages, 225 H2 mappings, 65 FAQs, 46 claims, 11,649 visible words, canonical links, source locks, standard YAML parsing, and exact scope checks passed; every controlled write counter remains zero."},
+      {"at": "2026-07-18T22:56:59Z", "status": "github_checks_pending", "note": "Committed the exact 33-path PR4 scope as c839068b0 and opened PR #3187. Merge remains gated on the final head passing every required check and having zero unresolved review threads."},
+      {"at": "2026-07-18T23:03:40Z", "status": "merged", "note": "Final head a23ea8b420f1dd921085260d35994e81b3aa1fc4 passed all 9 checks; PR #3187 was CLEAN/MERGEABLE with zero unresolved review threads and squash-merged as c14c19e92797213aa245de44caa304bc9880bafa. origin/main containment was verified and both remote and local feature branches were deleted before PR5 began."}
+    ],
+    "updated_at": "2026-07-18T23:03:40Z"
+  },
+  "BIG5-EN52-OPENNESS-FACETS-05": {
+    "id": "BIG5-EN52-OPENNESS-FACETS-05",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-openness-facets-05",
+    "title": "BIG5-EN52-OPENNESS-FACETS-05: translate six Openness facets",
+    "depends_on": ["BIG5-EN52-RANGES-04"],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "passed", "evidence": "BIG5-EN52-RANGES-04 merged as c14c19e92797213aa245de44caa304bc9880bafa after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
+      "local_validation": {"status": "passed", "evidence": "Completed exactly O1-O6 with 96 ordered H2 mappings, 31 FAQ mappings, 18 locked claims, and 5,899 reader-visible English words. The frozen expected-translated=28 validator passed with pending=24; standard YAML frontmatter, JSON, source/claim locks, canonical links, differentiated facet definitions, word counts, duplicate-body, CJK, diff, and exact-path gates passed. Ideas is not IQ, Feelings is not Neuroticism, Values is not political or moral rank, Actions is not impulsivity or thrill seeking, and every controlled write counter remains zero."},
       "github_required_checks": {"status": "pending", "evidence": null}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
@@ -98500,42 +98536,11 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "transitions": [
-      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR4 scope; no range work starts before PR3 merges."},
-      {"at": "2026-07-18T22:31:00Z", "status": "implementation_in_progress", "note": "Started from exact merged PR3 SHA 5c520a55a6999df6b5f2083ccf6f993effd2152c. Scope is limited to the fifteen canonical range pages, their evidence, QA, ledger completions, and train closeout; aliases, facets, completed hubs/domains, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
-      {"at": "2026-07-18T22:55:07Z", "status": "local_validation_passed", "note": "Completed five sequential range cohorts with page-level validation after each cohort and final cumulative translated=22 validation. All 15 pages, 225 H2 mappings, 65 FAQs, 46 claims, 11,649 visible words, canonical links, source locks, standard YAML parsing, and exact scope checks passed; every controlled write counter remains zero."},
-      {"at": "2026-07-18T22:56:59Z", "status": "github_checks_pending", "note": "Committed the exact 33-path PR4 scope as c839068b0 and opened PR #3187. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR5 scope; no O1-O6 work starts before PR4 merges."},
+      {"at": "2026-07-18T23:04:30Z", "status": "implementation_in_progress", "note": "Started from exact merged PR4 SHA c14c19e92797213aa245de44caa304bc9880bafa. Scope is limited to O1-O6, their evidence, QA, ledger completions, and train closeout; other facet domains, completed pages, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-18T23:13:34Z", "status": "local_validation_passed", "note": "Completed all six Openness facet pages with one-to-one sections, FAQ and claim maps. Cumulative translated=28 validation, standard YAML and JSON parsing, scientific/product boundary review, canonical-link checks, and exact-scope checks passed with every controlled write counter at zero."}
     ],
-    "updated_at": "2026-07-18T22:56:59Z"
-  },
-  "BIG5-EN52-OPENNESS-FACETS-05": {
-    "id": "BIG5-EN52-OPENNESS-FACETS-05",
-    "repo": "fap-api",
-    "base": "main",
-    "branch": "codex/big5-en52-openness-facets-05",
-    "title": "BIG5-EN52-OPENNESS-FACETS-05: translate six Openness facets",
-    "depends_on": ["BIG5-EN52-RANGES-04"],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {
-      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
-      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-RANGES-04 merge."},
-      "local_validation": {"status": "pending", "evidence": null},
-      "github_required_checks": {"status": "pending", "evidence": null}
-    },
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
-    "api_runtime_change": false,
-    "publish_allowed": false,
-    "deploy_allowed": false,
-    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR5 scope; no O1-O6 work starts before PR4 merges."}],
-    "updated_at": "2026-07-18T18:36:28Z"
+    "updated_at": "2026-07-18T23:13:34Z"
   },
   "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06": {
     "id": "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06",
