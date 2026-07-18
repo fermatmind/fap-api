@@ -11,6 +11,7 @@ use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 
 /**
@@ -33,6 +34,10 @@ final readonly class HighRiskApprovalService
     private const EXECUTION_SCHEMA_VERSION = 'solo-owner-ops-execution.v1';
 
     private const EXECUTION_AUTHORIZATION_TTL_MINUTES = 10;
+
+    private const STEP_UP_MAX_ATTEMPTS = 5;
+
+    private const STEP_UP_DECAY_SECONDS = 60;
 
     /** @var array<string, string> */
     private const TYPE_SURFACES = [
@@ -77,7 +82,7 @@ final readonly class HighRiskApprovalService
         int $actorAdminUserId,
         string $freshStepUpCode,
     ): AdminApproval {
-        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode, 'approve');
 
         return DB::transaction(function () use ($approvalId, $actorAdminUserId): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
@@ -129,7 +134,7 @@ final readonly class HighRiskApprovalService
         string $freshStepUpCode,
         string $reasonAppend = '',
     ): AdminApproval {
-        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode, 'reject');
 
         return DB::transaction(function () use ($approvalId, $actorAdminUserId, $reasonAppend): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
@@ -168,7 +173,7 @@ final readonly class HighRiskApprovalService
         int $actorAdminUserId,
         string $freshStepUpCode,
     ): AdminApproval {
-        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode, 'bind_legacy');
 
         return DB::transaction(function () use ($approvalId, $actorAdminUserId): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
@@ -239,7 +244,11 @@ final readonly class HighRiskApprovalService
         string $freshStepUpCode,
         bool $retryFailed = false,
     ): AdminApproval {
-        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+        $this->assertFreshStepUp(
+            $actorAdminUserId,
+            $freshStepUpCode,
+            $retryFailed ? 'retry' : 'execute',
+        );
 
         return DB::transaction(function () use ($approvalId, $actorAdminUserId, $retryFailed): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
@@ -437,8 +446,11 @@ final readonly class HighRiskApprovalService
         return $metadata;
     }
 
-    public function assertFreshStepUp(int $actorAdminUserId, string $freshStepUpCode): void
-    {
+    private function assertFreshStepUp(
+        int $actorAdminUserId,
+        string $freshStepUpCode,
+        string $action,
+    ): void {
         if ($actorAdminUserId <= 0) {
             throw new HighRiskApprovalValidationException('Current MFA/TOTP step-up verification is required.');
         }
@@ -447,9 +459,22 @@ final readonly class HighRiskApprovalService
         if (! $actor) {
             throw new HighRiskApprovalValidationException('Approval actor was not found.');
         }
-        if ($actor->totp_enabled_at === null || ! $this->verifyStepUpWithoutRequestSecrets($actor, $freshStepUpCode)) {
+
+        $rateLimitKey = sprintf(
+            'high-risk-approval-step-up:%s:%d',
+            preg_replace('/[^a-z0-9_-]+/i', '-', $action) ?: 'unspecified',
+            $actorAdminUserId,
+        );
+        if (RateLimiter::tooManyAttempts($rateLimitKey, self::STEP_UP_MAX_ATTEMPTS)) {
             throw new HighRiskApprovalValidationException('Current MFA/TOTP step-up verification is required.');
         }
+
+        if ($actor->totp_enabled_at === null || ! $this->verifyStepUpWithoutRequestSecrets($actor, $freshStepUpCode)) {
+            RateLimiter::hit($rateLimitKey, self::STEP_UP_DECAY_SECONDS);
+            throw new HighRiskApprovalValidationException('Current MFA/TOTP step-up verification is required.');
+        }
+
+        RateLimiter::clear($rateLimitKey);
     }
 
     private function verifyStepUpWithoutRequestSecrets(AdminUser $actor, string $freshStepUpCode): bool

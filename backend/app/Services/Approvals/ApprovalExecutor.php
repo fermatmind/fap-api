@@ -422,6 +422,11 @@ final class ApprovalExecutor
             return $value;
         }
 
+        $value = preg_replace(
+            '/\bAuthorization\b[\x22\x27]?\s*[:=]\s*[\x22\x27]?[^\r\n,;}\]\x22\x27]+/i',
+            'Authorization=[REDACTED]',
+            $value,
+        ) ?: $value;
         $value = preg_replace('/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/i', 'Bearer [REDACTED]', $value) ?: $value;
 
         return preg_replace(

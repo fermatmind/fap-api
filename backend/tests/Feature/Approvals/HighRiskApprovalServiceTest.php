@@ -17,6 +17,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 use Tests\TestCase;
@@ -360,11 +361,12 @@ final class HighRiskApprovalServiceTest extends TestCase
         $quotedAccessToken = Str::random(48);
         $quotedClientSecret = Str::random(48);
         $singleQuotedApiKey = Str::random(48);
+        $basicAuthorization = base64_encode(Str::random(48));
         $sanitize = new ReflectionMethod($executor, 'sanitizeErrorMessage');
         $sanitize->setAccessible(true);
         $message = (string) $sanitize->invoke(
             $executor,
-            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' bare Bearer '.$bearerToken.' json {"access_token":"'.$quotedAccessToken.'","clientSecret":"'.$quotedClientSecret.'"} json-ish {\'apiKey\':\''.$singleQuotedApiKey.'\'}',
+            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' bare Bearer '.$bearerToken.' json {"access_token":"'.$quotedAccessToken.'","clientSecret":"'.$quotedClientSecret.'"} json-ish {\'apiKey\':\''.$singleQuotedApiKey.'\'} Authorization: Basic '.$basicAuthorization,
         );
         $this->assertStringNotContainsString($privateValue, $message);
         $this->assertStringNotContainsString($accessToken, $message);
@@ -376,6 +378,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringNotContainsString($quotedAccessToken, $message);
         $this->assertStringNotContainsString($quotedClientSecret, $message);
         $this->assertStringNotContainsString($singleQuotedApiKey, $message);
+        $this->assertStringNotContainsString($basicAuthorization, $message);
         $this->assertStringContainsString('[REDACTED]', $message);
 
         $writeAudit = new ReflectionMethod($executor, 'writeAudit');
@@ -395,6 +398,7 @@ final class HighRiskApprovalServiceTest extends TestCase
                     'access_token' => $accessToken,
                     'cookie' => $cookie,
                     'provider_error' => 'apiKey='.$apiKey,
+                    'authorization_error' => 'Authorization: Basic '.$basicAuthorization,
                 ],
             ],
         );
@@ -406,6 +410,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringNotContainsString($cookie, (string) $audit->meta_json);
         $this->assertStringNotContainsString($apiKey, (string) $audit->meta_json);
         $this->assertStringNotContainsString($clientSecret, (string) $audit->meta_json);
+        $this->assertStringNotContainsString($basicAuthorization, (string) $audit->meta_json);
         $this->assertStringNotContainsString($privateValue, (string) $audit->reason);
         $this->assertStringNotContainsString($clientSecret, (string) $audit->reason);
         $this->assertStringContainsString('[REDACTED]', (string) $audit->meta_json);
@@ -561,6 +566,54 @@ final class HighRiskApprovalServiceTest extends TestCase
             'target_id' => (string) $approval->id,
             'action' => 'approval_execution_authorized',
         ]);
+    }
+
+    public function test_fresh_step_up_failures_are_rate_limited_per_actor_and_action(): void
+    {
+        $owner = $this->admin(totpEnabled: true);
+        $this->soloOwner($owner);
+        $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
+            'order_no' => 'ord-step-up-rate-limit',
+        ]);
+        $service = app(HighRiskApprovalService::class);
+        $rateLimitKey = 'high-risk-approval-step-up:approve:'.$owner->id;
+        RateLimiter::clear($rateLimitKey);
+
+        try {
+            for ($attempt = 0; $attempt < 5; $attempt++) {
+                try {
+                    $service->approve((string) $approval->id, (int) $owner->id, 'not-a-code');
+                    $this->fail('Expected invalid step-up to fail.');
+                } catch (HighRiskApprovalValidationException $exception) {
+                    $this->assertSame('Current MFA/TOTP step-up verification is required.', $exception->getMessage());
+                }
+            }
+
+            $this->assertSame(5, RateLimiter::attempts($rateLimitKey));
+            try {
+                $service->approve(
+                    (string) $approval->id,
+                    (int) $owner->id,
+                    $this->freshStepUpCode($owner),
+                );
+                $this->fail('Expected the rate-limited valid step-up not to be verified.');
+            } catch (HighRiskApprovalValidationException $exception) {
+                $this->assertSame('Current MFA/TOTP step-up verification is required.', $exception->getMessage());
+            }
+
+            $this->assertSame(AdminApproval::STATUS_PENDING, (string) $approval->fresh()->status);
+            $this->assertSame(0, RateLimiter::attempts('high-risk-approval-step-up:reject:'.$owner->id));
+        } finally {
+            RateLimiter::clear($rateLimitKey);
+        }
+
+        $service->approve(
+            (string) $approval->id,
+            (int) $owner->id,
+            $this->freshStepUpCode($owner),
+        );
+        $this->assertSame(0, RateLimiter::attempts($rateLimitKey));
+        $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approval->fresh()->status);
     }
 
     public function test_same_execution_actor_fresh_step_up_refreshes_authorization_ttl(): void
