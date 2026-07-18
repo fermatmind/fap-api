@@ -29,11 +29,23 @@ final class CareerDirectoryReadModelPerformanceTest extends TestCase
         foreach ([1046 => 300.0, 10000 => 500.0] as $count => $warmP95BudgetMs) {
             Cache::flush();
             $rows = $this->rows($count, (string) $family->id);
+            $responseCache = app(PublicCareerAuthorityResponseCache::class);
+            foreach ($rows as $row) {
+                $slug = (string) data_get($row, 'identity.canonical_slug');
+                $responseCache->publishJobDetailReadModel($slug, 'en', [
+                    'identity' => ['canonical_slug' => $slug],
+                    'fixture' => true,
+                ]);
+            }
             DB::connection()->flushQueryLog();
             DB::connection()->enableQueryLog();
             $memoryBefore = memory_get_usage(true);
             $buildStarted = hrtime(true);
-            $readModel = app(CareerDirectoryReadModelBuilder::class)->build($rows, 'en');
+            $readModel = app(CareerDirectoryReadModelBuilder::class)->build(
+                $rows,
+                'en',
+                static fn (string $slug, string $locale): bool => true,
+            );
             $buildElapsedMs = $this->elapsedMs($buildStarted);
             $queryCount = count(DB::getQueryLog());
             DB::connection()->disableQueryLog();
@@ -78,6 +90,29 @@ final class CareerDirectoryReadModelPerformanceTest extends TestCase
         }
 
         fwrite(STDOUT, "\ncareer_directory_read_model_metrics=".json_encode($observations, JSON_THROW_ON_ERROR)."\n");
+    }
+
+    public function test_directory_visibility_and_detail_readiness_remain_distinct(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'distinct-truth-family',
+            'title_en' => 'Distinct truth family',
+            'title_zh' => '独立真值行业',
+        ]);
+        $rows = $this->rows(2, (string) $family->id);
+        $readySlug = (string) data_get($rows, '0.identity.canonical_slug');
+
+        $readModel = app(CareerDirectoryReadModelBuilder::class)->build(
+            $rows,
+            'en',
+            static fn (string $slug): bool => $slug === $readySlug,
+        );
+
+        $this->assertCount(2, $readModel['items']);
+        $this->assertTrue($readModel['items'][0]['indexable']);
+        $this->assertTrue($readModel['items'][0]['detail_ready']);
+        $this->assertTrue($readModel['items'][1]['indexable']);
+        $this->assertFalse($readModel['items'][1]['detail_ready']);
     }
 
     /** @return list<array<string, mixed>> */

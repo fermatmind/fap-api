@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -155,6 +157,22 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertFalse(Cache::has($cacheKey));
     }
 
+    public function test_combined_warm_finishes_targeted_details_before_activating_directory(): void
+    {
+        $exitCode = Artisan::call('career:warm-public-authority-cache', [
+            '--job-detail-slugs' => 'missing-career',
+            '--job-detail-locales' => 'en',
+        ]);
+        $output = Artisan::output();
+
+        $this->assertSame(0, $exitCode);
+        $detailFinished = strpos($output, 'career_warm_phase=job_detail_en_missing-career state=finished');
+        $directoryStarted = strpos($output, 'career_warm_phase=job_index_en state=starting');
+        $this->assertIsInt($detailFinished);
+        $this->assertIsInt($directoryStarted);
+        $this->assertLessThan($directoryStarted, $detailFinished);
+    }
+
     public function test_command_can_warm_job_detail_caches_from_manifest_for_multiple_locales(): void
     {
         $manifestPath = tempnam(sys_get_temp_dir(), 'career-job-detail-manifest-');
@@ -230,6 +248,296 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         Cache::forget(PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:versions:'.$newVersion);
         $this->assertSame($oldPayload, $cache->directoryReadModelPayload('zh-CN'));
         $this->assertSame($oldVersion, $cache->directoryCacheStatus('zh-CN')['lkg_version']);
+    }
+
+    public function test_multi_locale_directory_activation_restores_all_pointers_when_later_locale_fails(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldEn = ['public_count' => 1, 'items' => [['slug' => 'old-en']]];
+        $oldZh = ['public_count' => 1, 'items' => [['slug' => 'old-zh']]];
+        $oldEnVersion = $cache->publishDirectoryReadModel('en', $oldEn);
+        $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', $oldZh);
+        $cacheManager = Cache::getFacadeRoot();
+        $zhActiveKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:active';
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhActiveKey, $oldZhVersion): bool {
+                    if ($key === $zhActiveKey && $value !== $oldZhVersion) {
+                        throw new \RuntimeException('synthetic zh activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            try {
+                $cache->publishDirectoryReadModelsAtomically([
+                    'en' => ['public_count' => 2, 'items' => [['slug' => 'new-en']]],
+                    'zh-CN' => ['public_count' => 2, 'items' => [['slug' => 'new-zh']]],
+                ]);
+                $this->fail('The synthetic second-locale activation should fail.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('synthetic zh activation failure', $exception->getMessage());
+            }
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame($oldEnVersion, $cache->directoryCacheStatus('en')['active_version']);
+        $this->assertSame($oldZhVersion, $cache->directoryCacheStatus('zh-CN')['active_version']);
+        $this->assertSame($oldEn, $cache->directoryReadModelPayload('en'));
+        $this->assertSame($oldZh, $cache->directoryReadModelPayload('zh-CN'));
+    }
+
+    public function test_atomic_directory_activation_stays_committed_when_legacy_cleanup_fails(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldEn = ['public_count' => 1, 'items' => [['slug' => 'old-en']]];
+        $newEn = ['public_count' => 2, 'items' => [['slug' => 'new-en']]];
+        $newZh = ['public_count' => 2, 'items' => [['slug' => 'new-zh']]];
+        $cache->publishDirectoryReadModel('en', $oldEn);
+        $legacyEnKey = PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':en';
+        Cache::forever($legacyEnKey, $oldEn);
+        $cacheManager = Cache::getFacadeRoot();
+        $legacyCleanupAttempts = 0;
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static fn (string $key, mixed $value): bool => $cacheManager->forever($key, $value));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static function (string $key) use ($cacheManager, $legacyEnKey, &$legacyCleanupAttempts): bool {
+                    if ($key === $legacyEnKey) {
+                        $legacyCleanupAttempts++;
+
+                        throw new \RuntimeException('synthetic legacy cleanup failure');
+                    }
+
+                    return $cacheManager->forget($key);
+                });
+
+            $versions = $cache->publishDirectoryReadModelsAtomically([
+                'en' => $newEn,
+                'zh-CN' => $newZh,
+            ]);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame(1, $legacyCleanupAttempts);
+        $this->assertSame($versions['en'], $cache->directoryCacheStatus('en')['active_version']);
+        $this->assertSame($versions['zh-CN'], $cache->directoryCacheStatus('zh-CN')['active_version']);
+        $this->assertSame($newEn, $cache->directoryReadModelPayload('en'));
+        $this->assertSame($newZh, $cache->directoryReadModelPayload('zh-CN'));
+    }
+
+    public function test_promotion_read_model_activation_restores_job_indexes_when_directory_switch_fails(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'atomic-list-family',
+            'title_en' => 'Atomic List Family',
+            'title_zh' => '原子列表职业族',
+        ]);
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'atomic-list-career',
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'direct_match',
+            'canonical_title_en' => 'Atomic List Career',
+            'canonical_title_zh' => '原子列表职业',
+            'search_h1_zh' => '原子列表职业',
+            'task_prototype_signature' => [],
+            'trust_inheritance_scope' => [],
+        ]);
+        $projectionItems = array_map(
+            static fn (string $locale): array => [
+                'slug' => 'atomic-list-career',
+                'locale' => $locale,
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+            ['en', 'zh'],
+        );
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($projectionItems as $item) {
+            $prepared = $cache->prepareJobDetailPayloadForExposure(
+                'atomic-list-career',
+                (string) $item['locale'],
+                $item,
+            );
+            $this->assertSame('pass', $cache->activatePreparedJobDetailPayloadsForExposure([$prepared])['status']);
+        }
+        $oldJobIndexes = [
+            'en' => ['bundle_kind' => 'career_job_index', 'items' => [['sentinel' => 'old-en']]],
+            'zh-CN' => ['bundle_kind' => 'career_job_index', 'items' => [['sentinel' => 'old-zh']]],
+        ];
+        foreach ($oldJobIndexes as $locale => $payload) {
+            Cache::forever(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':'.$locale.':public', $payload);
+        }
+        $oldEnVersion = $cache->publishDirectoryReadModel('en', ['public_count' => 0, 'items' => []]);
+        $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', ['public_count' => 0, 'items' => []]);
+        $cacheManager = Cache::getFacadeRoot();
+        $zhDirectoryActiveKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:active';
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhDirectoryActiveKey, $oldZhVersion): bool {
+                    if ($key === $zhDirectoryActiveKey && $value !== $oldZhVersion) {
+                        throw new \RuntimeException('synthetic promotion directory activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            try {
+                $cache->warmDirectoryReadModels(
+                    ['en', 'zh-CN'],
+                    null,
+                    $projectionItems,
+                    activateJobIndexPayloads: true,
+                );
+                $this->fail('The synthetic directory activation should fail.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('synthetic promotion directory activation failure', $exception->getMessage());
+            }
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        foreach ($oldJobIndexes as $locale => $payload) {
+            $this->assertSame(
+                $payload,
+                Cache::get(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':'.$locale.':public'),
+            );
+        }
+        $this->assertSame($oldEnVersion, $cache->directoryCacheStatus('en')['active_version']);
+        $this->assertSame($oldZhVersion, $cache->directoryCacheStatus('zh-CN')['active_version']);
+    }
+
+    public function test_multi_locale_directory_payloads_are_built_only_after_all_rebuild_locks_are_held(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'lock-guard-family',
+            'title_en' => 'Lock Guard Family',
+            'title_zh' => '锁保护职业族',
+        ]);
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'lock-guard-career',
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'direct_match',
+            'canonical_title_en' => 'Lock Guard Career',
+            'canonical_title_zh' => '锁保护职业',
+            'search_h1_zh' => '锁保护职业',
+            'task_prototype_signature' => [],
+            'trust_inheritance_scope' => [],
+        ]);
+        $projectionItems = array_map(
+            static fn (string $locale): array => [
+                'slug' => 'lock-guard-career',
+                'locale' => $locale,
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+            ['en', 'zh'],
+        );
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $lockState = (object) [
+            'depth' => 0,
+            'max_depth' => 0,
+            'leases' => [],
+            'waits' => [],
+        ];
+        $detailReadinessReads = 0;
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->twice()
+                ->andReturnUsing(static function (string $key, int $seconds) use ($lockState): object {
+                    $lockState->leases[] = $seconds;
+
+                    return new class($lockState)
+                    {
+                        public function __construct(private readonly object $state) {}
+
+                        public function block(int $seconds, callable $callback): mixed
+                        {
+                            $this->state->waits[] = $seconds;
+                            $this->state->depth++;
+                            $this->state->max_depth = max($this->state->max_depth, $this->state->depth);
+
+                            try {
+                                return $callback();
+                            } finally {
+                                $this->state->depth--;
+                            }
+                        }
+                    };
+                });
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(function (string $key, mixed $default = null) use ($cacheManager, $lockState, &$detailReadinessReads): mixed {
+                    if (
+                        str_starts_with($key, PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':')
+                        && str_ends_with($key, ':active')
+                    ) {
+                        $detailReadinessReads++;
+                        $this->assertSame(2, $lockState->depth, 'Detail readiness was inspected before both locale rebuild locks were held.');
+                    }
+
+                    return $cacheManager->get($key, $default);
+                });
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static fn (string $key, mixed $value): bool => $cacheManager->forever($key, $value));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+
+            $cache->warmDirectoryReadModels(['en', 'zh-CN'], null, $projectionItems);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertGreaterThan(0, $detailReadinessReads);
+        $this->assertSame(2, $lockState->max_depth);
+        $this->assertSame([185, 120], $lockState->leases);
+        $this->assertSame([65, 65], $lockState->waits);
     }
 
     public function test_fifty_cold_rebuild_contenders_only_execute_one_builder(): void

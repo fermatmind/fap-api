@@ -189,6 +189,19 @@ final class CareerJobListBundleBuilder
     }
 
     /**
+     * Build bounded directory rows from an explicit, already-validated
+     * post-promotion projection instead of the potentially stale materialized
+     * runtime lookup.
+     *
+     * @param  list<array<string, mixed>>  $runtimeDetailItems
+     * @return list<CareerJobListItemBundle>
+     */
+    public function buildFromRuntimeProjectionItems(array $runtimeDetailItems): array
+    {
+        return $this->buildRuntimeProjectionCareerJobItems([], false, $runtimeDetailItems);
+    }
+
+    /**
      * @param  list<string>  $excludedSlugs
      * @param  array<string, true>|null  $allowedSlugs
      * @return list<CareerJobListItemBundle>

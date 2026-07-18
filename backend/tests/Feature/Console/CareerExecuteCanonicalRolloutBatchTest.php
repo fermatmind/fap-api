@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\Models\IndexState;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -17,6 +22,8 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     use RefreshDatabase;
 
     private string $tmpProjectionPath;
+
+    private ?string $materializedProjectionDir = null;
 
     protected function setUp(): void
     {
@@ -48,6 +55,9 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     {
         if (is_file($this->tmpProjectionPath)) {
             @unlink($this->tmpProjectionPath);
+        }
+        if ($this->materializedProjectionDir !== null && is_dir($this->materializedProjectionDir)) {
+            File::deleteDirectory($this->materializedProjectionDir);
         }
 
         parent::tearDown();
@@ -286,6 +296,393 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame(2, data_get($payload, 'persistence_check.found_published'));
         $this->assertSame(0, data_get($payload, 'persistence_check.not_published_count'));
         $this->assertFalse($payload['rollback_required'] ?? true);
+        $this->assertSame([
+            'build_projection',
+            'stage_immutable_detail_projection',
+            'verify_staged_detail_payload',
+            'expose_runtime_projection_flags',
+            'activate_detail_pointer_batch',
+            'rebuild_and_activate_directory_read_model',
+        ], $payload['atomic_exposure_sequence'] ?? null);
+    }
+
+    public function test_apply_prepares_a_cold_candidate_cache_before_public_exposure(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $this->assertSame(
+            CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE,
+            app(CareerRuntimePublishProjectionVisibility::class)->itemForSlug('actuaries', 'en')['runtime_publish_state'] ?? null,
+        );
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'zh'));
+        $this->assertNotContains(
+            'actuaries',
+            array_map(
+                static fn (array $item): string => (string) data_get($item, 'identity.canonical_slug', ''),
+                $cache->jobIndexPayload('en')['items'],
+            ),
+        );
+
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--batch-id' => 'batch-actuaries-cache-cold',
+            '--slugs' => 'actuaries',
+            '--locales' => 'en,zh',
+            '--rollback-group' => 'actuaries',
+            '--apply' => true,
+            '--projection' => $this->tmpProjectionPath,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $payload = json_decode(Artisan::output(), true);
+        $this->assertIsArray($payload);
+        $this->assertSame('promoted_success', $payload['status'] ?? null);
+        $this->assertSame('pass', data_get($payload, 'cache_preparation.status'));
+        $this->assertCount(2, data_get($payload, 'cache_preparation.entries'));
+        $this->assertSame('pass', data_get($payload, 'detail_cache_activation.status'));
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'zh'));
+        $cachedPayload = $cache->jobDetailCacheReadiness('actuaries', 'en')['payload'];
+        $this->assertTrue(
+            (bool) data_get($cachedPayload, 'seo_contract.index_eligible'),
+            json_encode(data_get($cachedPayload, 'seo_contract'), JSON_THROW_ON_ERROR),
+        );
+        $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_en.status'));
+        $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_zh_cn.status'));
+        $this->assertTrue(data_get($payload, 'directory_activation.career_directory_en.job_index_activated'));
+        $this->assertContains(
+            'actuaries',
+            array_map(
+                static fn (array $item): string => (string) data_get($item, 'identity.canonical_slug', ''),
+                $cache->jobIndexPayload('en')['items'],
+            ),
+        );
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+        );
+
+        $cache->warmDirectoryReadModels(['en']);
+
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+            'A later directory-only warm must preserve a verified snapshot-backed promotion.',
+        );
+
+        $cache->warm();
+
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+            'A later broad authority warm must preserve a verified snapshot-backed promotion.',
+        );
+
+        $versionBeforeWarm = $cache->jobDetailCacheReadiness('actuaries', 'en')['version'];
+        $warm = $cache->warmJobDetailPayload('actuaries', 'en');
+        $this->assertSame('cached', $warm['status']);
+        $this->assertNotSame($versionBeforeWarm, $warm['version']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        $forgetWarm = $cache->warmJobDetailPayload('actuaries', 'en', true);
+        $this->assertSame('cached', $forgetWarm['status']);
+        $this->assertNotSame($warm['version'], $forgetWarm['version']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        $cache->warmDirectoryReadModels(['en']);
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+            'A targeted detail warm must retain snapshot-backed directory authority.',
+        );
+    }
+
+    public function test_candidate_request_cannot_purge_a_staged_pre_exposure_payload(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+
+        $this->assertSame('ready', $prepared['status']);
+        $this->assertSame('ready_staged', $prepared['classification']);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared]);
+
+        $this->assertSame('pass', $activation['status']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame($prepared['version'], $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+    }
+
+    public function test_stale_candidate_cannot_use_lkg_or_legacy_as_first_exposure_authority(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+        $this->assertSame('pass', $cache->activatePreparedJobDetailPayloadsForExposure([$prepared])['status']);
+
+        $lkgKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':actuaries:en:lkg';
+        Cache::forever($lkgKey, $prepared['version']);
+        Cache::forget($cache->jobDetailActiveVersionKey('actuaries', 'en'));
+
+        $this->assertSame('ready_lkg', $cache->jobDetailCacheReadiness('actuaries', 'en')['classification']);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        Cache::forget($lkgKey);
+        Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), ['fixture' => 'legacy']);
+
+        $this->assertSame('legacy_migratable', $cache->jobDetailCacheReadiness('actuaries', 'en')['classification']);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
+    }
+
+    public function test_apply_reports_committed_write_as_not_rolled_back_when_remediation_is_unverified(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $zhActiveKey = $cache->jobDetailActiveVersionKey('actuaries', 'zh');
+        $snapshotCleanupAttempts = 0;
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static function (string $key) use ($cacheManager, &$snapshotCleanupAttempts): bool {
+                    if (str_contains($key, ':exposure-projections:')) {
+                        $snapshotCleanupAttempts++;
+
+                        throw new \RuntimeException('synthetic exposure snapshot cleanup failure');
+                    }
+
+                    return $cacheManager->forget($key);
+                });
+            $cacheMock->shouldReceive('put')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->put($key, $value, $ttl));
+            $cacheMock->shouldReceive('add')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->add($key, $value, $ttl));
+            $cacheMock->shouldReceive('store')
+                ->andReturnUsing(static fn (?string $name = null) => $cacheManager->store($name));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhActiveKey): bool {
+                    if ($key === $zhActiveKey) {
+                        throw new \RuntimeException('synthetic post-commit detail activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+                '--batch-id' => 'batch-actuaries-post-commit-cache-failure',
+                '--slugs' => 'actuaries',
+                '--locales' => 'en,zh',
+                '--rollback-group' => 'actuaries',
+                '--apply' => true,
+                '--projection' => $this->tmpProjectionPath,
+                '--json' => true,
+            ]);
+            $payload = json_decode(Artisan::output(), true);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertSame('rollback_write_not_persisted', $payload['status'] ?? null);
+        $this->assertTrue($payload['writes_database'] ?? false);
+        $this->assertTrue($payload['database_commit_succeeded'] ?? false);
+        $this->assertFalse($payload['promotion_rolled_back'] ?? true);
+        $this->assertTrue($payload['rollback_required'] ?? false);
+        $this->assertFalse(data_get($payload, 'remediation.succeeded', true));
+        $this->assertSame('rollback_not_persisted', data_get($payload, 'remediation.status'));
+        $this->assertGreaterThan(0, $snapshotCleanupAttempts);
+        $this->assertContains(
+            'post_promotion_exposure_snapshot_cleanup_failed',
+            array_column($payload['failures'] ?? [], 'reason'),
+        );
+    }
+
+    public function test_directory_failure_does_not_roll_back_database_when_active_snapshot_cleanup_is_unverified(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $enDirectoryActiveKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':en:active';
+        $snapshotCleanupAttempts = 0;
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static function (string $key) use ($cacheManager, &$snapshotCleanupAttempts): bool {
+                    if (str_contains($key, ':exposure-projections:')) {
+                        $snapshotCleanupAttempts++;
+
+                        throw new \RuntimeException('synthetic active snapshot cleanup failure');
+                    }
+
+                    return $cacheManager->forget($key);
+                });
+            $cacheMock->shouldReceive('put')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->put($key, $value, $ttl));
+            $cacheMock->shouldReceive('add')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->add($key, $value, $ttl));
+            $cacheMock->shouldReceive('store')
+                ->andReturnUsing(static fn (?string $name = null) => $cacheManager->store($name));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $enDirectoryActiveKey): bool {
+                    if ($key === $enDirectoryActiveKey) {
+                        throw new \RuntimeException('synthetic post-commit directory activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+                '--batch-id' => 'batch-actuaries-cache-revocation-unverified',
+                '--slugs' => 'actuaries',
+                '--locales' => 'en,zh',
+                '--rollback-group' => 'actuaries',
+                '--apply' => true,
+                '--projection' => $this->tmpProjectionPath,
+                '--json' => true,
+            ]);
+            $payload = json_decode(Artisan::output(), true);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertSame('post_commit_cache_revocation_unverified', $payload['status'] ?? null);
+        $this->assertTrue($payload['writes_database'] ?? false);
+        $this->assertTrue($payload['database_commit_succeeded'] ?? false);
+        $this->assertFalse($payload['automatic_database_remediation_allowed'] ?? true);
+        $this->assertFalse($payload['promotion_rolled_back'] ?? true);
+        $this->assertTrue($payload['rollback_required'] ?? false);
+        $this->assertFalse(data_get($payload, 'remediation.attempted', true));
+        $this->assertSame('blocked_cache_revocation_unverified', data_get($payload, 'remediation.status'));
+        $this->assertGreaterThan(0, $snapshotCleanupAttempts);
+        $this->assertSame(
+            'indexed',
+            IndexState::query()
+                ->where('occupation_id', Occupation::query()->where('canonical_slug', 'actuaries')->value('id'))
+                ->latest('changed_at')
+                ->latest('created_at')
+                ->value('index_state'),
+        );
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
+        $this->assertContains(
+            'post_promotion_exposure_snapshot_cleanup_failed',
+            array_column($payload['failures'] ?? [], 'reason'),
+        );
+    }
+
+    public function test_prepared_detail_activation_blocks_when_exposure_projection_snapshot_is_missing(): void
+    {
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+        $cache->forgetPreparedJobDetailExposureProjectionSnapshots([$prepared]);
+
+        $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared]);
+
+        $this->assertSame('blocked', $activation['status']);
+        $this->assertSame('prepared_detail_activation_failed', data_get($activation, 'failures.0.reason'));
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+    }
+
+    public function test_prepared_detail_activation_restores_all_pointers_when_a_later_locale_fails(): void
+    {
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldEnVersion = $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'old-en']);
+        $oldZhVersion = $cache->publishJobDetailReadModel('actuaries', 'zh', ['fixture' => 'old-zh']);
+        $prepared = collect($publishedProjection['items'])
+            ->map(fn (array $item): array => $cache->prepareJobDetailPayloadForExposure(
+                'actuaries',
+                (string) $item['locale'],
+                $item,
+            ))
+            ->values()
+            ->all();
+        $cacheManager = Cache::getFacadeRoot();
+        $zhActiveKey = $cache->jobDetailActiveVersionKey('actuaries', 'zh');
+        $lockLeases = [];
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static function (string $key, int $seconds) use ($cacheManager, &$lockLeases): object {
+                    $lockLeases[] = $seconds;
+
+                    return $cacheManager->lock($key, $seconds);
+                });
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhActiveKey, $oldZhVersion): bool {
+                    if ($key === $zhActiveKey && $value !== $oldZhVersion) {
+                        throw new \RuntimeException('synthetic zh detail activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            $activation = $cache->activatePreparedJobDetailPayloadsForExposure($prepared);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame('blocked', $activation['status']);
+        $this->assertSame($oldEnVersion, $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
+        $this->assertSame($oldZhVersion, $cache->jobDetailCacheReadiness('actuaries', 'zh')['version']);
+        $this->assertSame([155, 120], $lockLeases);
     }
 
     public function test_command_writes_audit_report(): void
@@ -484,5 +881,17 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     private function writeRawProjection(array $projection): void
     {
         File::put($this->tmpProjectionPath, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    /** @param array<string, mixed> $projection */
+    private function writeMaterializedProjection(array $projection): void
+    {
+        $this->materializedProjectionDir = storage_path(
+            'app/private/career_runtime_publish_projection/test-stale-candidate-'.uniqid(),
+        );
+        File::ensureDirectoryExists($this->materializedProjectionDir);
+        $path = $this->materializedProjectionDir.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
+        File::put($path, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        touch($path, time() + 3600);
     }
 }

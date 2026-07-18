@@ -66,6 +66,7 @@ final class CareerJobListApiTest extends TestCase
     {
         $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-index']));
         $this->compileJobChain(CareerFoundationFixture::seedMissingTruthChain());
+        $this->markDetailReady('backend-architect-index');
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
@@ -106,11 +107,60 @@ final class CareerJobListApiTest extends TestCase
                 ]],
             ]
         );
+        $this->markDetailReady('cached-career-index', 'en');
 
         $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.identity.canonical_slug', 'cached-career-index');
+    }
+
+    public function test_it_filters_cached_job_index_when_detail_authority_is_not_ready(): void
+    {
+        $cacheKey = PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public';
+        Cache::put($cacheKey, [
+            'bundle_kind' => 'career_job_index',
+            'bundle_version' => 'career.protocol.job_index.v1',
+            'items' => [[
+                'identity' => ['canonical_slug' => 'cached-cold-detail'],
+                'seo_contract' => ['canonical_path' => '/career/jobs/cached-cold-detail'],
+            ]],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs?locale=en')
+            ->assertOk()
+            ->assertJsonCount(0, 'items');
+        $this->assertCount(1, Cache::get($cacheKey)['items']);
+
+        $this->markDetailReady('cached-cold-detail', 'en');
+
+        $this->getJson('/api/v0.5/career/jobs?locale=en')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'cached-cold-detail');
+    }
+
+    public function test_rebuilt_job_index_requires_another_rebuild_after_detail_warm(): void
+    {
+        $cacheKey = PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public';
+        $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'rebuilt-cold-detail']));
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(0, 'items');
+        $this->assertCount(0, Cache::get($cacheKey)['items']);
+
+        $this->markDetailReady('rebuilt-cold-detail');
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(0, 'items');
+
+        Cache::forget($cacheKey);
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'rebuilt-cold-detail');
     }
 
     public function test_it_reads_only_the_latest_completed_compile_run_for_public_index(): void
@@ -123,6 +173,7 @@ final class CareerJobListApiTest extends TestCase
             CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'latest-career-index']),
             5
         );
+        $this->markDetailReady('latest-career-index');
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
@@ -179,6 +230,7 @@ final class CareerJobListApiTest extends TestCase
         ]);
         $this->addDisplayAssetBackedCrosswalks($occupation, '29-1291', '29-1291.00');
         $this->createDisplayAsset($occupation->refresh());
+        $this->markDetailReady('acupuncturists');
 
         $response = $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
@@ -241,6 +293,9 @@ final class CareerJobListApiTest extends TestCase
                 releaseGatePass: array_fill_keys($slugs, true),
             ),
         );
+        foreach ($slugs as $slug) {
+            $this->markDetailReady($slug);
+        }
 
         DB::flushQueryLog();
         DB::enableQueryLog();
@@ -281,6 +336,7 @@ final class CareerJobListApiTest extends TestCase
             'truth_market' => 'US',
             'display_market' => 'zh-CN',
         ]);
+        $this->markDetailReady('agricultural-workers-all-other');
 
         $response = $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
@@ -329,6 +385,7 @@ final class CareerJobListApiTest extends TestCase
             'truth_market' => 'US',
             'display_market' => 'zh-CN',
         ]);
+        $this->markDetailReady('actuaries');
         $this->createDirectoryDraftOccupation([
             'canonical_slug' => 'accountants-and-auditors',
             'canonical_title_en' => 'Accountants and Auditors',
@@ -444,6 +501,14 @@ final class CareerJobListApiTest extends TestCase
         app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation'], [
             'compile_run_id' => $compileRun->id,
             'import_run_id' => $importRun->id,
+        ]);
+    }
+
+    private function markDetailReady(string $slug, string $locale = 'zh-CN'): void
+    {
+        app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel($slug, $locale, [
+            'identity' => ['canonical_slug' => $slug],
+            'fixture' => true,
         ]);
     }
 

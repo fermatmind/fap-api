@@ -28,8 +28,10 @@ final class CareerDirectoryAuthorityService
         $perPage = min(100, max(1, $perPage));
 
         $readModel = $this->responseCache->directoryReadModelPayload($publicLocale);
-        $items = is_array($readModel['items'] ?? null) ? $readModel['items'] : [];
-        $publicDetailIndexableCount = (int) ($readModel['public_count'] ?? count($items));
+        $items = $this->readyIndexableItems(
+            is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
+        );
+        $publicDetailIndexableCount = count($items);
         $queryNormalized = $this->normalizeFilter($query);
         $familyNormalized = $this->normalizeFilter($family);
 
@@ -39,9 +41,7 @@ final class CareerDirectoryAuthorityService
                 $items,
                 fn (array $item): bool => $this->matchesQuery($item, $queryNormalized),
             ));
-        $facets = $queryNormalized === ''
-            ? (is_array($readModel['facets'] ?? null) ? $readModel['facets'] : [])
-            : $this->familyFacets($queryFilteredItems);
+        $facets = $this->familyFacets($queryFilteredItems);
 
         $filteredItems = $familyNormalized === ''
             ? $queryFilteredItems
@@ -94,10 +94,11 @@ final class CareerDirectoryAuthorityService
     {
         $publicLocale = $this->normalizePublicLocale($locale);
         $readModel = $this->responseCache->directoryReadModelPayload($publicLocale);
+        $items = $this->readyIndexableItems(
+            is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
+        );
 
-        return is_array($readModel['items'] ?? null)
-            ? array_map(fn (array $item): array => $this->publicItem($item), $readModel['items'])
-            : [];
+        return array_map(fn (array $item): array => $this->publicItem($item), $items);
     }
 
     /**
@@ -168,6 +169,17 @@ final class CareerDirectoryAuthorityService
         unset($item['search_text']);
 
         return $item;
+    }
+
+    /** @param list<mixed> $items @return list<array<string, mixed>> */
+    private function readyIndexableItems(array $items): array
+    {
+        return array_values(array_filter(
+            $items,
+            static fn (mixed $item): bool => is_array($item)
+                && ($item['indexable'] ?? false) === true
+                && ($item['detail_ready'] ?? false) === true,
+        ));
     }
 
     private function normalizePublicLocale(string $locale): string

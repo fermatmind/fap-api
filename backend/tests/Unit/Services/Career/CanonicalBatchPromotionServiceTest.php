@@ -6,11 +6,23 @@ namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Expansion\CanonicalBatchPromotionService;
 use App\Domain\Career\Expansion\CanonicalExpansionManifestService;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use Tests\Fixtures\Career\CareerJobDetailExposureReadinessFixture;
 use Tests\TestCase;
 
 final class CanonicalBatchPromotionServiceTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->instance(
+            CareerJobDetailExposureReadiness::class,
+            new CareerJobDetailExposureReadinessFixture,
+        );
+    }
+
     public function test_dry_run_promotion_plan_does_not_mutate_state(): void
     {
         $manifest = $this->manifest();

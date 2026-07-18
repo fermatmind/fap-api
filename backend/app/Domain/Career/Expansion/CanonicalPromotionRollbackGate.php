@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace App\Domain\Career\Expansion;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 
 final class CanonicalPromotionRollbackGate
 {
+    public function __construct(
+        private readonly CareerJobDetailExposureReadiness $detailExposureReadiness,
+    ) {}
+
     /**
      * @var list<string>
      */
@@ -83,8 +88,13 @@ final class CanonicalPromotionRollbackGate
     /**
      * @return array<string, mixed>
      */
-    public function validatePostPromotion(array $manifestPayload, array $truth, ?array $projection = null): array
-    {
+    /** @param list<array<string, mixed>> $preparedDetailCaches */
+    public function validatePostPromotion(
+        array $manifestPayload,
+        array $truth,
+        ?array $projection = null,
+        array $preparedDetailCaches = [],
+    ): array {
         $manifest = $this->manifest($manifestPayload);
         $transaction = CanonicalPromotionTransaction::fromManifest($manifest, CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED, false);
         $truthItems = $this->items($truth);
@@ -109,6 +119,30 @@ final class CanonicalPromotionRollbackGate
                 if (! (bool) ($item[$field] ?? false)) {
                     $failures[] = $this->failure('post_promotion_'.$field.'_missing', $this->slug($item), $this->locale($item));
                 }
+            }
+
+            $preparedReadiness = $this->preparedDetailReadiness(
+                $preparedDetailCaches,
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            );
+            $readiness = $preparedReadiness ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            );
+            $readinessPasses = $preparedReadiness !== null
+                ? ($preparedReadiness['classification'] ?? null) === 'ready_staged'
+                : $this->detailExposureReadiness->jobDetailCacheIsReady(
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                );
+            if (! $readinessPasses) {
+                $failures[] = $this->failure(
+                    'post_promotion_detail_cache_not_ready',
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                    ['classification' => $readiness['classification']],
+                );
             }
         }
 
@@ -406,6 +440,37 @@ final class CanonicalPromotionRollbackGate
     private function locale(array $item): string
     {
         return strtolower(trim((string) ($item['locale'] ?? '')));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $preparedDetailCaches
+     * @return array{classification: string, payload: array<string, mixed>|null, version: string|null}|null
+     */
+    private function preparedDetailReadiness(array $preparedDetailCaches, string $slug, string $locale): ?array
+    {
+        foreach ($preparedDetailCaches as $entry) {
+            if (
+                $this->slug($entry) === $slug
+                && $this->preparedLocale((string) ($entry['locale'] ?? '')) === $this->preparedLocale($locale)
+                && ($entry['status'] ?? null) === 'ready'
+                && ($entry['classification'] ?? null) === 'ready_staged'
+                && is_string($entry['version'] ?? null)
+                && trim((string) $entry['version']) !== ''
+            ) {
+                return [
+                    'classification' => 'ready_staged',
+                    'payload' => null,
+                    'version' => (string) $entry['version'],
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    private function preparedLocale(string $locale): string
+    {
+        return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
     }
 
     /**

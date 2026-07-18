@@ -5,15 +5,25 @@ declare(strict_types=1);
 namespace App\Domain\Career\Expansion;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 
 final class CanonicalPostPromotionReleaseGateValidator
 {
+    public function __construct(
+        private readonly CareerJobDetailExposureReadiness $detailExposureReadiness,
+    ) {}
+
     /**
      * @return list<array<string, mixed>>
      */
-    public function validate(array $manifestPayload, array $truth, ?array $projection = null): array
-    {
+    /** @param list<array<string, mixed>> $preparedDetailCaches */
+    public function validate(
+        array $manifestPayload,
+        array $truth,
+        ?array $projection = null,
+        array $preparedDetailCaches = [],
+    ): array {
         $manifest = $this->manifest($manifestPayload);
         $transaction = CanonicalPromotionTransaction::fromManifest($manifest, CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED, false);
         $truthItems = $this->items($truth);
@@ -50,6 +60,30 @@ final class CanonicalPostPromotionReleaseGateValidator
                     'public_resolution_type' => $item['public_resolution_type'] ?? null,
                 ]);
             }
+
+            $preparedReadiness = $this->preparedDetailReadiness(
+                $preparedDetailCaches,
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            );
+            $readiness = $preparedReadiness ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            );
+            $readinessPasses = $preparedReadiness !== null
+                ? $this->cacheReadinessPasses($preparedReadiness)
+                : $this->detailExposureReadiness->jobDetailCacheIsReady(
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                );
+            if (! $readinessPasses) {
+                $failures[] = $this->failure(
+                    'post_promotion_detail_cache_not_ready',
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                    ['classification' => $readiness['classification']],
+                );
+            }
         }
 
         if (count($states) > 1) {
@@ -71,8 +105,17 @@ final class CanonicalPostPromotionReleaseGateValidator
             ],
             'required_fields' => CanonicalPromotionRollbackGate::REQUIRED_POST_PROMOTION_FIELDS,
             'release_gate_requirements' => [
+                'detail_cache_ready' => true,
                 'route' => true,
                 'indexing' => true,
+            ],
+            'required_exposure_sequence' => [
+                'build_projection',
+                'stage_immutable_detail_projection',
+                'verify_staged_detail_payload',
+                'expose_runtime_projection_flags',
+                'activate_detail_pointer_batch',
+                'rebuild_and_activate_directory_read_model',
             ],
             'failures' => $failures,
         ];
@@ -208,6 +251,37 @@ final class CanonicalPostPromotionReleaseGateValidator
     }
 
     /**
+     * @param  list<array<string, mixed>>  $preparedDetailCaches
+     * @return array{classification: string, payload: array<string, mixed>|null, version: string|null}|null
+     */
+    private function preparedDetailReadiness(array $preparedDetailCaches, string $slug, string $locale): ?array
+    {
+        foreach ($preparedDetailCaches as $entry) {
+            if (
+                $this->slug($entry) === $slug
+                && $this->preparedLocale((string) ($entry['locale'] ?? '')) === $this->preparedLocale($locale)
+                && ($entry['status'] ?? null) === 'ready'
+                && ($entry['classification'] ?? null) === 'ready_staged'
+                && is_string($entry['version'] ?? null)
+                && trim((string) $entry['version']) !== ''
+            ) {
+                return [
+                    'classification' => 'ready_staged',
+                    'payload' => null,
+                    'version' => (string) $entry['version'],
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    private function preparedLocale(string $locale): string
+    {
+        return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
+    }
+
+    /**
      * @param  array<string, mixed>  $context
      */
     private function failure(string $reason, ?string $slug = null, ?string $locale = null, array $context = []): array
@@ -220,5 +294,15 @@ final class CanonicalPostPromotionReleaseGateValidator
         ], static fn (mixed $value): bool => $value !== null && $value !== []);
 
         return $failure;
+    }
+
+    /** @param array{classification: string, payload: array<string, mixed>|null, version: string|null} $readiness */
+    private function cacheReadinessPasses(array $readiness): bool
+    {
+        return in_array(
+            $readiness['classification'],
+            ['ready_active', 'ready_lkg', 'legacy_migratable', 'ready_staged'],
+            true,
+        );
     }
 }

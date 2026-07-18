@@ -97474,8 +97474,8 @@
     "depends_on": [
       "CAREER-DETAIL-COLD-MISS-DEGRADE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "ff7b19d34b0a20e2ee99e82525e643d8e52eaac6",
+    "status": "merged",
+    "commit_sha": "478530b0a99aacdbedf9edbbe83205842c5cd28f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3164",
     "checks": {
       "authorization": {
@@ -97499,12 +97499,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-18T09:51:35Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -97541,8 +97541,293 @@
         "at": "2026-07-18T09:44:48Z",
         "status": "ready_to_merge",
         "note": "All nine required CI/code-scanning checks passed on exact implementation head ff7b19d34b0a20e2ee99e82525e643d8e52eaac6. Both same-scope review threads are resolved and outdated, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and the exact thirteen-path allowlist remains valid. This ledger-only transition must itself pass exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T10:07:37Z",
+        "status": "merged",
+        "note": "Reconciled during dependent PR3 metadata initialization: final ledger head 478530b0a99aacdbedf9edbbe83205842c5cd28f passed all nine checks, PR #3164 squash merged at 2026-07-18T09:51:35Z as e5ebe803e7768c5ab01858d8f2dabc2159a80571, origin/main contains the merge, local main equals origin/main, and both local and remote PR2 task branches are deleted. No staging wait or deploy occurred."
       }
     ],
-    "updated_at": "2026-07-18T09:44:48Z"
+    "updated_at": "2026-07-18T10:07:37Z"
+  },
+  "CAREER-DETAIL-ATOMIC-EXPOSURE-01": {
+    "id": "CAREER-DETAIL-ATOMIC-EXPOSURE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-detail-atomic-exposure-01",
+    "title": "CAREER-DETAIL-ATOMIC-EXPOSURE-01: gate Career detail exposure on verified cache readiness",
+    "depends_on": [
+      "CAREER-DETAIL-CACHE-COVERAGE-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "0f7240302ffce7d2d576e99362cbaea10ab813b2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The explicit seven-PR continuous execution goal authorized this exact PR3 scope, missing manifest/state registration, and complete normal PR lifecycle."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR2 merged as e5ebe803e7768c5ab01858d8f2dabc2159a80571; origin/main contains the merge and the clean PR3 branch was created from that exact main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After the nineteenth review finding, the Career/authority manifest passed 110 tests / 929 assertions across projection/promotion gates, first-exposure authorization, published LKG/legacy recovery, snapshot-preserving targeted detail warm, immutable staging and activation, ready-only public job-index/directory/industry/sitemap consumption, internal directory authority preservation during transient cache loss, the 10k readiness gate, atomic job-index/detail/directory activation and rollback, post-commit cache-revocation fail-closed behavior, best-effort legacy directory cleanup after verified v2 activation, directory truth/performance, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 112 tests / 935 assertions total. The 1046 and 10000 row directories built in about 4ms and 46ms with one DB query. All 33 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact thirty-six-path merge-base allowlist passed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All nine required CI/code-scanning checks passed on exact ledger head 0f7240302ffce7d2d576e99362cbaea10ab813b2: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T10:07:37Z",
+        "status": "implementation_in_progress",
+        "note": "Verified PR2 merge containment and complete post-merge cleanup, then created the isolated PR3 branch. Implementation is limited to the shared cache-readiness contract, fail-closed projection/promotion gates, and locale-specific directory detail truth. No production promotion/cache action, CMS/DB mutation, SEO runtime, deploy/SLO/scheduler, frontend, or later train scope is included."
+      },
+      {
+        "at": "2026-07-18T10:11:02Z",
+        "status": "local_checks_passed",
+        "note": "All PR3 manifest checks and the exact twenty-two-path scope gate passed. Runtime projection and both canonical promotion gates fail closed on non-ready target locale caches; directories preserve eligible/indexable membership while deriving detail_ready from the shared active/LKG/legacy contract. No production promotion/cache action, CMS/DB mutation, SEO runtime, deploy/SLO/scheduler, frontend, or later train scope occurred."
+      },
+      {
+        "at": "2026-07-18T10:14:14Z",
+        "status": "implementation_committed",
+        "note": "Committed the exact twenty-two-path PR3 implementation as 22e5629b881f3dc0ca4dd35d709b576f448c4223 after all focused checks, static validation, and cached scope validation passed. This ledger-only follow-up binds the implementation commit before push."
+      },
+      {
+        "at": "2026-07-18T10:15:21Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact PR3 branch and opened PR #3166 with the manifest title plus what, why, validation, repository-rule impact, and deferred-scope sections. GitHub reports the PR mergeable; required checks are running. No production promotion/cache action, staging wait, or deploy occurred."
+      },
+      {
+        "at": "2026-07-18T10:34:02Z",
+        "status": "github_review_fix_local_checks_passed",
+        "note": "Inspected both automated review threads before editing. The P1 finding was valid because an unpublished candidate could not use the ordinary public builder before readiness validation; the promotion executor now prepares target-locale active/LKG-safe payloads from its explicit post-promotion projection while the DB transaction remains uncommitted, verifies them, then commits exposure and activates directory models. The explicit projection also overrides a compiled snapshot's stale pre-promotion index state, preventing a structurally ready but noindex payload. The P2 finding was valid because the combined warm path activated directory before targeted detail cache; targeted detail warm now completes first. The repaired 99-test / 786-assertion suite, Big Five freeze classifier, Pint, Composer/YAML/JSON, diff checks, and exact twenty-seven-path scope gate all pass. No production mutation or deploy occurred."
+      },
+      {
+        "at": "2026-07-18T10:38:26Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "Final pre-commit audit confirmed explicit post-promotion SEO/indexability reaches runtime-shell, display-asset, and compiled-snapshot builders. The complete 99-test / 786-assertion PR3 suite, 2-test / 6-assertion Big Five classifier, all 24 manifest Pint paths, Composer/YAML/JSON validation, diff checks, and exact twenty-seven-path scope validation are green."
+      },
+      {
+        "at": "2026-07-18T10:39:58Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the complete same-scope review repair as 0217d3d038b00276dbfbcfebdae04e8cbeed753f. Replied to both automated review findings with exact implementation evidence and resolved both threads. GitHub reports the PR mergeable; exact-head required checks are running."
+      },
+      {
+        "at": "2026-07-18T10:53:13Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on f761aa32ba0089ee8cf727bbac7ec30cb7224f40. Pre-merge review then found one new valid P1: a later-locale directory activation failure could leave an earlier locale active after DB remediation. The current-scope repair stages and verifies every immutable locale payload first, acquires deterministic locale rebuild locks, then switches pointers with snapshot-based restoration of all touched active/LKG/activation metadata on any failure. A synthetic second-locale failure proves both locales keep their prior active payloads. The complete 100-test / 791-assertion suite, Big Five classifier, all 24 Pint paths, Composer/YAML/JSON, diff, and exact twenty-seven-path scope checks pass."
+      },
+      {
+        "at": "2026-07-18T10:54:10Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed atomic multi-locale directory activation as 3ed3068799df49057f12196bef85ef4523abf202. Replied to the exact P1 with the restoration contract and synthetic failure evidence, then resolved the thread. Exact-head required checks are running; no production cache, database, CMS, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T11:01:45Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 24037e6f1dbebce6feb070d42f5bdf1386731cf6. All three review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-seven-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T11:17:25Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks also passed on ready-ledger head 6147ed9320231f9102ddb1563246e25683008b26. Final review found a fourth valid P1: directory activation could still omit the newly promoted slug when the materialized lookup remained on its pre-promotion candidate artifact. The repair passes the exact validated post-promotion items into directory warm, overlays only published/dataset-visible rows for the matching locale, and preserves the broader existing directory. A regression creates a newer stale candidate artifact, proves lookup still sees published_candidate before apply, and proves the activated en directory contains the promoted slug. The complete 100-test / 793-assertion suite, Big Five classifier, all 25 Pint paths, Composer/YAML/JSON, diff, and exact twenty-eight-path scope checks pass."
+      },
+      {
+        "at": "2026-07-18T11:18:29Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the validated post-promotion directory overlay as 96252140d594b67d4252445d9b0890069210fa99. Replied to the exact P1 with stale-artifact regression evidence and resolved the thread. The follow-up ledger correction restores an unrelated historic Big Five item whose identically named status field was accidentally matched by a mechanical patch; no historic facts were otherwise changed. Exact-head required checks are running, with no materialized artifact, production cache, DB, CMS, staging, or deploy action."
+      },
+      {
+        "at": "2026-07-18T11:43:51Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on a2d56f79ebda6e5165abe58bcc75157915d8c0f8, but final review found a fifth valid P2: payload construction and detail-readiness inspection occurred before rebuild locks, so an older overlapping warmer could overwrite a newer directory. The repair sorts target locales, acquires every rebuild lock before reading authority/readiness or building payloads, then retains all-locale stage/verify and rollback-safe pointer activation. A regression proves both locale locks are held for every detail-readiness read and the existing synthetic later-locale failure still restores all pointers. The exact manifest suite passes 90 tests / 655 assertions plus 2 / 6 Big Five freeze assertions; 25 Pint paths, Composer/YAML/JSON, diff, and the exact twenty-eight-path scope gate are green. No production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T11:44:52Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed lock-scoped directory payload construction as 67bd30942945b1a3ebe5641261bdc4aed23a67ad. Replied to the fifth P2 with the nested-lock regression and full local evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:02:59Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on 542e865368ad44711c216ff273e3d8beb7db24a2, but final review found a sixth valid P2: pre-commit active pointers could be purged by a concurrent request still observing committed candidate authority. The repair stages only unreachable immutable versions, validates the explicit prepared batch in both promotion gates, commits DB exposure, atomically activates all prepared detail pointers under deterministic locks with full pointer restoration, then activates the directory. Candidate or stale-materialized reads remain 404 but no longer delete prepared/active pointers. Regressions prove candidate reads preserve staging and active cache, later-locale detail activation failure restores both locales, and the command completes the exact six-step sequence. The full 92-test / 669-assertion manifest and Big Five suites, 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope gate pass. No production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:04:36Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed immutable pre-exposure staging plus post-commit atomic detail pointer activation as 42dd2b6df161cdbd04f4b3183623454b89e78d3c. Replied to the sixth P2 with concurrency, stale-projection, and multi-locale pointer restoration evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, staging environment, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:11:51Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on exact head 57551b9d9a30cfaf85790d9da179d0daa50efcfb. All six review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-nine-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T12:31:24Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on ready-ledger head 6f169b68540e60f4ceb8232b38b7142885fcfab2, but final review found a seventh valid P1 and eighth valid P2. The repair stages the exact validated exposure projection beside each immutable detail payload and resolves route authority from that snapshot only when it matches the active verified version, so a stale candidate artifact cannot leave a directory link returning 404. Post-commit cache/directory failures now record the committed database write, remove the transient exposure snapshot to fail closed, and claim rollback only after verified remediation. The full Career manifest suite passes 91 tests / 672 assertions plus 2 / 6 Big Five freeze assertions; all 26 Pint paths, Composer/YAML/JSON, diff, and the exact twenty-nine-path scope gate are green. No materialized SEO artifact, production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:33:22Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the shared versioned exposure-projection snapshot plus truthful post-commit failure reporting as c53b56136205fb638742c6116faacd9d69562ed7. Replied to both new review findings with exact regression evidence and resolved both threads. Exact-head required checks are running; no materialized SEO artifact, production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:41:33Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 67855c251a18309da0044fbf099005526f0b8588. All eight review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-nine-path scope validation passes. This final ready-ledger commit must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T12:50:10Z",
+        "status": "github_review_fix_local_checks_pending",
+        "note": "All nine checks passed on ready-ledger head 30b03e586ba6beefa308a7571ddd5dae379d5cc4, but final review found a ninth valid P2: pointer activation did not re-verify the staged exposure-projection snapshot after the transaction-time gate. The repair now validates payload plus snapshot existence, matching slug/locale, and published flags for every entry under the activation locks before switching any pointer. The focused command suite passes 20 tests / 105 assertions and touched-file Pint passes. Another FermatMind ci_verify_mbti.sh is running, so the complete manifest suite is deferred until the local concurrency guard clears."
+      },
+      {
+        "at": "2026-07-18T12:52:43Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "The concurrency guard cleared and the complete PR3 manifest is green: 92 Career tests / 676 assertions plus 2 Big Five freeze tests / 6 assertions, all 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope validation. The activation lock now rejects an evicted or mismatched exposure snapshot before any pointer switch; the regression proves missing snapshot yields blocked activation and no ready active pointer."
+      },
+      {
+        "at": "2026-07-18T12:53:56Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed activation-time exposure snapshot revalidation as 2497bae3aea5f5c4b52c821b43b00be698126810. Replied to the ninth review finding with exact lock-time validation and regression evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T13:06:23Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on ledger head 6c885ea0c72cc90b97feeaae21de6a5545d94f59, but final review found a tenth valid P2: a later directory-only or broad warm could drop a snapshot-backed promotion while the materialized artifact remained candidate. Under the directory rebuild lock, the repair compares the new source list with the active directory, then preserves only missing members re-proven by an active detail payload and exact same-version published exposure snapshot. Regressions prove both later directory-only and broad warms keep the promoted slug. The complete suite passes 92 Career tests / 678 assertions plus 2 / 6 Big Five freeze assertions, 26 Pint paths, Composer/YAML/JSON/diff, and exact twenty-nine-path scope validation."
+      },
+      {
+        "at": "2026-07-18T13:07:43Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed non-regressing snapshot-backed directory and broad warm behavior as 79920df10175bcd031f11a231c63164cb6881e50. Replied to the tenth review finding with active-payload/same-version-snapshot proof and both warm-path regressions, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T13:14:55Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 177a0ba5753b2469f1c64906280c6ef34459191c. All ten review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-nine-path scope validation passes. This final ready-ledger commit must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T13:25:33Z",
+        "status": "github_review_fix_local_checks_pending",
+        "note": "All nine checks passed on ready-ledger head 0f7c56c8948d4484022660dc0abac9cb36240d6f, but final review found an eleventh valid P2: promotion success activated the directory but not the job-index cache consumed by the public list API. The repair builds both payload families under the same locale locks, snapshots and verifies EN/ZH job-index caches, then activates staged directory pointers; any job-index or directory failure restores both families. Focused promotion and synthetic directory-failure regressions pass. Another FermatMind ci_verify_mbti.sh is running, so the complete manifest suite is deferred until the local concurrency guard clears."
+      },
+      {
+        "at": "2026-07-18T13:30:50Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "The concurrency guard cleared and the complete PR3 manifest is green: 93 Career tests / 688 assertions plus 2 Big Five freeze tests / 6 assertions, all 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope validation. Promotion success now atomically aligns the public job-index API and directory, and the synthetic later-locale failure proves both job-index values and directory pointers restore."
+      },
+      {
+        "at": "2026-07-18T13:32:08Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed atomic public job-index plus directory activation as 8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81. Replied to the eleventh review finding with immediate list-API exposure and cross-cache rollback regressions, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T13:38:59Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head c021a49a20d6ba5acc7ff3afab57be2ff1147f26. All eleven review threads are resolved, the worktree is clean, and exact twenty-nine-path scope validation remains green. This final ledger-only transition must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T14:11:10Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on ready-ledger head 54347970f8f28ac378e20f8b3d3ea7180a363433, but final review found three additional valid P2s. Nested lock leases now cover all remaining waits plus bounded work; the internal directory preserves separate visibility/readiness truth while every public directory, industry, facet, count, pagination, and sitemap consumer filters to indexable plus detail-ready rows; and exposure-snapshot cleanup exceptions are recorded without interrupting post-commit database remediation. The full Career suite passes 99 tests / 743 assertions plus 2 / 6 Big Five freeze assertions, all 29 Pint paths, Composer/YAML/JSON/diff, and exact thirty-two-path scope validation. No production cache, DB, CMS, sitemap authority, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T14:12:39Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed nested-lock lease coverage, ready-only public directory consumers, and remediation-safe snapshot cleanup as e4a31d3daf556ed26ec93195ad386bd03daa6ae1. Replied to all three new review findings with exact regression evidence and resolved the threads. This ledger transition also restores the unrelated historic B5 runner status that a same-named mechanical match touched; no other historic facts changed. Exact-head required checks are running, with no production cache, DB, CMS, sitemap authority, staging, or deploy action."
+      },
+      {
+        "at": "2026-07-18T14:18:48Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "Inspected the failed content-pack-build-validate job and reproduced CareerDirectory10kOpsWarmValidateCommandTest locally. Its legacy fixture had runtime projection but no verified EN/ZH detail payloads, so the new ready-only public consumer correctly reported zero. The fixture now seeds explicit ready detail payloads, the exact CI gate passes 2 tests / 40 assertions, all 30 Pint paths and the full 103-test / 789-assertion manifest remain green, and the exact thirty-three-path allowlist has zero drift. No production or runtime cache mutation occurred."
+      },
+      {
+        "at": "2026-07-18T14:19:38Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the scoped 10k gate fixture repair as 6ba82275abfdaf7ca0051ccd2b23973b4a2a0959. The manifest now runs this exact required CI gate locally and allows its test path explicitly. Exact-head checks are rerunning; no production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T14:29:33Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "Inspected both failed MBTI jobs through their completed job logs. Both failed only at SitemapXmlTest because its Career fixture published runtime flags without verified EN/ZH detail payloads; Big Five and the other six checks passed. The test-only fixture now seeds explicit ready detail authority without changing SitemapGenerator or SEO runtime. The exact regression passes 1 test / 76 assertions, the full 104-test / 865-assertion local manifest remains green, and thirty-four-path scope validation has zero drift."
+      },
+      {
+        "at": "2026-07-18T14:30:27Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the test-only sitemap fixture repair as 0e6196e434b9d9d0698d786dbf0247d32054b384. No SitemapGenerator, SEO runtime, production enumeration authority, CMS, cache, database, staging, or deploy action changed. Exact-head required checks are rerunning."
+      },
+      {
+        "at": "2026-07-18T14:58:54Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on ledger head 463b56213aa7b624f0d6b7dc1b38ab60e5e1e122, but final review found fifteenth and sixteenth valid P2s. Gates had accepted ready_lkg or legacy_migratable for a stale candidate even though route authorization required active payload plus its exact published snapshot; additionally, a later targeted detail warm could replace that active version without carrying the snapshot forward. The repair preserves LKG/legacy recovery for already-published materialized authority, requires ready_active plus same-version published exposure authority before first exposure, and copies a validated snapshot to every targeted-warm version before switching its active pointer, including the forget path. Regressions prove candidate LKG/legacy stays 404, published recovery remains readable, ordinary and forget warm keep the route fresh, and later directory warm retains the row. The full Career suite passes 106 tests / 892 assertions plus 2 / 6 Big Five freeze assertions; 32 Pint paths, Composer/YAML/JSON/diff, and exact thirty-five-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:00:53Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed shared first-exposure readiness plus snapshot-preserving targeted warm as 92184869ed9af952957b860240b0644253f9312d. Replied to the fifteenth and sixteenth review findings with exact implementation and regression evidence, then resolved both threads. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:08:25Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 7584acb51e55982efe4a9c687bc2b43cf104fc9d. All sixteen review threads are resolved, GitHub reports OPEN/CLEAN, the worktree is clean, and exact thirty-five-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T15:23:34Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on ready-ledger head 9d878a33a8956e23fbc14b14bb2513275b443cc9, but final review found a seventeenth valid P2: the public job-index filtered publication and dataset visibility without verified detail readiness. The repair applies the shared readiness predicate to both cached reads and rebuild writes while keeping a separate published/dataset authority item set for the internal directory, so transient detail loss hides public links without deleting internal membership. Regressions prove cached cold rows are suppressed dynamically, cold rebuilds stay suppressed until detail warm plus index rebuild, and internal directory rows remain with detail_ready=false. The full Career suite passes 108 tests / 910 assertions plus 2 / 6 Big Five freeze assertions; 33 Pint paths, Composer/YAML/JSON/diff, and exact thirty-six-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:24:47Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed ready-only public job-index filtering with separate internal directory authority as 10eb90679c2d2718ea953051fa4f2cfe1b00b6eb. Replied to the seventeenth review finding with exact cached-read, rebuild, recovery, and internal-authority regression evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:40:34Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on exact ledger head c5fcd29a33169037c08bb4b9c40c7ffe40c1152d, but final review found an eighteenth valid P2: after detail pointers became active, a directory failure plus exposure-snapshot cleanup outage could let automatic database remediation claim rollback while the public route remained authorized. The repair distinguishes unreachable staged snapshots after detail-activation rollback from active snapshots after directory failure. If active snapshot revocation cannot be verified, it keeps the committed indexed database authority, returns post_commit_cache_revocation_unverified, and blocks automatic rollback or quarantine until revocation is proven. The full Career suite passes 109 tests / 924 assertions plus 2 / 6 Big Five freeze assertions; 33 Pint paths, Composer/YAML/JSON/diff, and exact thirty-six-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:42:03Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed fail-closed handling for unverified active exposure-snapshot revocation as f285e3594f29409a4a47dc2cd99ba24f2ba528b1. Replied to the eighteenth review finding with exact database/cache consistency and regression evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:52:46Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on exact ledger head 1429fda5e3b338c50889952e6c1937c61421dc39, but final review found a nineteenth valid P2: legacy v1 directory cleanup ran after verified v2 pointer activation and could throw outside the multi-locale rollback guard, incorrectly turning successful activation into a promotion failure. The repair makes only that compatibility-key cleanup best-effort with a structured warning, so verified active pointers remain the truthful result and database remediation is not triggered. A synthetic legacy-cleanup outage proves both EN/ZH active versions and payloads stay committed. The full Career suite passes 110 tests / 929 assertions plus 2 / 6 Big Five freeze assertions; 33 Pint paths, Composer/YAML/JSON/diff, and exact thirty-six-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:53:53Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed best-effort legacy directory cleanup after verified v2 activation as 28d0cb439c8b27db459ea3cebd987bc709657f25. Replied to the nineteenth review finding with exact multi-locale active-pointer and payload evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T16:04:00Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 0f7240302ffce7d2d576e99362cbaea10ab813b2. All nineteen review threads are resolved, GitHub reports OPEN/CLEAN/MERGEABLE, the worktree is clean, and exact thirty-six-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-18T16:04:00Z"
   }
 }
