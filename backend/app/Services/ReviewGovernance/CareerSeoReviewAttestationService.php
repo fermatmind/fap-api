@@ -193,8 +193,10 @@ final readonly class CareerSeoReviewAttestationService
         );
 
         return ReviewAttestation::query()
+            ->where('schema_version', (string) config('review_governance.attestation.schema_version'))
             ->where('review_mode', 'solo_owner')
             ->where('review_source', (string) config('review_governance.attestation.review_source'))
+            ->where('statement_version', (string) config('review_governance.attestation.statement_version'))
             ->where('attested_by_admin_user_id', $currentOwnerAdminUserId)
             ->where('decision', 'approved_all')
             ->where('target_count', $targetSet->count())

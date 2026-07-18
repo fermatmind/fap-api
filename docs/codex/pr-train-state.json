@@ -97235,7 +97235,7 @@
     "depends_on": [
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
-    "status": "github_checks_pending",
+    "status": "local_checks_passed",
     "commit_sha": "585312ddc815f0c6891acb4efddc651050a6e250",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3167",
     "checks": {
@@ -97245,11 +97245,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "The final focused Career/SEO review and architecture suite passed 14 tests with 355 assertions, and the exact runtime-freeze classifier controls passed 2 tests with 5 assertions. All six changed PHP paths passed syntax and Pint, Composer strict validation passed, the review-only command is registered, YAML/JSON and diff checks passed, and exact scope validation found only the ten allowed implementation/test/protocol/registry/train paths. The final complete bash backend/scripts/ci_verify_mbti.sh gate passed from the completed worktree, including Big Five 1524 tests with 187973 assertions, Enneagram, MBTI, Personality full-32 71 tests with 5383 assertions, migration, security, OpenAPI, order, dependency, webhook, and attempt gates. Validation-generated Big Five timestamps and hashes were restored exactly and are absent from the diff."
+        "evidence": "After the exact-head Codex P2 fix, the focused Career/SEO review and architecture suite passed 14 tests with 360 assertions, and the exact runtime-freeze classifier controls passed 2 tests with 5 assertions. The changed service and test passed syntax and Pint; the previously completed six-path syntax/Pint, Composer strict, command registration, YAML/JSON, diff, and exact ten-path scope checks remain valid. The complete bash backend/scripts/ci_verify_mbti.sh gate was rerun after the fix and passed from the completed worktree, including Big Five 1524 tests with 187973 assertions, Enneagram, MBTI, Personality full-32 71 tests with 5383 assertions, migration, security, OpenAPI, order, dependency, webhook, and attempt gates. Validation-generated Big Five timestamps and hashes were restored exactly and are absent from the diff."
       },
       "github": {
         "status": "pending",
-        "evidence": "PR #3167 was opened from codex/solo-owner-career-seo-review-04 after all required local checks and exact scope validation passed; required GitHub checks and exact-head review are pending."
+        "evidence": "All nine checks passed on superseded head fc283b4096504f4db7a201a290ec8ea85046fb84. Exact-head Codex review then reported one P2 stale-contract reuse issue; the same-scope schema_version and statement_version fix passed all local checks and awaits commit, push, fresh checks, and fresh exact-head review."
       }
     },
     "scope_validation": {
@@ -97293,9 +97293,14 @@
         "at": "2026-07-18T11:03:18Z",
         "status": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #3167 with the required change, rationale, validation, security/privacy, repository-rule-impact, deferred-items, and no-production-execution sections. Required checks and exact-head review are pending."
+      },
+      {
+        "at": "2026-07-18T11:24:13Z",
+        "status": "local_checks_passed",
+        "note": "All nine GitHub checks passed on fc283b4096504f4db7a201a290ec8ea85046fb84, then exact-head Codex review found one P2: evidence reuse did not filter the current schema_version and statement_version. The same-scope fix adds both fail-closed filters and rotation controls; focused validation passed 14 tests/360 assertions plus runtime-freeze 2/5, and the complete ci_verify_mbti.sh gate passed again. Concurrent heavy-suite guards were honored by stopping this task's attempted runs and waiting for other FermatMind validation to finish. No production action occurred."
       }
     ],
-    "updated_at": "2026-07-18T11:03:18Z"
+    "updated_at": "2026-07-18T11:24:13Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",

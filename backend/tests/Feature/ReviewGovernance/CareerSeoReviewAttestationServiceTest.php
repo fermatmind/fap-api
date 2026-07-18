@@ -137,6 +137,14 @@ final class CareerSeoReviewAttestationServiceTest extends TestCase
 
         $this->assertTrue($service->hasApprovedAllEvidence('search_submission_queue_approval', $targets));
         $service->assertApprovedAllEvidence('search_submission_queue_approval', array_reverse($targets));
+        $schemaVersion = config('review_governance.attestation.schema_version');
+        config()->set('review_governance.attestation.schema_version', 'rotated-schema-version');
+        $this->assertFalse($service->hasApprovedAllEvidence('search_submission_queue_approval', $targets));
+        config()->set('review_governance.attestation.schema_version', $schemaVersion);
+        $statementVersion = config('review_governance.attestation.statement_version');
+        config()->set('review_governance.attestation.statement_version', 'rotated-statement-version');
+        $this->assertFalse($service->hasApprovedAllEvidence('search_submission_queue_approval', $targets));
+        config()->set('review_governance.attestation.statement_version', $statementVersion);
         config()->set('review_governance.solo_owner_admin_user_id', 2);
         $this->assertFalse($service->hasApprovedAllEvidence('search_submission_queue_approval', $targets));
         config()->set('review_governance.solo_owner_admin_user_id', 1);
