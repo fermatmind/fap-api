@@ -97839,9 +97839,9 @@
     "depends_on": [
       "CAREER-DETAIL-ATOMIC-EXPOSURE-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "b7a4e705c00b405749da73ed45895d813c81770e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3176",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -97886,8 +97886,13 @@
         "at": "2026-07-18T16:26:55Z",
         "status": "local_validation_passed",
         "note": "All manifest checks and exact 13-path scope validation passed. The deploy gate is read-only, full coverage monitoring replaces sample-detail probing, and the bounded resumable repair schedule remains disabled by default; no production or deployment action was executed."
+      },
+      {
+        "at": "2026-07-18T16:28:12Z",
+        "status": "github_checks_pending",
+        "note": "Committed implementation as b7a4e705c00b405749da73ed45895d813c81770e, pushed the scoped branch, and opened PR #3176. GitHub required checks are queued or running."
       }
     ],
-    "updated_at": "2026-07-18T16:26:55Z"
+    "updated_at": "2026-07-18T16:28:12Z"
   }
 }
