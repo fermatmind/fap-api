@@ -192,6 +192,9 @@ async function main() {
     fail('source_registry', 'Source registry must contain 11 unique, resolved identities.');
   const registryIds = new Set(registry.sources.map((source) => source.source_id));
   const registryById = new Map(registry.sources.map((source) => [source.source_id, source]));
+  const registeredExternalUrls = new Set(registry.sources
+    .map((source) => source.verified_public_url)
+    .filter(Boolean));
   const usedIds = new Set(release.assets.flatMap((entry) => entry.evidence_claims.flatMap((claim) => claim.source_ids ?? [])));
   for (const sourceId of usedIds) if (!registryIds.has(sourceId)) fail('invalid_source_id', sourceId);
 
@@ -386,9 +389,15 @@ async function main() {
           fail('malformed_link', `${completedEntry.target_path}: ${destination}`);
           continue;
         }
-        if (!['fermatmind.com', 'www.fermatmind.com'].includes(parsedUrl.hostname.toLowerCase())) continue;
+        if (!['fermatmind.com', 'www.fermatmind.com'].includes(parsedUrl.hostname.toLowerCase())) {
+          if (!registeredExternalUrls.has(destination)) {
+            invalidInternalLinkCount += 1;
+            fail('unregistered_external_link', `${completedEntry.target_path}: ${destination}`);
+          }
+          continue;
+        }
         link = `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
-      } else if (/^(?:#|mailto:|tel:)/i.test(link)) {
+      } else if (/^#/.test(link)) {
         continue;
       } else if (!link.startsWith('/')) {
         invalidInternalLinkCount += 1;

@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed through raw-body link-audit head 5bba2d2f403b2abec29ededc5c6d676472564a52. Twenty-two actionable Codex review findings were accepted; the final same-origin link-normalization head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub checks passed through same-origin link-normalization head 55b26ed631b750092ba66d5a698e66c50f20b343. Twenty-four actionable Codex review findings were accepted; the final registered-external-link/frozen-validator-scope head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98139,9 +98139,14 @@
         "at": "2026-07-18T20:53:52Z",
         "status": "github_review_fixes_completed",
         "note": "All nine checks passed on raw-body link-audit head 5bba2d2f403b2abec29ededc5c6d676472564a52, then one valid P2 finding was accepted. Markdown inline and reference destinations on fermatmind.com or www.fermatmind.com now normalize from http, https, or protocol-relative absolute URLs to their path before zh-CN, unknown-canonical, and legacy-alias enforcement; non-canonical relative internal targets fail closed, while external evidence URLs remain allowed. The same-origin normalization probe and reproducible translated=0 authority validation pass."
+      },
+      {
+        "at": "2026-07-18T21:02:43Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on same-origin link-normalization head 55b26ed631b750092ba66d5a698e66c50f20b343, then two valid P2 findings were accepted. External Markdown destinations must now exactly match a non-empty verified_public_url in the locked eleven-source registry; invented, competitor, protocol-variant, mailto, tel, and other unregistered body links fail closed. The frozen Task 1 validator was removed from the allowed paths of content-only PR2 through PR9 while remaining a required read-only gate; PR10 retains its explicit full-package final QA scope. Registry allowlist probes, exact manifest-scope inspection, and the reproducible translated=0 authority validation pass."
       }
     ],
-    "updated_at": "2026-07-18T20:53:52Z"
+    "updated_at": "2026-07-18T21:02:43Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
