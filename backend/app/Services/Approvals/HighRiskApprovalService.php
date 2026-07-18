@@ -274,8 +274,6 @@ final readonly class HighRiskApprovalService
                     if ((int) $existingActor->id !== $actorAdminUserId) {
                         throw new HighRiskApprovalValidationException('Execution is already authorized by a different administrator.');
                     }
-
-                    return $approval;
                 }
             }
 

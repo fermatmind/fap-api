@@ -536,6 +536,65 @@ final class HighRiskApprovalServiceTest extends TestCase
         ]);
     }
 
+    public function test_same_execution_actor_fresh_step_up_refreshes_authorization_ttl(): void
+    {
+        $owner = $this->admin(
+            totpEnabled: true,
+            permissions: [
+                PermissionNames::ADMIN_FINANCE_WRITE,
+                PermissionNames::ADMIN_OPS_WRITE,
+            ],
+        );
+        $this->soloOwner($owner);
+        $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
+            'order_no' => 'ord-refresh-execution-authorization',
+        ]);
+        $service = app(HighRiskApprovalService::class);
+        $service->approve(
+            (string) $approval->id,
+            (int) $owner->id,
+            $this->freshStepUpCode($owner),
+        );
+        $first = $service->authorizeExecution(
+            (string) $approval->id,
+            (int) $owner->id,
+            $this->freshStepUpCode($owner),
+        );
+        $firstAuthorization = (array) data_get(
+            $first->payload_json,
+            HighRiskApprovalService::EXECUTION_METADATA_KEY,
+            [],
+        );
+
+        $this->travel(9)->minutes();
+        $refreshed = $service->authorizeExecution(
+            (string) $approval->id,
+            (int) $owner->id,
+            $this->freshStepUpCode($owner),
+        );
+        $refreshedAuthorization = (array) data_get(
+            $refreshed->payload_json,
+            HighRiskApprovalService::EXECUTION_METADATA_KEY,
+            [],
+        );
+
+        $this->assertNotSame(
+            $firstAuthorization['authorized_at'] ?? null,
+            $refreshedAuthorization['authorized_at'] ?? null,
+        );
+        $this->assertNotSame(
+            $firstAuthorization['authorization_sha256'] ?? null,
+            $refreshedAuthorization['authorization_sha256'] ?? null,
+        );
+        $this->assertSame(2, DB::table('audit_logs')
+            ->where('target_id', (string) $approval->id)
+            ->where('action', 'approval_execution_authorized')
+            ->count());
+
+        $this->travel(2)->minutes();
+        $this->assertSame((int) $owner->id, (int) $service->executionActor($refreshed->fresh())->id);
+    }
+
     private function soloOwner(AdminUser $owner): void
     {
         config()->set('admin.totp.enabled', true);
