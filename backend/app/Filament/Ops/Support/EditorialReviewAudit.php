@@ -5,12 +5,21 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Support;
 
 use App\Models\AdminUser;
+use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\EditorialReview;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use App\Services\Cms\CmsEditorialReviewAttestationService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+/**
+ * @review-surface article
+ * @review-surface editorial_review
+ */
 final class EditorialReviewAudit
 {
     public const STATE_READY = 'ready';
@@ -33,6 +42,11 @@ final class EditorialReviewAudit
 
         $owner = self::resolveOwnerCandidate($ownerAdminId);
         $workflow = self::workflowFor($type, $record);
+
+        if (! self::usesSoloOwnerMode()
+            && (int) $workflow->reviewer_admin_user_id === $ownerAdminId) {
+            throw new AuthorizationException('Team-separated review requires different owner and reviewer accounts.');
+        }
 
         if ((int) $workflow->owner_admin_user_id === $ownerAdminId) {
             return $workflow;
@@ -64,6 +78,11 @@ final class EditorialReviewAudit
 
         $reviewer = self::resolveReviewerCandidate($reviewerAdminId);
         $workflow = self::workflowFor($type, $record);
+
+        if (! self::usesSoloOwnerMode()
+            && (int) $workflow->owner_admin_user_id === $reviewerAdminId) {
+            throw new AuthorizationException('Team-separated review requires different owner and reviewer accounts.');
+        }
 
         if ((int) $workflow->reviewer_admin_user_id === $reviewerAdminId) {
             return $workflow;
@@ -114,31 +133,58 @@ final class EditorialReviewAudit
 
     public static function mark(string $decision, string $type, object $record): void
     {
-        $workflow = self::workflowFor($type, $record);
-        self::assertCanMark($workflow, $decision, $type, $record);
+        DB::transaction(function () use ($decision, $type, $record): void {
+            $workflow = self::workflowFor($type, $record);
+            self::assertCanMark($workflow, $decision, $type, $record);
 
-        $action = match ($decision) {
-            self::STATE_APPROVED => 'editorial_review_approved',
-            self::STATE_CHANGES_REQUESTED => 'editorial_review_changes_requested',
-            self::STATE_REJECTED => 'editorial_review_rejected',
-            default => throw new \InvalidArgumentException('Unsupported review decision.'),
-        };
+            $action = match ($decision) {
+                self::STATE_APPROVED => 'editorial_review_approved',
+                self::STATE_CHANGES_REQUESTED => 'editorial_review_changes_requested',
+                self::STATE_REJECTED => 'editorial_review_rejected',
+                default => throw new \InvalidArgumentException('Unsupported review decision.'),
+            };
 
-        $workflow->workflow_state = $decision;
-        $workflow->reviewed_by_admin_user_id = self::actorAdminId();
-        $workflow->reviewed_at = now();
-        $workflow->last_transition_at = now();
-        $workflow->save();
+            if ($decision === self::STATE_APPROVED && $type === 'article' && self::usesSoloOwnerMode()) {
+                $resources = [
+                    ['surface_id' => 'article', 'record' => $record],
+                    ['surface_id' => 'editorial_review', 'record' => $workflow],
+                ];
+                if ($record instanceof Article) {
+                    $workingRevision = app(ArticleTranslationRevisionWorkspace::class)
+                        ->resolveWorkingRevision($record);
+                    if ($workingRevision instanceof ArticleTranslationRevision) {
+                        $resources[] = [
+                            'surface_id' => 'article_translation_revision',
+                            'record' => $workingRevision,
+                        ];
+                    }
+                }
 
-        self::log(
-            action: $action,
-            type: $type,
-            record: $record,
-            meta: [
-                'decision' => $decision,
-                'workflow_state' => $decision,
-            ],
-        );
+                app(CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(
+                    attestation: null,
+                    scopeType: 'cms_editorial_review',
+                    scopeIdentity: 'article:'.(int) data_get($record, 'id').':workflow:'.(string) $workflow->id,
+                    resources: $resources,
+                    actorAdminUserId: self::actorAdminId() ?? 0,
+                );
+            }
+
+            $workflow->workflow_state = $decision;
+            $workflow->reviewed_by_admin_user_id = self::actorAdminId();
+            $workflow->reviewed_at = now();
+            $workflow->last_transition_at = now();
+            $workflow->save();
+
+            self::log(
+                action: $action,
+                type: $type,
+                record: $record,
+                meta: [
+                    'decision' => $decision,
+                    'workflow_state' => $decision,
+                ],
+            );
+        });
     }
 
     /**
@@ -214,6 +260,14 @@ final class EditorialReviewAudit
             && (int) ($snapshot['owner_admin_user_id'] ?? 0) === $adminUserId;
     }
 
+    public static function isSoloOwnerActor(?int $adminUserId = null): bool
+    {
+        $adminUserId ??= self::actorAdminId();
+
+        return $adminUserId !== null
+            && app(CmsEditorialReviewAttestationService::class)->isConfiguredSoloOwner($adminUserId);
+    }
+
     public static function resetStateAfterEdit(string $type, object $record): void
     {
         $workflow = self::query()
@@ -285,7 +339,8 @@ final class EditorialReviewAudit
             throw new AuthorizationException('This record is already approved and has no newer edits to resubmit.');
         }
 
-        if (! ContentAccess::isOwner() && self::actorAdminId() !== (int) $workflow->owner_admin_user_id) {
+        if (! self::isSoloOwnerActor()
+            && self::actorAdminId() !== (int) $workflow->owner_admin_user_id) {
             throw new AuthorizationException('Only the assigned owner can submit this record for review.');
         }
     }
@@ -303,7 +358,7 @@ final class EditorialReviewAudit
         $actorAdminId = self::actorAdminId();
         $isAssignedReviewer = $actorAdminId !== null && $actorAdminId === (int) $workflow->reviewer_admin_user_id;
 
-        if (! ContentAccess::isOwner() && (! ContentAccess::canReview() || ! $isAssignedReviewer)) {
+        if (! self::isSoloOwnerActor() && (! ContentAccess::canReview() || ! $isAssignedReviewer)) {
             throw new AuthorizationException('Only the assigned reviewer can decide this record.');
         }
 
@@ -338,6 +393,11 @@ final class EditorialReviewAudit
         return is_object($actor) && is_numeric(data_get($actor, 'id'))
             ? (int) data_get($actor, 'id')
             : null;
+    }
+
+    private static function usesSoloOwnerMode(): bool
+    {
+        return (string) config('review_governance.mode') === 'solo_owner';
     }
 
     /**

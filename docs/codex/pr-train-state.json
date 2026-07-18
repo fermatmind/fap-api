@@ -96757,8 +96757,8 @@
     "branch": "codex/solo-owner-review-foundation-01",
     "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
     "depends_on": [],
-    "status": "external_review_quota_hold",
-    "commit_sha": "afeb12c16aaff374d0015009d9f39ead1967a51d",
+    "status": "merged",
+    "commit_sha": "be8f5a0a7e322a58f472f47d790f339d97548d5d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
     "checks": {
       "dependency": {
@@ -96786,24 +96786,24 @@
         "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 28-file allowlist validation passed after the manifest explicitly added the required nested backend/AGENTS.md contract."
       },
       "github": {
-        "status": "passed_on_ledger_head",
-        "evidence": "All nine required and security checks passed on ledger-only PR head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. Green checks do not replace the missing exact-head Codex review. commit_sha intentionally remains the reviewed PR code head afeb12c16aaff374d0015009d9f39ead1967a51d rather than self-referencing ledger-only commits."
+        "status": "passed_and_merged",
+        "evidence": "GitHub reports PR #3160 MERGED at 2026-07-18T03:50:20Z from final PR head be8f5a0a7e322a58f472f47d790f339d97548d5d with squash merge commit d1cd7d0f083cb5c8f2ded6a54b78bbb815dc05e1. All nine final check runs are SUCCESS. The merge commit is contained by origin/main."
       },
       "codex_review": {
-        "status": "external_review_quota_hold",
-        "evidence": "The latest completed Codex review covers PR code head afeb12c16aaff374d0015009d9f39ead1967a51d and confirmed the JSON redaction repair plus the ledger alignment finding. An explicit @codex review request for ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae at 2026-07-17T19:34:59Z was rejected at 2026-07-17T19:35:06Z because code-review usage limits were exhausted. Observation through 2026-07-17T19:44:53Z produced no delayed automatic exact-head review; the old review is not treated as exact-head evidence."
+        "status": "latest_completed_review_not_exact_final_head",
+        "evidence": "The latest completed Codex review visible after merge covers afeb12c16aaff374d0015009d9f39ead1967a51d, not final PR head be8f5a0a7e322a58f472f47d790f339d97548d5d. This reconciliation records the independently observed GitHub merge and does not relabel the older review as exact-head evidence."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
-    "failure_reason": "External Codex code-review quota exhausted: exact-head review is unavailable for ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae. PR1 must remain open and unmerged, its current resolved-state audit must not be finalized, and PR2 must not start until a completed exact-head review is independently verified.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "merged_at": "2026-07-18T03:50:20Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -96940,8 +96940,114 @@
         "at": "2026-07-17T19:44:53Z",
         "status": "external_review_quota_hold",
         "note": "All nine checks passed on ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae and GitHub reports CLEAN/MERGEABLE, but the latest completed Codex review still covers only PR code head afeb12c16aaff374d0015009d9f39ead1967a51d. The exact-head request was quota-rejected at 2026-07-17T19:35:06Z and no delayed automatic review appeared during observation through 2026-07-17T19:44:53Z. Keep PR1 open and unmerged, do not finalize thread resolution, and do not start PR2 until exact-head review becomes available."
+      },
+      {
+        "at": "2026-07-18T03:55:14Z",
+        "status": "merged",
+        "note": "Post-merge reconciliation independently verified PR #3160 MERGED at 2026-07-18T03:50:20Z, final PR head be8f5a0a7e322a58f472f47d790f339d97548d5d, all nine final checks SUCCESS, and squash merge commit d1cd7d0f083cb5c8f2ded6a54b78bbb815dc05e1 contained by origin/main. Local main was synced to origin/main, the worktree was clean, the local task branch was deleted, and the remote task branch was absent. No deploy or production/CMS/database action was run. The latest completed Codex review remains recorded truthfully as non-exact for the final PR head."
       }
     ],
-    "updated_at": "2026-07-17T19:44:53Z"
+    "updated_at": "2026-07-18T03:55:14Z"
+  },
+  "SOLO-OWNER-CMS-REVIEW-02": {
+    "id": "SOLO-OWNER-CMS-REVIEW-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/solo-owner-cms-review-02",
+    "title": "SOLO-OWNER-CMS-REVIEW-02: accept solo-owner attestations across CMS editorial review",
+    "depends_on": [
+      "SOLO-OWNER-REVIEW-FOUNDATION-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "d112e9e099eac6f6a6f0b6f881b601b228a55fd9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3161",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3160 is MERGED, squash merge commit d1cd7d0f083cb5c8f2ded6a54b78bbb815dc05e1 is contained by origin/main, local main equaled origin/main before branch creation, and no local or remote PR2 task branch existed."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Passed the manifest CMS/Ops/architecture suite (456 tests, 4536 assertions), the operator-authorized SeoIntel controlled-publish regression with the focused PR02 set (71 tests, 1162 assertions), changed-PHP syntax lint, Pint on 20 changed PHP files, Composer strict validation, YAML/JSON parsing, git diff checks, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first MBTI run exposed an over-broad ArticlePublishService gate that blocked the existing baseline importer; that out-of-scope global publish change and its fixture were removed, the exact failure then passed (1 test, 29 assertions), and the complete MBTI gate passed on rerun including personality full-32 (71 tests, 5383 assertions)."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "PR #3161 exact head 6d44a35812a85b4c031146f441be230efe28bc86 passed all nine checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload. GitHub reports CLEAN and MERGEABLE."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T03:55:14Z",
+        "status": "pending_dependency",
+        "note": "Initialized from the explicit seven-PR serial execution goal with PR1 as the sole dependency and all production/CMS/database/publish/deploy actions prohibited."
+      },
+      {
+        "at": "2026-07-18T03:55:14Z",
+        "status": "implementation_in_progress",
+        "note": "PR1 merge containment, main parity, clean worktree, and absent local/remote PR2 branch were verified before creating codex/solo-owner-cms-review-02. Implementation is limited to CMS editorial review adapters and their tests; PR3-PR7 remain deferred."
+      },
+      {
+        "at": "2026-07-18T04:41:43Z",
+        "status": "local_checks_failed",
+        "note": "Allowed-path Article and compact-attestation focused suites pass, but eight unchanged SeoIntel controlled-publish assertions encode the prohibited legacy behavior where publish creates review approval. The exact test file is outside the user-locked PR02 allowlist, so no scope expansion, staging, push, or PR creation was performed."
+      },
+      {
+        "at": "2026-07-18T04:57:35Z",
+        "status": "implementation_in_progress",
+        "note": "The operator explicitly authorized the single SeoIntel controlled-publish test path. The manifest allowlist and test fixtures were updated so compact review evidence is bound before publish, while missing science review remains fail closed and write-free. No controller, Research, production, CMS, database, deploy, or search scope was added."
+      },
+      {
+        "at": "2026-07-18T05:22:30Z",
+        "status": "local_checks_passed",
+        "note": "All PR02 local gates passed. The complete MBTI gate was rerun from scratch after removing an over-broad global ArticlePublishService evidence check that broke the existing baseline importer and exceeded the preserved controlled-publisher boundary. The final scope contains only manifest-authorized CMS review adapters, the operator-authorized SeoIntel regression path, tests, protocol/registry, and train metadata; no production write or deploy occurred."
+      },
+      {
+        "at": "2026-07-18T05:25:49Z",
+        "status": "github_checks_pending",
+        "note": "Implementation commit 656f7beed8abd096969d5ec7b557371c1a1a93b1 was pushed and PR #3161 was opened with the exact manifest title, base main, and scoped head branch. This ledger-only follow-up records the real PR identity before final required-check polling."
+      },
+      {
+        "at": "2026-07-18T05:36:12Z",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "On exact PR head b9333436813e64cd2f68a5624cef13e6f4a6ae2a, eight GitHub checks passed and verify-bigfive failed only at BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff. Its hard-coded classifier reported nine exact PR02 CMS review-governance files. The operator explicitly authorized adding that single test path to PR02 and updating only its classifier plus regression assertions; no Big Five runtime implementation, production write, CMS mutation, database mutation, publish, or deploy scope was added."
+      },
+      {
+        "at": "2026-07-18T05:37:16Z",
+        "status": "local_checks_failed_fix_in_progress",
+        "note": "The first focused classifier run proved the original runtime-path gate now passes, while the new exactness assertion used ArticlePublishService as a blocked control even though an older generic CMS classifier already allows it. That invalid control was removed; the three remaining Personality, future publisher, and Big Five runtime controls remain blocked. No classifier allowlist or implementation scope was broadened by this fixture-only correction."
+      },
+      {
+        "at": "2026-07-18T05:42:42Z",
+        "status": "local_checks_passed_ci_fix_pending_commit",
+        "note": "The corrected focused runtime classifier suite passed with 2 tests and 6 assertions, Pint passed on the single authorized test file, and the exact GitHub verify-bigfive test filter passed with 1506 tests and 181768 assertions. PHP syntax, YAML/JSON parsing, and diff checks passed. Thirteen Big Five compiled files regenerated as test side effects were restored with exact reverse patches and are absent from the diff; only the operator-authorized classifier test and train metadata remain in this CI-fix worktree."
+      },
+      {
+        "at": "2026-07-18T05:43:35Z",
+        "status": "github_checks_pending_retry",
+        "note": "The scoped CI repair was committed as d112e9e099eac6f6a6f0b6f881b601b228a55fd9 after exact allowlist validation reported 28 branch files and zero outside scope. A ledger-only exact-commit follow-up will be pushed with it to trigger a new required-check run on PR #3161."
+      },
+      {
+        "at": "2026-07-18T05:51:13Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on exact PR head 6d44a35812a85b4c031146f441be230efe28bc86, including verify-bigfive after the scoped classifier repair. GitHub reports CLEAN and MERGEABLE. This pre-merge ledger transition records the required ready_to_merge state; its ledger-only commit must itself receive the complete required-check set before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-18T05:51:13Z"
   }
 }

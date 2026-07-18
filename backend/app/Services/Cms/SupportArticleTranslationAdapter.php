@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Models\SupportArticle;
 use Illuminate\Database\Eloquent\Model;
 
+/** @review-surface support_article */
 final class SupportArticleTranslationAdapter extends AbstractSiblingTranslationAdapter
 {
     public function contentType(): string
@@ -119,7 +120,6 @@ final class SupportArticleTranslationAdapter extends AbstractSiblingTranslationA
     {
         return [
             'status' => SupportArticle::STATUS_PUBLISHED,
-            'review_state' => SupportArticle::REVIEW_APPROVED,
             'published_at' => $target->published_at ?? now(),
         ];
     }

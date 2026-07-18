@@ -6,6 +6,7 @@ namespace Tests\Feature\SeoIntel;
 
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
+use App\Services\Cms\CmsEditorialReviewAttestationService;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\ContentPages\ContentPagesControlledPublishService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -299,8 +300,9 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
             $this->assertSame(ContentPage::STATUS_DRAFT, (string) $page->status);
             $this->assertFalse((bool) $page->is_public);
             $this->assertFalse((bool) $page->is_indexable);
-            $this->assertFalse((bool) $page->publish_allowed);
-            $this->assertNull($page->operator_approved_at);
+            $this->assertTrue((bool) $page->publish_allowed);
+            $this->assertSame('approved', (string) $page->review_state);
+            $this->assertNotNull($page->operator_approved_at);
             $this->assertNull($page->published_at);
         }
     }
@@ -366,46 +368,30 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         $this->assertTrue((bool) $protected->is_indexable);
     }
 
-    public function test_science_zh_scope_repairs_already_published_indexable_rows_without_creation(): void
+    public function test_science_zh_scope_does_not_use_publish_to_repair_missing_review(): void
     {
         $this->seedBrokenPublishedScienceZhTargets();
         $beforeCount = ContentPage::query()->withoutGlobalScopes()->count();
 
-        $dryRun = $this->runScienceZhPublishCommand(['--dry-run' => true]);
+        $output = $this->runScienceZhPublishCommand(['--execute' => true], expectedExitCode: 1);
 
-        $this->assertTrue($dryRun['ok'] ?? false);
-        $this->assertSame(0, $dryRun['would_publish_count'] ?? null);
-        $this->assertSame(5, $dryRun['would_update_count'] ?? null);
-        $this->assertSame(5, $dryRun['would_repair_existing_published_count'] ?? null);
-        $this->assertSame('repair_existing_published', data_get($dryRun, 'pages.0.action'));
-        $this->assertFalse((bool) data_get($dryRun, 'after_state_preview.science.is_indexable'));
-
-        $output = $this->runScienceZhPublishCommand(['--execute' => true]);
-
-        $this->assertTrue($output['ok'] ?? false);
-        $this->assertTrue($output['writes_committed'] ?? false);
-        $this->assertSame(array_map(static fn (string $key): string => 'zh-CN:'.$key, self::scienceZhTargetKeys()), $output['published_keys'] ?? null);
+        $this->assertFalse($output['ok'] ?? true);
+        $this->assertFalse($output['writes_committed'] ?? true);
+        $this->assertContains('review_not_approved', $this->errorCodes($output));
+        $this->assertContains('publish_gate_not_ready', $this->errorCodes($output));
         $this->assertSame($beforeCount, ContentPage::query()->withoutGlobalScopes()->count());
 
         foreach (self::scienceZhTargetKeys() as $key) {
             $page = $this->contentPageForLocale($key, 'zh-CN');
             $this->assertSame(ContentPage::STATUS_PUBLISHED, (string) $page->status);
             $this->assertTrue((bool) $page->is_public);
-            $this->assertFalse((bool) $page->is_indexable);
-            $this->assertSame('approved', (string) $page->review_state);
-            $this->assertFalse((bool) $page->legal_review_required);
-            $this->assertFalse((bool) $page->science_review_required);
-            $this->assertTrue((bool) $page->publish_allowed);
-            $this->assertSame('passed', (string) $page->claim_gate_status);
-            $this->assertSame([], $page->forbidden_claims ?? []);
-            $this->assertNotNull($page->operator_approved_at);
-            $this->assertTrue($page->passesPublicReadinessGate());
-
-            $this->getJson('/api/v0.5/content-pages/'.$key.'?locale=zh-CN&org_id=0')
-                ->assertOk()
-                ->assertJsonPath('ok', true)
-                ->assertJsonPath('page.slug', $key)
-                ->assertJsonPath('page.is_indexable', false);
+            $this->assertTrue((bool) $page->is_indexable);
+            $this->assertSame('science_review', (string) $page->review_state);
+            $this->assertTrue((bool) $page->legal_review_required);
+            $this->assertTrue((bool) $page->science_review_required);
+            $this->assertFalse((bool) $page->publish_allowed);
+            $this->assertSame('not_reviewed', (string) $page->claim_gate_status);
+            $this->assertNull($page->operator_approved_at);
         }
     }
 
@@ -506,6 +492,7 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
 
             $page = ContentPage::query()->withoutGlobalScopes()->create($this->pageAttributes($key));
             app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
+            $this->recordSeparateReview($page);
         }
     }
 
@@ -514,6 +501,7 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         foreach ($this->helpServiceSourceRows() as $row) {
             $page = ContentPage::query()->withoutGlobalScopes()->create($this->helpServicePageAttributes($row));
             app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
+            $this->recordSeparateReview($page);
         }
     }
 
@@ -530,7 +518,69 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
 
             $page = ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, $overridesByKey[$key] ?? []));
             app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $page);
+            $this->recordSeparateReview($page);
         }
+    }
+
+    private function recordSeparateReview(ContentPage $page): void
+    {
+        $reviewedAt = now()->subMinute();
+        $page->forceFill([
+            'review_state' => 'approved',
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'last_reviewed_at' => $reviewedAt,
+            'publish_allowed' => true,
+            'operator_approval_required' => true,
+            'operator_approved_at' => $reviewedAt,
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'schema_enabled' => false,
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+            'is_public' => false,
+            'is_indexable' => false,
+        ])->save();
+
+        $working = CmsTranslationRevision::query()
+            ->withoutGlobalScopes()
+            ->findOrFail((int) $page->working_revision_id);
+        $payload = is_array($working->payload_json) ? $working->payload_json : [];
+        $working->forceFill([
+            'revision_status' => CmsTranslationRevision::STATUS_APPROVED,
+            'payload_json' => [
+                ...$payload,
+                'review_state' => 'approved',
+                'legal_review_required' => false,
+                'science_review_required' => false,
+                'last_reviewed_at' => $reviewedAt,
+                'publish_allowed' => true,
+                'operator_approval_required' => true,
+                'operator_approved_at' => $reviewedAt,
+                'claim_gate_status' => 'passed',
+                'forbidden_claims' => [],
+                'schema_enabled' => false,
+                'faq_schema_eligible' => false,
+                'schema_eligibility_reviewed_at' => null,
+                'is_public' => false,
+                'is_indexable' => false,
+            ],
+            'approved_at' => $reviewedAt,
+        ])->save();
+
+        app(CmsEditorialReviewAttestationService::class)->bindOrCreateApproved(
+            null,
+            'content_page_review',
+            'content_page:'.(int) $page->id,
+            [
+                [
+                    'surface_id' => 'content_page',
+                    'record' => app(RowBackedRevisionWorkspace::class)->editorRecord('content_page', $page->refresh()),
+                ],
+                ['surface_id' => 'cms_translation_revision', 'record' => $working->refresh()],
+            ],
+            1,
+        );
     }
 
     private function seedBrokenPublishedScienceZhTargets(): void

@@ -155,7 +155,9 @@
                                     @endif
                                     @if ($item['can_decide'])
                                         <x-filament::button size="xs" color="success" type="button" wire:click="approveItem('{{ $item['type'] }}', {{ $item['id'] }})">
-                                            {{ __('ops.custom_pages.common.actions.approve') }}
+                                            {{ $item['solo_owner_attestation']
+                                                ? __('ops.custom_pages.editorial_review.solo_owner_approve')
+                                                : __('ops.custom_pages.common.actions.approve') }}
                                         </x-filament::button>
                                         <x-filament::button size="xs" color="warning" type="button" wire:click="requestChangesItem('{{ $item['type'] }}', {{ $item['id'] }})">
                                             {{ __('ops.custom_pages.common.actions.send_back') }}

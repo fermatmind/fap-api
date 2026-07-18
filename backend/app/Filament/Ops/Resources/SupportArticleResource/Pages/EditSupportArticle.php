@@ -7,15 +7,19 @@ namespace App\Filament\Ops\Resources\SupportArticleResource\Pages;
 use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\SupportArticle;
+use App\Services\Cms\CmsEditorialReviewTransitionService;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 
+/** @review-surface support_article */
 class EditSupportArticle extends EditRecord
 {
     protected static string $resource = SupportArticleResource::class;
+
+    private bool $releaseTransitioned = false;
 
     public function getTitle(): string|Htmlable
     {
@@ -84,7 +88,7 @@ class EditSupportArticle extends EditRecord
     {
         /** @var SupportArticle $record */
         $record = $record;
-        $workspace = app(RowBackedRevisionWorkspace::class);
+        $wasPublished = (string) $record->status === SupportArticle::STATUS_PUBLISHED;
         $revisionStatus = $record->isSourceContent()
             ? SupportArticle::TRANSLATION_STATUS_SOURCE
             : ((string) $data['status'] === SupportArticle::STATUS_PUBLISHED
@@ -95,10 +99,14 @@ class EditSupportArticle extends EditRecord
                         ? SupportArticle::TRANSLATION_STATUS_HUMAN_REVIEW
                         : SupportArticle::TRANSLATION_STATUS_DRAFT)));
 
-        $updated = $workspace->saveWorkingDraft(
-            'support_article',
-            $record,
-            [
+        $status = (string) $data['status'];
+        $reviewState = (string) $data['review_state'];
+
+        $updated = app(CmsEditorialReviewTransitionService::class)->saveRevisionedResource(
+            contentType: 'support_article',
+            surfaceId: 'support_article',
+            record: $record,
+            payload: [
                 'title' => trim((string) $data['title']),
                 'summary' => $data['summary'] ?? null,
                 'body_md' => (string) ($data['body_md'] ?? ''),
@@ -113,18 +121,22 @@ class EditSupportArticle extends EditRecord
                 'related_content_page_ids' => array_values((array) ($data['related_content_page_ids'] ?? [])),
                 'canonical_path' => $data['canonical_path'] ?? null,
             ],
-            $revisionStatus,
-            [
+            revisionStatus: $revisionStatus,
+            recordAttributes: [
                 'status' => (string) $data['status'],
                 'review_state' => (string) $data['review_state'],
                 'last_reviewed_at' => $data['last_reviewed_at'] ?? null,
                 'published_at' => $data['published_at'] ?? null,
             ],
+            reviewApproved: $reviewState === SupportArticle::REVIEW_APPROVED,
+            releaseRequested: in_array($status, [SupportArticle::STATUS_SCHEDULED, SupportArticle::STATUS_PUBLISHED], true),
+            publishNow: $status === SupportArticle::STATUS_PUBLISHED,
+            actorAdminUserId: (int) auth((string) config('admin.guard', 'admin'))->id(),
         );
+        $this->releaseTransitioned = ! $wasPublished
+            && (string) $updated->status === SupportArticle::STATUS_PUBLISHED;
 
-        return (string) $data['status'] === SupportArticle::STATUS_PUBLISHED
-            ? $workspace->publishWorkingRevision('support_article', $updated)
-            : $updated;
+        return $updated;
     }
 
     protected function afterSave(): void
@@ -132,7 +144,7 @@ class EditSupportArticle extends EditRecord
         /** @var SupportArticle $record */
         $record = $this->getRecord()->fresh();
 
-        if (ContentReleaseAudit::shouldDispatchPublishedFollowUp('support_article', $record, [
+        if ($this->releaseTransitioned || ContentReleaseAudit::shouldDispatchPublishedFollowUp('support_article', $record, [
             'title',
             'summary',
             'body_md',

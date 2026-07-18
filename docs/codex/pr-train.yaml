@@ -45139,3 +45139,78 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: SOLO-OWNER-CMS-REVIEW-02
+    repo: fap-api
+    base: main
+    branch: codex/solo-owner-cms-review-02
+    title: "SOLO-OWNER-CMS-REVIEW-02: accept solo-owner attestations across CMS editorial review"
+    status: user_authorized
+    depends_on:
+      - SOLO-OWNER-REVIEW-FOUNDATION-01
+    train_scope: cms_editorial_solo_owner_review_adapters
+    scope:
+      - Migrate Article, ArticleTranslationRevision, CmsTranslationRevision, ContentPage, SupportArticle, InterpretationGuide, ResearchReport, EditorialReview, CMS translation review, preview approval, and controlled editorial approval to the central solo-owner attestation contract.
+      - Allow the configured solo owner to act as owner, author, submitter, reviewer, and approver while retaining team_separated role separation for non-solo operation.
+      - Support single and batch compact attestations, deterministically expand exact per-revision/resource evidence, and preserve existing review state machines and audit trails.
+      - Keep review approval separate from publication or promotion, keep generic Filament publishing fail-closed, preserve controlled publisher boundaries, and make no production CMS or publication-state changes.
+    allowed_paths:
+      - backend/app/Models/EditorialReview.php
+      - backend/app/Models/Article*.php
+      - backend/app/Models/CmsTranslationRevision.php
+      - backend/app/Models/ContentPage.php
+      - backend/app/Models/SupportArticle.php
+      - backend/app/Models/InterpretationGuide.php
+      - backend/app/Models/ResearchReport.php
+      - backend/app/Services/Cms/**
+      - backend/app/Services/ContentPages/**
+      - backend/app/Services/Ops/*Translation*
+      - backend/app/Filament/Ops/Pages/EditorialReviewPage.php
+      - backend/app/Filament/Ops/Support/EditorialReviewAudit.php
+      - backend/app/Filament/Ops/Resources/**
+      - backend/resources/views/filament/ops/pages/editorial-review.blade.php
+      - backend/lang/en/ops.php
+      - backend/lang/zh_CN/ops.php
+      - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
+      - backend/tests/Feature/Ops/**
+      - backend/tests/Feature/Cms/**
+      - backend/tests/Unit/Services/Cms/**
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Architecture/ReviewPolicyRegistryTest.php
+      - docs/operations/solo-owner-review-protocol.md
+      - docs/operations/generated/solo-owner-review-surface-registry.v1.json
+      - AGENTS.md
+      - backend/AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify Personality, Career/SEO, high-risk AdminApproval, public API, or frontend workflows assigned to PR3-PR7.
+      - Modify actual article, help, policy, research, or personality content, or change any real publication state.
+      - Run production migrations, attestation binds, CMS writes, imports, publication, promotion, deployment, or any other production action.
+      - Merge review approval with publish or promotion, weaken generic Filament publish restrictions, or expose private reviewer identity or evidence publicly.
+    validation:
+      - same configured owner/submitter/reviewer solo_owner approval tests
+      - non-owner forgery rejection and team_separated role-separation tests
+      - approved_all and approved_with_exceptions exact target expansion tests
+      - review state-machine, audit-trail, publish-separation, generic publish fail-closed, and private-projection regression tests
+      - cd backend && php artisan test tests/Feature/Ops tests/Feature/Cms tests/Unit/Services/Cms tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool docs/operations/generated/solo-owner-review-surface-registry.v1.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend

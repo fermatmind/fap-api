@@ -12,6 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @review-surface cms_translation_revision
+ * @review-surface content_page
+ * @review-surface support_article
+ * @review-surface interpretation_guide
+ */
 final class SiblingTranslationWorkflowService
 {
     public const PUBLIC_EDITORIAL_ORG_ID = 0;
@@ -25,6 +31,7 @@ final class SiblingTranslationWorkflowService
         private readonly CmsMachineTranslationProviderRegistry $providers,
         private readonly AuditLogger $auditLogger,
         private readonly RowBackedRevisionWorkspace $workspace,
+        private readonly CmsEditorialReviewAttestationService $reviewAttestations,
         SupportArticleTranslationAdapter $supportArticles,
         InterpretationGuideTranslationAdapter $interpretationGuides,
         ContentPageTranslationAdapter $contentPages,
@@ -176,25 +183,50 @@ final class SiblingTranslationWorkflowService
         return $target->refresh();
     }
 
-    public function approveTranslation(string $contentType, Model $target): Model
-    {
-        $blockers = $this->preflight($contentType, $target)['blockers'];
-        if ($blockers !== []) {
-            throw new CmsTranslationWorkflowException('Translation approval is blocked by preflight issues.', $blockers);
-        }
+    /** @param array<string, mixed>|null $attestation */
+    public function approveTranslation(
+        string $contentType,
+        Model $target,
+        ?array $attestation = null,
+    ): Model {
+        return DB::transaction(function () use ($contentType, $target, $attestation): Model {
+            /** @var Model $locked */
+            $locked = $target->newQueryWithoutScopes()
+                ->lockForUpdate()
+                ->findOrFail($target->getKey());
+            $blockers = $this->preflight($contentType, $locked)['blockers'];
+            if ($blockers !== []) {
+                throw new CmsTranslationWorkflowException('Translation approval is blocked by preflight issues.', $blockers);
+            }
 
-        $target = $this->workspace->updateWorkingRevisionStatus($contentType, $target, CmsTranslationRevision::STATUS_APPROVED);
-        $adapter = $this->adapter($contentType);
-        $adapter->markApproved($target);
-        if (! filled($target->published_revision_id)) {
-            $target->save();
-        } else {
-            $target->saveQuietly();
-        }
+            $working = $this->workspace->workingRevision($contentType, $locked);
+            $reviewedContent = $this->workspace->editorRecord($contentType, $locked);
+            if ($attestation !== null || $this->reviewAttestations->usesSoloOwnerMode()) {
+                $this->reviewAttestations->bindOrCreateApproved(
+                    attestation: $attestation,
+                    scopeType: 'cms_translation_review',
+                    scopeIdentity: $contentType.':'.(int) $locked->getKey().':revision:'.(int) $working->getKey(),
+                    resources: [
+                        ['surface_id' => $this->reviewSurfaceForContentType($contentType), 'record' => $reviewedContent],
+                        ['surface_id' => 'cms_translation_revision', 'record' => $working],
+                    ],
+                    actorAdminUserId: $this->actorAdminId(),
+                );
+            }
 
-        $this->log('cms_translation_approved', $contentType, $target, []);
+            $locked = $this->workspace->updateWorkingRevisionStatus($contentType, $locked, CmsTranslationRevision::STATUS_APPROVED);
+            $adapter = $this->adapter($contentType);
+            $adapter->markApproved($locked);
+            if (! filled($locked->published_revision_id)) {
+                $locked->save();
+            } else {
+                $locked->saveQuietly();
+            }
 
-        return $target->refresh();
+            $this->log('cms_translation_approved', $contentType, $locked, []);
+
+            return $locked->refresh();
+        });
     }
 
     public function publishTranslation(string $contentType, Model $target): Model
@@ -208,6 +240,16 @@ final class SiblingTranslationWorkflowService
         if ($working->revision_status !== CmsTranslationRevision::STATUS_APPROVED) {
             throw new CmsTranslationWorkflowException('Only approved translation revisions can be published.', [
                 'working revision is not approved',
+            ]);
+        }
+
+        if ($this->reviewAttestations->usesSoloOwnerMode()) {
+            $this->reviewAttestations->assertApprovedEvidence([
+                [
+                    'surface_id' => $this->reviewSurfaceForContentType($contentType),
+                    'record' => $this->workspace->editorRecord($contentType, $target),
+                ],
+                ['surface_id' => 'cms_translation_revision', 'record' => $working],
             ]);
         }
 
@@ -340,6 +382,28 @@ final class SiblingTranslationWorkflowService
                 'machine translation provider unavailable',
             ]);
         }
+    }
+
+    private function reviewSurfaceForContentType(string $contentType): string
+    {
+        return match ($contentType) {
+            'support_article' => 'support_article',
+            'interpretation_guide' => 'interpretation_guide',
+            'content_page' => 'content_page',
+            default => throw new CmsTranslationWorkflowException('Unsupported CMS review surface.', [
+                'review surface missing',
+            ]),
+        };
+    }
+
+    private function actorAdminId(): int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $actor = auth($guard)->user();
+
+        return is_object($actor) && is_numeric(data_get($actor, 'id'))
+            ? (int) data_get($actor, 'id')
+            : 0;
     }
 
     private function assertSourceApprovedForMachineTranslation(SiblingTranslationAdapter $adapter, Model $source): void

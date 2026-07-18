@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources\ContentPageResource\Pages;
 use App\Filament\Ops\Resources\ContentPageResource;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\ContentPage;
+use App\Services\Cms\CmsEditorialReviewTransitionService;
 use App\Services\Cms\ContentPagePublishGate;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Actions;
@@ -15,9 +16,15 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @review-surface content_page
+ * @review-surface content_page_external_evidence_gate
+ */
 class EditContentPage extends EditRecord
 {
     protected static string $resource = ContentPageResource::class;
+
+    private bool $releaseTransitioned = false;
 
     public function getTitle(): string|Htmlable
     {
@@ -102,7 +109,8 @@ class EditContentPage extends EditRecord
     {
         /** @var ContentPage $record */
         $record = $record;
-        $workspace = app(RowBackedRevisionWorkspace::class);
+        $wasPublished = (string) $record->status === ContentPage::STATUS_PUBLISHED
+            && (bool) $record->is_public;
         $status = (string) $data['status'];
         $reviewState = (string) $data['review_state'];
         $this->validatePublishSafety($record, $data, $status, $reviewState);
@@ -117,10 +125,11 @@ class EditContentPage extends EditRecord
                         ? ContentPage::TRANSLATION_STATUS_HUMAN_REVIEW
                         : ContentPage::TRANSLATION_STATUS_DRAFT)));
 
-        $updated = $workspace->saveWorkingDraft(
-            'content_page',
-            $record,
-            [
+        $updated = app(CmsEditorialReviewTransitionService::class)->saveRevisionedResource(
+            contentType: 'content_page',
+            surfaceId: 'content_page',
+            record: $record,
+            payload: [
                 'title' => trim((string) $data['title']),
                 'summary' => $data['summary'] ?? null,
                 'body_md' => (string) ($data['content_md'] ?? ''),
@@ -155,8 +164,8 @@ class EditContentPage extends EditRecord
                 'faq_schema_eligible' => (bool) ($data['faq_schema_eligible'] ?? false),
                 'schema_eligibility_reviewed_at' => $data['schema_eligibility_reviewed_at'] ?? null,
             ],
-            $revisionStatus,
-            [
+            revisionStatus: $revisionStatus,
+            recordAttributes: [
                 'status' => $status,
                 'review_state' => $reviewState,
                 'published_at' => $data['published_at'] ?? null,
@@ -171,11 +180,17 @@ class EditContentPage extends EditRecord
                 'faq_schema_eligible' => (bool) ($data['faq_schema_eligible'] ?? false),
                 'schema_eligibility_reviewed_at' => $data['schema_eligibility_reviewed_at'] ?? null,
             ],
+            reviewApproved: $reviewState === 'approved',
+            releaseRequested: in_array($status, [ContentPage::STATUS_SCHEDULED, ContentPage::STATUS_PUBLISHED], true)
+                || (bool) ($data['is_public'] ?? false),
+            publishNow: $status === ContentPage::STATUS_PUBLISHED && (bool) ($data['is_public'] ?? false),
+            actorAdminUserId: (int) auth((string) config('admin.guard', 'admin'))->id(),
         );
+        $this->releaseTransitioned = ! $wasPublished
+            && (string) $updated->status === ContentPage::STATUS_PUBLISHED
+            && (bool) $updated->is_public;
 
-        return $status === ContentPage::STATUS_PUBLISHED && (bool) ($data['is_public'] ?? false)
-            ? $workspace->publishWorkingRevision('content_page', $updated)
-            : $updated;
+        return $updated;
     }
 
     protected function afterSave(): void
@@ -183,7 +198,7 @@ class EditContentPage extends EditRecord
         /** @var ContentPage $record */
         $record = $this->getRecord()->fresh();
 
-        if (ContentReleaseAudit::shouldDispatchPublishedFollowUp('content_page', $record, [
+        if ($this->releaseTransitioned || ContentReleaseAudit::shouldDispatchPublishedFollowUp('content_page', $record, [
             'title',
             'kicker',
             'summary',

@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\InterpretationGuideResource;
 use App\Models\InterpretationGuide;
 use Illuminate\Database\Eloquent\Model;
 
+/** @review-surface interpretation_guide */
 final class InterpretationGuideTranslationAdapter extends AbstractSiblingTranslationAdapter
 {
     public function contentType(): string
@@ -119,7 +120,6 @@ final class InterpretationGuideTranslationAdapter extends AbstractSiblingTransla
     {
         return [
             'status' => InterpretationGuide::STATUS_PUBLISHED,
-            'review_state' => InterpretationGuide::REVIEW_APPROVED,
             'published_at' => $target->published_at ?? now(),
         ];
     }

@@ -126,6 +126,11 @@ final class CmsTranslationShadowRevisionTest extends TestCase
 
     public function test_publish_promotes_working_revision_to_public_row(): void
     {
+        $owner = $this->createAdminWithPermissions([PermissionNames::ADMIN_APPROVAL_REVIEW]);
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $owner->id);
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'));
+
         $workspace = app(RowBackedRevisionWorkspace::class);
         $workflow = app(SiblingTranslationWorkflowService::class);
 

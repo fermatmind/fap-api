@@ -61,7 +61,15 @@ Preflight performs zero database writes. It returns only redacted status, scope 
 
 Binding uses one database transaction. It writes one immutable `review_attestations` row and automatically expands the trusted target set into immutable `review_attestation_target_evidences` rows. The attestation evidence SHA is the idempotency identity. Exact existing evidence returns the existing record after readback; partial, extra, or drifted evidence aborts. Any target write failure rolls back the attestation and all target evidence.
 
-No production bind or historical backfill is part of the foundation PR. Concrete CMS, personality, Career/SEO, and Ops adapters are migrated only in their declared later train items.
+No production bind or historical backfill is part of this PR train. Concrete adapters are migrated only in their declared train items; implementation and test fixtures may bind local transactional evidence, but production/CMS data is never mutated by the train itself.
+
+## CMS editorial adapters (PR2)
+
+`SOLO-OWNER-CMS-REVIEW-02` activates compact evidence for Article, ArticleTranslationRevision, CmsTranslationRevision, ContentPage, SupportArticle, InterpretationGuide, ResearchReport, and EditorialReview. One configured owner approval binds the exact resource/revision set and expands immutable per-target evidence. A content or revision payload edit changes the target fingerprint; workflow timestamps and later state outputs do not.
+
+Approval and release remain separate transitions. In `solo_owner` mode, an approved draft may create or bind compact evidence, while a scheduled, published, promoted, or controlled-publish transition must find previously bound evidence for the exact current targets. The release transition cannot attach a new attestation to approve and release in one operation. Generic Article/Career release restrictions and controlled-publisher preflight remain fail closed.
+
+`team_separated` mode retains distinct owner/reviewer enforcement and does not accept compact solo-owner attestations. ResearchReport and science ContentPage external-evidence gates remain R4: owner attestation may record review of existing evidence, but cannot replace missing references, legal/science readiness, or other objective evidence.
 
 ## Risk tiers
 

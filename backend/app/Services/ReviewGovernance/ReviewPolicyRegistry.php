@@ -6,6 +6,17 @@ namespace App\Services\ReviewGovernance;
 
 use LogicException;
 
+/**
+ * @review-surface article
+ * @review-surface article_translation_revision
+ * @review-surface cms_translation_revision
+ * @review-surface content_page
+ * @review-surface content_page_external_evidence_gate
+ * @review-surface support_article
+ * @review-surface interpretation_guide
+ * @review-surface research_report
+ * @review-surface editorial_review
+ */
 final class ReviewPolicyRegistry
 {
     public const SCHEMA_VERSION = 'review-policy-registry.v1';
@@ -53,6 +64,17 @@ final class ReviewPolicyRegistry
         ['media_library_operator_approval', 'cms', 'R4', 'App\\Models\\MediaAsset', 'private_only', true, 'SOLO-OWNER-CMS-REVIEW-02'],
     ];
 
+    private const CMS_ADAPTER_SURFACES = [
+        'article',
+        'article_translation_revision',
+        'cms_translation_revision',
+        'content_page',
+        'support_article',
+        'interpretation_guide',
+        'research_report',
+        'editorial_review',
+    ];
+
     /**
      * @return list<array{
      *   surface_id: string,
@@ -98,7 +120,7 @@ final class ReviewPolicyRegistry
                 'public_projection' => $publicProjection,
                 'external_evidence_required' => $externalEvidenceRequired,
                 'migration_pr' => $migrationPr,
-                'adapter_status' => 'policy_registered_adapter_pending',
+                'adapter_status' => self::adapterStatus($surfaceId, $externalEvidenceRequired),
             ];
         }, self::SURFACES);
 
@@ -187,5 +209,19 @@ final class ReviewPolicyRegistry
                 throw new LogicException('External-evidence review policy surfaces must be classified R4.');
             }
         }
+    }
+
+    private static function adapterStatus(string $surfaceId, bool $externalEvidenceRequired): string
+    {
+        if ($surfaceId === 'content_page_external_evidence_gate') {
+            return 'external_evidence_gate_preserved';
+        }
+        if (in_array($surfaceId, self::CMS_ADAPTER_SURFACES, true)) {
+            return $externalEvidenceRequired
+                ? 'compact_attestation_adapter_active_external_evidence_still_required'
+                : 'compact_attestation_adapter_active';
+        }
+
+        return 'policy_registered_adapter_pending';
     }
 }
