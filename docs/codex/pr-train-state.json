@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "c53b56136205fb638742c6116faacd9d69562ed7",
+    "status": "github_checks_pending",
+    "commit_sha": "2497bae3aea5f5c4b52c821b43b00be698126810",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97260,7 +97260,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine checks passed on prior ready-ledger head 30b03e586ba6beefa308a7571ddd5dae379d5cc4, but final review found one new valid P2. The same-scope activation revalidation repair must complete full local and exact-head checks before merge."
+        "evidence": "All nine checks passed on prior ready-ledger head 30b03e586ba6beefa308a7571ddd5dae379d5cc4. The activation-time exposure snapshot revalidation repair is committed as 2497bae3aea5f5c4b52c821b43b00be698126810, the ninth review thread is resolved, and exact-head checks are pending."
       }
     },
     "scope_validation": {
@@ -97389,8 +97389,13 @@
         "at": "2026-07-18T12:52:43Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "The concurrency guard cleared and the complete PR3 manifest is green: 92 Career tests / 676 assertions plus 2 Big Five freeze tests / 6 assertions, all 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope validation. The activation lock now rejects an evicted or mismatched exposure snapshot before any pointer switch; the regression proves missing snapshot yields blocked activation and no ready active pointer."
+      },
+      {
+        "at": "2026-07-18T12:53:56Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed activation-time exposure snapshot revalidation as 2497bae3aea5f5c4b52c821b43b00be698126810. Replied to the ninth review finding with exact lock-time validation and regression evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T12:52:43Z"
+    "updated_at": "2026-07-18T12:53:56Z"
   }
 }
