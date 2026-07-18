@@ -97381,7 +97381,7 @@
     "depends_on": [
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "cb6632ef47de8cf9b9ba097c9c9a7df8a96131df",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
@@ -97394,14 +97394,14 @@
         "evidence": "After the fourteenth exact-head review repair, focused approval/registry validation passed 24 tests/516 assertions and the exact runtime-freeze contract remains covered by the prior 367/759 pass. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove JSON single/double-quoted credentials are rejected before Eloquent persistence and by the legacy/direct-row service boundary, while recovery-code audit and executor-redaction protections remain fail closed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #3172 is open. Thirteenth repair ledger head 4a8dbc926278d343f123e15e3ab2a2667d96e100 passed all nine checks. Fourteenth exact-head review found one P2 persistence gap: JSON-quoted credential keys were redacted in executor output but not rejected by AdminApproval reasons. The model and legacy/service guards now reject the same quoted forms, all local gates passed, and push/check rerun is pending."
+        "status": "passed",
+        "evidence": "Exact fourteenth-repair ledger head db9a2fc6f98537d5e799decda1f98231abab37b7 passed all nine required CI/code-scanning checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Exact-head Codex review reported no major issues, every review thread is resolved, and GitHub reports MERGEABLE/CLEAN."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97529,9 +97529,14 @@
         "at": "2026-07-18T18:07:22Z",
         "status": "review_fix_local_checks_passed",
         "note": "Fourteenth exact-head Codex review on 4a8dbc926278d343f123e15e3ab2a2667d96e100 found one P2 boundary mismatch: quoted credential keys were covered by executor redaction but not the AdminApproval reason persistence guard. The model guard now accepts optional single/double quotes after sensitive keys, and dynamic tests prove double-quoted access_token plus single-quoted clientSecret fail before Eloquent persistence and again at the legacy/direct-row service boundary. Focused approval/registry tests passed 24/516, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T18:27:43Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation-plus-ledger head db9a2fc6f98537d5e799decda1f98231abab37b7 passed all nine required checks. Exact-head Codex review reported no major issues, all fourteen prior review findings are repaired and every thread is resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This ready_to_merge ledger-only commit must itself pass required checks and exact-head review before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T18:07:22Z"
+    "updated_at": "2026-07-18T18:27:43Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
