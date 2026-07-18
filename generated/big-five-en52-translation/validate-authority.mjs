@@ -285,6 +285,12 @@ async function main() {
       media_supported: false,
       cms_draft_created: false,
       publish_allowed: false,
+      author_display_name: 'FermatMind Editorial',
+      reviewer_display_name: 'FermatMind Editorial',
+      reviewer_admin_user_id: 1,
+      review_mode: 'solo_operator',
+      clinical_reviewed: false,
+      expert_endorsement: false,
     };
     for (const [key, expected] of Object.entries(fixedFields)) {
       if (frontmatter[key] !== expected) fail('page_identity_lock', `${completedEntry.target_path}: ${key}`);
@@ -312,7 +318,7 @@ async function main() {
       || /data:image\//i.test(body))
       fail('forbidden_media', completedEntry.target_path);
     if (/<!--|-->/.test(body)) fail('hidden_html_comment', completedEntry.target_path);
-    if (/<a\b/i.test(body)) fail('forbidden_html_anchor', completedEntry.target_path);
+    if (/<\/?[A-Za-z][^>]*>/.test(body)) fail('forbidden_raw_html', completedEntry.target_path);
     const declaredWords = frontmatter.word_count_en;
     const actualWords = englishWordCount(visibleBody);
     if (declaredWords !== actualWords) {
