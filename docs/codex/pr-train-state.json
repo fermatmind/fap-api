@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "c53b56136205fb638742c6116faacd9d69562ed7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97259,14 +97259,14 @@
         "evidence": "After inspecting all six automated review threads, the current Career manifest suite passed 90 tests / 663 assertions across projection/promotion gates, immutable pre-exposure staging, concurrent candidate/stale-projection reads, atomic detail-pointer activation/rollback, stale materialized directory overlay, atomic lock-scoped directory construction/rollback, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 92 tests / 669 assertions total. The actual readiness path built 1046 and 10000 row directories in about 14ms and 140ms with one DB query. All 26 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-nine-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on prior ready-ledger head 6f169b68540e60f4ceb8232b38b7142885fcfab2, but final review found two new valid threads. The same-scope repair is locally green and must pass exact-head checks after push."
+        "status": "passed",
+        "evidence": "All nine required CI and code-scanning checks passed on exact head 67855c251a18309da0044fbf099005526f0b8588. All eight automated review threads are resolved, GitHub reports MERGEABLE/CLEAN, and the exact twenty-nine-path scope gate passes. This ready-ledger transition must pass its own exact-head checks before squash merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97374,8 +97374,13 @@
         "at": "2026-07-18T12:33:22Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed the shared versioned exposure-projection snapshot plus truthful post-commit failure reporting as c53b56136205fb638742c6116faacd9d69562ed7. Replied to both new review findings with exact regression evidence and resolved both threads. Exact-head required checks are running; no materialized SEO artifact, production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:41:33Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 67855c251a18309da0044fbf099005526f0b8588. All eight review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-nine-path scope validation passes. This final ready-ledger commit must pass its own exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T12:33:22Z"
+    "updated_at": "2026-07-18T12:41:33Z"
   }
 }
