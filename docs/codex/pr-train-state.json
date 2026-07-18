@@ -97830,6 +97830,101 @@
     ],
     "updated_at": "2026-07-18T16:04:00Z"
   },
+  "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01": {
+    "id": "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-detail-deploy-slo-repair-01",
+    "title": "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01: gate deploys and repair Career detail cache coverage",
+    "depends_on": [
+      "CAREER-DETAIL-ATOMIC-EXPOSURE-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "e64eacaabc6d633c5a4b28969cbbdbf0d4f587df",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3176",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The explicit seven-PR continuous execution goal authorized this exact PR4 deploy, SLO, alerting, and controlled-repair scope plus missing manifest/state registration."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR3 merged as 468591b9713cbecf83f906cc998b367ab15973f7; origin/main contains the merge and this isolated PR4 branch was created from that exact main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After reconciliation with main 781d1636b, Career cache coverage ultimately passed 8 tests / 96 assertions, runtime SLO passed 7 tests / 38 assertions, deploy guards passed 2 tests / 16 assertions, and Big Five runtime freeze passed 2 tests / 5 assertions. Default scheduling excludes repair; explicit opt-in schedules minimum-targets=2092, batch-size=37, and the durable resume key. Scoped Pint passed after every fix; composer validate --strict, deploy.php lint, YAML/JSON parsing, diff checks, and exact 13-path scope validation passed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All nine required CI/code-scanning checks passed on exact implementation head e64eacaabc6d633c5a4b28969cbbdbf0d4f587df: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T16:16:30Z",
+        "status": "implementation_in_progress",
+        "note": "Verified PR3 merge containment and cleanup, created the isolated PR4 branch from exact origin/main, and registered the user-supplied deploy/SLO/controlled-repair scope. This PR implements gates and opt-in scheduling only; it performs no deployment, production cache write, queue dispatch, CMS/DB mutation, or staging wait."
+      },
+      {
+        "at": "2026-07-18T16:26:55Z",
+        "status": "local_validation_passed",
+        "note": "All manifest checks and exact 13-path scope validation passed. The deploy gate is read-only, full coverage monitoring replaces sample-detail probing, and the bounded resumable repair schedule remains disabled by default; no production or deployment action was executed."
+      },
+      {
+        "at": "2026-07-18T16:28:12Z",
+        "status": "github_checks_pending",
+        "note": "Committed implementation as b7a4e705c00b405749da73ed45895d813c81770e, pushed the scoped branch, and opened PR #3176. GitHub required checks are queued or running."
+      },
+      {
+        "at": "2026-07-18T16:38:03Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine checks passed on 32d7d4084b0388ef1b6bc7817fe549aae4239c39, then two valid same-scope review findings were inspected. The fix retains a real detail-route HTTP smoke alongside full cache-key coverage and passes the configured 2092 floor into scheduled repair before cursor advancement. Focused tests, schedule contract, Pint, Composer validation, diff checks, and exact scope validation passed."
+      },
+      {
+        "at": "2026-07-18T16:45:41Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine checks passed on 5f69db6b4755dab4d060bcd12fefb355e94e6579 and the first two threads were resolved. A new valid same-scope review found that PHP integer casting could weaken a malformed deploy floor. The deploy guard now accepts only a strict positive base-10 integer and fails closed otherwise; focused deploy tests, Pint, PHP lint, and diff checks passed."
+      },
+      {
+        "at": "2026-07-18T16:54:18Z",
+        "status": "main_reconciliation_pending",
+        "note": "All nine checks passed on 869f10382ce1997be574197beb3b6b9527e04193 and the deploy-floor thread was resolved. A new valid review found the same malformed-integer risk in runtime config; config now rejects malformed or non-positive target floors before SLO or repair scheduling. Focused observability tests and Pint passed. GitHub reports main advanced to 781d1636b and the PR must reconcile that dependency before final checks."
+      },
+      {
+        "at": "2026-07-18T16:58:06Z",
+        "status": "github_checks_pending",
+        "note": "Merged origin/main 781d1636b into the PR4 branch. Conflicts were limited to append-only PR-train manifest/state files; the upstream MBTI-COMP-PROJECTION-45 entries and the exact PR4 entries were both preserved. All manifest checks and exact 13-path scope validation passed on the reconciled tree at 17ae73527c1bb366cbf68dcd624e66fe8ca33c19."
+      },
+      {
+        "at": "2026-07-18T17:08:43Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine checks passed on 38734e75edbd95f82077bc4c86a47a97fe8dcccb and four earlier threads were resolved. Two new valid same-scope findings were inspected: CLI minimum-targets now rejects malformed or oversized values before inspection/write, and a completed repair cursor wraps on the next invocation so later missing/broken regressions are rediscovered. The wrap remains bounded, missing-only, resumable, and protected by the job's 300-second uniqueness lock. Focused coverage/SLO/freeze tests, Pint, diff checks, and exact scope validation passed."
+      },
+      {
+        "at": "2026-07-18T17:16:19Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on exact implementation head e64eacaabc6d633c5a4b28969cbbdbf0d4f587df. All six review threads are resolved, GitHub reports OPEN/CLEAN/MERGEABLE, the worktree is clean, and exact 13-path scope validation passes. This ledger-only transition must pass its own exact-head checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-18T17:16:19Z"
+  },
   "MBTI-COMP-PROJECTION-45": {
     "id": "MBTI-COMP-PROJECTION-45",
     "repo": "fap-api",

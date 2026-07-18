@@ -15,6 +15,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         {--verify-only : Explicitly select the default read-only verification mode}
         {--repair-missing : Queue only missing or broken published targets}
         {--locales=en,zh-CN : Comma-separated public locales}
+        {--minimum-targets=0 : Fail when the dynamic eligible target count is below this rollout floor}
         {--batch-size=250 : Maximum stable target rows inspected per repair invocation}
         {--resume-key=default : Durable repair cursor namespace}
         {--reset : Reset the repair cursor before queueing}
@@ -44,12 +45,32 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
             return $this->failCommand('--locales must contain only en or zh-CN and include at least one locale.');
         }
 
+        $minimumTargetsRaw = trim((string) $this->option('minimum-targets'));
+        if (preg_match('/^(?:0|[1-9][0-9]*)$/D', $minimumTargetsRaw) !== 1) {
+            return $this->failCommand('--minimum-targets must be a non-negative base-10 integer.');
+        }
+        $minimumTargets = (int) $minimumTargetsRaw;
+        if ($minimumTargets > 100000) {
+            return $this->failCommand('--minimum-targets must not exceed 100000.');
+        }
+
         $inspection = $this->coverageService->inspect($locales);
         $report = $inspection['report'];
+        $report['minimum_target_count'] = $minimumTargets;
+        $report['minimum_target_count_met'] = (int) $report['eligible_target_count'] >= $minimumTargets;
+        if (! $report['minimum_target_count_met']) {
+            $report['status'] = 'incomplete';
+        }
         if (! $repair) {
             $this->emit($report);
 
             return $report['status'] === 'ready' ? self::SUCCESS : self::FAILURE;
+        }
+
+        if (! $report['minimum_target_count_met']) {
+            $this->emit($report);
+
+            return self::FAILURE;
         }
 
         if (app()->environment('production') && ! (bool) $this->option('confirm-production-write')) {
@@ -65,7 +86,9 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         }
 
         $rows = $inspection['rows'];
-        $cursorBefore = min(count($rows), max(0, (int) Cache::get($resumeKey, 0)));
+        $storedCursor = max(0, (int) Cache::get($resumeKey, 0));
+        $cursorWrapped = $rows !== [] && $storedCursor >= count($rows);
+        $cursorBefore = $cursorWrapped ? 0 : min(count($rows), $storedCursor);
         $batchSize = min(1000, max(1, (int) $this->option('batch-size')));
         $batch = array_slice($rows, $cursorBefore, $batchSize);
         $queued = 0;
@@ -86,6 +109,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         $report['repair'] = [
             'resume_key' => $resumeKey,
             'batch_size' => $batchSize,
+            'cursor_wrapped' => $cursorWrapped,
             'cursor_before' => $cursorBefore,
             'cursor_after' => $cursorAfter,
             'remaining_targets' => count($rows) - $cursorAfter,

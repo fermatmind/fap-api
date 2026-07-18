@@ -22,6 +22,15 @@ $opsAccessControl = [
     ],
 ];
 
+$careerDetailMinimumTargetsRaw = env('CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT', 2092);
+$careerDetailMinimumTargetsRaw = is_int($careerDetailMinimumTargetsRaw)
+    ? (string) $careerDetailMinimumTargetsRaw
+    : (is_string($careerDetailMinimumTargetsRaw) ? trim($careerDetailMinimumTargetsRaw) : '');
+if (preg_match('/^[1-9][0-9]*$/D', $careerDetailMinimumTargetsRaw) !== 1) {
+    throw new UnexpectedValueException('CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT must be a positive base-10 integer.');
+}
+$careerDetailMinimumTargets = (int) $careerDetailMinimumTargetsRaw;
+
 return [
     'allowed_host' => $opsAccessControl['allowed_host'],
 
@@ -37,6 +46,9 @@ return [
         'site_url' => env('CAREER_RUNTIME_SLO_SITE_URL', env('FRONTEND_URL', 'https://fermatmind.com')),
         'api_url' => env('CAREER_RUNTIME_SLO_API_URL', env('APP_URL', 'https://api.fermatmind.com')),
         'timeout_seconds' => (int) env('CAREER_RUNTIME_SLO_TIMEOUT_SECONDS', 8),
+        'minimum_detail_target_count' => $careerDetailMinimumTargets,
+        'repair_missing_enabled' => (bool) env('CAREER_RUNTIME_SLO_REPAIR_MISSING_ENABLED', false),
+        'repair_batch_size' => (int) env('CAREER_RUNTIME_SLO_REPAIR_BATCH_SIZE', 100),
     ],
 
     'content_release_observability' => [

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Career\CareerJobDetailCacheCoverageService;
 use App\Services\Career\CareerRuntimeSloService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Ops\OpsAlertService;
@@ -17,8 +18,11 @@ final class CareerRuntimeSloCheck extends Command
 
     protected $description = 'Probe public Career runtime surfaces, evaluate the rolling SLO, and alert without mutating authority.';
 
-    public function handle(CareerRuntimeSloService $slo, PublicCareerAuthorityResponseCache $cache): int
-    {
+    public function handle(
+        CareerRuntimeSloService $slo,
+        PublicCareerAuthorityResponseCache $cache,
+        CareerJobDetailCacheCoverageService $coverageService,
+    ): int {
         $site = rtrim((string) config('ops.career_runtime_slo.site_url'), '/');
         $api = rtrim((string) config('ops.career_runtime_slo.api_url'), '/');
         $timeout = max(1, (int) config('ops.career_runtime_slo.timeout_seconds', 8));
@@ -44,14 +48,28 @@ final class CareerRuntimeSloCheck extends Command
 
         $enCount = (int) data_get(json_decode((string) ($responses['api_en']['body'] ?? ''), true), 'public_truth.public_detail_indexable_count', 0);
         $zhCount = (int) data_get(json_decode((string) ($responses['api_zh']['body'] ?? ''), true), 'public_truth.public_detail_indexable_count', 0);
-        $slug = (string) data_get(json_decode((string) ($responses['api_en']['body'] ?? ''), true), 'items.0.slug', '');
-        if ($slug !== '') {
+        $detailInspection = $coverageService->inspect(['en', 'zh-CN']);
+        $detailCoverage = $detailInspection['report'];
+        $minimumDetailTargets = max(1, (int) config('ops.career_runtime_slo.minimum_detail_target_count', 2092));
+        $detailSmokeTarget = collect($detailInspection['rows'])->first(
+            static fn (array $row): bool => $row['locale'] === 'en'
+                && $row['classification'] !== 'held_or_unpublished_excluded'
+        );
+        if (is_array($detailSmokeTarget)) {
             $started = hrtime(true);
             try {
-                $detail = Http::timeout($timeout)->get($api.'/api/v0.5/career/jobs/'.$slug, ['locale' => 'en']);
-                $responses['detail_sample'] = $this->summarize($detail, (hrtime(true) - $started) / 1_000_000);
+                $detail = Http::timeout($timeout)->get(
+                    $api.'/api/v0.5/career/jobs/'.$detailSmokeTarget['slug'],
+                    ['locale' => 'en'],
+                );
+                $responses['detail_route_smoke'] = $this->summarize($detail, (hrtime(true) - $started) / 1_000_000);
             } catch (\Throwable $throwable) {
-                $responses['detail_sample'] = ['status' => 0, 'duration_ms' => round((hrtime(true) - $started) / 1_000_000, 3), 'body' => '', 'error' => $throwable::class];
+                $responses['detail_route_smoke'] = [
+                    'status' => 0,
+                    'duration_ms' => round((hrtime(true) - $started) / 1_000_000, 3),
+                    'body' => '',
+                    'error' => $throwable::class,
+                ];
             }
         }
 
@@ -74,6 +92,10 @@ final class CareerRuntimeSloCheck extends Command
             'cache_stale' => $cacheStale,
             'last_rebuild_ms' => $lastRebuildMs,
             'smoke_failed' => $smokeFailed,
+            'detail_cache_missing_count' => (int) ($detailCoverage['missing_count'] ?? 0),
+            'detail_cache_broken_count' => (int) ($detailCoverage['broken_count'] ?? 0),
+            'detail_cache_target_count' => (int) ($detailCoverage['eligible_target_count'] ?? 0),
+            'minimum_detail_target_count' => $minimumDetailTargets,
         ]);
 
         $probes = collect($responses)->map(static fn (array $response): array => [
@@ -82,7 +104,14 @@ final class CareerRuntimeSloCheck extends Command
             'response_bytes' => strlen((string) ($response['body'] ?? '')),
             'error' => $response['error'] ?? null,
         ])->all();
-        $report = ['status' => $evaluation['status'], 'counts' => ['en' => $enCount, 'zh-CN' => $zhCount], 'cache' => $cacheStatuses, 'probes' => $probes, 'slo' => $evaluation];
+        $report = [
+            'status' => $evaluation['status'],
+            'counts' => ['en' => $enCount, 'zh-CN' => $zhCount],
+            'cache' => $cacheStatuses,
+            'detail_cache_coverage' => $detailCoverage,
+            'probes' => $probes,
+            'slo' => $evaluation,
+        ];
         if ($evaluation['alerts'] !== []) {
             OpsAlertService::send('[Career runtime SLO alert] '.implode(', ', $evaluation['alerts']));
         }

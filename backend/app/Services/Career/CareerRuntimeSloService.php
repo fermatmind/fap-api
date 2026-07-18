@@ -69,6 +69,15 @@ final class CareerRuntimeSloService
         if (($snapshot['smoke_failed'] ?? false) === true) {
             $alerts[] = 'career_release_smoke_failed';
         }
+        if ((int) ($snapshot['detail_cache_missing_count'] ?? 0) > 0) {
+            $alerts[] = 'career_detail_cache_coverage_missing';
+        }
+        if ((int) ($snapshot['detail_cache_broken_count'] ?? 0) > 0) {
+            $alerts[] = 'career_detail_cache_coverage_broken';
+        }
+        if ((int) ($snapshot['detail_cache_target_count'] ?? 0) < (int) ($snapshot['minimum_detail_target_count'] ?? 0)) {
+            $alerts[] = 'career_detail_cache_target_count_below_minimum';
+        }
 
         return [
             'sample_count' => count($api),
