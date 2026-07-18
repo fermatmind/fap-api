@@ -97618,7 +97618,7 @@
       "SOLO-OWNER-OPS-APPROVAL-05"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "4b2b22d9018a2f10ef9ae539e04d12a66cca76f9",
+    "commit_sha": "4956b056a42b2579b9821aefae893c1ca1441a51",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3185",
     "checks": {
       "dependency": {
@@ -97631,7 +97631,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "PR #3185 opened with the exact manifest title and branch. Required GitHub checks started on the pushed head; exact-head Codex review remains pending."
+        "evidence": "All nine required checks passed on head ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8. Exact-head Codex review found one scoped P2 mapping gap for known content-ready release states; the repair is locally committed and a new exact-head check/review cycle is pending."
       }
     },
     "scope_validation": {
@@ -97670,9 +97670,14 @@
         "at": "2026-07-18T22:05:37Z",
         "status": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #3185. GitHub reports the PR mergeable while required checks and exact-head Codex review are pending. No production or external-state action occurred beyond the authorized PR lifecycle."
+      },
+      {
+        "at": "2026-07-18T22:14:58Z",
+        "status": "github_checks_pending",
+        "note": "All nine checks passed on ac35ced41, then exact-head Codex review identified that operator_approved_content_ready and agent_promoted_content_ready were valid readable completed states but normalized to unknown. Added both approved mappings and regression cases in 4956b056a42b2579b9821aefae893c1ca1441a51; focused contract/personality/registry validation passed 24 tests / 896 assertions, scoped Pint and syntax passed, and post-commit runtime-freeze passed 2 tests / 6 assertions. A new exact-head CI/review cycle is pending."
       }
     ],
-    "updated_at": "2026-07-18T22:05:37Z"
+    "updated_at": "2026-07-18T22:14:58Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
