@@ -110,7 +110,10 @@ final class HighRiskApprovalServiceTest extends TestCase
     {
         config()->set('review_governance.mode', 'team_separated');
         $requester = $this->admin(totpEnabled: true);
-        $reviewer = $this->admin(totpEnabled: true);
+        $reviewer = $this->admin(
+            totpEnabled: true,
+            permissions: [PermissionNames::ADMIN_APPROVAL_REVIEW],
+        );
         $approval = $this->approval(AdminApproval::TYPE_MANUAL_GRANT, $requester, [
             'order_no' => 'ord-team-separated',
             'attempt_id' => (string) Str::uuid(),
@@ -135,6 +138,65 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertSame((int) $requester->id, (int) $approved->requested_by_admin_user_id);
         $this->assertSame((int) $reviewer->id, (int) $approved->approved_by_admin_user_id);
         $service->assertExecutable($approved);
+    }
+
+    public function test_team_separated_service_boundary_rejects_distinct_admin_without_review_permission(): void
+    {
+        config()->set('review_governance.mode', 'team_separated');
+        $requester = $this->admin(totpEnabled: true);
+        $nonReviewer = $this->admin(totpEnabled: true);
+        $service = app(HighRiskApprovalService::class);
+
+        $approve = $this->approval(AdminApproval::TYPE_MANUAL_GRANT, $requester, [
+            'order_no' => 'ord-non-reviewer-approve',
+        ]);
+        try {
+            $service->approve((string) $approve->id, (int) $nonReviewer->id, $this->freshStepUpCode($nonReviewer));
+            $this->fail('Expected a distinct non-review admin to be rejected during approval.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Team-separated approver lacks approval review permission.', $exception->getMessage());
+        }
+        $this->assertSame(AdminApproval::STATUS_PENDING, (string) $approve->fresh()->status);
+
+        $reject = $this->approval(AdminApproval::TYPE_REFUND, $requester, [
+            'order_no' => 'ord-non-reviewer-reject',
+        ]);
+        try {
+            $service->reject(
+                (string) $reject->id,
+                (int) $nonReviewer->id,
+                $this->freshStepUpCode($nonReviewer),
+                'not authorized to review',
+            );
+            $this->fail('Expected a distinct non-review admin to be rejected during rejection.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Team-separated approver lacks approval review permission.', $exception->getMessage());
+        }
+        $this->assertSame(AdminApproval::STATUS_PENDING, (string) $reject->fresh()->status);
+
+        $legacy = $this->approval(AdminApproval::TYPE_REPROCESS_EVENT, $requester, [
+            'payment_event_id' => (string) Str::uuid(),
+        ]);
+        DB::table('admin_approvals')->where('id', (string) $legacy->id)->update([
+            'status' => AdminApproval::STATUS_APPROVED,
+            'approved_by_admin_user_id' => (int) $nonReviewer->id,
+            'approved_at' => now()->subMinute()->startOfSecond(),
+        ]);
+        try {
+            $service->bindLegacyGovernance(
+                (string) $legacy->id,
+                (int) $nonReviewer->id,
+                $this->freshStepUpCode($nonReviewer),
+            );
+            $this->fail('Expected a distinct non-review admin to be rejected during legacy binding.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Team-separated approver lacks approval review permission.', $exception->getMessage());
+        }
+        $this->assertTrue($service->requiresLegacyGovernanceBinding($legacy->fresh()));
+        $this->assertDatabaseMissing('audit_logs', [
+            'target_id' => (string) $legacy->id,
+            'action' => 'approval_governance_rebound',
+        ]);
     }
 
     public function test_missing_step_up_non_owner_and_target_drift_fail_closed_without_action(): void

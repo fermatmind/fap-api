@@ -529,6 +529,10 @@ final readonly class HighRiskApprovalService
             if ($actorAdminUserId <= 0 || $actorAdminUserId === $requester) {
                 throw new HighRiskApprovalValidationException('Team-separated approval requires a distinct approver.');
             }
+            $actor = AdminUser::query()->find($actorAdminUserId);
+            if (! $actor || ! $actor->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW)) {
+                throw new HighRiskApprovalValidationException('Team-separated approver lacks approval review permission.');
+            }
 
             return;
         }
