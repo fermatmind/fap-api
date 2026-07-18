@@ -97236,7 +97236,7 @@
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
     "status": "local_checks_passed",
-    "commit_sha": "307f7f4506610e7efdfe4ce833b895629ef1fe41",
+    "commit_sha": "f04b3fb610ba3a329bfd9298bd2e6c225ff21958",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3167",
     "checks": {
       "dependency": {
@@ -97348,9 +97348,14 @@
         "at": "2026-07-18T12:54:09Z",
         "status": "local_checks_passed",
         "note": "All nine checks passed on superseded ready-to-merge head e8b0af939be5bc9ea3fe694ea5f38224aae15875, then exact-head Codex review found one P3: non-JSON validation failures did not print the actionable exception reason. The same-scope fix reports the reason only on the human-readable path while preserving stable redaction in JSON mode. Focused validation passed 16 tests/383 assertions plus the directly relevant runtime-freeze control 1/2, and the complete ci_verify_mbti.sh gate passed again including Big Five 1524/187973 and Personality 71/5383. Generated Big Five noise was exactly restored. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:55:52Z",
+        "status": "local_checks_passed",
+        "note": "Committed the human-readable validation-failure P3 repair as f04b3fb610ba3a329bfd9298bd2e6c225ff21958 after all local checks passed. This ledger-only follow-up records the final implementation commit before push and fresh exact-head validation."
       }
     ],
-    "updated_at": "2026-07-18T12:54:09Z"
+    "updated_at": "2026-07-18T12:55:52Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
