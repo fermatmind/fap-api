@@ -98442,13 +98442,50 @@
     "branch": "codex/big5-en52-domains-03",
     "title": "BIG5-EN52-DOMAINS-03: translate five Big Five English domains",
     "depends_on": ["BIG5-EN52-HUBS-02"],
-    "status": "github_checks_pending",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "5c520a55a6999df6b5f2083ccf6f993effd2152c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3186",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-HUBS-02 merged as 0f0aa7031d05185170f9a8723dfce5cf1f07d91f after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
       "local_validation": {"status": "passed", "evidence": "The frozen EN52 validator passed expected-translated=7 with pending=45. All five domain pages preserve 80 ordered H2 mappings, 31 FAQ mappings, 21 locked claims, 8,248 reader-visible English words, registered visible citations, canonical links, and zero CJK, invalid sources, claim mismatches, duplicate substantive body, or word-count drift. Neuroticism is non-diagnostic, Agreeableness non-moralizing, Conscientiousness non-predictive, Extraversion non-deficit-framed, and Openness non-IQ-equated. After an accepted P2, standard Ruby Psych parsed every domain frontmatter successfully with colon-bearing title fields quoted. Node syntax, all scoped JSON, YAML/state parsing, diff checks, and exact 13-path validation passed; all controlled write counters remain zero."},
+      "github_required_checks": {"status": "passed", "evidence": "Final head 2b705fb1c17c59c77ee8d97e0ea60137e0852b50 passed all 9 required checks; PR #3186 was CLEAN/MERGEABLE with zero unresolved review threads after one valid YAML-frontmatter P2 was fixed."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "failure_reason": null,
+    "merged_at": "2026-07-18T22:29:16Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR3 scope; no domain work starts before PR2 merges."},
+      {"at": "2026-07-18T21:54:00Z", "status": "implementation_in_progress", "note": "Started from exact merged PR2 SHA 0f0aa7031d05185170f9a8723dfce5cf1f07d91f. Scope is limited to the five domain pages, their evidence, QA, ledger completions, and train closeout; ranges, facet details, hubs, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-18T22:11:40Z", "status": "local_validation_passed", "note": "Completed five domain pages and evidence sidecars with 80 ordered H2 mappings, 31 FAQs, 21 locked claims, and 8,248 visible English words. The frozen translated=7 validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; scientific and product boundary review found zero P0 blockers, and every controlled write counter remains zero."},
+      {"at": "2026-07-18T22:14:00Z", "status": "github_checks_pending", "note": "Committed the exact 13-path PR3 scope as 2b741d056 and opened PR #3186. Merge remains gated on the final head passing every required check and having zero unresolved review threads."},
+      {"at": "2026-07-18T22:21:24Z", "status": "github_review_fixes_completed", "note": "Accepted one valid automated P2: standard YAML frontmatter rejects unquoted scalars containing colon-space even though the frozen regex parser accepted them. Quoted title and SEO title fields on all five domain pages, recomputed page/evidence/ledger hashes, passed Ruby Psych syntax on every page, and reran the frozen translated=7 validator successfully. Final-head GitHub checks and thread resolution remain required."},
+      {"at": "2026-07-18T22:29:16Z", "status": "merged", "note": "Final head 2b705fb1c17c59c77ee8d97e0ea60137e0852b50 passed all 9 checks; PR #3186 was CLEAN/MERGEABLE with zero unresolved review threads and squash-merged as 5c520a55a6999df6b5f2083ccf6f993effd2152c. origin/main containment was verified and both remote and local feature branches were deleted before PR4 began."}
+    ],
+    "updated_at": "2026-07-18T22:29:16Z"
+  },
+  "BIG5-EN52-RANGES-04": {
+    "id": "BIG5-EN52-RANGES-04",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-ranges-04",
+    "title": "BIG5-EN52-RANGES-04: translate fifteen canonical Big Five ranges",
+    "depends_on": ["BIG5-EN52-DOMAINS-03"],
+    "status": "github_checks_pending",
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3187",
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "passed", "evidence": "BIG5-EN52-DOMAINS-03 merged as 5c520a55a6999df6b5f2083ccf6f993effd2152c after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
+      "local_validation": {"status": "passed", "evidence": "Completed exactly 15 canonical high/mid/low range pages in five sequential domain cohorts, with 225 ordered H2 mappings, 65 FAQ mappings, 46 locked claims, and 11,649 reader-visible English words. The frozen expected-translated=22 validator passed with pending=30; all page frontmatter parsed under Ruby Psych after quoting one colon-bearing Openness excerpt; all JSON, state/YAML, link/source/claim, duplicate-body, word-count, CJK, diff, and exact-path gates passed. No legacy alias page was created and every controlled write counter remains zero."},
       "github_required_checks": {"status": "pending", "evidence": null}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
@@ -98463,43 +98500,12 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "transitions": [
-      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR3 scope; no domain work starts before PR2 merges."},
-      {"at": "2026-07-18T21:54:00Z", "status": "implementation_in_progress", "note": "Started from exact merged PR2 SHA 0f0aa7031d05185170f9a8723dfce5cf1f07d91f. Scope is limited to the five domain pages, their evidence, QA, ledger completions, and train closeout; ranges, facet details, hubs, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
-      {"at": "2026-07-18T22:11:40Z", "status": "local_validation_passed", "note": "Completed five domain pages and evidence sidecars with 80 ordered H2 mappings, 31 FAQs, 21 locked claims, and 8,248 visible English words. The frozen translated=7 validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; scientific and product boundary review found zero P0 blockers, and every controlled write counter remains zero."},
-      {"at": "2026-07-18T22:14:00Z", "status": "github_checks_pending", "note": "Committed the exact 13-path PR3 scope as 2b741d056 and opened PR #3186. Merge remains gated on the final head passing every required check and having zero unresolved review threads."},
-      {"at": "2026-07-18T22:21:24Z", "status": "github_review_fixes_completed", "note": "Accepted one valid automated P2: standard YAML frontmatter rejects unquoted scalars containing colon-space even though the frozen regex parser accepted them. Quoted title and SEO title fields on all five domain pages, recomputed page/evidence/ledger hashes, passed Ruby Psych syntax on every page, and reran the frozen translated=7 validator successfully. Final-head GitHub checks and thread resolution remain required."}
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR4 scope; no range work starts before PR3 merges."},
+      {"at": "2026-07-18T22:31:00Z", "status": "implementation_in_progress", "note": "Started from exact merged PR3 SHA 5c520a55a6999df6b5f2083ccf6f993effd2152c. Scope is limited to the fifteen canonical range pages, their evidence, QA, ledger completions, and train closeout; aliases, facets, completed hubs/domains, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-18T22:55:07Z", "status": "local_validation_passed", "note": "Completed five sequential range cohorts with page-level validation after each cohort and final cumulative translated=22 validation. All 15 pages, 225 H2 mappings, 65 FAQs, 46 claims, 11,649 visible words, canonical links, source locks, standard YAML parsing, and exact scope checks passed; every controlled write counter remains zero."},
+      {"at": "2026-07-18T22:56:59Z", "status": "github_checks_pending", "note": "Committed the exact 33-path PR4 scope as c839068b0 and opened PR #3187. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
     ],
-    "updated_at": "2026-07-18T22:21:24Z"
-  },
-  "BIG5-EN52-RANGES-04": {
-    "id": "BIG5-EN52-RANGES-04",
-    "repo": "fap-api",
-    "base": "main",
-    "branch": "codex/big5-en52-ranges-04",
-    "title": "BIG5-EN52-RANGES-04: translate fifteen canonical Big Five ranges",
-    "depends_on": ["BIG5-EN52-DOMAINS-03"],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {
-      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
-      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-DOMAINS-03 merge."},
-      "local_validation": {"status": "pending", "evidence": null},
-      "github_required_checks": {"status": "pending", "evidence": null}
-    },
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
-    "api_runtime_change": false,
-    "publish_allowed": false,
-    "deploy_allowed": false,
-    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR4 scope; no range work starts before PR3 merges."}],
-    "updated_at": "2026-07-18T18:36:28Z"
+    "updated_at": "2026-07-18T22:56:59Z"
   },
   "BIG5-EN52-OPENNESS-FACETS-05": {
     "id": "BIG5-EN52-OPENNESS-FACETS-05",
