@@ -80,7 +80,7 @@ Approval and release remain separate transitions. In `solo_owner` mode, an appro
 
 ## Personality adapters (PR3)
 
-`SOLO-OWNER-PERSONALITY-REVIEW-03` activates the same exact-target compact evidence contract for PersonalityPublicContentAsset, its private revision-review evidence, Big Five editorial revisions and Authority V2 review preflight, MBTI approval batches and cross-type authority, Enneagram Authority V2 review binding, and RIASEC content/release review.
+`SOLO-OWNER-PERSONALITY-REVIEW-03` activates the same exact-target compact evidence contract for PersonalityPublicContentAsset, its private revision-review evidence, Big Five editorial revisions and Authority V2 review preflight, MBTI approval batches, Enneagram Authority V2 review binding, and RIASEC content/release review. MBTI cross-type authority remains policy-registered with its adapter pending until an actual review gate consumes the central attestation contract.
 
 Big Five editorial approval permits the configured owner to be author, submitter, and reviewer in `solo_owner` mode and binds immutable evidence in the same transaction as the review-state transition. `team_separated` keeps the historical distinct-reviewer rule. Rollback remains separately authorized and retains its existing separation and audit controls.
 

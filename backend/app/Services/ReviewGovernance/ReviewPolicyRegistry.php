@@ -87,7 +87,6 @@ final class ReviewPolicyRegistry
         'personality_public_content_asset_revision_review',
         'big_five_v2_editorial_revision',
         'mbti_approval_batch',
-        'mbti_cross_type_comparison_authority',
         'enneagram_review_binder',
         'riasec_content_release_review',
     ];
