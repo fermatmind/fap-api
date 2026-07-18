@@ -11,9 +11,11 @@ use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\RecommendationSnapshot;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
+/** @review-surface career_trust_manifest */
 final class CareerSearchBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance'];
@@ -41,6 +43,7 @@ final class CareerSearchBundleBuilder
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /**
@@ -347,6 +350,7 @@ final class CareerSearchBundleBuilder
             trustSummary: [
                 'reviewer_status' => $trustManifest?->reviewer_status,
                 'reviewed_at' => optional($trustManifest?->reviewed_at)->toISOString(),
+                ...$this->publicReviewContract->project($trustManifest?->reviewer_status, $trustManifest?->reviewed_at),
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
                 'logic_version' => $trustManifest?->logic_version,
@@ -380,6 +384,7 @@ final class CareerSearchBundleBuilder
             ],
             seoContract: $this->buildDirectoryDraftSeoContract($occupation),
             trustSummary: [
+                ...$this->publicReviewContract->project(null),
                 'public_stub_kind' => self::PUBLIC_DIRECTORY_STUB_KIND,
                 'status' => 'unavailable',
                 'availability' => 'detail_unavailable',

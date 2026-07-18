@@ -13,8 +13,10 @@ use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
 use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Collection;
 
+/** @review-surface career_trust_manifest */
 final class CareerFamilyHubBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
@@ -24,6 +26,7 @@ final class CareerFamilyHubBundleBuilder
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerStructuredDataBuilder $structuredDataBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerFamilyHubBundle
@@ -211,6 +214,10 @@ final class CareerFamilyHubBundleBuilder
                     'seo_contract' => $this->buildSeoContract($occupation, $snapshot),
                     'trust_summary' => [
                         'reviewer_status' => $row['reviewer_status'] ?? $snapshot->trustManifest?->reviewer_status,
+                        ...$this->publicReviewContract->project(
+                            $row['reviewer_status'] ?? $snapshot->trustManifest?->reviewer_status,
+                            $snapshot->trustManifest?->reviewed_at,
+                        ),
                     ],
                 ];
             })

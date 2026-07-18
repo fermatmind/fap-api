@@ -68,6 +68,9 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ->assertJsonPath('steps.2', TransitionPathPayload::STEP_TOOL_OVERLAP)
             ->assertJsonPath('target_job.canonical_slug', 'registered-nurses')
             ->assertJsonPath('trust_summary.allow_transition_recommendation', true)
+            ->assertJsonPath('trust_summary.review_state', 'approved')
+            ->assertJsonPath('trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('trust_summary.reviewer', null)
             ->assertJsonPath('seo_contract.index_eligible', true)
             ->assertJsonPath('delta.entry_education_delta.source_value', "Bachelor's degree")
             ->assertJsonPath('delta.entry_education_delta.target_value', "Master's degree")
@@ -88,7 +91,14 @@ final class CareerTransitionPreviewApiTest extends TestCase
                     'mobility_score' => ['value', 'integrity_state', 'band'],
                     'confidence_score' => ['value', 'integrity_state', 'band'],
                 ],
-                'trust_summary' => ['allow_transition_recommendation', 'reviewer_status', 'reason_codes'],
+                'trust_summary' => [
+                    'allow_transition_recommendation',
+                    'reviewer_status',
+                    'review_state',
+                    'last_reviewed_at',
+                    'reviewer',
+                    'reason_codes',
+                ],
                 'why_this_path',
                 'what_is_lost',
                 'bridge_steps_90d' => [[

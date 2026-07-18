@@ -10,8 +10,10 @@ use App\DTO\Career\CareerRecommendationIndexItemBundle;
 use App\Models\CareerCompileRun;
 use App\Models\RecommendationSnapshot;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Collection;
 
+/** @review-surface career_trust_manifest */
 final class CareerRecommendationIndexBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
@@ -20,6 +22,7 @@ final class CareerRecommendationIndexBundleBuilder
 
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /**
@@ -136,6 +139,7 @@ final class CareerRecommendationIndexBundleBuilder
             trustSummary: [
                 'reviewer_status' => $trustManifest?->reviewer_status,
                 'reviewed_at' => optional($trustManifest?->reviewed_at)->toISOString(),
+                ...$this->publicReviewContract->project($trustManifest?->reviewer_status, $trustManifest?->reviewed_at),
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
                 'logic_version' => $trustManifest?->logic_version,

@@ -14,9 +14,14 @@ use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
+/**
+ * @review-surface career_trust_manifest
+ * @review-surface career_occupation_directory_review
+ */
 final class CareerAliasResolutionBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
@@ -50,6 +55,7 @@ final class CareerAliasResolutionBundleBuilder
     public function __construct(
         private readonly FirstWavePublishGate $publishGate,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function build(string $query, ?string $locale = null): CareerAliasResolutionBundle
@@ -274,6 +280,10 @@ final class CareerAliasResolutionBundleBuilder
                 'seo_contract' => $this->buildOccupationSeoContract($occupation, $snapshot),
                 'trust_summary' => [
                     'reviewer_status' => $snapshot->trustManifest?->reviewer_status,
+                    ...$this->publicReviewContract->project(
+                        $snapshot->trustManifest?->reviewer_status,
+                        $snapshot->trustManifest?->reviewed_at,
+                    ),
                 ],
             ];
         }
@@ -343,6 +353,7 @@ final class CareerAliasResolutionBundleBuilder
                 'seo_contract' => $this->buildDisplayAssetBackedOccupationSeoContract($occupation),
                 'trust_summary' => [
                     'reviewer_status' => 'approved_display_asset',
+                    ...$this->publicReviewContract->project('approved_display_asset'),
                 ],
             ];
         }

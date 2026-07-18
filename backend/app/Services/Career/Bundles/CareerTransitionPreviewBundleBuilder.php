@@ -11,13 +11,16 @@ use App\Models\RecommendationSnapshot;
 use App\Models\TransitionPath;
 use App\Services\Career\CareerTransitionPreviewReadinessLookup;
 use App\Services\Career\Transition\CareerTransitionContractBuilder;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Collection;
 
+/** @review-surface career_trust_manifest */
 final class CareerTransitionPreviewBundleBuilder
 {
     public function __construct(
         private readonly CareerTransitionPreviewReadinessLookup $readinessLookup,
         private readonly CareerTransitionContractBuilder $transitionContractBuilder,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function buildByType(string $type): ?CareerTransitionPreviewBundle
@@ -143,6 +146,7 @@ final class CareerTransitionPreviewBundleBuilder
             trustSummary: [
                 'allow_transition_recommendation' => true,
                 'reviewer_status' => $readiness['reviewer_status'] ?? null,
+                ...$this->publicReviewContract->project($readiness['reviewer_status'] ?? null),
                 'reason_codes' => $reasonCodes,
             ],
             whyThisPath: is_string($transitionExpansion['why_this_path'] ?? null)

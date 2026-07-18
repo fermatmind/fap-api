@@ -48,6 +48,8 @@ final class CareerSearchApiTest extends TestCase
             ->assertJsonPath('query.limit', 5)
             ->assertJsonPath('items.0.identity.canonical_slug', 'backend-architect-search-api')
             ->assertJsonPath('items.0.match_kind', 'canonical_slug_prefix')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonMissingPath('items.0.score_summary')
             ->assertJsonStructure([
                 'bundle_kind',
@@ -132,6 +134,9 @@ final class CareerSearchApiTest extends TestCase
             ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
             ->assertJsonPath('items.0.trust_summary.availability', 'detail_unavailable')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.seo_contract.index_eligible', false)
             ->assertJsonPath('items.0.seo_contract.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable')
