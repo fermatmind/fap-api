@@ -19,6 +19,7 @@ use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Collection;
 
+/** @review-surface career_trust_manifest */
 final class CareerJobListBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];

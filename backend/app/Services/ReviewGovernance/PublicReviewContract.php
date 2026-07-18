@@ -11,6 +11,7 @@ use Throwable;
 /**
  * @review-surface article
  * @review-surface content_page
+ * @review-surface content_page_external_evidence_gate
  * @review-surface support_article
  * @review-surface interpretation_guide
  * @review-surface research_report
