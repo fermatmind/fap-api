@@ -405,6 +405,64 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         ];
     }
 
+    /**
+     * Build and publish one target-locale detail projection from an explicit
+     * post-promotion projection item while the exposure transaction is still
+     * uncommitted. The cache can exist safely before route flags become public.
+     *
+     * @param  array<string, mixed>  $projectionItem
+     * @return array<string, mixed>
+     */
+    public function prepareJobDetailPayloadForExposure(
+        string $slug,
+        string $publicLocale,
+        array $projectionItem,
+    ): array {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        if (
+            $normalizedSlug === ''
+            || strtolower(trim((string) ($projectionItem['slug'] ?? ''))) !== $normalizedSlug
+            || ! $this->jobDetailProjectionItemIsPublished($projectionItem)
+        ) {
+            return [
+                'slug' => $normalizedSlug,
+                'locale' => $normalizedLocale,
+                'status' => 'projection_not_exposable',
+                'classification' => 'missing_pointer',
+            ];
+        }
+
+        $payload = $this->buildJobDetailReadModel(
+            $normalizedSlug,
+            $normalizedLocale,
+            $projectionItem,
+        );
+        if ($payload === null) {
+            return [
+                'slug' => $normalizedSlug,
+                'locale' => $normalizedLocale,
+                'status' => 'projection_build_failed',
+                'classification' => 'missing_pointer',
+            ];
+        }
+
+        $version = $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $payload);
+        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+
+        return [
+            'slug' => $normalizedSlug,
+            'locale' => $normalizedLocale,
+            'status' => in_array(
+                $readiness['classification'],
+                ['ready_active', 'ready_lkg', 'legacy_migratable'],
+                true,
+            ) ? 'ready' : 'verification_failed',
+            'classification' => $readiness['classification'],
+            'version' => $version,
+        ];
+    }
+
     /** @param array<string, mixed> $payload */
     public function publishJobDetailReadModel(string $slug, string $publicLocale, array $payload): string
     {
@@ -750,13 +808,24 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /**
      * @return array<string, mixed>|null
      */
-    private function buildJobDetailReadModel(string $slug, string $publicLocale): ?array
-    {
-        if (! $this->detailReadIsPublishedForLocale($slug, $publicLocale)) {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    private function buildJobDetailReadModel(
+        string $slug,
+        string $publicLocale,
+        ?array $exposureProjectionItem = null,
+    ): ?array {
+        if (
+            $exposureProjectionItem === null
+            && ! $this->detailReadIsPublishedForLocale($slug, $publicLocale)
+        ) {
             return null;
         }
 
-        $bundle = $this->careerJobDetailBundleBuilder->buildBySlug($slug, $publicLocale);
+        $bundle = $this->careerJobDetailBundleBuilder->buildBySlug(
+            $slug,
+            $publicLocale,
+            $exposureProjectionItem,
+        );
         if ($bundle !== null) {
             return (new CareerJobDetailResource($bundle))->toArray(
                 Request::create('/api/v0.5/career/jobs/'.$slug, 'GET', ['locale' => $publicLocale])

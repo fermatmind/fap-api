@@ -90,6 +90,80 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
         $this->assertNull($bundle);
     }
 
+    public function test_explicit_exposure_projection_overrides_stale_compiled_snapshot_index_state(): void
+    {
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(detailRouteEnabled: [
+                'backend-architect-exposure' => false,
+            ]),
+        );
+        $chain = CareerFoundationFixture::seedHighTrustCompleteChain([
+            'slug' => 'backend-architect-exposure',
+        ]);
+        $chain['indexState']->update([
+            'index_state' => 'noindex',
+            'index_eligible' => false,
+        ]);
+        $importRun = CareerImportRun::query()->create([
+            'dataset_name' => 'fixture',
+            'dataset_version' => 'v1',
+            'dataset_checksum' => 'checksum-exposure',
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinutes(10),
+            'finished_at' => now()->subMinutes(9),
+        ]);
+        $compileRun = CareerCompileRun::query()->create([
+            'import_run_id' => $importRun->id,
+            'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinutes(8),
+            'finished_at' => now()->subMinutes(7),
+        ]);
+        $chain['contextSnapshot']->update([
+            'compile_run_id' => $compileRun->id,
+            'context_payload' => ['materialization' => 'career_first_wave'],
+        ]);
+        $chain['childProjection']->update([
+            'compile_run_id' => $compileRun->id,
+            'projection_payload' => array_merge(
+                is_array($chain['childProjection']->projection_payload) ? $chain['childProjection']->projection_payload : [],
+                ['materialization' => 'career_first_wave'],
+            ),
+        ]);
+        app(CareerRecommendationCompiler::class)->compile(
+            $chain['childProjection'],
+            $chain['occupation'],
+            [
+                'compile_run_id' => $compileRun->id,
+                'index_state_id' => $chain['indexState']->id,
+                'import_run_id' => $importRun->id,
+            ],
+        );
+
+        $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug(
+            'backend-architect-exposure',
+            'en',
+            [
+                'slug' => 'backend-architect-exposure',
+                'locale' => 'en',
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+        );
+
+        $this->assertNotNull($bundle);
+        $this->assertTrue((bool) data_get($bundle?->toArray(), 'seo_contract.index_eligible'));
+        $this->assertSame('indexable', data_get($bundle?->toArray(), 'seo_contract.index_state'));
+    }
+
     public function test_it_prefers_first_wave_materialized_compile_snapshots_over_later_non_public_compiles(): void
     {
         $chain = CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-wave']);

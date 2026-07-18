@@ -155,6 +155,22 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertFalse(Cache::has($cacheKey));
     }
 
+    public function test_combined_warm_finishes_targeted_details_before_activating_directory(): void
+    {
+        $exitCode = Artisan::call('career:warm-public-authority-cache', [
+            '--job-detail-slugs' => 'missing-career',
+            '--job-detail-locales' => 'en',
+        ]);
+        $output = Artisan::output();
+
+        $this->assertSame(0, $exitCode);
+        $detailFinished = strpos($output, 'career_warm_phase=job_detail_en_missing-career state=finished');
+        $directoryStarted = strpos($output, 'career_warm_phase=job_index_en state=starting');
+        $this->assertIsInt($detailFinished);
+        $this->assertIsInt($directoryStarted);
+        $this->assertLessThan($directoryStarted, $detailFinished);
+    }
+
     public function test_command_can_warm_job_detail_caches_from_manifest_for_multiple_locales(): void
     {
         $manifestPath = tempnam(sys_get_temp_dir(), 'career-job-detail-manifest-');

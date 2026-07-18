@@ -10,6 +10,7 @@ use App\Domain\Career\Publish\CareerRolloutReportAuthoritySigner;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\IndexState;
 use App\Models\Occupation;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\DB;
 
 final class CanonicalBatchPromotionExecutorService
@@ -21,6 +22,7 @@ final class CanonicalBatchPromotionExecutorService
         private readonly CareerCanonicalRuntimeTruthExporter $truthExporter,
         private readonly CanonicalPostPromotionReleaseGateService $releaseGateService,
         private readonly CareerRolloutReportAuthoritySigner $rolloutReportAuthoritySigner,
+        private readonly PublicCareerAuthorityResponseCache $responseCache,
     ) {}
 
     /**
@@ -158,6 +160,22 @@ final class CanonicalBatchPromotionExecutorService
                 );
             }
 
+            $cachePreparation = $this->prepareDetailCachesForExposure(
+                $expectedLocaleRows,
+                $postProjection,
+            );
+            if (($cachePreparation['status'] ?? null) !== 'pass') {
+                DB::rollBack();
+
+                return $this->promotionValidationFailedResult(
+                    $transaction,
+                    $preStates,
+                    $promotedStates,
+                    $cachePreparation,
+                    null,
+                );
+            }
+
             $postPromotionValidation = $this->rollbackGate->validatePostPromotion(
                 $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
                 $postTruth,
@@ -192,12 +210,32 @@ final class CanonicalBatchPromotionExecutorService
 
             DB::commit();
 
+            try {
+                $directoryActivation = $this->responseCache->warmDirectoryReadModels($locales);
+            } catch (\Throwable $throwable) {
+                return $this->promotionValidationFailedResult(
+                    $transaction,
+                    $preStates,
+                    $promotedStates,
+                    [
+                        'status' => 'blocked',
+                        'failures' => [[
+                            'reason' => 'post_promotion_directory_activation_failed',
+                            'context' => ['error_class' => $throwable::class],
+                        ]],
+                    ],
+                    $releaseGate,
+                );
+            }
+
             return $this->successResult(
                 $transaction, $preStates, $promotedStates, $releaseGate,
-                $postProjection, $postTruth,
+                $postProjection, $postTruth, $cachePreparation, $directoryActivation,
             );
         } catch (\Throwable $e) {
-            DB::rollBack();
+            if (DB::transactionLevel() > 0) {
+                DB::rollBack();
+            }
 
             throw $e;
         }
@@ -299,6 +337,56 @@ final class CanonicalBatchPromotionExecutorService
     private function truthFromProjection(array $projection): array
     {
         return $this->truthExporter->buildFromProjectionArray($projection);
+    }
+
+    /**
+     * @param  list<array{slug: string, locale: string}>  $expectedLocaleRows
+     * @param  array<string, mixed>  $projection
+     * @return array<string, mixed>
+     */
+    private function prepareDetailCachesForExposure(array $expectedLocaleRows, array $projection): array
+    {
+        $projectionItems = $this->itemsFromPayload($projection);
+        $entries = [];
+        $failures = [];
+
+        foreach ($expectedLocaleRows as $expectedRow) {
+            $item = $this->itemFor($projectionItems, $expectedRow['slug'], $expectedRow['locale']);
+            if ($item === null) {
+                $failures[] = [
+                    'reason' => 'pre_exposure_projection_row_missing',
+                    'slug' => $expectedRow['slug'],
+                    'locale' => $expectedRow['locale'],
+                ];
+
+                continue;
+            }
+
+            $entry = $this->responseCache->prepareJobDetailPayloadForExposure(
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+                $item,
+            );
+            $entries[] = $entry;
+            if (($entry['status'] ?? null) !== 'ready') {
+                $failures[] = [
+                    'reason' => 'pre_exposure_detail_cache_not_ready',
+                    'slug' => $expectedRow['slug'],
+                    'locale' => $expectedRow['locale'],
+                    'context' => [
+                        'status' => $entry['status'] ?? null,
+                        'classification' => $entry['classification'] ?? null,
+                    ],
+                ];
+            }
+        }
+
+        return [
+            'status' => $failures === [] ? 'pass' : 'blocked',
+            'contract_version' => 'career.detail_atomic_exposure.v1',
+            'entries' => $entries,
+            'failures' => $failures,
+        ];
     }
 
     // ─── IndexState writes ──────────────────────────────────────────────────
@@ -666,6 +754,8 @@ final class CanonicalBatchPromotionExecutorService
         array $releaseGate,
         array $projection,
         array $truth,
+        array $cachePreparation,
+        array $directoryActivation,
     ): array {
         $projectionCounts = is_array($projection['counts'] ?? null) ? $projection['counts'] : [];
         $truthCounts = is_array($truth['counts'] ?? null) ? $truth['counts'] : [];
@@ -692,6 +782,15 @@ final class CanonicalBatchPromotionExecutorService
                 'truth_counts' => $truthCounts,
             ],
             'release_gate' => $releaseGate,
+            'cache_preparation' => $cachePreparation,
+            'directory_activation' => $directoryActivation,
+            'atomic_exposure_sequence' => [
+                'build_projection',
+                'publish_active_or_lkg_safe_detail_projection',
+                'verify_detail_pointer_and_payload',
+                'expose_runtime_projection_flags',
+                'rebuild_and_activate_directory_read_model',
+            ],
             'closeout_allowed' => (bool) ($releaseGate['closeout_allowed'] ?? false),
             'rollback_required' => false,
             'quarantine_required' => false,

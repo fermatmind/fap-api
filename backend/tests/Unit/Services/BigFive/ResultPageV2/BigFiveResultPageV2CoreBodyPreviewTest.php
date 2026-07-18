@@ -4948,6 +4948,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_career_detail_atomic_exposure(): void
     {
         $changed = [
+            'backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php',
+            'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionExecutorService.php',
             'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateValidator.php',
             'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php',
             'backend/app/Domain/Career/Publish/CareerJobDetailExposureReadiness.php',
@@ -4955,6 +4957,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Providers/AppServiceProvider.php',
             'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
             'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ];
 
@@ -10227,6 +10230,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerDetailAtomicExposureFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php',
+            'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionExecutorService.php',
             'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateValidator.php',
             'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php',
             'backend/app/Domain/Career/Publish/CareerJobDetailExposureReadiness.php',
@@ -10234,6 +10239,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Providers/AppServiceProvider.php',
             'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
             'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ], true);
     }

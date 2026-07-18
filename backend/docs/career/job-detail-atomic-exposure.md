@@ -10,7 +10,9 @@ The required release order is:
 4. expose runtime projection flags such as `detail_route_enabled` and `dataset_visible`;
 5. rebuild and activate the locale directory read model.
 
-`CareerRuntimePublishProjectionValidator`, the canonical promotion rollback gate, and the post-promotion release gate reject exposure with `detail_cache_not_ready_for_exposure` or `post_promotion_detail_cache_not_ready` when the target locale is not ready. Operators must prepare the detail cache before applying promotion; the promotion command does not perform a synchronous full rebuild.
+`CareerRuntimePublishProjectionValidator`, the canonical promotion rollback gate, and the post-promotion release gate reject exposure with `detail_cache_not_ready_for_exposure` or `post_promotion_detail_cache_not_ready` when the target locale is not ready. Apply prepares only the bounded promotion batch from its explicit post-promotion projection while database exposure remains uncommitted, verifies the resulting active pointer and payload, commits exposure, and then activates the directory. It never performs a synchronous full-corpus rebuild.
+
+For ordinary targeted warming, detail payloads are warmed before the full directory/index warm so the newly activated directory observes the final locale readiness state.
 
 The directory keeps public/indexability authority separate from runtime detail readiness. An otherwise eligible occupation remains a directory member when a transient cache loss occurs, but its `detail_ready` field becomes `false` on the next directory rebuild. This runtime state never deletes or rewrites CMS content, occupation records, publication authority, sitemap, llms, canonical, noindex, or JSON-LD authority.
 

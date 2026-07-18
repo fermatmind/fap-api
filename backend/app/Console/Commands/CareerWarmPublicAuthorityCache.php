@@ -54,11 +54,9 @@ final class CareerWarmPublicAuthorityCache extends Command
                     $this->line(sprintf('career_warm_phase=%s state=%s', $phase, $state));
                 }
             };
-            $summary = $directoryOnly
-                ? $cache->warmDirectoryReadModels(['en', 'zh-CN'], $reporter)
-                : ($jobDetailOnly ? [] : $cache->warm($reporter));
+            $summary = [];
+            $locales = $jobDetailLocales === [] ? ['zh-CN'] : $jobDetailLocales;
             if ($jobDetailSlugs !== []) {
-                $locales = $jobDetailLocales === [] ? ['zh-CN'] : $jobDetailLocales;
                 $summary = array_merge(
                     $summary,
                     $cache->warmJobDetailPayloads(
@@ -68,16 +66,20 @@ final class CareerWarmPublicAuthorityCache extends Command
                         $reporter,
                     ),
                 );
-                $jobDetailReport = $this->jobDetailReport(
-                    $summary,
-                    $jobDetailSlugs,
-                    $locales,
-                    $manifestPath === '' ? null : $manifestPath,
-                    $manifestPath === '' ? null : ($manifestSource === '' ? 'auto' : $manifestSource),
-                );
-            } else {
-                $jobDetailReport = null;
             }
+            $summary = array_merge(
+                $summary,
+                $directoryOnly
+                    ? $cache->warmDirectoryReadModels(['en', 'zh-CN'], $reporter)
+                    : ($jobDetailOnly ? [] : $cache->warm($reporter)),
+            );
+            $jobDetailReport = $jobDetailSlugs === [] ? null : $this->jobDetailReport(
+                $summary,
+                $jobDetailSlugs,
+                $locales,
+                $manifestPath === '' ? null : $manifestPath,
+                $manifestPath === '' ? null : ($manifestSource === '' ? 'auto' : $manifestSource),
+            );
 
             if ((bool) $this->option('json')) {
                 $this->line((string) json_encode([

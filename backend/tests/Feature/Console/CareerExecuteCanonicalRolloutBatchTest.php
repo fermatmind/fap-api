@@ -264,7 +264,6 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     public function test_apply_uses_explicit_batch_ledger_authority_for_stale_blocked_override_member(): void
     {
         $this->writeProjection($this->candidateProjection(['financial-analysts']));
-        $this->publishReadyDetailCaches(['financial-analysts'], ['en', 'zh']);
 
         $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
             '--batch-id' => 'batch-financial-analysts',
@@ -288,31 +287,47 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame(2, data_get($payload, 'persistence_check.found_published'));
         $this->assertSame(0, data_get($payload, 'persistence_check.not_published_count'));
         $this->assertFalse($payload['rollback_required'] ?? true);
+        $this->assertSame([
+            'build_projection',
+            'publish_active_or_lkg_safe_detail_projection',
+            'verify_detail_pointer_and_payload',
+            'expose_runtime_projection_flags',
+            'rebuild_and_activate_directory_read_model',
+        ], $payload['atomic_exposure_sequence'] ?? null);
     }
 
-    public function test_apply_fails_closed_before_public_exposure_when_detail_cache_is_missing(): void
+    public function test_apply_prepares_a_cold_candidate_cache_before_public_exposure(): void
     {
-        $this->writeProjection($this->candidateProjection(['financial-analysts']));
+        $this->writeProjection($this->candidateProjection(['actuaries']));
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'zh'));
 
         $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
-            '--batch-id' => 'batch-financial-analysts-cache-missing',
-            '--slugs' => 'financial-analysts',
+            '--batch-id' => 'batch-actuaries-cache-cold',
+            '--slugs' => 'actuaries',
             '--locales' => 'en,zh',
-            '--rollback-group' => 'financial-analysts',
+            '--rollback-group' => 'actuaries',
             '--apply' => true,
             '--projection' => $this->tmpProjectionPath,
             '--json' => true,
         ]);
 
-        $this->assertSame(1, $exitCode);
+        $this->assertSame(0, $exitCode);
         $payload = json_decode(Artisan::output(), true);
         $this->assertIsArray($payload);
-        $this->assertSame('promotion_validated_as_failed', $payload['status'] ?? null);
-        $this->assertContains(
-            'post_promotion_detail_cache_not_ready',
-            array_column($payload['failures'] ?? [], 'reason'),
+        $this->assertSame('promoted_success', $payload['status'] ?? null);
+        $this->assertSame('pass', data_get($payload, 'cache_preparation.status'));
+        $this->assertCount(2, data_get($payload, 'cache_preparation.entries'));
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'zh'));
+        $cachedPayload = $cache->jobDetailCacheReadiness('actuaries', 'en')['payload'];
+        $this->assertTrue(
+            (bool) data_get($cachedPayload, 'seo_contract.index_eligible'),
+            json_encode(data_get($cachedPayload, 'seo_contract'), JSON_THROW_ON_ERROR),
         );
-        $this->assertTrue(data_get($payload, 'remediation.succeeded'));
+        $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_en.status'));
+        $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_zh_cn.status'));
     }
 
     public function test_command_writes_audit_report(): void
@@ -511,23 +526,5 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     private function writeRawProjection(array $projection): void
     {
         File::put($this->tmpProjectionPath, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-    }
-
-    /**
-     * @param  list<string>  $slugs
-     * @param  list<string>  $locales
-     */
-    private function publishReadyDetailCaches(array $slugs, array $locales): void
-    {
-        $cache = app(PublicCareerAuthorityResponseCache::class);
-        foreach ($slugs as $slug) {
-            foreach ($locales as $locale) {
-                $cache->publishJobDetailReadModel($slug, $locale, [
-                    'identity' => ['canonical_slug' => $slug],
-                    'locale' => $locale,
-                    'fixture' => true,
-                ]);
-            }
-        }
     }
 }
