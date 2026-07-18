@@ -13,6 +13,7 @@ use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -178,13 +179,116 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
         $this->assertSame(0, $result['created_revision_count']);
         $this->assertSame(0, $result['english_write_count']);
         $this->assertSame(0, $result['non_personality_write_count']);
+        $this->assertSame(10, $result['alias_expected_count']);
+        $this->assertSame(10, $result['alias_safe_count']);
+        $this->assertSame(0, $result['alias_descriptor_overlap_count']);
+        $this->assertSame(0, $result['alias_collision_count']);
+        $this->assertTrue($result['alias_boundary_unchanged']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $result['alias_boundary_fingerprint_sha256']);
         $this->assertSame([], $result['errors']);
         $this->assertCount(52, $result['current_revision_ids']);
         $this->assertCount(52, $result['current_public_fingerprints']);
         $this->assertCount(52, $result['planned_source_hashes']);
         $this->assertDatabaseCount('personality_public_content_asset_revisions', 0);
-        $this->assertSame(52, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+        $this->assertSame(62, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('framework', 'big_five')->where('locale', 'zh-CN')->count());
+    }
+
+    public function test_preflight_rejects_missing_and_unknown_redirect_aliases(): void
+    {
+        $this->seedExactAuthorityRows();
+        DB::table('personality_public_content_assets')
+            ->where('entity_key', 'high-openness')
+            ->where('locale', 'zh-CN')
+            ->delete();
+
+        try {
+            app(BigFiveZhV3Publisher::class)->preflight($this->packagePath);
+            $this->fail('A missing reviewed redirect alias must fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('exactly 10 safe rows', $exception->getMessage());
+        }
+
+        $this->seedSafeRedirectAlias('high-openness');
+        $this->seedSafeRedirectAlias('low-neuroticism');
+
+        try {
+            app(BigFiveZhV3Publisher::class)->preflight($this->packagePath);
+            $this->fail('An unknown alias-shaped row must fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('exactly 10 safe rows', $exception->getMessage());
+        }
+    }
+
+    public function test_preflight_rejects_any_unsafe_redirect_alias_state(): void
+    {
+        $unsafeStates = [
+            ['launch_state' => PersonalityPublicContentAsset::LAUNCH_ARCHIVED],
+            ['is_public' => false],
+            ['index_eligible' => true],
+            ['sitemap_eligible' => true],
+            ['llms_eligible' => true],
+            ['robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW],
+            ['slug' => 'big-five/high-openness-wrong'],
+            ['canonical_json' => json_encode(['path' => '/zh/personality/big-five/openness-high'], JSON_THROW_ON_ERROR)],
+        ];
+
+        foreach ($unsafeStates as $unsafeState) {
+            $this->seedExactAuthorityRows();
+            DB::table('personality_public_content_assets')
+                ->where('entity_key', 'high-openness')
+                ->where('locale', 'zh-CN')
+                ->update($unsafeState);
+
+            try {
+                app(BigFiveZhV3Publisher::class)->preflight($this->packagePath);
+                $this->fail('Unsafe alias state must fail closed: '.json_encode($unsafeState, JSON_THROW_ON_ERROR));
+            } catch (RuntimeException $exception) {
+                $this->assertTrue(
+                    str_contains($exception->getMessage(), 'exact safe production state')
+                    || str_contains($exception->getMessage(), 'exactly 10 safe rows')
+                    || str_contains($exception->getMessage(), 'Target canonical collides'),
+                    $exception->getMessage(),
+                );
+            } finally {
+                DB::table('personality_public_content_asset_revisions')->delete();
+                DB::table('personality_public_content_assets')->delete();
+            }
+        }
+    }
+
+    public function test_publish_preserves_existing_alias_revision_and_pointers(): void
+    {
+        $this->seedExactAuthorityRows();
+        $alias = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('entity_key', 'emotional-stability')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+        $revisionId = DB::table('personality_public_content_asset_revisions')->insertGetId([
+            'asset_id' => $alias->id,
+            'revision_no' => 1,
+            'authority_asset_key' => 'legacy-alias:emotional-stability',
+            'source_package' => 'legacy-alias-baseline',
+            'source_hash' => str_repeat('b', 64),
+            'authority_package_sha256' => str_repeat('c', 64),
+            'workflow_state' => 'published',
+            'snapshot_json' => json_encode(['legacy' => true], JSON_THROW_ON_ERROR),
+            'public_runtime_fingerprint_before' => str_repeat('d', 64),
+            'created_by_admin_user_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('personality_public_content_assets')->where('id', $alias->id)->update([
+            'working_revision_id' => $revisionId,
+            'published_revision_id' => $revisionId,
+        ]);
+        $before = $this->aliasBoundarySnapshot();
+
+        $result = app(BigFiveZhV3Publisher::class)->publish($this->packagePath, 1);
+
+        $this->assertTrue($result['alias_boundary_unchanged']);
+        $this->assertSame($before, $this->aliasBoundarySnapshot());
+        $this->assertDatabaseCount('personality_public_content_asset_revisions', 53);
     }
 
     public function test_publish_is_atomic_exact_and_idempotent_without_touching_other_authority_rows(): void
@@ -194,6 +298,7 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
         $enneagram = $this->seedBoundaryRow('enneagram', 'hub', 'enneagram', 'enneagram', 'zh-CN');
         $englishBefore = $english->fresh()->getAttributes();
         $enneagramBefore = $enneagram->fresh()->getAttributes();
+        $aliasBefore = $this->aliasBoundarySnapshot();
 
         $publisher = app(BigFiveZhV3Publisher::class);
         $first = $publisher->publish($this->packagePath, 1);
@@ -209,6 +314,8 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
             ->whereNotNull('published_revision_id')->count());
         $this->assertSame($englishBefore, $english->fresh()->getAttributes());
         $this->assertSame($enneagramBefore, $enneagram->fresh()->getAttributes());
+        $this->assertSame($aliasBefore, $this->aliasBoundarySnapshot());
+        $this->assertTrue($first['alias_boundary_unchanged']);
 
         $targetUpdatedAt = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('framework', 'big_five')->where('locale', 'zh-CN')
@@ -226,6 +333,7 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
             ->orderBy('id')->get()->mapWithKeys(static fn (PersonalityPublicContentAsset $asset): array => [
                 $asset->id => $asset->updated_at?->toAtomString(),
             ])->all());
+        $this->assertSame($aliasBefore, $this->aliasBoundarySnapshot());
     }
 
     public function test_published_hub_projects_v1_content_and_complete_v2_authority(): void
@@ -237,8 +345,8 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
 
         $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=zh-CN&per_page=100')
             ->assertOk()
-            ->assertJsonPath('pagination.total', 52)
-            ->assertJsonCount(52, 'items');
+            ->assertJsonPath('pagination.total', 62)
+            ->assertJsonCount(62, 'items');
 
         $response = $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN');
         $response->assertOk()
@@ -301,7 +409,7 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
         }
 
         $this->assertDatabaseCount('personality_public_content_asset_revisions', 0);
-        $this->assertSame(52, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+        $this->assertSame(62, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('framework', 'big_five')->where('locale', 'zh-CN')
             ->where('source_package', 'test-existing-authority')->count());
         $this->assertSame(0, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
@@ -358,7 +466,59 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
             );
         }
 
+        foreach (BigFiveCanonicalRouteCatalog::ZH_REDIRECT_ONLY_ALIASES as $alias) {
+            $rows[] = $this->seedSafeRedirectAlias($alias);
+        }
+
         return $rows;
+    }
+
+    private function seedSafeRedirectAlias(string $alias): PersonalityPublicContentAsset
+    {
+        $row = $this->seedBoundaryRow(
+            PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            PersonalityPublicContentAsset::ENTITY_POLARITY,
+            $alias,
+            'big-five/'.$alias,
+            'zh-CN',
+        );
+        $row->forceFill([
+            'canonical_json' => ['path' => '/zh/personality/big-five/'.$alias],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
+            'is_public' => true,
+            'index_eligible' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+        ])->save();
+
+        return $row->fresh();
+    }
+
+    /** @return array{assets:list<array<string,mixed>>,revisions:list<array<string,mixed>>} */
+    private function aliasBoundarySnapshot(): array
+    {
+        $aliasIds = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+            ->where('locale', 'zh-CN')
+            ->whereIn('entity_key', BigFiveCanonicalRouteCatalog::ZH_REDIRECT_ONLY_ALIASES)
+            ->orderBy('id')
+            ->pluck('id');
+
+        return [
+            'assets' => DB::table('personality_public_content_assets')
+                ->whereIn('id', $aliasIds)
+                ->orderBy('id')
+                ->get()
+                ->map(static fn (object $row): array => (array) $row)
+                ->all(),
+            'revisions' => DB::table('personality_public_content_asset_revisions')
+                ->whereIn('asset_id', $aliasIds)
+                ->orderBy('id')
+                ->get()
+                ->map(static fn (object $row): array => (array) $row)
+                ->all(),
+        ];
     }
 
     /** @param array<string,mixed> $hreflang */

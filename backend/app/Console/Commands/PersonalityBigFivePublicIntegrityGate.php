@@ -16,6 +16,7 @@ final class PersonalityBigFivePublicIntegrityGate extends Command
     protected $signature = 'personality-big-five:public-integrity-gate
         {--source=../generated/big-five-authority-v2-integrity-gate-02/big_five_124_integrity_candidate_v2.json : Big Five V1 asset package}
         {--base-url=https://fermatmind.com : Declared public authority base URL}
+        {--require-reviewed-aliases : Require all ten reviewed zh-CN legacy aliases to resolve by exact single-hop 301}
         {--json : Emit JSON output}';
 
     protected $description = 'Resolve Big Five public internal links and fail closed on invalid targets without writing CMS state.';
@@ -24,7 +25,11 @@ final class PersonalityBigFivePublicIntegrityGate extends Command
     {
         try {
             $package = $this->loadPackage((string) $this->option('source'));
-            $summary = $gate->validate($package, (string) $this->option('base-url'));
+            $summary = $gate->validate(
+                $package,
+                (string) $this->option('base-url'),
+                (bool) $this->option('require-reviewed-aliases'),
+            );
         } catch (Throwable $exception) {
             $summary = [
                 'artifact' => 'BIG5-AUTHORITY-V2-INTEGRITY-GATE-02',
@@ -89,6 +94,7 @@ final class PersonalityBigFivePublicIntegrityGate extends Command
         $this->line('target_count='.(string) ($summary['target_count'] ?? 0));
         $this->line('canonical_200_count='.(string) ($summary['canonical_200_count'] ?? 0));
         $this->line('reviewed_301_alias_count='.(string) ($summary['reviewed_301_alias_count'] ?? 0));
+        $this->line('reviewed_301_alias_expected_count='.(string) ($summary['reviewed_301_alias_expected_count'] ?? 0));
         $this->line('errors_count='.(string) count((array) ($summary['errors'] ?? [])));
         $this->line('writes_committed=0');
     }
