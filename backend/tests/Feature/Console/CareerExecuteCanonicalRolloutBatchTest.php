@@ -436,6 +436,24 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame('rollback_not_persisted', data_get($payload, 'remediation.status'));
     }
 
+    public function test_prepared_detail_activation_blocks_when_exposure_projection_snapshot_is_missing(): void
+    {
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+        $cache->forgetPreparedJobDetailExposureProjectionSnapshots([$prepared]);
+
+        $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared]);
+
+        $this->assertSame('blocked', $activation['status']);
+        $this->assertSame('prepared_detail_activation_failed', data_get($activation, 'failures.0.reason'));
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+    }
+
     public function test_prepared_detail_activation_restores_all_pointers_when_a_later_locale_fails(): void
     {
         $publishedProjection = $this->publishedProjection(['actuaries']);

@@ -629,6 +629,24 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 ));
             }
 
+            $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
+                $slug,
+                $locale,
+                $version,
+            ));
+            if (
+                ! is_array($exposureProjection)
+                || strtolower(trim((string) ($exposureProjection['slug'] ?? ''))) !== $slug
+                || $this->normalizePublicLocale((string) ($exposureProjection['locale'] ?? '')) !== $locale
+                || ! $this->jobDetailProjectionItemIsPublished($exposureProjection)
+            ) {
+                throw new \RuntimeException(sprintf(
+                    'Career detail exposure projection verification failed for %s (%s).',
+                    $slug,
+                    $locale,
+                ));
+            }
+
             $snapshots[$slug.'|'.$locale] = [
                 'active' => $this->cacheValueSnapshot($this->jobDetailActiveVersionKey($slug, $locale)),
                 'lkg' => $this->cacheValueSnapshot($this->jobDetailLkgVersionKey($slug, $locale)),
