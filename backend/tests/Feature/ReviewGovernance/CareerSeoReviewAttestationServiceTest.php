@@ -209,6 +209,24 @@ final class CareerSeoReviewAttestationServiceTest extends TestCase
         $targets = $this->authoritativeTargets();
         $packageSha256 = hash('sha256', 'content-package-a');
 
+        foreach ([null, 'invalid'] as $invalidPackageSha256) {
+            try {
+                $service->createAndBindReview(
+                    surfaceId: 'content_package_approval',
+                    scopeType: 'seo_content_package',
+                    scopeIdentity: 'package:invalid',
+                    decision: 'approved_all',
+                    authoritativeTargets: $targets,
+                    actorAdminUserId: 1,
+                    packageSha256: $invalidPackageSha256,
+                );
+                $this->fail('Package-scoped evidence bound without an exact package SHA.');
+            } catch (ReviewAttestationValidationException $exception) {
+                $this->assertStringContainsString('package', strtolower($exception->getMessage()));
+            }
+        }
+        $this->assertDatabaseCount('review_attestations', 0);
+
         $service->createAndBindReview(
             surfaceId: 'content_package_approval',
             scopeType: 'seo_content_package',
@@ -278,15 +296,30 @@ final class CareerSeoReviewAttestationServiceTest extends TestCase
             'canary:article:1',
             'approved_all',
             $service->targets('seo_canary_approval', $targets),
+            packageSha256: hash('sha256', 'seo-canary-package'),
             adminUserId: 1,
         );
         $attestationPath = $this->jsonFixture('career-seo-attestation', $attestation);
         $targetsPath = $this->jsonFixture('career-seo-targets', ['targets' => $targets]);
 
+        $this->assertSame(1, Artisan::call('review:career-seo-attestation', [
+            '--surface' => 'seo_canary_approval',
+            '--attestation' => $attestationPath,
+            '--targets' => $targetsPath,
+            '--bind' => true,
+            '--actor-admin-user-id' => 1,
+            '--json' => true,
+        ]));
+        $blocked = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('BLOCKED_CAREER_SEO_REVIEW_ATTESTATION', $blocked['status']);
+        $this->assertFalse($blocked['review_evidence_bound']);
+        $this->assertDatabaseCount('review_attestations', 0);
+
         $this->assertSame(0, Artisan::call('review:career-seo-attestation', [
             '--surface' => 'seo_canary_approval',
             '--attestation' => $attestationPath,
             '--targets' => $targetsPath,
+            '--expected-package-sha256' => hash('sha256', 'seo-canary-package'),
             '--json' => true,
         ]));
         $preflight = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
@@ -298,6 +331,7 @@ final class CareerSeoReviewAttestationServiceTest extends TestCase
             '--surface' => 'seo_canary_approval',
             '--attestation' => $attestationPath,
             '--targets' => $targetsPath,
+            '--expected-package-sha256' => hash('sha256', 'seo-canary-package'),
             '--actor-admin-user-id' => 1,
             '--bind' => true,
             '--json' => true,

@@ -122,6 +122,8 @@ final readonly class CareerSeoReviewAttestationService
         array $authoritativeTargets,
         ?string $expectedPackageSha256 = null,
     ): array {
+        $this->assertExpectedPackageSha256($surfaceId, $expectedPackageSha256);
+
         return $this->attestations->preflight(
             $attestation,
             $this->targets($surfaceId, $authoritativeTargets),
@@ -144,6 +146,7 @@ final readonly class CareerSeoReviewAttestationService
         ?string $expectedPackageSha256 = null,
     ): ReviewAttestation {
         $this->assertConfiguredSoloOwner($actorAdminUserId);
+        $this->assertExpectedPackageSha256($surfaceId, $expectedPackageSha256);
 
         return $this->attestations->bind(
             $attestation,
@@ -167,6 +170,7 @@ final readonly class CareerSeoReviewAttestationService
         array $exceptions = [],
     ): ReviewAttestation {
         $this->assertConfiguredSoloOwner($actorAdminUserId);
+        $this->assertExpectedPackageSha256($surfaceId, $packageSha256);
         $targets = $this->targets($surfaceId, $authoritativeTargets);
         $attestation = $this->factory->make(
             scopeType: $scopeType,
@@ -265,6 +269,21 @@ final readonly class CareerSeoReviewAttestationService
         if (! $this->isConfiguredSoloOwner($actorAdminUserId)) {
             throw new ReviewAttestationValidationException(
                 'Career/SEO solo-owner review requires the authenticated configured owner.'
+            );
+        }
+    }
+
+    private function assertExpectedPackageSha256(string $surfaceId, ?string $expectedPackageSha256): void
+    {
+        $this->assertSurface($surfaceId);
+        if ($expectedPackageSha256 !== null && preg_match('/^[0-9a-f]{64}$/', $expectedPackageSha256) !== 1) {
+            throw new ReviewAttestationValidationException(
+                'Career/SEO expected package SHA-256 must be an exact lowercase digest.'
+            );
+        }
+        if (in_array($surfaceId, self::PACKAGE_SCOPED_SURFACES, true) && $expectedPackageSha256 === null) {
+            throw new ReviewAttestationValidationException(
+                'Career/SEO package-scoped review requires the exact current package SHA-256.'
             );
         }
     }

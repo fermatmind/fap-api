@@ -5706,7 +5706,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "local_checks_passed",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -97245,11 +97245,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After both exact-head Codex P2 fixes, the focused Career/SEO review and architecture suite passed 15 tests with 364 assertions, and the exact runtime-freeze classifier controls passed 2 tests with 5 assertions. The changed service and test passed syntax and Pint; the previously completed six-path syntax/Pint, Composer strict, command registration, YAML/JSON, diff, and exact ten-path scope checks remain valid. The complete bash backend/scripts/ci_verify_mbti.sh gate was rerun after the package-hash fix and passed from the completed worktree, including Big Five 1524 tests with 187973 assertions, Enneagram, MBTI, Personality full-32 71 tests with 5383 assertions, migration, security, OpenAPI, order, dependency, webhook, and attempt gates. Validation-generated Big Five timestamps and hashes were restored exactly and are absent from the diff."
+        "evidence": "After all three exact-head Codex P2 fixes, the focused Career/SEO review and architecture suite passed 15 tests with 371 assertions, and the exact runtime-freeze classifier controls passed 2 tests with 5 assertions. The changed service and test passed syntax and Pint; the previously completed six-path syntax/Pint, Composer strict, command registration, YAML/JSON, diff, and exact ten-path scope checks remain valid. The complete bash backend/scripts/ci_verify_mbti.sh gate was rerun after fail-closed package-hash validation was added to preflight and bind paths and passed from the completed worktree, including Big Five 1524 tests with 187973 assertions, Enneagram, MBTI, Personality full-32 71 tests with 5383 assertions, migration, security, OpenAPI, order, dependency, webhook, and attempt gates. Validation-generated Big Five timestamps and hashes were restored exactly and are absent from the diff."
       },
       "github": {
         "status": "pending",
-        "evidence": "All nine checks passed on superseded ready-to-merge head 747ad0a46d1bafeaf508487129a9b5e118bc0eb1. Exact-head Codex review then reported one P2 missing package_sha256 lock; the same-scope package requirement and exact-hash fix passed all local checks and awaits commit, push, fresh checks, and fresh exact-head review."
+        "evidence": "All nine checks passed on superseded head 32400a0d571b692e0d0213d3cf2e101df9379d57. Exact-head Codex review then reported a third P2: package-scoped preflight and bind paths could still accept and persist evidence without an expected package SHA-256. The same-scope fix now rejects missing or invalid package hashes before any persistence and passed all local checks; it awaits commit, push, fresh checks, and fresh exact-head review."
       }
     },
     "scope_validation": {
@@ -97318,9 +97318,14 @@
         "at": "2026-07-18T11:50:53Z",
         "status": "local_checks_passed",
         "note": "Committed the exact package-hash P2 repair as f5c88d211789f8f6c687bbfa12e2f6453d2040f7 after all local checks passed. This ledger-only follow-up records the final implementation commit before push and fresh exact-head validation."
+      },
+      {
+        "at": "2026-07-18T12:07:23Z",
+        "status": "local_checks_passed",
+        "note": "All nine checks passed on superseded head 32400a0d571b692e0d0213d3cf2e101df9379d57, then exact-head Codex review found a third P2: package-scoped preflight and bind paths did not themselves require an exact package SHA before central evidence persistence. The same-scope fix fails closed before writes for missing or invalid hashes; focused validation passed 15 tests/371 assertions plus runtime-freeze 2/5, and the complete ci_verify_mbti.sh gate passed again including Big Five 1524/187973 and Personality 71/5383. Generated Big Five noise was exactly restored. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T11:50:53Z"
+    "updated_at": "2026-07-18T12:07:23Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
