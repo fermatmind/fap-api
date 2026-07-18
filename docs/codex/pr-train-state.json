@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "96252140d594b67d4252445d9b0890069210fa99",
+    "status": "github_checks_pending",
+    "commit_sha": "67bd30942945b1a3ebe5641261bdc4aed23a67ad",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97344,8 +97344,13 @@
         "at": "2026-07-18T11:43:51Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on a2d56f79ebda6e5165abe58bcc75157915d8c0f8, but final review found a fifth valid P2: payload construction and detail-readiness inspection occurred before rebuild locks, so an older overlapping warmer could overwrite a newer directory. The repair sorts target locales, acquires every rebuild lock before reading authority/readiness or building payloads, then retains all-locale stage/verify and rollback-safe pointer activation. A regression proves both locale locks are held for every detail-readiness read and the existing synthetic later-locale failure still restores all pointers. The exact manifest suite passes 90 tests / 655 assertions plus 2 / 6 Big Five freeze assertions; 25 Pint paths, Composer/YAML/JSON, diff, and the exact twenty-eight-path scope gate are green. No production cache, DB, CMS, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T11:44:52Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed lock-scoped directory payload construction as 67bd30942945b1a3ebe5641261bdc4aed23a67ad. Replied to the fifth P2 with the nested-lock regression and full local evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T11:43:51Z"
+    "updated_at": "2026-07-18T11:44:52Z"
   }
 }
