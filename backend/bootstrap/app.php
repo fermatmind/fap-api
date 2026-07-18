@@ -42,6 +42,7 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\PersonalityBigFiveZhV3PackageBuild::class,
         \App\Console\Commands\PersonalityBigFiveZhV3ContentPublish::class,
         \App\Console\Commands\PersonalityMbtiFullCmsImport::class,
+        \App\Console\Commands\PersonalityMbtiCompRuntime46IntpRevision::class,
         \App\Console\Commands\PersonalityMbtiFullCmsPromote::class,
         \App\Console\Commands\PersonalityMbtiFullIndexabilityPromote::class,
         \App\Console\Commands\FapResolvePack::class,

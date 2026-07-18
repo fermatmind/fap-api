@@ -1,0 +1,371 @@
+{
+  "id": "MBTI-COMP-RUNTIME-46-INTP-REVISION",
+  "artifact": "MBTI-COMP-RUNTIME-46-INTP-EXACT-1-RECORD-REVISION-PACKAGE",
+  "generated_at": "2026-07-19T14:00:00.000Z",
+  "status": "approved_for_fail_closed_single_record_preflight",
+  "final_decision": "APPROVED_EXACT_ONE_RECORD_INTP_REVISION_FOR_PREFLIGHT_NO_PRODUCTION_WRITE_AUTHORIZED",
+  "source_manifest": {
+    "schema_version": "mbti-comp-runtime-46-intp-revision-source-v1",
+    "target_path": "/zh/personality/intp-a-vs-intp-t",
+    "failed_verification_contract": "needs_revision_only_for_failed_fields",
+    "failed_fields": [
+      "content_sections"
+    ],
+    "production_pre_state": {
+      "observed_at": "2026-07-19",
+      "section_count": 6,
+      "section_keys": [
+        "direct_answer",
+        "quick_judgment_table",
+        "easy_misread",
+        "real_scenario_differences",
+        "do_not_misjudge",
+        "next_reading"
+      ],
+      "sections_sha256": "719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359",
+      "publication_must_remain_unchanged": true,
+      "indexability_must_remain_unchanged": true
+    },
+    "superseded_source_file_sha256": "2dd0bac9aca963c0647463d9b961a7af4839aa6147b0443aec985b856c86e3bd"
+  },
+  "exact_package": {
+    "package_id": "mbti-comp-runtime-46-intp-revision-2026-07-19-r1",
+    "source_package_sha256": "5fcf54132504ef85978a5424e428fb56763ffbaa7c60f50b94b9c91fc3e85dc8",
+    "authorization_payload_sha256": "7a84cda503b6f328f0659ee5bd41c85f51c1eca44ac9aa7cfa721d59ab6197e2",
+    "import_scope_mode": "single_intp_at_content_revision_only",
+    "record_count": 1,
+    "production_write_authorized": false,
+    "production_write_executed": false,
+    "public_promotion_authorized": false
+  },
+  "repair_records": [
+    {
+      "approval_record_id": "mbti-comp-runtime-46:at_comparison:intp-a-vs-intp-t:r1",
+      "source_asset_id": "mbti-comp-runtime-46:intp-a-vs-intp-t",
+      "target_path": "/zh/personality/intp-a-vs-intp-t",
+      "target_url": "https://fermatmind.com/zh/personality/intp-a-vs-intp-t",
+      "locale": "zh-CN",
+      "slug": "intp-a-vs-intp-t",
+      "entity_kind": "at_comparison",
+      "cms_resource": "personality_comparison",
+      "cms_key": {
+        "locale": "zh-CN",
+        "framework": "mbti",
+        "comparison_slug": "intp-a-vs-intp-t",
+        "left_code": "INTP-A",
+        "right_code": "INTP-T"
+      },
+      "revision_scope": {
+        "allowed_fields": [
+          "content",
+          "content_sections",
+          "faq",
+          "internal_links",
+          "seo"
+        ],
+        "forbidden_fields": [
+          "status",
+          "is_public",
+          "is_indexable",
+          "sitemap_eligible",
+          "llms_eligible",
+          "canonical"
+        ]
+      },
+      "expected_pre_state": {
+        "record_must_exist": true,
+        "locale": "zh-CN",
+        "framework": "mbti64",
+        "entity_kind": "at_comparison",
+        "public_projection_must_remain_unchanged_by_import": true,
+        "current_sections_sha256": "719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359"
+      },
+      "expected_post_state": {
+        "revision_staged": true,
+        "revision_visibility": "draft_only",
+        "content_payload_sha256": "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e",
+        "public_projection_promoted": false,
+        "is_indexable_mutated": false,
+        "sitemap_eligibility_mutated": false,
+        "llms_eligibility_mutated": false
+      },
+      "import_payload": {
+        "url": "/zh/personality/intp-a-vs-intp-t",
+        "locale": "zh-CN",
+        "page_type": "comparison",
+        "comparison_kind": "at",
+        "canonical_target": "/zh/personality/intp-a-vs-intp-t",
+        "identity": {
+          "comparison_kind": "at",
+          "comparison_slug": "intp-a-vs-intp-t",
+          "base_type_code": "INTP",
+          "left_type_code": "INTP-A",
+          "right_type_code": "INTP-T"
+        },
+        "seo": {
+          "seo_title": "INTP-A 和 INTP-T 的区别：逻辑学家 A/T 对比 | FermatMind",
+          "seo_description": "对比 INTP-A 与 INTP-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+          "breadcrumb_title": "INTP-A 和 INTP-T 的区别",
+          "h1": "INTP-A 和 INTP-T 的区别",
+          "quick_answer_summary": "INTP-A 与 INTP-T 的最大区别，是在相同的概念建模、分析推理和独立解题偏好下，处理反馈、压力与自我确认的节奏不同。INTP-A 往往更快把当前模型用于行动；INTP-T 往往更频繁检查遗漏、风险与外部反馈。两者都不代表能力高低，也不能用于诊断、招聘或关系裁决。"
+        },
+        "content": {
+          "quick_answer": "INTP-A 与 INTP-T 的最大区别，是在相同的概念建模、分析推理和独立解题偏好下，处理反馈、压力与自我确认的节奏不同。INTP-A 往往更快把当前模型用于行动；INTP-T 往往更频繁检查遗漏、风险与外部反馈。两者都不代表能力高低，也不能用于诊断、招聘或关系裁决。",
+          "max_difference": "INTP-A 与 INTP-T 的最大区别，是在相同的概念建模、分析推理和独立解题偏好下，处理反馈、压力与自我确认的节奏不同。INTP-A 往往更快把当前模型用于行动；INTP-T 往往更频繁检查遗漏、风险与外部反馈。两者都不代表能力高低，也不能用于诊断、招聘或关系裁决。",
+          "quick_judgment_table": [
+            {
+              "dimension": "最大区别",
+              "a": "较快确认当前模型可用并进入行动",
+              "t": "更频繁检查模型是否遗漏条件或风险"
+            },
+            {
+              "dimension": "压力反馈",
+              "a": "倾向先维持判断与推进节奏",
+              "t": "倾向先复盘错误、评价和可改进处"
+            },
+            {
+              "dimension": "工作场景",
+              "a": "先做可观察版本，再用结果修正",
+              "t": "先补充边界检查，再决定何时交付"
+            },
+            {
+              "dimension": "容易误判",
+              "a": "可能被误读为不需要反馈",
+              "t": "可能被误读为没有判断或行动力"
+            }
+          ],
+          "confusion_reason": "INTP-A 与 INTP-T 共享 INTP 的逻辑探索和抽象建模偏好，外在行为可能很相似。只看一次自信、焦虑、沉默或拖延容易误判；更可靠的是观察形成模型后何时行动、收到反馈后如何修正，以及压力下复盘是否有停止点。",
+          "real_scene_differences": [
+            "面对开放问题时，INTP-A 可能先搭出可运行的模型或原型，再依据结果迭代；INTP-T 可能先核对假设、边界和表达风险。前者需要保留反证入口，后者需要设置停止验证点。两种节奏都不能替代岗位技能、交付证据和团队协作判断。",
+            "在关系沟通中，INTP-A 可能较快确认自己的理解并直接讨论问题；INTP-T 可能更在意措辞、误解和关系反馈。有效做法是把独处需求、事实判断、情绪影响和下一次沟通时间说清楚，而不是用 A/T 标签推断谁更在乎关系。",
+            "压力下，INTP-A 的稳定判断有助于继续推进，风险是过早忽略有效反馈；INTP-T 的持续校准有助于发现漏洞，风险是把不确定性放大成停滞。可逆下一步、明确反馈窗口和休息边界，都能帮助两者恢复校准。"
+          ],
+          "misjudgment_warning": "不要把 INTP-A 写成更聪明、更成熟或必然自信，也不要把 INTP-T 写成更脆弱、必然焦虑或没有行动力。A/T 是观察反馈与自我确认节奏的语言，结论仍需回到真实行为、情境、经验和证据。"
+        },
+        "content_sections": [
+          {
+            "key": "biggest_difference",
+            "title": "最大区别",
+            "body": "INTP-A 与 INTP-T 的最大区别，是在相同的概念建模、分析推理和独立解题偏好下，处理反馈、压力与自我确认的节奏不同。INTP-A 往往更快把当前模型用于行动；INTP-T 往往更频繁检查遗漏、风险与外部反馈。两者都不代表能力高低，也不能用于诊断、招聘或关系裁决。"
+          },
+          {
+            "key": "quick_judgment_table",
+            "title": "快速判断表",
+            "body": "最大区别：INTP-A=较快确认当前模型可用并进入行动；INTP-T=更频繁检查模型是否遗漏条件或风险；压力反馈：INTP-A=倾向先维持判断与推进节奏；INTP-T=倾向先复盘错误、评价和可改进处；工作场景：INTP-A=先做可观察版本，再用结果修正；INTP-T=先补充边界检查，再决定何时交付；容易误判：INTP-A=可能被误读为不需要反馈；INTP-T=可能被误读为没有判断或行动力",
+            "rows": [
+              {
+                "dimension": "最大区别",
+                "a": "较快确认当前模型可用并进入行动",
+                "t": "更频繁检查模型是否遗漏条件或风险"
+              },
+              {
+                "dimension": "压力反馈",
+                "a": "倾向先维持判断与推进节奏",
+                "t": "倾向先复盘错误、评价和可改进处"
+              },
+              {
+                "dimension": "工作场景",
+                "a": "先做可观察版本，再用结果修正",
+                "t": "先补充边界检查，再决定何时交付"
+              },
+              {
+                "dimension": "容易误判",
+                "a": "可能被误读为不需要反馈",
+                "t": "可能被误读为没有判断或行动力"
+              }
+            ]
+          },
+          {
+            "key": "easy_misread",
+            "title": "为什么容易混淆",
+            "body": "INTP-A 与 INTP-T 共享 INTP 的逻辑探索和抽象建模偏好，外在行为可能很相似。只看一次自信、焦虑、沉默或拖延容易误判；更可靠的是观察形成模型后何时行动、收到反馈后如何修正，以及压力下复盘是否有停止点。"
+          },
+          {
+            "key": "work_scenarios",
+            "title": "真实工作场景",
+            "body": "面对开放问题时，INTP-A 可能先搭出可运行的模型或原型，再依据结果迭代；INTP-T 可能先核对假设、边界和表达风险。前者需要保留反证入口，后者需要设置停止验证点。两种节奏都不能替代岗位技能、交付证据和团队协作判断。"
+          },
+          {
+            "key": "relationship_scenarios",
+            "title": "真实关系场景",
+            "body": "在关系沟通中，INTP-A 可能较快确认自己的理解并直接讨论问题；INTP-T 可能更在意措辞、误解和关系反馈。有效做法是把独处需求、事实判断、情绪影响和下一次沟通时间说清楚，而不是用 A/T 标签推断谁更在乎关系。"
+          },
+          {
+            "key": "stress_scenarios",
+            "title": "压力场景差异",
+            "body": "压力下，INTP-A 的稳定判断有助于继续推进，风险是过早忽略有效反馈；INTP-T 的持续校准有助于发现漏洞，风险是把不确定性放大成停滞。可逆下一步、明确反馈窗口和休息边界，都能帮助两者恢复校准。"
+          },
+          {
+            "key": "do_not_misjudge",
+            "title": "不要如何误判",
+            "body": "不要把 INTP-A 写成更聪明、更成熟或必然自信，也不要把 INTP-T 写成更脆弱、必然焦虑或没有行动力。A/T 是观察反馈与自我确认节奏的语言，结论仍需回到真实行为、情境、经验和证据。"
+          },
+          {
+            "key": "common_ground",
+            "title": "共同点",
+            "body": "INTP-A 与 INTP-T 都可能重视概念建模、逻辑一致性、独立思考和对复杂问题的探索。共同的成长问题不是谁更优，而是如何把模型转成可验证的行动，同时让反馈真正进入下一轮判断。"
+          },
+          {
+            "key": "usage_boundary",
+            "title": "使用边界",
+            "body": "该对比仅用于自我理解、沟通与成长复盘。A/T 不是官方 MBTI 原生维度，也不构成医学诊断、招聘筛选、智力或能力证明、职业保证、伴侣匹配或未来预测。"
+          }
+        ],
+        "faq": [
+          {
+            "question": "INTP-A 和 INTP-T 最大区别是什么？",
+            "answer": "主要差异在处理反馈、压力和自我确认的节奏。INTP-A 往往更快使用当前模型行动，INTP-T 往往更频繁检查遗漏和风险；这不是能力或价值高低。"
+          },
+          {
+            "question": "怎么判断自己更像 INTP-A 还是 INTP-T？",
+            "answer": "回看多个真实场景：形成判断后何时行动、收到批评后如何复盘、压力下是否持续检查。不要根据一次情绪或单一标签下结论。"
+          },
+          {
+            "question": "INTP-A 一定比 INTP-T 更自信吗？",
+            "answer": "不一定。A/T 只能提供自我确认和反馈处理倾向的观察语言，不能替代对具体能力、经验、环境支持或心理状态的判断。"
+          },
+          {
+            "question": "INTP-T 是否代表焦虑或心理问题？",
+            "answer": "不代表。人格内容不是心理健康诊断。如果压力持续影响睡眠、工作或关系，应寻求现实支持或合格专业帮助，而不是只用类型解释。"
+          },
+          {
+            "question": "这个对比能决定职业或关系选择吗？",
+            "answer": "不能。职业和关系还取决于兴趣、技能、经验、现实约束、沟通和双方边界；本页只提供复盘线索。"
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/intp-a",
+            "label": "INTP-A",
+            "purpose": "left_profile",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/personality/intp-t",
+            "label": "INTP-T",
+            "purpose": "right_profile",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/personality/intj-a-vs-intj-t",
+            "label": "INTJ A/T 对比",
+            "purpose": "related_at_comparison",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/personality",
+            "label": "MBTI 人格",
+            "purpose": "personality_hub",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "label": "免费 MBTI 测试",
+            "purpose": "test_loop",
+            "safe_public_route": true
+          }
+        ],
+        "structured_metadata": {
+          "primary_query": "INTP-A 和 INTP-T 的区别",
+          "secondary_queries": [
+            "INTP-A",
+            "INTP-T",
+            "INTP A/T 区别"
+          ],
+          "source_document": [
+            "MBTI-FULL-AUDIT-30",
+            "MBTI-COMP-AT-35 verification_contract",
+            "MBTI-COMP-RUNTIME-46 production readback"
+          ],
+          "claim_boundary": "educational_non_diagnostic_non_deterministic",
+          "route_safety": "public_routes_only"
+        },
+        "canonical": "https://fermatmind.com/zh/personality/intp-a-vs-intp-t",
+        "robots": "noindex,follow",
+        "import_visibility": {
+          "draft_only": true,
+          "no_public_promotion": true,
+          "no_indexability_mutation": true,
+          "no_sitemap_mutation": true,
+          "no_llms_mutation": true
+        }
+      },
+      "exact_payload_sha256": "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e",
+      "rollback_expectations": {
+        "atomic_record_required": true,
+        "rollback_on_any_failure": true,
+        "rollback_target": "remove only the draft revision identified by approval_record_id and exact_payload_sha256; preserve the current public projection and all publication/discoverability fields"
+      },
+      "readback_expectations": {
+        "required_section_keys": [
+          "biggest_difference",
+          "quick_judgment_table",
+          "easy_misread",
+          "work_scenarios",
+          "relationship_scenarios",
+          "stress_scenarios",
+          "do_not_misjudge",
+          "common_ground",
+          "usage_boundary"
+        ],
+        "exact_payload_sha256": "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e",
+        "minimum_quick_judgment_rows": 4,
+        "minimum_faq_count": 5,
+        "minimum_internal_link_count": 5,
+        "publication_unchanged": true,
+        "indexability_unchanged": true,
+        "sitemap_unchanged": true,
+        "llms_unchanged": true
+      },
+      "manual_review": {
+        "decision": "approved_for_fail_closed_single_record_preflight",
+        "production_write_authorized": false,
+        "public_promotion_authorized": false,
+        "notes": "A new exact-hash operator authorization is required after production preflight and dry-run."
+      }
+    }
+  ],
+  "authorization_payload": {
+    "package_id": "mbti-comp-runtime-46-intp-revision-2026-07-19-r1",
+    "source_package_sha256": "5fcf54132504ef85978a5424e428fb56763ffbaa7c60f50b94b9c91fc3e85dc8",
+    "import_scope_mode": "single_intp_at_content_revision_only",
+    "record_count": 1,
+    "records": [
+      {
+        "approval_record_id": "mbti-comp-runtime-46:at_comparison:intp-a-vs-intp-t:r1",
+        "target_path": "/zh/personality/intp-a-vs-intp-t",
+        "slug": "intp-a-vs-intp-t",
+        "entity_kind": "at_comparison",
+        "exact_payload_sha256": "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e",
+        "expected_pre_state": {
+          "record_must_exist": true,
+          "locale": "zh-CN",
+          "framework": "mbti64",
+          "entity_kind": "at_comparison",
+          "public_projection_must_remain_unchanged_by_import": true,
+          "current_sections_sha256": "719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359"
+        },
+        "expected_post_state": {
+          "revision_staged": true,
+          "revision_visibility": "draft_only",
+          "content_payload_sha256": "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e",
+          "public_projection_promoted": false,
+          "is_indexable_mutated": false,
+          "sitemap_eligibility_mutated": false,
+          "llms_eligibility_mutated": false
+        },
+        "manual_review_decision": "approved_for_fail_closed_single_record_preflight"
+      }
+    ]
+  },
+  "safety_boundary": {
+    "artifact_only": true,
+    "cms_write_attempted": false,
+    "database_mutation_attempted": false,
+    "publication_mutation_attempted": false,
+    "indexability_mutation_attempted": false,
+    "sitemap_llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "frontend_runtime_change_attempted": false
+  }
+}

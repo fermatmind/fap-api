@@ -20,23 +20,43 @@ final class MbtiFullCmsImportService
 
     private const AT_SNAPSHOT_KEY = 'mbti_cms_import_40_at_comparison_draft_v1';
 
+    private const INTP_REVISION_ARTIFACT = 'MBTI-COMP-RUNTIME-46-INTP-EXACT-1-RECORD-REVISION-PACKAGE';
+
+    private const INTP_REVISION_STATUS = 'approved_for_fail_closed_single_record_preflight';
+
+    private const INTP_REVISION_SCOPE = 'single_intp_at_content_revision_only';
+
+    private const INTP_REVISION_SNAPSHOT_KEY = 'mbti_comp_runtime_46_intp_revision_draft_v1';
+
     /** @param array<string,mixed> $package @param array<string,string> $options @return array<string,mixed> */
     public function plan(array $package, array $options): array
     {
-        return $this->buildSummary($package, $options, false);
+        return $this->buildSummary($package, $options, false, false);
     }
 
     /** @param array<string,mixed> $package @param array<string,string> $options @return array<string,mixed> */
     public function stage(array $package, array $options): array
     {
-        return DB::transaction(fn (): array => $this->buildSummary($package, $options, true));
+        return DB::transaction(fn (): array => $this->buildSummary($package, $options, true, false));
     }
 
     /** @param array<string,mixed> $package @param array<string,string> $options @return array<string,mixed> */
-    private function buildSummary(array $package, array $options, bool $write): array
+    public function planIntpRevision(array $package, array $options): array
     {
-        $base = $this->baseSummary($package, $options, $write);
-        $errors = $this->validatePackageEnvelope($package, $options);
+        return $this->buildSummary($package, $options, false, true);
+    }
+
+    /** @param array<string,mixed> $package @param array<string,string> $options @return array<string,mixed> */
+    public function stageIntpRevision(array $package, array $options): array
+    {
+        return DB::transaction(fn (): array => $this->buildSummary($package, $options, true, true));
+    }
+
+    /** @param array<string,mixed> $package @param array<string,string> $options @return array<string,mixed> */
+    private function buildSummary(array $package, array $options, bool $write, bool $intpRevision): array
+    {
+        $base = $this->baseSummary($package, $options, $write, $intpRevision);
+        $errors = $this->validatePackageEnvelope($package, $options, $intpRevision);
         $records = is_array($package['repair_records'] ?? null) ? array_values($package['repair_records']) : [];
         $preparedRows = [];
         $seenSlugs = [];
@@ -47,7 +67,7 @@ final class MbtiFullCmsImportService
 
                 continue;
             }
-            $prepared = $this->prepareRecord($record, $index, $seenSlugs, $errors);
+            $prepared = $this->prepareRecord($record, $index, $seenSlugs, $errors, $intpRevision);
             if ($prepared !== null) {
                 $preparedRows[] = $prepared;
             }
@@ -109,13 +129,16 @@ final class MbtiFullCmsImportService
     }
 
     /** @param array<string,mixed> $package @param array<string,string> $options @return list<array<string,string>> */
-    private function validatePackageEnvelope(array $package, array $options): array
+    private function validatePackageEnvelope(array $package, array $options, bool $intpRevision): array
     {
         $errors = [];
-        if (($package['artifact'] ?? null) !== self::ARTIFACT) {
-            $errors[] = $this->issue('artifact', 'artifact_mismatch', 'Only the MBTI-CMS-39 exact 43-record approval package is accepted.');
+        $artifact = $intpRevision ? self::INTP_REVISION_ARTIFACT : self::ARTIFACT;
+        $status = $intpRevision ? self::INTP_REVISION_STATUS : self::SOURCE_STATUS;
+        $recordCount = $intpRevision ? 1 : 43;
+        if (($package['artifact'] ?? null) !== $artifact) {
+            $errors[] = $this->issue('artifact', 'artifact_mismatch', 'The package artifact does not match the selected fail-closed import mode.');
         }
-        if (($package['status'] ?? null) !== self::SOURCE_STATUS) {
+        if (($package['status'] ?? null) !== $status) {
             $errors[] = $this->issue('status', 'status_mismatch', 'The approval package is not approved for fail-closed importer preflight.');
         }
         $exact = is_array($package['exact_package'] ?? null) ? $package['exact_package'] : [];
@@ -129,18 +152,23 @@ final class MbtiFullCmsImportService
                 $errors[] = $this->issue('exact_package.'.$field, 'exact_authorization_mismatch', 'The provided exact authorization does not match the approval package.');
             }
         }
-        if (($exact['production_import_executed'] ?? null) !== false || ($exact['production_import_authorized'] ?? null) !== false) {
+        $authorized = $intpRevision ? ($exact['production_write_authorized'] ?? null) : ($exact['production_import_authorized'] ?? null);
+        $executed = $intpRevision ? ($exact['production_write_executed'] ?? null) : ($exact['production_import_executed'] ?? null);
+        if ($executed !== false || $authorized !== false) {
             $errors[] = $this->issue('exact_package', 'package_execution_state_invalid', 'The source approval package must remain unexecuted and non-authorizing.');
         }
-        if ((int) ($exact['record_count'] ?? 0) !== 43 || count((array) ($package['repair_records'] ?? [])) !== 43) {
-            $errors[] = $this->issue('repair_records', 'record_count_mismatch', 'The importer requires the complete 43-record batch.');
+        if ((int) ($exact['record_count'] ?? 0) !== $recordCount || count((array) ($package['repair_records'] ?? [])) !== $recordCount) {
+            $errors[] = $this->issue('repair_records', 'record_count_mismatch', 'The importer requires the exact record count for the selected mode.');
+        }
+        if ($intpRevision) {
+            $errors = array_merge($errors, $this->validateIntpRevisionHashes($package));
         }
 
         return $errors;
     }
 
     /** @param array<string,mixed> $record @param array<string,bool> $seenSlugs @param list<array<string,string>> $errors @return array<string,mixed>|null */
-    private function prepareRecord(array $record, int $index, array &$seenSlugs, array &$errors): ?array
+    private function prepareRecord(array $record, int $index, array &$seenSlugs, array &$errors, bool $intpRevision): ?array
     {
         $path = 'repair_records.'.$index;
         $kind = (string) ($record['entity_kind'] ?? '');
@@ -149,6 +177,12 @@ final class MbtiFullCmsImportService
         $payload = is_array($record['import_payload'] ?? null) ? $record['import_payload'] : [];
         $expectedPre = is_array($record['expected_pre_state'] ?? null) ? $record['expected_pre_state'] : [];
         $expectedPost = is_array($record['expected_post_state'] ?? null) ? $record['expected_post_state'] : [];
+
+        if ($intpRevision && ($kind !== 'at_comparison' || $slug !== 'intp-a-vs-intp-t' || ($record['target_path'] ?? null) !== '/zh/personality/intp-a-vs-intp-t')) {
+            $errors[] = $this->issue($path, 'intp_revision_scope_mismatch', 'The single-record revision accepts only intp-a-vs-intp-t.');
+
+            return null;
+        }
 
         if (! in_array($kind, ['profile', 'at_comparison'], true)) {
             $errors[] = $this->issue($path.'.entity_kind', 'unsupported_entity_kind', 'Only profile and A/T comparison records are supported by this importer.');
@@ -186,7 +220,7 @@ final class MbtiFullCmsImportService
             return null;
         }
 
-        $snapshotKey = $kind === 'profile' ? self::PROFILE_SNAPSHOT_KEY : self::AT_SNAPSHOT_KEY;
+        $snapshotKey = $intpRevision ? self::INTP_REVISION_SNAPSHOT_KEY : ($kind === 'profile' ? self::PROFILE_SNAPSHOT_KEY : self::AT_SNAPSHOT_KEY);
         $existing = $this->existingRevision($target['model'], $target['id'], $snapshotKey, (string) ($record['approval_record_id'] ?? ''), $payloadHash);
 
         return [
@@ -326,7 +360,7 @@ final class MbtiFullCmsImportService
         $attributes = [
             'revision_no' => $row['next_revision_no'],
             'snapshot_json' => $row['snapshot'],
-            'note' => 'MBTI-CMS-40 draft-only import '.substr($row['payload_sha256'], 0, 12),
+            'note' => ($row['snapshot_key'] === self::INTP_REVISION_SNAPSHOT_KEY ? 'MBTI-COMP-RUNTIME-46 INTP draft-only revision ' : 'MBTI-CMS-40 draft-only import ').substr($row['payload_sha256'], 0, 12),
             'created_by_admin_user_id' => null,
             'created_at' => now(),
         ];
@@ -376,10 +410,10 @@ final class MbtiFullCmsImportService
     }
 
     /** @param array<string,mixed> $package @param array<string,string> $options @return array<string,mixed> */
-    private function baseSummary(array $package, array $options, bool $write): array
+    private function baseSummary(array $package, array $options, bool $write, bool $intpRevision): array
     {
         return [
-            'artifact' => 'MBTI-CMS-IMPORT-40',
+            'artifact' => $intpRevision ? 'MBTI-COMP-RUNTIME-46-INTP-REVISION-IMPORT' : 'MBTI-CMS-IMPORT-40',
             'source_artifact' => (string) ($package['artifact'] ?? ''),
             'source_package_sha256' => (string) ($options['expected_source_package_sha256'] ?? ''),
             'authorization_payload_sha256' => (string) ($options['expected_authorization_payload_sha256'] ?? ''),
@@ -396,6 +430,36 @@ final class MbtiFullCmsImportService
             'writes_committed' => false,
             'cms_write_attempted' => false,
         ];
+    }
+
+    /** @param array<string,mixed> $package @return list<array<string,string>> */
+    private function validateIntpRevisionHashes(array $package): array
+    {
+        $errors = [];
+        $exact = is_array($package['exact_package'] ?? null) ? $package['exact_package'] : [];
+        $records = is_array($package['repair_records'] ?? null) ? array_values($package['repair_records']) : [];
+        $record = is_array($records[0] ?? null) ? $records[0] : [];
+        $payload = is_array($record['import_payload'] ?? null) ? $record['import_payload'] : [];
+        $sourceManifest = is_array($package['source_manifest'] ?? null) ? $package['source_manifest'] : [];
+        $authorizationPayload = is_array($package['authorization_payload'] ?? null) ? $package['authorization_payload'] : [];
+
+        foreach ([
+            'exact_package.source_package_sha256' => [$this->hashJson($sourceManifest), (string) ($exact['source_package_sha256'] ?? '')],
+            'exact_package.authorization_payload_sha256' => [$this->hashJson($authorizationPayload), (string) ($exact['authorization_payload_sha256'] ?? '')],
+            'repair_records.0.exact_payload_sha256' => [$this->hashJson($payload), (string) ($record['exact_payload_sha256'] ?? '')],
+        ] as $field => [$actual, $expected]) {
+            if ($expected === '' || ! hash_equals($expected, $actual)) {
+                $errors[] = $this->issue($field, 'canonical_json_hash_mismatch', 'The immutable canonical JSON hash does not match the package content.');
+            }
+        }
+        if (($exact['import_scope_mode'] ?? null) !== self::INTP_REVISION_SCOPE
+            || ($authorizationPayload['import_scope_mode'] ?? null) !== self::INTP_REVISION_SCOPE
+            || ($authorizationPayload['record_count'] ?? null) !== 1
+            || ($exact['public_promotion_authorized'] ?? null) !== false) {
+            $errors[] = $this->issue('authorization_payload', 'intp_revision_authorization_boundary_mismatch', 'The single-record authorization boundary is incomplete or permits public promotion.');
+        }
+
+        return $errors;
     }
 
     /** @return array<string,string> */
