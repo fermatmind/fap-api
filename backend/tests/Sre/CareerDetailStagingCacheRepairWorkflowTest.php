@@ -15,6 +15,7 @@ final class CareerDetailStagingCacheRepairWorkflowTest extends TestCase
         $source = (string) file_get_contents(base_path('../.github/workflows/career-detail-staging-cache-repair.yml'));
 
         $this->assertStringContainsString('DEPLOY_PATH: "/var/www/fap-api-staging"', $source);
+        $this->assertStringContainsString('environment: staging', $source);
         $this->assertStringNotContainsString('/var/www/fap-api-production', $source);
         $this->assertStringContainsString(
             'TARGET_SLUGS: "library-technicians,purchasing-managers-buyers-and-purchasing-agents,tire-builders"',
