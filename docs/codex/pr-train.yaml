@@ -45281,6 +45281,60 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: SOLO-OWNER-CAREER-SEO-REVIEW-04
+    repo: fap-api
+    base: main
+    branch: codex/solo-owner-career-seo-review-04
+    title: "SOLO-OWNER-CAREER-SEO-REVIEW-04: accept solo-owner attestations across career and SEO review gates"
+    status: user_authorized
+    depends_on:
+      - SOLO-OWNER-PERSONALITY-REVIEW-03
+    train_scope: career_seo_solo_owner_review_adapters
+    scope:
+      - Migrate Career trust, occupation-truth, editorial-patch, occupation-directory, salary, AI-impact, and import/publish-readiness review plus SEO Agent draft/content-package, canary, search-queue, and claim-risk review to one private exact-target solo-owner attestation adapter.
+      - Support deterministic exact batch target sets, approved-with-exceptions expansion, rejected evidence, configured-owner enforcement, and one-attestation whole-batch evidence without combining unrelated single-target attestations.
+      - Provide one review-only preflight/bind entry point that cannot publish, import, index, change discoverability, submit search URLs, or project private reviewer identity.
+      - Preserve existing R4 external-evidence requirements and keep every Career/CMS/Search production transition and canonical, hreflang, robots, noindex, JSON-LD, sitemap, llms, and discoverability decision unchanged.
+    allowed_paths:
+      - backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php
+      - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
+      - backend/app/Console/Commands/CareerSeoReviewAttestationCommand.php
+      - backend/tests/Feature/ReviewGovernance/CareerSeoReviewAttestationServiceTest.php
+      - backend/tests/Architecture/ReviewPolicyRegistryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/operations/solo-owner-review-protocol.md
+      - docs/operations/generated/solo-owner-review-surface-registry.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify Career, CMS, SEO Agent, Search queue, canonical, hreflang, robots, noindex, JSON-LD, sitemap, llms, discoverability, public API, frontend, high-risk Ops, or Media Library runtime workflows outside the review-only adapter.
+      - Run production attestation binds, Career/CMS/Search database writes, imports, publication, indexing, search submission, cache actions, deployment, or any other production action.
+      - Let exceptions satisfy approved-all execution evidence or weaken external objective evidence, exact authorization, audit, privacy, required checks, or review/execution separation.
+    validation:
+      - exact target, deterministic SHA, exception expansion, rejected, missing, duplicate, extra, hash-drift, current-owner, team-separated, and whole-batch evidence tests
+      - review-only command preflight/bind separation and zero publish/import/index/search/discoverability capability tests
+      - cd backend && php artisan test tests/Feature/ReviewGovernance/CareerSeoReviewAttestationServiceTest.php tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && composer validate --strict
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool docs/operations/generated/solo-owner-review-surface-registry.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: CAREER-DETAIL-COLD-MISS-DEGRADE-01
     repo: fap-api
     base: main

@@ -92,6 +92,14 @@ Big Five Authority V2 compact review is consumed only by its read-only promotion
 
 Big Five and Enneagram PersonalityPublicContentAsset surfaces remain permanently text-only. These adapters add no Media Library, hero, inline, OG, Twitter, Markdown-image, or HTML-image path.
 
+## Career and SEO adapters (PR4)
+
+`SOLO-OWNER-CAREER-SEO-REVIEW-04` activates one private exact-target adapter for Career trust manifests, occupation truth metrics, editorial patches, occupation-directory review, salary and AI-impact assets, import/publish readiness, SEO Agent drafts and content packages, canary approval, search-submission queue approval, and claim-risk review. Callers must derive each target identity and SHA-256 from the authoritative resource, artifact, revision, or bounded queue snapshot; handwritten counts and combined single-target attestations cannot satisfy an exact batch gate.
+
+An owner attestation may record `approved_all`, `approved_with_exceptions`, or `rejected`. Exceptions expand into immutable per-target `excepted` evidence and cannot satisfy a later all-approved execution preflight. R4 occupation-truth and claim-risk surfaces still require their existing external objective evidence; owner review cannot manufacture or replace it.
+
+Binding Career/SEO review evidence has no domain-action capability. It does not publish or import Career/CMS content, approve a production import, change canonical/hreflang/robots/noindex/JSON-LD/sitemap/llms/discoverability state, enqueue or submit a search URL, or expose private reviewer identity. Publish, import, index, canary, and search-submission execution remain separate exact-authorized transitions that must consume one previously bound attestation over the exact current target set.
+
 ## Registry and public projection
 
 `ReviewPolicyRegistry` inventories every known human-review surface and declares its domain, risk tier, authority, current implementation, solo-owner policy, step-up boundary, execution separation, public projection, external-evidence requirement, migration PR, and adapter status. Architecture tests enforce schema, uniqueness, required coverage, R3 step-up, R4 evidence classification, and registration of models with review/approval fields. The generated inventory is `docs/operations/generated/solo-owner-review-surface-registry.v1.json`.

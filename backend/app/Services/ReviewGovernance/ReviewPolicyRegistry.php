@@ -91,6 +91,21 @@ final class ReviewPolicyRegistry
         'riasec_content_release_review',
     ];
 
+    private const CAREER_SEO_ADAPTER_SURFACES = [
+        'career_trust_manifest',
+        'career_occupation_truth_metric_review',
+        'career_editorial_patch',
+        'career_occupation_directory_review',
+        'career_salary_asset_review',
+        'career_ai_impact_asset_review',
+        'career_import_publish_readiness',
+        'seo_agent_draft_review',
+        'seo_canary_approval',
+        'search_submission_queue_approval',
+        'seo_claim_risk_review',
+        'content_package_approval',
+    ];
+
     /**
      * @return list<array{
      *   surface_id: string,
@@ -239,6 +254,11 @@ final class ReviewPolicyRegistry
         }
         if (in_array($surfaceId, self::PERSONALITY_ADAPTER_SURFACES, true)) {
             return 'compact_attestation_adapter_active';
+        }
+        if (in_array($surfaceId, self::CAREER_SEO_ADAPTER_SURFACES, true)) {
+            return $externalEvidenceRequired
+                ? 'compact_attestation_adapter_active_external_evidence_still_required'
+                : 'compact_attestation_adapter_active';
         }
 
         return 'policy_registered_adapter_pending';
