@@ -8,6 +8,19 @@ use App\Models\PersonalityPublicContentAsset;
 
 final class BigFiveCanonicalRouteCatalog
 {
+    public const EN_REDIRECT_ONLY_ALIAS_TARGETS = [
+        'emotional-stability' => 'neuroticism-low',
+        'high-agreeableness' => 'agreeableness-high',
+        'high-conscientiousness' => 'conscientiousness-high',
+        'high-extraversion' => 'extraversion-high',
+        'high-neuroticism' => 'neuroticism-high',
+        'high-openness' => 'openness-high',
+        'low-agreeableness' => 'agreeableness-low',
+        'low-conscientiousness' => 'conscientiousness-low',
+        'low-extraversion' => 'extraversion-low',
+        'low-openness' => 'openness-low',
+    ];
+
     public const ZH_REDIRECT_ONLY_ALIASES = [
         'emotional-stability',
         'high-agreeableness',
@@ -21,7 +34,7 @@ final class BigFiveCanonicalRouteCatalog
         'low-openness',
     ];
 
-    private const DOMAINS = [
+    public const DOMAINS = [
         'agreeableness',
         'conscientiousness',
         'extraversion',
@@ -29,7 +42,7 @@ final class BigFiveCanonicalRouteCatalog
         'openness',
     ];
 
-    private const V2_RANGES = [
+    public const V2_RANGES = [
         'agreeableness-high', 'agreeableness-mid', 'agreeableness-low',
         'conscientiousness-high', 'conscientiousness-mid', 'conscientiousness-low',
         'extraversion-high', 'extraversion-mid', 'extraversion-low',
@@ -37,7 +50,7 @@ final class BigFiveCanonicalRouteCatalog
         'openness-high', 'openness-mid', 'openness-low',
     ];
 
-    private const FACETS = [
+    public const FACETS = [
         'achievement-striving', 'actions', 'activity', 'aesthetics', 'altruism', 'anger',
         'anxiety', 'assertiveness', 'competence', 'compliance', 'deliberation', 'depression',
         'dutifulness', 'excitement-seeking', 'feelings', 'gregariousness', 'ideas', 'imagination',
@@ -73,13 +86,49 @@ final class BigFiveCanonicalRouteCatalog
         return $suffix === null ? null : "/{$segment}/personality/big-five{$suffix}";
     }
 
+    /** @return list<array{entity_type:string,entity_key:string,path:string}> */
+    public static function canonicalEntries(string $locale): array
+    {
+        $entries = [
+            [
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+                'entity_key' => 'big-five',
+            ],
+            [
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_FACET_HUB,
+                'entity_key' => 'facets',
+            ],
+        ];
+
+        foreach (self::DOMAINS as $entityKey) {
+            $entries[] = [
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+                'entity_key' => $entityKey,
+            ];
+        }
+        foreach (self::V2_RANGES as $entityKey) {
+            $entries[] = [
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_POLARITY,
+                'entity_key' => $entityKey,
+            ];
+        }
+        foreach (self::FACETS as $entityKey) {
+            $entries[] = [
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_FACET_DETAIL,
+                'entity_key' => $entityKey,
+            ];
+        }
+
+        return array_values(array_map(static function (array $entry) use ($locale): array {
+            $path = self::expectedPath($locale, $entry['entity_type'], $entry['entity_key']);
+
+            return $entry + ['path' => (string) $path];
+        }, $entries));
+    }
+
     private static function polaritySuffix(string $locale, string $entityKey): ?string
     {
         if (in_array($entityKey, self::V2_RANGES, true)) {
-            return '/'.$entityKey;
-        }
-
-        if ($locale === 'en' && in_array($entityKey, self::ZH_REDIRECT_ONLY_ALIASES, true)) {
             return '/'.$entityKey;
         }
 
