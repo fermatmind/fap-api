@@ -347,6 +347,35 @@ final class CareerSeoReviewAttestationServiceTest extends TestCase
         $this->assertDatabaseCount('review_attestation_target_evidences', 2);
     }
 
+    public function test_review_only_command_json_failure_redacts_private_target_identity(): void
+    {
+        $privateIdentity = 'private/seo/queue/operator-only-batch';
+        $attestationPath = $this->jsonFixture('career-seo-invalid-attestation', []);
+        $targetsPath = $this->jsonFixture('career-seo-private-duplicate-targets', ['targets' => [
+            ['identity' => $privateIdentity, 'sha256' => hash('sha256', 'private-target-a')],
+            ['identity' => $privateIdentity, 'sha256' => hash('sha256', 'private-target-b')],
+        ]]);
+
+        $exitCode = Artisan::call('review:career-seo-attestation', [
+            '--surface' => 'search_submission_queue_approval',
+            '--attestation' => $attestationPath,
+            '--targets' => $targetsPath,
+            '--json' => true,
+        ]);
+        $output = trim(Artisan::output());
+        $payload = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('BLOCKED_CAREER_SEO_REVIEW_ATTESTATION', $payload['status']);
+        $this->assertSame('INVALID_CAREER_SEO_REVIEW_ATTESTATION', $payload['error_code']);
+        $this->assertSame('Career/SEO review attestation validation failed.', $payload['error']);
+        $this->assertStringNotContainsString($privateIdentity, $output);
+        $this->assertStringNotContainsString('duplicate identity', $output);
+        $this->assertFalse($payload['review_evidence_bound']);
+        $this->assertDatabaseCount('review_attestations', 0);
+        $this->assertDatabaseCount('review_attestation_target_evidences', 0);
+    }
+
     /** @return list<array{identity:string,sha256:string}> */
     private function authoritativeTargets(): array
     {

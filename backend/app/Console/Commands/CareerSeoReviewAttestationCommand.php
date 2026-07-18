@@ -28,6 +28,10 @@ use Throwable;
  */
 final class CareerSeoReviewAttestationCommand extends Command
 {
+    private const JSON_FAILURE_CODE = 'INVALID_CAREER_SEO_REVIEW_ATTESTATION';
+
+    private const JSON_FAILURE_MESSAGE = 'Career/SEO review attestation validation failed.';
+
     protected $signature = 'review:career-seo-attestation
         {--surface= : Registered Career/SEO review surface}
         {--attestation= : Private compact attestation JSON path}
@@ -86,9 +90,12 @@ final class CareerSeoReviewAttestationCommand extends Command
                 'safety_boundaries' => $reviews->safetyBoundaries(),
             ]);
         } catch (Throwable $throwable) {
+            $json = (bool) $this->option('json');
+
             return $this->finish([
                 'status' => 'BLOCKED_CAREER_SEO_REVIEW_ATTESTATION',
-                'error' => $throwable->getMessage(),
+                'error_code' => self::JSON_FAILURE_CODE,
+                'error' => $json ? self::JSON_FAILURE_MESSAGE : $throwable->getMessage(),
                 'bind_requested' => (bool) $this->option('bind'),
                 'review_evidence_bound' => false,
                 'publishes' => false,
