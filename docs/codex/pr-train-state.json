@@ -97837,8 +97837,8 @@
     "branch": "codex/mbti-comp-projection-45",
     "title": "MBTI-COMP-PROJECTION-45: repair A/T comparison public projection",
     "depends_on": [],
-    "status": "review_fix_validated",
-    "commit_sha": "1fb976b5d6b02b336c8b7b2978ea8fbf3b662f66",
+    "status": "ready_to_merge",
+    "commit_sha": "b231c18aa4dabbe0a926d8561eae6faf8ad40918",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3175",
     "checks": {
       "authorization": {
@@ -97852,12 +97852,16 @@
       "local_validation": {
         "status": "passed",
         "evidence": "The focused public API suite passed 20 tests / 510 assertions across all sixteen A/T types, including fifteen top-level payload_json.sections projections, the legacy INTP nested sections projection, exact nine-section order/title/body/rows, FAQ/canonical/robots/JSON-LD, top-level authority precedence, and absent/malformed fail-closed cases. After review identified a malformed-top-level/stale-nested edge case, the controller and fixture were tightened so only an absent top-level key may use the legacy nested shape; malformed top-level authority explicitly removes stale nested sections. PHP syntax, scoped Pint, and the focused 20-test suite passed again, followed by a second complete ci_verify_mbti.sh pass. Route discovery, a fresh complete SQLite migration, strict Composer validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope validation also passed. Verification-generated Big Five compiled diffs were restored and are excluded."
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "All nine GitHub checks passed on exact validated code head b231c18aa4dabbe0a926d8561eae6faf8ad40918: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. GitHub reports OPEN/CLEAN/MERGEABLE."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97901,8 +97905,13 @@
         "at": "2026-07-18T16:33:16Z",
         "status": "main_reconciled",
         "note": "Merged current origin/main 468591b9713cbecf83f906cc998b367ab15973f7 into the scoped branch after main advanced. The only conflicts were append-only PR-train manifest/state files; all upstream entries and the exact MBTI-COMP-PROJECTION-45 entries were preserved. YAML/JSON, scoped Pint, the focused 20 tests / 510 assertions, and the complete ci_verify_mbti.sh gate passed on the combined tree."
+      },
+      {
+        "at": "2026-07-18T16:41:40Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on exact validated code head b231c18aa4dabbe0a926d8561eae6faf8ad40918. The single controller review thread is resolved, the exact four-path scope is intact, GitHub reports OPEN/CLEAN/MERGEABLE, and commit_sha now identifies the reviewed code head containing the malformed-section fix and current main. This ledger-only transition must pass its own exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T16:33:16Z"
+    "updated_at": "2026-07-18T16:41:40Z"
   }
 }
