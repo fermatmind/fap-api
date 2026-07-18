@@ -97839,7 +97839,7 @@
     "depends_on": [
       "CAREER-DETAIL-ATOMIC-EXPOSURE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "review_fix_local_validation_passed",
     "commit_sha": "17ae73527c1bb366cbf68dcd624e66fe8ca33c19",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3176",
     "checks": {
@@ -97853,7 +97853,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After reconciliation with main 781d1636b, Career cache coverage passed 7 tests / 76 assertions, runtime SLO passed 7 tests / 38 assertions, deploy guards passed 2 tests / 16 assertions, and Big Five runtime freeze passed 2 tests / 5 assertions. Default scheduling excludes repair; explicit opt-in schedules minimum-targets=2092, batch-size=37, and the durable resume key. Pint passed 9 files, composer validate --strict passed, deploy.php lint passed, YAML/JSON parsed, diff checks passed, and exact 13-path scope validation passed."
+        "evidence": "After reconciliation with main 781d1636b, Career cache coverage ultimately passed 8 tests / 96 assertions, runtime SLO passed 7 tests / 38 assertions, deploy guards passed 2 tests / 16 assertions, and Big Five runtime freeze passed 2 tests / 5 assertions. Default scheduling excludes repair; explicit opt-in schedules minimum-targets=2092, batch-size=37, and the durable resume key. Scoped Pint passed after every fix; composer validate --strict, deploy.php lint, YAML/JSON parsing, diff checks, and exact 13-path scope validation passed."
       },
       "github_required_checks": {
         "status": "pending",
@@ -97911,9 +97911,14 @@
         "at": "2026-07-18T16:58:06Z",
         "status": "github_checks_pending",
         "note": "Merged origin/main 781d1636b into the PR4 branch. Conflicts were limited to append-only PR-train manifest/state files; the upstream MBTI-COMP-PROJECTION-45 entries and the exact PR4 entries were both preserved. All manifest checks and exact 13-path scope validation passed on the reconciled tree at 17ae73527c1bb366cbf68dcd624e66fe8ca33c19."
+      },
+      {
+        "at": "2026-07-18T17:08:43Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine checks passed on 38734e75edbd95f82077bc4c86a47a97fe8dcccb and four earlier threads were resolved. Two new valid same-scope findings were inspected: CLI minimum-targets now rejects malformed or oversized values before inspection/write, and a completed repair cursor wraps on the next invocation so later missing/broken regressions are rediscovered. The wrap remains bounded, missing-only, resumable, and protected by the job's 300-second uniqueness lock. Focused coverage/SLO/freeze tests, Pint, diff checks, and exact scope validation passed."
       }
     ],
-    "updated_at": "2026-07-18T16:58:06Z"
+    "updated_at": "2026-07-18T17:08:43Z"
   },
   "MBTI-COMP-PROJECTION-45": {
     "id": "MBTI-COMP-PROJECTION-45",

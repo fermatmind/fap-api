@@ -70,7 +70,9 @@ Bounded scheduled repair is disabled by default. Setting
 that reuses the existing `runtime-slo` resume cursor, asynchronous queue guard,
 production-write confirmation, and missing/broken-only classification. The batch
 size defaults to 100 and is capped at 500. The same configured target floor is
-checked before the repair can advance its cursor. Disable the flag to stop new repair
+checked before the repair can advance its cursor. A completed cursor wraps to the
+start on the next scheduled invocation, re-inspects bounded rows, and still queues
+only targets that are currently missing or broken. Disable the flag to stop new repair
 dispatches; already queued jobs follow the normal queue operations policy.
 
 This PR does not set those production environment values, run the schedule,

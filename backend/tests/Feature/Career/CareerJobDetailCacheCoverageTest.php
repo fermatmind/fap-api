@@ -134,6 +134,23 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
     }
 
+    public function test_rollout_floor_rejects_malformed_cli_values_before_repair(): void
+    {
+        $this->bindProjection(['one']);
+        Queue::fake();
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing' => true,
+            '--minimum-targets' => '2,092',
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString('--minimum-targets must be a non-negative base-10 integer.', Artisan::output());
+        Queue::assertNothingPushed();
+        $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
+    }
+
     public function test_repair_queues_only_missing_or_broken_targets_and_preserves_healthy_caches(): void
     {
         $this->bindProjection(['active', 'legacy', 'lkg', 'missing']);
@@ -168,9 +185,10 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         }
     }
 
-    public function test_repair_resume_is_stable_and_does_not_requeue_completed_target_rows(): void
+    public function test_repair_resume_is_stable_within_a_pass_and_wraps_to_repair_later_regressions(): void
     {
         $this->bindProjection(['one', 'three', 'two']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
         Queue::fake();
         $options = [
             '--repair-missing' => true,
@@ -186,11 +204,37 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         }
         Queue::assertPushed(WarmCareerJobDetailProjection::class, 6);
 
+        foreach (['one', 'three', 'two'] as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug]);
+            }
+        }
+        $this->travel(301)->seconds();
+
         $this->assertSame(0, Artisan::call('career:verify-job-detail-cache-coverage', $options));
         $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
-        $this->assertSame(6, $report['repair']['cursor_before']);
+        $this->assertTrue($report['repair']['cursor_wrapped']);
+        $this->assertSame(0, $report['repair']['cursor_before']);
+        $this->assertSame(2, $report['repair']['cursor_after']);
         $this->assertSame(0, $report['repair']['queued_jobs']);
         Queue::assertPushed(WarmCareerJobDetailProjection::class, 6);
+
+        Cache::forget($cache->jobDetailActiveVersionKey('one', 'en'));
+        foreach ([4, 6] as $expectedCursor) {
+            $this->assertSame(0, Artisan::call('career:verify-job-detail-cache-coverage', $options));
+            $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+            $this->assertFalse($report['repair']['cursor_wrapped']);
+            $this->assertSame($expectedCursor, $report['repair']['cursor_after']);
+            $this->assertSame(0, $report['repair']['queued_jobs']);
+        }
+
+        $this->assertSame(0, Artisan::call('career:verify-job-detail-cache-coverage', $options));
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertTrue($report['repair']['cursor_wrapped']);
+        $this->assertSame(0, $report['repair']['cursor_before']);
+        $this->assertSame(1, $report['repair']['queued_jobs']);
+        Queue::assertPushed(WarmCareerJobDetailProjection::class, 7);
+        Queue::assertPushed(WarmCareerJobDetailProjection::class, static fn (WarmCareerJobDetailProjection $job): bool => $job->slug === 'one' && $job->locale === 'en');
     }
 
     public function test_production_repair_requires_explicit_confirmation(): void
