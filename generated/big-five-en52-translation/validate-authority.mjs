@@ -83,6 +83,16 @@ function markdownVisibleText(markdown) {
     .replace(/\[([^\]]+)\]\s*\[[^\]]*\]/g, '$1');
 }
 
+function markdownLinkDestinations(markdown) {
+  const destinations = new Set();
+  for (const match of markdown.matchAll(
+    /\[[^\]]+\]\(\s*(?:<([^>]+)>|([^\s)]+))(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\s*\)/g,
+  )) destinations.add(match[1] ?? match[2]);
+  for (const match of markdown.matchAll(/^\s*\[(?!\^)[^\]]+\]:\s*<?([^>\s]+)>?/gm))
+    destinations.add(match[1]);
+  return destinations;
+}
+
 function substantiveParagraphs(body) {
   return body.split(/\n\s*\n/).map((part) => part.trim()).filter((part) => {
     if (part.startsWith('#') || part.startsWith('> **Content method')) return false;
@@ -364,11 +374,27 @@ async function main() {
         fail('empty_faq_answer', `${completedEntry.target_path}: ${faqQuestions[index]}`);
       }
     }
-    const internalLinks = new Set();
-    for (const match of body.matchAll(/\[[^\]]+\]\(\s*(\/[^)\s]+)(?:\s+[^)]*)?\)/g)) internalLinks.add(match[1]);
-    for (const match of body.matchAll(/^\s*\[[^\]]+\]:\s*<?(\/[^>\s]+)>?/gm)) internalLinks.add(match[1]);
-    for (const match of body.matchAll(/\bhref\s*=\s*["'](\/[^"']+)["']/gi)) internalLinks.add(match[1]);
-    for (const link of internalLinks) {
+    for (const destination of markdownLinkDestinations(body)) {
+      let link = destination;
+      if (/^\/\//.test(link)) link = `https:${link}`;
+      if (/^https?:\/\//i.test(link)) {
+        let parsedUrl;
+        try {
+          parsedUrl = new URL(link);
+        } catch {
+          invalidInternalLinkCount += 1;
+          fail('malformed_link', `${completedEntry.target_path}: ${destination}`);
+          continue;
+        }
+        if (!['fermatmind.com', 'www.fermatmind.com'].includes(parsedUrl.hostname.toLowerCase())) continue;
+        link = `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
+      } else if (/^(?:#|mailto:|tel:)/i.test(link)) {
+        continue;
+      } else if (!link.startsWith('/')) {
+        invalidInternalLinkCount += 1;
+        fail('relative_internal_link', `${completedEntry.target_path}: ${destination}`);
+        continue;
+      }
       const canonicalLink = link.split(/[?#]/)[0];
       if (canonicalLink.startsWith('/zh/')) {
         zhInternalLinkCount += 1;

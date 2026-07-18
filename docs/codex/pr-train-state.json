@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed through Markdown-visible evidence/FAQ-answer head d552ac8fcc230d705a8c61160fe271a56358bc0d. Twenty-one actionable Codex review findings were accepted; the final raw-body link-audit head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub checks passed through raw-body link-audit head 5bba2d2f403b2abec29ededc5c6d676472564a52. Twenty-two actionable Codex review findings were accepted; the final same-origin link-normalization head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98134,9 +98134,14 @@
         "at": "2026-07-18T20:45:53Z",
         "status": "github_review_fixes_completed",
         "note": "All nine checks passed on Markdown-visible evidence/FAQ-answer head d552ac8fcc230d705a8c61160fe271a56358bc0d, then one valid P2 regression was accepted. Internal-link destinations are again extracted from raw Markdown body before any visibility projection, while reader-visible text remains isolated to word, section, FAQ, duplicate, and claim gates. A negative raw-body probe captured both a zh-CN inline destination and a legacy-alias reference definition; the reproducible translated=0 authority validation remains green."
+      },
+      {
+        "at": "2026-07-18T20:53:52Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on raw-body link-audit head 5bba2d2f403b2abec29ededc5c6d676472564a52, then one valid P2 finding was accepted. Markdown inline and reference destinations on fermatmind.com or www.fermatmind.com now normalize from http, https, or protocol-relative absolute URLs to their path before zh-CN, unknown-canonical, and legacy-alias enforcement; non-canonical relative internal targets fail closed, while external evidence URLs remain allowed. The same-origin normalization probe and reproducible translated=0 authority validation pass."
       }
     ],
-    "updated_at": "2026-07-18T20:45:53Z"
+    "updated_at": "2026-07-18T20:53:52Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
