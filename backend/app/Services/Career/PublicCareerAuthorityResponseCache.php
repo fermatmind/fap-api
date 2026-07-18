@@ -580,45 +580,74 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $this->careerJobListBundleBuilder->build(false)
         )->resolve();
 
-        $summary = [];
+        $payloads = [];
+        $startedAt = [];
         foreach ($locales as $locale) {
             $phase = 'career_directory_'.$this->cachePhaseLocale($locale);
             $reporter?->__invoke($phase, 'starting');
-            $observedVersion = Cache::get($this->directoryActiveVersionKey($locale));
-            $this->singleFlightDirectoryRebuild(
+            $startedAt[$locale] = hrtime(true);
+            $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
+                'bundle_kind' => 'career_job_index',
+                'bundle_version' => 'career.protocol.job_index.v1',
+                'items' => $sourceItems,
+            ], $locale);
+            $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+            $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
+                $items,
                 $locale,
-                is_string($observedVersion) ? $observedVersion : null,
-                function () use ($locale, $sourceItems): array {
-                    $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
-                        'bundle_kind' => 'career_job_index',
-                        'bundle_version' => 'career.protocol.job_index.v1',
-                        'items' => $sourceItems,
-                    ], $locale);
-                    $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
-                    $this->publishDirectoryReadModel(
-                        $locale,
-                        $this->careerDirectoryReadModelBuilder->build(
-                            $items,
-                            $locale,
-                            fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
-                        ),
-                    );
-
-                    return $jobIndex;
-                },
+                fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
             );
-            $status = $this->directoryCacheStatus($locale);
-            $payload = $this->directoryReadModelPayload($locale);
+        }
+
+        try {
+            $versions = $this->publishDirectoryReadModelsAtomically($payloads);
+        } finally {
+            foreach ($startedAt as $locale => $started) {
+                try {
+                    Cache::forever(
+                        $this->directoryLastRebuildDurationKey($locale),
+                        round((hrtime(true) - $started) / 1_000_000, 3),
+                    );
+                } catch (\Throwable) {
+                    // A telemetry write must not mask the activation failure.
+                }
+            }
+        }
+        $summary = [];
+        foreach ($payloads as $locale => $payload) {
+            $phase = 'career_directory_'.$this->cachePhaseLocale($locale);
             $summary[$phase] = [
                 'locale' => $locale,
-                'status' => ($status['status'] ?? null) === 'ready' ? 'cached' : 'unavailable',
-                'version' => is_string($status['active_version'] ?? null) ? $status['active_version'] : null,
+                'status' => 'cached',
+                'version' => $versions[$locale] ?? null,
                 'member_count' => count((array) ($payload['items'] ?? [])),
             ];
             $reporter?->__invoke($phase, 'finished');
         }
 
         return $summary;
+    }
+
+    /**
+     * Stage every locale payload before switching any active pointer. If a
+     * pointer switch fails, restore all pointer metadata touched by the batch.
+     * Staged payloads are immutable and harmless when left unreachable.
+     *
+     * @param  array<string, array<string, mixed>>  $payloadsByLocale
+     * @return array<string, string>
+     */
+    public function publishDirectoryReadModelsAtomically(array $payloadsByLocale): array
+    {
+        $payloads = [];
+        foreach ($payloadsByLocale as $locale => $payload) {
+            $payloads[$this->normalizePublicLocale((string) $locale)] = $payload;
+        }
+        ksort($payloads, SORT_STRING);
+
+        return $this->withDirectoryRebuildLocks(
+            array_keys($payloads),
+            fn (): array => $this->stageAndActivateDirectoryReadModels($payloads),
+        );
     }
 
     /**
@@ -783,6 +812,145 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $this->logDirectoryCacheState($normalizedLocale, 'rebuild', $version, ['rebuild' => 'finished']);
 
         return $version;
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $payloadsByLocale
+     * @return array<string, string>
+     */
+    private function stageAndActivateDirectoryReadModels(array $payloadsByLocale): array
+    {
+        $versions = [];
+        $snapshots = [];
+
+        foreach ($payloadsByLocale as $locale => $payload) {
+            $version = (string) Str::ulid();
+            $payloadKey = $this->directoryVersionPayloadKey($locale, $version);
+            Cache::forever($payloadKey, $payload);
+            if (! is_array(Cache::get($payloadKey))) {
+                throw new \RuntimeException(sprintf(
+                    'Career directory staged payload verification failed for locale %s.',
+                    $locale,
+                ));
+            }
+
+            $versions[$locale] = $version;
+            $snapshots[$locale] = $this->directoryPointerSnapshot($locale);
+        }
+
+        $attempted = [];
+        try {
+            foreach ($versions as $locale => $version) {
+                $attempted[] = $locale;
+                $this->activateStagedDirectoryReadModel(
+                    $locale,
+                    $version,
+                    $snapshots[$locale]['active']['value'],
+                );
+            }
+        } catch (\Throwable $throwable) {
+            foreach (array_reverse($attempted) as $locale) {
+                $this->restoreDirectoryPointerSnapshot($locale, $snapshots[$locale]);
+            }
+
+            throw $throwable;
+        }
+
+        foreach ($versions as $locale => $version) {
+            Cache::forget($this->directoryReadModelCacheKey($locale));
+            $this->logDirectoryCacheState($locale, 'rebuild', $version, [
+                'rebuild' => 'batch_finished',
+                'activation' => 'atomic_multi_locale',
+            ]);
+        }
+
+        return $versions;
+    }
+
+    private function activateStagedDirectoryReadModel(string $locale, string $version, mixed $previousVersion): void
+    {
+        if (is_string($previousVersion) && $previousVersion !== '') {
+            Cache::forever($this->directoryLkgVersionKey($locale), $previousVersion);
+        }
+        Cache::forever($this->directoryActiveVersionKey($locale), $version);
+        if (Cache::get($this->directoryActiveVersionKey($locale)) !== $version) {
+            throw new \RuntimeException(sprintf(
+                'Career directory active pointer verification failed for locale %s.',
+                $locale,
+            ));
+        }
+        Cache::forever($this->directoryActivatedAtKey($locale), now()->timestamp);
+    }
+
+    /**
+     * @return array{
+     *     active: array{exists: bool, value: mixed},
+     *     lkg: array{exists: bool, value: mixed},
+     *     activated_at: array{exists: bool, value: mixed}
+     * }
+     */
+    private function directoryPointerSnapshot(string $locale): array
+    {
+        return [
+            'active' => $this->cacheValueSnapshot($this->directoryActiveVersionKey($locale)),
+            'lkg' => $this->cacheValueSnapshot($this->directoryLkgVersionKey($locale)),
+            'activated_at' => $this->cacheValueSnapshot($this->directoryActivatedAtKey($locale)),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *     active: array{exists: bool, value: mixed},
+     *     lkg: array{exists: bool, value: mixed},
+     *     activated_at: array{exists: bool, value: mixed}
+     * }  $snapshot
+     */
+    private function restoreDirectoryPointerSnapshot(string $locale, array $snapshot): void
+    {
+        $this->restoreCacheValue($this->directoryActiveVersionKey($locale), $snapshot['active']);
+        $this->restoreCacheValue($this->directoryLkgVersionKey($locale), $snapshot['lkg']);
+        $this->restoreCacheValue($this->directoryActivatedAtKey($locale), $snapshot['activated_at']);
+    }
+
+    /** @return array{exists: bool, value: mixed} */
+    private function cacheValueSnapshot(string $key): array
+    {
+        return [
+            'exists' => Cache::has($key),
+            'value' => Cache::get($key),
+        ];
+    }
+
+    /** @param array{exists: bool, value: mixed} $snapshot */
+    private function restoreCacheValue(string $key, array $snapshot): void
+    {
+        if ($snapshot['exists']) {
+            Cache::forever($key, $snapshot['value']);
+
+            return;
+        }
+
+        Cache::forget($key);
+    }
+
+    /**
+     * @param  list<string>  $locales
+     * @param  callable(): array<string, string>  $callback
+     * @return array<string, string>
+     */
+    private function withDirectoryRebuildLocks(array $locales, callable $callback, int $offset = 0): array
+    {
+        if (! isset($locales[$offset])) {
+            return $callback();
+        }
+
+        $lock = Cache::lock($this->directoryRebuildLockKey($locales[$offset]), 60);
+
+        return $lock->block(65, fn (): array => $this->withDirectoryRebuildLocks(
+            $locales,
+            $callback,
+            $offset + 1,
+        ));
     }
 
     /** @return array{locale: string, status: string, active_version: ?string, lkg_version: ?string, age_seconds: ?int, last_rebuild_ms: ?float} */

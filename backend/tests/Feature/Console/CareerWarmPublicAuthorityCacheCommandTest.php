@@ -248,6 +248,54 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertSame($oldVersion, $cache->directoryCacheStatus('zh-CN')['lkg_version']);
     }
 
+    public function test_multi_locale_directory_activation_restores_all_pointers_when_later_locale_fails(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldEn = ['public_count' => 1, 'items' => [['slug' => 'old-en']]];
+        $oldZh = ['public_count' => 1, 'items' => [['slug' => 'old-zh']]];
+        $oldEnVersion = $cache->publishDirectoryReadModel('en', $oldEn);
+        $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', $oldZh);
+        $cacheManager = Cache::getFacadeRoot();
+        $zhActiveKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:active';
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhActiveKey, $oldZhVersion): bool {
+                    if ($key === $zhActiveKey && $value !== $oldZhVersion) {
+                        throw new \RuntimeException('synthetic zh activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            try {
+                $cache->publishDirectoryReadModelsAtomically([
+                    'en' => ['public_count' => 2, 'items' => [['slug' => 'new-en']]],
+                    'zh-CN' => ['public_count' => 2, 'items' => [['slug' => 'new-zh']]],
+                ]);
+                $this->fail('The synthetic second-locale activation should fail.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('synthetic zh activation failure', $exception->getMessage());
+            }
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame($oldEnVersion, $cache->directoryCacheStatus('en')['active_version']);
+        $this->assertSame($oldZhVersion, $cache->directoryCacheStatus('zh-CN')['active_version']);
+        $this->assertSame($oldEn, $cache->directoryReadModelPayload('en'));
+        $this->assertSame($oldZh, $cache->directoryReadModelPayload('zh-CN'));
+    }
+
     public function test_fifty_cold_rebuild_contenders_only_execute_one_builder(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);

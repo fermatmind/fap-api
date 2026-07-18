@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "github_review_fix_ready_to_commit",
     "commit_sha": "0217d3d038b00276dbfbcfebdae04e8cbeed753f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97256,11 +97256,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After inspecting both automated review threads and closing the compiled-snapshot exposure edge case, the same-scope repair suite passed 99 tests / 786 assertions across projection and promotion gates, candidate-safe cache preparation for runtime-shell and compiled authority paths, apply/rollback behavior, post-promotion command, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 13ms and 134ms with one DB query. All 24 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-seven-path allowlist passed."
+        "evidence": "After inspecting all three automated review threads, the same-scope repair suite passed 100 tests / 791 assertions across projection and promotion gates, candidate-safe cache preparation for runtime-shell and compiled authority paths, apply/rollback behavior, post-promotion command, atomic multi-locale directory activation/rollback, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 12ms and 133ms with one DB query. All 24 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-seven-path allowlist passed."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "The prior remote head is superseded by two valid same-scope review fixes. Candidate detail projections are now prepared and verified before database exposure, and combined warm runs targeted details before directory activation. Exact-head required checks will be restarted after the repair commit is pushed."
+        "evidence": "All nine checks passed on f761aa32ba0089ee8cf727bbac7ec30cb7224f40, then a new valid P1 review identified partial multi-locale directory activation on a later-locale failure. The local repair stages every locale before pointer activation and restores all touched pointer metadata on failure. Exact-head required checks will restart after this repair is pushed."
       }
     },
     "scope_validation": {
@@ -97314,8 +97314,13 @@
         "at": "2026-07-18T10:39:58Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed the complete same-scope review repair as 0217d3d038b00276dbfbcfebdae04e8cbeed753f. Replied to both automated review findings with exact implementation evidence and resolved both threads. GitHub reports the PR mergeable; exact-head required checks are running."
+      },
+      {
+        "at": "2026-07-18T10:53:13Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on f761aa32ba0089ee8cf727bbac7ec30cb7224f40. Pre-merge review then found one new valid P1: a later-locale directory activation failure could leave an earlier locale active after DB remediation. The current-scope repair stages and verifies every immutable locale payload first, acquires deterministic locale rebuild locks, then switches pointers with snapshot-based restoration of all touched active/LKG/activation metadata on any failure. A synthetic second-locale failure proves both locales keep their prior active payloads. The complete 100-test / 791-assertion suite, Big Five classifier, all 24 Pint paths, Composer/YAML/JSON, diff, and exact twenty-seven-path scope checks pass."
       }
     ],
-    "updated_at": "2026-07-18T10:39:58Z"
+    "updated_at": "2026-07-18T10:53:13Z"
   }
 }
