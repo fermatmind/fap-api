@@ -9,8 +9,10 @@ use App\Models\AdminUser;
 use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Approvals\HighRiskApprovalService;
 use App\Services\Approvals\HighRiskApprovalValidationException;
+use App\Services\Audit\AuditLogger;
 use App\Services\Auth\AdminTotpService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
@@ -374,6 +376,36 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringNotContainsString($privateValue, (string) $audit->reason);
         $this->assertStringNotContainsString($clientSecret, (string) $audit->reason);
         $this->assertStringContainsString('[REDACTED]', (string) $audit->meta_json);
+    }
+
+    public function test_reject_audit_metadata_does_not_capture_fresh_step_up_code(): void
+    {
+        $privateStepUpCode = 'recovery-'.Str::random(32);
+        $request = Request::create('/ops/admin-approvals', 'POST', [
+            'fresh_step_up_code' => $privateStepUpCode,
+            'reason_append' => 'safe rejection note',
+        ]);
+
+        app(AuditLogger::class)->log(
+            $request,
+            'approval_rejected',
+            'AdminApproval',
+            (string) Str::uuid(),
+            [
+                'params_sanitized' => [
+                    'reason_append' => 'safe rejection note',
+                ],
+            ],
+            'high-risk approval rejected',
+            'rejected',
+        );
+
+        $audit = DB::table('audit_logs')->where('action', 'approval_rejected')->latest('created_at')->first();
+
+        $this->assertNotNull($audit);
+        $this->assertStringNotContainsString($privateStepUpCode, (string) $audit->meta_json);
+        $this->assertStringNotContainsString('fresh_step_up_code', (string) $audit->meta_json);
+        $this->assertStringContainsString('safe rejection note', (string) $audit->meta_json);
     }
 
     private function soloOwner(AdminUser $owner): void

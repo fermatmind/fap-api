@@ -290,6 +290,10 @@ class AdminApprovalResource extends BaseTenantResource
                                     'org_id' => (int) $locked->org_id,
                                     'correlation_id' => (string) $locked->correlation_id,
                                     'type' => (string) $locked->type,
+                                    // Never let the one-time step-up code fall through to request()->all().
+                                    'params_sanitized' => [
+                                        'reason_append' => $append,
+                                    ],
                                 ],
                                 'high-risk approval rejected',
                                 'rejected',
