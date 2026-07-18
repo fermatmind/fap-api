@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "github_review_fix_ready_to_commit",
     "commit_sha": "e4a31d3daf556ed26ec93195ad386bd03daa6ae1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97256,11 +97256,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After all fourteen review findings, the Career manifest suite passed 99 tests / 743 assertions across projection/promotion gates, immutable payload plus exposure-snapshot staging, activation-time snapshot revalidation, nested-lock lease coverage, best-effort cleanup with guaranteed remediation progression, ready-only public directory/industry/sitemap consumption, snapshot-backed list preservation, atomic job-index/detail/directory activation and rollback, stale materialized projection reads, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 101 tests / 749 assertions total. The actual readiness path built 1046 and 10000 row directories in about 14ms and 143ms with one DB query. All 29 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact thirty-two-path merge-base allowlist passed."
+        "evidence": "After all fourteen review findings and the resulting CI fixture repair, the Career manifest suite passed 101 tests / 783 assertions across projection/promotion gates, immutable payload plus exposure-snapshot staging, activation-time snapshot revalidation, nested-lock lease coverage, best-effort cleanup with guaranteed remediation progression, ready-only public directory/industry/sitemap consumption, the 10k readiness gate, snapshot-backed list preservation, atomic job-index/detail/directory activation and rollback, stale materialized projection reads, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 103 tests / 789 assertions total. The actual readiness path built 1046 and 10000 row directories in about 14ms and 143ms with one DB query. All 30 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact thirty-three-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on prior ready-ledger head 54347970f8f28ac378e20f8b3d3ea7180a363433. Three new review findings were validated and repaired locally; exact-head checks will rerun after commit and push."
+        "status": "failed_repaired_locally",
+        "evidence": "On exact head 74a36de6a, content-pack-build-validate failed in CareerDirectory10kOpsWarmValidateCommandTest because its legacy fixture published runtime projection without verified EN/ZH detail payloads. The fixture now seeds the same ready detail authority required by production consumers, and the exact CI test passes 2 tests / 40 assertions locally."
       }
     },
     "scope_validation": {
@@ -97439,8 +97439,13 @@
         "at": "2026-07-18T14:12:39Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed nested-lock lease coverage, ready-only public directory consumers, and remediation-safe snapshot cleanup as e4a31d3daf556ed26ec93195ad386bd03daa6ae1. Replied to all three new review findings with exact regression evidence and resolved the threads. This ledger transition also restores the unrelated historic B5 runner status that a same-named mechanical match touched; no other historic facts changed. Exact-head required checks are running, with no production cache, DB, CMS, sitemap authority, staging, or deploy action."
+      },
+      {
+        "at": "2026-07-18T14:18:48Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "Inspected the failed content-pack-build-validate job and reproduced CareerDirectory10kOpsWarmValidateCommandTest locally. Its legacy fixture had runtime projection but no verified EN/ZH detail payloads, so the new ready-only public consumer correctly reported zero. The fixture now seeds explicit ready detail payloads, the exact CI gate passes 2 tests / 40 assertions, all 30 Pint paths and the full 103-test / 789-assertion manifest remain green, and the exact thirty-three-path allowlist has zero drift. No production or runtime cache mutation occurred."
       }
     ],
-    "updated_at": "2026-07-18T14:12:39Z"
+    "updated_at": "2026-07-18T14:18:48Z"
   }
 }
