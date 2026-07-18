@@ -97381,7 +97381,7 @@
     "depends_on": [
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "20b881d527e9bc8f2ab3478338a7a6c5b7424f39",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
@@ -97394,14 +97394,14 @@
         "evidence": "After the nineteenth exact-head review repair, focused approval/registry validation passed 28 tests/551 assertions and the exact runtime-freeze contract passed 367/759. The guarded exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, structured-file, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove the configured solo owner can reach the review UI, a different domain-qualified admin cannot list approvals in solo_owner mode, and the same domain executor fallback remains available only in team_separated mode."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Round-18 implementation-plus-ledger head a98e0fd3c097dbf853627d4af961c6f8c3a4a747 passed all nine required checks, but its exact-head review found one valid P2: a non-owner domain-qualified admin could list APPROVED/FAILED rows in solo_owner mode despite being unable to execute them. Round 19 limits the domain-executor query fallback to team_separated; the new implementation-plus-ledger head must pass all required checks, exact-head Codex review, and zero-unresolved-thread audit."
+        "status": "passed",
+        "evidence": "Exact round-19 implementation-plus-ledger head 8d4d5b96f71ca4623b36b96458d152b36f218eca passed all nine required CI/code-scanning checks. Exact-head Codex review reported no major issues, all 25 review threads are resolved, GitHub reports MERGEABLE/CLEAN, and the exact fourteen-path scope is clean."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97579,9 +97579,14 @@
         "at": "2026-07-18T20:22:29Z",
         "status": "review_fix_local_checks_passed",
         "note": "Nineteenth exact-head review on a98e0fd3c097dbf853627d4af961c6f8c3a4a747 found one valid P2: in solo_owner mode, a different admin with matching domain permissions could list APPROVED/FAILED approvals and their sensitive operational context even though execution policy accepted only the configured owner. The resource now enables domain-executor type fallback only in team_separated mode; the configured solo owner still reaches the full review UI. The first expanded regression attempted a tenant-scoped Eloquent query without OrgContext and errored before policy evaluation, so it was repaired to assert the exact private type gate directly. Focused approval/registry tests then passed 28/551, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T20:32:21Z",
+        "status": "ready_to_merge",
+        "note": "Exact round-19 implementation-plus-ledger head 8d4d5b96f71ca4623b36b96458d152b36f218eca passed all nine required checks. Exact-head Codex review reported no major issues, all 25 review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T20:22:29Z"
+    "updated_at": "2026-07-18T20:32:21Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
