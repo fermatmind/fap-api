@@ -45215,6 +45215,72 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
 
+  - id: SOLO-OWNER-PERSONALITY-REVIEW-03
+    repo: fap-api
+    base: main
+    branch: codex/solo-owner-personality-review-03
+    title: "SOLO-OWNER-PERSONALITY-REVIEW-03: accept solo-owner attestations across personality review gates"
+    status: user_authorized
+    depends_on:
+      - SOLO-OWNER-CMS-REVIEW-02
+    train_scope: personality_solo_owner_review_adapters
+    scope:
+      - Migrate MBTI content approval, Big Five editorial and Authority/release review, Enneagram Authority V2 review evidence, RIASEC content/release review, PersonalityPublicContentAsset review, and personality promotion preflight gates to the central solo-owner attestation contract.
+      - Allow the configured solo owner to act as author, submitter, and reviewer while rejecting non-owner forgery, cross-org actors, incorrect targets, and preserving team_separated role separation.
+      - Expand one compact Enneagram attestation into exactly 116 private evidence rows while preserving the existing private register and failing closed with zero writes on missing, duplicate, extra, rejected, or hash-drifted evidence.
+      - Keep review separate from promotion, preserve exact authorization, atomic promotion, rollback, readback, and deployed-SHA gates, and keep Big Five and Enneagram permanently text-only with zero Media Library writes.
+    allowed_paths:
+      - backend/app/Models/PersonalityPublicContentAsset*.php
+      - backend/app/Models/BigFiveV2EditorialRevision.php
+      - backend/app/Services/BigFive/**
+      - backend/app/Services/Enneagram/AuthorityV2/**
+      - backend/app/Services/Cms/*Personality*
+      - backend/app/Services/Riasec/**
+      - backend/app/Console/Commands/Personality*
+      - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
+      - backend/tests/Feature/SEO/*Enneagram*
+      - backend/tests/Feature/SEO/BigFiveAuthorityV247Test.php
+      - backend/tests/Feature/BigFive/**
+      - backend/tests/Feature/Riasec/**
+      - backend/tests/Feature/Console/*Mbti*
+      - backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php
+      - backend/tests/Unit/Services/BigFive/**
+      - docs/operations/solo-owner-review-protocol.md
+      - docs/operations/generated/solo-owner-review-surface-registry.v1.json
+      - AGENTS.md
+      - backend/AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify Career/SEO, high-risk Ops, public API normalization, frontend, Personality content, scoring/result algorithms, or Media Library write paths.
+      - Run production attestation binds, imports, promotion, publication, deployment, database mutations, media writes, or Enneagram PR23.
+      - Weaken exact authorization, atomic promotion, rollback, readback, deployed-SHA, public/private evidence, or text-only boundaries.
+    validation:
+      - Enneagram compact 116-to-exact-116 evidence tests with missing, duplicate, extra, rejected, hash-drift, zero-write, private-register, and public-reviewer-identity regressions
+      - MBTI, Big Five, RIASEC solo-owner acceptance, non-owner rejection, team_separated compatibility, review/promotion separation, and zero-media-write tests
+      - Enneagram Authority V2 focused suite
+      - Big Five focused review and promotion suite
+      - MBTI and RIASEC focused suite
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && composer validate --strict
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool docs/operations/generated/solo-owner-review-surface-registry.v1.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+
   - id: CAREER-DETAIL-COLD-MISS-DEGRADE-01
     repo: fap-api
     base: main

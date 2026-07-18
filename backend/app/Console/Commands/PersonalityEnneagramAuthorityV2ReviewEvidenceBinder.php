@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
 
+/** @review-surface enneagram_review_binder */
 final class PersonalityEnneagramAuthorityV2ReviewEvidenceBinder extends Command
 {
     protected $signature = 'personality:enneagram-authority-v2-review-evidence-binder
         {--source=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/release-gate-report.json : Final exact-SHA 116-page release report}
         {--review-register= : Private operator-supplied 116-row human-review register}
+        {--attestation= : Private compact solo-owner attestation for the exact 116-target set}
         {--preflight : Run a read-only exact review/revision/pointer preflight}
         {--bind : Atomically bind all 116 private review records and approve their working revisions}
         {--confirm-package-sha256= : Exact release package SHA-256; required for bind}
@@ -57,7 +59,7 @@ final class PersonalityEnneagramAuthorityV2ReviewEvidenceBinder extends Command
         }
 
         $releaseReport = $this->jsonFile((string) $this->option('source'), 'final release report');
-        [$reviewRegister, $reviewRegisterSha256] = $this->reviewRegister();
+        [$reviewRegister, $reviewRegisterSha256] = $this->reviewInput();
         $plan = $binder->preflight($releaseReport, $reviewRegister, $reviewRegisterSha256);
         if ($preflight) {
             return $plan;
@@ -111,11 +113,19 @@ final class PersonalityEnneagramAuthorityV2ReviewEvidenceBinder extends Command
     }
 
     /** @return array{array<string, mixed>, string} */
-    private function reviewRegister(): array
+    private function reviewInput(): array
     {
-        $path = $this->requiredOption('review-register');
+        $reviewRegister = trim((string) $this->option('review-register'));
+        $attestation = trim((string) $this->option('attestation'));
+        if (($reviewRegister === '') === ($attestation === '')) {
+            throw new RuntimeException('Exactly one of --review-register or --attestation is required.');
+        }
+        $path = $reviewRegister !== '' ? $reviewRegister : $attestation;
         $resolved = str_starts_with($path, DIRECTORY_SEPARATOR) ? $path : base_path($path);
-        $register = $this->jsonFile($resolved, 'private human-review register');
+        $register = $this->jsonFile(
+            $resolved,
+            $reviewRegister !== '' ? 'private human-review register' : 'private compact owner attestation',
+        );
         $sha256 = hash_file('sha256', $resolved);
         if (! is_string($sha256)) {
             throw new RuntimeException('Unable to hash the private human-review register.');

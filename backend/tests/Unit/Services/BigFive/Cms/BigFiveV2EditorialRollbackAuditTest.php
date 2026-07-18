@@ -178,6 +178,7 @@ final class BigFiveV2EditorialRollbackAuditTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $reviewer->id);
         $rollbacker = $this->adminWithPermissions([
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_CONTENT_RELEASE,

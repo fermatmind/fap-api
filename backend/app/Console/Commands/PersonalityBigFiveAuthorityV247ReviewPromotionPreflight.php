@@ -6,15 +6,18 @@ namespace App\Console\Commands;
 
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
 
+/** @review-surface personality_public_content_asset */
 final class PersonalityBigFiveAuthorityV247ReviewPromotionPreflight extends Command
 {
     protected $signature = 'personality:big-five-authority-v2-review-promotion-preflight
         {--review-manifest= : Review manifest JSON path}
         {--authorization-packet= : Cohort authorization packet JSON path}
         {--rollback-plan= : Rollback plan JSON path}
+        {--attestation= : Optional private compact solo-owner review attestation JSON path}
         {--package-only : Validate the locked pending package without database reads}
         {--json : Emit JSON output}';
 
@@ -27,6 +30,7 @@ final class PersonalityBigFiveAuthorityV247ReviewPromotionPreflight extends Comm
                 $this->requiredOption('review-manifest'),
                 $this->requiredOption('authorization-packet'),
                 $this->requiredOption('rollback-plan'),
+                $this->optionalAttestation(),
             ];
             $result = (bool) $this->option('package-only')
                 ? $preflight->packageOnly(...$arguments)
@@ -66,6 +70,25 @@ final class PersonalityBigFiveAuthorityV247ReviewPromotionPreflight extends Comm
         }
 
         return $value;
+    }
+
+    /** @return array<string,mixed>|null */
+    private function optionalAttestation(): ?array
+    {
+        $path = trim((string) $this->option('attestation'));
+        if ($path === '') {
+            return null;
+        }
+        $resolved = str_starts_with($path, DIRECTORY_SEPARATOR) ? $path : base_path($path);
+        if (! File::isFile($resolved)) {
+            throw new RuntimeException('Private Big Five review attestation file not found.');
+        }
+        $decoded = json_decode(File::get($resolved), true, 512, JSON_THROW_ON_ERROR);
+        if (! is_array($decoded)) {
+            throw new RuntimeException('Private Big Five review attestation must be a JSON object.');
+        }
+
+        return $decoded;
     }
 
     /** @param array<string,mixed> $result */

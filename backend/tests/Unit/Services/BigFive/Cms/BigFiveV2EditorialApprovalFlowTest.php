@@ -8,6 +8,8 @@ use App\Models\AdminUser;
 use App\Models\BigFiveV2EditorialAssetIndexEntry;
 use App\Models\BigFiveV2EditorialRevision;
 use App\Models\Permission;
+use App\Models\ReviewAttestation;
+use App\Models\ReviewAttestationTargetEvidence;
 use App\Models\Role;
 use App\Services\BigFive\Cms\BigFiveV2EditorialApprovalFlow;
 use App\Services\BigFive\Cms\BigFiveV2EditorialAssetIndex;
@@ -21,6 +23,71 @@ use Tests\TestCase;
 final class BigFiveV2EditorialApprovalFlowTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config(['review_governance.mode' => 'team_separated']);
+    }
+
+    public function test_configured_solo_owner_can_author_submit_and_approve_with_atomic_private_evidence(): void
+    {
+        $owner = $this->adminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        config([
+            'review_governance.mode' => 'solo_owner',
+            'review_governance.solo_owner_admin_user_id' => (int) $owner->id,
+        ]);
+
+        $flow = $this->flow();
+        $review = $flow->submitForReview($owner, $this->draftFor($owner), 'owner submission');
+        $approved = $flow->approve($owner, $review, 'owner review only');
+
+        $this->assertSame(BigFiveV2EditorialRevision::STATE_APPROVED, $approved->workflow_state);
+        $this->assertSame((int) $owner->id, (int) $approved->created_by_admin_user_id);
+        $this->assertSame((int) $owner->id, (int) $approved->submitted_by_admin_user_id);
+        $this->assertSame((int) $owner->id, (int) $approved->reviewed_by_admin_user_id);
+        $this->assertSame(1, ReviewAttestation::query()->count());
+        $this->assertSame(1, ReviewAttestationTargetEvidence::query()->count());
+        $this->assertFalse($approved->canPublishToRuntime());
+    }
+
+    public function test_solo_owner_approval_rejects_non_owner_without_state_or_evidence_write(): void
+    {
+        $owner = $this->adminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $otherReviewer = $this->adminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        config([
+            'review_governance.mode' => 'solo_owner',
+            'review_governance.solo_owner_admin_user_id' => (int) $owner->id,
+        ]);
+        $review = $this->flow()->submitForReview($owner, $this->draftFor($owner));
+
+        $this->assertTrue($this->flow()->capabilityMap($owner, $review)['approve']);
+        $this->assertTrue($this->flow()->capabilityMap($owner, $review)['reject']);
+        $this->assertFalse($this->flow()->capabilityMap($otherReviewer, $review)['approve']);
+        $this->assertFalse($this->flow()->capabilityMap($otherReviewer, $review)['reject']);
+
+        try {
+            $this->flow()->approve($otherReviewer, $review);
+            $this->fail('Expected non-owner solo review to fail closed.');
+        } catch (LogicException $exception) {
+            $this->assertStringContainsString('configured owner', $exception->getMessage());
+        }
+
+        $this->assertSame(BigFiveV2EditorialRevision::STATE_REVIEW, $review->refresh()->workflow_state);
+        $this->assertSame(0, ReviewAttestation::query()->count());
+        $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count());
+    }
 
     public function test_editor_reviewer_publisher_and_rollback_capabilities_are_separated(): void
     {

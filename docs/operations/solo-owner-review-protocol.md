@@ -78,6 +78,20 @@ Approval and release remain separate transitions. In `solo_owner` mode, an appro
 - R3 refund, benefit, payment reprocess, rollback, and data lifecycle: requester and approver may be the configured owner, but current MFA/TOTP step-up, reason, exact target fingerprint, correlation ID, idempotency, audit, and separate approve/execute transitions remain mandatory.
 - R4 external objective evidence: owner attestation may record that existing evidence was checked. It cannot manufacture expert review, clinical validation, legal advice, official partnership/certification, third-party endorsement, licensing, or platform approval. Missing evidence remains Unknown, blocked, or non-public.
 
+## Personality adapters (PR3)
+
+`SOLO-OWNER-PERSONALITY-REVIEW-03` activates the same exact-target compact evidence contract for PersonalityPublicContentAsset, its private revision-review evidence, Big Five editorial revisions and Authority V2 review preflight, MBTI approval batches, Enneagram Authority V2 review binding, and RIASEC content/release review. MBTI cross-type authority remains policy-registered with its adapter pending until an actual review gate consumes the central attestation contract.
+
+Big Five editorial approval permits the configured owner to be author, submitter, and reviewer in `solo_owner` mode and binds immutable evidence in the same transaction as the review-state transition. `team_separated` keeps the historical distinct-reviewer rule. Rollback remains separately authorized and retains its existing separation and audit controls.
+
+The MBTI approval queue binds its exact item IDs, recommendation hashes, source package SHA, and QA SHA before changing approval state. It does not write CMS content or trigger publication, promotion, indexability, sitemap, llms, or search actions.
+
+The Enneagram binder accepts either the existing private 116-row register or one compact `approved_all` attestation over the exact release-report target set. Compact input expands into 116 central immutable target-evidence rows and retains the 116-row private revision-review register required by the existing promoter. Missing, duplicate, extra, rejected, package-drifted, or hash-drifted input aborts the transaction with zero evidence or workflow-state writes. Binding remains distinct from the 116-row atomic promotion, deployed-SHA gate, readback, rollback, and PR23 execution.
+
+Big Five Authority V2 compact review is consumed only by its read-only promotion preflight; it cannot supply source/media permission, runtime binding, rollback targets, deployed SHA, or cohort authorization. RIASEC compact review binds only an exact release snapshot and explicitly authorizes no import, release, rollout, or production execution.
+
+Big Five and Enneagram PersonalityPublicContentAsset surfaces remain permanently text-only. These adapters add no Media Library, hero, inline, OG, Twitter, Markdown-image, or HTML-image path.
+
 ## Registry and public projection
 
 `ReviewPolicyRegistry` inventories every known human-review surface and declares its domain, risk tier, authority, current implementation, solo-owner policy, step-up boundary, execution separation, public projection, external-evidence requirement, migration PR, and adapter status. Architecture tests enforce schema, uniqueness, required coverage, R3 step-up, R4 evidence classification, and registration of models with review/approval fields. The generated inventory is `docs/operations/generated/solo-owner-review-surface-registry.v1.json`.

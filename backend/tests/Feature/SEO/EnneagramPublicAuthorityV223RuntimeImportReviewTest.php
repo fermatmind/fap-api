@@ -7,9 +7,13 @@ namespace Tests\Feature\SEO;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
+use App\Models\ReviewAttestation;
+use App\Models\ReviewAttestationTargetEvidence;
+use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV205RevisionWorkspaceWriter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV223ReviewEvidenceBinder;
+use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -21,6 +25,76 @@ final class EnneagramPublicAuthorityV223RuntimeImportReviewTest extends TestCase
     use RefreshDatabase;
 
     private const TEST_DEPLOY_SHA = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
+    public function test_compact_owner_attestation_expands_to_exact_116_private_evidence_rows_without_promotion(): void
+    {
+        $this->seedImportedWorkspace();
+        $publicBefore = $this->publicFingerprint();
+        $attestation = $this->compactAttestation();
+        $attestationSha = $this->fingerprint($attestation);
+
+        $plan = $this->binder()->preflight($this->releaseReport(), $attestation, $attestationSha);
+        $bound = $this->binder()->bind(
+            $this->releaseReport(),
+            $attestation,
+            $attestationSha,
+            (string) $plan['package_sha256'],
+            (string) $plan['preflight_fingerprint'],
+            (int) config('review_governance.solo_owner_admin_user_id'),
+        );
+
+        $this->assertSame('compact_solo_owner_attestation', $plan['review_input_mode']);
+        $this->assertSame(116, $plan['target_count']);
+        $this->assertSame(1, ReviewAttestation::query()->count());
+        $this->assertSame(116, ReviewAttestationTargetEvidence::query()->count());
+        $this->assertSame(116, PersonalityPublicContentAssetRevisionReview::query()->count());
+        $this->assertSame(116, $bound['workflow_transition_count']);
+        $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
+            ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED)
+            ->count());
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->whereNotNull('published_revision_id')->count());
+        $this->assertSame($publicBefore, $this->publicFingerprint());
+    }
+
+    public function test_compact_attestation_missing_extra_rejected_and_hash_drift_fail_with_zero_writes(): void
+    {
+        $this->seedImportedWorkspace();
+        $valid = $this->compactAttestation();
+        $rejected = app(ReviewAttestationFactory::class)->make(
+            scopeType: 'enneagram_authority_v2_review',
+            scopeIdentity: 'enneagram-authority-v2:116',
+            decision: 'rejected',
+            targets: app(PersonalityReviewAttestationService::class)->targets(
+                'enneagram_review_binder',
+                $this->compactAttestationTargets(),
+            ),
+            packageSha256: (string) $this->releaseReport()['package_sha256'],
+        );
+        $cases = [
+            'missing' => [...$valid, 'target_count' => 115],
+            'extra' => [...$valid, 'unexpected_private_field' => true],
+            'rejected' => $rejected,
+            'hash_drift' => [...$valid, 'target_set_sha256' => str_repeat('0', 64)],
+        ];
+
+        foreach ($cases as $label => $attestation) {
+            try {
+                $this->binder()->preflight(
+                    $this->releaseReport(),
+                    $attestation,
+                    $this->fingerprint($attestation),
+                );
+                $this->fail('Expected compact attestation to fail closed for '.$label.'.');
+            } catch (Throwable) {
+                $this->assertSame(0, ReviewAttestation::query()->count(), $label);
+                $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count(), $label);
+                $this->assertSame(0, PersonalityPublicContentAssetRevisionReview::query()->count(), $label);
+                $this->assertSame(116, PersonalityPublicContentAssetRevision::query()
+                    ->where('workflow_state', EnneagramPublicAuthorityV206RevisionPromoter::STATE_PENDING_MANUAL_REVIEW)
+                    ->count(), $label);
+            }
+        }
+    }
 
     public function test_exact_candidate_import_and_private_review_bind_are_atomic_and_publicly_invisible(): void
     {
@@ -339,6 +413,37 @@ SQL);
             'review_source' => PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN,
             'reviews' => $reviews,
         ];
+    }
+
+    /** @return array<string,mixed> */
+    private function compactAttestation(): array
+    {
+        $targets = app(PersonalityReviewAttestationService::class)->targets(
+            'enneagram_review_binder',
+            $this->compactAttestationTargets(),
+        );
+
+        return app(ReviewAttestationFactory::class)->make(
+            scopeType: 'enneagram_authority_v2_review',
+            scopeIdentity: 'enneagram-authority-v2:116',
+            decision: 'approved_all',
+            targets: $targets,
+            packageSha256: (string) $this->releaseReport()['package_sha256'],
+        );
+    }
+
+    /** @return list<array{identity:string,sha256:string}> */
+    private function compactAttestationTargets(): array
+    {
+        return array_map(static fn (array $record): array => [
+            'identity' => 'asset:'.implode(':', [
+                PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+                (string) $record['entity_type'],
+                (string) $record['code'],
+                (string) $record['locale'],
+            ]),
+            'sha256' => (string) $record['asset_sha256'],
+        ], $this->releaseReport()['asset_records']);
     }
 
     /** @return list<array<string, mixed>> */

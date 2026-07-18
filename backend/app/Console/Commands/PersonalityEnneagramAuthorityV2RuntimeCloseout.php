@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use RuntimeException;
 use Throwable;
 
+/** @review-surface enneagram_review_binder */
 final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
 {
     /** @var resource|null */
@@ -25,6 +26,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         {--execute : Execute only a separately authorized exact-SHA packet}
         {--source=docs/seo/personality/enneagram-authority-v2/enneagram-public-authority-v2-release-gate-22/release-gate-report.json : Exact 116-page release report}
         {--review-register= : Private completed 116-row human-review register}
+        {--attestation= : Private compact solo-owner attestation for the exact 116-target set}
         {--pre-readback= : Exact successful all-target pre-readback artifact}
         {--backend-deployed-sha= : Exact deployed backend Git SHA}
         {--frontend-deployed-sha= : Exact deployed frontend Git SHA}
@@ -107,7 +109,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
             ];
         }
 
-        [$reviewRegister, $reviewRegisterSha] = $this->jsonFileWithSha($this->requiredOption('review-register'), 'private review register');
+        [$reviewRegister, $reviewRegisterSha] = $this->reviewInput();
         [$preReadback, $preReadbackSha] = $this->optionalJsonFileWithSha((string) $this->option('pre-readback'), 'pre-readback');
         $backendSha = $this->requiredOption('backend-deployed-sha');
         $frontendSha = $this->requiredOption('frontend-deployed-sha');
@@ -232,6 +234,21 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
     private function optionalJsonFileWithSha(string $path, string $label): array
     {
         return trim($path) === '' ? [null, null] : $this->jsonFileWithSha($path, $label);
+    }
+
+    /** @return array{array<string,mixed>,string} */
+    private function reviewInput(): array
+    {
+        $reviewRegister = trim((string) $this->option('review-register'));
+        $attestation = trim((string) $this->option('attestation'));
+        if (($reviewRegister === '') === ($attestation === '')) {
+            throw new RuntimeException('Exactly one of --review-register or --attestation is required.');
+        }
+
+        return $this->jsonFileWithSha(
+            $reviewRegister !== '' ? $reviewRegister : $attestation,
+            $reviewRegister !== '' ? 'private review register' : 'private compact owner attestation',
+        );
     }
 
     /** @param array<string,mixed> $result */

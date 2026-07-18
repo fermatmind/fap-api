@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Services\ReviewGovernance\ReviewAttestationValidationException;
 use Illuminate\Support\Facades\DB;
 
+/** @review-surface mbti_approval_batch */
 final class PersonalityAgentApprovalQueueWriter
 {
     private const ALLOWED_FRAMEWORKS = ['mbti64', 'big_five', 'enneagram'];
@@ -63,6 +65,10 @@ final class PersonalityAgentApprovalQueueWriter
         '#[?&](?:token|session|user|result_id|report_id|order_no)=#i',
     ];
 
+    public function __construct(
+        private readonly PersonalityReviewAttestationService $reviewAttestations,
+    ) {}
+
     /**
      * @param  array<string,mixed>  $package
      * @param  array<string,mixed>  $qa
@@ -90,10 +96,25 @@ final class PersonalityAgentApprovalQueueWriter
      * @param  array<string,mixed>  $metadata
      * @return array<string,mixed>
      */
-    public function approveItems(array $itemIds, string $framework, string $sourceSha256, string $qaSha256, array $metadata = []): array
-    {
-        return DB::transaction(function () use ($itemIds, $framework, $sourceSha256, $qaSha256, $metadata): array {
-            return $this->approveItemsInTransaction($itemIds, $framework, $sourceSha256, $qaSha256, $metadata);
+    public function approveItems(
+        array $itemIds,
+        string $framework,
+        string $sourceSha256,
+        string $qaSha256,
+        array $metadata = [],
+        ?array $attestation = null,
+        ?int $actorAdminUserId = null,
+    ): array {
+        return DB::transaction(function () use ($itemIds, $framework, $sourceSha256, $qaSha256, $metadata, $attestation, $actorAdminUserId): array {
+            return $this->approveItemsInTransaction(
+                $itemIds,
+                $framework,
+                $sourceSha256,
+                $qaSha256,
+                $metadata,
+                $attestation,
+                $actorAdminUserId,
+            );
         });
     }
 
@@ -200,8 +221,15 @@ final class PersonalityAgentApprovalQueueWriter
      * @param  array<string,mixed>  $metadata
      * @return array<string,mixed>
      */
-    private function approveItemsInTransaction(array $itemIds, string $framework, string $sourceSha256, string $qaSha256, array $metadata): array
-    {
+    private function approveItemsInTransaction(
+        array $itemIds,
+        string $framework,
+        string $sourceSha256,
+        string $qaSha256,
+        array $metadata,
+        ?array $attestation,
+        ?int $actorAdminUserId,
+    ): array {
         $summary = $this->approvalBaseSummary($itemIds, $framework, $sourceSha256, $qaSha256, $metadata);
         $errors = $this->approvalValidationErrors($itemIds, $framework, $sourceSha256, $qaSha256);
 
@@ -278,21 +306,7 @@ final class PersonalityAgentApprovalQueueWriter
         $states = array_values(array_unique($rows->map(static fn (object $row): string => (string) $row->approval_state)->all()));
         sort($states);
 
-        if ($states === ['approved']) {
-            return array_merge($summary, [
-                'ok' => true,
-                'status' => 'pass',
-                'matched_item_count' => $rows->count(),
-                'approved_item_count' => 0,
-                'skipped_existing_approved_item_count' => $rows->count(),
-                'writes_committed' => false,
-                'items' => $this->approvalRows($rows),
-                'errors' => [],
-                'warnings' => [],
-            ]);
-        }
-
-        if ($states !== ['pending']) {
+        if ($states !== ['approved'] && $states !== ['pending']) {
             return array_merge($summary, [
                 'ok' => false,
                 'status' => 'fail',
@@ -309,6 +323,43 @@ final class PersonalityAgentApprovalQueueWriter
             ]);
         }
 
+        $attestationCreated = false;
+        if ($this->reviewAttestations->usesSoloOwnerMode()) {
+            $this->reviewAttestations->assertConfiguredSoloOwner($actorAdminUserId ?? 0);
+            $reviewTargets = $this->reviewTargets($rows);
+            if ($attestation !== null || ! $this->reviewAttestations->hasApprovedEvidence('mbti_approval_batch', $reviewTargets)) {
+                $bound = $this->reviewAttestations->bindOrCreateApproved(
+                    attestation: $attestation,
+                    surfaceId: 'mbti_approval_batch',
+                    scopeType: 'personality_approval_batch',
+                    scopeIdentity: $this->reviewScopeIdentity($itemIds),
+                    authoritativeTargets: $reviewTargets,
+                    actorAdminUserId: (int) $actorAdminUserId,
+                    packageSha256: $sourceSha256,
+                );
+                $attestationCreated = $bound->wasRecentlyCreated;
+            }
+        } elseif ($attestation !== null) {
+            throw new ReviewAttestationValidationException(
+                'Compact owner attestations are unavailable in team-separated mode.'
+            );
+        }
+
+        if ($states === ['approved']) {
+            return array_merge($summary, [
+                'ok' => true,
+                'status' => 'pass',
+                'matched_item_count' => $rows->count(),
+                'approved_item_count' => 0,
+                'skipped_existing_approved_item_count' => $rows->count(),
+                'writes_committed' => $attestationCreated,
+                'review_attestation_bound' => $this->reviewAttestations->usesSoloOwnerMode(),
+                'items' => $this->approvalRows($rows),
+                'errors' => [],
+                'warnings' => [],
+            ]);
+        }
+
         $now = now();
         $updated = DB::table('personality_agent_approval_items')
             ->whereIn('id', $itemIds)
@@ -320,6 +371,11 @@ final class PersonalityAgentApprovalQueueWriter
                 'approved_at' => $now,
                 'updated_at' => $now,
             ]);
+        if ($updated !== count($itemIds)) {
+            throw new ReviewAttestationValidationException(
+                'Approval update count did not match the requested item count.'
+            );
+        }
 
         $approvedRows = DB::table('personality_agent_approval_items as items')
             ->join('personality_agent_approval_batches as batches', 'batches.id', '=', 'items.batch_id')
@@ -341,20 +397,53 @@ final class PersonalityAgentApprovalQueueWriter
             ]);
 
         return array_merge($summary, [
-            'ok' => $updated === count($itemIds),
-            'status' => $updated === count($itemIds) ? 'pass' : 'fail',
+            'ok' => true,
+            'status' => 'pass',
             'matched_item_count' => $approvedRows->count(),
             'approved_item_count' => $updated,
             'skipped_existing_approved_item_count' => 0,
             'writes_committed' => $updated > 0,
+            'review_attestation_bound' => $this->reviewAttestations->usesSoloOwnerMode(),
             'items' => $this->approvalRows($approvedRows),
-            'errors' => $updated === count($itemIds) ? [] : [[
-                'field' => 'approval_items',
-                'code' => 'approval_update_count_mismatch',
-                'message' => 'Approval update count did not match the requested item count.',
-            ]],
+            'errors' => [],
             'warnings' => [],
         ]);
+    }
+
+    /**
+     * @param  \Illuminate\Support\Collection<int,object>  $rows
+     * @return list<array{identity:string,sha256:string}>
+     */
+    private function reviewTargets($rows): array
+    {
+        return $rows->map(static function (object $row): array {
+            $material = [
+                'item_id' => (int) $row->id,
+                'batch_id' => (int) $row->batch_id,
+                'framework' => (string) $row->framework,
+                'target_url' => (string) $row->target_url,
+                'recommendation_sha256' => (string) $row->recommendation_sha256,
+                'source_package_sha256' => (string) $row->source_package_sha256,
+                'qa_sha256' => (string) $row->qa_sha256,
+            ];
+
+            return [
+                'identity' => 'item:'.(int) $row->id,
+                'sha256' => hash('sha256', json_encode(
+                    $material,
+                    JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
+                )),
+            ];
+        })->all();
+    }
+
+    /** @param list<int> $itemIds */
+    private function reviewScopeIdentity(array $itemIds): string
+    {
+        $sorted = array_map(static fn (int|string $id): int => (int) $id, $itemIds);
+        sort($sorted, SORT_NUMERIC);
+
+        return 'personality_agent_approval_items:'.hash('sha256', implode(',', $sorted));
     }
 
     /**
@@ -506,6 +595,13 @@ final class PersonalityAgentApprovalQueueWriter
                 'field' => 'approved_at',
                 'code' => 'approval_item_approved_timestamp_missing',
                 'message' => 'Approval item '.$id.' is approved but approved_at is missing.',
+            ];
+        }
+        if ((string) $row->approval_state === 'pending' && $row->approved_at !== null) {
+            $errors[] = [
+                'field' => 'approved_at',
+                'code' => 'approval_item_pending_timestamp_present',
+                'message' => 'Approval item '.$id.' is pending but approved_at is already present.',
             ];
         }
         if (! in_array((string) $row->approval_state, ['pending', 'approved'], true)) {

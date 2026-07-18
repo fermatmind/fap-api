@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Models\ReviewAttestation;
+use App\Models\ReviewAttestationTargetEvidence;
+use App\Services\Cms\PersonalityAgentApprovalQueueWriter;
+use App\Services\ReviewGovernance\ReviewAttestationValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -374,6 +378,23 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         );
     }
 
+    public function test_mbti64_bilingual_batch_binds_one_bounded_scope_attestation_for_all_64_targets(): void
+    {
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions(
+            $this->mbti64V85V5PackagePath(),
+            $this->mbti64V85V5QaPath(),
+        )));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame(64, DB::table('personality_agent_approval_items')->where('approval_state', 'approved')->count());
+        $this->assertSame(1, ReviewAttestation::query()->count());
+        $this->assertLessThanOrEqual(191, strlen((string) ReviewAttestation::query()->value('scope_identity')));
+        $this->assertSame(64, ReviewAttestationTargetEvidence::query()->count());
+    }
+
     public function test_mbti64_v85_v5_bilingual_reencoded_artifact_fails_closed_on_hash_lock(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts(
@@ -540,6 +561,97 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         );
         $this->assertSame(2, DB::table('personality_agent_approval_items')->whereNotNull('approved_at')->count());
         $this->assertSame(0, DB::table('personality_agent_approval_items')->whereNotNull('rejected_at')->count());
+        $this->assertTrue($payload['review_attestation_bound']);
+        $this->assertSame(1, ReviewAttestation::query()->count());
+        $this->assertSame(2, ReviewAttestationTargetEvidence::query()->count());
+    }
+
+    public function test_approve_action_rejects_non_owner_before_state_or_attestation_writes(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        $hashes = $this->approvalHashes();
+
+        try {
+            app(PersonalityAgentApprovalQueueWriter::class)->approveItems(
+                $ids,
+                'mbti64',
+                $hashes['source_package_sha256'],
+                $hashes['qa_sha256'],
+                [],
+                null,
+                999,
+            );
+            $this->fail('Expected non-owner MBTI approval to fail closed.');
+        } catch (ReviewAttestationValidationException) {
+            $this->assertSame(2, DB::table('personality_agent_approval_items')->where('approval_state', 'pending')->count());
+            $this->assertSame(0, ReviewAttestation::query()->count());
+            $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count());
+        }
+    }
+
+    public function test_solo_owner_approval_service_rejects_missing_actor_before_writes(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        $hashes = $this->approvalHashes();
+
+        try {
+            app(PersonalityAgentApprovalQueueWriter::class)->approveItems(
+                $ids,
+                'mbti64',
+                $hashes['source_package_sha256'],
+                $hashes['qa_sha256'],
+            );
+            $this->fail('Expected missing MBTI approval actor to fail closed.');
+        } catch (ReviewAttestationValidationException) {
+            $this->assertSame(2, DB::table('personality_agent_approval_items')->where('approval_state', 'pending')->count());
+            $this->assertSame(0, ReviewAttestation::query()->count());
+            $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count());
+        }
+    }
+
+    public function test_solo_owner_approval_rejects_pending_item_with_stale_approved_timestamp_before_attestation_bind(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        DB::table('personality_agent_approval_items')->where('id', $ids[0])->update(['approved_at' => now()]);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertContains('approval_item_pending_timestamp_present', array_column($payload['errors'], 'code'));
+        $this->assertSame(2, DB::table('personality_agent_approval_items')->where('approval_state', 'pending')->count());
+        $this->assertSame(0, ReviewAttestation::query()->count());
+        $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count());
+    }
+
+    public function test_team_separated_mode_keeps_existing_mbti_approval_path_without_compact_evidence(): void
+    {
+        config()->set('review_governance.mode', 'team_separated');
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        $hashes = $this->approvalHashes();
+
+        $summary = app(PersonalityAgentApprovalQueueWriter::class)->approveItems(
+            $ids,
+            'mbti64',
+            $hashes['source_package_sha256'],
+            $hashes['qa_sha256'],
+        );
+
+        $this->assertTrue($summary['ok']);
+        $this->assertFalse($summary['review_attestation_bound']);
+        $this->assertSame(2, DB::table('personality_agent_approval_items')->where('approval_state', 'approved')->count());
+        $this->assertSame(0, ReviewAttestation::query()->count());
+        $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count());
     }
 
     public function test_approve_action_is_idempotent_when_all_requested_items_are_already_approved(): void
@@ -551,6 +663,7 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $hashes = $this->approvalHashes();
 
         $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes)));
+        $this->travel(2)->seconds();
         $secondExit = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
 
         $payload = $this->jsonOutput();
@@ -560,6 +673,33 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, $payload['approved_item_count']);
         $this->assertSame(2, $payload['skipped_existing_approved_item_count']);
         $this->assertSame(2, DB::table('personality_agent_approval_items')->where('approval_state', 'approved')->count());
+        $this->assertSame(1, ReviewAttestation::query()->count());
+        $this->assertSame(2, ReviewAttestationTargetEvidence::query()->count());
+    }
+
+    public function test_approved_items_bind_fresh_evidence_after_solo_owner_rotation(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        $hashes = $this->approvalHashes();
+        $originalOwnerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
+
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes)));
+        config()->set('review_governance.solo_owner_admin_user_id', $originalOwnerAdminUserId + 1);
+        $secondExit = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $hashes));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $secondExit);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(0, $payload['approved_item_count']);
+        $this->assertSame(2, $payload['skipped_existing_approved_item_count']);
+        $this->assertSame(2, ReviewAttestation::query()->count());
+        $this->assertSame(4, ReviewAttestationTargetEvidence::query()->count());
+        $this->assertSame(
+            [$originalOwnerAdminUserId, $originalOwnerAdminUserId + 1],
+            ReviewAttestation::query()->orderBy('attested_by_admin_user_id')->pluck('attested_by_admin_user_id')->all(),
+        );
     }
 
     public function test_approve_action_fails_closed_for_missing_items_without_partial_updates(): void

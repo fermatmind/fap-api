@@ -7,10 +7,14 @@ namespace App\Services\BigFive\Cms;
 use App\Models\AdminUser;
 use App\Models\BigFiveV2EditorialRevision;
 use App\Policies\BigFiveV2EditorialRevisionPolicy;
+use App\Services\Cms\PersonalityReviewAttestationService;
+use App\Services\ReviewGovernance\ReviewAttestationValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use LogicException;
 
+/** @review-surface big_five_v2_editorial_revision */
 final class BigFiveV2EditorialApprovalFlow
 {
     public function __construct(
@@ -41,14 +45,32 @@ final class BigFiveV2EditorialApprovalFlow
         AdminUser $actor,
         BigFiveV2EditorialRevision $revision,
         ?string $note = null,
+        ?array $attestation = null,
     ): BigFiveV2EditorialRevision {
-        $this->authorize($this->policy->approve($actor, $revision), 'approve Big Five V2 editorial revision');
-        $this->assertRoleSeparation($actor, $revision, 'approve');
+        return DB::transaction(function () use ($actor, $revision, $note, $attestation): BigFiveV2EditorialRevision {
+            $this->authorize($this->policy->approve($actor, $revision), 'approve Big Five V2 editorial revision');
+            $this->assertRoleSeparation($actor, $revision, 'approve');
 
-        $from = (string) $revision->workflow_state;
-        $updated = $this->workflow->approve($revision, (int) $actor->id, $note);
+            if ($this->reviewAttestations()->usesSoloOwnerMode()) {
+                $this->reviewAttestations()->bindOrCreateApproved(
+                    attestation: $attestation,
+                    surfaceId: 'big_five_v2_editorial_revision',
+                    scopeType: 'big_five_editorial_revision',
+                    scopeIdentity: 'big_five_v2_editorial_revision:'.(string) $revision->id,
+                    authoritativeTargets: [$this->reviewTarget($revision)],
+                    actorAdminUserId: (int) $actor->id,
+                );
+            } elseif ($attestation !== null) {
+                throw new ReviewAttestationValidationException(
+                    'Compact owner attestations are unavailable in team-separated mode.'
+                );
+            }
 
-        return $this->recordAudit($updated, 'approved', $actor, $from, (string) $updated->workflow_state, $note);
+            $from = (string) $revision->workflow_state;
+            $updated = $this->workflow->approve($revision, (int) $actor->id, $note);
+
+            return $this->recordAudit($updated, 'approved', $actor, $from, (string) $updated->workflow_state, $note);
+        });
     }
 
     /**
@@ -90,12 +112,15 @@ final class BigFiveV2EditorialApprovalFlow
      */
     public function capabilityMap(AdminUser $actor, BigFiveV2EditorialRevision $revision): array
     {
+        $reviewActorAllowed = ! $this->reviewAttestations()->usesSoloOwnerMode()
+            || $this->reviewAttestations()->isConfiguredSoloOwner((int) $actor->id);
+
         return [
             'view' => $this->policy->view($actor, $revision),
             'create_draft' => $this->policy->createDraft($actor),
             'submit_for_review' => $this->policy->submitForReview($actor, $revision),
-            'approve' => $this->policy->approve($actor, $revision),
-            'reject' => $this->policy->reject($actor, $revision),
+            'approve' => $reviewActorAllowed && $this->policy->approve($actor, $revision),
+            'reject' => $reviewActorAllowed && $this->policy->reject($actor, $revision),
             'rollback' => $this->policy->rollback($actor, $revision),
             'export_release_candidate' => $this->policy->exportReleaseCandidate($actor, $revision),
             'publish_to_runtime' => $this->policy->publishToRuntime($actor, $revision),
@@ -123,12 +148,41 @@ final class BigFiveV2EditorialApprovalFlow
     private function assertRoleSeparation(AdminUser $actor, BigFiveV2EditorialRevision $revision, string $action): void
     {
         $actorId = (int) $actor->id;
+        if ($this->reviewAttestations()->usesSoloOwnerMode()) {
+            if (! $this->reviewAttestations()->isConfiguredSoloOwner($actorId)) {
+                throw new LogicException('Big Five V2 solo-owner review requires the configured owner.');
+            }
+
+            return;
+        }
+
         if ($actorId > 0 && in_array($actorId, [
             (int) $revision->created_by_admin_user_id,
             (int) $revision->submitted_by_admin_user_id,
         ], true)) {
             throw new LogicException('Big Five V2 editorial role separation prevents '.$action.' by the author or submitter.');
         }
+    }
+
+    /** @return array{identity:string,sha256:string} */
+    private function reviewTarget(BigFiveV2EditorialRevision $revision): array
+    {
+        $sha256 = strtolower(trim((string) ($revision->draft_payload_hash ?: $revision->asset_sha256)));
+        if (preg_match('/^[0-9a-f]{64}$/', $sha256) !== 1) {
+            throw new ReviewAttestationValidationException(
+                'Big Five V2 editorial revision lacks an exact review target SHA-256.'
+            );
+        }
+
+        return [
+            'identity' => 'revision:'.(string) $revision->id,
+            'sha256' => $sha256,
+        ];
+    }
+
+    private function reviewAttestations(): PersonalityReviewAttestationService
+    {
+        return app(PersonalityReviewAttestationService::class);
     }
 
     private function assertRollbackRoleSeparation(AdminUser $actor, BigFiveV2EditorialRevision $revision): void

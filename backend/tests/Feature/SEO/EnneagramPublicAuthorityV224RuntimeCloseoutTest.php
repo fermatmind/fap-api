@@ -7,11 +7,13 @@ namespace Tests\Feature\SEO;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
+use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV205RevisionWorkspaceWriter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV223ReviewEvidenceBinder;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeCloseout;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeReadback;
+use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\File;
@@ -224,9 +226,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         );
         $this->fakeRuntimeHttp($report, frontendBaseUrl: 'https://fermatmind.com');
         $rollbackPath = '/tmp/enneagram-v224-rollback-'.bin2hex(random_bytes(8)).'.token';
-        $registerPath = storage_path('framework/testing/enneagram-v224-post-readback-register-'.bin2hex(random_bytes(4)).'.json');
-        File::ensureDirectoryExists(dirname($registerPath));
-        File::put($registerPath, json_encode($register, JSON_THROW_ON_ERROR));
+        $attestationPath = storage_path('framework/testing/enneagram-v224-post-readback-attestation-'.bin2hex(random_bytes(4)).'.json');
+        File::ensureDirectoryExists(dirname($attestationPath));
+        File::put($attestationPath, json_encode($this->compactAttestation(), JSON_THROW_ON_ERROR));
 
         try {
             $result = $this->closeout()->execute(
@@ -285,7 +287,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 '--frontend-base-url' => 'https://fermatmind.com',
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
-                '--review-register' => $registerPath,
+                '--attestation' => $attestationPath,
                 '--require-fresh-api-cache' => true,
                 '--allow-testing' => true,
             ])
@@ -294,7 +296,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 ->assertSuccessful();
         } finally {
             @unlink($rollbackPath);
-            File::delete($registerPath);
+            File::delete($attestationPath);
         }
     }
 
@@ -302,7 +304,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
     {
         $this->seedPublishedEstate('https://fermatmind.com');
         $report = $this->releaseReport();
-        $register = $this->reviewRegister($report);
+        $register = $this->compactAttestation();
         $reportSha = $this->fingerprintRaw($report);
         $registerSha = $this->fingerprintRaw($register);
         $closeout = $this->closeout();
@@ -1699,10 +1701,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
     public function test_console_preflight_generates_only_redacted_operator_artifacts(): void
     {
         $this->seedPublishedEstate();
-        $registerPath = storage_path('framework/testing/enneagram-v224-private-register.json');
+        $registerPath = storage_path('framework/testing/enneagram-v224-private-attestation.json');
         $outputDirectory = storage_path('framework/testing/enneagram-v224-artifacts-'.bin2hex(random_bytes(4)));
         File::ensureDirectoryExists(dirname($registerPath));
-        File::put($registerPath, json_encode($this->reviewRegister($this->releaseReport()), JSON_THROW_ON_ERROR));
+        File::put($registerPath, json_encode($this->compactAttestation(), JSON_THROW_ON_ERROR));
         config()->set('app.url', 'https://api.fermatmind.com');
         config()->set('app.frontend_url', 'https://fermatmind.com');
         config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
@@ -1710,7 +1712,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         try {
             $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
                 '--preflight' => true,
-                '--review-register' => $registerPath,
+                '--attestation' => $registerPath,
                 '--backend-deployed-sha' => self::BACKEND_SHA,
                 '--frontend-deployed-sha' => self::FRONTEND_SHA,
                 '--api-base-url' => 'https://api.test',
@@ -2861,6 +2863,29 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 'review_source' => PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN,
             ], $report['asset_records'], array_keys($report['asset_records'])),
         ];
+    }
+
+    /** @return array<string,mixed> */
+    private function compactAttestation(): array
+    {
+        $report = $this->releaseReport();
+        $targets = array_map(static fn (array $record): array => [
+            'identity' => 'asset:'.implode(':', [
+                PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+                (string) $record['entity_type'],
+                (string) $record['code'],
+                (string) $record['locale'],
+            ]),
+            'sha256' => (string) $record['asset_sha256'],
+        ], $report['asset_records']);
+
+        return app(ReviewAttestationFactory::class)->make(
+            scopeType: 'enneagram_authority_v2_review',
+            scopeIdentity: 'enneagram-authority-v2:116',
+            decision: 'approved_all',
+            targets: app(PersonalityReviewAttestationService::class)->targets('enneagram_review_binder', $targets),
+            packageSha256: (string) $report['package_sha256'],
+        );
     }
 
     /** @return array<string,mixed> */

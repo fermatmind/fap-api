@@ -7,12 +7,19 @@ namespace App\Services\Enneagram\AuthorityV2;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
+use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\Personality\AuthorityV2\PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter;
+use App\Services\ReviewGovernance\ReviewAttestationSchema;
 use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
+/**
+ * @review-surface personality_public_content_asset
+ * @review-surface personality_public_content_asset_revision_review
+ * @review-surface enneagram_review_binder
+ */
 final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
 {
     public const ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-IMPORT-REVIEW-22C';
@@ -22,6 +29,7 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
     public function __construct(
         private readonly EnneagramPublicAuthorityV205RevisionWorkspaceWriter $workspaceWriter,
         private readonly PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter $revisionWriter,
+        private readonly PersonalityReviewAttestationService $reviewAttestations,
     ) {}
 
     /**
@@ -65,6 +73,21 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
             if (! hash_equals((string) $plan['package_sha256'], $expectedPackageSha256)
                 || ! hash_equals((string) $plan['preflight_fingerprint'], $expectedPreflightFingerprint)) {
                 throw new RuntimeException('Human-review package SHA-256 or preflight fingerprint changed; transaction aborted.');
+            }
+
+            if (($plan['review_input_mode'] ?? null) === 'compact_solo_owner_attestation') {
+                $attestedBy = (int) ($plan['compact_attestation']['attested_by_admin_user_id'] ?? 0);
+                if ($boundByAdminUserId !== null && $boundByAdminUserId !== $attestedBy) {
+                    throw new RuntimeException('Compact attestation actor and binder actor do not match.');
+                }
+                $this->reviewAttestations->bindApproved(
+                    attestation: $plan['compact_attestation'],
+                    surfaceId: 'enneagram_review_binder',
+                    authoritativeTargets: $plan['attestation_targets'],
+                    actorAdminUserId: $attestedBy,
+                    expectedPackageSha256: (string) $plan['package_sha256'],
+                );
+                $boundByAdminUserId = $attestedBy;
             }
 
             foreach ($plan['targets'] as $target) {
@@ -174,11 +197,13 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
         if (preg_match('/^[0-9a-f]{64}$/', $reviewRegisterSha256) !== 1) {
             throw new RuntimeException('Human-review register SHA-256 is invalid.');
         }
-        if (($reviewRegister['schema_version'] ?? null) !== 'enneagram_public_authority_v2_private_review_register.v1'
-            || ($reviewRegister['review_source'] ?? null) !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
-            || ($reviewRegister['package_sha256'] ?? null) !== $packageSha256
-            || ! is_array($reviewRegister['reviews'] ?? null)
-            || count($reviewRegister['reviews']) !== self::TARGET_COUNT) {
+        $compactAttestation = ($reviewRegister['schema_version'] ?? null) === ReviewAttestationSchema::VERSION;
+        if (! $compactAttestation
+            && (($reviewRegister['schema_version'] ?? null) !== 'enneagram_public_authority_v2_private_review_register.v1'
+                || ($reviewRegister['review_source'] ?? null) !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
+                || ($reviewRegister['package_sha256'] ?? null) !== $packageSha256
+                || ! is_array($reviewRegister['reviews'] ?? null)
+                || count($reviewRegister['reviews']) !== self::TARGET_COUNT)) {
             throw new RuntimeException('Human-review register schema, source, package, or target count is invalid.');
         }
 
@@ -192,38 +217,47 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
         }
 
         $reviews = [];
-        foreach ($reviewRegister['reviews'] as $index => $review) {
-            if (! is_array($review)) {
-                throw new RuntimeException('Human-review register row must be an object at index '.$index.'.');
+        if (! $compactAttestation) {
+            foreach ($reviewRegister['reviews'] as $index => $review) {
+                if (! is_array($review)) {
+                    throw new RuntimeException('Human-review register row must be an object at index '.$index.'.');
+                }
+                $key = trim((string) ($review['asset_key'] ?? ''));
+                if ($key === '' || ! isset($releaseRecords[$key]) || isset($reviews[$key])) {
+                    throw new RuntimeException('Human-review register contains an unknown or duplicate asset key: '.$key.'.');
+                }
+                $reviews[$key] = $review;
             }
-            $key = trim((string) ($review['asset_key'] ?? ''));
-            if ($key === '' || ! isset($releaseRecords[$key]) || isset($reviews[$key])) {
-                throw new RuntimeException('Human-review register contains an unknown or duplicate asset key: '.$key.'.');
+            if (array_keys($releaseRecords) !== array_keys(array_replace($releaseRecords, $reviews))) {
+                throw new RuntimeException('Human-review register asset set does not match the final release report.');
             }
-            $reviews[$key] = $review;
-        }
-        if (array_keys($releaseRecords) !== array_keys(array_replace($releaseRecords, $reviews))) {
-            throw new RuntimeException('Human-review register asset set does not match the final release report.');
         }
 
         $targets = [];
         ksort($releaseRecords);
         foreach ($releaseRecords as $releaseAssetKey => $record) {
-            $review = $reviews[$releaseAssetKey] ?? null;
-            if (! is_array($review)) {
-                throw new RuntimeException('Human-review register is missing an asset: '.$releaseAssetKey.'.');
-            }
             $assetSha256 = strtolower(trim((string) ($record['asset_sha256'] ?? '')));
-            $reviewerName = trim((string) ($review['reviewer_name'] ?? ''));
-            $reviewSource = trim((string) ($review['review_source'] ?? ''));
-            $decision = trim((string) ($review['decision'] ?? ''));
-            if (($review['asset_sha256'] ?? null) !== $assetSha256
-                || $reviewerName === ''
-                || $reviewSource !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
-                || $decision !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED) {
-                throw new RuntimeException('Human-review row is missing approval or exact provenance: '.$releaseAssetKey.'.');
+            $review = $reviews[$releaseAssetKey] ?? null;
+            if ($compactAttestation) {
+                $reviewerName = 'configured_solo_owner';
+                $reviewSource = PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN;
+                $decision = PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED;
+                $reviewedAtInput = trim((string) ($reviewRegister['attested_at'] ?? ''));
+            } else {
+                if (! is_array($review)) {
+                    throw new RuntimeException('Human-review register is missing an asset: '.$releaseAssetKey.'.');
+                }
+                $reviewerName = trim((string) ($review['reviewer_name'] ?? ''));
+                $reviewSource = trim((string) ($review['review_source'] ?? ''));
+                $decision = trim((string) ($review['decision'] ?? ''));
+                if (($review['asset_sha256'] ?? null) !== $assetSha256
+                    || $reviewerName === ''
+                    || $reviewSource !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
+                    || $decision !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED) {
+                    throw new RuntimeException('Human-review row is missing approval or exact provenance: '.$releaseAssetKey.'.');
+                }
+                $reviewedAtInput = trim((string) ($review['reviewed_at'] ?? ''));
             }
-            $reviewedAtInput = trim((string) ($review['reviewed_at'] ?? ''));
             if ($reviewedAtInput === '') {
                 throw new RuntimeException('Human-review timestamp is missing: '.$releaseAssetKey.'.');
             }
@@ -279,7 +313,7 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
                 'decision' => $decision,
                 'review_source' => $reviewSource,
             ]);
-            if (isset($review['evidence_sha256']) && $review['evidence_sha256'] !== $evidenceSha256) {
+            if (is_array($review) && isset($review['evidence_sha256']) && $review['evidence_sha256'] !== $evidenceSha256) {
                 throw new RuntimeException('Human-review evidence SHA-256 is invalid: '.$releaseAssetKey.'.');
             }
 
@@ -309,6 +343,19 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
             throw new RuntimeException('Human-review binder requires exactly 116 validated targets.');
         }
 
+        $attestationTargets = array_map(static fn (array $target): array => [
+            'identity' => 'asset:'.(string) $target['asset_key'],
+            'sha256' => (string) $target['asset_sha256'],
+        ], $targets);
+        if ($compactAttestation) {
+            $this->reviewAttestations->preflightApproved(
+                $reviewRegister,
+                'enneagram_review_binder',
+                $attestationTargets,
+                $packageSha256,
+            );
+        }
+
         $publicFingerprint = $this->publicFingerprint($targets);
         $fingerprintTargets = array_map(static fn (array $target): array => [
             'asset_id' => (int) $target['asset']->id,
@@ -329,7 +376,12 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
             'duplicate_count' => 0,
             'package_sha256' => $packageSha256,
             'review_register_sha256' => $reviewRegisterSha256,
-            'review_source' => PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN,
+            'review_source' => $compactAttestation
+                ? (string) $reviewRegister['review_source']
+                : PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN,
+            'review_input_mode' => $compactAttestation
+                ? 'compact_solo_owner_attestation'
+                : 'legacy_private_116_row_register',
             'public_fingerprint' => $publicFingerprint,
             'preflight_fingerprint' => $this->fingerprint([
                 'package_sha256' => $packageSha256,
@@ -341,6 +393,8 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
             'production_execution' => false,
             'public_reviewer_name_write_count' => 0,
             'targets' => $targets,
+            'attestation_targets' => $attestationTargets,
+            'compact_attestation' => $compactAttestation ? $reviewRegister : null,
         ];
     }
 
@@ -393,7 +447,7 @@ final class EnneagramPublicAuthorityV223ReviewEvidenceBinder
     /** @param array<string, mixed> $plan @return array<string, mixed> */
     private function publicPlan(array $plan): array
     {
-        unset($plan['targets']);
+        unset($plan['targets'], $plan['attestation_targets'], $plan['compact_attestation']);
 
         return $plan;
     }

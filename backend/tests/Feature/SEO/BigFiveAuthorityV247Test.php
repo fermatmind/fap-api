@@ -19,6 +19,8 @@ use App\Models\TopicProfileSection;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use App\Services\BigFive\AuthorityV2\ReviewPromotion\BigFiveReviewPromotionPreflight;
 use App\Services\Cms\ContentPageTranslationAdapter;
+use App\Services\Cms\PersonalityReviewAttestationService;
+use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -57,6 +59,43 @@ final class BigFiveAuthorityV247Test extends TestCase
             'promotion_eligible' => 0,
             'cohorts_authorized' => 0,
         ], $result['counts']);
+        $this->assertSame(0, array_sum($result['actions']));
+    }
+
+    public function test_compact_solo_owner_review_satisfies_only_manual_review_gate_without_promotion_authority(): void
+    {
+        $review = $this->readJson(self::REVIEW);
+        $rawTargets = array_map(static fn (array $row): array => [
+            'identity' => 'authority_asset:'.(string) $row['asset_id'],
+            'sha256' => (string) $row['source_hash'],
+        ], $review['rows']);
+        $targets = app(PersonalityReviewAttestationService::class)->targets(
+            'personality_public_content_asset',
+            $rawTargets,
+        );
+        $attestation = app(ReviewAttestationFactory::class)->make(
+            scopeType: 'big_five_authority_v2_review',
+            scopeIdentity: 'big-five-authority-v2:231',
+            decision: 'approved_all',
+            targets: $targets,
+            packageSha256: BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+        );
+
+        $result = $this->preflight()->packageOnly(
+            self::REVIEW,
+            self::AUTHORIZATION,
+            self::ROLLBACK,
+            $attestation,
+        );
+
+        $this->assertTrue($result['ok']);
+        $this->assertSame(231, $result['counts']['manually_reviewed']);
+        $this->assertNotContains('manual_review_missing', $result['blockers']);
+        $this->assertContains('runtime_identity_unbound', $result['blockers']);
+        $this->assertContains('source_permission_missing', $result['blockers']);
+        $this->assertContains('media_permission_missing', $result['blockers']);
+        $this->assertContains('exact_cohort_authorization_missing', $result['blockers']);
+        $this->assertNotNull($result['review_attestation_evidence_sha256']);
         $this->assertSame(0, array_sum($result['actions']));
     }
 
