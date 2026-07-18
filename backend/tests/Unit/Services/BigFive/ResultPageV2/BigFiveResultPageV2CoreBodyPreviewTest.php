@@ -499,6 +499,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_en_legacy_range_retirement_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/UnexpectedRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -6279,6 +6295,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveEnLegacyRangeRetirementFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -8227,6 +8247,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveZhV3ContentPublish.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3PackageCompiler.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3Publisher.php',
+        ], true);
+    }
+
+    private function isBigFiveEnLegacyRangeRetirementFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
         ], true);
     }
 

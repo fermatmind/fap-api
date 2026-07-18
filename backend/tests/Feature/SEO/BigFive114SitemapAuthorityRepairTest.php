@@ -54,8 +54,8 @@ final class BigFive114SitemapAuthorityRepairTest extends TestCase
             ->sort()
             ->values();
 
-        self::assertCount(114, $paths);
-        self::assertCount(62, $paths->filter(static fn (string $path): bool => str_starts_with($path, '/en/')));
+        self::assertCount(104, $paths);
+        self::assertCount(52, $paths->filter(static fn (string $path): bool => str_starts_with($path, '/en/')));
         self::assertCount(52, $paths->filter(static fn (string $path): bool => str_starts_with($path, '/zh/')));
         self::assertCount(30, $paths->filter(static fn (string $path): bool => str_starts_with($path, '/en/personality/big-five/facets/')));
         self::assertCount(30, $paths->filter(static fn (string $path): bool => str_starts_with($path, '/zh/personality/big-five/facets/')));
@@ -64,7 +64,7 @@ final class BigFive114SitemapAuthorityRepairTest extends TestCase
 
         foreach (BigFiveCanonicalRouteCatalog::ZH_REDIRECT_ONLY_ALIASES as $alias) {
             self::assertNotContains('/zh/personality/big-five/'.$alias, $paths);
-            self::assertContains('/en/personality/big-five/'.$alias, $paths);
+            self::assertNotContains('/en/personality/big-five/'.$alias, $paths);
         }
     }
 
