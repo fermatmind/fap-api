@@ -520,5 +520,21 @@
     "recommended_follow_up": "Repair the five origin/main failures under their owning scopes, merge them to fap-api main, then resume PR3 by rebasing the preserved analytics worktree and rerunning every required local check. Do not bypass composer test or mix those repairs into PR3.",
     "status": "blocked_external_baseline",
     "train_continued": false
+  },
+  {
+    "observed_at": "2026-07-18T09:16:00Z",
+    "repo": "fap-api",
+    "pr_id": "CAREER-DETAIL-CACHE-COVERAGE-01",
+    "branch": "codex/career-detail-cache-coverage-01",
+    "blocker_type": "external_concurrent_shared_sqlite_corruption",
+    "evidence": [
+      "The process guard found another backend/scripts/ci_verify_mbti.sh process already running.",
+      "CareerWarmPublicAuthorityCacheCommandTest failed in setup with SQLSTATE[HY000]: General error: 11 database disk image is malformed while both processes used /tmp/fap-ci.sqlite.",
+      "The exact unchanged 14-test file passed with 143 assertions when rerun against a process-private SQLite :memory: database."
+    ],
+    "why_not_current_pr_scope": "PR2 changes Career detail cache coverage inspection and queue capability; it does not own the repository-wide shared PHPUnit SQLite path or the concurrently running verification process. The failure occurred before assertions and disappeared without a code change under database isolation.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Give each local verification process a unique SQLite database path or serialize suites that currently share /tmp/fap-ci.sqlite.",
+    "train_continued": true
   }
 ]
