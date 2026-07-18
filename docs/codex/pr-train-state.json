@@ -97618,7 +97618,7 @@
       "SOLO-OWNER-OPS-APPROVAL-05"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "4956b056a42b2579b9821aefae893c1ca1441a51",
+    "commit_sha": "d77d42579cc9a720737dc915c4b31e1c79c10e35",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3185",
     "checks": {
       "dependency": {
@@ -97627,11 +97627,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, and the exact runtime-freeze classifier. The guarded full bash backend/scripts/ci_verify_mbti.sh gate exited 0 through Big Five 1543/188110, Personality 89/5853, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. Changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, exact 35-path scope, and diff checks passed. After the unrelated Big Five hubs merge advanced origin/main, the branch was rebased and structured-file/scope checks were revalidated."
+        "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, and the exact runtime-freeze classifier. The guarded full bash backend/scripts/ci_verify_mbti.sh gate exited 0 through Big Five 1543/188110, Personality 89/5853, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. Changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, final exact 37-path scope, and diff checks passed. After the unrelated Big Five hubs merge advanced origin/main, the branch was rebased and structured-file/scope checks were revalidated."
       },
       "github": {
         "status": "pending",
-        "evidence": "All nine required checks passed on head ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8. Exact-head Codex review found one scoped P2 mapping gap for known content-ready release states; the repair is locally committed and a new exact-head check/review cycle is pending."
+        "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8 and f25279419bed4c1326d27f9264604b8a388a75ef. Exact-head reviews found and the branch repaired two scoped P2 contract gaps: content-ready state mapping and the Career job-list trust-summary projection. A new exact-head check/review cycle is pending."
       }
     },
     "scope_validation": {
@@ -97675,9 +97675,14 @@
         "at": "2026-07-18T22:14:58Z",
         "status": "github_checks_pending",
         "note": "All nine checks passed on ac35ced41, then exact-head Codex review identified that operator_approved_content_ready and agent_promoted_content_ready were valid readable completed states but normalized to unknown. Added both approved mappings and regression cases in 4956b056a42b2579b9821aefae893c1ca1441a51; focused contract/personality/registry validation passed 24 tests / 896 assertions, scoped Pint and syntax passed, and post-commit runtime-freeze passed 2 tests / 6 assertions. A new exact-head CI/review cycle is pending."
+      },
+      {
+        "at": "2026-07-18T22:25:50Z",
+        "status": "github_checks_pending",
+        "note": "All nine checks passed on f25279419, then exact-head Codex review identified the Career public job-list trust summaries as the remaining unnormalized projection under the registered career_trust_manifest surface. Added the normalized three-field contract to compiled, DOCX, unavailable-stub, display-asset, and runtime-projection list variants; added list API regressions; and registered the two previously omitted in-scope paths in the manifest and runtime-freeze allowlist. Career list passed 12 tests / 111 assertions, contract/registry passed 24 / 385, scoped Pint/syntax/YAML/diff passed, final scope is 37 paths with zero outside, and post-commit runtime-freeze passed 2 / 6. A new exact-head CI/review cycle is pending."
       }
     ],
-    "updated_at": "2026-07-18T22:14:58Z"
+    "updated_at": "2026-07-18T22:25:50Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
