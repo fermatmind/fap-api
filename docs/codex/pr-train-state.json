@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "2497bae3aea5f5c4b52c821b43b00be698126810",
+    "status": "github_checks_pending",
+    "commit_sha": "79920df10175bcd031f11a231c63164cb6881e50",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97260,7 +97260,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine checks passed on prior ledger head 6c885ea0c72cc90b97feeaae21de6a5545d94f59, but final review found a tenth valid P2. The same-scope non-regressing directory warm repair is locally green and must pass exact-head checks after push."
+        "evidence": "All nine checks passed on prior ledger head 6c885ea0c72cc90b97feeaae21de6a5545d94f59. The non-regressing snapshot-backed directory warm repair is committed as 79920df10175bcd031f11a231c63164cb6881e50, the tenth review thread is resolved, and exact-head checks are pending."
       }
     },
     "scope_validation": {
@@ -97399,8 +97399,13 @@
         "at": "2026-07-18T13:06:23Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on ledger head 6c885ea0c72cc90b97feeaae21de6a5545d94f59, but final review found a tenth valid P2: a later directory-only or broad warm could drop a snapshot-backed promotion while the materialized artifact remained candidate. Under the directory rebuild lock, the repair compares the new source list with the active directory, then preserves only missing members re-proven by an active detail payload and exact same-version published exposure snapshot. Regressions prove both later directory-only and broad warms keep the promoted slug. The complete suite passes 92 Career tests / 678 assertions plus 2 / 6 Big Five freeze assertions, 26 Pint paths, Composer/YAML/JSON/diff, and exact twenty-nine-path scope validation."
+      },
+      {
+        "at": "2026-07-18T13:07:43Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed non-regressing snapshot-backed directory and broad warm behavior as 79920df10175bcd031f11a231c63164cb6881e50. Replied to the tenth review finding with active-payload/same-version-snapshot proof and both warm-path regressions, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T13:06:23Z"
+    "updated_at": "2026-07-18T13:07:43Z"
   }
 }
