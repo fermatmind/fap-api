@@ -42476,7 +42476,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "f8d42a136a7924bfc94c6b4b5a710a0dd0abfc04",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -97660,9 +97660,14 @@
         "at": "2026-07-18T22:00:00Z",
         "status": "local_checks_passed",
         "note": "All focused suites and the single guarded full ci_verify_mbti.sh gate passed, with generated Big Five noise restored exactly. The branch then rebased cleanly onto unrelated Big Five hubs PR #3184; JSON/YAML, scope, and diff checks were revalidated. No production or external-state action occurred."
+      },
+      {
+        "at": "2026-07-18T22:04:00Z",
+        "status": "local_checks_passed",
+        "note": "Committed the exact 35-path implementation as f8d42a136a7924bfc94c6b4b5a710a0dd0abfc04. The post-commit branch-aware runtime-freeze checks passed 2 tests / 6 assertions, git diff check passed, and every committed path matched the PR06 manifest. No production or external-state action occurred."
       }
     ],
-    "updated_at": "2026-07-18T22:00:00Z"
+    "updated_at": "2026-07-18T22:04:00Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
