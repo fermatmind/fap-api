@@ -254,6 +254,9 @@ async function main() {
       backend_locale_contract: 'en',
       zh_source_path: sourcePath,
       zh_source_sha256: sha256(sourceBytes),
+      zh_section_count: markdown.match(/^##\s+/gm)?.length ?? 0,
+      zh_faq_count: sourceEntry.asset.faq.length,
+      zh_source_ids: sourceEntry.asset.authority.sources.map((source) => source.id),
       zh_runtime_projection_sha256: sourceEntry.runtime_projection_sha256,
       zh_canonical_path: sourceEntry.asset.canonical.path,
       en_slug: sourceEntry.asset.slug,
@@ -314,7 +317,8 @@ async function main() {
 
   const mapHeader = [
     'asset_index', 'page_identity', 'authority_asset_key', 'entity_type', 'entity_key', 'parent_identity',
-    'zh_source_path', 'zh_source_sha256', 'zh_runtime_projection_sha256', 'zh_canonical_path',
+    'zh_source_path', 'zh_source_sha256', 'zh_section_count', 'zh_faq_count', 'zh_source_ids',
+    'zh_runtime_projection_sha256', 'zh_canonical_path',
     'target_editorial_locale', 'backend_locale_contract', 'en_locked_name', 'en_slug',
     'en_canonical_path', 'en_output_path', 'en_claim_output_path', 'translation_pr', 'translation_status',
   ];

@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed on implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79, ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28, and review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload. Five actionable Codex review findings were accepted; the final source-tree fix head must repeat the same required-check gate before merge."
+        "evidence": "All 9 GitHub checks passed on implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79, ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28, review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b, and source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f. Seven actionable Codex review findings were accepted; the final claim/media integrity head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98094,9 +98094,14 @@
         "at": "2026-07-18T19:26:00Z",
         "status": "github_review_fixes_completed",
         "note": "A fifth valid P2 was accepted after review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b passed 9/9 checks. The builder now independently recomputes content_tree_sha256.v1 across every UTF-8-sorted pages/**/*.md path and byte payload, requires exactly 52 files, and matches both the external manifest and locked release SHA before reading any page into the EN52 manifest. A copied tree with one edited Markdown page was rejected by the negative probe."
+      },
+      {
+        "at": "2026-07-18T19:38:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two further valid P2 findings were accepted after source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f passed 9/9 checks. Completed claim sidecars must now preserve every locked per-page claim id, claim type, and source-id mapping, retain registry-exact visible citations, and expose the complete page-level translation evidence contract. Completed pages also fail on any hero, inline, OG, Twitter, image, media, or thumbnail frontmatter key in addition to Markdown/HTML body media."
       }
     ],
-    "updated_at": "2026-07-18T19:26:00Z"
+    "updated_at": "2026-07-18T19:38:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",

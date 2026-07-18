@@ -121,6 +121,7 @@ async function main() {
     || registry.unresolved_source_identity_count !== 0)
     fail('source_registry', 'Source registry must contain 11 unique, resolved identities.');
   const registryIds = new Set(registry.sources.map((source) => source.source_id));
+  const registryById = new Map(registry.sources.map((source) => [source.source_id, source]));
   const usedIds = new Set(release.assets.flatMap((entry) => entry.evidence_claims.flatMap((claim) => claim.source_ids ?? [])));
   for (const sourceId of usedIds) if (!registryIds.has(sourceId)) fail('invalid_source_id', sourceId);
 
@@ -183,11 +184,14 @@ async function main() {
     fail('translated_page_file_count', `Expected ${completed.length}, found ${pageFiles.length}.`);
 
   const manifestByIdentity = new Map(entries.map((entry) => [entry.page_identity, entry]));
+  const releaseByAuthorityKey = new Map(release.assets.map((entry) => [entry.authority_asset_key, entry]));
   const pageByIdentity = new Map();
   const paragraphOwners = new Map();
   let untranslatedChineseFragmentCount = 0;
   let invalidSourceIdCount = 0;
   let emptyClaimFileCount = 0;
+  let invalidClaimMappingCount = 0;
+  let visibleReferenceRegistryMismatchCount = 0;
   let invalidInternalLinkCount = 0;
   let zhInternalLinkCount = 0;
   let unknownCanonicalLinkCount = 0;
@@ -240,6 +244,12 @@ async function main() {
       if (frontmatter[key] !== expected) fail('page_identity_lock', `${completedEntry.target_path}: ${key}`);
     }
     if (frontmatter.translation_status !== 'completed') fail('page_translation_status', completedEntry.target_path);
+    const frontmatterMediaKeys = Object.keys(frontmatter).filter((key) => key !== 'media_supported'
+      && /(^|_)(hero|inline|og|open_graph|twitter|image|media|thumbnail)(_|$)/i.test(key));
+    if (frontmatterMediaKeys.length) fail(
+      'forbidden_frontmatter_media',
+      `${completedEntry.target_path}: ${frontmatterMediaKeys.join(',')}`,
+    );
     const chineseMatches = markdown.match(/[\u3400-\u9fff]/g)?.length ?? 0;
     untranslatedChineseFragmentCount += chineseMatches;
     if (chineseMatches) fail('untranslated_public_chinese_fragment', `${completedEntry.target_path}: ${chineseMatches}`);
@@ -294,17 +304,80 @@ async function main() {
       continue;
     }
     const claimRows = claimFile.claims ?? [];
+    const claimById = new Map(claimRows.map((claim) => [claim.claim_id, claim]));
+    const pageSha = sha256(Buffer.from(markdown));
+    const translatedSourceIds = [...new Set(claimRows.flatMap((claim) => (
+      Array.isArray(claim.source_ids) ? claim.source_ids : []
+    )))].sort();
     if (claimRows.length === 0) {
       emptyClaimFileCount += 1;
       fail('empty_claim_file', completedEntry.claim_path);
     }
-    if (claimFile.page_identity !== locked.page_identity
-      || claimFile.source_page_sha256 !== locked.zh_source_sha256
-      || claimFile.claim_count !== claimRows.length)
-      fail('claim_file_identity_lock', completedEntry.claim_path);
+    if (claimById.size !== claimRows.length) {
+      invalidClaimMappingCount += 1;
+      fail('duplicate_claim_id', completedEntry.claim_path);
+    }
+    const expectedEvidence = {
+      page_identity: locked.page_identity,
+      zh_source_path: locked.zh_source_path,
+      zh_source_sha256: locked.zh_source_sha256,
+      en_output_path: locked.en_output_path,
+      entity_type: locked.entity_type,
+      entity_key: locked.entity_key,
+      slug: locked.en_slug,
+      canonical_path: locked.en_canonical_path,
+      section_count_zh: locked.zh_section_count,
+      section_count_en: h2Sections.length,
+      faq_count_zh: locked.zh_faq_count,
+      faq_count_en: faqQuestions.length,
+      source_ids_zh: [...locked.zh_source_ids].sort(),
+      source_ids_en: translatedSourceIds,
+      claim_count: claimRows.length,
+      word_count_en: actualWords,
+      untranslated_fragment_count: chineseMatches,
+      terminology_version: manifest.authority.terminology_version,
+      translation_status: 'completed',
+      output_sha256: pageSha,
+    };
+    for (const [key, expected] of Object.entries(expectedEvidence)) {
+      const actual = Array.isArray(expected) ? [...(claimFile[key] ?? [])].sort() : claimFile[key];
+      if (JSON.stringify(actual) !== JSON.stringify(expected))
+        fail('translation_evidence_lock', `${completedEntry.claim_path}: ${key}`);
+    }
+    const releaseAsset = releaseByAuthorityKey.get(locked.authority_asset_key);
+    if (!releaseAsset) {
+      invalidClaimMappingCount += 1;
+      fail('missing_release_claim_authority', completedEntry.claim_path);
+    } else {
+      const expectedClaims = releaseAsset.evidence_claims ?? [];
+      for (const expectedClaim of expectedClaims) {
+        const translatedClaim = claimById.get(expectedClaim.claim_id);
+        if (!translatedClaim) {
+          invalidClaimMappingCount += 1;
+          fail('missing_locked_claim', `${completedEntry.claim_path}: ${expectedClaim.claim_id}`);
+          continue;
+        }
+        const actualSourceIds = Array.isArray(translatedClaim.source_ids) ? translatedClaim.source_ids : [];
+        const expectedSourceIds = expectedClaim.source_ids ?? [];
+        if (translatedClaim.claim_type !== expectedClaim.claim_type
+          || JSON.stringify([...actualSourceIds].sort()) !== JSON.stringify([...expectedSourceIds].sort())) {
+          invalidClaimMappingCount += 1;
+          fail('locked_claim_mapping', `${completedEntry.claim_path}: ${expectedClaim.claim_id}`);
+        }
+      }
+      for (const claim of claimRows) {
+        if (!expectedClaims.some((expectedClaim) => expectedClaim.claim_id === claim.claim_id)
+          && (claim.claim_type !== 'product_boundary'
+            || (Array.isArray(claim.source_ids) && claim.source_ids.length > 0))) {
+          invalidClaimMappingCount += 1;
+          fail('unlocked_evidence_claim', `${completedEntry.claim_path}: ${claim.claim_id ?? 'unknown'}`);
+        }
+      }
+    }
     for (const claim of claimRows) {
       if (!claim.claim_id || claim.page_identity !== locked.page_identity || !claim.visible_claim
         || !claim.claim_type || !claim.confidence || !claim.boundary || !claim.source_section
+        || !Array.isArray(claim.source_ids)
         || !VALID_EQUIVALENCE_STATUSES.has(claim.translation_equivalence_status))
         fail('claim_contract', `${completedEntry.claim_path}: ${claim.claim_id ?? 'unknown'}`);
       if (!body.includes(claim.visible_claim)) fail('claim_visible_text_missing', `${completedEntry.claim_path}: ${claim.claim_id}`);
@@ -312,10 +385,19 @@ async function main() {
         if (!registryIds.has(sourceId)) {
           invalidSourceIdCount += 1;
           fail('invalid_claim_source_id', `${completedEntry.claim_path}: ${sourceId}`);
+        } else {
+          const publicUrl = registryById.get(sourceId).verified_public_url;
+          if (publicUrl && !claim.visible_claim.includes(`[${sourceId}](${publicUrl})`)) {
+            visibleReferenceRegistryMismatchCount += 1;
+            fail('visible_reference_registry_mismatch', `${completedEntry.claim_path}: ${claim.claim_id}:${sourceId}`);
+          }
         }
       }
+      if (claim.translation_equivalence_status === 'scientifically_narrowed'
+        && !claim.scientific_narrowing_reason)
+        fail('missing_scientific_narrowing_reason', `${completedEntry.claim_path}: ${claim.claim_id}`);
     }
-    if (completedEntry.output_sha256 !== sha256(Buffer.from(markdown))) fail('ledger_page_sha', completedEntry.target_path);
+    if (completedEntry.output_sha256 !== pageSha) fail('ledger_page_sha', completedEntry.target_path);
     if (completedEntry.claim_sha256 !== sha256(Buffer.from(JSON.stringify(claimFile, null, 2) + '\n')))
       fail('ledger_claim_sha', completedEntry.claim_path);
   }
@@ -348,6 +430,8 @@ async function main() {
     untranslated_public_chinese_fragment_count: untranslatedChineseFragmentCount,
     invalid_source_id_count: invalidSourceIdCount,
     empty_claim_file_count: emptyClaimFileCount,
+    invalid_claim_mapping_count: invalidClaimMappingCount,
+    visible_reference_registry_mismatch_count: visibleReferenceRegistryMismatchCount,
     invalid_internal_link_count: invalidInternalLinkCount,
     zh_internal_link_count: zhInternalLinkCount,
     unknown_canonical_link_count: unknownCanonicalLinkCount,
