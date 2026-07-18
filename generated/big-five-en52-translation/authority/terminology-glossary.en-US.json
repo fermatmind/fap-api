@@ -1,0 +1,297 @@
+{
+  "schema_version": "big-five-en52-terminology.v1",
+  "locale": "en-US",
+  "status": "locked",
+  "unresolved_terminology_count": 0,
+  "core_terms": [
+    {
+      "term": "Big Five",
+      "usage": "Preferred public model name."
+    },
+    {
+      "term": "Five-Factor Model (FFM)",
+      "usage": "Academic context; do not imply all instruments share one facet hierarchy."
+    },
+    {
+      "term": "OCEAN",
+      "usage": "Retain the acronym and expand it on first use."
+    },
+    {
+      "entity_key": "openness",
+      "term": "Openness to Experience",
+      "usage": "Continuous trait domain; not a type or value judgment."
+    },
+    {
+      "entity_key": "conscientiousness",
+      "term": "Conscientiousness",
+      "usage": "Continuous trait domain; not a type or value judgment."
+    },
+    {
+      "entity_key": "extraversion",
+      "term": "Extraversion",
+      "usage": "Continuous trait domain; not a type or value judgment."
+    },
+    {
+      "entity_key": "agreeableness",
+      "term": "Agreeableness",
+      "usage": "Continuous trait domain; not a type or value judgment."
+    },
+    {
+      "entity_key": "neuroticism",
+      "term": "Neuroticism",
+      "usage": "A personality dimension describing emotional sensitivity and stress response, not mental illness."
+    }
+  ],
+  "hierarchy_terms": [
+    {
+      "term": "domain",
+      "meaning": "One of the five broad trait dimensions."
+    },
+    {
+      "term": "facet",
+      "meaning": "A narrower tendency nested within a domain; not an independent personality type."
+    },
+    {
+      "term": "trait",
+      "meaning": "A probabilistic tendency whose expression can vary by context."
+    }
+  ],
+  "range_terms": [
+    {
+      "key": "high",
+      "preferred_label": "high",
+      "boundary": "A higher tendency, not better, stronger, or more capable."
+    },
+    {
+      "key": "mid",
+      "preferred_label": "mid-range",
+      "boundary": "Not an absence of personality; both ends may appear across contexts."
+    },
+    {
+      "key": "low",
+      "preferred_label": "low",
+      "boundary": "A lower tendency, not a deficit or failure."
+    }
+  ],
+  "facets": [
+    {
+      "code": "O1",
+      "domain": "openness",
+      "entity_key": "imagination",
+      "canonical_en": "Imagination",
+      "semantic_boundary": null
+    },
+    {
+      "code": "O2",
+      "domain": "openness",
+      "entity_key": "aesthetics",
+      "canonical_en": "Aesthetics",
+      "semantic_boundary": null
+    },
+    {
+      "code": "O3",
+      "domain": "openness",
+      "entity_key": "feelings",
+      "canonical_en": "Feelings",
+      "semantic_boundary": null
+    },
+    {
+      "code": "O4",
+      "domain": "openness",
+      "entity_key": "actions",
+      "canonical_en": "Actions",
+      "semantic_boundary": null
+    },
+    {
+      "code": "O5",
+      "domain": "openness",
+      "entity_key": "ideas",
+      "canonical_en": "Ideas",
+      "semantic_boundary": null
+    },
+    {
+      "code": "O6",
+      "domain": "openness",
+      "entity_key": "values",
+      "canonical_en": "Values",
+      "semantic_boundary": null
+    },
+    {
+      "code": "C1",
+      "domain": "conscientiousness",
+      "entity_key": "competence",
+      "canonical_en": "Competence",
+      "semantic_boundary": null
+    },
+    {
+      "code": "C2",
+      "domain": "conscientiousness",
+      "entity_key": "order",
+      "canonical_en": "Order",
+      "semantic_boundary": null
+    },
+    {
+      "code": "C3",
+      "domain": "conscientiousness",
+      "entity_key": "dutifulness",
+      "canonical_en": "Dutifulness",
+      "semantic_boundary": null
+    },
+    {
+      "code": "C4",
+      "domain": "conscientiousness",
+      "entity_key": "achievement-striving",
+      "canonical_en": "Achievement Striving",
+      "semantic_boundary": null
+    },
+    {
+      "code": "C5",
+      "domain": "conscientiousness",
+      "entity_key": "self-discipline",
+      "canonical_en": "Self-Discipline",
+      "semantic_boundary": null
+    },
+    {
+      "code": "C6",
+      "domain": "conscientiousness",
+      "entity_key": "deliberation",
+      "canonical_en": "Deliberation",
+      "semantic_boundary": null
+    },
+    {
+      "code": "E1",
+      "domain": "extraversion",
+      "entity_key": "warmth",
+      "canonical_en": "Warmth",
+      "semantic_boundary": null
+    },
+    {
+      "code": "E2",
+      "domain": "extraversion",
+      "entity_key": "gregariousness",
+      "canonical_en": "Gregariousness",
+      "semantic_boundary": null
+    },
+    {
+      "code": "E3",
+      "domain": "extraversion",
+      "entity_key": "assertiveness",
+      "canonical_en": "Assertiveness",
+      "semantic_boundary": null
+    },
+    {
+      "code": "E4",
+      "domain": "extraversion",
+      "entity_key": "activity",
+      "canonical_en": "Activity",
+      "semantic_boundary": null
+    },
+    {
+      "code": "E5",
+      "domain": "extraversion",
+      "entity_key": "excitement-seeking",
+      "canonical_en": "Excitement Seeking",
+      "semantic_boundary": null
+    },
+    {
+      "code": "E6",
+      "domain": "extraversion",
+      "entity_key": "positive-emotions",
+      "canonical_en": "Positive Emotions",
+      "semantic_boundary": null
+    },
+    {
+      "code": "A1",
+      "domain": "agreeableness",
+      "entity_key": "trust",
+      "canonical_en": "Trust",
+      "semantic_boundary": null
+    },
+    {
+      "code": "A2",
+      "domain": "agreeableness",
+      "entity_key": "straightforwardness",
+      "canonical_en": "Straightforwardness",
+      "semantic_boundary": "Clear, non-manipulative expression; not saying everything, being harsh, or surrendering privacy."
+    },
+    {
+      "code": "A3",
+      "domain": "agreeableness",
+      "entity_key": "altruism",
+      "canonical_en": "Altruism",
+      "semantic_boundary": null
+    },
+    {
+      "code": "A4",
+      "domain": "agreeableness",
+      "entity_key": "compliance",
+      "canonical_en": "Compliance",
+      "semantic_boundary": "A tendency to de-escalate, compromise, or yield in conflict; not obedience, weakness, or accepting harm."
+    },
+    {
+      "code": "A5",
+      "domain": "agreeableness",
+      "entity_key": "modesty",
+      "canonical_en": "Modesty",
+      "semantic_boundary": null
+    },
+    {
+      "code": "A6",
+      "domain": "agreeableness",
+      "entity_key": "tender-mindedness",
+      "canonical_en": "Tender-Mindedness",
+      "semantic_boundary": "Giving weight to suffering, vulnerability, and humane concern; not clinical empathy, fragility, or perpetual leniency."
+    },
+    {
+      "code": "N1",
+      "domain": "neuroticism",
+      "entity_key": "anxiety",
+      "canonical_en": "Anxiety",
+      "semantic_boundary": "A non-diagnostic personality-facet label; it does not establish an anxiety disorder."
+    },
+    {
+      "code": "N2",
+      "domain": "neuroticism",
+      "entity_key": "anger",
+      "canonical_en": "Anger",
+      "semantic_boundary": null
+    },
+    {
+      "code": "N3",
+      "domain": "neuroticism",
+      "entity_key": "depression",
+      "canonical_en": "Depression",
+      "semantic_boundary": "A non-diagnostic personality-facet label; it does not establish depressive disorder."
+    },
+    {
+      "code": "N4",
+      "domain": "neuroticism",
+      "entity_key": "self-consciousness",
+      "canonical_en": "Self-Consciousness",
+      "semantic_boundary": null
+    },
+    {
+      "code": "N5",
+      "domain": "neuroticism",
+      "entity_key": "impulsiveness",
+      "canonical_en": "Impulsiveness",
+      "semantic_boundary": null
+    },
+    {
+      "code": "N6",
+      "domain": "neuroticism",
+      "entity_key": "vulnerability",
+      "canonical_en": "Vulnerability",
+      "semantic_boundary": null
+    }
+  ],
+  "prohibited_equivalences": [
+    "Openness equals intelligence",
+    "Agreeableness equals morality",
+    "Conscientiousness equals ability or guaranteed success",
+    "Low Extraversion equals shyness, loneliness, or poor social skill",
+    "Neuroticism equals mental illness",
+    "A facet equals an independent personality type",
+    "A high, mid-range, or low band is a diagnostic or normative category"
+  ]
+}
