@@ -97242,9 +97242,9 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "implementation_committed",
+    "status": "github_checks_pending",
     "commit_sha": "22e5629b881f3dc0ca4dd35d709b576f448c4223",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -97259,8 +97259,8 @@
         "evidence": "The combined focused suite passed 80 tests / 609 assertions across projection and promotion gates, apply/rollback behavior, post-promotion command, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and warm-cache regression. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 12ms and 134ms with one DB query. Changed-PHP Pint, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-two-path allowlist passed."
       },
       "github_required_checks": {
-        "status": "not_started",
-        "evidence": null
+        "status": "pending",
+        "evidence": "PR #3166 is open and mergeable on implementation-ledger head 1e3b8786c5ff7139ef2fbfbf99294196d95c484a; required CI and code scanning are running."
       }
     },
     "scope_validation": {
@@ -97294,8 +97294,13 @@
         "at": "2026-07-18T10:14:14Z",
         "status": "implementation_committed",
         "note": "Committed the exact twenty-two-path PR3 implementation as 22e5629b881f3dc0ca4dd35d709b576f448c4223 after all focused checks, static validation, and cached scope validation passed. This ledger-only follow-up binds the implementation commit before push."
+      },
+      {
+        "at": "2026-07-18T10:15:21Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact PR3 branch and opened PR #3166 with the manifest title plus what, why, validation, repository-rule impact, and deferred-scope sections. GitHub reports the PR mergeable; required checks are running. No production promotion/cache action, staging wait, or deploy occurred."
       }
     ],
-    "updated_at": "2026-07-18T10:14:14Z"
+    "updated_at": "2026-07-18T10:15:21Z"
   }
 }
