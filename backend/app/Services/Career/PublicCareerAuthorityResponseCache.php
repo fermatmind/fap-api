@@ -147,7 +147,11 @@ final class PublicCareerAuthorityResponseCache
      */
     public function jobDetailPayload(string $slug, string $publicLocale = 'zh-CN'): ?array
     {
-        return $this->jobDetailRead($slug, $publicLocale)['payload'];
+        $read = $this->jobDetailRead($slug, $publicLocale);
+
+        // This legacy accessor is also used by import/readiness gates. A recovery
+        // shell is HTTP-readable, but it is not a verified detail projection.
+        return $read['state'] === 'degraded' ? null : $read['payload'];
     }
 
     /**
@@ -215,6 +219,15 @@ final class PublicCareerAuthorityResponseCache
         $dispatchKey = $this->jobDetailWarmDispatchKey($slug, $publicLocale);
 
         try {
+            if (config('queue.default') === 'sync') {
+                Log::debug('career_job_detail_warm_dispatch_skipped_sync', [
+                    'slug' => $slug,
+                    'locale' => $publicLocale,
+                ]);
+
+                return;
+            }
+
             if (! Cache::add($dispatchKey, true, now()->addSeconds(self::JOB_DETAIL_WARM_DISPATCH_TTL_SECONDS))) {
                 return;
             }

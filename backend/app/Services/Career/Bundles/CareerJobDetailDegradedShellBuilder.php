@@ -91,6 +91,7 @@ final class CareerJobDetailDegradedShellBuilder
                 'canonical_path' => $path,
                 'index_state' => 'degraded_cache_recovery',
                 'index_eligible' => false,
+                'robots_policy' => 'noindex,follow',
                 'reason_codes' => ['detail_projection_cache_recovering'],
                 'dataset_eligible' => false,
                 'article_eligible' => false,

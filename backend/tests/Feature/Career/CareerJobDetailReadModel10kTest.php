@@ -22,6 +22,7 @@ final class CareerJobDetailReadModel10kTest extends TestCase
     {
         parent::setUp();
         Cache::flush();
+        config()->set('queue.default', 'database');
         $this->app->instance(
             CareerRuntimePublishProjectionVisibility::class,
             new CareerRuntimePublishProjectionVisibilityFixture(items: [
@@ -66,6 +67,7 @@ final class CareerJobDetailReadModel10kTest extends TestCase
 
         $this->assertSame('degraded', $read['state']);
         $this->assertSame('one', data_get($read, 'payload.identity.canonical_slug'));
+        $this->assertNull(app(PublicCareerAuthorityResponseCache::class)->jobDetailPayload('one', 'en'));
         $this->assertSame([], $queries, 'Cold-miss degradation must not query full detail authority on the request path.');
 
         $response = $this->getJson('/api/v0.5/career/jobs/one?locale=en');
@@ -79,12 +81,26 @@ final class CareerJobDetailReadModel10kTest extends TestCase
             ->assertJsonPath('claim_permissions.allow_strong_claim', false)
             ->assertJsonPath('seo_contract.index_eligible', false)
             ->assertJsonPath('seo_contract.index_state', 'degraded_cache_recovery')
+            ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
             ->assertJsonPath('display_surface_v1.implementation_contract.surface_policy', 'restricted_cache_recovery_shell')
             ->assertJsonMissingPath('truth_layer.median_pay_usd_annual')
             ->assertJsonMissingPath('score_bundle')
             ->assertJsonMissingPath('structured_data.occupation.@type');
 
         Queue::assertPushed(WarmCareerJobDetailProjection::class, 1);
+    }
+
+    public function test_sync_queue_never_builds_or_dispatches_the_warm_job_on_the_request_path(): void
+    {
+        config()->set('queue.default', 'sync');
+        Queue::fake();
+
+        $this->getJson('/api/v0.5/career/jobs/one?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'degraded')
+            ->assertJsonPath('detail_availability_v1.state', 'recovering');
+
+        Queue::assertNothingPushed();
     }
 
     public function test_legacy_projection_is_promoted_and_reported_as_stale_for_the_current_response(): void
