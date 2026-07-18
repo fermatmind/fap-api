@@ -98515,9 +98515,9 @@
     "branch": "codex/big5-en52-openness-facets-05",
     "title": "BIG5-EN52-OPENNESS-FACETS-05: translate six Openness facets",
     "depends_on": ["BIG5-EN52-RANGES-04"],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3188",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-RANGES-04 merged as c14c19e92797213aa245de44caa304bc9880bafa after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
@@ -98538,9 +98538,10 @@
     "transitions": [
       {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR5 scope; no O1-O6 work starts before PR4 merges."},
       {"at": "2026-07-18T23:04:30Z", "status": "implementation_in_progress", "note": "Started from exact merged PR4 SHA c14c19e92797213aa245de44caa304bc9880bafa. Scope is limited to O1-O6, their evidence, QA, ledger completions, and train closeout; other facet domains, completed pages, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
-      {"at": "2026-07-18T23:13:34Z", "status": "local_validation_passed", "note": "Completed all six Openness facet pages with one-to-one sections, FAQ and claim maps. Cumulative translated=28 validation, standard YAML and JSON parsing, scientific/product boundary review, canonical-link checks, and exact-scope checks passed with every controlled write counter at zero."}
+      {"at": "2026-07-18T23:13:34Z", "status": "local_validation_passed", "note": "Completed all six Openness facet pages with one-to-one sections, FAQ and claim maps. Cumulative translated=28 validation, standard YAML and JSON parsing, scientific/product boundary review, canonical-link checks, and exact-scope checks passed with every controlled write counter at zero."},
+      {"at": "2026-07-18T23:14:55Z", "status": "github_checks_pending", "note": "Committed the exact 15-path PR5 scope as 6897d26ff and opened PR #3188. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
     ],
-    "updated_at": "2026-07-18T23:13:34Z"
+    "updated_at": "2026-07-18T23:14:55Z"
   },
   "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06": {
     "id": "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06",
