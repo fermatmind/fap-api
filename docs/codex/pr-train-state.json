@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed through visible-surface enforcement head 01a73e59f270547e9504e8bef92203e373bd6bf1. Eighteen actionable Codex review findings were accepted; the final authority-metadata/raw-HTML enforcement head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub checks passed through authority-metadata/raw-HTML enforcement head 87eba19423247deefad10c599fb84f92aa928551. Twenty actionable Codex review findings were accepted; the final Markdown-visible evidence/FAQ-answer head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98124,9 +98124,14 @@
         "at": "2026-07-18T20:29:37Z",
         "status": "github_review_fixes_completed",
         "note": "All nine checks passed on visible-surface enforcement head 01a73e59f270547e9504e8bef92203e373bd6bf1, then two valid P2 findings were accepted. Completed pages now lock editorial reviewer metadata to the exact 52-page source cohort and require clinical_reviewed=false plus expert_endorsement=false; arbitrary reviewer, clinical, or endorsement claims fail closed. Any raw HTML element is rejected, so hidden spans/styles cannot satisfy reader-visible claims or citations. The reproducible authority build and translated=0 validator pass with all write counters at zero."
+      },
+      {
+        "at": "2026-07-18T20:38:10Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on authority-metadata/raw-HTML head 87eba19423247deefad10c599fb84f92aa928551, then two valid P2 findings were accepted. The visible-evidence gate now projects Markdown reader-visible text, removes link destinations, link titles, reference definitions, and reference-link metadata, and still requires the exact raw claim string plus its visible projection. Every locked FAQ question must also have a non-empty reader-visible answer. Positive visible-claim/FAQ probes and negative hidden-link-title/reference probes passed with the reproducible translated=0 authority validation."
       }
     ],
-    "updated_at": "2026-07-18T20:29:37Z"
+    "updated_at": "2026-07-18T20:38:10Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",

@@ -75,6 +75,14 @@ function englishWordCount(body) {
   return body.match(/[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*/g)?.length ?? 0;
 }
 
+function markdownVisibleText(markdown) {
+  return markdown
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/^\s{0,3}\[[^\]]+\]:\s*.*$/gm, '')
+    .replace(/\[([^\]]+)\]\(\s*(?:<[^>]*>|[^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\s*\)/g, '$1')
+    .replace(/\[([^\]]+)\]\s*\[[^\]]*\]/g, '$1');
+}
+
 function substantiveParagraphs(body) {
   return body.split(/\n\s*\n/).map((part) => part.trim()).filter((part) => {
     if (part.startsWith('#') || part.startsWith('> **Content method')) return false;
@@ -269,7 +277,7 @@ async function main() {
       continue;
     }
     const { frontmatter, frontmatterKeys, body } = parsed;
-    const visibleBody = body.replace(/<!--[\s\S]*?-->/g, '');
+    const visibleBody = markdownVisibleText(body);
     const fixedFields = {
       content_identity: locked.page_identity,
       asset_type: locked.entity_type,
@@ -333,12 +341,15 @@ async function main() {
       }
     }
     const faq = h2Sections.find((section) => section[1] === 'Frequently Asked Questions');
-    const faqQuestions = faq ? [...faq[2].matchAll(/^\*\*(.+[?])\*\*$/gm)] : [];
+    const faqEntries = faq ? [...faq[2].matchAll(
+      /^\*\*(.+[?])\*\*\s*\n([\s\S]*?)(?=^\*\*.+[?]\*\*\s*$|(?![\s\S]))/gm,
+    )] : [];
+    const faqQuestions = faqEntries.map((entry) => entry[1]);
     if (h2Sections.length !== locked.zh_section_count)
       fail('section_coverage_count', `${completedEntry.target_path}: ${h2Sections.length} != ${locked.zh_section_count}`);
     if (faqQuestions.length !== locked.zh_faq_count)
       fail('faq_coverage_count', `${completedEntry.target_path}: ${faqQuestions.length} != ${locked.zh_faq_count}`);
-    const normalizedFaqQuestions = faqQuestions.map((match) => match[1].toLowerCase().replace(/[^a-z0-9]+/g, ''));
+    const normalizedFaqQuestions = faqQuestions.map((question) => question.toLowerCase().replace(/[^a-z0-9]+/g, ''));
     if (new Set(normalizedFaqQuestions).size !== normalizedFaqQuestions.length) {
       duplicateFaqQuestionCount += 1;
       fail('duplicate_faq_question', completedEntry.target_path);
@@ -346,6 +357,12 @@ async function main() {
     if (faqQuestions.length === 0) {
       emptyFaqCount += 1;
       fail('empty_faq', completedEntry.target_path);
+    }
+    for (const [index, entry] of faqEntries.entries()) {
+      if (englishWordCount(markdownVisibleText(entry[2])) === 0) {
+        emptyFaqCount += 1;
+        fail('empty_faq_answer', `${completedEntry.target_path}: ${faqQuestions[index]}`);
+      }
     }
     const internalLinks = new Set();
     for (const match of visibleBody.matchAll(/\[[^\]]+\]\(\s*(\/[^)\s]+)(?:\s+[^)]*)?\)/g)) internalLinks.add(match[1]);
@@ -440,7 +457,7 @@ async function main() {
     } else {
       for (const [index, row] of faqMap.entries()) {
         if (row.zh_question !== locked.zh_faq_questions[index]
-          || row.en_question !== faqQuestions[index][1]
+          || row.en_question !== faqQuestions[index]
           || !VALID_EQUIVALENCE_STATUSES.has(row.translation_equivalence_status))
           fail('faq_translation_map', `${completedEntry.claim_path}: ${index + 1}`);
       }
@@ -481,7 +498,9 @@ async function main() {
         || !Array.isArray(claim.source_ids)
         || !VALID_EQUIVALENCE_STATUSES.has(claim.translation_equivalence_status))
         fail('claim_contract', `${completedEntry.claim_path}: ${claim.claim_id ?? 'unknown'}`);
-      if (!visibleBody.includes(claim.visible_claim)) fail('claim_visible_text_missing', `${completedEntry.claim_path}: ${claim.claim_id}`);
+      const visibleClaim = markdownVisibleText(claim.visible_claim);
+      if (!body.includes(claim.visible_claim) || !visibleClaim.trim() || !visibleBody.includes(visibleClaim))
+        fail('claim_visible_text_missing', `${completedEntry.claim_path}: ${claim.claim_id}`);
       for (const sourceId of claim.source_ids ?? []) {
         if (!registryIds.has(sourceId)) {
           invalidSourceIdCount += 1;
