@@ -216,9 +216,16 @@ final class CanonicalBatchPromotionExecutorService
                 $cachePreparation['entries'],
             );
             if (($detailCacheActivation['status'] ?? null) !== 'pass') {
-                $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots(
+                $failures = [[
+                    'reason' => 'post_promotion_detail_cache_activation_failed',
+                    'context' => ['failures' => $detailCacheActivation['failures'] ?? []],
+                ]];
+                $cleanupFailure = $this->forgetPreparedExposureSnapshotsSafely(
                     $cachePreparation['entries'],
                 );
+                if ($cleanupFailure !== null) {
+                    $failures[] = $cleanupFailure;
+                }
 
                 return $this->postCommitActivationFailedResult(
                     $transaction,
@@ -226,10 +233,7 @@ final class CanonicalBatchPromotionExecutorService
                     $promotedStates,
                     [
                         'status' => 'blocked',
-                        'failures' => [[
-                            'reason' => 'post_promotion_detail_cache_activation_failed',
-                            'context' => ['failures' => $detailCacheActivation['failures'] ?? []],
-                        ]],
+                        'failures' => $failures,
                     ],
                     $releaseGate,
                 );
@@ -243,9 +247,16 @@ final class CanonicalBatchPromotionExecutorService
                     activateJobIndexPayloads: true,
                 );
             } catch (\Throwable $throwable) {
-                $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots(
+                $failures = [[
+                    'reason' => 'post_promotion_directory_activation_failed',
+                    'context' => ['error_class' => $throwable::class],
+                ]];
+                $cleanupFailure = $this->forgetPreparedExposureSnapshotsSafely(
                     $cachePreparation['entries'],
                 );
+                if ($cleanupFailure !== null) {
+                    $failures[] = $cleanupFailure;
+                }
 
                 return $this->postCommitActivationFailedResult(
                     $transaction,
@@ -253,10 +264,7 @@ final class CanonicalBatchPromotionExecutorService
                     $promotedStates,
                     [
                         'status' => 'blocked',
-                        'failures' => [[
-                            'reason' => 'post_promotion_directory_activation_failed',
-                            'context' => ['error_class' => $throwable::class],
-                        ]],
+                        'failures' => $failures,
                     ],
                     $releaseGate,
                 );
@@ -273,6 +281,29 @@ final class CanonicalBatchPromotionExecutorService
             }
 
             throw $e;
+        }
+    }
+
+    /**
+     * Snapshot cleanup is a fail-closed cache hardening step after the
+     * publication transaction has committed. A cache outage here must be
+     * recorded, but it must never prevent execute() from reaching the
+     * database remediation path.
+     *
+     * @param  list<array<string, mixed>>  $preparedEntries
+     * @return array{reason: string, context: array{error_class: class-string<\Throwable>}}|null
+     */
+    private function forgetPreparedExposureSnapshotsSafely(array $preparedEntries): ?array
+    {
+        try {
+            $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots($preparedEntries);
+
+            return null;
+        } catch (\Throwable $throwable) {
+            return [
+                'reason' => 'post_promotion_exposure_snapshot_cleanup_failed',
+                'context' => ['error_class' => $throwable::class],
+            ];
         }
     }
 

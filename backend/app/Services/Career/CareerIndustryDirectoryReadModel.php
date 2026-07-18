@@ -19,7 +19,12 @@ final class CareerIndustryDirectoryReadModel
     {
         $publicLocale = $this->normalizePublicLocale($locale);
         $readModel = $this->responseCache->directoryReadModelPayload($publicLocale);
-        $items = is_array($readModel['items'] ?? null) ? $readModel['items'] : [];
+        $items = array_values(array_filter(
+            is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
+            static fn (mixed $item): bool => is_array($item)
+                && ($item['indexable'] ?? false) === true
+                && ($item['detail_ready'] ?? false) === true,
+        ));
         $industries = $this->industries($items, $publicLocale);
 
         return [
@@ -27,7 +32,7 @@ final class CareerIndustryDirectoryReadModel
             'bundle_kind' => 'career_industry_directory',
             'bundle_version' => 'career.industry_directory.v1',
             'locale' => $publicLocale,
-            'public_detail_indexable_count' => (int) ($readModel['public_count'] ?? count($items)),
+            'public_detail_indexable_count' => count($items),
             'industry_count' => count($industries),
             'industries' => $industries,
         ];

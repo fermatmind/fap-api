@@ -4955,6 +4955,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Domain/Career/Publish/CareerJobDetailExposureReadiness.php',
             'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
             'backend/app/Providers/AppServiceProvider.php',
+            'backend/app/Services/Career/CareerDirectoryAuthorityService.php',
+            'backend/app/Services/Career/CareerIndustryDirectoryReadModel.php',
             'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
             'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',

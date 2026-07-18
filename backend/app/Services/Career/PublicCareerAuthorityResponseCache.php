@@ -47,6 +47,14 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     public const DIRECTORY_CACHE_MAX_AGE_SECONDS = 1800;
 
+    private const JOB_DETAIL_EXPOSURE_LOCK_WAIT_SECONDS = 35;
+
+    private const JOB_DETAIL_EXPOSURE_LOCK_WORK_LEASE_SECONDS = 120;
+
+    private const DIRECTORY_REBUILD_LOCK_WAIT_SECONDS = 65;
+
+    private const DIRECTORY_REBUILD_LOCK_WORK_LEASE_SECONDS = 120;
+
     public function __construct(
         private readonly CareerPublicDatasetContractBuilder $datasetContractBuilder,
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
@@ -708,9 +716,17 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         [$slug, $locale] = explode('|', $targets[$offset], 2);
-        $lock = Cache::lock($this->jobDetailExposureActivationLockKey($slug, $locale), 30);
+        $lock = Cache::lock(
+            $this->jobDetailExposureActivationLockKey($slug, $locale),
+            $this->nestedLockLeaseSeconds(
+                count($targets),
+                $offset,
+                self::JOB_DETAIL_EXPOSURE_LOCK_WAIT_SECONDS,
+                self::JOB_DETAIL_EXPOSURE_LOCK_WORK_LEASE_SECONDS,
+            ),
+        );
 
-        return $lock->block(35, fn (): array => $this->withJobDetailExposureLocks(
+        return $lock->block(self::JOB_DETAIL_EXPOSURE_LOCK_WAIT_SECONDS, fn (): array => $this->withJobDetailExposureLocks(
             $targets,
             $callback,
             $offset + 1,
@@ -1214,9 +1230,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     public function singleFlightDirectoryRebuild(string $publicLocale, ?string $observedVersion, callable $rebuild): array
     {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $lock = Cache::lock($this->directoryRebuildLockKey($normalizedLocale), 60);
+        $lock = Cache::lock(
+            $this->directoryRebuildLockKey($normalizedLocale),
+            self::DIRECTORY_REBUILD_LOCK_WORK_LEASE_SECONDS,
+        );
 
-        return $lock->block(65, function () use ($normalizedLocale, $observedVersion, $rebuild): array {
+        return $lock->block(self::DIRECTORY_REBUILD_LOCK_WAIT_SECONDS, function () use ($normalizedLocale, $observedVersion, $rebuild): array {
             $currentVersion = Cache::get($this->directoryActiveVersionKey($normalizedLocale));
             if ($currentVersion !== null && $currentVersion !== $observedVersion) {
                 $this->logDirectoryCacheState($normalizedLocale, 'hit', (string) $currentVersion, ['rebuild' => 'coalesced']);
@@ -1398,13 +1417,28 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             return $callback();
         }
 
-        $lock = Cache::lock($this->directoryRebuildLockKey($locales[$offset]), 60);
+        $lock = Cache::lock(
+            $this->directoryRebuildLockKey($locales[$offset]),
+            $this->nestedLockLeaseSeconds(
+                count($locales),
+                $offset,
+                self::DIRECTORY_REBUILD_LOCK_WAIT_SECONDS,
+                self::DIRECTORY_REBUILD_LOCK_WORK_LEASE_SECONDS,
+            ),
+        );
 
-        return $lock->block(65, fn (): array => $this->withDirectoryRebuildLocks(
+        return $lock->block(self::DIRECTORY_REBUILD_LOCK_WAIT_SECONDS, fn (): array => $this->withDirectoryRebuildLocks(
             $locales,
             $callback,
             $offset + 1,
         ));
+    }
+
+    private function nestedLockLeaseSeconds(int $targetCount, int $offset, int $waitSeconds, int $workLeaseSeconds): int
+    {
+        $nestedWaits = max(0, $targetCount - $offset - 1);
+
+        return $workLeaseSeconds + ($nestedWaits * $waitSeconds);
     }
 
     /** @return array{locale: string, status: string, active_version: ?string, lkg_version: ?string, age_seconds: ?int, last_rebuild_ms: ?float} */

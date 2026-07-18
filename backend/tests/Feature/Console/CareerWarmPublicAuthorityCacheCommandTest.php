@@ -429,28 +429,38 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         );
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $cacheManager = Cache::getFacadeRoot();
-        $lockState = (object) ['depth' => 0, 'max_depth' => 0];
+        $lockState = (object) [
+            'depth' => 0,
+            'max_depth' => 0,
+            'leases' => [],
+            'waits' => [],
+        ];
         $detailReadinessReads = 0;
 
         try {
             $cacheMock = Cache::partialMock();
             $cacheMock->shouldReceive('lock')
                 ->twice()
-                ->andReturnUsing(static fn () => new class($lockState)
-                {
-                    public function __construct(private readonly object $state) {}
+                ->andReturnUsing(static function (string $key, int $seconds) use ($lockState): object {
+                    $lockState->leases[] = $seconds;
 
-                    public function block(int $seconds, callable $callback): mixed
+                    return new class($lockState)
                     {
-                        $this->state->depth++;
-                        $this->state->max_depth = max($this->state->max_depth, $this->state->depth);
+                        public function __construct(private readonly object $state) {}
 
-                        try {
-                            return $callback();
-                        } finally {
-                            $this->state->depth--;
+                        public function block(int $seconds, callable $callback): mixed
+                        {
+                            $this->state->waits[] = $seconds;
+                            $this->state->depth++;
+                            $this->state->max_depth = max($this->state->max_depth, $this->state->depth);
+
+                            try {
+                                return $callback();
+                            } finally {
+                                $this->state->depth--;
+                            }
                         }
-                    }
+                    };
                 });
             $cacheMock->shouldReceive('get')
                 ->andReturnUsing(function (string $key, mixed $default = null) use ($cacheManager, $lockState, &$detailReadinessReads): mixed {
@@ -478,6 +488,8 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 
         $this->assertGreaterThan(0, $detailReadinessReads);
         $this->assertSame(2, $lockState->max_depth);
+        $this->assertSame([185, 120], $lockState->leases);
+        $this->assertSame([65, 65], $lockState->waits);
     }
 
     public function test_fifty_cold_rebuild_contenders_only_execute_one_builder(): void

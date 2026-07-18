@@ -416,6 +416,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $cacheManager = Cache::getFacadeRoot();
         $zhActiveKey = $cache->jobDetailActiveVersionKey('actuaries', 'zh');
+        $snapshotCleanupAttempts = 0;
 
         try {
             $cacheMock = Cache::partialMock();
@@ -426,7 +427,15 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
             $cacheMock->shouldReceive('has')
                 ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
             $cacheMock->shouldReceive('forget')
-                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+                ->andReturnUsing(static function (string $key) use ($cacheManager, &$snapshotCleanupAttempts): bool {
+                    if (str_contains($key, ':exposure-projections:')) {
+                        $snapshotCleanupAttempts++;
+
+                        throw new \RuntimeException('synthetic exposure snapshot cleanup failure');
+                    }
+
+                    return $cacheManager->forget($key);
+                });
             $cacheMock->shouldReceive('put')
                 ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->put($key, $value, $ttl));
             $cacheMock->shouldReceive('add')
@@ -465,6 +474,11 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertTrue($payload['rollback_required'] ?? false);
         $this->assertFalse(data_get($payload, 'remediation.succeeded', true));
         $this->assertSame('rollback_not_persisted', data_get($payload, 'remediation.status'));
+        $this->assertGreaterThan(0, $snapshotCleanupAttempts);
+        $this->assertContains(
+            'post_promotion_exposure_snapshot_cleanup_failed',
+            array_column($payload['failures'] ?? [], 'reason'),
+        );
     }
 
     public function test_prepared_detail_activation_blocks_when_exposure_projection_snapshot_is_missing(): void
@@ -501,11 +515,16 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
             ->all();
         $cacheManager = Cache::getFacadeRoot();
         $zhActiveKey = $cache->jobDetailActiveVersionKey('actuaries', 'zh');
+        $lockLeases = [];
 
         try {
             $cacheMock = Cache::partialMock();
             $cacheMock->shouldReceive('lock')
-                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+                ->andReturnUsing(static function (string $key, int $seconds) use ($cacheManager, &$lockLeases): object {
+                    $lockLeases[] = $seconds;
+
+                    return $cacheManager->lock($key, $seconds);
+                });
             $cacheMock->shouldReceive('get')
                 ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
             $cacheMock->shouldReceive('has')
@@ -529,6 +548,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame('blocked', $activation['status']);
         $this->assertSame($oldEnVersion, $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
         $this->assertSame($oldZhVersion, $cache->jobDetailCacheReadiness('actuaries', 'zh')['version']);
+        $this->assertSame([155, 120], $lockLeases);
     }
 
     public function test_command_writes_audit_report(): void

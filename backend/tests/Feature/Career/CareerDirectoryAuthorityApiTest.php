@@ -111,7 +111,7 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->assertSame(['actuaries'], $slugs);
     }
 
-    public function test_transient_detail_cache_loss_keeps_directory_authority_but_marks_detail_not_ready(): void
+    public function test_transient_detail_cache_loss_preserves_internal_authority_but_removes_the_public_link(): void
     {
         $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
         $this->publishRuntimeProjection(['actuaries']);
@@ -127,11 +127,17 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $responseCache->forgetJobDetailPayload('actuaries', 'en');
         $responseCache->warmDirectoryReadModels(['en']);
 
+        $internalReadModel = $responseCache->directoryReadModelPayload('en');
+        $this->assertSame(1, $internalReadModel['public_count']);
+        $this->assertFalse($internalReadModel['items'][0]['detail_ready']);
+
         $this->getJson('/api/v0.5/career/directory?locale=en&per_page=100')
             ->assertOk()
-            ->assertJsonPath('pagination.total', 1)
-            ->assertJsonPath('items.0.indexable', true)
-            ->assertJsonPath('items.0.detail_ready', false);
+            ->assertJsonPath('public_truth.public_detail_indexable_count', 0)
+            ->assertJsonPath('public_truth.directory_member_count', 0)
+            ->assertJsonPath('pagination.total', 0)
+            ->assertJsonCount(0, 'facets.families')
+            ->assertJsonCount(0, 'items');
 
         $this->assertDatabaseHas('occupations', ['canonical_slug' => 'actuaries']);
     }
