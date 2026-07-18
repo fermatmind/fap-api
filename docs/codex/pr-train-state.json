@@ -97157,9 +97157,9 @@
     "depends_on": [
       "CAREER-DETAIL-COLD-MISS-DEGRADE-01"
     ],
-    "status": "implementation_committed",
+    "status": "github_checks_pending",
     "commit_sha": "a348b450224ecce6c937868a6d948aa47f495913",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3164",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -97175,7 +97175,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #3164 is open on the exact scoped branch; complete CI and code-scanning checks will run on the ledger-bound head."
       }
     },
     "scope_validation": {
@@ -97209,8 +97209,13 @@
         "at": "2026-07-18T09:21:40Z",
         "status": "implementation_committed",
         "note": "Committed the exact ten-path PR2 implementation as a348b450224ecce6c937868a6d948aa47f495913 after all focused checks and cached scope validation passed. This ledger-only follow-up binds the real implementation commit before push."
+      },
+      {
+        "at": "2026-07-18T09:22:56Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact PR2 branch and opened PR #3164 with the manifest title plus what, why, validation, repository-rule impact, sidecar, and deferred-scope sections. No production repair, staging wait, or deploy action occurred; required checks are running."
       }
     ],
-    "updated_at": "2026-07-18T09:21:40Z"
+    "updated_at": "2026-07-18T09:22:56Z"
   }
 }
