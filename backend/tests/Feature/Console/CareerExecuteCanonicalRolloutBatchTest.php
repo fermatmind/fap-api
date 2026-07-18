@@ -373,8 +373,67 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame('pass', $activation['status']);
         $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
         $this->assertSame($prepared['version'], $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
-        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
         $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+    }
+
+    public function test_apply_reports_committed_write_as_not_rolled_back_when_remediation_is_unverified(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $zhActiveKey = $cache->jobDetailActiveVersionKey('actuaries', 'zh');
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('put')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->put($key, $value, $ttl));
+            $cacheMock->shouldReceive('add')
+                ->andReturnUsing(static fn (string $key, mixed $value, mixed $ttl = null): bool => $cacheManager->add($key, $value, $ttl));
+            $cacheMock->shouldReceive('store')
+                ->andReturnUsing(static fn (?string $name = null) => $cacheManager->store($name));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhActiveKey): bool {
+                    if ($key === $zhActiveKey) {
+                        throw new \RuntimeException('synthetic post-commit detail activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+                '--batch-id' => 'batch-actuaries-post-commit-cache-failure',
+                '--slugs' => 'actuaries',
+                '--locales' => 'en,zh',
+                '--rollback-group' => 'actuaries',
+                '--apply' => true,
+                '--projection' => $this->tmpProjectionPath,
+                '--json' => true,
+            ]);
+            $payload = json_decode(Artisan::output(), true);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertSame('rollback_write_not_persisted', $payload['status'] ?? null);
+        $this->assertTrue($payload['writes_database'] ?? false);
+        $this->assertTrue($payload['database_commit_succeeded'] ?? false);
+        $this->assertFalse($payload['promotion_rolled_back'] ?? true);
+        $this->assertTrue($payload['rollback_required'] ?? false);
+        $this->assertFalse(data_get($payload, 'remediation.succeeded', true));
+        $this->assertSame('rollback_not_persisted', data_get($payload, 'remediation.status'));
     }
 
     public function test_prepared_detail_activation_restores_all_pointers_when_a_later_locale_fails(): void

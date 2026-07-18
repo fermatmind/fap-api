@@ -166,7 +166,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $projectionItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+        $projectionItem = $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale);
         if (! $this->jobDetailProjectionItemIsPublished($projectionItem)) {
             if (is_array($projectionItem)) {
                 Cache::put(
@@ -456,8 +456,19 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $version,
         );
         Cache::forever($payloadKey, $payload);
+        $exposureProjectionKey = $this->jobDetailExposureProjectionVersionKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $version,
+        );
+        Cache::forever($exposureProjectionKey, $projectionItem);
         $stagedPayload = Cache::get($payloadKey);
-        $ready = is_array($stagedPayload);
+        $stagedExposureProjection = Cache::get($exposureProjectionKey);
+        $ready = is_array($stagedPayload)
+            && is_array($stagedExposureProjection)
+            && strtolower(trim((string) ($stagedExposureProjection['slug'] ?? ''))) === $normalizedSlug
+            && $this->normalizePublicLocale((string) ($stagedExposureProjection['locale'] ?? '')) === $normalizedLocale
+            && $this->jobDetailProjectionItemIsPublished($stagedExposureProjection);
 
         return [
             'slug' => $normalizedSlug,
@@ -550,6 +561,32 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         return ['status' => 'pass', 'entries' => $activated, 'failures' => []];
+    }
+
+    /**
+     * Remove only the immutable exposure-projection snapshots prepared for a
+     * failed post-commit activation. The detail payload may remain cached, but
+     * without this matching snapshot a stale materialized candidate projection
+     * keeps the public route fail-closed.
+     *
+     * @param  list<array<string, mixed>>  $preparedEntries
+     */
+    public function forgetPreparedJobDetailExposureProjectionSnapshots(array $preparedEntries): void
+    {
+        foreach ($preparedEntries as $entry) {
+            $slug = strtolower(trim((string) ($entry['slug'] ?? '')));
+            $rawLocale = trim((string) ($entry['locale'] ?? ''));
+            $version = trim((string) ($entry['version'] ?? ''));
+            if ($slug === '' || $rawLocale === '' || $version === '') {
+                continue;
+            }
+
+            Cache::forget($this->jobDetailExposureProjectionVersionKey(
+                $slug,
+                $this->normalizePublicLocale($rawLocale),
+                $version,
+            ));
+        }
     }
 
     /** @param array<string, mixed> $payload */
@@ -1267,7 +1304,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             }
 
             $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
-            $projectionItem = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
+            $projectionItem = $this->effectiveJobDetailProjectionItem($slug, $publicLocale);
 
             return $slug !== '' && $this->detailReadIsPublishedForLocale($slug, $publicLocale)
                 && ($projectionItem['dataset_visible'] ?? false) === true;
@@ -1278,9 +1315,47 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     private function detailReadIsPublishedForLocale(string $slug, string $publicLocale): bool
     {
-        $item = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
+        $item = $this->effectiveJobDetailProjectionItem($slug, $publicLocale);
 
         return $this->jobDetailProjectionItemIsPublished($item);
+    }
+
+    /** @return array<string, mixed>|null */
+    private function effectiveJobDetailProjectionItem(string $slug, string $publicLocale): ?array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $materializedItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+        if ($this->jobDetailProjectionItemIsPublished($materializedItem)) {
+            return $materializedItem;
+        }
+
+        $activeVersion = Cache::get($this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale));
+        if (! is_string($activeVersion) || trim($activeVersion) === '') {
+            return $materializedItem;
+        }
+
+        $activePayload = Cache::get($this->jobDetailVersionPayloadKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $activeVersion,
+        ));
+        $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $activeVersion,
+        ));
+        if (
+            ! is_array($activePayload)
+            || ! is_array($exposureProjection)
+            || strtolower(trim((string) ($exposureProjection['slug'] ?? ''))) !== $normalizedSlug
+            || $this->normalizePublicLocale((string) ($exposureProjection['locale'] ?? '')) !== $normalizedLocale
+            || ! $this->jobDetailProjectionItemIsPublished($exposureProjection)
+        ) {
+            return $materializedItem;
+        }
+
+        return $exposureProjection;
     }
 
     /** @param array<string, mixed>|null $item */
@@ -1356,6 +1431,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     private function jobDetailVersionPayloadKey(string $slug, string $publicLocale, string $version): string
     {
         return sprintf('%s:%s:%s:versions:%s', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale), $version);
+    }
+
+    private function jobDetailExposureProjectionVersionKey(string $slug, string $publicLocale, string $version): string
+    {
+        return sprintf('%s:%s:%s:exposure-projections:%s', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale), $version);
     }
 
     public function jobDetailNegativeKey(string $slug, string $publicLocale): string

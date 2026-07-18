@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "ready_to_merge",
+    "status": "github_review_fix_ready_to_commit",
     "commit_sha": "42dd2b6df161cdbd04f4b3183623454b89e78d3c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97259,14 +97259,14 @@
         "evidence": "After inspecting all six automated review threads, the current Career manifest suite passed 90 tests / 663 assertions across projection/promotion gates, immutable pre-exposure staging, concurrent candidate/stale-projection reads, atomic detail-pointer activation/rollback, stale materialized directory overlay, atomic lock-scoped directory construction/rollback, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 92 tests / 669 assertions total. The actual readiness path built 1046 and 10000 row directories in about 14ms and 140ms with one DB query. All 26 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-nine-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "All nine required CI and code-scanning checks passed on exact head 57551b9d9a30cfaf85790d9da179d0daa50efcfb. All six automated review threads are resolved and GitHub reports MERGEABLE/CLEAN. The final ready-ledger commit must pass its own exact-head checks before squash merge."
+        "status": "pending",
+        "evidence": "All nine checks passed on prior ready-ledger head 6f169b68540e60f4ceb8232b38b7142885fcfab2, but final review found two new valid threads. The same-scope repair is locally green and must pass exact-head checks after push."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97364,8 +97364,13 @@
         "at": "2026-07-18T12:11:51Z",
         "status": "ready_to_merge",
         "note": "All nine required checks passed on exact head 57551b9d9a30cfaf85790d9da179d0daa50efcfb. All six review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-nine-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T12:31:24Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on ready-ledger head 6f169b68540e60f4ceb8232b38b7142885fcfab2, but final review found a seventh valid P1 and eighth valid P2. The repair stages the exact validated exposure projection beside each immutable detail payload and resolves route authority from that snapshot only when it matches the active verified version, so a stale candidate artifact cannot leave a directory link returning 404. Post-commit cache/directory failures now record the committed database write, remove the transient exposure snapshot to fail closed, and claim rollback only after verified remediation. The full Career manifest suite passes 91 tests / 672 assertions plus 2 / 6 Big Five freeze assertions; all 26 Pint paths, Composer/YAML/JSON, diff, and the exact twenty-nine-path scope gate are green. No materialized SEO artifact, production cache, DB, CMS, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T12:11:51Z"
+    "updated_at": "2026-07-18T12:31:24Z"
   }
 }

@@ -216,7 +216,11 @@ final class CanonicalBatchPromotionExecutorService
                 $cachePreparation['entries'],
             );
             if (($detailCacheActivation['status'] ?? null) !== 'pass') {
-                return $this->promotionValidationFailedResult(
+                $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots(
+                    $cachePreparation['entries'],
+                );
+
+                return $this->postCommitActivationFailedResult(
                     $transaction,
                     $preStates,
                     $promotedStates,
@@ -238,7 +242,11 @@ final class CanonicalBatchPromotionExecutorService
                     $this->itemsFromPayload($postProjection),
                 );
             } catch (\Throwable $throwable) {
-                return $this->promotionValidationFailedResult(
+                $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots(
+                    $cachePreparation['entries'],
+                );
+
+                return $this->postCommitActivationFailedResult(
                     $transaction,
                     $preStates,
                     $promotedStates,
@@ -329,8 +337,7 @@ final class CanonicalBatchPromotionExecutorService
         bool $quarantineOnFailure,
     ): array {
         $remediationWriteVerified = (bool) ($remediationResult['write_verified'] ?? false);
-
-        return array_merge($promotionResult, [
+        $merged = [
             'remediation' => [
                 'attempted' => true,
                 'mode' => $quarantineOnFailure ? 'quarantine' : 'rollback',
@@ -340,7 +347,19 @@ final class CanonicalBatchPromotionExecutorService
                 'succeeded' => $remediationWriteVerified,
                 'output' => $remediationResult,
             ],
-        ]);
+        ];
+
+        if (($promotionResult['database_commit_succeeded'] ?? false) === true) {
+            $merged = array_merge($merged, [
+                'status' => (string) ($remediationResult['status'] ?? 'post_commit_activation_failed'),
+                'promotion_rolled_back' => $remediationWriteVerified && ! $quarantineOnFailure,
+                'promotion_quarantined' => $remediationWriteVerified && $quarantineOnFailure,
+                'rollback_required' => ! $remediationWriteVerified && ! $quarantineOnFailure,
+                'quarantine_required' => ! $remediationWriteVerified && $quarantineOnFailure,
+            ]);
+        }
+
+        return array_merge($promotionResult, $merged);
     }
 
     // ─── Projection / Authority ─────────────────────────────────────────────
@@ -1020,6 +1039,47 @@ final class CanonicalBatchPromotionExecutorService
             'promoted_states' => $promotedStates,
             'post_promotion_validation' => $postPromotionValidation,
             'release_gate' => $releaseGate,
+            'failures' => is_array($postPromotionValidation['failures'] ?? null)
+                ? $postPromotionValidation['failures']
+                : [],
+        ];
+    }
+
+    /**
+     * A cache or directory activation failure after DB::commit() is materially
+     * different from an in-transaction gate failure. Report the committed
+     * promotion truthfully and let executeRemediation() determine whether the
+     * exposure was subsequently rolled back or quarantined.
+     *
+     * @param  array<string, string>  $preStates
+     * @param  array<string, mixed>  $postPromotionValidation
+     * @param  array<string, mixed>|null  $releaseGate
+     * @return array<string, mixed>
+     */
+    private function postCommitActivationFailedResult(
+        CanonicalPromotionTransaction $transaction,
+        array $preStates,
+        array $promotedStates,
+        array $postPromotionValidation,
+        ?array $releaseGate,
+    ): array {
+        return [
+            'status' => 'post_commit_activation_failed',
+            'batch_id' => $transaction->batchId,
+            'promoted_slugs' => $transaction->slugs,
+            'promoted_locale_rows' => count($transaction->expectedLocaleRows()),
+            'rollback_group' => $transaction->rollbackGroup,
+            'dry_run' => false,
+            'writes_database' => true,
+            'write_verified' => true,
+            'database_commit_succeeded' => true,
+            'promotion_rolled_back' => false,
+            'pre_states' => $preStates,
+            'promoted_states' => $promotedStates,
+            'post_promotion_validation' => $postPromotionValidation,
+            'release_gate' => $releaseGate,
+            'rollback_required' => true,
+            'quarantine_required' => false,
             'failures' => is_array($postPromotionValidation['failures'] ?? null)
                 ? $postPromotionValidation['failures']
                 : [],
