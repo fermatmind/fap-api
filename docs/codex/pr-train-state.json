@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "0217d3d038b00276dbfbcfebdae04e8cbeed753f",
+    "status": "github_checks_pending",
+    "commit_sha": "3ed3068799df49057f12196bef85ef4523abf202",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97319,8 +97319,13 @@
         "at": "2026-07-18T10:53:13Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on f761aa32ba0089ee8cf727bbac7ec30cb7224f40. Pre-merge review then found one new valid P1: a later-locale directory activation failure could leave an earlier locale active after DB remediation. The current-scope repair stages and verifies every immutable locale payload first, acquires deterministic locale rebuild locks, then switches pointers with snapshot-based restoration of all touched active/LKG/activation metadata on any failure. A synthetic second-locale failure proves both locales keep their prior active payloads. The complete 100-test / 791-assertion suite, Big Five classifier, all 24 Pint paths, Composer/YAML/JSON, diff, and exact twenty-seven-path scope checks pass."
+      },
+      {
+        "at": "2026-07-18T10:54:10Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed atomic multi-locale directory activation as 3ed3068799df49057f12196bef85ef4523abf202. Replied to the exact P1 with the restoration contract and synthetic failure evidence, then resolved the thread. Exact-head required checks are running; no production cache, database, CMS, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T10:53:13Z"
+    "updated_at": "2026-07-18T10:54:10Z"
   }
 }
