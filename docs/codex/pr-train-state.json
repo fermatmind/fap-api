@@ -42476,7 +42476,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "f8d42a136a7924bfc94c6b4b5a710a0dd0abfc04",
+    "commit_sha": null,
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -97617,9 +97617,9 @@
     "depends_on": [
       "SOLO-OWNER-OPS-APPROVAL-05"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "4b2b22d9018a2f10ef9ae539e04d12a66cca76f9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3185",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -97630,8 +97630,8 @@
         "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, and the exact runtime-freeze classifier. The guarded full bash backend/scripts/ci_verify_mbti.sh gate exited 0 through Big Five 1543/188110, Personality 89/5853, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. Changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, exact 35-path scope, and diff checks passed. After the unrelated Big Five hubs merge advanced origin/main, the branch was rebased and structured-file/scope checks were revalidated."
       },
       "github": {
-        "status": "not_started",
-        "evidence": null
+        "status": "pending",
+        "evidence": "PR #3185 opened with the exact manifest title and branch. Required GitHub checks started on the pushed head; exact-head Codex review remains pending."
       }
     },
     "scope_validation": {
@@ -97665,9 +97665,14 @@
         "at": "2026-07-18T22:04:00Z",
         "status": "local_checks_passed",
         "note": "Committed the exact 35-path implementation as f8d42a136a7924bfc94c6b4b5a710a0dd0abfc04. The post-commit branch-aware runtime-freeze checks passed 2 tests / 6 assertions, git diff check passed, and every committed path matched the PR06 manifest. No production or external-state action occurred."
+      },
+      {
+        "at": "2026-07-18T22:05:37Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3185. GitHub reports the PR mergeable while required checks and exact-head Codex review are pending. No production or external-state action occurred beyond the authorized PR lifecycle."
       }
     ],
-    "updated_at": "2026-07-18T22:04:00Z"
+    "updated_at": "2026-07-18T22:05:37Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
