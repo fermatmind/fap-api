@@ -97381,9 +97381,9 @@
     "depends_on": [
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "c602e33e5a3b45afabf9d034449d8e8d5eb42d9c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -97394,8 +97394,8 @@
         "evidence": "Post-commit focused approval/registry validation passed 18 tests/406 assertions and the branch-aware runtime freeze passed 2/6. PHP syntax, Pint, composer validate --strict, YAML/JSON, generated registry parity, exact 14-path allowlist, and diff checks passed. After recording one shared /tmp/fap-ci.sqlite collision with a competing Codex task, an isolated final bash backend/scripts/ci_verify_mbti.sh retry exited 0, including the committed runtime-freeze classifier, Enneagram 10/369, personality authority 71/5383, and all later commerce, migration, auth, OpenAPI, ownership, dependency-security, webhook, attempt, queue, and schema gates. Generated Big Five timestamp/hash noise was restored to origin/main."
       },
       "github": {
-        "status": "not_started",
-        "evidence": "The PR has not been pushed or opened."
+        "status": "pending",
+        "evidence": "PR #3172 is open from the exact scoped branch; required checks and exact-head Codex review are pending."
       }
     },
     "scope_validation": {
@@ -97444,9 +97444,14 @@
         "at": "2026-07-18T14:09:09Z",
         "status": "local_checks_passed",
         "note": "After the competing full gate exited, reran the exact manifest command in isolation. bash backend/scripts/ci_verify_mbti.sh exited 0 across the committed runtime-freeze classifier, Big Five, Enneagram 10/369, personality 71/5383, and all downstream security and regression gates. Restored deterministic Big Five generated files and retained only the exact 14 allowed PR05 paths. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T14:11:39Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3172 with implementation, rationale, validation, security/privacy, repository-rule impact, deferred data-lifecycle executor, and no-production-execution sections. Required GitHub checks and exact-head Codex review are pending."
       }
     ],
-    "updated_at": "2026-07-18T14:09:09Z"
+    "updated_at": "2026-07-18T14:11:39Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
