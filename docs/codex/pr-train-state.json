@@ -5631,7 +5631,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2753",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "B5-RESULT-RUNNER-SOP-RUNBOOK-01: Document Big Five V2 agent execution runner SOP",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "transitions": [
@@ -97249,7 +97249,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "All nine required checks passed on superseded ready-to-merge head e8b0af939be5bc9ea3fe694ea5f38224aae15875. Exact-head Codex review then reported one same-scope P3: non-JSON validation failures did not print the exception reason. The human-readable path now reports the actionable exception while JSON remains stably redacted; focused and full local validation passed, and the fix awaits commit, push, fresh checks, and fresh exact-head review."
+        "evidence": "All nine required checks passed on head 560b70f4f4a3980298244074c1826f15e1b2d22c. Exact-head Codex review confirmed the human-readable failure-path repair and found one ledger-only P3: an accidental broad status edit had downgraded the already-merged B5-RESULT-RUNNER-SOP-RUNBOOK-01 item. That historical top-level status is restored to merged; the correction awaits commit, push, fresh checks, and fresh exact-head review."
       }
     },
     "scope_validation": {
@@ -97353,9 +97353,14 @@
         "at": "2026-07-18T12:55:52Z",
         "status": "local_checks_passed",
         "note": "Committed the human-readable validation-failure P3 repair as f04b3fb610ba3a329bfd9298bd2e6c225ff21958 after all local checks passed. This ledger-only follow-up records the final implementation commit before push and fresh exact-head validation."
+      },
+      {
+        "at": "2026-07-18T13:03:41Z",
+        "status": "local_checks_passed",
+        "note": "All nine checks passed on head 560b70f4f4a3980298244074c1826f15e1b2d22c, then exact-head Codex review found one ledger-only P3: an accidental broad edit had changed the already-merged B5-RESULT-RUNNER-SOP-RUNBOOK-01 top-level status. Restored that historical status to merged, matching its final transition and verified merged PR. JSON, diff, and exact ten-path scope validation pass; no runtime or production action occurred."
       }
     ],
-    "updated_at": "2026-07-18T12:55:52Z"
+    "updated_at": "2026-07-18T13:03:41Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
