@@ -306,6 +306,17 @@ final class CareerSeoReviewAttestationServiceTest extends TestCase
             '--surface' => 'seo_canary_approval',
             '--attestation' => $attestationPath,
             '--targets' => $targetsPath,
+        ]));
+        $this->assertStringContainsString(
+            'package-scoped review requires the exact current package SHA-256',
+            Artisan::output(),
+        );
+        $this->assertDatabaseCount('review_attestations', 0);
+
+        $this->assertSame(1, Artisan::call('review:career-seo-attestation', [
+            '--surface' => 'seo_canary_approval',
+            '--attestation' => $attestationPath,
+            '--targets' => $targetsPath,
             '--bind' => true,
             '--actor-admin-user-id' => 1,
             '--json' => true,

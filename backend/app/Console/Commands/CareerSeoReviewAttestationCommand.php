@@ -91,6 +91,9 @@ final class CareerSeoReviewAttestationCommand extends Command
             ]);
         } catch (Throwable $throwable) {
             $json = (bool) $this->option('json');
+            if (! $json) {
+                $this->error($throwable->getMessage());
+            }
 
             return $this->finish([
                 'status' => 'BLOCKED_CAREER_SEO_REVIEW_ATTESTATION',
