@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_5;
 use App\Console\Commands\PersonalityPublicAssetsRetireMediaFields;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -1000,6 +1001,77 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertArrayNotHasKey('image', $response->json('personality_public_content_asset_v1.seo.twitter'));
         $this->assertStringNotContainsString('Named Reviewer', $response->getContent());
         $this->assertStringNotContainsString('Independent Review', $response->getContent());
+    }
+
+    public function test_detail_cache_version_and_response_boundary_redact_legacy_reviewer_projections(): void
+    {
+        $asset = PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'human_review_approved',
+            'is_public' => true,
+            'published_at' => now()->subDay(),
+            'last_reviewed_at' => now()->subHour(),
+        ]));
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $baseVersion = $cache->versionFor($asset);
+        $legacyPayload = [
+            'ok' => true,
+            'personality_public_content_asset_v1' => [
+                'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+                'framework' => 'big_five',
+                'entity_type' => 'hub',
+                'code' => 'big-five',
+                'locale' => 'en',
+                'review_state' => 'human_review_approved',
+                'last_reviewed_at' => $asset->last_reviewed_at?->toISOString(),
+            ],
+            'personality_public_content_asset_v2' => [
+                'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+                'compatible_v1_contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+                'visible_evidence' => [],
+                'editorial_authority' => [
+                    'review_state' => 'human_review_approved',
+                    'last_reviewed_at' => $asset->last_reviewed_at?->toISOString(),
+                    'reviewer' => [
+                        'name' => 'Legacy Cached Reviewer',
+                        'organization' => 'Private Review Organization',
+                        'role' => 'Reviewer',
+                    ],
+                ],
+                'schema_eligible' => false,
+            ],
+        ];
+
+        $cache->put('detail-code', 'big_five', 'hub', 'big-five', 'en', 0, $baseVersion, $legacyPayload);
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.review_state', 'approved')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null);
+
+        $cache->put(
+            'detail-code',
+            'big_five',
+            'hub',
+            'big-five',
+            'en',
+            0,
+            $baseVersion.':projection:public-review-contract-v1',
+            $legacyPayload,
+        );
+
+        $response = $this->getJson('/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
+            ->assertJsonPath('personality_public_content_asset_v1.review_state', 'approved')
+            ->assertJsonPath('personality_public_content_asset_v1.reviewer', null)
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.review_state', 'approved')
+            ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null);
+
+        $this->assertStringNotContainsString('Legacy Cached Reviewer', $response->getContent());
+        $this->assertStringNotContainsString('Private Review Organization', $response->getContent());
     }
 
     public function test_big_five_v2_projection_fails_closed_for_legacy_authority_and_does_not_fabricate_people(): void

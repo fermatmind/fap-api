@@ -28,6 +28,8 @@ final class PersonalityPublicContentAssetController extends Controller
 
     private const ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION = 'enneagram-authority-v2';
 
+    private const PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION = 'public-review-contract-v1';
+
     public function __construct(
         private readonly PersonalityPublicAssetReadModelCache $readModelCache,
         private readonly PublicReviewContract $publicReviewContract,
@@ -786,6 +788,7 @@ final class PersonalityPublicContentAssetController extends Controller
 
         try {
             $version = $this->readModelCache->versionFor($asset);
+            $version .= ':projection:'.self::PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION;
             if ($framework === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM) {
                 $version .= ':projection:'.self::ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION;
             }
@@ -921,6 +924,13 @@ final class PersonalityPublicContentAssetController extends Controller
                     $payload['personality_public_content_asset_v1']['seo'],
                 );
             }
+            $payload['personality_public_content_asset_v1'] = array_merge(
+                $payload['personality_public_content_asset_v1'],
+                $this->publicReviewContract->project(
+                    $payload['personality_public_content_asset_v1']['review_state'] ?? null,
+                    $payload['personality_public_content_asset_v1']['last_reviewed_at'] ?? null,
+                ),
+            );
         }
 
         if (is_array($payload['personality_public_content_asset_v2'] ?? null)) {
@@ -934,6 +944,16 @@ final class PersonalityPublicContentAssetController extends Controller
                     'schema_eligible',
                 ], true),
             );
+            $editorialAuthority = $payload['personality_public_content_asset_v2']['editorial_authority'] ?? null;
+            if (is_array($editorialAuthority)) {
+                $payload['personality_public_content_asset_v2']['editorial_authority'] = array_merge(
+                    $editorialAuthority,
+                    $this->publicReviewContract->project(
+                        $editorialAuthority['review_state'] ?? null,
+                        $editorialAuthority['last_reviewed_at'] ?? null,
+                    ),
+                );
+            }
         }
 
         if (is_array($payload['items'] ?? null)) {
