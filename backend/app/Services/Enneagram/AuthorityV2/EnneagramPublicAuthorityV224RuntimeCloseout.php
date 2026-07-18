@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
 
+/** @review-surface enneagram_review_binder */
 final class EnneagramPublicAuthorityV224RuntimeCloseout
 {
     public const ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E';

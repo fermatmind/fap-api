@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use RuntimeException;
 use Throwable;
 
+/** @review-surface enneagram_review_binder */
 final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
 {
     /** @var resource|null */

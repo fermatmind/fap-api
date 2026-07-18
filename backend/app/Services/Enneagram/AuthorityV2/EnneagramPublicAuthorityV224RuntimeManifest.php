@@ -12,6 +12,7 @@ use App\Services\ReviewGovernance\ReviewAttestationSchema;
 use Carbon\CarbonImmutable;
 use RuntimeException;
 
+/** @review-surface enneagram_review_binder */
 final class EnneagramPublicAuthorityV224RuntimeManifest
 {
     public const ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E';
