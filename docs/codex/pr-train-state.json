@@ -97192,9 +97192,14 @@
       "at": "2026-07-18T09:25:49Z",
       "status": "review_fix_local_checks_passed",
       "note": "Commit 9487f37476ab89635633e6103425ab7d9ea9c4d6 requires current solo_owner mode and current configured owner identity before reusing bound Personality evidence. The corrupt temporary SQLite was preserved as /tmp/fap-ci.sqlite.corrupt-pr3162-20260718T0917Z, and a clean complete gate passed, including Big Five 1510 tests/181790 assertions, Personality full-32 71 tests/5383 assertions, and CommerceOrderReadFallback 15 tests/163 assertions. All 23 PR PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, and PR-semantic scope validation reported 27 paths with zero outside. Generated Big Five files were restored exactly; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T09:29:52Z",
+      "status": "github_checks_pending",
+      "note": "Origin main advanced with merged Career PR #3163 while the PR03 review fix was in progress, making PR #3162 temporarily conflicting. Merge commit e04909b1590977451d69427034c891187f109445 integrated origin/main; the only conflicts were append-at-end train metadata and were resolved by preserving the complete PR03 entries plus the complete Career entries from main. YAML/JSON parsing, diff checks, the 48-test/782-assertion focused suite, and PR-semantic 27-path/zero-outside validation passed after the merge. Exact-head GitHub checks and Codex review are pending."
     }
   ],
-  "updated_at": "2026-07-18T09:25:49Z"
+  "updated_at": "2026-07-18T09:29:52Z"
 },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
