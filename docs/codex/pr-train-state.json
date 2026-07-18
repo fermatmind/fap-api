@@ -97236,7 +97236,7 @@
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
     "status": "local_checks_passed",
-    "commit_sha": null,
+    "commit_sha": "585312ddc815f0c6891acb4efddc651050a6e250",
     "pr_url": null,
     "checks": {
       "dependency": {
@@ -97283,9 +97283,14 @@
         "at": "2026-07-18T11:00:52Z",
         "status": "local_checks_passed",
         "note": "Final completed-worktree validation passed: focused review/architecture 14 tests/355 assertions, exact runtime-freeze controls 2 tests/5 assertions, syntax and Pint on all six PHP paths, Composer strict, command registration, YAML/JSON, diff, and exact ten-path scope checks. The rerun complete ci_verify_mbti.sh gate passed, including Big Five 1524 tests/187973 assertions and all downstream Enneagram, MBTI, Personality, migration, security, OpenAPI, order, dependency, webhook, and attempt gates. Generated Big Five timestamp/hash noise was restored exactly. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T11:02:03Z",
+        "status": "local_checks_passed",
+        "note": "Committed the exact ten-path implementation as 585312ddc815f0c6891acb4efddc651050a6e250 after all required local validation passed. This ledger-only follow-up records that immutable implementation commit before push; no runtime or production action occurred."
       }
     ],
-    "updated_at": "2026-07-18T11:00:52Z"
+    "updated_at": "2026-07-18T11:02:03Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
