@@ -895,8 +895,12 @@ class PersonalityController extends Controller
 
         $payload = is_array($section->payload_json) ? $section->payload_json : [];
         $content = is_array($payload['content'] ?? null) ? $payload['content'] : [];
-        if (is_array($payload['sections'] ?? null)) {
-            $content['sections'] = array_values($payload['sections']);
+        if (array_key_exists('sections', $payload)) {
+            if (is_array($payload['sections'])) {
+                $content['sections'] = array_values($payload['sections']);
+            } else {
+                unset($content['sections']);
+            }
         }
         $seo = is_array($content['seo'] ?? null) ? $content['seo'] : (is_array($payload['seo'] ?? null) ? $payload['seo'] : []);
 

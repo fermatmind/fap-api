@@ -1505,6 +1505,11 @@ final class PersonalityPublicApiTest extends TestCase
         ];
         if ($invalidSections !== null) {
             $payload['sections'] = $invalidSections;
+            $payload['content']['sections'] = [[
+                'key' => 'stale_nested_section',
+                'title' => 'Stale nested section',
+                'body' => 'Malformed top-level authority must fail closed.',
+            ]];
         }
         PersonalityProfileSection::query()->create([
             'profile_id' => (int) $profile->id,

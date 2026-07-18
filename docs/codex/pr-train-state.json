@@ -97552,7 +97552,7 @@
     "branch": "codex/mbti-comp-projection-45",
     "title": "MBTI-COMP-PROJECTION-45: repair A/T comparison public projection",
     "depends_on": [],
-    "status": "pr_open",
+    "status": "review_fix_validated",
     "commit_sha": "1fb976b5d6b02b336c8b7b2978ea8fbf3b662f66",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3175",
     "checks": {
@@ -97566,7 +97566,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "The focused public API suite passed 20 tests / 510 assertions across all sixteen A/T types, including fifteen top-level payload_json.sections projections, the legacy INTP nested sections projection, exact nine-section order/title/body/rows, FAQ/canonical/robots/JSON-LD, top-level authority precedence, and absent/malformed fail-closed cases. Scoped Pint, PHP syntax, route discovery, a fresh complete SQLite migration, strict Composer validation, YAML/JSON parsing, git diff checks, exact four-path scope validation, and the complete ci_verify_mbti.sh gate passed. Verification-generated Big Five compiled diffs were restored and are excluded."
+        "evidence": "The focused public API suite passed 20 tests / 510 assertions across all sixteen A/T types, including fifteen top-level payload_json.sections projections, the legacy INTP nested sections projection, exact nine-section order/title/body/rows, FAQ/canonical/robots/JSON-LD, top-level authority precedence, and absent/malformed fail-closed cases. After review identified a malformed-top-level/stale-nested edge case, the controller and fixture were tightened so only an absent top-level key may use the legacy nested shape; malformed top-level authority explicitly removes stale nested sections. PHP syntax, scoped Pint, and the focused 20-test suite passed again, followed by a second complete ci_verify_mbti.sh pass. Route discovery, a fresh complete SQLite migration, strict Composer validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope validation also passed. Verification-generated Big Five compiled diffs were restored and are excluded."
       }
     },
     "scope_validation": {
@@ -97606,8 +97606,13 @@
         "at": "2026-07-18T16:04:05Z",
         "status": "pr_open",
         "note": "Opened PR #3175 from the exact scoped branch. GitHub reports the PR open and mergeable; required checks are pending on head 1fb976b5d6b02b336c8b7b2978ea8fbf3b662f66."
+      },
+      {
+        "at": "2026-07-18T16:22:18Z",
+        "status": "review_fix_validated",
+        "note": "Addressed the single P2 review thread within the declared controller/test scope: a malformed present top-level sections key now fails closed instead of exposing stale nested legacy sections, while an absent key retains INTP compatibility. PHP syntax, scoped Pint, the focused 20 tests / 510 assertions, and the complete ci_verify_mbti.sh gate passed after the fix. Generated Big Five compiled diffs were restored."
       }
     ],
-    "updated_at": "2026-07-18T16:04:05Z"
+    "updated_at": "2026-07-18T16:22:18Z"
   }
 }
