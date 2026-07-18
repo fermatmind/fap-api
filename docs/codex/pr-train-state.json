@@ -97839,8 +97839,8 @@
     "depends_on": [
       "CAREER-DETAIL-ATOMIC-EXPOSURE-01"
     ],
-    "status": "review_fix_local_validation_passed",
-    "commit_sha": "17ae73527c1bb366cbf68dcd624e66fe8ca33c19",
+    "status": "ready_to_merge",
+    "commit_sha": "e64eacaabc6d633c5a4b28969cbbdbf0d4f587df",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3176",
     "checks": {
       "authorization": {
@@ -97856,14 +97856,14 @@
         "evidence": "After reconciliation with main 781d1636b, Career cache coverage ultimately passed 8 tests / 96 assertions, runtime SLO passed 7 tests / 38 assertions, deploy guards passed 2 tests / 16 assertions, and Big Five runtime freeze passed 2 tests / 5 assertions. Default scheduling excludes repair; explicit opt-in schedules minimum-targets=2092, batch-size=37, and the durable resume key. Scoped Pint passed after every fix; composer validate --strict, deploy.php lint, YAML/JSON parsing, diff checks, and exact 13-path scope validation passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "All nine required CI/code-scanning checks passed on exact implementation head e64eacaabc6d633c5a4b28969cbbdbf0d4f587df: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97916,9 +97916,14 @@
         "at": "2026-07-18T17:08:43Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine checks passed on 38734e75edbd95f82077bc4c86a47a97fe8dcccb and four earlier threads were resolved. Two new valid same-scope findings were inspected: CLI minimum-targets now rejects malformed or oversized values before inspection/write, and a completed repair cursor wraps on the next invocation so later missing/broken regressions are rediscovered. The wrap remains bounded, missing-only, resumable, and protected by the job's 300-second uniqueness lock. Focused coverage/SLO/freeze tests, Pint, diff checks, and exact scope validation passed."
+      },
+      {
+        "at": "2026-07-18T17:16:19Z",
+        "status": "ready_to_merge",
+        "note": "All nine required checks passed on exact implementation head e64eacaabc6d633c5a4b28969cbbdbf0d4f587df. All six review threads are resolved, GitHub reports OPEN/CLEAN/MERGEABLE, the worktree is clean, and exact 13-path scope validation passes. This ledger-only transition must pass its own exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T17:08:43Z"
+    "updated_at": "2026-07-18T17:16:19Z"
   },
   "MBTI-COMP-PROJECTION-45": {
     "id": "MBTI-COMP-PROJECTION-45",
