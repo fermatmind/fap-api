@@ -97157,8 +97157,8 @@
     "depends_on": [
       "CAREER-DETAIL-COLD-MISS-DEGRADE-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "implementation_committed",
+    "commit_sha": "a348b450224ecce6c937868a6d948aa47f495913",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -97204,8 +97204,13 @@
         "at": "2026-07-18T09:20:56Z",
         "status": "local_checks_passed",
         "note": "All PR2 manifest-focused tests and static gates passed. A concurrently running external ci_verify_mbti process corrupted the shared /tmp/fap-ci.sqlite before assertions; the unchanged warm-command suite passed 14/143 against process-private SQLite, and the external collision is recorded in both fixed sidecar files. Exact changed scope is ten allowlisted paths. No production repair, CMS/DB write, publication, staging wait, deploy, scheduler, public response, directory, or frontend change occurred."
+      },
+      {
+        "at": "2026-07-18T09:21:40Z",
+        "status": "implementation_committed",
+        "note": "Committed the exact ten-path PR2 implementation as a348b450224ecce6c937868a6d948aa47f495913 after all focused checks and cached scope validation passed. This ledger-only follow-up binds the real implementation commit before push."
       }
     ],
-    "updated_at": "2026-07-18T09:20:56Z"
+    "updated_at": "2026-07-18T09:21:40Z"
   }
 }
