@@ -240,6 +240,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_solo_owner_cms_review_files(): void
+    {
+        $allowed = [
+            'backend/app/Filament/Ops/Resources/InterpretationGuideResource/Pages/EditInterpretationGuide.php',
+            'backend/app/Filament/Ops/Resources/SupportArticleResource/Pages/EditSupportArticle.php',
+            'backend/app/Filament/Ops/Support/EditorialReviewAudit.php',
+            'backend/app/Services/Cms/CmsEditorialReviewAttestationService.php',
+            'backend/app/Services/Cms/CmsEditorialReviewTransitionService.php',
+            'backend/app/Services/Cms/InterpretationGuideTranslationAdapter.php',
+            'backend/app/Services/Cms/SiblingTranslationWorkflowService.php',
+            'backend/app/Services/Cms/SupportArticleTranslationAdapter.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+        ];
+        $blocked = [
+            'backend/app/Filament/Ops/Resources/PersonalityPublicContentAssetResource/Pages/EditPersonalityPublicContentAsset.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationPublisher.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -6001,6 +6024,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSoloOwnerCmsReviewFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -7768,6 +7795,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
             ], true)
             || $file === 'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php';
+    }
+
+    private function isSoloOwnerCmsReviewFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/InterpretationGuideResource/Pages/EditInterpretationGuide.php',
+            'backend/app/Filament/Ops/Resources/SupportArticleResource/Pages/EditSupportArticle.php',
+            'backend/app/Filament/Ops/Support/EditorialReviewAudit.php',
+            'backend/app/Services/Cms/CmsEditorialReviewAttestationService.php',
+            'backend/app/Services/Cms/CmsEditorialReviewTransitionService.php',
+            'backend/app/Services/Cms/InterpretationGuideTranslationAdapter.php',
+            'backend/app/Services/Cms/SiblingTranslationWorkflowService.php',
+            'backend/app/Services/Cms/SupportArticleTranslationAdapter.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+        ], true);
     }
 
     private function isCareerConsoleCommandFile(string $file): bool
