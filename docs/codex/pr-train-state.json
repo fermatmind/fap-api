@@ -97391,11 +97391,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the sixth exact-head review repair, focused approval/registry validation passed 20 tests/469 assertions and the exact Ops approval runtime-freeze contract passed 1/2. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed through Big Five 1530/188021, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Tests prove fresh per-action step-up, immutable per-attempt execution-actor binding, worker-side validation, domain execution under that actor, exact execution audit attribution, and zero reject-audit capture of the submitted step-up code."
+        "evidence": "After the seventh exact-head review repair, focused approval/registry validation passed 21 tests/475 assertions and the exact Ops approval runtime-freeze contract passed 1/2. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed through Big Five 1530/188021, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Tests prove fresh per-action step-up, immutable per-attempt execution-actor binding, worker-side validation, domain execution under that actor, exact execution audit attribution, zero reject-audit capture of the submitted step-up code, and content release/owner permission at rollback execution."
       },
       "github": {
         "status": "pending",
-        "evidence": "PR #3172 is open. Implementation head 2854dc32eabad729987ea55247e701effd877ecf passed all nine checks. Sixth exact-head review found that reject auditing could capture fresh_step_up_code through request()->all(); the scoped explicit params_sanitized repair and dynamic non-leak regression passed the full local gate and are pending push/check rerun."
+        "evidence": "PR #3172 is open. Sixth repair head 03cc2dd9002fd6e9c455f19f34c666838be81591 passed all nine checks. Seventh exact-head review found that a review-only execution actor could bypass the rollback request surface's content release permission; the scoped executor permission gate and team-separated regression passed the full local gate and are pending push/check rerun."
       }
     },
     "scope_validation": {
@@ -97479,9 +97479,19 @@
         "at": "2026-07-18T15:36:37Z",
         "status": "review_fix_local_checks_passed",
         "note": "Sixth exact-head Codex review on 2854dc32eabad729987ea55247e701effd877ecf found one P1: the reject Filament action passed a request containing fresh_step_up_code to AuditLogger, whose default params_sanitized captured request()->all(). The reject audit now supplies an explicit safe params_sanitized allowlist containing only reason_append; a dynamic request/audit regression proves neither the private value nor field name reaches audit meta. Focused approval/registry tests passed 20/469, exact Ops runtime-freeze passed 1/2, scoped Pint/PHP syntax/diff checks passed, and the exact full ci_verify_mbti.sh gate exited 0 through final cleanup. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T15:47:11Z",
+        "status": "local_check_failed_environment_then_repaired",
+        "note": "Another task switched the shared primary worktree to codex/mbti-comp-projection-45, so PR05 continued in an isolated worktree. The first focused test command incorrectly reused the primary worktree's optimized Composer vendor symlink; its classmap loaded old branch classes and reported HighRiskApprovalService missing plus stale registry/executor behavior. Replaced the symlink with an isolated vendor copy, rebuilt autoload without scripts, and reran successfully. This was an environment-path failure, not a product-code failure; the shared vendor and other task branch were not modified."
+      },
+      {
+        "at": "2026-07-18T15:54:54Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Seventh exact-head Codex review on 03cc2dd9002fd6e9c455f19f34c666838be81591 found one P1: the now-exact execution actor could run ROLLBACK_RELEASE with approval-review permission but without the content-release/owner permission required on the request surface. ApprovalExecutor now fails before any rollback transaction unless the bound execution actor has admin.content.release or admin.owner. A team-separated regression proves a review-only executor receives ROLLBACK_RELEASE_FORBIDDEN, creates no release row or rollback audit, and owns the failure audit. Focused approval/registry tests passed 21/475, runtime-freeze 1/2, scoped Pint/PHP syntax/diff checks passed, and the exact full ci_verify_mbti.sh gate exited 0 through final cleanup. No real rollback, release, or production mutation occurred."
       }
     ],
-    "updated_at": "2026-07-18T15:36:37Z"
+    "updated_at": "2026-07-18T15:54:54Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",

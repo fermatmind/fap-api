@@ -12,6 +12,7 @@ use App\Actions\Commerce\RevokeBenefitAction;
 use App\Models\AdminApproval;
 use App\Models\AdminUser;
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -291,6 +292,14 @@ final class ApprovalExecutor
      */
     private function executeRollbackRelease(AdminUser $actor, AdminApproval $approval, array $payload): ActionResult
     {
+        if (! $actor->hasPermission(PermissionNames::ADMIN_CONTENT_RELEASE)
+            && ! $actor->hasPermission(PermissionNames::ADMIN_OWNER)) {
+            return ActionResult::failure(
+                'ROLLBACK_RELEASE_FORBIDDEN',
+                'content release permission is required for rollback execution.',
+            );
+        }
+
         $orderNo = trim((string) ($payload['order_no'] ?? ''));
         $safeReason = (string) $this->redactSensitive((string) $approval->reason);
         $httpMeta = $this->auditHttpMeta();

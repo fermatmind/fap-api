@@ -253,6 +253,7 @@ class ApprovalFlowTest extends TestCase
         $actor = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_OPS_WRITE,
             PermissionNames::ADMIN_OPS_READ,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
 
         $approval = AdminApproval::query()->create([
@@ -291,6 +292,72 @@ class ApprovalFlowTest extends TestCase
         $this->assertNotNull($audit);
         $meta = json_decode((string) ($audit->meta_json ?? '{}'), true);
         $this->assertSame('ord_rb_1', (string) ($meta['order_no'] ?? ''));
+    }
+
+    public function test_review_only_execution_actor_cannot_execute_content_release_rollback(): void
+    {
+        config(['queue.default' => 'sync']);
+        config()->set('review_governance.mode', 'team_separated');
+
+        $requester = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        $reviewOnlyExecutor = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+
+        $approval = AdminApproval::query()->create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 7,
+            'type' => AdminApproval::TYPE_ROLLBACK_RELEASE,
+            'status' => AdminApproval::STATUS_PENDING,
+            'requested_by_admin_user_id' => (int) $requester->id,
+            'reason' => 'rollback requires release permission',
+            'payload_json' => [
+                'order_no' => 'ord_rb_forbidden',
+                'region' => 'GLOBAL',
+                'locale' => 'en',
+                'dir_alias' => 'default',
+                'from_version_id' => (string) Str::uuid(),
+                'to_version_id' => (string) Str::uuid(),
+            ],
+            'correlation_id' => (string) Str::uuid(),
+        ]);
+
+        $this->enableTotp($reviewer);
+        app(HighRiskApprovalService::class)->approve(
+            (string) $approval->id,
+            (int) $reviewer->id,
+            $this->freshStepUpCode($reviewer),
+        );
+        $this->enableTotp($reviewOnlyExecutor);
+        app(HighRiskApprovalService::class)->authorizeExecution(
+            (string) $approval->id,
+            (int) $reviewOnlyExecutor->id,
+            $this->freshStepUpCode($reviewOnlyExecutor),
+        );
+
+        $result = app(ApprovalExecutor::class)->execute((string) $approval->id);
+
+        $this->assertFalse($result->ok);
+        $this->assertSame('ROLLBACK_RELEASE_FORBIDDEN', $result->code);
+        $this->assertSame(AdminApproval::STATUS_FAILED, (string) $approval->fresh()->status);
+        $this->assertDatabaseMissing('content_pack_releases', [
+            'action' => 'rollback',
+            'dir_alias' => 'default',
+        ]);
+        $this->assertDatabaseMissing('audit_logs', [
+            'target_id' => (string) $approval->id,
+            'action' => 'content_release_rollback',
+        ]);
+        $this->assertDatabaseHas('audit_logs', [
+            'target_id' => (string) $approval->id,
+            'actor_admin_id' => (int) $reviewOnlyExecutor->id,
+            'action' => 'approval_executed_failed',
+        ]);
     }
 
     /**
