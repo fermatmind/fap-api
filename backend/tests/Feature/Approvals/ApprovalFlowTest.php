@@ -51,6 +51,7 @@ class ApprovalFlowTest extends TestCase
         ]);
 
         $requester = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_OPS_WRITE,
             PermissionNames::ADMIN_FINANCE_WRITE,
             PermissionNames::ADMIN_OPS_READ,
@@ -59,13 +60,6 @@ class ApprovalFlowTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_OPS_READ,
         ]);
-        $executor = $this->createAdminWithPermissions([
-            PermissionNames::ADMIN_APPROVAL_REVIEW,
-            PermissionNames::ADMIN_OPS_WRITE,
-            PermissionNames::ADMIN_FINANCE_WRITE,
-            PermissionNames::ADMIN_OPS_READ,
-        ]);
-
         $approval = AdminApproval::query()->create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -102,11 +96,11 @@ class ApprovalFlowTest extends TestCase
             (int) $reviewer->id,
             $this->freshStepUpCode($reviewer),
         );
-        $this->enableTotp($executor);
+        $this->enableTotp($requester);
         app(HighRiskApprovalService::class)->authorizeExecution(
             (string) $approval->id,
-            (int) $executor->id,
-            $this->freshStepUpCode($executor),
+            (int) $requester->id,
+            $this->freshStepUpCode($requester),
         );
         try {
             app(HighRiskApprovalService::class)->authorizeExecution(
@@ -130,7 +124,7 @@ class ApprovalFlowTest extends TestCase
 
         $this->assertDatabaseHas('audit_logs', [
             'org_id' => 0,
-            'actor_admin_id' => (int) $executor->id,
+            'actor_admin_id' => (int) $requester->id,
             'action' => 'approval_executed_success',
             'target_type' => 'AdminApproval',
             'target_id' => (string) $approval->id,

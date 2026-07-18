@@ -84,7 +84,7 @@ final readonly class HighRiskApprovalService
 
             $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
             $this->assertApprovalInputs($approval);
-            $this->assertActorPolicy($approval, $actorAdminUserId);
+            $this->assertApproverPolicy($approval, $actorAdminUserId);
 
             if (strtoupper((string) $approval->status) === AdminApproval::STATUS_APPROVED) {
                 if ((int) $approval->approved_by_admin_user_id !== $actorAdminUserId) {
@@ -134,7 +134,7 @@ final readonly class HighRiskApprovalService
 
             $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
             $this->assertApprovalInputs($approval);
-            $this->assertActorPolicy($approval, $actorAdminUserId);
+            $this->assertApproverPolicy($approval, $actorAdminUserId);
             if (! $this->requiresLegacyGovernanceBinding($approval)) {
                 throw new HighRiskApprovalValidationException('Approval does not require legacy governance binding.');
             }
@@ -187,7 +187,7 @@ final readonly class HighRiskApprovalService
             throw new HighRiskApprovalValidationException('Approval evidence SHA-256 is invalid or drifted.');
         }
 
-        $this->assertActorPolicy($approval, $approvedBy);
+        $this->assertApproverPolicy($approval, $approvedBy);
     }
 
     public function authorizeExecution(
@@ -216,7 +216,7 @@ final readonly class HighRiskApprovalService
                         : 'Only approved approvals can be authorized for execution.',
                 );
             }
-            $this->assertActorPolicy($approval, $actorAdminUserId);
+            $this->assertExecutionActorPolicy($actorAdminUserId);
 
             if (! $retryFailed && $this->hasExecutionAuthorization($approval)) {
                 try {
@@ -311,7 +311,7 @@ final readonly class HighRiskApprovalService
             throw new HighRiskApprovalValidationException('Execution authorization evidence is invalid, stale, or drifted.');
         }
 
-        $this->assertActorPolicy($approval, $actorAdminUserId);
+        $this->assertExecutionActorPolicy($actorAdminUserId);
         $actor = AdminUser::query()->find($actorAdminUserId);
         if (! $actor) {
             throw new HighRiskApprovalValidationException('Execution actor was not found.');
@@ -429,7 +429,7 @@ final readonly class HighRiskApprovalService
         }
     }
 
-    private function assertActorPolicy(AdminApproval $approval, int $actorAdminUserId): void
+    private function assertApproverPolicy(AdminApproval $approval, int $actorAdminUserId): void
     {
         $mode = (string) config('review_governance.mode');
         $requester = (int) ($approval->requested_by_admin_user_id ?? 0);
@@ -450,6 +450,28 @@ final readonly class HighRiskApprovalService
         }
 
         throw new HighRiskApprovalValidationException('Review governance mode is not supported for high-risk approval.');
+    }
+
+    private function assertExecutionActorPolicy(int $actorAdminUserId): void
+    {
+        $mode = (string) config('review_governance.mode');
+        if ($mode === 'solo_owner') {
+            $owner = (int) config('review_governance.solo_owner_admin_user_id');
+            if ($owner <= 0 || $actorAdminUserId !== $owner) {
+                throw new HighRiskApprovalValidationException('Execution actor is not the configured solo owner.');
+            }
+
+            return;
+        }
+        if ($mode === 'team_separated') {
+            if ($actorAdminUserId <= 0) {
+                throw new HighRiskApprovalValidationException('Team-separated execution requires a valid administrator.');
+            }
+
+            return;
+        }
+
+        throw new HighRiskApprovalValidationException('Review governance mode is not supported for high-risk execution.');
     }
 
     /** @return array<string, mixed> */
