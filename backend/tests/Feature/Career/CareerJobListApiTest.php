@@ -7,7 +7,9 @@ namespace Tests\Feature\Career;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
+use App\Models\CareerJobSeoMeta;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationCrosswalk;
@@ -89,6 +91,46 @@ final class CareerJobListApiTest extends TestCase
                     'provenance_meta' => ['compiler_version', 'compile_run_id'],
                 ]],
             ]);
+    }
+
+    public function test_docx_backed_job_review_contract_fails_closed_without_human_review_evidence(): void
+    {
+        $job = CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => 'docx-review-contract-list',
+            'slug' => 'docx-review-contract-list',
+            'locale' => 'zh-CN',
+            'title' => 'DOCX 审核契约职业',
+            'subtitle' => 'DOCX Review Contract Job',
+            'excerpt' => 'DOCX review contract fixture.',
+            'body_md' => '# DOCX review contract fixture',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [[
+                    'label' => 'BLS Occupational Outlook Handbook',
+                    'url' => 'https://www.bls.gov/ooh/fixture.htm',
+                ]],
+            ],
+        ]);
+        CareerJobSeoMeta::query()->create([
+            'job_id' => (int) $job->id,
+            'jsonld_overrides_json' => [
+                'source_docx' => 'docx-review-contract-list.docx',
+            ],
+        ]);
+        $this->markDetailReady('docx-review-contract-list');
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'docx-review-contract-list')
+            ->assertJsonPath('items.0.trust_summary.reviewer_status', 'docx_baseline_imported')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.trust_summary.reviewer', null);
     }
 
     public function test_it_serves_cached_public_job_index_payload_without_rebuilding_the_bundle(): void

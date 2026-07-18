@@ -472,7 +472,7 @@ final class CareerJobListBundleBuilder
             trustSummary: [
                 'reviewer_status' => 'docx_baseline_imported',
                 'reviewed_at' => optional($job->updated_at)->toISOString(),
-                ...$this->publicReviewContract->project('docx_baseline_imported', $job->updated_at),
+                ...$this->publicReviewContract->project('docx_baseline_imported'),
                 'content_version' => 'docx_342_career_batch',
                 'data_version' => 'docx_342_career_batch',
                 'logic_version' => 'career.protocol.job_detail.docx_baseline.v1',

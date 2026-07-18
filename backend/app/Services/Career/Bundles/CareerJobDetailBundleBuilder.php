@@ -800,7 +800,7 @@ final class CareerJobDetailBundleBuilder
                 ],
                 'reviewer_status' => 'approved',
                 'reviewed_at' => optional($job->updated_at)->toISOString(),
-                ...$this->publicReviewContract->project('approved', $job->updated_at),
+                ...$this->publicReviewContract->project('docx_baseline_imported'),
                 'ai_assistance' => [
                     'used' => true,
                     'summary' => 'DOCX baseline content was generated before import and preserved as backend CMS authority.',
