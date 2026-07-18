@@ -351,6 +351,25 @@ Behavior:
 - Do not rebuild expensive runtime projection synchronously during public
   request handling.
 
+Detail cache recovery follows a fixed request-path order:
+
+1. Return the active versioned projection with
+   `X-Fermat-Public-Read-Cache: fresh`.
+2. Return the last-known-good projection, or promote and return the one-release
+   legacy projection, with `X-Fermat-Public-Read-Cache: stale`.
+3. When all three are missing for an otherwise published locale, return a
+   backend-built restricted recovery shell with
+   `X-Fermat-Public-Read-Cache: degraded` and enqueue one idempotent unique
+   per-slug/per-locale warm job.
+
+The degraded shell carries route identity and recovery navigation only. It is
+non-indexable, blocks strong claims, salary, market, AI, scoring, evidence, and
+structured-data assertions, and must not query CMS/DB or invoke the full detail
+bundle assembler on the public request. Queue-dispatch failure is logged with
+safe slug/locale/error-class metadata and must not turn the shell into a 500.
+Unknown, hidden, held, release-blocked, or locale-mismatched projection states
+remain 404 and do not enqueue a warm job.
+
 ### SEO Authority Endpoint
 
 SEO authority must align with the same runtime detail gate used by the public

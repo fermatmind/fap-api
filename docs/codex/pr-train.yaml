@@ -45280,3 +45280,57 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: CMS/backend
+
+  - id: CAREER-DETAIL-COLD-MISS-DEGRADE-01
+    repo: fap-api
+    base: main
+    branch: codex/career-detail-cold-miss-degrade-01
+    title: "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500"
+    status: in_progress
+    depends_on: []
+    train_scope: career_detail_cold_miss_degradation
+    scope:
+      - Preserve active, last-known-good, and one-release legacy Career detail projection reads in that order.
+      - Return a backend-authoritative restricted minimal shell instead of a generic 500 when every projection cache is missing for an otherwise published slug and locale.
+      - Enqueue one unique and idempotent per-slug/per-locale warm job without restoring full synchronous request-time detail assembly.
+      - Preserve 404 behavior for unknown, hidden, held, release-blocked, and locale-mismatched projection states.
+    allowed_paths:
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php
+      - backend/app/Services/Career/Bundles/CareerJobDetailDegradedShellBuilder.php
+      - backend/app/Jobs/Career/WarmCareerJobDetailProjection.php
+      - backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php
+      - backend/tests/Feature/Career/CareerJobDetailApiTest.php
+      - backend/tests/Feature/V0_5/CareerJobPublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/career/README.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Add cache coverage audit, bulk recovery, directory readiness, publication gates, deploy hooks, scheduler, SLO repair, or frontend behavior from later train items.
+      - Restore full detail bundle, SEO, scoring, evidence, or CMS/DB assembly on the public HTTP request path.
+      - Add frontend or local Career content fallback, change public content authority, canonical, sitemap, llms, JSON-LD, or publication/indexability decisions.
+      - Warm production cache, mutate CMS/DB, import, publish, deploy, or wait for staging deployment.
+    validation:
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailReadModel10kTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailApiTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_5/CareerJobPublicApiTest.php --filter='detail|published|runtime' --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_career_detail_read_model_10k' --no-ansi
+      - cd backend && php artisan route:list --path=api/v0.5/career/jobs --except-vendor
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php app/Services/Career/PublicCareerAuthorityResponseCache.php app/Services/Career/Bundles/CareerJobDetailDegradedShellBuilder.php tests/Feature/Career/CareerJobDetailReadModel10kTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
