@@ -97552,8 +97552,8 @@
     "branch": "codex/mbti-comp-projection-45",
     "title": "MBTI-COMP-PROJECTION-45: repair A/T comparison public projection",
     "depends_on": [],
-    "status": "in_progress",
-    "commit_sha": null,
+    "status": "committed",
+    "commit_sha": "7a3a421a04e6d14ae37091350f2fc0a7d650d832",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -97596,8 +97596,13 @@
         "at": "2026-07-18T16:01:29Z",
         "status": "local_checks_passed",
         "note": "All manifest checks passed. The exact four changed paths project DB/CMS top-level sections with legacy DB payload compatibility and verify all sixteen A/T contracts plus malformed/absent behavior. No production deploy/readback, CMS/DB write, publication/indexability mutation, sitemap/llms release, frontend fallback, or cross-type change occurred."
+      },
+      {
+        "at": "2026-07-18T16:03:11Z",
+        "status": "committed",
+        "note": "Committed the exact four-path scope as 7a3a421a04e6d14ae37091350f2fc0a7d650d832 after all required local checks and cached-diff validation passed."
       }
     ],
-    "updated_at": "2026-07-18T16:01:29Z"
+    "updated_at": "2026-07-18T16:03:11Z"
   }
 }
