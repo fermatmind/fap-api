@@ -55,6 +55,28 @@ final class CareerIndustryDirectoryApiTest extends TestCase
             ->assertJsonPath('industries.0.discovery_jobs.0.canonical_path', '/zh/career/jobs/accountants');
     }
 
+    public function test_it_excludes_unready_jobs_from_public_counts_and_discovery_links(): void
+    {
+        $payload = $this->directoryPayload();
+        $payload['items'][4]['detail_ready'] = false;
+        $this->putDirectoryVersion('en', 'active-v2', $payload);
+
+        $response = $this->getJson('/api/v0.5/career/industries?locale=en')
+            ->assertOk()
+            ->assertJsonPath('public_detail_indexable_count', 4)
+            ->assertJsonPath('industries.0.slug', 'business-finance')
+            ->assertJsonPath('industries.0.count', 3)
+            ->assertJsonPath('industries.0.public_detail_count', 3)
+            ->assertJsonPath('industries.0.indexable_count', 3);
+
+        $discoverySlugs = collect($response->json('industries'))
+            ->flatMap(static fn (array $industry): array => $industry['discovery_jobs'] ?? [])
+            ->pluck('slug')
+            ->all();
+
+        $this->assertNotContains('actuaries', $discoverySlugs);
+    }
+
     public function test_it_returns_a_retryable_service_error_when_no_active_or_lkg_read_model_exists(): void
     {
         $this->getJson('/api/v0.5/career/industries?locale=en')

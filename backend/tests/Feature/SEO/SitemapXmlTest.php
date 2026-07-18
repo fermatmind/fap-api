@@ -812,6 +812,16 @@ class SitemapXmlTest extends TestCase
         );
 
         Cache::flush();
+        $responseCache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($items as $item) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $responseCache->publishJobDetailReadModel((string) $item['slug'], $locale, [
+                    'identity' => ['canonical_slug' => $item['slug']],
+                    'locale' => $locale,
+                    'fixture' => true,
+                ]);
+            }
+        }
     }
 
     /**

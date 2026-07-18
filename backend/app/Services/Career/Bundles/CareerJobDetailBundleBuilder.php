@@ -49,14 +49,21 @@ final class CareerJobDetailBundleBuilder
         private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
     ) {}
 
-    public function buildBySlug(string $slug, ?string $publicLocale = null): ?CareerJobDetailBundle
-    {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    public function buildBySlug(
+        string $slug,
+        ?string $publicLocale = null,
+        ?array $exposureProjectionItem = null,
+    ): ?CareerJobDetailBundle {
         $normalizedSlug = strtolower(trim($slug));
         if ($normalizedSlug === '') {
             return null;
         }
 
-        if (! $this->runtimePublishProjection->detailRouteEnabled($normalizedSlug)) {
+        if (
+            ! $this->runtimePublishProjection->detailRouteEnabled($normalizedSlug)
+            && ! $this->projectionItemAllowsIndexing($exposureProjectionItem)
+        ) {
             return null;
         }
 
@@ -75,8 +82,8 @@ final class CareerJobDetailBundleBuilder
         }
 
         if ($occupation->crosswalk_mode === self::DIRECTORY_DRAFT_CROSSWALK_MODE) {
-            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale)
-                ?? $this->buildRuntimePublishedFallbackBundle($occupation, $normalizedSlug, $publicLocale);
+            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale, $exposureProjectionItem)
+                ?? $this->buildRuntimePublishedFallbackBundle($occupation, $normalizedSlug, $publicLocale, $exposureProjectionItem);
         }
 
         $snapshot = RecommendationSnapshot::query()
@@ -102,13 +109,23 @@ final class CareerJobDetailBundleBuilder
             ->first();
 
         if (! $snapshot instanceof RecommendationSnapshot) {
-            $displayAssetBackedBundle = $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale);
+            $displayAssetBackedBundle = $this->buildDisplayAssetBackedBundle(
+                $occupation,
+                $normalizedSlug,
+                $publicLocale,
+                $exposureProjectionItem,
+            );
             if ($displayAssetBackedBundle instanceof CareerJobDetailBundle) {
                 return $displayAssetBackedBundle;
             }
 
             return $this->buildFromPublishedDocxCareerJob($normalizedSlug, $publicLocale)
-                ?? $this->buildRuntimePublishedFallbackBundle($occupation, $normalizedSlug, $publicLocale);
+                ?? $this->buildRuntimePublishedFallbackBundle(
+                    $occupation,
+                    $normalizedSlug,
+                    $publicLocale,
+                    $exposureProjectionItem,
+                );
         }
 
         $payload = is_array($snapshot->snapshot_payload) ? $snapshot->snapshot_payload : [];
@@ -245,7 +262,12 @@ final class CareerJobDetailBundleBuilder
             warnings: $warnings,
             claimPermissions: $this->normalizeArray($payload['claim_permissions'] ?? []),
             integritySummary: $this->normalizeArray($payload['integrity_summary'] ?? []),
-            seoContract: $this->buildSeoContract($occupation, $snapshot, $publicLocale),
+            seoContract: $this->buildSeoContract(
+                $occupation,
+                $snapshot,
+                $publicLocale,
+                $exposureProjectionItem,
+            ),
             provenanceMeta: [
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
@@ -274,14 +296,19 @@ final class CareerJobDetailBundleBuilder
         );
     }
 
-    private function buildRuntimePublishedFallbackBundle(Occupation $occupation, string $requestedSlug, ?string $publicLocale = null): ?CareerJobDetailBundle
-    {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    private function buildRuntimePublishedFallbackBundle(
+        Occupation $occupation,
+        string $requestedSlug,
+        ?string $publicLocale = null,
+        ?array $exposureProjectionItem = null,
+    ): ?CareerJobDetailBundle {
         $subjectSlug = strtolower((string) $occupation->canonical_slug);
         if ($subjectSlug === '' || $subjectSlug !== strtolower($requestedSlug)) {
             return null;
         }
 
-        if (! $this->runtimeProjectionItemAllowsIndexing($subjectSlug, $publicLocale)) {
+        if (! $this->runtimeProjectionItemAllowsIndexing($subjectSlug, $publicLocale, $exposureProjectionItem)) {
             return null;
         }
 
@@ -412,7 +439,7 @@ final class CareerJobDetailBundleBuilder
                 'confidence_cap' => 50,
                 'degradation_factor' => 1,
             ],
-            seoContract: $this->buildRuntimeProjectionSeoContract($occupation, $publicLocale),
+            seoContract: $this->buildRuntimeProjectionSeoContract($occupation, $publicLocale, $exposureProjectionItem),
             provenanceMeta: [
                 'content_version' => 'runtime_published_navigation_shell',
                 'data_version' => 'career_runtime_publish_projection',
@@ -443,8 +470,13 @@ final class CareerJobDetailBundleBuilder
         );
     }
 
-    private function buildDisplayAssetBackedBundle(Occupation $occupation, string $requestedSlug, ?string $publicLocale = null): ?CareerJobDetailBundle
-    {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    private function buildDisplayAssetBackedBundle(
+        Occupation $occupation,
+        string $requestedSlug,
+        ?string $publicLocale = null,
+        ?array $exposureProjectionItem = null,
+    ): ?CareerJobDetailBundle {
         $subjectSlug = strtolower((string) $occupation->canonical_slug);
         if ($subjectSlug === '' || $subjectSlug !== strtolower($requestedSlug)) {
             return null;
@@ -598,7 +630,7 @@ final class CareerJobDetailBundleBuilder
                 'confidence_cap' => 60,
                 'degradation_factor' => 1,
             ],
-            seoContract: $this->buildDisplayAssetBackedSeoContract($occupation, $publicLocale),
+            seoContract: $this->buildDisplayAssetBackedSeoContract($occupation, $publicLocale, $exposureProjectionItem),
             provenanceMeta: [
                 'content_version' => 'display_asset_backed_v4_2',
                 'data_version' => 'career_job_display_assets.v4.2',
@@ -918,8 +950,13 @@ final class CareerJobDetailBundleBuilder
     /**
      * @return array<string, mixed>
      */
-    private function buildSeoContract(Occupation $occupation, RecommendationSnapshot $snapshot, ?string $publicLocale = null): array
-    {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    private function buildSeoContract(
+        Occupation $occupation,
+        RecommendationSnapshot $snapshot,
+        ?string $publicLocale = null,
+        ?array $exposureProjectionItem = null,
+    ): array {
         $indexState = $snapshot->indexState;
         $canonicalPath = is_string($indexState?->canonical_path) ? $indexState->canonical_path : '/career/jobs/'.$occupation->canonical_slug;
         $canonicalTarget = $indexState?->canonical_target;
@@ -927,8 +964,12 @@ final class CareerJobDetailBundleBuilder
             $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $occupation->canonical_slug);
             $canonicalTarget = $canonicalPath;
         }
-        $indexEligible = (bool) ($indexState?->index_eligible ?? false);
-        $publicIndexState = IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
+        $indexEligible = $exposureProjectionItem !== null
+            ? $this->projectionItemAllowsIndexing($exposureProjectionItem)
+            : (bool) ($indexState?->index_eligible ?? false);
+        $publicIndexState = $exposureProjectionItem !== null
+            ? ($indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED)
+            : IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => 'career_protocol_bundle',
@@ -946,7 +987,9 @@ final class CareerJobDetailBundleBuilder
             'canonical_target' => $canonicalTarget,
             'index_state' => $publicIndexState,
             'index_eligible' => $indexEligible,
-            'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
+            'reason_codes' => $exposureProjectionItem !== null && $indexEligible
+                ? ['runtime_publish_projection', 'canonical_rollout_batch_promotion']
+                : (is_array($indexState?->reason_codes) ? $indexState->reason_codes : []),
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
@@ -957,10 +1000,16 @@ final class CareerJobDetailBundleBuilder
     /**
      * @return array<string, mixed>
      */
-    private function buildDisplayAssetBackedSeoContract(Occupation $occupation, ?string $publicLocale = null): array
-    {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    private function buildDisplayAssetBackedSeoContract(
+        Occupation $occupation,
+        ?string $publicLocale = null,
+        ?array $exposureProjectionItem = null,
+    ): array {
         $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $occupation->canonical_slug);
-        $indexEligible = $this->runtimeProjectionVisibilityAllowsIndexing((string) $occupation->canonical_slug);
+        $indexEligible = $exposureProjectionItem !== null
+            ? $this->projectionItemAllowsIndexing($exposureProjectionItem)
+            : $this->runtimeProjectionVisibilityAllowsIndexing((string) $occupation->canonical_slug);
         $indexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED;
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
@@ -992,10 +1041,18 @@ final class CareerJobDetailBundleBuilder
     /**
      * @return array<string, mixed>
      */
-    private function buildRuntimeProjectionSeoContract(Occupation $occupation, ?string $publicLocale = null): array
-    {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    private function buildRuntimeProjectionSeoContract(
+        Occupation $occupation,
+        ?string $publicLocale = null,
+        ?array $exposureProjectionItem = null,
+    ): array {
         $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $occupation->canonical_slug);
-        $indexEligible = $this->runtimeProjectionItemAllowsIndexing((string) $occupation->canonical_slug, $publicLocale);
+        $indexEligible = $this->runtimeProjectionItemAllowsIndexing(
+            (string) $occupation->canonical_slug,
+            $publicLocale,
+            $exposureProjectionItem,
+        );
         $indexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::TRUST_LIMITED;
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
@@ -1031,9 +1088,20 @@ final class CareerJobDetailBundleBuilder
             && $this->runtimePublishProjection->releaseGatePass($slug);
     }
 
-    private function runtimeProjectionItemAllowsIndexing(string $slug, ?string $publicLocale = null): bool
+    /** @param array<string, mixed>|null $projectionItem */
+    private function runtimeProjectionItemAllowsIndexing(
+        string $slug,
+        ?string $publicLocale = null,
+        ?array $projectionItem = null,
+    ): bool {
+        $item = $projectionItem ?? $this->runtimePublishProjection->itemForSlug($slug, $publicLocale ?? 'en');
+
+        return $this->projectionItemAllowsIndexing($item);
+    }
+
+    /** @param array<string, mixed>|null $item */
+    private function projectionItemAllowsIndexing(?array $item): bool
     {
-        $item = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale ?? 'en');
         $state = is_array($item)
             ? (string) (
                 $item['runtime_publish_state']

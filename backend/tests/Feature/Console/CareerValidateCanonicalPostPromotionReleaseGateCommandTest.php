@@ -6,12 +6,31 @@ namespace Tests\Feature\Console;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerValidateCanonicalPostPromotionReleaseGateCommandTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Cache::flush();
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true),
+        );
+        app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel('actors', 'en', [
+            'identity' => ['canonical_slug' => 'actors'],
+            'fixture' => true,
+        ]);
+    }
+
     public function test_validate_canonical_post_promotion_release_gate_command_passes_for_valid_payload(): void
     {
         $manifestPath = $this->writeManifest([
@@ -91,6 +110,30 @@ final class CareerValidateCanonicalPostPromotionReleaseGateCommandTest extends T
         $this->assertNotEmpty($payload['failure_reasons'] ?? []);
         $this->assertEquals(0, (int) data_get($payload, 'release_gate_pass_count'));
         $this->assertEquals(1, (int) data_get($payload, 'release_gate_blocked_count'));
+    }
+
+    public function test_validate_canonical_post_promotion_release_gate_command_blocks_missing_detail_cache(): void
+    {
+        Cache::flush();
+        $manifestPath = $this->writeManifest([
+            'slugs' => ['actors'],
+            'locales' => ['en'],
+            'rollback_group' => ['actors'],
+        ]);
+        $truthPath = $this->writeTruth([$this->truthItem([])]);
+        $projectionPath = $this->writeProjection([$this->projectionItem([])]);
+
+        $exitCode = Artisan::call('career:validate-canonical-post-promotion-release-gate', [
+            '--manifest' => $manifestPath,
+            '--truth' => $truthPath,
+            '--projection' => $projectionPath,
+            '--json' => true,
+        ]);
+
+        $payload = json_decode(Artisan::output(), true);
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertContains('post_promotion_detail_cache_not_ready', $payload['failure_reasons'] ?? []);
     }
 
     /**

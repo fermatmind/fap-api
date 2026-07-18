@@ -11,8 +11,12 @@ final class CareerDirectoryReadModelBuilder
 {
     public const READ_MODEL_VERSION = 'career.directory_read_model.v1';
 
-    /** @param list<mixed> $rows @return array<string, mixed> */
-    public function build(array $rows, string $publicLocale): array
+    /**
+     * @param  list<mixed>  $rows
+     * @param  callable(string, string): bool  $detailReadiness
+     * @return array<string, mixed>
+     */
+    public function build(array $rows, string $publicLocale, callable $detailReadiness): array
     {
         $locale = $this->normalizePublicLocale($publicLocale);
         $localePrefix = $locale === 'zh-CN' ? 'zh' : 'en';
@@ -48,7 +52,7 @@ final class CareerDirectoryReadModelBuilder
                 'indexability_state' => $this->normalizeText($row['seo_contract']['index_state'] ?? null),
                 'robots_policy' => $this->normalizeText($row['seo_contract']['robots_policy'] ?? null),
                 'indexable' => true,
-                'detail_ready' => true,
+                'detail_ready' => $detailReadiness($slug, $locale),
                 'updated_at' => $this->normalizeText($row['provenance_meta']['compiled_at'] ?? null) ?: null,
                 'search_text' => strtolower(implode(' ', array_filter([$slug, $titleEn, $titleZh]))),
             ];

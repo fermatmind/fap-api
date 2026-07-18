@@ -214,5 +214,19 @@ final class CareerDirectory10kOpsWarmValidateCommandTest extends TestCase
         );
 
         Cache::flush();
+        $responseCache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($items as $item) {
+            if (($item['runtime_publish_state'] ?? null) !== 'published') {
+                continue;
+            }
+
+            foreach (['en', 'zh-CN'] as $locale) {
+                $responseCache->publishJobDetailReadModel((string) $item['slug'], $locale, [
+                    'identity' => ['canonical_slug' => $item['slug']],
+                    'locale' => $locale,
+                    'fixture' => true,
+                ]);
+            }
+        }
     }
 }

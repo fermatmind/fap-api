@@ -10,6 +10,7 @@ use App\Domain\Career\Publish\CareerRolloutReportAuthoritySigner;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\IndexState;
 use App\Models\Occupation;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\DB;
 
 final class CanonicalBatchPromotionExecutorService
@@ -21,6 +22,7 @@ final class CanonicalBatchPromotionExecutorService
         private readonly CareerCanonicalRuntimeTruthExporter $truthExporter,
         private readonly CanonicalPostPromotionReleaseGateService $releaseGateService,
         private readonly CareerRolloutReportAuthoritySigner $rolloutReportAuthoritySigner,
+        private readonly PublicCareerAuthorityResponseCache $responseCache,
     ) {}
 
     /**
@@ -73,6 +75,13 @@ final class CanonicalBatchPromotionExecutorService
 
         if (($promotionResult['status'] ?? null) === 'promoted_success') {
             return $promotionResult;
+        }
+
+        if (($promotionResult['automatic_database_remediation_allowed'] ?? true) !== true) {
+            return $this->cacheRevocationUnverifiedResult(
+                $promotionResult,
+                $quarantineOnFailure,
+            );
         }
 
         $remediationResult = $this->executeRemediation(
@@ -158,10 +167,27 @@ final class CanonicalBatchPromotionExecutorService
                 );
             }
 
+            $cachePreparation = $this->prepareDetailCachesForExposure(
+                $expectedLocaleRows,
+                $postProjection,
+            );
+            if (($cachePreparation['status'] ?? null) !== 'pass') {
+                DB::rollBack();
+
+                return $this->promotionValidationFailedResult(
+                    $transaction,
+                    $preStates,
+                    $promotedStates,
+                    $cachePreparation,
+                    null,
+                );
+            }
+
             $postPromotionValidation = $this->rollbackGate->validatePostPromotion(
                 $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
                 $postTruth,
                 $postProjection,
+                $cachePreparation['entries'],
             );
 
             if (($postPromotionValidation['status'] ?? null) !== 'pass') {
@@ -177,6 +203,7 @@ final class CanonicalBatchPromotionExecutorService
                 $this->publishedManifest($batchId, $slugs, $locales, $rollbackGroup),
                 $postTruth,
                 $postProjection,
+                $cachePreparation['entries'],
             );
 
             $closeoutAllowed = (bool) ($releaseGate['closeout_allowed'] ?? false);
@@ -192,14 +219,100 @@ final class CanonicalBatchPromotionExecutorService
 
             DB::commit();
 
+            $detailCacheActivation = $this->responseCache->activatePreparedJobDetailPayloadsForExposure(
+                $cachePreparation['entries'],
+            );
+            if (($detailCacheActivation['status'] ?? null) !== 'pass') {
+                $failures = [[
+                    'reason' => 'post_promotion_detail_cache_activation_failed',
+                    'context' => ['failures' => $detailCacheActivation['failures'] ?? []],
+                ]];
+                $cleanupFailure = $this->forgetPreparedExposureSnapshotsSafely(
+                    $cachePreparation['entries'],
+                );
+                if ($cleanupFailure !== null) {
+                    $failures[] = $cleanupFailure;
+                }
+
+                return $this->postCommitActivationFailedResult(
+                    $transaction,
+                    $preStates,
+                    $promotedStates,
+                    [
+                        'status' => 'blocked',
+                        'failures' => $failures,
+                    ],
+                    $releaseGate,
+                );
+            }
+
+            try {
+                $directoryActivation = $this->responseCache->warmDirectoryReadModels(
+                    $locales,
+                    null,
+                    $this->itemsFromPayload($postProjection),
+                    activateJobIndexPayloads: true,
+                );
+            } catch (\Throwable $throwable) {
+                $failures = [[
+                    'reason' => 'post_promotion_directory_activation_failed',
+                    'context' => ['error_class' => $throwable::class],
+                ]];
+                $cleanupFailure = $this->forgetPreparedExposureSnapshotsSafely(
+                    $cachePreparation['entries'],
+                );
+                if ($cleanupFailure !== null) {
+                    $failures[] = $cleanupFailure;
+                }
+
+                return $this->postCommitActivationFailedResult(
+                    $transaction,
+                    $preStates,
+                    $promotedStates,
+                    [
+                        'status' => 'blocked',
+                        'failures' => $failures,
+                    ],
+                    $releaseGate,
+                    $cleanupFailure === null,
+                );
+            }
+
             return $this->successResult(
                 $transaction, $preStates, $promotedStates, $releaseGate,
-                $postProjection, $postTruth,
+                $postProjection, $postTruth, $cachePreparation, $detailCacheActivation,
+                $directoryActivation,
             );
         } catch (\Throwable $e) {
-            DB::rollBack();
+            if (DB::transactionLevel() > 0) {
+                DB::rollBack();
+            }
 
             throw $e;
+        }
+    }
+
+    /**
+     * Snapshot cleanup is a fail-closed cache hardening step after the
+     * publication transaction has committed. The caller decides whether a
+     * failed cleanup is safe to continue: staged snapshots are unreachable
+     * after atomic detail activation rollback, but active snapshots left by a
+     * later directory failure must block database remediation.
+     *
+     * @param  list<array<string, mixed>>  $preparedEntries
+     * @return array{reason: string, context: array{error_class: class-string<\Throwable>}}|null
+     */
+    private function forgetPreparedExposureSnapshotsSafely(array $preparedEntries): ?array
+    {
+        try {
+            $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots($preparedEntries);
+
+            return null;
+        } catch (\Throwable $throwable) {
+            return [
+                'reason' => 'post_promotion_exposure_snapshot_cleanup_failed',
+                'context' => ['error_class' => $throwable::class],
+            ];
         }
     }
 
@@ -265,8 +378,7 @@ final class CanonicalBatchPromotionExecutorService
         bool $quarantineOnFailure,
     ): array {
         $remediationWriteVerified = (bool) ($remediationResult['write_verified'] ?? false);
-
-        return array_merge($promotionResult, [
+        $merged = [
             'remediation' => [
                 'attempted' => true,
                 'mode' => $quarantineOnFailure ? 'quarantine' : 'rollback',
@@ -275,6 +387,45 @@ final class CanonicalBatchPromotionExecutorService
                     : ($quarantineOnFailure ? 'quarantine_not_persisted' : 'rollback_not_persisted'),
                 'succeeded' => $remediationWriteVerified,
                 'output' => $remediationResult,
+            ],
+        ];
+
+        if (($promotionResult['database_commit_succeeded'] ?? false) === true) {
+            $merged = array_merge($merged, [
+                'status' => (string) ($remediationResult['status'] ?? 'post_commit_activation_failed'),
+                'promotion_rolled_back' => $remediationWriteVerified && ! $quarantineOnFailure,
+                'promotion_quarantined' => $remediationWriteVerified && $quarantineOnFailure,
+                'rollback_required' => ! $remediationWriteVerified && ! $quarantineOnFailure,
+                'quarantine_required' => ! $remediationWriteVerified && $quarantineOnFailure,
+            ]);
+        }
+
+        return array_merge($promotionResult, $merged);
+    }
+
+    /**
+     * Do not roll database authority back while a previously activated cache
+     * snapshot could still authorize the public route. Keeping the committed
+     * published state is the only cross-authority-consistent result until cache
+     * revocation can be verified and remediation retried.
+     *
+     * @param  array<string, mixed>  $promotionResult
+     * @return array<string, mixed>
+     */
+    private function cacheRevocationUnverifiedResult(
+        array $promotionResult,
+        bool $quarantineOnFailure,
+    ): array {
+        return array_merge($promotionResult, [
+            'status' => 'post_commit_cache_revocation_unverified',
+            'promotion_rolled_back' => false,
+            'promotion_quarantined' => false,
+            'rollback_required' => ! $quarantineOnFailure,
+            'quarantine_required' => $quarantineOnFailure,
+            'remediation' => [
+                'attempted' => false,
+                'status' => 'blocked_cache_revocation_unverified',
+                'succeeded' => false,
             ],
         ]);
     }
@@ -299,6 +450,56 @@ final class CanonicalBatchPromotionExecutorService
     private function truthFromProjection(array $projection): array
     {
         return $this->truthExporter->buildFromProjectionArray($projection);
+    }
+
+    /**
+     * @param  list<array{slug: string, locale: string}>  $expectedLocaleRows
+     * @param  array<string, mixed>  $projection
+     * @return array<string, mixed>
+     */
+    private function prepareDetailCachesForExposure(array $expectedLocaleRows, array $projection): array
+    {
+        $projectionItems = $this->itemsFromPayload($projection);
+        $entries = [];
+        $failures = [];
+
+        foreach ($expectedLocaleRows as $expectedRow) {
+            $item = $this->itemFor($projectionItems, $expectedRow['slug'], $expectedRow['locale']);
+            if ($item === null) {
+                $failures[] = [
+                    'reason' => 'pre_exposure_projection_row_missing',
+                    'slug' => $expectedRow['slug'],
+                    'locale' => $expectedRow['locale'],
+                ];
+
+                continue;
+            }
+
+            $entry = $this->responseCache->prepareJobDetailPayloadForExposure(
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+                $item,
+            );
+            $entries[] = $entry;
+            if (($entry['status'] ?? null) !== 'ready') {
+                $failures[] = [
+                    'reason' => 'pre_exposure_detail_cache_not_ready',
+                    'slug' => $expectedRow['slug'],
+                    'locale' => $expectedRow['locale'],
+                    'context' => [
+                        'status' => $entry['status'] ?? null,
+                        'classification' => $entry['classification'] ?? null,
+                    ],
+                ];
+            }
+        }
+
+        return [
+            'status' => $failures === [] ? 'pass' : 'blocked',
+            'contract_version' => 'career.detail_atomic_exposure.v1',
+            'entries' => $entries,
+            'failures' => $failures,
+        ];
     }
 
     // ─── IndexState writes ──────────────────────────────────────────────────
@@ -666,6 +867,9 @@ final class CanonicalBatchPromotionExecutorService
         array $releaseGate,
         array $projection,
         array $truth,
+        array $cachePreparation,
+        array $detailCacheActivation,
+        array $directoryActivation,
     ): array {
         $projectionCounts = is_array($projection['counts'] ?? null) ? $projection['counts'] : [];
         $truthCounts = is_array($truth['counts'] ?? null) ? $truth['counts'] : [];
@@ -692,6 +896,17 @@ final class CanonicalBatchPromotionExecutorService
                 'truth_counts' => $truthCounts,
             ],
             'release_gate' => $releaseGate,
+            'cache_preparation' => $cachePreparation,
+            'detail_cache_activation' => $detailCacheActivation,
+            'directory_activation' => $directoryActivation,
+            'atomic_exposure_sequence' => [
+                'build_projection',
+                'stage_immutable_detail_projection',
+                'verify_staged_detail_payload',
+                'expose_runtime_projection_flags',
+                'activate_detail_pointer_batch',
+                'rebuild_and_activate_directory_read_model',
+            ],
             'closeout_allowed' => (bool) ($releaseGate['closeout_allowed'] ?? false),
             'rollback_required' => false,
             'quarantine_required' => false,
@@ -892,6 +1107,49 @@ final class CanonicalBatchPromotionExecutorService
             'promoted_states' => $promotedStates,
             'post_promotion_validation' => $postPromotionValidation,
             'release_gate' => $releaseGate,
+            'failures' => is_array($postPromotionValidation['failures'] ?? null)
+                ? $postPromotionValidation['failures']
+                : [],
+        ];
+    }
+
+    /**
+     * A cache or directory activation failure after DB::commit() is materially
+     * different from an in-transaction gate failure. Report the committed
+     * promotion truthfully and let executeRemediation() determine whether the
+     * exposure was subsequently rolled back or quarantined.
+     *
+     * @param  array<string, string>  $preStates
+     * @param  array<string, mixed>  $postPromotionValidation
+     * @param  array<string, mixed>|null  $releaseGate
+     * @return array<string, mixed>
+     */
+    private function postCommitActivationFailedResult(
+        CanonicalPromotionTransaction $transaction,
+        array $preStates,
+        array $promotedStates,
+        array $postPromotionValidation,
+        ?array $releaseGate,
+        bool $automaticDatabaseRemediationAllowed = true,
+    ): array {
+        return [
+            'status' => 'post_commit_activation_failed',
+            'batch_id' => $transaction->batchId,
+            'promoted_slugs' => $transaction->slugs,
+            'promoted_locale_rows' => count($transaction->expectedLocaleRows()),
+            'rollback_group' => $transaction->rollbackGroup,
+            'dry_run' => false,
+            'writes_database' => true,
+            'write_verified' => true,
+            'database_commit_succeeded' => true,
+            'automatic_database_remediation_allowed' => $automaticDatabaseRemediationAllowed,
+            'promotion_rolled_back' => false,
+            'pre_states' => $preStates,
+            'promoted_states' => $promotedStates,
+            'post_promotion_validation' => $postPromotionValidation,
+            'release_gate' => $releaseGate,
+            'rollback_required' => true,
+            'quarantine_required' => false,
             'failures' => is_array($postPromotionValidation['failures'] ?? null)
                 ? $postPromotionValidation['failures']
                 : [],

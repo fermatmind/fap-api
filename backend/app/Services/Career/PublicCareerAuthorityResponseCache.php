@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Resources\Career\CareerDatasetHubResource;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-final class PublicCareerAuthorityResponseCache
+final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposureReadiness
 {
     public const DATASET_HUB_CACHE_KEY = 'career:public-authority:dataset-hub:v3';
 
@@ -45,6 +46,14 @@ final class PublicCareerAuthorityResponseCache
     public const DIRECTORY_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v2';
 
     public const DIRECTORY_CACHE_MAX_AGE_SECONDS = 1800;
+
+    private const JOB_DETAIL_EXPOSURE_LOCK_WAIT_SECONDS = 35;
+
+    private const JOB_DETAIL_EXPOSURE_LOCK_WORK_LEASE_SECONDS = 120;
+
+    private const DIRECTORY_REBUILD_LOCK_WAIT_SECONDS = 65;
+
+    private const DIRECTORY_REBUILD_LOCK_WORK_LEASE_SECONDS = 120;
 
     public function __construct(
         private readonly CareerPublicDatasetContractBuilder $datasetContractBuilder,
@@ -165,10 +174,8 @@ final class PublicCareerAuthorityResponseCache
         }
 
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $projectionItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+        $projectionItem = $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale);
         if (! $this->jobDetailProjectionItemIsPublished($projectionItem)) {
-            $this->forgetJobDetailPayload($normalizedSlug, $normalizedLocale);
-
             if (is_array($projectionItem)) {
                 Cache::put(
                     $this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale),
@@ -177,6 +184,9 @@ final class PublicCareerAuthorityResponseCache
                 );
             }
 
+            // Publication authority remains fail-closed (404), but a read path
+            // must not destroy immutable/pointer state prepared by an in-flight
+            // promotion or retained while a materialized projection catches up.
             return ['payload' => null, 'state' => 'not_found'];
         }
 
@@ -282,6 +292,30 @@ final class PublicCareerAuthorityResponseCache
         return ['classification' => 'missing_pointer', 'payload' => null, 'version' => null];
     }
 
+    public function jobDetailCacheIsReady(string $slug, string $publicLocale = 'zh-CN'): bool
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+        if (! in_array($readiness['classification'], ['ready_active', 'ready_lkg', 'legacy_migratable'], true)) {
+            return false;
+        }
+
+        $materializedItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+        if ($this->jobDetailProjectionItemIsPublished($materializedItem)) {
+            return true;
+        }
+
+        // A stale candidate materialization may use only the active payload
+        // paired with its exact published exposure snapshot. LKG and legacy
+        // remain recovery paths for already-published materialized authority;
+        // they can never become first-exposure authority by themselves.
+        return $readiness['classification'] === 'ready_active'
+            && $this->jobDetailProjectionItemIsPublished(
+                $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale),
+            );
+    }
+
     private function dispatchJobDetailWarm(string $slug, string $publicLocale): void
     {
         $dispatchKey = $this->jobDetailWarmDispatchKey($slug, $publicLocale);
@@ -368,12 +402,28 @@ final class PublicCareerAuthorityResponseCache
         }
 
         $cacheKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
+        $materializedProjectionItem = $this->runtimePublishProjection->itemForSlug(
+            $normalizedSlug,
+            $normalizedLocale,
+        );
+        $effectiveProjectionItem = $this->effectiveJobDetailProjectionItem(
+            $normalizedSlug,
+            $normalizedLocale,
+        );
+        $snapshotBackedProjectionItem = ! $this->jobDetailProjectionItemIsPublished($materializedProjectionItem)
+            && $this->jobDetailProjectionItemIsPublished($effectiveProjectionItem)
+                ? $effectiveProjectionItem
+                : null;
         if ($forgetFirst) {
             $this->forgetJobDetailPayload($normalizedSlug, $normalizedLocale);
         }
 
         $started = hrtime(true);
-        $payload = $this->buildJobDetailReadModel($normalizedSlug, $normalizedLocale);
+        $payload = $this->buildJobDetailReadModel(
+            $normalizedSlug,
+            $normalizedLocale,
+            $snapshotBackedProjectionItem,
+        );
         $buildMs = round((hrtime(true) - $started) / 1_000_000, 3);
         if ($payload !== null && $buildMs > 2000) {
             throw new \RuntimeException(sprintf(
@@ -382,7 +432,12 @@ final class PublicCareerAuthorityResponseCache
                 $normalizedLocale,
             ));
         }
-        $version = $payload === null ? null : $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $payload);
+        $version = $payload === null ? null : $this->publishJobDetailReadModel(
+            $normalizedSlug,
+            $normalizedLocale,
+            $payload,
+            $snapshotBackedProjectionItem,
+        );
 
         return [
             'cache_key' => $cacheKey,
@@ -395,16 +450,241 @@ final class PublicCareerAuthorityResponseCache
         ];
     }
 
-    /** @param array<string, mixed> $payload */
-    public function publishJobDetailReadModel(string $slug, string $publicLocale, array $payload): string
-    {
+    /**
+     * Build and stage one target-locale detail projection from an explicit
+     * post-promotion projection item while the exposure transaction is still
+     * uncommitted. Only the immutable version payload is written; no public
+     * active/LKG pointer can be removed by a concurrent candidate request.
+     *
+     * @param  array<string, mixed>  $projectionItem
+     * @return array<string, mixed>
+     */
+    public function prepareJobDetailPayloadForExposure(
+        string $slug,
+        string $publicLocale,
+        array $projectionItem,
+    ): array {
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        if (
+            $normalizedSlug === ''
+            || strtolower(trim((string) ($projectionItem['slug'] ?? ''))) !== $normalizedSlug
+            || ! $this->jobDetailProjectionItemIsPublished($projectionItem)
+        ) {
+            return [
+                'slug' => $normalizedSlug,
+                'locale' => $normalizedLocale,
+                'status' => 'projection_not_exposable',
+                'classification' => 'missing_pointer',
+            ];
+        }
+
+        $payload = $this->buildJobDetailReadModel(
+            $normalizedSlug,
+            $normalizedLocale,
+            $projectionItem,
+        );
+        if ($payload === null) {
+            return [
+                'slug' => $normalizedSlug,
+                'locale' => $normalizedLocale,
+                'status' => 'projection_build_failed',
+                'classification' => 'missing_pointer',
+            ];
+        }
+
+        $version = (string) Str::ulid();
+        $payloadKey = $this->jobDetailVersionPayloadKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $version,
+        );
+        Cache::forever($payloadKey, $payload);
+        $exposureProjectionKey = $this->jobDetailExposureProjectionVersionKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $version,
+        );
+        Cache::forever($exposureProjectionKey, $projectionItem);
+        $stagedPayload = Cache::get($payloadKey);
+        $stagedExposureProjection = Cache::get($exposureProjectionKey);
+        $ready = is_array($stagedPayload)
+            && $this->jobDetailExposureProjectionSnapshotIsValid(
+                $stagedExposureProjection,
+                $normalizedSlug,
+                $normalizedLocale,
+            );
+
+        return [
+            'slug' => $normalizedSlug,
+            'locale' => $normalizedLocale,
+            'status' => $ready ? 'ready' : 'verification_failed',
+            'classification' => $ready ? 'ready_staged' : 'missing_payload',
+            'version' => $version,
+        ];
+    }
+
+    /**
+     * Atomically activate an already verified batch of immutable detail payloads
+     * after database exposure commits. Pointer snapshots are restored if any
+     * target cannot be verified or switched.
+     *
+     * @param  list<array<string, mixed>>  $preparedEntries
+     * @return array{status: string, entries: list<array<string, mixed>>, failures: list<array<string, mixed>>}
+     */
+    public function activatePreparedJobDetailPayloadsForExposure(array $preparedEntries): array
+    {
+        $entries = [];
+        $failures = [];
+        if ($preparedEntries === []) {
+            return [
+                'status' => 'blocked',
+                'entries' => [],
+                'failures' => [['reason' => 'prepared_detail_entries_missing']],
+            ];
+        }
+
+        foreach ($preparedEntries as $entry) {
+            $slug = strtolower(trim((string) ($entry['slug'] ?? '')));
+            $rawLocale = trim((string) ($entry['locale'] ?? ''));
+            $locale = $this->normalizePublicLocale($rawLocale);
+            $version = trim((string) ($entry['version'] ?? ''));
+            if (
+                $slug === ''
+                || $rawLocale === ''
+                || $version === ''
+                || ($entry['status'] ?? null) !== 'ready'
+                || ($entry['classification'] ?? null) !== 'ready_staged'
+            ) {
+                $failures[] = [
+                    'reason' => 'prepared_detail_entry_invalid',
+                    'slug' => $slug,
+                    'locale' => $locale,
+                ];
+
+                continue;
+            }
+
+            $key = $slug.'|'.$locale;
+            if (isset($entries[$key])) {
+                $failures[] = [
+                    'reason' => 'prepared_detail_entry_duplicate',
+                    'slug' => $slug,
+                    'locale' => $locale,
+                ];
+
+                continue;
+            }
+
+            $entries[$key] = [
+                'slug' => $slug,
+                'locale' => $locale,
+                'version' => $version,
+            ];
+        }
+
+        if ($failures !== [] || count($entries) !== count($preparedEntries)) {
+            return ['status' => 'blocked', 'entries' => [], 'failures' => $failures];
+        }
+
+        ksort($entries, SORT_STRING);
+
+        try {
+            $activated = $this->withJobDetailExposureLocks(
+                array_keys($entries),
+                fn (): array => $this->activateStagedJobDetailReadModels(array_values($entries)),
+            );
+        } catch (\Throwable $throwable) {
+            return [
+                'status' => 'blocked',
+                'entries' => [],
+                'failures' => [[
+                    'reason' => 'prepared_detail_activation_failed',
+                    'context' => ['error_class' => $throwable::class],
+                ]],
+            ];
+        }
+
+        return ['status' => 'pass', 'entries' => $activated, 'failures' => []];
+    }
+
+    /**
+     * Remove only the immutable exposure-projection snapshots prepared for a
+     * failed post-commit activation. The detail payload may remain cached, but
+     * without this matching snapshot a stale materialized candidate projection
+     * keeps the public route fail-closed.
+     *
+     * @param  list<array<string, mixed>>  $preparedEntries
+     */
+    public function forgetPreparedJobDetailExposureProjectionSnapshots(array $preparedEntries): void
+    {
+        foreach ($preparedEntries as $entry) {
+            $slug = strtolower(trim((string) ($entry['slug'] ?? '')));
+            $rawLocale = trim((string) ($entry['locale'] ?? ''));
+            $version = trim((string) ($entry['version'] ?? ''));
+            if ($slug === '' || $rawLocale === '' || $version === '') {
+                continue;
+            }
+
+            Cache::forget($this->jobDetailExposureProjectionVersionKey(
+                $slug,
+                $this->normalizePublicLocale($rawLocale),
+                $version,
+            ));
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  array<string, mixed>|null  $exposureProjectionItem
+     */
+    public function publishJobDetailReadModel(
+        string $slug,
+        string $publicLocale,
+        array $payload,
+        ?array $exposureProjectionItem = null,
+    ): string {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        if (
+            $exposureProjectionItem !== null
+            && ! $this->jobDetailExposureProjectionSnapshotIsValid(
+                $exposureProjectionItem,
+                $normalizedSlug,
+                $normalizedLocale,
+            )
+        ) {
+            throw new \InvalidArgumentException(sprintf(
+                'Career detail exposure projection is invalid for %s (%s).',
+                $normalizedSlug,
+                $normalizedLocale,
+            ));
+        }
+
         $version = (string) Str::ulid();
         $activeKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
         $previousVersion = Cache::get($activeKey);
 
         Cache::forever($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version), $payload);
+        if ($exposureProjectionItem !== null) {
+            $exposureProjectionKey = $this->jobDetailExposureProjectionVersionKey(
+                $normalizedSlug,
+                $normalizedLocale,
+                $version,
+            );
+            Cache::forever($exposureProjectionKey, $exposureProjectionItem);
+            if (! $this->jobDetailExposureProjectionSnapshotIsValid(
+                Cache::get($exposureProjectionKey),
+                $normalizedSlug,
+                $normalizedLocale,
+            )) {
+                throw new \RuntimeException(sprintf(
+                    'Career detail exposure projection write verification failed for %s (%s).',
+                    $normalizedSlug,
+                    $normalizedLocale,
+                ));
+            }
+        }
         if (is_string($previousVersion) && $previousVersion !== '') {
             Cache::forever($this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale), $previousVersion);
         }
@@ -413,6 +693,121 @@ final class PublicCareerAuthorityResponseCache
         Cache::forget($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
 
         return $version;
+    }
+
+    /**
+     * @param  list<array{slug: string, locale: string, version: string}>  $entries
+     * @return list<array<string, mixed>>
+     */
+    private function activateStagedJobDetailReadModels(array $entries): array
+    {
+        $snapshots = [];
+        foreach ($entries as $entry) {
+            $slug = $entry['slug'];
+            $locale = $entry['locale'];
+            $version = $entry['version'];
+            $payload = Cache::get($this->jobDetailVersionPayloadKey($slug, $locale, $version));
+            if (! is_array($payload)) {
+                throw new \RuntimeException(sprintf(
+                    'Career detail staged payload verification failed for %s (%s).',
+                    $slug,
+                    $locale,
+                ));
+            }
+
+            $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
+                $slug,
+                $locale,
+                $version,
+            ));
+            if (! $this->jobDetailExposureProjectionSnapshotIsValid($exposureProjection, $slug, $locale)) {
+                throw new \RuntimeException(sprintf(
+                    'Career detail exposure projection verification failed for %s (%s).',
+                    $slug,
+                    $locale,
+                ));
+            }
+
+            $snapshots[$slug.'|'.$locale] = [
+                'active' => $this->cacheValueSnapshot($this->jobDetailActiveVersionKey($slug, $locale)),
+                'lkg' => $this->cacheValueSnapshot($this->jobDetailLkgVersionKey($slug, $locale)),
+                'negative' => $this->cacheValueSnapshot($this->jobDetailNegativeKey($slug, $locale)),
+                'legacy' => $this->cacheValueSnapshot($this->jobDetailCacheKey($slug, $locale)),
+            ];
+        }
+
+        $attempted = [];
+        try {
+            foreach ($entries as $entry) {
+                $slug = $entry['slug'];
+                $locale = $entry['locale'];
+                $version = $entry['version'];
+                $key = $slug.'|'.$locale;
+                $attempted[] = $key;
+                $previousVersion = $snapshots[$key]['active']['value'];
+                if (is_string($previousVersion) && $previousVersion !== '') {
+                    Cache::forever($this->jobDetailLkgVersionKey($slug, $locale), $previousVersion);
+                }
+                Cache::forever($this->jobDetailActiveVersionKey($slug, $locale), $version);
+                if (Cache::get($this->jobDetailActiveVersionKey($slug, $locale)) !== $version) {
+                    throw new \RuntimeException(sprintf(
+                        'Career detail active pointer verification failed for %s (%s).',
+                        $slug,
+                        $locale,
+                    ));
+                }
+                Cache::forget($this->jobDetailNegativeKey($slug, $locale));
+                Cache::forget($this->jobDetailCacheKey($slug, $locale));
+            }
+        } catch (\Throwable $throwable) {
+            foreach (array_reverse($attempted) as $key) {
+                [$slug, $locale] = explode('|', $key, 2);
+                $snapshot = $snapshots[$key];
+                $this->restoreCacheValue($this->jobDetailActiveVersionKey($slug, $locale), $snapshot['active']);
+                $this->restoreCacheValue($this->jobDetailLkgVersionKey($slug, $locale), $snapshot['lkg']);
+                $this->restoreCacheValue($this->jobDetailNegativeKey($slug, $locale), $snapshot['negative']);
+                $this->restoreCacheValue($this->jobDetailCacheKey($slug, $locale), $snapshot['legacy']);
+            }
+
+            throw $throwable;
+        }
+
+        return array_map(static fn (array $entry): array => [
+            'slug' => $entry['slug'],
+            'locale' => $entry['locale'],
+            'status' => 'ready',
+            'classification' => 'ready_active',
+            'version' => $entry['version'],
+        ], $entries);
+    }
+
+    /**
+     * @param  list<string>  $targets
+     * @param  callable(): list<array<string, mixed>>  $callback
+     * @return list<array<string, mixed>>
+     */
+    private function withJobDetailExposureLocks(array $targets, callable $callback, int $offset = 0): array
+    {
+        if (! isset($targets[$offset])) {
+            return $callback();
+        }
+
+        [$slug, $locale] = explode('|', $targets[$offset], 2);
+        $lock = Cache::lock(
+            $this->jobDetailExposureActivationLockKey($slug, $locale),
+            $this->nestedLockLeaseSeconds(
+                count($targets),
+                $offset,
+                self::JOB_DETAIL_EXPOSURE_LOCK_WAIT_SECONDS,
+                self::JOB_DETAIL_EXPOSURE_LOCK_WORK_LEASE_SECONDS,
+            ),
+        );
+
+        return $lock->block(self::JOB_DETAIL_EXPOSURE_LOCK_WAIT_SECONDS, fn (): array => $this->withJobDetailExposureLocks(
+            $targets,
+            $callback,
+            $offset + 1,
+        ));
     }
 
     /**
@@ -500,53 +895,296 @@ final class PublicCareerAuthorityResponseCache
      * broader job-index, dataset, or launch-governance cache families.
      *
      * @param  list<string>  $publicLocales
-     * @return array<string, array{locale: string, status: string, version: ?string, member_count: int}>
+     * @param  list<array<string, mixed>>|null  $exposureProjectionItems
+     * @return array<string, array{locale: string, status: string, version: ?string, member_count: int, job_index_activated: bool}>
      */
-    public function warmDirectoryReadModels(array $publicLocales = ['en', 'zh-CN'], ?callable $reporter = null): array
-    {
+    public function warmDirectoryReadModels(
+        array $publicLocales = ['en', 'zh-CN'],
+        ?callable $reporter = null,
+        ?array $exposureProjectionItems = null,
+        bool $activateJobIndexPayloads = false,
+    ): array {
         $locales = array_values(array_unique(array_map(
             fn (string $locale): string => $this->normalizePublicLocale($locale),
             $publicLocales === [] ? ['en', 'zh-CN'] : $publicLocales,
         )));
-        $sourceItems = CareerJobListItemResource::collection(
-            $this->careerJobListBundleBuilder->build(false)
-        )->resolve();
-
-        $summary = [];
+        sort($locales, SORT_STRING);
+        $startedAt = [];
         foreach ($locales as $locale) {
             $phase = 'career_directory_'.$this->cachePhaseLocale($locale);
             $reporter?->__invoke($phase, 'starting');
-            $observedVersion = Cache::get($this->directoryActiveVersionKey($locale));
-            $this->singleFlightDirectoryRebuild(
-                $locale,
-                is_string($observedVersion) ? $observedVersion : null,
-                function () use ($locale, $sourceItems): array {
-                    $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
-                        'bundle_kind' => 'career_job_index',
-                        'bundle_version' => 'career.protocol.job_index.v1',
-                        'items' => $sourceItems,
-                    ], $locale);
-                    $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
-                    $this->publishDirectoryReadModel(
-                        $locale,
-                        $this->careerDirectoryReadModelBuilder->build($items, $locale),
-                    );
+            $startedAt[$locale] = hrtime(true);
+        }
 
-                    return $jobIndex;
+        try {
+            $activation = $this->withDirectoryRebuildLocks(
+                $locales,
+                function () use ($locales, $exposureProjectionItems, $activateJobIndexPayloads): array {
+                    // Build from authority and inspect detail readiness only after
+                    // every target-locale rebuild lock is held. A delayed older
+                    // warmer therefore cannot activate a payload captured before
+                    // a newer detail warm or promotion completed.
+                    $sourceItems = CareerJobListItemResource::collection(
+                        $this->careerJobListBundleBuilder->build(false)
+                    )->resolve();
+                    $payloads = [];
+                    $jobIndexes = [];
+                    foreach ($locales as $locale) {
+                        $authorityJobIndex = $this->filterJobIndexPayloadForPublicLocale([
+                            'bundle_kind' => 'career_job_index',
+                            'bundle_version' => 'career.protocol.job_index.v1',
+                            'items' => $sourceItems,
+                        ], $locale, false);
+                        $preservedExposureItems = $this->missingActiveDirectoryExposureProjectionItems(
+                            is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [],
+                            $locale,
+                        );
+                        $directoryExposureItems = array_merge(
+                            $preservedExposureItems,
+                            $exposureProjectionItems ?? [],
+                        );
+                        if ($directoryExposureItems !== []) {
+                            $authorityJobIndex['items'] = $this->mergeExposureDirectoryItems(
+                                is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [],
+                                $directoryExposureItems,
+                                $locale,
+                            );
+                        }
+                        $items = is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [];
+                        $jobIndexes[$locale] = $this->filterJobIndexPayloadForPublicLocale(
+                            $authorityJobIndex,
+                            $locale,
+                        );
+                        $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
+                            $items,
+                            $locale,
+                            fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
+                        );
+                    }
+
+                    return [
+                        'payloads' => $payloads,
+                        'versions' => $this->activateDirectoryAndOptionalJobIndexReadModels(
+                            $payloads,
+                            $jobIndexes,
+                            $activateJobIndexPayloads,
+                        ),
+                        'job_indexes_activated' => $activateJobIndexPayloads,
+                    ];
                 },
             );
-            $status = $this->directoryCacheStatus($locale);
-            $payload = $this->directoryReadModelPayload($locale);
+        } finally {
+            foreach ($startedAt as $locale => $started) {
+                try {
+                    Cache::forever(
+                        $this->directoryLastRebuildDurationKey($locale),
+                        round((hrtime(true) - $started) / 1_000_000, 3),
+                    );
+                } catch (\Throwable) {
+                    // A telemetry write must not mask the activation failure.
+                }
+            }
+        }
+        $payloads = $activation['payloads'];
+        $versions = $activation['versions'];
+        $summary = [];
+        foreach ($payloads as $locale => $payload) {
+            $phase = 'career_directory_'.$this->cachePhaseLocale($locale);
             $summary[$phase] = [
                 'locale' => $locale,
-                'status' => ($status['status'] ?? null) === 'ready' ? 'cached' : 'unavailable',
-                'version' => is_string($status['active_version'] ?? null) ? $status['active_version'] : null,
+                'status' => 'cached',
+                'version' => $versions[$locale] ?? null,
                 'member_count' => count((array) ($payload['items'] ?? [])),
+                'job_index_activated' => (bool) ($activation['job_indexes_activated'] ?? false),
             ];
             $reporter?->__invoke($phase, 'finished');
         }
 
         return $summary;
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $directoryPayloads
+     * @param  array<string, array<string, mixed>>  $jobIndexPayloads
+     * @return array<string, string>
+     */
+    private function activateDirectoryAndOptionalJobIndexReadModels(
+        array $directoryPayloads,
+        array $jobIndexPayloads,
+        bool $activateJobIndexPayloads,
+    ): array {
+        if (! $activateJobIndexPayloads) {
+            return $this->stageAndActivateDirectoryReadModels($directoryPayloads);
+        }
+
+        $jobIndexSnapshots = [];
+        foreach (array_keys($jobIndexPayloads) as $locale) {
+            $jobIndexSnapshots[$locale] = $this->cacheValueSnapshot(
+                $this->jobIndexCacheKey($locale, false),
+            );
+        }
+
+        try {
+            foreach ($jobIndexPayloads as $locale => $payload) {
+                $key = $this->jobIndexCacheKey($locale, false);
+                Cache::forever($key, $payload);
+                if (Cache::get($key) !== $payload) {
+                    throw new \RuntimeException(sprintf(
+                        'Career job index activation verification failed for locale %s.',
+                        $locale,
+                    ));
+                }
+            }
+
+            return $this->stageAndActivateDirectoryReadModels($directoryPayloads);
+        } catch (\Throwable $throwable) {
+            foreach ($jobIndexSnapshots as $locale => $snapshot) {
+                $this->restoreCacheValue($this->jobIndexCacheKey($locale, false), $snapshot);
+            }
+
+            throw $throwable;
+        }
+    }
+
+    /**
+     * @param  list<mixed>  $currentItems
+     * @param  list<array<string, mixed>>  $projectionItems
+     * @return list<array<string, mixed>>
+     */
+    private function mergeExposureDirectoryItems(
+        array $currentItems,
+        array $projectionItems,
+        string $publicLocale,
+    ): array {
+        $projectionLocale = $this->normalizePublicLocale($publicLocale) === 'zh-CN' ? 'zh' : 'en';
+        $localeItems = array_values(array_filter(
+            $projectionItems,
+            fn (array $item): bool => $this->projectionItemLocale($item) === $projectionLocale
+                && ($item['dataset_visible'] ?? false) === true
+                && $this->jobDetailProjectionItemIsPublished($item),
+        ));
+        $exposureItems = CareerJobListItemResource::collection(
+            $this->careerJobListBundleBuilder->buildFromRuntimeProjectionItems($localeItems),
+        )->resolve();
+
+        $itemsBySlug = [];
+        foreach (array_merge($currentItems, $exposureItems) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
+            if ($slug !== '') {
+                $itemsBySlug[$slug] = $item;
+            }
+        }
+
+        ksort($itemsBySlug, SORT_STRING);
+
+        return array_values($itemsBySlug);
+    }
+
+    /**
+     * Preserve only active-directory members missing from the newly rebuilt
+     * source list when they still have an active payload and the exact matching
+     * published exposure snapshot. The current directory is enumeration only;
+     * the versioned backend cache remains the authority proof.
+     *
+     * @param  list<mixed>  $currentItems
+     * @return list<array<string, mixed>>
+     */
+    private function missingActiveDirectoryExposureProjectionItems(
+        array $currentItems,
+        string $publicLocale,
+    ): array {
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $currentSlugs = [];
+        foreach ($currentItems as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
+            if ($slug !== '') {
+                $currentSlugs[$slug] = true;
+            }
+        }
+
+        $directoryVersion = Cache::get($this->directoryActiveVersionKey($normalizedLocale));
+        $directoryPayload = is_string($directoryVersion) && $directoryVersion !== ''
+            ? Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $directoryVersion))
+            : null;
+        $activeItems = is_array($directoryPayload)
+            && is_array($directoryPayload['items'] ?? null)
+                ? $directoryPayload['items']
+                : [];
+        $projectionItems = [];
+        foreach ($activeItems as $activeItem) {
+            if (! is_array($activeItem)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) ($activeItem['slug'] ?? '')));
+            if ($slug === '' || isset($currentSlugs[$slug])) {
+                continue;
+            }
+
+            $detailVersion = Cache::get($this->jobDetailActiveVersionKey($slug, $normalizedLocale));
+            if (! is_string($detailVersion) || $detailVersion === '') {
+                continue;
+            }
+
+            $detailPayload = Cache::get($this->jobDetailVersionPayloadKey(
+                $slug,
+                $normalizedLocale,
+                $detailVersion,
+            ));
+            $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
+                $slug,
+                $normalizedLocale,
+                $detailVersion,
+            ));
+            if (
+                ! is_array($detailPayload)
+                || ! $this->jobDetailExposureProjectionSnapshotIsValid(
+                    $exposureProjection,
+                    $slug,
+                    $normalizedLocale,
+                )
+                || ($exposureProjection['dataset_visible'] ?? false) !== true
+            ) {
+                continue;
+            }
+
+            $projectionItems[$slug] = $exposureProjection;
+        }
+
+        ksort($projectionItems, SORT_STRING);
+
+        return array_values($projectionItems);
+    }
+
+    /**
+     * Stage every locale payload while all target-locale rebuild locks are held
+     * before switching any active pointer. If a pointer switch fails, restore
+     * all pointer metadata touched by the batch. Staged payloads are immutable
+     * and harmless when left unreachable.
+     *
+     * @param  array<string, array<string, mixed>>  $payloadsByLocale
+     * @return array<string, string>
+     */
+    public function publishDirectoryReadModelsAtomically(array $payloadsByLocale): array
+    {
+        $payloads = [];
+        foreach ($payloadsByLocale as $locale => $payload) {
+            $payloads[$this->normalizePublicLocale((string) $locale)] = $payload;
+        }
+        ksort($payloads, SORT_STRING);
+
+        return $this->withDirectoryRebuildLocks(
+            array_keys($payloads),
+            fn (): array => $this->stageAndActivateDirectoryReadModels($payloads),
+        );
     }
 
     /**
@@ -609,17 +1247,10 @@ final class PublicCareerAuthorityResponseCache
      */
     private function refreshJobIndexPayload(string $publicLocale, bool $includeNonIndexable = false): array
     {
-        $items = CareerJobListItemResource::collection(
-            $this->careerJobListBundleBuilder->build($includeNonIndexable)
-        )->resolve();
-
-        $payload = [
-            'bundle_kind' => 'career_job_index',
-            'bundle_version' => 'career.protocol.job_index.v1',
-            'items' => $items,
-        ];
-
-        $payload = $this->filterJobIndexPayloadForPublicLocale($payload, $publicLocale);
+        $payload = $this->filterJobIndexPayloadForPublicLocale(
+            $this->buildJobIndexAuthorityPayload($includeNonIndexable),
+            $publicLocale,
+        );
 
         Cache::forever($this->jobIndexCacheKey($publicLocale, $includeNonIndexable), $payload);
 
@@ -636,16 +1267,53 @@ final class PublicCareerAuthorityResponseCache
             $normalizedLocale,
             is_string($observedVersion) ? $observedVersion : null,
             function () use ($normalizedLocale): array {
-                $jobIndex = $this->refreshJobIndexPayload($normalizedLocale);
-                $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+                $authorityJobIndex = $this->filterJobIndexPayloadForPublicLocale(
+                    $this->buildJobIndexAuthorityPayload(false),
+                    $normalizedLocale,
+                    false,
+                );
+                $items = is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [];
+                $preservedExposureItems = $this->missingActiveDirectoryExposureProjectionItems(
+                    $items,
+                    $normalizedLocale,
+                );
+                if ($preservedExposureItems !== []) {
+                    $items = $this->mergeExposureDirectoryItems(
+                        $items,
+                        $preservedExposureItems,
+                        $normalizedLocale,
+                    );
+                }
+                $authorityJobIndex['items'] = $items;
+                $jobIndex = $this->filterJobIndexPayloadForPublicLocale(
+                    $authorityJobIndex,
+                    $normalizedLocale,
+                );
+                Cache::forever($this->jobIndexCacheKey($normalizedLocale, false), $jobIndex);
                 $this->publishDirectoryReadModel(
                     $normalizedLocale,
-                    $this->careerDirectoryReadModelBuilder->build($items, $normalizedLocale),
+                    $this->careerDirectoryReadModelBuilder->build(
+                        $items,
+                        $normalizedLocale,
+                        fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
+                    ),
                 );
 
                 return $jobIndex;
             },
         );
+    }
+
+    /** @return array<string, mixed> */
+    private function buildJobIndexAuthorityPayload(bool $includeNonIndexable): array
+    {
+        return [
+            'bundle_kind' => 'career_job_index',
+            'bundle_version' => 'career.protocol.job_index.v1',
+            'items' => CareerJobListItemResource::collection(
+                $this->careerJobListBundleBuilder->build($includeNonIndexable),
+            )->resolve(),
+        ];
     }
 
     /**
@@ -655,9 +1323,12 @@ final class PublicCareerAuthorityResponseCache
     public function singleFlightDirectoryRebuild(string $publicLocale, ?string $observedVersion, callable $rebuild): array
     {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $lock = Cache::lock($this->directoryRebuildLockKey($normalizedLocale), 60);
+        $lock = Cache::lock(
+            $this->directoryRebuildLockKey($normalizedLocale),
+            self::DIRECTORY_REBUILD_LOCK_WORK_LEASE_SECONDS,
+        );
 
-        return $lock->block(65, function () use ($normalizedLocale, $observedVersion, $rebuild): array {
+        return $lock->block(self::DIRECTORY_REBUILD_LOCK_WAIT_SECONDS, function () use ($normalizedLocale, $observedVersion, $rebuild): array {
             $currentVersion = Cache::get($this->directoryActiveVersionKey($normalizedLocale));
             if ($currentVersion !== null && $currentVersion !== $observedVersion) {
                 $this->logDirectoryCacheState($normalizedLocale, 'hit', (string) $currentVersion, ['rebuild' => 'coalesced']);
@@ -709,6 +1380,179 @@ final class PublicCareerAuthorityResponseCache
         return $version;
     }
 
+    /**
+     * @param  array<string, array<string, mixed>>  $payloadsByLocale
+     * @return array<string, string>
+     */
+    private function stageAndActivateDirectoryReadModels(array $payloadsByLocale): array
+    {
+        $versions = [];
+        $snapshots = [];
+
+        foreach ($payloadsByLocale as $locale => $payload) {
+            $version = (string) Str::ulid();
+            $payloadKey = $this->directoryVersionPayloadKey($locale, $version);
+            Cache::forever($payloadKey, $payload);
+            if (! is_array(Cache::get($payloadKey))) {
+                throw new \RuntimeException(sprintf(
+                    'Career directory staged payload verification failed for locale %s.',
+                    $locale,
+                ));
+            }
+
+            $versions[$locale] = $version;
+            $snapshots[$locale] = $this->directoryPointerSnapshot($locale);
+        }
+
+        $attempted = [];
+        try {
+            foreach ($versions as $locale => $version) {
+                $attempted[] = $locale;
+                $this->activateStagedDirectoryReadModel(
+                    $locale,
+                    $version,
+                    $snapshots[$locale]['active']['value'],
+                );
+            }
+        } catch (\Throwable $throwable) {
+            foreach (array_reverse($attempted) as $locale) {
+                $this->restoreDirectoryPointerSnapshot($locale, $snapshots[$locale]);
+            }
+
+            throw $throwable;
+        }
+
+        foreach ($versions as $locale => $version) {
+            $this->forgetLegacyDirectoryReadModelSafely($locale);
+            $this->logDirectoryCacheState($locale, 'rebuild', $version, [
+                'rebuild' => 'batch_finished',
+                'activation' => 'atomic_multi_locale',
+            ]);
+        }
+
+        return $versions;
+    }
+
+    /**
+     * The v1 directory key is only a compatibility fallback after verified v2
+     * pointers have been activated. Cleanup must not turn a successful atomic
+     * pointer switch into a promotion failure whose remediation could diverge
+     * database authority from those active pointers.
+     */
+    private function forgetLegacyDirectoryReadModelSafely(string $locale): void
+    {
+        try {
+            Cache::forget($this->directoryReadModelCacheKey($locale));
+        } catch (\Throwable $throwable) {
+            Log::warning('career_directory_legacy_cache_cleanup_failed', [
+                'locale' => $locale,
+                'error_class' => $throwable::class,
+                'activation' => 'atomic_multi_locale',
+            ]);
+        }
+    }
+
+    private function activateStagedDirectoryReadModel(string $locale, string $version, mixed $previousVersion): void
+    {
+        if (is_string($previousVersion) && $previousVersion !== '') {
+            Cache::forever($this->directoryLkgVersionKey($locale), $previousVersion);
+        }
+        Cache::forever($this->directoryActiveVersionKey($locale), $version);
+        if (Cache::get($this->directoryActiveVersionKey($locale)) !== $version) {
+            throw new \RuntimeException(sprintf(
+                'Career directory active pointer verification failed for locale %s.',
+                $locale,
+            ));
+        }
+        Cache::forever($this->directoryActivatedAtKey($locale), now()->timestamp);
+    }
+
+    /**
+     * @return array{
+     *     active: array{exists: bool, value: mixed},
+     *     lkg: array{exists: bool, value: mixed},
+     *     activated_at: array{exists: bool, value: mixed}
+     * }
+     */
+    private function directoryPointerSnapshot(string $locale): array
+    {
+        return [
+            'active' => $this->cacheValueSnapshot($this->directoryActiveVersionKey($locale)),
+            'lkg' => $this->cacheValueSnapshot($this->directoryLkgVersionKey($locale)),
+            'activated_at' => $this->cacheValueSnapshot($this->directoryActivatedAtKey($locale)),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *     active: array{exists: bool, value: mixed},
+     *     lkg: array{exists: bool, value: mixed},
+     *     activated_at: array{exists: bool, value: mixed}
+     * }  $snapshot
+     */
+    private function restoreDirectoryPointerSnapshot(string $locale, array $snapshot): void
+    {
+        $this->restoreCacheValue($this->directoryActiveVersionKey($locale), $snapshot['active']);
+        $this->restoreCacheValue($this->directoryLkgVersionKey($locale), $snapshot['lkg']);
+        $this->restoreCacheValue($this->directoryActivatedAtKey($locale), $snapshot['activated_at']);
+    }
+
+    /** @return array{exists: bool, value: mixed} */
+    private function cacheValueSnapshot(string $key): array
+    {
+        return [
+            'exists' => Cache::has($key),
+            'value' => Cache::get($key),
+        ];
+    }
+
+    /** @param array{exists: bool, value: mixed} $snapshot */
+    private function restoreCacheValue(string $key, array $snapshot): void
+    {
+        if ($snapshot['exists']) {
+            Cache::forever($key, $snapshot['value']);
+
+            return;
+        }
+
+        Cache::forget($key);
+    }
+
+    /**
+     * @param  list<string>  $locales
+     * @param  callable(): array<string, mixed>  $callback
+     * @return array<string, mixed>
+     */
+    private function withDirectoryRebuildLocks(array $locales, callable $callback, int $offset = 0): array
+    {
+        if (! isset($locales[$offset])) {
+            return $callback();
+        }
+
+        $lock = Cache::lock(
+            $this->directoryRebuildLockKey($locales[$offset]),
+            $this->nestedLockLeaseSeconds(
+                count($locales),
+                $offset,
+                self::DIRECTORY_REBUILD_LOCK_WAIT_SECONDS,
+                self::DIRECTORY_REBUILD_LOCK_WORK_LEASE_SECONDS,
+            ),
+        );
+
+        return $lock->block(self::DIRECTORY_REBUILD_LOCK_WAIT_SECONDS, fn (): array => $this->withDirectoryRebuildLocks(
+            $locales,
+            $callback,
+            $offset + 1,
+        ));
+    }
+
+    private function nestedLockLeaseSeconds(int $targetCount, int $offset, int $waitSeconds, int $workLeaseSeconds): int
+    {
+        $nestedWaits = max(0, $targetCount - $offset - 1);
+
+        return $workLeaseSeconds + ($nestedWaits * $waitSeconds);
+    }
+
     /** @return array{locale: string, status: string, active_version: ?string, lkg_version: ?string, age_seconds: ?int, last_rebuild_ms: ?float} */
     public function directoryCacheStatus(string $publicLocale): array
     {
@@ -732,13 +1576,24 @@ final class PublicCareerAuthorityResponseCache
     /**
      * @return array<string, mixed>|null
      */
-    private function buildJobDetailReadModel(string $slug, string $publicLocale): ?array
-    {
-        if (! $this->detailReadIsPublishedForLocale($slug, $publicLocale)) {
+    /** @param array<string, mixed>|null $exposureProjectionItem */
+    private function buildJobDetailReadModel(
+        string $slug,
+        string $publicLocale,
+        ?array $exposureProjectionItem = null,
+    ): ?array {
+        if (
+            $exposureProjectionItem === null
+            && ! $this->detailReadIsPublishedForLocale($slug, $publicLocale)
+        ) {
             return null;
         }
 
-        $bundle = $this->careerJobDetailBundleBuilder->buildBySlug($slug, $publicLocale);
+        $bundle = $this->careerJobDetailBundleBuilder->buildBySlug(
+            $slug,
+            $publicLocale,
+            $exposureProjectionItem,
+        );
         if ($bundle !== null) {
             return (new CareerJobDetailResource($bundle))->toArray(
                 Request::create('/api/v0.5/career/jobs/'.$slug, 'GET', ['locale' => $publicLocale])
@@ -753,19 +1608,23 @@ final class PublicCareerAuthorityResponseCache
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
-    private function filterJobIndexPayloadForPublicLocale(array $payload, string $publicLocale): array
-    {
+    private function filterJobIndexPayloadForPublicLocale(
+        array $payload,
+        string $publicLocale,
+        bool $requireDetailReady = true,
+    ): array {
         $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
-        $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale): bool {
+        $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale, $requireDetailReady): bool {
             if (! is_array($item)) {
                 return false;
             }
 
             $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
-            $projectionItem = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
+            $projectionItem = $this->effectiveJobDetailProjectionItem($slug, $publicLocale);
 
             return $slug !== '' && $this->detailReadIsPublishedForLocale($slug, $publicLocale)
-                && ($projectionItem['dataset_visible'] ?? false) === true;
+                && ($projectionItem['dataset_visible'] ?? false) === true
+                && (! $requireDetailReady || $this->jobDetailCacheIsReady($slug, $publicLocale));
         }));
 
         return $payload;
@@ -773,9 +1632,62 @@ final class PublicCareerAuthorityResponseCache
 
     private function detailReadIsPublishedForLocale(string $slug, string $publicLocale): bool
     {
-        $item = $this->runtimePublishProjection->itemForSlug($slug, $publicLocale);
+        $item = $this->effectiveJobDetailProjectionItem($slug, $publicLocale);
 
         return $this->jobDetailProjectionItemIsPublished($item);
+    }
+
+    /** @return array<string, mixed>|null */
+    private function effectiveJobDetailProjectionItem(string $slug, string $publicLocale): ?array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $materializedItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+        if ($this->jobDetailProjectionItemIsPublished($materializedItem)) {
+            return $materializedItem;
+        }
+
+        $activeVersion = Cache::get($this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale));
+        if (! is_string($activeVersion) || trim($activeVersion) === '') {
+            return $materializedItem;
+        }
+
+        $activePayload = Cache::get($this->jobDetailVersionPayloadKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $activeVersion,
+        ));
+        $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $activeVersion,
+        ));
+        if (
+            ! is_array($activePayload)
+            || ! $this->jobDetailExposureProjectionSnapshotIsValid(
+                $exposureProjection,
+                $normalizedSlug,
+                $normalizedLocale,
+            )
+        ) {
+            return $materializedItem;
+        }
+
+        return $exposureProjection;
+    }
+
+    private function jobDetailExposureProjectionSnapshotIsValid(
+        mixed $exposureProjection,
+        string $slug,
+        string $publicLocale,
+    ): bool {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+
+        return is_array($exposureProjection)
+            && strtolower(trim((string) ($exposureProjection['slug'] ?? ''))) === $normalizedSlug
+            && $this->normalizePublicLocale((string) ($exposureProjection['locale'] ?? '')) === $normalizedLocale
+            && $this->jobDetailProjectionItemIsPublished($exposureProjection);
     }
 
     /** @param array<string, mixed>|null $item */
@@ -803,6 +1715,14 @@ final class PublicCareerAuthorityResponseCache
         $normalized = strtolower(trim($publicLocale));
 
         return in_array($normalized, ['en', 'en-us'], true) ? 'en' : 'zh-CN';
+    }
+
+    /** @param array<string, mixed> $item */
+    private function projectionItemLocale(array $item): string
+    {
+        return str_starts_with(strtolower(trim((string) ($item['locale'] ?? 'en'))), 'zh')
+            ? 'zh'
+            : 'en';
     }
 
     private function cachePhaseLocale(string $publicLocale): string
@@ -845,9 +1765,19 @@ final class PublicCareerAuthorityResponseCache
         return sprintf('%s:%s:%s:versions:%s', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale), $version);
     }
 
+    private function jobDetailExposureProjectionVersionKey(string $slug, string $publicLocale, string $version): string
+    {
+        return sprintf('%s:%s:%s:exposure-projections:%s', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale), $version);
+    }
+
     public function jobDetailNegativeKey(string $slug, string $publicLocale): string
     {
         return sprintf('%s:%s:%s:negative', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale));
+    }
+
+    private function jobDetailExposureActivationLockKey(string $slug, string $publicLocale): string
+    {
+        return sprintf('%s:%s:%s:exposure-lock', self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX, strtolower(trim($slug)), $this->normalizePublicLocale($publicLocale));
     }
 
     private function directoryReadModelCacheKey(string $publicLocale): string

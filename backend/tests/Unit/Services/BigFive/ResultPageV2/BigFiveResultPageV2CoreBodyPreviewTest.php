@@ -499,6 +499,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_en_legacy_range_retirement_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/UnexpectedRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_system_token_http_boundary_changes(): void
     {
         $allowed = [
@@ -4986,6 +5002,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_detail_atomic_exposure(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php',
+            'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionExecutorService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateValidator.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php',
+            'backend/app/Domain/Career/Publish/CareerJobDetailExposureReadiness.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
+            'backend/app/Providers/AppServiceProvider.php',
+            'backend/app/Services/Career/CareerDirectoryAuthorityService.php',
+            'backend/app/Services/Career/CareerIndustryDirectoryReadModel.php',
+            'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
+            'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertNotSame([], $this->mbtiImpactingRuntimeChanges([
+            'backend/app/Services/BigFive/FutureCareerCoverageService.php',
+        ], '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_10k_capacity_chaos_gate(): void
     {
         $changed = [
@@ -6279,6 +6320,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveEnLegacyRangeRetirementFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsPreviewRenderQaFile($file)) {
                 continue;
             }
@@ -7042,6 +7087,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareerDetailCacheCoverageFile($file)) {
+                continue;
+            }
+
+            if ($this->isCareerDetailAtomicExposureFile($file)) {
                 continue;
             }
 
@@ -8227,6 +8276,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveZhV3ContentPublish.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3PackageCompiler.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3Publisher.php',
+        ], true);
+    }
+
+    private function isBigFiveEnLegacyRangeRetirementFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
         ], true);
     }
 
@@ -10272,6 +10330,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/CareerVerifyJobDetailCacheCoverage.php',
             'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
+        ], true);
+    }
+
+    private function isCareerDetailAtomicExposureFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php',
+            'backend/app/Domain/Career/Expansion/CanonicalBatchPromotionExecutorService.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPostPromotionReleaseGateValidator.php',
+            'backend/app/Domain/Career/Expansion/CanonicalPromotionRollbackGate.php',
+            'backend/app/Domain/Career/Publish/CareerJobDetailExposureReadiness.php',
+            'backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionValidator.php',
+            'backend/app/Providers/AppServiceProvider.php',
+            'backend/app/Services/Career/CareerDirectoryReadModelBuilder.php',
+            'backend/app/Services/Career/CareerJobDetailCacheCoverageService.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ], true);
     }
 
