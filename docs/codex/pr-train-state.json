@@ -97065,7 +97065,7 @@
       "SOLO-OWNER-CMS-REVIEW-02"
     ],
     "status": "local_checks_passed",
-    "commit_sha": "ff4c34dafff285b826126c4e50dc2454cd18434c",
+    "commit_sha": "9487f37476ab89635633e6103425ab7d9ea9c4d6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
     "checks": {
       "dependency": {
@@ -97074,7 +97074,7 @@
       },
       "local_validation": {
         "status": "passed",
-      "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Exact-head Codex review then found that compact Enneagram attestations could bind but could not pass legacy-only closeout/resume/readback. The same-scope repair normalized compact attestations into the binder's exact 116 private rows, added mutually exclusive --attestation command support, and passed V223 (6 tests), V224 (59 tests, 611 assertions), 23-file PHP lint/Pint, Composer/YAML/JSON/diff checks, 27-path scope validation with zero outside paths, and the complete gate again. A later exact-head review found that the registered but unwired MBTI cross-type authority was falsely marked active; commit ff4c34dafff285b826126c4e50dc2454cd18434c keeps it policy-registered and adapter-pending. After rebuilding a stale local Composer classmap, ReviewPolicyRegistry passed with 7 tests and 281 assertions, all 23 changed PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, exact scope remained 27 paths with zero outside paths, and the complete gate passed from the corrected current-worktree classmap. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
+      "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Exact-head Codex review then found that compact Enneagram attestations could bind but could not pass legacy-only closeout/resume/readback. The same-scope repair normalized compact attestations into the binder's exact 116 private rows, added mutually exclusive --attestation command support, and passed V223 (6 tests), V224 (59 tests, 611 assertions), 23-file PHP lint/Pint, Composer/YAML/JSON/diff checks, 27-path scope validation with zero outside paths, and the complete gate again. A later exact-head review found that the registered but unwired MBTI cross-type authority was falsely marked active; commit ff4c34dafff285b826126c4e50dc2454cd18434c keeps it policy-registered and adapter-pending. Another exact-head review found stale bound evidence could survive owner rotation or a mode change; commit 9487f37476ab89635633e6103425ab7d9ea9c4d6 requires the current solo-owner mode and configured owner for reuse, rebinds MBTI evidence after rotation, and rejects stale RIASEC evidence. Focused validation passed with 48 tests and 782 assertions. After a shared temporary SQLite corruption caused a uniform 15-test/0-assertion environment failure, the corrupt file was preserved under /tmp and a clean complete gate passed, including 1510 Big Five tests with 181790 assertions and the previously failing CommerceOrderReadFallback suite with 15 tests and 163 assertions. All 23 PR PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, and exact scope remained 27 paths with zero outside paths. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
       },
     "github": {
       "status": "pending",
@@ -97167,8 +97167,33 @@
       "at": "2026-07-18T09:01:07Z",
       "status": "review_fix_local_checks_passed",
       "note": "Commit ff4c34dafff285b826126c4e50dc2454cd18434c removes the unwired MBTI cross-type surface from the active adapter set, keeps its generated registry status policy_registered_adapter_pending, and corrects the protocol claim. ReviewPolicyRegistry passed with 7 tests and 281 assertions after the current-worktree classmap rebuild; all 23 changed PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, exact scope remained 27 paths with zero outside paths, and the complete ci_verify_mbti.sh gate passed. Validation-generated Big Five compiled timestamps and hashes were restored exactly; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T09:07:13Z",
+      "status": "local_checks_failed",
+      "note": "All nine GitHub checks passed on exact head e6b4c0f072e6487998a46c54481c97c8da99d5dc, then exact-head Codex review found that evidence reuse checked historical solo-owner mode/source/decision but not the current configured owner or current review mode. MBTI idempotency and RIASEC assertApproved could therefore reuse stale evidence after governance reconfiguration. No merge, production write, publish, or deploy occurred."
+    },
+    {
+      "at": "2026-07-18T09:11:00Z",
+      "status": "local_checks_failed",
+      "note": "The first focused rerun loaded Composer metadata generated by another local worktree, causing current-branch classes to be missing and making the result invalid as source evidence. Rebuilding the local autoload map restored all class paths to this checkout; no tracked files or production/CMS/database/search/cache/media/publish/promotion/deploy state changed."
+    },
+    {
+      "at": "2026-07-18T09:12:00Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Current-owner and current-mode evidence reuse regressions passed with the MBTI, RIASEC, and ReviewPolicyRegistry focused suite: 48 tests and 782 assertions. Owner rotation now creates fresh MBTI evidence, while RIASEC rejects old-owner and team-separated reuse."
+    },
+    {
+      "at": "2026-07-18T09:17:00Z",
+      "status": "local_checks_failed",
+      "note": "The first complete ci_verify_mbti.sh attempt passed the 1510-test Big Five gate and all preceding gates, then the shared /tmp/fap-ci.sqlite reported database disk image is malformed. CommerceOrderReadFallback uniformly failed 15 tests before assertions. Integrity check confirmed temporary database corruption with no remaining process owner; this was treated as an environment failure, not a code failure, and no push or production action occurred."
+    },
+    {
+      "at": "2026-07-18T09:25:49Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Commit 9487f37476ab89635633e6103425ab7d9ea9c4d6 requires current solo_owner mode and current configured owner identity before reusing bound Personality evidence. The corrupt temporary SQLite was preserved as /tmp/fap-ci.sqlite.corrupt-pr3162-20260718T0917Z, and a clean complete gate passed, including Big Five 1510 tests/181790 assertions, Personality full-32 71 tests/5383 assertions, and CommerceOrderReadFallback 15 tests/163 assertions. All 23 PR PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, and PR-semantic scope validation reported 27 paths with zero outside. Generated Big Five files were restored exactly; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-18T09:01:07Z"
+  "updated_at": "2026-07-18T09:25:49Z"
 }
 }
