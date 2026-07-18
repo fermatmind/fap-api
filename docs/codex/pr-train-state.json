@@ -97618,7 +97618,7 @@
       "SOLO-OWNER-OPS-APPROVAL-05"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "db70f9536e16f2111e00bff773afea9f076061a7",
+    "commit_sha": "d49ea926dc2a2a04e6d4cc5e9e83e21ea2f85cba",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3185",
     "checks": {
       "dependency": {
@@ -97627,11 +97627,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, and the exact runtime-freeze classifier. The guarded full bash backend/scripts/ci_verify_mbti.sh gate exited 0 through Big Five 1543/188110, Personality 89/5853, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. The remaining Career search, recommendation-index, family-hub, transition-preview, and alias-resolution projections passed 11 tests / 766 assertions; changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, final exact 47-path scope, and diff checks passed. After the unrelated Big Five hubs merge advanced origin/main, the branch was rebased and structured-file/scope checks were revalidated."
+        "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, Enneagram runtime readback, and the exact runtime-freeze classifier. The guarded full bash backend/scripts/ci_verify_mbti.sh gate exited 0 through Big Five 1543/188110, Personality 89/5853, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. The remaining Career search, recommendation-index, family-hub, transition-preview, and alias-resolution projections passed 11 tests / 766 assertions; the normalized Enneagram authorized runtime-closeout readback passed 1 test / 31 assertions; changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, final exact 49-path scope, and diff checks passed. After the unrelated Big Five hubs merge advanced origin/main, the branch was rebased and structured-file/scope checks were revalidated."
       },
       "github": {
         "status": "pending",
-        "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, 26052fc118883c28dbefa0b5f3d398eb0e0b1283, 1ce94dfdedbfcbfef9d361444b4c975df73e94e9, and f36da9db46e183ff4f4b06e166a995c673dcf6d6. Exact-head reviews found and the branch repaired five scoped public-contract gaps plus one P1 surface-annotation traceability gap. A new exact-head check/review cycle is pending."
+        "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, 26052fc118883c28dbefa0b5f3d398eb0e0b1283, 1ce94dfdedbfcbfef9d361444b4c975df73e94e9, f36da9db46e183ff4f4b06e166a995c673dcf6d6, and c7f6ef0c272f071e4894fb944b6142e912405e81. Exact-head reviews found and the branch repaired five scoped public-projection gaps, one P1 surface-annotation traceability gap, and one P1 Enneagram runtime-consumer compatibility gap. A new exact-head check/review cycle is pending."
       }
     },
     "scope_validation": {
@@ -97695,9 +97695,14 @@
         "at": "2026-07-18T23:00:41Z",
         "status": "github_checks_pending",
         "note": "All nine checks passed on f36da9db4, then exact-head Codex review identified five remaining Career public trust-summary builders spanning search, MBTI recommendation index, family hub, transition preview, and alias resolution. Added the normalized three-field contract and redacted reviewer projection to all five builders, with display-asset-only evidence remaining fail-closed as unknown; focused API plus registry validation passed 11 tests / 766 assertions and scoped Pint/syntax/YAML/JSON/diff checks passed. The first post-commit runtime-freeze run exposed two missing PR-specific classifier entries (2 failed / 5 assertions); after adding the exact five Career paths to the PR06 classifier, the retry passed 2 tests / 6 assertions. Final scope is 47 paths with no production or external-state action; a new exact-head CI/review cycle is pending."
+      },
+      {
+        "at": "2026-07-18T23:22:24Z",
+        "status": "github_checks_pending",
+        "note": "All nine checks passed on c7f6ef0c2, then exact-head Codex review identified that Enneagram Authority V2 runtime readback still expected the internal human_review_approved value after the public contract normalized it to approved. Updated the readback consumer to compare and fingerprint the normalized contract, and changed its HTTP fake to emit the same identity-redacted three-field projection as the public controller. The authorized import/bind/promotion/cache/post-readback regression passed 1 test / 31 assertions, scoped Pint/syntax/YAML/diff checks passed, and post-commit runtime-freeze passed 2 / 6. Final scope is 49 paths with no production or external-state action; a new exact-head CI/review cycle is pending."
       }
     ],
-    "updated_at": "2026-07-18T23:00:41Z"
+    "updated_at": "2026-07-18T23:22:24Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
