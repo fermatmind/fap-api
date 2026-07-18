@@ -98406,13 +98406,49 @@
     "branch": "codex/big5-en52-hubs-02",
     "title": "BIG5-EN52-HUBS-02: translate Big Five English hubs",
     "depends_on": ["BIG5-EN52-TRANSLATION-AUTHORITY-01"],
-    "status": "github_checks_pending",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "0f0aa7031d05185170f9a8723dfce5cf1f07d91f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3184",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-TRANSLATION-AUTHORITY-01 merged as 0505baedd97120d837ad4771874730d952028f64; origin/main containment, required checks, review-thread closure, and branch cleanup were verified before this branch was created from that exact SHA."},
       "local_validation": {"status": "passed", "evidence": "The frozen EN52 validator passed expected-translated=2 with pending=50; 31 ordered H2 mappings, 14 FAQ mappings, 13 locked claims, registered visible citations, canonical English links, exact word counts, no CJK, no duplicate substantive body, and zero CMS/production/database/media/search writes. Node syntax, both evidence JSON files, all generated JSON, train YAML/state parsing, git diff checks, and exact 7-path scope validation passed."},
+      "github_required_checks": {"status": "passed", "evidence": "All 9 GitHub checks passed on final head 9e7b8d572ebe908a860aa7b76376a231faaab074; the PR was CLEAN/MERGEABLE with zero unresolved review threads before squash merge as 0f0aa7031d05185170f9a8723dfce5cf1f07d91f."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "failure_reason": null,
+    "merged_at": "2026-07-18T21:52:54Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR2 scope; no page work starts before PR1 merges."},
+      {"at": "2026-07-18T21:39:34Z", "status": "implementation_in_progress", "note": "Started from exact merged PR1 authority SHA 0505baedd97120d837ad4771874730d952028f64. Translating only the model hub and 30-facet hub with one-to-one section/FAQ maps and locked visible claims; CMS, runtime, production, database, media, search, deploy, and fap-web writes remain zero."},
+      {"at": "2026-07-18T21:43:43Z", "status": "local_validation_passed", "note": "Completed exactly two English hub pages and evidence sidecars: 31 ordered H2 mappings, 14 FAQ mappings, 13 locked claims, 4,939 reader-visible English words, canonical /en links, and zero public Chinese fragments. Frozen validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; all controlled write counters remain zero."},
+      {"at": "2026-07-18T21:47:00Z", "status": "github_checks_pending", "note": "Committed the exact seven-path PR2 scope as b1488b732 and opened PR #3184. Merge remains gated on the final head passing every required check and having zero unresolved review threads."},
+      {"at": "2026-07-18T21:52:54Z", "status": "merged", "note": "Final head 9e7b8d572ebe908a860aa7b76376a231faaab074 passed all 9 checks; PR #3184 was CLEAN/MERGEABLE with zero unresolved review threads and squash-merged as 0f0aa7031d05185170f9a8723dfce5cf1f07d91f. origin/main containment was verified and both remote and local feature branches were deleted before PR3 began."}
+    ],
+    "updated_at": "2026-07-18T21:52:54Z"
+  },
+  "BIG5-EN52-DOMAINS-03": {
+    "id": "BIG5-EN52-DOMAINS-03",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-domains-03",
+    "title": "BIG5-EN52-DOMAINS-03: translate five Big Five English domains",
+    "depends_on": ["BIG5-EN52-HUBS-02"],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "passed", "evidence": "BIG5-EN52-HUBS-02 merged as 0f0aa7031d05185170f9a8723dfce5cf1f07d91f after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
+      "local_validation": {"status": "passed", "evidence": "The frozen EN52 validator passed expected-translated=7 with pending=45. All five domain pages preserve 80 ordered H2 mappings, 31 FAQ mappings, 21 locked claims, 8,248 reader-visible English words, registered visible citations, canonical links, and zero CJK, invalid sources, claim mismatches, duplicate substantive body, or word-count drift. Neuroticism is non-diagnostic, Agreeableness non-moralizing, Conscientiousness non-predictive, Extraversion non-deficit-framed, and Openness non-IQ-equated. Node syntax, all scoped JSON, YAML/state parsing, diff checks, and exact 13-path validation passed; all controlled write counters remain zero."},
       "github_required_checks": {"status": "pending", "evidence": null}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
@@ -98427,42 +98463,11 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "transitions": [
-      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR2 scope; no page work starts before PR1 merges."},
-      {"at": "2026-07-18T21:39:34Z", "status": "implementation_in_progress", "note": "Started from exact merged PR1 authority SHA 0505baedd97120d837ad4771874730d952028f64. Translating only the model hub and 30-facet hub with one-to-one section/FAQ maps and locked visible claims; CMS, runtime, production, database, media, search, deploy, and fap-web writes remain zero."},
-      {"at": "2026-07-18T21:43:43Z", "status": "local_validation_passed", "note": "Completed exactly two English hub pages and evidence sidecars: 31 ordered H2 mappings, 14 FAQ mappings, 13 locked claims, 4,939 reader-visible English words, canonical /en links, and zero public Chinese fragments. Frozen validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; all controlled write counters remain zero."},
-      {"at": "2026-07-18T21:47:00Z", "status": "github_checks_pending", "note": "Committed the exact seven-path PR2 scope as b1488b732 and opened PR #3184. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR3 scope; no domain work starts before PR2 merges."},
+      {"at": "2026-07-18T21:54:00Z", "status": "implementation_in_progress", "note": "Started from exact merged PR2 SHA 0f0aa7031d05185170f9a8723dfce5cf1f07d91f. Scope is limited to the five domain pages, their evidence, QA, ledger completions, and train closeout; ranges, facet details, hubs, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-18T22:11:40Z", "status": "local_validation_passed", "note": "Completed five domain pages and evidence sidecars with 80 ordered H2 mappings, 31 FAQs, 21 locked claims, and 8,248 visible English words. The frozen translated=7 validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; scientific and product boundary review found zero P0 blockers, and every controlled write counter remains zero."}
     ],
-    "updated_at": "2026-07-18T21:47:00Z"
-  },
-  "BIG5-EN52-DOMAINS-03": {
-    "id": "BIG5-EN52-DOMAINS-03",
-    "repo": "fap-api",
-    "base": "main",
-    "branch": "codex/big5-en52-domains-03",
-    "title": "BIG5-EN52-DOMAINS-03: translate five Big Five English domains",
-    "depends_on": ["BIG5-EN52-HUBS-02"],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {
-      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
-      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-HUBS-02 merge."},
-      "local_validation": {"status": "pending", "evidence": null},
-      "github_required_checks": {"status": "pending", "evidence": null}
-    },
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
-    "api_runtime_change": false,
-    "publish_allowed": false,
-    "deploy_allowed": false,
-    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR3 scope; no domain work starts before PR2 merges."}],
-    "updated_at": "2026-07-18T18:36:28Z"
+    "updated_at": "2026-07-18T22:11:40Z"
   },
   "BIG5-EN52-RANGES-04": {
     "id": "BIG5-EN52-RANGES-04",
