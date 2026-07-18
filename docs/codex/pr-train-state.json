@@ -97065,7 +97065,7 @@
       "SOLO-OWNER-CMS-REVIEW-02"
     ],
     "status": "local_checks_passed",
-    "commit_sha": "9487f37476ab89635633e6103425ab7d9ea9c4d6",
+    "commit_sha": "90978a9ed064bbb6520787a9cf175a257199c8d9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
     "checks": {
       "dependency": {
@@ -97078,7 +97078,7 @@
       },
     "github": {
       "status": "pending",
-      "evidence": "PR #3162 is open from codex/solo-owner-personality-review-03 to main. Required checks and exact-head Codex review are pending; no merge is permitted until they pass on the final pushed head."
+      "evidence": "PR #3162 is open from codex/solo-owner-personality-review-03 to main. Exact-set evidence reuse repair 90978a9ed064bbb6520787a9cf175a257199c8d9 passed focused and complete local validation; required checks and exact-head Codex review are pending after push, and no merge is permitted until both pass on the final head."
       }
     },
     "scope_validation": {
@@ -97197,9 +97197,14 @@
       "at": "2026-07-18T09:29:52Z",
       "status": "github_checks_pending",
       "note": "Origin main advanced with merged Career PR #3163 while the PR03 review fix was in progress, making PR #3162 temporarily conflicting. Merge commit e04909b1590977451d69427034c891187f109445 integrated origin/main; the only conflicts were append-at-end train metadata and were resolved by preserving the complete PR03 entries plus the complete Career entries from main. YAML/JSON parsing, diff checks, the 48-test/782-assertion focused suite, and PR-semantic 27-path/zero-outside validation passed after the merge. Exact-head GitHub checks and Codex review are pending."
+    },
+    {
+      "at": "2026-07-18T09:50:43Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Resolved exact-head Codex P2 feedback in implementation commit 90978a9ed064bbb6520787a9cf175a257199c8d9 by requiring one current-owner approved_all attestation whose target_count, canonical target_set_sha256, and exact expanded evidence match the complete requested Personality target set. Two separate single-target attestations can no longer be combined as batch evidence. The MBTI/RIASEC/ReviewPolicy suite passed 49 tests/786 assertions; Big Five/Enneagram focused validation passed 126 tests/1179 assertions; Pint, Composer/YAML/JSON/diff checks and PR-semantic 27-path/zero-outside validation passed; and the complete ci_verify_mbti.sh gate exited zero. Validation-generated Big Five compiled timestamps and hashes were restored exactly. No production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-18T09:29:52Z"
+  "updated_at": "2026-07-18T09:50:43Z"
 },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
