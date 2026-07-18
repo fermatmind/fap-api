@@ -298,6 +298,54 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertSame($oldZh, $cache->directoryReadModelPayload('zh-CN'));
     }
 
+    public function test_atomic_directory_activation_stays_committed_when_legacy_cleanup_fails(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldEn = ['public_count' => 1, 'items' => [['slug' => 'old-en']]];
+        $newEn = ['public_count' => 2, 'items' => [['slug' => 'new-en']]];
+        $newZh = ['public_count' => 2, 'items' => [['slug' => 'new-zh']]];
+        $cache->publishDirectoryReadModel('en', $oldEn);
+        $legacyEnKey = PublicCareerAuthorityResponseCache::DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX.':en';
+        Cache::forever($legacyEnKey, $oldEn);
+        $cacheManager = Cache::getFacadeRoot();
+        $legacyCleanupAttempts = 0;
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static fn (string $key, mixed $value): bool => $cacheManager->forever($key, $value));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static function (string $key) use ($cacheManager, $legacyEnKey, &$legacyCleanupAttempts): bool {
+                    if ($key === $legacyEnKey) {
+                        $legacyCleanupAttempts++;
+
+                        throw new \RuntimeException('synthetic legacy cleanup failure');
+                    }
+
+                    return $cacheManager->forget($key);
+                });
+
+            $versions = $cache->publishDirectoryReadModelsAtomically([
+                'en' => $newEn,
+                'zh-CN' => $newZh,
+            ]);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame(1, $legacyCleanupAttempts);
+        $this->assertSame($versions['en'], $cache->directoryCacheStatus('en')['active_version']);
+        $this->assertSame($versions['zh-CN'], $cache->directoryCacheStatus('zh-CN')['active_version']);
+        $this->assertSame($newEn, $cache->directoryReadModelPayload('en'));
+        $this->assertSame($newZh, $cache->directoryReadModelPayload('zh-CN'));
+    }
+
     public function test_promotion_read_model_activation_restores_job_indexes_when_directory_switch_fails(): void
     {
         $family = OccupationFamily::query()->create([

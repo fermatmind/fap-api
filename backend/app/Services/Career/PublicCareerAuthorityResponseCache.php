@@ -1423,7 +1423,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         foreach ($versions as $locale => $version) {
-            Cache::forget($this->directoryReadModelCacheKey($locale));
+            $this->forgetLegacyDirectoryReadModelSafely($locale);
             $this->logDirectoryCacheState($locale, 'rebuild', $version, [
                 'rebuild' => 'batch_finished',
                 'activation' => 'atomic_multi_locale',
@@ -1431,6 +1431,25 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         return $versions;
+    }
+
+    /**
+     * The v1 directory key is only a compatibility fallback after verified v2
+     * pointers have been activated. Cleanup must not turn a successful atomic
+     * pointer switch into a promotion failure whose remediation could diverge
+     * database authority from those active pointers.
+     */
+    private function forgetLegacyDirectoryReadModelSafely(string $locale): void
+    {
+        try {
+            Cache::forget($this->directoryReadModelCacheKey($locale));
+        } catch (\Throwable $throwable) {
+            Log::warning('career_directory_legacy_cache_cleanup_failed', [
+                'locale' => $locale,
+                'error_class' => $throwable::class,
+                'activation' => 'atomic_multi_locale',
+            ]);
+        }
     }
 
     private function activateStagedDirectoryReadModel(string $locale, string $version, mixed $previousVersion): void
