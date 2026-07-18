@@ -96749,5 +96749,199 @@
         }
       ],
       "updated_at": "2026-07-16T18:09:14Z"
+  },
+  "SOLO-OWNER-REVIEW-FOUNDATION-01": {
+    "id": "SOLO-OWNER-REVIEW-FOUNDATION-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/solo-owner-review-foundation-01",
+    "title": "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract",
+    "depends_on": [],
+    "status": "external_review_quota_hold",
+    "commit_sha": "afeb12c16aaff374d0015009d9f39ead1967a51d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3160",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "This foundation PR has no dependencies; clean latest main and absent local/remote task branch were verified before branch creation."
+      },
+      "ci_verify_mbti_initial": {
+        "status": "failed_then_repaired",
+        "evidence": "The first complete backend/scripts/ci_verify_mbti.sh run failed only because the new down migration used dropIfExists, which violates the repository migration-safety gate. The migration was changed to guarded Schema::drop calls; focused migration-safety tests and the complete verifier then passed."
+      },
+      "ci_verify_mbti": {
+        "status": "passed",
+        "evidence": "bash backend/scripts/ci_verify_mbti.sh completed with exit 0 after the scoped migration-safety repair."
+      },
+      "focused_contracts": {
+        "status": "failed_then_repaired_and_passed",
+        "evidence": "The original ReviewGovernance unit/feature/architecture tests plus the Big Five runtime-freeze classifier passed: 371 tests, 1001 assertions. The post-review scope/storage and execution-separation suite initially exposed a test-only array/DTO assertion mistake; after correcting the assertion, the full manifest-focused suite passed: 15 tests, 301 assertions."
+      },
+      "migration_fresh_sqlite": {
+        "status": "passed",
+        "evidence": "Fresh temporary SQLite migration succeeded; one-step rollback removed only review_attestations and review_attestation_target_evidences while retaining the existing users table."
+      },
+      "static_validation": {
+        "status": "passed",
+        "evidence": "PHP lint, Pint (21 files), Composer validate --strict, JSON/YAML parsing, read-only preflight, git diff --check, and exact 28-file allowlist validation passed after the manifest explicitly added the required nested backend/AGENTS.md contract."
+      },
+      "github": {
+        "status": "passed_on_ledger_head",
+        "evidence": "All nine required and security checks passed on ledger-only PR head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae; GitHub reported mergeStateStatus=CLEAN and mergeable=MERGEABLE. Green checks do not replace the missing exact-head Codex review. commit_sha intentionally remains the reviewed PR code head afeb12c16aaff374d0015009d9f39ead1967a51d rather than self-referencing ledger-only commits."
+      },
+      "codex_review": {
+        "status": "external_review_quota_hold",
+        "evidence": "The latest completed Codex review covers PR code head afeb12c16aaff374d0015009d9f39ead1967a51d and confirmed the JSON redaction repair plus the ledger alignment finding. An explicit @codex review request for ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae at 2026-07-17T19:34:59Z was rejected at 2026-07-17T19:35:06Z because code-review usage limits were exhausted. Observation through 2026-07-17T19:44:53Z produced no delayed automatic exact-head review; the old review is not treated as exact-head evidence."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": "External Codex code-review quota exhausted: exact-head review is unavailable for ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae. PR1 must remain open and unmerged, its current resolved-state audit must not be finalized, and PR2 must not start until a completed exact-head review is independently verified.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-17T14:40:19Z",
+        "status": "pending_dependency",
+        "note": "Initialized from the explicit seven-PR serial execution goal with the required no-production-write defaults."
+      },
+      {
+        "at": "2026-07-17T14:40:19Z",
+        "status": "implementation_in_progress",
+        "note": "PR1 has no dependency. Latest main parity, clean worktree, and absent local/remote task branch were verified before creating the exact scoped branch. No production, CMS, database, publish, deploy, or review-bind action occurred."
+      },
+      {
+        "at": "2026-07-17T15:17:00Z",
+        "status": "local_validated",
+        "note": "All required PR1 checks passed after replacing the migration-safety-incompatible dropIfExists rollback with guarded drops. The complete backend verifier passed, the exact 27-file scope is clean, generated Big Five timestamp noise was removed, and no production or CMS action occurred."
+      },
+      {
+        "at": "2026-07-17T15:18:30Z",
+        "status": "ready_to_push",
+        "note": "The exact 27-file implementation and local-validation ledger were committed as 0e289aef5f16ee82b71bcd1f9ee0feab059648f2; only this ledger transition remains before push."
+      },
+      {
+        "at": "2026-07-17T15:19:34Z",
+        "status": "github_checks_pending",
+        "note": "PR #3160 was opened with the required scope, validation, privacy, repository-rule, deferred-item, and no-production-execution sections. Required checks and exact-head review are pending."
+      },
+      {
+        "at": "2026-07-17T15:28:41Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on the prior head. Two valid same-scope Codex P2 findings were repaired and targeted validation passed; a new head, full check rerun, and exact-head Codex review are required before merge."
+      },
+      {
+        "at": "2026-07-17T15:38:00Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on 6d17ef04b76c75a88fca32ef8ba0c98697b28943. Its Codex review found one additional valid P2: the architecture exemption was namespace-wide. The exemption is now an exact PR1 foundation file list with a regression test; a new full check run and exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T15:45:38Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on 2b719fef7163f37f70bd9ef07ef4b554661d044a. Its exact-head Codex review found one additional valid P2: the Big Five runtime-freeze helper still exempted every future ReviewGovernance DTO. The helper now allows only the three PR1 DTOs and explicitly regression-blocks a future DTO; a new full check run and exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T15:53:21Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on adcc27655d0c54fe676a46989b001bcc0d3db608. Its exact-head Codex review found a concurrent-bind idempotency race. Parent creation now uses createOrFirst, whose unique-conflict path reloads from the write connection before the existing exact target-evidence readback; focused binding and contract validation passed."
+      },
+      {
+        "at": "2026-07-17T16:07:31Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on a30f7798d1c4f72bded849ef16e7c46e837e2f8e. Its exact-head Codex review found only that commit_sha still pointed at the original implementation commit. The ledger now certifies a30f7798d1c4f72bded849ef16e7c46e837e2f8e; this ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T16:22:40Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on a5e212f9d35dc4b825e4e4fdc2a189cb76638865. Its exact-head Codex review confirmed the exception-canonicalization fix and found only that the ledger still certified the pre-fix SHA. The ledger now certifies the actual checked implementation head; this final ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T16:38:19Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on 8cf2133f129abf9129af7a91f93a4623b462dd32. Its exact-head Codex review confirmed the modified/removed review-gate marker repair and found only that the ledger still certified the pre-fix SHA. The ledger now certifies the actual checked implementation head; this final ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T17:05:22Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on ledger-only head c2813d18e82dc412879c8f2e1a069481189a4fa6. Its exact-head Codex review found that future adapters using only the compact ReviewAttestation bind path could evade the review-surface scanner. ReviewAttestation service, validator, and payload markers are now covered with regression assertions; focused architecture validation, PHP lint, Pint, and diff checks passed, and a new full check run plus exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T17:14:55Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on a0c380a1e7358ba78aefbafb2219ebe226d7ad19. Its exact-head Codex review confirmed the attestation-marker repair and found two ledger-only issues: an unrelated B5 status was changed and this PR1 entry remained prematurely ready before revalidation. The unrelated status is restored and PR1 now certifies the checked implementation head; this final ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T17:25:57Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on ledger-only head b92bac3f85014570e770ad085b3e42d079d75827. Its exact-head Codex review found that the exact foundation-file allowlist would also exempt future modifications. The exemption now requires the file to be both an exact PR1 foundation path and newly added in the current diff; focused architecture validation passed with 6 tests and 233 assertions, PHP lint, Pint, and diff checks passed, and a new full check run plus exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T17:34:09Z",
+        "status": "ready_to_merge",
+        "note": "All nine checks passed on 03afc3524d039da6dafd0ee19c6fa55c305b9ccd. Its exact-head Codex review confirmed the added-only foundation exemption and found only that the ledger still certified the pre-fix head. The ledger now certifies the actual checked implementation head; this final ledger-only transition must revalidate before squash merge."
+      },
+      {
+        "at": "2026-07-17T17:47:19Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on ledger-only head 53f358ad205bdcc44e8428daad9bc3188c617c29. Its exact-head Codex review found that scope_type accepted values longer than its 64-character storage column and that R1 surfaces incorrectly disabled production execution separation. Validation now enforces scope_type <= 64 and scope_identity <= 191, every registered surface requires separate production execution, and the generated inventory was refreshed. The first focused rerun exposed only a test-return-type assertion mistake; after repair, 15 tests with 301 assertions, PHP lint, Pint, Composer, YAML/JSON, generated-inventory parity, and diff checks passed."
+      },
+      {
+        "at": "2026-07-17T17:57:29Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on 30c33487ec6f16bc0bf440b54be0314d7c17032c. Its exact-head Codex review found that backend/AGENTS.md still described the historical Big Five ZH6 solo_operator cohort as a global role-separation exception, conflicting with the root solo_owner contract. The nested contract now makes solo_owner authoritative, keeps the historical label as cohort evidence only, repeats the @review-surface fail-closed rule, and the manifest explicitly adds backend/AGENTS.md to this PR scope. YAML and diff checks passed; a new full check run and exact-head review are required."
+      },
+      {
+        "at": "2026-07-17T18:08:00Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on b89a376fd7705544530805c24f9d3cb9d7a47640. Its exact-head Codex review confirmed the nested contract repair and found that the protocol's generic list-order statement omitted the fingerprint builder's required exception normalization. The protocol now explicitly sorts top-level exceptions by target_identity before canonical encoding and evidence hashing; JSON/YAML and diff validation remain required on the new head."
+      },
+      {
+        "at": "2026-07-17T18:19:38Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on eeba4a5ca00f52520f0d8ad6b1cbe9dada5205ef. Its exact-head Codex review confirmed the exception-order protocol repair and found that the architecture scanner hard-coded origin/main, which is not guaranteed in default shallow GitHub checkouts. Diff-base resolution now prefers an explicit override or available remote base, otherwise reads and narrowly fetches the exact GitHub pull-request base SHA, then falls back to HEAD parent; direct base-to-HEAD scans avoid a second shallow merge-base assumption. Focused architecture validation passed with 6 tests and 255 assertions plus PHP lint, Pint, and diff checks."
+      },
+      {
+        "at": "2026-07-17T18:28:35Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed on bb7bf065e20484c2b39da7f125aea45190abb7f6. Its exact-head Codex review confirmed the shallow-checkout repair and found that changed gates using revision_status or STATUS_APPROVED were not classified as manual approval gates. Those tokens now trigger the changed-file @review-surface scanner with a regression assertion. An initial over-broad attempt also applied the tokens to the all-model inventory scan and exposed a future PR4 surface; that adjacent change was removed, and the scoped architecture suite passed with 6 tests and 256 assertions plus PHP lint, Pint, and diff checks."
+      },
+      {
+        "at": "2026-07-17T18:40:29Z",
+        "status": "external_review_quota_hold",
+        "note": "All nine GitHub checks passed on f6b38296458018d09c335deb532d8768a56f618b and the PR is CLEAN/MERGEABLE, but the latest completed Codex review still covers only bb7bf065e20484c2b39da7f125aea45190abb7f6. The connector rejected the exact-head review request because code-review usage limits were exhausted. The old review is not exact-head evidence; do not merge, resolve current threads as final, or start PR2 until the external review gate is restored."
+      },
+      {
+        "at": "2026-07-17T18:52:35Z",
+        "status": "review_fix_validated",
+        "note": "The external review gate recovered: all nine checks passed and Codex reviewed exact head 5c9360ee73bdf93b523bb06285c20fbb6091f26a. The review found one valid P2 in the Big Five runtime-freeze classifier: exact PR1 foundation files were still exempted in future modification diffs. The exemption now requires each exact path to be newly added, and focused tests prove new files remain exempt while later Service/Validator modifications are classified as runtime-impacting. A new head, full required checks, and exact-head review are required before merge."
+      },
+      {
+        "at": "2026-07-17T19:12:36Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed and Codex reviewed exact head 688af0adf93600fb71d6207fdd059610d4b3a21e. The review found one valid P2: JSON preflight failures exposed lower-level exception text that can contain private target identities. JSON failures now return only a stable redacted error code/message plus zero-write and no-production-authorization flags; detailed exception text remains local to non-JSON mode. Focused tests prove a malicious private identity and duplicate diagnostic are absent from JSON. A new head, full required checks, and exact-head review are required before merge."
+      },
+      {
+        "at": "2026-07-17T19:27:40Z",
+        "status": "review_fix_validated",
+        "note": "All nine checks passed and Codex reviewed exact PR code head afeb12c16aaff374d0015009d9f39ead1967a51d. The JSON redaction fix was confirmed; the only new valid P2 was stale ledger commit_sha evidence. commit_sha now binds afeb12c16aaff374d0015009d9f39ead1967a51d, while the e2938ed8 value mentioned in the finding is recorded as GitHub's synthetic merge ref rather than PR head. This ledger-only closeout deliberately does not self-reference and remains pending a new full check run plus exact-head review before merge."
+      },
+      {
+        "at": "2026-07-17T19:44:53Z",
+        "status": "external_review_quota_hold",
+        "note": "All nine checks passed on ledger-only head 1e63023ebc8510835d71edf9ceb2f3528c79d5ae and GitHub reports CLEAN/MERGEABLE, but the latest completed Codex review still covers only PR code head afeb12c16aaff374d0015009d9f39ead1967a51d. The exact-head request was quota-rejected at 2026-07-17T19:35:06Z and no delayed automatic review appeared during observation through 2026-07-17T19:44:53Z. Keep PR1 open and unmerged, do not finalize thread resolution, and do not start PR2 until exact-head review becomes available."
+      }
+    ],
+    "updated_at": "2026-07-17T19:44:53Z"
   }
 }

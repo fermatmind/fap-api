@@ -200,6 +200,46 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_new_solo_owner_review_foundation_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/ReviewAttestationPreflight.php',
+            'backend/app/DTO/ReviewGovernance/ReviewTarget.php',
+            'backend/app/Models/ReviewAttestation.php',
+            'backend/app/Models/ReviewAttestationTargetEvidence.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationService.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+            'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php',
+        ];
+        $blocked = [
+            'backend/app/DTO/ReviewGovernance/FutureApprovalRequest.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationPublisher.php',
+            'backend/database/migrations/2026_07_17_150100_publish_review_attestations.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+        $modifiedFoundationFiles = [
+            'backend/app/Services/ReviewGovernance/ReviewAttestationService.php',
+            'backend/app/Services/ReviewGovernance/ReviewAttestationValidator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $allowed,
+            '',
+            '',
+            soloOwnerReviewFoundationAddedFiles: $allowed,
+        ));
+        $this->assertSame(
+            $modifiedFoundationFiles,
+            $this->mbtiImpactingRuntimeChanges(
+                $modifiedFoundationFiles,
+                '',
+                '',
+                soloOwnerReviewFoundationAddedFiles: [],
+            ),
+        );
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -5902,7 +5942,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
         $this->assertSame(0, $exitCode);
 
-        return $this->mbtiImpactingRuntimeChanges(array_values(array_unique(array_filter($output))), $repoRoot, $baseRef);
+        $addedCommand = array_merge(
+            ['git', '-C', $repoRoot, 'diff', '--name-only', '--diff-filter=A', "{$baseRef}...HEAD", '--'],
+            $paths,
+        );
+        $addedOutput = [];
+        $addedExitCode = 0;
+        exec(implode(' ', array_map('escapeshellarg', $addedCommand)), $addedOutput, $addedExitCode);
+        $this->assertSame(0, $addedExitCode);
+
+        return $this->mbtiImpactingRuntimeChanges(
+            array_values(array_unique(array_filter($output))),
+            $repoRoot,
+            $baseRef,
+            soloOwnerReviewFoundationAddedFiles: array_values(array_unique(array_filter($addedOutput))),
+        );
     }
 
     /**
@@ -5931,10 +5985,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $shareControllerChangedLines = null,
         ?array $opsAccessControlChangedLines = null,
         ?array $scaleLookupControllerChangedLines = null,
+        ?array $soloOwnerReviewFoundationAddedFiles = null,
     ): array {
         $impacting = [];
+        $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
+            $soloOwnerReviewFoundationAddedFiles ?? [],
+            true,
+        );
 
         foreach ($changed as $file) {
+            if (
+                $this->isSoloOwnerReviewFoundationFile($file)
+                && isset($soloOwnerReviewFoundationAddedFileSet[$file])
+            ) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -7677,6 +7743,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return array_values(array_unique($impacting));
+    }
+
+    private function isSoloOwnerReviewFoundationFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/ReviewAttestationPreflight.php'
+            || in_array($file, [
+                'backend/app/DTO/ReviewGovernance/ReviewTarget.php',
+                'backend/app/DTO/ReviewGovernance/ReviewTargetSet.php',
+                'backend/app/DTO/ReviewGovernance/ValidatedReviewAttestation.php',
+            ], true)
+            || in_array($file, [
+                'backend/app/Models/ReviewAttestation.php',
+                'backend/app/Models/ReviewAttestationTargetEvidence.php',
+            ], true)
+            || in_array($file, [
+                'backend/app/Services/ReviewGovernance/ReviewAttestationCanonicalizer.php',
+                'backend/app/Services/ReviewGovernance/ReviewAttestationFactory.php',
+                'backend/app/Services/ReviewGovernance/ReviewAttestationFingerprintBuilder.php',
+                'backend/app/Services/ReviewGovernance/ReviewAttestationSchema.php',
+                'backend/app/Services/ReviewGovernance/ReviewAttestationService.php',
+                'backend/app/Services/ReviewGovernance/ReviewAttestationValidationException.php',
+                'backend/app/Services/ReviewGovernance/ReviewAttestationValidator.php',
+                'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+            ], true)
+            || $file === 'backend/database/migrations/2026_07_17_150000_create_review_attestations_and_target_evidence_tables.php';
     }
 
     private function isCareerConsoleCommandFile(string $file): bool

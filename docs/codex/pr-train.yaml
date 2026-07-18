@@ -45081,3 +45081,61 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend_business_truth_with_provider_browser_telemetry
+
+  - id: SOLO-OWNER-REVIEW-FOUNDATION-01
+    repo: fap-api
+    base: main
+    branch: codex/solo-owner-review-foundation-01
+    title: "SOLO-OWNER-REVIEW-FOUNDATION-01: add the global compact owner-attestation contract"
+    status: user_authorized
+    depends_on: []
+    train_scope: global_solo_owner_review_governance_foundation
+    scope:
+      - Add the central solo-owner review governance configuration, compact attestation schema, canonicalizer, validator, deterministic target-set fingerprint builder, and transactional binder.
+      - Add backend-authoritative immutable attestation and per-target evidence models/tables without migrating or backfilling existing review workflows.
+      - Add ReviewPolicyRegistry, a read-only preflight command, architecture and behavior tests, the generated review-surface inventory, and the repository contract for solo-owner internal review.
+      - Keep external evidence, automated checks, exact production authorization, publish/promotion separation, high-risk step-up, and all production/CMS/database writes unchanged and prohibited.
+    allowed_paths:
+      - backend/.env.example
+      - backend/config/review_governance.php
+      - backend/database/migrations/*review_attestation*
+      - backend/app/Models/ReviewAttestation*.php
+      - backend/app/Services/ReviewGovernance/**
+      - backend/app/DTO/ReviewGovernance/**
+      - backend/app/Console/Commands/*ReviewAttestation*
+      - backend/tests/Feature/ReviewGovernance/**
+      - backend/tests/Unit/ReviewGovernance/**
+      - backend/tests/Architecture/ReviewPolicyRegistryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/operations/solo-owner-review-protocol.md
+      - docs/operations/generated/solo-owner-review-surface-registry.v1.json
+      - AGENTS.md
+      - backend/AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Migrate concrete CMS, personality, Career/SEO, Ops approval, public API, or frontend workflows assigned to PR2-PR7.
+      - Run production migrations, backfills, attestation binds, CMS writes, imports, publication, promotion, refunds, rollback, search submission, deployment, or any other production action.
+      - Weaken external-evidence requirements, required checks, exact-SHA authorization, readback, audit, permissions, TOTP, or production execution separation.
+    validation:
+      - fresh temporary SQLite up/down migration verification
+      - cd backend && php artisan test tests/Unit/ReviewGovernance tests/Feature/ReviewGovernance tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && php artisan review:attestation-preflight --attestation=<fixture> --targets=<fixture> --json --no-ansi
+      - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
+      - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool docs/operations/generated/solo-owner-review-surface-registry.v1.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: CMS/backend
