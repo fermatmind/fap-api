@@ -238,6 +238,7 @@ async function main() {
     const sourcePath = sourceEntry.source_file;
     const sourceBytes = await readFile(path.join(sourceRoot, sourcePath));
     const markdown = sourceBytes.toString('utf8');
+    const zhSectionHeadings = [...markdown.matchAll(/^##\s+(.+)$/gm)].map((match) => match[1]);
     const pageIdentity = frontmatterValue(markdown, 'content_identity');
     const parentIdentity = frontmatterValue(markdown, 'parent_identity') === 'null'
       ? null
@@ -258,8 +259,10 @@ async function main() {
       backend_locale_contract: 'en',
       zh_source_path: sourcePath,
       zh_source_sha256: sha256(sourceBytes),
-      zh_section_count: markdown.match(/^##\s+/gm)?.length ?? 0,
+      zh_section_count: zhSectionHeadings.length,
+      zh_section_headings: zhSectionHeadings,
       zh_faq_count: sourceEntry.asset.faq.length,
+      zh_faq_questions: sourceEntry.asset.faq.map((item) => item.question),
       zh_source_ids: sourceEntry.asset.authority.sources.map((source) => source.id),
       zh_runtime_projection_sha256: sourceEntry.runtime_projection_sha256,
       zh_canonical_path: sourceEntry.asset.canonical.path,

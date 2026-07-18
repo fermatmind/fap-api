@@ -10,7 +10,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(ROOT, '..', '..');
 const EXPECTED_SOURCE_SHA = '056b10d3f640d0cf7da35ec7bc99b009408049e75c1e25aa8e760eb8641ea8d5';
 const EXPECTED_RELEASE_SHA = '83536987f7edc73d668f481942c94f6bf549abf23a0e498941f47bc56726490d';
-const EXPECTED_MANIFEST_SHA = 'd7909510e3b306ba6dceb03286ed3d05f3ffa19edd688606b6d2d4b329895c56';
+const EXPECTED_MANIFEST_SHA = 'ee0fc42f087734e7094f13195449f9c8f98e9b2b8011e7f9b1cf7548fad1e0bf';
 const ALIASES = new Set([
   'emotional-stability', 'high-agreeableness', 'high-conscientiousness', 'high-extraversion',
   'high-neuroticism', 'high-openness', 'low-agreeableness', 'low-conscientiousness',
@@ -232,6 +232,7 @@ async function main() {
   let unknownCanonicalLinkCount = 0;
   let emptySectionCount = 0;
   let emptyFaqCount = 0;
+  let duplicateFaqQuestionCount = 0;
   let substantiveBodyExactDuplicateCount = 0;
   let wordCountMismatchCount = 0;
   const canonicalSet = new Set(canonicals);
@@ -282,7 +283,7 @@ async function main() {
     const frontmatterMediaKeys = frontmatterKeys.filter((key) => {
       if (key === 'media_supported') return false;
       const normalized = key.replaceAll('_', '').replaceAll('-', '').toLowerCase();
-      return ['hero', 'inline', 'og', 'opengraph', 'twitter', 'image', 'media', 'thumbnail']
+      return ['hero', 'inline', 'og', 'opengraph', 'twitter', 'image', 'media', 'thumbnail', 'cover', 'featured', 'banner']
         .some((prefix) => normalized.startsWith(prefix));
     });
     if (frontmatterMediaKeys.length) fail(
@@ -292,7 +293,10 @@ async function main() {
     const chineseMatches = markdown.match(/[\u3400-\u9fff]/g)?.length ?? 0;
     untranslatedChineseFragmentCount += chineseMatches;
     if (chineseMatches) fail('untranslated_public_chinese_fragment', `${completedEntry.target_path}: ${chineseMatches}`);
-    if (/!\[[^\]]*\]\([^)]+\)/.test(body) || /<img\b/i.test(body)) fail('forbidden_media', completedEntry.target_path);
+    if (/!\[[^\]]*\](?:\([^)]+\)|\[[^\]]*\])?/.test(body)
+      || /<(?:img|picture|source|video|audio|svg|iframe|object)\b/i.test(body)
+      || /data:image\//i.test(body))
+      fail('forbidden_media', completedEntry.target_path);
     const declaredWords = frontmatter.word_count_en;
     const actualWords = englishWordCount(body);
     if (declaredWords !== actualWords) {
@@ -308,6 +312,15 @@ async function main() {
     }
     const faq = h2Sections.find((section) => section[1] === 'Frequently Asked Questions');
     const faqQuestions = faq ? [...faq[2].matchAll(/^\*\*(.+[?])\*\*$/gm)] : [];
+    if (h2Sections.length !== locked.zh_section_count)
+      fail('section_coverage_count', `${completedEntry.target_path}: ${h2Sections.length} != ${locked.zh_section_count}`);
+    if (faqQuestions.length !== locked.zh_faq_count)
+      fail('faq_coverage_count', `${completedEntry.target_path}: ${faqQuestions.length} != ${locked.zh_faq_count}`);
+    const normalizedFaqQuestions = faqQuestions.map((match) => match[1].toLowerCase().replace(/[^a-z0-9]+/g, ''));
+    if (new Set(normalizedFaqQuestions).size !== normalizedFaqQuestions.length) {
+      duplicateFaqQuestionCount += 1;
+      fail('duplicate_faq_question', completedEntry.target_path);
+    }
     if (faqQuestions.length === 0) {
       emptyFaqCount += 1;
       fail('empty_faq', completedEntry.target_path);
@@ -382,6 +395,29 @@ async function main() {
       const actual = Array.isArray(expected) ? [...(claimFile[key] ?? [])].sort() : claimFile[key];
       if (JSON.stringify(actual) !== JSON.stringify(expected))
         fail('translation_evidence_lock', `${completedEntry.claim_path}: ${key}`);
+    }
+    const sectionMap = claimFile.section_map ?? [];
+    const enSectionHeadings = h2Sections.map((section) => section[1]);
+    if (sectionMap.length !== locked.zh_section_headings.length) {
+      fail('section_translation_map_count', completedEntry.claim_path);
+    } else {
+      for (const [index, row] of sectionMap.entries()) {
+        if (row.zh_heading !== locked.zh_section_headings[index]
+          || row.en_heading !== enSectionHeadings[index]
+          || !VALID_EQUIVALENCE_STATUSES.has(row.translation_equivalence_status))
+          fail('section_translation_map', `${completedEntry.claim_path}: ${index + 1}`);
+      }
+    }
+    const faqMap = claimFile.faq_map ?? [];
+    if (faqMap.length !== locked.zh_faq_questions.length) {
+      fail('faq_translation_map_count', completedEntry.claim_path);
+    } else {
+      for (const [index, row] of faqMap.entries()) {
+        if (row.zh_question !== locked.zh_faq_questions[index]
+          || row.en_question !== faqQuestions[index][1]
+          || !VALID_EQUIVALENCE_STATUSES.has(row.translation_equivalence_status))
+          fail('faq_translation_map', `${completedEntry.claim_path}: ${index + 1}`);
+      }
     }
     const releaseAsset = releaseByAuthorityKey.get(locked.authority_asset_key);
     if (!releaseAsset) {
@@ -476,6 +512,7 @@ async function main() {
     unknown_canonical_link_count: unknownCanonicalLinkCount,
     empty_section_count: emptySectionCount,
     empty_faq_count: emptyFaqCount,
+    duplicate_faq_question_count: duplicateFaqQuestionCount,
     substantive_body_exact_duplicate_count: substantiveBodyExactDuplicateCount,
     word_count_mismatch_count: wordCountMismatchCount,
     cms_write_count: 0,

@@ -98034,7 +98034,7 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "All 9 GitHub checks passed on implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79, ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28, review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b, source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f, claim/media head fda2adfa0128024e5eadf576f630db90d6db5e45, and manifest/frontmatter head 8755ec230afaf6724120fcdf0b2d824be1c4b05d. Eleven actionable Codex review findings were accepted; the final canonical/registry lock head must repeat the same 9-check gate before merge."
+        "evidence": "All 9 GitHub checks passed on implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79, ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28, review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b, source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f, claim/media head fda2adfa0128024e5eadf576f630db90d6db5e45, manifest/frontmatter head 8755ec230afaf6724120fcdf0b2d824be1c4b05d, and canonical/registry head 566a41c33d6c91c32ace4c081e75143d54be0481. Thirteen actionable Codex review findings were accepted; the final coverage/media-syntax head must repeat the same 9-check gate before merge."
       }
     },
     "scope_validation": {
@@ -98109,9 +98109,14 @@
         "at": "2026-07-18T19:58:00Z",
         "status": "github_review_fixes_completed",
         "note": "Two additional valid P2 findings were accepted after manifest/frontmatter head 8755ec230afaf6724120fcdf0b2d824be1c4b05d passed 9/9 checks. Every canonical manifest entry is now cross-checked against the locked release authority key, entity, source file, source IDs, runtime projection, zh/en canonical, slug, output, and claim path, while the complete immutable manifest and zh-en CSV map have byte hashes. The projected English source registry and terminology glossary now have deterministic hashes embedded in and enforced by the frozen manifest."
+      },
+      {
+        "at": "2026-07-18T20:08:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two more valid P2 findings were accepted after canonical/registry head 566a41c33d6c91c32ace4c081e75143d54be0481 passed 9/9 checks. Every completed English page must now match the locked zh-CN H2 and FAQ counts and provide ordered one-to-one section and FAQ translation maps. The text-only gate now rejects inline, full/collapsed/shortcut reference-style Markdown images, data-image payloads, and HTML image, picture, source, video, audio, SVG, iframe, or object tags."
       }
     ],
-    "updated_at": "2026-07-18T19:58:00Z"
+    "updated_at": "2026-07-18T20:08:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
