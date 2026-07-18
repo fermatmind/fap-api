@@ -5631,7 +5631,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2753",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "github_review_fix_ready_to_commit",
+    "status": "ready_to_merge",
     "title": "B5-RESULT-RUNNER-SOP-RUNBOOK-01: Document Big Five V2 agent execution runner SOP",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "transitions": [
@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "c021a49a20d6ba5acc7ff3afab57be2ff1147f26",
+    "status": "github_checks_pending",
+    "commit_sha": "e4a31d3daf556ed26ec93195ad386bd03daa6ae1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97434,8 +97434,13 @@
         "at": "2026-07-18T14:11:10Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on ready-ledger head 54347970f8f28ac378e20f8b3d3ea7180a363433, but final review found three additional valid P2s. Nested lock leases now cover all remaining waits plus bounded work; the internal directory preserves separate visibility/readiness truth while every public directory, industry, facet, count, pagination, and sitemap consumer filters to indexable plus detail-ready rows; and exposure-snapshot cleanup exceptions are recorded without interrupting post-commit database remediation. The full Career suite passes 99 tests / 743 assertions plus 2 / 6 Big Five freeze assertions, all 29 Pint paths, Composer/YAML/JSON/diff, and exact thirty-two-path scope validation. No production cache, DB, CMS, sitemap authority, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T14:12:39Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed nested-lock lease coverage, ready-only public directory consumers, and remediation-safe snapshot cleanup as e4a31d3daf556ed26ec93195ad386bd03daa6ae1. Replied to all three new review findings with exact regression evidence and resolved the threads. This ledger transition also restores the unrelated historic B5 runner status that a same-named mechanical match touched; no other historic facts changed. Exact-head required checks are running, with no production cache, DB, CMS, sitemap authority, staging, or deploy action."
       }
     ],
-    "updated_at": "2026-07-18T14:11:10Z"
+    "updated_at": "2026-07-18T14:12:39Z"
   }
 }
