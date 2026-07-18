@@ -97909,5 +97909,89 @@
       }
     ],
     "updated_at": "2026-07-18T16:54:18Z"
+  },
+  "MBTI-COMP-PROJECTION-45": {
+    "id": "MBTI-COMP-PROJECTION-45",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-comp-projection-45",
+    "title": "MBTI-COMP-PROJECTION-45: repair A/T comparison public projection",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "b231c18aa4dabbe0a926d8561eae6faf8ad40918",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3175",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a concrete /goal with the exact MBTI-COMP-PROJECTION-45 id, repository, branch, scope, dependency order, validation requirements, and complete normal PR lifecycle authorization."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "This is the first train item and has no dependency. The branch was created from fap-api origin/main 2372309c5486358f70144783b98333b42c6940ef after main parity and target-branch absence were verified."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The focused public API suite passed 20 tests / 510 assertions across all sixteen A/T types, including fifteen top-level payload_json.sections projections, the legacy INTP nested sections projection, exact nine-section order/title/body/rows, FAQ/canonical/robots/JSON-LD, top-level authority precedence, and absent/malformed fail-closed cases. After review identified a malformed-top-level/stale-nested edge case, the controller and fixture were tightened so only an absent top-level key may use the legacy nested shape; malformed top-level authority explicitly removes stale nested sections. PHP syntax, scoped Pint, and the focused 20-test suite passed again, followed by a second complete ci_verify_mbti.sh pass. Route discovery, a fresh complete SQLite migration, strict Composer validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope validation also passed. Verification-generated Big Five compiled diffs were restored and are excluded."
+      },
+      "github_checks": {
+        "status": "passed",
+        "evidence": "All nine GitHub checks passed on exact validated code head b231c18aa4dabbe0a926d8561eae6faf8ad40918: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. GitHub reports OPEN/CLEAN/MERGEABLE."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T15:47:24Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact current origin/main after confirming the unrelated untracked .workbuddy directory is outside scope and can remain untouched. The implementation is limited to the A/T public projection and real model-backed API tests; no production deploy, CMS/DB write, publication, indexability, sitemap/llms, frontend fallback, or cross-type change is included."
+      },
+      {
+        "at": "2026-07-18T16:01:29Z",
+        "status": "local_checks_passed",
+        "note": "All manifest checks passed. The exact four changed paths project DB/CMS top-level sections with legacy DB payload compatibility and verify all sixteen A/T contracts plus malformed/absent behavior. No production deploy/readback, CMS/DB write, publication/indexability mutation, sitemap/llms release, frontend fallback, or cross-type change occurred."
+      },
+      {
+        "at": "2026-07-18T16:03:11Z",
+        "status": "committed",
+        "note": "Committed the exact four-path scope as 7a3a421a04e6d14ae37091350f2fc0a7d650d832 after all required local checks and cached-diff validation passed."
+      },
+      {
+        "at": "2026-07-18T16:04:05Z",
+        "status": "pr_open",
+        "note": "Opened PR #3175 from the exact scoped branch. GitHub reports the PR open and mergeable; required checks are pending on head 1fb976b5d6b02b336c8b7b2978ea8fbf3b662f66."
+      },
+      {
+        "at": "2026-07-18T16:22:18Z",
+        "status": "review_fix_validated",
+        "note": "Addressed the single P2 review thread within the declared controller/test scope: a malformed present top-level sections key now fails closed instead of exposing stale nested legacy sections, while an absent key retains INTP compatibility. PHP syntax, scoped Pint, the focused 20 tests / 510 assertions, and the complete ci_verify_mbti.sh gate passed after the fix. Generated Big Five compiled diffs were restored."
+      },
+      {
+        "at": "2026-07-18T16:33:16Z",
+        "status": "main_reconciled",
+        "note": "Merged current origin/main 468591b9713cbecf83f906cc998b367ab15973f7 into the scoped branch after main advanced. The only conflicts were append-only PR-train manifest/state files; all upstream entries and the exact MBTI-COMP-PROJECTION-45 entries were preserved. YAML/JSON, scoped Pint, the focused 20 tests / 510 assertions, and the complete ci_verify_mbti.sh gate passed on the combined tree."
+      },
+      {
+        "at": "2026-07-18T16:41:40Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on exact validated code head b231c18aa4dabbe0a926d8561eae6faf8ad40918. The single controller review thread is resolved, the exact four-path scope is intact, GitHub reports OPEN/CLEAN/MERGEABLE, and commit_sha now identifies the reviewed code head containing the malformed-section fix and current main. This ledger-only transition must pass its own exact-head checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-18T16:41:40Z"
   }
 }
