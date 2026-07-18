@@ -335,6 +335,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/DailyGivingRecord.php',
             'backend/app/Services/Career/Bundles/CareerCnProxyPublicOwnerSurfaceBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
             'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
             'backend/app/Services/ReviewGovernance/PublicReviewContract.php',

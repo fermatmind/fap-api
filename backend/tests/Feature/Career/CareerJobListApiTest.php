@@ -73,6 +73,8 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_job_index')
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.identity.canonical_slug', 'backend-architect-index')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.seo_contract.index_eligible', true)
             ->assertJsonStructure([
                 'bundle_kind',
@@ -238,6 +240,9 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('items.0.identity.canonical_slug', 'acupuncturists')
             ->assertJsonPath('items.0.identity.entity_level', 'dataset_candidate')
             ->assertJsonPath('items.0.trust_summary.reviewer_status', 'pilot_display_asset')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.trust_summary.logic_version', 'career.protocol.job_list.display_asset_backed.v1')
             ->assertJsonPath('items.0.trust_summary.reason_codes.0', 'validated_display_asset_backed_release')
             ->assertJsonPath('items.0.trust_summary.reason_codes.1', 'runtime_publish_projection')
@@ -344,6 +349,9 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('items.0.identity.canonical_slug', 'agricultural-workers-all-other')
             ->assertJsonPath('items.0.identity.entity_level', 'dataset_candidate')
             ->assertJsonPath('items.0.trust_summary.reviewer_status', 'runtime_publish_projection')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.trust_summary.logic_version', 'career.protocol.job_detail.runtime_projection.v1')
             ->assertJsonPath('items.0.seo_contract.index_eligible', true)
             ->assertJsonPath('items.0.seo_contract.index_state', 'indexable')

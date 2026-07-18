@@ -45972,6 +45972,7 @@ prs:
       - backend/app/Models/DailyGivingRecord.php
       - backend/app/Services/Career/Bundles/CareerCnProxyPublicOwnerSurfaceBuilder.php
       - backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php
+      - backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php
       - backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php
       - backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
       - backend/app/Services/ReviewGovernance/PublicReviewContract.php
@@ -45981,6 +45982,7 @@ prs:
       - backend/tests/Feature/BigFive/BigFiveZhV3ControlledReleaseTest.php
       - backend/tests/Feature/Career/CareerCnProxyPublicOwnerApiTest.php
       - backend/tests/Feature/Career/CareerJobDetailApiTest.php
+      - backend/tests/Feature/Career/CareerJobListApiTest.php
       - backend/tests/Feature/Career/CareerRecommendationDetailApiTest.php
       - backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
       - backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php
@@ -46009,7 +46011,7 @@ prs:
       - cd backend && php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/ContentPages/ContentPagePublicApiTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php tests/Feature/Research/ResearchAssetBackendMvpTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php tests/Feature/BigFive/BigFiveZhV3ControlledReleaseTest.php tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php --no-ansi
       - cd backend && php artisan test tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi
-      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerCnProxyPublicOwnerApiTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerCnProxyPublicOwnerApiTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Foundation/DailyGivingRecordPublicationGateTest.php tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php --no-ansi
       - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|solo_owner_public_review_contract' --no-ansi
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
