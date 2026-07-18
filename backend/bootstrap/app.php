@@ -39,6 +39,8 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\ArticleIqMethodPagesReadback::class,
         \App\Console\Commands\ArticleIqMethodPagesReviewApproval::class,
         \App\Console\Commands\PersonalityEnneagramCmsPromote::class,
+        \App\Console\Commands\PersonalityBigFiveZhV3PackageBuild::class,
+        \App\Console\Commands\PersonalityBigFiveZhV3ContentPublish::class,
         \App\Console\Commands\PersonalityMbtiFullCmsImport::class,
         \App\Console\Commands\PersonalityMbtiFullCmsPromote::class,
         \App\Console\Commands\PersonalityMbtiFullIndexabilityPromote::class,

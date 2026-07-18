@@ -532,15 +532,20 @@ final class PersonalityPublicContentAssetController extends Controller
                 $this->canonicalStringList((array) ($item['source_ids'] ?? [])),
                 static fn (string $sourceId): bool => isset($sourceIds[$sourceId])
             ));
-            if ($claimId === null || $resolvedSourceIds === []) {
+            $supportLevel = $this->firstNonEmptyString($item['support_level'] ?? null);
+            if ($claimId === null || ($resolvedSourceIds === [] && $supportLevel !== 'not_required')) {
                 continue;
             }
 
-            $mapping[] = [
+            $canonical = [
                 'claim_id' => $claimId,
                 'source_ids' => $resolvedSourceIds,
                 'limitation' => $this->firstNonEmptyString($item['limitation'] ?? null),
             ];
+            if ($supportLevel !== null) {
+                $canonical['support_level'] = $supportLevel;
+            }
+            $mapping[] = $canonical;
         }
 
         return $mapping;
