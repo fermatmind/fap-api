@@ -365,9 +365,9 @@ async function main() {
       }
     }
     const internalLinks = new Set();
-    for (const match of visibleBody.matchAll(/\[[^\]]+\]\(\s*(\/[^)\s]+)(?:\s+[^)]*)?\)/g)) internalLinks.add(match[1]);
-    for (const match of visibleBody.matchAll(/^\s*\[[^\]]+\]:\s*<?(\/[^>\s]+)>?/gm)) internalLinks.add(match[1]);
-    for (const match of visibleBody.matchAll(/\bhref\s*=\s*["'](\/[^"']+)["']/gi)) internalLinks.add(match[1]);
+    for (const match of body.matchAll(/\[[^\]]+\]\(\s*(\/[^)\s]+)(?:\s+[^)]*)?\)/g)) internalLinks.add(match[1]);
+    for (const match of body.matchAll(/^\s*\[[^\]]+\]:\s*<?(\/[^>\s]+)>?/gm)) internalLinks.add(match[1]);
+    for (const match of body.matchAll(/\bhref\s*=\s*["'](\/[^"']+)["']/gi)) internalLinks.add(match[1]);
     for (const link of internalLinks) {
       const canonicalLink = link.split(/[?#]/)[0];
       if (canonicalLink.startsWith('/zh/')) {
