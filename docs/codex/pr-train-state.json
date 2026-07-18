@@ -97236,7 +97236,7 @@
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
     "status": "local_checks_passed",
-    "commit_sha": "585312ddc815f0c6891acb4efddc651050a6e250",
+    "commit_sha": "1ba21afee60134dda16247d3907971918c0c2789",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3167",
     "checks": {
       "dependency": {
@@ -97298,9 +97298,14 @@
         "at": "2026-07-18T11:24:13Z",
         "status": "local_checks_passed",
         "note": "All nine GitHub checks passed on fc283b4096504f4db7a201a290ec8ea85046fb84, then exact-head Codex review found one P2: evidence reuse did not filter the current schema_version and statement_version. The same-scope fix adds both fail-closed filters and rotation controls; focused validation passed 14 tests/360 assertions plus runtime-freeze 2/5, and the complete ci_verify_mbti.sh gate passed again. Concurrent heavy-suite guards were honored by stopping this task's attempted runs and waiting for other FermatMind validation to finish. No production action occurred."
+      },
+      {
+        "at": "2026-07-18T11:24:56Z",
+        "status": "local_checks_passed",
+        "note": "Committed the exact Codex P2 repair as 1ba21afee60134dda16247d3907971918c0c2789 after all local checks passed. This ledger-only follow-up records the final implementation commit before push and fresh exact-head validation."
       }
     ],
-    "updated_at": "2026-07-18T11:24:13Z"
+    "updated_at": "2026-07-18T11:24:56Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
