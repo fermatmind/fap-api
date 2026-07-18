@@ -96958,7 +96958,7 @@
     "depends_on": [
       "SOLO-OWNER-REVIEW-FOUNDATION-01"
     ],
-    "status": "github_checks_pending_retry",
+    "status": "ready_to_merge",
     "commit_sha": "d112e9e099eac6f6a6f0b6f881b601b228a55fd9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3161",
     "checks": {
@@ -96971,8 +96971,8 @@
         "evidence": "Passed the manifest CMS/Ops/architecture suite (456 tests, 4536 assertions), the operator-authorized SeoIntel controlled-publish regression with the focused PR02 set (71 tests, 1162 assertions), changed-PHP syntax lint, Pint on 20 changed PHP files, Composer strict validation, YAML/JSON parsing, git diff checks, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first MBTI run exposed an over-broad ArticlePublishService gate that blocked the existing baseline importer; that out-of-scope global publish change and its fixture were removed, the exact failure then passed (1 test, 29 assertions), and the complete MBTI gate passed on rerun including personality full-32 (71 tests, 5383 assertions)."
       },
       "github": {
-        "status": "pending_retry_push",
-        "evidence": "PR #3161 head b9333436813e64cd2f68a5624cef13e6f4a6ae2a passed eight checks, but verify-bigfive failed because its hard-coded runtime-freeze classifier did not recognize nine PR02 CMS review-governance files. The operator-authorized exact-file classifier repair passed locally and was committed as d112e9e099eac6f6a6f0b6f881b601b228a55fd9; the retry push is pending."
+        "status": "passed",
+        "evidence": "PR #3161 exact head 6d44a35812a85b4c031146f441be230efe28bc86 passed all nine checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload. GitHub reports CLEAN and MERGEABLE."
       }
     },
     "scope_validation": {
@@ -96981,7 +96981,7 @@
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
-    "failure_reason": "verify-bigfive failed on head b9333436813e64cd2f68a5624cef13e6f4a6ae2a because BigFiveResultPageV2CoreBodyPreviewTest classified nine exact PR02 CMS review-governance files as frozen runtime changes; the operator authorized the minimal exact-file classifier regression repair.",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -97041,8 +97041,13 @@
         "at": "2026-07-18T05:43:35Z",
         "status": "github_checks_pending_retry",
         "note": "The scoped CI repair was committed as d112e9e099eac6f6a6f0b6f881b601b228a55fd9 after exact allowlist validation reported 28 branch files and zero outside scope. A ledger-only exact-commit follow-up will be pushed with it to trigger a new required-check run on PR #3161."
+      },
+      {
+        "at": "2026-07-18T05:51:13Z",
+        "status": "ready_to_merge",
+        "note": "All nine GitHub checks passed on exact PR head 6d44a35812a85b4c031146f441be230efe28bc86, including verify-bigfive after the scoped classifier repair. GitHub reports CLEAN and MERGEABLE. This pre-merge ledger transition records the required ready_to_merge state; its ledger-only commit must itself receive the complete required-check set before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T05:43:35Z"
+    "updated_at": "2026-07-18T05:51:13Z"
   }
 }
