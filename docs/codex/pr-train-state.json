@@ -97618,7 +97618,7 @@
       "SOLO-OWNER-OPS-APPROVAL-05"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "d21bf721e50b59fc6f3898c41b0933a3794ac8fa",
+    "commit_sha": "9368bd0341a92385782830783a08d07a305f45cf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3185",
     "checks": {
       "dependency": {
@@ -97631,7 +97631,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, and 26052fc118883c28dbefa0b5f3d398eb0e0b1283. Exact-head reviews found and the branch repaired three scoped P2 contract gaps: content-ready state mapping, the Career job-list trust-summary projection, and registered in-review state normalization. A new exact-head check/review cycle is pending."
+        "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, 26052fc118883c28dbefa0b5f3d398eb0e0b1283, and 1ce94dfdedbfcbfef9d361444b4c975df73e94e9. Exact-head reviews found and the branch repaired three scoped P2 contract gaps plus one P1 surface-annotation traceability gap. A new exact-head check/review cycle is pending."
       }
     },
     "scope_validation": {
@@ -97685,9 +97685,14 @@
         "at": "2026-07-18T22:35:54Z",
         "status": "github_checks_pending",
         "note": "All nine checks passed on 26052fc11, then exact-head Codex review identified registered ContentPage legal/company review states as incorrectly unknown. Audited registered public-surface enums and normalized legal_review, company_review, product_or_policy_review, science_or_product_review, and Career in_review to pending, plus Career changes_required to rejected, while retaining unknown fail-closed behavior for unregistered values. Focused CMS/Career validation passed 20 tests / 425 assertions, scoped Pint/syntax/diff passed, and post-commit runtime-freeze passed 2 / 6. A new exact-head CI/review cycle is pending."
+      },
+      {
+        "at": "2026-07-18T22:45:58Z",
+        "status": "github_checks_pending",
+        "note": "All nine checks passed on 1ce94dfde, then exact-head Codex review identified a P1 traceability gap: PublicReviewContract omitted the registered content_page_external_evidence_gate annotation. Added that annotation plus an architecture assertion that every registered public-contract surface exactly matches the contract annotations. The first architecture retry correctly failed because the newly added CareerJobListBundleBuilder also lacked its career_trust_manifest annotation (1 failed / 30 passed); after adding it, the suite passed 31 / 393. The first scoped Pint test then found one unary-spacing issue; Pint fixed it and the final scoped Pint/syntax/diff checks passed. Post-commit runtime-freeze passed 2 / 6. Both failures were resolved in scope; a new exact-head CI/review cycle is pending."
       }
     ],
-    "updated_at": "2026-07-18T22:35:54Z"
+    "updated_at": "2026-07-18T22:45:58Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
