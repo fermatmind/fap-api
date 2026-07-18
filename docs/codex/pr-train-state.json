@@ -52795,8 +52795,8 @@
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d9b46f627afb695f34700d2dbf3038298d4fb298",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -97074,7 +97074,7 @@
       },
       "local_validation": {
         "status": "passed",
-      "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
+      "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Exact-head Codex review then found that compact Enneagram attestations could bind but could not pass legacy-only closeout/resume/readback. The same-scope repair normalized compact attestations into the binder's exact 116 private rows, added mutually exclusive --attestation command support, and passed V223 (6 tests), V224 (59 tests, 611 assertions), 23-file PHP lint/Pint, Composer/YAML/JSON/diff checks, 27-path scope validation with zero outside paths, and the complete gate again. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
       },
     "github": {
       "status": "pending",
@@ -97132,8 +97132,13 @@
       "at": "2026-07-18T07:34:11Z",
       "status": "github_checks_pending",
       "note": "PR #3162 opened against main from the scoped branch. Initial GitHub checks started on head a349c665ec01aa32afa71f18a9e1c4d6ce4ccf10; this ledger update will become the final pushed head and must receive a fresh exact-head check and Codex review verdict."
+    },
+    {
+      "at": "2026-07-18T07:57:15Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Resolved Codex P1 review feedback by preserving compact Enneagram attestation compatibility through runtime closeout, exact bound-review resume, and standalone post-readback. Implementation commit d9b46f627afb695f34700d2dbf3038298d4fb298 passed the focused and complete local gates; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-18T07:34:11Z"
+  "updated_at": "2026-07-18T07:57:15Z"
 }
 }
