@@ -30,7 +30,10 @@ final class HighRiskApprovalServiceTest extends TestCase
         Queue::fake();
         $owner = $this->admin(
             totpEnabled: true,
-            permissions: [PermissionNames::ADMIN_FINANCE_WRITE],
+            permissions: [
+                PermissionNames::ADMIN_FINANCE_WRITE,
+                PermissionNames::ADMIN_OPS_WRITE,
+            ],
         );
         $this->soloOwner($owner);
         $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
@@ -490,6 +493,47 @@ final class HighRiskApprovalServiceTest extends TestCase
         } catch (HighRiskApprovalValidationException $exception) {
             $this->assertSame('Current MFA/TOTP step-up verification is required.', $exception->getMessage());
         }
+    }
+
+    public function test_refund_execution_requires_finance_and_order_write_before_authorization(): void
+    {
+        $owner = $this->admin(
+            totpEnabled: true,
+            permissions: [PermissionNames::ADMIN_FINANCE_WRITE],
+        );
+        $this->soloOwner($owner);
+        $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
+            'order_no' => 'ord-finance-only',
+        ]);
+        $service = app(HighRiskApprovalService::class);
+        $service->approve(
+            (string) $approval->id,
+            (int) $owner->id,
+            $this->freshStepUpCode($owner),
+        );
+
+        try {
+            $service->authorizeExecution(
+                (string) $approval->id,
+                (int) $owner->id,
+                $this->freshStepUpCode($owner),
+            );
+            $this->fail('Expected finance-only refund execution authorization to fail before dispatch.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Execution actor lacks the required domain permission.', $exception->getMessage());
+        }
+
+        $approval->refresh();
+        $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approval->status);
+        $this->assertSame(0, (int) $approval->retry_count);
+        $this->assertNull(data_get(
+            $approval->payload_json,
+            HighRiskApprovalService::EXECUTION_METADATA_KEY,
+        ));
+        $this->assertDatabaseMissing('audit_logs', [
+            'target_id' => (string) $approval->id,
+            'action' => 'approval_execution_authorized',
+        ]);
     }
 
     private function soloOwner(AdminUser $owner): void

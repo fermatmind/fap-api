@@ -511,21 +511,17 @@ final readonly class HighRiskApprovalService
             throw new HighRiskApprovalValidationException('Execution actor was not found.');
         }
 
-        $requiredPermissions = match (strtoupper(trim((string) $approval->type))) {
+        $hasRequiredPermission = match (strtoupper(trim((string) $approval->type))) {
             AdminApproval::TYPE_MANUAL_GRANT,
             AdminApproval::TYPE_REVOKE_BENEFIT,
-            AdminApproval::TYPE_REPROCESS_EVENT => [PermissionNames::ADMIN_OPS_WRITE],
-            AdminApproval::TYPE_REFUND => [PermissionNames::ADMIN_FINANCE_WRITE],
-            AdminApproval::TYPE_ROLLBACK_RELEASE => [
-                PermissionNames::ADMIN_CONTENT_RELEASE,
-                PermissionNames::ADMIN_OWNER,
-            ],
-            default => [],
+            AdminApproval::TYPE_REPROCESS_EVENT => $actor->hasPermission(PermissionNames::ADMIN_OPS_WRITE),
+            AdminApproval::TYPE_REFUND => $actor->hasPermission(PermissionNames::ADMIN_FINANCE_WRITE)
+                && $actor->hasPermission(PermissionNames::ADMIN_OPS_WRITE),
+            AdminApproval::TYPE_ROLLBACK_RELEASE => $actor->hasPermission(PermissionNames::ADMIN_CONTENT_RELEASE)
+                || $actor->hasPermission(PermissionNames::ADMIN_OWNER),
+            default => false,
         };
-        if ($requiredPermissions === []
-            || ! collect($requiredPermissions)->contains(
-                fn (string $permission): bool => $actor->hasPermission($permission),
-            )) {
+        if (! $hasRequiredPermission) {
             throw new HighRiskApprovalValidationException('Execution actor lacks the required domain permission.');
         }
 
