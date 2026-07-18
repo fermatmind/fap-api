@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "28d0cb439c8b27db459ea3cebd987bc709657f25",
+    "status": "ready_to_merge",
+    "commit_sha": "0f7240302ffce7d2d576e99362cbaea10ab813b2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97259,14 +97259,14 @@
         "evidence": "After the nineteenth review finding, the Career/authority manifest passed 110 tests / 929 assertions across projection/promotion gates, first-exposure authorization, published LKG/legacy recovery, snapshot-preserving targeted detail warm, immutable staging and activation, ready-only public job-index/directory/industry/sitemap consumption, internal directory authority preservation during transient cache loss, the 10k readiness gate, atomic job-index/detail/directory activation and rollback, post-commit cache-revocation fail-closed behavior, best-effort legacy directory cleanup after verified v2 activation, directory truth/performance, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 112 tests / 935 assertions total. The 1046 and 10000 row directories built in about 4ms and 46ms with one DB query. All 33 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact thirty-six-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All nine required CI/code-scanning checks passed on exact ledger head 1429fda5e3b338c50889952e6c1937c61421dc39. The nineteenth same-scope review repair was committed and pushed in 28d0cb439c8b27db459ea3cebd987bc709657f25; exact-head checks are rerunning."
+        "status": "passed",
+        "evidence": "All nine required CI/code-scanning checks passed on exact ledger head 0f7240302ffce7d2d576e99362cbaea10ab813b2: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97504,8 +97504,13 @@
         "at": "2026-07-18T15:53:53Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed best-effort legacy directory cleanup after verified v2 activation as 28d0cb439c8b27db459ea3cebd987bc709657f25. Replied to the nineteenth review finding with exact multi-locale active-pointer and payload evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T16:04:00Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 0f7240302ffce7d2d576e99362cbaea10ab813b2. All nineteen review threads are resolved, GitHub reports OPEN/CLEAN/MERGEABLE, the worktree is clean, and exact thirty-six-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T15:53:53Z"
+    "updated_at": "2026-07-18T16:04:00Z"
   }
 }
