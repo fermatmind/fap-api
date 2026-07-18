@@ -930,13 +930,13 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                     $payloads = [];
                     $jobIndexes = [];
                     foreach ($locales as $locale) {
-                        $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
+                        $authorityJobIndex = $this->filterJobIndexPayloadForPublicLocale([
                             'bundle_kind' => 'career_job_index',
                             'bundle_version' => 'career.protocol.job_index.v1',
                             'items' => $sourceItems,
-                        ], $locale);
+                        ], $locale, false);
                         $preservedExposureItems = $this->missingActiveDirectoryExposureProjectionItems(
-                            is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [],
+                            is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [],
                             $locale,
                         );
                         $directoryExposureItems = array_merge(
@@ -944,14 +944,17 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                             $exposureProjectionItems ?? [],
                         );
                         if ($directoryExposureItems !== []) {
-                            $jobIndex['items'] = $this->mergeExposureDirectoryItems(
-                                is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [],
+                            $authorityJobIndex['items'] = $this->mergeExposureDirectoryItems(
+                                is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [],
                                 $directoryExposureItems,
                                 $locale,
                             );
                         }
-                        $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
-                        $jobIndexes[$locale] = $jobIndex;
+                        $items = is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [];
+                        $jobIndexes[$locale] = $this->filterJobIndexPayloadForPublicLocale(
+                            $authorityJobIndex,
+                            $locale,
+                        );
                         $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
                             $items,
                             $locale,
@@ -1244,17 +1247,10 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
      */
     private function refreshJobIndexPayload(string $publicLocale, bool $includeNonIndexable = false): array
     {
-        $items = CareerJobListItemResource::collection(
-            $this->careerJobListBundleBuilder->build($includeNonIndexable)
-        )->resolve();
-
-        $payload = [
-            'bundle_kind' => 'career_job_index',
-            'bundle_version' => 'career.protocol.job_index.v1',
-            'items' => $items,
-        ];
-
-        $payload = $this->filterJobIndexPayloadForPublicLocale($payload, $publicLocale);
+        $payload = $this->filterJobIndexPayloadForPublicLocale(
+            $this->buildJobIndexAuthorityPayload($includeNonIndexable),
+            $publicLocale,
+        );
 
         Cache::forever($this->jobIndexCacheKey($publicLocale, $includeNonIndexable), $payload);
 
@@ -1271,8 +1267,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $normalizedLocale,
             is_string($observedVersion) ? $observedVersion : null,
             function () use ($normalizedLocale): array {
-                $jobIndex = $this->refreshJobIndexPayload($normalizedLocale);
-                $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+                $authorityJobIndex = $this->filterJobIndexPayloadForPublicLocale(
+                    $this->buildJobIndexAuthorityPayload(false),
+                    $normalizedLocale,
+                    false,
+                );
+                $items = is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [];
                 $preservedExposureItems = $this->missingActiveDirectoryExposureProjectionItems(
                     $items,
                     $normalizedLocale,
@@ -1283,9 +1283,13 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                         $preservedExposureItems,
                         $normalizedLocale,
                     );
-                    $jobIndex['items'] = $items;
-                    Cache::forever($this->jobIndexCacheKey($normalizedLocale, false), $jobIndex);
                 }
+                $authorityJobIndex['items'] = $items;
+                $jobIndex = $this->filterJobIndexPayloadForPublicLocale(
+                    $authorityJobIndex,
+                    $normalizedLocale,
+                );
+                Cache::forever($this->jobIndexCacheKey($normalizedLocale, false), $jobIndex);
                 $this->publishDirectoryReadModel(
                     $normalizedLocale,
                     $this->careerDirectoryReadModelBuilder->build(
@@ -1298,6 +1302,18 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 return $jobIndex;
             },
         );
+    }
+
+    /** @return array<string, mixed> */
+    private function buildJobIndexAuthorityPayload(bool $includeNonIndexable): array
+    {
+        return [
+            'bundle_kind' => 'career_job_index',
+            'bundle_version' => 'career.protocol.job_index.v1',
+            'items' => CareerJobListItemResource::collection(
+                $this->careerJobListBundleBuilder->build($includeNonIndexable),
+            )->resolve(),
+        ];
     }
 
     /**
@@ -1573,10 +1589,13 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
-    private function filterJobIndexPayloadForPublicLocale(array $payload, string $publicLocale): array
-    {
+    private function filterJobIndexPayloadForPublicLocale(
+        array $payload,
+        string $publicLocale,
+        bool $requireDetailReady = true,
+    ): array {
         $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
-        $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale): bool {
+        $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale, $requireDetailReady): bool {
             if (! is_array($item)) {
                 return false;
             }
@@ -1585,7 +1604,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $projectionItem = $this->effectiveJobDetailProjectionItem($slug, $publicLocale);
 
             return $slug !== '' && $this->detailReadIsPublishedForLocale($slug, $publicLocale)
-                && ($projectionItem['dataset_visible'] ?? false) === true;
+                && ($projectionItem['dataset_visible'] ?? false) === true
+                && (! $requireDetailReady || $this->jobDetailCacheIsReady($slug, $publicLocale));
         }));
 
         return $payload;
