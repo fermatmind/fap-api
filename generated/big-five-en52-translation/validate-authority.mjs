@@ -21,6 +21,17 @@ const VALID_EQUIVALENCE_STATUSES = new Set([
   'localized_without_claim_change',
   'scientifically_narrowed',
 ]);
+const ALLOWED_FRONTMATTER_KEYS = new Set([
+  'package_version', 'content_identity', 'source_content_identity', 'asset_type', 'locale',
+  'source_locale', 'backend_locale_contract', 'slug', 'canonical_path', 'parent_identity',
+  'status', 'translation_status', 'source_page_sha256', 'source_registry_version',
+  'terminology_version', 'claim_mapping_version', 'cms_draft_created', 'publish_allowed',
+  'media_supported', 'title', 'h1', 'seo_title', 'seo_description', 'excerpt', 'primary_intent',
+  'target_questions', 'source_ids', 'author_display_name', 'reviewer_display_name',
+  'reviewer_admin_user_id', 'review_mode', 'clinical_reviewed', 'expert_endorsement',
+  'substantive_updated_at', 'content_method', 'word_count_en', 'translation_method',
+  'translation_reviewed_at',
+]);
 
 function sha256(buffer) {
   return createHash('sha256').update(buffer).digest('hex');
@@ -220,7 +231,6 @@ async function main() {
     fail('translated_page_file_count', `Expected ${completed.length}, found ${pageFiles.length}.`);
 
   const manifestByIdentity = new Map(entries.map((entry) => [entry.page_identity, entry]));
-  const pageByIdentity = new Map();
   const paragraphOwners = new Map();
   let untranslatedChineseFragmentCount = 0;
   let invalidSourceIdCount = 0;
@@ -259,7 +269,7 @@ async function main() {
       continue;
     }
     const { frontmatter, frontmatterKeys, body } = parsed;
-    pageByIdentity.set(completedEntry.page_identity, { body, frontmatter, path: completedEntry.target_path });
+    const visibleBody = body.replace(/<!--[\s\S]*?-->/g, '');
     const fixedFields = {
       content_identity: locked.page_identity,
       asset_type: locked.entity_type,
@@ -280,11 +290,15 @@ async function main() {
       if (frontmatter[key] !== expected) fail('page_identity_lock', `${completedEntry.target_path}: ${key}`);
     }
     if (frontmatter.translation_status !== 'completed') fail('page_translation_status', completedEntry.target_path);
+    const unknownFrontmatterKeys = frontmatterKeys.filter((key) => !ALLOWED_FRONTMATTER_KEYS.has(key));
+    if (unknownFrontmatterKeys.length)
+      fail('unknown_frontmatter_key', `${completedEntry.target_path}: ${unknownFrontmatterKeys.join(',')}`);
     const frontmatterMediaKeys = frontmatterKeys.filter((key) => {
       if (key === 'media_supported') return false;
+      const tokens = key.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase().split(/[-_]+/);
       const normalized = key.replaceAll('_', '').replaceAll('-', '').toLowerCase();
-      return ['hero', 'inline', 'og', 'opengraph', 'twitter', 'image', 'media', 'thumbnail', 'cover', 'featured', 'banner']
-        .some((prefix) => normalized.startsWith(prefix));
+      const mediaTokens = new Set(['hero', 'inline', 'og', 'twitter', 'image', 'media', 'thumbnail', 'cover', 'featured', 'banner']);
+      return tokens.some((token) => mediaTokens.has(token)) || normalized.includes('opengraph');
     });
     if (frontmatterMediaKeys.length) fail(
       'forbidden_frontmatter_media',
@@ -297,13 +311,15 @@ async function main() {
       || /<(?:img|picture|source|video|audio|svg|iframe|object)\b/i.test(body)
       || /data:image\//i.test(body))
       fail('forbidden_media', completedEntry.target_path);
+    if (/<!--|-->/.test(body)) fail('hidden_html_comment', completedEntry.target_path);
+    if (/<a\b/i.test(body)) fail('forbidden_html_anchor', completedEntry.target_path);
     const declaredWords = frontmatter.word_count_en;
-    const actualWords = englishWordCount(body);
+    const actualWords = englishWordCount(visibleBody);
     if (declaredWords !== actualWords) {
       wordCountMismatchCount += 1;
       fail('word_count_mismatch', `${completedEntry.target_path}: ${declaredWords} != ${actualWords}`);
     }
-    const h2Sections = [...body.matchAll(/^##\s+(.+)\n([\s\S]*?)(?=^##\s+|(?![\s\S]))/gm)];
+    const h2Sections = [...visibleBody.matchAll(/^##\s+(.+)\n([\s\S]*?)(?=^##\s+|(?![\s\S]))/gm)];
     for (const section of h2Sections) {
       if (!section[2].trim()) {
         emptySectionCount += 1;
@@ -325,24 +341,28 @@ async function main() {
       emptyFaqCount += 1;
       fail('empty_faq', completedEntry.target_path);
     }
-    for (const match of body.matchAll(/\[[^\]]+\]\((\/[^)]+)\)/g)) {
-      const link = match[1];
-      if (link.startsWith('/zh/')) {
+    const internalLinks = new Set();
+    for (const match of visibleBody.matchAll(/\[[^\]]+\]\(\s*(\/[^)\s]+)(?:\s+[^)]*)?\)/g)) internalLinks.add(match[1]);
+    for (const match of visibleBody.matchAll(/^\s*\[[^\]]+\]:\s*<?(\/[^>\s]+)>?/gm)) internalLinks.add(match[1]);
+    for (const match of visibleBody.matchAll(/\bhref\s*=\s*["'](\/[^"']+)["']/gi)) internalLinks.add(match[1]);
+    for (const link of internalLinks) {
+      const canonicalLink = link.split(/[?#]/)[0];
+      if (canonicalLink.startsWith('/zh/')) {
         zhInternalLinkCount += 1;
         invalidInternalLinkCount += 1;
         fail('zh_internal_link', `${completedEntry.target_path}: ${link}`);
-      } else if (!canonicalSet.has(link)) {
+      } else if (!canonicalSet.has(canonicalLink)) {
         unknownCanonicalLinkCount += 1;
         invalidInternalLinkCount += 1;
         fail('unknown_canonical_link', `${completedEntry.target_path}: ${link}`);
       }
-      const key = link.split('/').at(-1);
+      const key = canonicalLink.split('/').at(-1);
       if (ALIASES.has(key)) {
         invalidInternalLinkCount += 1;
         fail('legacy_alias_link', `${completedEntry.target_path}: ${link}`);
       }
     }
-    for (const paragraph of substantiveParagraphs(body)) {
+    for (const paragraph of substantiveParagraphs(visibleBody)) {
       const normalized = paragraph.replace(/\s+/g, ' ').trim();
       const owners = paragraphOwners.get(normalized) ?? [];
       owners.push(completedEntry.target_path);
@@ -455,7 +475,7 @@ async function main() {
         || !Array.isArray(claim.source_ids)
         || !VALID_EQUIVALENCE_STATUSES.has(claim.translation_equivalence_status))
         fail('claim_contract', `${completedEntry.claim_path}: ${claim.claim_id ?? 'unknown'}`);
-      if (!body.includes(claim.visible_claim)) fail('claim_visible_text_missing', `${completedEntry.claim_path}: ${claim.claim_id}`);
+      if (!visibleBody.includes(claim.visible_claim)) fail('claim_visible_text_missing', `${completedEntry.claim_path}: ${claim.claim_id}`);
       for (const sourceId of claim.source_ids ?? []) {
         if (!registryIds.has(sourceId)) {
           invalidSourceIdCount += 1;
