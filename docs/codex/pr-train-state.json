@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "10eb90679c2d2718ea953051fa4f2cfe1b00b6eb",
+    "status": "github_checks_pending",
+    "commit_sha": "f285e3594f29409a4a47dc2cd99ba24f2ba528b1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97260,7 +97260,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine required CI/code-scanning checks passed on exact ready-ledger head 9d878a33a8956e23fbc14b14bb2513275b443cc9. The seventeenth same-scope review repair was committed and pushed in 10eb90679c2d2718ea953051fa4f2cfe1b00b6eb; exact-head checks are rerunning."
+        "evidence": "All nine required CI/code-scanning checks passed on exact ledger head c5fcd29a33169037c08bb4b9c40c7ffe40c1152d. The eighteenth same-scope review repair was committed and pushed in f285e3594f29409a4a47dc2cd99ba24f2ba528b1; exact-head checks are rerunning."
       }
     },
     "scope_validation": {
@@ -97489,8 +97489,13 @@
         "at": "2026-07-18T15:40:34Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on exact ledger head c5fcd29a33169037c08bb4b9c40c7ffe40c1152d, but final review found an eighteenth valid P2: after detail pointers became active, a directory failure plus exposure-snapshot cleanup outage could let automatic database remediation claim rollback while the public route remained authorized. The repair distinguishes unreachable staged snapshots after detail-activation rollback from active snapshots after directory failure. If active snapshot revocation cannot be verified, it keeps the committed indexed database authority, returns post_commit_cache_revocation_unverified, and blocks automatic rollback or quarantine until revocation is proven. The full Career suite passes 109 tests / 924 assertions plus 2 / 6 Big Five freeze assertions; 33 Pint paths, Composer/YAML/JSON/diff, and exact thirty-six-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:42:03Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed fail-closed handling for unverified active exposure-snapshot revocation as f285e3594f29409a4a47dc2cd99ba24f2ba528b1. Replied to the eighteenth review finding with exact database/cache consistency and regression evidence, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T15:40:34Z"
+    "updated_at": "2026-07-18T15:42:03Z"
   }
 }
