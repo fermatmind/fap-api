@@ -98442,9 +98442,9 @@
     "branch": "codex/big5-en52-domains-03",
     "title": "BIG5-EN52-DOMAINS-03: translate five Big Five English domains",
     "depends_on": ["BIG5-EN52-HUBS-02"],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3186",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-HUBS-02 merged as 0f0aa7031d05185170f9a8723dfce5cf1f07d91f after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
@@ -98465,9 +98465,10 @@
     "transitions": [
       {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR3 scope; no domain work starts before PR2 merges."},
       {"at": "2026-07-18T21:54:00Z", "status": "implementation_in_progress", "note": "Started from exact merged PR2 SHA 0f0aa7031d05185170f9a8723dfce5cf1f07d91f. Scope is limited to the five domain pages, their evidence, QA, ledger completions, and train closeout; ranges, facet details, hubs, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
-      {"at": "2026-07-18T22:11:40Z", "status": "local_validation_passed", "note": "Completed five domain pages and evidence sidecars with 80 ordered H2 mappings, 31 FAQs, 21 locked claims, and 8,248 visible English words. The frozen translated=7 validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; scientific and product boundary review found zero P0 blockers, and every controlled write counter remains zero."}
+      {"at": "2026-07-18T22:11:40Z", "status": "local_validation_passed", "note": "Completed five domain pages and evidence sidecars with 80 ordered H2 mappings, 31 FAQs, 21 locked claims, and 8,248 visible English words. The frozen translated=7 validator and all scoped syntax, JSON, YAML, diff, and exact-path gates passed; scientific and product boundary review found zero P0 blockers, and every controlled write counter remains zero."},
+      {"at": "2026-07-18T22:14:00Z", "status": "github_checks_pending", "note": "Committed the exact 13-path PR3 scope as 2b741d056 and opened PR #3186. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
     ],
-    "updated_at": "2026-07-18T22:11:40Z"
+    "updated_at": "2026-07-18T22:14:00Z"
   },
   "BIG5-EN52-RANGES-04": {
     "id": "BIG5-EN52-RANGES-04",
