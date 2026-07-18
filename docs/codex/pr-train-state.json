@@ -97058,7 +97058,7 @@
     "title": "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500",
     "depends_on": [],
     "status": "local_checks_passed",
-    "commit_sha": null,
+    "commit_sha": "943cf071ea1b629092ff45e9733da5d2b377a9f6",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -97104,8 +97104,13 @@
         "at": "2026-07-18T08:28:15Z",
         "status": "local_checks_passed",
         "note": "All PR1 manifest checks and the exact changed-file allowlist passed. Published active, LKG, and legacy reads remain projection-only; an all-cache miss returns the restricted non-indexable shell and dispatches a unique warm job without synchronous detail assembly. Hidden and locale-mismatched authority remains 404. No production cache warm, CMS/DB write, publication, staging wait, or deploy occurred."
+      },
+      {
+        "at": "2026-07-18T08:30:10Z",
+        "status": "implementation_committed",
+        "note": "Committed the exact seven-path implementation as 943cf071ea1b629092ff45e9733da5d2b377a9f6 after local checks and cached diff validation passed; this ledger-only follow-up binds the real implementation commit before push."
       }
     ],
-    "updated_at": "2026-07-18T08:28:15Z"
+    "updated_at": "2026-07-18T08:30:10Z"
   }
 }
