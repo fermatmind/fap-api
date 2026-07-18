@@ -48,8 +48,30 @@ final class CareerRuntimeSloCheck extends Command
 
         $enCount = (int) data_get(json_decode((string) ($responses['api_en']['body'] ?? ''), true), 'public_truth.public_detail_indexable_count', 0);
         $zhCount = (int) data_get(json_decode((string) ($responses['api_zh']['body'] ?? ''), true), 'public_truth.public_detail_indexable_count', 0);
-        $detailCoverage = $coverageService->inspect(['en', 'zh-CN'])['report'];
+        $detailInspection = $coverageService->inspect(['en', 'zh-CN']);
+        $detailCoverage = $detailInspection['report'];
         $minimumDetailTargets = max(1, (int) config('ops.career_runtime_slo.minimum_detail_target_count', 2092));
+        $detailSmokeTarget = collect($detailInspection['rows'])->first(
+            static fn (array $row): bool => $row['locale'] === 'en'
+                && $row['classification'] !== 'held_or_unpublished_excluded'
+        );
+        if (is_array($detailSmokeTarget)) {
+            $started = hrtime(true);
+            try {
+                $detail = Http::timeout($timeout)->get(
+                    $api.'/api/v0.5/career/jobs/'.$detailSmokeTarget['slug'],
+                    ['locale' => 'en'],
+                );
+                $responses['detail_route_smoke'] = $this->summarize($detail, (hrtime(true) - $started) / 1_000_000);
+            } catch (\Throwable $throwable) {
+                $responses['detail_route_smoke'] = [
+                    'status' => 0,
+                    'duration_ms' => round((hrtime(true) - $started) / 1_000_000, 3),
+                    'body' => '',
+                    'error' => $throwable::class,
+                ];
+            }
+        }
 
         $requiredBodies = ['sitemap', 'llms', 'llms_full'];
         $smokeFailed = collect($responses)->contains(static fn (array $response): bool => (int) ($response['status'] ?? 0) !== 200)

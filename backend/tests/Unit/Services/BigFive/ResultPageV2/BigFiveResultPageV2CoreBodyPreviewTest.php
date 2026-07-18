@@ -4989,7 +4989,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $bootstrapChangedLines = [
             '+        if ((bool) config(\'ops.career_runtime_slo.repair_missing_enabled\', false)) {',
             '+            $repairBatchSize = min(500, max(1, (int) config(\'ops.career_runtime_slo.repair_batch_size\', 100)));',
-            '+            $schedule->command(\'career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --batch-size=\'.$repairBatchSize.\' --resume-key=runtime-slo --confirm-production-write --json\')',
+            '+            $minimumTargets = max(1, (int) config(\'ops.career_runtime_slo.minimum_detail_target_count\', 2092));',
+            '+            $schedule->command(\'career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --minimum-targets=\'.$minimumTargets.\' --batch-size=\'.$repairBatchSize.\' --resume-key=runtime-slo --confirm-production-write --json\')',
             '+                ->everyTenMinutes()',
             '+                ->withoutOverlapping();',
             '+        }',
@@ -12744,7 +12745,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         foreach ($changedLines as $line) {
-            if (preg_match('/career_runtime_slo\.repair_|career:verify-job-detail-cache-coverage|repairBatchSize|everyTenMinutes|withoutOverlapping|^\+\s*[{}]\s*$/u', $line) !== 1) {
+            if (preg_match('/career_runtime_slo\.(?:repair_|minimum_detail_target_count)|career:verify-job-detail-cache-coverage|repairBatchSize|minimumTargets|everyTenMinutes|withoutOverlapping|^\+\s*[{}]\s*$/u', $line) !== 1) {
                 return false;
             }
         }

@@ -97839,7 +97839,7 @@
     "depends_on": [
       "CAREER-DETAIL-ATOMIC-EXPOSURE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "review_fix_local_validation_passed",
     "commit_sha": "b7a4e705c00b405749da73ed45895d813c81770e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3176",
     "checks": {
@@ -97853,7 +97853,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused Career coverage and observability tests passed (14 tests, 109 assertions); deploy guard tests passed (2 tests, 14 assertions); Big Five runtime freeze tests passed (2 tests, 5 assertions). Default and explicitly enabled schedule:list contracts passed, Pint passed 9 files, composer validate --strict passed, deploy.php lint passed, YAML/JSON parsed, git diff checks passed, and exact 13-path scope validation passed."
+        "evidence": "Focused Career coverage and observability tests passed (14 tests, 109 assertions); deploy guard tests passed (2 tests, 14 assertions); Big Five runtime freeze tests passed (2 tests, 5 assertions). After review, observability tests passed again (7 tests, 35 assertions), Big Five runtime freeze tests passed again (2 tests, 5 assertions), the opt-in schedule showed minimum-targets=2092 with batch-size=37, Pint passed the 4 review-touched PHP files, composer validate --strict passed, git diff checks passed, and exact 13-path scope validation passed."
       },
       "github_required_checks": {
         "status": "pending",
@@ -97891,8 +97891,13 @@
         "at": "2026-07-18T16:28:12Z",
         "status": "github_checks_pending",
         "note": "Committed implementation as b7a4e705c00b405749da73ed45895d813c81770e, pushed the scoped branch, and opened PR #3176. GitHub required checks are queued or running."
+      },
+      {
+        "at": "2026-07-18T16:38:03Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine checks passed on 32d7d4084b0388ef1b6bc7817fe549aae4239c39, then two valid same-scope review findings were inspected. The fix retains a real detail-route HTTP smoke alongside full cache-key coverage and passes the configured 2092 floor into scheduled repair before cursor advancement. Focused tests, schedule contract, Pint, Composer validation, diff checks, and exact scope validation passed."
       }
     ],
-    "updated_at": "2026-07-18T16:28:12Z"
+    "updated_at": "2026-07-18T16:38:03Z"
   }
 }

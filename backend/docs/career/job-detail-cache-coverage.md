@@ -58,7 +58,8 @@ detail URL.
 ## Runtime SLO and controlled repair
 
 `career:runtime-slo-check` inspects the complete dynamic published slug × EN/ZH
-cache-key set on every scheduled run. It reports the coverage contract beside
+cache-key set on every scheduled run and retains one real detail-route HTTP smoke
+to detect routing or controller failures. It reports the coverage contract beside
 the existing page, directory, sitemap, and llms probes and emits distinct alerts
 for missing targets, broken targets, and an eligible target count below
 `CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT` (default 2,092). A single
@@ -68,7 +69,8 @@ Bounded scheduled repair is disabled by default. Setting
 `CAREER_RUNTIME_SLO_REPAIR_MISSING_ENABLED=true` registers a ten-minute repair
 that reuses the existing `runtime-slo` resume cursor, asynchronous queue guard,
 production-write confirmation, and missing/broken-only classification. The batch
-size defaults to 100 and is capped at 500. Disable the flag to stop new repair
+size defaults to 100 and is capped at 500. The same configured target floor is
+checked before the repair can advance its cursor. Disable the flag to stop new repair
 dispatches; already queued jobs follow the normal queue operations policy.
 
 This PR does not set those production environment values, run the schedule,

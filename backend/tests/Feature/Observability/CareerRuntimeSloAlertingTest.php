@@ -121,11 +121,11 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $this->assertStringContainsString('"response_bytes"', $output);
         $this->assertStringContainsString('"expected_target_count": 2', $output);
         $this->assertStringNotContainsString('<html>', $output);
-        Http::assertSentCount(7);
-        Http::assertNotSent(static fn (ClientRequest $request): bool => str_contains($request->url(), '/api/v0.5/career/jobs/'));
+        Http::assertSentCount(8);
+        Http::assertSent(static fn (ClientRequest $request): bool => $request->url() === 'https://api.test/api/v0.5/career/jobs/software-developer?locale=en');
     }
 
-    public function test_scheduled_probe_alerts_from_every_published_detail_cache_key_without_sampling_one_slug(): void
+    public function test_scheduled_probe_alerts_from_every_published_detail_cache_key_and_keeps_route_smoke(): void
     {
         config()->set('ops.career_runtime_slo.site_url', 'https://site.test');
         config()->set('ops.career_runtime_slo.api_url', 'https://api.test');
@@ -151,8 +151,9 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $this->assertStringContainsString('"expected_target_count": 4', $output);
         $this->assertStringContainsString('"missing_count": 2', $output);
         $this->assertStringContainsString('career_detail_cache_coverage_missing', $output);
-        Http::assertSentCount(7);
-        Http::assertNotSent(static fn (ClientRequest $request): bool => str_contains($request->url(), '/api/v0.5/career/jobs/'));
+        Http::assertSentCount(8);
+        Http::assertSent(static fn (ClientRequest $request): bool => $request->url() === 'https://api.test/api/v0.5/career/jobs/missing?locale=en'
+            || $request->url() === 'https://api.test/api/v0.5/career/jobs/ready?locale=en');
     }
 
     public function test_failed_smoke_sends_the_existing_ops_webhook_and_fails_the_check(): void
@@ -185,7 +186,9 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $this->assertIsString($schedule);
         $this->assertIsString($config);
         $this->assertStringContainsString("config('ops.career_runtime_slo.repair_missing_enabled', false)", $schedule);
-        $this->assertStringContainsString('--repair-missing --locales=en,zh-CN --batch-size=', $schedule);
+        $this->assertStringContainsString('--repair-missing --locales=en,zh-CN --minimum-targets=', $schedule);
+        $this->assertStringContainsString("config('ops.career_runtime_slo.minimum_detail_target_count', 2092)", $schedule);
+        $this->assertStringContainsString(".' --batch-size='.\$repairBatchSize", $schedule);
         $this->assertStringContainsString('--resume-key=runtime-slo --confirm-production-write --json', $schedule);
         $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_REPAIR_MISSING_ENABLED', false)", $config);
         $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_REPAIR_BATCH_SIZE', 100)", $config);
