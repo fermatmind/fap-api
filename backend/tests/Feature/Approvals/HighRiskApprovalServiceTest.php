@@ -350,11 +350,14 @@ final class HighRiskApprovalServiceTest extends TestCase
         $clientSecret = Str::random(48);
         $apiKey = Str::random(48);
         $bearerToken = Str::random(48);
+        $quotedAccessToken = Str::random(48);
+        $quotedClientSecret = Str::random(48);
+        $singleQuotedApiKey = Str::random(48);
         $sanitize = new ReflectionMethod($executor, 'sanitizeErrorMessage');
         $sanitize->setAccessible(true);
         $message = (string) $sanitize->invoke(
             $executor,
-            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' bare Bearer '.$bearerToken,
+            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' bare Bearer '.$bearerToken.' json {"access_token":"'.$quotedAccessToken.'","clientSecret":"'.$quotedClientSecret.'"} json-ish {\'apiKey\':\''.$singleQuotedApiKey.'\'}',
         );
         $this->assertStringNotContainsString($privateValue, $message);
         $this->assertStringNotContainsString($accessToken, $message);
@@ -363,6 +366,9 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringNotContainsString($clientSecret, $message);
         $this->assertStringNotContainsString($apiKey, $message);
         $this->assertStringNotContainsString($bearerToken, $message);
+        $this->assertStringNotContainsString($quotedAccessToken, $message);
+        $this->assertStringNotContainsString($quotedClientSecret, $message);
+        $this->assertStringNotContainsString($singleQuotedApiKey, $message);
         $this->assertStringContainsString('[REDACTED]', $message);
 
         $writeAudit = new ReflectionMethod($executor, 'writeAudit');
@@ -468,6 +474,12 @@ final class HighRiskApprovalServiceTest extends TestCase
             'order_no' => 'ord-recovery-consumption',
         ]);
         $service = app(HighRiskApprovalService::class);
+        $request = Request::create('/', 'POST', [
+            'fresh_step_up_code' => $recoveryCode,
+            'reason_append' => 'safe recovery step-up',
+        ]);
+        $this->app->instance('request', $request);
+        $this->app->instance(Request::class, $request);
 
         try {
             $service->approve((string) $approval->id, (int) $other->id, $recoveryCode);
@@ -486,6 +498,14 @@ final class HighRiskApprovalServiceTest extends TestCase
             'target_id' => (string) $other->id,
             'action' => 'admin_totp_recovery_code_used',
         ]);
+        $recoveryAuditMeta = (string) DB::table('audit_logs')
+            ->where('target_type', 'AdminUser')
+            ->where('target_id', (string) $other->id)
+            ->where('action', 'admin_totp_recovery_code_used')
+            ->value('meta_json');
+        $this->assertStringNotContainsString($recoveryCode, $recoveryAuditMeta);
+        $this->assertStringNotContainsString('fresh_step_up_code', $recoveryAuditMeta);
+        $this->assertStringNotContainsString('reason_append', $recoveryAuditMeta);
 
         try {
             $service->approve((string) $approval->id, (int) $other->id, $recoveryCode);

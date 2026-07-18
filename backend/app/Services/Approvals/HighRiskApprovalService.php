@@ -447,8 +447,31 @@ final readonly class HighRiskApprovalService
         if (! $actor) {
             throw new HighRiskApprovalValidationException('Approval actor was not found.');
         }
-        if ($actor->totp_enabled_at === null || ! $this->adminTotp->verify($actor, $freshStepUpCode)) {
+        if ($actor->totp_enabled_at === null || ! $this->verifyStepUpWithoutRequestSecrets($actor, $freshStepUpCode)) {
             throw new HighRiskApprovalValidationException('Current MFA/TOTP step-up verification is required.');
+        }
+    }
+
+    private function verifyStepUpWithoutRequestSecrets(AdminUser $actor, string $freshStepUpCode): bool
+    {
+        $request = request();
+        $auditRequest = $request->duplicate(
+            query: [],
+            request: [],
+            attributes: $request->attributes->all(),
+            cookies: $request->cookies->all(),
+            files: [],
+            server: $request->server->all(),
+        );
+
+        app()->instance('request', $auditRequest);
+        app()->instance(\Illuminate\Http\Request::class, $auditRequest);
+
+        try {
+            return $this->adminTotp->verify($actor, $freshStepUpCode);
+        } finally {
+            app()->instance('request', $request);
+            app()->instance(\Illuminate\Http\Request::class, $request);
         }
     }
 
