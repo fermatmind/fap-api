@@ -9,6 +9,9 @@ use App\Models\AdminUser;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Approvals\ApprovalExecutor;
+use App\Services\Approvals\HighRiskApprovalService;
+use App\Services\Approvals\HighRiskApprovalValidationException;
+use App\Services\Auth\AdminTotpService;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
 use App\Support\OrgContext;
@@ -17,6 +20,7 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use ReflectionMethod;
 use Tests\TestCase;
 
 class ApprovalFlowTest extends TestCase
@@ -47,6 +51,7 @@ class ApprovalFlowTest extends TestCase
         ]);
 
         $requester = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_OPS_WRITE,
             PermissionNames::ADMIN_FINANCE_WRITE,
             PermissionNames::ADMIN_OPS_READ,
@@ -55,7 +60,12 @@ class ApprovalFlowTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_OPS_READ,
         ]);
-
+        $alternateExecutor = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_OPS_WRITE,
+            PermissionNames::ADMIN_FINANCE_WRITE,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
         $approval = AdminApproval::query()->create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -85,29 +95,33 @@ class ApprovalFlowTest extends TestCase
             'created_at' => now(),
         ]);
 
-        $approval->update([
-            'status' => AdminApproval::STATUS_APPROVED,
-            'approved_by_admin_user_id' => (int) $reviewer->id,
-            'approved_at' => now(),
-        ]);
-
-        DB::table('audit_logs')->insert([
-            'org_id' => 0,
-            'actor_admin_id' => (int) $reviewer->id,
-            'action' => 'approval_approved',
-            'target_type' => 'AdminApproval',
-            'target_id' => (string) $approval->id,
-            'meta_json' => json_encode([
-                'actor' => (int) $reviewer->id,
-                'org_id' => 0,
-                'reason' => 'approval flow refund',
-                'correlation_id' => (string) $approval->correlation_id,
-            ], JSON_UNESCAPED_UNICODE),
-            'ip' => '127.0.0.1',
-            'user_agent' => 'phpunit',
-            'request_id' => 'req_approval_flow_2',
-            'created_at' => now(),
-        ]);
+        config()->set('review_governance.mode', 'team_separated');
+        $this->enableTotp($reviewer);
+        app(HighRiskApprovalService::class)->approve(
+            (string) $approval->id,
+            (int) $reviewer->id,
+            $this->freshStepUpCode($reviewer),
+        );
+        $this->enableTotp($requester);
+        app(HighRiskApprovalService::class)->authorizeExecution(
+            (string) $approval->id,
+            (int) $requester->id,
+            $this->freshStepUpCode($requester),
+        );
+        try {
+            $this->enableTotp($alternateExecutor);
+            app(HighRiskApprovalService::class)->authorizeExecution(
+                (string) $approval->id,
+                (int) $alternateExecutor->id,
+                $this->freshStepUpCode($alternateExecutor),
+            );
+            $this->fail('Expected the bound execution actor to remain immutable for the active attempt.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame(
+                'Execution is already authorized by a different administrator.',
+                $exception->getMessage(),
+            );
+        }
 
         $execution = app(ApprovalExecutor::class)->execute((string) $approval->id);
         $this->assertTrue($execution->ok);
@@ -117,6 +131,7 @@ class ApprovalFlowTest extends TestCase
 
         $this->assertDatabaseHas('audit_logs', [
             'org_id' => 0,
+            'actor_admin_id' => (int) $requester->id,
             'action' => 'approval_executed_success',
             'target_type' => 'AdminApproval',
             'target_id' => (string) $approval->id,
@@ -147,14 +162,14 @@ class ApprovalFlowTest extends TestCase
             'id' => (string) Str::uuid(),
             'org_id' => 0,
             'type' => AdminApproval::TYPE_REFUND,
-            'status' => AdminApproval::STATUS_APPROVED,
+            'status' => AdminApproval::STATUS_PENDING,
             'requested_by_admin_user_id' => (int) $requester->id,
-            'approved_by_admin_user_id' => (int) $requester->id,
-            'approved_at' => now(),
             'reason' => 'invalid payload',
             'payload_json' => ['order_no' => ''],
             'correlation_id' => (string) Str::uuid(),
         ]);
+
+        $this->approveAsSoloOwner($approval, $requester);
 
         $result = app(ApprovalExecutor::class)->execute((string) $approval->id);
         $this->assertFalse($result->ok);
@@ -205,14 +220,14 @@ class ApprovalFlowTest extends TestCase
             'id' => (string) Str::uuid(),
             'org_id' => 42,
             'type' => AdminApproval::TYPE_REFUND,
-            'status' => AdminApproval::STATUS_APPROVED,
+            'status' => AdminApproval::STATUS_PENDING,
             'requested_by_admin_user_id' => (int) $requester->id,
-            'approved_by_admin_user_id' => (int) $requester->id,
-            'approved_at' => now(),
             'reason' => 'refund for org 42',
             'payload_json' => ['order_no' => $orderNo],
             'correlation_id' => (string) Str::uuid(),
         ]);
+
+        $this->approveAsSoloOwner($approval, $requester);
 
         // Simulate queue worker execution where no request org context is available.
         app(OrgContext::class)->set(0, null, null);
@@ -239,16 +254,15 @@ class ApprovalFlowTest extends TestCase
         $actor = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_OPS_WRITE,
             PermissionNames::ADMIN_OPS_READ,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
 
         $approval = AdminApproval::query()->create([
             'id' => (string) Str::uuid(),
             'org_id' => 7,
             'type' => AdminApproval::TYPE_ROLLBACK_RELEASE,
-            'status' => AdminApproval::STATUS_APPROVED,
+            'status' => AdminApproval::STATUS_PENDING,
             'requested_by_admin_user_id' => (int) $actor->id,
-            'approved_by_admin_user_id' => (int) $actor->id,
-            'approved_at' => now(),
             'reason' => 'rollback current release',
             'payload_json' => [
                 'order_no' => 'ord_rb_1',
@@ -260,6 +274,8 @@ class ApprovalFlowTest extends TestCase
             ],
             'correlation_id' => (string) Str::uuid(),
         ]);
+
+        $this->approveAsSoloOwner($approval, $actor);
 
         $result = app(ApprovalExecutor::class)->execute((string) $approval->id);
         $this->assertTrue($result->ok);
@@ -277,6 +293,79 @@ class ApprovalFlowTest extends TestCase
         $this->assertNotNull($audit);
         $meta = json_decode((string) ($audit->meta_json ?? '{}'), true);
         $this->assertSame('ord_rb_1', (string) ($meta['order_no'] ?? ''));
+    }
+
+    public function test_review_only_execution_actor_cannot_authorize_content_release_rollback(): void
+    {
+        config(['queue.default' => 'sync']);
+        config()->set('review_governance.mode', 'team_separated');
+
+        $requester = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        $reviewOnlyExecutor = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+
+        $approval = AdminApproval::query()->create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 7,
+            'type' => AdminApproval::TYPE_ROLLBACK_RELEASE,
+            'status' => AdminApproval::STATUS_PENDING,
+            'requested_by_admin_user_id' => (int) $requester->id,
+            'reason' => 'rollback requires release permission',
+            'payload_json' => [
+                'order_no' => 'ord_rb_forbidden',
+                'region' => 'GLOBAL',
+                'locale' => 'en',
+                'dir_alias' => 'default',
+                'from_version_id' => (string) Str::uuid(),
+                'to_version_id' => (string) Str::uuid(),
+            ],
+            'correlation_id' => (string) Str::uuid(),
+        ]);
+
+        $this->enableTotp($reviewer);
+        app(HighRiskApprovalService::class)->approve(
+            (string) $approval->id,
+            (int) $reviewer->id,
+            $this->freshStepUpCode($reviewer),
+        );
+        $this->enableTotp($reviewOnlyExecutor);
+        try {
+            app(HighRiskApprovalService::class)->authorizeExecution(
+                (string) $approval->id,
+                (int) $reviewOnlyExecutor->id,
+                $this->freshStepUpCode($reviewOnlyExecutor),
+            );
+            $this->fail('Expected review-only actor to fail before execution authorization is stored.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Execution actor lacks the required domain permission.', $exception->getMessage());
+        }
+
+        $approval->refresh();
+        $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approval->status);
+        $this->assertSame(0, (int) $approval->retry_count);
+        $this->assertArrayNotHasKey(
+            HighRiskApprovalService::EXECUTION_METADATA_KEY,
+            (array) $approval->payload_json,
+        );
+        $this->assertDatabaseMissing('content_pack_releases', [
+            'action' => 'rollback',
+            'dir_alias' => 'default',
+        ]);
+        $this->assertDatabaseMissing('audit_logs', [
+            'target_id' => (string) $approval->id,
+            'action' => 'content_release_rollback',
+        ]);
+        $this->assertDatabaseMissing('audit_logs', [
+            'target_id' => (string) $approval->id,
+            'actor_admin_id' => (int) $reviewOnlyExecutor->id,
+            'action' => 'approval_execution_authorized',
+        ]);
     }
 
     /**
@@ -307,5 +396,42 @@ class ApprovalFlowTest extends TestCase
         $admin->roles()->syncWithoutDetaching([$role->id]);
 
         return $admin;
+    }
+
+    private function approveAsSoloOwner(AdminApproval $approval, AdminUser $actor): void
+    {
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $actor->id);
+        $this->enableTotp($actor);
+        app(HighRiskApprovalService::class)->approve(
+            (string) $approval->id,
+            (int) $actor->id,
+            $this->freshStepUpCode($actor),
+        );
+        app(HighRiskApprovalService::class)->authorizeExecution(
+            (string) $approval->id,
+            (int) $actor->id,
+            $this->freshStepUpCode($actor),
+        );
+    }
+
+    private function enableTotp(AdminUser $admin): void
+    {
+        $admin->forceFill([
+            'totp_enabled_at' => now(),
+            'totp_secret' => 'JBSWY3DPEHPK3PXP',
+        ])->save();
+    }
+
+    private function freshStepUpCode(AdminUser $admin): string
+    {
+        $totpAt = new ReflectionMethod(AdminTotpService::class, 'totpAt');
+        $totpAt->setAccessible(true);
+
+        return (string) $totpAt->invoke(
+            app(AdminTotpService::class),
+            (string) $admin->totp_secret,
+            (int) floor(time() / 30),
+        );
     }
 }

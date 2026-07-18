@@ -174,6 +174,29 @@ final class ReviewPolicyRegistryTest extends TestCase
         }
     }
 
+    public function test_pr5_ops_adapters_require_step_up_and_separate_execution(): void
+    {
+        $byId = collect(ReviewPolicyRegistry::all())->keyBy('surface_id');
+
+        foreach ([
+            'admin_approval',
+            'refund_approval',
+            'manual_benefit_grant_approval',
+            'benefit_revoke_approval',
+            'payment_event_reprocess_approval',
+            'rollback_release_approval',
+            'data_lifecycle_approval',
+        ] as $surfaceId) {
+            $row = $byId->get($surfaceId);
+            $this->assertIsArray($row);
+            $this->assertSame('R3', $row['risk_tier']);
+            $this->assertTrue($row['same_actor_allowed']);
+            $this->assertTrue($row['step_up_required']);
+            $this->assertTrue($row['production_execution_separate']);
+            $this->assertSame('step_up_high_risk_approval_adapter_active', $row['adapter_status']);
+        }
+    }
+
     public function test_new_or_modified_manual_review_gates_declare_a_registered_surface(): void
     {
         $repoRoot = dirname(__DIR__, 3);

@@ -9,7 +9,9 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Jobs\ExecuteApprovalJob;
 use App\Models\AdminApproval;
-use App\Services\Audit\AuditLogger;
+use App\Models\AdminUser;
+use App\Services\Approvals\HighRiskApprovalService;
+use App\Services\Approvals\HighRiskApprovalValidationException;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -17,8 +19,18 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @review-surface admin_approval
+ * @review-surface refund_approval
+ * @review-surface manual_benefit_grant_approval
+ * @review-surface benefit_revoke_approval
+ * @review-surface payment_event_reprocess_approval
+ * @review-surface rollback_release_approval
+ * @review-surface data_lifecycle_approval
+ */
 class AdminApprovalResource extends BaseTenantResource
 {
     protected static ?string $model = AdminApproval::class;
@@ -31,7 +43,24 @@ class AdminApprovalResource extends BaseTenantResource
 
     public static function canViewAny(): bool
     {
-        return static::canReview();
+        return static::canReview() || static::executableTypesForCurrentAdmin() !== [];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        if (static::canReview()) {
+            return $query;
+        }
+
+        $types = static::executableTypesForCurrentAdmin();
+        if ($types === []) {
+            return $query->whereRaw('1 = 0');
+        }
+
+        return $query
+            ->whereIn('status', [AdminApproval::STATUS_APPROVED, AdminApproval::STATUS_FAILED])
+            ->whereIn('type', $types);
     }
 
     public static function getNavigationBadge(): ?string
@@ -136,6 +165,7 @@ class AdminApprovalResource extends BaseTenantResource
                         AdminApproval::TYPE_REFUND => AdminApproval::TYPE_REFUND,
                         AdminApproval::TYPE_REPROCESS_EVENT => AdminApproval::TYPE_REPROCESS_EVENT,
                         AdminApproval::TYPE_ROLLBACK_RELEASE => AdminApproval::TYPE_ROLLBACK_RELEASE,
+                        AdminApproval::TYPE_DATA_LIFECYCLE => AdminApproval::TYPE_DATA_LIFECYCLE,
                     ]),
             ])
             ->actions([
@@ -146,46 +176,77 @@ class AdminApprovalResource extends BaseTenantResource
                     ->color('success')
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_PENDING)
                     ->requiresConfirmation()
-                    ->action(function (AdminApproval $record): void {
-                        $guard = (string) config('admin.guard', 'admin');
-                        $user = auth($guard)->user();
-                        $adminId = is_object($user) && method_exists($user, 'getAuthIdentifier')
-                            ? (int) $user->getAuthIdentifier()
-                            : null;
-
-                        DB::transaction(function () use ($record, $adminId): void {
-                            $locked = AdminApproval::query()->whereKey($record->id)->lockForUpdate()->first();
-                            if (! $locked || strtoupper((string) $locked->status) !== AdminApproval::STATUS_PENDING) {
-                                return;
-                            }
-
-                            $locked->status = AdminApproval::STATUS_APPROVED;
-                            $locked->approved_by_admin_user_id = $adminId;
-                            $locked->approved_at = now();
-                            $locked->save();
-
-                            app(AuditLogger::class)->log(
-                                request(),
-                                'approval_approved',
-                                'AdminApproval',
-                                (string) $locked->id,
-                                [
-                                    'actor' => $adminId,
-                                    'org_id' => (int) $locked->org_id,
-                                    'correlation_id' => (string) $locked->correlation_id,
-                                    'type' => (string) $locked->type,
-                                ],
-                                (string) $locked->reason,
-                                'approved',
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
+                        $adminId = static::currentAdminId();
+                        try {
+                            app(HighRiskApprovalService::class)->approve(
+                                (string) $record->id,
+                                $adminId,
+                                (string) ($data['fresh_step_up_code'] ?? ''),
                             );
-                        });
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()
+                                ->title('High-risk approval validation failed')
+                                ->danger()
+                                ->send();
 
-                        ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
+                            return;
+                        }
 
                         Notification::make()
                             ->title(__('ops.resources.approvals.notifications.approved'))
                             ->success()
                             ->send();
+                    }),
+                Tables\Actions\Action::make('bindLegacyGovernance')
+                    ->label('Bind legacy governance evidence')
+                    ->icon('heroicon-o-shield-check')
+                    ->color('warning')
+                    ->visible(fn (AdminApproval $record): bool => static::canReview()
+                        && app(HighRiskApprovalService::class)->requiresLegacyGovernanceBinding($record))
+                    ->requiresConfirmation()
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
+                        try {
+                            app(HighRiskApprovalService::class)->bindLegacyGovernance(
+                                (string) $record->id,
+                                static::currentAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
+                            );
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()->title('Legacy governance binding failed')->danger()->send();
+
+                            return;
+                        }
+
+                        Notification::make()->title('Legacy governance evidence bound')->success()->send();
+                    }),
+                Tables\Actions\Action::make('execute')
+                    ->label('Execute approved action')
+                    ->icon('heroicon-o-play')
+                    ->color('warning')
+                    ->visible(fn (AdminApproval $record): bool => static::canExecute($record)
+                        && strtoupper((string) $record->status) === AdminApproval::STATUS_APPROVED
+                        && app(HighRiskApprovalService::class)->executionSupported($record)
+                        && app(HighRiskApprovalService::class)->hasValidGovernanceEvidence($record))
+                    ->requiresConfirmation()
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
+                        try {
+                            app(HighRiskApprovalService::class)->authorizeExecution(
+                                (string) $record->id,
+                                static::currentAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
+                            );
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()->title('Execution authorization failed')->danger()->send();
+
+                            return;
+                        }
+
+                        ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
+                        Notification::make()->title('Approved action queued for execution')->success()->send();
                     }),
                 Tables\Actions\Action::make('reject')
                     ->label(__('ops.resources.approvals.actions.reject'))
@@ -194,48 +255,24 @@ class AdminApprovalResource extends BaseTenantResource
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_PENDING)
                     ->requiresConfirmation()
                     ->form([
+                        static::freshStepUpField(),
                         Forms\Components\Textarea::make('reason_append')
                             ->label(__('ops.resources.approvals.fields.reject_note'))
                             ->maxLength(255),
                     ])
                     ->action(function (AdminApproval $record, array $data): void {
-                        $guard = (string) config('admin.guard', 'admin');
-                        $user = auth($guard)->user();
-                        $adminId = is_object($user) && method_exists($user, 'getAuthIdentifier')
-                            ? (int) $user->getAuthIdentifier()
-                            : null;
-
-                        $append = trim((string) ($data['reason_append'] ?? ''));
-
-                        DB::transaction(function () use ($record, $adminId, $append): void {
-                            $locked = AdminApproval::query()->whereKey($record->id)->lockForUpdate()->first();
-                            if (! $locked || strtoupper((string) $locked->status) !== AdminApproval::STATUS_PENDING) {
-                                return;
-                            }
-
-                            $locked->status = AdminApproval::STATUS_REJECTED;
-                            $locked->approved_by_admin_user_id = $adminId;
-                            $locked->approved_at = now();
-                            if ($append !== '') {
-                                $locked->reason = trim((string) $locked->reason.' | reject_note: '.$append);
-                            }
-                            $locked->save();
-
-                            app(AuditLogger::class)->log(
-                                request(),
-                                'approval_rejected',
-                                'AdminApproval',
-                                (string) $locked->id,
-                                [
-                                    'actor' => $adminId,
-                                    'org_id' => (int) $locked->org_id,
-                                    'correlation_id' => (string) $locked->correlation_id,
-                                    'type' => (string) $locked->type,
-                                ],
-                                (string) $locked->reason,
-                                'rejected',
+                        try {
+                            app(HighRiskApprovalService::class)->reject(
+                                (string) $record->id,
+                                static::currentAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
+                                (string) ($data['reason_append'] ?? ''),
                             );
-                        });
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()->title('High-risk rejection validation failed')->danger()->send();
+
+                            return;
+                        }
 
                         Notification::make()
                             ->title(__('ops.resources.approvals.notifications.rejected'))
@@ -245,15 +282,25 @@ class AdminApprovalResource extends BaseTenantResource
                 Tables\Actions\Action::make('retryExecute')
                     ->label(__('ops.resources.approvals.actions.retry_execute'))
                     ->icon('heroicon-o-arrow-path')
-                    ->visible(fn (AdminApproval $record): bool => static::canReview() && in_array(strtoupper((string) $record->status), [AdminApproval::STATUS_FAILED, AdminApproval::STATUS_APPROVED], true))
+                    ->visible(fn (AdminApproval $record): bool => static::canExecute($record)
+                        && strtoupper((string) $record->status) === AdminApproval::STATUS_FAILED
+                        && app(HighRiskApprovalService::class)->executionSupported($record)
+                        && app(HighRiskApprovalService::class)->hasValidGovernanceEvidence($record))
                     ->requiresConfirmation()
-                    ->action(function (AdminApproval $record): void {
-                        DB::table('admin_approvals')
-                            ->where('id', (string) $record->id)
-                            ->update([
-                                'status' => AdminApproval::STATUS_APPROVED,
-                                'updated_at' => now(),
-                            ]);
+                    ->form([static::freshStepUpField()])
+                    ->action(function (AdminApproval $record, array $data): void {
+                        try {
+                            app(HighRiskApprovalService::class)->authorizeExecution(
+                                (string) $record->id,
+                                static::currentAdminId(),
+                                (string) ($data['fresh_step_up_code'] ?? ''),
+                                retryFailed: true,
+                            );
+                        } catch (HighRiskApprovalValidationException) {
+                            Notification::make()->title('Retry execution authorization failed')->danger()->send();
+
+                            return;
+                        }
 
                         ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
 
@@ -276,11 +323,80 @@ class AdminApprovalResource extends BaseTenantResource
 
     private static function canReview(): bool
     {
+        $user = static::currentAdmin();
+        if (! $user instanceof AdminUser) {
+            return false;
+        }
+
+        if ((string) config('review_governance.mode') === 'solo_owner') {
+            return (int) config('review_governance.solo_owner_admin_user_id') > 0
+                && (int) $user->getAuthIdentifier() === (int) config('review_governance.solo_owner_admin_user_id');
+        }
+
+        return (string) config('review_governance.mode') === 'team_separated'
+            && $user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW);
+    }
+
+    /** @return list<string> */
+    private static function executableTypesForCurrentAdmin(): array
+    {
+        $user = static::currentAdmin();
+        if (! $user instanceof AdminUser
+            || (string) config('review_governance.mode') !== 'team_separated') {
+            return [];
+        }
+
+        $types = [];
+        $canOperate = $user->hasPermission(PermissionNames::ADMIN_OPS_WRITE);
+        if ($canOperate) {
+            $types = [
+                AdminApproval::TYPE_MANUAL_GRANT,
+                AdminApproval::TYPE_REVOKE_BENEFIT,
+                AdminApproval::TYPE_REPROCESS_EVENT,
+            ];
+        }
+        if ($canOperate && $user->hasPermission(PermissionNames::ADMIN_FINANCE_WRITE)) {
+            $types[] = AdminApproval::TYPE_REFUND;
+        }
+        if ($user->hasPermission(PermissionNames::ADMIN_CONTENT_RELEASE)
+            || $user->hasPermission(PermissionNames::ADMIN_OWNER)) {
+            $types[] = AdminApproval::TYPE_ROLLBACK_RELEASE;
+        }
+
+        return $types;
+    }
+
+    private static function canExecute(AdminApproval $record): bool
+    {
+        return app(HighRiskApprovalService::class)->canAuthorizeExecution(
+            $record,
+            static::currentAdminId(),
+        );
+    }
+
+    private static function currentAdmin(): ?AdminUser
+    {
         $guard = (string) config('admin.guard', 'admin');
         $user = auth($guard)->user();
 
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && $user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW);
+        return $user instanceof AdminUser ? $user : null;
+    }
+
+    private static function currentAdminId(): int
+    {
+        $user = static::currentAdmin();
+
+        return $user instanceof AdminUser ? (int) $user->getAuthIdentifier() : 0;
+    }
+
+    private static function freshStepUpField(): Forms\Components\TextInput
+    {
+        return Forms\Components\TextInput::make('fresh_step_up_code')
+            ->label('Current TOTP or recovery code')
+            ->password()
+            ->autocomplete('one-time-code')
+            ->required()
+            ->minLength(6)
+            ->maxLength(32);
     }
 }

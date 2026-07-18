@@ -42437,7 +42437,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "6c6399fdb6ae806881487455bbde20ada6eefd92",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -97235,8 +97235,8 @@
     "depends_on": [
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "f04b3fb610ba3a329bfd9298bd2e6c225ff21958",
+    "status": "merged",
+    "commit_sha": "73eeeb0175388211793fb2f406d6af81a7e41866",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3167",
     "checks": {
       "dependency": {
@@ -97245,23 +97245,23 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the final exact-head P3 repair, the focused Career/SEO review and architecture suite passed 16 tests with 383 assertions, and the directly relevant runtime-freeze classifier control passed 1 test with 2 assertions. The changed command and test passed syntax and Pint; Composer strict, command registration, YAML/JSON, diff, and exact ten-path scope checks remain valid. The complete bash backend/scripts/ci_verify_mbti.sh gate was rerun after the human-readable failure-path fix and passed from the completed worktree, including Big Five 1524 tests with 187973 assertions, Enneagram, MBTI, Personality full-32 71 tests with 5383 assertions, migration, security, OpenAPI, order, dependency, webhook, and attempt gates. Validation-generated Big Five timestamps and hashes were restored exactly and are absent from the diff."
+        "evidence": "After the final exact-head P3 repair, the focused Career/SEO review and architecture suite passed 16 tests with 380 assertions, and the directly relevant runtime-freeze classifier control passed 1 test with 2 assertions. The changed command and test passed syntax and Pint; Composer strict, command registration, YAML/JSON, diff, and exact ten-path scope checks remain valid. The complete bash backend/scripts/ci_verify_mbti.sh gate passed from the completed worktree, including Big Five 1524 tests with 187973 assertions, Enneagram, MBTI, Personality full-32 71 tests with 5383 assertions, migration, security, OpenAPI, order, dependency, webhook, and attempt gates. Validation-generated Big Five timestamps and hashes were restored exactly and are absent from the diff."
       },
       "github": {
         "status": "passed",
-        "evidence": "All nine required checks passed on exact head 0132a1f933b297fa1f7eefff46f2db1024b48cbb: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Exact-head Codex review reported no major issues, every review thread is resolved, and GitHub reports CLEAN/MERGEABLE."
+        "evidence": "All nine required checks passed on final exact head 73eeeb0175388211793fb2f406d6af81a7e41866: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Exact-head Codex review reported no major issues, every review thread was resolved, and GitHub squash-merged PR #3167 at 2026-07-18T13:17:40Z as 8d43a25809740e069ed4b07728e2a48a16a3e442."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-18T13:17:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -97363,9 +97363,245 @@
         "at": "2026-07-18T13:11:06Z",
         "status": "ready_to_merge",
         "note": "Exact head 0132a1f933b297fa1f7eefff46f2db1024b48cbb passed all nine GitHub checks. Exact-head Codex review reported no major issues, all review threads are resolved, GitHub reports CLEAN/MERGEABLE, the worktree is clean, and PR-semantic scope remains exactly ten manifest-allowed paths. This ready_to_merge ledger-only commit must itself pass required checks and exact-head review before squash merge."
+      },
+      {
+        "at": "2026-07-18T13:36:16Z",
+        "status": "merged",
+        "note": "Reconciled while naturally initializing dependent PR05. GitHub reports PR #3167 MERGED at 2026-07-18T13:17:40Z from final exact head 73eeeb0175388211793fb2f406d6af81a7e41866 after all nine checks and exact-head Codex review passed; squash commit 8d43a25809740e069ed4b07728e2a48a16a3e442 is contained by origin/main. The repository cleanup script synced the clean shared main worktree and removed the local and remote task branches. Post-merge focused validation passed 16 tests/380 assertions plus runtime-freeze 1/2. This also corrects the earlier provisional 383-assertion ledger count to the reproducible 380. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T13:11:06Z"
+    "updated_at": "2026-07-18T13:36:16Z"
+  },
+  "SOLO-OWNER-OPS-APPROVAL-05": {
+    "id": "SOLO-OWNER-OPS-APPROVAL-05",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/solo-owner-ops-approval-05",
+    "title": "SOLO-OWNER-OPS-APPROVAL-05: allow step-up solo-owner approval for high-risk operations",
+    "depends_on": [
+      "SOLO-OWNER-CAREER-SEO-REVIEW-04"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "ab14acc5bc75be9f5493dad97376532e06772bc7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3167 is MERGED, squash commit 8d43a25809740e069ed4b07728e2a48a16a3e442 is contained by origin/main, the clean shared main worktree was synced, both PR04 task branches were removed, and post-merge focused validation passed before PR05 branch creation."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After the twenty-first exact-head review repair, focused approval/registry validation passed 28 tests/560 assertions and the exact runtime-freeze contract passed 367/759. The guarded exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, structured-file, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove solo_owner review UI is restricted to the exact configured owner regardless of generic review permission, while team_separated review remains permission-based and domain executor visibility remains intact."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "Exact round-21 implementation-plus-ledger head 8315511dce3ed11b3d05dee94bd0e8a019820d0f passed all nine required checks. Exact-head Codex review reported no major issues, all 27 review threads are resolved, and GitHub reports MERGEABLE/CLEAN."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T13:36:16Z",
+        "status": "implementation_in_progress",
+        "note": "Verified the PR04 dependency merge, containment, clean main sync, branch cleanup, and post-merge regression before creating the exact PR05 branch from origin/main. Implemented a centralized R3 gate that permits configured-owner self-approval only with current step-up, preserves team-separated distinct approval, hashes the exact target and evidence, separates approve from execute, revalidates drift in the worker, and registers all six operation types including evidence-only data lifecycle. Initial focused validation passed 17 tests/394 assertions. Tests use local transactions and fake queues; no refund, benefit, payment, rollback, data-lifecycle, production database, CMS, search, cache, publish, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T13:51:31Z",
+        "status": "local_checks_passed",
+        "note": "Fast-forwarded the uncommitted isolated PR05 work to latest origin/main f409c8aaab4cb6541ded744078583d81104bae13, then reran focused validation. Focused approval and registry tests passed 18/400, runtime-freeze passed 1/4, and the one guarded full ci_verify_mbti.sh run exited 0. Syntax, formatting, dependency metadata, structured files, generated registry parity, exact path scope, and whitespace checks passed. Validation used only local SQLite, fake queues, and mocks; no real high-risk operation or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T13:54:04Z",
+        "status": "local_check_failed_then_repaired",
+        "note": "After implementation commit 98012bfdab3335e21c5ab7096955a541337c776c, the branch-aware runtime freeze correctly failed on five approval-governance runtime paths that were invisible while uncommitted. Added the exact manifest-predeclared classifier exemption for only AdminApproval resource/model/executor and the two high-risk approval services; a generic data-lifecycle executor and Big Five runtime service remain blocked."
+      },
+      {
+        "at": "2026-07-18T13:54:04Z",
+        "status": "local_checks_passed",
+        "note": "Post-commit approval and registry validation passed 18 tests/406 assertions, including the committed-diff review-surface scan. The repaired runtime freeze and its narrow classifier contract passed 2/6, plus Pint and PHP syntax passed for the classifier file. No runtime implementation changed in this repair and no production action occurred."
+      },
+      {
+        "at": "2026-07-18T14:01:00Z",
+        "status": "local_check_failed_retriable",
+        "note": "The final full-gate retry failed during the Enneagram post-gate SQLite baseline check after migrations had printed success: /tmp/fap-ci.sqlite was zero bytes and all tables were missing. Read-only process inspection found another Codex task had started ci_verify_mbti.sh after this run began; both scripts hardcode the same /tmp/fap-ci.sqlite path. Recorded the deterministic shared-database collision and deferred retry until the competing process exits; no code change or production action is implicated."
+      },
+      {
+        "at": "2026-07-18T14:09:09Z",
+        "status": "local_checks_passed",
+        "note": "After the competing full gate exited, reran the exact manifest command in isolation. bash backend/scripts/ci_verify_mbti.sh exited 0 across the committed runtime-freeze classifier, Big Five, Enneagram 10/369, personality 71/5383, and all downstream security and regression gates. Restored deterministic Big Five generated files and retained only the exact 14 allowed PR05 paths. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T14:11:39Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3172 with implementation, rationale, validation, security/privacy, repository-rule impact, deferred data-lifecycle executor, and no-production-execution sections. Required GitHub checks and exact-head Codex review are pending."
+      },
+      {
+        "at": "2026-07-18T14:21:21Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Codex review on head 6834f0da7239453292575caf0366885cff93b77b identified one P2 gap: flat access_token and cookie assignments could survive executor error redaction. Expanded fail-closed input rejection and executor redaction to separator-prefixed token/secret keys plus cookies, and added dynamic non-leak regression coverage. Approval/registry tests passed 18/415, runtime freeze 2/6, and scoped Pint/syntax passed."
+      },
+      {
+        "at": "2026-07-18T14:32:08Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Second Codex review on head 95932247eb0b121b4f084de7def8db14d3ec8ce6 identified camelCase accessToken/clientSecret/apiKey variants. Generalized the flat credential-key matcher to safe alphanumeric/underscore/hyphen prefixes ending in a sensitive credential label; expanded approve/reject input rejection and dynamic error/reason/nested-audit non-leak tests. Approval/registry tests passed 18/427, runtime freeze 2/6, and scoped Pint passed."
+      },
+      {
+        "at": "2026-07-18T14:44:55Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Third Codex review on head 01cef5bd8632197655aba920e2ffee02c914297d found two P2 rollout/privacy gaps. Added model-level pre-save rejection so Eloquent request paths cannot persist or audit credential-bearing reasons, while service validation still covers legacy/direct rows. Added explicit step-up legacy evidence binding only for APPROVED/FAILED rows with a completely missing governance key, original approver/timestamp, and current policy; status is preserved, no action is queued, and malformed/drifted evidence remains fail closed. Focused validation passed 19/456, runtime freeze 2/6, scoped Pint/syntax, docs, and diff checks passed."
+      },
+      {
+        "at": "2026-07-18T14:56:30Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Fourth exact-head Codex review on a0033bff77188e8f88d3224bb8d276cf3cf85e18 found one P1: high-risk actions trusted a login-session TOTP user ID with no timestamp or nonce. Replaced that proof with a fresh code submitted and verified independently for approve, legacy bind, execute, reject, and retry. The time-bound TOTP or one-time recovery code is never persisted; a stale session marker and the disabled global TOTP switch both fail closed. Approval/registry tests passed 19/457, the exact Ops runtime-freeze contract passed 1/2, and scoped Pint/PHP syntax/diff checks passed."
+      },
+      {
+        "at": "2026-07-18T15:12:14Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Fifth exact-head Codex review on 6c1747d9678c076cb957dc4b2eba779e7e3908c3 found one P2: the fresh execution actor was dropped when only the approval ID entered the queue, so worker/domain/audit attribution fell back to requester or approver. Added a separate hashed private execution authorization binding the stepped-up actor, timestamp, approval evidence SHA, and attempt number before dispatch. The worker revalidates it, executes domain authorization as that actor, and attributes success/failure audit to the same actor; a different actor cannot overwrite an active authorization. Approval/registry tests passed 19/465, exact Ops runtime-freeze passed 1/2, scoped Pint passed, and the exact full ci_verify_mbti.sh gate completed with zero failures through its final queue backlog cleanup. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T15:36:37Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Sixth exact-head Codex review on 2854dc32eabad729987ea55247e701effd877ecf found one P1: the reject Filament action passed a request containing fresh_step_up_code to AuditLogger, whose default params_sanitized captured request()->all(). The reject audit now supplies an explicit safe params_sanitized allowlist containing only reason_append; a dynamic request/audit regression proves neither the private value nor field name reaches audit meta. Focused approval/registry tests passed 20/469, exact Ops runtime-freeze passed 1/2, scoped Pint/PHP syntax/diff checks passed, and the exact full ci_verify_mbti.sh gate exited 0 through final cleanup. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T15:47:11Z",
+        "status": "local_check_failed_environment_then_repaired",
+        "note": "Another task switched the shared primary worktree to codex/mbti-comp-projection-45, so PR05 continued in an isolated worktree. The first focused test command incorrectly reused the primary worktree's optimized Composer vendor symlink; its classmap loaded old branch classes and reported HighRiskApprovalService missing plus stale registry/executor behavior. Replaced the symlink with an isolated vendor copy, rebuilt autoload without scripts, and reran successfully. This was an environment-path failure, not a product-code failure; the shared vendor and other task branch were not modified."
+      },
+    {
+      "at": "2026-07-18T15:54:54Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Seventh exact-head Codex review on 03cc2dd9002fd6e9c455f19f34c666838be81591 found one P1: the now-exact execution actor could run ROLLBACK_RELEASE with approval-review permission but without the content-release/owner permission required on the request surface. ApprovalExecutor now fails before any rollback transaction unless the bound execution actor has admin.content.release or admin.owner. A team-separated regression proves a review-only executor receives ROLLBACK_RELEASE_FORBIDDEN, creates no release row or rollback audit, and owns the failure audit. Focused approval/registry tests passed 21/475, runtime-freeze 1/2, scoped Pint/PHP syntax/diff checks passed, and the exact full ci_verify_mbti.sh gate exited 0 through final cleanup. No real rollback, release, or production mutation occurred."
+    },
+    {
+      "at": "2026-07-18T16:17:01Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Eighth exact-head Codex review on f45271849f4191b554752cf599d2c30d6b30ee72 found one P2: team_separated requester/approver distinctness was also applied to the execution actor, blocking the original requester from executing after independent approval. Split approval and execution actor policies: team-separated approval still rejects requester self-approval, while a freshly stepped-up execution actor may be the requester and remains subject to the exact domain permission gate. The end-to-end refund regression now proves requester -> distinct reviewer -> same requester execution and audit attribution. Focused approval/registry tests passed 21/475, runtime-freeze 1/2, scoped Pint/PHP syntax, Composer/structured-file/diff checks, and the exact full ci_verify_mbti.sh gate all passed through final cleanup. Generated Big Five timestamp/hash noise was restored exactly. No real high-risk action or production mutation occurred."
+    },
+      {
+        "at": "2026-07-18T16:39:52Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Ninth exact-head Codex review on 498d5dcb28d0b514bb4deb16afcc9ffbfaf146ce found two P2 gaps. Execution authorization now requires the exact type-specific domain permission before writing authorization evidence or dispatching: ops.write for grant/revoke/reprocess, finance.write for refund, and content.release or owner for rollback; the worker repeats the same check so permission revocation also fails before retry consumption. A review-only rollback actor is rejected with the approval still APPROVED, retry_count zero, no execution evidence, and no authorization audit. AdminApproval persistence now rejects bare Bearer credentials, while executor error/audit redaction was dynamically re-proven. Focused approval/registry tests passed 21/481, runtime-freeze 1/2, scoped Pint/PHP syntax, Composer/structured-file/diff checks, and the exact full ci_verify_mbti.sh gate all passed through final cleanup. Generated Big Five timestamp/hash noise was restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T17:00:15Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Tenth exact-head Codex review on 9a08101583e2ff86b1f3931c02b8c46c30cd3b2e found two P2 gaps and one P3 schema mismatch. Reject now runs through the centralized service and enforces the configured solo owner or distinct team reviewer before mutation. Approve, legacy bind, execution authorization, and reject consume one-time recovery codes before their rollbackable business transactions, so later policy or drift failures cannot restore the code or its audit. Approval and reject audit user agents are capped at the 255-character schema limit. Focused approval/registry tests passed 22/493, runtime-freeze 1/2, scoped Pint/PHP syntax, Composer/structured-file/diff checks, and the exact full ci_verify_mbti.sh gate all passed through final cleanup. Generated Big Five files were restored exactly, leaving only the manifest-approved scope. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T17:16:49Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Eleventh exact-head Codex review on 28bc9ca59bd27ff44e852d4bb51c2b9bca0b6a5f found one P2 mismatch between refund pre-dispatch authorization and the downstream order policy. Refund execution now requires both admin.finance.write and admin.ops.write before authorization evidence or queue dispatch; rollback retains content.release-or-owner semantics, while grant, revoke, and reprocess retain ops.write. A finance-only regression proves the approval remains APPROVED with retry_count zero and no execution metadata or authorization audit. Focused approval/registry tests passed 23/498, runtime-freeze 1/2, scoped Pint/PHP syntax, Composer/structured-file/diff checks, and the exact full ci_verify_mbti.sh gate all passed through final cleanup. Generated Big Five files were restored exactly. No real refund or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T17:32:00Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Twelfth exact-head Codex review on f2fdfdec08cc8083c84cdcde61365b2da7305c8d found one P2 near-expiry race: a same-actor repeat Execute consumed fresh step-up but returned the prior authorization. Same-actor retries now refresh authorized_at and authorization_sha256 for the unchanged execution attempt; a different actor still cannot replace an active authorization. The regression advances time nine minutes, refreshes, then proves worker validation succeeds two minutes later when the old authorization would be stale. Focused approval/registry tests passed 24/502, runtime-freeze 1/2, scoped Pint/PHP syntax, Composer/structured-file/diff checks, and the exact full ci_verify_mbti.sh gate all passed through final cleanup. Generated Big Five files were restored exactly. No real dispatch or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T17:51:16Z",
+        "status": "local_check_failed_environment_then_repaired",
+        "note": "The first focused PHPUnit invocation omitted the required testing environment and attempted the default local MySQL connection; all 15 errors were root@localhost access denials before test data setup. A later auxiliary two-dot syntax command also included unrelated paths deleted by newly advanced origin/main and failed opening one absent file. Re-ran with in-memory SQLite, fake/sync queue isolation, the manifest merge-base range, and explicit current-scope PHP paths; both command-configuration failures are repaired and no product-code defect or database mutation occurred."
+      },
+      {
+        "at": "2026-07-18T17:51:16Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Thirteenth exact-head Codex review on 7d8ca06028b17bcecad446a6e12ec98bab0b057a found two P2 secret-handling gaps. Step-up verification now binds a parameter-free duplicate request only while the shared recovery-code verifier writes its audit, then restores the original request in a finally block; neither recovery value nor fresh_step_up_code/reason_append can persist. Executor redaction now handles JSON single/double-quoted credential keys and values. Focused approval/registry tests passed 24/508, runtime-freeze passed 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T18:07:22Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Fourteenth exact-head Codex review on 4a8dbc926278d343f123e15e3ab2a2667d96e100 found one P2 boundary mismatch: quoted credential keys were covered by executor redaction but not the AdminApproval reason persistence guard. The model guard now accepts optional single/double quotes after sensitive keys, and dynamic tests prove double-quoted access_token plus single-quoted clientSecret fail before Eloquent persistence and again at the legacy/direct-row service boundary. Focused approval/registry tests passed 24/516, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T18:27:43Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation-plus-ledger head db9a2fc6f98537d5e799decda1f98231abab37b7 passed all nine required checks. Exact-head Codex review reported no major issues, all fourteen prior review findings are repaired and every thread is resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This ready_to_merge ledger-only commit must itself pass required checks and exact-head review before squash merge."
+      },
+      {
+        "at": "2026-07-18T18:51:24Z",
+        "status": "premerge_review_threads_found_fix_in_progress",
+        "note": "Final pre-merge GraphQL audit correctly stopped merge after finding two unresolved P2 threads that had landed while later ledger heads were progressing: Authorization: Basic values retained the credential after the scheme, and fresh high-risk step-up verification had no per-actor/action attempt limiter. No merge occurred."
+      },
+      {
+        "at": "2026-07-18T18:51:24Z",
+        "status": "local_check_failed_then_repaired",
+        "note": "The first combined post-repair check passed runtime-freeze 367/759, then Pint found one unary-operator spacing issue in HighRiskApprovalService and stopped the remaining chained checks. Pint repaired that single mechanical format issue; the full formatting, syntax, Composer strict, structured-file, scope, and diff checks then passed."
+      },
+      {
+        "at": "2026-07-18T18:51:24Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Fifteenth review repair now redacts an entire multi-word Authorization header value before generic scalar redaction, and privately enforces five failed step-up attempts per minute for each actor/action bucket before invoking TOTP/recovery verification. Success clears only the matching bucket; approve, reject, legacy bind, execute, and retry use fixed internal action names. Focused approval/registry tests passed 25/529, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T19:06:05Z",
+        "status": "ready_to_merge",
+        "note": "Exact round-15 implementation-plus-ledger head ed642827e359e0a03e6ac9390a9a067baa3a31d2 passed all nine required checks. Exact-head Codex review reported no major issues, both newly repaired P2 threads and all 21 total review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
+      },
+      {
+        "at": "2026-07-18T19:23:26Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Sixteenth exact-head review on ready ledger head 3fbb727fde061fadecef5f1fb9f380525dd6e5ef found one valid P2: team-separated policy enforced distinctness but not admin.approval.review at the reusable service boundary. The service now resolves the actor and requires that permission before approve, reject, legacy bind, and executable-evidence validation. Direct-service regressions cover all three mutation entries. Focused approval/registry tests passed 26/536, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T19:40:29Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Seventeenth pre-merge thread audit found one valid P2 from the prior exact-head review: team-separated execute and retry actions were visible only to approval reviewers, so a review-only approver and domain-only executor could strand an approved action. The resource now admits domain-qualified actors, limits their query to APPROVED/FAILED rows for exact executable types, and uses the service's type-specific execution policy for execute/retry visibility; reviewers retain the full approval view but cannot execute without domain permission. Focused approval/registry tests passed 27/542, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T19:50:45Z",
+        "status": "ready_to_merge",
+        "note": "Exact round-17 implementation-plus-ledger head 9c6f024bd2e15b16982ad56933fc9c5d31efa624 passed all nine required checks. Exact-head Codex review reported no major issues, all 23 review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
+      },
+      {
+        "at": "2026-07-18T20:06:19Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Eighteenth exact-head review on ready ledger head f572dff87a2843b3a956152584fc52d06b54fa07 found one valid P2: canReview required admin.approval.review even for the configured solo owner accepted by the centralized service, making pending approvals unreachable in the solo-owner UI. The resource now grants review visibility to that exact configured owner only in solo_owner mode; team-separated mode remains permission-gated. Focused approval/registry tests passed 28/546, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T20:22:29Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Nineteenth exact-head review on a98e0fd3c097dbf853627d4af961c6f8c3a4a747 found one valid P2: in solo_owner mode, a different admin with matching domain permissions could list APPROVED/FAILED approvals and their sensitive operational context even though execution policy accepted only the configured owner. The resource now enables domain-executor type fallback only in team_separated mode; the configured solo owner still reaches the full review UI. The first expanded regression attempted a tenant-scoped Eloquent query without OrgContext and errored before policy evaluation, so it was repaired to assert the exact private type gate directly. Focused approval/registry tests then passed 28/551, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T20:32:21Z",
+        "status": "ready_to_merge",
+        "note": "Exact round-19 implementation-plus-ledger head 8d4d5b96f71ca4623b36b96458d152b36f218eca passed all nine required checks. Exact-head Codex review reported no major issues, all 25 review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
+      },
+      {
+        "at": "2026-07-18T20:47:08Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Twentieth exact-head review on final ready-ledger head c026806e2f0641fa40dcc111177c250310a11cdc found one valid P2 after a transient first review error: the common spaced label API key: could bypass both AdminApproval reason persistence rejection and executor failure redaction. The credential patterns now accept whitespace, underscore, or hyphen between API and key for model, nested-key, and scalar-error boundaries. Dynamic tests cover persistence/service rejection and executor non-leak. Focused approval/registry tests passed 28/556, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T21:01:47Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Twenty-first exact-head review on 68c0e345a1694e34cbbeda7354b2e07ab54ded82 found one valid P2: canReview granted generic admin.approval.review before checking solo_owner identity, exposing approve/reject/bind actions that the service rejected only after fresh step-up and possible recovery-code consumption. The resource now branches by governance mode: solo_owner admits only the exact configured owner, while team_separated requires admin.approval.review. Dynamic tests prove both directions plus preserved domain-executor access. Focused approval/registry tests passed 28/560, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T21:12:25Z",
+        "status": "ready_to_merge",
+        "note": "Exact round-21 implementation-plus-ledger head 8315511dce3ed11b3d05dee94bd0e8a019820d0f passed all nine required checks. Exact-head Codex review reported no major issues, all 27 review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-18T21:12:25Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",

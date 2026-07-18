@@ -12,8 +12,18 @@ use App\Actions\Commerce\RevokeBenefitAction;
 use App\Models\AdminApproval;
 use App\Models\AdminUser;
 use App\Support\OrgContext;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @review-surface admin_approval
+ * @review-surface refund_approval
+ * @review-surface manual_benefit_grant_approval
+ * @review-surface benefit_revoke_approval
+ * @review-surface payment_event_reprocess_approval
+ * @review-surface rollback_release_approval
+ * @review-surface data_lifecycle_approval
+ */
 final class ApprovalExecutor
 {
     public function __construct(
@@ -21,6 +31,7 @@ final class ApprovalExecutor
         private readonly RevokeBenefitAction $revokeBenefitAction,
         private readonly RefundOrderAction $refundOrderAction,
         private readonly ReprocessPaymentEventAction $reprocessPaymentEventAction,
+        private readonly HighRiskApprovalService $highRiskApprovalService,
     ) {}
 
     public function execute(string $approvalId): ActionResult
@@ -52,12 +63,36 @@ final class ApprovalExecutor
                 return ActionResult::failure('APPROVAL_STATUS_INVALID', 'approval must be APPROVED before execution.');
             }
 
+            try {
+                $this->highRiskApprovalService->assertExecutable($approval);
+            } catch (HighRiskApprovalValidationException) {
+                return ActionResult::failure(
+                    'APPROVAL_GOVERNANCE_INVALID',
+                    'approval governance validation failed.',
+                );
+            }
+            if (! $this->highRiskApprovalService->executionSupported($approval)) {
+                return ActionResult::failure(
+                    'APPROVAL_EXECUTION_ADAPTER_MISSING',
+                    'approval execution adapter is not registered.',
+                );
+            }
+            try {
+                $executionActor = $this->highRiskApprovalService->executionActor($approval);
+            } catch (HighRiskApprovalValidationException) {
+                return ActionResult::failure(
+                    'APPROVAL_EXECUTION_AUTHORIZATION_INVALID',
+                    'approval execution authorization validation failed.',
+                );
+            }
+
             $approval->status = AdminApproval::STATUS_EXECUTING;
             $approval->retry_count = (int) $approval->retry_count + 1;
             $approval->save();
 
             return ActionResult::success([
                 'approval' => $approval,
+                'execution_actor' => $executionActor,
             ]);
         });
 
@@ -72,15 +107,18 @@ final class ApprovalExecutor
 
         /** @var AdminApproval $approval */
         $approval = $payload['approval'];
+        /** @var AdminUser $executionActor */
+        $executionActor = $payload['execution_actor'];
+        $executionActorId = (int) $executionActor->id;
         $correlationId = trim((string) $approval->correlation_id);
         $reason = trim((string) $approval->reason);
         $orgId = max(0, (int) $approval->org_id);
 
         try {
-            $actionResult = $this->dispatchByTypeWithOrgContext($approval, $orgId);
+            $actionResult = $this->dispatchByTypeWithOrgContext($approval, $orgId, $executionActor);
 
             if ($actionResult->ok) {
-                DB::transaction(function () use ($approval, $actionResult, $correlationId, $reason): void {
+                DB::transaction(function () use ($approval, $actionResult, $correlationId, $reason, $executionActorId): void {
                     $locked = AdminApproval::query()->whereKey($approval->id)->lockForUpdate()->first();
                     if (! $locked) {
                         return;
@@ -94,7 +132,7 @@ final class ApprovalExecutor
 
                     $this->writeAudit(
                         orgId: (int) $locked->org_id,
-                        actorAdminId: $locked->approved_by_admin_user_id,
+                        actorAdminId: $executionActorId,
                         action: 'approval_executed_success',
                         targetId: (string) $locked->id,
                         reason: $reason,
@@ -116,7 +154,7 @@ final class ApprovalExecutor
             $code = (string) ($actionResult->code ?? 'APPROVAL_EXECUTE_FAILED');
             $message = $this->sanitizeErrorMessage((string) ($actionResult->message ?? 'approval execution failed.'));
 
-            DB::transaction(function () use ($approval, $code, $message, $correlationId, $reason): void {
+            DB::transaction(function () use ($approval, $code, $message, $correlationId, $reason, $executionActorId): void {
                 $locked = AdminApproval::query()->whereKey($approval->id)->lockForUpdate()->first();
                 if (! $locked) {
                     return;
@@ -129,7 +167,7 @@ final class ApprovalExecutor
 
                 $this->writeAudit(
                     orgId: (int) $locked->org_id,
-                    actorAdminId: $locked->approved_by_admin_user_id,
+                    actorAdminId: $executionActorId,
                     action: 'approval_executed_failed',
                     targetId: (string) $locked->id,
                     reason: $reason,
@@ -148,7 +186,7 @@ final class ApprovalExecutor
         } catch (\Throwable $e) {
             $message = $this->sanitizeErrorMessage($e->getMessage());
 
-            DB::transaction(function () use ($approval, $message, $correlationId, $reason): void {
+            DB::transaction(function () use ($approval, $message, $correlationId, $reason, $executionActorId): void {
                 $locked = AdminApproval::query()->whereKey($approval->id)->lockForUpdate()->first();
                 if (! $locked) {
                     return;
@@ -161,7 +199,7 @@ final class ApprovalExecutor
 
                 $this->writeAudit(
                     orgId: (int) $locked->org_id,
-                    actorAdminId: $locked->approved_by_admin_user_id,
+                    actorAdminId: $executionActorId,
                     action: 'approval_executed_failed',
                     targetId: (string) $locked->id,
                     reason: $reason,
@@ -180,15 +218,10 @@ final class ApprovalExecutor
         }
     }
 
-    private function dispatchByType(AdminApproval $approval): ActionResult
+    private function dispatchByType(AdminApproval $approval, AdminUser $actor): ActionResult
     {
         $payload = is_array($approval->payload_json) ? $approval->payload_json : [];
         $type = strtoupper((string) $approval->type);
-
-        $actor = $this->resolveActionActor($approval);
-        if (! $actor) {
-            return ActionResult::failure('ACTOR_NOT_FOUND', 'request actor not found.');
-        }
 
         return match ($type) {
             AdminApproval::TYPE_MANUAL_GRANT => $this->manualGrantAction->execute(
@@ -226,7 +259,7 @@ final class ApprovalExecutor
         };
     }
 
-    private function dispatchByTypeWithOrgContext(AdminApproval $approval, int $orgId): ActionResult
+    private function dispatchByTypeWithOrgContext(AdminApproval $approval, int $orgId, AdminUser $actor): ActionResult
     {
         $container = app();
         $hadContextBinding = $container->bound(OrgContext::class);
@@ -245,7 +278,7 @@ final class ApprovalExecutor
         $container->instance(OrgContext::class, $context);
 
         try {
-            return $this->dispatchByType($approval);
+            return $this->dispatchByType($approval, $actor);
         } finally {
             $context->set($previousOrgId, $previousUserId, $previousRole, $previousAnonId);
             if (! $hadContextBinding) {
@@ -259,10 +292,19 @@ final class ApprovalExecutor
      */
     private function executeRollbackRelease(AdminUser $actor, AdminApproval $approval, array $payload): ActionResult
     {
+        if (! $actor->hasPermission(PermissionNames::ADMIN_CONTENT_RELEASE)
+            && ! $actor->hasPermission(PermissionNames::ADMIN_OWNER)) {
+            return ActionResult::failure(
+                'ROLLBACK_RELEASE_FORBIDDEN',
+                'content release permission is required for rollback execution.',
+            );
+        }
+
         $orderNo = trim((string) ($payload['order_no'] ?? ''));
+        $safeReason = (string) $this->redactSensitive((string) $approval->reason);
         $httpMeta = $this->auditHttpMeta();
 
-        DB::transaction(function () use ($approval, $payload, $actor, $orderNo, $httpMeta): void {
+        DB::transaction(function () use ($approval, $payload, $actor, $orderNo, $safeReason, $httpMeta): void {
             DB::table('content_pack_releases')->insert([
                 'id' => (string) \Illuminate\Support\Str::uuid(),
                 'action' => 'rollback',
@@ -274,7 +316,7 @@ final class ApprovalExecutor
                 'from_pack_id' => isset($payload['from_pack_id']) ? (string) $payload['from_pack_id'] : null,
                 'to_pack_id' => isset($payload['to_pack_id']) ? (string) $payload['to_pack_id'] : null,
                 'status' => 'success',
-                'message' => (string) $approval->reason,
+                'message' => $safeReason,
                 'created_by' => (string) $actor->id,
                 'probe_ok' => null,
                 'probe_json' => null,
@@ -293,7 +335,7 @@ final class ApprovalExecutor
                     'actor' => (int) $actor->id,
                     'org_id' => (int) $approval->org_id,
                     'order_no' => $orderNo,
-                    'reason' => (string) $approval->reason,
+                    'reason' => $safeReason,
                     'correlation_id' => (string) $approval->correlation_id,
                     'from_version_id' => $payload['from_version_id'] ?? null,
                     'to_version_id' => $payload['to_version_id'] ?? null,
@@ -301,7 +343,7 @@ final class ApprovalExecutor
                 'ip' => $httpMeta['ip'],
                 'user_agent' => $httpMeta['user_agent'],
                 'request_id' => $httpMeta['request_id'],
-                'reason' => (string) $approval->reason,
+                'reason' => $safeReason,
                 'result' => 'success',
                 'created_at' => now(),
             ]);
@@ -313,24 +355,6 @@ final class ApprovalExecutor
         ]);
     }
 
-    private function resolveActionActor(AdminApproval $approval): ?AdminUser
-    {
-        $requestedBy = (int) ($approval->requested_by_admin_user_id ?? 0);
-        if ($requestedBy > 0) {
-            $requested = AdminUser::query()->find($requestedBy);
-            if ($requested) {
-                return $requested;
-            }
-        }
-
-        $approvedBy = (int) ($approval->approved_by_admin_user_id ?? 0);
-        if ($approvedBy > 0) {
-            return AdminUser::query()->find($approvedBy);
-        }
-
-        return null;
-    }
-
     private function sanitizeErrorMessage(string $message): string
     {
         $message = trim($message);
@@ -338,6 +362,7 @@ final class ApprovalExecutor
             return 'approval execution failed.';
         }
 
+        $message = (string) $this->redactSensitive($message);
         $message = preg_replace('/\s+/', ' ', $message) ?: $message;
 
         return mb_substr($message, 0, 255);
@@ -356,6 +381,8 @@ final class ApprovalExecutor
         array $extra = [],
     ): void {
         $httpMeta = $this->auditHttpMeta();
+        $safeReason = (string) $this->redactSensitive($reason);
+        $safeExtra = $this->redactSensitive($extra);
 
         DB::table('audit_logs')->insert([
             'org_id' => $orgId,
@@ -366,16 +393,47 @@ final class ApprovalExecutor
             'meta_json' => json_encode(array_merge([
                 'actor' => $actorAdminId,
                 'org_id' => $orgId,
-                'reason' => $reason,
+                'reason' => $safeReason,
                 'correlation_id' => $correlationId,
-            ], $extra), JSON_UNESCAPED_UNICODE),
+            ], is_array($safeExtra) ? $safeExtra : []), JSON_UNESCAPED_UNICODE),
             'ip' => $httpMeta['ip'],
             'user_agent' => $httpMeta['user_agent'],
             'request_id' => $httpMeta['request_id'],
-            'reason' => $reason,
+            'reason' => $safeReason,
             'result' => str_contains($action, 'failed') ? 'failed' : 'success',
             'created_at' => now(),
         ]);
+    }
+
+    private function redactSensitive(mixed $value, ?string $key = null): mixed
+    {
+        if ($key !== null && preg_match('/token|totp|secret|password|authorization|cookie|api[\s_-]*key/i', $key) === 1) {
+            return '[REDACTED]';
+        }
+        if (is_array($value)) {
+            $redacted = [];
+            foreach ($value as $itemKey => $item) {
+                $redacted[$itemKey] = $this->redactSensitive($item, is_string($itemKey) ? $itemKey : null);
+            }
+
+            return $redacted;
+        }
+        if (! is_string($value)) {
+            return $value;
+        }
+
+        $value = preg_replace(
+            '/\bAuthorization\b[\x22\x27]?\s*[:=]\s*[\x22\x27]?[^\r\n,;}\]\x22\x27]+/i',
+            'Authorization=[REDACTED]',
+            $value,
+        ) ?: $value;
+        $value = preg_replace('/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/i', 'Bearer [REDACTED]', $value) ?: $value;
+
+        return preg_replace(
+            '/\b([a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[\s_-]*key))\b[\x22\x27]?\s*[:=]\s*[\x22\x27]?[^\s,;}\]\x22\x27]+/i',
+            '$1=[REDACTED]',
+            $value,
+        ) ?: $value;
     }
 
     /**

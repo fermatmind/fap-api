@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/** @review-surface admin_approval */
 class AdminApproval extends Model
 {
     use HasOrgScope;
@@ -29,6 +30,8 @@ class AdminApproval extends Model
     public const TYPE_REPROCESS_EVENT = 'REPROCESS_EVENT';
 
     public const TYPE_ROLLBACK_RELEASE = 'ROLLBACK_RELEASE';
+
+    public const TYPE_DATA_LIFECYCLE = 'DATA_LIFECYCLE';
 
     public const STATUS_PENDING = 'PENDING';
 
@@ -66,6 +69,24 @@ class AdminApproval extends Model
         'executed_at' => 'datetime',
         'retry_count' => 'integer',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (self $approval): void {
+            if (self::reasonContainsCredential((string) $approval->reason)) {
+                throw new \InvalidArgumentException('Approval reason must not contain credentials or secret material.');
+            }
+        });
+    }
+
+    public static function reasonContainsCredential(string $reason): bool
+    {
+        return preg_match('/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/i', $reason) === 1
+            || preg_match(
+                '/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[\s_-]*key)\b[\x22\x27]?\s*[:=]/i',
+                $reason,
+            ) === 1;
+    }
 
     public function requestedBy(): BelongsTo
     {
