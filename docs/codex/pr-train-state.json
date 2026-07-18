@@ -97065,7 +97065,7 @@
       "SOLO-OWNER-CMS-REVIEW-02"
     ],
     "status": "local_checks_passed",
-    "commit_sha": "78d75830966b9dc86aaf43b2f1844d99f828bce7",
+    "commit_sha": "ff4c34dafff285b826126c4e50dc2454cd18434c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
     "checks": {
       "dependency": {
@@ -97074,7 +97074,7 @@
       },
       "local_validation": {
         "status": "passed",
-      "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Exact-head Codex review then found that compact Enneagram attestations could bind but could not pass legacy-only closeout/resume/readback. The same-scope repair normalized compact attestations into the binder's exact 116 private rows, added mutually exclusive --attestation command support, and passed V223 (6 tests), V224 (59 tests, 611 assertions), 23-file PHP lint/Pint, Composer/YAML/JSON/diff checks, 27-path scope validation with zero outside paths, and the complete gate again. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
+      "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Exact-head Codex review then found that compact Enneagram attestations could bind but could not pass legacy-only closeout/resume/readback. The same-scope repair normalized compact attestations into the binder's exact 116 private rows, added mutually exclusive --attestation command support, and passed V223 (6 tests), V224 (59 tests, 611 assertions), 23-file PHP lint/Pint, Composer/YAML/JSON/diff checks, 27-path scope validation with zero outside paths, and the complete gate again. A later exact-head review found that the registered but unwired MBTI cross-type authority was falsely marked active; commit ff4c34dafff285b826126c4e50dc2454cd18434c keeps it policy-registered and adapter-pending. After rebuilding a stale local Composer classmap, ReviewPolicyRegistry passed with 7 tests and 281 assertions, all 23 changed PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, exact scope remained 27 paths with zero outside paths, and the complete gate passed from the corrected current-worktree classmap. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
       },
     "github": {
       "status": "pending",
@@ -97152,8 +97152,23 @@
       "at": "2026-07-18T08:33:31Z",
       "status": "review_fix_local_checks_passed",
       "note": "Declared the existing enneagram_review_binder surface on the exact three closeout gates in commit 78d75830966b9dc86aaf43b2f1844d99f828bce7. Review-policy plus V224 closeout validation passed with 66 tests and 892 assertions, scoped Pint passed, and the complete ci_verify_mbti.sh gate passed including 1510 Big Five tests with 181790 assertions and Personality full-32 with 71 tests and 5383 assertions. Validation-generated Big Five compiled timestamps and hashes were restored exactly; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T08:49:33Z",
+      "status": "local_checks_failed",
+      "note": "All nine GitHub checks were green on exact head b439223747918d623ceba74ec2c313b41b7e0f64, then exact-head Codex review found that mbti_cross_type_comparison_authority was reported as compact_attestation_adapter_active even though no central attestation review gate was wired. The claim was treated as a same-scope P2 release blocker; no merge, production write, publish, or deploy occurred."
+    },
+    {
+      "at": "2026-07-18T09:01:06Z",
+      "status": "local_checks_failed",
+      "note": "The first focused ReviewPolicyRegistry rerun loaded a stale vendor Composer classmap pointing at another local worktree, so its result was invalid as current-branch evidence. composer dump-autoload --optimize rebuilt the local-only classmap to this checkout; package discovery and asset publication produced no tracked changes, and no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T09:01:07Z",
+      "status": "review_fix_local_checks_passed",
+      "note": "Commit ff4c34dafff285b826126c4e50dc2454cd18434c removes the unwired MBTI cross-type surface from the active adapter set, keeps its generated registry status policy_registered_adapter_pending, and corrects the protocol claim. ReviewPolicyRegistry passed with 7 tests and 281 assertions after the current-worktree classmap rebuild; all 23 changed PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, exact scope remained 27 paths with zero outside paths, and the complete ci_verify_mbti.sh gate passed. Validation-generated Big Five compiled timestamps and hashes were restored exactly; no production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-18T08:33:31Z"
+  "updated_at": "2026-07-18T09:01:07Z"
 }
 }
