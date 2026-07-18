@@ -304,6 +304,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_solo_owner_ops_approval_files(): void
+    {
+        $allowed = [
+            'backend/app/Filament/Ops/Resources/AdminApprovalResource.php',
+            'backend/app/Models/AdminApproval.php',
+            'backend/app/Services/Approvals/ApprovalExecutor.php',
+            'backend/app/Services/Approvals/HighRiskApprovalService.php',
+            'backend/app/Services/Approvals/HighRiskApprovalValidationException.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Approvals/DataLifecycleApprovalExecutor.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -6119,6 +6138,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSoloOwnerOpsApprovalFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -7936,6 +7959,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/CareerSeoReviewAttestationCommand.php',
             'backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+        ], true);
+    }
+
+    private function isSoloOwnerOpsApprovalFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/AdminApprovalResource.php',
+            'backend/app/Models/AdminApproval.php',
+            'backend/app/Services/Approvals/ApprovalExecutor.php',
+            'backend/app/Services/Approvals/HighRiskApprovalService.php',
+            'backend/app/Services/Approvals/HighRiskApprovalValidationException.php',
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
         ], true);
     }

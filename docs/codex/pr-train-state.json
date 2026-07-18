@@ -97391,7 +97391,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "High-risk approval, existing approval flow, and registry validation passed 18 tests/400 assertions; runtime-freeze validation passed 1 test/4 assertions; PHP syntax, Pint, composer validate --strict, YAML/JSON parsing, generated registry parity, exact 13-path allowlist, and git diff --check passed. The single guarded bash backend/scripts/ci_verify_mbti.sh run exited 0, including personality authority 71 tests/5383 assertions plus commerce, migration, auth, OpenAPI, ownership, dependency-security, webhook, and attempt regression gates. Generated Big Five timestamp/hash noise was restored to origin/main before staging."
+        "evidence": "Post-commit high-risk approval, existing approval flow, and registry validation passed 18 tests/406 assertions. The branch-aware runtime freeze initially exposed the five exact approval-governance runtime paths; the manifest-predeclared classifier test was narrowed to those files and now passes 2 tests/6 assertions while continuing to block a generic data-lifecycle executor and Big Five runtime service. PHP syntax, Pint, composer validate --strict, YAML/JSON parsing, generated registry parity, exact allowlist scope, and git diff checks passed. The single guarded bash backend/scripts/ci_verify_mbti.sh run exited 0, including personality authority 71 tests/5383 assertions plus commerce, migration, auth, OpenAPI, ownership, dependency-security, webhook, and attempt regression gates. Generated Big Five timestamp/hash noise was restored to origin/main before staging."
       },
       "github": {
         "status": "not_started",
@@ -97424,9 +97424,19 @@
         "at": "2026-07-18T13:51:31Z",
         "status": "local_checks_passed",
         "note": "Fast-forwarded the uncommitted isolated PR05 work to latest origin/main f409c8aaab4cb6541ded744078583d81104bae13, then reran focused validation. Focused approval and registry tests passed 18/400, runtime-freeze passed 1/4, and the one guarded full ci_verify_mbti.sh run exited 0. Syntax, formatting, dependency metadata, structured files, generated registry parity, exact path scope, and whitespace checks passed. Validation used only local SQLite, fake queues, and mocks; no real high-risk operation or production mutation occurred."
+      },
+      {
+        "at": "2026-07-18T13:54:04Z",
+        "status": "local_check_failed_then_repaired",
+        "note": "After implementation commit 98012bfdab3335e21c5ab7096955a541337c776c, the branch-aware runtime freeze correctly failed on five approval-governance runtime paths that were invisible while uncommitted. Added the exact manifest-predeclared classifier exemption for only AdminApproval resource/model/executor and the two high-risk approval services; a generic data-lifecycle executor and Big Five runtime service remain blocked."
+      },
+      {
+        "at": "2026-07-18T13:54:04Z",
+        "status": "local_checks_passed",
+        "note": "Post-commit approval and registry validation passed 18 tests/406 assertions, including the committed-diff review-surface scan. The repaired runtime freeze and its narrow classifier contract passed 2/6, plus Pint and PHP syntax passed for the classifier file. No runtime implementation changed in this repair and no production action occurred."
       }
     ],
-    "updated_at": "2026-07-18T13:51:31Z"
+    "updated_at": "2026-07-18T13:54:04Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
