@@ -427,7 +427,7 @@ final class ApprovalExecutor
         $value = preg_replace('/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/i', 'Bearer [REDACTED]', $value) ?: $value;
 
         return preg_replace(
-            '/\b(token|totp|secret|password|authorization|api[_-]?key)\b\s*[:=]\s*[^\s,;]+/i',
+            '/\b((?:[a-z0-9]+[_-])*(?:token|totp|secret|password|authorization|cookie|api[_-]?key))\b\s*[:=]\s*[^\s,;]+/i',
             '$1=[REDACTED]',
             $value,
         ) ?: $value;

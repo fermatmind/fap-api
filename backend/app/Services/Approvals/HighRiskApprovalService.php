@@ -228,7 +228,7 @@ final readonly class HighRiskApprovalService
             || ! Str::isUuid((string) $approval->correlation_id)) {
             throw new HighRiskApprovalValidationException('Approval requester, reason, or correlation ID is invalid.');
         }
-        if (preg_match('/\b(token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i', (string) $approval->reason) === 1) {
+        if (preg_match('/\b(?:[a-z0-9]+[_-])*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i', (string) $approval->reason) === 1) {
             throw new HighRiskApprovalValidationException('Approval reason must not contain credentials or secret material.');
         }
     }

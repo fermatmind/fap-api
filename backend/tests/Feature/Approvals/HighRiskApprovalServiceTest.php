@@ -117,12 +117,15 @@ final class HighRiskApprovalServiceTest extends TestCase
         }
 
         $privateCredential = Str::random(40);
-        $approval->forceFill(['reason' => 'token='.$privateCredential])->save();
-        try {
-            $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
-            $this->fail('Expected credential-bearing reason to fail.');
-        } catch (HighRiskApprovalValidationException $exception) {
-            $this->assertStringNotContainsString($privateCredential, $exception->getMessage());
+        foreach (['token=', 'access_token=', 'cookie='] as $credentialPrefix) {
+            $approval->forceFill(['reason' => $credentialPrefix.$privateCredential])->save();
+            try {
+                $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
+                $this->fail('Expected credential-bearing reason to fail.');
+            } catch (HighRiskApprovalValidationException $exception) {
+                $this->assertStringNotContainsString($privateCredential, $exception->getMessage());
+            }
+            $this->assertSame(AdminApproval::STATUS_PENDING, (string) $approval->fresh()->status);
         }
         $approval->forceFill(['reason' => 'operator confirmed exact high-risk target'])->save();
 
@@ -199,13 +202,17 @@ final class HighRiskApprovalServiceTest extends TestCase
     {
         $executor = app(ApprovalExecutor::class);
         $privateValue = Str::random(48);
+        $accessToken = Str::random(48);
+        $cookie = Str::random(48);
         $sanitize = new ReflectionMethod($executor, 'sanitizeErrorMessage');
         $sanitize->setAccessible(true);
         $message = (string) $sanitize->invoke(
             $executor,
-            'provider failed token='.$privateValue.' Authorization: Bearer '.$privateValue,
+            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' Authorization: Bearer '.$privateValue,
         );
         $this->assertStringNotContainsString($privateValue, $message);
+        $this->assertStringNotContainsString($accessToken, $message);
+        $this->assertStringNotContainsString($cookie, $message);
         $this->assertStringContainsString('[REDACTED]', $message);
 
         $writeAudit = new ReflectionMethod($executor, 'writeAudit');
@@ -220,13 +227,19 @@ final class HighRiskApprovalServiceTest extends TestCase
             (string) Str::uuid(),
             [
                 'totp' => $privateValue,
-                'nested' => ['api_key' => $privateValue],
+                'nested' => [
+                    'api_key' => $privateValue,
+                    'access_token' => $accessToken,
+                    'cookie' => $cookie,
+                ],
             ],
         );
 
         $audit = DB::table('audit_logs')->where('action', 'approval_executed_failed')->first();
         $this->assertNotNull($audit);
         $this->assertStringNotContainsString($privateValue, (string) $audit->meta_json);
+        $this->assertStringNotContainsString($accessToken, (string) $audit->meta_json);
+        $this->assertStringNotContainsString($cookie, (string) $audit->meta_json);
         $this->assertStringNotContainsString($privateValue, (string) $audit->reason);
         $this->assertStringContainsString('[REDACTED]', (string) $audit->meta_json);
     }
