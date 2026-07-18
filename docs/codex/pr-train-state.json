@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
+    "status": "implementation_committed",
+    "commit_sha": "22e5629b881f3dc0ca4dd35d709b576f448c4223",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -97289,8 +97289,13 @@
         "at": "2026-07-18T10:11:02Z",
         "status": "local_checks_passed",
         "note": "All PR3 manifest checks and the exact twenty-two-path scope gate passed. Runtime projection and both canonical promotion gates fail closed on non-ready target locale caches; directories preserve eligible/indexable membership while deriving detail_ready from the shared active/LKG/legacy contract. No production promotion/cache action, CMS/DB mutation, SEO runtime, deploy/SLO/scheduler, frontend, or later train scope occurred."
+      },
+      {
+        "at": "2026-07-18T10:14:14Z",
+        "status": "implementation_committed",
+        "note": "Committed the exact twenty-two-path PR3 implementation as 22e5629b881f3dc0ca4dd35d709b576f448c4223 after all focused checks, static validation, and cached scope validation passed. This ledger-only follow-up binds the implementation commit before push."
       }
     ],
-    "updated_at": "2026-07-18T10:11:02Z"
+    "updated_at": "2026-07-18T10:14:14Z"
   }
 }
