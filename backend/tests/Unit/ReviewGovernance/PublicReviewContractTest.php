@@ -58,7 +58,13 @@ final class PublicReviewContractTest extends TestCase
         yield 'operator release' => ['operator_v3_release', 'approved'];
         yield 'published without llms' => ['published_no_llms', 'approved'];
         yield 'pending review' => ['pending_human_review', 'pending'];
+        yield 'content page legal review' => ['legal_review', 'pending'];
+        yield 'content page company review' => ['company_review', 'pending'];
+        yield 'support product or policy review' => ['product_or_policy_review', 'pending'];
+        yield 'interpretation science or product review' => ['science_or_product_review', 'pending'];
+        yield 'career in review' => ['in_review', 'pending'];
         yield 'science review' => ['science_review', 'pending'];
+        yield 'career changes required' => ['changes_required', 'rejected'];
         yield 'changes requested' => ['changes_requested', 'rejected'];
         yield 'unknown string' => ['internal_operator_override', 'unknown'];
         yield 'missing' => [null, 'unknown'];
