@@ -143,6 +143,42 @@ final class RiasecSoloOwnerReviewGateTest extends TestCase
         }
     }
 
+    public function test_separate_single_target_attestations_cannot_be_combined_as_batch_evidence(): void
+    {
+        $service = app(PersonalityReviewAttestationService::class);
+        $ownerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
+        $targets = [
+            ['identity' => 'release_snapshot:riasec-60', 'sha256' => hash('sha256', 'riasec-60')],
+            ['identity' => 'release_snapshot:riasec-140', 'sha256' => hash('sha256', 'riasec-140')],
+        ];
+
+        foreach ($targets as $target) {
+            $service->bindOrCreateApproved(
+                attestation: null,
+                surfaceId: 'riasec_content_release_review',
+                scopeType: 'riasec_content_release_snapshot',
+                scopeIdentity: $target['identity'],
+                authoritativeTargets: [$target],
+                actorAdminUserId: $ownerAdminUserId,
+            );
+        }
+
+        $this->assertFalse($service->hasApprovedEvidence('riasec_content_release_review', $targets));
+
+        $service->bindOrCreateApproved(
+            attestation: null,
+            surfaceId: 'riasec_content_release_review',
+            scopeType: 'riasec_content_release_snapshot_batch',
+            scopeIdentity: 'riasec-60-140',
+            authoritativeTargets: $targets,
+            actorAdminUserId: $ownerAdminUserId,
+        );
+
+        $this->assertTrue($service->hasApprovedEvidence('riasec_content_release_review', $targets));
+        $this->assertSame(3, ReviewAttestation::query()->count());
+        $this->assertSame(4, ReviewAttestationTargetEvidence::query()->count());
+    }
+
     /** @return array<string,mixed> */
     private function attestation(string $snapshotId, string $snapshotSha): array
     {

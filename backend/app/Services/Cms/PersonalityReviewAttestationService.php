@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\DTO\ReviewGovernance\ReviewTargetSet;
 use App\Models\ReviewAttestation;
-use App\Models\ReviewAttestationTargetEvidence;
+use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use App\Services\ReviewGovernance\ReviewAttestationService;
 use App\Services\ReviewGovernance\ReviewAttestationValidationException;
@@ -40,6 +41,7 @@ final readonly class PersonalityReviewAttestationService
     public function __construct(
         private ReviewAttestationFactory $factory,
         private ReviewAttestationService $attestations,
+        private ReviewAttestationCanonicalizer $canonicalizer,
     ) {}
 
     public function usesSoloOwnerMode(): bool
@@ -170,13 +172,31 @@ final readonly class PersonalityReviewAttestationService
             return false;
         }
 
-        foreach ($this->targets($surfaceId, $authoritativeTargets) as $target) {
-            if (! $this->hasApprovedTarget($target, $currentOwnerAdminUserId)) {
-                return false;
-            }
-        }
+        $targetSet = ReviewTargetSet::fromArray(
+            $this->targets($surfaceId, $authoritativeTargets),
+            $this->canonicalizer,
+        );
 
-        return true;
+        return ReviewAttestation::query()
+            ->where('review_mode', 'solo_owner')
+            ->where('review_source', (string) config('review_governance.attestation.review_source'))
+            ->where('attested_by_admin_user_id', $currentOwnerAdminUserId)
+            ->where('decision', 'approved_all')
+            ->where('target_count', $targetSet->count())
+            ->where('target_set_sha256', $targetSet->sha256)
+            ->whereHas('targetEvidences', static function ($query) use ($targetSet): void {
+                $query->where('target_decision', 'approved')
+                    ->where(static function ($query) use ($targetSet): void {
+                        foreach ($targetSet->targets as $target) {
+                            $query->orWhere(static function ($query) use ($target): void {
+                                $query->where('target_identity', $target->identity)
+                                    ->where('target_sha256', $target->sha256);
+                            });
+                        }
+                    });
+            }, '=', $targetSet->count())
+            ->has('targetEvidences', '=', $targetSet->count())
+            ->exists();
     }
 
     /** @param list<array{identity:string,sha256:string}> $authoritativeTargets */
@@ -187,23 +207,6 @@ final readonly class PersonalityReviewAttestationService
                 'Personality review evidence is missing or stale for one or more exact targets.'
             );
         }
-    }
-
-    /** @param array{target_identity:string,target_sha256:string} $target */
-    private function hasApprovedTarget(array $target, int $currentOwnerAdminUserId): bool
-    {
-        return ReviewAttestationTargetEvidence::query()
-            ->where('target_identity', $target['target_identity'])
-            ->where('target_sha256', $target['target_sha256'])
-            ->where('target_decision', 'approved')
-            ->whereHas('attestation', static function ($query) use ($currentOwnerAdminUserId): void {
-                $query
-                    ->where('review_mode', 'solo_owner')
-                    ->where('review_source', (string) config('review_governance.attestation.review_source'))
-                    ->where('attested_by_admin_user_id', $currentOwnerAdminUserId)
-                    ->where('decision', 'approved_all');
-            })
-            ->exists();
     }
 
     public function assertConfiguredSoloOwner(int $actorAdminUserId): void
