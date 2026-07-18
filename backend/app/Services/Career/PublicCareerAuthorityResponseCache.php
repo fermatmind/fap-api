@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Resources\Career\CareerDatasetHubResource;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-final class PublicCareerAuthorityResponseCache
+final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposureReadiness
 {
     public const DATASET_HUB_CACHE_KEY = 'career:public-authority:dataset-hub:v3';
 
@@ -282,6 +283,15 @@ final class PublicCareerAuthorityResponseCache
         return ['classification' => 'missing_pointer', 'payload' => null, 'version' => null];
     }
 
+    public function jobDetailCacheIsReady(string $slug, string $publicLocale = 'zh-CN'): bool
+    {
+        return in_array(
+            $this->jobDetailCacheReadiness($slug, $publicLocale)['classification'],
+            ['ready_active', 'ready_lkg', 'legacy_migratable'],
+            true,
+        );
+    }
+
     private function dispatchJobDetailWarm(string $slug, string $publicLocale): void
     {
         $dispatchKey = $this->jobDetailWarmDispatchKey($slug, $publicLocale);
@@ -529,7 +539,11 @@ final class PublicCareerAuthorityResponseCache
                     $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
                     $this->publishDirectoryReadModel(
                         $locale,
-                        $this->careerDirectoryReadModelBuilder->build($items, $locale),
+                        $this->careerDirectoryReadModelBuilder->build(
+                            $items,
+                            $locale,
+                            fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
+                        ),
                     );
 
                     return $jobIndex;
@@ -640,7 +654,11 @@ final class PublicCareerAuthorityResponseCache
                 $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
                 $this->publishDirectoryReadModel(
                     $normalizedLocale,
-                    $this->careerDirectoryReadModelBuilder->build($items, $normalizedLocale),
+                    $this->careerDirectoryReadModelBuilder->build(
+                        $items,
+                        $normalizedLocale,
+                        fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
+                    ),
                 );
 
                 return $jobIndex;

@@ -9,6 +9,7 @@ use App\Domain\Career\Expansion\CanonicalPostPromotionReleaseGateService;
 use App\Domain\Career\Expansion\CanonicalPostPromotionReleaseGateValidator;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use PHPUnit\Framework\TestCase;
+use Tests\Fixtures\Career\CareerJobDetailExposureReadinessFixture;
 
 final class CanonicalPostPromotionReleaseGateServiceTest extends TestCase
 {
@@ -53,7 +54,9 @@ final class CanonicalPostPromotionReleaseGateServiceTest extends TestCase
 
     private function service(): CanonicalPostPromotionReleaseGateService
     {
-        return new CanonicalPostPromotionReleaseGateService(new CanonicalPostPromotionReleaseGateValidator);
+        return new CanonicalPostPromotionReleaseGateService(new CanonicalPostPromotionReleaseGateValidator(
+            new CareerJobDetailExposureReadinessFixture,
+        ));
     }
 
     private function manifest(array $overrides = []): array

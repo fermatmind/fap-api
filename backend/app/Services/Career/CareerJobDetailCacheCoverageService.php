@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 
@@ -20,7 +21,7 @@ final class CareerJobDetailCacheCoverageService
 
     public function __construct(
         private readonly CareerRuntimePublishProjectionVisibility $runtimeProjection,
-        private readonly PublicCareerAuthorityResponseCache $responseCache,
+        private readonly CareerJobDetailExposureReadiness $responseCache,
     ) {}
 
     /**

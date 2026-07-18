@@ -33,7 +33,11 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
         $this->createDirectoryOccupation('actors', 'Actors', '演员', 'arts-media', 'Arts and Media');
         $this->publishRuntimeProjection(['accountants-and-auditors', 'actuaries', 'actors']);
-        $this->warmDirectoryAuthority();
+        $this->assertTrue(app(PublicCareerAuthorityResponseCache::class)->jobDetailCacheIsReady('accountants-and-auditors', 'en'));
+        $this->assertTrue(app(PublicCareerAuthorityResponseCache::class)->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertTrue(app(PublicCareerAuthorityResponseCache::class)->jobDetailCacheIsReady('actors', 'en'));
+        $warmSummary = app(PublicCareerAuthorityResponseCache::class)->warm();
+        $this->assertSame(3, data_get($warmSummary, 'job_index_en.member_count'));
 
         $response = $this->getJson('/api/v0.5/career/directory?locale=en&page=1&per_page=2')
             ->assertOk()
@@ -105,6 +109,31 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             ->all();
 
         $this->assertSame(['actuaries'], $slugs);
+    }
+
+    public function test_transient_detail_cache_loss_keeps_directory_authority_but_marks_detail_not_ready(): void
+    {
+        $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
+        $this->publishRuntimeProjection(['actuaries']);
+        $this->warmDirectoryAuthority();
+
+        $this->getJson('/api/v0.5/career/directory?locale=en&per_page=100')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.indexable', true)
+            ->assertJsonPath('items.0.detail_ready', true);
+
+        $responseCache = app(PublicCareerAuthorityResponseCache::class);
+        $responseCache->forgetJobDetailPayload('actuaries', 'en');
+        $responseCache->warmDirectoryReadModels(['en']);
+
+        $this->getJson('/api/v0.5/career/directory?locale=en&per_page=100')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.indexable', true)
+            ->assertJsonPath('items.0.detail_ready', false);
+
+        $this->assertDatabaseHas('occupations', ['canonical_slug' => 'actuaries']);
     }
 
     private function createDirectoryOccupation(
@@ -231,5 +260,19 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         );
 
         Cache::flush();
+        $responseCache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($items as $item) {
+            if (($item['runtime_publish_state'] ?? null) !== 'published') {
+                continue;
+            }
+
+            foreach (['en', 'zh-CN'] as $locale) {
+                $responseCache->publishJobDetailReadModel($item['slug'], $locale, [
+                    'identity' => ['canonical_slug' => $item['slug']],
+                    'locale' => $locale,
+                    'fixture' => true,
+                ]);
+            }
+        }
     }
 }

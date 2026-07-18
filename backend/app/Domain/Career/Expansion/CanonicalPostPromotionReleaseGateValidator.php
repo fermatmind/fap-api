@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace App\Domain\Career\Expansion;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 
 final class CanonicalPostPromotionReleaseGateValidator
 {
+    public function __construct(
+        private readonly CareerJobDetailExposureReadiness $detailExposureReadiness,
+    ) {}
+
     /**
      * @return list<array<string, mixed>>
      */
@@ -50,6 +55,19 @@ final class CanonicalPostPromotionReleaseGateValidator
                     'public_resolution_type' => $item['public_resolution_type'] ?? null,
                 ]);
             }
+
+            $readiness = $this->detailExposureReadiness->jobDetailCacheReadiness(
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            );
+            if (! $this->cacheReadinessPasses($readiness)) {
+                $failures[] = $this->failure(
+                    'post_promotion_detail_cache_not_ready',
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                    ['classification' => $readiness['classification']],
+                );
+            }
         }
 
         if (count($states) > 1) {
@@ -71,8 +89,16 @@ final class CanonicalPostPromotionReleaseGateValidator
             ],
             'required_fields' => CanonicalPromotionRollbackGate::REQUIRED_POST_PROMOTION_FIELDS,
             'release_gate_requirements' => [
+                'detail_cache_ready' => true,
                 'route' => true,
                 'indexing' => true,
+            ],
+            'required_exposure_sequence' => [
+                'build_projection',
+                'publish_active_or_lkg_safe_detail_projection',
+                'verify_detail_pointer_and_payload',
+                'expose_runtime_projection_flags',
+                'rebuild_and_activate_directory_read_model',
             ],
             'failures' => $failures,
         ];
@@ -220,5 +246,15 @@ final class CanonicalPostPromotionReleaseGateValidator
         ], static fn (mixed $value): bool => $value !== null && $value !== []);
 
         return $failure;
+    }
+
+    /** @param array{classification: string, payload: array<string, mixed>|null, version: string|null} $readiness */
+    private function cacheReadinessPasses(array $readiness): bool
+    {
+        return in_array(
+            $readiness['classification'],
+            ['ready_active', 'ready_lkg', 'legacy_migratable'],
+            true,
+        );
     }
 }

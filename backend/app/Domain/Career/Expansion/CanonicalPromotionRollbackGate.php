@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace App\Domain\Career\Expansion;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 
 final class CanonicalPromotionRollbackGate
 {
+    public function __construct(
+        private readonly CareerJobDetailExposureReadiness $detailExposureReadiness,
+    ) {}
+
     /**
      * @var list<string>
      */
@@ -109,6 +114,19 @@ final class CanonicalPromotionRollbackGate
                 if (! (bool) ($item[$field] ?? false)) {
                     $failures[] = $this->failure('post_promotion_'.$field.'_missing', $this->slug($item), $this->locale($item));
                 }
+            }
+
+            $readiness = $this->detailExposureReadiness->jobDetailCacheReadiness(
+                $expectedRow['slug'],
+                $expectedRow['locale'],
+            );
+            if (! in_array($readiness['classification'], ['ready_active', 'ready_lkg', 'legacy_migratable'], true)) {
+                $failures[] = $this->failure(
+                    'post_promotion_detail_cache_not_ready',
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                    ['classification' => $readiness['classification']],
+                );
             }
         }
 

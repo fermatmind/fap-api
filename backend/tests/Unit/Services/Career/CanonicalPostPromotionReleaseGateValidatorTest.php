@@ -8,12 +8,13 @@ use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Expansion\CanonicalPostPromotionReleaseGateValidator;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use PHPUnit\Framework\TestCase;
+use Tests\Fixtures\Career\CareerJobDetailExposureReadinessFixture;
 
 final class CanonicalPostPromotionReleaseGateValidatorTest extends TestCase
 {
     public function test_validator_passes_for_published_candidate_closeout_payload(): void
     {
-        $validator = new CanonicalPostPromotionReleaseGateValidator;
+        $validator = $this->validator();
         $result = $validator->validate($this->manifest(), $this->truth(), $this->projection());
 
         $this->assertSame('pass', $result['status']);
@@ -22,7 +23,7 @@ final class CanonicalPostPromotionReleaseGateValidatorTest extends TestCase
 
     public function test_validator_blocks_non_published_state_rows(): void
     {
-        $validator = new CanonicalPostPromotionReleaseGateValidator;
+        $validator = $this->validator();
         $result = $validator->validate(
             $this->manifest(),
             $this->truth([$this->publishedTruthItem(['projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE])]),
@@ -37,7 +38,7 @@ final class CanonicalPostPromotionReleaseGateValidatorTest extends TestCase
 
     public function test_validator_blocks_non_canonical_rows(): void
     {
-        $validator = new CanonicalPostPromotionReleaseGateValidator;
+        $validator = $this->validator();
         $result = $validator->validate(
             $this->manifest(),
             $this->truth([$this->publishedTruthItem(['public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_ALIAS_REDIRECT])]),
@@ -48,6 +49,33 @@ final class CanonicalPostPromotionReleaseGateValidatorTest extends TestCase
         $reasons = array_column($result['failures'], 'reason');
         $this->assertContains('post_promotion_non_canonical_public_type', $reasons);
         $this->assertContains('post_promotion_projection_non_canonical_public_type', $reasons);
+    }
+
+    public function test_validator_fails_closed_when_detail_cache_is_not_ready(): void
+    {
+        $validator = $this->validator(new CareerJobDetailExposureReadinessFixture(
+            classifications: ['actors|en' => 'missing_pointer'],
+        ));
+
+        $result = $validator->validate($this->manifest(), $this->truth(), $this->projection());
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertContains('post_promotion_detail_cache_not_ready', array_column($result['failures'], 'reason'));
+        $this->assertSame('missing_pointer', data_get($result, 'failures.0.context.classification'));
+        $this->assertSame([
+            'build_projection',
+            'publish_active_or_lkg_safe_detail_projection',
+            'verify_detail_pointer_and_payload',
+            'expose_runtime_projection_flags',
+            'rebuild_and_activate_directory_read_model',
+        ], $result['required_exposure_sequence']);
+    }
+
+    private function validator(?CareerJobDetailExposureReadinessFixture $readiness = null): CanonicalPostPromotionReleaseGateValidator
+    {
+        return new CanonicalPostPromotionReleaseGateValidator(
+            $readiness ?? new CareerJobDetailExposureReadinessFixture,
+        );
     }
 
     private function manifest(array $overrides = []): array

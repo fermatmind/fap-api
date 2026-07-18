@@ -8,6 +8,10 @@ use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 
 final class CareerRuntimePublishProjectionValidator
 {
+    public function __construct(
+        private readonly CareerJobDetailExposureReadiness $detailExposureReadiness,
+    ) {}
+
     /**
      * @return array<string, mixed>
      */
@@ -64,6 +68,7 @@ final class CareerRuntimePublishProjectionValidator
         $releaseGatePass = (bool) ($item['release_gate_pass'] ?? false);
         $robotsIndexable = (bool) ($item['robots_indexable'] ?? false);
         $canonicalSelf = (bool) ($item['canonical_self'] ?? false);
+        $locale = trim((string) ($item['locale'] ?? ''));
 
         if ($slug === '') {
             $failures[] = $this->failure($index, $slug, 'missing_slug');
@@ -97,6 +102,19 @@ final class CareerRuntimePublishProjectionValidator
         )) {
             $failures[] = $this->failure($index, $slug, 'seo_geo_live_without_publish_gate');
         }
+        if (
+            $type === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
+            && $state === CareerRuntimePublishProjectionService::STATE_PUBLISHED
+            && ($detailRouteEnabled === true || $datasetVisible)
+        ) {
+            $readiness = $this->detailExposureReadiness->jobDetailCacheReadiness($slug, $locale);
+            if (! $this->cacheReadinessPasses($readiness)) {
+                $failures[] = $this->failure($index, $slug, 'detail_cache_not_ready_for_exposure', [
+                    'locale' => $locale,
+                    'classification' => $readiness['classification'],
+                ]);
+            }
+        }
 
         return $failures;
     }
@@ -104,13 +122,24 @@ final class CareerRuntimePublishProjectionValidator
     /**
      * @return array<string, mixed>
      */
-    private function failure(int $index, string $slug, string $reason): array
+    private function failure(int $index, string $slug, string $reason, array $context = []): array
     {
-        return [
+        return array_filter([
             'index' => $index,
             'slug' => $slug !== '' ? $slug : null,
             'reason' => $reason,
-        ];
+            'context' => $context,
+        ], static fn (mixed $value): bool => $value !== null && $value !== []);
+    }
+
+    /** @param array{classification: string, payload: array<string, mixed>|null, version: string|null} $readiness */
+    private function cacheReadinessPasses(array $readiness): bool
+    {
+        return in_array(
+            $readiness['classification'],
+            ['ready_active', 'ready_lkg', 'legacy_migratable'],
+            true,
+        );
     }
 
     /**

@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -263,6 +264,7 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     public function test_apply_uses_explicit_batch_ledger_authority_for_stale_blocked_override_member(): void
     {
         $this->writeProjection($this->candidateProjection(['financial-analysts']));
+        $this->publishReadyDetailCaches(['financial-analysts'], ['en', 'zh']);
 
         $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
             '--batch-id' => 'batch-financial-analysts',
@@ -286,6 +288,31 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame(2, data_get($payload, 'persistence_check.found_published'));
         $this->assertSame(0, data_get($payload, 'persistence_check.not_published_count'));
         $this->assertFalse($payload['rollback_required'] ?? true);
+    }
+
+    public function test_apply_fails_closed_before_public_exposure_when_detail_cache_is_missing(): void
+    {
+        $this->writeProjection($this->candidateProjection(['financial-analysts']));
+
+        $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
+            '--batch-id' => 'batch-financial-analysts-cache-missing',
+            '--slugs' => 'financial-analysts',
+            '--locales' => 'en,zh',
+            '--rollback-group' => 'financial-analysts',
+            '--apply' => true,
+            '--projection' => $this->tmpProjectionPath,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $payload = json_decode(Artisan::output(), true);
+        $this->assertIsArray($payload);
+        $this->assertSame('promotion_validated_as_failed', $payload['status'] ?? null);
+        $this->assertContains(
+            'post_promotion_detail_cache_not_ready',
+            array_column($payload['failures'] ?? [], 'reason'),
+        );
+        $this->assertTrue(data_get($payload, 'remediation.succeeded'));
     }
 
     public function test_command_writes_audit_report(): void
@@ -484,5 +511,23 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
     private function writeRawProjection(array $projection): void
     {
         File::put($this->tmpProjectionPath, json_encode($projection, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     */
+    private function publishReadyDetailCaches(array $slugs, array $locales): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($slugs as $slug) {
+            foreach ($locales as $locale) {
+                $cache->publishJobDetailReadModel($slug, $locale, [
+                    'identity' => ['canonical_slug' => $slug],
+                    'locale' => $locale,
+                    'fixture' => true,
+                ]);
+            }
+        }
     }
 }

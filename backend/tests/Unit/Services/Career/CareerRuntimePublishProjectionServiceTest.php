@@ -8,6 +8,7 @@ use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionValidator;
 use PHPUnit\Framework\TestCase;
+use Tests\Fixtures\Career\CareerJobDetailExposureReadinessFixture;
 
 final class CareerRuntimePublishProjectionServiceTest extends TestCase
 {
@@ -183,10 +184,36 @@ final class CareerRuntimePublishProjectionServiceTest extends TestCase
         $projection['items'][0]['sitemap_live'] = true;
         $projection['items'][0]['release_gate_pass'] = false;
 
-        $result = (new CareerRuntimePublishProjectionValidator)->validate($projection);
+        $result = (new CareerRuntimePublishProjectionValidator(
+            new CareerJobDetailExposureReadinessFixture,
+        ))->validate($projection);
 
         $this->assertSame('blocked', $result['status']);
         $this->assertSame('seo_geo_live_without_publish_gate', data_get($result, 'failures.0.reason'));
+    }
+
+    public function test_validator_blocks_detail_exposure_until_target_locale_cache_is_ready(): void
+    {
+        $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($this->ledger([
+            [
+                'source_slug' => 'actors',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'indexable',
+            ],
+        ]));
+
+        $result = (new CareerRuntimePublishProjectionValidator(
+            new CareerJobDetailExposureReadinessFixture(
+                classifications: ['actors|zh-CN' => 'missing_payload'],
+            ),
+        ))->validate($projection);
+
+        $this->assertSame('blocked', $result['status']);
+        $failure = collect($result['failures'])->firstWhere('reason', 'detail_cache_not_ready_for_exposure');
+        $this->assertIsArray($failure);
+        $this->assertSame('zh', data_get($failure, 'context.locale'));
+        $this->assertSame('missing_payload', data_get($failure, 'context.classification'));
     }
 
     /**

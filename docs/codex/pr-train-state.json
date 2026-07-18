@@ -97157,8 +97157,8 @@
     "depends_on": [
       "CAREER-DETAIL-COLD-MISS-DEGRADE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "ff7b19d34b0a20e2ee99e82525e643d8e52eaac6",
+    "status": "merged",
+    "commit_sha": "478530b0a99aacdbedf9edbbe83205842c5cd28f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3164",
     "checks": {
       "authorization": {
@@ -97182,12 +97182,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-18T09:51:35Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -97224,8 +97224,73 @@
         "at": "2026-07-18T09:44:48Z",
         "status": "ready_to_merge",
         "note": "All nine required CI/code-scanning checks passed on exact implementation head ff7b19d34b0a20e2ee99e82525e643d8e52eaac6. Both same-scope review threads are resolved and outdated, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and the exact thirteen-path allowlist remains valid. This ledger-only transition must itself pass exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-18T10:07:37Z",
+        "status": "merged",
+        "note": "Reconciled during dependent PR3 metadata initialization: final ledger head 478530b0a99aacdbedf9edbbe83205842c5cd28f passed all nine checks, PR #3164 squash merged at 2026-07-18T09:51:35Z as e5ebe803e7768c5ab01858d8f2dabc2159a80571, origin/main contains the merge, local main equals origin/main, and both local and remote PR2 task branches are deleted. No staging wait or deploy occurred."
       }
     ],
-    "updated_at": "2026-07-18T09:44:48Z"
+    "updated_at": "2026-07-18T10:07:37Z"
+  },
+  "CAREER-DETAIL-ATOMIC-EXPOSURE-01": {
+    "id": "CAREER-DETAIL-ATOMIC-EXPOSURE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-detail-atomic-exposure-01",
+    "title": "CAREER-DETAIL-ATOMIC-EXPOSURE-01: gate Career detail exposure on verified cache readiness",
+    "depends_on": [
+      "CAREER-DETAIL-CACHE-COVERAGE-01"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The explicit seven-PR continuous execution goal authorized this exact PR3 scope, missing manifest/state registration, and complete normal PR lifecycle."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR2 merged as e5ebe803e7768c5ab01858d8f2dabc2159a80571; origin/main contains the merge and the clean PR3 branch was created from that exact main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The combined focused suite passed 80 tests / 609 assertions across projection and promotion gates, apply/rollback behavior, post-promotion command, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and warm-cache regression. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 12ms and 134ms with one DB query. Changed-PHP Pint, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-two-path allowlist passed."
+      },
+      "github_required_checks": {
+        "status": "not_started",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T10:07:37Z",
+        "status": "implementation_in_progress",
+        "note": "Verified PR2 merge containment and complete post-merge cleanup, then created the isolated PR3 branch. Implementation is limited to the shared cache-readiness contract, fail-closed projection/promotion gates, and locale-specific directory detail truth. No production promotion/cache action, CMS/DB mutation, SEO runtime, deploy/SLO/scheduler, frontend, or later train scope is included."
+      },
+      {
+        "at": "2026-07-18T10:11:02Z",
+        "status": "local_checks_passed",
+        "note": "All PR3 manifest checks and the exact twenty-two-path scope gate passed. Runtime projection and both canonical promotion gates fail closed on non-ready target locale caches; directories preserve eligible/indexable membership while deriving detail_ready from the shared active/LKG/legacy contract. No production promotion/cache action, CMS/DB mutation, SEO runtime, deploy/SLO/scheduler, frontend, or later train scope occurred."
+      }
+    ],
+    "updated_at": "2026-07-18T10:11:02Z"
   }
 }

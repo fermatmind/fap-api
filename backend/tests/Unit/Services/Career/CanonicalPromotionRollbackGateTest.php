@@ -8,12 +8,13 @@ use App\Domain\Career\Expansion\CanonicalExpansionManifestService;
 use App\Domain\Career\Expansion\CanonicalPromotionRollbackGate;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use PHPUnit\Framework\TestCase;
+use Tests\Fixtures\Career\CareerJobDetailExposureReadinessFixture;
 
 final class CanonicalPromotionRollbackGateTest extends TestCase
 {
     public function test_it_accepts_hidden_published_candidate_pre_route_inventory(): void
     {
-        $result = (new CanonicalPromotionRollbackGate)->validatePromotionPlan(
+        $result = $this->gate()->validatePromotionPlan(
             $this->manifest(),
             ['items' => [
                 $this->candidateTruthItem('actors', 'en'),
@@ -32,7 +33,7 @@ final class CanonicalPromotionRollbackGateTest extends TestCase
 
     public function test_it_rejects_candidate_public_route_or_surface_exposure(): void
     {
-        $result = (new CanonicalPromotionRollbackGate)->validatePromotionPlan(
+        $result = $this->gate()->validatePromotionPlan(
             $this->manifest(),
             ['items' => [
                 $this->candidateTruthItem('actors', 'en', [
@@ -53,7 +54,7 @@ final class CanonicalPromotionRollbackGateTest extends TestCase
 
     public function test_it_rejects_software_developers_and_cn_proxy_candidates(): void
     {
-        $result = (new CanonicalPromotionRollbackGate)->validatePromotionPlan($this->manifest([
+        $result = $this->gate()->validatePromotionPlan($this->manifest([
             'slugs' => ['software-developers', 'cn-software-engineers'],
             'rollback_group' => ['software-developers', 'cn-software-engineers'],
         ]));
@@ -66,7 +67,7 @@ final class CanonicalPromotionRollbackGateTest extends TestCase
 
     public function test_it_rejects_blocked_rows_and_partial_rollback_groups(): void
     {
-        $result = (new CanonicalPromotionRollbackGate)->validatePromotionPlan($this->manifest([
+        $result = $this->gate()->validatePromotionPlan($this->manifest([
             'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_BLOCKED,
             'projection_state' => CareerRuntimePublishProjectionService::STATE_BLOCKED,
             'slugs' => ['actors', 'registered-nurses'],
@@ -82,7 +83,7 @@ final class CanonicalPromotionRollbackGateTest extends TestCase
 
     public function test_it_requires_fully_live_published_rows_after_promotion(): void
     {
-        $result = (new CanonicalPromotionRollbackGate)->validatePostPromotion(
+        $result = $this->gate()->validatePostPromotion(
             array_merge($this->manifest(), [
                 'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED,
                 'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
@@ -102,7 +103,7 @@ final class CanonicalPromotionRollbackGateTest extends TestCase
 
     public function test_it_rejects_partial_post_promotion_state(): void
     {
-        $result = (new CanonicalPromotionRollbackGate)->validatePostPromotion(
+        $result = $this->gate()->validatePostPromotion(
             array_merge($this->manifest(), [
                 'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED,
                 'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
@@ -117,6 +118,34 @@ final class CanonicalPromotionRollbackGateTest extends TestCase
         $reasons = array_column($result['failures'], 'reason');
         $this->assertContains('partial_promotion_detected', $reasons);
         $this->assertContains('post_promotion_state_not_published', $reasons);
+    }
+
+    public function test_post_promotion_gate_blocks_missing_detail_cache(): void
+    {
+        $result = $this->gate(new CareerJobDetailExposureReadinessFixture(
+            classifications: ['actors|zh-CN' => 'broken_pointer'],
+        ))->validatePostPromotion(
+            array_merge($this->manifest(), [
+                'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED,
+                'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+            ]),
+            ['items' => [
+                $this->publishedTruthItem('actors', 'en'),
+                $this->publishedTruthItem('actors', 'zh'),
+            ]],
+        );
+
+        $this->assertSame('blocked', $result['status']);
+        $failure = collect($result['failures'])->firstWhere('reason', 'post_promotion_detail_cache_not_ready');
+        $this->assertSame('zh', $failure['locale'] ?? null);
+        $this->assertSame('broken_pointer', data_get($failure, 'context.classification'));
+    }
+
+    private function gate(?CareerJobDetailExposureReadinessFixture $readiness = null): CanonicalPromotionRollbackGate
+    {
+        return new CanonicalPromotionRollbackGate(
+            $readiness ?? new CareerJobDetailExposureReadinessFixture,
+        );
     }
 
     /**
