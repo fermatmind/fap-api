@@ -97236,7 +97236,7 @@
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
     "status": "ready_to_merge",
-    "commit_sha": "f5c88d211789f8f6c687bbfa12e2f6453d2040f7",
+    "commit_sha": "47629cbccdc6335b28dead2479c1d18ebe117a94",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3167",
     "checks": {
       "dependency": {
@@ -97323,9 +97323,14 @@
         "at": "2026-07-18T12:07:23Z",
         "status": "local_checks_passed",
         "note": "All nine checks passed on superseded head 32400a0d571b692e0d0213d3cf2e101df9379d57, then exact-head Codex review found a third P2: package-scoped preflight and bind paths did not themselves require an exact package SHA before central evidence persistence. The same-scope fix fails closed before writes for missing or invalid hashes; focused validation passed 15 tests/371 assertions plus runtime-freeze 2/5, and the complete ci_verify_mbti.sh gate passed again including Big Five 1524/187973 and Personality 71/5383. Generated Big Five noise was exactly restored. No production/CMS/database/search/cache/media/publish/import/index/submit/deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T12:08:05Z",
+        "status": "local_checks_passed",
+        "note": "Committed the exact package-scoped preflight/bind P2 repair as 47629cbccdc6335b28dead2479c1d18ebe117a94 after all local checks passed. This ledger-only follow-up records the final implementation commit before push and fresh exact-head validation."
       }
     ],
-    "updated_at": "2026-07-18T12:07:23Z"
+    "updated_at": "2026-07-18T12:08:05Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
