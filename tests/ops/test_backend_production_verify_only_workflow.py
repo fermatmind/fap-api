@@ -43,12 +43,29 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
         self.assertIn("environment: production", self.raw)
         self.assertIn("cancel-in-progress: false", self.raw)
         self.assertIn('[[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]', self.run_text)
-        self.assertIn('[[ "$RELEASE_NAME" =~ ^[a-z0-9][a-z0-9._-]{0,127}$ ]]', self.run_text)
+        self.assertIn('[[ "$RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]', self.run_text)
         self.assertIn(
             "I explicitly approve read-only backend production verification for SHA "
             "${EXPECTED_RELEASE_SHA} release ${RELEASE_NAME}.",
             self.run_text,
         )
+
+    def test_release_name_contract_accepts_existing_utc_release_identifiers(self):
+        release_name_pattern = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
+
+        self.assertRegex(
+            "big5-zh-v3-gate-20260718T122115Z-ddee2ec42-29644251396-1",
+            release_name_pattern,
+        )
+        for invalid_release_name in (
+            "-starts-with-separator",
+            "contains/path",
+            "contains space",
+            "contains:$variable",
+            "a" * 129,
+        ):
+            with self.subTest(release_name=invalid_release_name):
+                self.assertNotRegex(invalid_release_name, release_name_pattern)
 
     def test_exact_release_health_and_public_authority_checks_are_present(self):
         required = (

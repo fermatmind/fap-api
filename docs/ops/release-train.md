@@ -198,7 +198,9 @@ scale lookups, RIASEC question counts, schema, web processes, and all discovered
 for 30 days. It does not deploy, migrate, publish, restart or unlock processes,
 write remote files, inspect raw logs, submit search URLs, or change CMS/database
 state. A failed verification stops with evidence only and does not repair the
-production node.
+production node. Release directory names may contain ASCII letters in either
+case, digits, dots, underscores, and hyphens, up to 128 characters; this includes
+the uppercase `T` and `Z` used by existing UTC-stamped production releases.
 
 Public backend evidence comes from `GET /api/v0.3/flags` and the zh-CN Big Five
 hub Personality API. Both must return `200`. The Personality request carries
