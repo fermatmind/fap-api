@@ -44,6 +44,13 @@ final readonly class CareerSeoReviewAttestationService
         'content_package_approval',
     ];
 
+    private const PACKAGE_SCOPED_SURFACES = [
+        'career_import_publish_readiness',
+        'seo_agent_draft_review',
+        'seo_canary_approval',
+        'content_package_approval',
+    ];
+
     public function __construct(
         private ReviewAttestationCanonicalizer $canonicalizer,
         private ReviewAttestationFactory $factory,
@@ -180,10 +187,16 @@ final readonly class CareerSeoReviewAttestationService
      *
      * @param  list<array{identity:string,sha256:string}>  $authoritativeTargets
      */
-    public function hasApprovedAllEvidence(string $surfaceId, array $authoritativeTargets): bool
-    {
+    public function hasApprovedAllEvidence(
+        string $surfaceId,
+        array $authoritativeTargets,
+        ?string $expectedPackageSha256 = null,
+    ): bool {
         $currentOwnerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
-        if (! $this->usesSoloOwnerMode() || $currentOwnerAdminUserId <= 0) {
+        if (! $this->usesSoloOwnerMode()
+            || $currentOwnerAdminUserId <= 0
+            || ($expectedPackageSha256 !== null && preg_match('/^[0-9a-f]{64}$/', $expectedPackageSha256) !== 1)
+            || (in_array($surfaceId, self::PACKAGE_SCOPED_SURFACES, true) && $expectedPackageSha256 === null)) {
             return false;
         }
 
@@ -192,7 +205,7 @@ final readonly class CareerSeoReviewAttestationService
             $this->canonicalizer,
         );
 
-        return ReviewAttestation::query()
+        $query = ReviewAttestation::query()
             ->where('schema_version', (string) config('review_governance.attestation.schema_version'))
             ->where('review_mode', 'solo_owner')
             ->where('review_source', (string) config('review_governance.attestation.review_source'))
@@ -212,14 +225,22 @@ final readonly class CareerSeoReviewAttestationService
                         }
                     });
             }, '=', $targetSet->count())
-            ->has('targetEvidences', '=', $targetSet->count())
-            ->exists();
+            ->has('targetEvidences', '=', $targetSet->count());
+
+        $expectedPackageSha256 === null
+            ? $query->whereNull('package_sha256')
+            : $query->where('package_sha256', $expectedPackageSha256);
+
+        return $query->exists();
     }
 
     /** @param list<array{identity:string,sha256:string}> $authoritativeTargets */
-    public function assertApprovedAllEvidence(string $surfaceId, array $authoritativeTargets): void
-    {
-        if (! $this->hasApprovedAllEvidence($surfaceId, $authoritativeTargets)) {
+    public function assertApprovedAllEvidence(
+        string $surfaceId,
+        array $authoritativeTargets,
+        ?string $expectedPackageSha256 = null,
+    ): void {
+        if (! $this->hasApprovedAllEvidence($surfaceId, $authoritativeTargets, $expectedPackageSha256)) {
             throw new ReviewAttestationValidationException(
                 'Career/SEO approved review evidence is missing or stale for the exact target set.'
             );

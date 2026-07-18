@@ -203,6 +203,33 @@ final class CareerSeoReviewAttestationServiceTest extends TestCase
         $this->assertDatabaseCount('review_attestation_target_evidences', 2);
     }
 
+    public function test_package_scoped_evidence_requires_the_exact_current_package_sha(): void
+    {
+        $service = app(CareerSeoReviewAttestationService::class);
+        $targets = $this->authoritativeTargets();
+        $packageSha256 = hash('sha256', 'content-package-a');
+
+        $service->createAndBindReview(
+            surfaceId: 'content_package_approval',
+            scopeType: 'seo_content_package',
+            scopeIdentity: 'package:a',
+            decision: 'approved_all',
+            authoritativeTargets: $targets,
+            actorAdminUserId: 1,
+            packageSha256: $packageSha256,
+        );
+
+        $this->assertFalse($service->hasApprovedAllEvidence('content_package_approval', $targets));
+        $this->assertFalse($service->hasApprovedAllEvidence(
+            'content_package_approval',
+            $targets,
+            hash('sha256', 'content-package-b'),
+        ));
+        $this->assertFalse($service->hasApprovedAllEvidence('content_package_approval', $targets, 'invalid'));
+        $this->assertTrue($service->hasApprovedAllEvidence('content_package_approval', $targets, $packageSha256));
+        $service->assertApprovedAllEvidence('content_package_approval', $targets, $packageSha256);
+    }
+
     public function test_non_owner_and_team_separated_mode_cannot_bind_solo_owner_evidence(): void
     {
         $service = app(CareerSeoReviewAttestationService::class);
