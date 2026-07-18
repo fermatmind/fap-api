@@ -97381,8 +97381,8 @@
     "depends_on": [
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "93bfb6130d7ae81eb7d2618116cfd79b09bb1fd8",
+    "status": "github_checks_pending",
+    "commit_sha": "1ff921c2f37851ec6c84d6cdc4b2577d632ff097",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
       "dependency": {
@@ -97391,17 +97391,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the seventeenth exact-head review repair, focused approval/registry validation passed 27 tests/542 assertions and the exact runtime-freeze contract passed 367/759. The guarded exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove a team-separated reviewer without domain write permission cannot execute, while a domain-qualified executor without approval-review permission can reach and authorize the exact action; non-executable records remain filtered from that actor's resource query."
+        "evidence": "After the eighteenth exact-head review repair, focused approval/registry validation passed 28 tests/546 assertions and the exact runtime-freeze contract passed 367/759. The guarded exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, structured-file, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove the configured solo owner can reach the review UI without admin.approval.review only in solo_owner mode, while team-separated review remains permission-gated."
       },
       "github": {
-        "status": "passed",
-        "evidence": "Exact round-17 implementation-plus-ledger head 9c6f024bd2e15b16982ad56933fc9c5d31efa624 passed all nine required CI/code-scanning checks. Exact-head Codex review reported no major issues, all 23 review threads are resolved, GitHub reports MERGEABLE/CLEAN, and the exact fourteen-path scope is clean."
+        "status": "pending",
+        "evidence": "The prior ready ledger head f572dff87a2843b3a956152584fc52d06b54fa07 passed all nine required checks, but its exact-head review found one valid P2: the configured solo owner accepted by the service could not reach the review UI without admin.approval.review. Round 18 repairs that UI gate; the new implementation-plus-ledger head must pass all required checks, exact-head Codex review, and zero-unresolved-thread audit."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97569,9 +97569,14 @@
         "at": "2026-07-18T19:50:45Z",
         "status": "ready_to_merge",
         "note": "Exact round-17 implementation-plus-ledger head 9c6f024bd2e15b16982ad56933fc9c5d31efa624 passed all nine required checks. Exact-head Codex review reported no major issues, all 23 review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
+      },
+      {
+        "at": "2026-07-18T20:06:19Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Eighteenth exact-head review on ready ledger head f572dff87a2843b3a956152584fc52d06b54fa07 found one valid P2: canReview required admin.approval.review even for the configured solo owner accepted by the centralized service, making pending approvals unreachable in the solo-owner UI. The resource now grants review visibility to that exact configured owner only in solo_owner mode; team-separated mode remains permission-gated. Focused approval/registry tests passed 28/546, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
       }
     ],
-    "updated_at": "2026-07-18T19:50:45Z"
+    "updated_at": "2026-07-18T20:06:19Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
