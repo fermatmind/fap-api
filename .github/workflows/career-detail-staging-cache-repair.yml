@@ -15,6 +15,14 @@ on:
         description: "Exact 40-character REVISION currently active on staging"
         required: true
         type: string
+      candidate_release_revision:
+        description: "Exact 40-character REVISION materialized in the inactive candidate release"
+        required: true
+        type: string
+      candidate_release_name:
+        description: "Exact inactive Deployer release directory name (run_id-attempt)"
+        required: true
+        type: string
       operator_approval_phrase:
         description: "Required only for repair mode; must match the exact revision-bound phrase"
         required: false
@@ -48,12 +56,22 @@ jobs:
         env:
           MODE: ${{ inputs.mode }}
           EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
         run: |
           set -euo pipefail
 
           if [[ ! "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]; then
             echo "expected_active_revision must be a lowercase 40-character revision." >&2
+            exit 2
+          fi
+          if [[ ! "$CANDIDATE_RELEASE_REVISION" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "candidate_release_revision must be a lowercase 40-character revision." >&2
+            exit 2
+          fi
+          if [[ ! "$CANDIDATE_RELEASE_NAME" =~ ^[0-9]+-[1-9][0-9]*$ ]]; then
+            echo "candidate_release_name must use the exact run_id-attempt format." >&2
             exit 2
           fi
 
@@ -65,7 +83,7 @@ jobs:
               fi
               ;;
             repair)
-              expected_phrase="I explicitly approve staging Career detail cache repair for SHA ${EXPECTED_ACTIVE_REVISION} slugs ${TARGET_SLUGS} locale ${TARGET_LOCALE}; cache-only, no CMS/DB/publication/indexability/sitemap/llms/search."
+              expected_phrase="I explicitly approve staging Career detail cache repair with active SHA ${EXPECTED_ACTIVE_REVISION} using inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for slugs ${TARGET_SLUGS} locale ${TARGET_LOCALE}; cache-only, no CMS/DB/publication/indexability/sitemap/llms/search."
               if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
                 echo "operator_approval_phrase does not match the exact staging cache repair authorization." >&2
                 exit 2
@@ -99,21 +117,25 @@ jobs:
         shell: bash
         env:
           EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
         run: |
           set -euo pipefail
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "set -euo pipefail; test -L '$DEPLOY_PATH/current'; test \"\$(tr -d '\\r\\n' < '$DEPLOY_PATH/current/REVISION')\" = '$EXPECTED_ACTIVE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+            "set -euo pipefail; test -L '$DEPLOY_PATH/current'; test \"\$(tr -d '\\r\\n' < '$DEPLOY_PATH/current/REVISION')\" = '$EXPECTED_ACTIVE_REVISION'; test -d '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'; test \"\$(tr -d '\\r\\n' < '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/REVISION')\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
 
       - name: Read-only cache coverage preflight
         id: preflight
         shell: bash
+        env:
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
         run: |
           set -euo pipefail
           set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH/current/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=2092 --json --no-interaction --no-ansi" \
+            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=2092 --json --no-interaction --no-ansi" \
             > preflight.json
           command_status=$?
           set -e
@@ -152,21 +174,25 @@ jobs:
       - name: Warm exactly three missing zh-CN detail caches
         if: inputs.mode == 'repair'
         shell: bash
+        env:
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
         run: |
           set -euo pipefail
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH/current/backend' && php artisan career:warm-public-authority-cache --job-detail-slugs='$TARGET_SLUGS' --job-detail-locales='$TARGET_LOCALE' --job-detail-only --json --no-interaction --no-ansi" \
+            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:warm-public-authority-cache --job-detail-slugs='$TARGET_SLUGS' --job-detail-locales='$TARGET_LOCALE' --job-detail-only --json --no-interaction --no-ansi" \
             | tee repair.json
 
       - name: Verify exact post-repair coverage
         if: inputs.mode == 'repair'
         shell: bash
+        env:
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
         run: |
           set -euo pipefail
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH/current/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=2092 --json --no-interaction --no-ansi" \
+            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=2092 --json --no-interaction --no-ansi" \
             | tee post-repair.json
 
           # shellcheck disable=SC2016
