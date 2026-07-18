@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "3ed3068799df49057f12196bef85ef4523abf202",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97259,14 +97259,14 @@
         "evidence": "After inspecting all three automated review threads, the same-scope repair suite passed 100 tests / 791 assertions across projection and promotion gates, candidate-safe cache preparation for runtime-shell and compiled authority paths, apply/rollback behavior, post-promotion command, atomic multi-locale directory activation/rollback, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 12ms and 133ms with one DB query. All 24 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-seven-path allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on f761aa32ba0089ee8cf727bbac7ec30cb7224f40, then a new valid P1 review identified partial multi-locale directory activation on a later-locale failure. The local repair stages every locale before pointer activation and restores all touched pointer metadata on failure. Exact-head required checks will restart after this repair is pushed."
+        "status": "passed",
+        "evidence": "All nine CI and code-scanning checks passed on exact repair-ledger head 24037e6f1dbebce6feb070d42f5bdf1386731cf6. GitHub reports MERGEABLE/CLEAN and all three automated review threads are resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97324,8 +97324,13 @@
         "at": "2026-07-18T10:54:10Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed atomic multi-locale directory activation as 3ed3068799df49057f12196bef85ef4523abf202. Replied to the exact P1 with the restoration contract and synthetic failure evidence, then resolved the thread. Exact-head required checks are running; no production cache, database, CMS, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T11:01:45Z",
+        "status": "ready_to_merge",
+        "note": "All nine required CI/code-scanning checks passed on exact head 24037e6f1dbebce6feb070d42f5bdf1386731cf6. All three review threads are resolved, GitHub reports MERGEABLE/CLEAN, the worktree is clean, and exact twenty-seven-path scope validation passes. This final ledger-only transition must pass its own exact-head checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-18T10:54:10Z"
+    "updated_at": "2026-07-18T11:01:45Z"
   }
 }
