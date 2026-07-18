@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81",
+      "status": "ready_to_merge",
+      "commit_sha": "c021a49a20d6ba5acc7ff3afab57be2ff1147f26",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97259,14 +97259,14 @@
         "evidence": "After all eleven review findings, the Career manifest suite passed 93 tests / 688 assertions across projection/promotion gates, immutable payload plus exposure-snapshot staging, activation-time snapshot revalidation, snapshot-backed list preservation, atomic job-index/detail/directory activation and rollback, stale materialized projection reads, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6, for 95 tests / 694 assertions total. The actual readiness path built 1046 and 10000 row directories in about 13ms and 137ms with one DB query. All 26 manifest Pint paths, Composer strict validation, YAML/JSON, diff checks, and the exact twenty-nine-path merge-base allowlist passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All nine checks passed on prior ready-ledger head 0f7c56c8948d4484022660dc0abac9cb36240d6f. Atomic public job-index plus directory activation is committed as 8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81, the eleventh review thread is resolved, and exact-head checks are pending."
+          "status": "passed",
+          "evidence": "All nine required CI/code-scanning checks passed on exact head c021a49a20d6ba5acc7ff3afab57be2ff1147f26. All eleven review threads are resolved and the exact twenty-nine-path scope remains validated."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+        "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97420,12 +97420,17 @@
         "status": "github_review_fix_ready_to_commit",
         "note": "The concurrency guard cleared and the complete PR3 manifest is green: 93 Career tests / 688 assertions plus 2 Big Five freeze tests / 6 assertions, all 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope validation. Promotion success now atomically aligns the public job-index API and directory, and the synthetic later-locale failure proves both job-index values and directory pointers restore."
       },
-      {
-        "at": "2026-07-18T13:32:08Z",
-        "status": "github_checks_pending",
-        "note": "Committed and pushed atomic public job-index plus directory activation as 8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81. Replied to the eleventh review finding with immediate list-API exposure and cross-cache rollback regressions, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
-      }
-    ],
-    "updated_at": "2026-07-18T13:32:08Z"
+        {
+          "at": "2026-07-18T13:32:08Z",
+          "status": "github_checks_pending",
+          "note": "Committed and pushed atomic public job-index plus directory activation as 8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81. Replied to the eleventh review finding with immediate list-API exposure and cross-cache rollback regressions, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
+        },
+        {
+          "at": "2026-07-18T13:38:59Z",
+          "status": "ready_to_merge",
+          "note": "All nine required CI/code-scanning checks passed on exact head c021a49a20d6ba5acc7ff3afab57be2ff1147f26. All eleven review threads are resolved, the worktree is clean, and exact twenty-nine-path scope validation remains green. This final ledger-only transition must pass its own exact-head checks before squash merge."
+        }
+      ],
+      "updated_at": "2026-07-18T13:38:59Z"
   }
 }
