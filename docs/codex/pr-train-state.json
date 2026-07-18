@@ -97235,9 +97235,9 @@
     "depends_on": [
       "SOLO-OWNER-PERSONALITY-REVIEW-03"
     ],
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "commit_sha": "585312ddc815f0c6891acb4efddc651050a6e250",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3167",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -97249,7 +97249,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #3167 was opened from codex/solo-owner-career-seo-review-04 after all required local checks and exact scope validation passed; required GitHub checks and exact-head review are pending."
       }
     },
     "scope_validation": {
@@ -97288,9 +97288,14 @@
         "at": "2026-07-18T11:02:03Z",
         "status": "local_checks_passed",
         "note": "Committed the exact ten-path implementation as 585312ddc815f0c6891acb4efddc651050a6e250 after all required local validation passed. This ledger-only follow-up records that immutable implementation commit before push; no runtime or production action occurred."
+      },
+      {
+        "at": "2026-07-18T11:03:18Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3167 with the required change, rationale, validation, security/privacy, repository-rule-impact, deferred-items, and no-production-execution sections. Required checks and exact-head review are pending."
       }
     ],
-    "updated_at": "2026-07-18T11:02:03Z"
+    "updated_at": "2026-07-18T11:03:18Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
