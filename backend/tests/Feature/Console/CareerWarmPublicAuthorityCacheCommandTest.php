@@ -298,6 +298,103 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertSame($oldZh, $cache->directoryReadModelPayload('zh-CN'));
     }
 
+    public function test_promotion_read_model_activation_restores_job_indexes_when_directory_switch_fails(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'atomic-list-family',
+            'title_en' => 'Atomic List Family',
+            'title_zh' => '原子列表职业族',
+        ]);
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'atomic-list-career',
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'direct_match',
+            'canonical_title_en' => 'Atomic List Career',
+            'canonical_title_zh' => '原子列表职业',
+            'search_h1_zh' => '原子列表职业',
+            'task_prototype_signature' => [],
+            'trust_inheritance_scope' => [],
+        ]);
+        $projectionItems = array_map(
+            static fn (string $locale): array => [
+                'slug' => 'atomic-list-career',
+                'locale' => $locale,
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+            ['en', 'zh'],
+        );
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($projectionItems as $item) {
+            $prepared = $cache->prepareJobDetailPayloadForExposure(
+                'atomic-list-career',
+                (string) $item['locale'],
+                $item,
+            );
+            $this->assertSame('pass', $cache->activatePreparedJobDetailPayloadsForExposure([$prepared])['status']);
+        }
+        $oldJobIndexes = [
+            'en' => ['bundle_kind' => 'career_job_index', 'items' => [['sentinel' => 'old-en']]],
+            'zh-CN' => ['bundle_kind' => 'career_job_index', 'items' => [['sentinel' => 'old-zh']]],
+        ];
+        foreach ($oldJobIndexes as $locale => $payload) {
+            Cache::forever(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':'.$locale.':public', $payload);
+        }
+        $oldEnVersion = $cache->publishDirectoryReadModel('en', ['public_count' => 0, 'items' => []]);
+        $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', ['public_count' => 0, 'items' => []]);
+        $cacheManager = Cache::getFacadeRoot();
+        $zhDirectoryActiveKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:active';
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->andReturnUsing(static fn (string $key, int $seconds) => $cacheManager->lock($key, $seconds));
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhDirectoryActiveKey, $oldZhVersion): bool {
+                    if ($key === $zhDirectoryActiveKey && $value !== $oldZhVersion) {
+                        throw new \RuntimeException('synthetic promotion directory activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            try {
+                $cache->warmDirectoryReadModels(
+                    ['en', 'zh-CN'],
+                    null,
+                    $projectionItems,
+                    activateJobIndexPayloads: true,
+                );
+                $this->fail('The synthetic directory activation should fail.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('synthetic promotion directory activation failure', $exception->getMessage());
+            }
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        foreach ($oldJobIndexes as $locale => $payload) {
+            $this->assertSame(
+                $payload,
+                Cache::get(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':'.$locale.':public'),
+            );
+        }
+        $this->assertSame($oldEnVersion, $cache->directoryCacheStatus('en')['active_version']);
+        $this->assertSame($oldZhVersion, $cache->directoryCacheStatus('zh-CN')['active_version']);
+    }
+
     public function test_multi_locale_directory_payloads_are_built_only_after_all_rebuild_locks_are_held(): void
     {
         $family = OccupationFamily::query()->create([

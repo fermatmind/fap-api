@@ -803,12 +803,13 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
      *
      * @param  list<string>  $publicLocales
      * @param  list<array<string, mixed>>|null  $exposureProjectionItems
-     * @return array<string, array{locale: string, status: string, version: ?string, member_count: int}>
+     * @return array<string, array{locale: string, status: string, version: ?string, member_count: int, job_index_activated: bool}>
      */
     public function warmDirectoryReadModels(
         array $publicLocales = ['en', 'zh-CN'],
         ?callable $reporter = null,
         ?array $exposureProjectionItems = null,
+        bool $activateJobIndexPayloads = false,
     ): array {
         $locales = array_values(array_unique(array_map(
             fn (string $locale): string => $this->normalizePublicLocale($locale),
@@ -825,7 +826,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         try {
             $activation = $this->withDirectoryRebuildLocks(
                 $locales,
-                function () use ($locales, $exposureProjectionItems): array {
+                function () use ($locales, $exposureProjectionItems, $activateJobIndexPayloads): array {
                     // Build from authority and inspect detail readiness only after
                     // every target-locale rebuild lock is held. A delayed older
                     // warmer therefore cannot activate a payload captured before
@@ -834,6 +835,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                         $this->careerJobListBundleBuilder->build(false)
                     )->resolve();
                     $payloads = [];
+                    $jobIndexes = [];
                     foreach ($locales as $locale) {
                         $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
                             'bundle_kind' => 'career_job_index',
@@ -856,6 +858,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                             );
                         }
                         $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+                        $jobIndexes[$locale] = $jobIndex;
                         $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
                             $items,
                             $locale,
@@ -865,7 +868,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
                     return [
                         'payloads' => $payloads,
-                        'versions' => $this->stageAndActivateDirectoryReadModels($payloads),
+                        'versions' => $this->activateDirectoryAndOptionalJobIndexReadModels(
+                            $payloads,
+                            $jobIndexes,
+                            $activateJobIndexPayloads,
+                        ),
+                        'job_indexes_activated' => $activateJobIndexPayloads,
                     ];
                 },
             );
@@ -891,11 +899,55 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 'status' => 'cached',
                 'version' => $versions[$locale] ?? null,
                 'member_count' => count((array) ($payload['items'] ?? [])),
+                'job_index_activated' => (bool) ($activation['job_indexes_activated'] ?? false),
             ];
             $reporter?->__invoke($phase, 'finished');
         }
 
         return $summary;
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $directoryPayloads
+     * @param  array<string, array<string, mixed>>  $jobIndexPayloads
+     * @return array<string, string>
+     */
+    private function activateDirectoryAndOptionalJobIndexReadModels(
+        array $directoryPayloads,
+        array $jobIndexPayloads,
+        bool $activateJobIndexPayloads,
+    ): array {
+        if (! $activateJobIndexPayloads) {
+            return $this->stageAndActivateDirectoryReadModels($directoryPayloads);
+        }
+
+        $jobIndexSnapshots = [];
+        foreach (array_keys($jobIndexPayloads) as $locale) {
+            $jobIndexSnapshots[$locale] = $this->cacheValueSnapshot(
+                $this->jobIndexCacheKey($locale, false),
+            );
+        }
+
+        try {
+            foreach ($jobIndexPayloads as $locale => $payload) {
+                $key = $this->jobIndexCacheKey($locale, false);
+                Cache::forever($key, $payload);
+                if (Cache::get($key) !== $payload) {
+                    throw new \RuntimeException(sprintf(
+                        'Career job index activation verification failed for locale %s.',
+                        $locale,
+                    ));
+                }
+            }
+
+            return $this->stageAndActivateDirectoryReadModels($directoryPayloads);
+        } catch (\Throwable $throwable) {
+            foreach ($jobIndexSnapshots as $locale => $snapshot) {
+                $this->restoreCacheValue($this->jobIndexCacheKey($locale, false), $snapshot);
+            }
+
+            throw $throwable;
+        }
     }
 
     /**

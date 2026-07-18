@@ -317,6 +317,13 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
         $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'zh'));
+        $this->assertNotContains(
+            'actuaries',
+            array_map(
+                static fn (array $item): string => (string) data_get($item, 'identity.canonical_slug', ''),
+                $cache->jobIndexPayload('en')['items'],
+            ),
+        );
 
         $exitCode = Artisan::call('career:execute-canonical-rollout-batch', [
             '--batch-id' => 'batch-actuaries-cache-cold',
@@ -344,6 +351,14 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         );
         $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_en.status'));
         $this->assertSame('cached', data_get($payload, 'directory_activation.career_directory_zh_cn.status'));
+        $this->assertTrue(data_get($payload, 'directory_activation.career_directory_en.job_index_activated'));
+        $this->assertContains(
+            'actuaries',
+            array_map(
+                static fn (array $item): string => (string) data_get($item, 'identity.canonical_slug', ''),
+                $cache->jobIndexPayload('en')['items'],
+            ),
+        );
         $this->assertContains(
             'actuaries',
             array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),

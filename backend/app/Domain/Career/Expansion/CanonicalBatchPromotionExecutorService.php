@@ -240,6 +240,7 @@ final class CanonicalBatchPromotionExecutorService
                     $locales,
                     null,
                     $this->itemsFromPayload($postProjection),
+                    activateJobIndexPayloads: true,
                 );
             } catch (\Throwable $throwable) {
                 $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots(
