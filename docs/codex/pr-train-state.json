@@ -88944,7 +88944,7 @@
     "ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01"
   ],
   "status": "completed",
-  "commit_sha": null,
+  "commit_sha": "081a4931f03163fb47371a43cab86ed804a9c156",
   "pr_url": null,
   "failure_reason": null,
   "merged_at": null,
@@ -97122,8 +97122,13 @@
       "at": "2026-07-18T07:31:13Z",
       "status": "local_checks_passed",
       "note": "Final authorization review removed implicit solo-owner actor inference from the MBTI approval writer. The explicit-actor zero-write regression passed in the 34-test focused suite, and the complete manifest gate passed again on the final worktree. No production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T07:32:55Z",
+      "status": "implementation_committed",
+      "note": "Exact 22-path implementation and validation evidence committed as 081a4931f03163fb47371a43cab86ed804a9c156; staged scope validation reported zero paths outside the PR manifest."
     }
   ],
-  "updated_at": "2026-07-18T07:31:13Z"
+  "updated_at": "2026-07-18T07:32:55Z"
 }
 }
