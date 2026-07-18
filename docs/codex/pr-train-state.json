@@ -97381,8 +97381,8 @@
     "depends_on": [
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "20b881d527e9bc8f2ab3478338a7a6c5b7424f39",
+    "status": "github_checks_pending",
+    "commit_sha": "99ee9650c53e051245ef8621e719f3aa902e73e2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
       "dependency": {
@@ -97391,17 +97391,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the nineteenth exact-head review repair, focused approval/registry validation passed 28 tests/551 assertions and the exact runtime-freeze contract passed 367/759. The guarded exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, structured-file, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove the configured solo owner can reach the review UI, a different domain-qualified admin cannot list approvals in solo_owner mode, and the same domain executor fallback remains available only in team_separated mode."
+        "evidence": "After the twentieth exact-head review repair, focused approval/registry validation passed 28 tests/556 assertions and the exact runtime-freeze contract passed 367/759. The guarded exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, structured-file, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove spaced API key labels are rejected before approval-reason persistence and redacted from executor failure output while existing credential forms remain protected."
       },
       "github": {
-        "status": "passed",
-        "evidence": "Exact round-19 implementation-plus-ledger head 8d4d5b96f71ca4623b36b96458d152b36f218eca passed all nine required CI/code-scanning checks. Exact-head Codex review reported no major issues, all 25 review threads are resolved, GitHub reports MERGEABLE/CLEAN, and the exact fourteen-path scope is clean."
+        "status": "pending",
+        "evidence": "The final round-19 ready-ledger head c026806e2f0641fa40dcc111177c250310a11cdc passed all nine required checks, but after an initial transient review error its exact-head Codex review found one valid P2: spaced API key labels were not covered by the persistence guard or executor redaction. Round 20 expands the shared credential patterns; the new implementation-plus-ledger head must pass all required checks, exact-head Codex review, and zero-unresolved-thread audit."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97584,9 +97584,14 @@
         "at": "2026-07-18T20:32:21Z",
         "status": "ready_to_merge",
         "note": "Exact round-19 implementation-plus-ledger head 8d4d5b96f71ca4623b36b96458d152b36f218eca passed all nine required checks. Exact-head Codex review reported no major issues, all 25 review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
+      },
+      {
+        "at": "2026-07-18T20:47:08Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Twentieth exact-head review on final ready-ledger head c026806e2f0641fa40dcc111177c250310a11cdc found one valid P2 after a transient first review error: the common spaced label API key: could bypass both AdminApproval reason persistence rejection and executor failure redaction. The credential patterns now accept whitespace, underscore, or hyphen between API and key for model, nested-key, and scalar-error boundaries. Dynamic tests cover persistence/service rejection and executor non-leak. Focused approval/registry tests passed 28/556, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
       }
     ],
-    "updated_at": "2026-07-18T20:32:21Z"
+    "updated_at": "2026-07-18T20:47:08Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
