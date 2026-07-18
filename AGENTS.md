@@ -96,6 +96,10 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - A recovered transient transport failure does not invalidate an otherwise healthy deploy. Persistent transport failure, malformed JSON, `ok != true`, or a mismatched `primary_slug` remains fail closed.
 - Retry behavior must not replace the public authority probe with a loopback-only probe, print private topology or response bodies, or authorize deploy, rollback, restart, unlock, migration, CMS mutation, or Search Channel activity.
 
+### Production Verify-Only Discipline
+- The generic backend production verify-only workflow is a read-only evidence authority, not a deploy path. It requires an exact SHA/release approval on `main`, may read only the current release identity, internal/public health, business APIs, schema and process state, and may create only a sanitized runner-side artifact.
+- Verify-only must not deploy, migrate, publish, restart, unlock, write remote files, inspect raw logs, submit search URLs, or mutate CMS/database state. Any failed check stops and reports without repairing production.
+
 ### PR Train Manifest Discipline
 - Under a concrete execution goal, add an exact missing goal-supplied PR-train manifest/state entry under the standing authorization and continue. Outside an execution goal, stop and report the gap unless the user asks to update the train manifest and state ledger.
 - This stop rule applies only when the user requested a PR-train item. It must not block an explicitly requested ad-hoc PR whose scope does not modify PR-train metadata.

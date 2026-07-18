@@ -189,6 +189,17 @@ failure, malformed JSON, `ok != true`, or a mismatched `primary_slug` remains a
 blocking deployment failure. The helper does not print the probed authority or
 the response body.
 
+`backend-production-verify-only.yml` is a separate, manual, exact-SHA production
+evidence workflow. It runs only from `main`, requires the exact read-only
+approval phrase, and verifies the deployed `REVISION`, release directory,
+internal health, public health policy, business APIs, content source hash,
+scale lookups, RIASEC question counts, schema, web processes, and all discovered
+`fap-queue` processes. It creates only a sanitized runner-side artifact retained
+for 30 days. It does not deploy, migrate, publish, restart or unlock processes,
+write remote files, inspect raw logs, submit search URLs, or change CMS/database
+state. A failed verification stops with evidence only and does not repair the
+production node.
+
 Public backend evidence comes from `GET /api/v0.3/flags` and the zh-CN Big Five
 hub Personality API. Both must return `200`. The Personality request carries
 `User-Agent: FermatMindReleaseProbe/<PROBE_ID>` so a later read-only target-node

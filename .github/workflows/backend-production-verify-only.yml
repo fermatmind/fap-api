@@ -1,0 +1,316 @@
+name: Backend Production Verify Only
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_release_sha:
+        description: Exact deployed backend SHA (40 lowercase hex characters)
+        required: true
+        type: string
+      release_name:
+        description: Exact deployed backend release directory name
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact SHA-bound read-only production verification approval phrase
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-production-verify-only
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Validate main and exact read-only approval
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+      RELEASE_NAME: ${{ inputs.release_name }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+    steps:
+      - name: Validate exact SHA-bound read-only approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$RELEASE_NAME" =~ ^[a-z0-9][a-z0-9._-]{0,127}$ ]]
+          expected="I explicitly approve read-only backend production verification for SHA ${EXPECTED_RELEASE_SHA} release ${RELEASE_NAME}."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+
+      - name: Checkout main authority
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify release SHA is reachable from origin main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          git cat-file -e "${EXPECTED_RELEASE_SHA}^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+
+  verify:
+    name: Verify exact backend production release without writes
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
+      EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+      RELEASE_NAME: ${{ inputs.release_name }}
+
+    steps:
+      - name: Checkout main authority
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH HEALTHCHECK_URL; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          [[ "$HEALTHCHECK_URL" =~ ^https://[A-Za-z0-9.-]+/api/healthz$ ]]
+          echo "Protected production topology validation passed without disclosing values."
+
+      - name: Verify all public scale lookups with bounded retry
+        shell: bash
+        run: |
+          set -euo pipefail
+          public_api_base_url="${HEALTHCHECK_URL%/api/healthz}"
+          [[ "$public_api_base_url" =~ ^https://[A-Za-z0-9.-]+$ ]]
+          scale_lookup_count=0
+          for slug in \
+            mbti-personality-test-16-personality-types \
+            big-five-personality-test-ocean-model \
+            enneagram-personality-test-nine-types \
+            iq-test-intelligence-quotient-assessment \
+            clinical-depression-anxiety-assessment-professional-edition
+          do
+            SCALE_LOOKUP_BASE_URL="$public_api_base_url" \
+            SCALE_LOOKUP_SLUG="$slug" \
+            SCALE_LOOKUP_USE_RESOLVE=false \
+            SCALE_LOOKUP_ATTEMPTS=3 \
+            SCALE_LOOKUP_RETRY_DELAY_SECONDS=2 \
+            SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS=5 \
+            SCALE_LOOKUP_MAX_TIME_SECONDS=40 \
+              bash backend/scripts/deploy/verify_scale_lookup.sh >/dev/null
+            scale_lookup_count=$((scale_lookup_count + 1))
+          done
+          test "$scale_lookup_count" -eq 5
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Verify deployed release and runtime without writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_expected_sha '%q' "$EXPECTED_RELEASE_SHA"
+          printf -v q_release_name '%q' "$RELEASE_NAME"
+          printf -v q_healthcheck_url '%q' "$HEALTHCHECK_URL"
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH=$q_deploy_path EXPECTED_RELEASE_SHA=$q_expected_sha RELEASE_NAME=$q_release_name HEALTHCHECK_URL=$q_healthcheck_url bash -s" \
+            <<'REMOTE' > artifacts/backend-production-verification.json
+          set -Eeuo pipefail
+
+          public_api_base_url="${HEALTHCHECK_URL%/api/healthz}"
+          healthcheck_host="${public_api_base_url#https://}"
+          [[ "$public_api_base_url" =~ ^https://[A-Za-z0-9.-]+$ ]]
+          [[ "$healthcheck_host" =~ ^[A-Za-z0-9.-]+$ ]]
+
+          current_release="$(readlink -f "$DEPLOY_PATH/current")"
+          test -d "$current_release"
+          test "$(basename "$current_release")" = "$RELEASE_NAME"
+          test -f "$current_release/REVISION"
+          deployed_revision="$(tr -d '\r\n' < "$current_release/REVISION")"
+          test "$deployed_revision" = "$EXPECTED_RELEASE_SHA"
+
+          internal_health="$(curl -fsS --connect-timeout 5 --max-time 20 \
+            --resolve "${healthcheck_host}:443:127.0.0.1" \
+            "https://${healthcheck_host}/api/healthz")"
+          jq -e '.ok == true' <<<"$internal_health" >/dev/null
+
+          public_health_status="$(curl -sS --connect-timeout 5 --max-time 20 \
+            -o /dev/null -w '%{http_code}' "${public_api_base_url}/api/healthz")"
+          test "$public_health_status" = "404"
+
+          flags_payload="$(curl -fsS --connect-timeout 5 --max-time 30 \
+            "${public_api_base_url}/api/v0.3/flags")"
+          jq -e 'type == "object"' <<<"$flags_payload" >/dev/null
+
+          hub_path='/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'
+          public_hub="$(curl -fsS --connect-timeout 5 --max-time 30 \
+            "${public_api_base_url}${hub_path}")"
+          public_source_hash="$(jq -er '
+            select(.ok == true)
+            | .personality_public_content_asset_v1.source_hash
+            | select(type == "string" and test("^[0-9a-f]{64}$"))
+          ' <<<"$public_hub")"
+
+          internal_hub="$(curl -fsS --connect-timeout 5 --max-time 30 \
+            --resolve "${healthcheck_host}:443:127.0.0.1" \
+            "https://${healthcheck_host}${hub_path}")"
+          internal_source_hash="$(jq -er '
+            select(.ok == true)
+            | .personality_public_content_asset_v1.source_hash
+            | select(type == "string" and test("^[0-9a-f]{64}$"))
+          ' <<<"$internal_hub")"
+          test "$internal_source_hash" = "$public_source_hash"
+
+          riasec_60="$(curl -fsS --connect-timeout 5 --max-time 40 \
+            "${public_api_base_url}/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_60")"
+          jq -e '.ok == true and .form_code == "riasec_60" and (.questions.items | length) == 60' \
+            <<<"$riasec_60" >/dev/null
+
+          riasec_140="$(curl -fsS --connect-timeout 5 --max-time 40 \
+            "${public_api_base_url}/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_140")"
+          jq -e '.ok == true and .form_code == "riasec_140" and (.questions.items | length) == 140' \
+            <<<"$riasec_140" >/dev/null
+
+          (cd "$current_release/backend" && \
+            php artisan fap:schema:verify --no-interaction --no-ansi >/dev/null)
+
+          pgrep -f '[p]hp-fpm' >/dev/null
+          pgrep -x nginx >/dev/null || pgrep -f '[n]ginx' >/dev/null
+
+          queue_status="$(sudo -n /usr/bin/supervisorctl status)"
+          queue_total="$(awk '$1 ~ /^fap-queue/ {count++} END {print count+0}' <<<"$queue_status")"
+          queue_running="$(awk '$1 ~ /^fap-queue/ && $2 == "RUNNING" {count++} END {print count+0}' <<<"$queue_status")"
+          test "$queue_total" -gt 0
+          test "$queue_running" -eq "$queue_total"
+
+          checked_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          jq -n \
+            --arg release_sha "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$RELEASE_NAME" \
+            --arg checked_at "$checked_at" \
+            --argjson queue_total "$queue_total" \
+            --argjson queue_running "$queue_running" \
+            '{
+              schema_version: "backend-production-verify-only.v1",
+              status: "PASS_BACKEND_PRODUCTION_VERIFY_ONLY",
+              release_sha: $release_sha,
+              release_name: $release_name,
+              checked_at: $checked_at,
+              checks: {
+                deployed_revision_match: true,
+                release_name_match: true,
+                internal_health: true,
+                public_health_policy_404: true,
+                flags_api: true,
+                big_five_hub_api: true,
+                personality_source_hash_match: true,
+                scale_lookup_count: 5,
+                riasec_60_questions: 60,
+                riasec_140_questions: 140,
+                schema_verified: true,
+                php_fpm_running: true,
+                nginx_running: true,
+                queue_total: $queue_total,
+                queue_running: $queue_running
+              },
+              negative_guarantees: {
+                deploy: false,
+                migration: false,
+                database_write: false,
+                cms_write: false,
+                publisher: false,
+                queue_restart: false,
+                process_restart: false,
+                deploy_lock_mutation: false,
+                remote_file_write: false,
+                raw_log_read: false,
+                search_submit: false
+              },
+              writes_committed: false
+            }'
+          REMOTE
+
+          jq -e '
+            .schema_version == "backend-production-verify-only.v1" and
+            .status == "PASS_BACKEND_PRODUCTION_VERIFY_ONLY" and
+            .release_sha == env.EXPECTED_RELEASE_SHA and
+            .release_name == env.RELEASE_NAME and
+            .checks.scale_lookup_count == 5 and
+            .checks.riasec_60_questions == 60 and
+            .checks.riasec_140_questions == 140 and
+            .checks.queue_total > 0 and
+            .checks.queue_running == .checks.queue_total and
+            .negative_guarantees.remote_file_write == false and
+            .negative_guarantees.database_write == false and
+            .writes_committed == false
+          ' artifacts/backend-production-verification.json >/dev/null
+
+      - name: Publish safe verification summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          status="$(jq -r '.status' artifacts/backend-production-verification.json)"
+          checked_at="$(jq -r '.checked_at' artifacts/backend-production-verification.json)"
+          queue_total="$(jq -r '.checks.queue_total' artifacts/backend-production-verification.json)"
+          {
+            echo "## Backend production verify-only"
+            echo
+            echo "- Status: ${status}"
+            echo "- Checked at: ${checked_at}"
+            echo "- Exact release identity: verified"
+            echo "- Public/internal content authority match: verified"
+            echo "- Scale lookups: 5"
+            echo "- RIASEC question counts: 60 / 140"
+            echo "- Running queues: ${queue_total}"
+            echo "- Writes committed: false"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload safe verification artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-production-verify-only-${{ github.run_id }}
+          path: artifacts/backend-production-verification.json
+          if-no-files-found: error
+          retention-days: 30
