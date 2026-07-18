@@ -14,6 +14,8 @@ final class CareerJobDetailController extends Controller
 {
     use RespondsWithNotFound;
 
+    private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
+
     private const INTERNAL_READER_PAYLOAD_KEYS = [
         'source_id',
         'source_ids',
@@ -49,13 +51,15 @@ final class CareerJobDetailController extends Controller
     public function show(Request $request, string $slug): JsonResponse
     {
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
-        $payload = $this->responseCache->jobDetailPayload($slug, $publicLocale);
+        $read = $this->responseCache->jobDetailRead($slug, $publicLocale);
+        $payload = $read['payload'];
 
         if ($payload === null) {
             return $this->notFoundResponse('career job detail bundle unavailable.');
         }
 
-        return response()->json($this->projectReaderSafePayload($payload));
+        return response()->json($this->projectReaderSafePayload($payload))
+            ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);
     }
 
     /**

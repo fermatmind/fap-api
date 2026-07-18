@@ -97049,5 +97049,63 @@
       }
     ],
     "updated_at": "2026-07-18T05:51:13Z"
+  },
+  "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
+    "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-detail-cold-miss-degrade-01",
+    "title": "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500",
+    "depends_on": [],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The explicit seven-PR continuous execution goal authorized this exact PR id, title, scope, manifest/state registration, and normal PR lifecycle."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "This first train item declares no dependency and started from origin/main 6ee71f2e63a21182dd05a5835588a1e6308bcde2 in an isolated clean worktree."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "CareerJobDetailReadModel10kTest passed 10 tests / 114 assertions; CareerJobDetailApiTest passed 13 / 149; the filtered CareerJobPublicApiTest passed 5 / 68. The exact six-route inventory, scoped Pint, Composer strict validation, four PHP syntax checks, YAML/JSON parsing, git diff check, and exact seven-path allowlist validation passed. The cold-miss test also proves zero SQL queries on degradation, fresh/LKG/legacy state behavior, one queued warm across repeated misses, no warm for hidden/unknown projection states, and dispatch failure remaining a restricted 200."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR not opened yet."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T08:23:47Z",
+        "status": "implementation_in_progress",
+        "note": "Created the isolated task branch from current origin/main. Implementation is limited to published Career detail cold-miss degradation, safe cache-state metadata, and unique asynchronous recovery; no later PR, production cache, CMS, database, publication, staging wait, or deploy action is included."
+      },
+      {
+        "at": "2026-07-18T08:28:15Z",
+        "status": "local_checks_passed",
+        "note": "All PR1 manifest checks and the exact changed-file allowlist passed. Published active, LKG, and legacy reads remain projection-only; an all-cache miss returns the restricted non-indexable shell and dispatches a unique warm job without synchronous detail assembly. Hidden and locale-mismatched authority remains 404. No production cache warm, CMS/DB write, publication, staging wait, or deploy occurred."
+      }
+    ],
+    "updated_at": "2026-07-18T08:28:15Z"
   }
 }

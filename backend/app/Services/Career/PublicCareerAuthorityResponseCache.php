@@ -10,9 +10,11 @@ use App\Http\Resources\Career\CareerDatasetHubResource;
 use App\Http\Resources\Career\CareerDatasetMethodResource;
 use App\Http\Resources\Career\CareerJobDetailResource;
 use App\Http\Resources\Career\CareerJobListItemResource;
+use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Services\Career\AiImpactAssets\CareerAiImpactPreviewDetailShellBuilder;
 use App\Services\Career\Bundles\CareerCnProxyPublicOwnerSurfaceBuilder;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
+use App\Services\Career\Bundles\CareerJobDetailDegradedShellBuilder;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
 use Illuminate\Http\Request;
@@ -36,6 +38,8 @@ final class PublicCareerAuthorityResponseCache
 
     public const JOB_DETAIL_NEGATIVE_CACHE_TTL_SECONDS = 300;
 
+    public const JOB_DETAIL_WARM_DISPATCH_TTL_SECONDS = 300;
+
     public const DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v1';
 
     public const DIRECTORY_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v2';
@@ -47,6 +51,7 @@ final class PublicCareerAuthorityResponseCache
         private readonly CareerLaunchGovernanceClosureService $launchGovernanceClosureService,
         private readonly CareerJobListBundleBuilder $careerJobListBundleBuilder,
         private readonly CareerJobDetailBundleBuilder $careerJobDetailBundleBuilder,
+        private readonly CareerJobDetailDegradedShellBuilder $careerJobDetailDegradedShellBuilder,
         private readonly CareerCnProxyPublicOwnerSurfaceBuilder $cnProxySurfaceBuilder,
         private readonly CareerAiImpactPreviewDetailShellBuilder $aiImpactPreviewDetailShellBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
@@ -142,9 +147,17 @@ final class PublicCareerAuthorityResponseCache
      */
     public function jobDetailPayload(string $slug, string $publicLocale = 'zh-CN'): ?array
     {
+        return $this->jobDetailRead($slug, $publicLocale)['payload'];
+    }
+
+    /**
+     * @return array{payload: array<string, mixed>|null, state: 'degraded'|'fresh'|'not_found'|'stale'}
+     */
+    public function jobDetailRead(string $slug, string $publicLocale = 'zh-CN'): array
+    {
         $normalizedSlug = strtolower(trim($slug));
         if ($normalizedSlug === '') {
-            return null;
+            return ['payload' => null, 'state' => 'not_found'];
         }
 
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
@@ -160,32 +173,79 @@ final class PublicCareerAuthorityResponseCache
                 );
             }
 
-            return null;
+            return ['payload' => null, 'state' => 'not_found'];
         }
 
         Cache::forget($this->jobDetailNegativeKey($normalizedSlug, $normalizedLocale));
-        foreach ([$this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale), $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale)] as $pointerKey) {
+        foreach (['fresh' => $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale), 'stale' => $this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale)] as $state => $pointerKey) {
             $version = Cache::get($pointerKey);
             $payload = is_string($version) && $version !== ''
                 ? Cache::get($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version))
                 : null;
             if (is_array($payload)) {
-                return $payload;
+                $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, $state, $version);
+
+                return ['payload' => $payload, 'state' => $state];
             }
         }
 
         $legacy = Cache::get($this->jobDetailCacheKey($normalizedSlug, $normalizedLocale));
         if (is_array($legacy)) {
             $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $legacy);
+            $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'stale', 'legacy-v1');
 
-            return $legacy;
+            return ['payload' => $legacy, 'state' => 'stale'];
         }
 
-        throw new \RuntimeException(sprintf(
-            'Career detail authority cache is unavailable for published slug %s (%s).',
-            $normalizedSlug,
-            $normalizedLocale,
-        ));
+        $this->dispatchJobDetailWarm($normalizedSlug, $normalizedLocale);
+        $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'degraded', null);
+
+        return [
+            'payload' => $this->careerJobDetailDegradedShellBuilder->build(
+                $normalizedSlug,
+                $normalizedLocale,
+                $projectionItem,
+            ),
+            'state' => 'degraded',
+        ];
+    }
+
+    private function dispatchJobDetailWarm(string $slug, string $publicLocale): void
+    {
+        $dispatchKey = $this->jobDetailWarmDispatchKey($slug, $publicLocale);
+
+        try {
+            if (! Cache::add($dispatchKey, true, now()->addSeconds(self::JOB_DETAIL_WARM_DISPATCH_TTL_SECONDS))) {
+                return;
+            }
+
+            try {
+                WarmCareerJobDetailProjection::dispatch($slug, $publicLocale);
+            } catch (\Throwable $throwable) {
+                Cache::forget($dispatchKey);
+                Log::warning('career_job_detail_warm_dispatch_failed', [
+                    'slug' => $slug,
+                    'locale' => $publicLocale,
+                    'error_class' => $throwable::class,
+                ]);
+            }
+        } catch (\Throwable $throwable) {
+            Log::warning('career_job_detail_warm_dispatch_guard_failed', [
+                'slug' => $slug,
+                'locale' => $publicLocale,
+                'error_class' => $throwable::class,
+            ]);
+        }
+    }
+
+    private function jobDetailWarmDispatchKey(string $slug, string $publicLocale): string
+    {
+        return sprintf(
+            '%s:%s:%s:warm-dispatch',
+            self::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX,
+            strtolower(trim($slug)),
+            $this->normalizePublicLocale($publicLocale),
+        );
     }
 
     public function forgetJobDetailPayload(string $slug, string $publicLocale = 'zh-CN'): bool
@@ -757,5 +817,16 @@ final class PublicCareerAuthorityResponseCache
             'cache_state' => $state,
             'version' => $version,
         ], $extra));
+    }
+
+    private function logJobDetailCacheState(string $slug, string $locale, string $state, ?string $version): void
+    {
+        Log::info('career_public_authority_cache', [
+            'surface' => 'job_detail',
+            'slug' => $slug,
+            'locale' => $locale,
+            'cache_state' => $state,
+            'version' => $version,
+        ]);
     }
 }
