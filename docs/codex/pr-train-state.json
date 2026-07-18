@@ -2370,7 +2370,7 @@
       },
       {
         "at": "2026-05-31T05:28:15+08:00",
-        "status": "local_checks_passed",
+  "status": "github_checks_pending",
         "summary": "All scoped local validations passed in the isolated worktree."
       },
       {
@@ -88945,7 +88945,7 @@
   ],
   "status": "completed",
   "commit_sha": "081a4931f03163fb47371a43cab86ed804a9c156",
-  "pr_url": null,
+  "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
   "failure_reason": null,
   "merged_at": null,
   "remote_branch_deleted": false,
@@ -97076,9 +97076,9 @@
         "status": "passed",
       "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
       },
-      "github": {
-        "status": "not_started",
-        "evidence": "No PR has been opened for SOLO-OWNER-PERSONALITY-REVIEW-03."
+    "github": {
+      "status": "pending",
+      "evidence": "PR #3162 is open from codex/solo-owner-personality-review-03 to main. Required checks and exact-head Codex review are pending; no merge is permitted until they pass on the final pushed head."
       }
     },
     "scope_validation": {
@@ -97127,8 +97127,13 @@
       "at": "2026-07-18T07:32:55Z",
       "status": "implementation_committed",
       "note": "Exact 22-path implementation and validation evidence committed as 081a4931f03163fb47371a43cab86ed804a9c156; staged scope validation reported zero paths outside the PR manifest."
+    },
+    {
+      "at": "2026-07-18T07:34:11Z",
+      "status": "github_checks_pending",
+      "note": "PR #3162 opened against main from the scoped branch. Initial GitHub checks started on head a349c665ec01aa32afa71f18a9e1c4d6ce4ccf10; this ledger update will become the final pushed head and must receive a fresh exact-head check and Codex review verdict."
     }
   ],
-  "updated_at": "2026-07-18T07:32:55Z"
+  "updated_at": "2026-07-18T07:34:11Z"
 }
 }
