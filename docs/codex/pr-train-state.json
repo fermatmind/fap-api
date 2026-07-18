@@ -97381,8 +97381,8 @@
     "depends_on": [
       "SOLO-OWNER-CAREER-SEO-REVIEW-04"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "2c21a828cfd37f29e6892b88353535c15d0a404a",
+    "status": "github_checks_pending",
+    "commit_sha": "f9f0a3175a0413957be5676f0e564e4e65597350",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3172",
     "checks": {
       "dependency": {
@@ -97391,17 +97391,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the fifteenth exact-head review repair, focused approval/registry validation passed 25 tests/529 assertions and the exact runtime-freeze contract passed 367/759. The exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five, Enneagram 10/369, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove Basic Authorization values are fully removed from error/audit output and failed step-up attempts are limited per actor/action before verifier invocation, with success clearing only its own bucket."
+        "evidence": "After the sixteenth exact-head review repair, focused approval/registry validation passed 26 tests/536 assertions and the exact runtime-freeze contract passed 367/759. The guarded exact manifest full bash backend/scripts/ci_verify_mbti.sh gate completed again through Big Five 1530/188021, Enneagram, personality 71/5383, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue and downstream regression gates with zero failures. Scoped Pint, PHP syntax, Composer strict validation, JSON/YAML, generated registry parity, exact 14-path allowlist, and diff checks passed. Dynamic regressions prove a distinct team-separated administrator without admin.approval.review cannot approve, reject, or bind legacy governance through direct service calls."
       },
       "github": {
-        "status": "passed",
-        "evidence": "Exact implementation-plus-ledger head ed642827e359e0a03e6ac9390a9a067baa3a31d2 passed all nine required CI/code-scanning checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Exact-head Codex review reported no major issues, all 21 review threads are resolved, and GitHub reports MERGEABLE/CLEAN."
+        "status": "pending",
+        "evidence": "Final ready-to-merge ledger head 3fbb727fde061fadecef5f1fb9f380525dd6e5ef passed all nine checks, but its exact-head Codex review found one valid P2: team-separated direct service calls did not require admin.approval.review. The service boundary and approve/reject/legacy-bind regressions are repaired in implementation commit f9f0a3175a0413957be5676f0e564e4e65597350; local gates passed, and the push/check/review rerun is pending."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97554,9 +97554,14 @@
         "at": "2026-07-18T19:06:05Z",
         "status": "ready_to_merge",
         "note": "Exact round-15 implementation-plus-ledger head ed642827e359e0a03e6ac9390a9a067baa3a31d2 passed all nine required checks. Exact-head Codex review reported no major issues, both newly repaired P2 threads and all 21 total review threads are resolved, GitHub reports MERGEABLE/CLEAN, the isolated worktree is clean, and semantic scope remains exactly fourteen manifest-allowed paths. This final ready_to_merge ledger-only commit must itself pass required checks, exact-head review, and a zero-unresolved-thread pre-merge audit before squash merge."
+      },
+      {
+        "at": "2026-07-18T19:23:26Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Sixteenth exact-head review on ready ledger head 3fbb727fde061fadecef5f1fb9f380525dd6e5ef found one valid P2: team-separated policy enforced distinctness but not admin.approval.review at the reusable service boundary. The service now resolves the actor and requires that permission before approve, reject, legacy bind, and executable-evidence validation. Direct-service regressions cover all three mutation entries. Focused approval/registry tests passed 26/536, runtime-freeze 367/759, scoped Pint/PHP syntax, Composer strict, structured-file/diff/exact 14-path checks, and the guarded full ci_verify_mbti.sh gate all passed. Generated Big Five files were restored exactly. No real high-risk action or production mutation occurred."
       }
     ],
-    "updated_at": "2026-07-18T19:06:05Z"
+    "updated_at": "2026-07-18T19:23:26Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
