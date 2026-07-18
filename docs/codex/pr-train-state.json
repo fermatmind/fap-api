@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "0e6196e434b9d9d0698d786dbf0247d32054b384",
+    "status": "github_checks_pending",
+    "commit_sha": "92184869ed9af952957b860240b0644253f9312d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97260,7 +97260,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine required CI/code-scanning checks passed on 463b56213aa7b624f0d6b7dc1b38ab60e5e1e122. The fifteenth same-scope review repair is locally green and awaiting commit/push before exact-head checks rerun."
+        "evidence": "All nine required CI/code-scanning checks passed on 463b56213aa7b624f0d6b7dc1b38ab60e5e1e122. The fifteenth and sixteenth same-scope review repairs were committed and pushed in 92184869ed9af952957b860240b0644253f9312d; exact-head checks are rerunning."
       }
     },
     "scope_validation": {
@@ -97464,8 +97464,13 @@
         "at": "2026-07-18T14:58:54Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "All nine checks passed on ledger head 463b56213aa7b624f0d6b7dc1b38ab60e5e1e122, but final review found fifteenth and sixteenth valid P2s. Gates had accepted ready_lkg or legacy_migratable for a stale candidate even though route authorization required active payload plus its exact published snapshot; additionally, a later targeted detail warm could replace that active version without carrying the snapshot forward. The repair preserves LKG/legacy recovery for already-published materialized authority, requires ready_active plus same-version published exposure authority before first exposure, and copies a validated snapshot to every targeted-warm version before switching its active pointer, including the forget path. Regressions prove candidate LKG/legacy stays 404, published recovery remains readable, ordinary and forget warm keep the route fresh, and later directory warm retains the row. The full Career suite passes 106 tests / 892 assertions plus 2 / 6 Big Five freeze assertions; 32 Pint paths, Composer/YAML/JSON/diff, and exact thirty-five-path scope validation are green. No production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-18T15:00:53Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed shared first-exposure readiness plus snapshot-preserving targeted warm as 92184869ed9af952957b860240b0644253f9312d. Replied to the fifteenth and sixteenth review findings with exact implementation and regression evidence, then resolved both threads. Exact-head required checks are running; no production cache, DB, CMS, sitemap runtime, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T14:58:54Z"
+    "updated_at": "2026-07-18T15:00:53Z"
   }
 }
