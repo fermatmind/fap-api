@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
@@ -103,6 +103,32 @@ function sha256(buffer) {
   return createHash('sha256').update(buffer).digest('hex');
 }
 
+async function contentTreeAuthority(sourceRoot) {
+  const pageRoot = path.join(sourceRoot, 'pages');
+  const pagePaths = [];
+  const walk = async (directory) => {
+    for (const item of await readdir(directory, { withFileTypes: true })) {
+      const target = path.join(directory, item.name);
+      if (item.isDirectory()) await walk(target);
+      else if (target.endsWith('.md')) pagePaths.push(target);
+    }
+  };
+  await walk(pageRoot);
+  pagePaths.sort((left, right) => Buffer.compare(
+    Buffer.from(path.relative(sourceRoot, left).split(path.sep).join('/'), 'utf8'),
+    Buffer.from(path.relative(sourceRoot, right).split(path.sep).join('/'), 'utf8'),
+  ));
+  const digest = createHash('sha256');
+  for (const pagePath of pagePaths) {
+    const relativePath = path.relative(sourceRoot, pagePath).split(path.sep).join('/');
+    digest.update(Buffer.from(relativePath, 'utf8'));
+    digest.update(Buffer.from([0]));
+    digest.update(await readFile(pagePath));
+    digest.update(Buffer.from([0]));
+  }
+  return { fileCount: pagePaths.length, sha256: digest.digest('hex') };
+}
+
 function csvCell(value) {
   const text = String(value ?? '');
   return /[",\n\r]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
@@ -187,6 +213,12 @@ async function main() {
   const sourceManifest = JSON.parse(await readFile(path.join(sourceRoot, 'package-manifest.json'), 'utf8'));
   if (sourceManifest.content_hash_sha256 !== SOURCE_CONTENT_SHA256 || sourceManifest.content_file_count !== 52) {
     throw new Error('External reviewed source tree is not the locked 52-page authority.');
+  }
+  const sourceTree = await contentTreeAuthority(sourceRoot);
+  if (sourceTree.fileCount !== sourceManifest.content_file_count
+    || sourceTree.sha256 !== sourceManifest.content_hash_sha256
+    || sourceTree.sha256 !== release.source_content_sha256) {
+    throw new Error('External source page tree does not match the locked zh-CN content hash.');
   }
   const sourceRegistryPath = path.join(sourceRoot, 'research/source-registry.json');
   const sourceRegistryBytes = await readFile(sourceRegistryPath);
