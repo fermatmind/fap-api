@@ -97064,8 +97064,8 @@
     "depends_on": [
       "SOLO-OWNER-CMS-REVIEW-02"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": "f1316d75ff9701b23e00593aaa968f80a1c43068",
+    "status": "ready_to_merge",
+    "commit_sha": "8a577dcc340c2fc7fb56c29d38d7df1a2f217b06",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3162",
     "checks": {
       "dependency": {
@@ -97077,14 +97077,14 @@
       "evidence": "Passed the focused Personality review suite (99 tests, 1279 assertions), the Big Five runtime-freeze regression (2 tests, 6 assertions), expanded Enneagram workspace/promotion/text-only/binder/closeout coverage, changed-PHP syntax lint, Pint on all 18 changed PHP files, backend Composer strict validation, YAML/JSON parsing, git diff checks, exact allowed-path validation, and the complete bash backend/scripts/ci_verify_mbti.sh gate. The first complete gate exposed eight Big Five release-linkage/rollback fixtures whose reviewer was not configured as the solo owner; the same-scope fixtures were corrected, their focused suite passed with 14 tests and 83 assertions, and the complete gate passed on rerun. Final review then bounded the 64-target MBTI batch scope identity with a deterministic hash and required the solo-owner service caller to provide an explicit actor instead of inferring owner identity; the focused suite passed with 34 tests and 459 assertions, and the complete gate passed again from the final worktree, including 1510 Big Five tests with 181790 assertions plus Enneagram, MBTI, migration, security, OpenAPI, and dependency gates. Exact-head Codex review then found that compact Enneagram attestations could bind but could not pass legacy-only closeout/resume/readback. The same-scope repair normalized compact attestations into the binder's exact 116 private rows, added mutually exclusive --attestation command support, and passed V223 (6 tests), V224 (59 tests, 611 assertions), 23-file PHP lint/Pint, Composer/YAML/JSON/diff checks, 27-path scope validation with zero outside paths, and the complete gate again. A later exact-head review found that the registered but unwired MBTI cross-type authority was falsely marked active; commit ff4c34dafff285b826126c4e50dc2454cd18434c keeps it policy-registered and adapter-pending. Another exact-head review found stale bound evidence could survive owner rotation or a mode change; commit 9487f37476ab89635633e6103425ab7d9ea9c4d6 requires the current solo-owner mode and configured owner for reuse, rebinds MBTI evidence after rotation, and rejects stale RIASEC evidence. Focused validation passed with 48 tests and 782 assertions. After a shared temporary SQLite corruption caused a uniform 15-test/0-assertion environment failure, the corrupt file was preserved under /tmp and a clean complete gate passed, including 1510 Big Five tests with 181790 assertions and the previously failing CommerceOrderReadFallback suite with 15 tests and 163 assertions. All 23 PR PHP files passed syntax/Pint, Composer/YAML/JSON/diff checks passed, and exact scope remained 27 paths with zero outside paths. Generated Big Five compiled timestamps/hashes produced by validation were restored with exact reverse patches and are absent from the PR diff."
       },
     "github": {
-      "status": "pending",
-      "evidence": "PR #3162 is open from codex/solo-owner-personality-review-03 to main. Big Five solo-owner capability repair f1316d75ff9701b23e00593aaa968f80a1c43068 passed focused and complete local validation; required checks and exact-head Codex review are pending after push, and no merge is permitted until both pass on the final head."
+      "status": "passed",
+      "evidence": "All nine GitHub checks passed on exact head 8a577dcc340c2fc7fb56c29d38d7df1a2f217b06: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Exact-head Codex review reported no major issues, all review threads are resolved, and GitHub reports CLEAN/MERGEABLE."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97212,9 +97212,14 @@
       "at": "2026-07-18T10:07:06Z",
       "status": "review_fix_local_checks_passed",
       "note": "Resolved exact-head Codex P2 feedback in implementation commit f1316d75ff9701b23e00593aaa968f80a1c43068 by applying the configured solo-owner condition to Big Five approve/reject capability reporting as well as submit-time enforcement. The regression proves the configured owner retains both capabilities, an equally permissioned non-owner receives neither, and the existing team-separated reviewer behavior remains enabled. Focused validation passed 21 tests/121 assertions; Pint, Composer/YAML/JSON/diff checks and PR-semantic 27-path/zero-outside validation passed; and the complete ci_verify_mbti.sh gate exited zero with 1510 Big Five tests/181794 assertions. Validation-generated Big Five compiled timestamps and hashes were restored exactly. No production/CMS/database/search/cache/media/publish/promotion/deploy action occurred."
+    },
+    {
+      "at": "2026-07-18T10:20:56Z",
+      "status": "ready_to_merge",
+      "note": "Exact implementation-plus-ledger head 8a577dcc340c2fc7fb56c29d38d7df1a2f217b06 passed all nine GitHub checks and exact-head Codex review reported no major issues. All review threads are resolved, GitHub reports CLEAN/MERGEABLE, the worktree is clean, and PR-semantic scope revalidation remains 27 paths with zero outside the manifest allowlist. This ready_to_merge ledger-only commit must itself pass the complete required-check set and exact-head review before squash merge."
     }
   ],
-  "updated_at": "2026-07-18T10:07:06Z"
+  "updated_at": "2026-07-18T10:20:56Z"
 },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
