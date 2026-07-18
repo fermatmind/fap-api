@@ -1,6 +1,8 @@
 # Career detail atomic exposure
 
-Career detail exposure is fail-closed against the same cache-readiness contract used by the coverage audit. A target locale is ready only when its detail payload is available through `ready_active`, `ready_lkg`, or `legacy_migratable` state.
+Career detail exposure is fail-closed against the same cache-readiness chain used by the coverage audit. For already-published materialized authority, `ready_active`, `ready_lkg`, and `legacy_migratable` remain valid recovery states. While materialized authority is still a pre-promotion candidate, first exposure requires `ready_active` plus the exact same-version published exposure snapshot; LKG or legacy alone cannot authorize a route, directory row, job-index row, or promotion gate.
+
+If a targeted detail warm replaces the active version while materialized authority is still catching up, it carries the validated published exposure snapshot forward to the new immutable version before switching the active pointer. This applies with and without `--forget-job-detail`, so routine cache repair cannot revoke an already-authorized snapshot-backed route.
 
 The required release order is:
 

@@ -294,11 +294,26 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     public function jobDetailCacheIsReady(string $slug, string $publicLocale = 'zh-CN'): bool
     {
-        return in_array(
-            $this->jobDetailCacheReadiness($slug, $publicLocale)['classification'],
-            ['ready_active', 'ready_lkg', 'legacy_migratable'],
-            true,
-        );
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+        if (! in_array($readiness['classification'], ['ready_active', 'ready_lkg', 'legacy_migratable'], true)) {
+            return false;
+        }
+
+        $materializedItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+        if ($this->jobDetailProjectionItemIsPublished($materializedItem)) {
+            return true;
+        }
+
+        // A stale candidate materialization may use only the active payload
+        // paired with its exact published exposure snapshot. LKG and legacy
+        // remain recovery paths for already-published materialized authority;
+        // they can never become first-exposure authority by themselves.
+        return $readiness['classification'] === 'ready_active'
+            && $this->jobDetailProjectionItemIsPublished(
+                $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale),
+            );
     }
 
     private function dispatchJobDetailWarm(string $slug, string $publicLocale): void
@@ -387,12 +402,28 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         $cacheKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
+        $materializedProjectionItem = $this->runtimePublishProjection->itemForSlug(
+            $normalizedSlug,
+            $normalizedLocale,
+        );
+        $effectiveProjectionItem = $this->effectiveJobDetailProjectionItem(
+            $normalizedSlug,
+            $normalizedLocale,
+        );
+        $snapshotBackedProjectionItem = ! $this->jobDetailProjectionItemIsPublished($materializedProjectionItem)
+            && $this->jobDetailProjectionItemIsPublished($effectiveProjectionItem)
+                ? $effectiveProjectionItem
+                : null;
         if ($forgetFirst) {
             $this->forgetJobDetailPayload($normalizedSlug, $normalizedLocale);
         }
 
         $started = hrtime(true);
-        $payload = $this->buildJobDetailReadModel($normalizedSlug, $normalizedLocale);
+        $payload = $this->buildJobDetailReadModel(
+            $normalizedSlug,
+            $normalizedLocale,
+            $snapshotBackedProjectionItem,
+        );
         $buildMs = round((hrtime(true) - $started) / 1_000_000, 3);
         if ($payload !== null && $buildMs > 2000) {
             throw new \RuntimeException(sprintf(
@@ -401,7 +432,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 $normalizedLocale,
             ));
         }
-        $version = $payload === null ? null : $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $payload);
+        $version = $payload === null ? null : $this->publishJobDetailReadModel(
+            $normalizedSlug,
+            $normalizedLocale,
+            $payload,
+            $snapshotBackedProjectionItem,
+        );
 
         return [
             'cache_key' => $cacheKey,
@@ -598,16 +634,57 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
     }
 
-    /** @param array<string, mixed> $payload */
-    public function publishJobDetailReadModel(string $slug, string $publicLocale, array $payload): string
-    {
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  array<string, mixed>|null  $exposureProjectionItem
+     */
+    public function publishJobDetailReadModel(
+        string $slug,
+        string $publicLocale,
+        array $payload,
+        ?array $exposureProjectionItem = null,
+    ): string {
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        if (
+            $exposureProjectionItem !== null
+            && ! $this->jobDetailExposureProjectionSnapshotIsValid(
+                $exposureProjectionItem,
+                $normalizedSlug,
+                $normalizedLocale,
+            )
+        ) {
+            throw new \InvalidArgumentException(sprintf(
+                'Career detail exposure projection is invalid for %s (%s).',
+                $normalizedSlug,
+                $normalizedLocale,
+            ));
+        }
+
         $version = (string) Str::ulid();
         $activeKey = $this->jobDetailActiveVersionKey($normalizedSlug, $normalizedLocale);
         $previousVersion = Cache::get($activeKey);
 
         Cache::forever($this->jobDetailVersionPayloadKey($normalizedSlug, $normalizedLocale, $version), $payload);
+        if ($exposureProjectionItem !== null) {
+            $exposureProjectionKey = $this->jobDetailExposureProjectionVersionKey(
+                $normalizedSlug,
+                $normalizedLocale,
+                $version,
+            );
+            Cache::forever($exposureProjectionKey, $exposureProjectionItem);
+            if (! $this->jobDetailExposureProjectionSnapshotIsValid(
+                Cache::get($exposureProjectionKey),
+                $normalizedSlug,
+                $normalizedLocale,
+            )) {
+                throw new \RuntimeException(sprintf(
+                    'Career detail exposure projection write verification failed for %s (%s).',
+                    $normalizedSlug,
+                    $normalizedLocale,
+                ));
+            }
+        }
         if (is_string($previousVersion) && $previousVersion !== '') {
             Cache::forever($this->jobDetailLkgVersionKey($normalizedSlug, $normalizedLocale), $previousVersion);
         }

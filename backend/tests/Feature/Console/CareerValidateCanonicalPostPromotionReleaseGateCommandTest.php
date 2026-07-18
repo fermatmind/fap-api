@@ -6,10 +6,12 @@ namespace Tests\Feature\Console;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerValidateCanonicalPostPromotionReleaseGateCommandTest extends TestCase
@@ -19,6 +21,10 @@ final class CareerValidateCanonicalPostPromotionReleaseGateCommandTest extends T
         parent::setUp();
 
         Cache::flush();
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(defaultItemPublished: true),
+        );
         app(PublicCareerAuthorityResponseCache::class)->publishJobDetailReadModel('actors', 'en', [
             'identity' => ['canonical_slug' => 'actors'],
             'fixture' => true,

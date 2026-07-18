@@ -61,15 +61,22 @@ final class CanonicalPostPromotionReleaseGateValidator
                 ]);
             }
 
-            $readiness = $this->preparedDetailReadiness(
+            $preparedReadiness = $this->preparedDetailReadiness(
                 $preparedDetailCaches,
                 $expectedRow['slug'],
                 $expectedRow['locale'],
-            ) ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
+            );
+            $readiness = $preparedReadiness ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
                 $expectedRow['slug'],
                 $expectedRow['locale'],
             );
-            if (! $this->cacheReadinessPasses($readiness)) {
+            $readinessPasses = $preparedReadiness !== null
+                ? $this->cacheReadinessPasses($preparedReadiness)
+                : $this->detailExposureReadiness->jobDetailCacheIsReady(
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                );
+            if (! $readinessPasses) {
                 $failures[] = $this->failure(
                     'post_promotion_detail_cache_not_ready',
                     $expectedRow['slug'],

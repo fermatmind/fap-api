@@ -72,6 +72,19 @@ final class CanonicalPostPromotionReleaseGateValidatorTest extends TestCase
         ], $result['required_exposure_sequence']);
     }
 
+    public function test_validator_rejects_lkg_without_first_exposure_authorization(): void
+    {
+        $validator = $this->validator(new CareerJobDetailExposureReadinessFixture(
+            classifications: ['actors|en' => 'ready_lkg'],
+            exposureReady: ['actors|en' => false],
+        ));
+
+        $result = $validator->validate($this->manifest(), $this->truth(), $this->projection());
+
+        $this->assertSame('blocked', $result['status']);
+        $this->assertSame('ready_lkg', data_get($result, 'failures.0.context.classification'));
+    }
+
     private function validator(?CareerJobDetailExposureReadinessFixture $readiness = null): CanonicalPostPromotionReleaseGateValidator
     {
         return new CanonicalPostPromotionReleaseGateValidator(

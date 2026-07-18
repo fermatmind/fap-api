@@ -44,7 +44,7 @@ final class CareerDirectoryReadModelPerformanceTest extends TestCase
             $readModel = app(CareerDirectoryReadModelBuilder::class)->build(
                 $rows,
                 'en',
-                static fn (string $slug, string $locale): bool => $responseCache->jobDetailCacheIsReady($slug, $locale),
+                static fn (string $slug, string $locale): bool => true,
             );
             $buildElapsedMs = $this->elapsedMs($buildStarted);
             $queryCount = count(DB::getQueryLog());

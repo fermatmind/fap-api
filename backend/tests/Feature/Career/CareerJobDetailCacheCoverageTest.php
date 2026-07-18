@@ -33,6 +33,8 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
             $cache->publishJobDetailReadModel('active', $locale, ['slug' => 'active']);
             $this->seedLkgOnly($cache, 'lkg', $locale);
             Cache::forever($cache->jobDetailCacheKey('legacy', $locale), ['slug' => 'legacy']);
+            $this->assertTrue($cache->jobDetailCacheIsReady('lkg', $locale));
+            $this->assertTrue($cache->jobDetailCacheIsReady('legacy', $locale));
             Cache::forever($cache->jobDetailActiveVersionKey('missing-payload', $locale), 'ghost');
             Cache::forever($cache->jobDetailActiveVersionKey('broken-pointer', $locale), ['not-a-version']);
             Cache::forever($cache->jobDetailActiveVersionKey('invalid-payload', $locale), 'invalid');
@@ -57,6 +59,10 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertSame(1, $report['excluded_count']);
         $this->assertSame(0.4, $report['coverage_ratio']);
         $this->assertSame('incomplete', $report['status']);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->assertSame('stale', $cache->jobDetailRead('lkg', $locale)['state']);
+            $this->assertSame('stale', $cache->jobDetailRead('legacy', $locale)['state']);
+        }
         foreach ($report['examples'] as $examples) {
             $this->assertCount(1, $examples);
         }

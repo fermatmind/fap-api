@@ -379,6 +379,26 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
             array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
             'A later broad authority warm must preserve a verified snapshot-backed promotion.',
         );
+
+        $versionBeforeWarm = $cache->jobDetailCacheReadiness('actuaries', 'en')['version'];
+        $warm = $cache->warmJobDetailPayload('actuaries', 'en');
+        $this->assertSame('cached', $warm['status']);
+        $this->assertNotSame($versionBeforeWarm, $warm['version']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        $forgetWarm = $cache->warmJobDetailPayload('actuaries', 'en', true);
+        $this->assertSame('cached', $forgetWarm['status']);
+        $this->assertNotSame($warm['version'], $forgetWarm['version']);
+        $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        $cache->warmDirectoryReadModels(['en']);
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+            'A targeted detail warm must retain snapshot-backed directory authority.',
+        );
     }
 
     public function test_candidate_request_cannot_purge_a_staged_pre_exposure_payload(): void
@@ -406,6 +426,36 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertSame($prepared['version'], $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
         $this->assertSame('fresh', $cache->jobDetailRead('actuaries', 'en')['state']);
         $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
+    }
+
+    public function test_stale_candidate_cannot_use_lkg_or_legacy_as_first_exposure_authority(): void
+    {
+        $candidateProjection = $this->candidateProjection(['actuaries']);
+        $this->writeProjection($candidateProjection);
+        $this->writeMaterializedProjection($candidateProjection);
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+        $this->assertSame('pass', $cache->activatePreparedJobDetailPayloadsForExposure([$prepared])['status']);
+
+        $lkgKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':actuaries:en:lkg';
+        Cache::forever($lkgKey, $prepared['version']);
+        Cache::forget($cache->jobDetailActiveVersionKey('actuaries', 'en'));
+
+        $this->assertSame('ready_lkg', $cache->jobDetailCacheReadiness('actuaries', 'en')['classification']);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
+
+        Cache::forget($lkgKey);
+        Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), ['fixture' => 'legacy']);
+
+        $this->assertSame('legacy_migratable', $cache->jobDetailCacheReadiness('actuaries', 'en')['classification']);
+        $this->assertFalse($cache->jobDetailCacheIsReady('actuaries', 'en'));
+        $this->assertSame('not_found', $cache->jobDetailRead('actuaries', 'en')['state']);
     }
 
     public function test_apply_reports_committed_write_as_not_rolled_back_when_remediation_is_unverified(): void

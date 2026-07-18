@@ -108,7 +108,7 @@ final class CareerRuntimePublishProjectionValidator
             && ($detailRouteEnabled === true || $datasetVisible)
         ) {
             $readiness = $this->detailExposureReadiness->jobDetailCacheReadiness($slug, $locale);
-            if (! $this->cacheReadinessPasses($readiness)) {
+            if (! $this->detailExposureReadiness->jobDetailCacheIsReady($slug, $locale)) {
                 $failures[] = $this->failure($index, $slug, 'detail_cache_not_ready_for_exposure', [
                     'locale' => $locale,
                     'classification' => $readiness['classification'],
@@ -130,16 +130,6 @@ final class CareerRuntimePublishProjectionValidator
             'reason' => $reason,
             'context' => $context,
         ], static fn (mixed $value): bool => $value !== null && $value !== []);
-    }
-
-    /** @param array{classification: string, payload: array<string, mixed>|null, version: string|null} $readiness */
-    private function cacheReadinessPasses(array $readiness): bool
-    {
-        return in_array(
-            $readiness['classification'],
-            ['ready_active', 'ready_lkg', 'legacy_migratable'],
-            true,
-        );
     }
 
     /**

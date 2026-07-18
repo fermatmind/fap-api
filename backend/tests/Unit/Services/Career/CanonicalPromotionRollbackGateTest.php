@@ -141,6 +141,28 @@ final class CanonicalPromotionRollbackGateTest extends TestCase
         $this->assertSame('broken_pointer', data_get($failure, 'context.classification'));
     }
 
+    public function test_post_promotion_gate_rejects_lkg_without_first_exposure_authorization(): void
+    {
+        $result = $this->gate(new CareerJobDetailExposureReadinessFixture(
+            classifications: ['actors|en' => 'ready_lkg'],
+            exposureReady: ['actors|en' => false],
+        ))->validatePostPromotion(
+            array_merge($this->manifest(), [
+                'rollout_state' => CanonicalExpansionManifestService::ROLLOUT_STATE_PUBLISHED,
+                'projection_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+            ]),
+            ['items' => [
+                $this->publishedTruthItem('actors', 'en'),
+                $this->publishedTruthItem('actors', 'zh'),
+            ]],
+        );
+
+        $this->assertSame('blocked', $result['status']);
+        $failure = collect($result['failures'])->firstWhere('reason', 'post_promotion_detail_cache_not_ready');
+        $this->assertSame('en', $failure['locale'] ?? null);
+        $this->assertSame('ready_lkg', data_get($failure, 'context.classification'));
+    }
+
     private function gate(?CareerJobDetailExposureReadinessFixture $readiness = null): CanonicalPromotionRollbackGate
     {
         return new CanonicalPromotionRollbackGate(

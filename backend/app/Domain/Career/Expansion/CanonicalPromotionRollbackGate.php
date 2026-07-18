@@ -121,15 +121,22 @@ final class CanonicalPromotionRollbackGate
                 }
             }
 
-            $readiness = $this->preparedDetailReadiness(
+            $preparedReadiness = $this->preparedDetailReadiness(
                 $preparedDetailCaches,
                 $expectedRow['slug'],
                 $expectedRow['locale'],
-            ) ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
+            );
+            $readiness = $preparedReadiness ?? $this->detailExposureReadiness->jobDetailCacheReadiness(
                 $expectedRow['slug'],
                 $expectedRow['locale'],
             );
-            if (! in_array($readiness['classification'], ['ready_active', 'ready_lkg', 'legacy_migratable', 'ready_staged'], true)) {
+            $readinessPasses = $preparedReadiness !== null
+                ? ($preparedReadiness['classification'] ?? null) === 'ready_staged'
+                : $this->detailExposureReadiness->jobDetailCacheIsReady(
+                    $expectedRow['slug'],
+                    $expectedRow['locale'],
+                );
+            if (! $readinessPasses) {
                 $failures[] = $this->failure(
                     'post_promotion_detail_cache_not_ready',
                     $expectedRow['slug'],

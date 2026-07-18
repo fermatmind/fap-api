@@ -14,6 +14,7 @@ final class CareerJobDetailExposureReadinessFixture implements CareerJobDetailEx
     public function __construct(
         private readonly string $defaultClassification = 'ready_active',
         private readonly array $classifications = [],
+        private readonly array $exposureReady = [],
     ) {}
 
     public function jobDetailCacheReadiness(string $slug, string $publicLocale = 'zh-CN'): array
@@ -31,6 +32,11 @@ final class CareerJobDetailExposureReadinessFixture implements CareerJobDetailEx
 
     public function jobDetailCacheIsReady(string $slug, string $publicLocale = 'zh-CN'): bool
     {
+        $key = strtolower(trim($slug)).'|'.$this->normalizeLocale($publicLocale);
+        if (array_key_exists($key, $this->exposureReady)) {
+            return $this->exposureReady[$key] === true;
+        }
+
         return in_array(
             $this->jobDetailCacheReadiness($slug, $publicLocale)['classification'],
             ['ready_active', 'ready_lkg', 'legacy_migratable'],

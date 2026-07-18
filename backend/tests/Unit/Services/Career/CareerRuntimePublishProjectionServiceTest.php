@@ -216,6 +216,30 @@ final class CareerRuntimePublishProjectionServiceTest extends TestCase
         $this->assertSame('missing_payload', data_get($failure, 'context.classification'));
     }
 
+    public function test_validator_rejects_recovery_cache_that_is_not_authorized_for_first_exposure(): void
+    {
+        $projection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($this->ledger([
+            [
+                'source_slug' => 'actors',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'indexable',
+            ],
+        ]));
+
+        $result = (new CareerRuntimePublishProjectionValidator(
+            new CareerJobDetailExposureReadinessFixture(
+                classifications: ['actors|en' => 'ready_lkg'],
+                exposureReady: ['actors|en' => false],
+            ),
+        ))->validate($projection);
+
+        $failure = collect($result['failures'])->firstWhere('reason', 'detail_cache_not_ready_for_exposure');
+        $this->assertIsArray($failure);
+        $this->assertSame('en', data_get($failure, 'context.locale'));
+        $this->assertSame('ready_lkg', data_get($failure, 'context.classification'));
+    }
+
     /**
      * @param  list<array<string, mixed>>  $rows
      * @return array<string, mixed>
