@@ -60,6 +60,459 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: BIG5-EN52-TRANSLATION-AUTHORITY-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on: []
+    branch: codex/big5-en52-translation-authority-01
+    title: "BIG5-EN52-TRANSLATION-AUTHORITY-01: freeze English translation authority"
+    train_scope: big_five_en52_translation_authority
+    status: user_authorized
+    mode: execute
+    page_count: 0
+    scope:
+      - Resolve and lock the exact reviewed 52-page zh-CN Big Five V3 source authority and its deterministic compiler/package hashes.
+      - Lock the 52-page en-US canonical manifest, zh-to-en identity map, English terminology, source registry, style and scientific boundaries, translation ledger, and reusable validator framework.
+      - Register all ten user-supplied BIG5-EN52 PR-train items without translating a full English page.
+    allowed_paths:
+      - generated/big-five-en52-translation/README.md
+      - generated/big-five-en52-translation/build-authority.mjs
+      - generated/big-five-en52-translation/validate-authority.mjs
+      - generated/big-five-en52-translation/authority/authority-resolution.md
+      - generated/big-five-en52-translation/authority/source-registry.en-US.json
+      - generated/big-five-en52-translation/authority/style-and-claim-boundaries.md
+      - generated/big-five-en52-translation/authority/terminology-glossary.en-US.json
+      - generated/big-five-en52-translation/manifests/canonical-manifest.en-US.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/manifests/zh-en-page-map.csv
+      - generated/big-five-en52-translation/qa/authority-validation.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Translate a complete English page, modify zh-CN source prose, create a placeholder page, or modify fap-web.
+      - Modify CMS/runtime/API, migrations, routes, canonical/hreflang/robots/sitemap/llms/JSON-LD behavior, publisher execution paths, or production configuration.
+      - Write CMS/database/Media Library/search state, publish, promote, deploy, or create a legacy alias content page.
+    validation:
+      - python3 -m py_compile /Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package/qa/validate-authority-package.py
+      - cd /Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package && python3 qa/validate-authority-package.py
+      - node --check generated/big-five-en52-translation/build-authority.mjs
+      - node --check generated/big-five-en52-translation/validate-authority.mjs
+      - node generated/big-five-en52-translation/build-authority.mjs --source-root=/Users/rainie/Desktop/FermatMind-Big-Five-ZH-V3-content-package --reviewed-date=2026-07-19
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=0
+      - cd backend && php artisan test tests/Feature/BigFive/BigFiveZhV3ControlledReleaseTest.php --filter='compiled_fixture_is_exact_deterministic_text_only_release|compiler_serialization_is_byte_stable' --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-HUBS-02
+
+  - id: BIG5-EN52-HUBS-02
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-TRANSLATION-AUTHORITY-01]
+    branch: codex/big5-en52-hubs-02
+    title: "BIG5-EN52-HUBS-02: translate Big Five English hubs"
+    train_scope: big_five_en52_hubs
+    status: user_authorized
+    mode: execute
+    page_count: 2
+    scope:
+      - Translate and localize only the Big Five model hub and 30-facet hub with page claims, translation evidence, QA, and two ledger completions.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/hub/big-five-hub.en-US.md
+      - generated/big-five-en52-translation/pages/facet-hub/facets.en-US.md
+      - generated/big-five-en52-translation/evidence/big-five-hub.claims.json
+      - generated/big-five-en52-translation/evidence/facets.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/hubs-02.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Translate domains, ranges, or facet details; change Task 1 identity/slug authority; modify zh-CN prose, runtime, CMS, fap-web, or legacy aliases.
+    validation:
+      - node --check generated/big-five-en52-translation/validate-authority.mjs
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=2
+      - python3 -m json.tool generated/big-five-en52-translation/evidence/big-five-hub.claims.json >/dev/null
+      - python3 -m json.tool generated/big-five-en52-translation/evidence/facets.claims.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-DOMAINS-03
+
+  - id: BIG5-EN52-DOMAINS-03
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-HUBS-02]
+    branch: codex/big5-en52-domains-03
+    title: "BIG5-EN52-DOMAINS-03: translate five Big Five English domains"
+    train_scope: big_five_en52_domains
+    status: user_authorized
+    mode: execute
+    page_count: 5
+    scope:
+      - Translate only the five locked Big Five domain pages with claims, evidence, QA, and ledger updates.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/domains/**
+      - generated/big-five-en52-translation/evidence/openness.claims.json
+      - generated/big-five-en52-translation/evidence/conscientiousness.claims.json
+      - generated/big-five-en52-translation/evidence/extraversion.claims.json
+      - generated/big-five-en52-translation/evidence/agreeableness.claims.json
+      - generated/big-five-en52-translation/evidence/neuroticism.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/domains-03.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Generate ranges or facet details; modify completed hubs except same-PR link repair; modify zh-CN prose, runtime, CMS, fap-web, or legacy aliases.
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=7
+      - python3 -m json.tool generated/big-five-en52-translation/manifests/translation-ledger.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-RANGES-04
+
+  - id: BIG5-EN52-RANGES-04
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-DOMAINS-03]
+    branch: codex/big5-en52-ranges-04
+    title: "BIG5-EN52-RANGES-04: translate fifteen canonical Big Five ranges"
+    train_scope: big_five_en52_canonical_ranges
+    status: user_authorized
+    mode: execute
+    page_count: 15
+    scope:
+      - Translate the fifteen locked domain-high, domain-mid, and domain-low canonical range pages in five domain cohorts, with page-level QA before advancing cohorts.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/ranges/**
+      - generated/big-five-en52-translation/evidence/*-high.claims.json
+      - generated/big-five-en52-translation/evidence/*-mid.claims.json
+      - generated/big-five-en52-translation/evidence/*-low.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/ranges-04.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Create high-domain, low-domain, emotional-stability, or any other legacy alias page; modify redirect catalog, domains, hubs, zh-CN prose, runtime, CMS, or fap-web.
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=22
+      - python3 -m json.tool generated/big-five-en52-translation/manifests/translation-ledger.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-OPENNESS-FACETS-05
+
+  - id: BIG5-EN52-OPENNESS-FACETS-05
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-RANGES-04]
+    branch: codex/big5-en52-openness-facets-05
+    title: "BIG5-EN52-OPENNESS-FACETS-05: translate six Openness facets"
+    train_scope: big_five_en52_openness_facets
+    status: user_authorized
+    mode: execute
+    page_count: 6
+    scope:
+      - Translate the locked O1-O6 facet details with differentiated definitions, trade-offs, combinations, claims, evidence, QA, and ledger updates.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/facets/imagination.en-US.md
+      - generated/big-five-en52-translation/pages/facets/aesthetics.en-US.md
+      - generated/big-five-en52-translation/pages/facets/feelings.en-US.md
+      - generated/big-five-en52-translation/pages/facets/actions.en-US.md
+      - generated/big-five-en52-translation/pages/facets/ideas.en-US.md
+      - generated/big-five-en52-translation/pages/facets/values.en-US.md
+      - generated/big-five-en52-translation/evidence/O*.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/openness-facets-05.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=28
+      - python3 -m json.tool generated/big-five-en52-translation/manifests/translation-ledger.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06
+
+  - id: BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-OPENNESS-FACETS-05]
+    branch: codex/big5-en52-conscientiousness-facets-06
+    title: "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06: translate six Conscientiousness facets"
+    train_scope: big_five_en52_conscientiousness_facets
+    status: user_authorized
+    mode: execute
+    page_count: 6
+    scope:
+      - Translate the locked C1-C6 facet details without moralizing order, duty, self-discipline, or achievement, with claims, evidence, QA, and ledger updates.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/facets/competence.en-US.md
+      - generated/big-five-en52-translation/pages/facets/order.en-US.md
+      - generated/big-five-en52-translation/pages/facets/dutifulness.en-US.md
+      - generated/big-five-en52-translation/pages/facets/achievement-striving.en-US.md
+      - generated/big-five-en52-translation/pages/facets/self-discipline.en-US.md
+      - generated/big-five-en52-translation/pages/facets/deliberation.en-US.md
+      - generated/big-five-en52-translation/evidence/C*.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/conscientiousness-facets-06.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=34
+      - python3 -m json.tool generated/big-five-en52-translation/manifests/translation-ledger.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-EXTRAVERSION-FACETS-07
+
+  - id: BIG5-EN52-EXTRAVERSION-FACETS-07
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06]
+    branch: codex/big5-en52-extraversion-facets-07
+    title: "BIG5-EN52-EXTRAVERSION-FACETS-07: translate six Extraversion facets"
+    train_scope: big_five_en52_extraversion_facets
+    status: user_authorized
+    mode: execute
+    page_count: 6
+    scope:
+      - Translate the locked E1-E6 facet details while separating social engagement, activity, positive emotion, stimulation preference, and expression intensity, with claims, evidence, QA, and ledger updates.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/facets/warmth.en-US.md
+      - generated/big-five-en52-translation/pages/facets/gregariousness.en-US.md
+      - generated/big-five-en52-translation/pages/facets/assertiveness.en-US.md
+      - generated/big-five-en52-translation/pages/facets/activity.en-US.md
+      - generated/big-five-en52-translation/pages/facets/excitement-seeking.en-US.md
+      - generated/big-five-en52-translation/pages/facets/positive-emotions.en-US.md
+      - generated/big-five-en52-translation/evidence/E*.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/extraversion-facets-07.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=40
+      - python3 -m json.tool generated/big-five-en52-translation/manifests/translation-ledger.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-AGREEABLENESS-FACETS-08
+
+  - id: BIG5-EN52-AGREEABLENESS-FACETS-08
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-EXTRAVERSION-FACETS-07]
+    branch: codex/big5-en52-agreeableness-facets-08
+    title: "BIG5-EN52-AGREEABLENESS-FACETS-08: translate six Agreeableness facets"
+    train_scope: big_five_en52_agreeableness_facets
+    status: user_authorized
+    mode: execute
+    page_count: 6
+    scope:
+      - Translate the locked A1-A6 facet details with the Task 1 names and semantic boundaries, without moralizing high or low Agreeableness, with claims, evidence, QA, and ledger updates.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/facets/trust.en-US.md
+      - generated/big-five-en52-translation/pages/facets/straightforwardness.en-US.md
+      - generated/big-five-en52-translation/pages/facets/altruism.en-US.md
+      - generated/big-five-en52-translation/pages/facets/compliance.en-US.md
+      - generated/big-five-en52-translation/pages/facets/modesty.en-US.md
+      - generated/big-five-en52-translation/pages/facets/tender-mindedness.en-US.md
+      - generated/big-five-en52-translation/evidence/A*.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/agreeableness-facets-08.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=46
+      - python3 -m json.tool generated/big-five-en52-translation/manifests/translation-ledger.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-NEUROTICISM-FACETS-09
+
+  - id: BIG5-EN52-NEUROTICISM-FACETS-09
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-AGREEABLENESS-FACETS-08]
+    branch: codex/big5-en52-neuroticism-facets-09
+    title: "BIG5-EN52-NEUROTICISM-FACETS-09: translate six Neuroticism facets"
+    train_scope: big_five_en52_neuroticism_facets
+    status: user_authorized
+    mode: execute
+    page_count: 6
+    scope:
+      - Translate the locked N1-N6 facet details in non-stigmatizing, non-diagnostic language with claims, evidence, QA, and ledger updates.
+    allowed_paths:
+      - generated/big-five-en52-translation/pages/facets/anxiety.en-US.md
+      - generated/big-five-en52-translation/pages/facets/anger.en-US.md
+      - generated/big-five-en52-translation/pages/facets/depression.en-US.md
+      - generated/big-five-en52-translation/pages/facets/self-consciousness.en-US.md
+      - generated/big-five-en52-translation/pages/facets/impulsiveness.en-US.md
+      - generated/big-five-en52-translation/pages/facets/vulnerability.en-US.md
+      - generated/big-five-en52-translation/evidence/N*.claims.json
+      - generated/big-five-en52-translation/manifests/translation-ledger.json
+      - generated/big-five-en52-translation/qa/neuroticism-facets-09.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=52
+      - python3 -m json.tool generated/big-five-en52-translation/manifests/translation-ledger.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-FINAL-QA-10
+
+  - id: BIG5-EN52-FINAL-QA-10
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-NEUROTICISM-FACETS-09]
+    branch: codex/big5-en52-final-qa-10
+    title: "BIG5-EN52-FINAL-QA-10: unify and validate all 52 English assets"
+    train_scope: big_five_en52_final_qa
+    status: user_authorized
+    mode: execute
+    page_count: 52
+    scope:
+      - Run the ten mandated full-cohort audits, repair all in-scope English pages and claims, regenerate final QA artifacts, and lock deterministic cohort, payload, and file hashes.
+    allowed_paths:
+      - generated/big-five-en52-translation/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify zh-CN source prose, canonical identities, entity keys, slugs, route catalog, API/CMS/runtime, sitemap/llms/schema, fap-web, production configuration, or legacy aliases.
+      - Execute CMS/database/Media Library/search writes, production import, promotion, deployment, SSH, cache clearing, or manual search submission.
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=52
+      - deterministic English package build twice with byte-identical comparison
+      - cd backend && php artisan test tests/Feature/BigFive/BigFiveZhV3ControlledReleaseTest.php --filter='compiled_fixture|preflight' --no-ansi
+      - cd backend && php artisan test tests/Feature/SEO/SitemapXmlTest.php --no-ansi
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - fresh SQLite migration in an isolated mktemp directory
+      - pgrep -af 'vitest|phpunit|composer.*test|ci_verify_mbti|verify_mbti' || true
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && vendor/bin/pint --test
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-COMP-PROJECTION-45
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api

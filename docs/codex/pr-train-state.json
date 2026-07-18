@@ -98244,5 +98244,425 @@
       }
     ],
     "updated_at": "2026-07-18T16:41:40Z"
+  },
+  "BIG5-EN52-TRANSLATION-AUTHORITY-01": {
+    "id": "BIG5-EN52-TRANSLATION-AUTHORITY-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-translation-authority-01",
+    "title": "BIG5-EN52-TRANSLATION-AUTHORITY-01: freeze English translation authority",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3181",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied an explicit continuous /goal with the exact ten PR ids, branches, titles, scopes, dependencies, validation gates, merge lifecycle, and manifest/state authorization."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "This first item has no dependency. The branch was created from exact origin/main c2f627275bd5c300c5f17fea3a6301cd3e7728e7 after fetch, branch-conflict checks, and worktree isolation."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The reviewed external zh-CN source validator passed 52 pages, 170 verified claims, 261 FAQs, zero invalid source/link/duplicate/scientific/stale-report gates, and content SHA 056b10d3f640d0cf7da35ec7bc99b009408049e75c1e25aa8e760eb8641ea8d5. The current origin/main compiler rebuilt the checked-in V3 release byte-identically at file SHA 83536987f7edc73d668f481942c94f6bf549abf23a0e498941f47bc56726490d. The EN52 builder and validator passed 52 unique mappings, zero aliases/unknowns/duplicate slugs/unresolved terms/unresolved source identities, translated=0, pending=52, and zero writes. The focused controlled-release suite passed 2 tests / 6042 assertions; Node syntax, all generated JSON, YAML/state parsing, diff checks, and exact 13-path scope validation passed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All 9 GitHub checks passed through reference-definition visibility head de56e497d82527c1ef0727cddb9f91470997ee6b. Twenty-six actionable Codex review findings were accepted; the final completed-page metadata-contract head must repeat the same 9-check gate before merge."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-18T18:36:28Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact current origin/main while preserving the unrelated untracked .workbuddy directory. The reviewed 52-page zh-CN source tree, compiler, publisher, route catalog, locked release package, claims, FAQ, and source registry are being resolved before any translation; CMS, runtime, production, search, media, deployment, fap-web, and legacy alias writes remain zero."
+      },
+      {
+        "at": "2026-07-18T18:42:01Z",
+        "status": "local_validation_passed",
+        "note": "Frozen the unique 52-page source authority, en-US editorial/backend-en route mapping, 30-facet terminology, eleven-source registry, style/claim boundaries, 52-entry pending ledger, and reusable page/claim/CJK/link/duplicate validator. All Task 1 gates and exact 13-path scope validation passed; complete English pages remain zero and CMS/runtime/production/media/search/deploy/fap-web changes remain zero."
+      },
+      {
+        "at": "2026-07-18T18:43:00Z",
+        "status": "committed",
+        "note": "Committed the exact 13-path Task 1 authority scope as 11f70252e0fe1aa0def95a09a7cb47d871143e9e after all required local and staged checks passed. The unrelated .workbuddy directory remains untracked and unstaged."
+      },
+      {
+        "at": "2026-07-18T18:45:00Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3181. GitHub required checks will be evaluated on the final ledger head before any merge or PR2 work; no staging or deployment workflow is awaited."
+      },
+      {
+        "at": "2026-07-18T18:55:00Z",
+        "status": "github_review_fix_in_progress",
+        "note": "All nine checks passed on f5a50041457d001fa4eb8422cbd73240dba9b4fd, then two valid P2 review findings were accepted. The authority builder now requires an explicit reviewed-date and records Asia/Shanghai instead of hiding date provenance in a constant; commit_sha remains null until the real squash merge SHA exists."
+      },
+      {
+        "at": "2026-07-18T19:06:00Z",
+        "status": "ready_to_merge",
+        "note": "The reviewed implementation head ddb72c1412e011ba8243f0117d7eba68a007bd79 passed all 9 GitHub checks and has no unresolved review thread. This final ledger-only transition records that evidence; merge remains contingent on the same checks passing again on the resulting final head."
+      },
+      {
+        "at": "2026-07-18T19:17:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two additional valid P2 findings were accepted after ledger head 7f018f96dc8337eb6bbcb18e559d9750686fbd28 passed 9/9 checks. The reusable validator now accepts and integrity-checks pending/completed ledger mixtures for later train items, while the builder rejects any external source registry whose raw SHA differs from the locked zh-CN release. Focused validation passes; merge remains contingent on the final review-fix head passing all required checks and having zero unresolved threads."
+      },
+      {
+        "at": "2026-07-18T19:26:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "A fifth valid P2 was accepted after review-fix head a5097e17d79dc64a54a0153f416e6255aedb849b passed 9/9 checks. The builder now independently recomputes content_tree_sha256.v1 across every UTF-8-sorted pages/**/*.md path and byte payload, requires exactly 52 files, and matches both the external manifest and locked release SHA before reading any page into the EN52 manifest. A copied tree with one edited Markdown page was rejected by the negative probe."
+      },
+      {
+        "at": "2026-07-18T19:38:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two further valid P2 findings were accepted after source-tree head f6cc1bb6e9c9c505c3b0a5a796c4ee96f718089f passed 9/9 checks. Completed claim sidecars must now preserve every locked per-page claim id, claim type, and source-id mapping, retain registry-exact visible citations, and expose the complete page-level translation evidence contract. Completed pages also fail on any hero, inline, OG, Twitter, image, media, or thumbnail frontmatter key in addition to Markdown/HTML body media."
+      },
+      {
+        "at": "2026-07-18T19:46:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two more valid P2 findings were accepted after claim/media head fda2adfa0128024e5eadf576f630db90d6db5e45 passed 9/9 checks. The canonical manifest now remains immutable at its initial pending assignment state while the translation ledger alone records dynamic completion, matching later PR path scopes. Frontmatter inspection now covers raw top-level and nested YAML keys with underscore, hyphen, or camel-style media prefixes, closing hero-image, og-image, twitter-image, and nested metadata bypasses."
+      },
+      {
+        "at": "2026-07-18T19:58:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two additional valid P2 findings were accepted after manifest/frontmatter head 8755ec230afaf6724120fcdf0b2d824be1c4b05d passed 9/9 checks. Every canonical manifest entry is now cross-checked against the locked release authority key, entity, source file, source IDs, runtime projection, zh/en canonical, slug, output, and claim path, while the complete immutable manifest and zh-en CSV map have byte hashes. The projected English source registry and terminology glossary now have deterministic hashes embedded in and enforced by the frozen manifest."
+      },
+      {
+        "at": "2026-07-18T20:08:00Z",
+        "status": "github_review_fixes_completed",
+        "note": "Two more valid P2 findings were accepted after canonical/registry head 566a41c33d6c91c32ace4c081e75143d54be0481 passed 9/9 checks. Every completed English page must now match the locked zh-CN H2 and FAQ counts and provide ordered one-to-one section and FAQ translation maps. The text-only gate now rejects inline, full/collapsed/shortcut reference-style Markdown images, data-image payloads, and HTML image, picture, source, video, audio, SVG, iframe, or object tags."
+      },
+      {
+        "at": "2026-07-18T20:20:31Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on coverage/media-syntax head 774c4b1a3a48e060f8b4f0efe79a8e5b903d87ec, then three valid P2 findings were accepted. Completed pages now use an explicit frontmatter schema and tokenized camel/snake/kebab media-key detection, reject hidden HTML comments and raw HTML anchors, audit inline and reference-definition Markdown internal links, and count only reader-visible body text for words, sections, duplicates, and visible claims. The reproducible authority build and translated=0 validator pass with all write counters at zero."
+      },
+      {
+        "at": "2026-07-18T20:29:37Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on visible-surface enforcement head 01a73e59f270547e9504e8bef92203e373bd6bf1, then two valid P2 findings were accepted. Completed pages now lock editorial reviewer metadata to the exact 52-page source cohort and require clinical_reviewed=false plus expert_endorsement=false; arbitrary reviewer, clinical, or endorsement claims fail closed. Any raw HTML element is rejected, so hidden spans/styles cannot satisfy reader-visible claims or citations. The reproducible authority build and translated=0 validator pass with all write counters at zero."
+      },
+      {
+        "at": "2026-07-18T20:38:10Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on authority-metadata/raw-HTML head 87eba19423247deefad10c599fb84f92aa928551, then two valid P2 findings were accepted. The visible-evidence gate now projects Markdown reader-visible text, removes link destinations, link titles, reference definitions, and reference-link metadata, and still requires the exact raw claim string plus its visible projection. Every locked FAQ question must also have a non-empty reader-visible answer. Positive visible-claim/FAQ probes and negative hidden-link-title/reference probes passed with the reproducible translated=0 authority validation."
+      },
+      {
+        "at": "2026-07-18T20:45:53Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on Markdown-visible evidence/FAQ-answer head d552ac8fcc230d705a8c61160fe271a56358bc0d, then one valid P2 regression was accepted. Internal-link destinations are again extracted from raw Markdown body before any visibility projection, while reader-visible text remains isolated to word, section, FAQ, duplicate, and claim gates. A negative raw-body probe captured both a zh-CN inline destination and a legacy-alias reference definition; the reproducible translated=0 authority validation remains green."
+      },
+      {
+        "at": "2026-07-18T20:53:52Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on raw-body link-audit head 5bba2d2f403b2abec29ededc5c6d676472564a52, then one valid P2 finding was accepted. Markdown inline and reference destinations on fermatmind.com or www.fermatmind.com now normalize from http, https, or protocol-relative absolute URLs to their path before zh-CN, unknown-canonical, and legacy-alias enforcement; non-canonical relative internal targets fail closed, while external evidence URLs remain allowed. The same-origin normalization probe and reproducible translated=0 authority validation pass."
+      },
+      {
+        "at": "2026-07-18T21:02:43Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on same-origin link-normalization head 55b26ed631b750092ba66d5a698e66c50f20b343, then two valid P2 findings were accepted. External Markdown destinations must now exactly match a non-empty verified_public_url in the locked eleven-source registry; invented, competitor, protocol-variant, mailto, tel, and other unregistered body links fail closed. The frozen Task 1 validator was removed from the allowed paths of content-only PR2 through PR9 while remaining a required read-only gate; PR10 retains its explicit full-package final QA scope. Registry allowlist probes, exact manifest-scope inspection, and the reproducible translated=0 authority validation pass."
+      },
+      {
+        "at": "2026-07-18T21:11:50Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on registered-external-link/frozen-validator-scope head c651096c35144232ea5e2a9a73c13cfe1e50fd68, then one valid P2 finding was accepted. Completed pages now reject all non-footnote Markdown reference definitions and use inline links only; the reader-visible projection also removes each definition and all immediately indented continuation lines, so hidden multi-line titles cannot satisfy word, FAQ, duplicate, or claim visibility gates. Positive visible-text and negative hidden-continuation probes pass with the reproducible translated=0 authority validation."
+      },
+      {
+        "at": "2026-07-18T21:21:13Z",
+        "status": "github_review_fixes_completed",
+        "note": "All nine checks passed on reference-definition visibility head de56e497d82527c1ef0727cddb9f91470997ee6b, then one valid P2 finding was accepted. Every completed page now locks package version, org, framework, source locale, parent identity, local-only lifecycle status, exact source IDs, editorial review boundary, and canonical identity fields; requires non-empty title, H1, SEO title/description, excerpt, intent, target questions, content/translation methods, and valid editorial dates; binds one body H1 exactly to frontmatter; and rejects cross-page duplicate public metadata. Block-list frontmatter parsing was added for target questions. The reproducible translated=0 authority validation remains green."
+      }
+    ],
+    "updated_at": "2026-07-18T21:21:13Z"
+  },
+  "BIG5-EN52-HUBS-02": {
+    "id": "BIG5-EN52-HUBS-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-hubs-02",
+    "title": "BIG5-EN52-HUBS-02: translate Big Five English hubs",
+    "depends_on": ["BIG5-EN52-TRANSLATION-AUTHORITY-01"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-TRANSLATION-AUTHORITY-01 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR2 scope; no page work starts before PR1 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-DOMAINS-03": {
+    "id": "BIG5-EN52-DOMAINS-03",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-domains-03",
+    "title": "BIG5-EN52-DOMAINS-03: translate five Big Five English domains",
+    "depends_on": ["BIG5-EN52-HUBS-02"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-HUBS-02 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR3 scope; no domain work starts before PR2 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-RANGES-04": {
+    "id": "BIG5-EN52-RANGES-04",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-ranges-04",
+    "title": "BIG5-EN52-RANGES-04: translate fifteen canonical Big Five ranges",
+    "depends_on": ["BIG5-EN52-DOMAINS-03"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-DOMAINS-03 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR4 scope; no range work starts before PR3 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-OPENNESS-FACETS-05": {
+    "id": "BIG5-EN52-OPENNESS-FACETS-05",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-openness-facets-05",
+    "title": "BIG5-EN52-OPENNESS-FACETS-05: translate six Openness facets",
+    "depends_on": ["BIG5-EN52-RANGES-04"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-RANGES-04 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR5 scope; no O1-O6 work starts before PR4 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06": {
+    "id": "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-conscientiousness-facets-06",
+    "title": "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06: translate six Conscientiousness facets",
+    "depends_on": ["BIG5-EN52-OPENNESS-FACETS-05"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-OPENNESS-FACETS-05 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR6 scope; no C1-C6 work starts before PR5 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-EXTRAVERSION-FACETS-07": {
+    "id": "BIG5-EN52-EXTRAVERSION-FACETS-07",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-extraversion-facets-07",
+    "title": "BIG5-EN52-EXTRAVERSION-FACETS-07: translate six Extraversion facets",
+    "depends_on": ["BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR7 scope; no E1-E6 work starts before PR6 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-AGREEABLENESS-FACETS-08": {
+    "id": "BIG5-EN52-AGREEABLENESS-FACETS-08",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-agreeableness-facets-08",
+    "title": "BIG5-EN52-AGREEABLENESS-FACETS-08: translate six Agreeableness facets",
+    "depends_on": ["BIG5-EN52-EXTRAVERSION-FACETS-07"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-EXTRAVERSION-FACETS-07 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR8 scope; no A1-A6 work starts before PR7 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-NEUROTICISM-FACETS-09": {
+    "id": "BIG5-EN52-NEUROTICISM-FACETS-09",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-neuroticism-facets-09",
+    "title": "BIG5-EN52-NEUROTICISM-FACETS-09: translate six Neuroticism facets",
+    "depends_on": ["BIG5-EN52-AGREEABLENESS-FACETS-08"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-AGREEABLENESS-FACETS-08 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR9 scope; no N1-N6 work starts before PR8 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
+  },
+  "BIG5-EN52-FINAL-QA-10": {
+    "id": "BIG5-EN52-FINAL-QA-10",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-final-qa-10",
+    "title": "BIG5-EN52-FINAL-QA-10: unify and validate all 52 English assets",
+    "depends_on": ["BIG5-EN52-NEUROTICISM-FACETS-09"],
+    "status": "pending_dependency",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-NEUROTICISM-FACETS-09 merge."},
+      "local_validation": {"status": "pending", "evidence": null},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR10 full-cohort QA scope; no final unification starts before PR9 merges."}],
+    "updated_at": "2026-07-18T18:36:28Z"
   }
 }
