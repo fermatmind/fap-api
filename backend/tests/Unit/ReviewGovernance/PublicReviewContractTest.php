@@ -52,6 +52,8 @@ final class PublicReviewContractTest extends TestCase
     {
         yield 'approved' => ['approved', 'approved'];
         yield 'approved for production' => ['approved_for_production', 'approved'];
+        yield 'operator-approved content ready' => ['operator_approved_content_ready', 'approved'];
+        yield 'agent-promoted content ready' => ['agent_promoted_content_ready', 'approved'];
         yield 'reviewed alias' => ['reviewed', 'approved'];
         yield 'operator release' => ['operator_v3_release', 'approved'];
         yield 'published without llms' => ['published_no_llms', 'approved'];
