@@ -341,7 +341,8 @@ class AdminApprovalResource extends BaseTenantResource
     private static function executableTypesForCurrentAdmin(): array
     {
         $user = static::currentAdmin();
-        if (! $user instanceof AdminUser) {
+        if (! $user instanceof AdminUser
+            || (string) config('review_governance.mode') !== 'team_separated') {
             return [];
         }
 

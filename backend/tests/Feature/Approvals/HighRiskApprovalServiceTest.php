@@ -110,16 +110,43 @@ final class HighRiskApprovalServiceTest extends TestCase
     public function test_configured_solo_owner_can_reach_review_ui_without_review_permission(): void
     {
         $owner = $this->admin(totpEnabled: true);
+        $domainOperator = $this->admin(
+            totpEnabled: true,
+            permissions: [PermissionNames::ADMIN_OPS_WRITE],
+        );
         $this->soloOwner($owner);
+        $approval = $this->approval(AdminApproval::TYPE_REPROCESS_EVENT, $owner, [
+            'payment_event_id' => (string) Str::uuid(),
+            'order_no' => 'ord-solo-owner-review-ui',
+        ]);
+        app(HighRiskApprovalService::class)->approve(
+            (string) $approval->id,
+            (int) $owner->id,
+            $this->freshStepUpCode($owner),
+        );
         $this->actingAs($owner, (string) config('admin.guard', 'admin'));
 
         $canReview = new ReflectionMethod(AdminApprovalResource::class, 'canReview');
         $canReview->setAccessible(true);
+        $executableTypes = new ReflectionMethod(AdminApprovalResource::class, 'executableTypesForCurrentAdmin');
+        $executableTypes->setAccessible(true);
 
         $this->assertTrue($canReview->invoke(null));
         $this->assertTrue(AdminApprovalResource::canViewAny());
 
+        $this->actingAs($domainOperator, (string) config('admin.guard', 'admin'));
+        $this->assertFalse($canReview->invoke(null));
+        $this->assertFalse(AdminApprovalResource::canViewAny());
+        $this->assertSame([], $executableTypes->invoke(null));
+
         config()->set('review_governance.mode', 'team_separated');
+        $this->assertTrue(AdminApprovalResource::canViewAny());
+        $this->assertSame(
+            [AdminApproval::TYPE_MANUAL_GRANT, AdminApproval::TYPE_REVOKE_BENEFIT, AdminApproval::TYPE_REPROCESS_EVENT],
+            $executableTypes->invoke(null),
+        );
+
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'));
         $this->assertFalse($canReview->invoke(null));
         $this->assertFalse(AdminApprovalResource::canViewAny());
     }
