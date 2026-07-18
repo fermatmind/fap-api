@@ -348,6 +348,22 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
             'actuaries',
             array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
         );
+
+        $cache->warmDirectoryReadModels(['en']);
+
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+            'A later directory-only warm must preserve a verified snapshot-backed promotion.',
+        );
+
+        $cache->warm();
+
+        $this->assertContains(
+            'actuaries',
+            array_column($cache->directoryReadModelPayload('en')['items'], 'slug'),
+            'A later broad authority warm must preserve a verified snapshot-backed promotion.',
+        );
     }
 
     public function test_candidate_request_cannot_purge_a_staged_pre_exposure_payload(): void

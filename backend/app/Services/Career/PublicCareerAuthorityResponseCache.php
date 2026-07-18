@@ -465,10 +465,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $stagedPayload = Cache::get($payloadKey);
         $stagedExposureProjection = Cache::get($exposureProjectionKey);
         $ready = is_array($stagedPayload)
-            && is_array($stagedExposureProjection)
-            && strtolower(trim((string) ($stagedExposureProjection['slug'] ?? ''))) === $normalizedSlug
-            && $this->normalizePublicLocale((string) ($stagedExposureProjection['locale'] ?? '')) === $normalizedLocale
-            && $this->jobDetailProjectionItemIsPublished($stagedExposureProjection);
+            && $this->jobDetailExposureProjectionSnapshotIsValid(
+                $stagedExposureProjection,
+                $normalizedSlug,
+                $normalizedLocale,
+            );
 
         return [
             'slug' => $normalizedSlug,
@@ -634,12 +635,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 $locale,
                 $version,
             ));
-            if (
-                ! is_array($exposureProjection)
-                || strtolower(trim((string) ($exposureProjection['slug'] ?? ''))) !== $slug
-                || $this->normalizePublicLocale((string) ($exposureProjection['locale'] ?? '')) !== $locale
-                || ! $this->jobDetailProjectionItemIsPublished($exposureProjection)
-            ) {
+            if (! $this->jobDetailExposureProjectionSnapshotIsValid($exposureProjection, $slug, $locale)) {
                 throw new \RuntimeException(sprintf(
                     'Career detail exposure projection verification failed for %s (%s).',
                     $slug,
@@ -844,10 +840,18 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                             'bundle_version' => 'career.protocol.job_index.v1',
                             'items' => $sourceItems,
                         ], $locale);
-                        if ($exposureProjectionItems !== null) {
+                        $preservedExposureItems = $this->missingActiveDirectoryExposureProjectionItems(
+                            is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [],
+                            $locale,
+                        );
+                        $directoryExposureItems = array_merge(
+                            $preservedExposureItems,
+                            $exposureProjectionItems ?? [],
+                        );
+                        if ($directoryExposureItems !== []) {
                             $jobIndex['items'] = $this->mergeExposureDirectoryItems(
                                 is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [],
-                                $exposureProjectionItems,
+                                $directoryExposureItems,
                                 $locale,
                             );
                         }
@@ -930,6 +934,86 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         ksort($itemsBySlug, SORT_STRING);
 
         return array_values($itemsBySlug);
+    }
+
+    /**
+     * Preserve only active-directory members missing from the newly rebuilt
+     * source list when they still have an active payload and the exact matching
+     * published exposure snapshot. The current directory is enumeration only;
+     * the versioned backend cache remains the authority proof.
+     *
+     * @param  list<mixed>  $currentItems
+     * @return list<array<string, mixed>>
+     */
+    private function missingActiveDirectoryExposureProjectionItems(
+        array $currentItems,
+        string $publicLocale,
+    ): array {
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $currentSlugs = [];
+        foreach ($currentItems as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
+            if ($slug !== '') {
+                $currentSlugs[$slug] = true;
+            }
+        }
+
+        $directoryVersion = Cache::get($this->directoryActiveVersionKey($normalizedLocale));
+        $directoryPayload = is_string($directoryVersion) && $directoryVersion !== ''
+            ? Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $directoryVersion))
+            : null;
+        $activeItems = is_array($directoryPayload)
+            && is_array($directoryPayload['items'] ?? null)
+                ? $directoryPayload['items']
+                : [];
+        $projectionItems = [];
+        foreach ($activeItems as $activeItem) {
+            if (! is_array($activeItem)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) ($activeItem['slug'] ?? '')));
+            if ($slug === '' || isset($currentSlugs[$slug])) {
+                continue;
+            }
+
+            $detailVersion = Cache::get($this->jobDetailActiveVersionKey($slug, $normalizedLocale));
+            if (! is_string($detailVersion) || $detailVersion === '') {
+                continue;
+            }
+
+            $detailPayload = Cache::get($this->jobDetailVersionPayloadKey(
+                $slug,
+                $normalizedLocale,
+                $detailVersion,
+            ));
+            $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
+                $slug,
+                $normalizedLocale,
+                $detailVersion,
+            ));
+            if (
+                ! is_array($detailPayload)
+                || ! $this->jobDetailExposureProjectionSnapshotIsValid(
+                    $exposureProjection,
+                    $slug,
+                    $normalizedLocale,
+                )
+                || ($exposureProjection['dataset_visible'] ?? false) !== true
+            ) {
+                continue;
+            }
+
+            $projectionItems[$slug] = $exposureProjection;
+        }
+
+        ksort($projectionItems, SORT_STRING);
+
+        return array_values($projectionItems);
     }
 
     /**
@@ -1044,6 +1128,19 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             function () use ($normalizedLocale): array {
                 $jobIndex = $this->refreshJobIndexPayload($normalizedLocale);
                 $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+                $preservedExposureItems = $this->missingActiveDirectoryExposureProjectionItems(
+                    $items,
+                    $normalizedLocale,
+                );
+                if ($preservedExposureItems !== []) {
+                    $items = $this->mergeExposureDirectoryItems(
+                        $items,
+                        $preservedExposureItems,
+                        $normalizedLocale,
+                    );
+                    $jobIndex['items'] = $items;
+                    Cache::forever($this->jobIndexCacheKey($normalizedLocale, false), $jobIndex);
+                }
                 $this->publishDirectoryReadModel(
                     $normalizedLocale,
                     $this->careerDirectoryReadModelBuilder->build(
@@ -1365,15 +1462,30 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         ));
         if (
             ! is_array($activePayload)
-            || ! is_array($exposureProjection)
-            || strtolower(trim((string) ($exposureProjection['slug'] ?? ''))) !== $normalizedSlug
-            || $this->normalizePublicLocale((string) ($exposureProjection['locale'] ?? '')) !== $normalizedLocale
-            || ! $this->jobDetailProjectionItemIsPublished($exposureProjection)
+            || ! $this->jobDetailExposureProjectionSnapshotIsValid(
+                $exposureProjection,
+                $normalizedSlug,
+                $normalizedLocale,
+            )
         ) {
             return $materializedItem;
         }
 
         return $exposureProjection;
+    }
+
+    private function jobDetailExposureProjectionSnapshotIsValid(
+        mixed $exposureProjection,
+        string $slug,
+        string $publicLocale,
+    ): bool {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+
+        return is_array($exposureProjection)
+            && strtolower(trim((string) ($exposureProjection['slug'] ?? ''))) === $normalizedSlug
+            && $this->normalizePublicLocale((string) ($exposureProjection['locale'] ?? '')) === $normalizedLocale
+            && $this->jobDetailProjectionItemIsPublished($exposureProjection);
     }
 
     /** @param array<string, mixed>|null $item */
