@@ -613,6 +613,25 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         }
     }
 
+    public function test_solo_owner_approval_rejects_pending_item_with_stale_approved_timestamp_before_attestation_bind(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $this->assertSame(0, Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath)));
+        $ids = DB::table('personality_agent_approval_items')->orderBy('id')->pluck('id')->map(fn ($id): int => (int) $id)->all();
+        DB::table('personality_agent_approval_items')->where('id', $ids[0])->update(['approved_at' => now()]);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->approveOptions($ids, $this->approvalHashes()));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertContains('approval_item_pending_timestamp_present', array_column($payload['errors'], 'code'));
+        $this->assertSame(2, DB::table('personality_agent_approval_items')->where('approval_state', 'pending')->count());
+        $this->assertSame(0, ReviewAttestation::query()->count());
+        $this->assertSame(0, ReviewAttestationTargetEvidence::query()->count());
+    }
+
     public function test_team_separated_mode_keeps_existing_mbti_approval_path_without_compact_evidence(): void
     {
         config()->set('review_governance.mode', 'team_separated');

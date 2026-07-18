@@ -371,6 +371,11 @@ final class PersonalityAgentApprovalQueueWriter
                 'approved_at' => $now,
                 'updated_at' => $now,
             ]);
+        if ($updated !== count($itemIds)) {
+            throw new ReviewAttestationValidationException(
+                'Approval update count did not match the requested item count.'
+            );
+        }
 
         $approvedRows = DB::table('personality_agent_approval_items as items')
             ->join('personality_agent_approval_batches as batches', 'batches.id', '=', 'items.batch_id')
@@ -392,19 +397,15 @@ final class PersonalityAgentApprovalQueueWriter
             ]);
 
         return array_merge($summary, [
-            'ok' => $updated === count($itemIds),
-            'status' => $updated === count($itemIds) ? 'pass' : 'fail',
+            'ok' => true,
+            'status' => 'pass',
             'matched_item_count' => $approvedRows->count(),
             'approved_item_count' => $updated,
             'skipped_existing_approved_item_count' => 0,
             'writes_committed' => $updated > 0,
             'review_attestation_bound' => $this->reviewAttestations->usesSoloOwnerMode(),
             'items' => $this->approvalRows($approvedRows),
-            'errors' => $updated === count($itemIds) ? [] : [[
-                'field' => 'approval_items',
-                'code' => 'approval_update_count_mismatch',
-                'message' => 'Approval update count did not match the requested item count.',
-            ]],
+            'errors' => [],
             'warnings' => [],
         ]);
     }
@@ -594,6 +595,13 @@ final class PersonalityAgentApprovalQueueWriter
                 'field' => 'approved_at',
                 'code' => 'approval_item_approved_timestamp_missing',
                 'message' => 'Approval item '.$id.' is approved but approved_at is missing.',
+            ];
+        }
+        if ((string) $row->approval_state === 'pending' && $row->approved_at !== null) {
+            $errors[] = [
+                'field' => 'approved_at',
+                'code' => 'approval_item_pending_timestamp_present',
+                'message' => 'Approval item '.$id.' is pending but approved_at is already present.',
             ];
         }
         if (! in_array((string) $row->approval_state, ['pending', 'approved'], true)) {
