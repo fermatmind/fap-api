@@ -97057,7 +97057,7 @@
     "branch": "codex/career-detail-cold-miss-degrade-01",
     "title": "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500",
     "depends_on": [],
-    "status": "local_checks_passed_ci_fix_pending_commit",
+    "status": "github_checks_pending_retry",
     "commit_sha": "943cf071ea1b629092ff45e9733da5d2b377a9f6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3163",
     "checks": {
@@ -97074,8 +97074,8 @@
         "evidence": "CareerJobDetailReadModel10kTest passed 10 tests / 114 assertions; CareerJobDetailApiTest passed 13 / 149; the filtered CareerJobPublicApiTest passed 5 / 68. After inspecting the required-check failure, the exact runtime-freeze reproduction and Career detail classifier regression passed 2 tests / 5 assertions. The exact six-route inventory, scoped Pint on five PHP files, Composer strict validation, PHP syntax, YAML/JSON parsing, git diff check, and updated exact eight-path allowlist validation passed. The cold-miss test also proves zero SQL queries on degradation, fresh/LKG/legacy state behavior, one queued warm across repeated misses, no warm for hidden/unknown projection states, and dispatch failure remaining a restricted 200."
       },
       "github_required_checks": {
-        "status": "failed_fix_in_progress",
-        "evidence": "On final head 77c1d55f7016b391a368c65f4fdfc4f55c2db7a4, seven jobs passed and verify-bigfive failed only because the existing runtime-freeze classifier did not recognize the new exact CareerJobDetailDegradedShellBuilder path. The failure is introduced by this PR and is being repaired only in the existing Career detail read-model classifier plus its exact regression assertion."
+        "status": "pending_retry",
+        "evidence": "On head 77c1d55f7016b391a368c65f4fdfc4f55c2db7a4, seven jobs passed and verify-bigfive failed only because the existing runtime-freeze classifier did not recognize the new exact CareerJobDetailDegradedShellBuilder path. The focused same-scope repair passed locally and was pushed as e59e4dd21e6a29b251b0c994dffd65f681d5af38; complete required checks are restarting."
       }
     },
     "scope_validation": {
@@ -97124,8 +97124,13 @@
         "at": "2026-07-18T08:41:49Z",
         "status": "local_checks_passed_ci_fix_pending_commit",
         "note": "The exact failing runtime-path test and its Career detail classifier regression now pass with 2 tests / 5 assertions. Pint, PHP syntax, YAML/JSON parsing, diff checks, and the updated exact eight-path scope gate pass. The repair adds only the new builder to the pre-existing Career detail read-model classifier and manifest allowlist."
+      },
+      {
+        "at": "2026-07-18T08:42:35Z",
+        "status": "github_checks_pending_retry",
+        "note": "Committed and pushed the scoped classifier repair as e59e4dd21e6a29b251b0c994dffd65f681d5af38. GitHub reports PR #3163 mergeable and the new complete CI plus Code Scanning runs in progress."
       }
     ],
-    "updated_at": "2026-07-18T08:41:49Z"
+    "updated_at": "2026-07-18T08:42:35Z"
   }
 }
