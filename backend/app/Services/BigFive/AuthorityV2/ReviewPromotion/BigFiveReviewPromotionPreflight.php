@@ -18,12 +18,14 @@ use App\Models\TopicProfileRevision;
 use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ContentPageTranslationAdapter;
+use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\Cms\TopicEntryResolverService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
 
+/** @review-surface personality_public_content_asset */
 final class BigFiveReviewPromotionPreflight
 {
     private const APPROVED_WORKFLOW_STATE = 'approved';
@@ -69,12 +71,23 @@ final class BigFiveReviewPromotionPreflight
         private readonly BigFiveAuthorityV2DraftImportWriter $packageWriter,
         private readonly TopicEntryResolverService $topicEntryResolverService,
         private readonly ContentPageTranslationAdapter $contentPageTranslationAdapter,
+        private readonly PersonalityReviewAttestationService $reviewAttestations,
     ) {}
 
     /** @return array<string,mixed> */
-    public function packageOnly(string $reviewManifestPath, string $authorizationPacketPath, string $rollbackPlanPath): array
-    {
+    public function packageOnly(
+        string $reviewManifestPath,
+        string $authorizationPacketPath,
+        string $rollbackPlanPath,
+        ?array $attestation = null,
+    ): array {
         $artifacts = $this->artifacts($reviewManifestPath, $authorizationPacketPath, $rollbackPlanPath, true);
+        $attestationPreflight = $attestation === null ? null : $this->reviewAttestations->preflightApproved(
+            $attestation,
+            'personality_public_content_asset',
+            $this->reviewTargets($artifacts['review']['rows']),
+            BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+        );
 
         return [
             'ok' => true,
@@ -89,28 +102,39 @@ final class BigFiveReviewPromotionPreflight
                 'primary_create' => self::PRIMARY_CREATE_COUNT,
                 'existing_revision' => self::EXISTING_REVISION_COUNT,
                 'cohorts' => count($artifacts['review']['cohorts']),
-                'manually_reviewed' => 0,
+                'manually_reviewed' => $attestationPreflight === null ? 0 : self::ASSET_COUNT,
                 'runtime_bound' => 0,
                 'rollback_targets_bound' => 0,
                 'promotion_eligible' => 0,
                 'cohorts_authorized' => 0,
             ],
             'blockers' => [
-                'manual_review_missing',
+                ...($attestationPreflight === null ? ['manual_review_missing'] : []),
                 'runtime_identity_unbound',
                 'source_permission_missing',
                 'media_permission_missing',
                 'rollback_target_unbound',
                 'exact_cohort_authorization_missing',
             ],
+            'review_attestation_evidence_sha256' => $attestationPreflight['evidence_sha256'] ?? null,
             'actions' => $this->zeroActions(0),
         ];
     }
 
     /** @return array<string,mixed> */
-    public function databasePreflight(string $reviewManifestPath, string $authorizationPacketPath, string $rollbackPlanPath): array
-    {
+    public function databasePreflight(
+        string $reviewManifestPath,
+        string $authorizationPacketPath,
+        string $rollbackPlanPath,
+        ?array $attestation = null,
+    ): array {
         $artifacts = $this->artifacts($reviewManifestPath, $authorizationPacketPath, $rollbackPlanPath, false);
+        $attestationPreflight = $attestation === null ? null : $this->reviewAttestations->preflightApproved(
+            $attestation,
+            'personality_public_content_asset',
+            $this->reviewTargets($artifacts['review']['rows']),
+            BigFiveAuthorityV2DraftImportWriter::PACKAGE_SHA256,
+        );
         $legacy = $this->packageWriter->validatedPlan(
             '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json',
             '../generated/big-five-authority-v2/big5-authority-v2-release-gate-37/production-authorization-packet.json',
@@ -136,7 +160,7 @@ final class BigFiveReviewPromotionPreflight
             if (! is_array($descriptor) || ! is_array($rollback)) {
                 throw new RuntimeException('Review package identity is not present in the locked authority package: '.$row['asset_id'].'.');
             }
-            $assessment = $this->assessRow($row, $descriptor, $rollback);
+            $assessment = $this->assessRow($row, $descriptor, $rollback, $attestationPreflight !== null);
             $databaseReads += (int) $assessment['database_reads'];
             $issueCodes = [...$issueCodes, ...$assessment['issues']];
             $blockerCodes = [...$blockerCodes, ...$assessment['blockers']];
@@ -156,6 +180,7 @@ final class BigFiveReviewPromotionPreflight
         $preflightFingerprint = $this->fingerprint([
             'review_manifest_sha256' => $artifacts['review_sha256'],
             'rollback_plan_sha256' => $artifacts['rollback_sha256'],
+            'review_attestation_evidence_sha256' => $attestationPreflight['evidence_sha256'] ?? null,
             'runtime' => $runtimeMaterial,
         ]);
 
@@ -296,8 +321,12 @@ final class BigFiveReviewPromotionPreflight
     }
 
     /** @param array<string,mixed> $row @param array<string,mixed> $descriptor @param array<string,mixed> $rollback @return array<string,mixed> */
-    private function assessRow(array $row, array $descriptor, array $rollback): array
-    {
+    private function assessRow(
+        array $row,
+        array $descriptor,
+        array $rollback,
+        bool $soloOwnerAttestationApproved = false,
+    ): array {
         $issues = [];
         $blockers = [];
         $record = $this->record($descriptor);
@@ -387,12 +416,12 @@ final class BigFiveReviewPromotionPreflight
             }
         }
 
-        $manualReviewComplete = ($row['manual_review']['status'] ?? null) === 'approved'
+        $manualReviewComplete = $soloOwnerAttestationApproved || (($row['manual_review']['status'] ?? null) === 'approved'
             && is_int($row['manual_review']['reviewer_id'] ?? null)
             && ($row['manual_review']['reviewer_id'] ?? 0) > 0
             && is_string($row['manual_review']['reviewed_at'] ?? null)
             && strtotime((string) $row['manual_review']['reviewed_at']) !== false
-            && preg_match('/^[0-9a-f]{64}$/', (string) ($row['manual_review']['review_record_sha256'] ?? '')) === 1;
+            && preg_match('/^[0-9a-f]{64}$/', (string) ($row['manual_review']['review_record_sha256'] ?? '')) === 1);
         if (! $manualReviewComplete) {
             $blockers[] = 'manual_review_missing';
         }
@@ -436,6 +465,26 @@ final class BigFiveReviewPromotionPreflight
             'blockers' => $blockers,
             'database_reads' => $databaseReads,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $rows
+     * @return list<array{identity:string,sha256:string}>
+     */
+    private function reviewTargets(array $rows): array
+    {
+        return array_map(static function (array $row): array {
+            $assetId = trim((string) ($row['asset_id'] ?? ''));
+            $sourceHash = strtolower(trim((string) ($row['source_hash'] ?? '')));
+            if ($assetId === '' || preg_match('/^[0-9a-f]{64}$/', $sourceHash) !== 1) {
+                throw new RuntimeException('Big Five review target identity or source SHA-256 is invalid.');
+            }
+
+            return [
+                'identity' => 'authority_asset:'.$assetId,
+                'sha256' => $sourceHash,
+            ];
+        }, $rows);
     }
 
     private function existingRevisionIsolationMismatch(Model $record, mixed $working, mixed $published): bool

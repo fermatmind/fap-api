@@ -263,6 +263,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_solo_owner_personality_review_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityAgentApprovalQueueCommand.php',
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php',
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2ReviewEvidenceBinder.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFiveReviewPromotionPreflight.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialApprovalFlow.php',
+            'backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php',
+            'backend/app/Services/Cms/PersonalityReviewAttestationService.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV223ReviewEvidenceBinder.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+            'backend/app/Services/Riasec/RiasecContentReleaseReviewGate.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Cms/PersonalityReviewPublisher.php',
+            'backend/app/Services/Riasec/RiasecReviewAndImportExecutor.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -6028,6 +6052,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSoloOwnerPersonalityReviewFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -7809,6 +7837,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/SiblingTranslationWorkflowService.php',
             'backend/app/Services/Cms/SupportArticleTranslationAdapter.php',
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+        ], true);
+    }
+
+    private function isSoloOwnerPersonalityReviewFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityAgentApprovalQueueCommand.php',
+            'backend/app/Console/Commands/PersonalityBigFiveAuthorityV247ReviewPromotionPreflight.php',
+            'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2ReviewEvidenceBinder.php',
+            'backend/app/Services/BigFive/AuthorityV2/ReviewPromotion/BigFiveReviewPromotionPreflight.php',
+            'backend/app/Services/BigFive/Cms/BigFiveV2EditorialApprovalFlow.php',
+            'backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php',
+            'backend/app/Services/Cms/PersonalityReviewAttestationService.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV223ReviewEvidenceBinder.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+            'backend/app/Services/Riasec/RiasecContentReleaseReviewGate.php',
         ], true);
     }
 

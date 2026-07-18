@@ -16,6 +16,13 @@ use LogicException;
  * @review-surface interpretation_guide
  * @review-surface research_report
  * @review-surface editorial_review
+ * @review-surface personality_public_content_asset
+ * @review-surface personality_public_content_asset_revision_review
+ * @review-surface big_five_v2_editorial_revision
+ * @review-surface mbti_approval_batch
+ * @review-surface mbti_cross_type_comparison_authority
+ * @review-surface enneagram_review_binder
+ * @review-surface riasec_content_release_review
  */
 final class ReviewPolicyRegistry
 {
@@ -73,6 +80,16 @@ final class ReviewPolicyRegistry
         'interpretation_guide',
         'research_report',
         'editorial_review',
+    ];
+
+    private const PERSONALITY_ADAPTER_SURFACES = [
+        'personality_public_content_asset',
+        'personality_public_content_asset_revision_review',
+        'big_five_v2_editorial_revision',
+        'mbti_approval_batch',
+        'mbti_cross_type_comparison_authority',
+        'enneagram_review_binder',
+        'riasec_content_release_review',
     ];
 
     /**
@@ -220,6 +237,9 @@ final class ReviewPolicyRegistry
             return $externalEvidenceRequired
                 ? 'compact_attestation_adapter_active_external_evidence_still_required'
                 : 'compact_attestation_adapter_active';
+        }
+        if (in_array($surfaceId, self::PERSONALITY_ADAPTER_SURFACES, true)) {
+            return 'compact_attestation_adapter_active';
         }
 
         return 'policy_registered_adapter_pending';

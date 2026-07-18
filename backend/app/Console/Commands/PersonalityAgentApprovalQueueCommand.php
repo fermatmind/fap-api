@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
 
+/** @review-surface mbti_approval_batch */
 final class PersonalityAgentApprovalQueueCommand extends Command
 {
     private const OPERATOR_APPROVAL = 'PERSONALITY-AGENT-HUMAN-APPROVAL-QUEUE-01';
+
     private const APPROVE_OPERATOR_APPROVAL = 'PERSONALITY-AGENT-APPROVAL-QUEUE-APPROVE-CONTRACT-01';
 
     protected $signature = 'personality:agent-approval-queue
@@ -25,6 +27,7 @@ final class PersonalityAgentApprovalQueueCommand extends Command
         {--framework= : Required framework lock for --approve}
         {--source-package-sha256= : Required source package SHA256 lock for --approve}
         {--qa-sha256= : Required QA artifact SHA256 lock for --approve}
+        {--attestation= : Optional private compact solo-owner attestation JSON for --approve}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
         {--operator-approved= : Required exact approval token for --write or --approve}';
@@ -73,6 +76,8 @@ final class PersonalityAgentApprovalQueueCommand extends Command
                 [
                     'item_ids' => (string) $this->option('item-ids'),
                 ],
+                $this->optionalJsonFile((string) $this->option('attestation')),
+                (int) config('review_governance.solo_owner_admin_user_id'),
             ), [
                 'command' => 'personality:agent-approval-queue',
             ]);
@@ -124,6 +129,23 @@ final class PersonalityAgentApprovalQueueCommand extends Command
         }
 
         return $resolved;
+    }
+
+    /** @return array<string,mixed>|null */
+    private function optionalJsonFile(string $path): ?array
+    {
+        $path = trim($path);
+        if ($path === '') {
+            return null;
+        }
+
+        $resolved = $this->resolvePath($path, 'Attestation');
+        $decoded = json_decode((string) File::get($resolved), true, 512, JSON_THROW_ON_ERROR);
+        if (! is_array($decoded)) {
+            throw new RuntimeException('Attestation must be a JSON object.');
+        }
+
+        return $decoded;
     }
 
     /**

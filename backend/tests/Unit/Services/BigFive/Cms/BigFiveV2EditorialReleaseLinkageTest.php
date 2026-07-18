@@ -129,6 +129,7 @@ final class BigFiveV2EditorialReleaseLinkageTest extends TestCase
             PermissionNames::ADMIN_APPROVAL_REVIEW,
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $reviewer->id);
         $workflow = new BigFiveV2EditorialWorkflow;
         $flow = new BigFiveV2EditorialApprovalFlow;
         $draft = $workflow->createDraftFromAsset($this->linkedAsset(), (int) $editor->id);
