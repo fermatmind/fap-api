@@ -325,7 +325,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         $safeReason = (string) $approval->reason;
         $credentialReasons = array_map(
             static fn (string $prefix): string => $prefix.$privateCredential,
-            ['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey=', 'Bearer '],
+            ['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey=', 'API key: ', 'Bearer '],
         );
         $credentialReasons[] = '{"access_token":"'.$privateCredential.'"}';
         $credentialReasons[] = "{'clientSecret':'".$privateCredential."'}";
@@ -509,12 +509,13 @@ final class HighRiskApprovalServiceTest extends TestCase
         $quotedAccessToken = Str::random(48);
         $quotedClientSecret = Str::random(48);
         $singleQuotedApiKey = Str::random(48);
+        $spacedApiKey = Str::random(48);
         $basicAuthorization = base64_encode(Str::random(48));
         $sanitize = new ReflectionMethod($executor, 'sanitizeErrorMessage');
         $sanitize->setAccessible(true);
         $message = (string) $sanitize->invoke(
             $executor,
-            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' bare Bearer '.$bearerToken.' json {"access_token":"'.$quotedAccessToken.'","clientSecret":"'.$quotedClientSecret.'"} json-ish {\'apiKey\':\''.$singleQuotedApiKey.'\'} Authorization: Basic '.$basicAuthorization,
+            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' API key: '.$spacedApiKey.' bare Bearer '.$bearerToken.' json {"access_token":"'.$quotedAccessToken.'","clientSecret":"'.$quotedClientSecret.'"} json-ish {\'apiKey\':\''.$singleQuotedApiKey.'\'} Authorization: Basic '.$basicAuthorization,
         );
         $this->assertStringNotContainsString($privateValue, $message);
         $this->assertStringNotContainsString($accessToken, $message);
@@ -526,6 +527,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringNotContainsString($quotedAccessToken, $message);
         $this->assertStringNotContainsString($quotedClientSecret, $message);
         $this->assertStringNotContainsString($singleQuotedApiKey, $message);
+        $this->assertStringNotContainsString($spacedApiKey, $message);
         $this->assertStringNotContainsString($basicAuthorization, $message);
         $this->assertStringContainsString('[REDACTED]', $message);
 

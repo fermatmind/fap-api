@@ -407,7 +407,7 @@ final class ApprovalExecutor
 
     private function redactSensitive(mixed $value, ?string $key = null): mixed
     {
-        if ($key !== null && preg_match('/token|totp|secret|password|authorization|cookie|api[_-]?key/i', $key) === 1) {
+        if ($key !== null && preg_match('/token|totp|secret|password|authorization|cookie|api[\s_-]*key/i', $key) === 1) {
             return '[REDACTED]';
         }
         if (is_array($value)) {
@@ -430,7 +430,7 @@ final class ApprovalExecutor
         $value = preg_replace('/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/i', 'Bearer [REDACTED]', $value) ?: $value;
 
         return preg_replace(
-            '/\b([a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key))\b[\x22\x27]?\s*[:=]\s*[\x22\x27]?[^\s,;}\]\x22\x27]+/i',
+            '/\b([a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[\s_-]*key))\b[\x22\x27]?\s*[:=]\s*[\x22\x27]?[^\s,;}\]\x22\x27]+/i',
             '$1=[REDACTED]',
             $value,
         ) ?: $value;

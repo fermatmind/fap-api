@@ -83,7 +83,7 @@ class AdminApproval extends Model
     {
         return preg_match('/\bBearer\s+[A-Za-z0-9._~+\/-]+=*/i', $reason) === 1
             || preg_match(
-                '/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b[\x22\x27]?\s*[:=]/i',
+                '/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[\s_-]*key)\b[\x22\x27]?\s*[:=]/i',
                 $reason,
             ) === 1;
     }
