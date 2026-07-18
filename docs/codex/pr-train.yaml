@@ -45980,6 +45980,7 @@ prs:
       - backend/app/Services/Career/Bundles/CareerSearchBundleBuilder.php
       - backend/app/Services/Career/Bundles/CareerTransitionPreviewBundleBuilder.php
       - backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV224RuntimeReadback.php
       - backend/app/Services/ReviewGovernance/PublicReviewContract.php
       - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
       - backend/app/Services/Riasec/RiasecPublicProjectionService.php
@@ -45998,6 +45999,7 @@ prs:
       - backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php
       - backend/tests/Feature/Foundation/DailyGivingRecordPublicationGateTest.php
       - backend/tests/Feature/Research/ResearchAssetBackendMvpTest.php
+      - backend/tests/Feature/SEO/EnneagramPublicAuthorityV224RuntimeCloseoutTest.php
       - backend/tests/Feature/V0_5/ArticlePublicApiTest.php
       - backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
       - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
@@ -46023,6 +46025,7 @@ prs:
       - cd backend && php artisan test tests/Unit/Services/Riasec/RiasecStructuralDifferenceSlotRegistryTest.php tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Career/CareerAliasResolutionApiTest.php tests/Feature/Career/CareerCnProxyPublicOwnerApiTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerRecommendationIndexApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Foundation/DailyGivingRecordPublicationGateTest.php tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/SEO/EnneagramPublicAuthorityV224RuntimeCloseoutTest.php --filter=authorized_execute_runs_import_bind_atomic_promotion_cache_and_nine_plus_canary_readbacks --no-ansi
       - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|solo_owner_public_review_contract' --no-ansi
       - git diff --name-only --diff-filter=ACMR origin/main...HEAD -- 'backend/*.php' 'backend/**/*.php' | while IFS= read -r file; do php -l "$file" || exit 1; done
       - cd backend && vendor/bin/pint --test <current PR changed PHP paths>
