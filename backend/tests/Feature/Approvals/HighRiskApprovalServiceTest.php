@@ -11,7 +11,6 @@ use App\Models\Role;
 use App\Services\Approvals\ApprovalExecutor;
 use App\Services\Approvals\HighRiskApprovalService;
 use App\Services\Approvals\HighRiskApprovalValidationException;
-use App\Services\Audit\AuditLogger;
 use App\Services\Auth\AdminTotpService;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,6 +39,10 @@ final class HighRiskApprovalServiceTest extends TestCase
 
         $service = app(HighRiskApprovalService::class);
         $freshStepUpCode = $this->freshStepUpCode($owner);
+        $request = Request::create('/', 'POST');
+        $request->headers->set('User-Agent', str_repeat('a', 400));
+        $this->app->instance('request', $request);
+        $this->app->instance(Request::class, $request);
         $approved = $service->approve((string) $approval->id, (int) $owner->id, $freshStepUpCode);
 
         $this->assertSame(AdminApproval::STATUS_APPROVED, (string) $approved->status);
@@ -53,6 +56,12 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertNull($approved->executed_at);
         $this->assertSame(0, (int) $approved->retry_count);
         Queue::assertNothingPushed();
+        $approvalAudit = DB::table('audit_logs')
+            ->where('target_id', (string) $approval->id)
+            ->where('action', 'approval_approved')
+            ->first();
+        $this->assertNotNull($approvalAudit);
+        $this->assertSame(255, mb_strlen((string) $approvalAudit->user_agent));
 
         $unauthorizedExecution = app(ApprovalExecutor::class)->execute((string) $approval->id);
         $this->assertFalse($unauthorizedExecution->ok);
@@ -386,34 +395,101 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringContainsString('[REDACTED]', (string) $audit->meta_json);
     }
 
-    public function test_reject_audit_metadata_does_not_capture_fresh_step_up_code(): void
+    public function test_reject_requires_governance_actor_and_audit_does_not_capture_step_up_code(): void
     {
-        $privateStepUpCode = 'recovery-'.Str::random(32);
-        $request = Request::create('/ops/admin-approvals', 'POST', [
+        $owner = $this->admin(totpEnabled: true);
+        $other = $this->admin(totpEnabled: true);
+        $this->soloOwner($owner);
+        $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
+            'order_no' => 'ord-reject-policy',
+        ]);
+        $service = app(HighRiskApprovalService::class);
+
+        try {
+            $service->reject(
+                (string) $approval->id,
+                (int) $other->id,
+                $this->freshStepUpCode($other),
+                'unauthorized rejection',
+            );
+            $this->fail('Expected solo-owner rejection policy to reject a non-owner actor.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Approval actor is not the configured solo owner.', $exception->getMessage());
+        }
+        $this->assertSame(AdminApproval::STATUS_PENDING, (string) $approval->fresh()->status);
+        $this->assertDatabaseMissing('audit_logs', [
+            'target_id' => (string) $approval->id,
+            'action' => 'approval_rejected',
+        ]);
+
+        $privateStepUpCode = $this->freshStepUpCode($owner);
+        $request = Request::create('/', 'POST', [
             'fresh_step_up_code' => $privateStepUpCode,
             'reason_append' => 'safe rejection note',
         ]);
+        $this->app->instance('request', $request);
+        $this->app->instance(Request::class, $request);
 
-        app(AuditLogger::class)->log(
-            $request,
-            'approval_rejected',
-            'AdminApproval',
-            (string) Str::uuid(),
-            [
-                'params_sanitized' => [
-                    'reason_append' => 'safe rejection note',
-                ],
-            ],
-            'high-risk approval rejected',
-            'rejected',
+        $rejected = $service->reject(
+            (string) $approval->id,
+            (int) $owner->id,
+            $privateStepUpCode,
+            'safe rejection note',
         );
+        $this->assertSame(AdminApproval::STATUS_REJECTED, (string) $rejected->status);
+        $this->assertSame((int) $owner->id, (int) $rejected->approved_by_admin_user_id);
 
-        $audit = DB::table('audit_logs')->where('action', 'approval_rejected')->latest('created_at')->first();
+        $audit = DB::table('audit_logs')
+            ->where('target_id', (string) $approval->id)
+            ->where('action', 'approval_rejected')
+            ->first();
 
         $this->assertNotNull($audit);
         $this->assertStringNotContainsString($privateStepUpCode, (string) $audit->meta_json);
         $this->assertStringNotContainsString('fresh_step_up_code', (string) $audit->meta_json);
         $this->assertStringContainsString('safe rejection note', (string) $audit->meta_json);
+    }
+
+    public function test_recovery_code_remains_consumed_when_approval_policy_rejects_actor(): void
+    {
+        $owner = $this->admin(totpEnabled: true);
+        $other = $this->admin();
+        $this->soloOwner($owner);
+        $recoveryCode = strtoupper(Str::random(10));
+        app(AdminTotpService::class)->enableForUser(
+            $other,
+            'JBSWY3DPEHPK3PXP',
+            [$recoveryCode],
+        );
+        $approval = $this->approval(AdminApproval::TYPE_REFUND, $owner, [
+            'order_no' => 'ord-recovery-consumption',
+        ]);
+        $service = app(HighRiskApprovalService::class);
+
+        try {
+            $service->approve((string) $approval->id, (int) $other->id, $recoveryCode);
+            $this->fail('Expected solo-owner approval policy to reject a non-owner actor.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Approval actor is not the configured solo owner.', $exception->getMessage());
+        }
+
+        $this->assertSame(AdminApproval::STATUS_PENDING, (string) $approval->fresh()->status);
+        $this->assertNotNull(DB::table('admin_user_totp_recovery_codes')
+            ->where('admin_user_id', (int) $other->id)
+            ->where('code_hash', hash('sha256', $recoveryCode))
+            ->value('used_at'));
+        $this->assertDatabaseHas('audit_logs', [
+            'target_type' => 'AdminUser',
+            'target_id' => (string) $other->id,
+            'action' => 'admin_totp_recovery_code_used',
+        ]);
+
+        try {
+            $service->approve((string) $approval->id, (int) $other->id, $recoveryCode);
+            $this->fail('Expected the consumed recovery code not to be reusable.');
+        } catch (HighRiskApprovalValidationException $exception) {
+            $this->assertSame('Current MFA/TOTP step-up verification is required.', $exception->getMessage());
+        }
     }
 
     private function soloOwner(AdminUser $owner): void

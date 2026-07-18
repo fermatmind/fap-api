@@ -77,13 +77,14 @@ final readonly class HighRiskApprovalService
         int $actorAdminUserId,
         string $freshStepUpCode,
     ): AdminApproval {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $freshStepUpCode): AdminApproval {
+        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
 
-            $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
             $this->assertApprovalInputs($approval);
             $this->assertApproverPolicy($approval, $actorAdminUserId);
 
@@ -122,18 +123,59 @@ final readonly class HighRiskApprovalService
         }, 3);
     }
 
-    public function bindLegacyGovernance(
+    public function reject(
         string $approvalId,
         int $actorAdminUserId,
         string $freshStepUpCode,
+        string $reasonAppend = '',
     ): AdminApproval {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $freshStepUpCode): AdminApproval {
+        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $reasonAppend): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
 
-            $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+            $this->assertApprovalInputs($approval);
+            $this->assertApproverPolicy($approval, $actorAdminUserId);
+            if (strtoupper((string) $approval->status) !== AdminApproval::STATUS_PENDING) {
+                throw new HighRiskApprovalValidationException('Only pending approvals can be rejected.');
+            }
+
+            $append = trim($reasonAppend);
+            if (AdminApproval::reasonContainsCredential($append)) {
+                throw new HighRiskApprovalValidationException('Reject note must not contain credentials or secret material.');
+            }
+
+            $approval->status = AdminApproval::STATUS_REJECTED;
+            $approval->approved_by_admin_user_id = $actorAdminUserId;
+            $approval->approved_at = now()->startOfSecond();
+            if ($append !== '') {
+                $approval->reason = trim((string) $approval->reason.' | reject_note: '.$append);
+            }
+            $approval->save();
+
+            $this->writeRejectAudit($approval, $actorAdminUserId, $append);
+            $approval->refresh();
+
+            return $approval;
+        }, 3);
+    }
+
+    public function bindLegacyGovernance(
+        string $approvalId,
+        int $actorAdminUserId,
+        string $freshStepUpCode,
+    ): AdminApproval {
+        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId): AdminApproval {
+            $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
+            if (! $approval) {
+                throw new HighRiskApprovalValidationException('Approval record was not found.');
+            }
+
             $this->assertApprovalInputs($approval);
             $this->assertApproverPolicy($approval, $actorAdminUserId);
             if (! $this->requiresLegacyGovernanceBinding($approval)) {
@@ -197,13 +239,14 @@ final readonly class HighRiskApprovalService
         string $freshStepUpCode,
         bool $retryFailed = false,
     ): AdminApproval {
-        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $freshStepUpCode, $retryFailed): AdminApproval {
+        $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
+
+        return DB::transaction(function () use ($approvalId, $actorAdminUserId, $retryFailed): AdminApproval {
             $approval = AdminApproval::query()->whereKey($approvalId)->lockForUpdate()->first();
             if (! $approval) {
                 throw new HighRiskApprovalValidationException('Approval record was not found.');
             }
 
-            $this->assertFreshStepUp($actorAdminUserId, $freshStepUpCode);
             $this->assertExecutable($approval);
             if (! $this->executionSupported($approval)) {
                 throw new HighRiskApprovalValidationException('Approval execution adapter is not registered.');
@@ -552,12 +595,42 @@ final readonly class HighRiskApprovalService
                 'step_up_verified' => true,
             ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             'ip' => $request->ip(),
-            'user_agent' => mb_substr((string) $request->userAgent(), 0, 500),
+            'user_agent' => mb_substr((string) $request->userAgent(), 0, 255),
             'request_id' => (string) ($request->headers->get('X-Request-ID') ?: $request->attributes->get('request_id') ?: ''),
             'reason' => $action === 'approval_governance_rebound'
                 ? 'legacy high-risk approval governance evidence rebound'
                 : 'high-risk approval evidence recorded',
             'result' => 'approved',
+            'created_at' => now(),
+        ]);
+    }
+
+    private function writeRejectAudit(
+        AdminApproval $approval,
+        int $actorAdminUserId,
+        string $reasonAppend,
+    ): void {
+        $request = request();
+        DB::table('audit_logs')->insert([
+            'org_id' => (int) $approval->org_id,
+            'actor_admin_id' => $actorAdminUserId,
+            'action' => 'approval_rejected',
+            'target_type' => 'AdminApproval',
+            'target_id' => (string) $approval->id,
+            'meta_json' => json_encode([
+                'actor' => $actorAdminUserId,
+                'org_id' => (int) $approval->org_id,
+                'correlation_id' => (string) $approval->correlation_id,
+                'type' => (string) $approval->type,
+                'params_sanitized' => [
+                    'reason_append' => $reasonAppend,
+                ],
+            ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            'ip' => $request->ip(),
+            'user_agent' => mb_substr((string) $request->userAgent(), 0, 255),
+            'request_id' => (string) ($request->headers->get('X-Request-ID') ?: $request->attributes->get('request_id') ?: ''),
+            'reason' => 'high-risk approval rejected',
+            'result' => 'rejected',
             'created_at' => now(),
         ]);
     }

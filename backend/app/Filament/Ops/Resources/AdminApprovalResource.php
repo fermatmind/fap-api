@@ -11,7 +11,6 @@ use App\Jobs\ExecuteApprovalJob;
 use App\Models\AdminApproval;
 use App\Services\Approvals\HighRiskApprovalService;
 use App\Services\Approvals\HighRiskApprovalValidationException;
-use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -244,61 +243,17 @@ class AdminApprovalResource extends BaseTenantResource
                     ])
                     ->action(function (AdminApproval $record, array $data): void {
                         try {
-                            app(HighRiskApprovalService::class)->assertFreshStepUp(
+                            app(HighRiskApprovalService::class)->reject(
+                                (string) $record->id,
                                 static::currentAdminId(),
                                 (string) ($data['fresh_step_up_code'] ?? ''),
+                                (string) ($data['reason_append'] ?? ''),
                             );
                         } catch (HighRiskApprovalValidationException) {
-                            Notification::make()->title('Current MFA/TOTP step-up is required')->danger()->send();
+                            Notification::make()->title('High-risk rejection validation failed')->danger()->send();
 
                             return;
                         }
-                        $guard = (string) config('admin.guard', 'admin');
-                        $user = auth($guard)->user();
-                        $adminId = is_object($user) && method_exists($user, 'getAuthIdentifier')
-                            ? (int) $user->getAuthIdentifier()
-                            : null;
-
-                        $append = trim((string) ($data['reason_append'] ?? ''));
-                        if (AdminApproval::reasonContainsCredential($append)) {
-                            Notification::make()->title('Reject note must not contain credentials or secret material')->danger()->send();
-
-                            return;
-                        }
-
-                        DB::transaction(function () use ($record, $adminId, $append): void {
-                            $locked = AdminApproval::query()->whereKey($record->id)->lockForUpdate()->first();
-                            if (! $locked || strtoupper((string) $locked->status) !== AdminApproval::STATUS_PENDING) {
-                                return;
-                            }
-
-                            $locked->status = AdminApproval::STATUS_REJECTED;
-                            $locked->approved_by_admin_user_id = $adminId;
-                            $locked->approved_at = now();
-                            if ($append !== '') {
-                                $locked->reason = trim((string) $locked->reason.' | reject_note: '.$append);
-                            }
-                            $locked->save();
-
-                            app(AuditLogger::class)->log(
-                                request(),
-                                'approval_rejected',
-                                'AdminApproval',
-                                (string) $locked->id,
-                                [
-                                    'actor' => $adminId,
-                                    'org_id' => (int) $locked->org_id,
-                                    'correlation_id' => (string) $locked->correlation_id,
-                                    'type' => (string) $locked->type,
-                                    // Never let the one-time step-up code fall through to request()->all().
-                                    'params_sanitized' => [
-                                        'reason_append' => $append,
-                                    ],
-                                ],
-                                'high-risk approval rejected',
-                                'rejected',
-                            );
-                        });
 
                         Notification::make()
                             ->title(__('ops.resources.approvals.notifications.rejected'))
