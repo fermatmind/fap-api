@@ -97242,7 +97242,7 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_checks_pending",
+    "status": "github_review_fix_ready_to_commit",
     "commit_sha": "96252140d594b67d4252445d9b0890069210fa99",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
@@ -97256,11 +97256,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After inspecting all four automated review threads, the same-scope repair suite passed 100 tests / 793 assertions across projection and promotion gates, candidate-safe cache preparation for runtime-shell and compiled authority paths, apply/rollback behavior, stale materialized projection overlay, post-promotion command, atomic multi-locale directory activation/rollback, directory truth, actual cache-readiness performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 12ms and 136ms with one DB query. All 25 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-eight-path allowlist passed."
+        "evidence": "After inspecting all five automated review threads, the current same-scope manifest suite passed 90 tests / 655 assertions across projection and promotion gates, candidate-safe cache preparation, stale materialized projection overlay, post-promotion apply/rollback, atomic multi-locale activation/rollback, lock-scoped directory payload construction, directory truth/performance, CareerJobListApi, PR2 coverage, and targeted warm ordering. The new regression proves detail-readiness reads occur only after both locale rebuild locks are held; the prior pointer-restore regression remains green. Big Five runtime-freeze checks passed 2 / 6. The actual readiness path built 1046 and 10000 row directories in about 13ms and 135ms with one DB query. All 25 manifest Pint paths, Composer strict validation, PHP/YAML/JSON syntax, diff checks, and the exact twenty-eight-path merge-base allowlist passed."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine checks passed on ready ledger head 6147ed9320231f9102ddb1563246e25683008b26, then a new valid P1 identified directory activation reading a stale materialized candidate projection instead of the validated post-promotion projection. The local repair overlays that exact validated locale projection during atomic directory activation. Exact-head checks will restart after push."
+        "evidence": "All nine checks passed on exact head a2d56f79ebda6e5165abe58bcc75157915d8c0f8. Final review then found a fifth valid P2: directory payloads were captured before locale locks, allowing an older blocked warmer to overwrite newer readiness. The local repair acquires deterministic target-locale locks before authority/readiness reads and payload construction, then preserves the existing stage/verify/atomic activation and pointer restoration contract. Exact-head checks will restart after push."
       }
     },
     "scope_validation": {
@@ -97339,8 +97339,13 @@
         "at": "2026-07-18T11:18:29Z",
         "status": "github_checks_pending",
         "note": "Committed and pushed the validated post-promotion directory overlay as 96252140d594b67d4252445d9b0890069210fa99. Replied to the exact P1 with stale-artifact regression evidence and resolved the thread. The follow-up ledger correction restores an unrelated historic Big Five item whose identically named status field was accidentally matched by a mechanical patch; no historic facts were otherwise changed. Exact-head required checks are running, with no materialized artifact, production cache, DB, CMS, staging, or deploy action."
+      },
+      {
+        "at": "2026-07-18T11:43:51Z",
+        "status": "github_review_fix_ready_to_commit",
+        "note": "All nine checks passed on a2d56f79ebda6e5165abe58bcc75157915d8c0f8, but final review found a fifth valid P2: payload construction and detail-readiness inspection occurred before rebuild locks, so an older overlapping warmer could overwrite a newer directory. The repair sorts target locales, acquires every rebuild lock before reading authority/readiness or building payloads, then retains all-locale stage/verify and rollback-safe pointer activation. A regression proves both locale locks are held for every detail-readiness read and the existing synthetic later-locale failure still restores all pointers. The exact manifest suite passes 90 tests / 655 assertions plus 2 / 6 Big Five freeze assertions; 25 Pint paths, Composer/YAML/JSON, diff, and the exact twenty-eight-path scope gate are green. No production cache, DB, CMS, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T11:18:29Z"
+    "updated_at": "2026-07-18T11:43:51Z"
   }
 }

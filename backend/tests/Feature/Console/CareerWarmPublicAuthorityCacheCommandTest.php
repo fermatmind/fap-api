@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -294,6 +296,91 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertSame($oldZhVersion, $cache->directoryCacheStatus('zh-CN')['active_version']);
         $this->assertSame($oldEn, $cache->directoryReadModelPayload('en'));
         $this->assertSame($oldZh, $cache->directoryReadModelPayload('zh-CN'));
+    }
+
+    public function test_multi_locale_directory_payloads_are_built_only_after_all_rebuild_locks_are_held(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'lock-guard-family',
+            'title_en' => 'Lock Guard Family',
+            'title_zh' => '锁保护职业族',
+        ]);
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'lock-guard-career',
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'direct_match',
+            'canonical_title_en' => 'Lock Guard Career',
+            'canonical_title_zh' => '锁保护职业',
+            'search_h1_zh' => '锁保护职业',
+            'task_prototype_signature' => [],
+            'trust_inheritance_scope' => [],
+        ]);
+        $projectionItems = array_map(
+            static fn (string $locale): array => [
+                'slug' => 'lock-guard-career',
+                'locale' => $locale,
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+            ['en', 'zh'],
+        );
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $lockState = (object) ['depth' => 0, 'max_depth' => 0];
+        $detailReadinessReads = 0;
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('lock')
+                ->twice()
+                ->andReturnUsing(static fn () => new class($lockState)
+                {
+                    public function __construct(private readonly object $state) {}
+
+                    public function block(int $seconds, callable $callback): mixed
+                    {
+                        $this->state->depth++;
+                        $this->state->max_depth = max($this->state->max_depth, $this->state->depth);
+
+                        try {
+                            return $callback();
+                        } finally {
+                            $this->state->depth--;
+                        }
+                    }
+                });
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(function (string $key, mixed $default = null) use ($cacheManager, $lockState, &$detailReadinessReads): mixed {
+                    if (
+                        str_starts_with($key, PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':')
+                        && str_ends_with($key, ':active')
+                    ) {
+                        $detailReadinessReads++;
+                        $this->assertSame(2, $lockState->depth, 'Detail readiness was inspected before both locale rebuild locks were held.');
+                    }
+
+                    return $cacheManager->get($key, $default);
+                });
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static fn (string $key, mixed $value): bool => $cacheManager->forever($key, $value));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+
+            $cache->warmDirectoryReadModels(['en', 'zh-CN'], null, $projectionItems);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertGreaterThan(0, $detailReadinessReads);
+        $this->assertSame(2, $lockState->max_depth);
     }
 
     public function test_fifty_cold_rebuild_contenders_only_execute_one_builder(): void

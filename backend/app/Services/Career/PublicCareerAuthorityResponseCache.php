@@ -580,38 +580,53 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             fn (string $locale): string => $this->normalizePublicLocale($locale),
             $publicLocales === [] ? ['en', 'zh-CN'] : $publicLocales,
         )));
-        $sourceItems = CareerJobListItemResource::collection(
-            $this->careerJobListBundleBuilder->build(false)
-        )->resolve();
-
-        $payloads = [];
+        sort($locales, SORT_STRING);
         $startedAt = [];
         foreach ($locales as $locale) {
             $phase = 'career_directory_'.$this->cachePhaseLocale($locale);
             $reporter?->__invoke($phase, 'starting');
             $startedAt[$locale] = hrtime(true);
-            $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
-                'bundle_kind' => 'career_job_index',
-                'bundle_version' => 'career.protocol.job_index.v1',
-                'items' => $sourceItems,
-            ], $locale);
-            if ($exposureProjectionItems !== null) {
-                $jobIndex['items'] = $this->mergeExposureDirectoryItems(
-                    is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [],
-                    $exposureProjectionItems,
-                    $locale,
-                );
-            }
-            $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
-            $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
-                $items,
-                $locale,
-                fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
-            );
         }
 
         try {
-            $versions = $this->publishDirectoryReadModelsAtomically($payloads);
+            $activation = $this->withDirectoryRebuildLocks(
+                $locales,
+                function () use ($locales, $exposureProjectionItems): array {
+                    // Build from authority and inspect detail readiness only after
+                    // every target-locale rebuild lock is held. A delayed older
+                    // warmer therefore cannot activate a payload captured before
+                    // a newer detail warm or promotion completed.
+                    $sourceItems = CareerJobListItemResource::collection(
+                        $this->careerJobListBundleBuilder->build(false)
+                    )->resolve();
+                    $payloads = [];
+                    foreach ($locales as $locale) {
+                        $jobIndex = $this->filterJobIndexPayloadForPublicLocale([
+                            'bundle_kind' => 'career_job_index',
+                            'bundle_version' => 'career.protocol.job_index.v1',
+                            'items' => $sourceItems,
+                        ], $locale);
+                        if ($exposureProjectionItems !== null) {
+                            $jobIndex['items'] = $this->mergeExposureDirectoryItems(
+                                is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [],
+                                $exposureProjectionItems,
+                                $locale,
+                            );
+                        }
+                        $items = is_array($jobIndex['items'] ?? null) ? $jobIndex['items'] : [];
+                        $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
+                            $items,
+                            $locale,
+                            fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
+                        );
+                    }
+
+                    return [
+                        'payloads' => $payloads,
+                        'versions' => $this->stageAndActivateDirectoryReadModels($payloads),
+                    ];
+                },
+            );
         } finally {
             foreach ($startedAt as $locale => $started) {
                 try {
@@ -624,6 +639,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 }
             }
         }
+        $payloads = $activation['payloads'];
+        $versions = $activation['versions'];
         $summary = [];
         foreach ($payloads as $locale => $payload) {
             $phase = 'career_directory_'.$this->cachePhaseLocale($locale);
@@ -678,9 +695,10 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     }
 
     /**
-     * Stage every locale payload before switching any active pointer. If a
-     * pointer switch fails, restore all pointer metadata touched by the batch.
-     * Staged payloads are immutable and harmless when left unreachable.
+     * Stage every locale payload while all target-locale rebuild locks are held
+     * before switching any active pointer. If a pointer switch fails, restore
+     * all pointer metadata touched by the batch. Staged payloads are immutable
+     * and harmless when left unreachable.
      *
      * @param  array<string, array<string, mixed>>  $payloadsByLocale
      * @return array<string, string>
@@ -984,8 +1002,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     /**
      * @param  list<string>  $locales
-     * @param  callable(): array<string, string>  $callback
-     * @return array<string, string>
+     * @param  callable(): array<string, mixed>  $callback
+     * @return array<string, mixed>
      */
     private function withDirectoryRebuildLocks(array $locales, callable $callback, int $offset = 0): array
     {
