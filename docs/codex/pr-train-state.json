@@ -97057,9 +97057,9 @@
     "branch": "codex/career-detail-cold-miss-degrade-01",
     "title": "CAREER-DETAIL-COLD-MISS-DEGRADE-01: prevent published Career detail cold misses from returning generic 500",
     "depends_on": [],
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "commit_sha": "943cf071ea1b629092ff45e9733da5d2b377a9f6",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3163",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -97075,7 +97075,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR not opened yet."
+        "evidence": "PR #3163 is open and mergeable; required checks started on the pushed head and remain pending."
       }
     },
     "scope_validation": {
@@ -97109,8 +97109,13 @@
         "at": "2026-07-18T08:30:10Z",
         "status": "implementation_committed",
         "note": "Committed the exact seven-path implementation as 943cf071ea1b629092ff45e9733da5d2b377a9f6 after local checks and cached diff validation passed; this ledger-only follow-up binds the real implementation commit before push."
+      },
+      {
+        "at": "2026-07-18T08:31:55Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3163 against main with the manifest title and required what, why, validation, rule-impact, and deferred-scope sections. GitHub reports the PR open and mergeable; required checks are running."
       }
     ],
-    "updated_at": "2026-07-18T08:30:10Z"
+    "updated_at": "2026-07-18T08:31:55Z"
   }
 }
