@@ -97242,8 +97242,8 @@
     "depends_on": [
       "CAREER-DETAIL-CACHE-COVERAGE-01"
     ],
-    "status": "github_review_fix_ready_to_commit",
-    "commit_sha": "79920df10175bcd031f11a231c63164cb6881e50",
+    "status": "github_checks_pending",
+    "commit_sha": "8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3166",
     "checks": {
       "authorization": {
@@ -97260,7 +97260,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All nine checks passed on prior ready-ledger head 0f7c56c8948d4484022660dc0abac9cb36240d6f, but final review found an eleventh valid P2. The same-scope atomic job-index plus directory activation repair must complete full local and exact-head checks before merge."
+        "evidence": "All nine checks passed on prior ready-ledger head 0f7c56c8948d4484022660dc0abac9cb36240d6f. Atomic public job-index plus directory activation is committed as 8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81, the eleventh review thread is resolved, and exact-head checks are pending."
       }
     },
     "scope_validation": {
@@ -97419,8 +97419,13 @@
         "at": "2026-07-18T13:30:50Z",
         "status": "github_review_fix_ready_to_commit",
         "note": "The concurrency guard cleared and the complete PR3 manifest is green: 93 Career tests / 688 assertions plus 2 Big Five freeze tests / 6 assertions, all 26 Pint paths, Composer/YAML/JSON, diff, and exact twenty-nine-path scope validation. Promotion success now atomically aligns the public job-index API and directory, and the synthetic later-locale failure proves both job-index values and directory pointers restore."
+      },
+      {
+        "at": "2026-07-18T13:32:08Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed atomic public job-index plus directory activation as 8f9ca4a01c557f82fdb4731c8f7f3da783fdcb81. Replied to the eleventh review finding with immediate list-API exposure and cross-cache rollback regressions, then resolved the thread. Exact-head required checks are running; no production cache, DB, CMS, materialized SEO artifact, staging, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-18T13:30:50Z"
+    "updated_at": "2026-07-18T13:32:08Z"
   }
 }
