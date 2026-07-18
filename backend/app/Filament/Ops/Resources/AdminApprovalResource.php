@@ -9,6 +9,7 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Jobs\ExecuteApprovalJob;
 use App\Models\AdminApproval;
+use App\Models\AdminUser;
 use App\Services\Approvals\HighRiskApprovalService;
 use App\Services\Approvals\HighRiskApprovalValidationException;
 use App\Support\OrgContext;
@@ -18,6 +19,7 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -41,7 +43,24 @@ class AdminApprovalResource extends BaseTenantResource
 
     public static function canViewAny(): bool
     {
-        return static::canReview();
+        return static::canReview() || static::executableTypesForCurrentAdmin() !== [];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        if (static::canReview()) {
+            return $query;
+        }
+
+        $types = static::executableTypesForCurrentAdmin();
+        if ($types === []) {
+            return $query->whereRaw('1 = 0');
+        }
+
+        return $query
+            ->whereIn('status', [AdminApproval::STATUS_APPROVED, AdminApproval::STATUS_FAILED])
+            ->whereIn('type', $types);
     }
 
     public static function getNavigationBadge(): ?string
@@ -207,7 +226,7 @@ class AdminApprovalResource extends BaseTenantResource
                     ->label('Execute approved action')
                     ->icon('heroicon-o-play')
                     ->color('warning')
-                    ->visible(fn (AdminApproval $record): bool => static::canReview()
+                    ->visible(fn (AdminApproval $record): bool => static::canExecute($record)
                         && strtoupper((string) $record->status) === AdminApproval::STATUS_APPROVED
                         && app(HighRiskApprovalService::class)->executionSupported($record)
                         && app(HighRiskApprovalService::class)->hasValidGovernanceEvidence($record))
@@ -263,7 +282,10 @@ class AdminApprovalResource extends BaseTenantResource
                 Tables\Actions\Action::make('retryExecute')
                     ->label(__('ops.resources.approvals.actions.retry_execute'))
                     ->icon('heroicon-o-arrow-path')
-                    ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_FAILED)
+                    ->visible(fn (AdminApproval $record): bool => static::canExecute($record)
+                        && strtoupper((string) $record->status) === AdminApproval::STATUS_FAILED
+                        && app(HighRiskApprovalService::class)->executionSupported($record)
+                        && app(HighRiskApprovalService::class)->hasValidGovernanceEvidence($record))
                     ->requiresConfirmation()
                     ->form([static::freshStepUpField()])
                     ->action(function (AdminApproval $record, array $data): void {
@@ -301,22 +323,61 @@ class AdminApprovalResource extends BaseTenantResource
 
     private static function canReview(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
+        $user = static::currentAdmin();
 
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
+        return $user instanceof AdminUser
             && $user->hasPermission(PermissionNames::ADMIN_APPROVAL_REVIEW);
     }
 
-    private static function currentAdminId(): int
+    /** @return list<string> */
+    private static function executableTypesForCurrentAdmin(): array
+    {
+        $user = static::currentAdmin();
+        if (! $user instanceof AdminUser) {
+            return [];
+        }
+
+        $types = [];
+        $canOperate = $user->hasPermission(PermissionNames::ADMIN_OPS_WRITE);
+        if ($canOperate) {
+            $types = [
+                AdminApproval::TYPE_MANUAL_GRANT,
+                AdminApproval::TYPE_REVOKE_BENEFIT,
+                AdminApproval::TYPE_REPROCESS_EVENT,
+            ];
+        }
+        if ($canOperate && $user->hasPermission(PermissionNames::ADMIN_FINANCE_WRITE)) {
+            $types[] = AdminApproval::TYPE_REFUND;
+        }
+        if ($user->hasPermission(PermissionNames::ADMIN_CONTENT_RELEASE)
+            || $user->hasPermission(PermissionNames::ADMIN_OWNER)) {
+            $types[] = AdminApproval::TYPE_ROLLBACK_RELEASE;
+        }
+
+        return $types;
+    }
+
+    private static function canExecute(AdminApproval $record): bool
+    {
+        return app(HighRiskApprovalService::class)->canAuthorizeExecution(
+            $record,
+            static::currentAdminId(),
+        );
+    }
+
+    private static function currentAdmin(): ?AdminUser
     {
         $guard = (string) config('admin.guard', 'admin');
         $user = auth($guard)->user();
 
-        return is_object($user) && method_exists($user, 'getAuthIdentifier')
-            ? (int) $user->getAuthIdentifier()
-            : 0;
+        return $user instanceof AdminUser ? $user : null;
+    }
+
+    private static function currentAdminId(): int
+    {
+        $user = static::currentAdmin();
+
+        return $user instanceof AdminUser ? (int) $user->getAuthIdentifier() : 0;
     }
 
     private static function freshStepUpField(): Forms\Components\TextInput

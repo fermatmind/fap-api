@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Approvals;
 
+use App\Filament\Ops\Resources\AdminApprovalResource;
 use App\Models\AdminApproval;
 use App\Models\AdminUser;
 use App\Models\Permission;
@@ -197,6 +198,47 @@ final class HighRiskApprovalServiceTest extends TestCase
             'target_id' => (string) $legacy->id,
             'action' => 'approval_governance_rebound',
         ]);
+    }
+
+    public function test_team_separated_domain_executor_can_reach_execute_action_without_review_permission(): void
+    {
+        config()->set('review_governance.mode', 'team_separated');
+        $requester = $this->admin(totpEnabled: true);
+        $reviewer = $this->admin(
+            totpEnabled: true,
+            permissions: [PermissionNames::ADMIN_APPROVAL_REVIEW],
+        );
+        $executor = $this->admin(
+            totpEnabled: true,
+            permissions: [
+                PermissionNames::ADMIN_FINANCE_WRITE,
+                PermissionNames::ADMIN_OPS_WRITE,
+            ],
+        );
+        $approval = $this->approval(AdminApproval::TYPE_REFUND, $requester, [
+            'order_no' => 'ord-separated-executor-ui',
+        ]);
+        $service = app(HighRiskApprovalService::class);
+        $approved = $service->approve(
+            (string) $approval->id,
+            (int) $reviewer->id,
+            $this->freshStepUpCode($reviewer),
+        );
+
+        $canExecute = new ReflectionMethod(AdminApprovalResource::class, 'canExecute');
+        $canExecute->setAccessible(true);
+
+        $this->actingAs($reviewer, (string) config('admin.guard', 'admin'));
+        $this->assertFalse($canExecute->invoke(null, $approved));
+
+        $this->actingAs($executor, (string) config('admin.guard', 'admin'));
+        $this->assertTrue(AdminApprovalResource::canViewAny());
+        $this->assertTrue($canExecute->invoke(null, $approved));
+        $this->assertTrue($service->canAuthorizeExecution($approved, (int) $executor->id));
+
+        $this->actingAs($requester, (string) config('admin.guard', 'admin'));
+        $this->assertFalse(AdminApprovalResource::canViewAny());
+        $this->assertFalse($canExecute->invoke(null, $approved));
     }
 
     public function test_missing_step_up_non_owner_and_target_drift_fail_closed_without_action(): void

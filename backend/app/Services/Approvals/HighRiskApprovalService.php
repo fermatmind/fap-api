@@ -365,6 +365,17 @@ final readonly class HighRiskApprovalService
         return $this->assertExecutionActorPolicy($approval, $actorAdminUserId);
     }
 
+    public function canAuthorizeExecution(AdminApproval $approval, int $actorAdminUserId): bool
+    {
+        try {
+            $this->assertExecutionActorPolicy($approval, $actorAdminUserId);
+
+            return true;
+        } catch (HighRiskApprovalValidationException) {
+            return false;
+        }
+    }
+
     /** @return list<string> */
     public function supportedSurfaceIds(): array
     {
