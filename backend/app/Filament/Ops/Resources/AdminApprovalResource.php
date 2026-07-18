@@ -222,7 +222,7 @@ class AdminApprovalResource extends BaseTenantResource
                             : null;
 
                         $append = trim((string) ($data['reason_append'] ?? ''));
-                        if (preg_match('/\b(?:[a-z0-9]+[_-])*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i', $append) === 1) {
+                        if (preg_match('/\b[a-z0-9_-]*(?:token|totp|secret|password|authorization|cookie|api[_-]?key)\b\s*[:=]/i', $append) === 1) {
                             Notification::make()->title('Reject note must not contain credentials or secret material')->danger()->send();
 
                             return;

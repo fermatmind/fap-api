@@ -117,7 +117,7 @@ final class HighRiskApprovalServiceTest extends TestCase
         }
 
         $privateCredential = Str::random(40);
-        foreach (['token=', 'access_token=', 'cookie='] as $credentialPrefix) {
+        foreach (['token=', 'access_token=', 'cookie=', 'accessToken=', 'clientSecret=', 'apiKey='] as $credentialPrefix) {
             $approval->forceFill(['reason' => $credentialPrefix.$privateCredential])->save();
             try {
                 $service->approve((string) $approval->id, (int) $owner->id, (int) $owner->id);
@@ -204,15 +204,21 @@ final class HighRiskApprovalServiceTest extends TestCase
         $privateValue = Str::random(48);
         $accessToken = Str::random(48);
         $cookie = Str::random(48);
+        $accessTokenCamel = Str::random(48);
+        $clientSecret = Str::random(48);
+        $apiKey = Str::random(48);
         $sanitize = new ReflectionMethod($executor, 'sanitizeErrorMessage');
         $sanitize->setAccessible(true);
         $message = (string) $sanitize->invoke(
             $executor,
-            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' Authorization: Bearer '.$privateValue,
+            'provider failed token='.$privateValue.' access_token='.$accessToken.' cookie='.$cookie.' accessToken='.$accessTokenCamel.' clientSecret='.$clientSecret.' apiKey='.$apiKey.' Authorization: Bearer '.$privateValue,
         );
         $this->assertStringNotContainsString($privateValue, $message);
         $this->assertStringNotContainsString($accessToken, $message);
         $this->assertStringNotContainsString($cookie, $message);
+        $this->assertStringNotContainsString($accessTokenCamel, $message);
+        $this->assertStringNotContainsString($clientSecret, $message);
+        $this->assertStringNotContainsString($apiKey, $message);
         $this->assertStringContainsString('[REDACTED]', $message);
 
         $writeAudit = new ReflectionMethod($executor, 'writeAudit');
@@ -223,7 +229,7 @@ final class HighRiskApprovalServiceTest extends TestCase
             null,
             'approval_executed_failed',
             (string) Str::uuid(),
-            'secret='.$privateValue,
+            'clientSecret='.$clientSecret,
             (string) Str::uuid(),
             [
                 'totp' => $privateValue,
@@ -231,6 +237,7 @@ final class HighRiskApprovalServiceTest extends TestCase
                     'api_key' => $privateValue,
                     'access_token' => $accessToken,
                     'cookie' => $cookie,
+                    'provider_error' => 'apiKey='.$apiKey,
                 ],
             ],
         );
@@ -240,7 +247,10 @@ final class HighRiskApprovalServiceTest extends TestCase
         $this->assertStringNotContainsString($privateValue, (string) $audit->meta_json);
         $this->assertStringNotContainsString($accessToken, (string) $audit->meta_json);
         $this->assertStringNotContainsString($cookie, (string) $audit->meta_json);
+        $this->assertStringNotContainsString($apiKey, (string) $audit->meta_json);
+        $this->assertStringNotContainsString($clientSecret, (string) $audit->meta_json);
         $this->assertStringNotContainsString($privateValue, (string) $audit->reason);
+        $this->assertStringNotContainsString($clientSecret, (string) $audit->reason);
         $this->assertStringContainsString('[REDACTED]', (string) $audit->meta_json);
     }
 
