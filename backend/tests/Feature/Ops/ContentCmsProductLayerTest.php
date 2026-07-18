@@ -630,6 +630,8 @@ final class ContentCmsProductLayerTest extends TestCase
 
     public function test_editorial_review_approvals_are_persisted_and_gate_release_queue(): void
     {
+        config()->set('review_governance.mode', 'team_separated');
+
         $owner = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_WRITE,
         ]);
@@ -724,8 +726,77 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertTrue($article->is_public);
     }
 
+    public function test_configured_solo_owner_can_submit_and_approve_the_same_article_with_compact_evidence(): void
+    {
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $owner->id);
+
+        $session = $this->opsSession((int) $owner->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+        $article = $this->seedArticle([
+            'org_id' => $selectedOrgId,
+            'title' => 'Solo Owner Review Article',
+            'excerpt' => 'Solo owner ready excerpt',
+            'content_md' => 'Solo owner ready body',
+            'status' => 'draft',
+            'is_public' => false,
+        ]);
+        $this->ensureSeoReady($selectedOrgId, 'article', $article);
+
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        EditorialReviewAudit::assignOwner((int) $owner->id, 'article', $article);
+        EditorialReviewAudit::assignReviewer((int) $owner->id, 'article', $article);
+        EditorialReviewAudit::submit('article', $article);
+
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->assertSee('I reviewed this and approve')
+            ->call('approveItem', 'article', (int) $article->id);
+
+        $workflow = EditorialReview::withoutGlobalScopes()
+            ->where('content_type', 'article')
+            ->where('content_id', (int) $article->id)
+            ->firstOrFail();
+
+        $this->assertSame(EditorialReviewAudit::STATE_APPROVED, (string) $workflow->workflow_state);
+        $this->assertSame((int) $owner->id, (int) $workflow->owner_admin_user_id);
+        $this->assertSame((int) $owner->id, (int) $workflow->reviewer_admin_user_id);
+        $this->assertSame((int) $owner->id, (int) $workflow->submitted_by_admin_user_id);
+        $this->assertSame((int) $owner->id, (int) $workflow->reviewed_by_admin_user_id);
+        $this->assertDatabaseCount('review_attestations', 1);
+        $this->assertDatabaseCount('review_attestation_target_evidences', 3);
+        $this->assertSame('draft', (string) $article->refresh()->status);
+        $this->assertFalse((bool) $article->is_public);
+    }
+
+    public function test_team_separated_mode_rejects_the_same_owner_and_reviewer(): void
+    {
+        config()->set('review_governance.mode', 'team_separated');
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        $session = $this->opsSession((int) $admin->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+        $article = $this->seedArticle(['org_id' => $selectedOrgId]);
+
+        $this->setOpsContext($selectedOrgId, $admin, '/ops/editorial-review');
+        EditorialReviewAudit::assignOwner((int) $admin->id, 'article', $article);
+
+        $this->expectException(AuthorizationException::class);
+        $this->expectExceptionMessage('different owner and reviewer');
+
+        EditorialReviewAudit::assignReviewer((int) $admin->id, 'article', $article);
+    }
+
     public function test_editorial_review_can_approve_public_system_article_working_revision(): void
     {
+        config()->set('review_governance.mode', 'team_separated');
+
         $owner = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_WRITE,
         ]);
@@ -836,6 +907,8 @@ final class ContentCmsProductLayerTest extends TestCase
 
     public function test_reassigning_reviewer_invalidates_existing_approval_until_resubmitted(): void
     {
+        config()->set('review_governance.mode', 'team_separated');
+
         $owner = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_WRITE,
         ]);

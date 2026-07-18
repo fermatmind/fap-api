@@ -7,15 +7,19 @@ namespace App\Filament\Ops\Resources\InterpretationGuideResource\Pages;
 use App\Filament\Ops\Resources\InterpretationGuideResource;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\InterpretationGuide;
+use App\Services\Cms\CmsEditorialReviewTransitionService;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 
+/** @review-surface interpretation_guide */
 class EditInterpretationGuide extends EditRecord
 {
     protected static string $resource = InterpretationGuideResource::class;
+
+    private bool $releaseTransitioned = false;
 
     public function getTitle(): string|Htmlable
     {
@@ -83,7 +87,7 @@ class EditInterpretationGuide extends EditRecord
     {
         /** @var InterpretationGuide $record */
         $record = $record;
-        $workspace = app(RowBackedRevisionWorkspace::class);
+        $wasPublished = (string) $record->status === InterpretationGuide::STATUS_PUBLISHED;
         $revisionStatus = $record->isSourceContent()
             ? InterpretationGuide::TRANSLATION_STATUS_SOURCE
             : ((string) $data['status'] === InterpretationGuide::STATUS_PUBLISHED
@@ -94,10 +98,14 @@ class EditInterpretationGuide extends EditRecord
                         ? InterpretationGuide::TRANSLATION_STATUS_HUMAN_REVIEW
                         : InterpretationGuide::TRANSLATION_STATUS_DRAFT)));
 
-        $updated = $workspace->saveWorkingDraft(
-            'interpretation_guide',
-            $record,
-            [
+        $status = (string) $data['status'];
+        $reviewState = (string) $data['review_state'];
+
+        $updated = app(CmsEditorialReviewTransitionService::class)->saveRevisionedResource(
+            contentType: 'interpretation_guide',
+            surfaceId: 'interpretation_guide',
+            record: $record,
+            payload: [
                 'title' => trim((string) $data['title']),
                 'summary' => $data['summary'] ?? null,
                 'body_md' => (string) ($data['body_md'] ?? ''),
@@ -111,18 +119,22 @@ class EditInterpretationGuide extends EditRecord
                 'related_methodology_page_ids' => array_values((array) ($data['related_methodology_page_ids'] ?? [])),
                 'canonical_path' => $data['canonical_path'] ?? null,
             ],
-            $revisionStatus,
-            [
+            revisionStatus: $revisionStatus,
+            recordAttributes: [
                 'status' => (string) $data['status'],
                 'review_state' => (string) $data['review_state'],
                 'last_reviewed_at' => $data['last_reviewed_at'] ?? null,
                 'published_at' => $data['published_at'] ?? null,
             ],
+            reviewApproved: $reviewState === InterpretationGuide::REVIEW_APPROVED,
+            releaseRequested: in_array($status, [InterpretationGuide::STATUS_SCHEDULED, InterpretationGuide::STATUS_PUBLISHED], true),
+            publishNow: $status === InterpretationGuide::STATUS_PUBLISHED,
+            actorAdminUserId: (int) auth((string) config('admin.guard', 'admin'))->id(),
         );
+        $this->releaseTransitioned = ! $wasPublished
+            && (string) $updated->status === InterpretationGuide::STATUS_PUBLISHED;
 
-        return (string) $data['status'] === InterpretationGuide::STATUS_PUBLISHED
-            ? $workspace->publishWorkingRevision('interpretation_guide', $updated)
-            : $updated;
+        return $updated;
     }
 
     protected function afterSave(): void
@@ -130,7 +142,7 @@ class EditInterpretationGuide extends EditRecord
         /** @var InterpretationGuide $record */
         $record = $this->getRecord()->fresh();
 
-        if (ContentReleaseAudit::shouldDispatchPublishedFollowUp('interpretation_guide', $record, [
+        if ($this->releaseTransitioned || ContentReleaseAudit::shouldDispatchPublishedFollowUp('interpretation_guide', $record, [
             'title',
             'summary',
             'body_md',

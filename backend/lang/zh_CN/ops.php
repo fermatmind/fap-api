@@ -1118,6 +1118,7 @@ return [
             'filters_hint' => '按内容类型或准备状态聚焦审核队列，无需离开本页。',
             'select_owner' => '选择负责人',
             'select_reviewer' => '选择审核人',
+            'solo_owner_approve' => '本人已审核并通过',
             'assign_hint' => '先分配负责人和审核人，再提交。',
             'empty_title' => '当前审核筛选下没有匹配草稿',
             'empty_desc' => '调整类型或审核状态筛选，或从内容编辑运营界面创建新草稿内容。',

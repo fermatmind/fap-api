@@ -15,6 +15,11 @@ use App\Services\Audit\AuditLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @review-surface article
+ * @review-surface article_translation_revision
+ * @review-surface editorial_review
+ */
 final class ArticleTranslationWorkflowService
 {
     public const PUBLIC_EDITORIAL_ORG_ID = 0;
@@ -24,6 +29,7 @@ final class ArticleTranslationWorkflowService
         private readonly ArticleTranslationRevisionWorkspace $workspace,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly AuditLogger $auditLogger,
+        private readonly CmsEditorialReviewAttestationService $reviewAttestations,
     ) {}
 
     public function canGenerateMachineDraft(): bool
@@ -214,19 +220,31 @@ final class ArticleTranslationWorkflowService
         });
     }
 
-    public function approveTranslation(Article $target): ArticleTranslationRevision
+    /** @param array<string, mixed>|null $attestation */
+    public function approveTranslation(Article $target, ?array $attestation = null): ArticleTranslationRevision
     {
-        return $this->approveHumanReviewRevision($target, null, true);
+        return $this->approveHumanReviewRevision($target, null, true, $attestation, true);
     }
 
-    public function approveEditorialWorkingRevision(Article $target, ?int $adminUserId = null): ArticleTranslationRevision
-    {
-        return $this->approveHumanReviewRevision($target, $adminUserId, false);
+    /** @param array<string, mixed>|null $attestation */
+    public function approveEditorialWorkingRevision(
+        Article $target,
+        ?int $adminUserId = null,
+        ?array $attestation = null,
+        bool $bindAttestation = true,
+    ): ArticleTranslationRevision {
+        return $this->approveHumanReviewRevision($target, $adminUserId, false, $attestation, $bindAttestation);
     }
 
-    private function approveHumanReviewRevision(Article $target, ?int $adminUserId, bool $markEditorialApproved): ArticleTranslationRevision
-    {
-        return DB::transaction(function () use ($target, $adminUserId, $markEditorialApproved): ArticleTranslationRevision {
+    /** @param array<string, mixed>|null $attestation */
+    private function approveHumanReviewRevision(
+        Article $target,
+        ?int $adminUserId,
+        bool $markEditorialApproved,
+        ?array $attestation,
+        bool $bindAttestation,
+    ): ArticleTranslationRevision {
+        return DB::transaction(function () use ($target, $adminUserId, $markEditorialApproved, $attestation, $bindAttestation): ArticleTranslationRevision {
             $locked = $this->lockWorkingArticle($target);
             $revision = $this->workingRevisionOrFail($locked);
 
@@ -249,6 +267,19 @@ final class ArticleTranslationWorkflowService
 
             if ($blockers !== []) {
                 throw new ArticleTranslationWorkflowException('Translation approval is blocked by preflight issues.', $blockers);
+            }
+
+            if ($bindAttestation && ($attestation !== null || $this->reviewAttestations->usesSoloOwnerMode())) {
+                $this->reviewAttestations->bindOrCreateApproved(
+                    attestation: $attestation,
+                    scopeType: 'cms_article_review',
+                    scopeIdentity: 'article:'.(int) $locked->id.':revision:'.(int) $revision->id,
+                    resources: [
+                        ['surface_id' => 'article', 'record' => $locked],
+                        ['surface_id' => 'article_translation_revision', 'record' => $revision],
+                    ],
+                    actorAdminUserId: $actorId,
+                );
             }
 
             $now = now();

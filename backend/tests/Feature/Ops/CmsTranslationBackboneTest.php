@@ -70,6 +70,10 @@ final class CmsTranslationBackboneTest extends TestCase
 
     public function test_row_backed_translation_workflow_publishes_with_invalidation_signals(): void
     {
+        $owner = $this->createAdminWithPermissions([PermissionNames::ADMIN_APPROVAL_REVIEW]);
+        config()->set('review_governance.solo_owner_admin_user_id', (int) $owner->id);
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'));
+
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
             'https://cache.example.test/invalidate',
         ]);
@@ -109,6 +113,9 @@ final class CmsTranslationBackboneTest extends TestCase
                 'result' => 'success',
             ]);
         }
+
+        $this->assertDatabaseCount('review_attestations', 3);
+        $this->assertDatabaseCount('review_attestation_target_evidences', 6);
     }
 
     public function test_row_backed_translation_preflight_blocks_stale_publish(): void

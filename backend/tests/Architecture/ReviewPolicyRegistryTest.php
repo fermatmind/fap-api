@@ -115,6 +115,34 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertFalse($artifact['boundaries']['public_reviewer_identity_allowed']);
     }
 
+    public function test_pr2_cms_adapters_are_active_without_weakening_external_evidence(): void
+    {
+        $byId = collect(ReviewPolicyRegistry::all())->keyBy('surface_id');
+
+        foreach ([
+            'article',
+            'article_translation_revision',
+            'cms_translation_revision',
+            'content_page',
+            'support_article',
+            'interpretation_guide',
+            'editorial_review',
+        ] as $surfaceId) {
+            $this->assertSame('compact_attestation_adapter_active', $byId[$surfaceId]['adapter_status']);
+        }
+
+        $this->assertSame(
+            'compact_attestation_adapter_active_external_evidence_still_required',
+            $byId['research_report']['adapter_status'],
+        );
+        $this->assertTrue($byId['research_report']['external_evidence_required']);
+        $this->assertSame(
+            'external_evidence_gate_preserved',
+            $byId['content_page_external_evidence_gate']['adapter_status'],
+        );
+        $this->assertTrue($byId['content_page_external_evidence_gate']['external_evidence_required']);
+    }
+
     public function test_new_or_modified_manual_review_gates_declare_a_registered_surface(): void
     {
         $repoRoot = dirname(__DIR__, 3);

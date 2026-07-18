@@ -6,10 +6,16 @@ namespace App\Services\ContentPages;
 
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
+use App\Services\Cms\CmsEditorialReviewAttestationService;
+use App\Services\Cms\ContentPagePublishGate;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
+/**
+ * @review-surface content_page
+ * @review-surface content_page_external_evidence_gate
+ */
 final class ContentPagesControlledPublishService
 {
     public const COMMAND = 'content-pages:publish-controlled';
@@ -94,6 +100,8 @@ final class ContentPagesControlledPublishService
 
     public function __construct(
         private readonly RowBackedRevisionWorkspace $workspace,
+        private readonly CmsEditorialReviewAttestationService $reviewAttestations,
+        private readonly ContentPagePublishGate $publishGate,
     ) {}
 
     /**
@@ -169,12 +177,6 @@ final class ContentPagesControlledPublishService
                     continue;
                 }
 
-                if ($scope === self::SCOPE_SCIENCE_ZH) {
-                    $page = $this->prepareScienceZhForPublish($page);
-                } elseif ($scope === self::SCOPE_HELP_SERVICE && $page->isScienceControlledPage()) {
-                    $page = $this->prepareScienceControlledGateForPublish($page);
-                }
-
                 $page->load('workingRevision');
                 $publishPayloadHash = $page->workingRevision instanceof CmsTranslationRevision
                     ? $this->workspace->revisionPayloadHash($page->workingRevision)
@@ -186,12 +188,6 @@ final class ContentPagesControlledPublishService
                     $expectedRevisionId,
                     $publishPayloadHash,
                 );
-                if ($scope === self::SCOPE_SCIENCE_ZH) {
-                    $publishedPage = $this->prepareScienceZhForPublish($publishedPage);
-                } elseif ($scope === self::SCOPE_HELP_SERVICE && $publishedPage->isScienceControlledPage()) {
-                    $publishedPage = $this->prepareScienceControlledGateForPublish($publishedPage);
-                }
-
                 $published[] = (string) ($pagePlan['target_key'] ?? $publishedPage->slug);
             }
 
@@ -421,6 +417,44 @@ final class ContentPagesControlledPublishService
             $errors[] = $this->issue('content_pages.'.$key.'.status', 'invalid_publish_state', 'Target content page must be an unpublished draft or an already-published idempotency match.');
         }
 
+        if ((string) $page->review_state !== 'approved') {
+            $errors[] = $this->issue('content_pages.'.$key.'.review_state', 'review_not_approved', 'Controlled publish requires a separately completed content review.');
+        } elseif ($this->reviewAttestations->usesSoloOwnerMode()) {
+            $persistedPage = ContentPage::query()
+                ->withoutGlobalScopes()
+                ->find($page->getKey());
+            $working = $persistedPage instanceof ContentPage && $persistedPage->working_revision_id
+                ? CmsTranslationRevision::query()->withoutGlobalScopes()->find((int) $persistedPage->working_revision_id)
+                : null;
+            $contentSnapshot = $persistedPage instanceof ContentPage && ! $this->isPublishedTarget($persistedPage)
+                ? $this->workspace->editorRecord('content_page', $persistedPage)
+                : $persistedPage;
+            if (! $persistedPage instanceof ContentPage
+                || ! $contentSnapshot instanceof ContentPage
+                || ! $this->reviewAttestations->hasApprovedEvidence('content_page', $contentSnapshot)) {
+                $errors[] = $this->issue('content_pages.'.$key.'.review_attestation', 'content_review_attestation_missing_or_stale', 'Controlled publish requires approved compact evidence for the exact current content snapshot.');
+            }
+            if (! $working instanceof CmsTranslationRevision
+                || ! $this->reviewAttestations->hasApprovedEvidence('cms_translation_revision', $working)) {
+                $errors[] = $this->issue('content_pages.'.$key.'.review_attestation', 'revision_review_attestation_missing_or_stale', 'Controlled publish requires approved compact evidence for the exact current working revision snapshot.');
+            }
+        }
+
+        $publishCandidate = clone $page;
+        $publishCandidate->forceFill([
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+        ]);
+        foreach ($this->publishGate->errorsFor($publishCandidate) as $field => $messages) {
+            foreach ($messages as $message) {
+                $errors[] = $this->issue(
+                    'content_pages.'.$key.'.'.$field,
+                    'publish_gate_not_ready',
+                    $message,
+                );
+            }
+        }
+
         if ($scope === self::SCOPE_HELP_SERVICE) {
             array_push($errors, ...$this->preflightHelpServicePage($page));
         }
@@ -501,8 +535,8 @@ final class ContentPagesControlledPublishService
             $errors[] = $this->issue($fieldPrefix.'.kind', 'invalid_kind', 'Help service controlled publish only allows kind=help.');
         }
 
-        if ((string) $page->review_state !== 'owner_review' && (string) $page->review_state !== 'approved') {
-            $errors[] = $this->issue($fieldPrefix.'.review_state', 'invalid_review_state', 'Help service page must remain owner_review or approved before controlled publish.');
+        if ((string) $page->review_state !== 'approved') {
+            $errors[] = $this->issue($fieldPrefix.'.review_state', 'invalid_review_state', 'Help service page must be separately approved before controlled publish.');
         }
 
         if ((string) $page->support_contact !== 'support@fermatmind.com') {
@@ -567,68 +601,6 @@ final class ContentPagesControlledPublishService
             && in_array((string) $page->slug, self::SCIENCE_ZH_ALLOWED_KEYS, true)
             && (string) $page->locale === self::SCIENCE_ZH_LOCALE
             && ((bool) $page->is_indexable || ! $page->passesPublicReadinessGate());
-    }
-
-    private function prepareScienceZhForPublish(ContentPage $page): ContentPage
-    {
-        $page = $this->prepareScienceControlledGateForPublish($page);
-
-        return $page->refresh();
-    }
-
-    private function prepareScienceControlledGateForPublish(ContentPage $page): ContentPage
-    {
-        $approvedAt = $page->operator_approved_at ?? now();
-        $reviewedAt = $page->last_reviewed_at ?? now();
-        $payloadPatch = [
-            'review_state' => 'approved',
-            'legal_review_required' => false,
-            'science_review_required' => false,
-            'reviewer' => trim((string) $page->reviewer) === '' ? 'operator_review' : $page->reviewer,
-            'schema_enabled' => false,
-            'publish_allowed' => true,
-            'operator_approval_required' => true,
-            'operator_approved_at' => $approvedAt,
-            'claim_gate_status' => 'passed',
-            'forbidden_claims' => [],
-            'faq_schema_eligible' => false,
-            'schema_eligibility_reviewed_at' => null,
-            'is_public' => false,
-            'is_indexable' => false,
-        ];
-
-        $working = $this->workspace->workingRevision('content_page', $page);
-        $payload = is_array($working->payload_json) ? $working->payload_json : [];
-        $working->forceFill([
-            'revision_status' => CmsTranslationRevision::STATUS_APPROVED,
-            'payload_json' => [
-                ...$payload,
-                ...$payloadPatch,
-                'operator_approved_at' => $approvedAt,
-                'schema_eligibility_reviewed_at' => null,
-            ],
-            'approved_at' => $working->approved_at ?? $approvedAt,
-        ])->save();
-
-        $page->forceFill([
-            'review_state' => 'approved',
-            'legal_review_required' => false,
-            'science_review_required' => false,
-            'last_reviewed_at' => $reviewedAt,
-            'reviewer' => (string) $payloadPatch['reviewer'],
-            'schema_enabled' => false,
-            'publish_allowed' => true,
-            'operator_approval_required' => true,
-            'operator_approved_at' => $approvedAt,
-            'claim_gate_status' => 'passed',
-            'forbidden_claims' => [],
-            'faq_schema_eligible' => false,
-            'schema_eligibility_reviewed_at' => null,
-            'is_indexable' => false,
-            'working_revision_id' => (int) $working->id,
-        ])->save();
-
-        return $page->refresh();
     }
 
     private function hasFoundationOverclaim(mixed $page): bool
@@ -725,19 +697,19 @@ final class ContentPagesControlledPublishService
             return [
                 ...$preview,
                 'is_indexable' => false,
-                'review_state' => 'approved',
-                'legal_review_required' => false,
-                'science_review_required' => false,
-                'last_reviewed_at' => $page->last_reviewed_at?->toDateTimeString() ?? 'set_at_execute_time',
-                'publish_allowed' => true,
-                'operator_approval_required' => true,
-                'operator_approved_at' => $page->operator_approved_at?->toDateTimeString() ?? 'set_at_execute_time',
-                'claim_gate_status' => 'passed',
-                'forbidden_claims' => [],
-                'schema_enabled' => false,
-                'faq_schema_eligible' => false,
-                'schema_eligibility_reviewed_at' => null,
-                'public_readiness_gate' => 'pass_after_execute',
+                'review_state' => (string) $page->review_state,
+                'legal_review_required' => (bool) $page->legal_review_required,
+                'science_review_required' => (bool) $page->science_review_required,
+                'last_reviewed_at' => $page->last_reviewed_at?->toDateTimeString(),
+                'publish_allowed' => (bool) $page->publish_allowed,
+                'operator_approval_required' => (bool) $page->operator_approval_required,
+                'operator_approved_at' => $page->operator_approved_at?->toDateTimeString(),
+                'claim_gate_status' => (string) $page->claim_gate_status,
+                'forbidden_claims' => is_array($page->forbidden_claims) ? $page->forbidden_claims : [],
+                'schema_enabled' => (bool) $page->schema_enabled,
+                'faq_schema_eligible' => (bool) $page->faq_schema_eligible,
+                'schema_eligibility_reviewed_at' => $page->schema_eligibility_reviewed_at?->toDateTimeString(),
+                'public_readiness_gate' => $page->passesPublicReadinessGate() ? 'pass' : 'blocked',
             ];
         }
 

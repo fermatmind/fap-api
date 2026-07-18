@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\ContentPageResource;
 use App\Models\ContentPage;
 use Illuminate\Database\Eloquent\Model;
 
+/** @review-surface content_page */
 final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdapter
 {
     public function contentType(): string
@@ -147,7 +148,6 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
     {
         return [
             'status' => ContentPage::STATUS_PUBLISHED,
-            'review_state' => 'approved',
             'is_public' => true,
             'published_at' => $target->published_at ?? now(),
         ];

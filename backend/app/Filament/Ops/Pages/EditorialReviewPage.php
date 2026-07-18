@@ -21,6 +21,10 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Auth\Access\AuthorizationException;
 
+/**
+ * @review-surface article
+ * @review-surface editorial_review
+ */
 class EditorialReviewPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
@@ -167,7 +171,11 @@ class EditorialReviewPage extends Page
         if ($workingRevision instanceof ArticleTranslationRevision
             && $workingRevision->revision_status === ArticleTranslationRevision::STATUS_HUMAN_REVIEW) {
             app(ArticleTranslationWorkflowService::class)
-                ->approveEditorialWorkingRevision($record, $this->actorAdminId());
+                ->approveEditorialWorkingRevision(
+                    $record,
+                    $this->actorAdminId(),
+                    bindAttestation: false,
+                );
         }
 
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
@@ -472,6 +480,8 @@ class EditorialReviewPage extends Page
                 && $this->canDecideReview([
                     'reviewer_admin_user_id' => $reviewerAdminId,
                 ]),
+            'solo_owner_attestation' => $type === 'article'
+                && EditorialReviewAudit::isSoloOwnerActor($this->actorAdminId()),
         ];
     }
 
@@ -562,7 +572,7 @@ class EditorialReviewPage extends Page
      */
     private function canSubmitForReview(?array $snapshot): bool
     {
-        if (ContentAccess::isOwner()) {
+        if (EditorialReviewAudit::isSoloOwnerActor($this->actorAdminId())) {
             return true;
         }
 
@@ -580,7 +590,7 @@ class EditorialReviewPage extends Page
      */
     private function canDecideReview(?array $snapshot): bool
     {
-        if (ContentAccess::isOwner()) {
+        if (EditorialReviewAudit::isSoloOwnerActor($this->actorAdminId())) {
             return true;
         }
 

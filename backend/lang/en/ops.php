@@ -1118,6 +1118,7 @@ return [
             'filters_hint' => 'Focus the review queue by content type or readiness state without leaving the page.',
             'select_owner' => 'Select owner',
             'select_reviewer' => 'Select reviewer',
+            'solo_owner_approve' => 'I reviewed this and approve',
             'assign_hint' => 'Assign owner + reviewer, then submit.',
             'empty_title' => 'No draft records match the current review filter',
             'empty_desc' => 'Adjust the type or review-state filter, or create new draft content from the editorial operations surface.',
