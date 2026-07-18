@@ -180,6 +180,15 @@ vhost to loopback for `GET /api/healthz`. It requires HTTP `200` and JSON
 raw configuration values. A non-allowlisted public request to `/api/healthz`
 continues to return `404` by design and is not a wrapper failure signal.
 
+The post-symlink public scale lookup smoke uses
+`backend/scripts/deploy/verify_scale_lookup.sh`. Each configured slug receives
+at most three complete HTTP-and-JSON attempts, with a two-second delay, a
+five-second connect timeout, and a forty-second per-attempt timeout. A transient
+transport error or `5xx` may recover on a later attempt; persistent transport
+failure, malformed JSON, `ok != true`, or a mismatched `primary_slug` remains a
+blocking deployment failure. The helper does not print the probed authority or
+the response body.
+
 Public backend evidence comes from `GET /api/v0.3/flags` and the zh-CN Big Five
 hub Personality API. Both must return `200`. The Personality request carries
 `User-Agent: FermatMindReleaseProbe/<PROBE_ID>` so a later read-only target-node
