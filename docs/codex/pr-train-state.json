@@ -98016,9 +98016,9 @@
     "branch": "codex/big5-en52-translation-authority-01",
     "title": "BIG5-EN52-TRANSLATION-AUTHORITY-01: freeze English translation authority",
     "depends_on": [],
-    "status": "committed",
+    "status": "github_checks_pending",
     "commit_sha": "11f70252e0fe1aa0def95a09a7cb47d871143e9e",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3181",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -98069,9 +98069,14 @@
         "at": "2026-07-18T18:43:00Z",
         "status": "committed",
         "note": "Committed the exact 13-path Task 1 authority scope as 11f70252e0fe1aa0def95a09a7cb47d871143e9e after all required local and staged checks passed. The unrelated .workbuddy directory remains untracked and unstaged."
+      },
+      {
+        "at": "2026-07-18T18:45:00Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3181. GitHub required checks will be evaluated on the final ledger head before any merge or PR2 work; no staging or deployment workflow is awaited."
       }
     ],
-    "updated_at": "2026-07-18T18:43:00Z"
+    "updated_at": "2026-07-18T18:45:00Z"
   },
   "BIG5-EN52-HUBS-02": {
     "id": "BIG5-EN52-HUBS-02",
