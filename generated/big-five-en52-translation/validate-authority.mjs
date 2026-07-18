@@ -10,6 +10,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(ROOT, '..', '..');
 const EXPECTED_SOURCE_SHA = '056b10d3f640d0cf7da35ec7bc99b009408049e75c1e25aa8e760eb8641ea8d5';
 const EXPECTED_RELEASE_SHA = '83536987f7edc73d668f481942c94f6bf549abf23a0e498941f47bc56726490d';
+const EXPECTED_MANIFEST_SHA = 'd7909510e3b306ba6dceb03286ed3d05f3ffa19edd688606b6d2d4b329895c56';
 const ALIASES = new Set([
   'emotional-stability', 'high-agreeableness', 'high-conscientiousness', 'high-extraversion',
   'high-neuroticism', 'high-openness', 'low-agreeableness', 'low-conscientiousness',
@@ -74,10 +75,14 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const errors = [];
   const fail = (gate, detail) => errors.push({ gate, detail });
-  const manifest = await json('manifests/canonical-manifest.en-US.json');
+  const manifestBytes = await readFile(path.join(ROOT, 'manifests/canonical-manifest.en-US.json'));
+  const manifest = JSON.parse(manifestBytes.toString('utf8'));
+  const pageMapBytes = await readFile(path.join(ROOT, 'manifests/zh-en-page-map.csv'));
   const ledger = await json('manifests/translation-ledger.json');
-  const glossary = await json('authority/terminology-glossary.en-US.json');
-  const registry = await json('authority/source-registry.en-US.json');
+  const glossaryBytes = await readFile(path.join(ROOT, 'authority/terminology-glossary.en-US.json'));
+  const glossary = JSON.parse(glossaryBytes.toString('utf8'));
+  const registryBytes = await readFile(path.join(ROOT, 'authority/source-registry.en-US.json'));
+  const registry = JSON.parse(registryBytes.toString('utf8'));
   const releasePath = path.join(
     REPO_ROOT,
     'generated/big-five-authority-v3/big5-zh-v3-52-page-release/release-package.json',
@@ -86,8 +91,15 @@ async function main() {
   const release = JSON.parse(releaseBytes.toString('utf8'));
   if (sha256(releaseBytes) !== EXPECTED_RELEASE_SHA) fail('source_release_file_sha', 'Locked release package SHA drifted.');
   if (release.source_content_sha256 !== EXPECTED_SOURCE_SHA) fail('source_content_sha', 'Locked source content SHA drifted.');
+  if (sha256(manifestBytes) !== EXPECTED_MANIFEST_SHA) fail('canonical_manifest_sha', 'Frozen canonical manifest bytes drifted.');
+  if (sha256(pageMapBytes) !== manifest.authority.zh_en_page_map_sha256)
+    fail('zh_en_page_map_sha', 'zh-en page map drifted from the frozen canonical manifest.');
   if (manifest.authority.source_registry_sha256 !== release.source_registry_sha256)
     fail('source_registry_sha', 'Canonical manifest source registry SHA drifted from the locked release package.');
+  if (sha256(registryBytes) !== manifest.authority.projected_source_registry_sha256)
+    fail('projected_source_registry_sha', 'Generated English source registry drifted from its locked projection.');
+  if (sha256(glossaryBytes) !== manifest.authority.projected_terminology_sha256)
+    fail('projected_terminology_sha', 'Generated English terminology drifted from its locked projection.');
 
   const entries = manifest.entries ?? [];
   const identities = entries.map((entry) => entry.page_identity);
@@ -109,6 +121,31 @@ async function main() {
   if (entries.some((entry) => !/^[a-f0-9]{64}$/.test(entry.zh_source_sha256)
     || !/^[a-f0-9]{64}$/.test(entry.zh_runtime_projection_sha256)))
     fail('source_page_sha', 'A source page or source projection SHA is invalid.');
+  const releaseByAuthorityKey = new Map(release.assets.map((entry) => [entry.authority_asset_key, entry]));
+  for (const entry of entries) {
+    const lockedSource = releaseByAuthorityKey.get(entry.authority_asset_key);
+    if (!lockedSource) {
+      fail('unknown_canonical_target', entry.page_identity);
+      continue;
+    }
+    const expectedTarget = {
+      page_identity: lockedSource.authority_asset_key,
+      entity_type: lockedSource.asset.entity_type,
+      entity_key: lockedSource.asset.entity_key,
+      zh_source_path: lockedSource.source_file,
+      zh_source_ids: lockedSource.asset.authority.sources.map((source) => source.id),
+      zh_runtime_projection_sha256: lockedSource.runtime_projection_sha256,
+      zh_canonical_path: lockedSource.asset.canonical.path,
+      en_slug: lockedSource.asset.slug,
+      en_canonical_path: lockedSource.asset.canonical.path.replace(/^\/zh\//, '/en/'),
+      en_output_path: lockedSource.source_file.replace('.zh-CN.md', '.en-US.md'),
+      en_claim_output_path: `evidence/${lockedSource.authority_asset_key}.claims.json`,
+    };
+    for (const [key, expected] of Object.entries(expectedTarget)) {
+      if (JSON.stringify(entry[key]) !== JSON.stringify(expected))
+        fail('canonical_target_lock', `${entry.page_identity}: ${key}`);
+    }
+  }
 
   const counts = Object.fromEntries(['hub', 'domain', 'polarity', 'facet_hub', 'facet_detail']
     .map((type) => [type, entries.filter((entry) => entry.entity_type === type).length]));
@@ -183,7 +220,6 @@ async function main() {
     fail('translated_page_file_count', `Expected ${completed.length}, found ${pageFiles.length}.`);
 
   const manifestByIdentity = new Map(entries.map((entry) => [entry.page_identity, entry]));
-  const releaseByAuthorityKey = new Map(release.assets.map((entry) => [entry.authority_asset_key, entry]));
   const pageByIdentity = new Map();
   const paragraphOwners = new Map();
   let untranslatedChineseFragmentCount = 0;

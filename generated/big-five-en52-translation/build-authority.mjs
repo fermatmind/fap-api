@@ -141,7 +141,11 @@ function csv(rows) {
 async function writeJson(relativePath, value) {
   const output = path.join(PACKAGE_ROOT, relativePath);
   await mkdir(path.dirname(output), { recursive: true });
-  await writeFile(output, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+  await writeFile(output, serializedJson(value), 'utf8');
+}
+
+function serializedJson(value) {
+  return `${JSON.stringify(value, null, 2)}\n`;
 }
 
 function frontmatterValue(markdown, key) {
@@ -269,66 +273,6 @@ async function main() {
     });
   }
 
-  const familyCounts = Object.fromEntries(
-    [...new Set(entries.map((entry) => entry.entity_type))]
-      .sort()
-      .map((type) => [type, entries.filter((entry) => entry.entity_type === type).length]),
-  );
-  const manifest = {
-    schema_version: 'big-five-en52-canonical-manifest.v1',
-    package_id: 'fermatmind-big-five-en52-translation',
-    generated_at: reviewedDate,
-    review_timezone: 'Asia/Shanghai',
-    target_editorial_locale: 'en-US',
-    backend_locale_contract: 'en',
-    canonical_locale_segment: 'en',
-    authority: {
-      source_package: 'FermatMind-Big-Five-ZH-V3-content-package',
-      source_content_sha256: SOURCE_CONTENT_SHA256,
-      source_release_package: 'generated/big-five-authority-v3/big5-zh-v3-52-page-release/release-package.json',
-      source_release_payload_sha256: SOURCE_PACKAGE_PAYLOAD_SHA256,
-      source_release_file_sha256: SOURCE_PACKAGE_FILE_SHA256,
-      source_registry_sha256: release.source_registry_sha256,
-      source_registry_version: sourceRegistry.registry_version,
-      terminology_version: 'big-five-en52-terminology.v1',
-      claim_mapping_version: 'big-five-en52-claims.v1',
-    },
-    counts: {
-      page_count: entries.length,
-      model_hub_count: familyCounts.hub,
-      domain_count: familyCounts.domain,
-      range_count: familyCounts.polarity,
-      facet_hub_count: familyCounts.facet_hub,
-      facet_detail_count: familyCounts.facet_detail,
-      legacy_alias_page_count: 0,
-    },
-    constraints: {
-      media_supported: false,
-      cms_write_allowed: false,
-      production_write_allowed: false,
-      publish_allowed: false,
-      deploy_allowed: false,
-      runtime_seo_change_allowed: false,
-      fap_web_change_allowed: false,
-    },
-    entries,
-  };
-  await writeJson('manifests/canonical-manifest.en-US.json', manifest);
-
-  const mapHeader = [
-    'asset_index', 'page_identity', 'authority_asset_key', 'entity_type', 'entity_key', 'parent_identity',
-    'zh_source_path', 'zh_source_sha256', 'zh_section_count', 'zh_faq_count', 'zh_source_ids',
-    'zh_runtime_projection_sha256', 'zh_canonical_path',
-    'target_editorial_locale', 'backend_locale_contract', 'en_locked_name', 'en_slug',
-    'en_canonical_path', 'en_output_path', 'en_claim_output_path', 'translation_pr', 'translation_status',
-  ];
-  await mkdir(path.join(PACKAGE_ROOT, 'manifests'), { recursive: true });
-  await writeFile(
-    path.join(PACKAGE_ROOT, 'manifests/zh-en-page-map.csv'),
-    csv([mapHeader, ...entries.map((entry) => mapHeader.map((key) => entry[key]))]),
-    'utf8',
-  );
-
   const facets = Object.entries(FACETS).flatMap(([domain, rows]) => rows.map(([code, entityKey, name]) => ({
     code,
     domain,
@@ -336,7 +280,7 @@ async function main() {
     canonical_en: name,
     semantic_boundary: BOUNDARIES[entityKey] ?? null,
   })));
-  await writeJson('authority/terminology-glossary.en-US.json', {
+  const projectedTerminology = {
     schema_version: 'big-five-en52-terminology.v1',
     locale: 'en-US',
     status: 'locked',
@@ -367,9 +311,8 @@ async function main() {
       'A facet equals an independent personality type',
       'A high, mid-range, or low band is a diagnostic or normative category',
     ],
-  });
-
-  await writeJson('authority/source-registry.en-US.json', {
+  };
+  const projectedSourceRegistry = {
     schema_version: 'big-five-en52-source-registry.v1',
     locale: 'en-US',
     source_registry_version: sourceRegistry.registry_version,
@@ -390,7 +333,74 @@ async function main() {
         ? 'bibliographic_only_rechecked_against_official_publisher_metadata'
         : 'rechecked_against_primary_or_registration_metadata',
     })),
-  });
+  };
+  const mapHeader = [
+    'asset_index', 'page_identity', 'authority_asset_key', 'entity_type', 'entity_key', 'parent_identity',
+    'zh_source_path', 'zh_source_sha256', 'zh_section_count', 'zh_faq_count', 'zh_source_ids',
+    'zh_runtime_projection_sha256', 'zh_canonical_path',
+    'target_editorial_locale', 'backend_locale_contract', 'en_locked_name', 'en_slug',
+    'en_canonical_path', 'en_output_path', 'en_claim_output_path', 'translation_pr', 'translation_status',
+  ];
+  const pageMapCsv = csv([mapHeader, ...entries.map((entry) => mapHeader.map((key) => entry[key]))]);
+
+  const familyCounts = Object.fromEntries(
+    [...new Set(entries.map((entry) => entry.entity_type))]
+      .sort()
+      .map((type) => [type, entries.filter((entry) => entry.entity_type === type).length]),
+  );
+  const manifest = {
+    schema_version: 'big-five-en52-canonical-manifest.v1',
+    package_id: 'fermatmind-big-five-en52-translation',
+    generated_at: reviewedDate,
+    review_timezone: 'Asia/Shanghai',
+    target_editorial_locale: 'en-US',
+    backend_locale_contract: 'en',
+    canonical_locale_segment: 'en',
+    authority: {
+      source_package: 'FermatMind-Big-Five-ZH-V3-content-package',
+      source_content_sha256: SOURCE_CONTENT_SHA256,
+      source_release_package: 'generated/big-five-authority-v3/big5-zh-v3-52-page-release/release-package.json',
+      source_release_payload_sha256: SOURCE_PACKAGE_PAYLOAD_SHA256,
+      source_release_file_sha256: SOURCE_PACKAGE_FILE_SHA256,
+      source_registry_sha256: release.source_registry_sha256,
+      projected_source_registry_sha256: sha256(Buffer.from(serializedJson(projectedSourceRegistry))),
+      source_registry_version: sourceRegistry.registry_version,
+      projected_terminology_sha256: sha256(Buffer.from(serializedJson(projectedTerminology))),
+      terminology_version: 'big-five-en52-terminology.v1',
+      claim_mapping_version: 'big-five-en52-claims.v1',
+      zh_en_page_map_sha256: sha256(Buffer.from(pageMapCsv)),
+    },
+    counts: {
+      page_count: entries.length,
+      model_hub_count: familyCounts.hub,
+      domain_count: familyCounts.domain,
+      range_count: familyCounts.polarity,
+      facet_hub_count: familyCounts.facet_hub,
+      facet_detail_count: familyCounts.facet_detail,
+      legacy_alias_page_count: 0,
+    },
+    constraints: {
+      media_supported: false,
+      cms_write_allowed: false,
+      production_write_allowed: false,
+      publish_allowed: false,
+      deploy_allowed: false,
+      runtime_seo_change_allowed: false,
+      fap_web_change_allowed: false,
+    },
+    entries,
+  };
+  await writeJson('manifests/canonical-manifest.en-US.json', manifest);
+
+  await mkdir(path.join(PACKAGE_ROOT, 'manifests'), { recursive: true });
+  await writeFile(
+    path.join(PACKAGE_ROOT, 'manifests/zh-en-page-map.csv'),
+    pageMapCsv,
+    'utf8',
+  );
+
+  await writeJson('authority/terminology-glossary.en-US.json', projectedTerminology);
+  await writeJson('authority/source-registry.en-US.json', projectedSourceRegistry);
 
   await writeJson('manifests/translation-ledger.json', {
     schema_version: 'big-five-en52-translation-ledger.v1',
