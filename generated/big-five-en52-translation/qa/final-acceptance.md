@@ -26,8 +26,8 @@ Reviewed date: 2026-07-19 (Asia/Shanghai editorial date)
 ## Deterministic identity
 
 - Cohort snapshot SHA-256: `94449467281cffaccc295bab3bbbb574cf817e461ee2fbae8288eedd9a988b3a`
-- Package payload SHA-256: `9aa5b2cca1a7d8a384c62222cc923a2d1fddedb3f06ad7a1e1c647f3a1581ec5`
-- Package manifest file SHA-256: `c2408ec9a4894077ae0475cab5ae8eb8deaa1a4c605edc84c51fc7e5186d9752`
+- Package payload SHA-256: `696fd8126d10948e7e6f26ad7ee3f8a73ee6fb03a7d0b3dd3a85929f66377036`
+- Package manifest file SHA-256: `f132d6d6bbbe2aaac339d0efc569ac5c3edf9b891a980fc772eff0c81b41f9cd`
 
 ## Authority boundary
 

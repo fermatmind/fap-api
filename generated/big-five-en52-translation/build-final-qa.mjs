@@ -222,9 +222,8 @@ for (const page of pageData) {
     equivalenceRows.push([page.entry.page_identity, page.entry.entity_type, page.entry.zh_section_count, page.pageSections.length, page.entry.zh_faq_count, page.faqs.length, sourceIdsMatch, page.lockedClaimsMatch, visibleClaims, equivalencePass ? 'PASS' : 'FAIL', cohortSha]);
     const intro = page.body.split(/^##\s+/m)[0].replace(/^#\s+.*$/m, '').trim();
     const british = /\b(?:behaviour|behaviours|favour|favourite|organise|organisation|recognise|centre|colour|labour|travelling|programme)\b/i.test(page.visible);
-    const titleStopWords = new Set(['a', 'an', 'and', 'for', 'in', 'of', 'on', 'the', 'to', 'with']);
-    const keyTerm = (page.frontmatter.title.split(/[:|]/)[0].toLowerCase().match(/[a-z]+/g) ?? [])
-        .find((term) => !titleStopWords.has(term)) ?? '';
+    const topicKey = page.entry.entity_type === 'polarity' ? page.entry.parent_identity : page.entry.entity_key;
+    const keyTerm = (topicKey?.toLowerCase().match(/[a-z]+/g) ?? []).find((term) => term.length > 2) ?? '';
     const termCount = (page.visible.toLowerCase().match(new RegExp(`\\b${keyTerm}\\b`, 'g')) ?? []).length;
     const termDensity = page.actualWords === 0 ? 0 : termCount / page.actualWords;
     const keywordStuffing = termCount >= 50 && termDensity >= 0.04;
