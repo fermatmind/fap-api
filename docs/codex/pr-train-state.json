@@ -98826,13 +98826,50 @@
     "branch": "codex/big5-en52-final-qa-10",
     "title": "BIG5-EN52-FINAL-QA-10: unify and validate all 52 English assets",
     "depends_on": ["BIG5-EN52-NEUROTICISM-FACETS-09"],
-    "status": "github_checks_pending",
+    "status": "merged",
     "commit_sha": "adfc9c45f2695802a7611b200b1834348ab225ea",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3193",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-NEUROTICISM-FACETS-09 merged as 90f601742748c4af4897215cf9a727aa554f4ae1 after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
       "local_validation": {"status": "passed", "evidence": "All 52 English assets passed the deterministic final builder and frozen validator with 52 pages, 261 FAQs, 170 claims, 11 sources, zero pending pages, zero manifest-audit failures, zero translation-equivalence failures, zero unexpected/missing/duplicate claim IDs, zero frontmatter/sidecar mismatches, zero claim-row schema failures, zero claim-authority value mismatches, zero cohort snapshot mismatches, zero body-media references, zero unregistered external links, zero unsupported rendered-link syntax, zero source-release or projected-authority-input failures, zero committed-package input mismatches, zero unexpected/missing page or claim files, zero ledger mismatches, zero stale QA/final artifacts, zero FAQ row failures, zero word-count mismatches, zero source conflicts, zero SEO/GEO row failures, zero internal-link violations, zero unknown canonicals, zero zh-CN links, zero scientific blockers, zero substantive exact or high-similarity duplicates, zero CJK residue, and zero alias rows. Canonical manifest, translation ledger, source registry, terminology glossary, source release, cohort snapshot, and claim authority values are bound to fixed review-visible SHA roots. Isolated claim-map drift, unexpected alias page, unexpected claim ID, forbidden canonical, forbidden media field, inline Markdown image, unregistered external link, inline HTML anchor, CommonMark email autolink, flipped clinical-review claim, changed claim boundary, refreshed cohort copy and ledger, needs-review claim status, unsupported claim-row field, removed body source URL, raw source-release drift, projected registry drift, stale QA report, and stale package-manifest fixtures each failed closed on their named counters. Two independent clean output roots were byte-identical; package payload SHA is f008b3379223274f21d29d7a9dea36646d51e6b63b4fee2fdab69267639cfdfe. Focused Big Five release, sitemap, and EN parity tests passed (6,227 assertions total); route listing, isolated fresh SQLite migration, JSON/YAML/Node syntax, git diff, and full scripts/ci_verify_mbti.sh gates passed. Pint reported 18 pre-existing unrelated PHP style issues outside this generated/docs-only scope; no Pint changes were written and no backend runtime file is in scope."},
+      "github_required_checks": {"status": "passed", "evidence": "Final head 214f01ed4ef75cdf4143ffa4c351be3a2352c059 passed all 9 GitHub checks; PR #3193 had zero unresolved review threads before squash merge."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "failure_reason": null,
+    "merged_at": "2026-07-19T03:03:39Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR10 full-cohort QA scope; no final unification starts before PR9 merges."},
+      {"at": "2026-07-19T00:28:44Z", "status": "implementation_in_progress", "note": "Started from exact merged PR9 SHA 90f601742748c4af4897215cf9a727aa554f4ae1. Scope is limited to all 52 English pages/claims, authority inputs, final audit reports, deterministic package artifacts, validator/build support, and train closeout; zh-CN, aliases, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-19T00:49:11Z", "status": "local_validation_passed", "note": "Completed all ten final audits and deterministic package assembly. The 52-page/261-FAQ/170-claim cohort passed equivalence, natural-English, scientific red-team, source integrity, SEO/GEO, internal-link, duplicate, FAQ, word-count, frozen-manifest, and zero-write gates; two clean output roots were byte-identical. Focused tests, isolated migration, route inventory, parsers, diff checks, and the complete ci_verify_mbti.sh chain passed. Pint's 18 findings are pre-existing and outside this generated/docs-only scope."},
+      {"at": "2026-07-19T00:51:50Z", "status": "github_checks_pending", "note": "Committed the exact 15-path PR10 scope as adfc9c45f and opened PR #3193. Merge remains gated on the final head passing every required check and having zero unresolved review threads."},
+      {"at": "2026-07-19T03:55:26Z", "status": "merged", "note": "Reconciled during the naturally related PR11 docs/codex update: final head 214f01ed4ef75cdf4143ffa4c351be3a2352c059 passed all 9 checks with zero unresolved review threads; PR #3193 squash-merged as 3cee6b806ede534950917a2fe27e367e2ad4e95e, origin/main containment was verified, and the local and remote PR10 branches were already absent."}
+    ],
+    "updated_at": "2026-07-19T03:55:26Z"
+  },
+  "BIG5-EN52-RELEASE-PACKAGE-11": {
+    "id": "BIG5-EN52-RELEASE-PACKAGE-11",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-release-package-11",
+    "title": "BIG5-EN52-RELEASE-PACKAGE-11: compile locked English 52-page release package",
+    "depends_on": ["BIG5-EN52-FINAL-QA-10"],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's four-PR continuous /goal with exact id, title, branch, dependency, scope, allowed paths, validation, and zero-production-write boundary."},
+      "dependency": {"status": "passed", "evidence": "BIG5-EN52-FINAL-QA-10 PR #3193 merged as 3cee6b806ede534950917a2fe27e367e2ad4e95e after all 9 checks passed and zero unresolved review threads; origin/main containment was verified before this branch was created from 4aa605bc57da85d65fb6c012d47bbfce85903272."},
+      "local_validation": {"status": "passed", "evidence": "Locked final-QA inputs validated at source/cohort/final-payload/final-file SHA 056b10d3/94449467/f008b337/022f6220. The English-only compiler emitted exactly 52 backend-locale en descriptors with family counts 1/5/15/1/30, 170 claims, 261 FAQs, 11 sources, zero legacy alias pages, and no media/search authority. Runtime package payload SHA is 86b11c14a9103b65a1a085de2e4102ab94985a55be83fdcbdcb553ca6cbeed89 and file SHA is 1ee709e7d9880540db072bebb39d7001278518c816cae8265f7af4bc2411659c. Source validator, PHP syntax, focused PHPUnit (3 tests, 568 assertions), two independent clean-root byte comparisons, JSON/count/locale/canonical/alias/CJK/media assertions, scoped Pint, YAML/JSON parse, diff and exact-path checks passed. Database, CMS, media, search, cache, publish, deploy, and production writes remained zero."},
       "github_required_checks": {"status": "pending", "evidence": null}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
@@ -98848,11 +98885,9 @@
     "search_channel_action": false,
     "deploy_allowed": false,
     "transitions": [
-      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR10 full-cohort QA scope; no final unification starts before PR9 merges."},
-      {"at": "2026-07-19T00:28:44Z", "status": "implementation_in_progress", "note": "Started from exact merged PR9 SHA 90f601742748c4af4897215cf9a727aa554f4ae1. Scope is limited to all 52 English pages/claims, authority inputs, final audit reports, deterministic package artifacts, validator/build support, and train closeout; zh-CN, aliases, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
-      {"at": "2026-07-19T00:49:11Z", "status": "local_validation_passed", "note": "Completed all ten final audits and deterministic package assembly. The 52-page/261-FAQ/170-claim cohort passed equivalence, natural-English, scientific red-team, source integrity, SEO/GEO, internal-link, duplicate, FAQ, word-count, frozen-manifest, and zero-write gates; two clean output roots were byte-identical. Focused tests, isolated migration, route inventory, parsers, diff checks, and the complete ci_verify_mbti.sh chain passed. Pint's 18 findings are pre-existing and outside this generated/docs-only scope."},
-      {"at": "2026-07-19T00:51:50Z", "status": "github_checks_pending", "note": "Committed the exact 15-path PR10 scope as adfc9c45f and opened PR #3193. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
+      {"at": "2026-07-19T03:55:26Z", "status": "implementation_in_progress", "note": "Started from exact origin/main SHA 4aa605bc57da85d65fb6c012d47bbfce85903272 after verifying PR10 merged and contained. Scope is limited to the English-only deterministic 52-page text-only runtime release compiler, build command, focused tests, generated release artifacts, and train ledger; no content edits, runtime API, routes, migrations, middleware, sitemap/llms, fap-web, production, database, CMS, media, search, cache, or deploy action is included."},
+      {"at": "2026-07-19T04:05:10Z", "status": "local_validation_passed", "note": "Compiled and locked the exact English runtime release package at payload SHA 86b11c14a9103b65a1a085de2e4102ab94985a55be83fdcbdcb553ca6cbeed89 and file SHA 1ee709e7d9880540db072bebb39d7001278518c816cae8265f7af4bc2411659c. Exact inventory, en-US-to-en normalization, backend canonical catalog, alias exclusion, text-only boundary, source/claim/FAQ counts, deterministic clean-root builds, focused tests, PHP syntax, scoped formatting, parsers, diff and path scope all passed with controlled writes at zero."}
     ],
-    "updated_at": "2026-07-19T00:51:50Z"
+    "updated_at": "2026-07-19T04:05:10Z"
   }
 }
