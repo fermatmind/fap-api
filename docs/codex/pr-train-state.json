@@ -98863,9 +98863,9 @@
     "branch": "codex/big5-en52-release-package-11",
     "title": "BIG5-EN52-RELEASE-PACKAGE-11: compile locked English 52-page release package",
     "depends_on": ["BIG5-EN52-FINAL-QA-10"],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f6ddbc27c19f747f9ce163da1d9b038cb3ea522e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3201",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's four-PR continuous /goal with exact id, title, branch, dependency, scope, allowed paths, validation, and zero-production-write boundary."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-FINAL-QA-10 PR #3193 merged as 3cee6b806ede534950917a2fe27e367e2ad4e95e after all 9 checks passed and zero unresolved review threads; origin/main containment was verified before this branch was created from 4aa605bc57da85d65fb6c012d47bbfce85903272."},
@@ -98886,8 +98886,9 @@
     "deploy_allowed": false,
     "transitions": [
       {"at": "2026-07-19T03:55:26Z", "status": "implementation_in_progress", "note": "Started from exact origin/main SHA 4aa605bc57da85d65fb6c012d47bbfce85903272 after verifying PR10 merged and contained. Scope is limited to the English-only deterministic 52-page text-only runtime release compiler, build command, focused tests, generated release artifacts, and train ledger; no content edits, runtime API, routes, migrations, middleware, sitemap/llms, fap-web, production, database, CMS, media, search, cache, or deploy action is included."},
-      {"at": "2026-07-19T04:05:10Z", "status": "local_validation_passed", "note": "Compiled and locked the exact English runtime release package at payload SHA 86b11c14a9103b65a1a085de2e4102ab94985a55be83fdcbdcb553ca6cbeed89 and file SHA 1ee709e7d9880540db072bebb39d7001278518c816cae8265f7af4bc2411659c. Exact inventory, en-US-to-en normalization, backend canonical catalog, alias exclusion, text-only boundary, source/claim/FAQ counts, deterministic clean-root builds, focused tests, PHP syntax, scoped formatting, parsers, diff and path scope all passed with controlled writes at zero."}
+      {"at": "2026-07-19T04:05:10Z", "status": "local_validation_passed", "note": "Compiled and locked the exact English runtime release package at payload SHA 86b11c14a9103b65a1a085de2e4102ab94985a55be83fdcbdcb553ca6cbeed89 and file SHA 1ee709e7d9880540db072bebb39d7001278518c816cae8265f7af4bc2411659c. Exact inventory, en-US-to-en normalization, backend canonical catalog, alias exclusion, text-only boundary, source/claim/FAQ counts, deterministic clean-root builds, focused tests, PHP syntax, scoped formatting, parsers, diff and path scope all passed with controlled writes at zero."},
+      {"at": "2026-07-19T04:07:33Z", "status": "github_checks_pending", "note": "Rebased the exact eight-file scope onto latest origin/main 3b86955dd, reran focused tests and scope checks, committed implementation head f6ddbc27c19f747f9ce163da1d9b038cb3ea522e, pushed the exact branch, and opened PR #3201. Merge remains gated on the final head passing every required check with zero unresolved actionable review threads."}
     ],
-    "updated_at": "2026-07-19T04:05:10Z"
+    "updated_at": "2026-07-19T04:07:33Z"
   }
 }
