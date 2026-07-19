@@ -97618,7 +97618,7 @@
       "SOLO-OWNER-OPS-APPROVAL-05"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "856e9e4f5a7866ef3e13abe099a57f7ba450076b",
+      "commit_sha": "55d6c1331a2971b9754bc6cf5bc5f3ece4d7fa7f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3185",
     "checks": {
       "dependency": {
@@ -97627,11 +97627,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, Enneagram runtime readback, and the exact runtime-freeze classifier. The guarded full bash backend/scripts/ci_verify_mbti.sh gate exited 0 through Big Five 1543/188110, Personality 89/5853, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. The remaining Career search, recommendation-index, family-hub, transition-preview, and alias-resolution projections passed 11 tests / 766 assertions; normalized Career job list/detail passed 26 tests / 272 assertions; normalized Personality public cache and projection passed 28 tests / 525 assertions; the normalized Enneagram authorized runtime-closeout readback passed 1 test / 31 assertions; changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, final exact 49-path scope, and diff checks passed. After the unrelated Big Five hubs merge advanced origin/main, the branch was rebased and structured-file/scope checks were revalidated."
+          "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, Enneagram runtime readback, and the exact runtime-freeze classifier. The guarded full bash backend/scripts/ci_verify_mbti.sh gate exited 0 through Big Five 1543/188110, Personality 89/5853, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. The remaining Career search, recommendation-index, family-hub, transition-preview, and alias-resolution projections passed 11 tests / 766 assertions; final Career job list/detail plus Personality public cache and projection passed 55 tests / 812 assertions after cache-version and response-boundary hardening; the normalized Enneagram authorized runtime-closeout readback passed 1 test / 31 assertions; changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, final exact 50-path scope, runtime-freeze, and diff checks passed. One intermediate full cache regression correctly found that canonical DOCX unknown/null was being overwritten from a legacy reviewed_at alias (2 failures / 803 assertions); the response normalizer was fixed to prefer canonical fields whenever review_state exists, and the full retry passed. After the unrelated Big Five hubs merge advanced origin/main, the branch was rebased and structured-file/scope checks were revalidated."
       },
       "github": {
         "status": "pending",
-        "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, 26052fc118883c28dbefa0b5f3d398eb0e0b1283, 1ce94dfdedbfcbfef9d361444b4c975df73e94e9, f36da9db46e183ff4f4b06e166a995c673dcf6d6, c7f6ef0c272f071e4894fb944b6142e912405e81, 5ab9e9e33dfb0df3c510578001998125fd58be73, and 9cb2e6b208484730161e432a7000a25a01d2ed91. Exact-head reviews found and the branch repaired six scoped public-projection gaps, one P1 surface-annotation traceability gap, one P1 Enneagram runtime-consumer compatibility gap, and one P1 stale-cache reviewer-redaction gap. A new exact-head check/review cycle is pending."
+          "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, 26052fc118883c28dbefa0b5f3d398eb0e0b1283, 1ce94dfdedbfcbfef9d361444b4c975df73e94e9, f36da9db46e183ff4f4b06e166a995c673dcf6d6, c7f6ef0c272f071e4894fb944b6142e912405e81, 5ab9e9e33dfb0df3c510578001998125fd58be73, 9cb2e6b208484730161e432a7000a25a01d2ed91, and 8da2203a28a3baab24128d08d0fe53c9e4100ba2. Exact-head reviews found and the branch repaired six scoped public-projection gaps, one P1 surface-annotation traceability gap, one P1 Enneagram runtime-consumer compatibility gap, one P1 stale-detail-cache reviewer-redaction gap, and two P2 Career/Personality index cache-version and response-boundary gaps. A new exact-head check/review cycle is pending."
       }
     },
     "scope_validation": {
@@ -97706,13 +97706,18 @@
         "status": "github_checks_pending",
         "note": "All nine checks passed on 5ab9e9e33, then exact-head Codex review identified a DOCX-backed Career list/detail review-state inconsistency. Preserved the evidence boundary that docx_baseline_imported is import evidence rather than human-review evidence: both list and detail now fail closed to review_state unknown with null last_reviewed_at and reviewer, rather than promoting the list to approved. The first new list fixture returned no items because it lacked the required DOCX source reference (1 failed / 1 warning); after completing the fixture, the focused retry passed 2 / 24 and the full Career job list/detail files passed 26 / 272. Scoped Pint/syntax/diff and post-commit runtime-freeze passed. Final scope remains 49 paths with no production or external-state action; a new exact-head CI/review cycle is pending."
       },
-      {
-        "at": "2026-07-18T23:46:20Z",
-        "status": "github_checks_pending",
-        "note": "All nine checks passed on 9cb2e6b20, then exact-head Codex review identified that unchanged Personality detail cache versions and legacy LKG payloads could retain a pre-PR6 reviewer projection. Added a public-review-contract detail projection version for both Big Five and Enneagram and made the response boundary re-normalize cached v1/v2 review fields, so even a legacy payload under an active or LKG pointer cannot expose reviewer identity. The cache-version/redaction regression passed 1 / 14 and the full Personality public contract file passed 28 / 525; scoped Pint/syntax/diff and post-commit runtime-freeze passed. Final scope remains 49 paths with no cache purge, production, or external-state action; a new exact-head CI/review cycle is pending."
-      }
-    ],
-    "updated_at": "2026-07-18T23:46:20Z"
+        {
+          "at": "2026-07-18T23:46:20Z",
+          "status": "github_checks_pending",
+          "note": "All nine checks passed on 9cb2e6b20, then exact-head Codex review identified that unchanged Personality detail cache versions and legacy LKG payloads could retain a pre-PR6 reviewer projection. Added a public-review-contract detail projection version for both Big Five and Enneagram and made the response boundary re-normalize cached v1/v2 review fields, so even a legacy payload under an active or LKG pointer cannot expose reviewer identity. The cache-version/redaction regression passed 1 / 14 and the full Personality public contract file passed 28 / 525; scoped Pint/syntax/diff and post-commit runtime-freeze passed. Final scope remains 49 paths with no cache purge, production, or external-state action; a new exact-head CI/review cycle is pending."
+        },
+        {
+          "at": "2026-07-19T00:01:57Z",
+          "status": "github_checks_pending",
+          "note": "All nine checks passed on 8da2203a2, then exact-head Codex review identified two P2 cache gaps: Career job detail/index active, LKG, and legacy payloads could retain the old trust shape, and Personality index cache versions and cached response items were not normalized. Bumped Career job index/detail cache namespaces, normalized Career trust payloads at read/write boundaries, versioned Personality index projections, and re-normalized every cached index item. The focused cache regressions passed 3 / 21. The first full three-file run exposed that canonical DOCX unknown/null was being overwritten from the retained legacy reviewed_at alias (2 failures / 803); after preferring canonical fields whenever review_state exists, the full retry passed 55 / 812. Scoped Pint, PHP syntax, YAML/JSON, diff, and post-commit runtime-freeze checks passed. Final scope is 50 paths with no cache purge, production, or external-state action; a new exact-head CI/review cycle is pending."
+        }
+      ],
+      "updated_at": "2026-07-19T00:01:57Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
