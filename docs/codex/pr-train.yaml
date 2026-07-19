@@ -657,6 +657,52 @@ prs:
     content_authority: CMS/backend
     next_task: MBTI-COMP-RUNTIME-46
 
+  - id: MBTI-COMP-RUNTIME-46
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on: [MBTI-COMP-PROJECTION-45]
+    branch: codex/mbti-comp-runtime-46
+    title: "MBTI-COMP-RUNTIME-46: deploy and accept all A/T comparison pages"
+    train_scope: mbti_at_comparison_production_deploy_and_acceptance
+    status: user_authorized
+    mode: execute
+    type: production_operation_report_docs_generated_test
+    scope:
+      - Record the exact code-only production deployment that activated the isolated MBTI comparison runtime SHA and its release identity.
+      - Record the separately authorized single-record INTP content revision promotion, automatic failed-readback rollback, canonical-hash control repair, successful exact retry, and rollback readiness.
+      - Lock the final public HTTPS acceptance evidence proving all sixteen A/T comparison API responses and visible pages expose the approved nine-section contract, five FAQs, canonical, indexable robots, JSON-LD, and backend authority without frontend fallback.
+    allowed_paths:
+      - backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md
+      - backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json
+      - backend/tests/Feature/V0_5/MbtiCompRuntime46ProductionAcceptanceReportTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime code, deploy workflows, import packages, CMS/database content, publication, indexability, sitemap, llms, Search Channel, GSC, or fap-web.
+      - Execute another production deploy, CMS/database write, publication/indexability change, sitemap submission, search indexing request, or private production inspection.
+      - Implement MBTI-COMP-GATE-47 or any later train item.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_5/MbtiCompRuntime46ProductionAcceptanceReportTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/V0_5/MbtiCompRuntime46ProductionAcceptanceReportTest.php
+      - python3 -m json.tool backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: true
+    content_authority: CMS/backend
+    next_task: MBTI-COMP-GATE-47
+
   - id: CAREER-DETAIL-DEPLOY-SLO-REPAIR-01
     repo: fap-api
     base: main
