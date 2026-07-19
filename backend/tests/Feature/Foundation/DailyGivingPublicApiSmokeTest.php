@@ -46,7 +46,10 @@ final class DailyGivingPublicApiSmokeTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('record.record_code', $record->record_code)
             ->assertJsonPath('record.donation_status', DailyGivingRecord::DONATION_VERIFIED)
-            ->assertJsonPath('record.proof_status', DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE);
+            ->assertJsonPath('record.proof_status', DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE)
+            ->assertJsonPath('record.review_state', 'approved')
+            ->assertJsonPath('record.last_reviewed_at', null)
+            ->assertJsonPath('record.reviewer', null);
 
         $publicRecord = $show->json('record');
 

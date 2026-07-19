@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Services\ReviewGovernance\PublicReviewContract;
+
+/** @review-surface career_occupation_directory_review */
 final class CareerCnProxyPublicOwnerSurfaceBuilder
 {
     private const PLAN_DEFAULT_PATH = '/tmp/career_2786_cn_proxy_public_owner_plan.json';
@@ -19,6 +22,10 @@ final class CareerCnProxyPublicOwnerSurfaceBuilder
      * @var array<string, array<string, mixed>>|null
      */
     private ?array $claimsBySlug = null;
+
+    public function __construct(
+        private readonly PublicReviewContract $publicReviewContract,
+    ) {}
 
     /**
      * @return array<string, mixed>|null
@@ -214,8 +221,11 @@ final class CareerCnProxyPublicOwnerSurfaceBuilder
             ],
             'trust_manifest' => [
                 'reviewer_status' => $this->stringValue($claim['review_status'] ?? null) ?? 'human_reviewed',
-                'reviewer' => (string) $claim['reviewer'],
                 'reviewed_at' => (string) $claim['reviewed_at'],
+                ...$this->publicReviewContract->project(
+                    $this->stringValue($claim['review_status'] ?? null) ?? 'human_reviewed',
+                    $claim['reviewed_at'],
+                ),
                 'review_decision' => (string) $claim['review_decision'],
                 'evidence_strength' => $this->stringValue($claim['evidence_strength'] ?? null),
                 'last_validated_at' => $this->stringValue($claim['last_validated_at'] ?? null),

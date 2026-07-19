@@ -52,6 +52,8 @@ final class CareerFamilyHubApiTest extends TestCase
             ->assertJsonPath('visible_children.0.canonical_slug', 'data-scientists')
             ->assertJsonPath('visible_children.0.seo_contract.index_eligible', true)
             ->assertJsonPath('visible_children.0.trust_summary.reviewer_status', 'approved')
+            ->assertJsonPath('visible_children.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('visible_children.0.trust_summary.reviewer', null)
             ->assertJsonMissingPath('structured_data.route_kind')
             ->assertJsonMissingPath('structured_data.canonical_path')
             ->assertJsonMissingPath('structured_data.canonical_title')
@@ -80,7 +82,7 @@ final class CareerFamilyHubApiTest extends TestCase
                     'canonical_title_en',
                     'canonical_title_zh',
                     'seo_contract' => ['canonical_path', 'index_state', 'index_eligible', 'reason_codes'],
-                    'trust_summary' => ['reviewer_status'],
+                    'trust_summary' => ['reviewer_status', 'review_state', 'last_reviewed_at', 'reviewer'],
                 ]],
                 'counts' => [
                     'visible_children_count',

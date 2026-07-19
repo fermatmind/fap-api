@@ -15,7 +15,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
             "adapter_status": "compact_attestation_adapter_active"
@@ -63,7 +63,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
             "adapter_status": "compact_attestation_adapter_active"
@@ -79,7 +79,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": true,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
             "adapter_status": "external_evidence_gate_preserved"
@@ -95,7 +95,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
             "adapter_status": "compact_attestation_adapter_active"
@@ -111,7 +111,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
             "adapter_status": "compact_attestation_adapter_active"
@@ -127,7 +127,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": true,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
             "adapter_status": "compact_attestation_adapter_active_external_evidence_still_required"
@@ -159,7 +159,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-PERSONALITY-REVIEW-03",
             "adapter_status": "compact_attestation_adapter_active"
@@ -223,10 +223,10 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-PERSONALITY-REVIEW-03",
-            "adapter_status": "policy_registered_adapter_pending"
+            "adapter_status": "public_review_contract_active"
         },
         {
             "surface_id": "enneagram_review_binder",
@@ -255,7 +255,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-PERSONALITY-REVIEW-03",
             "adapter_status": "compact_attestation_adapter_active"
@@ -271,7 +271,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-CAREER-SEO-REVIEW-04",
             "adapter_status": "compact_attestation_adapter_active"
@@ -319,7 +319,7 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-CAREER-SEO-REVIEW-04",
             "adapter_status": "compact_attestation_adapter_active"
@@ -453,7 +453,7 @@
             "adapter_status": "compact_attestation_adapter_active"
         },
         {
-      "surface_id": "admin_approval",
+            "surface_id": "admin_approval",
             "domain": "ops",
             "risk_tier": "R3",
             "authority_layer": "CMS/backend",
@@ -466,10 +466,10 @@
             "public_projection": "private_only",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-OPS-APPROVAL-05",
-      "adapter_status": "step_up_high_risk_approval_adapter_active"
+            "adapter_status": "step_up_high_risk_approval_adapter_active"
         },
         {
-      "surface_id": "refund_approval",
+            "surface_id": "refund_approval",
             "domain": "ops",
             "risk_tier": "R3",
             "authority_layer": "CMS/backend",
@@ -482,10 +482,10 @@
             "public_projection": "private_only",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-OPS-APPROVAL-05",
-      "adapter_status": "step_up_high_risk_approval_adapter_active"
+            "adapter_status": "step_up_high_risk_approval_adapter_active"
         },
         {
-      "surface_id": "manual_benefit_grant_approval",
+            "surface_id": "manual_benefit_grant_approval",
             "domain": "ops",
             "risk_tier": "R3",
             "authority_layer": "CMS/backend",
@@ -498,10 +498,10 @@
             "public_projection": "private_only",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-OPS-APPROVAL-05",
-      "adapter_status": "step_up_high_risk_approval_adapter_active"
+            "adapter_status": "step_up_high_risk_approval_adapter_active"
         },
         {
-      "surface_id": "benefit_revoke_approval",
+            "surface_id": "benefit_revoke_approval",
             "domain": "ops",
             "risk_tier": "R3",
             "authority_layer": "CMS/backend",
@@ -514,10 +514,10 @@
             "public_projection": "private_only",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-OPS-APPROVAL-05",
-      "adapter_status": "step_up_high_risk_approval_adapter_active"
+            "adapter_status": "step_up_high_risk_approval_adapter_active"
         },
         {
-      "surface_id": "payment_event_reprocess_approval",
+            "surface_id": "payment_event_reprocess_approval",
             "domain": "ops",
             "risk_tier": "R3",
             "authority_layer": "CMS/backend",
@@ -530,10 +530,10 @@
             "public_projection": "private_only",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-OPS-APPROVAL-05",
-      "adapter_status": "step_up_high_risk_approval_adapter_active"
+            "adapter_status": "step_up_high_risk_approval_adapter_active"
         },
         {
-      "surface_id": "rollback_release_approval",
+            "surface_id": "rollback_release_approval",
             "domain": "ops",
             "risk_tier": "R3",
             "authority_layer": "CMS/backend",
@@ -546,10 +546,10 @@
             "public_projection": "private_only",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-OPS-APPROVAL-05",
-      "adapter_status": "step_up_high_risk_approval_adapter_active"
+            "adapter_status": "step_up_high_risk_approval_adapter_active"
         },
         {
-      "surface_id": "data_lifecycle_approval",
+            "surface_id": "data_lifecycle_approval",
             "domain": "ops",
             "risk_tier": "R3",
             "authority_layer": "CMS/backend",
@@ -562,7 +562,7 @@
             "public_projection": "private_only",
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-OPS-APPROVAL-05",
-      "adapter_status": "step_up_high_risk_approval_adapter_active"
+            "adapter_status": "step_up_high_risk_approval_adapter_active"
         },
         {
             "surface_id": "daily_giving_operator_approval",
@@ -575,10 +575,10 @@
             "same_actor_allowed": true,
             "step_up_required": false,
             "production_execution_separate": true,
-            "public_projection": "normalized_contract_pending_pr6",
+            "public_projection": "normalized_review_contract_v1",
             "external_evidence_required": true,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
-            "adapter_status": "policy_registered_adapter_pending"
+            "adapter_status": "public_review_contract_active"
         },
         {
             "surface_id": "media_library_operator_approval",
@@ -597,11 +597,42 @@
             "adapter_status": "policy_registered_adapter_pending"
         }
     ],
+    "public_review_contract": {
+        "schema_version": "public-review.v1",
+        "states": [
+            "approved",
+            "pending",
+            "rejected",
+            "unknown"
+        ],
+        "fields": [
+            "review_state",
+            "last_reviewed_at",
+            "reviewer"
+        ],
+        "reviewer": null,
+        "surface_ids": [
+            "article",
+            "content_page",
+            "content_page_external_evidence_gate",
+            "support_article",
+            "interpretation_guide",
+            "research_report",
+            "personality_public_content_asset",
+            "mbti_cross_type_comparison_authority",
+            "riasec_content_release_review",
+            "career_trust_manifest",
+            "career_occupation_directory_review",
+            "daily_giving_operator_approval"
+        ]
+    },
     "boundaries": {
         "human_review_is_production_authorization": false,
         "external_evidence_can_be_created_by_attestation": false,
         "automated_checks_remain_required": true,
         "high_risk_step_up_remains_required": true,
-        "public_reviewer_identity_allowed": false
+        "public_reviewer_identity_allowed": false,
+        "legacy_internal_reviewer_separation_blocker_count": 0,
+        "public_reviewer_identity_exposure_count": 0
     }
 }

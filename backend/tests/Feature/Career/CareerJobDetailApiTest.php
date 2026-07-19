@@ -106,6 +106,8 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'backend-architect')
             ->assertJsonPath('trust_manifest.content_version', 'v4.1')
+            ->assertJsonPath('trust_manifest.review_state', 'approved')
+            ->assertJsonPath('trust_manifest.reviewer', null)
             ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/backend-architect')
             ->assertJsonPath('structured_data.occupation.@type', 'Occupation')
             ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
@@ -165,6 +167,11 @@ final class CareerJobDetailApiTest extends TestCase
                 'bundle_kind' => 'career_job_detail',
                 'identity' => ['canonical_slug' => 'cached-career-detail'],
                 'titles' => ['canonical_en' => 'Cached Career Detail'],
+                'trust_manifest' => [
+                    'reviewer_status' => 'approved',
+                    'reviewed_at' => '2026-07-18T00:00:00Z',
+                    'reviewer' => ['name' => 'Legacy Cached Career Reviewer'],
+                ],
                 'seo_contract' => [
                     'canonical_path' => '/en/career/jobs/cached-career-detail',
                     'canonical_target' => '/en/career/jobs/cached-career-detail',
@@ -180,7 +187,9 @@ final class CareerJobDetailApiTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs/cached-career-detail?locale=en')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'cached-career-detail')
-            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/cached-career-detail');
+            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/cached-career-detail')
+            ->assertJsonPath('trust_manifest.review_state', 'approved')
+            ->assertJsonPath('trust_manifest.reviewer', null);
     }
 
     public function test_it_remains_conservative_and_does_not_fall_back_to_legacy_cms_jobs(): void
@@ -281,6 +290,9 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('locale_policy.crosswalk_mode', 'docx_baseline')
             ->assertJsonPath('titles.canonical_zh', '会计师和审计师')
             ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.docx_baseline.v1')
+            ->assertJsonPath('trust_manifest.review_state', 'unknown')
+            ->assertJsonPath('trust_manifest.last_reviewed_at', null)
+            ->assertJsonPath('trust_manifest.reviewer', null)
             ->assertJsonPath('truth_layer.median_pay_usd_annual', 81350)
             ->assertJsonPath('content_sections.0.title', '01 你通常会在这些工作场景里接触这份职业')
             ->assertJsonPath('content_sections.0.body_md', '• 处理需要准确记录、核对或解释的财务与经营信息。')

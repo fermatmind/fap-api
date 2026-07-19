@@ -323,6 +323,42 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_solo_owner_public_review_contract_files(): void
+    {
+        $allowed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/InterpretationGuideController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php',
+            'backend/app/Models/DailyGivingRecord.php',
+            'backend/app/Services/Career/Bundles/CareerCnProxyPublicOwnerSurfaceBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerAliasResolutionBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerRecommendationIndexBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerSearchBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerTransitionPreviewBundleBuilder.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV224RuntimeReadback.php',
+            'backend/app/Services/ReviewGovernance/PublicReviewContract.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Career/CareerReviewAndPublishExecutor.php',
+            'backend/app/Services/ReviewGovernance/PublicReviewerProfile.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
     {
         $changed = [
@@ -6213,6 +6249,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSoloOwnerPublicReviewContractFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -8055,6 +8095,34 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Approvals/HighRiskApprovalService.php',
             'backend/app/Services/Approvals/HighRiskApprovalValidationException.php',
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+        ], true);
+    }
+
+    private function isSoloOwnerPublicReviewContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/InterpretationGuideController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/ResearchReportController.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php',
+            'backend/app/Models/DailyGivingRecord.php',
+            'backend/app/Services/Career/Bundles/CareerAliasResolutionBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerCnProxyPublicOwnerSurfaceBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerJobListBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerRecommendationDetailBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerRecommendationIndexBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerSearchBundleBuilder.php',
+            'backend/app/Services/Career/Bundles/CareerTransitionPreviewBundleBuilder.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
+            'backend/app/Services/Enneagram/AuthorityV2/EnneagramPublicAuthorityV224RuntimeReadback.php',
+            'backend/app/Services/ReviewGovernance/PublicReviewContract.php',
+            'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
+            'backend/app/Services/Riasec/RiasecPublicProjectionService.php',
         ], true);
     }
 

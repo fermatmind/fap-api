@@ -13,6 +13,7 @@ use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromo
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV223ReviewEvidenceBinder;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeCloseout;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeReadback;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
@@ -2512,6 +2513,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         $apiCanonicalUrlOverride,
                     );
                 }
+                $publicReview = app(PublicReviewContract::class)->project(
+                    $asset->review_state,
+                    $asset->last_reviewed_at,
+                );
 
                 return Http::response([
                     'ok' => true,
@@ -2532,16 +2537,13 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'hreflang' => $hreflang,
                         'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
                         'media' => ['hero' => null, 'inline' => [], 'og' => null],
-                        'review_state' => $stalePublicPayload ? 'stale_review_state' : (string) $asset->review_state,
+                        'review_state' => $stalePublicPayload ? 'stale_review_state' : $publicReview['review_state'],
                         'source_package' => $stalePublicPayload ? 'stale-public-package' : $asset->source_package,
                         'source_hash' => $stalePublicPayload ? str_repeat('f', 64) : $asset->source_hash,
                     ],
                     'personality_public_content_asset_v2' => [
                         'visible_evidence' => $visibleEvidence,
-                        'editorial_authority' => [
-                            'review_state' => (string) $asset->review_state,
-                            'reviewer' => null,
-                        ],
+                        'editorial_authority' => $publicReview,
                         'operator_supplied_value' => $privateReviewerLeak,
                         'private_route' => $privateRouteLeak,
                     ],

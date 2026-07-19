@@ -1,0 +1,94 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\ReviewGovernance;
+
+use App\Services\ReviewGovernance\PublicReviewContract;
+use Carbon\CarbonImmutable;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+
+final class PublicReviewContractTest extends TestCase
+{
+    #[DataProvider('stateCases')]
+    public function test_it_normalizes_public_review_states_fail_closed(mixed $input, string $expected): void
+    {
+        $this->assertSame($expected, (new PublicReviewContract)->normalizeState($input));
+    }
+
+    public function test_it_projects_only_the_locked_public_review_contract(): void
+    {
+        $projection = (new PublicReviewContract)->project(
+            'human_review_approved',
+            CarbonImmutable::parse('2026-07-18T20:00:00+08:00'),
+        );
+
+        $this->assertSame([
+            'review_state' => 'approved',
+            'last_reviewed_at' => '2026-07-18T12:00:00.000000Z',
+            'reviewer' => null,
+        ], $projection);
+        $this->assertSame(
+            ['review_state', 'last_reviewed_at', 'reviewer'],
+            array_keys($projection),
+        );
+        $this->assertStringNotContainsString('reviewer_name', json_encode($projection, JSON_THROW_ON_ERROR));
+    }
+
+    public function test_invalid_timestamp_is_redacted_to_null(): void
+    {
+        $contract = new PublicReviewContract;
+
+        $this->assertSame([
+            'review_state' => 'approved',
+            'last_reviewed_at' => null,
+            'reviewer' => null,
+        ], $contract->project('approved', 'private://review/evidence'));
+
+        foreach ([
+            1_721_300_000,
+            'now',
+            'tomorrow',
+            '2026-07-18',
+            '2026-07-18T12:00:00',
+            '2026-02-30T12:00:00Z',
+        ] as $timestamp) {
+            $this->assertNull($contract->project('approved', $timestamp)['last_reviewed_at']);
+        }
+    }
+
+    public function test_absolute_string_timestamp_is_normalized_to_utc(): void
+    {
+        $this->assertSame(
+            '2026-07-18T12:00:00.123456Z',
+            (new PublicReviewContract)->project(
+                'approved',
+                '2026-07-18T20:00:00.123456+08:00',
+            )['last_reviewed_at'],
+        );
+    }
+
+    /** @return iterable<string,array{mixed,string}> */
+    public static function stateCases(): iterable
+    {
+        yield 'approved' => ['approved', 'approved'];
+        yield 'approved for production' => ['approved_for_production', 'approved'];
+        yield 'operator-approved content ready' => ['operator_approved_content_ready', 'approved'];
+        yield 'agent-promoted content ready' => ['agent_promoted_content_ready', 'approved'];
+        yield 'reviewed alias' => ['reviewed', 'approved'];
+        yield 'operator release' => ['operator_v3_release', 'approved'];
+        yield 'published without llms' => ['published_no_llms', 'approved'];
+        yield 'pending review' => ['pending_human_review', 'pending'];
+        yield 'content page legal review' => ['legal_review', 'pending'];
+        yield 'content page company review' => ['company_review', 'pending'];
+        yield 'support product or policy review' => ['product_or_policy_review', 'pending'];
+        yield 'interpretation science or product review' => ['science_or_product_review', 'pending'];
+        yield 'career in review' => ['in_review', 'pending'];
+        yield 'science review' => ['science_review', 'pending'];
+        yield 'career changes required' => ['changes_required', 'rejected'];
+        yield 'changes requested' => ['changes_requested', 'rejected'];
+        yield 'unknown string' => ['internal_operator_override', 'unknown'];
+        yield 'missing' => [null, 'unknown'];
+    }
+}

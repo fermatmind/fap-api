@@ -17,6 +17,7 @@ use App\Services\Cms\ArticleService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
@@ -26,6 +27,7 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use RuntimeException;
 
+/** @review-surface article */
 class ArticleController extends Controller
 {
     public function __construct(
@@ -36,6 +38,7 @@ class ArticleController extends Controller
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /**
@@ -1056,13 +1059,12 @@ class ArticleController extends Controller
             throw new RuntimeException('published revision not found.');
         }
 
-        return [
+        return array_merge([
             'id' => (int) $article->id,
             'org_id' => (int) $article->org_id,
             'category_id' => $article->category_id !== null ? (int) $article->category_id : null,
             'author_admin_user_id' => $article->author_admin_user_id !== null ? (int) $article->author_admin_user_id : null,
             'author_name' => $article->author_name,
-            'reviewer_name' => $article->reviewer_name,
             'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
             'slug' => (string) $article->slug,
             'locale' => (string) $article->locale,
@@ -1097,7 +1099,10 @@ class ArticleController extends Controller
             'category' => $this->scopedCategory($article),
             'tags' => $this->scopedTags($article),
             'seo_meta' => $this->publicSeoMetaSnapshot($article, $revision),
-        ];
+        ], $this->publicReviewContract->project(
+            $revision->reviewed_at !== null || $revision->approved_at !== null ? 'approved' : $revision->revision_status,
+            $revision->reviewed_at ?? $revision->approved_at,
+        ));
     }
 
     /**
@@ -1116,13 +1121,12 @@ class ArticleController extends Controller
             $excerpt = Str::limit(trim((string) preg_replace('/\s+/u', ' ', strip_tags($plainBody))), 240, '…');
         }
 
-        return [
+        return array_merge([
             'id' => (int) $article->id,
             'org_id' => (int) $article->org_id,
             'category_id' => $article->category_id !== null ? (int) $article->category_id : null,
             'author_admin_user_id' => $article->author_admin_user_id !== null ? (int) $article->author_admin_user_id : null,
             'author_name' => $article->author_name,
-            'reviewer_name' => $article->reviewer_name,
             'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
             'slug' => (string) $article->slug,
             'locale' => (string) $article->locale,
@@ -1153,7 +1157,10 @@ class ArticleController extends Controller
             'updated_at' => $revision->updated_at?->toISOString() ?? $article->updated_at?->toISOString(),
             'category' => $this->scopedCategory($article),
             'tags' => $this->scopedTags($article),
-        ];
+        ], $this->publicReviewContract->project(
+            $revision->reviewed_at !== null || $revision->approved_at !== null ? 'approved' : $revision->revision_status,
+            $revision->reviewed_at ?? $revision->approved_at,
+        ));
     }
 
     /**

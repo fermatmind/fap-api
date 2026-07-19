@@ -10,16 +10,19 @@ use App\Models\ContentPage;
 use App\Services\Cms\ContentPagePublishGate;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\Cms\SiblingTranslationWorkflowService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+/** @review-surface content_page */
 final class ContentPageController extends Controller
 {
     public function __construct(
         private readonly RowBackedRevisionWorkspace $workspace,
         private readonly ContentPagePublishGate $contentPagePublishGate,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /**
@@ -50,7 +53,7 @@ final class ContentPageController extends Controller
 
         return response()->json([
             'ok' => true,
-            'page' => $this->pagePayload($page),
+            'page' => $this->pagePayload($page, true),
         ]);
     }
 
@@ -383,9 +386,9 @@ final class ContentPageController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function pagePayload(ContentPage $page): array
+    private function pagePayload(ContentPage $page, bool $public = false): array
     {
-        return [
+        $payload = [
             'slug' => (string) $page->slug,
             'path' => (string) $page->path,
             'kind' => (string) $page->kind,
@@ -428,6 +431,17 @@ final class ContentPageController extends Controller
             'faq_schema_eligible' => (bool) $page->faq_schema_eligible,
             'schema_eligibility_reviewed_at' => $this->dateString($page->schema_eligibility_reviewed_at),
         ];
+
+        if (! $public) {
+            return $payload;
+        }
+
+        unset($payload['reviewer']);
+
+        return array_merge($payload, $this->publicReviewContract->project(
+            $page->review_state,
+            $page->last_reviewed_at,
+        ));
     }
 
     /**

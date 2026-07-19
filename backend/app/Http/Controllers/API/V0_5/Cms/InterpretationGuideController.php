@@ -9,15 +9,18 @@ use App\Http\Controllers\Controller;
 use App\Models\InterpretationGuide;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\Cms\SiblingTranslationWorkflowService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+/** @review-surface interpretation_guide */
 final class InterpretationGuideController extends Controller
 {
     public function __construct(
         private readonly RowBackedRevisionWorkspace $workspace,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -38,7 +41,7 @@ final class InterpretationGuideController extends Controller
 
         return response()->json([
             'ok' => true,
-            'items' => $query->get()->map(fn (InterpretationGuide $guide): array => $this->payload($guide))->values()->all(),
+            'items' => $query->get()->map(fn (InterpretationGuide $guide): array => $this->payload($guide, true))->values()->all(),
             'search_scope' => [
                 'included_models' => ['interpretation_guides'],
                 'excluded_models' => ['articles'],
@@ -71,7 +74,7 @@ final class InterpretationGuideController extends Controller
 
         return response()->json([
             'ok' => true,
-            'guide' => $this->payload($guide),
+            'guide' => $this->payload($guide, true),
         ]);
     }
 
@@ -325,9 +328,9 @@ final class InterpretationGuideController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function payload(InterpretationGuide $guide): array
+    private function payload(InterpretationGuide $guide, bool $public = false): array
     {
-        return [
+        $payload = [
             'id' => (int) $guide->id,
             'slug' => (string) $guide->slug,
             'title' => (string) $guide->title,
@@ -350,6 +353,10 @@ final class InterpretationGuideController extends Controller
             'canonical_path' => $guide->canonical_path ?: '/support/guides/'.(string) $guide->slug,
             'searchable_model' => 'interpretation_guides',
         ];
+
+        return $public
+            ? array_merge($payload, $this->publicReviewContract->project($guide->review_state, $guide->last_reviewed_at))
+            : $payload;
     }
 
     private function normalizeLocale(string $locale): string

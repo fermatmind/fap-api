@@ -8,6 +8,7 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\Personality\AuthorityV2\PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use DateTimeImmutable;
 use DOMDocument;
 use DOMElement;
@@ -18,6 +19,9 @@ use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 
+/**
+ * @review-surface personality_public_content_asset
+ */
 final class EnneagramPublicAuthorityV224RuntimeReadback
 {
     public const ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E';
@@ -25,6 +29,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     public function __construct(
         private readonly EnneagramPublicAuthorityV224RuntimeManifest $manifest,
         private readonly PersonalityAuthorityV2CollisionSafeWorkingRevisionWriter $revisionWriter,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /**
@@ -175,7 +180,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if ($phase === 'post') {
             if (($v1['source_hash'] ?? null) !== $target['asset_sha256']
                 || ($v1['source_package'] ?? null) !== EnneagramPublicAuthorityV205RevisionWorkspaceWriter::SOURCE_PACKAGE
-                || data_get($v2, 'editorial_authority.review_state') !== EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED
+                || data_get($v2, 'editorial_authority.review_state') !== PublicReviewContract::APPROVED
                 || data_get($v2, 'editorial_authority.reviewer') !== null) {
                 $issues[] = 'api_exact_candidate_or_review_mismatch';
             }
@@ -266,7 +271,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
             'source_package' => $asset->source_package,
             'source_hash' => $asset->source_hash,
-            'review_state' => (string) $asset->review_state,
+            'review_state' => $this->publicReviewContract->normalizeState($asset->review_state),
         ];
         $observed = [
             'title' => (string) ($v1['title'] ?? ''),

@@ -14,8 +14,10 @@ use App\Models\RecommendationSnapshot;
 use App\Services\Analytics\CareerConversionClosureBuilder;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Collection;
 
+/** @review-surface career_trust_manifest */
 final class CareerRecommendationDetailBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
@@ -45,6 +47,7 @@ final class CareerRecommendationDetailBundleBuilder
         private readonly CareerFeedbackTimelineAuthorityService $feedbackTimelineAuthorityService,
         private readonly CareerLifecycleOperationalSummaryService $lifecycleOperationalSummaryService,
         private readonly CareerConversionClosureBuilder $conversionClosureBuilder,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function buildByType(string $type): ?CareerRecommendationDetailBundle
@@ -125,6 +128,7 @@ final class CareerRecommendationDetailBundleBuilder
                 'logic_version' => $trustManifest?->logic_version,
                 'reviewer_status' => $trustManifest?->reviewer_status,
                 'reviewed_at' => optional($trustManifest?->reviewed_at)->toISOString(),
+                ...$this->publicReviewContract->project($trustManifest?->reviewer_status, $trustManifest?->reviewed_at),
                 'quality' => is_array($trustManifest?->quality) ? $trustManifest->quality : [],
                 'locale_context' => is_array($trustManifest?->locale_context) ? $trustManifest->locale_context : [],
                 'methodology' => is_array($trustManifest?->methodology) ? $trustManifest->methodology : [],
@@ -370,6 +374,7 @@ final class CareerRecommendationDetailBundleBuilder
         return [
             'reviewer_status' => $trustManifest?->reviewer_status,
             'reviewed_at' => optional($trustManifest?->reviewed_at)->toISOString(),
+            ...$this->publicReviewContract->project($trustManifest?->reviewer_status, $trustManifest?->reviewed_at),
             'content_version' => $trustManifest?->content_version,
             'data_version' => $trustManifest?->data_version,
             'logic_version' => $trustManifest?->logic_version,

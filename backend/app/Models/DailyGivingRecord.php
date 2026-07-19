@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 
+/** @review-surface daily_giving_operator_approval */
 class DailyGivingRecord extends Model
 {
     use HasFactory;
@@ -208,7 +210,7 @@ class DailyGivingRecord extends Model
      */
     public function toPublicArray(): array
     {
-        return [
+        return array_merge([
             'record_code' => $this->record_code,
             'donation_date' => $this->donation_date?->toDateString(),
             'recipient_name' => $this->recipient_name,
@@ -225,7 +227,16 @@ class DailyGivingRecord extends Model
             'social_other_links' => $this->social_other_links,
             'public_notes' => $this->public_notes,
             'published_at' => $this->published_at?->toDateTimeString(),
-        ];
+        ], (new PublicReviewContract)->project(
+            match ($this->proof_status) {
+                self::PROOF_OPERATOR_APPROVED_AVAILABLE,
+                self::PROOF_REDACTED_AVAILABLE,
+                self::PROOF_WITHHELD => PublicReviewContract::APPROVED,
+                self::PROOF_OPERATOR_APPROVED_PENDING,
+                self::PROOF_REDACTED_PENDING => PublicReviewContract::PENDING,
+                default => PublicReviewContract::UNKNOWN,
+            },
+        ));
     }
 
     public function publicProofUrl(): ?string

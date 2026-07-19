@@ -6,9 +6,11 @@ namespace App\Services\Cms;
 
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Models\PersonalityProfile;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Support\CanonicalFrontendUrl;
 use Illuminate\Support\Facades\File;
 
+/** @review-surface mbti_cross_type_comparison_authority */
 final class Mbti64CrossTypeComparisonPublicReadModel
 {
     private const SOURCE_DIR = 'docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702';
@@ -30,6 +32,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
 
     public function __construct(
         private readonly Mbti64CrossTypeComparisonAssetsDryRunPlanner $planner,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /**
@@ -195,6 +198,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'source_notes' => is_array($payload['source_notes'] ?? null) ? $payload['source_notes'] : [],
             'source_package_id' => (string) ($authority->source_package_id ?? ''),
             'review_status' => (string) $authority->review_status,
+            ...$this->publicReviewContract->project($authority->review_status),
             'publish_status' => (string) $authority->publish_status,
             'indexability_status' => (string) $authority->indexability_status,
         ];
@@ -241,6 +245,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'llms_eligible' => (bool) ($asset['_llms_eligible'] ?? false),
             'status' => 'authority_ready',
             'review_status' => (string) $asset['review_status'],
+            ...$this->publicReviewContract->project($asset['review_status']),
             'publish_status' => (string) $asset['publish_status'],
             'indexability_status' => (string) $asset['indexability_status'],
         ];
@@ -297,6 +302,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'sitemap_eligible' => (bool) ($asset['_sitemap_eligible'] ?? false),
             'llms_eligible' => (bool) ($asset['_llms_eligible'] ?? false),
             'review_status' => (string) $asset['review_status'],
+            ...$this->publicReviewContract->project($asset['review_status']),
             'publish_status' => (string) $asset['publish_status'],
             'indexability_status' => (string) $asset['indexability_status'],
         ];

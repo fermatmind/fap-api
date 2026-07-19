@@ -169,6 +169,9 @@ class DailyGivingRecordPublicationGateTest extends TestCase
         $this->assertArrayHasKey('record_code', $public);
         $this->assertArrayHasKey('donation_date', $public);
         $this->assertArrayHasKey('recipient_name', $public);
+        $this->assertSame('approved', $public['review_state']);
+        $this->assertNull($public['last_reviewed_at']);
+        $this->assertNull($public['reviewer']);
         $this->assertArrayNotHasKey('proof_private_path', $public);
         $this->assertArrayNotHasKey('receipt_reference_private', $public);
         $this->assertArrayNotHasKey('internal_notes', $public);
@@ -200,6 +203,13 @@ class DailyGivingRecordPublicationGateTest extends TestCase
         $this->assertArrayHasKey('social_other_links', $public);
         $this->assertArrayHasKey('public_notes', $public);
         $this->assertArrayHasKey('published_at', $public);
+        $this->assertSame(
+            ['review_state', 'last_reviewed_at', 'reviewer'],
+            array_values(array_intersect(
+                array_keys($public),
+                ['review_state', 'last_reviewed_at', 'reviewer'],
+            )),
+        );
     }
 
     public function test_operator_approved_pending_proof_status_is_not_publishable(): void

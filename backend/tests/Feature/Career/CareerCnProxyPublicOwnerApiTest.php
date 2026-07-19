@@ -15,7 +15,7 @@ final class CareerCnProxyPublicOwnerApiTest extends TestCase
         config()->set('fap.career.cn_proxy_public_owner_plan_path', $planPath);
         config()->set('fap.career.cn_proxy_trust_manifest_path', $manifestPath);
 
-        $this->getJson('/api/v0.5/career/cn-proxy/cn-1-01-00-01?locale=zh-CN')
+        $response = $this->getJson('/api/v0.5/career/cn-proxy/cn-1-01-00-01?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_cn_proxy_public_owner')
             ->assertJsonPath('identity.canonical_slug', 'cn-1-01-00-01')
@@ -31,7 +31,13 @@ final class CareerCnProxyPublicOwnerApiTest extends TestCase
             ->assertJsonPath('seo_contract.index_eligible', false)
             ->assertJsonPath('seo_contract.robots_policy', 'noindex,follow')
             ->assertJsonPath('structured_data.occupation', [])
-            ->assertJsonPath('trust_manifest.review_decision', 'approve_noindex_public_cn_proxy_page');
+            ->assertJsonPath('trust_manifest.review_decision', 'approve_noindex_public_cn_proxy_page')
+            ->assertJsonPath('trust_manifest.review_state', 'approved')
+            ->assertJsonPath('trust_manifest.last_reviewed_at', '2026-05-15T21:30:56.000000Z')
+            ->assertJsonPath('trust_manifest.reviewer', null);
+
+        $this->assertStringNotContainsString('"reviewer":"reviewer"', $response->getContent());
+        $this->assertStringNotContainsString('human review confirmed', $response->getContent());
     }
 
     public function test_existing_job_detail_api_does_not_bypass_runtime_publication_authority_for_cn_proxy(): void

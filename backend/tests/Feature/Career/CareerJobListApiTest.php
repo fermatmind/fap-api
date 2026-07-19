@@ -7,7 +7,9 @@ namespace Tests\Feature\Career;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
+use App\Models\CareerJobSeoMeta;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationCrosswalk;
@@ -73,6 +75,8 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_job_index')
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.identity.canonical_slug', 'backend-architect-index')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.seo_contract.index_eligible', true)
             ->assertJsonStructure([
                 'bundle_kind',
@@ -89,6 +93,46 @@ final class CareerJobListApiTest extends TestCase
             ]);
     }
 
+    public function test_docx_backed_job_review_contract_fails_closed_without_human_review_evidence(): void
+    {
+        $job = CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => 'docx-review-contract-list',
+            'slug' => 'docx-review-contract-list',
+            'locale' => 'zh-CN',
+            'title' => 'DOCX 审核契约职业',
+            'subtitle' => 'DOCX Review Contract Job',
+            'excerpt' => 'DOCX review contract fixture.',
+            'body_md' => '# DOCX review contract fixture',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [[
+                    'label' => 'BLS Occupational Outlook Handbook',
+                    'url' => 'https://www.bls.gov/ooh/fixture.htm',
+                ]],
+            ],
+        ]);
+        CareerJobSeoMeta::query()->create([
+            'job_id' => (int) $job->id,
+            'jsonld_overrides_json' => [
+                'source_docx' => 'docx-review-contract-list.docx',
+            ],
+        ]);
+        $this->markDetailReady('docx-review-contract-list');
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'docx-review-contract-list')
+            ->assertJsonPath('items.0.trust_summary.reviewer_status', 'docx_baseline_imported')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.trust_summary.reviewer', null);
+    }
+
     public function test_it_serves_cached_public_job_index_payload_without_rebuilding_the_bundle(): void
     {
         Cache::put(
@@ -100,7 +144,11 @@ final class CareerJobListApiTest extends TestCase
                     'identity' => ['canonical_slug' => 'cached-career-index'],
                     'titles' => ['canonical_en' => 'Cached Career Index'],
                     'truth_summary' => [],
-                    'trust_summary' => [],
+                    'trust_summary' => [
+                        'reviewer_status' => 'approved',
+                        'reviewed_at' => '2026-07-18T00:00:00Z',
+                        'reviewer' => ['name' => 'Legacy Cached Career Reviewer'],
+                    ],
                     'score_summary' => [],
                     'seo_contract' => ['canonical_path' => '/career/jobs/cached-career-index', 'index_state' => 'indexable', 'index_eligible' => true, 'reason_codes' => []],
                     'provenance_meta' => [],
@@ -112,7 +160,9 @@ final class CareerJobListApiTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonCount(1, 'items')
-            ->assertJsonPath('items.0.identity.canonical_slug', 'cached-career-index');
+            ->assertJsonPath('items.0.identity.canonical_slug', 'cached-career-index')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.reviewer', null);
     }
 
     public function test_it_filters_cached_job_index_when_detail_authority_is_not_ready(): void
@@ -238,6 +288,9 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('items.0.identity.canonical_slug', 'acupuncturists')
             ->assertJsonPath('items.0.identity.entity_level', 'dataset_candidate')
             ->assertJsonPath('items.0.trust_summary.reviewer_status', 'pilot_display_asset')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.trust_summary.logic_version', 'career.protocol.job_list.display_asset_backed.v1')
             ->assertJsonPath('items.0.trust_summary.reason_codes.0', 'validated_display_asset_backed_release')
             ->assertJsonPath('items.0.trust_summary.reason_codes.1', 'runtime_publish_projection')
@@ -344,6 +397,9 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('items.0.identity.canonical_slug', 'agricultural-workers-all-other')
             ->assertJsonPath('items.0.identity.entity_level', 'dataset_candidate')
             ->assertJsonPath('items.0.trust_summary.reviewer_status', 'runtime_publish_projection')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.trust_summary.logic_version', 'career.protocol.job_detail.runtime_projection.v1')
             ->assertJsonPath('items.0.seo_contract.index_eligible', true)
             ->assertJsonPath('items.0.seo_contract.index_state', 'indexable')

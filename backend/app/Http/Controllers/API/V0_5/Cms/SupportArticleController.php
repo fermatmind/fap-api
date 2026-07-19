@@ -9,15 +9,18 @@ use App\Http\Controllers\Controller;
 use App\Models\SupportArticle;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\Cms\SiblingTranslationWorkflowService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+/** @review-surface support_article */
 final class SupportArticleController extends Controller
 {
     public function __construct(
         private readonly RowBackedRevisionWorkspace $workspace,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -38,7 +41,7 @@ final class SupportArticleController extends Controller
 
         return response()->json([
             'ok' => true,
-            'items' => $query->get()->map(fn (SupportArticle $article): array => $this->payload($article))->values()->all(),
+            'items' => $query->get()->map(fn (SupportArticle $article): array => $this->payload($article, true))->values()->all(),
             'search_scope' => [
                 'included_models' => ['support_articles'],
                 'excluded_models' => ['articles'],
@@ -71,7 +74,7 @@ final class SupportArticleController extends Controller
 
         return response()->json([
             'ok' => true,
-            'article' => $this->payload($article),
+            'article' => $this->payload($article, true),
         ]);
     }
 
@@ -330,9 +333,9 @@ final class SupportArticleController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function payload(SupportArticle $article): array
+    private function payload(SupportArticle $article, bool $public = false): array
     {
-        return [
+        $payload = [
             'id' => (int) $article->id,
             'slug' => (string) $article->slug,
             'title' => (string) $article->title,
@@ -356,6 +359,10 @@ final class SupportArticleController extends Controller
             'canonical_path' => $article->canonical_path ?: '/support/articles/'.(string) $article->slug,
             'searchable_model' => 'support_articles',
         ];
+
+        return $public
+            ? array_merge($payload, $this->publicReviewContract->project($article->review_state, $article->last_reviewed_at))
+            : $payload;
     }
 
     private function normalizeLocale(string $locale): string

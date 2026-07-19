@@ -16,8 +16,10 @@ use App\Models\OccupationCrosswalk;
 use App\Models\RecommendationSnapshot;
 use App\Models\Scopes\TenantScope;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Collection;
 
+/** @review-surface career_trust_manifest */
 final class CareerJobListBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
@@ -50,6 +52,7 @@ final class CareerJobListBundleBuilder
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /**
@@ -410,6 +413,7 @@ final class CareerJobListBundleBuilder
             trustSummary: [
                 'reviewer_status' => $trustManifest?->reviewer_status,
                 'reviewed_at' => optional($trustManifest?->reviewed_at)->toISOString(),
+                ...$this->publicReviewContract->project($trustManifest?->reviewer_status, $trustManifest?->reviewed_at),
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
                 'logic_version' => $trustManifest?->logic_version,
@@ -468,6 +472,7 @@ final class CareerJobListBundleBuilder
             trustSummary: [
                 'reviewer_status' => 'docx_baseline_imported',
                 'reviewed_at' => optional($job->updated_at)->toISOString(),
+                ...$this->publicReviewContract->project('docx_baseline_imported'),
                 'content_version' => 'docx_342_career_batch',
                 'data_version' => 'docx_342_career_batch',
                 'logic_version' => 'career.protocol.job_detail.docx_baseline.v1',
@@ -530,6 +535,7 @@ final class CareerJobListBundleBuilder
                 'truth_market' => $occupation->truth_market,
             ],
             trustSummary: [
+                ...$this->publicReviewContract->project(null),
                 'public_stub_kind' => self::PUBLIC_DIRECTORY_STUB_KIND,
                 'status' => 'unavailable',
                 'availability' => 'detail_unavailable',
@@ -564,6 +570,7 @@ final class CareerJobListBundleBuilder
             trustSummary: [
                 'reviewer_status' => 'pilot_display_asset',
                 'reviewed_at' => null,
+                ...$this->publicReviewContract->project('pilot_display_asset'),
                 'content_version' => 'display_asset_backed_v4_2',
                 'data_version' => 'career_job_display_assets.v4.2',
                 'logic_version' => 'career.protocol.job_list.display_asset_backed.v1',
@@ -614,6 +621,7 @@ final class CareerJobListBundleBuilder
             trustSummary: [
                 'reviewer_status' => 'runtime_publish_projection',
                 'reviewed_at' => null,
+                ...$this->publicReviewContract->project('runtime_publish_projection'),
                 'content_version' => 'runtime_publish_projection',
                 'data_version' => 'runtime_publish_projection',
                 'logic_version' => 'career.protocol.job_detail.runtime_projection.v1',

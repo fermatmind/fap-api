@@ -42,6 +42,8 @@ final class CareerRecommendationIndexApiTest extends TestCase
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.recommendation_subject_meta.public_route_slug', 'intj')
             ->assertJsonPath('items.0.seo_contract.index_eligible', true)
+            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonStructure([
                 'bundle_kind',
                 'bundle_version',

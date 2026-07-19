@@ -83,7 +83,17 @@ final class ContentPagePublicApiTest extends TestCase
             '--source-dir' => '../content_baselines/content_pages',
         ])->assertExitCode(0);
 
-        $this->getJson('/api/v0.5/content-pages/about?locale=zh-CN&org_id=0')
+        ContentPage::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'about')
+            ->where('locale', 'zh-CN')
+            ->update([
+                'review_state' => 'approved',
+                'last_reviewed_at' => '2026-07-18T12:00:00+08:00',
+                'reviewer' => 'Private Owner Reviewer',
+            ]);
+
+        $aboutResponse = $this->getJson('/api/v0.5/content-pages/about?locale=zh-CN&org_id=0')
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('page.slug', 'about')
@@ -91,7 +101,12 @@ final class ContentPagePublicApiTest extends TestCase
             ->assertJsonPath('page.locale', 'zh-CN')
             ->assertJsonPath('page.is_public', true)
             ->assertJsonPath('page.is_indexable', true)
-            ->assertJsonPath('page.headings.0', '我们是谁');
+            ->assertJsonPath('page.headings.0', '我们是谁')
+            ->assertJsonPath('page.review_state', 'approved')
+            ->assertJsonPath('page.last_reviewed_at', '2026-07-18T04:00:00.000000Z')
+            ->assertJsonPath('page.reviewer', null);
+
+        $this->assertStringNotContainsString('Private Owner Reviewer', $aboutResponse->getContent());
 
         $this->getJson('/api/v0.5/content-pages/missing-page?locale=zh-CN&org_id=0')
             ->assertNotFound()

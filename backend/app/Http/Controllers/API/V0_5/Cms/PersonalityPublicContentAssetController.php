@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Support\Personality\PersonalityPublicContentMediaPolicy;
 use App\Support\PublicSeoTitleNormalizer;
 use DateTimeImmutable;
@@ -18,6 +19,7 @@ use Illuminate\Validation\Rule;
 use LengthException;
 use Throwable;
 
+/** @review-surface personality_public_content_asset */
 final class PersonalityPublicContentAssetController extends Controller
 {
     public const MAX_DETAIL_PAYLOAD_BYTES = 524288;
@@ -26,8 +28,11 @@ final class PersonalityPublicContentAssetController extends Controller
 
     private const ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION = 'enneagram-authority-v2';
 
+    private const PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION = 'public-review-contract-v1';
+
     public function __construct(
         private readonly PersonalityPublicAssetReadModelCache $readModelCache,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -93,6 +98,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 'last_page' => (int) $paginator->lastPage(),
             ];
             $version = $this->readModelCache->collectionVersion($assets, $pagination);
+            $version .= ':projection:'.self::PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION;
             $cachedRead = $this->readModelCache->read(
                 'index',
                 $framework,
@@ -354,7 +360,7 @@ final class PersonalityPublicContentAssetController extends Controller
             $seo = PublicSeoTitleNormalizer::normalizeSeoPayload($seo);
         }
 
-        return [
+        return array_merge([
             'id' => (int) $asset->id,
             'org_id' => (int) $asset->org_id,
             'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
@@ -385,13 +391,11 @@ final class PersonalityPublicContentAssetController extends Controller
             'sitemap_eligible' => (bool) $asset->sitemap_eligible,
             'llms_eligible' => (bool) $asset->llms_eligible,
             'launch_state' => (string) $asset->launch_state,
-            'review_state' => (string) $asset->review_state,
             'source_package' => $asset->source_package,
             'source_hash' => $asset->source_hash,
             'published_at' => $asset->published_at?->toAtomString(),
-            'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
             'updated_at' => $asset->updated_at?->toAtomString(),
-        ];
+        ], $this->publicReviewContract->project($asset->review_state, $asset->last_reviewed_at));
     }
 
     /** @return array<string,mixed> */
@@ -446,14 +450,11 @@ final class PersonalityPublicContentAssetController extends Controller
                 'limitations' => $this->canonicalStringList((array) ($authority['limitations'] ?? [])),
                 'eligible' => $visibleEvidenceEligible,
             ],
-            'editorial_authority' => [
+            'editorial_authority' => array_merge([
                 'author' => $this->canonicalEditorialActor($authority['author'] ?? null),
-                'reviewer' => $this->canonicalEditorialActor($authority['reviewer'] ?? null),
-                'review_state' => (string) $asset->review_state,
-                'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
                 'published_at' => $asset->published_at?->toAtomString(),
                 'updated_at' => $asset->updated_at?->toAtomString(),
-            ],
+            ], $this->publicReviewContract->project($asset->review_state, $asset->last_reviewed_at)),
             'schema_eligible' => $schemaEligible,
         ];
     }
@@ -788,6 +789,7 @@ final class PersonalityPublicContentAssetController extends Controller
 
         try {
             $version = $this->readModelCache->versionFor($asset);
+            $version .= ':projection:'.self::PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION;
             if ($framework === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM) {
                 $version .= ':projection:'.self::ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION;
             }
@@ -923,6 +925,13 @@ final class PersonalityPublicContentAssetController extends Controller
                     $payload['personality_public_content_asset_v1']['seo'],
                 );
             }
+            $payload['personality_public_content_asset_v1'] = array_merge(
+                $payload['personality_public_content_asset_v1'],
+                $this->publicReviewContract->project(
+                    $payload['personality_public_content_asset_v1']['review_state'] ?? null,
+                    $payload['personality_public_content_asset_v1']['last_reviewed_at'] ?? null,
+                ),
+            );
         }
 
         if (is_array($payload['personality_public_content_asset_v2'] ?? null)) {
@@ -936,6 +945,16 @@ final class PersonalityPublicContentAssetController extends Controller
                     'schema_eligible',
                 ], true),
             );
+            $editorialAuthority = $payload['personality_public_content_asset_v2']['editorial_authority'] ?? null;
+            if (is_array($editorialAuthority)) {
+                $payload['personality_public_content_asset_v2']['editorial_authority'] = array_merge(
+                    $editorialAuthority,
+                    $this->publicReviewContract->project(
+                        $editorialAuthority['review_state'] ?? null,
+                        $editorialAuthority['last_reviewed_at'] ?? null,
+                    ),
+                );
+            }
         }
 
         if (is_array($payload['items'] ?? null)) {
@@ -948,6 +967,13 @@ final class PersonalityPublicContentAssetController extends Controller
                 if (is_array($item['seo'] ?? null)) {
                     $item['seo'] = PersonalityPublicContentMediaPolicy::sanitizeSeo($item['seo']);
                 }
+                $item = array_merge(
+                    $item,
+                    $this->publicReviewContract->project(
+                        $item['review_state'] ?? null,
+                        $item['last_reviewed_at'] ?? null,
+                    ),
+                );
                 $payload['items'][$index] = $item;
             }
         }

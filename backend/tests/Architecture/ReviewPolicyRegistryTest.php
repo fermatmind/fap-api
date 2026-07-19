@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Architecture;
 
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Services\ReviewGovernance\ReviewPolicyRegistry;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use ReflectionClass;
 use SplFileInfo;
 
 final class ReviewPolicyRegistryTest extends TestCase
@@ -113,6 +115,46 @@ final class ReviewPolicyRegistryTest extends TestCase
         $this->assertFalse($artifact['boundaries']['human_review_is_production_authorization']);
         $this->assertFalse($artifact['boundaries']['external_evidence_can_be_created_by_attestation']);
         $this->assertFalse($artifact['boundaries']['public_reviewer_identity_allowed']);
+        $this->assertSame(0, $artifact['boundaries']['legacy_internal_reviewer_separation_blocker_count']);
+        $this->assertSame(0, $artifact['boundaries']['public_reviewer_identity_exposure_count']);
+        $this->assertSame(
+            ['review_state', 'last_reviewed_at', 'reviewer'],
+            $artifact['public_review_contract']['fields'],
+        );
+        $this->assertNull($artifact['public_review_contract']['reviewer']);
+    }
+
+    public function test_pr6_public_surfaces_use_only_the_normalized_identity_redacted_contract(): void
+    {
+        $inventory = ReviewPolicyRegistry::inventory();
+        $byId = collect($inventory['surfaces'])->keyBy('surface_id');
+
+        foreach ($inventory['public_review_contract']['surface_ids'] as $surfaceId) {
+            $row = $byId->get($surfaceId);
+            $this->assertIsArray($row);
+            $this->assertSame('normalized_review_contract_v1', $row['public_projection']);
+        }
+
+        $this->assertSame(
+            ['approved', 'pending', 'rejected', 'unknown'],
+            $inventory['public_review_contract']['states'],
+        );
+        $this->assertSame(0, $inventory['boundaries']['legacy_internal_reviewer_separation_blocker_count']);
+        $this->assertSame(0, $inventory['boundaries']['public_reviewer_identity_exposure_count']);
+    }
+
+    public function test_pr6_public_contract_annotations_cover_every_registered_public_surface(): void
+    {
+        $reflection = new ReflectionClass(PublicReviewContract::class);
+        $source = (string) file_get_contents((string) $reflection->getFileName());
+        preg_match_all('/@review-surface\s+([a-z0-9_]+)/', $source, $matches);
+
+        $annotated = array_values(array_unique($matches[1] ?? []));
+        $registered = ReviewPolicyRegistry::inventory()['public_review_contract']['surface_ids'];
+        sort($annotated);
+        sort($registered);
+
+        $this->assertSame($registered, $annotated);
     }
 
     public function test_pr2_cms_adapters_are_active_without_weakening_external_evidence(): void

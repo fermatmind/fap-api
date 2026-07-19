@@ -39,26 +39,26 @@ final class ReviewPolicyRegistry
      * @var list<array<string, mixed>>
      */
     private const SURFACES = [
-        ['article', 'cms', 'R1', 'App\\Models\\Article', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['article', 'cms', 'R1', 'App\\Models\\Article', 'normalized_review_contract_v1', false, 'SOLO-OWNER-CMS-REVIEW-02'],
         ['article_translation_revision', 'cms', 'R1', 'App\\Models\\ArticleTranslationRevision', 'private_only', false, 'SOLO-OWNER-CMS-REVIEW-02'],
         ['cms_translation_revision', 'cms', 'R1', 'App\\Models\\CmsTranslationRevision', 'private_only', false, 'SOLO-OWNER-CMS-REVIEW-02'],
-        ['content_page', 'cms', 'R1', 'App\\Models\\ContentPage', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-CMS-REVIEW-02'],
-        ['content_page_external_evidence_gate', 'cms', 'R4', 'App\\Models\\ContentPage', 'normalized_contract_pending_pr6', true, 'SOLO-OWNER-CMS-REVIEW-02'],
-        ['support_article', 'cms', 'R1', 'App\\Models\\SupportArticle', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-CMS-REVIEW-02'],
-        ['interpretation_guide', 'cms', 'R1', 'App\\Models\\InterpretationGuide', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-CMS-REVIEW-02'],
-        ['research_report', 'cms', 'R4', 'App\\Models\\ResearchReport', 'normalized_contract_pending_pr6', true, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['content_page', 'cms', 'R1', 'App\\Models\\ContentPage', 'normalized_review_contract_v1', false, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['content_page_external_evidence_gate', 'cms', 'R4', 'App\\Models\\ContentPage', 'normalized_review_contract_v1', true, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['support_article', 'cms', 'R1', 'App\\Models\\SupportArticle', 'normalized_review_contract_v1', false, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['interpretation_guide', 'cms', 'R1', 'App\\Models\\InterpretationGuide', 'normalized_review_contract_v1', false, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['research_report', 'cms', 'R4', 'App\\Models\\ResearchReport', 'normalized_review_contract_v1', true, 'SOLO-OWNER-CMS-REVIEW-02'],
         ['editorial_review', 'cms', 'R1', 'App\\Models\\EditorialReview', 'private_only', false, 'SOLO-OWNER-CMS-REVIEW-02'],
-        ['personality_public_content_asset', 'personality', 'R1', 'App\\Models\\PersonalityPublicContentAsset', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
+        ['personality_public_content_asset', 'personality', 'R1', 'App\\Models\\PersonalityPublicContentAsset', 'normalized_review_contract_v1', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
         ['personality_public_content_asset_revision_review', 'personality', 'R1', 'App\\Models\\PersonalityPublicContentAssetRevisionReview', 'private_only', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
         ['big_five_v2_editorial_revision', 'personality', 'R1', 'App\\Models\\BigFiveV2EditorialRevision', 'private_only', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
         ['mbti_approval_batch', 'personality', 'R1', 'App\\Console\\Commands\\PersonalityAgentApprovalQueueCommand', 'private_only', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
-        ['mbti_cross_type_comparison_authority', 'personality', 'R1', 'App\\Models\\MbtiCrossTypeComparisonAuthority', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
+        ['mbti_cross_type_comparison_authority', 'personality', 'R1', 'App\\Models\\MbtiCrossTypeComparisonAuthority', 'normalized_review_contract_v1', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
         ['enneagram_review_binder', 'personality', 'R2', 'App\\Services\\Enneagram\\AuthorityV2\\EnneagramPublicAuthorityV223ReviewEvidenceBinder', 'private_only', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
-        ['riasec_content_release_review', 'personality', 'R2', 'App\\Services\\Riasec', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
-        ['career_trust_manifest', 'career', 'R1', 'App\\Models\\TrustManifest', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
+        ['riasec_content_release_review', 'personality', 'R2', 'App\\Services\\Riasec', 'normalized_review_contract_v1', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
+        ['career_trust_manifest', 'career', 'R1', 'App\\Models\\TrustManifest', 'normalized_review_contract_v1', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
         ['career_occupation_truth_metric_review', 'career', 'R4', 'App\\Models\\OccupationTruthMetric', 'private_only', true, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
         ['career_editorial_patch', 'career', 'R1', 'App\\Services\\Career', 'private_only', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
-        ['career_occupation_directory_review', 'career', 'R1', 'App\\Domain\\Career', 'normalized_contract_pending_pr6', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
+        ['career_occupation_directory_review', 'career', 'R1', 'App\\Domain\\Career', 'normalized_review_contract_v1', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
         ['career_salary_asset_review', 'career', 'R1', 'App\\Models\\CareerJobSalaryAsset', 'private_only', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
         ['career_ai_impact_asset_review', 'career', 'R1', 'App\\Models\\CareerJobAiImpactAsset', 'private_only', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
         ['career_import_publish_readiness', 'career', 'R2', 'App\\Services\\Career', 'private_only', false, 'SOLO-OWNER-CAREER-SEO-REVIEW-04'],
@@ -74,7 +74,7 @@ final class ReviewPolicyRegistry
         ['payment_event_reprocess_approval', 'ops', 'R3', 'App\\Services\\Approvals', 'private_only', false, 'SOLO-OWNER-OPS-APPROVAL-05'],
         ['rollback_release_approval', 'ops', 'R3', 'App\\Services\\Approvals', 'private_only', false, 'SOLO-OWNER-OPS-APPROVAL-05'],
         ['data_lifecycle_approval', 'ops', 'R3', 'App\\Services\\Attempts', 'private_only', false, 'SOLO-OWNER-OPS-APPROVAL-05'],
-        ['daily_giving_operator_approval', 'cms', 'R4', 'App\\Models\\DailyGivingRecord', 'normalized_contract_pending_pr6', true, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['daily_giving_operator_approval', 'cms', 'R4', 'App\\Models\\DailyGivingRecord', 'normalized_review_contract_v1', true, 'SOLO-OWNER-CMS-REVIEW-02'],
         ['media_library_operator_approval', 'cms', 'R4', 'App\\Models\\MediaAsset', 'private_only', true, 'SOLO-OWNER-CMS-REVIEW-02'],
     ];
 
@@ -121,6 +121,21 @@ final class ReviewPolicyRegistry
         'payment_event_reprocess_approval',
         'rollback_release_approval',
         'data_lifecycle_approval',
+    ];
+
+    private const PUBLIC_REVIEW_CONTRACT_SURFACES = [
+        'article',
+        'content_page',
+        'content_page_external_evidence_gate',
+        'support_article',
+        'interpretation_guide',
+        'research_report',
+        'personality_public_content_asset',
+        'mbti_cross_type_comparison_authority',
+        'riasec_content_release_review',
+        'career_trust_manifest',
+        'career_occupation_directory_review',
+        'daily_giving_operator_approval',
     ];
 
     /**
@@ -190,12 +205,21 @@ final class ReviewPolicyRegistry
             'review_source' => 'owner_operator_attestation',
             'surface_count' => count($surfaces),
             'surfaces' => $surfaces,
+            'public_review_contract' => [
+                'schema_version' => 'public-review.v1',
+                'states' => ['approved', 'pending', 'rejected', 'unknown'],
+                'fields' => ['review_state', 'last_reviewed_at', 'reviewer'],
+                'reviewer' => null,
+                'surface_ids' => self::PUBLIC_REVIEW_CONTRACT_SURFACES,
+            ],
             'boundaries' => [
                 'human_review_is_production_authorization' => false,
                 'external_evidence_can_be_created_by_attestation' => false,
                 'automated_checks_remain_required' => true,
                 'high_risk_step_up_remains_required' => true,
                 'public_reviewer_identity_allowed' => false,
+                'legacy_internal_reviewer_separation_blocker_count' => self::legacyPublicContractBlockerCount($surfaces),
+                'public_reviewer_identity_exposure_count' => self::publicReviewerIdentityExposureCount($surfaces),
             ],
         ];
     }
@@ -280,7 +304,36 @@ final class ReviewPolicyRegistry
         if (in_array($surfaceId, self::OPS_ADAPTER_SURFACES, true)) {
             return 'step_up_high_risk_approval_adapter_active';
         }
+        if (in_array($surfaceId, self::PUBLIC_REVIEW_CONTRACT_SURFACES, true)) {
+            return 'public_review_contract_active';
+        }
 
         return 'policy_registered_adapter_pending';
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $surfaces
+     */
+    private static function legacyPublicContractBlockerCount(array $surfaces): int
+    {
+        $byId = array_column($surfaces, null, 'surface_id');
+
+        return count(array_filter(
+            self::PUBLIC_REVIEW_CONTRACT_SURFACES,
+            static fn (string $surfaceId): bool => ($byId[$surfaceId]['public_projection'] ?? null)
+                !== 'normalized_review_contract_v1',
+        ));
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $surfaces
+     */
+    private static function publicReviewerIdentityExposureCount(array $surfaces): int
+    {
+        return count(array_filter(
+            $surfaces,
+            static fn (array $surface): bool => $surface['public_projection'] !== 'private_only'
+                && $surface['public_projection'] !== 'normalized_review_contract_v1',
+        ));
     }
 }

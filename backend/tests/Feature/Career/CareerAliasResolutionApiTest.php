@@ -53,6 +53,8 @@ final class CareerAliasResolutionApiTest extends TestCase
             ->assertJsonPath('resolution.occupation.canonical_slug', 'data-scientists')
             ->assertJsonPath('resolution.occupation.seo_contract.index_eligible', true)
             ->assertJsonPath('resolution.occupation.trust_summary.reviewer_status', 'approved')
+            ->assertJsonPath('resolution.occupation.trust_summary.review_state', 'approved')
+            ->assertJsonPath('resolution.occupation.trust_summary.reviewer', null)
             ->assertJsonMissingPath('resolution.family')
             ->assertJsonMissingPath('resolution.candidates');
     }
@@ -114,6 +116,9 @@ final class CareerAliasResolutionApiTest extends TestCase
             ->assertJsonPath('resolution.occupation.seo_contract.canonical_path', '/career/jobs/food-scientists-and-technologists')
             ->assertJsonPath('resolution.occupation.seo_contract.index_eligible', true)
             ->assertJsonPath('resolution.occupation.trust_summary.reviewer_status', 'approved_display_asset')
+            ->assertJsonPath('resolution.occupation.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('resolution.occupation.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('resolution.occupation.trust_summary.reviewer', null)
             ->assertJsonMissingPath('resolution.occupation.alias_url');
     }
 
