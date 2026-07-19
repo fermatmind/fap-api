@@ -42476,7 +42476,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "012a0daaa5cf9334201d6d300accad41a9d62590",
+    "commit_sha": null,
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -98943,7 +98943,7 @@
     "title": "MBTI-COMP-RUNTIME-46: deploy and accept all A/T comparison pages",
     "depends_on": ["MBTI-COMP-PROJECTION-45"],
     "status": "github_checks_pending",
-    "commit_sha": null,
+    "commit_sha": "012a0daaa5cf9334201d6d300accad41a9d62590",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3206",
     "checks": {
       "authorization": {"status": "passed", "evidence": "The operator separately authorized the exact code-only production SHA bc0ed833bc9aae1473ab37f1dead2517e1aff618 and the exact single-record INTP package/payload/promotion authorization hashes. No authorization was inferred for publication, indexability, sitemap, llms, Search Channel, GSC, or indexing requests."},
