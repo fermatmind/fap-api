@@ -11,7 +11,7 @@ Deterministic, backend-ready, text-only package compiled from the locked final-Q
 - Sources: `11`
 - Media supported: `false`
 - Search submission allowed: `false`
-- Package payload SHA-256: `86b11c14a9103b65a1a085de2e4102ab94985a55be83fdcbdcb553ca6cbeed89`
-- Package file SHA-256: `1ee709e7d9880540db072bebb39d7001278518c816cae8265f7af4bc2411659c`
+- Package payload SHA-256: `9000eb347965b91c32dd91b0d07769a28add6b1d1619169dae5027cfb765113b`
+- Package file SHA-256: `91f3c1e94894cfe59ce17ee00e5046d26a9cafc9113fe1eeb4488e4951e4940a`
 
 This artifact does not publish content, write CMS/database state, deploy code, mutate cache, or submit search URLs.

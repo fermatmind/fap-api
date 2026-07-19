@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\BigFive;
 
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
+use App\Services\Cms\PersonalityPublicContentAssetContract;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use Illuminate\Support\Facades\File;
 use RuntimeException;
@@ -67,6 +68,7 @@ final class BigFiveEn52ReleasePackageTest extends TestCase
         $faqs = 0;
         foreach ($assets as $descriptor) {
             $asset = $descriptor['asset'];
+            app(PersonalityPublicContentAssetContract::class)->validateAsset($asset);
             $this->assertSame('en', $asset['locale']);
             $this->assertSame(
                 BigFiveCanonicalRouteCatalog::expectedPath('en', $asset['entity_type'], $asset['entity_key']),

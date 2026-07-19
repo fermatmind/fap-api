@@ -25,9 +25,9 @@ final class BigFiveEn52PackageCompiler
 
     public const INPUT_PACKAGE_FILE_SHA256 = '022f6220dc0a47149dff24b97737b6556694d5e90ec906c32aa0437e4b341b4c';
 
-    public const RELEASE_PACKAGE_PAYLOAD_SHA256 = '86b11c14a9103b65a1a085de2e4102ab94985a55be83fdcbdcb553ca6cbeed89';
+    public const RELEASE_PACKAGE_PAYLOAD_SHA256 = '9000eb347965b91c32dd91b0d07769a28add6b1d1619169dae5027cfb765113b';
 
-    public const RELEASE_PACKAGE_FILE_SHA256 = '1ee709e7d9880540db072bebb39d7001278518c816cae8265f7af4bc2411659c';
+    public const RELEASE_PACKAGE_FILE_SHA256 = '91f3c1e94894cfe59ce17ee00e5046d26a9cafc9113fe1eeb4488e4951e4940a';
 
     public const ASSET_COUNT = 52;
 
@@ -54,6 +54,16 @@ final class BigFiveEn52PackageCompiler
         'polarity' => PersonalityPublicContentAsset::ENTITY_POLARITY,
         'facet_hub' => PersonalityPublicContentAsset::ENTITY_FACET_HUB,
         'facet_detail' => PersonalityPublicContentAsset::ENTITY_FACET_DETAIL,
+    ];
+
+    /** @var array<string,string> */
+    private const SOURCE_TYPE_MAP = [
+        'journal_article' => 'peer_reviewed_research',
+        'meta_analysis' => 'peer_reviewed_research',
+        'meta_synthesis' => 'peer_reviewed_research',
+        'official_project_resource' => 'official_documentation',
+        'technical_manual' => 'professional_standard',
+        'academic_book_metadata' => 'book',
     ];
 
     /** @var list<string> */
@@ -150,7 +160,7 @@ final class BigFiveEn52PackageCompiler
         $fileSha256 = hash('sha256', $releaseJson);
         if (! hash_equals(self::RELEASE_PACKAGE_PAYLOAD_SHA256, $payloadSha256)
             || ! hash_equals(self::RELEASE_PACKAGE_FILE_SHA256, $fileSha256)) {
-            throw new RuntimeException('RUNTIME_RELEASE_DRIFT: compiled English release package hash mismatch.');
+            throw new RuntimeException("RUNTIME_RELEASE_DRIFT: payload={$payloadSha256} file={$fileSha256}.");
         }
 
         return [
@@ -433,7 +443,7 @@ final class BigFiveEn52PackageCompiler
                 'claim_mapping' => array_map(static fn (array $claim): array => [
                     'claim_id' => (string) $claim['claim_id'],
                     'source_ids' => array_values((array) ($claim['source_ids'] ?? [])),
-                    'confidence' => (string) ($claim['confidence'] ?? ''),
+                    'support_level' => (array) ($claim['source_ids'] ?? []) === [] ? 'not_required' : 'direct',
                     'limitation' => (string) $claim['boundary'],
                 ], $claims),
                 'limitations' => [
@@ -588,17 +598,26 @@ final class BigFiveEn52PackageCompiler
                     $claimIds[] = (string) $claim['claim_id'];
                 }
             }
+            $lastVerifiedAt = trim((string) ($source['last_verified_at'] ?? ''));
+            $hasPublicationYear = is_int($source['year'] ?? null);
+            $year = $hasPublicationYear ? (int) $source['year'] : (int) substr($lastVerifiedAt, 0, 4);
+            $limitation = trim(implode(' ', array_filter([
+                (string) ($source['verification_note'] ?? ''),
+                ! $hasPublicationYear
+                    ? 'This official page does not state a publication year; year records the verified public snapshot year, not a publication date.'
+                    : '',
+            ])));
             $public[] = [
                 'id' => $sourceId,
                 'title' => (string) ($source['title'] ?? ''),
                 'author_or_organization' => implode('; ', array_map('strval', (array) ($source['authors'] ?? []))),
-                'year' => (int) ($source['year'] ?? 0),
-                'source_type' => (string) ($source['source_type'] ?? 'other_public_source'),
+                'year' => $year,
+                'source_type' => self::SOURCE_TYPE_MAP[(string) ($source['source_type'] ?? '')] ?? 'other_public_source',
                 'doi' => $source['doi'] ?? null,
                 'public_url' => $source['verified_public_url'] ?? null,
                 'accessed_at' => $source['last_verified_at'] ?? null,
                 'claim_ids' => $claimIds,
-                'limitation' => (string) ($source['verification_note'] ?? ''),
+                'limitation' => $limitation,
             ];
         }
 
