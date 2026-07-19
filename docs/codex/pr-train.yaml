@@ -512,6 +512,57 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: backend
+    next_task: BIG5-EN52-RELEASE-PACKAGE-11
+
+  - id: BIG5-EN52-RELEASE-PACKAGE-11
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-FINAL-QA-10]
+    branch: codex/big5-en52-release-package-11
+    title: "BIG5-EN52-RELEASE-PACKAGE-11: compile locked English 52-page release package"
+    train_scope: big_five_en52_release_package
+    status: user_authorized
+    mode: execute
+    page_count: 52
+    scope:
+      - Deterministically compile the locked, final-QA-passed English 52-page Markdown, claims, and authority inputs into an isolated text-only backend runtime release package, explicitly normalizing editorial locale en-US to backend locale en without any database or CMS write.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityBigFiveEn52PackageBuild.php
+      - backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php
+      - backend/tests/Feature/BigFive/BigFiveEn52ReleasePackageTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/bootstrap/app.php
+      - generated/big-five-en52-release/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify the 52 English pages, claims, QA conclusions, zh-CN prose or publisher, public API, routes, migrations, middleware, sitemap, llms, fap-web, production configuration, or legacy alias authority.
+      - Execute CMS/database/Media Library/search writes, production import, publication, alias purge, deployment, SSH, cache mutation, or search submission.
+    validation:
+      - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=52
+      - PHP syntax checks for every touched PHP file
+      - cd backend && php artisan test tests/Feature/BigFive/BigFiveEn52ReleasePackageTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_big_five_en52_package_build_files' --no-ansi
+      - two independent clean-root package builds with byte-identical release package and compile report output
+      - exact release JSON count, hash, locale, canonical, alias, internal-link, and text-only assertions
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveEn52PackageBuild.php app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php tests/Feature/BigFive/BigFiveEn52ReleasePackageTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: BIG5-EN52-CONTROLLED-PUBLISHER-12
 
   - id: MBTI-COMP-PROJECTION-45
     repo: fap-api

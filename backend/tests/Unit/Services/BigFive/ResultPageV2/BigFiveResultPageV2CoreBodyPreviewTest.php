@@ -554,6 +554,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_en52_package_build_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveEn52PackageBuild.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52Publisher.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_big_five_legacy_alias_hard_purge_files(): void
     {
         $allowed = [
@@ -6415,6 +6430,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveEn52PackageBuildFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveLegacyAliasHardPurgeFile($file)) {
                 continue;
             }
@@ -8418,6 +8437,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveZhV3ContentPublish.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3PackageCompiler.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveZhV3Publisher.php',
+        ], true);
+    }
+
+    private function isBigFiveEn52PackageBuildFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveEn52PackageBuild.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php',
         ], true);
     }
 
