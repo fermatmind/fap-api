@@ -1,0 +1,141 @@
+name: MBTI COMP RUNTIME 46 staging dry run
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_active_revision:
+        description: "Exact 40-character REVISION currently active on staging"
+        required: true
+        type: string
+      expected_release_name:
+        description: "Exact active Deployer release directory name"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mbti-comp-runtime46-staging-dry-run
+  cancel-in-progress: false
+
+jobs:
+  dry-run:
+    name: Verify exact staging release and run read-only INTP preflight
+    runs-on: ubuntu-latest
+    environment: staging
+    timeout-minutes: 15
+    env:
+      DEPLOY_HOST: "49.234.55.28"
+      DEPLOY_USER: "ubuntu"
+      DEPLOY_PORT: "22"
+      DEPLOY_PATH: "/var/www/fap-api-staging"
+      STAGING_API_BASE_URL: "https://staging-api.fermatmind.com"
+      STAGING_PAGE_URL: "https://staging.fermatmind.com/zh/personality/intp-a-vs-intp-t"
+      PACKAGE_PATH: "docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json"
+      SOURCE_PACKAGE_SHA256: "5fcf54132504ef85978a5424e428fb56763ffbaa7c60f50b94b9c91fc3e85dc8"
+      AUTHORIZATION_PAYLOAD_SHA256: "7a84cda503b6f328f0659ee5bd41c85f51c1eca44ac9aa7cfa721d59ab6197e2"
+      EXACT_PAYLOAD_SHA256: "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e"
+
+    steps:
+      - name: Validate fixed staging read-only contract
+        shell: bash
+        env:
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[0-9]+-[1-9][0-9]*$ ]]
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Verify exact active staging revision
+        shell: bash
+        env:
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); test \"\$(basename \"\$current\")\" = '$EXPECTED_RELEASE_NAME'; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+
+      - name: Run exact one-record dry run
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "cd '$DEPLOY_PATH/current/backend' && php artisan personality:mbti-comp-runtime46-intp-revision --package='$PACKAGE_PATH' --source-package-sha256='$SOURCE_PACKAGE_SHA256' --authorization-payload-sha256='$AUTHORIZATION_PAYLOAD_SHA256' --import-scope-mode=single_intp_at_content_revision_only --record-count=1 --dry-run --json --no-interaction --no-ansi" \
+            | tee artifacts/intp-revision-dry-run.json
+
+          jq -e \
+            --arg payload_sha "$EXACT_PAYLOAD_SHA256" \
+            '.ok == true
+             and .dry_run == true
+             and .write == false
+             and .cms_write_attempted == false
+             and .writes_committed == false
+             and .row_count == 1
+             and .at_comparison_row_count == 1
+             and (.rows | length) == 1
+             and .rows[0].slug == "intp-a-vs-intp-t"
+             and .rows[0].action == "would_stage_draft_revision"
+             and .rows[0].payload_sha256 == $payload_sha' \
+            artifacts/intp-revision-dry-run.json >/dev/null
+
+      - name: Read back public staging API and page without writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS --connect-timeout 5 --max-time 30 \
+            "$STAGING_API_BASE_URL/api/v0.5/personality/comparisons/intp-a-vs-intp-t?locale=zh-CN" \
+            | tee artifacts/intp-public-api.json >/dev/null
+          jq -e '
+            .ok == true
+            and .comparison_public_projection_v1.comparison_slug == "intp-a-vs-intp-t"
+            and (.comparison_public_projection_v1.sections | type) == "array"
+          ' artifacts/intp-public-api.json >/dev/null
+
+          page_status="$(curl -sS --connect-timeout 5 --max-time 30 -o /dev/null -w '%{http_code}' "$STAGING_PAGE_URL")"
+          test "$page_status" = "200"
+          jq -n \
+            --arg active_revision "${{ inputs.expected_active_revision }}" \
+            --arg release_name "${{ inputs.expected_release_name }}" \
+            --arg page_status "$page_status" \
+            '{
+              schema_version: "mbti-comp-runtime46-staging-readback.v1",
+              active_revision: $active_revision,
+              release_name: $release_name,
+              public_api_ok: true,
+              page_http_status: ($page_status | tonumber),
+              write_attempted: false
+            }' > artifacts/staging-readback-receipt.json
+
+      - name: Upload staging dry-run receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: mbti-comp-runtime46-staging-dry-run-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
