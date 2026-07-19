@@ -8,6 +8,14 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const REVIEWED_DATE = '2026-07-19';
+const EXPECTED_AUTHORITY_INPUT_SHA256 = Object.freeze({
+    canonical_manifest: 'ee0fc42f087734e7094f13195449f9c8f98e9b2b8011e7f9b1cf7548fad1e0bf',
+    translation_ledger: '3b939666c5470e5b21e8d714610bdf99da91e0092d965638dde9eb7a8dce6ef6',
+    source_registry: '8551461d1ed16d0e11756cd6b08240ef19968e8c92219ded5e227c3f8ca6caf1',
+    terminology_glossary: 'b91a4e831c6b7cc7228c6e2bf432c9a5cc8859f518ee15614823b70ee7e0abd1',
+    source_release: '83536987f7edc73d668f481942c94f6bf549abf23a0e498941f47bc56726490d',
+    cohort_snapshot: '94449467281cffaccc295bab3bbbb574cf817e461ee2fbae8288eedd9a988b3a',
+});
 const EXPECTED_CLAIM_AUTHORITY_SHA256 = '6d4572f4ad2806417d2ed76592f41f3e028779aa94122f8caaacf55f1fb05bb2';
 const args = Object.fromEntries(process.argv.slice(2).map((arg) => {
     const match = arg.match(/^--([^=]+)=(.+)$/);
@@ -150,14 +158,19 @@ const unexpectedClaimPaths = actualClaimPaths.filter((file) => !expectedClaimPat
 const missingClaimPaths = [...expectedClaimPaths].filter((file) => !actualClaimPaths.includes(file));
 const manifestAuthorityKeys = new Set(manifest.entries.map((entry) => entry.authority_asset_key));
 const releaseAuthorityKeys = new Set(release.assets.map((asset) => asset.authority_asset_key));
-const sourceReleaseFailures = Number(sha256(releaseBytes) !== manifest.authority.source_release_file_sha256)
+const sourceReleaseFailures = Number(sha256(releaseBytes) !== EXPECTED_AUTHORITY_INPUT_SHA256.source_release)
+    + Number(sha256(releaseBytes) !== manifest.authority.source_release_file_sha256)
     + Number(release.package_payload_sha256 !== manifest.authority.source_release_payload_sha256)
     + Number(release.source_content_sha256 !== manifest.authority.source_content_sha256)
     + Math.abs(release.assets.length - 52) + Math.abs(releaseByAuthority.size - release.assets.length)
     + [...manifestAuthorityKeys].filter((key) => !releaseAuthorityKeys.has(key)).length
     + [...releaseAuthorityKeys].filter((key) => !manifestAuthorityKeys.has(key)).length;
 const registryIds = registry.sources.map((source) => source.source_id);
-const authorityInputFailures = Number(sha256(registryBytes) !== manifest.authority.projected_source_registry_sha256)
+const authorityInputFailures = Number(sha256(manifestBytes) !== EXPECTED_AUTHORITY_INPUT_SHA256.canonical_manifest)
+    + Number(sha256(ledgerBytes) !== EXPECTED_AUTHORITY_INPUT_SHA256.translation_ledger)
+    + Number(sha256(registryBytes) !== EXPECTED_AUTHORITY_INPUT_SHA256.source_registry)
+    + Number(sha256(glossaryBytes) !== EXPECTED_AUTHORITY_INPUT_SHA256.terminology_glossary)
+    + Number(sha256(registryBytes) !== manifest.authority.projected_source_registry_sha256)
     + Number(sha256(glossaryBytes) !== manifest.authority.projected_terminology_sha256)
     + Number(registry.source_registry_version !== manifest.authority.source_registry_version)
     + Number(glossary.schema_version !== manifest.authority.terminology_version)
@@ -346,6 +359,7 @@ for (const entry of manifest.entries) {
 
 const cohortBytes = jsonBytes(cohort);
 const cohortSha = sha256(cohortBytes);
+const cohortSnapshotMismatches = Number(cohortSha !== EXPECTED_AUTHORITY_INPUT_SHA256.cohort_snapshot);
 const claimAuthorityValueMismatches = Number(claimAuthorityRows.length !== 170)
     + Number(sha256(jsonBytes(claimAuthorityRows)) !== EXPECTED_CLAIM_AUTHORITY_SHA256);
 const committedFilesByIdentity = new Map((committedPackageManifest?.files ?? []).map((file) => [file.page_identity, file]));
@@ -471,6 +485,7 @@ const hardGates = {
     frontmatter_manifest_mismatch_count: frontmatterManifestMismatches, sidecar_metadata_mismatch_count: sidecarMetadataMismatches,
     claim_row_schema_failure_count: claimRowSchemaFailures,
     claim_authority_value_mismatch_count: claimAuthorityValueMismatches,
+    cohort_snapshot_mismatch_count: cohortSnapshotMismatches,
     source_release_failure_count: sourceReleaseFailures,
     authority_input_failure_count: authorityInputFailures, committed_package_input_mismatch_count: committedPackageInputMismatches,
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
