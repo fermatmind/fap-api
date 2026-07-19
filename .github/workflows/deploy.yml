@@ -209,6 +209,17 @@ jobs:
         working-directory: backend
         run: php artisan test tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php
 
+      - name: Normalize exact isolated candidate branch-diff baseline
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
+        shell: bash
+        env:
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
+          git update-ref refs/remotes/origin/main "$EXPECTED_RELEASE_SHA"
+          test "$(git merge-base origin/main HEAD)" = "$EXPECTED_RELEASE_SHA"
+
       - name: Gate - ci_verify_mbti (Phase D)
         env:
           RUN_BIG5_OCEAN_GATE: "1"
