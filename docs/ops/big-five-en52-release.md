@@ -17,6 +17,14 @@ public sitemap/llms surfaces, and the 104 canonical plus 20 redirect-only public
 artifact. The generic production verify-only runner must capture sanitized JSON stdout into its runner-side
 artifact after separately validating that the approved SHA is contained by `main`.
 
+Every verifier request to the backend public API carries a short-lived HMAC signature bound to the exact
+HTTPS API origin and GET request URI. The public personality read-model cache recognizes only a valid signature produced with
+the deployed application key and bypasses all cache reads, locks, pointer refreshes, and cache writes for
+that request. The same signature is carried under the dedicated `Fermat-Verify-Only` authorization scheme,
+so the existing non-anonymous request boundary also suppresses deferred runtime-metrics cache writes. The
+signature expires after 60 seconds and cannot be replayed for a different URI. Frontend surface probes do
+not carry these headers.
+
 ## Required approval inputs
 
 - Exact deployed fap-api `main` SHA and exact release directory name.

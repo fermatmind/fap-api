@@ -631,6 +631,7 @@ prs:
     allowed_paths:
       - backend/app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php
       - backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php
+      - backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php
       - backend/tests/Feature/BigFive/BigFiveEn52RuntimeVerifyTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/bootstrap/app.php
@@ -645,7 +646,7 @@ prs:
       - PHP syntax checks for every touched PHP file
       - cd backend && php artisan test tests/Feature/BigFive/BigFiveEn52RuntimeVerifyTest.php --no-ansi
       - focused tests cover zero-write fingerprints, wrong SHA/release/package, 51/53 rows, missing/mixed revisions, alias reappearance, public/discoverability drift, non-target drift, sanitized failures, and bounded HTTP failure
-      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php bootstrap/app.php tests/Feature/BigFive/BigFiveEn52RuntimeVerifyTest.php
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php app/Services/Cms/PersonalityPublicAssetReadModelCache.php bootstrap/app.php tests/Feature/BigFive/BigFiveEn52RuntimeVerifyTest.php
       - cd backend && php artisan route:list --path=api --except-vendor
       - isolated fresh SQLite migration
       - process guard followed by cd backend && bash scripts/ci_verify_mbti.sh
@@ -659,7 +660,7 @@ prs:
     production_write_execution: false
     database_mutation: false
     cms_mutation: false
-    api_runtime_change: false
+    api_runtime_change: true
     publish_allowed: false
     search_channel_action: false
     deploy_allowed: false

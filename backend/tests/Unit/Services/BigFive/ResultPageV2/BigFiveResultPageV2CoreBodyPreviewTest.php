@@ -589,6 +589,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowed = [
             'backend/app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php',
+            'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php',
             'backend/bootstrap/app.php',
         ];
         $bootstrapChangedLines = [
@@ -8512,6 +8513,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php',
+            'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php',
         ], true);
     }
 

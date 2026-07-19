@@ -6,6 +6,7 @@ namespace App\Services\BigFive\AuthorityV3\Release;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use DOMDocument;
 use DOMXPath;
@@ -174,7 +175,7 @@ final class BigFiveEn52RuntimeVerifier
     /** @param list<string> $expectedPaths @return array{count:int,detail_count:int,media_exposure_count:int} */
     private function publicApi(string $origin, array $expectedPaths): array
     {
-        $response = $this->get($origin.'/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100');
+        $response = $this->getPublicApi($origin.'/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100');
         $payload = $this->successfulJson($response, 'public_api_failed');
         $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
         if (count($items) !== 52 || (int) data_get($payload, 'pagination.total', 0) !== 52) {
@@ -210,7 +211,7 @@ final class BigFiveEn52RuntimeVerifier
         foreach ($items as $item) {
             $entityType = (string) ($item['entity_type'] ?? '');
             $code = (string) ($item['code'] ?? '');
-            $detailPayload = $this->successfulJson($this->get(
+            $detailPayload = $this->successfulJson($this->getPublicApi(
                 $origin.'/api/v0.5/personality-content-assets/big_five/'
                     .rawurlencode($entityType).'/'.rawurlencode($code).'?locale=en'
             ), 'public_api_detail_failed');
@@ -238,7 +239,7 @@ final class BigFiveEn52RuntimeVerifier
         }
         foreach (BigFiveCanonicalRouteCatalog::redirectOnlyAliasTargets('en') as $alias => $_target) {
             foreach (['en', 'zh-CN'] as $locale) {
-                $aliasResponse = $this->get($origin.'/api/v0.5/personality-content-assets/big_five/polarity/'.$alias.'?locale='.urlencode($locale));
+                $aliasResponse = $this->getPublicApi($origin.'/api/v0.5/personality-content-assets/big_five/polarity/'.$alias.'?locale='.urlencode($locale));
                 if ($aliasResponse->status() !== 404) {
                     throw new RuntimeException('alias_public_api_reappearance');
                 }
@@ -254,7 +255,7 @@ final class BigFiveEn52RuntimeVerifier
         $expected = [...$enPaths, ...array_column(BigFiveCanonicalRouteCatalog::canonicalEntries('zh-CN'), 'path')];
         sort($expected);
         $aliases = array_keys(BigFiveCanonicalRouteCatalog::reviewedRedirectPaths());
-        $source = $this->successfulJson($this->get($apiOrigin.'/api/v0.5/seo/sitemap-source'), 'sitemap_source_failed');
+        $source = $this->successfulJson($this->getPublicApi($apiOrigin.'/api/v0.5/seo/sitemap-source'), 'sitemap_source_failed');
         $sourcePaths = $this->pathsFromUrls(array_column((array) ($source['items'] ?? []), 'loc'), $frontendOrigin);
         if ($this->bigFiveSubset($sourcePaths) !== $expected) {
             throw new RuntimeException('sitemap_source_cohort_mismatch');
@@ -370,6 +371,13 @@ final class BigFiveEn52RuntimeVerifier
     private function get(string $url): Response
     {
         return Http::accept('*/*')->withoutRedirecting()->connectTimeout(self::CONNECT_TIMEOUT_SECONDS)
+            ->timeout(self::REQUEST_TIMEOUT_SECONDS)->get($url);
+    }
+
+    private function getPublicApi(string $url): Response
+    {
+        return Http::withHeaders(PersonalityPublicAssetReadModelCache::signedVerifyOnlyHeaders('GET', $url))
+            ->accept('*/*')->withoutRedirecting()->connectTimeout(self::CONNECT_TIMEOUT_SECONDS)
             ->timeout(self::REQUEST_TIMEOUT_SECONDS)->get($url);
     }
 

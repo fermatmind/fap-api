@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\Feature\BigFive;
 
+use App\Http\Middleware\RecordPublicContentRuntime;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52RuntimeVerifier;
+use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Factory;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request as ServerRequest;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use ReflectionMethod;
@@ -71,6 +75,18 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         $this->assertSame(0, $result['search_action_count']);
         $this->assertFalse($result['writes_committed']);
         $this->assertSame($before, $this->databaseBytes());
+        foreach (Http::recorded() as [$request]) {
+            $isPublicApi = parse_url($request->url(), PHP_URL_HOST) === 'api.fermatmind.com';
+            $this->assertSame(
+                $isPublicApi,
+                $request->hasHeader(PersonalityPublicAssetReadModelCache::VERIFY_ONLY_TIMESTAMP_HEADER),
+            );
+            $this->assertSame(
+                $isPublicApi,
+                $request->hasHeader(PersonalityPublicAssetReadModelCache::VERIFY_ONLY_SIGNATURE_HEADER),
+            );
+            $this->assertSame($isPublicApi, $request->hasHeader('Authorization'));
+        }
     }
 
     public function test_wrong_sha_release_package_and_51_or_53_row_boundaries_fail_closed(): void
@@ -262,6 +278,65 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'public_api_detail_projection_mismatch');
     }
 
+    public function test_signed_verify_only_public_api_request_bypasses_every_cache_operation(): void
+    {
+        config(['app.key' => 'base64:'.base64_encode(str_repeat('v', 32))]);
+        $url = 'https://api.fermatmind.com/api/v0.5/personality-content-assets?framework=big_five&locale=en';
+        $headers = PersonalityPublicAssetReadModelCache::signedVerifyOnlyHeaders('GET', $url);
+        $request = ServerRequest::create(
+            $url,
+            'GET',
+            server: [
+                'HTTP_X_FERMAT_VERIFY_ONLY_TIMESTAMP' => $headers[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_TIMESTAMP_HEADER],
+                'HTTP_X_FERMAT_VERIFY_ONLY_SIGNATURE' => $headers[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_SIGNATURE_HEADER],
+                'HTTP_AUTHORIZATION' => $headers['Authorization'],
+            ],
+        );
+        $this->app->instance('request', $request);
+        Cache::spy();
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+
+        $this->assertSame('', $cache->captureFence('index', 'big_five', 'all', 'verified', 'en', 0));
+        $this->assertSame(
+            ['state' => 'bypass', 'payload' => null],
+            $cache->read('index', 'big_five', 'all', 'verified', 'en', 0, 'version'),
+        );
+        $cache->put('index', 'big_five', 'all', 'verified', 'en', 0, 'version', ['ok' => true]);
+
+        Cache::shouldNotHaveReceived('get');
+        Cache::shouldNotHaveReceived('put');
+        Cache::shouldNotHaveReceived('lock');
+        Cache::shouldNotHaveReceived('forget');
+        $scope = new ReflectionMethod(app(RecordPublicContentRuntime::class), 'scope');
+        $this->assertNull($scope->invoke(app(RecordPublicContentRuntime::class), $request));
+
+        $replayed = ServerRequest::create(
+            'https://api.fermatmind.com/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en',
+            'GET',
+            server: [
+                'HTTP_X_FERMAT_VERIFY_ONLY_TIMESTAMP' => $headers[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_TIMESTAMP_HEADER],
+                'HTTP_X_FERMAT_VERIFY_ONLY_SIGNATURE' => $headers[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_SIGNATURE_HEADER],
+                'HTTP_AUTHORIZATION' => $headers['Authorization'],
+            ],
+        );
+        $this->app->instance('request', $replayed);
+        $method = new ReflectionMethod($cache, 'isSignedVerifyOnlyRequest');
+        $this->assertFalse($method->invoke($cache));
+
+        $expiredHeaders = PersonalityPublicAssetReadModelCache::signedVerifyOnlyHeaders('GET', $url, time() - 61);
+        $expired = ServerRequest::create($url, 'GET', server: [
+            'HTTP_X_FERMAT_VERIFY_ONLY_TIMESTAMP' => $expiredHeaders[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_TIMESTAMP_HEADER],
+            'HTTP_X_FERMAT_VERIFY_ONLY_SIGNATURE' => $expiredHeaders[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_SIGNATURE_HEADER],
+            'HTTP_AUTHORIZATION' => $expiredHeaders['Authorization'],
+        ]);
+        $this->app->instance('request', $expired);
+        $this->assertFalse($method->invoke($cache));
+        $this->expectFailureCode(
+            fn () => PersonalityPublicAssetReadModelCache::signedVerifyOnlyHeaders('GET', 'https://off-origin.invalid/api/v0.5/personality-content-assets'),
+            'verify_only_cache_bypass_target_invalid',
+        );
+    }
+
     private function seedAndPublish(): void
     {
         if (PersonalityPublicContentAsset::query()->withoutGlobalScopes()->exists()) {
@@ -328,7 +403,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
             ? array_values(array_diff($completePaths, [$omitPath]))
             : $completePaths;
         $aliases = BigFiveCanonicalRouteCatalog::reviewedRedirectPaths();
-        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath, $rejectedExtraSurface, $brokenDetailPath, $driftDetailPath) {
+        Http::fake(function (ClientRequest $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath, $rejectedExtraSurface, $brokenDetailPath, $driftDetailPath) {
             $url = $request->url();
             $path = (string) parse_url($url, PHP_URL_PATH);
             if ($path === '/api/v0.5/personality-content-assets') {
