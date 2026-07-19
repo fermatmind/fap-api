@@ -77,8 +77,11 @@ function linkDestinations(markdown) {
 function unsupportedRenderedLinkSyntax(markdown) {
     const withoutSupportedInlineLinks = markdown.replace(/!?\[[^\]]*\]\(\s*(?:<[^>]*>|[^\s)]+)(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\s*\)/g, '');
     return /(?:https?:\/\/|mailto:)/i.test(withoutSupportedInlineLinks)
+        || /<[A-Z][A-Z0-9+.-]{1,31}:[^<>\s]*>/i.test(withoutSupportedInlineLinks)
         || /<[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}>/i.test(withoutSupportedInlineLinks)
         || /<a\b/i.test(withoutSupportedInlineLinks)
+        || /\b(?:href|src)\s*=/i.test(withoutSupportedInlineLinks)
+        || /\bwww\.[^\s<>]+/i.test(withoutSupportedInlineLinks)
         || /^\s*\[[^\]]+\]:\s*/m.test(withoutSupportedInlineLinks)
         || /(?<!!)\[[^\]]+\]\s*\[[^\]]*\]/.test(withoutSupportedInlineLinks);
 }
