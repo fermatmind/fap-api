@@ -530,6 +530,7 @@ prs:
       - backend/app/Console/Commands/PersonalityBigFiveEn52PackageBuild.php
       - backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php
       - backend/tests/Feature/BigFive/BigFiveEn52ReleasePackageTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/bootstrap/app.php
       - generated/big-five-en52-release/**
       - docs/codex/pr-train.yaml
@@ -542,6 +543,7 @@ prs:
       - node generated/big-five-en52-translation/validate-authority.mjs --expected-translated=52
       - PHP syntax checks for every touched PHP file
       - cd backend && php artisan test tests/Feature/BigFive/BigFiveEn52ReleasePackageTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_big_five_en52_package_build_files' --no-ansi
       - two independent clean-root package builds with byte-identical release package and compile report output
       - exact release JSON count, hash, locale, canonical, alias, internal-link, and text-only assertions
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveEn52PackageBuild.php app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php tests/Feature/BigFive/BigFiveEn52ReleasePackageTest.php
