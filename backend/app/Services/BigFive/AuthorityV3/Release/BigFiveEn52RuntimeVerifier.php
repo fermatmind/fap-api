@@ -23,13 +23,6 @@ final class BigFiveEn52RuntimeVerifier
     public const REQUEST_TIMEOUT_SECONDS = 20;
 
     /** @var list<string> */
-    private const APPROVED_PUBLIC_HOSTS = [
-        'api.fermatmind.com',
-        'fermatmind.com',
-        'www.fermatmind.com',
-    ];
-
-    /** @var list<string> */
     private const SEARCH_TABLES = [
         'seo_domestic_submission_logs',
         'seo_indexnow_submissions',
@@ -50,8 +43,8 @@ final class BigFiveEn52RuntimeVerifier
     {
         $approvedSha = $this->gitSha($approval['approved_sha'] ?? '');
         $releaseName = $this->releaseName($approval['release_name'] ?? '');
-        $apiOrigin = $this->httpsOrigin($approval['api_origin'] ?? '');
-        $frontendOrigin = $this->httpsOrigin($approval['frontend_origin'] ?? '');
+        $apiOrigin = $this->httpsOrigin($approval['api_origin'] ?? '', 'api');
+        $frontendOrigin = $this->httpsOrigin($approval['frontend_origin'] ?? '', 'frontend');
         $expectedZh = $this->sha256($approval['expected_zh_fingerprint'] ?? '', 'approval_zh_fingerprint_invalid');
         $expectedNonTarget = $this->sha256($approval['expected_non_target_fingerprint'] ?? '', 'approval_non_target_fingerprint_invalid');
         $expectedSearch = $this->sha256($approval['expected_search_fingerprint'] ?? '', 'approval_search_fingerprint_invalid');
@@ -376,7 +369,9 @@ final class BigFiveEn52RuntimeVerifier
         if (! @$document->loadXML($xml, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
             throw new RuntimeException('sitemap_invalid_xml');
         }
-        $nodes = (new DOMXPath($document))->query('//*[local-name()="loc"]');
+        $xpath = new DOMXPath($document);
+        $xpath->registerNamespace('sitemap', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+        $nodes = $xpath->query('/sitemap:urlset/sitemap:url/sitemap:loc');
         if ($nodes === false) {
             throw new RuntimeException('sitemap_invalid_xml');
         }
@@ -489,13 +484,18 @@ final class BigFiveEn52RuntimeVerifier
         return $value;
     }
 
-    private function httpsOrigin(string $value): string
+    private function httpsOrigin(string $value, string $role): string
     {
         $value = rtrim(trim($value), '/');
         $parts = parse_url($value);
         $host = is_array($parts) ? strtolower(trim((string) ($parts['host'] ?? ''))) : '';
+        $approvedHost = match ($role) {
+            'api' => 'api.fermatmind.com',
+            'frontend' => 'fermatmind.com',
+            default => throw new RuntimeException('public_origin_role_invalid'),
+        };
         if (! is_array($parts) || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
-            || ! in_array($host, self::APPROVED_PUBLIC_HOSTS, true) || isset($parts['port'])
+            || $host !== $approvedHost || isset($parts['port'])
             || isset($parts['user']) || isset($parts['pass']) || isset($parts['query']) || isset($parts['fragment'])
             || ($parts['path'] ?? '') !== '') {
             throw new RuntimeException('public_origin_invalid');

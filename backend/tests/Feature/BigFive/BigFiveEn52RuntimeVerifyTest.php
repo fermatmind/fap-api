@@ -195,11 +195,18 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         $method = new ReflectionMethod(app(BigFiveEn52RuntimeVerifier::class), 'httpsOrigin');
         $verifier = app(BigFiveEn52RuntimeVerifier::class);
 
-        foreach (['https://api.fermatmind.com', 'https://fermatmind.com', 'https://www.fermatmind.com'] as $origin) {
-            $this->assertSame($origin, $method->invoke($verifier, $origin));
-        }
-        foreach (['https://127.0.0.1', 'https://localhost', 'https://internal.fermatmind.com', 'https://fermatmind.com:443'] as $origin) {
-            $this->expectFailureCode(fn () => $method->invoke($verifier, $origin), 'public_origin_invalid');
+        $this->assertSame('https://api.fermatmind.com', $method->invoke($verifier, 'https://api.fermatmind.com', 'api'));
+        $this->assertSame('https://fermatmind.com', $method->invoke($verifier, 'https://fermatmind.com', 'frontend'));
+        foreach ([
+            ['https://fermatmind.com', 'api'],
+            ['https://api.fermatmind.com', 'frontend'],
+            ['https://www.fermatmind.com', 'frontend'],
+            ['https://127.0.0.1', 'api'],
+            ['https://localhost', 'frontend'],
+            ['https://internal.fermatmind.com', 'api'],
+            ['https://fermatmind.com:443', 'frontend'],
+        ] as [$origin, $role]) {
+            $this->expectFailureCode(fn () => $method->invoke($verifier, $origin, $role), 'public_origin_invalid');
         }
     }
 
@@ -227,7 +234,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         }
     }
 
-    public function test_sitemap_uses_only_loc_entries_for_the_exact_cohort(): void
+    public function test_sitemap_uses_only_url_loc_entries_for_the_exact_cohort(): void
     {
         $this->seedAndPublish();
         $verifier = app(BigFiveEn52RuntimeVerifier::class);
@@ -342,10 +349,11 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                     $nonLocEvidence = $sitemapNonLocOnlyPath === null
                         ? ''
                         : '<!-- https://fermatmind.com'.$sitemapNonLocOnlyPath.' -->'
-                            .'<xhtml:link href="https://fermatmind.com'.$sitemapNonLocOnlyPath.'" />';
+                            .'<xhtml:link href="https://fermatmind.com'.$sitemapNonLocOnlyPath.'" />'
+                            .'<image:image><image:loc>https://fermatmind.com'.$sitemapNonLocOnlyPath.'</image:loc></image:image>';
 
                     return Http::response(
-                        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+                        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'
                             .$entries.$nonLocEvidence.'</urlset>',
                         200,
                         ['Content-Type' => 'application/xml'],
