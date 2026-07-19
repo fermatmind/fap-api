@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\PersonalityPublicContentAsset;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use JsonException;
+use RuntimeException;
 use Throwable;
 
 final class PersonalityPublicAssetReadModelCache
@@ -17,6 +19,16 @@ final class PersonalityPublicAssetReadModelCache
     public const TTL_SECONDS = 600;
 
     public const LKG_TTL_SECONDS = 604800;
+
+    public const VERIFY_ONLY_TIMESTAMP_HEADER = 'X-Fermat-Verify-Only-Timestamp';
+
+    public const VERIFY_ONLY_SIGNATURE_HEADER = 'X-Fermat-Verify-Only-Signature';
+
+    public const VERIFY_ONLY_AUTH_SCHEME = 'Fermat-Verify-Only';
+
+    private const VERIFY_ONLY_API_ORIGIN = 'https://api.fermatmind.com';
+
+    private const VERIFY_ONLY_MAX_SKEW_SECONDS = 60;
 
     private const COLLECTION_REGISTRY_LIMIT = 200;
 
@@ -678,6 +690,10 @@ final class PersonalityPublicAssetReadModelCache
         string $locale,
         int $orgId,
     ): bool {
+        if ($this->isSignedVerifyOnlyRequest()) {
+            return false;
+        }
+
         $surfaceEntityTypeIsValid = match ($surface) {
             'detail-code' => in_array($entityType, PersonalityPublicContentAsset::ENTITY_TYPES, true),
             'detail-slug' => $entityType === 'slug',
@@ -691,6 +707,96 @@ final class PersonalityPublicAssetReadModelCache
             && $surfaceEntityTypeIsValid
             && $selector !== ''
             && strlen($selector) <= 512;
+    }
+
+    /** @return array<string,string> */
+    public static function signedVerifyOnlyHeaders(string $method, string $url, ?int $timestamp = null): array
+    {
+        $method = strtoupper(trim($method));
+        $parts = parse_url($url);
+        if ($method !== 'GET' || ! is_array($parts) || ! isset($parts['path'])
+            || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
+            || strtolower((string) ($parts['host'] ?? '')) !== 'api.fermatmind.com'
+            || isset($parts['port']) || isset($parts['user']) || isset($parts['pass']) || isset($parts['fragment'])) {
+            throw new RuntimeException('verify_only_cache_bypass_target_invalid');
+        }
+
+        $uri = (string) $parts['path'];
+        if (isset($parts['query'])) {
+            $uri .= '?'.$parts['query'];
+        }
+        $timestamp ??= time();
+        $signature = self::verifyOnlySignature($method, self::VERIFY_ONLY_API_ORIGIN, $uri, $timestamp);
+
+        return [
+            'Authorization' => self::VERIFY_ONLY_AUTH_SCHEME.' '.$signature,
+            self::VERIFY_ONLY_TIMESTAMP_HEADER => (string) $timestamp,
+            self::VERIFY_ONLY_SIGNATURE_HEADER => $signature,
+        ];
+    }
+
+    private function isSignedVerifyOnlyRequest(): bool
+    {
+        if (! app()->bound('request')) {
+            return false;
+        }
+
+        $request = app('request');
+        if (! $request instanceof Request || strtoupper($request->method()) !== 'GET'
+            || strtolower($request->getSchemeAndHttpHost()) !== self::VERIFY_ONLY_API_ORIGIN) {
+            return false;
+        }
+
+        $timestampValue = trim((string) $request->header(self::VERIFY_ONLY_TIMESTAMP_HEADER, ''));
+        $signature = strtolower(trim((string) $request->header(self::VERIFY_ONLY_SIGNATURE_HEADER, '')));
+        $authorization = trim((string) $request->header('Authorization', ''));
+        if (preg_match('/^[0-9]{10}$/', $timestampValue) !== 1
+            || preg_match('/^[a-f0-9]{64}$/', $signature) !== 1
+            || ! hash_equals(self::VERIFY_ONLY_AUTH_SCHEME.' '.$signature, $authorization)) {
+            return false;
+        }
+
+        $timestamp = (int) $timestampValue;
+        if (abs(time() - $timestamp) > self::VERIFY_ONLY_MAX_SKEW_SECONDS) {
+            return false;
+        }
+
+        $key = trim((string) config('app.key', ''));
+        if ($key === '') {
+            return false;
+        }
+
+        return hash_equals(
+            self::verifyOnlySignature(
+                'GET',
+                self::VERIFY_ONLY_API_ORIGIN,
+                $request->getRequestUri(),
+                $timestamp,
+                $key,
+            ),
+            $signature,
+        );
+    }
+
+    private static function verifyOnlySignature(
+        string $method,
+        string $origin,
+        string $uri,
+        int $timestamp,
+        ?string $key = null,
+    ): string {
+        $key ??= trim((string) config('app.key', ''));
+        if ($key === '') {
+            throw new RuntimeException('verify_only_cache_bypass_key_unavailable');
+        }
+
+        return hash_hmac('sha256', implode("\n", [
+            'personality-public-cache-verify-only:v1',
+            $timestamp,
+            $method,
+            $origin,
+            $uri,
+        ]), $key);
     }
 
     private function recordState(
