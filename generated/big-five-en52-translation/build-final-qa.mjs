@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const REVIEWED_DATE = '2026-07-19';
+const EXPECTED_CLAIM_AUTHORITY_SHA256 = '6d4572f4ad2806417d2ed76592f41f3e028779aa94122f8caaacf55f1fb05bb2';
 const args = Object.fromEntries(process.argv.slice(2).map((arg) => {
     const match = arg.match(/^--([^=]+)=(.+)$/);
     return match ? [match[1], match[2]] : [arg, true];
@@ -171,6 +172,7 @@ const cohort = [];
 const paragraphs = [];
 const titleOwners = new Map();
 const clinicalRisks = [];
+const claimAuthorityRows = [];
 let internalViolations = 0;
 let unregisteredExternalLinks = 0;
 let bodyMediaReferences = 0;
@@ -260,6 +262,13 @@ for (const entry of manifest.entries) {
             && (claim.translation_equivalence_status !== 'scientifically_narrowed'
                 || (typeof claim.scientific_narrowing_reason === 'string' && claim.scientific_narrowing_reason.trim().length > 0));
         if (!claimRowMatches) claimRowSchemaFailures += 1;
+        claimAuthorityRows.push({
+            claim_id: claim.claim_id, page_identity: claim.page_identity, visible_claim: claim.visible_claim,
+            source_ids: claim.source_ids, claim_type: claim.claim_type, confidence: claim.confidence,
+            boundary: claim.boundary, source_section: claim.source_section,
+            translation_equivalence_status: claim.translation_equivalence_status,
+            scientific_narrowing_reason: claim.scientific_narrowing_reason ?? null,
+        });
         if (!body.includes(claim.visible_claim)) visibleReferenceMismatches += 1;
         for (const sourceId of claim.source_ids ?? []) {
             if (!registeredUrls.has(sourceId)) invalidClaimSourceIds += 1;
@@ -337,6 +346,8 @@ for (const entry of manifest.entries) {
 
 const cohortBytes = jsonBytes(cohort);
 const cohortSha = sha256(cohortBytes);
+const claimAuthorityValueMismatches = Number(claimAuthorityRows.length !== 170)
+    + Number(sha256(jsonBytes(claimAuthorityRows)) !== EXPECTED_CLAIM_AUTHORITY_SHA256);
 const committedFilesByIdentity = new Map((committedPackageManifest?.files ?? []).map((file) => [file.page_identity, file]));
 let committedPackageInputMismatches = Number(committedPackageManifest?.schema_version !== 'big-five-en52-package-manifest.v1')
     + Math.abs((committedPackageManifest?.files ?? []).length - manifest.entries.length);
@@ -459,6 +470,7 @@ const hardGates = {
     unexpected_claim_id_count: unexpectedClaimIds, missing_claim_id_count: missingClaimIds, duplicate_claim_id_count: duplicateClaimIds,
     frontmatter_manifest_mismatch_count: frontmatterManifestMismatches, sidecar_metadata_mismatch_count: sidecarMetadataMismatches,
     claim_row_schema_failure_count: claimRowSchemaFailures,
+    claim_authority_value_mismatch_count: claimAuthorityValueMismatches,
     source_release_failure_count: sourceReleaseFailures,
     authority_input_failure_count: authorityInputFailures, committed_package_input_mismatch_count: committedPackageInputMismatches,
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
