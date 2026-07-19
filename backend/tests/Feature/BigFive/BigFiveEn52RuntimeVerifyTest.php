@@ -63,6 +63,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         $this->assertSame(52, $result['asset_count']);
         $this->assertSame(52, $result['revision_count']);
         $this->assertSame(52, $result['public_api_count']);
+        $this->assertSame(52, $result['public_api_detail_count']);
         $this->assertSame(104, $result['canonical_total_count']);
         $this->assertSame(20, $result['permanent_single_hop_redirect_count']);
         $this->assertSame(0, $result['canonical_redirect_count']);
@@ -247,6 +248,20 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'sitemap_cohort_mismatch');
     }
 
+    public function test_each_canonical_public_api_detail_must_be_readable_and_exact(): void
+    {
+        $this->seedAndPublish();
+        $verifier = app(BigFiveEn52RuntimeVerifier::class);
+        $approval = $this->approval($verifier);
+        $detailPath = '/api/v0.5/personality-content-assets/big_five/domain/openness';
+
+        $this->fakeHealthyPublicRuntime(brokenDetailPath: $detailPath);
+        $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'public_api_detail_failed');
+
+        $this->fakeHealthyPublicRuntime(driftDetailPath: $detailPath);
+        $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'public_api_detail_projection_mismatch');
+    }
+
     private function seedAndPublish(): void
     {
         if (PersonalityPublicContentAsset::query()->withoutGlobalScopes()->exists()) {
@@ -303,6 +318,8 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         bool $queryAliasLocation = false,
         ?string $sitemapNonLocOnlyPath = null,
         ?string $rejectedExtraSurface = null,
+        ?string $brokenDetailPath = null,
+        ?string $driftDetailPath = null,
     ): void {
         Http::swap(new Factory);
         Http::preventStrayRequests();
@@ -311,7 +328,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
             ? array_values(array_diff($completePaths, [$omitPath]))
             : $completePaths;
         $aliases = BigFiveCanonicalRouteCatalog::reviewedRedirectPaths();
-        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath, $rejectedExtraSurface) {
+        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath, $rejectedExtraSurface, $brokenDetailPath, $driftDetailPath) {
             $url = $request->url();
             $path = (string) parse_url($url, PHP_URL_PATH);
             if ($path === '/api/v0.5/personality-content-assets') {
@@ -325,6 +342,33 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                     ])->all();
 
                 return Http::response(['ok' => true, 'items' => $items, 'pagination' => ['total' => 52]], 200);
+            }
+            if (preg_match('#^/api/v0\.5/personality-content-assets/big_five/([^/]+)/([^/]+)$#', $path, $matches) === 1) {
+                if ($path === $brokenDetailPath) {
+                    return Http::response(['ok' => false], 404);
+                }
+                $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+                    ->where('framework', 'big_five')->where('locale', 'en')
+                    ->where('entity_type', rawurldecode($matches[1]))->where('entity_key', rawurldecode($matches[2]))->first();
+                if (! $asset instanceof PersonalityPublicContentAsset) {
+                    return Http::response(['ok' => false], 404);
+                }
+                $detail = [
+                    'framework' => 'big_five', 'locale' => 'en', 'entity_type' => $asset->entity_type,
+                    'code' => $asset->entity_key, 'canonical_path' => data_get($asset->canonical_json, 'path'),
+                    'hreflang' => $asset->hreflang_json, 'robots' => $asset->robots, 'is_public' => (bool) $asset->is_public,
+                    'index_eligible' => (bool) $asset->index_eligible, 'sitemap_eligible' => (bool) $asset->sitemap_eligible,
+                    'llms_eligible' => (bool) $asset->llms_eligible, 'source_package' => $asset->source_package,
+                ];
+                if ($path === $driftDetailPath) {
+                    $detail['canonical_path'] = '/en/personality/big-five/drift';
+                }
+
+                return Http::response([
+                    'ok' => true,
+                    'personality_public_content_asset_v1' => $detail,
+                    'personality_public_content_asset_v2' => ['contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2],
+                ], 200);
             }
             if ($path === '/api/v0.5/seo/sitemap-source') {
                 $surfacePaths = $allPaths;

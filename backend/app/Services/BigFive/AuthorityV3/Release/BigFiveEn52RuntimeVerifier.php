@@ -102,6 +102,7 @@ final class BigFiveEn52RuntimeVerifier
             'asset_count' => 52,
             'revision_count' => 52,
             'public_api_count' => $api['count'],
+            'public_api_detail_count' => $api['detail_count'],
             'canonical_total_count' => 104,
             'family_counts' => BigFiveEn52PackageCompiler::FAMILY_COUNTS,
             'alias_database_count' => 0,
@@ -170,7 +171,7 @@ final class BigFiveEn52RuntimeVerifier
         ];
     }
 
-    /** @param list<string> $expectedPaths @return array{count:int,media_exposure_count:int} */
+    /** @param list<string> $expectedPaths @return array{count:int,detail_count:int,media_exposure_count:int} */
     private function publicApi(string $origin, array $expectedPaths): array
     {
         $response = $this->get($origin.'/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100');
@@ -205,6 +206,36 @@ final class BigFiveEn52RuntimeVerifier
         if ($paths !== $expectedPaths || $media !== 0) {
             throw new RuntimeException('public_api_projection_mismatch');
         }
+        $detailCount = 0;
+        foreach ($items as $item) {
+            $entityType = (string) ($item['entity_type'] ?? '');
+            $code = (string) ($item['code'] ?? '');
+            $detailPayload = $this->successfulJson($this->get(
+                $origin.'/api/v0.5/personality-content-assets/big_five/'
+                    .rawurlencode($entityType).'/'.rawurlencode($code).'?locale=en'
+            ), 'public_api_detail_failed');
+            $detail = $detailPayload['personality_public_content_asset_v1'] ?? null;
+            $detailV2 = $detailPayload['personality_public_content_asset_v2'] ?? null;
+            if (! is_array($detail) || ! is_array($detailV2)
+                || ($detailV2['contract_version'] ?? null) !== PersonalityPublicContentAsset::CONTRACT_VERSION_V2) {
+                throw new RuntimeException('public_api_detail_projection_mismatch');
+            }
+            foreach ([
+                'framework', 'locale', 'entity_type', 'code', 'canonical_path', 'hreflang', 'robots',
+                'is_public', 'index_eligible', 'sitemap_eligible', 'llms_eligible', 'source_package',
+            ] as $key) {
+                if (($detail[$key] ?? null) !== ($item[$key] ?? null)) {
+                    throw new RuntimeException('public_api_detail_projection_mismatch');
+                }
+            }
+            if ($this->containsMediaKey($detailPayload)) {
+                throw new RuntimeException('public_api_detail_media_exposure');
+            }
+            $detailCount++;
+        }
+        if ($detailCount !== 52) {
+            throw new RuntimeException('public_api_detail_count_mismatch');
+        }
         foreach (BigFiveCanonicalRouteCatalog::redirectOnlyAliasTargets('en') as $alias => $_target) {
             foreach (['en', 'zh-CN'] as $locale) {
                 $aliasResponse = $this->get($origin.'/api/v0.5/personality-content-assets/big_five/polarity/'.$alias.'?locale='.urlencode($locale));
@@ -214,7 +245,7 @@ final class BigFiveEn52RuntimeVerifier
             }
         }
 
-        return ['count' => 52, 'media_exposure_count' => 0];
+        return ['count' => 52, 'detail_count' => $detailCount, 'media_exposure_count' => 0];
     }
 
     /** @param list<string> $enPaths @return array{sitemap_count:int,llms_count:int,llms_full_count:int} */
