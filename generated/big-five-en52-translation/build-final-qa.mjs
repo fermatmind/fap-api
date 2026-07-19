@@ -23,6 +23,9 @@ const csvCell = (value) => /[",\n\r]/.test(String(value ?? ''))
 const csv = (rows) => `${rows.map((row) => row.map(csvCell).join(',')).join('\n')}\n`;
 const EXPECTED_FRONTMATTER_KEYS = new Set(['asset_type', 'author_display_name', 'backend_locale_contract', 'canonical_path', 'claim_mapping_version', 'clinical_reviewed', 'cms_draft_created', 'content_identity', 'content_method', 'excerpt', 'expert_endorsement', 'framework', 'h1', 'locale', 'media_supported', 'org_id', 'package_version', 'parent_identity', 'primary_intent', 'publish_allowed', 'review_mode', 'reviewer_admin_user_id', 'reviewer_display_name', 'seo_description', 'seo_title', 'slug', 'source_content_identity', 'source_ids', 'source_locale', 'source_page_sha256', 'source_registry_version', 'status', 'substantive_updated_at', 'target_questions', 'terminology_version', 'title', 'translation_method', 'translation_reviewed_at', 'translation_status', 'word_count_en']);
 const EXPECTED_SIDECAR_KEYS = new Set(['canonical_path', 'claim_count', 'claims', 'en_output_path', 'entity_key', 'entity_type', 'faq_count_en', 'faq_count_zh', 'faq_map', 'output_sha256', 'page_identity', 'section_count_en', 'section_count_zh', 'section_map', 'slug', 'source_ids_en', 'source_ids_zh', 'terminology_version', 'translation_status', 'untranslated_fragment_count', 'word_count_en', 'zh_source_path', 'zh_source_sha256']);
+const EXPECTED_CLAIM_KEYS = new Set(['boundary', 'claim_id', 'claim_type', 'confidence', 'page_identity', 'source_ids', 'source_section', 'translation_equivalence_status', 'visible_claim']);
+const EXPECTED_NARROWED_CLAIM_KEYS = new Set([...EXPECTED_CLAIM_KEYS, 'scientific_narrowing_reason']);
+const APPROVED_EQUIVALENCE_STATUSES = new Set(['exact_meaning_preserved', 'localized_without_claim_change', 'scientifically_narrowed']);
 
 function parseFrontmatter(markdown) {
     const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -179,6 +182,7 @@ let duplicateClaimIds = 0;
 let ledgerEntryMismatches = 0;
 let frontmatterManifestMismatches = 0;
 let sidecarMetadataMismatches = 0;
+let claimRowSchemaFailures = 0;
 const faqFrequency = new Map();
 const pageData = [];
 
@@ -232,6 +236,15 @@ for (const entry of manifest.entries) {
     const claimRows = claims.claims ?? [];
     if (claimRows.length === 0) emptyClaimFiles += 1;
     for (const claim of claimRows) {
+        const expectedClaimKeys = claim.translation_equivalence_status === 'scientifically_narrowed'
+            ? EXPECTED_NARROWED_CLAIM_KEYS : EXPECTED_CLAIM_KEYS;
+        const claimRowMatches = APPROVED_EQUIVALENCE_STATUSES.has(claim.translation_equivalence_status)
+            && Object.keys(claim).length === expectedClaimKeys.size
+            && Object.keys(claim).every((key) => expectedClaimKeys.has(key))
+            && claim.page_identity === entry.page_identity
+            && (claim.translation_equivalence_status !== 'scientifically_narrowed'
+                || (typeof claim.scientific_narrowing_reason === 'string' && claim.scientific_narrowing_reason.trim().length > 0));
+        if (!claimRowMatches) claimRowSchemaFailures += 1;
         if (!body.includes(claim.visible_claim)) visibleReferenceMismatches += 1;
         for (const sourceId of claim.source_ids ?? []) {
             if (!registeredUrls.has(sourceId)) invalidClaimSourceIds += 1;
@@ -425,6 +438,7 @@ const hardGates = {
     invalid_claim_source_id_count: invalidClaimSourceIds, true_internal_link_violation_count: internalViolations,
     unexpected_claim_id_count: unexpectedClaimIds, missing_claim_id_count: missingClaimIds, duplicate_claim_id_count: duplicateClaimIds,
     frontmatter_manifest_mismatch_count: frontmatterManifestMismatches, sidecar_metadata_mismatch_count: sidecarMetadataMismatches,
+    claim_row_schema_failure_count: claimRowSchemaFailures,
     source_release_failure_count: sourceReleaseFailures,
     authority_input_failure_count: authorityInputFailures, committed_package_input_mismatch_count: committedPackageInputMismatches,
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
