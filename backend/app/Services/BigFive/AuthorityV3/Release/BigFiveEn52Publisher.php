@@ -103,6 +103,14 @@ final class BigFiveEn52Publisher
                     throw new RuntimeException('Target asset disappeared during transaction: '.$descriptor['authority_asset_key'].'.');
                 }
                 $this->assertLockedTargetMatchesPlan($asset, $descriptor);
+                $zhCounterpart = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+                    ->whereKey($descriptor['zh_counterpart_id'])
+                    ->lockForUpdate()
+                    ->first();
+                if (! $zhCounterpart instanceof PersonalityPublicContentAsset) {
+                    throw new RuntimeException('Corresponding zh-CN authority row disappeared during transaction: '.$descriptor['authority_asset_key'].'.');
+                }
+                $this->assertLockedZhCounterpartMatchesPlan($zhCounterpart, $descriptor);
 
                 $existingRevision = PersonalityPublicContentAssetRevision::query()
                     ->where('authority_package_sha256', self::PACKAGE_FILE_SHA256)
@@ -342,6 +350,8 @@ final class BigFiveEn52Publisher
                 'attributes' => $attributes,
                 'snapshot' => $snapshot,
                 'target_preflight_fingerprint' => $targetPreflightFingerprint,
+                'zh_counterpart_id' => (int) $zhCounterpart->id,
+                'zh_counterpart_preflight_fingerprint' => $this->runtimeFingerprint($zhCounterpart),
             ];
             $currentRevisionIds[$authorityAssetKey] = [
                 'working_revision_id' => $row->working_revision_id === null ? null : (int) $row->working_revision_id,
@@ -654,6 +664,19 @@ final class BigFiveEn52Publisher
         if (! preg_match('/^[a-f0-9]{64}$/', $expected)
             || ! hash_equals($expected, $this->runtimeFingerprint($asset))) {
             throw new RuntimeException('Target asset drifted after preflight for '.$descriptor['authority_asset_key'].'.');
+        }
+    }
+
+    /** @param array<string,mixed> $descriptor */
+    private function assertLockedZhCounterpartMatchesPlan(
+        PersonalityPublicContentAsset $asset,
+        array $descriptor,
+    ): void {
+        $expected = (string) ($descriptor['zh_counterpart_preflight_fingerprint'] ?? '');
+        if ((int) ($descriptor['zh_counterpart_id'] ?? 0) !== (int) $asset->id
+            || ! preg_match('/^[a-f0-9]{64}$/', $expected)
+            || ! hash_equals($expected, $this->runtimeFingerprint($asset))) {
+            throw new RuntimeException('Corresponding zh-CN authority row drifted after preflight for '.$descriptor['authority_asset_key'].'.');
         }
     }
 

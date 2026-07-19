@@ -461,6 +461,28 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         ]);
     }
 
+    public function test_locked_zh_cn_counterpart_fingerprint_rejects_post_preflight_drift(): void
+    {
+        $this->seedExactAuthorityRows();
+        $counterpart = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('framework', 'big_five')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+        $publisher = app(BigFiveEn52Publisher::class);
+        $fingerprintMethod = new ReflectionMethod($publisher, 'runtimeFingerprint');
+        $preflightFingerprint = $fingerprintMethod->invoke($publisher, $counterpart);
+        $counterpart->forceFill(['summary' => 'concurrent zh-CN editorial drift'])->save();
+
+        $assertionMethod = new ReflectionMethod($publisher, 'assertLockedZhCounterpartMatchesPlan');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('zh-CN authority row drifted after preflight');
+        $assertionMethod->invoke($publisher, $counterpart->fresh(), [
+            'authority_asset_key' => 'synthetic-target',
+            'zh_counterpart_id' => (int) $counterpart->id,
+            'zh_counterpart_preflight_fingerprint' => $preflightFingerprint,
+        ]);
+    }
+
     public function test_non_target_boundary_reads_search_tables_from_seo_intel_connection(): void
     {
         config([
