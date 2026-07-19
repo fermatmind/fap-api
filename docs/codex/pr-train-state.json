@@ -98942,7 +98942,7 @@
     "branch": "codex/mbti-comp-runtime-46",
     "title": "MBTI-COMP-RUNTIME-46: deploy and accept all A/T comparison pages",
     "depends_on": ["MBTI-COMP-PROJECTION-45"],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "012a0daaa5cf9334201d6d300accad41a9d62590",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3206",
     "checks": {
@@ -98952,9 +98952,9 @@
       "single_record_content_revision": {"status": "passed", "evidence": "Dry-run 29674866867 passed. Initial write 29675163335 promoted the exact revision and then successfully restored the previous public section through automatic rollback after a newline-only canonical hash-control mismatch. PR #3205 fixed only canonical hashing; retry 29675471856 promoted revision 212 and passed exact nine-section readback. Publication, indexability, sitemap, llms, and search state remained unchanged."},
       "production_acceptance": {"status": "passed", "evidence": "Public HTTPS readback completed at 2026-07-19T06:44:00.120Z: all 16 A/T APIs and all 16 visible pages returned 200 with exact ordered 9 sections, non-empty content, 5 FAQs, exact canonical, index,follow robots, JSON-LD, and visible authoritative section titles. Per-target canonical section and projection SHA-256 fingerprints are locked in the generated report."},
       "local_validation": {"status": "passed", "evidence": "Focused report contract passed 3 tests and 154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and exact five-path scope validation passed. This operation closeout changes only docs/generated/test and train metadata, so runtime route, migration, curl, and full ci_verify_mbti.sh commands are not applicable."},
-      "github_required_checks": {"status": "pending", "evidence": null}
+      "github_required_checks": {"status": "passed", "evidence": "Final reviewed implementation/evidence head 407e703439da015f78e5f46ab714462b85a787b6 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload. The sole P2 review thread identified the transient SECURITY-103 ledger pointer drift; head 407e70343 restored that object to origin/main and the final PR diff contains no SECURITY-103 change. The thread was resolved with zero remaining unresolved review threads."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -98973,8 +98973,9 @@
       {"at": "2026-07-19T06:44:00Z", "status": "production_acceptance_passed", "note": "All 16 A/T API and all 16 visible-page targets passed the complete production contract through public HTTPS only: 9 ordered sections, non-empty content, 5 FAQs, canonical, robots, JSON-LD, backend authority, and visible section-title parity."},
       {"at": "2026-07-19T06:47:57Z", "status": "implementation_in_progress", "note": "Started the repository-conventional operation closeout from latest origin/main. Scope is limited to the production acceptance markdown, machine-readable 16-target evidence, focused report contract test, and exact manifest/state entry; no runtime, workflow, content, publication, indexability, sitemap, llms, search, deploy, CMS/database, or fap-web change is included."},
       {"at": "2026-07-19T06:49:07Z", "status": "local_validation_passed", "note": "The focused operation-report contract passed 3 tests/154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and the exact five-path scope passed. Runtime route, migration, curl, and full ci_verify_mbti.sh checks are not applicable to this docs/generated/test-only closeout."},
-      {"at": "2026-07-19T06:51:40Z", "status": "github_checks_pending", "note": "Pushed the exact five-path closeout scope and opened PR #3206. Merge remains gated on every required GitHub check, clean scope, mergeability, and zero unresolved actionable review threads."}
+      {"at": "2026-07-19T06:51:40Z", "status": "github_checks_pending", "note": "Pushed the exact five-path closeout scope and opened PR #3206. Merge remains gated on every required GitHub check, clean scope, mergeability, and zero unresolved actionable review threads."},
+      {"at": "2026-07-19T07:00:54Z", "status": "ready_to_merge", "note": "All 9 GitHub checks passed on reviewed head 407e70343. The sole P2 review correctly identified a transient scope-out ledger pointer; that pointer was already restored to origin/main, the final diff is exactly the five allowed Runtime46 paths, the thread is resolved, and GitHub reports CLEAN/MERGEABLE."}
     ],
-    "updated_at": "2026-07-19T06:51:40Z"
+    "updated_at": "2026-07-19T07:00:54Z"
   }
 }
