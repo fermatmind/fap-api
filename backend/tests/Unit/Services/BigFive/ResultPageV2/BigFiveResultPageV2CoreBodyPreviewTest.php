@@ -584,6 +584,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_en52_runtime_verify_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php',
+            'backend/bootstrap/app.php',
+        ];
+        $bootstrapChangedLines = [
+            '+        \\App\\Console\\Commands\\PersonalityBigFiveEn52RuntimeVerify::class,',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV3/Release/UnexpectedEn52RuntimeVerifier.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $allowed,
+            '',
+            '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_big_five_legacy_alias_hard_purge_files(): void
     {
         $allowed = [
@@ -6453,6 +6477,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveEn52RuntimeVerifyFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveLegacyAliasHardPurgeFile($file)) {
                 continue;
             }
@@ -8018,6 +8046,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->bootstrapDiffIsBigFiveZhV3ControlledReleaseCommandsOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->bootstrapDiffIsBigFiveEn52RuntimeVerifyCommandOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                 )
             ) {
                 continue;
@@ -8037,6 +8068,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->bootstrapDiffIsPublicContentRuntimeMetricsOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsPublicContentDeliveryProbeOnly($bootstrapAppChangedLines ?? [])
                     || $this->bootstrapDiffIsBigFiveZhV3ControlledReleaseCommandsOnly($bootstrapAppChangedLines ?? [])
+                    || $this->bootstrapDiffIsBigFiveEn52RuntimeVerifyCommandOnly($bootstrapAppChangedLines ?? [])
                 )
             ) {
                 continue;
@@ -8472,6 +8504,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveEn52ContentPublish.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52Publisher.php',
+        ], true);
+    }
+
+    private function isBigFiveEn52RuntimeVerifyFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php',
         ], true);
     }
 
@@ -13597,6 +13637,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '\\App\\Console\\Commands\\PersonalityBigFiveZhV3PackageBuild::class,',
             '\\App\\Console\\Commands\\PersonalityBigFiveZhV3ContentPublish::class,',
         ];
+        $actual = [];
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ($line[0] ?? '') !== '+') {
+                return false;
+            }
+            $normalized = trim(substr($line, 1));
+            if ($normalized !== '') {
+                $actual[] = $normalized;
+            }
+        }
+
+        return $actual === $expected;
+    }
+
+    /** @param list<string> $changedLines */
+    private function bootstrapDiffIsBigFiveEn52RuntimeVerifyCommandOnly(array $changedLines): bool
+    {
+        $expected = ['\\App\\Console\\Commands\\PersonalityBigFiveEn52RuntimeVerify::class,'];
         $actual = [];
         foreach ($changedLines as $line) {
             if (! is_string($line) || ($line[0] ?? '') !== '+') {

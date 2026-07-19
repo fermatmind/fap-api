@@ -614,6 +614,58 @@ prs:
     content_authority: backend
     next_task: BIG5-EN52-104-DISCOVERABILITY-CONVERGENCE-13
 
+  - id: BIG5-EN52-RUNTIME-CLOSEOUT-14
+    repo: fap-api
+    base: main
+    depends_on: [BIG5-EN52-CONTROLLED-PUBLISHER-12, BIG5-EN52-104-DISCOVERABILITY-CONVERGENCE-13]
+    branch: codex/big5-en52-runtime-closeout-14
+    title: "BIG5-EN52-RUNTIME-CLOSEOUT-14: add exact English 52-page production readback"
+    train_scope: big_five_en52_runtime_closeout
+    status: user_authorized
+    mode: execute
+    page_count: 52
+    scope:
+      - Add an English EN52 verify-only production readback command and verifier bound to an exact approved fap-api main SHA, release identity, PR11 package SHA, release id, locale en, and the exact 52 canonical identities.
+      - Prove database, package revision/pointer, public API, canonical/hreflang/robots/indexability, sitemap/llms, alias redirect, text-only, zero-search-action, zh-CN, and non-target invariants without repairing or mutating production.
+      - Emit only sanitized JSON on stdout so the generic production verify-only runner may create the sole runner-side artifact after separately controlled exact authorization.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php
+      - backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php
+      - backend/tests/Feature/BigFive/BigFiveEn52RuntimeVerifyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/bootstrap/app.php
+      - docs/ops/big-five-en52-release.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify routes, migrations, middleware, public controllers, fap-web, packages, publishers, production configuration, deploy workflows, CMS content, or redirect authority.
+      - Deploy, migrate, publish, purge, write database/CMS/media, flush caches, restart processes, use SSH for repair, submit search actions, inspect raw logs, or expose secrets, tokens, topology, credentials, private notes, raw environment values, or response bodies.
+    validation:
+      - PHP syntax checks for every touched PHP file
+      - cd backend && php artisan test tests/Feature/BigFive/BigFiveEn52RuntimeVerifyTest.php --no-ansi
+      - focused tests cover zero-write fingerprints, wrong SHA/release/package, 51/53 rows, missing/mixed revisions, alias reappearance, public/discoverability drift, non-target drift, sanitized failures, and bounded HTTP failure
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveEn52RuntimeVerify.php app/Services/BigFive/AuthorityV3/Release/BigFiveEn52RuntimeVerifier.php bootstrap/app.php tests/Feature/BigFive/BigFiveEn52RuntimeVerifyTest.php
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - isolated fresh SQLite migration
+      - process guard followed by cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: null
+
   - id: MBTI-COMP-PROJECTION-45
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api
