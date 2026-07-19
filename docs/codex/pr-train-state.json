@@ -98587,13 +98587,49 @@
     "branch": "codex/big5-en52-extraversion-facets-07",
     "title": "BIG5-EN52-EXTRAVERSION-FACETS-07: translate six Extraversion facets",
     "depends_on": ["BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06"],
-    "status": "github_checks_pending",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "25a940323e875964955164e53b9d6693ceddbbc8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3190",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
       "dependency": {"status": "passed", "evidence": "BIG5-EN52-CONSCIENTIOUSNESS-FACETS-06 merged as c4265751cd2c23fbec1fbd681e1073552d36324e after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
       "local_validation": {"status": "passed", "evidence": "Completed exactly E1-E6 with 96 ordered H2 mappings, 30 FAQ mappings, 18 locked claims, and 4,559 reader-visible English words. The frozen expected-translated=40 validator passed with pending=12; standard YAML frontmatter, JSON, source/claim locks, canonical links, differentiated facet definitions, word counts, duplicate-body, CJK, diff, and exact-path gates passed. Warmth is not kindness, Gregariousness is not social skill or anxiety, Assertiveness is not aggression or leadership, Activity is not health or productivity, Excitement Seeking is not substance use or recklessness, Positive Emotions is not happiness or mental health, and every controlled write counter remains zero."},
+      "github_required_checks": {"status": "passed", "evidence": "Final head dacec6cefaaabb4f1c6a307788a5e4dfb15d29a4 passed all 9 GitHub checks; PR #3190 was CLEAN/MERGEABLE with zero unresolved review threads before squash merge."}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
+    "failure_reason": null,
+    "merged_at": "2026-07-18T23:53:23Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR7 scope; no E1-E6 work starts before PR6 merges."},
+      {"at": "2026-07-18T23:39:30Z", "status": "implementation_in_progress", "note": "Started from exact merged PR6 SHA c4265751cd2c23fbec1fbd681e1073552d36324e. Scope is limited to E1-E6, their evidence, QA, ledger completions, and train closeout; other facet domains, completed pages, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-18T23:44:48Z", "status": "local_validation_passed", "note": "Completed all six Extraversion facet pages with one-to-one sections, FAQ and claim maps. Cumulative translated=40 validation, standard YAML and JSON parsing, scientific/product boundary review, canonical-link checks, and exact-scope checks passed with every controlled write counter at zero."},
+      {"at": "2026-07-18T23:46:11Z", "status": "github_checks_pending", "note": "Committed the exact 15-path PR7 scope as 24e5ef255 and opened PR #3190. Merge remains gated on the final head passing every required check and having zero unresolved review threads."},
+      {"at": "2026-07-18T23:53:23Z", "status": "merged", "note": "Final head dacec6cefaaabb4f1c6a307788a5e4dfb15d29a4 passed all 9 checks; PR #3190 was CLEAN/MERGEABLE with zero unresolved review threads and squash-merged as 25a940323e875964955164e53b9d6693ceddbbc8. origin/main containment was verified and both remote and local feature branches were deleted before PR8 began."}
+    ],
+    "updated_at": "2026-07-18T23:53:23Z"
+  },
+  "BIG5-EN52-AGREEABLENESS-FACETS-08": {
+    "id": "BIG5-EN52-AGREEABLENESS-FACETS-08",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-en52-agreeableness-facets-08",
+    "title": "BIG5-EN52-AGREEABLENESS-FACETS-08: translate six Agreeableness facets",
+    "depends_on": ["BIG5-EN52-EXTRAVERSION-FACETS-07"],
+    "status": "github_checks_pending",
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3191",
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
+      "dependency": {"status": "passed", "evidence": "BIG5-EN52-EXTRAVERSION-FACETS-07 merged as 25a940323e875964955164e53b9d6693ceddbbc8 after 9/9 checks and zero unresolved review threads; origin/main containment and branch cleanup were verified before this branch was created from that exact SHA."},
+      "local_validation": {"status": "passed", "evidence": "Completed exactly A1-A6 with 96 ordered H2 mappings, 30 FAQ mappings, 18 locked claims, and 4,291 reader-visible English words. The frozen expected-translated=46 validator passed with pending=6; standard YAML frontmatter, JSON, source/claim locks, canonical links, differentiated non-moralizing facet definitions, word counts, duplicate-body, CJK, diff, and exact-path gates passed. Trust is not goodness or gullibility, Straightforwardness is not honesty certification or bluntness, Altruism is not moral proof or self-sacrifice, Compliance is not obedience or weakness, Modesty is not low self-esteem, Tender-Mindedness is not softness or a diagnosis, and every controlled write counter remains zero."},
       "github_required_checks": {"status": "pending", "evidence": null}
     },
     "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
@@ -98608,42 +98644,12 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "transitions": [
-      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR7 scope; no E1-E6 work starts before PR6 merges."},
-      {"at": "2026-07-18T23:39:30Z", "status": "implementation_in_progress", "note": "Started from exact merged PR6 SHA c4265751cd2c23fbec1fbd681e1073552d36324e. Scope is limited to E1-E6, their evidence, QA, ledger completions, and train closeout; other facet domains, completed pages, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
-      {"at": "2026-07-18T23:44:48Z", "status": "local_validation_passed", "note": "Completed all six Extraversion facet pages with one-to-one sections, FAQ and claim maps. Cumulative translated=40 validation, standard YAML and JSON parsing, scientific/product boundary review, canonical-link checks, and exact-scope checks passed with every controlled write counter at zero."},
-      {"at": "2026-07-18T23:46:11Z", "status": "github_checks_pending", "note": "Committed the exact 15-path PR7 scope as 24e5ef255 and opened PR #3190. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
+      {"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR8 scope; no A1-A6 work starts before PR7 merges."},
+      {"at": "2026-07-18T23:54:02Z", "status": "implementation_in_progress", "note": "Started from exact merged PR7 SHA 25a940323e875964955164e53b9d6693ceddbbc8. Scope is limited to A1-A6, their evidence, QA, ledger completions, and train closeout; other facet domains, completed pages, zh-CN, runtime, CMS, production, database, media, search, deploy, and fap-web remain untouched."},
+      {"at": "2026-07-19T00:00:31Z", "status": "local_validation_passed", "note": "Completed all six Agreeableness facet pages with one-to-one sections, FAQ and claim maps. Cumulative translated=46 validation, standard YAML and JSON parsing, scientific/product boundary review, canonical-link checks, and exact-scope checks passed with every controlled write counter at zero."},
+      {"at": "2026-07-19T00:03:23Z", "status": "github_checks_pending", "note": "Committed the exact 15-path PR8 scope as ccf3bb3e8 and opened PR #3191. Merge remains gated on the final head passing every required check and having zero unresolved review threads."}
     ],
-    "updated_at": "2026-07-18T23:46:11Z"
-  },
-  "BIG5-EN52-AGREEABLENESS-FACETS-08": {
-    "id": "BIG5-EN52-AGREEABLENESS-FACETS-08",
-    "repo": "fap-api",
-    "base": "main",
-    "branch": "codex/big5-en52-agreeableness-facets-08",
-    "title": "BIG5-EN52-AGREEABLENESS-FACETS-08: translate six Agreeableness facets",
-    "depends_on": ["BIG5-EN52-EXTRAVERSION-FACETS-07"],
-    "status": "pending_dependency",
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {
-      "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's ten-PR continuous /goal."},
-      "dependency": {"status": "pending", "evidence": "Awaiting BIG5-EN52-EXTRAVERSION-FACETS-07 merge."},
-      "local_validation": {"status": "pending", "evidence": null},
-      "github_required_checks": {"status": "pending", "evidence": null}
-    },
-    "scope_validation": {"allowed_paths_only": false, "local_validation_passed": false, "github_checks_green": false, "post_merge_revalidated": false},
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
-    "api_runtime_change": false,
-    "publish_allowed": false,
-    "deploy_allowed": false,
-    "transitions": [{"at": "2026-07-18T18:36:28Z", "status": "pending_dependency", "note": "Registered from the exact user-supplied PR8 scope; no A1-A6 work starts before PR7 merges."}],
-    "updated_at": "2026-07-18T18:36:28Z"
+    "updated_at": "2026-07-19T00:03:23Z"
   },
   "BIG5-EN52-NEUROTICISM-FACETS-09": {
     "id": "BIG5-EN52-NEUROTICISM-FACETS-09",
