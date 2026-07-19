@@ -98904,7 +98904,7 @@
     "title": "BIG5-EN52-CONTROLLED-PUBLISHER-12: add exact English 52-page controlled publisher",
     "depends_on": ["BIG5-EN52-RELEASE-PACKAGE-11"],
     "status": "github_checks_pending",
-    "commit_sha": "37d778ba2fa6e47e185ee75f9019404ea3da2d44",
+    "commit_sha": "a39c26f6d0801cbf255e2cf4579968680f683981",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3204",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Explicitly authorized by the operator's four-PR continuous /goal with exact id, title, branch, dependency, scope, paths, validations, and zero-production-write boundary."},
@@ -98927,8 +98927,9 @@
     "transitions": [
       {"at": "2026-07-19T04:48:00Z", "status": "implementation_in_progress", "note": "Started from exact PR11 merge SHA feb6c48925b045c7931bf9a36e2c6badb53a36aa. Scope is limited to the English-only read-only-default controlled publisher, CLI, exact EN52 release boundary rules, focused tests, command registration, and train ledger; no production preflight or write, deploy, SSH, alias purge, search, route, migration, middleware, public API, fap-web, or zh-CN publisher change is included."},
       {"at": "2026-07-19T05:08:12Z", "status": "local_validation_passed", "note": "Implemented and validated the exact English EN52 controlled publisher. Focused PHPUnit passed 19 tests/6,149 assertions; scoped syntax/Pint, command, routes, fresh SQLite migration, parsers, diff and path scope passed; the complete guarded ci_verify_mbti.sh chain passed including 1,566 Big Five tests/194,827 assertions. Production and controlled writes remained zero; CI-generated BIG5_OCEAN timestamp artifacts were restored exactly to HEAD before scope validation."},
-      {"at": "2026-07-19T05:10:44Z", "status": "github_checks_pending", "note": "Rebased the validated exact eight-path scope onto origin/main SHA 9ace51559, reran focused PHPUnit, scoped Pint, and route inventory, pushed code head 37d778ba2fa6e47e185ee75f9019404ea3da2d44, and opened PR #3204. This following commit changes only the PR12 ledger pointer; merge remains gated on every required check and zero unresolved actionable review threads."}
+      {"at": "2026-07-19T05:10:44Z", "status": "github_checks_pending", "note": "Rebased the validated exact eight-path scope onto origin/main SHA 9ace51559, reran focused PHPUnit, scoped Pint, and route inventory, pushed code head 37d778ba2fa6e47e185ee75f9019404ea3da2d44, and opened PR #3204. This following commit changes only the PR12 ledger pointer; merge remains gated on every required check and zero unresolved actionable review threads."},
+      {"at": "2026-07-19T05:22:41Z", "status": "github_checks_pending", "note": "Diagnosed the sole verify-bigfive failure as the branch-diff runtime-freeze classifier lacking an exact EN52 controlled-release exception. Added a fail-closed two-file classifier rule and its focused allowed/blocked regression test, registered that test path in the PR12 manifest, and reran the combined classifier plus publisher suites successfully: 392 tests and 6,919 assertions, scoped Pint, 224-line route inventory, YAML/JSON, and diff checks passed. Code fix head is a39c26f6d0801cbf255e2cf4579968680f683981; the following commit changes only this ledger pointer before GitHub checks rerun."}
     ],
-    "updated_at": "2026-07-19T05:10:44Z"
+    "updated_at": "2026-07-19T05:22:41Z"
   }
 }
