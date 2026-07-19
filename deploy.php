@@ -232,6 +232,28 @@ function deployHttpsUrlArg(string $host, string $path): string
     return deployShellArg("https://{$host}{$path}");
 }
 
+function deployPublicDnsHealthcheckCommand(string $host): string
+{
+    $url = deployHttpsUrlArg($host, '/api/healthz');
+    $jq = deployShellArg('.ok==true');
+    $probe = "curl -fsS --connect-timeout 5 --max-time 15 {$url} | jq -e {$jq} >/dev/null";
+
+    return 'attempt=1; while [ "$attempt" -le 10 ]; do '
+        ."if {$probe}; then exit 0; fi; "
+        .'if [ "$attempt" -eq 10 ]; then echo "Public DNS healthcheck failed after 10 attempts" >&2; exit 1; fi; '
+        .'attempt=$((attempt + 1)); sleep 3; done';
+}
+
+function runProductionPublicDnsHealthcheck(): void
+{
+    if (currentHost()->getAlias() !== 'production') {
+        return;
+    }
+
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    run('bash -lc '.deployShellArg(deployPublicDnsHealthcheckCommand($host)));
+}
+
 function deploySystemdServiceArg(string $service, string $label): string
 {
     $service = trim($service);
@@ -335,6 +357,17 @@ BASH);
 });
 
 before('deploy:symlink', 'guard:expected-release-revision');
+
+/**
+ * Refuse to move the production symlink while the real public-DNS route is
+ * unhealthy. The loopback vhost probe cannot prove that the public edge and
+ * origin routing still reach this production service.
+ */
+task('guard:public-dns-health', function () {
+    runProductionPublicDnsHealthcheck();
+});
+
+before('deploy:symlink', 'guard:public-dns-health');
 
 /**
  * The current symlink must never expose a Career directory whose published
@@ -1237,6 +1270,10 @@ task('healthcheck:public', function () {
     run($cmd);
 });
 
+task('healthcheck:public-dns', function () {
+    runProductionPublicDnsHealthcheck();
+});
+
 task('healthcheck:auth-guest-contract', function () {
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skip auth guest POST contract probe in authority-mutation-free deploy mode</comment>');
@@ -1597,6 +1634,7 @@ after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
+after('healthcheck:public', 'healthcheck:public-dns');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
