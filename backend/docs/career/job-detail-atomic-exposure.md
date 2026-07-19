@@ -1,5 +1,12 @@
 # Career detail atomic exposure
 
+Implementation status: merged in `CAREER-DETAIL-ATOMIC-EXPOSURE-01`
+(`fap-api#3166`) on 2026-07-18. Deployment coverage, full-cohort SLO checking,
+and controlled repair subsequently merged in
+`CAREER-DETAIL-DEPLOY-SLO-REPAIR-01` (`fap-api#3176`). The seven-PR
+cross-repository closeout is maintained in
+`backend/docs/career/career-detail-stability-train-2026-07-18.md`.
+
 Career detail exposure is fail-closed against the same cache-readiness chain used by the coverage audit. For already-published materialized authority, `ready_active`, `ready_lkg`, and `legacy_migratable` remain valid recovery states. While materialized authority is still a pre-promotion candidate, first exposure requires `ready_active` plus the exact same-version published exposure snapshot; LKG or legacy alone cannot authorize a route, directory row, job-index row, or promotion gate.
 
 If a targeted detail warm replaces the active version while materialized authority is still catching up, it carries the validated published exposure snapshot forward to the new immutable version before switching the active pointer. This applies with and without `--forget-job-detail`, so routine cache repair cannot revoke an already-authorized snapshot-backed route.
@@ -19,4 +26,7 @@ For ordinary targeted warming, detail payloads are warmed before the full direct
 
 The internal directory read model keeps public/indexability authority separate from runtime detail readiness. An otherwise eligible occupation remains an internal directory member when a transient cache loss occurs, but its `detail_ready` field becomes `false` on the next rebuild. Public job-index cache reads and rebuild writes apply the same verified-detail predicate, while the separate authority item set still feeds the internal directory. Public job index, directory, industry discovery, counts, pagination, and sitemap enumeration therefore expose only rows whose publication/indexability authority and detail readiness both pass. This runtime state never deletes or rewrites CMS content, occupation records, publication authority, sitemap, llms, canonical, noindex, or JSON-LD authority.
 
-This change performs no production promotion, cache repair, CMS/database mutation, or deployment. Runtime monitoring and controlled repair belong to `CAREER-DETAIL-DEPLOY-SLO-REPAIR-01`.
+The merged implementation is not evidence of a production promotion, cache
+repair, CMS/database mutation, or deployment. Runtime monitoring and controlled
+repair are now implemented by `CAREER-DETAIL-DEPLOY-SLO-REPAIR-01`; production
+execution remains separately controlled.

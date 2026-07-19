@@ -1,6 +1,6 @@
 # Career Backend Technical Handbook
 
-Last reviewed: 2026-06-01
+Last reviewed: 2026-07-19
 
 This is the backend entry point for FermatMind Career architecture, authority,
 runtime publication, discoverability, and operations. It consolidates the
@@ -137,6 +137,20 @@ Train sidecar:
   `backend/tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php` and
   `backend/tests/Unit/Report/EqIntegratedReportComposerTest.php`. Scoped
   Career PR checks passed; the EQ files are outside this train's changed scope.
+
+### Career Detail Stability PR Train Closeout
+
+The 2026-07-18 stability train closed the cache cold-miss, coverage,
+publication exposure, deployment/SLO, frontend recovery, prefetch, and global
+footer bundle gaps through seven merged PRs across fap-api and fap-web.
+
+The maintained cross-repository closeout, merge ledger, resulting runtime
+contract, measured frontend evidence, and exact deployment boundary are in:
+
+- `backend/docs/career/career-detail-stability-train-2026-07-18.md`
+
+This records merged code, not proof of a production deployment or live-site
+recovery.
 
 ### Related fap-web Technical Notes
 

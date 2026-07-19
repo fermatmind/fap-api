@@ -1,5 +1,10 @@
 # Career job detail cache coverage
 
+Implementation status: merged through `CAREER-DETAIL-CACHE-COVERAGE-01`
+(`fap-api#3164`) and `CAREER-DETAIL-DEPLOY-SLO-REPAIR-01` (`fap-api#3176`) on
+2026-07-18. The seven-PR cross-repository closeout is maintained in
+`backend/docs/career/career-detail-stability-train-2026-07-18.md`.
+
 `career:verify-job-detail-cache-coverage` audits the backend runtime publish
 projection authority against the versioned Career detail cache. It does not use
 the frontend directory or a historical manifest as authority.
@@ -75,7 +80,7 @@ start on the next scheduled invocation, re-inspects bounded rows, and still queu
 only targets that are currently missing or broken. Disable the flag to stop new repair
 dispatches; already queued jobs follow the normal queue operations policy.
 
-This PR does not set those production environment values, run the schedule,
-dispatch repair jobs, warm production caches, wait for staging, or deploy any
-release. Production execution still requires the separate exact-SHA deployment
-and environment authorization paths.
+The merged implementation does not prove that production environment values
+were set, the schedule ran, repair jobs were dispatched, production caches were
+warmed, or any release was deployed. Production execution still requires the
+separate exact-SHA deployment and environment authorization paths.
