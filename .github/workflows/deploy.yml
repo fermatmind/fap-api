@@ -4,9 +4,36 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      release_mode:
+        description: "main deploys the workflow revision; mbti_runtime46_isolated deploys one exact audited candidate"
+        required: true
+        default: main
+        type: choice
+        options:
+          - main
+          - mbti_runtime46_isolated
+      expected_release_sha:
+        description: "Required exact candidate SHA only for mbti_runtime46_isolated"
+        required: false
+        default: ""
+        type: string
+      expected_base_sha:
+        description: "Required exact production base SHA only for mbti_runtime46_isolated"
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        description: "Required exact staging-only approval only for mbti_runtime46_isolated"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
+
+env:
+  MBTI_RUNTIME46_PRODUCTION_BASE_SHA: "781d1636b2c74f5852076a5864b681910a1e0e47"
 
 jobs:
   checks:
@@ -56,6 +83,41 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Validate exact isolated Runtime 46 candidate
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
+        shell: bash
+        env:
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$EXPECTED_BASE_SHA" = "$MBTI_RUNTIME46_PRODUCTION_BASE_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
+          test "$(git rev-list --parents -n 1 HEAD | awk '{print NF}')" -eq 2
+          test "$(git rev-parse HEAD^)" = "$EXPECTED_BASE_SHA"
+          expected_phrase="I explicitly approve isolated MBTI-COMP-RUNTIME-46 staging deploy for SHA ${EXPECTED_RELEASE_SHA} based on production SHA ${EXPECTED_BASE_SHA}; no production deploy or CMS/DB/content write."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          expected_files="$(printf '%s\n' \
+            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php \
+            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php \
+            backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php \
+            backend/app/Services/Cms/MbtiFullCmsImportService.php \
+            backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json \
+            backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)"
+          actual_files="$(git diff --no-renames --name-only "$EXPECTED_BASE_SHA" HEAD | sort)"
+          test "$actual_files" = "$expected_files"
+          test -z "$(git diff --no-renames --diff-filter=D --name-only "$EXPECTED_BASE_SHA" HEAD)"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          while IFS= read -r path; do
+            test -n "$path"
+            git show "origin/main:$path" | cmp - "$path"
+          done <<<"$expected_files"
 
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
@@ -142,6 +204,11 @@ jobs:
           set -euo pipefail
           test -f backend/vendor/autoload.php
 
+      - name: Verify isolated Runtime 46 focused contract
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
+        working-directory: backend
+        run: php artisan test tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php
+
       - name: Gate - ci_verify_mbti (Phase D)
         env:
           RUN_BIG5_OCEAN_GATE: "1"
@@ -191,6 +258,34 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Revalidate exact isolated Runtime 46 candidate
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
+        shell: bash
+        env:
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
+          test "$EXPECTED_BASE_SHA" = "$MBTI_RUNTIME46_PRODUCTION_BASE_SHA"
+          test "$(git rev-list --parents -n 1 HEAD | awk '{print NF}')" -eq 2
+          test "$(git rev-parse HEAD^)" = "$EXPECTED_BASE_SHA"
+          expected_phrase="I explicitly approve isolated MBTI-COMP-RUNTIME-46 staging deploy for SHA ${EXPECTED_RELEASE_SHA} based on production SHA ${EXPECTED_BASE_SHA}; no production deploy or CMS/DB/content write."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          expected_files="$(printf '%s\n' \
+            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php \
+            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php \
+            backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php \
+            backend/app/Services/Cms/MbtiFullCmsImportService.php \
+            backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json \
+            backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)"
+          test "$(git diff --no-renames --name-only "$EXPECTED_BASE_SHA" HEAD | sort)" = "$expected_files"
+          test -z "$(git diff --no-renames --diff-filter=D --name-only "$EXPECTED_BASE_SHA" HEAD)"
 
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
@@ -767,3 +862,43 @@ jobs:
           retry "Ops forms.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/forms/forms.css'" || echo "Ops forms.css reference assertion skipped"
           retry "Ops support.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/support/support.css'" || echo "Ops support.css reference assertion skipped"
           retry "Ops app.js reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'js/filament/filament/app.js'" || echo "Ops app.js reference assertion skipped"
+
+      - name: Emit exact isolated Runtime 46 staging receipt
+        if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
+        shell: bash
+        env:
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
+        run: |
+          set -euo pipefail
+          remote_revision="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\\r\\n' < '$DEPLOY_PATH/current/REVISION'")"
+          test "$remote_revision" = "$EXPECTED_RELEASE_SHA"
+          mkdir -p artifacts
+          patch_sha256="$(git diff --binary "$EXPECTED_BASE_SHA" HEAD | sha256sum | awk '{print $1}')"
+          jq -n \
+            --arg schema_version "mbti-runtime46-isolated-staging.v1" \
+            --arg candidate_sha "$EXPECTED_RELEASE_SHA" \
+            --arg base_sha "$EXPECTED_BASE_SHA" \
+            --arg remote_revision "$remote_revision" \
+            --arg patch_sha256 "$patch_sha256" \
+            '{
+              schema_version: $schema_version,
+              candidate_sha: $candidate_sha,
+              base_sha: $base_sha,
+              remote_revision: $remote_revision,
+              patch_sha256: $patch_sha256,
+              record_scope: "intp-a-vs-intp-t",
+              cms_or_db_write_attempted: false,
+              production_deploy_attempted: false,
+              publication_or_indexability_changed: false,
+              sitemap_llms_search_attempted: false
+            }' > artifacts/isolated-staging-receipt.json
+
+      - name: Upload exact isolated Runtime 46 staging receipt
+        if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: mbti-runtime46-isolated-staging-${{ github.run_id }}
+          path: artifacts/isolated-staging-receipt.json
+          if-no-files-found: error
+          retention-days: 90

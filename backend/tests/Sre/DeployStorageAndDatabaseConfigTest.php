@@ -173,7 +173,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('.name == "Deploy checks (staging)" and .conclusion == "success"', $source);
         $this->assertStringContainsString('.name == "Deploy (staging)" and .conclusion == "success"', $source);
         $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $source);
-        $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main.', $source);
+        $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main and has no exact isolated receipt.', $source);
         $this->assertStringContainsString('-o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"', $source);
         $this->assertLessThan(
             strpos($source, '- name: Deploy production with Deployer'),
@@ -191,6 +191,44 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('test "$TARGET" = "staging"', $source);
         $this->assertStringNotContainsString('DEPLOY_HOST_PROD', $source);
         $this->assertStringNotContainsString('- production', $source);
+    }
+
+    #[Test]
+    public function deploy_application_supports_only_the_exact_receipted_runtime46_isolated_candidate(): void
+    {
+        $staging = $this->readRepoFile('.github/workflows/deploy.yml');
+        $production = $this->readRepoFile('.github/workflows/deploy-production.yml');
+        $exactPaths = [
+            'backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php',
+            'backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php',
+            'backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php',
+            'backend/app/Services/Cms/MbtiFullCmsImportService.php',
+            'backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json',
+            'backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php',
+        ];
+
+        $this->assertStringContainsString('mbti_runtime46_isolated', $staging);
+        $this->assertStringContainsString('781d1636b2c74f5852076a5864b681910a1e0e47', $staging);
+        $this->assertStringContainsString('test "$(git rev-list --parents -n 1 HEAD | awk', $staging);
+        $this->assertStringContainsString('test "$(git rev-parse HEAD^)" = "$EXPECTED_BASE_SHA"', $staging);
+        $this->assertStringContainsString('I explicitly approve isolated MBTI-COMP-RUNTIME-46 staging deploy for SHA ${EXPECTED_RELEASE_SHA} based on production SHA ${EXPECTED_BASE_SHA}; no production deploy or CMS/DB/content write.', $staging);
+        $this->assertStringContainsString('git show "origin/main:$path" | cmp - "$path"', $staging);
+        $this->assertStringContainsString('php artisan test tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php', $staging);
+        $this->assertStringContainsString('mbti-runtime46-isolated-staging-${{ github.run_id }}', $staging);
+        $this->assertStringContainsString('cms_or_db_write_attempted: false', $staging);
+        $this->assertStringContainsString('production_deploy_attempted: false', $staging);
+
+        foreach ($exactPaths as $path) {
+            $this->assertSame(2, substr_count($staging, $path), $path);
+            $this->assertGreaterThanOrEqual(2, substr_count($production, $path), $path);
+        }
+
+        $this->assertStringContainsString('gh run download "$STAGING_RUN_ID" --name "mbti-runtime46-isolated-staging-${STAGING_RUN_ID}"', $production);
+        $this->assertStringContainsString('.schema_version == "mbti-runtime46-isolated-staging.v1"', $production);
+        $this->assertStringContainsString('and .remote_revision == $candidate_sha', $production);
+        $this->assertStringContainsString('and .cms_or_db_write_attempted == false', $production);
+        $this->assertStringContainsString('test "$(git rev-parse "${DEPLOY_SHA}^")" = "$EXPECTED_DEPLOYED_REVISION"', $production);
+        $this->assertStringContainsString('main-byte-identical scoped files', $production);
     }
 
     #[Test]

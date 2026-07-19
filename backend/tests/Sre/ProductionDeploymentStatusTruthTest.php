@@ -18,7 +18,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('environment:', $eligibility);
         $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $eligibility);
         $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $eligibility);
-        $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main.', $eligibility);
+        $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main and has no exact isolated receipt.', $eligibility);
         $this->assertStringContainsString('git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"', $eligibility);
         $this->assertStringContainsString('exit 1', $eligibility);
         $this->assertStringNotContainsString('eligible=false', $eligibility);
@@ -41,7 +41,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('backend/resources backend/routes backend/artisan backend/composer.json backend/composer.lock deploy.php', $eligibility);
         $this->assertStringContainsString('staging-equivalence refused a runtime or deployment artifact change.', $eligibility);
         $this->assertStringContainsString('deployed runtime artifact is byte-equivalent across the audited control-only delta.', $eligibility);
-        $this->assertStringContainsString('non-standard deployment requires staging evidence for the exact deploy SHA.', $eligibility);
+        $this->assertStringContainsString('non-standard deployment requires exact-SHA staging evidence or an exact isolated Runtime 46 receipt.', $eligibility);
     }
 
     public function test_revision_queue_restart_and_both_smoke_steps_are_mandatory(): void
