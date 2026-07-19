@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     concurrency:
-      group: deploy-checks-${{ github.repository }}-staging
+      group: deploy-checks-${{ github.repository }}-staging-${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && 'runtime46-isolated' || 'main' }}
       cancel-in-progress: ${{ github.event_name == 'push' }}
 
     services:
