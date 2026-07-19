@@ -102,6 +102,7 @@ final class BigFiveEn52Publisher
                 if (! $asset instanceof PersonalityPublicContentAsset) {
                     throw new RuntimeException('Target asset disappeared during transaction: '.$descriptor['authority_asset_key'].'.');
                 }
+                $this->assertLockedTargetMatchesPlan($asset, $descriptor);
 
                 $existingRevision = PersonalityPublicContentAssetRevision::query()
                     ->where('authority_package_sha256', self::PACKAGE_FILE_SHA256)
@@ -333,18 +334,20 @@ final class BigFiveEn52Publisher
                 'attributes' => $attributes,
                 'evidence_claims' => array_values(is_array($entry['evidence_claims'] ?? null) ? $entry['evidence_claims'] : []),
             ];
+            $targetPreflightFingerprint = $this->runtimeFingerprint($row);
             $descriptors[] = [
                 'asset_id' => (int) $row->id,
                 'authority_asset_key' => $authorityAssetKey,
                 'source_hash' => $sourceHash,
                 'attributes' => $attributes,
                 'snapshot' => $snapshot,
+                'target_preflight_fingerprint' => $targetPreflightFingerprint,
             ];
             $currentRevisionIds[$authorityAssetKey] = [
                 'working_revision_id' => $row->working_revision_id === null ? null : (int) $row->working_revision_id,
                 'published_revision_id' => $row->published_revision_id === null ? null : (int) $row->published_revision_id,
             ];
-            $currentPublicFingerprints[$authorityAssetKey] = $this->runtimeFingerprint($row);
+            $currentPublicFingerprints[$authorityAssetKey] = $targetPreflightFingerprint;
             $plannedSourceHashes[$authorityAssetKey] = $sourceHash;
             if ((bool) $row->is_public && (string) $row->launch_state === PersonalityPublicContentAsset::LAUNCH_PUBLISHED) {
                 $currentPublicCount++;
@@ -642,6 +645,18 @@ final class BigFiveEn52Publisher
         }
     }
 
+    /** @param array<string,mixed> $descriptor */
+    private function assertLockedTargetMatchesPlan(
+        PersonalityPublicContentAsset $asset,
+        array $descriptor,
+    ): void {
+        $expected = (string) ($descriptor['target_preflight_fingerprint'] ?? '');
+        if (! preg_match('/^[a-f0-9]{64}$/', $expected)
+            || ! hash_equals($expected, $this->runtimeFingerprint($asset))) {
+            throw new RuntimeException('Target asset drifted after preflight for '.$descriptor['authority_asset_key'].'.');
+        }
+    }
+
     /** @param list<array<string,mixed>> $descriptors */
     private function assertAllReadback(array $descriptors): void
     {
@@ -736,12 +751,25 @@ final class BigFiveEn52Publisher
             'career_job_ai_impact_assets', 'career_job_display_assets',
             'career_job_page_assembly_assets', 'career_job_salary_assets',
             'media_assets', 'media_variants',
+        ] as $table) {
+            $nonPersonality[$table] = Schema::hasTable($table)
+                ? DB::table($table)->orderBy('id')->get()
+                    ->map(static fn (object $row): array => (array) $row)->all()
+                : [];
+        }
+        $seoConnection = trim((string) config('seo_intel.connection', 'seo_intel'));
+        if ($seoConnection === '') {
+            throw new RuntimeException('SEO intelligence database connection is not configured.');
+        }
+        $seoSchema = Schema::connection($seoConnection);
+        $seoDatabase = DB::connection($seoConnection);
+        foreach ([
             'seo_domestic_submission_logs', 'seo_indexnow_submissions', 'seo_issue_queue',
             'seo_search_channel_queue_batches', 'seo_search_channel_queue_items',
             'seo_search_channel_queue_events',
         ] as $table) {
-            $nonPersonality[$table] = Schema::hasTable($table)
-                ? DB::table($table)->orderBy('id')->get()
+            $nonPersonality[$table] = $seoSchema->hasTable($table)
+                ? $seoDatabase->table($table)->orderBy('id')->get()
                     ->map(static fn (object $row): array => (array) $row)->all()
                 : [];
         }

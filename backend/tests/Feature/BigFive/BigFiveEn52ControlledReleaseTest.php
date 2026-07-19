@@ -14,6 +14,9 @@ use App\Services\SEO\SitemapGenerator;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use ReflectionMethod;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -42,6 +45,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         $decoded = json_decode((string) file_get_contents($this->packagePath), true, flags: JSON_THROW_ON_ERROR);
         $this->assertIsArray($decoded);
         $this->package = $decoded;
+        config(['seo_intel.connection' => config('database.default')]);
     }
 
     public function test_compiled_fixture_is_exact_deterministic_text_only_release(): void
@@ -438,6 +442,60 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         $this->assertSame(0, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('framework', 'big_five')->where('locale', 'en')
             ->whereNotNull('published_revision_id')->count());
+    }
+
+    public function test_locked_target_fingerprint_rejects_post_preflight_drift(): void
+    {
+        $row = $this->seedExactAuthorityRows()[0];
+        $publisher = app(BigFiveEn52Publisher::class);
+        $fingerprintMethod = new ReflectionMethod($publisher, 'runtimeFingerprint');
+        $preflightFingerprint = $fingerprintMethod->invoke($publisher, $row);
+        $row->forceFill(['summary' => 'concurrent editorial drift'])->save();
+
+        $assertionMethod = new ReflectionMethod($publisher, 'assertLockedTargetMatchesPlan');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('drifted after preflight');
+        $assertionMethod->invoke($publisher, $row->fresh(), [
+            'authority_asset_key' => 'synthetic-target',
+            'target_preflight_fingerprint' => $preflightFingerprint,
+        ]);
+    }
+
+    public function test_non_target_boundary_reads_search_tables_from_seo_intel_connection(): void
+    {
+        config([
+            'seo_intel.connection' => 'seo_boundary_test',
+            'database.connections.seo_boundary_test' => [
+                'driver' => 'sqlite',
+                'database' => ':memory:',
+                'prefix' => '',
+                'foreign_key_constraints' => true,
+            ],
+        ]);
+        DB::purge('seo_boundary_test');
+        Schema::connection('seo_boundary_test')->create('seo_issue_queue', function ($table): void {
+            $table->id();
+            $table->string('payload');
+        });
+        DB::connection('seo_boundary_test')->table('seo_issue_queue')->insert(['payload' => 'before']);
+        $this->seedExactAuthorityRows();
+        $mutated = false;
+        PersonalityPublicContentAsset::saving(static function () use (&$mutated): void {
+            if (! $mutated) {
+                $mutated = true;
+                DB::connection('seo_boundary_test')->table('seo_issue_queue')->insert(['payload' => 'during']);
+            }
+        });
+
+        try {
+            app(BigFiveEn52Publisher::class)->publish($this->packagePath, 1);
+            $this->fail('A search-boundary mutation on seo_intel must fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('non-target authority boundary changed', strtolower($exception->getMessage()));
+        }
+
+        $this->assertDatabaseCount('personality_public_content_asset_revisions', 0);
+        $this->assertSame(2, DB::connection('seo_boundary_test')->table('seo_issue_queue')->count());
     }
 
     public function test_partial_locked_revision_state_fails_closed(): void
