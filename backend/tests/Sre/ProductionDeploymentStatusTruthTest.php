@@ -36,7 +36,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('if [ "$RESOLVED_DEPLOY_MODE" != standard ]', $eligibility);
         $this->assertStringContainsString('git merge-base --is-ancestor "$STAGING_SHA" "$DEPLOY_SHA"', $eligibility);
         $this->assertStringContainsString('git diff --no-renames --name-only "$STAGING_SHA" "$DEPLOY_SHA"', $eligibility);
-        $this->assertStringContainsString('.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)', $eligibility);
+        $this->assertStringContainsString('.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)', $eligibility);
         $this->assertStringContainsString('staging-equivalence refused non-audited delta path: $path', $eligibility);
         $this->assertStringContainsString('backend/resources backend/routes backend/artisan backend/composer.json backend/composer.lock deploy.php', $eligibility);
         $this->assertStringContainsString('staging-equivalence refused a runtime or deployment artifact change.', $eligibility);

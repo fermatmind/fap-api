@@ -254,7 +254,7 @@ jobs:
             STAGING_EQUIVALENT_SCOPE=true
             for path in "${STAGING_DELTA[@]}"; do
               case "$path" in
-                .github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)
+                .github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)
                   echo "staging-equivalence accepted audited deployment-control path: $path"
                   ;;
                 *)

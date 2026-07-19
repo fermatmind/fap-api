@@ -1,0 +1,244 @@
+name: MBTI COMP RUNTIME 46 production ops
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry_run is read-only; write stages one draft revision after exact operator authorization"
+        required: true
+        default: dry_run
+        type: choice
+        options:
+          - dry_run
+          - write
+      expected_active_revision:
+        description: "Exact 40-character REVISION currently active on production"
+        required: true
+        type: string
+      expected_release_name:
+        description: "Exact active Deployer release directory name"
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: "Required only for write mode; exact SHA/package/hash-bound authorization"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mbti-comp-runtime46-production-ops
+  cancel-in-progress: false
+
+jobs:
+  production-ops:
+    name: INTP revision production ${{ inputs.mode }}
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
+    env:
+      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      PUBLIC_API_URL: "https://api.fermatmind.com/api/v0.5/personality/comparisons/intp-a-vs-intp-t?locale=zh-CN"
+      PACKAGE_ID: "mbti-comp-runtime-46-intp-revision-2026-07-19-r1"
+      PACKAGE_PATH: "docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json"
+      SOURCE_PACKAGE_SHA256: "5fcf54132504ef85978a5424e428fb56763ffbaa7c60f50b94b9c91fc3e85dc8"
+      AUTHORIZATION_PAYLOAD_SHA256: "7a84cda503b6f328f0659ee5bd41c85f51c1eca44ac9aa7cfa721d59ab6197e2"
+      EXACT_PAYLOAD_SHA256: "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e"
+      EXPECTED_PUBLIC_SECTIONS_SHA256: "719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359"
+
+    steps:
+      - name: Validate exact production operation contract
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+
+          case "$MODE" in
+            dry_run)
+              if [ -n "$OPERATOR_APPROVAL_PHRASE" ]; then
+                echo "dry_run refuses an operator approval phrase." >&2
+                exit 2
+              fi
+              ;;
+            write)
+              expected_phrase="I explicitly approve MBTI-COMP-RUNTIME-46 production single-record draft revision write for package ${PACKAGE_ID} payload SHA ${EXACT_PAYLOAD_SHA256} authorization SHA ${AUTHORIZATION_PAYLOAD_SHA256} on active SHA ${EXPECTED_ACTIVE_REVISION}; no publication/indexability/sitemap/llms/search changes."
+              if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
+                echo "operator_approval_phrase does not match the exact one-record production write authorization." >&2
+                exit 2
+              fi
+              ;;
+            *)
+              echo "unsupported mode: $MODE" >&2
+              exit 2
+              ;;
+          esac
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Verify exact active production release and quiescence
+        shell: bash
+        env:
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); test \"\$(basename \"\$current\")\" = '$EXPECTED_RELEASE_NAME'; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+
+      - name: Capture exact public pre-state
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          curl --retry 3 --retry-all-errors --retry-delay 2 -fsS \
+            --connect-timeout 5 --max-time 45 "$PUBLIC_API_URL" \
+            | tee artifacts/public-before.json >/dev/null
+          jq -e '
+            .ok == true
+            and .comparison_public_projection_v1.comparison_slug == "intp-a-vs-intp-t"
+            and (.comparison_public_projection_v1.sections | length) == 6
+            and [.comparison_public_projection_v1.sections[].id] == [
+              "direct_answer",
+              "quick_judgment_table",
+              "easy_misread",
+              "real_scenario_differences",
+              "do_not_misjudge",
+              "next_reading"
+            ]
+            and .seo_meta.canonical_url == "https://fermatmind.com/zh/personality/intp-a-vs-intp-t"
+            and (.seo_meta.robots | ascii_downcase | gsub(" "; "")) == "index,follow"
+          ' artifacts/public-before.json >/dev/null
+          before_sections_sha="$(jq -S -c '.comparison_public_projection_v1.sections' artifacts/public-before.json | sha256sum | awk '{print $1}')"
+          test "$before_sections_sha" = "$EXPECTED_PUBLIC_SECTIONS_SHA256"
+          printf '%s\n' "$before_sections_sha" > artifacts/public-before-sections.sha256
+
+      - name: Execute fixed exact-hash command
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          mode_flags='--dry-run'
+          if [ "$MODE" = write ]; then
+            mode_flags='--write --production-write-authorized --no-publication-change --no-indexability-change --no-sitemap --no-llms --no-search-release'
+          fi
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "cd '$DEPLOY_PATH/current/backend' && php artisan personality:mbti-comp-runtime46-intp-revision --package='$PACKAGE_PATH' --source-package-sha256='$SOURCE_PACKAGE_SHA256' --authorization-payload-sha256='$AUTHORIZATION_PAYLOAD_SHA256' --import-scope-mode=single_intp_at_content_revision_only --record-count=1 $mode_flags --json --no-interaction --no-ansi" \
+            | tee artifacts/operation.json
+
+          jq -e \
+            --arg mode "$MODE" \
+            --arg payload_sha "$EXACT_PAYLOAD_SHA256" \
+            '.ok == true
+             and .row_count == 1
+             and .at_comparison_row_count == 1
+             and (.rows | length) == 1
+             and .rows[0].slug == "intp-a-vs-intp-t"
+             and .rows[0].payload_sha256 == $payload_sha
+             and .publish_attempted == false
+             and .index_attempted == false
+             and .sitemap_llms_release_attempted == false
+             and .search_release_attempted == false
+             and (if $mode == "dry_run" then
+                    .dry_run == true
+                    and .write == false
+                    and .cms_write_attempted == false
+                    and .writes_committed == false
+                    and (.rows[0].action == "would_stage_draft_revision" or .rows[0].action == "would_skip_existing")
+                  else
+                    .dry_run == false
+                    and .write == true
+                    and .cms_write_attempted == true
+                    and .published_content_count == 0
+                    and (.rows[0].action == "staged_draft_revision" or .rows[0].action == "skipped_existing")
+                  end)' artifacts/operation.json >/dev/null
+
+      - name: Prove public projection and discoverability are unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --retry 3 --retry-all-errors --retry-delay 2 -fsS \
+            --connect-timeout 5 --max-time 45 "$PUBLIC_API_URL" \
+            | tee artifacts/public-after.json >/dev/null
+          before_projection_sha="$(jq -S -c '.comparison_public_projection_v1' artifacts/public-before.json | sha256sum | awk '{print $1}')"
+          after_projection_sha="$(jq -S -c '.comparison_public_projection_v1' artifacts/public-after.json | sha256sum | awk '{print $1}')"
+          test "$after_projection_sha" = "$before_projection_sha"
+          test "$(jq -r '.seo_meta.canonical_url' artifacts/public-after.json)" = "$(jq -r '.seo_meta.canonical_url' artifacts/public-before.json)"
+          test "$(jq -r '.seo_meta.robots' artifacts/public-after.json)" = "$(jq -r '.seo_meta.robots' artifacts/public-before.json)"
+
+          jq -n \
+            --arg mode "${{ inputs.mode }}" \
+            --arg active_revision "${{ inputs.expected_active_revision }}" \
+            --arg release_name "${{ inputs.expected_release_name }}" \
+            --arg package_id "$PACKAGE_ID" \
+            --arg payload_sha256 "$EXACT_PAYLOAD_SHA256" \
+            --arg authorization_sha256 "$AUTHORIZATION_PAYLOAD_SHA256" \
+            --arg public_projection_sha256 "$after_projection_sha" \
+            '{
+              schema_version: "mbti-comp-runtime46-production-ops.v1",
+              mode: $mode,
+              active_revision: $active_revision,
+              release_name: $release_name,
+              package_id: $package_id,
+              payload_sha256: $payload_sha256,
+              authorization_payload_sha256: $authorization_sha256,
+              public_projection_sha256: $public_projection_sha256,
+              public_projection_unchanged: true,
+              publication_changed: false,
+              indexability_changed: false,
+              sitemap_or_llms_changed: false,
+              search_action_attempted: false,
+              rollback_target: "remove only the exact approval_record_id/payload_sha256 draft revision; preserve the public projection"
+            }' > artifacts/receipt.json
+
+      - name: Upload production operation receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: mbti-comp-runtime46-production-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 90
