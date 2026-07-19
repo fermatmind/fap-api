@@ -6,7 +6,7 @@
   "backend_locale_contract": "en",
   "source_content_sha256": "056b10d3f640d0cf7da35ec7bc99b009408049e75c1e25aa8e760eb8641ea8d5",
   "cohort_snapshot_sha256": "94449467281cffaccc295bab3bbbb574cf817e461ee2fbae8288eedd9a988b3a",
-  "package_payload_sha256": "606d00c3f1f14aa1f84731ea04a0be0116ca7241dd35bcd7e0024e65d780a088",
+  "package_payload_sha256": "eadf576907e3451ee8f32441011bc033c57d66bef82f87b466875151156a7fa7",
   "page_count": 52,
   "claim_file_count": 52,
   "files": [
@@ -376,10 +376,10 @@
     }
   ],
   "qa_reports": {
-    "qa/manifest-audit.json": "830e460b8f074cf0ca934701490659899447b8f3752502a76fc23e7947e05e47",
+    "qa/manifest-audit.json": "80f6f4217daf0014c361d80a98215d94e74e0a649016563fc21b9629e3705571",
     "qa/translation-equivalence-report.csv": "fedd0525408962829770622926dab3eca2202b68d73043c51cbd42fb228795ce",
     "qa/scientific-red-team.md": "b9c35c79b445a45eb830f238aa278624c3bfb0b535c85f09b3f2e0ca2f4ed706",
-    "qa/source-integrity-report.json": "0820166dd707f8b339f60c1d3ddc874cb39df638ab4f00070cffc7f323db20c8",
+    "qa/source-integrity-report.json": "4a90a1bc38a62a9f2dff0762d0d127a917afab93e4a177e2b48e611173e06dd1",
     "qa/seo-geo-content-report.csv": "b47fb1801abec85a5985328c41be74669be97ead7e28df4050e7c067b55f77ac",
     "qa/internal-link-report.csv": "66c53d29e8e4c497eff6307fcdbd0c0db27c64709aa584f98c3dc0f060749812",
     "qa/duplicate-report.csv": "df68fc0bd68ccbf2206d9d49a405ffe9c3ba93c1c2e8fc15f475aeaad2b7b098",
@@ -398,6 +398,9 @@
     "empty_claim_file_count": 0,
     "invalid_claim_source_id_count": 0,
     "true_internal_link_violation_count": 0,
+    "unexpected_claim_id_count": 0,
+    "missing_claim_id_count": 0,
+    "duplicate_claim_id_count": 0,
     "unknown_canonical_link_count": 0,
     "zh_internal_link_count": 0,
     "unresolved_scientific_blocker_count": 0,

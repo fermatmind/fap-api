@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
@@ -84,6 +84,16 @@ function jaccard(left, right) {
     return intersection / new Set([...a, ...b]).size;
 }
 
+async function relativeFiles(root) {
+    const found = [];
+    for (const entry of await readdir(root, { withFileTypes: true })) {
+        const absolute = path.join(root, entry.name);
+        if (entry.isDirectory()) found.push(...await relativeFiles(absolute));
+        else if (entry.isFile()) found.push(path.relative(ROOT, absolute).split(path.sep).join('/'));
+    }
+    return found.sort();
+}
+
 const emitted = new Map();
 async function emit(relativePath, bytes) {
     const value = Buffer.from(bytes);
@@ -106,6 +116,15 @@ const registeredUrls = new Map(registry.sources.map((source) => [source.source_i
 const canonicalSet = new Set(manifest.entries.map((entry) => entry.en_canonical_path));
 const aliasKeys = new Set(['emotional-stability', 'high-agreeableness', 'high-conscientiousness', 'high-extraversion', 'high-neuroticism', 'high-openness', 'low-agreeableness', 'low-conscientiousness', 'low-extraversion', 'low-openness']);
 const entryByIdentity = new Map(manifest.entries.map((entry) => [entry.page_identity, entry]));
+const ledgerByIdentity = new Map(ledger.entries.map((entry) => [entry.page_identity, entry]));
+const expectedPagePaths = new Set(manifest.entries.map((entry) => entry.en_output_path));
+const expectedClaimPaths = new Set(manifest.entries.map((entry) => entry.en_claim_output_path));
+const actualPagePaths = (await relativeFiles(path.join(ROOT, 'pages'))).filter((file) => file.endsWith('.en-US.md'));
+const actualClaimPaths = (await relativeFiles(path.join(ROOT, 'evidence'))).filter((file) => file.endsWith('.claims.json'));
+const unexpectedPagePaths = actualPagePaths.filter((file) => !expectedPagePaths.has(file));
+const missingPagePaths = [...expectedPagePaths].filter((file) => !actualPagePaths.includes(file));
+const unexpectedClaimPaths = actualClaimPaths.filter((file) => !expectedClaimPaths.has(file));
+const missingClaimPaths = [...expectedClaimPaths].filter((file) => !actualClaimPaths.includes(file));
 
 const equivalenceRows = [['page_identity', 'entity_type', 'section_count_zh', 'section_count_en', 'faq_count_zh', 'faq_count_en', 'source_ids_match', 'locked_claims_present', 'visible_claims_present', 'status', 'input_cohort_sha256']];
 const seoRows = [['page_identity', 'title_unique', 'seo_title_unique', 'seo_description_unique', 'answer_first', 'h1_count', 'h2_count', 'faq_question_style', 'en_us_spelling', 'keyword_term', 'keyword_count', 'keyword_density', 'keyword_stuffing_flag', 'status', 'page_sha256']];
@@ -130,6 +149,10 @@ let faqTotal = 0;
 let seoGeoFailures = 0;
 let equivalenceFailures = 0;
 let faqFailures = 0;
+let unexpectedClaimIds = 0;
+let missingClaimIds = 0;
+let duplicateClaimIds = 0;
+let ledgerEntryMismatches = 0;
 const faqFrequency = new Map();
 const pageData = [];
 
@@ -144,7 +167,11 @@ for (const entry of manifest.entries) {
     const faqs = faqSection ? [...faqSection.content.matchAll(/^\*\*(.+[?])\*\*\s*\n([\s\S]*?)(?=^\*\*.+[?]\*\*\s*$|(?![\s\S]))/gm)] : [];
     const pageSha = sha256(pageBytes);
     const claimSha = sha256(claimBytes);
+    const ledgerClaimSha = sha256(jsonBytes(claims));
     const actualWords = wordCount(visible);
+    const ledgerEntry = ledgerByIdentity.get(entry.page_identity);
+    if (!ledgerEntry || ledgerEntry.target_path !== entry.en_output_path || ledgerEntry.claim_path !== entry.en_claim_output_path
+        || ledgerEntry.status !== 'completed' || ledgerEntry.output_sha256 !== pageSha || ledgerEntry.claim_sha256 !== ledgerClaimSha) ledgerEntryMismatches += 1;
     if (actualWords !== frontmatter.word_count_en) wordMismatches += 1;
     untranslatedChinese += pageBytes.toString('utf8').match(/[\u3400-\u9fff]/g)?.length ?? 0;
     cohort.push({ page_identity: entry.page_identity, entity_type: entry.entity_type, page_sha256: pageSha, claim_sha256: claimSha, word_count_en: actualWords });
@@ -167,7 +194,14 @@ for (const entry of manifest.entries) {
     }
     const expectedClaims = releaseByAuthority.get(entry.authority_asset_key)?.evidence_claims ?? [];
     const claimById = new Map(claimRows.map((claim) => [claim.claim_id, claim]));
-    let lockedClaimsMatch = claimById.size === claimRows.length;
+    const expectedClaimIds = new Set(expectedClaims.map((claim) => claim.claim_id));
+    const pageDuplicateClaimIds = claimRows.length - claimById.size;
+    const pageUnexpectedClaimIds = [...claimById.keys()].filter((claimId) => !expectedClaimIds.has(claimId)).length;
+    const pageMissingClaimIds = [...expectedClaimIds].filter((claimId) => !claimById.has(claimId)).length;
+    duplicateClaimIds += pageDuplicateClaimIds;
+    unexpectedClaimIds += pageUnexpectedClaimIds;
+    missingClaimIds += pageMissingClaimIds;
+    let lockedClaimsMatch = pageDuplicateClaimIds === 0 && pageUnexpectedClaimIds === 0 && pageMissingClaimIds === 0;
     for (const expected of expectedClaims) {
         const actual = claimById.get(expected.claim_id);
         const mappingMatches = actual
@@ -271,8 +305,10 @@ const manifestAudit = {
     page_count: manifest.entries.length, translated_page_count: ledger.translated_page_count, pending_page_count: ledger.pending_page_count,
     model_hub_count: familyCounts.hub, domain_count: familyCounts.domain, range_count: familyCounts.polarity,
     facet_hub_count: familyCounts.facet_hub, facet_detail_count: familyCounts.facet_detail,
-    legacy_alias_page_count: manifest.entries.filter((entry) => aliasKeys.has(entry.entity_key)).length,
-    unexpected_page_count: Math.max(0, cohort.length - manifest.entries.length), missing_page_count: Math.max(0, manifest.entries.length - cohort.length),
+    legacy_alias_page_count: actualPagePaths.filter((file) => aliasKeys.has(path.basename(file, '.en-US.md'))).length,
+    unexpected_page_count: unexpectedPagePaths.length, missing_page_count: missingPagePaths.length,
+    unexpected_claim_file_count: unexpectedClaimPaths.length, missing_claim_file_count: missingClaimPaths.length,
+    ledger_entry_mismatch_count: ledgerEntryMismatches + Math.abs(ledger.entries.length - manifest.entries.length),
     duplicate_identity_count: manifest.entries.length - new Set(manifest.entries.map((entry) => entry.page_identity)).size,
     duplicate_slug_count: manifest.entries.length - new Set(manifest.entries.map((entry) => entry.en_slug)).size,
     duplicate_canonical_count: manifest.entries.length - new Set(manifest.entries.map((entry) => entry.en_canonical_path)).size,
@@ -282,17 +318,20 @@ const sourceIntegrity = {
     schema_version: 'big-five-en52-source-integrity.v1', reviewed_date: REVIEWED_DATE, input_cohort_sha256: cohortSha,
     source_registry_count: registry.sources.length, claim_file_count: pageData.length, source_id_conflict_count: sourceConflicts,
     visible_reference_registry_mismatch_count: visibleReferenceMismatches, empty_claim_file_count: emptyClaimFiles,
-    invalid_claim_source_id_count: invalidClaimSourceIds, doi_or_bibliography_conflict_count: 0,
+    invalid_claim_source_id_count: invalidClaimSourceIds, unexpected_claim_id_count: unexpectedClaimIds,
+    missing_claim_id_count: missingClaimIds, duplicate_claim_id_count: duplicateClaimIds, doi_or_bibliography_conflict_count: 0,
     claims_visible_in_body: visibleReferenceMismatches === 0, qa_status: 'PASS',
 };
 const manifestAuditFailures = manifestAudit.unexpected_page_count + manifestAudit.missing_page_count
     + manifestAudit.duplicate_identity_count + manifestAudit.duplicate_slug_count
     + manifestAudit.duplicate_canonical_count + manifestAudit.legacy_alias_page_count
+    + manifestAudit.unexpected_claim_file_count + manifestAudit.missing_claim_file_count + manifestAudit.ledger_entry_mismatch_count
     + Number(manifestAudit.model_hub_count !== 1) + Number(manifestAudit.domain_count !== 5)
     + Number(manifestAudit.range_count !== 15) + Number(manifestAudit.facet_hub_count !== 1)
     + Number(manifestAudit.facet_detail_count !== 30);
 manifestAudit.qa_status = manifestAuditFailures === 0 ? 'PASS' : 'FAIL';
-sourceIntegrity.qa_status = sourceConflicts + visibleReferenceMismatches + emptyClaimFiles + invalidClaimSourceIds === 0 ? 'PASS' : 'FAIL';
+sourceIntegrity.qa_status = sourceConflicts + visibleReferenceMismatches + emptyClaimFiles + invalidClaimSourceIds
+    + unexpectedClaimIds + missingClaimIds + duplicateClaimIds === 0 ? 'PASS' : 'FAIL';
 const redTeamStatus = clinicalRisks.length === 0 ? 'PASS — zero unresolved P0/P1/P2 findings' : `FAIL — ${clinicalRisks.length} unresolved automated findings`;
 const redTeam = `# Big Five EN52 scientific red-team\n\nStatus: **${redTeamStatus}**\n\n`+
     `Input cohort SHA-256: \`${cohortSha}\`\n\n`+
@@ -320,6 +359,7 @@ const hardGates = {
     word_count_mismatch_count: wordMismatches, source_id_conflict_count: sourceConflicts,
     visible_reference_registry_mismatch_count: visibleReferenceMismatches, empty_claim_file_count: emptyClaimFiles,
     invalid_claim_source_id_count: invalidClaimSourceIds, true_internal_link_violation_count: internalViolations,
+    unexpected_claim_id_count: unexpectedClaimIds, missing_claim_id_count: missingClaimIds, duplicate_claim_id_count: duplicateClaimIds,
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
     manifest_audit_failure_count: manifestAuditFailures, translation_equivalence_failure_count: equivalenceFailures,
     seo_geo_failure_count: seoGeoFailures, faq_failure_count: faqFailures,
