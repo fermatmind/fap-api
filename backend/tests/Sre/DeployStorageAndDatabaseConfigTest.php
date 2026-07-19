@@ -214,6 +214,9 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('I explicitly approve isolated MBTI-COMP-RUNTIME-46 staging deploy for SHA ${EXPECTED_RELEASE_SHA} based on production SHA ${EXPECTED_BASE_SHA}; no production deploy or CMS/DB/content write.', $staging);
         $this->assertStringContainsString('git show "origin/main:$path" | cmp - "$path"', $staging);
         $this->assertStringContainsString('php artisan test tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php', $staging);
+        $this->assertStringContainsString('Normalize exact isolated candidate branch-diff baseline', $staging);
+        $this->assertStringContainsString('git update-ref refs/remotes/origin/main "$EXPECTED_RELEASE_SHA"', $staging);
+        $this->assertStringContainsString('test "$(git merge-base origin/main HEAD)" = "$EXPECTED_RELEASE_SHA"', $staging);
         $this->assertStringContainsString('mbti-runtime46-isolated-staging-${{ github.run_id }}', $staging);
         $this->assertStringContainsString('cms_or_db_write_attempted: false', $staging);
         $this->assertStringContainsString('production_deploy_attempted: false', $staging);
