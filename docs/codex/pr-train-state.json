@@ -98942,9 +98942,9 @@
     "branch": "codex/mbti-comp-runtime-46",
     "title": "MBTI-COMP-RUNTIME-46: deploy and accept all A/T comparison pages",
     "depends_on": ["MBTI-COMP-PROJECTION-45"],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3206",
     "checks": {
       "authorization": {"status": "passed", "evidence": "The operator separately authorized the exact code-only production SHA bc0ed833bc9aae1473ab37f1dead2517e1aff618 and the exact single-record INTP package/payload/promotion authorization hashes. No authorization was inferred for publication, indexability, sitemap, llms, Search Channel, GSC, or indexing requests."},
       "dependency": {"status": "passed", "evidence": "MBTI-COMP-PROJECTION-45 PR #3175 merged as 781d1636b2c74f5852076a5864b681910a1e0e47 and formed the isolated production candidate base."},
@@ -98972,8 +98972,9 @@
       {"at": "2026-07-19T05:51:30Z", "status": "content_write_and_readback_passed", "note": "After the focused canonical-hash repair PR #3205 merged, the same exact authorization safely retried revision 212. Workflow 29675471856 verified active SHA/release/package/hash boundaries, committed only the INTP public content promotion, and passed exact nine-section readback without rollback."},
       {"at": "2026-07-19T06:44:00Z", "status": "production_acceptance_passed", "note": "All 16 A/T API and all 16 visible-page targets passed the complete production contract through public HTTPS only: 9 ordered sections, non-empty content, 5 FAQs, canonical, robots, JSON-LD, backend authority, and visible section-title parity."},
       {"at": "2026-07-19T06:47:57Z", "status": "implementation_in_progress", "note": "Started the repository-conventional operation closeout from latest origin/main. Scope is limited to the production acceptance markdown, machine-readable 16-target evidence, focused report contract test, and exact manifest/state entry; no runtime, workflow, content, publication, indexability, sitemap, llms, search, deploy, CMS/database, or fap-web change is included."},
-      {"at": "2026-07-19T06:49:07Z", "status": "local_validation_passed", "note": "The focused operation-report contract passed 3 tests/154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and the exact five-path scope passed. Runtime route, migration, curl, and full ci_verify_mbti.sh checks are not applicable to this docs/generated/test-only closeout."}
+      {"at": "2026-07-19T06:49:07Z", "status": "local_validation_passed", "note": "The focused operation-report contract passed 3 tests/154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and the exact five-path scope passed. Runtime route, migration, curl, and full ci_verify_mbti.sh checks are not applicable to this docs/generated/test-only closeout."},
+      {"at": "2026-07-19T06:51:40Z", "status": "github_checks_pending", "note": "Pushed the exact five-path closeout scope and opened PR #3206. Merge remains gated on every required GitHub check, clean scope, mergeability, and zero unresolved actionable review threads."}
     ],
-    "updated_at": "2026-07-19T06:49:07Z"
+    "updated_at": "2026-07-19T06:51:40Z"
   }
 }
