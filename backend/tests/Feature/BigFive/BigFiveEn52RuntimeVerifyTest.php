@@ -158,6 +158,28 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         ])->assertFailed()->expectsOutputToContain('approval_sha_invalid')->doesntExpectOutputToContain($secret);
     }
 
+    public function test_absolute_public_urls_require_the_exact_approved_origin(): void
+    {
+        $method = new ReflectionMethod(app(BigFiveEn52RuntimeVerifier::class), 'pathFromUrl');
+        $origin = 'https://www.example.test';
+
+        $this->assertSame('/en/personality/big-five/openness', $method->invoke(
+            app(BigFiveEn52RuntimeVerifier::class),
+            $origin.'/en/personality/big-five/openness',
+            $origin,
+        ));
+        $this->assertSame('', $method->invoke(
+            app(BigFiveEn52RuntimeVerifier::class),
+            'https://www.example.test.evil/en/personality/big-five/openness',
+            $origin,
+        ));
+        $this->assertSame('', $method->invoke(
+            app(BigFiveEn52RuntimeVerifier::class),
+            'https://www.example.test:443/en/personality/big-five/openness',
+            $origin,
+        ));
+    }
+
     private function seedAndPublish(): void
     {
         if (PersonalityPublicContentAsset::query()->withoutGlobalScopes()->exists()) {

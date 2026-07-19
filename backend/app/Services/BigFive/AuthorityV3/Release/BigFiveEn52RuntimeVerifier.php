@@ -368,14 +368,21 @@ final class BigFiveEn52RuntimeVerifier
 
     private function pathFromUrl(string $url, string $origin): string
     {
-        if (str_starts_with($url, '/')) {
+        if (str_starts_with($url, '/') && ! str_starts_with($url, '//')) {
             return (string) (parse_url($url, PHP_URL_PATH) ?: '');
         }
-        if (! str_starts_with($url, $origin)) {
+
+        $urlParts = parse_url($url);
+        $originParts = parse_url($origin);
+        if (! is_array($urlParts) || ! is_array($originParts)
+            || strtolower((string) ($urlParts['scheme'] ?? '')) !== strtolower((string) ($originParts['scheme'] ?? ''))
+            || strtolower((string) ($urlParts['host'] ?? '')) !== strtolower((string) ($originParts['host'] ?? ''))
+            || ($urlParts['port'] ?? null) !== ($originParts['port'] ?? null)
+            || isset($urlParts['user']) || isset($urlParts['pass'])) {
             return '';
         }
 
-        return (string) (parse_url($url, PHP_URL_PATH) ?: '');
+        return (string) ($urlParts['path'] ?? '');
     }
 
     private function containsMediaKey(mixed $value): bool
