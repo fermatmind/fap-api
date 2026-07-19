@@ -63,6 +63,44 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('steps.latest_main_guard.outputs.eligible', $deploy);
     }
 
+    public function test_production_deploy_fails_closed_on_public_dns_health_before_and_after_activation(): void
+    {
+        $workflow = $this->workflow();
+        $deploy = strstr($workflow, '  deploy-production:') ?: '';
+        $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
+        $publicDnsCommand = $this->between(
+            $deployer,
+            'function deployPublicDnsHealthcheckCommand',
+            'function runProductionPublicDnsHealthcheck'
+        );
+
+        $baselineOffset = strpos($deploy, '- name: Verify public-DNS health baseline');
+        $deployOffset = strpos($deploy, '- name: Deploy production with Deployer');
+        $postDeployOffset = strpos($deploy, '- name: Healthcheck and contract smoke');
+
+        $this->assertIsInt($baselineOffset);
+        $this->assertIsInt($deployOffset);
+        $this->assertIsInt($postDeployOffset);
+        $this->assertLessThan($deployOffset, $baselineOffset);
+        $this->assertLessThan($postDeployOffset, $deployOffset);
+        $this->assertSame(2, substr_count(
+            $deploy,
+            'curl -fsS --connect-timeout 5 --max-time 15 "$HEALTHCHECK_URL" | jq -e \'.ok==true\' >/dev/null'
+        ));
+        $this->assertStringContainsString('Public DNS health baseline failed after 10 attempts', $deploy);
+        $this->assertStringContainsString('Public DNS healthcheck failed after 10 attempts', $deploy);
+
+        $this->assertStringContainsString("task('guard:public-dns-health'", $deployer);
+        $this->assertStringContainsString("before('deploy:symlink', 'guard:public-dns-health')", $deployer);
+        $this->assertStringContainsString("task('healthcheck:public-dns'", $deployer);
+        $this->assertStringContainsString("after('healthcheck:public', 'healthcheck:public-dns')", $deployer);
+        $this->assertStringContainsString("currentHost()->getAlias() !== 'production'", $deployer);
+        $this->assertStringContainsString('deployPublicDnsHealthcheckCommand($host)', $deployer);
+        $this->assertStringContainsString('curl -fsS --connect-timeout 5 --max-time 15', $publicDnsCommand);
+        $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/healthz')", $publicDnsCommand);
+        $this->assertStringNotContainsString('--resolve', $publicDnsCommand);
+    }
+
     public function test_auto_mode_is_fail_closed_to_a_cumulative_code_only_lane(): void
     {
         $workflow = $this->workflow();
