@@ -98934,5 +98934,46 @@
       {"at": "2026-07-19T05:52:32Z", "status": "github_checks_pending", "note": "All 9 GitHub checks passed at f2a134f1d76f0d27d199eb04aa7c317e7c01fca9, then the refreshed review found one additional valid P2 thread for the symmetric zh-CN concurrency window. Bound each descriptor to the exact zh-CN counterpart id and runtime fingerprint, lockForUpdate and revalidate that counterpart inside the same transaction before any English revision/write, and added a focused post-preflight zh-CN drift regression. Focused suite passed 25 tests/6,169 assertions with syntax, scoped Pint, and diff checks. Review-fix code head is 8ddb57d9047049a89f5eb1aacd7732367790fbb4; the following commit changes only this ledger pointer before GitHub checks rerun."}
     ],
     "updated_at": "2026-07-19T05:52:32Z"
+  },
+  "MBTI-COMP-RUNTIME-46": {
+    "id": "MBTI-COMP-RUNTIME-46",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-comp-runtime-46",
+    "title": "MBTI-COMP-RUNTIME-46: deploy and accept all A/T comparison pages",
+    "depends_on": ["MBTI-COMP-PROJECTION-45"],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "The operator separately authorized the exact code-only production SHA bc0ed833bc9aae1473ab37f1dead2517e1aff618 and the exact single-record INTP package/payload/promotion authorization hashes. No authorization was inferred for publication, indexability, sitemap, llms, Search Channel, GSC, or indexing requests."},
+      "dependency": {"status": "passed", "evidence": "MBTI-COMP-PROJECTION-45 PR #3175 merged as 781d1636b2c74f5852076a5864b681910a1e0e47 and formed the isolated production candidate base."},
+      "production_deployment": {"status": "passed", "evidence": "Code-only production workflow 29674638168 deployed and verified exact revision bc0ed833bc9aae1473ab37f1dead2517e1aff618 as release mbti-comp-runtime-46-20260719-r3-29674638168-1; health and contract smokes passed with no CMS/database content write."},
+      "single_record_content_revision": {"status": "passed", "evidence": "Dry-run 29674866867 passed. Initial write 29675163335 promoted the exact revision and then successfully restored the previous public section through automatic rollback after a newline-only canonical hash-control mismatch. PR #3205 fixed only canonical hashing; retry 29675471856 promoted revision 212 and passed exact nine-section readback. Publication, indexability, sitemap, llms, and search state remained unchanged."},
+      "production_acceptance": {"status": "passed", "evidence": "Public HTTPS readback completed at 2026-07-19T06:44:00.120Z: all 16 A/T APIs and all 16 visible pages returned 200 with exact ordered 9 sections, non-empty content, 5 FAQs, exact canonical, index,follow robots, JSON-LD, and visible authoritative section titles. Per-target canonical section and projection SHA-256 fingerprints are locked in the generated report."},
+      "local_validation": {"status": "passed", "evidence": "Focused report contract passed 3 tests and 154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and exact five-path scope validation passed. This operation closeout changes only docs/generated/test and train metadata, so runtime route, migration, curl, and full ci_verify_mbti.sh commands are not applicable."},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": false, "post_merge_revalidated": false},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": true,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": true,
+    "transitions": [
+      {"at": "2026-07-19T05:24:17Z", "status": "production_deployment_passed", "note": "The separately authorized code-only deployment activated exact SHA bc0ed833bc9aae1473ab37f1dead2517e1aff618 and passed deployed-revision, health, contract, and Ops smokes without a CMS/database content write."},
+      {"at": "2026-07-19T05:39:21Z", "status": "content_write_rolled_back_safely", "note": "The exact one-record payload was promoted, the public response matched the approved package, and a newline-only hash-control mismatch triggered and verified automatic rollback to the exact previous INTP public section. No publication, indexability, sitemap, llms, or search mutation occurred."},
+      {"at": "2026-07-19T05:51:30Z", "status": "content_write_and_readback_passed", "note": "After the focused canonical-hash repair PR #3205 merged, the same exact authorization safely retried revision 212. Workflow 29675471856 verified active SHA/release/package/hash boundaries, committed only the INTP public content promotion, and passed exact nine-section readback without rollback."},
+      {"at": "2026-07-19T06:44:00Z", "status": "production_acceptance_passed", "note": "All 16 A/T API and all 16 visible-page targets passed the complete production contract through public HTTPS only: 9 ordered sections, non-empty content, 5 FAQs, canonical, robots, JSON-LD, backend authority, and visible section-title parity."},
+      {"at": "2026-07-19T06:47:57Z", "status": "implementation_in_progress", "note": "Started the repository-conventional operation closeout from latest origin/main. Scope is limited to the production acceptance markdown, machine-readable 16-target evidence, focused report contract test, and exact manifest/state entry; no runtime, workflow, content, publication, indexability, sitemap, llms, search, deploy, CMS/database, or fap-web change is included."},
+      {"at": "2026-07-19T06:49:07Z", "status": "local_validation_passed", "note": "The focused operation-report contract passed 3 tests/154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and the exact five-path scope passed. Runtime route, migration, curl, and full ci_verify_mbti.sh checks are not applicable to this docs/generated/test-only closeout."}
+    ],
+    "updated_at": "2026-07-19T06:49:07Z"
   }
 }
