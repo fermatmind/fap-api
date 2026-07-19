@@ -128,6 +128,8 @@ let untranslatedChinese = 0;
 let wordMismatches = 0;
 let faqTotal = 0;
 let seoGeoFailures = 0;
+let equivalenceFailures = 0;
+let faqFailures = 0;
 const faqFrequency = new Map();
 const pageData = [];
 
@@ -219,6 +221,7 @@ for (const page of pageData) {
     const visibleClaims = page.claims.claims.every((claim) => page.visible.includes(visibleText(claim.visible_claim)));
     const equivalencePass = page.pageSections.length === page.entry.zh_section_count && page.faqs.length === page.entry.zh_faq_count
         && sourceIdsMatch && page.lockedClaimsMatch && page.sectionMapMatches && page.faqMapMatches && visibleClaims;
+    if (!equivalencePass) equivalenceFailures += 1;
     equivalenceRows.push([page.entry.page_identity, page.entry.entity_type, page.entry.zh_section_count, page.pageSections.length, page.entry.zh_faq_count, page.faqs.length, sourceIdsMatch, page.lockedClaimsMatch, visibleClaims, equivalencePass ? 'PASS' : 'FAIL', cohortSha]);
     const intro = page.body.split(/^##\s+/m)[0].replace(/^#\s+.*$/m, '').trim();
     const british = /\b(?:behaviour|behaviours|favour|favourite|organise|organisation|recognise|centre|colour|labour|travelling|programme)\b/i.test(page.visible);
@@ -240,7 +243,9 @@ for (const page of pageData) {
     page.faqs.forEach((faq, index) => {
         const normalized = page.normalizedFaqs[index];
         const withinUnique = page.normalizedFaqs.filter((value) => value === normalized).length === 1;
-        faqRows.push([page.entry.page_identity, index + 1, faq[1], normalized, wordCount(visibleText(faq[2])), withinUnique, faqFrequency.get(normalized), faqFrequency.get(normalized) > 1 ? 'reviewed_context_specific_answer' : 'unique_intent', withinUnique && wordCount(visibleText(faq[2])) > 0 ? 'PASS' : 'FAIL', page.pageSha]);
+        const faqPass = withinUnique && wordCount(visibleText(faq[2])) > 0;
+        if (!faqPass) faqFailures += 1;
+        faqRows.push([page.entry.page_identity, index + 1, faq[1], normalized, wordCount(visibleText(faq[2])), withinUnique, faqFrequency.get(normalized), faqFrequency.get(normalized) > 1 ? 'reviewed_context_specific_answer' : 'unique_intent', faqPass ? 'PASS' : 'FAIL', page.pageSha]);
     });
 }
 
@@ -280,7 +285,16 @@ const sourceIntegrity = {
     invalid_claim_source_id_count: invalidClaimSourceIds, doi_or_bibliography_conflict_count: 0,
     claims_visible_in_body: visibleReferenceMismatches === 0, qa_status: 'PASS',
 };
-const redTeam = `# Big Five EN52 scientific red-team\n\nStatus: **PASS — zero unresolved P0/P1/P2 findings**\n\n`+
+const manifestAuditFailures = manifestAudit.unexpected_page_count + manifestAudit.missing_page_count
+    + manifestAudit.duplicate_identity_count + manifestAudit.duplicate_slug_count
+    + manifestAudit.duplicate_canonical_count + manifestAudit.legacy_alias_page_count
+    + Number(manifestAudit.model_hub_count !== 1) + Number(manifestAudit.domain_count !== 5)
+    + Number(manifestAudit.range_count !== 15) + Number(manifestAudit.facet_hub_count !== 1)
+    + Number(manifestAudit.facet_detail_count !== 30);
+manifestAudit.qa_status = manifestAuditFailures === 0 ? 'PASS' : 'FAIL';
+sourceIntegrity.qa_status = sourceConflicts + visibleReferenceMismatches + emptyClaimFiles + invalidClaimSourceIds === 0 ? 'PASS' : 'FAIL';
+const redTeamStatus = clinicalRisks.length === 0 ? 'PASS — zero unresolved P0/P1/P2 findings' : `FAIL — ${clinicalRisks.length} unresolved automated findings`;
+const redTeam = `# Big Five EN52 scientific red-team\n\nStatus: **${redTeamStatus}**\n\n`+
     `Input cohort SHA-256: \`${cohortSha}\`\n\n`+
     `## Automated P0 screen\n\nUnqualified diagnostic, deterministic, career-prediction, ability, and moralization candidates: **${clinicalRisks.length}**. `+
     `Every page was also checked for product-validation inflation, fixed-type language, unsupported norms, and high/low value judgments.\n\n`+
@@ -307,7 +321,8 @@ const hardGates = {
     visible_reference_registry_mismatch_count: visibleReferenceMismatches, empty_claim_file_count: emptyClaimFiles,
     invalid_claim_source_id_count: invalidClaimSourceIds, true_internal_link_violation_count: internalViolations,
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
-    seo_geo_failure_count: seoGeoFailures,
+    manifest_audit_failure_count: manifestAuditFailures, translation_equivalence_failure_count: equivalenceFailures,
+    seo_geo_failure_count: seoGeoFailures, faq_failure_count: faqFailures,
     stale_qa_report_count: 0, substantive_body_exact_duplicate_count: substantiveExactDuplicates,
     substantive_high_similarity_count: substantiveHighSimilarity, untranslated_public_chinese_fragment_count: untranslatedChinese,
     legacy_alias_page_count: legacyLinks + manifestAudit.legacy_alias_page_count, faq_count: faqTotal,
