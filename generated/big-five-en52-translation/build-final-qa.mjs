@@ -65,6 +65,14 @@ function linkDestinations(markdown) {
         .map((match) => match[1] ?? match[2]);
 }
 
+function unsupportedRenderedLinkSyntax(markdown) {
+    const withoutSupportedInlineLinks = markdown.replace(/!?\[[^\]]*\]\(\s*(?:<[^>]*>|[^\s)]+)(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\s*\)/g, '');
+    return /(?:https?:\/\/|mailto:)/i.test(withoutSupportedInlineLinks)
+        || /<a\b/i.test(withoutSupportedInlineLinks)
+        || /^\s*\[[^\]]+\]:\s*/m.test(withoutSupportedInlineLinks)
+        || /(?<!!)\[[^\]]+\]\s*\[[^\]]*\]/.test(withoutSupportedInlineLinks);
+}
+
 function sections(body) {
     return [...body.matchAll(/^##\s+(.+)\n([\s\S]*?)(?=^##\s+|(?![\s\S]))/gm)]
         .map((match) => ({ heading: match[1], content: match[2].trim() }));
@@ -166,6 +174,7 @@ const clinicalRisks = [];
 let internalViolations = 0;
 let unregisteredExternalLinks = 0;
 let bodyMediaReferences = 0;
+let unsupportedRenderedLinkSyntaxPages = 0;
 let zhLinks = 0;
 let unknownLinks = 0;
 let legacyLinks = 0;
@@ -229,6 +238,7 @@ for (const entry of manifest.entries) {
     untranslatedChinese += pageBytes.toString('utf8').match(/[\u3400-\u9fff]/g)?.length ?? 0;
     bodyMediaReferences += (body.match(/!\[[^\]]*\](?:\([^)]*\)|\s*\[[^\]]*\])/g) ?? []).length;
     bodyMediaReferences += (body.match(/<(?:img|picture|source|svg)\b/gi) ?? []).length;
+    unsupportedRenderedLinkSyntaxPages += Number(unsupportedRenderedLinkSyntax(body));
     cohort.push({ page_identity: entry.page_identity, entity_type: entry.entity_type, page_sha256: pageSha, claim_sha256: claimSha, word_count_en: actualWords });
     paragraphs.push(...paragraphRows(entry.page_identity, body));
     for (const key of ['title', 'seo_title', 'seo_description']) {
@@ -445,6 +455,7 @@ const hardGates = {
     visible_reference_registry_mismatch_count: visibleReferenceMismatches, empty_claim_file_count: emptyClaimFiles,
     invalid_claim_source_id_count: invalidClaimSourceIds, true_internal_link_violation_count: internalViolations,
     unregistered_external_link_count: unregisteredExternalLinks, body_media_reference_count: bodyMediaReferences,
+    unsupported_rendered_link_syntax_count: unsupportedRenderedLinkSyntaxPages,
     unexpected_claim_id_count: unexpectedClaimIds, missing_claim_id_count: missingClaimIds, duplicate_claim_id_count: duplicateClaimIds,
     frontmatter_manifest_mismatch_count: frontmatterManifestMismatches, sidecar_metadata_mismatch_count: sidecarMetadataMismatches,
     claim_row_schema_failure_count: claimRowSchemaFailures,
