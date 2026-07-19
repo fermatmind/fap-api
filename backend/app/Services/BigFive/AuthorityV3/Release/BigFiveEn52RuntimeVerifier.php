@@ -356,7 +356,20 @@ final class BigFiveEn52RuntimeVerifier
     /** @param list<string> $urls @return list<string> */
     private function pathsFromUrls(array $urls, string $origin): array
     {
-        $paths = array_values(array_filter(array_map(fn ($url) => $this->pathFromUrl((string) $url, $origin), $urls)));
+        $paths = [];
+        foreach ($urls as $url) {
+            $url = trim((string) $url);
+            $path = $this->pathFromUrl($url, $origin);
+            if ($path === '') {
+                $rejectedPath = parse_url($url, PHP_URL_PATH);
+                if (is_string($rejectedPath) && $this->isBigFivePath($rejectedPath)) {
+                    throw new RuntimeException('discoverability_url_invalid');
+                }
+
+                continue;
+            }
+            $paths[] = $path;
+        }
         sort($paths);
 
         return $paths;
@@ -387,10 +400,15 @@ final class BigFiveEn52RuntimeVerifier
     /** @param list<string> $paths @return list<string> */
     private function bigFiveSubset(array $paths): array
     {
-        $paths = array_values(array_filter($paths, fn ($path) => preg_match('#^/(?:en|zh)/personality/big-five(?:/|$)#', $path) === 1));
+        $paths = array_values(array_filter($paths, fn ($path) => $this->isBigFivePath((string) $path)));
         sort($paths);
 
         return $paths;
+    }
+
+    private function isBigFivePath(string $path): bool
+    {
+        return preg_match('#^/(?:en|zh)/personality/big-five(?:/|$)#', $path) === 1;
     }
 
     private function pathFromUrl(string $url, string $origin): string

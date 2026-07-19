@@ -231,6 +231,9 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                 default => 'llms_full_cohort_mismatch',
             };
             $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), $error);
+
+            $this->fakeHealthyPublicRuntime(rejectedExtraSurface: $surface);
+            $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'discoverability_url_invalid');
         }
     }
 
@@ -299,6 +302,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         ?string $duplicateSurface = null,
         bool $queryAliasLocation = false,
         ?string $sitemapNonLocOnlyPath = null,
+        ?string $rejectedExtraSurface = null,
     ): void {
         Http::swap(new Factory);
         Http::preventStrayRequests();
@@ -307,7 +311,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
             ? array_values(array_diff($completePaths, [$omitPath]))
             : $completePaths;
         $aliases = BigFiveCanonicalRouteCatalog::reviewedRedirectPaths();
-        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath) {
+        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath, $rejectedExtraSurface) {
             $url = $request->url();
             $path = (string) parse_url($url, PHP_URL_PATH);
             if ($path === '/api/v0.5/personality-content-assets') {
@@ -328,7 +332,12 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                     $surfacePaths[] = $completePaths[0];
                 }
 
-                return Http::response(['ok' => true, 'items' => array_map(fn ($item) => ['loc' => 'https://fermatmind.com'.$item], $surfacePaths)], 200);
+                $items = array_map(fn ($item) => ['loc' => 'https://fermatmind.com'.$item], $surfacePaths);
+                if ($rejectedExtraSurface === $path) {
+                    $items[] = ['loc' => 'https://off-origin.invalid/en/personality/big-five/openness'];
+                }
+
+                return Http::response(['ok' => true, 'items' => $items], 200);
             }
             if (in_array($path, ['/sitemap.xml', '/llms.txt', '/llms-full.txt'], true)) {
                 $surfacePaths = $path === $omitOnlySurface && $omitPath !== null
@@ -351,16 +360,24 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                         : '<!-- https://fermatmind.com'.$sitemapNonLocOnlyPath.' -->'
                             .'<xhtml:link href="https://fermatmind.com'.$sitemapNonLocOnlyPath.'" />'
                             .'<image:image><image:loc>https://fermatmind.com'.$sitemapNonLocOnlyPath.'</image:loc></image:image>';
+                    $rejectedEntry = $rejectedExtraSurface === $path
+                        ? '<url><loc>https://off-origin.invalid/en/personality/big-five/openness</loc></url>'
+                        : '';
 
                     return Http::response(
                         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'
-                            .$entries.$nonLocEvidence.'</urlset>',
+                            .$entries.$nonLocEvidence.$rejectedEntry.'</urlset>',
                         200,
                         ['Content-Type' => 'application/xml'],
                     );
                 }
 
-                return Http::response(implode("\n", array_map(fn ($item) => 'https://fermatmind.com'.$item, $surfacePaths)), 200);
+                $body = implode("\n", array_map(fn ($item) => 'https://fermatmind.com'.$item, $surfacePaths));
+                if ($rejectedExtraSurface === $path) {
+                    $body .= "\nhttps://off-origin.invalid/en/personality/big-five/openness";
+                }
+
+                return Http::response($body, 200);
             }
             if (isset($aliases[$path])) {
                 $location = 'https://fermatmind.com'.$aliases[$path].($queryAliasLocation ? '?utm=bad' : '');
