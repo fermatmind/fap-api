@@ -28,6 +28,22 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('skip_deploy', $source);
     }
 
+    public function test_standard_staging_evidence_allows_only_audited_control_only_byte_equivalent_delta(): void
+    {
+        $eligibility = $this->between($this->workflow(), '  deployment-eligibility:', '  deploy-production:');
+
+        $this->assertStringContainsString('if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]', $eligibility);
+        $this->assertStringContainsString('if [ "$RESOLVED_DEPLOY_MODE" != standard ]', $eligibility);
+        $this->assertStringContainsString('git merge-base --is-ancestor "$STAGING_SHA" "$DEPLOY_SHA"', $eligibility);
+        $this->assertStringContainsString('git diff --no-renames --name-only "$STAGING_SHA" "$DEPLOY_SHA"', $eligibility);
+        $this->assertStringContainsString('.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)', $eligibility);
+        $this->assertStringContainsString('staging-equivalence refused non-audited delta path: $path', $eligibility);
+        $this->assertStringContainsString('backend/resources backend/routes backend/artisan backend/composer.json backend/composer.lock deploy.php', $eligibility);
+        $this->assertStringContainsString('staging-equivalence refused a runtime or deployment artifact change.', $eligibility);
+        $this->assertStringContainsString('deployed runtime artifact is byte-equivalent across the audited control-only delta.', $eligibility);
+        $this->assertStringContainsString('non-standard deployment requires staging evidence for the exact deploy SHA.', $eligibility);
+    }
+
     public function test_revision_queue_restart_and_both_smoke_steps_are_mandatory(): void
     {
         $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';

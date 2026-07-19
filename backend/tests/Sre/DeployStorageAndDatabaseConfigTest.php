@@ -167,7 +167,9 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('.name == "Deploy Application"', $source);
         $this->assertStringContainsString('.path == ".github/workflows/deploy.yml"', $source);
         $this->assertStringContainsString('.head_branch == "main"', $source);
-        $this->assertStringContainsString('.head_sha == $sha', $source);
+        $this->assertStringContainsString('STAGING_SHA="$(jq -r \'.head_sha\' <<<"$RUN_JSON")"', $source);
+        $this->assertStringContainsString('staging evidence does not cover the exact deploy artifact.', $source);
+        $this->assertStringContainsString('staging-equivalence refused a runtime or deployment artifact change.', $source);
         $this->assertStringContainsString('.name == "Deploy checks (staging)" and .conclusion == "success"', $source);
         $this->assertStringContainsString('.name == "Deploy (staging)" and .conclusion == "success"', $source);
         $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $source);

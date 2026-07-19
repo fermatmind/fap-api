@@ -222,14 +222,59 @@ jobs:
           echo "deploy_mode=$RESOLVED_DEPLOY_MODE" >> "$GITHUB_OUTPUT"
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
-          jq -e --arg sha "$DEPLOY_SHA" \
+          jq -e \
             '.name == "Deploy Application"
              and .path == ".github/workflows/deploy.yml"
              and (.event == "push" or .event == "workflow_dispatch")
              and .status == "completed"
              and .conclusion == "success"
              and .head_branch == "main"
-             and .head_sha == $sha' <<<"$RUN_JSON" >/dev/null
+             and (.head_sha | type == "string" and test("^[0-9a-f]{40}$"))' <<<"$RUN_JSON" >/dev/null
+          STAGING_SHA="$(jq -r '.head_sha' <<<"$RUN_JSON")"
+
+          if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]; then
+            if [ "$RESOLVED_DEPLOY_MODE" != standard ]; then
+              echo "non-standard deployment requires staging evidence for the exact deploy SHA." >&2
+              exit 1
+            fi
+            if ! git cat-file -e "${STAGING_SHA}^{commit}"; then
+              echo "staging-equivalence check cannot resolve the staged revision." >&2
+              exit 1
+            fi
+            if ! git merge-base --is-ancestor "$STAGING_SHA" "$DEPLOY_SHA"; then
+              echo "staging-equivalence check requires the staged revision to be an ancestor of the deploy SHA." >&2
+              exit 1
+            fi
+
+            mapfile -t STAGING_DELTA < <(git diff --no-renames --name-only "$STAGING_SHA" "$DEPLOY_SHA")
+            if [ "${#STAGING_DELTA[@]}" -eq 0 ]; then
+              echo "staging-equivalence check refused an unexplained SHA mismatch." >&2
+              exit 1
+            fi
+            STAGING_EQUIVALENT_SCOPE=true
+            for path in "${STAGING_DELTA[@]}"; do
+              case "$path" in
+                .github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)
+                  echo "staging-equivalence accepted audited deployment-control path: $path"
+                  ;;
+                *)
+                  STAGING_EQUIVALENT_SCOPE=false
+                  echo "staging-equivalence refused non-audited delta path: $path" >&2
+                  ;;
+              esac
+            done
+            if [ "$STAGING_EQUIVALENT_SCOPE" != true ]; then
+              echo "staging evidence does not cover the exact deploy artifact." >&2
+              exit 1
+            fi
+            if ! git diff --quiet "$STAGING_SHA" "$DEPLOY_SHA" -- \
+              backend/app backend/bootstrap backend/config backend/database backend/public \
+              backend/resources backend/routes backend/artisan backend/composer.json backend/composer.lock deploy.php; then
+              echo "staging-equivalence refused a runtime or deployment artifact change." >&2
+              exit 1
+            fi
+            echo "staging evidence accepted: deployed runtime artifact is byte-equivalent across the audited control-only delta."
+          fi
 
           JOBS_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}/jobs?per_page=100")"
           jq -e \
