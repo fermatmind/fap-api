@@ -21,6 +21,8 @@ const csvCell = (value) => /[",\n\r]/.test(String(value ?? ''))
     ? `"${String(value ?? '').replaceAll('"', '""')}"`
     : String(value ?? '');
 const csv = (rows) => `${rows.map((row) => row.map(csvCell).join(',')).join('\n')}\n`;
+const EXPECTED_FRONTMATTER_KEYS = new Set(['asset_type', 'author_display_name', 'backend_locale_contract', 'canonical_path', 'claim_mapping_version', 'clinical_reviewed', 'cms_draft_created', 'content_identity', 'content_method', 'excerpt', 'expert_endorsement', 'framework', 'h1', 'locale', 'media_supported', 'org_id', 'package_version', 'parent_identity', 'primary_intent', 'publish_allowed', 'review_mode', 'reviewer_admin_user_id', 'reviewer_display_name', 'seo_description', 'seo_title', 'slug', 'source_content_identity', 'source_ids', 'source_locale', 'source_page_sha256', 'source_registry_version', 'status', 'substantive_updated_at', 'target_questions', 'terminology_version', 'title', 'translation_method', 'translation_reviewed_at', 'translation_status', 'word_count_en']);
+const EXPECTED_SIDECAR_KEYS = new Set(['canonical_path', 'claim_count', 'claims', 'en_output_path', 'entity_key', 'entity_type', 'faq_count_en', 'faq_count_zh', 'faq_map', 'output_sha256', 'page_identity', 'section_count_en', 'section_count_zh', 'section_map', 'slug', 'source_ids_en', 'source_ids_zh', 'terminology_version', 'translation_status', 'untranslated_fragment_count', 'word_count_en', 'zh_source_path', 'zh_source_sha256']);
 
 function parseFrontmatter(markdown) {
     const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -191,7 +193,9 @@ for (const entry of manifest.entries) {
         terminology_version: manifest.authority.terminology_version, claim_mapping_version: manifest.authority.claim_mapping_version,
         cms_draft_created: false, publish_allowed: false, media_supported: false,
     };
-    const frontmatterMatches = Object.entries(expectedFrontmatter).every(([key, value]) => frontmatter[key] === value)
+    const frontmatterMatches = Object.keys(frontmatter).length === EXPECTED_FRONTMATTER_KEYS.size
+        && Object.keys(frontmatter).every((key) => EXPECTED_FRONTMATTER_KEYS.has(key))
+        && Object.entries(expectedFrontmatter).every(([key, value]) => frontmatter[key] === value)
         && JSON.stringify([...(frontmatter.source_ids ?? [])].sort()) === JSON.stringify([...entry.zh_source_ids].sort())
         && frontmatter.h1 === body.match(/^#\s+(.+)$/m)?.[1];
     if (!frontmatterMatches) frontmatterManifestMismatches += 1;
@@ -212,7 +216,7 @@ for (const entry of manifest.entries) {
     const claimRows = claims.claims ?? [];
     if (claimRows.length === 0) emptyClaimFiles += 1;
     for (const claim of claimRows) {
-        if (!visible.includes(visibleText(claim.visible_claim))) visibleReferenceMismatches += 1;
+        if (!body.includes(claim.visible_claim)) visibleReferenceMismatches += 1;
         for (const sourceId of claim.source_ids ?? []) {
             if (!registeredUrls.has(sourceId)) invalidClaimSourceIds += 1;
             else if (registeredUrls.get(sourceId) && !claim.visible_claim.includes(`[${sourceId}](${registeredUrls.get(sourceId)})`)) visibleReferenceMismatches += 1;
@@ -241,7 +245,9 @@ for (const entry of manifest.entries) {
     const faqMapMatches = (claims.faq_map ?? []).length === entry.zh_faq_count
         && (claims.faq_map ?? []).every((row, index) => row.zh_question === entry.zh_faq_questions[index]
             && row.en_question === faqs[index]?.[1]);
-    const sidecarMetadataMatches = claims.page_identity === entry.page_identity && claims.zh_source_path === entry.zh_source_path
+    const sidecarMetadataMatches = Object.keys(claims).length === EXPECTED_SIDECAR_KEYS.size
+        && Object.keys(claims).every((key) => EXPECTED_SIDECAR_KEYS.has(key))
+        && claims.page_identity === entry.page_identity && claims.zh_source_path === entry.zh_source_path
         && claims.zh_source_sha256 === entry.zh_source_sha256 && claims.en_output_path === entry.en_output_path
         && claims.entity_type === entry.entity_type && claims.entity_key === entry.entity_key && claims.slug === entry.en_slug
         && claims.canonical_path === entry.en_canonical_path && claims.section_count_zh === entry.zh_section_count
@@ -388,17 +394,6 @@ await emit('qa/duplicate-report.csv', csv(duplicateRows));
 await emit('qa/faq-report.csv', csv(faqRows));
 await emit('qa/word-count-report.csv', csv(wordRows));
 
-let staleQaReports = 0;
-if (OUTPUT_ROOT !== ROOT) {
-    for (const [relativePath, expectedBytes] of emitted) {
-        try {
-            if (!expectedBytes.equals(await readFile(path.join(ROOT, relativePath)))) staleQaReports += 1;
-        } catch {
-            staleQaReports += 1;
-        }
-    }
-}
-
 const hardGates = {
     page_count: cohort.length, translated_page_count: ledger.translated_page_count, pending_page_count: ledger.pending_page_count,
     word_count_mismatch_count: wordMismatches, source_id_conflict_count: sourceConflicts,
@@ -410,7 +405,7 @@ const hardGates = {
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
     manifest_audit_failure_count: manifestAuditFailures, translation_equivalence_failure_count: equivalenceFailures,
     seo_geo_failure_count: seoGeoFailures, faq_failure_count: faqFailures,
-    stale_qa_report_count: staleQaReports, substantive_body_exact_duplicate_count: substantiveExactDuplicates,
+    stale_qa_report_count: 0, substantive_body_exact_duplicate_count: substantiveExactDuplicates,
     substantive_high_similarity_count: substantiveHighSimilarity, untranslated_public_chinese_fragment_count: untranslatedChinese,
     legacy_alias_page_count: legacyLinks + manifestAudit.legacy_alias_page_count, faq_count: faqTotal,
     qa_status: 'PASS', cms_write_allowed: false, publish_allowed: false, writes_committed: false,
@@ -439,7 +434,6 @@ const packageManifest = {
     qa_reports: reportHashes, final_acceptance_path: 'qa/final-acceptance.md', final_hashes_path: 'final-hashes.json', constraints: hardGates,
 };
 const packageManifestBytes = jsonBytes(packageManifest);
-await emit('package-manifest.json', packageManifestBytes);
 const packageFileSha = sha256(packageManifestBytes);
 const finalAcceptance = `# Big Five EN52 final acceptance\n\nStatus: **PASS / 52 OF 52 / ZERO CONTROLLED WRITES**\n\n`+
     `Reviewed date: ${REVIEWED_DATE} (Asia/Shanghai editorial date)\n\n`+
@@ -451,7 +445,6 @@ const finalAcceptance = `# Big Five EN52 final acceptance\n\nStatus: **PASS / 52
     `- Package payload SHA-256: \`${payloadSha}\`\n`+
     `- Package manifest file SHA-256: \`${packageFileSha}\`\n\n`+
     `## Authority boundary\n\nThis package creates no CMS draft or working revision and performs no publication, production/database, media, search-submission, deployment, runtime SEO, API, route, sitemap, llms, JSON-LD, fap-web, or legacy-alias write.\n`;
-await emit('qa/final-acceptance.md', finalAcceptance);
 const finalHashes = {
     schema_version: 'big-five-en52-final-hashes.v1', reviewed_date: REVIEWED_DATE,
     source_content_sha256: manifest.authority.source_content_sha256,
@@ -459,7 +452,22 @@ const finalHashes = {
     final_acceptance_sha256: sha256(Buffer.from(finalAcceptance)), page_count: 52, claim_file_count: 52,
     qa_status: 'PASS', cms_write_allowed: false, publish_allowed: false, writes_committed: false,
 };
-await emit('final-hashes.json', jsonBytes(finalHashes));
+const finalArtifacts = new Map([
+    ['package-manifest.json', Buffer.from(packageManifestBytes)],
+    ['qa/final-acceptance.md', Buffer.from(finalAcceptance)],
+    ['final-hashes.json', Buffer.from(jsonBytes(finalHashes))],
+]);
+if (OUTPUT_ROOT !== ROOT) {
+    for (const [relativePath, expectedBytes] of new Map([...emitted, ...finalArtifacts])) {
+        try {
+            if (!expectedBytes.equals(await readFile(path.join(ROOT, relativePath)))) hardGates.stale_qa_report_count += 1;
+        } catch {
+            hardGates.stale_qa_report_count += 1;
+        }
+    }
+    if (hardGates.stale_qa_report_count !== 0) throw new Error(`Final hard gates failed: ${JSON.stringify([['stale_qa_report_count', hardGates.stale_qa_report_count]])}`);
+}
+for (const [relativePath, bytes] of finalArtifacts) await emit(relativePath, bytes);
 
 process.stdout.write(jsonBytes({
     status: 'PASS_BIG_FIVE_EN52_FINAL_QA', output_root: OUTPUT_ROOT, ...hardGates,
