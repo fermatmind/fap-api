@@ -292,7 +292,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('5fcf54132504ef85978a5424e428fb56763ffbaa7c60f50b94b9c91fc3e85dc8', $source);
         $this->assertStringContainsString('7a84cda503b6f328f0659ee5bd41c85f51c1eca44ac9aa7cfa721d59ab6197e2', $source);
         $this->assertStringContainsString('10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e', $source);
-        $this->assertStringContainsString('719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359', $source);
+        $this->assertStringNotContainsString('719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359', $source);
+        $this->assertStringContainsString('d39be1b48b4ecc8a11d5eef20559cf9bc0ad05b9b82fb29b3ecdca09f3db4f39', $source);
         $this->assertStringContainsString('5b8afeec191d348dbb888c6cb4a63ea1e167e1a004bf35e41c1e64399f0c8369', $source);
         $this->assertStringContainsString('c9b3c3fa7f68a73e946f6bbc0a3f02ea6a95f3cbf5e9d3141778dd7d6408e03d', $source);
         $this->assertStringContainsString('6f7148e9787127ce128e19f0a37832be78119c7f1d9dcdf3a5f4d83aa8295ab9', $source);
@@ -304,6 +305,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("promotion_flags='--dry-run'", $source);
         $this->assertStringContainsString("stage_flags='--write --production-write-authorized --no-publication-change --no-indexability-change --no-sitemap --no-llms --no-search-release'", $source);
         $this->assertStringContainsString("promotion_flags='--write --production-content-write-authorized --no-publication-change --no-indexability-change --no-sitemap --no-llms --no-search-release'", $source);
+        $this->assertSame(3, substr_count($source, "jq -j -S -c '.comparison_public_projection_v1.sections'"));
         $this->assertStringContainsString('test "$before_sections_sha" = "$EXPECTED_PUBLIC_SECTIONS_SHA256"', $source);
         $this->assertStringContainsString('test "$post_sections_sha" = "$EXPECTED_POST_PUBLIC_SECTIONS_SHA256"', $source);
         $this->assertStringContainsString('--rollback-on-readback-failure-authorized', $source);

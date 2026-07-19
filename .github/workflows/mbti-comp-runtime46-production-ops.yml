@@ -50,7 +50,7 @@ jobs:
       SOURCE_PACKAGE_SHA256: "5fcf54132504ef85978a5424e428fb56763ffbaa7c60f50b94b9c91fc3e85dc8"
       AUTHORIZATION_PAYLOAD_SHA256: "7a84cda503b6f328f0659ee5bd41c85f51c1eca44ac9aa7cfa721d59ab6197e2"
       EXACT_PAYLOAD_SHA256: "10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e"
-      EXPECTED_PUBLIC_SECTIONS_SHA256: "719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359"
+      EXPECTED_PUBLIC_SECTIONS_SHA256: "d39be1b48b4ecc8a11d5eef20559cf9bc0ad05b9b82fb29b3ecdca09f3db4f39"
       PROMOTION_PACKAGE_SHA256: "5b8afeec191d348dbb888c6cb4a63ea1e167e1a004bf35e41c1e64399f0c8369"
       PROMOTION_AUTHORIZATION_SHA256: "c9b3c3fa7f68a73e946f6bbc0a3f02ea6a95f3cbf5e9d3141778dd7d6408e03d"
       EXPECTED_POST_PUBLIC_SECTIONS_SHA256: "6f7148e9787127ce128e19f0a37832be78119c7f1d9dcdf3a5f4d83aa8295ab9"
@@ -153,7 +153,7 @@ jobs:
             and .seo_meta.canonical_url == "https://fermatmind.com/zh/personality/intp-a-vs-intp-t"
             and (.seo_meta.robots | ascii_downcase | gsub(" "; "")) == "index,follow"
           ' artifacts/public-before.json >/dev/null
-          before_sections_sha="$(jq -S -c '.comparison_public_projection_v1.sections' artifacts/public-before.json | sha256sum | awk '{print $1}')"
+          before_sections_sha="$(jq -j -S -c '.comparison_public_projection_v1.sections' artifacts/public-before.json | sha256sum | awk '{print $1}')"
           test "$before_sections_sha" = "$EXPECTED_PUBLIC_SECTIONS_SHA256"
           printf '%s\n' "$before_sections_sha" > artifacts/public-before-sections.sha256
 
@@ -248,7 +248,7 @@ jobs:
             test "$after_projection_sha" = "$before_projection_sha" || readback_ok=0
           else
             jq -e '[.comparison_public_projection_v1.sections[].id] == ["biggest_difference","quick_judgment_table","easy_misread","work_scenarios","relationship_scenarios","stress_scenarios","do_not_misjudge","common_ground","usage_boundary"]' artifacts/public-after.json >/dev/null || readback_ok=0
-            post_sections_sha="$(jq -S -c '.comparison_public_projection_v1.sections' artifacts/public-after.json | sha256sum | awk '{print $1}')"
+            post_sections_sha="$(jq -j -S -c '.comparison_public_projection_v1.sections' artifacts/public-after.json | sha256sum | awk '{print $1}')"
             test "$post_sections_sha" = "$EXPECTED_POST_PUBLIC_SECTIONS_SHA256" || readback_ok=0
           fi
 
@@ -258,7 +258,7 @@ jobs:
               "cd '$DEPLOY_PATH/current/backend' && php artisan personality:mbti-comp-runtime46-intp-promote --package='$PACKAGE_PATH' --source-package-sha256='$SOURCE_PACKAGE_SHA256' --authorization-payload-sha256='$AUTHORIZATION_PAYLOAD_SHA256' --promotion-package-sha256='$PROMOTION_PACKAGE_SHA256' --promotion-authorization-sha256='$PROMOTION_AUTHORIZATION_SHA256' --import-scope-mode=single_intp_at_content_revision_only --record-count=1 --rollback --production-content-write-authorized --rollback-on-readback-failure-authorized --no-publication-change --no-indexability-change --no-sitemap --no-llms --no-search-release --json --no-interaction --no-ansi" \
               | tee artifacts/rollback-operation.json
             curl --retry 3 --retry-all-errors --retry-delay 2 -fsS --connect-timeout 5 --max-time 45 "$PUBLIC_API_URL" | tee artifacts/public-after-rollback.json >/dev/null
-            rollback_sections_sha="$(jq -S -c '.comparison_public_projection_v1.sections' artifacts/public-after-rollback.json | sha256sum | awk '{print $1}')"
+            rollback_sections_sha="$(jq -j -S -c '.comparison_public_projection_v1.sections' artifacts/public-after-rollback.json | sha256sum | awk '{print $1}')"
             test "$rollback_sections_sha" = "$EXPECTED_PUBLIC_SECTIONS_SHA256"
             echo "Exact write readback failed; previous INTP public section restored." >&2
             exit 1
