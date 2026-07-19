@@ -97617,8 +97617,8 @@
     "depends_on": [
       "SOLO-OWNER-OPS-APPROVAL-05"
     ],
-      "status": "github_checks_pending",
-      "commit_sha": "545d7775963088d6a8bdf790ef9557367a782960",
+      "status": "ready_to_merge",
+      "commit_sha": "27622bfa02a1464f51a51aabed79cc1e4a828780",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3185",
     "checks": {
       "dependency": {
@@ -97630,14 +97630,14 @@
           "evidence": "Focused public-contract suites passed across registry, Article, ContentPage, Support, Interpretation, Research, Personality, Big Five, MBTI, RIASEC, Career, DailyGiving, Enneagram runtime readback, and the exact runtime-freeze classifier. After strict absolute timestamp parsing was added, every manifest-focused public projection suite was rerun: contract/registry 32/406, CMS public surfaces 42 warnings/628 assertions, Personality/Big Five/MBTI 44 warnings/6787 assertions, RIASEC 13 warnings/1221 assertions, Career 63 warnings/780 assertions, DailyGiving 21 warnings/87 assertions, Enneagram runtime 1 warning/31 assertions, and runtime-freeze 2 warnings/6 assertions. The guarded full bash backend/scripts/ci_verify_mbti.sh gate was rerun and exited 0 through Big Five 1543/188110, Personality 89/5853, Enneagram, MBTI smoke, migration, auth, OpenAPI, commerce security, dependency, queue, and downstream regression gates. Changed-PHP Pint and syntax, Composer strict, generated registry parity, YAML/JSON, final exact 50-path scope, and diff checks passed. The first registry rerun correctly found that two later review repairs lacked registered @review-surface annotations (1 failure / 406 assertions); Career cache and Enneagram runtime readback were annotated and the retry passed. Earlier resolved failures remain recorded in prior transitions."
       },
       "github": {
-          "status": "pending",
-          "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, 26052fc118883c28dbefa0b5f3d398eb0e0b1283, 1ce94dfdedbfcbfef9d361444b4c975df73e94e9, f36da9db46e183ff4f4b06e166a995c673dcf6d6, c7f6ef0c272f071e4894fb944b6142e912405e81, 5ab9e9e33dfb0df3c510578001998125fd58be73, 9cb2e6b208484730161e432a7000a25a01d2ed91, 8da2203a28a3baab24128d08d0fe53c9e4100ba2, f1cb695b10215a27e60884629fd12eb60db0fee7, and d81d15fcbc38b4afdbe72c21a395ffa7e64b507d. Exact-head review on d81d15fcb found one P2 loose timestamp parsing gap. PublicReviewContract now accepts string timestamps only when they are valid ISO absolute timestamps with Z or an explicit offset; relative, timezone-less, malformed, and invalid calendar timestamps fail closed to null. A new exact-head check/review cycle is pending."
+          "status": "passed",
+          "evidence": "All nine required checks passed on heads ac35ced41f6014ea9b3a967f4fbbbfaf5a40abc8, f25279419bed4c1326d27f9264604b8a388a75ef, 26052fc118883c28dbefa0b5f3d398eb0e0b1283, 1ce94dfdedbfcbfef9d361444b4c975df73e94e9, f36da9db46e183ff4f4b06e166a995c673dcf6d6, c7f6ef0c272f071e4894fb944b6142e912405e81, 5ab9e9e33dfb0df3c510578001998125fd58be73, 9cb2e6b208484730161e432a7000a25a01d2ed91, 8da2203a28a3baab24128d08d0fe53c9e4100ba2, f1cb695b10215a27e60884629fd12eb60db0fee7, d81d15fcbc38b4afdbe72c21a395ffa7e64b507d, and 27622bfa02a1464f51a51aabed79cc1e4a828780. Exact-head review on d81d15fcb found and the branch repaired one P2 loose timestamp parsing gap. Codex reviewed 27622bfa0 with no major issues, all review threads are resolved, and GitHub reports CLEAN/MERGEABLE."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-        "github_checks_green": false,
+        "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97725,9 +97725,14 @@
           "at": "2026-07-19T00:30:14Z",
           "status": "github_checks_pending",
           "note": "All nine checks passed on the ready-to-merge ledger head d81d15fcb, then exact-head Codex review identified that Carbon's loose string parser could invent request-time or timezone-dependent public review timestamps. Replaced it with strict ISO absolute timestamp validation, added valid-offset and fail-closed regression cases, and annotated the later Career cache and Enneagram runtime review consumers after the first registry rerun exposed both omissions (1 failed / 406 assertions). All manifest-focused suites, 46-file Pint/syntax, Composer, structured files, post-commit runtime-freeze, and the single guarded full ci_verify_mbti.sh gate passed; generated Big Five compile noise was restored exactly. Final scope remains 50 paths with no production or external-state action; a new exact-head CI/review cycle is pending."
+        },
+        {
+          "at": "2026-07-19T00:38:48Z",
+          "status": "ready_to_merge",
+          "note": "All nine required checks passed on exact head 27622bfa0. Codex reported no major issues for that exact commit, all review threads are resolved, GitHub reports CLEAN/MERGEABLE, and the merge-base scope remains exactly 50 changed paths with zero outside the 51-entry allowlist. No production or external-state action occurred beyond the authorized PR lifecycle. The metadata-only ready-to-merge ledger commit requires the final exact-head CI and review cycle before squash merge."
         }
       ],
-      "updated_at": "2026-07-19T00:30:14Z"
+      "updated_at": "2026-07-19T00:38:48Z"
   },
   "CAREER-DETAIL-COLD-MISS-DEGRADE-01": {
     "id": "CAREER-DETAIL-COLD-MISS-DEGRADE-01",
