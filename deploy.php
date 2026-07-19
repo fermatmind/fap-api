@@ -362,7 +362,39 @@ task('guard:career-detail-cache-coverage', function () {
     ));
 });
 
+/**
+ * Staging deploys may outlive legacy detail-cache TTLs while rebuilding the
+ * directory authority. Repair only the targets that are missing at the end of
+ * that rebuild, then keep the complete read-only gate below as the authority.
+ * Production is deliberately excluded from this cache-write task.
+ */
+task('career:repair-staging-detail-cache-coverage', function () {
+    if (currentHost()->getAlias() !== 'staging') {
+        writeln('<comment>Skipping staging-only Career detail cache repair.</comment>');
+
+        return;
+    }
+
+    $maximumRepairsRaw = trim((string) (getenv('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS') ?: '250'));
+    if (preg_match('/^[1-9][0-9]*$/D', $maximumRepairsRaw) !== 1 || (int) $maximumRepairsRaw > 1000) {
+        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 1000.');
+    }
+
+    $minimumTargetsRaw = trim((string) (getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS') ?: '2092'));
+    if (preg_match('/^[1-9][0-9]*$/D', $minimumTargetsRaw) !== 1) {
+        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS must be a positive base-10 integer.');
+    }
+
+    run(sprintf(
+        'timeout 300 {{bin/php}} %s career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN --minimum-targets=%d --maximum-sync-repairs=%d --json --no-interaction --no-ansi',
+        deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
+        (int) $minimumTargetsRaw,
+        (int) $maximumRepairsRaw,
+    ));
+});
+
 before('deploy:symlink', 'guard:career-detail-cache-coverage');
+before('guard:career-detail-cache-coverage', 'career:repair-staging-detail-cache-coverage');
 
 task('guard:ops-theme-asset', function () {
     $asset = deployPlaceholderPathArg('{{release_path}}', 'backend/public/css/app/ops-theme.css');
