@@ -21,6 +21,13 @@ final class BigFiveEn52RuntimeVerifier
     public const REQUEST_TIMEOUT_SECONDS = 20;
 
     /** @var list<string> */
+    private const APPROVED_PUBLIC_HOSTS = [
+        'api.fermatmind.com',
+        'fermatmind.com',
+        'www.fermatmind.com',
+    ];
+
+    /** @var list<string> */
     private const SEARCH_TABLES = [
         'seo_domestic_submission_logs',
         'seo_indexnow_submissions',
@@ -253,7 +260,7 @@ final class BigFiveEn52RuntimeVerifier
         }
         foreach (BigFiveCanonicalRouteCatalog::reviewedRedirectPaths() as $from => $to) {
             $response = $this->get($origin.$from);
-            if (! in_array($response->status(), [301, 308], true)
+            if ($response->status() !== 301
                 || $this->pathFromUrl((string) $response->header('Location'), $origin) !== $to) {
                 throw new RuntimeException('alias_redirect_boundary_mismatch');
             }
@@ -351,7 +358,6 @@ final class BigFiveEn52RuntimeVerifier
     private function pathsFromUrls(array $urls, string $origin): array
     {
         $paths = array_values(array_filter(array_map(fn ($url) => $this->pathFromUrl((string) $url, $origin), $urls)));
-        $paths = array_values(array_unique($paths));
         sort($paths);
 
         return $paths;
@@ -369,7 +375,12 @@ final class BigFiveEn52RuntimeVerifier
     private function pathFromUrl(string $url, string $origin): string
     {
         if (str_starts_with($url, '/') && ! str_starts_with($url, '//')) {
-            return (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $parts = parse_url($url);
+            if (! is_array($parts) || isset($parts['query']) || isset($parts['fragment'])) {
+                return '';
+            }
+
+            return (string) ($parts['path'] ?? '');
         }
 
         $urlParts = parse_url($url);
@@ -378,7 +389,8 @@ final class BigFiveEn52RuntimeVerifier
             || strtolower((string) ($urlParts['scheme'] ?? '')) !== strtolower((string) ($originParts['scheme'] ?? ''))
             || strtolower((string) ($urlParts['host'] ?? '')) !== strtolower((string) ($originParts['host'] ?? ''))
             || ($urlParts['port'] ?? null) !== ($originParts['port'] ?? null)
-            || isset($urlParts['user']) || isset($urlParts['pass'])) {
+            || isset($urlParts['user']) || isset($urlParts['pass'])
+            || isset($urlParts['query']) || isset($urlParts['fragment'])) {
             return '';
         }
 
@@ -455,9 +467,11 @@ final class BigFiveEn52RuntimeVerifier
     {
         $value = rtrim(trim($value), '/');
         $parts = parse_url($value);
+        $host = is_array($parts) ? strtolower(trim((string) ($parts['host'] ?? ''))) : '';
         if (! is_array($parts) || strtolower((string) ($parts['scheme'] ?? '')) !== 'https'
-            || trim((string) ($parts['host'] ?? '')) === '' || isset($parts['user']) || isset($parts['pass'])
-            || isset($parts['query']) || isset($parts['fragment']) || ($parts['path'] ?? '') !== '') {
+            || ! in_array($host, self::APPROVED_PUBLIC_HOSTS, true) || isset($parts['port'])
+            || isset($parts['user']) || isset($parts['pass']) || isset($parts['query']) || isset($parts['fragment'])
+            || ($parts['path'] ?? '') !== '') {
             throw new RuntimeException('public_origin_invalid');
         }
 

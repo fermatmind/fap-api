@@ -30,8 +30,8 @@ Example shape (placeholders are intentionally non-runnable):
 php artisan personality:big-five-en52-runtime-verify \
   --approved-sha="<40-hex-approved-main-sha>" \
   --release-name="<exact-release-name>" \
-  --api-origin="https://<public-api-origin>" \
-  --frontend-origin="https://<public-frontend-origin>" \
+  --api-origin="https://api.fermatmind.com" \
+  --frontend-origin="https://fermatmind.com" \
   --expected-zh-fingerprint="<64-hex-approved-baseline>" \
   --expected-non-target-fingerprint="<64-hex-approved-baseline>" \
   --expected-search-fingerprint="<64-hex-approved-baseline>" \

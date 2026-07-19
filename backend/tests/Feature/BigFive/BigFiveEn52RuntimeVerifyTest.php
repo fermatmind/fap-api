@@ -161,7 +161,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
     public function test_absolute_public_urls_require_the_exact_approved_origin(): void
     {
         $method = new ReflectionMethod(app(BigFiveEn52RuntimeVerifier::class), 'pathFromUrl');
-        $origin = 'https://www.example.test';
+        $origin = 'https://fermatmind.com';
 
         $this->assertSame('/en/personality/big-five/openness', $method->invoke(
             app(BigFiveEn52RuntimeVerifier::class),
@@ -170,14 +170,61 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         ));
         $this->assertSame('', $method->invoke(
             app(BigFiveEn52RuntimeVerifier::class),
-            'https://www.example.test.evil/en/personality/big-five/openness',
+            'https://fermatmind.com.evil/en/personality/big-five/openness',
             $origin,
         ));
         $this->assertSame('', $method->invoke(
             app(BigFiveEn52RuntimeVerifier::class),
-            'https://www.example.test:443/en/personality/big-five/openness',
+            'https://fermatmind.com:443/en/personality/big-five/openness',
             $origin,
         ));
+        $this->assertSame('', $method->invoke(
+            app(BigFiveEn52RuntimeVerifier::class),
+            $origin.'/en/personality/big-five/openness?utm=bad',
+            $origin,
+        ));
+        $this->assertSame('', $method->invoke(
+            app(BigFiveEn52RuntimeVerifier::class),
+            '/en/personality/big-five/openness#fragment',
+            $origin,
+        ));
+    }
+
+    public function test_verify_origins_are_locked_to_exact_public_fermatmind_hosts(): void
+    {
+        $method = new ReflectionMethod(app(BigFiveEn52RuntimeVerifier::class), 'httpsOrigin');
+        $verifier = app(BigFiveEn52RuntimeVerifier::class);
+
+        foreach (['https://api.fermatmind.com', 'https://fermatmind.com', 'https://www.fermatmind.com'] as $origin) {
+            $this->assertSame($origin, $method->invoke($verifier, $origin));
+        }
+        foreach (['https://127.0.0.1', 'https://localhost', 'https://internal.fermatmind.com', 'https://fermatmind.com:443'] as $origin) {
+            $this->expectFailureCode(fn () => $method->invoke($verifier, $origin), 'public_origin_invalid');
+        }
+    }
+
+    public function test_redirect_status_query_and_duplicate_discoverability_fail_closed(): void
+    {
+        $this->seedAndPublish();
+        $verifier = app(BigFiveEn52RuntimeVerifier::class);
+        $approval = $this->approval($verifier);
+
+        $this->fakeHealthyPublicRuntime(redirectStatus: 308);
+        $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'alias_redirect_boundary_mismatch');
+
+        $this->fakeHealthyPublicRuntime(queryAliasLocation: true);
+        $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'alias_redirect_boundary_mismatch');
+
+        foreach (['/api/v0.5/seo/sitemap-source', '/sitemap.xml', '/llms.txt', '/llms-full.txt'] as $surface) {
+            $this->fakeHealthyPublicRuntime(duplicateSurface: $surface);
+            $error = match ($surface) {
+                '/api/v0.5/seo/sitemap-source' => 'sitemap_source_cohort_mismatch',
+                '/sitemap.xml' => 'sitemap_cohort_mismatch',
+                '/llms.txt' => 'llms_cohort_mismatch',
+                default => 'llms_full_cohort_mismatch',
+            };
+            $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), $error);
+        }
     }
 
     private function seedAndPublish(): void
@@ -213,8 +260,8 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         return [
             'approved_sha' => self::APPROVED_SHA,
             'release_name' => self::RELEASE_NAME,
-            'api_origin' => 'https://api.example.test',
-            'frontend_origin' => 'https://www.example.test',
+            'api_origin' => 'https://api.fermatmind.com',
+            'frontend_origin' => 'https://fermatmind.com',
             'package_path' => $this->packagePath,
             'expected_zh_fingerprint' => $cohort['zh_fingerprint'],
             'expected_non_target_fingerprint' => $cohort['non_target_fingerprint'],
@@ -228,8 +275,13 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         return ['sha' => self::APPROVED_SHA, 'name' => self::RELEASE_NAME];
     }
 
-    private function fakeHealthyPublicRuntime(?string $omitPath = null, ?string $omitOnlySurface = null): void
-    {
+    private function fakeHealthyPublicRuntime(
+        ?string $omitPath = null,
+        ?string $omitOnlySurface = null,
+        int $redirectStatus = 301,
+        ?string $duplicateSurface = null,
+        bool $queryAliasLocation = false,
+    ): void {
         Http::swap(new Factory);
         Http::preventStrayRequests();
         $completePaths = [...array_column(BigFiveCanonicalRouteCatalog::canonicalEntries('en'), 'path'), ...array_column(BigFiveCanonicalRouteCatalog::canonicalEntries('zh-CN'), 'path')];
@@ -237,7 +289,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
             ? array_values(array_diff($completePaths, [$omitPath]))
             : $completePaths;
         $aliases = BigFiveCanonicalRouteCatalog::reviewedRedirectPaths();
-        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface) {
+        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation) {
             $url = $request->url();
             $path = (string) parse_url($url, PHP_URL_PATH);
             if ($path === '/api/v0.5/personality-content-assets') {
@@ -253,17 +305,27 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                 return Http::response(['ok' => true, 'items' => $items, 'pagination' => ['total' => 52]], 200);
             }
             if ($path === '/api/v0.5/seo/sitemap-source') {
-                return Http::response(['ok' => true, 'items' => array_map(fn ($item) => ['loc' => 'https://www.example.test'.$item], $allPaths)], 200);
+                $surfacePaths = $allPaths;
+                if ($duplicateSurface === $path) {
+                    $surfacePaths[] = $completePaths[0];
+                }
+
+                return Http::response(['ok' => true, 'items' => array_map(fn ($item) => ['loc' => 'https://fermatmind.com'.$item], $surfacePaths)], 200);
             }
             if (in_array($path, ['/sitemap.xml', '/llms.txt', '/llms-full.txt'], true)) {
                 $surfacePaths = $path === $omitOnlySurface && $omitPath !== null
                     ? array_values(array_diff($completePaths, [$omitPath]))
                     : $allPaths;
+                if ($duplicateSurface === $path) {
+                    $surfacePaths[] = $completePaths[0];
+                }
 
-                return Http::response(implode("\n", array_map(fn ($item) => 'https://www.example.test'.$item, $surfacePaths)), 200);
+                return Http::response(implode("\n", array_map(fn ($item) => 'https://fermatmind.com'.$item, $surfacePaths)), 200);
             }
             if (isset($aliases[$path])) {
-                return Http::response('', 301, ['Location' => 'https://www.example.test'.$aliases[$path]]);
+                $location = 'https://fermatmind.com'.$aliases[$path].($queryAliasLocation ? '?utm=bad' : '');
+
+                return Http::response('', $redirectStatus, ['Location' => $location]);
             }
             if (in_array($path, $allPaths, true)) {
                 return Http::response('ok', 200);
