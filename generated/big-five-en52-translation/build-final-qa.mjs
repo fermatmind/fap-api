@@ -126,6 +126,7 @@ const releaseBytes = await readFile(path.resolve(ROOT, '..', 'big-five-authority
 const release = JSON.parse(releaseBytes);
 const releaseByAuthority = new Map(release.assets.map((asset) => [asset.authority_asset_key, asset]));
 const registeredUrls = new Map(registry.sources.map((source) => [source.source_id, source.verified_public_url]));
+const registeredExternalUrls = new Set(registeredUrls.values());
 const canonicalSet = new Set(manifest.entries.map((entry) => entry.en_canonical_path));
 const aliasKeys = new Set(['emotional-stability', 'high-agreeableness', 'high-conscientiousness', 'high-extraversion', 'high-neuroticism', 'high-openness', 'low-agreeableness', 'low-conscientiousness', 'low-extraversion', 'low-openness']);
 const entryByIdentity = new Map(manifest.entries.map((entry) => [entry.page_identity, entry]));
@@ -163,6 +164,8 @@ const paragraphs = [];
 const titleOwners = new Map();
 const clinicalRisks = [];
 let internalViolations = 0;
+let unregisteredExternalLinks = 0;
+let bodyMediaReferences = 0;
 let zhLinks = 0;
 let unknownLinks = 0;
 let legacyLinks = 0;
@@ -224,6 +227,8 @@ for (const entry of manifest.entries) {
         || ledgerEntry.status !== 'completed' || ledgerEntry.output_sha256 !== pageSha || ledgerEntry.claim_sha256 !== ledgerClaimSha) ledgerEntryMismatches += 1;
     if (actualWords !== frontmatter.word_count_en) wordMismatches += 1;
     untranslatedChinese += pageBytes.toString('utf8').match(/[\u3400-\u9fff]/g)?.length ?? 0;
+    bodyMediaReferences += (body.match(/!\[[^\]]*\](?:\([^)]*\)|\s*\[[^\]]*\])/g) ?? []).length;
+    bodyMediaReferences += (body.match(/<(?:img|picture|source|svg)\b/gi) ?? []).length;
     cohort.push({ page_identity: entry.page_identity, entity_type: entry.entity_type, page_sha256: pageSha, claim_sha256: claimSha, word_count_en: actualWords });
     paragraphs.push(...paragraphRows(entry.page_identity, body));
     for (const key of ['title', 'seo_title', 'seo_description']) {
@@ -294,15 +299,18 @@ for (const entry of manifest.entries) {
     const destinations = linkDestinations(body);
     for (const destination of destinations) {
         const external = /^https?:\/\//.test(destination);
+        const registeredExternal = external && registeredExternalUrls.has(destination);
         const canonical = external ? null : destination.split(/[?#]/)[0];
         const alias = canonical ? aliasKeys.has(canonical.split('/').at(-1)) : false;
-        const known = external || canonicalSet.has(canonical);
+        const known = external ? registeredExternal : canonicalSet.has(canonical);
         let status = 'PASS';
         if (!external && canonical?.startsWith('/zh/')) { status = 'FAIL_ZH_LINK'; zhLinks += 1; }
         else if (alias) { status = 'FAIL_LEGACY_ALIAS'; legacyLinks += 1; }
+        else if (external && !registeredExternal) { status = 'FAIL_UNREGISTERED_EXTERNAL'; unregisteredExternalLinks += 1; }
         else if (!known) { status = 'FAIL_UNKNOWN_CANONICAL'; unknownLinks += 1; }
         if (status !== 'PASS') internalViolations += 1;
-        linkRows.push([entry.page_identity, entry.en_output_path, destination, external ? 'registered_external' : 'internal_canonical', known, alias, status]);
+        linkRows.push([entry.page_identity, entry.en_output_path, destination, external
+            ? (registeredExternal ? 'registered_external' : 'unregistered_external') : 'internal_canonical', known, alias, status]);
     }
     const requiredLinks = [];
     if (entry.entity_type === 'facet_detail' || entry.entity_type === 'polarity') requiredLinks.push(parentCanonical);
@@ -436,6 +444,7 @@ const hardGates = {
     word_count_mismatch_count: wordMismatches, source_id_conflict_count: sourceConflicts,
     visible_reference_registry_mismatch_count: visibleReferenceMismatches, empty_claim_file_count: emptyClaimFiles,
     invalid_claim_source_id_count: invalidClaimSourceIds, true_internal_link_violation_count: internalViolations,
+    unregistered_external_link_count: unregisteredExternalLinks, body_media_reference_count: bodyMediaReferences,
     unexpected_claim_id_count: unexpectedClaimIds, missing_claim_id_count: missingClaimIds, duplicate_claim_id_count: duplicateClaimIds,
     frontmatter_manifest_mismatch_count: frontmatterManifestMismatches, sidecar_metadata_mismatch_count: sidecarMetadataMismatches,
     claim_row_schema_failure_count: claimRowSchemaFailures,
