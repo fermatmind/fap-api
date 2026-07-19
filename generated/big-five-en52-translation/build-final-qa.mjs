@@ -112,6 +112,13 @@ const ledger = JSON.parse(ledgerBytes);
 const registryBytes = await readFile(path.join(ROOT, 'authority/source-registry.en-US.json'));
 const registry = JSON.parse(registryBytes);
 const glossaryBytes = await readFile(path.join(ROOT, 'authority/terminology-glossary.en-US.json'));
+const glossary = JSON.parse(glossaryBytes);
+let committedPackageManifest = null;
+try {
+    committedPackageManifest = JSON.parse(await readFile(path.join(ROOT, 'package-manifest.json')));
+} catch {
+    committedPackageManifest = null;
+}
 const releaseBytes = await readFile(path.resolve(ROOT, '..', 'big-five-authority-v3', 'big5-zh-v3-52-page-release', 'release-package.json'));
 const release = JSON.parse(releaseBytes);
 const releaseByAuthority = new Map(release.assets.map((asset) => [asset.authority_asset_key, asset]));
@@ -136,6 +143,12 @@ const sourceReleaseFailures = Number(sha256(releaseBytes) !== manifest.authority
     + Math.abs(release.assets.length - 52) + Math.abs(releaseByAuthority.size - release.assets.length)
     + [...manifestAuthorityKeys].filter((key) => !releaseAuthorityKeys.has(key)).length
     + [...releaseAuthorityKeys].filter((key) => !manifestAuthorityKeys.has(key)).length;
+const registryIds = registry.sources.map((source) => source.source_id);
+const authorityInputFailures = Number(sha256(registryBytes) !== manifest.authority.projected_source_registry_sha256)
+    + Number(sha256(glossaryBytes) !== manifest.authority.projected_terminology_sha256)
+    + Number(registry.source_registry_version !== manifest.authority.source_registry_version)
+    + Number(glossary.schema_version !== manifest.authority.terminology_version)
+    + Math.abs(registry.sources.length - 11) + Math.abs(new Set(registryIds).size - registryIds.length);
 
 const equivalenceRows = [['page_identity', 'entity_type', 'section_count_zh', 'section_count_en', 'faq_count_zh', 'faq_count_en', 'source_ids_match', 'locked_claims_present', 'visible_claims_present', 'status', 'input_cohort_sha256']];
 const seoRows = [['page_identity', 'title_unique', 'seo_title_unique', 'seo_description_unique', 'answer_first', 'h1_count', 'h2_count', 'faq_question_style', 'en_us_spelling', 'keyword_term', 'keyword_count', 'keyword_density', 'keyword_stuffing_flag', 'status', 'page_sha256']];
@@ -192,6 +205,9 @@ for (const entry of manifest.entries) {
         source_registry_version: manifest.authority.source_registry_version,
         terminology_version: manifest.authority.terminology_version, claim_mapping_version: manifest.authority.claim_mapping_version,
         cms_draft_created: false, publish_allowed: false, media_supported: false,
+        author_display_name: 'FermatMind Editorial', reviewer_display_name: 'FermatMind Editorial', reviewer_admin_user_id: 1,
+        review_mode: 'solo_operator', clinical_reviewed: false, expert_endorsement: false,
+        substantive_updated_at: REVIEWED_DATE, translation_reviewed_at: REVIEWED_DATE,
     };
     const frontmatterMatches = Object.keys(frontmatter).length === EXPECTED_FRONTMATTER_KEYS.size
         && Object.keys(frontmatter).every((key) => EXPECTED_FRONTMATTER_KEYS.has(key))
@@ -290,6 +306,14 @@ for (const entry of manifest.entries) {
 
 const cohortBytes = jsonBytes(cohort);
 const cohortSha = sha256(cohortBytes);
+const committedFilesByIdentity = new Map((committedPackageManifest?.files ?? []).map((file) => [file.page_identity, file]));
+let committedPackageInputMismatches = Number(committedPackageManifest?.schema_version !== 'big-five-en52-package-manifest.v1')
+    + Math.abs((committedPackageManifest?.files ?? []).length - manifest.entries.length);
+for (const page of pageData) {
+    const committed = committedFilesByIdentity.get(page.entry.page_identity);
+    if (!committed || committed.page_path !== page.entry.en_output_path || committed.claim_path !== page.entry.en_claim_output_path
+        || committed.page_sha256 !== page.pageSha || committed.claim_sha256 !== page.claimSha) committedPackageInputMismatches += 1;
+}
 for (const page of pageData) {
     const sourceIdsMatch = JSON.stringify([...page.claims.source_ids_en].sort()) === JSON.stringify([...page.entry.zh_source_ids].sort());
     const visibleClaims = page.claims.claims.every((claim) => page.visible.includes(visibleText(claim.visible_claim)));
@@ -402,6 +426,7 @@ const hardGates = {
     unexpected_claim_id_count: unexpectedClaimIds, missing_claim_id_count: missingClaimIds, duplicate_claim_id_count: duplicateClaimIds,
     frontmatter_manifest_mismatch_count: frontmatterManifestMismatches, sidecar_metadata_mismatch_count: sidecarMetadataMismatches,
     source_release_failure_count: sourceReleaseFailures,
+    authority_input_failure_count: authorityInputFailures, committed_package_input_mismatch_count: committedPackageInputMismatches,
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
     manifest_audit_failure_count: manifestAuditFailures, translation_equivalence_failure_count: equivalenceFailures,
     seo_geo_failure_count: seoGeoFailures, faq_failure_count: faqFailures,
