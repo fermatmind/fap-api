@@ -561,7 +561,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php',
         ];
         $blocked = [
+            'backend/app/Services/BigFive/AuthorityV3/Release/UnexpectedPackageRuntimeWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_only_big_five_en52_controlled_release_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveEn52ContentPublish.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52Publisher.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/AuthorityV3/Release/UnexpectedEn52RuntimeWriter.php',
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
         ];
 
@@ -6434,6 +6449,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveEn52ControlledReleaseFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveLegacyAliasHardPurgeFile($file)) {
                 continue;
             }
@@ -8445,6 +8464,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveEn52PackageBuild.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52PackageCompiler.php',
+        ], true);
+    }
+
+    private function isBigFiveEn52ControlledReleaseFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveEn52ContentPublish.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52Publisher.php',
         ], true);
     }
 
