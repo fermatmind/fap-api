@@ -227,6 +227,40 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function runtime46_production_ops_is_exact_hash_bound_and_separates_dry_run_from_single_draft_write(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/mbti-comp-runtime46-production-ops.yml');
+
+        $this->assertStringContainsString('workflow_dispatch:', $source);
+        $this->assertStringNotContainsString("\npush:", $source);
+        $this->assertStringNotContainsString("\nschedule:", $source);
+        $this->assertStringContainsString('environment: production', $source);
+        $this->assertStringContainsString('mode:', $source);
+        $this->assertStringContainsString('- dry_run', $source);
+        $this->assertStringContainsString('- write', $source);
+        $this->assertStringContainsString('expected_active_revision:', $source);
+        $this->assertStringContainsString('expected_release_name:', $source);
+        $this->assertStringContainsString('operator_approval_phrase:', $source);
+        $this->assertStringContainsString('mbti-comp-runtime-46-intp-revision-2026-07-19-r1', $source);
+        $this->assertStringContainsString('5fcf54132504ef85978a5424e428fb56763ffbaa7c60f50b94b9c91fc3e85dc8', $source);
+        $this->assertStringContainsString('7a84cda503b6f328f0659ee5bd41c85f51c1eca44ac9aa7cfa721d59ab6197e2', $source);
+        $this->assertStringContainsString('10b306f2dbac4f9a801a7718ec5584d84f56f6de601ada0f8f677bcb163f960e', $source);
+        $this->assertStringContainsString('719df14a8b79159aaf889237c714774582e07cc731ccc95d2000209b8f4ce359', $source);
+        $this->assertStringContainsString('dry_run refuses an operator approval phrase.', $source);
+        $this->assertStringContainsString('I explicitly approve MBTI-COMP-RUNTIME-46 production single-record draft revision write for package ${PACKAGE_ID} payload SHA ${EXACT_PAYLOAD_SHA256} authorization SHA ${AUTHORIZATION_PAYLOAD_SHA256} on active SHA ${EXPECTED_ACTIVE_REVISION}; no publication/indexability/sitemap/llms/search changes.', $source);
+        $this->assertStringContainsString('personality:mbti-comp-runtime46-intp-revision', $source);
+        $this->assertStringContainsString("mode_flags='--dry-run'", $source);
+        $this->assertStringContainsString("mode_flags='--write --production-write-authorized --no-publication-change --no-indexability-change --no-sitemap --no-llms --no-search-release'", $source);
+        $this->assertStringContainsString('test "$before_sections_sha" = "$EXPECTED_PUBLIC_SECTIONS_SHA256"', $source);
+        $this->assertStringContainsString('test "$after_projection_sha" = "$before_projection_sha"', $source);
+        $this->assertStringContainsString('publication_changed: false', $source);
+        $this->assertStringContainsString('indexability_changed: false', $source);
+        $this->assertStringContainsString('sitemap_or_llms_changed: false', $source);
+        $this->assertStringContainsString('search_action_attempted: false', $source);
+        $this->assertStringContainsString('actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02', $source);
+    }
+
+    #[Test]
     public function production_deploy_lock_guard_retries_the_full_script_and_only_removes_verified_stale_ci_locks(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
