@@ -6,8 +6,11 @@ namespace Tests\Feature\Career;
 
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Jobs\Career\WarmCareerJobDetailProjection;
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
 use App\Services\Career\CareerJobDetailCacheCoverageService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Queue;
@@ -16,6 +19,8 @@ use Tests\TestCase;
 
 final class CareerJobDetailCacheCoverageTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -249,6 +254,90 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
 
         Queue::assertNothingPushed();
         $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
+    }
+
+    public function test_sync_repair_warms_only_missing_targets_and_rechecks_complete_coverage(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'coverage-family',
+            'title_en' => 'Coverage Family',
+            'title_zh' => '缓存覆盖职业族',
+        ]);
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'missing',
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'direct_match',
+            'canonical_title_en' => 'Missing Cache Career',
+            'canonical_title_zh' => '待补缓存职业',
+            'search_h1_zh' => '待补缓存职业',
+            'task_prototype_signature' => [],
+            'trust_inheritance_scope' => [],
+        ]);
+        $this->bindProjection(['active', 'legacy', 'missing']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $cache->publishJobDetailReadModel('active', $locale, ['slug' => 'active']);
+            Cache::forever($cache->jobDetailCacheKey('legacy', $locale), ['slug' => 'legacy']);
+        }
+        $activeVersions = array_map(
+            static fn (string $locale): mixed => Cache::get($cache->jobDetailActiveVersionKey('active', $locale)),
+            ['en', 'zh-CN'],
+        );
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-sync' => true,
+            '--maximum-sync-repairs' => 2,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame('sync_repair_completed', $report['status']);
+        $this->assertSame('ready', $report['coverage_status']);
+        $this->assertTrue($report['repair']['write_executed']);
+        $this->assertSame(2, $report['repair']['cached_target_count']);
+        $this->assertSame(0, $report['repair']['failed_target_count']);
+        foreach (['en', 'zh-CN'] as $index => $locale) {
+            $this->assertSame($activeVersions[$index], Cache::get($cache->jobDetailActiveVersionKey('active', $locale)));
+            $this->assertTrue(Cache::has($cache->jobDetailCacheKey('legacy', $locale)));
+            $this->assertIsString(Cache::get($cache->jobDetailActiveVersionKey('missing', $locale)));
+        }
+    }
+
+    public function test_sync_repair_refuses_before_writes_when_missing_count_exceeds_limit(): void
+    {
+        $this->bindProjection(['one', 'two']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-sync' => true,
+            '--maximum-sync-repairs' => 3,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exit);
+        $this->assertSame('sync_repair_refused_over_limit', $report['status']);
+        $this->assertFalse($report['repair']['write_executed']);
+        $this->assertSame(4, $report['repair']['repairable_target_count']);
+        foreach (['one', 'two'] as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey($slug, $locale)));
+            }
+        }
+    }
+
+    public function test_sync_repair_is_forbidden_in_production(): void
+    {
+        $this->bindProjection(['one']);
+        $this->app->detectEnvironment(static fn (): string => 'production');
+
+        $this->artisan('career:verify-job-detail-cache-coverage', ['--repair-missing-sync' => true])
+            ->expectsOutput('Synchronous cache coverage repair is forbidden in production.')
+            ->assertExitCode(1);
     }
 
     /**
