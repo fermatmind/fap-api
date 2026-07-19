@@ -221,6 +221,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('DEPLOY_REVISION="$EXPECTED_RELEASE_SHA"', $staging);
         $this->assertStringContainsString('--revision "$DEPLOY_REVISION"', $staging);
         $this->assertStringContainsString('-o deploy_mode="$DEPLOY_MODE"', $staging);
+        $this->assertStringContainsString("staging-\${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && 'runtime46-isolated' || 'main' }}", $staging);
         $this->assertStringContainsString("inputs.release_mode != 'mbti_runtime46_isolated'", $staging);
         $this->assertStringContainsString('mbti-runtime46-isolated-staging-${{ github.run_id }}', $staging);
         $this->assertStringContainsString('cms_or_db_write_attempted: false', $staging);
