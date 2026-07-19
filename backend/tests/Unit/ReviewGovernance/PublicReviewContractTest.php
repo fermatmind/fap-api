@@ -38,13 +38,35 @@ final class PublicReviewContractTest extends TestCase
 
     public function test_invalid_timestamp_is_redacted_to_null(): void
     {
+        $contract = new PublicReviewContract;
+
         $this->assertSame([
             'review_state' => 'approved',
             'last_reviewed_at' => null,
             'reviewer' => null,
-        ], (new PublicReviewContract)->project('approved', 'private://review/evidence'));
+        ], $contract->project('approved', 'private://review/evidence'));
 
-        $this->assertNull((new PublicReviewContract)->project('approved', 1_721_300_000)['last_reviewed_at']);
+        foreach ([
+            1_721_300_000,
+            'now',
+            'tomorrow',
+            '2026-07-18',
+            '2026-07-18T12:00:00',
+            '2026-02-30T12:00:00Z',
+        ] as $timestamp) {
+            $this->assertNull($contract->project('approved', $timestamp)['last_reviewed_at']);
+        }
+    }
+
+    public function test_absolute_string_timestamp_is_normalized_to_utc(): void
+    {
+        $this->assertSame(
+            '2026-07-18T12:00:00.123456Z',
+            (new PublicReviewContract)->project(
+                'approved',
+                '2026-07-18T20:00:00.123456+08:00',
+            )['last_reviewed_at'],
+        );
     }
 
     /** @return iterable<string,array{mixed,string}> */

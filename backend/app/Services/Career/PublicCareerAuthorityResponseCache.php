@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+/**
+ * @review-surface career_trust_manifest
+ */
 final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposureReadiness
 {
     public const DATASET_HUB_CACHE_KEY = 'career:public-authority:dataset-hub:v3';

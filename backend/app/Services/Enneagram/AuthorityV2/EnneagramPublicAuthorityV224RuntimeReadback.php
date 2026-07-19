@@ -19,6 +19,9 @@ use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 
+/**
+ * @review-surface personality_public_content_asset
+ */
 final class EnneagramPublicAuthorityV224RuntimeReadback
 {
     public const ARTIFACT = 'ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E';

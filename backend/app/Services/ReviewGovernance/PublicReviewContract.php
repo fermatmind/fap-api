@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\ReviewGovernance;
 
 use Carbon\CarbonImmutable;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Throwable;
 
@@ -129,7 +130,27 @@ final class PublicReviewContract
                 return null;
             }
 
-            return CarbonImmutable::parse($value)->utc()->toISOString();
+            $timestamp = trim($value);
+            if (! preg_match(
+                '/\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})\z/D',
+                $timestamp,
+            )) {
+                return null;
+            }
+
+            $format = str_contains($timestamp, '.')
+                ? '!Y-m-d\\TH:i:s.uP'
+                : '!Y-m-d\\TH:i:sP';
+            $parsed = DateTimeImmutable::createFromFormat($format, $timestamp);
+            $errors = DateTimeImmutable::getLastErrors();
+            if (
+                $parsed === false
+                || ($errors !== false && ($errors['warning_count'] > 0 || $errors['error_count'] > 0))
+            ) {
+                return null;
+            }
+
+            return CarbonImmutable::instance($parsed)->utc()->toISOString();
         } catch (Throwable) {
             return null;
         }
