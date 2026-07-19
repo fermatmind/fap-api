@@ -217,6 +217,11 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('Normalize exact isolated candidate branch-diff baseline', $staging);
         $this->assertStringContainsString('git update-ref refs/remotes/origin/main "$EXPECTED_RELEASE_SHA"', $staging);
         $this->assertStringContainsString('test "$(git merge-base origin/main HEAD)" = "$EXPECTED_RELEASE_SHA"', $staging);
+        $this->assertStringContainsString('DEPLOY_TASK="deploy:code-only"', $staging);
+        $this->assertStringContainsString('DEPLOY_REVISION="$EXPECTED_RELEASE_SHA"', $staging);
+        $this->assertStringContainsString('--revision "$DEPLOY_REVISION"', $staging);
+        $this->assertStringContainsString('-o deploy_mode="$DEPLOY_MODE"', $staging);
+        $this->assertStringContainsString("inputs.release_mode != 'mbti_runtime46_isolated'", $staging);
         $this->assertStringContainsString('mbti-runtime46-isolated-staging-${{ github.run_id }}', $staging);
         $this->assertStringContainsString('cms_or_db_write_attempted: false', $staging);
         $this->assertStringContainsString('production_deploy_attempted: false', $staging);

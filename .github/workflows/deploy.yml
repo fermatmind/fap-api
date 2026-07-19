@@ -506,8 +506,21 @@ jobs:
         shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
+          RELEASE_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode || 'main' }}
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
         run: |
           set -euo pipefail
+          DEPLOY_TASK="deploy"
+          DEPLOY_REVISION="$GITHUB_SHA"
+          DEPLOY_MODE="standard"
+          if [ "$RELEASE_MODE" = "mbti_runtime46_isolated" ]; then
+            test "$GITHUB_EVENT_NAME" = "workflow_dispatch"
+            test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
+            DEPLOY_TASK="deploy:code-only"
+            DEPLOY_REVISION="$EXPECTED_RELEASE_SHA"
+            DEPLOY_MODE="code_only"
+          fi
+          export DEPLOY_REVISION DEPLOY_MODE
           DEPLOY_LOCK_METADATA="$(php -r '
           $serverUrl = getenv("GITHUB_SERVER_URL") ?: "https://github.com";
           $repository = getenv("GITHUB_REPOSITORY") ?: "";
@@ -517,7 +530,7 @@ jobs:
               "env" => getenv("TARGET") ?: "",
               "run_id" => $runId,
               "run_attempt" => getenv("GITHUB_RUN_ATTEMPT") ?: "",
-              "sha" => getenv("GITHUB_SHA") ?: "",
+              "sha" => getenv("DEPLOY_REVISION") ?: getenv("GITHUB_SHA") ?: "",
               "actor" => getenv("GITHUB_ACTOR") ?: "",
               "workflow" => getenv("GITHUB_WORKFLOW") ?: "",
               "repository" => $repository,
@@ -529,12 +542,14 @@ jobs:
           export DEPLOY_LOCK_METADATA
           export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
           export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
-          php /tmp/dep.phar deploy "$TARGET" -f deploy.php \
+          php /tmp/dep.phar "$DEPLOY_TASK" "$TARGET" -f deploy.php \
+            --revision "$DEPLOY_REVISION" \
             -o release_name="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o deploy_mode="$DEPLOY_MODE" \
             -vvv --no-interaction
 
       - name: Restart queue workers (Supervisor)
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
+        if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && (github.event_name != 'workflow_dispatch' || inputs.release_mode != 'mbti_runtime46_isolated') }}
         shell: bash
         run: |
           set -euo pipefail
