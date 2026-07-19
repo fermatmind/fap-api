@@ -108,7 +108,7 @@ const aliasKeys = new Set(['emotional-stability', 'high-agreeableness', 'high-co
 const entryByIdentity = new Map(manifest.entries.map((entry) => [entry.page_identity, entry]));
 
 const equivalenceRows = [['page_identity', 'entity_type', 'section_count_zh', 'section_count_en', 'faq_count_zh', 'faq_count_en', 'source_ids_match', 'locked_claims_present', 'visible_claims_present', 'status', 'input_cohort_sha256']];
-const seoRows = [['page_identity', 'title_unique', 'seo_title_unique', 'seo_description_unique', 'answer_first', 'h1_count', 'h2_count', 'faq_question_style', 'en_us_spelling', 'keyword_stuffing_flag', 'status', 'page_sha256']];
+const seoRows = [['page_identity', 'title_unique', 'seo_title_unique', 'seo_description_unique', 'answer_first', 'h1_count', 'h2_count', 'faq_question_style', 'en_us_spelling', 'keyword_term', 'keyword_count', 'keyword_density', 'keyword_stuffing_flag', 'status', 'page_sha256']];
 const linkRows = [['page_identity', 'source_path', 'destination', 'link_type', 'canonical_known', 'legacy_alias', 'status']];
 const faqRows = [['page_identity', 'faq_index', 'question', 'normalized_question', 'answer_word_count', 'within_page_unique', 'cross_page_duplicate_count', 'intent_resolution', 'status', 'page_sha256']];
 const wordRows = [['page_identity', 'entity_type', 'declared_word_count', 'actual_word_count', 'match', 'page_sha256']];
@@ -127,6 +127,7 @@ let emptyClaimFiles = 0;
 let untranslatedChinese = 0;
 let wordMismatches = 0;
 let faqTotal = 0;
+let seoGeoFailures = 0;
 const faqFrequency = new Map();
 const pageData = [];
 
@@ -221,16 +222,21 @@ for (const page of pageData) {
     equivalenceRows.push([page.entry.page_identity, page.entry.entity_type, page.entry.zh_section_count, page.pageSections.length, page.entry.zh_faq_count, page.faqs.length, sourceIdsMatch, page.lockedClaimsMatch, visibleClaims, equivalencePass ? 'PASS' : 'FAIL', cohortSha]);
     const intro = page.body.split(/^##\s+/m)[0].replace(/^#\s+.*$/m, '').trim();
     const british = /\b(?:behaviour|behaviours|favour|favourite|organise|organisation|recognise|centre|colour|labour|travelling|programme)\b/i.test(page.visible);
-    const keyTerm = page.frontmatter.title.split(/[:|]/)[0].toLowerCase().match(/[a-z]+/g)?.at(0) ?? '';
+    const titleStopWords = new Set(['a', 'an', 'and', 'for', 'in', 'of', 'on', 'the', 'to', 'with']);
+    const keyTerm = (page.frontmatter.title.split(/[:|]/)[0].toLowerCase().match(/[a-z]+/g) ?? [])
+        .find((term) => !titleStopWords.has(term)) ?? '';
     const termCount = (page.visible.toLowerCase().match(new RegExp(`\\b${keyTerm}\\b`, 'g')) ?? []).length;
+    const termDensity = page.actualWords === 0 ? 0 : termCount / page.actualWords;
+    const keywordStuffing = termCount >= 50 && termDensity >= 0.04;
     const metadataUnique = titleOwners.get(`title:${page.frontmatter.title}`) === 1
         && titleOwners.get(`seo_title:${page.frontmatter.seo_title}`) === 1
         && titleOwners.get(`seo_description:${page.frontmatter.seo_description}`) === 1;
-    const seoPass = metadataUnique && wordCount(intro) >= 10 && !british && termCount < 50
+    const seoPass = metadataUnique && wordCount(intro) >= 10 && !british && !keywordStuffing
         && (page.visible.match(/^#\s+/gm) ?? []).length === 1
         && page.pageSections.length === page.entry.zh_section_count
         && page.faqs.every((faq) => faq[1].endsWith('?'));
-    seoRows.push([page.entry.page_identity, titleOwners.get(`title:${page.frontmatter.title}`) === 1, titleOwners.get(`seo_title:${page.frontmatter.seo_title}`) === 1, titleOwners.get(`seo_description:${page.frontmatter.seo_description}`) === 1, wordCount(intro) >= 10, (page.visible.match(/^#\s+/gm) ?? []).length, page.pageSections.length, page.faqs.every((faq) => faq[1].endsWith('?')), !british, termCount >= 50, seoPass ? 'PASS' : 'FAIL', page.pageSha]);
+    if (!seoPass) seoGeoFailures += 1;
+    seoRows.push([page.entry.page_identity, titleOwners.get(`title:${page.frontmatter.title}`) === 1, titleOwners.get(`seo_title:${page.frontmatter.seo_title}`) === 1, titleOwners.get(`seo_description:${page.frontmatter.seo_description}`) === 1, wordCount(intro) >= 10, (page.visible.match(/^#\s+/gm) ?? []).length, page.pageSections.length, page.faqs.every((faq) => faq[1].endsWith('?')), !british, keyTerm, termCount, termDensity.toFixed(4), keywordStuffing, seoPass ? 'PASS' : 'FAIL', page.pageSha]);
     wordRows.push([page.entry.page_identity, page.entry.entity_type, page.frontmatter.word_count_en, page.actualWords, page.frontmatter.word_count_en === page.actualWords, page.pageSha]);
     page.faqs.forEach((faq, index) => {
         const normalized = page.normalizedFaqs[index];
@@ -302,6 +308,7 @@ const hardGates = {
     visible_reference_registry_mismatch_count: visibleReferenceMismatches, empty_claim_file_count: emptyClaimFiles,
     invalid_claim_source_id_count: invalidClaimSourceIds, true_internal_link_violation_count: internalViolations,
     unknown_canonical_link_count: unknownLinks, zh_internal_link_count: zhLinks, unresolved_scientific_blocker_count: clinicalRisks.length,
+    seo_geo_failure_count: seoGeoFailures,
     stale_qa_report_count: 0, substantive_body_exact_duplicate_count: substantiveExactDuplicates,
     substantive_high_similarity_count: substantiveHighSimilarity, untranslated_public_chinese_fragment_count: untranslatedChinese,
     legacy_alias_page_count: legacyLinks + manifestAudit.legacy_alias_page_count, faq_count: faqTotal,
