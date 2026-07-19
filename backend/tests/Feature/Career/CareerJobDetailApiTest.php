@@ -167,6 +167,11 @@ final class CareerJobDetailApiTest extends TestCase
                 'bundle_kind' => 'career_job_detail',
                 'identity' => ['canonical_slug' => 'cached-career-detail'],
                 'titles' => ['canonical_en' => 'Cached Career Detail'],
+                'trust_manifest' => [
+                    'reviewer_status' => 'approved',
+                    'reviewed_at' => '2026-07-18T00:00:00Z',
+                    'reviewer' => ['name' => 'Legacy Cached Career Reviewer'],
+                ],
                 'seo_contract' => [
                     'canonical_path' => '/en/career/jobs/cached-career-detail',
                     'canonical_target' => '/en/career/jobs/cached-career-detail',
@@ -182,7 +187,9 @@ final class CareerJobDetailApiTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs/cached-career-detail?locale=en')
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'cached-career-detail')
-            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/cached-career-detail');
+            ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/cached-career-detail')
+            ->assertJsonPath('trust_manifest.review_state', 'approved')
+            ->assertJsonPath('trust_manifest.reviewer', null);
     }
 
     public function test_it_remains_conservative_and_does_not_fall_back_to_legacy_cms_jobs(): void

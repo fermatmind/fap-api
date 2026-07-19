@@ -98,6 +98,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 'last_page' => (int) $paginator->lastPage(),
             ];
             $version = $this->readModelCache->collectionVersion($assets, $pagination);
+            $version .= ':projection:'.self::PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION;
             $cachedRead = $this->readModelCache->read(
                 'index',
                 $framework,
@@ -966,6 +967,13 @@ final class PersonalityPublicContentAssetController extends Controller
                 if (is_array($item['seo'] ?? null)) {
                     $item['seo'] = PersonalityPublicContentMediaPolicy::sanitizeSeo($item['seo']);
                 }
+                $item = array_merge(
+                    $item,
+                    $this->publicReviewContract->project(
+                        $item['review_state'] ?? null,
+                        $item['last_reviewed_at'] ?? null,
+                    ),
+                );
                 $payload['items'][$index] = $item;
             }
         }

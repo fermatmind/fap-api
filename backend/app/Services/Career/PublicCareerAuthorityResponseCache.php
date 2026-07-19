@@ -18,6 +18,7 @@ use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\Bundles\CareerJobDetailDegradedShellBuilder;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
 use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -31,11 +32,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     public const LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY = 'career:public-authority:launch-governance-closure:v1';
 
-    public const JOB_INDEX_CACHE_KEY_PREFIX = 'career:public-authority:job-index:v1';
+    public const JOB_INDEX_CACHE_KEY_PREFIX = 'career:public-authority:job-index:v2';
 
     public const JOB_DETAIL_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v1';
 
-    public const JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v2';
+    public const JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v3';
 
     public const JOB_DETAIL_NEGATIVE_CACHE_TTL_SECONDS = 300;
 
@@ -65,6 +66,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         private readonly CareerAiImpactPreviewDetailShellBuilder $aiImpactPreviewDetailShellBuilder,
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerDirectoryReadModelBuilder $careerDirectoryReadModelBuilder,
+        private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
     /** @return array<string, mixed> */
@@ -195,18 +197,25 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         if ($readiness['classification'] === 'ready_active') {
             $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'fresh', $readiness['version']);
 
-            return ['payload' => $readiness['payload'], 'state' => 'fresh'];
+            return [
+                'payload' => $this->normalizeJobDetailReviewContract((array) $readiness['payload']),
+                'state' => 'fresh',
+            ];
         }
         if ($readiness['classification'] === 'ready_lkg') {
             $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'stale', $readiness['version']);
 
-            return ['payload' => $readiness['payload'], 'state' => 'stale'];
+            return [
+                'payload' => $this->normalizeJobDetailReviewContract((array) $readiness['payload']),
+                'state' => 'stale',
+            ];
         }
         if ($readiness['classification'] === 'legacy_migratable') {
-            $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $readiness['payload']);
+            $payload = $this->normalizeJobDetailReviewContract((array) $readiness['payload']);
+            $this->publishJobDetailReadModel($normalizedSlug, $normalizedLocale, $payload);
             $this->logJobDetailCacheState($normalizedSlug, $normalizedLocale, 'stale', 'legacy-v1');
 
-            return ['payload' => $readiness['payload'], 'state' => 'stale'];
+            return ['payload' => $payload, 'state' => 'stale'];
         }
 
         $this->dispatchJobDetailWarm($normalizedSlug, $normalizedLocale);
@@ -646,6 +655,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     ): string {
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $payload = $this->normalizeJobDetailReviewContract($payload);
         if (
             $exposureProjectionItem !== null
             && ! $this->jobDetailExposureProjectionSnapshotIsValid(
@@ -1614,6 +1624,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         bool $requireDetailReady = true,
     ): array {
         $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
+        $items = array_map(
+            fn (mixed $item): mixed => is_array($item)
+                ? $this->normalizeJobIndexItemReviewContract($item)
+                : $item,
+            $items,
+        );
         $payload['items'] = array_values(array_filter($items, function (mixed $item) use ($publicLocale, $requireDetailReady): bool {
             if (! is_array($item)) {
                 return false;
@@ -1628,6 +1644,44 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }));
 
         return $payload;
+    }
+
+    /** @param array<string, mixed> $payload @return array<string, mixed> */
+    private function normalizeJobDetailReviewContract(array $payload): array
+    {
+        if (is_array($payload['trust_manifest'] ?? null)) {
+            $payload['trust_manifest'] = $this->normalizeReviewContainer($payload['trust_manifest']);
+        }
+
+        return $payload;
+    }
+
+    /** @param array<string, mixed> $item @return array<string, mixed> */
+    private function normalizeJobIndexItemReviewContract(array $item): array
+    {
+        if (is_array($item['trust_summary'] ?? null)) {
+            $item['trust_summary'] = $this->normalizeReviewContainer($item['trust_summary']);
+        }
+
+        return $item;
+    }
+
+    /** @param array<string, mixed> $review @return array<string, mixed> */
+    private function normalizeReviewContainer(array $review): array
+    {
+        $hasCanonicalReviewState = array_key_exists('review_state', $review);
+
+        return array_merge(
+            $review,
+            $this->publicReviewContract->project(
+                $hasCanonicalReviewState
+                    ? $review['review_state']
+                    : ($review['reviewer_status'] ?? null),
+                $hasCanonicalReviewState
+                    ? ($review['last_reviewed_at'] ?? null)
+                    : ($review['reviewed_at'] ?? null),
+            ),
+        );
     }
 
     private function detailReadIsPublishedForLocale(string $slug, string $publicLocale): bool

@@ -1074,6 +1074,67 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertStringNotContainsString('Private Review Organization', $response->getContent());
     }
 
+    public function test_index_cache_version_and_response_boundary_redact_legacy_review_projections(): void
+    {
+        $asset = PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'human_review_approved',
+            'is_public' => true,
+            'published_at' => now()->subDay(),
+            'last_reviewed_at' => now()->subHour(),
+        ]));
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $pagination = [
+            'current_page' => 1,
+            'per_page' => 20,
+            'total' => 1,
+            'last_page' => 1,
+        ];
+        $baseVersion = $cache->collectionVersion([$asset], $pagination);
+        $legacyPayload = [
+            'ok' => true,
+            'items' => [[
+                'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+                'framework' => 'big_five',
+                'entity_type' => 'hub',
+                'code' => 'big-five',
+                'locale' => 'en',
+                'review_state' => 'human_review_approved',
+                'last_reviewed_at' => $asset->last_reviewed_at?->toISOString(),
+                'reviewer' => ['name' => 'Legacy Cached Index Reviewer'],
+            ]],
+            'pagination' => $pagination,
+        ];
+
+        $cache->put('index', 'big_five', 'hub', 'page:1:per-page:20', 'en', 0, $baseVersion, $legacyPayload);
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&entity_type=hub&locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('items.0.review_state', 'approved')
+            ->assertJsonPath('items.0.reviewer', null);
+
+        $cache->put(
+            'index',
+            'big_five',
+            'hub',
+            'page:1:per-page:20',
+            'en',
+            0,
+            $baseVersion.':projection:public-review-contract-v1',
+            $legacyPayload,
+        );
+
+        $response = $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&entity_type=hub&locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
+            ->assertJsonPath('items.0.review_state', 'approved')
+            ->assertJsonPath('items.0.reviewer', null);
+
+        $this->assertStringNotContainsString('Legacy Cached Index Reviewer', $response->getContent());
+    }
+
     public function test_big_five_v2_projection_fails_closed_for_legacy_authority_and_does_not_fabricate_people(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([

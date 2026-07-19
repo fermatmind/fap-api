@@ -144,7 +144,11 @@ final class CareerJobListApiTest extends TestCase
                     'identity' => ['canonical_slug' => 'cached-career-index'],
                     'titles' => ['canonical_en' => 'Cached Career Index'],
                     'truth_summary' => [],
-                    'trust_summary' => [],
+                    'trust_summary' => [
+                        'reviewer_status' => 'approved',
+                        'reviewed_at' => '2026-07-18T00:00:00Z',
+                        'reviewer' => ['name' => 'Legacy Cached Career Reviewer'],
+                    ],
                     'score_summary' => [],
                     'seo_contract' => ['canonical_path' => '/career/jobs/cached-career-index', 'index_state' => 'indexable', 'index_eligible' => true, 'reason_codes' => []],
                     'provenance_meta' => [],
@@ -156,7 +160,9 @@ final class CareerJobListApiTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonCount(1, 'items')
-            ->assertJsonPath('items.0.identity.canonical_slug', 'cached-career-index');
+            ->assertJsonPath('items.0.identity.canonical_slug', 'cached-career-index')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.reviewer', null);
     }
 
     public function test_it_filters_cached_job_index_when_detail_authority_is_not_ready(): void
