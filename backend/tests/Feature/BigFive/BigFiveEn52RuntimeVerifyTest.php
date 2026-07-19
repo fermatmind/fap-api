@@ -227,6 +227,16 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         }
     }
 
+    public function test_sitemap_uses_only_loc_entries_for_the_exact_cohort(): void
+    {
+        $this->seedAndPublish();
+        $verifier = app(BigFiveEn52RuntimeVerifier::class);
+        $approval = $this->approval($verifier);
+        $this->fakeHealthyPublicRuntime(sitemapNonLocOnlyPath: '/en/personality/big-five/openness');
+
+        $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'sitemap_cohort_mismatch');
+    }
+
     private function seedAndPublish(): void
     {
         if (PersonalityPublicContentAsset::query()->withoutGlobalScopes()->exists()) {
@@ -281,6 +291,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         int $redirectStatus = 301,
         ?string $duplicateSurface = null,
         bool $queryAliasLocation = false,
+        ?string $sitemapNonLocOnlyPath = null,
     ): void {
         Http::swap(new Factory);
         Http::preventStrayRequests();
@@ -289,7 +300,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
             ? array_values(array_diff($completePaths, [$omitPath]))
             : $completePaths;
         $aliases = BigFiveCanonicalRouteCatalog::reviewedRedirectPaths();
-        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation) {
+        Http::fake(function (Request $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath) {
             $url = $request->url();
             $path = (string) parse_url($url, PHP_URL_PATH);
             if ($path === '/api/v0.5/personality-content-assets') {
@@ -318,6 +329,27 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                     : $allPaths;
                 if ($duplicateSurface === $path) {
                     $surfacePaths[] = $completePaths[0];
+                }
+
+                if ($path === '/sitemap.xml') {
+                    $locPaths = $sitemapNonLocOnlyPath === null
+                        ? $surfacePaths
+                        : array_values(array_diff($surfacePaths, [$sitemapNonLocOnlyPath]));
+                    $entries = implode('', array_map(
+                        fn ($item) => '<url><loc>https://fermatmind.com'.$item.'</loc></url>',
+                        $locPaths,
+                    ));
+                    $nonLocEvidence = $sitemapNonLocOnlyPath === null
+                        ? ''
+                        : '<!-- https://fermatmind.com'.$sitemapNonLocOnlyPath.' -->'
+                            .'<xhtml:link href="https://fermatmind.com'.$sitemapNonLocOnlyPath.'" />';
+
+                    return Http::response(
+                        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+                            .$entries.$nonLocEvidence.'</urlset>',
+                        200,
+                        ['Content-Type' => 'application/xml'],
+                    );
                 }
 
                 return Http::response(implode("\n", array_map(fn ($item) => 'https://fermatmind.com'.$item, $surfacePaths)), 200);

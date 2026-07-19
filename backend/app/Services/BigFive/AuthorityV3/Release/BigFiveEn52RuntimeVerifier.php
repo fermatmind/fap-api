@@ -7,6 +7,8 @@ namespace App\Services\BigFive\AuthorityV3\Release;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
+use DOMDocument;
+use DOMXPath;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -239,8 +241,12 @@ final class BigFiveEn52RuntimeVerifier
             if (! $response->successful()) {
                 throw new RuntimeException($name.'_failed');
             }
-            preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9:/])/(?!/)[^\s<>()"\']+#i', $response->body(), $matches);
-            $paths = $this->pathsFromUrls($matches[0] ?? [], $frontendOrigin);
+            if ($name === 'sitemap') {
+                $paths = $this->pathsFromSitemap($response->body(), $frontendOrigin);
+            } else {
+                preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9:/])/(?!/)[^\s<>()"\']+#i', $response->body(), $matches);
+                $paths = $this->pathsFromUrls($matches[0] ?? [], $frontendOrigin);
+            }
             if ($this->bigFiveSubset($paths) !== $expected || array_intersect($aliases, $paths) !== []) {
                 throw new RuntimeException($name.'_cohort_mismatch');
             }
@@ -361,6 +367,26 @@ final class BigFiveEn52RuntimeVerifier
         sort($paths);
 
         return $paths;
+    }
+
+    /** @return list<string> */
+    private function pathsFromSitemap(string $xml, string $origin): array
+    {
+        $document = new DOMDocument;
+        if (! @$document->loadXML($xml, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
+            throw new RuntimeException('sitemap_invalid_xml');
+        }
+        $nodes = (new DOMXPath($document))->query('//*[local-name()="loc"]');
+        if ($nodes === false) {
+            throw new RuntimeException('sitemap_invalid_xml');
+        }
+
+        $urls = [];
+        foreach ($nodes as $node) {
+            $urls[] = trim($node->textContent);
+        }
+
+        return $this->pathsFromUrls($urls, $origin);
     }
 
     /** @param list<string> $paths @return list<string> */
