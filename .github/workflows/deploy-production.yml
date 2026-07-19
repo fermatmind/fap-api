@@ -62,6 +62,7 @@ jobs:
       eligible: ${{ steps.latest_main_guard.outputs.eligible }}
       deploy_sha: ${{ steps.latest_main_guard.outputs.deploy_sha }}
       deploy_mode: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
+      isolated_runtime46: ${{ steps.resolve_deploy_mode.outputs.isolated_runtime46 }}
       main_sha: ${{ steps.latest_main_guard.outputs.main_sha }}
     steps:
       - name: Checkout deploy revision for eligibility
@@ -189,6 +190,9 @@ jobs:
                   backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)
                     echo "code-only scope accepted audited personality runtime projection service: $path"
                     ;;
+                  backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php|backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php|backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php|backend/app/Services/Cms/MbtiFullCmsImportService.php|backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json|backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)
+                    echo "code-only scope accepted exact isolated Runtime 46 path: $path"
+                    ;;
                   backend/.env.example|backend/scripts/pr71_verify.sh)
                     echo "code-only scope accepted audited non-runtime release metadata or verification path: $path"
                     ;;
@@ -220,6 +224,7 @@ jobs:
             exit 2
           fi
           echo "deploy_mode=$RESOLVED_DEPLOY_MODE" >> "$GITHUB_OUTPUT"
+          echo "isolated_runtime46=false" >> "$GITHUB_OUTPUT"
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
           jq -e \
@@ -233,47 +238,71 @@ jobs:
           STAGING_SHA="$(jq -r '.head_sha' <<<"$RUN_JSON")"
 
           if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]; then
-            if [ "$RESOLVED_DEPLOY_MODE" != standard ]; then
-              echo "non-standard deployment requires staging evidence for the exact deploy SHA." >&2
-              exit 1
-            fi
-            if ! git cat-file -e "${STAGING_SHA}^{commit}"; then
-              echo "staging-equivalence check cannot resolve the staged revision." >&2
-              exit 1
-            fi
-            if ! git merge-base --is-ancestor "$STAGING_SHA" "$DEPLOY_SHA"; then
-              echo "staging-equivalence check requires the staged revision to be an ancestor of the deploy SHA." >&2
-              exit 1
-            fi
+            receipt_dir="$(mktemp -d)"
+            if gh run download "$STAGING_RUN_ID" --name "mbti-runtime46-isolated-staging-${STAGING_RUN_ID}" --dir "$receipt_dir" >/dev/null 2>&1; then
+              receipt="$receipt_dir/isolated-staging-receipt.json"
+              test "$RESOLVED_DEPLOY_MODE" = code_only
+              test -f "$receipt"
+              expected_patch_sha="$(git diff --binary "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" | sha256sum | awk '{print $1}')"
+              jq -e \
+                --arg candidate_sha "$DEPLOY_SHA" \
+                --arg base_sha "$EXPECTED_DEPLOYED_REVISION" \
+                --arg patch_sha256 "$expected_patch_sha" \
+                '.schema_version == "mbti-runtime46-isolated-staging.v1"
+                 and .candidate_sha == $candidate_sha
+                 and .base_sha == $base_sha
+                 and .remote_revision == $candidate_sha
+                 and .patch_sha256 == $patch_sha256
+                 and .record_scope == "intp-a-vs-intp-t"
+                 and .cms_or_db_write_attempted == false
+                 and .production_deploy_attempted == false
+                 and .publication_or_indexability_changed == false
+                 and .sitemap_llms_search_attempted == false' "$receipt" >/dev/null
+              echo "isolated_runtime46=true" >> "$GITHUB_OUTPUT"
+              echo "staging evidence accepted: exact isolated Runtime 46 receipt matches the deploy candidate."
+            else
+              if [ "$RESOLVED_DEPLOY_MODE" != standard ]; then
+                echo "non-standard deployment requires exact-SHA staging evidence or an exact isolated Runtime 46 receipt." >&2
+                exit 1
+              fi
+              if ! git cat-file -e "${STAGING_SHA}^{commit}"; then
+                echo "staging-equivalence check cannot resolve the staged revision." >&2
+                exit 1
+              fi
+              if ! git merge-base --is-ancestor "$STAGING_SHA" "$DEPLOY_SHA"; then
+                echo "staging-equivalence check requires the staged revision to be an ancestor of the deploy SHA." >&2
+                exit 1
+              fi
 
-            mapfile -t STAGING_DELTA < <(git diff --no-renames --name-only "$STAGING_SHA" "$DEPLOY_SHA")
-            if [ "${#STAGING_DELTA[@]}" -eq 0 ]; then
-              echo "staging-equivalence check refused an unexplained SHA mismatch." >&2
-              exit 1
+              mapfile -t STAGING_DELTA < <(git diff --no-renames --name-only "$STAGING_SHA" "$DEPLOY_SHA")
+              if [ "${#STAGING_DELTA[@]}" -eq 0 ]; then
+                echo "staging-equivalence check refused an unexplained SHA mismatch." >&2
+                exit 1
+              fi
+              STAGING_EQUIVALENT_SCOPE=true
+              for path in "${STAGING_DELTA[@]}"; do
+                case "$path" in
+                  .github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)
+                    echo "staging-equivalence accepted audited deployment-control path: $path"
+                    ;;
+                  *)
+                    STAGING_EQUIVALENT_SCOPE=false
+                    echo "staging-equivalence refused non-audited delta path: $path" >&2
+                    ;;
+                esac
+              done
+              if [ "$STAGING_EQUIVALENT_SCOPE" != true ]; then
+                echo "staging evidence does not cover the exact deploy artifact." >&2
+                exit 1
+              fi
+              if ! git diff --quiet "$STAGING_SHA" "$DEPLOY_SHA" -- \
+                backend/app backend/bootstrap backend/config backend/database backend/public \
+                backend/resources backend/routes backend/artisan backend/composer.json backend/composer.lock deploy.php; then
+                echo "staging-equivalence refused a runtime or deployment artifact change." >&2
+                exit 1
+              fi
+              echo "staging evidence accepted: deployed runtime artifact is byte-equivalent across the audited control-only delta."
             fi
-            STAGING_EQUIVALENT_SCOPE=true
-            for path in "${STAGING_DELTA[@]}"; do
-              case "$path" in
-                .github/workflows/mbti-comp-runtime46-staging-dry-run.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/deploy-production.yml|backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php|backend/tests/Sre/ProductionDeploymentStatusTruthTest.php)
-                  echo "staging-equivalence accepted audited deployment-control path: $path"
-                  ;;
-                *)
-                  STAGING_EQUIVALENT_SCOPE=false
-                  echo "staging-equivalence refused non-audited delta path: $path" >&2
-                  ;;
-              esac
-            done
-            if [ "$STAGING_EQUIVALENT_SCOPE" != true ]; then
-              echo "staging evidence does not cover the exact deploy artifact." >&2
-              exit 1
-            fi
-            if ! git diff --quiet "$STAGING_SHA" "$DEPLOY_SHA" -- \
-              backend/app backend/bootstrap backend/config backend/database backend/public \
-              backend/resources backend/routes backend/artisan backend/composer.json backend/composer.lock deploy.php; then
-              echo "staging-equivalence refused a runtime or deployment artifact change." >&2
-              exit 1
-            fi
-            echo "staging evidence accepted: deployed runtime artifact is byte-equivalent across the audited control-only delta."
           fi
 
           JOBS_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}/jobs?per_page=100")"
@@ -287,6 +316,8 @@ jobs:
         shell: bash
         env:
           DEPLOY_MODE: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
+          ISOLATED_RUNTIME46: ${{ steps.resolve_deploy_mode.outputs.isolated_runtime46 }}
+          EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main:refs/remotes/origin/main
@@ -308,8 +339,25 @@ jobs:
               ;;
             code_only)
               if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"; then
-                echo "Code-only production deploy refused because expected_release_sha is not reachable from latest main." >&2
-                exit 1
+                if [ "$ISOLATED_RUNTIME46" != true ]; then
+                  echo "Code-only production deploy refused because expected_release_sha is not reachable from latest main and has no exact isolated receipt." >&2
+                  exit 1
+                fi
+                test "$(git rev-list --parents -n 1 "$DEPLOY_SHA" | awk '{print NF}')" -eq 2
+                test "$(git rev-parse "${DEPLOY_SHA}^")" = "$EXPECTED_DEPLOYED_REVISION"
+                expected_files="$(printf '%s\n' \
+                  backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php \
+                  backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php \
+                  backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php \
+                  backend/app/Services/Cms/MbtiFullCmsImportService.php \
+                  backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json \
+                  backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)"
+                test "$(git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" | sort)" = "$expected_files"
+                while IFS= read -r path; do
+                  test -n "$path"
+                  git show "$LATEST_MAIN_SHA:$path" | cmp - "$path"
+                done <<<"$expected_files"
+                echo "Code-only production deploy accepted exact isolated Runtime 46 candidate with main-byte-identical scoped files."
               fi
               ;;
             *)
