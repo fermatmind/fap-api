@@ -230,6 +230,60 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         app(BigFiveEn52Publisher::class)->preflight($this->packagePath);
     }
 
+    public function test_preflight_rejects_missing_or_unreadable_zh_cn_counterpart(): void
+    {
+        $this->seedExactAuthorityRows();
+        $counterpart = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('framework', 'big_five')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+        $counterpart->delete();
+
+        try {
+            app(BigFiveEn52Publisher::class)->preflight($this->packagePath);
+            $this->fail('A missing zh-CN counterpart must fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertStringContainsString('exactly 52 canonical counterpart rows', $exception->getMessage());
+        }
+
+        $this->seedExactZhCounterpart((string) $counterpart->entity_type, (string) $counterpart->entity_key, (string) $counterpart->slug);
+        $restored = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('framework', 'big_five')
+            ->where('locale', 'zh-CN')
+            ->where('entity_type', $counterpart->entity_type)
+            ->where('entity_key', $counterpart->entity_key)
+            ->firstOrFail();
+        $restored->forceFill(['published_at' => now()->addDay()])->save();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('not publicly readable');
+        app(BigFiveEn52Publisher::class)->preflight($this->packagePath);
+    }
+
+    public function test_preflight_rejects_future_english_published_at(): void
+    {
+        $rows = $this->seedExactAuthorityRows();
+        $rows[0]->forceFill(['published_at' => now()->addDay()])->save();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('future published_at');
+        app(BigFiveEn52Publisher::class)->preflight($this->packagePath);
+    }
+
+    public function test_preflight_rejects_zh_cn_counterpart_canonical_or_hreflang_drift(): void
+    {
+        $this->seedExactAuthorityRows();
+        $counterpart = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('framework', 'big_five')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+        $counterpart->forceFill(['hreflang_json' => ['zh-CN' => '/zh/personality/big-five']])->save();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('canonical or hreflang drifted');
+        app(BigFiveEn52Publisher::class)->preflight($this->packagePath);
+    }
+
     public function test_database_and_preflight_reject_slug_and_canonical_collisions(): void
     {
         $rows = $this->seedExactAuthorityRows();
@@ -252,7 +306,9 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
     public function test_publish_is_atomic_exact_and_idempotent_without_touching_other_authority_rows(): void
     {
         $this->seedExactAuthorityRows();
-        $zhBoundary = $this->seedBoundaryRow('big_five', 'hub', 'big-five', 'big-five', 'zh-CN');
+        $zhBoundary = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('framework', 'big_five')->where('entity_type', 'hub')->where('entity_key', 'big-five')
+            ->where('locale', 'zh-CN')->firstOrFail();
         $enneagram = $this->seedBoundaryRow('enneagram', 'hub', 'enneagram', 'enneagram', 'zh-CN');
         $zhBoundaryBefore = $zhBoundary->fresh()->getAttributes();
         $enneagramBefore = $enneagram->fresh()->getAttributes();
@@ -516,9 +572,35 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
             );
             $row->forceFill(['canonical_json' => $asset['canonical']])->save();
             $rows[] = $row->fresh();
+            $this->seedExactZhCounterpart(
+                (string) $asset['entity_type'],
+                (string) $asset['entity_key'],
+                (string) $asset['slug'],
+            );
         }
 
         return $rows;
+    }
+
+    private function seedExactZhCounterpart(string $entityType, string $entityKey, string $slug): PersonalityPublicContentAsset
+    {
+        $hreflang = [
+            'en' => BigFiveCanonicalRouteCatalog::expectedPath('en', $entityType, $entityKey),
+            'zh-CN' => BigFiveCanonicalRouteCatalog::expectedPath('zh-CN', $entityType, $entityKey),
+        ];
+        $row = $this->seedBoundaryRow('big_five', $entityType, $entityKey, $slug, 'zh-CN', $hreflang);
+        $row->forceFill([
+            'canonical_json' => ['path' => $hreflang['zh-CN']],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'published_at' => now()->subDay(),
+        ])->save();
+
+        return $row->fresh();
     }
 
     private function seedLegacyRedirectAlias(string $locale, string $alias): PersonalityPublicContentAsset

@@ -208,6 +208,14 @@ final class BigFiveEn52Publisher
         if ($targetRowCount !== BigFiveEn52PackageCompiler::ASSET_COUNT) {
             throw new RuntimeException('English CMS authority inventory must contain exactly 52 existing canonical rows.');
         }
+        $zhCounterpartRowCount = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+            ->where('locale', 'zh-CN')
+            ->count();
+        if ($zhCounterpartRowCount !== BigFiveEn52PackageCompiler::ASSET_COUNT) {
+            throw new RuntimeException('Chinese CMS authority inventory must contain exactly 52 canonical counterpart rows.');
+        }
 
         $descriptors = [];
         $identitySeen = [];
@@ -258,6 +266,9 @@ final class BigFiveEn52Publisher
             if ((string) data_get($row->canonical_json, 'path', '') !== $canonical) {
                 throw new RuntimeException('Existing CMS canonical does not match the locked descriptor for '.$authorityAssetKey.'.');
             }
+            if ($row->published_at?->isFuture()) {
+                throw new RuntimeException('Existing CMS target has a future published_at for '.$authorityAssetKey.'.');
+            }
             $slugCollision = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
                 ->where('org_id', 0)
                 ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
@@ -288,6 +299,27 @@ final class BigFiveEn52Publisher
             ];
             if ($this->stableJson($row->hreflang_json) !== $this->stableJson($expectedHreflang)) {
                 throw new RuntimeException('Existing CMS hreflang must equal the exact en/zh-CN canonical pair for '.$authorityAssetKey.'.');
+            }
+            $zhCounterpart = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+                ->where('entity_type', $data->entityType)
+                ->where('entity_key', $data->entityKey)
+                ->where('locale', 'zh-CN')
+                ->first();
+            if (! $zhCounterpart instanceof PersonalityPublicContentAsset) {
+                throw new RuntimeException('Corresponding zh-CN authority row is missing for '.$authorityAssetKey.'.');
+            }
+            if ((string) data_get($zhCounterpart->canonical_json, 'path', '') !== $expectedHreflang['zh-CN']
+                || $this->stableJson($zhCounterpart->hreflang_json) !== $this->stableJson($expectedHreflang)) {
+                throw new RuntimeException('Corresponding zh-CN authority row canonical or hreflang drifted for '.$authorityAssetKey.'.');
+            }
+            $zhCounterpartIsReadable = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+                ->publiclyReadable()
+                ->whereKey($zhCounterpart->id)
+                ->exists();
+            if (! $zhCounterpartIsReadable) {
+                throw new RuntimeException('Corresponding zh-CN authority row is not publicly readable for '.$authorityAssetKey.'.');
             }
             $attributes['hreflang_json'] = $expectedHreflang;
             $attributes['created_by_admin_user_id'] = self::OPERATOR_ADMIN_USER_ID;
