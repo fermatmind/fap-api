@@ -820,7 +820,7 @@ task('queue:reload-workers', function () {
                 $quotedService = deploySystemdServiceArg($legacySystemdService, 'legacy_queue_systemd_service');
                 $notFoundMessage = deployShellArg("legacy queue systemd service not found: {$legacySystemdService}");
                 writeln('<comment>supervisorctl not found; fallback to legacy systemd queue service</comment>');
-                run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl restart {$quotedService}; else printf '%s\\n' {$notFoundMessage} >&2; fi");
+                run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl restart {$quotedService}; else printf '%s\\n' {$notFoundMessage} >&2; exit 1; fi");
 
                 return;
             }

@@ -438,6 +438,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('Reload queue workers through the process manager without a cache restart signal in code_only deploy mode', $source);
         $this->assertStringContainsString('Reload queue workers through systemd without a cache restart signal in code_only deploy mode', $source);
         $this->assertStringContainsString('code_only deploy requires a queue process manager reload path', $source);
+        $this->assertStringContainsString("else printf '%s\\\\n' {\$notFoundMessage} >&2; exit 1; fi", $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip nginx reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $source);
