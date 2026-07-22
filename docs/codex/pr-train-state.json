@@ -99103,7 +99103,7 @@
     "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
     "depends_on": [],
     "status": "github_checks_pending",
-    "commit_sha": "1d6cc801cd7baf39d9b5c3d0854b52eb0fe6d990",
+    "commit_sha": "ac4e32c435b86e715020c1fa4854f9d256b573a3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3210",
     "checks": {
       "authorization": {
@@ -99112,7 +99112,7 @@
       },
       "dependency": {
         "status": "passed",
-        "evidence": "No PR dependencies; branch started from exact origin/main 2c197196ab041f5e5102f9d828e7e978bc96c8ba."
+        "evidence": "No declared PR dependency. Branch started from origin/main 2c197196ab041f5e5102f9d828e7e978bc96c8ba, then rebased onto exact origin/main f474b41ec49e67956697878d90436a6bd19243e0 after isolated required-check baseline repair PR #3211 merged."
       },
       "local_validation": {
         "status": "passed",
@@ -99155,8 +99155,13 @@
         "at": "2026-07-22T17:17:21Z",
         "status": "github_checks_pending",
         "note": "Implementation commit 1d6cc801cd7baf39d9b5c3d0854b52eb0fe6d990 was pushed and PR #3210 opened. Awaiting required GitHub checks; no deployment workflow was manually dispatched."
+      },
+      {
+        "at": "2026-07-22T17:42:22Z",
+        "status": "github_checks_pending",
+        "note": "The first CI run failed only because six Guzzle advisories published after the last main CI made Composer audit fail on the unchanged main lockfile. Isolated lockfile-only baseline repair PR #3211 passed full local and remote CI with zero advisories and merged as f474b41ec49e67956697878d90436a6bd19243e0. This branch was rebased onto that exact main; implementation commit is now ac4e32c435b86e715020c1fa4854f9d256b573a3. Awaiting the combined exact-head rerun."
       }
     ],
-    "updated_at": "2026-07-22T17:17:21Z"
+    "updated_at": "2026-07-22T17:42:22Z"
   }
 }
