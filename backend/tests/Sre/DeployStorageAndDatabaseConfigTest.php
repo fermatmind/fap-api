@@ -351,6 +351,45 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function code_only_scope_accepts_only_the_exact_audited_root5_paths(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+
+        foreach ([
+            '.github/workflows/career-detail-staging-cache-repair.yml',
+            '.github/workflows/deploy.yml',
+            '.github/workflows/mbti-comp-runtime46-production-ops.yml',
+            '.github/workflows/mbti-comp-runtime46-staging-dry-run.yml',
+            'backend/app/Filament/Ops/Resources/AdminApprovalResource.php',
+            'backend/app/Models/AdminApproval.php',
+            'backend/app/Models/DailyGivingRecord.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
+            'backend/docs/career/README.md',
+            'backend/docs/career/career-detail-stability-train-2026-07-18.md',
+            'backend/docs/career/job-detail-cache-coverage.md',
+            'backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json',
+            'backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md',
+            'docs/ops/big-five-en52-release.md',
+            'docs/ops/big-five-legacy-alias-hard-purge.md',
+        ] as $auditedPath) {
+            $this->assertStringContainsString($auditedPath, $source);
+        }
+
+        $this->assertStringContainsString(
+            'code-only scope accepted exact audited Root5 runtime or inert evidence path:',
+            $source
+        );
+        $this->assertStringContainsString('backend/database/*', $source);
+        $this->assertStringContainsString('backend/content_baselines/*', $source);
+        $this->assertStringContainsString('content_packages/*', $source);
+        $this->assertStringContainsString('backend/storage/*', $source);
+        $this->assertStringContainsString('code-only scope refused authority path:', $source);
+        $this->assertStringNotContainsString('backend/app/Services/Cms/*)', $source);
+        $this->assertStringNotContainsString('backend/app/Models/*)', $source);
+        $this->assertStringNotContainsString('backend/app/Filament/*)', $source);
+    }
+
+    #[Test]
     public function release_candidate_record_keeps_the_main_head_and_undeployed_commit_list_auditable(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');

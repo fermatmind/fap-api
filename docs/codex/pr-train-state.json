@@ -99094,5 +99094,64 @@
       {"at": "2026-07-19T07:09:16Z", "status": "review_fix_local_validation_passed", "note": "The refreshed review correctly identified that Runtime46 commit_sha still referenced the initial evidence commit. Advanced it to exact reviewed all-green head f2048e239e20290c8828c660f7c9d8569c02779e; the following commit changes only this Runtime46 pointer and its evidence note before the final GitHub checks rerun."}
     ],
     "updated_at": "2026-07-19T07:09:16Z"
+  },
+  "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01": {
+    "id": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-root5-no-mutation-deploy-path-01",
+    "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
+    "depends_on": [],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Operator explicitly authorized the complete PR lifecycle and prohibited deploy, restart, CMS/database/cache writes."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "No PR dependencies; branch started from exact origin/main 2c197196ab041f5e5102f9d828e7e978bc96c8ba."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused deploy storage/database config suite passed (19 tests, 318 assertions); exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash scripts/ci_verify_mbti.sh exited 0, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-22T17:07:33Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 2c197196 with a four-file workflow/test/train-metadata scope. The change admits only fifteen exact audited Root5 runtime, deployment-control, or inert evidence paths while preserving fail-closed mutation and unknown-path rejection. No deploy, restart, SSH, migration, CMS/database/cache/Search or sitemap action is authorized or executed."
+      },
+      {
+        "at": "2026-07-22T17:15:58Z",
+        "status": "local_validation_passed",
+        "note": "All manifest local checks passed. Full CI exited 0; generated Big Five compiler output was removed from the task diff, leaving exactly the four declared workflow, focused test and train-metadata files. No deployment or external mutation was executed."
+      }
+    ],
+    "updated_at": "2026-07-22T17:15:58Z"
   }
 }
