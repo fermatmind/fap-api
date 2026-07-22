@@ -99102,8 +99102,8 @@
     "branch": "codex/saep-proposed-api-root5-no-mutation-deploy-path-01",
     "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "12e8fc73e7218003cc3f3122dbda3cdc749eb1c7",
+    "status": "github_checks_pending",
+    "commit_sha": "5d494247f10935d1edec6f05e59f01b90b3793cc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3210",
     "checks": {
       "authorization": {
@@ -99116,17 +99116,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Initial and review-fix validation passed. Focused deploy storage/database config suite now passes 19 tests / 323 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash scripts/ci_verify_mbti.sh exited 0 after the review fix, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates."
+        "evidence": "Initial and both review-fix validation passes succeeded. Focused deploy storage/database config suite now passes 19 tests / 324 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash backend/scripts/ci_verify_mbti.sh exited 0 after the missing-unit fail-closed fix, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates. One incorrect Pint executable path and one root-level HTTP-smoke script invocation failed harmlessly before their correct commands passed; neither performed an external mutation."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact reviewed head 91a826d3c67f0c5f48b245537a48119ed08e6096 passed every required CI and Code Scanning check. The following commit changes only the corrected resolvable implementation pointer and ready-to-merge ledger state; it must pass the same required checks before merge."
+        "status": "pending",
+        "evidence": "All required CI and Code Scanning checks passed on the prior ledger head d4b80fadb869936bad5ab148aac9b6f4eecc82d2. Exact implementation head 5d494247f10935d1edec6f05e59f01b90b3793cc and the following ledger-only pointer commit must rerun the same checks before merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99175,8 +99175,13 @@
         "at": "2026-07-22T18:11:53Z",
         "status": "ready_to_merge",
         "note": "Exact-head review identified that the prior ledger-only commit manually expanded the implementation SHA incorrectly. The pointer is corrected to the real resolvable commit 12e8fc73e7218003cc3f3122dbda3cdc749eb1c7. All required CI and Code Scanning checks passed on reviewed head 91a826d3c67f0c5f48b245537a48119ed08e6096, the worker-reload P1 thread is resolved, and the following commit changes only this ledger correction and ready-to-merge state. Merge remains gated on its exact-head required-check rerun and zero unresolved review threads; no deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-22T18:29:03Z",
+        "status": "github_checks_pending",
+        "note": "Final exact-head review identified a valid P2: the supervisor fallback printed a missing legacy systemd unit error but returned success, allowing code_only to finish without any worker reload. Implementation head 5d494247f10935d1edec6f05e59f01b90b3793cc now exits nonzero in that branch. Focused validation passed 19 tests / 324 assertions, scoped syntax/Pint/diff checks passed, and the complete backend master CI exited 0. The following commit changes only this ledger pointer before exact-head GitHub checks; no deployment, restart, SSH, CMS/database/cache/Search or other external mutation was executed."
       }
     ],
-    "updated_at": "2026-07-22T18:11:53Z"
+    "updated_at": "2026-07-22T18:29:03Z"
   }
 }
