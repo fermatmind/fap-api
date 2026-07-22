@@ -133,9 +133,11 @@ prs:
       - Admit only the fifteen exact audited Root5 runtime, deployment-control, or inert evidence paths currently rejected by the cumulative production code-only classifier.
       - Preserve fail-closed rejection of migrations, database/content authority artifacts, storage state, and any unknown or non-audited CMS, Model, Filament, or backend documentation path.
       - Preserve the existing deploy:code-only task boundary that omits migrations, seeders, CMS baseline imports, Career authority cache warm, and sitemap source cache warm.
+      - Reload long-running queue workers through the configured process manager after code-only symlink activation, without issuing the cache-backed artisan queue restart signal; fail closed when no process-manager reload path exists.
     allowed_paths:
       - .github/workflows/deploy-production.yml
       - backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php
+      - deploy.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
@@ -143,7 +145,7 @@ prs:
       - Execute staging or production deployment, restart or reload any service, use SSH, or remove a deploy lock.
       - Execute migrations, CMS/database writes, cache warm/flush/clear, baseline import, publication, Search action, or sitemap mutation.
       - Add wildcard acceptance for backend/app/Services/Cms, backend/app/Models, backend/app/Filament, backend/docs, or any authority/data path.
-      - Modify deploy.php, application runtime behavior, routes, migrations, content authority, or fap-web.
+      - Modify application runtime behavior, routes, migrations, content authority, or fap-web.
     validation:
       - cd backend && php artisan test tests/Sre/DeployStorageAndDatabaseConfigTest.php --filter='code_only' --no-ansi
       - cd backend && vendor/bin/pint --test tests/Sre/DeployStorageAndDatabaseConfigTest.php

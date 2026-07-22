@@ -99116,7 +99116,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused deploy storage/database config suite passed (19 tests, 318 assertions); exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash scripts/ci_verify_mbti.sh exited 0, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates."
+        "evidence": "Initial and review-fix validation passed. Focused deploy storage/database config suite now passes 19 tests / 323 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash scripts/ci_verify_mbti.sh exited 0 after the review fix, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates."
       },
       "github_required_checks": {
         "status": "pending",
@@ -99160,8 +99160,13 @@
         "at": "2026-07-22T17:42:22Z",
         "status": "github_checks_pending",
         "note": "The first CI run failed only because six Guzzle advisories published after the last main CI made Composer audit fail on the unchanged main lockfile. Isolated lockfile-only baseline repair PR #3211 passed full local and remote CI with zero advisories and merged as f474b41ec49e67956697878d90436a6bd19243e0. This branch was rebased onto that exact main; implementation commit is now ac4e32c435b86e715020c1fa4854f9d256b573a3. Awaiting the combined exact-head rerun."
+      },
+      {
+        "at": "2026-07-22T18:00:42Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact-head review identified that newly admitted approval UI/model code could dispatch work to stale pre-release queue workers. The same-scope fix makes code_only reload workers directly through configured supervisor/systemd without the cache-backed artisan queue:restart signal and fail closed when no manager reload path exists. Focused 19-test / 323-assertion suite, scoped Pint and the complete local CI passed. One initial Pint invocation used an unreadable ../../deploy.php path; it was corrected to ../deploy.php and passed without modifying external state. No deploy, restart, SSH or CMS/database/cache/Search action was executed."
       }
     ],
-    "updated_at": "2026-07-22T17:42:22Z"
+    "updated_at": "2026-07-22T18:00:42Z"
   }
 }

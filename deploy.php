@@ -795,11 +795,7 @@ task('reload:nginx', function () {
 });
 
 task('queue:reload-workers', function () {
-    if (deployIsCodeOnly()) {
-        writeln('<comment>Skip queue worker reload in code_only deploy mode</comment>');
-
-        return;
-    }
+    $codeOnly = deployIsCodeOnly();
 
     $manager = strtolower(trim((string) get('queue_manager', 'supervisor')));
 
@@ -810,9 +806,13 @@ task('queue:reload-workers', function () {
         $legacySystemdService = trim((string) get('legacy_queue_systemd_service', ''));
         $disableLegacySystemd = (bool) get('legacy_queue_systemd_disable', true);
 
-        within('{{current_path}}/backend', function () {
-            run('{{bin/php}} artisan queue:restart --ansi');
-        });
+        if (! $codeOnly) {
+            within('{{current_path}}/backend', function () {
+                run('{{bin/php}} artisan queue:restart --ansi');
+            });
+        } else {
+            writeln('<comment>Reload queue workers through the process manager without a cache restart signal in code_only deploy mode</comment>');
+        }
 
         $supervisorctlAvailable = test('[ -x '.escapeshellarg($supervisorctl).' ] || command -v supervisorctl >/dev/null 2>&1');
         if (! $supervisorctlAvailable) {
@@ -823,6 +823,10 @@ task('queue:reload-workers', function () {
                 run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl restart {$quotedService}; else printf '%s\\n' {$notFoundMessage} >&2; fi");
 
                 return;
+            }
+
+            if ($codeOnly) {
+                throw new \RuntimeException('code_only deploy requires a queue process manager reload path');
             }
 
             writeln('<comment>supervisorctl not found and no legacy systemd service configured; skip manager-specific queue reload</comment>');
@@ -871,9 +875,13 @@ task('queue:reload-workers', function () {
             throw new \RuntimeException('queue manager systemd requires legacy_queue_systemd_service');
         }
 
-        within('{{current_path}}/backend', function () {
-            run('{{bin/php}} artisan queue:restart --ansi');
-        });
+        if (! $codeOnly) {
+            within('{{current_path}}/backend', function () {
+                run('{{bin/php}} artisan queue:restart --ansi');
+            });
+        } else {
+            writeln('<comment>Reload queue workers through systemd without a cache restart signal in code_only deploy mode</comment>');
+        }
         $quotedService = deploySystemdServiceArg($systemdService, 'legacy_queue_systemd_service');
         run("sudo -n /usr/bin/systemctl restart {$quotedService}");
 
