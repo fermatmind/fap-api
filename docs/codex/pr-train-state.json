@@ -89043,7 +89043,7 @@
   "scope_validation": {
     "allowed_paths_only": true,
     "local_validation_passed": true,
-    "github_checks_green": true,
+      "github_checks_green": true,
     "post_merge_revalidated": true
   },
   "transitions": [
@@ -99102,8 +99102,8 @@
     "branch": "codex/saep-proposed-api-root5-no-mutation-deploy-path-01",
     "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
     "depends_on": [],
-    "status": "github_checks_pending",
-    "commit_sha": "12e8fc73e904f6b71e0ab20fc892068204886d6a",
+    "status": "ready_to_merge",
+    "commit_sha": "12e8fc73e7218003cc3f3122dbda3cdc749eb1c7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3210",
     "checks": {
       "authorization": {
@@ -99119,14 +99119,14 @@
         "evidence": "Initial and review-fix validation passed. Focused deploy storage/database config suite now passes 19 tests / 323 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash scripts/ci_verify_mbti.sh exited 0 after the review fix, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact reviewed head 91a826d3c67f0c5f48b245537a48119ed08e6096 passed every required CI and Code Scanning check. The following commit changes only the corrected resolvable implementation pointer and ready-to-merge ledger state; it must pass the same required checks before merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99169,9 +99169,14 @@
       {
         "at": "2026-07-22T18:01:33Z",
         "status": "github_checks_pending",
-        "note": "Review fix committed as exact implementation head 12e8fc73e904f6b71e0ab20fc892068204886d6a. The following commit updates only this ledger pointer before the required-check rerun; no deployment or external mutation was executed."
+        "note": "Review fix committed as exact implementation head 12e8fc73e7218003cc3f3122dbda3cdc749eb1c7. The following commit updates only this ledger pointer before the required-check rerun; no deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-22T18:11:53Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review identified that the prior ledger-only commit manually expanded the implementation SHA incorrectly. The pointer is corrected to the real resolvable commit 12e8fc73e7218003cc3f3122dbda3cdc749eb1c7. All required CI and Code Scanning checks passed on reviewed head 91a826d3c67f0c5f48b245537a48119ed08e6096, the worker-reload P1 thread is resolved, and the following commit changes only this ledger correction and ready-to-merge state. Merge remains gated on its exact-head required-check rerun and zero unresolved review threads; no deployment or external mutation was executed."
       }
     ],
-    "updated_at": "2026-07-22T18:01:33Z"
+    "updated_at": "2026-07-22T18:11:53Z"
   }
 }
