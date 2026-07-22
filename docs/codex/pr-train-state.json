@@ -99102,9 +99102,9 @@
     "branch": "codex/saep-proposed-api-root5-no-mutation-deploy-path-01",
     "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
     "depends_on": [],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "1d6cc801cd7baf39d9b5c3d0854b52eb0fe6d990",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3210",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -99150,8 +99150,13 @@
         "at": "2026-07-22T17:15:58Z",
         "status": "local_validation_passed",
         "note": "All manifest local checks passed. Full CI exited 0; generated Big Five compiler output was removed from the task diff, leaving exactly the four declared workflow, focused test and train-metadata files. No deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-22T17:17:21Z",
+        "status": "github_checks_pending",
+        "note": "Implementation commit 1d6cc801cd7baf39d9b5c3d0854b52eb0fe6d990 was pushed and PR #3210 opened. Awaiting required GitHub checks; no deployment workflow was manually dispatched."
       }
     ],
-    "updated_at": "2026-07-22T17:15:58Z"
+    "updated_at": "2026-07-22T17:17:21Z"
   }
 }
