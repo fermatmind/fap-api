@@ -953,7 +953,8 @@ task('guard:queue-reload-capability', function () {
                 (array) get('queue_supervisor_required_programs', []),
                 static fn (mixed $value): bool => trim((string) $value) !== ''
             ));
-            if (deployIsCodeOnly() && deployBooleanOption('require_ops_queue_reload', false)) {
+            if (currentHost()->getAlias() === 'production'
+                || deployBooleanOption('require_ops_queue_reload', false)) {
                 $requiredPrograms[] = 'fap-queue-ops';
                 $requiredPrograms = array_values(array_unique($requiredPrograms));
             }
@@ -1050,7 +1051,8 @@ task('queue:reload-workers', function () {
         $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
         $requiredPrograms = array_values(array_filter((array) get('queue_supervisor_required_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
         $optionalPrograms = array_values(array_filter((array) get('queue_supervisor_optional_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
-        $requireOpsQueueReload = $codeOnly && deployBooleanOption('require_ops_queue_reload', false);
+        $requireOpsQueueReload = currentHost()->getAlias() === 'production'
+            || deployBooleanOption('require_ops_queue_reload', false);
         if ($requireOpsQueueReload) {
             $requiredPrograms[] = 'fap-queue-ops';
             $requiredPrograms = array_values(array_unique($requiredPrograms));
@@ -1058,7 +1060,7 @@ task('queue:reload-workers', function () {
                 $optionalPrograms,
                 static fn (string $program): bool => $program !== 'fap-queue-ops'
             ));
-            writeln('<comment>Require the ops queue worker reload for approval runtime code_only scope</comment>');
+            writeln('<comment>Require the ops queue worker for the production approval runtime topology</comment>');
         }
         $legacySystemdService = trim((string) get('legacy_queue_systemd_service', ''));
         $disableLegacySystemd = (bool) get('legacy_queue_systemd_disable', true);
@@ -1074,7 +1076,7 @@ task('queue:reload-workers', function () {
         $supervisorctlAvailable = test('[ -x '.escapeshellarg($supervisorctl).' ] || command -v supervisorctl >/dev/null 2>&1');
         if (! $supervisorctlAvailable) {
             if ($requireOpsQueueReload) {
-                throw new \RuntimeException('approval runtime code_only deploy requires the supervisor ops queue reload path');
+                throw new \RuntimeException('production approval runtime requires the supervisor ops queue reload path');
             }
 
             if ($legacySystemdService !== '') {
