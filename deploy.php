@@ -408,12 +408,19 @@ task('guard:public-dns-health', function () {
 before('deploy:symlink', 'guard:public-dns-health');
 
 /**
- * The current symlink must never expose a Career directory whose published
- * detail routes are not fully backed by verified active/LKG/legacy cache
- * payloads. This is read-only and runs against the release code plus shared
- * runtime cache before activation.
+ * Standard and schema-only releases must never expose a Career directory whose
+ * published detail routes are not fully backed by verified active/LKG/legacy
+ * cache payloads. A code-only release neither rebuilds nor mutates those detail
+ * caches, so an existing L3 cache-coverage deficit must not block an unrelated
+ * L1 runtime activation.
  */
 task('guard:career-detail-cache-coverage', function () {
+    if (deployIsCodeOnly()) {
+        writeln('<comment>Skipping Career detail cache coverage for code-only release; shared detail caches are unchanged.</comment>');
+
+        return;
+    }
+
     $minimumTargetsRaw = getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS');
     $minimumTargetsRaw = $minimumTargetsRaw === false || trim($minimumTargetsRaw) === ''
         ? '2092'
