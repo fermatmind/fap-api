@@ -26,7 +26,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": null
+        "evidence": "Initial exact-head run passed 8 checks and failed verify-bigfive only because its runtime-freeze classifier did not yet classify the new Career-only reviewer bridge as MBTI-isolated. The exact allowlist regression was added in scope and its two focused tests / 6 assertions pass locally; GitHub rerun is pending."
       }
     },
     "scope_validation": {
@@ -67,9 +67,14 @@
         "at": "2026-07-23T01:45:00Z",
         "status": "github_checks_pending",
         "note": "Committed the exact nine-path PR2 scope as 8c808558b429dc538df24f19149d75e699f33c6c, pushed the scoped branch, and opened PR #3214. Merge remains gated on all required GitHub checks, clean scope, mergeability, and resolved actionable review. This following commit changes only the PR2 ledger transition."
+      },
+      {
+        "at": "2026-07-23T01:50:00Z",
+        "status": "github_checks_failed_repairing",
+        "note": "Initial GitHub exact head passed hygiene, supply-chain, content-pack, both MBTI freezes, Semgrep blocking/OSS/SARIF and failed only verify-bigfive after 1583 tests because the freeze classifier flagged the new Career-only review bridge. Added that exact bridge path to the existing solo-owner Career/SEO review classifier and its positive regression set; the focused freeze tests now pass 2 tests/6 assertions. Required checks remain pending rerun and are not overridden."
       }
     ],
-    "updated_at": "2026-07-23T01:45:00Z"
+    "updated_at": "2026-07-23T01:50:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",

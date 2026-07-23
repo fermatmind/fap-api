@@ -193,6 +193,7 @@ prs:
       - backend/tests/Feature/Career/CareerJobDetailApiTest.php
       - backend/tests/Feature/Career/CareerJobListApiTest.php
       - backend/tests/Feature/ReviewGovernance/CareerSeoReviewAttestationServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/seo/career-pilot-review-evidence-bridge-01.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -211,6 +212,7 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php tests/Feature/ReviewGovernance/CareerSeoReviewAttestationServiceTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php --no-ansi
       - cd backend && php artisan route:list --path=api --except-vendor
       - cd backend && vendor/bin/pint --test app/Console/Commands/CareerBuildPilotReviewPackageCommand.php app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php app/Http/Controllers/API/V0_5/Career/CareerJobListController.php app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_solo_owner_career_seo_review_files' --no-ansi
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
