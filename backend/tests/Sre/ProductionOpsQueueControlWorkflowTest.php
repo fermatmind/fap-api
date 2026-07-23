@@ -62,6 +62,13 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'sudo -n "$supervisorctl_path" update fap-queue-ops',
             'OPS_QUEUE_REMOTE_PREFLIGHT_FAILED',
             'OPS_QUEUE_REMOTE_APPLY_FAILED',
+            'OPS_QUEUE_PREFLIGHT_GATE_FAILED:[A-Z0-9_]+',
+            'OPS_QUEUE_APPLY_GATE_FAILED:[A-Z0-9_]+',
+            'failure_gate=PID_LOOKUP',
+            'failure_gate=WORKING_DIRECTORY',
+            'failure_gate=ARGV_IDENTITY',
+            'failure_gate=PROCESS_START_AFTER_CONFIG',
+            'failure_gate=QUEUE_PROBE',
             'application_deploy_count: 0',
             'symlink_write_count: 0',
             'migration_count: 0',
@@ -79,6 +86,14 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertStringNotContainsString('whoami', $workflow);
         $this->assertStringNotContainsString('hostname', $workflow);
         $this->assertStringNotContainsString('cat "$META"', $workflow);
+        $this->assertStringNotContainsString(
+            'cat "$RUNNER_TEMP/ops-queue-preflight-ssh.err"',
+            $workflow,
+        );
+        $this->assertStringNotContainsString(
+            'cat "$RUNNER_TEMP/ops-queue-apply-ssh.err"',
+            $workflow,
+        );
         $this->assertStringNotContainsString(
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
             $workflow,
