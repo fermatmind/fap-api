@@ -1,4 +1,71 @@
 {
+  "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01": {
+    "id": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-pilot-review-evidence-bridge-01",
+    "title": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01 bind exact career review evidence",
+    "depends_on": [
+      "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized the exact five-PR Career search-entry plan, including this reviewer-evidence bridge scope and controlled-production boundary."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3213 is merged as 31819becfcf8bda0b3fd9ae4f301b011e031374f, origin/main contains the merge, required checks passed, and local/remote task-branch cleanup was verified before this PR started from that exact main revision."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused Career pilot bridge, review-governance, job list/detail, and architecture suites passed 48 tests / 758 assertions. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, git diff, and exact allowed-path scope checks passed. The package command remained read-only and no controlled production action occurred."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-23T09:30:00+08:00",
+        "status": "planned",
+        "note": "Operator authorized CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01 with exact branch/title and dependency on merged PR1. Scope is deterministic bilingual visible content/SEO/claim targets, exact solo-owner approved_all evidence projection, automatic stale-evidence invalidation, and private reviewer evidence. Deploy, production evidence bind, CMS/database mutation, publication, indexability, sitemap/llms, Search Channel, held-slug release, and URL submission remain prohibited."
+      },
+      {
+        "at": "2026-07-23T09:45:00+08:00",
+        "status": "in_progress",
+        "note": "Started from exact PR1 merge 31819becfcf8bda0b3fd9ae4f301b011e031374f in an isolated worktree. Added the read-only six-target-per-slug package builder and exact public projection bridge; focused validation is in progress and no controlled production action has occurred."
+      },
+      {
+        "at": "2026-07-23T01:40:00Z",
+        "status": "local_validation_passed",
+        "note": "Implemented deterministic bilingual content/SEO/visible-claim targets, exact scope/target/package evidence lookup, whole-batch stale invalidation, and identity-redacted list/detail projection. Focused suites passed 48 tests/758 assertions; syntax, 220 routes, Pint, Composer validation/audit, YAML/JSON, diff, and exact-path scope passed. No deploy, production evidence bind, cache operation, CMS/database mutation, publication, indexability, sitemap/llms, Search Channel action, held-slug release, or URL submission occurred."
+      }
+    ],
+    "updated_at": "2026-07-23T01:40:00Z"
+  },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
     "repo": "fap-api",
@@ -6,8 +73,8 @@
     "branch": "codex/career-jobs-index-lkg-resilience-01",
     "title": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01 stabilize legacy career jobs index",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "c3d8262ea627e4a3ec87e5fa6c7b321a5c8af6ed",
+    "status": "merged",
+    "commit_sha": "31819becfcf8bda0b3fd9ae4f301b011e031374f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3213",
     "checks": {
       "authorization": {
@@ -31,12 +98,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-23T01:29:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65,9 +132,14 @@
         "at": "2026-07-23T01:13:29Z",
         "status": "ready_to_merge",
         "note": "All 9 GitHub checks passed on exact head c3d8262ea627e4a3ec87e5fa6c7b321a5c8af6ed and GitHub reports CLEAN/MERGEABLE. The only review thread proposed treating an unactivated legacy v2 payload as success; this was declined because it conflicts with the operator-approved active-to-LKG then CAREER_JOB_INDEX_NOT_WARM 503 contract, and the thread is resolved. This following commit changes only the PR1 ledger state before final exact-head checks rerun."
+      },
+      {
+        "at": "2026-07-23T01:29:00Z",
+        "status": "merged",
+        "note": "Reconciled during PR2 after GitHub confirmed PR #3213 merged as 31819becfcf8bda0b3fd9ae4f301b011e031374f, origin/main containment, all nine required checks green, remote branch deletion, local task worktree/branch cleanup, and clean isolated post-merge focused revalidation. No production deploy or cache operation occurred."
       }
     ],
-    "updated_at": "2026-07-23T01:13:29Z"
+    "updated_at": "2026-07-23T01:29:00Z"
   },
   "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01": {
     "id": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01",

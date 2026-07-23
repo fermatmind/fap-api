@@ -7,6 +7,7 @@ namespace App\Http\Controllers\API\V0_5\Career;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Career\Review\CareerPilotReviewEvidenceBridge;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -46,6 +47,7 @@ final class CareerJobDetailController extends Controller
 
     public function __construct(
         private readonly PublicCareerAuthorityResponseCache $responseCache,
+        private readonly CareerPilotReviewEvidenceBridge $reviewEvidenceBridge,
     ) {}
 
     public function show(Request $request, string $slug): JsonResponse
@@ -57,6 +59,8 @@ final class CareerJobDetailController extends Controller
         if ($payload === null) {
             return $this->notFoundResponse('career job detail bundle unavailable.');
         }
+
+        $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload);
 
         return response()->json($this->projectReaderSafePayload($payload))
             ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);
