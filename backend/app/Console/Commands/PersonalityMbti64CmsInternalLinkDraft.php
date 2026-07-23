@@ -27,6 +27,10 @@ final class PersonalityMbti64CmsInternalLinkDraft extends Command
         {--graph= : Path to the MBTI64 internal-link graph JSON artifact}
         {--dry-run : Validate and plan without database writes}
         {--write : Create CMS internal-link draft revision rows}
+        {--locale= : Bounded cohort locale; --write requires en}
+        {--page-type= : Bounded source page type; --write requires variant}
+        {--expected-rows= : Bounded source row count; --write requires 32}
+        {--expected-edges= : Bounded active edge count; --write requires 64}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
         {--draft-only : Required for --write; confirms revision draft only}
@@ -71,6 +75,8 @@ final class PersonalityMbti64CmsInternalLinkDraft extends Command
             throw new RuntimeException('Either --dry-run or --write is required.');
         }
 
+        $this->assertBoundedOptions($write);
+
         if ($write) {
             $this->assertWriteGuards();
         }
@@ -110,6 +116,36 @@ final class PersonalityMbti64CmsInternalLinkDraft extends Command
         }
     }
 
+    private function assertBoundedOptions(bool $write): void
+    {
+        $provided = [
+            'locale' => trim((string) $this->option('locale')),
+            'page-type' => trim((string) $this->option('page-type')),
+            'expected-rows' => trim((string) $this->option('expected-rows')),
+            'expected-edges' => trim((string) $this->option('expected-edges')),
+        ];
+        $anyProvided = array_filter(
+            $provided,
+            static fn (string $value): bool => $value !== ''
+        ) !== [];
+
+        if (! $write && ! $anyProvided) {
+            return;
+        }
+
+        $expected = [
+            'locale' => 'en',
+            'page-type' => 'variant',
+            'expected-rows' => '32',
+            'expected-edges' => '64',
+        ];
+        foreach ($expected as $name => $value) {
+            if ($provided[$name] !== $value) {
+                throw new RuntimeException('--'.$name.'='.$value.' is required for the bounded MBTI64 draft cohort.');
+            }
+        }
+    }
+
     private function resolvePath(string $path): string
     {
         $resolved = str_starts_with($path, '/')
@@ -131,6 +167,10 @@ final class PersonalityMbti64CmsInternalLinkDraft extends Command
         return [
             'dry_run' => (bool) $this->option('dry-run'),
             'write' => (bool) $this->option('write'),
+            'locale' => trim((string) $this->option('locale')),
+            'page_type' => trim((string) $this->option('page-type')),
+            'expected_rows' => (int) $this->option('expected-rows'),
+            'expected_edges' => (int) $this->option('expected-edges'),
             'draft_only' => (bool) $this->option('draft-only'),
             'no_publish' => (bool) $this->option('no-publish'),
             'no_index' => (bool) $this->option('no-index'),

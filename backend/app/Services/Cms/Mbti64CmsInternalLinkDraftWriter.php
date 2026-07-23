@@ -16,6 +16,15 @@ final class Mbti64CmsInternalLinkDraftWriter
 
     private const GRAPH_VERSION = 'mbti64.internal_link_graph.v1';
 
+    private const BOUNDED_EDGE_TYPES = [
+        'variant_at_pair',
+        'variant_to_comparison',
+    ];
+
+    private const EXCLUDED_BOUNDED_EDGE_TYPES = [
+        'related_test',
+    ];
+
     private const FORBIDDEN_ROUTE_PATTERNS = [
         '#/results?(?:/|$)#i',
         '#/orders?(?:/|$)#i',
@@ -57,8 +66,30 @@ final class Mbti64CmsInternalLinkDraftWriter
     {
         $errors = $this->validateGraph($graph);
         $warnings = [];
+        $boundary = $this->boundary($options);
+        if ($write && $boundary === null) {
+            $errors[] = [
+                'field' => 'options',
+                'code' => 'bounded_write_options_required',
+                'message' => 'Writes require locale=en, page_type=variant, expected_rows=32 and expected_edges=64.',
+            ];
+        }
 
         $nodes = $this->nodes($graph);
+        if ($boundary !== null) {
+            $nodes = array_values(array_filter(
+                $nodes,
+                function (array $node) use ($boundary): bool {
+                    $path = $this->normalizePath((string) ($node['path'] ?? $node['url'] ?? ''));
+                    $identity = $this->identityForNode($node, $path);
+
+                    return $identity !== null
+                        && $identity['locale'] === $boundary['locale']
+                        && $identity['page_type'] === $boundary['page_type'];
+                }
+            ));
+        }
+
         $nodesByPath = [];
         foreach ($nodes as $node) {
             $path = $this->normalizePath((string) ($node['path'] ?? $node['url'] ?? ''));
@@ -69,6 +100,13 @@ final class Mbti64CmsInternalLinkDraftWriter
 
         $recommendedBySource = $this->groupEdges($graph, 'recommendedEdges');
         $blockedBySource = $this->groupEdges($graph, 'blockedEdges');
+        $cohortPayloadSha256 = $boundary !== null
+            ? $this->cohortPayloadSha256(
+                $nodesByPath,
+                $this->edges($graph, 'recommendedEdges'),
+                $errors
+            )
+            : null;
         $privateRecommendedEdgeCount = 0;
         foreach ($this->edges($graph, 'recommendedEdges') as $edge) {
             $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
@@ -95,9 +133,12 @@ final class Mbti64CmsInternalLinkDraftWriter
                 continue;
             }
 
-            $activeEdges = $this->activeEdgesForSource($recommendedBySource[$sourcePath] ?? []);
+            $sourceRecommendedEdges = $recommendedBySource[$sourcePath] ?? [];
+            $activeEdges = $boundary !== null
+                ? $this->boundedEdgesForSource($sourcePath, $sourceRecommendedEdges, $identity, $errors)
+                : $this->activeEdgesForSource($sourceRecommendedEdges);
             $blockedEdges = array_values($blockedBySource[$sourcePath] ?? []);
-            $internalLinks = $this->internalLinks($activeEdges);
+            $internalLinks = $this->internalLinks($activeEdges, $identity, $boundary !== null);
 
             if ($internalLinks === []) {
                 $errors[] = [
@@ -121,7 +162,14 @@ final class Mbti64CmsInternalLinkDraftWriter
             }
 
             $existingRevision = is_int($targetId)
-                ? $this->existingRevision($pageType, $targetField, $targetId, $sourceSha256)
+                ? $this->existingRevision(
+                    $pageType,
+                    $targetField,
+                    $targetId,
+                    $sourceSha256,
+                    $cohortPayloadSha256,
+                    $boundary
+                )
                 : null;
             $nextRevisionNo = is_int($targetId)
                 ? $this->nextRevisionNo($pageType, $targetField, $targetId)
@@ -151,6 +199,8 @@ final class Mbti64CmsInternalLinkDraftWriter
                     $node,
                     $identity,
                     $sourceSha256,
+                    $cohortPayloadSha256,
+                    $boundary,
                     $activeEdges,
                     $blockedEdges,
                     $internalLinks
@@ -158,8 +208,35 @@ final class Mbti64CmsInternalLinkDraftWriter
             ];
         }
 
+        if ($boundary !== null) {
+            $activeEdgeCount = array_sum(array_map(
+                static fn (array $row): int => (int) ($row['active_internal_link_count'] ?? 0),
+                $preparedRows
+            ));
+            if (count($preparedRows) !== $boundary['expected_rows']) {
+                $errors[] = [
+                    'field' => 'bounded_scope.rows',
+                    'code' => 'bounded_row_count_mismatch',
+                    'message' => 'Expected exactly '.$boundary['expected_rows'].' bounded rows; found '.count($preparedRows).'.',
+                ];
+            }
+            if ($activeEdgeCount !== $boundary['expected_edges']) {
+                $errors[] = [
+                    'field' => 'bounded_scope.edges',
+                    'code' => 'bounded_edge_count_mismatch',
+                    'message' => 'Expected exactly '.$boundary['expected_edges'].' bounded edges; found '.$activeEdgeCount.'.',
+                ];
+            }
+        }
+
         if ($errors !== []) {
-            return array_merge($this->baseSummary($graph, $sourceSha256, $write), [
+            return array_merge($this->baseSummary(
+                $graph,
+                $sourceSha256,
+                $write,
+                $boundary,
+                $cohortPayloadSha256
+            ), [
                 'ok' => false,
                 'status' => 'fail',
                 'row_count' => count($preparedRows),
@@ -204,7 +281,13 @@ final class Mbti64CmsInternalLinkDraftWriter
             unset($preparedRow);
         }
 
-        return array_merge($this->baseSummary($graph, $sourceSha256, $write), [
+        return array_merge($this->baseSummary(
+            $graph,
+            $sourceSha256,
+            $write,
+            $boundary,
+            $cohortPayloadSha256
+        ), [
             'ok' => true,
             'status' => 'pass',
             'row_count' => count($preparedRows),
@@ -230,13 +313,20 @@ final class Mbti64CmsInternalLinkDraftWriter
      * @param  array<string,mixed>  $graph
      * @return array<string,mixed>
      */
-    private function baseSummary(array $graph, string $sourceSha256, bool $write): array
-    {
+    private function baseSummary(
+        array $graph,
+        string $sourceSha256,
+        bool $write,
+        ?array $boundary = null,
+        ?string $cohortPayloadSha256 = null,
+    ): array {
         return [
             'artifact' => 'MBTI64-CMS-INTERNAL-LINK-DRAFT-01',
             'source_version' => (string) ($graph['version'] ?? ''),
             'source_status' => (string) ($graph['status'] ?? ''),
             'source_sha256' => $sourceSha256,
+            'cohort_payload_sha256' => $cohortPayloadSha256,
+            'bounded_scope' => $boundary,
             'snapshot_key' => self::SNAPSHOT_KEY,
             'dry_run' => ! $write,
             'write' => $write,
@@ -247,6 +337,109 @@ final class Mbti64CmsInternalLinkDraftWriter
             'search_release_attempted' => false,
             'writes_committed' => false,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     * @return array{locale:string,page_type:string,expected_rows:int,expected_edges:int}|null
+     */
+    private function boundary(array $options): ?array
+    {
+        $boundary = [
+            'locale' => trim((string) ($options['locale'] ?? '')),
+            'page_type' => trim((string) ($options['page_type'] ?? '')),
+            'expected_rows' => (int) ($options['expected_rows'] ?? 0),
+            'expected_edges' => (int) ($options['expected_edges'] ?? 0),
+        ];
+        if ($boundary === [
+            'locale' => '',
+            'page_type' => '',
+            'expected_rows' => 0,
+            'expected_edges' => 0,
+        ]) {
+            return null;
+        }
+
+        $expected = [
+            'locale' => 'en',
+            'page_type' => 'variant',
+            'expected_rows' => 32,
+            'expected_edges' => 64,
+        ];
+        if ($boundary !== $expected) {
+            throw new \RuntimeException(
+                'Bounded cohort requires locale=en, page_type=variant, expected_rows=32 and expected_edges=64.'
+            );
+        }
+
+        return $boundary;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $nodesByPath
+     * @param  list<array<string,mixed>>  $recommendedEdges
+     * @param  list<array<string,string>>  $errors
+     */
+    private function cohortPayloadSha256(
+        array $nodesByPath,
+        array $recommendedEdges,
+        array &$errors,
+    ): string {
+        $sources = array_keys($nodesByPath);
+        sort($sources, SORT_STRING);
+        $sourceLookup = array_fill_keys($sources, true);
+        $selectedEdges = [];
+
+        foreach ($recommendedEdges as $edge) {
+            $sourcePath = $this->normalizePath((string) ($edge['source_path'] ?? $edge['source_url'] ?? ''));
+            if (! isset($sourceLookup[$sourcePath])
+                || ! in_array((string) ($edge['edge_type'] ?? ''), self::BOUNDED_EDGE_TYPES, true)) {
+                continue;
+            }
+
+            $node = $nodesByPath[$sourcePath] ?? [];
+            $identity = $this->identityForNode($node, $sourcePath);
+            if ($identity === null) {
+                $errors[] = [
+                    'field' => 'nodes.'.$sourcePath,
+                    'code' => 'bounded_cohort_identity_missing',
+                    'message' => 'Unable to resolve the bounded cohort identity for '.$sourcePath.'.',
+                ];
+
+                continue;
+            }
+
+            $selectedEdges[] = $this->withApprovedAnchorText($edge, $identity);
+        }
+
+        $payload = $this->canonicalize([
+            'sources' => $sources,
+            'edges' => $selectedEdges,
+        ]);
+        $json = json_encode(
+            $payload,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR
+        );
+
+        return hash('sha256', $json);
+    }
+
+    private function canonicalize(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        if (array_is_list($value)) {
+            return array_map(fn (mixed $item): mixed => $this->canonicalize($item), $value);
+        }
+
+        ksort($value, SORT_STRING);
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->canonicalize($item);
+        }
+
+        return $value;
     }
 
     /**
@@ -371,15 +564,122 @@ final class Mbti64CmsInternalLinkDraftWriter
 
     /**
      * @param  list<array<string,mixed>>  $edges
+     * @param  array<string,string>  $identity
+     * @param  list<array<string,string>>  $errors
      * @return list<array<string,mixed>>
      */
-    private function internalLinks(array $edges): array
+    private function boundedEdgesForSource(
+        string $sourcePath,
+        array $edges,
+        array $identity,
+        array &$errors,
+    ): array {
+        $allowed = [];
+        $roleCounts = array_fill_keys(self::BOUNDED_EDGE_TYPES, 0);
+
+        foreach ($edges as $edge) {
+            $edgeType = (string) ($edge['edge_type'] ?? '');
+            if (in_array($edgeType, self::EXCLUDED_BOUNDED_EDGE_TYPES, true)) {
+                continue;
+            }
+            if (! in_array($edgeType, self::BOUNDED_EDGE_TYPES, true)) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'unsupported_bounded_edge_type',
+                    'message' => 'Unsupported bounded edge type '.$edgeType.' for '.$sourcePath.'.',
+                ];
+
+                continue;
+            }
+
+            $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            if (($edge['locale'] ?? null) !== 'en' || ! str_starts_with($target, '/en/personality/')) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'bounded_edge_locale_mismatch',
+                    'message' => 'Bounded English edge target must remain under /en/personality/: '.$target,
+                ];
+
+                continue;
+            }
+
+            $type = strtolower((string) $identity['canonical_type_code']);
+            $expectedTarget = $edgeType === 'variant_at_pair'
+                ? '/en/personality/'.$type.'-'.(strtolower((string) $identity['variant_code']) === 'a' ? 't' : 'a')
+                : '/en/personality/'.$type.'-a-vs-'.$type.'-t';
+            if ($target !== $expectedTarget) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'bounded_edge_target_mismatch',
+                    'message' => 'Expected '.$edgeType.' target '.$expectedTarget.' for '.$sourcePath.'; found '.$target.'.',
+                ];
+
+                continue;
+            }
+
+            if (($edge['safe_public_route'] ?? null) !== true
+                || trim((string) ($edge['publish_blocker_if_any'] ?? '')) !== ''
+                || $target === ''
+                || $this->containsForbiddenRoutePattern($target)) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'unsafe_bounded_edge',
+                    'message' => 'Bounded edge must be a safe public route with no publish blocker: '.$target,
+                ];
+
+                continue;
+            }
+
+            $roleCounts[$edgeType]++;
+            $allowed[] = $this->withApprovedAnchorText($edge, $identity);
+        }
+
+        foreach ($roleCounts as $edgeType => $count) {
+            if ($count !== 1) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'bounded_edge_role_count_mismatch',
+                    'message' => 'Expected exactly one '.$edgeType.' edge for '.$sourcePath.'; found '.$count.'.',
+                ];
+            }
+        }
+
+        return $allowed;
+    }
+
+    /**
+     * @param  array<string,mixed>  $edge
+     * @param  array<string,string>  $identity
+     * @return array<string,mixed>
+     */
+    private function withApprovedAnchorText(array $edge, array $identity): array
+    {
+        $type = (string) $identity['canonical_type_code'];
+        $edgeType = (string) ($edge['edge_type'] ?? '');
+        $edge['anchor_text'] = $edgeType === 'variant_at_pair'
+            ? 'Compare '.$type.'-A and '.$type.'-T'
+            : $type.'-A vs '.$type.'-T';
+        $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+        $edge['target_variant'] = strtoupper((string) strrchr($target, '-'));
+        $edge['target_variant'] = ltrim($edge['target_variant'], '-');
+
+        return $edge;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $edges
+     * @param  array<string,string>  $identity
+     * @return list<array<string,mixed>>
+     */
+    private function internalLinks(array $edges, array $identity, bool $bounded): array
     {
         $links = [];
         foreach ($edges as $edge) {
             $links[] = [
                 'href' => $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? '')),
-                'anchor_text' => trim((string) ($edge['anchor_text_suggestion'] ?? '')),
+                'anchor_text' => $bounded
+                    ? trim((string) ($edge['anchor_text'] ?? ''))
+                    : trim((string) ($edge['anchor_text_suggestion'] ?? '')),
                 'role' => (string) ($edge['edge_type'] ?? ''),
                 'safe_public_route' => true,
                 'priority' => (string) ($edge['priority'] ?? ''),
@@ -465,6 +765,8 @@ final class Mbti64CmsInternalLinkDraftWriter
         string $targetField,
         int $targetId,
         string $sourceSha256,
+        ?string $cohortPayloadSha256,
+        ?array $boundary,
     ): PersonalityProfileRevision|PersonalityProfileVariantRevision|null {
         $query = $pageType === 'comparison'
             ? PersonalityProfileRevision::query()->where($targetField, $targetId)
@@ -473,7 +775,13 @@ final class Mbti64CmsInternalLinkDraftWriter
         foreach ($query->orderByDesc('revision_no')->get() as $revision) {
             $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
             $storedSha = (string) ($snapshot[self::SNAPSHOT_KEY]['source']['source_sha256'] ?? '');
-            if ($storedSha === $sourceSha256) {
+            $storedCohortSha = (string) ($snapshot[self::SNAPSHOT_KEY]['source']['cohort_payload_sha256'] ?? '');
+            $storedBoundary = $snapshot[self::SNAPSHOT_KEY]['source']['bounded_scope'] ?? null;
+            if ($storedSha === $sourceSha256
+                && ($boundary === null || (
+                    $storedCohortSha === $cohortPayloadSha256
+                    && $storedBoundary === $boundary
+                ))) {
                 return $revision;
             }
         }
@@ -538,6 +846,8 @@ final class Mbti64CmsInternalLinkDraftWriter
         array $node,
         array $identity,
         string $sourceSha256,
+        ?string $cohortPayloadSha256,
+        ?array $boundary,
         array $activeEdges,
         array $blockedEdges,
         array $internalLinks,
@@ -549,6 +859,8 @@ final class Mbti64CmsInternalLinkDraftWriter
                     'version' => (string) ($graph['version'] ?? ''),
                     'status' => (string) ($graph['status'] ?? ''),
                     'source_sha256' => $sourceSha256,
+                    'cohort_payload_sha256' => $cohortPayloadSha256,
+                    'bounded_scope' => $boundary,
                 ],
                 'identity' => $identity,
                 'first_class_draft_fields' => [

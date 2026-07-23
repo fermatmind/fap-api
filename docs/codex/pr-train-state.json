@@ -99442,5 +99442,64 @@
       }
     ],
     "updated_at": "2026-07-23T01:38:21Z"
+  },
+  "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01": {
+    "id": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-per02-mbti64-en64-bounded-draft-01",
+    "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
+    "depends_on": [],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Operator authorized the complete PR lifecycle for the exact EN variant 32-row/64-edge bounded draft scope and explicitly excluded real CMS/database writes, publication, promotion and deployment."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "No declared PR dependency. The branch started from exact origin/main 88e3014a7f98d9f3ce49530a56ed52c690cf02ec."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused command coverage passed 15 tests/319 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role and graph-integrity cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. The bounded write test used only in-memory SQLite; no real CMS/database write occurred."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-23T03:08:14Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 88e3014a7f98d9f3ce49530a56ed52c690cf02ec. Scope is limited to the command, bounded writer, focused command test and train metadata. No real CMS/database write, publish, promotion, deploy, cache, sitemap, llms or Search action is authorized or executed."
+      },
+      {
+        "at": "2026-07-23T03:21:59Z",
+        "status": "local_validation_passed",
+        "note": "Implemented fail-closed exact EN variant boundaries and a cohort-bound writer. Focused tests passed 15 tests/319 assertions; syntax, scoped Pint, Composer validation/audit, full ci_verify_mbti.sh, metadata parsers, diff and exact five-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline. No production or CMS/database write was executed."
+      }
+    ],
+    "updated_at": "2026-07-23T03:21:59Z"
   }
 }
