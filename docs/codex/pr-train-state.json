@@ -6,9 +6,9 @@
     "branch": "codex/career-jobs-index-lkg-resilience-01",
     "title": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01 stabilize legacy career jobs index",
     "depends_on": [],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "55292831c3d1048b5af5d09ba054048ee2ffbaef",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3213",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -55,9 +55,14 @@
         "at": "2026-07-23T01:02:44Z",
         "status": "local_validation_passed",
         "note": "Implemented immutable versioned active/LKG reads, fail-closed CAREER_JOB_INDEX_NOT_WARM 503 with Retry-After, and bilingual warm activation with rollback. Focused tests passed 37 tests/346 assertions; syntax, route inventory, Pint, Composer validation/audit, parsers, diff, and exact allowed-path scope passed. No deploy, production cache operation, CMS/database mutation, publication, sitemap/llms change, Search Channel action, held-slug release, or URL submission occurred."
+      },
+      {
+        "at": "2026-07-23T01:04:10Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact eight-path PR1 scope as 55292831c3d1048b5af5d09ba054048ee2ffbaef, pushed the scoped branch, and opened PR #3213. Merge remains gated on all required GitHub checks, clean scope, mergeability, and resolved actionable review. The following commit updates only this ledger transition."
       }
     ],
-    "updated_at": "2026-07-23T01:02:44Z"
+    "updated_at": "2026-07-23T01:04:10Z"
   },
   "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01": {
     "id": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01",
