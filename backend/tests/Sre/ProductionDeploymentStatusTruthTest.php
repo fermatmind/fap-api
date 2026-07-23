@@ -295,7 +295,11 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
-            'EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="51d9c50a3084f2be51b9e913e7d53e220bd82c994f85d1f639651f21201c716b"',
+            'EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="53e4e854dadee2260637c0288ead58818808bad098c3fce8e2168ea38746ba09"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            '] | sort_by(.canonical_slug, .publish_track)',
             $eligibility
         );
         $this->assertStringContainsString(
