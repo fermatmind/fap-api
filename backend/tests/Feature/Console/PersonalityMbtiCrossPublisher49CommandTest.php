@@ -246,6 +246,25 @@ final class PersonalityMbtiCrossPublisher49CommandTest extends TestCase
             ->count());
     }
 
+    public function test_exact_content_readback_accepts_json_object_key_reordering(): void
+    {
+        $written = $this->publishContent();
+        $row = MbtiCrossTypeComparisonAuthority::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'enfp-vs-entp')
+            ->firstOrFail();
+        $row->forceFill([
+            'content_payload_json' => array_reverse((array) $row->content_payload_json, true),
+        ])->save();
+
+        self::assertSame(0, Artisan::call('personality:mbti-cross-publisher49-indexability', ['--json' => true]));
+        $plan = $this->parsedOutput();
+
+        self::assertTrue($plan['ok']);
+        self::assertSame('held', $plan['discoverability_state']);
+        self::assertSame($written['content_readback_sha256'], $plan['required_content_readback_sha256']);
+    }
+
     public function test_content_phase_rerun_preserves_an_already_released_exact_package(): void
     {
         $written = $this->publishContent();

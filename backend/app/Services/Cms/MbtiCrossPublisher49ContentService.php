@@ -100,7 +100,7 @@ final class MbtiCrossPublisher49ContentService
             }
 
             $after = $this->snapshot(true);
-            if ($this->comparable($after) !== $this->comparable($desired)) {
+            if (! $this->statesEqual($after, $desired)) {
                 throw new RuntimeException('Transactional exact-three content readback mismatch.');
             }
 
@@ -171,16 +171,12 @@ final class MbtiCrossPublisher49ContentService
         ];
     }
 
-    private function comparable(array $rows): array
+    private function statesEqual(array $left, array $right): bool
     {
-        return array_map(static function (mixed $row): mixed {
-            if (! is_array($row)) {
-                return $row;
-            }
-            unset($row['id']);
-
-            return $row;
-        }, $rows);
+        return hash_equals(
+            $this->packageContract->sha($left),
+            $this->packageContract->sha($right),
+        );
     }
 
     /**
@@ -206,7 +202,7 @@ final class MbtiCrossPublisher49ContentService
                 || data_get($row, 'content_payload_json.robots') === 'index,follow'
             ))) > 0;
         $normalized = $this->normalizedHeldRows($rows);
-        $contentMatches = $this->comparable($normalized) === $this->comparable($desired);
+        $contentMatches = $this->statesEqual($normalized, $desired);
 
         if ($hasReleaseSignal) {
             if ($releasedCount !== 3 || ! $contentMatches) {

@@ -99579,11 +99579,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "PASS after both review fixes: Publisher 49 plus review registry passed 22 tests / 475 assertions, scoped PHP syntax and Pint passed, git diff --check passed, and the complete backend/scripts/ci_verify_mbti.sh passed including Big Five 1596 tests / 195602 assertions, personality authority 89 / 5853, MBTI end-to-end, migration, security, OpenAPI, and downstream gates. Generated Big Five artifacts were restored to HEAD."
+        "evidence": "PASS after all three review fixes: Publisher 49 plus review registry passed 23 tests / 481 assertions including JSON object-key reordering, scoped PHP syntax and Pint passed, git diff --check passed, and the complete backend/scripts/ci_verify_mbti.sh passed including Big Five 1596 tests / 195602 assertions, personality authority 89 / 5853, MBTI end-to-end, migration, security, OpenAPI, and downstream gates. Generated Big Five artifacts were restored to HEAD."
       },
       "github_required_checks": {
         "status": "pending_final_head",
-        "evidence": "All nine required checks passed on head 81ae7bc8e320603f9688fb81febf618dc3e6121f. Two subsequent actionable review findings are fixed locally with complete validation; fresh exact-head checks remain mandatory before merge."
+        "evidence": "All nine required checks passed on head a0d1cba0e835dbe89cc1075e6b5827197adbbeda. A subsequent actionable JSON-order review finding is fixed locally with complete validation; fresh exact-head checks remain mandatory before merge."
       }
     },
     "scope_validation": {
@@ -99633,8 +99633,13 @@
         "at": "2026-07-23T06:45:00Z",
         "status": "pending_external_merge",
         "note": "Resolved both actionable review findings in scope: indexability now compares every normalized live authority field to the exact approved package, and content reruns preserve a fully released cohort while mixed release or post-release content drift fails closed. Focused and complete local validation passed; fresh exact-head GitHub checks and thread resolution remain mandatory. No production/staging write or discoverability action was executed."
+      },
+      {
+        "at": "2026-07-23T07:02:00Z",
+        "status": "pending_external_merge",
+        "note": "After all nine checks passed, pre-merge review identified database JSON object-key ordering as a false-negative risk. Exact content equality now uses the package contract's recursively stable SHA comparison in both content and indexability stages, with a key-reordering regression. Focused and complete local validation passed; fresh exact-head checks and final thread resolution remain mandatory. No production/staging write or discoverability action was executed."
       }
     ],
-    "updated_at": "2026-07-23T06:45:00Z"
+    "updated_at": "2026-07-23T07:02:00Z"
   }
 }

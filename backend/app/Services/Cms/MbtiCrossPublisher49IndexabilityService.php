@@ -143,7 +143,10 @@ final class MbtiCrossPublisher49IndexabilityService
         $expectedRows = $this->packageContract->desiredAuthorityRows($records);
         foreach ($rows as $index => $row) {
             $actual = $this->packageContract->normalizeDiscoverabilityToHeld($this->fullState($row));
-            if ($actual !== $expectedRows[$index]) {
+            if (! hash_equals(
+                $this->packageContract->sha($actual),
+                $this->packageContract->sha($expectedRows[$index]),
+            )) {
                 throw new RuntimeException("Published content authority row {$row->slug} does not match the exact approved package.");
             }
         }
