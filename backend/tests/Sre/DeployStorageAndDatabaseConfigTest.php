@@ -777,6 +777,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
         $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);
         $this->assertStringContainsString('approval runtime code_only deploy requires the supervisor ops queue reload path', $source);
+        $this->assertStringNotContainsString("task('ensure:required-ops-queue-supervisor-program'", $source);
+        $this->assertStringContainsString("after('deploy:symlink', 'queue:reload-workers');", $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip nginx reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $source);
