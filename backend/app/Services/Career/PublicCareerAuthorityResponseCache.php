@@ -988,6 +988,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                         $jobIndexes[$locale] = $this->filterJobIndexPayloadForPublicLocale(
                             $authorityJobIndex,
                             $locale,
+                            false,
                         );
                         $payloads[$locale] = $this->careerDirectoryReadModelBuilder->build(
                             $items,
