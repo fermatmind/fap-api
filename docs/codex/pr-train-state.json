@@ -8,7 +8,7 @@
     "depends_on": [
       "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
     ],
-    "status": "github_review_repairing",
+    "status": "ready_to_merge",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
     "checks": {
@@ -25,14 +25,14 @@
         "evidence": "After rebasing onto latest origin/main, focused Career pilot bridge, review-governance, job list/detail, and architecture suites passed 48 tests / 773 assertions; the Big Five isolation regression passed 2 tests / 6 assertions. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, git diff, and exact allowed-path scope checks passed. The package command remained read-only and no controlled production action occurred."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "The ledger-only head passed all 9 checks, but final review identified a cross-scope per-slug ordering defect. The current head is intentionally null while that same-PR repair and exact checks are pending."
+        "status": "passed",
+        "evidence": "Exact final implementation head cfc4121f872e207e90ad41f0fbd86cf1d8c5b1b4 passed all 9 checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. All actionable review threads are resolved. commit_sha remains null until GitHub supplies the squash merge commit, avoiding a false self-reference from this ledger-only closeout commit."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -122,9 +122,14 @@
         "at": "2026-07-23T03:07:00Z",
         "status": "github_review_repairing",
         "note": "Ledger-only head e5dd7a4b4818af192ce5faef9c96b8a042476652 passed all 9 checks. Final review identified that an older approval in another package scope could override a newer rejection for the same slug. Changed resolution to newest-attestation-wins per slug and set commit_sha null while the repair is pending, preventing downstream use of an obsolete head. No production action occurred."
+      },
+      {
+        "at": "2026-07-23T03:15:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact final implementation head cfc4121f872e207e90ad41f0fbd86cf1d8c5b1b4 passed all 9 GitHub checks and all review threads are resolved. commit_sha intentionally remains null until the squash merge commit exists; exact green implementation evidence is recorded here without claiming the metadata-only closeout commit as runtime authority. Merge awaits this ledger-only head's checks."
       }
     ],
-    "updated_at": "2026-07-23T03:07:00Z"
+    "updated_at": "2026-07-23T03:15:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
