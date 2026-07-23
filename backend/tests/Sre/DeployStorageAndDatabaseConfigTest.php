@@ -598,6 +598,18 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
+            'backend/scripts/deploy/immutable_candidate_sitemap_control.php',
+            $source
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed immutable sitemap control hash.',
+            $source
+        );
+        $this->assertStringContainsString(
             'code-only scope classification accepted the exact audited Runtime 46 subsumed baseline.',
             $source
         );

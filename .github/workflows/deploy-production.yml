@@ -286,6 +286,14 @@ jobs:
                       echo "code-only scope refused an unreviewed sitemap source-cache warm verifier hash." >&2
                     }
                     ;;
+                  backend/scripts/deploy/immutable_candidate_sitemap_control.php)
+                    EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"
+                    test "$(sha256sum "$path" | awk '{print $1}')" = \
+                      "$EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256" || {
+                      CODE_ONLY_SCOPE=false
+                      echo "code-only scope refused an unreviewed immutable sitemap control hash." >&2
+                    }
+                    ;;
                   .github/workflows/backend-production-verify-only.yml|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)
                     echo "code-only scope accepted audited release support path: $path"
                     ;;
