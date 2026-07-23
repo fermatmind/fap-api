@@ -149,7 +149,10 @@ final class CareerPilotReviewEvidenceBridge
         $projection = $this->projectionBySlug()[strtolower(trim($slug))]
             ?? self::UNAPPROVED_PROJECTION;
 
-        $payload['trust_manifest'] = array_merge($payload['trust_manifest'], $projection);
+        $payload['trust_manifest'] = array_merge(
+            $payload['trust_manifest'],
+            Arr::only($projection, ['review_state', 'last_reviewed_at']),
+        );
 
         return $payload;
     }

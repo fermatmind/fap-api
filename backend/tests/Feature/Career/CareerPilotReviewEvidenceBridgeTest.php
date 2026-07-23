@@ -110,6 +110,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             $this->assertStringNotContainsString('target_set_sha256', $publicJson);
             $this->assertStringNotContainsString('package_sha256', $publicJson);
             $this->assertStringNotContainsString('evidence_sha256', $publicJson);
+            $this->assertStringNotContainsString('index_item_sha256_by_locale', $publicJson);
         }
     }
 
