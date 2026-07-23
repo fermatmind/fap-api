@@ -6,6 +6,7 @@ namespace Tests\Feature\BigFive;
 
 use App\Http\Middleware\RecordPublicContentRuntime;
 use App\Models\PersonalityPublicContentAsset;
+use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52ProductionEvidence;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52RuntimeVerifier;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
@@ -17,6 +18,7 @@ use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as ServerRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use ReflectionMethod;
 use RuntimeException;
@@ -358,7 +360,25 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                 'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED, 'published_at' => now()->subDay(),
             ])->save();
         }
-        app(BigFiveEn52Publisher::class)->publish($this->packagePath, BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID);
+        $directory = storage_path('framework/testing/en52-runtime-backups/'.bin2hex(random_bytes(8)));
+        File::ensureDirectoryExists($directory);
+        $backup = app(BigFiveEn52ProductionEvidence::class)->createBackup(
+            $this->packagePath,
+            $directory,
+            BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
+            self::APPROVED_SHA,
+            self::RELEASE_NAME,
+            $this->identity(),
+        );
+        app(BigFiveEn52Publisher::class)->publish(
+            $this->packagePath,
+            BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
+            self::APPROVED_SHA,
+            self::RELEASE_NAME,
+            $directory.DIRECTORY_SEPARATOR.$backup['manifest_file'],
+            $backup['backup_manifest_sha256'],
+            $this->identity(),
+        );
     }
 
     /** @return array<string,string> */

@@ -18,6 +18,10 @@ final class PersonalityBigFiveEn52ContentPublish extends Command
         {--confirm-content-sha256= : Required locked source content SHA for execute}
         {--confirm-cohort-sha256= : Required locked cohort snapshot SHA for execute}
         {--confirm-package-sha256= : Required locked compiled package file SHA for execute}
+        {--approved-sha= : Required exact deployed backend SHA for execute}
+        {--release-name= : Required exact deployed release directory identity for execute}
+        {--backup-manifest= : Required verified EN52 production backup manifest for execute}
+        {--backup-sha256= : Required SHA-256 of the exact backup manifest file for execute}
         {--operator-admin-user-id= : Required operator admin user id for execute}
         {--allow-testing : Permit execute only in APP_ENV=testing with SQLite}
         {--json : Emit full JSON output}';
@@ -34,7 +38,19 @@ final class PersonalityBigFiveEn52ContentPublish extends Command
             if ((bool) $this->option('execute')) {
                 $this->assertExecuteEnvironment();
                 $this->assertExactConfirmation();
-                $result = $publisher->publish($package, (int) $this->option('operator-admin-user-id'));
+                $testingIdentity = app()->environment('testing') ? [
+                    'sha' => (string) $this->option('approved-sha'),
+                    'name' => (string) $this->option('release-name'),
+                ] : null;
+                $result = $publisher->publish(
+                    $package,
+                    (int) $this->option('operator-admin-user-id'),
+                    (string) $this->option('approved-sha'),
+                    (string) $this->option('release-name'),
+                    (string) $this->option('backup-manifest'),
+                    (string) $this->option('backup-sha256'),
+                    $testingIdentity,
+                );
             } else {
                 $result = $publisher->preflight($package);
             }
@@ -110,6 +126,8 @@ final class PersonalityBigFiveEn52ContentPublish extends Command
             'alias_descriptor_overlap_count',
             'alias_collision_count', 'alias_boundary_fingerprint_sha256', 'alias_boundary_unchanged',
             'created_revision_count', 'idempotent_unchanged_count', 'writes_committed',
+            'approved_sha', 'release_name', 'backup_manifest_sha256', 'backup_manifest_verified',
+            'backup_artifact_sha256',
             'cache_invalidation_ok', 'cache_invalidation_warning',
         ] as $field) {
             if (! array_key_exists($field, $result) || $result[$field] === null) {

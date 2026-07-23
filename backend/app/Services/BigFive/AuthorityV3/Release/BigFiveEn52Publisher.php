@@ -45,6 +45,7 @@ final class BigFiveEn52Publisher
         private readonly PersonalityPublicContentAssetContract $contract,
         private readonly PersonalityPublicAssetReadModelCache $personalityCache,
         private readonly SeoDiscoverabilityCacheInvalidator $discoverabilityCache,
+        private readonly BigFiveEn52ProductionEvidence $productionEvidence,
     ) {}
 
     /** @return array<string,mixed> */
@@ -74,15 +75,34 @@ final class BigFiveEn52Publisher
     }
 
     /** @return array<string,mixed> */
-    public function publish(string $packagePath, int $operatorAdminUserId): array
-    {
+    /** @param array{sha:string,name:string}|null $testingReleaseIdentity */
+    public function publish(
+        string $packagePath,
+        int $operatorAdminUserId,
+        string $approvedSha,
+        string $releaseName,
+        string $backupManifestPath,
+        string $backupManifestSha256,
+        ?array $testingReleaseIdentity = null,
+    ): array {
         if ($operatorAdminUserId !== self::OPERATOR_ADMIN_USER_ID) {
             throw new RuntimeException('The locked Big Five English EN52 operator is admin_user:1.');
         }
 
+        $this->productionEvidence->assertReleaseIdentity($approvedSha, $releaseName, $testingReleaseIdentity);
         $plan = $this->buildPlan($packagePath);
         $beforeBoundary = $this->nonTargetBoundaryFingerprint();
-        $result = DB::transaction(function () use ($plan, $operatorAdminUserId, $beforeBoundary): array {
+        $result = DB::transaction(function () use (
+            $plan,
+            $packagePath,
+            $operatorAdminUserId,
+            $approvedSha,
+            $releaseName,
+            $backupManifestPath,
+            $backupManifestSha256,
+            $testingReleaseIdentity,
+            $beforeBoundary,
+        ): array {
             $lockedAliasBoundary = $this->assertRedirectAliasesAbsent($plan['descriptors'], true);
             if (! hash_equals(
                 (string) $plan['alias_boundary']['fingerprint_sha256'],
@@ -90,6 +110,16 @@ final class BigFiveEn52Publisher
             )) {
                 throw new RuntimeException('Redirect alias boundary drifted before the 52-page transaction.');
             }
+            $backupManifest = $this->productionEvidence->assertBackupManifest(
+                $packagePath,
+                $backupManifestPath,
+                strtolower(trim($backupManifestSha256)),
+                $operatorAdminUserId,
+                $approvedSha,
+                $releaseName,
+                true,
+                $testingReleaseIdentity,
+            );
 
             $writes = [];
             $createdRevisionCount = 0;
@@ -185,6 +215,11 @@ final class BigFiveEn52Publisher
                 'transaction_readback_ok' => true,
                 'non_target_boundary_unchanged' => true,
                 'alias_boundary_unchanged' => true,
+                'approved_sha' => strtolower(trim($approvedSha)),
+                'release_name' => trim($releaseName),
+                'backup_manifest_sha256' => strtolower(trim($backupManifestSha256)),
+                'backup_manifest_verified' => true,
+                'backup_artifact_sha256' => $backupManifest['backup_artifact_sha256'],
             ];
         }, 1);
 
