@@ -271,7 +271,7 @@ jobs:
                     }
                     ;;
                   backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php)
-                    EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="253b471b6b5cfec1f57c77000b956cfac2e1f4baff28aef9d3760b32d94956a5"
+                    EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="723c219801ba183310756cdfc5a10c1afdf6fd3e4137a9039978fbf50c44b8fd"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
                       "$EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256" || {
                       CODE_ONLY_SCOPE=false

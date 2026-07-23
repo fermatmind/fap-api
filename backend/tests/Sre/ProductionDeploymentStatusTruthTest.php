@@ -318,7 +318,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
-            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="253b471b6b5cfec1f57c77000b956cfac2e1f4baff28aef9d3760b32d94956a5"',
+            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="723c219801ba183310756cdfc5a10c1afdf6fd3e4137a9039978fbf50c44b8fd"',
             $eligibility
         );
         $this->assertStringContainsString(
