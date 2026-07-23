@@ -188,6 +188,9 @@ standard deployments continue to report and require `linear_ancestor`.
 Any cache-only repair against the inactive candidate must repeat this exact
 production/bridge/path/status/blob proof before accepting the otherwise
 non-ancestral active revision; it may not weaken the proof to a SHA allowlist.
+The repair workflow also proves that the candidate cache path is writable by
+the application runtime user before dispatch, then runs the cache cursor and
+bounded queue dispatch as that same runtime user.
 
 ## fap-web handling in V1
 - `fap-web` is a reference only.

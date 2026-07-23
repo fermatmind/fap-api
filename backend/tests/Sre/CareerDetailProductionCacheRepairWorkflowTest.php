@@ -76,6 +76,14 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString('--batch-size=$REPAIR_BATCH_SIZE', $source);
         $this->assertStringContainsString('--confirm-production-write', $source);
         $this->assertStringContainsString("supervisorctl status 'fap-queue-default-high:*'", $source);
+        $this->assertStringContainsString(
+            'sudo -n -u www-data -- test -w storage/framework/cache/data',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'sudo -n -u www-data -- php artisan career:verify-job-detail-cache-coverage --repair-missing',
+            $source,
+        );
         $this->assertStringContainsString('for batch in $(seq 1 9)', $source);
         $this->assertStringContainsString('for _attempt in $(seq 1 90)', $source);
         $this->assertStringContainsString('.covered_target_count == $expected_targets', $source);
