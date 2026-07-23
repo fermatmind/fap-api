@@ -12,19 +12,23 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_cross_type_comparison_index_prefers_database_authority_rows(): void
+    public function test_cross_type_comparison_index_returns_the_existing_four_published_database_authorities(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
-        $this->createAuthority([
-            'slug' => 'istj-vs-isfj',
-            'left_type_code' => 'ISTJ',
-            'right_type_code' => 'ISFJ',
-            'title' => 'ISTJ 和 ISFJ 的区别：规则执行与照护判断',
-            'seo_title' => 'ISTJ 和 ISFJ 的区别 | FermatMind',
-            'seo_description' => 'ISTJ 和 ISFJ 的区别测试描述',
-            'summary' => 'ISTJ 更容易从规则和责任入口判断，ISFJ 更容易从照护和关系稳定入口判断。',
-        ]);
+        foreach ([
+            ['entj-vs-intj', 'ENTJ', 'INTJ'],
+            ['infj-vs-infp', 'INFJ', 'INFP'],
+            ['intj-vs-intp', 'INTJ', 'INTP'],
+            ['istj-vs-isfj', 'ISTJ', 'ISFJ'],
+        ] as [$slug, $leftType, $rightType]) {
+            $this->createAuthority([
+                'slug' => $slug,
+                'left_type_code' => $leftType,
+                'right_type_code' => $rightType,
+                'title' => $leftType.' 和 '.$rightType.' 的区别',
+            ]);
+        }
 
         $response = $this->getJson('/api/v0.5/personality/comparisons?locale=zh-CN');
 
@@ -34,9 +38,16 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         $items = collect($response->json('cross_type_comparisons'));
         $authorityItem = $items->firstWhere('slug', 'istj-vs-isfj');
 
+        self::assertSame([
+            'entj-vs-intj',
+            'infj-vs-infp',
+            'intj-vs-intp',
+            'istj-vs-isfj',
+        ], $items->pluck('slug')->all());
         self::assertIsArray($authorityItem);
-        self::assertSame('ISTJ 和 ISFJ 的区别：规则执行与照护判断', $authorityItem['title']);
+        self::assertSame('ISTJ 和 ISFJ 的区别', $authorityItem['title']);
         self::assertSame('https://fermatmind.com/zh/personality/istj-vs-isfj', $authorityItem['public_url']);
+        self::assertSame('database', $authorityItem['authority_source']);
         self::assertTrue((bool) $authorityItem['is_public']);
         self::assertFalse((bool) $authorityItem['is_indexable']);
         self::assertFalse((bool) $authorityItem['sitemap_eligible']);
@@ -78,6 +89,7 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
             ->assertJsonPath('comparison_public_projection_v1.faq.0.question', 'ISTJ 和 ISFJ 最大区别是什么？')
             ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/zh/personality/istj-a')
             ->assertJsonPath('comparison_public_projection_v1.source_refs.0', 'mbti-content15-top-blocker-batch')
+            ->assertJsonPath('comparison_public_projection_v1.authority_source', 'database')
             ->assertJsonPath('comparison_public_projection_v1.is_indexable', false)
             ->assertJsonPath('comparison_public_projection_v1.sitemap_eligible', false)
             ->assertJsonPath('comparison_public_projection_v1.llms_eligible', false)
@@ -142,6 +154,48 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         self::assertIsArray($quickJudgmentTable);
         self::assertSame('判断入口', data_get($quickJudgmentTable, 'rows.0.dimension'));
         self::assertSame([], $quickJudgmentTable['body']);
+    }
+
+    public function test_draft_private_and_missing_database_rows_never_fall_back_to_local_packages(): void
+    {
+        $this->createAuthority([
+            'slug' => 'intj-vs-intp',
+            'publish_status' => 'draft',
+            'is_public' => true,
+            'is_indexable' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+        ]);
+        $this->createAuthority([
+            'slug' => 'entj-vs-intj',
+            'left_type_code' => 'ENTJ',
+            'right_type_code' => 'INTJ',
+            'is_public' => false,
+            'is_indexable' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+        ]);
+
+        $index = $this->getJson('/api/v0.5/personality/comparisons?locale=zh-CN');
+        $index->assertOk()
+            ->assertJsonCount(0, 'cross_type_comparisons')
+            ->assertJsonCount(0, 'comparison_list_public_projection_v1.groups.1.items');
+
+        foreach (['intj-vs-intp', 'entj-vs-intj', 'enfp-vs-entp'] as $slug) {
+            $this->getJson('/api/v0.5/personality/comparisons/'.$slug.'?locale=zh-CN')
+                ->assertNotFound()
+                ->assertJsonPath('error_code', 'NOT_FOUND');
+        }
+    }
+
+    public function test_runtime_read_model_has_no_local_package_or_dry_run_planner_dependency(): void
+    {
+        $source = file_get_contents(app_path('Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php'));
+
+        self::assertIsString($source);
+        self::assertStringNotContainsString('mbti-cross-type-comparison-content-assets-draft', $source);
+        self::assertStringNotContainsString('Mbti64CrossTypeComparisonAssetsDryRunPlanner', $source);
+        self::assertStringNotContainsString('Illuminate\\Support\\Facades\\File', $source);
     }
 
     /**

@@ -65,7 +65,7 @@ prs:
     base: main
     branch: codex/mbti-cross-publisher-49
     title: "MBTI-CROSS-PUBLISHER-49: add exact-three controlled comparison publisher"
-    status: pending_external_merge
+    status: merged
     depends_on:
       - MBTI-CROSS-APPROVAL-48
     train_scope: mbti_cross_exact_three_controlled_publisher
@@ -118,6 +118,61 @@ prs:
     database_mutation: false
     cms_mutation: false
     api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: MBTI-CROSS-AUTHORITY-50
+    repo: fap-api
+    base: main
+    branch: codex/mbti-cross-authority-50
+    title: "MBTI-CROSS-AUTHORITY-50: make cross-type comparison runtime DB-authoritative"
+    status: github_checks_pending
+    depends_on:
+      - MBTI-CROSS-PUBLISHER-49
+    train_scope: mbti_cross_type_comparison_db_runtime_authority
+    scope:
+      - Make the public cross-type comparison read model consume only published, public DB/CMS authority rows.
+      - Remove the local draft package and dry-run planner from the runtime public response path while retaining them as non-runtime importer, planner, approval, and test inputs.
+      - Return the contractual unavailable/not-found response when no eligible DB row exists, including when a matching local draft exists.
+      - Preserve DB noindex, sitemap, and llms eligibility state and expose an accurate database authority marker.
+      - Preserve the existing four published cross-type comparisons and all sixteen A/T comparison projections.
+    allowed_paths:
+      - backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute a production or staging deploy, CMS/database write, publication/indexability mutation, cache action, sitemap/llms release, or search submission.
+      - Publish the Approval 48 exact-three cohort or modify any production comparison row.
+      - Modify local draft/import packages, importer/planner/approval inputs, routes, migrations, frontend behavior, or the 55-URL gate.
+      - Add a frontend or backend local-content runtime fallback.
+    validation:
+      - php -l backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - php -l backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php
+      - php -l backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_freeze_classifier_ignores_mbti_cross_type_comparison_public_read_model|runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - cd backend && php artisan route:list --path=api/v0.5/personality/comparisons --except-vendor
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
     publish_allowed: false
     search_channel_action: false
     deploy_allowed: false
