@@ -255,7 +255,7 @@ jobs:
           [ -e "$DEPLOY_PATH/.dep/deploy.lock" ] && lock_present=true
           process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {count++} $1=="composer" && $0 ~ /install/ {count++} END {print count+0}')"
           supervisorctl_path="$(command -v supervisorctl)"
-          status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"
+          status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
           program_present=false
           program_state=MISSING
           if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1} END {exit !found}' <<<"$status_lines"; then

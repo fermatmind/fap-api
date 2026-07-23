@@ -27,7 +27,15 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $deployer,
         );
         $this->assertStringContainsString(
-            "deployIsCodeOnly() && deployBooleanOption('require_ops_queue_reload', false)",
+            "currentHost()->getAlias() === 'production'",
+            $deployer,
+        );
+        $this->assertSame(
+            2,
+            substr_count($deployer, "currentHost()->getAlias() === 'production'"),
+        );
+        $this->assertStringContainsString(
+            "|| deployBooleanOption('require_ops_queue_reload', false)",
             $deployer,
         );
         $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $deployer);
@@ -775,8 +783,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         );
         $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
-        $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);
-        $this->assertStringContainsString('approval runtime code_only deploy requires the supervisor ops queue reload path', $source);
+        $this->assertStringContainsString('Require the ops queue worker for the production approval runtime topology', $source);
+        $this->assertStringContainsString('production approval runtime requires the supervisor ops queue reload path', $source);
         $this->assertStringNotContainsString("task('ensure:required-ops-queue-supervisor-program'", $source);
         $this->assertStringContainsString("after('deploy:symlink', 'queue:reload-workers');", $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);

@@ -35,6 +35,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$DEPLOY_PATH/current/backend" 2>/dev/null)"',
             'test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"',
             'test "$rendered_sha256" = "$EXPECTED_RENDERED_SHA256"',
+            'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"',
             'test ! -e /etc/supervisor/conf.d/fap-queue-ops.conf',
             'sudo -n install -o root -g root -m 0644 "$candidate" /etc/supervisor/conf.d/fap-queue-ops.conf',
             'sudo -n "$supervisord_path" -t',
@@ -58,6 +59,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertStringNotContainsString('whoami', $workflow);
         $this->assertStringNotContainsString('hostname', $workflow);
         $this->assertStringNotContainsString('cat "$META"', $workflow);
+        $this->assertStringNotContainsString(
+            'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
+            $workflow,
+        );
     }
 
     #[Test]
