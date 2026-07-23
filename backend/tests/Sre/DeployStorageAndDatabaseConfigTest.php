@@ -146,10 +146,12 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     {
         $source = $this->readRepoFile('deploy.php');
 
+        $this->assertStringContainsString('php_bin="$(command -v {{bin/php}})"', $source);
         $this->assertStringContainsString(
-            'sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}',
+            'sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"',
             $source,
         );
+        $this->assertStringNotContainsString('SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}', $source);
         $this->assertStringContainsString('verify_sitemap_source_cache_warm.sh', $source);
         $this->assertStringContainsString('SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS', $source);
         $this->assertStringContainsString('SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS', $source);

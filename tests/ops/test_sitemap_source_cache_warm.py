@@ -204,6 +204,9 @@ class SitemapSourceCacheWarmTest(unittest.TestCase):
 
         self.assertIn("verify_sitemap_source_cache_warm.sh", warm_task)
         self.assertIn("sudo -n -u www-data -- env", warm_task)
+        self.assertIn('php_bin="$(command -v {{bin/php}})"', warm_task)
+        self.assertIn('SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"', warm_task)
+        self.assertNotIn("SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}", warm_task)
         self.assertIn("SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS", warm_task)
         self.assertIn("SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS", warm_task)
         self.assertIn("SITEMAP_SOURCE_WARM_STRICT", warm_task)
