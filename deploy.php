@@ -80,6 +80,8 @@ set('queue_supervisor_optional_programs', [
     'fap-queue-insights',
 ]);
 set('require_ops_queue_reload', false);
+set('require_career_candidate_preflight', false);
+set('career_public_cache_summary_sha256', '');
 set('legacy_queue_systemd_service', 'fap-queue.service');
 set('legacy_queue_systemd_disable', true);
 set('required_public_static_media_assets', [
@@ -714,6 +716,26 @@ exit 0
 BASH,
         $command,
     ));
+});
+
+task('career:verify-public-dataset-cache-equivalence', function () {
+    if (! deployIsCodeOnly() || ! deployBooleanOption('require_career_candidate_preflight', false)) {
+        writeln('<comment>Skip Career candidate dataset equivalence outside the exact required code_only scope</comment>');
+
+        return;
+    }
+
+    $expectedSha256 = strtolower(trim((string) get('career_public_cache_summary_sha256', '')));
+    if (preg_match('/^[a-f0-9]{64}$/', $expectedSha256) !== 1) {
+        throw new \RuntimeException('Career candidate dataset equivalence requires an exact public-cache summary SHA-256');
+    }
+
+    within('{{release_path}}/backend', function () use ($expectedSha256) {
+        run(sprintf(
+            '{{bin/php}} artisan career:verify-public-dataset-cache-equivalence --expected-sha256=%s --verify-live-public-cache --json --no-interaction --ansi',
+            escapeshellarg($expectedSha256),
+        ));
+    });
 });
 
 task('seo:warm-sitemap-source-cache', function () {
@@ -1783,6 +1805,7 @@ task('deploy:code-only', [
     'artisan:view:cache',
     'artisan:event:cache',
     'guard:public-content-release',
+    'career:verify-public-dataset-cache-equivalence',
     'deploy:publish',
 ]);
 

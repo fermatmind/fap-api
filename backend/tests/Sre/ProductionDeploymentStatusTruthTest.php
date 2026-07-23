@@ -258,6 +258,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
     public function test_code_only_lane_allows_only_audited_cms_runtime_and_release_support_exceptions(): void
     {
         $workflow = $this->workflow();
+        $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
         $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
         $runtimeExceptions = 'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)';
         $subsumedRuntimeExceptions = '.github/workflows/career-detail-production-cache-repair.yml|backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php|backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php|backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php|backend/app/Services/Cms/MbtiCrossPublisher49Package.php|backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json|backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json|docs/04-ops/deploy-incident-runbook.md|docs/seo/career-jobs-index-lkg-resilience-01.md|docs/seo/career-pilot-review-evidence-bridge-01.md)';
@@ -278,8 +279,45 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertNotFalse($cmsAuthorityWildcardPosition);
         $this->assertLessThan($cmsAuthorityWildcardPosition, $runtimeExceptionsPosition);
         $this->assertLessThan($cmsAuthorityWildcardPosition, $subsumedRuntimeExceptionsPosition);
-        $this->assertStringNotContainsString(
-            'backend/docs/career/publish_track_reconciliation.json|',
+        $this->assertStringContainsString(
+            'backend/docs/career/publish_track_reconciliation.json)',
+            $eligibility
+        );
+        $this->assertStringContainsString('REQUIRE_CAREER_CANDIDATE_PREFLIGHT=true', $eligibility);
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="53e4e854dadee2260637c0288ead58818808bad098c3fce8e2168ea38746ba09"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'candidate rebuild equivalence remains required before activation.',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'backend/app/Console/Commands/CareerVerifyPublicDatasetCacheEquivalence.php',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="468eb607a9d8a0a4c69cf18e2232a11d7bc8008932545f76a93900dfeedbaacf"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed Career dataset equivalence verifier hash.',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="e6beeebb64b6bc346e622b43400262239e76813936fb2363cb9ee85484446f13"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed Career candidate bootstrap runner hash.',
             $eligibility
         );
         $this->assertStringContainsString(
@@ -321,6 +359,34 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('backend/docs/*', $eligibility);
         $this->assertStringNotContainsString('docs/operations/*', $eligibility);
         $this->assertStringContainsString('code-only scope refused authority path: $path', $eligibility);
+        $this->assertStringContainsString(
+            'REQUIRE_CAREER_CANDIDATE_PREFLIGHT: ${{ needs.deployment-eligibility.outputs.require_career_candidate_preflight }}',
+            $workflow
+        );
+        $this->assertStringContainsString(
+            '-o career_public_cache_summary_sha256="$CAREER_PUBLIC_CACHE_SUMMARY_SHA256"',
+            $workflow
+        );
+        $this->assertStringContainsString(
+            '--verify-live-public-cache --json --no-interaction --ansi',
+            $deployer
+        );
+        $revalidationPosition = strpos(
+            $workflow,
+            '- name: Revalidate live Career public-cache summary before activation'
+        );
+        $deployerPosition = strpos($workflow, '- name: Deploy production with Deployer');
+        $this->assertNotFalse($revalidationPosition);
+        $this->assertNotFalse($deployerPosition);
+        $this->assertLessThan($deployerPosition, $revalidationPosition);
+        $this->assertStringContainsString(
+            'Career public-cache summary drifted after eligibility; refusing activation.',
+            $workflow
+        );
+        $this->assertGreaterThanOrEqual(
+            2,
+            substr_count($workflow, 'https://api.fermatmind.com/api/v0.5/career/datasets/occupations')
+        );
     }
 
     public function test_schema_only_mode_is_latest_main_exact_migration_and_read_only_authority_lane(): void
