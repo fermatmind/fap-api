@@ -169,22 +169,22 @@ newer main commits.
 
 One exact historical production baseline is separately audited because the
 isolated Runtime 46 commit is not topologically present on `main`, while its
-six resulting files are already present byte-for-byte in the staged candidate:
+six resulting files are already present byte-for-byte in an audited bridge:
 
 ```text
 production baseline: bc0ed833bc9aae1473ab37f1dead2517e1aff618
-candidate:           49038deb50cda789e4365ea42068832ed28d6023
-staging run:         29977064260
+audited bridge:      49038deb50cda789e4365ea42068832ed28d6023
 ```
 
-The workflow accepts this pair only after proving that the production commit
-has exactly one parent, that parent is an ancestor of the candidate, the
-production patch has exactly the locked five additions and one modification,
-and all six production blobs equal the corresponding candidate blobs. Unknown
-paths, missing files, changed statuses, renames, deletions, blob drift, another
-production or candidate SHA, or another staging run fail closed. The release
-record reports `runtime46_patch_subsumed`; all ordinary standard deployments
-continue to report and require `linear_ancestor`.
+The workflow accepts only a main-reachable candidate descended from that bridge
+and backed by its own exact successful staging run. It then proves that the
+production commit has exactly one parent, that parent is an ancestor of the
+candidate, the production patch has exactly the locked five additions and one
+modification, and all six production blobs equal the corresponding candidate
+blobs. Unknown paths, missing files, changed statuses, renames, deletions, blob
+drift, another production SHA, or a candidate outside the audited bridge history
+fail closed. The release record reports `runtime46_patch_subsumed`; all ordinary
+standard deployments continue to report and require `linear_ancestor`.
 
 ## fap-web handling in V1
 - `fap-web` is a reference only.
