@@ -550,6 +550,7 @@ jobs:
       CAREER_CACHE_REPAIR_REQUIRED: ${{ needs.deployment-eligibility.outputs.career_cache_repair_required }}
       EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
       APPROVED_MIGRATION: ${{ inputs.approved_migration }}
+      WORKFLOW_CONTROL_SHA: ${{ github.sha }}
 
     steps:
       - name: Checkout deploy revision
@@ -557,6 +558,83 @@ jobs:
         with:
           ref: ${{ needs.deployment-eligibility.outputs.deploy_sha }}
           fetch-depth: 0
+
+      - name: Prepare exact immutable candidate deployment control
+        id: immutable_candidate_control
+        shell: bash
+        env:
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+        run: |
+          set -euo pipefail
+          candidate_sha="49038deb50cda789e4365ea42068832ed28d6023"
+          staging_run_id="29977064260"
+          candidate_recipe_sha256="e814b6ff4996669097db0f32fd3caebc1fcd05dd9015e2260016e3f4ece3c068"
+          helper_sha256="04f9d6b6b66b0be10a4996064cdf9150e1b0f1ec300edf93f87e8c0368ea0713"
+          wrapper_sha256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"
+          wrapper_path="backend/scripts/deploy/immutable_candidate_sitemap_control.php"
+          helper_path="backend/scripts/deploy/verify_sitemap_source_cache_warm.sh"
+
+          echo "enabled=false" >> "$GITHUB_OUTPUT"
+          if [ "$DEPLOY_SHA" != "$candidate_sha" ]; then
+            echo "Immutable candidate deployment control is not required for this release."
+            exit 0
+          fi
+
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$DEPLOY_MODE" = "standard"
+          test "$STAGING_RUN_ID" = "$staging_run_id"
+          [[ "$WORKFLOW_CONTROL_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin "$WORKFLOW_CONTROL_SHA"
+          git cat-file -e "${WORKFLOW_CONTROL_SHA}^{commit}"
+          git merge-base --is-ancestor "$DEPLOY_SHA" "$WORKFLOW_CONTROL_SHA"
+
+          candidate_tree_before="$(git rev-parse HEAD^{tree})"
+          test "$(git rev-parse HEAD)" = "$candidate_sha"
+          test -z "$(git status --porcelain=v1)"
+          test "$(sha256sum deploy.php | awk '{print $1}')" = "$candidate_recipe_sha256"
+
+          control_wrapper="$RUNNER_TEMP/immutable-candidate-sitemap-control.php"
+          control_helper="$RUNNER_TEMP/verify-sitemap-source-cache-warm.sh"
+          git show "${WORKFLOW_CONTROL_SHA}:${wrapper_path}" > "$control_wrapper"
+          git show "${WORKFLOW_CONTROL_SHA}:${helper_path}" > "$control_helper"
+          chmod 600 "$control_wrapper" "$control_helper"
+
+          test "$(sha256sum "$control_wrapper" | awk '{print $1}')" = "$wrapper_sha256"
+          test "$(sha256sum "$control_helper" | awk '{print $1}')" = "$helper_sha256"
+          php -l "$control_wrapper" >/dev/null
+          bash -n "$control_helper"
+
+          test "$(git rev-parse HEAD^{tree})" = "$candidate_tree_before"
+          test -z "$(git status --porcelain=v1)"
+
+          receipt="$RUNNER_TEMP/backend-immutable-candidate-control-receipt.json"
+          jq -n \
+            --arg candidate_sha "$candidate_sha" \
+            --arg control_sha "$WORKFLOW_CONTROL_SHA" \
+            --arg staging_run_id "$staging_run_id" \
+            --arg candidate_recipe_sha256 "$candidate_recipe_sha256" \
+            --arg helper_sha256 "$helper_sha256" \
+            --arg wrapper_sha256 "$wrapper_sha256" \
+            '{
+              schema_version: "backend-immutable-candidate-control-receipt.v1",
+              status: "PASS_IMMUTABLE_CANDIDATE_CONTROL_PREPARED",
+              candidate_sha: $candidate_sha,
+              control_sha: $control_sha,
+              staging_run_id: $staging_run_id,
+              candidate_recipe_sha256: $candidate_recipe_sha256,
+              sitemap_warm_helper_sha256: $helper_sha256,
+              control_wrapper_sha256: $wrapper_sha256,
+              control_mode: "candidate_recipe_with_runner_only_sitemap_override",
+              candidate_tree_unchanged: true,
+              release_overlay: false,
+              remote_control_file_write: false
+            }' > "$receipt"
+
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
+          echo "recipe_path=$control_wrapper" >> "$GITHUB_OUTPUT"
+          echo "helper_path=$control_helper" >> "$GITHUB_OUTPUT"
+          echo "receipt_path=$receipt" >> "$GITHUB_OUTPUT"
+          echo "Immutable candidate deployment control prepared without changing the candidate tree."
 
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
@@ -974,7 +1052,13 @@ jobs:
             schema_only) DEPLOY_TASK=deploy:schema-only ;;
             *) echo "Unsupported resolved deploy mode: $DEPLOY_MODE" >&2; exit 2 ;;
           esac
-          php /tmp/dep.phar "$DEPLOY_TASK" production -f deploy.php \
+          deployer_recipe="deploy.php"
+          if [ "${{ steps.immutable_candidate_control.outputs.enabled }}" = "true" ]; then
+            deployer_recipe="${{ steps.immutable_candidate_control.outputs.recipe_path }}"
+            export IMMUTABLE_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"
+            export IMMUTABLE_SITEMAP_WARM_HELPER_PATH="${{ steps.immutable_candidate_control.outputs.helper_path }}"
+          fi
+          php /tmp/dep.phar "$DEPLOY_TASK" production -f "$deployer_recipe" \
             --revision "$DEPLOY_SHA" \
             -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o deploy_mode="$DEPLOY_MODE" \
@@ -985,6 +1069,15 @@ jobs:
             -o career_cache_repair_required="$CAREER_CACHE_REPAIR_REQUIRED" \
             -o schema_only_migration="$APPROVED_MIGRATION" \
             -vvv --no-interaction
+
+      - name: Upload immutable candidate control receipt
+        if: ${{ always() && steps.immutable_candidate_control.outputs.enabled == 'true' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-immutable-candidate-control-${{ github.run_id }}
+          path: ${{ steps.immutable_candidate_control.outputs.receipt_path }}
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Restart queue workers through Laravel queue restart
         if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' || needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}
