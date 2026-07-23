@@ -6,6 +6,7 @@ namespace Tests\Feature\BigFive;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
+use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52ProductionEvidence;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Cms\PersonalityPublicContentAssetContract;
@@ -15,6 +16,7 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use ReflectionMethod;
 use RuntimeException;
@@ -23,6 +25,10 @@ use Tests\TestCase;
 final class BigFiveEn52ControlledReleaseTest extends TestCase
 {
     use RefreshDatabase;
+
+    private const APPROVED_SHA = '110749a534183b5ab28108c027a14842ec06b860';
+
+    private const RELEASE_NAME = '20260719T071900Z-en52';
 
     private string $packagePath;
 
@@ -318,7 +324,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         $enneagramBefore = $enneagram->fresh()->getAttributes();
 
         $publisher = app(BigFiveEn52Publisher::class);
-        $first = $publisher->publish($this->packagePath, 1);
+        $first = $this->publishWithVerifiedBackup($publisher);
 
         $this->assertTrue($first['ok']);
         $this->assertTrue($first['cache_invalidation_ok']);
@@ -348,7 +354,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
             ->orderBy('id')->get()->mapWithKeys(static fn (PersonalityPublicContentAsset $asset): array => [
                 $asset->id => $asset->updated_at?->toAtomString(),
             ])->all();
-        $second = $publisher->publish($this->packagePath, 1);
+        $second = $this->publishWithVerifiedBackup($publisher);
 
         $this->assertTrue($second['ok']);
         $this->assertSame(0, $second['created_revision_count']);
@@ -364,7 +370,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
     public function test_published_hub_projects_v1_content_and_complete_v2_authority(): void
     {
         $this->seedExactAuthorityRows();
-        app(BigFiveEn52Publisher::class)->publish($this->packagePath, 1);
+        $this->publishWithVerifiedBackup();
         $hub = collect($this->package['assets'])->firstWhere('authority_asset_key', 'big-five-hub');
         $this->assertIsArray($hub);
 
@@ -400,7 +406,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $this->seedExactAuthorityRows();
-        app(BigFiveEn52Publisher::class)->publish($this->packagePath, 1);
+        $this->publishWithVerifiedBackup();
         app(PublicCareerAuthorityResponseCache::class)->warm();
 
         $urls = collect(app(SitemapGenerator::class)->generateUrls())
@@ -429,7 +435,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         });
 
         try {
-            app(BigFiveEn52Publisher::class)->publish($this->packagePath, 1);
+            $this->publishWithVerifiedBackup();
             $this->fail('The synthetic late write failure should abort the release.');
         } catch (RuntimeException $exception) {
             $this->assertSame('synthetic late write failure', $exception->getMessage());
@@ -510,7 +516,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         });
 
         try {
-            app(BigFiveEn52Publisher::class)->publish($this->packagePath, 1);
+            $this->publishWithVerifiedBackup();
             $this->fail('A search-boundary mutation on seo_intel must fail closed.');
         } catch (RuntimeException $exception) {
             $this->assertStringContainsString('non-target authority boundary changed', strtolower($exception->getMessage()));
@@ -524,7 +530,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
     {
         $this->seedExactAuthorityRows();
         $publisher = app(BigFiveEn52Publisher::class);
-        $publisher->publish($this->packagePath, 1);
+        $this->publishWithVerifiedBackup($publisher);
 
         $revision = \App\Models\PersonalityPublicContentAssetRevision::query()->firstOrFail();
         $revision->delete();
@@ -540,7 +546,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
     {
         $this->seedExactAuthorityRows();
         $publisher = app(BigFiveEn52Publisher::class);
-        $publisher->publish($this->packagePath, 1);
+        $this->publishWithVerifiedBackup($publisher);
 
         $revision = \App\Models\PersonalityPublicContentAssetRevision::query()->firstOrFail();
         $replacement = $revision->getAttributes();
@@ -560,13 +566,97 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         $this->seedExactAuthorityRows();
         Cache::shouldReceive('lock')->andThrow(new RuntimeException('synthetic cache failure'));
 
-        $result = app(BigFiveEn52Publisher::class)->publish($this->packagePath, 1);
+        $result = $this->publishWithVerifiedBackup();
 
         $this->assertTrue($result['writes_committed']);
         $this->assertFalse($result['cache_invalidation_ok']);
         $this->assertSame('COMMITTED_WITH_WARNING_BIG_FIVE_EN52_52_PAGE_PUBLISH', $result['status']);
         $this->assertSame('PUBLIC_CACHE_INVALIDATION_FAILED_AFTER_COMMIT', $result['cache_invalidation_warning']);
         $this->assertDatabaseCount('personality_public_content_asset_revisions', 52);
+    }
+
+    public function test_production_evidence_and_backup_bind_exact_live_rows_and_baselines(): void
+    {
+        $this->seedExactAuthorityRows();
+        $evidence = app(BigFiveEn52ProductionEvidence::class);
+
+        $inspection = $evidence->inspect($this->packagePath);
+        $this->assertTrue($inspection['ok']);
+        $this->assertSame(52, $inspection['en_canonical_count']);
+        $this->assertSame(52, $inspection['zh_canonical_count']);
+        $this->assertSame(0, $inspection['legacy_alias_count']);
+        $this->assertSame(0, $inspection['source_hash_match_count']);
+        $this->assertFalse($inspection['writes_committed']);
+        $this->assertTrue($inspection['database_snapshot_unchanged']);
+        foreach ($inspection['baseline_fingerprints'] as $fingerprint) {
+            $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $fingerprint);
+        }
+
+        $backup = $this->createVerifiedBackup();
+        $this->assertFileExists($backup['manifest_path']);
+        $this->assertFileExists($backup['artifact_path']);
+        $this->assertSame(0600, fileperms($backup['manifest_path']) & 0777);
+        $this->assertSame(0600, fileperms($backup['artifact_path']) & 0777);
+        $this->assertSame(52, data_get($backup, 'result.tables.personality_public_content_assets.row_count'));
+
+        PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where('framework', 'big_five')->where('locale', 'en')->firstOrFail()
+            ->forceFill(['summary' => 'post-backup drift'])->save();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('no longer matches the locked live cohort');
+        app(BigFiveEn52Publisher::class)->publish(
+            $this->packagePath,
+            1,
+            self::APPROVED_SHA,
+            self::RELEASE_NAME,
+            $backup['manifest_path'],
+            $backup['manifest_sha256'],
+            $this->releaseIdentityForTests(),
+        );
+    }
+
+    public function test_production_backup_requires_alias_absence_and_exact_release_identity(): void
+    {
+        $this->seedExactAuthorityRows();
+        $this->seedLegacyRedirectAlias('en', 'high-openness');
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('requires all twenty legacy alias rows to be absent');
+        $this->createVerifiedBackup();
+    }
+
+    public function test_evidence_and_backup_commands_keep_read_only_and_execute_authorities_separate(): void
+    {
+        $this->seedExactAuthorityRows();
+        $this->artisan('personality:big-five-en52-production-evidence', [
+            '--package' => $this->packagePath,
+            '--json' => true,
+        ])->assertSuccessful()
+            ->expectsOutputToContain('PASS_BIG_FIVE_EN52_PRODUCTION_EVIDENCE');
+
+        $directory = storage_path('framework/testing/en52-command-backups/'.bin2hex(random_bytes(8)));
+        File::ensureDirectoryExists($directory);
+        $base = [
+            '--package' => $this->packagePath,
+            '--execute' => true,
+            '--allow-testing' => true,
+            '--output-dir' => $directory,
+            '--approved-sha' => self::APPROVED_SHA,
+            '--release-name' => self::RELEASE_NAME,
+            '--operator-admin-user-id' => 1,
+            '--json' => true,
+        ];
+        $this->artisan('personality:big-five-en52-production-backup', $base)->assertFailed();
+        $this->assertSame([], glob($directory.DIRECTORY_SEPARATOR.'*.json') ?: []);
+
+        $this->artisan('personality:big-five-en52-production-backup', [
+            ...$base,
+            '--confirm' => BigFiveEn52ProductionEvidence::BACKUP_CONFIRMATION,
+        ])->assertSuccessful()
+            ->expectsOutputToContain('PASS_BIG_FIVE_EN52_PRODUCTION_BACKUP_CREATED');
+        $this->assertCount(2, glob($directory.DIRECTORY_SEPARATOR.'*.json') ?: []);
+        $this->assertDatabaseCount('personality_public_content_asset_revisions', 0);
     }
 
     public function test_execute_command_fails_closed_without_exact_hash_confirmations(): void
@@ -614,6 +704,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
     public function test_execute_command_accepts_only_the_exact_locked_confirmations(): void
     {
         $this->seedExactAuthorityRows();
+        $backup = $this->createVerifiedBackup();
 
         $this->artisan('personality:big-five-en52-content-publish', [
             '--package' => $this->packagePath,
@@ -622,6 +713,10 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
             '--confirm-content-sha256' => BigFiveEn52PackageCompiler::SOURCE_CONTENT_SHA256,
             '--confirm-cohort-sha256' => BigFiveEn52PackageCompiler::COHORT_SNAPSHOT_SHA256,
             '--confirm-package-sha256' => BigFiveEn52Publisher::PACKAGE_FILE_SHA256,
+            '--approved-sha' => self::APPROVED_SHA,
+            '--release-name' => self::RELEASE_NAME,
+            '--backup-manifest' => $backup['manifest_path'],
+            '--backup-sha256' => $backup['manifest_sha256'],
             '--operator-admin-user-id' => 1,
         ])->assertSuccessful()
             ->expectsOutputToContain('asset_count=52')
@@ -631,6 +726,50 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
             ->expectsOutputToContain('writes_committed=1');
 
         $this->assertDatabaseCount('personality_public_content_asset_revisions', 52);
+    }
+
+    /** @return array<string,mixed> */
+    private function publishWithVerifiedBackup(?BigFiveEn52Publisher $publisher = null): array
+    {
+        $backup = $this->createVerifiedBackup();
+
+        return ($publisher ?? app(BigFiveEn52Publisher::class))->publish(
+            $this->packagePath,
+            1,
+            self::APPROVED_SHA,
+            self::RELEASE_NAME,
+            $backup['manifest_path'],
+            $backup['manifest_sha256'],
+            $this->releaseIdentityForTests(),
+        );
+    }
+
+    /** @return array{result:array<string,mixed>,manifest_path:string,artifact_path:string,manifest_sha256:string} */
+    private function createVerifiedBackup(): array
+    {
+        $directory = storage_path('framework/testing/en52-backups/'.bin2hex(random_bytes(8)));
+        File::ensureDirectoryExists($directory);
+        $result = app(BigFiveEn52ProductionEvidence::class)->createBackup(
+            $this->packagePath,
+            $directory,
+            1,
+            self::APPROVED_SHA,
+            self::RELEASE_NAME,
+            $this->releaseIdentityForTests(),
+        );
+
+        return [
+            'result' => $result,
+            'manifest_path' => $directory.DIRECTORY_SEPARATOR.$result['manifest_file'],
+            'artifact_path' => $directory.DIRECTORY_SEPARATOR.$result['artifact_file'],
+            'manifest_sha256' => $result['backup_manifest_sha256'],
+        ];
+    }
+
+    /** @return array{sha:string,name:string} */
+    private function releaseIdentityForTests(): array
+    {
+        return ['sha' => self::APPROVED_SHA, 'name' => self::RELEASE_NAME];
     }
 
     /** @return list<PersonalityPublicContentAsset> */
