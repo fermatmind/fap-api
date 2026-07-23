@@ -252,26 +252,39 @@ function deployHttpsUrlArg(string $host, string $path): string
     return deployShellArg("https://{$host}{$path}");
 }
 
-function deployPublicDnsHealthcheckCommand(string $host): string
+function deployPublicDnsBusinessEvidenceCommand(string $host): string
 {
-    $url = deployHttpsUrlArg($host, '/api/healthz');
-    $jq = deployShellArg('.ok==true');
-    $probe = "curl -fsS --connect-timeout 5 --max-time 15 {$url} | jq -e {$jq} >/dev/null";
+    $healthUrl = deployHttpsUrlArg($host, '/api/healthz');
+    $flagsUrl = deployHttpsUrlArg($host, '/api/v0.3/flags');
+    $personalityUrl = deployHttpsUrlArg(
+        $host,
+        '/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'
+    );
+    $httpCode = deployShellArg('%{http_code}');
+    $personalityContract = deployShellArg(
+        '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))'
+    );
+    $probe = 'public_health_status="$(curl -sS --connect-timeout 5 --max-time 15 '
+        ."-o /dev/null -w {$httpCode} {$healthUrl} || true)\"; "
+        .'[ "$public_health_status" = "404" ] '
+        ."&& curl -fsS --connect-timeout 5 --max-time 15 {$flagsUrl} >/dev/null "
+        ."&& curl -fsS --connect-timeout 5 --max-time 15 {$personalityUrl} "
+        ."| jq -e {$personalityContract} >/dev/null";
 
     return 'attempt=1; while [ "$attempt" -le 10 ]; do '
         ."if {$probe}; then exit 0; fi; "
-        .'if [ "$attempt" -eq 10 ]; then echo "Public DNS healthcheck failed after 10 attempts" >&2; exit 1; fi; '
+        .'if [ "$attempt" -eq 10 ]; then echo "Public DNS business evidence failed after 10 attempts" >&2; exit 1; fi; '
         .'attempt=$((attempt + 1)); sleep 3; done';
 }
 
-function runProductionPublicDnsHealthcheck(): void
+function runProductionPublicDnsBusinessEvidence(): void
 {
     if (currentHost()->getAlias() !== 'production') {
         return;
     }
 
     $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
-    run('bash -lc '.deployShellArg(deployPublicDnsHealthcheckCommand($host)));
+    run('bash -lc '.deployShellArg(deployPublicDnsBusinessEvidenceCommand($host)));
 }
 
 function deploySystemdServiceArg(string $service, string $label): string
@@ -380,12 +393,12 @@ BASH);
 before('deploy:symlink', 'guard:expected-release-revision');
 
 /**
- * Refuse to move the production symlink while the real public-DNS route is
- * unhealthy. The loopback vhost probe cannot prove that the public edge and
- * origin routing still reach this production service.
+ * Refuse to move the production symlink unless the protected health policy and
+ * real public-DNS business routes are healthy. The loopback vhost probe alone
+ * cannot prove that the public edge and origin routing reach this service.
  */
 task('guard:public-dns-health', function () {
-    runProductionPublicDnsHealthcheck();
+    runProductionPublicDnsBusinessEvidence();
 });
 
 before('deploy:symlink', 'guard:public-dns-health');
@@ -1383,7 +1396,7 @@ task('healthcheck:public', function () {
 });
 
 task('healthcheck:public-dns', function () {
-    runProductionPublicDnsHealthcheck();
+    runProductionPublicDnsBusinessEvidence();
 });
 
 task('healthcheck:auth-guest-contract', function () {

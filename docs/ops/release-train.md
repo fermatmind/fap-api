@@ -180,6 +180,14 @@ vhost to loopback for `GET /api/healthz`. It requires HTTP `200` and JSON
 raw configuration values. A non-allowlisted public request to `/api/healthz`
 continues to return `404` by design and is not a wrapper failure signal.
 
+The protected standard production workflow and Deployer enforce the same split
+before and after release activation. The target node's loopback-resolved vhost
+must return `200` with `ok=true`; the public health endpoint must return exactly
+`404`; and public-DNS business evidence must include successful flags and
+zh-CN Big Five Hub Personality API responses. The Personality response must
+contain a valid 64-character `source_hash`. Public `/api/healthz` is never used
+as a `200` readiness requirement.
+
 The post-symlink public scale lookup smoke uses
 `backend/scripts/deploy/verify_scale_lookup.sh`. Each configured slug receives
 at most three complete HTTP-and-JSON attempts, with a two-second delay, a

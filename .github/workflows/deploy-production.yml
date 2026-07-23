@@ -620,16 +620,29 @@ jobs:
           LOCK_GUARD_B64="$(printf '%s' "$LOCK_GUARD_SCRIPT" | base64 | tr -d '\n')"
           ssh_retry "TARGET='$TARGET' DEPLOY_MODE='$DEPLOY_MODE' DEPLOY_PATH='$DEPLOY_PATH' STALE_LOCK_SECONDS='1800' GITHUB_REPOSITORY='$GITHUB_REPOSITORY' bash -lc 'printf %s $LOCK_GUARD_B64 | base64 -d | bash'"
 
-      - name: Verify public-DNS health baseline
+      - name: Verify production health evidence baseline
         shell: bash
         run: |
           set -euo pipefail
+          HEALTHCHECK_HOST="$(echo "$HEALTHCHECK_URL" | awk -F[/:] '{print $4}')"
+          PUBLIC_API_ORIGIN="https://${HEALTHCHECK_HOST}"
+          verify_public_evidence() {
+            local public_health_status
+            public_health_status="$(curl -sS --connect-timeout 5 --max-time 15 \
+              -o /dev/null -w '%{http_code}' "$HEALTHCHECK_URL" || true)"
+            [ "$public_health_status" = "404" ] \
+              && curl -fsS --connect-timeout 5 --max-time 15 \
+                "${PUBLIC_API_ORIGIN}/api/v0.3/flags" >/dev/null \
+              && curl -fsS --connect-timeout 5 --max-time 15 \
+                "${PUBLIC_API_ORIGIN}/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN" \
+                | jq -e '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))' >/dev/null
+          }
           for attempt in 1 2 3 4 5 6 7 8 9 10; do
-            if curl -fsS --connect-timeout 5 --max-time 15 "$HEALTHCHECK_URL" | jq -e '.ok==true' >/dev/null; then
+            if verify_public_evidence; then
               exit 0
             fi
             if [ "$attempt" -eq 10 ]; then
-              echo "Public DNS health baseline failed after 10 attempts" >&2
+              echo "Production health evidence baseline failed after 10 attempts" >&2
               exit 1
             fi
             sleep 3
@@ -780,7 +793,19 @@ jobs:
             done
           }
           HEALTHCHECK_HOST="$(echo "$HEALTHCHECK_URL" | awk -F[/:] '{print $4}')"
+          PUBLIC_API_ORIGIN="https://${HEALTHCHECK_HOST}"
           AUTH_HOST="$(echo "$AUTH_GUEST_CHECK_URL" | awk -F[/:] '{print $4}')"
+          verify_public_evidence() {
+            local public_health_status
+            public_health_status="$(curl -sS --connect-timeout 5 --max-time 15 \
+              -o /dev/null -w '%{http_code}' "$HEALTHCHECK_URL" || true)"
+            [ "$public_health_status" = "404" ] \
+              && curl -fsS --connect-timeout 5 --max-time 15 \
+                "${PUBLIC_API_ORIGIN}/api/v0.3/flags" >/dev/null \
+              && curl -fsS --connect-timeout 5 --max-time 15 \
+                "${PUBLIC_API_ORIGIN}/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN" \
+                | jq -e '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))' >/dev/null
+          }
           for i in 1 2 3 4 5 6 7 8 9 10; do
             if ssh_retry "curl -fsS --resolve '$HEALTHCHECK_HOST:443:127.0.0.1' 'https://$HEALTHCHECK_HOST/api/healthz' | jq -e '.ok==true'" >/dev/null; then
               break
@@ -792,11 +817,11 @@ jobs:
             sleep 3
           done
           for i in 1 2 3 4 5 6 7 8 9 10; do
-            if curl -fsS --connect-timeout 5 --max-time 15 "$HEALTHCHECK_URL" | jq -e '.ok==true' >/dev/null; then
+            if verify_public_evidence; then
               break
             fi
             if [ "$i" -eq 10 ]; then
-              echo "Public DNS healthcheck failed after 10 attempts" >&2
+              echo "Post-deploy public business evidence failed after 10 attempts" >&2
               exit 1
             fi
             sleep 3
