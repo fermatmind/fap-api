@@ -42681,7 +42681,7 @@
     "id": "SECURITY-103-API-04",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3229",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -99708,7 +99708,7 @@
       {
         "at": "2026-07-23T07:29:41Z",
         "status": "github_checks_pending",
-        "note": "All local validation and exact five-path scope checks passed. The following commit uses pending_remote_pr_head to avoid a self-referential ledger SHA; required GitHub checks and exact-head review remain mandatory before merge."
+        "note": "All local validation and exact five-path scope checks passed. Implementation commit 90b78bcee was pushed and PR #3229 opened; pending_remote_pr_head avoids a self-referential ledger SHA. Required GitHub checks and exact-head review remain mandatory before merge."
       }
     ],
     "updated_at": "2026-07-23T07:29:41Z"
