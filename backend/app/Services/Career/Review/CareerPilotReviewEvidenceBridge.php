@@ -211,6 +211,7 @@ final class CareerPilotReviewEvidenceBridge
 
         $resolved = [];
         $seenScopes = [];
+        $seenSlugs = [];
         foreach ($attestations as $attestation) {
             $scopeIdentity = (string) $attestation->scope_identity;
             if (isset($seenScopes[$scopeIdentity])) {
@@ -218,16 +219,22 @@ final class CareerPilotReviewEvidenceBridge
             }
             $seenScopes[$scopeIdentity] = true;
 
-            $slugs = $this->slugsFromEvidence($attestation);
-            foreach ($slugs as $slug) {
-                $resolved[$slug] ??= ['review_state' => 'unknown', 'last_reviewed_at' => null];
+            $scopeSlugs = $this->slugsFromEvidence($attestation);
+            $unresolvedSlugs = [];
+            foreach ($scopeSlugs as $slug) {
+                if (isset($seenSlugs[$slug])) {
+                    continue;
+                }
+                $seenSlugs[$slug] = true;
+                $unresolvedSlugs[] = $slug;
+                $resolved[$slug] = ['review_state' => 'unknown', 'last_reviewed_at' => null];
             }
-            if ($slugs === [] || (string) $attestation->decision !== 'approved_all') {
+            if ($unresolvedSlugs === [] || (string) $attestation->decision !== 'approved_all') {
                 continue;
             }
 
             try {
-                $package = $this->buildPackage($slugs);
+                $package = $this->buildPackage($scopeSlugs);
             } catch (\Throwable) {
                 continue;
             }
@@ -251,7 +258,7 @@ final class CareerPilotReviewEvidenceBridge
             }
 
             $reviewedAt = $attestation->attested_at?->utc()->toISOString();
-            foreach ($slugs as $slug) {
+            foreach ($unresolvedSlugs as $slug) {
                 $resolved[$slug] = [
                     'review_state' => 'approved',
                     'last_reviewed_at' => $reviewedAt,

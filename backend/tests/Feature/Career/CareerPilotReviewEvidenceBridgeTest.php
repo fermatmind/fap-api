@@ -157,6 +157,35 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('trust_manifest.last_reviewed_at', null);
     }
 
+    public function test_newer_overlapping_rejection_cannot_be_overridden_by_older_approval(): void
+    {
+        $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
+        $reviews = app(CareerSeoReviewAttestationService::class);
+        $reviews->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+        $reviews->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: 'career-search-entry-pilot:newer-overlapping-rejection',
+            decision: 'rejected',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+
+        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
+            ->assertOk()
+            ->assertJsonPath('trust_manifest.review_state', 'unknown')
+            ->assertJsonPath('trust_manifest.last_reviewed_at', null);
+    }
+
     public function test_public_trust_evidence_and_exact_index_entry_drift_fail_closed(): void
     {
         $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);

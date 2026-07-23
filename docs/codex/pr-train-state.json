@@ -8,8 +8,8 @@
     "depends_on": [
       "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "50899d7c89c9eac395d0d0ffe6aa41a18dd3b13c",
+    "status": "github_review_repairing",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
     "checks": {
       "authorization": {
@@ -25,14 +25,14 @@
         "evidence": "After rebasing onto latest origin/main, focused Career pilot bridge, review-governance, job list/detail, and architecture suites passed 48 tests / 773 assertions; the Big Five isolation regression passed 2 tests / 6 assertions. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, git diff, and exact allowed-path scope checks passed. The package command remained read-only and no controlled production action occurred."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact final implementation head 50899d7c89c9eac395d0d0ffe6aa41a18dd3b13c passed all 9 checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. All actionable review threads were fixed, replied to, and resolved."
+        "status": "pending",
+        "evidence": "The ledger-only head passed all 9 checks, but final review identified a cross-scope per-slug ordering defect. The current head is intentionally null while that same-PR repair and exact checks are pending."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -117,9 +117,14 @@
         "at": "2026-07-23T02:58:00Z",
         "status": "ready_to_merge",
         "note": "Exact final implementation head 50899d7c89c9eac395d0d0ffe6aa41a18dd3b13c passed all 9 GitHub checks with every actionable review thread resolved. Updated the ledger from the obsolete pre-review head to this actual green implementation head. Merge awaits only this ledger-only head's required checks; no production action occurred."
+      },
+      {
+        "at": "2026-07-23T03:07:00Z",
+        "status": "github_review_repairing",
+        "note": "Ledger-only head e5dd7a4b4818af192ce5faef9c96b8a042476652 passed all 9 checks. Final review identified that an older approval in another package scope could override a newer rejection for the same slug. Changed resolution to newest-attestation-wins per slug and set commit_sha null while the repair is pending, preventing downstream use of an obsolete head. No production action occurred."
       }
     ],
-    "updated_at": "2026-07-23T02:58:00Z"
+    "updated_at": "2026-07-23T03:07:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
