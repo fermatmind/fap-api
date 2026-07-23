@@ -149,6 +149,7 @@ jobs:
                  and .ops_pending_total == 0
                  and .program_present == false
                  and .current_config_sha256 == "0000000000000000000000000000000000000000000000000000000000000000"
+                 and .live_process_verified == false
                  and .production_write_execution == false' "$receipt" >/dev/null
               ;;
             *)
@@ -259,6 +260,7 @@ jobs:
           status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
           program_present=false
           program_state=MISSING
+          live_process_verified=false
           if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1} END {exit !found}' <<<"$status_lines"; then
             program_present=true
             if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1; if ($2 != "RUNNING") bad=1} END {exit !(found && !bad)}' <<<"$status_lines"; then
@@ -271,12 +273,37 @@ jobs:
           if [ -f /etc/supervisor/conf.d/fap-queue-ops.conf ]; then
             current_config_sha256="$(sha256sum /etc/supervisor/conf.d/fap-queue-ops.conf | awk '{print $1}')"
           fi
+          if [ "$program_present" = true ]; then
+            program_count="$(awk '$1 ~ /^fap-queue-ops(:|$)/ {count++} END {print count+0}' <<<"$status_lines")"
+            test "$program_count" -eq 1
+            worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops:fap-queue-ops_00 2>/dev/null)"
+            [[ "$worker_pid" =~ ^[1-9][0-9]*$ ]]
+            test -r "/proc/$worker_pid/cmdline"
+            test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
+            test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$current")"
+            expected_argv_sha256="$(printf '%s\0' \
+              /usr/bin/php artisan queue:work database --queue=ops --sleep=1 --tries=3 \
+              --timeout=120 --max-time=3600 | sha256sum | awk '{print $1}')"
+            actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
+            test "$actual_argv_sha256" = "$expected_argv_sha256"
+            config_epoch="$(stat -c %Y /etc/supervisor/conf.d/fap-queue-ops.conf)"
+            boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
+            start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
+            clock_ticks="$(getconf CLK_TCK)"
+            [[ "$config_epoch" =~ ^[0-9]+$ ]]
+            [[ "$boot_epoch" =~ ^[0-9]+$ ]]
+            [[ "$start_ticks" =~ ^[0-9]+$ ]]
+            [[ "$clock_ticks" =~ ^[1-9][0-9]*$ ]]
+            process_epoch=$((boot_epoch + start_ticks / clock_ticks))
+            test "$process_epoch" -ge "$config_epoch"
+            live_process_verified=true
+          fi
           probe_code="$(printf '%s' "$QUEUE_PROBE_PHP_B64" | base64 -d)"
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$current" 2>/dev/null)"
           [[ "$ops_pending_total" =~ ^[0-9]+$ ]]
-          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
             "$active_revision" "$lock_present" "$process_count" "$program_present" \
-            "$program_state" "$ops_pending_total" "$current_config_sha256"
+            "$program_state" "$ops_pending_total" "$current_config_sha256" "$live_process_verified"
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
@@ -291,7 +318,7 @@ jobs:
             echo "OPS_QUEUE_REMOTE_PREFLIGHT_FAILED" >&2
             exit "$ssh_rc"
           fi
-          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 <<<"$result"
+          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified <<<"$result"
           test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"
           test "$lock_present" = false
           test "$process_count" = 0
@@ -299,18 +326,22 @@ jobs:
           [[ "$program_state" =~ ^(MISSING|RUNNING|NOT_RUNNING)$ ]]
           test "$ops_pending_total" = 0
           [[ "$current_config_sha256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$live_process_verified" =~ ^(true|false)$ ]]
           zero_sha256="$(printf '0%.0s' {1..64})"
           if [ "$program_present" = true ]; then
             test "$program_state" = RUNNING
             test "$current_config_sha256" = "$EXPECTED_RENDERED_SHA256"
+            test "$live_process_verified" = true
           else
             test "$program_state" = MISSING
             test "$current_config_sha256" = "$zero_sha256"
+            test "$live_process_verified" = false
           fi
           echo "program_present=$program_present" >> "$GITHUB_OUTPUT"
           echo "program_state=$program_state" >> "$GITHUB_OUTPUT"
           echo "ops_pending_total=$ops_pending_total" >> "$GITHUB_OUTPUT"
           echo "current_config_sha256=$current_config_sha256" >> "$GITHUB_OUTPUT"
+          echo "live_process_verified=$live_process_verified" >> "$GITHUB_OUTPUT"
           echo "Read-only production preflight passed without disclosing routing, payload or database metadata."
 
       - name: Apply exact Supervisor ops queue candidate
@@ -331,6 +362,7 @@ jobs:
           test "${{ steps.preflight.outputs.program_state }}" = MISSING
           test "${{ steps.preflight.outputs.ops_pending_total }}" = 0
           test "${{ steps.preflight.outputs.current_config_sha256 }}" = "$(printf '0%.0s' {1..64})"
+          test "${{ steps.preflight.outputs.live_process_verified }}" = false
           config_b64="$(base64 < "$CANDIDATE_PATH" | tr -d '\n')"
           queue_probe_php='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $conn=Illuminate\Support\Facades\DB::connection(); $conn->listen(function($query){$sql=ltrim(strtolower((string)$query->sql)); if(!str_starts_with($sql,"select")&&!str_starts_with($sql,"show")&&!str_starts_with($sql,"describe")&&!str_starts_with($sql,"explain")&&!str_starts_with($sql,"pragma")){throw new RuntimeException("write query refused");}}); echo (clone $conn->table("jobs")->where("queue","ops"))->count(),PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
           queue_probe_b64="$(printf '%s' "$queue_probe_php" | base64 | tr -d '\n')"
@@ -364,9 +396,28 @@ jobs:
             test "$attempt" -lt 10
             sleep 2
           done
+          status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
+          program_count="$(awk '$1 ~ /^fap-queue-ops(:|$)/ {count++} END {print count+0}' <<<"$status_lines")"
+          test "$program_count" -eq 1
+          worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops:fap-queue-ops_00 2>/dev/null)"
+          [[ "$worker_pid" =~ ^[1-9][0-9]*$ ]]
+          test -r "/proc/$worker_pid/cmdline"
+          test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
+          test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$DEPLOY_PATH/current/backend")"
+          expected_argv_sha256="$(printf '%s\0' \
+            /usr/bin/php artisan queue:work database --queue=ops --sleep=1 --tries=3 \
+            --timeout=120 --max-time=3600 | sha256sum | awk '{print $1}')"
+          actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
+          test "$actual_argv_sha256" = "$expected_argv_sha256"
+          config_epoch="$(stat -c %Y /etc/supervisor/conf.d/fap-queue-ops.conf)"
+          boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
+          start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
+          clock_ticks="$(getconf CLK_TCK)"
+          process_epoch=$((boot_epoch + start_ticks / clock_ticks))
+          test "$process_epoch" -ge "$config_epoch"
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
           test "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
-          printf 'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\n'
+          printf 'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true\n'
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
@@ -381,9 +432,10 @@ jobs:
             echo "OPS_QUEUE_REMOTE_APPLY_FAILED" >&2
             exit "$ssh_rc"
           fi
-          test "$result" = $'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1'
+          test "$result" = $'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true'
           echo "write_count=1" >> "$GITHUB_OUTPUT"
           echo "worker_count=1" >> "$GITHUB_OUTPUT"
+          echo "live_process_verified=true" >> "$GITHUB_OUTPUT"
           echo "Exact Supervisor ops queue candidate applied without deploying application code."
 
       - name: Build sanitized control receipt
@@ -398,6 +450,8 @@ jobs:
           PROGRAM_PRESENT_BEFORE: ${{ steps.preflight.outputs.program_present }}
           PROGRAM_STATE_BEFORE: ${{ steps.preflight.outputs.program_state }}
           CURRENT_CONFIG_SHA256_BEFORE: ${{ steps.preflight.outputs.current_config_sha256 }}
+          LIVE_PROCESS_VERIFIED_BEFORE: ${{ steps.preflight.outputs.live_process_verified }}
+          APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}
           OPS_PENDING_TOTAL: ${{ steps.preflight.outputs.ops_pending_total }}
         run: |
           set -euo pipefail
@@ -410,6 +464,7 @@ jobs:
             program_present="$PROGRAM_PRESENT_BEFORE"
             program_state="$PROGRAM_STATE_BEFORE"
             current_config_sha256="$CURRENT_CONFIG_SHA256_BEFORE"
+            live_process_verified="$LIVE_PROCESS_VERIFIED_BEFORE"
           else
             status=PASS_APPLY
             production_write=true
@@ -418,6 +473,7 @@ jobs:
             program_present=true
             program_state=RUNNING
             current_config_sha256="$RENDERED_SHA256"
+            live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"
           fi
           jq -n \
             --arg contract_version "backend.production_ops_queue_control.v1" \
@@ -435,6 +491,7 @@ jobs:
             --argjson program_present "$program_present" \
             --arg program_state "$program_state" \
             --arg current_config_sha256 "$current_config_sha256" \
+            --argjson live_process_verified "$live_process_verified" \
             --argjson production_write_execution "$production_write" \
             --argjson config_write_count "$config_write_count" \
             --argjson worker_start_count "$worker_start_count" \
@@ -454,6 +511,7 @@ jobs:
               program_present: $program_present,
               program_state: $program_state,
               current_config_sha256: $current_config_sha256,
+              live_process_verified: $live_process_verified,
               production_write_execution: $production_write_execution,
               config_write_count: $config_write_count,
               worker_start_count: $worker_start_count,

@@ -30,6 +30,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'and .ops_pending_total == 0',
             'and .program_present == false',
             'and .current_config_sha256 == "0000000000000000000000000000000000000000000000000000000000000000"',
+            'and .live_process_verified == false',
             'test "$lock_present" = false',
             'test "$process_count" = 0',
             'test "$ops_pending_total" = 0',
@@ -39,8 +40,22 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"',
             'test "$current_config_sha256" = "$EXPECTED_RENDERED_SHA256"',
             'test "$current_config_sha256" = "$zero_sha256"',
+            'test "$(ps -o user= -p "$worker_pid" | awk \'{$1=$1; print}\')" = www-data',
+            'test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$current")"',
+            'pid fap-queue-ops:fap-queue-ops_00',
+            'actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk \'{print $1}\')"',
+            'process_epoch=$((boot_epoch + start_ticks / clock_ticks))',
+            'test "$process_epoch" -ge "$config_epoch"',
+            'test "$live_process_verified" = true',
+            'test "$live_process_verified" = false',
+            'test "${{ steps.preflight.outputs.live_process_verified }}" = false',
             'CURRENT_CONFIG_SHA256_BEFORE: ${{ steps.preflight.outputs.current_config_sha256 }}',
+            'LIVE_PROCESS_VERIFIED_BEFORE: ${{ steps.preflight.outputs.live_process_verified }}',
             'current_config_sha256: $current_config_sha256',
+            'live_process_verified: $live_process_verified',
+            'APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}',
+            'live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"',
+            'live_process_verified=true',
             'test ! -e /etc/supervisor/conf.d/fap-queue-ops.conf',
             'sudo -n install -o root -g root -m 0644 "$candidate" /etc/supervisor/conf.d/fap-queue-ops.conf',
             'sudo -n "$supervisord_path" -t',
@@ -68,6 +83,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
             $workflow,
         );
+        $this->assertSame(2, substr_count($workflow, 'pid fap-queue-ops:fap-queue-ops_00'));
     }
 
     #[Test]
