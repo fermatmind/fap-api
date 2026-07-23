@@ -8,13 +8,10 @@ use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Models\PersonalityProfile;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Support\CanonicalFrontendUrl;
-use Illuminate\Support\Facades\File;
 
 /** @review-surface mbti_cross_type_comparison_authority */
 final class Mbti64CrossTypeComparisonPublicReadModel
 {
-    private const SOURCE_DIR = 'docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702';
-
     private const CONTRACT_VERSION = 'mbti.cross_type_comparison.public.v1';
 
     private const AUTHORITY_CONTRACT_VERSION = 'mbti.cross_type_comparison.authority.v1';
@@ -25,15 +22,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
 
     private const LOCALE = 'zh-CN';
 
-    /**
-     * @var array<string,array<string,mixed>>|null
-     */
-    private ?array $assetsBySlug = null;
-
-    public function __construct(
-        private readonly Mbti64CrossTypeComparisonAssetsDryRunPlanner $planner,
-        private readonly PublicReviewContract $publicReviewContract,
-    ) {}
+    public function __construct(private readonly PublicReviewContract $publicReviewContract) {}
 
     /**
      * @return list<array<string,mixed>>
@@ -45,7 +34,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
         }
 
         $items = [];
-        foreach ($this->assetsBySlug() as $asset) {
+        foreach ($this->authorityAssetsBySlug() as $asset) {
             $item = $this->listItem($asset, $locale);
             if ($item !== null) {
                 $items[] = $item;
@@ -67,60 +56,12 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             return null;
         }
 
-        $asset = $this->assetsBySlug()[$normalizedSlug] ?? null;
+        $asset = $this->authorityAssetsBySlug()[$normalizedSlug] ?? null;
         if (! is_array($asset)) {
             return null;
         }
 
         return $this->detail($asset, $locale);
-    }
-
-    /**
-     * @return array<string,array<string,mixed>>
-     */
-    private function assetsBySlug(): array
-    {
-        if ($this->assetsBySlug !== null) {
-            return $this->assetsBySlug;
-        }
-
-        $authorityAssets = $this->authorityAssetsBySlug();
-        $plan = $this->planner->planSourceDir(self::SOURCE_DIR);
-        if (($plan['ok'] ?? false) !== true) {
-            return $this->assetsBySlug = $authorityAssets;
-        }
-
-        $assets = [];
-        foreach ((array) ($plan['rows'] ?? []) as $row) {
-            if (! is_array($row)) {
-                continue;
-            }
-
-            $slug = $this->stringValue($row['slug'] ?? null);
-            $sourceFile = $this->stringValue($row['source_file'] ?? null);
-            if ($slug === null || $sourceFile === null) {
-                continue;
-            }
-
-            $path = base_path($sourceFile);
-            if (! File::isFile($path)) {
-                continue;
-            }
-
-            $asset = json_decode((string) File::get($path), true);
-            if (! is_array($asset) || $this->stringValue($asset['slug'] ?? null) !== $slug) {
-                continue;
-            }
-
-            $asset['_source_sha256'] = (string) ($row['source_sha256'] ?? hash('sha256', (string) File::get($path)));
-            $assets[$slug] = $asset;
-        }
-
-        ksort($assets);
-        $assets = array_merge($assets, $authorityAssets);
-        ksort($assets);
-
-        return $this->assetsBySlug = $assets;
     }
 
     /**
@@ -134,6 +75,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             ->where('org_id', 0)
             ->where('locale', self::LOCALE)
             ->where('comparison_type', self::COMPARISON_TYPE)
+            ->where('publish_status', 'published')
             ->where('is_public', true)
             ->orderBy('slug')
             ->get();
@@ -239,6 +181,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'summary' => (string) $asset['summary'],
             'public_url' => $this->canonicalUrl($slug, $locale),
             'canonical_url' => $this->canonicalUrl($slug, $locale),
+            'authority_source' => (string) $asset['_authority_source'],
             'is_public' => (bool) ($asset['_is_public'] ?? true),
             'is_indexable' => (bool) ($asset['_is_indexable'] ?? false),
             'sitemap_eligible' => (bool) ($asset['_sitemap_eligible'] ?? false),
@@ -291,12 +234,9 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'internal_links' => $internalLinks,
             'claim_boundary' => (string) $asset['claim_boundary'],
             'source_notes' => $this->sourceNotes($asset),
-            'source_refs' => [
-                (string) ($asset['source_package_id'] ?? 'mbti-cross-type-comparison-content-assets-draft-20260702'),
-                self::AUTHORITY_CONTRACT_VERSION,
-                self::READMODEL_CONTRACT_VERSION,
-            ],
+            'source_refs' => $this->sourceRefs($asset),
             'source_sha256' => (string) ($asset['_source_sha256'] ?? ''),
+            'authority_source' => (string) $asset['_authority_source'],
             'is_public' => (bool) ($asset['_is_public'] ?? true),
             'is_indexable' => (bool) ($asset['_is_indexable'] ?? false),
             'sitemap_eligible' => (bool) ($asset['_sitemap_eligible'] ?? false),
@@ -306,6 +246,19 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'publish_status' => (string) $asset['publish_status'],
             'indexability_status' => (string) $asset['indexability_status'],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     * @return list<string>
+     */
+    private function sourceRefs(array $asset): array
+    {
+        return array_values(array_filter([
+            $this->stringValue($asset['source_package_id'] ?? null),
+            self::AUTHORITY_CONTRACT_VERSION,
+            self::READMODEL_CONTRACT_VERSION,
+        ]));
     }
 
     /**

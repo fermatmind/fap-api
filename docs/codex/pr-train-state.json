@@ -42681,7 +42681,7 @@
     "id": "SECURITY-103-API-04",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3229",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -99561,8 +99561,8 @@
     "depends_on": [
       "MBTI-CROSS-APPROVAL-48"
     ],
-    "status": "pending_external_merge",
-    "commit_sha": "pending_remote_pr_head",
+    "status": "merged",
+    "commit_sha": "f028eb5d86947c8ef2e3b84244fc363cfdeee224",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3227",
     "checks": {
       "dependency": {
@@ -99582,20 +99582,20 @@
         "evidence": "PASS after all three review fixes: Publisher 49 plus review registry passed 23 tests / 481 assertions including JSON object-key reordering, scoped PHP syntax and Pint passed, git diff --check passed, and the complete backend/scripts/ci_verify_mbti.sh passed including Big Five 1596 tests / 195602 assertions, personality authority 89 / 5853, MBTI end-to-end, migration, security, OpenAPI, and downstream gates. Generated Big Five artifacts were restored to HEAD."
       },
       "github_required_checks": {
-        "status": "pending_final_head",
-        "evidence": "All nine required checks passed on head a0d1cba0e835dbe89cc1075e6b5827197adbbeda. A subsequent actionable JSON-order review finding is fixed locally with complete validation; fresh exact-head checks remain mandatory before merge."
+        "status": "passed",
+        "evidence": "All nine required checks passed on exact final head ec98de75ffa9a126294b5196c98193b920092226, all three actionable review threads were resolved, and GitHub squash-merged PR #3227 as f028eb5d86947c8ef2e3b84244fc363cfdeee224."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-23T07:10:49Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -99638,8 +99638,84 @@
         "at": "2026-07-23T07:02:00Z",
         "status": "pending_external_merge",
         "note": "After all nine checks passed, pre-merge review identified database JSON object-key ordering as a false-negative risk. Exact content equality now uses the package contract's recursively stable SHA comparison in both content and indexability stages, with a key-reordering regression. Focused and complete local validation passed; fresh exact-head checks and final thread resolution remain mandatory. No production/staging write or discoverability action was executed."
+      },
+      {
+        "at": "2026-07-23T07:10:49Z",
+        "status": "merged",
+        "note": "Exact final head ec98de75ffa9a126294b5196c98193b920092226 passed all nine checks with all review threads resolved and was squash-merged as f028eb5d86947c8ef2e3b84244fc363cfdeee224. Main was synced, focused post-merge validation passed 11 tests / 476 assertions, and both local and remote task branches were deleted."
       }
     ],
-    "updated_at": "2026-07-23T07:02:00Z"
+    "updated_at": "2026-07-23T07:10:49Z"
+  },
+  "MBTI-CROSS-AUTHORITY-50": {
+    "id": "MBTI-CROSS-AUTHORITY-50",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-cross-authority-50",
+    "title": "MBTI-CROSS-AUTHORITY-50: make cross-type comparison runtime DB-authoritative",
+    "depends_on": [
+      "MBTI-CROSS-PUBLISHER-49"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3227 is MERGED as f028eb5d86947c8ef2e3b84244fc363cfdeee224, origin/main contains that merge, focused post-merge checks passed, and both PR49 branches were deleted."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "This authority PR changes code and tests only. No staging/production deploy, CMS/database write, publication/indexability mutation, cache action, sitemap/llms release, or search submission is authorized or executed."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "DB-only authority tests passed 5 tests / 79 assertions; the full PersonalityPublicApiTest passed 50 tests / 3907 assertions including all 16 A/T projections; focused runtime-freeze checks passed 2 tests / 5 assertions. PHP syntax, scoped Pint, Composer strict validation/audit, route inventory, full SQLite migrations, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks, and exact five-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All nine required CI and security checks passed on exact head b1fab1696c623ca70f025bae5cf4d6c22a64f8ee. GitHub reports CLEAN/MERGEABLE, exact diff is the five allowed paths, no review threads exist, and exact-head inspection found no unresolved issue."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-23T07:19:54Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main f028eb5d86947c8ef2e3b84244fc363cfdeee224 after PR49 merge and cleanup. Scope is limited to the DB-only public read model, focused regressions, and train metadata; no external or production mutation is authorized or attempted."
+      },
+      {
+        "at": "2026-07-23T07:28:45Z",
+        "status": "local_validation_passed",
+        "note": "The runtime now reads only published/public DB authority rows, returns 404 for draft/private/missing rows even when local drafts exist, preserves noindex/sitemap/llms flags, and exposes authority_source=database. All manifest checks passed; no staging/production deploy, CMS/database write, publication/indexability change, cache action, sitemap/llms release, or search submission occurred."
+      },
+      {
+        "at": "2026-07-23T07:29:41Z",
+        "status": "github_checks_pending",
+        "note": "All local validation and exact five-path scope checks passed. Implementation commit 90b78bcee was pushed and PR #3229 opened; pending_remote_pr_head avoids a self-referential ledger SHA. Required GitHub checks and exact-head review remain mandatory before merge."
+      },
+      {
+        "at": "2026-07-23T07:44:26Z",
+        "status": "ready_to_merge",
+        "note": "Exact head b1fab1696c623ca70f025bae5cf4d6c22a64f8ee passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the five allowed paths, no review threads exist, and exact-head inspection found no unresolved issue. This following ledger-only transition must rerun all required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-23T07:44:26Z"
   }
 }

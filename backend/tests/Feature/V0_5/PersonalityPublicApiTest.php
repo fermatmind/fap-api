@@ -789,7 +789,7 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertStringNotContainsString('token', (string) $response->getContent());
     }
 
-    public function test_personality_comparison_index_returns_cross_type_group_from_backend_authority(): void
+    public function test_personality_comparison_index_does_not_synthesize_cross_type_rows_from_local_packages(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
@@ -799,23 +799,9 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('comparison_list_public_projection_v1.groups.1.key', 'cross_type_comparisons')
             ->assertJsonPath('comparison_list_public_projection_v1.groups.1.comparison_type', 'mbti_cross_type')
-            ->assertJsonPath('comparison_list_public_projection_v1.groups.1.items.0.slug', 'enfp-vs-entp')
-            ->assertJsonPath('comparison_list_public_projection_v1.groups.1.items.0.public_route_type', 'cross-type-comparison')
-            ->assertJsonPath('comparison_list_public_projection_v1.groups.1.items.0.public_url', 'https://fermatmind.com/zh/personality/enfp-vs-entp')
-            ->assertJsonPath('comparison_list_public_projection_v1.groups.1.items.0.is_public', true)
-            ->assertJsonPath('comparison_list_public_projection_v1.groups.1.items.0.is_indexable', false)
-            ->assertJsonPath('cross_type_comparisons.0.slug', 'enfp-vs-entp');
+            ->assertJsonCount(0, 'comparison_list_public_projection_v1.groups.1.items')
+            ->assertJsonCount(0, 'cross_type_comparisons');
 
-        $slugs = collect($response->json('cross_type_comparisons'))->pluck('slug')->sort()->values()->all();
-        self::assertSame([
-            'enfp-vs-entp',
-            'entj-vs-intj',
-            'estj-vs-entj',
-            'infj-vs-infp',
-            'intj-vs-intp',
-            'isfp-vs-infp',
-        ], $slugs);
-        self::assertNotContains('istj-vs-isfj', $slugs);
         self::assertStringNotContainsString('/zh/result', (string) $response->getContent());
         self::assertStringNotContainsString('/zh/orders', (string) $response->getContent());
         self::assertStringNotContainsString('token=', (string) $response->getContent());
@@ -882,42 +868,14 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertNotContains('https://fermatmind.com/zh/personality/intj-vs-intp', $locs);
     }
 
-    public function test_personality_comparison_endpoint_returns_cross_type_detail_from_backend_authority(): void
+    public function test_personality_comparison_endpoint_does_not_return_local_cross_type_draft_detail(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
-        $response = $this->getJson('/api/v0.5/personality/comparisons/intj-vs-intp?locale=zh-CN');
-
-        $response->assertOk()
-            ->assertJsonPath('ok', true)
-            ->assertJsonPath('comparison_public_projection_v1.comparison_contract_version', 'mbti.cross_type_comparison.public.v1')
-            ->assertJsonPath('comparison_public_projection_v1.authority_contract_version', 'mbti.cross_type_comparison.authority.v1')
-            ->assertJsonPath('comparison_public_projection_v1.readmodel_contract_version', 'mbti.cross_type_comparison.readmodel.v1')
-            ->assertJsonPath('comparison_public_projection_v1.comparison_slug', 'intj-vs-intp')
-            ->assertJsonPath('comparison_public_projection_v1.comparison_type', 'mbti_cross_type')
-            ->assertJsonPath('comparison_public_projection_v1.public_route_type', 'cross-type-comparison')
-            ->assertJsonPath('comparison_public_projection_v1.left_type', 'INTJ')
-            ->assertJsonPath('comparison_public_projection_v1.right_type', 'INTP')
-            ->assertJsonPath('comparison_public_projection_v1.canonical_url', 'https://fermatmind.com/zh/personality/intj-vs-intp')
-            ->assertJsonPath('comparison_public_projection_v1.is_public', true)
-            ->assertJsonPath('comparison_public_projection_v1.is_indexable', false)
-            ->assertJsonPath('comparison_public_projection_v1.sections.0.id', 'quick_answer')
-            ->assertJsonPath('comparison_public_projection_v1.sections.0.title', '快速结论：INTJ 和 INTP 最大区别是什么')
-            ->assertJsonPath('comparison_public_projection_v1.faq.0.question', 'INTJ 和 INTP 最大区别是什么？')
-            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/zh/personality/intj')
-            ->assertJsonPath('comparison_public_projection_v1.source_refs.0', 'mbti-cross-type-comparison-content-assets-draft-20260702');
-
-        self::assertGreaterThanOrEqual(5, count((array) $response->json('comparison_public_projection_v1.sections')));
-        self::assertGreaterThanOrEqual(4, count((array) $response->json('comparison_public_projection_v1.faq')));
-        self::assertGreaterThanOrEqual(3, count((array) $response->json('comparison_public_projection_v1.internal_links')));
-        self::assertStringContainsString(
-            '战略收敛',
-            (string) $response->json('comparison_public_projection_v1.summary'),
-        );
-        self::assertStringNotContainsString('/zh/result', (string) $response->getContent());
-        self::assertStringNotContainsString('/zh/orders', (string) $response->getContent());
-        self::assertStringNotContainsString('token=', (string) $response->getContent());
-        self::assertStringNotContainsString('order_no=', (string) $response->getContent());
+        $this->getJson('/api/v0.5/personality/comparisons/intj-vs-intp?locale=zh-CN')
+            ->assertNotFound()
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     public function test_personality_cross_type_comparison_endpoint_fails_closed_for_missing_or_unavailable_assets(): void
