@@ -71,7 +71,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}',
             'live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"',
             'live_process_verified=true',
-            'OPS_CONFIG_PATH: ${{ secrets.PRODUCTION_OPS_SUPERVISOR_CONFIG_PATH }}',
+            'failure_gate=CONFIG_DISCOVERY',
+            'sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print',
+            'test "${#config_candidates[@]}" -le 1',
+            'OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf',
             '[[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]',
             'test "$(printf \'%s\' "$OPS_CONFIG_PATH" | sha256sum | awk \'{print $1}\')" = "$EXPECTED_CONFIG_PATH_SHA256"',
             'sudo -n install -o root -g root -m 0600 "$OPS_CONFIG_PATH" "$backup"',
@@ -104,7 +107,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertStringNotContainsString('whoami', $workflow);
         $this->assertStringNotContainsString('hostname', $workflow);
         $this->assertStringNotContainsString('cat "$META"', $workflow);
-        $this->assertStringNotContainsString('/etc/supervisor/conf.d/fap-queue-ops.conf', $workflow);
+        $this->assertStringNotContainsString(
+            'secrets.PRODUCTION_OPS_SUPERVISOR_CONFIG_PATH',
+            $workflow,
+        );
         $this->assertStringNotContainsString(
             'cat "$RUNNER_TEMP/ops-queue-preflight-ssh.err"',
             $workflow,
@@ -118,6 +124,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             $workflow,
         );
         $this->assertSame(2, substr_count($workflow, 'pid fap-queue-ops:fap-queue-ops_00'));
+        $this->assertSame(2, substr_count($workflow, 'failure_gate=CONFIG_DISCOVERY'));
     }
 
     #[Test]
