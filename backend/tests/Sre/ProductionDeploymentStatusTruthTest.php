@@ -255,7 +255,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('main_commits_not_deployed: ${UNDEPLOYED_COUNT}', $deploy);
     }
 
-    public function test_candidate_only_lane_materializes_latest_main_without_activation_or_runtime_mutation(): void
+    public function test_candidate_only_lane_supports_exact_active_fast_path_without_weakening_activation_guards(): void
     {
         $workflow = $this->workflow();
         $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
@@ -267,6 +267,12 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             'auto|code_only|candidate_only',
             'RESOLVED_DEPLOY_MODE=candidate_only',
             'I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.',
+            'I explicitly approve backend exact-active inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}; same revision, distinct release path, zero activation.',
+            'candidate_only accepted an empty diff for the exact-active same-SHA inactive-release fast path.',
+            'exact-active candidate_only fast path requires staging_run_id to be empty.',
+            'Exact-active candidate_only fast path requires the candidate SHA to equal expected_deployed_revision.',
+            'Exact-active candidate_only fast path requires the active SHA to remain reachable from latest main.',
+            'Exact-active same-SHA candidate_only fast path accepted without staging evidence.',
             'Inactive candidate materialization requires expected_release_sha to equal latest main.',
             'Inactive candidate materialization requires exact-SHA successful staging evidence.',
             'candidate_only validated the Career reconciliation input without reading or repairing the live public cache.',
@@ -278,8 +284,12 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             'DEPLOY_TASK=deploy:candidate-only',
             '- name: Verify exact inactive candidate materialization',
             'backend.inactive_candidate_materialization.v1',
+            'test \"\$current\" != \"\$candidate\"',
+            'test \"\$(tr -d \'\r\n\' < \"\$current/REVISION\")\" = \'$EXPECTED_DEPLOYED_REVISION\'',
+            'test \"\$(tr -d \'\r\n\' < \"\$candidate/REVISION\")\" = \'$DEPLOY_SHA\'',
             'candidate_activation: false',
             'active_pointer_changed: false',
+            'staging_evidence_waived: $exact_active_candidate_fast_path',
             'cache_write_count: 0',
             'queue_dispatch_count: 0',
             'database_write_count: 0',
