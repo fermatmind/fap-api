@@ -68,29 +68,36 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
 
         $this->assertStringContainsString('verify_only refuses an operator approval phrase.', $source);
         $this->assertStringContainsString(
-            'cache/queue-only, no CMS/DB-authority/publication/indexability/sitemap/llms/search.',
+            'cache-only, candidate-runtime-direct, zero queue dispatch, no CMS/DB-authority/publication/indexability/sitemap/llms/search.',
             $source,
         );
+        $this->assertStringContainsString('- direct_repair', $source);
+        $this->assertStringNotContainsString('enqueue_and_wait', $source);
         $this->assertSame(2, substr_count($source, 'career:verify-job-detail-cache-coverage --verify-only'));
-        $this->assertSame(1, substr_count($source, 'career:verify-job-detail-cache-coverage --repair-missing'));
+        $this->assertSame(1, substr_count($source, 'career:verify-job-detail-cache-coverage --repair-missing-direct'));
+        $this->assertStringNotContainsString('career:verify-job-detail-cache-coverage --repair-missing --', $source);
         $this->assertStringContainsString('--batch-size=$REPAIR_BATCH_SIZE', $source);
         $this->assertStringContainsString('--confirm-production-write', $source);
-        $this->assertStringContainsString("supervisorctl status 'fap-queue-default-high:*'", $source);
+        $this->assertStringNotContainsString('supervisorctl', $source);
         $this->assertStringContainsString(
             'sudo -n -u www-data -- test -w storage/framework/cache/data',
             $source,
         );
         $this->assertStringContainsString(
-            'sudo -n -u www-data -- php artisan career:verify-job-detail-cache-coverage --repair-missing',
+            'sudo -n -u www-data -- /usr/bin/timeout 600 php artisan career:verify-job-detail-cache-coverage --repair-missing-direct',
             $source,
         );
         $this->assertStringContainsString('for batch in $(seq 1 9)', $source);
-        $this->assertStringContainsString('for _attempt in $(seq 1 90)', $source);
+        $this->assertStringNotContainsString('for _attempt in', $source);
+        $this->assertStringNotContainsString('sleep 20', $source);
         $this->assertStringContainsString('.covered_target_count == $expected_targets', $source);
         $this->assertStringContainsString('and .missing_count == 0', $source);
         $this->assertStringContainsString('and .broken_count == 0', $source);
         $this->assertStringNotContainsString('--repair-missing-sync', $source);
         $this->assertStringNotContainsString('deploy:symlink', $source);
+        $this->assertStringNotContainsString('php artisan migrate', $source);
+        $this->assertStringNotContainsString('php artisan queue:', $source);
+        $this->assertStringNotContainsString('php artisan search:', $source);
     }
 
     private function workflowSource(): string

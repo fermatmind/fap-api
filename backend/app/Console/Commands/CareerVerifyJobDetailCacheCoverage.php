@@ -9,6 +9,7 @@ use App\Services\Career\CareerJobDetailCacheCoverageService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Throwable;
 
 final class CareerVerifyJobDetailCacheCoverage extends Command
 {
@@ -16,16 +17,17 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         {--verify-only : Explicitly select the default read-only verification mode}
         {--repair-missing : Queue only missing or broken published targets}
         {--repair-missing-sync : Synchronize only missing or broken targets in a non-production deploy gate}
+        {--repair-missing-direct : Directly warm one bounded missing/broken batch in the current candidate runtime}
         {--locales=en,zh-CN : Comma-separated public locales}
         {--minimum-targets=0 : Fail when the dynamic eligible target count is below this rollout floor}
         {--batch-size=250 : Maximum stable target rows inspected per repair invocation}
         {--maximum-sync-repairs=250 : Refuse synchronous repair before writes when more targets are missing or broken}
         {--resume-key=default : Durable repair cursor namespace}
-        {--reset : Reset the repair cursor before queueing}
-        {--confirm-production-write : Confirm production cache cursor writes and queue dispatch}
+        {--reset : Reset the queued or direct repair cursor before processing}
+        {--confirm-production-write : Confirm production cache writes for a queued or direct repair}
         {--json : Emit the stable JSON contract}';
 
-    protected $description = 'Verify published Career detail cache coverage and optionally queue bounded missing/broken repairs.';
+    protected $description = 'Verify published Career detail cache coverage and optionally repair bounded missing/broken targets.';
 
     public function __construct(
         private readonly CareerJobDetailCacheCoverageService $coverageService,
@@ -38,15 +40,17 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
     {
         $queuedRepair = (bool) $this->option('repair-missing');
         $syncRepair = (bool) $this->option('repair-missing-sync');
-        $repair = $queuedRepair || $syncRepair;
-        if ($queuedRepair && $syncRepair) {
-            return $this->failCommand('--repair-missing and --repair-missing-sync are mutually exclusive.');
+        $directRepair = (bool) $this->option('repair-missing-direct');
+        $repairModes = array_filter([$queuedRepair, $syncRepair, $directRepair]);
+        $repair = $repairModes !== [];
+        if (count($repairModes) > 1) {
+            return $this->failCommand('Repair modes are mutually exclusive.');
         }
         if ($repair && (bool) $this->option('verify-only')) {
             return $this->failCommand('--verify-only cannot be combined with a repair mode.');
         }
-        if (! $repair && (bool) $this->option('reset')) {
-            return $this->failCommand('--reset is available only with --repair-missing.');
+        if (! ($queuedRepair || $directRepair) && (bool) $this->option('reset')) {
+            return $this->failCommand('--reset is available only with --repair-missing or --repair-missing-direct.');
         }
 
         $locales = $this->locales((string) $this->option('locales'));
@@ -88,6 +92,9 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
 
         if (app()->environment('production') && ! (bool) $this->option('confirm-production-write')) {
             return $this->failCommand('Production repair requires --confirm-production-write; verification remains read-only by default.');
+        }
+        if ($directRepair) {
+            return $this->repairDirectly($inspection, $locales);
         }
         if (config('queue.default') === 'sync') {
             return $this->failCommand('Repair requires an asynchronous queue connection; queue.default=sync is not allowed.');
@@ -132,6 +139,90 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         $this->emit($report);
 
         return self::SUCCESS;
+    }
+
+    /**
+     * @param  array{report: array<string, mixed>, rows: list<array{slug: string, locale: string, classification: string, repairable: bool}>}  $inspection
+     * @param  list<string>  $locales
+     */
+    private function repairDirectly(array $inspection, array $locales): int
+    {
+        $batchSizeRaw = trim((string) $this->option('batch-size'));
+        if (preg_match('/^[1-9][0-9]*$/D', $batchSizeRaw) !== 1 || (int) $batchSizeRaw > 250) {
+            return $this->failCommand('--batch-size must be an integer between 1 and 250 for direct repair.');
+        }
+
+        $resumeKey = $this->resumeCacheKey((string) $this->option('resume-key'));
+        if ((bool) $this->option('reset')) {
+            Cache::forget($resumeKey);
+        }
+
+        $rows = $inspection['rows'];
+        $storedCursor = max(0, (int) Cache::get($resumeKey, 0));
+        $cursorBefore = min(count($rows), $storedCursor);
+        $batchSize = (int) $batchSizeRaw;
+        $batch = array_slice($rows, $cursorBefore, $batchSize);
+        $cached = 0;
+        $failed = 0;
+
+        foreach ($batch as $row) {
+            if (! $row['repairable']) {
+                continue;
+            }
+
+            try {
+                $entry = $this->responseCache->warmJobDetailPayload(
+                    $row['slug'],
+                    $row['locale'],
+                    false,
+                );
+                if (($entry['status'] ?? null) === 'cached') {
+                    $cached++;
+                } else {
+                    $failed++;
+                }
+            } catch (Throwable) {
+                $failed++;
+            }
+        }
+
+        $cursorAfter = $failed === 0
+            ? $cursorBefore + count($batch)
+            : $cursorBefore;
+        if ($failed === 0) {
+            Cache::forever($resumeKey, $cursorAfter);
+        }
+
+        $postRepair = $this->coverageService->inspect($locales)['report'];
+        $postRepair['minimum_target_count'] = (int) ($inspection['report']['minimum_target_count'] ?? 0);
+        $postRepair['minimum_target_count_met'] = (bool) ($inspection['report']['minimum_target_count_met'] ?? false);
+        $postRepair['coverage_status'] = $postRepair['status'];
+        $remainingTargets = max(0, count($rows) - $cursorAfter);
+        $remainingRepairable = (int) $postRepair['missing_count'] + (int) $postRepair['broken_count'];
+        $postRepair['status'] = match (true) {
+            $failed > 0 => 'direct_repair_failed',
+            $postRepair['coverage_status'] === 'ready' => 'direct_repair_completed',
+            $remainingTargets === 0 => 'direct_repair_incomplete',
+            default => 'direct_repair_partial',
+        };
+        $postRepair['repair'] = [
+            'mode' => 'direct',
+            'resume_key' => $resumeKey,
+            'batch_size' => $batchSize,
+            'cursor_before' => $cursorBefore,
+            'cursor_after' => $cursorAfter,
+            'remaining_targets' => $remainingTargets,
+            'remaining_repairable_count' => $remainingRepairable,
+            'inspected_targets' => count($batch),
+            'cached_target_count' => $cached,
+            'failed_target_count' => $failed,
+            'write_executed' => $cached > 0,
+        ];
+        $this->emit($postRepair);
+
+        return in_array($postRepair['status'], ['direct_repair_completed', 'direct_repair_partial'], true)
+            ? self::SUCCESS
+            : self::FAILURE;
     }
 
     /**

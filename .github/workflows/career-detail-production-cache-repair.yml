@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "verify_only is read-only; enqueue_and_wait dispatches bounded cache-only repair and requires full readback"
+        description: "verify_only is read-only; direct_repair warms bounded cache batches inside the exact inactive candidate runtime"
         required: true
         default: verify_only
         type: choice
         options:
           - verify_only
-          - enqueue_and_wait
+          - direct_repair
       expected_active_revision:
         description: "Exact 40-character REVISION currently active on production"
         required: true
@@ -33,7 +33,7 @@ on:
         default: "2090"
         type: string
       operator_approval_phrase:
-        description: "Required only for enqueue_and_wait; must match the exact revision/count-bound phrase"
+        description: "Required only for direct_repair; must match the exact revision/count-bound phrase"
         required: false
         default: ""
         type: string
@@ -47,7 +47,7 @@ jobs:
     name: Career detail production cache repair (${{ inputs.mode }})
     runs-on: ubuntu-latest
     environment: production
-    timeout-minutes: 45
+    timeout-minutes: 120
     concurrency:
       group: deploy-${{ github.repository }}-production
       cancel-in-progress: false
@@ -101,9 +101,9 @@ jobs:
                 exit 2
               fi
               ;;
-            enqueue_and_wait)
+            direct_repair)
               test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
-              expected_phrase="I explicitly approve production Career detail cache repair with active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; cache/queue-only, no CMS/DB-authority/publication/indexability/sitemap/llms/search."
+              expected_phrase="I explicitly approve production Career detail cache repair with active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; cache-only, candidate-runtime-direct, zero queue dispatch, no CMS/DB-authority/publication/indexability/sitemap/llms/search."
               if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
                 echo "operator_approval_phrase does not match the exact production cache repair authorization." >&2
                 exit 2
@@ -282,8 +282,8 @@ jobs:
              and .covered_target_count == ($expected_targets - $expected_missing)' \
             artifacts/preflight.json >/dev/null
 
-      - name: Enqueue complete bounded repair pass
-        if: inputs.mode == 'enqueue_and_wait'
+      - name: Run bounded repair inside exact candidate runtime
+        if: inputs.mode == 'direct_repair'
         shell: bash
         env:
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
@@ -292,7 +292,7 @@ jobs:
           set -euo pipefail
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "test \"\$(sudo -n /usr/bin/supervisorctl status 'fap-queue-default-high:*' | grep -c ' RUNNING ')\" -ge 1 && cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && sudo -n -u www-data -- test -w storage/framework/cache/data"
+            "set -euo pipefail; cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend'; test -x /usr/bin/timeout; sudo -n -u www-data -- test -w storage/framework/cache/data"
           resume_key="production-bootstrap-${CANDIDATE_RELEASE_REVISION}"
           completed=false
           for batch in $(seq 1 9); do
@@ -302,42 +302,29 @@ jobs:
             fi
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
               -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && sudo -n -u www-data -- php artisan career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --batch-size=$REPAIR_BATCH_SIZE --resume-key='$resume_key' $reset_flag --confirm-production-write --json --no-interaction --no-ansi" \
-              | tee "artifacts/repair-batch-${batch}.json"
-            remaining="$(jq -r '.repair.remaining_targets' "artifacts/repair-batch-${batch}.json")"
-            if [ "$remaining" = "0" ]; then
+              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && sudo -n -u www-data -- /usr/bin/timeout 600 php artisan career:verify-job-detail-cache-coverage --repair-missing-direct --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --batch-size=$REPAIR_BATCH_SIZE --resume-key='$resume_key' $reset_flag --confirm-production-write --json --no-interaction --no-ansi" \
+              | tee "artifacts/direct-repair-batch-${batch}.json"
+            coverage_status="$(jq -r '.coverage_status' "artifacts/direct-repair-batch-${batch}.json")"
+            remaining="$(jq -r '.repair.remaining_targets' "artifacts/direct-repair-batch-${batch}.json")"
+            if [ "$coverage_status" = "ready" ]; then
               completed=true
               break
             fi
+            test "$remaining" -gt 0
           done
           test "$completed" = true
 
-      - name: Wait for exact full coverage
-        if: inputs.mode == 'enqueue_and_wait'
+      - name: Read back exact full coverage
+        if: inputs.mode == 'direct_repair'
         shell: bash
         env:
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
         run: |
           set -euo pipefail
-          ready=false
-          for _attempt in $(seq 1 90); do
-            set +e
-            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --json --no-interaction --no-ansi" \
-              > artifacts/post-repair-latest.json
-            command_status=$?
-            set -e
-            if [ "$command_status" -eq 0 ] && jq -e '.status == "ready"' artifacts/post-repair-latest.json >/dev/null; then
-              ready=true
-              break
-            fi
-            if [ "$command_status" -ne 0 ] && [ "$command_status" -ne 1 ]; then
-              exit "$command_status"
-            fi
-            sleep 20
-          done
-          test "$ready" = true
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --json --no-interaction --no-ansi" \
+            > artifacts/post-repair.json
           jq -e \
             --argjson expected_targets "$MINIMUM_TARGETS" \
             '.status == "ready"
@@ -348,7 +335,7 @@ jobs:
              and .broken_count == 0
              and .excluded_count == 0
              and .coverage_ratio == 1' \
-            artifacts/post-repair-latest.json >/dev/null
+            artifacts/post-repair.json >/dev/null
 
       - name: Upload production cache repair receipt
         if: always()

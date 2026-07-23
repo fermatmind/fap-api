@@ -260,26 +260,145 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
     }
 
+    public function test_production_direct_repair_requires_explicit_confirmation_before_writes(): void
+    {
+        $this->bindProjection(['one']);
+        Queue::fake();
+        $this->app->detectEnvironment(static fn (): string => 'production');
+
+        $this->artisan('career:verify-job-detail-cache-coverage', ['--repair-missing-direct' => true])
+            ->expectsOutput('Production repair requires --confirm-production-write; verification remains read-only by default.')
+            ->assertExitCode(1);
+
+        Queue::assertNothingPushed();
+        $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
+    }
+
+    public function test_direct_repair_modes_are_mutually_exclusive_and_verify_only_remains_read_only(): void
+    {
+        $this->bindProjection(['one']);
+        Queue::fake();
+
+        foreach ([
+            ['--repair-missing-direct' => true, '--repair-missing' => true],
+            ['--repair-missing-direct' => true, '--repair-missing-sync' => true],
+        ] as $options) {
+            $this->assertSame(1, Artisan::call('career:verify-job-detail-cache-coverage', $options));
+            $this->assertStringContainsString('Repair modes are mutually exclusive.', Artisan::output());
+        }
+
+        $this->assertSame(1, Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-direct' => true,
+            '--verify-only' => true,
+        ]));
+        $this->assertStringContainsString('--verify-only cannot be combined with a repair mode.', Artisan::output());
+        Queue::assertNothingPushed();
+        $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
+    }
+
+    public function test_direct_repair_runs_in_process_with_stable_resume_and_is_idempotent(): void
+    {
+        $this->createOccupation('one');
+        $this->createOccupation('two');
+        $this->bindProjection(['one', 'two']);
+        config()->set('queue.default', 'sync');
+        Queue::fake();
+        $options = [
+            '--repair-missing-direct' => true,
+            '--batch-size' => 2,
+            '--resume-key' => 'candidate-direct',
+            '--json' => true,
+        ];
+
+        $this->assertSame(0, Artisan::call('career:verify-job-detail-cache-coverage', $options + ['--reset' => true]));
+        $first = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('direct_repair_partial', $first['status']);
+        $this->assertSame('incomplete', $first['coverage_status']);
+        $this->assertSame('direct', $first['repair']['mode']);
+        $this->assertSame(0, $first['repair']['cursor_before']);
+        $this->assertSame(2, $first['repair']['cursor_after']);
+        $this->assertSame(2, $first['repair']['remaining_targets']);
+        $this->assertSame(2, $first['repair']['cached_target_count']);
+        $this->assertSame(0, $first['repair']['failed_target_count']);
+        Queue::assertNothingPushed();
+
+        $this->assertSame(0, Artisan::call('career:verify-job-detail-cache-coverage', $options));
+        $second = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('direct_repair_completed', $second['status']);
+        $this->assertSame('ready', $second['coverage_status']);
+        $this->assertSame(4, $second['repair']['cursor_after']);
+        $this->assertSame(0, $second['repair']['remaining_targets']);
+        $this->assertSame(0, $second['repair']['remaining_repairable_count']);
+        foreach (['one', 'two'] as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $this->assertIsString(Cache::get(
+                    app(PublicCareerAuthorityResponseCache::class)->jobDetailActiveVersionKey($slug, $locale),
+                ));
+            }
+        }
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $versionBefore = Cache::get($cache->jobDetailActiveVersionKey('one', 'en'));
+        $this->assertSame(0, Artisan::call('career:verify-job-detail-cache-coverage', $options + ['--reset' => true]));
+        $idempotent = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('direct_repair_completed', $idempotent['status']);
+        $this->assertSame(0, $idempotent['repair']['cached_target_count']);
+        $this->assertSame($versionBefore, Cache::get($cache->jobDetailActiveVersionKey('one', 'en')));
+        Queue::assertNothingPushed();
+    }
+
+    public function test_direct_repair_rejects_oversized_batches_before_writes(): void
+    {
+        $this->bindProjection(['one']);
+        Queue::fake();
+
+        $this->artisan('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-direct' => true,
+            '--batch-size' => 251,
+        ])
+            ->expectsOutput('--batch-size must be an integer between 1 and 250 for direct repair.')
+            ->assertExitCode(1);
+
+        Queue::assertNothingPushed();
+        $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:default'));
+    }
+
+    public function test_direct_repair_failure_keeps_cursor_and_reports_partial_writes(): void
+    {
+        $this->createOccupation('buildable');
+        $this->bindProjection(['buildable', 'unbuildable']);
+        Queue::fake();
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-direct' => true,
+            '--batch-size' => 4,
+            '--resume-key' => 'candidate-failure',
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exit);
+        $this->assertSame('direct_repair_failed', $report['status']);
+        $this->assertSame(0, $report['repair']['cursor_before']);
+        $this->assertSame(0, $report['repair']['cursor_after']);
+        $this->assertSame(2, $report['repair']['cached_target_count']);
+        $this->assertSame(2, $report['repair']['failed_target_count']);
+        $this->assertTrue($report['repair']['write_executed']);
+        $this->assertFalse(Cache::has('career:detail-cache-coverage-repair:v1:candidate-failure'));
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $this->assertIsString(Cache::get($cache->jobDetailActiveVersionKey('buildable', 'en')));
+        $this->assertStringStartsWith(
+            PublicCareerAuthorityResponseCache::JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX.':',
+            $cache->jobDetailActiveVersionKey('buildable', 'en'),
+        );
+        Queue::assertNothingPushed();
+    }
+
     public function test_sync_repair_warms_only_missing_targets_and_rechecks_complete_coverage(): void
     {
-        $family = OccupationFamily::query()->create([
-            'canonical_slug' => 'coverage-family',
-            'title_en' => 'Coverage Family',
-            'title_zh' => '缓存覆盖职业族',
-        ]);
-        Occupation::query()->create([
-            'family_id' => $family->id,
-            'canonical_slug' => 'missing',
-            'entity_level' => 'dataset_candidate',
-            'truth_market' => 'US',
-            'display_market' => 'zh-CN',
-            'crosswalk_mode' => 'direct_match',
-            'canonical_title_en' => 'Missing Cache Career',
-            'canonical_title_zh' => '待补缓存职业',
-            'search_h1_zh' => '待补缓存职业',
-            'task_prototype_signature' => [],
-            'trust_inheritance_scope' => [],
-        ]);
+        $this->createOccupation('missing');
         $this->bindProjection(['active', 'legacy', 'missing']);
         $cache = app(PublicCareerAuthorityResponseCache::class);
         foreach (['en', 'zh-CN'] as $locale) {
@@ -396,6 +515,30 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug, 'revision' => 1]);
         $activeVersion = $cache->publishJobDetailReadModel($slug, $locale, ['slug' => $slug, 'revision' => 2]);
         Cache::forget($this->versionPayloadKey($slug, $locale, $activeVersion));
+    }
+
+    private function createOccupation(string $slug): void
+    {
+        $family = OccupationFamily::query()->firstOrCreate(
+            ['canonical_slug' => 'coverage-family'],
+            [
+                'title_en' => 'Coverage Family',
+                'title_zh' => '缓存覆盖职业族',
+            ],
+        );
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => $slug,
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'direct_match',
+            'canonical_title_en' => ucfirst(str_replace('-', ' ', $slug)),
+            'canonical_title_zh' => '待补缓存职业',
+            'search_h1_zh' => '待补缓存职业',
+            'task_prototype_signature' => [],
+            'trust_inheritance_scope' => [],
+        ]);
     }
 
     private function versionPayloadKey(string $slug, string $locale, string $version): string
