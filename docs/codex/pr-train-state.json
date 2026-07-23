@@ -9,7 +9,7 @@
       "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "8c808558b429dc538df24f19149d75e699f33c6c",
+    "commit_sha": "f59355180375aa5892e44f2289d9001543d2b42f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
     "checks": {
       "authorization": {
@@ -22,7 +22,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused Career pilot bridge, review-governance, job list/detail, and architecture suites passed 48 tests / 758 assertions. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, git diff, and exact allowed-path scope checks passed. The package command remained read-only and no controlled production action occurred."
+        "evidence": "After rebasing onto latest origin/main, focused Career pilot bridge, review-governance, job list/detail, and architecture suites passed 48 tests / 773 assertions; the Big Five isolation regression passed 2 tests / 6 assertions. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, git diff, and exact allowed-path scope checks passed. The package command remained read-only and no controlled production action occurred."
       },
       "github_required_checks": {
         "status": "pending",
@@ -77,9 +77,14 @@
         "at": "2026-07-23T01:55:00Z",
         "status": "github_review_repairing",
         "note": "Addressed the automated P1 review finding: all Career list/detail public review states now default to unknown/null even when legacy trust data says approved, and only the exact current approved_all bilingual package upgrades them to approved. Added legacy-approved-without-evidence regression coverage and the required registered @review-surface annotation. Focused Career/review contracts, ReviewPolicyRegistry architecture tests, Pint, and both Big Five freeze regression tests pass locally."
+      },
+      {
+        "at": "2026-07-23T02:00:00Z",
+        "status": "github_checks_pending",
+        "note": "Rebased cleanly onto latest origin/main 1bb86cf2b while preserving the unrelated SAEP manifest item and the exact PR2 manifest/state scope. Revalidation passed 48 tests/773 assertions plus the 2-test/6-assertion Big Five isolation regression; syntax, 220 routes, Pint, Composer validation/audit, YAML/JSON, diff, and exact-path scope passed. The updated exact implementation head is f59355180375aa5892e44f2289d9001543d2b42f; required GitHub checks are pending after force-with-lease push."
       }
     ],
-    "updated_at": "2026-07-23T01:55:00Z"
+    "updated_at": "2026-07-23T02:00:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
