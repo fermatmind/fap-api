@@ -1,4 +1,71 @@
 {
+  "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
+    "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-publish-track-coverage-reconcile-01",
+    "title": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01 close career publish-track gaps",
+    "depends_on": [
+      "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized the exact five-PR Career search-entry plan, including this publish-track coverage reconciliation scope and controlled-production boundary."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3214 is merged as 65765dde98a9ac96bf6a67ae514a6730bc7fab71, origin/main contains the merge, all required checks passed, and isolated post-merge focused revalidation passed before PR3 started from that exact revision."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused publish-track resolver, full-dataset authority, Dataset API, batch manifest validator, and 1046/2092 directory/held regression suites passed 19 tests / 508 assertions. PHP syntax, 224-line API route inventory, scoped Pint, Composer strict validation/audit, reconciliation JSON, train YAML/state JSON, git diff, and exact allowed-path scope checks passed. No production, CMS/database, sitemap, indexability, runtime cohort, Search Channel, or URL-submission action occurred."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-23T03:30:00Z",
+        "status": "planned",
+        "note": "Operator authorized CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01 with exact branch/title and dependency on merged PR2. Scope is the locked four-authority publish-track resolution order, conservative reconciliation of exactly three missing slugs, fail-closed historical first-wave conflicts, complete non-empty track coverage, and held-slug regression protection. Deploy, production cache operations, CMS/database mutation, sitemap/llms, Search Channel, held-slug release, and URL submission remain prohibited."
+      },
+      {
+        "at": "2026-07-23T03:35:00Z",
+        "status": "in_progress",
+        "note": "Started from exact PR2 merge 65765dde98a9ac96bf6a67ae514a6730bc7fab71 in an isolated worktree. Implementing the backend-only resolver and explicit audited reconciliation record; no controlled production action has occurred."
+      },
+      {
+        "at": "2026-07-23T04:00:00Z",
+        "status": "local_validation_passed",
+        "note": "Implemented the locked batch → current first-wave → runtime projection → explicit reconciliation resolution order, explicit review_needed records for exactly three audited gaps, fail-closed historical first-wave conflicts, and a review_needed fallback for any future unresolved member. Focused suites passed 19 tests/508 assertions; syntax, 224 API routes, Pint, Composer validation/audit, parsers, diff, and exact-path scope passed. The 1046/2092 directory gate and software-developers held exclusion remain green. No controlled production action occurred."
+      }
+    ],
+    "updated_at": "2026-07-23T04:00:00Z"
+  },
   "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01": {
     "id": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",
     "repo": "fap-api",
@@ -8,8 +75,8 @@
     "depends_on": [
       "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "65765dde98a9ac96bf6a67ae514a6730bc7fab71",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
     "checks": {
       "authorization": {
@@ -33,12 +100,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-23T03:25:16Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -127,9 +194,14 @@
         "at": "2026-07-23T03:15:00Z",
         "status": "ready_to_merge",
         "note": "Exact final implementation head cfc4121f872e207e90ad41f0fbd86cf1d8c5b1b4 passed all 9 GitHub checks and all review threads are resolved. commit_sha intentionally remains null until the squash merge commit exists; exact green implementation evidence is recorded here without claiming the metadata-only closeout commit as runtime authority. Merge awaits this ledger-only head's checks."
+      },
+      {
+        "at": "2026-07-23T03:25:16Z",
+        "status": "merged",
+        "note": "Reconciled during PR3 after GitHub confirmed PR #3214 merged as 65765dde98a9ac96bf6a67ae514a6730bc7fab71, origin/main containment, all nine required checks green, remote branch deletion, isolated task worktree/branch cleanup, and focused post-merge revalidation passing 8 tests/55 assertions plus Pint. No deploy, production evidence bind, cache operation, CMS/database mutation, publication, sitemap/llms change, Search Channel action, held-slug release, or URL submission occurred."
       }
     ],
-    "updated_at": "2026-07-23T03:15:00Z"
+    "updated_at": "2026-07-23T03:25:16Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
