@@ -6,6 +6,7 @@ namespace Tests\Unit\Services\Cms;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use RuntimeException;
@@ -43,6 +44,177 @@ final class PersonalityPublicAssetReadModelCacheTest extends TestCase
         self::assertSame('bypass', $cache->read(
             'detail-code', 'mbti', 'domain', 'openness', 'en', 0, 'v1'
         )['state']);
+    }
+
+    public function test_active_collection_reads_are_lock_free_and_do_not_refresh_cache_state(): void
+    {
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $version = 'collection:v1:projection:public-review-contract-v1';
+        $payload = ['ok' => true, 'items' => [['code' => 'openness']]];
+
+        try {
+            Cache::shouldReceive('get')
+                ->times(10)
+                ->ordered()
+                ->andReturn(
+                    'baseline',
+                    $version,
+                    $payload,
+                    $version,
+                    'baseline',
+                    'baseline',
+                    $version,
+                    $payload,
+                    $version,
+                    'baseline',
+                );
+            Cache::shouldReceive('lock')->never();
+            Cache::shouldReceive('put')->never();
+            Cache::shouldReceive('forget')->never();
+
+            for ($attempt = 0; $attempt < 2; $attempt++) {
+                self::assertSame([
+                    'state' => 'fresh',
+                    'payload' => $payload,
+                ], $cache->readActiveCollection(
+                    'big_five',
+                    'all',
+                    'page:1:per-page:100',
+                    'en',
+                    0,
+                    'public-review-contract-v1',
+                ));
+            }
+        } finally {
+            Cache::swap($cacheManager);
+        }
+    }
+
+    public function test_active_collection_read_rejects_pointer_and_fence_drift(): void
+    {
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $cacheManager = Cache::getFacadeRoot();
+        $version = 'collection:v1:projection:public-review-contract-v1';
+        $payload = ['ok' => true, 'items' => [['code' => 'openness']]];
+
+        try {
+            Cache::shouldReceive('get')
+                ->times(5)
+                ->ordered()
+                ->andReturn('baseline', $version, $payload, 'collection:v2:projection:public-review-contract-v1', 'baseline');
+
+            self::assertSame('miss', $cache->readActiveCollection(
+                'big_five',
+                'all',
+                'page:1:per-page:100',
+                'en',
+                0,
+                'public-review-contract-v1',
+            )['state']);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $cacheManager = Cache::getFacadeRoot();
+
+        try {
+            Cache::shouldReceive('get')
+                ->times(5)
+                ->ordered()
+                ->andReturn('baseline', $version, $payload, $version, 'rotated-fence');
+
+            self::assertSame('miss', $cache->readActiveCollection(
+                'big_five',
+                'all',
+                'page:1:per-page:100',
+                'en',
+                0,
+                'public-review-contract-v1',
+            )['state']);
+        } finally {
+            Cache::swap($cacheManager);
+        }
+    }
+
+    public function test_collection_reads_reject_legacy_projection_versions_and_accept_current_lkg(): void
+    {
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $selector = 'page:1:per-page:100';
+        $payload = ['ok' => true, 'items' => [['code' => 'openness']]];
+        $version = 'collection:v1:projection:public-review-contract-v1';
+
+        $cache->put('index', 'big_five', 'all', $selector, 'en', 0, $version, $payload);
+        $cache->invalidateCollections('big_five', 'all', 'en', 0, true);
+
+        self::assertSame([
+            'state' => 'stale',
+            'payload' => $payload,
+        ], $cache->staleCollection(
+            'big_five',
+            'all',
+            $selector,
+            'en',
+            0,
+            'public-review-contract-v1',
+        ));
+
+        Cache::put(
+            $cache->lkgKey('index', 'big_five', 'all', $selector, 'en'),
+            'collection:legacy',
+        );
+
+        self::assertSame('miss', $cache->staleCollection(
+            'big_five',
+            'all',
+            $selector,
+            'en',
+            0,
+            'public-review-contract-v1',
+        )['state']);
+    }
+
+    public function test_signed_verify_only_requests_bypass_active_and_stale_collection_cache_reads(): void
+    {
+        config(['app.key' => 'base64:'.base64_encode(str_repeat('v', 32))]);
+        $url = 'https://api.fermatmind.com/api/v0.5/personality-content-assets?framework=big_five&locale=en';
+        $headers = PersonalityPublicAssetReadModelCache::signedVerifyOnlyHeaders('GET', $url);
+        $request = Request::create($url, 'GET', server: [
+            'HTTP_X_FERMAT_VERIFY_ONLY_TIMESTAMP' => $headers[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_TIMESTAMP_HEADER],
+            'HTTP_X_FERMAT_VERIFY_ONLY_SIGNATURE' => $headers[PersonalityPublicAssetReadModelCache::VERIFY_ONLY_SIGNATURE_HEADER],
+            'HTTP_AUTHORIZATION' => $headers['Authorization'],
+        ]);
+        $this->app->instance('request', $request);
+        Cache::spy();
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+
+        self::assertSame([
+            'state' => 'bypass',
+            'payload' => null,
+        ], $cache->readActiveCollection(
+            'big_five',
+            'all',
+            'page:1:per-page:100',
+            'en',
+            0,
+            'public-review-contract-v1',
+        ));
+        self::assertSame([
+            'state' => 'bypass',
+            'payload' => null,
+        ], $cache->staleCollection(
+            'big_five',
+            'all',
+            'page:1:per-page:100',
+            'en',
+            0,
+            'public-review-contract-v1',
+        ));
+
+        Cache::shouldNotHaveReceived('get');
+        Cache::shouldNotHaveReceived('put');
+        Cache::shouldNotHaveReceived('lock');
+        Cache::shouldNotHaveReceived('forget');
     }
 
     public function test_version_switch_keeps_previous_payload_as_lkg(): void

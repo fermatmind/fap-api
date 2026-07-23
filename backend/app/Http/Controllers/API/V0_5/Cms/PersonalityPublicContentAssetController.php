@@ -28,7 +28,7 @@ final class PersonalityPublicContentAssetController extends Controller
 
     private const ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION = 'enneagram-authority-v2';
 
-    private const PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION = 'public-review-contract-v1';
+    private const PUBLIC_REVIEW_PROJECTION_CACHE_VERSION = 'public-review-contract-v1';
 
     public function __construct(
         private readonly PersonalityPublicAssetReadModelCache $readModelCache,
@@ -54,6 +54,18 @@ final class PersonalityPublicContentAssetController extends Controller
         $framework = (string) ($validated['framework'] ?? '');
         $entityType = (string) ($validated['entity_type'] ?? 'all');
         $selector = $this->indexSelector($validated['page'], $validated['per_page']);
+        $cachedRead = $this->readModelCache->readActiveCollection(
+            $framework,
+            $entityType,
+            $selector,
+            $validated['locale'],
+            $validated['org_id'],
+            self::PUBLIC_REVIEW_PROJECTION_CACHE_VERSION,
+        );
+        if (is_array($cachedRead['payload'])) {
+            return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
+        }
+
         $fenceToken = $this->readModelCache->captureFence(
             'index',
             $framework,
@@ -98,41 +110,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 'last_page' => (int) $paginator->lastPage(),
             ];
             $version = $this->readModelCache->collectionVersion($assets, $pagination);
-            $version .= ':projection:'.self::PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION;
-            $cachedRead = $this->readModelCache->read(
-                'index',
-                $framework,
-                $entityType,
-                $selector,
-                $validated['locale'],
-                $validated['org_id'],
-                $version,
-                $fenceToken,
-            );
-            if (is_array($cachedRead['payload'])) {
-                if ($this->isOversizedDetailPayload($cachedRead['payload'])) {
-                    $this->readModelCache->discardActivePreservingLkg(
-                        $surface,
-                        $framework,
-                        $entityType,
-                        $selector,
-                        $locale,
-                        $orgId,
-                    );
-
-                    return $this->staleResponseOrThrow(
-                        $surface,
-                        $framework,
-                        $entityType,
-                        $selector,
-                        $locale,
-                        $orgId,
-                        new LengthException('cached personality content asset detail payload exceeds budget.'),
-                    );
-                }
-
-                return $this->publicReadResponse($cachedRead['payload'], $cachedRead['state']);
-            }
+            $version .= ':projection:'.self::PUBLIC_REVIEW_PROJECTION_CACHE_VERSION;
 
             $payload = [
                 'ok' => true,
@@ -164,6 +142,7 @@ final class PersonalityPublicContentAssetController extends Controller
                 $validated['locale'],
                 $validated['org_id'],
                 $throwable,
+                self::PUBLIC_REVIEW_PROJECTION_CACHE_VERSION,
             );
         }
     }
@@ -789,7 +768,7 @@ final class PersonalityPublicContentAssetController extends Controller
 
         try {
             $version = $this->readModelCache->versionFor($asset);
-            $version .= ':projection:'.self::PUBLIC_REVIEW_DETAIL_PROJECTION_CACHE_VERSION;
+            $version .= ':projection:'.self::PUBLIC_REVIEW_PROJECTION_CACHE_VERSION;
             if ($framework === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM) {
                 $version .= ':projection:'.self::ENNEAGRAM_DETAIL_PROJECTION_CACHE_VERSION;
             }
@@ -989,15 +968,25 @@ final class PersonalityPublicContentAssetController extends Controller
         string $locale,
         int $orgId,
         Throwable $throwable,
+        ?string $requiredCollectionProjectionVersion = null,
     ): JsonResponse {
-        $staleRead = $this->readModelCache->stale(
-            $surface,
-            $framework,
-            $entityType,
-            $selector,
-            $locale,
-            $orgId,
-        );
+        $staleRead = $surface === 'index' && $requiredCollectionProjectionVersion !== null
+            ? $this->readModelCache->staleCollection(
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+                $requiredCollectionProjectionVersion,
+            )
+            : $this->readModelCache->stale(
+                $surface,
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $orgId,
+            );
         if ($this->isV1OnlyEnneagramDetailPayload($surface, $framework, $staleRead['payload'])) {
             $this->readModelCache->discardActivePreservingLkg(
                 $surface,
