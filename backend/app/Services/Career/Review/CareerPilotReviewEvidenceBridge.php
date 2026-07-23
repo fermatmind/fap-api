@@ -36,6 +36,26 @@ final class CareerPilotReviewEvidenceBridge
         'last_reviewed_at' => null,
     ];
 
+    private const PRIVATE_DETAIL_KEYS = [
+        'source_id',
+        'source_ids',
+        'source_trace_id',
+        'evidence_id',
+        'row_hash',
+        'search_projection',
+        'audit_fields',
+        'compile_refs',
+        'crosswalk_ids',
+        'import_run_id',
+        'compile_run_id',
+        'index_state_id',
+        'attested_by_admin_user_id',
+        'target_set_sha256',
+        'package_sha256',
+        'evidence_sha256',
+        'exceptions_json',
+    ];
+
     /** @var array<string, array{review_state:string,last_reviewed_at:string|null,index_item_sha256_by_locale?:array<string,string>}>|null */
     private ?array $requestProjection = null;
 
@@ -302,8 +322,32 @@ final class CareerPilotReviewEvidenceBridge
                     is_array($payload['trust_manifest'] ?? null) ? $payload['trust_manifest'] : [],
                     ['review_state', 'last_reviewed_at', 'reviewer'],
                 ),
+                'complete_public_detail_projection' => $this->reviewablePublicDetailPayload($payload),
             ],
         ];
+    }
+
+    /** @param array<string,mixed> $payload @return array<string,mixed> */
+    private function reviewablePublicDetailPayload(array $payload): array
+    {
+        foreach (self::PRIVATE_DETAIL_KEYS as $key) {
+            unset($payload[$key]);
+        }
+
+        if (is_array($payload['trust_manifest'] ?? null)) {
+            $payload['trust_manifest'] = Arr::except(
+                $payload['trust_manifest'],
+                ['review_state', 'last_reviewed_at', 'reviewer'],
+            );
+        }
+
+        foreach ($payload as $key => $value) {
+            if (is_array($value)) {
+                $payload[$key] = $this->reviewablePublicDetailPayload($value);
+            }
+        }
+
+        return $payload;
     }
 
     /** @param list<string> $slugs @return array<string,array<string,array<string,mixed>>> */

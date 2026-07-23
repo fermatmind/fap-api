@@ -102,9 +102,14 @@
         "at": "2026-07-23T02:31:00Z",
         "status": "github_review_repairing",
         "note": "Exact locale repair head 5732637b7dba631a0229a443d61ee2b2d8896a83 passed all 9 GitHub checks. Latest review identified public score/integrity outputs missing from the visible-claim hash; added score_bundle, white_box_scores, and integrity_summary plus approved-then-score-drift fail-closed coverage. Final checks remain pending and no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:40:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact scoring repair head 61c95439bf5fba7794b17bc5a28de94791982b38 passed all 9 GitHub checks. Latest review correctly generalized the gap to any unlisted public detail field. Replaced field-by-field coverage with a recursive complete-public-detail target that excludes only derived review and private/internal evidence keys; added alias/ontology-style unlisted-field drift regression. Final checks remain pending and no production action occurred."
       }
     ],
-    "updated_at": "2026-07-23T02:31:00Z"
+    "updated_at": "2026-07-23T02:40:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
