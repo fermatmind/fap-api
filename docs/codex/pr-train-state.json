@@ -1,4 +1,64 @@
 {
+  "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
+    "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-jobs-index-lkg-resilience-01",
+    "title": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01 stabilize legacy career jobs index",
+    "depends_on": [],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized the exact five-PR Career search-entry plan and this first dependency-free PR scope."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "This PR has no dependencies and started from the latest observed origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Read-only public preflight observed directory EN 200 in about 0.23s, legacy jobs EN 200 in about 20.9s/1.26MB, and zh-CN exceeding the bounded 25s probe. Focused suites passed 37 tests/346 assertions covering successful contract compatibility, active/LKG reads, retryable cold-cache 503, 50-contender coalescing, bilingual rollback, and the 1046/10k directory gate. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, diff, and exact-path scope checks passed. A separate full ci_verify_mbti.sh was already running, so no second heavy local chain was started."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-23T00:00:00+08:00",
+        "status": "planned",
+        "note": "Operator authorized CAREER-JOBS-INDEX-LKG-RESILIENCE-01 with exact branch/title, no dependencies, active-to-LKG read behavior, retryable cold-cache 503, atomic EN/zh-CN warm activation, focused validation, and an explicit prohibition on deploy, production cache writes, CMS/database mutation, sitemap/Search Channel changes, held-slug release, and URL submission."
+      },
+      {
+        "at": "2026-07-23T01:02:44Z",
+        "status": "local_validation_passed",
+        "note": "Implemented immutable versioned active/LKG reads, fail-closed CAREER_JOB_INDEX_NOT_WARM 503 with Retry-After, and bilingual warm activation with rollback. Focused tests passed 37 tests/346 assertions; syntax, route inventory, Pint, Composer validation/audit, parsers, diff, and exact allowed-path scope passed. No deploy, production cache operation, CMS/database mutation, publication, sitemap/llms change, Search Channel action, held-slug release, or URL submission occurred."
+      }
+    ],
+    "updated_at": "2026-07-23T01:02:44Z"
+  },
   "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01": {
     "id": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01",
     "repo": "fap-api",

@@ -20,9 +20,9 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
     {
         Cache::forget(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY);
         Cache::forget(PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY);
-        Cache::forget(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public');
+        Cache::forget(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':en:public:active');
         Cache::forget(PublicCareerAuthorityResponseCache::LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY);
-        Cache::forget(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public');
+        Cache::forget(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:public:active');
 
         $this->artisan('career:warm-public-authority-cache')
             ->expectsOutputToContain('career_warm_phase=dataset_payloads state=starting')
@@ -36,15 +36,17 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             ->expectsOutputToContain('status=warmed')
             ->expectsOutputToContain(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY)
             ->expectsOutputToContain(PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY)
-            ->expectsOutputToContain(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public')
-            ->expectsOutputToContain(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public')
+            ->expectsOutputToContain(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':en:public:active')
+            ->expectsOutputToContain(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:public:active')
             ->expectsOutputToContain(PublicCareerAuthorityResponseCache::LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY)
             ->assertExitCode(0);
 
         $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY));
         $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY));
-        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public'));
-        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public'));
+        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':en:public:active'));
+        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':en:public:lkg'));
+        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:public:active'));
+        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:public:lkg'));
         $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY));
     }
 
@@ -250,6 +252,72 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertSame($oldVersion, $cache->directoryCacheStatus('zh-CN')['lkg_version']);
     }
 
+    public function test_job_index_falls_back_to_the_last_known_good_immutable_payload(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldPayload = ['bundle_kind' => 'career_job_index', 'generation' => 'old', 'items' => []];
+        $newPayload = ['bundle_kind' => 'career_job_index', 'generation' => 'new', 'items' => []];
+        $oldVersions = $cache->publishJobIndexReadModelsAtomically(['en' => $oldPayload]);
+        $newVersions = $cache->publishJobIndexReadModelsAtomically(['en' => $newPayload]);
+
+        $this->assertSame($newPayload, $cache->jobIndexPayload('en'));
+        Cache::forget(
+            PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX
+            .':en:public:versions:'.$newVersions['en'],
+        );
+
+        $this->assertSame($oldPayload, $cache->jobIndexPayload('en'));
+        $this->assertSame(
+            $oldVersions['en'],
+            Cache::get(PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':en:public:lkg'),
+        );
+    }
+
+    public function test_job_index_multi_locale_activation_restores_all_pointers_when_later_locale_fails(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldPayloads = [
+            'en' => ['bundle_kind' => 'career_job_index', 'generation' => 'old-en', 'items' => []],
+            'zh-CN' => ['bundle_kind' => 'career_job_index', 'generation' => 'old-zh', 'items' => []],
+        ];
+        $oldVersions = $cache->publishJobIndexReadModelsAtomically($oldPayloads);
+        $cacheManager = Cache::getFacadeRoot();
+        $zhActiveKey = PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':zh-CN:public:active';
+
+        try {
+            $cacheMock = Cache::partialMock();
+            $cacheMock->shouldReceive('get')
+                ->andReturnUsing(static fn (string $key, mixed $default = null): mixed => $cacheManager->get($key, $default));
+            $cacheMock->shouldReceive('has')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->has($key));
+            $cacheMock->shouldReceive('forget')
+                ->andReturnUsing(static fn (string $key): bool => $cacheManager->forget($key));
+            $cacheMock->shouldReceive('forever')
+                ->andReturnUsing(static function (string $key, mixed $value) use ($cacheManager, $zhActiveKey, $oldVersions): bool {
+                    if ($key === $zhActiveKey && $value !== $oldVersions['zh-CN']) {
+                        throw new \RuntimeException('synthetic zh job-index activation failure');
+                    }
+
+                    return $cacheManager->forever($key, $value);
+                });
+
+            try {
+                $cache->publishJobIndexReadModelsAtomically([
+                    'en' => ['bundle_kind' => 'career_job_index', 'generation' => 'new-en', 'items' => []],
+                    'zh-CN' => ['bundle_kind' => 'career_job_index', 'generation' => 'new-zh', 'items' => []],
+                ]);
+                $this->fail('The synthetic second-locale job-index activation should fail.');
+            } catch (\RuntimeException $exception) {
+                $this->assertSame('synthetic zh job-index activation failure', $exception->getMessage());
+            }
+        } finally {
+            Cache::swap($cacheManager);
+        }
+
+        $this->assertSame($oldPayloads['en'], $cache->jobIndexPayload('en'));
+        $this->assertSame($oldPayloads['zh-CN'], $cache->jobIndexPayload('zh-CN'));
+    }
+
     public function test_multi_locale_directory_activation_restores_all_pointers_when_later_locale_fails(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
@@ -388,12 +456,10 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             $this->assertSame('pass', $cache->activatePreparedJobDetailPayloadsForExposure([$prepared])['status']);
         }
         $oldJobIndexes = [
-            'en' => ['bundle_kind' => 'career_job_index', 'items' => [['sentinel' => 'old-en']]],
-            'zh-CN' => ['bundle_kind' => 'career_job_index', 'items' => [['sentinel' => 'old-zh']]],
+            'en' => ['bundle_kind' => 'career_job_index', 'sentinel' => 'old-en', 'items' => []],
+            'zh-CN' => ['bundle_kind' => 'career_job_index', 'sentinel' => 'old-zh', 'items' => []],
         ];
-        foreach ($oldJobIndexes as $locale => $payload) {
-            Cache::forever(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':'.$locale.':public', $payload);
-        }
+        $cache->publishJobIndexReadModelsAtomically($oldJobIndexes);
         $oldEnVersion = $cache->publishDirectoryReadModel('en', ['public_count' => 0, 'items' => []]);
         $oldZhVersion = $cache->publishDirectoryReadModel('zh-CN', ['public_count' => 0, 'items' => []]);
         $cacheManager = Cache::getFacadeRoot();
@@ -434,10 +500,7 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         }
 
         foreach ($oldJobIndexes as $locale => $payload) {
-            $this->assertSame(
-                $payload,
-                Cache::get(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':'.$locale.':public'),
-            );
+            $this->assertSame($payload, $cache->jobIndexPayload($locale));
         }
         $this->assertSame($oldEnVersion, $cache->directoryCacheStatus('en')['active_version']);
         $this->assertSame($oldZhVersion, $cache->directoryCacheStatus('zh-CN')['active_version']);
@@ -545,17 +608,19 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         $activeKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':en:active';
         $lkgKey = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':en:lkg';
-        $jobIndexKey = PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':en:public';
+        $jobIndexActiveKey = PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':en:public:active';
+        $jobIndexLkgKey = PublicCareerAuthorityResponseCache::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX.':en:public:lkg';
         Cache::forget($activeKey);
         Cache::forget($lkgKey);
-        Cache::forget($jobIndexKey);
+        Cache::forget($jobIndexActiveKey);
+        Cache::forget($jobIndexLkgKey);
         $rebuilds = 0;
 
         for ($request = 0; $request < 50; $request++) {
-            $result = $cache->singleFlightDirectoryRebuild('en', null, function () use ($cache, &$rebuilds, $jobIndexKey): array {
+            $result = $cache->singleFlightDirectoryRebuild('en', null, function () use ($cache, &$rebuilds): array {
                 $rebuilds++;
                 $jobIndex = ['bundle_kind' => 'career_job_index', 'items' => [['slug' => 'one']]];
-                Cache::forever($jobIndexKey, $jobIndex);
+                $cache->publishJobIndexReadModelsAtomically(['en' => $jobIndex]);
                 $cache->publishDirectoryReadModel('en', ['public_count' => 1, 'items' => [['slug' => 'one']]]);
 
                 return $jobIndex;

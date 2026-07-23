@@ -37,6 +37,8 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     public const JOB_INDEX_CACHE_KEY_PREFIX = 'career:public-authority:job-index:v2';
 
+    public const JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:job-index:v3';
+
     public const JOB_DETAIL_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v1';
 
     public const JOB_DETAIL_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:job-detail:v3';
@@ -147,13 +149,27 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     public function jobIndexPayload(string $publicLocale = 'zh-CN', bool $includeNonIndexable = false): array
     {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $cacheKey = $this->jobIndexCacheKey($normalizedLocale, $includeNonIndexable);
-        $cached = Cache::get($cacheKey);
-        if (is_array($cached)) {
-            return $this->filterJobIndexPayloadForPublicLocale($cached, $normalizedLocale);
+        foreach ([
+            'active' => $this->jobIndexActiveVersionKey($normalizedLocale, $includeNonIndexable),
+            'lkg' => $this->jobIndexLkgVersionKey($normalizedLocale, $includeNonIndexable),
+        ] as $state => $pointerKey) {
+            $version = Cache::get($pointerKey);
+            $payload = is_string($version) && $version !== ''
+                ? Cache::get($this->jobIndexVersionPayloadKey($normalizedLocale, $includeNonIndexable, $version))
+                : null;
+            if (is_array($payload)) {
+                $this->logJobIndexCacheState($normalizedLocale, $state, $version);
+
+                return $payload;
+            }
         }
 
-        return $this->refreshJobIndexPayload($normalizedLocale, $includeNonIndexable);
+        $this->logJobIndexCacheState($normalizedLocale, 'miss', null);
+
+        throw new \RuntimeException(sprintf(
+            'Career job index authority cache is not warm for locale %s.',
+            $normalizedLocale,
+        ));
     }
 
     /**
@@ -862,11 +878,16 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $reporter?->__invoke('dataset_payloads', 'finished');
 
         $reporter?->__invoke('job_index_en', 'starting');
-        $jobIndexEn = $this->warmJobIndexPayload('en');
-        $reporter?->__invoke('job_index_en', 'finished');
-
         $reporter?->__invoke('job_index_zh_cn', 'starting');
-        $jobIndexZhCn = $this->warmJobIndexPayload('zh-CN');
+        $this->warmDirectoryReadModels(
+            ['en', 'zh-CN'],
+            null,
+            null,
+            activateJobIndexPayloads: true,
+        );
+        $jobIndexEn = $this->jobIndexPayload('en');
+        $jobIndexZhCn = $this->jobIndexPayload('zh-CN');
+        $reporter?->__invoke('job_index_en', 'finished');
         $reporter?->__invoke('job_index_zh_cn', 'finished');
 
         $reporter?->__invoke('launch_governance_closure', 'starting');
@@ -885,12 +906,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 'member_count' => (int) data_get($datasetMethod, 'scope_summary.member_count', 0),
             ],
             'job_index_en' => [
-                'cache_key' => $this->jobIndexCacheKey('en', false),
+                'cache_key' => $this->jobIndexActiveVersionKey('en', false),
                 'status' => 'cached',
                 'member_count' => count((array) data_get($jobIndexEn, 'items', [])),
             ],
             'job_index_zh_cn' => [
-                'cache_key' => $this->jobIndexCacheKey('zh-CN', false),
+                'cache_key' => $this->jobIndexActiveVersionKey('zh-CN', false),
                 'status' => 'cached',
                 'member_count' => count((array) data_get($jobIndexZhCn, 'items', [])),
             ],
@@ -1032,31 +1053,102 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
         $jobIndexSnapshots = [];
         foreach (array_keys($jobIndexPayloads) as $locale) {
-            $jobIndexSnapshots[$locale] = $this->cacheValueSnapshot(
-                $this->jobIndexCacheKey($locale, false),
-            );
+            $jobIndexSnapshots[$locale] = $this->jobIndexPointerSnapshot($locale, false);
         }
 
         try {
-            foreach ($jobIndexPayloads as $locale => $payload) {
-                $key = $this->jobIndexCacheKey($locale, false);
-                Cache::forever($key, $payload);
-                if (Cache::get($key) !== $payload) {
-                    throw new \RuntimeException(sprintf(
-                        'Career job index activation verification failed for locale %s.',
-                        $locale,
-                    ));
-                }
+            $this->stageAndActivateJobIndexReadModels($jobIndexPayloads, false);
+            $versions = $this->stageAndActivateDirectoryReadModels($directoryPayloads);
+            foreach (array_keys($jobIndexPayloads) as $locale) {
+                $this->forgetLegacyJobIndexSafely($locale, false);
             }
 
-            return $this->stageAndActivateDirectoryReadModels($directoryPayloads);
+            return $versions;
         } catch (\Throwable $throwable) {
             foreach ($jobIndexSnapshots as $locale => $snapshot) {
-                $this->restoreCacheValue($this->jobIndexCacheKey($locale, false), $snapshot);
+                $this->restoreJobIndexPointerSnapshot($locale, false, $snapshot);
             }
 
             throw $throwable;
         }
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $payloadsByLocale
+     * @return array<string, string>
+     */
+    public function publishJobIndexReadModelsAtomically(array $payloadsByLocale): array
+    {
+        $normalized = [];
+        foreach ($payloadsByLocale as $locale => $payload) {
+            $normalizedLocale = $this->normalizePublicLocale((string) $locale);
+            $normalized[$normalizedLocale] = $this->filterJobIndexPayloadForPublicLocale(
+                $payload,
+                $normalizedLocale,
+            );
+        }
+        ksort($normalized, SORT_STRING);
+
+        return $this->stageAndActivateJobIndexReadModels($normalized, false);
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $payloadsByLocale
+     * @return array<string, string>
+     */
+    private function stageAndActivateJobIndexReadModels(array $payloadsByLocale, bool $includeNonIndexable): array
+    {
+        $versions = [];
+        $snapshots = [];
+        foreach ($payloadsByLocale as $locale => $payload) {
+            $version = (string) Str::ulid();
+            $payloadKey = $this->jobIndexVersionPayloadKey($locale, $includeNonIndexable, $version);
+            Cache::forever($payloadKey, $payload);
+            if (Cache::get($payloadKey) !== $payload) {
+                throw new \RuntimeException(sprintf(
+                    'Career job index staged payload verification failed for locale %s.',
+                    $locale,
+                ));
+            }
+            $versions[$locale] = $version;
+            $snapshots[$locale] = $this->jobIndexPointerSnapshot($locale, $includeNonIndexable);
+        }
+
+        $attempted = [];
+        try {
+            foreach ($versions as $locale => $version) {
+                $attempted[] = $locale;
+                $previousVersion = $snapshots[$locale]['active']['value'];
+                Cache::forever(
+                    $this->jobIndexLkgVersionKey($locale, $includeNonIndexable),
+                    is_string($previousVersion) && $previousVersion !== '' ? $previousVersion : $version,
+                );
+                Cache::forever($this->jobIndexActiveVersionKey($locale, $includeNonIndexable), $version);
+                if (Cache::get($this->jobIndexActiveVersionKey($locale, $includeNonIndexable)) !== $version) {
+                    throw new \RuntimeException(sprintf(
+                        'Career job index active pointer verification failed for locale %s.',
+                        $locale,
+                    ));
+                }
+                Cache::forever($this->jobIndexActivatedAtKey($locale, $includeNonIndexable), now()->timestamp);
+            }
+        } catch (\Throwable $throwable) {
+            foreach (array_reverse($attempted) as $locale) {
+                $this->restoreJobIndexPointerSnapshot(
+                    $locale,
+                    $includeNonIndexable,
+                    $snapshots[$locale],
+                );
+            }
+
+            throw $throwable;
+        }
+
+        foreach ($versions as $locale => $version) {
+            $this->logJobIndexCacheState($locale, 'rebuild', $version);
+        }
+
+        return $versions;
     }
 
     /**
@@ -1255,68 +1347,6 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         return $payload;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    private function refreshJobIndexPayload(string $publicLocale, bool $includeNonIndexable = false): array
-    {
-        $payload = $this->filterJobIndexPayloadForPublicLocale(
-            $this->buildJobIndexAuthorityPayload($includeNonIndexable),
-            $publicLocale,
-        );
-
-        Cache::forever($this->jobIndexCacheKey($publicLocale, $includeNonIndexable), $payload);
-
-        return $payload;
-    }
-
-    /** @return array<string, mixed> */
-    private function warmJobIndexPayload(string $publicLocale): array
-    {
-        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $observedVersion = Cache::get($this->directoryActiveVersionKey($normalizedLocale));
-
-        return $this->singleFlightDirectoryRebuild(
-            $normalizedLocale,
-            is_string($observedVersion) ? $observedVersion : null,
-            function () use ($normalizedLocale): array {
-                $authorityJobIndex = $this->filterJobIndexPayloadForPublicLocale(
-                    $this->buildJobIndexAuthorityPayload(false),
-                    $normalizedLocale,
-                    false,
-                );
-                $items = is_array($authorityJobIndex['items'] ?? null) ? $authorityJobIndex['items'] : [];
-                $preservedExposureItems = $this->missingActiveDirectoryExposureProjectionItems(
-                    $items,
-                    $normalizedLocale,
-                );
-                if ($preservedExposureItems !== []) {
-                    $items = $this->mergeExposureDirectoryItems(
-                        $items,
-                        $preservedExposureItems,
-                        $normalizedLocale,
-                    );
-                }
-                $authorityJobIndex['items'] = $items;
-                $jobIndex = $this->filterJobIndexPayloadForPublicLocale(
-                    $authorityJobIndex,
-                    $normalizedLocale,
-                );
-                Cache::forever($this->jobIndexCacheKey($normalizedLocale, false), $jobIndex);
-                $this->publishDirectoryReadModel(
-                    $normalizedLocale,
-                    $this->careerDirectoryReadModelBuilder->build(
-                        $items,
-                        $normalizedLocale,
-                        fn (string $slug, string $itemLocale): bool => $this->jobDetailCacheIsReady($slug, $itemLocale),
-                    ),
-                );
-
-                return $jobIndex;
-            },
-        );
-    }
-
     /** @return array<string, mixed> */
     private function buildJobIndexAuthorityPayload(bool $includeNonIndexable): array
     {
@@ -1346,9 +1376,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             if ($currentVersion !== null && $currentVersion !== $observedVersion) {
                 $this->logDirectoryCacheState($normalizedLocale, 'hit', (string) $currentVersion, ['rebuild' => 'coalesced']);
 
-                $cached = Cache::get($this->jobIndexCacheKey($normalizedLocale, false));
-                if (is_array($cached)) {
-                    return $cached;
+                try {
+                    return $this->jobIndexPayload($normalizedLocale);
+                } catch (\RuntimeException) {
+                    // The directory may have advanced without a matching job-index
+                    // activation. The lock owner must complete the supplied rebuild.
                 }
             }
 
@@ -1797,6 +1829,84 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         );
     }
 
+    private function jobIndexActiveVersionKey(string $publicLocale, bool $includeNonIndexable): string
+    {
+        return sprintf(
+            '%s:%s:%s:active',
+            self::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX,
+            $this->normalizePublicLocale($publicLocale),
+            $includeNonIndexable ? 'with-non-indexable' : 'public',
+        );
+    }
+
+    private function jobIndexLkgVersionKey(string $publicLocale, bool $includeNonIndexable): string
+    {
+        return sprintf(
+            '%s:%s:%s:lkg',
+            self::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX,
+            $this->normalizePublicLocale($publicLocale),
+            $includeNonIndexable ? 'with-non-indexable' : 'public',
+        );
+    }
+
+    private function jobIndexVersionPayloadKey(string $publicLocale, bool $includeNonIndexable, string $version): string
+    {
+        return sprintf(
+            '%s:%s:%s:versions:%s',
+            self::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX,
+            $this->normalizePublicLocale($publicLocale),
+            $includeNonIndexable ? 'with-non-indexable' : 'public',
+            $version,
+        );
+    }
+
+    private function jobIndexActivatedAtKey(string $publicLocale, bool $includeNonIndexable): string
+    {
+        return sprintf(
+            '%s:%s:%s:activated-at',
+            self::JOB_INDEX_VERSIONED_CACHE_KEY_PREFIX,
+            $this->normalizePublicLocale($publicLocale),
+            $includeNonIndexable ? 'with-non-indexable' : 'public',
+        );
+    }
+
+    /**
+     * @return array{
+     *     active: array{exists: bool, value: mixed},
+     *     lkg: array{exists: bool, value: mixed},
+     *     activated_at: array{exists: bool, value: mixed}
+     * }
+     */
+    private function jobIndexPointerSnapshot(string $locale, bool $includeNonIndexable): array
+    {
+        return [
+            'active' => $this->cacheValueSnapshot($this->jobIndexActiveVersionKey($locale, $includeNonIndexable)),
+            'lkg' => $this->cacheValueSnapshot($this->jobIndexLkgVersionKey($locale, $includeNonIndexable)),
+            'activated_at' => $this->cacheValueSnapshot($this->jobIndexActivatedAtKey($locale, $includeNonIndexable)),
+        ];
+    }
+
+    /** @param array{active: array{exists: bool, value: mixed}, lkg: array{exists: bool, value: mixed}, activated_at: array{exists: bool, value: mixed}} $snapshot */
+    private function restoreJobIndexPointerSnapshot(string $locale, bool $includeNonIndexable, array $snapshot): void
+    {
+        $this->restoreCacheValue($this->jobIndexActiveVersionKey($locale, $includeNonIndexable), $snapshot['active']);
+        $this->restoreCacheValue($this->jobIndexLkgVersionKey($locale, $includeNonIndexable), $snapshot['lkg']);
+        $this->restoreCacheValue($this->jobIndexActivatedAtKey($locale, $includeNonIndexable), $snapshot['activated_at']);
+    }
+
+    private function forgetLegacyJobIndexSafely(string $locale, bool $includeNonIndexable): void
+    {
+        try {
+            Cache::forget($this->jobIndexCacheKey($locale, $includeNonIndexable));
+        } catch (\Throwable $throwable) {
+            Log::warning('career_job_index_legacy_cache_cleanup_failed', [
+                'locale' => $locale,
+                'error_class' => $throwable::class,
+                'activation' => 'atomic_multi_locale',
+            ]);
+        }
+    }
+
     public function jobDetailCacheKey(string $slug, string $publicLocale): string
     {
         return sprintf(
@@ -1885,6 +1995,16 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             'cache_state' => $state,
             'version' => $version,
         ], $extra));
+    }
+
+    private function logJobIndexCacheState(string $locale, string $state, ?string $version): void
+    {
+        Log::info('career_public_authority_cache', [
+            'surface' => 'job_index',
+            'locale' => $locale,
+            'cache_state' => $state,
+            'version' => $version,
+        ]);
     }
 
     private function logJobDetailCacheState(string $slug, string $locale, string $state, ?string $version): void
