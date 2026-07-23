@@ -28,6 +28,16 @@ on:
         required: false
         default: ""
         type: string
+      expected_current_config_sha256:
+        description: "Apply only: current managed config SHA-256 from the immutable preflight receipt"
+        required: false
+        default: ""
+        type: string
+      expected_config_path_sha256:
+        description: "Apply only: managed config path SHA-256 from the immutable preflight receipt"
+        required: false
+        default: ""
+        type: string
       preflight_run_id:
         description: "Apply only: successful immutable preflight run id"
         required: false
@@ -80,6 +90,8 @@ jobs:
           EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
           EXPECTED_TEMPLATE_SHA256: ${{ inputs.expected_template_sha256 }}
           EXPECTED_RENDERED_SHA256: ${{ inputs.expected_rendered_sha256 }}
+          EXPECTED_CURRENT_CONFIG_SHA256: ${{ inputs.expected_current_config_sha256 }}
+          EXPECTED_CONFIG_PATH_SHA256: ${{ inputs.expected_config_path_sha256 }}
           PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
           PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
@@ -98,15 +110,19 @@ jobs:
           case "$MODE" in
             preflight)
               test -z "$EXPECTED_RENDERED_SHA256"
+              test -z "$EXPECTED_CURRENT_CONFIG_SHA256"
+              test -z "$EXPECTED_CONFIG_PATH_SHA256"
               test -z "$PREFLIGHT_RUN_ID"
               test -z "$PREFLIGHT_RUN_ATTEMPT"
               test -z "$OPERATOR_APPROVAL_PHRASE"
               ;;
             apply)
               [[ "$EXPECTED_RENDERED_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$EXPECTED_CURRENT_CONFIG_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$EXPECTED_CONFIG_PATH_SHA256" =~ ^[0-9a-f]{64}$ ]]
               [[ "$PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
               [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
-              expected_phrase="I explicitly approve production fap-api ops queue program convergence from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} template SHA256 ${EXPECTED_TEMPLATE_SHA256} rendered SHA256 ${EXPECTED_RENDERED_SHA256}; install one Supervisor ops worker, zero queued jobs, no deploy/symlink/migration/CMS/database-authority/publication/sitemap/llms/search/PR23."
+              expected_phrase="I explicitly approve production fap-api ops queue managed-config convergence from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} template SHA256 ${EXPECTED_TEMPLATE_SHA256} config-path SHA256 ${EXPECTED_CONFIG_PATH_SHA256} current config SHA256 ${EXPECTED_CURRENT_CONFIG_SHA256} rendered SHA256 ${EXPECTED_RENDERED_SHA256}; converge exactly one Supervisor ops worker config and restart only that worker with zero queued jobs, no deploy/symlink/migration/CMS/database-authority/publication/sitemap/llms/search/PR23."
               test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
 
               run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
@@ -132,10 +148,12 @@ jobs:
                 --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
                 --arg active "$EXPECTED_ACTIVE_REVISION" \
                 --arg template_sha "$EXPECTED_TEMPLATE_SHA256" \
+                --arg config_path_sha "$EXPECTED_CONFIG_PATH_SHA256" \
+                --arg current_config_sha "$EXPECTED_CURRENT_CONFIG_SHA256" \
                 --arg rendered_sha "$EXPECTED_RENDERED_SHA256" \
                 --arg run_id "$PREFLIGHT_RUN_ID" \
                 --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-                '.contract_version == "backend.production_ops_queue_control.v1"
+                '.contract_version == "backend.production_ops_queue_control.v2"
                  and .mode == "preflight"
                  and .status == "PASS_PREFLIGHT"
                  and .run_id == $run_id
@@ -143,13 +161,23 @@ jobs:
                  and .control_plane_sha == $control
                  and .active_revision == $active
                  and .template_sha256 == $template_sha
+                 and .config_path_sha256 == $config_path_sha
+                 and .current_config_sha256 == $current_config_sha
                  and .rendered_sha256 == $rendered_sha
                  and .deploy_lock_present == false
                  and .deploy_like_process_count == 0
                  and .ops_pending_total == 0
-                 and .program_present == false
-                 and .current_config_sha256 == "0000000000000000000000000000000000000000000000000000000000000000"
-                 and .live_process_verified == false
+                 and .convergence_required == true
+                 and (
+                   (.program_present == true
+                    and .program_state == "RUNNING"
+                    and .live_process_verified == true)
+                   or
+                   (.program_present == false
+                    and .program_state == "MISSING"
+                    and .current_config_sha256 == "0000000000000000000000000000000000000000000000000000000000000000"
+                    and .live_process_verified == false)
+                 )
                  and .production_write_execution == false' "$receipt" >/dev/null
               ;;
             *)
@@ -239,6 +267,7 @@ jobs:
           DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
           DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
           DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          OPS_CONFIG_PATH: ${{ secrets.PRODUCTION_OPS_SUPERVISOR_CONFIG_PATH }}
           EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
           EXPECTED_RENDERED_SHA256: ${{ steps.render.outputs.rendered_sha256 }}
         run: |
@@ -247,6 +276,9 @@ jobs:
           [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
           [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
           [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" != *".."* ]]
+          config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
           queue_probe_php='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $conn=Illuminate\Support\Facades\DB::connection(); $conn->listen(function($query){$sql=ltrim(strtolower((string)$query->sql)); if(!str_starts_with($sql,"select")&&!str_starts_with($sql,"show")&&!str_starts_with($sql,"describe")&&!str_starts_with($sql,"explain")&&!str_starts_with($sql,"pragma")){throw new RuntimeException("write query refused");}}); echo (clone $conn->table("jobs")->where("queue","ops"))->count(),PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
           queue_probe_b64="$(printf '%s' "$queue_probe_php" | base64 | tr -d '\n')"
           remote_script="$(cat <<'REMOTE'
@@ -275,9 +307,9 @@ jobs:
             fi
           fi
           current_config_sha256="$(printf '0%.0s' {1..64})"
-          if [ -f /etc/supervisor/conf.d/fap-queue-ops.conf ]; then
+          if [ -f "$OPS_CONFIG_PATH" ]; then
             failure_gate=CONFIG_HASH
-            current_config_sha256="$(sha256sum /etc/supervisor/conf.d/fap-queue-ops.conf | awk '{print $1}')"
+            current_config_sha256="$(sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
           fi
           if [ "$program_present" = true ]; then
             failure_gate=UNIQUE_PROCESS
@@ -298,8 +330,10 @@ jobs:
             failure_gate=ARGV_IDENTITY
             actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
             test "$actual_argv_sha256" = "$expected_argv_sha256"
+            failure_gate=CONFIG_PATH
+            test -f "$OPS_CONFIG_PATH"
             failure_gate=CONFIG_MTIME
-            config_epoch="$(stat -c %Y /etc/supervisor/conf.d/fap-queue-ops.conf)"
+            config_epoch="$(stat -c %Y "$OPS_CONFIG_PATH")"
             failure_gate=BOOT_TIME
             boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
             failure_gate=PROCESS_START_TICKS
@@ -329,7 +363,7 @@ jobs:
           set +e
           result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' OPS_CONFIG_PATH='$OPS_CONFIG_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-preflight-ssh.err")"
           ssh_rc=$?
           set -e
@@ -355,18 +389,22 @@ jobs:
           zero_sha256="$(printf '0%.0s' {1..64})"
           if [ "$program_present" = true ]; then
             test "$program_state" = RUNNING
-            test "$current_config_sha256" = "$EXPECTED_RENDERED_SHA256"
+            test "$current_config_sha256" != "$zero_sha256"
             test "$live_process_verified" = true
           else
             test "$program_state" = MISSING
             test "$current_config_sha256" = "$zero_sha256"
             test "$live_process_verified" = false
           fi
+          convergence_required=false
+          [ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true
           echo "program_present=$program_present" >> "$GITHUB_OUTPUT"
           echo "program_state=$program_state" >> "$GITHUB_OUTPUT"
           echo "ops_pending_total=$ops_pending_total" >> "$GITHUB_OUTPUT"
           echo "current_config_sha256=$current_config_sha256" >> "$GITHUB_OUTPUT"
           echo "live_process_verified=$live_process_verified" >> "$GITHUB_OUTPUT"
+          echo "config_path_sha256=$config_path_sha256" >> "$GITHUB_OUTPUT"
+          echo "convergence_required=$convergence_required" >> "$GITHUB_OUTPUT"
           echo "Read-only production preflight passed without disclosing routing, payload or database metadata."
 
       - name: Apply exact Supervisor ops queue candidate
@@ -378,16 +416,29 @@ jobs:
           DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
           DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
           DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          OPS_CONFIG_PATH: ${{ secrets.PRODUCTION_OPS_SUPERVISOR_CONFIG_PATH }}
           EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
           EXPECTED_RENDERED_SHA256: ${{ steps.render.outputs.rendered_sha256 }}
+          EXPECTED_CURRENT_CONFIG_SHA256: ${{ inputs.expected_current_config_sha256 }}
+          EXPECTED_CONFIG_PATH_SHA256: ${{ inputs.expected_config_path_sha256 }}
           CANDIDATE_PATH: ${{ steps.render.outputs.candidate_path }}
         run: |
           set -euo pipefail
-          test "${{ steps.preflight.outputs.program_present }}" = false
-          test "${{ steps.preflight.outputs.program_state }}" = MISSING
           test "${{ steps.preflight.outputs.ops_pending_total }}" = 0
-          test "${{ steps.preflight.outputs.current_config_sha256 }}" = "$(printf '0%.0s' {1..64})"
-          test "${{ steps.preflight.outputs.live_process_verified }}" = false
+          test "${{ steps.preflight.outputs.current_config_sha256 }}" = "$EXPECTED_CURRENT_CONFIG_SHA256"
+          test "${{ steps.preflight.outputs.config_path_sha256 }}" = "$EXPECTED_CONFIG_PATH_SHA256"
+          test "${{ steps.preflight.outputs.convergence_required }}" = true
+          if [ "${{ steps.preflight.outputs.program_present }}" = true ]; then
+            test "${{ steps.preflight.outputs.program_state }}" = RUNNING
+            test "${{ steps.preflight.outputs.live_process_verified }}" = true
+          else
+            test "${{ steps.preflight.outputs.program_state }}" = MISSING
+            test "${{ steps.preflight.outputs.current_config_sha256 }}" = "$(printf '0%.0s' {1..64})"
+            test "${{ steps.preflight.outputs.live_process_verified }}" = false
+          fi
+          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" != *".."* ]]
+          test "$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')" = "$EXPECTED_CONFIG_PATH_SHA256"
           config_b64="$(base64 < "$CANDIDATE_PATH" | tr -d '\n')"
           queue_probe_php='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $conn=Illuminate\Support\Facades\DB::connection(); $conn->listen(function($query){$sql=ltrim(strtolower((string)$query->sql)); if(!str_starts_with($sql,"select")&&!str_starts_with($sql,"show")&&!str_starts_with($sql,"describe")&&!str_starts_with($sql,"explain")&&!str_starts_with($sql,"pragma")){throw new RuntimeException("write query refused");}}); echo (clone $conn->table("jobs")->where("queue","ops"))->count(),PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
           queue_probe_b64="$(printf '%s' "$queue_probe_php" | base64 | tr -d '\n')"
@@ -402,8 +453,16 @@ jobs:
           failure_gate=DEPLOY_PROCESS_QUIESCENCE
           process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {count++} $1=="composer" && $0 ~ /install/ {count++} END {print count+0}')"
           test "$process_count" -eq 0
-          failure_gate=CONFIG_ABSENT
-          test ! -e /etc/supervisor/conf.d/fap-queue-ops.conf
+          failure_gate=CONFIG_PATH_HASH
+          test "$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')" = "$EXPECTED_CONFIG_PATH_SHA256"
+          zero_sha256="$(printf '0%.0s' {1..64})"
+          current_config_sha256="$zero_sha256"
+          if [ -f "$OPS_CONFIG_PATH" ]; then
+            failure_gate=CONFIG_HASH
+            current_config_sha256="$(sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
+          fi
+          failure_gate=EXPECTED_CONFIG_HASH
+          test "$current_config_sha256" = "$EXPECTED_CURRENT_CONFIG_SHA256"
           failure_gate=QUEUE_PROBE
           probe_code="$(printf '%s' "$QUEUE_PROBE_PHP_B64" | base64 -d)"
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$DEPLOY_PATH/current/backend" 2>/dev/null)"
@@ -414,11 +473,25 @@ jobs:
           printf '%s' "$CONFIG_B64" | base64 -d > "$candidate"
           failure_gate=CANDIDATE_HASH
           test "$(sha256sum "$candidate" | awk '{print $1}')" = "$EXPECTED_RENDERED_SHA256"
+          backup_sha256="$zero_sha256"
+          if [ "$current_config_sha256" != "$zero_sha256" ]; then
+            backup="$HOME/.fap-queue-ops.${CONTROL_RUN_ID}.backup"
+            failure_gate=BACKUP_ABSENT
+            test ! -e "$backup"
+            failure_gate=BACKUP_INSTALL
+            sudo -n install -o root -g root -m 0600 "$OPS_CONFIG_PATH" "$backup"
+            failure_gate=BACKUP_HASH
+            backup_sha256="$(sudo -n sha256sum "$backup" | awk '{print $1}')"
+            test "$backup_sha256" = "$EXPECTED_CURRENT_CONFIG_SHA256"
+          else
+            failure_gate=CONFIG_ABSENT
+            test ! -e "$OPS_CONFIG_PATH"
+          fi
           failure_gate=CONFIG_INSTALL
-          sudo -n install -o root -g root -m 0644 "$candidate" /etc/supervisor/conf.d/fap-queue-ops.conf
+          sudo -n install -o root -g root -m 0644 "$candidate" "$OPS_CONFIG_PATH"
           unlink "$candidate"
           failure_gate=INSTALLED_CONFIG_HASH
-          test "$(sudo -n sha256sum /etc/supervisor/conf.d/fap-queue-ops.conf | awk '{print $1}')" = "$EXPECTED_RENDERED_SHA256"
+          test "$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')" = "$EXPECTED_RENDERED_SHA256"
           failure_gate=SUPERVISORCTL_PATH
           supervisord_path="$(command -v supervisord)"
           supervisorctl_path="$(command -v supervisorctl)"
@@ -457,7 +530,7 @@ jobs:
           actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
           test "$actual_argv_sha256" = "$expected_argv_sha256"
           failure_gate=CONFIG_MTIME
-          config_epoch="$(stat -c %Y /etc/supervisor/conf.d/fap-queue-ops.conf)"
+          config_epoch="$(stat -c %Y "$OPS_CONFIG_PATH")"
           failure_gate=BOOT_TIME
           boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
           failure_gate=PROCESS_START_TICKS
@@ -471,14 +544,14 @@ jobs:
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
           test "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
           trap - ERR
-          printf 'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true\n'
+          printf 'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true\nbackup_sha256=%s\n' "$backup_sha256"
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
           set +e
           result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' OPS_CONFIG_PATH='$OPS_CONFIG_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-apply-ssh.err")"
           ssh_rc=$?
           set -e
@@ -492,10 +565,13 @@ jobs:
             fi
             exit "$ssh_rc"
           fi
-          test "$result" = $'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true'
+          backup_sha256="$(awk -F= '$1 == "backup_sha256" {print $2}' <<<"$result")"
+          [[ "$backup_sha256" =~ ^[0-9a-f]{64}$ ]]
+          test "$(sed -n '1,4p' <<<"$result")" = $'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true'
           echo "write_count=1" >> "$GITHUB_OUTPUT"
           echo "worker_count=1" >> "$GITHUB_OUTPUT"
           echo "live_process_verified=true" >> "$GITHUB_OUTPUT"
+          echo "backup_sha256=$backup_sha256" >> "$GITHUB_OUTPUT"
           echo "Exact Supervisor ops queue candidate applied without deploying application code."
 
       - name: Build sanitized control receipt
@@ -510,8 +586,11 @@ jobs:
           PROGRAM_PRESENT_BEFORE: ${{ steps.preflight.outputs.program_present }}
           PROGRAM_STATE_BEFORE: ${{ steps.preflight.outputs.program_state }}
           CURRENT_CONFIG_SHA256_BEFORE: ${{ steps.preflight.outputs.current_config_sha256 }}
+          CONFIG_PATH_SHA256: ${{ steps.preflight.outputs.config_path_sha256 }}
+          CONVERGENCE_REQUIRED_BEFORE: ${{ steps.preflight.outputs.convergence_required }}
           LIVE_PROCESS_VERIFIED_BEFORE: ${{ steps.preflight.outputs.live_process_verified }}
           APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}
+          APPLY_BACKUP_SHA256: ${{ steps.apply.outputs.backup_sha256 }}
           OPS_PENDING_TOTAL: ${{ steps.preflight.outputs.ops_pending_total }}
         run: |
           set -euo pipefail
@@ -524,7 +603,9 @@ jobs:
             program_present="$PROGRAM_PRESENT_BEFORE"
             program_state="$PROGRAM_STATE_BEFORE"
             current_config_sha256="$CURRENT_CONFIG_SHA256_BEFORE"
+            convergence_required="$CONVERGENCE_REQUIRED_BEFORE"
             live_process_verified="$LIVE_PROCESS_VERIFIED_BEFORE"
+            backup_config_sha256="$(printf '0%.0s' {1..64})"
           else
             status=PASS_APPLY
             production_write=true
@@ -533,10 +614,12 @@ jobs:
             program_present=true
             program_state=RUNNING
             current_config_sha256="$RENDERED_SHA256"
+            convergence_required=false
             live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"
+            backup_config_sha256="$APPLY_BACKUP_SHA256"
           fi
           jq -n \
-            --arg contract_version "backend.production_ops_queue_control.v1" \
+            --arg contract_version "backend.production_ops_queue_control.v2" \
             --arg mode "$MODE" \
             --arg status "$status" \
             --arg run_id "$GITHUB_RUN_ID" \
@@ -544,6 +627,7 @@ jobs:
             --arg control_plane_sha "$CONTROL_PLANE_SHA" \
             --arg active_revision "$ACTIVE_REVISION" \
             --arg template_sha256 "$TEMPLATE_SHA256" \
+            --arg config_path_sha256 "$CONFIG_PATH_SHA256" \
             --arg rendered_sha256 "$RENDERED_SHA256" \
             --argjson deploy_lock_present false \
             --argjson deploy_like_process_count 0 \
@@ -551,7 +635,9 @@ jobs:
             --argjson program_present "$program_present" \
             --arg program_state "$program_state" \
             --arg current_config_sha256 "$current_config_sha256" \
+            --argjson convergence_required "$convergence_required" \
             --argjson live_process_verified "$live_process_verified" \
+            --arg backup_config_sha256 "$backup_config_sha256" \
             --argjson production_write_execution "$production_write" \
             --argjson config_write_count "$config_write_count" \
             --argjson worker_start_count "$worker_start_count" \
@@ -564,6 +650,7 @@ jobs:
               control_plane_sha: $control_plane_sha,
               active_revision: $active_revision,
               template_sha256: $template_sha256,
+              config_path_sha256: $config_path_sha256,
               rendered_sha256: $rendered_sha256,
               deploy_lock_present: $deploy_lock_present,
               deploy_like_process_count: $deploy_like_process_count,
@@ -571,7 +658,9 @@ jobs:
               program_present: $program_present,
               program_state: $program_state,
               current_config_sha256: $current_config_sha256,
+              convergence_required: $convergence_required,
               live_process_verified: $live_process_verified,
+              backup_config_sha256: $backup_config_sha256,
               production_write_execution: $production_write_execution,
               config_write_count: $config_write_count,
               worker_start_count: $worker_start_count,
