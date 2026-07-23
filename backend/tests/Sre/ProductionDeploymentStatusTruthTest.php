@@ -84,7 +84,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('rm -f', $candidateStep);
     }
 
-    public function test_standard_candidate_accepts_only_the_exact_audited_runtime46_subsumed_baseline(): void
+    public function test_standard_candidate_accepts_only_a_staged_descendant_of_the_audited_runtime46_bridge(): void
     {
         $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';
         $candidateStep = $this->between(
@@ -95,11 +95,12 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
 
         foreach ([
             'AUDITED_RUNTIME46_PRODUCTION_SHA="bc0ed833bc9aae1473ab37f1dead2517e1aff618"',
-            'AUDITED_RUNTIME46_CANDIDATE_SHA="49038deb50cda789e4365ea42068832ed28d6023"',
-            'AUDITED_RUNTIME46_STAGING_RUN_ID="29977064260"',
+            'AUDITED_RUNTIME46_BRIDGE_SHA="49038deb50cda789e4365ea42068832ed28d6023"',
             '[ "$CURRENT_PRODUCTION_SHA" = "$AUDITED_RUNTIME46_PRODUCTION_SHA" ]',
-            '[ "$DEPLOY_SHA" = "$AUDITED_RUNTIME46_CANDIDATE_SHA" ]',
-            '[ "$STAGING_RUN_ID" = "$AUDITED_RUNTIME46_STAGING_RUN_ID" ]',
+            'git cat-file -e "${AUDITED_RUNTIME46_BRIDGE_SHA}^{commit}"',
+            'git merge-base --is-ancestor "$AUDITED_RUNTIME46_BRIDGE_SHA" "$DEPLOY_SHA"',
+            'STAGING_SHA: ${{ needs.deployment-eligibility.outputs.staging_sha }}',
+            '[ "$STAGING_SHA" = "$DEPLOY_SHA" ]',
             '[ "${#production_commit[@]}" -eq 2 ]',
             'git merge-base --is-ancestor "$production_parent" "$DEPLOY_SHA"',
             'git diff --no-renames --name-status "$production_parent" "$CURRENT_PRODUCTION_SHA"',
@@ -109,10 +110,14 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             '[ "$production_blob" = "$candidate_blob" ]',
             'Subsumed baseline refused an unknown, deleted, renamed, or status-drifted production path.',
             'Subsumed baseline refused Runtime 46 blob drift.',
+            'Subsumed baseline requires a candidate descended from the audited Runtime 46 bridge.',
+            'Subsumed baseline requires exact-SHA staging evidence for the selected descendant.',
         ] as $contract) {
             $this->assertStringContainsString($contract, $candidateStep);
         }
 
+        $this->assertStringNotContainsString('[ "$DEPLOY_SHA" = "$AUDITED_RUNTIME46_BRIDGE_SHA" ]', $candidateStep);
+        $this->assertStringNotContainsString('AUDITED_RUNTIME46_STAGING_RUN_ID', $candidateStep);
         $this->assertSame(5, substr_count($candidateStep, '$\'A\\tbackend/'));
         $this->assertSame(1, substr_count($candidateStep, '$\'M\\tbackend/'));
         $this->assertStringContainsString(
