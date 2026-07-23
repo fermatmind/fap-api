@@ -573,7 +573,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $allowed = [
             'backend/app/Console/Commands/PersonalityBigFiveEn52ContentPublish.php',
+            'backend/app/Console/Commands/PersonalityBigFiveEn52ProductionBackup.php',
+            'backend/app/Console/Commands/PersonalityBigFiveEn52ProductionEvidence.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52Publisher.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52ProductionEvidence.php',
         ];
         $blocked = [
             'backend/app/Services/BigFive/AuthorityV3/Release/UnexpectedEn52RuntimeWriter.php',
@@ -8504,7 +8507,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityBigFiveEn52ContentPublish.php',
+            'backend/app/Console/Commands/PersonalityBigFiveEn52ProductionBackup.php',
+            'backend/app/Console/Commands/PersonalityBigFiveEn52ProductionEvidence.php',
             'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52Publisher.php',
+            'backend/app/Services/BigFive/AuthorityV3/Release/BigFiveEn52ProductionEvidence.php',
         ], true);
     }
 
