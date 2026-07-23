@@ -67,6 +67,7 @@ set('static_media_healthcheck_use_resolve', false);
 set('nginx_site', '/etc/nginx/sites-enabled/fap-api');
 set('php_fpm_service', 'php8.4-fpm');
 set('queue_manager', 'supervisor');
+set('queue_reload_required', true);
 set('queue_supervisorctl', '/usr/bin/supervisorctl');
 set('queue_supervisor_required_programs', [
     'fap-queue-default-high',
@@ -139,6 +140,24 @@ function deployMode(): string
 function deployIsCodeOnly(): bool
 {
     return deployMode() === 'code_only';
+}
+
+function deployBooleanOption(string $name, bool $default): bool
+{
+    $value = get($name, $default);
+    if (is_bool($value)) {
+        return $value;
+    }
+
+    $normalized = strtolower(trim((string) $value));
+    if (in_array($normalized, ['1', 'true', 'yes', 'on'], true)) {
+        return true;
+    }
+    if (in_array($normalized, ['0', 'false', 'no', 'off'], true)) {
+        return false;
+    }
+
+    throw new \RuntimeException("{$name} must be an explicit boolean");
 }
 
 function deploySkipsAuthorityMutations(): bool
@@ -324,6 +343,7 @@ $stagingHost = host('staging')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm')
+    ->set('queue_reload_required', false)
     ->set('env', [
         'SEO_PUBLIC_SITEMAP_AUTHORITY' => getenv('SEO_PUBLIC_SITEMAP_AUTHORITY_STG') ?: 'backend',
     ]);
@@ -428,6 +448,7 @@ task('career:repair-staging-detail-cache-coverage', function () {
 });
 
 before('deploy:symlink', 'guard:career-detail-cache-coverage');
+before('deploy:symlink', 'guard:queue-reload-capability');
 before('guard:career-detail-cache-coverage', 'career:repair-staging-detail-cache-coverage');
 
 task('guard:ops-theme-asset', function () {
@@ -774,6 +795,63 @@ task('guard:deploy-shell-config', function () {
     }
 });
 
+task('guard:queue-reload-capability', function () {
+    $reloadRequired = deployBooleanOption('queue_reload_required', true);
+    $manager = strtolower(trim((string) get('queue_manager', 'supervisor')));
+
+    if (! $reloadRequired) {
+        if (currentHost()->getAlias() !== 'staging') {
+            throw new \RuntimeException('queue reload may be optional only on the staging host');
+        }
+
+        if (test("pgrep -af '(^|[[:space:]])artisan[[:space:]]+(queue:work|horizon)([[:space:]]|$)' >/dev/null 2>&1")) {
+            throw new \RuntimeException('staging has unmanaged Laravel queue workers; configure a queue manager before deployment');
+        }
+
+        writeln('<comment>Staging queue capability preflight passed with no configured or running workers</comment>');
+
+        return;
+    }
+
+    if ($manager === 'supervisor') {
+        $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
+        if (test('[ -x '.escapeshellarg($supervisorctl).' ] || command -v supervisorctl >/dev/null 2>&1')) {
+            writeln('<comment>Queue capability preflight passed for supervisor</comment>');
+
+            return;
+        }
+
+        $legacySystemdService = trim((string) get('legacy_queue_systemd_service', ''));
+        if ($legacySystemdService !== '') {
+            $quotedService = deploySystemdServiceArg($legacySystemdService, 'legacy_queue_systemd_service');
+            if (test("sudo -n /usr/bin/systemctl cat {$quotedService} >/dev/null 2>&1")) {
+                writeln('<comment>Queue capability preflight passed for the declared systemd fallback</comment>');
+
+                return;
+            }
+        }
+
+        throw new \RuntimeException('queue capability preflight found no configured supervisor or systemd reload path');
+    }
+
+    if ($manager === 'systemd') {
+        $systemdService = trim((string) get('legacy_queue_systemd_service', ''));
+        if ($systemdService === '') {
+            throw new \RuntimeException('queue manager systemd requires legacy_queue_systemd_service');
+        }
+        $quotedService = deploySystemdServiceArg($systemdService, 'legacy_queue_systemd_service');
+        if (! test("sudo -n /usr/bin/systemctl cat {$quotedService} >/dev/null 2>&1")) {
+            throw new \RuntimeException('queue capability preflight could not find the declared systemd service');
+        }
+
+        writeln('<comment>Queue capability preflight passed for systemd</comment>');
+
+        return;
+    }
+
+    throw new \RuntimeException('unsupported queue_manager ['.$manager.']');
+});
+
 /**
  * ======================================================
  * 服务重载
@@ -797,6 +875,17 @@ task('reload:nginx', function () {
 
 task('queue:reload-workers', function () {
     $codeOnly = deployIsCodeOnly();
+    $reloadRequired = deployBooleanOption('queue_reload_required', true);
+
+    if (! $reloadRequired) {
+        if (currentHost()->getAlias() !== 'staging') {
+            throw new \RuntimeException('queue reload may be optional only on the staging host');
+        }
+
+        writeln('<comment>Skip queue worker reload for the explicit no-worker staging topology</comment>');
+
+        return;
+    }
 
     $manager = strtolower(trim((string) get('queue_manager', 'supervisor')));
 
@@ -804,11 +893,7 @@ task('queue:reload-workers', function () {
         $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
         $requiredPrograms = array_values(array_filter((array) get('queue_supervisor_required_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
         $optionalPrograms = array_values(array_filter((array) get('queue_supervisor_optional_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
-        $requireOpsQueueReload = $codeOnly && in_array(
-            strtolower(trim((string) get('require_ops_queue_reload', 'false'))),
-            ['1', 'true', 'yes', 'on'],
-            true
-        );
+        $requireOpsQueueReload = $codeOnly && deployBooleanOption('require_ops_queue_reload', false);
         if ($requireOpsQueueReload) {
             $requiredPrograms[] = 'fap-queue-ops';
             $requiredPrograms = array_values(array_unique($requiredPrograms));

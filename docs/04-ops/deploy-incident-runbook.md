@@ -50,6 +50,42 @@ Approval for one action does not imply approval for another.
 - `web_runtime_failure`: PHP-FPM, nginx, or public smoke failed
 - `unknown`: evidence is insufficient or conflicting
 
+## Staging queue capability boundary
+
+Staging currently has an explicit no-worker topology. A staging deployment must
+check this boundary before acquiring a deploy lock or moving the current
+symlink:
+
+- no Supervisor queue manager is configured;
+- no legacy queue systemd unit is configured;
+- no unmanaged `artisan queue:work` or `artisan horizon` process may be
+  running;
+- the post-activation queue-depth smoke remains mandatory.
+
+Production continues to require a configured Supervisor or declared systemd
+reload path. The staging exception must never disable the production queue
+reload requirement.
+
+The staging workflow obtains SSH topology and smoke endpoints only from
+protected GitHub Environment secrets. Logs may report boolean outcomes, counts,
+task names, run ids, and exact Git revisions, but must not print host
+addresses, remote users, deploy roots, endpoint URLs, SSH fingerprints, lock
+metadata payloads, or raw process command lines.
+
+The July 23 staging incident reached the intended exact revision and reloaded
+the web runtime before failing on a nonexistent queue-manager fallback. The
+owned deploy lock was removed. Read-only follow-up found zero Laravel queue
+workers and healthy PHP-FPM/nginx processes. An external `/api/healthz` request
+returned the expected restricted-source `404`; per this runbook, that result
+must be rechecked through the allowlisted deployment health path and is not by
+itself proof of a broken application health route.
+
+### Repository rule impact
+
+This is a deployment-control change only. It does not change CMS authority,
+public API contracts, content, database state, queue configuration, or
+production deployment authorization.
+
 ## Frontend deploy incident classifications
 
 - `complete_and_verified`: Node1 HEAD matches intended SHA, PM2 converged, public smoke passed
