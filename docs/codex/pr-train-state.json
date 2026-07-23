@@ -99725,9 +99725,9 @@
     "branch": "codex/saep-proposed-api-per02-mbti-en64-internal-link-promotion-01",
     "title": "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01: add revision-bound MBTI EN64 internal-link promotion and rollback",
     "depends_on": [],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3256",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -99773,8 +99773,13 @@
         "at": "2026-07-23T22:24:26Z",
         "status": "local_validation_passed",
         "note": "The exact revision-bound command and service now fail closed across dry-run, separate review binding, promotion, rollback and cache-closeout-only modes. All manifest checks passed; no production review, CMS/database write, cache action, deploy, publication/indexability mutation, sitemap/llms release or Search action occurred."
+      },
+      {
+        "at": "2026-07-23T22:25:39Z",
+        "status": "github_checks_pending",
+        "note": "All local validation and exact five-path scope checks passed. Implementation commit 7d82dd34c was pushed and PR #3256 opened; pending_remote_pr_head avoids a self-referential ledger SHA. Required GitHub checks and exact-head review remain mandatory before merge."
       }
     ],
-    "updated_at": "2026-07-23T22:24:26Z"
+    "updated_at": "2026-07-23T22:25:39Z"
   }
 }
