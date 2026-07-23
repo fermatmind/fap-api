@@ -24,7 +24,7 @@ final class CareerJobListController extends Controller
         try {
             $payload = $this->responseCache->jobIndexPayload($publicLocale);
 
-            return response()->json($this->reviewEvidenceBridge->projectJobIndexPayload($payload));
+            return response()->json($this->reviewEvidenceBridge->projectJobIndexPayload($payload, $publicLocale));
         } catch (\RuntimeException) {
             return response()->json([
                 'ok' => false,

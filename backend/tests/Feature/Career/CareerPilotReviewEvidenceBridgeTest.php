@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Tests\Feature\Career;
 
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Career\Review\CareerPilotReviewEvidenceBridge;
 use App\Services\ReviewGovernance\CareerSeoReviewAttestationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Queue;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
@@ -150,16 +153,82 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('trust_manifest.last_reviewed_at', null);
     }
 
-    private function publishBilingualDetails(string $englishContent = 'current visible English content'): void
+    public function test_public_trust_evidence_and_exact_index_entry_drift_fail_closed(): void
     {
+        $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+
+        $this->publishBilingualDetails(trustSource: 'changed public source evidence');
+        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
+            ->assertOk()
+            ->assertJsonPath('trust_manifest.review_state', 'unknown');
+
+        $current = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $current['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $current['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $current['package_sha256'],
+        );
+
+        app(PublicCareerAuthorityResponseCache::class)->publishJobIndexReadModelsAtomically([
+            'en' => $this->indexPayload('Changed English index title'),
+            'zh-CN' => $this->indexPayload(),
+        ]);
+        $this->getJson('/api/v0.5/career/jobs?locale=en')
+            ->assertOk()
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown');
+    }
+
+    public function test_legacy_or_cold_detail_cache_fails_without_promotion_or_dispatch(): void
+    {
+        Queue::fake();
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $cache->publishJobDetailReadModel(self::SLUG, 'en', $this->detailPayload('en', $englishContent));
-        $cache->publishJobDetailReadModel(self::SLUG, 'zh-CN', $this->detailPayload('zh-CN', '当前可见中文内容'));
+        foreach (['en', 'zh-CN'] as $locale) {
+            Cache::forget($cache->jobDetailActiveVersionKey(self::SLUG, $locale));
+            Cache::put($cache->jobDetailCacheKey(self::SLUG, $locale), $this->detailPayload($locale, 'legacy payload'));
+        }
+
+        try {
+            app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
+            $this->fail('Legacy-only detail authority must fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('active/LKG', $exception->getMessage());
+        }
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->assertNull(Cache::get($cache->jobDetailActiveVersionKey(self::SLUG, $locale)));
+            $this->assertIsArray(Cache::get($cache->jobDetailCacheKey(self::SLUG, $locale)));
+        }
+        Queue::assertNotPushed(WarmCareerJobDetailProjection::class);
+    }
+
+    private function publishBilingualDetails(
+        string $englishContent = 'current visible English content',
+        string $trustSource = 'current public source evidence',
+    ): void {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cache->publishJobDetailReadModel(self::SLUG, 'en', $this->detailPayload('en', $englishContent, $trustSource));
+        $cache->publishJobDetailReadModel(self::SLUG, 'zh-CN', $this->detailPayload('zh-CN', '当前可见中文内容', $trustSource));
     }
 
     /** @return array<string,mixed> */
-    private function detailPayload(string $locale, string $content): array
-    {
+    private function detailPayload(
+        string $locale,
+        string $content,
+        string $trustSource = 'current public source evidence',
+    ): array {
         $prefix = $locale === 'en' ? '/en' : '/zh';
 
         return [
@@ -175,6 +244,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
                 'review_state' => 'approved',
                 'last_reviewed_at' => '2026-07-01T00:00:00Z',
                 'reviewer' => null,
+                'source_trace' => [$trustSource],
             ],
             'warnings' => [],
             'claim_permissions' => ['allow_strong_claim' => false],
@@ -189,12 +259,13 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
     }
 
     /** @return array<string,mixed> */
-    private function indexPayload(): array
+    private function indexPayload(string $title = 'Reviewed Pilot Career'): array
     {
         return [
             'bundle_kind' => 'career_job_index',
             'items' => [[
                 'identity' => ['canonical_slug' => self::SLUG],
+                'titles' => ['canonical_en' => $title],
                 'trust_summary' => [
                     'reviewer_status' => 'human_reviewed',
                     'review_state' => 'approved',

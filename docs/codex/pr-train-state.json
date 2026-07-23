@@ -8,7 +8,7 @@
     "depends_on": [
       "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
     ],
-    "status": "ready_to_merge",
+    "status": "github_review_repairing",
     "commit_sha": "d61adb9fe2c71e17fde5b59be528d4340772eca3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
     "checks": {
@@ -32,7 +32,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -87,9 +87,14 @@
         "at": "2026-07-23T02:06:00Z",
         "status": "ready_to_merge",
         "note": "Exact PR head d61adb9fe2c71e17fde5b59be528d4340772eca3 passed all 9 required/reporting checks. The automated P1 fail-closed review was fixed with regression coverage, replied to, and resolved. Scope remains limited to the declared 12 paths; merge awaits this ledger-only head's required checks."
+      },
+      {
+        "at": "2026-07-23T02:14:00Z",
+        "status": "github_review_repairing",
+        "note": "Final-head review raised three actionable boundaries before merge: bind public trust evidence, bind the exact bilingual index entry, and avoid legacy promotion/warm dispatch during package reads. The same PR now folds each locale's exact index item and visible trust evidence into the six-target package, compares the served list item to the approved hash before projection, and accepts only published active/LKG detail readiness through no-side-effect inspection. Added drift and cache-side-effect regressions; focused suites pass 50 tests/783 assertions plus the 2-test/6-assertion Big Five isolation regression. GitHub checks and review resolution are pending; no production action occurred."
       }
     ],
-    "updated_at": "2026-07-23T02:06:00Z"
+    "updated_at": "2026-07-23T02:14:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
