@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Throwable;
 
 /**
  * @review-surface career_trust_manifest
@@ -447,25 +448,37 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         $started = hrtime(true);
-        $payload = $this->buildJobDetailReadModel(
-            $normalizedSlug,
-            $normalizedLocale,
-            $snapshotBackedProjectionItem,
-        );
-        $buildMs = round((hrtime(true) - $started) / 1_000_000, 3);
-        if ($payload !== null && $buildMs > 2000) {
-            throw new \RuntimeException(sprintf(
-                'Career detail projection exceeded 2000ms budget for %s (%s).',
+        try {
+            $payload = $this->buildJobDetailReadModel(
                 $normalizedSlug,
                 $normalizedLocale,
-            ));
+                $snapshotBackedProjectionItem,
+            );
+        } catch (Throwable $cause) {
+            throw CareerJobDetailWarmFailure::buildException(
+                $cause,
+                round((hrtime(true) - $started) / 1_000_000, 3),
+            );
         }
-        $version = $payload === null ? null : $this->publishJobDetailReadModel(
-            $normalizedSlug,
-            $normalizedLocale,
-            $payload,
-            $snapshotBackedProjectionItem,
-        );
+        $buildMs = round((hrtime(true) - $started) / 1_000_000, 3);
+        if ($payload !== null && $buildMs > 2000) {
+            throw CareerJobDetailWarmFailure::buildBudgetExceeded($buildMs);
+        }
+        $publishStarted = hrtime(true);
+        try {
+            $version = $payload === null ? null : $this->publishJobDetailReadModel(
+                $normalizedSlug,
+                $normalizedLocale,
+                $payload,
+                $snapshotBackedProjectionItem,
+            );
+        } catch (Throwable $cause) {
+            throw CareerJobDetailWarmFailure::publishException(
+                $cause,
+                $buildMs,
+                round((hrtime(true) - $publishStarted) / 1_000_000, 3),
+            );
+        }
 
         return [
             'cache_key' => $cacheKey,

@@ -107,6 +107,54 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringNotContainsString('WarmCareerJobDetailProjection', $source);
     }
 
+    #[Test]
+    public function single_target_diagnosis_is_read_only_by_default_and_exactly_authorized_for_one_write(): void
+    {
+        $source = $this->workflowSource();
+
+        $this->assertStringContainsString('- diagnose_target', $source);
+        $this->assertStringContainsString('execute_diagnostic_write:', $source);
+        $this->assertStringContainsString('default: false', $source);
+        $this->assertStringContainsString('read-only diagnose_target refuses an operator approval phrase.', $source);
+        $this->assertStringContainsString(
+            'production Career single-target inactive-candidate cache diagnosis with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} runner SHA256 ${EXPECTED_RUNNER_SHA256}',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'for target ${DIAGNOSTIC_TARGET_SLUG}/${DIAGNOSTIC_TARGET_LOCALE} at exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers',
+            $source,
+        );
+        $this->assertStringContainsString('FM_CAREER_MODE=diagnose_target', $source);
+        $this->assertStringContainsString("FM_CAREER_TARGET_SLUG='\$DIAGNOSTIC_TARGET_SLUG'", $source);
+        $this->assertStringContainsString("FM_CAREER_TARGET_LOCALE='\$DIAGNOSTIC_TARGET_LOCALE'", $source);
+        $this->assertStringContainsString("FM_CAREER_DIAGNOSTIC_WRITE='\$diagnostic_write'", $source);
+        $this->assertSame(1, substr_count($source, 'FM_CAREER_MODE=diagnose_target'));
+        $this->assertStringContainsString('.cache_write_count == 1', $source);
+        $this->assertStringContainsString('.failure_evidence.failure_stage', $source);
+        $this->assertStringContainsString('.failure_evidence.message? == null', $source);
+        $this->assertStringContainsString('.failure_evidence.cache_key? == null', $source);
+    }
+
+    #[Test]
+    public function workflow_contains_no_deploy_publication_or_search_execution_surface(): void
+    {
+        $source = $this->workflowSource();
+
+        foreach ([
+            'deploy:symlink',
+            'php artisan migrate',
+            'php artisan queue:',
+            'php artisan search:',
+            'indexnow',
+            'baidu',
+            'sitemap:generate',
+            'articles:publish',
+            'career:publish',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, strtolower($source));
+        }
+    }
+
     private function workflowSource(): string
     {
         return (string) file_get_contents(base_path('../.github/workflows/career-detail-production-cache-repair.yml'));

@@ -755,6 +755,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_detail_single_target_warm_diagnostics(): void
+    {
+        $changed = [
+            'backend/app/Services/Career/CareerJobDetailWarmFailure.php',
+            'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_cms_article_report_correctness_changes(): void
     {
         $changed = [
@@ -10629,6 +10639,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
             'backend/app/Jobs/Career/WarmCareerJobDetailProjection.php',
+            'backend/app/Services/Career/CareerJobDetailWarmFailure.php',
             'backend/app/Services/Career/Bundles/CareerJobDetailDegradedShellBuilder.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
         ], true);
