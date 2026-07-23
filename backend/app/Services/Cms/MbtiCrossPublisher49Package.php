@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
+use App\Models\MbtiCrossTypeComparisonAuthority;
 use RuntimeException;
 
 /** @review-surface mbti_cross_type_comparison_authority */
@@ -138,6 +139,70 @@ final class MbtiCrossPublisher49Package
             $this->stable($value),
             JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR,
         ));
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $records
+     * @return list<array<string,mixed>>
+     */
+    public function desiredAuthorityRows(array $records): array
+    {
+        return array_map(function (array $record): array {
+            $payload = (array) $record['candidate_payload'];
+
+            return [
+                'org_id' => 0,
+                'locale' => 'zh-CN',
+                'slug' => (string) $record['slug'],
+                'comparison_type' => MbtiCrossTypeComparisonAuthority::COMPARISON_TYPE,
+                'left_type_code' => (string) $payload['left_type'],
+                'right_type_code' => (string) $payload['right_type'],
+                'title' => (string) $payload['title'],
+                'seo_title' => (string) $payload['seo_title'],
+                'seo_description' => (string) $payload['seo_description'],
+                'summary' => (string) $payload['summary'],
+                'content_payload_json' => [
+                    'sections' => (array) $payload['sections'],
+                    'faq' => (array) $payload['faq'],
+                    'internal_links' => (array) $payload['internal_links'],
+                    'source_notes' => (array) $payload['source_notes'],
+                    'canonical' => (string) $payload['canonical_url'],
+                    'robots' => 'noindex,follow',
+                    'approval_record_id' => (string) $record['approval_record_id'],
+                    'content_sha256' => (string) $record['content_sha256'],
+                    'package_sha256' => self::PACKAGE_SHA256,
+                ],
+                'claim_boundary' => (string) $payload['claim_boundary'],
+                'source_package_id' => 'MBTI-CROSS-APPROVAL-48',
+                'source_sha256' => (string) $record['content_sha256'],
+                'authority_contract_version' => MbtiCrossTypeComparisonAuthority::AUTHORITY_CONTRACT_VERSION,
+                'readmodel_contract_version' => MbtiCrossTypeComparisonAuthority::READMODEL_CONTRACT_VERSION,
+                'review_status' => 'approved',
+                'publish_status' => 'published',
+                'indexability_status' => 'held_for_mbti_cross_indexability_release',
+                'is_public' => true,
+                'is_indexable' => false,
+                'sitemap_eligible' => false,
+                'llms_eligible' => false,
+                'search_submission_eligible' => false,
+            ];
+        }, $records);
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    public function normalizeDiscoverabilityToHeld(array $row): array
+    {
+        $row['indexability_status'] = 'held_for_mbti_cross_indexability_release';
+        $row['is_indexable'] = false;
+        $row['sitemap_eligible'] = false;
+        $row['llms_eligible'] = false;
+        $row['search_submission_eligible'] = false;
+        $row['content_payload_json']['robots'] = 'noindex,follow';
+
+        return $row;
     }
 
     private function stable(mixed $value): mixed

@@ -24,13 +24,18 @@ final class MbtiCrossPublisher49ContentService
     {
         $records = $this->packageContract->validate($package, $authorization);
         $before = $this->snapshot(false);
-        $desired = $this->desiredRows($records);
-        $alreadyApplied = $this->comparable($before) === $this->comparable($desired);
+        $desired = $this->packageContract->desiredAuthorityRows($records);
+        $applicationState = $this->applicationState($before, $desired);
+        $alreadyApplied = in_array($applicationState, ['held', 'released'], true);
 
         return [
             'artifact' => self::CONTRACT,
             'ok' => true,
-            'status' => $alreadyApplied ? 'already_applied' : 'ready',
+            'status' => match ($applicationState) {
+                'held' => 'already_applied',
+                'released' => 'already_released',
+                default => 'ready',
+            },
             'mode' => 'dry_run',
             'record_count' => 3,
             'exact_slugs' => MbtiCrossPublisher49Package::EXACT_SLUGS,
@@ -41,7 +46,9 @@ final class MbtiCrossPublisher49ContentService
             'required_production_authorization' => $this->expectedProductionAuthorization(
                 $this->packageContract->sha($before),
             ),
-            'content_readback_sha256' => $alreadyApplied ? $this->contentReadbackSha($before) : null,
+            'content_readback_sha256' => $alreadyApplied
+                ? $this->contentReadbackSha($this->normalizedHeldRows($before))
+                : null,
             'already_applied' => $alreadyApplied,
             'writes_committed' => false,
             'indexability_mutated' => false,
@@ -68,12 +75,16 @@ final class MbtiCrossPublisher49ContentService
 
         return DB::transaction(function () use ($records, $expectedCurrentStateSha256): array {
             $before = $this->snapshot(true);
-            $desired = $this->desiredRows($records);
+            $desired = $this->packageContract->desiredAuthorityRows($records);
             $beforeSha = $this->packageContract->sha($before);
             $rollback = $this->rollbackManifest($before);
+            $applicationState = $this->applicationState($before, $desired);
 
-            if ($this->comparable($before) === $this->comparable($desired)) {
+            if ($applicationState === 'held') {
                 return $this->writeSummary('already_applied', $before, $beforeSha, $rollback, false);
+            }
+            if ($applicationState === 'released') {
+                return $this->writeSummary('already_released', $before, $beforeSha, $rollback, false);
             }
             if (! hash_equals($beforeSha, $expectedCurrentStateSha256)) {
                 throw new RuntimeException('Production current-state SHA-256 precondition mismatch.');
@@ -104,54 +115,6 @@ final class MbtiCrossPublisher49ContentService
             .MbtiCrossPublisher49Package::AUTHORIZATION_SHA256.' current state SHA '
             .$expectedCurrentStateSha256.' covering only enfp-vs-entp, estj-vs-entj, and isfp-vs-infp; '
             .'keep noindex, sitemap, llms, llms-full, and search submission held.';
-    }
-
-    /**
-     * @param  list<array<string,mixed>>  $records
-     * @return list<array<string,mixed>>
-     */
-    private function desiredRows(array $records): array
-    {
-        return array_map(function (array $record): array {
-            $payload = (array) $record['candidate_payload'];
-
-            return [
-                'org_id' => 0,
-                'locale' => 'zh-CN',
-                'slug' => (string) $record['slug'],
-                'comparison_type' => MbtiCrossTypeComparisonAuthority::COMPARISON_TYPE,
-                'left_type_code' => (string) $payload['left_type'],
-                'right_type_code' => (string) $payload['right_type'],
-                'title' => (string) $payload['title'],
-                'seo_title' => (string) $payload['seo_title'],
-                'seo_description' => (string) $payload['seo_description'],
-                'summary' => (string) $payload['summary'],
-                'content_payload_json' => [
-                    'sections' => (array) $payload['sections'],
-                    'faq' => (array) $payload['faq'],
-                    'internal_links' => (array) $payload['internal_links'],
-                    'source_notes' => (array) $payload['source_notes'],
-                    'canonical' => (string) $payload['canonical_url'],
-                    'robots' => 'noindex,follow',
-                    'approval_record_id' => (string) $record['approval_record_id'],
-                    'content_sha256' => (string) $record['content_sha256'],
-                    'package_sha256' => MbtiCrossPublisher49Package::PACKAGE_SHA256,
-                ],
-                'claim_boundary' => (string) $payload['claim_boundary'],
-                'source_package_id' => 'MBTI-CROSS-APPROVAL-48',
-                'source_sha256' => (string) $record['content_sha256'],
-                'authority_contract_version' => MbtiCrossTypeComparisonAuthority::AUTHORITY_CONTRACT_VERSION,
-                'readmodel_contract_version' => MbtiCrossTypeComparisonAuthority::READMODEL_CONTRACT_VERSION,
-                'review_status' => 'approved',
-                'publish_status' => 'published',
-                'indexability_status' => 'held_for_mbti_cross_indexability_release',
-                'is_public' => true,
-                'is_indexable' => false,
-                'sitemap_eligible' => false,
-                'llms_eligible' => false,
-                'search_submission_eligible' => false,
-            ];
-        }, $records);
     }
 
     /**
@@ -221,6 +184,56 @@ final class MbtiCrossPublisher49ContentService
     }
 
     /**
+     * @param  list<array<string,mixed>|null>  $rows
+     * @param  list<array<string,mixed>>  $desired
+     */
+    private function applicationState(array $rows, array $desired): string
+    {
+        $releasedCount = count(array_filter($rows, fn (mixed $row): bool => is_array($row)
+            && ($row['indexability_status'] ?? null) === 'released_by_mbti_cross_publisher_49'
+            && (bool) ($row['is_indexable'] ?? false)
+            && (bool) ($row['sitemap_eligible'] ?? false)
+            && (bool) ($row['llms_eligible'] ?? false)
+            && ! (bool) ($row['search_submission_eligible'] ?? true)
+            && data_get($row, 'content_payload_json.robots') === 'index,follow'));
+        $hasReleaseSignal = count(array_filter($rows, static fn (mixed $row): bool => is_array($row)
+            && (
+                ($row['indexability_status'] ?? null) === 'released_by_mbti_cross_publisher_49'
+                || (bool) ($row['is_indexable'] ?? false)
+                || (bool) ($row['sitemap_eligible'] ?? false)
+                || (bool) ($row['llms_eligible'] ?? false)
+                || (bool) ($row['search_submission_eligible'] ?? false)
+                || data_get($row, 'content_payload_json.robots') === 'index,follow'
+            ))) > 0;
+        $normalized = $this->normalizedHeldRows($rows);
+        $contentMatches = $this->comparable($normalized) === $this->comparable($desired);
+
+        if ($hasReleaseSignal) {
+            if ($releasedCount !== 3 || ! $contentMatches) {
+                throw new RuntimeException('Released comparison rows must not be rewritten by the content phase.');
+            }
+
+            return 'released';
+        }
+
+        return $contentMatches ? 'held' : 'pending';
+    }
+
+    /**
+     * @param  list<array<string,mixed>|null>  $rows
+     * @return list<array<string,mixed>|null>
+     */
+    private function normalizedHeldRows(array $rows): array
+    {
+        return array_map(
+            fn (mixed $row): mixed => is_array($row)
+                ? $this->packageContract->normalizeDiscoverabilityToHeld($row)
+                : $row,
+            $rows,
+        );
+    }
+
+    /**
      * @param  list<array<string,mixed>|null>  $before
      * @return array<string,mixed>
      */
@@ -261,7 +274,7 @@ final class MbtiCrossPublisher49ContentService
             'editorial_authorization_sha256' => MbtiCrossPublisher49Package::AUTHORIZATION_SHA256,
             'prewrite_state_sha256' => $beforeSha,
             'postwrite_state_sha256' => $this->packageContract->sha($rows),
-            'content_readback_sha256' => $this->contentReadbackSha($rows),
+            'content_readback_sha256' => $this->contentReadbackSha($this->normalizedHeldRows($rows)),
             'already_applied' => ! $committed,
             'writes_committed' => $committed,
             'indexability_mutated' => false,

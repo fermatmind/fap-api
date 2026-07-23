@@ -222,6 +222,70 @@ final class PersonalityMbtiCrossPublisher49CommandTest extends TestCase
         self::assertSame('already_released', $this->parsedOutput()['status']);
     }
 
+    public function test_indexability_release_rejects_live_content_drift_even_when_stored_hashes_are_unchanged(): void
+    {
+        $written = $this->publishContent();
+        $row = MbtiCrossTypeComparisonAuthority::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'enfp-vs-entp')
+            ->firstOrFail();
+        $row->forceFill(['title' => 'tampered after content publication'])->save();
+
+        $service = app(MbtiCrossPublisher49IndexabilityService::class);
+        self::assertSame(1, Artisan::call('personality:mbti-cross-publisher49-indexability', [
+            '--execute' => true,
+            '--content-readback-sha256' => $written['content_readback_sha256'],
+            '--production-authorization' => $service->expectedProductionAuthorization($written['content_readback_sha256']),
+            '--json' => true,
+        ]));
+
+        self::assertStringContainsString('does not match the exact approved package', Artisan::output());
+        self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()
+            ->withoutGlobalScopes()
+            ->where('is_indexable', true)
+            ->count());
+    }
+
+    public function test_content_phase_rerun_preserves_an_already_released_exact_package(): void
+    {
+        $written = $this->publishContent();
+        $indexability = app(MbtiCrossPublisher49IndexabilityService::class);
+        self::assertSame(0, Artisan::call('personality:mbti-cross-publisher49-indexability', [
+            '--execute' => true,
+            '--content-readback-sha256' => $written['content_readback_sha256'],
+            '--production-authorization' => $indexability->expectedProductionAuthorization($written['content_readback_sha256']),
+            '--json' => true,
+        ]));
+
+        $plan = $this->contentPlan();
+        self::assertSame('already_released', $plan['status']);
+        self::assertTrue($plan['already_applied']);
+        self::assertSame($written['content_readback_sha256'], $plan['content_readback_sha256']);
+
+        $content = app(MbtiCrossPublisher49ContentService::class);
+        self::assertSame(0, Artisan::call('personality:mbti-cross-publisher49-content', [
+            '--execute' => true,
+            '--expected-current-state-sha256' => $plan['current_state_sha256'],
+            '--production-authorization' => $content->expectedProductionAuthorization($plan['current_state_sha256']),
+            '--json' => true,
+        ]));
+        $rerun = $this->parsedOutput();
+
+        self::assertSame('already_released', $rerun['status']);
+        self::assertFalse($rerun['writes_committed']);
+        $rows = MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->get();
+        self::assertSame(3, $rows->where('is_indexable', true)->count());
+        self::assertSame(3, $rows->where('sitemap_eligible', true)->count());
+        self::assertSame(3, $rows->where('llms_eligible', true)->count());
+        self::assertSame(0, $rows->where('search_submission_eligible', true)->count());
+        self::assertSame(
+            ['index,follow'],
+            $rows->pluck('content_payload_json')->map(
+                static fn (array $payload): string => (string) ($payload['robots'] ?? '')
+            )->unique()->values()->all(),
+        );
+    }
+
     /**
      * @return array<string,mixed>
      */

@@ -140,19 +140,10 @@ final class MbtiCrossPublisher49IndexabilityService
      */
     private function assertPublishedContent(array $rows, array $records): void
     {
+        $expectedRows = $this->packageContract->desiredAuthorityRows($records);
         foreach ($rows as $index => $row) {
-            $record = $records[$index];
-            $payload = (array) $row->content_payload_json;
-            if ($row->slug !== $record['slug']
-                || $row->source_package_id !== 'MBTI-CROSS-APPROVAL-48'
-                || ! hash_equals((string) $record['content_sha256'], (string) $row->source_sha256)
-                || ! hash_equals(MbtiCrossPublisher49Package::PACKAGE_SHA256, (string) ($payload['package_sha256'] ?? ''))
-                || ! hash_equals((string) $record['content_sha256'], (string) ($payload['content_sha256'] ?? ''))
-                || $row->review_status !== 'approved'
-                || $row->publish_status !== 'published'
-                || ! (bool) $row->is_public
-                || (bool) $row->search_submission_eligible
-            ) {
+            $actual = $this->packageContract->normalizeDiscoverabilityToHeld($this->fullState($row));
+            if ($actual !== $expectedRows[$index]) {
                 throw new RuntimeException("Published content authority row {$row->slug} does not match the exact approved package.");
             }
         }
@@ -196,15 +187,7 @@ final class MbtiCrossPublisher49IndexabilityService
     private function heldContentReadbackSha(array $rows): string
     {
         $normalized = array_map(function (MbtiCrossTypeComparisonAuthority $row): array {
-            $state = $this->fullState($row);
-            $state['indexability_status'] = 'held_for_mbti_cross_indexability_release';
-            $state['is_indexable'] = false;
-            $state['sitemap_eligible'] = false;
-            $state['llms_eligible'] = false;
-            $state['search_submission_eligible'] = false;
-            $state['content_payload_json']['robots'] = 'noindex,follow';
-
-            return $state;
+            return $this->packageContract->normalizeDiscoverabilityToHeld($this->fullState($row));
         }, $rows);
 
         return $this->packageContract->sha([

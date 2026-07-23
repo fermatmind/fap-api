@@ -99561,7 +99561,7 @@
     "depends_on": [
       "MBTI-CROSS-APPROVAL-48"
     ],
-    "status": "github_checks_retry_pending",
+    "status": "pending_external_merge",
     "commit_sha": "pending_remote_pr_head",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3227",
     "checks": {
@@ -99579,11 +99579,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "PASS after the GitHub fix: exact new classifier regression (1 assertion), original runtime branch-diff failure reproduction (4 assertions), full classifier file (376 tests, 775 assertions), Publisher 49 plus review registry (20 tests, 455 assertions), scoped syntax/Pint, and the exact GitHub Big Five gate sequence (1596 tests total, 195602 assertions). The earlier full backend/scripts/ci_verify_mbti.sh also passed before this exact-file test-only classifier addition. Generated Big Five artifacts were restored to HEAD."
+        "evidence": "PASS after both review fixes: Publisher 49 plus review registry passed 22 tests / 475 assertions, scoped PHP syntax and Pint passed, git diff --check passed, and the complete backend/scripts/ci_verify_mbti.sh passed including Big Five 1596 tests / 195602 assertions, personality authority 89 / 5853, MBTI end-to-end, migration, security, OpenAPI, and downstream gates. Generated Big Five artifacts were restored to HEAD."
       },
       "github_required_checks": {
-        "status": "failed_fixing",
-        "evidence": "On exact head dd14a0226, 8 checks passed and verify-bigfive failed only BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because the five new PR49 app files were absent from the exact-file MBTI-only classifier. The remaining 1593 Big Five tests passed with 195597 assertions."
+        "status": "pending_final_head",
+        "evidence": "All nine required checks passed on head 81ae7bc8e320603f9688fb81febf618dc3e6121f. Two subsequent actionable review findings are fixed locally with complete validation; fresh exact-head checks remain mandatory before merge."
       }
     },
     "scope_validation": {
@@ -99628,8 +99628,13 @@
         "at": "2026-07-23T06:26:15Z",
         "status": "github_checks_retry_pending",
         "note": "The narrow classifier repair and package review-surface annotation passed focused architecture checks and the exact full Big Five GitHub gate locally. Ready to push a new exact head and rerun all required checks."
+      },
+      {
+        "at": "2026-07-23T06:45:00Z",
+        "status": "pending_external_merge",
+        "note": "Resolved both actionable review findings in scope: indexability now compares every normalized live authority field to the exact approved package, and content reruns preserve a fully released cohort while mixed release or post-release content drift fails closed. Focused and complete local validation passed; fresh exact-head GitHub checks and thread resolution remain mandatory. No production/staging write or discoverability action was executed."
       }
     ],
-    "updated_at": "2026-07-23T06:26:15Z"
+    "updated_at": "2026-07-23T06:45:00Z"
   }
 }
