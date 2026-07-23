@@ -19,6 +19,14 @@ final class CareerJobListController extends Controller
     {
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
 
-        return response()->json($this->responseCache->jobIndexPayload($publicLocale));
+        try {
+            return response()->json($this->responseCache->jobIndexPayload($publicLocale));
+        } catch (\RuntimeException) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'CAREER_JOB_INDEX_NOT_WARM',
+                'message' => 'career job index temporarily unavailable.',
+            ], 503)->header('Retry-After', '60');
+        }
     }
 }

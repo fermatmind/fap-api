@@ -266,7 +266,7 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertFalse(Cache::has($cacheKey));
     }
 
-    public function test_it_filters_cached_job_index_items_against_requested_locale_projection(): void
+    public function test_it_filters_job_index_items_before_activating_the_requested_locale_snapshot(): void
     {
         $publishedActor = [
             'runtime_publish_state' => 'published',
@@ -278,7 +278,7 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $visibility = Mockery::mock(CareerRuntimePublishProjectionVisibility::class);
         $visibility->shouldReceive('itemForSlug')
             ->with('actors', 'zh-CN')
-            ->twice()
+            ->times(3)
             ->andReturn($publishedActor);
         $visibility->shouldReceive('itemForSlug')
             ->with('accountants-and-auditors', 'zh-CN')
@@ -287,12 +287,17 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->app->instance(CareerRuntimePublishProjectionVisibility::class, $visibility);
 
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        Cache::forever(PublicCareerAuthorityResponseCache::JOB_INDEX_CACHE_KEY_PREFIX.':zh-CN:public', [
-            'bundle_kind' => 'career_job_index',
-            'bundle_version' => 'career.protocol.job_index.v1',
-            'items' => [
-                ['identity' => ['canonical_slug' => 'actors']],
-                ['identity' => ['canonical_slug' => 'accountants-and-auditors']],
+        $cache->publishJobDetailReadModel('actors', 'zh-CN', [
+            'identity' => ['canonical_slug' => 'actors'],
+        ]);
+        $cache->publishJobIndexReadModelsAtomically([
+            'zh-CN' => [
+                'bundle_kind' => 'career_job_index',
+                'bundle_version' => 'career.protocol.job_index.v1',
+                'items' => [
+                    ['identity' => ['canonical_slug' => 'actors']],
+                    ['identity' => ['canonical_slug' => 'accountants-and-auditors']],
+                ],
             ],
         ]);
 
