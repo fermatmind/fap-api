@@ -417,6 +417,49 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_bounded_cased_duplicate_source_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['nodes'] as &$node) {
+                if (($node['path'] ?? null) === '/en/personality/intp-a') {
+                    $node['path'] = '/en/personality/INTJ-A';
+                    $node['url'] = 'https://fermatmind.com/en/personality/INTJ-A';
+                    break;
+                }
+            }
+            unset($node);
+
+            foreach ($graph['recommendedEdges'] as &$edge) {
+                if (($edge['source_path'] ?? null) !== '/en/personality/intp-a') {
+                    continue;
+                }
+
+                $edge['source_path'] = '/en/personality/INTJ-A';
+                $edge['source_url'] = 'https://fermatmind.com/en/personality/INTJ-A';
+                if (($edge['edge_type'] ?? null) === 'variant_at_pair') {
+                    $edge['target_path'] = '/en/personality/intj-t';
+                    $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-t';
+                } elseif (($edge['edge_type'] ?? null) === 'variant_to_comparison') {
+                    $edge['target_path'] = '/en/personality/intj-a-vs-intj-t';
+                    $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-a-vs-intj-t';
+                }
+            }
+            unset($edge);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('bounded_source_inventory_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertContains('bounded_target_inventory_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     /**
      * @return array<string,PersonalityProfile|PersonalityProfileVariant>
      */

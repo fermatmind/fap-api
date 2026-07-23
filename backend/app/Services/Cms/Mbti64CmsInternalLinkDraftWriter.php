@@ -97,6 +97,9 @@ final class Mbti64CmsInternalLinkDraftWriter
                 $nodesByPath[$path] = $node;
             }
         }
+        if ($boundary !== null) {
+            $this->validateBoundedSourceInventory($nodesByPath, $errors);
+        }
 
         $recommendedBySource = $this->groupEdges($graph, 'recommendedEdges');
         $blockedBySource = $this->groupEdges($graph, 'blockedEdges');
@@ -213,6 +216,10 @@ final class Mbti64CmsInternalLinkDraftWriter
                 static fn (array $row): int => (int) ($row['active_internal_link_count'] ?? 0),
                 $preparedRows
             ));
+            $targetIds = array_values(array_filter(
+                array_column($preparedRows, 'target_id'),
+                static fn (mixed $targetId): bool => is_int($targetId)
+            ));
             if (count($preparedRows) !== $boundary['expected_rows']) {
                 $errors[] = [
                     'field' => 'bounded_scope.rows',
@@ -225,6 +232,14 @@ final class Mbti64CmsInternalLinkDraftWriter
                     'field' => 'bounded_scope.edges',
                     'code' => 'bounded_edge_count_mismatch',
                     'message' => 'Expected exactly '.$boundary['expected_edges'].' bounded edges; found '.$activeEdgeCount.'.',
+                ];
+            }
+            if (count($targetIds) !== $boundary['expected_rows']
+                || count(array_unique($targetIds, SORT_REGULAR)) !== $boundary['expected_rows']) {
+                $errors[] = [
+                    'field' => 'bounded_scope.target_ids',
+                    'code' => 'bounded_target_inventory_mismatch',
+                    'message' => 'Bounded rows must resolve to exactly 32 distinct CMS variant target IDs.',
                 ];
             }
         }
@@ -373,6 +388,32 @@ final class Mbti64CmsInternalLinkDraftWriter
         }
 
         return $boundary;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $nodesByPath
+     * @param  list<array<string,string>>  $errors
+     */
+    private function validateBoundedSourceInventory(array $nodesByPath, array &$errors): void
+    {
+        $expectedPaths = [];
+        foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+            foreach (['a', 't'] as $variantCode) {
+                $expectedPaths[] = '/en/personality/'.strtolower($typeCode).'-'.$variantCode;
+            }
+        }
+
+        $actualPaths = array_keys($nodesByPath);
+        sort($expectedPaths, SORT_STRING);
+        sort($actualPaths, SORT_STRING);
+
+        if ($actualPaths !== $expectedPaths) {
+            $errors[] = [
+                'field' => 'bounded_scope.sources',
+                'code' => 'bounded_source_inventory_mismatch',
+                'message' => 'Bounded sources must exactly match the 32 canonical lowercase English MBTI variant paths.',
+            ];
+        }
     }
 
     /**
