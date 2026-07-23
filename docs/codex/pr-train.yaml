@@ -257,6 +257,7 @@ prs:
       - backend/tests/Feature/Career/CareerDatasetPublicApiTest.php
       - backend/tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php
       - backend/tests/Unit/Services/Career/CareerPublishTrackResolverTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -272,6 +273,7 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Career/CareerPublishTrackResolverTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php tests/Feature/Career/CareerDatasetPublicApiTest.php tests/Feature/Console/CareerRunAssetBatchCommandTest.php tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php --no-ansi
       - cd backend && php artisan route:list --path=api --except-vendor
       - cd backend && vendor/bin/pint --test app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php app/Services/Career/Dataset/CareerPublishTrackReconciliationReader.php app/Services/Career/Dataset/CareerPublishTrackResolver.php tests/Feature/Career/CareerDatasetPublicApiTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php tests/Unit/Services/Career/CareerPublishTrackResolverTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_career_publish_track_reconciliation_files' --no-ansi
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

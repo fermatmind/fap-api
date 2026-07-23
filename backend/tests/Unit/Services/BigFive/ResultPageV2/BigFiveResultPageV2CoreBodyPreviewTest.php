@@ -305,6 +305,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_career_publish_track_reconciliation_files(): void
+    {
+        $allowed = [
+            'backend/app/Services/Career/Dataset/CareerPublishTrackReconciliationReader.php',
+            'backend/app/Services/Career/Dataset/CareerPublishTrackResolver.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Career/Dataset/CareerPublishTrackPublisher.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_solo_owner_ops_approval_files(): void
     {
         $allowed = [
@@ -6344,6 +6359,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerPublishTrackReconciliationFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCareerBridgeContractFile($file)) {
                 continue;
             }
@@ -8214,6 +8233,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerCliArtifactPathGuardFile(string $file): bool
     {
         return $file === 'backend/app/Services/Career/CareerCliArtifactPathGuard.php';
+    }
+
+    private function isCareerPublishTrackReconciliationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Career/Dataset/CareerPublishTrackReconciliationReader.php',
+            'backend/app/Services/Career/Dataset/CareerPublishTrackResolver.php',
+        ], true);
     }
 
     private function isBigFiveCareerBridgeContractFile(string $file): bool
