@@ -99103,7 +99103,7 @@
     "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
     "depends_on": [],
     "status": "github_checks_pending",
-    "commit_sha": "158363ed06afc6a4033ffc78a9bf902bed511d85",
+    "commit_sha": "15e0e30b492e7399960150121ae7bc0b6100e351",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3210",
     "checks": {
       "authorization": {
@@ -99112,15 +99112,15 @@
       },
       "dependency": {
         "status": "passed",
-        "evidence": "No declared PR dependency. Branch started from origin/main 2c197196ab041f5e5102f9d828e7e978bc96c8ba, then rebased onto exact origin/main f474b41ec49e67956697878d90436a6bd19243e0 after isolated required-check baseline repair PR #3211 merged."
+        "evidence": "No declared PR dependency. Branch started from origin/main 2c197196ab041f5e5102f9d828e7e978bc96c8ba, rebased onto f474b41ec49e67956697878d90436a6bd19243e0 after isolated required-check baseline repair PR #3211 merged, onto d862379403efa05ce450bd75481be94905edfb43 after external closeout PR #3212, and finally onto exact origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f after external Career PR #3213 advanced main."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Initial and all review-fix validation passes succeeded. Focused deploy storage/database config suite now passes 19 tests / 335 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash backend/scripts/ci_verify_mbti.sh exited 0 after the approval-scope ops-worker requirement, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates. One incorrect Pint executable path and one root-level HTTP-smoke script invocation failed harmlessly before their correct commands passed; neither performed an external mutation."
+        "evidence": "Initial and all review-fix validation passes succeeded. Focused deploy storage/database config suite now passes 19 tests / 341 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash backend/scripts/ci_verify_mbti.sh exited 0 after the external staging-workflow receipt and supervisor-only ops-worker requirements, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates. One incorrect Pint executable path and one root-level HTTP-smoke script invocation failed harmlessly before their correct commands passed; neither performed an external mutation."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All required CI and Code Scanning checks passed on prior exact head 94252755bb2c774c1f996c159d06553e284b5f0e. Exact implementation head 158363ed06afc6a4033ffc78a9bf902bed511d85 and the following ledger-only pointer commit must rerun the same checks before merge."
+        "evidence": "All required CI and Code Scanning checks passed on prior exact head 8ab9c0afee10ed003fb64f6bcdc0a85121831d4d. After rebasing onto origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f, exact implementation head 15e0e30b492e7399960150121ae7bc0b6100e351 and the following amended ledger-only pointer commit must rerun the same checks before merge."
       }
     },
     "scope_validation": {
@@ -99185,8 +99185,23 @@
         "at": "2026-07-23T00:47:57Z",
         "status": "github_checks_pending",
         "note": "Exact-head review identified a valid P1: approval runtime paths could deploy while fap-queue-ops remained optional. Implementation head 158363ed06afc6a4033ffc78a9bf902bed511d85 now emits an approval-scope flag from cumulative classification and promotes the ops supervisor program to the fail-closed required set only for that scope. Focused validation passed 19 tests / 335 assertions, scoped syntax/Pint/YAML/diff checks passed, and the complete backend master CI exited 0. The following commit changes only this ledger pointer before exact-head GitHub checks; no deployment, restart, SSH, CMS/database/cache/Search or other external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:08:56Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified two valid P1 boundaries. Implementation head 15e0e30b492e7399960150121ae7bc0b6100e351 after the latest rebase now refuses deploy.yml in code_only unless its bytes match an external repository-variable SHA-256 receipt, and refuses the legacy systemd fallback whenever approval scope requires the supervisor ops worker. Focused validation passed 19 tests / 341 assertions, scoped syntax/Pint/YAML/diff checks passed, and the complete backend master CI exited 0. The following amended commit changes only this ledger pointer before exact-head GitHub checks; no repository variable was set and no deployment, restart, SSH, CMS/database/cache/Search or other external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:12:07Z",
+        "status": "github_checks_pending",
+        "note": "External PR #3212 advanced origin/main to d862379403efa05ce450bd75481be94905edfb43 while checks were starting. The branch was cleanly rebased; the sole ledger conflict retained main's merged Runtime Closeout 14 state and this task's independent record. Scope remains the same five paths, and exact-head checks must restart. No deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:28:50Z",
+        "status": "github_checks_pending",
+        "note": "External Career PR #3213 advanced origin/main to 31819becfcf8bda0b3fd9ae4f301b011e031374f immediately after the prior exact-head review. The branch was rebased again; the manifest conflict retained both main's Career item and this task's isolated item, while the state merge preserved both ledgers. Scope remains the same five paths, and exact-head checks must restart. No deployment or external mutation was executed."
       }
     ],
-    "updated_at": "2026-07-23T00:47:57Z"
+    "updated_at": "2026-07-23T01:28:50Z"
   }
 }
