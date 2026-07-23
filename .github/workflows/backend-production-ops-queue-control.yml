@@ -148,6 +148,7 @@ jobs:
                  and .deploy_like_process_count == 0
                  and .ops_pending_total == 0
                  and .program_present == false
+                 and .current_config_sha256 == "0000000000000000000000000000000000000000000000000000000000000000"
                  and .production_write_execution == false' "$receipt" >/dev/null
               ;;
             *)
@@ -298,6 +299,14 @@ jobs:
           [[ "$program_state" =~ ^(MISSING|RUNNING|NOT_RUNNING)$ ]]
           test "$ops_pending_total" = 0
           [[ "$current_config_sha256" =~ ^[0-9a-f]{64}$ ]]
+          zero_sha256="$(printf '0%.0s' {1..64})"
+          if [ "$program_present" = true ]; then
+            test "$program_state" = RUNNING
+            test "$current_config_sha256" = "$EXPECTED_RENDERED_SHA256"
+          else
+            test "$program_state" = MISSING
+            test "$current_config_sha256" = "$zero_sha256"
+          fi
           echo "program_present=$program_present" >> "$GITHUB_OUTPUT"
           echo "program_state=$program_state" >> "$GITHUB_OUTPUT"
           echo "ops_pending_total=$ops_pending_total" >> "$GITHUB_OUTPUT"
@@ -388,6 +397,7 @@ jobs:
           RENDERED_SHA256: ${{ steps.render.outputs.rendered_sha256 }}
           PROGRAM_PRESENT_BEFORE: ${{ steps.preflight.outputs.program_present }}
           PROGRAM_STATE_BEFORE: ${{ steps.preflight.outputs.program_state }}
+          CURRENT_CONFIG_SHA256_BEFORE: ${{ steps.preflight.outputs.current_config_sha256 }}
           OPS_PENDING_TOTAL: ${{ steps.preflight.outputs.ops_pending_total }}
         run: |
           set -euo pipefail
@@ -399,6 +409,7 @@ jobs:
             worker_start_count=0
             program_present="$PROGRAM_PRESENT_BEFORE"
             program_state="$PROGRAM_STATE_BEFORE"
+            current_config_sha256="$CURRENT_CONFIG_SHA256_BEFORE"
           else
             status=PASS_APPLY
             production_write=true
@@ -406,6 +417,7 @@ jobs:
             worker_start_count=1
             program_present=true
             program_state=RUNNING
+            current_config_sha256="$RENDERED_SHA256"
           fi
           jq -n \
             --arg contract_version "backend.production_ops_queue_control.v1" \
@@ -422,6 +434,7 @@ jobs:
             --argjson ops_pending_total "$OPS_PENDING_TOTAL" \
             --argjson program_present "$program_present" \
             --arg program_state "$program_state" \
+            --arg current_config_sha256 "$current_config_sha256" \
             --argjson production_write_execution "$production_write" \
             --argjson config_write_count "$config_write_count" \
             --argjson worker_start_count "$worker_start_count" \
@@ -440,6 +453,7 @@ jobs:
               ops_pending_total: $ops_pending_total,
               program_present: $program_present,
               program_state: $program_state,
+              current_config_sha256: $current_config_sha256,
               production_write_execution: $production_write_execution,
               config_write_count: $config_write_count,
               worker_start_count: $worker_start_count,
