@@ -209,7 +209,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString("task('guard:public-dns-health'", $deployer);
         $this->assertStringContainsString("before('deploy:symlink', 'guard:public-dns-health')", $deployer);
         $this->assertStringContainsString("task('healthcheck:public-dns'", $deployer);
-        $this->assertStringContainsString("after('healthcheck:public', 'healthcheck:public-dns')", $deployer);
+        $this->assertStringContainsString("after('healthcheck:sitemap-source', 'healthcheck:public-dns')", $deployer);
         $this->assertStringContainsString("currentHost()->getAlias() !== 'production'", $deployer);
         $this->assertStringContainsString('deployPublicDnsBusinessEvidenceCommand($host)', $deployer);
         $this->assertStringContainsString('curl -sS --connect-timeout 5 --max-time 15', $publicBusinessCommand);
@@ -293,7 +293,12 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
-            'candidate rebuild equivalence remains required before activation.',
+            'AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="cb248a673e4827a4dcaae3f41f74cffd50d99f73984286cb733e6ba0b935158b"',
+            $eligibility
+        );
+        $this->assertStringContainsString('CAREER_CACHE_REPAIR_REQUIRED=true', $eligibility);
+        $this->assertStringContainsString(
+            'pending atomic candidate repair and rollback protection.',
             $eligibility
         );
         $this->assertStringContainsString(
@@ -305,7 +310,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
-            'EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="468eb607a9d8a0a4c69cf18e2232a11d7bc8008932545f76a93900dfeedbaacf"',
+            'EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="e02a12517b69de48eab515d8ea9f48dadf6bb30345cfba0f99d0538d89b0de30"',
             $eligibility
         );
         $this->assertStringContainsString(
@@ -313,11 +318,23 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
-            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="e6beeebb64b6bc346e622b43400262239e76813936fb2363cb9ee85484446f13"',
+            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="253b471b6b5cfec1f57c77000b956cfac2e1f4baff28aef9d3760b32d94956a5"',
             $eligibility
         );
         $this->assertStringContainsString(
             'code-only scope refused an unreviewed Career candidate bootstrap runner hash.',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'backend/scripts/deploy/verify_sitemap_source_cache_warm.sh',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_SITEMAP_WARM_VERIFIER_SHA256="04f9d6b6b66b0be10a4996064cdf9150e1b0f1ec300edf93f87e8c0368ea0713"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed sitemap source-cache warm verifier hash.',
             $eligibility
         );
         $this->assertStringContainsString(
@@ -368,9 +385,20 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $workflow
         );
         $this->assertStringContainsString(
-            '--verify-live-public-cache --json --no-interaction --ansi',
+            '-o career_expected_candidate_summary_sha256="$CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256"',
+            $workflow
+        );
+        $this->assertStringContainsString(
+            '-o career_cache_repair_required="$CAREER_CACHE_REPAIR_REQUIRED"',
+            $workflow
+        );
+        $this->assertStringContainsString(
+            '--verify-live-public-cache%s --json --no-interaction --ansi',
             $deployer
         );
+        $this->assertStringContainsString('--repair-live-public-cache', $deployer);
+        $this->assertStringContainsString('--rollback-repair', $deployer);
+        $this->assertStringContainsString('--finalize-repair', $deployer);
         $revalidationPosition = strpos(
             $workflow,
             '- name: Revalidate live Career public-cache summary before activation'
