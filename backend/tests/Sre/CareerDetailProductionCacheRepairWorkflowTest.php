@@ -31,6 +31,7 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString('group: deploy-${{ github.repository }}-production', $source);
         $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('test "$GITHUB_REF" = "refs/heads/main"', $source);
+        $this->assertStringContainsString('test "$EXPECTED_ACTIVE_REVISION" != "$CANDIDATE_RELEASE_REVISION"', $source);
         $this->assertStringContainsString('ref: ${{ inputs.candidate_release_revision }}', $source);
         $this->assertStringContainsString('test "$(git rev-parse HEAD)" = "$CANDIDATE_RELEASE_REVISION"', $source);
         $this->assertStringContainsString('git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$CANDIDATE_RELEASE_REVISION"', $source);

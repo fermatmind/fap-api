@@ -88,6 +88,7 @@ jobs:
           [[ "$DEPLOY_PATH" != *".."* ]]
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
           [[ "$CANDIDATE_RELEASE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          test "$EXPECTED_ACTIVE_REVISION" != "$CANDIDATE_RELEASE_REVISION"
           [[ "$CANDIDATE_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
           [[ "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]
           [[ "$EXPECTED_MISSING_POINTER_COUNT" =~ ^(0|[1-9][0-9]{0,3})$ ]]
