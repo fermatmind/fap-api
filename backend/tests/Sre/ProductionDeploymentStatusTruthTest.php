@@ -63,18 +63,18 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('steps.latest_main_guard.outputs.eligible', $deploy);
     }
 
-    public function test_production_deploy_fails_closed_on_public_dns_health_before_and_after_activation(): void
+    public function test_production_deploy_uses_internal_health_and_public_business_evidence_before_and_after_activation(): void
     {
         $workflow = $this->workflow();
         $deploy = strstr($workflow, '  deploy-production:') ?: '';
         $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
-        $publicDnsCommand = $this->between(
+        $publicBusinessCommand = $this->between(
             $deployer,
-            'function deployPublicDnsHealthcheckCommand',
-            'function runProductionPublicDnsHealthcheck'
+            'function deployPublicDnsBusinessEvidenceCommand',
+            'function runProductionPublicDnsBusinessEvidence'
         );
 
-        $baselineOffset = strpos($deploy, '- name: Verify public-DNS health baseline');
+        $baselineOffset = strpos($deploy, '- name: Verify production health evidence baseline');
         $deployOffset = strpos($deploy, '- name: Deploy production with Deployer');
         $postDeployOffset = strpos($deploy, '- name: Healthcheck and contract smoke');
 
@@ -85,20 +85,41 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertLessThan($postDeployOffset, $deployOffset);
         $this->assertSame(2, substr_count(
             $deploy,
-            'curl -fsS --connect-timeout 5 --max-time 15 "$HEALTHCHECK_URL" | jq -e \'.ok==true\' >/dev/null'
+            'public_health_status="$(curl -sS --connect-timeout 5 --max-time 15'
         ));
-        $this->assertStringContainsString('Public DNS health baseline failed after 10 attempts', $deploy);
-        $this->assertStringContainsString('Public DNS healthcheck failed after 10 attempts', $deploy);
+        $this->assertSame(2, substr_count($deploy, '[ "$public_health_status" = "404" ]'));
+        $this->assertSame(2, substr_count($deploy, '${PUBLIC_API_ORIGIN}/api/v0.3/flags'));
+        $this->assertSame(2, substr_count(
+            $deploy,
+            '${PUBLIC_API_ORIGIN}/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'
+        ));
+        $this->assertSame(2, substr_count(
+            $deploy,
+            '.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$")'
+        ));
+        $this->assertStringContainsString('Production health evidence baseline failed after 10 attempts', $deploy);
+        $this->assertStringContainsString('Post-deploy public business evidence failed after 10 attempts', $deploy);
+        $this->assertStringNotContainsString(
+            'curl -fsS --connect-timeout 5 --max-time 15 "$HEALTHCHECK_URL" | jq -e \'.ok==true\'',
+            $deploy
+        );
 
         $this->assertStringContainsString("task('guard:public-dns-health'", $deployer);
         $this->assertStringContainsString("before('deploy:symlink', 'guard:public-dns-health')", $deployer);
         $this->assertStringContainsString("task('healthcheck:public-dns'", $deployer);
         $this->assertStringContainsString("after('healthcheck:public', 'healthcheck:public-dns')", $deployer);
         $this->assertStringContainsString("currentHost()->getAlias() !== 'production'", $deployer);
-        $this->assertStringContainsString('deployPublicDnsHealthcheckCommand($host)', $deployer);
-        $this->assertStringContainsString('curl -fsS --connect-timeout 5 --max-time 15', $publicDnsCommand);
-        $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/healthz')", $publicDnsCommand);
-        $this->assertStringNotContainsString('--resolve', $publicDnsCommand);
+        $this->assertStringContainsString('deployPublicDnsBusinessEvidenceCommand($host)', $deployer);
+        $this->assertStringContainsString('curl -sS --connect-timeout 5 --max-time 15', $publicBusinessCommand);
+        $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/healthz')", $publicBusinessCommand);
+        $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/v0.3/flags')", $publicBusinessCommand);
+        $this->assertStringContainsString(
+            "'/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'",
+            $publicBusinessCommand
+        );
+        $this->assertStringContainsString('[ "$public_health_status" = "404" ]', $publicBusinessCommand);
+        $this->assertStringContainsString('personality_public_content_asset_v1.source_hash', $publicBusinessCommand);
+        $this->assertStringNotContainsString('--resolve', $publicBusinessCommand);
     }
 
     public function test_auto_mode_is_fail_closed_to_a_cumulative_code_only_lane(): void
