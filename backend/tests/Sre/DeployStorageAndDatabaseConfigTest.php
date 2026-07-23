@@ -767,6 +767,18 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
         $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);
         $this->assertStringContainsString('approval runtime code_only deploy requires the supervisor ops queue reload path', $source);
+        $this->assertStringContainsString("set('queue_supervisor_ops_program_config', '/etc/supervisor/conf.d/fap-queue-ops.conf');", $source);
+        $this->assertStringContainsString("task('ensure:required-ops-queue-supervisor-program'", $source);
+        $this->assertStringContainsString('Approval execution worker for the database ops queue.', $source);
+        $this->assertStringContainsString('queue:work database --queue=ops --sleep=1 --tries=3 --timeout=120 --max-time=3600', $source);
+        $this->assertStringContainsString('rollback_ops_queue_config()', $source);
+        $this->assertStringContainsString('while [ "$attempt" -le 10 ]', $source);
+        $this->assertStringContainsString('ops queue Supervisor program is installed and RUNNING', $source);
+        $this->assertStringContainsString(
+            "after('ensure:required-ops-queue-supervisor-program', 'queue:reload-workers');",
+            $source
+        );
+        $this->assertStringNotContainsString("after('deploy:symlink', 'queue:reload-workers');", $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip nginx reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $source);

@@ -69,6 +69,7 @@ set('php_fpm_service', 'php8.4-fpm');
 set('queue_manager', 'supervisor');
 set('queue_reload_required', true);
 set('queue_supervisorctl', '/usr/bin/supervisorctl');
+set('queue_supervisor_ops_program_config', '/etc/supervisor/conf.d/fap-queue-ops.conf');
 set('queue_supervisor_required_programs', [
     'fap-queue-default-high',
     'fap-queue-reports',
@@ -1002,6 +1003,122 @@ task('reload:nginx', function () {
     run('sudo -n /usr/bin/systemctl reload nginx');
 });
 
+task('ensure:required-ops-queue-supervisor-program', function () {
+    if (! (deployIsCodeOnly() && deployBooleanOption('require_ops_queue_reload', false))) {
+        return;
+    }
+
+    if (strtolower(trim((string) get('queue_manager', 'supervisor'))) !== 'supervisor') {
+        throw new \RuntimeException('approval runtime code_only deploy requires the Supervisor ops queue topology');
+    }
+
+    $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
+    if (! test('[ -x '.escapeshellarg($supervisorctl).' ] || command -v supervisorctl >/dev/null 2>&1')) {
+        throw new \RuntimeException('approval runtime code_only deploy requires supervisorctl before ops queue bootstrap');
+    }
+
+    $resolvedSupervisorctl = trim((string) run(
+        'if [ -x '.escapeshellarg($supervisorctl).' ]; then echo '.escapeshellarg($supervisorctl).'; else command -v supervisorctl; fi'
+    ));
+    $configPath = deploySafeAbsolutePath(
+        (string) get('queue_supervisor_ops_program_config', '/etc/supervisor/conf.d/fap-queue-ops.conf'),
+        'queue_supervisor_ops_program_config'
+    );
+    $deployPath = rtrim(deploySafeAbsolutePath((string) get('deploy_path'), 'deploy_path'), '/');
+    $workerUser = currentHost()->getRemoteUser() ?: 'ubuntu';
+
+    if (preg_match('/^[a-z_][a-z0-9_-]*[$]?$/i', $workerUser) !== 1) {
+        throw new \RuntimeException('invalid ops queue Supervisor worker user');
+    }
+
+    $configBody = <<<CONF
+# Managed by fap-api deploy. Approval execution worker for the database ops queue.
+[program:fap-queue-ops]
+directory={$deployPath}/current/backend
+command=/usr/bin/php8.4 artisan queue:work database --queue=ops --sleep=1 --tries=3 --timeout=120 --max-time=3600
+user={$workerUser}
+numprocs=1
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+redirect_stderr=true
+stdout_logfile={$deployPath}/shared/backend/storage/logs/queue-ops.log
+stopwaitsecs=130
+CONF;
+
+    $command = strtr(<<<'BASH'
+set -euo pipefail
+tmp_config="$(mktemp)"
+backup_config="$(mktemp)"
+config_path=__CONFIG_PATH__
+config_existed=0
+trap 'rm -f "$tmp_config" "$backup_config"' EXIT
+
+printf %s __ENCODED_CONFIG__ | base64 -d > "$tmp_config"
+test -s "$tmp_config"
+sudo -n test -d "$(dirname "$config_path")"
+
+rollback_ops_queue_config() {
+    if [ "$config_existed" = "1" ]; then
+        sudo -n cp -p "$backup_config" "$config_path"
+    else
+        sudo -n rm -f "$config_path"
+    fi
+    sudo -n __SUPERVISORCTL__ reread >/dev/null 2>&1 || true
+    sudo -n __SUPERVISORCTL__ update >/dev/null 2>&1 || true
+}
+
+if sudo -n test -f "$config_path"; then
+    config_existed=1
+    sudo -n cp -p "$config_path" "$backup_config"
+fi
+
+sudo -n cp "$tmp_config" "$config_path"
+
+if ! sudo -n __SUPERVISORCTL__ reread; then
+    rollback_ops_queue_config
+    echo "ops queue Supervisor config reread failed; restored previous state" >&2
+    exit 1
+fi
+
+if ! sudo -n __SUPERVISORCTL__ update; then
+    rollback_ops_queue_config
+    echo "ops queue Supervisor config update failed; restored previous state" >&2
+    exit 1
+fi
+
+sudo -n __SUPERVISORCTL__ start 'fap-queue-ops:*' >/dev/null 2>&1 \
+    || sudo -n __SUPERVISORCTL__ start 'fap-queue-ops' >/dev/null 2>&1 \
+    || true
+
+ops_queue_running=0
+attempt=1
+while [ "$attempt" -le 10 ]; do
+    if (sudo -n __SUPERVISORCTL__ status 'fap-queue-ops:*' 2>/dev/null || sudo -n __SUPERVISORCTL__ status 'fap-queue-ops' 2>/dev/null) | grep -q 'RUNNING'; then
+        ops_queue_running=1
+        break
+    fi
+    attempt=$((attempt + 1))
+    sleep 1
+done
+
+if [ "$ops_queue_running" != "1" ]; then
+    rollback_ops_queue_config
+    echo "ops queue Supervisor program is not RUNNING; restored previous state" >&2
+    exit 1
+fi
+
+echo "ops queue Supervisor program is installed and RUNNING"
+BASH, [
+        '__CONFIG_PATH__' => escapeshellarg($configPath),
+        '__ENCODED_CONFIG__' => escapeshellarg(base64_encode($configBody)),
+        '__SUPERVISORCTL__' => escapeshellarg($resolvedSupervisorctl),
+    ]);
+
+    run($command);
+});
+
 task('queue:reload-workers', function () {
     $codeOnly = deployIsCodeOnly();
     $reloadRequired = deployBooleanOption('queue_reload_required', true);
@@ -1884,7 +2001,8 @@ after('guard:public-content-release', 'ensure:release-runtime-perms');
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
-after('deploy:symlink', 'queue:reload-workers');
+after('deploy:symlink', 'ensure:required-ops-queue-supervisor-program');
+after('ensure:required-ops-queue-supervisor-program', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('healthcheck:public', 'healthcheck:sitemap-source');
 after('healthcheck:sitemap-source', 'healthcheck:public-dns');
