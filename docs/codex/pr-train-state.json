@@ -99717,5 +99717,64 @@
       }
     ],
     "updated_at": "2026-07-23T07:44:26Z"
+  },
+  "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01": {
+    "id": "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-per02-mbti-en64-internal-link-promotion-01",
+    "title": "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01: add revision-bound MBTI EN64 internal-link promotion and rollback",
+    "depends_on": [],
+    "status": "local_validation_passed",
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "No manifest dependency; implementation started from exact origin/main 03480a1b30284af17b03a0fb853c44641c84fb17."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "This PR implements code, tests and train metadata only. No production review binding, CMS/database write, promotion, rollback, cache action, deploy, publication, sitemap/llms or Search action is authorized or executed."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused promotion and review-policy tests passed 26 tests / 457 assertions. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact five-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-24T00:00:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 03480a1b30284af17b03a0fb853c44641c84fb17 in an isolated clean worktree. Scope is limited to the revision-bound MBTI EN64 promotion command, service, focused test and train metadata; no production or content mutation is authorized or attempted."
+      },
+      {
+        "at": "2026-07-23T22:24:26Z",
+        "status": "local_validation_passed",
+        "note": "The exact revision-bound command and service now fail closed across dry-run, separate review binding, promotion, rollback and cache-closeout-only modes. All manifest checks passed; no production review, CMS/database write, cache action, deploy, publication/indexability mutation, sitemap/llms release or Search action occurred."
+      }
+    ],
+    "updated_at": "2026-07-23T22:24:26Z"
   }
 }
