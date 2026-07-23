@@ -183,7 +183,11 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertSame('repair_queued_complete', $report['status']);
         $this->assertSame(2, $report['repair']['queued_jobs']);
         Queue::assertPushed(WarmCareerJobDetailProjection::class, 2);
-        Queue::assertPushed(WarmCareerJobDetailProjection::class, static fn (WarmCareerJobDetailProjection $job): bool => $job->slug === 'missing');
+        Queue::assertPushed(
+            WarmCareerJobDetailProjection::class,
+            static fn (WarmCareerJobDetailProjection $job): bool => $job->slug === 'missing'
+                && $job->queue === 'default',
+        );
         foreach (['en', 'zh-CN'] as $index => $locale) {
             $this->assertSame($activeVersions[$index], Cache::get($cache->jobDetailActiveVersionKey('active', $locale)));
             $this->assertTrue(Cache::has($cache->jobDetailCacheKey('legacy', $locale)));

@@ -1,0 +1,263 @@
+name: Career detail production cache repair
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "verify_only is read-only; enqueue_and_wait dispatches bounded cache-only repair and requires full readback"
+        required: true
+        default: verify_only
+        type: choice
+        options:
+          - verify_only
+          - enqueue_and_wait
+      expected_active_revision:
+        description: "Exact 40-character REVISION currently active on production"
+        required: true
+        type: string
+      candidate_release_revision:
+        description: "Exact 40-character REVISION materialized in the inactive candidate release"
+        required: true
+        type: string
+      candidate_release_name:
+        description: "Exact inactive Deployer release directory name"
+        required: true
+        type: string
+      expected_missing_pointer_count:
+        description: "Exact read-only preflight missing_pointer_count (0-2092)"
+        required: true
+        default: "2090"
+        type: string
+      operator_approval_phrase:
+        description: "Required only for enqueue_and_wait; must match the exact revision/count-bound phrase"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  production-cache-repair:
+    name: Career detail production cache repair (${{ inputs.mode }})
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 45
+    concurrency:
+      group: deploy-${{ github.repository }}-production
+      cancel-in-progress: false
+    env:
+      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      MINIMUM_TARGETS: "2092"
+      REPAIR_BATCH_SIZE: "250"
+
+    steps:
+      - name: Validate exact production cache operation contract
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$CANDIDATE_RELEASE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$CANDIDATE_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$EXPECTED_MISSING_POINTER_COUNT" =~ ^(0|[1-9][0-9]{0,3})$ ]]
+          test "$EXPECTED_MISSING_POINTER_COUNT" -le "$MINIMUM_TARGETS"
+
+          case "$MODE" in
+            verify_only)
+              if [ -n "$OPERATOR_APPROVAL_PHRASE" ]; then
+                echo "verify_only refuses an operator approval phrase." >&2
+                exit 2
+              fi
+              ;;
+            enqueue_and_wait)
+              test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
+              expected_phrase="I explicitly approve production Career detail cache repair with active SHA ${EXPECTED_ACTIVE_REVISION} using inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; cache/queue-only, no CMS/DB-authority/publication/indexability/sitemap/llms/search."
+              if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
+                echo "operator_approval_phrase does not match the exact production cache repair authorization." >&2
+                exit 2
+              fi
+              ;;
+            *)
+              echo "unsupported mode: $MODE" >&2
+              exit 2
+              ;;
+          esac
+
+      - name: Check out exact candidate revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: ${{ inputs.candidate_release_revision }}
+          persist-credentials: false
+
+      - name: Verify checked-out candidate revision
+        shell: bash
+        env:
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_RELEASE_REVISION"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Verify exact active and inactive production releases
+        shell: bash
+        env:
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test \"\$(tr -d '\\r\\n' < \"\$candidate/REVISION\")\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+
+      - name: Read-only exact coverage preflight
+        shell: bash
+        env:
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --json --no-interaction --no-ansi" \
+            > artifacts/preflight.json
+          command_status=$?
+          set -e
+          if [ "$command_status" -ne 0 ] && [ "$command_status" -ne 1 ]; then
+            echo "coverage preflight failed unexpectedly with exit $command_status" >&2
+            exit "$command_status"
+          fi
+
+          jq -e \
+            --argjson expected_missing "$EXPECTED_MISSING_POINTER_COUNT" \
+            --argjson expected_targets "$MINIMUM_TARGETS" \
+            '.contract_version == "career.job_detail_cache_coverage.v1"
+             and .expected_target_count == $expected_targets
+             and .eligible_target_count == $expected_targets
+             and .minimum_target_count_met == true
+             and .missing_pointer_count == $expected_missing
+             and .missing_payload_count == 0
+             and .broken_count == 0
+             and .excluded_count == 0
+             and .covered_target_count == ($expected_targets - $expected_missing)' \
+            artifacts/preflight.json >/dev/null
+
+      - name: Enqueue complete bounded repair pass
+        if: inputs.mode == 'enqueue_and_wait'
+        shell: bash
+        env:
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "test \"\$(sudo -n /usr/bin/supervisorctl status 'fap-queue-default-high:*' | grep -c ' RUNNING ')\" -ge 1"
+          resume_key="production-bootstrap-${CANDIDATE_RELEASE_REVISION}"
+          completed=false
+          for batch in $(seq 1 9); do
+            reset_flag=""
+            if [ "$batch" -eq 1 ]; then
+              reset_flag="--reset"
+            fi
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --batch-size=$REPAIR_BATCH_SIZE --resume-key='$resume_key' $reset_flag --confirm-production-write --json --no-interaction --no-ansi" \
+              | tee "artifacts/repair-batch-${batch}.json"
+            remaining="$(jq -r '.repair.remaining_targets' "artifacts/repair-batch-${batch}.json")"
+            if [ "$remaining" = "0" ]; then
+              completed=true
+              break
+            fi
+          done
+          test "$completed" = true
+
+      - name: Wait for exact full coverage
+        if: inputs.mode == 'enqueue_and_wait'
+        shell: bash
+        env:
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+        run: |
+          set -euo pipefail
+          ready=false
+          for _attempt in $(seq 1 90); do
+            set +e
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --json --no-interaction --no-ansi" \
+              > artifacts/post-repair-latest.json
+            command_status=$?
+            set -e
+            if [ "$command_status" -eq 0 ] && jq -e '.status == "ready"' artifacts/post-repair-latest.json >/dev/null; then
+              ready=true
+              break
+            fi
+            if [ "$command_status" -ne 0 ] && [ "$command_status" -ne 1 ]; then
+              exit "$command_status"
+            fi
+            sleep 20
+          done
+          test "$ready" = true
+          jq -e \
+            --argjson expected_targets "$MINIMUM_TARGETS" \
+            '.status == "ready"
+             and .expected_target_count == $expected_targets
+             and .eligible_target_count == $expected_targets
+             and .covered_target_count == $expected_targets
+             and .missing_count == 0
+             and .broken_count == 0
+             and .excluded_count == 0
+             and .coverage_ratio == 1' \
+            artifacts/post-repair-latest.json >/dev/null
+
+      - name: Upload production cache repair receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: career-detail-production-cache-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/
+          if-no-files-found: ignore
+          retention-days: 30

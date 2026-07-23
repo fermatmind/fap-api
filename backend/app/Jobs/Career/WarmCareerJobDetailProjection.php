@@ -26,7 +26,7 @@ final class WarmCareerJobDetailProjection implements ShouldBeUnique, ShouldQueue
         public readonly string $slug,
         public readonly string $locale,
     ) {
-        $this->onQueue('career-cache');
+        $this->onQueue('default');
     }
 
     public function uniqueId(): string

@@ -50,6 +50,34 @@ Production repair remains a controlled write boundary and additionally requires
 capability only; it does not authorize or execute a production repair, deployment,
 CMS/DB write, or publication change.
 
+Repair jobs are routed explicitly to the managed `default` queue. The production
+Supervisor baseline consumes `high,default`; no separate `career-cache` worker is
+required.
+
+## Controlled production bootstrap
+
+The `Career detail production cache repair` workflow is the only repository
+workflow for recovering a large production pointer gap before a standard deploy.
+It supports:
+
+- `verify_only`, which performs no cache or queue write;
+- `enqueue_and_wait`, which requires an exact approval phrase bound to the active
+  SHA, inactive candidate SHA and release, and expected preflight missing-pointer
+  count;
+- stable batches of at most 250 targets across the full 2,092-target cohort;
+- final read-only verification requiring 2,092 covered targets, zero missing or
+  broken targets, and coverage ratio 1.0.
+
+The workflow uses the same production concurrency group as deployment, verifies
+that no deploy lock exists, and runs the repair command from the exact inactive
+candidate release. It writes only cache repair cursors, queue rows, and versioned
+Career detail cache payloads/pointers. It does not mutate CMS/database authority,
+publication, indexability, sitemap, llms, or Search Channel state.
+
+The workflow does not weaken or bypass the read-only deploy activation gate.
+After a successful repair receipt, a standard deploy must still rerun the normal
+coverage guard before moving the production symlink.
+
 ## Deployment activation gate
 
 Every Deployer release runs the read-only coverage command before
