@@ -5,20 +5,40 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Console\Commands\PersonalityBigFiveLegacyAliasesPurge;
+use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\BigFive\AuthorityV2\RangeIa\BigFiveLegacyAliasHardPurge;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
+use App\Services\SEO\SitemapCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use RuntimeException;
 use Tests\TestCase;
 
 final class BigFiveLegacyAliasHardPurgeTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'https://frontend.test/api/content-release/revalidate');
+        config()->set('ops.content_release_observability.hmac_revalidation_secret', str_repeat('s', 32));
+        Http::fake([
+            'https://frontend.test/api/content-release/revalidate' => Http::response([
+                'ok' => true,
+                'revalidated_paths' => ['/llms.txt', '/llms-full.txt'],
+                'rejected_paths' => [],
+            ]),
+        ]);
+    }
 
     public function test_preflight_finds_exact_twenty_aliases_without_writes(): void
     {
@@ -196,6 +216,12 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         self::assertSame(0, $summary['non_target_personality_rows_changed']);
         self::assertSame(0, $summary['media_library_write_count']);
         self::assertSame(0, $summary['search_submission_write_count']);
+        self::assertTrue($summary['cache_closeout_ok']);
+        self::assertSame('PASS_CACHE_CLOSEOUT', $summary['cache_closeout_status']);
+        self::assertSame(2, $summary['cache_closeout']['personality_collection_cache']['invalidated_locale_count']);
+        self::assertSame(20, $summary['cache_closeout']['legacy_alias_detail_cache']['invalidated_target_count']);
+        self::assertSame(4, $summary['cache_closeout']['discoverability_cache']['invalidated_key_count']);
+        self::assertSame(2, $summary['cache_closeout']['frontend_llms_cache']['accepted_path_count']);
         self::assertDatabaseCount('personality_public_content_asset_revisions', 0);
         self::assertDatabaseCount('personality_public_content_asset_revision_reviews', 0);
         self::assertSame($canonicalBefore, $this->canonicalFingerprint());
@@ -205,6 +231,80 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             ->assertOk()->assertJsonCount(52, 'items');
         $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=zh-CN&org_id=0&per_page=100')
             ->assertOk()->assertJsonCount(52, 'items');
+    }
+
+    public function test_execute_commits_database_and_reports_partial_closeout_when_frontend_cache_fails(): void
+    {
+        $this->seedBoundary();
+        [$path, $sha] = $this->writeBackupManifest();
+        config()->set('ops.content_release_observability.hmac_revalidation_url', '');
+
+        $summary = app(BigFiveLegacyAliasHardPurge::class)->run(true, 1, $path, $sha);
+
+        self::assertSame('PARTIAL_CACHE_CLOSEOUT', $summary['status']);
+        self::assertTrue($summary['writes_committed']);
+        self::assertFalse($summary['cache_closeout_ok']);
+        self::assertSame(0, $summary['legacy_alias_asset_count']);
+        self::assertDatabaseCount('personality_public_content_assets', 104);
+        self::assertNotEmpty($summary['errors']);
+    }
+
+    public function test_cache_closeout_only_is_idempotent_and_never_changes_database_or_unrelated_cache(): void
+    {
+        $this->seedBoundary(includeAliases: false);
+        $before = $this->databaseFingerprint();
+        Cache::put('unrelated:sentinel', 'keep', 600);
+
+        $first = app(BigFiveLegacyAliasHardPurge::class)->runCacheCloseoutOnly(1);
+        $second = app(BigFiveLegacyAliasHardPurge::class)->runCacheCloseoutOnly(1);
+
+        self::assertSame('PASS_CACHE_CLOSEOUT_ONLY', $first['status']);
+        self::assertSame('PASS_CACHE_CLOSEOUT_ONLY', $second['status']);
+        self::assertFalse($first['writes_committed']);
+        self::assertFalse($first['cache_closeout']['database_writes_committed']);
+        self::assertSame($before, $this->databaseFingerprint());
+        self::assertSame('keep', Cache::get('unrelated:sentinel'));
+    }
+
+    public function test_cache_closeout_only_rejects_before_alias_database_rows_are_purged(): void
+    {
+        $this->seedBoundary();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('requires all twenty legacy alias rows to be absent');
+        app(BigFiveLegacyAliasHardPurge::class)->runCacheCloseoutOnly(1);
+    }
+
+    public function test_execute_invalidates_locked_backend_cache_families_and_preserves_unrelated_cache(): void
+    {
+        $this->seedBoundary();
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $cache->put('index', 'big_five', 'polarity', 'page=1', $locale, 0, 'v1', ['stale' => true]);
+            $cache->put('detail-code', 'big_five', 'polarity', 'high-openness', $locale, 0, 'v1', ['stale' => true]);
+            $cache->put('detail-slug', 'big_five', 'slug', 'big-five/high-openness', $locale, 0, 'v1', ['stale' => true]);
+        }
+        Cache::put(SitemapSourceController::CACHE_KEY_FRESH, ['stale' => true], 600);
+        Cache::put(SitemapSourceController::CACHE_KEY_STALE, ['stale' => true], 600);
+        Cache::put(SitemapCache::XML_CACHE_KEY, '<stale/>', 600);
+        Cache::put(SitemapCache::ETAG_CACHE_KEY, 'stale', 600);
+        Cache::put('unrelated:sentinel', 'keep', 600);
+        [$path, $sha] = $this->writeBackupManifest();
+
+        $summary = app(BigFiveLegacyAliasHardPurge::class)->run(true, 1, $path, $sha);
+
+        self::assertSame('PASS_PURGED', $summary['status']);
+        foreach ([SitemapSourceController::CACHE_KEY_FRESH, SitemapSourceController::CACHE_KEY_STALE, SitemapCache::XML_CACHE_KEY, SitemapCache::ETAG_CACHE_KEY] as $key) {
+            self::assertNull(Cache::get($key));
+        }
+        foreach (['en', 'zh-CN'] as $locale) {
+            self::assertNull(Cache::get($cache->activeKey('index', 'big_five', 'polarity', 'page=1', $locale)));
+            self::assertNull(Cache::get($cache->lkgKey('index', 'big_five', 'polarity', 'page=1', $locale)));
+            self::assertNull(Cache::get($cache->activeKey('detail-code', 'big_five', 'polarity', 'high-openness', $locale)));
+            self::assertNull(Cache::get($cache->activeKey('detail-slug', 'big_five', 'slug', 'big-five/high-openness', $locale)));
+        }
+        self::assertSame('keep', Cache::get('unrelated:sentinel'));
+        Http::assertSentCount(1);
     }
 
     public function test_command_requires_exact_confirmation_operator_and_backup(): void
@@ -228,6 +328,24 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         ])->assertSuccessful()
             ->expectsOutputToContain('status=PASS_PURGED')
             ->expectsOutputToContain('deleted_asset_count=20');
+    }
+
+    public function test_command_cache_closeout_only_requires_exact_confirmation_and_is_read_only(): void
+    {
+        $this->seedBoundary(includeAliases: false);
+        $before = $this->databaseFingerprint();
+
+        $this->artisan('personality:big-five-legacy-aliases-purge', [
+            '--cache-closeout-only' => true,
+            '--operator-admin-user-id' => 1,
+        ])->assertFailed();
+        $this->artisan('personality:big-five-legacy-aliases-purge', [
+            '--cache-closeout-only' => true,
+            '--confirm' => PersonalityBigFiveLegacyAliasesPurge::CACHE_CLOSEOUT_CONFIRMATION,
+            '--operator-admin-user-id' => 1,
+        ])->assertSuccessful()->expectsOutputToContain('status=PASS_CACHE_CLOSEOUT_ONLY');
+
+        self::assertSame($before, $this->databaseFingerprint());
     }
 
     public function test_sitemap_keeps_only_104_canonical_big_five_paths(): void

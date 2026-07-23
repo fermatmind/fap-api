@@ -26,6 +26,10 @@ final class BigFiveLegacyAliasHardPurge
 
     private const EXPECTED_CANONICAL_COUNT_PER_LOCALE = 52;
 
+    public function __construct(
+        private readonly BigFiveLegacyAliasCacheCloseout $cacheCloseout,
+    ) {}
+
     /** @return array<string,mixed> */
     public function run(
         bool $execute,
@@ -46,7 +50,7 @@ final class BigFiveLegacyAliasHardPurge
             throw new RuntimeException('Legacy alias hard purge is locked to operator admin_user:1.');
         }
 
-        return DB::transaction(function () use (
+        $databaseResult = DB::transaction(function () use (
             $operatorAdminUserId,
             $backupManifestPath,
             $backupManifestSha256,
@@ -103,6 +107,29 @@ final class BigFiveLegacyAliasHardPurge
                 ],
             );
         }, 1);
+
+        return $this->withCacheCloseout($databaseResult, $this->cacheCloseout->closeout());
+    }
+
+    /** @return array<string,mixed> */
+    public function runCacheCloseoutOnly(int $operatorAdminUserId): array
+    {
+        $this->assertSchema();
+        if ($operatorAdminUserId !== 1) {
+            throw new RuntimeException('Legacy alias cache closeout is locked to operator admin_user:1.');
+        }
+        $inspection = $this->inspect(lockForUpdate: false);
+        if ($inspection['alias_count'] !== 0) {
+            throw new RuntimeException('Cache-closeout-only requires all twenty legacy alias rows to be absent.');
+        }
+
+        $cache = $this->cacheCloseout->closeout();
+
+        return $this->withCacheCloseout(
+            $this->summary($inspection, 'PASS_CACHE_CLOSEOUT_ONLY', false, true),
+            $cache,
+            cacheOnly: true,
+        );
     }
 
     /**
@@ -523,6 +550,21 @@ final class BigFiveLegacyAliasHardPurge
             'errors' => [],
             ...$extra,
         ];
+    }
+
+    /** @param array<string,mixed> $summary @param array<string,mixed> $cache @return array<string,mixed> */
+    private function withCacheCloseout(array $summary, array $cache, bool $cacheOnly = false): array
+    {
+        $ok = ($cache['ok'] ?? false) === true;
+        $summary['status'] = $ok
+            ? ($cacheOnly ? 'PASS_CACHE_CLOSEOUT_ONLY' : 'PASS_PURGED')
+            : 'PARTIAL_CACHE_CLOSEOUT';
+        $summary['cache_closeout_status'] = $cache['status'] ?? 'PARTIAL_CACHE_CLOSEOUT';
+        $summary['cache_closeout_ok'] = $ok;
+        $summary['cache_closeout'] = $cache;
+        $summary['errors'] = $cache['errors'] ?? ['Cache closeout returned no error evidence.'];
+
+        return $summary;
     }
 
     private function assertSchema(): void
