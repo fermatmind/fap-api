@@ -8,8 +8,8 @@
     "depends_on": [
       "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
+    "status": "github_checks_pending",
+    "commit_sha": "76696ebf3f66cdc43228926f447f86e971960591",
     "pr_url": null,
     "checks": {
       "authorization": {
@@ -22,7 +22,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused publish-track resolver, full-dataset authority, Dataset API, batch manifest validator, and 1046/2092 directory/held regression suites passed 19 tests / 508 assertions. PHP syntax, 224-line API route inventory, scoped Pint, Composer strict validation/audit, reconciliation JSON, train YAML/state JSON, git diff, and exact allowed-path scope checks passed. No production, CMS/database, sitemap, indexability, runtime cohort, Search Channel, or URL-submission action occurred."
+        "evidence": "After rebasing onto latest origin/main, focused publish-track resolver, full-dataset authority, Dataset API, batch manifest validator, and 1046/2092 directory/held regression suites passed 19 tests / 506 assertions. PHP syntax, 224-line API route inventory, scoped Pint, Composer strict validation/audit, reconciliation JSON, train YAML/state JSON, git diff, and exact allowed-path scope checks passed. No production, CMS/database, sitemap, indexability, runtime cohort, Search Channel, or URL-submission action occurred."
       },
       "github_required_checks": {
         "status": "pending",
@@ -61,10 +61,15 @@
       {
         "at": "2026-07-23T04:00:00Z",
         "status": "local_validation_passed",
-        "note": "Implemented the locked batch → current first-wave → runtime projection → explicit reconciliation resolution order, explicit review_needed records for exactly three audited gaps, fail-closed historical first-wave conflicts, and a review_needed fallback for any future unresolved member. Focused suites passed 19 tests/508 assertions; syntax, 224 API routes, Pint, Composer validation/audit, parsers, diff, and exact-path scope passed. The 1046/2092 directory gate and software-developers held exclusion remain green. No controlled production action occurred."
+        "note": "Implemented the locked batch → current first-wave → runtime projection → explicit reconciliation resolution order, explicit review_needed records for exactly three audited gaps, fail-closed historical first-wave conflicts, and a review_needed fallback for any future unresolved member. Focused suites passed 19 tests/506 assertions after rebasing onto latest origin/main; syntax, 224 API routes, Pint, Composer validation/audit, parsers, diff, and exact-path scope passed. The 1046/2092 directory gate and software-developers held exclusion remain green. No controlled production action occurred."
+      },
+      {
+        "at": "2026-07-23T04:10:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact eight-path PR3 implementation, rebased cleanly onto latest origin/main 49038deb5, and revalidated the focused 19-test/506-assertion scope at implementation head 76696ebf3f66cdc43228926f447f86e971960591. Push and PR creation follow; merge remains gated on required GitHub checks, clean scope, mergeability, and resolved actionable review. This following commit changes only the PR3 ledger transition."
       }
     ],
-    "updated_at": "2026-07-23T04:00:00Z"
+    "updated_at": "2026-07-23T04:10:00Z"
   },
   "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01": {
     "id": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",
