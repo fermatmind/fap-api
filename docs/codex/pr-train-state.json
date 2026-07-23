@@ -99656,7 +99656,7 @@
     "depends_on": [
       "MBTI-CROSS-PUBLISHER-49"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "pending_remote_pr_head",
     "pr_url": null,
     "checks": {
@@ -99673,14 +99673,14 @@
         "evidence": "DB-only authority tests passed 5 tests / 79 assertions; the full PersonalityPublicApiTest passed 50 tests / 3907 assertions including all 16 A/T projections; focused runtime-freeze checks passed 2 tests / 5 assertions. PHP syntax, scoped Pint, Composer strict validation/audit, route inventory, full SQLite migrations, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks, and exact five-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
-        "status": "not_started",
-        "evidence": null
+        "status": "passed",
+        "evidence": "All nine required CI and security checks passed on exact head b1fab1696c623ca70f025bae5cf4d6c22a64f8ee. GitHub reports CLEAN/MERGEABLE, exact diff is the five allowed paths, no review threads exist, and exact-head inspection found no unresolved issue."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99709,8 +99709,13 @@
         "at": "2026-07-23T07:29:41Z",
         "status": "github_checks_pending",
         "note": "All local validation and exact five-path scope checks passed. Implementation commit 90b78bcee was pushed and PR #3229 opened; pending_remote_pr_head avoids a self-referential ledger SHA. Required GitHub checks and exact-head review remain mandatory before merge."
+      },
+      {
+        "at": "2026-07-23T07:44:26Z",
+        "status": "ready_to_merge",
+        "note": "Exact head b1fab1696c623ca70f025bae5cf4d6c22a64f8ee passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the five allowed paths, no review threads exist, and exact-head inspection found no unresolved issue. This following ledger-only transition must rerun all required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-23T07:29:41Z"
+    "updated_at": "2026-07-23T07:44:26Z"
   }
 }
