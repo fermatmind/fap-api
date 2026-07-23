@@ -71,6 +71,12 @@ public sitemap/llms surfaces, and the 104 canonical plus 20 redirect-only public
 artifact. The generic production verify-only runner must capture sanitized JSON stdout into its runner-side
 artifact after separately validating that the approved SHA is contained by `main`.
 
+The discoverability cohort is the exact 104-path union returned by `BigFiveCanonicalRouteCatalog` for `en`
+and `zh-CN`. Independent ContentPage URLs such as `/zh/personality/big-five/methodology` and
+`/zh/personality/big-five/source-review-policy` may remain public but are not counted as Personality assets.
+All 20 reviewed legacy alias paths remain forbidden on sitemap source, sitemap, `llms.txt`, and
+`llms-full.txt`; a missing or duplicate canonical path also fails verification.
+
 Every verifier request to the backend public API carries a short-lived HMAC signature bound to the exact
 HTTPS API origin and GET request URI. The public personality read-model cache recognizes only a valid signature produced with
 the deployed application key and bypasses all cache reads, locks, pointer refreshes, and cache writes for

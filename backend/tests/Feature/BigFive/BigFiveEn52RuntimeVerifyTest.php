@@ -75,6 +75,9 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         $this->assertSame(0, $result['canonical_redirect_count']);
         $this->assertSame(0, $result['media_exposure_count']);
         $this->assertSame(0, $result['search_action_count']);
+        $this->assertSame(104, $result['sitemap_canonical_cohort_count']);
+        $this->assertSame(104, $result['llms_canonical_cohort_count']);
+        $this->assertSame(104, $result['llms_full_canonical_cohort_count']);
         $this->assertFalse($result['writes_committed']);
         $this->assertSame($before, $this->databaseBytes());
         foreach (Http::recorded() as [$request]) {
@@ -253,7 +256,30 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
 
             $this->fakeHealthyPublicRuntime(rejectedExtraSurface: $surface);
             $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), 'discoverability_url_invalid');
+
+            $this->fakeHealthyPublicRuntime(
+                additionalSurfacePaths: ['/en/personality/big-five/high-openness'],
+                additionalOnlySurface: $surface,
+            );
+            $this->expectFailureCode(fn () => $verifier->verify($approval, $this->identity()), $error);
         }
+    }
+
+    public function test_independent_technical_content_pages_do_not_expand_the_canonical_cohort(): void
+    {
+        $this->seedAndPublish();
+        $verifier = app(BigFiveEn52RuntimeVerifier::class);
+        $approval = $this->approval($verifier);
+        $this->fakeHealthyPublicRuntime(additionalSurfacePaths: [
+            '/zh/personality/big-five/methodology',
+            '/zh/personality/big-five/source-review-policy',
+        ]);
+
+        $result = $verifier->verify($approval, $this->identity());
+
+        $this->assertSame(104, $result['sitemap_canonical_cohort_count']);
+        $this->assertSame(104, $result['llms_canonical_cohort_count']);
+        $this->assertSame(104, $result['llms_full_canonical_cohort_count']);
     }
 
     public function test_sitemap_uses_only_url_loc_entries_for_the_exact_cohort(): void
@@ -415,6 +441,8 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
         ?string $rejectedExtraSurface = null,
         ?string $brokenDetailPath = null,
         ?string $driftDetailPath = null,
+        array $additionalSurfacePaths = [],
+        ?string $additionalOnlySurface = null,
     ): void {
         Http::swap(new Factory);
         Http::preventStrayRequests();
@@ -423,7 +451,7 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
             ? array_values(array_diff($completePaths, [$omitPath]))
             : $completePaths;
         $aliases = BigFiveCanonicalRouteCatalog::reviewedRedirectPaths();
-        Http::fake(function (ClientRequest $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath, $rejectedExtraSurface, $brokenDetailPath, $driftDetailPath) {
+        Http::fake(function (ClientRequest $request) use ($allPaths, $aliases, $completePaths, $omitPath, $omitOnlySurface, $redirectStatus, $duplicateSurface, $queryAliasLocation, $sitemapNonLocOnlyPath, $rejectedExtraSurface, $brokenDetailPath, $driftDetailPath, $additionalSurfacePaths, $additionalOnlySurface) {
             $url = $request->url();
             $path = (string) parse_url($url, PHP_URL_PATH);
             if ($path === '/api/v0.5/personality-content-assets') {
@@ -467,6 +495,9 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
             }
             if ($path === '/api/v0.5/seo/sitemap-source') {
                 $surfacePaths = $allPaths;
+                if ($additionalOnlySurface === null || $additionalOnlySurface === $path) {
+                    $surfacePaths = [...$surfacePaths, ...$additionalSurfacePaths];
+                }
                 if ($duplicateSurface === $path) {
                     $surfacePaths[] = $completePaths[0];
                 }
@@ -482,6 +513,9 @@ final class BigFiveEn52RuntimeVerifyTest extends TestCase
                 $surfacePaths = $path === $omitOnlySurface && $omitPath !== null
                     ? array_values(array_diff($completePaths, [$omitPath]))
                     : $allPaths;
+                if ($additionalOnlySurface === null || $additionalOnlySurface === $path) {
+                    $surfacePaths = [...$surfacePaths, ...$additionalSurfacePaths];
+                }
                 if ($duplicateSurface === $path) {
                     $surfacePaths[] = $completePaths[0];
                 }

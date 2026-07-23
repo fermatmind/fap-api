@@ -115,6 +115,9 @@ final class BigFiveEn52RuntimeVerifier
             'sitemap_count' => $discoverability['sitemap_count'],
             'llms_count' => $discoverability['llms_count'],
             'llms_full_count' => $discoverability['llms_full_count'],
+            'sitemap_canonical_cohort_count' => $discoverability['sitemap_count'],
+            'llms_canonical_cohort_count' => $discoverability['llms_count'],
+            'llms_full_canonical_cohort_count' => $discoverability['llms_full_count'],
             'zh_fingerprint' => $db['zh_fingerprint'],
             'non_target_fingerprint' => $db['non_target_fingerprint'],
             'search_fingerprint' => $db['search_fingerprint'],
@@ -257,7 +260,7 @@ final class BigFiveEn52RuntimeVerifier
         $aliases = array_keys(BigFiveCanonicalRouteCatalog::reviewedRedirectPaths());
         $source = $this->successfulJson($this->getPublicApi($apiOrigin.'/api/v0.5/seo/sitemap-source'), 'sitemap_source_failed');
         $sourcePaths = $this->pathsFromUrls(array_column((array) ($source['items'] ?? []), 'loc'), $frontendOrigin);
-        if ($this->bigFiveSubset($sourcePaths) !== $expected) {
+        if ($this->bigFiveCanonicalSubset($sourcePaths) !== $expected || array_intersect($aliases, $sourcePaths) !== []) {
             throw new RuntimeException('sitemap_source_cohort_mismatch');
         }
         $counts = [];
@@ -272,7 +275,7 @@ final class BigFiveEn52RuntimeVerifier
                 preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9:/])/(?!/)[^\s<>()"\']+#i', $response->body(), $matches);
                 $paths = $this->pathsFromUrls($matches[0] ?? [], $frontendOrigin);
             }
-            if ($this->bigFiveSubset($paths) !== $expected || array_intersect($aliases, $paths) !== []) {
+            if ($this->bigFiveCanonicalSubset($paths) !== $expected || array_intersect($aliases, $paths) !== []) {
                 throw new RuntimeException($name.'_cohort_mismatch');
             }
             $counts[$name.'_count'] = 104;
@@ -437,9 +440,17 @@ final class BigFiveEn52RuntimeVerifier
     }
 
     /** @param list<string> $paths @return list<string> */
-    private function bigFiveSubset(array $paths): array
+    private function bigFiveCanonicalSubset(array $paths): array
     {
-        $paths = array_values(array_filter($paths, fn ($path) => $this->isBigFivePath((string) $path)));
+        $canonicalPaths = [
+            ...array_column(BigFiveCanonicalRouteCatalog::canonicalEntries('en'), 'path'),
+            ...array_column(BigFiveCanonicalRouteCatalog::canonicalEntries('zh-CN'), 'path'),
+        ];
+        $canonicalPathSet = array_fill_keys($canonicalPaths, true);
+        $paths = array_values(array_filter(
+            $paths,
+            static fn ($path): bool => isset($canonicalPathSet[(string) $path]),
+        ));
         sort($paths);
 
         return $paths;
