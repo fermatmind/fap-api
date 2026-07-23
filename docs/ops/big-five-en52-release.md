@@ -4,6 +4,60 @@ The English Big Five authority release is the locked 52-page `en` cohort identif
 `big-five-en52-52-page-release-20260719` and package SHA-256
 `91f3c1e94894cfe59ce17ee00e5046d26a9cafc9113fe1eeb4488e4951e4940a`.
 
+## Four-PR delivery status
+
+The four-PR implementation train is complete at the source-control and CI layer. All four PRs are merged,
+their final required checks passed, their review threads are resolved, their merge commits are contained by
+the corresponding repository `origin/main`, and their task branches have been removed. This does **not**
+mean that the controlled English publication or production runtime verification has run.
+
+The following block is the stable scanner summary for this train. PR13 is cross-repository evidence from
+`fap-web`; this backend documentation update does not mutate the frontend train ledger.
+
+```yaml
+big_five_en52_four_pr_train:
+  snapshot_date: 2026-07-23
+  delivery_status: merged
+  production_execution: not_run
+  items:
+    - id: BIG5-EN52-RELEASE-PACKAGE-11
+      repository: fap-api
+      pr: 3201
+      final_head: 6a23d62fb0c0ff0dc8f65b31080195189d0573a7
+      merge_commit: feb6c48925b045c7931bf9a36e2c6badb53a36aa
+      merged_at: 2026-07-19T04:44:41Z
+      required_checks: 9/9
+      unresolved_review_threads: 0
+    - id: BIG5-EN52-CONTROLLED-PUBLISHER-12
+      repository: fap-api
+      pr: 3204
+      final_head: 9a0f0d528f5e195d642f455d6a7f546d3e67df10
+      merge_commit: 6ed2ca4591c764099e58cd2acc7ba2971263170e
+      merged_at: 2026-07-19T06:42:53Z
+      required_checks: 9/9
+      unresolved_review_threads: 0
+    - id: BIG5-EN52-104-DISCOVERABILITY-CONVERGENCE-13
+      repository: fap-web
+      pr: 1792
+      final_head: ab1dec4b5c5b30e8b476051040b21d0210596fc8
+      merge_commit: 5becd8b7374240fabd58803276e73d26f361b0af
+      merged_at: 2026-07-19T07:18:22Z
+      required_checks: 7/7
+      unresolved_review_threads: 0
+    - id: BIG5-EN52-RUNTIME-CLOSEOUT-14
+      repository: fap-api
+      pr: 3208
+      final_head: d48816e982a9cd9a48f403a20050b25abcd8c597
+      merge_commit: 2c197196ab041f5e5102f9d828e7e978bc96c8ba
+      merged_at: 2026-07-19T09:39:14Z
+      required_checks: 9/9
+      unresolved_review_threads: 0
+```
+
+For follow-up scans, treat `delivery_status: merged` as code delivery only. The next controlled milestone
+remains a separately authorized production publication followed by separately authorized read-only runtime
+verification against an exact deployed `main` SHA and release identity.
+
 ## Separation of authority
 
 `personality:big-five-en52-content-publish` is the separately controlled publisher. This document and
