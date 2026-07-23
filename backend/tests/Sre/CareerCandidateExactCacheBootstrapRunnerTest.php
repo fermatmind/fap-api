@@ -301,6 +301,152 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
     }
 
     #[Test]
+    public function exact_target_diagnostic_defaults_to_zero_writes_and_redacts_identity(): void
+    {
+        $inspection = $this->inspection([
+            $this->row('private-target', 'en', true, 'missing_pointer'),
+        ]);
+        $calls = 0;
+        $receipt = CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
+            str_repeat('3', 40),
+            $inspection,
+            'private-target',
+            'en',
+            false,
+            static fn (): array => throw new \RuntimeException('Precompute must not run.'),
+            function () use (&$calls): array {
+                $calls++;
+
+                return $this->warmSuccess(1);
+            },
+            static fn (): array => throw new \RuntimeException('Readback must not run.'),
+            1,
+        );
+
+        $encoded = json_encode($receipt, JSON_THROW_ON_ERROR);
+        $this->assertSame(0, $calls);
+        $this->assertSame('ready', $receipt['status']);
+        $this->assertFalse($receipt['diagnostic_write']);
+        $this->assertSame(0, $receipt['cache_write_count']);
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $receipt['target_index_sha256']);
+        $this->assertStringNotContainsString('private-target', $encoded);
+        $this->assertArrayNotHasKey('target', $receipt);
+        $this->assertArrayNotHasKey('slug', $receipt);
+        $this->assertArrayNotHasKey('locale', $receipt);
+    }
+
+    #[Test]
+    public function exact_target_diagnostic_warms_once_and_requires_exact_readback(): void
+    {
+        $inspection = $this->inspection([
+            $this->row('private-target', 'en', true, 'missing_pointer'),
+        ]);
+        $calls = 0;
+        $receipt = CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
+            str_repeat('4', 40),
+            $inspection,
+            'private-target',
+            'en',
+            true,
+            fn (array $slugs): array => $this->closures($slugs),
+            function () use (&$calls): array {
+                $calls++;
+
+                return $this->warmSuccess(1234.5);
+            },
+            fn (): array => $this->inspection([
+                $this->row('private-target', 'en', false, 'ready_active'),
+            ]),
+            1,
+        );
+
+        $this->assertSame(1, $calls);
+        $this->assertSame('completed', $receipt['status']);
+        $this->assertSame(1, $receipt['cache_write_count']);
+        $this->assertSame(0, $receipt['failure_count']);
+        $this->assertSame(1234.5, $receipt['build_ms']);
+        $this->assertSame(0, $receipt['post_target_coverage']['missing_pointer_count']);
+    }
+
+    #[Test]
+    public function exact_target_diagnostic_failure_is_safe_and_does_not_retry(): void
+    {
+        $inspection = $this->inspection([
+            $this->row('private-target', 'en', true, 'missing_pointer'),
+        ]);
+        $calls = 0;
+        $receipt = CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
+            str_repeat('5', 40),
+            $inspection,
+            'private-target',
+            'en',
+            true,
+            fn (array $slugs): array => $this->closures($slugs),
+            function () use (&$calls): array {
+                $calls++;
+
+                return $this->warmFailure('build_detail_payload', 'build_budget_exceeded', 5123.4);
+            },
+            static fn (): array => $inspection,
+            1,
+        );
+
+        $encoded = json_encode($receipt, JSON_THROW_ON_ERROR);
+        $this->assertSame(1, $calls);
+        $this->assertSame('failed', $receipt['status']);
+        $this->assertSame('build_detail_payload', $receipt['failure_stage']);
+        $this->assertSame('build_budget_exceeded', $receipt['error_category']);
+        $this->assertSame(0, $receipt['cache_write_count']);
+        $this->assertStringNotContainsString('private-target', $encoded);
+        $this->assertStringNotContainsString('cache_key', $encoded);
+        $this->assertStringNotContainsString('message', $encoded);
+    }
+
+    #[Test]
+    public function exact_target_diagnostic_readback_failure_preserves_observed_cache_write(): void
+    {
+        $inspection = $this->inspection([
+            $this->row('private-target', 'en', true, 'missing_pointer'),
+        ]);
+        $receipt = CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
+            str_repeat('6', 40),
+            $inspection,
+            'private-target',
+            'en',
+            true,
+            fn (array $slugs): array => $this->closures($slugs),
+            fn (): array => $this->warmSuccess(100),
+            static fn (): array => $inspection,
+            1,
+        );
+
+        $this->assertSame('failed', $receipt['status']);
+        $this->assertSame('post_batch_coverage', $receipt['failure_stage']);
+        $this->assertSame(1, $receipt['cache_write_count']);
+        $this->assertSame(1, $receipt['failure_count']);
+    }
+
+    #[Test]
+    public function diagnostic_and_batch_inputs_are_mutually_exclusive(): void
+    {
+        foreach ([
+            ['preflight', ['FM_CAREER_TARGET_SLUG' => 'one']],
+            ['diagnose_target', ['FM_CAREER_BATCH_OFFSET' => '0']],
+            ['batch', ['FM_CAREER_TARGET_LOCALE' => 'en']],
+        ] as [$mode, $extra]) {
+            try {
+                CareerCandidateExactCacheBootstrapRunner::assertModeInputs(
+                    ['FM_CAREER_MODE' => $mode, ...$extra],
+                    $mode,
+                );
+                $this->fail('Expected mode input conflict.');
+            } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+                $this->assertSame('MODE_INPUT_CONFLICT', $failure->safeCode);
+            }
+        }
+    }
+
+    #[Test]
     public function candidate_revision_drift_fails_before_candidate_bootstrap(): void
     {
         $root = storage_path('framework/testing/candidate-exact-runner-'.bin2hex(random_bytes(4)));

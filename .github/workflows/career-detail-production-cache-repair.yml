@@ -4,35 +4,36 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "verify_only is read-only; bootstrap_and_verify streams the versioned runner into the exact inactive candidate runtime"
+        description: "verify_only is read-only; diagnose_target permits one exact target; bootstrap_and_verify remains separately controlled"
         required: true
         default: verify_only
         type: choice
         options:
           - verify_only
+          - diagnose_target
           - bootstrap_and_verify
       expected_control_plane_sha:
-        description: "Required only for bootstrap_and_verify; exact main SHA containing this workflow and runner"
+        description: "Required for diagnose_target/bootstrap_and_verify; exact main SHA containing this workflow and runner"
         required: false
         default: ""
         type: string
       expected_runner_sha256:
-        description: "Required only for bootstrap_and_verify; exact SHA256 of the streamed candidate-exact runner"
+        description: "Required for diagnose_target/bootstrap_and_verify; exact SHA256 of the streamed candidate-exact runner"
         required: false
         default: ""
         type: string
       authorization_preflight_run_id:
-        description: "Required only for bootstrap_and_verify; exact successful verify_only run"
+        description: "Required for diagnose_target/bootstrap_and_verify; exact successful verify_only run"
         required: false
         default: ""
         type: string
       authorization_preflight_run_attempt:
-        description: "Required only for bootstrap_and_verify; exact verify_only run attempt"
+        description: "Required for diagnose_target/bootstrap_and_verify; exact verify_only run attempt"
         required: false
         default: ""
         type: string
       expected_coverage_fingerprint_sha256:
-        description: "Required only for bootstrap_and_verify; exact v2 preflight coverage fingerprint"
+        description: "Required for diagnose_target/bootstrap_and_verify; exact v2 preflight coverage fingerprint"
         required: false
         default: ""
         type: string
@@ -57,8 +58,23 @@ on:
         required: true
         default: "2090"
         type: string
+      diagnostic_target_slug:
+        description: "Required only for diagnose_target; one exact lowercase canonical slug"
+        required: false
+        default: ""
+        type: string
+      diagnostic_target_locale:
+        description: "Required only for diagnose_target; exact public locale"
+        required: false
+        default: ""
+        type: string
+      execute_diagnostic_write:
+        description: "diagnose_target defaults to zero writes; enable only with exact authorization"
+        required: true
+        default: false
+        type: boolean
       operator_approval_phrase:
-        description: "Required only for bootstrap_and_verify; must match the exact control-plane/runner/revision/count-bound phrase"
+        description: "Required for a diagnostic write or bootstrap; must match the exact bound phrase"
         required: false
         default: ""
         type: string
@@ -98,6 +114,9 @@ jobs:
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
           STAGING_RUN_ID: ${{ inputs.staging_run_id }}
           EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
+          DIAGNOSTIC_TARGET_SLUG: ${{ inputs.diagnostic_target_slug }}
+          DIAGNOSTIC_TARGET_LOCALE: ${{ inputs.diagnostic_target_locale }}
+          EXECUTE_DIAGNOSTIC_WRITE: ${{ inputs.execute_diagnostic_write }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
         run: |
           set -euo pipefail
@@ -122,8 +141,37 @@ jobs:
               test -z "$AUTHORIZATION_PREFLIGHT_RUN_ID"
               test -z "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT"
               test -z "$EXPECTED_COVERAGE_FINGERPRINT_SHA256"
+              test -z "$DIAGNOSTIC_TARGET_SLUG"
+              test -z "$DIAGNOSTIC_TARGET_LOCALE"
+              test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
+              ;;
+            diagnose_target)
+              test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
+              [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+              [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$AUTHORIZATION_PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
+              [[ "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+              [[ "$EXPECTED_COVERAGE_FINGERPRINT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$DIAGNOSTIC_TARGET_SLUG" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]
+              [[ "$DIAGNOSTIC_TARGET_LOCALE" =~ ^(en|zh-CN)$ ]]
+              if [ "$EXECUTE_DIAGNOSTIC_WRITE" = "true" ]; then
+                expected_phrase="I explicitly approve production Career single-target inactive-candidate cache diagnosis with authorization preflight run ${AUTHORIZATION_PREFLIGHT_RUN_ID} coverage fingerprint ${EXPECTED_COVERAGE_FINGERPRINT_SHA256} control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} runner SHA256 ${EXPECTED_RUNNER_SHA256} active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for target ${DIAGNOSTIC_TARGET_SLUG}/${DIAGNOSTIC_TARGET_LOCALE} at exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets with offline build budget ${OFFLINE_BUILD_BUDGET_MS}ms; one candidate-runtime cache warm, zero queue/DB/CMS-authority/publication/indexability/sitemap/llms/search/candidate activation."
+                if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
+                  echo "operator_approval_phrase does not match the exact single-target cache diagnosis authorization." >&2
+                  exit 2
+                fi
+              else
+                test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
+                if [ -n "$OPERATOR_APPROVAL_PHRASE" ]; then
+                  echo "read-only diagnose_target refuses an operator approval phrase." >&2
+                  exit 2
+                fi
+              fi
               ;;
             bootstrap_and_verify)
+              test -z "$DIAGNOSTIC_TARGET_SLUG"
+              test -z "$DIAGNOSTIC_TARGET_LOCALE"
+              test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
               test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
               [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
               [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
@@ -273,7 +321,7 @@ jobs:
             <<<"$jobs_json" >/dev/null
 
       - name: Bind immutable v2 verify-only authorization
-        if: inputs.mode == 'bootstrap_and_verify'
+        if: inputs.mode != 'verify_only'
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -533,6 +581,104 @@ jobs:
                 candidate_activation: false
               }' > artifacts/authorization-packet.json
           fi
+
+      - name: Diagnose one exact candidate cache target
+        if: inputs.mode == 'diagnose_target'
+        shell: bash
+        env:
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
+          EXPECTED_COVERAGE_FINGERPRINT_SHA256: ${{ inputs.expected_coverage_fingerprint_sha256 }}
+          DIAGNOSTIC_TARGET_SLUG: ${{ inputs.diagnostic_target_slug }}
+          DIAGNOSTIC_TARGET_LOCALE: ${{ inputs.diagnostic_target_locale }}
+          EXECUTE_DIAGNOSTIC_WRITE: ${{ inputs.execute_diagnostic_write }}
+        run: |
+          set -euo pipefail
+          verify_identity() {
+            test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+            test "$(sha256sum "$RUNNER_PATH" | awk '{print $1}')" = "$RUNNER_SHA256"
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test \"\$(tr -d '\\r\\n' < \"\$candidate/REVISION\")\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'" \
+              2>/dev/null
+          }
+          verify_identity
+
+          diagnostic_write=0
+          if [ "$EXECUTE_DIAGNOSTIC_WRITE" = "true" ]; then
+            diagnostic_write=1
+          fi
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=diagnose_target FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$EXPECTED_MISSING_POINTER_COUNT' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$EXPECTED_COVERAGE_FINGERPRINT_SHA256' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' FM_CAREER_TARGET_SLUG='$DIAGNOSTIC_TARGET_SLUG' FM_CAREER_TARGET_LOCALE='$DIAGNOSTIC_TARGET_LOCALE' FM_CAREER_DIAGNOSTIC_WRITE='$diagnostic_write' /usr/bin/timeout 720 /usr/bin/php" \
+            < "$RUNNER_PATH" > artifacts/single-target-diagnostic.json 2>/dev/null
+          diagnostic_exit=$?
+          set -e
+
+          jq -e \
+            --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
+            --arg expected_fingerprint "$EXPECTED_COVERAGE_FINGERPRINT_SHA256" \
+            --argjson expected_targets "$MINIMUM_TARGETS" \
+            --argjson expected_missing "$EXPECTED_MISSING_POINTER_COUNT" \
+            --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
+            '.contract_version == "career.candidate_exact_cache_bootstrap.v2"
+             and .mode == "diagnose_target"
+             and .candidate_revision == $candidate_sha
+             and (.target_index_sha256 | test("^[0-9a-f]{64}$"))
+             and .offline_build_budget_ms == $offline_build_budget_ms
+             and .queue_dispatch_count == 0
+             and .database_write_count == 0
+             and .pre_coverage_fingerprint_sha256 == $expected_fingerprint
+             and .pre_target_coverage.expected_target_count == $expected_targets
+             and .pre_target_coverage.missing_pointer_count == $expected_missing
+             and (.target? == null)
+             and (.slug? == null)
+             and (.locale? == null)
+             and (.message? == null)
+             and (.cache_key? == null)' \
+            artifacts/single-target-diagnostic.json >/dev/null
+
+          if [ "$diagnostic_write" -eq 0 ]; then
+            test "$diagnostic_exit" -eq 0
+            jq -e \
+              '.status == "ready"
+               and .diagnostic_write == false
+               and .cache_write_count == 0
+               and .failure_count == 0
+               and .post_target_coverage == .pre_target_coverage
+               and .post_coverage_fingerprint_sha256 == .pre_coverage_fingerprint_sha256' \
+              artifacts/single-target-diagnostic.json >/dev/null
+          elif [ "$diagnostic_exit" -eq 0 ]; then
+            jq -e \
+              '.status == "completed"
+               and .diagnostic_write == true
+               and .cache_write_count == 1
+               and .failure_count == 0
+               and .failure_stage == null
+               and .error_category == null
+               and .post_target_coverage.missing_pointer_count == (.pre_target_coverage.missing_pointer_count - 1)' \
+              artifacts/single-target-diagnostic.json >/dev/null
+          else
+            jq -e \
+              '.status == "failed"
+               and .diagnostic_write == true
+               and (.cache_write_count == 0 or .cache_write_count == 1)
+               and .failure_count == 1
+               and (.failure_stage | IN("precompute_conversion_closure", "build_detail_payload", "publish_cache_payload", "post_batch_coverage"))
+               and (.error_category | IN("build_budget_exceeded", "cache_publish_failed", "database_permanent_read", "database_transient_read", "payload_not_cached", "unexpected"))
+               and (.build_ms | type == "number")
+               and .post_target_coverage.missing_pointer_count == .pre_target_coverage.missing_pointer_count' \
+              artifacts/single-target-diagnostic.json >/dev/null
+            exit "$diagnostic_exit"
+          fi
+          verify_identity
 
       - name: Run candidate-exact synchronous cache batches
         if: inputs.mode == 'bootstrap_and_verify'
