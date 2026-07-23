@@ -327,6 +327,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
         $this->assertStringContainsString('I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
+        $this->assertStringContainsString('I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve backend schema-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID} migration ${APPROVED_MIGRATION}.', $source);
         $this->assertStringContainsString('expected_deployed_revision as a lowercase 40-character deployed REVISION', $source);
         $this->assertStringContainsString('.name == "Deploy Application"', $source);
@@ -773,6 +774,83 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function candidate_only_materializes_an_exact_inactive_release_without_authority_or_activation(): void
+    {
+        $workflow = $this->readRepoFile('.github/workflows/deploy-production.yml');
+        $deployer = $this->readRepoFile('deploy.php');
+
+        foreach ([
+            '- candidate_only',
+            'Inactive candidate materialization requires expected_release_sha to equal latest main.',
+            'Inactive candidate materialization requires exact-SHA successful staging evidence.',
+            'candidate_only validated the Career reconciliation input without reading or repairing the live public cache.',
+            'I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.',
+            'DEPLOY_TASK=deploy:candidate-only',
+            '- name: Verify exact inactive candidate materialization',
+            'backend.inactive_candidate_materialization.v1',
+            'PASS_INACTIVE_CANDIDATE_MATERIALIZED',
+            'candidate_activation: false',
+            'active_pointer_changed: false',
+            'cache_write_count: 0',
+            'queue_dispatch_count: 0',
+            'database_write_count: 0',
+            'cms_authority_write_count: 0',
+            'publication_write_count: 0',
+            'discoverability_write_count: 0',
+            '- name: Upload inactive candidate materialization receipt',
+            "if: \${{ needs.deployment-eligibility.outputs.deploy_mode != 'candidate_only' }}",
+            'SSH and deploy-root preflight passed without disclosing topology.',
+            'deploy lock guard: existing lock detected age_seconds=$AGE_SECONDS',
+            'deploy lock guard: candidate-only materialization refuses to remove an existing lock automatically',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $workflow);
+        }
+        $this->assertStringNotContainsString('whoami; hostname; id', $workflow);
+        $this->assertStringNotContainsString('sed -n \'1,120p\' "$META"', $workflow);
+        $this->assertStringNotContainsString('echo "$ACTIVE_PROCESSES"', $workflow);
+
+        $start = strpos($deployer, "task('deploy:candidate-only', [");
+        $this->assertNotFalse($start);
+        $end = strpos($deployer, ']);', (int) $start);
+        $this->assertNotFalse($end);
+        $task = substr($deployer, (int) $start, (int) $end - (int) $start + 3);
+
+        foreach ([
+            "'guard:candidate-only-mode'",
+            "'deploy:prepare'",
+            "'deploy:vendors'",
+            "'artisan:storage:link'",
+            "'artisan:config:cache'",
+            "'artisan:route:cache'",
+            "'artisan:event:cache'",
+            "'guard:public-content-release'",
+            "'fap:deploy-unlock-owned'",
+        ] as $requiredTask) {
+            $this->assertStringContainsString($requiredTask, $task);
+        }
+
+        foreach ([
+            'deploy:publish',
+            'deploy:symlink',
+            'artisan:migrate',
+            'artisan:scales:seed-default',
+            'cms:import-landing-surface-baselines',
+            'cms:import-content-page-baselines',
+            'career:warm-public-authority-cache',
+            'career:verify-public-dataset-cache-equivalence',
+            'seo:warm-sitemap-source-cache',
+            'queue:reload-workers',
+        ] as $forbiddenTask) {
+            $this->assertStringNotContainsString($forbiddenTask, $task);
+        }
+
+        $this->assertStringContainsString(
+            "return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);",
+            $deployer
+        );
+    }
+
+    #[Test]
     public function schema_only_deploy_is_bound_to_one_added_migration_and_excludes_authority_mutations(): void
     {
         $workflow = $this->readRepoFile('.github/workflows/deploy-production.yml');
@@ -784,7 +862,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'schema_only requires expected_deployed_revision as a lowercase 40-character deployed REVISION.',
             'schema_only requires one exact approved_migration filename.',
             'standard deploy refuses approved_migration; use schema_only for an exact migration.',
-            'auto/code_only refuses approved_migration; use schema_only for an exact migration.',
+            'auto/code_only/candidate_only refuses approved_migration; use schema_only for an exact migration.',
             'git diff --no-renames --name-status "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" -- backend/database/migrations',
             '$\'A\\t\'"$MIGRATION_PATH"',
             'cumulative diff must add exactly the approved migration and no other migration',
@@ -836,7 +914,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('schema-only deploy could not verify the approved migration as Ran', $deployer);
         $this->assertStringContainsString("after('artisan:migrate', 'guard:no-pending-migrations')", $deployer);
         $this->assertStringNotContainsString("after('artisan:migrate-schema-only'", $deployer);
-        $this->assertStringContainsString("return in_array(deployMode(), ['code_only', 'schema_only'], true);", $deployer);
+        $this->assertStringContainsString("return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);", $deployer);
         $this->assertSame(3, substr_count($deployer, 'if (deploySkipsAuthorityMutations())'));
         $this->assertStringContainsString('Skip nginx static media route mutation in authority-mutation-free deploy mode', $deployer);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $deployer);

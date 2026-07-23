@@ -255,6 +255,55 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('main_commits_not_deployed: ${UNDEPLOYED_COUNT}', $deploy);
     }
 
+    public function test_candidate_only_lane_materializes_latest_main_without_activation_or_runtime_mutation(): void
+    {
+        $workflow = $this->workflow();
+        $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
+        $deploy = strstr($workflow, '  deploy-production:') ?: '';
+        $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
+
+        foreach ([
+            'candidate_only',
+            'auto|code_only|candidate_only',
+            'RESOLVED_DEPLOY_MODE=candidate_only',
+            'I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.',
+            'Inactive candidate materialization requires expected_release_sha to equal latest main.',
+            'Inactive candidate materialization requires exact-SHA successful staging evidence.',
+            'candidate_only validated the Career reconciliation input without reading or repairing the live public cache.',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $eligibility);
+        }
+
+        foreach ([
+            'DEPLOY_TASK=deploy:candidate-only',
+            '- name: Verify exact inactive candidate materialization',
+            'backend.inactive_candidate_materialization.v1',
+            'candidate_activation: false',
+            'active_pointer_changed: false',
+            'cache_write_count: 0',
+            'queue_dispatch_count: 0',
+            'database_write_count: 0',
+            'cms_authority_write_count: 0',
+            'publication_write_count: 0',
+            'discoverability_write_count: 0',
+            'backend-inactive-candidate-${{ github.run_id }}-${{ github.run_attempt }}',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $deploy);
+        }
+
+        $start = strpos($deployer, "task('deploy:candidate-only', [");
+        $this->assertNotFalse($start);
+        $end = strpos($deployer, ']);', (int) $start);
+        $this->assertNotFalse($end);
+        $task = substr($deployer, (int) $start, (int) $end - (int) $start + 3);
+        $this->assertStringContainsString("'fap:deploy-unlock-owned'", $task);
+        $this->assertStringNotContainsString('deploy:publish', $task);
+        $this->assertStringNotContainsString('deploy:symlink', $task);
+        $this->assertStringNotContainsString('artisan:migrate', $task);
+        $this->assertStringNotContainsString('career:verify-public-dataset-cache-equivalence', $task);
+        $this->assertStringNotContainsString('queue:reload-workers', $task);
+    }
+
     public function test_code_only_lane_allows_only_audited_cms_runtime_and_release_support_exceptions(): void
     {
         $workflow = $this->workflow();
