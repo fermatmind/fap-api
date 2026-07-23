@@ -97,9 +97,14 @@
         "at": "2026-07-23T02:22:00Z",
         "status": "github_review_repairing",
         "note": "Exact repair head 5aaf55009096a0c4493e1a853a2ef9a5f01581fc passed all 9 GitHub checks. Latest review then identified one locale-normalization mismatch for en-US list requests; aligned the bridge with cache normalization and added approved en-US regression coverage. Final checks remain pending and no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:31:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact locale repair head 5732637b7dba631a0229a443d61ee2b2d8896a83 passed all 9 GitHub checks. Latest review identified public score/integrity outputs missing from the visible-claim hash; added score_bundle, white_box_scores, and integrity_summary plus approved-then-score-drift fail-closed coverage. Final checks remain pending and no production action occurred."
       }
     ],
-    "updated_at": "2026-07-23T02:22:00Z"
+    "updated_at": "2026-07-23T02:31:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",

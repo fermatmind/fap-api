@@ -293,6 +293,9 @@ final class CareerPilotReviewEvidenceBridge
                 'truth_layer' => $payload['truth_layer'] ?? [],
                 'claim_permissions' => $payload['claim_permissions'] ?? [],
                 'warnings' => $payload['warnings'] ?? [],
+                'score_bundle' => $payload['score_bundle'] ?? [],
+                'white_box_scores' => $payload['white_box_scores'] ?? [],
+                'integrity_summary' => $payload['integrity_summary'] ?? [],
                 'display_claim_permissions' => $display['claim_permissions'] ?? null,
                 'display_sources' => $display['sources'] ?? null,
                 'public_trust_evidence' => Arr::except(

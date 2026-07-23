@@ -70,7 +70,7 @@ Only an immutable `approved_all` attestation whose scope identity, six-target-pe
 }
 ```
 
-Career list/detail review state defaults to `unknown` with no review timestamp. Rejected, exception, partial, duplicate, malformed, missing, cold, and stale evidence cannot inherit an older trust status. Any visible content, public trust evidence, exact index entry, SEO, structured-data, claim-permission, warning, source, or truth-layer drift changes the target/package SHA and invalidates the whole batch.
+Career list/detail review state defaults to `unknown` with no review timestamp. Rejected, exception, partial, duplicate, malformed, missing, cold, and stale evidence cannot inherit an older trust status. Any visible content, public trust evidence, exact index entry, score bundle, white-box score, integrity summary, SEO, structured-data, claim-permission, warning, source, or truth-layer drift changes the target/package SHA and invalidates the whole batch.
 
 Reviewer identity, target SHA, target-set SHA, package SHA, evidence SHA, exceptions, and attestation records remain private. Existing compatibility fields may remain in the API, but the public reviewer value stays `null`.
 

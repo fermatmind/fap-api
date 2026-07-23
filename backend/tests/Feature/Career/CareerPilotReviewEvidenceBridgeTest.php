@@ -217,13 +217,33 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         Queue::assertNotPushed(WarmCareerJobDetailProjection::class);
     }
 
+    public function test_public_scoring_claim_drift_fails_closed(): void
+    {
+        $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+
+        $this->publishBilingualDetails(score: 99);
+        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
+            ->assertOk()
+            ->assertJsonPath('trust_manifest.review_state', 'unknown');
+    }
+
     private function publishBilingualDetails(
         string $englishContent = 'current visible English content',
         string $trustSource = 'current public source evidence',
+        int $score = 42,
     ): void {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $cache->publishJobDetailReadModel(self::SLUG, 'en', $this->detailPayload('en', $englishContent, $trustSource));
-        $cache->publishJobDetailReadModel(self::SLUG, 'zh-CN', $this->detailPayload('zh-CN', '当前可见中文内容', $trustSource));
+        $cache->publishJobDetailReadModel(self::SLUG, 'en', $this->detailPayload('en', $englishContent, $trustSource, $score));
+        $cache->publishJobDetailReadModel(self::SLUG, 'zh-CN', $this->detailPayload('zh-CN', '当前可见中文内容', $trustSource, $score));
     }
 
     /** @return array<string,mixed> */
@@ -231,6 +251,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         string $locale,
         string $content,
         string $trustSource = 'current public source evidence',
+        int $score = 42,
     ): array {
         $prefix = $locale === 'en' ? '/en' : '/zh';
 
@@ -240,6 +261,9 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             'locale_policy' => ['locale' => $locale],
             'titles' => ['canonical_en' => 'Reviewed Pilot Career', 'canonical_zh' => '审核试点职业'],
             'truth_layer' => ['summary' => 'Source-bounded public fact.'],
+            'score_bundle' => ['confidence_score' => ['value' => $score]],
+            'white_box_scores' => ['confidence_score' => ['value' => $score, 'formula' => 'bounded fixture']],
+            'integrity_summary' => ['integrity_state' => 'source_bounded', 'confidence_cap' => $score],
             'content_sections' => [['key' => 'overview', 'body_md' => $content]],
             'content_body_md' => $content,
             'trust_manifest' => [
