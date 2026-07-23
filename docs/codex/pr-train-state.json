@@ -99450,8 +99450,8 @@
     "branch": "codex/saep-proposed-api-per02-mbti64-en64-bounded-draft-01",
     "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
     "depends_on": [],
-    "status": "github_checks_pending",
-    "commit_sha": "fc28e817843a00c2c6da7908ac47649c898df7c3",
+    "status": "ready_to_merge",
+    "commit_sha": "83913c236d66fcc3d2c8aab5f4be51bc26a2bf75",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
     "checks": {
       "authorization": {
@@ -99464,17 +99464,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused command coverage passed 15 tests/319 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role and graph-integrity cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. The bounded write test used only in-memory SQLite; no real CMS/database write occurred."
+        "evidence": "Focused command coverage passed 16 tests/327 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity and cased-duplicate source cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation repeated 16 tests/327 assertions. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All 9 checks passed on 7d91338b056915c99f53753480b291e99b74d73d, after which exact-head Codex review identified a same-scope cased-duplicate source inventory gap. The scoped repair is locally validated and must rerun all required checks."
+        "status": "passed",
+        "evidence": "Exact repaired and rebased head 83913c236d66fcc3d2c8aab5f4be51bc26a2bf75 passed all 9 checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets and non-blocking SARIF upload. The cased-duplicate review finding is fixed with regression coverage and its thread is resolved. The following commit changes only this ledger binding and must rerun required checks before merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99513,8 +99513,13 @@
         "at": "2026-07-23T03:39:54Z",
         "status": "github_checks_pending",
         "note": "Exact-head Codex review found that case-insensitive identity parsing plus case-sensitive path keys could admit a cased duplicate source while omitting a canonical variant. Added exact canonical lowercase 32-path inventory validation, distinct 32-target-ID validation and a pre-write regression test. Focused validation now passes 16 tests/327 assertions with scoped Pint, PHP syntax and diff checks green. No real write occurred; the repaired head must rerun required checks."
+      },
+      {
+        "at": "2026-07-23T03:50:53Z",
+        "status": "ready_to_merge",
+        "note": "Rebased onto exact origin/main 49038deb50cda789e4365ea42068832ed28d6023 while preserving all intervening main ledger state. Rebase validation passed 16 tests/327 assertions, syntax, scoped Pint, metadata parsers, diff and exact five-path scope. Exact repaired head 83913c236d66fcc3d2c8aab5f4be51bc26a2bf75 passed all 9 GitHub checks and exact-head review confirmed the implementation repair; this following ledger-only commit binds tooling to that repaired head and must pass final checks before merge."
       }
     ],
-    "updated_at": "2026-07-23T03:39:54Z"
+    "updated_at": "2026-07-23T03:50:53Z"
   }
 }
