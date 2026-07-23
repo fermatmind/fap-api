@@ -188,9 +188,41 @@ standard deployments continue to report and require `linear_ancestor`.
 Any cache-only repair against the inactive candidate must repeat this exact
 production/bridge/path/status/blob proof before accepting the otherwise
 non-ancestral active revision; it may not weaken the proof to a SHA allowlist.
-The repair workflow also proves that the candidate cache path is writable by
-the application runtime user before dispatch, then runs the cache cursor and
-bounded queue dispatch as that same runtime user.
+The Career detail repair workflow checks out the exact current `main` control
+plane, hashes the versioned
+`backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php` runner, and
+streams that runner over stdin. The runner loads only the inactive release's
+own `vendor/autoload.php` and `bootstrap/app.php`, then resolves that
+candidate's coverage and cache services. It never loads the active release,
+dispatches a queue job, uses Supervisor, or stores a repair cursor.
+
+`verify_only` is strictly read-only: it rejects an approval phrase, installs a
+fail-closed database guard, validates the exact 2,092-row coverage boundary,
+and emits only control-plane SHA, runner SHA256, release identity, counts, and
+zero-write evidence. `bootstrap_and_verify` additionally requires the exact
+control-plane SHA, runner SHA256, active/candidate revisions, staging run,
+inactive release name, and missing-pointer count in the operator phrase. It
+revalidates the active pointer, inactive candidate, deploy-lock absence, and
+runner hash before each fixed target-row batch at offsets
+`0,250,500,750,1000,1250,1500,1750,2000`.
+
+Each batch runs as the application runtime user with a 600-second limit and
+calls the candidate's own synchronous detail warmer only for rows still marked
+repairable. Ready targets are skipped without changing their pointers. Any
+non-`cached` result or exception stops immediately with a sanitized error code.
+A retry starts again at offset zero after a new read-only preflight and new
+exact authorization; already-ready rows are automatically skipped. Final
+readback must prove `2092/2092`, zero missing/broken/excluded rows, the exact
+authorized cache-write total, the unchanged active SHA, and the still-inactive
+candidate. This workflow never deploys, activates, migrates, publishes, writes
+CMS/database authority, changes indexability, or touches sitemap, llms, or
+Search Channel state.
+
+The exact write authorization format is:
+
+```text
+I explicitly approve production Career inactive-candidate exact cache bootstrap with control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
+```
 
 ## fap-web handling in V1
 - `fap-web` is a reference only.
