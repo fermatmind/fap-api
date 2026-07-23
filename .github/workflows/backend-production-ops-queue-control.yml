@@ -276,7 +276,7 @@ jobs:
           if [ "$program_present" = true ]; then
             program_count="$(awk '$1 ~ /^fap-queue-ops(:|$)/ {count++} END {print count+0}' <<<"$status_lines")"
             test "$program_count" -eq 1
-            worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops 2>/dev/null)"
+            worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops:fap-queue-ops_00 2>/dev/null)"
             [[ "$worker_pid" =~ ^[1-9][0-9]*$ ]]
             test -r "/proc/$worker_pid/cmdline"
             test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
@@ -399,7 +399,7 @@ jobs:
           status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
           program_count="$(awk '$1 ~ /^fap-queue-ops(:|$)/ {count++} END {print count+0}' <<<"$status_lines")"
           test "$program_count" -eq 1
-          worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops 2>/dev/null)"
+          worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops:fap-queue-ops_00 2>/dev/null)"
           [[ "$worker_pid" =~ ^[1-9][0-9]*$ ]]
           test -r "/proc/$worker_pid/cmdline"
           test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data

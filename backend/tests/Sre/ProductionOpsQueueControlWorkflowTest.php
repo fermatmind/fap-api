@@ -42,6 +42,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'test "$current_config_sha256" = "$zero_sha256"',
             'test "$(ps -o user= -p "$worker_pid" | awk \'{$1=$1; print}\')" = www-data',
             'test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$current")"',
+            'pid fap-queue-ops:fap-queue-ops_00',
             'actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk \'{print $1}\')"',
             'process_epoch=$((boot_epoch + start_ticks / clock_ticks))',
             'test "$process_epoch" -ge "$config_epoch"',
@@ -82,6 +83,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
             $workflow,
         );
+        $this->assertSame(2, substr_count($workflow, 'pid fap-queue-ops:fap-queue-ops_00'));
     }
 
     #[Test]
