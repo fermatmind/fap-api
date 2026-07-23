@@ -292,7 +292,7 @@ jobs:
           set -euo pipefail
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "test \"\$(sudo -n /usr/bin/supervisorctl status 'fap-queue-default-high:*' | grep -c ' RUNNING ')\" -ge 1"
+            "test \"\$(sudo -n /usr/bin/supervisorctl status 'fap-queue-default-high:*' | grep -c ' RUNNING ')\" -ge 1 && cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && sudo -n -u www-data -- test -w storage/framework/cache/data"
           resume_key="production-bootstrap-${CANDIDATE_RELEASE_REVISION}"
           completed=false
           for batch in $(seq 1 9); do
@@ -302,7 +302,7 @@ jobs:
             fi
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
               -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --batch-size=$REPAIR_BATCH_SIZE --resume-key='$resume_key' $reset_flag --confirm-production-write --json --no-interaction --no-ansi" \
+              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && sudo -n -u www-data -- php artisan career:verify-job-detail-cache-coverage --repair-missing --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --batch-size=$REPAIR_BATCH_SIZE --resume-key='$resume_key' $reset_flag --confirm-production-write --json --no-interaction --no-ansi" \
               | tee "artifacts/repair-batch-${batch}.json"
             remaining="$(jq -r '.repair.remaining_targets' "artifacts/repair-batch-${batch}.json")"
             if [ "$remaining" = "0" ]; then
