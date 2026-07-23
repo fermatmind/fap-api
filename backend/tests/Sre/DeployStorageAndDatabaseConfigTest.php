@@ -386,6 +386,11 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('require_ops_queue_reload: ${{ steps.resolve_deploy_mode.outputs.require_ops_queue_reload }}', $source);
         $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD: ${{ needs.deployment-eligibility.outputs.require_ops_queue_reload }}', $source);
         $this->assertStringContainsString('-o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD"', $source);
+        $this->assertStringContainsString('TRUSTED_STAGING_WORKFLOW_SHA256: ${{ vars.PRODUCTION_TRUSTED_STAGING_WORKFLOW_SHA256 }}', $source);
+        $this->assertStringContainsString('code-only scope requires an external trusted SHA-256 receipt for deploy.yml.', $source);
+        $this->assertStringContainsString('sha256sum .github/workflows/deploy.yml', $source);
+        $this->assertStringContainsString('code-only scope refused deploy.yml because its SHA-256 does not match the external trusted receipt.', $source);
+        $this->assertStringNotContainsString('.github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/deploy.yml|', $source);
         $this->assertStringContainsString('backend/database/*', $source);
         $this->assertStringContainsString('backend/content_baselines/*', $source);
         $this->assertStringContainsString('content_packages/*', $source);
@@ -450,6 +455,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
         $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);
+        $this->assertStringContainsString('approval runtime code_only deploy requires the supervisor ops queue reload path', $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip nginx reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $source);

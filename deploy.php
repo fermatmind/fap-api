@@ -831,6 +831,10 @@ task('queue:reload-workers', function () {
 
         $supervisorctlAvailable = test('[ -x '.escapeshellarg($supervisorctl).' ] || command -v supervisorctl >/dev/null 2>&1');
         if (! $supervisorctlAvailable) {
+            if ($requireOpsQueueReload) {
+                throw new \RuntimeException('approval runtime code_only deploy requires the supervisor ops queue reload path');
+            }
+
             if ($legacySystemdService !== '') {
                 $quotedService = deploySystemdServiceArg($legacySystemdService, 'legacy_queue_systemd_service');
                 $notFoundMessage = deployShellArg("legacy queue systemd service not found: {$legacySystemdService}");
