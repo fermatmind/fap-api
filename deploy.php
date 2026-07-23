@@ -134,7 +134,7 @@ function deployMode(): string
 {
     $mode = strtolower(trim((string) get('deploy_mode', 'standard')));
 
-    if (! in_array($mode, ['standard', 'code_only', 'schema_only'], true)) {
+    if (! in_array($mode, ['standard', 'code_only', 'candidate_only', 'schema_only'], true)) {
         throw new \RuntimeException("unsupported deploy_mode [{$mode}]");
     }
 
@@ -144,6 +144,11 @@ function deployMode(): string
 function deployIsCodeOnly(): bool
 {
     return deployMode() === 'code_only';
+}
+
+function deployIsCandidateOnly(): bool
+{
+    return deployMode() === 'candidate_only';
 }
 
 function deployBooleanOption(string $name, bool $default): bool
@@ -166,7 +171,7 @@ function deployBooleanOption(string $name, bool $default): bool
 
 function deploySkipsAuthorityMutations(): bool
 {
-    return in_array(deployMode(), ['code_only', 'schema_only'], true);
+    return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);
 }
 
 function deploySchemaOnlyMigration(): string
@@ -868,6 +873,12 @@ task('guard:forbid-destructive', function () {
 task('guard:code-only-mode', function () {
     if (! deployIsCodeOnly()) {
         throw new \RuntimeException('deploy:code-only requires deploy_mode=code_only');
+    }
+});
+
+task('guard:candidate-only-mode', function () {
+    if (! deployIsCandidateOnly()) {
+        throw new \RuntimeException('deploy:candidate-only requires deploy_mode=candidate_only');
     }
 });
 
@@ -1903,6 +1914,27 @@ task('deploy:code-only', [
     'career:verify-public-dataset-cache-equivalence',
     'deploy:publish',
     'career:finalize-public-dataset-cache-equivalence',
+]);
+
+/**
+ * An inactive candidate is materialized from exact staged code without
+ * changing the active symlink or any application-data/authority surface.
+ * The owning workflow verifies the release identity and inactive state after
+ * this task returns successfully.
+ */
+task('deploy:candidate-only', [
+    'guard:deploy-shell-config',
+    'guard:forbid-destructive',
+    'guard:candidate-only-mode',
+    'deploy:prepare',
+    'deploy:vendors',
+    'artisan:storage:link',
+    'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:view:cache',
+    'artisan:event:cache',
+    'guard:public-content-release',
+    'fap:deploy-unlock-owned',
 ]);
 
 /**

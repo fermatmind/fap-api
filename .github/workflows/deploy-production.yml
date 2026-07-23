@@ -20,13 +20,14 @@ on:
         required: true
         type: string
       deploy_mode:
-        description: "auto permits strict code-only scope; schema_only requires one exact approved migration"
+        description: "auto permits strict code-only scope; candidate_only materializes an inactive exact release; schema_only requires one exact approved migration"
         required: false
         default: auto
         type: choice
         options:
           - auto
           - code_only
+          - candidate_only
           - schema_only
           - standard
       expected_deployed_revision:
@@ -103,9 +104,9 @@ jobs:
             exit 2
           fi
           case "$REQUESTED_DEPLOY_MODE" in
-            auto|code_only|schema_only|standard) ;;
+            auto|code_only|candidate_only|schema_only|standard) ;;
             *)
-              echo "deploy_mode must be auto, code_only, schema_only, or standard." >&2
+              echo "deploy_mode must be auto, code_only, candidate_only, schema_only, or standard." >&2
               exit 2
               ;;
           esac
@@ -174,13 +175,13 @@ jobs:
               RESOLVED_DEPLOY_MODE=schema_only
               EXPECTED_APPROVAL="I explicitly approve backend schema-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID} migration ${APPROVED_MIGRATION}."
               ;;
-            auto|code_only)
+            auto|code_only|candidate_only)
               if [ -n "$APPROVED_MIGRATION" ]; then
-                echo "auto/code_only refuses approved_migration; use schema_only for an exact migration." >&2
+                echo "auto/code_only/candidate_only refuses approved_migration; use schema_only for an exact migration." >&2
                 exit 2
               fi
               if [[ ! "$EXPECTED_DEPLOYED_REVISION" =~ ^[0-9a-f]{40}$ ]]; then
-                echo "auto/code_only requires expected_deployed_revision as a lowercase 40-character deployed REVISION." >&2
+                echo "auto/code_only/candidate_only requires expected_deployed_revision as a lowercase 40-character deployed REVISION." >&2
                 exit 2
               fi
               if ! git cat-file -e "${EXPECTED_DEPLOYED_REVISION}^{commit}"; then
@@ -318,50 +319,60 @@ jobs:
                   echo "code-only scope refused an unreviewed Career reconciliation candidate hash." >&2
                   exit 1
                 }
-                read_career_public_cache_summary_sha256() {
-                  local dataset summary
-                  dataset="$(curl --http1.1 --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
-                    "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
-                  summary="$(jq -cS '{
-                    contract_version,
-                    manifest_version: .collection_summary.manifest_version,
-                    member_count: .collection_summary.member_count,
-                    tracking_counts: .collection_summary.tracking_counts,
-                    publish_track_distribution: .collection_summary.facet_distributions.publish_track,
-                    members: [
-                      .members[]
-                      | {canonical_slug, publish_track}
-                    ] | sort_by(.canonical_slug, .publish_track)
-                  }' <<<"$dataset")"
-                  printf '%s' "$summary" | sha256sum | awk '{print $1}'
-                }
-                first_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
-                second_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
-                third_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
-                test "$first_career_summary_sha256" = "$second_career_summary_sha256"
-                test "$second_career_summary_sha256" = "$third_career_summary_sha256"
-                CAREER_PUBLIC_CACHE_SUMMARY_SHA256="$first_career_summary_sha256"
-                CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256="$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256"
-                case "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" in
-                  "$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256")
-                    echo "code-only scope verified the exact candidate-equivalent Career public cache."
-                    ;;
-                  "$AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256")
-                    CAREER_CACHE_REPAIR_REQUIRED=true
-                    echo "code-only scope accepted the exact audited stale Career cache pending atomic candidate repair and rollback protection."
-                    ;;
-                  *)
-                    echo "code-only scope refused an unreviewed Career public-cache summary." >&2
-                    exit 1
-                    ;;
-                esac
+                if [ "$REQUESTED_DEPLOY_MODE" = candidate_only ]; then
+                  REQUIRE_CAREER_CANDIDATE_PREFLIGHT=false
+                  echo "candidate_only validated the Career reconciliation input without reading or repairing the live public cache."
+                else
+                  read_career_public_cache_summary_sha256() {
+                    local dataset summary
+                    dataset="$(curl --http1.1 --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
+                      "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
+                    summary="$(jq -cS '{
+                      contract_version,
+                      manifest_version: .collection_summary.manifest_version,
+                      member_count: .collection_summary.member_count,
+                      tracking_counts: .collection_summary.tracking_counts,
+                      publish_track_distribution: .collection_summary.facet_distributions.publish_track,
+                      members: [
+                        .members[]
+                        | {canonical_slug, publish_track}
+                      ] | sort_by(.canonical_slug, .publish_track)
+                    }' <<<"$dataset")"
+                    printf '%s' "$summary" | sha256sum | awk '{print $1}'
+                  }
+                  first_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
+                  second_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
+                  third_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
+                  test "$first_career_summary_sha256" = "$second_career_summary_sha256"
+                  test "$second_career_summary_sha256" = "$third_career_summary_sha256"
+                  CAREER_PUBLIC_CACHE_SUMMARY_SHA256="$first_career_summary_sha256"
+                  CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256="$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256"
+                  case "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" in
+                    "$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256")
+                      echo "code-only scope verified the exact candidate-equivalent Career public cache."
+                      ;;
+                    "$AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256")
+                      CAREER_CACHE_REPAIR_REQUIRED=true
+                      echo "code-only scope accepted the exact audited stale Career cache pending atomic candidate repair and rollback protection."
+                      ;;
+                    *)
+                      echo "code-only scope refused an unreviewed Career public-cache summary." >&2
+                      exit 1
+                      ;;
+                  esac
+                fi
               fi
               if [ "$CODE_ONLY_SCOPE" != true ]; then
                 echo "code-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path; rerun only with an explicit standard deployment approval." >&2
                 exit 1
               fi
-              RESOLVED_DEPLOY_MODE=code_only
-              EXPECTED_APPROVAL="I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+              if [ "$REQUESTED_DEPLOY_MODE" = candidate_only ]; then
+                RESOLVED_DEPLOY_MODE=candidate_only
+                EXPECTED_APPROVAL="I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+              else
+                RESOLVED_DEPLOY_MODE=code_only
+                EXPECTED_APPROVAL="I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+              fi
               ;;
           esac
           if [ "$OPERATOR_APPROVAL_PHRASE" != "$EXPECTED_APPROVAL" ]; then
@@ -517,6 +528,16 @@ jobs:
                   git show "$LATEST_MAIN_SHA:$path" | cmp - "$path"
                 done <<<"$expected_files"
                 echo "Code-only production deploy accepted exact isolated Runtime 46 candidate with main-byte-identical scoped files."
+              fi
+              ;;
+            candidate_only)
+              if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
+                echo "Inactive candidate materialization requires expected_release_sha to equal latest main." >&2
+                exit 1
+              fi
+              if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]; then
+                echo "Inactive candidate materialization requires exact-SHA successful staging evidence." >&2
+                exit 1
               fi
               ;;
             *)
@@ -741,11 +762,11 @@ jobs:
               sleep "$retry_delay"
             done
           }
-          ssh_retry 'whoami; hostname; id'
-          ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
+          ssh_retry "test -d '$DEPLOY_PATH'" >/dev/null
+          echo "SSH and deploy-root preflight passed without disclosing topology."
 
       - name: Verify mutation-limited deployed baseline before writes
-        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'code_only' || needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'code_only' || needs.deployment-eligibility.outputs.deploy_mode == 'candidate_only' || needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -927,18 +948,20 @@ jobs:
           LOCK_MTIME="$(stat -c %Y "$LOCK")"
           NOW="$(date +%s)"
           AGE_SECONDS="$((NOW - LOCK_MTIME))"
-          echo "deploy lock guard: existing lock owner=${OWNER:-unknown} age_seconds=$AGE_SECONDS"
-          [ -f "$META" ] && sed -n '1,120p' "$META" || true
+          echo "deploy lock guard: existing lock detected age_seconds=$AGE_SECONDS"
           ACTIVE_PROCESSES="$(ps -eo pid,ppid,user,cmd \
             | grep -E 'dep deploy|dep worker|deployer|composer install|artisan migrate|queue:reload-workers' \
             | grep -v grep || true)"
           if [ -n "$ACTIVE_PROCESSES" ]; then
-            echo "$ACTIVE_PROCESSES"
             echo "deploy lock guard: active deploy-like process exists"
             exit 1
           fi
           if [ "$DEPLOY_MODE" = "code_only" ]; then
             echo "deploy lock guard: code-only deploy refuses to remove an existing lock automatically"
+            exit 1
+          fi
+          if [ "$DEPLOY_MODE" = "candidate_only" ]; then
+            echo "deploy lock guard: candidate-only materialization refuses to remove an existing lock automatically"
             exit 1
           fi
           if [ "$DEPLOY_MODE" = "schema_only" ]; then
@@ -1057,6 +1080,7 @@ jobs:
           case "$DEPLOY_MODE" in
             standard) DEPLOY_TASK=deploy ;;
             code_only) DEPLOY_TASK=deploy:code-only ;;
+            candidate_only) DEPLOY_TASK=deploy:candidate-only ;;
             schema_only) DEPLOY_TASK=deploy:schema-only ;;
             *) echo "Unsupported resolved deploy mode: $DEPLOY_MODE" >&2; exit 2 ;;
           esac
@@ -1087,6 +1111,76 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Verify exact inactive candidate materialization
+        id: inactive_candidate
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'candidate_only' }}
+        shell: bash
+        env:
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          runner_sha256="$(sha256sum backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php | awk '{print $1}')"
+          workflow_sha256="$(sha256sum .github/workflows/deploy-production.yml | awk '{print $1}')"
+          ssh_retry \
+            "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$release_name'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\r\n' < \"\$current/REVISION\")\" = '$EXPECTED_DEPLOYED_REVISION'; test \"\$(tr -d '\r\n' < \"\$candidate/REVISION\")\" = '$DEPLOY_SHA'; test -r \"\$candidate/backend/vendor/autoload.php\"; test -r \"\$candidate/backend/bootstrap/app.php\"; test \"\$(sha256sum \"\$candidate/backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php\" | awk '{print \$1}')\" = '$runner_sha256'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+          receipt="$RUNNER_TEMP/backend-inactive-candidate-materialization.json"
+          jq -n \
+            --arg contract_version "backend.inactive_candidate_materialization.v1" \
+            --arg control_plane_sha "$WORKFLOW_CONTROL_SHA" \
+            --arg deploy_workflow_sha256 "$workflow_sha256" \
+            --arg staging_run_id "$STAGING_RUN_ID" \
+            --arg active_revision "$EXPECTED_DEPLOYED_REVISION" \
+            --arg candidate_revision "$DEPLOY_SHA" \
+            --arg candidate_release "$release_name" \
+            --arg runner_sha256 "$runner_sha256" \
+            '{
+              contract_version: $contract_version,
+              status: "PASS_INACTIVE_CANDIDATE_MATERIALIZED",
+              control_plane_sha: $control_plane_sha,
+              deploy_workflow_sha256: $deploy_workflow_sha256,
+              staging_run_id: $staging_run_id,
+              active_revision: $active_revision,
+              candidate_revision: $candidate_revision,
+              candidate_release: $candidate_release,
+              runner_sha256: $runner_sha256,
+              candidate_activation: false,
+              active_pointer_changed: false,
+              cache_write_count: 0,
+              queue_dispatch_count: 0,
+              database_write_count: 0,
+              cms_authority_write_count: 0,
+              publication_write_count: 0,
+              discoverability_write_count: 0
+            }' > "$receipt"
+          echo "receipt_path=$receipt" >> "$GITHUB_OUTPUT"
+          echo "Inactive candidate materialization verified without disclosing production routing metadata."
+
+      - name: Upload inactive candidate materialization receipt
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'candidate_only' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-inactive-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ steps.inactive_candidate.outputs.receipt_path }}
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Restart queue workers through Laravel queue restart
         if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' || needs.deployment-eligibility.outputs.deploy_mode == 'schema_only' }}
         shell: bash
@@ -1112,6 +1206,7 @@ jobs:
 
       - name: Verify deployed revision
         id: deployed_revision
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode != 'candidate_only' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1171,6 +1266,7 @@ jobs:
           ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan fap:schema:verify --no-interaction --no-ansi"
 
       - name: Healthcheck and contract smoke
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode != 'candidate_only' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1231,6 +1327,7 @@ jobs:
           fi
 
       - name: Ops entry and asset smoke
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode != 'candidate_only' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1293,6 +1390,7 @@ jobs:
           retry "Ops app.js smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/js/filament/filament/app.js' >/dev/null"
 
       - name: Record production release candidate
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode != 'candidate_only' }}
         shell: bash
         env:
           MAIN_SHA: ${{ needs.deployment-eligibility.outputs.main_sha }}
