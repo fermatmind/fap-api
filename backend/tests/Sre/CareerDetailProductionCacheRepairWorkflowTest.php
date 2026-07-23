@@ -35,6 +35,22 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString('ref: ${{ inputs.candidate_release_revision }}', $source);
         $this->assertStringContainsString('test "$(git rev-parse HEAD)" = "$CANDIDATE_RELEASE_REVISION"', $source);
         $this->assertStringContainsString('git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$CANDIDATE_RELEASE_REVISION"', $source);
+        $this->assertStringContainsString(
+            'AUDITED_RUNTIME46_PRODUCTION_SHA="bc0ed833bc9aae1473ab37f1dead2517e1aff618"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'AUDITED_RUNTIME46_BRIDGE_SHA="49038deb50cda789e4365ea42068832ed28d6023"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'git merge-base --is-ancestor "$AUDITED_RUNTIME46_BRIDGE_SHA" "$CANDIDATE_RELEASE_REVISION"',
+            $source,
+        );
+        $this->assertStringContainsString('verify_audited_runtime46_subsumed_baseline', $source);
+        $this->assertSame(5, substr_count($source, '$\'A\\tbackend/'));
+        $this->assertSame(1, substr_count($source, '$\'M\\tbackend/'));
+        $this->assertStringContainsString('[ "$production_blob" = "$candidate_blob" ]', $source);
         $this->assertStringContainsString('git merge-base --is-ancestor "$CANDIDATE_RELEASE_REVISION" origin/main', $source);
         $this->assertStringContainsString('actions/runs/${STAGING_RUN_ID}', $source);
         $this->assertStringContainsString('.head_sha == $candidate_sha', $source);
