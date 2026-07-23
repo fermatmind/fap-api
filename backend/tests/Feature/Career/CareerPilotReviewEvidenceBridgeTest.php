@@ -66,6 +66,15 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         $this->assertSame(0, $payload['database_writes']);
         $this->assertFalse($payload['review_evidence_bound']);
         $this->assertDatabaseCount('review_attestations', 0);
+
+        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
+            ->assertOk()
+            ->assertJsonPath('trust_manifest.review_state', 'unknown')
+            ->assertJsonPath('trust_manifest.last_reviewed_at', null);
+        $this->getJson('/api/v0.5/career/jobs?locale=en')
+            ->assertOk()
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null);
     }
 
     public function test_exact_approved_all_evidence_projects_only_public_review_fields(): void
@@ -162,9 +171,9 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             'content_sections' => [['key' => 'overview', 'body_md' => $content]],
             'content_body_md' => $content,
             'trust_manifest' => [
-                'reviewer_status' => 'pilot_display_asset',
-                'review_state' => 'unknown',
-                'last_reviewed_at' => null,
+                'reviewer_status' => 'human_reviewed',
+                'review_state' => 'approved',
+                'last_reviewed_at' => '2026-07-01T00:00:00Z',
                 'reviewer' => null,
             ],
             'warnings' => [],
@@ -187,9 +196,9 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             'items' => [[
                 'identity' => ['canonical_slug' => self::SLUG],
                 'trust_summary' => [
-                    'reviewer_status' => 'pilot_display_asset',
-                    'review_state' => 'unknown',
-                    'last_reviewed_at' => null,
+                    'reviewer_status' => 'human_reviewed',
+                    'review_state' => 'approved',
+                    'last_reviewed_at' => '2026-07-01T00:00:00Z',
                     'reviewer' => null,
                 ],
             ]],

@@ -16,6 +16,8 @@ use Illuminate\Support\Arr;
  * The source is the already-published bilingual active/LKG detail read model.
  * Evidence binding remains private and cannot publish, index, enqueue, submit,
  * or otherwise change discoverability.
+ *
+ * @review-surface career_trust_manifest
  */
 final class CareerPilotReviewEvidenceBridge
 {
@@ -28,6 +30,11 @@ final class CareerPilotReviewEvidenceBridge
     private const TARGET_KINDS = ['content', 'seo', 'visible_claims'];
 
     private const LOCALES = ['en', 'zh-CN'];
+
+    private const UNAPPROVED_PROJECTION = [
+        'review_state' => 'unknown',
+        'last_reviewed_at' => null,
+    ];
 
     /** @var array<string, array{review_state:string,last_reviewed_at:string|null}>|null */
     private ?array $requestProjection = null;
@@ -112,10 +119,8 @@ final class CareerPilotReviewEvidenceBridge
             return $payload;
         }
 
-        $projection = $this->projectionBySlug()[strtolower(trim($slug))] ?? null;
-        if ($projection === null) {
-            return $payload;
-        }
+        $projection = $this->projectionBySlug()[strtolower(trim($slug))]
+            ?? self::UNAPPROVED_PROJECTION;
 
         $payload['trust_manifest'] = array_merge($payload['trust_manifest'], $projection);
 
@@ -126,7 +131,7 @@ final class CareerPilotReviewEvidenceBridge
     public function projectJobIndexPayload(array $payload): array
     {
         $projections = $this->projectionBySlug();
-        if ($projections === [] || ! is_array($payload['items'] ?? null)) {
+        if (! is_array($payload['items'] ?? null)) {
             return $payload;
         }
 
@@ -135,10 +140,10 @@ final class CareerPilotReviewEvidenceBridge
                 return $item;
             }
             $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
-            if (! isset($projections[$slug])) {
-                return $item;
-            }
-            $item['trust_summary'] = array_merge($item['trust_summary'], $projections[$slug]);
+            $item['trust_summary'] = array_merge(
+                $item['trust_summary'],
+                $projections[$slug] ?? self::UNAPPROVED_PROJECTION,
+            );
 
             return $item;
         }, $payload['items']);

@@ -72,9 +72,14 @@
         "at": "2026-07-23T01:50:00Z",
         "status": "github_checks_failed_repairing",
         "note": "Initial GitHub exact head passed hygiene, supply-chain, content-pack, both MBTI freezes, Semgrep blocking/OSS/SARIF and failed only verify-bigfive after 1583 tests because the freeze classifier flagged the new Career-only review bridge. Added that exact bridge path to the existing solo-owner Career/SEO review classifier and its positive regression set; the focused freeze tests now pass 2 tests/6 assertions. Required checks remain pending rerun and are not overridden."
+      },
+      {
+        "at": "2026-07-23T01:55:00Z",
+        "status": "github_review_repairing",
+        "note": "Addressed the automated P1 review finding: all Career list/detail public review states now default to unknown/null even when legacy trust data says approved, and only the exact current approved_all bilingual package upgrades them to approved. Added legacy-approved-without-evidence regression coverage and the required registered @review-surface annotation. Focused Career/review contracts, ReviewPolicyRegistry architecture tests, Pint, and both Big Five freeze regression tests pass locally."
       }
     ],
-    "updated_at": "2026-07-23T01:50:00Z"
+    "updated_at": "2026-07-23T01:55:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
