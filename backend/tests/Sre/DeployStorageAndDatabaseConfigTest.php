@@ -473,6 +473,10 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
+            'git fetch --no-tags origin "$EXPECTED_DEPLOYED_REVISION"',
+            $source
+        );
+        $this->assertStringContainsString(
             'code-only scope accepted exact audited Root5 runtime or inert evidence path:',
             $source
         );

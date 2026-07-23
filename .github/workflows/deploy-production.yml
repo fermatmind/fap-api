@@ -176,8 +176,14 @@ jobs:
                 exit 2
               fi
               if ! git cat-file -e "${EXPECTED_DEPLOYED_REVISION}^{commit}"; then
-                echo "code-only scope classification cannot resolve expected_deployed_revision." >&2
-                exit 1
+                git fetch --no-tags origin "$EXPECTED_DEPLOYED_REVISION" >/dev/null 2>&1 || {
+                  echo "code-only scope classification cannot fetch expected_deployed_revision." >&2
+                  exit 1
+                }
+                git cat-file -e "${EXPECTED_DEPLOYED_REVISION}^{commit}" || {
+                  echo "code-only scope classification cannot resolve expected_deployed_revision." >&2
+                  exit 1
+                }
               fi
               CLASSIFICATION_BASE="$EXPECTED_DEPLOYED_REVISION"
               if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then

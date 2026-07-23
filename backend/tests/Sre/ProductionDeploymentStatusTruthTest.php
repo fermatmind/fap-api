@@ -286,6 +286,10 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             'code-only scope classification accepted the exact audited Runtime 46 subsumed baseline.',
             $eligibility
         );
+        $this->assertStringContainsString(
+            'git fetch --no-tags origin "$EXPECTED_DEPLOYED_REVISION"',
+            $eligibility
+        );
         $this->assertSame(1, substr_count($eligibility, $runtimeExceptions));
         $this->assertSame(1, substr_count($eligibility, $subsumedRuntimeExceptions));
         $this->assertSame(1, substr_count($eligibility, $nonRuntimeExceptions));
