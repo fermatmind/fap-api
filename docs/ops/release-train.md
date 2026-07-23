@@ -185,6 +185,9 @@ blobs. Unknown paths, missing files, changed statuses, renames, deletions, blob
 drift, another production SHA, or a candidate outside the audited bridge history
 fail closed. The release record reports `runtime46_patch_subsumed`; all ordinary
 standard deployments continue to report and require `linear_ancestor`.
+Any cache-only repair against the inactive candidate must repeat this exact
+production/bridge/path/status/blob proof before accepting the otherwise
+non-ancestral active revision; it may not weaken the proof to a SHA allowlist.
 
 ## fap-web handling in V1
 - `fap-web` is a reference only.
