@@ -420,11 +420,16 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function career_detail_cache_coverage_is_read_only_complete_and_required_before_symlink_activation(): void
+    public function career_detail_cache_coverage_is_read_only_complete_and_does_not_block_code_only_activation(): void
     {
         $source = $this->readRepoFile('deploy.php');
 
         $this->assertStringContainsString("task('guard:career-detail-cache-coverage'", $source);
+        $this->assertStringContainsString('if (deployIsCodeOnly()) {', $source);
+        $this->assertStringContainsString(
+            'Skipping Career detail cache coverage for code-only release; shared detail caches are unchanged.',
+            $source
+        );
         $this->assertStringContainsString('career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN', $source);
         $this->assertStringContainsString('--minimum-targets=%d --json --no-interaction --no-ansi', $source);
         $this->assertStringContainsString("getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS')", $source);
