@@ -99551,5 +99551,95 @@
       }
     ],
     "updated_at": "2026-07-23T04:56:23Z"
+  },
+  "MBTI-CROSS-PUBLISHER-49": {
+    "id": "MBTI-CROSS-PUBLISHER-49",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-cross-publisher-49",
+    "title": "MBTI-CROSS-PUBLISHER-49: add exact-three controlled comparison publisher",
+    "depends_on": [
+      "MBTI-CROSS-APPROVAL-48"
+    ],
+    "status": "pending_external_merge",
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3227",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "MBTI-CROSS-APPROVAL-48 PR #1801 merged into fap-web main as 5ae48bdda2ccd0e63bee9ca30de395ccd8ddd26b after all seven exact-head checks passed; its post-merge focused contracts passed 22/22."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "The exact editorial authorization permits PR49 implementation only. It explicitly does not authorize production CMS/database writes, publication/indexability changes, sitemap/llms changes, or search submission; this PR performs no such external action."
+      },
+      "package_boundary": {
+        "status": "passed",
+        "evidence": "Implementation binds only package SHA 604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae, authorization SHA be4f17484334074cf2c90d57898ab80b6074093b2510a4b7b4b0432a164b4670, record_count 3, and the ordered slug set enfp-vs-entp, estj-vs-entj, isfp-vs-infp."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "PASS after all three review fixes: Publisher 49 plus review registry passed 23 tests / 481 assertions including JSON object-key reordering, scoped PHP syntax and Pint passed, git diff --check passed, and the complete backend/scripts/ci_verify_mbti.sh passed including Big Five 1596 tests / 195602 assertions, personality authority 89 / 5853, MBTI end-to-end, migration, security, OpenAPI, and downstream gates. Generated Big Five artifacts were restored to HEAD."
+      },
+      "github_required_checks": {
+        "status": "pending_final_head",
+        "evidence": "All nine required checks passed on head a0d1cba0e835dbe89cc1075e6b5827197adbbeda. A subsequent actionable JSON-order review finding is fixed locally with complete validation; fresh exact-head checks remain mandatory before merge."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-23T05:45:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from isolated latest-origin/main worktree after Approval 48 merged. Scope is code, immutable package inputs, tests, and train metadata only; no production/staging CMS/database, publication, indexability, sitemap, llms, search, deploy, cache, or runtime read-model action is authorized or attempted."
+      },
+      {
+        "at": "2026-07-23T06:09:06Z",
+        "status": "local_validation_passed",
+        "note": "All manifest checks passed on the latest origin/main baseline. Changed files are confined to the exact PR49 allowed paths; no staging or production mutation was executed."
+      },
+      {
+        "at": "2026-07-23T06:11:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed implementation as b3d573a5d, pushed codex/mbti-cross-publisher-49, and opened PR #3227. Required GitHub checks and review gates are pending."
+      },
+      {
+        "at": "2026-07-23T06:19:58Z",
+        "status": "github_checks_fixing",
+        "note": "GitHub verify-bigfive failed only the exact-file runtime-freeze classifier because it did not yet recognize the five PR49 publisher files as MBTI-only. Added a five-file allowlist and focused regression test; no broad path exemption or publisher behavior change."
+      },
+      {
+        "at": "2026-07-23T06:26:15Z",
+        "status": "github_checks_retry_pending",
+        "note": "The narrow classifier repair and package review-surface annotation passed focused architecture checks and the exact full Big Five GitHub gate locally. Ready to push a new exact head and rerun all required checks."
+      },
+      {
+        "at": "2026-07-23T06:45:00Z",
+        "status": "pending_external_merge",
+        "note": "Resolved both actionable review findings in scope: indexability now compares every normalized live authority field to the exact approved package, and content reruns preserve a fully released cohort while mixed release or post-release content drift fails closed. Focused and complete local validation passed; fresh exact-head GitHub checks and thread resolution remain mandatory. No production/staging write or discoverability action was executed."
+      },
+      {
+        "at": "2026-07-23T07:02:00Z",
+        "status": "pending_external_merge",
+        "note": "After all nine checks passed, pre-merge review identified database JSON object-key ordering as a false-negative risk. Exact content equality now uses the package contract's recursively stable SHA comparison in both content and indexability stages, with a key-reordering regression. Focused and complete local validation passed; fresh exact-head checks and final thread resolution remain mandatory. No production/staging write or discoverability action was executed."
+      }
+    ],
+    "updated_at": "2026-07-23T07:02:00Z"
   }
 }
