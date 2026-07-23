@@ -216,6 +216,19 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $wrapper,
         );
         $this->assertSame(2, substr_count($wrapper, "task('"));
+        $this->assertStringContainsString(
+            'php_bin="$(command -v {{bin/php}})"',
+            $wrapper,
+        );
+        $this->assertStringContainsString('test -n "$php_bin"', $wrapper);
+        $this->assertStringContainsString(
+            'SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"',
+            $wrapper,
+        );
+        $this->assertStringNotContainsString(
+            'SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}',
+            $wrapper,
+        );
         $this->assertStringContainsString('| base64 -d', $wrapper);
         $this->assertStringContainsString('SITEMAP_SOURCE_WARM_STRICT=false', $wrapper);
         $this->assertStringContainsString(
@@ -602,7 +615,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
-            'EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"',
+            'EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="5111aac8197ba8df85698eab2a199475baab7ef7456db01dfb698ed54a928dcf"',
             $source
         );
         $this->assertStringContainsString(
