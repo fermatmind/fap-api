@@ -8,8 +8,8 @@
     "depends_on": [
       "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "f59355180375aa5892e44f2289d9001543d2b42f",
+    "status": "ready_to_merge",
+    "commit_sha": "d61adb9fe2c71e17fde5b59be528d4340772eca3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
     "checks": {
       "authorization": {
@@ -25,14 +25,14 @@
         "evidence": "After rebasing onto latest origin/main, focused Career pilot bridge, review-governance, job list/detail, and architecture suites passed 48 tests / 773 assertions; the Big Five isolation regression passed 2 tests / 6 assertions. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, git diff, and exact allowed-path scope checks passed. The package command remained read-only and no controlled production action occurred."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "Initial exact-head run passed 8 checks and failed verify-bigfive only because its runtime-freeze classifier did not yet classify the new Career-only reviewer bridge as MBTI-isolated. The exact allowlist regression was added in scope and its two focused tests / 6 assertions pass locally; GitHub rerun is pending."
+        "status": "passed",
+        "evidence": "Exact head d61adb9fe2c71e17fde5b59be528d4340772eca3 passed all 9 checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. The automated P1 was fixed, replied to, and its review thread resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -82,9 +82,14 @@
         "at": "2026-07-23T02:00:00Z",
         "status": "github_checks_pending",
         "note": "Rebased cleanly onto latest origin/main 1bb86cf2b while preserving the unrelated SAEP manifest item and the exact PR2 manifest/state scope. Revalidation passed 48 tests/773 assertions plus the 2-test/6-assertion Big Five isolation regression; syntax, 220 routes, Pint, Composer validation/audit, YAML/JSON, diff, and exact-path scope passed. The updated exact implementation head is f59355180375aa5892e44f2289d9001543d2b42f; required GitHub checks are pending after force-with-lease push."
+      },
+      {
+        "at": "2026-07-23T02:06:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact PR head d61adb9fe2c71e17fde5b59be528d4340772eca3 passed all 9 required/reporting checks. The automated P1 fail-closed review was fixed with regression coverage, replied to, and resolved. Scope remains limited to the declared 12 paths; merge awaits this ledger-only head's required checks."
       }
     ],
-    "updated_at": "2026-07-23T02:00:00Z"
+    "updated_at": "2026-07-23T02:06:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
