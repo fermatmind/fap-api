@@ -8,9 +8,9 @@
     "depends_on": [
       "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "8c808558be2fc0d607dc5bd134daf9b85688b386",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -62,9 +62,14 @@
         "at": "2026-07-23T01:40:00Z",
         "status": "local_validation_passed",
         "note": "Implemented deterministic bilingual content/SEO/visible-claim targets, exact scope/target/package evidence lookup, whole-batch stale invalidation, and identity-redacted list/detail projection. Focused suites passed 48 tests/758 assertions; syntax, 220 routes, Pint, Composer validation/audit, YAML/JSON, diff, and exact-path scope passed. No deploy, production evidence bind, cache operation, CMS/database mutation, publication, indexability, sitemap/llms, Search Channel action, held-slug release, or URL submission occurred."
+      },
+      {
+        "at": "2026-07-23T01:45:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact nine-path PR2 scope as 8c808558be2fc0d607dc5bd134daf9b85688b386, pushed the scoped branch, and opened PR #3214. Merge remains gated on all required GitHub checks, clean scope, mergeability, and resolved actionable review. This following commit changes only the PR2 ledger transition."
       }
     ],
-    "updated_at": "2026-07-23T01:40:00Z"
+    "updated_at": "2026-07-23T01:45:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
