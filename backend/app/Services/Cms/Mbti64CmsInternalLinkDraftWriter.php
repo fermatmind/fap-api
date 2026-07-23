@@ -112,9 +112,7 @@ final class Mbti64CmsInternalLinkDraftWriter
             : null;
         $privateRecommendedEdgeCount = 0;
         foreach ($this->edges($graph, 'recommendedEdges') as $edge) {
-            $rawSource = trim((string) ($edge['source_path'] ?? $edge['source_url'] ?? ''));
-            $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
-            if ($this->containsForbiddenRoutePattern($rawSource)) {
+            if ($this->edgeSideContainsForbiddenValue($edge, 'source')) {
                 $privateRecommendedEdgeCount++;
                 $errors[] = [
                     'field' => 'recommendedEdges',
@@ -122,7 +120,7 @@ final class Mbti64CmsInternalLinkDraftWriter
                     'message' => 'Recommended edge source contains a forbidden private route pattern.',
                 ];
             }
-            if ($this->containsForbiddenRoutePattern($rawTarget)) {
+            if ($this->edgeSideContainsForbiddenValue($edge, 'target')) {
                 $privateRecommendedEdgeCount++;
                 $errors[] = [
                     'field' => 'recommendedEdges',
@@ -603,15 +601,13 @@ final class Mbti64CmsInternalLinkDraftWriter
     private function activeEdgesForSource(array $edges): array
     {
         return array_values(array_filter($edges, function (array $edge): bool {
-            $rawSource = trim((string) ($edge['source_path'] ?? $edge['source_url'] ?? ''));
-            $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
-            $target = $this->normalizePath($rawTarget);
+            $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
 
             return ($edge['safe_public_route'] ?? null) === true
                 && trim((string) ($edge['publish_blocker_if_any'] ?? '')) === ''
                 && $target !== ''
-                && ! $this->containsForbiddenRoutePattern($rawSource)
-                && ! $this->containsForbiddenRoutePattern($rawTarget)
+                && ! $this->edgeSideContainsForbiddenValue($edge, 'source')
+                && ! $this->edgeSideContainsForbiddenValue($edge, 'target')
                 && ! $this->containsForbiddenRoutePattern($target);
         }));
     }
@@ -646,8 +642,7 @@ final class Mbti64CmsInternalLinkDraftWriter
                 continue;
             }
 
-            $rawSource = trim((string) ($edge['source_path'] ?? $edge['source_url'] ?? ''));
-            if ($this->containsForbiddenRoutePattern($rawSource)) {
+            if ($this->edgeSideContainsForbiddenValue($edge, 'source')) {
                 $errors[] = [
                     'field' => 'recommendedEdges.'.$sourcePath,
                     'code' => 'unsafe_bounded_edge',
@@ -656,10 +651,18 @@ final class Mbti64CmsInternalLinkDraftWriter
 
                 continue;
             }
+            if (! $this->edgeSideMatchesPath($edge, 'source', $sourcePath)) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'bounded_edge_source_mismatch',
+                    'message' => 'Every bounded edge source path and URL must match its canonical source.',
+                ];
 
-            $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
-            $target = $this->normalizePath($rawTarget);
-            if ($this->containsForbiddenRoutePattern($rawTarget)) {
+                continue;
+            }
+
+            $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            if ($this->edgeSideContainsForbiddenValue($edge, 'target')) {
                 $errors[] = [
                     'field' => 'recommendedEdges.'.$sourcePath,
                     'code' => 'unsafe_bounded_edge',
@@ -682,7 +685,7 @@ final class Mbti64CmsInternalLinkDraftWriter
             $expectedTarget = $edgeType === 'variant_at_pair'
                 ? '/en/personality/'.$type.'-'.(strtolower((string) $identity['variant_code']) === 'a' ? 't' : 'a')
                 : '/en/personality/'.$type.'-a-vs-'.$type.'-t';
-            if ($target !== $expectedTarget) {
+            if ($target !== $expectedTarget || ! $this->edgeSideMatchesPath($edge, 'target', $expectedTarget)) {
                 $errors[] = [
                     'field' => 'recommendedEdges.'.$sourcePath,
                     'code' => 'bounded_edge_target_mismatch',
@@ -995,6 +998,42 @@ final class Mbti64CmsInternalLinkDraftWriter
         $path = '/'.ltrim($path, '/');
 
         return $path !== '/' ? rtrim($path, '/') : $path;
+    }
+
+    /**
+     * @param  array<string,mixed>  $edge
+     */
+    private function edgeSideContainsForbiddenValue(array $edge, string $side): bool
+    {
+        foreach ([$side.'_path', $side.'_url'] as $field) {
+            $value = trim((string) ($edge[$field] ?? ''));
+            if ($value !== '' && $this->containsForbiddenRoutePattern($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $edge
+     */
+    private function edgeSideMatchesPath(array $edge, string $side, string $expectedPath): bool
+    {
+        $seen = false;
+        foreach ([$side.'_path', $side.'_url'] as $field) {
+            $value = trim((string) ($edge[$field] ?? ''));
+            if ($value === '') {
+                continue;
+            }
+
+            $seen = true;
+            if ($this->normalizePath($value) !== $expectedPath) {
+                return false;
+            }
+        }
+
+        return $seen;
     }
 
     private function containsForbiddenRoutePattern(string $value): bool

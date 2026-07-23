@@ -467,7 +467,6 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
             foreach ($graph['recommendedEdges'] as &$edge) {
                 if (($edge['source_path'] ?? null) === '/en/personality/intj-a'
                     && ($edge['edge_type'] ?? null) === 'variant_at_pair') {
-                    $edge['target_path'] = '/en/personality/intj-t?token=must-not-persist';
                     $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-t?token=must-not-persist';
                     break;
                 }
@@ -495,7 +494,6 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
             foreach ($graph['recommendedEdges'] as &$edge) {
                 if (($edge['source_path'] ?? null) === '/en/personality/intj-a'
                     && ($edge['edge_type'] ?? null) === 'variant_at_pair') {
-                    $edge['source_path'] = '/en/personality/intj-a?token=must-not-persist';
                     $edge['source_url'] = 'https://fermatmind.com/en/personality/intj-a?token=must-not-persist';
                     break;
                 }
