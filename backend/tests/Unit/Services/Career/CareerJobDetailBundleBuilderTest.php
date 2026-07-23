@@ -66,7 +66,17 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
             'import_run_id' => $importRun->id,
         ]);
 
-        $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug('backend-architect');
+        $conversionClosureOverride = [
+            'subject_slug' => 'backend-architect',
+            'counts' => ['career_job_detail_cta_click' => 42],
+            'readiness' => ['closure_ready' => true],
+        ];
+        $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug(
+            'backend-architect',
+            null,
+            null,
+            $conversionClosureOverride,
+        );
 
         $this->assertNotNull($bundle);
         $payload = $bundle?->toArray() ?? [];
@@ -79,6 +89,7 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
         $this->assertArrayHasKey('allow_strong_claim', (array) data_get($payload, 'claim_permissions'));
         $this->assertArrayHasKey('metadata_contract_version', (array) data_get($payload, 'seo_contract'));
         $this->assertArrayHasKey('compiler_version', (array) data_get($payload, 'provenance_meta'));
+        $this->assertSame($conversionClosureOverride, $payload['conversion_closure']);
     }
 
     public function test_it_returns_null_when_only_mutable_occupation_exists_without_compiled_authority_snapshot(): void

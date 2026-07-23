@@ -198,30 +198,39 @@ dispatches a queue job, uses Supervisor, or stores a repair cursor.
 
 `verify_only` is strictly read-only: it rejects an approval phrase, installs a
 fail-closed database guard, validates the exact 2,092-row coverage boundary,
-and emits only control-plane SHA, runner SHA256, release identity, counts, and
-zero-write evidence. `bootstrap_and_verify` additionally requires the exact
-control-plane SHA, runner SHA256, active/candidate revisions, staging run,
-inactive release name, and missing-pointer count in the operator phrase. It
-revalidates the active pointer, inactive candidate, deploy-lock absence, and
-runner hash before each fixed target-row batch at offsets
-`0,250,500,750,1000,1250,1500,1750,2000`.
+and emits a v2 authorization artifact bound to the workflow run id/attempt,
+control-plane SHA, runner SHA256, release identity, coverage fingerprint,
+counts, 5,000ms offline budget, one retry, 50-row batch size, and zero-write
+evidence. `bootstrap_and_verify` must download that exact successful immutable
+artifact, reject v1 packets, prove there was no intervening bootstrap run, and
+match the current row-level coverage fingerprint before any cache write.
 
-Each batch runs as the application runtime user with a 600-second limit and
-calls the candidate's own synchronous detail warmer only for rows still marked
-repairable. Ready targets are skipped without changing their pointers. Any
-non-`cached` result or exception stops immediately with a sanitized error code.
-A retry starts again at offset zero after a new read-only preflight and new
-exact authorization; already-ready rows are automatically skipped. Final
-readback must prove `2092/2092`, zero missing/broken/excluded rows, the exact
-authorized cache-write total, the unchanged active SHA, and the still-inactive
-candidate. This workflow never deploys, activates, migrates, publishes, writes
-CMS/database authority, changes indexability, or touches sitemap, llms, or
-Search Channel state.
+Each 50-row batch runs as the application runtime user with a 720-second
+limit. The candidate precomputes conversion closure with one events read, one
+shortlist aggregation, and one feedback aggregation per batch, then calls its
+own offline synchronous detail warmer only for rows still marked repairable.
+The public HTTP warmer retains its separate 2,000ms budget. Only
+`build_budget_exceeded` and transient database reads receive one bounded retry
+after 500ms; permanent database, cache publish, payload, and unexpected errors
+stop immediately. Receipts contain only safe failure stage/category, build
+timings, row-index hash, and pre/post coverage fingerprints. They never contain
+target identity, query text, exception text, cache keys, or SSH routing data.
+
+A failed run preserves verified cache. Recovery starts again at offset zero
+after a new read-only preflight and new exact authorization; already-ready rows
+are automatically skipped. Final readback must prove `2092/2092`, zero
+missing/broken/excluded rows, the exact authorized cache-write total, the
+unchanged active SHA, and the still-inactive candidate. The retired
+`88dedb58f341e6c92d07754eac7862fa3454dc7c` candidate is permanently rejected.
+This workflow never deploys, activates, migrates, publishes, writes CMS/database
+authority, changes indexability, or touches sitemap, llms, or Search Channel
+state. Its production routing metadata is consumed only from environment
+secrets; there is no Actions-variable fallback.
 
 The exact write authorization format is:
 
 ```text
-I explicitly approve production Career inactive-candidate exact cache bootstrap with control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
+I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run <PREFLIGHT_RUN_ID> coverage fingerprint <COVERAGE_SHA256> control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets with offline build budget 5000ms, retry limit 1 and batch size 50; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
 ```
 
 ## fap-web handling in V1
