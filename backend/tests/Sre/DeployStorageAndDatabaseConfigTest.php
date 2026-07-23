@@ -23,6 +23,16 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $deployer,
         );
         $this->assertStringContainsString(
+            'queue capability preflight requires running supervisor program [{$program}] before release activation',
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            "deployIsCodeOnly() && deployBooleanOption('require_ops_queue_reload', false)",
+            $deployer,
+        );
+        $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $deployer);
+        $this->assertStringContainsString('END { exit !(found && !bad) }', $deployer);
+        $this->assertStringContainsString(
             'staging has unmanaged Laravel queue workers; configure a queue manager before deployment',
             $deployer,
         );
@@ -847,6 +857,10 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString(
             "return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);",
             $deployer
+        );
+        $this->assertStringContainsString(
+            '.github/workflows/backend-production-ops-queue-control.yml|deploy/supervisor/fap-queue-ops.conf.template',
+            $workflow,
         );
     }
 
