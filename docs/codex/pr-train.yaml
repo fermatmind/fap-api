@@ -120,6 +120,52 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01
+    repo: fap-api
+    base: main
+    depends_on: []
+    branch: codex/saep-proposed-api-root5-no-mutation-deploy-path-01
+    title: "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths"
+    train_scope: root5_no_mutation_deploy_path
+    status: user_authorized
+    mode: execute
+    scope:
+      - Admit only the fifteen exact audited Root5 runtime, deployment-control, or inert evidence paths currently rejected by the cumulative production code-only classifier.
+      - Preserve fail-closed rejection of migrations, database/content authority artifacts, storage state, and any unknown or non-audited CMS, Model, Filament, or backend documentation path.
+      - Preserve the existing deploy:code-only task boundary that omits migrations, seeders, CMS baseline imports, Career authority cache warm, and sitemap source cache warm.
+      - Reload long-running queue workers through the configured process manager after code-only symlink activation, without issuing the cache-backed artisan queue restart signal; fail closed when no process-manager reload path exists.
+    allowed_paths:
+      - .github/workflows/deploy-production.yml
+      - backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php
+      - deploy.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Execute staging or production deployment, restart or reload any service, use SSH, or remove a deploy lock.
+      - Execute migrations, CMS/database writes, cache warm/flush/clear, baseline import, publication, Search action, or sitemap mutation.
+      - Add wildcard acceptance for backend/app/Services/Cms, backend/app/Models, backend/app/Filament, backend/docs, or any authority/data path.
+      - Modify application runtime behavior, routes, migrations, content authority, or fap-web.
+    validation:
+      - cd backend && php artisan test tests/Sre/DeployStorageAndDatabaseConfigTest.php --filter='code_only' --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Sre/DeployStorageAndDatabaseConfigTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG5-EN52-TRANSLATION-AUTHORITY-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api

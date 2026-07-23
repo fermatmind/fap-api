@@ -89043,7 +89043,7 @@
   "scope_validation": {
     "allowed_paths_only": true,
     "local_validation_passed": true,
-    "github_checks_green": true,
+      "github_checks_green": true,
     "post_merge_revalidated": true
   },
   "transitions": [
@@ -99094,5 +99094,119 @@
       {"at": "2026-07-19T07:09:16Z", "status": "review_fix_local_validation_passed", "note": "The refreshed review correctly identified that Runtime46 commit_sha still referenced the initial evidence commit. Advanced it to exact reviewed all-green head f2048e239e20290c8828c660f7c9d8569c02779e; the following commit changes only this Runtime46 pointer and its evidence note before the final GitHub checks rerun."}
     ],
     "updated_at": "2026-07-19T07:09:16Z"
+  },
+  "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01": {
+    "id": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-root5-no-mutation-deploy-path-01",
+    "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "3d187963f2908129b8f1420ae12f1083734b6920",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3210",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Operator explicitly authorized the complete PR lifecycle and prohibited deploy, restart, CMS/database/cache writes."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "No declared PR dependency. Branch started from origin/main 2c197196ab041f5e5102f9d828e7e978bc96c8ba, rebased onto f474b41ec49e67956697878d90436a6bd19243e0 after isolated required-check baseline repair PR #3211 merged, onto d862379403efa05ce450bd75481be94905edfb43 after external closeout PR #3212, and finally onto exact origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f after external Career PR #3213 advanced main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Initial and all review-fix validation passes succeeded. Focused deploy storage/database config suite now passes 19 tests / 341 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash backend/scripts/ci_verify_mbti.sh exited 0 after the external staging-workflow receipt and supervisor-only ops-worker requirements, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates. One incorrect Pint executable path and one root-level HTTP-smoke script invocation failed harmlessly before their correct commands passed; neither performed an external mutation."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All 9 required CI and Code Scanning checks passed on exact reviewed PR head 3d187963f2908129b8f1420ae12f1083734b6920 after the final rebase onto origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f. The following commit changes only this ledger pointer and ready-to-merge evidence and must rerun the same required checks before merge."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-22T17:07:33Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 2c197196 with a four-file workflow/test/train-metadata scope. The change admits only fifteen exact audited Root5 runtime, deployment-control, or inert evidence paths while preserving fail-closed mutation and unknown-path rejection. No deploy, restart, SSH, migration, CMS/database/cache/Search or sitemap action is authorized or executed."
+      },
+      {
+        "at": "2026-07-22T17:15:58Z",
+        "status": "local_validation_passed",
+        "note": "All manifest local checks passed. Full CI exited 0; generated Big Five compiler output was removed from the task diff, leaving exactly the four declared workflow, focused test and train-metadata files. No deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-22T17:17:21Z",
+        "status": "github_checks_pending",
+        "note": "Implementation commit 1d6cc801cd7baf39d9b5c3d0854b52eb0fe6d990 was pushed and PR #3210 opened. Awaiting required GitHub checks; no deployment workflow was manually dispatched."
+      },
+      {
+        "at": "2026-07-22T17:42:22Z",
+        "status": "github_checks_pending",
+        "note": "The first CI run failed only because six Guzzle advisories published after the last main CI made Composer audit fail on the unchanged main lockfile. Isolated lockfile-only baseline repair PR #3211 passed full local and remote CI with zero advisories and merged as f474b41ec49e67956697878d90436a6bd19243e0. This branch was rebased onto that exact main; implementation commit is now ac4e32c435b86e715020c1fa4854f9d256b573a3. Awaiting the combined exact-head rerun."
+      },
+      {
+        "at": "2026-07-22T18:00:42Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact-head review identified that newly admitted approval UI/model code could dispatch work to stale pre-release queue workers. The same-scope fix makes code_only reload workers directly through configured supervisor/systemd without the cache-backed artisan queue:restart signal and fail closed when no manager reload path exists. Focused 19-test / 323-assertion suite, scoped Pint and the complete local CI passed. One initial Pint invocation used an unreadable ../../deploy.php path; it was corrected to ../deploy.php and passed without modifying external state. No deploy, restart, SSH or CMS/database/cache/Search action was executed."
+      },
+      {
+        "at": "2026-07-22T18:01:33Z",
+        "status": "github_checks_pending",
+        "note": "Review fix committed as exact implementation head 12e8fc73e7218003cc3f3122dbda3cdc749eb1c7. The following commit updates only this ledger pointer before the required-check rerun; no deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-22T18:11:53Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review identified that the prior ledger-only commit manually expanded the implementation SHA incorrectly. The pointer is corrected to the real resolvable commit 12e8fc73e7218003cc3f3122dbda3cdc749eb1c7. All required CI and Code Scanning checks passed on reviewed head 91a826d3c67f0c5f48b245537a48119ed08e6096, the worker-reload P1 thread is resolved, and the following commit changes only this ledger correction and ready-to-merge state. Merge remains gated on its exact-head required-check rerun and zero unresolved review threads; no deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-22T18:29:03Z",
+        "status": "github_checks_pending",
+        "note": "Final exact-head review identified a valid P2: the supervisor fallback printed a missing legacy systemd unit error but returned success, allowing code_only to finish without any worker reload. Implementation head 5d494247f10935d1edec6f05e59f01b90b3793cc now exits nonzero in that branch. Focused validation passed 19 tests / 324 assertions, scoped syntax/Pint/diff checks passed, and the complete backend master CI exited 0. The following commit changes only this ledger pointer before exact-head GitHub checks; no deployment, restart, SSH, CMS/database/cache/Search or other external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T00:47:57Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified a valid P1: approval runtime paths could deploy while fap-queue-ops remained optional. Implementation head 158363ed06afc6a4033ffc78a9bf902bed511d85 now emits an approval-scope flag from cumulative classification and promotes the ops supervisor program to the fail-closed required set only for that scope. Focused validation passed 19 tests / 335 assertions, scoped syntax/Pint/YAML/diff checks passed, and the complete backend master CI exited 0. The following commit changes only this ledger pointer before exact-head GitHub checks; no deployment, restart, SSH, CMS/database/cache/Search or other external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:08:56Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified two valid P1 boundaries. Implementation head 15e0e30b492e7399960150121ae7bc0b6100e351 after the latest rebase now refuses deploy.yml in code_only unless its bytes match an external repository-variable SHA-256 receipt, and refuses the legacy systemd fallback whenever approval scope requires the supervisor ops worker. Focused validation passed 19 tests / 341 assertions, scoped syntax/Pint/YAML/diff checks passed, and the complete backend master CI exited 0. The following amended commit changes only this ledger pointer before exact-head GitHub checks; no repository variable was set and no deployment, restart, SSH, CMS/database/cache/Search or other external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:12:07Z",
+        "status": "github_checks_pending",
+        "note": "External PR #3212 advanced origin/main to d862379403efa05ce450bd75481be94905edfb43 while checks were starting. The branch was cleanly rebased; the sole ledger conflict retained main's merged Runtime Closeout 14 state and this task's independent record. Scope remains the same five paths, and exact-head checks must restart. No deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:28:50Z",
+        "status": "github_checks_pending",
+        "note": "External Career PR #3213 advanced origin/main to 31819becfcf8bda0b3fd9ae4f301b011e031374f immediately after the prior exact-head review. The branch was rebased again; the manifest conflict retained both main's Career item and this task's isolated item, while the state merge preserved both ledgers. Scope remains the same five paths, and exact-head checks must restart. No deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:38:21Z",
+        "status": "ready_to_merge",
+        "note": "All 9 required CI and Code Scanning checks passed on exact reviewed head 3d187963f2908129b8f1420ae12f1083734b6920, which GitHub reports mergeable against unchanged origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f. The implementation review findings are resolved; the two remaining P2 threads request this exact reviewed-head ledger pointer and will be resolved after this ledger-only commit. Merge remains gated on the ledger-only head rerunning every required check with zero unresolved threads. No deployment, restart, SSH, repository-variable change, CMS/database/cache/Search or other external mutation was executed."
+      }
+    ],
+    "updated_at": "2026-07-23T01:38:21Z"
   }
 }

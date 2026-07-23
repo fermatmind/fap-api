@@ -351,6 +351,57 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function code_only_scope_accepts_only_the_exact_audited_root5_paths(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+
+        foreach ([
+            '.github/workflows/career-detail-staging-cache-repair.yml',
+            '.github/workflows/deploy.yml',
+            '.github/workflows/mbti-comp-runtime46-production-ops.yml',
+            '.github/workflows/mbti-comp-runtime46-staging-dry-run.yml',
+            'backend/app/Filament/Ops/Resources/AdminApprovalResource.php',
+            'backend/app/Models/AdminApproval.php',
+            'backend/app/Models/DailyGivingRecord.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
+            'backend/docs/career/README.md',
+            'backend/docs/career/career-detail-stability-train-2026-07-18.md',
+            'backend/docs/career/job-detail-cache-coverage.md',
+            'backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json',
+            'backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md',
+            'docs/ops/big-five-en52-release.md',
+            'docs/ops/big-five-legacy-alias-hard-purge.md',
+        ] as $auditedPath) {
+            $this->assertStringContainsString($auditedPath, $source);
+        }
+
+        $this->assertStringContainsString(
+            'code-only scope accepted exact audited Root5 runtime or inert evidence path:',
+            $source
+        );
+        $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD=false', $source);
+        $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD=true', $source);
+        $this->assertStringContainsString('code-only scope accepted approval runtime path and requires ops queue reload:', $source);
+        $this->assertStringContainsString('require_ops_queue_reload=$REQUIRE_OPS_QUEUE_RELOAD', $source);
+        $this->assertStringContainsString('require_ops_queue_reload: ${{ steps.resolve_deploy_mode.outputs.require_ops_queue_reload }}', $source);
+        $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD: ${{ needs.deployment-eligibility.outputs.require_ops_queue_reload }}', $source);
+        $this->assertStringContainsString('-o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD"', $source);
+        $this->assertStringContainsString('TRUSTED_STAGING_WORKFLOW_SHA256: ${{ vars.PRODUCTION_TRUSTED_STAGING_WORKFLOW_SHA256 }}', $source);
+        $this->assertStringContainsString('code-only scope requires an external trusted SHA-256 receipt for deploy.yml.', $source);
+        $this->assertStringContainsString('sha256sum .github/workflows/deploy.yml', $source);
+        $this->assertStringContainsString('code-only scope refused deploy.yml because its SHA-256 does not match the external trusted receipt.', $source);
+        $this->assertStringNotContainsString('.github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/deploy.yml|', $source);
+        $this->assertStringContainsString('backend/database/*', $source);
+        $this->assertStringContainsString('backend/content_baselines/*', $source);
+        $this->assertStringContainsString('content_packages/*', $source);
+        $this->assertStringContainsString('backend/storage/*', $source);
+        $this->assertStringContainsString('code-only scope refused authority path:', $source);
+        $this->assertStringNotContainsString('backend/app/Services/Cms/*)', $source);
+        $this->assertStringNotContainsString('backend/app/Models/*)', $source);
+        $this->assertStringNotContainsString('backend/app/Filament/*)', $source);
+    }
+
+    #[Test]
     public function release_candidate_record_keeps_the_main_head_and_undeployed_commit_list_auditable(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
@@ -394,7 +445,18 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $this->assertStringNotContainsString($forbiddenTask, $task);
         }
 
-        $this->assertStringContainsString('Skip queue worker reload in code_only deploy mode', $source);
+        $this->assertStringContainsString('$codeOnly = deployIsCodeOnly();', $source);
+        $this->assertStringContainsString('if (! $codeOnly)', $source);
+        $this->assertStringContainsString('Reload queue workers through the process manager without a cache restart signal in code_only deploy mode', $source);
+        $this->assertStringContainsString('Reload queue workers through systemd without a cache restart signal in code_only deploy mode', $source);
+        $this->assertStringContainsString('code_only deploy requires a queue process manager reload path', $source);
+        $this->assertStringContainsString("else printf '%s\\\\n' {\$notFoundMessage} >&2; exit 1; fi", $source);
+        $this->assertStringContainsString("get('require_ops_queue_reload', 'false')", $source);
+        $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
+        $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
+        $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);
+        $this->assertStringContainsString('approval runtime code_only deploy requires the supervisor ops queue reload path', $source);
+        $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip nginx reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $source);
         $this->assertStringContainsString('Skip shared content package copy in authority-mutation-free deploy mode', $source);
