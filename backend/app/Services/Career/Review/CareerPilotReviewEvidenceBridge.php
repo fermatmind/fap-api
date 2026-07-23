@@ -335,6 +335,6 @@ final class CareerPilotReviewEvidenceBridge
 
     private function normalizeLocale(string $locale): string
     {
-        return strtolower(trim($locale)) === 'en' ? 'en' : 'zh-CN';
+        return in_array(strtolower(trim($locale)), ['en', 'en-us'], true) ? 'en' : 'zh-CN';
     }
 }

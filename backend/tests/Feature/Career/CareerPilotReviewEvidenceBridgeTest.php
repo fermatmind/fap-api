@@ -101,6 +101,9 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
             ->assertJsonPath('items.0.trust_summary.reviewer', null);
+        $this->getJson('/api/v0.5/career/jobs?locale=en-US')
+            ->assertOk()
+            ->assertJsonPath('items.0.trust_summary.review_state', 'approved');
 
         foreach ([$detail->getContent(), $index->getContent()] as $publicJson) {
             $this->assertStringNotContainsString('attested_by_admin_user_id', $publicJson);

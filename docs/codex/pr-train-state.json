@@ -92,9 +92,14 @@
         "at": "2026-07-23T02:14:00Z",
         "status": "github_review_repairing",
         "note": "Final-head review raised three actionable boundaries before merge: bind public trust evidence, bind the exact bilingual index entry, and avoid legacy promotion/warm dispatch during package reads. The same PR now folds each locale's exact index item and visible trust evidence into the six-target package, compares the served list item to the approved hash before projection, and accepts only published active/LKG detail readiness through no-side-effect inspection. Added drift and cache-side-effect regressions; focused suites pass 50 tests/783 assertions plus the 2-test/6-assertion Big Five isolation regression. GitHub checks and review resolution are pending; no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:22:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact repair head 5aaf55009096a0c4493e1a853a2ef9a5f01581fc passed all 9 GitHub checks. Latest review then identified one locale-normalization mismatch for en-US list requests; aligned the bridge with cache normalization and added approved en-US regression coverage. Final checks remain pending and no production action occurred."
       }
     ],
-    "updated_at": "2026-07-23T02:14:00Z"
+    "updated_at": "2026-07-23T02:22:00Z"
   },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
