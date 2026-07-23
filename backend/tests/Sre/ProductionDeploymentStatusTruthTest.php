@@ -338,6 +338,18 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
+            'backend/scripts/deploy/immutable_candidate_sitemap_control.php',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed immutable sitemap control hash.',
+            $eligibility
+        );
+        $this->assertStringContainsString(
             'code-only scope classification accepted the exact audited Runtime 46 subsumed baseline.',
             $eligibility
         );
