@@ -99451,7 +99451,7 @@
     "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
     "depends_on": [],
     "status": "github_checks_pending",
-    "commit_sha": "22565ef059f593a74ee2c8aa64c5632728a190b3",
+    "commit_sha": "4487b1da71721d7b6dbe4611f52e8e948fe422d3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
     "checks": {
       "authorization": {
@@ -99464,11 +99464,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused command coverage passed 17 tests/336 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity, cased-duplicate source and tokenized raw-target cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation passed before the two latest same-scope security regressions; each repair reran the focused suite, syntax and scoped Pint. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
+        "evidence": "Focused command coverage passed 18 tests/345 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity, cased-duplicate source and tokenized raw source/target cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation passed before the latest same-scope security regressions; each repair reran the focused suite, syntax and scoped Pint. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All 9 checks passed on a827f564b6e60c701acc19f1fce258be22d3b4f7, after which exact-head review identified a raw tokenized-target normalization gap. The same-scope repair is committed as 22565ef059f593a74ee2c8aa64c5632728a190b3 with 17-test/336-assertion focused validation and must rerun all required checks."
+        "evidence": "All 9 checks passed on af493a00c3409a0ece619dda03ee0716d7520773, after which exact-head review identified the symmetric raw tokenized-source normalization gap. The same-scope repair is committed as 4487b1da71721d7b6dbe4611f52e8e948fe422d3 with 18-test/345-assertion focused validation and must rerun all required checks."
       }
     },
     "scope_validation": {
@@ -99523,8 +99523,13 @@
         "at": "2026-07-23T04:07:07Z",
         "status": "github_checks_pending",
         "note": "Final-head review found that path normalization removed forbidden query parameters before validation while raw recommended edges could still enter snapshot previews. Repair 22565ef059f593a74ee2c8aa64c5632728a190b3 now validates the raw target before normalization, suppresses the raw sensitive value from errors, excludes the unsafe edge and proves zero revisions plus no token output. Focused validation passes 17 tests/336 assertions with syntax and scoped Pint green; required checks are pending."
+      },
+      {
+        "at": "2026-07-23T04:16:24Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review found the symmetric raw source normalization path could preserve a tokenized source edge in snapshot data. Repair 4487b1da71721d7b6dbe4611f52e8e948fe422d3 now validates raw edge sources before normalization in both bounded and unbounded selection, suppresses sensitive values, and proves no token output plus zero revisions. Focused validation passes 18 tests/345 assertions with syntax and scoped Pint green; required checks are pending."
       }
     ],
-    "updated_at": "2026-07-23T04:07:07Z"
+    "updated_at": "2026-07-23T04:16:24Z"
   }
 }
