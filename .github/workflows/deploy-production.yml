@@ -112,7 +112,7 @@ jobs:
                 exit 2
               fi
               RESOLVED_DEPLOY_MODE=standard
-              EXPECTED_APPROVAL="I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+              EXPECTED_APPROVAL="I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}."
               ;;
             schema_only)
               if [[ ! "$EXPECTED_DEPLOYED_REVISION" =~ ^[0-9a-f]{40}$ ]]; then
@@ -332,6 +332,7 @@ jobs:
             '([.jobs[] | select(.name == "Deploy checks (staging)" and .conclusion == "success")] | length) == 1
              and ([.jobs[] | select(.name == "Deploy (staging)" and .conclusion == "success")] | length) == 1' \
             <<<"$JOBS_JSON" >/dev/null
+          echo "staging_sha=$STAGING_SHA" >> "$GITHUB_OUTPUT"
 
       - name: Confirm approved release satisfies deployment mode policy
         id: latest_main_guard
@@ -340,6 +341,7 @@ jobs:
           DEPLOY_MODE: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
           ISOLATED_RUNTIME46: ${{ steps.resolve_deploy_mode.outputs.isolated_runtime46 }}
           EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
+          STAGING_SHA: ${{ steps.resolve_deploy_mode.outputs.staging_sha }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main:refs/remotes/origin/main
@@ -348,9 +350,16 @@ jobs:
           echo "main_sha=$LATEST_MAIN_SHA" >> "$GITHUB_OUTPUT"
           case "$DEPLOY_MODE" in
             standard)
-              if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
-                echo "Manual standard production deploy refused because expected_release_sha is not latest main." >&2
+              if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"; then
+                echo "Manual standard production deploy refused because the staged candidate is not reachable from latest main." >&2
                 exit 1
+              fi
+              if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
+                if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]; then
+                  echo "Immutable standard candidate requires an exact-SHA successful staging run when main has advanced." >&2
+                  exit 1
+                fi
+                echo "Immutable staged release candidate accepted; newer main commits remain intentionally excluded."
               fi
               ;;
             schema_only)
@@ -552,6 +561,52 @@ jobs:
             exit 1
           fi
           echo "mutation-limited deployed baseline verified"
+
+      - name: Verify immutable standard candidate advances production before writes
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          LATEST_MAIN_AT_WRITE="$(git rev-parse origin/main)"
+          if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_AT_WRITE"; then
+            echo "Immutable standard candidate is no longer reachable from latest main." >&2
+            exit 1
+          fi
+          CURRENT_PRODUCTION_SHA="$(ssh_retry "cd '$DEPLOY_PATH/current' && test -f REVISION && tr -d '\r\n' < REVISION")"
+          if [[ ! "$CURRENT_PRODUCTION_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Immutable standard candidate cannot verify the current production REVISION." >&2
+            exit 1
+          fi
+          if ! git cat-file -e "${CURRENT_PRODUCTION_SHA}^{commit}"; then
+            echo "Immutable standard candidate cannot resolve the current production commit." >&2
+            exit 1
+          fi
+          if [ "$CURRENT_PRODUCTION_SHA" = "$DEPLOY_SHA" ]; then
+            echo "Immutable standard candidate is already deployed; refusing a redundant production mutation." >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$CURRENT_PRODUCTION_SHA" "$DEPLOY_SHA"; then
+            echo "Immutable standard candidate would not advance the current production revision." >&2
+            exit 1
+          fi
+          echo "Immutable standard candidate ancestry verified without disclosing revision values."
 
       - name: Remote deploy lock guard
         shell: bash

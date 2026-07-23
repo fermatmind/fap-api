@@ -147,9 +147,25 @@ High-risk paths require manual approval and are blocked by default:
 
 Production deployment has no `push`, `pull_request`, or `workflow_run` trigger.
 It is available only through manual `workflow_dispatch` after exact-SHA approval,
-successful staging evidence for the same latest-main SHA, a safe release ID, and
-the exact SHA-bound approval phrase. Any missing or mismatched evidence stops
-before production SSH credentials are loaded.
+successful staging evidence for an immutable candidate SHA, a safe release ID,
+and the exact bounded SHA/release approval phrase. The candidate may trail
+`main` without expiring when it remains an ancestor of current `main` and the
+staging run is for that exact candidate. Newer main commits are intentionally
+excluded rather than silently added to the deployment.
+
+After production credentials are loaded but before any remote mutation, the
+workflow re-fetches `main`, reads the current production `REVISION`, and proves
+both ancestry edges:
+
+```text
+current production REVISION -> staged candidate SHA -> current main SHA
+```
+
+The workflow fails closed on a diverged or unresolvable revision, a rollback,
+an already-deployed candidate, or non-exact staging evidence for a candidate
+that trails `main`. This allows parallel PR trains to continue without turning
+production authorization into a moving target. It does not deploy or authorize
+newer main commits.
 
 ## fap-web handling in V1
 - `fap-web` is a reference only.

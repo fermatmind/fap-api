@@ -9,15 +9,29 @@ use Tests\TestCase;
 
 final class ProductionDeploymentStatusTruthTest extends TestCase
 {
-    public function test_standard_stale_sha_fails_closed_before_the_environment_deploy_job(): void
+    public function test_standard_immutable_staged_candidate_may_trail_main_but_must_remain_its_ancestor(): void
     {
         $source = $this->workflow();
         $eligibility = $this->between($source, '  deployment-eligibility:', '  deploy-production:');
         $deploy = strstr($source, '  deploy-production:') ?: '';
 
         $this->assertStringNotContainsString('environment:', $eligibility);
+        $this->assertStringContainsString(
+            'I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}.',
+            $eligibility
+        );
+        $this->assertStringContainsString('STAGING_SHA: ${{ steps.resolve_deploy_mode.outputs.staging_sha }}', $eligibility);
+        $this->assertStringContainsString('echo "staging_sha=$STAGING_SHA" >> "$GITHUB_OUTPUT"', $eligibility);
+        $this->assertStringContainsString('if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"', $eligibility);
         $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $eligibility);
-        $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $eligibility);
+        $this->assertStringContainsString('if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]', $eligibility);
+        $this->assertStringContainsString('Immutable standard candidate requires an exact-SHA successful staging run when main has advanced.', $eligibility);
+        $this->assertStringContainsString('Manual standard production deploy refused because the staged candidate is not reachable from latest main.', $eligibility);
+        $this->assertStringContainsString('newer main commits remain intentionally excluded', $eligibility);
+        $this->assertStringNotContainsString(
+            'Manual standard production deploy refused because expected_release_sha is not latest main.',
+            $eligibility
+        );
         $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main and has no exact isolated receipt.', $eligibility);
         $this->assertStringContainsString('git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"', $eligibility);
         $this->assertStringContainsString('exit 1', $eligibility);
@@ -26,6 +40,45 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString("if: \${{ needs.deployment-eligibility.outputs.eligible == 'true' }}", $deploy);
         $this->assertStringContainsString("environment:\n      name: production", $deploy);
         $this->assertStringNotContainsString('skip_deploy', $source);
+    }
+
+    public function test_standard_candidate_revalidates_main_and_production_ancestry_before_any_remote_write(): void
+    {
+        $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';
+        $candidateStep = $this->between(
+            $deploy,
+            '- name: Verify immutable standard candidate advances production before writes',
+            '- name: Remote deploy lock guard'
+        );
+
+        $candidateOffset = strpos($deploy, '- name: Verify immutable standard candidate advances production before writes');
+        $lockOffset = strpos($deploy, '- name: Remote deploy lock guard');
+        $healthOffset = strpos($deploy, '- name: Verify production health evidence baseline');
+        $deployerOffset = strpos($deploy, '- name: Deploy production with Deployer');
+
+        $this->assertIsInt($candidateOffset);
+        $this->assertIsInt($lockOffset);
+        $this->assertIsInt($healthOffset);
+        $this->assertIsInt($deployerOffset);
+        $this->assertLessThan($lockOffset, $candidateOffset);
+        $this->assertLessThan($healthOffset, $candidateOffset);
+        $this->assertLessThan($deployerOffset, $candidateOffset);
+        $this->assertStringContainsString(
+            "if: \${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}",
+            $candidateStep
+        );
+        $this->assertStringContainsString('git fetch --no-tags origin main:refs/remotes/origin/main', $candidateStep);
+        $this->assertStringContainsString('git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_AT_WRITE"', $candidateStep);
+        $this->assertStringContainsString('test -f REVISION', $candidateStep);
+        $this->assertStringContainsString('[[ ! "$CURRENT_PRODUCTION_SHA" =~ ^[0-9a-f]{40}$ ]]', $candidateStep);
+        $this->assertStringContainsString('git cat-file -e "${CURRENT_PRODUCTION_SHA}^{commit}"', $candidateStep);
+        $this->assertStringContainsString('if [ "$CURRENT_PRODUCTION_SHA" = "$DEPLOY_SHA" ]', $candidateStep);
+        $this->assertStringContainsString('git merge-base --is-ancestor "$CURRENT_PRODUCTION_SHA" "$DEPLOY_SHA"', $candidateStep);
+        $this->assertStringContainsString('would not advance the current production revision', $candidateStep);
+        $this->assertStringNotContainsString('dep deploy', $candidateStep);
+        $this->assertStringNotContainsString('artisan migrate', $candidateStep);
+        $this->assertStringNotContainsString('queue:restart', $candidateStep);
+        $this->assertStringNotContainsString('rm -f', $candidateStep);
     }
 
     public function test_standard_staging_evidence_allows_only_audited_control_only_byte_equivalent_delta(): void

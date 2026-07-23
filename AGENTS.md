@@ -102,6 +102,11 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - Verify-only release directory identifiers accept ASCII letters in either case, digits, dots, underscores, and hyphens so existing UTC-stamped production names with `T` and `Z` remain verifiable; path separators, whitespace, shell metacharacters, and names longer than 128 characters remain rejected.
 - Verify-only must not deploy, migrate, publish, restart, unlock, write remote files, inspect raw logs, submit search URLs, or mutate CMS/database state. Any failed check stops and reports without repairing production.
 
+### Immutable Staged Release Candidate Discipline
+- A standard backend production deployment targets an immutable candidate SHA with an exact successful staging run; it does not chase a moving latest `main`. The candidate may trail `main` only while it remains an ancestor of current `main`, its staging run is for that exact SHA, and the operator approval explicitly binds the exact SHA/release while excluding all newer main commits.
+- Immediately before any remote mutation, the production workflow must revalidate that the candidate remains reachable from current `main`, read the current production `REVISION`, and prove that production is a strict ancestor of the candidate. Divergence, rollback, an unresolvable revision, an already-deployed candidate, or non-exact staging evidence fails closed.
+- Newer main commits remain outside the bounded deployment and are listed in the production release record. Main advancement alone never invalidates an otherwise safe staged candidate, and it never authorizes deploying newer commits.
+
 ### PR Train Manifest Discipline
 - Under a concrete execution goal, add an exact missing goal-supplied PR-train manifest/state entry under the standing authorization and continue. Outside an execution goal, stop and report the gap unless the user asks to update the train manifest and state ledger.
 - This stop rule applies only when the user requested a PR-train item. It must not block an explicitly requested ad-hoc PR whose scope does not modify PR-train metadata.
