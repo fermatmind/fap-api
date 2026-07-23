@@ -134,6 +134,96 @@ final class PersonalityPublicAssetReadModelCache
     }
 
     /**
+     * @return array{state:'fresh'|'miss'|'bypass',payload:array<string,mixed>|null}
+     */
+    public function readActiveCollection(
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        int $orgId,
+        string $requiredProjectionVersion,
+    ): array {
+        if (! $this->isCacheable('index', $framework, $entityType, $selector, $locale, $orgId)) {
+            $this->recordState('index', $framework, $entityType, $locale, 'bypass');
+
+            return ['state' => 'bypass', 'payload' => null];
+        }
+
+        try {
+            $payload = $this->readStableCollectionPointer(
+                $this->activeKey('index', $framework, $entityType, $selector, $locale),
+                $framework,
+                $entityType,
+                $selector,
+                $locale,
+                $requiredProjectionVersion,
+            );
+        } catch (Throwable $throwable) {
+            $this->recordState('index', $framework, $entityType, $locale, 'bypass', $throwable);
+
+            return ['state' => 'bypass', 'payload' => null];
+        }
+
+        if (! is_array($payload)) {
+            $this->recordState('index', $framework, $entityType, $locale, 'miss');
+
+            return ['state' => 'miss', 'payload' => null];
+        }
+
+        $this->recordState('index', $framework, $entityType, $locale, 'fresh');
+
+        return ['state' => 'fresh', 'payload' => $payload];
+    }
+
+    /**
+     * @return array{state:'stale'|'miss'|'bypass',payload:array<string,mixed>|null}
+     */
+    public function staleCollection(
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        int $orgId,
+        string $requiredProjectionVersion,
+    ): array {
+        if (! $this->isCacheable('index', $framework, $entityType, $selector, $locale, $orgId)) {
+            $this->recordState('index', $framework, $entityType, $locale, 'bypass');
+
+            return ['state' => 'bypass', 'payload' => null];
+        }
+
+        try {
+            foreach ([
+                $this->activeKey('index', $framework, $entityType, $selector, $locale),
+                $this->lkgKey('index', $framework, $entityType, $selector, $locale),
+            ] as $pointerKey) {
+                $payload = $this->readStableCollectionPointer(
+                    $pointerKey,
+                    $framework,
+                    $entityType,
+                    $selector,
+                    $locale,
+                    $requiredProjectionVersion,
+                );
+                if (is_array($payload)) {
+                    $this->recordState('index', $framework, $entityType, $locale, 'stale');
+
+                    return ['state' => 'stale', 'payload' => $payload];
+                }
+            }
+        } catch (Throwable $throwable) {
+            $this->recordState('index', $framework, $entityType, $locale, 'miss', $throwable);
+
+            return ['state' => 'miss', 'payload' => null];
+        }
+
+        $this->recordState('index', $framework, $entityType, $locale, 'miss');
+
+        return ['state' => 'miss', 'payload' => null];
+    }
+
+    /**
      * @return array{state:'stale'|'miss'|'bypass',payload:array<string,mixed>|null}
      */
     public function stale(
@@ -590,6 +680,46 @@ final class PersonalityPublicAssetReadModelCache
         $token = Cache::get($this->fenceKey($surface, $framework, $entityType, $selector, $locale));
 
         return is_string($token) && $token !== '' ? $token : 'baseline';
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function readStableCollectionPointer(
+        string $pointerKey,
+        string $framework,
+        string $entityType,
+        string $selector,
+        string $locale,
+        string $requiredProjectionVersion,
+    ): ?array {
+        if (preg_match('/^[a-z0-9][a-z0-9._-]{0,127}$/', $requiredProjectionVersion) !== 1) {
+            return null;
+        }
+
+        $fenceBefore = $this->currentFenceToken('index', $framework, $entityType, $selector, $locale);
+        $versionBefore = Cache::get($pointerKey);
+        $requiredSuffix = ':projection:'.$requiredProjectionVersion;
+        if (! is_string($versionBefore)
+            || $versionBefore === ''
+            || ! str_ends_with($versionBefore, $requiredSuffix)) {
+            return null;
+        }
+
+        $payload = Cache::get(
+            $this->key('index', $framework, $entityType, $selector, $locale, $versionBefore)
+        );
+        $versionAfter = Cache::get($pointerKey);
+        $fenceAfter = $this->currentFenceToken('index', $framework, $entityType, $selector, $locale);
+
+        if (! is_array($payload)
+            || ! is_string($versionAfter)
+            || ! hash_equals($versionBefore, $versionAfter)
+            || ! hash_equals($fenceBefore, $fenceAfter)) {
+            return null;
+        }
+
+        return $payload;
     }
 
     private function fenceMatches(

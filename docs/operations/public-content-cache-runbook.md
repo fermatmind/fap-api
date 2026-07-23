@@ -43,3 +43,11 @@ The L3 phase invokes the Career command with `--directory-only`; it rebuilds onl
 Any failed priority stops later warm phases. After a successful warm, the command re-reads every selected version and fails if a pointer is missing, a payload cannot be read back, or a payload exceeds the byte budget. Reports never contain public content bodies, private routes, attempt/report/order identifiers, or secrets.
 
 Big Five warm accepts only API cache states `miss` (newly built) or `fresh`; a stale/bypass response fails the phase instead of being reported as warmed. Payload budgets use the same JSON serialization as the public API response, including escaped Unicode byte size.
+
+## Personality collection runtime reads
+
+Anonymous org-0 Big Five and Enneagram collection GETs read the active versioned projection before querying the database. A valid active hit is a pure, lock-free cache read: it must not acquire the collection write lock, refresh the active pointer, or update the selector registry.
+
+The active read verifies the collection projection discriminator and reads the fence and active pointer both before and after the versioned payload. Pointer or fence drift, a missing payload, or a projection-version mismatch is a cache miss and triggers the existing database rebuild path. Cache publication, invalidation, and fence rotation retain the existing collection lock.
+
+If the database query or projection build fails, the API may serve only a last-known-good payload that matches the current collection projection discriminator and passes the same stable pointer/fence checks. If no compatible LKG exists, the request remains fail closed. Signed verify-only requests continue to bypass active and LKG cache consumption.

@@ -20,6 +20,7 @@ use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -2065,6 +2066,8 @@ final class PersonalityPublicApiTest extends TestCase
         DB::table('personality_public_content_assets')
             ->where('id', $bigFive->id)
             ->update(['title' => "\xB1\x31"]);
+        app(PersonalityPublicAssetReadModelCache::class)
+            ->invalidateCollections('big_five', 'all', 'en', 0, true);
 
         $this->getJson($bigFivePath)
             ->assertOk()
@@ -2088,6 +2091,114 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
             ->assertJsonPath('personality_public_content_asset_v1.id', (int) $enneagram->id);
+    }
+
+    public function test_personality_asset_collection_active_hits_skip_database_queries_and_preserve_payloads(): void
+    {
+        Cache::flush();
+        $this->createPublicContentAsset([
+            'source_hash' => str_repeat('a', 64),
+        ]);
+        $this->createPublicContentAsset([
+            'locale' => 'zh-CN',
+            'title' => '开放性',
+            'canonical_json' => ['path' => '/zh/personality/big-five/openness'],
+            'source_hash' => str_repeat('b', 64),
+        ]);
+        $this->createPublicContentAsset([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'type-1',
+            'slug' => 'enneagram/type-1',
+            'title' => 'Enneagram Type 1',
+            'source_hash' => str_repeat('c', 64),
+        ]);
+
+        foreach ([
+            '/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100',
+            '/api/v0.5/personality-content-assets?framework=big_five&locale=zh-CN&per_page=100',
+            '/api/v0.5/personality-content-assets?framework=enneagram&locale=en&per_page=100',
+        ] as $path) {
+            $initial = $this->getJson($path)
+                ->assertOk()
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+            $initialPayload = $initial->json();
+            self::assertIsArray($initialPayload);
+            self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) data_get($initialPayload, 'items.0.source_hash'));
+
+            DB::flushQueryLog();
+            DB::enableQueryLog();
+            try {
+                for ($attempt = 0; $attempt < 2; $attempt++) {
+                    $cached = $this->getJson($path)
+                        ->assertOk()
+                        ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
+                    self::assertSame($initialPayload, $cached->json());
+                }
+
+                self::assertSame([], DB::getQueryLog(), $path);
+            } finally {
+                DB::disableQueryLog();
+                DB::flushQueryLog();
+            }
+        }
+    }
+
+    public function test_personality_asset_collection_rebuilds_when_active_projection_version_is_legacy(): void
+    {
+        Cache::flush();
+        $asset = $this->createPublicContentAsset();
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $selector = 'page:1:per-page:100';
+        $pagination = ['current_page' => 1, 'per_page' => 100, 'total' => 1, 'last_page' => 1];
+        $legacyPayload = [
+            'ok' => true,
+            'items' => [['title' => 'Legacy cached openness']],
+            'pagination' => $pagination,
+        ];
+        $cache->put(
+            'index',
+            'big_five',
+            'all',
+            $selector,
+            'en',
+            0,
+            $cache->collectionVersion([$asset], $pagination),
+            $legacyPayload,
+        );
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
+            ->assertJsonPath('items.0.title', 'Openness');
+
+        $activeVersion = Cache::get($cache->activeKey('index', 'big_five', 'all', $selector, 'en'));
+        self::assertIsString($activeVersion);
+        self::assertStringEndsWith(':projection:public-review-contract-v1', $activeVersion);
+    }
+
+    public function test_personality_asset_collection_uses_current_projection_lkg_on_database_failure_and_fails_closed_without_it(): void
+    {
+        Cache::flush();
+        $this->createPublicContentAsset();
+        $cache = app(PersonalityPublicAssetReadModelCache::class);
+        $path = '/api/v0.5/personality-content-assets?framework=big_five&locale=en&per_page=100';
+        $initial = $this->getJson($path)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
+        $initialPayload = $initial->json();
+        self::assertIsArray($initialPayload);
+
+        $cache->invalidateCollections('big_five', 'all', 'en', 0, true);
+        Schema::drop('personality_public_content_assets');
+
+        $this->getJson($path)
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertExactJson($initialPayload);
+
+        Cache::flush();
+        $this->getJson($path)->assertStatus(500);
     }
 
     public function test_personality_asset_detail_uses_one_canonical_projection_within_payload_budget(): void
@@ -2309,7 +2420,7 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonMissingPath('personality_public_content_asset_v2.media_authority');
         $this->getJson($indexPath)
             ->assertOk()
-            ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh')
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss')
             ->assertJsonMissingPath('items.0.content_sections')
             ->assertJsonMissingPath('items.0.media')
             ->assertJsonMissingPath('items.0.seo.twitter_image_url');
@@ -2317,6 +2428,7 @@ final class PersonalityPublicApiTest extends TestCase
         DB::table('personality_public_content_assets')
             ->where('id', $asset->id)
             ->update(['title' => "\xB1\x31"]);
+        $cache->invalidateCollections('big_five', 'all', 'en', 0, true);
 
         $this->getJson($detailPath)
             ->assertOk()
