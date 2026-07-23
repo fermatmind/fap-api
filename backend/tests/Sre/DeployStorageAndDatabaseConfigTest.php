@@ -10,6 +10,77 @@ use Tests\TestCase;
 final class DeployStorageAndDatabaseConfigTest extends TestCase
 {
     #[Test]
+    public function staging_deploy_preflights_queue_capability_before_release_activation(): void
+    {
+        $deployer = $this->readRepoFile('deploy.php');
+        $workflow = $this->readRepoFile('.github/workflows/deploy.yml');
+
+        $this->assertStringContainsString("set('queue_reload_required', true);", $deployer);
+        $this->assertStringContainsString("->set('queue_reload_required', false)", $deployer);
+        $this->assertStringContainsString("task('guard:queue-reload-capability'", $deployer);
+        $this->assertStringContainsString(
+            "before('deploy:symlink', 'guard:queue-reload-capability')",
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'staging has unmanaged Laravel queue workers; configure a queue manager before deployment',
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'Skip queue worker reload for the explicit no-worker staging topology',
+            $deployer,
+        );
+
+        $preflightOffset = strpos($workflow, '- name: Queue reload capability preflight');
+        $lockOffset = strpos($workflow, '- name: Remote deploy lock guard');
+        $deployOffset = strpos($workflow, '- name: Deploy (Deployer)');
+        $this->assertIsInt($preflightOffset);
+        $this->assertIsInt($lockOffset);
+        $this->assertIsInt($deployOffset);
+        $this->assertLessThan($lockOffset, $preflightOffset);
+        $this->assertLessThan($deployOffset, $lockOffset);
+        $this->assertStringNotContainsString('- name: Restart queue workers (Supervisor)', $workflow);
+    }
+
+    #[Test]
+    public function staging_deploy_logs_keep_operational_topology_redacted(): void
+    {
+        $workflow = $this->readRepoFile('.github/workflows/deploy.yml');
+
+        foreach ([
+            'DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}',
+            'DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}',
+            'DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}',
+            'DEPLOY_PATH: ${{ secrets.STAGING_DEPLOY_PATH }}',
+            'HEALTHCHECK_URL: ${{ secrets.STAGING_HEALTHCHECK_URL }}',
+            'AUTH_GUEST_CHECK_URL: ${{ secrets.STAGING_AUTH_GUEST_CHECK_URL }}',
+            'OPS_HOST: ${{ secrets.STAGING_OPS_HOST }}',
+            'Protected staging topology validation passed without disclosing values.',
+            'SSH and deploy-root preflight passed without disclosing topology.',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $workflow);
+        }
+
+        foreach ([
+            'DEPLOY_HOST_STG: "',
+            'DEPLOY_PATH_STG: "',
+            'HEALTHCHECK_URL_STG: "',
+            'AUTH_GUEST_CHECK_URL_STG: "',
+            'staging.fermatmind.com',
+            'whoami; hostname; id',
+            'echo "SSH=',
+            'echo "DEPLOY_PATH=',
+            'echo "HEALTHCHECK_URL=',
+            'echo "AUTH_GUEST_CHECK_URL=',
+            'sed -n \'1,120p\' "$META"',
+            'echo "$ACTIVE_PROCESSES"',
+            '-vvv --no-interaction',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $workflow);
+        }
+    }
+
+    #[Test]
     public function mysql_connection_keeps_ssl_ca_option_configurable(): void
     {
         $source = $this->readRepoFile('backend/config/database.php');
@@ -222,7 +293,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('--revision "$DEPLOY_REVISION"', $staging);
         $this->assertStringContainsString('-o deploy_mode="$DEPLOY_MODE"', $staging);
         $this->assertStringContainsString("staging-\${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && 'runtime46-isolated' || 'main' }}", $staging);
-        $this->assertStringContainsString("inputs.release_mode != 'mbti_runtime46_isolated'", $staging);
+        $this->assertStringContainsString('Queue reload capability preflight', $staging);
+        $this->assertStringContainsString('if [ "$RELEASE_MODE" = "mbti_runtime46_isolated" ]', $staging);
         $this->assertStringContainsString('mbti-runtime46-isolated-staging-${{ github.run_id }}', $staging);
         $this->assertStringContainsString('cms_or_db_write_attempted: false', $staging);
         $this->assertStringContainsString('production_deploy_attempted: false', $staging);
@@ -451,7 +523,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('Reload queue workers through systemd without a cache restart signal in code_only deploy mode', $source);
         $this->assertStringContainsString('code_only deploy requires a queue process manager reload path', $source);
         $this->assertStringContainsString("else printf '%s\\\\n' {\$notFoundMessage} >&2; exit 1; fi", $source);
-        $this->assertStringContainsString("get('require_ops_queue_reload', 'false')", $source);
+        $this->assertStringContainsString("deployBooleanOption('require_ops_queue_reload', false)", $source);
         $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
         $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);

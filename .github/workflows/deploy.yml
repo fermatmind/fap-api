@@ -72,14 +72,6 @@ jobs:
       DEPLOYER_VERSION: "7.5.12"
       DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
 
-      # ====== staging ======
-      DEPLOY_USER_STG: "ubuntu"
-      DEPLOY_PORT_STG: "22"
-      DEPLOY_HOST_STG: "49.234.55.28"
-      DEPLOY_PATH_STG: "/var/www/fap-api-staging"
-      HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/healthz"
-      AUTH_GUEST_CHECK_URL_STG: "https://staging.fermatmind.com/api/v0.3/auth/guest"
-
     steps:
       - name: Checkout code
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -135,34 +127,6 @@ jobs:
 
       - name: CAE gate (config + artifact safety)
         run: bash backend/scripts/cae_gate.sh
-
-      - name: Resolve target vars
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          test "$TARGET" = "staging"
-          DEPLOY_HOST="$DEPLOY_HOST_STG"
-          DEPLOY_USER="$DEPLOY_USER_STG"
-          DEPLOY_PORT="$DEPLOY_PORT_STG"
-          DEPLOY_PATH="$DEPLOY_PATH_STG"
-          HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
-          AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
-
-          {
-            echo "DEPLOY_HOST=$DEPLOY_HOST"
-            echo "DEPLOY_USER=$DEPLOY_USER"
-            echo "DEPLOY_PORT=$DEPLOY_PORT"
-            echo "DEPLOY_PATH=$DEPLOY_PATH"
-            echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
-            echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
-          } >> "$GITHUB_ENV"
-
-          echo "TARGET=$TARGET"
-          echo "SSH=$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT"
-          echo "DEPLOY_PATH=$DEPLOY_PATH"
-          echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
-          echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
 
       - name: Cache Composer
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
@@ -255,14 +219,17 @@ jobs:
       TARGET: staging
       DEPLOYER_VERSION: "7.5.12"
       DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
-
-      # ====== staging ======
-      DEPLOY_USER_STG: "ubuntu"
-      DEPLOY_PORT_STG: "22"
-      DEPLOY_HOST_STG: "49.234.55.28"
-      DEPLOY_PATH_STG: "/var/www/fap-api-staging"
-      HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/healthz"
-      AUTH_GUEST_CHECK_URL_STG: "https://staging.fermatmind.com/api/v0.3/auth/guest"
+      DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.STAGING_DEPLOY_PATH }}
+      DEPLOY_USER_STG: ${{ secrets.STAGING_DEPLOY_USER }}
+      DEPLOY_PORT_STG: ${{ secrets.STAGING_DEPLOY_PORT }}
+      DEPLOY_HOST_STG: ${{ secrets.STAGING_DEPLOY_HOST }}
+      DEPLOY_PATH_STG: ${{ secrets.STAGING_DEPLOY_PATH }}
+      HEALTHCHECK_URL: ${{ secrets.STAGING_HEALTHCHECK_URL }}
+      AUTH_GUEST_CHECK_URL: ${{ secrets.STAGING_AUTH_GUEST_CHECK_URL }}
+      OPS_HOST: ${{ secrets.STAGING_OPS_HOST }}
       SSH_RETRY_ATTEMPTS: "3"
       SSH_RETRY_DELAY_SECONDS: "10"
 
@@ -304,33 +271,35 @@ jobs:
           php-version: '8.4'
           coverage: none
 
-      - name: Resolve target vars
+      - name: Validate protected staging topology
         shell: bash
         run: |
           set -euo pipefail
-
-          test "$TARGET" = "staging"
-          DEPLOY_HOST="$DEPLOY_HOST_STG"
-          DEPLOY_USER="$DEPLOY_USER_STG"
-          DEPLOY_PORT="$DEPLOY_PORT_STG"
-          DEPLOY_PATH="$DEPLOY_PATH_STG"
-          HEALTHCHECK_URL="$HEALTHCHECK_URL_STG"
-          AUTH_GUEST_CHECK_URL="$AUTH_GUEST_CHECK_URL_STG"
-
-          {
-            echo "DEPLOY_HOST=$DEPLOY_HOST"
-            echo "DEPLOY_USER=$DEPLOY_USER"
-            echo "DEPLOY_PORT=$DEPLOY_PORT"
-            echo "DEPLOY_PATH=$DEPLOY_PATH"
-            echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
-            echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
-          } >> "$GITHUB_ENV"
-
-          echo "TARGET=$TARGET"
-          echo "SSH=$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT"
-          echo "DEPLOY_PATH=$DEPLOY_PATH"
-          echo "HEALTHCHECK_URL=$HEALTHCHECK_URL"
-          echo "AUTH_GUEST_CHECK_URL=$AUTH_GUEST_CHECK_URL"
+          required=(
+            DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH
+            DEPLOY_USER_STG DEPLOY_PORT_STG DEPLOY_HOST_STG DEPLOY_PATH_STG
+            HEALTHCHECK_URL AUTH_GUEST_CHECK_URL OPS_HOST
+          )
+          for name in "${required[@]}"; do
+            if [ -z "${!name:-}" ]; then
+              echo "Protected staging environment secret ${name} is required." >&2
+              exit 2
+            fi
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [ "$DEPLOY_PORT" -ge 1 ] && [ "$DEPLOY_PORT" -le 65535 ]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          [[ "$HEALTHCHECK_URL" =~ ^https://[A-Za-z0-9.-]+/[^[:space:]]+$ ]]
+          [[ "$AUTH_GUEST_CHECK_URL" =~ ^https://[A-Za-z0-9.-]+/[^[:space:]]+$ ]]
+          [[ "$OPS_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [ "$DEPLOY_USER" = "$DEPLOY_USER_STG" ]
+          [ "$DEPLOY_PORT" = "$DEPLOY_PORT_STG" ]
+          [ "$DEPLOY_HOST" = "$DEPLOY_HOST_STG" ]
+          [ "$DEPLOY_PATH" = "$DEPLOY_PATH_STG" ]
+          echo "Protected staging topology validation passed without disclosing values."
 
       - name: Skip stale staging deploy
         id: stale_guard
@@ -371,7 +340,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ssh-add -l
+          ssh-add -l >/dev/null
+          echo "SSH agent key presence verified."
 
       - name: Install pinned SSH known_hosts
         if: steps.stale_guard.outputs.skip_deploy != 'true'
@@ -385,7 +355,7 @@ jobs:
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
 
-      - name: SSH preflight (whoami)
+      - name: SSH preflight
         if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
@@ -421,10 +391,26 @@ jobs:
             done
           }
 
-          # ✅ 已删除 -o IdentitiesOnly=yes，确保使用 ssh-agent 中的 key
-          ssh_retry 'whoami; hostname; id'
+          ssh_retry true
+          ssh_retry "test -d '$DEPLOY_PATH'"
+          echo "SSH and deploy-root preflight passed without disclosing topology."
 
-          ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
+      - name: Queue reload capability preflight
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
+        shell: bash
+        env:
+          RELEASE_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode || 'main' }}
+        run: |
+          set -euo pipefail
+          DEPLOY_MODE="standard"
+          if [ "$RELEASE_MODE" = "mbti_runtime46_isolated" ]; then
+            DEPLOY_MODE="code_only"
+          fi
+          export DEPLOY_MODE
+          php /tmp/dep.phar guard:queue-reload-capability "$TARGET" -f deploy.php \
+            --revision "$GITHUB_SHA" \
+            -o deploy_mode="$DEPLOY_MODE" \
+            --no-interaction
 
       - name: Remote deploy lock guard
         if: steps.stale_guard.outputs.skip_deploy != 'true'
@@ -473,20 +459,18 @@ jobs:
             exit 0
           fi
 
-          OWNER="$(cat "$LOCK" 2>/dev/null || true)"
           LOCK_MTIME="$(stat -c %Y "$LOCK")"
           NOW="$(date +%s)"
           AGE_SECONDS="$((NOW - LOCK_MTIME))"
 
-          echo "deploy lock guard: existing lock owner=${OWNER:-unknown} age_seconds=$AGE_SECONDS"
-          [ -f "$META" ] && sed -n '1,120p' "$META" || true
+          echo "deploy lock guard: existing lock detected age_seconds=$AGE_SECONDS"
+          [ -f "$META" ] && echo "deploy lock guard: ownership metadata present" || true
 
           ACTIVE_PROCESSES="$(ps -eo pid,ppid,user,cmd \
             | grep -E 'dep deploy|dep worker|deployer|composer install|artisan migrate|queue:reload-workers' \
             | grep -v grep || true)"
 
           if [ -n "$ACTIVE_PROCESSES" ]; then
-            echo "$ACTIVE_PROCESSES"
             echo "deploy lock guard: active deploy-like process exists"
             exit 1
           fi
@@ -521,6 +505,7 @@ jobs:
             DEPLOY_MODE="code_only"
           fi
           export DEPLOY_REVISION DEPLOY_MODE
+          # shellcheck disable=SC2016
           DEPLOY_LOCK_METADATA="$(php -r '
           $serverUrl = getenv("GITHUB_SERVER_URL") ?: "https://github.com";
           $repository = getenv("GITHUB_REPOSITORY") ?: "";
@@ -546,45 +531,7 @@ jobs:
             --revision "$DEPLOY_REVISION" \
             -o release_name="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o deploy_mode="$DEPLOY_MODE" \
-            -vvv --no-interaction
-
-      - name: Restart queue workers (Supervisor)
-        if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && (github.event_name != 'workflow_dispatch' || inputs.release_mode != 'mbti_runtime46_isolated') }}
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          ssh_retry() {
-            local attempt
-            local rc
-            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
-            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
-
-            for attempt in $(seq 1 "$max_attempts"); do
-              set +e
-              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
-              rc=$?
-              set -e
-
-              if [ "$rc" -eq 0 ]; then
-                return 0
-              fi
-
-              if [ "$rc" -ne 255 ]; then
-                return "$rc"
-              fi
-
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                return "$rc"
-              fi
-
-              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
-              sleep "$retry_delay"
-            done
-          }
-
-          ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
+            --no-interaction
 
       - name: Healthcheck (post deploy)
         if: steps.stale_guard.outputs.skip_deploy != 'true'
@@ -622,9 +569,9 @@ jobs:
             done
           }
 
-          echo "Healthcheck: $HEALTHCHECK_URL"
+          echo "Staging healthcheck started."
           HEALTHCHECK_HOST="$(echo "$HEALTHCHECK_URL" | awk -F[/:] '{print $4}')"
-          for i in 1 2 3 4 5 6 7 8 9 10; do
+          for _ in 1 2 3 4 5 6 7 8 9 10; do
             if ssh_retry "curl -fsS --resolve '$HEALTHCHECK_HOST:443:127.0.0.1' 'https://$HEALTHCHECK_HOST/api/healthz' | jq -e '.ok==true'" >/dev/null; then
               exit 0
             fi
@@ -669,9 +616,9 @@ jobs:
             done
           }
 
-          echo "Auth guest contract: $AUTH_GUEST_CHECK_URL"
+          echo "Staging auth guest contract check started."
           AUTH_HOST="$(echo "$AUTH_GUEST_CHECK_URL" | awk -F[/:] '{print $4}')"
-          for i in 1 2 3 4 5; do
+          for _ in 1 2 3 4 5; do
             if ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null; then
               exit 0
             fi
@@ -687,7 +634,6 @@ jobs:
           set -euo pipefail
 
           test "$TARGET" = "staging"
-          OPS_HOST="staging.fermatmind.com"
           ASSERT_ROOT_REDIRECT="no"
 
           ROOT_URL="https://${OPS_HOST}/"
@@ -761,7 +707,7 @@ jobs:
             local attempts="$2"
             shift 2
 
-            for i in $(seq 1 "$attempts"); do
+            for _ in $(seq 1 "$attempts"); do
               if "$@"; then
                 return 0
               fi
@@ -773,17 +719,17 @@ jobs:
           }
 
           if [ "$ASSERT_ROOT_REDIRECT" = "yes" ]; then
-            echo "Ops root smoke: $ROOT_URL"
+            echo "Ops root smoke started."
             retry "Ops root redirect" 5 assert_redirect "$ROOT_URL" "/ops"
 
-            echo "Ops admin alias smoke: $ADMIN_URL"
+            echo "Ops admin alias smoke started."
             retry "Ops admin redirect" 5 assert_redirect "$ADMIN_URL" "/ops"
           fi
 
-          echo "Ops panel smoke: $OPS_URL"
+          echo "Ops panel smoke started."
           retry "Ops panel redirect" 5 assert_redirect "$OPS_URL" "/ops/login"
 
-          echo "Ops login smoke: $LOGIN_URL"
+          echo "Ops login smoke started."
           retry "Ops login 200" 5 assert_200 "$LOGIN_URL"
 
       - name: Ops asset smoke (post deploy)
@@ -793,7 +739,6 @@ jobs:
           set -euo pipefail
 
           test "$TARGET" = "staging"
-          OPS_HOST="staging.fermatmind.com"
 
           LOGIN_URL="https://${OPS_HOST}/ops/login"
           THEME_URL="https://${OPS_HOST}/css/app/ops-theme.css"
@@ -842,7 +787,7 @@ jobs:
             local attempts="$2"
             shift 2
 
-            for i in $(seq 1 "$attempts"); do
+            for _ in $(seq 1 "$attempts"); do
               if "$@"; then
                 return 0
               fi
@@ -853,26 +798,26 @@ jobs:
             return 1
           }
 
-          echo "Ops login smoke: $LOGIN_URL"
+          echo "Ops login smoke started."
           retry "Ops login smoke" 5 assert_http_200 "$LOGIN_URL"
 
           theme_smoke_ok=1
-          echo "Ops asset smoke: $THEME_URL"
+          echo "Ops theme asset smoke started."
           if ! retry "Ops theme smoke" 5 assert_http_200 "$THEME_URL"; then
             echo "Ops theme smoke skipped: theme URL not directly accessible on this target"
             theme_smoke_ok=0
           fi
 
-          echo "Ops asset smoke: $APP_CSS_URL"
+          echo "Ops application CSS smoke started."
           retry "Ops app.css smoke" 5 assert_http_200 "$APP_CSS_URL"
 
-          echo "Ops asset smoke: $FORMS_URL"
+          echo "Ops forms CSS smoke started."
           retry "Ops forms.css smoke" 5 assert_http_200 "$FORMS_URL"
 
-          echo "Ops asset smoke: $SUPPORT_URL"
+          echo "Ops support CSS smoke started."
           retry "Ops support.css smoke" 5 assert_http_200 "$SUPPORT_URL"
 
-          echo "Ops asset smoke: $APP_JS_URL"
+          echo "Ops application JavaScript smoke started."
           retry "Ops app.js smoke" 5 assert_http_200 "$APP_JS_URL"
 
           if [ "$theme_smoke_ok" -eq 1 ]; then
