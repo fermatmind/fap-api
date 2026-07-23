@@ -112,7 +112,16 @@ final class Mbti64CmsInternalLinkDraftWriter
             : null;
         $privateRecommendedEdgeCount = 0;
         foreach ($this->edges($graph, 'recommendedEdges') as $edge) {
+            $rawSource = trim((string) ($edge['source_path'] ?? $edge['source_url'] ?? ''));
             $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            if ($this->containsForbiddenRoutePattern($rawSource)) {
+                $privateRecommendedEdgeCount++;
+                $errors[] = [
+                    'field' => 'recommendedEdges',
+                    'code' => 'forbidden_recommended_edge_source',
+                    'message' => 'Recommended edge source contains a forbidden private route pattern.',
+                ];
+            }
             if ($this->containsForbiddenRoutePattern($rawTarget)) {
                 $privateRecommendedEdgeCount++;
                 $errors[] = [
@@ -594,12 +603,14 @@ final class Mbti64CmsInternalLinkDraftWriter
     private function activeEdgesForSource(array $edges): array
     {
         return array_values(array_filter($edges, function (array $edge): bool {
+            $rawSource = trim((string) ($edge['source_path'] ?? $edge['source_url'] ?? ''));
             $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
             $target = $this->normalizePath($rawTarget);
 
             return ($edge['safe_public_route'] ?? null) === true
                 && trim((string) ($edge['publish_blocker_if_any'] ?? '')) === ''
                 && $target !== ''
+                && ! $this->containsForbiddenRoutePattern($rawSource)
                 && ! $this->containsForbiddenRoutePattern($rawTarget)
                 && ! $this->containsForbiddenRoutePattern($target);
         }));
@@ -630,6 +641,17 @@ final class Mbti64CmsInternalLinkDraftWriter
                     'field' => 'recommendedEdges.'.$sourcePath,
                     'code' => 'unsupported_bounded_edge_type',
                     'message' => 'Unsupported bounded edge type '.$edgeType.' for '.$sourcePath.'.',
+                ];
+
+                continue;
+            }
+
+            $rawSource = trim((string) ($edge['source_path'] ?? $edge['source_url'] ?? ''));
+            if ($this->containsForbiddenRoutePattern($rawSource)) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'unsafe_bounded_edge',
+                    'message' => 'Bounded edge raw source contains a forbidden route or query parameter.',
                 ];
 
                 continue;
