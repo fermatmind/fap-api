@@ -66,6 +66,8 @@ jobs:
       require_ops_queue_reload: ${{ steps.resolve_deploy_mode.outputs.require_ops_queue_reload }}
       require_career_candidate_preflight: ${{ steps.resolve_deploy_mode.outputs.require_career_candidate_preflight }}
       career_public_cache_summary_sha256: ${{ steps.resolve_deploy_mode.outputs.career_public_cache_summary_sha256 }}
+      career_expected_candidate_summary_sha256: ${{ steps.resolve_deploy_mode.outputs.career_expected_candidate_summary_sha256 }}
+      career_cache_repair_required: ${{ steps.resolve_deploy_mode.outputs.career_cache_repair_required }}
       main_sha: ${{ steps.latest_main_guard.outputs.main_sha }}
       staging_sha: ${{ steps.resolve_deploy_mode.outputs.staging_sha }}
     steps:
@@ -110,6 +112,8 @@ jobs:
           REQUIRE_OPS_QUEUE_RELOAD=false
           REQUIRE_CAREER_CANDIDATE_PREFLIGHT=false
           CAREER_PUBLIC_CACHE_SUMMARY_SHA256=""
+          CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256=""
+          CAREER_CACHE_REPAIR_REQUIRED=false
           case "$REQUESTED_DEPLOY_MODE" in
             standard)
               if [ -n "$APPROVED_MIGRATION" ]; then
@@ -259,7 +263,7 @@ jobs:
                     echo "code-only scope accepted audited non-runtime release metadata or verification path: $path"
                     ;;
                   backend/app/Console/Commands/CareerVerifyPublicDatasetCacheEquivalence.php)
-                    EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="468eb607a9d8a0a4c69cf18e2232a11d7bc8008932545f76a93900dfeedbaacf"
+                    EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="e02a12517b69de48eab515d8ea9f48dadf6bb30345cfba0f99d0538d89b0de30"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
                       "$EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256" || {
                       CODE_ONLY_SCOPE=false
@@ -267,11 +271,19 @@ jobs:
                     }
                     ;;
                   backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php)
-                    EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="e6beeebb64b6bc346e622b43400262239e76813936fb2363cb9ee85484446f13"
+                    EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="253b471b6b5cfec1f57c77000b956cfac2e1f4baff28aef9d3760b32d94956a5"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
                       "$EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256" || {
                       CODE_ONLY_SCOPE=false
                       echo "code-only scope refused an unreviewed Career candidate bootstrap runner hash." >&2
+                    }
+                    ;;
+                  backend/scripts/deploy/verify_sitemap_source_cache_warm.sh)
+                    EXPECTED_SITEMAP_WARM_VERIFIER_SHA256="04f9d6b6b66b0be10a4996064cdf9150e1b0f1ec300edf93f87e8c0368ea0713"
+                    test "$(sha256sum "$path" | awk '{print $1}')" = \
+                      "$EXPECTED_SITEMAP_WARM_VERIFIER_SHA256" || {
+                      CODE_ONLY_SCOPE=false
+                      echo "code-only scope refused an unreviewed sitemap source-cache warm verifier hash." >&2
                     }
                     ;;
                   .github/workflows/backend-production-verify-only.yml|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)
@@ -292,30 +304,49 @@ jobs:
               if [ "$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" = true ]; then
                 EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"
                 EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="53e4e854dadee2260637c0288ead58818808bad098c3fce8e2168ea38746ba09"
+                AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="cb248a673e4827a4dcaae3f41f74cffd50d99f73984286cb733e6ba0b935158b"
                 test "$(sha256sum backend/docs/career/publish_track_reconciliation.json | awk '{print $1}')" = \
                   "$EXPECTED_CAREER_RECONCILIATION_SHA256" || {
                   echo "code-only scope refused an unreviewed Career reconciliation candidate hash." >&2
                   exit 1
                 }
-                CAREER_DATASET_JSON="$(curl --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
-                  "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
-                CAREER_PUBLIC_CACHE_SUMMARY="$(jq -cS '{
-                  contract_version,
-                  manifest_version: .collection_summary.manifest_version,
-                  member_count: .collection_summary.member_count,
-                  tracking_counts: .collection_summary.tracking_counts,
-                  publish_track_distribution: .collection_summary.facet_distributions.publish_track,
-                  members: [
-                    .members[]
-                    | {canonical_slug, publish_track}
-                  ] | sort_by(.canonical_slug, .publish_track)
-                }' <<<"$CAREER_DATASET_JSON")"
-                CAREER_PUBLIC_CACHE_SUMMARY_SHA256="$(printf '%s' "$CAREER_PUBLIC_CACHE_SUMMARY" | sha256sum | awk '{print $1}')"
-                test "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" = "$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256" || {
-                  echo "code-only scope refused Career reconciliation because the complete public cache summary drifted." >&2
-                  exit 1
+                read_career_public_cache_summary_sha256() {
+                  local dataset summary
+                  dataset="$(curl --http1.1 --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
+                    "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
+                  summary="$(jq -cS '{
+                    contract_version,
+                    manifest_version: .collection_summary.manifest_version,
+                    member_count: .collection_summary.member_count,
+                    tracking_counts: .collection_summary.tracking_counts,
+                    publish_track_distribution: .collection_summary.facet_distributions.publish_track,
+                    members: [
+                      .members[]
+                      | {canonical_slug, publish_track}
+                    ] | sort_by(.canonical_slug, .publish_track)
+                  }' <<<"$dataset")"
+                  printf '%s' "$summary" | sha256sum | awk '{print $1}'
                 }
-                echo "code-only scope verified the exact live Career public-cache summary; candidate rebuild equivalence remains required before activation."
+                first_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
+                second_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
+                third_career_summary_sha256="$(read_career_public_cache_summary_sha256)"
+                test "$first_career_summary_sha256" = "$second_career_summary_sha256"
+                test "$second_career_summary_sha256" = "$third_career_summary_sha256"
+                CAREER_PUBLIC_CACHE_SUMMARY_SHA256="$first_career_summary_sha256"
+                CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256="$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256"
+                case "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" in
+                  "$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256")
+                    echo "code-only scope verified the exact candidate-equivalent Career public cache."
+                    ;;
+                  "$AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256")
+                    CAREER_CACHE_REPAIR_REQUIRED=true
+                    echo "code-only scope accepted the exact audited stale Career cache pending atomic candidate repair and rollback protection."
+                    ;;
+                  *)
+                    echo "code-only scope refused an unreviewed Career public-cache summary." >&2
+                    exit 1
+                    ;;
+                esac
               fi
               if [ "$CODE_ONLY_SCOPE" != true ]; then
                 echo "code-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path; rerun only with an explicit standard deployment approval." >&2
@@ -334,6 +365,8 @@ jobs:
           echo "require_ops_queue_reload=$REQUIRE_OPS_QUEUE_RELOAD" >> "$GITHUB_OUTPUT"
           echo "require_career_candidate_preflight=$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" >> "$GITHUB_OUTPUT"
           echo "career_public_cache_summary_sha256=$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" >> "$GITHUB_OUTPUT"
+          echo "career_expected_candidate_summary_sha256=$CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256" >> "$GITHUB_OUTPUT"
+          echo "career_cache_repair_required=$CAREER_CACHE_REPAIR_REQUIRED" >> "$GITHUB_OUTPUT"
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
           jq -e \
@@ -513,6 +546,8 @@ jobs:
       REQUIRE_OPS_QUEUE_RELOAD: ${{ needs.deployment-eligibility.outputs.require_ops_queue_reload }}
       REQUIRE_CAREER_CANDIDATE_PREFLIGHT: ${{ needs.deployment-eligibility.outputs.require_career_candidate_preflight }}
       CAREER_PUBLIC_CACHE_SUMMARY_SHA256: ${{ needs.deployment-eligibility.outputs.career_public_cache_summary_sha256 }}
+      CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256: ${{ needs.deployment-eligibility.outputs.career_expected_candidate_summary_sha256 }}
+      CAREER_CACHE_REPAIR_REQUIRED: ${{ needs.deployment-eligibility.outputs.career_cache_repair_required }}
       EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
       APPROVED_MIGRATION: ${{ inputs.approved_migration }}
 
@@ -878,25 +913,32 @@ jobs:
             exit 0
           fi
           [[ "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" =~ ^[0-9a-f]{64}$ ]]
-          career_dataset_json="$(curl --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
-            "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
-          live_summary="$(jq -cS '{
-            contract_version,
-            manifest_version: .collection_summary.manifest_version,
-            member_count: .collection_summary.member_count,
-            tracking_counts: .collection_summary.tracking_counts,
-            publish_track_distribution: .collection_summary.facet_distributions.publish_track,
-            members: [
-              .members[]
-              | {canonical_slug, publish_track}
-            ] | sort_by(.canonical_slug, .publish_track)
-          }' <<<"$career_dataset_json")"
-          live_summary_sha256="$(printf '%s' "$live_summary" | sha256sum | awk '{print $1}')"
-          unset career_dataset_json live_summary
-          test "$live_summary_sha256" = "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" || {
-            echo "Career public-cache summary drifted after eligibility; refusing activation." >&2
-            exit 1
+          read_career_public_cache_summary_sha256() {
+            local dataset summary
+            dataset="$(curl --http1.1 --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
+              "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
+            summary="$(jq -cS '{
+              contract_version,
+              manifest_version: .collection_summary.manifest_version,
+              member_count: .collection_summary.member_count,
+              tracking_counts: .collection_summary.tracking_counts,
+              publish_track_distribution: .collection_summary.facet_distributions.publish_track,
+              members: [
+                .members[]
+                | {canonical_slug, publish_track}
+              ] | sort_by(.canonical_slug, .publish_track)
+            }' <<<"$dataset")"
+            printf '%s' "$summary" | sha256sum | awk '{print $1}'
           }
+          first_live_summary_sha256="$(read_career_public_cache_summary_sha256)"
+          second_live_summary_sha256="$(read_career_public_cache_summary_sha256)"
+          third_live_summary_sha256="$(read_career_public_cache_summary_sha256)"
+          test "$first_live_summary_sha256" = "$second_live_summary_sha256"
+          test "$second_live_summary_sha256" = "$third_live_summary_sha256"
+          test "$first_live_summary_sha256" = "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" || {
+              echo "Career public-cache summary drifted after eligibility; refusing activation." >&2
+              exit 1
+            }
           echo "Career public-cache summary remains exact immediately before candidate verification."
 
       - name: Deploy production with Deployer
@@ -939,6 +981,8 @@ jobs:
             -o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD" \
             -o require_career_candidate_preflight="$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" \
             -o career_public_cache_summary_sha256="$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" \
+            -o career_expected_candidate_summary_sha256="$CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256" \
+            -o career_cache_repair_required="$CAREER_CACHE_REPAIR_REQUIRED" \
             -o schema_only_migration="$APPROVED_MIGRATION" \
             -vvv --no-interaction
 

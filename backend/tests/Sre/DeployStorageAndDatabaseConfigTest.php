@@ -501,9 +501,15 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
-            'candidate rebuild equivalence remains required before activation.',
+            'AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="cb248a673e4827a4dcaae3f41f74cffd50d99f73984286cb733e6ba0b935158b"',
             $source
         );
+        $this->assertStringContainsString('CAREER_CACHE_REPAIR_REQUIRED=true', $source);
+        $this->assertStringContainsString(
+            'pending atomic candidate repair and rollback protection.',
+            $source
+        );
+        $this->assertSame(6, substr_count($source, 'read_career_public_cache_summary_sha256)"'));
         $this->assertStringContainsString(
             'backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php',
             $source
@@ -513,7 +519,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
-            'EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="468eb607a9d8a0a4c69cf18e2232a11d7bc8008932545f76a93900dfeedbaacf"',
+            'EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="e02a12517b69de48eab515d8ea9f48dadf6bb30345cfba0f99d0538d89b0de30"',
             $source
         );
         $this->assertStringContainsString(
@@ -521,11 +527,23 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
-            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="e6beeebb64b6bc346e622b43400262239e76813936fb2363cb9ee85484446f13"',
+            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="253b471b6b5cfec1f57c77000b956cfac2e1f4baff28aef9d3760b32d94956a5"',
             $source
         );
         $this->assertStringContainsString(
             'code-only scope refused an unreviewed Career candidate bootstrap runner hash.',
+            $source
+        );
+        $this->assertStringContainsString(
+            'backend/scripts/deploy/verify_sitemap_source_cache_warm.sh',
+            $source
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_SITEMAP_WARM_VERIFIER_SHA256="04f9d6b6b66b0be10a4996064cdf9150e1b0f1ec300edf93f87e8c0368ea0713"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed sitemap source-cache warm verifier hash.',
             $source
         );
         $this->assertStringContainsString(
@@ -604,17 +622,21 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             "'career:verify-public-dataset-cache-equivalence'",
             "'guard:public-content-release'",
             "'deploy:publish'",
+            "'career:finalize-public-dataset-cache-equivalence'",
         ] as $requiredTask) {
             $this->assertStringContainsString($requiredTask, $task);
         }
         $guardPosition = strpos($task, "'guard:public-content-release'");
         $careerPosition = strpos($task, "'career:verify-public-dataset-cache-equivalence'");
         $publishPosition = strpos($task, "'deploy:publish'");
+        $finalizePosition = strpos($task, "'career:finalize-public-dataset-cache-equivalence'");
         $this->assertNotFalse($guardPosition);
         $this->assertNotFalse($careerPosition);
         $this->assertNotFalse($publishPosition);
+        $this->assertNotFalse($finalizePosition);
         $this->assertLessThan($careerPosition, $guardPosition);
         $this->assertLessThan($publishPosition, $careerPosition);
+        $this->assertLessThan($finalizePosition, $publishPosition);
 
         foreach ([
             'artisan:migrate',
@@ -636,10 +658,29 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("deployBooleanOption('require_ops_queue_reload', false)", $source);
         $this->assertStringContainsString("deployBooleanOption('require_career_candidate_preflight', false)", $source);
         $this->assertStringContainsString(
-            'career:verify-public-dataset-cache-equivalence --expected-sha256=%s --verify-live-public-cache --json --no-interaction --ansi',
+            'career:verify-public-dataset-cache-equivalence --expected-sha256=%s --expected-current-sha256=%s --verify-live-public-cache%s --json --no-interaction --ansi',
             $source
         );
         $this->assertStringContainsString("set('career_public_cache_summary_sha256', '');", $source);
+        $this->assertStringContainsString("set('career_expected_candidate_summary_sha256', '');", $source);
+        $this->assertStringContainsString("set('career_cache_repair_required', false);", $source);
+        $this->assertStringContainsString('--rollback-repair --json --no-interaction --ansi', $source);
+        $this->assertStringContainsString(
+            "before('fap:deploy-unlock-owned', 'career:rollback-public-dataset-cache-equivalence')",
+            $source
+        );
+        $this->assertStringContainsString(
+            'test(\'[ "$(readlink -f {{deploy_path}}/current)" = "$(readlink -f {{release_path}})" ]\')',
+            $source
+        );
+        $this->assertStringContainsString(
+            'Keep the candidate-exact Career dataset cache because this release is already active',
+            $source
+        );
+        $this->assertStringContainsString(
+            "invoke('career:finalize-public-dataset-cache-equivalence');",
+            $source
+        );
         $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
         $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);

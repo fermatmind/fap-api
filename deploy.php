@@ -82,6 +82,8 @@ set('queue_supervisor_optional_programs', [
 set('require_ops_queue_reload', false);
 set('require_career_candidate_preflight', false);
 set('career_public_cache_summary_sha256', '');
+set('career_expected_candidate_summary_sha256', '');
+set('career_cache_repair_required', false);
 set('legacy_queue_systemd_service', 'fap-queue.service');
 set('legacy_queue_systemd_disable', true);
 set('required_public_static_media_assets', [
@@ -725,15 +727,81 @@ task('career:verify-public-dataset-cache-equivalence', function () {
         return;
     }
 
-    $expectedSha256 = strtolower(trim((string) get('career_public_cache_summary_sha256', '')));
-    if (preg_match('/^[a-f0-9]{64}$/', $expectedSha256) !== 1) {
-        throw new \RuntimeException('Career candidate dataset equivalence requires an exact public-cache summary SHA-256');
+    $expectedCurrentSha256 = strtolower(trim((string) get('career_public_cache_summary_sha256', '')));
+    $expectedCandidateSha256 = strtolower(trim((string) get('career_expected_candidate_summary_sha256', '')));
+    if (preg_match('/^[a-f0-9]{64}$/', $expectedCurrentSha256) !== 1
+        || preg_match('/^[a-f0-9]{64}$/', $expectedCandidateSha256) !== 1) {
+        throw new \RuntimeException('Career candidate dataset equivalence requires exact current and candidate summary SHA-256 values');
+    }
+    $repairRequired = deployBooleanOption('career_cache_repair_required', false);
+
+    within('{{release_path}}/backend', function () use (
+        $expectedCurrentSha256,
+        $expectedCandidateSha256,
+        $repairRequired,
+    ) {
+        $repairOptions = $repairRequired
+            ? ' --repair-live-public-cache --repair-id='.deployShellArg('{{release_name}}')
+            : '';
+        run(sprintf(
+            '{{bin/php}} artisan career:verify-public-dataset-cache-equivalence --expected-sha256=%s --expected-current-sha256=%s --verify-live-public-cache%s --json --no-interaction --ansi',
+            escapeshellarg($expectedCandidateSha256),
+            escapeshellarg($expectedCurrentSha256),
+            $repairOptions,
+        ));
+    });
+});
+
+task('career:finalize-public-dataset-cache-equivalence', function () {
+    if (! deployIsCodeOnly()
+        || ! deployBooleanOption('require_career_candidate_preflight', false)
+        || ! deployBooleanOption('career_cache_repair_required', false)) {
+        return;
     }
 
-    within('{{release_path}}/backend', function () use ($expectedSha256) {
+    $expectedCurrentSha256 = strtolower(trim((string) get('career_public_cache_summary_sha256', '')));
+    $expectedCandidateSha256 = strtolower(trim((string) get('career_expected_candidate_summary_sha256', '')));
+    within('{{release_path}}/backend', function () use ($expectedCurrentSha256, $expectedCandidateSha256) {
         run(sprintf(
-            '{{bin/php}} artisan career:verify-public-dataset-cache-equivalence --expected-sha256=%s --verify-live-public-cache --json --no-interaction --ansi',
-            escapeshellarg($expectedSha256),
+            <<<'BASH'
+set +e
+{{bin/php}} artisan career:verify-public-dataset-cache-equivalence --expected-sha256=%s --expected-current-sha256=%s --repair-id=%s --finalize-repair --json --no-interaction --ansi
+status=$?
+set -e
+if [ "$status" -ne 0 ]; then
+  echo "career_dataset_cache_repair_finalize_nonblocking_failure=$status"
+fi
+exit 0
+BASH,
+            escapeshellarg($expectedCandidateSha256),
+            escapeshellarg($expectedCurrentSha256),
+            deployShellArg('{{release_name}}'),
+        ));
+    });
+});
+
+task('career:rollback-public-dataset-cache-equivalence', function () {
+    if (! deployIsCodeOnly()
+        || ! deployBooleanOption('require_career_candidate_preflight', false)
+        || ! deployBooleanOption('career_cache_repair_required', false)) {
+        return;
+    }
+
+    if (test('[ "$(readlink -f {{deploy_path}}/current)" = "$(readlink -f {{release_path}})" ]')) {
+        writeln('<comment>Keep the candidate-exact Career dataset cache because this release is already active</comment>');
+        invoke('career:finalize-public-dataset-cache-equivalence');
+
+        return;
+    }
+
+    $expectedCurrentSha256 = strtolower(trim((string) get('career_public_cache_summary_sha256', '')));
+    $expectedCandidateSha256 = strtolower(trim((string) get('career_expected_candidate_summary_sha256', '')));
+    within('{{release_path}}/backend', function () use ($expectedCurrentSha256, $expectedCandidateSha256) {
+        run(sprintf(
+            '{{bin/php}} artisan career:verify-public-dataset-cache-equivalence --expected-sha256=%s --expected-current-sha256=%s --repair-id=%s --rollback-repair --json --no-interaction --ansi',
+            escapeshellarg($expectedCandidateSha256),
+            escapeshellarg($expectedCurrentSha256),
+            deployShellArg('{{release_name}}'),
         ));
     });
 });
@@ -1823,6 +1891,7 @@ task('deploy:code-only', [
     'guard:public-content-release',
     'career:verify-public-dataset-cache-equivalence',
     'deploy:publish',
+    'career:finalize-public-dataset-cache-equivalence',
 ]);
 
 /**
@@ -1850,3 +1919,4 @@ after('rollback', 'bootstrap-cache:rebuild-current');
 after('bootstrap-cache:rebuild-current', 'rollback:healthcheck');
 
 after('deploy:failed', 'fap:deploy-unlock-owned');
+before('fap:deploy-unlock-owned', 'career:rollback-public-dataset-cache-equivalence');

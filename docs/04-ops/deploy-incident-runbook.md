@@ -110,6 +110,38 @@ sitemap source warm task. The candidate release directory was created, but the
 production symlink was not switched. A new deployment requires a new exact
 release authorization; the historical run must not be rerun or relabeled.
 
+## Candidate-exact Career dataset cache repair
+
+A failed standard candidate may rebuild the shared Career dataset cache before
+`deploy:publish` without changing the production `REVISION`. When a later
+code-only release contains the audited publish-track reconciliation input, the
+deployment must not treat that stale cache as candidate-equivalent.
+
+The production workflow permits repair only when all of these conditions hold:
+
+- three HTTP/1.1 public reads have the same complete normalized summary hash;
+- the live hash is either the exact candidate hash or the one audited stale
+  hash produced by the known pre-activation warm;
+- the inactive candidate rebuild matches the exact candidate hash;
+- the cache key still matches the audited current hash after acquiring the
+  deployment-scoped lock;
+- the replacement is limited to the Career dataset-hub cache key;
+- the public readback exposes the exact candidate hash before activation.
+
+The command stores a one-hour deployment-scoped rollback payload before the
+cache replacement. A deployment failure before symlink activation restores
+that exact payload before the owned deploy lock is released. Once the candidate
+release is the active symlink, a later post-activation hook failure keeps the
+candidate-exact cache and finalizes the rollback payload on a best-effort basis.
+A failed pre-activation readback rolls back immediately. The operation performs
+no CMS/database write and does not alter publication, indexability, sitemap,
+llms, or search state.
+
+An unknown hash, unstable three-read sample, candidate mismatch, lock-time
+drift, missing rollback payload, or failed rollback verification remains
+fail-closed. Do not add another accepted hash without a new read-only incident
+audit and a reviewed code change.
+
 ## Frontend deploy incident classifications
 
 - `complete_and_verified`: Node1 HEAD matches intended SHA, PM2 converged, public smoke passed
