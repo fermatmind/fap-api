@@ -53,10 +53,12 @@ task('seo:warm-sitemap-source-cache', function () use ($warmHelperPayload): void
     $payload = deployShellArg($warmHelperPayload);
 
     run(
-        'printf %s '.$payload
+        'php_bin="$(command -v {{bin/php}})"'
+        .' && test -n "$php_bin"'
+        .' && printf %s '.$payload
         .' | base64 -d'
         .' | sudo -n -u www-data -- env'
-        .' SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}'
+        .' SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"'
         .' SITEMAP_SOURCE_WARM_ARTISAN='.$artisan
         .' SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS=180'
         .' SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS=30'

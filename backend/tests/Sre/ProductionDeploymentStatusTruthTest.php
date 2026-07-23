@@ -342,7 +342,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
-            'EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"',
+            'EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="5111aac8197ba8df85698eab2a199475baab7ef7456db01dfb698ed54a928dcf"',
             $eligibility
         );
         $this->assertStringContainsString(

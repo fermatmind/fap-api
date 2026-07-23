@@ -287,7 +287,7 @@ jobs:
                     }
                     ;;
                   backend/scripts/deploy/immutable_candidate_sitemap_control.php)
-                    EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"
+                    EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="5111aac8197ba8df85698eab2a199475baab7ef7456db01dfb698ed54a928dcf"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
                       "$EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256" || {
                       CODE_ONLY_SCOPE=false
@@ -578,7 +578,7 @@ jobs:
           staging_run_id="29977064260"
           candidate_recipe_sha256="e814b6ff4996669097db0f32fd3caebc1fcd05dd9015e2260016e3f4ece3c068"
           helper_sha256="04f9d6b6b66b0be10a4996064cdf9150e1b0f1ec300edf93f87e8c0368ea0713"
-          wrapper_sha256="59080960b93335fdabbe0e50ce683770a84960a330b04c9df7fbe87214ea3ef3"
+          wrapper_sha256="5111aac8197ba8df85698eab2a199475baab7ef7456db01dfb698ed54a928dcf"
           wrapper_path="backend/scripts/deploy/immutable_candidate_sitemap_control.php"
           helper_path="backend/scripts/deploy/verify_sitemap_source_cache_warm.sh"
 

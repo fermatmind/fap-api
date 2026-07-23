@@ -100,9 +100,16 @@ class ImmutableCandidateSitemapControlTest(unittest.TestCase):
             "Setup PHP",
         )
         wrapper_match = re.search(r'wrapper_sha256="([0-9a-f]{64})"', step)
+        classifier_match = re.search(
+            r'EXPECTED_IMMUTABLE_SITEMAP_CONTROL_SHA256="([0-9a-f]{64})"',
+            self.workflow,
+        )
 
         self.assertIsNotNone(wrapper_match)
+        self.assertIsNotNone(classifier_match)
         self.assertEqual(sha256(WRAPPER), wrapper_match.group(1))
+        self.assertEqual(sha256(WRAPPER), classifier_match.group(1))
+        self.assertEqual(wrapper_match.group(1), classifier_match.group(1))
         self.assertIn(
             f'helper_sha256="{sha256(HELPER)}"',
             step,
@@ -130,9 +137,12 @@ class ImmutableCandidateSitemapControlTest(unittest.TestCase):
     def test_wrapper_streams_the_locked_helper_without_remote_file_writes(self):
         for expected in (
             "base64_encode",
+            'php_bin="$(command -v {{bin/php}})"',
+            'test -n "$php_bin"',
             "printf %s ",
             "| base64 -d",
             "sudo -n -u www-data -- env",
+            'SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"',
             "SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS=180",
             "SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS=30",
             "SITEMAP_SOURCE_WARM_STRICT=false",
@@ -151,6 +161,7 @@ class ImmutableCandidateSitemapControlTest(unittest.TestCase):
             "upload(",
             "scp ",
             "rsync ",
+            "SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}",
         ):
             self.assertNotIn(forbidden, self.wrapper)
 
