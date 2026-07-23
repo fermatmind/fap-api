@@ -142,6 +142,34 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         $this->assertDatabaseHas('occupations', ['canonical_slug' => 'actuaries']);
     }
 
+    public function test_full_warm_keeps_the_job_index_complete_when_detail_caches_are_cold(): void
+    {
+        $this->createDirectoryOccupation('accountants-and-auditors', 'Accountants and Auditors', '会计师与审计师', 'business-finance', 'Business and Finance');
+        $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
+        $this->publishRuntimeProjection(['accountants-and-auditors', 'actuaries']);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['accountants-and-auditors', 'actuaries'] as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $cache->forgetJobDetailPayload($slug, $locale);
+                $this->assertFalse($cache->jobDetailCacheIsReady($slug, $locale));
+            }
+        }
+
+        $summary = $cache->warm();
+
+        $this->assertSame(2, data_get($summary, 'job_index_en.member_count'));
+        $this->assertSame(2, data_get($summary, 'job_index_zh_cn.member_count'));
+        $this->assertSame(
+            ['accountants-and-auditors', 'actuaries'],
+            collect($cache->jobIndexPayload('en')['items'])->pluck('identity.canonical_slug')->all(),
+        );
+        $this->assertSame(
+            ['accountants-and-auditors', 'actuaries'],
+            collect($cache->jobIndexPayload('zh-CN')['items'])->pluck('identity.canonical_slug')->all(),
+        );
+    }
+
     private function createDirectoryOccupation(
         string $slug,
         string $titleEn,
