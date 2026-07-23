@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use RuntimeException;
 
+/** @review-surface mbti_cross_type_comparison_authority */
 final class MbtiCrossPublisher49Package
 {
     public const PACKAGE_SHA256 = '604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae';

@@ -99561,7 +99561,7 @@
     "depends_on": [
       "MBTI-CROSS-APPROVAL-48"
     ],
-    "status": "github_checks_pending",
+    "status": "github_checks_retry_pending",
     "commit_sha": "pending_remote_pr_head",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3227",
     "checks": {
@@ -99579,11 +99579,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "PASS on latest origin/main baseline d779fe959: six PHP syntax checks; exact package/auth contract (3 ordered slugs); focused Publisher 49 plus review registry tests (20 tests, 450 assertions); scoped Pint (6 files); command auto-discovery; Composer strict validation and locked audit; YAML/JSON/whitespace checks; and full backend/scripts/ci_verify_mbti.sh including Big Five (1595 tests, 195601 assertions), Enneagram, MBTI end-to-end, personality authority (89 tests, 5853 assertions), security, migration, OpenAPI, dependency, and regression gates. Generated Big Five timestamp/hash artifacts were mechanically restored to HEAD after the passing run."
+        "evidence": "PASS after the GitHub fix: exact new classifier regression (1 assertion), original runtime branch-diff failure reproduction (4 assertions), full classifier file (376 tests, 775 assertions), Publisher 49 plus review registry (20 tests, 455 assertions), scoped syntax/Pint, and the exact GitHub Big Five gate sequence (1596 tests total, 195602 assertions). The earlier full backend/scripts/ci_verify_mbti.sh also passed before this exact-file test-only classifier addition. Generated Big Five artifacts were restored to HEAD."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "failed_fixing",
+        "evidence": "On exact head dd14a0226, 8 checks passed and verify-bigfive failed only BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because the five new PR49 app files were absent from the exact-file MBTI-only classifier. The remaining 1593 Big Five tests passed with 195597 assertions."
       }
     },
     "scope_validation": {
@@ -99618,8 +99618,18 @@
         "at": "2026-07-23T06:11:00Z",
         "status": "github_checks_pending",
         "note": "Committed implementation as b3d573a5d, pushed codex/mbti-cross-publisher-49, and opened PR #3227. Required GitHub checks and review gates are pending."
+      },
+      {
+        "at": "2026-07-23T06:19:58Z",
+        "status": "github_checks_fixing",
+        "note": "GitHub verify-bigfive failed only the exact-file runtime-freeze classifier because it did not yet recognize the five PR49 publisher files as MBTI-only. Added a five-file allowlist and focused regression test; no broad path exemption or publisher behavior change."
+      },
+      {
+        "at": "2026-07-23T06:26:15Z",
+        "status": "github_checks_retry_pending",
+        "note": "The narrow classifier repair and package review-surface annotation passed focused architecture checks and the exact full Big Five GitHub gate locally. Ready to push a new exact head and rerun all required checks."
       }
     ],
-    "updated_at": "2026-07-23T06:11:00Z"
+    "updated_at": "2026-07-23T06:26:15Z"
   }
 }

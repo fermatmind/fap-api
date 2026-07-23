@@ -1021,6 +1021,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_cross_publisher_49_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Content.php',
+            'backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Indexability.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49Package.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_cms_import_draft_dry_run_files(): void
     {
         $changed = [
@@ -6443,6 +6456,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiCrossPublisher49File($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsImportDraftDryRunFile($file)) {
                 continue;
             }
@@ -8422,6 +8439,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/MbtiCrossTypeComparisonAuthority.php',
             'backend/database/migrations/2026_07_06_000100_create_mbti_cross_type_comparison_authorities_table.php',
             'backend/tests/Feature/V0_5/MbtiCrossTypeComparisonAuthorityReadModelTest.php',
+        ], true);
+    }
+
+    private function isMbtiCrossPublisher49File(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Content.php',
+            'backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Indexability.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49Package.php',
         ], true);
     }
 

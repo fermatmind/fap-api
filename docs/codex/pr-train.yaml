@@ -65,7 +65,7 @@ prs:
     base: main
     branch: codex/mbti-cross-publisher-49
     title: "MBTI-CROSS-PUBLISHER-49: add exact-three controlled comparison publisher"
-    status: github_checks_pending
+    status: github_checks_retry_pending
     depends_on:
       - MBTI-CROSS-APPROVAL-48
     train_scope: mbti_cross_exact_three_controlled_publisher
@@ -84,6 +84,7 @@ prs:
       - backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json
       - backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json
       - backend/tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -101,6 +102,7 @@ prs:
       - php -l backend/tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_mbti_cross_publisher_49_files --no-ansi
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiCrossPublisher49Content.php app/Console/Commands/PersonalityMbtiCrossPublisher49Indexability.php app/Services/Cms/MbtiCrossPublisher49Package.php app/Services/Cms/MbtiCrossPublisher49ContentService.php app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction
