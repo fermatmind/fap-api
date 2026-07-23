@@ -9,7 +9,7 @@
       "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "76696ebf3f66cdc43228926f447f86e971960591",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3220",
     "checks": {
       "authorization": {
@@ -72,9 +72,14 @@
         "at": "2026-07-23T04:15:00Z",
         "status": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #3220 with the exact train title, scope, validation, deferred production actions, and repository-rule impact. Required GitHub checks and actionable review remain pending; no controlled production action occurred."
+      },
+      {
+        "at": "2026-07-23T04:20:00Z",
+        "status": "github_review_repairing",
+        "note": "Automated review correctly identified that commit_sha cannot safely name an earlier implementation commit after ledger-only PR-head transitions. Set commit_sha back to null until GitHub supplies the squash merge commit; the exact validated implementation head remains recorded in history. Required checks will rerun on the repair head and no production action occurred."
       }
     ],
-    "updated_at": "2026-07-23T04:15:00Z"
+    "updated_at": "2026-07-23T04:20:00Z"
   },
   "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01": {
     "id": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",
