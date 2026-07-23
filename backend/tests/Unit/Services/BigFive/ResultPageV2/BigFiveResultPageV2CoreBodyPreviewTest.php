@@ -618,8 +618,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
             'backend/app/Console/Commands/PersonalityBigFiveLegacyAliasesPurge.php',
             'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveLegacyAliasCacheCloseout.php',
             'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveLegacyAliasHardPurge.php',
             'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
+            'backend/app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php',
         ];
         $blocked = [
             'backend/app/Services/BigFive/AuthorityV2/RangeIa/UnexpectedRuntimeWriter.php',
@@ -8529,8 +8531,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityBigFiveEnLegacyRangesRetire.php',
             'backend/app/Console/Commands/PersonalityBigFiveLegacyAliasesPurge.php',
             'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveEnLegacyRangeRetirement.php',
+            'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveLegacyAliasCacheCloseout.php',
             'backend/app/Services/BigFive/AuthorityV2/RangeIa/BigFiveLegacyAliasHardPurge.php',
             'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
+            'backend/app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php',
         ], true);
     }
 

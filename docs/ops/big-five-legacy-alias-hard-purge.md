@@ -11,7 +11,7 @@ This runbook controls physical removal of the ten English and ten zh-CN Big Five
 - Both locales must retain exactly 52 canonical assets before and after deletion.
 - Any alias-related review attestation target evidence blocks deletion.
 - The 104 canonical rows, their revisions/reviews, and every non-target Personality row must retain identical fingerprints.
-- Deployment, backup creation, purge execution, cache invalidation, and backup restoration are separate production authorities.
+- Deployment, backup creation, purge execution, cache-only retry, and backup restoration are separate production authorities.
 
 ## Read-only preflight
 
@@ -64,11 +64,25 @@ php artisan personality:big-five-legacy-aliases-purge \
   --json
 ```
 
-Success is `PASS_PURGED`, `deleted_asset_count=20`, zero remaining alias/revision/review/attestation counts, 52 canonical rows per locale, and zero canonical/non-target drift. Transaction failure rolls back. Post-transaction cache or public readback failure stops and reports; restoring the backup requires a new exact authorization.
+Success is `PASS_PURGED`, `deleted_asset_count=20`, zero remaining alias/revision/review/attestation counts, 52 canonical rows per locale, zero canonical/non-target drift, and `cache_closeout_status=PASS_CACHE_CLOSEOUT`. Transaction failure rolls back.
+
+The cache closeout runs only after the deletion transaction commits. It invalidates both locale collection families, all twenty alias detail identities, sitemap-source fresh/stale, sitemap XML/ETag, and the exact frontend `/llms.txt` and `/llms-full.txt` paths through the configured HMAC revalidation endpoint. A cache failure never attempts to restore committed database rows: the command exits non-zero with `PARTIAL_CACHE_CLOSEOUT` and category-level evidence.
+
+After separate authorization, retry only the locked cache set without database writes:
+
+```bash
+php artisan personality:big-five-legacy-aliases-purge \
+  --cache-closeout-only \
+  --confirm=CLOSEOUT_BIG_FIVE_LEGACY_ALIAS_CACHES \
+  --operator-admin-user-id=1 \
+  --json
+```
+
+This mode requires the alias database count to be zero and both canonical cohorts to remain exactly 52. It is idempotent, does not accept `--execute`, and does not touch canonical rows, Media Library, articles, Search Channel, or unrelated Personality cache families.
 
 ## Production closeout
 
-After a separately authorized cache invalidation, verify:
+After `PASS_CACHE_CLOSEOUT` or `PASS_CACHE_CLOSEOUT_ONLY`, verify:
 
 - database Big Five assets: 104 total, 52 `zh-CN`, 52 `en`;
 - legacy alias assets, revisions, revision reviews, and attestation targets: zero;
@@ -77,4 +91,4 @@ After a separately authorized cache invalidation, verify:
 - all twenty legacy paths: exact one-hop 301 to the catalog target, followed by 200;
 - Media Library and search submission writes: zero.
 
-Repository rule impact: legacy Big Five aliases are now URL-only redirect identities. CMS/database alias authority and the English archive-retirement workflow are permanently removed.
+Repository rule impact: legacy Big Five aliases are URL-only redirect identities. CMS/database alias authority and the English archive-retirement workflow are permanently removed. Post-purge cache invalidation has a bounded, auditable, independently retryable closeout and never rolls back committed database deletion.

@@ -32,6 +32,29 @@ final class SeoDiscoverabilityCacheInvalidator
     }
 
     /**
+     * Legacy alias hard purge has no stale fallback authority: both sitemap-source
+     * generations and the rendered sitemap document caches must be invalidated.
+     *
+     * @return list<string>
+     */
+    public function flushPersonalityPublicContentHardPurgeCaches(): array
+    {
+        $keys = [
+            'sitemap-source:fresh' => SitemapSourceController::CACHE_KEY_FRESH,
+            'sitemap-source:stale' => SitemapSourceController::CACHE_KEY_STALE,
+            'sitemap:xml' => SitemapCache::XML_CACHE_KEY,
+            'sitemap:etag' => SitemapCache::ETAG_CACHE_KEY,
+        ];
+
+        foreach ($keys as $key) {
+            // A missing key is already invalidated, so false remains an idempotent success.
+            Cache::forget($key);
+        }
+
+        return array_keys($keys);
+    }
+
+    /**
      * @return list<string>
      */
     private function flushSharedDiscoverabilityCaches(): array
