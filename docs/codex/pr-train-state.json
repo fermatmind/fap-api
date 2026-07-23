@@ -99451,7 +99451,7 @@
     "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
     "depends_on": [],
     "status": "github_checks_pending",
-    "commit_sha": "8c1955ad32bd6a5b156b34a35ac5226f69f09faa",
+    "commit_sha": "ca419f35e8f0ad9ddfe0e7955a2d1da3004ef8eb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
     "checks": {
       "authorization": {
@@ -99464,11 +99464,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused command coverage passed 18 tests/345 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity, cased-duplicate source and tokenized raw source/target cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation passed before the latest same-scope security regressions; each repair reran the focused suite, syntax and scoped Pint. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
+        "evidence": "Focused command coverage passed 19 tests/353 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity, cased-duplicate source, tokenized raw source/target and tokenized bounded-node cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation passed before the latest same-scope security regressions; each repair reran the focused suite, syntax and scoped Pint. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All 9 checks passed on 0a3aac68ce2a036a0dc75a9efb1231b9a45f89af, after which exact-head review identified that safe *_path fields could mask unsafe sibling *_url fields. The same-scope repair is committed as 8c1955ad32bd6a5b156b34a35ac5226f69f09faa with 18-test/345-assertion focused validation and must rerun all required checks."
+        "evidence": "All 9 checks passed on 99587fa92fe699ebff731265bee4a4129cbd9d17, after which exact-head review identified the same safe-path/unsafe-URL masking risk on bounded nodes. The same-scope repair is committed as ca419f35e8f0ad9ddfe0e7955a2d1da3004ef8eb with 19-test/353-assertion focused validation and must rerun all required checks."
       }
     },
     "scope_validation": {
@@ -99533,8 +99533,13 @@
         "at": "2026-07-23T04:25:56Z",
         "status": "github_checks_pending",
         "note": "Exact-head review found that selecting *_path with null coalescing could mask an unsafe sibling *_url field. Repair 8c1955ad32bd6a5b156b34a35ac5226f69f09faa validates every supplied source/target path and URL before normalization and requires all bounded fields to normalize to the exact canonical source/target. The safe-path-plus-tokenized-URL regressions pass with no token output and zero revisions; focused validation remains 18 tests/345 assertions with syntax and scoped Pint green."
+      },
+      {
+        "at": "2026-07-23T04:35:27Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review found bounded graph nodes could independently pair a canonical path with a tokenized URL and persist the raw node. Repair ca419f35e8f0ad9ddfe0e7955a2d1da3004ef8eb validates every node path/URL before nodesByPath construction, requires canonical agreement and excludes unsafe nodes from snapshot previews. The new regression proves no token output and zero revisions; focused validation passes 19 tests/353 assertions with syntax and scoped Pint green."
       }
     ],
-    "updated_at": "2026-07-23T04:25:56Z"
+    "updated_at": "2026-07-23T04:35:27Z"
   }
 }
