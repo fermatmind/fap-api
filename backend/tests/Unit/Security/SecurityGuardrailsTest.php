@@ -350,7 +350,6 @@ final class SecurityGuardrailsTest extends TestCase
     {
         $repoRoot = dirname(base_path());
         $workflowPaths = [
-            '.github/workflows/deploy.yml',
             '.github/workflows/deploy-production.yml',
             '.github/workflows/career-content-production-dry-run.yml',
             '.github/workflows/career-content-production-import.yml',
@@ -372,12 +371,17 @@ final class SecurityGuardrailsTest extends TestCase
         $deploy = file_get_contents($repoRoot.'/.github/workflows/deploy.yml');
         $this->assertIsString($deploy);
 
+        $this->assertStringNotContainsString('webfactory/ssh-agent@', $deploy);
+        $this->assertStringContainsString('SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}', $deploy);
+        $this->assertStringContainsString('printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1', $deploy);
+        $this->assertStringContainsString('ssh-add -l >/dev/null 2>&1', $deploy);
+        $this->assertStringContainsString('ssh-agent -k >/dev/null 2>&1 || true', $deploy);
         $this->assertDoesNotMatchRegularExpression('/ssh-keyscan/', $deploy);
         $this->assertMatchesRegularExpression('/SSH_KNOWN_HOSTS/', $deploy);
         $this->assertMatchesRegularExpression('/DEPLOYER_SHA256/', $deploy);
         $this->assertMatchesRegularExpression('/sha256sum -c -/', $deploy);
         $this->assertLessThan(
-            strpos($deploy, 'webfactory/ssh-agent'),
+            strpos($deploy, 'Set up SSH agent without key metadata output'),
             strpos($deploy, 'Install Deployer (pinned)')
         );
     }

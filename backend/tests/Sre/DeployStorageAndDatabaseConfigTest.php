@@ -56,6 +56,11 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'AUTH_GUEST_CHECK_URL: ${{ secrets.STAGING_AUTH_GUEST_CHECK_URL }}',
             'OPS_HOST: ${{ secrets.STAGING_OPS_HOST }}',
             'Protected staging topology validation passed without disclosing values.',
+            '- name: Set up SSH agent without key metadata output',
+            'printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1',
+            'ssh-add -l >/dev/null 2>&1',
+            '- name: Stop SSH agent',
+            'ssh-agent -k >/dev/null 2>&1 || true',
             'SSH and deploy-root preflight passed without disclosing topology.',
         ] as $contract) {
             $this->assertStringContainsString($contract, $workflow);
@@ -75,6 +80,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'sed -n \'1,120p\' "$META"',
             'echo "$ACTIVE_PROCESSES"',
             '-vvv --no-interaction',
+            'webfactory/ssh-agent@',
+            '- name: Debug SSH agent (fingerprints only)',
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $workflow);
         }
