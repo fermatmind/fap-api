@@ -99450,8 +99450,8 @@
     "branch": "codex/saep-proposed-api-per02-mbti64-en64-bounded-draft-01",
     "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
     "depends_on": [],
-    "status": "github_checks_pending",
-    "commit_sha": "6117bba2622c41a58690611082dcba46b4fb32dd",
+    "status": "ready_to_merge",
+    "commit_sha": "fc28e817843a00c2c6da7908ac47649c898df7c3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
     "checks": {
       "authorization": {
@@ -99467,14 +99467,14 @@
         "evidence": "Focused command coverage passed 15 tests/319 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role and graph-integrity cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. The bounded write test used only in-memory SQLite; no real CMS/database write occurred."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact reviewed head fc28e817843a00c2c6da7908ac47649c898df7c3 passed all 9 checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets and non-blocking SARIF upload. The PR contained exactly the five allowed files and had zero review threads. This following commit changes only this ledger transition; merge remains gated on the final ledger-only head rerunning the same required checks."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99503,8 +99503,13 @@
         "at": "2026-07-23T03:23:30Z",
         "status": "github_checks_pending",
         "note": "Committed the exact five-path implementation as 6117bba2622c41a58690611082dcba46b4fb32dd, pushed the scoped branch and opened PR #3219. Merge remains gated on required GitHub checks, exact-head review, clean scope and mergeability. This following commit changes only the PR-train state ledger."
+      },
+      {
+        "at": "2026-07-23T03:30:44Z",
+        "status": "ready_to_merge",
+        "note": "All 9 required and security checks passed on exact reviewed head fc28e817843a00c2c6da7908ac47649c898df7c3. GitHub reported the PR mergeable before the final query refreshed, the diff contains exactly the five allowed paths, and review threads are zero. This following commit records ready_to_merge only; its final head must rerun all required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-23T03:23:30Z"
+    "updated_at": "2026-07-23T03:30:44Z"
   }
 }
