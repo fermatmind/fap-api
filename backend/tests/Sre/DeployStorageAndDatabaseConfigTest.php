@@ -147,7 +147,30 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $source = $this->readRepoFile('deploy.php');
 
         $this->assertStringContainsString(
-            'sudo -n -u www-data -- {{bin/php}} %s seo:warm-sitemap-source-cache',
+            'sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}',
+            $source,
+        );
+        $this->assertStringContainsString('verify_sitemap_source_cache_warm.sh', $source);
+        $this->assertStringContainsString('SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS', $source);
+        $this->assertStringContainsString('SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS', $source);
+        $this->assertStringContainsString('SITEMAP_SOURCE_WARM_STRICT', $source);
+    }
+
+    #[Test]
+    public function sitemap_cache_warm_timeout_is_nonblocking_only_with_a_post_symlink_safe_fallback_gate(): void
+    {
+        $source = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString("task('healthcheck:sitemap-source'", $source);
+        $this->assertStringContainsString('/api/v0.5/seo/sitemap-source', $source);
+        $this->assertStringContainsString('.ok==true and .count >= 1', $source);
+        $this->assertStringContainsString('backend_sitemap_generator_fallback', $source);
+        $this->assertStringContainsString(
+            "after('healthcheck:public', 'healthcheck:sitemap-source')",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "after('healthcheck:sitemap-source', 'healthcheck:public-dns')",
             $source,
         );
     }

@@ -86,6 +86,30 @@ This is a deployment-control change only. It does not change CMS authority,
 public API contracts, content, database state, queue configuration, or
 production deployment authorization.
 
+## Sitemap source cache warm timeout
+
+The sitemap source cache is a derived cache, not publication authority or
+release evidence. Standard deployment runs one bounded warm attempt as
+`www-data`. A timeout, lock contention, malformed result, empty result, or
+command failure is non-blocking by default and must emit only a sanitized
+degraded status. The deploy must not retry this heavy generator automatically.
+
+After activation, `healthcheck:sitemap-source` remains fail closed. The target
+node loopback response must return `ok=true`, `count>=1`, and either the full
+`backend_sitemap_generator` source or the safe
+`backend_sitemap_generator_fallback` source. This keeps temporary cache warm
+failure separate from public endpoint availability.
+
+Set `DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT=true` only for a release that
+explicitly requires a successful warm result. Invalid timeout, kill-after,
+strict-mode, PHP, or Artisan configuration always fails before execution.
+Historical failed workflow runs retain their original conclusion.
+
+The July 23 production run `30008600976` timed out in the pre-activation
+sitemap source warm task. The candidate release directory was created, but the
+production symlink was not switched. A new deployment requires a new exact
+release authorization; the historical run must not be rerun or relabeled.
+
 ## Frontend deploy incident classifications
 
 - `complete_and_verified`: Node1 HEAD matches intended SHA, PM2 converged, public smoke passed

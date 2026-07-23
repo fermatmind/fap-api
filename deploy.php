@@ -739,13 +739,17 @@ task('career:verify-public-dataset-cache-equivalence', function () {
 });
 
 task('seo:warm-sitemap-source-cache', function () {
-    $timeoutSeconds = (int) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_TIMEOUT') ?: 180);
-    $timeoutSeconds = max(120, $timeoutSeconds);
+    $timeoutSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_TIMEOUT') ?: '180');
+    $killAfterSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_KILL_AFTER') ?: '30');
+    $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'false');
 
     run(sprintf(
-        'timeout %d sudo -n -u www-data -- {{bin/php}} %s seo:warm-sitemap-source-cache --json --no-interaction --ansi',
-        $timeoutSeconds,
+        'sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}} SITEMAP_SOURCE_WARM_ARTISAN=%s SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS=%s SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS=%s SITEMAP_SOURCE_WARM_STRICT=%s bash %s',
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
+        deployShellArg($timeoutSeconds),
+        deployShellArg($killAfterSeconds),
+        deployShellArg($strict),
+        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_sitemap_source_cache_warm.sh'),
     ));
 });
 
@@ -1417,6 +1421,17 @@ task('healthcheck:public', function () {
     run($cmd);
 });
 
+task('healthcheck:sitemap-source', function () {
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $url = deployHttpsUrlArg($host, '/api/v0.5/seo/sitemap-source');
+    $jq = deployShellArg(
+        '.ok==true and .count >= 1 and (.source=="backend_sitemap_generator" or .source=="backend_sitemap_generator_fallback")'
+    );
+    $cmd = "curl -fsS {$resolveArg}{$url} | jq -e {$jq}";
+    run($cmd);
+});
+
 task('healthcheck:public-dns', function () {
     runProductionPublicDnsBusinessEvidence();
 });
@@ -1781,7 +1796,8 @@ after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
-after('healthcheck:public', 'healthcheck:public-dns');
+after('healthcheck:public', 'healthcheck:sitemap-source');
+after('healthcheck:sitemap-source', 'healthcheck:public-dns');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:scale-lookup');
