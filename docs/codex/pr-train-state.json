@@ -99450,9 +99450,9 @@
     "branch": "codex/saep-proposed-api-per02-mbti64-en64-bounded-draft-01",
     "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
     "depends_on": [],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "6117bba2622c41a58690611082dcba46b4fb32dd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -99498,8 +99498,13 @@
         "at": "2026-07-23T03:21:59Z",
         "status": "local_validation_passed",
         "note": "Implemented fail-closed exact EN variant boundaries and a cohort-bound writer. Focused tests passed 15 tests/319 assertions; syntax, scoped Pint, Composer validation/audit, full ci_verify_mbti.sh, metadata parsers, diff and exact five-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline. No production or CMS/database write was executed."
+      },
+      {
+        "at": "2026-07-23T03:23:30Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact five-path implementation as 6117bba2622c41a58690611082dcba46b4fb32dd, pushed the scoped branch and opened PR #3219. Merge remains gated on required GitHub checks, exact-head review, clean scope and mergeability. This following commit changes only the PR-train state ledger."
       }
     ],
-    "updated_at": "2026-07-23T03:21:59Z"
+    "updated_at": "2026-07-23T03:23:30Z"
   }
 }
