@@ -74,11 +74,55 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('git cat-file -e "${CURRENT_PRODUCTION_SHA}^{commit}"', $candidateStep);
         $this->assertStringContainsString('if [ "$CURRENT_PRODUCTION_SHA" = "$DEPLOY_SHA" ]', $candidateStep);
         $this->assertStringContainsString('git merge-base --is-ancestor "$CURRENT_PRODUCTION_SHA" "$DEPLOY_SHA"', $candidateStep);
-        $this->assertStringContainsString('would not advance the current production revision', $candidateStep);
+        $this->assertStringContainsString('PRODUCTION_BASELINE_MODE="linear_ancestor"', $candidateStep);
+        $this->assertStringContainsString('PRODUCTION_BASELINE_MODE="runtime46_patch_subsumed"', $candidateStep);
+        $this->assertStringContainsString('would not safely advance the current production revision', $candidateStep);
+        $this->assertStringContainsString('production_baseline_mode=$PRODUCTION_BASELINE_MODE', $candidateStep);
         $this->assertStringNotContainsString('dep deploy', $candidateStep);
         $this->assertStringNotContainsString('artisan migrate', $candidateStep);
         $this->assertStringNotContainsString('queue:restart', $candidateStep);
         $this->assertStringNotContainsString('rm -f', $candidateStep);
+    }
+
+    public function test_standard_candidate_accepts_only_the_exact_audited_runtime46_subsumed_baseline(): void
+    {
+        $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';
+        $candidateStep = $this->between(
+            $deploy,
+            '- name: Verify immutable standard candidate advances production before writes',
+            '- name: Remote deploy lock guard'
+        );
+
+        foreach ([
+            'AUDITED_RUNTIME46_PRODUCTION_SHA="bc0ed833bc9aae1473ab37f1dead2517e1aff618"',
+            'AUDITED_RUNTIME46_CANDIDATE_SHA="49038deb50cda789e4365ea42068832ed28d6023"',
+            'AUDITED_RUNTIME46_STAGING_RUN_ID="29977064260"',
+            '[ "$CURRENT_PRODUCTION_SHA" = "$AUDITED_RUNTIME46_PRODUCTION_SHA" ]',
+            '[ "$DEPLOY_SHA" = "$AUDITED_RUNTIME46_CANDIDATE_SHA" ]',
+            '[ "$STAGING_RUN_ID" = "$AUDITED_RUNTIME46_STAGING_RUN_ID" ]',
+            '[ "${#production_commit[@]}" -eq 2 ]',
+            'git merge-base --is-ancestor "$production_parent" "$DEPLOY_SHA"',
+            'git diff --no-renames --name-status "$production_parent" "$CURRENT_PRODUCTION_SHA"',
+            '[ "$actual_diff" = "$expected_diff" ]',
+            'git rev-parse "${CURRENT_PRODUCTION_SHA}:${path}"',
+            'git rev-parse "${DEPLOY_SHA}:${path}"',
+            '[ "$production_blob" = "$candidate_blob" ]',
+            'Subsumed baseline refused an unknown, deleted, renamed, or status-drifted production path.',
+            'Subsumed baseline refused Runtime 46 blob drift.',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $candidateStep);
+        }
+
+        $this->assertSame(5, substr_count($candidateStep, '$\'A\\tbackend/'));
+        $this->assertSame(1, substr_count($candidateStep, '$\'M\\tbackend/'));
+        $this->assertStringContainsString(
+            'PRODUCTION_BASELINE_MODE: ${{ steps.standard_baseline_guard.outputs.production_baseline_mode }}',
+            $deploy
+        );
+        $this->assertStringContainsString(
+            'production_baseline_mode: ${PRODUCTION_BASELINE_MODE}',
+            $deploy
+        );
     }
 
     public function test_standard_staging_evidence_allows_only_audited_control_only_byte_equivalent_delta(): void
