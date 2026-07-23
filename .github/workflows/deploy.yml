@@ -329,19 +329,20 @@ jobs:
           printf '%s  /tmp/dep.phar\n' "$DEPLOYER_SHA256" | sha256sum -c -
           php /tmp/dep.phar --version
 
-      - name: Set up SSH
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Debug SSH agent (fingerprints only)
+      - name: Set up SSH agent without key metadata output
         if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
-          ssh-add -l >/dev/null
-          echo "SSH agent key presence verified."
+          test -n "$SSH_PRIVATE_KEY"
+          eval "$(ssh-agent -s)" >/dev/null
+          printf 'SSH_AUTH_SOCK=%s\n' "$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          printf 'SSH_AGENT_PID=%s\n' "$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+          ssh-add -l >/dev/null 2>&1
+          echo "SSH agent key presence verified without disclosing key metadata."
 
       - name: Install pinned SSH known_hosts
         if: steps.stale_guard.outputs.skip_deploy != 'true'
@@ -873,3 +874,11 @@ jobs:
           path: artifacts/isolated-staging-receipt.json
           if-no-files-found: error
           retention-days: 90
+
+      - name: Stop SSH agent
+        if: ${{ always() && steps.stale_guard.outputs.skip_deploy != 'true' }}
+        shell: bash
+        run: |
+          if [ -n "${SSH_AGENT_PID:-}" ]; then
+            ssh-agent -k >/dev/null 2>&1 || true
+          fi
