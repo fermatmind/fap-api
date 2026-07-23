@@ -88,6 +88,31 @@ final class Mbti64CmsInternalLinkDraftWriter
                         && $identity['page_type'] === $boundary['page_type'];
                 }
             ));
+            $safeNodes = [];
+            foreach ($nodes as $node) {
+                $path = $this->normalizePath((string) ($node['path'] ?? $node['url'] ?? ''));
+                if ($this->nodeContainsForbiddenValue($node)) {
+                    $errors[] = [
+                        'field' => 'bounded_scope.sources',
+                        'code' => 'unsafe_bounded_node',
+                        'message' => 'Bounded node path or URL contains a forbidden private route pattern.',
+                    ];
+
+                    continue;
+                }
+                if (! $this->nodeFieldsMatchPath($node, $path)) {
+                    $errors[] = [
+                        'field' => 'bounded_scope.sources',
+                        'code' => 'bounded_node_identity_mismatch',
+                        'message' => 'Every bounded node path and URL must match its canonical source path.',
+                    ];
+
+                    continue;
+                }
+
+                $safeNodes[] = $node;
+            }
+            $nodes = $safeNodes;
         }
 
         $nodesByPath = [];
@@ -1023,6 +1048,42 @@ final class Mbti64CmsInternalLinkDraftWriter
         $seen = false;
         foreach ([$side.'_path', $side.'_url'] as $field) {
             $value = trim((string) ($edge[$field] ?? ''));
+            if ($value === '') {
+                continue;
+            }
+
+            $seen = true;
+            if ($this->normalizePath($value) !== $expectedPath) {
+                return false;
+            }
+        }
+
+        return $seen;
+    }
+
+    /**
+     * @param  array<string,mixed>  $node
+     */
+    private function nodeContainsForbiddenValue(array $node): bool
+    {
+        foreach (['path', 'url'] as $field) {
+            $value = trim((string) ($node[$field] ?? ''));
+            if ($value !== '' && $this->containsForbiddenRoutePattern($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $node
+     */
+    private function nodeFieldsMatchPath(array $node, string $expectedPath): bool
+    {
+        $seen = false;
+        foreach (['path', 'url'] as $field) {
+            $value = trim((string) ($node[$field] ?? ''));
             if ($value === '') {
                 continue;
             }

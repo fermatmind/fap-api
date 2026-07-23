@@ -514,6 +514,31 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_bounded_tokenized_node_url_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['nodes'] as &$node) {
+                if (($node['path'] ?? null) === '/en/personality/intj-a') {
+                    $node['url'] = 'https://fermatmind.com/en/personality/intj-a?token=must-not-persist';
+                    break;
+                }
+            }
+            unset($node);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('unsafe_bounded_node', array_column($payload['errors'], 'code'));
+        $this->assertStringNotContainsString('must-not-persist', Artisan::output());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     /**
      * @return array<string,PersonalityProfile|PersonalityProfileVariant>
      */
