@@ -4,13 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "verify_only is read-only; direct_repair warms bounded cache batches inside the exact inactive candidate runtime"
+        description: "verify_only is read-only; bootstrap_and_verify streams the versioned runner into the exact inactive candidate runtime"
         required: true
         default: verify_only
         type: choice
         options:
           - verify_only
-          - direct_repair
+          - bootstrap_and_verify
+      expected_control_plane_sha:
+        description: "Required only for bootstrap_and_verify; exact main SHA containing this workflow and runner"
+        required: false
+        default: ""
+        type: string
+      expected_runner_sha256:
+        description: "Required only for bootstrap_and_verify; exact SHA256 of the streamed candidate-exact runner"
+        required: false
+        default: ""
+        type: string
       expected_active_revision:
         description: "Exact 40-character REVISION currently active on production"
         required: true
@@ -33,7 +43,7 @@ on:
         default: "2090"
         type: string
       operator_approval_phrase:
-        description: "Required only for direct_repair; must match the exact revision/count-bound phrase"
+        description: "Required only for bootstrap_and_verify; must match the exact control-plane/runner/revision/count-bound phrase"
         required: false
         default: ""
         type: string
@@ -47,7 +57,7 @@ jobs:
     name: Career detail production cache repair (${{ inputs.mode }})
     runs-on: ubuntu-latest
     environment: production
-    timeout-minutes: 120
+    timeout-minutes: 90
     concurrency:
       group: deploy-${{ github.repository }}-production
       cancel-in-progress: false
@@ -58,13 +68,16 @@ jobs:
       RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
       DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
       MINIMUM_TARGETS: "2092"
-      REPAIR_BATCH_SIZE: "250"
+      BOOTSTRAP_BATCH_SIZE: "250"
+      RUNNER_PATH: "backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php"
 
     steps:
       - name: Validate exact production cache operation contract
         shell: bash
         env:
           MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_RUNNER_SHA256: ${{ inputs.expected_runner_sha256 }}
           EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
           CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
@@ -100,12 +113,16 @@ jobs:
                 echo "verify_only refuses an operator approval phrase." >&2
                 exit 2
               fi
+              test -z "$EXPECTED_CONTROL_PLANE_SHA"
+              test -z "$EXPECTED_RUNNER_SHA256"
               ;;
-            direct_repair)
+            bootstrap_and_verify)
               test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
-              expected_phrase="I explicitly approve production Career detail cache repair with active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; cache-only, candidate-runtime-direct, zero queue dispatch, no CMS/DB-authority/publication/indexability/sitemap/llms/search."
+              [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+              [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              expected_phrase="I explicitly approve production Career inactive-candidate exact cache bootstrap with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} runner SHA256 ${EXPECTED_RUNNER_SHA256} active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation."
               if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
-                echo "operator_approval_phrase does not match the exact production cache repair authorization." >&2
+                echo "operator_approval_phrase does not match the exact candidate-exact cache bootstrap authorization." >&2
                 exit 2
               fi
               ;;
@@ -115,12 +132,36 @@ jobs:
               ;;
           esac
 
-      - name: Check out exact candidate revision
+      - name: Check out exact main control plane
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
-          ref: ${{ inputs.candidate_release_revision }}
+          ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Bind exact control plane and runner
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_RUNNER_SHA256: ${{ inputs.expected_runner_sha256 }}
+        run: |
+          set -euo pipefail
+          control_plane_sha="$(git rev-parse HEAD)"
+          test "$control_plane_sha" = "$GITHUB_SHA"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$control_plane_sha" = "$(git rev-parse origin/main)"
+          test -f "$RUNNER_PATH"
+          runner_sha256="$(sha256sum "$RUNNER_PATH" | awk '{print $1}')"
+          [[ "$runner_sha256" =~ ^[0-9a-f]{64}$ ]]
+          if [ "$MODE" = "bootstrap_and_verify" ]; then
+            test "$control_plane_sha" = "$EXPECTED_CONTROL_PLANE_SHA"
+            test "$runner_sha256" = "$EXPECTED_RUNNER_SHA256"
+          fi
+          {
+            echo "CONTROL_PLANE_SHA=$control_plane_sha"
+            echo "RUNNER_SHA256=$runner_sha256"
+          } >> "$GITHUB_ENV"
 
       - name: Verify candidate ancestry and exact staging evidence
         shell: bash
@@ -189,8 +230,11 @@ jobs:
               }
             done
           }
-          test "$(git rev-parse HEAD)" = "$CANDIDATE_RELEASE_REVISION"
-          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          if ! git cat-file -e "${CANDIDATE_RELEASE_REVISION}^{commit}"; then
+            git fetch --no-tags origin "$CANDIDATE_RELEASE_REVISION"
+          fi
+          git cat-file -e "${CANDIDATE_RELEASE_REVISION}^{commit}"
           if ! git cat-file -e "${EXPECTED_ACTIVE_REVISION}^{commit}"; then
             git fetch --no-tags origin "$EXPECTED_ACTIVE_REVISION"
           fi
@@ -252,79 +296,145 @@ jobs:
         shell: bash
         env:
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
           EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
         run: |
           set -euo pipefail
           mkdir -p artifacts
-          set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --json --no-interaction --no-ansi" \
-            > artifacts/preflight.json
-          command_status=$?
-          set -e
-          if [ "$command_status" -ne 0 ] && [ "$command_status" -ne 1 ]; then
-            echo "coverage preflight failed unexpectedly with exit $command_status" >&2
-            exit "$command_status"
-          fi
+            "set -euo pipefail; test -x /usr/bin/php; test -x /usr/bin/timeout; sudo -n -u www-data -- test -r '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend/vendor/autoload.php'; sudo -n -u www-data -- test -w '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend/storage/framework/cache/data'"
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=preflight FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$EXPECTED_MISSING_POINTER_COUNT' /usr/bin/timeout 600 /usr/bin/php" \
+            < "$RUNNER_PATH" > artifacts/preflight.json
 
           jq -e \
+            --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
             --argjson expected_missing "$EXPECTED_MISSING_POINTER_COUNT" \
             --argjson expected_targets "$MINIMUM_TARGETS" \
-            '.contract_version == "career.job_detail_cache_coverage.v1"
-             and .expected_target_count == $expected_targets
-             and .eligible_target_count == $expected_targets
-             and .minimum_target_count_met == true
-             and .missing_pointer_count == $expected_missing
-             and .missing_payload_count == 0
-             and .broken_count == 0
-             and .excluded_count == 0
-             and .covered_target_count == ($expected_targets - $expected_missing)' \
+            '.contract_version == "career.candidate_exact_cache_bootstrap.v1"
+             and .mode == "preflight"
+             and .status == "ready"
+             and .candidate_revision == $candidate_sha
+             and .cache_write_count == 0
+             and .failure_count == 0
+             and .queue_dispatch_count == 0
+             and .database_write_count == 0
+             and .coverage.expected_target_count == $expected_targets
+             and .coverage.eligible_target_count == $expected_targets
+             and .coverage.missing_pointer_count == $expected_missing
+             and .coverage.missing_payload_count == 0
+             and .coverage.broken_count == 0
+             and .coverage.excluded_count == 0
+             and .coverage.covered_target_count == ($expected_targets - $expected_missing)' \
             artifacts/preflight.json >/dev/null
 
-      - name: Run bounded repair inside exact candidate runtime
-        if: inputs.mode == 'direct_repair'
+          jq -n \
+            --arg contract_version "career.candidate_exact_cache_bootstrap.authorization.v1" \
+            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
+            --arg runner_sha256 "$RUNNER_SHA256" \
+            --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
+            --arg candidate_revision "$CANDIDATE_RELEASE_REVISION" \
+            --arg candidate_release "$CANDIDATE_RELEASE_NAME" \
+            --arg staging_run_id "$STAGING_RUN_ID" \
+            --argjson expected_targets "$MINIMUM_TARGETS" \
+            --argjson missing_pointer_count "$EXPECTED_MISSING_POINTER_COUNT" \
+            '{
+              contract_version: $contract_version,
+              control_plane_sha: $control_plane_sha,
+              runner_sha256: $runner_sha256,
+              active_revision: $active_revision,
+              candidate_revision: $candidate_revision,
+              candidate_release: $candidate_release,
+              staging_run_id: $staging_run_id,
+              expected_target_count: $expected_targets,
+              missing_pointer_count: $missing_pointer_count,
+              cache_write_count: 0,
+              queue_dispatch_count: 0,
+              database_write_count: 0,
+              candidate_activation: false
+            }' > artifacts/authorization-packet.json
+
+      - name: Run candidate-exact synchronous cache batches
+        if: inputs.mode == 'bootstrap_and_verify'
         shell: bash
         env:
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
           CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
         run: |
           set -euo pipefail
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "set -euo pipefail; cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend'; test -x /usr/bin/timeout; sudo -n -u www-data -- test -w storage/framework/cache/data"
-          resume_key="production-bootstrap-${CANDIDATE_RELEASE_REVISION}"
-          completed=false
-          for batch in $(seq 1 9); do
-            reset_flag=""
-            if [ "$batch" -eq 1 ]; then
-              reset_flag="--reset"
-            fi
+          verify_identity() {
+            test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+            test "$(sha256sum "$RUNNER_PATH" | awk '{print $1}')" = "$RUNNER_SHA256"
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
               -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && sudo -n -u www-data -- /usr/bin/timeout 600 php artisan career:verify-job-detail-cache-coverage --repair-missing-direct --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --batch-size=$REPAIR_BATCH_SIZE --resume-key='$resume_key' $reset_flag --confirm-production-write --json --no-interaction --no-ansi" \
-              | tee "artifacts/direct-repair-batch-${batch}.json"
-            coverage_status="$(jq -r '.coverage_status' "artifacts/direct-repair-batch-${batch}.json")"
-            remaining="$(jq -r '.repair.remaining_targets' "artifacts/direct-repair-batch-${batch}.json")"
-            if [ "$coverage_status" = "ready" ]; then
-              completed=true
-              break
+              "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test \"\$(tr -d '\\r\\n' < \"\$candidate/REVISION\")\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+          }
+
+          total_writes=0
+          expected_remaining="$EXPECTED_MISSING_POINTER_COUNT"
+          for offset in 0 250 500 750 1000 1250 1500 1750 2000; do
+            verify_identity
+            receipt="artifacts/candidate-exact-batch-${offset}.json"
+            if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=batch FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$expected_remaining' FM_CAREER_BATCH_OFFSET='$offset' FM_CAREER_BATCH_SIZE='$BOOTSTRAP_BATCH_SIZE' /usr/bin/timeout 600 /usr/bin/php" \
+              < "$RUNNER_PATH" > "$receipt"; then
+              echo "candidate-exact cache batch failed; inspect the sanitized receipt." >&2
+              exit 1
             fi
-            test "$remaining" -gt 0
+
+            writes="$(jq -r '.cache_write_count' "$receipt")"
+            [[ "$writes" =~ ^(0|[1-9][0-9]*)$ ]]
+            test "$writes" -le "$expected_remaining"
+            post_remaining=$((expected_remaining - writes))
+            jq -e \
+              --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
+              --argjson offset "$offset" \
+              --argjson writes "$writes" \
+              --argjson post_remaining "$post_remaining" \
+              '.contract_version == "career.candidate_exact_cache_bootstrap.v1"
+               and .mode == "batch"
+               and .status == "completed"
+               and .candidate_revision == $candidate_sha
+               and .batch_offset == $offset
+               and .batch_size == 250
+               and .cache_write_count == $writes
+               and .failure_count == 0
+               and .queue_dispatch_count == 0
+               and .database_write_count == 0
+               and .post_batch_coverage.missing_pointer_count == $post_remaining
+               and .post_batch_coverage.missing_payload_count == 0
+               and .post_batch_coverage.broken_count == 0
+               and .post_batch_coverage.excluded_count == 0' \
+              "$receipt" >/dev/null
+            total_writes=$((total_writes + writes))
+            expected_remaining="$post_remaining"
           done
-          test "$completed" = true
+          test "$total_writes" -eq "$EXPECTED_MISSING_POINTER_COUNT"
+          test "$expected_remaining" -eq 0
+          printf '%s\n' "$total_writes" > artifacts/total-cache-writes.txt
+          verify_identity
 
       - name: Read back exact full coverage
-        if: inputs.mode == 'direct_repair'
+        if: inputs.mode == 'bootstrap_and_verify'
         shell: bash
         env:
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
         run: |
           set -euo pipefail
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          post_bootstrap_raw="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --json --no-interaction --no-ansi" \
-            > artifacts/post-repair.json
+            "cd '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend' && sudo -n -u www-data -- /usr/bin/timeout 600 /usr/bin/php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN --minimum-targets=$MINIMUM_TARGETS --json --no-interaction --no-ansi")"
           jq -e \
             --argjson expected_targets "$MINIMUM_TARGETS" \
             '.status == "ready"
@@ -335,7 +445,23 @@ jobs:
              and .broken_count == 0
              and .excluded_count == 0
              and .coverage_ratio == 1' \
-            artifacts/post-repair.json >/dev/null
+            <<<"$post_bootstrap_raw" >/dev/null
+          jq '{
+            contract_version,
+            status,
+            expected_target_count,
+            eligible_target_count,
+            covered_target_count,
+            missing_count,
+            broken_count,
+            excluded_count,
+            coverage_ratio
+          }' <<<"$post_bootstrap_raw" > artifacts/post-bootstrap.json
+          unset post_bootstrap_raw
+          test "$(cat artifacts/total-cache-writes.txt)" -eq "$EXPECTED_MISSING_POINTER_COUNT"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test \"\$(tr -d '\\r\\n' < \"\$candidate/REVISION\")\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
 
       - name: Upload production cache repair receipt
         if: always()
