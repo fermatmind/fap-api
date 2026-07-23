@@ -55,11 +55,15 @@ final class CareerJobDetailBundleBuilder
         private readonly PublicReviewContract $publicReviewContract,
     ) {}
 
-    /** @param array<string, mixed>|null $exposureProjectionItem */
+    /**
+     * @param  array<string, mixed>|null  $exposureProjectionItem
+     * @param  array<string, mixed>|null  $conversionClosureOverride
+     */
     public function buildBySlug(
         string $slug,
         ?string $publicLocale = null,
         ?array $exposureProjectionItem = null,
+        ?array $conversionClosureOverride = null,
     ): ?CareerJobDetailBundle {
         $normalizedSlug = strtolower(trim($slug));
         if ($normalizedSlug === '') {
@@ -84,12 +88,27 @@ final class CareerJobDetailBundleBuilder
             ->first();
 
         if (! $occupation instanceof Occupation) {
-            return $this->buildFromPublishedDocxCareerJob($normalizedSlug, $publicLocale);
+            return $this->buildFromPublishedDocxCareerJob(
+                $normalizedSlug,
+                $publicLocale,
+                $conversionClosureOverride,
+            );
         }
 
         if ($occupation->crosswalk_mode === self::DIRECTORY_DRAFT_CROSSWALK_MODE) {
-            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug, $publicLocale, $exposureProjectionItem)
-                ?? $this->buildRuntimePublishedFallbackBundle($occupation, $normalizedSlug, $publicLocale, $exposureProjectionItem);
+            return $this->buildDisplayAssetBackedBundle(
+                $occupation,
+                $normalizedSlug,
+                $publicLocale,
+                $exposureProjectionItem,
+                $conversionClosureOverride,
+            ) ?? $this->buildRuntimePublishedFallbackBundle(
+                $occupation,
+                $normalizedSlug,
+                $publicLocale,
+                $exposureProjectionItem,
+                $conversionClosureOverride,
+            );
         }
 
         $snapshot = RecommendationSnapshot::query()
@@ -120,17 +139,23 @@ final class CareerJobDetailBundleBuilder
                 $normalizedSlug,
                 $publicLocale,
                 $exposureProjectionItem,
+                $conversionClosureOverride,
             );
             if ($displayAssetBackedBundle instanceof CareerJobDetailBundle) {
                 return $displayAssetBackedBundle;
             }
 
-            return $this->buildFromPublishedDocxCareerJob($normalizedSlug, $publicLocale)
+            return $this->buildFromPublishedDocxCareerJob(
+                $normalizedSlug,
+                $publicLocale,
+                $conversionClosureOverride,
+            )
                 ?? $this->buildRuntimePublishedFallbackBundle(
                     $occupation,
                     $normalizedSlug,
                     $publicLocale,
                     $exposureProjectionItem,
+                    $conversionClosureOverride,
                 );
         }
 
@@ -153,7 +178,8 @@ final class CareerJobDetailBundleBuilder
         $searchH1Zh = $this->localeIntegrityGate->validZhAuthorityText($occupation->search_h1_zh)
             ?? $canonicalTitleZh;
         $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
-        $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
+        $conversionClosure = $conversionClosureOverride
+            ?? $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
 
         return new CareerJobDetailBundle(
             identity: [
@@ -303,12 +329,16 @@ final class CareerJobDetailBundleBuilder
         );
     }
 
-    /** @param array<string, mixed>|null $exposureProjectionItem */
+    /**
+     * @param  array<string, mixed>|null  $exposureProjectionItem
+     * @param  array<string, mixed>|null  $conversionClosureOverride
+     */
     private function buildRuntimePublishedFallbackBundle(
         Occupation $occupation,
         string $requestedSlug,
         ?string $publicLocale = null,
         ?array $exposureProjectionItem = null,
+        ?array $conversionClosureOverride = null,
     ): ?CareerJobDetailBundle {
         $subjectSlug = strtolower((string) $occupation->canonical_slug);
         if ($subjectSlug === '' || $subjectSlug !== strtolower($requestedSlug)) {
@@ -329,7 +359,8 @@ final class CareerJobDetailBundleBuilder
             'blocked_claims' => ['compiled_recommendation_claims_unavailable', 'display_asset_claims_unavailable'],
         ];
         $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
-        $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
+        $conversionClosure = $conversionClosureOverride
+            ?? $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
 
         return new CareerJobDetailBundle(
             identity: [
@@ -478,12 +509,16 @@ final class CareerJobDetailBundleBuilder
         );
     }
 
-    /** @param array<string, mixed>|null $exposureProjectionItem */
+    /**
+     * @param  array<string, mixed>|null  $exposureProjectionItem
+     * @param  array<string, mixed>|null  $conversionClosureOverride
+     */
     private function buildDisplayAssetBackedBundle(
         Occupation $occupation,
         string $requestedSlug,
         ?string $publicLocale = null,
         ?array $exposureProjectionItem = null,
+        ?array $conversionClosureOverride = null,
     ): ?CareerJobDetailBundle {
         $subjectSlug = strtolower((string) $occupation->canonical_slug);
         if ($subjectSlug === '' || $subjectSlug !== strtolower($requestedSlug)) {
@@ -519,7 +554,8 @@ final class CareerJobDetailBundleBuilder
             'blocked_claims' => ['compiled_recommendation_claims_unavailable'],
         ];
         $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
-        $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
+        $conversionClosure = $conversionClosureOverride
+            ?? $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
 
         return new CareerJobDetailBundle(
             identity: [
@@ -683,8 +719,12 @@ final class CareerJobDetailBundleBuilder
         return $this->findPublishedDocxCareerJob($slug) instanceof CareerJob;
     }
 
-    private function buildFromPublishedDocxCareerJob(string $slug, ?string $publicLocale = null): ?CareerJobDetailBundle
-    {
+    /** @param array<string, mixed>|null $conversionClosureOverride */
+    private function buildFromPublishedDocxCareerJob(
+        string $slug,
+        ?string $publicLocale = null,
+        ?array $conversionClosureOverride = null,
+    ): ?CareerJobDetailBundle {
         $job = $this->findPublishedDocxCareerJob($slug);
 
         if (! $job instanceof CareerJob) {
@@ -879,7 +919,7 @@ final class CareerJobDetailBundleBuilder
                 'state_endpoint' => '/api/v0.5/career/shortlist/state',
                 'write_endpoint' => '/api/v0.5/career/shortlist',
             ],
-            conversionClosure: [
+            conversionClosure: $conversionClosureOverride ?? [
                 'subject_slug' => $subjectSlug,
                 'counts' => [],
                 'readiness' => [],

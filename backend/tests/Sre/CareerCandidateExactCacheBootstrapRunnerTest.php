@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Sre;
 
-use App\Services\Career\CareerJobDetailWarmFailure;
 use FermatMind\Deploy\CareerCandidateExactCacheBootstrapFailure;
 use FermatMind\Deploy\CareerCandidateExactCacheBootstrapRunner;
 use PHPUnit\Framework\Attributes\Test;
@@ -15,22 +14,28 @@ require_once __DIR__.'/../../scripts/deploy/career_candidate_exact_cache_bootstr
 final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
 {
     #[Test]
-    public function preflight_receipt_is_read_only_and_contains_only_bounded_coverage(): void
+    public function preflight_receipt_is_v2_read_only_and_fingerprint_bound(): void
     {
+        $inspection = $this->inspection([
+            $this->row('ready', 'en', false, 'ready_active'),
+            $this->row('missing', 'zh-CN', true, 'missing_pointer'),
+        ]);
         $receipt = CareerCandidateExactCacheBootstrapRunner::preflightReceipt(
             str_repeat('a', 40),
-            $this->inspection([
-                $this->row('ready', 'en', false, 'ready_active'),
-                $this->row('missing', 'zh-CN', true, 'missing_pointer'),
-            ]),
+            $inspection,
         );
 
-        $this->assertSame('preflight', $receipt['mode']);
-        $this->assertSame('ready', $receipt['status']);
+        $this->assertSame('career.candidate_exact_cache_bootstrap.v2', $receipt['contract_version']);
+        $this->assertSame(50, $receipt['batch_size']);
+        $this->assertSame(5000, $receipt['offline_build_budget_ms']);
+        $this->assertSame(1, $receipt['retry_limit']);
         $this->assertSame(0, $receipt['cache_write_count']);
         $this->assertSame(0, $receipt['queue_dispatch_count']);
         $this->assertSame(0, $receipt['database_write_count']);
-        $this->assertSame(1, $receipt['repairable_target_count']);
+        $this->assertSame(
+            CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($inspection),
+            $receipt['coverage_fingerprint_sha256'],
+        );
         $this->assertArrayNotHasKey('rows', $receipt);
     }
 
@@ -66,97 +71,157 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
     }
 
     #[Test]
-    public function batch_uses_fixed_row_offset_skips_ready_targets_and_preserves_ready_pointer_state(): void
+    public function build_budget_failure_retries_once_then_succeeds(): void
     {
         $inspection = $this->inspection([
-            $this->row('ready', 'en', false, 'ready_active'),
-            $this->row('missing-a', 'en', true, 'missing_pointer'),
-            $this->row('missing-b', 'zh-CN', true, 'missing_pointer'),
+            $this->row('private-target', 'en', true, 'missing_pointer'),
         ]);
-        $warmed = [];
+        $calls = 0;
+        $delays = 0;
 
         $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
             str_repeat('b', 40),
             $inspection,
             0,
-            250,
-            function (string $slug, string $locale) use (&$warmed): array {
-                $warmed[] = $slug.'|'.$locale;
+            50,
+            fn (array $slugs): array => $this->closures($slugs),
+            function () use (&$calls): array {
+                $calls++;
 
-                return ['status' => 'cached'];
+                return $calls === 1
+                    ? $this->warmFailure('build_detail_payload', 'build_budget_exceeded', 5123.4)
+                    : $this->warmSuccess(1200.5);
             },
             fn (): array => $this->inspection([
-                $this->row('ready', 'en', false, 'ready_active'),
-                $this->row('missing-a', 'en', false, 'ready_active'),
-                $this->row('missing-b', 'zh-CN', false, 'ready_active'),
+                $this->row('private-target', 'en', false, 'ready_active'),
             ]),
-            3,
+            1,
+            function () use (&$delays): void {
+                $delays++;
+            },
         );
 
-        $this->assertSame(['missing-a|en', 'missing-b|zh-CN'], $warmed);
-        $this->assertSame(3, $receipt['inspected_target_count']);
-        $this->assertSame(2, $receipt['repairable_target_count']);
-        $this->assertSame(2, $receipt['cache_write_count']);
-        $this->assertSame(0, $receipt['failure_count']);
-        $this->assertSame(0, $receipt['queue_dispatch_count']);
+        $this->assertSame('completed', $receipt['status']);
+        $this->assertSame(2, $receipt['attempt_count']);
+        $this->assertSame(1, $receipt['retry_count']);
+        $this->assertSame(1, $delays);
+        $this->assertSame(6323.9, $receipt['batch_build_ms_total']);
+        $this->assertSame(5123.4, $receipt['batch_build_ms_max']);
     }
 
     #[Test]
-    public function batch_stops_on_first_failure_and_receipt_never_contains_target_or_exception_details(): void
+    public function transient_database_failure_retries_but_permanent_failures_do_not(): void
+    {
+        $inspection = $this->inspection([
+            $this->row('private-target', 'en', true, 'missing_pointer'),
+        ]);
+        $transientCalls = 0;
+        $transient = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+            str_repeat('c', 40),
+            $inspection,
+            0,
+            50,
+            fn (array $slugs): array => $this->closures($slugs),
+            function () use (&$transientCalls): array {
+                $transientCalls++;
+
+                return $transientCalls === 1
+                    ? $this->warmFailure('build_detail_payload', 'database_transient_read', 20)
+                    : $this->warmSuccess(30);
+            },
+            fn (): array => $this->inspection([
+                $this->row('private-target', 'en', false, 'ready_active'),
+            ]),
+            1,
+            static fn (): null => null,
+        );
+        $this->assertSame('completed', $transient['status']);
+        $this->assertSame(2, $transientCalls);
+
+        foreach ([
+            ['build_detail_payload', 'database_permanent_read'],
+            ['publish_cache_payload', 'cache_publish_failed'],
+            ['build_detail_payload', 'payload_not_cached'],
+            ['build_detail_payload', 'unexpected'],
+        ] as [$stage, $category]) {
+            $calls = 0;
+            $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+                str_repeat('d', 40),
+                $inspection,
+                0,
+                50,
+                fn (array $slugs): array => $this->closures($slugs),
+                function () use (&$calls, $stage, $category): array {
+                    $calls++;
+
+                    return $this->warmFailure($stage, $category, 10);
+                },
+                static fn (): array => $inspection,
+                1,
+                static fn (): null => null,
+            );
+            $this->assertSame(1, $calls);
+            $this->assertSame(0, $receipt['retry_count']);
+            $this->assertSame($category, $receipt['error_category']);
+        }
+    }
+
+    #[Test]
+    public function second_retry_failure_stops_and_receipt_redacts_target_and_exception_details(): void
     {
         $inspection = $this->inspection([
             $this->row('first-private-slug', 'en', true, 'missing_pointer'),
-            $this->row('second-private-slug', 'zh-CN', true, 'missing_pointer'),
-            $this->row('must-not-run', 'en', true, 'missing_pointer'),
+            $this->row('must-not-run', 'zh-CN', true, 'missing_pointer'),
         ]);
         $calls = 0;
 
         $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
-            str_repeat('c', 40),
+            str_repeat('e', 40),
             $inspection,
             0,
-            250,
+            50,
+            fn (array $slugs): array => $this->closures($slugs),
             function () use (&$calls): array {
                 $calls++;
-                if ($calls === 2) {
-                    throw new \RuntimeException('secret cache key and private slug');
-                }
 
-                return ['status' => 'cached'];
+                return $this->warmFailure('build_detail_payload', 'build_budget_exceeded', 5100);
             },
-            fn (): array => $inspection,
-            3,
+            static fn (): array => $inspection,
+            2,
+            static fn (): null => null,
         );
 
         $encoded = json_encode($receipt, JSON_THROW_ON_ERROR);
         $this->assertSame(2, $calls);
         $this->assertSame('failed', $receipt['status']);
-        $this->assertSame(1, $receipt['cache_write_count']);
-        $this->assertSame(1, $receipt['failure_count']);
-        $this->assertSame('TARGET_WARM_FAILED', $receipt['error_code']);
+        $this->assertSame(2, $receipt['attempt_count']);
+        $this->assertSame(1, $receipt['retry_count']);
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $receipt['failed_target_index_sha256']);
         $this->assertStringNotContainsString('private-slug', $encoded);
-        $this->assertStringNotContainsString('secret cache key', $encoded);
         $this->assertStringNotContainsString('must-not-run', $encoded);
+        $this->assertStringNotContainsString('exception', $encoded);
+        $this->assertStringNotContainsString('cache_key', $encoded);
     }
 
     #[Test]
-    public function partial_success_is_recoverable_from_offset_zero_without_rewarming_ready_rows(): void
+    public function offset_zero_recovery_skips_ready_rows_and_preserves_partial_success(): void
     {
-        $secondInspection = $this->inspection([
+        $inspection = $this->inspection([
             $this->row('already-complete', 'en', false, 'ready_active'),
             $this->row('remaining', 'zh-CN', true, 'missing_pointer'),
         ]);
         $warmed = [];
 
         $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
-            str_repeat('d', 40),
-            $secondInspection,
+            str_repeat('f', 40),
+            $inspection,
             0,
-            250,
+            50,
+            fn (array $slugs): array => $this->closures($slugs),
             function (string $slug) use (&$warmed): array {
                 $warmed[] = $slug;
 
-                return ['status' => 'cached'];
+                return $this->warmSuccess(1);
             },
             fn (): array => $this->inspection([
                 $this->row('already-complete', 'en', false, 'ready_active'),
@@ -171,262 +236,68 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
     }
 
     #[Test]
-    public function diagnostic_defaults_to_zero_writes_for_one_exact_missing_target(): void
+    public function offsets_are_exact_multiples_of_fifty_and_final_batch_has_forty_two_rows(): void
     {
-        $inspection = $this->inspection([
-            $this->row('command-and-control-center-specialists', 'en', true, 'missing_pointer'),
-        ]);
-        $calls = 0;
-
-        $receipt = CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
-            str_repeat('1', 40),
-            $inspection,
-            'command-and-control-center-specialists',
-            'en',
-            false,
-            function () use (&$calls): array {
-                $calls++;
-
-                return ['status' => 'cached'];
-            },
-            static fn (): array => throw new \RuntimeException('Read-only diagnosis must not inspect after a write.'),
-            1,
-        );
-
-        $this->assertSame(0, $calls);
-        $this->assertSame('ready', $receipt['status']);
-        $this->assertFalse($receipt['diagnostic_write']);
-        $this->assertSame(0, $receipt['cache_write_count']);
-        $this->assertSame(0, $receipt['queue_dispatch_count']);
-        $this->assertSame($receipt['pre_target_coverage'], $receipt['post_target_coverage']);
-    }
-
-    #[Test]
-    public function diagnostic_writes_at_most_one_exact_target_and_requires_ready_active_readback(): void
-    {
-        $inspection = $this->inspection([
-            $this->row('command-and-control-center-specialists', 'en', true, 'missing_pointer'),
-            $this->row('already-ready', 'zh-CN', false, 'ready_active'),
-        ]);
-        $calls = [];
-
-        $receipt = CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
-            str_repeat('2', 40),
-            $inspection,
-            'command-and-control-center-specialists',
-            'en',
-            true,
-            function (string $slug, string $locale) use (&$calls): array {
-                $calls[] = $slug.'|'.$locale;
-
-                return ['status' => 'cached', 'build_ms' => 123.456];
-            },
-            fn (): array => $this->inspection([
-                $this->row('command-and-control-center-specialists', 'en', false, 'ready_active'),
-                $this->row('already-ready', 'zh-CN', false, 'ready_active'),
-            ]),
-            2,
-        );
-
-        $this->assertSame(['command-and-control-center-specialists|en'], $calls);
-        $this->assertSame('completed', $receipt['status']);
-        $this->assertSame(1, $receipt['cache_write_count']);
-        $this->assertSame(0, $receipt['queue_dispatch_count']);
-        $this->assertSame(0, $receipt['database_write_count']);
-        $this->assertArrayNotHasKey('failure_evidence', $receipt);
-    }
-
-    #[Test]
-    public function diagnostic_emits_only_typed_safe_failure_evidence_and_preserves_partial_state(): void
-    {
-        $inspection = $this->inspection([
-            $this->row('command-and-control-center-specialists', 'en', true, 'missing_pointer'),
-        ]);
-        $failures = [
-            CareerJobDetailWarmFailure::buildException(
-                new \RuntimeException('private build payload and cache key'),
-                17.25,
+        $this->assertSame(42, count(array_filter(
+            range(0, 2091),
+            static fn (int $offset): bool => CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(
+                $offset,
+                2092,
             ),
-            CareerJobDetailWarmFailure::buildBudgetExceeded(2001.5),
-            CareerJobDetailWarmFailure::publishException(
-                new \LogicException('private publish path and cache key'),
-                900.25,
-                4.75,
-            ),
-        ];
-        $expected = [
-            ['build_exception', 'CAREER_DETAIL_BUILD_EXCEPTION'],
-            ['build_budget_exceeded', 'CAREER_DETAIL_BUILD_BUDGET_EXCEEDED'],
-            ['publish_exception', 'CAREER_DETAIL_PUBLISH_EXCEPTION'],
-        ];
+        )));
+        $this->assertTrue(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(2050, 2092));
+        $this->assertFalse(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(2092, 2092));
+        $this->assertFalse(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(51, 2092));
 
-        foreach ($failures as $index => $failure) {
-            $this->assertNull($failure->getPrevious());
-            $this->assertSame($expected[$index][1], $failure->getMessage());
-            $receipt = CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
-                str_repeat('3', 40),
-                $inspection,
-                'command-and-control-center-specialists',
-                'en',
-                true,
-                static fn (): array => throw $failure,
-                static fn (): array => $inspection,
-                1,
-            );
-            $encoded = json_encode($receipt, JSON_THROW_ON_ERROR);
-
-            $this->assertSame('failed', $receipt['status']);
-            $this->assertSame(0, $receipt['cache_write_count']);
-            $this->assertSame($expected[$index][0], $receipt['failure_evidence']['failure_stage']);
-            $this->assertSame($expected[$index][1], $receipt['failure_evidence']['safe_code']);
-            $this->assertSame(
-                $receipt['pre_target_coverage'],
-                $receipt['post_target_coverage'],
-            );
-            $this->assertStringNotContainsString('private build payload', $encoded);
-            $this->assertStringNotContainsString('private publish path', $encoded);
-            $this->assertStringNotContainsString('cache key', $encoded);
-            $this->assertStringNotContainsString('message', $encoded);
-        }
-    }
-
-    #[Test]
-    public function diagnostic_rejects_multi_target_syntax_invalid_locale_and_non_repairable_target(): void
-    {
-        $inspection = $this->inspection([
-            $this->row('held-target', 'en', false, 'held_or_unpublished_excluded'),
-        ]);
-
-        foreach ([
-            ['held-target,other-target', 'en'],
-            ['held-target', 'fr'],
-            ['held-target', 'en'],
-        ] as [$slug, $locale]) {
-            try {
-                CareerCandidateExactCacheBootstrapRunner::diagnosticReceipt(
-                    str_repeat('4', 40),
-                    $inspection,
-                    $slug,
-                    $locale,
-                    false,
-                    static fn (): array => ['status' => 'cached'],
-                    static fn (): array => $inspection,
-                    1,
-                );
-                $this->fail('Expected exact diagnostic target rejection.');
-            } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
-                $this->assertContains($failure->safeCode, [
-                    'INVALID_DIAGNOSTIC_TARGET',
-                    'DIAGNOSTIC_TARGET_NOT_REPAIRABLE',
-                    'COVERAGE_BOUNDARY_FAILED',
-                    'TARGET_COUNT_DRIFT',
-                ]);
-            }
-        }
-    }
-
-    #[Test]
-    public function runner_modes_reject_batch_and_diagnostic_input_combinations(): void
-    {
-        foreach ([
-            ['preflight', ['FM_CAREER_TARGET_SLUG' => 'one']],
-            ['batch', ['FM_CAREER_BATCH_OFFSET' => '0', 'FM_CAREER_BATCH_SIZE' => '250', 'FM_CAREER_TARGET_LOCALE' => 'en']],
-            ['diagnose_target', ['FM_CAREER_TARGET_SLUG' => 'one', 'FM_CAREER_TARGET_LOCALE' => 'en']],
-        ] as [$mode, $inputs]) {
-            try {
-                CareerCandidateExactCacheBootstrapRunner::assertModeInputs($inputs, $mode);
-                $this->fail('Expected mode input conflict.');
-            } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
-                $this->assertContains($failure->safeCode, ['MODE_INPUT_CONFLICT', 'MISSING_REQUIRED_INPUT']);
-            }
-        }
-    }
-
-    #[Test]
-    public function diagnostic_requires_the_candidate_typed_failure_contract_before_any_warm(): void
-    {
-        CareerCandidateExactCacheBootstrapRunner::assertDiagnosticFailureContract();
-
-        $this->assertTrue(class_exists(CareerJobDetailWarmFailure::class));
-        $this->assertTrue(method_exists(CareerJobDetailWarmFailure::class, 'safeEvidence'));
-        $this->assertTrue(method_exists(CareerJobDetailWarmFailure::class, 'safeCauseClass'));
-    }
-
-    #[Test]
-    public function runner_accepts_only_the_nine_fixed_offsets_and_exact_batch_size(): void
-    {
-        $this->assertSame(
-            [0, 250, 500, 750, 1000, 1250, 1500, 1750, 2000],
-            CareerCandidateExactCacheBootstrapRunner::BATCH_OFFSETS,
-        );
-
-        foreach ([1, 249, 251, 2250] as $offset) {
-            try {
-                CareerCandidateExactCacheBootstrapRunner::batchReceipt(
-                    str_repeat('e', 40),
-                    $this->inspection([]),
-                    $offset,
-                    250,
-                    static fn (): array => ['status' => 'cached'],
-                    fn (): array => $this->inspection([]),
-                    0,
-                );
-                $this->fail('Expected batch boundary rejection.');
-            } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
-                $this->assertSame('INVALID_BATCH_BOUNDARY', $failure->safeCode);
-            }
-        }
-    }
-
-    #[Test]
-    public function final_fixed_batch_inspects_exactly_the_remaining_ninety_two_rows(): void
-    {
         $rows = [];
         for ($index = 0; $index < 2092; $index++) {
             $rows[] = $this->row('ready-'.$index, $index % 2 === 0 ? 'en' : 'zh-CN', false, 'ready_active');
         }
         $inspection = $this->inspection($rows);
-
         $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
-            str_repeat('f', 40),
+            str_repeat('1', 40),
             $inspection,
-            2000,
-            250,
+            2050,
+            50,
+            static fn (): array => [],
             static fn (): array => throw new \RuntimeException('Ready targets must never warm.'),
             static fn (): array => $inspection,
             2092,
         );
 
-        $this->assertSame(92, $receipt['inspected_target_count']);
-        $this->assertSame(0, $receipt['repairable_target_count']);
+        $this->assertSame(42, $receipt['inspected_target_count']);
         $this->assertSame(0, $receipt['cache_write_count']);
     }
 
     #[Test]
-    public function preflight_rejects_count_drift_broken_or_excluded_targets(): void
+    public function coverage_and_target_hashes_are_deterministic_and_detect_classification_drift(): void
     {
         $inspection = $this->inspection([
-            $this->row('missing', 'en', true, 'missing_pointer'),
+            $this->row('one', 'en', true, 'missing_pointer'),
         ]);
-        CareerCandidateExactCacheBootstrapRunner::assertInspection($inspection, 1, 1, true);
-        $this->addToAssertionCount(1);
+        $same = $this->inspection([
+            $this->row('one', 'en', true, 'missing_pointer'),
+        ]);
+        $drifted = $this->inspection([
+            $this->row('one', 'en', false, 'ready_active'),
+        ]);
 
-        foreach ([
-            [$inspection, 1, 0],
-            [$this->inspection([$this->row('broken', 'en', true, 'broken_pointer')]), 1, 0],
-            [$this->inspection([$this->row('held', 'en', false, 'held_or_unpublished_excluded')]), 1, 0],
-        ] as [$candidate, $targets, $missing]) {
-            try {
-                CareerCandidateExactCacheBootstrapRunner::assertInspection($candidate, $targets, $missing, true);
-                $this->fail('Expected coverage boundary rejection.');
-            } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
-                $this->assertContains($failure->safeCode, [
-                    'MISSING_POINTER_COUNT_DRIFT',
-                    'COVERAGE_BOUNDARY_FAILED',
-                    'TARGET_COUNT_DRIFT',
-                ]);
-            }
-        }
+        $this->assertSame(
+            CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($inspection),
+            CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($same),
+        );
+        $this->assertNotSame(
+            CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($inspection),
+            CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($drifted),
+        );
+        $this->assertSame(
+            CareerCandidateExactCacheBootstrapRunner::targetIndexHash(str_repeat('2', 40), 7, 'en', 'one'),
+            CareerCandidateExactCacheBootstrapRunner::targetIndexHash(str_repeat('2', 40), 7, 'en', 'one'),
+        );
+        $this->assertNotSame(
+            CareerCandidateExactCacheBootstrapRunner::targetIndexHash(str_repeat('2', 40), 7, 'en', 'one'),
+            CareerCandidateExactCacheBootstrapRunner::targetIndexHash(str_repeat('2', 40), 8, 'en', 'one'),
+        );
     }
 
     #[Test]
@@ -445,6 +316,8 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
                 'FM_CAREER_CANDIDATE_SHA' => str_repeat('2', 40),
                 'FM_CAREER_EXPECTED_TARGETS' => '2092',
                 'FM_CAREER_EXPECTED_MISSING' => '2090',
+                'FM_CAREER_OFFLINE_BUILD_BUDGET_MS' => '5000',
+                'FM_CAREER_RETRY_LIMIT' => '1',
             ]);
             $this->fail('Expected candidate revision drift rejection.');
         } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
@@ -467,6 +340,46 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             'FM_CAREER_MODE' => 'preflight',
             'UNSAFE_INPUT' => 'value',
         ]);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, array<string, mixed>>
+     */
+    private function closures(array $slugs): array
+    {
+        $closures = [];
+        foreach ($slugs as $slug) {
+            $closures[$slug] = [
+                'subject_slug' => $slug,
+                'counts' => [],
+                'readiness' => [],
+            ];
+        }
+
+        return $closures;
+    }
+
+    /** @return array<string, mixed> */
+    private function warmSuccess(float $buildMs): array
+    {
+        return [
+            'status' => 'cached',
+            'failure_stage' => null,
+            'error_category' => null,
+            'build_ms' => $buildMs,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function warmFailure(string $stage, string $category, float $buildMs): array
+    {
+        return [
+            'status' => 'failed',
+            'failure_stage' => $stage,
+            'error_category' => $category,
+            'build_ms' => $buildMs,
+        ];
     }
 
     /**

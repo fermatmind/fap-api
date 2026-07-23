@@ -48,6 +48,10 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     public const JOB_DETAIL_WARM_DISPATCH_TTL_SECONDS = 300;
 
+    public const JOB_DETAIL_HTTP_BUILD_BUDGET_MS = 2000;
+
+    public const JOB_DETAIL_OFFLINE_BOOTSTRAP_BUILD_BUDGET_MS = 5000;
+
     public const DIRECTORY_READ_MODEL_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v1';
 
     public const DIRECTORY_VERSIONED_CACHE_KEY_PREFIX = 'career:public-authority:directory-read-model:v2';
@@ -461,7 +465,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             );
         }
         $buildMs = round((hrtime(true) - $started) / 1_000_000, 3);
-        if ($payload !== null && $buildMs > 2000) {
+        if ($payload !== null && $buildMs > self::JOB_DETAIL_HTTP_BUILD_BUDGET_MS) {
             throw CareerJobDetailWarmFailure::buildBudgetExceeded($buildMs);
         }
         $publishStarted = hrtime(true);
@@ -487,6 +491,105 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             'status' => $payload === null ? 'missing' : 'cached',
             'member_count' => $payload === null ? 0 : count((array) data_get($payload, 'sections', data_get($payload, 'modules', []))),
             'version' => $version,
+            'build_ms' => $buildMs,
+        ];
+    }
+
+    /**
+     * Candidate-exact cache bootstrap entry point. Unlike the HTTP/runtime
+     * warmer, this method accepts an already batched conversion closure and
+     * reports only bounded classifications suitable for production receipts.
+     *
+     * @param  array<string, mixed>  $conversionClosure
+     * @return array{
+     *   status: 'cached'|'failed',
+     *   failure_stage: 'build_detail_payload'|'publish_cache_payload'|null,
+     *   error_category: 'build_budget_exceeded'|'cache_publish_failed'|'database_permanent_read'|'database_transient_read'|'payload_not_cached'|'unexpected'|null,
+     *   build_ms: float
+     * }
+     */
+    public function warmJobDetailPayloadForOfflineBootstrap(
+        string $slug,
+        string $publicLocale,
+        array $conversionClosure,
+    ): array {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        if (
+            $normalizedSlug === ''
+            || strtolower(trim((string) ($conversionClosure['subject_slug'] ?? ''))) !== $normalizedSlug
+        ) {
+            return $this->offlineBootstrapFailure(
+                'build_detail_payload',
+                'payload_not_cached',
+                0.0,
+            );
+        }
+
+        $materializedProjectionItem = $this->runtimePublishProjection->itemForSlug(
+            $normalizedSlug,
+            $normalizedLocale,
+        );
+        $effectiveProjectionItem = $this->effectiveJobDetailProjectionItem(
+            $normalizedSlug,
+            $normalizedLocale,
+        );
+        $snapshotBackedProjectionItem = ! $this->jobDetailProjectionItemIsPublished($materializedProjectionItem)
+            && $this->jobDetailProjectionItemIsPublished($effectiveProjectionItem)
+                ? $effectiveProjectionItem
+                : null;
+
+        $started = hrtime(true);
+        try {
+            $payload = $this->buildJobDetailReadModel(
+                $normalizedSlug,
+                $normalizedLocale,
+                $snapshotBackedProjectionItem,
+                $conversionClosure,
+            );
+        } catch (\Throwable $throwable) {
+            return $this->offlineBootstrapFailure(
+                'build_detail_payload',
+                $this->offlineBootstrapBuildErrorCategory($throwable),
+                $this->elapsedMilliseconds($started),
+            );
+        }
+
+        $buildMs = $this->elapsedMilliseconds($started);
+        if ($buildMs > self::JOB_DETAIL_OFFLINE_BOOTSTRAP_BUILD_BUDGET_MS) {
+            return $this->offlineBootstrapFailure(
+                'build_detail_payload',
+                'build_budget_exceeded',
+                $buildMs,
+            );
+        }
+        if ($payload === null) {
+            return $this->offlineBootstrapFailure(
+                'build_detail_payload',
+                'payload_not_cached',
+                $buildMs,
+            );
+        }
+
+        try {
+            $this->publishJobDetailReadModel(
+                $normalizedSlug,
+                $normalizedLocale,
+                $payload,
+                $snapshotBackedProjectionItem,
+            );
+        } catch (\Throwable) {
+            return $this->offlineBootstrapFailure(
+                'publish_cache_payload',
+                'cache_publish_failed',
+                $buildMs,
+            );
+        }
+
+        return [
+            'status' => 'cached',
+            'failure_stage' => null,
+            'error_category' => null,
             'build_ms' => $buildMs,
         ];
     }
@@ -1640,6 +1743,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         string $slug,
         string $publicLocale,
         ?array $exposureProjectionItem = null,
+        ?array $conversionClosureOverride = null,
     ): ?array {
         if (
             $exposureProjectionItem === null
@@ -1652,6 +1756,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $slug,
             $publicLocale,
             $exposureProjectionItem,
+            $conversionClosureOverride,
         );
         if ($bundle !== null) {
             return (new CareerJobDetailResource($bundle))->toArray(
@@ -1661,6 +1766,59 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
         return $this->cnProxySurfaceBuilder->buildBySlug($slug, $publicLocale)
             ?? $this->aiImpactPreviewDetailShellBuilder->build($slug, $publicLocale);
+    }
+
+    /**
+     * @return array{
+     *   status: 'failed',
+     *   failure_stage: 'build_detail_payload'|'publish_cache_payload',
+     *   error_category: string,
+     *   build_ms: float
+     * }
+     */
+    private function offlineBootstrapFailure(
+        string $failureStage,
+        string $errorCategory,
+        float $buildMs,
+    ): array {
+        return [
+            'status' => 'failed',
+            'failure_stage' => $failureStage,
+            'error_category' => $errorCategory,
+            'build_ms' => $buildMs,
+        ];
+    }
+
+    private function elapsedMilliseconds(int $started): float
+    {
+        return round((hrtime(true) - $started) / 1_000_000, 3);
+    }
+
+    private function offlineBootstrapBuildErrorCategory(\Throwable $throwable): string
+    {
+        for ($candidate = $throwable; $candidate instanceof \Throwable; $candidate = $candidate->getPrevious()) {
+            $sqlState = (string) $candidate->getCode();
+            $driverCode = null;
+            if ($candidate instanceof \Illuminate\Database\QueryException) {
+                $sqlState = (string) ($candidate->errorInfo[0] ?? $sqlState);
+                $driverCode = $candidate->errorInfo[1] ?? null;
+            } elseif ($candidate instanceof \PDOException) {
+                $driverCode = $candidate->errorInfo[1] ?? null;
+            }
+
+            if (
+                str_starts_with($sqlState, '08')
+                || $sqlState === '40001'
+                || in_array((int) $driverCode, [1205, 1213, 2006, 2013], true)
+            ) {
+                return 'database_transient_read';
+            }
+            if ($candidate instanceof \Illuminate\Database\QueryException || $candidate instanceof \PDOException) {
+                return 'database_permanent_read';
+            }
+        }
+
+        return 'unexpected';
     }
 
     /**

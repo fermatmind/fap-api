@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace FermatMind\Deploy;
 
-use App\Services\Career\CareerJobDetailWarmFailure;
 use Closure;
 use Illuminate\Contracts\Console\Kernel;
+use ReflectionClass;
 use ReflectionMethod;
 use RuntimeException;
 use Throwable;
@@ -21,12 +21,17 @@ final class CareerCandidateExactCacheBootstrapFailure extends RuntimeException
 
 final class CareerCandidateExactCacheBootstrapRunner
 {
-    public const CONTRACT_VERSION = 'career.candidate_exact_cache_bootstrap.v1';
+    public const CONTRACT_VERSION = 'career.candidate_exact_cache_bootstrap.v2';
 
-    public const BATCH_SIZE = 250;
+    public const AUTHORIZATION_CONTRACT_VERSION = 'career.candidate_exact_cache_bootstrap.authorization.v2';
 
-    /** @var list<int> */
-    public const BATCH_OFFSETS = [0, 250, 500, 750, 1000, 1250, 1500, 1750, 2000];
+    public const BATCH_SIZE = 50;
+
+    public const OFFLINE_BUILD_BUDGET_MS = 5000;
+
+    public const RETRY_LIMIT = 1;
+
+    public const RETRY_DELAY_MS = 500;
 
     /** @var list<string> */
     private const INPUT_NAMES = [
@@ -36,11 +41,35 @@ final class CareerCandidateExactCacheBootstrapRunner
         'FM_CAREER_CANDIDATE_SHA',
         'FM_CAREER_EXPECTED_TARGETS',
         'FM_CAREER_EXPECTED_MISSING',
+        'FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT',
         'FM_CAREER_BATCH_OFFSET',
         'FM_CAREER_BATCH_SIZE',
-        'FM_CAREER_TARGET_SLUG',
-        'FM_CAREER_TARGET_LOCALE',
-        'FM_CAREER_DIAGNOSTIC_WRITE',
+        'FM_CAREER_OFFLINE_BUILD_BUDGET_MS',
+        'FM_CAREER_RETRY_LIMIT',
+    ];
+
+    /** @var list<string> */
+    private const RETRYABLE_ERROR_CATEGORIES = [
+        'build_budget_exceeded',
+        'database_transient_read',
+    ];
+
+    /** @var list<string> */
+    private const SAFE_ERROR_CATEGORIES = [
+        'build_budget_exceeded',
+        'cache_publish_failed',
+        'database_permanent_read',
+        'database_transient_read',
+        'payload_not_cached',
+        'unexpected',
+    ];
+
+    /** @var list<string> */
+    private const SAFE_FAILURE_STAGES = [
+        'precompute_conversion_closure',
+        'build_detail_payload',
+        'publish_cache_payload',
+        'post_batch_coverage',
     ];
 
     public static function main(): int
@@ -70,10 +99,9 @@ final class CareerCandidateExactCacheBootstrapRunner
         self::assertOnlyAllowlistedInputs($environment);
 
         $mode = self::required($environment, 'FM_CAREER_MODE');
-        if (! in_array($mode, ['preflight', 'batch', 'diagnose_target'], true)) {
+        if (! in_array($mode, ['preflight', 'batch'], true)) {
             self::fail('INVALID_MODE');
         }
-        self::assertModeInputs($environment, $mode);
 
         $expectedCandidateSha = self::sha(self::required($environment, 'FM_CAREER_CANDIDATE_SHA'));
         $expectedTargets = self::integer(
@@ -88,12 +116,24 @@ final class CareerCandidateExactCacheBootstrapRunner
             $expectedTargets,
             'INVALID_EXPECTED_MISSING',
         );
+        self::integer(
+            self::required($environment, 'FM_CAREER_OFFLINE_BUILD_BUDGET_MS'),
+            self::OFFLINE_BUILD_BUDGET_MS,
+            self::OFFLINE_BUILD_BUDGET_MS,
+            'INVALID_OFFLINE_BUILD_BUDGET',
+        );
+        self::integer(
+            self::required($environment, 'FM_CAREER_RETRY_LIMIT'),
+            self::RETRY_LIMIT,
+            self::RETRY_LIMIT,
+            'INVALID_RETRY_LIMIT',
+        );
+
         $candidateBackend = self::candidateBackend(
             self::required($environment, 'FM_CAREER_MANAGED_RELEASES_ROOT'),
             self::required($environment, 'FM_CAREER_CANDIDATE_RELEASE'),
             $expectedCandidateSha,
         );
-
         $autoload = $candidateBackend.'/vendor/autoload.php';
         $bootstrap = $candidateBackend.'/bootstrap/app.php';
         if (! is_file($autoload) || ! is_file($bootstrap)) {
@@ -114,33 +154,32 @@ final class CareerCandidateExactCacheBootstrapRunner
 
         $coverageClass = 'App\\Services\\Career\\CareerJobDetailCacheCoverageService';
         $cacheClass = 'App\\Services\\Career\\PublicCareerAuthorityResponseCache';
-        self::assertServiceSignatures($coverageClass, $cacheClass);
-        if ($mode === 'diagnose_target') {
-            self::assertDiagnosticFailureContract();
-        }
+        $conversionClass = 'App\\Services\\Analytics\\CareerConversionClosureBuilder';
+        self::assertServiceSignatures($coverageClass, $cacheClass, $conversionClass);
         self::installDatabaseGuard($app);
 
         $coverage = $app->make($coverageClass);
         $cache = $app->make($cacheClass);
+        $conversion = $app->make($conversionClass);
         $inspect = static fn (): array => $coverage->inspect(['en', 'zh-CN'], 0);
         $inspection = $inspect();
         self::assertInspection($inspection, $expectedTargets, $expectedMissing, true);
+        $coverageFingerprint = self::coverageFingerprint($inspection);
+        $expectedCoverageFingerprint = trim(
+            (string) ($environment['FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT'] ?? ''),
+        );
+        if (
+            $expectedCoverageFingerprint !== ''
+            && (
+                preg_match('/^[0-9a-f]{64}$/D', $expectedCoverageFingerprint) !== 1
+                || ! hash_equals($expectedCoverageFingerprint, $coverageFingerprint)
+            )
+        ) {
+            self::fail('COVERAGE_FINGERPRINT_DRIFT');
+        }
 
         if ($mode === 'preflight') {
             return self::preflightReceipt($expectedCandidateSha, $inspection);
-        }
-
-        if ($mode === 'diagnose_target') {
-            return self::diagnosticReceipt(
-                $expectedCandidateSha,
-                $inspection,
-                self::required($environment, 'FM_CAREER_TARGET_SLUG'),
-                self::required($environment, 'FM_CAREER_TARGET_LOCALE'),
-                self::boolean(self::required($environment, 'FM_CAREER_DIAGNOSTIC_WRITE')),
-                static fn (string $slug, string $locale): array => $cache->warmJobDetailPayload($slug, $locale, false),
-                $inspect,
-                $expectedTargets,
-            );
         }
 
         $offset = self::integer(
@@ -149,22 +188,24 @@ final class CareerCandidateExactCacheBootstrapRunner
             $expectedTargets - 1,
             'INVALID_BATCH_OFFSET',
         );
-        if (! in_array($offset, self::BATCH_OFFSETS, true)) {
-            self::fail('INVALID_BATCH_OFFSET');
-        }
         $batchSize = self::integer(
             self::required($environment, 'FM_CAREER_BATCH_SIZE'),
             self::BATCH_SIZE,
             self::BATCH_SIZE,
             'INVALID_BATCH_SIZE',
         );
+        if (! self::isValidBatchOffset($offset, $expectedTargets)) {
+            self::fail('INVALID_BATCH_OFFSET');
+        }
 
         return self::batchReceipt(
             $expectedCandidateSha,
             $inspection,
             $offset,
             $batchSize,
-            static fn (string $slug, string $locale): array => $cache->warmJobDetailPayload($slug, $locale, false),
+            static fn (array $slugs): array => $conversion->buildForSubjectSlugs($slugs),
+            static fn (string $slug, string $locale, array $closure): array => $cache
+                ->warmJobDetailPayloadForOfflineBootstrap($slug, $locale, $closure),
             $inspect,
             $expectedTargets,
         );
@@ -182,20 +223,24 @@ final class CareerCandidateExactCacheBootstrapRunner
             'status' => 'ready',
             'candidate_revision' => $candidateSha,
             'batch_offset' => null,
-            'batch_size' => null,
+            'batch_size' => self::BATCH_SIZE,
+            'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
+            'retry_limit' => self::RETRY_LIMIT,
             'inspected_target_count' => (int) ($inspection['report']['expected_target_count'] ?? 0),
             'repairable_target_count' => self::repairableCount($inspection),
             'cache_write_count' => 0,
             'failure_count' => 0,
             'queue_dispatch_count' => 0,
             'database_write_count' => 0,
+            'coverage_fingerprint_sha256' => self::coverageFingerprint($inspection),
             'coverage' => self::safeCoverage($inspection['report'] ?? []),
         ];
     }
 
     /**
      * @param  array<string, mixed>  $inspection
-     * @param  Closure(string, string): array<string, mixed>  $warmer
+     * @param  Closure(list<string>): array<string, array<string, mixed>>  $precompute
+     * @param  Closure(string, string, array<string, mixed>): array<string, mixed>  $warmer
      * @param  Closure(): array<string, mixed>  $postInspect
      * @return array<string, mixed>
      */
@@ -204,11 +249,13 @@ final class CareerCandidateExactCacheBootstrapRunner
         array $inspection,
         int $offset,
         int $batchSize,
+        Closure $precompute,
         Closure $warmer,
         Closure $postInspect,
         int $expectedTargets,
+        ?Closure $retryDelay = null,
     ): array {
-        if (! in_array($offset, self::BATCH_OFFSETS, true) || $batchSize !== self::BATCH_SIZE) {
+        if (! self::isValidBatchOffset($offset, $expectedTargets) || $batchSize !== self::BATCH_SIZE) {
             self::fail('INVALID_BATCH_BOUNDARY');
         }
 
@@ -218,160 +265,242 @@ final class CareerCandidateExactCacheBootstrapRunner
         }
 
         $batch = array_slice($rows, $offset, $batchSize);
-        $repairable = 0;
-        $writes = 0;
-        $failures = 0;
-        $errorCode = null;
-
-        foreach ($batch as $row) {
-            if (! is_array($row) || ! is_bool($row['repairable'] ?? null)) {
+        $repairableRows = [];
+        foreach ($batch as $relativeIndex => $row) {
+            if (
+                ! is_array($row)
+                || ! is_string($row['slug'] ?? null)
+                || ! in_array($row['locale'] ?? null, ['en', 'zh-CN'], true)
+                || ! is_bool($row['repairable'] ?? null)
+            ) {
                 self::fail('INVALID_TARGET_ROW');
             }
-            if ($row['repairable'] !== true) {
-                continue;
-            }
-
-            $repairable++;
-            $slug = $row['slug'] ?? null;
-            $locale = $row['locale'] ?? null;
-            if (! is_string($slug) || trim($slug) === '' || ! in_array($locale, ['en', 'zh-CN'], true)) {
-                self::fail('INVALID_TARGET_ROW');
-            }
-
-            try {
-                $result = $warmer($slug, $locale);
-                if (($result['status'] ?? null) !== 'cached') {
-                    $failures = 1;
-                    $errorCode = 'TARGET_NOT_CACHED';
-                    break;
-                }
-                $writes++;
-            } catch (Throwable) {
-                $failures = 1;
-                $errorCode = 'TARGET_WARM_FAILED';
-                break;
+            if ($row['repairable'] === true) {
+                $repairableRows[] = [
+                    ...$row,
+                    'absolute_index' => $offset + $relativeIndex,
+                ];
             }
         }
 
-        $postInspection = $postInspect();
-        self::assertInspectionBoundary($postInspection, $expectedTargets);
+        $preFingerprint = self::coverageFingerprint($inspection);
+        try {
+            $closures = $precompute(array_values(array_unique(array_map(
+                static fn (array $row): string => $row['slug'],
+                $repairableRows,
+            ))));
+        } catch (Throwable $throwable) {
+            return self::failedBatchReceipt(
+                $candidateSha,
+                $offset,
+                count($batch),
+                count($repairableRows),
+                0,
+                'precompute_conversion_closure',
+                self::safeThrowableCategory($throwable),
+                0.0,
+                0.0,
+                0.0,
+                1,
+                0,
+                null,
+                $preFingerprint,
+                $preFingerprint,
+                $inspection,
+                $inspection,
+            );
+        }
+
+        $writes = 0;
+        $attemptCount = 0;
+        $retryCount = 0;
+        $batchBuildMsTotal = 0.0;
+        $batchBuildMsMax = 0.0;
+        $failureStage = null;
+        $errorCategory = null;
+        $failureBuildMs = 0.0;
+        $failedTargetHash = null;
+        $delay = $retryDelay ?? static fn (): int => usleep(self::RETRY_DELAY_MS * 1000);
+
+        foreach ($repairableRows as $row) {
+            $closure = $closures[$row['slug']] ?? null;
+            if (! is_array($closure)) {
+                $failureStage = 'precompute_conversion_closure';
+                $errorCategory = 'unexpected';
+                $failedTargetHash = self::targetIndexHash(
+                    $candidateSha,
+                    $row['absolute_index'],
+                    $row['locale'],
+                    $row['slug'],
+                );
+                break;
+            }
+
+            for ($attempt = 0; $attempt <= self::RETRY_LIMIT; $attempt++) {
+                $attemptCount++;
+                try {
+                    $result = $warmer($row['slug'], $row['locale'], $closure);
+                } catch (Throwable $throwable) {
+                    $result = [
+                        'status' => 'failed',
+                        'failure_stage' => 'build_detail_payload',
+                        'error_category' => self::safeThrowableCategory($throwable),
+                        'build_ms' => 0.0,
+                    ];
+                }
+
+                $buildMs = self::safeMilliseconds($result['build_ms'] ?? 0);
+                $batchBuildMsTotal = round($batchBuildMsTotal + $buildMs, 3);
+                $batchBuildMsMax = max($batchBuildMsMax, $buildMs);
+                if (($result['status'] ?? null) === 'cached') {
+                    $failureStage = null;
+                    $errorCategory = null;
+                    $failureBuildMs = 0.0;
+                    $writes++;
+
+                    continue 2;
+                }
+
+                $failureStage = self::safeFailureStage($result['failure_stage'] ?? null);
+                $errorCategory = self::safeErrorCategory($result['error_category'] ?? null);
+                $failureBuildMs = $buildMs;
+                if (
+                    $attempt < self::RETRY_LIMIT
+                    && in_array($errorCategory, self::RETRYABLE_ERROR_CATEGORIES, true)
+                ) {
+                    $retryCount++;
+                    $delay();
+
+                    continue;
+                }
+
+                $failedTargetHash = self::targetIndexHash(
+                    $candidateSha,
+                    $row['absolute_index'],
+                    $row['locale'],
+                    $row['slug'],
+                );
+                break 2;
+            }
+        }
+
+        try {
+            $postInspection = $postInspect();
+            self::assertInspectionBoundary($postInspection, $expectedTargets);
+        } catch (Throwable) {
+            $postInspection = $inspection;
+            $failureStage = 'post_batch_coverage';
+            $errorCategory = 'unexpected';
+            $failedTargetHash = null;
+        }
+
+        $postFingerprint = self::coverageFingerprint($postInspection);
+        $expectedPostMissing = max(
+            0,
+            (int) ($inspection['report']['missing_pointer_count'] ?? 0) - $writes,
+        );
+        if (
+            $failureStage === null
+            && (int) ($postInspection['report']['missing_pointer_count'] ?? -1) !== $expectedPostMissing
+        ) {
+            $failureStage = 'post_batch_coverage';
+            $errorCategory = 'unexpected';
+        }
+
+        if ($failureStage !== null || $errorCategory !== null) {
+            return self::failedBatchReceipt(
+                $candidateSha,
+                $offset,
+                count($batch),
+                count($repairableRows),
+                $writes,
+                $failureStage ?? 'build_detail_payload',
+                $errorCategory ?? 'unexpected',
+                $failureBuildMs,
+                $batchBuildMsTotal,
+                $batchBuildMsMax,
+                $attemptCount,
+                $retryCount,
+                $failedTargetHash,
+                $preFingerprint,
+                $postFingerprint,
+                $inspection,
+                $postInspection,
+            );
+        }
 
         return [
             'contract_version' => self::CONTRACT_VERSION,
             'mode' => 'batch',
-            'status' => $failures === 0 ? 'completed' : 'failed',
+            'status' => 'completed',
             'candidate_revision' => $candidateSha,
             'batch_offset' => $offset,
             'batch_size' => $batchSize,
+            'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
+            'retry_limit' => self::RETRY_LIMIT,
             'inspected_target_count' => count($batch),
-            'repairable_target_count' => $repairable,
+            'repairable_target_count' => count($repairableRows),
             'cache_write_count' => $writes,
-            'failure_count' => $failures,
-            'error_code' => $errorCode,
+            'failure_count' => 0,
+            'failure_stage' => null,
+            'error_category' => null,
+            'build_ms' => 0.0,
+            'batch_build_ms_total' => $batchBuildMsTotal,
+            'batch_build_ms_max' => round($batchBuildMsMax, 3),
+            'attempt_count' => $attemptCount,
+            'retry_count' => $retryCount,
+            'failed_target_index_sha256' => null,
             'queue_dispatch_count' => 0,
             'database_write_count' => 0,
+            'pre_coverage_fingerprint_sha256' => $preFingerprint,
+            'post_coverage_fingerprint_sha256' => $postFingerprint,
             'pre_batch_coverage' => self::safeCoverage($inspection['report'] ?? []),
             'post_batch_coverage' => self::safeCoverage($postInspection['report'] ?? []),
         ];
     }
 
-    /**
-     * @param  array<string, mixed>  $inspection
-     * @param  Closure(string, string): array<string, mixed>  $warmer
-     * @param  Closure(): array<string, mixed>  $postInspect
-     * @return array<string, mixed>
-     */
-    public static function diagnosticReceipt(
+    public static function isValidBatchOffset(int $offset, int $expectedTargets): bool
+    {
+        return $offset >= 0
+            && $offset < $expectedTargets
+            && $offset % self::BATCH_SIZE === 0;
+    }
+
+    /** @param array<string, mixed> $inspection */
+    public static function coverageFingerprint(array $inspection): string
+    {
+        $rows = [];
+        foreach (array_values($inspection['rows'] ?? []) as $index => $row) {
+            if (! is_array($row)) {
+                self::fail('INVALID_TARGET_ROW');
+            }
+            $rows[] = [
+                'index' => $index,
+                'slug' => (string) ($row['slug'] ?? ''),
+                'locale' => (string) ($row['locale'] ?? ''),
+                'classification' => (string) ($row['classification'] ?? ''),
+                'repairable' => ($row['repairable'] ?? false) === true,
+            ];
+        }
+
+        return hash('sha256', (string) json_encode([
+            'rows' => $rows,
+            'coverage' => self::safeCoverage($inspection['report'] ?? []),
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+    }
+
+    public static function targetIndexHash(
         string $candidateSha,
-        array $inspection,
-        string $slug,
+        int $rowIndex,
         string $locale,
-        bool $executeWrite,
-        Closure $warmer,
-        Closure $postInspect,
-        int $expectedTargets,
-    ): array {
-        $target = self::diagnosticTarget($inspection, $slug, $locale, $expectedTargets);
-        $preCoverage = self::safeCoverage($inspection['report'] ?? []);
-        if (! $executeWrite) {
-            return [
-                'contract_version' => self::CONTRACT_VERSION,
-                'mode' => 'diagnose_target',
-                'status' => 'ready',
-                'candidate_revision' => $candidateSha,
-                'target' => ['slug' => $slug, 'locale' => $locale],
-                'diagnostic_write' => false,
-                'target_classification' => $target['classification'],
-                'cache_write_count' => 0,
-                'failure_count' => 0,
-                'queue_dispatch_count' => 0,
-                'database_write_count' => 0,
-                'pre_target_coverage' => $preCoverage,
-                'post_target_coverage' => $preCoverage,
-            ];
-        }
-
-        $failureEvidence = null;
-        $status = 'failed';
-        $writes = 0;
-        try {
-            $result = $warmer($slug, $locale);
-            if (($result['status'] ?? null) !== 'cached') {
-                $failureEvidence = [
-                    'failure_stage' => 'result_validation',
-                    'safe_code' => 'CAREER_DETAIL_TARGET_NOT_CACHED',
-                    'cause_class' => 'warm_result',
-                    'build_ms' => self::safeTiming($result['build_ms'] ?? 0),
-                    'publish_ms' => 0.0,
-                ];
-            } else {
-                $status = 'completed';
-                $writes = 1;
-            }
-        } catch (CareerJobDetailWarmFailure $failure) {
-            $failureEvidence = $failure->safeEvidence();
-        } catch (Throwable $failure) {
-            $failureEvidence = [
-                'failure_stage' => 'unrecognized_exception',
-                'safe_code' => 'CAREER_DETAIL_UNRECOGNIZED_EXCEPTION',
-                'cause_class' => CareerJobDetailWarmFailure::safeCauseClass($failure),
-                'build_ms' => 0.0,
-                'publish_ms' => 0.0,
-            ];
-        }
-
-        $postInspection = $postInspect();
-        self::assertInspectionBoundary($postInspection, $expectedTargets);
-        if ($status === 'completed') {
-            $postTarget = self::findTarget($postInspection, $slug, $locale);
-            $preMissing = (int) ($inspection['report']['missing_pointer_count'] ?? -1);
-            $postMissing = (int) ($postInspection['report']['missing_pointer_count'] ?? -1);
-            if (
-                ! is_array($postTarget)
-                || ($postTarget['repairable'] ?? true) !== false
-                || ($postTarget['classification'] ?? null) !== 'ready_active'
-                || $postMissing !== $preMissing - 1
-            ) {
-                self::fail('DIAGNOSTIC_READBACK_FAILED');
-            }
-        }
-
-        return array_filter([
-            'contract_version' => self::CONTRACT_VERSION,
-            'mode' => 'diagnose_target',
-            'status' => $status,
-            'candidate_revision' => $candidateSha,
-            'target' => ['slug' => $slug, 'locale' => $locale],
-            'diagnostic_write' => true,
-            'target_classification' => $target['classification'],
-            'cache_write_count' => $writes,
-            'failure_count' => $status === 'completed' ? 0 : 1,
-            'queue_dispatch_count' => 0,
-            'database_write_count' => 0,
-            'failure_evidence' => $failureEvidence,
-            'pre_target_coverage' => $preCoverage,
-            'post_target_coverage' => self::safeCoverage($postInspection['report'] ?? []),
-        ], static fn (mixed $value): bool => $value !== null);
+        string $slug,
+    ): string {
+        return hash('sha256', (string) json_encode([
+            $candidateSha,
+            sprintf('%06d', $rowIndex),
+            $locale,
+            $slug,
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
     }
 
     public static function assertReadOnlySql(string $query): void
@@ -409,27 +538,6 @@ final class CareerCandidateExactCacheBootstrapRunner
     {
         if (array_diff(array_keys($environment), self::INPUT_NAMES) !== []) {
             self::fail('UNEXPECTED_INPUT');
-        }
-    }
-
-    /**
-     * @param  array<string, string>  $environment
-     */
-    public static function assertModeInputs(array $environment, string $mode): void
-    {
-        $batchInputs = ['FM_CAREER_BATCH_OFFSET', 'FM_CAREER_BATCH_SIZE'];
-        $diagnosticInputs = ['FM_CAREER_TARGET_SLUG', 'FM_CAREER_TARGET_LOCALE', 'FM_CAREER_DIAGNOSTIC_WRITE'];
-        if ($mode !== 'batch' && array_intersect($batchInputs, array_keys($environment)) !== []) {
-            self::fail('MODE_INPUT_CONFLICT');
-        }
-        if ($mode !== 'diagnose_target' && array_intersect($diagnosticInputs, array_keys($environment)) !== []) {
-            self::fail('MODE_INPUT_CONFLICT');
-        }
-        if ($mode === 'batch' && array_diff($batchInputs, array_keys($environment)) !== []) {
-            self::fail('MISSING_REQUIRED_INPUT');
-        }
-        if ($mode === 'diagnose_target' && array_diff($diagnosticInputs, array_keys($environment)) !== []) {
-            self::fail('MISSING_REQUIRED_INPUT');
         }
     }
 
@@ -473,47 +581,48 @@ final class CareerCandidateExactCacheBootstrapRunner
         }
     }
 
-    private static function assertServiceSignatures(string $coverageClass, string $cacheClass): void
-    {
-        if (! class_exists($coverageClass) || ! class_exists($cacheClass)) {
+    private static function assertServiceSignatures(
+        string $coverageClass,
+        string $cacheClass,
+        string $conversionClass,
+    ): void {
+        if (! class_exists($coverageClass) || ! class_exists($cacheClass) || ! class_exists($conversionClass)) {
             self::fail('CANDIDATE_SERVICE_MISSING');
         }
 
         $inspect = new ReflectionMethod($coverageClass, 'inspect');
-        $warm = new ReflectionMethod($cacheClass, 'warmJobDetailPayload');
+        $warm = new ReflectionMethod($cacheClass, 'warmJobDetailPayloadForOfflineBootstrap');
+        $batchConversion = new ReflectionMethod($conversionClass, 'buildForSubjectSlugs');
+        $cacheReflection = new ReflectionClass($cacheClass);
         if (! $inspect->isPublic() || $inspect->getNumberOfParameters() !== 2) {
             self::fail('COVERAGE_SERVICE_INCOMPATIBLE');
         }
         if (! $warm->isPublic() || $warm->getNumberOfParameters() !== 3) {
             self::fail('CACHE_SERVICE_INCOMPATIBLE');
         }
+        if (! $batchConversion->isPublic() || $batchConversion->getNumberOfParameters() !== 1) {
+            self::fail('CONVERSION_SERVICE_INCOMPATIBLE');
+        }
+        if (
+            ! $cacheReflection->hasConstant('JOB_DETAIL_OFFLINE_BOOTSTRAP_BUILD_BUDGET_MS')
+            || $cacheReflection->getConstant('JOB_DETAIL_OFFLINE_BOOTSTRAP_BUILD_BUDGET_MS')
+                !== self::OFFLINE_BUILD_BUDGET_MS
+        ) {
+            self::fail('OFFLINE_BUILD_BUDGET_INCOMPATIBLE');
+        }
 
         $inspectParameters = $inspect->getParameters();
         $warmParameters = $warm->getParameters();
+        $batchParameters = $batchConversion->getParameters();
         if (
             (string) $inspectParameters[0]->getType() !== 'array'
             || (string) $inspectParameters[1]->getType() !== 'int'
             || (string) $warmParameters[0]->getType() !== 'string'
             || (string) $warmParameters[1]->getType() !== 'string'
-            || (string) $warmParameters[2]->getType() !== 'bool'
+            || (string) $warmParameters[2]->getType() !== 'array'
+            || (string) $batchParameters[0]->getType() !== 'array'
         ) {
             self::fail('CANDIDATE_SERVICE_INCOMPATIBLE');
-        }
-    }
-
-    public static function assertDiagnosticFailureContract(): void
-    {
-        if (! class_exists(CareerJobDetailWarmFailure::class)) {
-            self::fail('CANDIDATE_DIAGNOSTIC_CONTRACT_MISSING');
-        }
-        foreach (['safeEvidence', 'safeCauseClass'] as $method) {
-            if (! method_exists(CareerJobDetailWarmFailure::class, $method)) {
-                self::fail('CANDIDATE_DIAGNOSTIC_CONTRACT_INCOMPATIBLE');
-            }
-            $reflection = new ReflectionMethod(CareerJobDetailWarmFailure::class, $method);
-            if (! $reflection->isPublic()) {
-                self::fail('CANDIDATE_DIAGNOSTIC_CONTRACT_INCOMPATIBLE');
-            }
         }
     }
 
@@ -572,49 +681,6 @@ final class CareerCandidateExactCacheBootstrapRunner
     }
 
     /**
-     * @param  array<string, mixed>  $inspection
-     * @return array{slug: string, locale: string, classification: string, repairable: bool}
-     */
-    private static function diagnosticTarget(array $inspection, string $slug, string $locale, int $expectedTargets): array
-    {
-        self::assertInspectionBoundary($inspection, $expectedTargets);
-        if (
-            preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $slug) !== 1
-            || ! in_array($locale, ['en', 'zh-CN'], true)
-        ) {
-            self::fail('INVALID_DIAGNOSTIC_TARGET');
-        }
-        $target = self::findTarget($inspection, $slug, $locale);
-        if (! is_array($target)) {
-            self::fail('DIAGNOSTIC_TARGET_NOT_FOUND');
-        }
-        if (($target['repairable'] ?? false) !== true || ($target['classification'] ?? null) !== 'missing_pointer') {
-            self::fail('DIAGNOSTIC_TARGET_NOT_REPAIRABLE');
-        }
-
-        return $target;
-    }
-
-    /**
-     * @param  array<string, mixed>  $inspection
-     * @return array<string, mixed>|null
-     */
-    private static function findTarget(array $inspection, string $slug, string $locale): ?array
-    {
-        $matches = array_values(array_filter(
-            $inspection['rows'] ?? [],
-            static fn (mixed $row): bool => is_array($row)
-                && ($row['slug'] ?? null) === $slug
-                && ($row['locale'] ?? null) === $locale,
-        ));
-        if (count($matches) > 1) {
-            self::fail('DUPLICATE_DIAGNOSTIC_TARGET');
-        }
-
-        return $matches[0] ?? null;
-    }
-
-    /**
      * @param  array<string, mixed>  $report
      * @return array<string, int|float|string>
      */
@@ -631,6 +697,107 @@ final class CareerCandidateExactCacheBootstrapRunner
             'excluded_count' => (int) ($report['excluded_count'] ?? 0),
             'coverage_ratio' => (float) ($report['coverage_ratio'] ?? 0),
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $inspection
+     * @param  array<string, mixed>  $postInspection
+     * @return array<string, mixed>
+     */
+    private static function failedBatchReceipt(
+        string $candidateSha,
+        int $offset,
+        int $inspectedTargets,
+        int $repairableTargets,
+        int $writes,
+        string $failureStage,
+        string $errorCategory,
+        float $buildMs,
+        float $batchBuildMsTotal,
+        float $batchBuildMsMax,
+        int $attemptCount,
+        int $retryCount,
+        ?string $failedTargetHash,
+        string $preFingerprint,
+        string $postFingerprint,
+        array $inspection,
+        array $postInspection,
+    ): array {
+        return [
+            'contract_version' => self::CONTRACT_VERSION,
+            'mode' => 'batch',
+            'status' => 'failed',
+            'candidate_revision' => $candidateSha,
+            'batch_offset' => $offset,
+            'batch_size' => self::BATCH_SIZE,
+            'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
+            'retry_limit' => self::RETRY_LIMIT,
+            'inspected_target_count' => $inspectedTargets,
+            'repairable_target_count' => $repairableTargets,
+            'cache_write_count' => $writes,
+            'failure_count' => 1,
+            'failure_stage' => self::safeFailureStage($failureStage),
+            'error_category' => self::safeErrorCategory($errorCategory),
+            'build_ms' => round($buildMs, 3),
+            'batch_build_ms_total' => round($batchBuildMsTotal, 3),
+            'batch_build_ms_max' => round($batchBuildMsMax, 3),
+            'attempt_count' => $attemptCount,
+            'retry_count' => $retryCount,
+            'failed_target_index_sha256' => $failedTargetHash,
+            'queue_dispatch_count' => 0,
+            'database_write_count' => 0,
+            'pre_coverage_fingerprint_sha256' => $preFingerprint,
+            'post_coverage_fingerprint_sha256' => $postFingerprint,
+            'pre_batch_coverage' => self::safeCoverage($inspection['report'] ?? []),
+            'post_batch_coverage' => self::safeCoverage($postInspection['report'] ?? []),
+        ];
+    }
+
+    private static function safeFailureStage(mixed $value): string
+    {
+        return is_string($value) && in_array($value, self::SAFE_FAILURE_STAGES, true)
+            ? $value
+            : 'build_detail_payload';
+    }
+
+    private static function safeErrorCategory(mixed $value): string
+    {
+        return is_string($value) && in_array($value, self::SAFE_ERROR_CATEGORIES, true)
+            ? $value
+            : 'unexpected';
+    }
+
+    private static function safeThrowableCategory(Throwable $throwable): string
+    {
+        for ($candidate = $throwable; $candidate instanceof Throwable; $candidate = $candidate->getPrevious()) {
+            $sqlState = (string) $candidate->getCode();
+            $driverCode = null;
+            if ($candidate instanceof \Illuminate\Database\QueryException) {
+                $sqlState = (string) ($candidate->errorInfo[0] ?? $sqlState);
+                $driverCode = $candidate->errorInfo[1] ?? null;
+            } elseif ($candidate instanceof \PDOException) {
+                $driverCode = $candidate->errorInfo[1] ?? null;
+            }
+            if (
+                str_starts_with($sqlState, '08')
+                || $sqlState === '40001'
+                || in_array((int) $driverCode, [1205, 1213, 2006, 2013], true)
+            ) {
+                return 'database_transient_read';
+            }
+            if ($candidate instanceof \Illuminate\Database\QueryException || $candidate instanceof \PDOException) {
+                return 'database_permanent_read';
+            }
+        }
+
+        return 'unexpected';
+    }
+
+    private static function safeMilliseconds(mixed $value): float
+    {
+        return is_numeric($value) && (float) $value >= 0
+            ? round((float) $value, 3)
+            : 0.0;
     }
 
     /** @return array<string, string> */
@@ -682,25 +849,7 @@ final class CareerCandidateExactCacheBootstrapRunner
         return $integer;
     }
 
-    private static function boolean(string $value): bool
-    {
-        return match ($value) {
-            '0' => false,
-            '1' => true,
-            default => self::fail('INVALID_DIAGNOSTIC_WRITE'),
-        };
-    }
-
-    private static function safeTiming(mixed $value): float
-    {
-        if (! is_int($value) && ! is_float($value)) {
-            return 0.0;
-        }
-
-        return round(max(0.0, (float) $value), 3);
-    }
-
-    /** @return array<string, int|string> */
+    /** @return array<string, float|int|string|null> */
     private static function failureReceipt(string $errorCode): array
     {
         return [
@@ -709,6 +858,16 @@ final class CareerCandidateExactCacheBootstrapRunner
             'error_code' => $errorCode,
             'cache_write_count' => 0,
             'failure_count' => 1,
+            'failure_stage' => null,
+            'error_category' => null,
+            'build_ms' => 0.0,
+            'batch_build_ms_total' => 0.0,
+            'batch_build_ms_max' => 0.0,
+            'attempt_count' => 0,
+            'retry_count' => 0,
+            'failed_target_index_sha256' => null,
+            'pre_coverage_fingerprint_sha256' => null,
+            'post_coverage_fingerprint_sha256' => null,
             'queue_dispatch_count' => 0,
             'database_write_count' => 0,
         ];
