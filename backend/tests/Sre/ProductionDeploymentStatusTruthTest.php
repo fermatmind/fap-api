@@ -291,6 +291,18 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
+            'EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="51d9c50a3084f2be51b9e913e7d53e220bd82c994f85d1f639651f21201c716b"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'the exact public cache summary drifted.',
+            $eligibility
+        );
+        $this->assertStringContainsString(
             'no cache write is required.',
             $eligibility
         );

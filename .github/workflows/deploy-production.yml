@@ -271,6 +271,13 @@ jobs:
                 esac
               done
               if [ "$REQUIRE_CAREER_RECONCILIATION_CACHE_PREFLIGHT" = true ]; then
+                EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"
+                EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="51d9c50a3084f2be51b9e913e7d53e220bd82c994f85d1f639651f21201c716b"
+                test "$(sha256sum backend/docs/career/publish_track_reconciliation.json | awk '{print $1}')" = \
+                  "$EXPECTED_CAREER_RECONCILIATION_SHA256" || {
+                  echo "code-only scope refused an unreviewed Career reconciliation candidate hash." >&2
+                  exit 1
+                }
                 CAREER_DATASET_JSON="$(curl --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
                   "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
                 jq -e '
@@ -280,6 +287,28 @@ jobs:
                   and (.collection_summary.facet_distributions.publish_track | type == "object")
                 ' <<<"$CAREER_DATASET_JSON" >/dev/null || {
                   echo "code-only scope refused Career reconciliation because the public authority cache is not already converged to v3." >&2
+                  exit 1
+                }
+                CAREER_PUBLIC_CACHE_SUMMARY="$(jq -cS '{
+                  contract_version,
+                  manifest_version: .collection_summary.manifest_version,
+                  member_count: .collection_summary.member_count,
+                  tracking_counts: .collection_summary.tracking_counts,
+                  publish_track_distribution: .collection_summary.facet_distributions.publish_track,
+                  targets: [
+                    .members[]
+                    | select(
+                        .canonical_slug == "computer-network-architects"
+                        or .canonical_slug == "computer-systems-analysts"
+                        or .canonical_slug == "database-administrators-and-architects"
+                        or .canonical_slug == "information-security-analysts"
+                      )
+                    | {canonical_slug, publish_track}
+                  ] | sort_by(.canonical_slug)
+                }' <<<"$CAREER_DATASET_JSON")"
+                test "$(printf '%s' "$CAREER_PUBLIC_CACHE_SUMMARY" | sha256sum | awk '{print $1}')" = \
+                  "$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256" || {
+                  echo "code-only scope refused Career reconciliation because the exact public cache summary drifted." >&2
                   exit 1
                 }
                 echo "code-only scope verified the public Career reconciliation cache is already converged to v3; no cache write is required."
