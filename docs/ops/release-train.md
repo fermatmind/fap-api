@@ -185,6 +185,21 @@ blobs. Unknown paths, missing files, changed statuses, renames, deletions, blob
 drift, another production SHA, or a candidate outside the audited bridge history
 fail closed. The release record reports `runtime46_patch_subsumed`; all ordinary
 standard deployments continue to report and require `linear_ancestor`.
+
+The exact bridge candidate `49038deb50cda789e4365ea42068832ed28d6023`
+predates the bounded, non-blocking sitemap-source warm helper. When that exact
+candidate and staging run `29977064260` are selected, the production workflow
+may load a runner-only control wrapper from the immutable workflow-dispatch
+SHA. The wrapper first verifies the candidate recipe, wrapper, and helper
+SHA-256 values, then loads the candidate's own `deploy.php`, replaces only the
+sitemap warm task, and inserts the sitemap-source fallback check before the
+existing public-DNS smoke. The helper is streamed over stdin; neither it nor the
+wrapper is copied into the remote release. The release checkout, tree, and
+`REVISION` remain the exact candidate. The workflow uploads a sanitized
+`backend-immutable-candidate-control-receipt.v1`; any identity, hash, staging,
+tree, or control drift fails before remote mutation. No other candidate may use
+this exception.
+
 Any cache-only repair against the inactive candidate must repeat this exact
 production/bridge/path/status/blob proof before accepting the otherwise
 non-ancestral active revision; it may not weaken the proof to a SHA allowlist.

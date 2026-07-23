@@ -178,6 +178,55 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function immutable_candidate_uses_a_runner_only_hash_locked_sitemap_control_recipe(): void
+    {
+        $workflow = $this->readRepoFile('.github/workflows/deploy-production.yml');
+        $wrapper = $this->readRepoFile(
+            'backend/scripts/deploy/immutable_candidate_sitemap_control.php'
+        );
+
+        foreach ([
+            '49038deb50cda789e4365ea42068832ed28d6023',
+            '29977064260',
+            'e814b6ff4996669097db0f32fd3caebc1fcd05dd9015e2260016e3f4ece3c068',
+            '04f9d6b6b66b0be10a4996064cdf9150e1b0f1ec300edf93f87e8c0368ea0713',
+            'Prepare exact immutable candidate deployment control',
+            'WORKFLOW_CONTROL_SHA: ${{ github.sha }}',
+            'git show "${WORKFLOW_CONTROL_SHA}:${wrapper_path}"',
+            'git show "${WORKFLOW_CONTROL_SHA}:${helper_path}"',
+            'test "$(git rev-parse HEAD^{tree})" = "$candidate_tree_before"',
+            'candidate_recipe_with_runner_only_sitemap_override',
+            'release_overlay: false',
+            'remote_control_file_write: false',
+            'IMMUTABLE_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"',
+            'php /tmp/dep.phar "$DEPLOY_TASK" production -f "$deployer_recipe"',
+            '--revision "$DEPLOY_SHA"',
+            'backend-immutable-candidate-control-receipt.v1',
+        ] as $boundary) {
+            $this->assertStringContainsString($boundary, $workflow);
+        }
+
+        $this->assertStringContainsString('require $candidateRecipe;', $wrapper);
+        $this->assertStringContainsString(
+            "task('seo:warm-sitemap-source-cache'",
+            $wrapper,
+        );
+        $this->assertStringContainsString(
+            "task('healthcheck:sitemap-source'",
+            $wrapper,
+        );
+        $this->assertSame(2, substr_count($wrapper, "task('"));
+        $this->assertStringContainsString('| base64 -d', $wrapper);
+        $this->assertStringContainsString('SITEMAP_SOURCE_WARM_STRICT=false', $wrapper);
+        $this->assertStringContainsString(
+            "before('healthcheck:public-dns', 'healthcheck:sitemap-source')",
+            $wrapper,
+        );
+        $this->assertStringNotContainsString('file_put_contents', $wrapper);
+        $this->assertStringNotContainsString('upload(', $wrapper);
+    }
+
+    #[Test]
     public function failed_deploy_unlock_passes_runner_identity_to_the_remote_verifier_explicitly(): void
     {
         $source = $this->readRepoFile('deploy.php');
