@@ -106,6 +106,7 @@ jobs:
               ;;
           esac
           REQUIRE_OPS_QUEUE_RELOAD=false
+          REQUIRE_CAREER_RECONCILIATION_CACHE_PREFLIGHT=false
           case "$REQUESTED_DEPLOY_MODE" in
             standard)
               if [ -n "$APPROVED_MIGRATION" ]; then
@@ -241,6 +242,10 @@ jobs:
                   .github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|backend/app/Models/DailyGivingRecord.php|backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php|backend/docs/career/README.md|backend/docs/career/career-detail-stability-train-2026-07-18.md|backend/docs/career/job-detail-cache-coverage.md|backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json|backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md|docs/ops/big-five-en52-release.md|docs/ops/big-five-legacy-alias-hard-purge.md)
                     echo "code-only scope accepted exact audited Root5 runtime or inert evidence path: $path"
                     ;;
+                  backend/docs/career/publish_track_reconciliation.json)
+                    REQUIRE_CAREER_RECONCILIATION_CACHE_PREFLIGHT=true
+                    echo "code-only scope conditionally accepted the exact Career reconciliation authority input pending public cache v3 preflight: $path"
+                    ;;
                   .github/workflows/career-detail-production-cache-repair.yml|backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php|backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php|backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php|backend/app/Services/Cms/MbtiCrossPublisher49Package.php|backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json|backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json|docs/04-ops/deploy-incident-runbook.md|docs/seo/career-jobs-index-lkg-resilience-01.md|docs/seo/career-pilot-review-evidence-bridge-01.md)
                     echo "code-only scope accepted exact audited subsumed runtime or inert authority input path: $path"
                     ;;
@@ -265,6 +270,20 @@ jobs:
                     ;;
                 esac
               done
+              if [ "$REQUIRE_CAREER_RECONCILIATION_CACHE_PREFLIGHT" = true ]; then
+                CAREER_DATASET_JSON="$(curl --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
+                  "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
+                jq -e '
+                  .contract_version == "career.dataset_public_contract.v1"
+                  and .collection_summary.manifest_version == "career.dataset_authority.publish_track_reconciled.v3"
+                  and .collection_summary.tracking_counts.tracking_complete == true
+                  and (.collection_summary.facet_distributions.publish_track | type == "object")
+                ' <<<"$CAREER_DATASET_JSON" >/dev/null || {
+                  echo "code-only scope refused Career reconciliation because the public authority cache is not already converged to v3." >&2
+                  exit 1
+                }
+                echo "code-only scope verified the public Career reconciliation cache is already converged to v3; no cache write is required."
+              fi
               if [ "$CODE_ONLY_SCOPE" != true ]; then
                 echo "code-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path; rerun only with an explicit standard deployment approval." >&2
                 exit 1

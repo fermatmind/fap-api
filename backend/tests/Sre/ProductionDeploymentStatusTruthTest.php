@@ -278,8 +278,20 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertNotFalse($cmsAuthorityWildcardPosition);
         $this->assertLessThan($cmsAuthorityWildcardPosition, $runtimeExceptionsPosition);
         $this->assertLessThan($cmsAuthorityWildcardPosition, $subsumedRuntimeExceptionsPosition);
-        $this->assertStringNotContainsString(
-            'backend/docs/career/publish_track_reconciliation.json|',
+        $this->assertStringContainsString(
+            'backend/docs/career/publish_track_reconciliation.json)',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'REQUIRE_CAREER_RECONCILIATION_CACHE_PREFLIGHT=true',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            '.collection_summary.manifest_version == "career.dataset_authority.publish_track_reconciled.v3"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'no cache write is required.',
             $eligibility
         );
         $this->assertStringContainsString(

@@ -464,8 +464,20 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $this->assertStringContainsString($auditedPath, $source);
         }
 
-        $this->assertStringNotContainsString(
-            'backend/docs/career/publish_track_reconciliation.json|',
+        $this->assertStringContainsString(
+            'backend/docs/career/publish_track_reconciliation.json)',
+            $source
+        );
+        $this->assertStringContainsString(
+            'REQUIRE_CAREER_RECONCILIATION_CACHE_PREFLIGHT=true',
+            $source
+        );
+        $this->assertStringContainsString(
+            '.collection_summary.manifest_version == "career.dataset_authority.publish_track_reconciled.v3"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'no cache write is required.',
             $source
         );
         $this->assertStringContainsString(
