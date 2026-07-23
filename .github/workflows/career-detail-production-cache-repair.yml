@@ -4,20 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "verify_only is read-only; bootstrap_and_verify streams the versioned runner into the exact inactive candidate runtime"
+        description: "verify_only is read-only; diagnose_target is one exact target; bootstrap_and_verify remains separately controlled"
         required: true
         default: verify_only
         type: choice
         options:
           - verify_only
+          - diagnose_target
           - bootstrap_and_verify
       expected_control_plane_sha:
-        description: "Required only for bootstrap_and_verify; exact main SHA containing this workflow and runner"
+        description: "Required for diagnose_target/bootstrap_and_verify; exact main SHA containing this workflow and runner"
         required: false
         default: ""
         type: string
       expected_runner_sha256:
-        description: "Required only for bootstrap_and_verify; exact SHA256 of the streamed candidate-exact runner"
+        description: "Required for diagnose_target/bootstrap_and_verify; exact SHA256 of the streamed candidate-exact runner"
         required: false
         default: ""
         type: string
@@ -42,8 +43,23 @@ on:
         required: true
         default: "2090"
         type: string
+      diagnostic_target_slug:
+        description: "Required only for diagnose_target; one exact lowercase canonical slug"
+        required: false
+        default: ""
+        type: string
+      diagnostic_target_locale:
+        description: "Required only for diagnose_target; exact public locale"
+        required: false
+        default: ""
+        type: string
+      execute_diagnostic_write:
+        description: "diagnose_target defaults to zero writes; enable only with the exact single-target authorization"
+        required: true
+        default: false
+        type: boolean
       operator_approval_phrase:
-        description: "Required only for bootstrap_and_verify; must match the exact control-plane/runner/revision/count-bound phrase"
+        description: "Required for a diagnostic write or bootstrap; must match the exact bound phrase"
         required: false
         default: ""
         type: string
@@ -83,6 +99,9 @@ jobs:
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
           STAGING_RUN_ID: ${{ inputs.staging_run_id }}
           EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
+          DIAGNOSTIC_TARGET_SLUG: ${{ inputs.diagnostic_target_slug }}
+          DIAGNOSTIC_TARGET_LOCALE: ${{ inputs.diagnostic_target_locale }}
+          EXECUTE_DIAGNOSTIC_WRITE: ${{ inputs.execute_diagnostic_write }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
         run: |
           set -euo pipefail
@@ -115,8 +134,34 @@ jobs:
               fi
               test -z "$EXPECTED_CONTROL_PLANE_SHA"
               test -z "$EXPECTED_RUNNER_SHA256"
+              test -z "$DIAGNOSTIC_TARGET_SLUG"
+              test -z "$DIAGNOSTIC_TARGET_LOCALE"
+              test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
+              ;;
+            diagnose_target)
+              test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
+              [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+              [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$DIAGNOSTIC_TARGET_SLUG" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]
+              [[ "$DIAGNOSTIC_TARGET_LOCALE" =~ ^(en|zh-CN)$ ]]
+              if [ "$EXECUTE_DIAGNOSTIC_WRITE" = "true" ]; then
+                expected_phrase="I explicitly approve production Career single-target inactive-candidate cache diagnosis with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} runner SHA256 ${EXPECTED_RUNNER_SHA256} active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for target ${DIAGNOSTIC_TARGET_SLUG}/${DIAGNOSTIC_TARGET_LOCALE} at exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; one candidate-runtime cache warm, zero queue/DB/CMS-authority/publication/indexability/sitemap/llms/search/candidate activation."
+                if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
+                  echo "operator_approval_phrase does not match the exact single-target cache diagnosis authorization." >&2
+                  exit 2
+                fi
+              else
+                test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
+                if [ -n "$OPERATOR_APPROVAL_PHRASE" ]; then
+                  echo "read-only diagnose_target refuses an operator approval phrase." >&2
+                  exit 2
+                fi
+              fi
               ;;
             bootstrap_and_verify)
+              test -z "$DIAGNOSTIC_TARGET_SLUG"
+              test -z "$DIAGNOSTIC_TARGET_LOCALE"
+              test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
               test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
               [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
               [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
@@ -154,7 +199,7 @@ jobs:
           test -f "$RUNNER_PATH"
           runner_sha256="$(sha256sum "$RUNNER_PATH" | awk '{print $1}')"
           [[ "$runner_sha256" =~ ^[0-9a-f]{64}$ ]]
-          if [ "$MODE" = "bootstrap_and_verify" ]; then
+          if [ "$MODE" != "verify_only" ]; then
             test "$control_plane_sha" = "$EXPECTED_CONTROL_PLANE_SHA"
             test "$runner_sha256" = "$EXPECTED_RUNNER_SHA256"
           fi
@@ -358,6 +403,91 @@ jobs:
               database_write_count: 0,
               candidate_activation: false
             }' > artifacts/authorization-packet.json
+
+      - name: Diagnose one exact candidate cache target
+        if: inputs.mode == 'diagnose_target'
+        shell: bash
+        env:
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
+          DIAGNOSTIC_TARGET_SLUG: ${{ inputs.diagnostic_target_slug }}
+          DIAGNOSTIC_TARGET_LOCALE: ${{ inputs.diagnostic_target_locale }}
+          EXECUTE_DIAGNOSTIC_WRITE: ${{ inputs.execute_diagnostic_write }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(sha256sum "$RUNNER_PATH" | awk '{print $1}')" = "$RUNNER_SHA256"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test \"\$(tr -d '\\r\\n' < \"\$candidate/REVISION\")\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+
+          diagnostic_write=0
+          if [ "$EXECUTE_DIAGNOSTIC_WRITE" = "true" ]; then
+            diagnostic_write=1
+          fi
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=diagnose_target FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$EXPECTED_MISSING_POINTER_COUNT' FM_CAREER_TARGET_SLUG='$DIAGNOSTIC_TARGET_SLUG' FM_CAREER_TARGET_LOCALE='$DIAGNOSTIC_TARGET_LOCALE' FM_CAREER_DIAGNOSTIC_WRITE='$diagnostic_write' /usr/bin/timeout 600 /usr/bin/php" \
+            < "$RUNNER_PATH" > artifacts/single-target-diagnostic.json
+          diagnostic_exit=$?
+          set -e
+
+          jq -e \
+            --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
+            --arg slug "$DIAGNOSTIC_TARGET_SLUG" \
+            --arg locale "$DIAGNOSTIC_TARGET_LOCALE" \
+            --argjson expected_targets "$MINIMUM_TARGETS" \
+            --argjson expected_missing "$EXPECTED_MISSING_POINTER_COUNT" \
+            '.contract_version == "career.candidate_exact_cache_bootstrap.v1"
+             and .mode == "diagnose_target"
+             and .candidate_revision == $candidate_sha
+             and .target == {slug: $slug, locale: $locale}
+             and .queue_dispatch_count == 0
+             and .database_write_count == 0
+             and .pre_target_coverage.expected_target_count == $expected_targets
+             and .pre_target_coverage.missing_pointer_count == $expected_missing
+             and (.failure_evidence.message? == null)
+             and (.failure_evidence.cache_key? == null)' \
+            artifacts/single-target-diagnostic.json >/dev/null
+
+          if [ "$diagnostic_write" -eq 0 ]; then
+            test "$diagnostic_exit" -eq 0
+            jq -e \
+              '.status == "ready"
+               and .diagnostic_write == false
+               and .cache_write_count == 0
+               and .failure_count == 0
+               and .post_target_coverage == .pre_target_coverage' \
+              artifacts/single-target-diagnostic.json >/dev/null
+          elif [ "$diagnostic_exit" -eq 0 ]; then
+            jq -e \
+              '.status == "completed"
+               and .diagnostic_write == true
+               and .cache_write_count == 1
+               and .failure_count == 0
+               and .post_target_coverage.missing_pointer_count == (.pre_target_coverage.missing_pointer_count - 1)' \
+              artifacts/single-target-diagnostic.json >/dev/null
+          else
+            jq -e \
+              '.status == "failed"
+               and .diagnostic_write == true
+               and .cache_write_count == 0
+               and .failure_count == 1
+               and (.failure_evidence.failure_stage | IN("build_exception", "build_budget_exceeded", "publish_exception", "result_validation", "unrecognized_exception"))
+               and (.failure_evidence.safe_code | type == "string")
+               and (.failure_evidence.cause_class | type == "string")
+               and (.failure_evidence.build_ms | type == "number")
+               and (.failure_evidence.publish_ms | type == "number")' \
+              artifacts/single-target-diagnostic.json >/dev/null
+            exit "$diagnostic_exit"
+          fi
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test \"\$(tr -d '\\r\\n' < \"\$candidate/REVISION\")\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
 
       - name: Run candidate-exact synchronous cache batches
         if: inputs.mode == 'bootstrap_and_verify'
