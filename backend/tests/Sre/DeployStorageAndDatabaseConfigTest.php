@@ -212,8 +212,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('DEPLOY_SHA: ${{ inputs.expected_release_sha }}', $source);
         $this->assertStringContainsString('RELEASE_ID: ${{ inputs.release_id }}', $source);
         $this->assertStringContainsString('Confirm approved release satisfies deployment mode policy', $source);
-        $this->assertStringContainsString('if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]', $source);
-        $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $source);
+        $this->assertStringContainsString('if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"; then', $source);
+        $this->assertStringContainsString('Manual standard production deploy refused because the staged candidate is not reachable from latest main.', $source);
         $this->assertStringContainsString('--revision "$DEPLOY_SHA"', $source);
         $this->assertStringContainsString("tr -d '\\r\\n' < REVISION", $source);
     }
@@ -238,7 +238,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('[[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]', $source);
         $this->assertStringContainsString('[[ ! "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]', $source);
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
-        $this->assertStringContainsString('I explicitly approve backend production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
+        $this->assertStringContainsString('I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve backend schema-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID} migration ${APPROVED_MIGRATION}.', $source);
         $this->assertStringContainsString('expected_deployed_revision as a lowercase 40-character deployed REVISION', $source);
@@ -250,7 +250,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('staging-equivalence refused a runtime or deployment artifact change.', $source);
         $this->assertStringContainsString('.name == "Deploy checks (staging)" and .conclusion == "success"', $source);
         $this->assertStringContainsString('.name == "Deploy (staging)" and .conclusion == "success"', $source);
-        $this->assertStringContainsString('Manual standard production deploy refused because expected_release_sha is not latest main.', $source);
+        $this->assertStringContainsString('Manual standard production deploy refused because the staged candidate is not reachable from latest main.', $source);
         $this->assertStringContainsString('Code-only production deploy refused because expected_release_sha is not reachable from latest main and has no exact isolated receipt.', $source);
         $this->assertStringContainsString('-o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"', $source);
         $this->assertLessThan(
@@ -435,6 +435,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
 
         foreach ([
+            '.github/workflows/career-detail-production-cache-repair.yml',
             '.github/workflows/career-detail-staging-cache-repair.yml',
             '.github/workflows/deploy.yml',
             '.github/workflows/mbti-comp-runtime46-production-ops.yml',
@@ -442,20 +443,53 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'backend/app/Filament/Ops/Resources/AdminApprovalResource.php',
             'backend/app/Models/AdminApproval.php',
             'backend/app/Models/DailyGivingRecord.php',
+            'backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php',
             'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php',
+            'backend/app/Services/Cms/MbtiCrossPublisher49Package.php',
+            'backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json',
+            'backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json',
             'backend/docs/career/README.md',
             'backend/docs/career/career-detail-stability-train-2026-07-18.md',
             'backend/docs/career/job-detail-cache-coverage.md',
             'backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json',
             'backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md',
+            'docs/04-ops/deploy-incident-runbook.md',
             'docs/ops/big-five-en52-release.md',
             'docs/ops/big-five-legacy-alias-hard-purge.md',
+            'docs/seo/career-jobs-index-lkg-resilience-01.md',
+            'docs/seo/career-pilot-review-evidence-bridge-01.md',
         ] as $auditedPath) {
             $this->assertStringContainsString($auditedPath, $source);
         }
 
+        $this->assertStringNotContainsString(
+            'backend/docs/career/publish_track_reconciliation.json|',
+            $source
+        );
+        $this->assertStringContainsString(
+            'code-only scope classification accepted the exact audited Runtime 46 subsumed baseline.',
+            $source
+        );
+        $this->assertStringContainsString(
+            'git fetch --no-tags origin "$EXPECTED_DEPLOYED_REVISION"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'actual_runtime46_diff="$(git diff --no-renames --name-status "$CLASSIFICATION_BASE" "$EXPECTED_DEPLOYED_REVISION")"',
+            $source
+        );
+        $this->assertStringContainsString(
+            '$(git rev-parse "${DEPLOY_SHA}:${runtime46_path}")',
+            $source
+        );
         $this->assertStringContainsString(
             'code-only scope accepted exact audited Root5 runtime or inert evidence path:',
+            $source
+        );
+        $this->assertStringContainsString(
+            'code-only scope accepted exact audited subsumed runtime or inert authority input path:',
             $source
         );
         $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD=false', $source);
