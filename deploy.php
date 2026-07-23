@@ -812,7 +812,11 @@ task('seo:warm-sitemap-source-cache', function () {
     $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'false');
 
     run(sprintf(
-        'sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}} SITEMAP_SOURCE_WARM_ARTISAN=%s SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS=%s SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS=%s SITEMAP_SOURCE_WARM_STRICT=%s bash %s',
+        <<<'BASH'
+php_bin="$(command -v {{bin/php}})"
+test -n "$php_bin"
+sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin" SITEMAP_SOURCE_WARM_ARTISAN=%s SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS=%s SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS=%s SITEMAP_SOURCE_WARM_STRICT=%s bash %s
+BASH,
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
         deployShellArg($timeoutSeconds),
         deployShellArg($killAfterSeconds),
