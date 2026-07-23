@@ -47,7 +47,54 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
-    public function test_write_creates_ninety_six_draft_revisions_without_changing_live_records(): void
+    public function test_bounded_dry_run_plans_exact_en_variant_cohort_without_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath();
+
+        $exitCode = Artisan::call(
+            'personality:mbti64-cms-internal-link-draft',
+            $this->boundedOptions($graphPath, dryRun: true)
+        );
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertSame([
+            'locale' => 'en',
+            'page_type' => 'variant',
+            'expected_rows' => 32,
+            'expected_edges' => 64,
+        ], $payload['bounded_scope']);
+        $this->assertSame(32, $payload['row_count']);
+        $this->assertSame(32, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(64, $payload['active_internal_link_count']);
+        $this->assertSame(
+            'ed99662788d106d371bc14ca676df57edf860bb50bb2e62fa3e551f2bd4c7f23',
+            $payload['cohort_payload_sha256']
+        );
+        foreach ($payload['rows'] as $row) {
+            $this->assertSame('en', $row['locale']);
+            $this->assertSame('variant', $row['page_type']);
+            $links = $row['snapshot_preview']['mbti64_internal_link_graph_v1']['first_class_draft_fields']['internal_links'];
+            $this->assertCount(2, $links);
+            $type = $row['identity']['canonical_type_code'];
+            $this->assertSame(
+                ['variant_at_pair', 'variant_to_comparison'],
+                array_column($links, 'role')
+            );
+            $this->assertSame(
+                ['Compare '.$type.'-A and '.$type.'-T', $type.'-A vs '.$type.'-T'],
+                array_column($links, 'anchor_text')
+            );
+        }
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_write_creates_thirty_two_bounded_draft_revisions_without_changing_live_records(): void
     {
         $targets = $this->seedAllTargets();
         $graphPath = $this->graphPath();
@@ -63,23 +110,24 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $this->assertFalse($payload['dry_run']);
         $this->assertTrue($payload['write']);
         $this->assertTrue($payload['writes_committed']);
-        $this->assertSame(96, $payload['created_revision_count']);
+        $this->assertSame(32, $payload['created_revision_count']);
         $this->assertSame(0, $payload['skipped_existing_count']);
-        $this->assertSame(32, PersonalityProfileRevision::query()->count());
-        $this->assertSame(64, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(32, PersonalityProfileVariantRevision::query()->count());
         $this->assertSame($profileBefore, $this->profileLiveState($targets['en|INTJ']));
         $this->assertSame($variantBefore, $this->variantLiveState($targets['en|INTJ-A']));
         $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
 
-        $comparison = PersonalityProfileRevision::query()
-            ->where('profile_id', (int) $targets['en|INTJ']->id)
-            ->firstOrFail();
         $variant = PersonalityProfileVariantRevision::query()
             ->where('personality_profile_variant_id', (int) $targets['en|INTJ-A']->id)
             ->firstOrFail();
 
-        $this->assertInternalLinkSnapshot($comparison->snapshot_json);
         $this->assertInternalLinkSnapshot($variant->snapshot_json);
+        $source = $variant->snapshot_json['mbti64_internal_link_graph_v1']['source'];
+        $this->assertSame(
+            'ed99662788d106d371bc14ca676df57edf860bb50bb2e62fa3e551f2bd4c7f23',
+            $source['cohort_payload_sha256']
+        );
     }
 
     public function test_second_write_is_idempotent_for_same_graph_hash(): void
@@ -97,9 +145,9 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $this->assertTrue($payload['ok']);
         $this->assertFalse($payload['writes_committed']);
         $this->assertSame(0, $payload['created_revision_count']);
-        $this->assertSame(96, $payload['skipped_existing_count']);
-        $this->assertSame(32, PersonalityProfileRevision::query()->count());
-        $this->assertSame(64, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame(32, $payload['skipped_existing_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(32, PersonalityProfileVariantRevision::query()->count());
     }
 
     public function test_changed_graph_hash_creates_next_revision_version(): void
@@ -120,9 +168,9 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $payload = $this->jsonOutput();
         $this->assertSame(0, $secondExit);
         $this->assertTrue($payload['ok']);
-        $this->assertSame(96, $payload['created_revision_count']);
-        $this->assertSame(64, PersonalityProfileRevision::query()->count());
-        $this->assertSame(128, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame(32, $payload['created_revision_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(64, PersonalityProfileVariantRevision::query()->count());
     }
 
     public function test_missing_target_blocks_entire_write_batch(): void
@@ -216,6 +264,278 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $this->assertFalse($payload['ok']);
         $this->assertStringContainsString('--no-llms is required', (string) ($payload['errors'][0]['message'] ?? ''));
         $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_write_fails_closed_without_exact_bounded_options(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath();
+        $options = $this->writeOptions($graphPath);
+        unset($options['--expected-edges']);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertStringContainsString(
+            '--expected-edges=64 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_unknown_edge_type_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            $edge = $graph['recommendedEdges'][0];
+            $edge['edge_type'] = 'unknown_bounded_role';
+            $edge['source_path'] = '/en/personality/intj-a';
+            $edge['source_url'] = 'https://fermatmind.com/en/personality/intj-a';
+            $edge['target_path'] = '/en/personality/intj-t';
+            $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-t';
+            $edge['locale'] = 'en';
+            $graph['recommendedEdges'][] = $edge;
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains(
+            'unsupported_bounded_edge_type',
+            array_column($payload['errors'], 'code')
+        );
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_count_options_reject_expanded_or_partial_cohorts(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath();
+
+        foreach ([
+            ['--expected-rows', 33, '--expected-rows=32 is required'],
+            ['--expected-edges', 63, '--expected-edges=64 is required'],
+            ['--expected-edges', 65, '--expected-edges=64 is required'],
+        ] as [$option, $value, $message]) {
+            $options = $this->writeOptions($graphPath);
+            $options[$option] = $value;
+
+            $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $options);
+            $payload = $this->jsonOutput();
+
+            $this->assertSame(1, $exitCode);
+            $this->assertFalse($payload['ok']);
+            $this->assertStringContainsString($message, (string) ($payload['errors'][0]['message'] ?? ''));
+        }
+
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_missing_required_edge_role_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            $graph['recommendedEdges'] = array_values(array_filter(
+                $graph['recommendedEdges'],
+                static fn (array $edge): bool => ! (
+                    ($edge['source_path'] ?? null) === '/en/personality/intj-a'
+                    && ($edge['edge_type'] ?? null) === 'variant_to_comparison'
+                )
+            ));
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('bounded_edge_role_count_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertContains('bounded_edge_count_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_cross_locale_target_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['recommendedEdges'] as &$edge) {
+                if (($edge['source_path'] ?? null) === '/en/personality/intj-a'
+                    && ($edge['edge_type'] ?? null) === 'variant_at_pair') {
+                    $edge['target_path'] = '/zh/personality/intj-t';
+                    $edge['target_url'] = 'https://fermatmind.com/zh/personality/intj-t';
+                    break;
+                }
+            }
+            unset($edge);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('bounded_edge_locale_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_same_locale_wrong_target_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['recommendedEdges'] as &$edge) {
+                if (($edge['source_path'] ?? null) === '/en/personality/intj-a'
+                    && ($edge['edge_type'] ?? null) === 'variant_at_pair') {
+                    $edge['target_path'] = '/en/personality/infj-t';
+                    $edge['target_url'] = 'https://fermatmind.com/en/personality/infj-t';
+                    break;
+                }
+            }
+            unset($edge);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('bounded_edge_target_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_cased_duplicate_source_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['nodes'] as &$node) {
+                if (($node['path'] ?? null) === '/en/personality/intp-a') {
+                    $node['path'] = '/en/personality/INTJ-A';
+                    $node['url'] = 'https://fermatmind.com/en/personality/INTJ-A';
+                    break;
+                }
+            }
+            unset($node);
+
+            foreach ($graph['recommendedEdges'] as &$edge) {
+                if (($edge['source_path'] ?? null) !== '/en/personality/intp-a') {
+                    continue;
+                }
+
+                $edge['source_path'] = '/en/personality/INTJ-A';
+                $edge['source_url'] = 'https://fermatmind.com/en/personality/INTJ-A';
+                if (($edge['edge_type'] ?? null) === 'variant_at_pair') {
+                    $edge['target_path'] = '/en/personality/intj-t';
+                    $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-t';
+                } elseif (($edge['edge_type'] ?? null) === 'variant_to_comparison') {
+                    $edge['target_path'] = '/en/personality/intj-a-vs-intj-t';
+                    $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-a-vs-intj-t';
+                }
+            }
+            unset($edge);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('bounded_source_inventory_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertContains('bounded_target_inventory_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_tokenized_raw_target_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['recommendedEdges'] as &$edge) {
+                if (($edge['source_path'] ?? null) === '/en/personality/intj-a'
+                    && ($edge['edge_type'] ?? null) === 'variant_at_pair') {
+                    $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-t?token=must-not-persist';
+                    break;
+                }
+            }
+            unset($edge);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('forbidden_recommended_edge_target', array_column($payload['errors'], 'code'));
+        $this->assertContains('unsafe_bounded_edge', array_column($payload['errors'], 'code'));
+        $this->assertStringNotContainsString('must-not-persist', Artisan::output());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_tokenized_raw_source_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['recommendedEdges'] as &$edge) {
+                if (($edge['source_path'] ?? null) === '/en/personality/intj-a'
+                    && ($edge['edge_type'] ?? null) === 'variant_at_pair') {
+                    $edge['source_url'] = 'https://fermatmind.com/en/personality/intj-a?token=must-not-persist';
+                    break;
+                }
+            }
+            unset($edge);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('forbidden_recommended_edge_source', array_column($payload['errors'], 'code'));
+        $this->assertContains('unsafe_bounded_edge', array_column($payload['errors'], 'code'));
+        $this->assertStringNotContainsString('must-not-persist', Artisan::output());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_bounded_tokenized_node_url_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['nodes'] as &$node) {
+                if (($node['path'] ?? null) === '/en/personality/intj-a') {
+                    $node['url'] = 'https://fermatmind.com/en/personality/intj-a?token=must-not-persist';
+                    break;
+                }
+            }
+            unset($node);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('unsafe_bounded_node', array_column($payload['errors'], 'code'));
+        $this->assertStringNotContainsString('must-not-persist', Artisan::output());
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
@@ -381,7 +701,7 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
      */
     private function writeOptions(string $graphPath): array
     {
-        return [
+        return array_merge($this->boundedOptions($graphPath), [
             '--graph' => $graphPath,
             '--write' => true,
             '--json' => true,
@@ -392,6 +712,22 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
             '--no-llms' => true,
             '--no-search-release' => true,
             '--operator-approved' => 'MBTI64-CMS-INTERNAL-LINK-DRAFT-01',
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function boundedOptions(string $graphPath, bool $dryRun = false): array
+    {
+        return [
+            '--graph' => $graphPath,
+            '--dry-run' => $dryRun,
+            '--json' => true,
+            '--locale' => 'en',
+            '--page-type' => 'variant',
+            '--expected-rows' => 32,
+            '--expected-edges' => 64,
         ];
     }
 

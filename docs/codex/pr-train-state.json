@@ -99442,5 +99442,114 @@
       }
     ],
     "updated_at": "2026-07-23T01:38:21Z"
+  },
+  "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01": {
+    "id": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-per02-mbti64-en64-bounded-draft-01",
+    "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Operator authorized the complete PR lifecycle for the exact EN variant 32-row/64-edge bounded draft scope and explicitly excluded real CMS/database writes, publication, promotion and deployment."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "No declared PR dependency. The branch started from exact origin/main 88e3014a7f98d9f3ce49530a56ed52c690cf02ec, rebased cleanly onto 49038deb50cda789e4365ea42068832ed28d6023, and then rebased cleanly onto current origin/main b1790a8ebf4447a1478b1ef69304a3f4e2825358 after unrelated Career/deploy work advanced main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused command coverage passed 19 tests/353 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity, cased-duplicate source, tokenized raw source/target and tokenized bounded-node cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation passed before the latest same-scope security regressions; each repair reran the focused suite, syntax and scoped Pint. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All 9 required CI and Code Scanning checks passed on exact PR head 02572b0d442cb58b8be8d7e87d190374feb64c5c after the clean rebase onto current origin/main b1790a8ebf4447a1478b1ef69304a3f4e2825358. Exact-head Codex review reported no major issues, all review threads are resolved, GitHub reports CLEAN/MERGEABLE, and the diff is exactly the five allowed paths. commit_sha intentionally remains pending_remote_pr_head so this final ledger-only transition cannot create a stale self-referential SHA; the resulting head must rerun all required checks before merge."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-23T03:08:14Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 88e3014a7f98d9f3ce49530a56ed52c690cf02ec. Scope is limited to the command, bounded writer, focused command test and train metadata. No real CMS/database write, publish, promotion, deploy, cache, sitemap, llms or Search action is authorized or executed."
+      },
+      {
+        "at": "2026-07-23T03:21:59Z",
+        "status": "local_validation_passed",
+        "note": "Implemented fail-closed exact EN variant boundaries and a cohort-bound writer. Focused tests passed 15 tests/319 assertions; syntax, scoped Pint, Composer validation/audit, full ci_verify_mbti.sh, metadata parsers, diff and exact five-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline. No production or CMS/database write was executed."
+      },
+      {
+        "at": "2026-07-23T03:23:30Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact five-path implementation as 6117bba2622c41a58690611082dcba46b4fb32dd, pushed the scoped branch and opened PR #3219. Merge remains gated on required GitHub checks, exact-head review, clean scope and mergeability. This following commit changes only the PR-train state ledger."
+      },
+      {
+        "at": "2026-07-23T03:30:44Z",
+        "status": "ready_to_merge",
+        "note": "All 9 required and security checks passed on exact reviewed head fc28e817843a00c2c6da7908ac47649c898df7c3. GitHub reported the PR mergeable before the final query refreshed, the diff contains exactly the five allowed paths, and review threads are zero. This following commit records ready_to_merge only; its final head must rerun all required checks before squash merge."
+      },
+      {
+        "at": "2026-07-23T03:39:54Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head Codex review found that case-insensitive identity parsing plus case-sensitive path keys could admit a cased duplicate source while omitting a canonical variant. Added exact canonical lowercase 32-path inventory validation, distinct 32-target-ID validation and a pre-write regression test. Focused validation now passes 16 tests/327 assertions with scoped Pint, PHP syntax and diff checks green. No real write occurred; the repaired head must rerun required checks."
+      },
+      {
+        "at": "2026-07-23T03:50:53Z",
+        "status": "ready_to_merge",
+        "note": "Rebased onto exact origin/main 49038deb50cda789e4365ea42068832ed28d6023 while preserving all intervening main ledger state. Rebase validation passed 16 tests/327 assertions, syntax, scoped Pint, metadata parsers, diff and exact five-path scope. Exact repaired head 83913c236d66fcc3d2c8aab5f4be51bc26a2bf75 passed all 9 GitHub checks and exact-head review confirmed the implementation repair; this following ledger-only commit binds tooling to that repaired head and must pass final checks before merge."
+      },
+      {
+        "at": "2026-07-23T04:07:07Z",
+        "status": "github_checks_pending",
+        "note": "Final-head review found that path normalization removed forbidden query parameters before validation while raw recommended edges could still enter snapshot previews. Repair 22565ef059f593a74ee2c8aa64c5632728a190b3 now validates the raw target before normalization, suppresses the raw sensitive value from errors, excludes the unsafe edge and proves zero revisions plus no token output. Focused validation passes 17 tests/336 assertions with syntax and scoped Pint green; required checks are pending."
+      },
+      {
+        "at": "2026-07-23T04:16:24Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review found the symmetric raw source normalization path could preserve a tokenized source edge in snapshot data. Repair 4487b1da71721d7b6dbe4611f52e8e948fe422d3 now validates raw edge sources before normalization in both bounded and unbounded selection, suppresses sensitive values, and proves no token output plus zero revisions. Focused validation passes 18 tests/345 assertions with syntax and scoped Pint green; required checks are pending."
+      },
+      {
+        "at": "2026-07-23T04:25:56Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review found that selecting *_path with null coalescing could mask an unsafe sibling *_url field. Repair 8c1955ad32bd6a5b156b34a35ac5226f69f09faa validates every supplied source/target path and URL before normalization and requires all bounded fields to normalize to the exact canonical source/target. The safe-path-plus-tokenized-URL regressions pass with no token output and zero revisions; focused validation remains 18 tests/345 assertions with syntax and scoped Pint green."
+      },
+      {
+        "at": "2026-07-23T04:35:27Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review found bounded graph nodes could independently pair a canonical path with a tokenized URL and persist the raw node. Repair ca419f35e8f0ad9ddfe0e7955a2d1da3004ef8eb validates every node path/URL before nodesByPath construction, requires canonical agreement and excludes unsafe nodes from snapshot previews. The new regression proves no token output and zero revisions; focused validation passes 19 tests/353 assertions with syntax and scoped Pint green."
+      },
+      {
+        "at": "2026-07-23T04:45:37Z",
+        "status": "github_checks_pending",
+        "note": "All 9 checks passed on exact reviewed pre-rebase head 442c0f9c8183d657c232d6590d3deadbd0e1e68f with all six implementation review threads resolved. Unrelated main changes advanced origin/main to b1790a8ebf4447a1478b1ef69304a3f4e2825358, so the branch was cleanly rebased and the exact functional repair head is now 45de7cc368c287928473da653275b7dcc8b64146. The top-level commit_sha now uses the repository-established pending_remote_pr_head sentinel to avoid stale self-referential ledger hashes; the following ledger-only head must rerun all checks and exact-head review."
+      },
+      {
+        "at": "2026-07-23T04:56:23Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 02572b0d442cb58b8be8d7e87d190374feb64c5c passed all 9 required checks and exact-head Codex review with no major issues. All seven review threads are resolved, GitHub reports CLEAN/MERGEABLE against unchanged origin/main b1790a8ebf4447a1478b1ef69304a3f4e2825358, and the diff remains exactly the five allowed paths. This final ledger-only transition must rerun all required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-23T04:56:23Z"
   }
 }
