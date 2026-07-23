@@ -8,7 +8,7 @@
     "depends_on": [
       "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01"
     ],
-    "status": "github_checks_failed_repairing",
+    "status": "github_review_repairing",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3220",
     "checks": {
@@ -51,7 +51,7 @@
       {
         "at": "2026-07-23T03:30:00Z",
         "status": "planned",
-        "note": "Operator authorized CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01 with exact branch/title and dependency on merged PR2. Scope is the locked four-authority publish-track resolution order, conservative reconciliation of exactly three missing slugs, fail-closed historical first-wave conflicts, complete non-empty track coverage, and held-slug regression protection. Deploy, production cache operations, CMS/database mutation, sitemap/llms, Search Channel, held-slug release, and URL submission remain prohibited."
+        "note": "Operator authorized CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01 with exact branch/title and dependency on merged PR2. Scope is the locked four-authority publish-track resolution order, conservative reconciliation of the three identified current 1046 gaps, fail-closed historical first-wave conflicts, complete non-empty track coverage, and held-slug regression protection. Deploy, production cache operations, CMS/database mutation, sitemap/llms, Search Channel, held-slug release, and URL submission remain prohibited."
       },
       {
         "at": "2026-07-23T03:35:00Z",
@@ -61,7 +61,7 @@
       {
         "at": "2026-07-23T04:00:00Z",
         "status": "local_validation_passed",
-        "note": "Implemented the locked batch → current first-wave → runtime projection → explicit reconciliation resolution order, explicit review_needed records for exactly three audited gaps, fail-closed historical first-wave conflicts, and a review_needed fallback for any future unresolved member. Focused suites passed 19 tests/506 assertions after rebasing onto latest origin/main; syntax, 224 API routes, Pint, Composer validation/audit, parsers, diff, and exact-path scope passed. The 1046/2092 directory gate and software-developers held exclusion remain green. No controlled production action occurred."
+        "note": "Implemented the locked batch → current first-wave → runtime projection → explicit reconciliation resolution order, explicit review_needed records for the three identified current 1046 gaps, fail-closed historical first-wave conflicts, and a review_needed fallback for any future unresolved member. Focused suites passed 19 tests/506 assertions after rebasing onto latest origin/main; syntax, 224 API routes, Pint, Composer validation/audit, parsers, diff, and exact-path scope passed. The 1046/2092 directory gate and software-developers held exclusion remain green. No controlled production action occurred."
       },
       {
         "at": "2026-07-23T04:10:00Z",
@@ -82,9 +82,14 @@
         "at": "2026-07-23T04:30:00Z",
         "status": "github_checks_failed_repairing",
         "note": "Final head d634ab8cde2b7920bdac1b1f0f56546115e113df passed hygiene, supply-chain, content-pack including Career 10k capacity/fault resilience, both MBTI freezes, and all Semgrep checks. verify-bigfive failed after 1592 passing tests only because its runtime-freeze classifier flagged the two new Career publish-track resolver classes. Adding an exact two-file classifier exemption with positive and negative regression coverage; required checks remain enforced and no production action occurred."
+      },
+      {
+        "at": "2026-07-23T04:40:00Z",
+        "status": "github_review_repairing",
+        "note": "Repair head 1ded54903787d7ac2cd881f3fd3313594f0a074e passed all nine GitHub checks. Latest review then identified that the legacy 342 baseline member database-administrators-and-architects was relying on generic review_needed fallback instead of explicit audit evidence. Adding a separate legacy-baseline reconciliation record while preserving the original three current 1046 gaps and without changing runtime cohort, indexability, held exposure, or pilot eligibility."
       }
     ],
-    "updated_at": "2026-07-23T04:30:00Z"
+    "updated_at": "2026-07-23T04:40:00Z"
   },
   "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01": {
     "id": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",

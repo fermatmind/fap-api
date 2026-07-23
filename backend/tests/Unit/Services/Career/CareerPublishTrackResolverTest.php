@@ -37,13 +37,14 @@ final class CareerPublishTrackResolverTest extends TestCase
         }
     }
 
-    public function test_reconciliation_contains_only_the_three_audited_gaps(): void
+    public function test_reconciliation_contains_the_three_current_gaps_and_legacy_baseline_gap(): void
     {
         $reconciliation = app(CareerPublishTrackReconciliationReader::class)->bySlug();
 
         $this->assertSame([
             'computer-network-architects',
             'computer-systems-analysts',
+            'database-administrators-and-architects',
             'information-security-analysts',
         ], array_keys($reconciliation));
         $this->assertSame(
