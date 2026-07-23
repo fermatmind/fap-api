@@ -112,13 +112,13 @@ final class Mbti64CmsInternalLinkDraftWriter
             : null;
         $privateRecommendedEdgeCount = 0;
         foreach ($this->edges($graph, 'recommendedEdges') as $edge) {
-            $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
-            if ($this->containsForbiddenRoutePattern($target)) {
+            $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            if ($this->containsForbiddenRoutePattern($rawTarget)) {
                 $privateRecommendedEdgeCount++;
                 $errors[] = [
                     'field' => 'recommendedEdges',
                     'code' => 'forbidden_recommended_edge_target',
-                    'message' => 'Recommended edge target contains a forbidden private route pattern: '.$target,
+                    'message' => 'Recommended edge target contains a forbidden private route pattern.',
                 ];
             }
         }
@@ -594,11 +594,13 @@ final class Mbti64CmsInternalLinkDraftWriter
     private function activeEdgesForSource(array $edges): array
     {
         return array_values(array_filter($edges, function (array $edge): bool {
-            $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            $target = $this->normalizePath($rawTarget);
 
             return ($edge['safe_public_route'] ?? null) === true
                 && trim((string) ($edge['publish_blocker_if_any'] ?? '')) === ''
                 && $target !== ''
+                && ! $this->containsForbiddenRoutePattern($rawTarget)
                 && ! $this->containsForbiddenRoutePattern($target);
         }));
     }
@@ -633,7 +635,17 @@ final class Mbti64CmsInternalLinkDraftWriter
                 continue;
             }
 
-            $target = $this->normalizePath((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            $rawTarget = trim((string) ($edge['target_path'] ?? $edge['target_url'] ?? ''));
+            $target = $this->normalizePath($rawTarget);
+            if ($this->containsForbiddenRoutePattern($rawTarget)) {
+                $errors[] = [
+                    'field' => 'recommendedEdges.'.$sourcePath,
+                    'code' => 'unsafe_bounded_edge',
+                    'message' => 'Bounded edge raw target contains a forbidden route or query parameter.',
+                ];
+
+                continue;
+            }
             if (($edge['locale'] ?? null) !== 'en' || ! str_starts_with($target, '/en/personality/')) {
                 $errors[] = [
                     'field' => 'recommendedEdges.'.$sourcePath,

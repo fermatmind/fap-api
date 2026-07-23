@@ -460,6 +460,34 @@ final class PersonalityMbti64CmsInternalLinkDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_bounded_tokenized_raw_target_fails_closed_before_writes(): void
+    {
+        $this->seedAllTargets();
+        $graphPath = $this->graphPath(static function (array $graph): array {
+            foreach ($graph['recommendedEdges'] as &$edge) {
+                if (($edge['source_path'] ?? null) === '/en/personality/intj-a'
+                    && ($edge['edge_type'] ?? null) === 'variant_at_pair') {
+                    $edge['target_path'] = '/en/personality/intj-t?token=must-not-persist';
+                    $edge['target_url'] = 'https://fermatmind.com/en/personality/intj-t?token=must-not-persist';
+                    break;
+                }
+            }
+            unset($edge);
+
+            return $graph;
+        });
+
+        $exitCode = Artisan::call('personality:mbti64-cms-internal-link-draft', $this->writeOptions($graphPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('forbidden_recommended_edge_target', array_column($payload['errors'], 'code'));
+        $this->assertContains('unsafe_bounded_edge', array_column($payload['errors'], 'code'));
+        $this->assertStringNotContainsString('must-not-persist', Artisan::output());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     /**
      * @return array<string,PersonalityProfile|PersonalityProfileVariant>
      */
