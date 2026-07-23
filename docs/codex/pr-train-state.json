@@ -99561,9 +99561,9 @@
     "depends_on": [
       "MBTI-CROSS-APPROVAL-48"
     ],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3227",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -99613,8 +99613,13 @@
         "at": "2026-07-23T06:09:06Z",
         "status": "local_validation_passed",
         "note": "All manifest checks passed on the latest origin/main baseline. Changed files are confined to the exact PR49 allowed paths; no staging or production mutation was executed."
+      },
+      {
+        "at": "2026-07-23T06:11:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed implementation as b3d573a5d, pushed codex/mbti-cross-publisher-49, and opened PR #3227. Required GitHub checks and review gates are pending."
       }
     ],
-    "updated_at": "2026-07-23T06:09:06Z"
+    "updated_at": "2026-07-23T06:11:00Z"
   }
 }
