@@ -267,7 +267,6 @@ jobs:
           DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
           DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
           DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
-          OPS_CONFIG_PATH: ${{ secrets.PRODUCTION_OPS_SUPERVISOR_CONFIG_PATH }}
           EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
           EXPECTED_RENDERED_SHA256: ${{ steps.render.outputs.rendered_sha256 }}
         run: |
@@ -276,9 +275,6 @@ jobs:
           [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
           [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
           [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
-          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
-          [[ "$OPS_CONFIG_PATH" != *".."* ]]
-          config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
           queue_probe_php='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $conn=Illuminate\Support\Facades\DB::connection(); $conn->listen(function($query){$sql=ltrim(strtolower((string)$query->sql)); if(!str_starts_with($sql,"select")&&!str_starts_with($sql,"show")&&!str_starts_with($sql,"describe")&&!str_starts_with($sql,"explain")&&!str_starts_with($sql,"pragma")){throw new RuntimeException("write query refused");}}); echo (clone $conn->table("jobs")->where("queue","ops"))->count(),PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
           queue_probe_b64="$(printf '%s' "$queue_probe_php" | base64 | tr -d '\n')"
           remote_script="$(cat <<'REMOTE'
@@ -306,6 +302,19 @@ jobs:
               program_state=NOT_RUNNING
             fi
           fi
+          failure_gate=CONFIG_DISCOVERY
+          mapfile -t config_candidates < <(
+            sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print 2>/dev/null \
+              | sort -u
+          )
+          test "${#config_candidates[@]}" -le 1
+          OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf
+          if [ "${#config_candidates[@]}" -eq 1 ]; then
+            OPS_CONFIG_PATH="${config_candidates[0]}"
+          fi
+          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" != *".."* ]]
+          config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
           current_config_sha256="$(printf '0%.0s' {1..64})"
           if [ -f "$OPS_CONFIG_PATH" ]; then
             failure_gate=CONFIG_HASH
@@ -354,16 +363,17 @@ jobs:
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$current" 2>/dev/null)"
           [[ "$ops_pending_total" =~ ^[0-9]+$ ]]
           trap - ERR
-          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
             "$active_revision" "$lock_present" "$process_count" "$program_present" \
-            "$program_state" "$ops_pending_total" "$current_config_sha256" "$live_process_verified"
+            "$program_state" "$ops_pending_total" "$current_config_sha256" \
+            "$live_process_verified" "$config_path_sha256"
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
           set +e
           result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' OPS_CONFIG_PATH='$OPS_CONFIG_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-preflight-ssh.err")"
           ssh_rc=$?
           set -e
@@ -377,7 +387,7 @@ jobs:
             fi
             exit "$ssh_rc"
           fi
-          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified <<<"$result"
+          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified config_path_sha256 <<<"$result"
           test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"
           test "$lock_present" = false
           test "$process_count" = 0
@@ -386,6 +396,7 @@ jobs:
           test "$ops_pending_total" = 0
           [[ "$current_config_sha256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$live_process_verified" =~ ^(true|false)$ ]]
+          [[ "$config_path_sha256" =~ ^[0-9a-f]{64}$ ]]
           zero_sha256="$(printf '0%.0s' {1..64})"
           if [ "$program_present" = true ]; then
             test "$program_state" = RUNNING
@@ -416,7 +427,6 @@ jobs:
           DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
           DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
           DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
-          OPS_CONFIG_PATH: ${{ secrets.PRODUCTION_OPS_SUPERVISOR_CONFIG_PATH }}
           EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
           EXPECTED_RENDERED_SHA256: ${{ steps.render.outputs.rendered_sha256 }}
           EXPECTED_CURRENT_CONFIG_SHA256: ${{ inputs.expected_current_config_sha256 }}
@@ -436,9 +446,6 @@ jobs:
             test "${{ steps.preflight.outputs.current_config_sha256 }}" = "$(printf '0%.0s' {1..64})"
             test "${{ steps.preflight.outputs.live_process_verified }}" = false
           fi
-          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
-          [[ "$OPS_CONFIG_PATH" != *".."* ]]
-          test "$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')" = "$EXPECTED_CONFIG_PATH_SHA256"
           config_b64="$(base64 < "$CANDIDATE_PATH" | tr -d '\n')"
           queue_probe_php='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $conn=Illuminate\Support\Facades\DB::connection(); $conn->listen(function($query){$sql=ltrim(strtolower((string)$query->sql)); if(!str_starts_with($sql,"select")&&!str_starts_with($sql,"show")&&!str_starts_with($sql,"describe")&&!str_starts_with($sql,"explain")&&!str_starts_with($sql,"pragma")){throw new RuntimeException("write query refused");}}); echo (clone $conn->table("jobs")->where("queue","ops"))->count(),PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
           queue_probe_b64="$(printf '%s' "$queue_probe_php" | base64 | tr -d '\n')"
@@ -453,6 +460,18 @@ jobs:
           failure_gate=DEPLOY_PROCESS_QUIESCENCE
           process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {count++} $1=="composer" && $0 ~ /install/ {count++} END {print count+0}')"
           test "$process_count" -eq 0
+          failure_gate=CONFIG_DISCOVERY
+          mapfile -t config_candidates < <(
+            sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print 2>/dev/null \
+              | sort -u
+          )
+          test "${#config_candidates[@]}" -le 1
+          OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf
+          if [ "${#config_candidates[@]}" -eq 1 ]; then
+            OPS_CONFIG_PATH="${config_candidates[0]}"
+          fi
+          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" != *".."* ]]
           failure_gate=CONFIG_PATH_HASH
           test "$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')" = "$EXPECTED_CONFIG_PATH_SHA256"
           zero_sha256="$(printf '0%.0s' {1..64})"
@@ -551,7 +570,7 @@ jobs:
           set +e
           result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' OPS_CONFIG_PATH='$OPS_CONFIG_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-apply-ssh.err")"
           ssh_rc=$?
           set -e
