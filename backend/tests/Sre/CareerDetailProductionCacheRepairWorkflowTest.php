@@ -37,6 +37,26 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
     }
 
     #[Test]
+    public function same_revision_requires_a_distinct_inactive_candidate_release_path(): void
+    {
+        $source = $this->workflowSource();
+
+        $this->assertStringNotContainsString(
+            'test "$EXPECTED_ACTIVE_REVISION" != "$CANDIDATE_RELEASE_REVISION"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'The revisions may match when the candidate is a separately',
+            $source,
+        );
+        $this->assertGreaterThanOrEqual(3, substr_count($source, 'test \"\$current\" != \"\$candidate\"'));
+        $this->assertGreaterThanOrEqual(3, substr_count($source, '\$current/REVISION'));
+        $this->assertGreaterThanOrEqual(3, substr_count($source, "'\$EXPECTED_ACTIVE_REVISION'"));
+        $this->assertGreaterThanOrEqual(3, substr_count($source, '\$candidate/REVISION'));
+        $this->assertGreaterThanOrEqual(3, substr_count($source, "'\$CANDIDATE_RELEASE_REVISION'"));
+    }
+
+    #[Test]
     public function verify_only_emits_an_immutable_v2_authorization_packet(): void
     {
         $source = $this->workflowSource();
