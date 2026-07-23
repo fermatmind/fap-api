@@ -6,8 +6,8 @@
     "branch": "codex/career-jobs-index-lkg-resilience-01",
     "title": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01 stabilize legacy career jobs index",
     "depends_on": [],
-    "status": "github_checks_pending",
-    "commit_sha": "55292831c3d1048b5af5d09ba054048ee2ffbaef",
+    "status": "ready_to_merge",
+    "commit_sha": "c3d8262ea627e4a3ec87e5fa6c7b321a5c8af6ed",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3213",
     "checks": {
       "authorization": {
@@ -23,14 +23,14 @@
         "evidence": "Read-only public preflight observed directory EN 200 in about 0.23s, legacy jobs EN 200 in about 20.9s/1.26MB, and zh-CN exceeding the bounded 25s probe. Focused suites passed 37 tests/346 assertions covering successful contract compatibility, active/LKG reads, retryable cold-cache 503, 50-contender coalescing, bilingual rollback, and the 1046/10k directory gate. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, diff, and exact-path scope checks passed. A separate full ci_verify_mbti.sh was already running, so no second heavy local chain was started."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact reviewed head c3d8262ea627e4a3ec87e5fa6c7b321a5c8af6ed passed hygiene, supply-chain, content-pack-build-validate including Career 10k capacity/fault resilience, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF upload. GitHub reported CLEAN/MERGEABLE. The sole review suggestion requested a legacy v2 success fallback, which conflicts with the exact operator-approved active-to-LKG then retryable-503 contract; the rationale was recorded and the thread resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -60,9 +60,14 @@
         "at": "2026-07-23T01:04:10Z",
         "status": "github_checks_pending",
         "note": "Committed the exact eight-path PR1 scope as 55292831c3d1048b5af5d09ba054048ee2ffbaef, pushed the scoped branch, and opened PR #3213. Merge remains gated on all required GitHub checks, clean scope, mergeability, and resolved actionable review. The following commit updates only this ledger transition."
+      },
+      {
+        "at": "2026-07-23T01:13:29Z",
+        "status": "ready_to_merge",
+        "note": "All 9 GitHub checks passed on exact head c3d8262ea627e4a3ec87e5fa6c7b321a5c8af6ed and GitHub reports CLEAN/MERGEABLE. The only review thread proposed treating an unactivated legacy v2 payload as success; this was declined because it conflicts with the operator-approved active-to-LKG then CAREER_JOB_INDEX_NOT_WARM 503 contract, and the thread is resolved. This following commit changes only the PR1 ledger state before final exact-head checks rerun."
       }
     ],
-    "updated_at": "2026-07-23T01:04:10Z"
+    "updated_at": "2026-07-23T01:13:29Z"
   },
   "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01": {
     "id": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01",
