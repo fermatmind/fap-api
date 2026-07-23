@@ -336,12 +336,12 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('expected_deployed_revision:', $source);
         $this->assertStringContainsString('approved_migration:', $source);
         $this->assertStringContainsString('default: auto', $source);
-        $this->assertSame(4, substr_count($source, 'required: true'));
+        $this->assertSame(3, substr_count($source, 'required: true'));
         $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('Validate manual exact-SHA approval and staging evidence', $source);
         $this->assertStringNotContainsString("if: github.event_name == 'workflow_dispatch'", $source);
         $this->assertStringContainsString('[[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]', $source);
-        $this->assertStringContainsString('[[ ! "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]', $source);
+        $this->assertStringContainsString('staging_run_id must be numeric outside the exact-active candidate_only fast path.', $source);
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
         $this->assertStringContainsString('I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
@@ -801,16 +801,25 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
 
         foreach ([
             '- candidate_only',
+            'candidate_only accepted an empty diff for the exact-active same-SHA inactive-release fast path.',
+            'exact-active candidate_only fast path requires staging_run_id to be empty.',
+            'Exact-active candidate_only fast path requires the candidate SHA to equal expected_deployed_revision.',
+            'Exact-active candidate_only fast path requires the active SHA to remain reachable from latest main.',
             'Inactive candidate materialization requires expected_release_sha to equal latest main.',
             'Inactive candidate materialization requires exact-SHA successful staging evidence.',
             'candidate_only validated the Career reconciliation input without reading or repairing the live public cache.',
             'I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.',
+            'I explicitly approve backend exact-active inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}; same revision, distinct release path, zero activation.',
             'DEPLOY_TASK=deploy:candidate-only',
             '- name: Verify exact inactive candidate materialization',
             'backend.inactive_candidate_materialization.v1',
             'PASS_INACTIVE_CANDIDATE_MATERIALIZED',
+            'test \"\$current\" != \"\$candidate\"',
+            'test \"\$(tr -d \'\r\n\' < \"\$current/REVISION\")\" = \'$EXPECTED_DEPLOYED_REVISION\'',
+            'test \"\$(tr -d \'\r\n\' < \"\$candidate/REVISION\")\" = \'$DEPLOY_SHA\'',
             'candidate_activation: false',
             'active_pointer_changed: false',
+            'staging_evidence_waived: $exact_active_candidate_fast_path',
             'cache_write_count: 0',
             'queue_dispatch_count: 0',
             'database_write_count: 0',
