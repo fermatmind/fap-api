@@ -115,6 +115,33 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
     }
 
     #[Test]
+    public function single_target_diagnostic_is_preflight_bound_one_write_and_identity_redacted(): void
+    {
+        $source = $this->workflowSource();
+
+        $this->assertStringContainsString('- diagnose_target', $source);
+        $this->assertStringContainsString('diagnostic_target_slug:', $source);
+        $this->assertStringContainsString('diagnostic_target_locale:', $source);
+        $this->assertStringContainsString('execute_diagnostic_write:', $source);
+        $this->assertStringContainsString(
+            'production Career single-target inactive-candidate cache diagnosis with authorization preflight run ${AUTHORIZATION_PREFLIGHT_RUN_ID} coverage fingerprint ${EXPECTED_COVERAGE_FINGERPRINT_SHA256}',
+            $source,
+        );
+        $this->assertStringContainsString('FM_CAREER_MODE=diagnose_target', $source);
+        $this->assertStringContainsString('FM_CAREER_DIAGNOSTIC_WRITE=\'$diagnostic_write\'', $source);
+        $this->assertStringContainsString('artifacts/single-target-diagnostic.json', $source);
+        $this->assertStringContainsString('.target_index_sha256 | test("^[0-9a-f]{64}$")', $source);
+        $this->assertStringContainsString('and (.target? == null)', $source);
+        $this->assertStringContainsString('and (.slug? == null)', $source);
+        $this->assertStringContainsString('and (.locale? == null)', $source);
+        $this->assertStringContainsString('and (.message? == null)', $source);
+        $this->assertStringContainsString('and (.cache_key? == null)', $source);
+        $this->assertStringContainsString('and .cache_write_count == 1', $source);
+        $this->assertStringContainsString('and .queue_dispatch_count == 0', $source);
+        $this->assertStringContainsString('and .database_write_count == 0', $source);
+    }
+
+    #[Test]
     public function workflow_contains_no_deploy_publication_or_search_execution_surface(): void
     {
         $source = $this->workflowSource();
@@ -156,7 +183,6 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         }
         $this->assertStringNotContainsString('known_hosts:', $source);
         $this->assertStringNotContainsString('exception_message', $source);
-        $this->assertStringNotContainsString('target_slug', $source);
     }
 
     private function workflowSource(): string

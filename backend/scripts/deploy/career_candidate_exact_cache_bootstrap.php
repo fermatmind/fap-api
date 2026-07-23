@@ -46,6 +46,9 @@ final class CareerCandidateExactCacheBootstrapRunner
         'FM_CAREER_BATCH_SIZE',
         'FM_CAREER_OFFLINE_BUILD_BUDGET_MS',
         'FM_CAREER_RETRY_LIMIT',
+        'FM_CAREER_TARGET_SLUG',
+        'FM_CAREER_TARGET_LOCALE',
+        'FM_CAREER_DIAGNOSTIC_WRITE',
     ];
 
     /** @var list<string> */
@@ -99,9 +102,10 @@ final class CareerCandidateExactCacheBootstrapRunner
         self::assertOnlyAllowlistedInputs($environment);
 
         $mode = self::required($environment, 'FM_CAREER_MODE');
-        if (! in_array($mode, ['preflight', 'batch'], true)) {
+        if (! in_array($mode, ['preflight', 'batch', 'diagnose_target'], true)) {
             self::fail('INVALID_MODE');
         }
+        self::assertModeInputs($environment, $mode);
 
         $expectedCandidateSha = self::sha(self::required($environment, 'FM_CAREER_CANDIDATE_SHA'));
         $expectedTargets = self::integer(
@@ -180,6 +184,21 @@ final class CareerCandidateExactCacheBootstrapRunner
 
         if ($mode === 'preflight') {
             return self::preflightReceipt($expectedCandidateSha, $inspection);
+        }
+
+        if ($mode === 'diagnose_target') {
+            return self::diagnosticReceipt(
+                $expectedCandidateSha,
+                $inspection,
+                self::required($environment, 'FM_CAREER_TARGET_SLUG'),
+                self::required($environment, 'FM_CAREER_TARGET_LOCALE'),
+                self::boolean(self::required($environment, 'FM_CAREER_DIAGNOSTIC_WRITE')),
+                static fn (array $slugs): array => $conversion->buildForSubjectSlugs($slugs),
+                static fn (string $slug, string $locale, array $closure): array => $cache
+                    ->warmJobDetailPayloadForOfflineBootstrap($slug, $locale, $closure),
+                $inspect,
+                $expectedTargets,
+            );
         }
 
         $offset = self::integer(
@@ -466,6 +485,131 @@ final class CareerCandidateExactCacheBootstrapRunner
             && $offset % self::BATCH_SIZE === 0;
     }
 
+    /**
+     * @param  array<string, mixed>  $inspection
+     * @param  Closure(list<string>): array<string, array<string, mixed>>  $precompute
+     * @param  Closure(string, string, array<string, mixed>): array<string, mixed>  $warmer
+     * @param  Closure(): array<string, mixed>  $postInspect
+     * @return array<string, mixed>
+     */
+    public static function diagnosticReceipt(
+        string $candidateSha,
+        array $inspection,
+        string $slug,
+        string $locale,
+        bool $executeWrite,
+        Closure $precompute,
+        Closure $warmer,
+        Closure $postInspect,
+        int $expectedTargets,
+    ): array {
+        $target = self::diagnosticTarget($inspection, $slug, $locale, $expectedTargets);
+        $preFingerprint = self::coverageFingerprint($inspection);
+        $preCoverage = self::safeCoverage($inspection['report'] ?? []);
+        $targetHash = self::targetIndexHash($candidateSha, $target['index'], $locale, $slug);
+        if (! $executeWrite) {
+            return [
+                'contract_version' => self::CONTRACT_VERSION,
+                'mode' => 'diagnose_target',
+                'status' => 'ready',
+                'candidate_revision' => $candidateSha,
+                'target_index_sha256' => $targetHash,
+                'diagnostic_write' => false,
+                'target_classification' => $target['classification'],
+                'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
+                'cache_write_count' => 0,
+                'failure_count' => 0,
+                'failure_stage' => null,
+                'error_category' => null,
+                'build_ms' => 0.0,
+                'queue_dispatch_count' => 0,
+                'database_write_count' => 0,
+                'pre_coverage_fingerprint_sha256' => $preFingerprint,
+                'post_coverage_fingerprint_sha256' => $preFingerprint,
+                'pre_target_coverage' => $preCoverage,
+                'post_target_coverage' => $preCoverage,
+            ];
+        }
+
+        $failureStage = null;
+        $errorCategory = null;
+        $buildMs = 0.0;
+        $writes = 0;
+        try {
+            $closures = $precompute([$slug]);
+            $closure = $closures[$slug] ?? null;
+            if (! is_array($closure)) {
+                $failureStage = 'precompute_conversion_closure';
+                $errorCategory = 'unexpected';
+            } else {
+                $result = $warmer($slug, $locale, $closure);
+                $buildMs = self::safeMilliseconds($result['build_ms'] ?? 0);
+                if (($result['status'] ?? null) === 'cached') {
+                    $writes = 1;
+                } else {
+                    $failureStage = self::safeFailureStage($result['failure_stage'] ?? null);
+                    $errorCategory = self::safeErrorCategory($result['error_category'] ?? null);
+                }
+            }
+        } catch (Throwable $throwable) {
+            $failureStage = 'precompute_conversion_closure';
+            $errorCategory = self::safeThrowableCategory($throwable);
+        }
+
+        try {
+            $postInspection = $postInspect();
+            self::assertInspectionBoundary($postInspection, $expectedTargets);
+        } catch (Throwable) {
+            $postInspection = $inspection;
+            $failureStage = 'post_batch_coverage';
+            $errorCategory = 'unexpected';
+            $writes = 0;
+        }
+        $postFingerprint = self::coverageFingerprint($postInspection);
+        $preMissing = (int) ($inspection['report']['missing_pointer_count'] ?? -1);
+        $postMissing = (int) ($postInspection['report']['missing_pointer_count'] ?? -1);
+        $postTarget = self::findTarget($postInspection, $slug, $locale);
+        if (
+            $writes === 1
+            && (
+                ! is_array($postTarget)
+                || ($postTarget['repairable'] ?? true) !== false
+                || ($postTarget['classification'] ?? null) !== 'ready_active'
+                || $postMissing !== $preMissing - 1
+            )
+        ) {
+            $failureStage = 'post_batch_coverage';
+            $errorCategory = 'unexpected';
+        } elseif ($writes === 0 && $postMissing !== $preMissing) {
+            $failureStage = 'post_batch_coverage';
+            $errorCategory = 'unexpected';
+        }
+
+        $failed = $failureStage !== null || $errorCategory !== null;
+
+        return [
+            'contract_version' => self::CONTRACT_VERSION,
+            'mode' => 'diagnose_target',
+            'status' => $failed ? 'failed' : 'completed',
+            'candidate_revision' => $candidateSha,
+            'target_index_sha256' => $targetHash,
+            'diagnostic_write' => true,
+            'target_classification' => $target['classification'],
+            'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
+            'cache_write_count' => $writes,
+            'failure_count' => $failed ? 1 : 0,
+            'failure_stage' => $failed ? self::safeFailureStage($failureStage) : null,
+            'error_category' => $failed ? self::safeErrorCategory($errorCategory) : null,
+            'build_ms' => $buildMs,
+            'queue_dispatch_count' => 0,
+            'database_write_count' => 0,
+            'pre_coverage_fingerprint_sha256' => $preFingerprint,
+            'post_coverage_fingerprint_sha256' => $postFingerprint,
+            'pre_target_coverage' => $preCoverage,
+            'post_target_coverage' => self::safeCoverage($postInspection['report'] ?? []),
+        ];
+    }
+
     /** @param array<string, mixed> $inspection */
     public static function coverageFingerprint(array $inspection): string
     {
@@ -538,6 +682,27 @@ final class CareerCandidateExactCacheBootstrapRunner
     {
         if (array_diff(array_keys($environment), self::INPUT_NAMES) !== []) {
             self::fail('UNEXPECTED_INPUT');
+        }
+    }
+
+    /**
+     * @param  array<string, string>  $environment
+     */
+    public static function assertModeInputs(array $environment, string $mode): void
+    {
+        $batchInputs = ['FM_CAREER_BATCH_OFFSET', 'FM_CAREER_BATCH_SIZE'];
+        $diagnosticInputs = ['FM_CAREER_TARGET_SLUG', 'FM_CAREER_TARGET_LOCALE', 'FM_CAREER_DIAGNOSTIC_WRITE'];
+        if ($mode !== 'batch' && array_intersect($batchInputs, array_keys($environment)) !== []) {
+            self::fail('MODE_INPUT_CONFLICT');
+        }
+        if ($mode !== 'diagnose_target' && array_intersect($diagnosticInputs, array_keys($environment)) !== []) {
+            self::fail('MODE_INPUT_CONFLICT');
+        }
+        if ($mode === 'batch' && array_diff($batchInputs, array_keys($environment)) !== []) {
+            self::fail('MISSING_REQUIRED_INPUT');
+        }
+        if ($mode === 'diagnose_target' && array_diff($diagnosticInputs, array_keys($environment)) !== []) {
+            self::fail('MISSING_REQUIRED_INPUT');
         }
     }
 
@@ -678,6 +843,66 @@ final class CareerCandidateExactCacheBootstrapRunner
             $inspection['rows'] ?? [],
             static fn (mixed $row): bool => is_array($row) && ($row['repairable'] ?? false) === true,
         ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $inspection
+     * @return array{index: int, classification: string, repairable: bool}
+     */
+    private static function diagnosticTarget(array $inspection, string $slug, string $locale, int $expectedTargets): array
+    {
+        self::assertInspectionBoundary($inspection, $expectedTargets);
+        if (
+            preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $slug) !== 1
+            || ! in_array($locale, ['en', 'zh-CN'], true)
+        ) {
+            self::fail('INVALID_DIAGNOSTIC_TARGET');
+        }
+        $matches = [];
+        foreach (array_values($inspection['rows'] ?? []) as $index => $row) {
+            if (
+                is_array($row)
+                && ($row['slug'] ?? null) === $slug
+                && ($row['locale'] ?? null) === $locale
+            ) {
+                $matches[] = ['index' => $index, ...$row];
+            }
+        }
+        if (count($matches) > 1) {
+            self::fail('DUPLICATE_DIAGNOSTIC_TARGET');
+        }
+        $target = $matches[0] ?? null;
+        if (! is_array($target)) {
+            self::fail('DIAGNOSTIC_TARGET_NOT_FOUND');
+        }
+        if (($target['repairable'] ?? false) !== true || ($target['classification'] ?? null) !== 'missing_pointer') {
+            self::fail('DIAGNOSTIC_TARGET_NOT_REPAIRABLE');
+        }
+
+        return [
+            'index' => (int) $target['index'],
+            'classification' => (string) $target['classification'],
+            'repairable' => true,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $inspection
+     * @return array<string, mixed>|null
+     */
+    private static function findTarget(array $inspection, string $slug, string $locale): ?array
+    {
+        $matches = array_values(array_filter(
+            $inspection['rows'] ?? [],
+            static fn (mixed $row): bool => is_array($row)
+                && ($row['slug'] ?? null) === $slug
+                && ($row['locale'] ?? null) === $locale,
+        ));
+        if (count($matches) > 1) {
+            self::fail('DUPLICATE_DIAGNOSTIC_TARGET');
+        }
+
+        return $matches[0] ?? null;
     }
 
     /**
@@ -847,6 +1072,15 @@ final class CareerCandidateExactCacheBootstrapRunner
         }
 
         return $integer;
+    }
+
+    private static function boolean(string $value): bool
+    {
+        return match ($value) {
+            '0' => false,
+            '1' => true,
+            default => self::fail('INVALID_BOOLEAN_INPUT'),
+        };
     }
 
     /** @return array<string, float|int|string|null> */

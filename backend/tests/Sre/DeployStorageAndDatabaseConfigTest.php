@@ -578,7 +578,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
-            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="723c219801ba183310756cdfc5a10c1afdf6fd3e4137a9039978fbf50c44b8fd"',
+            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="603d5d7f1d53057903ec76baad238a818c8ecefbd0d00f0f312e01d57068de86"',
             $source
         );
         $this->assertStringContainsString(
