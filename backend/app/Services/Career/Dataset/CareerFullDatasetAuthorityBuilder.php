@@ -19,7 +19,7 @@ final class CareerFullDatasetAuthorityBuilder
 {
     public const AUTHORITY_KIND = 'career_full_dataset_authority';
 
-    public const AUTHORITY_VERSION = 'career.dataset_authority.runtime_projection_plus_legacy_342.v2';
+    public const AUTHORITY_VERSION = 'career.dataset_authority.publish_track_reconciled.v3';
 
     public const DATASET_KEY = 'career_all_342_occupations_dataset';
 
@@ -59,6 +59,7 @@ final class CareerFullDatasetAuthorityBuilder
         private readonly CareerDatasetPublicationMetadataService $publicationMetadataService,
         private readonly CareerAssetBatchManifestBuilder $batchManifestBuilder,
         private readonly FirstWaveManifestReader $firstWaveManifestReader,
+        private readonly CareerPublishTrackResolver $publishTrackResolver,
     ) {}
 
     public function build(): CareerFullDatasetAuthority
@@ -109,6 +110,7 @@ final class CareerFullDatasetAuthorityBuilder
 
                 continue;
             }
+            $runtimeProjectionItem = $runtimeDatasetItemsBySlug[$slug] ?? null;
             unset($runtimeDatasetItemsBySlug[$slug]);
 
             $releaseCohort = $this->normalizeNullableString($ledgerMember['release_cohort'] ?? null);
@@ -130,9 +132,10 @@ final class CareerFullDatasetAuthorityBuilder
             $familySlug = is_array($batchContext)
                 ? $this->normalizeNullableString($batchContext['family_slug'] ?? null)
                 : null;
-            $publishTrack = is_array($batchContext)
-                ? $this->normalizeNullableString($batchContext['publish_track'] ?? null)
-                : null;
+            $publishTrack = $this->publishTrackResolver->resolve(
+                $slug,
+                is_array($runtimeProjectionItem) ? $runtimeProjectionItem : null,
+            );
 
             if ($familySlug === null) {
                 $familySlug = $this->normalizeNullableString($familyBySlug[$slug] ?? null);

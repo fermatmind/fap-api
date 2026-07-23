@@ -36,7 +36,7 @@ final class CareerFullDatasetAuthorityBuilderTest extends TestCase
         $authority = app(CareerFullDatasetAuthorityBuilder::class)->build()->toArray();
 
         $this->assertSame('career_full_dataset_authority', $authority['authority_kind'] ?? null);
-        $this->assertSame('career.dataset_authority.runtime_projection_plus_legacy_342.v2', $authority['authority_version'] ?? null);
+        $this->assertSame('career.dataset_authority.publish_track_reconciled.v3', $authority['authority_version'] ?? null);
         $this->assertSame('career_all_342_occupations_dataset', $authority['dataset_key'] ?? null);
         $this->assertSame('career_all_342', $authority['dataset_scope'] ?? null);
         $this->assertSame('career_tracked_occupation', $authority['member_kind'] ?? null);
@@ -50,6 +50,16 @@ final class CareerFullDatasetAuthorityBuilderTest extends TestCase
         $this->assertIsArray(data_get($authority, 'summary.strong_index_decision_counts'));
         $this->assertIsArray(data_get($authority, 'facet_distributions.family'));
         $this->assertIsArray(data_get($authority, 'facet_distributions.publish_track'));
+        $unknownTrackSlugs = collect((array) ($authority['members'] ?? []))
+            ->filter(static fn (array $member): bool => ($member['publish_track'] ?? null) === null)
+            ->pluck('canonical_slug')
+            ->values()
+            ->all();
+        $this->assertSame([], $unknownTrackSlugs, json_encode($unknownTrackSlugs, JSON_THROW_ON_ERROR));
+        $this->assertSame(
+            342,
+            array_sum(array_map('intval', (array) data_get($authority, 'facet_distributions.publish_track', []))),
+        );
 
         $members = (array) ($authority['members'] ?? []);
         $this->assertCount(342, $members);

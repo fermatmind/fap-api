@@ -232,6 +232,68 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on:
+      - CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01
+    branch: codex/career-publish-track-coverage-reconcile-01
+    title: "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01 close career publish-track gaps"
+    train_scope: career_publish_track_coverage_reconcile
+    status: user_authorized
+    mode: execute
+    scope:
+      - Resolve Career publish track through one backend priority chain: current batch manifest, current first-wave authority, runtime projection, then explicit reconciliation authority.
+      - Conservatively classify computer-network-architects, computer-systems-analysts, and information-security-analysts as review_needed when no higher-priority current authority exists.
+      - Explicitly record the separate legacy-342-only database-administrators-and-architects gap as review_needed without changing the current 1046 runtime cohort.
+      - Downgrade historical first-wave classifications that conflict with current blocked authority to review_needed instead of inferring stable approval.
+      - Require every member to have a non-empty publish track and keep review_needed ineligible for the later bounded search pilot.
+      - Preserve the 1046 public detail cohort, 2092 sitemap URLs, runtime/indexability state, and held exclusions for software-developers, digital-forensics-analysts, and computer-occupations-all-other.
+    allowed_paths:
+      - backend/app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php
+      - backend/app/Services/Career/Dataset/CareerPublishTrackReconciliationReader.php
+      - backend/app/Services/Career/Dataset/CareerPublishTrackResolver.php
+      - backend/docs/career/publish_track_reconciliation.json
+      - backend/tests/Feature/Career/CareerDatasetPublicApiTest.php
+      - backend/tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php
+      - backend/tests/Unit/Services/Career/CareerPublishTrackResolverTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, public Career content, sitemap, llms, Search Channel, canonical, robots, indexability, runtime cohort, or held-slug exposure.
+      - Infer stable or candidate from historical evidence when current approval is absent or conflicted.
+      - Deploy, warm or clear production caches, mutate CMS/database state, publish, enqueue, approve, submit URLs, or call an external search provider.
+    validation:
+      - php -l backend/app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php
+      - php -l backend/app/Services/Career/Dataset/CareerPublishTrackReconciliationReader.php
+      - php -l backend/app/Services/Career/Dataset/CareerPublishTrackResolver.php
+      - php -l backend/tests/Unit/Services/Career/CareerPublishTrackResolverTest.php
+      - python3 -m json.tool backend/docs/career/publish_track_reconciliation.json >/dev/null
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Career/CareerPublishTrackResolverTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php tests/Feature/Career/CareerDatasetPublicApiTest.php tests/Feature/Console/CareerRunAssetBatchCommandTest.php tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php --no-ansi
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && vendor/bin/pint --test app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php app/Services/Career/Dataset/CareerPublishTrackReconciliationReader.php app/Services/Career/Dataset/CareerPublishTrackResolver.php tests/Feature/Career/CareerDatasetPublicApiTest.php tests/Unit/Services/Career/CareerFullDatasetAuthorityBuilderTest.php tests/Unit/Services/Career/CareerPublishTrackResolverTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_career_publish_track_reconciliation_files' --no-ansi
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG5-EN52-TRANSLATION-AUTHORITY-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api
