@@ -563,10 +563,24 @@ jobs:
           echo "mutation-limited deployed baseline verified"
 
       - name: Verify immutable standard candidate advances production before writes
+        id: standard_baseline_guard
         if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'standard' }}
         shell: bash
+        env:
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
         run: |
           set -euo pipefail
+          AUDITED_RUNTIME46_PRODUCTION_SHA="bc0ed833bc9aae1473ab37f1dead2517e1aff618"
+          AUDITED_RUNTIME46_CANDIDATE_SHA="49038deb50cda789e4365ea42068832ed28d6023"
+          AUDITED_RUNTIME46_STAGING_RUN_ID="29977064260"
+          AUDITED_RUNTIME46_PATHS=(
+            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php
+            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php
+            backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php
+            backend/app/Services/Cms/MbtiFullCmsImportService.php
+            backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json
+            backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php
+          )
           ssh_retry() {
             local attempt rc
             local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
@@ -583,6 +597,54 @@ jobs:
               sleep "$retry_delay"
             done
           }
+          verify_audited_runtime46_subsumed_baseline() {
+            local production_parent actual_diff expected_diff path production_blob candidate_blob
+            local -a production_commit
+            [ "$CURRENT_PRODUCTION_SHA" = "$AUDITED_RUNTIME46_PRODUCTION_SHA" ] || {
+              echo "Subsumed baseline refused an unreviewed production revision." >&2
+              return 1
+            }
+            [ "$DEPLOY_SHA" = "$AUDITED_RUNTIME46_CANDIDATE_SHA" ] || {
+              echo "Subsumed baseline refused a candidate outside the audited Runtime 46 release." >&2
+              return 1
+            }
+            [ "$STAGING_RUN_ID" = "$AUDITED_RUNTIME46_STAGING_RUN_ID" ] || {
+              echo "Subsumed baseline requires the exact audited successful staging run." >&2
+              return 1
+            }
+            read -r -a production_commit <<<"$(git rev-list --parents -n 1 "$CURRENT_PRODUCTION_SHA")"
+            [ "${#production_commit[@]}" -eq 2 ] || {
+              echo "Subsumed baseline requires a production commit with exactly one parent." >&2
+              return 1
+            }
+            production_parent="${production_commit[1]}"
+            git merge-base --is-ancestor "$production_parent" "$DEPLOY_SHA" || {
+              echo "Subsumed baseline requires the production parent to be an ancestor of the candidate." >&2
+              return 1
+            }
+            expected_diff="$(printf '%s\n' \
+              $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php' \
+              $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php' \
+              $'A\tbackend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php' \
+              $'M\tbackend/app/Services/Cms/MbtiFullCmsImportService.php' \
+              $'A\tbackend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json' \
+              $'A\tbackend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php')"
+            actual_diff="$(git diff --no-renames --name-status "$production_parent" "$CURRENT_PRODUCTION_SHA")"
+            [ "$actual_diff" = "$expected_diff" ] || {
+              echo "Subsumed baseline refused an unknown, deleted, renamed, or status-drifted production path." >&2
+              return 1
+            }
+            for path in "${AUDITED_RUNTIME46_PATHS[@]}"; do
+              production_blob="$(git rev-parse "${CURRENT_PRODUCTION_SHA}:${path}")" || return 1
+              candidate_blob="$(git rev-parse "${DEPLOY_SHA}:${path}")" || return 1
+              git cat-file -e "${production_blob}^{blob}" || return 1
+              git cat-file -e "${candidate_blob}^{blob}" || return 1
+              [ "$production_blob" = "$candidate_blob" ] || {
+                echo "Subsumed baseline refused Runtime 46 blob drift." >&2
+                return 1
+              }
+            done
+          }
           git fetch --no-tags origin main:refs/remotes/origin/main
           LATEST_MAIN_AT_WRITE="$(git rev-parse origin/main)"
           if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_AT_WRITE"; then
@@ -595,18 +657,30 @@ jobs:
             exit 1
           fi
           if ! git cat-file -e "${CURRENT_PRODUCTION_SHA}^{commit}"; then
-            echo "Immutable standard candidate cannot resolve the current production commit." >&2
-            exit 1
+            git fetch --no-tags origin "$CURRENT_PRODUCTION_SHA" >/dev/null 2>&1 || {
+              echo "Immutable standard candidate cannot resolve the current production commit." >&2
+              exit 1
+            }
+            git cat-file -e "${CURRENT_PRODUCTION_SHA}^{commit}" || {
+              echo "Immutable standard candidate cannot resolve the fetched production commit." >&2
+              exit 1
+            }
           fi
           if [ "$CURRENT_PRODUCTION_SHA" = "$DEPLOY_SHA" ]; then
             echo "Immutable standard candidate is already deployed; refusing a redundant production mutation." >&2
             exit 1
           fi
+          PRODUCTION_BASELINE_MODE="linear_ancestor"
           if ! git merge-base --is-ancestor "$CURRENT_PRODUCTION_SHA" "$DEPLOY_SHA"; then
-            echo "Immutable standard candidate would not advance the current production revision." >&2
-            exit 1
+            if verify_audited_runtime46_subsumed_baseline; then
+              PRODUCTION_BASELINE_MODE="runtime46_patch_subsumed"
+            else
+              echo "Immutable standard candidate would not safely advance the current production revision." >&2
+              exit 1
+            fi
           fi
-          echo "Immutable standard candidate ancestry verified without disclosing revision values."
+          echo "production_baseline_mode=$PRODUCTION_BASELINE_MODE" >> "$GITHUB_OUTPUT"
+          echo "Immutable standard candidate baseline verified without disclosing revision values."
 
       - name: Remote deploy lock guard
         shell: bash
@@ -954,6 +1028,7 @@ jobs:
         env:
           MAIN_SHA: ${{ needs.deployment-eligibility.outputs.main_sha }}
           DEPLOYED_SHA: ${{ steps.deployed_revision.outputs.deployed_sha }}
+          PRODUCTION_BASELINE_MODE: ${{ steps.standard_baseline_guard.outputs.production_baseline_mode }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main:refs/remotes/origin/main
@@ -965,6 +1040,9 @@ jobs:
             echo "- main_sha_at_eligibility: ${MAIN_SHA}"
             echo "- deployed_sha: ${DEPLOYED_SHA}"
             echo "- deploy_mode: ${DEPLOY_MODE}"
+            if [ "$DEPLOY_MODE" = "standard" ]; then
+              echo "- production_baseline_mode: ${PRODUCTION_BASELINE_MODE}"
+            fi
             if [ "$DEPLOY_MODE" = "schema_only" ]; then
               echo "- approved_migration: ${APPROVED_MIGRATION}"
             fi
