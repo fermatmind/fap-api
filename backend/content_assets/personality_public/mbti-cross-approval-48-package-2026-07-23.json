@@ -1,0 +1,995 @@
+{
+  "schema_version": "mbti.cross_type_comparison.approval.v1",
+  "id": "MBTI-CROSS-APPROVAL-48",
+  "generated_at": "2026-07-23T01:20:00+08:00",
+  "status": "pending_operator_editorial_reapproval",
+  "final_decision": "PENDING_EXACT_THREE_EDITORIAL_REAPPROVAL_AFTER_LLMS_FULL_CONTRACT_REPAIR_NO_PRODUCTION_ACTION_AUTHORIZED",
+  "summary": {
+    "record_count": 3,
+    "exact_slugs": [
+      "enfp-vs-entp",
+      "estj-vs-entj",
+      "isfp-vs-infp"
+    ],
+    "source_hash_drift_count": 3,
+    "approved_count": 0,
+    "pending_count": 3
+  },
+  "editorial_approval": {
+    "decision": "reapproval_required_after_llms_full_contract_repair",
+    "previously_approved_repaired_package_sha256": "f5a0d286168e0d6b14e376c7230915eb97e2506214a78b50190184764d6ba59f",
+    "previous_repaired_approval_statement_sha256": "d5a4bab4141839a5d617c91c162ff03782667bbabf985ce0b5c07e190013bfca",
+    "previous_operator_authorization_sha256": "9856cd386fcd22391f216f8f77a08ff4f8ccc25c164938928b72ec6c43ea891b",
+    "previously_approved_pending_package_sha256": "1c7e94b856725ee4aa4f5e50a07faf5fbba482099e52d6fb09dd5a1401866fb6",
+    "previous_approval_statement_sha256": "dce287b36b20b78a49dee9a257fb4616d3a118acf9db7e504b175162410198ae",
+    "invalidation_reason": "The content-release payload now requires keep_out_of_llms_full=true and content-phase readback explicitly requires llms_full_eligible=false in addition to llms_eligible=false; this fail-closed repair changes the package hash and requires a new exact editorial approval.",
+    "exact_slugs": [
+      "enfp-vs-entp",
+      "estj-vs-entj",
+      "isfp-vs-infp"
+    ],
+    "permits_pr_48_finalization_and_merge": false,
+    "permits_pr_49_implementation": false,
+    "production_content_write_authorized": false,
+    "publication_or_indexability_change_authorized": false,
+    "sitemap_or_llms_change_authorized": false,
+    "search_submission_authorized": false
+  },
+  "source_package": {
+    "package_id": "mbti-cross-type-comparison-content-assets-draft-20260702",
+    "source_repository": "fermatmind/fap-api",
+    "source_repository_commit": "1f78f9b2ed53d22c800c5560f12d381d17754bf3",
+    "original_manifest_path": "backend/docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702/source_manifest.json",
+    "declared_hash_drift_detected": true,
+    "provenance_policy": "Bind the exact committed snapshots and retain stale declared hashes as evidence; never silently substitute the obsolete manifest hashes."
+  },
+  "records": [
+    {
+      "approval_record_id": "mbti-cross-approval-48:enfp-vs-entp",
+      "slug": "enfp-vs-entp",
+      "locale": "zh-CN",
+      "comparison_type": "mbti_cross_type",
+      "source": {
+        "package_id": "mbti-cross-type-comparison-content-assets-draft-20260702",
+        "source_repository": "fermatmind/fap-api",
+        "source_repository_commit": "1f78f9b2ed53d22c800c5560f12d381d17754bf3",
+        "original_path": "backend/docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702/comparisons/FermatMind_ENFP_vs_ENTP_CMS_READY.json",
+        "snapshot_path": "docs/seo/personality/mbti-cross-approval-48-source-enfp-vs-entp-2026-07-02.json",
+        "raw_file_sha256": "725c9f4764040604e08d6b1a78939c5cdd5a4d642208eded6ebfafee0f99e147",
+        "stale_source_manifest_declared_sha256": "907c8d9a4b20246b9c206af96f67a5fbc00c728fab1543481cdac6b5540eb6c1",
+        "declared_hash_matches_snapshot": false
+      },
+      "content_sha256": "a7b14d279daa3d2ccaaffa9442b5254f8e6f75e1ea0d3bf7a5c08817b912af7e",
+      "candidate_payload": {
+        "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
+        "comparison_slug": "enfp-vs-entp",
+        "comparison_type": "mbti_cross_type",
+        "base_type_code": "ENFP",
+        "left_type": "ENFP",
+        "right_type": "ENTP",
+        "base_type_codes": [
+          "ENFP",
+          "ENTP"
+        ],
+        "scale_code": "MBTI",
+        "locale": "zh-CN",
+        "public_route_type": "cross-type-comparison",
+        "title": "ENFP 和 ENTP 的区别：可能性探索、价值判断与观点挑战",
+        "description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+        "seo_title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+        "seo_description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+        "summary": "ENFP 与 ENTP 都容易被新想法、新关系和新可能点燃，也都不喜欢被僵化规则过早限制。区别在于，ENFP 更常从人的动机、价值感和情绪连接判断一个方向是否值得投入；ENTP 更常从逻辑结构、机制漏洞和概念实验判断一个想法是否站得住。本文不把两者做高低排序，而是帮助用户在真实场景中区分：自己是在追问“这对人和意义有什么影响”，还是在追问“这个系统还能怎样被拆开、重组和验证”。",
+        "canonical_url": "https://fermatmind.com/zh/personality/enfp-vs-entp",
+        "sections": [
+          {
+            "id": "quick_answer",
+            "title": "快速结论：ENFP 和 ENTP 最大区别是什么",
+            "body": [
+              "ENFP 和 ENTP 最容易混淆，因为他们都外向、灵活、反应快，也都喜欢把一个普通话题推向新的可能性。两者都不太满足于按部就班，都可能在聊天、项目、学习或关系中不断提出“有没有另一种做法”。真正的差异不是一个感性、一个理性，而是他们评估可能性的中心不同：ENFP 更先看人、价值和意义，ENTP 更先看逻辑、机制和可测试性。",
+              "ENFP 的探索通常带着关系温度。他们会问：这个想法会不会让人更有生命力？这件事是否符合真实的价值？这段关系有没有被看见、被理解、被尊重？因此，ENFP 的创意常常不是冷冰冰的点子，而是把人的故事、情绪、动机和未来可能性连接起来。FermatMind 的 ENFP-A / ENFP-T 资产都强调灵感探索、真实表达与承诺边界，这也说明 ENFP 的核心不是单纯外向热闹，而是把可能性和人连接起来。",
+              "ENTP 的探索更像一套持续运行的概念实验系统。他们会问：这个观点的前提是什么？规则能不能被重写？反例在哪里？如果把机制拆开，是否会得到更好的路径？FermatMind 的 ENTP-A / ENTP-T 资产都把核心放在可能性探索、逻辑拆解和落地承诺之间的张力上。ENTP 不一定是在“吵架”，很多时候是在用挑战测试观点的稳定性。",
+              "所以，如果一个人更在意“这个方向是否真实、有意义、能不能让人被点燃”，他可能更接近 ENFP 的判断方式；如果一个人更在意“这个说法是否自洽、漏洞在哪里、能不能被改造成更聪明的系统”，他可能更接近 ENTP 的判断方式。但这仍然只是倾向，不是身份判决。具体判断还需要结合长期行为、真实反馈、Big Five 特质维度和职业兴趣等证据。"
+            ]
+          },
+          {
+            "id": "why_they_are_confused",
+            "title": "为什么 ENFP 和 ENTP 容易被混淆",
+            "body": [
+              "ENFP 和 ENTP 的外在节奏很像：都能快速接话，都容易对新鲜信息兴奋，也都可能在一场讨论里连续抛出多个角度。对于不熟悉 MBTI 的人来说，只要看到一个人点子多、话题跳跃、讨厌僵化、喜欢探索，就很容易把 ENFP 和 ENTP 放在同一个框里。事实上，这种相似来自共同的外向直觉倾向：他们都容易看到一个现象背后还能延伸出什么。",
+              "混淆还来自他们都不喜欢过早定型。ENFP 不愿意把人的未来写死，ENTP 不愿意把想法的边界写死。ENFP 会觉得一个人还有别的可能，ENTP 会觉得一个观点还有别的解法。二者都可能反对“事情只能这样”，只是反对的理由不同：ENFP 是因为那样会压缩人的真实和成长，ENTP 是因为那样会限制模型、规则和实验。",
+              "在社交中，两者也都可能显得有感染力。ENFP 的感染力常来自情绪共鸣、故事感和对人的好奇；ENTP 的感染力常来自观点碰撞、幽默反转和对规则的挑战。一个 ENFP 可能把沉闷的场面变成一段有温度的连接，一个 ENTP 可能把僵住的议题变成一场新的脑力游戏。外界看到的都是“活跃”，但背后的驱动并不一样。",
+              "因此，区分 ENFP 和 ENTP，不应只看一个人是否外向、是否话多、是否有创意。更关键的问题是：他在提出新想法时，最想保护的是人的价值和感受，还是观点的逻辑和机制？他在被反驳时，首先受影响的是关系连接和意义感，还是论证结构和规则可行性？这些问题比“谁更感性、谁更理性”准确得多。"
+            ]
+          },
+          {
+            "id": "shared_traits",
+            "title": "共同点：同样外向、灵活、好奇并喜欢新可能",
+            "body": [
+              "ENFP 和 ENTP 都很容易被“还没有发生的可能性”吸引。他们不太愿意只接受既定答案，也不喜欢把生活变成重复执行。一个新的项目、一段陌生关系、一种新的工具、一套不同的解释框架，都可能让他们迅速进入状态。这种开放性让他们在早期探索、创意启动、跨界沟通和新问题拆解中表现得很活跃。",
+              "两者也都可能对常规流程缺乏耐心。如果一件事只是为了维持形式，而不能带来新的理解、新的连接或更好的效果，他们往往会想改掉它。ENFP 可能会问：“这个流程有没有让人变得麻木？”ENTP 可能会问：“这个流程的逻辑还成立吗？”问法不同，但都说明他们很难长期忍受没有意义或没有机制价值的重复。",
+              "他们在人际中都可能显得轻快、好接近、有话题。ENFP 常通过热情、共情和真实表达拉近距离；ENTP 常通过幽默、挑战和脑力互动激活对话。两者都可能让身边人觉得“和这个人聊天不会无聊”。但这种外在活跃并不代表他们没有深度，也不代表他们不会疲惫。真正消耗他们的，往往不是互动本身，而是被迫在不真实、无趣或不允许探索的环境里消耗。",
+              "共同点之外，必须保留边界。ENFP 和 ENTP 的差异不能用来预测谁更适合某种职业、谁更有创造力或谁更擅长关系。人格类型只是观察偏好的工具。一个 ENFP 可以非常理性，一个 ENTP 也可以非常在意关系。准确的使用方式，是把类型当作复盘线索，再回到真实行为、长期反馈、能力证据和具体环境中验证。"
+            ]
+          },
+          {
+            "id": "core_difference",
+            "title": "核心差异：价值驱动的可能性 vs 逻辑驱动的实验",
+            "body": [
+              "ENFP 的可能性探索通常先经过价值感过滤。一个想法是否让人更自由、更真实、更被理解，一个项目是否让人重新看到意义，一段关系是否还有成长空间，这些问题会直接影响 ENFP 是否愿意投入。FermatMind 的 ENFP 内容资产反复强调灵感、真实表达、连接、承诺边界和反馈处理，这些都指向同一个核心：ENFP 的发散不是为了发散本身，而是为了找到更有生命力的路径。",
+              "ENTP 的可能性探索则更像概念和机制的实验。一个观点越稳定，他们越想测试它的边界；一个规则越被默认，他们越想知道它是否可以被重写。ENTP 的挑战不是单纯反叛，而是通过反问、对比、拆解和重构，让观点暴露出真正的强度。FermatMind 的 ENTP 内容资产强调逻辑拆解、快速试错、重构思路和落地承诺，这说明 ENTP 的核心不是爱争，而是用碰撞寻找更好的解释。",
+              "这也解释了两者在讨论中的差异。ENFP 可能会把一个想法拉回人的体验：“这个方案对用户、团队、关系有什么影响？”ENTP 可能会把一个想法推向机制测试：“这个方案的假设是什么？如果换个前提会怎样？”两者都在推进讨论，只是推进方向不同。ENFP 更像在问方向是否有意义，ENTP 更像在问结构是否站得住。",
+              "如果把这个差异说成 F/T 的简单二分，就会写浅。ENFP 并不是不讲逻辑，而是会把人的动机、价值和情绪证据纳入判断；ENTP 并不是不在意人，而是更习惯先测试观点和机制，再处理关系反馈。成熟的 ENFP 需要让价值感进入可执行结构，成熟的 ENTP 需要让逻辑挑战保留关系可承受度。"
+            ]
+          },
+          {
+            "id": "work_and_learning",
+            "title": "工作与学习场景差异",
+            "body": [
+              "在工作中，ENFP 通常更擅长打开人的参与感。他们适合早期创意、用户洞察、内容表达、社群沟通、品牌叙事、教育激发、跨界连接等需要把人和可能性连起来的场景。这里的“适合”不是职业结论，而是任务节奏上的倾向：当工作需要理解人的动机、重组故事、点燃参与感时，ENFP 的优势更容易被看见。",
+              "ENTP 在工作中更容易进入假设测试和机制重构。他们适合新方案探索、产品假设、策略讨论、商业模型、流程重组、问题拆解、技术或运营实验等需要挑战前提的场景。同样，这不是说 ENTP 更适合某职业，而是说明他们在任务中更容易从“这个系统还能怎样优化”切入。一个 ENTP 可能不满足于把需求照单全收，而会先检查需求背后的规则是否合理。",
+              "面对不确定任务时，ENFP 往往先问：这件事为什么值得做？谁会被影响？有没有更能激发人的讲法？ENTP 往往先问：这个问题的假设是什么？最小可测试版本是什么？如果第一条路径失败，替代方案是什么？因此，ENFP 可能先建立意义和参与动机，ENTP 可能先搭建试错框架和逻辑验证路径。",
+              "协作中，ENFP 需要注意不要把所有灵感都立刻变成承诺。太多开放可能会让团队兴奋，也可能让团队无法判断优先级。ENTP 需要注意不要把所有讨论都变成挑战。一个观点值得测试，不代表对方随时准备接受高强度反问。职业成长上，ENFP 要练习收束，ENTP 要练习承接；ENFP 要把人的可能性落成下一步，ENTP 要把概念实验变成可被团队跟进的行动边界。"
+            ]
+          },
+          {
+            "id": "communication_and_relationships",
+            "title": "沟通与关系中的差异",
+            "body": [
+              "在关系里，ENFP 更容易通过热情、好奇、共情和情绪共鸣表达连接。他们会在意对方的故事、感受、变化和未说出口的需求，也会希望关系里有真实、自由和成长。如果关系变得冷淡、机械或缺少回应，ENFP 可能会感到失去生命力，甚至开始怀疑这段关系是否仍然真实。",
+              "ENTP 的连接方式更常通过观点碰撞、幽默、共同探索和新体验展开。他们可能会用玩笑、反问或挑战来表达兴趣，因为在他们看来，能一起讨论、一起拆解、一起把一个观点推到更远，本身就是一种亲近。问题在于，对方可能把这种挑战理解成否定，尤其在对方需要情绪承认而不是思维实验时。",
+              "冲突中，ENFP 更容易关注关系是否仍然安全：对方是不是理解我？这件事有没有伤害价值和信任？ENTP 更容易关注问题是否被说清楚：你的论据是什么？这个结论为什么成立？这两种反应都可能有效，也都可能制造误会。ENFP 如果只强调感受，可能让讨论失去结构；ENTP 如果只强调逻辑，可能让对方觉得情绪被压扁。",
+              "更可执行的沟通方式是：ENFP 在表达感受时补上具体事实和请求，例如“我在意的是这件事没有被提前说清，我需要下次有明确确认”；ENTP 在挑战观点前先标注意图，例如“我不是否定你，我是在测试这个方案是否更稳”。这样，ENFP 的价值感不会变成模糊压力，ENTP 的逻辑挑战也不会变成关系攻击。"
+            ]
+          },
+          {
+            "id": "stress_and_growth",
+            "title": "压力反应与成长建议",
+            "body": [
+              "给 ENFP 的建议：观察指标：当你同时开启很多可能性时，记录哪些只是灵感，哪些已经变成对他人的承诺。练习方式：每周把新想法分成“暂存、试验、承诺”三栏，避免把热情自动升级为责任。",
+              "给 ENFP 的建议：观察指标：当别人没有立即回应你的热情时，先区分对方是不同意、没理解、没能量，还是只需要时间。复盘问题：我现在是在确认真实反馈，还是在用想象填补沉默？",
+              "给 ENFP 的建议：练习方式：把价值感翻译成行动句。不要只说“我觉得这个项目应该更有温度”，而是说“我们可以先访谈三位用户，确认他们真正卡在哪里”。",
+              "给 ENFP 的建议：复盘问题：我最想保护的是人的感受、长期意义，还是我自己对自由和变化的需求？当这三者冲突时，我能不能说出当前优先级。",
+              "给 ENTP 的建议：观察指标：一次讨论后，别人是更清楚下一步，还是只是觉得被你挑战了。练习方式：每次反问前先说明目的——“我想测试这个假设，不是反对你本人”。",
+              "给 ENTP 的建议：练习方式：为每个新想法设定最小验证动作。不要只停留在概念上，而要明确下一步谁做、用什么标准判断、多久复盘。",
+              "给 ENTP 的建议：复盘问题：我现在继续挑战，是为了找到更好的机制，还是因为讨论本身让我兴奋？如果是后者，需要确认它是否仍然服务目标。",
+              "给 ENTP 的建议：观察指标：当别人提出情绪反馈时，你是否马上把它转成论点。成长方向不是放弃逻辑，而是先承认对方体验，再讨论机制。"
+            ]
+          },
+          {
+            "id": "misconceptions",
+            "title": "常见误解",
+            "body": [
+              "误解一：ENFP 感性，ENTP 理性。更准确地说，ENFP 会把人的动机和价值纳入判断，ENTP 会优先测试逻辑和机制；两者都可以理性，也都可能被情绪影响。",
+              "误解二：ENTP 就是爱吵架。许多 ENTP 的挑战是为了测试观点，而不是为了压倒别人。真正的问题在于他们是否说明了挑战目的，是否照顾了对方承受度。",
+              "误解三：ENFP 没有逻辑。ENFP 不是不讲逻辑，而是更容易先问这件事对人、意义和关系有什么影响。成熟的 ENFP 会把价值感转化成清晰步骤。",
+              "误解四：ENFP 一定更温柔，ENTP 一定更犀利。类型只能描述倾向，不能决定一个人的礼貌、共情、教养或沟通成熟度。",
+              "误解五：P 型都没有执行力。ENFP 和 ENTP 都可能执行力很强，只是他们需要把开放探索收束成具体承诺、验证节点和复盘机制。",
+              "误解六：测出 ENFP 或 ENTP 就能决定职业。人格结果不能预测职业成功、收入、晋升或适配度。职业判断还需要结合能力证据、兴趣、工作环境、行业机会和现实反馈。",
+              "误解七：ENFP 和 ENTP 的差异只在 F/T。真正差异还包括评估问题的中心、处理反馈的方式、沟通意图和成长策略，不能只看一个字母。",
+              "误解八：类型解释可以替代真实沟通。无论是 ENFP 还是 ENTP，如果关系中出现误解，都需要回到具体行为、感受、责任和下一步，而不是用人格标签结束讨论。"
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "ENFP 和 ENTP 最大区别是什么？",
+            "answer": "最大区别在于评估可能性的中心。ENFP 更关注人的动机、价值感、情绪连接和意义；ENTP 更关注观点是否自洽、机制是否有效、规则能否被改写。两者都好奇、灵活、喜欢新可能，但判断路径不同。"
+          },
+          {
+            "question": "ENFP 和 ENTP 哪个更理性？",
+            "answer": "不能这样排序。ENTP 更常把逻辑结构放在前台，ENFP 更常把人和价值纳入判断，但这不代表 ENFP 不理性，也不代表 ENTP 没有情绪。理性表现还取决于训练、经验、压力和具体情境。"
+          },
+          {
+            "question": "ENTP 是不是更爱吵架？",
+            "answer": "不一定。ENTP 常通过挑战观点来测试逻辑，这可能被误读成争吵。成熟的 ENTP 会说明自己是在测试假设，而不是否定对方本人，并在讨论后给出可执行下一步。"
+          },
+          {
+            "question": "ENFP 是不是更容易受情绪影响？",
+            "answer": "ENFP 更容易把情绪、价值和关系信号纳入判断，但这不等于不稳定。对他们来说，情绪常是理解人和意义的重要信息。关键是把感受转成可确认的事实和请求。"
+          },
+          {
+            "question": "ENFP 和 ENTP 哪个更适合领导？",
+            "answer": "不能用类型直接判断领导力。ENFP 可能擅长激发愿景、连接人和动机；ENTP 可能擅长挑战假设、打开方案和重构机制。真正的领导表现还要看责任感、沟通、执行、经验和团队情境。"
+          },
+          {
+            "question": "工作中怎么使用 ENFP / ENTP 对比结果？",
+            "answer": "可以用它复盘自己的项目切入方式：你是先问人的意义和参与感，还是先问逻辑漏洞和机制实验？再看自己是否需要补收束、交付、沟通边界或反馈确认。"
+          },
+          {
+            "question": "关系中怎么理解 ENFP 和 ENTP 的差异？",
+            "answer": "ENFP 更需要真实回应和价值共鸣，ENTP 更容易通过观点碰撞和共同探索建立连接。误会常出现在：ENFP 觉得 ENTP 太像在挑战人，ENTP 觉得 ENFP 太快把观点讨论理解成关系信号。"
+          },
+          {
+            "question": "这个结果能不能决定职业选择？",
+            "answer": "不能。ENFP / ENTP 对比只能提供偏好线索。职业选择还需要结合 Big Five 特质、RIASEC 职业兴趣、技能证据、行业环境、工作节奏和长期复盘。"
+          }
+        ],
+        "internal_links": [
+          {
+            "label": "查看 ENFP-A 人格特点",
+            "href": "/zh/personality/enfp-a",
+            "reason": "左侧类型详情页（canonical ENFP-A 公开画像）"
+          },
+          {
+            "label": "查看 ENTP-A 人格特点",
+            "href": "/zh/personality/entp-a",
+            "reason": "右侧类型详情页（canonical ENTP-A 公开画像）"
+          },
+          {
+            "label": "做免费 16 型人格测试",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "reason": "MBTI 测试页"
+          },
+          {
+            "label": "用大五人格交叉验证特质维度",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "reason": "Big Five 交叉验证"
+          },
+          {
+            "label": "用 RIASEC 检查职业兴趣方向",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "reason": "RIASEC 职业兴趣"
+          },
+          {
+            "label": "查看 ENFP-A 与 ENFP-T 的区别",
+            "href": "/zh/personality/enfp-a-vs-enfp-t",
+            "reason": "ENFP A/T 对比"
+          },
+          {
+            "label": "查看 ENTP-A 与 ENTP-T 的区别",
+            "href": "/zh/personality/entp-a-vs-entp-t",
+            "reason": "ENTP A/T 对比"
+          }
+        ],
+        "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、关系判断或职业决定。ENFP 与 ENTP 的对比只用于自我理解和复盘：帮助用户观察自己如何探索可能性、处理反馈、表达观点、建立关系和推进创意。人格类型不是身份限制，也不能预测职业成功、收入、录取、晋升、伴侣结果或人生结局。更可靠的使用方式，是把类型结果与真实经历、能力证据、Big Five 特质、RIASEC 职业兴趣和长期反馈一起看。",
+        "source_notes": {
+          "competitor_reference_used_for_structure_only": true,
+          "copied_competitor_text": false,
+          "medical_or_career_decision_claims": false,
+          "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
+          "fermatmind_source_assets_used": [
+            "/mnt/data/enfp-a.md",
+            "/mnt/data/enfp-t.md",
+            "/mnt/data/entp-a.md",
+            "/mnt/data/entp-t.md"
+          ],
+          "source_basis_summary": [
+            "ENFP-A / ENFP-T 文本资产强调灵感探索、真实表达、关系反馈、承诺边界和可能性连接。",
+            "ENTP-A / ENTP-T 文本资产强调可能性探索、逻辑拆解、观点挑战、快速试错和落地承诺。",
+            "16P 未作为文案来源，仅作为 MBTI 内容页常见信息架构参考；未复制其句子、比喻、CTA 或品牌表达。"
+          ]
+        },
+        "review_status": "draft",
+        "publish_status": "draft",
+        "indexability_status": "pending_review",
+        "is_indexable": false
+      },
+      "expected_content_contract": {
+        "section_count": 8,
+        "section_ids": [
+          "quick_answer",
+          "why_they_are_confused",
+          "shared_traits",
+          "core_difference",
+          "work_and_learning",
+          "communication_and_relationships",
+          "stress_and_growth",
+          "misconceptions"
+        ],
+        "section_sha256": "bba4469493a1c197d40a8270e34ca46cac4c54b778639661e191373463d8675f",
+        "faq_count": 8,
+        "faq_sha256": "257150692f2307ee634ad3c3d124f0075fa5bbcc269ad293267830c041dfb88f",
+        "internal_link_count": 7,
+        "internal_links_sha256": "a7fa19d1afa2cab7c630c1e96ee3566685b95eb9d0057b422b85b420aaa4b31a"
+      },
+      "expected_seo_contract": {
+        "canonical_url": "https://fermatmind.com/zh/personality/enfp-vs-entp",
+        "seo_title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+        "seo_description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+        "content_phase_robots": "noindex,follow",
+        "indexability_phase_robots": "index,follow"
+      },
+      "initial_public_state_expectation": {
+        "api_http_status": 200,
+        "page_http_status": 200,
+        "publish_status": "draft",
+        "is_indexable": false,
+        "indexability_status": "pending_review",
+        "robots": "noindex,follow"
+      },
+      "rollback_contract": {
+        "capture_prewrite_revision_and_payload_hash": true,
+        "atomic_exact_three_required": true,
+        "rollback_all_three_on_any_write_or_readback_failure": true,
+        "restore_only_exact_slug_prewrite_state": true,
+        "preserve_publication_and_indexability_state": true,
+        "prohibit_fourth_record": true
+      },
+      "content_phase_readback_contract": {
+        "api_http_status": 200,
+        "page_http_status": 200,
+        "authority_must_be_db_or_cms": true,
+        "exact_content_sha256": "a7b14d279daa3d2ccaaffa9442b5254f8e6f75e1ea0d3bf7a5c08817b912af7e",
+        "exact_section_ids": [
+          "quick_answer",
+          "why_they_are_confused",
+          "shared_traits",
+          "core_difference",
+          "work_and_learning",
+          "communication_and_relationships",
+          "stress_and_growth",
+          "misconceptions"
+        ],
+        "exact_section_sha256": "bba4469493a1c197d40a8270e34ca46cac4c54b778639661e191373463d8675f",
+        "exact_faq_sha256": "257150692f2307ee634ad3c3d124f0075fa5bbcc269ad293267830c041dfb88f",
+        "exact_internal_links_sha256": "a7fa19d1afa2cab7c630c1e96ee3566685b95eb9d0057b422b85b420aaa4b31a",
+        "canonical_url": "https://fermatmind.com/zh/personality/enfp-vs-entp",
+        "robots": "noindex,follow",
+        "is_indexable": false,
+        "sitemap_eligible": false,
+        "llms_eligible": false,
+        "llms_full_eligible": false
+      },
+      "manual_review": {
+        "source_review_status": "draft",
+        "operator_editorial_approval": "pending_reapproval_after_llms_full_contract_repair",
+        "previously_approved_repaired_package_sha256": "f5a0d286168e0d6b14e376c7230915eb97e2506214a78b50190184764d6ba59f",
+        "previous_repaired_approval_statement_sha256": "d5a4bab4141839a5d617c91c162ff03782667bbabf985ce0b5c07e190013bfca",
+        "content_release_authorized": false,
+        "indexability_release_authorized": false
+      }
+    },
+    {
+      "approval_record_id": "mbti-cross-approval-48:estj-vs-entj",
+      "slug": "estj-vs-entj",
+      "locale": "zh-CN",
+      "comparison_type": "mbti_cross_type",
+      "source": {
+        "package_id": "mbti-cross-type-comparison-content-assets-draft-20260702",
+        "source_repository": "fermatmind/fap-api",
+        "source_repository_commit": "1f78f9b2ed53d22c800c5560f12d381d17754bf3",
+        "original_path": "backend/docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702/comparisons/FermatMind_ESTJ_vs_ENTJ_CMS_READY.json",
+        "snapshot_path": "docs/seo/personality/mbti-cross-approval-48-source-estj-vs-entj-2026-07-02.json",
+        "raw_file_sha256": "3a7febb8c31848938c63e3a76375d6b2d2b48665b6bf3cf2afdd53d0cf39fe75",
+        "stale_source_manifest_declared_sha256": "35a91214cc6c3e472b52e813cd1bb7ba2c492f1b8c2e442b2411bf68ad0428a2",
+        "declared_hash_matches_snapshot": false
+      },
+      "content_sha256": "b73514962b2d72be47c9004f2b5e5fb7572ea82f918c2a0f5a3374e15b2f36cc",
+      "candidate_payload": {
+        "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
+        "comparison_slug": "estj-vs-entj",
+        "comparison_type": "mbti_cross_type",
+        "base_type_code": "ESTJ",
+        "left_type": "ESTJ",
+        "right_type": "ENTJ",
+        "base_type_codes": [
+          "ESTJ",
+          "ENTJ"
+        ],
+        "scale_code": "MBTI",
+        "locale": "zh-CN",
+        "public_route_type": "cross-type-comparison",
+        "title": "ESTJ 和 ENTJ 的区别：执行秩序、战略重构与组织推进",
+        "description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+        "seo_title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+        "seo_description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+        "summary": "ESTJ 和 ENTJ 都常表现出明确目标、快速决策、重视效率和组织结果的倾向，因此很容易被混淆。差异不在于谁更像领导，也不在于谁更强势；更关键的是他们看待系统的入口不同。ESTJ 更常从既有规则、责任分工、流程稳定和当下执行质量出发，关注当前系统如何可靠运转；ENTJ 更常从长期目标、资源重组、战略胜率和结构升级出发，关注这个系统是否值得被重构。本文用于帮助用户复盘管理方式、协作摩擦、压力反应和成长策略，不用于判断能力、职位或职业结局。",
+        "canonical_url": "https://fermatmind.com/zh/personality/estj-vs-entj",
+        "sections": [
+          {
+            "id": "quick_answer",
+            "title": "快速结论：ESTJ 和 ENTJ 最大区别是什么",
+            "body": [
+              "ESTJ 和 ENTJ 最大区别，不是一个守旧、一个进取，也不是谁更适合管理。更准确地说，ESTJ 更容易先看现实秩序是否清楚：规则是否被执行，责任是否明确，流程是否稳定，结果是否按标准交付。ENTJ 更容易先看战略结构是否有效：目标是否足够大，资源是否被正确配置，系统是否需要被重构，当前路径是否能带来长期胜率。",
+              "两者都偏向外向思维，都倾向于把模糊问题转成可执行安排。区别在于，ESTJ 的判断常从经验、规则和已验证流程进入，ENTJ 的判断常从趋势、目标和系统杠杆进入。前者更关心“现在这套秩序怎么稳定运转”，后者更关心“这套秩序是否还值得继续存在”。",
+              "在工作中，ESTJ 往往会先问谁负责、什么时候交、标准是什么；ENTJ 往往会先问这个目标是否足够重要、资源能否重组、是否有更高效的战略路径。两种方式都能带来推进力，也都可能带来摩擦。ESTJ 的风险是把已验证流程看得太重，ENTJ 的风险是重构速度超过他人的理解和承受节奏。",
+              "因此，这篇对比页不把 ESTJ 和 ENTJ 放进高低排序。它比较的是决策依据、组织推进方式、压力下的控制倾向、关系表达方式和成长策略。用户更适合把它当作复盘工具：我是在维护必要秩序，还是在逃避重构？我是在推动战略升级，还是低估了现实流程和人的接受成本？"
+            ]
+          },
+          {
+            "id": "why_they_are_confused",
+            "title": "为什么 ESTJ 和 ENTJ 容易被混淆",
+            "body": [
+              "ESTJ 和 ENTJ 容易被混淆，是因为他们在外显行为上有很多重叠。两者都可能说话直接、行动果断、不喜欢含糊拖延，也都倾向于把讨论拉回目标、结果、责任和执行。旁人看到的往往是“这个人很有组织力、很能推动事情”，但没有进一步区分他们推动事情的依据是什么。",
+              "在团队会议里，ESTJ 和 ENTJ 都可能打断一场没有结论的讨论。ESTJ 可能是因为会议偏离了既定目标，没人确认下一步负责人；ENTJ 可能是因为会议还停在局部问题，没有回答战略方向是否正确。外部动作都像是在收束场面，内部判断逻辑却不同。",
+              "两者也都容易被贴上“强势”标签。ESTJ 的强势常来自规则和责任：既然标准已经说清楚，就不应该不断例外；ENTJ 的强势常来自战略和资源：既然目标更大，低效结构就应该被调整。前者更像在保护系统稳定，后者更像在追求系统升级。",
+              "如果只用“领导型”“执行型”“控制欲强”这类标签概括，用户很难区分两者。更有效的观察方式是看他们面对变化时的第一反应：ESTJ 多半先检查变化是否破坏秩序和责任链；ENTJ 多半先评估变化是否能提高长期效率和目标达成概率。"
+            ]
+          },
+          {
+            "id": "shared_traits",
+            "title": "共同点：同样果断、重视效率与组织结果",
+            "body": [
+              "ESTJ 和 ENTJ 的共同点，是都不太喜欢事情长时间停在模糊状态。一个目标如果没有负责人，一个方案如果没有时间表，一个讨论如果只有情绪没有结论，他们都会感到消耗。对他们来说，清晰不是形式要求，而是让资源、时间和人的努力不被浪费的基础。",
+              "两者也都更重视现实结果，而不是表面热闹。ESTJ 会追问承诺有没有兑现，规则有没有执行，流程有没有按标准跑完。ENTJ 会追问资源有没有发挥杠杆效应，策略是否真的改善局面，当前投入是否服务长期目标。这种结果导向让他们在组织中很容易承担推动角色。",
+              "在人际合作中，他们通常更喜欢直接沟通。模糊暗示、反复试探、只表达感受但不说需求，都会让他们难以判断下一步。ESTJ 可能希望对方说清责任和标准，ENTJ 可能希望对方说清目标和取舍。两者都不一定排斥情绪，只是更希望情绪能转化成可处理的信息。",
+              "共同点也意味着共同风险。他们都可能在压力下加快节奏、提高要求、减少解释，把效率放在关系体验之前。成熟的 ESTJ 和 ENTJ 都需要意识到：推动事情不只是把任务往前推，也包括让他人理解为什么这样推进、他们在其中承担什么、有哪些地方可以反馈。"
+            ]
+          },
+          {
+            "id": "core_difference",
+            "title": "核心差异：执行秩序 vs 战略重构",
+            "body": [
+              "ESTJ 的核心入口是执行秩序。他们会本能地寻找已验证的方法、明确的角色、稳定的流程和可复查的标准。一个系统如果能按规则运转，ESTJ 往往愿意持续维护和优化它。对他们来说，秩序不是束缚，而是让承诺可以被兑现、让责任不被稀释的现实工具。",
+              "ENTJ 的核心入口是战略重构。他们更容易把当前系统当作可以被重新设计的结构：如果目标更大，原来的流程就不一定值得保留；如果资源配置低效，原来的权责就应该被调整。对 ENTJ 来说，稳定本身不是目的，系统能否支持更大的结果才是重点。",
+              "这就是两者最关键的分歧。ESTJ 面对一个运转不佳的团队，可能先修流程：谁负责、标准是什么、哪里没有执行到位。ENTJ 面对同样场景，可能先问战略是否错了：这件事值得做吗，组织结构是否不适配，是否应该换目标、换资源或换打法。两者都有价值，但如果彼此不理解，就会互相觉得对方抓错重点。",
+              "在长期合作中，ESTJ 能提醒 ENTJ 不要只看未来蓝图而忽略当下系统的承重能力；ENTJ 能提醒 ESTJ 不要因为流程已经存在，就默认它仍然服务目标。好的判断通常需要两种视角同时存在：一边确认现实能不能跑稳，一边确认这套现实是否值得继续优化或重构。"
+            ]
+          },
+          {
+            "id": "work_and_learning",
+            "title": "工作与学习场景差异",
+            "body": [
+              "在工作节奏上，ESTJ 更偏向把事情拆成清楚步骤，然后稳定推进。他们喜欢明确的时间表、责任人、标准和复盘节点。比如项目延期时，ESTJ 可能先检查执行链条：哪个环节没有按时交付，哪个标准没有说清，谁需要补位。这个方式能快速恢复秩序，但如果环境正在发生结构性变化，也可能只是在旧系统里修补。",
+              "ENTJ 的节奏更偏向先确认战略方向，再重组资源。他们看到延期，不一定只问哪里没有执行，而会问项目目标是否仍然正确，资源是否被放在错误位置，是否需要砍掉低价值环节。这个方式能推动升级，但如果太快进入重构，团队成员可能还没理解为什么原流程被推翻。",
+              "面对不确定任务，ESTJ 通常希望先获得可操作框架。他们会问规则、边界、历史数据和风险清单；ENTJ 则更愿意从目标倒推结构，先建立大方向，再边推进边调整资源。学习中也类似：ESTJ 更容易通过系统课程、练习和稳定复盘累积能力；ENTJ 更容易围绕一个高价值目标快速学习必要模块，并把知识用于战略判断。",
+              "协作方式上，ESTJ 通常重视稳定配合和职责清晰。对他们来说，可靠同事是说到做到、交付可查、少制造临时混乱的人。ENTJ 更重视能力密度和战略贡献。对他们来说，可靠同事不只是完成任务，还要能发现杠杆点、提出更优路径、承担更大目标的一部分。",
+              "面对批评和绩效反馈时，ESTJ 更容易关注标准是否一致、评价是否公平、流程是否有可复查依据；ENTJ 更容易关注反馈是否揭示了战略盲区、资源误配或组织阻力。ESTJ 需要避免把反馈都理解为对规则执行的挑战，ENTJ 需要避免把反馈都理解为对战略权威的阻碍。",
+              "职业成长上，ESTJ 可以练习从“把当前事情管好”升级到“判断当前系统是否还值得这样管”；ENTJ 可以练习从“看见更大目标”回到“让现实系统稳稳承接改变”。人格类型不能决定职业方向，但能帮助用户识别自己在工作里更容易使用哪一种推进方式。"
+            ]
+          },
+          {
+            "id": "communication_and_relationships",
+            "title": "沟通与关系中的差异",
+            "body": [
+              "在关系中，ESTJ 表达在意的方式常常是负责、安排和解决问题。他们可能不会说很多柔软的话，但会记得时间、处理事项、维护家庭或团队秩序。对他们来说，稳定和可靠本身就是一种重视。问题在于，如果对方期待的是情绪回应，ESTJ 的实际支持可能会被误读成只讲道理、不懂感受。",
+              "ENTJ 表达重视的方式更常体现在规划、推动和共同成长。他们可能会为关系设定方向，提醒对方提升能力，推动双方一起解决长期问题。这些行为背后可能是投入，但如果缺少情绪确认，对方也可能感到被管理、被评估，而不是被陪伴。",
+              "冲突中，ESTJ 往往会回到规则、承诺和事实。他们会问：当初怎么说的，谁没有做到，下一步怎么补。ENTJ 则更可能回到目标、效率和系统。他们会问：这段关系或合作的核心问题是什么，继续这样是否值得，结构怎么调整才能减少重复冲突。两者都可能显得直接，但直接的来源不同。",
+              "对安全感的需求也不同。ESTJ 更需要可靠、稳定、兑现承诺和日常秩序；ENTJ 更需要方向一致、成长空间、决策尊重和战略合作。ESTJ 容易被临时变动和责任模糊消耗，ENTJ 容易被长期停滞和低效重复消耗。",
+              "可执行的沟通方式是：和 ESTJ 沟通时，尽量说清事实、责任、时间和可执行方案；和 ENTJ 沟通时，除了事实，也要说明目标、取舍和长期影响。对 ESTJ，不要只说“我感觉不舒服”，还要说明哪里需要调整；对 ENTJ，不要只说“你太强势”，可以说明哪一部分节奏太快、需要更多参与感。",
+              "两者自己也需要练习情绪翻译。ESTJ 可以在解决问题前先确认一句：“我知道这件事让你不舒服，我想先听你讲完，再一起看怎么处理。”ENTJ 可以在给建议前先确认一句：“我现在想帮你找方向，但如果你只需要我听，我可以先不分析。”这类小句子能显著降低误解。"
+            ]
+          },
+          {
+            "id": "stress_and_growth",
+            "title": "压力反应与成长建议",
+            "body": [
+              "给 ESTJ 的建议：把“规则被破坏”拆成具体问题：是标准没说清、资源不足、责任不明，还是对方态度确实有问题。观察指标是自己是否一压力大就开始重复强调纪律。",
+              "给 ESTJ 的建议：练习在要求前说明目的。比如提出流程标准时，同时说明它保护的是质量、时间、公平还是风险控制。这样能让别人更容易理解你的秩序感，而不是只感到被管。",
+              "给 ESTJ 的建议：给变化设置试运行窗口。不是每个新方案都要马上接纳，但可以规定一个小范围试点和复盘标准。复盘问题是：我反对的是变化本身，还是反对缺乏验证的变化。",
+              "给 ESTJ 的建议：让责任被分担，而不是只靠自己补位。每次想亲自接手时，先问：这件事应该由我做，还是我需要把标准、步骤和验收方式教给别人。",
+              "给 ENTJ 的建议：把重构速度和他人理解速度分开管理。你可以比别人更早看见战略问题，但仍需要把判断路径说出来。观察指标是团队是否只是服从，而不是理解。",
+              "给 ENTJ 的建议：在砍掉旧流程前，先确认它原本保护了什么。旧系统可能低效，但也可能承载了风险控制、经验记忆或关系信任。复盘问题是：我是在升级系统，还是低估了系统的隐性功能。",
+              "给 ENTJ 的建议：给反馈留入口。不要只要求别人跟上目标，也要主动问：这个目标的哪一部分让你不确定，哪一部分需要更多信息。这样可以减少战略推进中的抵触。",
+              "给 ENTJ 的建议：练习区分控制和负责。负责是明确目标、资源和边界；控制是把所有变量都收回自己手里。压力越大，越要检查自己是否正在把他人的判断空间压缩掉。"
+            ]
+          },
+          {
+            "id": "misconceptions",
+            "title": "常见误解",
+            "body": [
+              "误解一：ESTJ 比 ENTJ 更传统。更准确地说，ESTJ 更重视已验证的秩序，ENTJ 更重视系统是否能支持更大目标。传统不是 ESTJ 的本质，重构也不是 ENTJ 的全部。",
+              "误解二：ENTJ 比 ESTJ 更适合领导。人格类型不能决定领导力。ESTJ 可能擅长稳定执行和责任管理，ENTJ 可能擅长战略重构和资源配置，但实际表现取决于能力、经验、场景和反馈。",
+              "误解三：ESTJ 只会守规则。成熟的 ESTJ 并不是机械服从规则，而是理解规则如何保护结果、公平和稳定。他们也可以优化流程，只是通常需要看到明确证据。",
+              "误解四：ENTJ 只会推翻现状。成熟的 ENTJ 并不是为了变化而变化，而是会判断系统是否仍然服务目标。问题在于他们有时需要放慢速度，让别人理解重构理由。",
+              "误解五：两者都没有情绪。ESTJ 和 ENTJ 可能不把情绪作为主要决策依据，但这不等于没有情绪。他们只是更常用行动、责任和规划表达在意。",
+              "误解六：测出 ESTJ 或 ENTJ 就能决定职业。类型只能提示管理偏好和工作节奏，不能预测收入、晋升、录取、职业成功或适合行业。"
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "ESTJ 和 ENTJ 最大区别是什么？",
+            "answer": "最大区别在于组织问题的入口。ESTJ 更常从规则、经验、流程和责任出发，关注当前系统如何稳定执行；ENTJ 更常从长期目标、资源配置和战略结构出发，关注系统是否应该被重构。"
+          },
+          {
+            "question": "ESTJ 和 ENTJ 哪个更适合领导？",
+            "answer": "不能用类型判断领导力。ESTJ 可能在流程执行、责任管理和稳定运营中表现突出；ENTJ 可能在战略调整、资源调度和组织升级中更显眼。真实领导表现还取决于经验、沟通、行业和团队环境。"
+          },
+          {
+            "question": "ESTJ 会不会比 ENTJ 更守旧？",
+            "answer": "不一定。ESTJ 倾向重视已验证的方法和现实秩序，但当新方法有证据、流程和风险控制时，他们也可能稳定推动变化。把 ESTJ 简化成守旧并不准确。"
+          },
+          {
+            "question": "ENTJ 会不会比 ESTJ 更强势？",
+            "answer": "ENTJ 可能在目标和战略上推进更快，但强势程度不是类型决定的。ESTJ 也可能在规则执行上很强硬。差异更多在于强硬的来源：ESTJ 常来自责任秩序，ENTJ 常来自战略目标。"
+          },
+          {
+            "question": "工作中怎么区分自己是 ESTJ 还是 ENTJ？",
+            "answer": "观察你面对混乱时先问什么。如果你先问规则、负责人、标准和交付链条，可能更接近 ESTJ；如果你先问目标是否正确、资源是否错配、系统是否需要重构，可能更接近 ENTJ。"
+          },
+          {
+            "question": "ESTJ 和 ENTJ 在关系里有什么不同？",
+            "answer": "ESTJ 更常通过稳定、负责、守约和解决日常问题表达在意；ENTJ 更常通过规划未来、推动成长和直接反馈表达重视。两者都需要练习在解决问题前先确认对方的感受。"
+          },
+          {
+            "question": "ESTJ 和 ENTJ 哪个更容易有压力？",
+            "answer": "压力来源不同。ESTJ 更容易被规则失效、责任不清和频繁临时变化消耗；ENTJ 更容易被目标受阻、资源低效和系统停滞消耗。是否压力大还与环境、经验和情绪调节有关。"
+          },
+          {
+            "question": "这个对比能不能决定职业选择？",
+            "answer": "不能。ESTJ vs ENTJ 对比只能帮助理解管理方式和决策偏好。职业选择需要结合能力证据、RIASEC 职业兴趣、Big Five 特质、行业要求、工作环境和现实资源。"
+          }
+        ],
+        "internal_links": [
+          {
+            "label": "查看 ESTJ-A 人格特点",
+            "href": "/zh/personality/estj-a",
+            "reason": "左侧类型详情页（canonical ESTJ-A 公开画像）"
+          },
+          {
+            "label": "查看 ENTJ-A 人格特点",
+            "href": "/zh/personality/entj-a",
+            "reason": "右侧类型详情页（canonical ENTJ-A 公开画像）"
+          },
+          {
+            "label": "做免费 16 型人格测试",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "reason": "MBTI 测试页"
+          },
+          {
+            "label": "用大五人格交叉验证特质维度",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "reason": "Big Five 交叉验证"
+          },
+          {
+            "label": "用 RIASEC 检查职业兴趣方向",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "reason": "RIASEC 职业兴趣"
+          },
+          {
+            "label": "查看 ESTJ-A 与 ESTJ-T 的区别",
+            "href": "/zh/personality/estj-a-vs-estj-t",
+            "reason": "ESTJ A/T 对比"
+          },
+          {
+            "label": "查看 ENTJ-A 与 ENTJ-T 的区别",
+            "href": "/zh/personality/entj-a-vs-entj-t",
+            "reason": "ENTJ A/T 对比"
+          }
+        ],
+        "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、领导力筛选、关系判断或职业决定。ESTJ 与 ENTJ 的对比只用于帮助用户理解行为倾向、压力反应、管理方式、决策依据和成长策略。人格类型是自我理解和复盘工具，不是身份限制，也不能证明能力、收入、晋升、职业成功或关系质量。具体建议需要结合真实经历、能力证据、工作环境、长期反馈和其他测评结果共同判断。",
+        "source_notes": {
+          "competitor_reference_used_for_structure_only": true,
+          "copied_competitor_text": false,
+          "medical_or_career_decision_claims": false,
+          "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
+          "fermatmind_source_basis": [
+            "ESTJ-A/ESTJ-T FermatMind 线上人格页文本资产显示 ESTJ 主题围绕组织执行、规则责任、结果导向、稳定执行与反馈校准。",
+            "ENTJ-A/ENTJ-T FermatMind 线上人格页文本资产显示 ENTJ 主题围绕战略推进、资源协调、目标拆解、组织调整与复盘校准。"
+          ]
+        },
+        "review_status": "draft",
+        "publish_status": "draft",
+        "indexability_status": "pending_review",
+        "is_indexable": false
+      },
+      "expected_content_contract": {
+        "section_count": 8,
+        "section_ids": [
+          "quick_answer",
+          "why_they_are_confused",
+          "shared_traits",
+          "core_difference",
+          "work_and_learning",
+          "communication_and_relationships",
+          "stress_and_growth",
+          "misconceptions"
+        ],
+        "section_sha256": "21c168504e4f98e712503dfd43ce142245a1e3f27fcb28808eb164da1ad9b31c",
+        "faq_count": 8,
+        "faq_sha256": "ace1989124b561d5eaf6ecfa3e48e0298e9b8c6bd5d37d1f851608178a2e6f42",
+        "internal_link_count": 7,
+        "internal_links_sha256": "e6d92cb0d8378d23ce4390556e55cb36accec6149c059e83637778b4fcabf28e"
+      },
+      "expected_seo_contract": {
+        "canonical_url": "https://fermatmind.com/zh/personality/estj-vs-entj",
+        "seo_title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+        "seo_description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+        "content_phase_robots": "noindex,follow",
+        "indexability_phase_robots": "index,follow"
+      },
+      "initial_public_state_expectation": {
+        "api_http_status": 200,
+        "page_http_status": 200,
+        "publish_status": "draft",
+        "is_indexable": false,
+        "indexability_status": "pending_review",
+        "robots": "noindex,follow"
+      },
+      "rollback_contract": {
+        "capture_prewrite_revision_and_payload_hash": true,
+        "atomic_exact_three_required": true,
+        "rollback_all_three_on_any_write_or_readback_failure": true,
+        "restore_only_exact_slug_prewrite_state": true,
+        "preserve_publication_and_indexability_state": true,
+        "prohibit_fourth_record": true
+      },
+      "content_phase_readback_contract": {
+        "api_http_status": 200,
+        "page_http_status": 200,
+        "authority_must_be_db_or_cms": true,
+        "exact_content_sha256": "b73514962b2d72be47c9004f2b5e5fb7572ea82f918c2a0f5a3374e15b2f36cc",
+        "exact_section_ids": [
+          "quick_answer",
+          "why_they_are_confused",
+          "shared_traits",
+          "core_difference",
+          "work_and_learning",
+          "communication_and_relationships",
+          "stress_and_growth",
+          "misconceptions"
+        ],
+        "exact_section_sha256": "21c168504e4f98e712503dfd43ce142245a1e3f27fcb28808eb164da1ad9b31c",
+        "exact_faq_sha256": "ace1989124b561d5eaf6ecfa3e48e0298e9b8c6bd5d37d1f851608178a2e6f42",
+        "exact_internal_links_sha256": "e6d92cb0d8378d23ce4390556e55cb36accec6149c059e83637778b4fcabf28e",
+        "canonical_url": "https://fermatmind.com/zh/personality/estj-vs-entj",
+        "robots": "noindex,follow",
+        "is_indexable": false,
+        "sitemap_eligible": false,
+        "llms_eligible": false,
+        "llms_full_eligible": false
+      },
+      "manual_review": {
+        "source_review_status": "draft",
+        "operator_editorial_approval": "pending_reapproval_after_llms_full_contract_repair",
+        "previously_approved_repaired_package_sha256": "f5a0d286168e0d6b14e376c7230915eb97e2506214a78b50190184764d6ba59f",
+        "previous_repaired_approval_statement_sha256": "d5a4bab4141839a5d617c91c162ff03782667bbabf985ce0b5c07e190013bfca",
+        "content_release_authorized": false,
+        "indexability_release_authorized": false
+      }
+    },
+    {
+      "approval_record_id": "mbti-cross-approval-48:isfp-vs-infp",
+      "slug": "isfp-vs-infp",
+      "locale": "zh-CN",
+      "comparison_type": "mbti_cross_type",
+      "source": {
+        "package_id": "mbti-cross-type-comparison-content-assets-draft-20260702",
+        "source_repository": "fermatmind/fap-api",
+        "source_repository_commit": "1f78f9b2ed53d22c800c5560f12d381d17754bf3",
+        "original_path": "backend/docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702/comparisons/FermatMind_ISFP_vs_INFP_CMS_READY.json",
+        "snapshot_path": "docs/seo/personality/mbti-cross-approval-48-source-isfp-vs-infp-2026-07-02.json",
+        "raw_file_sha256": "3c25e03b72812921964b9efcb0391af96793c4081f54a02bbf0c33f08e591ac5",
+        "stale_source_manifest_declared_sha256": "0dc7d7852ad5c751aa9f03bb3c668590b0e8c71f418adff8b8276d8e7f0a8bea",
+        "declared_hash_matches_snapshot": false
+      },
+      "content_sha256": "41e62902dae206acc8735b19ff7e698fd51b5a609d2aeb34bb02556867399a65",
+      "candidate_payload": {
+        "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
+        "comparison_slug": "isfp-vs-infp",
+        "comparison_type": "mbti_cross_type",
+        "base_type_code": "ISFP",
+        "left_type": "ISFP",
+        "right_type": "INFP",
+        "base_type_codes": [
+          "ISFP",
+          "INFP"
+        ],
+        "scale_code": "MBTI",
+        "locale": "zh-CN",
+        "public_route_type": "cross-type-comparison",
+        "title": "ISFP 和 INFP 的区别：当下体验、内在意义与价值表达",
+        "description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+        "seo_title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+        "seo_description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+        "summary": "ISFP 和 INFP 都重视真实、自主、个人价值和不被外界粗暴定义的生活方式，但两者进入世界的入口不同。ISFP 更依靠当下体验、感官真实、具体行动和审美选择来确认什么适合自己；INFP 更依靠内在意义、价值叙事、想象世界和长期理想来解释自己。本文用于帮助用户区分两者在行动节奏、情绪复盘、创造路径、关系表达和成长策略中的差异，不用于诊断、筛选或决定职业关系。",
+        "canonical_url": "https://fermatmind.com/zh/personality/isfp-vs-infp",
+        "sections": [
+          {
+            "id": "quick_answer",
+            "title": "快速结论：ISFP 和 INFP 最大区别是什么",
+            "body": [
+              "ISFP 和 INFP 的最大区别，不是一个更艺术、一个更文学，也不是一个更现实、一个更理想。更准确地说，ISFP 更容易从具体体验进入判断：环境是否舒服，行动是否自然，关系是否让人感到真实；INFP 更容易从内在意义进入判断：这件事是否符合价值，表达是否忠于自我，选择是否仍然像自己。",
+              "两者都重视真实和个人边界。ISFP 的真实更常通过行动、审美、身体感受和生活选择显现，可能是一种穿搭、一段空间安排、一次安静陪伴，或一个“不想再勉强”的决定。INFP 的真实更常通过故事、语言、想象、价值立场和自我解释显现，他们会不断追问一个选择背后的意义。",
+              "在工作和学习中，ISFP 往往需要看见现实材料、具体反馈和可操作路径，才会真正进入状态；INFP 则更需要知道这个任务为什么值得做、它与个人价值或长期理想有什么连接。一个偏向体验落地，一个偏向意义建构，但两者都可能有创造力，也都可能在被压迫、被催促或被误解时退回内在世界。",
+              "使用这组差异时，要避免把 ISFP 写成“不思考”，也不要把 INFP 写成“不行动”。ISFP 也会有深层价值，只是常通过具体体验确认；INFP 也会行动，只是常需要先确认内在意义。人格类型只能提供复盘语言，不能替代真实经历、能力证据、职业兴趣和长期反馈。"
+            ]
+          },
+          {
+            "id": "why_they_are_confused",
+            "title": "为什么 ISFP 和 INFP 容易被混淆",
+            "body": [
+              "ISFP 和 INFP 容易被混淆，是因为两者都属于内向情感驱动明显的类型。外界经常先看到他们安静、重视个人感受、讨厌被强迫、对真实关系有高要求，于是把他们归为同一种“温柔、敏感、有审美或有理想”的人。但这种观察只停留在表层。",
+              "真正的差别要看他们如何确认一个选择。ISFP 更容易问：这件事在现实中是否舒服、自然、贴合当下？我能不能用行动、作品、身体体验或生活方式把它做出来？INFP 更容易问：这件事是否符合我的内在价值？它能否被我放进一个更大的意义结构里？它会不会让我偏离真正的自己？",
+              "在关系里，两者也都可能不喜欢强硬冲突，但沉默的含义不同。ISFP 的沉默可能是在感受环境、观察对方的真实行动，或保护自己的体验边界；INFP 的沉默可能是在整理价值冲突、回放情绪细节，或寻找一种既真实又不伤人的表达方式。只看“都不爱争”，很容易误判。",
+              "在创作和职业探索中，ISFP 可能从材料、空间、身体、色彩、手感、服务体验或真实生活片段出发；INFP 可能从主题、人物、象征、价值命题、叙事和情绪深度出发。两者都能创造，但创造的起点和验证方式不同。"
+            ]
+          },
+          {
+            "id": "shared_traits",
+            "title": "共同点：同样重视真实、自主与个人价值",
+            "body": [
+              "ISFP 和 INFP 都不太适合被强行塞进一个高度标准化、没有个人空间的环境。两者都需要保留某种自主感：可以决定自己如何表达、靠近什么样的人、用什么节奏投入一件事，以及在价值被冒犯时保留退出权。",
+              "他们也都可能对表面正确但缺乏真实感的东西保持距离。一个关系如果只有礼貌却没有真诚，一个工作如果只有流程却没有个人意义，一个环境如果总要求他们压掉感受，他们都会逐渐失去投入。区别在于，ISFP 可能先通过身体和体验感到“不对”，INFP 则可能先在内心价值层面意识到“不像我”。",
+              "两者都有柔软的一面，但柔软不等于没有边界。ISFP 的边界常体现在选择上：不再参加某个场合，不再回应某种要求，换一个更自在的环境。INFP 的边界常体现在意义判断上：这件事违背我的核心价值，我不能继续假装认同。",
+              "共同点并不意味着两者可以被同一套建议处理。对 ISFP 有用的建议往往要落到具体行动和现实反馈，对 INFP 有用的建议往往需要先承认内在价值和情绪逻辑。费马测试的对比页应帮助用户看到这种细微差别，而不是把两者都写成“敏感理想型”。"
+            ]
+          },
+          {
+            "id": "core_difference",
+            "title": "核心差异：具体体验 vs 内在意义",
+            "body": [
+              "ISFP 的判断更贴近当下体验。他们会通过具体生活来确认自己：这个空间让我放松吗，这个人的行动是否真诚，这个作品是否有质感，这个选择是否让我仍然感到自由。很多 ISFP 不一定先用语言解释价值，但他们会用选择和行动表达价值。",
+              "INFP 的判断更贴近内在意义。他们会把经历放进自我叙事里：这件事说明我在乎什么，我是否背离了自己的价值，我想成为怎样的人，这段关系是否真正理解我的内在世界。INFP 的现实行动常常需要先通过意义确认，否则他们很难长期投入。",
+              "这就是 J/P 以外更重要的差异：不是谁更有秩序，也不是谁更散漫，而是信息落点不同。ISFP 的开放更多发生在现实体验里，他们愿意通过尝试、感受和具体反馈调整方向；INFP 的开放更多发生在想象和价值结构里，他们愿意不断重新解释自己与世界的关系。",
+              "这种差异也解释了为什么两者在压力下的表现不同。ISFP 被控制、评价或剥夺自由时，可能用沉默、离开、减少回应来保护感受空间；INFP 被误解、催促或价值否定时，可能进入更长的自我解释和情绪复盘。两者都不是简单逃避，而是在用自己熟悉的方式维持真实感。"
+            ]
+          },
+          {
+            "id": "work_and_learning",
+            "title": "工作与学习场景差异",
+            "body": [
+              "在学习和工作中，ISFP 更容易被具体任务、真实体验和可见成果激活。一个设计、服务、手作、体验优化、内容表达或现场协作任务，如果能让他们看见实际效果，他们通常更容易进入状态。抽象目标如果没有现实入口，很容易让他们感到空泛。",
+              "INFP 更容易被意义、表达和价值命题激活。他们可能对写作、心理、教育、公益、内容创作、品牌叙事、咨询支持或需要理解个体经验的任务产生兴趣。但他们真正投入的前提，不是职业名字本身，而是这件事是否能承载内在价值与长期理想。",
+              "面对不确定任务时，ISFP 可能先尝试一个小动作，看现实反馈如何；INFP 可能先在脑中展开多种意义路径，判断哪个方向更真实。前者的风险是只看当下感觉，低估长期结构；后者的风险是意义推演太久，迟迟无法进入现实验证。",
+              "协作中，ISFP 通常更需要尊重个人节奏和表达方式。他们不喜欢被过度管理，也不喜欢被迫用高调语言解释自己。INFP 更需要知道团队为什么要做这件事、自己在其中的价值位置是什么，以及沟通是否保持真诚。如果只给任务不给意义，INFP 容易失去动力。",
+              "职业成长建议也应不同。ISFP 需要练习把感受判断转成可沟通的标准：我喜欢这个方案，是因为质感、效率、舒适度还是价值贴合？INFP 需要练习把价值判断转成可执行的小步：我认同这个方向，下一周可以完成什么具体动作？两者都不能只靠类型决定职业选择。"
+            ]
+          },
+          {
+            "id": "communication_and_relationships",
+            "title": "沟通与关系中的差异",
+            "body": [
+              "ISFP 在关系里常用行动表达在意。他们可能不擅长长篇解释，但会通过陪伴、审美细节、实际帮助、记住偏好和创造舒服环境来传达关心。别人如果只期待明确语言，可能会误以为他们不够投入；事实上，他们只是更相信具体行为比情绪宣言更可靠。",
+              "INFP 在关系里更重视被理解。他们需要的不只是陪伴，还包括对方愿意听见自己的内在逻辑、价值感、矛盾和想象。一个 INFP 即使外表安静，内心可能已经组织了大量关于关系的解释。如果对方只处理表面问题，而不触碰意义层，他们仍可能觉得孤独。",
+              "冲突中，ISFP 可能先撤退到感受安全的地方，等情绪和身体状态稳定后再决定是否沟通。INFP 则可能在心里反复组织语言，试图找到既不背叛自己、又不伤害对方的表达方式。两者都可能沉默，但 ISFP 的沉默更像保护体验边界，INFP 的沉默更像整理内在价值冲突。",
+              "可执行沟通建议是：和 ISFP 沟通时，少一点抽象追问，多一点具体尊重，例如“你需要空间，还是需要我调整这个安排？”和 INFP 沟通时，少一点只问结果，多一点承认意义，例如“我想理解这件事为什么对你重要。”对两者来说，清楚边界比猜测更有效。"
+            ]
+          },
+          {
+            "id": "stress_and_growth",
+            "title": "压力反应与成长建议",
+            "body": [
+              "给 ISFP 的建议：观察指标：当你感到不舒服时，先区分是环境刺激、他人控制、价值冲突，还是单纯疲惫。练习方式：把“我不想继续”写成一个具体原因，而不是只用撤退表达。复盘问题：我是在保护真实边界，还是因为不想解释而让误解继续扩大？",
+              "给 ISFP 的建议：观察指标：当你用行动照顾别人时，留意对方是否真的理解你的在意。练习方式：在行动之外补一句简短说明，例如“我这样做是因为我在意这件事”。复盘问题：我是否把所有关心都藏在行动里，导致别人无法接住？",
+              "给 ISFP 的建议：观察指标：当你选择一个创作或职业方向时，确认它是否只有当下舒服，还是也有长期承接。练习方式：给每个喜欢的方向写下三项现实条件：时间、技能、反馈来源。复盘问题：这个选择能不能支持我持续表达，而不是只满足一时自由感？",
+              "给 ISFP 的建议：观察指标：当别人评价你时，判断自己是否立刻收回表达。练习方式：把反馈分成事实、审美偏好和对方情绪。复盘问题：我是否把别人的偏好误认为自己的价值被否定？",
+              "给 INFP 的建议：观察指标：当你陷入意义复盘时，确认自己是否还在产生新信息。练习方式：给每次复盘设一个结束点，写下一个最小行动。复盘问题：我现在是在理解自己，还是在用理解拖延现实行动？",
+              "给 INFP 的建议：观察指标：当你觉得不被理解时，先区分对方没有理解、对方不同意、还是你还没有说清。练习方式：把内心复杂感受压缩成三句话：我在意什么，我受影响在哪里，我希望下一步怎么做。复盘问题：我是否期待别人自动读懂我的内在世界？",
+              "给 INFP 的建议：观察指标：当你开始一个理想项目时，看它是否有现实容器。练习方式：把一个大主题拆成一周内可完成的具体成果。复盘问题：我的理想是否已经有可以被别人看见的形状？",
+              "给 INFP 的建议：观察指标：当价值受到挑战时，判断自己是否把不同意见理解成否定人格。练习方式：把“他不理解我”改写成“他不同意这个表达 / 这个方案 / 这个时间点”。复盘问题：我能否保护价值，同时允许现实讨论存在？"
+            ]
+          },
+          {
+            "id": "misconceptions",
+            "title": "常见误解",
+            "body": [
+              "误解一：ISFP 就是艺术型，INFP 就是文学型。更准确的说法是，ISFP 更偏向用具体体验和审美行动确认真实，INFP 更偏向用内在意义和价值叙事确认真实。具体兴趣仍要看个人经验。",
+              "误解二：ISFP 不思考。ISFP 也会有深层判断，只是他们常通过感受、行动和现实选择来表达，而不是先建立长篇理论。",
+              "误解三：INFP 不行动。INFP 也可以很有行动力，只是他们通常需要先确认行动是否符合价值和意义，否则容易难以持续。",
+              "误解四：ISFP 比 INFP 更现实。ISFP 的确更贴近具体体验，但这不等于缺少理想；INFP 更关注内在意义，也不等于脱离现实。",
+              "误解五：一个人测出 ISFP 或 INFP 就能决定职业。人格类型只能提示偏好，不能替代能力、兴趣、训练、行业环境和真实反馈。",
+              "误解六：测评结果应该用来给人贴标签。更合适的用法是把它当作复盘工具，帮助用户观察自己在行动、关系、压力和选择中的反复模式。"
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "ISFP 和 INFP 最大区别是什么？",
+            "answer": "ISFP 更容易从具体体验、审美行动和现实感受进入判断；INFP 更容易从内在价值、想象世界和意义叙事进入判断。两者都重视真实和自主，但确认真实的路径不同。"
+          },
+          {
+            "question": "ISFP 和 INFP 谁更有创造力？",
+            "answer": "不能简单排序。ISFP 的创造力常落在具体体验、审美选择、空间、行动和真实生活细节中；INFP 的创造力常落在故事、象征、价值命题、文字和内在世界表达中。"
+          },
+          {
+            "question": "ISFP 是不是比 INFP 更现实？",
+            "answer": "ISFP 通常更贴近当下体验和现实反馈，但这不代表他们没有理想。INFP 更关注内在意义和长期价值，但也可以通过作品、行动和承诺进入现实。"
+          },
+          {
+            "question": "INFP 是不是比 ISFP 更敏感？",
+            "answer": "两者都可能敏感。ISFP 更容易对环境、评价、身体感受和具体体验敏感；INFP 更容易对价值冲突、误解、关系意义和自我一致性感到敏感。"
+          },
+          {
+            "question": "工作中怎么区分 ISFP 和 INFP？",
+            "answer": "可以观察他们如何进入任务。ISFP 往往需要具体材料、现实反馈和自由行动空间；INFP 往往需要理解任务意义、价值位置和表达方向。两者都需要边界和尊重。"
+          },
+          {
+            "question": "关系中怎么理解 ISFP 和 INFP 的差异？",
+            "answer": "ISFP 常通过陪伴、行动和细节表达在意；INFP 更需要价值和内心世界被理解。和 ISFP 沟通要尊重空间，和 INFP 沟通要认真听见意义。"
+          },
+          {
+            "question": "ISFP 和 INFP 会随着时间改变吗？",
+            "answer": "人格结果描述的是偏好倾向，不是固定命运。经验、环境、关系、职业训练和长期复盘都会影响一个人表达类型的方式。"
+          },
+          {
+            "question": "这个结果能不能决定职业选择？",
+            "answer": "不能。ISFP / INFP 的对比只能提供行为和偏好线索。职业选择还需要结合 RIASEC 职业兴趣、Big Five 特质维度、技能证据、现实机会和长期反馈。"
+          }
+        ],
+        "internal_links": [
+          {
+            "label": "查看 ISFP-A 人格特点",
+            "href": "/zh/personality/isfp-a",
+            "reason": "左侧类型详情页（canonical ISFP-A 公开画像）"
+          },
+          {
+            "label": "查看 INFP-A 人格特点",
+            "href": "/zh/personality/infp-a",
+            "reason": "右侧类型详情页（canonical INFP-A 公开画像）"
+          },
+          {
+            "label": "做免费 16 型人格测试",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "reason": "MBTI 测试页"
+          },
+          {
+            "label": "用大五人格交叉验证特质维度",
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "reason": "Big Five 交叉验证"
+          },
+          {
+            "label": "用 RIASEC 检查职业兴趣方向",
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "reason": "RIASEC 职业兴趣"
+          },
+          {
+            "label": "查看 ISFP-A 与 ISFP-T 的区别",
+            "href": "/zh/personality/isfp-a-vs-isfp-t",
+            "reason": "ISFP A/T 对比"
+          },
+          {
+            "label": "查看 INFP-A 与 INFP-T 的区别",
+            "href": "/zh/personality/infp-a-vs-infp-t",
+            "reason": "INFP A/T 对比"
+          }
+        ],
+        "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、关系判断或职业决定。ISFP 与 INFP 的对比只用于帮助用户理解行为倾向、价值表达、压力反应、沟通方式和成长策略。人格类型是自我理解工具，不是身份限制；任何重要选择都需要结合真实经历、能力证据、长期反馈、职业兴趣和现实环境。",
+        "source_notes": {
+          "competitor_reference_used_for_structure_only": true,
+          "copied_competitor_text": false,
+          "medical_or_career_decision_claims": false,
+          "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。"
+        },
+        "review_status": "draft",
+        "publish_status": "draft",
+        "indexability_status": "pending_review",
+        "is_indexable": false
+      },
+      "expected_content_contract": {
+        "section_count": 8,
+        "section_ids": [
+          "quick_answer",
+          "why_they_are_confused",
+          "shared_traits",
+          "core_difference",
+          "work_and_learning",
+          "communication_and_relationships",
+          "stress_and_growth",
+          "misconceptions"
+        ],
+        "section_sha256": "d2823ef24eeb178686b8530eb71cb32642e56fbb44dc6e501c7b6049b462b225",
+        "faq_count": 8,
+        "faq_sha256": "291d743ad32f33bbcba2241e3cf26b95cc609b0241d59d8dfc5509782bc47603",
+        "internal_link_count": 7,
+        "internal_links_sha256": "7e38223c858f1d033d6b545361d221020204c25dc1ed0f07599861c5169b3ee0"
+      },
+      "expected_seo_contract": {
+        "canonical_url": "https://fermatmind.com/zh/personality/isfp-vs-infp",
+        "seo_title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+        "seo_description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+        "content_phase_robots": "noindex,follow",
+        "indexability_phase_robots": "index,follow"
+      },
+      "initial_public_state_expectation": {
+        "api_http_status": 200,
+        "page_http_status": 200,
+        "publish_status": "draft",
+        "is_indexable": false,
+        "indexability_status": "pending_review",
+        "robots": "noindex,follow"
+      },
+      "rollback_contract": {
+        "capture_prewrite_revision_and_payload_hash": true,
+        "atomic_exact_three_required": true,
+        "rollback_all_three_on_any_write_or_readback_failure": true,
+        "restore_only_exact_slug_prewrite_state": true,
+        "preserve_publication_and_indexability_state": true,
+        "prohibit_fourth_record": true
+      },
+      "content_phase_readback_contract": {
+        "api_http_status": 200,
+        "page_http_status": 200,
+        "authority_must_be_db_or_cms": true,
+        "exact_content_sha256": "41e62902dae206acc8735b19ff7e698fd51b5a609d2aeb34bb02556867399a65",
+        "exact_section_ids": [
+          "quick_answer",
+          "why_they_are_confused",
+          "shared_traits",
+          "core_difference",
+          "work_and_learning",
+          "communication_and_relationships",
+          "stress_and_growth",
+          "misconceptions"
+        ],
+        "exact_section_sha256": "d2823ef24eeb178686b8530eb71cb32642e56fbb44dc6e501c7b6049b462b225",
+        "exact_faq_sha256": "291d743ad32f33bbcba2241e3cf26b95cc609b0241d59d8dfc5509782bc47603",
+        "exact_internal_links_sha256": "7e38223c858f1d033d6b545361d221020204c25dc1ed0f07599861c5169b3ee0",
+        "canonical_url": "https://fermatmind.com/zh/personality/isfp-vs-infp",
+        "robots": "noindex,follow",
+        "is_indexable": false,
+        "sitemap_eligible": false,
+        "llms_eligible": false,
+        "llms_full_eligible": false
+      },
+      "manual_review": {
+        "source_review_status": "draft",
+        "operator_editorial_approval": "pending_reapproval_after_llms_full_contract_repair",
+        "previously_approved_repaired_package_sha256": "f5a0d286168e0d6b14e376c7230915eb97e2506214a78b50190184764d6ba59f",
+        "previous_repaired_approval_statement_sha256": "d5a4bab4141839a5d617c91c162ff03782667bbabf985ce0b5c07e190013bfca",
+        "content_release_authorized": false,
+        "indexability_release_authorized": false
+      }
+    }
+  ],
+  "content_release_candidate": {
+    "payload": {
+      "schema_version": "mbti.cross_type_comparison.content_release_candidate.v1",
+      "phase": "content_revision_only",
+      "exact_slugs": [
+        "enfp-vs-entp",
+        "estj-vs-entj",
+        "isfp-vs-infp"
+      ],
+      "records": [
+        {
+          "slug": "enfp-vs-entp",
+          "content_sha256": "a7b14d279daa3d2ccaaffa9442b5254f8e6f75e1ea0d3bf7a5c08817b912af7e"
+        },
+        {
+          "slug": "estj-vs-entj",
+          "content_sha256": "b73514962b2d72be47c9004f2b5e5fb7572ea82f918c2a0f5a3374e15b2f36cc"
+        },
+        {
+          "slug": "isfp-vs-infp",
+          "content_sha256": "41e62902dae206acc8735b19ff7e698fd51b5a609d2aeb34bb02556867399a65"
+        }
+      ],
+      "invariants": {
+        "atomic_exact_three": true,
+        "keep_noindex": true,
+        "keep_out_of_sitemap": true,
+        "keep_out_of_llms": true,
+        "keep_out_of_llms_full": true,
+        "no_indexability_mutation": true
+      }
+    },
+    "payload_sha256": "0c680aeaa17fc3a022e7c78444628c8381d5584c4e4964dd4d801c79072193c6",
+    "authorization_status": "blocked_pending_editorial_reapproval_and_separate_production_content_write_authorization"
+  },
+  "indexability_release_template": {
+    "payload": {
+      "schema_version": "mbti.cross_type_comparison.indexability_release_template.v1",
+      "phase": "indexability_after_successful_content_readback_only",
+      "exact_slugs": [
+        "enfp-vs-entp",
+        "estj-vs-entj",
+        "isfp-vs-infp"
+      ],
+      "required_inputs": [
+        "exact_promoted_revision_ids",
+        "successful_content_readback_sha256",
+        "separate_operator_authorization_sha256"
+      ],
+      "allowed_mutations": [
+        "is_indexable",
+        "robots",
+        "sitemap_eligibility",
+        "llms_txt_eligibility",
+        "llms_full_eligibility"
+      ],
+      "prohibited_mutations": [
+        "content",
+        "sections",
+        "faq",
+        "canonical",
+        "any_fourth_record"
+      ],
+      "search_submission_allowed": false
+    },
+    "template_sha256": "3f3aaf4da6ff6ad4c41ba705ffecc4b8c1ff060d5f76c70142fe4ce575314dfb",
+    "authorization_status": "blocked_until_content_promotion_and_readback_pass"
+  },
+  "safety_boundary": {
+    "artifact_only": true,
+    "frontend_runtime_authority": false,
+    "production_deploy_attempted": false,
+    "cms_or_database_write_attempted": false,
+    "publication_or_indexability_mutation_attempted": false,
+    "sitemap_or_llms_mutation_attempted": false,
+    "search_submission_attempted": false,
+    "credentials_or_user_data_included": false
+  },
+  "package_sha256": "604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae"
+}

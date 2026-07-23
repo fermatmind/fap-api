@@ -99551,5 +99551,70 @@
       }
     ],
     "updated_at": "2026-07-23T04:56:23Z"
+  },
+  "MBTI-CROSS-PUBLISHER-49": {
+    "id": "MBTI-CROSS-PUBLISHER-49",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-cross-publisher-49",
+    "title": "MBTI-CROSS-PUBLISHER-49: add exact-three controlled comparison publisher",
+    "depends_on": [
+      "MBTI-CROSS-APPROVAL-48"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "MBTI-CROSS-APPROVAL-48 PR #1801 merged into fap-web main as 5ae48bdda2ccd0e63bee9ca30de395ccd8ddd26b after all seven exact-head checks passed; its post-merge focused contracts passed 22/22."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "The exact editorial authorization permits PR49 implementation only. It explicitly does not authorize production CMS/database writes, publication/indexability changes, sitemap/llms changes, or search submission; this PR performs no such external action."
+      },
+      "package_boundary": {
+        "status": "passed",
+        "evidence": "Implementation binds only package SHA 604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae, authorization SHA be4f17484334074cf2c90d57898ab80b6074093b2510a4b7b4b0432a164b4670, record_count 3, and the ordered slug set enfp-vs-entp, estj-vs-entj, isfp-vs-infp."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "PASS on latest origin/main baseline d779fe959: six PHP syntax checks; exact package/auth contract (3 ordered slugs); focused Publisher 49 plus review registry tests (20 tests, 450 assertions); scoped Pint (6 files); command auto-discovery; Composer strict validation and locked audit; YAML/JSON/whitespace checks; and full backend/scripts/ci_verify_mbti.sh including Big Five (1595 tests, 195601 assertions), Enneagram, MBTI end-to-end, personality authority (89 tests, 5853 assertions), security, migration, OpenAPI, dependency, and regression gates. Generated Big Five timestamp/hash artifacts were mechanically restored to HEAD after the passing run."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-23T05:45:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from isolated latest-origin/main worktree after Approval 48 merged. Scope is code, immutable package inputs, tests, and train metadata only; no production/staging CMS/database, publication, indexability, sitemap, llms, search, deploy, cache, or runtime read-model action is authorized or attempted."
+      },
+      {
+        "at": "2026-07-23T06:09:06Z",
+        "status": "local_validation_passed",
+        "note": "All manifest checks passed on the latest origin/main baseline. Changed files are confined to the exact PR49 allowed paths; no staging or production mutation was executed."
+      }
+    ],
+    "updated_at": "2026-07-23T06:09:06Z"
   }
 }

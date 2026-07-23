@@ -60,6 +60,67 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-CROSS-PUBLISHER-49
+    repo: fap-api
+    base: main
+    branch: codex/mbti-cross-publisher-49
+    title: "MBTI-CROSS-PUBLISHER-49: add exact-three controlled comparison publisher"
+    status: local_validation_passed
+    depends_on:
+      - MBTI-CROSS-APPROVAL-48
+    train_scope: mbti_cross_exact_three_controlled_publisher
+    scope:
+      - Bind the immutable Approval 48 package SHA 604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae and editorial authorization SHA be4f17484334074cf2c90d57898ab80b6074093b2510a4b7b4b0432a164b4670.
+      - Add a dry-run-default, exact-three, transactional content publisher for only enfp-vs-entp, estj-vs-entj, and isfp-vs-infp.
+      - Require an exact live-state precondition plus a separate production content-write authorization before any non-test write, and keep content public but noindex and outside sitemap, llms, llms-full, and search submission.
+      - Add an independent dry-run-default indexability stage that requires successful content readback plus its own exact production authorization and may change only robots/indexability/sitemap/llms eligibility.
+      - Emit machine-readable readback and rollback manifests, fail closed on package/auth/state drift, roll back partial transactions, and remain idempotent.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Content.php
+      - backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Indexability.php
+      - backend/app/Services/Cms/MbtiCrossPublisher49Package.php
+      - backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php
+      - backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php
+      - backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json
+      - backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json
+      - backend/tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute either stage against production or staging, mutate any real CMS/database row, or infer production authorization from the Approval 48 editorial approval.
+      - Change runtime public read-model selection, routes, migrations, frontend behavior, or any comparison outside the exact three-slug set.
+      - Couple content publication to indexability, sitemap, llms, or llms-full release.
+      - Submit sitemap, llms, GSC, URL Inspection, IndexNow, Baidu, or any other search/indexing request.
+      - Weaken existing publisher, review, production deploy, or Search Channel guards.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Content.php
+      - php -l backend/app/Console/Commands/PersonalityMbtiCrossPublisher49Indexability.php
+      - php -l backend/app/Services/Cms/MbtiCrossPublisher49Package.php
+      - php -l backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php
+      - php -l backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php
+      - php -l backend/tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbtiCrossPublisher49Content.php app/Console/Commands/PersonalityMbtiCrossPublisher49Indexability.php app/Services/Cms/MbtiCrossPublisher49Package.php app/Services/Cms/MbtiCrossPublisher49ContentService.php app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php tests/Feature/Console/PersonalityMbtiCrossPublisher49CommandTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01
     repo: fap-api
     base: main
