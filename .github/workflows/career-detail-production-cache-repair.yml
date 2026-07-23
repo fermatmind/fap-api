@@ -23,6 +23,10 @@ on:
         description: "Exact inactive Deployer release directory name"
         required: true
         type: string
+      staging_run_id:
+        description: "Successful exact-SHA Deploy Application staging run"
+        required: true
+        type: string
       expected_missing_pointer_count:
         description: "Exact read-only preflight missing_pointer_count (0-2092)"
         required: true
@@ -36,6 +40,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   production-cache-repair:
@@ -63,6 +68,7 @@ jobs:
           EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
           CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
           CANDIDATE_RELEASE_NAME: ${{ inputs.candidate_release_name }}
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
           EXPECTED_MISSING_POINTER_COUNT: ${{ inputs.expected_missing_pointer_count }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
         run: |
@@ -83,6 +89,7 @@ jobs:
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
           [[ "$CANDIDATE_RELEASE_REVISION" =~ ^[0-9a-f]{40}$ ]]
           [[ "$CANDIDATE_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]
           [[ "$EXPECTED_MISSING_POINTER_COUNT" =~ ^(0|[1-9][0-9]{0,3})$ ]]
           test "$EXPECTED_MISSING_POINTER_COUNT" -le "$MINIMUM_TARGETS"
 
@@ -95,7 +102,7 @@ jobs:
               ;;
             enqueue_and_wait)
               test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
-              expected_phrase="I explicitly approve production Career detail cache repair with active SHA ${EXPECTED_ACTIVE_REVISION} using inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; cache/queue-only, no CMS/DB-authority/publication/indexability/sitemap/llms/search."
+              expected_phrase="I explicitly approve production Career detail cache repair with active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets; cache/queue-only, no CMS/DB-authority/publication/indexability/sitemap/llms/search."
               if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
                 echo "operator_approval_phrase does not match the exact production cache repair authorization." >&2
                 exit 2
@@ -111,15 +118,41 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           ref: ${{ inputs.candidate_release_revision }}
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Verify checked-out candidate revision
+      - name: Verify candidate ancestry and exact staging evidence
         shell: bash
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
           CANDIDATE_RELEASE_REVISION: ${{ inputs.candidate_release_revision }}
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$CANDIDATE_RELEASE_REVISION"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          git cat-file -e "${EXPECTED_ACTIVE_REVISION}^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$CANDIDATE_RELEASE_REVISION"
+          git merge-base --is-ancestor "$CANDIDATE_RELEASE_REVISION" origin/main
+
+          run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
+          jq -e \
+            --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
+            '.name == "Deploy Application"
+             and .path == ".github/workflows/deploy.yml"
+             and (.event == "push" or .event == "workflow_dispatch")
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == $candidate_sha' \
+            <<<"$run_json" >/dev/null
+
+          jobs_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}/jobs?per_page=100")"
+          jq -e \
+            '([.jobs[] | select(.name == "Deploy checks (staging)" and .conclusion == "success")] | length) == 1
+             and ([.jobs[] | select(.name == "Deploy (staging)" and .conclusion == "success")] | length) == 1' \
+            <<<"$jobs_json" >/dev/null
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0

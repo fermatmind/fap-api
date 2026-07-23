@@ -29,9 +29,16 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
 
         $this->assertStringContainsString('environment: production', $source);
         $this->assertStringContainsString('group: deploy-${{ github.repository }}-production', $source);
+        $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('test "$GITHUB_REF" = "refs/heads/main"', $source);
         $this->assertStringContainsString('ref: ${{ inputs.candidate_release_revision }}', $source);
         $this->assertStringContainsString('test "$(git rev-parse HEAD)" = "$CANDIDATE_RELEASE_REVISION"', $source);
+        $this->assertStringContainsString('git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$CANDIDATE_RELEASE_REVISION"', $source);
+        $this->assertStringContainsString('git merge-base --is-ancestor "$CANDIDATE_RELEASE_REVISION" origin/main', $source);
+        $this->assertStringContainsString('actions/runs/${STAGING_RUN_ID}', $source);
+        $this->assertStringContainsString('.head_sha == $candidate_sha', $source);
+        $this->assertStringContainsString('Deploy checks (staging)', $source);
+        $this->assertStringContainsString('Deploy (staging)', $source);
         $this->assertStringContainsString('test \"\$current\" != \"\$candidate\"', $source);
         $this->assertStringContainsString("test ! -e '\$DEPLOY_PATH/.dep/deploy.lock'", $source);
         $this->assertStringNotContainsString('/var/www/fap-api-staging', $source);

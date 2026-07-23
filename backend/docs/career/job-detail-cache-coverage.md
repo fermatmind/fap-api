@@ -62,17 +62,19 @@ It supports:
 
 - `verify_only`, which performs no cache or queue write;
 - `enqueue_and_wait`, which requires an exact approval phrase bound to the active
-  SHA, inactive candidate SHA and release, and expected preflight missing-pointer
-  count;
+  SHA, exact-SHA successful staging run, inactive candidate SHA and release, and
+  expected preflight missing-pointer count;
 - stable batches of at most 250 targets across the full 2,092-target cohort;
 - final read-only verification requiring 2,092 covered targets, zero missing or
   broken targets, and coverage ratio 1.0.
 
 The workflow uses the same production concurrency group as deployment, verifies
-that no deploy lock exists, and runs the repair command from the exact inactive
-candidate release. It writes only cache repair cursors, queue rows, and versioned
-Career detail cache payloads/pointers. It does not mutate CMS/database authority,
-publication, indexability, sitemap, llms, or Search Channel state.
+that the candidate advances the active revision, remains reachable from current
+`main`, has an exact successful staging run, and has no deploy lock before it
+runs the repair command from the inactive candidate release. It writes only cache
+repair cursors, queue rows, and versioned Career detail cache payloads/pointers.
+It does not mutate CMS/database authority, publication, indexability, sitemap,
+llms, or Search Channel state.
 
 The workflow does not weaken or bypass the read-only deploy activation gate.
 After a successful repair receipt, a standard deploy must still rerun the normal
