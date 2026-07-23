@@ -179,11 +179,20 @@ jobs:
                 echo "code-only scope classification cannot resolve expected_deployed_revision." >&2
                 exit 1
               fi
+              CLASSIFICATION_BASE="$EXPECTED_DEPLOYED_REVISION"
               if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then
-                echo "code-only scope classification requires expected_deployed_revision to be an ancestor of expected_release_sha." >&2
-                exit 1
+                AUDITED_RUNTIME46_PRODUCTION_SHA="bc0ed833bc9aae1473ab37f1dead2517e1aff618"
+                AUDITED_RUNTIME46_BRIDGE_SHA="49038deb50cda789e4365ea42068832ed28d6023"
+                if [ "$EXPECTED_DEPLOYED_REVISION" != "$AUDITED_RUNTIME46_PRODUCTION_SHA" ] \
+                  || ! git merge-base --is-ancestor "$AUDITED_RUNTIME46_BRIDGE_SHA" "$DEPLOY_SHA"; then
+                  echo "code-only scope classification requires a linear deployed revision or the exact audited Runtime 46 subsumed baseline." >&2
+                  exit 1
+                fi
+                CLASSIFICATION_BASE="$(git rev-parse "${EXPECTED_DEPLOYED_REVISION}^")"
+                test "$CLASSIFICATION_BASE" = "781d1636b2c74f5852076a5864b681910a1e0e47"
+                echo "code-only scope classification accepted the exact audited Runtime 46 subsumed baseline."
               fi
-              mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA")
+              mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "$CLASSIFICATION_BASE" "$DEPLOY_SHA")
               if [ "${#CHANGED_FILES[@]}" -eq 0 ]; then
                 echo "code-only scope classification refused an empty deployed-revision diff." >&2
                 exit 1
@@ -211,6 +220,9 @@ jobs:
                     ;;
                   .github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|backend/app/Models/DailyGivingRecord.php|backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php|backend/docs/career/README.md|backend/docs/career/career-detail-stability-train-2026-07-18.md|backend/docs/career/job-detail-cache-coverage.md|backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json|backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md|docs/ops/big-five-en52-release.md|docs/ops/big-five-legacy-alias-hard-purge.md)
                     echo "code-only scope accepted exact audited Root5 runtime or inert evidence path: $path"
+                    ;;
+                  .github/workflows/career-detail-production-cache-repair.yml|backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php|backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php|backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php|backend/app/Services/Cms/MbtiCrossPublisher49Package.php|backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json|backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json|docs/04-ops/deploy-incident-runbook.md|docs/seo/career-jobs-index-lkg-resilience-01.md|docs/seo/career-pilot-review-evidence-bridge-01.md)
+                    echo "code-only scope accepted exact audited subsumed runtime or inert authority input path: $path"
                     ;;
                   backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php|backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php|backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php|backend/app/Services/Cms/MbtiFullCmsImportService.php|backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json|backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)
                     echo "code-only scope accepted exact isolated Runtime 46 path: $path"

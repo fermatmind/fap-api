@@ -260,25 +260,42 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $workflow = $this->workflow();
         $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
         $runtimeExceptions = 'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)';
+        $subsumedRuntimeExceptions = '.github/workflows/career-detail-production-cache-repair.yml|backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php|backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php|backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php|backend/app/Services/Cms/MbtiCrossPublisher49Package.php|backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json|backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json|docs/04-ops/deploy-incident-runbook.md|docs/seo/career-jobs-index-lkg-resilience-01.md|docs/seo/career-pilot-review-evidence-bridge-01.md)';
         $nonRuntimeExceptions = 'backend/.env.example|backend/scripts/pr71_verify.sh)';
         $releaseSupportExceptions = '.github/workflows/backend-production-verify-only.yml|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)';
         $cmsAuthorityWildcard = 'backend/app/Services/Cms/*';
 
         $runtimeExceptionsPosition = strpos($eligibility, $runtimeExceptions);
+        $subsumedRuntimeExceptionsPosition = strpos($eligibility, $subsumedRuntimeExceptions);
         $nonRuntimeExceptionsPosition = strpos($eligibility, $nonRuntimeExceptions);
         $releaseSupportExceptionsPosition = strpos($eligibility, $releaseSupportExceptions);
         $cmsAuthorityWildcardPosition = strpos($eligibility, $cmsAuthorityWildcard);
 
         $this->assertNotFalse($runtimeExceptionsPosition);
+        $this->assertNotFalse($subsumedRuntimeExceptionsPosition);
         $this->assertNotFalse($nonRuntimeExceptionsPosition);
         $this->assertNotFalse($releaseSupportExceptionsPosition);
         $this->assertNotFalse($cmsAuthorityWildcardPosition);
         $this->assertLessThan($cmsAuthorityWildcardPosition, $runtimeExceptionsPosition);
+        $this->assertLessThan($cmsAuthorityWildcardPosition, $subsumedRuntimeExceptionsPosition);
+        $this->assertStringNotContainsString(
+            'backend/docs/career/publish_track_reconciliation.json|',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope classification accepted the exact audited Runtime 46 subsumed baseline.',
+            $eligibility
+        );
         $this->assertSame(1, substr_count($eligibility, $runtimeExceptions));
+        $this->assertSame(1, substr_count($eligibility, $subsumedRuntimeExceptions));
         $this->assertSame(1, substr_count($eligibility, $nonRuntimeExceptions));
         $this->assertSame(1, substr_count($eligibility, $releaseSupportExceptions));
         $this->assertStringContainsString(
             'code-only scope accepted audited personality runtime projection service: $path',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope accepted exact audited subsumed runtime or inert authority input path: $path',
             $eligibility
         );
         $this->assertStringContainsString(
