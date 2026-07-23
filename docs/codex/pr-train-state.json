@@ -99102,8 +99102,8 @@
     "branch": "codex/saep-proposed-api-root5-no-mutation-deploy-path-01",
     "title": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01: admit audited cumulative code-only paths",
     "depends_on": [],
-    "status": "github_checks_pending",
-    "commit_sha": "15e0e30b492e7399960150121ae7bc0b6100e351",
+    "status": "ready_to_merge",
+    "commit_sha": "3d187963f2908129b8f1420ae12f1083734b6920",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3210",
     "checks": {
       "authorization": {
@@ -99119,14 +99119,14 @@
         "evidence": "Initial and all review-fix validation passes succeeded. Focused deploy storage/database config suite now passes 19 tests / 341 assertions; exact cumulative classifier simulation accepted 245 changed paths with 0 refusals; scoped Pint, YAML, JSON and git diff checks passed; bash backend/scripts/ci_verify_mbti.sh exited 0 after the external staging-workflow receipt and supervisor-only ops-worker requirements, including the 1,585-test / 195,520-assertion Big Five suite and all subsequent MBTI, security, migration, OpenAPI and dependency gates. One incorrect Pint executable path and one root-level HTTP-smoke script invocation failed harmlessly before their correct commands passed; neither performed an external mutation."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "All required CI and Code Scanning checks passed on prior exact head 8ab9c0afee10ed003fb64f6bcdc0a85121831d4d. After rebasing onto origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f, exact implementation head 15e0e30b492e7399960150121ae7bc0b6100e351 and the following amended ledger-only pointer commit must rerun the same checks before merge."
+        "status": "passed",
+        "evidence": "All 9 required CI and Code Scanning checks passed on exact reviewed PR head 3d187963f2908129b8f1420ae12f1083734b6920 after the final rebase onto origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f. The following commit changes only this ledger pointer and ready-to-merge evidence and must rerun the same required checks before merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99200,8 +99200,13 @@
         "at": "2026-07-23T01:28:50Z",
         "status": "github_checks_pending",
         "note": "External Career PR #3213 advanced origin/main to 31819becfcf8bda0b3fd9ae4f301b011e031374f immediately after the prior exact-head review. The branch was rebased again; the manifest conflict retained both main's Career item and this task's isolated item, while the state merge preserved both ledgers. Scope remains the same five paths, and exact-head checks must restart. No deployment or external mutation was executed."
+      },
+      {
+        "at": "2026-07-23T01:38:21Z",
+        "status": "ready_to_merge",
+        "note": "All 9 required CI and Code Scanning checks passed on exact reviewed head 3d187963f2908129b8f1420ae12f1083734b6920, which GitHub reports mergeable against unchanged origin/main 31819becfcf8bda0b3fd9ae4f301b011e031374f. The implementation review findings are resolved; the two remaining P2 threads request this exact reviewed-head ledger pointer and will be resolved after this ledger-only commit. Merge remains gated on the ledger-only head rerunning every required check with zero unresolved threads. No deployment, restart, SSH, repository-variable change, CMS/database/cache/Search or other external mutation was executed."
       }
     ],
-    "updated_at": "2026-07-23T01:28:50Z"
+    "updated_at": "2026-07-23T01:38:21Z"
   }
 }
