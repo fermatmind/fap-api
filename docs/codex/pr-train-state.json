@@ -99451,7 +99451,7 @@
     "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
     "depends_on": [],
     "status": "github_checks_pending",
-    "commit_sha": "4487b1da71721d7b6dbe4611f52e8e948fe422d3",
+    "commit_sha": "8c1955ad32bd6a5b156b34a35ac5226f69f09faa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
     "checks": {
       "authorization": {
@@ -99468,7 +99468,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "All 9 checks passed on af493a00c3409a0ece619dda03ee0716d7520773, after which exact-head review identified the symmetric raw tokenized-source normalization gap. The same-scope repair is committed as 4487b1da71721d7b6dbe4611f52e8e948fe422d3 with 18-test/345-assertion focused validation and must rerun all required checks."
+        "evidence": "All 9 checks passed on 0a3aac68ce2a036a0dc75a9efb1231b9a45f89af, after which exact-head review identified that safe *_path fields could mask unsafe sibling *_url fields. The same-scope repair is committed as 8c1955ad32bd6a5b156b34a35ac5226f69f09faa with 18-test/345-assertion focused validation and must rerun all required checks."
       }
     },
     "scope_validation": {
@@ -99528,8 +99528,13 @@
         "at": "2026-07-23T04:16:24Z",
         "status": "github_checks_pending",
         "note": "Exact-head review found the symmetric raw source normalization path could preserve a tokenized source edge in snapshot data. Repair 4487b1da71721d7b6dbe4611f52e8e948fe422d3 now validates raw edge sources before normalization in both bounded and unbounded selection, suppresses sensitive values, and proves no token output plus zero revisions. Focused validation passes 18 tests/345 assertions with syntax and scoped Pint green; required checks are pending."
+      },
+      {
+        "at": "2026-07-23T04:25:56Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review found that selecting *_path with null coalescing could mask an unsafe sibling *_url field. Repair 8c1955ad32bd6a5b156b34a35ac5226f69f09faa validates every supplied source/target path and URL before normalization and requires all bounded fields to normalize to the exact canonical source/target. The safe-path-plus-tokenized-URL regressions pass with no token output and zero revisions; focused validation remains 18 tests/345 assertions with syntax and scoped Pint green."
       }
     ],
-    "updated_at": "2026-07-23T04:16:24Z"
+    "updated_at": "2026-07-23T04:25:56Z"
   }
 }
