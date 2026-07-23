@@ -35,9 +35,12 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'and .convergence_required == true',
             '(.program_present == true',
             'and .program_state == "RUNNING"',
+            'and (.worker_runtime_state == "CURRENT"',
+            'or .worker_runtime_state == "STALE_MANAGED_RELEASE")',
             'and .live_process_verified == true)',
             '(.program_present == false',
             'and .program_state == "MISSING"',
+            'and .worker_runtime_state == "MISSING"',
             'test "$lock_present" = false',
             'test "$process_count" = 0',
             'test "$ops_pending_total" = 0',
@@ -47,8 +50,16 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"',
             'test "$current_config_sha256" != "$zero_sha256"',
             '[ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true',
+            '[ "$worker_runtime_state" != CURRENT ] && convergence_required=true',
             'test "$(ps -o user= -p "$worker_pid" | awk \'{$1=$1; print}\')" = www-data',
-            'test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$current")"',
+            'worker_cwd="$(readlink -f "/proc/$worker_pid/cwd")"',
+            'releases_root="$(readlink -f "$DEPLOY_PATH/releases")"',
+            'worker_release_name="${worker_release#"$releases_root"/}"',
+            '[[ "$worker_release_name" =~ ^[A-Za-z0-9._-]{1,128}$ ]]',
+            'test "$worker_release" = "$releases_root/$worker_release_name"',
+            '[[ "$worker_revision" =~ ^[0-9a-f]{40}$ ]]',
+            'worker_runtime_state=STALE_MANAGED_RELEASE',
+            '[[ "$worker_runtime_state" =~ ^(CURRENT|STALE_MANAGED_RELEASE|MISSING)$ ]]',
             'pid fap-queue-ops:fap-queue-ops_00',
             'actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk \'{print $1}\')"',
             'process_epoch=$((boot_epoch + start_ticks / clock_ticks))',
@@ -68,6 +79,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'convergence_required: $convergence_required',
             'backup_config_sha256: $backup_config_sha256',
             'live_process_verified: $live_process_verified',
+            'worker_runtime_state: $worker_runtime_state',
             'APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}',
             'live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"',
             'live_process_verified=true',
@@ -121,6 +133,14 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         );
         $this->assertStringNotContainsString(
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
+            $workflow,
+        );
+        $this->assertStringNotContainsString(
+            'echo "$worker_cwd"',
+            $workflow,
+        );
+        $this->assertStringNotContainsString(
+            'worker_revision: $worker_revision',
             $workflow,
         );
         $this->assertSame(2, substr_count($workflow, 'pid fap-queue-ops:fap-queue-ops_00'));

@@ -171,10 +171,13 @@ jobs:
                  and (
                    (.program_present == true
                     and .program_state == "RUNNING"
+                    and (.worker_runtime_state == "CURRENT"
+                         or .worker_runtime_state == "STALE_MANAGED_RELEASE")
                     and .live_process_verified == true)
                    or
                    (.program_present == false
                     and .program_state == "MISSING"
+                    and .worker_runtime_state == "MISSING"
                     and .current_config_sha256 == "0000000000000000000000000000000000000000000000000000000000000000"
                     and .live_process_verified == false)
                  )
@@ -293,6 +296,7 @@ jobs:
           status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
           program_present=false
           program_state=MISSING
+          worker_runtime_state=MISSING
           live_process_verified=false
           if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1} END {exit !found}' <<<"$status_lines"; then
             program_present=true
@@ -332,7 +336,28 @@ jobs:
             failure_gate=RUN_AS_USER
             test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
             failure_gate=WORKING_DIRECTORY
-            test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$current")"
+            worker_cwd="$(readlink -f "/proc/$worker_pid/cwd")"
+            current_cwd="$(readlink -f "$current")"
+            if [ "$worker_cwd" = "$current_cwd" ]; then
+              worker_runtime_state=CURRENT
+            else
+              releases_root="$(readlink -f "$DEPLOY_PATH/releases")"
+              case "$worker_cwd" in
+                "$releases_root"/*/backend)
+                  worker_release="${worker_cwd%/backend}"
+                  worker_release_name="${worker_release#"$releases_root"/}"
+                  [[ "$worker_release_name" =~ ^[A-Za-z0-9._-]{1,128}$ ]]
+                  test "$worker_release" = "$releases_root/$worker_release_name"
+                  test -f "$worker_release/REVISION"
+                  worker_revision="$(tr -d '\r\n' < "$worker_release/REVISION")"
+                  [[ "$worker_revision" =~ ^[0-9a-f]{40}$ ]]
+                  worker_runtime_state=STALE_MANAGED_RELEASE
+                  ;;
+                *)
+                  false
+                  ;;
+              esac
+            fi
             expected_argv_sha256="$(printf '%s\0' \
               /usr/bin/php artisan queue:work database --queue=ops --sleep=1 --tries=3 \
               --timeout=120 --max-time=3600 | sha256sum | awk '{print $1}')"
@@ -363,10 +388,10 @@ jobs:
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$current" 2>/dev/null)"
           [[ "$ops_pending_total" =~ ^[0-9]+$ ]]
           trap - ERR
-          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
             "$active_revision" "$lock_present" "$process_count" "$program_present" \
             "$program_state" "$ops_pending_total" "$current_config_sha256" \
-            "$live_process_verified" "$config_path_sha256"
+            "$live_process_verified" "$config_path_sha256" "$worker_runtime_state"
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
@@ -387,7 +412,7 @@ jobs:
             fi
             exit "$ssh_rc"
           fi
-          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified config_path_sha256 <<<"$result"
+          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified config_path_sha256 worker_runtime_state <<<"$result"
           test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"
           test "$lock_present" = false
           test "$process_count" = 0
@@ -397,24 +422,29 @@ jobs:
           [[ "$current_config_sha256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$live_process_verified" =~ ^(true|false)$ ]]
           [[ "$config_path_sha256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$worker_runtime_state" =~ ^(CURRENT|STALE_MANAGED_RELEASE|MISSING)$ ]]
           zero_sha256="$(printf '0%.0s' {1..64})"
           if [ "$program_present" = true ]; then
             test "$program_state" = RUNNING
             test "$current_config_sha256" != "$zero_sha256"
             test "$live_process_verified" = true
+            [[ "$worker_runtime_state" =~ ^(CURRENT|STALE_MANAGED_RELEASE)$ ]]
           else
             test "$program_state" = MISSING
             test "$current_config_sha256" = "$zero_sha256"
             test "$live_process_verified" = false
+            test "$worker_runtime_state" = MISSING
           fi
           convergence_required=false
           [ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true
+          [ "$worker_runtime_state" != CURRENT ] && convergence_required=true
           echo "program_present=$program_present" >> "$GITHUB_OUTPUT"
           echo "program_state=$program_state" >> "$GITHUB_OUTPUT"
           echo "ops_pending_total=$ops_pending_total" >> "$GITHUB_OUTPUT"
           echo "current_config_sha256=$current_config_sha256" >> "$GITHUB_OUTPUT"
           echo "live_process_verified=$live_process_verified" >> "$GITHUB_OUTPUT"
           echo "config_path_sha256=$config_path_sha256" >> "$GITHUB_OUTPUT"
+          echo "worker_runtime_state=$worker_runtime_state" >> "$GITHUB_OUTPUT"
           echo "convergence_required=$convergence_required" >> "$GITHUB_OUTPUT"
           echo "Read-only production preflight passed without disclosing routing, payload or database metadata."
 
@@ -608,6 +638,7 @@ jobs:
           CONFIG_PATH_SHA256: ${{ steps.preflight.outputs.config_path_sha256 }}
           CONVERGENCE_REQUIRED_BEFORE: ${{ steps.preflight.outputs.convergence_required }}
           LIVE_PROCESS_VERIFIED_BEFORE: ${{ steps.preflight.outputs.live_process_verified }}
+          WORKER_RUNTIME_STATE_BEFORE: ${{ steps.preflight.outputs.worker_runtime_state }}
           APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}
           APPLY_BACKUP_SHA256: ${{ steps.apply.outputs.backup_sha256 }}
           OPS_PENDING_TOTAL: ${{ steps.preflight.outputs.ops_pending_total }}
@@ -624,6 +655,7 @@ jobs:
             current_config_sha256="$CURRENT_CONFIG_SHA256_BEFORE"
             convergence_required="$CONVERGENCE_REQUIRED_BEFORE"
             live_process_verified="$LIVE_PROCESS_VERIFIED_BEFORE"
+            worker_runtime_state="$WORKER_RUNTIME_STATE_BEFORE"
             backup_config_sha256="$(printf '0%.0s' {1..64})"
           else
             status=PASS_APPLY
@@ -635,6 +667,7 @@ jobs:
             current_config_sha256="$RENDERED_SHA256"
             convergence_required=false
             live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"
+            worker_runtime_state=CURRENT
             backup_config_sha256="$APPLY_BACKUP_SHA256"
           fi
           jq -n \
@@ -656,6 +689,7 @@ jobs:
             --arg current_config_sha256 "$current_config_sha256" \
             --argjson convergence_required "$convergence_required" \
             --argjson live_process_verified "$live_process_verified" \
+            --arg worker_runtime_state "$worker_runtime_state" \
             --arg backup_config_sha256 "$backup_config_sha256" \
             --argjson production_write_execution "$production_write" \
             --argjson config_write_count "$config_write_count" \
@@ -679,6 +713,7 @@ jobs:
               current_config_sha256: $current_config_sha256,
               convergence_required: $convergence_required,
               live_process_verified: $live_process_verified,
+              worker_runtime_state: $worker_runtime_state,
               backup_config_sha256: $backup_config_sha256,
               production_write_execution: $production_write_execution,
               config_write_count: $config_write_count,
