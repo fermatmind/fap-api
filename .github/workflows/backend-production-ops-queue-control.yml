@@ -251,12 +251,17 @@ jobs:
           queue_probe_b64="$(printf '%s' "$queue_probe_php" | base64 | tr -d '\n')"
           remote_script="$(cat <<'REMOTE'
           set -euo pipefail
+          failure_gate=INITIALIZE
+          trap 'printf "OPS_QUEUE_PREFLIGHT_GATE_FAILED:%s\n" "$failure_gate" >&2' ERR
           current="$DEPLOY_PATH/current/backend"
+          failure_gate=ACTIVE_REVISION_READ
           active_revision="$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")"
           lock_present=false
           [ -e "$DEPLOY_PATH/.dep/deploy.lock" ] && lock_present=true
           process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {count++} $1=="composer" && $0 ~ /install/ {count++} END {print count+0}')"
+          failure_gate=SUPERVISORCTL_PATH
           supervisorctl_path="$(command -v supervisorctl)"
+          failure_gate=SUPERVISOR_STATUS
           status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
           program_present=false
           program_state=MISSING
@@ -271,36 +276,50 @@ jobs:
           fi
           current_config_sha256="$(printf '0%.0s' {1..64})"
           if [ -f /etc/supervisor/conf.d/fap-queue-ops.conf ]; then
+            failure_gate=CONFIG_HASH
             current_config_sha256="$(sha256sum /etc/supervisor/conf.d/fap-queue-ops.conf | awk '{print $1}')"
           fi
           if [ "$program_present" = true ]; then
+            failure_gate=UNIQUE_PROCESS
             program_count="$(awk '$1 ~ /^fap-queue-ops(:|$)/ {count++} END {print count+0}' <<<"$status_lines")"
             test "$program_count" -eq 1
+            failure_gate=PID_LOOKUP
             worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops:fap-queue-ops_00 2>/dev/null)"
             [[ "$worker_pid" =~ ^[1-9][0-9]*$ ]]
+            failure_gate=CMDLINE_READABLE
             test -r "/proc/$worker_pid/cmdline"
+            failure_gate=RUN_AS_USER
             test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
+            failure_gate=WORKING_DIRECTORY
             test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$current")"
             expected_argv_sha256="$(printf '%s\0' \
               /usr/bin/php artisan queue:work database --queue=ops --sleep=1 --tries=3 \
               --timeout=120 --max-time=3600 | sha256sum | awk '{print $1}')"
+            failure_gate=ARGV_IDENTITY
             actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
             test "$actual_argv_sha256" = "$expected_argv_sha256"
+            failure_gate=CONFIG_MTIME
             config_epoch="$(stat -c %Y /etc/supervisor/conf.d/fap-queue-ops.conf)"
+            failure_gate=BOOT_TIME
             boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
+            failure_gate=PROCESS_START_TICKS
             start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
+            failure_gate=CLOCK_TICKS
             clock_ticks="$(getconf CLK_TCK)"
             [[ "$config_epoch" =~ ^[0-9]+$ ]]
             [[ "$boot_epoch" =~ ^[0-9]+$ ]]
             [[ "$start_ticks" =~ ^[0-9]+$ ]]
             [[ "$clock_ticks" =~ ^[1-9][0-9]*$ ]]
             process_epoch=$((boot_epoch + start_ticks / clock_ticks))
+            failure_gate=PROCESS_START_AFTER_CONFIG
             test "$process_epoch" -ge "$config_epoch"
             live_process_verified=true
           fi
+          failure_gate=QUEUE_PROBE
           probe_code="$(printf '%s' "$QUEUE_PROBE_PHP_B64" | base64 -d)"
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$current" 2>/dev/null)"
           [[ "$ops_pending_total" =~ ^[0-9]+$ ]]
+          trap - ERR
           printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
             "$active_revision" "$lock_present" "$process_count" "$program_present" \
             "$program_state" "$ops_pending_total" "$current_config_sha256" "$live_process_verified"
@@ -315,7 +334,13 @@ jobs:
           ssh_rc=$?
           set -e
           if [ "$ssh_rc" -ne 0 ]; then
-            echo "OPS_QUEUE_REMOTE_PREFLIGHT_FAILED" >&2
+            failure_code="$(grep -Eo 'OPS_QUEUE_PREFLIGHT_GATE_FAILED:[A-Z0-9_]+' \
+              "$RUNNER_TEMP/ops-queue-preflight-ssh.err" | tail -n 1 || true)"
+            if [[ "$failure_code" =~ ^OPS_QUEUE_PREFLIGHT_GATE_FAILED:[A-Z0-9_]+$ ]]; then
+              echo "$failure_code" >&2
+            else
+              echo "OPS_QUEUE_REMOTE_PREFLIGHT_FAILED" >&2
+            fi
             exit "$ssh_rc"
           fi
           IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified <<<"$result"
@@ -368,26 +393,42 @@ jobs:
           queue_probe_b64="$(printf '%s' "$queue_probe_php" | base64 | tr -d '\n')"
           remote_script="$(cat <<'REMOTE'
           set -euo pipefail
+          failure_gate=INITIALIZE
+          trap 'printf "OPS_QUEUE_APPLY_GATE_FAILED:%s\n" "$failure_gate" >&2' ERR
+          failure_gate=DEPLOY_LOCK
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+          failure_gate=ACTIVE_REVISION
           test "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
+          failure_gate=DEPLOY_PROCESS_QUIESCENCE
           process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {count++} $1=="composer" && $0 ~ /install/ {count++} END {print count+0}')"
           test "$process_count" -eq 0
+          failure_gate=CONFIG_ABSENT
           test ! -e /etc/supervisor/conf.d/fap-queue-ops.conf
+          failure_gate=QUEUE_PROBE
           probe_code="$(printf '%s' "$QUEUE_PROBE_PHP_B64" | base64 -d)"
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$DEPLOY_PATH/current/backend" 2>/dev/null)"
           test "$ops_pending_total" = 0
+          failure_gate=CANDIDATE_PATH
           candidate="$HOME/.fap-queue-ops.${CONTROL_RUN_ID}.candidate"
           test ! -e "$candidate"
           printf '%s' "$CONFIG_B64" | base64 -d > "$candidate"
+          failure_gate=CANDIDATE_HASH
           test "$(sha256sum "$candidate" | awk '{print $1}')" = "$EXPECTED_RENDERED_SHA256"
+          failure_gate=CONFIG_INSTALL
           sudo -n install -o root -g root -m 0644 "$candidate" /etc/supervisor/conf.d/fap-queue-ops.conf
           unlink "$candidate"
+          failure_gate=INSTALLED_CONFIG_HASH
           test "$(sudo -n sha256sum /etc/supervisor/conf.d/fap-queue-ops.conf | awk '{print $1}')" = "$EXPECTED_RENDERED_SHA256"
+          failure_gate=SUPERVISORCTL_PATH
           supervisord_path="$(command -v supervisord)"
           supervisorctl_path="$(command -v supervisorctl)"
+          failure_gate=SUPERVISOR_CONFIG
           sudo -n "$supervisord_path" -t >/dev/null 2>&1
+          failure_gate=SUPERVISOR_REREAD
           sudo -n "$supervisorctl_path" reread >/dev/null
+          failure_gate=SUPERVISOR_UPDATE
           sudo -n "$supervisorctl_path" update fap-queue-ops >/dev/null
+          failure_gate=SUPERVISOR_RUNNING
           for attempt in $(seq 1 10); do
             if sudo -n "$supervisorctl_path" status 2>/dev/null \
               | awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1; if ($2 != "RUNNING") bad=1} END {exit !(found && !bad)}'; then
@@ -397,26 +438,39 @@ jobs:
             sleep 2
           done
           status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
+          failure_gate=UNIQUE_PROCESS
           program_count="$(awk '$1 ~ /^fap-queue-ops(:|$)/ {count++} END {print count+0}' <<<"$status_lines")"
           test "$program_count" -eq 1
+          failure_gate=PID_LOOKUP
           worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops:fap-queue-ops_00 2>/dev/null)"
           [[ "$worker_pid" =~ ^[1-9][0-9]*$ ]]
+          failure_gate=CMDLINE_READABLE
           test -r "/proc/$worker_pid/cmdline"
+          failure_gate=RUN_AS_USER
           test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
+          failure_gate=WORKING_DIRECTORY
           test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$DEPLOY_PATH/current/backend")"
           expected_argv_sha256="$(printf '%s\0' \
             /usr/bin/php artisan queue:work database --queue=ops --sleep=1 --tries=3 \
             --timeout=120 --max-time=3600 | sha256sum | awk '{print $1}')"
+          failure_gate=ARGV_IDENTITY
           actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
           test "$actual_argv_sha256" = "$expected_argv_sha256"
+          failure_gate=CONFIG_MTIME
           config_epoch="$(stat -c %Y /etc/supervisor/conf.d/fap-queue-ops.conf)"
+          failure_gate=BOOT_TIME
           boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
+          failure_gate=PROCESS_START_TICKS
           start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
+          failure_gate=CLOCK_TICKS
           clock_ticks="$(getconf CLK_TCK)"
           process_epoch=$((boot_epoch + start_ticks / clock_ticks))
+          failure_gate=PROCESS_START_AFTER_CONFIG
           test "$process_epoch" -ge "$config_epoch"
+          failure_gate=POST_APPLY_QUIESCENCE
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
           test "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
+          trap - ERR
           printf 'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true\n'
           REMOTE
           )"
@@ -429,7 +483,13 @@ jobs:
           ssh_rc=$?
           set -e
           if [ "$ssh_rc" -ne 0 ]; then
-            echo "OPS_QUEUE_REMOTE_APPLY_FAILED" >&2
+            failure_code="$(grep -Eo 'OPS_QUEUE_APPLY_GATE_FAILED:[A-Z0-9_]+' \
+              "$RUNNER_TEMP/ops-queue-apply-ssh.err" | tail -n 1 || true)"
+            if [[ "$failure_code" =~ ^OPS_QUEUE_APPLY_GATE_FAILED:[A-Z0-9_]+$ ]]; then
+              echo "$failure_code" >&2
+            else
+              echo "OPS_QUEUE_REMOTE_APPLY_FAILED" >&2
+            fi
             exit "$ssh_rc"
           fi
           test "$result" = $'apply_status=PASS\nprogram_state=RUNNING\nworker_count=1\nlive_process_verified=true'
