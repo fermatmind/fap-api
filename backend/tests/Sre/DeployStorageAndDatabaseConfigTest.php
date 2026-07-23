@@ -379,6 +379,13 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'code-only scope accepted exact audited Root5 runtime or inert evidence path:',
             $source
         );
+        $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD=false', $source);
+        $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD=true', $source);
+        $this->assertStringContainsString('code-only scope accepted approval runtime path and requires ops queue reload:', $source);
+        $this->assertStringContainsString('require_ops_queue_reload=$REQUIRE_OPS_QUEUE_RELOAD', $source);
+        $this->assertStringContainsString('require_ops_queue_reload: ${{ steps.resolve_deploy_mode.outputs.require_ops_queue_reload }}', $source);
+        $this->assertStringContainsString('REQUIRE_OPS_QUEUE_RELOAD: ${{ needs.deployment-eligibility.outputs.require_ops_queue_reload }}', $source);
+        $this->assertStringContainsString('-o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD"', $source);
         $this->assertStringContainsString('backend/database/*', $source);
         $this->assertStringContainsString('backend/content_baselines/*', $source);
         $this->assertStringContainsString('content_packages/*', $source);
@@ -439,6 +446,10 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('Reload queue workers through systemd without a cache restart signal in code_only deploy mode', $source);
         $this->assertStringContainsString('code_only deploy requires a queue process manager reload path', $source);
         $this->assertStringContainsString("else printf '%s\\\\n' {\$notFoundMessage} >&2; exit 1; fi", $source);
+        $this->assertStringContainsString("get('require_ops_queue_reload', 'false')", $source);
+        $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
+        $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
+        $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip nginx reload in code_only deploy mode', $source);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $source);

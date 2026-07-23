@@ -78,6 +78,7 @@ set('queue_supervisor_optional_programs', [
     'fap-queue-content',
     'fap-queue-insights',
 ]);
+set('require_ops_queue_reload', false);
 set('legacy_queue_systemd_service', 'fap-queue.service');
 set('legacy_queue_systemd_disable', true);
 set('required_public_static_media_assets', [
@@ -803,6 +804,20 @@ task('queue:reload-workers', function () {
         $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
         $requiredPrograms = array_values(array_filter((array) get('queue_supervisor_required_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
         $optionalPrograms = array_values(array_filter((array) get('queue_supervisor_optional_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
+        $requireOpsQueueReload = $codeOnly && in_array(
+            strtolower(trim((string) get('require_ops_queue_reload', 'false'))),
+            ['1', 'true', 'yes', 'on'],
+            true
+        );
+        if ($requireOpsQueueReload) {
+            $requiredPrograms[] = 'fap-queue-ops';
+            $requiredPrograms = array_values(array_unique($requiredPrograms));
+            $optionalPrograms = array_values(array_filter(
+                $optionalPrograms,
+                static fn (string $program): bool => $program !== 'fap-queue-ops'
+            ));
+            writeln('<comment>Require the ops queue worker reload for approval runtime code_only scope</comment>');
+        }
         $legacySystemdService = trim((string) get('legacy_queue_systemd_service', ''));
         $disableLegacySystemd = (bool) get('legacy_queue_systemd_disable', true);
 

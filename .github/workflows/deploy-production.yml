@@ -63,6 +63,7 @@ jobs:
       deploy_sha: ${{ steps.latest_main_guard.outputs.deploy_sha }}
       deploy_mode: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
       isolated_runtime46: ${{ steps.resolve_deploy_mode.outputs.isolated_runtime46 }}
+      require_ops_queue_reload: ${{ steps.resolve_deploy_mode.outputs.require_ops_queue_reload }}
       main_sha: ${{ steps.latest_main_guard.outputs.main_sha }}
     steps:
       - name: Checkout deploy revision for eligibility
@@ -102,6 +103,7 @@ jobs:
               exit 2
               ;;
           esac
+          REQUIRE_OPS_QUEUE_RELOAD=false
           case "$REQUESTED_DEPLOY_MODE" in
             standard)
               if [ -n "$APPROVED_MIGRATION" ]; then
@@ -190,7 +192,11 @@ jobs:
                   backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)
                     echo "code-only scope accepted audited personality runtime projection service: $path"
                     ;;
-                  .github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/deploy.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|backend/app/Filament/Ops/Resources/AdminApprovalResource.php|backend/app/Models/AdminApproval.php|backend/app/Models/DailyGivingRecord.php|backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php|backend/docs/career/README.md|backend/docs/career/career-detail-stability-train-2026-07-18.md|backend/docs/career/job-detail-cache-coverage.md|backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json|backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md|docs/ops/big-five-en52-release.md|docs/ops/big-five-legacy-alias-hard-purge.md)
+                  backend/app/Filament/Ops/Resources/AdminApprovalResource.php|backend/app/Models/AdminApproval.php)
+                    REQUIRE_OPS_QUEUE_RELOAD=true
+                    echo "code-only scope accepted approval runtime path and requires ops queue reload: $path"
+                    ;;
+                  .github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/deploy.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|backend/app/Models/DailyGivingRecord.php|backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php|backend/docs/career/README.md|backend/docs/career/career-detail-stability-train-2026-07-18.md|backend/docs/career/job-detail-cache-coverage.md|backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json|backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md|docs/ops/big-five-en52-release.md|docs/ops/big-five-legacy-alias-hard-purge.md)
                     echo "code-only scope accepted exact audited Root5 runtime or inert evidence path: $path"
                     ;;
                   backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php|backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php|backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php|backend/app/Services/Cms/MbtiFullCmsImportService.php|backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json|backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)
@@ -228,6 +234,7 @@ jobs:
           fi
           echo "deploy_mode=$RESOLVED_DEPLOY_MODE" >> "$GITHUB_OUTPUT"
           echo "isolated_runtime46=false" >> "$GITHUB_OUTPUT"
+          echo "require_ops_queue_reload=$REQUIRE_OPS_QUEUE_RELOAD" >> "$GITHUB_OUTPUT"
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
           jq -e \
@@ -395,6 +402,7 @@ jobs:
       AUTH_GUEST_CHECK_URL: ${{ vars.PRODUCTION_AUTH_GUEST_CHECK_URL }}
       OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
       DEPLOY_MODE: ${{ needs.deployment-eligibility.outputs.deploy_mode }}
+      REQUIRE_OPS_QUEUE_RELOAD: ${{ needs.deployment-eligibility.outputs.require_ops_queue_reload }}
       EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
       APPROVED_MIGRATION: ${{ inputs.approved_migration }}
 
@@ -652,6 +660,7 @@ jobs:
             --revision "$DEPLOY_SHA" \
             -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o deploy_mode="$DEPLOY_MODE" \
+            -o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD" \
             -o schema_only_migration="$APPROVED_MIGRATION" \
             -vvv --no-interaction
 
