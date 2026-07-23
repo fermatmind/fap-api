@@ -142,6 +142,39 @@ drift, missing rollback payload, or failed rollback verification remains
 fail-closed. Do not add another accepted hash without a new read-only incident
 audit and a reviewed code change.
 
+## Production ops queue program convergence
+
+Approval execution dispatches to the `ops` queue. The production deployment
+preflight must therefore prove that `fap-queue-ops` exists and is `RUNNING`
+before moving the active release symlink whenever cumulative scope includes
+approval runtime code. A generic `supervisorctl` availability check is not
+sufficient.
+
+The canonical program definition is
+`deploy/supervisor/fap-queue-ops.conf.template`. Use the protected
+`Backend Production Ops Queue Control` workflow:
+
+1. Run `preflight` against the exact latest control-plane SHA and exact active
+   backend revision. It is read-only and fails if a deploy lock/process exists
+   or if the `ops` backlog is non-zero; it reports the current program state.
+2. Review the immutable receipt and bind its run id/attempt, active revision,
+   template SHA-256, and rendered SHA-256 into the exact apply phrase.
+3. Run `apply` only after that separate authorization. It installs one exact
+   Supervisor config only when the program/config are still absent, validates
+   the complete Supervisor configuration, updates only `fap-queue-ops`, and
+   requires the single worker to become `RUNNING`.
+
+The workflow never deploys application code, moves the active symlink, runs
+migrations, or changes CMS/database authority, publication, sitemap, llms,
+search, or PR23 state. A non-zero `ops` backlog requires a separate operational
+assessment because starting the worker could execute queued business actions.
+
+The July 24 incident run `30042084983` activated the intended backend revision
+but failed after activation because the required `fap-queue-ops` program did
+not exist. The historical conclusion remains failed. Subsequent releases must
+pass the new pre-symlink program-state guard and must not treat that failed run
+as complete queue convergence.
+
 ## Frontend deploy incident classifications
 
 - `complete_and_verified`: Node1 HEAD matches intended SHA, PM2 converged, public smoke passed

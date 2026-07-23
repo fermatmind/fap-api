@@ -945,6 +945,34 @@ task('guard:queue-reload-capability', function () {
     if ($manager === 'supervisor') {
         $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
         if (test('[ -x '.escapeshellarg($supervisorctl).' ] || command -v supervisorctl >/dev/null 2>&1')) {
+            $resolvedSupervisorctl = trim((string) run(
+                'if [ -x '.escapeshellarg($supervisorctl).' ]; then echo '.escapeshellarg($supervisorctl).'; else command -v supervisorctl; fi'
+            ));
+            $quotedSupervisorctl = escapeshellarg($resolvedSupervisorctl);
+            $requiredPrograms = array_values(array_filter(
+                (array) get('queue_supervisor_required_programs', []),
+                static fn (mixed $value): bool => trim((string) $value) !== ''
+            ));
+            if (deployIsCodeOnly() && deployBooleanOption('require_ops_queue_reload', false)) {
+                $requiredPrograms[] = 'fap-queue-ops';
+                $requiredPrograms = array_values(array_unique($requiredPrograms));
+            }
+
+            foreach ($requiredPrograms as $program) {
+                $program = trim((string) $program);
+                if (! preg_match('/^[A-Za-z0-9._-]+$/', $program)) {
+                    throw new \RuntimeException('queue capability preflight found an invalid supervisor program name');
+                }
+
+                $programPattern = '^'.preg_quote($program, '/').'(:|$)';
+                $statusCommand = "sudo -n {$quotedSupervisorctl} status 2>/dev/null"
+                    .' | awk -v pattern='.escapeshellarg($programPattern)
+                    ." '\$1 ~ pattern { found=1; if (\$2 != \"RUNNING\") bad=1 } END { exit !(found && !bad) }'";
+                if (! test($statusCommand)) {
+                    throw new \RuntimeException("queue capability preflight requires running supervisor program [{$program}] before release activation");
+                }
+            }
+
             writeln('<comment>Queue capability preflight passed for supervisor</comment>');
 
             return;
