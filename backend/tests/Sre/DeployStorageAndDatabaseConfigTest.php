@@ -763,12 +763,19 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             "invoke('career:finalize-public-dataset-cache-equivalence');",
             $source
         );
-        $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
-        $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
+        $this->assertStringContainsString(
+            "set('queue_supervisor_required_programs', [\n    'fap-queue-default-high',\n    'fap-queue-reports',\n    'fap-queue-ops',\n]);",
+            $source
+        );
+        $this->assertStringNotContainsString("set('queue_supervisor_optional_programs', [\n    'fap-queue-ops',", $source);
         $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);
         $this->assertStringContainsString('approval runtime code_only deploy requires the supervisor ops queue reload path', $source);
         $this->assertStringContainsString("set('queue_supervisor_ops_program_config', '/etc/supervisor/conf.d/fap-queue-ops.conf');", $source);
         $this->assertStringContainsString("task('ensure:required-ops-queue-supervisor-program'", $source);
+        $this->assertStringContainsString(
+            "currentHost()->getAlias() !== 'production' || ! deployBooleanOption('queue_reload_required', true)",
+            $source
+        );
         $this->assertStringContainsString('Approval execution worker for the database ops queue.', $source);
         $this->assertStringContainsString('queue:work database --queue=ops --sleep=1 --tries=3 --timeout=120 --max-time=3600', $source);
         $this->assertStringContainsString('rollback_ops_queue_config()', $source);

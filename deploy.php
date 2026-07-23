@@ -73,9 +73,9 @@ set('queue_supervisor_ops_program_config', '/etc/supervisor/conf.d/fap-queue-ops
 set('queue_supervisor_required_programs', [
     'fap-queue-default-high',
     'fap-queue-reports',
+    'fap-queue-ops',
 ]);
 set('queue_supervisor_optional_programs', [
-    'fap-queue-ops',
     'fap-queue-commerce',
     'fap-queue-content',
     'fap-queue-insights',
@@ -1004,7 +1004,7 @@ task('reload:nginx', function () {
 });
 
 task('ensure:required-ops-queue-supervisor-program', function () {
-    if (! (deployIsCodeOnly() && deployBooleanOption('require_ops_queue_reload', false))) {
+    if (currentHost()->getAlias() !== 'production' || ! deployBooleanOption('queue_reload_required', true)) {
         return;
     }
 
@@ -1141,12 +1141,6 @@ task('queue:reload-workers', function () {
         $optionalPrograms = array_values(array_filter((array) get('queue_supervisor_optional_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
         $requireOpsQueueReload = $codeOnly && deployBooleanOption('require_ops_queue_reload', false);
         if ($requireOpsQueueReload) {
-            $requiredPrograms[] = 'fap-queue-ops';
-            $requiredPrograms = array_values(array_unique($requiredPrograms));
-            $optionalPrograms = array_values(array_filter(
-                $optionalPrograms,
-                static fn (string $program): bool => $program !== 'fap-queue-ops'
-            ));
             writeln('<comment>Require the ops queue worker reload for approval runtime code_only scope</comment>');
         }
         $legacySystemdService = trim((string) get('legacy_queue_systemd_service', ''));
