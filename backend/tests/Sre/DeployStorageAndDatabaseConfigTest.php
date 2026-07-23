@@ -477,6 +477,14 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString(
+            'actual_runtime46_diff="$(git diff --no-renames --name-status "$CLASSIFICATION_BASE" "$EXPECTED_DEPLOYED_REVISION")"',
+            $source
+        );
+        $this->assertStringContainsString(
+            '$(git rev-parse "${DEPLOY_SHA}:${runtime46_path}")',
+            $source
+        );
+        $this->assertStringContainsString(
             'code-only scope accepted exact audited Root5 runtime or inert evidence path:',
             $source
         );

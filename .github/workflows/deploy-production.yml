@@ -196,6 +196,20 @@ jobs:
                 fi
                 CLASSIFICATION_BASE="$(git rev-parse "${EXPECTED_DEPLOYED_REVISION}^")"
                 test "$CLASSIFICATION_BASE" = "781d1636b2c74f5852076a5864b681910a1e0e47"
+                expected_runtime46_diff="$(printf '%s\n' \
+                  $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php' \
+                  $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php' \
+                  $'A\tbackend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php' \
+                  $'M\tbackend/app/Services/Cms/MbtiFullCmsImportService.php' \
+                  $'A\tbackend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json' \
+                  $'A\tbackend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php')"
+                actual_runtime46_diff="$(git diff --no-renames --name-status "$CLASSIFICATION_BASE" "$EXPECTED_DEPLOYED_REVISION")"
+                test "$actual_runtime46_diff" = "$expected_runtime46_diff"
+                while IFS= read -r runtime46_path; do
+                  test -n "$runtime46_path"
+                  test "$(git rev-parse "${EXPECTED_DEPLOYED_REVISION}:${runtime46_path}")" = \
+                    "$(git rev-parse "${DEPLOY_SHA}:${runtime46_path}")"
+                done < <(printf '%s\n' "$expected_runtime46_diff" | cut -f2)
                 echo "code-only scope classification accepted the exact audited Runtime 46 subsumed baseline."
               fi
               mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "$CLASSIFICATION_BASE" "$DEPLOY_SHA")

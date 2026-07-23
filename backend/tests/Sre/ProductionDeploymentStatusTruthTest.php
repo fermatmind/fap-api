@@ -290,6 +290,14 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             'git fetch --no-tags origin "$EXPECTED_DEPLOYED_REVISION"',
             $eligibility
         );
+        $this->assertStringContainsString(
+            'actual_runtime46_diff="$(git diff --no-renames --name-status "$CLASSIFICATION_BASE" "$EXPECTED_DEPLOYED_REVISION")"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            '$(git rev-parse "${DEPLOY_SHA}:${runtime46_path}")',
+            $eligibility
+        );
         $this->assertSame(1, substr_count($eligibility, $runtimeExceptions));
         $this->assertSame(1, substr_count($eligibility, $subsumedRuntimeExceptions));
         $this->assertSame(1, substr_count($eligibility, $nonRuntimeExceptions));
