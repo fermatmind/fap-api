@@ -99450,8 +99450,8 @@
     "branch": "codex/saep-proposed-api-per02-mbti64-en64-bounded-draft-01",
     "title": "SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01: add fail-closed English MBTI variant draft boundaries",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "83913c236d66fcc3d2c8aab5f4be51bc26a2bf75",
+    "status": "github_checks_pending",
+    "commit_sha": "22565ef059f593a74ee2c8aa64c5632728a190b3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3219",
     "checks": {
       "authorization": {
@@ -99464,17 +99464,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused command coverage passed 16 tests/327 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity and cased-duplicate source cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation repeated 16 tests/327 assertions. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
+        "evidence": "Focused command coverage passed 17 tests/336 assertions, including the compatible 96-row dry-run, exact EN variant 32-row/64-edge bounded dry-run/write/idempotency, approved copy and stable cohort hash, plus fail-closed invalid-boundary, unsafe-target, locale, role, graph-integrity, cased-duplicate source and tokenized raw-target cases. PHP syntax, scoped Pint, Composer strict validation/audit, complete ci_verify_mbti.sh, YAML/JSON parsing, diff checks and the exact five-path scope all passed. Rebase-focused validation passed before the two latest same-scope security regressions; each repair reran the focused suite, syntax and scoped Pint. The bounded write tests used only in-memory SQLite; no real CMS/database write occurred."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact repaired and rebased head 83913c236d66fcc3d2c8aab5f4be51bc26a2bf75 passed all 9 checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets and non-blocking SARIF upload. The cased-duplicate review finding is fixed with regression coverage and its thread is resolved. The following commit changes only this ledger binding and must rerun required checks before merge."
+        "status": "pending",
+        "evidence": "All 9 checks passed on a827f564b6e60c701acc19f1fce258be22d3b4f7, after which exact-head review identified a raw tokenized-target normalization gap. The same-scope repair is committed as 22565ef059f593a74ee2c8aa64c5632728a190b3 with 17-test/336-assertion focused validation and must rerun all required checks."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99518,8 +99518,13 @@
         "at": "2026-07-23T03:50:53Z",
         "status": "ready_to_merge",
         "note": "Rebased onto exact origin/main 49038deb50cda789e4365ea42068832ed28d6023 while preserving all intervening main ledger state. Rebase validation passed 16 tests/327 assertions, syntax, scoped Pint, metadata parsers, diff and exact five-path scope. Exact repaired head 83913c236d66fcc3d2c8aab5f4be51bc26a2bf75 passed all 9 GitHub checks and exact-head review confirmed the implementation repair; this following ledger-only commit binds tooling to that repaired head and must pass final checks before merge."
+      },
+      {
+        "at": "2026-07-23T04:07:07Z",
+        "status": "github_checks_pending",
+        "note": "Final-head review found that path normalization removed forbidden query parameters before validation while raw recommended edges could still enter snapshot previews. Repair 22565ef059f593a74ee2c8aa64c5632728a190b3 now validates the raw target before normalization, suppresses the raw sensitive value from errors, excludes the unsafe edge and proves zero revisions plus no token output. Focused validation passes 17 tests/336 assertions with syntax and scoped Pint green; required checks are pending."
       }
     ],
-    "updated_at": "2026-07-23T03:50:53Z"
+    "updated_at": "2026-07-23T04:07:07Z"
   }
 }
