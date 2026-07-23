@@ -464,8 +464,45 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $this->assertStringContainsString($auditedPath, $source);
         }
 
-        $this->assertStringNotContainsString(
-            'backend/docs/career/publish_track_reconciliation.json|',
+        $this->assertStringContainsString(
+            'backend/docs/career/publish_track_reconciliation.json)',
+            $source
+        );
+        $this->assertStringContainsString('REQUIRE_CAREER_CANDIDATE_PREFLIGHT=true', $source);
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="53e4e854dadee2260637c0288ead58818808bad098c3fce8e2168ea38746ba09"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'candidate rebuild equivalence remains required before activation.',
+            $source
+        );
+        $this->assertStringContainsString(
+            'backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php',
+            $source
+        );
+        $this->assertStringContainsString(
+            'backend/app/Console/Commands/CareerVerifyPublicDatasetCacheEquivalence.php',
+            $source
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="468eb607a9d8a0a4c69cf18e2232a11d7bc8008932545f76a93900dfeedbaacf"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed Career dataset equivalence verifier hash.',
+            $source
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="e6beeebb64b6bc346e622b43400262239e76813936fb2363cb9ee85484446f13"',
+            $source
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed Career candidate bootstrap runner hash.',
             $source
         );
         $this->assertStringContainsString(
@@ -541,11 +578,20 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             "'deploy:prepare'",
             "'deploy:vendors'",
             "'artisan:config:cache'",
+            "'career:verify-public-dataset-cache-equivalence'",
             "'guard:public-content-release'",
             "'deploy:publish'",
         ] as $requiredTask) {
             $this->assertStringContainsString($requiredTask, $task);
         }
+        $guardPosition = strpos($task, "'guard:public-content-release'");
+        $careerPosition = strpos($task, "'career:verify-public-dataset-cache-equivalence'");
+        $publishPosition = strpos($task, "'deploy:publish'");
+        $this->assertNotFalse($guardPosition);
+        $this->assertNotFalse($careerPosition);
+        $this->assertNotFalse($publishPosition);
+        $this->assertLessThan($careerPosition, $guardPosition);
+        $this->assertLessThan($publishPosition, $careerPosition);
 
         foreach ([
             'artisan:migrate',
@@ -565,6 +611,12 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('code_only deploy requires a queue process manager reload path', $source);
         $this->assertStringContainsString("else printf '%s\\\\n' {\$notFoundMessage} >&2; exit 1; fi", $source);
         $this->assertStringContainsString("deployBooleanOption('require_ops_queue_reload', false)", $source);
+        $this->assertStringContainsString("deployBooleanOption('require_career_candidate_preflight', false)", $source);
+        $this->assertStringContainsString(
+            'career:verify-public-dataset-cache-equivalence --expected-sha256=%s --verify-live-public-cache --json --no-interaction --ansi',
+            $source
+        );
+        $this->assertStringContainsString("set('career_public_cache_summary_sha256', '');", $source);
         $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $source);
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
         $this->assertStringContainsString('Require the ops queue worker reload for approval runtime code_only scope', $source);

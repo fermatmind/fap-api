@@ -64,6 +64,8 @@ jobs:
       deploy_mode: ${{ steps.resolve_deploy_mode.outputs.deploy_mode }}
       isolated_runtime46: ${{ steps.resolve_deploy_mode.outputs.isolated_runtime46 }}
       require_ops_queue_reload: ${{ steps.resolve_deploy_mode.outputs.require_ops_queue_reload }}
+      require_career_candidate_preflight: ${{ steps.resolve_deploy_mode.outputs.require_career_candidate_preflight }}
+      career_public_cache_summary_sha256: ${{ steps.resolve_deploy_mode.outputs.career_public_cache_summary_sha256 }}
       main_sha: ${{ steps.latest_main_guard.outputs.main_sha }}
       staging_sha: ${{ steps.resolve_deploy_mode.outputs.staging_sha }}
     steps:
@@ -106,6 +108,8 @@ jobs:
               ;;
           esac
           REQUIRE_OPS_QUEUE_RELOAD=false
+          REQUIRE_CAREER_CANDIDATE_PREFLIGHT=false
+          CAREER_PUBLIC_CACHE_SUMMARY_SHA256=""
           case "$REQUESTED_DEPLOY_MODE" in
             standard)
               if [ -n "$APPROVED_MIGRATION" ]; then
@@ -241,6 +245,10 @@ jobs:
                   .github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/mbti-comp-runtime46-production-ops.yml|.github/workflows/mbti-comp-runtime46-staging-dry-run.yml|backend/app/Models/DailyGivingRecord.php|backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php|backend/docs/career/README.md|backend/docs/career/career-detail-stability-train-2026-07-18.md|backend/docs/career/job-detail-cache-coverage.md|backend/docs/seo/generated/mbti-comp-runtime-46-production-acceptance.v1.json|backend/docs/seo/mbti-comp-runtime-46-production-acceptance.md|docs/ops/big-five-en52-release.md|docs/ops/big-five-legacy-alias-hard-purge.md)
                     echo "code-only scope accepted exact audited Root5 runtime or inert evidence path: $path"
                     ;;
+                  backend/docs/career/publish_track_reconciliation.json)
+                    REQUIRE_CAREER_CANDIDATE_PREFLIGHT=true
+                    echo "code-only scope conditionally accepted the exact Career reconciliation authority input pending live-cache and candidate-rebuild equivalence: $path"
+                    ;;
                   .github/workflows/career-detail-production-cache-repair.yml|backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php|backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php|backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php|backend/app/Services/Cms/MbtiCrossPublisher49Package.php|backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json|backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json|docs/04-ops/deploy-incident-runbook.md|docs/seo/career-jobs-index-lkg-resilience-01.md|docs/seo/career-pilot-review-evidence-bridge-01.md)
                     echo "code-only scope accepted exact audited subsumed runtime or inert authority input path: $path"
                     ;;
@@ -249,6 +257,22 @@ jobs:
                     ;;
                   backend/.env.example|backend/scripts/pr71_verify.sh)
                     echo "code-only scope accepted audited non-runtime release metadata or verification path: $path"
+                    ;;
+                  backend/app/Console/Commands/CareerVerifyPublicDatasetCacheEquivalence.php)
+                    EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256="468eb607a9d8a0a4c69cf18e2232a11d7bc8008932545f76a93900dfeedbaacf"
+                    test "$(sha256sum "$path" | awk '{print $1}')" = \
+                      "$EXPECTED_CAREER_EQUIVALENCE_VERIFIER_SHA256" || {
+                      CODE_ONLY_SCOPE=false
+                      echo "code-only scope refused an unreviewed Career dataset equivalence verifier hash." >&2
+                    }
+                    ;;
+                  backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php)
+                    EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256="e6beeebb64b6bc346e622b43400262239e76813936fb2363cb9ee85484446f13"
+                    test "$(sha256sum "$path" | awk '{print $1}')" = \
+                      "$EXPECTED_CAREER_BOOTSTRAP_RUNNER_SHA256" || {
+                      CODE_ONLY_SCOPE=false
+                      echo "code-only scope refused an unreviewed Career candidate bootstrap runner hash." >&2
+                    }
                     ;;
                   .github/workflows/backend-production-verify-only.yml|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)
                     echo "code-only scope accepted audited release support path: $path"
@@ -265,6 +289,34 @@ jobs:
                     ;;
                 esac
               done
+              if [ "$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" = true ]; then
+                EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"
+                EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="53e4e854dadee2260637c0288ead58818808bad098c3fce8e2168ea38746ba09"
+                test "$(sha256sum backend/docs/career/publish_track_reconciliation.json | awk '{print $1}')" = \
+                  "$EXPECTED_CAREER_RECONCILIATION_SHA256" || {
+                  echo "code-only scope refused an unreviewed Career reconciliation candidate hash." >&2
+                  exit 1
+                }
+                CAREER_DATASET_JSON="$(curl --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
+                  "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
+                CAREER_PUBLIC_CACHE_SUMMARY="$(jq -cS '{
+                  contract_version,
+                  manifest_version: .collection_summary.manifest_version,
+                  member_count: .collection_summary.member_count,
+                  tracking_counts: .collection_summary.tracking_counts,
+                  publish_track_distribution: .collection_summary.facet_distributions.publish_track,
+                  members: [
+                    .members[]
+                    | {canonical_slug, publish_track}
+                  ] | sort_by(.canonical_slug, .publish_track)
+                }' <<<"$CAREER_DATASET_JSON")"
+                CAREER_PUBLIC_CACHE_SUMMARY_SHA256="$(printf '%s' "$CAREER_PUBLIC_CACHE_SUMMARY" | sha256sum | awk '{print $1}')"
+                test "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" = "$EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256" || {
+                  echo "code-only scope refused Career reconciliation because the complete public cache summary drifted." >&2
+                  exit 1
+                }
+                echo "code-only scope verified the exact live Career public-cache summary; candidate rebuild equivalence remains required before activation."
+              fi
               if [ "$CODE_ONLY_SCOPE" != true ]; then
                 echo "code-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path; rerun only with an explicit standard deployment approval." >&2
                 exit 1
@@ -280,6 +332,8 @@ jobs:
           echo "deploy_mode=$RESOLVED_DEPLOY_MODE" >> "$GITHUB_OUTPUT"
           echo "isolated_runtime46=false" >> "$GITHUB_OUTPUT"
           echo "require_ops_queue_reload=$REQUIRE_OPS_QUEUE_RELOAD" >> "$GITHUB_OUTPUT"
+          echo "require_career_candidate_preflight=$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" >> "$GITHUB_OUTPUT"
+          echo "career_public_cache_summary_sha256=$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" >> "$GITHUB_OUTPUT"
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
           jq -e \
@@ -457,6 +511,8 @@ jobs:
       OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
       DEPLOY_MODE: ${{ needs.deployment-eligibility.outputs.deploy_mode }}
       REQUIRE_OPS_QUEUE_RELOAD: ${{ needs.deployment-eligibility.outputs.require_ops_queue_reload }}
+      REQUIRE_CAREER_CANDIDATE_PREFLIGHT: ${{ needs.deployment-eligibility.outputs.require_career_candidate_preflight }}
+      CAREER_PUBLIC_CACHE_SUMMARY_SHA256: ${{ needs.deployment-eligibility.outputs.career_public_cache_summary_sha256 }}
       EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
       APPROVED_MIGRATION: ${{ inputs.approved_migration }}
 
@@ -813,6 +869,36 @@ jobs:
             sleep 3
           done
 
+      - name: Revalidate live Career public-cache summary before activation
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" != true ]; then
+            echo "Career candidate dataset equivalence is not required for this deployment."
+            exit 0
+          fi
+          [[ "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          career_dataset_json="$(curl --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
+            "https://api.fermatmind.com/api/v0.5/career/datasets/occupations")"
+          live_summary="$(jq -cS '{
+            contract_version,
+            manifest_version: .collection_summary.manifest_version,
+            member_count: .collection_summary.member_count,
+            tracking_counts: .collection_summary.tracking_counts,
+            publish_track_distribution: .collection_summary.facet_distributions.publish_track,
+            members: [
+              .members[]
+              | {canonical_slug, publish_track}
+            ] | sort_by(.canonical_slug, .publish_track)
+          }' <<<"$career_dataset_json")"
+          live_summary_sha256="$(printf '%s' "$live_summary" | sha256sum | awk '{print $1}')"
+          unset career_dataset_json live_summary
+          test "$live_summary_sha256" = "$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" || {
+            echo "Career public-cache summary drifted after eligibility; refusing activation." >&2
+            exit 1
+          }
+          echo "Career public-cache summary remains exact immediately before candidate verification."
+
       - name: Deploy production with Deployer
         shell: bash
         env:
@@ -851,6 +937,8 @@ jobs:
             -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o deploy_mode="$DEPLOY_MODE" \
             -o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD" \
+            -o require_career_candidate_preflight="$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" \
+            -o career_public_cache_summary_sha256="$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" \
             -o schema_only_migration="$APPROVED_MIGRATION" \
             -vvv --no-interaction
 
