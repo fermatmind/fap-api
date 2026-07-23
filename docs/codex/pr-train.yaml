@@ -166,6 +166,72 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    base: main
+    depends_on:
+      - CAREER-JOBS-INDEX-LKG-RESILIENCE-01
+    branch: codex/career-pilot-review-evidence-bridge-01
+    title: "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01 bind exact career review evidence"
+    train_scope: career_pilot_review_evidence_bridge
+    status: user_authorized
+    mode: execute
+    scope:
+      - Generate deterministic EN and zh-CN visible-content, SEO, and visible-claim targets from active/LKG Career detail authority for an exact candidate slug set.
+      - Reuse review:career-seo-attestation and solo_owner evidence with exact scope identity, target count, target-set SHA, and package SHA binding.
+      - Project approved only when one immutable approved_all attestation matches the complete current bilingual package; fail closed for missing, rejected, exception, partial, duplicate, cold, or stale evidence.
+      - Expose only the public review state and timestamp projection while keeping reviewer identity and all private attestation evidence private.
+      - Preserve publication, indexability, canonical, sitemap, llms, Search Channel, held-slug, and URL-submission state.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerBuildPilotReviewPackageCommand.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerJobListController.php
+      - backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php
+      - backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php
+      - backend/tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php
+      - backend/tests/Feature/Career/CareerJobDetailApiTest.php
+      - backend/tests/Feature/Career/CareerJobListApiTest.php
+      - backend/tests/Feature/ReviewGovernance/CareerSeoReviewAttestationServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/seo/career-pilot-review-evidence-bridge-01.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web or add frontend Career content or fallback authority.
+      - Create or change Career content, publishing, indexability, canonical, sitemap, llms, Search Channel, runtime cohort, or held-slug exposure.
+      - Expose reviewer identity, attestation SHA, target SHA, target-set SHA, package SHA, evidence SHA, exceptions, or private paths through a public API.
+      - Deploy, warm or clear production caches, bind production evidence, mutate CMS/database state, publish, enqueue, approve, submit URLs, or call an external search provider.
+    validation:
+      - php -l backend/app/Console/Commands/CareerBuildPilotReviewPackageCommand.php
+      - php -l backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php
+      - php -l backend/app/Http/Controllers/API/V0_5/Career/CareerJobListController.php
+      - php -l backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php
+      - php -l backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php
+      - php -l backend/tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php tests/Feature/ReviewGovernance/CareerSeoReviewAttestationServiceTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php --no-ansi
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CareerBuildPilotReviewPackageCommand.php app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php app/Http/Controllers/API/V0_5/Career/CareerJobListController.php app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_solo_owner_career_seo_review_files' --no-ansi
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG5-EN52-TRANSLATION-AUTHORITY-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api

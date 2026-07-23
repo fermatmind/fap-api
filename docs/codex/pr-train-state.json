@@ -1,4 +1,136 @@
 {
+  "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01": {
+    "id": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-pilot-review-evidence-bridge-01",
+    "title": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01 bind exact career review evidence",
+    "depends_on": [
+      "CAREER-JOBS-INDEX-LKG-RESILIENCE-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3214",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator explicitly authorized the exact five-PR Career search-entry plan, including this reviewer-evidence bridge scope and controlled-production boundary."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3213 is merged as 31819becfcf8bda0b3fd9ae4f301b011e031374f, origin/main contains the merge, required checks passed, and local/remote task-branch cleanup was verified before this PR started from that exact main revision."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After rebasing onto latest origin/main, focused Career pilot bridge, review-governance, job list/detail, and architecture suites passed 48 tests / 773 assertions; the Big Five isolation regression passed 2 tests / 6 assertions. PHP syntax, 220-route inventory, scoped Pint, Composer strict validation/audit, YAML/JSON parsing, git diff, and exact allowed-path scope checks passed. The package command remained read-only and no controlled production action occurred."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact final implementation head cfc4121f872e207e90ad41f0fbd86cf1d8c5b1b4 passed all 9 checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. All actionable review threads are resolved. commit_sha remains null until GitHub supplies the squash merge commit, avoiding a false self-reference from this ledger-only closeout commit."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-23T09:30:00+08:00",
+        "status": "planned",
+        "note": "Operator authorized CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01 with exact branch/title and dependency on merged PR1. Scope is deterministic bilingual visible content/SEO/claim targets, exact solo-owner approved_all evidence projection, automatic stale-evidence invalidation, and private reviewer evidence. Deploy, production evidence bind, CMS/database mutation, publication, indexability, sitemap/llms, Search Channel, held-slug release, and URL submission remain prohibited."
+      },
+      {
+        "at": "2026-07-23T09:45:00+08:00",
+        "status": "in_progress",
+        "note": "Started from exact PR1 merge 31819becfcf8bda0b3fd9ae4f301b011e031374f in an isolated worktree. Added the read-only six-target-per-slug package builder and exact public projection bridge; focused validation is in progress and no controlled production action has occurred."
+      },
+      {
+        "at": "2026-07-23T01:40:00Z",
+        "status": "local_validation_passed",
+        "note": "Implemented deterministic bilingual content/SEO/visible-claim targets, exact scope/target/package evidence lookup, whole-batch stale invalidation, and identity-redacted list/detail projection. Focused suites passed 48 tests/758 assertions; syntax, 220 routes, Pint, Composer validation/audit, YAML/JSON, diff, and exact-path scope passed. No deploy, production evidence bind, cache operation, CMS/database mutation, publication, indexability, sitemap/llms, Search Channel action, held-slug release, or URL submission occurred."
+      },
+      {
+        "at": "2026-07-23T01:45:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact nine-path PR2 scope as 8c808558b429dc538df24f19149d75e699f33c6c, pushed the scoped branch, and opened PR #3214. Merge remains gated on all required GitHub checks, clean scope, mergeability, and resolved actionable review. This following commit changes only the PR2 ledger transition."
+      },
+      {
+        "at": "2026-07-23T01:50:00Z",
+        "status": "github_checks_failed_repairing",
+        "note": "Initial GitHub exact head passed hygiene, supply-chain, content-pack, both MBTI freezes, Semgrep blocking/OSS/SARIF and failed only verify-bigfive after 1583 tests because the freeze classifier flagged the new Career-only review bridge. Added that exact bridge path to the existing solo-owner Career/SEO review classifier and its positive regression set; the focused freeze tests now pass 2 tests/6 assertions. Required checks remain pending rerun and are not overridden."
+      },
+      {
+        "at": "2026-07-23T01:55:00Z",
+        "status": "github_review_repairing",
+        "note": "Addressed the automated P1 review finding: all Career list/detail public review states now default to unknown/null even when legacy trust data says approved, and only the exact current approved_all bilingual package upgrades them to approved. Added legacy-approved-without-evidence regression coverage and the required registered @review-surface annotation. Focused Career/review contracts, ReviewPolicyRegistry architecture tests, Pint, and both Big Five freeze regression tests pass locally."
+      },
+      {
+        "at": "2026-07-23T02:00:00Z",
+        "status": "github_checks_pending",
+        "note": "Rebased cleanly onto latest origin/main 1bb86cf2b while preserving the unrelated SAEP manifest item and the exact PR2 manifest/state scope. Revalidation passed 48 tests/773 assertions plus the 2-test/6-assertion Big Five isolation regression; syntax, 220 routes, Pint, Composer validation/audit, YAML/JSON, diff, and exact-path scope passed. The updated exact implementation head is f59355180375aa5892e44f2289d9001543d2b42f; required GitHub checks are pending after force-with-lease push."
+      },
+      {
+        "at": "2026-07-23T02:06:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact PR head d61adb9fe2c71e17fde5b59be528d4340772eca3 passed all 9 required/reporting checks. The automated P1 fail-closed review was fixed with regression coverage, replied to, and resolved. Scope remains limited to the declared 12 paths; merge awaits this ledger-only head's required checks."
+      },
+      {
+        "at": "2026-07-23T02:14:00Z",
+        "status": "github_review_repairing",
+        "note": "Final-head review raised three actionable boundaries before merge: bind public trust evidence, bind the exact bilingual index entry, and avoid legacy promotion/warm dispatch during package reads. The same PR now folds each locale's exact index item and visible trust evidence into the six-target package, compares the served list item to the approved hash before projection, and accepts only published active/LKG detail readiness through no-side-effect inspection. Added drift and cache-side-effect regressions; focused suites pass 50 tests/783 assertions plus the 2-test/6-assertion Big Five isolation regression. GitHub checks and review resolution are pending; no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:22:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact repair head 5aaf55009096a0c4493e1a853a2ef9a5f01581fc passed all 9 GitHub checks. Latest review then identified one locale-normalization mismatch for en-US list requests; aligned the bridge with cache normalization and added approved en-US regression coverage. Final checks remain pending and no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:31:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact locale repair head 5732637b7dba631a0229a443d61ee2b2d8896a83 passed all 9 GitHub checks. Latest review identified public score/integrity outputs missing from the visible-claim hash; added score_bundle, white_box_scores, and integrity_summary plus approved-then-score-drift fail-closed coverage. Final checks remain pending and no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:40:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact scoring repair head 61c95439bf5fba7794b17bc5a28de94791982b38 passed all 9 GitHub checks. Latest review correctly generalized the gap to any unlisted public detail field. Replaced field-by-field coverage with a recursive complete-public-detail target that excludes only derived review and private/internal evidence keys; added alias/ontology-style unlisted-field drift regression. Final checks remain pending and no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:49:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact complete-projection head 78083f1a213daed4c99ea52363ce9a0b6ee542c4 passed all 9 GitHub checks. Latest review identified that internal per-locale index hashes used by list validation could be merged into detail trust_manifest. Restricted detail projection to review_state and last_reviewed_at and extended public-response leakage regression coverage. Final checks remain pending and no production action occurred."
+      },
+      {
+        "at": "2026-07-23T02:58:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact final implementation head 50899d7c89c9eac395d0d0ffe6aa41a18dd3b13c passed all 9 GitHub checks with every actionable review thread resolved. Updated the ledger from the obsolete pre-review head to this actual green implementation head. Merge awaits only this ledger-only head's required checks; no production action occurred."
+      },
+      {
+        "at": "2026-07-23T03:07:00Z",
+        "status": "github_review_repairing",
+        "note": "Ledger-only head e5dd7a4b4818af192ce5faef9c96b8a042476652 passed all 9 checks. Final review identified that an older approval in another package scope could override a newer rejection for the same slug. Changed resolution to newest-attestation-wins per slug and set commit_sha null while the repair is pending, preventing downstream use of an obsolete head. No production action occurred."
+      },
+      {
+        "at": "2026-07-23T03:15:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact final implementation head cfc4121f872e207e90ad41f0fbd86cf1d8c5b1b4 passed all 9 GitHub checks and all review threads are resolved. commit_sha intentionally remains null until the squash merge commit exists; exact green implementation evidence is recorded here without claiming the metadata-only closeout commit as runtime authority. Merge awaits this ledger-only head's checks."
+      }
+    ],
+    "updated_at": "2026-07-23T03:15:00Z"
+  },
   "CAREER-JOBS-INDEX-LKG-RESILIENCE-01": {
     "id": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01",
     "repo": "fap-api",
@@ -6,8 +138,8 @@
     "branch": "codex/career-jobs-index-lkg-resilience-01",
     "title": "CAREER-JOBS-INDEX-LKG-RESILIENCE-01 stabilize legacy career jobs index",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "c3d8262ea627e4a3ec87e5fa6c7b321a5c8af6ed",
+    "status": "merged",
+    "commit_sha": "31819becfcf8bda0b3fd9ae4f301b011e031374f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3213",
     "checks": {
       "authorization": {
@@ -31,12 +163,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-23T01:29:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65,9 +197,14 @@
         "at": "2026-07-23T01:13:29Z",
         "status": "ready_to_merge",
         "note": "All 9 GitHub checks passed on exact head c3d8262ea627e4a3ec87e5fa6c7b321a5c8af6ed and GitHub reports CLEAN/MERGEABLE. The only review thread proposed treating an unactivated legacy v2 payload as success; this was declined because it conflicts with the operator-approved active-to-LKG then CAREER_JOB_INDEX_NOT_WARM 503 contract, and the thread is resolved. This following commit changes only the PR1 ledger state before final exact-head checks rerun."
+      },
+      {
+        "at": "2026-07-23T01:29:00Z",
+        "status": "merged",
+        "note": "Reconciled during PR2 after GitHub confirmed PR #3213 merged as 31819becfcf8bda0b3fd9ae4f301b011e031374f, origin/main containment, all nine required checks green, remote branch deletion, local task worktree/branch cleanup, and clean isolated post-merge focused revalidation. No production deploy or cache operation occurred."
       }
     ],
-    "updated_at": "2026-07-23T01:13:29Z"
+    "updated_at": "2026-07-23T01:29:00Z"
   },
   "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01": {
     "id": "ENNEAGRAM-90-CONTENT-PACKAGE-FREEZE-01",

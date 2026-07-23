@@ -106,7 +106,8 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'backend-architect')
             ->assertJsonPath('trust_manifest.content_version', 'v4.1')
-            ->assertJsonPath('trust_manifest.review_state', 'approved')
+            ->assertJsonPath('trust_manifest.review_state', 'unknown')
+            ->assertJsonPath('trust_manifest.last_reviewed_at', null)
             ->assertJsonPath('trust_manifest.reviewer', null)
             ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/backend-architect')
             ->assertJsonPath('structured_data.occupation.@type', 'Occupation')
@@ -188,7 +189,8 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'cached-career-detail')
             ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/cached-career-detail')
-            ->assertJsonPath('trust_manifest.review_state', 'approved')
+            ->assertJsonPath('trust_manifest.review_state', 'unknown')
+            ->assertJsonPath('trust_manifest.last_reviewed_at', null)
             ->assertJsonPath('trust_manifest.reviewer', null);
     }
 

@@ -196,12 +196,33 @@ final readonly class CareerSeoReviewAttestationService
         array $authoritativeTargets,
         ?string $expectedPackageSha256 = null,
     ): bool {
+        return $this->approvedAllEvidence(
+            $surfaceId,
+            $authoritativeTargets,
+            $expectedPackageSha256,
+        ) instanceof ReviewAttestation;
+    }
+
+    /**
+     * Return the newest immutable approval for the exact current target set.
+     * Reviewer identity and private evidence fields must never be projected
+     * from the returned model onto a public response.
+     *
+     * @param  list<array{identity:string,sha256:string}>  $authoritativeTargets
+     */
+    public function approvedAllEvidence(
+        string $surfaceId,
+        array $authoritativeTargets,
+        ?string $expectedPackageSha256 = null,
+        ?string $scopeType = null,
+        ?string $scopeIdentity = null,
+    ): ?ReviewAttestation {
         $currentOwnerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
         if (! $this->usesSoloOwnerMode()
             || $currentOwnerAdminUserId <= 0
             || ($expectedPackageSha256 !== null && preg_match('/^[0-9a-f]{64}$/', $expectedPackageSha256) !== 1)
             || (in_array($surfaceId, self::PACKAGE_SCOPED_SURFACES, true) && $expectedPackageSha256 === null)) {
-            return false;
+            return null;
         }
 
         $targetSet = ReviewTargetSet::fromArray(
@@ -234,8 +255,14 @@ final readonly class CareerSeoReviewAttestationService
         $expectedPackageSha256 === null
             ? $query->whereNull('package_sha256')
             : $query->where('package_sha256', $expectedPackageSha256);
+        if ($scopeType !== null) {
+            $query->where('scope_type', $scopeType);
+        }
+        if ($scopeIdentity !== null) {
+            $query->where('scope_identity', $scopeIdentity);
+        }
 
-        return $query->exists();
+        return $query->orderByDesc('attested_at')->orderByDesc('id')->first();
     }
 
     /** @param list<array{identity:string,sha256:string}> $authoritativeTargets */

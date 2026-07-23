@@ -291,6 +291,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $allowed = [
             'backend/app/Console/Commands/CareerSeoReviewAttestationCommand.php',
+            'backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php',
             'backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php',
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
         ];
@@ -8159,6 +8160,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/CareerSeoReviewAttestationCommand.php',
+            'backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php',
             'backend/app/Services/ReviewGovernance/CareerSeoReviewAttestationService.php',
             'backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php',
         ], true);

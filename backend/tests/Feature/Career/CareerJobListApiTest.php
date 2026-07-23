@@ -75,7 +75,8 @@ final class CareerJobListApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_job_index')
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.identity.canonical_slug', 'backend-architect-index')
-            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
             ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.seo_contract.index_eligible', true)
             ->assertJsonStructure([
@@ -160,7 +161,8 @@ final class CareerJobListApiTest extends TestCase
             ->assertOk()
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.identity.canonical_slug', 'cached-career-index')
-            ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
             ->assertJsonPath('items.0.trust_summary.reviewer', null);
     }
 
