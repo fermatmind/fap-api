@@ -68,6 +68,16 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
             $workflow,
         );
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
+        $this->assertStringContainsString(
+            'ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            'SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}',
+            $workflow,
+        );
+        $this->assertStringNotContainsString('PRODUCTION_DEPLOY_SSH_KEY', $workflow);
+        $this->assertStringNotContainsString('PRODUCTION_SSH_KNOWN_HOSTS', $workflow);
         $this->assertStringNotContainsString(
             'cat "$RUNNER_TEMP/ops-shared-migration.err"',
             $workflow,
