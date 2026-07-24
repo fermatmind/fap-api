@@ -105,7 +105,7 @@ jobs:
       stripped_program_section_count: ${{ steps.validate.outputs.stripped_program_section_count }}
     steps:
       - name: Checkout exact control plane
-        uses: actions/checkout@v4
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ inputs.expected_control_plane_sha }}
           fetch-depth: 1
@@ -336,13 +336,13 @@ jobs:
     environment: production
     steps:
       - name: Checkout exact control plane
-        uses: actions/checkout@v4
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ needs.eligibility.outputs.control_plane_sha }}
           fetch-depth: 1
 
       - name: Start pinned SSH agent
-        uses: webfactory/ssh-agent@v0.9.1
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
         with:
           ssh-private-key: ${{ secrets.PRODUCTION_DEPLOY_SSH_KEY }}
 
@@ -622,7 +622,7 @@ jobs:
              and .automatic_rollback_count == 0' "$receipt" >/dev/null
 
       - name: Upload immutable shared migration receipt
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: backend-production-ops-shared-config-${{ needs.eligibility.outputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/backend-production-ops-shared-config-migration.json
