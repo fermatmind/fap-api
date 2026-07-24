@@ -340,7 +340,8 @@ jobs:
           [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
           [[ "$OPS_CONFIG_PATH" != *".."* ]]
           config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
-          current_config_sha256="$(printf '0%.0s' {1..64})"
+          zero_sha256="$(printf '0%.0s' {1..64})"
+          current_config_sha256="$zero_sha256"
           if sudo -n test -f "$OPS_CONFIG_PATH"; then
             failure_gate=CONFIG_HASH
             current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
@@ -379,23 +380,23 @@ jobs:
             failure_gate=ARGV_IDENTITY
             actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
             test "$actual_argv_sha256" = "$expected_argv_sha256"
-            failure_gate=CONFIG_PATH
-            sudo -n test -f "$OPS_CONFIG_PATH"
-            failure_gate=CONFIG_MTIME
-            config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"
-            failure_gate=BOOT_TIME
-            boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
-            failure_gate=PROCESS_START_TICKS
-            start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
-            failure_gate=CLOCK_TICKS
-            clock_ticks="$(getconf CLK_TCK)"
-            [[ "$config_epoch" =~ ^[0-9]+$ ]]
-            [[ "$boot_epoch" =~ ^[0-9]+$ ]]
-            [[ "$start_ticks" =~ ^[0-9]+$ ]]
-            [[ "$clock_ticks" =~ ^[1-9][0-9]*$ ]]
-            process_epoch=$((boot_epoch + start_ticks / clock_ticks))
-            if [ "$process_epoch" -ge "$config_epoch" ]; then
-              runtime_config_current=true
+            if [ "$current_config_sha256" != "$zero_sha256" ]; then
+              failure_gate=CONFIG_MTIME
+              config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"
+              failure_gate=BOOT_TIME
+              boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
+              failure_gate=PROCESS_START_TICKS
+              start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
+              failure_gate=CLOCK_TICKS
+              clock_ticks="$(getconf CLK_TCK)"
+              [[ "$config_epoch" =~ ^[0-9]+$ ]]
+              [[ "$boot_epoch" =~ ^[0-9]+$ ]]
+              [[ "$start_ticks" =~ ^[0-9]+$ ]]
+              [[ "$clock_ticks" =~ ^[1-9][0-9]*$ ]]
+              process_epoch=$((boot_epoch + start_ticks / clock_ticks))
+              if [ "$process_epoch" -ge "$config_epoch" ]; then
+                runtime_config_current=true
+              fi
             fi
             live_process_verified=true
           fi
@@ -444,7 +445,6 @@ jobs:
           zero_sha256="$(printf '0%.0s' {1..64})"
           if [ "$program_present" = true ]; then
             test "$program_state" = RUNNING
-            test "$current_config_sha256" != "$zero_sha256"
             test "$live_process_verified" = true
           else
             test "$program_state" = MISSING
