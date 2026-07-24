@@ -22,76 +22,48 @@ on:
         description: Exact canonical ops template SHA256
         required: true
         type: string
-      expected_config_path_sha256:
-        description: Apply-only config path SHA256 from preflight
+      evidence_run_id:
+        description: Exact successful v5 queue-control preflight run
+        required: true
+        type: string
+      evidence_run_attempt:
+        description: Exact successful v5 queue-control preflight attempt
+        required: true
+        type: string
+      expected_source_path_sha256:
+        description: Apply-only shared source path SHA256
         required: false
         type: string
-      expected_current_config_sha256:
-        description: Apply-only full shared config SHA256 from preflight
-        required: false
-        type: string
-      expected_current_ops_section_sha256:
-        description: Apply-only current ops section SHA256 from preflight
+      expected_source_config_sha256:
+        description: Apply-only shared source config SHA256
         required: false
         type: string
       expected_stripped_source_sha256:
         description: Apply-only stripped shared source SHA256
         required: false
         type: string
+      expected_target_path_sha256:
+        description: Apply-only dedicated target path SHA256
+        required: false
+        type: string
+      expected_target_current_sha256:
+        description: Apply-only dedicated target current SHA256
+        required: false
+        type: string
+      expected_rendered_ops_sha256:
+        description: Apply-only rendered dedicated ops SHA256
+        required: false
+        type: string
       expected_foreign_runtime_fingerprint_sha256:
         description: Apply-only foreign runtime fingerprint SHA256
         required: false
         type: string
-      expected_rendered_ops_config_sha256:
-        description: Apply-only rendered canonical ops config SHA256
-        required: false
-        type: string
-      expected_managed_target_path_sha256:
-        description: Apply-only managed dedicated target path SHA256
-        required: false
-        type: string
-      expected_managed_target_current_sha256:
-        description: Apply-only current managed target SHA256 (zero when absent)
-        required: false
-        type: string
-      expected_config_exact_program_section_count:
-        description: Apply-only exact ops section count
-        required: false
-        type: string
-      expected_config_total_section_count:
-        description: Apply-only total shared section count
-        required: false
-        type: string
-      expected_config_foreign_program_section_count:
-        description: Apply-only foreign program section count
-        required: false
-        type: string
-      expected_stripped_exact_program_section_count:
-        description: Apply-only stripped exact ops section count
-        required: false
-        type: string
-      expected_stripped_total_section_count:
-        description: Apply-only stripped total section count
-        required: false
-        type: string
-      expected_stripped_program_section_count:
-        description: Apply-only stripped program section count
-        required: false
-        type: string
-      expected_runtime_cwd_current:
-        description: Apply-only runtime cwd flag
-        required: false
-        type: string
-      expected_runtime_config_current:
-        description: Apply-only runtime config flag
-        required: false
-        type: string
       preflight_run_id:
-        description: Apply-only immutable successful preflight run id
+        description: Apply-only immutable migration preflight run id
         required: false
         type: string
       preflight_run_attempt:
-        description: Apply-only immutable successful preflight attempt
+        description: Apply-only immutable migration preflight attempt
         required: false
         type: string
       operator_approval_phrase:
@@ -116,6 +88,21 @@ jobs:
       control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
       active_revision: ${{ steps.validate.outputs.active_revision }}
       template_sha256: ${{ steps.validate.outputs.template_sha256 }}
+      evidence_run_id: ${{ steps.validate.outputs.evidence_run_id }}
+      evidence_run_attempt: ${{ steps.validate.outputs.evidence_run_attempt }}
+      config_path_sha256: ${{ steps.validate.outputs.config_path_sha256 }}
+      current_config_sha256: ${{ steps.validate.outputs.current_config_sha256 }}
+      managed_target_path_sha256: ${{ steps.validate.outputs.managed_target_path_sha256 }}
+      managed_target_current_sha256: ${{ steps.validate.outputs.managed_target_current_sha256 }}
+      stripped_source_sha256: ${{ steps.validate.outputs.stripped_source_sha256 }}
+      rendered_ops_sha256: ${{ steps.validate.outputs.rendered_ops_sha256 }}
+      foreign_runtime_fingerprint_sha256: ${{ steps.validate.outputs.foreign_runtime_fingerprint_sha256 }}
+      config_exact_program_section_count: ${{ steps.validate.outputs.config_exact_program_section_count }}
+      config_total_section_count: ${{ steps.validate.outputs.config_total_section_count }}
+      config_foreign_program_section_count: ${{ steps.validate.outputs.config_foreign_program_section_count }}
+      stripped_exact_program_section_count: ${{ steps.validate.outputs.stripped_exact_program_section_count }}
+      stripped_total_section_count: ${{ steps.validate.outputs.stripped_total_section_count }}
+      stripped_program_section_count: ${{ steps.validate.outputs.stripped_program_section_count }}
     steps:
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -123,7 +110,7 @@ jobs:
           ref: ${{ inputs.expected_control_plane_sha }}
           fetch-depth: 1
 
-      - name: Validate exact control and immutable binding
+      - name: Validate exact control, v5 evidence and immutable binding
         id: validate
         shell: bash
         env:
@@ -132,22 +119,15 @@ jobs:
           EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
           EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
           EXPECTED_TEMPLATE_SHA256: ${{ inputs.expected_template_sha256 }}
-          EXPECTED_CONFIG_PATH_SHA256: ${{ inputs.expected_config_path_sha256 }}
-          EXPECTED_CURRENT_CONFIG_SHA256: ${{ inputs.expected_current_config_sha256 }}
-          EXPECTED_CURRENT_OPS_SECTION_SHA256: ${{ inputs.expected_current_ops_section_sha256 }}
+          EVIDENCE_RUN_ID: ${{ inputs.evidence_run_id }}
+          EVIDENCE_RUN_ATTEMPT: ${{ inputs.evidence_run_attempt }}
+          EXPECTED_SOURCE_PATH_SHA256: ${{ inputs.expected_source_path_sha256 }}
+          EXPECTED_SOURCE_CONFIG_SHA256: ${{ inputs.expected_source_config_sha256 }}
           EXPECTED_STRIPPED_SOURCE_SHA256: ${{ inputs.expected_stripped_source_sha256 }}
+          EXPECTED_TARGET_PATH_SHA256: ${{ inputs.expected_target_path_sha256 }}
+          EXPECTED_TARGET_CURRENT_SHA256: ${{ inputs.expected_target_current_sha256 }}
+          EXPECTED_RENDERED_OPS_SHA256: ${{ inputs.expected_rendered_ops_sha256 }}
           EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ inputs.expected_foreign_runtime_fingerprint_sha256 }}
-          EXPECTED_RENDERED_OPS_CONFIG_SHA256: ${{ inputs.expected_rendered_ops_config_sha256 }}
-          EXPECTED_MANAGED_TARGET_PATH_SHA256: ${{ inputs.expected_managed_target_path_sha256 }}
-          EXPECTED_MANAGED_TARGET_CURRENT_SHA256: ${{ inputs.expected_managed_target_current_sha256 }}
-          EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_exact_program_section_count }}
-          EXPECTED_CONFIG_TOTAL_SECTION_COUNT: ${{ inputs.expected_config_total_section_count }}
-          EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_foreign_program_section_count }}
-          EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT: ${{ inputs.expected_stripped_exact_program_section_count }}
-          EXPECTED_STRIPPED_TOTAL_SECTION_COUNT: ${{ inputs.expected_stripped_total_section_count }}
-          EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT: ${{ inputs.expected_stripped_program_section_count }}
-          EXPECTED_RUNTIME_CWD_CURRENT: ${{ inputs.expected_runtime_cwd_current }}
-          EXPECTED_RUNTIME_CONFIG_CURRENT: ${{ inputs.expected_runtime_config_current }}
           PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
           PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
@@ -160,6 +140,8 @@ jobs:
           [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
           [[ "$EXPECTED_TEMPLATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EVIDENCE_RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$EVIDENCE_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
@@ -167,53 +149,104 @@ jobs:
           bash -n "$control_script"
           php -l "$projector_script"
 
+          evidence_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${EVIDENCE_RUN_ID}")"
+          jq -e \
+            --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+            --argjson attempt "$EVIDENCE_RUN_ATTEMPT" \
+            '.name == "Backend Production Ops Queue Control"
+             and .path == ".github/workflows/backend-production-ops-queue-control.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == $sha
+             and .run_attempt == $attempt' <<<"$evidence_run_json" >/dev/null
+
+          evidence_dir="$(mktemp -d)"
+          gh run download "$EVIDENCE_RUN_ID" \
+            --name "backend-production-ops-queue-preflight-${EVIDENCE_RUN_ID}-${EVIDENCE_RUN_ATTEMPT}" \
+            --dir "$evidence_dir"
+          evidence_receipt="$evidence_dir/backend-production-ops-queue-control.json"
+          test -f "$evidence_receipt"
+          jq -e \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg template_sha "$EXPECTED_TEMPLATE_SHA256" \
+            '.contract_version == "backend.production_ops_queue_control.v5"
+             and .mode == "preflight"
+             and .status == "PASS_PREFLIGHT"
+             and .control_plane_sha == $control
+             and .active_revision == $active
+             and .template_sha256 == $template_sha
+             and .config_layout == "SHARED"
+             and .config_exact_program_section_count == 1
+             and .config_total_section_count == 3
+             and .config_foreign_program_section_count == 2
+             and .apply_supported == false
+             and .managed_target_current_sha256 == ("0" * 64)
+             and .stripped_exact_program_section_count == 0
+             and .stripped_total_section_count == 2
+             and .stripped_program_section_count == 2
+             and .migration_supported == true
+             and .runtime_cwd_current == true
+             and .runtime_config_current == true
+             and .ops_pending_total == 0
+             and .live_process_verified == true
+             and .production_write_execution == false
+             and .config_write_count == 0
+             and .application_deploy_count == 0
+             and .symlink_write_count == 0
+             and .cms_or_database_authority_write_count == 0
+             and .publication_or_discoverability_write_count == 0' \
+            "$evidence_receipt" >/dev/null
+
+          config_path_sha256="$(jq -r '.config_path_sha256' "$evidence_receipt")"
+          current_config_sha256="$(jq -r '.current_config_sha256' "$evidence_receipt")"
+          managed_target_path_sha256="$(jq -r '.managed_target_path_sha256' "$evidence_receipt")"
+          managed_target_current_sha256="$(jq -r '.managed_target_current_sha256' "$evidence_receipt")"
+          stripped_source_sha256="$(jq -r '.stripped_source_sha256' "$evidence_receipt")"
+          rendered_ops_sha256="$(jq -r '.rendered_sha256' "$evidence_receipt")"
+          foreign_runtime_fingerprint_sha256="$(jq -r '.foreign_runtime_fingerprint_sha256' "$evidence_receipt")"
+          config_exact_program_section_count="$(jq -r '.config_exact_program_section_count' "$evidence_receipt")"
+          config_total_section_count="$(jq -r '.config_total_section_count' "$evidence_receipt")"
+          config_foreign_program_section_count="$(jq -r '.config_foreign_program_section_count' "$evidence_receipt")"
+          stripped_exact_program_section_count="$(jq -r '.stripped_exact_program_section_count' "$evidence_receipt")"
+          stripped_total_section_count="$(jq -r '.stripped_total_section_count' "$evidence_receipt")"
+          stripped_program_section_count="$(jq -r '.stripped_program_section_count' "$evidence_receipt")"
+          for hash_value in \
+            "$config_path_sha256" "$current_config_sha256" \
+            "$managed_target_path_sha256" "$managed_target_current_sha256" \
+            "$stripped_source_sha256" "$rendered_ops_sha256" \
+            "$foreign_runtime_fingerprint_sha256"; do
+            [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
+          done
+
           if [ "$MODE" = preflight ]; then
-            test -z "$EXPECTED_CONFIG_PATH_SHA256"
-            test -z "$EXPECTED_CURRENT_CONFIG_SHA256"
-            test -z "$EXPECTED_CURRENT_OPS_SECTION_SHA256"
+            test -z "$EXPECTED_SOURCE_PATH_SHA256"
+            test -z "$EXPECTED_SOURCE_CONFIG_SHA256"
             test -z "$EXPECTED_STRIPPED_SOURCE_SHA256"
+            test -z "$EXPECTED_TARGET_PATH_SHA256"
+            test -z "$EXPECTED_TARGET_CURRENT_SHA256"
+            test -z "$EXPECTED_RENDERED_OPS_SHA256"
             test -z "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
-            test -z "$EXPECTED_RENDERED_OPS_CONFIG_SHA256"
-            test -z "$EXPECTED_MANAGED_TARGET_PATH_SHA256"
-            test -z "$EXPECTED_MANAGED_TARGET_CURRENT_SHA256"
-            test -z "$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT"
-            test -z "$EXPECTED_CONFIG_TOTAL_SECTION_COUNT"
-            test -z "$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT"
-            test -z "$EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT"
-            test -z "$EXPECTED_STRIPPED_TOTAL_SECTION_COUNT"
-            test -z "$EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT"
-            test -z "$EXPECTED_RUNTIME_CWD_CURRENT"
-            test -z "$EXPECTED_RUNTIME_CONFIG_CURRENT"
             test -z "$PREFLIGHT_RUN_ID"
             test -z "$PREFLIGHT_RUN_ATTEMPT"
             test -z "$OPERATOR_APPROVAL_PHRASE"
           else
             test "$MODE" = apply
             for hash_value in \
-              "$EXPECTED_CONFIG_PATH_SHA256" \
-              "$EXPECTED_CURRENT_CONFIG_SHA256" \
-              "$EXPECTED_CURRENT_OPS_SECTION_SHA256" \
-              "$EXPECTED_STRIPPED_SOURCE_SHA256" \
-              "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
-              "$EXPECTED_RENDERED_OPS_CONFIG_SHA256" \
-              "$EXPECTED_MANAGED_TARGET_PATH_SHA256" \
-              "$EXPECTED_MANAGED_TARGET_CURRENT_SHA256"; do
+              "$EXPECTED_SOURCE_PATH_SHA256" "$EXPECTED_SOURCE_CONFIG_SHA256" \
+              "$EXPECTED_STRIPPED_SOURCE_SHA256" "$EXPECTED_TARGET_PATH_SHA256" \
+              "$EXPECTED_TARGET_CURRENT_SHA256" "$EXPECTED_RENDERED_OPS_SHA256" \
+              "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256"; do
               [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
             done
-            [[ "$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT" =~ ^[0-9]+$ ]]
-            [[ "$EXPECTED_CONFIG_TOTAL_SECTION_COUNT" =~ ^[0-9]+$ ]]
-            [[ "$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT" =~ ^[0-9]+$ ]]
-            [[ "$EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT" =~ ^[0-9]+$ ]]
-            [[ "$EXPECTED_STRIPPED_TOTAL_SECTION_COUNT" =~ ^[0-9]+$ ]]
-            [[ "$EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT" =~ ^[0-9]+$ ]]
-            [[ "$EXPECTED_RUNTIME_CWD_CURRENT" =~ ^(true|false)$ ]]
-            [[ "$EXPECTED_RUNTIME_CONFIG_CURRENT" =~ ^(true|false)$ ]]
             [[ "$PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
             [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
-            expected_phrase="I explicitly approve production fap-api shared-to-dedicated ops config migration from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} template SHA256 ${EXPECTED_TEMPLATE_SHA256} source-path SHA256 ${EXPECTED_CONFIG_PATH_SHA256} source-current SHA256 ${EXPECTED_CURRENT_CONFIG_SHA256} current-ops-section SHA256 ${EXPECTED_CURRENT_OPS_SECTION_SHA256} stripped-source SHA256 ${EXPECTED_STRIPPED_SOURCE_SHA256} managed-target-path SHA256 ${EXPECTED_MANAGED_TARGET_PATH_SHA256} managed-target-current SHA256 ${EXPECTED_MANAGED_TARGET_CURRENT_SHA256} rendered-ops-config SHA256 ${EXPECTED_RENDERED_OPS_CONFIG_SHA256} foreign-runtime-fingerprint SHA256 ${EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256} source-section-counts ${EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT}/${EXPECTED_CONFIG_TOTAL_SECTION_COUNT}/${EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT} stripped-section-counts ${EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT}/${EXPECTED_STRIPPED_TOTAL_SECTION_COUNT}/${EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT} runtime-cwd-current ${EXPECTED_RUNTIME_CWD_CURRENT} runtime-config-current ${EXPECTED_RUNTIME_CONFIG_CURRENT}; remove only the exact [program:fap-queue-ops] section from the attested shared source, install only the canonical dedicated target, preserve both foreign programs and their runtime fingerprint, update only fap-queue-ops, and perform exact rollback on failed readback; no deploy/symlink/application-migration/CMS/database-authority/publication/indexability/sitemap/llms/search/PR23."
+            expected_phrase="I explicitly approve production fap-api shared-to-dedicated ops config migration from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} and v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} template SHA256 ${EXPECTED_TEMPLATE_SHA256} source-path SHA256 ${EXPECTED_SOURCE_PATH_SHA256} source-config SHA256 ${EXPECTED_SOURCE_CONFIG_SHA256} stripped-source SHA256 ${EXPECTED_STRIPPED_SOURCE_SHA256} target-path SHA256 ${EXPECTED_TARGET_PATH_SHA256} target-current SHA256 ${EXPECTED_TARGET_CURRENT_SHA256} rendered-ops SHA256 ${EXPECTED_RENDERED_OPS_SHA256} foreign-runtime SHA256 ${EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256} section-counts 1/3/2 to 0/2/2; write one stripped shared source and one dedicated ops config, preserve foreign program state and PIDs, restart only fap-queue-ops, keep exact backup, and stop without automatic rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23."
             test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
 
-            run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+            preflight_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
             jq -e \
               --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
               --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
@@ -224,34 +257,26 @@ jobs:
                and .conclusion == "success"
                and .head_branch == "main"
                and .head_sha == $sha
-               and .run_attempt == $attempt' <<<"$run_json" >/dev/null
-
-            receipt_dir="$(mktemp -d)"
+               and .run_attempt == $attempt' <<<"$preflight_run_json" >/dev/null
+            preflight_dir="$(mktemp -d)"
             gh run download "$PREFLIGHT_RUN_ID" \
               --name "backend-production-ops-shared-config-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
-              --dir "$receipt_dir"
-            receipt="$receipt_dir/backend-production-ops-shared-config-migration.json"
-            test -f "$receipt"
+              --dir "$preflight_dir"
+            preflight_receipt="$preflight_dir/backend-production-ops-shared-config-migration.json"
+            test -f "$preflight_receipt"
             jq -e \
               --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
               --arg active "$EXPECTED_ACTIVE_REVISION" \
               --arg template_sha "$EXPECTED_TEMPLATE_SHA256" \
-              --arg config_path_sha "$EXPECTED_CONFIG_PATH_SHA256" \
-              --arg current_config_sha "$EXPECTED_CURRENT_CONFIG_SHA256" \
-              --arg current_ops_sha "$EXPECTED_CURRENT_OPS_SECTION_SHA256" \
-              --arg stripped_source_sha "$EXPECTED_STRIPPED_SOURCE_SHA256" \
-              --arg foreign_runtime_fingerprint_sha "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
-              --arg rendered_ops_config_sha "$EXPECTED_RENDERED_OPS_CONFIG_SHA256" \
-              --arg managed_target_path_sha "$EXPECTED_MANAGED_TARGET_PATH_SHA256" \
-              --arg managed_target_current_sha "$EXPECTED_MANAGED_TARGET_CURRENT_SHA256" \
-              --argjson exact_count "$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT" \
-              --argjson total_count "$EXPECTED_CONFIG_TOTAL_SECTION_COUNT" \
-              --argjson foreign_count "$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT" \
-              --argjson stripped_exact_count "$EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT" \
-              --argjson stripped_total_count "$EXPECTED_STRIPPED_TOTAL_SECTION_COUNT" \
-              --argjson stripped_program_count "$EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT" \
-              --argjson runtime_cwd "$EXPECTED_RUNTIME_CWD_CURRENT" \
-              --argjson runtime_config "$EXPECTED_RUNTIME_CONFIG_CURRENT" \
+              --arg evidence_run_id "$EVIDENCE_RUN_ID" \
+              --arg evidence_run_attempt "$EVIDENCE_RUN_ATTEMPT" \
+              --arg source_path "$EXPECTED_SOURCE_PATH_SHA256" \
+              --arg source_config "$EXPECTED_SOURCE_CONFIG_SHA256" \
+              --arg stripped_source "$EXPECTED_STRIPPED_SOURCE_SHA256" \
+              --arg target_path "$EXPECTED_TARGET_PATH_SHA256" \
+              --arg target_current "$EXPECTED_TARGET_CURRENT_SHA256" \
+              --arg rendered_ops "$EXPECTED_RENDERED_OPS_SHA256" \
+              --arg foreign_runtime "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
               --arg run_id "$PREFLIGHT_RUN_ID" \
               --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
               '.contract_version == "backend.production_ops_shared_config_migration.v2"
@@ -259,29 +284,27 @@ jobs:
                and .status == "PASS_PREFLIGHT"
                and .run_id == $run_id
                and .run_attempt == $run_attempt
+               and .evidence_run_id == $evidence_run_id
+               and .evidence_run_attempt == $evidence_run_attempt
                and .control_plane_sha == $control
                and .active_revision == $active
                and .template_sha256 == $template_sha
-               and .config_path_sha256 == $config_path_sha
-               and .current_config_sha256 == $current_config_sha
-               and .current_ops_section_sha256 == $current_ops_sha
-               and .stripped_source_sha256 == $stripped_source_sha
-               and .foreign_runtime_fingerprint_sha256 == $foreign_runtime_fingerprint_sha
-               and .rendered_ops_config_sha256 == $rendered_ops_config_sha
-               and .managed_target_path_sha256 == $managed_target_path_sha
-               and .managed_target_current_sha256 == $managed_target_current_sha
-               and .config_exact_program_section_count == $exact_count
-               and .config_total_section_count == $total_count
-               and .config_foreign_program_section_count == $foreign_count
-               and .stripped_exact_program_section_count == $stripped_exact_count
-               and .stripped_total_section_count == $stripped_total_count
-               and .stripped_program_section_count == $stripped_program_count
-               and .runtime_cwd_current == $runtime_cwd
-               and .runtime_config_current == $runtime_config
+               and .source_path_sha256 == $source_path
+               and .source_config_sha256 == $source_config
+               and .stripped_source_sha256 == $stripped_source
+               and .target_path_sha256 == $target_path
+               and .target_current_sha256 == $target_current
+               and .rendered_ops_sha256 == $rendered_ops
+               and .foreign_runtime_fingerprint_sha256 == $foreign_runtime
+               and .config_exact_program_section_count == 1
+               and .config_total_section_count == 3
+               and .config_foreign_program_section_count == 2
+               and .stripped_exact_program_section_count == 0
+               and .stripped_total_section_count == 2
+               and .stripped_program_section_count == 2
                and .ops_pending_total == 0
                and .live_process_verified == true
-               and .migration_supported == true
-               and .production_write_execution == false' "$receipt" >/dev/null
+               and .production_write_execution == false' "$preflight_receipt" >/dev/null
           fi
 
           {
@@ -289,10 +312,25 @@ jobs:
             echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
             echo "active_revision=$EXPECTED_ACTIVE_REVISION"
             echo "template_sha256=$EXPECTED_TEMPLATE_SHA256"
+            echo "evidence_run_id=$EVIDENCE_RUN_ID"
+            echo "evidence_run_attempt=$EVIDENCE_RUN_ATTEMPT"
+            echo "config_path_sha256=$config_path_sha256"
+            echo "current_config_sha256=$current_config_sha256"
+            echo "managed_target_path_sha256=$managed_target_path_sha256"
+            echo "managed_target_current_sha256=$managed_target_current_sha256"
+            echo "stripped_source_sha256=$stripped_source_sha256"
+            echo "rendered_ops_sha256=$rendered_ops_sha256"
+            echo "foreign_runtime_fingerprint_sha256=$foreign_runtime_fingerprint_sha256"
+            echo "config_exact_program_section_count=$config_exact_program_section_count"
+            echo "config_total_section_count=$config_total_section_count"
+            echo "config_foreign_program_section_count=$config_foreign_program_section_count"
+            echo "stripped_exact_program_section_count=$stripped_exact_program_section_count"
+            echo "stripped_total_section_count=$stripped_total_section_count"
+            echo "stripped_program_section_count=$stripped_program_section_count"
           } >> "$GITHUB_OUTPUT"
 
   control:
-    name: Preflight or apply shared ops section migration
+    name: Preflight or apply shared to dedicated ops migration
     needs: eligibility
     runs-on: ubuntu-latest
     environment: production
@@ -333,22 +371,26 @@ jobs:
           DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
           EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
           EXPECTED_TEMPLATE_SHA256: ${{ needs.eligibility.outputs.template_sha256 }}
-          EXPECTED_CONFIG_PATH_SHA256: ${{ inputs.expected_config_path_sha256 }}
-          EXPECTED_CURRENT_CONFIG_SHA256: ${{ inputs.expected_current_config_sha256 }}
-          EXPECTED_CURRENT_OPS_SECTION_SHA256: ${{ inputs.expected_current_ops_section_sha256 }}
+          EVIDENCE_CONFIG_PATH_SHA256: ${{ needs.eligibility.outputs.config_path_sha256 }}
+          EVIDENCE_CURRENT_CONFIG_SHA256: ${{ needs.eligibility.outputs.current_config_sha256 }}
+          EVIDENCE_MANAGED_TARGET_PATH_SHA256: ${{ needs.eligibility.outputs.managed_target_path_sha256 }}
+          EVIDENCE_MANAGED_TARGET_CURRENT_SHA256: ${{ needs.eligibility.outputs.managed_target_current_sha256 }}
+          EVIDENCE_STRIPPED_SOURCE_SHA256: ${{ needs.eligibility.outputs.stripped_source_sha256 }}
+          EVIDENCE_RENDERED_OPS_SHA256: ${{ needs.eligibility.outputs.rendered_ops_sha256 }}
+          EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ needs.eligibility.outputs.foreign_runtime_fingerprint_sha256 }}
+          EVIDENCE_CONFIG_EXACT_PROGRAM_SECTION_COUNT: ${{ needs.eligibility.outputs.config_exact_program_section_count }}
+          EVIDENCE_CONFIG_TOTAL_SECTION_COUNT: ${{ needs.eligibility.outputs.config_total_section_count }}
+          EVIDENCE_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT: ${{ needs.eligibility.outputs.config_foreign_program_section_count }}
+          EVIDENCE_STRIPPED_EXACT_PROGRAM_SECTION_COUNT: ${{ needs.eligibility.outputs.stripped_exact_program_section_count }}
+          EVIDENCE_STRIPPED_TOTAL_SECTION_COUNT: ${{ needs.eligibility.outputs.stripped_total_section_count }}
+          EVIDENCE_STRIPPED_PROGRAM_SECTION_COUNT: ${{ needs.eligibility.outputs.stripped_program_section_count }}
+          EXPECTED_SOURCE_PATH_SHA256: ${{ inputs.expected_source_path_sha256 }}
+          EXPECTED_SOURCE_CONFIG_SHA256: ${{ inputs.expected_source_config_sha256 }}
           EXPECTED_STRIPPED_SOURCE_SHA256: ${{ inputs.expected_stripped_source_sha256 }}
+          EXPECTED_TARGET_PATH_SHA256: ${{ inputs.expected_target_path_sha256 }}
+          EXPECTED_TARGET_CURRENT_SHA256: ${{ inputs.expected_target_current_sha256 }}
+          EXPECTED_RENDERED_OPS_SHA256: ${{ inputs.expected_rendered_ops_sha256 }}
           EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ inputs.expected_foreign_runtime_fingerprint_sha256 }}
-          EXPECTED_RENDERED_OPS_CONFIG_SHA256: ${{ inputs.expected_rendered_ops_config_sha256 }}
-          EXPECTED_MANAGED_TARGET_PATH_SHA256: ${{ inputs.expected_managed_target_path_sha256 }}
-          EXPECTED_MANAGED_TARGET_CURRENT_SHA256: ${{ inputs.expected_managed_target_current_sha256 }}
-          EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_exact_program_section_count }}
-          EXPECTED_CONFIG_TOTAL_SECTION_COUNT: ${{ inputs.expected_config_total_section_count }}
-          EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_foreign_program_section_count }}
-          EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT: ${{ inputs.expected_stripped_exact_program_section_count }}
-          EXPECTED_STRIPPED_TOTAL_SECTION_COUNT: ${{ inputs.expected_stripped_total_section_count }}
-          EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT: ${{ inputs.expected_stripped_program_section_count }}
-          EXPECTED_RUNTIME_CWD_CURRENT: ${{ inputs.expected_runtime_cwd_current }}
-          EXPECTED_RUNTIME_CONFIG_CURRENT: ${{ inputs.expected_runtime_config_current }}
         run: |
           set -euo pipefail
           [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
@@ -367,66 +409,82 @@ jobs:
           set +e
           result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' OPS_CANDIDATE_B64='$candidate_b64' OPS_PROJECTOR_B64='$projector_b64' CONTROL_RUN_ID='$GITHUB_RUN_ID' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_CURRENT_OPS_SECTION_SHA256='$EXPECTED_CURRENT_OPS_SECTION_SHA256' EXPECTED_STRIPPED_SOURCE_SHA256='$EXPECTED_STRIPPED_SOURCE_SHA256' EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256='$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256' EXPECTED_RENDERED_OPS_CONFIG_SHA256='$EXPECTED_RENDERED_OPS_CONFIG_SHA256' EXPECTED_MANAGED_TARGET_PATH_SHA256='$EXPECTED_MANAGED_TARGET_PATH_SHA256' EXPECTED_MANAGED_TARGET_CURRENT_SHA256='$EXPECTED_MANAGED_TARGET_CURRENT_SHA256' EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT='$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT' EXPECTED_CONFIG_TOTAL_SECTION_COUNT='$EXPECTED_CONFIG_TOTAL_SECTION_COUNT' EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT='$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT' EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT='$EXPECTED_STRIPPED_EXACT_PROGRAM_SECTION_COUNT' EXPECTED_STRIPPED_TOTAL_SECTION_COUNT='$EXPECTED_STRIPPED_TOTAL_SECTION_COUNT' EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT='$EXPECTED_STRIPPED_PROGRAM_SECTION_COUNT' EXPECTED_RUNTIME_CWD_CURRENT='$EXPECTED_RUNTIME_CWD_CURRENT' EXPECTED_RUNTIME_CONFIG_CURRENT='$EXPECTED_RUNTIME_CONFIG_CURRENT' bash -lc 'printf %s $control_b64 | base64 -d | bash'" \
-            2>"$RUNNER_TEMP/ops-shared-config.err")"
+            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' OPS_CANDIDATE_B64='$candidate_b64' OPS_PROJECTOR_B64='$projector_b64' CONTROL_RUN_ID='$GITHUB_RUN_ID' EVIDENCE_CONFIG_PATH_SHA256='$EVIDENCE_CONFIG_PATH_SHA256' EVIDENCE_CURRENT_CONFIG_SHA256='$EVIDENCE_CURRENT_CONFIG_SHA256' EVIDENCE_MANAGED_TARGET_PATH_SHA256='$EVIDENCE_MANAGED_TARGET_PATH_SHA256' EVIDENCE_MANAGED_TARGET_CURRENT_SHA256='$EVIDENCE_MANAGED_TARGET_CURRENT_SHA256' EVIDENCE_STRIPPED_SOURCE_SHA256='$EVIDENCE_STRIPPED_SOURCE_SHA256' EVIDENCE_RENDERED_OPS_SHA256='$EVIDENCE_RENDERED_OPS_SHA256' EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256='$EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256' EVIDENCE_CONFIG_EXACT_PROGRAM_SECTION_COUNT='$EVIDENCE_CONFIG_EXACT_PROGRAM_SECTION_COUNT' EVIDENCE_CONFIG_TOTAL_SECTION_COUNT='$EVIDENCE_CONFIG_TOTAL_SECTION_COUNT' EVIDENCE_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT='$EVIDENCE_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT' EVIDENCE_STRIPPED_EXACT_PROGRAM_SECTION_COUNT='$EVIDENCE_STRIPPED_EXACT_PROGRAM_SECTION_COUNT' EVIDENCE_STRIPPED_TOTAL_SECTION_COUNT='$EVIDENCE_STRIPPED_TOTAL_SECTION_COUNT' EVIDENCE_STRIPPED_PROGRAM_SECTION_COUNT='$EVIDENCE_STRIPPED_PROGRAM_SECTION_COUNT' EXPECTED_SOURCE_PATH_SHA256='$EXPECTED_SOURCE_PATH_SHA256' EXPECTED_SOURCE_CONFIG_SHA256='$EXPECTED_SOURCE_CONFIG_SHA256' EXPECTED_STRIPPED_SOURCE_SHA256='$EXPECTED_STRIPPED_SOURCE_SHA256' EXPECTED_TARGET_PATH_SHA256='$EXPECTED_TARGET_PATH_SHA256' EXPECTED_TARGET_CURRENT_SHA256='$EXPECTED_TARGET_CURRENT_SHA256' EXPECTED_RENDERED_OPS_SHA256='$EXPECTED_RENDERED_OPS_SHA256' EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256='$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256' bash -lc 'printf %s $control_b64 | base64 -d | bash'" \
+            2>"$RUNNER_TEMP/ops-shared-migration.err")"
           ssh_rc=$?
           set -e
           if [ "$ssh_rc" -ne 0 ]; then
-            failure_code="$(grep -Eo 'OPS_SHARED_CONFIG_(GATE|ROLLBACK)_FAILED:[A-Z0-9_]+' \
-              "$RUNNER_TEMP/ops-shared-config.err" | tail -n 1 || true)"
-            if [[ "$failure_code" =~ ^OPS_SHARED_CONFIG_(GATE|ROLLBACK)_FAILED:[A-Z0-9_]+$ ]]; then
+            failure_code="$(grep -Eo 'OPS_SHARED_MIGRATION_GATE_FAILED:[A-Z0-9_]+' \
+              "$RUNNER_TEMP/ops-shared-migration.err" | tail -n 1 || true)"
+            if [[ "$failure_code" =~ ^OPS_SHARED_MIGRATION_GATE_FAILED:[A-Z0-9_]+$ ]]; then
               echo "$failure_code" >&2
             else
-              echo "OPS_SHARED_CONFIG_REMOTE_FAILED" >&2
+              echo "OPS_SHARED_MIGRATION_REMOTE_FAILED" >&2
             fi
             exit "$ssh_rc"
           fi
 
-          known_keys='^(active_revision|config_path_sha256|current_config_sha256|current_ops_section_sha256|stripped_source_sha256|foreign_runtime_fingerprint_sha256|rendered_ops_config_sha256|managed_target_path_sha256|managed_target_current_sha256|config_exact_program_section_count|config_total_section_count|config_foreign_program_section_count|stripped_exact_program_section_count|stripped_total_section_count|stripped_program_section_count|runtime_cwd_current|runtime_config_current|ops_pending_total|live_process_verified|migration_supported|status|production_write_execution|source_config_write_count|managed_target_write_count|worker_restart_count|rollback_execution_count)='
+          known_keys='^(active_revision|source_path_sha256|source_config_sha256|stripped_source_sha256|target_path_sha256|target_current_sha256|rendered_ops_sha256|foreign_runtime_fingerprint_sha256|config_exact_program_section_count|config_total_section_count|config_foreign_program_section_count|stripped_exact_program_section_count|stripped_total_section_count|stripped_program_section_count|runtime_cwd_current|runtime_config_current|ops_pending_total|live_process_verified|backup_sha256|post_source_sha256|post_target_sha256|post_foreign_runtime_fingerprint_sha256|status|production_write_execution|source_config_write_count|target_config_write_count|backup_write_count|worker_restart_count|migration_count|automatic_rollback_count)='
           test -z "$(grep -Ev "$known_keys" <<<"$result" || true)"
           value() {
             local key="$1"
             awk -F= -v key="$key" '$1 == key {print substr($0, length(key) + 2)}' <<<"$result"
           }
           for key in \
-            active_revision config_path_sha256 current_config_sha256 \
-            current_ops_section_sha256 stripped_source_sha256 foreign_runtime_fingerprint_sha256 \
-            rendered_ops_config_sha256 managed_target_path_sha256 managed_target_current_sha256 \
-            config_exact_program_section_count config_total_section_count \
-            config_foreign_program_section_count stripped_exact_program_section_count \
-            stripped_total_section_count stripped_program_section_count \
-            runtime_cwd_current runtime_config_current ops_pending_total live_process_verified \
-            migration_supported status production_write_execution source_config_write_count \
-            managed_target_write_count worker_restart_count rollback_execution_count; do
+            active_revision source_path_sha256 source_config_sha256 stripped_source_sha256 \
+            target_path_sha256 target_current_sha256 rendered_ops_sha256 \
+            foreign_runtime_fingerprint_sha256 config_exact_program_section_count \
+            config_total_section_count config_foreign_program_section_count \
+            stripped_exact_program_section_count stripped_total_section_count \
+            stripped_program_section_count runtime_cwd_current runtime_config_current \
+            ops_pending_total live_process_verified backup_sha256 post_source_sha256 \
+            post_target_sha256 post_foreign_runtime_fingerprint_sha256 status \
+            production_write_execution source_config_write_count target_config_write_count \
+            backup_write_count worker_restart_count migration_count automatic_rollback_count; do
             field_value="$(value "$key")"
             test -n "$field_value"
             echo "$key=$field_value" >> "$GITHUB_OUTPUT"
           done
           test "$(value active_revision)" = "$EXPECTED_ACTIVE_REVISION"
-          test "$(value rendered_ops_config_sha256)" = "$(sha256sum "$candidate" | awk '{print $1}')"
-          test "$(value ops_pending_total)" = 0
-          test "$(value live_process_verified)" = true
+          test "$(value source_path_sha256)" = "$EVIDENCE_CONFIG_PATH_SHA256"
+          test "$(value source_config_sha256)" = "$EVIDENCE_CURRENT_CONFIG_SHA256"
+          test "$(value stripped_source_sha256)" = "$EVIDENCE_STRIPPED_SOURCE_SHA256"
+          test "$(value rendered_ops_sha256)" = "$EVIDENCE_RENDERED_OPS_SHA256"
+          test "$(value rendered_ops_sha256)" = "$(sha256sum "$candidate" | awk '{print $1}')"
+          test "$(value target_path_sha256)" = "$EVIDENCE_MANAGED_TARGET_PATH_SHA256"
+          test "$(value target_current_sha256)" = "$EVIDENCE_MANAGED_TARGET_CURRENT_SHA256"
+          test "$(value foreign_runtime_fingerprint_sha256)" = "$EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
           test "$(value config_exact_program_section_count)" = 1
           test "$(value config_total_section_count)" = 3
           test "$(value config_foreign_program_section_count)" = 2
           test "$(value stripped_exact_program_section_count)" = 0
           test "$(value stripped_total_section_count)" = 2
           test "$(value stripped_program_section_count)" = 2
-          test "$(value migration_supported)" = true
+          test "$(value runtime_cwd_current)" = true
+          test "$(value runtime_config_current)" = true
+          test "$(value ops_pending_total)" = 0
+          test "$(value live_process_verified)" = true
+          test "$(value automatic_rollback_count)" = 0
           if [ "$MODE" = preflight ]; then
             test "$(value status)" = PASS_PREFLIGHT
             test "$(value production_write_execution)" = false
             test "$(value source_config_write_count)" = 0
-            test "$(value managed_target_write_count)" = 0
+            test "$(value target_config_write_count)" = 0
+            test "$(value backup_write_count)" = 0
             test "$(value worker_restart_count)" = 0
+            test "$(value migration_count)" = 0
           else
             test "$(value status)" = PASS_APPLY
             test "$(value production_write_execution)" = true
             test "$(value source_config_write_count)" = 1
-            test "$(value managed_target_write_count)" = 1
+            test "$(value target_config_write_count)" = 1
+            test "$(value backup_write_count)" = 1
             test "$(value worker_restart_count)" = 1
+            test "$(value migration_count)" = 1
+            test "$(value post_source_sha256)" = "$EXPECTED_STRIPPED_SOURCE_SHA256"
+            test "$(value post_target_sha256)" = "$EXPECTED_RENDERED_OPS_SHA256"
+            test "$(value post_foreign_runtime_fingerprint_sha256)" = "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
           fi
-          test "$(value rollback_execution_count)" = 0
 
       - name: Build sanitized immutable receipt
         shell: bash
@@ -434,16 +492,17 @@ jobs:
           MODE: ${{ needs.eligibility.outputs.mode }}
           CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
           TEMPLATE_SHA256: ${{ needs.eligibility.outputs.template_sha256 }}
+          EVIDENCE_RUN_ID: ${{ needs.eligibility.outputs.evidence_run_id }}
+          EVIDENCE_RUN_ATTEMPT: ${{ needs.eligibility.outputs.evidence_run_attempt }}
           ACTIVE_REVISION: ${{ steps.control.outputs.active_revision }}
           STATUS: ${{ steps.control.outputs.status }}
-          CONFIG_PATH_SHA256: ${{ steps.control.outputs.config_path_sha256 }}
-          CURRENT_CONFIG_SHA256: ${{ steps.control.outputs.current_config_sha256 }}
-          CURRENT_OPS_SECTION_SHA256: ${{ steps.control.outputs.current_ops_section_sha256 }}
+          SOURCE_PATH_SHA256: ${{ steps.control.outputs.source_path_sha256 }}
+          SOURCE_CONFIG_SHA256: ${{ steps.control.outputs.source_config_sha256 }}
           STRIPPED_SOURCE_SHA256: ${{ steps.control.outputs.stripped_source_sha256 }}
+          TARGET_PATH_SHA256: ${{ steps.control.outputs.target_path_sha256 }}
+          TARGET_CURRENT_SHA256: ${{ steps.control.outputs.target_current_sha256 }}
+          RENDERED_OPS_SHA256: ${{ steps.control.outputs.rendered_ops_sha256 }}
           FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ steps.control.outputs.foreign_runtime_fingerprint_sha256 }}
-          RENDERED_OPS_CONFIG_SHA256: ${{ steps.control.outputs.rendered_ops_config_sha256 }}
-          MANAGED_TARGET_PATH_SHA256: ${{ steps.control.outputs.managed_target_path_sha256 }}
-          MANAGED_TARGET_CURRENT_SHA256: ${{ steps.control.outputs.managed_target_current_sha256 }}
           EXACT_COUNT: ${{ steps.control.outputs.config_exact_program_section_count }}
           TOTAL_COUNT: ${{ steps.control.outputs.config_total_section_count }}
           FOREIGN_COUNT: ${{ steps.control.outputs.config_foreign_program_section_count }}
@@ -454,11 +513,17 @@ jobs:
           RUNTIME_CONFIG_CURRENT: ${{ steps.control.outputs.runtime_config_current }}
           OPS_PENDING_TOTAL: ${{ steps.control.outputs.ops_pending_total }}
           LIVE_PROCESS_VERIFIED: ${{ steps.control.outputs.live_process_verified }}
+          BACKUP_SHA256: ${{ steps.control.outputs.backup_sha256 }}
+          POST_SOURCE_SHA256: ${{ steps.control.outputs.post_source_sha256 }}
+          POST_TARGET_SHA256: ${{ steps.control.outputs.post_target_sha256 }}
+          POST_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ steps.control.outputs.post_foreign_runtime_fingerprint_sha256 }}
           PRODUCTION_WRITE_EXECUTION: ${{ steps.control.outputs.production_write_execution }}
           SOURCE_CONFIG_WRITE_COUNT: ${{ steps.control.outputs.source_config_write_count }}
-          MANAGED_TARGET_WRITE_COUNT: ${{ steps.control.outputs.managed_target_write_count }}
+          TARGET_CONFIG_WRITE_COUNT: ${{ steps.control.outputs.target_config_write_count }}
+          BACKUP_WRITE_COUNT: ${{ steps.control.outputs.backup_write_count }}
           WORKER_RESTART_COUNT: ${{ steps.control.outputs.worker_restart_count }}
-          ROLLBACK_EXECUTION_COUNT: ${{ steps.control.outputs.rollback_execution_count }}
+          MIGRATION_COUNT: ${{ steps.control.outputs.migration_count }}
+          AUTOMATIC_ROLLBACK_COUNT: ${{ steps.control.outputs.automatic_rollback_count }}
         run: |
           set -euo pipefail
           receipt="$RUNNER_TEMP/backend-production-ops-shared-config-migration.json"
@@ -468,17 +533,18 @@ jobs:
             --arg status "$STATUS" \
             --arg run_id "$GITHUB_RUN_ID" \
             --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg evidence_run_id "$EVIDENCE_RUN_ID" \
+            --arg evidence_run_attempt "$EVIDENCE_RUN_ATTEMPT" \
             --arg control_plane_sha "$CONTROL_PLANE_SHA" \
             --arg active_revision "$ACTIVE_REVISION" \
             --arg template_sha256 "$TEMPLATE_SHA256" \
-            --arg config_path_sha256 "$CONFIG_PATH_SHA256" \
-            --arg current_config_sha256 "$CURRENT_CONFIG_SHA256" \
-            --arg current_ops_section_sha256 "$CURRENT_OPS_SECTION_SHA256" \
+            --arg source_path_sha256 "$SOURCE_PATH_SHA256" \
+            --arg source_config_sha256 "$SOURCE_CONFIG_SHA256" \
             --arg stripped_source_sha256 "$STRIPPED_SOURCE_SHA256" \
+            --arg target_path_sha256 "$TARGET_PATH_SHA256" \
+            --arg target_current_sha256 "$TARGET_CURRENT_SHA256" \
+            --arg rendered_ops_sha256 "$RENDERED_OPS_SHA256" \
             --arg foreign_runtime_fingerprint_sha256 "$FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
-            --arg rendered_ops_config_sha256 "$RENDERED_OPS_CONFIG_SHA256" \
-            --arg managed_target_path_sha256 "$MANAGED_TARGET_PATH_SHA256" \
-            --arg managed_target_current_sha256 "$MANAGED_TARGET_CURRENT_SHA256" \
             --argjson exact_count "$EXACT_COUNT" \
             --argjson total_count "$TOTAL_COUNT" \
             --argjson foreign_count "$FOREIGN_COUNT" \
@@ -489,30 +555,35 @@ jobs:
             --argjson runtime_config_current "$RUNTIME_CONFIG_CURRENT" \
             --argjson ops_pending_total "$OPS_PENDING_TOTAL" \
             --argjson live_process_verified "$LIVE_PROCESS_VERIFIED" \
+            --arg backup_sha256 "$BACKUP_SHA256" \
+            --arg post_source_sha256 "$POST_SOURCE_SHA256" \
+            --arg post_target_sha256 "$POST_TARGET_SHA256" \
+            --arg post_foreign_runtime_fingerprint_sha256 "$POST_FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
             --argjson production_write_execution "$PRODUCTION_WRITE_EXECUTION" \
             --argjson source_config_write_count "$SOURCE_CONFIG_WRITE_COUNT" \
-            --argjson managed_target_write_count "$MANAGED_TARGET_WRITE_COUNT" \
+            --argjson target_config_write_count "$TARGET_CONFIG_WRITE_COUNT" \
+            --argjson backup_write_count "$BACKUP_WRITE_COUNT" \
             --argjson worker_restart_count "$WORKER_RESTART_COUNT" \
-            --argjson rollback_execution_count "$ROLLBACK_EXECUTION_COUNT" \
+            --argjson migration_count "$MIGRATION_COUNT" \
+            --argjson automatic_rollback_count "$AUTOMATIC_ROLLBACK_COUNT" \
             '{
               contract_version: $contract_version,
               mode: $mode,
               status: $status,
               run_id: $run_id,
               run_attempt: $run_attempt,
+              evidence_run_id: $evidence_run_id,
+              evidence_run_attempt: $evidence_run_attempt,
               control_plane_sha: $control_plane_sha,
               active_revision: $active_revision,
               template_sha256: $template_sha256,
-              config_layout: "SHARED",
-              migration_supported: true,
-              config_path_sha256: $config_path_sha256,
-              current_config_sha256: $current_config_sha256,
-              current_ops_section_sha256: $current_ops_section_sha256,
+              source_path_sha256: $source_path_sha256,
+              source_config_sha256: $source_config_sha256,
               stripped_source_sha256: $stripped_source_sha256,
+              target_path_sha256: $target_path_sha256,
+              target_current_sha256: $target_current_sha256,
+              rendered_ops_sha256: $rendered_ops_sha256,
               foreign_runtime_fingerprint_sha256: $foreign_runtime_fingerprint_sha256,
-              rendered_ops_config_sha256: $rendered_ops_config_sha256,
-              managed_target_path_sha256: $managed_target_path_sha256,
-              managed_target_current_sha256: $managed_target_current_sha256,
               config_exact_program_section_count: $exact_count,
               config_total_section_count: $total_count,
               config_foreign_program_section_count: $foreign_count,
@@ -523,27 +594,32 @@ jobs:
               runtime_config_current: $runtime_config_current,
               ops_pending_total: $ops_pending_total,
               live_process_verified: $live_process_verified,
+              backup_sha256: $backup_sha256,
+              post_source_sha256: $post_source_sha256,
+              post_target_sha256: $post_target_sha256,
+              post_foreign_runtime_fingerprint_sha256: $post_foreign_runtime_fingerprint_sha256,
               production_write_execution: $production_write_execution,
               source_config_write_count: $source_config_write_count,
-              managed_target_write_count: $managed_target_write_count,
+              target_config_write_count: $target_config_write_count,
+              backup_write_count: $backup_write_count,
               worker_restart_count: $worker_restart_count,
-              rollback_execution_count: $rollback_execution_count,
-              deploy_count: 0,
+              migration_count: $migration_count,
+              automatic_rollback_count: $automatic_rollback_count,
+              application_deploy_count: 0,
               symlink_write_count: 0,
               application_migration_count: 0,
               cms_or_database_authority_write_count: 0,
               publication_or_discoverability_write_count: 0
             }' > "$receipt"
           jq -e \
-            '.config_layout == "SHARED"
-             and .migration_supported == true
-             and .ops_pending_total == 0
+            '.ops_pending_total == 0
              and .live_process_verified == true
-             and .deploy_count == 0
+             and .application_deploy_count == 0
              and .symlink_write_count == 0
              and .application_migration_count == 0
              and .cms_or_database_authority_write_count == 0
-             and .publication_or_discoverability_write_count == 0' "$receipt" >/dev/null
+             and .publication_or_discoverability_write_count == 0
+             and .automatic_rollback_count == 0' "$receipt" >/dev/null
 
       - name: Upload immutable shared migration receipt
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
