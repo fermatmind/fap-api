@@ -314,6 +314,8 @@ jobs:
           supervisorctl_path="$(command -v supervisorctl)"
           failure_gate=SUPERVISOR_STATUS
           status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
+          failure_gate=GREP_PATH
+          grep_path="$(command -v grep)"
           program_present=false
           program_state=MISSING
           live_process_verified=false
@@ -329,21 +331,26 @@ jobs:
           fi
           failure_gate=CONFIG_DISCOVERY
           mapfile -t config_candidates < <(
-            sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print 2>/dev/null \
+            sudo -n find /etc/supervisor /opt/1panel -type f -size -256k \
+              \( -name '*.conf' -o -name '*.ini' \) \
+              -exec "$grep_path" -lFx '[program:fap-queue-ops]' {} + 2>/dev/null \
               | sort -u
           )
           test "${#config_candidates[@]}" -le 1
           OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf
           if [ "${#config_candidates[@]}" -eq 1 ]; then
             OPS_CONFIG_PATH="${config_candidates[0]}"
+            failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY
+            test "$(sudo -n "$grep_path" -Fxc '[program:fap-queue-ops]' "$OPS_CONFIG_PATH")" -eq 1
+            test "$(sudo -n "$grep_path" -Ec '^\[[^]]+\][[:space:]]*$' "$OPS_CONFIG_PATH")" -eq 1
           fi
-          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]
           [[ "$OPS_CONFIG_PATH" != *".."* ]]
           config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
           current_config_sha256="$(printf '0%.0s' {1..64})"
-          if [ -f "$OPS_CONFIG_PATH" ]; then
+          if [ "${#config_candidates[@]}" -eq 1 ]; then
             failure_gate=CONFIG_HASH
-            current_config_sha256="$(sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
+            current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
           fi
           if [ "$program_present" = true ]; then
             failure_gate=UNIQUE_PROCESS
@@ -515,6 +522,8 @@ jobs:
           test "$process_count" -eq 0
           failure_gate=SUPERVISORCTL_PATH
           supervisorctl_path="$(command -v supervisorctl)"
+          failure_gate=GREP_PATH
+          grep_path="$(command -v grep)"
           failure_gate=SUPERVISOR_STATUS_BEFORE
           status_before="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
           program_present_before=false
@@ -526,23 +535,28 @@ jobs:
           test "$program_present_before" = "$EXPECTED_PROGRAM_PRESENT_BEFORE"
           failure_gate=CONFIG_DISCOVERY
           mapfile -t config_candidates < <(
-            sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print 2>/dev/null \
+            sudo -n find /etc/supervisor /opt/1panel -type f -size -256k \
+              \( -name '*.conf' -o -name '*.ini' \) \
+              -exec "$grep_path" -lFx '[program:fap-queue-ops]' {} + 2>/dev/null \
               | sort -u
           )
           test "${#config_candidates[@]}" -le 1
           OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf
           if [ "${#config_candidates[@]}" -eq 1 ]; then
             OPS_CONFIG_PATH="${config_candidates[0]}"
+            failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY
+            test "$(sudo -n "$grep_path" -Fxc '[program:fap-queue-ops]' "$OPS_CONFIG_PATH")" -eq 1
+            test "$(sudo -n "$grep_path" -Ec '^\[[^]]+\][[:space:]]*$' "$OPS_CONFIG_PATH")" -eq 1
           fi
-          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]
           [[ "$OPS_CONFIG_PATH" != *".."* ]]
           failure_gate=CONFIG_PATH_HASH
           test "$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')" = "$EXPECTED_CONFIG_PATH_SHA256"
           zero_sha256="$(printf '0%.0s' {1..64})"
           current_config_sha256="$zero_sha256"
-          if [ -f "$OPS_CONFIG_PATH" ]; then
+          if [ "${#config_candidates[@]}" -eq 1 ]; then
             failure_gate=CONFIG_HASH
-            current_config_sha256="$(sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
+            current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
           fi
           failure_gate=EXPECTED_CONFIG_HASH
           test "$current_config_sha256" = "$EXPECTED_CURRENT_CONFIG_SHA256"
