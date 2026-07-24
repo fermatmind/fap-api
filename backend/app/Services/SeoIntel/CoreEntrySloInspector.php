@@ -261,7 +261,12 @@ final class CoreEntrySloInspector
         if ($meta === '') {
             return 'missing';
         }
-        if (str_contains($directives, 'noindex') || str_contains($directives, 'nofollow')) {
+
+        $tokens = preg_split('/[\s,;]+/', $directives, -1, PREG_SPLIT_NO_EMPTY);
+        if (
+            is_array($tokens)
+            && array_intersect($tokens, ['noindex', 'nofollow', 'none']) !== []
+        ) {
             return 'drift';
         }
 

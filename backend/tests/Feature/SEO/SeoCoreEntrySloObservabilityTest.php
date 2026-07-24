@@ -243,6 +243,9 @@ final class SeoCoreEntrySloObservabilityTest extends TestCase
                 'Server-Timing' => $target['id'] === 'l3_articles_en' ? 'ttfb;dur=9000' : 'ttfb;dur=100',
                 'X-FermatMind-Content-State' => $target['id'] === 'l3_career_en' ? 'last-known-good' : 'fresh',
             ];
+            if ($target['id'] === 'l3_iq_en') {
+                $headers['X-Robots-Tag'] = 'none';
+            }
 
             return match ($target['id']) {
                 'l1_mbti_en' => Http::response('', 503, $headers),
@@ -283,7 +286,7 @@ final class SeoCoreEntrySloObservabilityTest extends TestCase
         $this->assertSame(1, data_get($artifact, 'ops_read_model.incident_category_counts.http_5xx'));
         $this->assertSame(1, data_get($artifact, 'ops_read_model.incident_category_counts.thin_shell'));
         $this->assertSame(1, data_get($artifact, 'ops_read_model.incident_category_counts.canonical_drift'));
-        $this->assertSame(1, data_get($artifact, 'ops_read_model.incident_category_counts.robots_drift'));
+        $this->assertSame(2, data_get($artifact, 'ops_read_model.incident_category_counts.robots_drift'));
         $this->assertSame(1, data_get($artifact, 'ops_read_model.incident_category_counts.ttfb_breach'));
         $this->assertSame('critical', data_get($artifact, 'ops_read_model.tiers.L1.status'));
         $this->assertSame('high', data_get($artifact, 'ops_read_model.tiers.L2.status'));
@@ -296,6 +299,7 @@ final class SeoCoreEntrySloObservabilityTest extends TestCase
         $this->assertContains('thin_shell', $results['l2_big_five_en']['incident_categories']);
         $this->assertContains('canonical_drift', $results['l3_riasec_en']['incident_categories']);
         $this->assertContains('robots_drift', $results['l3_eq_en']['incident_categories']);
+        $this->assertContains('robots_drift', $results['l3_iq_en']['incident_categories']);
         $this->assertContains('ttfb_breach', $results['l3_articles_en']['incident_categories']);
         $this->assertSame('last_known_good', data_get($results['l3_career_en'], 'dependency_state.delivery_mode'));
         $this->assertSame('degraded', data_get($results['l3_career_en'], 'dependency_state.cms_api'));
