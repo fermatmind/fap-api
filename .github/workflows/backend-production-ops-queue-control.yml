@@ -357,7 +357,7 @@ jobs:
             failure_gate=RUN_AS_USER
             test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
             failure_gate=WORKING_DIRECTORY
-            worker_cwd="$(readlink -f "/proc/$worker_pid/cwd")"
+            worker_cwd="$(sudo -n -u www-data readlink -f "/proc/$worker_pid/cwd")"
             if [ "$worker_cwd" = "$(readlink -f "$current")" ]; then
               runtime_cwd_current=true
             else
@@ -611,7 +611,7 @@ jobs:
           failure_gate=RUN_AS_USER
           test "$(ps -o user= -p "$worker_pid" | awk '{$1=$1; print}')" = www-data
           failure_gate=WORKING_DIRECTORY
-          test "$(readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$DEPLOY_PATH/current/backend")"
+          test "$(sudo -n -u www-data readlink -f "/proc/$worker_pid/cwd")" = "$(readlink -f "$DEPLOY_PATH/current/backend")"
           expected_argv_sha256="$(printf '%s\0' \
             /usr/bin/php artisan queue:work database --queue=ops --sleep=1 --tries=3 \
             --timeout=120 --max-time=3600 | sha256sum | awk '{print $1}')"

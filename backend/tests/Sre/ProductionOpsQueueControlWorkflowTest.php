@@ -52,6 +52,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'test "$current_config_sha256" != "$zero_sha256"',
             '[ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true',
             'test "$(ps -o user= -p "$worker_pid" | awk \'{$1=$1; print}\')" = www-data',
+            'sudo -n -u www-data readlink -f "/proc/$worker_pid/cwd"',
             'case "$worker_cwd" in',
             '"$deploy_root"/releases/*/backend)',
             'test "$(tr -d \'\r\n\' < "$stale_release/REVISION")" = "$active_revision"',
@@ -139,6 +140,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             $workflow,
         );
         $this->assertSame(2, substr_count($workflow, 'pid fap-queue-ops:fap-queue-ops_00'));
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'sudo -n -u www-data readlink -f "/proc/$worker_pid/cwd"'),
+        );
         $this->assertSame(2, substr_count($workflow, 'failure_gate=CONFIG_DISCOVERY'));
     }
 
