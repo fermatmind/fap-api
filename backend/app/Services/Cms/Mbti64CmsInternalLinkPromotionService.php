@@ -136,7 +136,7 @@ final class Mbti64CmsInternalLinkPromotionService
             $this->assertApprovedReview($inventory, $options);
             $sections = $this->sectionsForTargets($inventory['target_ids'], true);
             $this->assertSectionState($sections, $inventory);
-            $beforeState = $this->publicState($inventory['variants']);
+            $beforeState = $this->publicState($inventory['variants'], true);
 
             if ($sections->count() === 0) {
                 foreach ($inventory['rows'] as $row) {
@@ -148,7 +148,8 @@ final class Mbti64CmsInternalLinkPromotionService
 
             $liveSections = $this->sectionsForTargets($inventory['target_ids'], true);
             $receipt = $this->promotionReceipt($liveSections, $inventory);
-            if ($liveSections->count() !== 32 || $this->publicState($inventory['variants']) !== $beforeState) {
+            if ($liveSections->count() !== 32
+                || $this->publicState($inventory['variants'], true) !== $beforeState) {
                 throw new RuntimeException(
                     'Promotion transaction readback changed the exact row count or a public/indexability invariant.'
                 );
@@ -221,14 +222,14 @@ final class Mbti64CmsInternalLinkPromotionService
             )) {
                 throw new RuntimeException('The exact rollback authorization SHA256 does not match.');
             }
-            $beforeState = $this->publicState($inventory['variants']);
+            $beforeState = $this->publicState($inventory['variants'], true);
             $ids = $sections->pluck('id')->map(static fn (mixed $id): int => (int) $id)->all();
             $deleted = PersonalityProfileVariantSection::query()
                 ->whereIn('id', $ids)
                 ->delete();
             if ($deleted !== 32
                 || $this->sectionsForTargets($inventory['target_ids'], true)->count() !== 0
-                || $this->publicState($inventory['variants']) !== $beforeState) {
+                || $this->publicState($inventory['variants'], true) !== $beforeState) {
                 throw new RuntimeException(
                     'Rollback transaction readback changed the exact deletion count or a public/indexability invariant.'
                 );
@@ -756,8 +757,12 @@ final class Mbti64CmsInternalLinkPromotionService
     /**
      * @param  Collection<int,PersonalityProfileVariant>  $variants
      */
-    private function publicState(Collection $variants): string
+    private function publicState(Collection $variants, bool $lock = false): string
     {
+        if ($lock) {
+            $variants = $this->reloadWithLockedProfiles($variants);
+        }
+
         return $this->canonicalSha($variants->map(static function (
             PersonalityProfileVariant $variant
         ): array {
@@ -775,6 +780,63 @@ final class Mbti64CmsInternalLinkPromotionService
                 'profile_published_at' => optional($profile->published_at)->toJSON(),
             ];
         })->values()->all());
+    }
+
+    /**
+     * @param  Collection<int,PersonalityProfileVariant>  $variants
+     * @return Collection<int,PersonalityProfileVariant>
+     */
+    private function reloadWithLockedProfiles(Collection $variants): Collection
+    {
+        $targetIds = $variants
+            ->pluck('id')
+            ->map(static fn (mixed $id): int => (int) $id)
+            ->all();
+        $freshVariants = PersonalityProfileVariant::query()
+            ->withoutGlobalScopes()
+            ->whereIn('id', $targetIds)
+            ->orderBy('id')
+            ->lockForUpdate()
+            ->get();
+        if ($freshVariants->count() !== count($targetIds)) {
+            throw new RuntimeException(
+                'A target variant disappeared while locking the public-state invariant.'
+            );
+        }
+
+        $profileIds = $freshVariants
+            ->pluck('personality_profile_id')
+            ->map(static fn (mixed $id): int => (int) $id)
+            ->unique()
+            ->values()
+            ->all();
+        $profiles = PersonalityProfile::query()
+            ->withoutGlobalScopes()
+            ->whereIn('id', $profileIds)
+            ->orderBy('id')
+            ->lockForUpdate()
+            ->get()
+            ->keyBy('id');
+        if ($profiles->count() !== count($profileIds)) {
+            throw new RuntimeException(
+                'A parent profile disappeared while locking the public-state invariant.'
+            );
+        }
+
+        foreach ($freshVariants as $variant) {
+            $profile = $profiles->get((int) $variant->personality_profile_id);
+            if (! $profile instanceof PersonalityProfile
+                || (int) $profile->org_id !== 0
+                || (string) $profile->scale_code !== PersonalityProfile::SCALE_CODE_MBTI
+                || (string) $profile->locale !== 'en') {
+                throw new RuntimeException(
+                    'A parent profile drifted outside the exact English MBTI authority boundary.'
+                );
+            }
+            $variant->setRelation('profile', $profile);
+        }
+
+        return $freshVariants;
     }
 
     /**

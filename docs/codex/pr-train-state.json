@@ -99739,7 +99739,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main, focused promotion and review-policy tests passed 26 tests / 459 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete ci_verify_mbti.sh (including the formerly failing runtime-path gate), YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying exact-head review, focused promotion and review-policy tests passed 27 tests / 466 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction now reloads and locks exact parent profiles and fails closed on an in-transaction public/indexability drift fixture. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete ci_verify_mbti.sh (including the formerly failing runtime-path gate), YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
         "status": "retry_pending",
@@ -99785,11 +99785,16 @@
         "note": "Initial head 37361a917 passed eight checks; verify-bigfive failed only because the existing runtime-freeze classifier returned the new promotion command and service as impacting paths. No feature test or implementation assertion failed."
       },
       {
-        "at": "2026-07-24T00:00:00Z",
+        "at": "2026-07-24T00:59:09Z",
         "status": "same_scope_fix_in_progress",
         "note": "The operator explicitly authorized the existing Big Five runtime-freeze classifier test as the sixth current-PR path. Latest origin/main 73cafd71dd9e7d519b01796e792b75fcfcbcc6a2 was merged into the clean task branch before applying the exact two-path classifier contract."
+      },
+      {
+        "at": "2026-07-24T01:10:15Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that the transaction reused a previously loaded parent profile relation. The scoped fix reloads and locks the exact variants and parent profiles for both before/after public-state fingerprints; a SQLite trigger regression proves parent state drift rolls back all sections."
       }
     ],
-    "updated_at": "2026-07-24T00:59:09Z"
+    "updated_at": "2026-07-24T01:10:15Z"
   }
 }

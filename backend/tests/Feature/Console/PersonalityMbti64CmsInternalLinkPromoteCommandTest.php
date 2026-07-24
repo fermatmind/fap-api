@@ -19,6 +19,7 @@ use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use PHPUnit\Framework\Attributes\DataProvider;
 use RuntimeException;
@@ -210,6 +211,41 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertSame('skipped_existing_exact_promotion', $secondPayload['action']);
         $this->assertSame($payload['promotion_receipt_sha256'], $secondPayload['promotion_receipt_sha256']);
         $this->assertSame(32, PersonalityProfileVariantSection::query()->count());
+    }
+
+    public function test_promotion_rolls_back_when_parent_public_state_changes_during_transaction(): void
+    {
+        $reviewed = $this->bindReview();
+        $plan = $this->dryRun($reviewed['options']);
+        $profileId = (int) PersonalityProfileVariant::query()
+            ->findOrFail($reviewed['fixture']['rows'][0]['target_id'])
+            ->personality_profile_id;
+
+        DB::statement(
+            'CREATE TRIGGER mbti_en64_profile_drift_after_section '
+            .'AFTER INSERT ON personality_profile_variant_sections '
+            .'BEGIN UPDATE personality_profiles SET is_indexable = 0 '
+            .'WHERE id = '.$profileId.'; END'
+        );
+
+        try {
+            $exit = Artisan::call(
+                'personality:mbti64-cms-internal-link-promote',
+                array_merge($this->writeFlags(), $reviewed['options'], [
+                    '--expected-promotion-authorization-sha256' => $plan['promotion_authorization_sha256'],
+                ])
+            );
+        } finally {
+            DB::statement('DROP TRIGGER IF EXISTS mbti_en64_profile_drift_after_section');
+        }
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            'public/indexability invariant',
+            Artisan::output()
+        );
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertTrue((bool) PersonalityProfile::query()->findOrFail($profileId)->is_indexable);
     }
 
     public function test_partial_or_drifted_live_sections_fail_closed(): void
