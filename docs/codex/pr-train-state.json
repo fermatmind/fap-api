@@ -6010,7 +6010,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -99739,17 +99739,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 33 tests / 493 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, excludes non-public variants and parent profiles from the exact public cohort, and binds existing section identity to org_id=0. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 34 tests / 497 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, excludes non-public variants and parent profiles, requires variant runtime identity to match its exact public parent, and binds existing section identity to org_id=0. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact head 40222f4eb463d21bdfe61e747b49821e29dd31af passed all nine required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets and semgrep SARIF upload."
+        "status": "retry_pending",
+        "evidence": "Ledger head 882caaa804763b73b3351dd71dc790e834a3f4a3 passed all nine required checks, then exact-head review required one final same-scope public parent-identity repair. The repaired head must rerun all nine checks."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99808,8 +99808,13 @@
         "at": "2026-07-24T01:54:22Z",
         "status": "ready_to_merge",
         "note": "Exact head 40222f4eb463d21bdfe61e747b49821e29dd31af passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the six authorized paths, and all four review threads are resolved. This ledger-only transition must rerun required checks before squash merge."
+      },
+      {
+        "at": "2026-07-24T02:11:30Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Ledger head 882caaa804763b73b3351dd71dc790e834a3f4a3 passed all checks, but exact-head review found that a swapped runtime identity could remain attached to the wrong public parent. The scoped fix validates variant canonical/variant/runtime identity against parent type/canonical/slug identity under both inventory and transaction locks; the focused and complete local suites passed."
       }
     ],
-    "updated_at": "2026-07-24T01:54:22Z"
+    "updated_at": "2026-07-24T02:11:30Z"
   }
 }

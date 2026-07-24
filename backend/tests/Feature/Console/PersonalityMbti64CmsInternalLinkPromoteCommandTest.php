@@ -250,6 +250,37 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         ];
     }
 
+    public function test_variant_with_mismatched_public_parent_fails_before_inventory_writes(): void
+    {
+        $fixture = $this->seedRevisionCohort();
+        $intjTarget = collect($fixture['rows'])
+            ->firstWhere('runtime_type_code', 'INTJ-A');
+        $enfpTarget = collect($fixture['rows'])
+            ->firstWhere('runtime_type_code', 'ENFP-A');
+        PersonalityProfileVariant::query()
+            ->whereKey($intjTarget['target_id'])
+            ->update(['runtime_type_code' => 'ZZZZ-A']);
+        PersonalityProfileVariant::query()
+            ->whereKey($enfpTarget['target_id'])
+            ->update(['runtime_type_code' => 'INTJ-A']);
+        PersonalityProfileVariant::query()
+            ->whereKey($intjTarget['target_id'])
+            ->update(['runtime_type_code' => 'ENFP-A']);
+
+        $exit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge(['--dry-run' => true], $fixture['options'])
+        );
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            'variant identity does not match its exact public parent profile',
+            Artisan::output()
+        );
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, ReviewAttestation::query()->count());
+    }
+
     public function test_promotion_creates_exact_sections_invalidates_cache_and_is_idempotent(): void
     {
         $reviewed = $this->bindReview();

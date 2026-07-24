@@ -357,6 +357,7 @@ final class Mbti64CmsInternalLinkPromotionService
 
         $rows = [];
         foreach ($variants as $variant) {
+            $this->assertPublicVariantParentIdentity($variant);
             $revisionQuery = PersonalityProfileVariantRevision::query()
                 ->where('personality_profile_variant_id', (int) $variant->id)
                 ->orderByDesc('revision_no')
@@ -852,9 +853,29 @@ final class Mbti64CmsInternalLinkPromotionService
                 );
             }
             $variant->setRelation('profile', $profile);
+            $this->assertPublicVariantParentIdentity($variant);
         }
 
         return $freshVariants;
+    }
+
+    private function assertPublicVariantParentIdentity(
+        PersonalityProfileVariant $variant
+    ): void {
+        $runtimeType = strtoupper((string) $variant->runtime_type_code);
+        $baseType = substr($runtimeType, 0, 4);
+        $variantCode = substr($runtimeType, 5, 1);
+        $profile = $variant->profile;
+        if (! $profile instanceof PersonalityProfile
+            || (string) $variant->canonical_type_code !== $baseType
+            || (string) $variant->variant_code !== $variantCode
+            || (string) $profile->type_code !== $baseType
+            || (string) $profile->canonical_type_code !== $baseType
+            || (string) $profile->slug !== strtolower($baseType)) {
+            throw new RuntimeException(
+                'A variant identity does not match its exact public parent profile.'
+            );
+        }
     }
 
     /**
