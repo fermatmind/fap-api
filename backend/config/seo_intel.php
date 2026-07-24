@@ -165,6 +165,7 @@ return [
         'default_timeout_seconds' => 10,
         'max_timeout_seconds' => 15,
         'tier_order' => ['L1', 'L2', 'L3'],
+        'public_host_allowlist' => ['fermatmind.com'],
         'private_path_segments' => [
             'take',
             'result',

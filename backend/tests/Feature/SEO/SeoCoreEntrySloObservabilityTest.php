@@ -16,6 +16,16 @@ use Tests\TestCase;
 
 final class SeoCoreEntrySloObservabilityTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config([
+            'seo_intel.public_canonical_host' => 'https://slo.fermatmind.test',
+            'seo_intel.core_entry_slo.public_host_allowlist' => ['slo.fermatmind.test'],
+        ]);
+    }
+
     #[Test]
     public function deterministic_manifest_has_exact_l1_l2_l3_public_entry_scope(): void
     {
@@ -96,6 +106,25 @@ final class SeoCoreEntrySloObservabilityTest extends TestCase
                     $this->assertSame('core_entry_slo_public_base_url_private', $exception->getMessage());
                 }
             }
+        } finally {
+            config(['seo_intel.public_canonical_host' => $original]);
+        }
+
+        Http::assertNothingSent();
+    }
+
+    #[Test]
+    public function manifest_fails_closed_for_a_hostname_outside_the_public_allowlist_before_http(): void
+    {
+        $original = config('seo_intel.public_canonical_host');
+        config(['seo_intel.public_canonical_host' => 'https://untrusted-public.example']);
+        Http::fake();
+
+        try {
+            app(CoreEntrySloManifest::class)->resolve();
+            $this->fail('Expected public-host allowlist rejection.');
+        } catch (InvalidArgumentException $exception) {
+            $this->assertSame('core_entry_slo_public_base_url_not_allowed', $exception->getMessage());
         } finally {
             config(['seo_intel.public_canonical_host' => $original]);
         }

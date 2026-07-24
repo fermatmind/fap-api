@@ -30,6 +30,14 @@ final class CoreEntrySloManifest
             throw new InvalidArgumentException('core_entry_slo_tier_order_invalid');
         }
 
+        $publicHostAllowlist = array_values(array_unique(array_map(
+            fn (string $host): string => $this->normalizedHost($host),
+            $this->stringList($config['public_host_allowlist'] ?? [])
+        )));
+        if ($publicHostAllowlist === [] || in_array('', $publicHostAllowlist, true)) {
+            throw new InvalidArgumentException('core_entry_slo_public_host_allowlist_invalid');
+        }
+
         $privateSegments = array_map(
             static fn (string $value): string => strtolower($value),
             $this->stringList($config['private_path_segments'] ?? [])
@@ -83,7 +91,7 @@ final class CoreEntrySloManifest
 
         return [
             ...$manifestPayload,
-            'public_base_url' => $this->publicBaseUrl(),
+            'public_base_url' => $this->publicBaseUrl($publicHostAllowlist),
             'manifest_sha256' => hash('sha256', json_encode($manifestPayload, JSON_THROW_ON_ERROR)),
         ];
     }
@@ -199,7 +207,10 @@ final class CoreEntrySloManifest
         return $markers;
     }
 
-    private function publicBaseUrl(): string
+    /**
+     * @param  list<string>  $publicHostAllowlist
+     */
+    private function publicBaseUrl(array $publicHostAllowlist): string
     {
         $value = rtrim($this->string(config('seo_intel.public_canonical_host')), '/');
         $parts = parse_url($value);
@@ -217,10 +228,7 @@ final class CoreEntrySloManifest
             throw new InvalidArgumentException('core_entry_slo_public_base_url_invalid');
         }
 
-        $host = rtrim(strtolower((string) $parts['host']), '.');
-        if (str_starts_with($host, '[') && str_ends_with($host, ']')) {
-            $host = substr($host, 1, -1);
-        }
+        $host = $this->normalizedHost((string) $parts['host']);
 
         if (
             $host === ''
@@ -240,7 +248,20 @@ final class CoreEntrySloManifest
             throw new InvalidArgumentException('core_entry_slo_public_base_url_private');
         }
 
+        if (! in_array($host, $publicHostAllowlist, true)) {
+            throw new InvalidArgumentException('core_entry_slo_public_base_url_not_allowed');
+        }
+
         return $value;
+    }
+
+    private function normalizedHost(string $host): string
+    {
+        $normalized = rtrim(strtolower(trim($host)), '.');
+
+        return str_starts_with($normalized, '[') && str_ends_with($normalized, ']')
+            ? substr($normalized, 1, -1)
+            : $normalized;
     }
 
     /**

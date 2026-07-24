@@ -6,7 +6,7 @@
 2. L2: EN/ZH Big Five test detail.
 3. L3: EN/ZH RIASEC, Enneagram, IQ, EQ, Career, and Articles entries.
 
-The deterministic manifest is owned by `config/seo_intel.php`. It contains 16 public canonical paths and rejects query strings, fragments, non-EN/ZH paths, duplicate targets, private IP/host targets, and any path containing private-flow segments such as result, attempt, order, recovery, payment, checkout, report, or share.
+The deterministic manifest is owned by `config/seo_intel.php`. It contains 16 public canonical paths and accepts only the explicit canonical-host allowlist (default: `fermatmind.com`), so arbitrary hostnames and DNS-rebinding targets fail closed before HTTP. It also rejects query strings, fragments, non-EN/ZH paths, duplicate targets, private IP/host targets, and any path containing private-flow segments such as result, attempt, order, recovery, payment, checkout, report, or share.
 
 ## Command
 
