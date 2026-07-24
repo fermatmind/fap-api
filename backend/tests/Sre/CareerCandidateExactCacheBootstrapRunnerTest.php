@@ -30,6 +30,8 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
         $this->assertSame(5000, $receipt['offline_build_budget_ms']);
         $this->assertSame(1, $receipt['retry_limit']);
         $this->assertSame(0, $receipt['cache_write_count']);
+        $this->assertSame(0, $receipt['owned_cache_write_count']);
+        $this->assertSame(0, $receipt['concurrent_coverage_gain_count']);
         $this->assertSame(0, $receipt['queue_dispatch_count']);
         $this->assertSame(0, $receipt['database_write_count']);
         $this->assertSame(
@@ -232,7 +234,110 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
 
         $this->assertSame(['remaining'], $warmed);
         $this->assertSame(1, $receipt['cache_write_count']);
+        $this->assertSame(1, $receipt['owned_cache_write_count']);
+        $this->assertSame(0, $receipt['concurrent_coverage_gain_count']);
         $this->assertSame(0, $receipt['post_batch_coverage']['missing_pointer_count']);
+    }
+
+    #[Test]
+    public function batch_accepts_monotonic_concurrent_coverage_gain_outside_its_slice(): void
+    {
+        $beforeRows = [];
+        $afterRows = [];
+        for ($index = 0; $index < 100; $index++) {
+            $beforeRows[] = $this->row('target-'.$index, $index % 2 === 0 ? 'en' : 'zh-CN', false, 'ready_active');
+            $afterRows[] = $this->row('target-'.$index, $index % 2 === 0 ? 'en' : 'zh-CN', false, 'ready_active');
+        }
+        $beforeRows[1] = $this->row('target-1', 'zh-CN', true, 'missing_pointer');
+        $beforeRows[60] = $this->row('target-60', 'en', true, 'missing_pointer');
+
+        $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+            str_repeat('1', 40),
+            $this->inspection($beforeRows),
+            0,
+            50,
+            fn (array $slugs): array => $this->closures($slugs),
+            fn (): array => $this->warmSuccess(10),
+            fn (): array => $this->inspection($afterRows),
+            100,
+        );
+
+        $this->assertSame('completed', $receipt['status']);
+        $this->assertSame(1, $receipt['cache_write_count']);
+        $this->assertSame(1, $receipt['owned_cache_write_count']);
+        $this->assertSame(1, $receipt['concurrent_coverage_gain_count']);
+        $this->assertSame(2, $receipt['pre_batch_coverage']['missing_pointer_count']);
+        $this->assertSame(0, $receipt['post_batch_coverage']['missing_pointer_count']);
+        $this->assertSame(0, $receipt['queue_dispatch_count']);
+        $this->assertSame(0, $receipt['database_write_count']);
+    }
+
+    #[Test]
+    public function batch_fails_when_an_owned_target_is_not_covered_after_a_successful_write(): void
+    {
+        $inspection = $this->inspection([
+            $this->row('owned-target', 'en', true, 'missing_pointer'),
+        ]);
+
+        $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+            str_repeat('2', 40),
+            $inspection,
+            0,
+            50,
+            fn (array $slugs): array => $this->closures($slugs),
+            fn (): array => $this->warmSuccess(10),
+            static fn (): array => $inspection,
+            1,
+        );
+
+        $this->assertSame('failed', $receipt['status']);
+        $this->assertSame('post_batch_coverage', $receipt['failure_stage']);
+        $this->assertSame('unexpected', $receipt['error_category']);
+        $this->assertSame(1, $receipt['owned_cache_write_count']);
+        $this->assertSame(0, $receipt['concurrent_coverage_gain_count']);
+    }
+
+    #[Test]
+    public function batch_rejects_covered_regression_broken_rows_and_target_set_drift(): void
+    {
+        $before = $this->inspection([
+            $this->row('stable-covered', 'en', false, 'ready_active'),
+            $this->row('owned-target', 'zh-CN', true, 'missing_pointer'),
+        ]);
+
+        foreach ([
+            $this->inspection([
+                $this->row('stable-covered', 'en', true, 'missing_pointer'),
+                $this->row('owned-target', 'zh-CN', false, 'ready_active'),
+            ]),
+            $this->inspection([
+                $this->row('stable-covered', 'en', false, 'invalid_payload'),
+                $this->row('owned-target', 'zh-CN', false, 'ready_active'),
+            ]),
+            $this->inspection([
+                $this->row('stable-covered', 'en', false, 'held_or_unpublished_excluded'),
+                $this->row('owned-target', 'zh-CN', false, 'ready_active'),
+            ]),
+            $this->inspection([
+                $this->row('changed-target', 'en', false, 'ready_active'),
+                $this->row('owned-target', 'zh-CN', false, 'ready_active'),
+            ]),
+        ] as $after) {
+            $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+                str_repeat('3', 40),
+                $before,
+                0,
+                50,
+                fn (array $slugs): array => $this->closures($slugs),
+                fn (): array => $this->warmSuccess(10),
+                static fn (): array => $after,
+                2,
+            );
+
+            $this->assertSame('failed', $receipt['status']);
+            $this->assertSame('post_batch_coverage', $receipt['failure_stage']);
+            $this->assertSame('unexpected', $receipt['error_category']);
+        }
     }
 
     #[Test]

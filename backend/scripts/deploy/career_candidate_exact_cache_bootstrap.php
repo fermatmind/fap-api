@@ -75,6 +75,13 @@ final class CareerCandidateExactCacheBootstrapRunner
         'post_batch_coverage',
     ];
 
+    /** @var list<string> */
+    private const COVERED_CLASSIFICATIONS = [
+        'ready_active',
+        'ready_lkg',
+        'legacy_migratable',
+    ];
+
     public static function main(): int
     {
         try {
@@ -248,6 +255,8 @@ final class CareerCandidateExactCacheBootstrapRunner
             'inspected_target_count' => (int) ($inspection['report']['expected_target_count'] ?? 0),
             'repairable_target_count' => self::repairableCount($inspection),
             'cache_write_count' => 0,
+            'owned_cache_write_count' => 0,
+            'concurrent_coverage_gain_count' => 0,
             'failure_count' => 0,
             'queue_dispatch_count' => 0,
             'database_write_count' => 0,
@@ -315,6 +324,7 @@ final class CareerCandidateExactCacheBootstrapRunner
                 count($batch),
                 count($repairableRows),
                 0,
+                0,
                 'precompute_conversion_closure',
                 self::safeThrowableCategory($throwable),
                 0.0,
@@ -339,6 +349,7 @@ final class CareerCandidateExactCacheBootstrapRunner
         $errorCategory = null;
         $failureBuildMs = 0.0;
         $failedTargetHash = null;
+        $ownedTargetIndexes = [];
         $delay = $retryDelay ?? static fn (): int => usleep(self::RETRY_DELAY_MS * 1000);
 
         foreach ($repairableRows as $row) {
@@ -376,6 +387,7 @@ final class CareerCandidateExactCacheBootstrapRunner
                     $errorCategory = null;
                     $failureBuildMs = 0.0;
                     $writes++;
+                    $ownedTargetIndexes[] = $row['absolute_index'];
 
                     continue 2;
                 }
@@ -414,16 +426,19 @@ final class CareerCandidateExactCacheBootstrapRunner
         }
 
         $postFingerprint = self::coverageFingerprint($postInspection);
-        $expectedPostMissing = max(
-            0,
-            (int) ($inspection['report']['missing_pointer_count'] ?? 0) - $writes,
-        );
-        if (
-            $failureStage === null
-            && (int) ($postInspection['report']['missing_pointer_count'] ?? -1) !== $expectedPostMissing
-        ) {
+        $concurrentCoverageGain = 0;
+        try {
+            $transition = self::assertMonotonicCoverageTransition(
+                $inspection,
+                $postInspection,
+                $ownedTargetIndexes,
+                $expectedTargets,
+            );
+            $concurrentCoverageGain = $transition['concurrent_coverage_gain_count'];
+        } catch (Throwable) {
             $failureStage = 'post_batch_coverage';
             $errorCategory = 'unexpected';
+            $failedTargetHash = null;
         }
 
         if ($failureStage !== null || $errorCategory !== null) {
@@ -433,6 +448,7 @@ final class CareerCandidateExactCacheBootstrapRunner
                 count($batch),
                 count($repairableRows),
                 $writes,
+                $concurrentCoverageGain,
                 $failureStage ?? 'build_detail_payload',
                 $errorCategory ?? 'unexpected',
                 $failureBuildMs,
@@ -460,6 +476,8 @@ final class CareerCandidateExactCacheBootstrapRunner
             'inspected_target_count' => count($batch),
             'repairable_target_count' => count($repairableRows),
             'cache_write_count' => $writes,
+            'owned_cache_write_count' => $writes,
+            'concurrent_coverage_gain_count' => $concurrentCoverageGain,
             'failure_count' => 0,
             'failure_stage' => null,
             'error_category' => null,
@@ -483,6 +501,101 @@ final class CareerCandidateExactCacheBootstrapRunner
         return $offset >= 0
             && $offset < $expectedTargets
             && $offset % self::BATCH_SIZE === 0;
+    }
+
+    /**
+     * Allow only monotonic cache coverage growth while proving that every
+     * successful write owned by this batch is covered in the post-readback.
+     * Live HTTP traffic may independently warm other missing targets, but it
+     * may not change the target set or hide any coverage regression.
+     *
+     * @param  array<string, mixed>  $before
+     * @param  array<string, mixed>  $after
+     * @param  list<int>  $ownedTargetIndexes
+     * @return array{coverage_gain_count: int, concurrent_coverage_gain_count: int}
+     */
+    public static function assertMonotonicCoverageTransition(
+        array $before,
+        array $after,
+        array $ownedTargetIndexes,
+        int $expectedTargets,
+    ): array {
+        self::assertInspectionBoundary($before, $expectedTargets);
+        self::assertInspectionBoundary($after, $expectedTargets);
+
+        $beforeRows = array_values($before['rows']);
+        $afterRows = array_values($after['rows']);
+        $owned = [];
+        foreach ($ownedTargetIndexes as $index) {
+            if (! is_int($index) || $index < 0 || $index >= $expectedTargets || isset($owned[$index])) {
+                self::fail('INVALID_OWNED_TARGET_INDEX');
+            }
+            $owned[$index] = true;
+        }
+
+        $coverageGain = 0;
+        $ownedCovered = 0;
+        foreach ($beforeRows as $index => $beforeRow) {
+            $afterRow = $afterRows[$index] ?? null;
+            if (
+                ! is_array($afterRow)
+                || $beforeRow['slug'] !== $afterRow['slug']
+                || $beforeRow['locale'] !== $afterRow['locale']
+            ) {
+                self::fail('TARGET_SET_DRIFT');
+            }
+
+            $beforeClassification = (string) $beforeRow['classification'];
+            $afterClassification = (string) $afterRow['classification'];
+            $beforeCovered = self::classificationIsCovered($beforeClassification);
+            $afterCovered = self::classificationIsCovered($afterClassification);
+
+            if ($beforeCovered && ! $afterCovered) {
+                self::fail('COVERAGE_REGRESSION');
+            }
+            if ($beforeClassification === 'missing_pointer') {
+                if ($afterClassification === 'missing_pointer') {
+                    if (isset($owned[$index])) {
+                        self::fail('OWNED_TARGET_NOT_COVERED');
+                    }
+
+                    continue;
+                }
+                if (! $afterCovered) {
+                    self::fail('NON_MONOTONIC_COVERAGE_TRANSITION');
+                }
+                $coverageGain++;
+            } elseif (! $beforeCovered) {
+                self::fail('NON_MONOTONIC_COVERAGE_TRANSITION');
+            }
+
+            if (isset($owned[$index])) {
+                if ($beforeClassification !== 'missing_pointer' || ! $afterCovered) {
+                    self::fail('OWNED_TARGET_NOT_COVERED');
+                }
+                $ownedCovered++;
+            }
+        }
+
+        if ($ownedCovered !== count($owned) || $coverageGain < $ownedCovered) {
+            self::fail('OWNED_TARGET_NOT_COVERED');
+        }
+
+        $beforeMissing = (int) $before['report']['missing_pointer_count'];
+        $afterMissing = (int) $after['report']['missing_pointer_count'];
+        $beforeCovered = (int) $before['report']['covered_target_count'];
+        $afterCovered = (int) $after['report']['covered_target_count'];
+        if (
+            $beforeMissing - $afterMissing !== $coverageGain
+            || $afterCovered - $beforeCovered !== $coverageGain
+        ) {
+            self::fail('COVERAGE_REPORT_DRIFT');
+        }
+
+        return [
+            'coverage_gain_count' => $coverageGain,
+            'concurrent_coverage_gain_count' => $coverageGain - $ownedCovered,
+        ];
     }
 
     /**
@@ -518,6 +631,8 @@ final class CareerCandidateExactCacheBootstrapRunner
                 'target_classification' => $target['classification'],
                 'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
                 'cache_write_count' => 0,
+                'owned_cache_write_count' => 0,
+                'concurrent_coverage_gain_count' => 0,
                 'failure_count' => 0,
                 'failure_stage' => null,
                 'error_category' => null,
@@ -597,6 +712,8 @@ final class CareerCandidateExactCacheBootstrapRunner
             'target_classification' => $target['classification'],
             'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
             'cache_write_count' => $writes,
+            'owned_cache_write_count' => $writes,
+            'concurrent_coverage_gain_count' => 0,
             'failure_count' => $failed ? 1 : 0,
             'failure_stage' => $failed ? self::safeFailureStage($failureStage) : null,
             'error_category' => $failed ? self::safeErrorCategory($errorCategory) : null,
@@ -742,6 +859,16 @@ final class CareerCandidateExactCacheBootstrapRunner
                 || ! is_bool($row['repairable'] ?? null)
             ) {
                 self::fail('INVALID_TARGET_ROW');
+            }
+            $classification = (string) $row['classification'];
+            if (
+                $classification !== 'missing_pointer'
+                && ! self::classificationIsCovered($classification)
+            ) {
+                self::fail('COVERAGE_BOUNDARY_FAILED');
+            }
+            if (($classification === 'missing_pointer') !== $row['repairable']) {
+                self::fail('REPAIRABLE_TARGET_COUNT_DRIFT');
             }
         }
     }
@@ -924,6 +1051,11 @@ final class CareerCandidateExactCacheBootstrapRunner
         ];
     }
 
+    private static function classificationIsCovered(string $classification): bool
+    {
+        return in_array($classification, self::COVERED_CLASSIFICATIONS, true);
+    }
+
     /**
      * @param  array<string, mixed>  $inspection
      * @param  array<string, mixed>  $postInspection
@@ -935,6 +1067,7 @@ final class CareerCandidateExactCacheBootstrapRunner
         int $inspectedTargets,
         int $repairableTargets,
         int $writes,
+        int $concurrentCoverageGain,
         string $failureStage,
         string $errorCategory,
         float $buildMs,
@@ -960,6 +1093,8 @@ final class CareerCandidateExactCacheBootstrapRunner
             'inspected_target_count' => $inspectedTargets,
             'repairable_target_count' => $repairableTargets,
             'cache_write_count' => $writes,
+            'owned_cache_write_count' => $writes,
+            'concurrent_coverage_gain_count' => $concurrentCoverageGain,
             'failure_count' => 1,
             'failure_stage' => self::safeFailureStage($failureStage),
             'error_category' => self::safeErrorCategory($errorCategory),
@@ -1091,6 +1226,8 @@ final class CareerCandidateExactCacheBootstrapRunner
             'status' => 'failed',
             'error_code' => $errorCode,
             'cache_write_count' => 0,
+            'owned_cache_write_count' => 0,
+            'concurrent_coverage_gain_count' => 0,
             'failure_count' => 1,
             'failure_stage' => null,
             'error_category' => null,
