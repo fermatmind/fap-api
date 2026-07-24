@@ -314,6 +314,16 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
             ->assertJsonPath('internal_links.1.key', 'variant_to_comparison')
             ->assertJsonPath('internal_links.1.label', 'INTJ-A vs INTJ-T');
 
+        $reordered = PersonalityProfileVariantSection::query()
+            ->orderBy('id')
+            ->firstOrFail();
+        $reorderedPayload = $reordered->payload_json;
+        $reorderedPayload['items'] = array_map(
+            static fn (array $link): array => array_reverse($link, true),
+            $reorderedPayload['items']
+        );
+        $reordered->forceFill(['payload_json' => $reorderedPayload])->save();
+
         $second = Artisan::call(
             'personality:mbti64-cms-internal-link-promote',
             array_merge($this->writeFlags(), $options)
@@ -324,6 +334,42 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertSame('skipped_existing_exact_promotion', $secondPayload['action']);
         $this->assertSame($payload['promotion_receipt_sha256'], $secondPayload['promotion_receipt_sha256']);
         $this->assertSame(32, PersonalityProfileVariantSection::query()->count());
+    }
+
+    public function test_receipt_bound_rollback_survives_a_newer_draft_revision(): void
+    {
+        $promoted = $this->promoteReviewedCohort();
+        $variant = PersonalityProfileVariant::query()
+            ->where('runtime_type_code', 'INTJ-A')
+            ->firstOrFail();
+        $latest = PersonalityProfileVariantRevision::query()
+            ->where('personality_profile_variant_id', $variant->id)
+            ->orderByDesc('revision_no')
+            ->firstOrFail();
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'revision_no' => (int) $latest->revision_no + 1,
+            'snapshot_json' => $latest->snapshot_json,
+            'note' => 'newer draft after promotion',
+            'created_at' => now(),
+        ]);
+
+        $exit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge($this->rollbackFlags(), $promoted['options'], [
+                '--expected-promotion-receipt-sha256' => $promoted['payload']['promotion_receipt_sha256'],
+                '--expected-rollback-authorization-sha256' => $promoted['payload']['rollback_authorization_sha256'],
+            ])
+        );
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(0, $exit);
+        $this->assertSame('rolled_back_exact_32_sections', $payload['action']);
+        $this->assertSame(
+            $promoted['payload']['promotion_receipt_sha256'],
+            $payload['promotion_receipt_sha256']
+        );
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
     }
 
     public function test_promotion_rolls_back_when_parent_public_state_changes_during_transaction(): void
@@ -527,6 +573,7 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
             'role' => ['role'],
             'route' => ['route'],
             'wrong safe target' => ['safe_target'],
+            'extra public field' => ['extra_field'],
         ];
     }
 
@@ -673,6 +720,9 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
                 }
                 if ($mutation === 'safe_target' && $runtime === 'INTJ-A') {
                     $links[1]['href'] = '/en/personality/infj-a-vs-infj-t';
+                }
+                if ($mutation === 'extra_field' && $runtime === 'INTJ-A') {
+                    $links[0]['token'] = 'must-not-be-public';
                 }
                 $snapshot = [
                     'mbti64_internal_link_graph_v1' => [

@@ -35,6 +35,16 @@ final class Mbti64CmsInternalLinkPromotionService
         'variant_to_comparison',
     ];
 
+    private const ALLOWED_LINK_KEYS = [
+        'anchor_text',
+        'href',
+        'priority',
+        'reason',
+        'role',
+        'safe_public_route',
+        'source',
+    ];
+
     private const FORBIDDEN_ROUTE_PATTERN = '#/(?:results|orders|share|pay|payment|history|private|account)(?:/|$)|(?:[?&](?:token|session|user|result_id|report_id|order_no)=)#i';
 
     public function __construct(
@@ -197,7 +207,7 @@ final class Mbti64CmsInternalLinkPromotionService
     {
         $this->assertRuntime($options);
         $result = DB::transaction(function () use ($options): array {
-            $inventory = $this->inventory($options, true, allowPromotedState: true);
+            $inventory = $this->rollbackInventory($options);
             $sections = $this->sectionsForTargets($inventory['target_ids'], true);
             $this->assertFullyPromoted($sections, $inventory);
             $receipt = $this->promotionReceipt($sections, $inventory);
@@ -320,44 +330,10 @@ final class Mbti64CmsInternalLinkPromotionService
             );
         }
 
-        $variantQuery = PersonalityProfileVariant::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', 0)
-            ->where('is_published', true)
-            ->where(static function ($query): void {
-                $query->whereNull('published_at')
-                    ->orWhere('published_at', '<=', now());
-            })
-            ->whereHas('profile', static fn ($query) => $query
-                ->withoutGlobalScopes()
-                ->where('org_id', 0)
-                ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
-                ->where('locale', 'en')
-                ->publishedPublic()
-                ->where(static function ($nested): void {
-                    $nested->whereNull('published_at')
-                        ->orWhere('published_at', '<=', now());
-                }))
-            ->with(['profile' => static fn ($query) => $query->withoutGlobalScopes()])
-            ->orderBy('runtime_type_code');
-        if ($lock) {
-            $variantQuery->lockForUpdate();
-        }
-        /** @var Collection<int,PersonalityProfileVariant> $variants */
-        $variants = $variantQuery->get();
-        $variants = $variants
-            ->filter(static fn (PersonalityProfileVariant $variant): bool => preg_match(
-                '/^[EI][SN][TF][JP]-[AT]$/',
-                (string) $variant->runtime_type_code
-            ) === 1)
-            ->values();
-        if ($variants->count() !== 32) {
-            throw new RuntimeException('Exactly 32 English MBTI A/T variant targets are required.');
-        }
+        $variants = $this->publicVariants($lock);
 
         $rows = [];
         foreach ($variants as $variant) {
-            $this->assertPublicVariantParentIdentity($variant);
             $revisionQuery = PersonalityProfileVariantRevision::query()
                 ->where('personality_profile_variant_id', (int) $variant->id)
                 ->orderByDesc('revision_no')
@@ -427,16 +403,7 @@ final class Mbti64CmsInternalLinkPromotionService
 
         $targetIds = array_column($rows, 'target_id');
         $sections = $this->sectionsForTargets($targetIds, $lock);
-        $markers = array_map(
-            static fn (array $row): array => [
-                'runtime_type_code' => $row['runtime_type_code'],
-                'target_id' => $row['target_id'],
-                'section_exists' => false,
-                'section_id' => null,
-                'section_sha256' => null,
-            ],
-            $rows
-        );
+        $markers = $this->rollbackMarkers($rows);
         $rollbackMarkersSha = $this->canonicalSha($markers);
         if (! $allowPromotedState && $sections->count() !== 0) {
             throw new RuntimeException('The exact target-section baseline must remain empty.');
@@ -473,6 +440,143 @@ final class Mbti64CmsInternalLinkPromotionService
     }
 
     /**
+     * @return Collection<int,PersonalityProfileVariant>
+     */
+    private function publicVariants(bool $lock): Collection
+    {
+        $variantQuery = PersonalityProfileVariant::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('is_published', true)
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->whereHas('profile', static fn ($query) => $query
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+                ->where('locale', 'en')
+                ->publishedPublic()
+                ->where(static function ($nested): void {
+                    $nested->whereNull('published_at')
+                        ->orWhere('published_at', '<=', now());
+                }))
+            ->with(['profile' => static fn ($query) => $query->withoutGlobalScopes()])
+            ->orderBy('runtime_type_code');
+        if ($lock) {
+            $variantQuery->lockForUpdate();
+        }
+        /** @var Collection<int,PersonalityProfileVariant> $variants */
+        $variants = $variantQuery->get();
+        $variants = $variants
+            ->filter(static fn (PersonalityProfileVariant $variant): bool => preg_match(
+                '/^[EI][SN][TF][JP]-[AT]$/',
+                (string) $variant->runtime_type_code
+            ) === 1)
+            ->values();
+        if ($variants->count() !== 32) {
+            throw new RuntimeException('Exactly 32 English MBTI A/T variant targets are required.');
+        }
+        foreach ($variants as $variant) {
+            $this->assertPublicVariantParentIdentity($variant);
+        }
+
+        return $variants;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $rows
+     * @return list<array<string,mixed>>
+     */
+    private function rollbackMarkers(array $rows): array
+    {
+        return array_map(
+            static fn (array $row): array => [
+                'runtime_type_code' => $row['runtime_type_code'],
+                'target_id' => $row['target_id'],
+                'section_exists' => false,
+                'section_id' => null,
+                'section_sha256' => null,
+            ],
+            $rows
+        );
+    }
+
+    /**
+     * @param  array<string,string|int>  $options
+     * @return array<string,mixed>
+     */
+    private function rollbackInventory(array $options): array
+    {
+        $graphSha = $this->requiredHash($options, 'expected_graph_sha256');
+        $cohortSha = $this->requiredHash($options, 'expected_cohort_sha256');
+        if (($options['expected_checkpoint112_inventory_sha256'] ?? null)
+                !== self::CHECKPOINT112_INVENTORY_SHA256
+            || ($options['expected_section_inventory_sha256'] ?? null)
+                !== self::CHECKPOINT112_SECTION_INVENTORY_SHA256
+            || (int) ($options['expected_rows'] ?? 0) !== 32
+            || (int) ($options['expected_edges'] ?? 0) !== 64) {
+            throw new RuntimeException(
+                'Checkpoint 112 inventory, section inventory or exact 32/64 boundary does not match.'
+            );
+        }
+        $variants = $this->publicVariants(true);
+        $targetIds = $variants->pluck('id')
+            ->map(static fn (mixed $id): int => (int) $id)
+            ->all();
+        $sections = $this->sectionsForTargets($targetIds, true);
+        if ($sections->count() !== 32) {
+            throw new RuntimeException('Exactly 32 promoted target sections are required.');
+        }
+        $sectionsByTarget = $sections->keyBy('personality_profile_variant_id');
+        $rows = [];
+        foreach ($variants as $variant) {
+            $section = $sectionsByTarget->get((int) $variant->id);
+            $links = $section instanceof PersonalityProfileVariantSection
+                ? data_get($section->payload_json, 'items')
+                : null;
+            if (! is_array($links)) {
+                throw new RuntimeException('A receipt-bound target section has no exact link payload.');
+            }
+            $runtimeType = strtoupper((string) $variant->runtime_type_code);
+            $this->assertLinks($runtimeType, $links);
+            $rows[] = [
+                'runtime_type_code' => $runtimeType,
+                'target_id' => (int) $variant->id,
+                'links' => array_values($links),
+            ];
+        }
+        usort(
+            $rows,
+            static fn (array $left, array $right): int => $left['runtime_type_code']
+                <=> $right['runtime_type_code']
+        );
+        $rollbackMarkersSha = $this->canonicalSha($this->rollbackMarkers($rows));
+        if (! hash_equals(
+            $this->requiredHash($options, 'expected_rollback_markers_sha256'),
+            $rollbackMarkersSha
+        )) {
+            throw new RuntimeException('The exact rollback absence markers SHA256 does not match.');
+        }
+
+        return [
+            'rows' => $rows,
+            'variants' => $variants,
+            'target_ids' => $targetIds,
+            'runtime_types' => array_column($rows, 'runtime_type_code'),
+            'review_targets' => [],
+            'revision_identity_sha256' => $this->requiredHash(
+                $options,
+                'expected_revision_identity_sha256'
+            ),
+            'rollback_markers_sha256' => $rollbackMarkersSha,
+            'graph_sha256' => $graphSha,
+            'cohort_sha256' => $cohortSha,
+        ];
+    }
+
+    /**
      * @param  list<mixed>  $links
      */
     private function assertLinks(string $runtimeType, array $links): void
@@ -497,7 +601,8 @@ final class Mbti64CmsInternalLinkPromotionService
             '/en/personality/'.strtolower($baseType).'-a-vs-'.strtolower($baseType).'-t',
         ];
         foreach ($links as $index => $link) {
-            if (! is_array($link)) {
+            if (! is_array($link)
+                || array_diff(array_keys($link), self::ALLOWED_LINK_KEYS) !== []) {
                 throw new RuntimeException(
                     'An exact internal link contains unsafe or unapproved copy/route data.'
                 );
@@ -587,8 +692,10 @@ final class Mbti64CmsInternalLinkPromotionService
         foreach ($inventory['rows'] as $row) {
             $section = $byTarget->get($row['target_id']);
             if (! $section instanceof PersonalityProfileVariantSection
-                || $this->sectionComparable($section)
-                    !== $this->expectedSectionComparable($row)) {
+                || ! hash_equals(
+                    $this->canonicalSha($this->expectedSectionComparable($row)),
+                    $this->canonicalSha($this->sectionComparable($section))
+                )) {
                 throw new RuntimeException('A promoted target section is missing, extra or drifted.');
             }
         }
@@ -625,7 +732,7 @@ final class Mbti64CmsInternalLinkPromotionService
             'render_variant' => 'links',
             'body_md' => null,
             'body_html' => null,
-            'payload_json' => ['items' => array_values($row['links'])],
+            'payload_json' => ['items' => $this->publicLinks($row['links'])],
             'sort_order' => 981,
             'is_enabled' => true,
         ];
@@ -658,6 +765,23 @@ final class Mbti64CmsInternalLinkPromotionService
             'sort_order' => (int) $section->sort_order,
             'is_enabled' => (bool) $section->is_enabled,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $links
+     * @return list<array<string,mixed>>
+     */
+    private function publicLinks(array $links): array
+    {
+        return array_map(
+            static fn (array $link): array => [
+                'href' => (string) $link['href'],
+                'anchor_text' => (string) $link['anchor_text'],
+                'role' => (string) $link['role'],
+                'safe_public_route' => true,
+            ],
+            $links
+        );
     }
 
     /**
