@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\DTO\ReviewGovernance\ReviewTargetSet;
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSection;
@@ -959,6 +960,12 @@ final class Mbti64CmsInternalLinkPromotionService
             ->pluck('id')
             ->map(static fn (mixed $id): int => (int) $id)
             ->all();
+        $profileIds = $variants
+            ->pluck('personality_profile_id')
+            ->map(static fn (mixed $id): int => (int) $id)
+            ->unique()
+            ->values()
+            ->all();
 
         return $this->canonicalSha([
             'variants' => $variants->map(static function (
@@ -979,6 +986,7 @@ final class Mbti64CmsInternalLinkPromotionService
                 ];
             })->values()->all(),
             'variant_seo' => $this->variantSeoState($targetIds, $lock),
+            'profile_seo' => $this->profileSeoState($profileIds, $lock),
         ]);
     }
 
@@ -1022,6 +1030,48 @@ final class Mbti64CmsInternalLinkPromotionService
                 'jsonld_overrides_json' => $seo?->jsonld_overrides_json,
             ];
         }, $targetIds);
+    }
+
+    /**
+     * @param  list<int>  $profileIds
+     * @return list<array<string,mixed>>
+     */
+    private function profileSeoState(array $profileIds, bool $lock): array
+    {
+        $query = PersonalityProfileSeoMeta::query()
+            ->withoutGlobalScopes()
+            ->whereIn('profile_id', $profileIds)
+            ->orderBy('profile_id');
+        if ($lock) {
+            $query->lockForUpdate();
+        }
+        $seoByProfile = $query->get()->keyBy('profile_id');
+
+        return array_map(static function (int $profileId) use ($seoByProfile): array {
+            $seo = $seoByProfile->get($profileId);
+
+            return [
+                'profile_id' => $profileId,
+                'exists' => $seo instanceof PersonalityProfileSeoMeta,
+                'seo_meta_id' => $seo instanceof PersonalityProfileSeoMeta
+                    ? (int) $seo->id
+                    : null,
+                'org_id' => $seo instanceof PersonalityProfileSeoMeta
+                    ? (int) $seo->org_id
+                    : null,
+                'seo_title' => $seo?->seo_title,
+                'seo_description' => $seo?->seo_description,
+                'canonical_url' => $seo?->canonical_url,
+                'og_title' => $seo?->og_title,
+                'og_description' => $seo?->og_description,
+                'og_image_url' => $seo?->og_image_url,
+                'twitter_title' => $seo?->twitter_title,
+                'twitter_description' => $seo?->twitter_description,
+                'twitter_image_url' => $seo?->twitter_image_url,
+                'robots' => $seo?->robots,
+                'jsonld_overrides_json' => $seo?->jsonld_overrides_json,
+            ];
+        }, $profileIds);
     }
 
     /**

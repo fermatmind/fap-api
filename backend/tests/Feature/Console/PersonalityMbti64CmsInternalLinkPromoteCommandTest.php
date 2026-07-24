@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Models\AdminUser;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSection;
@@ -505,6 +506,50 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertSame(
             'noindex,follow',
             PersonalityProfileVariantSeoMeta::query()->findOrFail($seo->id)->robots
+        );
+    }
+
+    public function test_promotion_rolls_back_when_parent_seo_changes_during_transaction(): void
+    {
+        $reviewed = $this->bindReview();
+        $plan = $this->dryRun($reviewed['options']);
+        $profileId = (int) PersonalityProfileVariant::query()
+            ->findOrFail($reviewed['fixture']['rows'][0]['target_id'])
+            ->personality_profile_id;
+        $seo = PersonalityProfileSeoMeta::query()->create([
+            'org_id' => 0,
+            'profile_id' => $profileId,
+            'canonical_url' => '/en/personality/intj',
+            'robots' => 'noindex,follow',
+        ]);
+
+        DB::statement(
+            'CREATE TRIGGER mbti_en64_parent_seo_drift_after_section '
+            .'AFTER INSERT ON personality_profile_variant_sections '
+            .'BEGIN UPDATE personality_profile_seo_meta '
+            ."SET robots = 'index,follow' WHERE id = ".(int) $seo->id.'; END'
+        );
+
+        try {
+            $exit = Artisan::call(
+                'personality:mbti64-cms-internal-link-promote',
+                array_merge($this->writeFlags(), $reviewed['options'], [
+                    '--expected-promotion-authorization-sha256' => $plan['promotion_authorization_sha256'],
+                ])
+            );
+        } finally {
+            DB::statement('DROP TRIGGER IF EXISTS mbti_en64_parent_seo_drift_after_section');
+        }
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            'public/indexability invariant',
+            Artisan::output()
+        );
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(
+            'noindex,follow',
+            PersonalityProfileSeoMeta::query()->findOrFail($seo->id)->robots
         );
     }
 

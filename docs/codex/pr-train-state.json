@@ -99739,7 +99739,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 38 tests / 532 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion and rollback transaction guards reload and lock exact parent profiles plus variant SEO state, fail closed on public/indexability/robots/canonical SEO drift, exclude non-public variants and parents, validate runtime identity, bind sections to org_id=0, canonicalize stored JSON comparisons, reject extra link fields, and keep rollback plus promoted/rolled-back cache closeout receipt/absence-bound after newer drafts. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete final ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 39 tests / 539 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion and rollback transaction guards reload and lock exact parent profiles plus variant and parent SEO state, fail closed on public/indexability/robots/canonical SEO drift, exclude non-public variants and parents, validate runtime identity, bind sections to org_id=0, canonicalize stored JSON comparisons, reject extra link fields, and keep rollback plus promoted/rolled-back cache closeout receipt/absence-bound after newer drafts. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete final ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
         "status": "retry_pending",
@@ -99843,8 +99843,13 @@
         "at": "2026-07-24T03:57:12Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "Exact-head review found that the transaction public-state fingerprint omitted variant SEO robots and canonical state. The scoped fix loads and locks the exact 32 variant SEO projections and includes all public SEO fields in the before/after fingerprint; a SQLite trigger regression proves concurrent robots drift rolls back the section mutation. Focused tests passed 38 tests / 532 assertions and the complete ci_verify_mbti.sh suite passed."
+      },
+      {
+        "at": "2026-07-24T04:06:40Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that parent profile SEO could still alter fallback robots/canonical output during a promotion or rollback transaction. The scoped fix loads and locks the exact parent SEO projections and includes all public parent SEO fields in the same before/after fingerprint; a second trigger regression proves concurrent parent robots drift rolls back all sections. Focused tests passed 39 tests / 539 assertions."
       }
     ],
-    "updated_at": "2026-07-24T03:57:12Z"
+    "updated_at": "2026-07-24T04:06:40Z"
   }
 }
