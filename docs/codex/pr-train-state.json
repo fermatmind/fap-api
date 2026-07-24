@@ -99872,7 +99872,7 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
     ],
-    "status": "github_checks_pending",
+    "status": "github_required_check_failed_scope_authority_needed",
     "commit_sha": "b13452ebc44165c187162d4637699300169424f3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
     "checks": {
@@ -99889,8 +99889,8 @@
         "evidence": "Passed focused tests (11 tests / 68 assertions), scoped Pint (7 files), the exact migration through php artisan migrate --force against a disposable local SQLite database, API route listing (220 routes), composer validate --strict, composer audit (no advisories), YAML parse, JSON parse, git diff --check, and exact changed-file validation (10/10 authorized paths). The first disposable-migration wrapper invocation had a php -r namespace escaping syntax error before Laravel boot; the corrected wrapper ran the migration and verified all three tables."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3280 opened from exact local-validated implementation commit 6ab43507d8e5320b03adc0448c9866380ff1b54e. GitHub initially reports MERGEABLE/UNSTABLE with required checks starting."
+        "status": "failed",
+        "evidence": "Exact head f56f00d6b77495d3f60bba941b993151749f8db0 passed hygiene, supply-chain, content-pack-build-validate, Semgrep, MBTI v2, and MBTI legacy. verify-bigfive failed only BigFiveResultPageV2CoreBodyPreviewTest::runtime_paths_have_no_uncommitted_diff after 1597 tests passed and 1 was skipped: the freeze classifier does not yet exempt this PR's six SEO Intel runtime/migration files."
       }
     },
     "scope_validation": {
@@ -99899,7 +99899,7 @@
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
-    "failure_reason": null,
+    "failure_reason": "The required Big Five freeze check needs a narrow classifier regression in backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php. That file is outside Task 6 allowed paths, and the user's latest authorization explicitly limited it to Task 2, so Task 6 cannot modify it without new scope authority.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -99930,8 +99930,13 @@
         "at": "2026-07-24T06:17:16Z",
         "status": "same_scope_privacy_fix_validated",
         "note": "Final schema review found the optional query_display_masked column weakened the privacy-safe hash-only contract. Removed that column and its fixture use, added a regression assertion preventing query display storage, reran focused tests (11 tests / 69 assertions), scoped Pint, disposable-SQLite migration with an explicit absent-column assertion, composer validate --strict, and composer audit; all passed. Fix commit is b13452ebc44165c187162d4637699300169424f3."
+      },
+      {
+        "at": "2026-07-24T06:25:54Z",
+        "status": "github_required_check_failed_scope_authority_needed",
+        "note": "At exact head f56f00d6b77495d3f60bba941b993151749f8db0, all required checks except verify-bigfive passed. The Big Five job passed 1597 tests with 1 skipped and failed only the branch-diff freeze assertion because six new Task 6 SEO Intel runtime/migration files are not classified as non-Big-Five changes. The narrow repair belongs in BigFiveResultPageV2CoreBodyPreviewTest.php, but the user's existing authorization for that path is explicitly Task-2-only; Task 6 is held for new scope authority and no out-of-scope edit was made."
       }
     ],
-    "updated_at": "2026-07-24T06:17:16Z"
+    "updated_at": "2026-07-24T06:25:54Z"
   }
 }
