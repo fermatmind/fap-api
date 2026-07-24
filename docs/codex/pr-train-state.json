@@ -99873,7 +99873,7 @@
       "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "6ab43507d8e5320b03adc0448c9866380ff1b54e",
+    "commit_sha": "b13452ebc44165c187162d4637699300169424f3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
     "checks": {
       "dependency": {
@@ -99882,7 +99882,7 @@
       },
       "focused_query_owner_tests": {
         "status": "passed",
-        "evidence": "Final focused run passed 11 tests / 68 assertions. During scoped implementation, the new reciprocal-hreflang regression initially selected the first locale row rather than the zh-CN row; the fixture assertion was corrected and the exact suite passed on retry."
+        "evidence": "Final focused run passed 11 tests / 69 assertions. During scoped implementation, the new reciprocal-hreflang regression initially selected the first locale row rather than the zh-CN row; the fixture assertion was corrected and the exact suite passed on retry. Final privacy review removed the unnecessary query display column and asserts hash-only query storage."
       },
       "required_local_checks": {
         "status": "passed",
@@ -99925,8 +99925,13 @@
         "at": "2026-07-24T06:15:31Z",
         "status": "github_checks_pending",
         "note": "Committed the exact 10-path Task 6 scope at 6ab43507d8e5320b03adc0448c9866380ff1b54e, pushed codex/seo-query-owner-url-truth-01, and opened PR #3280. GitHub initially reports MERGEABLE/UNSTABLE with required checks starting; no production-side action occurred."
+      },
+      {
+        "at": "2026-07-24T06:17:16Z",
+        "status": "same_scope_privacy_fix_validated",
+        "note": "Final schema review found the optional query_display_masked column weakened the privacy-safe hash-only contract. Removed that column and its fixture use, added a regression assertion preventing query display storage, reran focused tests (11 tests / 69 assertions), scoped Pint, disposable-SQLite migration with an explicit absent-column assertion, composer validate --strict, and composer audit; all passed. Fix commit is b13452ebc44165c187162d4637699300169424f3."
       }
     ],
-    "updated_at": "2026-07-24T06:15:31Z"
+    "updated_at": "2026-07-24T06:17:16Z"
   }
 }
