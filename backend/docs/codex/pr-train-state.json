@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T04:05:26Z",
+  "updated_at": "2026-07-24T04:14:17Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,7 +11,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "review_fix_local_checks_passed",
       "branch": "codex/seo-core-entry-slo-observability-01",
-      "commit_sha": "c810ccde07387f2aec4b965b545488c340047491",
+      "commit_sha": "1956ed408a28d23fe3d47b01b6b96462b4240bc6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
       "checks": {
         "dependency": {
@@ -22,7 +22,7 @@
           {
             "command": "php artisan test tests/Feature/SEO/SeoCoreEntrySloObservabilityTest.php --no-ansi",
             "status": "passed",
-            "details": "6 tests and 427 assertions passed, including query-bearing absolute CTA URLs, normalized loopback-host rejection, and explicit public-host allowlist enforcement."
+            "details": "6 tests and 428 assertions passed, including query-bearing absolute CTA URLs, normalized loopback-host rejection, explicit public-host allowlist enforcement, and X-Robots-Tag none classification."
           },
           {
             "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_seo_core_entry_slo_observability_files --no-ansi",
@@ -70,7 +70,7 @@
           {
             "command": "GitHub review-fix head rerun",
             "status": "pending",
-            "details": "Prior review-fix head passed all nine checks; the final explicit-host-allowlist head requires a fresh GitHub run."
+            "details": "Prior explicit-host-allowlist head passed all nine checks; the final robots-alias classification head requires a fresh GitHub run."
           },
           {
             "command": "GitHub CI hygiene",
@@ -169,6 +169,11 @@
           "at": "2026-07-24T04:05:26Z",
           "status": "review_fix_local_checks_passed",
           "summary": "Addressed the final SSRF review finding with an explicit canonical public-host allowlist (default fermatmind.com), preventing arbitrary DNS-resolved targets before HTTP. Observer tests passed 6 tests/427 assertions, including a non-allowlisted hostname no-request regression; the authorized freeze-classifier regression passed 1 test/2 assertions, Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, and exact 10-file scope remained unchanged."
+        },
+        {
+          "at": "2026-07-24T04:14:17Z",
+          "status": "review_fix_local_checks_passed",
+          "summary": "Addressed the robots alias review finding: X-Robots-Tag none is now tokenized and classified as non-indexable alongside noindex/nofollow. Observer tests passed 6 tests/428 assertions, the authorized freeze-classifier regression passed 1 test/2 assertions, Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, and exact 10-file scope remained unchanged."
         }
       ]
     },
