@@ -7,6 +7,19 @@ Runtime impact: none
 Search submission impact: none
 CMS impact: none
 
+## 2026-07-24 execution addendum
+
+The current live baseline, completed Career infrastructure ledger, nine-task
+status, product-growth sequencing, and exact proposed PR cards are maintained
+in
+`backend/docs/seo/seo-product-growth-status-and-pr-plan-2026-07-24.md`.
+
+That addendum records a current P0 incident: all twelve EN/ZH core test detail
+URLs enumerated by the 2026-07-24 public sitemap returned HTTP 500 in the
+09:27 CST read-only probe. Core test availability must return to a stable
+12/12 HTTP 200 before this strategy resumes article, Career, personality, or
+test-page expansion.
+
 ## 0. Executive Decision
 
 FermatMind should now position the whole site as:
