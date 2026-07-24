@@ -1,5 +1,135 @@
 <?php
 
+$coreEntryTestFamilies = [
+    [
+        'key' => 'mbti',
+        'tier' => 'L1',
+        'slug' => 'mbti-personality-test-16-personality-types',
+        'ttfb_budget_ms' => 1000,
+    ],
+    [
+        'key' => 'big_five',
+        'tier' => 'L2',
+        'slug' => 'big-five-personality-test-ocean-model',
+        'ttfb_budget_ms' => 1500,
+    ],
+    [
+        'key' => 'enneagram',
+        'tier' => 'L3',
+        'slug' => 'enneagram-personality-test-nine-types',
+        'ttfb_budget_ms' => 2500,
+    ],
+    [
+        'key' => 'riasec',
+        'tier' => 'L3',
+        'slug' => 'holland-career-interest-test-riasec',
+        'ttfb_budget_ms' => 2500,
+    ],
+    [
+        'key' => 'iq',
+        'tier' => 'L3',
+        'slug' => 'iq-test-intelligence-quotient-assessment',
+        'ttfb_budget_ms' => 2500,
+    ],
+    [
+        'key' => 'eq',
+        'tier' => 'L3',
+        'slug' => 'eq-test-emotional-intelligence-assessment',
+        'ttfb_budget_ms' => 2500,
+    ],
+];
+
+$coreEntrySloTargets = [];
+
+foreach ($coreEntryTestFamilies as $family) {
+    foreach (['en', 'zh'] as $locale) {
+        $alternateLocale = $locale === 'en' ? 'zh' : 'en';
+        $path = '/'.$locale.'/tests/'.$family['slug'];
+
+        $coreEntrySloTargets[] = [
+            'id' => strtolower($family['tier']).'_'.$family['key'].'_'.$locale,
+            'tier' => $family['tier'],
+            'page_family' => 'test_detail',
+            'locale' => $locale,
+            'path' => $path,
+            'alternate_path' => '/'.$alternateLocale.'/tests/'.$family['slug'],
+            'alternate_hreflang' => $alternateLocale === 'zh' ? 'zh-CN' : 'en',
+            'ttfb_budget_ms' => $family['ttfb_budget_ms'],
+            'ssr_markers' => [
+                'data-evidence-page-family="test_detail"',
+            ],
+            'primary_cta_markers' => [
+                'href="'.$path.'/take"',
+            ],
+            'last_known_good_markers' => [
+                'data-content-state="last-known-good"',
+                'data-source-state="last-known-good"',
+            ],
+            'minimal_shell_markers' => [
+                'data-testid="test-detail-minimal-shell"',
+                'data-content-state="minimal-shell"',
+            ],
+            'authority_dependency' => 'scale_catalog_and_cms_landing_surface',
+        ];
+    }
+}
+
+foreach (['en', 'zh'] as $locale) {
+    $alternateLocale = $locale === 'en' ? 'zh' : 'en';
+
+    $coreEntrySloTargets[] = [
+        'id' => 'l3_career_'.$locale,
+        'tier' => 'L3',
+        'page_family' => 'career',
+        'locale' => $locale,
+        'path' => '/'.$locale.'/career',
+        'alternate_path' => '/'.$alternateLocale.'/career',
+        'alternate_hreflang' => $alternateLocale === 'zh' ? 'zh-CN' : 'en',
+        'ttfb_budget_ms' => 2500,
+        'ssr_markers' => [
+            'data-testid="career-explorer-pathways"',
+        ],
+        'primary_cta_markers' => [
+            'action="/'.$locale.'/career/jobs"',
+        ],
+        'last_known_good_markers' => [
+            'data-content-state="last-known-good"',
+            'data-testid="career-directory-stale"',
+        ],
+        'minimal_shell_markers' => [
+            'data-testid="career-minimal-shell"',
+            'data-content-state="minimal-shell"',
+        ],
+        'authority_dependency' => 'career_public_api_and_cache',
+    ];
+
+    $coreEntrySloTargets[] = [
+        'id' => 'l3_articles_'.$locale,
+        'tier' => 'L3',
+        'page_family' => 'articles',
+        'locale' => $locale,
+        'path' => '/'.$locale.'/articles',
+        'alternate_path' => '/'.$alternateLocale.'/articles',
+        'alternate_hreflang' => $alternateLocale === 'zh' ? 'zh-CN' : 'en',
+        'ttfb_budget_ms' => 2500,
+        'ssr_markers' => [
+            'data-testid="articles-card-',
+        ],
+        'primary_cta_markers' => [
+            'href="/'.$locale.'/articles/',
+        ],
+        'last_known_good_markers' => [
+            'data-content-state="last-known-good"',
+            'data-source-state="last-known-good"',
+        ],
+        'minimal_shell_markers' => [
+            'data-testid="articles-minimal-shell"',
+            'data-content-state="minimal-shell"',
+        ],
+        'authority_dependency' => 'cms_articles_api_and_cache',
+    ];
+}
+
 return [
     'enabled' => env('SEO_INTEL_ENABLED', false),
     'connection' => env('SEO_INTEL_DB_CONNECTION', 'seo_intel'),
@@ -27,6 +157,35 @@ return [
     ],
     'default_collector' => 'noop',
     'collector_timeout_seconds' => env('SEO_INTEL_COLLECTOR_TIMEOUT_SECONDS', 30),
+    'core_entry_slo' => [
+        'schema_version' => 'seo-core-entry-slo-observability.v1',
+        'enabled' => env('SEO_INTEL_CORE_ENTRY_SLO_ENABLED', false),
+        'default_concurrency' => 4,
+        'max_concurrency' => 4,
+        'default_timeout_seconds' => 10,
+        'max_timeout_seconds' => 15,
+        'tier_order' => ['L1', 'L2', 'L3'],
+        'private_path_segments' => [
+            'take',
+            'result',
+            'results',
+            'attempt',
+            'attempts',
+            'order',
+            'orders',
+            'recovery',
+            'recover',
+            'payment',
+            'payments',
+            'pay',
+            'checkout',
+            'report',
+            'reports',
+            'share',
+            'account',
+        ],
+        'targets' => $coreEntrySloTargets,
+    ],
     'url_truth_inventory' => [
         'canary_default_limit' => 10,
         'canary_max_limit' => 50,

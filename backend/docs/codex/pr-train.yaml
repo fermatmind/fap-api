@@ -6,6 +6,59 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: SEO-CORE-ENTRY-SLO-OBSERVABILITY-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-core-entry-slo-observability-01
+    base: main
+    depends_on:
+      - SEO-CORE-TEST-DETAIL-500-INCIDENT-01
+    mode: execute
+    title: "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01 add tiered SEO entry SLO"
+    scope: >
+      Add a backend-only read-only L1/L2/L3 public SEO entry observer with a
+      deterministic public URL manifest, bounded concurrency, sanitized JSON
+      artifacts, and an ops read model for HTTP, TTFB, visible SSR, canonical,
+      robots, hreflang, CTA, upstream/CMS/API, and fresh/LKG/minimal-shell
+      state. Preserve zero DB, CMS, sitemap, llms, Search Channel, indexing,
+      scheduler, queue-worker, production, and private-URL writes or probes.
+    allowed_paths:
+      - app/Console/Commands/**
+      - app/Services/SeoIntel/**
+      - config/**
+      - tests/Feature/SEO/**
+      - docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php artisan test tests/Feature/SEO/SeoCoreEntrySloObservabilityTest.php"
+      - "vendor/bin/pint --test app/Console/Commands app/Services/SeoIntel tests/Feature/SEO"
+      - "php artisan route:list --path=api --except-vendor"
+      - "composer validate --strict"
+      - "composer audit"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true); puts \"yaml ok\"'"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "git diff --cached --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: SEO-OPS-ZH-ARTICLE-QUALITY-DRY-RUN-ADAPTER-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
