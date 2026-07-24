@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T03:19:20Z",
+  "updated_at": "2026-07-24T03:28:38Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,7 +9,7 @@
     "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_pending",
+      "status": "github_checks_failed_scope_blocked",
       "branch": "codex/seo-core-entry-slo-observability-01",
       "commit_sha": "477000f7693d2e7407fe07bd1a6c4069933f936e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
@@ -61,9 +61,40 @@
             "details": "Exactly 9 changed files; every path is allowed by the Task 2 manifest."
           }
         ],
-        "github": []
+        "github": [
+          {
+            "command": "GitHub CI hygiene",
+            "status": "passed"
+          },
+          {
+            "command": "GitHub Code Scanning and Semgrep",
+            "status": "passed",
+            "details": "Semgrep blocking secrets, SARIF upload, and Semgrep OSS passed."
+          },
+          {
+            "command": "GitHub CI supply-chain",
+            "status": "passed"
+          },
+          {
+            "command": "GitHub CI content-pack-build-validate",
+            "status": "passed"
+          },
+          {
+            "command": "GitHub CI verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "command": "GitHub CI verify-mbti-v2",
+            "status": "passed"
+          },
+          {
+            "command": "GitHub CI verify-bigfive",
+            "status": "failed",
+            "details": "1595 tests passed and 1 runtime-freeze classifier test failed because the four new read-only SEO observer app files are not in the classifier allowlist."
+          }
+        ]
       },
-      "failure_reason": null,
+      "failure_reason": "Required verify-bigfive failed only at BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classification. The exact planning authority forbids expanding beyond Commands, Services/SeoIntel, config, Feature/SEO, and docs/seo; the needed classifier file tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php is outside that declared scope.",
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -98,6 +129,11 @@
           "at": "2026-07-24T03:19:20Z",
           "status": "github_checks_pending",
           "summary": "Pushed the exact scoped branch and opened PR #3271 with the manifest-matching title. GitHub reports the PR mergeable; required checks are running."
+        },
+        {
+          "at": "2026-07-24T03:28:38Z",
+          "status": "github_checks_failed_scope_blocked",
+          "summary": "Eight of nine GitHub checks passed. verify-bigfive ran 1595 passing tests and failed only because the shared runtime-freeze classifier does not yet exclude the four new read-only SEO observer app files. Updating that classifier requires one exact Unit test file outside the planning authority allowed_paths, so no out-of-scope edit was made."
         }
       ]
     },
