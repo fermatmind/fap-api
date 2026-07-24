@@ -1,0 +1,491 @@
+name: Backend Production Ops Shared Config Migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only preflight or exact authorized apply
+        required: true
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production application SHA
+        required: true
+        type: string
+      expected_template_sha256:
+        description: Exact canonical ops template SHA256
+        required: true
+        type: string
+      expected_config_path_sha256:
+        description: Apply-only config path SHA256 from preflight
+        required: false
+        type: string
+      expected_current_config_sha256:
+        description: Apply-only full shared config SHA256 from preflight
+        required: false
+        type: string
+      expected_current_ops_section_sha256:
+        description: Apply-only current ops section SHA256 from preflight
+        required: false
+        type: string
+      expected_foreign_projection_sha256:
+        description: Apply-only foreign config projection SHA256
+        required: false
+        type: string
+      expected_foreign_status_sha256:
+        description: Apply-only foreign Supervisor status SHA256
+        required: false
+        type: string
+      expected_rendered_ops_section_sha256:
+        description: Apply-only rendered canonical ops section SHA256
+        required: false
+        type: string
+      expected_patched_config_sha256:
+        description: Apply-only exact patched shared config SHA256
+        required: false
+        type: string
+      expected_config_exact_program_section_count:
+        description: Apply-only exact ops section count
+        required: false
+        type: string
+      expected_config_total_section_count:
+        description: Apply-only total shared section count
+        required: false
+        type: string
+      expected_config_foreign_program_section_count:
+        description: Apply-only foreign program section count
+        required: false
+        type: string
+      expected_runtime_cwd_current:
+        description: Apply-only runtime cwd flag
+        required: false
+        type: string
+      expected_runtime_config_current:
+        description: Apply-only runtime config flag
+        required: false
+        type: string
+      preflight_run_id:
+        description: Apply-only immutable successful preflight run id
+        required: false
+        type: string
+      preflight_run_attempt:
+        description: Apply-only immutable successful preflight attempt
+        required: false
+        type: string
+      operator_approval_phrase:
+        description: Apply-only exact receipt-bound operator approval
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: backend-production-ops-shared-config-migration
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Resolve shared config migration eligibility
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.validate.outputs.mode }}
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      active_revision: ${{ steps.validate.outputs.active_revision }}
+      template_sha256: ${{ steps.validate.outputs.template_sha256 }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate exact control and immutable binding
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EXPECTED_TEMPLATE_SHA256: ${{ inputs.expected_template_sha256 }}
+          EXPECTED_CONFIG_PATH_SHA256: ${{ inputs.expected_config_path_sha256 }}
+          EXPECTED_CURRENT_CONFIG_SHA256: ${{ inputs.expected_current_config_sha256 }}
+          EXPECTED_CURRENT_OPS_SECTION_SHA256: ${{ inputs.expected_current_ops_section_sha256 }}
+          EXPECTED_FOREIGN_PROJECTION_SHA256: ${{ inputs.expected_foreign_projection_sha256 }}
+          EXPECTED_FOREIGN_STATUS_SHA256: ${{ inputs.expected_foreign_status_sha256 }}
+          EXPECTED_RENDERED_OPS_SECTION_SHA256: ${{ inputs.expected_rendered_ops_section_sha256 }}
+          EXPECTED_PATCHED_CONFIG_SHA256: ${{ inputs.expected_patched_config_sha256 }}
+          EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_exact_program_section_count }}
+          EXPECTED_CONFIG_TOTAL_SECTION_COUNT: ${{ inputs.expected_config_total_section_count }}
+          EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_foreign_program_section_count }}
+          EXPECTED_RUNTIME_CWD_CURRENT: ${{ inputs.expected_runtime_cwd_current }}
+          EXPECTED_RUNTIME_CONFIG_CURRENT: ${{ inputs.expected_runtime_config_current }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          template="deploy/supervisor/fap-queue-ops.conf.template"
+          control_script="scripts/deploy/control_ops_shared_config.sh"
+          projector_script="scripts/deploy/project_ops_shared_config.php"
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_TEMPLATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(sha256sum "$template" | awk '{print $1}')" = "$EXPECTED_TEMPLATE_SHA256"
+          bash -n "$control_script"
+          php -l "$projector_script"
+
+          if [ "$MODE" = preflight ]; then
+            test -z "$EXPECTED_CONFIG_PATH_SHA256"
+            test -z "$EXPECTED_CURRENT_CONFIG_SHA256"
+            test -z "$EXPECTED_CURRENT_OPS_SECTION_SHA256"
+            test -z "$EXPECTED_FOREIGN_PROJECTION_SHA256"
+            test -z "$EXPECTED_FOREIGN_STATUS_SHA256"
+            test -z "$EXPECTED_RENDERED_OPS_SECTION_SHA256"
+            test -z "$EXPECTED_PATCHED_CONFIG_SHA256"
+            test -z "$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT"
+            test -z "$EXPECTED_CONFIG_TOTAL_SECTION_COUNT"
+            test -z "$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT"
+            test -z "$EXPECTED_RUNTIME_CWD_CURRENT"
+            test -z "$EXPECTED_RUNTIME_CONFIG_CURRENT"
+            test -z "$PREFLIGHT_RUN_ID"
+            test -z "$PREFLIGHT_RUN_ATTEMPT"
+            test -z "$OPERATOR_APPROVAL_PHRASE"
+          else
+            test "$MODE" = apply
+            for hash_value in \
+              "$EXPECTED_CONFIG_PATH_SHA256" \
+              "$EXPECTED_CURRENT_CONFIG_SHA256" \
+              "$EXPECTED_CURRENT_OPS_SECTION_SHA256" \
+              "$EXPECTED_FOREIGN_PROJECTION_SHA256" \
+              "$EXPECTED_FOREIGN_STATUS_SHA256" \
+              "$EXPECTED_RENDERED_OPS_SECTION_SHA256" \
+              "$EXPECTED_PATCHED_CONFIG_SHA256"; do
+              [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
+            done
+            [[ "$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT" =~ ^[0-9]+$ ]]
+            [[ "$EXPECTED_CONFIG_TOTAL_SECTION_COUNT" =~ ^[0-9]+$ ]]
+            [[ "$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT" =~ ^[0-9]+$ ]]
+            [[ "$EXPECTED_RUNTIME_CWD_CURRENT" =~ ^(true|false)$ ]]
+            [[ "$EXPECTED_RUNTIME_CONFIG_CURRENT" =~ ^(true|false)$ ]]
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
+            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
+            expected_phrase="I explicitly approve production fap-api shared ops-section migration from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} template SHA256 ${EXPECTED_TEMPLATE_SHA256} config-path SHA256 ${EXPECTED_CONFIG_PATH_SHA256} current-config SHA256 ${EXPECTED_CURRENT_CONFIG_SHA256} current-ops-section SHA256 ${EXPECTED_CURRENT_OPS_SECTION_SHA256} foreign-projection SHA256 ${EXPECTED_FOREIGN_PROJECTION_SHA256} foreign-status SHA256 ${EXPECTED_FOREIGN_STATUS_SHA256} rendered-ops-section SHA256 ${EXPECTED_RENDERED_OPS_SECTION_SHA256} patched-config SHA256 ${EXPECTED_PATCHED_CONFIG_SHA256} section-counts ${EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT}/${EXPECTED_CONFIG_TOTAL_SECTION_COUNT}/${EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT} runtime-cwd-current ${EXPECTED_RUNTIME_CWD_CURRENT} runtime-config-current ${EXPECTED_RUNTIME_CONFIG_CURRENT}; replace only the exact [program:fap-queue-ops] section in the one attested shared Supervisor file, preserve the foreign projection and foreign program statuses, restart only fap-queue-ops, and perform exact rollback on failed readback; no deploy/symlink/migration/CMS/database-authority/publication/sitemap/llms/search/PR23."
+            test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+            run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+            jq -e \
+              --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+              --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+              '.name == "Backend Production Ops Shared Config Migration"
+               and .path == ".github/workflows/backend-production-ops-shared-config-migration.yml"
+               and .event == "workflow_dispatch"
+               and .status == "completed"
+               and .conclusion == "success"
+               and .head_branch == "main"
+               and .head_sha == $sha
+               and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+
+            receipt_dir="$(mktemp -d)"
+            gh run download "$PREFLIGHT_RUN_ID" \
+              --name "backend-production-ops-shared-config-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+              --dir "$receipt_dir"
+            receipt="$receipt_dir/backend-production-ops-shared-config-migration.json"
+            test -f "$receipt"
+            jq -e \
+              --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg template_sha "$EXPECTED_TEMPLATE_SHA256" \
+              --arg config_path_sha "$EXPECTED_CONFIG_PATH_SHA256" \
+              --arg current_config_sha "$EXPECTED_CURRENT_CONFIG_SHA256" \
+              --arg current_ops_sha "$EXPECTED_CURRENT_OPS_SECTION_SHA256" \
+              --arg foreign_projection_sha "$EXPECTED_FOREIGN_PROJECTION_SHA256" \
+              --arg foreign_status_sha "$EXPECTED_FOREIGN_STATUS_SHA256" \
+              --arg rendered_ops_sha "$EXPECTED_RENDERED_OPS_SECTION_SHA256" \
+              --arg patched_config_sha "$EXPECTED_PATCHED_CONFIG_SHA256" \
+              --argjson exact_count "$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT" \
+              --argjson total_count "$EXPECTED_CONFIG_TOTAL_SECTION_COUNT" \
+              --argjson foreign_count "$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT" \
+              --argjson runtime_cwd "$EXPECTED_RUNTIME_CWD_CURRENT" \
+              --argjson runtime_config "$EXPECTED_RUNTIME_CONFIG_CURRENT" \
+              --arg run_id "$PREFLIGHT_RUN_ID" \
+              --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
+              '.contract_version == "backend.production_ops_shared_config_migration.v1"
+               and .mode == "preflight"
+               and .status == "PASS_PREFLIGHT"
+               and .run_id == $run_id
+               and .run_attempt == $run_attempt
+               and .control_plane_sha == $control
+               and .active_revision == $active
+               and .template_sha256 == $template_sha
+               and .config_path_sha256 == $config_path_sha
+               and .current_config_sha256 == $current_config_sha
+               and .current_ops_section_sha256 == $current_ops_sha
+               and .foreign_projection_sha256 == $foreign_projection_sha
+               and .foreign_status_sha256 == $foreign_status_sha
+               and .rendered_ops_section_sha256 == $rendered_ops_sha
+               and .patched_config_sha256 == $patched_config_sha
+               and .config_exact_program_section_count == $exact_count
+               and .config_total_section_count == $total_count
+               and .config_foreign_program_section_count == $foreign_count
+               and .runtime_cwd_current == $runtime_cwd
+               and .runtime_config_current == $runtime_config
+               and .ops_pending_total == 0
+               and .live_process_verified == true
+               and .migration_supported == true
+               and .production_write_execution == false' "$receipt" >/dev/null
+          fi
+
+          {
+            echo "mode=$MODE"
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "active_revision=$EXPECTED_ACTIVE_REVISION"
+            echo "template_sha256=$EXPECTED_TEMPLATE_SHA256"
+          } >> "$GITHUB_OUTPUT"
+
+  control:
+    name: Preflight or apply shared ops section migration
+    needs: eligibility
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.PRODUCTION_DEPLOY_SSH_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.PRODUCTION_SSH_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Render and run exact shared migration control
+        id: control
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          EXPECTED_TEMPLATE_SHA256: ${{ needs.eligibility.outputs.template_sha256 }}
+          EXPECTED_CONFIG_PATH_SHA256: ${{ inputs.expected_config_path_sha256 }}
+          EXPECTED_CURRENT_CONFIG_SHA256: ${{ inputs.expected_current_config_sha256 }}
+          EXPECTED_CURRENT_OPS_SECTION_SHA256: ${{ inputs.expected_current_ops_section_sha256 }}
+          EXPECTED_FOREIGN_PROJECTION_SHA256: ${{ inputs.expected_foreign_projection_sha256 }}
+          EXPECTED_FOREIGN_STATUS_SHA256: ${{ inputs.expected_foreign_status_sha256 }}
+          EXPECTED_RENDERED_OPS_SECTION_SHA256: ${{ inputs.expected_rendered_ops_section_sha256 }}
+          EXPECTED_PATCHED_CONFIG_SHA256: ${{ inputs.expected_patched_config_sha256 }}
+          EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_exact_program_section_count }}
+          EXPECTED_CONFIG_TOTAL_SECTION_COUNT: ${{ inputs.expected_config_total_section_count }}
+          EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT: ${{ inputs.expected_config_foreign_program_section_count }}
+          EXPECTED_RUNTIME_CWD_CURRENT: ${{ inputs.expected_runtime_cwd_current }}
+          EXPECTED_RUNTIME_CONFIG_CURRENT: ${{ inputs.expected_runtime_config_current }}
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          template="deploy/supervisor/fap-queue-ops.conf.template"
+          candidate="$RUNNER_TEMP/fap-queue-ops.conf"
+          sed "s#__DEPLOY_PATH__#$DEPLOY_PATH#g" "$template" > "$candidate"
+          test "$(sha256sum "$template" | awk '{print $1}')" = "$EXPECTED_TEMPLATE_SHA256"
+          test "$(grep -Fc '[program:fap-queue-ops]' "$candidate")" -eq 1
+          candidate_b64="$(base64 -w 0 "$candidate")"
+          control_b64="$(base64 -w 0 scripts/deploy/control_ops_shared_config.sh)"
+          projector_b64="$(base64 -w 0 scripts/deploy/project_ops_shared_config.php)"
+
+          set +e
+          result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' OPS_CANDIDATE_B64='$candidate_b64' OPS_PROJECTOR_B64='$projector_b64' CONTROL_RUN_ID='$GITHUB_RUN_ID' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_CURRENT_OPS_SECTION_SHA256='$EXPECTED_CURRENT_OPS_SECTION_SHA256' EXPECTED_FOREIGN_PROJECTION_SHA256='$EXPECTED_FOREIGN_PROJECTION_SHA256' EXPECTED_FOREIGN_STATUS_SHA256='$EXPECTED_FOREIGN_STATUS_SHA256' EXPECTED_RENDERED_OPS_SECTION_SHA256='$EXPECTED_RENDERED_OPS_SECTION_SHA256' EXPECTED_PATCHED_CONFIG_SHA256='$EXPECTED_PATCHED_CONFIG_SHA256' EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT='$EXPECTED_CONFIG_EXACT_PROGRAM_SECTION_COUNT' EXPECTED_CONFIG_TOTAL_SECTION_COUNT='$EXPECTED_CONFIG_TOTAL_SECTION_COUNT' EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT='$EXPECTED_CONFIG_FOREIGN_PROGRAM_SECTION_COUNT' EXPECTED_RUNTIME_CWD_CURRENT='$EXPECTED_RUNTIME_CWD_CURRENT' EXPECTED_RUNTIME_CONFIG_CURRENT='$EXPECTED_RUNTIME_CONFIG_CURRENT' bash -lc 'printf %s $control_b64 | base64 -d | bash'" \
+            2>"$RUNNER_TEMP/ops-shared-config.err")"
+          ssh_rc=$?
+          set -e
+          if [ "$ssh_rc" -ne 0 ]; then
+            failure_code="$(grep -Eo 'OPS_SHARED_CONFIG_(GATE|ROLLBACK)_FAILED:[A-Z0-9_]+' \
+              "$RUNNER_TEMP/ops-shared-config.err" | tail -n 1 || true)"
+            if [[ "$failure_code" =~ ^OPS_SHARED_CONFIG_(GATE|ROLLBACK)_FAILED:[A-Z0-9_]+$ ]]; then
+              echo "$failure_code" >&2
+            else
+              echo "OPS_SHARED_CONFIG_REMOTE_FAILED" >&2
+            fi
+            exit "$ssh_rc"
+          fi
+
+          known_keys='^(active_revision|config_path_sha256|current_config_sha256|current_ops_section_sha256|foreign_projection_sha256|foreign_status_sha256|rendered_ops_section_sha256|patched_config_sha256|config_exact_program_section_count|config_total_section_count|config_foreign_program_section_count|runtime_cwd_current|runtime_config_current|ops_pending_total|live_process_verified|status|production_write_execution|config_write_count|worker_restart_count|rollback_execution_count)='
+          test -z "$(grep -Ev "$known_keys" <<<"$result" || true)"
+          value() {
+            local key="$1"
+            awk -F= -v key="$key" '$1 == key {print substr($0, length(key) + 2)}' <<<"$result"
+          }
+          for key in \
+            active_revision config_path_sha256 current_config_sha256 \
+            current_ops_section_sha256 foreign_projection_sha256 foreign_status_sha256 \
+            rendered_ops_section_sha256 patched_config_sha256 \
+            config_exact_program_section_count config_total_section_count \
+            config_foreign_program_section_count runtime_cwd_current runtime_config_current \
+            ops_pending_total live_process_verified status production_write_execution \
+            config_write_count worker_restart_count rollback_execution_count; do
+            field_value="$(value "$key")"
+            test -n "$field_value"
+            echo "$key=$field_value" >> "$GITHUB_OUTPUT"
+          done
+          test "$(value active_revision)" = "$EXPECTED_ACTIVE_REVISION"
+          test "$(value rendered_ops_section_sha256)" = "$(sha256sum "$candidate" | awk '{print $1}')"
+          test "$(value ops_pending_total)" = 0
+          test "$(value live_process_verified)" = true
+          test "$(value config_exact_program_section_count)" = 1
+          test "$(value config_total_section_count)" -ge 2
+          test "$(value config_foreign_program_section_count)" -ge 1
+          if [ "$MODE" = preflight ]; then
+            test "$(value status)" = PASS_PREFLIGHT
+            test "$(value production_write_execution)" = false
+            test "$(value config_write_count)" = 0
+            test "$(value worker_restart_count)" = 0
+          else
+            test "$(value status)" = PASS_APPLY
+            test "$(value production_write_execution)" = true
+            test "$(value config_write_count)" = 1
+            test "$(value worker_restart_count)" = 1
+          fi
+          test "$(value rollback_execution_count)" = 0
+
+      - name: Build sanitized immutable receipt
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+          TEMPLATE_SHA256: ${{ needs.eligibility.outputs.template_sha256 }}
+          ACTIVE_REVISION: ${{ steps.control.outputs.active_revision }}
+          STATUS: ${{ steps.control.outputs.status }}
+          CONFIG_PATH_SHA256: ${{ steps.control.outputs.config_path_sha256 }}
+          CURRENT_CONFIG_SHA256: ${{ steps.control.outputs.current_config_sha256 }}
+          CURRENT_OPS_SECTION_SHA256: ${{ steps.control.outputs.current_ops_section_sha256 }}
+          FOREIGN_PROJECTION_SHA256: ${{ steps.control.outputs.foreign_projection_sha256 }}
+          FOREIGN_STATUS_SHA256: ${{ steps.control.outputs.foreign_status_sha256 }}
+          RENDERED_OPS_SECTION_SHA256: ${{ steps.control.outputs.rendered_ops_section_sha256 }}
+          PATCHED_CONFIG_SHA256: ${{ steps.control.outputs.patched_config_sha256 }}
+          EXACT_COUNT: ${{ steps.control.outputs.config_exact_program_section_count }}
+          TOTAL_COUNT: ${{ steps.control.outputs.config_total_section_count }}
+          FOREIGN_COUNT: ${{ steps.control.outputs.config_foreign_program_section_count }}
+          RUNTIME_CWD_CURRENT: ${{ steps.control.outputs.runtime_cwd_current }}
+          RUNTIME_CONFIG_CURRENT: ${{ steps.control.outputs.runtime_config_current }}
+          OPS_PENDING_TOTAL: ${{ steps.control.outputs.ops_pending_total }}
+          LIVE_PROCESS_VERIFIED: ${{ steps.control.outputs.live_process_verified }}
+          PRODUCTION_WRITE_EXECUTION: ${{ steps.control.outputs.production_write_execution }}
+          CONFIG_WRITE_COUNT: ${{ steps.control.outputs.config_write_count }}
+          WORKER_RESTART_COUNT: ${{ steps.control.outputs.worker_restart_count }}
+          ROLLBACK_EXECUTION_COUNT: ${{ steps.control.outputs.rollback_execution_count }}
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-ops-shared-config-migration.json"
+          jq -n \
+            --arg contract_version "backend.production_ops_shared_config_migration.v1" \
+            --arg mode "$MODE" \
+            --arg status "$STATUS" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
+            --arg active_revision "$ACTIVE_REVISION" \
+            --arg template_sha256 "$TEMPLATE_SHA256" \
+            --arg config_path_sha256 "$CONFIG_PATH_SHA256" \
+            --arg current_config_sha256 "$CURRENT_CONFIG_SHA256" \
+            --arg current_ops_section_sha256 "$CURRENT_OPS_SECTION_SHA256" \
+            --arg foreign_projection_sha256 "$FOREIGN_PROJECTION_SHA256" \
+            --arg foreign_status_sha256 "$FOREIGN_STATUS_SHA256" \
+            --arg rendered_ops_section_sha256 "$RENDERED_OPS_SECTION_SHA256" \
+            --arg patched_config_sha256 "$PATCHED_CONFIG_SHA256" \
+            --argjson exact_count "$EXACT_COUNT" \
+            --argjson total_count "$TOTAL_COUNT" \
+            --argjson foreign_count "$FOREIGN_COUNT" \
+            --argjson runtime_cwd_current "$RUNTIME_CWD_CURRENT" \
+            --argjson runtime_config_current "$RUNTIME_CONFIG_CURRENT" \
+            --argjson ops_pending_total "$OPS_PENDING_TOTAL" \
+            --argjson live_process_verified "$LIVE_PROCESS_VERIFIED" \
+            --argjson production_write_execution "$PRODUCTION_WRITE_EXECUTION" \
+            --argjson config_write_count "$CONFIG_WRITE_COUNT" \
+            --argjson worker_restart_count "$WORKER_RESTART_COUNT" \
+            --argjson rollback_execution_count "$ROLLBACK_EXECUTION_COUNT" \
+            '{
+              contract_version: $contract_version,
+              mode: $mode,
+              status: $status,
+              run_id: $run_id,
+              run_attempt: $run_attempt,
+              control_plane_sha: $control_plane_sha,
+              active_revision: $active_revision,
+              template_sha256: $template_sha256,
+              config_layout: "SHARED",
+              migration_supported: true,
+              config_path_sha256: $config_path_sha256,
+              current_config_sha256: $current_config_sha256,
+              current_ops_section_sha256: $current_ops_section_sha256,
+              foreign_projection_sha256: $foreign_projection_sha256,
+              foreign_status_sha256: $foreign_status_sha256,
+              rendered_ops_section_sha256: $rendered_ops_section_sha256,
+              patched_config_sha256: $patched_config_sha256,
+              config_exact_program_section_count: $exact_count,
+              config_total_section_count: $total_count,
+              config_foreign_program_section_count: $foreign_count,
+              runtime_cwd_current: $runtime_cwd_current,
+              runtime_config_current: $runtime_config_current,
+              ops_pending_total: $ops_pending_total,
+              live_process_verified: $live_process_verified,
+              production_write_execution: $production_write_execution,
+              config_write_count: $config_write_count,
+              worker_restart_count: $worker_restart_count,
+              rollback_execution_count: $rollback_execution_count,
+              deploy_count: 0,
+              symlink_write_count: 0,
+              application_migration_count: 0,
+              cms_or_database_authority_write_count: 0,
+              publication_or_discoverability_write_count: 0
+            }' > "$receipt"
+          jq -e \
+            '.config_layout == "SHARED"
+             and .migration_supported == true
+             and .ops_pending_total == 0
+             and .live_process_verified == true
+             and .deploy_count == 0
+             and .symlink_write_count == 0
+             and .application_migration_count == 0
+             and .cms_or_database_authority_write_count == 0
+             and .publication_or_discoverability_write_count == 0' "$receipt" >/dev/null
+
+      - name: Upload immutable shared migration receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-production-ops-shared-config-${{ needs.eligibility.outputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/backend-production-ops-shared-config-migration.json
+          if-no-files-found: error
+          retention-days: 30
