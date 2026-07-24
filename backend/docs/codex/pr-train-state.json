@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T05:05:00Z",
+  "updated_at": "2026-07-24T05:06:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-10K-GSC-BOUNDED-BACKFILL-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "github_checks_pending",
       "branch": "codex/seo-10k-gsc-bounded-backfill-01",
       "commit_sha": "869156faae8e24645c7d6f788e12ecb0178082f3",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3276",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -62,7 +62,13 @@
             "details": "Exactly eight files; every path is listed in the Task 3 manifest and the Task-2-only Big Five classifier file is unchanged."
           }
         ],
-        "github": []
+        "github": [
+          {
+            "command": "initial GitHub required checks",
+            "status": "pending",
+            "details": "PR #3276 is OPEN and MERGEABLE; hygiene and Code Scanning checks started."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
@@ -94,6 +100,11 @@
           "at": "2026-07-24T05:05:00Z",
           "status": "local_checks_passed",
           "summary": "Rebased without conflict onto latest origin/main 6117a8704d73d476c52fb28a296d83e71dd234d4. Re-ran all Task 3 checks successfully: 10 backfill tests/146 assertions, 21 existing GSC tests/197 assertions, committed branch-diff runtime-freeze gate 1 test/4 assertions, command help, focused Pint, Composer validation/audit, JSON/YAML parsing, diff checks, and exact eight-file scope."
+        },
+        {
+          "at": "2026-07-24T05:06:00Z",
+          "status": "github_checks_pending",
+          "summary": "Pushed the exact eight-file Task 3 branch and opened PR #3276 with the manifest-matching title and required what/why/validation/deferred/rule-impact sections. GitHub reports the PR OPEN and MERGEABLE; required checks are running."
         }
       ]
     },
