@@ -694,12 +694,32 @@ final class Mbti64CmsInternalLinkPromotionService
             $this->canonicalizer,
         );
         $evidenceSha = $this->requiredHash($options, 'expected_review_evidence_sha256');
+        $currentOwnerAdminUserId = (int) config(
+            'review_governance.solo_owner_admin_user_id'
+        );
         $exists = ReviewAttestation::query()
             ->where('evidence_sha256', $evidenceSha)
+            ->where('review_mode', 'solo_owner')
+            ->where(
+                'review_source',
+                (string) config('review_governance.attestation.review_source')
+            )
+            ->where('attested_by_admin_user_id', $currentOwnerAdminUserId)
             ->where('decision', 'approved_all')
             ->where('target_count', 32)
             ->where('target_set_sha256', $targetSet->sha256)
             ->where('package_sha256', $inventory['revision_identity_sha256'])
+            ->whereHas('targetEvidences', static function ($query) use ($targetSet): void {
+                $query->where('target_decision', 'approved')
+                    ->where(static function ($query) use ($targetSet): void {
+                        foreach ($targetSet->targets as $target) {
+                            $query->orWhere(static function ($query) use ($target): void {
+                                $query->where('target_identity', $target->identity)
+                                    ->where('target_sha256', $target->sha256);
+                            });
+                        }
+                    });
+            }, '=', $targetSet->count())
             ->has('targetEvidences', '=', 32)
             ->exists();
         if (! $exists) {

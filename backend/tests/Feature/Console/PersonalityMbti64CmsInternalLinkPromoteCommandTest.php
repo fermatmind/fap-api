@@ -142,6 +142,56 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
     }
 
+    public function test_exact_evidence_must_belong_to_current_solo_owner(): void
+    {
+        $stale = $this->bindReview();
+        $newOwner = AdminUser::query()->create([
+            'name' => 'New owner',
+            'email' => 'new-owner@example.test',
+            'password' => 'test-password',
+            'is_active' => 1,
+        ]);
+        config()->set(
+            'review_governance.solo_owner_admin_user_id',
+            (int) $newOwner->id
+        );
+        $targets = app(PersonalityReviewAttestationService::class)->targets(
+            'mbti_approval_batch',
+            $stale['fixture']['review_targets']
+        );
+        $freshAttestation = app(ReviewAttestationFactory::class)->make(
+            scopeType: 'per02_mbti_en64_internal_link_revision_set',
+            scopeIdentity: $stale['fixture']['revision_identity_sha256'],
+            decision: 'approved_all',
+            targets: $targets,
+            packageSha256: $stale['fixture']['revision_identity_sha256'],
+            adminUserId: (int) $newOwner->id,
+        );
+        app(PersonalityReviewAttestationService::class)->bindApproved(
+            $freshAttestation,
+            'mbti_approval_batch',
+            $stale['fixture']['review_targets'],
+            (int) $newOwner->id,
+            $stale['fixture']['revision_identity_sha256'],
+        );
+        $plan = $this->dryRun($stale['options']);
+
+        $exit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge($this->writeFlags(), $stale['options'], [
+                '--expected-promotion-authorization-sha256' => $plan['promotion_authorization_sha256'],
+            ])
+        );
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            'exact approved 32-target revision-bound review evidence is missing or stale',
+            Artisan::output()
+        );
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(2, ReviewAttestation::query()->count());
+    }
+
     public function test_new_latest_revision_invalidates_bound_review_and_promotion_package(): void
     {
         $reviewed = $this->bindReview();

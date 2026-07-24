@@ -99739,7 +99739,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 39 tests / 539 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion and rollback transaction guards reload and lock exact parent profiles plus variant and parent SEO state, fail closed on public/indexability/robots/canonical SEO drift, exclude non-public variants and parents, validate runtime identity, bind sections to org_id=0, canonicalize stored JSON comparisons, reject extra link fields, and keep rollback plus promoted/rolled-back cache closeout receipt/absence-bound after newer drafts. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete final ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 40 tests / 546 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion and rollback transaction guards reload and lock exact parent profiles plus variant and parent SEO state, fail closed on public/indexability/robots/canonical SEO drift, exclude non-public variants and parents, validate runtime identity, bind sections to org_id=0, canonicalize stored JSON comparisons, reject extra link fields, keep rollback plus promoted/rolled-back cache closeout receipt/absence-bound after newer drafts, and require the consumed exact evidence to itself belong to the current solo owner/source with all 32 approved target identities. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete final ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
         "status": "retry_pending",
@@ -99848,8 +99848,13 @@
         "at": "2026-07-24T04:06:40Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "Exact-head review found that parent profile SEO could still alter fallback robots/canonical output during a promotion or rollback transaction. The scoped fix loads and locks the exact parent SEO projections and includes all public parent SEO fields in the same before/after fingerprint; a second trigger regression proves concurrent parent robots drift rolls back all sections. Focused tests passed 39 tests / 539 assertions."
+      },
+      {
+        "at": "2026-07-24T04:29:02Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that current-owner approval and the requested evidence SHA could be satisfied by different attestations. The exact-evidence query now independently binds solo_owner mode, current review source, current owner admin ID, exact package/target set, and all 32 approved target identity/SHA pairs. An owner-rotation regression proves stale evidence cannot be consumed even when a different fresh approval exists. Focused tests passed 40 tests / 546 assertions and the complete ci_verify_mbti.sh suite passed."
       }
     ],
-    "updated_at": "2026-07-24T04:06:40Z"
+    "updated_at": "2026-07-24T04:29:02Z"
   }
 }
