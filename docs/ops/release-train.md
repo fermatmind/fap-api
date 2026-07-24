@@ -231,11 +231,26 @@ stop immediately. Receipts contain only safe failure stage/category, build
 timings, row-index hash, and pre/post coverage fingerprints. They never contain
 target identity, query text, exception text, cache keys, or SSH routing data.
 
+A successful batch must read back every target written by that batch as
+covered. Because the derived Career cache is shared with the live read-through
+warmer, targets outside the current 50-row slice may independently move from
+`missing_pointer` to a covered state while the batch is running. That safe
+monotonic gain is reported separately as
+`concurrent_coverage_gain_count`; the runner-owned count remains
+`owned_cache_write_count` and continues to equal `cache_write_count`.
+Target-set drift, covered-to-missing regression, broken/invalid or excluded
+rows, owned targets that remain missing, and coverage report inconsistencies
+all fail closed. The workflow feeds the observed post-batch missing count and
+coverage fingerprint into the next batch rather than inferring them from the
+runner-owned write count.
+
 A failed run preserves verified cache. Recovery starts again at offset zero
 after a new read-only preflight and new exact authorization; already-ready rows
 are automatically skipped. Final readback must prove `2092/2092`, zero
-missing/broken/excluded rows, the exact authorized cache-write total, the
-unchanged active SHA, and the still-inactive candidate. The retired
+missing/broken/excluded rows, runner-owned plus concurrent monotonic coverage
+gain equal to the exact authorized initial missing count, zero queue dispatches
+and database writes, the unchanged active SHA, and the still-inactive
+candidate. The retired
 `88dedb58f341e6c92d07754eac7862fa3454dc7c` candidate is permanently rejected.
 This workflow never deploys, activates, migrates, publishes, writes CMS/database
 authority, changes indexability, or touches sitemap, llms, or Search Channel
