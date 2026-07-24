@@ -87,10 +87,16 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"',
             'live_process_verified=true',
             'failure_gate=CONFIG_DISCOVERY',
-            'sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print',
+            'failure_gate=GREP_PATH',
+            'grep_path="$(command -v grep)"',
+            'sudo -n find /etc/supervisor /opt/1panel -type f -size -256k',
+            '-exec "$grep_path" -lFx \'[program:fap-queue-ops]\' {} +',
             'test "${#config_candidates[@]}" -le 1',
+            'failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY',
+            'test "$(sudo -n "$grep_path" -Fxc \'[program:fap-queue-ops]\' "$OPS_CONFIG_PATH")" -eq 1',
+            'test "$(sudo -n "$grep_path" -Ec \'^\\[[^]]+\\][[:space:]]*$\' "$OPS_CONFIG_PATH")" -eq 1',
             'OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf',
-            '[[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]',
+            '[[ "$OPS_CONFIG_PATH" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]',
             'if sudo -n test -f "$OPS_CONFIG_PATH"; then',
             'current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk \'{print $1}\')"',
             'sudo -n test -f "$OPS_CONFIG_PATH"',
@@ -110,6 +116,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'failure_gate=WORKING_DIRECTORY_REVISION',
             'failure_gate=ARGV_IDENTITY',
             'failure_gate=QUEUE_PROBE',
+            'current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk \'{print $1}\')"',
             'application_deploy_count: 0',
             'symlink_write_count: 0',
             'migration_count: 0',
@@ -168,6 +175,20 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertSame(
             2,
             substr_count($workflow, 'config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"'),
+        );
+        $this->assertSame(2, substr_count($workflow, 'failure_gate=GREP_PATH'));
+        $this->assertSame(2, substr_count($workflow, 'failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY'));
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'sudo -n "$grep_path" -Ec \'^\\[[^]]+\\][[:space:]]*$\''),
+        );
+        $this->assertSame(
+            2,
+            substr_count($workflow, '-exec "$grep_path" -lFx \'[program:fap-queue-ops]\' {} +'),
+        );
+        $this->assertStringNotContainsString(
+            '-name fap-queue-ops.conf -print',
+            $workflow,
         );
     }
 
