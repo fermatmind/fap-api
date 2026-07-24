@@ -229,6 +229,60 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01
+    repo: fap-api
+    base: main
+    depends_on: []
+    branch: codex/saep-proposed-api-per02-mbti-en64-internal-link-promotion-01
+    title: "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01: add revision-bound MBTI EN64 internal-link promotion and rollback"
+    train_scope: per02_mbti_en64_revision_bound_internal_link_promotion
+    status: user_authorized
+    mode: execute
+    scope:
+      - Add a fail-closed command and service for exact dry-run, separate review binding, promotion, rollback and cache-closeout of the 32 English MBTI variant revisions and 64 approved links.
+      - Bind every action to the deployed SHA/release, graph/cohort hashes, checkpoint 112 inventories, exact revision identity and exact rollback absence markers.
+      - Reuse the mbti_approval_batch solo-owner review surface and immutable 32-target ReviewAttestation evidence without adding schema, routes or public APIs.
+      - Create or remove only exact receipt-bound mbti_content15_internal_links sections while preserving revision snapshots, publication, public/indexability, comparison, sitemap, llms and Search state.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php
+      - backend/app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php
+      - backend/tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute a production/staging deploy, real review binding, CMS/database promotion or rollback, cache mutation, publication/indexability change, sitemap/llms release or Search action.
+      - Modify migrations, routes, public APIs, frontend behavior, revision snapshots, comparison rows, content authority, permissions, secrets or production data.
+      - Admit a stale revision, partial or drifted section set, mismatched receipt/review evidence, private/query/cross-locale link, wrong copy/role, or any cohort other than exact 32 rows and 64 edges.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php
+      - php -l backend/app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php
+      - php -l backend/tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_mbti64_cms_internal_link_promotion_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-interaction --no-ansi
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: CAREER-JOBS-INDEX-LKG-RESILIENCE-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api

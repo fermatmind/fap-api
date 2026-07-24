@@ -99717,5 +99717,149 @@
       }
     ],
     "updated_at": "2026-07-23T07:44:26Z"
+  },
+  "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01": {
+    "id": "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-per02-mbti-en64-internal-link-promotion-01",
+    "title": "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01: add revision-bound MBTI EN64 internal-link promotion and rollback",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3256",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "No manifest dependency; implementation started from exact origin/main 03480a1b30284af17b03a0fb853c44641c84fb17."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "This PR implements code, tests and train metadata only. No production review binding, CMS/database write, promotion, rollback, cache action, deploy, publication, sitemap/llms or Search action is authorized or executed."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 40 tests / 546 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion and rollback transaction guards reload and lock exact parent profiles plus variant and parent SEO state, fail closed on public/indexability/robots/canonical SEO drift, exclude non-public variants and parents, validate runtime identity, bind sections to org_id=0, canonicalize stored JSON comparisons, reject extra link fields, keep rollback plus promoted/rolled-back cache closeout receipt/absence-bound after newer drafts, and require the consumed exact evidence to itself belong to the current solo owner/source with all 32 approved target identities. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete final ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact head 1ae93bf0a7429d11be53d4ab7a9d998777a3e125 passed all nine required checks after every scoped review repair and latest-main rebind."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-24T00:59:09Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 03480a1b30284af17b03a0fb853c44641c84fb17 in an isolated clean worktree. Scope is limited to the revision-bound MBTI EN64 promotion command, service, focused test and train metadata; no production or content mutation is authorized or attempted."
+      },
+      {
+        "at": "2026-07-23T22:24:26Z",
+        "status": "local_validation_passed",
+        "note": "The exact revision-bound command and service now fail closed across dry-run, separate review binding, promotion, rollback and cache-closeout-only modes. All manifest checks passed; no production review, CMS/database write, cache action, deploy, publication/indexability mutation, sitemap/llms release or Search action occurred."
+      },
+      {
+        "at": "2026-07-23T22:25:39Z",
+        "status": "github_checks_pending",
+        "note": "All local validation and exact five-path scope checks passed. Implementation commit 7d82dd34c was pushed and PR #3256 opened; pending_remote_pr_head avoids a self-referential ledger SHA. Required GitHub checks and exact-head review remain mandatory before merge."
+      },
+      {
+        "at": "2026-07-23T22:33:55Z",
+        "status": "github_checks_failed",
+        "note": "Initial head 37361a917 passed eight checks; verify-bigfive failed only because the existing runtime-freeze classifier returned the new promotion command and service as impacting paths. No feature test or implementation assertion failed."
+      },
+      {
+        "at": "2026-07-24T00:59:09Z",
+        "status": "same_scope_fix_in_progress",
+        "note": "The operator explicitly authorized the existing Big Five runtime-freeze classifier test as the sixth current-PR path. Latest origin/main 73cafd71dd9e7d519b01796e792b75fcfcbcc6a2 was merged into the clean task branch before applying the exact two-path classifier contract."
+      },
+      {
+        "at": "2026-07-24T01:10:15Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that the transaction reused a previously loaded parent profile relation. The scoped fix reloads and locks the exact variants and parent profiles for both before/after public-state fingerprints; a SQLite trigger regression proves parent state drift rolls back all sections."
+      },
+      {
+        "at": "2026-07-24T01:27:11Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "A second exact-head review found that the bounded inventory did not duplicate the public variant route's org, publication and publication-time gates. The scoped fix applies those predicates before the 32-target boundary and revalidates them under lock; three negative fixtures prove non-public variants fail before any review or section write."
+      },
+      {
+        "at": "2026-07-24T01:45:32Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Further exact-head review required the same status/public/publication-time gates for parent profiles and org_id=0 in the exact live section comparable. Three parent visibility fixtures and a wrong-org 32-section fixture now fail before promotion success; the complete local verification suite passed again."
+      },
+      {
+        "at": "2026-07-24T01:54:22Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 40222f4eb463d21bdfe61e747b49821e29dd31af passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the six authorized paths, and all four review threads are resolved. This ledger-only transition must rerun required checks before squash merge."
+      },
+      {
+        "at": "2026-07-24T02:11:30Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Ledger head 882caaa804763b73b3351dd71dc790e834a3f4a3 passed all checks, but exact-head review found that a swapped runtime identity could remain attached to the wrong public parent. The scoped fix validates variant canonical/variant/runtime identity against parent type/canonical/slug identity under both inventory and transaction locks; the focused and complete local suites passed."
+      },
+      {
+        "at": "2026-07-24T02:20:27Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that a successful rollback receipt reported write=false despite deleting 32 sections. The scoped truthfulness fix reports rollback=true, write=true and writes_committed=true, with focused assertions locking all three fields."
+      },
+      {
+        "at": "2026-07-24T02:27:42Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 53dc87a6f7bacfc2500843e3ea15431dc78532b0 passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the six authorized paths, and all six review threads are resolved. This final ledger-only transition must rerun required checks before squash merge."
+      },
+      {
+        "at": "2026-07-24T02:47:59Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found three scoped issues: database JSON key ordering could cause false drift, undeclared link fields could leak into public sections, and rollback incorrectly required the reviewed revision to remain latest. The fix compares canonical section payload hashes, whitelists and projects exact public link fields, and reconstructs rollback inventory from the receipt-bound live sections while preserving exact public-state and section guards. Focused tests passed 36 tests / 511 assertions and the complete ci_verify_mbti.sh suite passed."
+      },
+      {
+        "at": "2026-07-24T03:21:33Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that cache-closeout-only still required the reviewed revision to remain latest. The scoped fix now derives promoted closeout from the exact receipt-bound sections and rolled-back closeout from the exact zero-section markers, while retaining the 32 public target and hash boundaries. A newer-draft regression proves both closeout states remain retryable; focused tests passed 37 tests / 525 assertions and the complete ci_verify_mbti.sh suite passed."
+      },
+      {
+        "at": "2026-07-24T03:40:10Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 60e257b47b447c937653e505d5507a446d44cb1a includes latest origin/main, passed all nine required checks, remains MERGEABLE/CLEAN, and the semantic diff is exactly the six authorized paths. The unrelated B5-RESULT-WEEKLY-OPS-RUNNER-01 status was restored to its unchanged origin/main value. This ledger-only head must rerun required checks before squash merge."
+      },
+      {
+        "at": "2026-07-24T03:57:12Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that the transaction public-state fingerprint omitted variant SEO robots and canonical state. The scoped fix loads and locks the exact 32 variant SEO projections and includes all public SEO fields in the before/after fingerprint; a SQLite trigger regression proves concurrent robots drift rolls back the section mutation. Focused tests passed 38 tests / 532 assertions and the complete ci_verify_mbti.sh suite passed."
+      },
+      {
+        "at": "2026-07-24T04:06:40Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that parent profile SEO could still alter fallback robots/canonical output during a promotion or rollback transaction. The scoped fix loads and locks the exact parent SEO projections and includes all public parent SEO fields in the same before/after fingerprint; a second trigger regression proves concurrent parent robots drift rolls back all sections. Focused tests passed 39 tests / 539 assertions."
+      },
+      {
+        "at": "2026-07-24T04:29:02Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that current-owner approval and the requested evidence SHA could be satisfied by different attestations. The exact-evidence query now independently binds solo_owner mode, current review source, current owner admin ID, exact package/target set, and all 32 approved target identity/SHA pairs. An owner-rotation regression proves stale evidence cannot be consumed even when a different fresh approval exists. Focused tests passed 40 tests / 546 assertions and the complete ci_verify_mbti.sh suite passed."
+      },
+      {
+        "at": "2026-07-24T04:36:51Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 1ae93bf0a7429d11be53d4ab7a9d998777a3e125 passed all nine required checks, has zero unresolved review threads, is MERGEABLE/CLEAN, is not behind origin/main, and retains exactly the six authorized paths. This final ledger-only transition must itself pass all required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-24T04:36:51Z"
   }
 }
