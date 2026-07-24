@@ -404,6 +404,8 @@ jobs:
              and .retry_limit == $retry_limit
              and .batch_size == $batch_size
              and .cache_write_count == 0
+             and .owned_cache_write_count == 0
+             and .concurrent_coverage_gain_count == 0
              and .queue_dispatch_count == 0
              and .database_write_count == 0
              and .candidate_activation == false' \
@@ -531,6 +533,8 @@ jobs:
              and (.coverage_fingerprint_sha256 | test("^[0-9a-f]{64}$"))
              and ($expected_fingerprint == "" or .coverage_fingerprint_sha256 == $expected_fingerprint)
              and .cache_write_count == 0
+             and .owned_cache_write_count == 0
+             and .concurrent_coverage_gain_count == 0
              and .failure_count == 0
              and .queue_dispatch_count == 0
              and .database_write_count == 0
@@ -578,6 +582,8 @@ jobs:
                 retry_limit: $retry_limit,
                 batch_size: $batch_size,
                 cache_write_count: 0,
+                owned_cache_write_count: 0,
+                concurrent_coverage_gain_count: 0,
                 queue_dispatch_count: 0,
                 database_write_count: 0,
                 candidate_activation: false
@@ -635,6 +641,8 @@ jobs:
              and .candidate_revision == $candidate_sha
              and (.target_index_sha256 | test("^[0-9a-f]{64}$"))
              and .offline_build_budget_ms == $offline_build_budget_ms
+             and .cache_write_count == .owned_cache_write_count
+             and .concurrent_coverage_gain_count == 0
              and .queue_dispatch_count == 0
              and .database_write_count == 0
              and .pre_coverage_fingerprint_sha256 == $expected_fingerprint
@@ -706,7 +714,8 @@ jobs:
               2>/dev/null
           }
 
-          total_writes=0
+          total_owned_writes=0
+          total_concurrent_coverage_gain=0
           expected_remaining="$EXPECTED_MISSING_POINTER_COUNT"
           expected_fingerprint="$EXPECTED_COVERAGE_FINGERPRINT_SHA256"
           offset=0
@@ -721,14 +730,24 @@ jobs:
               exit 1
             fi
 
-            writes="$(jq -r '.cache_write_count' "$receipt")"
-            [[ "$writes" =~ ^(0|[1-9][0-9]*)$ ]]
-            test "$writes" -le "$expected_remaining"
-            post_remaining=$((expected_remaining - writes))
+            owned_writes="$(jq -r '.owned_cache_write_count' "$receipt")"
+            concurrent_gain="$(jq -r '.concurrent_coverage_gain_count' "$receipt")"
+            pre_remaining="$(jq -r '.pre_batch_coverage.missing_pointer_count' "$receipt")"
+            post_remaining="$(jq -r '.post_batch_coverage.missing_pointer_count' "$receipt")"
+            [[ "$owned_writes" =~ ^(0|[1-9][0-9]*)$ ]]
+            [[ "$concurrent_gain" =~ ^(0|[1-9][0-9]*)$ ]]
+            [[ "$pre_remaining" =~ ^(0|[1-9][0-9]*)$ ]]
+            [[ "$post_remaining" =~ ^(0|[1-9][0-9]*)$ ]]
+            test "$pre_remaining" -eq "$expected_remaining"
+            test "$post_remaining" -le "$pre_remaining"
+            coverage_gain=$((pre_remaining - post_remaining))
+            test "$coverage_gain" -eq $((owned_writes + concurrent_gain))
             jq -e \
               --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
               --argjson offset "$offset" \
-              --argjson writes "$writes" \
+              --argjson owned_writes "$owned_writes" \
+              --argjson concurrent_gain "$concurrent_gain" \
+              --argjson pre_remaining "$pre_remaining" \
               --argjson post_remaining "$post_remaining" \
               --arg expected_fingerprint "$expected_fingerprint" \
               --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
@@ -742,7 +761,9 @@ jobs:
                and .batch_size == $batch_size
                and .offline_build_budget_ms == $offline_build_budget_ms
                and .retry_limit == $retry_limit
-               and .cache_write_count == $writes
+               and .cache_write_count == $owned_writes
+               and .owned_cache_write_count == $owned_writes
+               and .concurrent_coverage_gain_count == $concurrent_gain
                and .failure_count == 0
                and .failure_stage == null
                and .error_category == null
@@ -753,19 +774,41 @@ jobs:
                and .database_write_count == 0
                and .pre_coverage_fingerprint_sha256 == $expected_fingerprint
                and (.post_coverage_fingerprint_sha256 | test("^[0-9a-f]{64}$"))
+               and .pre_batch_coverage.missing_pointer_count == $pre_remaining
                and .post_batch_coverage.missing_pointer_count == $post_remaining
+               and (
+                 .post_batch_coverage.covered_target_count
+                 - .pre_batch_coverage.covered_target_count
+               ) == ($owned_writes + $concurrent_gain)
                and .post_batch_coverage.missing_payload_count == 0
                and .post_batch_coverage.broken_count == 0
                and .post_batch_coverage.excluded_count == 0' \
               "$receipt" >/dev/null
-            total_writes=$((total_writes + writes))
+            total_owned_writes=$((total_owned_writes + owned_writes))
+            total_concurrent_coverage_gain=$((total_concurrent_coverage_gain + concurrent_gain))
             expected_remaining="$post_remaining"
             expected_fingerprint="$(jq -r '.post_coverage_fingerprint_sha256' "$receipt")"
             offset=$((offset + BOOTSTRAP_BATCH_SIZE))
           done
-          test "$total_writes" -eq "$EXPECTED_MISSING_POINTER_COUNT"
+          total_coverage_gain=$((total_owned_writes + total_concurrent_coverage_gain))
+          test "$total_coverage_gain" -eq "$EXPECTED_MISSING_POINTER_COUNT"
           test "$expected_remaining" -eq 0
-          printf '%s\n' "$total_writes" > artifacts/total-cache-writes.txt
+          jq -n \
+            --argjson initial_missing_pointer_count "$EXPECTED_MISSING_POINTER_COUNT" \
+            --argjson final_missing_pointer_count "$expected_remaining" \
+            --argjson owned_cache_write_count "$total_owned_writes" \
+            --argjson concurrent_coverage_gain_count "$total_concurrent_coverage_gain" \
+            --argjson total_coverage_gain_count "$total_coverage_gain" \
+            '{
+              contract_version: "career.candidate_exact_cache_bootstrap.progress.v1",
+              initial_missing_pointer_count: $initial_missing_pointer_count,
+              final_missing_pointer_count: $final_missing_pointer_count,
+              owned_cache_write_count: $owned_cache_write_count,
+              concurrent_coverage_gain_count: $concurrent_coverage_gain_count,
+              total_coverage_gain_count: $total_coverage_gain_count,
+              queue_dispatch_count: 0,
+              database_write_count: 0
+            }' > artifacts/cache-bootstrap-progress.json
           verify_identity
 
       - name: Read back exact full coverage
@@ -809,7 +852,18 @@ jobs:
             coverage_ratio
           }' <<<"$post_bootstrap_raw" > artifacts/post-bootstrap.json
           unset post_bootstrap_raw
-          test "$(cat artifacts/total-cache-writes.txt)" -eq "$EXPECTED_MISSING_POINTER_COUNT"
+          jq -e \
+            --argjson expected_missing "$EXPECTED_MISSING_POINTER_COUNT" \
+            '.contract_version == "career.candidate_exact_cache_bootstrap.progress.v1"
+             and .initial_missing_pointer_count == $expected_missing
+             and .final_missing_pointer_count == 0
+             and .total_coverage_gain_count == $expected_missing
+             and .total_coverage_gain_count == (
+               .owned_cache_write_count + .concurrent_coverage_gain_count
+             )
+             and .queue_dispatch_count == 0
+             and .database_write_count == 0' \
+            artifacts/cache-bootstrap-progress.json >/dev/null
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_ACTIVE_REVISION'; test \"\$(tr -d '\\r\\n' < \"\$candidate/REVISION\")\" = '$CANDIDATE_RELEASE_REVISION'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'" \

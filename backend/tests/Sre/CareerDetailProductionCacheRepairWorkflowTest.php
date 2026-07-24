@@ -121,8 +121,16 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         );
         $this->assertStringContainsString('FM_CAREER_MODE=batch', $source);
         $this->assertStringContainsString('/usr/bin/timeout 720 /usr/bin/php', $source);
-        $this->assertStringContainsString('test "$total_writes" -eq "$EXPECTED_MISSING_POINTER_COUNT"', $source);
+        $this->assertStringContainsString(
+            'total_coverage_gain=$((total_owned_writes + total_concurrent_coverage_gain))',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'test "$total_coverage_gain" -eq "$EXPECTED_MISSING_POINTER_COUNT"',
+            $source,
+        );
         $this->assertStringContainsString('test "$expected_remaining" -eq 0', $source);
+        $this->assertStringContainsString('artifacts/cache-bootstrap-progress.json', $source);
         $this->assertGreaterThanOrEqual(3, substr_count($source, 'test \"\$current\" != \"\$candidate\"'));
         $this->assertGreaterThanOrEqual(3, substr_count($source, "test ! -e '\$DEPLOY_PATH/.dep/deploy.lock'"));
         $this->assertStringContainsString('sudo -n -u www-data -- env', $source);
@@ -132,6 +140,51 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringNotContainsString('php artisan queue:', $source);
         $this->assertStringNotContainsString('php artisan search:', $source);
         $this->assertStringNotContainsString('WarmCareerJobDetailProjection', $source);
+    }
+
+    #[Test]
+    public function bootstrap_advances_from_observed_monotonic_coverage_instead_of_owned_write_arithmetic(): void
+    {
+        $source = $this->workflowSource();
+
+        $this->assertStringContainsString(
+            'owned_writes="$(jq -r \'.owned_cache_write_count\' "$receipt")"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'concurrent_gain="$(jq -r \'.concurrent_coverage_gain_count\' "$receipt")"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'post_remaining="$(jq -r \'.post_batch_coverage.missing_pointer_count\' "$receipt")"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'test "$coverage_gain" -eq $((owned_writes + concurrent_gain))',
+            $source,
+        );
+        $this->assertStringContainsString('expected_remaining="$post_remaining"', $source);
+        $this->assertStringContainsString(
+            'expected_fingerprint="$(jq -r \'.post_coverage_fingerprint_sha256\' "$receipt")"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.owned_cache_write_count + .concurrent_coverage_gain_count',
+            $source,
+        );
+        $this->assertGreaterThanOrEqual(
+            4,
+            substr_count($source, '.owned_cache_write_count'),
+        );
+        $this->assertGreaterThanOrEqual(
+            4,
+            substr_count($source, '.concurrent_coverage_gain_count'),
+        );
+        $this->assertStringNotContainsString(
+            'post_remaining=$((expected_remaining - writes))',
+            $source,
+        );
+        $this->assertStringNotContainsString('artifacts/total-cache-writes.txt', $source);
     }
 
     #[Test]
