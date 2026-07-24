@@ -171,7 +171,7 @@ jobs:
                 --argjson runtime_config_current "$EXPECTED_RUNTIME_CONFIG_CURRENT" \
                 --arg run_id "$PREFLIGHT_RUN_ID" \
                 --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-                '.contract_version == "backend.production_ops_queue_control.v3"
+                '.contract_version == "backend.production_ops_queue_control.v4"
                  and .mode == "preflight"
                  and .status == "PASS_PREFLIGHT"
                  and .run_id == $run_id
@@ -188,6 +188,18 @@ jobs:
                  and .deploy_like_process_count == 0
                  and .ops_pending_total == 0
                  and .convergence_required == true
+                 and .apply_supported == true
+                 and (
+                   (.config_layout == "ABSENT"
+                    and .config_exact_program_section_count == 0
+                    and .config_total_section_count == 0
+                    and .config_foreign_program_section_count == 0)
+                   or
+                   (.config_layout == "DEDICATED"
+                    and .config_exact_program_section_count == 1
+                    and .config_total_section_count == 1
+                    and .config_foreign_program_section_count == 0)
+                 )
                  and (
                    (.program_present == true
                     and .program_state == "RUNNING"
@@ -314,11 +326,17 @@ jobs:
           supervisorctl_path="$(command -v supervisorctl)"
           failure_gate=SUPERVISOR_STATUS
           status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
+          failure_gate=GREP_PATH
+          grep_path="$(command -v grep)"
           program_present=false
           program_state=MISSING
           live_process_verified=false
           runtime_cwd_current=false
           runtime_config_current=false
+          config_layout=ABSENT
+          config_exact_program_section_count=0
+          config_total_section_count=0
+          config_foreign_program_section_count=0
           if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1} END {exit !found}' <<<"$status_lines"; then
             program_present=true
             if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1; if ($2 != "RUNNING") bad=1} END {exit !(found && !bad)}' <<<"$status_lines"; then
@@ -329,18 +347,37 @@ jobs:
           fi
           failure_gate=CONFIG_DISCOVERY
           mapfile -t config_candidates < <(
-            sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print 2>/dev/null \
+            sudo -n find /etc/supervisor /opt/1panel -type f -size -256k \
+              \( -name '*.conf' -o -name '*.ini' \) \
+              -exec "$grep_path" -lFx '[program:fap-queue-ops]' {} + 2>/dev/null \
               | sort -u
           )
           test "${#config_candidates[@]}" -le 1
           OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf
           if [ "${#config_candidates[@]}" -eq 1 ]; then
             OPS_CONFIG_PATH="${config_candidates[0]}"
+            failure_gate=CONFIG_PROGRAM_IDENTITY_COUNT
+            config_exact_program_section_count="$(sudo -n "$grep_path" -Fxc '[program:fap-queue-ops]' "$OPS_CONFIG_PATH")"
+            test "$config_exact_program_section_count" -eq 1
+            failure_gate=CONFIG_SECTION_COUNTS
+            config_total_section_count="$(sudo -n "$grep_path" -Ec '^\[[^]]+\][[:space:]]*$' "$OPS_CONFIG_PATH")"
+            config_program_section_count="$(sudo -n "$grep_path" -Ec '^\[program:[^]]+\][[:space:]]*$' "$OPS_CONFIG_PATH")"
+            [[ "$config_total_section_count" =~ ^[1-9][0-9]*$ ]]
+            [[ "$config_program_section_count" =~ ^[1-9][0-9]*$ ]]
+            test "$config_total_section_count" -ge "$config_program_section_count"
+            config_foreign_program_section_count=$((config_program_section_count - config_exact_program_section_count))
+            test "$config_foreign_program_section_count" -ge 0
+            if [ "$config_total_section_count" -eq 1 ]; then
+              config_layout=DEDICATED
+            else
+              config_layout=SHARED
+            fi
           fi
-          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]
           [[ "$OPS_CONFIG_PATH" != *".."* ]]
           config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
-          current_config_sha256="$(printf '0%.0s' {1..64})"
+          zero_sha256="$(printf '0%.0s' {1..64})"
+          current_config_sha256="$zero_sha256"
           if sudo -n test -f "$OPS_CONFIG_PATH"; then
             failure_gate=CONFIG_HASH
             current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
@@ -379,23 +416,23 @@ jobs:
             failure_gate=ARGV_IDENTITY
             actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
             test "$actual_argv_sha256" = "$expected_argv_sha256"
-            failure_gate=CONFIG_PATH
-            sudo -n test -f "$OPS_CONFIG_PATH"
-            failure_gate=CONFIG_MTIME
-            config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"
-            failure_gate=BOOT_TIME
-            boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
-            failure_gate=PROCESS_START_TICKS
-            start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
-            failure_gate=CLOCK_TICKS
-            clock_ticks="$(getconf CLK_TCK)"
-            [[ "$config_epoch" =~ ^[0-9]+$ ]]
-            [[ "$boot_epoch" =~ ^[0-9]+$ ]]
-            [[ "$start_ticks" =~ ^[0-9]+$ ]]
-            [[ "$clock_ticks" =~ ^[1-9][0-9]*$ ]]
-            process_epoch=$((boot_epoch + start_ticks / clock_ticks))
-            if [ "$process_epoch" -ge "$config_epoch" ]; then
-              runtime_config_current=true
+            if [ "$current_config_sha256" != "$zero_sha256" ]; then
+              failure_gate=CONFIG_MTIME
+              config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"
+              failure_gate=BOOT_TIME
+              boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
+              failure_gate=PROCESS_START_TICKS
+              start_ticks="$(awk '{print $22}' "/proc/$worker_pid/stat")"
+              failure_gate=CLOCK_TICKS
+              clock_ticks="$(getconf CLK_TCK)"
+              [[ "$config_epoch" =~ ^[0-9]+$ ]]
+              [[ "$boot_epoch" =~ ^[0-9]+$ ]]
+              [[ "$start_ticks" =~ ^[0-9]+$ ]]
+              [[ "$clock_ticks" =~ ^[1-9][0-9]*$ ]]
+              process_epoch=$((boot_epoch + start_ticks / clock_ticks))
+              if [ "$process_epoch" -ge "$config_epoch" ]; then
+                runtime_config_current=true
+              fi
             fi
             live_process_verified=true
           fi
@@ -404,11 +441,13 @@ jobs:
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$current" 2>/dev/null)"
           [[ "$ops_pending_total" =~ ^[0-9]+$ ]]
           trap - ERR
-          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
             "$active_revision" "$lock_present" "$process_count" "$program_present" \
             "$program_state" "$ops_pending_total" "$current_config_sha256" \
             "$live_process_verified" "$config_path_sha256" \
-            "$runtime_cwd_current" "$runtime_config_current"
+            "$runtime_cwd_current" "$runtime_config_current" "$config_layout" \
+            "$config_exact_program_section_count" "$config_total_section_count" \
+            "$config_foreign_program_section_count"
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
@@ -429,7 +468,7 @@ jobs:
             fi
             exit "$ssh_rc"
           fi
-          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified config_path_sha256 runtime_cwd_current runtime_config_current <<<"$result"
+          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified config_path_sha256 runtime_cwd_current runtime_config_current config_layout config_exact_program_section_count config_total_section_count config_foreign_program_section_count <<<"$result"
           test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"
           test "$lock_present" = false
           test "$process_count" = 0
@@ -441,10 +480,29 @@ jobs:
           [[ "$config_path_sha256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$runtime_cwd_current" =~ ^(true|false)$ ]]
           [[ "$runtime_config_current" =~ ^(true|false)$ ]]
+          [[ "$config_layout" =~ ^(ABSENT|DEDICATED|SHARED)$ ]]
+          [[ "$config_exact_program_section_count" =~ ^[0-9]+$ ]]
+          [[ "$config_total_section_count" =~ ^[0-9]+$ ]]
+          [[ "$config_foreign_program_section_count" =~ ^[0-9]+$ ]]
+          case "$config_layout" in
+            ABSENT)
+              test "$config_exact_program_section_count" -eq 0
+              test "$config_total_section_count" -eq 0
+              test "$config_foreign_program_section_count" -eq 0
+              ;;
+            DEDICATED)
+              test "$config_exact_program_section_count" -eq 1
+              test "$config_total_section_count" -eq 1
+              test "$config_foreign_program_section_count" -eq 0
+              ;;
+            SHARED)
+              test "$config_exact_program_section_count" -eq 1
+              test "$config_total_section_count" -ge 2
+              ;;
+          esac
           zero_sha256="$(printf '0%.0s' {1..64})"
           if [ "$program_present" = true ]; then
             test "$program_state" = RUNNING
-            test "$current_config_sha256" != "$zero_sha256"
             test "$live_process_verified" = true
           else
             test "$program_state" = MISSING
@@ -455,6 +513,8 @@ jobs:
           [ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true
           [ "$runtime_cwd_current" != true ] && convergence_required=true
           [ "$runtime_config_current" != true ] && convergence_required=true
+          apply_supported=false
+          [[ "$config_layout" =~ ^(ABSENT|DEDICATED)$ ]] && apply_supported=true
           echo "program_present=$program_present" >> "$GITHUB_OUTPUT"
           echo "program_state=$program_state" >> "$GITHUB_OUTPUT"
           echo "ops_pending_total=$ops_pending_total" >> "$GITHUB_OUTPUT"
@@ -464,6 +524,11 @@ jobs:
           echo "runtime_cwd_current=$runtime_cwd_current" >> "$GITHUB_OUTPUT"
           echo "runtime_config_current=$runtime_config_current" >> "$GITHUB_OUTPUT"
           echo "convergence_required=$convergence_required" >> "$GITHUB_OUTPUT"
+          echo "config_layout=$config_layout" >> "$GITHUB_OUTPUT"
+          echo "config_exact_program_section_count=$config_exact_program_section_count" >> "$GITHUB_OUTPUT"
+          echo "config_total_section_count=$config_total_section_count" >> "$GITHUB_OUTPUT"
+          echo "config_foreign_program_section_count=$config_foreign_program_section_count" >> "$GITHUB_OUTPUT"
+          echo "apply_supported=$apply_supported" >> "$GITHUB_OUTPUT"
           echo "Read-only production preflight passed without disclosing routing, payload or database metadata."
 
       - name: Apply exact Supervisor ops queue candidate
@@ -491,6 +556,8 @@ jobs:
           test "${{ steps.preflight.outputs.runtime_cwd_current }}" = "$EXPECTED_RUNTIME_CWD_CURRENT"
           test "${{ steps.preflight.outputs.runtime_config_current }}" = "$EXPECTED_RUNTIME_CONFIG_CURRENT"
           test "${{ steps.preflight.outputs.convergence_required }}" = true
+          test "${{ steps.preflight.outputs.apply_supported }}" = true
+          [[ "${{ steps.preflight.outputs.config_layout }}" =~ ^(ABSENT|DEDICATED)$ ]]
           if [ "${{ steps.preflight.outputs.program_present }}" = true ]; then
             test "${{ steps.preflight.outputs.program_state }}" = RUNNING
             test "${{ steps.preflight.outputs.live_process_verified }}" = true
@@ -515,6 +582,8 @@ jobs:
           test "$process_count" -eq 0
           failure_gate=SUPERVISORCTL_PATH
           supervisorctl_path="$(command -v supervisorctl)"
+          failure_gate=GREP_PATH
+          grep_path="$(command -v grep)"
           failure_gate=SUPERVISOR_STATUS_BEFORE
           status_before="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
           program_present_before=false
@@ -526,15 +595,20 @@ jobs:
           test "$program_present_before" = "$EXPECTED_PROGRAM_PRESENT_BEFORE"
           failure_gate=CONFIG_DISCOVERY
           mapfile -t config_candidates < <(
-            sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print 2>/dev/null \
+            sudo -n find /etc/supervisor /opt/1panel -type f -size -256k \
+              \( -name '*.conf' -o -name '*.ini' \) \
+              -exec "$grep_path" -lFx '[program:fap-queue-ops]' {} + 2>/dev/null \
               | sort -u
           )
           test "${#config_candidates[@]}" -le 1
           OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf
           if [ "${#config_candidates[@]}" -eq 1 ]; then
             OPS_CONFIG_PATH="${config_candidates[0]}"
+            failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY
+            test "$(sudo -n "$grep_path" -Fxc '[program:fap-queue-ops]' "$OPS_CONFIG_PATH")" -eq 1
+            test "$(sudo -n "$grep_path" -Ec '^\[[^]]+\][[:space:]]*$' "$OPS_CONFIG_PATH")" -eq 1
           fi
-          [[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]
+          [[ "$OPS_CONFIG_PATH" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]
           [[ "$OPS_CONFIG_PATH" != *".."* ]]
           failure_gate=CONFIG_PATH_HASH
           test "$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')" = "$EXPECTED_CONFIG_PATH_SHA256"
@@ -680,6 +754,11 @@ jobs:
           RUNTIME_CONFIG_CURRENT_BEFORE: ${{ steps.preflight.outputs.runtime_config_current }}
           CONVERGENCE_REQUIRED_BEFORE: ${{ steps.preflight.outputs.convergence_required }}
           LIVE_PROCESS_VERIFIED_BEFORE: ${{ steps.preflight.outputs.live_process_verified }}
+          CONFIG_LAYOUT_BEFORE: ${{ steps.preflight.outputs.config_layout }}
+          CONFIG_EXACT_PROGRAM_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_exact_program_section_count }}
+          CONFIG_TOTAL_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_total_section_count }}
+          CONFIG_FOREIGN_PROGRAM_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_foreign_program_section_count }}
+          APPLY_SUPPORTED_BEFORE: ${{ steps.preflight.outputs.apply_supported }}
           APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}
           APPLY_BACKUP_SHA256: ${{ steps.apply.outputs.backup_sha256 }}
           OPS_PENDING_TOTAL: ${{ steps.preflight.outputs.ops_pending_total }}
@@ -698,6 +777,11 @@ jobs:
             runtime_config_current="$RUNTIME_CONFIG_CURRENT_BEFORE"
             convergence_required="$CONVERGENCE_REQUIRED_BEFORE"
             live_process_verified="$LIVE_PROCESS_VERIFIED_BEFORE"
+            config_layout="$CONFIG_LAYOUT_BEFORE"
+            config_exact_program_section_count="$CONFIG_EXACT_PROGRAM_SECTION_COUNT_BEFORE"
+            config_total_section_count="$CONFIG_TOTAL_SECTION_COUNT_BEFORE"
+            config_foreign_program_section_count="$CONFIG_FOREIGN_PROGRAM_SECTION_COUNT_BEFORE"
+            apply_supported="$APPLY_SUPPORTED_BEFORE"
             backup_config_sha256="$(printf '0%.0s' {1..64})"
           else
             status=PASS_APPLY
@@ -711,10 +795,15 @@ jobs:
             runtime_config_current=true
             convergence_required=false
             live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"
+            config_layout=DEDICATED
+            config_exact_program_section_count=1
+            config_total_section_count=1
+            config_foreign_program_section_count=0
+            apply_supported=true
             backup_config_sha256="$APPLY_BACKUP_SHA256"
           fi
           jq -n \
-            --arg contract_version "backend.production_ops_queue_control.v3" \
+            --arg contract_version "backend.production_ops_queue_control.v4" \
             --arg mode "$MODE" \
             --arg status "$status" \
             --arg run_id "$GITHUB_RUN_ID" \
@@ -734,6 +823,11 @@ jobs:
             --argjson runtime_config_current "$runtime_config_current" \
             --argjson convergence_required "$convergence_required" \
             --argjson live_process_verified "$live_process_verified" \
+            --arg config_layout "$config_layout" \
+            --argjson config_exact_program_section_count "$config_exact_program_section_count" \
+            --argjson config_total_section_count "$config_total_section_count" \
+            --argjson config_foreign_program_section_count "$config_foreign_program_section_count" \
+            --argjson apply_supported "$apply_supported" \
             --arg backup_config_sha256 "$backup_config_sha256" \
             --argjson production_write_execution "$production_write" \
             --argjson config_write_count "$config_write_count" \
@@ -759,6 +853,11 @@ jobs:
               runtime_config_current: $runtime_config_current,
               convergence_required: $convergence_required,
               live_process_verified: $live_process_verified,
+              config_layout: $config_layout,
+              config_exact_program_section_count: $config_exact_program_section_count,
+              config_total_section_count: $config_total_section_count,
+              config_foreign_program_section_count: $config_foreign_program_section_count,
+              apply_supported: $apply_supported,
               backup_config_sha256: $backup_config_sha256,
               production_write_execution: $production_write_execution,
               config_write_count: $config_write_count,

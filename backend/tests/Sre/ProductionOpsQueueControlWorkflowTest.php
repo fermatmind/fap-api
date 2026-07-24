@@ -27,7 +27,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'preflight_run_id',
             'preflight_run_attempt',
             'operator_approval_phrase',
-            'backend.production_ops_queue_control.v3',
+            'backend.production_ops_queue_control.v4',
             'PASS_PREFLIGHT',
             'PASS_APPLY',
             'and .production_write_execution == false',
@@ -37,6 +37,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'and .runtime_cwd_current == $runtime_cwd_current',
             'and .runtime_config_current == $runtime_config_current',
             'and .convergence_required == true',
+            'and .apply_supported == true',
+            '(.config_layout == "ABSENT"',
+            '(.config_layout == "DEDICATED"',
+            'and .config_foreign_program_section_count == 0',
             '(.program_present == true',
             'and .program_state == "RUNNING"',
             'and .live_process_verified == true)',
@@ -49,7 +53,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"',
             'test "$rendered_sha256" = "$EXPECTED_RENDERED_SHA256"',
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"',
-            'test "$current_config_sha256" != "$zero_sha256"',
+            'if [ "$current_config_sha256" != "$zero_sha256" ]; then',
             '[ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true',
             'test "$(ps -o user= -p "$worker_pid" | awk \'{$1=$1; print}\')" = www-data',
             'sudo -n -u www-data readlink -f "/proc/$worker_pid/cwd"',
@@ -64,6 +68,8 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'test "$live_process_verified" = false',
             'test "${{ steps.preflight.outputs.live_process_verified }}" = false',
             'test "${{ steps.preflight.outputs.convergence_required }}" = true',
+            'test "${{ steps.preflight.outputs.apply_supported }}" = true',
+            '[[ "${{ steps.preflight.outputs.config_layout }}" =~ ^(ABSENT|DEDICATED)$ ]]',
             'test "${{ steps.preflight.outputs.config_path_sha256 }}" = "$EXPECTED_CONFIG_PATH_SHA256"',
             'test "${{ steps.preflight.outputs.runtime_cwd_current }}" = "$EXPECTED_RUNTIME_CWD_CURRENT"',
             'test "${{ steps.preflight.outputs.runtime_config_current }}" = "$EXPECTED_RUNTIME_CONFIG_CURRENT"',
@@ -75,6 +81,11 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'RUNTIME_CONFIG_CURRENT_BEFORE: ${{ steps.preflight.outputs.runtime_config_current }}',
             'CONVERGENCE_REQUIRED_BEFORE: ${{ steps.preflight.outputs.convergence_required }}',
             'LIVE_PROCESS_VERIFIED_BEFORE: ${{ steps.preflight.outputs.live_process_verified }}',
+            'CONFIG_LAYOUT_BEFORE: ${{ steps.preflight.outputs.config_layout }}',
+            'CONFIG_EXACT_PROGRAM_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_exact_program_section_count }}',
+            'CONFIG_TOTAL_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_total_section_count }}',
+            'CONFIG_FOREIGN_PROGRAM_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_foreign_program_section_count }}',
+            'APPLY_SUPPORTED_BEFORE: ${{ steps.preflight.outputs.apply_supported }}',
             'APPLY_BACKUP_SHA256: ${{ steps.apply.outputs.backup_sha256 }}',
             'current_config_sha256: $current_config_sha256',
             'config_path_sha256: $config_path_sha256',
@@ -83,14 +94,32 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'convergence_required: $convergence_required',
             'backup_config_sha256: $backup_config_sha256',
             'live_process_verified: $live_process_verified',
+            'config_layout: $config_layout',
+            'config_exact_program_section_count: $config_exact_program_section_count',
+            'config_total_section_count: $config_total_section_count',
+            'config_foreign_program_section_count: $config_foreign_program_section_count',
+            'apply_supported: $apply_supported',
             'APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}',
             'live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"',
             'live_process_verified=true',
             'failure_gate=CONFIG_DISCOVERY',
-            'sudo -n find /etc/supervisor /opt/1panel -type f -name fap-queue-ops.conf -print',
+            'failure_gate=GREP_PATH',
+            'grep_path="$(command -v grep)"',
+            'sudo -n find /etc/supervisor /opt/1panel -type f -size -256k',
+            '-exec "$grep_path" -lFx \'[program:fap-queue-ops]\' {} +',
             'test "${#config_candidates[@]}" -le 1',
+            'failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY',
+            'failure_gate=CONFIG_PROGRAM_IDENTITY_COUNT',
+            'failure_gate=CONFIG_SECTION_COUNTS',
+            'config_layout=SHARED',
+            'config_layout=DEDICATED',
+            'config_layout=ABSENT',
+            'apply_supported=false',
+            '[[ "$config_layout" =~ ^(ABSENT|DEDICATED)$ ]] && apply_supported=true',
+            'test "$(sudo -n "$grep_path" -Fxc \'[program:fap-queue-ops]\' "$OPS_CONFIG_PATH")" -eq 1',
+            'test "$(sudo -n "$grep_path" -Ec \'^\\[[^]]+\\][[:space:]]*$\' "$OPS_CONFIG_PATH")" -eq 1',
             'OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf',
-            '[[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]',
+            '[[ "$OPS_CONFIG_PATH" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]',
             'if sudo -n test -f "$OPS_CONFIG_PATH"; then',
             'current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk \'{print $1}\')"',
             'sudo -n test -f "$OPS_CONFIG_PATH"',
@@ -110,6 +139,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'failure_gate=WORKING_DIRECTORY_REVISION',
             'failure_gate=ARGV_IDENTITY',
             'failure_gate=QUEUE_PROBE',
+            'current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk \'{print $1}\')"',
             'application_deploy_count: 0',
             'symlink_write_count: 0',
             'migration_count: 0',
@@ -143,6 +173,14 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
             $workflow,
         );
+        $this->assertStringNotContainsString(
+            'failure_gate=CONFIG_PATH'."\n".'            sudo -n test -f "$OPS_CONFIG_PATH"',
+            $workflow,
+        );
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'if [ "$current_config_sha256" != "$zero_sha256" ]; then'),
+        );
         $this->assertSame(2, substr_count($workflow, 'pid fap-queue-ops:fap-queue-ops_00'));
         $this->assertSame(
             2,
@@ -160,6 +198,22 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertSame(
             2,
             substr_count($workflow, 'config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"'),
+        );
+        $this->assertSame(2, substr_count($workflow, 'failure_gate=GREP_PATH'));
+        $this->assertSame(1, substr_count($workflow, 'failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY'));
+        $this->assertSame(1, substr_count($workflow, 'failure_gate=CONFIG_PROGRAM_IDENTITY_COUNT'));
+        $this->assertSame(1, substr_count($workflow, 'failure_gate=CONFIG_SECTION_COUNTS'));
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'sudo -n "$grep_path" -Ec \'^\\[[^]]+\\][[:space:]]*$\''),
+        );
+        $this->assertSame(
+            2,
+            substr_count($workflow, '-exec "$grep_path" -lFx \'[program:fap-queue-ops]\' {} +'),
+        );
+        $this->assertStringNotContainsString(
+            '-name fap-queue-ops.conf -print',
+            $workflow,
         );
     }
 
