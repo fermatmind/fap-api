@@ -341,9 +341,9 @@ jobs:
           [[ "$OPS_CONFIG_PATH" != *".."* ]]
           config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
           current_config_sha256="$(printf '0%.0s' {1..64})"
-          if [ -f "$OPS_CONFIG_PATH" ]; then
+          if sudo -n test -f "$OPS_CONFIG_PATH"; then
             failure_gate=CONFIG_HASH
-            current_config_sha256="$(sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
+            current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
           fi
           if [ "$program_present" = true ]; then
             failure_gate=UNIQUE_PROCESS
@@ -380,9 +380,9 @@ jobs:
             actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
             test "$actual_argv_sha256" = "$expected_argv_sha256"
             failure_gate=CONFIG_PATH
-            test -f "$OPS_CONFIG_PATH"
+            sudo -n test -f "$OPS_CONFIG_PATH"
             failure_gate=CONFIG_MTIME
-            config_epoch="$(stat -c %Y "$OPS_CONFIG_PATH")"
+            config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"
             failure_gate=BOOT_TIME
             boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
             failure_gate=PROCESS_START_TICKS
@@ -540,9 +540,9 @@ jobs:
           test "$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')" = "$EXPECTED_CONFIG_PATH_SHA256"
           zero_sha256="$(printf '0%.0s' {1..64})"
           current_config_sha256="$zero_sha256"
-          if [ -f "$OPS_CONFIG_PATH" ]; then
+          if sudo -n test -f "$OPS_CONFIG_PATH"; then
             failure_gate=CONFIG_HASH
-            current_config_sha256="$(sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
+            current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
           fi
           failure_gate=EXPECTED_CONFIG_HASH
           test "$current_config_sha256" = "$EXPECTED_CURRENT_CONFIG_SHA256"
@@ -570,7 +570,7 @@ jobs:
             test "$backup_sha256" = "$EXPECTED_CURRENT_CONFIG_SHA256"
           else
             failure_gate=CONFIG_ABSENT
-            test ! -e "$OPS_CONFIG_PATH"
+            sudo -n test ! -e "$OPS_CONFIG_PATH"
           fi
           failure_gate=CONFIG_INSTALL
           sudo -n install -o root -g root -m 0644 "$candidate" "$OPS_CONFIG_PATH"
@@ -619,7 +619,7 @@ jobs:
           actual_argv_sha256="$(sha256sum "/proc/$worker_pid/cmdline" | awk '{print $1}')"
           test "$actual_argv_sha256" = "$expected_argv_sha256"
           failure_gate=CONFIG_MTIME
-          config_epoch="$(stat -c %Y "$OPS_CONFIG_PATH")"
+          config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"
           failure_gate=BOOT_TIME
           boot_epoch="$(awk '$1 == "btime" {print $2}' /proc/stat)"
           failure_gate=PROCESS_START_TICKS
