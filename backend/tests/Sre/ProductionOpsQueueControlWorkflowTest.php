@@ -49,7 +49,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"',
             'test "$rendered_sha256" = "$EXPECTED_RENDERED_SHA256"',
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"',
-            'test "$current_config_sha256" != "$zero_sha256"',
+            'if [ "$current_config_sha256" != "$zero_sha256" ]; then',
             '[ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true',
             'test "$(ps -o user= -p "$worker_pid" | awk \'{$1=$1; print}\')" = www-data',
             'sudo -n -u www-data readlink -f "/proc/$worker_pid/cwd"',
@@ -142,6 +142,14 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertStringNotContainsString(
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
             $workflow,
+        );
+        $this->assertStringNotContainsString(
+            'failure_gate=CONFIG_PATH'."\n".'            sudo -n test -f "$OPS_CONFIG_PATH"',
+            $workflow,
+        );
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'if [ "$current_config_sha256" != "$zero_sha256" ]; then'),
         );
         $this->assertSame(2, substr_count($workflow, 'pid fap-queue-ops:fap-queue-ops_00'));
         $this->assertSame(
