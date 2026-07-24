@@ -273,13 +273,15 @@ final class Mbti64CmsInternalLinkPromotionService
     public function cacheCloseout(array $options): array
     {
         $this->assertRuntime($options);
-        $inventory = $this->inventory($options, false, allowPromotedState: true);
         $state = (string) ($options['expected_live_state'] ?? '');
         if (! in_array($state, ['promoted', 'rolled_back'], true)) {
             throw new RuntimeException(
                 '--expected-live-state must be promoted or rolled_back with --cache-closeout-only.'
             );
         }
+        $inventory = $state === 'promoted'
+            ? $this->rollbackInventory($options, false)
+            : $this->rolledBackInventory($options);
         $sections = $this->sectionsForTargets($inventory['target_ids'], false);
         if ($state === 'promoted') {
             $this->assertFullyPromoted($sections, $inventory);
@@ -507,7 +509,7 @@ final class Mbti64CmsInternalLinkPromotionService
      * @param  array<string,string|int>  $options
      * @return array<string,mixed>
      */
-    private function rollbackInventory(array $options): array
+    private function rollbackInventory(array $options, bool $lock = true): array
     {
         $graphSha = $this->requiredHash($options, 'expected_graph_sha256');
         $cohortSha = $this->requiredHash($options, 'expected_cohort_sha256');
@@ -521,11 +523,11 @@ final class Mbti64CmsInternalLinkPromotionService
                 'Checkpoint 112 inventory, section inventory or exact 32/64 boundary does not match.'
             );
         }
-        $variants = $this->publicVariants(true);
+        $variants = $this->publicVariants($lock);
         $targetIds = $variants->pluck('id')
             ->map(static fn (mixed $id): int => (int) $id)
             ->all();
-        $sections = $this->sectionsForTargets($targetIds, true);
+        $sections = $this->sectionsForTargets($targetIds, $lock);
         if ($sections->count() !== 32) {
             throw new RuntimeException('Exactly 32 promoted target sections are required.');
         }
@@ -552,6 +554,59 @@ final class Mbti64CmsInternalLinkPromotionService
             static fn (array $left, array $right): int => $left['runtime_type_code']
                 <=> $right['runtime_type_code']
         );
+        $rollbackMarkersSha = $this->canonicalSha($this->rollbackMarkers($rows));
+        if (! hash_equals(
+            $this->requiredHash($options, 'expected_rollback_markers_sha256'),
+            $rollbackMarkersSha
+        )) {
+            throw new RuntimeException('The exact rollback absence markers SHA256 does not match.');
+        }
+
+        return [
+            'rows' => $rows,
+            'variants' => $variants,
+            'target_ids' => $targetIds,
+            'runtime_types' => array_column($rows, 'runtime_type_code'),
+            'review_targets' => [],
+            'revision_identity_sha256' => $this->requiredHash(
+                $options,
+                'expected_revision_identity_sha256'
+            ),
+            'rollback_markers_sha256' => $rollbackMarkersSha,
+            'graph_sha256' => $graphSha,
+            'cohort_sha256' => $cohortSha,
+        ];
+    }
+
+    /**
+     * @param  array<string,string|int>  $options
+     * @return array<string,mixed>
+     */
+    private function rolledBackInventory(array $options): array
+    {
+        $graphSha = $this->requiredHash($options, 'expected_graph_sha256');
+        $cohortSha = $this->requiredHash($options, 'expected_cohort_sha256');
+        if (($options['expected_checkpoint112_inventory_sha256'] ?? null)
+                !== self::CHECKPOINT112_INVENTORY_SHA256
+            || ($options['expected_section_inventory_sha256'] ?? null)
+                !== self::CHECKPOINT112_SECTION_INVENTORY_SHA256
+            || (int) ($options['expected_rows'] ?? 0) !== 32
+            || (int) ($options['expected_edges'] ?? 0) !== 64) {
+            throw new RuntimeException(
+                'Checkpoint 112 inventory, section inventory or exact 32/64 boundary does not match.'
+            );
+        }
+        $variants = $this->publicVariants(false);
+        $rows = $variants->map(static fn (
+            PersonalityProfileVariant $variant
+        ): array => [
+            'runtime_type_code' => strtoupper((string) $variant->runtime_type_code),
+            'target_id' => (int) $variant->id,
+        ])->values()->all();
+        $targetIds = array_column($rows, 'target_id');
+        if ($this->sectionsForTargets($targetIds, false)->count() !== 0) {
+            throw new RuntimeException('Rolled-back cache closeout requires zero target sections.');
+        }
         $rollbackMarkersSha = $this->canonicalSha($this->rollbackMarkers($rows));
         if (! hash_equals(
             $this->requiredHash($options, 'expected_rollback_markers_sha256'),

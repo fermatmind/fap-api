@@ -99739,7 +99739,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 36 tests / 511 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on public/indexability drift, excludes non-public variants and parents, validates runtime identity, binds sections to org_id=0, canonicalizes stored JSON comparisons, rejects extra link fields, and permits receipt-bound rollback after a newer draft revision without weakening exact section/public-state guards. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete final ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 37 tests / 525 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on public/indexability drift, excludes non-public variants and parents, validates runtime identity, binds sections to org_id=0, canonicalizes stored JSON comparisons, rejects extra link fields, and keeps rollback plus promoted/rolled-back cache closeout receipt/absence-bound after newer drafts without weakening exact section/public-state guards. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete final ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
       "status": "retry_pending",
@@ -99828,8 +99828,13 @@
         "at": "2026-07-24T02:47:59Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "Exact-head review found three scoped issues: database JSON key ordering could cause false drift, undeclared link fields could leak into public sections, and rollback incorrectly required the reviewed revision to remain latest. The fix compares canonical section payload hashes, whitelists and projects exact public link fields, and reconstructs rollback inventory from the receipt-bound live sections while preserving exact public-state and section guards. Focused tests passed 36 tests / 511 assertions and the complete ci_verify_mbti.sh suite passed."
+      },
+      {
+        "at": "2026-07-24T03:21:33Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that cache-closeout-only still required the reviewed revision to remain latest. The scoped fix now derives promoted closeout from the exact receipt-bound sections and rolled-back closeout from the exact zero-section markers, while retaining the 32 public target and hash boundaries. A newer-draft regression proves both closeout states remain retryable; focused tests passed 37 tests / 525 assertions and the complete ci_verify_mbti.sh suite passed."
       }
     ],
-    "updated_at": "2026-07-24T02:47:59Z"
+    "updated_at": "2026-07-24T03:21:33Z"
   }
 }

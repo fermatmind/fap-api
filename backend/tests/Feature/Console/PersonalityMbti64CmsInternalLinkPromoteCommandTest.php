@@ -372,6 +372,64 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
     }
 
+    public function test_receipt_bound_cache_closeout_survives_a_newer_draft_revision(): void
+    {
+        $promoted = $this->promoteReviewedCohort();
+        $variant = PersonalityProfileVariant::query()
+            ->where('runtime_type_code', 'INTJ-A')
+            ->firstOrFail();
+        $latest = PersonalityProfileVariantRevision::query()
+            ->where('personality_profile_variant_id', $variant->id)
+            ->orderByDesc('revision_no')
+            ->firstOrFail();
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'revision_no' => (int) $latest->revision_no + 1,
+            'snapshot_json' => $latest->snapshot_json,
+            'note' => 'newer draft before cache closeout',
+            'created_at' => now(),
+        ]);
+
+        $promotedExit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge($promoted['options'], [
+                '--cache-closeout-only' => true,
+                '--cache-mutation-authorized' => true,
+                '--expected-live-state' => 'promoted',
+                '--expected-promotion-receipt-sha256' => $promoted['payload']['promotion_receipt_sha256'],
+            ])
+        );
+        $promotedPayload = $this->jsonOutput();
+
+        $this->assertSame(0, $promotedExit);
+        $this->assertSame('cache_closeout_only_promoted', $promotedPayload['action']);
+        $this->assertSame(32, $promotedPayload['cache_closeout']['invalidated_count']);
+
+        $rollbackExit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge($this->rollbackFlags(), $promoted['options'], [
+                '--expected-promotion-receipt-sha256' => $promoted['payload']['promotion_receipt_sha256'],
+                '--expected-rollback-authorization-sha256' => $promoted['payload']['rollback_authorization_sha256'],
+            ])
+        );
+        $this->assertSame(0, $rollbackExit);
+
+        $rolledBackExit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge($promoted['options'], [
+                '--cache-closeout-only' => true,
+                '--cache-mutation-authorized' => true,
+                '--expected-live-state' => 'rolled_back',
+            ])
+        );
+        $rolledBackPayload = $this->jsonOutput();
+
+        $this->assertSame(0, $rolledBackExit);
+        $this->assertSame('cache_closeout_only_rolled_back', $rolledBackPayload['action']);
+        $this->assertSame(32, $rolledBackPayload['cache_closeout']['invalidated_count']);
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+    }
+
     public function test_promotion_rolls_back_when_parent_public_state_changes_during_transaction(): void
     {
         $reviewed = $this->bindReview();
