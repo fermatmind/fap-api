@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T05:06:00Z",
+  "updated_at": "2026-07-24T05:15:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "SEO-10K-GSC-BOUNDED-BACKFILL-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_pending",
+      "status": "ready_to_merge",
       "branch": "codex/seo-10k-gsc-bounded-backfill-01",
-      "commit_sha": "869156faae8e24645c7d6f788e12ecb0178082f3",
+      "commit_sha": "e5279947a4028410d608231bd160c6486e87186d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3276",
       "checks": {
         "dependency": {
@@ -64,9 +64,9 @@
         ],
         "github": [
           {
-            "command": "initial GitHub required checks",
-            "status": "pending",
-            "details": "PR #3276 is OPEN and MERGEABLE; hygiene and Code Scanning checks started."
+            "command": "GitHub required checks on pre-rebase PR head 3306efc3c585e4863364922f2607303ae9317603",
+            "status": "passed",
+            "details": "All nine checks passed: hygiene, Semgrep blocking secrets, supply-chain, Semgrep SARIF, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. A final rerun follows the non-overlapping latest-main rebase and this ledger update."
           }
         ]
       },
@@ -105,6 +105,11 @@
           "at": "2026-07-24T05:06:00Z",
           "status": "github_checks_pending",
           "summary": "Pushed the exact eight-file Task 3 branch and opened PR #3276 with the manifest-matching title and required what/why/validation/deferred/rule-impact sections. GitHub reports the PR OPEN and MERGEABLE; required checks are running."
+        },
+        {
+          "at": "2026-07-24T05:15:00Z",
+          "status": "ready_to_merge",
+          "summary": "PR #3276 completed 9/9 GitHub checks successfully at head 3306efc3c585e4863364922f2607303ae9317603 and remained CLEAN/MERGEABLE with no actionable review comments. Rebased without conflict onto latest main 76f591dda9fe6569400cf2ac64adf25ef900202c, whose deploy-only paths do not overlap Task 3, and re-ran all local manifest and runtime-freeze checks successfully. The final rewritten head will rerun required checks before squash merge."
         }
       ]
     },
