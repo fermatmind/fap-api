@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T03:18:17Z",
+  "updated_at": "2026-07-24T03:19:20Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "github_checks_pending",
       "branch": "codex/seo-core-entry-slo-observability-01",
       "commit_sha": "477000f7693d2e7407fe07bd1a6c4069933f936e",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -93,6 +93,11 @@
           "at": "2026-07-24T03:18:17Z",
           "status": "local_checks_passed",
           "summary": "Committed the validated Task 2 implementation as 477000f7693d2e7407fe07bd1a6c4069933f936e; preparing the scoped branch for push and PR creation."
+        },
+        {
+          "at": "2026-07-24T03:19:20Z",
+          "status": "github_checks_pending",
+          "summary": "Pushed the exact scoped branch and opened PR #3271 with the manifest-matching title. GitHub reports the PR mergeable; required checks are running."
         }
       ]
     },
