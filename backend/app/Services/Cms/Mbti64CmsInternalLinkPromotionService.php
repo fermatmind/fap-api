@@ -9,6 +9,7 @@ use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSection;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Models\ReviewAttestation;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use Illuminate\Database\Eloquent\Collection;
@@ -954,24 +955,73 @@ final class Mbti64CmsInternalLinkPromotionService
         if ($lock) {
             $variants = $this->reloadWithLockedProfiles($variants);
         }
+        $targetIds = $variants
+            ->pluck('id')
+            ->map(static fn (mixed $id): int => (int) $id)
+            ->all();
 
-        return $this->canonicalSha($variants->map(static function (
-            PersonalityProfileVariant $variant
-        ): array {
-            $profile = $variant->profile;
+        return $this->canonicalSha([
+            'variants' => $variants->map(static function (
+                PersonalityProfileVariant $variant
+            ): array {
+                $profile = $variant->profile;
+
+                return [
+                    'target_id' => (int) $variant->id,
+                    'runtime_type_code' => (string) $variant->runtime_type_code,
+                    'is_published' => (bool) $variant->is_published,
+                    'published_at' => optional($variant->published_at)->toJSON(),
+                    'profile_id' => (int) $profile->id,
+                    'profile_status' => (string) $profile->status,
+                    'profile_is_public' => (bool) $profile->is_public,
+                    'profile_is_indexable' => (bool) $profile->is_indexable,
+                    'profile_published_at' => optional($profile->published_at)->toJSON(),
+                ];
+            })->values()->all(),
+            'variant_seo' => $this->variantSeoState($targetIds, $lock),
+        ]);
+    }
+
+    /**
+     * @param  list<int>  $targetIds
+     * @return list<array<string,mixed>>
+     */
+    private function variantSeoState(array $targetIds, bool $lock): array
+    {
+        $query = PersonalityProfileVariantSeoMeta::query()
+            ->withoutGlobalScopes()
+            ->whereIn('personality_profile_variant_id', $targetIds)
+            ->orderBy('personality_profile_variant_id');
+        if ($lock) {
+            $query->lockForUpdate();
+        }
+        $seoByTarget = $query->get()->keyBy('personality_profile_variant_id');
+
+        return array_map(static function (int $targetId) use ($seoByTarget): array {
+            $seo = $seoByTarget->get($targetId);
 
             return [
-                'target_id' => (int) $variant->id,
-                'runtime_type_code' => (string) $variant->runtime_type_code,
-                'is_published' => (bool) $variant->is_published,
-                'published_at' => optional($variant->published_at)->toJSON(),
-                'profile_id' => (int) $profile->id,
-                'profile_status' => (string) $profile->status,
-                'profile_is_public' => (bool) $profile->is_public,
-                'profile_is_indexable' => (bool) $profile->is_indexable,
-                'profile_published_at' => optional($profile->published_at)->toJSON(),
+                'target_id' => $targetId,
+                'exists' => $seo instanceof PersonalityProfileVariantSeoMeta,
+                'seo_meta_id' => $seo instanceof PersonalityProfileVariantSeoMeta
+                    ? (int) $seo->id
+                    : null,
+                'org_id' => $seo instanceof PersonalityProfileVariantSeoMeta
+                    ? (int) $seo->org_id
+                    : null,
+                'seo_title' => $seo?->seo_title,
+                'seo_description' => $seo?->seo_description,
+                'canonical_url' => $seo?->canonical_url,
+                'og_title' => $seo?->og_title,
+                'og_description' => $seo?->og_description,
+                'og_image_url' => $seo?->og_image_url,
+                'twitter_title' => $seo?->twitter_title,
+                'twitter_description' => $seo?->twitter_description,
+                'twitter_image_url' => $seo?->twitter_image_url,
+                'robots' => $seo?->robots,
+                'jsonld_overrides_json' => $seo?->jsonld_overrides_json,
             ];
-        })->values()->all());
+        }, $targetIds);
     }
 
     /**
