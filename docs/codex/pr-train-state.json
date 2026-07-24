@@ -99872,9 +99872,9 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "6ab43507d8e5320b03adc0448c9866380ff1b54e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -99890,7 +99890,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #3280 opened from exact local-validated implementation commit 6ab43507d8e5320b03adc0448c9866380ff1b54e. GitHub initially reports MERGEABLE/UNSTABLE with required checks starting."
       }
     },
     "scope_validation": {
@@ -99920,8 +99920,13 @@
         "at": "2026-07-24T06:13:55Z",
         "status": "local_checks_passed",
         "note": "Task 6 now models six explicit URL roles and produces a read-only fail-closed report. Scoped review added the actual backend scale_catalog URL authority, strict redirect-catalog/public-path validation, and reciprocal hreflang enforcement. Final focused tests passed 11 tests / 68 assertions, all remaining local gates passed, and the diff is exactly the 10 authorized paths. No production migration, deploy, DB/CMS write, Search Channel action, URL submission, or external API call occurred."
+      },
+      {
+        "at": "2026-07-24T06:15:31Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact 10-path Task 6 scope at 6ab43507d8e5320b03adc0448c9866380ff1b54e, pushed codex/seo-query-owner-url-truth-01, and opened PR #3280. GitHub initially reports MERGEABLE/UNSTABLE with required checks starting; no production-side action occurred."
       }
     ],
-    "updated_at": "2026-07-24T06:13:55Z"
+    "updated_at": "2026-07-24T06:15:31Z"
   }
 }
