@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T04:24:52Z",
+  "updated_at": "2026-07-24T04:32:47Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,7 +9,7 @@
     "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "review_fix_local_checks_passed",
+      "status": "ready_to_merge",
       "branch": "codex/seo-core-entry-slo-observability-01",
       "commit_sha": "60644bfdfb99c3d6c5507129b0e82b9138b19cff",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
@@ -69,8 +69,8 @@
         "github": [
           {
             "command": "GitHub review-fix head rerun",
-            "status": "pending",
-            "details": "Prior robots-alias classification head passed all nine checks; the final inventory-aligned Career CTA head requires a fresh GitHub run."
+            "status": "passed",
+            "details": "The inventory-aligned Career CTA head passed all nine checks."
           },
           {
             "command": "GitHub CI hygiene",
@@ -179,6 +179,11 @@
           "at": "2026-07-24T04:24:52Z",
           "status": "review_fix_local_checks_passed",
           "summary": "Aligned both Career entry CTA markers to the inventory-backed rendered anchors for industries and recommendations instead of the absent jobs form. Observer tests passed 6 tests/430 assertions with exact EN/ZH marker assertions; the authorized freeze-classifier regression passed 1 test/2 assertions, Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, and exact 10-file scope remained unchanged."
+        },
+        {
+          "at": "2026-07-24T04:32:47Z",
+          "status": "ready_to_merge",
+          "summary": "Final review-fix head ee81f9aee07f7c5bcacd599d35a6bd613d34adbf completed 9/9 GitHub checks successfully: hygiene, Semgrep blocking secrets, supply-chain, Semgrep SARIF, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. PR #3271 is CLEAN and MERGEABLE with no new actionable review comments."
         }
       ]
     },
