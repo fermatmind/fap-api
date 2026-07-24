@@ -497,6 +497,9 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
 
         $this->assertSame(0, $exit);
         $this->assertSame('rolled_back_exact_32_sections', $payload['action']);
+        $this->assertTrue($payload['rollback']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
         $this->assertSame(32, $payload['deleted_section_count']);
         $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
     }

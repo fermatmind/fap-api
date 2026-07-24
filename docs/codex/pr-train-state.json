@@ -99739,7 +99739,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 34 tests / 497 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, excludes non-public variants and parent profiles, requires variant runtime identity to match its exact public parent, and binds existing section identity to org_id=0. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 34 tests / 500 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, excludes non-public variants and parent profiles, requires variant runtime identity to match its exact public parent, binds existing section identity to org_id=0, and truthfully marks successful rollback receipts as writes. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
         "status": "retry_pending",
@@ -99813,8 +99813,13 @@
         "at": "2026-07-24T02:11:30Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "Ledger head 882caaa804763b73b3351dd71dc790e834a3f4a3 passed all checks, but exact-head review found that a swapped runtime identity could remain attached to the wrong public parent. The scoped fix validates variant canonical/variant/runtime identity against parent type/canonical/slug identity under both inventory and transaction locks; the focused and complete local suites passed."
+      },
+      {
+        "at": "2026-07-24T02:20:27Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review found that a successful rollback receipt reported write=false despite deleting 32 sections. The scoped truthfulness fix reports rollback=true, write=true and writes_committed=true, with focused assertions locking all three fields."
       }
     ],
-    "updated_at": "2026-07-24T02:11:30Z"
+    "updated_at": "2026-07-24T02:20:27Z"
   }
 }

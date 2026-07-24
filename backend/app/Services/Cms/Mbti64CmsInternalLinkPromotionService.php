@@ -244,7 +244,7 @@ final class Mbti64CmsInternalLinkPromotionService
             'action' => 'rolled_back_exact_32_sections',
             'dry_run' => false,
             'rollback' => true,
-            'write' => false,
+            'write' => true,
             'writes_committed' => true,
             'deleted_section_count' => 32,
             'promotion_receipt_sha256' => $result['receipt']['receipt_sha256'],
