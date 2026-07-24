@@ -168,6 +168,46 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
     }
 
+    #[DataProvider('nonPublicVariantProvider')]
+    public function test_non_public_variant_target_fails_before_inventory_writes(
+        string $column,
+        mixed $value,
+    ): void {
+        $fixture = $this->seedRevisionCohort();
+        $targetId = $fixture['rows'][0]['target_id'];
+        $resolvedValue = $value === 'future'
+            ? now()->addDay()
+            : $value;
+        PersonalityProfileVariant::query()
+            ->whereKey($targetId)
+            ->update([$column => $resolvedValue]);
+
+        $exit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge(['--dry-run' => true], $fixture['options'])
+        );
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            'Exactly 32 English MBTI A/T variant targets are required',
+            Artisan::output()
+        );
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, ReviewAttestation::query()->count());
+    }
+
+    /**
+     * @return array<string,array{string,mixed}>
+     */
+    public static function nonPublicVariantProvider(): array
+    {
+        return [
+            'cross-org variant' => ['org_id', 7],
+            'unpublished variant' => ['is_published', false],
+            'future publication' => ['published_at', 'future'],
+        ];
+    }
+
     public function test_promotion_creates_exact_sections_invalidates_cache_and_is_idempotent(): void
     {
         $reviewed = $this->bindReview();

@@ -99739,7 +99739,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main and applying exact-head review, focused promotion and review-policy tests passed 27 tests / 466 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction now reloads and locks exact parent profiles and fails closed on an in-transaction public/indexability drift fixture. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete ci_verify_mbti.sh (including the formerly failing runtime-path gate), YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying both exact-head reviews, focused promotion and review-policy tests passed 30 tests / 478 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, and excludes cross-org, unpublished or future-published variants from the exact public cohort. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
         "status": "retry_pending",
@@ -99793,8 +99793,13 @@
         "at": "2026-07-24T01:10:15Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "Exact-head review found that the transaction reused a previously loaded parent profile relation. The scoped fix reloads and locks the exact variants and parent profiles for both before/after public-state fingerprints; a SQLite trigger regression proves parent state drift rolls back all sections."
+      },
+      {
+        "at": "2026-07-24T01:27:11Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "A second exact-head review found that the bounded inventory did not duplicate the public variant route's org, publication and publication-time gates. The scoped fix applies those predicates before the 32-target boundary and revalidates them under lock; three negative fixtures prove non-public variants fail before any review or section write."
       }
     ],
-    "updated_at": "2026-07-24T01:10:15Z"
+    "updated_at": "2026-07-24T01:27:11Z"
   }
 }

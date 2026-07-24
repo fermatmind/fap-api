@@ -322,6 +322,12 @@ final class Mbti64CmsInternalLinkPromotionService
 
         $variantQuery = PersonalityProfileVariant::query()
             ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('is_published', true)
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
             ->whereHas('profile', static fn ($query) => $query
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
@@ -825,12 +831,15 @@ final class Mbti64CmsInternalLinkPromotionService
 
         foreach ($freshVariants as $variant) {
             $profile = $profiles->get((int) $variant->personality_profile_id);
-            if (! $profile instanceof PersonalityProfile
+            if ((int) $variant->org_id !== 0
+                || ! (bool) $variant->is_published
+                || ($variant->published_at !== null && $variant->published_at->isFuture())
+                || ! $profile instanceof PersonalityProfile
                 || (int) $profile->org_id !== 0
                 || (string) $profile->scale_code !== PersonalityProfile::SCALE_CODE_MBTI
                 || (string) $profile->locale !== 'en') {
                 throw new RuntimeException(
-                    'A parent profile drifted outside the exact English MBTI authority boundary.'
+                    'A variant or parent profile drifted outside the exact public English MBTI authority boundary.'
                 );
             }
             $variant->setRelation('profile', $profile);
