@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T03:42:11Z",
+  "updated_at": "2026-07-24T03:54:33Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ready_to_merge",
+      "status": "review_fix_local_checks_passed",
       "branch": "codex/seo-core-entry-slo-observability-01",
-      "commit_sha": "440b6290d62eb0b89ff1e1fa01bcff71bab42418",
+      "commit_sha": "8b12d696cfb60bc1617607ce00ecdea4986fb94a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
       "checks": {
         "dependency": {
@@ -22,7 +22,7 @@
           {
             "command": "php artisan test tests/Feature/SEO/SeoCoreEntrySloObservabilityTest.php --no-ansi",
             "status": "passed",
-            "details": "4 tests and 422 assertions passed."
+            "details": "5 tests and 425 assertions passed, including query-bearing absolute CTA URLs and normalized loopback-host rejection."
           },
           {
             "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_seo_core_entry_slo_observability_files --no-ansi",
@@ -67,6 +67,11 @@
           }
         ],
         "github": [
+          {
+            "command": "GitHub review-fix head rerun",
+            "status": "pending",
+            "details": "Prior head passed all nine checks; the scoped review-fix head requires a fresh GitHub run."
+          },
           {
             "command": "GitHub CI hygiene",
             "status": "passed"
@@ -154,6 +159,11 @@
           "at": "2026-07-24T03:42:11Z",
           "status": "ready_to_merge",
           "summary": "GitHub rerun completed 9/9 green: hygiene, Semgrep blocking secrets, supply-chain, Semgrep SARIF, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. PR #3271 is CLEAN and MERGEABLE at head 440b6290d62eb0b89ff1e1fa01bcff71bab42418."
+        },
+        {
+          "at": "2026-07-24T03:54:33Z",
+          "status": "review_fix_local_checks_passed",
+          "summary": "Addressed both automated review findings within Task 2 scope: primary CTA inspection now parses same-origin href/action URLs while allowing query parameters and bounded public path prefixes, and public-host validation normalizes bracketed IPv6 literals and trailing dots before rejecting private targets. Observer tests passed 5 tests/425 assertions, the authorized freeze-classifier regression passed 1 test/2 assertions, Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, and diff/scope checks remained clean."
         }
       ]
     },
