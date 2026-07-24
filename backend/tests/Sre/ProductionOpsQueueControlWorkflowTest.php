@@ -91,6 +91,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'test "${#config_candidates[@]}" -le 1',
             'OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf',
             '[[ "$OPS_CONFIG_PATH" =~ ^/[A-Za-z0-9._/-]+/fap-queue-ops\.conf$ ]]',
+            'if sudo -n test -f "$OPS_CONFIG_PATH"; then',
+            'current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk \'{print $1}\')"',
+            'sudo -n test -f "$OPS_CONFIG_PATH"',
+            'config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"',
             'test "$(printf \'%s\' "$OPS_CONFIG_PATH" | sha256sum | awk \'{print $1}\')" = "$EXPECTED_CONFIG_PATH_SHA256"',
             'sudo -n install -o root -g root -m 0600 "$OPS_CONFIG_PATH" "$backup"',
             'sudo -n install -o root -g root -m 0644 "$candidate" "$OPS_CONFIG_PATH"',
@@ -145,6 +149,18 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             substr_count($workflow, 'sudo -n -u www-data readlink -f "/proc/$worker_pid/cwd"'),
         );
         $this->assertSame(2, substr_count($workflow, 'failure_gate=CONFIG_DISCOVERY'));
+        $this->assertSame(2, substr_count($workflow, 'if sudo -n test -f "$OPS_CONFIG_PATH"; then'));
+        $this->assertSame(
+            2,
+            substr_count(
+                $workflow,
+                'current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk \'{print $1}\')"',
+            ),
+        );
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'config_epoch="$(sudo -n stat -c %Y "$OPS_CONFIG_PATH")"'),
+        );
     }
 
     #[Test]
