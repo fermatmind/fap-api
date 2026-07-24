@@ -1,17 +1,103 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T04:32:47Z",
+  "updated_at": "2026-07-24T05:04:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-10K-GSC-BOUNDED-BACKFILL-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-10k-gsc-bounded-backfill-01",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "Task 1 fap-web PR #1804 is merged at a36de3f04df7b0fb0efd25a1fec66a39d77fae54."
+        },
+        "local": [
+          {
+            "command": "php artisan test tests/Feature/SeoIntel/SeoIntelGscReadModelBoundedBackfillTest.php",
+            "status": "passed",
+            "details": "10 tests and 146 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Feature/SeoIntel/SeoIntelGscReadModelControlledImportCanaryTest.php tests/Feature/SeoIntel/SeoIntelGscReadModelImporterDryRunTest.php tests/Feature/SeoIntel/SeoIntelGscReadModelCanaryReadbackTest.php",
+            "status": "passed",
+            "details": "21 tests and 197 assertions passed."
+          },
+          {
+            "command": "php artisan help seo-intel:gsc-readmodel-import-canary | rg -- '--backfill'",
+            "status": "passed",
+            "details": "The existing classifier-approved canary command exposes the bounded backfill mode."
+          },
+          {
+            "command": "vendor/bin/pint --test focused Task 3 paths",
+            "status": "passed",
+            "details": "4 files passed before documentation and ledger finalization."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "composer validate --strict",
+            "status": "passed"
+          },
+          {
+            "command": "composer audit",
+            "status": "passed",
+            "details": "No security vulnerability advisories found."
+          },
+          {
+            "command": "JSON and YAML contract validation",
+            "status": "passed"
+          },
+          {
+            "command": "exact changed-file scope validation",
+            "status": "passed",
+            "details": "Exactly eight files; every path is listed in the Task 3 manifest and the Task-2-only Big Five classifier file is unchanged."
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-07-24T04:43:00Z",
+          "status": "in_progress",
+          "summary": "Started Task 3 from exact fap-api origin/main cd9f80a2894f238ab8a667a96d77b1e9679e77fb after verifying Task 1 merged. Implementing only the bounded GSC read-model backfill scope in an isolated worktree."
+        },
+        {
+          "at": "2026-07-24T05:03:00Z",
+          "status": "focused_checks_passed",
+          "summary": "The page/query/query-page bounded backfill, cursor binding, reset, hard cap, current and legacy idempotent reruns, production confirmation, non-duplicate DB error classification, partial-failure retry and readback tests passed 10 tests/146 assertions. Existing canary, dry-run and readback regressions passed 21 tests/197 assertions. To honor the operator's Task-2-only freeze-classifier authorization, the implementation was folded into the already-classified canary command and service; the classifier pure-function check returned no impacting paths without modifying the Big Five test file."
+        },
+        {
+          "at": "2026-07-24T05:04:00Z",
+          "status": "local_checks_passed",
+          "summary": "All Task 3 manifest checks passed on the implementation head: focused backfill and existing GSC regressions, command help, Pint, Composer strict validation/audit, JSON/YAML parsing, diff check, and exact eight-file scope. origin/main then advanced by two unrelated merged PRs, including manifest/ledger additions, so the branch will be rebased and fully revalidated before push."
+        }
+      ]
+    },
     "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ready_to_merge",
+      "status": "merged",
       "branch": "codex/seo-core-entry-slo-observability-01",
-      "commit_sha": "60644bfdfb99c3d6c5507129b0e82b9138b19cff",
+      "commit_sha": "cd9f80a2894f238ab8a667a96d77b1e9679e77fb",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
       "checks": {
         "dependency": {
@@ -106,9 +192,9 @@
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-07-24T04:40:31Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -184,6 +270,11 @@
           "at": "2026-07-24T04:32:47Z",
           "status": "ready_to_merge",
           "summary": "Final review-fix head ee81f9aee07f7c5bcacd599d35a6bd613d34adbf completed 9/9 GitHub checks successfully: hygiene, Semgrep blocking secrets, supply-chain, Semgrep SARIF, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. PR #3271 is CLEAN and MERGEABLE with no new actionable review comments."
+        },
+        {
+          "at": "2026-07-24T05:09:00Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled Task 2 after GitHub reported PR #3271 merged at cd9f80a2894f238ab8a667a96d77b1e9679e77fb on 2026-07-24T04:40:31Z. origin/main contains the merge commit, the remote task branch is deleted, local post-merge cleanup completed, and focused post-merge observer/classifier regressions passed."
         }
       ]
     },

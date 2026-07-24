@@ -8,6 +8,8 @@ use Illuminate\Support\Carbon;
 
 final class GscReadModelArtifactDryRunImporter
 {
+    public const MAX_PREVIEW_ROWS = 10000;
+
     private const SCHEMA_VERSION = 'gsc-readmodel-importer-dryrun.v1';
 
     /**
@@ -38,7 +40,7 @@ final class GscReadModelArtifactDryRunImporter
      */
     public function preview(array $artifact, int $limit = 250): array
     {
-        $limit = max(1, min($limit, 250));
+        $limit = max(1, min($limit, self::MAX_PREVIEW_ROWS));
         $errors = $this->validateArtifact($artifact);
 
         $safeRows = data_get($artifact, 'payload.metadata.safe_row_preview', []);

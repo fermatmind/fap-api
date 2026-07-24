@@ -6,6 +6,65 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: SEO-10K-GSC-BOUNDED-BACKFILL-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-10k-gsc-bounded-backfill-01
+    base: main
+    depends_on:
+      - SEO-CORE-TEST-DETAIL-500-INCIDENT-01
+    mode: execute
+    title: "SEO-10K-GSC-BOUNDED-BACKFILL-01 add bounded resumable GSC import"
+    scope: >
+      Extend the existing max-10 GSC read-model canary with a separate
+      backend-only bounded, resumable and idempotent importer for sanitized
+      page, query and query-by-page cohorts. Bind stable cursors and resume
+      keys to the source artifact SHA, enforce explicit batch and 10,000-row
+      hard bounds, emit sanitized partial-failure and readback receipts, and
+      fail closed on artifact, schema, origin or production-confirmation
+      mismatch. Preserve dry-run defaults and zero live GSC, scheduler, queue,
+      CMS, Search Channel, Request Indexing, sitemap-submission or credential
+      side effects.
+    allowed_paths:
+      - app/Console/Commands/SeoIntelGscReadModelImportCanaryCommand.php
+      - app/Services/SeoIntel/GscReadModelArtifactDryRunImporter.php
+      - app/Services/SeoIntel/GscReadModelControlledImportCanary.php
+      - tests/Feature/SeoIntel/SeoIntelGscReadModelBoundedBackfillTest.php
+      - docs/seo/gsc-readmodel-bounded-backfill.md
+      - docs/seo/generated/gsc-readmodel-bounded-backfill.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php artisan test tests/Feature/SeoIntel/SeoIntelGscReadModelBoundedBackfillTest.php"
+      - "php artisan test tests/Feature/SeoIntel/SeoIntelGscReadModelControlledImportCanaryTest.php tests/Feature/SeoIntel/SeoIntelGscReadModelImporterDryRunTest.php tests/Feature/SeoIntel/SeoIntelGscReadModelCanaryReadbackTest.php"
+      - "php artisan help seo-intel:gsc-readmodel-import-canary | rg -- '--backfill'"
+      - "vendor/bin/pint --test app/Console/Commands/SeoIntelGscReadModelImportCanaryCommand.php app/Services/SeoIntel/GscReadModelArtifactDryRunImporter.php app/Services/SeoIntel/GscReadModelControlledImportCanary.php tests/Feature/SeoIntel/SeoIntelGscReadModelBoundedBackfillTest.php"
+      - "composer validate --strict"
+      - "composer audit"
+      - "python3 -m json.tool docs/seo/generated/gsc-readmodel-bounded-backfill.v1.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true); puts \"yaml ok\"'"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "git diff --cached --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: SEO-CORE-ENTRY-SLO-OBSERVABILITY-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
