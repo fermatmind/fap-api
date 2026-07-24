@@ -99725,7 +99725,7 @@
     "branch": "codex/saep-proposed-api-per02-mbti-en64-internal-link-promotion-01",
     "title": "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01: add revision-bound MBTI EN64 internal-link promotion and rollback",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "pending_remote_pr_head",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3256",
     "checks": {
@@ -99742,14 +99742,14 @@
         "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 33 tests / 493 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, excludes non-public variants and parent profiles from the exact public cohort, and binds existing section identity to org_id=0. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
-        "status": "retry_pending",
-        "evidence": "Initial exact head 37361a917 passed 8/9 checks. verify-bigfive deterministically rejected the two newly added promotion runtime files because its freeze classifier did not yet include this exact scope. The operator explicitly authorized adding the classifier contract test to the current PR; no product behavior expansion is included."
+        "status": "passed",
+        "evidence": "Exact head 40222f4eb463d21bdfe61e747b49821e29dd31af passed all nine required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets and semgrep SARIF upload."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99803,8 +99803,13 @@
         "at": "2026-07-24T01:45:32Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "Further exact-head review required the same status/public/publication-time gates for parent profiles and org_id=0 in the exact live section comparable. Three parent visibility fixtures and a wrong-org 32-section fixture now fail before promotion success; the complete local verification suite passed again."
+      },
+      {
+        "at": "2026-07-24T01:54:22Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 40222f4eb463d21bdfe61e747b49821e29dd31af passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the six authorized paths, and all four review threads are resolved. This ledger-only transition must rerun required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-24T01:45:32Z"
+    "updated_at": "2026-07-24T01:54:22Z"
   }
 }
