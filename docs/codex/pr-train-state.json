@@ -6010,7 +6010,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -99742,14 +99742,14 @@
         "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 34 tests / 500 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, excludes non-public variants and parent profiles, requires variant runtime identity to match its exact public parent, binds existing section identity to org_id=0, and truthfully marks successful rollback receipts as writes. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
-        "status": "retry_pending",
-        "evidence": "Ledger head 882caaa804763b73b3351dd71dc790e834a3f4a3 passed all nine required checks, then exact-head review required one final same-scope public parent-identity repair. The repaired head must rerun all nine checks."
+        "status": "passed",
+        "evidence": "Exact head 53dc87a6f7bacfc2500843e3ea15431dc78532b0 passed all nine required checks after every scoped review repair."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -99818,8 +99818,13 @@
         "at": "2026-07-24T02:20:27Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "Exact-head review found that a successful rollback receipt reported write=false despite deleting 32 sections. The scoped truthfulness fix reports rollback=true, write=true and writes_committed=true, with focused assertions locking all three fields."
+      },
+      {
+        "at": "2026-07-24T02:27:42Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 53dc87a6f7bacfc2500843e3ea15431dc78532b0 passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the six authorized paths, and all six review threads are resolved. This final ledger-only transition must rerun required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-24T02:20:27Z"
+    "updated_at": "2026-07-24T02:27:42Z"
   }
 }
