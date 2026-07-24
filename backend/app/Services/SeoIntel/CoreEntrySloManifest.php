@@ -217,12 +217,18 @@ final class CoreEntrySloManifest
             throw new InvalidArgumentException('core_entry_slo_public_base_url_invalid');
         }
 
-        $host = strtolower((string) $parts['host']);
+        $host = rtrim(strtolower((string) $parts['host']), '.');
+        if (str_starts_with($host, '[') && str_ends_with($host, ']')) {
+            $host = substr($host, 1, -1);
+        }
+
         if (
-            $host === 'localhost'
+            $host === ''
+            || $host === 'localhost'
             || str_ends_with($host, '.localhost')
             || str_ends_with($host, '.local')
             || str_ends_with($host, '.internal')
+            || str_contains($host, '%')
         ) {
             throw new InvalidArgumentException('core_entry_slo_public_base_url_private');
         }

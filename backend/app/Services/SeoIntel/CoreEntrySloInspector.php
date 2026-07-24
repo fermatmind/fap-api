@@ -57,9 +57,11 @@ final class CoreEntrySloInspector
                 $incidents[] = 'hreflang_drift';
             }
 
-            $ctaStatus = $this->containsAny($body, (array) $target['primary_cta_markers'])
-                ? 'pass'
-                : 'missing';
+            $ctaStatus = $this->primaryCtaStatus(
+                $body,
+                $publicBaseUrl,
+                (array) $target['primary_cta_markers']
+            );
             if ($ctaStatus !== 'pass') {
                 $incidents[] = 'primary_cta_missing';
             }
@@ -129,9 +131,13 @@ final class CoreEntrySloInspector
                 'expected_path_sha256' => hash('sha256', (string) $target['alternate_path']),
             ],
             'primary_cta' => [
-                'status' => $httpStatus === 'pass' && $this->containsAny($body, (array) $target['primary_cta_markers'])
-                    ? 'pass'
-                    : 'missing_or_not_evaluated',
+                'status' => $httpStatus === 'pass'
+                    ? $this->primaryCtaStatus(
+                        $body,
+                        $publicBaseUrl,
+                        (array) $target['primary_cta_markers']
+                    )
+                    : 'not_evaluated',
             ],
             'dependency_state' => [
                 'authority_dependency' => (string) $target['authority_dependency'],
@@ -361,6 +367,71 @@ final class CoreEntrySloInspector
             && $path === $expectedPath
             && ! isset($candidateParts['query'])
             && ! isset($candidateParts['fragment']);
+    }
+
+    /**
+     * CTA markers describe an href/action path; an omitted closing quote marks a
+     * public path prefix. Query parameters on the rendered URL are allowed.
+     *
+     * @param  list<string>  $markers
+     */
+    private function primaryCtaStatus(string $body, string $publicBaseUrl, array $markers): string
+    {
+        if (preg_match_all('/<(?:a|form)\b[^>]*>/i', $body, $matches) === false) {
+            return 'missing';
+        }
+
+        foreach ($markers as $marker) {
+            if (preg_match('/^(href|action)="([^"]+)"?$/', $marker, $expected) !== 1) {
+                continue;
+            }
+
+            $attribute = $expected[1];
+            $expectedPath = $expected[2];
+            $isPrefix = ! str_ends_with($marker, '"');
+
+            foreach ($matches[0] ?? [] as $tag) {
+                $candidate = $this->attributes($tag)[$attribute] ?? null;
+                if (
+                    is_string($candidate)
+                    && $this->primaryCtaUrlMatches($candidate, $publicBaseUrl, $expectedPath, $isPrefix)
+                ) {
+                    return 'pass';
+                }
+            }
+        }
+
+        return 'missing';
+    }
+
+    private function primaryCtaUrlMatches(
+        string $candidate,
+        string $publicBaseUrl,
+        string $expectedPath,
+        bool $isPrefix,
+    ): bool {
+        $candidateParts = parse_url($candidate);
+        $baseParts = parse_url($publicBaseUrl);
+
+        if (
+            ! is_array($candidateParts)
+            || ! is_array($baseParts)
+            || isset($candidateParts['fragment'])
+        ) {
+            return false;
+        }
+
+        $candidateHost = strtolower((string) ($candidateParts['host'] ?? $baseParts['host'] ?? ''));
+        $baseHost = strtolower((string) ($baseParts['host'] ?? ''));
+        $candidateScheme = strtolower((string) ($candidateParts['scheme'] ?? $baseParts['scheme'] ?? ''));
+        $path = preg_replace('#/+#', '/', '/'.ltrim((string) ($candidateParts['path'] ?? ''), '/'));
+        $pathMatches = $isPrefix
+            ? str_starts_with($path, $expectedPath)
+            : $path === $expectedPath;
+
+        return $candidateScheme === 'https'
+            && $candidateHost === $baseHost
+            && $pathMatches;
     }
 
     /**

@@ -80,6 +80,30 @@ final class SeoCoreEntrySloObservabilityTest extends TestCase
     }
 
     #[Test]
+    public function manifest_fails_closed_for_normalized_loopback_hosts_before_http(): void
+    {
+        $original = config('seo_intel.public_canonical_host');
+        Http::fake();
+
+        try {
+            foreach (['https://[::1]', 'https://localhost.'] as $privateHost) {
+                config(['seo_intel.public_canonical_host' => $privateHost]);
+
+                try {
+                    app(CoreEntrySloManifest::class)->resolve();
+                    $this->fail('Expected normalized private-host rejection for '.$privateHost);
+                } catch (InvalidArgumentException $exception) {
+                    $this->assertSame('core_entry_slo_public_base_url_private', $exception->getMessage());
+                }
+            }
+        } finally {
+            config(['seo_intel.public_canonical_host' => $original]);
+        }
+
+        Http::assertNothingSent();
+    }
+
+    #[Test]
     public function command_probes_the_exact_manifest_with_bounded_concurrency_and_writes_only_a_sanitized_artifact(): void
     {
         config(['seo_intel.public_canonical_host' => 'https://slo.fermatmind.test']);
@@ -260,9 +284,18 @@ final class SeoCoreEntrySloObservabilityTest extends TestCase
         $canonicalPath ??= (string) $target['path'];
         $marker ??= (string) $target['ssr_markers'][0];
         $ctaMarker = (string) $target['primary_cta_markers'][0];
-        $cta = str_starts_with($ctaMarker, 'action=')
-            ? '<form '.$ctaMarker.' method="get"><button type="submit">Continue</button></form>'
-            : '<a '.$ctaMarker.'>Continue</a>';
+        preg_match('/^(href|action)="([^"]+)"?$/', $ctaMarker, $ctaParts);
+        $ctaAttribute = (string) ($ctaParts[1] ?? '');
+        $ctaPath = (string) ($ctaParts[2] ?? '');
+        if (! str_ends_with($ctaMarker, '"')) {
+            $ctaPath .= 'fixture-entry';
+        }
+        $ctaUrl = $ctaAttribute === 'href'
+            ? 'https://slo.fermatmind.test'.$ctaPath.'?source=slo'
+            : $ctaPath.'?source=slo';
+        $cta = $ctaAttribute === 'action'
+            ? '<form action="'.$ctaUrl.'" method="get"><button type="submit">Continue</button></form>'
+            : '<a href="'.$ctaUrl.'">Continue</a>';
 
         return '<!doctype html><html><head>'
             .'<link rel="canonical" href="https://slo.fermatmind.test'.$canonicalPath.'">'
