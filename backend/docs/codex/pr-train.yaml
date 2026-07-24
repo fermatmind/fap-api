@@ -27,12 +27,14 @@ prs:
       - app/Services/SeoIntel/**
       - config/**
       - tests/Feature/SEO/**
+      - tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/seo/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     checks:
       - "php artisan test tests/Feature/SEO/SeoCoreEntrySloObservabilityTest.php"
-      - "vendor/bin/pint --test app/Console/Commands app/Services/SeoIntel tests/Feature/SEO"
+      - "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_seo_core_entry_slo_observability_files"
+      - "vendor/bin/pint --test app/Console/Commands app/Services/SeoIntel tests/Feature/SEO tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
       - "php artisan route:list --path=api --except-vendor"
       - "composer validate --strict"
       - "composer audit"

@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T03:28:38Z",
+  "updated_at": "2026-07-24T03:34:54Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,7 +9,7 @@
     "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed_scope_blocked",
+      "status": "ci_fix_local_checks_passed",
       "branch": "codex/seo-core-entry-slo-observability-01",
       "commit_sha": "477000f7693d2e7407fe07bd1a6c4069933f936e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
@@ -25,9 +25,14 @@
             "details": "4 tests and 422 assertions passed."
           },
           {
-            "command": "vendor/bin/pint --test app/Console/Commands app/Services/SeoIntel tests/Feature/SEO",
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_seo_core_entry_slo_observability_files --no-ansi",
             "status": "passed",
-            "details": "606 files passed after isolated pre-existing baseline repair PR #3269 merged."
+            "details": "1 test and 2 assertions passed, including the Big Five runtime negative control."
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands app/Services/SeoIntel tests/Feature/SEO tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+            "status": "passed",
+            "details": "607 files passed after isolated pre-existing baseline repair PR #3269 merged."
           },
           {
             "command": "php artisan route:list --path=api --except-vendor",
@@ -58,7 +63,7 @@
           {
             "command": "exact changed-file scope validation",
             "status": "passed",
-            "details": "Exactly 9 changed files; every path is allowed by the Task 2 manifest."
+            "details": "Exactly 10 changed files; every path is allowed by the Task 2 manifest, including the one operator-authorized freeze classifier test file."
           }
         ],
         "github": [
@@ -94,7 +99,7 @@
           }
         ]
       },
-      "failure_reason": "Required verify-bigfive failed only at BigFiveResultPageV2CoreBodyPreviewTest runtime freeze classification. The exact planning authority forbids expanding beyond Commands, Services/SeoIntel, config, Feature/SEO, and docs/seo; the needed classifier file tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php is outside that declared scope.",
+      "failure_reason": null,
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -134,6 +139,16 @@
           "at": "2026-07-24T03:28:38Z",
           "status": "github_checks_failed_scope_blocked",
           "summary": "Eight of nine GitHub checks passed. verify-bigfive ran 1595 passing tests and failed only because the shared runtime-freeze classifier does not yet exclude the four new read-only SEO observer app files. Updating that classifier requires one exact Unit test file outside the planning authority allowed_paths, so no out-of-scope edit was made."
+        },
+        {
+          "at": "2026-07-24T03:33:03Z",
+          "status": "ci_fix_in_progress",
+          "summary": "The operator explicitly authorized adding only tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php to Task 2 allowed_paths for the exact four-file read-only SEO observer freeze-classifier regression. Rebasing onto origin/main 14629b34228a15f8a2cb68a7b311d6fe09ea54be completed without conflict; implementing only that CI fix."
+        },
+        {
+          "at": "2026-07-24T03:34:54Z",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "The exact freeze-classifier regression passed with a Big Five runtime negative control (1 test, 2 assertions); the observer contract remained green (4 tests, 422 assertions). Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, YAML/JSON and diff checks passed, and exact scope validation proved only 10 authorized files."
         }
       ]
     },

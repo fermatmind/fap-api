@@ -2104,6 +2104,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_core_entry_slo_observability_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/SeoIntelCoreEntrySloObserveCommand.php',
+            'backend/app/Services/SeoIntel/CoreEntrySloInspector.php',
+            'backend/app/Services/SeoIntel/CoreEntrySloManifest.php',
+            'backend/app/Services/SeoIntel/CoreEntrySloObserver.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_url_truth_inventory_collector_files(): void
     {
         $changed = [
@@ -6849,6 +6865,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoCoreEntrySloObservabilityFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelUrlTruthInventoryCollectorFile($file)) {
                 continue;
             }
@@ -9226,6 +9246,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SeoIntelCollector.php',
             'backend/app/Services/SeoIntel/SeoIntelCollectorManager.php',
             'backend/app/Services/SeoIntel/SeoIntelCollectorResult.php',
+        ], true);
+    }
+
+    private function isSeoCoreEntrySloObservabilityFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelCoreEntrySloObserveCommand.php',
+            'backend/app/Services/SeoIntel/CoreEntrySloInspector.php',
+            'backend/app/Services/SeoIntel/CoreEntrySloManifest.php',
+            'backend/app/Services/SeoIntel/CoreEntrySloObserver.php',
         ], true);
     }
 
