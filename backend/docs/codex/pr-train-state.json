@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T03:17:22Z",
+  "updated_at": "2026-07-24T03:18:17Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,7 +11,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "local_checks_passed",
       "branch": "codex/seo-core-entry-slo-observability-01",
-      "commit_sha": null,
+      "commit_sha": "477000f7693d2e7407fe07bd1a6c4069933f936e",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -88,6 +88,11 @@
           "at": "2026-07-24T03:17:22Z",
           "status": "local_checks_passed",
           "summary": "All Task 2 manifest checks passed: focused observer contract (4 tests, 422 assertions), whole-directory Pint (606 files), API route listing (220 routes), Composer strict validation and audit, YAML/JSON parsing, diff check, and exact 9-file scope validation. Static write-boundary review found no DB, CMS, publish, sitemap, llms, Search Channel, scheduler, queue-worker, deploy, or private-flow probe implementation."
+        },
+        {
+          "at": "2026-07-24T03:18:17Z",
+          "status": "local_checks_passed",
+          "summary": "Committed the validated Task 2 implementation as 477000f7693d2e7407fe07bd1a6c4069933f936e; preparing the scoped branch for push and PR creation."
         }
       ]
     },
