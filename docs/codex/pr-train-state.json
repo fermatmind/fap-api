@@ -99861,5 +99861,67 @@
       }
     ],
     "updated_at": "2026-07-24T04:36:51Z"
+  },
+  "SEO-QUERY-OWNER-URL-TRUTH-01": {
+    "id": "SEO-QUERY-OWNER-URL-TRUTH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-query-owner-url-truth-01",
+    "title": "SEO-QUERY-OWNER-URL-TRUTH-01 bind one intent to one canonical owner",
+    "depends_on": [
+      "SEO-10K-GSC-BOUNDED-BACKFILL-01",
+      "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 3 PR #3276 is merged at 3f4648e2e166e8d482009a5c3ef864489703e013 and fap-api origin/main contains that commit. Task 5 PR #1805 is merged at 34a20519e8bcd1fa74273cfe91b300d2b6cfc1fa with post-merge 31/31 sitemap contracts passed."
+      },
+      "focused_query_owner_tests": {
+        "status": "passed",
+        "evidence": "Final focused run passed 11 tests / 68 assertions. During scoped implementation, the new reciprocal-hreflang regression initially selected the first locale row rather than the zh-CN row; the fixture assertion was corrected and the exact suite passed on retry."
+      },
+      "required_local_checks": {
+        "status": "passed",
+        "evidence": "Passed focused tests (11 tests / 68 assertions), scoped Pint (7 files), the exact migration through php artisan migrate --force against a disposable local SQLite database, API route listing (220 routes), composer validate --strict, composer audit (no advisories), YAML parse, JSON parse, git diff --check, and exact changed-file validation (10/10 authorized paths). The first disposable-migration wrapper invocation had a php -r namespace escaping syntax error before Laravel boot; the corrected wrapper ran the migration and verified all three tables."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-24T06:07:21Z",
+        "status": "implementation_in_progress",
+        "note": "Started Task 6 from exact fap-api origin/main 0dac333fd31a1873d96fd550cff57f94ba50f97d in an isolated worktree after both declared dependencies were verified merged. Scope is backend query-family and URL-role contract plus read-only conflict reporting; no production migration, DB/CMS authority write, canonical/publication/indexability/sitemap/internal-link mutation, Search Channel action, URL submission, deploy, or external API call is authorized or attempted."
+      },
+      {
+        "at": "2026-07-24T06:13:55Z",
+        "status": "local_checks_passed",
+        "note": "Task 6 now models six explicit URL roles and produces a read-only fail-closed report. Scoped review added the actual backend scale_catalog URL authority, strict redirect-catalog/public-path validation, and reciprocal hreflang enforcement. Final focused tests passed 11 tests / 68 assertions, all remaining local gates passed, and the diff is exactly the 10 authorized paths. No production migration, deploy, DB/CMS write, Search Channel action, URL submission, or external API call occurred."
+      }
+    ],
+    "updated_at": "2026-07-24T06:13:55Z"
   }
 }
