@@ -455,7 +455,6 @@ final class SeoAgentL5aCandidateReviewCommand extends Command
     }
 
     /**
-     * @param  mixed  $value
      * @return list<string>
      */
     private function forbiddenKeysPresent(mixed $value): array

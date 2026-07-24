@@ -43,7 +43,7 @@ final class SeoAgentWeeklyReadonlyRunnerCommand extends Command
             return $this->finish($this->failureSummary('delegated_command_missing'));
         }
 
-        $runOutputBuffer = new BufferedOutput();
+        $runOutputBuffer = new BufferedOutput;
         $exitCode = $runCommand->run(new ArrayInput([
             'command' => 'seo-agent:run',
             '--sources' => implode(',', $sources),
