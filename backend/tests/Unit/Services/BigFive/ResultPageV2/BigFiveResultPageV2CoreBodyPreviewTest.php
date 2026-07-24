@@ -1232,6 +1232,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti64_cms_internal_link_promotion_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php',
+            'backend/app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti64_cms_projection_draft_files(): void
     {
         $changed = [
@@ -6567,6 +6581,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbti64CmsInternalLinkPromotionFile($file)) {
+                continue;
+            }
+
             if ($this->isMbti64CmsProjectionDraftFile($file)) {
                 continue;
             }
@@ -8659,6 +8677,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkDraft.php',
             'backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php',
+        ], true);
+    }
+
+    private function isMbti64CmsInternalLinkPromotionFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php',
+            'backend/app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php',
         ], true);
     }
 

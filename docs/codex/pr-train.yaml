@@ -247,6 +247,7 @@ prs:
       - backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php
       - backend/app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php
       - backend/tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -257,7 +258,9 @@ prs:
       - php -l backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php
       - php -l backend/app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php
       - php -l backend/tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_mbti64_cms_internal_link_promotion_files' --no-ansi
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityMbti64CmsInternalLinkPromote.php app/Services/Cms/Mbti64CmsInternalLinkPromotionService.php tests/Feature/Console/PersonalityMbti64CmsInternalLinkPromoteCommandTest.php
       - cd backend && php artisan route:list --path=api --except-vendor
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-interaction --no-ansi
