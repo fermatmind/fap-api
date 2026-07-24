@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T03:34:54Z",
+  "updated_at": "2026-07-24T03:42:11Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "SEO-CORE-ENTRY-SLO-OBSERVABILITY-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ci_fix_local_checks_passed",
+      "status": "ready_to_merge",
       "branch": "codex/seo-core-entry-slo-observability-01",
-      "commit_sha": "477000f7693d2e7407fe07bd1a6c4069933f936e",
+      "commit_sha": "440b6290d62eb0b89ff1e1fa01bcff71bab42418",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
       "checks": {
         "dependency": {
@@ -94,8 +94,8 @@
           },
           {
             "command": "GitHub CI verify-bigfive",
-            "status": "failed",
-            "details": "1595 tests passed and 1 runtime-freeze classifier test failed because the four new read-only SEO observer app files are not in the classifier allowlist."
+            "status": "passed",
+            "details": "The complete Big Five content and business gate passed after the exact freeze-classifier regression."
           }
         ]
       },
@@ -149,6 +149,11 @@
           "at": "2026-07-24T03:34:54Z",
           "status": "ci_fix_local_checks_passed",
           "summary": "The exact freeze-classifier regression passed with a Big Five runtime negative control (1 test, 2 assertions); the observer contract remained green (4 tests, 422 assertions). Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, YAML/JSON and diff checks passed, and exact scope validation proved only 10 authorized files."
+        },
+        {
+          "at": "2026-07-24T03:42:11Z",
+          "status": "ready_to_merge",
+          "summary": "GitHub rerun completed 9/9 green: hygiene, Semgrep blocking secrets, supply-chain, Semgrep SARIF, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. PR #3271 is CLEAN and MERGEABLE at head 440b6290d62eb0b89ff1e1fa01bcff71bab42418."
         }
       ]
     },
