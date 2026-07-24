@@ -332,7 +332,12 @@ final class Mbti64CmsInternalLinkPromotionService
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
                 ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
-                ->where('locale', 'en'))
+                ->where('locale', 'en')
+                ->publishedPublic()
+                ->where(static function ($nested): void {
+                    $nested->whereNull('published_at')
+                        ->orWhere('published_at', '<=', now());
+                }))
             ->with(['profile' => static fn ($query) => $query->withoutGlobalScopes()])
             ->orderBy('runtime_type_code');
         if ($lock) {
@@ -633,7 +638,7 @@ final class Mbti64CmsInternalLinkPromotionService
     {
         return array_diff_key(
             $this->sectionAttributes($row),
-            ['org_id' => true, 'personality_profile_variant_id' => true]
+            ['personality_profile_variant_id' => true]
         );
     }
 
@@ -643,6 +648,7 @@ final class Mbti64CmsInternalLinkPromotionService
     private function sectionComparable(PersonalityProfileVariantSection $section): array
     {
         return [
+            'org_id' => (int) $section->org_id,
             'section_key' => (string) $section->section_key,
             'render_variant' => (string) $section->render_variant,
             'body_md' => $section->body_md,
@@ -837,7 +843,10 @@ final class Mbti64CmsInternalLinkPromotionService
                 || ! $profile instanceof PersonalityProfile
                 || (int) $profile->org_id !== 0
                 || (string) $profile->scale_code !== PersonalityProfile::SCALE_CODE_MBTI
-                || (string) $profile->locale !== 'en') {
+                || (string) $profile->locale !== 'en'
+                || (string) $profile->status !== 'published'
+                || ! (bool) $profile->is_public
+                || ($profile->published_at !== null && $profile->published_at->isFuture())) {
                 throw new RuntimeException(
                     'A variant or parent profile drifted outside the exact public English MBTI authority boundary.'
                 );

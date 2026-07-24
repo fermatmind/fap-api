@@ -208,6 +208,48 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         ];
     }
 
+    #[DataProvider('nonPublicParentProvider')]
+    public function test_non_public_parent_profile_fails_before_inventory_writes(
+        string $column,
+        mixed $value,
+    ): void {
+        $fixture = $this->seedRevisionCohort();
+        $profileId = (int) PersonalityProfileVariant::query()
+            ->findOrFail($fixture['rows'][0]['target_id'])
+            ->personality_profile_id;
+        $resolvedValue = $value === 'future'
+            ? now()->addDay()
+            : $value;
+        PersonalityProfile::query()
+            ->whereKey($profileId)
+            ->update([$column => $resolvedValue]);
+
+        $exit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge(['--dry-run' => true], $fixture['options'])
+        );
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            'Exactly 32 English MBTI A/T variant targets are required',
+            Artisan::output()
+        );
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, ReviewAttestation::query()->count());
+    }
+
+    /**
+     * @return array<string,array{string,mixed}>
+     */
+    public static function nonPublicParentProvider(): array
+    {
+        return [
+            'draft parent' => ['status', 'draft'],
+            'private parent' => ['is_public', false],
+            'future parent publication' => ['published_at', 'future'],
+        ];
+    }
+
     public function test_promotion_creates_exact_sections_invalidates_cache_and_is_idempotent(): void
     {
         $reviewed = $this->bindReview();
@@ -318,7 +360,19 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         }
         PersonalityProfileVariantSection::query()
             ->where('personality_profile_variant_id', $row['target_id'])
-            ->update(['sort_order' => 982]);
+            ->update(['org_id' => 7]);
+        $wrongOrgExit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge($this->writeFlags(), $options)
+        );
+
+        $this->assertSame(1, $wrongOrgExit);
+        $this->assertStringContainsString('missing, extra or drifted', Artisan::output());
+        $this->assertSame(32, PersonalityProfileVariantSection::query()->count());
+
+        PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', $row['target_id'])
+            ->update(['org_id' => 0, 'sort_order' => 982]);
         $driftedExit = Artisan::call(
             'personality:mbti64-cms-internal-link-promote',
             array_merge($this->writeFlags(), $options)

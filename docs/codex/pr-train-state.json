@@ -99739,7 +99739,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After syncing origin/main and applying both exact-head reviews, focused promotion and review-policy tests passed 30 tests / 478 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, and excludes cross-org, unpublished or future-published variants from the exact public cohort. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
+        "evidence": "After syncing origin/main and applying all exact-head reviews, focused promotion and review-policy tests passed 33 tests / 493 assertions; the focused runtime-freeze classifier regression passed 2 tests / 6 assertions. The promotion transaction reloads and locks exact parent profiles, fails closed on an in-transaction public/indexability drift fixture, excludes non-public variants and parent profiles from the exact public cohort, and binds existing section identity to org_id=0. PHP syntax, scoped Pint, route inventory (220 routes), full SQLite migrations, Composer strict validation/audit, complete post-fix ci_verify_mbti.sh, YAML/JSON parsing, diff checks and exact six-path scope passed. Verification-generated Big Five compiled artifacts were restored to the starting baseline."
       },
       "github_required_checks": {
         "status": "retry_pending",
@@ -99798,8 +99798,13 @@
         "at": "2026-07-24T01:27:11Z",
         "status": "same_scope_review_fix_in_progress",
         "note": "A second exact-head review found that the bounded inventory did not duplicate the public variant route's org, publication and publication-time gates. The scoped fix applies those predicates before the 32-target boundary and revalidates them under lock; three negative fixtures prove non-public variants fail before any review or section write."
+      },
+      {
+        "at": "2026-07-24T01:45:32Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Further exact-head review required the same status/public/publication-time gates for parent profiles and org_id=0 in the exact live section comparable. Three parent visibility fixtures and a wrong-org 32-section fixture now fail before promotion success; the complete local verification suite passed again."
       }
     ],
-    "updated_at": "2026-07-24T01:27:11Z"
+    "updated_at": "2026-07-24T01:45:32Z"
   }
 }
