@@ -171,7 +171,7 @@ jobs:
                 --argjson runtime_config_current "$EXPECTED_RUNTIME_CONFIG_CURRENT" \
                 --arg run_id "$PREFLIGHT_RUN_ID" \
                 --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-                '.contract_version == "backend.production_ops_queue_control.v4"
+                '.contract_version == "backend.production_ops_queue_control.v5"
                  and .mode == "preflight"
                  and .status == "PASS_PREFLIGHT"
                  and .run_id == $run_id
@@ -337,6 +337,16 @@ jobs:
           config_exact_program_section_count=0
           config_total_section_count=0
           config_foreign_program_section_count=0
+          zero_sha256="$(printf '0%.0s' {1..64})"
+          managed_target_path=/etc/supervisor/conf.d/fap-queue-ops.conf
+          managed_target_path_sha256="$(printf '%s' "$managed_target_path" | sha256sum | awk '{print $1}')"
+          managed_target_current_sha256="$zero_sha256"
+          stripped_source_sha256="$zero_sha256"
+          stripped_exact_program_section_count=0
+          stripped_total_section_count=0
+          stripped_program_section_count=0
+          foreign_runtime_fingerprint_sha256="$zero_sha256"
+          migration_supported=false
           if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1} END {exit !found}' <<<"$status_lines"; then
             program_present=true
             if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1; if ($2 != "RUNNING") bad=1} END {exit !(found && !bad)}' <<<"$status_lines"; then
@@ -376,11 +386,78 @@ jobs:
           [[ "$OPS_CONFIG_PATH" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]
           [[ "$OPS_CONFIG_PATH" != *".."* ]]
           config_path_sha256="$(printf '%s' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}')"
-          zero_sha256="$(printf '0%.0s' {1..64})"
           current_config_sha256="$zero_sha256"
           if sudo -n test -f "$OPS_CONFIG_PATH"; then
             failure_gate=CONFIG_HASH
             current_config_sha256="$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')"
+          fi
+          if [ "$config_layout" = SHARED ]; then
+            failure_gate=MIGRATION_TARGET_PATH
+            [[ "$managed_target_path" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.conf$ ]]
+            test "$managed_target_path" != "$OPS_CONFIG_PATH"
+            if sudo -n test -f "$managed_target_path"; then
+              managed_target_current_sha256="$(sudo -n sha256sum "$managed_target_path" | awk '{print $1}')"
+            fi
+            failure_gate=STRIPPED_SOURCE_HASH
+            stripped_source_sha256="$(
+              sudo -n awk '
+                $0 == "[program:fap-queue-ops]" { in_ops=1; next }
+                in_ops && $0 ~ /^\[[^]]+\][[:space:]]*$/ { in_ops=0 }
+                !in_ops { print }
+              ' "$OPS_CONFIG_PATH" | sha256sum | awk '{print $1}'
+            )"
+            failure_gate=STRIPPED_SOURCE_COUNTS
+            stripped_exact_program_section_count="$(
+              sudo -n awk '
+                $0 == "[program:fap-queue-ops]" { in_ops=1; next }
+                in_ops && $0 ~ /^\[[^]]+\][[:space:]]*$/ { in_ops=0 }
+                !in_ops { print }
+              ' "$OPS_CONFIG_PATH" | "$grep_path" -Fxc '[program:fap-queue-ops]' || true
+            )"
+            stripped_total_section_count="$(
+              sudo -n awk '
+                $0 == "[program:fap-queue-ops]" { in_ops=1; next }
+                in_ops && $0 ~ /^\[[^]]+\][[:space:]]*$/ { in_ops=0 }
+                !in_ops { print }
+              ' "$OPS_CONFIG_PATH" | "$grep_path" -Ec '^\[[^]]+\][[:space:]]*$' || true
+            )"
+            stripped_program_section_count="$(
+              sudo -n awk '
+                $0 == "[program:fap-queue-ops]" { in_ops=1; next }
+                in_ops && $0 ~ /^\[[^]]+\][[:space:]]*$/ { in_ops=0 }
+                !in_ops { print }
+              ' "$OPS_CONFIG_PATH" | "$grep_path" -Ec '^\[program:[^]]+\][[:space:]]*$' || true
+            )"
+            [[ "$stripped_source_sha256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$stripped_exact_program_section_count" =~ ^[0-9]+$ ]]
+            [[ "$stripped_total_section_count" =~ ^[0-9]+$ ]]
+            [[ "$stripped_program_section_count" =~ ^[0-9]+$ ]]
+            test "$stripped_exact_program_section_count" -eq 0
+            test "$stripped_total_section_count" -eq $((config_total_section_count - 1))
+            test "$stripped_program_section_count" -eq "$config_foreign_program_section_count"
+            failure_gate=FOREIGN_RUNTIME_FINGERPRINT
+            foreign_runtime_fingerprint_sha256="$(
+              awk '
+                $1 !~ /^fap-queue-ops(:|$)/ {
+                  pid=""
+                  for (i=3; i<=NF; i++) {
+                    if ($i == "pid") {
+                      pid=$(i+1)
+                      gsub(/,/, "", pid)
+                    }
+                  }
+                  print $1 "\t" $2 "\t" pid
+                }
+              ' <<<"$status_lines" | sort | sha256sum | awk '{print $1}'
+            )"
+            [[ "$foreign_runtime_fingerprint_sha256" =~ ^[0-9a-f]{64}$ ]]
+            if [ "$config_total_section_count" -eq 3 ] \
+              && [ "$config_foreign_program_section_count" -eq 2 ] \
+              && [ "$stripped_total_section_count" -eq 2 ] \
+              && [ "$stripped_program_section_count" -eq 2 ] \
+              && [ "$managed_target_current_sha256" = "$zero_sha256" ]; then
+              migration_supported=true
+            fi
           fi
           if [ "$program_present" = true ]; then
             failure_gate=UNIQUE_PROCESS
@@ -441,13 +518,17 @@ jobs:
           ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$current" 2>/dev/null)"
           [[ "$ops_pending_total" =~ ^[0-9]+$ ]]
           trap - ERR
-          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
             "$active_revision" "$lock_present" "$process_count" "$program_present" \
             "$program_state" "$ops_pending_total" "$current_config_sha256" \
             "$live_process_verified" "$config_path_sha256" \
             "$runtime_cwd_current" "$runtime_config_current" "$config_layout" \
             "$config_exact_program_section_count" "$config_total_section_count" \
-            "$config_foreign_program_section_count"
+            "$config_foreign_program_section_count" "$managed_target_path_sha256" \
+            "$managed_target_current_sha256" "$stripped_source_sha256" \
+            "$stripped_exact_program_section_count" "$stripped_total_section_count" \
+            "$stripped_program_section_count" "$foreign_runtime_fingerprint_sha256" \
+            "$migration_supported"
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
@@ -468,7 +549,7 @@ jobs:
             fi
             exit "$ssh_rc"
           fi
-          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified config_path_sha256 runtime_cwd_current runtime_config_current config_layout config_exact_program_section_count config_total_section_count config_foreign_program_section_count <<<"$result"
+          IFS=$'\t' read -r active_revision lock_present process_count program_present program_state ops_pending_total current_config_sha256 live_process_verified config_path_sha256 runtime_cwd_current runtime_config_current config_layout config_exact_program_section_count config_total_section_count config_foreign_program_section_count managed_target_path_sha256 managed_target_current_sha256 stripped_source_sha256 stripped_exact_program_section_count stripped_total_section_count stripped_program_section_count foreign_runtime_fingerprint_sha256 migration_supported <<<"$result"
           test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"
           test "$lock_present" = false
           test "$process_count" = 0
@@ -484,6 +565,14 @@ jobs:
           [[ "$config_exact_program_section_count" =~ ^[0-9]+$ ]]
           [[ "$config_total_section_count" =~ ^[0-9]+$ ]]
           [[ "$config_foreign_program_section_count" =~ ^[0-9]+$ ]]
+          [[ "$managed_target_path_sha256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$managed_target_current_sha256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$stripped_source_sha256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$stripped_exact_program_section_count" =~ ^[0-9]+$ ]]
+          [[ "$stripped_total_section_count" =~ ^[0-9]+$ ]]
+          [[ "$stripped_program_section_count" =~ ^[0-9]+$ ]]
+          [[ "$foreign_runtime_fingerprint_sha256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$migration_supported" =~ ^(true|false)$ ]]
           case "$config_layout" in
             ABSENT)
               test "$config_exact_program_section_count" -eq 0
@@ -529,6 +618,14 @@ jobs:
           echo "config_total_section_count=$config_total_section_count" >> "$GITHUB_OUTPUT"
           echo "config_foreign_program_section_count=$config_foreign_program_section_count" >> "$GITHUB_OUTPUT"
           echo "apply_supported=$apply_supported" >> "$GITHUB_OUTPUT"
+          echo "managed_target_path_sha256=$managed_target_path_sha256" >> "$GITHUB_OUTPUT"
+          echo "managed_target_current_sha256=$managed_target_current_sha256" >> "$GITHUB_OUTPUT"
+          echo "stripped_source_sha256=$stripped_source_sha256" >> "$GITHUB_OUTPUT"
+          echo "stripped_exact_program_section_count=$stripped_exact_program_section_count" >> "$GITHUB_OUTPUT"
+          echo "stripped_total_section_count=$stripped_total_section_count" >> "$GITHUB_OUTPUT"
+          echo "stripped_program_section_count=$stripped_program_section_count" >> "$GITHUB_OUTPUT"
+          echo "foreign_runtime_fingerprint_sha256=$foreign_runtime_fingerprint_sha256" >> "$GITHUB_OUTPUT"
+          echo "migration_supported=$migration_supported" >> "$GITHUB_OUTPUT"
           echo "Read-only production preflight passed without disclosing routing, payload or database metadata."
 
       - name: Apply exact Supervisor ops queue candidate
@@ -759,6 +856,14 @@ jobs:
           CONFIG_TOTAL_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_total_section_count }}
           CONFIG_FOREIGN_PROGRAM_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.config_foreign_program_section_count }}
           APPLY_SUPPORTED_BEFORE: ${{ steps.preflight.outputs.apply_supported }}
+          MANAGED_TARGET_PATH_SHA256_BEFORE: ${{ steps.preflight.outputs.managed_target_path_sha256 }}
+          MANAGED_TARGET_CURRENT_SHA256_BEFORE: ${{ steps.preflight.outputs.managed_target_current_sha256 }}
+          STRIPPED_SOURCE_SHA256_BEFORE: ${{ steps.preflight.outputs.stripped_source_sha256 }}
+          STRIPPED_EXACT_PROGRAM_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.stripped_exact_program_section_count }}
+          STRIPPED_TOTAL_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.stripped_total_section_count }}
+          STRIPPED_PROGRAM_SECTION_COUNT_BEFORE: ${{ steps.preflight.outputs.stripped_program_section_count }}
+          FOREIGN_RUNTIME_FINGERPRINT_SHA256_BEFORE: ${{ steps.preflight.outputs.foreign_runtime_fingerprint_sha256 }}
+          MIGRATION_SUPPORTED_BEFORE: ${{ steps.preflight.outputs.migration_supported }}
           APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}
           APPLY_BACKUP_SHA256: ${{ steps.apply.outputs.backup_sha256 }}
           OPS_PENDING_TOTAL: ${{ steps.preflight.outputs.ops_pending_total }}
@@ -782,6 +887,14 @@ jobs:
             config_total_section_count="$CONFIG_TOTAL_SECTION_COUNT_BEFORE"
             config_foreign_program_section_count="$CONFIG_FOREIGN_PROGRAM_SECTION_COUNT_BEFORE"
             apply_supported="$APPLY_SUPPORTED_BEFORE"
+            managed_target_path_sha256="$MANAGED_TARGET_PATH_SHA256_BEFORE"
+            managed_target_current_sha256="$MANAGED_TARGET_CURRENT_SHA256_BEFORE"
+            stripped_source_sha256="$STRIPPED_SOURCE_SHA256_BEFORE"
+            stripped_exact_program_section_count="$STRIPPED_EXACT_PROGRAM_SECTION_COUNT_BEFORE"
+            stripped_total_section_count="$STRIPPED_TOTAL_SECTION_COUNT_BEFORE"
+            stripped_program_section_count="$STRIPPED_PROGRAM_SECTION_COUNT_BEFORE"
+            foreign_runtime_fingerprint_sha256="$FOREIGN_RUNTIME_FINGERPRINT_SHA256_BEFORE"
+            migration_supported="$MIGRATION_SUPPORTED_BEFORE"
             backup_config_sha256="$(printf '0%.0s' {1..64})"
           else
             status=PASS_APPLY
@@ -800,10 +913,18 @@ jobs:
             config_total_section_count=1
             config_foreign_program_section_count=0
             apply_supported=true
+            managed_target_path_sha256="$CONFIG_PATH_SHA256"
+            managed_target_current_sha256="$RENDERED_SHA256"
+            stripped_source_sha256="$(printf '0%.0s' {1..64})"
+            stripped_exact_program_section_count=0
+            stripped_total_section_count=0
+            stripped_program_section_count=0
+            foreign_runtime_fingerprint_sha256="$(printf '0%.0s' {1..64})"
+            migration_supported=false
             backup_config_sha256="$APPLY_BACKUP_SHA256"
           fi
           jq -n \
-            --arg contract_version "backend.production_ops_queue_control.v4" \
+            --arg contract_version "backend.production_ops_queue_control.v5" \
             --arg mode "$MODE" \
             --arg status "$status" \
             --arg run_id "$GITHUB_RUN_ID" \
@@ -828,6 +949,14 @@ jobs:
             --argjson config_total_section_count "$config_total_section_count" \
             --argjson config_foreign_program_section_count "$config_foreign_program_section_count" \
             --argjson apply_supported "$apply_supported" \
+            --arg managed_target_path_sha256 "$managed_target_path_sha256" \
+            --arg managed_target_current_sha256 "$managed_target_current_sha256" \
+            --arg stripped_source_sha256 "$stripped_source_sha256" \
+            --argjson stripped_exact_program_section_count "$stripped_exact_program_section_count" \
+            --argjson stripped_total_section_count "$stripped_total_section_count" \
+            --argjson stripped_program_section_count "$stripped_program_section_count" \
+            --arg foreign_runtime_fingerprint_sha256 "$foreign_runtime_fingerprint_sha256" \
+            --argjson migration_supported "$migration_supported" \
             --arg backup_config_sha256 "$backup_config_sha256" \
             --argjson production_write_execution "$production_write" \
             --argjson config_write_count "$config_write_count" \
@@ -858,6 +987,14 @@ jobs:
               config_total_section_count: $config_total_section_count,
               config_foreign_program_section_count: $config_foreign_program_section_count,
               apply_supported: $apply_supported,
+              managed_target_path_sha256: $managed_target_path_sha256,
+              managed_target_current_sha256: $managed_target_current_sha256,
+              stripped_source_sha256: $stripped_source_sha256,
+              stripped_exact_program_section_count: $stripped_exact_program_section_count,
+              stripped_total_section_count: $stripped_total_section_count,
+              stripped_program_section_count: $stripped_program_section_count,
+              foreign_runtime_fingerprint_sha256: $foreign_runtime_fingerprint_sha256,
+              migration_supported: $migration_supported,
               backup_config_sha256: $backup_config_sha256,
               production_write_execution: $production_write_execution,
               config_write_count: $config_write_count,
