@@ -36,7 +36,6 @@ return new class extends Migration
                     ->cascadeOnDelete();
                 $table->char('query_hash', 64);
                 $table->string('source_engine', 64)->default('google');
-                $table->string('query_display_masked', 255)->nullable();
                 $table->string('source_authority', 64);
                 $table->string('authority_status', 32)->default('active');
                 $table->timestamps();

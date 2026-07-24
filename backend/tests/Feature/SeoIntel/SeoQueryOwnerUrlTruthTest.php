@@ -74,7 +74,14 @@ final class SeoQueryOwnerUrlTruthTest extends TestCase
         ]));
 
         $source = (string) file_get_contents($this->migrationPath());
-        foreach (['email', 'attempt_id', 'order_no', 'payment_id', 'raw_query'] as $forbidden) {
+        foreach ([
+            'email',
+            'attempt_id',
+            'order_no',
+            'payment_id',
+            'raw_query',
+            'query_display',
+        ] as $forbidden) {
             $this->assertStringNotContainsString("'{$forbidden}'", $source);
         }
     }
@@ -375,7 +382,6 @@ final class SeoQueryOwnerUrlTruthTest extends TestCase
             'query_family_id' => $family->id,
             'query_hash' => hash('sha256', $familyKey.'|'.$locale),
             'source_engine' => 'google',
-            'query_display_masked' => $familyKey,
             'source_authority' => 'backend_query_owner_registry',
             'authority_status' => 'active',
         ]);
