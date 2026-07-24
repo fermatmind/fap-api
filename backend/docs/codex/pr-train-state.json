@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T05:04:00Z",
+  "updated_at": "2026-07-24T05:05:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,7 +11,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "local_checks_passed",
       "branch": "codex/seo-10k-gsc-bounded-backfill-01",
-      "commit_sha": null,
+      "commit_sha": "869156faae8e24645c7d6f788e12ecb0178082f3",
       "pr_url": null,
       "checks": {
         "dependency": {
@@ -89,6 +89,11 @@
           "at": "2026-07-24T05:04:00Z",
           "status": "local_checks_passed",
           "summary": "All Task 3 manifest checks passed on the implementation head: focused backfill and existing GSC regressions, command help, Pint, Composer strict validation/audit, JSON/YAML parsing, diff check, and exact eight-file scope. origin/main then advanced by two unrelated merged PRs, including manifest/ledger additions, so the branch will be rebased and fully revalidated before push."
+        },
+        {
+          "at": "2026-07-24T05:05:00Z",
+          "status": "local_checks_passed",
+          "summary": "Rebased without conflict onto latest origin/main 6117a8704d73d476c52fb28a296d83e71dd234d4. Re-ran all Task 3 checks successfully: 10 backfill tests/146 assertions, 21 existing GSC tests/197 assertions, committed branch-diff runtime-freeze gate 1 test/4 assertions, command help, focused Pint, Composer validation/audit, JSON/YAML parsing, diff checks, and exact eight-file scope."
         }
       ]
     },
