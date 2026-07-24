@@ -90,7 +90,8 @@ foreach (['en', 'zh'] as $locale) {
             'data-testid="career-explorer-pathways"',
         ],
         'primary_cta_markers' => [
-            'action="/'.$locale.'/career/jobs"',
+            'href="/'.$locale.'/career/industries"',
+            'href="/'.$locale.'/career/recommendations"',
         ],
         'last_known_good_markers' => [
             'data-content-state="last-known-good"',

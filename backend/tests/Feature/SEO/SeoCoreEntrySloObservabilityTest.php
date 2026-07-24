@@ -54,6 +54,16 @@ final class SeoCoreEntrySloObservabilityTest extends TestCase
         sort($families);
         $this->assertSame(['articles', 'career', 'test_detail'], $families);
 
+        $targetsById = collect($targets)->keyBy('id');
+        $this->assertSame([
+            'href="/en/career/industries"',
+            'href="/en/career/recommendations"',
+        ], $targetsById['l3_career_en']['primary_cta_markers']);
+        $this->assertSame([
+            'href="/zh/career/industries"',
+            'href="/zh/career/recommendations"',
+        ], $targetsById['l3_career_zh']['primary_cta_markers']);
+
         foreach ($targets as $target) {
             $this->assertMatchesRegularExpression('#^/(en|zh)/#', $target['path']);
             $this->assertMatchesRegularExpression('#^/(en|zh)/#', $target['alternate_path']);
