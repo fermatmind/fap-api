@@ -1,0 +1,65 @@
+{
+  "schema_version": "gsc-readmodel-bounded-backfill.v1",
+  "task": "SEO-10K-GSC-BOUNDED-BACKFILL-01",
+  "command": "php artisan seo-intel:gsc-readmodel-import-canary --backfill",
+  "default_mode": "dry_run_backfill_plan",
+  "source": {
+    "schema_version": "gsc-hk-sidecar-runner-wrapper.v1",
+    "mode": "live-read",
+    "data_origin": "live_gsc_api",
+    "data_quality_gate": "pass",
+    "artifact_sha256_binding_required": true
+  },
+  "cohorts": [
+    "page",
+    "query",
+    "query-page"
+  ],
+  "bounds": {
+    "minimum_batch_size": 1,
+    "maximum_batch_size": 1000,
+    "minimum_hard_max_rows": 1,
+    "maximum_hard_max_rows": 10000
+  },
+  "resume": {
+    "stable_cursor": true,
+    "resume_key_hashed_in_receipts": true,
+    "reset_requires_cursor_absent": true,
+    "cursor_bindings": [
+      "artifact_sha256",
+      "cohort",
+      "resume_key_sha256",
+      "hard_max_rows"
+    ]
+  },
+  "idempotency": {
+    "target_unique_index": "seo_gsc_daily_idempotency_key_unique",
+    "duplicate_safe_rerun": true,
+    "row_key_fields": [
+      "report_date",
+      "canonical_url_hash",
+      "query_hash",
+      "source_engine",
+      "device",
+      "country",
+      "search_type"
+    ]
+  },
+  "receipts": {
+    "partial_failure": true,
+    "readback": true,
+    "sanitized": true
+  },
+  "negative_guarantees": {
+    "default_database_write": false,
+    "live_gsc_api_call": false,
+    "scheduler_activation": false,
+    "queue_worker_activation": false,
+    "cms_write": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "request_indexing": false,
+    "sitemap_submission": false,
+    "new_credentials": false
+  }
+}

@@ -13,12 +13,20 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
     protected $signature = 'seo-intel:gsc-readmodel-import-canary
         {--artifact= : Path to a sanitized GSC sidecar live-read artifact}
         {--limit=1 : Canary row limit; bounded 1..10}
+        {--backfill : Use the bounded resumable backfill mode}
+        {--cohort=query-page : Backfill cohort: page, query, or query-page}
+        {--batch-size=100 : Backfill rows per batch; bounded 1..1000}
+        {--hard-max-rows=10000 : Backfill hard total cap; bounded 1..10000}
+        {--resume-key= : Stable operator-selected backfill resume key}
+        {--cursor= : Opaque cursor emitted by the previous backfill batch}
+        {--reset : Restart backfill at offset zero; cannot be combined with --cursor}
         {--execute : Execute the bounded canary write}
         {--confirm-artifact-sha256= : Required for --execute; must match artifact SHA256}
         {--confirm-write= : Required exact confirmation phrase for --execute}
+        {--confirm-production-write : Additionally required for production backfill execution}
         {--json : Emit JSON summary}';
 
-    protected $description = 'Validate a sanitized GSC artifact and optionally write a controlled seo_gsc_daily batch10 canary.';
+    protected $description = 'Plan or execute a controlled GSC read-model canary or bounded resumable backfill.';
 
     public function handle(GscReadModelControlledImportCanary $canary): int
     {
@@ -42,6 +50,10 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
         }
 
         $sha256 = hash('sha256', $raw);
+        if ((bool) $this->option('backfill')) {
+            return $this->handleBackfill($canary, $decoded, $sha256);
+        }
+
         $limit = $this->limit();
         if ($limit === null) {
             return $this->finish([
@@ -60,6 +72,52 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
                 $this->nullableString($this->option('confirm-write')),
             )
             : $canary->plan($decoded, $sha256, $limit);
+
+        return $this->finish($summary);
+    }
+
+    /**
+     * @param  array<string, mixed>  $artifact
+     */
+    private function handleBackfill(
+        GscReadModelControlledImportCanary $canary,
+        array $artifact,
+        string $artifactSha256,
+    ): int {
+        $batchSize = $this->integerOption('batch-size');
+        $hardMaxRows = $this->integerOption('hard-max-rows');
+        if ($batchSize === null || $hardMaxRows === null) {
+            return $this->finish($this->failureSummary('numeric_option_invalid'));
+        }
+
+        $cohort = trim((string) $this->option('cohort'));
+        $resumeKey = trim((string) $this->option('resume-key'));
+        $cursor = $this->nullableString($this->option('cursor'));
+        $summary = (bool) $this->option('execute')
+            ? $canary->executeBackfill(
+                $artifact,
+                $artifactSha256,
+                $cohort,
+                $batchSize,
+                $hardMaxRows,
+                $resumeKey,
+                $cursor,
+                (bool) $this->option('reset'),
+                $this->nullableString($this->option('confirm-artifact-sha256')),
+                $this->nullableString($this->option('confirm-write')),
+                app()->environment('production'),
+                (bool) $this->option('confirm-production-write'),
+            )
+            : $canary->planBackfill(
+                $artifact,
+                $artifactSha256,
+                $cohort,
+                $batchSize,
+                $hardMaxRows,
+                $resumeKey,
+                $cursor,
+                (bool) $this->option('reset'),
+            );
 
         return $this->finish($summary);
     }
@@ -88,6 +146,13 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
         return $limit >= 1 && $limit <= 10 ? $limit : null;
     }
 
+    private function integerOption(string $name): ?int
+    {
+        $raw = trim((string) $this->option($name));
+
+        return preg_match('/^\d+$/', $raw) === 1 ? (int) $raw : null;
+    }
+
     private function nullableString(mixed $value): ?string
     {
         $normalized = trim((string) $value);
@@ -100,11 +165,17 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
      */
     private function failureSummary(string $issue): array
     {
+        $backfill = (bool) $this->option('backfill');
+
         return [
-            'schema_version' => GscReadModelControlledImportCanary::SCHEMA_VERSION,
-            'task' => GscReadModelControlledImportCanary::TASK,
+            'schema_version' => $backfill
+                ? GscReadModelControlledImportCanary::BACKFILL_SCHEMA_VERSION
+                : GscReadModelControlledImportCanary::SCHEMA_VERSION,
+            'task' => $backfill
+                ? GscReadModelControlledImportCanary::BACKFILL_TASK
+                : GscReadModelControlledImportCanary::TASK,
             'status' => 'blocked',
-            'mode' => 'canary_preflight_blocked',
+            'mode' => $backfill ? 'backfill_preflight_blocked' : 'canary_preflight_blocked',
             'ok' => false,
             'dry_run' => ! (bool) $this->option('execute'),
             'execute' => (bool) $this->option('execute'),
