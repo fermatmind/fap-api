@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T03:54:33Z",
+  "updated_at": "2026-07-24T04:05:26Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,7 +11,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "review_fix_local_checks_passed",
       "branch": "codex/seo-core-entry-slo-observability-01",
-      "commit_sha": "8b12d696cfb60bc1617607ce00ecdea4986fb94a",
+      "commit_sha": "c810ccde07387f2aec4b965b545488c340047491",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3271",
       "checks": {
         "dependency": {
@@ -22,7 +22,7 @@
           {
             "command": "php artisan test tests/Feature/SEO/SeoCoreEntrySloObservabilityTest.php --no-ansi",
             "status": "passed",
-            "details": "5 tests and 425 assertions passed, including query-bearing absolute CTA URLs and normalized loopback-host rejection."
+            "details": "6 tests and 427 assertions passed, including query-bearing absolute CTA URLs, normalized loopback-host rejection, and explicit public-host allowlist enforcement."
           },
           {
             "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_seo_core_entry_slo_observability_files --no-ansi",
@@ -70,7 +70,7 @@
           {
             "command": "GitHub review-fix head rerun",
             "status": "pending",
-            "details": "Prior head passed all nine checks; the scoped review-fix head requires a fresh GitHub run."
+            "details": "Prior review-fix head passed all nine checks; the final explicit-host-allowlist head requires a fresh GitHub run."
           },
           {
             "command": "GitHub CI hygiene",
@@ -164,6 +164,11 @@
           "at": "2026-07-24T03:54:33Z",
           "status": "review_fix_local_checks_passed",
           "summary": "Addressed both automated review findings within Task 2 scope: primary CTA inspection now parses same-origin href/action URLs while allowing query parameters and bounded public path prefixes, and public-host validation normalizes bracketed IPv6 literals and trailing dots before rejecting private targets. Observer tests passed 5 tests/425 assertions, the authorized freeze-classifier regression passed 1 test/2 assertions, Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, and diff/scope checks remained clean."
+        },
+        {
+          "at": "2026-07-24T04:05:26Z",
+          "status": "review_fix_local_checks_passed",
+          "summary": "Addressed the final SSRF review finding with an explicit canonical public-host allowlist (default fermatmind.com), preventing arbitrary DNS-resolved targets before HTTP. Observer tests passed 6 tests/427 assertions, including a non-allowlisted hostname no-request regression; the authorized freeze-classifier regression passed 1 test/2 assertions, Pint passed 607 files, 220 API routes listed, Composer strict validation and audit passed, and exact 10-file scope remained unchanged."
         }
       ]
     },
