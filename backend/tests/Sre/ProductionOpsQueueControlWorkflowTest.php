@@ -27,7 +27,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'preflight_run_id',
             'preflight_run_attempt',
             'operator_approval_phrase',
-            'backend.production_ops_queue_control.v4',
+            'backend.production_ops_queue_control.v5',
             'PASS_PREFLIGHT',
             'PASS_APPLY',
             'and .production_write_execution == false',
@@ -99,6 +99,14 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'config_total_section_count: $config_total_section_count',
             'config_foreign_program_section_count: $config_foreign_program_section_count',
             'apply_supported: $apply_supported',
+            'managed_target_path_sha256: $managed_target_path_sha256',
+            'managed_target_current_sha256: $managed_target_current_sha256',
+            'stripped_source_sha256: $stripped_source_sha256',
+            'stripped_exact_program_section_count: $stripped_exact_program_section_count',
+            'stripped_total_section_count: $stripped_total_section_count',
+            'stripped_program_section_count: $stripped_program_section_count',
+            'foreign_runtime_fingerprint_sha256: $foreign_runtime_fingerprint_sha256',
+            'migration_supported: $migration_supported',
             'APPLY_LIVE_PROCESS_VERIFIED: ${{ steps.apply.outputs.live_process_verified }}',
             'live_process_verified="$APPLY_LIVE_PROCESS_VERIFIED"',
             'live_process_verified=true',
@@ -116,6 +124,22 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'config_layout=ABSENT',
             'apply_supported=false',
             '[[ "$config_layout" =~ ^(ABSENT|DEDICATED)$ ]] && apply_supported=true',
+            'managed_target_path=/etc/supervisor/conf.d/fap-queue-ops.conf',
+            'failure_gate=MIGRATION_TARGET_PATH',
+            'failure_gate=STRIPPED_SOURCE_HASH',
+            'failure_gate=STRIPPED_SOURCE_COUNTS',
+            'failure_gate=FOREIGN_RUNTIME_FINGERPRINT',
+            '$0 == "[program:fap-queue-ops]" { in_ops=1; next }',
+            'test "$stripped_exact_program_section_count" -eq 0',
+            'test "$stripped_total_section_count" -eq $((config_total_section_count - 1))',
+            'test "$stripped_program_section_count" -eq "$config_foreign_program_section_count"',
+            'migration_supported=false',
+            'migration_supported=true',
+            'MANAGED_TARGET_PATH_SHA256_BEFORE: ${{ steps.preflight.outputs.managed_target_path_sha256 }}',
+            'MANAGED_TARGET_CURRENT_SHA256_BEFORE: ${{ steps.preflight.outputs.managed_target_current_sha256 }}',
+            'STRIPPED_SOURCE_SHA256_BEFORE: ${{ steps.preflight.outputs.stripped_source_sha256 }}',
+            'FOREIGN_RUNTIME_FINGERPRINT_SHA256_BEFORE: ${{ steps.preflight.outputs.foreign_runtime_fingerprint_sha256 }}',
+            'MIGRATION_SUPPORTED_BEFORE: ${{ steps.preflight.outputs.migration_supported }}',
             'test "$(sudo -n "$grep_path" -Fxc \'[program:fap-queue-ops]\' "$OPS_CONFIG_PATH")" -eq 1',
             'test "$(sudo -n "$grep_path" -Ec \'^\\[[^]]+\\][[:space:]]*$\' "$OPS_CONFIG_PATH")" -eq 1',
             'OPS_CONFIG_PATH=/etc/supervisor/conf.d/fap-queue-ops.conf',
@@ -203,6 +227,14 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertSame(1, substr_count($workflow, 'failure_gate=CONFIG_SINGLE_PROGRAM_BOUNDARY'));
         $this->assertSame(1, substr_count($workflow, 'failure_gate=CONFIG_PROGRAM_IDENTITY_COUNT'));
         $this->assertSame(1, substr_count($workflow, 'failure_gate=CONFIG_SECTION_COUNTS'));
+        $this->assertSame(1, substr_count($workflow, 'failure_gate=MIGRATION_TARGET_PATH'));
+        $this->assertSame(1, substr_count($workflow, 'failure_gate=STRIPPED_SOURCE_HASH'));
+        $this->assertSame(1, substr_count($workflow, 'failure_gate=STRIPPED_SOURCE_COUNTS'));
+        $this->assertSame(1, substr_count($workflow, 'failure_gate=FOREIGN_RUNTIME_FINGERPRINT'));
+        $this->assertSame(
+            4,
+            substr_count($workflow, '$0 == "[program:fap-queue-ops]" { in_ops=1; next }'),
+        );
         $this->assertSame(
             2,
             substr_count($workflow, 'sudo -n "$grep_path" -Ec \'^\\[[^]]+\\][[:space:]]*$\''),
