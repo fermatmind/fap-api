@@ -9,6 +9,7 @@ use App\Http\Middleware\RequireOpsOrgSelected;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\SetOpsRequestContext;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\API\V0_5\SEO\LlmsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,28 @@ Route::get('/', function () {
 });
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])
+    ->withoutMiddleware([
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+    ]);
+
+Route::get('/llms.txt', [LlmsController::class, 'llmsTxt'])
+    ->withoutMiddleware([
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+        \App\Http\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+        \App\Http\Middleware\VerifyCsrfToken::class,
+    ]);
+
+Route::get('/llms-full.txt', [LlmsController::class, 'llmsFullTxt'])
     ->withoutMiddleware([
         \Illuminate\Cookie\Middleware\EncryptCookies::class,
         \App\Http\Middleware\EncryptCookies::class,
