@@ -237,7 +237,7 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
     {
         $this->seedBoundary();
         [$path, $sha] = $this->writeBackupManifest();
-        config()->set('ops.content_release_observability.hmac_revalidation_url', '');
+        config()->set('ops.content_release_observability.hmac_revalidation_url', 'http://localhost/revalidate');
 
         $summary = app(BigFiveLegacyAliasHardPurge::class)->run(true, 1, $path, $sha);
 
