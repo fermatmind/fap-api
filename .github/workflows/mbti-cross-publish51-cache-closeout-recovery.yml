@@ -1,0 +1,680 @@
+name: MBTI Cross Publish 51 Cache Closeout Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only preflight or exact cache-only apply
+        required: true
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this recovery control plane
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active fap-api production SHA
+        required: true
+        type: string
+      expected_source_cache_sha256:
+        description: Apply only; source-cache SHA from the immutable preflight
+        required: false
+        default: ""
+        type: string
+      expected_feed_absence_sha256:
+        description: Apply only; exact feed-absence SHA from the immutable preflight
+        required: false
+        default: ""
+        type: string
+      preflight_run_id:
+        description: Apply only; immutable successful matching preflight run
+        required: false
+        default: ""
+        type: string
+      preflight_run_attempt:
+        description: Apply only; immutable successful matching preflight attempt
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        description: Apply only; exact cache-only recovery authorization
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: mbti-cross-publish51-cache-closeout-recovery
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Resolve exact cache closeout recovery eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      mode: ${{ steps.validate.outputs.mode }}
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      active_revision: ${{ steps.validate.outputs.active_revision }}
+      source_cache_sha256: ${{ steps.validate.outputs.source_cache_sha256 }}
+      feed_absence_sha256: ${{ steps.validate.outputs.feed_absence_sha256 }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate latest control plane and immutable recovery receipt
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EXPECTED_SOURCE_CACHE_SHA256: ${{ inputs.expected_source_cache_sha256 }}
+          EXPECTED_FEED_ABSENCE_SHA256: ${{ inputs.expected_feed_absence_sha256 }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          EXPECTED_FRONTEND_REVISION: 5e3b2e874c942b3021e662428eb97b3893de0153
+          CONTENT_READBACK_SHA256: a8933ce064815c0d7815cfc968ffd6957b310dc3bd42adfa16033e13c5b79afd
+          CONTENT_FINGERPRINT_SHA256: 06a076d1492f9a35f9c1e8f7eef94e47d573dd306c49097140f98eb324bb0659
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+          case "$MODE" in
+            preflight)
+              test -z "$EXPECTED_SOURCE_CACHE_SHA256"
+              test -z "$EXPECTED_FEED_ABSENCE_SHA256"
+              test -z "$PREFLIGHT_RUN_ID"
+              test -z "$PREFLIGHT_RUN_ATTEMPT"
+              test -z "$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            apply)
+              [[ "$EXPECTED_SOURCE_CACHE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$EXPECTED_FEED_ABSENCE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+              [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+
+              run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+              jq -e \
+                --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+                --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+                '.name == "MBTI Cross Publish 51 Cache Closeout Recovery"
+                 and .path == ".github/workflows/mbti-cross-publish51-cache-closeout-recovery.yml"
+                 and .event == "workflow_dispatch"
+                 and .status == "completed"
+                 and .conclusion == "success"
+                 and .head_branch == "main"
+                 and .head_sha == $sha
+                 and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+
+              receipt_dir="$(mktemp -d)"
+              gh run download "$PREFLIGHT_RUN_ID" \
+                --name "mbti-cross-publish51-cache-closeout-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+                --dir "$receipt_dir"
+              receipt="$receipt_dir/mbti-cross-publish51-cache-closeout-recovery.json"
+              test -f "$receipt"
+              jq -e \
+                --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+                --arg active "$EXPECTED_ACTIVE_REVISION" \
+                --arg frontend "$EXPECTED_FRONTEND_REVISION" \
+                --arg content "$CONTENT_READBACK_SHA256" \
+                --arg fingerprint "$CONTENT_FINGERPRINT_SHA256" \
+                --arg source "$EXPECTED_SOURCE_CACHE_SHA256" \
+                --arg absence "$EXPECTED_FEED_ABSENCE_SHA256" \
+                '.contract_version == "mbti.cross.publish51.cache_closeout_recovery.v1"
+                 and .mode == "preflight"
+                 and .status == "PASS_PREFLIGHT"
+                 and .control_plane_sha == $control
+                 and .active_revision == $active
+                 and .frontend_revision == $frontend
+                 and .content_readback_sha256 == $content
+                 and .content_fingerprint_sha256 == $fingerprint
+                 and .source_cache_sha256 == $source
+                 and .feed_absence_sha256 == $absence
+                 and .discoverability_state == "released"
+                 and .record_count == 3
+                 and .exact_slugs == ["enfp-vs-entp","estj-vs-entj","isfp-vs-infp"]
+                 and .source_missing_count == 3
+                 and .feed_missing_count == 9
+                 and .cache_write_count == 0
+                 and .database_write_count == 0
+                 and .body_mutation_count == 0
+                 and .indexability_write_count == 0
+                 and .search_submission_count == 0' "$receipt" >/dev/null
+
+              expected_phrase="I explicitly approve MBTI-CROSS-PUBLISH-51 production cache-only discoverability closeout from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} frontend SHA ${EXPECTED_FRONTEND_REVISION} content readback SHA ${CONTENT_READBACK_SHA256} content fingerprint SHA ${CONTENT_FINGERPRINT_SHA256} source cache SHA ${EXPECTED_SOURCE_CACHE_SHA256} feed absence SHA ${EXPECTED_FEED_ABSENCE_SHA256}; delete exactly six bounded backend cache keys, warm sitemap source, revalidate exact six frontend paths, and perform read-only exact-three public API/page/feed readback; no DB/body/publication/indexability/deploy/restart/sitemap submission/llms submission/search submission."
+              test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+              ;;
+            *)
+              echo "Unsupported cache closeout recovery mode." >&2
+              exit 2
+              ;;
+          esac
+
+          {
+            echo "mode=$MODE"
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "active_revision=$EXPECTED_ACTIVE_REVISION"
+            echo "source_cache_sha256=$EXPECTED_SOURCE_CACHE_SHA256"
+            echo "feed_absence_sha256=$EXPECTED_FEED_ABSENCE_SHA256"
+          } >> "$GITHUB_OUTPUT"
+
+  production-control:
+    name: Run exact cache closeout recovery ${{ needs.eligibility.outputs.mode }}
+    needs: eligibility
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 10
+    concurrency:
+      group: deploy-${{ github.repository }}-production
+      cancel-in-progress: false
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Revalidate latest control plane immediately before recovery
+        shell: bash
+        env:
+          EXPECTED_CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+      - name: Run fixed cache closeout recovery
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          EXPECTED_SOURCE_CACHE_SHA256: ${{ needs.eligibility.outputs.source_cache_sha256 }}
+          EXPECTED_FEED_ABSENCE_SHA256: ${{ needs.eligibility.outputs.feed_absence_sha256 }}
+          EXPECTED_FRONTEND_REVISION: 5e3b2e874c942b3021e662428eb97b3893de0153
+          CONTENT_READBACK_SHA256: a8933ce064815c0d7815cfc968ffd6957b310dc3bd42adfa16033e13c5b79afd
+          CONTENT_FINGERPRINT_SHA256: 06a076d1492f9a35f9c1e8f7eef94e47d573dd306c49097140f98eb324bb0659
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+
+          set +e
+          result="$(timeout --signal=TERM --kill-after=10s 300s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_SOURCE_CACHE_SHA256='$EXPECTED_SOURCE_CACHE_SHA256' EXPECTED_FEED_ABSENCE_SHA256='$EXPECTED_FEED_ABSENCE_SHA256' EXPECTED_FRONTEND_REVISION='$EXPECTED_FRONTEND_REVISION' CONTENT_READBACK_SHA256='$CONTENT_READBACK_SHA256' CONTENT_FINGERPRINT_SHA256='$CONTENT_FINGERPRINT_SHA256' timeout --signal=TERM --kill-after=10s 270s bash -s" \
+            2>"$RUNNER_TEMP/mbti-cross-publish51-cache-closeout.err" <<'REMOTE'
+          set -euo pipefail
+          current="$(readlink -f "$DEPLOY_PATH/current")"
+          test -d "$current/backend"
+          test "$(tr -d '\r\n' < "$current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
+          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+          cd "$current/backend"
+
+          frontend_revision="$(
+            curl -fsS --proto '=https' --max-redirs 0 \
+              --connect-timeout 10 --max-time 30 \
+              -H 'Accept: application/json' \
+              -H 'Cache-Control: no-cache' \
+              https://fermatmind.com/revision \
+              | jq -er --arg expected "$EXPECTED_FRONTEND_REVISION" \
+                  '.revision | select(. == $expected)'
+          )"
+          test "$frontend_revision" = "$EXPECTED_FRONTEND_REVISION"
+
+          publisher_result="$(php artisan personality:mbti-cross-publisher49-indexability \
+            --json --no-interaction --no-ansi)"
+          jq -e \
+            --arg content "$CONTENT_READBACK_SHA256" \
+            --arg fingerprint "$CONTENT_FINGERPRINT_SHA256" \
+            '.ok == true
+             and .artifact == "mbti.cross.publisher49.indexability.v1"
+             and .mode == "dry_run"
+             and .status == "already_released"
+             and .discoverability_state == "released"
+             and .required_content_readback_sha256 == $content
+             and .content_fingerprint_sha256 == $fingerprint
+             and .indexability_write_committed == false
+             and .body_mutated == false
+             and .search_submission_executed == false
+             and .record_count == 3
+             and .exact_slugs == ["enfp-vs-entp","estj-vs-entj","isfp-vs-infp"]
+             and (.readback | length) == 3
+             and all(.readback[];
+               .publish_status == "published"
+               and .review_status == "approved"
+               and .is_public == true
+               and .is_indexable == true
+               and .sitemap_eligible == true
+               and .llms_eligible == true
+               and .search_submission_eligible == false
+               and .content_payload_json.robots == "index,follow"
+               and (.content_payload_json.sections | length) == 8
+               and (.content_payload_json.faq | length) == 8
+               and (.content_payload_json.internal_links | length) == 7)' \
+            <<<"$publisher_result" >/dev/null
+
+          source_state="$(php -r '
+          require getcwd()."/vendor/autoload.php";
+          $app = require getcwd()."/bootstrap/app.php";
+          $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+          $payload = Illuminate\Support\Facades\Cache::get("seo:sitemap-source:v1:fresh");
+          if (! is_array($payload)) {
+              throw new RuntimeException("Fresh sitemap-source cache is absent.");
+          }
+          $normalize = static function (mixed $value) use (&$normalize): mixed {
+              if (! is_array($value)) {
+                  return $value;
+              }
+              if (! array_is_list($value)) {
+                  ksort($value);
+              }
+              foreach ($value as $key => $item) {
+                  $value[$key] = $normalize($item);
+              }
+              return $value;
+          };
+          $json = json_encode($normalize($payload), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+          $slugs = ["enfp-vs-entp", "estj-vs-entj", "isfp-vs-infp"];
+          $items = is_array($payload["items"] ?? null) ? $payload["items"] : [];
+          $missing = 0;
+          foreach ($slugs as $slug) {
+              $found = false;
+              foreach ($items as $item) {
+                  if (is_array($item) && str_contains((string) ($item["loc"] ?? ""), "/".$slug)) {
+                      $found = true;
+                      break;
+                  }
+              }
+              if (! $found) {
+                  $missing++;
+              }
+          }
+          echo json_encode([
+              "source_cache_sha256" => hash("sha256", $json),
+              "source_missing_count" => $missing,
+              "source_item_count" => count($items),
+          ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+          ')"
+
+          feed_dir="$(mktemp -d)"
+          trap 'rm -rf "$feed_dir"' EXIT
+          : >"$feed_dir/absence.txt"
+          for surface in sitemap.xml llms.txt llms-full.txt; do
+            curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+              --connect-timeout 10 --max-time 60 \
+              -H 'Cache-Control: no-cache' \
+              "https://fermatmind.com/$surface" >"$feed_dir/$surface"
+            for slug in enfp-vs-entp estj-vs-entj isfp-vs-infp; do
+              expected_url="https://fermatmind.com/zh/personality/$slug"
+              if ! grep -F "$expected_url" "$feed_dir/$surface" >/dev/null; then
+                printf '%s|%s|absent\n' "$surface" "$slug" >>"$feed_dir/absence.txt"
+              fi
+            done
+          done
+          feed_missing_count="$(wc -l <"$feed_dir/absence.txt" | tr -d ' ')"
+          feed_absence_sha256="$(sha256sum "$feed_dir/absence.txt" | awk '{print $1}')"
+
+          cache_endpoint_count="$(php -r '
+          require getcwd()."/vendor/autoload.php";
+          $app = require getcwd()."/bootstrap/app.php";
+          $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+          $endpoints = array_values(array_filter(array_map(
+              static fn (mixed $value): string => trim((string) $value),
+              (array) config("ops.content_release_observability.cache_invalidation_urls", [])
+          )));
+          $secret = trim((string) config("ops.content_release_observability.cache_invalidation_secret", ""));
+          if ($endpoints === [] || $secret === "") {
+              throw new RuntimeException("Bounded frontend cache revalidation is not configured.");
+          }
+          echo count($endpoints);
+          ')"
+
+          if [ "$MODE" = preflight ]; then
+            test "$(jq -r '.source_missing_count' <<<"$source_state")" = 3
+            test "$feed_missing_count" = 9
+            jq -c \
+              --arg frontend_revision "$frontend_revision" \
+              --arg feed_absence_sha256 "$feed_absence_sha256" \
+              --argjson feed_missing_count "$feed_missing_count" \
+              --argjson endpoint_count "$cache_endpoint_count" \
+              --argjson source_state "$source_state" \
+              '. + $source_state + {
+                frontend_revision: $frontend_revision,
+                feed_absence_sha256: $feed_absence_sha256,
+                feed_missing_count: $feed_missing_count,
+                frontend_revalidation_endpoint_count: $endpoint_count,
+                cache_closeout_ready: true,
+                cache_write_count: 0,
+                database_write_count: 0,
+                body_mutation_count: 0,
+                indexability_write_count: 0
+              }' <<<"$publisher_result"
+          else
+            test "$(jq -r '.source_cache_sha256' <<<"$source_state")" = "$EXPECTED_SOURCE_CACHE_SHA256"
+            test "$feed_absence_sha256" = "$EXPECTED_FEED_ABSENCE_SHA256"
+            test "$(jq -r '.source_missing_count' <<<"$source_state")" = 3
+            test "$feed_missing_count" = 9
+
+            php -r '
+            require getcwd()."/vendor/autoload.php";
+            $app = require getcwd()."/bootstrap/app.php";
+            $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+            foreach ([
+                "seo:sitemap-source:v1:fresh",
+                "seo:sitemap-source:v1:stale",
+                "seo:sitemap:xml:v6",
+                "seo:sitemap:etag:v6",
+                "seo:llms-txt:v1:body",
+                "seo:llms-full-txt:v1:body",
+            ] as $key) {
+                Illuminate\Support\Facades\Cache::forget($key);
+            }
+            ' >/dev/null
+
+            sitemap_warm="$(php artisan seo:warm-sitemap-source-cache --json --no-interaction --no-ansi)"
+            jq -e '.status == "warmed" and .count > 0' <<<"$sitemap_warm" >/dev/null
+
+            warmed_source="$(php -r '
+            require getcwd()."/vendor/autoload.php";
+            $app = require getcwd()."/bootstrap/app.php";
+            $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+            $payload = Illuminate\Support\Facades\Cache::get("seo:sitemap-source:v1:fresh");
+            $items = is_array($payload["items"] ?? null) ? $payload["items"] : [];
+            $slugs = ["enfp-vs-entp", "estj-vs-entj", "isfp-vs-infp"];
+            $found = 0;
+            foreach ($slugs as $slug) {
+                foreach ($items as $item) {
+                    if (is_array($item) && str_contains((string) ($item["loc"] ?? ""), "/".$slug)) {
+                        $found++;
+                        break;
+                    }
+                }
+            }
+            echo json_encode(["source_found_count" => $found], JSON_THROW_ON_ERROR);
+            ')"
+            test "$(jq -r '.source_found_count' <<<"$warmed_source")" = 3
+
+            php -r '
+            require getcwd()."/vendor/autoload.php";
+            $app = require getcwd()."/bootstrap/app.php";
+            $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+            $paths = [
+                "/zh/personality/enfp-vs-entp",
+                "/zh/personality/estj-vs-entj",
+                "/zh/personality/isfp-vs-infp",
+                "/sitemap.xml",
+                "/llms.txt",
+                "/llms-full.txt",
+            ];
+            $endpoints = array_values(array_filter(array_map(
+                static fn (mixed $value): string => trim((string) $value),
+                (array) config("ops.content_release_observability.cache_invalidation_urls", [])
+            )));
+            $secret = trim((string) config("ops.content_release_observability.cache_invalidation_secret", ""));
+            if ($endpoints === [] || $secret === "") {
+                throw new RuntimeException("Bounded frontend cache revalidation is not configured.");
+            }
+            $payload = [
+                "event" => "content_release_revalidate",
+                "source" => "mbti_cross_publish51_cache_closeout_recovery",
+                "content" => [
+                    "type" => "mbti-cross-comparison",
+                    "id" => 0,
+                    "org_id" => 0,
+                    "title" => "MBTI cross comparison exact-three cache closeout",
+                    "slug" => "exact-three",
+                    "locale" => "zh-CN",
+                    "status" => "published",
+                    "visibility" => "public",
+                ],
+                "cache_signal" => [
+                    "kind" => "invalidate",
+                    "paths" => $paths,
+                    "urls" => $paths,
+                ],
+            ];
+            foreach ($endpoints as $endpoint) {
+                $response = Illuminate\Support\Facades\Http::acceptJson()
+                    ->timeout(15)
+                    ->withHeaders([
+                        "X-FM-Content-Release-Source" => "mbti_cross_publish51_cache_closeout_recovery",
+                        "X-FM-Content-Release-Token" => $secret,
+                    ])
+                    ->post($endpoint, $payload);
+                $body = $response->json();
+                $revalidated = is_array($body) ? (array) ($body["revalidated_paths"] ?? []) : [];
+                $rejected = is_array($body) ? (array) ($body["rejected_paths"] ?? []) : [];
+                sort($revalidated);
+                $expected = $paths;
+                sort($expected);
+                if (! $response->successful() || $rejected !== [] || $revalidated !== $expected) {
+                    throw new RuntimeException("Bounded frontend cache recovery revalidation failed.");
+                }
+            }
+            ' >/dev/null
+
+            for surface in sitemap.xml llms.txt llms-full.txt; do
+              curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+                --connect-timeout 10 --max-time 60 \
+                -H 'Cache-Control: no-cache' \
+                "https://fermatmind.com/$surface" >"$feed_dir/$surface.post"
+              for slug in enfp-vs-entp estj-vs-entj isfp-vs-infp; do
+                expected_url="https://fermatmind.com/zh/personality/$slug"
+                grep -F "$expected_url" "$feed_dir/$surface.post" >/dev/null
+              done
+            done
+
+            for slug in enfp-vs-entp estj-vs-entj isfp-vs-infp; do
+              expected_url="https://fermatmind.com/zh/personality/$slug"
+              curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+                --connect-timeout 10 --max-time 60 \
+                -H 'Cache-Control: no-cache' \
+                "$expected_url" >"$feed_dir/$slug.html"
+              grep -F '<meta name="robots" content="index, follow"/>' "$feed_dir/$slug.html" >/dev/null
+              grep -F "<link rel=\"canonical\" href=\"$expected_url\"/>" "$feed_dir/$slug.html" >/dev/null
+            done
+
+            post_publisher="$(php artisan personality:mbti-cross-publisher49-indexability \
+              --json --no-interaction --no-ansi)"
+            test "$(jq -r '.content_fingerprint_sha256' <<<"$post_publisher")" = "$CONTENT_FINGERPRINT_SHA256"
+            test "$(jq -r '.required_content_readback_sha256' <<<"$post_publisher")" = "$CONTENT_READBACK_SHA256"
+            test "$(jq -r '.discoverability_state' <<<"$post_publisher")" = released
+
+            jq -c \
+              --arg frontend_revision "$frontend_revision" \
+              --arg feed_absence_sha256 "$feed_absence_sha256" \
+              --arg source_cache_sha256 "$EXPECTED_SOURCE_CACHE_SHA256" \
+              '. + {
+                frontend_revision: $frontend_revision,
+                source_cache_sha256: $source_cache_sha256,
+                feed_absence_sha256: $feed_absence_sha256,
+                source_missing_count: 3,
+                feed_missing_count: 9,
+                cache_closeout_completed: true,
+                cache_write_count: 6,
+                backend_cache_key_count: 6,
+                frontend_revalidation_path_count: 6,
+                source_found_count: 3,
+                public_api_readback_completed: true,
+                public_page_readback_completed: true,
+                public_feed_readback_completed: true,
+                database_write_count: 0,
+                body_mutation_count: 0,
+                indexability_write_count: 0
+              }' <<<"$post_publisher"
+          fi
+
+          post_current="$(readlink -f "$DEPLOY_PATH/current")"
+          test "$post_current" = "$current"
+          test "$(tr -d '\r\n' < "$post_current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
+          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+          REMOTE
+          )"
+          ssh_rc=$?
+          set -e
+          if [ "$ssh_rc" -ne 0 ] || ! jq -e 'type == "object"' <<<"$result" >/dev/null 2>&1; then
+            echo "MBTI_CROSS_PUBLISH51_CACHE_CLOSEOUT_REMOTE_OPERATION_FAILED" >&2
+            exit 1
+          fi
+
+          umask 077
+          printf '%s' "$result" >"$RUNNER_TEMP/mbti-cross-publish51-cache-closeout-result.json"
+
+      - name: Validate operation and build sanitized recovery receipt
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          EXPECTED_FRONTEND_REVISION: 5e3b2e874c942b3021e662428eb97b3893de0153
+          CONTENT_READBACK_SHA256: a8933ce064815c0d7815cfc968ffd6957b310dc3bd42adfa16033e13c5b79afd
+          CONTENT_FINGERPRINT_SHA256: 06a076d1492f9a35f9c1e8f7eef94e47d573dd306c49097140f98eb324bb0659
+        run: |
+          set -euo pipefail
+          result_file="$RUNNER_TEMP/mbti-cross-publish51-cache-closeout-result.json"
+          test -f "$result_file"
+          result="$(<"$result_file")"
+
+          jq -e \
+            --arg frontend "$EXPECTED_FRONTEND_REVISION" \
+            --arg content "$CONTENT_READBACK_SHA256" \
+            --arg fingerprint "$CONTENT_FINGERPRINT_SHA256" \
+            '.ok == true
+             and .artifact == "mbti.cross.publisher49.indexability.v1"
+             and .mode == "dry_run"
+             and .status == "already_released"
+             and .discoverability_state == "released"
+             and .required_content_readback_sha256 == $content
+             and .content_fingerprint_sha256 == $fingerprint
+             and .frontend_revision == $frontend
+             and .record_count == 3
+             and .exact_slugs == ["enfp-vs-entp","estj-vs-entj","isfp-vs-infp"]
+             and .database_write_count == 0
+             and .body_mutation_count == 0
+             and .indexability_write_count == 0
+             and .search_submission_executed == false' <<<"$result" >/dev/null
+
+          if [ "$MODE" = preflight ]; then
+            jq -e '
+              .source_missing_count == 3
+              and .feed_missing_count == 9
+              and .cache_closeout_ready == true
+              and .frontend_revalidation_endpoint_count > 0
+              and .cache_write_count == 0
+              and (.source_cache_sha256 | test("^[0-9a-f]{64}$"))
+              and (.feed_absence_sha256 | test("^[0-9a-f]{64}$"))' <<<"$result" >/dev/null
+          else
+            jq -e '
+              .cache_closeout_completed == true
+              and .cache_write_count == 6
+              and .backend_cache_key_count == 6
+              and .frontend_revalidation_path_count == 6
+              and .source_found_count == 3
+              and .public_api_readback_completed == true
+              and .public_page_readback_completed == true
+              and .public_feed_readback_completed == true' <<<"$result" >/dev/null
+          fi
+
+          mkdir -p artifacts
+          approval_sha256="$(printf '%s' "$OPERATOR_APPROVAL_PHRASE" | sha256sum | awk '{print $1}')"
+          jq -n \
+            --arg mode "$MODE" \
+            --arg control "${{ needs.eligibility.outputs.control_plane_sha }}" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg frontend "$EXPECTED_FRONTEND_REVISION" \
+            --arg content "$CONTENT_READBACK_SHA256" \
+            --arg fingerprint "$CONTENT_FINGERPRINT_SHA256" \
+            --arg source "$(jq -r '.source_cache_sha256' <<<"$result")" \
+            --arg absence "$(jq -r '.feed_absence_sha256' <<<"$result")" \
+            --arg approval "$approval_sha256" \
+            --argjson source_missing "$(jq '.source_missing_count' <<<"$result")" \
+            --argjson feed_missing "$(jq '.feed_missing_count' <<<"$result")" \
+            --argjson cache_writes "$(jq '.cache_write_count' <<<"$result")" \
+            --argjson cache_closeout "$(jq '.cache_closeout_completed // false' <<<"$result")" \
+            '{
+              contract_version: "mbti.cross.publish51.cache_closeout_recovery.v1",
+              mode: $mode,
+              status: (if $mode == "preflight" then "PASS_PREFLIGHT" else "PASS_APPLY" end),
+              run_id: "${{ github.run_id }}",
+              run_attempt: "${{ github.run_attempt }}",
+              control_plane_sha: $control,
+              active_revision: $active,
+              frontend_revision: $frontend,
+              content_readback_sha256: $content,
+              content_fingerprint_sha256: $fingerprint,
+              discoverability_state: "released",
+              record_count: 3,
+              exact_slugs: ["enfp-vs-entp","estj-vs-entj","isfp-vs-infp"],
+              source_cache_sha256: $source,
+              feed_absence_sha256: $absence,
+              source_missing_count: $source_missing,
+              feed_missing_count: $feed_missing,
+              cache_write_count: $cache_writes,
+              cache_closeout_completed: $cache_closeout,
+              database_write_count: 0,
+              body_mutation_count: 0,
+              publication_write_count: 0,
+              indexability_write_count: 0,
+              application_deploy_count: 0,
+              symlink_write_count: 0,
+              worker_restart_count: 0,
+              sitemap_submission_count: 0,
+              llms_submission_count: 0,
+              search_submission_count: 0,
+              operator_approval_phrase_sha256: $approval
+            }' > artifacts/mbti-cross-publish51-cache-closeout-recovery.json
+
+      - name: Upload sanitized recovery receipt
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: mbti-cross-publish51-cache-closeout-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/mbti-cross-publish51-cache-closeout-recovery.json
+          if-no-files-found: error
+          retention-days: 30
