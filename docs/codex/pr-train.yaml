@@ -244,6 +244,7 @@ prs:
       - Preserve the existing A/T variant, same-type comparison, cross-type comparison, personality hub and all non-personality sitemap cohorts.
     allowed_paths:
       - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php
       - backend/tests/Feature/SEO/SitemapGeneratorTest.php
       - backend/tests/Feature/SEO/SitemapSourceApiTest.php
       - backend/tests/Feature/SEO/SitemapXmlTest.php

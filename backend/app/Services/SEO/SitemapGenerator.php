@@ -573,7 +573,7 @@ class SitemapGenerator
 
         $robots = strtolower(trim((string) ($profile->seoMeta?->robots ?? 'index,follow')));
 
-        return $robots !== '' && ! str_contains($robots, 'noindex');
+        return $robots === 'index,follow';
     }
 
     /**

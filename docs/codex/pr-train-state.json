@@ -100627,8 +100627,13 @@
         "at": "2026-07-26T15:45:00Z",
         "status": "pr_open_checks_pending",
         "note": "Resolved the exact-head P2 review finding: MBTI base expected canonical URLs now use CanonicalFrontendUrl::fromConfig(), with a focused www/HTTP normalization regression test. The next pushed head requires a fresh full remote-check set."
+      },
+      {
+        "at": "2026-07-26T16:00:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "Addressed two exact-head P2 findings: base profiles require exact index,follow robots, and LlmsController explicitly excludes four-letter MBTI base paths so this sitemap-only PR cannot expand llms.txt or llms-full.txt. Fresh remote checks are required."
       }
     ],
-    "updated_at": "2026-07-26T15:45:00Z"
+    "updated_at": "2026-07-26T16:00:00Z"
   }
 }
