@@ -532,11 +532,13 @@ jobs:
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
+          process_group_runner_b64="$(base64 -w 0 scripts/deploy/run_remote_control_process_group.py)"
+          process_group_forward_env_keys="DEPLOY_PATH,QUEUE_PROBE_PHP_B64"
           set +e
           result="$(timeout --signal=TERM --kill-after=10s 180s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' timeout --signal=TERM --kill-after=10s 150s bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' REMOTE_CONTROL_B64='$remote_b64' REMOTE_CONTROL_RUNNER_B64='$process_group_runner_b64' REMOTE_CONTROL_FORWARD_ENV_KEYS='$process_group_forward_env_keys' REMOTE_CONTROL_TIMEOUT_SECONDS=150 REMOTE_CONTROL_TERM_GRACE_SECONDS=10 REMOTE_CONTROL_RUN_USER='$DEPLOY_USER' bash -o pipefail -lc 'printf %s \$REMOTE_CONTROL_RUNNER_B64 | base64 -d | python3 - --build-privileged-launcher | base64 -d | sudo -n python3'" \
             2>"$RUNNER_TEMP/ops-queue-preflight-ssh.err")"
           ssh_rc=$?
           set -e
@@ -818,11 +820,13 @@ jobs:
           REMOTE
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
+          process_group_runner_b64="$(base64 -w 0 scripts/deploy/run_remote_control_process_group.py)"
+          process_group_forward_env_keys="DEPLOY_PATH,EXPECTED_CONFIG_PATH_SHA256,EXPECTED_CURRENT_CONFIG_SHA256,EXPECTED_ACTIVE_REVISION,EXPECTED_RENDERED_SHA256,EXPECTED_PROGRAM_PRESENT_BEFORE,CONTROL_RUN_ID,CONFIG_B64,QUEUE_PROBE_PHP_B64"
           set +e
           result="$(timeout --signal=TERM --kill-after=10s 180s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' EXPECTED_PROGRAM_PRESENT_BEFORE='$EXPECTED_PROGRAM_PRESENT_BEFORE' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' timeout --signal=TERM --kill-after=10s 150s bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' EXPECTED_PROGRAM_PRESENT_BEFORE='$EXPECTED_PROGRAM_PRESENT_BEFORE' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' REMOTE_CONTROL_B64='$remote_b64' REMOTE_CONTROL_RUNNER_B64='$process_group_runner_b64' REMOTE_CONTROL_FORWARD_ENV_KEYS='$process_group_forward_env_keys' REMOTE_CONTROL_TIMEOUT_SECONDS=150 REMOTE_CONTROL_TERM_GRACE_SECONDS=10 REMOTE_CONTROL_RUN_USER='$DEPLOY_USER' bash -o pipefail -lc 'printf %s \$REMOTE_CONTROL_RUNNER_B64 | base64 -d | python3 - --build-privileged-launcher | base64 -d | sudo -n python3'" \
             2>"$RUNNER_TEMP/ops-queue-apply-ssh.err")"
           ssh_rc=$?
           set -e

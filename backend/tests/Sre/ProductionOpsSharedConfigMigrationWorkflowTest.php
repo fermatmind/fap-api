@@ -52,7 +52,13 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
             'automatic_rollback_count: $automatic_rollback_count',
             'timeout-minutes: 10',
             'timeout --signal=TERM --kill-after=10s 180s',
-            'EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256=\'$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256\' timeout --signal=TERM --kill-after=10s 150s bash',
+            'scripts/deploy/run_remote_control_process_group.py',
+            'REMOTE_CONTROL_TIMEOUT_SECONDS=150',
+            'REMOTE_CONTROL_TERM_GRACE_SECONDS=10',
+            'REMOTE_CONTROL_RUN_USER=\'$DEPLOY_USER\'',
+            '--build-privileged-launcher',
+            'bash -o pipefail -lc',
+            'base64 -d | sudo -n python3',
             'application_deploy_count: 0',
             'symlink_write_count: 0',
             'application_migration_count: 0',
@@ -70,9 +76,9 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
             'I explicitly approve production fap-api shared-to-dedicated ops config migration from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} and v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} template SHA256 ${EXPECTED_TEMPLATE_SHA256} source-path SHA256 ${EXPECTED_SOURCE_PATH_SHA256} source-config SHA256 ${EXPECTED_SOURCE_CONFIG_SHA256} stripped-source SHA256 ${EXPECTED_STRIPPED_SOURCE_SHA256} target-path SHA256 ${EXPECTED_TARGET_PATH_SHA256} target-current SHA256 ${EXPECTED_TARGET_CURRENT_SHA256} rendered-ops SHA256 ${EXPECTED_RENDERED_OPS_SHA256} foreign-runtime SHA256 ${EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256} section-counts 1/3/2 to 0/2/2; write one stripped shared source and one dedicated ops config, preserve foreign program state and PIDs, restart only fap-queue-ops, keep exact backup, and stop without automatic rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23.',
             $workflow,
         );
-        $this->assertSame(
-            1,
-            substr_count($workflow, 'timeout --signal=TERM --kill-after=10s 150s bash'),
+        $this->assertStringNotContainsString(
+            'timeout --signal=TERM --kill-after=10s 150s bash',
+            $workflow,
         );
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
         $this->assertStringContainsString(
@@ -91,6 +97,13 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
         );
         $this->assertStringNotContainsString('whoami', $workflow);
         $this->assertStringNotContainsString('hostname', $workflow);
+
+        $runner = $this->readRepoFile('scripts/deploy/run_remote_control_process_group.py');
+        $this->assertStringContainsString('not enable_child_subreaper()', $runner);
+        $this->assertStringContainsString('signal_descendants(os.getpid(), signal.SIGKILL)', $runner);
+        $this->assertStringContainsString('os.initgroups(run_user, user.pw_gid)', $runner);
+        $this->assertStringContainsString('os.setuid(user.pw_uid)', $runner);
+        $this->assertStringContainsString('user.pw_uid == 0', $runner);
     }
 
     #[Test]
@@ -243,6 +256,80 @@ CONF;
             unlink($sourcePath);
             unlink($outputPath);
         }
+    }
+
+    #[Test]
+    public function remote_process_group_runner_kills_a_term_ignoring_descendant(): void
+    {
+        $pidPath = tempnam(sys_get_temp_dir(), 'ops-pgroup-pid-');
+        $this->assertNotFalse($pidPath);
+        $payload = sprintf(
+            "bash -c 'trap \"\" TERM; while :; do sleep 1; done' &\nprintf '%%s' \"\$!\" > %s\nwait\n",
+            escapeshellarg($pidPath),
+        );
+        $runner = dirname(__DIR__, 3).'/scripts/deploy/run_remote_control_process_group.py';
+        $harness = sprintf(
+            <<<'PYTHON'
+import importlib.util
+spec = importlib.util.spec_from_file_location("remote_control_runner", %s)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+raise SystemExit(module.main(require_privileged=False))
+PYTHON,
+            json_encode($runner, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
+        );
+        $command = sprintf(
+            'REMOTE_CONTROL_B64=%s REMOTE_CONTROL_TIMEOUT_SECONDS=1 REMOTE_CONTROL_TERM_GRACE_SECONDS=1 REMOTE_CONTROL_RUN_USER=runner python3 -c %s',
+            escapeshellarg(base64_encode($payload)),
+            escapeshellarg($harness),
+        );
+        exec($command, $lines, $exitCode);
+        $pid = trim((string) file_get_contents($pidPath));
+
+        try {
+            $this->assertSame(124, $exitCode);
+            $this->assertMatchesRegularExpression('/^[1-9][0-9]*$/', $pid);
+            $states = [];
+            exec(sprintf('ps -o stat= -p %s', escapeshellarg($pid)), $states);
+            $liveStates = array_filter(
+                array_map('trim', $states),
+                static fn (string $state): bool => $state !== '' && ! str_starts_with($state, 'Z'),
+            );
+            $this->assertSame([], array_values($liveStates));
+        } finally {
+            if (preg_match('/^[1-9][0-9]*$/', $pid) === 1) {
+                exec(sprintf('kill -KILL %s >/dev/null 2>&1', escapeshellarg($pid)));
+            }
+            unlink($pidPath);
+        }
+    }
+
+    #[Test]
+    public function privileged_launcher_forwards_only_allowlisted_control_environment(): void
+    {
+        $runner = dirname(__DIR__, 3).'/scripts/deploy/run_remote_control_process_group.py';
+        $control = base64_encode("printf 'PASS_PRIVILEGED_LAUNCHER\\n'\n");
+        $runnerSource = base64_encode((string) file_get_contents($runner));
+        $command = sprintf(
+            'REMOTE_CONTROL_B64=%s REMOTE_CONTROL_RUNNER_B64=%s REMOTE_CONTROL_FORWARD_ENV_KEYS=DEPLOY_PATH REMOTE_CONTROL_TIMEOUT_SECONDS=1 REMOTE_CONTROL_TERM_GRACE_SECONDS=1 REMOTE_CONTROL_RUN_USER=Runner_User DEPLOY_PATH=%s python3 %s --build-privileged-launcher',
+            escapeshellarg($control),
+            escapeshellarg($runnerSource),
+            escapeshellarg('/managed/release/root'),
+            escapeshellarg($runner),
+        );
+        exec($command, $lines, $exitCode);
+        $encodedLauncher = implode('', $lines);
+        $launcher = base64_decode($encodedLauncher, true);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertMatchesRegularExpression('/^[A-Za-z0-9+\\/=]+$/', $encodedLauncher);
+        $this->assertIsString($launcher);
+        $this->assertStringContainsString(
+            '"DEPLOY_PATH": "/managed/release/root"',
+            $launcher,
+        );
+        $this->assertStringNotContainsString('/managed/release/root', $encodedLauncher);
+        $this->assertStringNotContainsString('PASS_PRIVILEGED_LAUNCHER', $encodedLauncher);
     }
 
     private function readRepoFile(string $relativePath): string
