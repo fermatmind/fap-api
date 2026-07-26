@@ -100126,8 +100126,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "prefixed_url_credential_review_repair_local_checks_passed_github_checks_pending",
-  "commit_sha": "6c320014b7c98e09ccbe30221f6e7b36c9e94c35",
+  "status": "ready_to_merge",
+  "commit_sha": "4b54a3b39c4cffe9a4e1b352236ba498fbbc2243",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100144,21 +100144,21 @@
       },
     "focused_recovery_tests": {
       "status": "passed",
-      "evidence": "Final focused validation passed 20 tests / 280 assertions covering the complete 54-row contextual cohort and cutoff, random opaque page IDs with no persisted URL mapping or unkeyed URL digests, exact-five deterministic output, the explicit eligibility requirement of click loss or click-flat impression loss, fail-closed insufficient deterioration coverage, immutable package hashes across artifact-directory/write failures, nonnegative integer query counts with raw/retained/exclusion conservation, the directly verifiable opaque page ID tie-break for equal deltas, finite nonnegative native-number position validation and strict metric comparison, immutable evidence SHA, committed artifact byte equality, exact package/target-set hashes, idempotent artifact bytes, zero business writes, pre-sanitization query-owner conflicts, raw-query and unkeyed-digest exclusion, structured secret-key rejection, target/source/claim drift, valid nonnegative integer GSC counts across target and non-target cohort rows, click/impression relationships, the exact manual-review checklist, credential-free source URLs including percent-encoded keys, fail-closed 0/54 formal readmodel coverage, rejection of self-attested formal gates, and counts-only query-summary binding in each review target hash. ReviewPolicyRegistryTest also passed 11 tests; the combined focused run passed 31 tests / 637 assertions."
+      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, random opaque page IDs with no persisted URL mapping or unkeyed URL digests, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, exact integer/query-count conservation, finite positions, source/claim boundaries, and the fail-closed 0/54 formal readmodel gate. The final repair adds recursive exact field allowlists for both sanitized sidecars, rejects camel-case and collapsed credential names, and rejects loopback/link-local/private/internal source hosts. Recovery plus ReviewPolicyRegistry passed 33 tests / 651 assertions; the three new focused safety regressions passed 3 tests / 17 assertions."
       },
     "required_local_checks": {
       "status": "passed_review_repairs",
-      "evidence": "The final recovery suite passed 20 tests / 284 assertions and the combined recovery plus ReviewPolicyRegistry run passed 31/641. Both Big Five classifier assertions passed 2/6. Scoped Pint passed, composer validate --strict passed, composer audit found no advisories, all content-pack JSON parsed, and git diff --check passed. The documented deterministic command intentionally exits 1 twice, with the repeat reporting changed=false, candidate_package_built=true, approval_eligible=false, business_write=false, status=blocked_formal_gsc_readmodel_gate, package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact file SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and opaque full-cohort artifact SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
+      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 33 tests / 651 assertions. The operator-authorized Big Five freeze-classifier file passed 382 data-driven tests / 786 assertions. Scoped Pint and git diff --check passed after the final repair; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and deterministic dry-run checks remain passed. The dry run remains business_write=false and blocked_formal_gsc_readmodel_gate with immutable package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
-      "status": "pending_after_review_repair",
-      "evidence": "All nine GitHub checks passed at ready-ledger head 6c320014b7c98e09ccbe30221f6e7b36c9e94c35. Its automatic review then identified one P2: provider-prefixed credential parameter names could bypass exact key matching. The repair rejects normalized credential tokens at exact, prefix, or suffix boundaries and adds focused x-api-key, github_token, and db-password regressions; a new GitHub run is pending after commit and push."
+      "status": "passed",
+      "evidence": "All nine GitHub checks passed at exact reviewed implementation head 4b54a3b39c4cffe9a4e1b352236ba498fbbc2243, including verify-bigfive, verify-mbti-legacy, verify-mbti-v2, hygiene, supply-chain, content-pack validation, and Semgrep. Current-head Codex review found no remaining implementation issue; its sole active comment is the stale ledger SHA corrected by this ready-to-merge record."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
   "failure_reason": null,
@@ -100287,8 +100287,13 @@
       "at": "2026-07-26T08:21:35Z",
       "status": "prefixed_url_credential_review_repair_local_checks_passed_github_checks_pending",
       "note": "The ready-ledger head completed all nine checks, but its refreshed review found provider-prefixed credential URL parameters could bypass exact normalized key membership. Source URL validation now rejects each credential key at exact, prefix, or suffix token boundaries; focused coverage proves x-api-key, github_token, and db-password fail closed in addition to userinfo, percent-encoded access_token, client-secret, refresh_token, authorization, and cookie. Recovery plus review-registry passed 31/641, Big Five classifier passed 2/6, and scoped Pint passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:42:39Z",
+      "status": "ready_to_merge",
+      "note": "Resolved the final current-head review findings by enforcing recursive exact allowlists on sanitized query/cohort artifacts, recognizing camel-case and collapsed credential keys, and rejecting private or internal source-reference hosts. Recovery plus ReviewPolicyRegistry passed 33/651, the authorized Big Five freeze-classifier file passed 382/786, scoped Pint and diff checks passed, and all nine GitHub checks passed at exact reviewed implementation head 4b54a3b39c4cffe9a4e1b352236ba498fbbc2243. Exact scope remains the eleven Task 8 allowed paths. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-26T08:21:35Z"
+  "updated_at": "2026-07-26T08:42:39Z"
 }
 }
