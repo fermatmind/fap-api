@@ -345,6 +345,26 @@ final class SeoSearchToResultFunnelTest extends TestCase
     }
 
     #[Test]
+    public function missing_product_funnel_evidence_fails_closed(): void
+    {
+        $url = 'https://fermatmind.com/en/tests/no-materialized-funnel';
+        $hash = hash('sha256', $url);
+        $this->insertUrlTruth($hash, $url, 'test_detail', true);
+        $this->insertGsc($hash, 100, 10);
+
+        $report = app(SearchToResultFunnelReadModel::class)->report(
+            '2026-07-20',
+            '2026-07-20',
+        );
+
+        $this->assertFalse($report['ok'] ?? true);
+        $this->assertSame('blocked', $report['status'] ?? null);
+        $this->assertContains('product_funnel_evidence_missing', $report['issues'] ?? []);
+        $this->assertSame([], $report['rows'] ?? null);
+        $this->assertSame(0, data_get($report, 'totals.start_test_count'));
+    }
+
+    #[Test]
     public function command_is_read_only_and_invalid_windows_fail_closed(): void
     {
         $url = 'https://fermatmind.com/en/tests/mbti';

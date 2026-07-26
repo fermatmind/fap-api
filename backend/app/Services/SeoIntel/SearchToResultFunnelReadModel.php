@@ -161,6 +161,7 @@ final class SearchToResultFunnelReadModel
 
         $rows = [];
         $privateExclusionCount = (int) $gsc['private_exclusion_count'];
+        $missingFunnelEvidenceCount = 0;
 
         foreach ($gsc['rows'] as $gscRow) {
             $hash = (string) $gscRow['canonical_url_hash'];
@@ -181,7 +182,12 @@ final class SearchToResultFunnelReadModel
                 $hash,
                 $gscRow['source_engine'],
             ]);
-            $event = $funnel[$eventKey] ?? $this->emptyFunnel();
+            if (! isset($funnel[$eventKey])) {
+                $missingFunnelEvidenceCount++;
+
+                continue;
+            }
+            $event = $funnel[$eventKey];
             $indexed = ($truth['indexable'] ?? false) === true;
             $validProductStarts = $indexed ? (int) $event['start_test_count'] : 0;
             $impressions = (int) $gscRow['impressions'];
@@ -217,6 +223,14 @@ final class SearchToResultFunnelReadModel
                     ),
                 ],
             ];
+        }
+
+        if ($missingFunnelEvidenceCount > 0) {
+            return $this->blockedReport(
+                $fromDate->toDateString(),
+                $toDate->toDateString(),
+                ['product_funnel_evidence_missing'],
+            );
         }
 
         if ($rows === []) {

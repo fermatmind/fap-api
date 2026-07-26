@@ -17,6 +17,10 @@ GSC page aggregates to existing product funnel aggregates.
   forbidden, unknown, or mixed trusted/untrusted source blocks the complete
   window instead of contaminating its metrics.
 - `page_family` comes from backend URL Truth `page_entity_type`.
+- Every GSC row that survives page-family/privacy gates must have a materialized
+  `seo_event_funnel_daily` row at the same date/hash/engine grain. Missing
+  product evidence blocks the complete report instead of fabricating zero
+  starts, completions, or result views.
 
 The output uses only the SHA-256 canonical URL hash. It never returns a raw URL,
 raw query, result identifier, attempt identifier, order identifier, recovery
@@ -67,7 +71,8 @@ php artisan seo-intel:search-to-result-funnel-report \
 Both dates are required and inclusive. The command is read-only and returns a
 non-zero exit code for an invalid window, missing required source schema, empty
 GSC evidence, an empty page-family result, a disallowed GSC data origin, a
-non-final GSC row, or a missing URL Truth classification.
+non-final GSC row, a missing URL Truth classification, or missing materialized
+product-funnel evidence.
 
 ## Boundaries
 
