@@ -100127,7 +100127,7 @@
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
   "status": "complete_evidence_schema_review_repairs_local_checks_passed_github_checks_pending",
-  "commit_sha": "bd9434c3f7d48364d99e1a0966970cf8390c8876",
+  "commit_sha": "143a1960561e1863b44534ac3aa6105aa73a482f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100152,7 +100152,7 @@
       },
     "github_required_checks": {
       "status": "pending_after_review_repair",
-      "evidence": "All nine GitHub checks passed at prior implementation head 4b54a3b39c4cffe9a4e1b352236ba498fbbc2243 and ledger head 90e566ebb6980059d542cd2586dde1f0828687ed. The ledger-head review then identified three additional P2 evidence boundaries. Exact implementation head bd9434c3f7d48364d99e1a0966970cf8390c8876 adds the corresponding primary-evidence schema, numeric-host, and comparison-window repairs; a fresh GitHub run is pending."
+      "evidence": "All nine GitHub checks passed at prior implementation head 4b54a3b39c4cffe9a4e1b352236ba498fbbc2243 and ledger head 90e566ebb6980059d542cd2586dde1f0828687ed. The ledger-head review then identified three additional P2 evidence boundaries. Exact implementation head 143a1960561e1863b44534ac3aa6105aa73a482f adds the primary-evidence schema, numeric-host, comparison-window, and recursive list-element repairs; a fresh GitHub run is pending."
       }
     },
     "scope_validation": {
@@ -100297,8 +100297,13 @@
       "at": "2026-07-26T08:54:44Z",
       "status": "complete_evidence_schema_review_repairs_local_checks_passed_github_checks_pending",
       "note": "The ledger-only head passed all nine checks, but current-head review found three additional evidence-boundary gaps. The primary evidence now has an exact recursive schema down through each recovery plan and source reference; source hosts reject numeric noncanonical IP spellings such as 127.1 and octal dotted forms; and GSC windows must be valid, equally sized, consecutive, non-overlapping, and bounded by observed_at. Recovery plus ReviewPolicyRegistry passed 35/667, scoped Pint and diff checks passed. Another worktree was already running a full MBTI/Big Five verification, so no second local full freeze run was started; GitHub required checks are pending. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:57:37Z",
+      "status": "complete_evidence_schema_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "A proactive recursive-schema audit also constrained every allowed list that can reach the candidate package to a true string list, including recovery actions, claims, manual-review checks, observation fields, query exclusions, and top-five opaque IDs; nested objects cannot hide undeclared raw evidence inside those lists. Recovery plus ReviewPolicyRegistry remains green at 35/667, scoped Pint and diff checks pass, and GitHub checks are pending at exact implementation head 143a1960561e1863b44534ac3aa6105aa73a482f. No production or business write occurred."
     }
   ],
-  "updated_at": "2026-07-26T08:54:44Z"
+  "updated_at": "2026-07-26T08:57:37Z"
 }
 }
