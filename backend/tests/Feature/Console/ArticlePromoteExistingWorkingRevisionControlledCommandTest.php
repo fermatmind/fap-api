@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Console\Commands\ArticlePromoteExistingWorkingRevisionControlled;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticlePublishService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
+use ReflectionMethod;
+use RuntimeException;
 use Tests\TestCase;
 
 final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends TestCase
@@ -55,6 +59,66 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
         $this->assertSame($publishedRevisionId, (int) $article->published_revision_id);
         $this->assertSame($workingRevisionId, (int) $article->working_revision_id);
         $this->assertSame(ArticleTranslationRevision::STATUS_APPROVED, (string) $article->workingRevision?->revision_status);
+    }
+
+    public function test_dry_run_rejects_short_body_and_forbidden_draft_markers(): void
+    {
+        $article = $this->createExistingArticleWithWorkingRevision([
+            'working_body' => "## Draft\n\nBig Five Authority V2 draft candidate pending manual review.\n\n短模板。",
+        ]);
+
+        $exitCode = Artisan::call('articles:promote-existing-working-revision', $this->commandOptions($article, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertErrorCode($payload, 'forbidden_draft_marker');
+        $this->assertErrorCode($payload, 'body_han_characters_below_minimum');
+        $this->assertFalse((bool) data_get($payload, 'plan.editorial_completeness.ok'));
+        $this->assertSame(2000, data_get($payload, 'plan.editorial_completeness.minimum_han_characters'));
+    }
+
+    public function test_execute_revalidates_editorial_completeness_inside_promotion_transaction(): void
+    {
+        $article = $this->createExistingArticleWithWorkingRevision();
+        $publishedRevisionId = (int) $article->published_revision_id;
+        $workingRevisionId = (int) $article->working_revision_id;
+        $command = app(ArticlePromoteExistingWorkingRevisionControlled::class);
+        $assertCompleteness = new ReflectionMethod($command, 'assertEditorialCompleteness');
+
+        $this->assertNull($assertCompleteness->invoke($command, $article, $article->workingRevision));
+
+        ArticleTranslationRevision::query()
+            ->withoutGlobalScopes()
+            ->whereKey($workingRevisionId)
+            ->update([
+                'content_md' => 'Big Five Authority V2 draft candidate pending manual review.',
+            ]);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('forbidden_draft_marker');
+
+        try {
+            app(ArticlePublishService::class)->promoteExistingWorkingRevision(
+                (int) $article->id,
+                $workingRevisionId,
+                $publishedRevisionId,
+                dispatchFollowUp: false,
+                transactionGuard: fn (Article $lockedArticle, ArticleTranslationRevision $lockedRevision) => $assertCompleteness->invoke(
+                    $command,
+                    $lockedArticle,
+                    $lockedRevision,
+                ),
+            );
+        } finally {
+            $article->refresh();
+            $this->assertSame($publishedRevisionId, (int) $article->published_revision_id);
+            $this->assertSame($workingRevisionId, (int) $article->working_revision_id);
+            $this->assertSame(ArticleTranslationRevision::STATUS_APPROVED, (string) $article->workingRevision?->revision_status);
+        }
     }
 
     public function test_execute_promotes_existing_article_working_revision_and_preserves_route_state(): void
@@ -228,7 +292,11 @@ final class ArticlePromoteExistingWorkingRevisionControlledCommandTest extends T
             ['name' => 'EQ', 'is_active' => true]
         );
         $publishedBody = "## Existing EQ article\n\n旧正文。";
-        $workingBody = "## EQ 分数应该怎么理解\n\nEQ 分数是情绪线索，不是能力判决。\n\n## 下一步\n\n[开始 EQ 测试](/zh/tests/eq-test-emotional-intelligence-assessment)";
+        $workingBody = (string) ($overrides['working_body'] ?? (
+            "## EQ 分数应该怎么理解\n\nEQ 分数是情绪线索，不是能力判决。\n\n"
+            .str_repeat('理解情绪线索时，需要结合场景、持续时间和个人目标，再用一次小实验记录变化。', 100)
+            ."\n\n## 下一步\n\n[开始 EQ 测试](/zh/tests/eq-test-emotional-intelligence-assessment)"
+        ));
         $workingStatus = (string) ($overrides['working_revision_status'] ?? ArticleTranslationRevision::STATUS_APPROVED);
 
         $article = Article::unguarded(fn (): Article => Article::query()->withoutGlobalScopes()->create([

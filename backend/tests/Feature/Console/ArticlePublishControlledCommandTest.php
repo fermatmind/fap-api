@@ -44,6 +44,49 @@ final class ArticlePublishControlledCommandTest extends TestCase
         $this->assertNull($article->published_revision_id);
     }
 
+    public function test_dry_run_rejects_short_body_and_forbidden_draft_markers(): void
+    {
+        $article = $this->createControlledDraft([
+            'body' => "## Draft\n\nBig Five Authority V2 draft candidate pending manual review.\n\n短模板。",
+        ]);
+
+        $this->artisan('articles:publish-controlled', [
+            '--article' => [(string) $article->id],
+            '--dry-run' => true,
+            '--make-indexable' => true,
+        ])
+            ->expectsOutputToContain('ok=0')
+            ->expectsOutputToContain('forbidden_draft_marker')
+            ->expectsOutputToContain('body_han_characters_below_minimum')
+            ->assertExitCode(1);
+
+        $article->refresh();
+        $this->assertSame('draft', (string) $article->status);
+        $this->assertNull($article->published_revision_id);
+    }
+
+    public function test_dry_run_uses_working_revision_instead_of_stale_article_and_seo_projections(): void
+    {
+        $article = $this->createControlledDraft();
+        $article->forceFill([
+            'title' => 'draft candidate stale projection',
+            'excerpt' => 'pending manual review stale projection',
+        ])->save();
+        $article->seoMeta?->forceFill([
+            'seo_title' => 'draft candidate stale SEO projection',
+            'seo_description' => 'pending manual review stale SEO projection',
+        ])->save();
+
+        $command = app(ArticlePublishControlled::class);
+        $preflight = new ReflectionMethod($command, 'preflightArticle');
+        $plan = $preflight->invoke($command, (int) $article->id, [], true);
+
+        $this->assertIsArray($plan);
+        $this->assertTrue((bool) $plan['ok']);
+        $this->assertTrue((bool) data_get($plan, 'editorial_completeness.ok'));
+        $this->assertSame([], data_get($plan, 'editorial_completeness.matched_forbidden_markers'));
+    }
+
     public function test_controlled_publish_requires_acknowledged_boundary_warnings_and_exact_confirmation(): void
     {
         $this->fakeContentReleaseEndpoint();
@@ -282,6 +325,43 @@ final class ArticlePublishControlledCommandTest extends TestCase
         }
     }
 
+    public function test_controlled_publish_revalidates_content_completeness_inside_transaction(): void
+    {
+        $article = $this->createControlledDraft(['slug' => 'controlled-publish-content-revalidate']);
+        $command = app(ArticlePublishControlled::class);
+        $preflight = new ReflectionMethod($command, 'preflightArticle');
+        $publish = new ReflectionMethod($command, 'publishPlannedArticle');
+
+        $plan = $preflight->invoke($command, (int) $article->id, [], true);
+        $this->assertIsArray($plan);
+        $this->assertTrue((bool) $plan['ok']);
+
+        ArticleTranslationRevision::query()
+            ->withoutGlobalScopes()
+            ->whereKey((int) $article->working_revision_id)
+            ->update([
+                'content_md' => 'Big Five Authority V2 draft candidate pending manual review.',
+            ]);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('forbidden_draft_marker');
+
+        try {
+            $publish->invoke(
+                $command,
+                $plan,
+                app(ArticlePublishService::class),
+                app(AuditLogger::class),
+                "I explicitly approve Codex to publish article id {$article->id} after preflight passes.",
+                true
+            );
+        } finally {
+            $article->refresh();
+            $this->assertSame('draft', (string) $article->status);
+            $this->assertNull($article->published_revision_id);
+        }
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */
@@ -295,7 +375,11 @@ final class ArticlePublishControlledCommandTest extends TestCase
             ['org_id' => 0, 'slug' => 'riasec'],
             ['name' => 'RIASEC', 'is_active' => true]
         );
-        $body = "## Controlled Publish Draft\n\n## 执行摘要\n\n正文。\n\n## FAQ\n\n### Q\n\nA.";
+        $body = (string) ($overrides['body'] ?? (
+            "## Controlled Publish Draft\n\n## 执行摘要\n\n"
+            .str_repeat('这篇文章通过具体情境解释人格测量边界并提供可复盘的行动建议。', 120)
+            ."\n\n## FAQ\n\n### Q\n\n这是结构化参考，不是固定身份或结果保证。"
+        ));
         $bodyHash = hash('sha256', preg_replace("/\r\n?/", "\n", trim($body)));
         $locale = (string) ($overrides['locale'] ?? 'zh-CN');
         $slug = (string) ($overrides['slug'] ?? 'controlled-publish-draft');

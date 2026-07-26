@@ -13,10 +13,14 @@ use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * @review-surface article
+ */
 final class ArticleReleaseCloseoutService
 {
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
+        private readonly ArticleEditorialCompletenessGate $editorialCompletenessGate,
     ) {}
 
     /**
@@ -87,6 +91,7 @@ final class ArticleReleaseCloseoutService
         $canonicalUrl = 'https://fermatmind.com'.$canonicalPath;
         $checks = [
             'article' => $this->articleCheck($article, $expectedSlug),
+            'editorial_completeness' => $this->editorialCompletenessCheck($article),
             'seo_meta' => $this->seoMetaCheck($article, $canonicalPath),
             'media' => $this->mediaCheck($article),
             'taxonomy' => $this->taxonomyCheck($article),
@@ -109,6 +114,26 @@ final class ArticleReleaseCloseoutService
             publicSmoke: $publicSmoke,
             gscManual: $gscManual,
             observation: $observation,
+        );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function editorialCompletenessCheck(Article $article): array
+    {
+        $revision = $article->publishedRevision;
+
+        return $this->editorialCompletenessGate->inspect(
+            (string) $article->locale,
+            (string) ($revision?->content_md ?? ''),
+            [
+                'published_revision.title' => (string) ($revision?->title ?? ''),
+                'published_revision.excerpt' => (string) ($revision?->excerpt ?? ''),
+                'published_revision.content_md' => (string) ($revision?->content_md ?? ''),
+                'published_revision.seo_title' => (string) ($revision?->seo_title ?? ''),
+                'published_revision.seo_description' => (string) ($revision?->seo_description ?? ''),
+            ],
         );
     }
 

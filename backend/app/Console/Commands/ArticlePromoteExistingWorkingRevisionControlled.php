@@ -9,11 +9,15 @@ use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\ArticleEditorialCompletenessGate;
 use App\Services\Cms\ArticlePublishService;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use RuntimeException;
 
+/**
+ * @review-surface article
+ */
 final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 {
     protected $signature = 'articles:promote-existing-working-revision
@@ -37,6 +41,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         {--json : Emit a JSON summary}';
 
     protected $description = 'Promote an approved working revision for an already-published existing article through a controlled fail-closed runtime.';
+
+    public function __construct(
+        private readonly ArticleEditorialCompletenessGate $editorialCompletenessGate,
+    ) {
+        parent::__construct();
+    }
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
@@ -129,6 +139,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                     $currentPublishedRevisionId,
                     'controlled_existing_article_working_revision_promotion',
                     dispatchFollowUp: false,
+                    transactionGuard: fn (Article $lockedArticle, ArticleTranslationRevision $lockedRevision) => $this->assertEditorialCompleteness(
+                        $lockedArticle,
+                        $lockedRevision,
+                    ),
                 );
 
                 $this->logPromotion($auditLogger, $article, $plan, $confirmation);
@@ -408,6 +422,13 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             }
         }
 
+        $editorialCompleteness = $this->editorialCompleteness($article, $workingRevision);
+        foreach ((array) $editorialCompleteness['issues'] as $issue) {
+            if (is_array($issue)) {
+                $errors[] = $issue;
+            }
+        }
+
         return [
             'article_id' => (int) $article->id,
             'locale' => (string) $article->locale,
@@ -434,11 +455,42 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             'references_count' => (int) ($import?->references_count ?? 0),
             'graph_status' => $graphStatus,
             'answer_surface_status' => $answerSurfaceStatus,
+            'editorial_completeness' => $editorialCompleteness,
             'after_promotion' => $afterPromotion,
             'ok' => $errors === [],
             'warnings' => $warnings,
             'errors' => $errors,
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function editorialCompleteness(Article $article, ?ArticleTranslationRevision $workingRevision): array
+    {
+        return $this->editorialCompletenessGate->inspect(
+            (string) $article->locale,
+            (string) ($workingRevision?->content_md ?? ''),
+            [
+                'working_revision.title' => (string) ($workingRevision?->title ?? ''),
+                'working_revision.excerpt' => (string) ($workingRevision?->excerpt ?? ''),
+                'working_revision.content_md' => (string) ($workingRevision?->content_md ?? ''),
+                'working_revision.seo_title' => (string) ($workingRevision?->seo_title ?? ''),
+                'working_revision.seo_description' => (string) ($workingRevision?->seo_description ?? ''),
+            ],
+        );
+    }
+
+    private function assertEditorialCompleteness(Article $article, ArticleTranslationRevision $workingRevision): void
+    {
+        $result = $this->editorialCompleteness($article, $workingRevision);
+        if ((bool) $result['ok']) {
+            return;
+        }
+
+        $codes = array_values(array_filter(array_column((array) $result['issues'], 'code'), 'is_string'));
+
+        throw new RuntimeException('editorial completeness failed: '.implode(',', $codes));
     }
 
     /**
