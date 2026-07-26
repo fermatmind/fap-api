@@ -100126,8 +100126,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "opaque_id_secret_position_review_repairs_local_checks_passed_github_checks_pending",
-  "commit_sha": "e7faf70ebc135f7d5837b2d9cbb9a7ea67c13570",
+  "status": "ready_to_merge",
+  "commit_sha": "9cc66480cbf1e3f976813bf47c0ad105b9d83106",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100151,14 +100151,14 @@
       "evidence": "The final recovery suite passed 20 tests / 280 assertions and the combined recovery plus ReviewPolicyRegistry run passed 31/637. Both Big Five classifier assertions passed 2/6. Scoped Pint passed 4 files, composer validate --strict passed, composer audit found no advisories, all content-pack JSON parsed, and git diff --check passed. The deterministic command intentionally exits 1 with changed=false, candidate_package_built=true, approval_eligible=false, status=blocked_formal_gsc_readmodel_gate, package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact file SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and opaque full-cohort artifact SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
-      "status": "pending_after_review_repairs",
-      "evidence": "All nine GitHub checks passed at ledger-amended head e7faf70ebc135f7d5837b2d9cbb9a7ea67c13570. The automatically refreshed Codex review then identified three P2s: reversible unkeyed page URL hashes, incomplete structured secret-key rejection, and permissive average-position validation. All three are repaired within existing Task 8 paths with focused regressions; a new GitHub run is pending after commit and push."
+      "status": "passed",
+      "evidence": "All nine GitHub checks passed at exact reviewed implementation head 9cc66480cbf1e3f976813bf47c0ad105b9d83106: hygiene, supply-chain, content-pack-build-validation, Semgrep OSS, Code Scanning Semgrep blocking and SARIF upload, verify-mbti-legacy, verify-mbti-v2, and verify-bigfive. Codex review is bound to that exact head; all implementation findings are repaired and no active unresolved review thread remains."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
   "failure_reason": null,
@@ -100267,8 +100267,13 @@
       "at": "2026-07-26T07:44:59Z",
       "status": "opaque_id_secret_position_review_repairs_local_checks_passed_github_checks_pending",
       "note": "The ledger-only amendment completed all nine checks, but its refreshed Codex review found three valid P2s. The 54-row page cohort now replaces dictionary-reversible unkeyed URL SHA-256 values with random opaque page evidence IDs whose mapping remains outside Git; the exact five public targets bind those IDs without exposing the 49 non-target URLs. Recursive forbidden-key validation now normalizes and blocks structured secret keys such as api_key, client-secret, authorization, password, signature, and token families. Page positions now require finite nonnegative native integers/floats and target/cohort metrics compare strictly after validation. Recovery plus review-registry passed 31/637, both Big Five classifier assertions passed 2/6, scoped Pint/Composer/JSON/diff checks passed, and the deterministic blocked artifact repeated changed=false with package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T07:54:36Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact reviewed implementation head 9cc66480cbf1e3f976813bf47c0ad105b9d83106, including verify-bigfive. The current-head Codex review found no remaining implementation issue; its sole ledger comment incorrectly treated the still-open PR as merged and was resolved with the repository rule that merge SHA/time/cleanup facts cannot be pre-filled. Exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier test only for the corresponding freeze regression. No production or business write occurred."
     }
   ],
-  "updated_at": "2026-07-26T07:44:59Z"
+  "updated_at": "2026-07-26T07:54:36Z"
 }
 }
