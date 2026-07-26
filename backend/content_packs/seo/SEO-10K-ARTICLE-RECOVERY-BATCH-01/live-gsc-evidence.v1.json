@@ -1,0 +1,520 @@
+{
+    "schema": "fermatmind-seo-10k-article-recovery-evidence.v1",
+    "task": "SEO-10K-ARTICLE-RECOVERY-BATCH-01",
+    "batch_id": "article-recovery-batch-01",
+    "observed_at": "2026-07-26T04:35:35Z",
+    "scope": {
+        "exact_existing_url_count": 5,
+        "new_url_allowed": false,
+        "database_write_allowed": false,
+        "cms_write_allowed": false,
+        "publish_allowed": false,
+        "indexability_write_allowed": false,
+        "search_submit_allowed": false,
+        "scheduler_allowed": false,
+        "queue_allowed": false,
+        "deploy_allowed": false
+    },
+    "selection": {
+        "eligible_scope": "existing_public_article_urls_observed_in_live_gsc",
+        "eligibility_rule": "click_delta_lt_0_or_click_delta_eq_0_and_impression_delta_lt_0",
+        "rule": "click_delta_asc_then_impression_delta_asc_then_page_evidence_id_asc",
+        "exact_count": 5,
+        "page_export_article_row_count": 54
+    },
+    "gsc": {
+        "property": "sc-domain:fermatmind.com",
+        "source_engine": "google",
+        "search_type": "web",
+        "data_origin": "live_gsc_browser_export",
+        "current_window": {
+            "start": "2026-06-26",
+            "end": "2026-07-23"
+        },
+        "previous_window": {
+            "start": "2026-05-29",
+            "end": "2026-06-25"
+        },
+        "page_export": {
+            "zip_sha256": "1ee3b4e9d08977df9b3ea4ac269f3a7185d6750c0e82fca7554fce6d57479f72",
+            "csv_sha256": "d60da642e55cc6a934a3a7ac49889614a370f1fb46fd0b71f7c74c35c89b7edb",
+            "total_row_count": 1013
+        },
+        "page_cohort_artifact": {
+            "path": "live-gsc-page-cohort-hashes.v1.json",
+            "sha256": "a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb",
+            "schema": "fermatmind-seo-10k-article-recovery-page-cohort-opaque-ids.v1",
+            "article_row_count": 54,
+            "raw_url_persisted": false,
+            "identifier_model": "opaque_random_ids_mapping_not_persisted",
+            "unkeyed_url_digest_persisted": false
+        },
+        "query_summary_artifact": {
+            "path": "live-gsc-query-summary.v1.json",
+            "sha256": "98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695",
+            "schema": "fermatmind-seo-10k-article-recovery-query-summary.v1",
+            "raw_query_persisted": false,
+            "unkeyed_query_digest_persisted": false
+        },
+        "formal_readmodel_gate": {
+            "status": "blocked",
+            "required_data_origin": "live_gsc_api",
+            "required_row_source": "live_gsc_api",
+            "required_source_engine": "google",
+            "required_data_state": "final",
+            "required_article_cohort_coverage_count": 54,
+            "actual_eligible_article_cohort_coverage_count": 0,
+            "opportunity_queue_eligible": false,
+            "reason": "The completed 10-row production canary covers only the zh MBTI test page and does not cover this 54-article cohort."
+        }
+    },
+    "targets": [
+        {
+            "rank": 1,
+            "canonical_url": "https://fermatmind.com/en/articles/what-is-riasec-holland-code-career-interest-test",
+            "slug": "what-is-riasec-holland-code-career-interest-test",
+            "locale": "en",
+            "article_id": 41,
+            "current_authority": {
+                "public_api_http_status": 200,
+                "published_revision_id": 67,
+                "status": "published",
+                "is_public": true,
+                "is_indexable": true,
+                "sitemap_eligible": true,
+                "llms_eligible": true,
+                "review_state": "approved",
+                "last_reviewed_at": "2026-06-23T02:04:29Z",
+                "content_sha256": "46c679e336f9721d40db0a3c366e0c71778bcec990ffa2296a5b7246ebcc959d",
+                "seo_sha256": "e05fb509c4329c2f65c2b3564707d9872f1261f485d79883cb60773380830be7"
+            },
+            "gsc_page": {
+                "current_clicks": 2,
+                "previous_clicks": 5,
+                "click_delta": -3,
+                "current_impressions": 1905,
+                "previous_impressions": 1345,
+                "impression_delta": 560,
+                "current_position": 19.09,
+                "previous_position": 18.87
+            },
+            "query_export": {
+                "zip_sha256": "ef23ffb89071abf81eab250b24356071f992108ae6ae228f26ade2cb24119055",
+                "csv_sha256": "666e503aaafaf9b76c191952509bbc9504fbce950873fed893648ecba4ae1fb3",
+                "raw_row_count": 163,
+                "retained_query_count": 162,
+                "excluded_site_operator_count": 1,
+                "excluded_brand_or_mixed_count": 0,
+                "evidence_state": "available"
+            },
+            "proposed_recovery": {
+                "title_candidate": "What Is RIASEC? Holland Codes, Six Interest Types, and How to Use Them",
+                "meta_description_candidate": "Learn what the six RIASEC Holland Code types describe, how an interest profile supports career exploration, and why it should not decide your career for you.",
+                "visible_section_actions": [
+                    "answer_the_definition_in_the_opening",
+                    "make_the_six_interest_types_scannable",
+                    "separate_interest_fit_from_job_prediction",
+                    "add_a_measure_interpret_act_review_workflow"
+                ]
+            },
+            "source_refs": [
+                {
+                    "id": "onet-interest-profiler-manual",
+                    "url": "https://www.onetcenter.org/reports/IP_Manual.html",
+                    "authority_type": "official_technical_manual"
+                },
+                {
+                    "id": "onet-career-exploration-tools",
+                    "url": "https://www.onetcenter.org/tools.html",
+                    "authority_type": "official_program_source"
+                }
+            ],
+            "claim_boundary": {
+                "allowed_claims": [
+                    "RIASEC describes vocational-interest patterns",
+                    "interest profiles may support exploration and reflection"
+                ],
+                "prohibited_claims": [
+                    "a code determines the right career",
+                    "a result predicts job performance or income",
+                    "the assessment is a hiring or diagnostic decision tool"
+                ],
+                "required_disclaimer": "Treat the result as a structured exploration hypothesis, not a fixed identity or career verdict."
+            },
+            "page_evidence_id": "page_e194ff15cf3db1170cef059a8373d7d3"
+        },
+        {
+            "rank": 2,
+            "canonical_url": "https://fermatmind.com/zh/articles/college-major-choice-holland-mbti-career-test",
+            "slug": "college-major-choice-holland-mbti-career-test",
+            "locale": "zh-CN",
+            "article_id": 52,
+            "current_authority": {
+                "public_api_http_status": 200,
+                "published_revision_id": 64,
+                "status": "published",
+                "is_public": true,
+                "is_indexable": true,
+                "sitemap_eligible": true,
+                "llms_eligible": true,
+                "review_state": "approved",
+                "last_reviewed_at": "2026-06-18T05:51:02Z",
+                "content_sha256": "7b63bf0a684211e089aeded1bfa0a58d16288762d2c8d1a62fc7a6f87baf9b60",
+                "seo_sha256": "68d437fc4b932806e64ab9f67091c34091946cea9bf988656716a4c69a4a2278"
+            },
+            "gsc_page": {
+                "current_clicks": 0,
+                "previous_clicks": 1,
+                "click_delta": -1,
+                "current_impressions": 81,
+                "previous_impressions": 406,
+                "impression_delta": -325,
+                "current_position": 5.25,
+                "previous_position": 6.64
+            },
+            "query_export": {
+                "zip_sha256": "f933dac38c719fb7d4487df67527ab44554951dff437c926260497c2500b72d3",
+                "csv_sha256": "fb44d4e78915d303edb50159133dd55ea23832219b77ae98d6135f14638f5eae",
+                "raw_row_count": 2,
+                "retained_query_count": 1,
+                "excluded_site_operator_count": 1,
+                "excluded_brand_or_mixed_count": 0,
+                "evidence_state": "available"
+            },
+            "proposed_recovery": {
+                "title_candidate": "选专业时，霍兰德 RIASEC 和 MBTI 分别能帮你看什么？",
+                "meta_description_candidate": "用霍兰德兴趣类型梳理专业方向，用 MBTI 作为沟通偏好参考；结合课程、能力、价值观与现实约束完成选专业核对。",
+                "visible_section_actions": [
+                    "distinguish_interest_evidence_from_personality_language",
+                    "add_a_major_course_reality_check",
+                    "make_non_deterministic_decision_steps_visible",
+                    "remove_any_test_to_major_shortcut"
+                ]
+            },
+            "source_refs": [
+                {
+                    "id": "onet-interest-profiler-manual",
+                    "url": "https://www.onetcenter.org/reports/IP_Manual.html",
+                    "authority_type": "official_technical_manual"
+                },
+                {
+                    "id": "vocational-interests-performance-meta-analysis",
+                    "url": "https://pubmed.ncbi.nlm.nih.gov/26168474/",
+                    "authority_type": "peer_reviewed_meta_analysis"
+                },
+                {
+                    "id": "national-academies-mbti-career-counseling-review",
+                    "url": "https://www.nationalacademies.org/read/1580/chapter/8",
+                    "authority_type": "national_academies_review"
+                }
+            ],
+            "claim_boundary": {
+                "allowed_claims": [
+                    "interest fit may support reflection about study environments",
+                    "MBTI preference language may support discussion"
+                ],
+                "prohibited_claims": [
+                    "either test selects the correct major",
+                    "a type guarantees academic success",
+                    "a result replaces course, ability, values, cost, or opportunity evidence"
+                ],
+                "required_disclaimer": "测评只提供结构化参考，不能替代课程体验、能力证据、价值观与现实约束的综合判断。"
+            },
+            "page_evidence_id": "page_697f92d62675c7a3f5f07e670ab645e1"
+        },
+        {
+            "rank": 3,
+            "canonical_url": "https://fermatmind.com/zh/articles/how-personality-shapes-attitude-toward-ai",
+            "slug": "how-personality-shapes-attitude-toward-ai",
+            "locale": "zh-CN",
+            "article_id": 15,
+            "current_authority": {
+                "public_api_http_status": 200,
+                "published_revision_id": 34,
+                "status": "published",
+                "is_public": true,
+                "is_indexable": true,
+                "sitemap_eligible": true,
+                "llms_eligible": true,
+                "review_state": "approved",
+                "last_reviewed_at": null,
+                "content_sha256": "5ea63626418abd1fc79993f96f4f13deed1b8fd65783321ea4c9e6265d95d379",
+                "seo_sha256": "a812adcf630fa7b88699eddeac0cff852bb46e1503efa1d3528192e7e197f639"
+            },
+            "gsc_page": {
+                "current_clicks": 0,
+                "previous_clicks": 1,
+                "click_delta": -1,
+                "current_impressions": 25,
+                "previous_impressions": 32,
+                "impression_delta": -7,
+                "current_position": 12,
+                "previous_position": 7.12
+            },
+            "query_export": {
+                "zip_sha256": "ffdef800ebd675835ee90e197114725db0d0e4528c73572763e1d39a8154b372",
+                "csv_sha256": "9fe64180b9cc5c2624e44e273b4beca541449c2c52f685905ca8dab29b224bca",
+                "raw_row_count": 1,
+                "retained_query_count": 1,
+                "excluded_site_operator_count": 0,
+                "excluded_brand_or_mixed_count": 0,
+                "evidence_state": "available"
+            },
+            "proposed_recovery": {
+                "title_candidate": "人格会影响我们对 AI 的态度吗？研究发现与使用边界",
+                "meta_description_candidate": "梳理人格特质与 AI 接受、信任和焦虑之间的研究关联，并说明相关不等于因果，测评结果也不能预测个人态度。",
+                "visible_section_actions": [
+                    "answer_association_not_causation_early",
+                    "separate_trust_acceptance_and_anxiety_constructs",
+                    "tie_each_research_claim_to_a_visible_source",
+                    "add_individual_prediction_limits"
+                ]
+            },
+            "source_refs": [
+                {
+                    "id": "ai-attitude-ubiquitous-computing-study",
+                    "url": "https://doi.org/10.1007/s00779-024-01823-7",
+                    "authority_type": "peer_reviewed_research"
+                },
+                {
+                    "id": "algorithm-aversion-organizational-behavior-study",
+                    "url": "https://doi.org/10.1016/j.obhdp.2018.12.005",
+                    "authority_type": "peer_reviewed_research"
+                },
+                {
+                    "id": "ai-attitude-scientific-reports-study",
+                    "url": "https://doi.org/10.1038/s41598-022-18638-2",
+                    "authority_type": "peer_reviewed_research"
+                }
+            ],
+            "claim_boundary": {
+                "allowed_claims": [
+                    "research reports associations between measured traits and AI attitudes",
+                    "context and measurement choices may change observed relationships"
+                ],
+                "prohibited_claims": [
+                    "personality causes an individual's AI attitude",
+                    "a personality result predicts adoption or performance",
+                    "correlation is described as destiny or diagnosis"
+                ],
+                "required_disclaimer": "研究中的群体相关不能用于预测某个个体；人格测评结果应当作为可复盘的工作假设。"
+            },
+            "page_evidence_id": "page_4855ddbd04ba4095ea4a3a6b3c8b9be3"
+        },
+        {
+            "rank": 4,
+            "canonical_url": "https://fermatmind.com/en/articles/mbti-personality-test-science-vs-pseudoscience",
+            "slug": "mbti-personality-test-science-vs-pseudoscience",
+            "locale": "en",
+            "article_id": 34,
+            "current_authority": {
+                "public_api_http_status": 200,
+                "published_revision_id": 70,
+                "status": "published",
+                "is_public": true,
+                "is_indexable": true,
+                "sitemap_eligible": true,
+                "llms_eligible": true,
+                "review_state": "approved",
+                "last_reviewed_at": "2026-06-23T13:01:33Z",
+                "content_sha256": "16e19ce4c3aade22553d1a86d27967c9f32c43fb875d0a7fa3ceb206f651c6b1",
+                "seo_sha256": "87bfa7179c4fc1b50c45320789ed25a19471f195093fa4e240e32938cd662db9"
+            },
+            "gsc_page": {
+                "current_clicks": 0,
+                "previous_clicks": 0,
+                "click_delta": 0,
+                "current_impressions": 40,
+                "previous_impressions": 145,
+                "impression_delta": -105,
+                "current_position": 9.97,
+                "previous_position": 14.51
+            },
+            "query_export": {
+                "zip_sha256": "0361dac2ad9c8a00b2e0b62dba1db6ef0aff682b8d7c329820f71a4bff8be5ad",
+                "csv_sha256": "f226998ea56caec711e8eb8c78b8e19371d8bca4c17e8c0cd7012d3407ccdfbd",
+                "raw_row_count": 0,
+                "retained_query_count": 0,
+                "excluded_site_operator_count": 0,
+                "excluded_brand_or_mixed_count": 0,
+                "evidence_state": "privacy_threshold_suppressed"
+            },
+            "proposed_recovery": {
+                "title_candidate": "Is MBTI Scientific? What Reliability, Validity, and Type Labels Can—and Cannot—Show",
+                "meta_description_candidate": "A balanced guide to MBTI reliability and validity: what preference scores may support, why type labels have limits, and how to use results as hypotheses.",
+                "visible_section_actions": [
+                    "define_reliability_validity_and_typology_separately",
+                    "present_supporting_and_cautionary_evidence",
+                    "avoid_a_binary_science_or_pseudoscience_verdict",
+                    "make_non_selection_and_non_diagnostic_boundaries_visible"
+                ]
+            },
+            "source_refs": [
+                {
+                    "id": "national-academies-mbti-career-counseling-review",
+                    "url": "https://www.nationalacademies.org/read/1580/chapter/8",
+                    "authority_type": "national_academies_review"
+                },
+                {
+                    "id": "pittenger-mbti-cautionary-review",
+                    "url": "https://doi.org/10.1037/1065-9293.57.3.210",
+                    "authority_type": "peer_reviewed_review"
+                },
+                {
+                    "id": "capraro-mbti-reliability-meta-analysis",
+                    "url": "https://doi.org/10.1177/0013164402062004004",
+                    "authority_type": "peer_reviewed_meta_analysis"
+                }
+            ],
+            "claim_boundary": {
+                "allowed_claims": [
+                    "score reliability and categorical type interpretation are separate questions",
+                    "published evidence contains both supportive and cautionary findings"
+                ],
+                "prohibited_claims": [
+                    "MBTI is absolutely scientific or absolutely meaningless",
+                    "four letters diagnose or fix identity",
+                    "type predicts hiring, career success, or mental health"
+                ],
+                "required_disclaimer": "Use a type result as a conversation aid and revisable hypothesis, not as a diagnosis, selection rule, or final account of personality."
+            },
+            "page_evidence_id": "page_e26fd511d9d9a26fb2f94087ef568763"
+        },
+        {
+            "rank": 5,
+            "canonical_url": "https://fermatmind.com/zh/articles/iq-test-tool-guide",
+            "slug": "iq-test-tool-guide",
+            "locale": "zh-CN",
+            "article_id": 7,
+            "current_authority": {
+                "public_api_http_status": 200,
+                "published_revision_id": 7,
+                "status": "published",
+                "is_public": true,
+                "is_indexable": true,
+                "sitemap_eligible": true,
+                "llms_eligible": true,
+                "review_state": "approved",
+                "last_reviewed_at": null,
+                "content_sha256": "650b64675e623ae1e3ee006ce237572681a2b516fd3bb937aa7c8ea70aeacb4c",
+                "seo_sha256": "da24a2fe07751358f8dce39d12de2655d1197ed06d2b68382928526e8a660e6c"
+            },
+            "gsc_page": {
+                "current_clicks": 0,
+                "previous_clicks": 0,
+                "click_delta": 0,
+                "current_impressions": 22,
+                "previous_impressions": 46,
+                "impression_delta": -24,
+                "current_position": 7.41,
+                "previous_position": 6.96
+            },
+            "query_export": {
+                "zip_sha256": "6e667e465c2ad520702f1ccbe0cfc19e1fd7fdb8802c99a359c950d0ba4f0131",
+                "csv_sha256": "1a22f46beaee8ae61bdc41eb052488dcb47b225afec8a6817c7baba3384e2f97",
+                "raw_row_count": 3,
+                "retained_query_count": 3,
+                "excluded_site_operator_count": 0,
+                "excluded_brand_or_mixed_count": 0,
+                "evidence_state": "available"
+            },
+            "proposed_recovery": {
+                "title_candidate": "IQ 测试工具怎么选与怎么读：分数、常模、误差和适用边界",
+                "meta_description_candidate": "了解 IQ 测试的常模、信度、测量误差与适用范围；在线结果只能作为结构化参考，不能代替专业评估或决定教育与职业。",
+                "visible_section_actions": [
+                    "explain_norms_reliability_and_measurement_error",
+                    "distinguish_online_reference_from_professional_assessment",
+                    "add_context_and_cultural_compatibility_limits",
+                    "remove_any_fixed_ability_or_destiny_language"
+                ]
+            },
+            "source_refs": [
+                {
+                    "id": "testing-standards-2014",
+                    "url": "https://www.testingstandards.net/",
+                    "authority_type": "joint_professional_standard"
+                },
+                {
+                    "id": "intelligence-and-iq-education-review",
+                    "url": "https://doi.org/10.1080/01443410500344696",
+                    "authority_type": "peer_reviewed_review"
+                },
+                {
+                    "id": "iq-testing-educational-intervention-review",
+                    "url": "https://doi.org/10.3390/jintelligence3040137",
+                    "authority_type": "peer_reviewed_open_review"
+                }
+            ],
+            "claim_boundary": {
+                "allowed_claims": [
+                    "well-constructed tests can support bounded interpretations for intended uses",
+                    "score interpretation depends on norms, uncertainty, context, and purpose"
+                ],
+                "prohibited_claims": [
+                    "an online score is a diagnosis or fixed measure of worth",
+                    "a score determines education, hiring, income, or future outcomes",
+                    "different instruments or norms are interchangeable without evidence"
+                ],
+                "required_disclaimer": "在线结果仅供结构化参考，不能替代合格专业人员在明确目的、常模与情境下进行的正式评估。"
+            },
+            "page_evidence_id": "page_7d5b318ddae0f6e0c116d6786bbabb98"
+        }
+    ],
+    "query_owner": {
+        "policy": "owner_conflict_checked_before_counts_only_sanitization",
+        "cross_target_conflict_count": 0,
+        "conflict_state": "pass",
+        "suppressed_target_count": 1,
+        "suppressed_target_policy": "manual_review_hold_no_query_claim",
+        "raw_query_persisted": false,
+        "unkeyed_query_digest_persisted": false
+    },
+    "manual_review_gate": {
+        "status": "pending",
+        "required_checks": [
+            "exact_target_set_sha_matches",
+            "current_content_sha_matches",
+            "current_seo_sha_matches",
+            "query_owner_conflict_count_is_zero",
+            "source_refs_support_visible_claims",
+            "claim_boundaries_are_visible",
+            "suppressed_query_target_is_explicitly_reviewed",
+            "candidate_title_and_description_are_approved"
+        ],
+        "reviewer_identity_required": true,
+        "reviewed_target_sha_required": true,
+        "bypass_allowed": false
+    },
+    "observation_contract": {
+        "anchor": "future_manual_publish_receipt.published_at",
+        "windows": [
+            "D1",
+            "D7",
+            "D14",
+            "D28"
+        ],
+        "metrics": [
+            "page_clicks",
+            "page_impressions",
+            "page_ctr",
+            "page_average_position",
+            "query_owner_conflicts",
+            "canonical_robots_and_indexability"
+        ],
+        "second_batch_locked_until": "D28_review_completed",
+        "automatic_second_batch_allowed": false
+    },
+    "target_set_sha256": "f893df6f17ab964a04c5fe371627baedeb4cc4e42507ce77538d87d7f3bfa9ce",
+    "negative_guarantees": {
+        "database_write": false,
+        "cms_write": false,
+        "cms_publish": false,
+        "indexability_write": false,
+        "new_url": false,
+        "search_channel_enqueue": false,
+        "url_submission": false,
+        "scheduler": false,
+        "queue": false,
+        "deploy": false
+    }
+}

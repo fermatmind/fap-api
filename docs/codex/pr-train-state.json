@@ -100114,8 +100114,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-QUERY-OWNER-URL-TRUTH-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "dc7d34a4215a811ca3f1e8ff03febee1061fd00d",
+    "status": "merged",
+    "commit_sha": "cd82192229928c9e1ad9e3329f9dec1a6a25b848",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
     "checks": {
       "dependency": {
@@ -100142,9 +100142,9 @@
       "post_merge_revalidated": false
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-26T03:11:16Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -100247,8 +100247,259 @@
         "at": "2026-07-26T03:02:51Z",
         "status": "ready_to_merge",
         "note": "All 9 required checks passed on final ledger head b8daa28069c8a4602dc0db20951adcd63add3f8e after eleven same-scope review repairs. GitHub reports CLEAN and MERGEABLE, all review threads are resolved, and the exact branch scope remains 7/7 authorized paths. Recording ready_to_merge before the final ledger-only head is rechecked."
+      },
+      {
+        "at": "2026-07-26T04:57:28Z",
+        "status": "merged",
+        "note": "Reconciled the stale Task 7 ledger from external truth: GitHub reports PR #3283 MERGED at cd82192229928c9e1ad9e3329f9dec1a6a25b848 on 2026-07-26T03:11:16Z, origin/main contains that merge commit, the remote task branch is absent, and no local task branch or worktree remains. This bookkeeping reconciliation performs no production, CMS, database, search, indexing, or deploy action."
       }
     ],
-    "updated_at": "2026-07-26T03:02:51Z"
-  }
+    "updated_at": "2026-07-26T04:57:28Z"
+  },
+  "SEO-10K-ARTICLE-RECOVERY-BATCH-01": {
+    "id": "SEO-10K-ARTICLE-RECOVERY-BATCH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-10k-article-recovery-batch-01",
+    "title": "SEO-10K-ARTICLE-RECOVERY-BATCH-01 recover five existing article owners",
+    "depends_on": [
+      "SEO-10K-GSC-BOUNDED-BACKFILL-01",
+      "SEO-QUERY-OWNER-URL-TRUTH-01",
+      "SEO-SEARCH-TO-RESULT-FUNNEL-01"
+    ],
+  "status": "ready_to_merge",
+  "commit_sha": "eb1f3d22a017a6bf7edefbbb39cb4e060c1b7859",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 3 merge 3f4648e2e166e8d482009a5c3ef864489703e013, Task 6 merge bd5d317c76cc6f858bc0e2f3c853df2bef248d94, and Task 7 merge cd82192229928c9e1ad9e3329f9dec1a6a25b848 are all ancestors of exact fap-api origin/main."
+      },
+    "live_gsc_evidence": {
+      "status": "contextual_candidate_ranking_passed_formal_readmodel_blocked",
+      "evidence": "A live authenticated GSC browser export compared 2026-06-26..2026-07-23 against 2026-05-29..2026-06-25 and bound all 54 article rows, the exact rank-5/rank-6 cutoff, and five deterministic candidates. The cohort now uses random opaque page evidence IDs whose URL mapping is not persisted; raw non-target URLs and dictionary-reversible unkeyed URL digests are absent. The query summary retains only per-target counts, exclusions, and privacy state after a pre-sanitization zero-conflict owner check; raw queries and unkeyed query digests are absent. One target remains explicitly privacy-threshold-suppressed. This browser export is contextual candidate-ranking evidence only: the eligible production live_gsc_api readmodel currently covers 0/54 article owners, so the formal gate is blocked and the batch is not approval eligible."
+      },
+      "current_public_authority": {
+        "status": "passed",
+        "evidence": "All five exact URLs returned HTTP 200 from the backend public article authority and were verified published, public, indexable, sitemap-eligible, llms-eligible, and review-approved. The evidence locks each current content/SEO SHA plus target-set SHA f893df6f17ab964a04c5fe371627baedeb4cc4e42507ce77538d87d7f3bfa9ce."
+      },
+    "focused_recovery_tests": {
+      "status": "passed",
+      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, opaque page IDs, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, query-count conservation, source/claim boundaries, exact recursive evidence schemas, query-free public source URLs, exact observation anchor/windows/metrics/second-batch lock, canonical locally emitted blocked formal-readmodel gate, exact nonfuture observation chronology, query-export plus complete global and per-target GSC/ranking/authority review binding, symlink-safe atomic artifact writes, exact FermatMind web property provenance, raw export hashes/counts, and independently complete recovery title/description candidates. Recovery plus ReviewPolicyRegistry passed 42 tests / 723 assertions."
+      },
+    "required_local_checks": {
+      "status": "passed_review_repairs",
+      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 42 tests / 723 assertions. Scoped Pint and git diff --check passed; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and operator-authorized Big Five freeze-classifier checks remain passed. The documented command intentionally exits 1, repeats with changed=false, and reports business_write=false, blocked_formal_gsc_readmodel_gate, package SHA ec37f9d1f0bfacab313639c8500e63d7330d2f7d59358f2f4b557e53a8fc3c5e, artifact SHA 376ca12fbd3c7f8d6f818f4471c9cf9c161687337d36863c59d524d834143bbb, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
+      },
+    "github_required_checks": {
+      "status": "passed",
+      "evidence": "All nine GitHub checks passed at exact head 927133fdb4b6f1e24ff2d2285abfc78c7d37058c, including verify-bigfive. Exact-head Codex review reported no major issues and there are zero active unresolved non-outdated threads. The reviewed implementation candidate is eb1f3d22a017a6bf7edefbbb39cb4e060c1b7859."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+  "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-26T04:57:28Z",
+        "status": "implementation_in_progress",
+        "note": "Started Task 8 from fap-api origin/main after all three declared dependencies were verified merged. Live GSC page/query evidence and current backend public article authority were captured into sanitized SHA-bound artifacts. Scope is exactly five existing article recovery review plans and a deterministic local dry-run package; no CMS/database write, publication, canonical/indexability/sitemap/llms change, raw query storage, Search Channel action, URL/sitemap submission, scheduler, queue, deploy, or second batch is authorized or attempted."
+      },
+      {
+        "at": "2026-07-26T05:07:25Z",
+        "status": "local_checks_passed",
+        "note": "Rebased onto exact latest origin/main c78872709d794e52a87e71d30b969d630fde1b50 and completed every manifest check. Final Task 8 tests passed 4/84, including committed artifact byte equality and fail-closed drift cases; scoped Pint, Composer validation/audit, command discovery, PHP syntax, artifact idempotence, YAML/JSON, diff, and exact 9/9 scope checks all passed. GSC browser tabs were finalized to one page-level handoff tab. No CMS/database/publication/indexability/sitemap/llms/Search Channel/indexing/scheduler/queue/deploy action occurred."
+      },
+      {
+        "at": "2026-07-26T05:08:28Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact nine-path Task 8 branch and opened PR #3295 with what changed, why, validation, deferred operations, and repository-rule impact. GitHub required checks are pending. No production, CMS, database, publication, indexing, Search Channel, scheduler, queue, or deploy action occurred."
+      },
+    {
+      "at": "2026-07-26T05:18:05Z",
+      "status": "github_required_check_failed_scope_authority_needed",
+      "note": "At exact head 830110343cc48ceb6313bc5a923c4a0fef927bcf, all required checks except verify-bigfive passed. Big Five itself passed 1599 tests with 1 skipped and failed only the branch-diff freeze assertion, which rejects exactly the Task 8 command, planner, and three sanitized content-pack JSON artifacts. The narrow repair belongs in BigFiveResultPageV2CoreBodyPreviewTest.php, but existing authorization for that path is explicitly limited to Tasks 2, 6, and 7. No out-of-scope edit was made; Task 8 awaits exact scope authority."
+    },
+    {
+      "at": "2026-07-26T05:36:15Z",
+      "status": "review_repairs_passed_formal_readmodel_gate_blocked",
+      "note": "Resolved all three automated review findings within existing Task 8 allowed paths. The browser export is now explicitly contextual-only and binds the complete 54-row article cohort plus rank-5/rank-6 cutoff; raw query persistence is explicitly false; and approval requires a separate exact-SHA production live_gsc_api gate artifact. Current eligible readmodel coverage is 0/54 because the prior 10-row controlled canary covers only the zh MBTI test page, so the command deterministically writes an audit candidate package, returns nonzero, and cannot enter manual recovery approval. Focused tests passed 7/103; scoped Pint, Composer validate/audit, YAML/JSON parsing, and diff checks passed. No CMS/database/publication/indexability/sitemap/llms/Search Channel/indexing/scheduler/queue/deploy action occurred. The independent verify-bigfive classifier scope authorization is still required before PR merge."
+    },
+    {
+      "at": "2026-07-26T05:40:16Z",
+      "status": "review_hardening_passed_scope_hold_unchanged",
+      "note": "Resolved three additional automated P2 findings inside the existing planner/test scope: GSC counts now require exact nonnegative integers with valid click/impression relationships, the manual-review gate requires the exact documented checklist, and source URLs reject userinfo, fragments, and credential-bearing query parameters. Focused tests passed 10/113 and scoped Pint/diff checks passed. The formal production readmodel remains fail-closed at 0/54 article coverage, and the independent verify-bigfive classifier path authorization remains the only code-PR scope hold."
+    },
+    {
+      "at": "2026-07-26T05:49:44Z",
+      "status": "github_required_check_failed_scope_authority_needed",
+      "note": "At final review-repaired head d6d5b01f83cd3c5803d9dc3ab50d34b23a63fbe3, hygiene, supply-chain, content-pack validation, Semgrep, verify-mbti-legacy, and verify-mbti-v2 passed. verify-bigfive alone failed after 1599 tests passed with 1 skipped; its branch-diff classifier rejects exactly six Task 8 files: the command, planner, live GSC evidence, full 54-row page cohort, query hashes, and deterministic dry-run artifact. The minimal regression still belongs only in BigFiveResultPageV2CoreBodyPreviewTest.php, which lacks Task 8 path authorization. This ledger transition is held locally for inclusion with that scoped classifier repair so it does not trigger a redundant known-failing CI run."
+    },
+    {
+      "at": "2026-07-26T05:51:44Z",
+      "status": "final_review_repairs_passed_scope_hold_unchanged",
+      "note": "Resolved the latest two automated review findings inside allowed paths: ArticleRecoveryBatchPlanner now declares registered @review-surface article, and every one of the 54 cohort rows validates original JSON rank/count/delta types before ranking, including click/impression relationships. The recovery suite passed 11/116; combined with ReviewPolicyRegistryTest the focused run passed 22/473; scoped Pint and diff checks passed. The independent Big Five runtime-freeze classifier path authorization remains required."
+    },
+    {
+      "at": "2026-07-26T05:57:51Z",
+      "status": "classifier_repair_local_checks_passed_github_checks_pending",
+      "note": "The operator explicitly authorized BigFiveResultPageV2CoreBodyPreviewTest.php for Task 8 only to add the corresponding freeze-classifier regression. The manifest now includes that exact path. The classifier permits only the exact Task 8 command, planner, and four batch-01 evidence/package artifacts while rejecting a future publisher, batch-02 artifact, and Big Five runtime service. The new regression passed 1/2 and the original CI-failing branch-diff assertion passed 1/4. Recovery plus review-registry tests passed 22/473, scoped Pint passed 4 files, YAML/JSON and diff checks passed. The production live_gsc_api readmodel remains intentionally fail-closed at 0/54 article coverage; no recovery approval or production write occurred."
+    },
+    {
+      "at": "2026-07-26T06:01:53Z",
+      "status": "final_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "Resolved two review findings at the classifier-repaired head. The local planner no longer contains any JSON-only path to approval eligibility: even a self-attested pass artifact remains blocked until a future separately scoped backend verifier computes and validates a receipt directly from authoritative seo_gsc_daily rows. Source URL credential detection now parses and decodes query parameter keys, including access%5Ftoken. Recovery plus review-registry tests passed 22/473, both Big Five classifier assertions passed 2/6, scoped Pint passed 4 files, and YAML/JSON/diff checks passed. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
+    },
+    {
+      "at": "2026-07-26T06:12:37Z",
+      "status": "query_review_binding_local_checks_passed_github_checks_pending",
+      "note": "After all nine required checks passed at a1039dccffa05aa06af147809f15e6c24863da4b, the latest Codex review found that review_target_sha256 did not bind the explicit query privacy state and immutable query evidence. Each target hash and visible plan now bind query_evidence_state, retained count, the exact global query-hash artifact SHA, and a target-specific query-hash-set SHA. A mutation regression proves that replacing retained query evidence changes the review target hash. The deterministic blocked package was regenerated: package SHA bde73b919585e09344cbc190e029ba21712b72709831d42626239d2901b1222a, file SHA c0c08b26d874488eb3794c115a2a9455edd82bb320e8b2d8d89c82d384ba6cf0, repeat changed=false. Recovery plus review-registry passed 23/477, Big Five classifier assertions passed 2/6, and Pint/JSON/diff checks passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T06:24:14Z",
+      "status": "privacy_safe_tiebreak_local_checks_passed_github_checks_pending",
+      "note": "After all nine required checks passed at b71dbc55aa5444107182f19ffd0774d5415dadce, the latest Codex review found that equal click/impression delta rows could not prove the declared raw-URL tie-break from a URL-hash-only artifact. The evidence contract and planner now use canonical_url_hash ASC, which is privacy-safe and directly verifiable; the two existing tied groups already conform, the top five and rank-5/rank-6 cutoff remain unchanged, and a tied-row swap regression fails closed. Cascading locks were regenerated: cohort SHA ea018de2a0edc410c0f8bc9f76b9aa745b1008e9aee357df0ee90ace7ba4c0d3, evidence SHA 4f3352ae618a3a430602b941ebc5554faf617a873861838fc39fb2b222411748, package SHA 08b0c812fd357ea4ca5b97fe3b52b2708b6d5f9449d6d398841ab7a3b9308cc1, file SHA 6d15e8a84d76076e08e3b99d1650dd7858c7321a58d138ce7845682cc8460e50, repeat changed=false. Recovery plus review-registry passed 24/480; Big Five classifier passed 2/6; Pint/JSON/diff checks passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T06:40:06Z",
+      "status": "privacy_safe_query_summary_local_checks_passed_github_checks_pending",
+      "note": "After all nine required checks passed at 038dbb4c55effa118ad9fa02955492988da2c759, the latest Codex review identified ordinary query SHA-256 values as dictionary-recoverable. The final tree deletes the 167-digest artifact and replaces it with a counts-only query summary containing per-target retained/excluded counts and privacy state after the pre-sanitization zero-conflict check; raw queries and unkeyed digests are explicitly forbidden. Recovery plus review-registry passed 25/486, Big Five classifier passed 2/6, scoped Pint/Composer/JSON/YAML/diff checks passed, and the deterministic blocked artifact repeated with changed=false. Locks are evidence SHA 4eb7eed7c0d180579bedcb602a6fecffcd7c1f0e5b4aab6adc86074b7cac2de4, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, package SHA ce6b7de3f9063f16aa25442fe9cd7835949beb40587f605e918fa394fbb1dd83, and file SHA 569a9004a4bea57c63b08181d8c6b2a39afe298f885b24dcf95772b7c5caf7ab. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T06:52:56Z",
+      "status": "performance_deterioration_gate_local_checks_passed_github_checks_pending",
+      "note": "After all nine required checks passed at 16743ede43816dae34f668d2bba95b1e75c4f255, the latest Codex review correctly identified that ranks 4 and 5 had click_delta=0 and should not be described as click loss. The manifest, evidence, planner, and operator docs now define eligible performance deterioration as click_delta<0 or click_delta=0 with impression_delta<0; selection still prioritizes click loss, and a regression proves the batch fails closed when fewer than five rows qualify. The five exact targets and cutoff remain unchanged. Recovery plus review-registry passed 26/489, Big Five classifier passed 2/6, Pint/JSON/YAML/diff checks passed, and the deterministic artifact repeated with changed=false. Locks are cohort SHA 523a8213817e5e43412673a877e67a4f8efd0b63934e2770fd7d1fb4065924dd, evidence SHA b3b1e39ad318d8ad59becd61be804e1ba81ff56707489483bfb77b9d21b75fed, package SHA 4eb3fd0bd81aaa576093eff256b1aae6ea96d2f5b65aa9ac48aeb18fc5565985, and file SHA bf492ac42db26ecad6c1383861a1568dc7433c09e83b93d8f4fc131e6dda72fe. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T07:03:04Z",
+      "status": "immutable_package_error_envelope_local_checks_passed_github_checks_pending",
+      "note": "After all nine required checks passed at 24d5f91db915291985a76694d5982618607ad628, the latest Codex review found that artifact-directory/write failures changed package status, ok, and issues after package_sha256 was computed. The command now keeps artifact failures in the outer command.issues envelope and never mutates the planner package; a missing-directory regression proves package SHA/status/issues remain exact. Recovery plus review-registry passed 27/496, Big Five classifier passed 2/6, and scoped Pint passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T07:11:51Z",
+      "status": "query_count_conservation_local_checks_passed_github_checks_pending",
+      "note": "After all nine required checks passed at 8d24c284b79c3213ab516b006d84f5e27bc097aa, the latest Codex review found that query counts could be coerced and did not have to reconcile to raw_row_count. Planner validation now requires every raw, retained, and excluded count in both evidence layers to be an original nonnegative integer and enforces raw = retained + site_operator_excluded + brand_or_mixed_excluded. A malformed/string/negative/conservation regression fails closed, while the review-hash mutation fixture now preserves valid count conservation. Recovery plus review-registry passed 28/501, Big Five classifier passed 2/6, and scoped Pint passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T07:21:18Z",
+      "status": "deleted_query_hash_path_blocked_local_checks_passed_github_checks_pending",
+      "note": "After all nine required checks passed at 1c833ce7faada84e6d045eaadfdb2acf5e09a51e, the latest Codex review found that the final single-commit tree no longer contains live-gsc-query-hashes.v1.json but the runtime-freeze helper still exempted that obsolete path. The allowlist now contains only the six shipped Task 8 command/planner/artifact files, and the removed query-hash path is explicitly asserted blocked alongside a future publisher, batch 02, and Big Five runtime. Both classifier assertions passed 2/6. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T07:29:23Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact reviewed implementation head 0f9fb4fb1c533f847f59cee60544fe46c4a16914, including verify-bigfive. Codex review is bound to that head and its sole finding was the stale ledger commit reference; commit_sha and check evidence now point to the exact reviewed implementation candidate. Exact scope remains the Task 8 allowed paths, including the operator-authorized Big Five freeze-classifier regression only. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
+    },
+    {
+      "at": "2026-07-26T07:44:59Z",
+      "status": "opaque_id_secret_position_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "The ledger-only amendment completed all nine checks, but its refreshed Codex review found three valid P2s. The 54-row page cohort now replaces dictionary-reversible unkeyed URL SHA-256 values with random opaque page evidence IDs whose mapping remains outside Git; the exact five public targets bind those IDs without exposing the 49 non-target URLs. Recursive forbidden-key validation now normalizes and blocks structured secret keys such as api_key, client-secret, authorization, password, signature, and token families. Page positions now require finite nonnegative native integers/floats and target/cohort metrics compare strictly after validation. Recovery plus review-registry passed 31/637, both Big Five classifier assertions passed 2/6, scoped Pint/Composer/JSON/diff checks passed, and the deterministic blocked artifact repeated changed=false with package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T07:54:36Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact reviewed implementation head 9cc66480cbf1e3f976813bf47c0ad105b9d83106, including verify-bigfive. The current-head Codex review found no remaining implementation issue; its sole ledger comment incorrectly treated the still-open PR as merged and was resolved with the repository rule that merge SHA/time/cleanup facts cannot be pre-filled. Exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier test only for the corresponding freeze regression. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:03:34Z",
+      "status": "url_credential_and_documented_sha_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger head completed all nine checks, but its refreshed review found that source URL credential parameters did not yet cover client_secret, refresh_token, authorization, and cookie, and that the documented command still used the pre-opaque-ID evidence SHA. URL query keys now use the same normalized credential-key authority as structured evidence; focused fixtures cover userinfo, percent-encoded access_token, client-secret, refresh_token, authorization, and cookie. The runbook now carries exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03 and the copied command was replayed twice with intentional exit 1, changed=false on repeat, business_write=false, and package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768. Recovery plus review-registry passed 31/639, Big Five classifier passed 2/6, and scoped Pint passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:12:18Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact reviewed repair head bd62fc03eeae1f361874aad55ba56efce0b38ffa, including verify-bigfive. Current-head Codex review completed with no finding and no active unresolved thread. Exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier test only for the corresponding freeze regression. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:21:35Z",
+      "status": "prefixed_url_credential_review_repair_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger head completed all nine checks, but its refreshed review found provider-prefixed credential URL parameters could bypass exact normalized key membership. Source URL validation now rejects each credential key at exact, prefix, or suffix token boundaries; focused coverage proves x-api-key, github_token, and db-password fail closed in addition to userinfo, percent-encoded access_token, client-secret, refresh_token, authorization, and cookie. Recovery plus review-registry passed 31/641, Big Five classifier passed 2/6, and scoped Pint passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:42:39Z",
+      "status": "ready_to_merge",
+      "note": "Resolved the final current-head review findings by enforcing recursive exact allowlists on sanitized query/cohort artifacts, recognizing camel-case and collapsed credential keys, and rejecting private or internal source-reference hosts. Recovery plus ReviewPolicyRegistry passed 33/651, the authorized Big Five freeze-classifier file passed 382/786, scoped Pint and diff checks passed, and all nine GitHub checks passed at exact reviewed implementation head 4b54a3b39c4cffe9a4e1b352236ba498fbbc2243. Exact scope remains the eleven Task 8 allowed paths. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
+    },
+    {
+      "at": "2026-07-26T08:54:44Z",
+      "status": "complete_evidence_schema_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "The ledger-only head passed all nine checks, but current-head review found three additional evidence-boundary gaps. The primary evidence now has an exact recursive schema down through each recovery plan and source reference; source hosts reject numeric noncanonical IP spellings such as 127.1 and octal dotted forms; and GSC windows must be valid, equally sized, consecutive, non-overlapping, and bounded by observed_at. Recovery plus ReviewPolicyRegistry passed 35/667, scoped Pint and diff checks passed. Another worktree was already running a full MBTI/Big Five verification, so no second local full freeze run was started; GitHub required checks are pending. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:57:37Z",
+      "status": "complete_evidence_schema_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "A proactive recursive-schema audit also constrained every allowed list that can reach the candidate package to a true string list, including recovery actions, claims, manual-review checks, observation fields, query exclusions, and top-five opaque IDs; nested objects cannot hide undeclared raw evidence inside those lists. Recovery plus ReviewPolicyRegistry remains green at 35/667, scoped Pint and diff checks pass, and GitHub checks are pending at exact implementation head 143a1960561e1863b44534ac3aa6105aa73a482f. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T09:09:35Z",
+      "status": "review_hash_and_atomic_artifact_repairs_local_checks_passed_github_checks_pending",
+      "note": "After all nine checks passed at the superseded head, current-head review found that the review target hash omitted the per-target private query ZIP/CSV identities and that fixed artifact paths could follow symlinks. Each target review hash and visible plan now bind both validated private export SHAs. Artifact output rejects symlinked directories/destinations and writes through an exclusively created same-directory temporary file followed by atomic rename; regressions prove a victim file is unchanged. Recovery plus ReviewPolicyRegistry passed 37/678, scoped Pint/JSON/diff checks passed, and the deterministic command repeated changed=false with package SHA 543f1099a8cc8efeb9704f03eed912143fdfb356fd5ba5c1015ce0d3a8e07dec and artifact SHA e82c1d750bc3c707edfb2f96bfbb85d73d93fbabc26281957f85337d5346fcc8. GitHub checks are pending; no production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T09:18:24Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact current head 7546f36193db0c195191d6f5a5e1a2d23ab0bd39, including verify-bigfive. Current-head Codex review completed with no active unresolved thread. The ledger binds exact reviewed implementation head 4f98d7b2d6507f64491a350f58534bab6c682d21; exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier regression only. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
+    },
+    {
+      "at": "2026-07-26T09:22:49Z",
+      "status": "gsc_provenance_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger review found three final provenance/completeness gaps. Planner validation now locks the exact sc-domain:fermatmind.com web property and emits both values, requires valid page-export ZIP/CSV SHA-256 plus an original integer row count, and requires title_candidate and meta_description_candidate independently nonempty. Recovery plus ReviewPolicyRegistry passed 38/687, scoped Pint/JSON/diff checks passed, and the deterministic command repeated changed=false with package SHA 057f1e88800b0fea500d0354092318a4461028ebc7c39659428f83129fa399c1 and artifact SHA fca2cca31e48715b51a85ee525873cfcca8358e0fc507afff86f94abdf2950ca. GitHub checks are pending; no production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T09:31:40Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact current head 69218979660d93b435e68c4f1541d9a13b010382, including verify-bigfive. Current-head Codex review completed with no active unresolved thread. The ledger binds exact reviewed implementation head a67697c0c84d4c0bcd2d0a0b00b5fd42ca1c3d0d; exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier regression only. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
+    },
+    {
+      "at": "2026-07-26T09:35:27Z",
+      "status": "ranking_review_binding_and_host_normalization_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger review found that review_target_sha256 omitted rank/GSC evidence and trailing-dot internal hosts could bypass suffix checks. Review material now binds rank, article identity, locale/slug, complete current authority, complete GSC page metrics, query evidence, recovery, sources, and claims. Source validation rejects root-dot absolute spellings and numeric/hex resolver forms. Recovery plus ReviewPolicyRegistry passed 39/690, scoped Pint/diff checks passed, and the deterministic command repeated changed=false with package SHA 7b55d212ceabf0d574e60df6a2c557fdde1b025a06886017fc7cd98bf44d2d4b and artifact SHA 83719bc66b332394ef6a319062f75fbe2d9998df769c42e31220925d1f930d8c. GitHub checks are pending; no production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T09:44:11Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact reviewed head ab49367d23f47c91464c64e805991b20e16f6252, including verify-bigfive. Current-head Codex review is bound to that head with zero active unresolved non-outdated threads. The ledger continues to bind implementation candidate 1a80a68a8738c7570caf0ed756a7c9a048214390; exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier regression only. This ledger-only commit must itself pass all required checks and exact-head review before squash merge. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
+    },
+    {
+      "at": "2026-07-26T09:56:46Z",
+      "status": "observed_at_and_global_gsc_review_binding_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger head passed all nine checks, but exact-head review found that observed_at accepted relative/future timestamps and each target review hash omitted global GSC provenance. Planner validation now requires exact nonfuture UTC observed_at values and every review target binds the full source evidence SHA, page cohort SHA, comparison windows, GSC property/search type, data origin/source engine, and page-export ZIP/CSV/count identity. Regressions reject tomorrow and a future exact timestamp and prove page-export/cohort changes invalidate the target review hash. Recovery plus ReviewPolicyRegistry passed 40 tests / 702 assertions, scoped Pint and diff checks passed, and the deterministic blocked package repeated changed=false with package SHA ec37f9d1f0bfacab313639c8500e63d7330d2f7d59358f2f4b557e53a8fc3c5e and artifact SHA 376ca12fbd3c7f8d6f818f4471c9cf9c161687337d36863c59d524d834143bbb. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T10:10:38Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact head 00f8416f8725222e43367f405b47049b6dbec18f, including verify-bigfive. The exact-head Codex review reported no major issues, all prior findings are repaired, active unresolved non-outdated threads are zero, GitHub reports CLEAN/MERGEABLE, and the isolated worktree is clean. Exact semantic scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier regression only. This final ledger-only commit must itself pass the complete exact-head check and review cycle before squash merge. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T10:21:22Z",
+      "status": "source_query_and_observation_contract_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger head passed all nine checks, but exact-head review found that an unrecognized signed query parameter could preserve a secret-bearing source URL and that observation anchor/metrics were not locked. Source references now reject every query string rather than enumerating credential names. The observation contract now requires future_manual_publish_receipt.published_at, exact D1/D7/D14/D28 windows, the complete ordered six-metric set, D28_review_completed, and automatic_second_batch_allowed=false. Regressions cover sig=TOPSECRET, changed anchors, empty metrics, and partial metrics. Recovery plus ReviewPolicyRegistry passed 41 tests / 711 assertions and scoped Pint/diff checks passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T10:31:19Z",
+      "status": "canonical_formal_readmodel_gate_local_checks_passed_github_checks_pending",
+      "note": "After all nine checks passed at the source-query/observation repair head, exact-head review found that an input formal_readmodel_gate could contradict the planner's fail-closed result and still be copied into the audit package. The planner now requires the complete canonical blocked gate on input and emits a locally constructed blocked gate; mutations to status=passed, eligible coverage, or opportunity_queue_eligible fail closed. Recovery plus ReviewPolicyRegistry passed 42 tests / 723 assertions and scoped Pint/diff checks passed. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T10:45:13Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact head 927133fdb4b6f1e24ff2d2285abfc78c7d37058c, including verify-bigfive. Exact-head Codex review reported no major issues, active unresolved non-outdated threads are zero, GitHub reports CLEAN/MERGEABLE, the isolated worktree is clean, and semantic scope remains exactly eleven allowed Task 8 paths including the operator-authorized Big Five classifier regression only. This final ledger-only commit must itself pass the complete exact-head check and review cycle before squash merge. No production or business write occurred."
+    }
+  ],
+  "updated_at": "2026-07-26T10:45:13Z"
+}
 }
