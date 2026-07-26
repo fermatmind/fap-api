@@ -183,6 +183,8 @@ final class ArticleRecoveryBatchPlanner
                 'page_cohort_artifact_sha256' => $pageCohortArtifact['sha256'],
                 'observed_at' => (string) ($evidence['observed_at'] ?? ''),
                 'data_origin' => (string) data_get($evidence, 'gsc.data_origin', ''),
+                'property' => (string) data_get($evidence, 'gsc.property', ''),
+                'search_type' => (string) data_get($evidence, 'gsc.search_type', ''),
                 'evidence_role' => 'contextual_candidate_ranking_only',
                 'current_window' => (array) data_get($evidence, 'gsc.current_window', []),
                 'previous_window' => (array) data_get($evidence, 'gsc.previous_window', []),
@@ -343,6 +345,18 @@ final class ArticleRecoveryBatchPlanner
         }
         if ((string) data_get($evidence, 'gsc.source_engine', '') !== 'google') {
             $issues[] = 'gsc_source_engine_invalid';
+        }
+        if (data_get($evidence, 'gsc.property') !== 'sc-domain:fermatmind.com'
+            || data_get($evidence, 'gsc.search_type') !== 'web') {
+            $issues[] = 'gsc_property_or_search_type_invalid';
+        }
+        if (! $this->validHash((string) data_get($evidence, 'gsc.page_export.zip_sha256', ''))
+            || ! $this->validHash((string) data_get($evidence, 'gsc.page_export.csv_sha256', ''))) {
+            $issues[] = 'gsc_page_export_hash_invalid';
+        }
+        if (! is_int(data_get($evidence, 'gsc.page_export.total_row_count'))
+            || data_get($evidence, 'gsc.page_export.total_row_count') < self::EXPECTED_TARGET_COUNT) {
+            $issues[] = 'gsc_page_export_count_invalid';
         }
         if ((string) data_get($evidence, 'selection.rule', '') !== 'click_delta_asc_then_impression_delta_asc_then_page_evidence_id_asc') {
             $issues[] = 'selection_rule_invalid';
@@ -891,9 +905,12 @@ final class ArticleRecoveryBatchPlanner
     private function validateRecoveryAndClaims(array $target, string $url, array &$issues): void
     {
         $recovery = (array) ($target['proposed_recovery'] ?? []);
-        $candidateText = trim((string) ($recovery['title_candidate'] ?? '')).' '
-            .trim((string) ($recovery['meta_description_candidate'] ?? ''));
-        if (trim($candidateText) === '' || count((array) ($recovery['visible_section_actions'] ?? [])) < 2) {
+        $titleCandidate = trim((string) ($recovery['title_candidate'] ?? ''));
+        $metaDescriptionCandidate = trim((string) ($recovery['meta_description_candidate'] ?? ''));
+        $candidateText = $titleCandidate.' '.$metaDescriptionCandidate;
+        if ($titleCandidate === ''
+            || $metaDescriptionCandidate === ''
+            || count((array) ($recovery['visible_section_actions'] ?? [])) < 2) {
             $issues[] = 'recovery_plan_incomplete:'.$url;
         }
         foreach (['guaranteed', 'guarantees', 'absolutely accurate', '绝对准确', '保证录用', '保证收入'] as $forbidden) {

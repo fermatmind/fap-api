@@ -53,8 +53,10 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             'a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb',
             data_get($package, 'source_evidence.page_cohort_artifact_sha256')
         );
+        self::assertSame('sc-domain:fermatmind.com', data_get($package, 'source_evidence.property'));
+        self::assertSame('web', data_get($package, 'source_evidence.search_type'));
         self::assertSame(
-            '543f1099a8cc8efeb9704f03eed912143fdfb356fd5ba5c1015ce0d3a8e07dec',
+            '057f1e88800b0fea500d0354092318a4461028ebc7c39659428f83129fa399c1',
             $package['package_sha256']
         );
         self::assertSame(
@@ -634,6 +636,40 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
                 self::assertContains('gsc_comparison_windows_invalid', $package['issues']);
                 self::assertFalse($package['would_write']);
             }
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_requires_exact_gsc_property_export_identity_and_complete_recovery_metadata(): void
+    {
+        [$directory, $evidence] = $this->mutableFixture();
+
+        try {
+            $firstUrl = $evidence['targets'][0]['canonical_url'];
+            $secondUrl = $evidence['targets'][1]['canonical_url'];
+            $evidence['gsc']['property'] = 'sc-domain:example.org';
+            $evidence['gsc']['search_type'] = 'image';
+            $evidence['gsc']['page_export']['zip_sha256'] = '';
+            $evidence['gsc']['page_export']['csv_sha256'] = 'not-a-sha';
+            $evidence['gsc']['page_export']['total_row_count'] = '149';
+            $evidence['targets'][0]['proposed_recovery']['title_candidate'] = '';
+            $evidence['targets'][1]['proposed_recovery']['meta_description_candidate'] = '';
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertFalse($package['ok']);
+            self::assertContains('gsc_property_or_search_type_invalid', $package['issues']);
+            self::assertContains('gsc_page_export_hash_invalid', $package['issues']);
+            self::assertContains('gsc_page_export_count_invalid', $package['issues']);
+            self::assertContains('recovery_plan_incomplete:'.$firstUrl, $package['issues']);
+            self::assertContains('recovery_plan_incomplete:'.$secondUrl, $package['issues']);
+            self::assertFalse($package['would_write']);
         } finally {
             File::deleteDirectory($directory);
         }
