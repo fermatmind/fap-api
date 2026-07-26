@@ -265,6 +265,21 @@ class SitemapGenerator
                 continue;
             }
 
+            $baseCanonical = $this->personalityProfileSeoService->buildCanonicalUrl($row, $locale);
+            if ($this->personalityBaseProfileAllowsIndexing($row, $baseCanonical)) {
+                $lastmod = $row->updated_at
+                    ?? $row->published_at
+                    ?? now();
+                $baseTypeCode = strtolower((string) ($row->canonical_type_code ?: $row->type_code));
+
+                $urls[] = [
+                    'loc' => $baseCanonical,
+                    'lastmod' => $lastmod->toAtomString(),
+                    'slug' => 'personality:base:'.$segment.':'.$baseTypeCode,
+                    'updated_at' => $lastmod->toDateTimeString(),
+                ];
+            }
+
             foreach ($row->variants as $variant) {
                 if (! $variant instanceof PersonalityProfileVariant) {
                     continue;
@@ -524,6 +539,38 @@ class SitemapGenerator
                 ''
             )));
         }
+
+        return $robots !== '' && ! str_contains($robots, 'noindex');
+    }
+
+    private function personalityBaseProfileAllowsIndexing(PersonalityProfile $profile, ?string $canonical): bool
+    {
+        $locale = trim((string) $profile->locale);
+        $segment = $this->personalityProfileSeoService->mapBackendLocaleToFrontendSegment($locale);
+        $baseTypeCode = strtoupper(trim((string) ($profile->canonical_type_code ?: $profile->type_code)));
+        $slug = strtolower(trim((string) $profile->slug));
+
+        if ($segment === ''
+            || ! in_array($locale, PersonalityProfile::SUPPORTED_LOCALES, true)
+            || ! in_array($baseTypeCode, PersonalityProfile::BASE_TYPE_CODES, true)
+            || $slug !== strtolower($baseTypeCode)
+            || ! (bool) $profile->is_public
+            || ! (bool) $profile->is_indexable
+            || (string) $profile->status !== 'published') {
+            return false;
+        }
+
+        if ($profile->published_at !== null && $profile->published_at->isFuture()) {
+            return false;
+        }
+
+        $expectedCanonical = rtrim((string) config('app.frontend_url', config('app.url', '')), '/')
+            .'/'.$segment.'/personality/'.strtolower($baseTypeCode);
+        if ($canonical === null || $canonical !== $expectedCanonical) {
+            return false;
+        }
+
+        $robots = strtolower(trim((string) ($profile->seoMeta?->robots ?? 'index,follow')));
 
         return $robots !== '' && ! str_contains($robots, 'noindex');
     }

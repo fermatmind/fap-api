@@ -10,6 +10,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Models\PersonalityProfile;
 use App\Models\PersonalityPublicContentAsset;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -167,6 +168,49 @@ class SitemapSourceApiTest extends TestCase
         $this->assertContains('https://fermatmind.com/zh/personality/big-five/neuroticism-low', $locs);
         $this->assertContains('https://fermatmind.com/en/personality/big-five/openness', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/personality/big-five/openness-noindex', $locs);
+    }
+
+    public function test_sitemap_source_exports_only_canonical_public_mbti_base_routes(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        foreach (['INTJ', 'ENFP'] as $typeCode) {
+            foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
+                PersonalityProfile::query()->create([
+                    'org_id' => 0,
+                    'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+                    'type_code' => $typeCode,
+                    'canonical_type_code' => $typeCode,
+                    'slug' => strtolower($typeCode),
+                    'locale' => $locale,
+                    'title' => $typeCode.' Personality Type',
+                    'status' => 'published',
+                    'is_public' => true,
+                    'is_indexable' => true,
+                    'published_at' => now()->subMinute(),
+                    'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+                ]);
+            }
+        }
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
+
+        $locs = collect($this->getJson('/api/v0.5/seo/sitemap-source')
+            ->assertOk()
+            ->json('items'))
+            ->pluck('loc')
+            ->filter(static fn (string $location): bool => preg_match('#/(?:en|zh)/personality/[a-z]{4}$#', $location) === 1)
+            ->sort()
+            ->values()
+            ->all();
+
+        $this->assertSame([
+            'https://fermatmind.com/en/personality/enfp',
+            'https://fermatmind.com/en/personality/intj',
+            'https://fermatmind.com/zh/personality/enfp',
+            'https://fermatmind.com/zh/personality/intj',
+        ], $locs);
     }
 
     /**

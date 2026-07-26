@@ -100537,5 +100537,78 @@
     }
   ],
   "updated_at": "2026-07-26T10:45:13Z"
-}
+  },
+  "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02": {
+    "id": "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-per02-mbti-base-type-discoverability-02",
+    "title": "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02: add canonical MBTI base types to sitemap authority",
+    "depends_on": [],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "web_production_dependency": {
+        "status": "passed",
+        "evidence": "SAEP_WEB_PER02_BASE_OWNER_PRODUCTION_READBACK_20260726 records WEB_BASE_OWNER_PRODUCTION_READBACK_PASS for 32/32 base URLs on Web SHA 5e3b2e874c942b3021e662428eb97b3893de0153; this PR does not treat the evidence as an API deployment or acceptance."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "Operator authorized this exact code-only PR lifecycle. Production deployment, CMS/database/cache/Search writes and Checkpoint 116 remain separately controlled."
+      },
+      "focused_mbti_sitemap_tests": {
+        "status": "passed",
+        "evidence": "The changed MBTI base sitemap generator cases and the new sitemap-source API cohort test pass in the isolated worktree."
+      },
+      "full_sitemap_source_suite": {
+        "status": "passed",
+        "evidence": "After rebasing onto independent baseline repair PR #3312 (8ed512841cabf45fc92fa6cf43955333073029e3), the complete SitemapGeneratorTest and SitemapSourceApiTest selection passed: 24 tests, 885 assertions, with only isolated-worktree missing-.env warnings."
+      },
+      "ci_verify_mbti": {
+        "status": "passed",
+        "evidence": "The declared MBTI verification script completed on the rebased worktree; generated Big Five compiled artifacts were restored to the committed bytes and excluded from this PR."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-26T13:00:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from isolated exact origin/main a864792d3b0564503a9e91df039c396dcb68ca78 after the saved Web 32/32 production readback. Scope is sitemap authority, focused tests and train metadata only; no production, CMS/database/cache/Search or deploy action is authorized or executed."
+      },
+      {
+        "at": "2026-07-26T13:25:00Z",
+        "status": "local_validation_partial_external_baseline_failure",
+        "note": "Syntax, Pint, Composer validation/audit, focused MBTI sitemap tests, YAML/JSON parsing, diff checks and exact scope validation passed. The full SitemapSourceApiTest suite has four existing Career runtime projection/cache fixture failures outside this scope; recorded as a required-check-affecting sidecar without changing Career code."
+      },
+      {
+        "at": "2026-07-26T14:40:00Z",
+        "status": "revalidation_in_progress",
+        "note": "Independent baseline repair PR #3312 merged as 8ed512841cabf45fc92fa6cf43955333073029e3 with all nine required checks green. Rebased this PR onto the repaired origin/main; full local validation is now required before push."
+      },
+      {
+        "at": "2026-07-26T14:55:00Z",
+        "status": "local_validation_passed",
+        "note": "The complete declared local validation passed after the rebase: syntax, focused sitemap tests (24 tests/885 assertions), Pint, Composer validation/audit, ci_verify_mbti, YAML/JSON parsing, diff checks and exact seven-file scope validation. Big Five generated validation artifacts were restored and are not part of the PR."
+      }
+    ],
+    "updated_at": "2026-07-26T14:55:00Z"
+  }
 }
