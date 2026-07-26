@@ -99872,8 +99872,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
     ],
-    "status": "github_required_check_failed_scope_authority_needed",
-    "commit_sha": "b13452ebc44165c187162d4637699300169424f3",
+    "status": "same_scope_freeze_classifier_fix_local_passed",
+    "commit_sha": "7d0f927a9c9a5c38916389ef3017834f7541e689",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
     "checks": {
       "dependency": {
@@ -99891,6 +99891,10 @@
       "github_required_checks": {
         "status": "failed",
         "evidence": "Exact head f56f00d6b77495d3f60bba941b993151749f8db0 passed hygiene, supply-chain, content-pack-build-validate, Semgrep, MBTI v2, and MBTI legacy. verify-bigfive failed only BigFiveResultPageV2CoreBodyPreviewTest::runtime_paths_have_no_uncommitted_diff after 1597 tests passed and 1 was skipped: the freeze classifier does not yet exempt this PR's six SEO Intel runtime/migration files."
+      },
+      "same_scope_freeze_classifier_fix": {
+        "status": "passed",
+        "evidence": "The user explicitly added BigFiveResultPageV2CoreBodyPreviewTest.php to Task 6 allowed paths. The narrow exact-file classifier regression passed 2 tests / 6 assertions and proves the six Task 6 runtime/migration files are ignored while a writer, a publish migration, and the Big Five runtime service remain blocked. The Task 6 feature suite passed 11 tests / 69 assertions after merging latest origin/main; scoped Pint passed 8 files; YAML, JSON, diff checks, and exact scope validation passed for all 11/11 authorized paths."
       }
     },
     "scope_validation": {
@@ -99899,7 +99903,7 @@
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
-    "failure_reason": "The required Big Five freeze check needs a narrow classifier regression in backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php. That file is outside Task 6 allowed paths, and the user's latest authorization explicitly limited it to Task 2, so Task 6 cannot modify it without new scope authority.",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -99935,8 +99939,13 @@
         "at": "2026-07-24T06:25:54Z",
         "status": "github_required_check_failed_scope_authority_needed",
         "note": "At exact head f56f00d6b77495d3f60bba941b993151749f8db0, all required checks except verify-bigfive passed. The Big Five job passed 1597 tests with 1 skipped and failed only the branch-diff freeze assertion because six new Task 6 SEO Intel runtime/migration files are not classified as non-Big-Five changes. The narrow repair belongs in BigFiveResultPageV2CoreBodyPreviewTest.php, but the user's existing authorization for that path is explicitly Task-2-only; Task 6 is held for new scope authority and no out-of-scope edit was made."
+      },
+      {
+        "at": "2026-07-26T01:04:51Z",
+        "status": "same_scope_freeze_classifier_fix_local_passed",
+        "note": "The user explicitly authorized BigFiveResultPageV2CoreBodyPreviewTest.php as an eleventh Task 6 allowed path solely for the corresponding freeze-classifier regression. After merging latest origin/main, the exact-file classifier fix passed 2 tests / 6 assertions and the Task 6 feature suite passed 11 tests / 69 assertions. The regression does not exempt adjacent writer, publish-migration, or Big Five runtime files; no production migration, deploy, DB/CMS write, Search Channel action, URL submission, or external API call occurred."
       }
     ],
-    "updated_at": "2026-07-24T06:25:54Z"
+    "updated_at": "2026-07-26T01:04:51Z"
   }
 }

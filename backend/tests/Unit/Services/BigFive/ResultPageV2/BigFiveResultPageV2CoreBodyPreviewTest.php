@@ -2157,6 +2157,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_seo_query_owner_url_truth_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/SeoIntelQueryOwnerUrlTruthReportCommand.php',
+            'backend/app/Models/Seo/QueryFamily.php',
+            'backend/app/Models/Seo/QueryFamilyQuery.php',
+            'backend/app/Models/Seo/QueryUrlBinding.php',
+            'backend/app/Services/SeoIntel/QueryOwnerUrlTruthReadModel.php',
+            'backend/database/migrations/seo_intel/2026_07_24_060000_create_seo_query_owner_url_truth_tables.php',
+        ];
+        $blocked = [
+            'backend/app/Services/SeoIntel/QueryOwnerUrlTruthWriter.php',
+            'backend/database/migrations/seo_intel/2026_07_24_060100_publish_seo_query_owner_url_truth.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_drift_foundation_files(): void
     {
         $changed = [
@@ -6895,6 +6915,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoQueryOwnerUrlTruthFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelDriftFoundationFile($file)) {
                 continue;
             }
@@ -9301,6 +9325,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/SeoIntelUrlTruthHandoffCommand.php',
             'backend/app/Services/SeoIntel/UrlTruthHandoffArtifact.php',
             'backend/app/Services/SeoIntel/UrlTruthInventoryRecordWriter.php',
+        ], true);
+    }
+
+    private function isSeoQueryOwnerUrlTruthFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelQueryOwnerUrlTruthReportCommand.php',
+            'backend/app/Models/Seo/QueryFamily.php',
+            'backend/app/Models/Seo/QueryFamilyQuery.php',
+            'backend/app/Models/Seo/QueryUrlBinding.php',
+            'backend/app/Services/SeoIntel/QueryOwnerUrlTruthReadModel.php',
+            'backend/database/migrations/seo_intel/2026_07_24_060000_create_seo_query_owner_url_truth_tables.php',
         ], true);
     }
 

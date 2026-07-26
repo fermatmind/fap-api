@@ -46926,6 +46926,7 @@ prs:
       - backend/app/Console/Commands/SeoIntelQueryOwnerUrlTruthReportCommand.php
       - backend/database/migrations/seo_intel/2026_07_24_060000_create_seo_query_owner_url_truth_tables.php
       - backend/tests/Feature/SeoIntel/SeoQueryOwnerUrlTruthTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/query-owner-url-truth.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -46935,7 +46936,8 @@ prs:
       - Run a production migration, deploy, or treat GSC, sitemap XML, frontend routes, crawler logs, or search results as authority.
     validation:
       - cd backend && php artisan test tests/Feature/SeoIntel/SeoQueryOwnerUrlTruthTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Models/Seo app/Services/SeoIntel/QueryOwnerUrlTruthReadModel.php app/Console/Commands/SeoIntelQueryOwnerUrlTruthReportCommand.php database/migrations/seo_intel/2026_07_24_060000_create_seo_query_owner_url_truth_tables.php tests/Feature/SeoIntel/SeoQueryOwnerUrlTruthTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_seo_query_owner_url_truth_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Models/Seo app/Services/SeoIntel/QueryOwnerUrlTruthReadModel.php app/Console/Commands/SeoIntelQueryOwnerUrlTruthReportCommand.php database/migrations/seo_intel/2026_07_24_060000_create_seo_query_owner_url_truth_tables.php tests/Feature/SeoIntel/SeoQueryOwnerUrlTruthTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - local/test SQLite php artisan migrate --force
       - cd backend && php artisan route:list --path=api --except-vendor
       - cd backend && composer validate --strict
