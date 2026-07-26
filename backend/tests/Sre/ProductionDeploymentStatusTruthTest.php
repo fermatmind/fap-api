@@ -266,18 +266,19 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             'candidate_only',
             'auto|code_only|candidate_only',
             'RESOLVED_DEPLOY_MODE=candidate_only',
-            'I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.',
+            'I explicitly approve bounded backend inactive candidate materialization for exact SHA ${DEPLOY_SHA} using exact staging run ${STAGING_RUN_ID} from active SHA ${EXPECTED_DEPLOYED_REVISION}, excluding all newer main commits, release ${RELEASE_ID}; distinct inactive release path, zero activation.',
             'I explicitly approve backend exact-active inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}; same revision, distinct release path, zero activation.',
             'candidate_only accepted an empty diff for the exact-active same-SHA inactive-release fast path.',
             'exact-active candidate_only fast path requires staging_run_id to be empty.',
             'Exact-active candidate_only fast path requires the candidate SHA to equal expected_deployed_revision.',
             'Exact-active candidate_only fast path requires the active SHA to remain reachable from latest main.',
             'Exact-active same-SHA candidate_only fast path accepted without staging evidence.',
-            'Inactive candidate materialization requires expected_release_sha to equal latest main.',
+            'Inactive candidate materialization requires expected_release_sha to remain reachable from latest main.',
             'Inactive candidate materialization requires exact-SHA successful staging evidence.',
+            'Inactive candidate materialization excludes newer main commits from this bounded release.',
             'candidate_only materialization requires the current active revision to be an ancestor of the candidate.',
             'candidate_only materialization refused an unexplained empty active-to-candidate diff.',
-            'candidate_only accepted an exact staged latest-main artifact without reusing the code-only cumulative path allowlist.',
+            'candidate_only accepted an exact staged main-ancestor artifact without reusing the code-only cumulative path allowlist.',
         ] as $contract) {
             $this->assertStringContainsString($contract, $eligibility);
         }
@@ -293,14 +294,23 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
 
         foreach ([
             'DEPLOY_TASK=deploy:candidate-only',
+            '- name: Revalidate bounded inactive candidate identities before writes',
+            'Candidate-only pre-write guard requires the control-plane SHA to remain reachable from current main.',
+            'Candidate-only pre-write guard requires the candidate SHA to remain an ancestor of the control plane and current main.',
+            'Candidate-only pre-write guard requires exact staging evidence for the candidate SHA.',
             '- name: Verify exact inactive candidate materialization',
-            'backend.inactive_candidate_materialization.v1',
+            'backend.inactive_candidate_materialization.v2',
             'test \"\$current\" != \"\$candidate\"',
             'test \"\$(tr -d \'\r\n\' < \"\$current/REVISION\")\" = \'$EXPECTED_DEPLOYED_REVISION\'',
             'test \"\$(tr -d \'\r\n\' < \"\$candidate/REVISION\")\" = \'$DEPLOY_SHA\'',
             'candidate_activation: false',
             'active_pointer_changed: false',
             'staging_evidence_waived: $exact_active_candidate_fast_path',
+            'bounded_staged_ancestor: $bounded_staged_ancestor',
+            'newer_main_commits_excluded: $newer_main_commits_excluded',
+            'main_sha_at_write: $main_sha_at_write',
+            'control_workflow_sha256: $control_workflow_sha256',
+            'git show "${WORKFLOW_CONTROL_SHA}:.github/workflows/deploy-production.yml"',
             'cache_write_count: 0',
             'queue_dispatch_count: 0',
             'database_write_count: 0',
@@ -311,6 +321,14 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         ] as $contract) {
             $this->assertStringContainsString($contract, $deploy);
         }
+        $this->assertLessThan(
+            strpos($deploy, '- name: Deploy production with Deployer'),
+            strpos($deploy, '- name: Revalidate bounded inactive candidate identities before writes')
+        );
+        $this->assertTrue(
+            strpos($deploy, '- name: Verify mutation-limited deployed baseline before writes')
+            < strpos($deploy, '- name: Revalidate bounded inactive candidate identities before writes')
+        );
 
         $start = strpos($deployer, "task('deploy:candidate-only', [");
         $this->assertNotFalse($start);

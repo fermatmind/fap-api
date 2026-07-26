@@ -210,13 +210,13 @@ jobs:
                     echo "candidate_only materialization refused an unexplained empty active-to-candidate diff." >&2
                     exit 1
                   fi
-                  echo "candidate_only accepted an exact staged latest-main artifact without reusing the code-only cumulative path allowlist."
+                  echo "candidate_only accepted an exact staged main-ancestor artifact without reusing the code-only cumulative path allowlist."
                 fi
                 RESOLVED_DEPLOY_MODE=candidate_only
                 if [ "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" = true ]; then
                   EXPECTED_APPROVAL="I explicitly approve backend exact-active inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}; same revision, distinct release path, zero activation."
                 else
-                  EXPECTED_APPROVAL="I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+                  EXPECTED_APPROVAL="I explicitly approve bounded backend inactive candidate materialization for exact SHA ${DEPLOY_SHA} using exact staging run ${STAGING_RUN_ID} from active SHA ${EXPECTED_DEPLOYED_REVISION}, excluding all newer main commits, release ${RELEASE_ID}; distinct inactive release path, zero activation."
                 fi
               else
                 CLASSIFICATION_BASE="$EXPECTED_DEPLOYED_REVISION"
@@ -575,13 +575,16 @@ jobs:
                 fi
                 echo "Exact-active same-SHA candidate_only fast path accepted without staging evidence."
               else
-                if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
-                  echo "Inactive candidate materialization requires expected_release_sha to equal latest main." >&2
+                if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$LATEST_MAIN_SHA"; then
+                  echo "Inactive candidate materialization requires expected_release_sha to remain reachable from latest main." >&2
                   exit 1
                 fi
                 if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]; then
                   echo "Inactive candidate materialization requires exact-SHA successful staging evidence." >&2
                   exit 1
+                fi
+                if [ "$DEPLOY_SHA" != "$LATEST_MAIN_SHA" ]; then
+                  echo "Inactive candidate materialization excludes newer main commits from this bounded release."
                 fi
               fi
               ;;
@@ -838,6 +841,58 @@ jobs:
             exit 1
           fi
           echo "mutation-limited deployed baseline verified"
+
+      - name: Revalidate bounded inactive candidate identities before writes
+        id: bounded_candidate_guard
+        if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'candidate_only' }}
+        shell: bash
+        env:
+          STAGING_SHA: ${{ needs.deployment-eligibility.outputs.staging_sha }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$WORKFLOW_CONTROL_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+          git cat-file -e "${WORKFLOW_CONTROL_SHA}^{commit}"
+          MAIN_SHA_AT_WRITE="$(git rev-parse origin/main)"
+          if ! git merge-base --is-ancestor "$WORKFLOW_CONTROL_SHA" "$MAIN_SHA_AT_WRITE"; then
+            echo "Candidate-only pre-write guard requires the control-plane SHA to remain reachable from current main." >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$DEPLOY_SHA" "$WORKFLOW_CONTROL_SHA" \
+            || ! git merge-base --is-ancestor "$DEPLOY_SHA" "$MAIN_SHA_AT_WRITE"; then
+            echo "Candidate-only pre-write guard requires the candidate SHA to remain an ancestor of the control plane and current main." >&2
+            exit 1
+          fi
+
+          BOUNDED_STAGED_ANCESTOR=false
+          if [ "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" = true ]; then
+            if [ "$DEPLOY_SHA" != "$EXPECTED_DEPLOYED_REVISION" ] || [ -n "$STAGING_SHA" ]; then
+              echo "Candidate-only pre-write guard rejected exact-active fast-path identity drift." >&2
+              exit 1
+            fi
+          else
+            if [ "$STAGING_SHA" != "$DEPLOY_SHA" ]; then
+              echo "Candidate-only pre-write guard requires exact staging evidence for the candidate SHA." >&2
+              exit 1
+            fi
+            if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then
+              echo "Candidate-only pre-write guard requires the authorized active revision to remain an ancestor of the candidate." >&2
+              exit 1
+            fi
+            BOUNDED_STAGED_ANCESTOR=true
+          fi
+
+          NEWER_MAIN_COMMITS_EXCLUDED=false
+          if [ "$DEPLOY_SHA" != "$MAIN_SHA_AT_WRITE" ]; then
+            NEWER_MAIN_COMMITS_EXCLUDED=true
+          fi
+          {
+            echo "main_sha_at_write=$MAIN_SHA_AT_WRITE"
+            echo "bounded_staged_ancestor=$BOUNDED_STAGED_ANCESTOR"
+            echo "newer_main_commits_excluded=$NEWER_MAIN_COMMITS_EXCLUDED"
+          } >> "$GITHUB_OUTPUT"
+          echo "Bounded inactive candidate identities revalidated immediately before remote mutation."
 
       - name: Verify immutable standard candidate advances production before writes
         id: standard_baseline_guard
@@ -1183,27 +1238,39 @@ jobs:
           }
           release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           runner_sha256="$(sha256sum backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php | awk '{print $1}')"
-          workflow_sha256="$(sha256sum .github/workflows/deploy-production.yml | awk '{print $1}')"
+          candidate_workflow_sha256="$(sha256sum .github/workflows/deploy-production.yml | awk '{print $1}')"
+          control_workflow_sha256="$(git show "${WORKFLOW_CONTROL_SHA}:.github/workflows/deploy-production.yml" | sha256sum | awk '{print $1}')"
+          main_sha_at_write="${{ steps.bounded_candidate_guard.outputs.main_sha_at_write }}"
+          bounded_staged_ancestor="${{ steps.bounded_candidate_guard.outputs.bounded_staged_ancestor }}"
+          newer_main_commits_excluded="${{ steps.bounded_candidate_guard.outputs.newer_main_commits_excluded }}"
           ssh_retry \
             "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); candidate=\$(readlink -f '$DEPLOY_PATH/releases/$release_name'); test -n \"\$current\"; test -n \"\$candidate\"; test \"\$current\" != \"\$candidate\"; test \"\$(tr -d '\r\n' < \"\$current/REVISION\")\" = '$EXPECTED_DEPLOYED_REVISION'; test \"\$(tr -d '\r\n' < \"\$candidate/REVISION\")\" = '$DEPLOY_SHA'; test -r \"\$candidate/backend/vendor/autoload.php\"; test -r \"\$candidate/backend/bootstrap/app.php\"; test \"\$(sha256sum \"\$candidate/backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php\" | awk '{print \$1}')\" = '$runner_sha256'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
           receipt="$RUNNER_TEMP/backend-inactive-candidate-materialization.json"
           jq -n \
-            --arg contract_version "backend.inactive_candidate_materialization.v1" \
+            --arg contract_version "backend.inactive_candidate_materialization.v2" \
             --arg control_plane_sha "$WORKFLOW_CONTROL_SHA" \
-            --arg deploy_workflow_sha256 "$workflow_sha256" \
+            --arg control_workflow_sha256 "$control_workflow_sha256" \
+            --arg candidate_workflow_sha256 "$candidate_workflow_sha256" \
             --arg staging_run_id "$STAGING_RUN_ID" \
             --argjson exact_active_candidate_fast_path "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" \
+            --argjson bounded_staged_ancestor "$bounded_staged_ancestor" \
+            --argjson newer_main_commits_excluded "$newer_main_commits_excluded" \
             --arg active_revision "$EXPECTED_DEPLOYED_REVISION" \
             --arg candidate_revision "$DEPLOY_SHA" \
             --arg candidate_release "$release_name" \
             --arg runner_sha256 "$runner_sha256" \
+            --arg main_sha_at_write "$main_sha_at_write" \
             '{
               contract_version: $contract_version,
               status: "PASS_INACTIVE_CANDIDATE_MATERIALIZED",
               control_plane_sha: $control_plane_sha,
-              deploy_workflow_sha256: $deploy_workflow_sha256,
+              control_workflow_sha256: $control_workflow_sha256,
+              candidate_workflow_sha256: $candidate_workflow_sha256,
               staging_run_id: $staging_run_id,
               staging_evidence_waived: $exact_active_candidate_fast_path,
+              bounded_staged_ancestor: $bounded_staged_ancestor,
+              newer_main_commits_excluded: $newer_main_commits_excluded,
+              main_sha_at_write: $main_sha_at_write,
               active_revision: $active_revision,
               candidate_revision: $candidate_revision,
               candidate_release: $candidate_release,
