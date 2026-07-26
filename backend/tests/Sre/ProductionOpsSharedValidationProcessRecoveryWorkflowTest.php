@@ -139,8 +139,31 @@ final class ProductionOpsSharedValidationProcessRecoveryWorkflowTest extends Tes
         $this->assertSame(1, substr_count($script, 'sudo -n kill -TERM "$validation_pid"'));
 
         $runner = $this->readRepoFile('scripts/deploy/run_remote_control_process_group.py');
+        $workflow = $this->readRepoFile(
+            '.github/workflows/backend-production-ops-shared-validation-process-recovery.yml',
+        );
+        $this->assertSame(
+            1,
+            preg_match(
+                '/process_group_forward_env_keys="([^"]+)"/',
+                $workflow,
+                $forwardedKeyMatch,
+            ),
+        );
+        foreach (explode(',', $forwardedKeyMatch[1]) as $forwardedKey) {
+            $this->assertStringContainsString(
+                sprintf('"%s"', $forwardedKey),
+                $runner,
+                "{$forwardedKey} is missing from the privileged runner allowlist.",
+            );
+        }
+
         foreach ([
             '"FAILED_RUN_ID"',
+            '"EVIDENCE_SOURCE_PATH_SHA256"',
+            '"EVIDENCE_SOURCE_CONFIG_SHA256"',
+            '"EVIDENCE_TARGET_PATH_SHA256"',
+            '"EVIDENCE_TARGET_CURRENT_SHA256"',
             '"EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256"',
             '"EXPECTED_OPS_WORKER_PID_SHA256"',
             '"EXPECTED_VALIDATION_CONFIG_SHA256"',
