@@ -138,12 +138,14 @@ while IFS=$'\t' read -r article_id slug translation_group_id observed_revision_i
          and .articles[0].sitemap_eligible == true
          and .articles[0].llms_eligible == true
          and (.articles[0].body_hash | test("^[0-9a-f]{64}$"))
-         and .safety_flags.schema_generation_allowed == false
-         and .safety_flags.hreflang_generation_allowed == false
-         and .safety_flags.search_submission_allowed == false
-         and .safety_flags.revalidation_allowed == false
-         and .safety_flags.sitemap_change_allowed == false
-         and .safety_flags.llms_change_allowed == false' \
+         and .safety_flags.slug_lock == true
+         and .safety_flags.canonical_lock == true
+         and .safety_flags.schema_hold == true
+         and .safety_flags.hreflang_hold == true
+         and .safety_flags.search_hold == true
+         and .safety_flags.no_revalidation == true
+         and .safety_flags.no_sitemap == true
+         and .safety_flags.no_llms == true' \
         <<<"$summary" >/dev/null || fail_receipt "article_preflight_contract_failed"
 
     safe_row="$(jq -c \

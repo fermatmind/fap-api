@@ -61,6 +61,18 @@ final class Seo13ArticleDraftProductionOpsWorkflowTest extends TestCase
         $this->assertStringContainsString('--no-revalidation', $runner);
         $this->assertStringContainsString('--no-sitemap', $runner);
         $this->assertStringContainsString('--no-llms', $runner);
+        foreach ([
+            'slug_lock',
+            'canonical_lock',
+            'schema_hold',
+            'hreflang_hold',
+            'search_hold',
+            'no_revalidation',
+            'no_sitemap',
+            'no_llms',
+        ] as $hold) {
+            $this->assertStringContainsString("and .safety_flags.{$hold} == true", $runner);
+        }
         $this->assertStringContainsString('and .articles[0].created_isolated_working_revision == true', $runner);
         $this->assertStringContainsString('and .articles[0].working_revision_status == "human_review"', $runner);
         $this->assertStringContainsString('cms_write_count: 13', $runner);
