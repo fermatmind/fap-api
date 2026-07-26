@@ -9,12 +9,16 @@ use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\ArticleEditorialCompletenessGate;
 use App\Services\Cms\ArticlePublishService;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
+/**
+ * @review-surface article
+ */
 final class ArticlePublishControlled extends Command
 {
     protected $signature = 'articles:publish-controlled
@@ -26,6 +30,12 @@ final class ArticlePublishControlled extends Command
         {--json : Emit a JSON summary}';
 
     protected $description = 'Publish reviewed article drafts only behind an explicit controlled Codex-assisted publish confirmation.';
+
+    public function __construct(
+        private readonly ArticleEditorialCompletenessGate $editorialCompletenessGate,
+    ) {
+        parent::__construct();
+    }
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
@@ -334,6 +344,23 @@ final class ArticlePublishControlled extends Command
             $errors[] = $this->issue('faq_items', 'faq_items_missing', 'FAQ items must be present for controlled SEO article publish.');
         }
 
+        $editorialCompleteness = $this->editorialCompletenessGate->inspect(
+            (string) $article->locale,
+            (string) ($revision?->content_md ?? ''),
+            [
+                'working_revision.title' => (string) ($revision?->title ?? ''),
+                'working_revision.excerpt' => (string) ($revision?->excerpt ?? ''),
+                'working_revision.content_md' => (string) ($revision?->content_md ?? ''),
+                'working_revision.seo_title' => (string) ($revision?->seo_title ?? ''),
+                'working_revision.seo_description' => (string) ($revision?->seo_description ?? ''),
+            ],
+        );
+        foreach ((array) $editorialCompleteness['issues'] as $issue) {
+            if (is_array($issue)) {
+                $errors[] = $issue;
+            }
+        }
+
         return [
             'article_id' => $articleId,
             'slug' => (string) $article->slug,
@@ -353,6 +380,7 @@ final class ArticlePublishControlled extends Command
             'graph_status' => (string) data_get($import?->graph_json, 'status', ''),
             'cta_count' => is_array($ctaSlots) ? count($ctaSlots) : 0,
             'faq_count' => is_array($faqItems) ? count($faqItems) : 0,
+            'editorial_completeness' => $editorialCompleteness,
             'make_indexable' => $makeIndexable,
             'ok' => $errors === [],
             'errors' => $errors,

@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
+use Closure;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use RuntimeException;
@@ -95,6 +96,7 @@ final class ArticlePublishService
         int $currentPublishedRevisionId,
         string $source = 'existing_article_controlled_promotion',
         bool $dispatchFollowUp = true,
+        ?Closure $transactionGuard = null,
     ): Article {
         if ($articleId <= 0) {
             throw new InvalidArgumentException('article_id must be positive.');
@@ -108,7 +110,7 @@ final class ArticlePublishService
             throw new InvalidArgumentException('current_published_revision_id must be positive.');
         }
 
-        $article = DB::transaction(function () use ($articleId, $workingRevisionId, $currentPublishedRevisionId): Article {
+        $article = DB::transaction(function () use ($articleId, $workingRevisionId, $currentPublishedRevisionId, $transactionGuard): Article {
             $article = Article::query()
                 ->withoutGlobalScopes()
                 ->where('id', $articleId)
@@ -182,6 +184,10 @@ final class ArticlePublishService
 
             if (trim((string) $workingRevision->content_md) === '') {
                 throw new InvalidArgumentException('revision content_md must exist before promotion.');
+            }
+
+            if ($transactionGuard instanceof Closure) {
+                $transactionGuard($article, $workingRevision);
             }
 
             $this->articleBodyHeadingGuard->assertNoBodyH1((string) $workingRevision->content_md);

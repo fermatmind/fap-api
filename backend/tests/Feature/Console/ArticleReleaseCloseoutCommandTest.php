@@ -63,6 +63,36 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertFalse($payload['sitemap_llms_mutation_attempted']);
     }
 
+    public function test_closeout_rejects_short_draft_published_revision_even_when_article_projection_is_complete(): void
+    {
+        $article = $this->createReleasedArticle();
+        $article->forceFill([
+            'content_md' => $this->completeZhArticleBody(),
+        ])->save();
+        $article->publishedRevision?->forceFill([
+            'content_md' => "## Draft\n\nBig Five Authority V2 draft candidate pending manual review.\n\n短模板。",
+        ])->save();
+
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => (string) $article->slug,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('BLOCKED_OPERATOR_INPUT', $payload['decision']);
+        $this->assertFalse((bool) data_get($payload, 'checks.editorial_completeness.ok'));
+        $this->assertErrorCode($payload, 'forbidden_draft_marker');
+        $this->assertErrorCode($payload, 'body_han_characters_below_minimum');
+    }
+
     public function test_closeout_blocks_ops_media_library_origin_even_with_explicit_schema_hreflang_holds(): void
     {
         $article = $this->createReleasedArticle([
@@ -507,7 +537,8 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
     {
         $bodyUrl = 'https://api.fermatmind.com/storage/media-library/body.png';
         $article = $this->createReleasedArticle([
-            'content_md' => "# 标题\n\n## execution-plan\n\n<a id=\"answer-block-execution-plan\"></a>\n\n![流程图]({$bodyUrl})",
+            'content_md' => "# 标题\n\n## execution-plan\n\n<a id=\"answer-block-execution-plan\"></a>\n\n![流程图]({$bodyUrl})\n\n"
+                .str_repeat('先核对招生规则和个人条件，再把兴趣测量作为结构化线索，通过小范围比较和复盘逐步缩小选择。', 90),
             'content_html' => "<h2 id=\"execution-plan\">计划</h2><div id=\"answer-block-execution-plan\"></div><img src=\"{$bodyUrl}\">",
             'cover_image_variants' => [
                 'editorial_package_v1' => [
@@ -619,7 +650,7 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
             'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
             'title' => '高考出分后专业太多怎么筛？位次+霍兰德排除清单',
             'excerpt' => '高考出分后，用位次、选科要求、霍兰德职业兴趣测试和排除清单缩小专业范围。',
-            'content_md' => '# 高考出分后专业太多怎么筛？'."\n\n![流程图](https://api.fermatmind.com/storage/media-library/body.png)\n\n正文。",
+            'content_md' => $this->completeZhArticleBody(),
             'content_html' => '<h1>高考出分后专业太多怎么筛？</h1><img src="https://api.fermatmind.com/storage/media-library/body.png">',
             'cover_image_url' => 'https://api.fermatmind.com/storage/media-library/cover.jpg',
             'cover_image_variants' => [
@@ -697,6 +728,13 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         ]);
 
         return $article->fresh(['category', 'tags', 'publishedRevision', 'seoMeta']) ?? $article;
+    }
+
+    private function completeZhArticleBody(): string
+    {
+        return '# 高考出分后专业太多怎么筛？'
+            ."\n\n![流程图](https://api.fermatmind.com/storage/media-library/body.png)\n\n"
+            .str_repeat('先核对招生规则和个人条件，再把兴趣测量作为结构化线索，通过小范围比较和复盘逐步缩小选择。', 90);
     }
 
     private function prepareSeoIntelSqliteConnection(): void
