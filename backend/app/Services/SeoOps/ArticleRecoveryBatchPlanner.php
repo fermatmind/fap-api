@@ -350,6 +350,13 @@ final class ArticleRecoveryBatchPlanner
         if ((string) data_get($evidence, 'selection.eligibility_rule', '') !== self::PERFORMANCE_DETERIORATION_RULE) {
             $issues[] = 'selection_eligibility_rule_invalid';
         }
+        if (! $this->validComparisonWindows(
+            (array) data_get($evidence, 'gsc.previous_window', []),
+            (array) data_get($evidence, 'gsc.current_window', []),
+            (string) ($evidence['observed_at'] ?? ''),
+        )) {
+            $issues[] = 'gsc_comparison_windows_invalid';
+        }
         if ((int) data_get($evidence, 'selection.page_export_article_row_count', 0) < self::EXPECTED_TARGET_COUNT) {
             $issues[] = 'page_export_article_cohort_too_small';
         }
@@ -1099,6 +1106,10 @@ final class ArticleRecoveryBatchPlanner
             ) !== false;
         }
 
+        if (preg_match('/^[0-9.]+$/', $host) === 1) {
+            return false;
+        }
+
         if (! str_contains($host, '.')) {
             return false;
         }
@@ -1117,6 +1128,196 @@ final class ArticleRecoveryBatchPlanner
      */
     private function artifactSchemaKeysAreExact(array $payload, string $schema): bool
     {
+        if ($schema === self::INPUT_SCHEMA) {
+            if (! $this->hasExactKeys($payload, [
+                'schema',
+                'task',
+                'batch_id',
+                'observed_at',
+                'scope',
+                'gsc',
+                'selection',
+                'query_owner',
+                'target_set_sha256',
+                'targets',
+                'manual_review_gate',
+                'observation_contract',
+                'negative_guarantees',
+            ])
+                || ! $this->hasExactKeys((array) ($payload['scope'] ?? []), [
+                    'exact_existing_url_count',
+                    'new_url_allowed',
+                    'database_write_allowed',
+                    'cms_write_allowed',
+                    'publish_allowed',
+                    'indexability_write_allowed',
+                    'search_submit_allowed',
+                    'scheduler_allowed',
+                    'queue_allowed',
+                    'deploy_allowed',
+                ])
+                || ! $this->hasExactKeys((array) ($payload['gsc'] ?? []), [
+                    'data_origin',
+                    'source_engine',
+                    'property',
+                    'search_type',
+                    'current_window',
+                    'previous_window',
+                    'page_export',
+                    'query_summary_artifact',
+                    'page_cohort_artifact',
+                    'formal_readmodel_gate',
+                ])
+                || ! $this->hasExactKeys((array) data_get($payload, 'gsc.current_window', []), ['start', 'end'])
+                || ! $this->hasExactKeys((array) data_get($payload, 'gsc.previous_window', []), ['start', 'end'])
+                || ! $this->hasExactKeys((array) data_get($payload, 'gsc.page_export', []), [
+                    'zip_sha256',
+                    'csv_sha256',
+                    'total_row_count',
+                ])
+                || ! $this->hasExactKeys((array) data_get($payload, 'gsc.query_summary_artifact', []), [
+                    'path',
+                    'sha256',
+                    'schema',
+                    'raw_query_persisted',
+                    'unkeyed_query_digest_persisted',
+                ])
+                || ! $this->hasExactKeys((array) data_get($payload, 'gsc.page_cohort_artifact', []), [
+                    'path',
+                    'sha256',
+                    'schema',
+                    'article_row_count',
+                    'raw_url_persisted',
+                    'unkeyed_url_digest_persisted',
+                    'identifier_model',
+                ])
+                || ! $this->hasExactKeys((array) data_get($payload, 'gsc.formal_readmodel_gate', []), [
+                    'status',
+                    'required_data_origin',
+                    'required_source_engine',
+                    'required_row_source',
+                    'required_data_state',
+                    'required_article_cohort_coverage_count',
+                    'actual_eligible_article_cohort_coverage_count',
+                    'opportunity_queue_eligible',
+                    'reason',
+                ])
+                || ! $this->hasExactKeys((array) ($payload['selection'] ?? []), [
+                    'rule',
+                    'eligibility_rule',
+                    'eligible_scope',
+                    'exact_count',
+                    'page_export_article_row_count',
+                ])
+                || ! $this->hasExactKeys((array) ($payload['query_owner'] ?? []), [
+                    'policy',
+                    'conflict_state',
+                    'cross_target_conflict_count',
+                    'raw_query_persisted',
+                    'unkeyed_query_digest_persisted',
+                    'suppressed_target_count',
+                    'suppressed_target_policy',
+                ])
+                || ! $this->hasExactKeys((array) ($payload['manual_review_gate'] ?? []), [
+                    'status',
+                    'reviewer_identity_required',
+                    'reviewed_target_sha_required',
+                    'bypass_allowed',
+                    'required_checks',
+                ])
+                || ! $this->hasExactKeys((array) ($payload['observation_contract'] ?? []), [
+                    'anchor',
+                    'windows',
+                    'metrics',
+                    'second_batch_locked_until',
+                    'automatic_second_batch_allowed',
+                ])
+                || ! $this->hasExactKeys((array) ($payload['negative_guarantees'] ?? []), [
+                    'database_write',
+                    'cms_write',
+                    'cms_publish',
+                    'indexability_write',
+                    'new_url',
+                    'search_channel_enqueue',
+                    'url_submission',
+                    'scheduler',
+                    'queue',
+                    'deploy',
+                ])) {
+                return false;
+            }
+
+            foreach ((array) ($payload['targets'] ?? []) as $target) {
+                if (! is_array($target)
+                    || ! $this->hasExactKeys($target, [
+                        'rank',
+                        'article_id',
+                        'locale',
+                        'slug',
+                        'canonical_url',
+                        'page_evidence_id',
+                        'current_authority',
+                        'gsc_page',
+                        'query_export',
+                        'proposed_recovery',
+                        'source_refs',
+                        'claim_boundary',
+                    ])
+                    || ! $this->hasExactKeys((array) ($target['current_authority'] ?? []), [
+                        'published_revision_id',
+                        'status',
+                        'is_public',
+                        'is_indexable',
+                        'sitemap_eligible',
+                        'llms_eligible',
+                        'review_state',
+                        'last_reviewed_at',
+                        'content_sha256',
+                        'seo_sha256',
+                        'public_api_http_status',
+                    ])
+                    || ! $this->hasExactKeys((array) ($target['gsc_page'] ?? []), [
+                        'current_clicks',
+                        'previous_clicks',
+                        'click_delta',
+                        'current_impressions',
+                        'previous_impressions',
+                        'impression_delta',
+                        'current_position',
+                        'previous_position',
+                    ])
+                    || ! $this->hasExactKeys((array) ($target['query_export'] ?? []), [
+                        'zip_sha256',
+                        'csv_sha256',
+                        'raw_row_count',
+                        'retained_query_count',
+                        'excluded_site_operator_count',
+                        'excluded_brand_or_mixed_count',
+                        'evidence_state',
+                    ])
+                    || ! $this->hasExactKeys((array) ($target['proposed_recovery'] ?? []), [
+                        'title_candidate',
+                        'meta_description_candidate',
+                        'visible_section_actions',
+                    ])
+                    || ! $this->hasExactKeys((array) ($target['claim_boundary'] ?? []), [
+                        'allowed_claims',
+                        'prohibited_claims',
+                        'required_disclaimer',
+                    ])) {
+                    return false;
+                }
+                foreach ((array) ($target['source_refs'] ?? []) as $sourceRef) {
+                    if (! is_array($sourceRef)
+                        || ! $this->hasExactKeys($sourceRef, ['id', 'url', 'authority_type'])) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         if ($schema === self::QUERY_SCHEMA) {
             if (! $this->hasExactKeys($payload, [
                 'schema',
@@ -1206,6 +1407,49 @@ final class ArticleRecoveryBatchPlanner
         }
 
         return true;
+    }
+
+    /**
+     * @param  array<string, mixed>  $previousWindow
+     * @param  array<string, mixed>  $currentWindow
+     */
+    private function validComparisonWindows(
+        array $previousWindow,
+        array $currentWindow,
+        string $observedAt,
+    ): bool {
+        $previousStart = $this->exactDate((string) ($previousWindow['start'] ?? ''));
+        $previousEnd = $this->exactDate((string) ($previousWindow['end'] ?? ''));
+        $currentStart = $this->exactDate((string) ($currentWindow['start'] ?? ''));
+        $currentEnd = $this->exactDate((string) ($currentWindow['end'] ?? ''));
+
+        try {
+            $observed = new \DateTimeImmutable($observedAt);
+        } catch (\Exception) {
+            return false;
+        }
+
+        if ($previousStart === null || $previousEnd === null || $currentStart === null || $currentEnd === null
+            || $previousStart > $previousEnd
+            || $currentStart > $currentEnd
+            || $currentStart != $previousEnd->modify('+1 day')
+            || $currentEnd > $observed->setTime(0, 0)) {
+            return false;
+        }
+
+        return $previousStart->diff($previousEnd)->days === $currentStart->diff($currentEnd)->days;
+    }
+
+    private function exactDate(string $value): ?\DateTimeImmutable
+    {
+        $date = \DateTimeImmutable::createFromFormat('!Y-m-d', $value);
+        $errors = \DateTimeImmutable::getLastErrors();
+
+        return $date instanceof \DateTimeImmutable
+            && ($errors === false || ($errors['warning_count'] === 0 && $errors['error_count'] === 0))
+            && $date->format('Y-m-d') === $value
+                ? $date
+                : null;
     }
 
     /**

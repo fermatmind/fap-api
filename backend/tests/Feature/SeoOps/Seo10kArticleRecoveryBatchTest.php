@@ -471,6 +471,28 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         }
     }
 
+    public function test_it_rejects_non_allowlisted_fields_in_primary_evidence(): void
+    {
+        [$directory, $evidence] = $this->mutableFixture();
+
+        try {
+            $evidence['targets'][0]['proposed_recovery']['search_terms'] = ['must-not-persist'];
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertFalse($package['ok']);
+            self::assertContains('artifact_field_allowlist_invalid', $package['issues']);
+            self::assertFalse($package['would_write']);
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
     public function test_it_rejects_private_or_internal_source_reference_hosts(): void
     {
         [$directory, $evidence] = $this->mutableFixture();
@@ -486,6 +508,16 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             foreach ($privateUrls as $index => $privateUrl) {
                 $evidence['targets'][$index]['source_refs'][0]['url'] = $privateUrl;
             }
+            $evidence['targets'][0]['source_refs'][] = [
+                'id' => 'shorthand-loopback',
+                'url' => 'https://127.1/private',
+                'authority_type' => 'research',
+            ];
+            $evidence['targets'][1]['source_refs'][] = [
+                'id' => 'octal-loopback',
+                'url' => 'https://0177.0.0.1/private',
+                'authority_type' => 'research',
+            ];
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
             $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
 
@@ -499,6 +531,61 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
                 self::assertContains('source_ref_invalid:'.$target['canonical_url'], $package['issues']);
             }
             self::assertFalse($package['would_write']);
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_requires_valid_consecutive_equal_length_nonfuture_comparison_windows(): void
+    {
+        [$directory, $evidence] = $this->mutableFixture();
+
+        try {
+            $invalidWindows = [
+                [
+                    'previous' => ['start' => '2026-05-29', 'end' => '2026-06-25'],
+                    'current' => ['start' => 'not-a-date', 'end' => '2026-07-23'],
+                    'observed_at' => '2026-07-26T04:35:35Z',
+                ],
+                [
+                    'previous' => ['start' => '2026-05-29', 'end' => '2026-06-25'],
+                    'current' => ['start' => '2026-06-25', 'end' => '2026-07-22'],
+                    'observed_at' => '2026-07-26T04:35:35Z',
+                ],
+                [
+                    'previous' => ['start' => '2026-06-25', 'end' => '2026-05-29'],
+                    'current' => ['start' => '2026-06-26', 'end' => '2026-07-23'],
+                    'observed_at' => '2026-07-26T04:35:35Z',
+                ],
+                [
+                    'previous' => ['start' => '2026-06-26', 'end' => '2026-07-23'],
+                    'current' => ['start' => '2026-07-24', 'end' => '2026-08-20'],
+                    'observed_at' => '2026-07-26T04:35:35Z',
+                ],
+                [
+                    'previous' => ['start' => '2026-05-29', 'end' => '2026-06-25'],
+                    'current' => ['start' => '2026-06-26', 'end' => '2026-07-22'],
+                    'observed_at' => '2026-07-26T04:35:35Z',
+                ],
+            ];
+
+            foreach ($invalidWindows as $invalidWindow) {
+                $mutated = $evidence;
+                $mutated['gsc']['previous_window'] = $invalidWindow['previous'];
+                $mutated['gsc']['current_window'] = $invalidWindow['current'];
+                $mutated['observed_at'] = $invalidWindow['observed_at'];
+                $this->writeJson($directory.'/live-gsc-evidence.v1.json', $mutated);
+                $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+                $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                    $directory.'/live-gsc-evidence.v1.json',
+                    $evidenceSha
+                );
+
+                self::assertFalse($package['ok']);
+                self::assertContains('gsc_comparison_windows_invalid', $package['issues']);
+                self::assertFalse($package['would_write']);
+            }
         } finally {
             File::deleteDirectory($directory);
         }
@@ -756,10 +843,8 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             );
 
             self::assertFalse($package['ok']);
-            self::assertFalse($package['approval_eligible']);
-            self::assertSame('blocked_formal_gsc_readmodel_gate', $package['status']);
-            self::assertSame(['formal_gsc_readmodel_gate_not_passed'], $package['issues']);
-            self::assertSame('blocked_formal_gsc_readmodel_gate', data_get($package, 'manual_review_gate.status'));
+            self::assertSame('blocked', $package['status']);
+            self::assertContains('artifact_field_allowlist_invalid', $package['issues']);
             self::assertFalse($package['would_write']);
         } finally {
             File::deleteDirectory($directory);
