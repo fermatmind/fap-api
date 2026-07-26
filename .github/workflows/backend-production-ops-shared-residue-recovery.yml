@@ -54,6 +54,10 @@ on:
         description: Apply-only exact preserved backup SHA256
         required: false
         type: string
+      expected_foreign_runtime_fingerprint_sha256:
+        description: Apply-only exact current foreign runtime fingerprint from the recovery preflight
+        required: false
+        type: string
       expected_residue_set_sha256:
         description: Apply-only exact sanitized residue-set SHA256
         required: false
@@ -119,7 +123,7 @@ jobs:
       source_current_config_sha256: ${{ steps.validate.outputs.source_current_config_sha256 }}
       target_path_sha256: ${{ steps.validate.outputs.target_path_sha256 }}
       target_current_sha256: ${{ steps.validate.outputs.target_current_sha256 }}
-      foreign_runtime_fingerprint_sha256: ${{ steps.validate.outputs.foreign_runtime_fingerprint_sha256 }}
+      source_foreign_runtime_fingerprint_sha256: ${{ steps.validate.outputs.source_foreign_runtime_fingerprint_sha256 }}
     steps:
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -144,6 +148,7 @@ jobs:
           FAILED_RUN_ATTEMPT: ${{ inputs.failed_run_attempt }}
           EXPECTED_FAILED_CONTROL_PLANE_SHA: ${{ inputs.expected_failed_control_plane_sha }}
           EXPECTED_BACKUP_SHA256: ${{ inputs.expected_backup_sha256 }}
+          EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ inputs.expected_foreign_runtime_fingerprint_sha256 }}
           EXPECTED_RESIDUE_SET_SHA256: ${{ inputs.expected_residue_set_sha256 }}
           EXPECTED_RESIDUE_FILE_COUNT: ${{ inputs.expected_residue_file_count }}
           EXPECTED_VALIDATION_PROCESS_STATE: ${{ inputs.expected_validation_process_state }}
@@ -232,7 +237,7 @@ jobs:
           source_original_config_sha256="$(jq -r '.current_config_sha256' "$evidence_receipt")"
           source_current_config_sha256="$(jq -r '.stripped_source_sha256' "$evidence_receipt")"
           source_target_path_sha256="$(jq -r '.managed_target_path_sha256' "$evidence_receipt")"
-          foreign_runtime_fingerprint_sha256="$(jq -r '.foreign_runtime_fingerprint_sha256' "$evidence_receipt")"
+          source_foreign_runtime_fingerprint_sha256="$(jq -r '.foreign_runtime_fingerprint_sha256' "$evidence_receipt")"
 
           current_evidence_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${CURRENT_EVIDENCE_RUN_ID}")"
           jq -e \
@@ -285,12 +290,13 @@ jobs:
           for hash_value in \
             "$source_path_sha256" "$source_original_config_sha256" \
             "$source_current_config_sha256" "$target_path_sha256" \
-            "$target_current_sha256" "$foreign_runtime_fingerprint_sha256"; do
+            "$target_current_sha256" "$source_foreign_runtime_fingerprint_sha256"; do
             [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
           done
 
           if [ "$MODE" = preflight ]; then
             test -z "$EXPECTED_BACKUP_SHA256"
+            test -z "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
             test -z "$EXPECTED_RESIDUE_SET_SHA256"
             test -z "$EXPECTED_RESIDUE_FILE_COUNT"
             test -z "$EXPECTED_VALIDATION_PROCESS_STATE"
@@ -303,6 +309,7 @@ jobs:
           else
             test "$MODE" = apply
             [[ "$EXPECTED_BACKUP_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256" =~ ^[0-9a-f]{64}$ ]]
             [[ "$EXPECTED_RESIDUE_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
             [[ "$EXPECTED_RESIDUE_FILE_COUNT" =~ ^[1-5]$ ]]
             test "$EXPECTED_VALIDATION_PROCESS_STATE" = absent
@@ -311,7 +318,7 @@ jobs:
             test "$EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256" = "$zero_sha256"
             [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
             [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
-            expected_phrase="I explicitly approve production fap-api cleanup of stale shared-config migration residue from failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT} using recovery preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT}, source v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT} at source control-plane SHA ${EXPECTED_SOURCE_CONTROL_PLANE_SHA}, and current v5 evidence run ${CURRENT_EVIDENCE_RUN_ID} attempt ${CURRENT_EVIDENCE_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} source-path SHA256 ${source_path_sha256} source-original SHA256 ${source_original_config_sha256} source-current SHA256 ${source_current_config_sha256} target-path SHA256 ${target_path_sha256} target-current SHA256 ${target_current_sha256} backup SHA256 ${EXPECTED_BACKUP_SHA256} residue-set SHA256 ${EXPECTED_RESIDUE_SET_SHA256} residue-file-count ${EXPECTED_RESIDUE_FILE_COUNT} validation-process-state ${EXPECTED_VALIDATION_PROCESS_STATE} validation-process-fingerprint SHA256 ${EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256} migration-process-state ${EXPECTED_MIGRATION_PROCESS_STATE} migration-process-fingerprint SHA256 ${EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256} foreign-runtime SHA256 ${foreign_runtime_fingerprint_sha256}; delete only the exact bounded /tmp residue files, preserve the stripped shared source, exact dedicated target, exact backup, main Supervisor programs/PIDs and ops worker, and stop without rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23."
+            expected_phrase="I explicitly approve production fap-api cleanup of stale shared-config migration residue from failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT} using recovery preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT}, source v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT} at source control-plane SHA ${EXPECTED_SOURCE_CONTROL_PLANE_SHA}, and current v5 evidence run ${CURRENT_EVIDENCE_RUN_ID} attempt ${CURRENT_EVIDENCE_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} source-path SHA256 ${source_path_sha256} source-original SHA256 ${source_original_config_sha256} source-current SHA256 ${source_current_config_sha256} target-path SHA256 ${target_path_sha256} target-current SHA256 ${target_current_sha256} backup SHA256 ${EXPECTED_BACKUP_SHA256} residue-set SHA256 ${EXPECTED_RESIDUE_SET_SHA256} residue-file-count ${EXPECTED_RESIDUE_FILE_COUNT} validation-process-state ${EXPECTED_VALIDATION_PROCESS_STATE} validation-process-fingerprint SHA256 ${EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256} migration-process-state ${EXPECTED_MIGRATION_PROCESS_STATE} migration-process-fingerprint SHA256 ${EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256} foreign-runtime SHA256 ${EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256}; delete only the exact bounded /tmp residue files, preserve the stripped shared source, exact dedicated target, exact backup, main Supervisor programs/PIDs and ops worker, and stop without rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23."
             test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
 
             preflight_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
@@ -354,10 +361,11 @@ jobs:
               --arg validation_fingerprint "$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256" \
               --arg migration_state "$EXPECTED_MIGRATION_PROCESS_STATE" \
               --arg migration_fingerprint "$EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256" \
-              --arg foreign_runtime "$foreign_runtime_fingerprint_sha256" \
+              --arg source_foreign_runtime "$source_foreign_runtime_fingerprint_sha256" \
+              --arg foreign_runtime "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
               --arg run_id "$PREFLIGHT_RUN_ID" \
               --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-              '.contract_version == "backend.production_ops_shared_residue_recovery.v2"
+              '.contract_version == "backend.production_ops_shared_residue_recovery.v3"
                and .mode == "preflight"
                and .status == "PASS_PREFLIGHT"
                and .run_id == $run_id
@@ -383,6 +391,7 @@ jobs:
                and .validation_process_fingerprint_sha256 == $validation_fingerprint
                and .migration_process_state == $migration_state
                and .migration_process_fingerprint_sha256 == $migration_fingerprint
+               and .source_foreign_runtime_fingerprint_sha256 == $source_foreign_runtime
                and .foreign_runtime_fingerprint_sha256 == $foreign_runtime
                and .ops_worker_process_count == 1
                and .ops_pending_total == 0
@@ -406,7 +415,7 @@ jobs:
             echo "source_current_config_sha256=$source_current_config_sha256"
             echo "target_path_sha256=$target_path_sha256"
             echo "target_current_sha256=$target_current_sha256"
-            echo "foreign_runtime_fingerprint_sha256=$foreign_runtime_fingerprint_sha256"
+            echo "source_foreign_runtime_fingerprint_sha256=$source_foreign_runtime_fingerprint_sha256"
           } >> "$GITHUB_OUTPUT"
 
   control:
@@ -457,7 +466,8 @@ jobs:
           EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256: ${{ needs.eligibility.outputs.source_current_config_sha256 }}
           EVIDENCE_TARGET_PATH_SHA256: ${{ needs.eligibility.outputs.target_path_sha256 }}
           EVIDENCE_TARGET_CURRENT_SHA256: ${{ needs.eligibility.outputs.target_current_sha256 }}
-          EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ needs.eligibility.outputs.foreign_runtime_fingerprint_sha256 }}
+          SOURCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ needs.eligibility.outputs.source_foreign_runtime_fingerprint_sha256 }}
+          EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ inputs.expected_foreign_runtime_fingerprint_sha256 }}
           EXPECTED_BACKUP_SHA256: ${{ inputs.expected_backup_sha256 }}
           EXPECTED_RESIDUE_SET_SHA256: ${{ inputs.expected_residue_set_sha256 }}
           EXPECTED_RESIDUE_FILE_COUNT: ${{ inputs.expected_residue_file_count }}
@@ -477,7 +487,7 @@ jobs:
           result="$(timeout --signal=TERM --kill-after=10s 180s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' FAILED_RUN_ID='$FAILED_RUN_ID' EVIDENCE_SOURCE_PATH_SHA256='$EVIDENCE_SOURCE_PATH_SHA256' EVIDENCE_SOURCE_ORIGINAL_CONFIG_SHA256='$EVIDENCE_SOURCE_ORIGINAL_CONFIG_SHA256' EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256='$EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256' EVIDENCE_TARGET_PATH_SHA256='$EVIDENCE_TARGET_PATH_SHA256' EVIDENCE_TARGET_CURRENT_SHA256='$EVIDENCE_TARGET_CURRENT_SHA256' EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256='$EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256' EXPECTED_BACKUP_SHA256='$EXPECTED_BACKUP_SHA256' EXPECTED_RESIDUE_SET_SHA256='$EXPECTED_RESIDUE_SET_SHA256' EXPECTED_RESIDUE_FILE_COUNT='$EXPECTED_RESIDUE_FILE_COUNT' EXPECTED_VALIDATION_PROCESS_STATE='$EXPECTED_VALIDATION_PROCESS_STATE' EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256='$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256' EXPECTED_MIGRATION_PROCESS_STATE='$EXPECTED_MIGRATION_PROCESS_STATE' EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256='$EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256' timeout --signal=TERM --kill-after=10s 150s bash -lc 'printf %s $control_b64 | base64 -d | bash'" \
+            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' FAILED_RUN_ID='$FAILED_RUN_ID' EVIDENCE_SOURCE_PATH_SHA256='$EVIDENCE_SOURCE_PATH_SHA256' EVIDENCE_SOURCE_ORIGINAL_CONFIG_SHA256='$EVIDENCE_SOURCE_ORIGINAL_CONFIG_SHA256' EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256='$EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256' EVIDENCE_TARGET_PATH_SHA256='$EVIDENCE_TARGET_PATH_SHA256' EVIDENCE_TARGET_CURRENT_SHA256='$EVIDENCE_TARGET_CURRENT_SHA256' EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256='$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256' EXPECTED_BACKUP_SHA256='$EXPECTED_BACKUP_SHA256' EXPECTED_RESIDUE_SET_SHA256='$EXPECTED_RESIDUE_SET_SHA256' EXPECTED_RESIDUE_FILE_COUNT='$EXPECTED_RESIDUE_FILE_COUNT' EXPECTED_VALIDATION_PROCESS_STATE='$EXPECTED_VALIDATION_PROCESS_STATE' EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256='$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256' EXPECTED_MIGRATION_PROCESS_STATE='$EXPECTED_MIGRATION_PROCESS_STATE' EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256='$EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256' timeout --signal=TERM --kill-after=10s 150s bash -lc 'printf %s $control_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-shared-residue-recovery.err")"
           ssh_rc=$?
           set -e
@@ -522,7 +532,7 @@ jobs:
           test "$(value source_current_config_sha256)" = "$EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256"
           test "$(value target_path_sha256)" = "$EVIDENCE_TARGET_PATH_SHA256"
           test "$(value target_current_sha256)" = "$EVIDENCE_TARGET_CURRENT_SHA256"
-          test "$(value foreign_runtime_fingerprint_sha256)" = "$EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
+          [[ "$(value foreign_runtime_fingerprint_sha256)" =~ ^[0-9a-f]{64}$ ]]
           test "$(value ops_worker_process_count)" = 1
           test "$(value ops_pending_total)" = 0
           test "$(value validation_process_state)" = absent
@@ -544,6 +554,7 @@ jobs:
             test "$(value production_write_execution)" = false
             test "$(value deleted_residue_file_count)" = 0
           else
+            test "$(value foreign_runtime_fingerprint_sha256)" = "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
             test "$(value status)" = PASS_APPLY
             test "$(value production_write_execution)" = true
             test "$(value deleted_residue_file_count)" = "$EXPECTED_RESIDUE_FILE_COUNT"
@@ -557,6 +568,7 @@ jobs:
           EVIDENCE_RUN_ID: ${{ needs.eligibility.outputs.evidence_run_id }}
           EVIDENCE_RUN_ATTEMPT: ${{ needs.eligibility.outputs.evidence_run_attempt }}
           SOURCE_CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.source_control_plane_sha }}
+          SOURCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ needs.eligibility.outputs.source_foreign_runtime_fingerprint_sha256 }}
           CURRENT_EVIDENCE_RUN_ID: ${{ needs.eligibility.outputs.current_evidence_run_id }}
           CURRENT_EVIDENCE_RUN_ATTEMPT: ${{ needs.eligibility.outputs.current_evidence_run_attempt }}
           FAILED_RUN_ID: ${{ needs.eligibility.outputs.failed_run_id }}
@@ -585,7 +597,7 @@ jobs:
           set -euo pipefail
           receipt="$RUNNER_TEMP/backend-production-ops-shared-residue-recovery.json"
           jq -n \
-            --arg contract_version "backend.production_ops_shared_residue_recovery.v2" \
+            --arg contract_version "backend.production_ops_shared_residue_recovery.v3" \
             --arg mode "$MODE" \
             --arg status "$STATUS" \
             --arg run_id "$GITHUB_RUN_ID" \
@@ -593,6 +605,7 @@ jobs:
             --arg evidence_run_id "$EVIDENCE_RUN_ID" \
             --arg evidence_run_attempt "$EVIDENCE_RUN_ATTEMPT" \
             --arg source_control_plane_sha "$SOURCE_CONTROL_PLANE_SHA" \
+            --arg source_foreign_runtime_fingerprint_sha256 "$SOURCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
             --arg current_evidence_run_id "$CURRENT_EVIDENCE_RUN_ID" \
             --arg current_evidence_run_attempt "$CURRENT_EVIDENCE_RUN_ATTEMPT" \
             --arg failed_run_id "$FAILED_RUN_ID" \
@@ -626,6 +639,7 @@ jobs:
               evidence_run_id: $evidence_run_id,
               evidence_run_attempt: $evidence_run_attempt,
               source_control_plane_sha: $source_control_plane_sha,
+              source_foreign_runtime_fingerprint_sha256: $source_foreign_runtime_fingerprint_sha256,
               current_evidence_run_id: $current_evidence_run_id,
               current_evidence_run_attempt: $current_evidence_run_attempt,
               failed_run_id: $failed_run_id,
