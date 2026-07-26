@@ -116,30 +116,13 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->where('landing_surface_id', $home->id)
             ->where('block_key', 'recommended_articles')
             ->firstOrFail();
-        $recommendedArticleItems = data_get($recommendedArticlesBlock->payload_json, 'items', []);
-        $recommendedArticleSlugs = array_map(
-            static fn ($item): string => (string) data_get($item, 'article.slug'),
-            $recommendedArticleItems
-        );
-
         $this->assertSame(
-            [
-                'which-love-script-fits-you-best',
-                'how-personality-shapes-attitude-toward-ai',
-                'how-16-personality-types-talk-to-an-ai-coach',
-                'childhood-dream-job-still-shapes-career-choice',
-                'best-valentines-date-by-personality-and-relationship-science',
-                'are-infj-men-rare-or-socially-silenced',
-            ],
-            $recommendedArticleSlugs
+            'latest_published_indexable',
+            (string) data_get($recommendedArticlesBlock->payload_json, 'selection_mode')
         );
-        $this->assertTrue(
-            collect($recommendedArticleItems)->every(
-                static fn (array $item): bool => data_get($item, 'is_pinned') === true
-            )
-        );
-        $this->assertNotContains('mbti-basics', $recommendedArticleSlugs);
-        $this->assertNotContains('big-five-tool-guide', $recommendedArticleSlugs);
+        $this->assertSame(6, (int) data_get($recommendedArticlesBlock->payload_json, 'limit'));
+        $this->assertSame([], data_get($recommendedArticlesBlock->payload_json, 'pinned_slugs'));
+        $this->assertArrayNotHasKey('items', $recommendedArticlesBlock->payload_json);
 
         $tests = LandingSurface::query()
             ->withoutGlobalScopes()
@@ -509,7 +492,34 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('surface.page_blocks.0.payload_json.items.0.article.canonical_url', 'https://fermatmind.com/zh/articles/recommended-article');
     }
 
-    public function test_home_recommended_articles_auto_sync_latest_articles_and_preserve_explicit_pins(): void
+    public function test_internal_update_rejects_pins_for_latest_home_recommended_articles(): void
+    {
+        $admin = $this->createCmsAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+
+        $this->withSession(['ops_org_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/landing-surfaces/home', [
+                'locale' => 'zh-CN',
+                'status' => 'published',
+                'is_public' => true,
+                'is_indexable' => true,
+                'page_blocks' => [
+                    [
+                        'block_key' => 'recommended_articles',
+                        'block_type' => 'json',
+                        'payload_json' => [
+                            'selection_mode' => 'latest_published_indexable',
+                            'limit' => 6,
+                            'pinned_slugs' => ['editor-pinned-article'],
+                        ],
+                    ],
+                ],
+            ])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['page_blocks.0.payload_json.pinned_slugs']);
+    }
+
+    public function test_home_recommended_articles_select_latest_render_eligible_articles_without_pins(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
@@ -533,6 +543,9 @@ final class LandingSurfacePublicApiTest extends TestCase
             'block_type' => 'json',
             'title' => '推荐阅读',
             'payload_json' => [
+                'selection_mode' => 'latest_published_indexable',
+                'limit' => 6,
+                'pinned_slugs' => [],
                 'items' => [
                     [
                         'is_pinned' => true,
@@ -559,17 +572,27 @@ final class LandingSurfacePublicApiTest extends TestCase
             'published_at' => Carbon::create(2026, 4, 2, 8, 0, 0, 'UTC'),
         ]);
         $this->createArticle([
-            'slug' => 'newest-uploaded-article',
+            'slug' => 'same-date-first',
             'locale' => 'zh-CN',
-            'title' => '最新上传文章',
+            'title' => '同日第一篇',
             'published_at' => Carbon::create(2026, 5, 14, 8, 0, 0, 'UTC'),
         ]);
         $this->createArticle([
-            'slug' => 'second-newest-uploaded-article',
+            'slug' => 'same-date-second',
             'locale' => 'zh-CN',
-            'title' => '第二新文章',
-            'published_at' => Carbon::create(2026, 5, 13, 8, 0, 0, 'UTC'),
+            'title' => '同日第二篇',
+            'published_at' => Carbon::create(2026, 5, 14, 8, 0, 0, 'UTC'),
         ]);
+        $this->createArticle(['slug' => 'latest-three', 'locale' => 'zh-CN', 'published_at' => Carbon::create(2026, 5, 13, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'latest-four', 'locale' => 'zh-CN', 'published_at' => Carbon::create(2026, 5, 12, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'latest-five', 'locale' => 'zh-CN', 'published_at' => Carbon::create(2026, 5, 11, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'latest-six', 'locale' => 'zh-CN', 'published_at' => Carbon::create(2026, 5, 10, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'older-than-limit', 'locale' => 'zh-CN', 'published_at' => Carbon::create(2026, 5, 9, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'noindex-newer', 'locale' => 'zh-CN', 'is_indexable' => false, 'published_at' => Carbon::create(2026, 5, 18, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'private-newer', 'locale' => 'zh-CN', 'is_public' => false, 'published_at' => Carbon::create(2026, 5, 17, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'missing-revision-newer', 'locale' => 'zh-CN', 'published_at' => Carbon::create(2026, 5, 16, 8, 0, 0, 'UTC')], [], false);
+        $this->createArticle(['slug' => 'missing-cover-newer', 'locale' => 'zh-CN', 'cover_image_url' => null, 'published_at' => Carbon::create(2026, 5, 15, 8, 0, 0, 'UTC')]);
+        $this->createArticle(['slug' => 'english-newer', 'locale' => 'en', 'published_at' => Carbon::create(2026, 5, 19, 8, 0, 0, 'UTC')]);
 
         $response = $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-CN&org_id=0');
 
@@ -578,15 +601,17 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertIsArray($items);
         $this->assertSame(
             [
-                'editor-pinned-article',
-                'newest-uploaded-article',
-                'second-newest-uploaded-article',
+                'same-date-second',
+                'same-date-first',
+                'latest-three',
+                'latest-four',
+                'latest-five',
+                'latest-six',
             ],
             array_map(static fn (array $item): string => (string) data_get($item, 'article.slug'), $items)
         );
-        $this->assertTrue((bool) data_get($items[0], 'is_pinned'));
-        $this->assertSame('最新上传文章', (string) data_get($items[1], 'article.title'));
-        $this->assertSame('第二新文章', (string) data_get($items[2], 'article.title'));
+        $this->assertSame([1, 2, 3, 4, 5, 6], array_column($items, 'display_order'));
+        $this->assertTrue(collect($items)->every(static fn (array $item): bool => ! array_key_exists('is_pinned', $item)));
     }
 
     public function test_public_api_skips_malformed_recommended_article_slugs_without_crashing(): void
@@ -677,22 +702,24 @@ final class LandingSurfacePublicApiTest extends TestCase
         $items = data_get($recommendedBlock, 'payload_json.items');
         $this->assertIsArray($items);
         $this->assertCount(6, $items);
-        $this->assertTrue(
-            collect($items)->every(
-                static fn (array $item): bool => data_get($item, 'is_pinned') === true
-            )
-        );
+        $this->assertSame('latest_published_indexable', data_get($recommendedBlock, 'payload_json.selection_mode'));
+        $this->assertSame([], data_get($recommendedBlock, 'payload_json.pinned_slugs'));
 
         $slugs = array_map(static fn (array $item): string => (string) data_get($item, 'article.slug'), $items);
+        $expectedSlugs = Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('locale', 'zh-CN')
+            ->where('is_indexable', true)
+            ->publiclyReadable()
+            ->whereNotNull('published_revision_id')
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->limit(6)
+            ->pluck('slug')
+            ->all();
         $this->assertSame(
-            [
-                'which-love-script-fits-you-best',
-                'how-personality-shapes-attitude-toward-ai',
-                'how-16-personality-types-talk-to-an-ai-coach',
-                'childhood-dream-job-still-shapes-career-choice',
-                'best-valentines-date-by-personality-and-relationship-science',
-                'are-infj-men-rare-or-socially-silenced',
-            ],
+            $expectedSlugs,
             $slugs
         );
 
@@ -713,6 +740,7 @@ final class LandingSurfacePublicApiTest extends TestCase
             $this->assertNotEmpty(data_get($article, 'category.name'));
             $this->assertNotEmpty(data_get($article, 'tags.0.name'));
             $this->assertStringStartsWith('https://fermatmind.com/zh/articles/', (string) data_get($article, 'canonical_url'));
+            $this->assertArrayNotHasKey('is_pinned', $item);
         }
 
         $noindex = Article::query()

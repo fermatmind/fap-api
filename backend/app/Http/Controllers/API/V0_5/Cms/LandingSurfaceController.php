@@ -23,6 +23,8 @@ use Illuminate\Validation\Rule;
 
 final class LandingSurfaceController extends Controller
 {
+    private const RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST = 'latest_published_indexable';
+
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
     ) {}
@@ -107,6 +109,10 @@ final class LandingSurfaceController extends Controller
             'page_blocks.*.sort_order' => ['nullable', 'integer', 'min:0'],
             'page_blocks.*.is_enabled' => ['nullable', 'boolean'],
         ]);
+
+        $validator->after(function (\Illuminate\Validation\Validator $validator) use ($request): void {
+            $this->validateRecommendedArticleBlockPayloads($request->input('page_blocks'), $validator);
+        });
 
         if ($validator->fails()) {
             return response()->json([
@@ -228,6 +234,12 @@ final class LandingSurfaceController extends Controller
 
         $payload = is_array($block->payload_json) ? $block->payload_json : [];
         $items = $payload['items'] ?? null;
+        $selectionMode = $this->recommendedArticleSelectionMode($payload);
+
+        if ($selectionMode === self::RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST) {
+            return $this->latestRecommendedArticlePayloadMap($locale, $orgId);
+        }
+
         if (! is_array($items) || $items === []) {
             return [];
         }
@@ -286,6 +298,51 @@ final class LandingSurfaceController extends Controller
                 (string) $article->slug => $this->recommendedArticleProjection($article),
             ])
             ->all();
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function latestRecommendedArticlePayloadMap(string $locale, int $orgId): array
+    {
+        return Article::query()
+            ->withoutGlobalScopes()
+            ->with($this->recommendedArticleRelations())
+            ->where('org_id', $orgId)
+            ->where('locale', $locale)
+            ->where('is_indexable', true)
+            ->publiclyReadable()
+            ->whereHas('publishedRevision')
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->get()
+            ->filter(fn (Article $article): bool => $this->isRecommendedArticleRenderEligible($article))
+            ->take(6)
+            ->mapWithKeys(fn (Article $article): array => [
+                (string) $article->slug => $this->recommendedArticleProjection($article),
+            ])
+            ->all();
+    }
+
+    private function isRecommendedArticleRenderEligible(Article $article): bool
+    {
+        $revision = $article->publishedRevision;
+        if (! $revision instanceof ArticleTranslationRevision) {
+            return false;
+        }
+
+        if (
+            $this->nullableString($revision->title) === null
+            || $this->nullableString($revision->excerpt) === null
+            || PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url) === null
+            || $this->nullableString($article->cover_image_alt) === null
+            || ! ($article->category instanceof ArticleCategory)
+            || $article->tags->isEmpty()
+        ) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -445,6 +502,46 @@ final class LandingSurfaceController extends Controller
         return max(1, min(12, (int) $limit));
     }
 
+    private function recommendedArticleSelectionMode(array $payload): ?string
+    {
+        $mode = $this->nullableString($payload['selection_mode'] ?? null);
+
+        return $mode === null ? null : strtolower($mode);
+    }
+
+    private function validateRecommendedArticleBlockPayloads(mixed $blocks, \Illuminate\Validation\Validator $validator): void
+    {
+        if (! is_array($blocks)) {
+            return;
+        }
+
+        foreach ($blocks as $index => $block) {
+            if (! is_array($block) || $this->normalizeKey((string) ($block['block_key'] ?? '')) !== 'recommended_articles') {
+                continue;
+            }
+
+            $payload = $block['payload_json'] ?? [];
+            if (! is_array($payload) || $this->recommendedArticleSelectionMode($payload) !== self::RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST) {
+                continue;
+            }
+
+            if (($payload['limit'] ?? null) !== 6) {
+                $validator->errors()->add(
+                    "page_blocks.$index.payload_json.limit",
+                    'latest_published_indexable selection requires limit 6.'
+                );
+            }
+
+            $pinnedSlugs = $payload['pinned_slugs'] ?? [];
+            if (! is_array($pinnedSlugs) || $pinnedSlugs !== []) {
+                $validator->errors()->add(
+                    "page_blocks.$index.payload_json.pinned_slugs",
+                    'latest_published_indexable selection does not allow pinned slugs.'
+                );
+            }
+        }
+    }
+
     private function isPinnedRecommendedArticleItem(array $item): bool
     {
         foreach (['pinned', 'is_pinned', 'pin_to_top', 'is_featured'] as $key) {
@@ -469,6 +566,18 @@ final class LandingSurfaceController extends Controller
     private function enrichRecommendedArticlesPayload(array $payload, array $articleMap): array
     {
         $items = $payload['items'] ?? null;
+        if ($this->recommendedArticleSelectionMode($payload) === self::RECOMMENDED_ARTICLE_SELECTION_MODE_LATEST) {
+            $payload['items'] = collect($articleMap)
+                ->values()
+                ->map(fn (array $article, int $index): array => [
+                    'display_order' => $index + 1,
+                    'article' => $article,
+                ])
+                ->all();
+
+            return $payload;
+        }
+
         if (! is_array($items) || $items === []) {
             return $payload;
         }
