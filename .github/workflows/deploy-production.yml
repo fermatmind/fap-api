@@ -197,44 +197,63 @@ jobs:
                 && [ "$DEPLOY_SHA" = "$EXPECTED_DEPLOYED_REVISION" ]; then
                 EXACT_ACTIVE_CANDIDATE_FAST_PATH=true
               fi
-              CLASSIFICATION_BASE="$EXPECTED_DEPLOYED_REVISION"
-              if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then
-                AUDITED_RUNTIME46_PRODUCTION_SHA="bc0ed833bc9aae1473ab37f1dead2517e1aff618"
-                AUDITED_RUNTIME46_BRIDGE_SHA="49038deb50cda789e4365ea42068832ed28d6023"
-                if [ "$EXPECTED_DEPLOYED_REVISION" != "$AUDITED_RUNTIME46_PRODUCTION_SHA" ] \
-                  || ! git merge-base --is-ancestor "$AUDITED_RUNTIME46_BRIDGE_SHA" "$DEPLOY_SHA"; then
-                  echo "code-only scope classification requires a linear deployed revision or the exact audited Runtime 46 subsumed baseline." >&2
-                  exit 1
+              if [ "$REQUESTED_DEPLOY_MODE" = candidate_only ]; then
+                if [ "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" = true ]; then
+                  echo "candidate_only accepted an empty diff for the exact-active same-SHA inactive-release fast path."
+                else
+                  if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then
+                    echo "candidate_only materialization requires the current active revision to be an ancestor of the candidate." >&2
+                    exit 1
+                  fi
+                  mapfile -t CANDIDATE_CHANGED_FILES < <(git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA")
+                  if [ "${#CANDIDATE_CHANGED_FILES[@]}" -eq 0 ]; then
+                    echo "candidate_only materialization refused an unexplained empty active-to-candidate diff." >&2
+                    exit 1
+                  fi
+                  echo "candidate_only accepted an exact staged latest-main artifact without reusing the code-only cumulative path allowlist."
                 fi
-                CLASSIFICATION_BASE="$(git rev-parse "${EXPECTED_DEPLOYED_REVISION}^")"
-                test "$CLASSIFICATION_BASE" = "781d1636b2c74f5852076a5864b681910a1e0e47"
-                expected_runtime46_diff="$(printf '%s\n' \
-                  $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php' \
-                  $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php' \
-                  $'A\tbackend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php' \
-                  $'M\tbackend/app/Services/Cms/MbtiFullCmsImportService.php' \
-                  $'A\tbackend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json' \
-                  $'A\tbackend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php')"
-                actual_runtime46_diff="$(git diff --no-renames --name-status "$CLASSIFICATION_BASE" "$EXPECTED_DEPLOYED_REVISION")"
-                test "$actual_runtime46_diff" = "$expected_runtime46_diff"
-                while IFS= read -r runtime46_path; do
-                  test -n "$runtime46_path"
-                  test "$(git rev-parse "${EXPECTED_DEPLOYED_REVISION}:${runtime46_path}")" = \
-                    "$(git rev-parse "${DEPLOY_SHA}:${runtime46_path}")"
-                done < <(printf '%s\n' "$expected_runtime46_diff" | cut -f2)
-                echo "code-only scope classification accepted the exact audited Runtime 46 subsumed baseline."
-              fi
-              mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "$CLASSIFICATION_BASE" "$DEPLOY_SHA")
-              if [ "${#CHANGED_FILES[@]}" -eq 0 ]; then
-                if [ "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" != true ]; then
+                RESOLVED_DEPLOY_MODE=candidate_only
+                if [ "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" = true ]; then
+                  EXPECTED_APPROVAL="I explicitly approve backend exact-active inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}; same revision, distinct release path, zero activation."
+                else
+                  EXPECTED_APPROVAL="I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+                fi
+              else
+                CLASSIFICATION_BASE="$EXPECTED_DEPLOYED_REVISION"
+                if ! git merge-base --is-ancestor "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA"; then
+                  AUDITED_RUNTIME46_PRODUCTION_SHA="bc0ed833bc9aae1473ab37f1dead2517e1aff618"
+                  AUDITED_RUNTIME46_BRIDGE_SHA="49038deb50cda789e4365ea42068832ed28d6023"
+                  if [ "$EXPECTED_DEPLOYED_REVISION" != "$AUDITED_RUNTIME46_PRODUCTION_SHA" ] \
+                    || ! git merge-base --is-ancestor "$AUDITED_RUNTIME46_BRIDGE_SHA" "$DEPLOY_SHA"; then
+                    echo "code-only scope classification requires a linear deployed revision or the exact audited Runtime 46 subsumed baseline." >&2
+                    exit 1
+                  fi
+                  CLASSIFICATION_BASE="$(git rev-parse "${EXPECTED_DEPLOYED_REVISION}^")"
+                  test "$CLASSIFICATION_BASE" = "781d1636b2c74f5852076a5864b681910a1e0e47"
+                  expected_runtime46_diff="$(printf '%s\n' \
+                    $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php' \
+                    $'A\tbackend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php' \
+                    $'A\tbackend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php' \
+                    $'M\tbackend/app/Services/Cms/MbtiFullCmsImportService.php' \
+                    $'A\tbackend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json' \
+                    $'A\tbackend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php')"
+                  actual_runtime46_diff="$(git diff --no-renames --name-status "$CLASSIFICATION_BASE" "$EXPECTED_DEPLOYED_REVISION")"
+                  test "$actual_runtime46_diff" = "$expected_runtime46_diff"
+                  while IFS= read -r runtime46_path; do
+                    test -n "$runtime46_path"
+                    test "$(git rev-parse "${EXPECTED_DEPLOYED_REVISION}:${runtime46_path}")" = \
+                      "$(git rev-parse "${DEPLOY_SHA}:${runtime46_path}")"
+                  done < <(printf '%s\n' "$expected_runtime46_diff" | cut -f2)
+                  echo "code-only scope classification accepted the exact audited Runtime 46 subsumed baseline."
+                fi
+                mapfile -t CHANGED_FILES < <(git diff --no-renames --name-only "$CLASSIFICATION_BASE" "$DEPLOY_SHA")
+                if [ "${#CHANGED_FILES[@]}" -eq 0 ]; then
                   echo "code-only scope classification refused an empty deployed-revision diff." >&2
                   exit 1
                 fi
-                echo "candidate_only accepted an empty diff for the exact-active same-SHA inactive-release fast path."
-              fi
-              CODE_ONLY_SCOPE=true
-              for path in "${CHANGED_FILES[@]}"; do
-                case "$path" in
+                CODE_ONLY_SCOPE=true
+                for path in "${CHANGED_FILES[@]}"; do
+                  case "$path" in
                   backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)
                     echo "code-only scope accepted audited personality runtime projection service: $path"
                     ;;
@@ -314,21 +333,17 @@ jobs:
                     CODE_ONLY_SCOPE=false
                     echo "code-only scope refused unknown path: $path" >&2
                     ;;
-                esac
-              done
-              if [ "$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" = true ]; then
-                EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"
-                EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="53e4e854dadee2260637c0288ead58818808bad098c3fce8e2168ea38746ba09"
-                AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="cb248a673e4827a4dcaae3f41f74cffd50d99f73984286cb733e6ba0b935158b"
-                test "$(sha256sum backend/docs/career/publish_track_reconciliation.json | awk '{print $1}')" = \
-                  "$EXPECTED_CAREER_RECONCILIATION_SHA256" || {
-                  echo "code-only scope refused an unreviewed Career reconciliation candidate hash." >&2
-                  exit 1
-                }
-                if [ "$REQUESTED_DEPLOY_MODE" = candidate_only ]; then
-                  REQUIRE_CAREER_CANDIDATE_PREFLIGHT=false
-                  echo "candidate_only validated the Career reconciliation input without reading or repairing the live public cache."
-                else
+                  esac
+                done
+                if [ "$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" = true ]; then
+                  EXPECTED_CAREER_RECONCILIATION_SHA256="98880c3de1473e1dd9ff2466e256a888ccad3620540ad7d42b19d556cefff184"
+                  EXPECTED_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="53e4e854dadee2260637c0288ead58818808bad098c3fce8e2168ea38746ba09"
+                  AUDITED_STALE_CAREER_PUBLIC_CACHE_SUMMARY_SHA256="cb248a673e4827a4dcaae3f41f74cffd50d99f73984286cb733e6ba0b935158b"
+                  test "$(sha256sum backend/docs/career/publish_track_reconciliation.json | awk '{print $1}')" = \
+                    "$EXPECTED_CAREER_RECONCILIATION_SHA256" || {
+                    echo "code-only scope refused an unreviewed Career reconciliation candidate hash." >&2
+                    exit 1
+                  }
                   read_career_public_cache_summary_sha256() {
                     local dataset summary
                     dataset="$(curl --http1.1 --retry 2 --retry-all-errors --connect-timeout 5 --max-time 30 -fsS \
@@ -367,19 +382,10 @@ jobs:
                       ;;
                   esac
                 fi
-              fi
-              if [ "$CODE_ONLY_SCOPE" != true ]; then
-                echo "code-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path; rerun only with an explicit standard deployment approval." >&2
-                exit 1
-              fi
-              if [ "$REQUESTED_DEPLOY_MODE" = candidate_only ]; then
-                RESOLVED_DEPLOY_MODE=candidate_only
-                if [ "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" = true ]; then
-                  EXPECTED_APPROVAL="I explicitly approve backend exact-active inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}; same revision, distinct release path, zero activation."
-                else
-                  EXPECTED_APPROVAL="I explicitly approve backend inactive candidate materialization for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
+                if [ "$CODE_ONLY_SCOPE" != true ]; then
+                  echo "code-only deployment refused: cumulative deployed-revision diff contains a forbidden or unknown path; rerun only with an explicit standard deployment approval." >&2
+                  exit 1
                 fi
-              else
                 RESOLVED_DEPLOY_MODE=code_only
                 EXPECTED_APPROVAL="I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}."
               fi

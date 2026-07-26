@@ -275,10 +275,21 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             'Exact-active same-SHA candidate_only fast path accepted without staging evidence.',
             'Inactive candidate materialization requires expected_release_sha to equal latest main.',
             'Inactive candidate materialization requires exact-SHA successful staging evidence.',
-            'candidate_only validated the Career reconciliation input without reading or repairing the live public cache.',
+            'candidate_only materialization requires the current active revision to be an ancestor of the candidate.',
+            'candidate_only materialization refused an unexplained empty active-to-candidate diff.',
+            'candidate_only accepted an exact staged latest-main artifact without reusing the code-only cumulative path allowlist.',
         ] as $contract) {
             $this->assertStringContainsString($contract, $eligibility);
         }
+
+        $candidateScopeStart = strpos($eligibility, 'if [ "$REQUESTED_DEPLOY_MODE" = candidate_only ]; then');
+        $this->assertNotFalse($candidateScopeStart);
+        $candidateScopeEnd = strpos($eligibility, "              else\n                CLASSIFICATION_BASE=", (int) $candidateScopeStart);
+        $this->assertNotFalse($candidateScopeEnd);
+        $candidateScope = substr($eligibility, (int) $candidateScopeStart, (int) $candidateScopeEnd - (int) $candidateScopeStart);
+        $this->assertStringNotContainsString('CODE_ONLY_SCOPE', $candidateScope);
+        $this->assertStringNotContainsString('backend/database/*', $candidateScope);
+        $this->assertStringNotContainsString('backend/app/Services/Cms/*', $candidateScope);
 
         foreach ([
             'DEPLOY_TASK=deploy:candidate-only',
@@ -322,7 +333,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $runtimeExceptions = 'backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)';
         $subsumedRuntimeExceptions = '.github/workflows/career-detail-production-cache-repair.yml|backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php|backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php|backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php|backend/app/Services/Cms/MbtiCrossPublisher49Package.php|backend/content_assets/personality_public/mbti-cross-approval-48-operator-authorization-r2-2026-07-23.json|backend/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json|docs/04-ops/deploy-incident-runbook.md|docs/seo/career-jobs-index-lkg-resilience-01.md|docs/seo/career-pilot-review-evidence-bridge-01.md)';
         $nonRuntimeExceptions = 'backend/.env.example|backend/scripts/pr71_verify.sh)';
-        $releaseSupportExceptions = '.github/workflows/backend-production-verify-only.yml|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)';
+        $releaseSupportExceptions = '.github/workflows/backend-production-verify-only.yml|.github/workflows/backend-production-ops-queue-control.yml|deploy/supervisor/fap-queue-ops.conf.template|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)';
         $cmsAuthorityWildcard = 'backend/app/Services/Cms/*';
 
         $runtimeExceptionsPosition = strpos($eligibility, $runtimeExceptions);

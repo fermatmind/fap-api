@@ -113,6 +113,7 @@ Prefer a repo-compatible default implementation and mark options as optional.
 
 ### Inactive Candidate Materialization Discipline
 - A backend release needed for candidate-exact offline verification must use the protected `candidate_only` production mode with the exact latest `main` SHA, exact successful staging run, current active `REVISION`, release id, and the workflow-defined exact authorization phrase.
+- `candidate_only` eligibility must validate its exact staged latest-main artifact independently of the `code_only` cumulative path allowlist. Authority, migration, or content files present in the inactive release are not executed or published by this lane; exact staging, latest-main identity, active-to-candidate ancestry, and the no-activation task boundary remain mandatory.
 - `candidate_only` may materialize the managed release, install its exact dependencies, link the existing runtime environment/storage, and build release-local framework caches. It must finish successfully without `deploy:publish`, symlink activation, migration, queue reload, CMS/database authority mutation, publication, discoverability mutation, Career public-cache repair, or active-runtime health/restart actions.
 - The workflow must verify the candidate revision, runner SHA, managed release identity, inactive state, unchanged active revision, and absent deploy lock, then upload only a sanitized receipt. Candidate creation must never rely on an intentionally failed deployment to leave an inactive release.
 
