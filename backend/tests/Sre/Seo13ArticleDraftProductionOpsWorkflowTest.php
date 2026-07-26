@@ -33,6 +33,9 @@ final class Seo13ArticleDraftProductionOpsWorkflowTest extends TestCase
         $this->assertStringContainsString('.revalidation_count == 0', $workflow);
         $this->assertStringContainsString('.sitemap_write_count == 0', $workflow);
         $this->assertStringContainsString('.llms_write_count == 0', $workflow);
+        $this->assertStringContainsString('.status == "FAIL_CLOSED"', $workflow);
+        $this->assertStringContainsString('if: always()', $workflow);
+        $this->assertStringContainsString('exit "$remote_status"', $workflow);
         $this->assertStringContainsString('vars.PRODUCTION_DEPLOY_HOST', $workflow);
         $this->assertStringContainsString('secrets.SSH_PRIVATE_KEY', $workflow);
         $this->assertStringNotContainsString('139.224.', $workflow);
