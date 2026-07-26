@@ -50,6 +50,8 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
             'worker_restart_count: $worker_restart_count',
             'migration_count: $migration_count',
             'automatic_rollback_count: $automatic_rollback_count',
+            'timeout-minutes: 10',
+            'timeout --signal=TERM --kill-after=10s 180s',
             'application_deploy_count: 0',
             'symlink_write_count: 0',
             'application_migration_count: 0',
@@ -108,10 +110,12 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
             'ops-supervisor-migration-backups',
             'install -o root -g root -m 0600 "$source_path" "$backup_path"',
             'CANDIDATE_SET_VALIDATE',
-            '"$supervisord_path" -t -c "$validation_root"',
+            'validate_supervisor_config "$validation_root"',
+            'from supervisor.options import ServerOptions',
+            'ServerOptions().realize(args=["-c", sys.argv[1]])',
             'install -o root -g root -m 0644 "$stripped_candidate" "$source_path"',
             'install -o root -g root -m 0644 "$target_candidate" "$target_path"',
-            '"$supervisord_path" -t',
+            'validate_supervisor_config /etc/supervisor/supervisord.conf',
             'update fap-queue-ops',
             'test "$post_foreign_runtime_fingerprint_sha256" = "$foreign_runtime_fingerprint_sha256"',
             'test "$readback_pid" != "$worker_pid"',
@@ -134,6 +138,8 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
             'restart fap-queue-ops:fap-queue-ops_00',
             'queue=default',
             'queue=reports',
+            '"$supervisord_path" -t',
+            'Supervisord(',
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $script);
         }

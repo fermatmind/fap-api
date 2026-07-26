@@ -78,8 +78,23 @@ test "$deploy_like_process_count" = 0
 
 failure_gate=SUPERVISOR_PATHS
 supervisorctl_path="$(command -v supervisorctl)"
-supervisord_path="$(command -v supervisord)"
+python3_path="$(command -v python3)"
 grep_path="$(command -v grep)"
+
+validate_supervisor_config() {
+  local config_path="$1"
+
+  sudo -n "$python3_path" - "$config_path" >/dev/null 2>&1 <<'PY'
+import sys
+
+from supervisor.options import ServerOptions
+
+if len(sys.argv) != 2:
+    raise SystemExit(2)
+
+ServerOptions().realize(args=["-c", sys.argv[1]])
+PY
+}
 
 foreign_runtime_fingerprint() {
   awk '
@@ -250,14 +265,14 @@ if [ "$MODE" = apply ]; then
     "files=$stripped_candidate $target_candidate" \
     | sudo -n tee "$validation_root" >/dev/null
   sudo -n chmod 0600 "$validation_root"
-  sudo -n "$supervisord_path" -t -c "$validation_root" >/dev/null 2>&1
+  validate_supervisor_config "$validation_root"
 
   failure_gate=SOURCE_INSTALL
   sudo -n install -o root -g root -m 0644 "$stripped_candidate" "$source_path"
   failure_gate=TARGET_INSTALL
   sudo -n install -o root -g root -m 0644 "$target_candidate" "$target_path"
   failure_gate=LIVE_CONFIG_VALIDATE
-  sudo -n "$supervisord_path" -t >/dev/null 2>&1
+  validate_supervisor_config /etc/supervisor/supervisord.conf
   failure_gate=SUPERVISOR_REREAD
   sudo -n "$supervisorctl_path" reread >/dev/null
   failure_gate=SUPERVISOR_UPDATE
