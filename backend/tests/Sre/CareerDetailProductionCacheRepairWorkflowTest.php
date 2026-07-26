@@ -246,6 +246,67 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
     }
 
     #[Test]
+    public function bootstrap_retries_only_an_explicit_transient_runtime_initialization_in_a_fresh_process(): void
+    {
+        $source = $this->workflowSource();
+
+        $this->assertStringContainsString('run_candidate_batch()', $source);
+        $this->assertStringContainsString(
+            '.error_code == "CANDIDATE_RUNTIME_INITIALIZATION_FAILED"',
+            $source,
+        );
+        foreach ([
+            'load_candidate_application',
+            'bootstrap_candidate_kernel',
+            'validate_candidate_services',
+            'install_database_guard',
+            'resolve_candidate_services',
+        ] as $stage) {
+            $this->assertStringContainsString('"'.$stage.'"', $source);
+        }
+        $this->assertStringContainsString('.error_category == "database_transient_read"', $source);
+        $this->assertStringContainsString('.cache_write_count == 0', $source);
+        $this->assertStringContainsString('.owned_cache_write_count == 0', $source);
+        $this->assertStringContainsString('.attempt_count == 1', $source);
+        $this->assertStringContainsString('.retry_count == 0', $source);
+        $this->assertStringContainsString('sleep 0.5', $source);
+        $this->assertStringContainsString('verify_identity', $source);
+        $retryBoundary = substr(
+            $source,
+            (int) strpos($source, 'runtime_initialization_retry_count=$((runtime_initialization_retry_count + 1))'),
+            500,
+        );
+        $this->assertLessThan(
+            strpos($retryBoundary, 'sleep 0.5'),
+            strpos($retryBoundary, 'verify_identity'),
+        );
+        $this->assertLessThan(
+            strpos($retryBoundary, 'run_candidate_batch "$receipt"'),
+            strpos($retryBoundary, 'sleep 0.5'),
+        );
+        $this->assertStringContainsString(
+            'candidate-exact-batch-${offset}-runtime-attempt-1.json',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'runtime_initialization_retry_count=$((runtime_initialization_retry_count + 1))',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'runtime_initialization_retry_limit_per_batch: $runtime_initialization_retry_limit',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'failed outside the safe runtime initialization retry boundary',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'failed after one safe runtime initialization retry',
+            $source,
+        );
+    }
+
+    #[Test]
     public function single_target_diagnostic_is_preflight_bound_one_write_and_identity_redacted(): void
     {
         $source = $this->workflowSource();

@@ -234,11 +234,17 @@ stop immediately. This same rule wraps the candidate's full coverage read
 before each batch: an explicitly classified transient database read gets one
 500ms retry, while a permanent or unclassified failure stops before that batch
 owns any write. Pre-batch failures retain the safe batch offset, stage,
-category, attempt count, and retry count. Candidate-runtime initialization
-failures are classified separately and are never retried. Receipts contain
-only safe failure stage/category, build timings, row-index hash, and pre/post
-coverage fingerprints. They never contain target identity, query text,
-exception text, cache keys, or SSH routing data.
+category, attempt count, and retry count. Candidate-runtime initialization is
+split into application load, kernel bootstrap, service validation, database
+guard installation, and service resolution. If one of those stages reports an
+explicit transient database read with zero writes, the workflow preserves the
+sanitized first-attempt receipt, revalidates exact active/candidate/lock
+identity, waits 500ms, and starts exactly one fresh PHP process. It never
+retries a permanent or unclassified initialization failure, and it never
+reuses a partially initialized Laravel process. Receipts contain only safe
+failure stage/category, build timings, row-index hash, and pre/post coverage
+fingerprints. They never contain target identity, query text, exception text,
+cache keys, or SSH routing data.
 
 A successful batch must read back every target written by that batch as
 covered. Because the derived Career cache is shared with the live read-through

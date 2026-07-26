@@ -8,6 +8,7 @@ use FermatMind\Deploy\CareerCandidateExactCacheBootstrapFailure;
 use FermatMind\Deploy\CareerCandidateExactCacheBootstrapRunner;
 use PDOException;
 use PHPUnit\Framework\Attributes\Test;
+use RuntimeException;
 use Tests\TestCase;
 
 require_once __DIR__.'/../../scripts/deploy/career_candidate_exact_cache_bootstrap.php';
@@ -235,6 +236,77 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
 
         $this->assertSame(1, $calls);
         $this->assertSame(0, $delays);
+    }
+
+    #[Test]
+    public function candidate_runtime_stage_classifies_transient_database_failure_without_retrying_the_process(): void
+    {
+        $calls = 0;
+
+        try {
+            CareerCandidateExactCacheBootstrapRunner::candidateRuntimeStage(
+                'install_database_guard',
+                function () use (&$calls): never {
+                    $calls++;
+                    $exception = new PDOException('private routing and database detail');
+                    $exception->errorInfo = ['HY000', 2006, 'private routing and database detail'];
+
+                    throw $exception;
+                },
+            );
+            $this->fail('Expected candidate runtime initialization failure.');
+        } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+            $receipt = CareerCandidateExactCacheBootstrapRunner::failureReceipt(
+                $failure->safeCode,
+                $failure->failureStage,
+                $failure->errorCategory,
+                $failure->attemptCount,
+                $failure->retryCount,
+                650,
+            );
+            $encoded = json_encode($receipt, JSON_THROW_ON_ERROR);
+
+            $this->assertSame('CANDIDATE_RUNTIME_INITIALIZATION_FAILED', $failure->safeCode);
+            $this->assertSame('install_database_guard', $failure->failureStage);
+            $this->assertSame('database_transient_read', $failure->errorCategory);
+            $this->assertSame(1, $failure->attemptCount);
+            $this->assertSame(0, $failure->retryCount);
+            $this->assertSame(650, $receipt['batch_offset']);
+            $this->assertStringNotContainsString('private', $encoded);
+            $this->assertStringNotContainsString('routing', $encoded);
+            $this->assertStringNotContainsString('database detail', $encoded);
+        }
+
+        $this->assertSame(1, $calls);
+    }
+
+    #[Test]
+    public function candidate_runtime_stage_keeps_permanent_and_unexpected_failures_outside_retry_boundary(): void
+    {
+        foreach ([
+            ['bootstrap_candidate_kernel', new PDOException('private permanent detail'), 'database_permanent_read'],
+            ['resolve_candidate_services', new RuntimeException('private unexpected detail'), 'unexpected'],
+        ] as [$stage, $throwable, $expectedCategory]) {
+            if ($throwable instanceof PDOException) {
+                $throwable->errorInfo = ['42000', 1064, 'private permanent detail'];
+            }
+
+            try {
+                CareerCandidateExactCacheBootstrapRunner::candidateRuntimeStage(
+                    $stage,
+                    static function () use ($throwable): never {
+                        throw $throwable;
+                    },
+                );
+                $this->fail('Expected candidate runtime initialization failure.');
+            } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+                $this->assertSame('CANDIDATE_RUNTIME_INITIALIZATION_FAILED', $failure->safeCode);
+                $this->assertSame($stage, $failure->failureStage);
+                $this->assertSame($expectedCategory, $failure->errorCategory);
+                $this->assertSame(1, $failure->attemptCount);
+                $this->assertSame(0, $failure->retryCount);
+            }
+        }
     }
 
     #[Test]

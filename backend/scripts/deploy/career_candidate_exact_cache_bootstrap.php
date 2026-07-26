@@ -77,6 +77,11 @@ final class CareerCandidateExactCacheBootstrapRunner
     /** @var list<string> */
     private const SAFE_FAILURE_STAGES = [
         'initialize_candidate_runtime',
+        'load_candidate_application',
+        'bootstrap_candidate_kernel',
+        'validate_candidate_services',
+        'install_database_guard',
+        'resolve_candidate_services',
         'pre_batch_coverage',
         'precompute_conversion_closure',
         'build_detail_payload',
@@ -183,14 +188,28 @@ final class CareerCandidateExactCacheBootstrapRunner
             self::fail('CANDIDATE_BOOTSTRAP_MISSING');
         }
 
-        require_once $autoload;
-        $app = require $bootstrap;
-        if (! is_object($app) || ! method_exists($app, 'make')) {
-            self::fail('CANDIDATE_BOOTSTRAP_INVALID');
-        }
+        $app = self::candidateRuntimeStage(
+            'load_candidate_application',
+            static function () use ($autoload, $bootstrap): object {
+                require_once $autoload;
+                $candidateApp = require $bootstrap;
+                if (! is_object($candidateApp) || ! method_exists($candidateApp, 'make')) {
+                    self::fail('CANDIDATE_BOOTSTRAP_INVALID');
+                }
 
-        $kernel = $app->make(Kernel::class);
-        $kernel->bootstrap();
+                return $candidateApp;
+            },
+        );
+
+        self::candidateRuntimeStage(
+            'bootstrap_candidate_kernel',
+            static function () use ($app): null {
+                $kernel = $app->make(Kernel::class);
+                $kernel->bootstrap();
+
+                return null;
+            },
+        );
         if (! method_exists($app, 'environment') || ! $app->environment('production')) {
             self::fail('NON_PRODUCTION_RUNTIME');
         }
@@ -198,12 +217,31 @@ final class CareerCandidateExactCacheBootstrapRunner
         $coverageClass = 'App\\Services\\Career\\CareerJobDetailCacheCoverageService';
         $cacheClass = 'App\\Services\\Career\\PublicCareerAuthorityResponseCache';
         $conversionClass = 'App\\Services\\Analytics\\CareerConversionClosureBuilder';
-        self::assertServiceSignatures($coverageClass, $cacheClass, $conversionClass);
-        self::installDatabaseGuard($app);
+        self::candidateRuntimeStage(
+            'validate_candidate_services',
+            static function () use ($coverageClass, $cacheClass, $conversionClass): null {
+                self::assertServiceSignatures($coverageClass, $cacheClass, $conversionClass);
 
-        $coverage = $app->make($coverageClass);
-        $cache = $app->make($cacheClass);
-        $conversion = $app->make($conversionClass);
+                return null;
+            },
+        );
+        self::candidateRuntimeStage(
+            'install_database_guard',
+            static function () use ($app): null {
+                self::installDatabaseGuard($app);
+
+                return null;
+            },
+        );
+
+        [$coverage, $cache, $conversion] = self::candidateRuntimeStage(
+            'resolve_candidate_services',
+            static fn (): array => [
+                $app->make($coverageClass),
+                $app->make($cacheClass),
+                $app->make($conversionClass),
+            ],
+        );
         $inspect = static fn (): array => $coverage->inspect(['en', 'zh-CN'], 0);
         $inspectionRead = self::coverageInspectionWithRetry($inspect);
         $inspection = $inspectionRead['inspection'];
@@ -367,6 +405,39 @@ final class CareerCandidateExactCacheBootstrapRunner
             $attemptCount,
             $retryCount,
         );
+    }
+
+    /**
+     * Classify candidate-runtime initialization failures without exposing
+     * exception text or retrying a partially initialized Laravel process.
+     * The workflow may start one fresh PHP process only when this classification
+     * is an explicit transient database read.
+     */
+    public static function candidateRuntimeStage(string $stage, Closure $operation): mixed
+    {
+        if (! in_array($stage, [
+            'load_candidate_application',
+            'bootstrap_candidate_kernel',
+            'validate_candidate_services',
+            'install_database_guard',
+            'resolve_candidate_services',
+        ], true)) {
+            self::fail('INVALID_CANDIDATE_RUNTIME_STAGE');
+        }
+
+        try {
+            return $operation();
+        } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+            throw $failure;
+        } catch (Throwable $throwable) {
+            throw new CareerCandidateExactCacheBootstrapFailure(
+                'CANDIDATE_RUNTIME_INITIALIZATION_FAILED',
+                $stage,
+                self::safeThrowableCategory($throwable),
+                1,
+                0,
+            );
+        }
     }
 
     /**
