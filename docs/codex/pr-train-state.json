@@ -99973,8 +99973,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-QUERY-OWNER-URL-TRUTH-01"
     ],
-    "status": "review_repairs_local_checks_passed",
-    "commit_sha": "697144060a891710eeba2f539e34906dccf08a4d",
+    "status": "github_checks_pending",
+    "commit_sha": "dc7d34a4215a811ca3f1e8ff03febee1061fd00d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
     "checks": {
       "dependency": {
@@ -99990,8 +99990,8 @@
         "evidence": "After all eleven review repairs, focused Task 7 tests passed 11/106; the operator-authorized classifier branch-diff and regression tests passed 2/6; scoped Pint passed 4 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 7/7 authorized paths."
       },
       "github_required_checks": {
-        "status": "retry_pending",
-        "evidence": "All 9 required checks passed on ten-review-repair head ef98d63b9d1ac555ada5606e3653b629a345fd0a, but automated review then found a P1 missing-product-evidence gap. Those checks are stale after the new same-scope repair; a fresh complete GitHub check set is required after push."
+        "status": "pending",
+        "evidence": "All 9 required checks passed on ten-review-repair head ef98d63b9d1ac555ada5606e3653b629a345fd0a, but automated review then found a P1 missing-product-evidence gap. The new same-scope repair commit dc7d34a4215a811ca3f1e8ff03febee1061fd00d passed expanded local validation and requires a fresh complete GitHub check set."
       }
     },
     "scope_validation": {
@@ -100096,8 +100096,13 @@
         "at": "2026-07-26T02:53:49Z",
         "status": "review_repairs_local_checks_passed",
         "note": "After head ef98d63b9d1ac555ada5606e3653b629a345fd0a passed all 9 checks, automated review found one additional P1: absent seo_event_funnel_daily rows were represented as genuine zero product outcomes. Every GSC row that survives page-family/privacy gates must now have a materialized same-grain funnel row or the report blocks with product_funnel_evidence_missing. Local validation passed Task 7 tests 11/106, classifier 2/6, Pint 4 files, Composer validate/audit, command discovery, YAML/JSON, diff checks, and exact 7/7 scope."
+      },
+      {
+        "at": "2026-07-26T02:54:16Z",
+        "status": "github_checks_pending",
+        "note": "Committed the product-funnel evidence completeness repair and regression at dc7d34a4215a811ca3f1e8ff03febee1061fd00d. The exact 7-path branch is ready for a fresh complete GitHub required-check set."
       }
     ],
-    "updated_at": "2026-07-26T02:53:49Z"
+    "updated_at": "2026-07-26T02:54:16Z"
   }
 }
