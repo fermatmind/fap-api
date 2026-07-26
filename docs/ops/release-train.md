@@ -186,6 +186,17 @@ drift, another production SHA, or a candidate outside the audited bridge history
 fail closed. The release record reports `runtime46_patch_subsumed`; all ordinary
 standard deployments continue to report and require `linear_ancestor`.
 
+Standard staging and production deploys run Career public-authority warming as
+a bounded derived-cache step. The warm can spend several minutes inside one
+dataset phase without application output, so Deployer wraps the exact child
+with a fixed `career_warm_heartbeat=running` line every 20 seconds. The wrapper
+records the child's real exit status, terminates that exact child on
+HUP/INT/TERM, and never prints its PID, routing metadata, target identity,
+exception text, or cache keys. Non-strict mode may continue after the bounded
+child fails; strict mode preserves the same heartbeat but remains fail closed.
+The heartbeat does not retry the warm and does not change CMS, database
+authority, publication, sitemap, llms, search, or candidate activation.
+
 The exact bridge candidate `49038deb50cda789e4365ea42068832ed28d6023`
 predates the bounded, non-blocking sitemap-source warm helper. When that exact
 candidate and staging run `29977064260` are selected, the production workflow

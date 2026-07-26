@@ -710,26 +710,45 @@ task('career:warm-public-authority-cache', function () {
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
     );
 
+    $heartbeatCommand = sprintf(
+        <<<'BASH'
+set +e
+%s &
+warm_pid=$!
+cleanup_warm() {
+  if kill -0 "$warm_pid" 2>/dev/null; then
+    kill -TERM "$warm_pid" 2>/dev/null || true
+    wait "$warm_pid" 2>/dev/null || true
+  fi
+}
+trap 'cleanup_warm; exit 143' HUP INT TERM
+while kill -0 "$warm_pid" 2>/dev/null; do
+  sleep 20
+  if kill -0 "$warm_pid" 2>/dev/null; then
+    echo "career_warm_heartbeat=running"
+  fi
+done
+wait "$warm_pid"
+status=$?
+trap - HUP INT TERM
+set -e
+BASH,
+        $command,
+    );
+
     if ($strictWarmCache) {
-        run($command);
+        run($heartbeatCommand."\n".'exit "$status"');
 
         return;
     }
 
-    run(sprintf(
-        <<<'BASH'
-set +e
-%s
-status=$?
-set -e
+    run($heartbeatCommand.<<<'BASH'
 if [ "$status" -ne 0 ]; then
   echo "career_warm_public_authority_cache_nonblocking_failure=$status"
   echo "Continuing deploy because DEPLOY_CAREER_WARM_CACHE_STRICT is not true."
 fi
 exit 0
-BASH,
-        $command,
-    ));
+BASH);
 });
 
 task('career:verify-public-dataset-cache-equivalence', function () {
