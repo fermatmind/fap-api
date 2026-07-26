@@ -19,15 +19,20 @@ final class ProductionOpsSharedResidueRecoveryWorkflowTest extends TestCase
         foreach ([
             'Backend Production Ops Shared Residue Recovery',
             'backend.production_ops_queue_control.v5',
-            'backend.production_ops_shared_residue_recovery.v1',
+            'backend.production_ops_shared_residue_recovery.v2',
             'failed_run_id',
             'failed_run_attempt',
             'expected_failed_control_plane_sha',
+            'expected_source_control_plane_sha',
+            'current_evidence_run_id',
+            'current_evidence_run_attempt',
             'expected_backup_sha256',
             'expected_residue_set_sha256',
             'expected_residue_file_count',
             'expected_validation_process_state',
             'expected_validation_process_fingerprint_sha256',
+            'expected_migration_process_state',
+            'expected_migration_process_fingerprint_sha256',
             'preflight_run_id',
             'preflight_run_attempt',
             'operator_approval_phrase',
@@ -37,6 +42,9 @@ final class ProductionOpsSharedResidueRecoveryWorkflowTest extends TestCase
             '.config_total_section_count == 3',
             '.config_foreign_program_section_count == 2',
             '.managed_target_current_sha256 == ("0" * 64)',
+            '.config_layout == "DEDICATED"',
+            '.runtime_config_current == true',
+            '.convergence_required == false',
             '.production_write_execution == false',
             'PASS_PREFLIGHT',
             'PASS_APPLY',
@@ -57,11 +65,11 @@ final class ProductionOpsSharedResidueRecoveryWorkflowTest extends TestCase
         }
 
         $this->assertStringContainsString(
-            'I explicitly approve production fap-api cleanup of stale shared-config migration residue from failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT} using recovery preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} and v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT}',
+            'I explicitly approve production fap-api cleanup of stale shared-config migration residue from failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT} using recovery preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT}, source v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT} at source control-plane SHA ${EXPECTED_SOURCE_CONTROL_PLANE_SHA}, and current v5 evidence run ${CURRENT_EVIDENCE_RUN_ID} attempt ${CURRENT_EVIDENCE_RUN_ATTEMPT}',
             $workflow,
         );
         $this->assertStringContainsString(
-            'delete only the exact bounded /tmp residue files, preserve the shared source, absent dedicated target, exact backup, main Supervisor programs/PIDs and ops worker, and stop without rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23.',
+            'delete only the exact bounded /tmp residue files, preserve the stripped shared source, exact dedicated target, exact backup, main Supervisor programs/PIDs and ops worker, and stop without rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23.',
             $workflow,
         );
         $this->assertSame(
@@ -99,9 +107,9 @@ final class ProductionOpsSharedResidueRecoveryWorkflowTest extends TestCase
             'test "${#config_candidates[@]}" -eq 1',
             "-lFx '[program:fap-queue-ops]'",
             'test "$source_path_sha256" = "$EVIDENCE_SOURCE_PATH_SHA256"',
-            'test "$source_config_sha256" = "$EVIDENCE_SOURCE_CONFIG_SHA256"',
-            'sudo -n test ! -e "$target_path"',
-            'test "$backup_sha256" = "$source_config_sha256"',
+            'test "$source_current_config_sha256" = "$EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256"',
+            'test "$target_current_path" = "$target_path"',
+            'test "$backup_sha256" = "$source_original_config_sha256"',
             'ops-supervisor-migration-backups/shared-source-${FAILED_RUN_ID}.conf',
             '/tmp/fap-ops-shared-migration-${FAILED_RUN_ID}',
             '"${residue_prefix}.source"',
@@ -113,6 +121,7 @@ final class ProductionOpsSharedResidueRecoveryWorkflowTest extends TestCase
             'test "${#discovered_residue_paths[@]}" -le 5',
             'test "$validation_process_count" = 0',
             'validation_process_state=absent',
+            'migration_process_state=absent',
             'test "$residue_set_sha256" = "$EXPECTED_RESIDUE_SET_SHA256"',
             'sudo -n rm -f -- "$discovered_path"',
             'test "$post_worker_pid" = "$worker_pid"',
