@@ -9,7 +9,7 @@
       "MBTI-CROSS-PUBLISHER-49",
       "MBTI-CROSS-AUTHORITY-50"
     ],
-    "status": "ready_to_merge",
+    "status": "github_review_repairing",
     "commit_sha": "5a3b35fe46dc087b63cef2a2adbf4048184c9d36",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3294",
     "checks": {
@@ -121,9 +121,14 @@
         "at": "2026-07-26T07:48:00Z",
         "status": "ready_to_merge",
         "note": "Exact implementation head 5a3b35fe46dc087b63cef2a2adbf4048184c9d36 passed all 9 required GitHub checks, exact-head Codex review found no major issues, all review threads are resolved, mergeability is CLEAN, and scope remains the exact five declared paths. This ledger-only transition records readiness; its resulting head must independently pass checks and review before squash merge. Production fap-web deploy and all production content/indexability/search actions remain unexecuted."
+      },
+      {
+        "at": "2026-07-26T07:56:00Z",
+        "status": "github_review_repairing",
+        "note": "The ledger-only head acc32d2aa passed all 9 GitHub checks, then exact-head review found that Phase A preflight did not prove cache-closeout readiness and that manifest/state lifecycle statuses diverged. The scoped repair binds all four live modes and both immutable preflight receipts to exact fap-web SHA 841280ab35945e2c1454f5ac18ea3ededdfab5b6, makes content_preflight require configured endpoint/secret readiness before authorization, and keeps manifest/state aligned at github_review_repairing until fresh checks complete."
       }
     ],
-    "updated_at": "2026-07-26T07:48:00Z"
+    "updated_at": "2026-07-26T07:56:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",

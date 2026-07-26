@@ -184,12 +184,12 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             'Public feed readback must use the unmodified canonical cache key.',
         );
         $this->assertSame(
-            3,
+            5,
             substr_count(
                 $workflow,
                 'and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"',
             ),
-            'The immutable preflight receipt, live preflight, and live apply must all bind the frontend revision.',
+            'Both phase receipts and all four live operations must bind the frontend revision.',
         );
         $this->assertSame(
             1,

@@ -148,13 +148,16 @@ jobs:
                  and .content_write_count == 0
                  and .indexability_write_count == 0
                  and .search_submission_count == 0
+                 and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
                  and (if $mode == "indexability_preflight"
                       then .cache_closeout_ready == true
-                           and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
+                           and .frontend_revalidation_endpoint_count > 0
                       else true
                       end)
                  and (if $mode == "content_preflight"
                       then .current_state_sha256 == $state
+                           and .cache_closeout_ready == true
+                           and .frontend_revalidation_endpoint_count > 0
                       else .content_readback_sha256 == $state
                       end)' "$receipt" >/dev/null
               ;;
@@ -255,23 +258,42 @@ jobs:
           test "$(tr -d '\r\n' < "$current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
           cd "$current/backend"
-          frontend_revision=""
-          if [ "$MODE" = indexability_preflight ] || [ "$MODE" = indexability_apply ]; then
-            frontend_revision="$(
-              curl -fsS --proto '=https' --max-redirs 0 \
-                --connect-timeout 10 --max-time 30 \
-                -H 'Accept: application/json' \
-                -H 'Cache-Control: no-cache' \
-                https://fermatmind.com/revision \
-                | jq -er --arg expected "$EXPECTED_FRONTEND_REVISION" \
-                    '.revision | select(. == $expected)'
-            )"
-            test "$frontend_revision" = "$EXPECTED_FRONTEND_REVISION"
-          fi
+          frontend_revision="$(
+            curl -fsS --proto '=https' --max-redirs 0 \
+              --connect-timeout 10 --max-time 30 \
+              -H 'Accept: application/json' \
+              -H 'Cache-Control: no-cache' \
+              https://fermatmind.com/revision \
+              | jq -er --arg expected "$EXPECTED_FRONTEND_REVISION" \
+                  '.revision | select(. == $expected)'
+          )"
+          test "$frontend_revision" = "$EXPECTED_FRONTEND_REVISION"
           case "$MODE" in
             content_preflight)
-              php artisan personality:mbti-cross-publisher49-content \
-                --json --no-interaction --no-ansi
+              publisher_result="$(php artisan personality:mbti-cross-publisher49-content \
+                --json --no-interaction --no-ansi)"
+              cache_endpoint_count="$(php -r '
+              require getcwd()."/vendor/autoload.php";
+              $app = require getcwd()."/bootstrap/app.php";
+              $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+              $endpoints = array_values(array_filter(array_map(
+                  static fn (mixed $value): string => trim((string) $value),
+                  (array) config("ops.content_release_observability.cache_invalidation_urls", [])
+              )));
+              $secret = trim((string) config("ops.content_release_observability.cache_invalidation_secret", ""));
+              if ($endpoints === [] || $secret === "") {
+                  throw new RuntimeException("Bounded frontend cache revalidation is not configured.");
+              }
+              echo count($endpoints);
+              ')"
+              jq -c \
+                --argjson endpoint_count "$cache_endpoint_count" \
+                --arg frontend_revision "$frontend_revision" \
+                '. + {
+                  cache_closeout_ready: true,
+                  frontend_revalidation_endpoint_count: $endpoint_count,
+                  frontend_revision: $frontend_revision
+                }' <<<"$publisher_result"
               ;;
             content_apply)
               approval="$(printf '%s' "$APPROVAL_B64" | base64 -d)"
@@ -361,9 +383,11 @@ jobs:
               trap - EXIT
 
               jq -c \
+                --arg frontend_revision "$frontend_revision" \
                 '. + {
                   content_cache_closeout_completed: true,
                   content_frontend_revalidation_path_count: 3,
+                  frontend_revision: $frontend_revision,
                   public_page_readback_completed: true,
                   public_page_count: 3
                 }' <<<"$publisher_result"
@@ -568,6 +592,9 @@ jobs:
                 and .writes_committed == false
                 and .indexability_mutated == false
                 and .sitemap_or_llms_mutated == false
+                and .cache_closeout_ready == true
+                and .frontend_revalidation_endpoint_count > 0
+                and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
                 and (.readback | length) == 3' <<<"$result" >/dev/null
               ;;
             content_apply)
@@ -581,6 +608,7 @@ jobs:
                  and (.content_readback_sha256 | test("^[0-9a-f]{64}$"))
                  and .indexability_mutated == false
                  and .sitemap_or_llms_mutated == false
+                 and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
                  and .content_cache_closeout_completed == true
                  and .content_frontend_revalidation_path_count == 3
                  and .public_page_readback_completed == true
