@@ -31,7 +31,7 @@ final class CareerCandidateExactCacheBootstrapRunner
 
     public const AUTHORIZATION_CONTRACT_VERSION = 'career.candidate_exact_cache_bootstrap.authorization.v2';
 
-    public const BATCH_SIZE = 50;
+    public const BATCH_SIZE = 10;
 
     public const OFFLINE_BUILD_BUDGET_MS = 5000;
 
