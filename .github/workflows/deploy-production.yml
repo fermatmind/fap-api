@@ -607,15 +607,15 @@ jobs:
     environment:
       name: production
     env:
-      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
-      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
-      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
-      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
-      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
-      DEPLOY_USER_PROD: ${{ vars.PRODUCTION_DEPLOY_USER }}
-      DEPLOY_PORT_PROD: ${{ vars.PRODUCTION_DEPLOY_PORT }}
-      DEPLOY_HOST_PROD: ${{ vars.PRODUCTION_DEPLOY_HOST }}
-      DEPLOY_PATH_PROD: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      DEPLOY_USER_PROD: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT_PROD: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST_PROD: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH_PROD: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
       HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
       AUTH_GUEST_CHECK_URL: ${{ vars.PRODUCTION_AUTH_GUEST_CHECK_URL }}
       OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
@@ -1317,7 +1317,7 @@ jobs:
               sleep "$retry_delay"
             done
           }
-          ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
+          ssh_retry "cd '$DEPLOY_PATH/current/backend' && sudo -n -u www-data -- php artisan queue:restart --ansi"
 
       - name: Verify deployed revision
         id: deployed_revision

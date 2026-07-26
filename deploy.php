@@ -944,6 +944,7 @@ task('guard:deploy-shell-config', function () {
 });
 
 task('guard:queue-reload-capability', function () {
+    $codeOnly = deployIsCodeOnly();
     $reloadRequired = deployBooleanOption('queue_reload_required', true);
     $manager = strtolower(trim((string) get('queue_manager', 'supervisor')));
 
@@ -959,6 +960,21 @@ task('guard:queue-reload-capability', function () {
         writeln('<comment>Staging queue capability preflight passed with no configured or running workers</comment>');
 
         return;
+    }
+
+    if (! $codeOnly) {
+        $artisan = deployPlaceholderPathArg('{{release_path}}', 'backend/artisan');
+        $cacheData = deployPlaceholderPathArg(
+            '{{release_path}}',
+            'backend/storage/framework/cache/data',
+        );
+
+        if (! test("sudo -n -u www-data -- test -r {$artisan}")) {
+            throw new \RuntimeException('queue restart preflight requires the application runtime identity to read Artisan');
+        }
+        if (! test("sudo -n -u www-data -- test -w {$cacheData}")) {
+            throw new \RuntimeException('queue restart preflight requires the application runtime identity to write the shared cache directory');
+        }
     }
 
     if ($manager === 'supervisor') {
@@ -1086,7 +1102,7 @@ task('queue:reload-workers', function () {
 
         if (! $codeOnly) {
             within('{{current_path}}/backend', function () {
-                run('{{bin/php}} artisan queue:restart --ansi');
+                run('sudo -n -u www-data -- {{bin/php}} artisan queue:restart --ansi');
             });
         } else {
             writeln('<comment>Reload queue workers through the process manager without a cache restart signal in code_only deploy mode</comment>');
@@ -1159,7 +1175,7 @@ task('queue:reload-workers', function () {
 
         if (! $codeOnly) {
             within('{{current_path}}/backend', function () {
-                run('{{bin/php}} artisan queue:restart --ansi');
+                run('sudo -n -u www-data -- {{bin/php}} artisan queue:restart --ansi');
             });
         } else {
             writeln('<comment>Reload queue workers through systemd without a cache restart signal in code_only deploy mode</comment>');
