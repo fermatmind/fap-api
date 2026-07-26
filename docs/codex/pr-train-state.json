@@ -99974,7 +99974,7 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "415d96e6e4b2ac257ca8f5c6be8edfd7f64c5e84",
+    "commit_sha": "4e15b00553fa118ff9c9e08acf018c7ed65a7b2a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
     "checks": {
       "dependency": {
@@ -99987,11 +99987,11 @@
       },
       "required_local_checks": {
         "status": "passed",
-        "evidence": "Focused tests passed 7/67; scoped Pint passed 3 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 6/6 authorized paths."
+        "evidence": "Focused Task 7 tests passed 7/67; the operator-authorized classifier branch-diff and regression tests passed 2/6; scoped Pint passed 4 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 7/7 authorized paths."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "The operator-authorized classifier repair passed the exact branch-diff test plus its positive/negative regression: 2 tests / 6 assertions. The Task 7 feature suite also passed 7/67, scoped Pint passed 4 files, and all remaining local manifest checks passed. Repair commit 415d96e6e4b2ac257ca8f5c6be8edfd7f64c5e84 is ready for the GitHub required-check retry."
+        "evidence": "All 9 required checks passed on pre-rebase head d0358c40cedb8645d1d83d7cb062856865e0b70f. origin/main advanced by one independent deploy repair (#3284) while checks ran, so the exact 7-path Task 7 commits were cleanly rebased onto a2318ec915e6b321f79ac5b9f38bb80b3a6b2e25. Rebased head 4e15b00553fa118ff9c9e08acf018c7ed65a7b2a requires a fresh complete check set before merge."
       }
     },
     "scope_validation": {
@@ -100046,8 +100046,13 @@
         "at": "2026-07-26T01:51:02Z",
         "status": "github_checks_pending",
         "note": "Committed the operator-authorized classifier repair at 415d96e6e4b2ac257ca8f5c6be8edfd7f64c5e84. The exact 7-path Task 7 branch is ready to push for the required GitHub check retry."
+      },
+      {
+        "at": "2026-07-26T02:00:13Z",
+        "status": "github_checks_pending",
+        "note": "All 9 required checks passed on head d0358c40cedb8645d1d83d7cb062856865e0b70f, but origin/main advanced by independent deploy repair #3284 during validation. Cleanly rebased the exact 7-path Task 7 branch onto origin/main a2318ec915e6b321f79ac5b9f38bb80b3a6b2e25 and force-pushed with lease. Rebased head 4e15b00553fa118ff9c9e08acf018c7ed65a7b2a must pass a fresh complete required-check set before merge."
       }
     ],
-    "updated_at": "2026-07-26T01:51:02Z"
+    "updated_at": "2026-07-26T02:00:13Z"
   }
 }
