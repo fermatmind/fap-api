@@ -100126,8 +100126,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "complete_evidence_schema_review_repairs_local_checks_passed_github_checks_pending",
-  "commit_sha": "143a1960561e1863b44534ac3aa6105aa73a482f",
+  "status": "review_hash_and_atomic_artifact_repairs_local_checks_passed_github_checks_pending",
+  "commit_sha": "4f98d7b2d6507f64491a350f58534bab6c682d21",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100144,15 +100144,15 @@
       },
     "focused_recovery_tests": {
       "status": "passed",
-      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, random opaque page IDs with no persisted URL mapping or unkeyed URL digests, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, exact integer/query-count conservation, finite positions, source/claim boundaries, and the fail-closed 0/54 formal readmodel gate. The final repair adds recursive exact field allowlists for both sanitized sidecars, rejects camel-case and collapsed credential names, and rejects loopback/link-local/private/internal source hosts. Recovery plus ReviewPolicyRegistry passed 33 tests / 651 assertions; the three new focused safety regressions passed 3 tests / 17 assertions."
+      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, opaque page IDs, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, query-count conservation, source/claim boundaries, exact recursive evidence schemas, credential/private-host rejection, comparison chronology, query-export review binding, and symlink-safe atomic artifact writes. Recovery plus ReviewPolicyRegistry passed 37 tests / 678 assertions."
       },
     "required_local_checks": {
       "status": "passed_review_repairs",
-      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 33 tests / 651 assertions. The operator-authorized Big Five freeze-classifier file passed 382 data-driven tests / 786 assertions. Scoped Pint and git diff --check passed after the final repair; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and deterministic dry-run checks remain passed. The dry run remains business_write=false and blocked_formal_gsc_readmodel_gate with immutable package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
+      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 37 tests / 678 assertions. Scoped Pint and git diff --check passed; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and operator-authorized Big Five freeze-classifier checks remain passed. The documented command intentionally exits 1, repeats with changed=false, and reports business_write=false, blocked_formal_gsc_readmodel_gate, package SHA 543f1099a8cc8efeb9704f03eed912143fdfb356fd5ba5c1015ce0d3a8e07dec, artifact SHA e82c1d750bc3c707edfb2f96bfbb85d73d93fbabc26281957f85337d5346fcc8, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
       "status": "pending_after_review_repair",
-      "evidence": "All nine GitHub checks passed at prior implementation head 4b54a3b39c4cffe9a4e1b352236ba498fbbc2243 and ledger head 90e566ebb6980059d542cd2586dde1f0828687ed. The ledger-head review then identified three additional P2 evidence boundaries. Exact implementation head 143a1960561e1863b44534ac3aa6105aa73a482f adds the primary-evidence schema, numeric-host, comparison-window, and recursive list-element repairs; a fresh GitHub run is pending."
+      "evidence": "All nine GitHub checks passed at superseded head b6d772512e88a87ca5c6cd38ad31402ecfc182be. Its review then identified two P2s: private query export identities were absent from each target review hash, and artifact writes followed symlinks/non-atomic fixed paths. Exact implementation head 4f98d7b2d6507f64491a350f58534bab6c682d21 fixes both with regressions; a fresh GitHub run is pending."
       }
     },
     "scope_validation": {
@@ -100302,8 +100302,13 @@
       "at": "2026-07-26T08:57:37Z",
       "status": "complete_evidence_schema_review_repairs_local_checks_passed_github_checks_pending",
       "note": "A proactive recursive-schema audit also constrained every allowed list that can reach the candidate package to a true string list, including recovery actions, claims, manual-review checks, observation fields, query exclusions, and top-five opaque IDs; nested objects cannot hide undeclared raw evidence inside those lists. Recovery plus ReviewPolicyRegistry remains green at 35/667, scoped Pint and diff checks pass, and GitHub checks are pending at exact implementation head 143a1960561e1863b44534ac3aa6105aa73a482f. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T09:09:35Z",
+      "status": "review_hash_and_atomic_artifact_repairs_local_checks_passed_github_checks_pending",
+      "note": "After all nine checks passed at the superseded head, current-head review found that the review target hash omitted the per-target private query ZIP/CSV identities and that fixed artifact paths could follow symlinks. Each target review hash and visible plan now bind both validated private export SHAs. Artifact output rejects symlinked directories/destinations and writes through an exclusively created same-directory temporary file followed by atomic rename; regressions prove a victim file is unchanged. Recovery plus ReviewPolicyRegistry passed 37/678, scoped Pint/JSON/diff checks passed, and the deterministic command repeated changed=false with package SHA 543f1099a8cc8efeb9704f03eed912143fdfb356fd5ba5c1015ce0d3a8e07dec and artifact SHA e82c1d750bc3c707edfb2f96bfbb85d73d93fbabc26281957f85337d5346fcc8. GitHub checks are pending; no production or business write occurred."
     }
   ],
-  "updated_at": "2026-07-26T08:57:37Z"
+  "updated_at": "2026-07-26T09:09:35Z"
 }
 }
