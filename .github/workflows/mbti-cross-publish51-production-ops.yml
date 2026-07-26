@@ -715,6 +715,7 @@ jobs:
             --argjson writes_committed "$(jq '.writes_committed // false' <<<"$result")" \
             --argjson indexability_committed "$(jq '.indexability_write_committed // false' <<<"$result")" \
             --argjson cache_ready "$(jq '.cache_closeout_ready // false' <<<"$result")" \
+            --argjson frontend_endpoint_count "$(jq '.frontend_revalidation_endpoint_count // 0' <<<"$result")" \
             --argjson cache_closeout "$(jq '.cache_closeout_completed // false' <<<"$result")" \
             --argjson content_cache_closeout "$(jq '.content_cache_closeout_completed // false' <<<"$result")" \
             --argjson page_readback "$(jq '.public_page_readback_completed // false' <<<"$result")" \
@@ -749,6 +750,7 @@ jobs:
               symlink_write_count: 0,
               worker_restart_count: 0,
               cache_closeout_ready: $cache_ready,
+              frontend_revalidation_endpoint_count: $frontend_endpoint_count,
               cache_closeout_completed: $cache_closeout,
               content_cache_closeout_completed: $content_cache_closeout,
               public_page_readback_completed: $page_readback,
