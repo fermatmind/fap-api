@@ -99861,5 +99861,101 @@
       }
     ],
     "updated_at": "2026-07-24T04:36:51Z"
+  },
+  "SEO-QUERY-OWNER-URL-TRUTH-01": {
+    "id": "SEO-QUERY-OWNER-URL-TRUTH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-query-owner-url-truth-01",
+    "title": "SEO-QUERY-OWNER-URL-TRUTH-01 bind one intent to one canonical owner",
+    "depends_on": [
+      "SEO-10K-GSC-BOUNDED-BACKFILL-01",
+      "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "4a93f06f6b568fc7e648f6d4ac791a612fd9c5af",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 3 PR #3276 is merged at 3f4648e2e166e8d482009a5c3ef864489703e013 and fap-api origin/main contains that commit. Task 5 PR #1805 is merged at 34a20519e8bcd1fa74273cfe91b300d2b6cfc1fa with post-merge 31/31 sitemap contracts passed."
+      },
+      "focused_query_owner_tests": {
+        "status": "passed",
+        "evidence": "Final focused run passed 11 tests / 69 assertions. During scoped implementation, the new reciprocal-hreflang regression initially selected the first locale row rather than the zh-CN row; the fixture assertion was corrected and the exact suite passed on retry. Final privacy review removed the unnecessary query display column and asserts hash-only query storage."
+      },
+      "required_local_checks": {
+        "status": "passed",
+        "evidence": "Passed focused tests (11 tests / 68 assertions), scoped Pint (7 files), the exact migration through php artisan migrate --force against a disposable local SQLite database, API route listing (220 routes), composer validate --strict, composer audit (no advisories), YAML parse, JSON parse, git diff --check, and exact changed-file validation (10/10 authorized paths). The first disposable-migration wrapper invocation had a php -r namespace escaping syntax error before Laravel boot; the corrected wrapper ran the migration and verified all three tables."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact PR head 4a93f06f6b568fc7e648f6d4ac791a612fd9c5af passed all nine required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. The formerly failing verify-bigfive job passed in 5m49s."
+      },
+      "same_scope_freeze_classifier_fix": {
+        "status": "passed",
+        "evidence": "The user explicitly added BigFiveResultPageV2CoreBodyPreviewTest.php to Task 6 allowed paths. The narrow exact-file classifier regression passed 2 tests / 6 assertions and proves the six Task 6 runtime/migration files are ignored while a writer, a publish migration, and the Big Five runtime service remain blocked. The Task 6 feature suite passed 11 tests / 69 assertions after merging latest origin/main; scoped Pint passed 8 files; YAML, JSON, diff checks, and exact scope validation passed for all 11/11 authorized paths."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-24T06:07:21Z",
+        "status": "implementation_in_progress",
+        "note": "Started Task 6 from exact fap-api origin/main 0dac333fd31a1873d96fd550cff57f94ba50f97d in an isolated worktree after both declared dependencies were verified merged. Scope is backend query-family and URL-role contract plus read-only conflict reporting; no production migration, DB/CMS authority write, canonical/publication/indexability/sitemap/internal-link mutation, Search Channel action, URL submission, deploy, or external API call is authorized or attempted."
+      },
+      {
+        "at": "2026-07-24T06:13:55Z",
+        "status": "local_checks_passed",
+        "note": "Task 6 now models six explicit URL roles and produces a read-only fail-closed report. Scoped review added the actual backend scale_catalog URL authority, strict redirect-catalog/public-path validation, and reciprocal hreflang enforcement. Final focused tests passed 11 tests / 68 assertions, all remaining local gates passed, and the diff is exactly the 10 authorized paths. No production migration, deploy, DB/CMS write, Search Channel action, URL submission, or external API call occurred."
+      },
+      {
+        "at": "2026-07-24T06:15:31Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact 10-path Task 6 scope at 6ab43507d8e5320b03adc0448c9866380ff1b54e, pushed codex/seo-query-owner-url-truth-01, and opened PR #3280. GitHub initially reports MERGEABLE/UNSTABLE with required checks starting; no production-side action occurred."
+      },
+      {
+        "at": "2026-07-24T06:17:16Z",
+        "status": "same_scope_privacy_fix_validated",
+        "note": "Final schema review found the optional query_display_masked column weakened the privacy-safe hash-only contract. Removed that column and its fixture use, added a regression assertion preventing query display storage, reran focused tests (11 tests / 69 assertions), scoped Pint, disposable-SQLite migration with an explicit absent-column assertion, composer validate --strict, and composer audit; all passed. Fix commit is b13452ebc44165c187162d4637699300169424f3."
+      },
+      {
+        "at": "2026-07-24T06:25:54Z",
+        "status": "github_required_check_failed_scope_authority_needed",
+        "note": "At exact head f56f00d6b77495d3f60bba941b993151749f8db0, all required checks except verify-bigfive passed. The Big Five job passed 1597 tests with 1 skipped and failed only the branch-diff freeze assertion because six new Task 6 SEO Intel runtime/migration files are not classified as non-Big-Five changes. The narrow repair belongs in BigFiveResultPageV2CoreBodyPreviewTest.php, but the user's existing authorization for that path is explicitly Task-2-only; Task 6 is held for new scope authority and no out-of-scope edit was made."
+      },
+      {
+        "at": "2026-07-26T01:04:51Z",
+        "status": "same_scope_freeze_classifier_fix_local_passed",
+        "note": "The user explicitly authorized BigFiveResultPageV2CoreBodyPreviewTest.php as an eleventh Task 6 allowed path solely for the corresponding freeze-classifier regression. After merging latest origin/main, the exact-file classifier fix passed 2 tests / 6 assertions and the Task 6 feature suite passed 11 tests / 69 assertions. The regression does not exempt adjacent writer, publish-migration, or Big Five runtime files; no production migration, deploy, DB/CMS write, Search Channel action, URL submission, or external API call occurred."
+      },
+      {
+        "at": "2026-07-26T01:06:14Z",
+        "status": "github_checks_pending",
+        "note": "Committed the authorized same-scope classifier repair at 587dd40d8750f3b52a9c8fa46ceb0654cfc733a7 after all focused, formatting, manifest, ledger, diff, and 11/11 scope checks passed. The branch includes latest origin/main and now awaits a fresh complete GitHub required-check run."
+      },
+      {
+        "at": "2026-07-26T01:14:53Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 4a93f06f6b568fc7e648f6d4ac791a612fd9c5af passed all nine required checks, including verify-bigfive. GitHub reports MERGEABLE/CLEAN, the branch is not behind origin/main, there are zero unresolved review threads, and the diff remains exactly 11/11 authorized paths. This final ledger-only transition must itself pass all required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-26T01:14:53Z"
   }
 }
