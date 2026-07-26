@@ -23,6 +23,29 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $deployer,
         );
         $this->assertStringContainsString(
+            'sudo -n -u www-data -- test -r {$artisan}',
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'sudo -n -u www-data -- test -w {$cacheData}',
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'queue restart preflight requires the application runtime identity to write the shared cache directory',
+            $deployer,
+        );
+        $this->assertSame(
+            2,
+            substr_count(
+                $deployer,
+                "run('sudo -n -u www-data -- {{bin/php}} artisan queue:restart --ansi');",
+            ),
+        );
+        $this->assertStringNotContainsString(
+            "run('{{bin/php}} artisan queue:restart --ansi');",
+            $deployer,
+        );
+        $this->assertStringContainsString(
             'queue capability preflight requires running supervisor program [{$program}] before release activation',
             $deployer,
         );

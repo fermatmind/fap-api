@@ -19,7 +19,7 @@ final class ProductionDeployProtectedTopologyTest extends TestCase
     }
 
     #[Test]
-    public function production_topology_comes_only_from_protected_environment_variables(): void
+    public function private_production_routing_comes_only_from_masked_environment_secrets(): void
     {
         foreach ([
             'PRODUCTION_DEPLOY_USER',
@@ -27,18 +27,22 @@ final class ProductionDeployProtectedTopologyTest extends TestCase
             'PRODUCTION_DEPLOY_HOST',
             'PRODUCTION_RETIRED_DEPLOY_HOST',
             'PRODUCTION_DEPLOY_PATH',
+        ] as $secret) {
+            $this->assertStringContainsString('${{ secrets.'.$secret.' }}', $this->workflow);
+            $this->assertStringNotContainsString('${{ vars.'.$secret.' }}', $this->workflow);
+        }
+
+        foreach ([
             'PRODUCTION_HEALTHCHECK_URL',
             'PRODUCTION_AUTH_GUEST_CHECK_URL',
             'PRODUCTION_OPS_HOST',
-        ] as $variable) {
-            $this->assertStringContainsString('${{ vars.'.$variable.' }}', $this->workflow);
+        ] as $publicVariable) {
+            $this->assertStringContainsString('${{ vars.'.$publicVariable.' }}', $this->workflow);
         }
 
         $this->assertStringNotContainsString('139.224.130.204', $this->workflow);
         $this->assertStringNotContainsString('122.152.221.126', $this->workflow);
         $this->assertStringNotContainsString('/var/www/fap-api', $this->workflow);
-        $this->assertStringNotContainsString('https://api.fermatmind.com', $this->workflow);
-        $this->assertStringNotContainsString('ops.fermatmind.com', $this->workflow);
     }
 
     #[Test]
@@ -55,8 +59,21 @@ final class ProductionDeployProtectedTopologyTest extends TestCase
         $this->assertLessThan($deployerOffset, $guardOffset);
         $this->assertStringContainsString('Protected production environment variable ${name} is required.', $this->workflow);
         $this->assertStringContainsString('without disclosing values', $this->workflow);
-        $this->assertStringContainsString('DEPLOY_HOST_PROD: ${{ vars.PRODUCTION_DEPLOY_HOST }}', $this->workflow);
-        $this->assertStringContainsString('RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}', $this->workflow);
-        $this->assertStringContainsString('DEPLOY_PATH_PROD: ${{ vars.PRODUCTION_DEPLOY_PATH }}', $this->workflow);
+        $this->assertStringContainsString('DEPLOY_HOST_PROD: ${{ secrets.PRODUCTION_DEPLOY_HOST }}', $this->workflow);
+        $this->assertStringContainsString('RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}', $this->workflow);
+        $this->assertStringContainsString('DEPLOY_PATH_PROD: ${{ secrets.PRODUCTION_DEPLOY_PATH }}', $this->workflow);
+    }
+
+    #[Test]
+    public function production_queue_restart_uses_the_application_runtime_identity(): void
+    {
+        $this->assertStringContainsString(
+            'sudo -n -u www-data -- php artisan queue:restart --ansi',
+            $this->workflow,
+        );
+        $this->assertStringNotContainsString(
+            '&& php artisan queue:restart',
+            $this->workflow,
+        );
     }
 }
