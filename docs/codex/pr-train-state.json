@@ -99973,9 +99973,9 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-QUERY-OWNER-URL-TRUTH-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f96658b25956a8b6a04e017cc2343f14c2eaf721",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -99988,6 +99988,10 @@
       "required_local_checks": {
         "status": "passed",
         "evidence": "Focused tests passed 7/67; scoped Pint passed 3 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 6/6 authorized paths."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3283 is open for implementation commit f96658b25956a8b6a04e017cc2343f14c2eaf721; the complete required-check set must pass before merge."
       }
     },
     "scope_validation": {
@@ -100017,8 +100021,13 @@
         "at": "2026-07-26T01:37:08Z",
         "status": "local_checks_passed",
         "note": "Task 7 now aggregates GSC rows to page/date/source grain, preserves safe data origins without duplicating product events, maps existing start/submit/view columns to canonical product metrics, and counts valid starts only for production traffic on backend-authoritative public indexable URL Truth rows. Focused tests passed 7/67, scoped Pint passed, dependency and command checks passed, composer validate/audit passed, and the exact diff is 6/6 authorized paths. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-26T01:38:18Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact 6-path Task 7 scope at f96658b25956a8b6a04e017cc2343f14c2eaf721, pushed codex/seo-search-to-result-funnel-01, and opened PR #3283. GitHub required checks are pending; no production-side or external action occurred."
       }
     ],
-    "updated_at": "2026-07-26T01:37:08Z"
+    "updated_at": "2026-07-26T01:38:18Z"
   }
 }
