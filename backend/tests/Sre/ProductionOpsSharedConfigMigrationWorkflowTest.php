@@ -52,6 +52,7 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
             'automatic_rollback_count: $automatic_rollback_count',
             'timeout-minutes: 10',
             'timeout --signal=TERM --kill-after=10s 180s',
+            'EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256=\'$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256\' timeout --signal=TERM --kill-after=10s 150s bash',
             'application_deploy_count: 0',
             'symlink_write_count: 0',
             'application_migration_count: 0',
@@ -68,6 +69,10 @@ final class ProductionOpsSharedConfigMigrationWorkflowTest extends TestCase
         $this->assertStringContainsString(
             'I explicitly approve production fap-api shared-to-dedicated ops config migration from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} and v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} template SHA256 ${EXPECTED_TEMPLATE_SHA256} source-path SHA256 ${EXPECTED_SOURCE_PATH_SHA256} source-config SHA256 ${EXPECTED_SOURCE_CONFIG_SHA256} stripped-source SHA256 ${EXPECTED_STRIPPED_SOURCE_SHA256} target-path SHA256 ${EXPECTED_TARGET_PATH_SHA256} target-current SHA256 ${EXPECTED_TARGET_CURRENT_SHA256} rendered-ops SHA256 ${EXPECTED_RENDERED_OPS_SHA256} foreign-runtime SHA256 ${EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256} section-counts 1/3/2 to 0/2/2; write one stripped shared source and one dedicated ops config, preserve foreign program state and PIDs, restart only fap-queue-ops, keep exact backup, and stop without automatic rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23.',
             $workflow,
+        );
+        $this->assertSame(
+            1,
+            substr_count($workflow, 'timeout --signal=TERM --kill-after=10s 150s bash'),
         );
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
         $this->assertStringContainsString(

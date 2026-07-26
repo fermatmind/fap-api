@@ -154,6 +154,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'from supervisor.options import ServerOptions',
             'ServerOptions().realize(args=["-c", sys.argv[1]])',
             'timeout --signal=TERM --kill-after=10s 180s',
+            'QUEUE_PROBE_PHP_B64=\'$queue_probe_b64\' timeout --signal=TERM --kill-after=10s 150s bash',
             'sudo -n "$supervisorctl_path" update fap-queue-ops',
             'sudo -n "$supervisorctl_path" restart fap-queue-ops:fap-queue-ops_00',
             'OPS_QUEUE_REMOTE_PREFLIGHT_FAILED',
@@ -257,6 +258,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertSame(
             2,
             substr_count($workflow, 'timeout --signal=TERM --kill-after=10s 180s'),
+        );
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'timeout --signal=TERM --kill-after=10s 150s bash'),
         );
     }
 
