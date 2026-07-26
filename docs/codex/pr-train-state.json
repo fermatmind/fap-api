@@ -100126,8 +100126,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "ready_to_merge",
-  "commit_sha": "dac3b94685dc01390807633cdd7651ecde8074d0",
+  "status": "source_query_and_observation_contract_local_checks_passed_github_checks_pending",
+  "commit_sha": "cefae89249c7241cc9e5d1a70c6032505124fcbb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100144,21 +100144,21 @@
       },
     "focused_recovery_tests": {
       "status": "passed",
-      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, opaque page IDs, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, query-count conservation, source/claim boundaries, exact recursive evidence schemas, credential/private-host rejection, exact nonfuture observation chronology, query-export plus complete global and per-target GSC/ranking/authority review binding, symlink-safe atomic artifact writes, exact FermatMind web property provenance, raw export hashes/counts, and independently complete recovery title/description candidates. Recovery plus ReviewPolicyRegistry passed 40 tests / 702 assertions."
+      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, opaque page IDs, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, query-count conservation, source/claim boundaries, exact recursive evidence schemas, query-free public source URLs, exact observation anchor/windows/metrics/second-batch lock, exact nonfuture observation chronology, query-export plus complete global and per-target GSC/ranking/authority review binding, symlink-safe atomic artifact writes, exact FermatMind web property provenance, raw export hashes/counts, and independently complete recovery title/description candidates. Recovery plus ReviewPolicyRegistry passed 41 tests / 711 assertions."
       },
     "required_local_checks": {
       "status": "passed_review_repairs",
-      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 40 tests / 702 assertions. Scoped Pint and git diff --check passed; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and operator-authorized Big Five freeze-classifier checks remain passed. The documented command intentionally exits 1, repeats with changed=false, and reports business_write=false, blocked_formal_gsc_readmodel_gate, package SHA ec37f9d1f0bfacab313639c8500e63d7330d2f7d59358f2f4b557e53a8fc3c5e, artifact SHA 376ca12fbd3c7f8d6f818f4471c9cf9c161687337d36863c59d524d834143bbb, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
+      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 41 tests / 711 assertions. Scoped Pint and git diff --check passed; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and operator-authorized Big Five freeze-classifier checks remain passed. The documented command intentionally exits 1, repeats with changed=false, and reports business_write=false, blocked_formal_gsc_readmodel_gate, package SHA ec37f9d1f0bfacab313639c8500e63d7330d2f7d59358f2f4b557e53a8fc3c5e, artifact SHA 376ca12fbd3c7f8d6f818f4471c9cf9c161687337d36863c59d524d834143bbb, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
-      "status": "passed",
-      "evidence": "All nine GitHub checks passed at exact head 00f8416f8725222e43367f405b47049b6dbec18f, including verify-bigfive. Exact-head Codex review reported no major issues and there are zero active unresolved non-outdated review threads. The reviewed implementation candidate is dac3b94685dc01390807633cdd7651ecde8074d0."
+      "status": "pending_after_review_repair",
+      "evidence": "All nine GitHub checks passed at ready-ledger head ace2d862262c250eb3a40caa8d41440724b7f805. Its exact-head review found that unrecognized signed source URL parameters could be persisted and that the observation anchor/metrics were not locked. Implementation head cefae89249c7241cc9e5d1a70c6032505124fcbb rejects every source URL query string and requires the exact observation anchor, windows, ordered metric set, D28 lock, and automatic-second-batch prohibition. A fresh complete GitHub cycle is pending."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
   "failure_reason": null,
@@ -100342,8 +100342,13 @@
       "at": "2026-07-26T10:10:38Z",
       "status": "ready_to_merge",
       "note": "All nine GitHub checks passed at exact head 00f8416f8725222e43367f405b47049b6dbec18f, including verify-bigfive. The exact-head Codex review reported no major issues, all prior findings are repaired, active unresolved non-outdated threads are zero, GitHub reports CLEAN/MERGEABLE, and the isolated worktree is clean. Exact semantic scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier regression only. This final ledger-only commit must itself pass the complete exact-head check and review cycle before squash merge. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T10:21:22Z",
+      "status": "source_query_and_observation_contract_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger head passed all nine checks, but exact-head review found that an unrecognized signed query parameter could preserve a secret-bearing source URL and that observation anchor/metrics were not locked. Source references now reject every query string rather than enumerating credential names. The observation contract now requires future_manual_publish_receipt.published_at, exact D1/D7/D14/D28 windows, the complete ordered six-metric set, D28_review_completed, and automatic_second_batch_allowed=false. Regressions cover sig=TOPSECRET, changed anchors, empty metrics, and partial metrics. Recovery plus ReviewPolicyRegistry passed 41 tests / 711 assertions and scoped Pint/diff checks passed. No production or business write occurred."
     }
   ],
-  "updated_at": "2026-07-26T10:10:38Z"
+  "updated_at": "2026-07-26T10:21:22Z"
 }
 }
