@@ -227,7 +227,7 @@ final class ArticleRecoveryBatchPlanner
                 'suppressed_target_count' => $suppressedCount,
                 'raw_query_persisted' => false,
             ],
-            'formal_readmodel_gate' => (array) data_get($evidence, 'gsc.formal_readmodel_gate', []),
+            'formal_readmodel_gate' => $this->blockedFormalReadmodelGate(),
             'target_set_sha256' => (string) ($evidence['target_set_sha256'] ?? ''),
             'targets' => $targetPlans,
             'manual_review_gate' => [
@@ -374,6 +374,10 @@ final class ArticleRecoveryBatchPlanner
         if (data_get($evidence, 'gsc.property') !== 'sc-domain:fermatmind.com'
             || data_get($evidence, 'gsc.search_type') !== 'web') {
             $issues[] = 'gsc_property_or_search_type_invalid';
+        }
+        if ($this->canonicalJson((array) data_get($evidence, 'gsc.formal_readmodel_gate', []))
+            !== $this->canonicalJson($this->blockedFormalReadmodelGate())) {
+            $issues[] = 'formal_readmodel_gate_invalid';
         }
         if (! $this->validHash((string) data_get($evidence, 'gsc.page_export.zip_sha256', ''))
             || ! $this->validHash((string) data_get($evidence, 'gsc.page_export.csv_sha256', ''))) {
@@ -714,6 +718,24 @@ final class ArticleRecoveryBatchPlanner
     private function formalReadmodelGateIssue(): string
     {
         return 'formal_gsc_readmodel_gate_not_passed';
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function blockedFormalReadmodelGate(): array
+    {
+        return [
+            'status' => 'blocked',
+            'required_data_origin' => 'live_gsc_api',
+            'required_row_source' => 'live_gsc_api',
+            'required_source_engine' => 'google',
+            'required_data_state' => 'final',
+            'required_article_cohort_coverage_count' => 54,
+            'actual_eligible_article_cohort_coverage_count' => 0,
+            'opportunity_queue_eligible' => false,
+            'reason' => 'The completed 10-row production canary covers only the zh MBTI test page and does not cover this 54-article cohort.',
+        ];
     }
 
     /**

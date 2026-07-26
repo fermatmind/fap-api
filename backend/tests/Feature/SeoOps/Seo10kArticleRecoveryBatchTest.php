@@ -952,6 +952,51 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         }
     }
 
+    public function test_it_requires_and_emits_the_canonical_blocked_formal_readmodel_gate(): void
+    {
+        [$directory, $evidence] = $this->mutableFixture();
+
+        try {
+            foreach ([
+                ['status' => 'passed'],
+                ['actual_eligible_article_cohort_coverage_count' => 54],
+                ['opportunity_queue_eligible' => true],
+            ] as $invalidGate) {
+                $mutated = $evidence;
+                $mutated['gsc']['formal_readmodel_gate'] = [
+                    ...$mutated['gsc']['formal_readmodel_gate'],
+                    ...$invalidGate,
+                ];
+                $this->writeJson($directory.'/live-gsc-evidence.v1.json', $mutated);
+                $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+                $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                    $directory.'/live-gsc-evidence.v1.json',
+                    $evidenceSha
+                );
+
+                self::assertFalse($package['ok']);
+                self::assertContains('formal_readmodel_gate_invalid', $package['issues']);
+                self::assertFalse($package['would_write']);
+            }
+
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $validEvidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+            $validPackage = (new ArticleRecoveryBatchPlanner($validEvidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $validEvidenceSha
+            );
+            self::assertSame('blocked', data_get($validPackage, 'formal_readmodel_gate.status'));
+            self::assertSame(
+                0,
+                data_get($validPackage, 'formal_readmodel_gate.actual_eligible_article_cohort_coverage_count')
+            );
+            self::assertFalse(data_get($validPackage, 'formal_readmodel_gate.opportunity_queue_eligible'));
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
     public function test_it_rejects_a_self_attested_formal_readmodel_gate_artifact(): void
     {
         [$directory, $evidence, , $pageCohort] = $this->mutableFixture();
