@@ -306,6 +306,12 @@ final class SeoSearchToResultFunnelTest extends TestCase
     {
         $url = 'https://fermatmind.com/en/tests/private-hash-unknown';
         $hash = hash('sha256', $url);
+        $this->insertUrlTruth(
+            $hash,
+            'https://fermatmind.com/en/tests/mismatched-public-owner',
+            'test_detail',
+            true,
+        );
         $this->insertGsc($hash, 100, 10);
         $this->insertFunnel($hash, 7, 6, 5);
 

@@ -402,15 +402,21 @@ final class SearchToResultFunnelReadModel
                 if (! $this->validHash($hash)) {
                     continue;
                 }
+                $canonicalUrl = is_scalar($row->canonical_url ?? null)
+                    ? trim((string) $row->canonical_url)
+                    : '';
+                if ($canonicalUrl === '' || ! hash_equals($hash, hash('sha256', $canonicalUrl))) {
+                    continue;
+                }
 
                 $private = (bool) ($row->is_private_flow ?? false)
-                    || $this->isPrivateUrl($row->canonical_url ?? null);
+                    || $this->isPrivateUrl($canonicalUrl);
                 $pageFamily = $this->dimension($row->page_entity_type ?? null, 64);
                 $locale = $this->locale($row->locale ?? null);
                 $sourceAuthority = $this->dimension($row->source_authority ?? null, 64);
                 $authorityOwned = is_string($sourceAuthority)
                     && in_array($sourceAuthority, $this->urlTruthAuthorities(), true);
-                $publicCanonical = $this->publicCanonicalUrl($row->canonical_url ?? null);
+                $publicCanonical = $this->publicCanonicalUrl($canonicalUrl);
                 $current = $truth[$hash] ?? null;
 
                 if ($current === null) {

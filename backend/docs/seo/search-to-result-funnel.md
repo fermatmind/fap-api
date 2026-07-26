@@ -22,7 +22,10 @@ The output uses only the SHA-256 canonical URL hash. It never returns a raw URL,
 raw query, result identifier, attempt identifier, order identifier, recovery
 token, or payment identifier. Every GSC hash must resolve to an existing URL
 Truth row; an unknown hash blocks the report so a potentially private imported
-hash cannot be emitted without an approved privacy classification.
+hash cannot be emitted without an approved privacy classification. A URL Truth
+row is accepted only when its stored hash exactly equals
+`sha256(canonical_url)`; a drifted hash/URL pair is treated as missing Truth and
+fails closed.
 
 ## Product event mapping
 
