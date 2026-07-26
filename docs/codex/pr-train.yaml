@@ -46957,3 +46957,51 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: SEO-SEARCH-TO-RESULT-FUNNEL-01
+    repo: fap-api
+    base: main
+    branch: codex/seo-search-to-result-funnel-01
+    title: "SEO-SEARCH-TO-RESULT-FUNNEL-01 connect search landing to product outcomes"
+    status: in_progress
+    depends_on:
+      - SEO-10K-GSC-BOUNDED-BACKFILL-01
+      - SEO-QUERY-OWNER-URL-TRUTH-01
+    train_scope: seo_search_to_result_funnel
+    scope:
+      - Join privacy-safe GSC page aggregates to canonical start_test, complete_test, and view_result daily metrics.
+      - Preserve the requested date window, source_engine, data_origin, and backend-authoritative page family.
+      - Report starts per 1,000 impressions and the start-to-complete-to-result funnel.
+      - Count valid product starts only for public, backend-authoritative, indexable URL Truth rows.
+    allowed_paths:
+      - backend/app/Services/SeoIntel/SearchToResultFunnelReadModel.php
+      - backend/app/Console/Commands/SeoIntelSearchToResultFunnelReportCommand.php
+      - backend/tests/Feature/Analytics/SeoSearchToResultFunnelTest.php
+      - backend/docs/seo/search-to-result-funnel.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Treat GSC as purchase, order, payment, or revenue truth.
+      - Store or output private result, attempt, order, recovery, or payment URLs or identifiers.
+      - Write analytics, CMS, URL Truth, publication, indexability, sitemap, llms, or Search Channel state.
+      - Call external analytics/search APIs, submit URLs/sitemaps, run a migration, or deploy.
+    validation:
+      - cd backend && php artisan test tests/Feature/Analytics/SeoSearchToResultFunnelTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/SeoIntel/SearchToResultFunnelReadModel.php app/Console/Commands/SeoIntelSearchToResultFunnelReportCommand.php tests/Feature/Analytics/SeoSearchToResultFunnelTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend

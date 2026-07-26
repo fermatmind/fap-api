@@ -99872,8 +99872,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "4a93f06f6b568fc7e648f6d4ac791a612fd9c5af",
+    "status": "merged",
+    "commit_sha": "bd5d317c76cc6f858bc0e2f3c853df2bef248d94",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
     "checks": {
       "dependency": {
@@ -99900,13 +99900,13 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-26T01:23:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -99954,8 +99954,71 @@
         "at": "2026-07-26T01:14:53Z",
         "status": "ready_to_merge",
         "note": "Exact head 4a93f06f6b568fc7e648f6d4ac791a612fd9c5af passed all nine required checks, including verify-bigfive. GitHub reports MERGEABLE/CLEAN, the branch is not behind origin/main, there are zero unresolved review threads, and the diff remains exactly 11/11 authorized paths. This final ledger-only transition must itself pass all required checks before squash merge."
+      },
+      {
+        "at": "2026-07-26T01:34:42Z",
+        "status": "merged",
+        "note": "GitHub reports PR #3280 MERGED at bd5d317c76cc6f858bc0e2f3c853df2bef248d94 after the final ledger-only head passed all nine required checks. origin/main contains the merge, local main was fast-forwarded while preserving unrelated operator changes, the remote and local task branches were deleted, the isolated worktree was removed, and post-merge focused validation passed 11 tests / 69 assertions plus 2 classifier tests / 6 assertions."
       }
     ],
-    "updated_at": "2026-07-26T01:14:53Z"
+    "updated_at": "2026-07-26T01:34:42Z"
+  },
+  "SEO-SEARCH-TO-RESULT-FUNNEL-01": {
+    "id": "SEO-SEARCH-TO-RESULT-FUNNEL-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-search-to-result-funnel-01",
+    "title": "SEO-SEARCH-TO-RESULT-FUNNEL-01 connect search landing to product outcomes",
+    "depends_on": [
+      "SEO-10K-GSC-BOUNDED-BACKFILL-01",
+      "SEO-QUERY-OWNER-URL-TRUTH-01"
+    ],
+    "status": "local_checks_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 3 PR #3276 is MERGED at 3f4648e2e166e8d482009a5c3ef864489703e013 and Task 6 PR #3280 is MERGED at bd5d317c76cc6f858bc0e2f3c853df2bef248d94; exact fap-api origin/main contains both merge commits."
+      },
+      "focused_search_to_result_tests": {
+        "status": "passed",
+        "evidence": "The final focused suite passed 7 tests / 67 assertions covering page aggregation, historical-column-to-canonical event mapping, date/source/family filtering, mixed data-origin deduplication, private URL and non-product traffic exclusion, backend URL Truth authority/indexability gates, command zero-write behavior, and missing-schema fail-closed behavior. The first invocation stopped before Laravel boot because the new isolated worktree had no vendor directory; reusing the primary vendor symlink exposed a pre-existing absolute Composer classmap pointing to a removed temporary worktree. A private ignored vendor copy was created and its autoload rebuilt without tracked changes before the actual tests ran."
+      },
+      "required_local_checks": {
+        "status": "passed",
+        "evidence": "Focused tests passed 7/67; scoped Pint passed 3 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 6/6 authorized paths."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-26T01:34:42Z",
+        "status": "implementation_in_progress",
+        "note": "Started Task 7 from exact fap-api origin/main bd5d317c76cc6f858bc0e2f3c853df2bef248d94 in an isolated worktree after both declared dependencies were verified merged. Scope is a read-only hash/date/source/data-origin/page-family projection over existing GSC, funnel, and URL Truth tables; no migration, database/CMS write, external API call, publication/indexability/sitemap/llms/Search Channel action, URL submission, or deploy is authorized or attempted."
+      },
+      {
+        "at": "2026-07-26T01:37:08Z",
+        "status": "local_checks_passed",
+        "note": "Task 7 now aggregates GSC rows to page/date/source grain, preserves safe data origins without duplicating product events, maps existing start/submit/view columns to canonical product metrics, and counts valid starts only for production traffic on backend-authoritative public indexable URL Truth rows. Focused tests passed 7/67, scoped Pint passed, dependency and command checks passed, composer validate/audit passed, and the exact diff is 6/6 authorized paths. No production or external write occurred."
+      }
+    ],
+    "updated_at": "2026-07-26T01:37:08Z"
   }
 }
