@@ -775,10 +775,14 @@ final class ArticleRecoveryBatchPlanner
                 'target_query_summary_sha256' => $targetQuerySummarySha256,
             ];
             $reviewMaterial = [
+                'rank' => $rank,
+                'article_id' => (int) ($target['article_id'] ?? 0),
+                'locale' => $locale,
+                'slug' => $slug,
                 'canonical_url' => $url,
                 'page_evidence_id' => (string) ($target['page_evidence_id'] ?? ''),
-                'content_sha256' => (string) data_get($target, 'current_authority.content_sha256', ''),
-                'seo_sha256' => (string) data_get($target, 'current_authority.seo_sha256', ''),
+                'current_authority' => (array) ($target['current_authority'] ?? []),
+                'gsc_page' => (array) ($target['gsc_page'] ?? []),
                 'query_evidence' => $queryReviewEvidence,
                 'proposed_recovery' => (array) ($target['proposed_recovery'] ?? []),
                 'source_refs' => (array) ($target['source_refs'] ?? []),
@@ -1127,6 +1131,10 @@ final class ArticleRecoveryBatchPlanner
 
     private function isPublicSourceHost(string $host): bool
     {
+        if (str_ends_with($host, '.')) {
+            return false;
+        }
+
         if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
             return filter_var(
                 $host,
@@ -1136,6 +1144,13 @@ final class ArticleRecoveryBatchPlanner
         }
 
         if (preg_match('/^[0-9.]+$/', $host) === 1) {
+            return false;
+        }
+        $labels = explode('.', $host);
+        if (array_all(
+            $labels,
+            static fn (string $label): bool => preg_match('/^(?:0x[0-9a-f]+|[0-9]+)$/', $label) === 1,
+        )) {
             return false;
         }
 

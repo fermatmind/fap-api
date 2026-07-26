@@ -56,7 +56,7 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         self::assertSame('sc-domain:fermatmind.com', data_get($package, 'source_evidence.property'));
         self::assertSame('web', data_get($package, 'source_evidence.search_type'));
         self::assertSame(
-            '057f1e88800b0fea500d0354092318a4461028ebc7c39659428f83129fa399c1',
+            '7b55d212ceabf0d574e60df6a2c557fdde1b025a06886017fc7cd98bf44d2d4b',
             $package['package_sha256']
         );
         self::assertSame(
@@ -568,6 +568,21 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
                 'url' => 'https://0177.0.0.1/private',
                 'authority_type' => 'research',
             ];
+            $evidence['targets'][2]['source_refs'][] = [
+                'id' => 'root-dot-localhost',
+                'url' => 'https://localhost./private',
+                'authority_type' => 'research',
+            ];
+            $evidence['targets'][3]['source_refs'][] = [
+                'id' => 'root-dot-internal',
+                'url' => 'https://metadata.google.internal./latest',
+                'authority_type' => 'research',
+            ];
+            $evidence['targets'][4]['source_refs'][] = [
+                'id' => 'hex-loopback',
+                'url' => 'https://0x7f.0.0.1/private',
+                'authority_type' => 'research',
+            ];
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
             $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
 
@@ -1005,6 +1020,51 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             self::assertSame(
                 str_repeat('b', 64),
                 data_get($mutated, 'targets.0.private_query_export_csv_sha256')
+            );
+            self::assertFalse($mutated['approval_eligible']);
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_binds_target_identity_authority_rank_and_gsc_metrics_into_the_review_hash(): void
+    {
+        $planner = app(ArticleRecoveryBatchPlanner::class);
+        $baseline = $planner->plan($this->evidencePath, self::EVIDENCE_SHA256);
+        [$directory, $evidence, , $pageCohort] = $this->mutableFixture();
+
+        try {
+            $evidence['targets'][0]['gsc_page']['current_position'] += 0.1;
+            $targetPageEvidenceId = $evidence['targets'][0]['page_evidence_id'];
+            foreach ($pageCohort['rows'] as &$row) {
+                if ($row['page_evidence_id'] === $targetPageEvidenceId) {
+                    $row['current_position'] += 0.1;
+                    break;
+                }
+            }
+            unset($row);
+            $pageCohort['cutoff_attestation']['rank_5'] = $pageCohort['rows'][4];
+            $pageCohort['cutoff_attestation']['rank_6'] = $pageCohort['rows'][5];
+            $this->writeJson($directory.'/live-gsc-page-cohort-hashes.v1.json', $pageCohort);
+            $evidence['gsc']['page_cohort_artifact']['sha256'] = hash_file(
+                'sha256',
+                $directory.'/live-gsc-page-cohort-hashes.v1.json'
+            );
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $mutated = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertNotSame(
+                data_get($baseline, 'targets.0.review_target_sha256'),
+                data_get($mutated, 'targets.0.review_target_sha256')
+            );
+            self::assertSame(
+                $evidence['targets'][0]['gsc_page'],
+                data_get($mutated, 'targets.0.gsc_page')
             );
             self::assertFalse($mutated['approval_eligible']);
         } finally {
