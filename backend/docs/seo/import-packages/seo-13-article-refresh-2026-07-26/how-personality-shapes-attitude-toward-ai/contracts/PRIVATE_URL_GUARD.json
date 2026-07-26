@@ -1,0 +1,22 @@
+{
+  "forbidden_paths": [
+    "/result",
+    "/results",
+    "/orders",
+    "/order",
+    "/share",
+    "/pay",
+    "/payment",
+    "/history",
+    "/take"
+  ],
+  "forbidden_query_keys": [
+    "result_id",
+    "order_id",
+    "payment_id",
+    "token",
+    "score",
+    "user_id",
+    "report_id"
+  ]
+}
