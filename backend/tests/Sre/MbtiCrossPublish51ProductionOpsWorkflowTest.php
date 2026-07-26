@@ -213,6 +213,63 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
         );
     }
 
+    #[Test]
+    public function workflow_keeps_remote_execution_and_receipt_validation_in_separate_run_steps(): void
+    {
+        $workflow = $this->workflow();
+
+        $this->assertStringContainsString(
+            'printf \'%s\' "$result" > "$RUNNER_TEMP/mbti-cross-publish51-result.json"',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            '- name: Validate operation and build sanitized receipt',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            'result="$(<"$result_file")"',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            'rm -f "$result_file"',
+            $workflow,
+        );
+        $this->assertSame(
+            1,
+            substr_count($workflow, 'printf \'%s\' "$result"'),
+            'The raw result must only be persisted once to the runner temporary directory.',
+        );
+        $this->assertStringNotContainsString(
+            'artifacts/mbti-cross-publish51-result.json',
+            $workflow,
+            'The raw operation result must never enter the uploaded artifact directory.',
+        );
+
+        $lines = preg_split('/\R/', $workflow);
+        $this->assertIsArray($lines);
+        foreach ($lines as $index => $line) {
+            if (preg_match('/^(\s*)run:\s*\|\s*$/', $line, $matches) !== 1) {
+                continue;
+            }
+
+            $indent = strlen($matches[1]);
+            $body = '';
+            for ($cursor = $index + 1; $cursor < count($lines); $cursor++) {
+                $candidate = $lines[$cursor];
+                if ($candidate !== '' && strlen($candidate) - strlen(ltrim($candidate)) <= $indent) {
+                    break;
+                }
+                $body .= $candidate."\n";
+            }
+
+            $this->assertLessThanOrEqual(
+                20_000,
+                strlen($body),
+                'Each run block must stay below GitHub Actions’ 21,000-character expression limit.',
+            );
+        }
+    }
+
     private function workflow(): string
     {
         $path = dirname(__DIR__, 3).'/.github/workflows/mbti-cross-publish51-production-ops.yml';

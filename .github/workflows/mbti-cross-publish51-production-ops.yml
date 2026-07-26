@@ -571,6 +571,24 @@ jobs:
             exit 1
           fi
 
+          umask 077
+          printf '%s' "$result" > "$RUNNER_TEMP/mbti-cross-publish51-result.json"
+
+      - name: Validate operation and build sanitized receipt
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          EXPECTED_STATE_SHA256: ${{ needs.eligibility.outputs.expected_state_sha256 }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          PACKAGE_SHA256: 604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae
+          EDITORIAL_AUTHORIZATION_SHA256: be4f17484334074cf2c90d57898ab80b6074093b2510a4b7b4b0432a164b4670
+        run: |
+          set -euo pipefail
+          result_file="$RUNNER_TEMP/mbti-cross-publish51-result.json"
+          test -f "$result_file"
+          result="$(<"$result_file")"
+
           jq -e \
             --arg package "$PACKAGE_SHA256" \
             --arg authorization "$EDITORIAL_AUTHORIZATION_SHA256" \
@@ -736,6 +754,8 @@ jobs:
               public_page_readback_completed: $page_readback,
               public_feed_readback_completed: $feed_readback
             }' > artifacts/mbti-cross-publish51-production-ops.json
+
+          rm -f "$result_file"
 
       - name: Upload sanitized immutable phase receipt
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
