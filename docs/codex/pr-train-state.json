@@ -9,7 +9,7 @@
       "MBTI-CROSS-PUBLISHER-49",
       "MBTI-CROSS-AUTHORITY-50"
     ],
-    "status": "ready_to_merge",
+    "status": "github_review_repairing",
     "commit_sha": "ad8eb5e2ce726527415d9cc8998b36e5b93d7f86",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3294",
     "checks": {
@@ -27,17 +27,17 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 86 assertions after all three review repairs; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed, including Big Five 1601 tests / 195611 assertions, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts were removed or restored to HEAD."
+        "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 102 assertions after the complete review-repair series; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed, including Big Five 1601 tests / 195611 assertions, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts were removed or restored to HEAD."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact reviewed head ad8eb5e2ce726527415d9cc8998b36e5b93d7f86 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validation, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. All three actionable review threads were repaired in scope and resolved."
+        "status": "pending",
+        "evidence": "Exact head f4e881c1bcfe9b8a8f5c0e5d39e2cf639fc6eba4 passed all 9 GitHub checks, then exact-head review identified a Phase B discoverability-cache closeout gap. Fresh checks are required after the in-scope repair."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -81,9 +81,19 @@
         "at": "2026-07-26T05:30:00Z",
         "status": "ready_to_merge",
         "note": "Exact head ad8eb5e2ce726527415d9cc8998b36e5b93d7f86 passed all 9 required GitHub checks, all three actionable review threads are resolved, mergeability is CLEAN, and the PR remains limited to the declared five paths. This ledger-only transition records readiness; its resulting exact head must also pass required checks before squash merge."
+      },
+      {
+        "at": "2026-07-26T05:46:00Z",
+        "status": "github_review_repairing",
+        "note": "Final ledger head f4e881c1b passed all 9 GitHub checks, then exact-head review found that Phase B could sign PASS_APPLY before backend/frontend discoverability caches and public feeds converged. The scoped repair adds read-only closeout readiness to indexability preflight and, only after authorized indexability apply, exact backend cache invalidation, sitemap-source warm, bounded frontend path revalidation, and three-feed exact-URL readback before receipt creation. The first focused static-test retry failed only because five assertions expected single-quoted path literals after the workflow switched those literals to double quotes; assertions were corrected in scope and the full focused validation is being rerun."
+      },
+      {
+        "at": "2026-07-26T05:47:00Z",
+        "status": "github_review_repairing",
+        "note": "The Phase B cache/readback repair passed workflow YAML, actionlint, focused SRE tests 3/102, scoped Pint, ledger JSON, and diff checks. The immutable preflight receipt now proves closeout readiness; PASS_APPLY requires five exact backend cache keys invalidated, successful sitemap-source warm, five bounded frontend paths revalidated, and all three exact comparison URLs present in sitemap.xml, llms.txt, and llms-full.txt. No search submission, deploy, symlink, restart, or automatic rollback path was added."
       }
     ],
-    "updated_at": "2026-07-26T05:30:00Z"
+    "updated_at": "2026-07-26T05:47:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",

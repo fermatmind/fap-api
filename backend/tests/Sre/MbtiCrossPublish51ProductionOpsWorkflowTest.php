@@ -87,8 +87,8 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             'test ! -e "$DEPLOY_PATH/.dep/deploy.lock"',
             'test "$post_current" = "$current"',
             'test "$(tr -d \'\\r\\n\' < "$post_current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"',
-            'timeout --signal=TERM --kill-after=10s 180s',
-            'timeout --signal=TERM --kill-after=10s 150s bash',
+            'timeout --signal=TERM --kill-after=10s 300s',
+            'timeout --signal=TERM --kill-after=10s 270s bash',
             'MBTI_CROSS_PUBLISH51_REMOTE_OPERATION_FAILED',
         ] as $contract) {
             $this->assertStringContainsString($contract, $workflow);
@@ -137,6 +137,22 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             '(.content_payload_json.internal_links | length) == 7',
             'rollback_manifest_sha256',
             'operator_approval_phrase_sha256',
+            '"seo:sitemap-source:v1:fresh"',
+            '"seo:sitemap:xml:v6"',
+            '"seo:sitemap:etag:v6"',
+            '"seo:llms-txt:v1:body"',
+            '"seo:llms-full-txt:v1:body"',
+            'seo:warm-sitemap-source-cache --json --no-interaction --no-ansi',
+            '"/zh/personality/enfp-vs-entp"',
+            '"/zh/personality/estj-vs-entj"',
+            '"/zh/personality/isfp-vs-infp"',
+            '"/llms.txt"',
+            '"/llms-full.txt"',
+            'X-FM-Content-Release-Token',
+            'https://fermatmind.com/${surface}?mbti_cross_publish51=${EXPECTED_STATE_SHA256}',
+            'cache_closeout_ready',
+            'cache_closeout_completed',
+            'public_feed_readback_completed',
             'artifacts/mbti-cross-publish51-production-ops.json',
         ] as $contract) {
             $this->assertStringContainsString($contract, $workflow);

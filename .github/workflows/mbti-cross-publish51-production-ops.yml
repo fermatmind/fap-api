@@ -148,6 +148,10 @@ jobs:
                  and .content_write_count == 0
                  and .indexability_write_count == 0
                  and .search_submission_count == 0
+                 and (if $mode == "indexability_preflight"
+                      then .cache_closeout_ready == true
+                      else true
+                      end)
                  and (if $mode == "content_preflight"
                       then .current_state_sha256 == $state
                       else .content_readback_sha256 == $state
@@ -238,10 +242,10 @@ jobs:
           approval_b64="$(printf '%s' "$OPERATOR_APPROVAL_PHRASE" | base64 -w 0)"
 
           set +e
-          result="$(timeout --signal=TERM --kill-after=10s 180s \
+          result="$(timeout --signal=TERM --kill-after=10s 300s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_STATE_SHA256='$EXPECTED_STATE_SHA256' APPROVAL_B64='$approval_b64' timeout --signal=TERM --kill-after=10s 150s bash -s" \
+            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_STATE_SHA256='$EXPECTED_STATE_SHA256' APPROVAL_B64='$approval_b64' timeout --signal=TERM --kill-after=10s 270s bash -s" \
             2>"$RUNNER_TEMP/mbti-cross-publish51.err" <<'REMOTE'
           set -euo pipefail
           current="$(readlink -f "$DEPLOY_PATH/current")"
@@ -263,16 +267,154 @@ jobs:
                 --json --no-interaction --no-ansi
               ;;
             indexability_preflight)
-              php artisan personality:mbti-cross-publisher49-indexability \
-                --json --no-interaction --no-ansi
+              publisher_result="$(php artisan personality:mbti-cross-publisher49-indexability \
+                --json --no-interaction --no-ansi)"
+              cache_endpoint_count="$(php -r '
+              require getcwd()."/vendor/autoload.php";
+              $app = require getcwd()."/bootstrap/app.php";
+              $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+              $endpoints = array_values(array_filter(array_map(
+                  static fn (mixed $value): string => trim((string) $value),
+                  (array) config("ops.content_release_observability.cache_invalidation_urls", [])
+              )));
+              $secret = trim((string) config("ops.content_release_observability.cache_invalidation_secret", ""));
+              if ($endpoints === [] || $secret === "") {
+                  throw new RuntimeException("Bounded frontend cache revalidation is not configured.");
+              }
+              echo count($endpoints);
+              ')"
+              jq -c \
+                --argjson endpoint_count "$cache_endpoint_count" \
+                '. + {
+                  cache_closeout_ready: true,
+                  frontend_revalidation_endpoint_count: $endpoint_count
+                }' <<<"$publisher_result"
               ;;
             indexability_apply)
               approval="$(printf '%s' "$APPROVAL_B64" | base64 -d)"
-              php artisan personality:mbti-cross-publisher49-indexability \
+              publisher_result="$(php artisan personality:mbti-cross-publisher49-indexability \
                 --execute \
                 --content-readback-sha256="$EXPECTED_STATE_SHA256" \
                 --production-authorization="$approval" \
-                --json --no-interaction --no-ansi
+                --json --no-interaction --no-ansi)"
+              jq -e '
+                .ok == true
+                and .artifact == "mbti.cross.publisher49.indexability.v1"
+                and .mode == "write"
+                and (.status == "released" or .status == "already_released")' \
+                <<<"$publisher_result" >/dev/null
+
+              php -r '
+              require getcwd()."/vendor/autoload.php";
+              $app = require getcwd()."/bootstrap/app.php";
+              $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+              foreach ([
+                  "seo:sitemap-source:v1:fresh",
+                  "seo:sitemap:xml:v6",
+                  "seo:sitemap:etag:v6",
+                  "seo:llms-txt:v1:body",
+                  "seo:llms-full-txt:v1:body",
+              ] as $key) {
+                  Illuminate\Support\Facades\Cache::forget($key);
+              }
+              ' >/dev/null
+
+              sitemap_warm="$(php artisan seo:warm-sitemap-source-cache --json --no-interaction --no-ansi)"
+              jq -e '.status == "warmed" and .count > 0' <<<"$sitemap_warm" >/dev/null
+
+              php -r '
+              require getcwd()."/vendor/autoload.php";
+              $app = require getcwd()."/bootstrap/app.php";
+              $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+              $paths = [
+                  "/zh/personality/enfp-vs-entp",
+                  "/zh/personality/estj-vs-entj",
+                  "/zh/personality/isfp-vs-infp",
+                  "/llms.txt",
+                  "/llms-full.txt",
+              ];
+              $endpoints = array_values(array_filter(array_map(
+                  static fn (mixed $value): string => trim((string) $value),
+                  (array) config("ops.content_release_observability.cache_invalidation_urls", [])
+              )));
+              $secret = trim((string) config("ops.content_release_observability.cache_invalidation_secret", ""));
+              if ($endpoints === [] || $secret === "") {
+                  throw new RuntimeException("Bounded frontend cache revalidation is not configured.");
+              }
+              $payload = [
+                  "event" => "content_release_revalidate",
+                  "source" => "mbti_cross_publish51_indexability_apply",
+                  "content" => [
+                      "type" => "mbti-cross-comparison",
+                      "id" => 0,
+                      "org_id" => 0,
+                      "title" => "MBTI cross comparison exact-three release",
+                      "slug" => "exact-three",
+                      "locale" => "zh-CN",
+                      "status" => "published",
+                      "visibility" => "public",
+                  ],
+                  "cache_signal" => [
+                      "kind" => "invalidate",
+                      "paths" => $paths,
+                      "urls" => $paths,
+                  ],
+              ];
+              foreach ($endpoints as $endpoint) {
+                  $response = Illuminate\Support\Facades\Http::acceptJson()
+                      ->timeout(15)
+                      ->withHeaders([
+                          "X-FM-Content-Release-Source" => "mbti_cross_publish51_indexability_apply",
+                          "X-FM-Content-Release-Token" => $secret,
+                      ])
+                      ->post($endpoint, $payload);
+                  $body = $response->json();
+                  $revalidated = is_array($body) ? (array) ($body["revalidated_paths"] ?? []) : [];
+                  $rejected = is_array($body) ? (array) ($body["rejected_paths"] ?? []) : [];
+                  sort($revalidated);
+                  $expected = $paths;
+                  sort($expected);
+                  if (! $response->successful() || $rejected !== [] || $revalidated !== $expected) {
+                      throw new RuntimeException("Bounded frontend cache revalidation failed.");
+                  }
+              }
+              ' >/dev/null
+
+              readback_dir="$(mktemp -d)"
+              trap 'rm -rf "$readback_dir"' EXIT
+              readback_pids=()
+              for surface in sitemap.xml llms.txt llms-full.txt; do
+                (
+                  curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+                    --connect-timeout 10 --max-time 60 \
+                    -H 'Cache-Control: no-cache' \
+                    "https://fermatmind.com/${surface}?mbti_cross_publish51=${EXPECTED_STATE_SHA256}" \
+                    >"$readback_dir/$surface"
+                ) &
+                readback_pids+=("$!")
+              done
+              for readback_pid in "${readback_pids[@]}"; do
+                wait "$readback_pid"
+              done
+              for slug in enfp-vs-entp estj-vs-entj isfp-vs-infp; do
+                expected_url="https://fermatmind.com/zh/personality/$slug"
+                grep -F "$expected_url" "$readback_dir/sitemap.xml" >/dev/null
+                grep -F "$expected_url" "$readback_dir/llms.txt" >/dev/null
+                grep -F "$expected_url" "$readback_dir/llms-full.txt" >/dev/null
+              done
+              rm -rf "$readback_dir"
+              trap - EXIT
+
+              jq -c \
+                '. + {
+                  cache_closeout_completed: true,
+                  backend_cache_key_count: 5,
+                  frontend_revalidation_path_count: 5,
+                  public_feed_readback_completed: true,
+                  public_feed_count: 3
+                }' <<<"$publisher_result"
               ;;
           esac
           post_current="$(readlink -f "$DEPLOY_PATH/current")"
@@ -346,6 +488,8 @@ jobs:
                 and (.discoverability_state == "held" or .discoverability_state == "released")
                 and .indexability_write_committed == false
                 and .body_mutated == false
+                and .cache_closeout_ready == true
+                and .frontend_revalidation_endpoint_count > 0
                 and (.readback | length) == 3' <<<"$result" >/dev/null
               ;;
             indexability_apply)
@@ -358,6 +502,11 @@ jobs:
                  and (.content_fingerprint_sha256 | test("^[0-9a-f]{64}$"))
                  and .discoverability_state == "released"
                  and .body_mutated == false
+                 and .cache_closeout_completed == true
+                 and .backend_cache_key_count == 5
+                 and .frontend_revalidation_path_count == 5
+                 and .public_feed_readback_completed == true
+                 and .public_feed_count == 3
                  and (.readback | length) == 3
                  and all(.readback[];
                    .publish_status == "published"
@@ -393,6 +542,9 @@ jobs:
             --arg operation_status "$(jq -r '.status' <<<"$result")" \
             --argjson writes_committed "$(jq '.writes_committed // false' <<<"$result")" \
             --argjson indexability_committed "$(jq '.indexability_write_committed // false' <<<"$result")" \
+            --argjson cache_ready "$(jq '.cache_closeout_ready // false' <<<"$result")" \
+            --argjson cache_closeout "$(jq '.cache_closeout_completed // false' <<<"$result")" \
+            --argjson feed_readback "$(jq '.public_feed_readback_completed // false' <<<"$result")" \
             '{
               contract_version: "mbti.cross.publish51.production_ops.v1",
               mode: $mode,
@@ -420,7 +572,10 @@ jobs:
               search_submission_count: 0,
               application_deploy_count: 0,
               symlink_write_count: 0,
-              worker_restart_count: 0
+              worker_restart_count: 0,
+              cache_closeout_ready: $cache_ready,
+              cache_closeout_completed: $cache_closeout,
+              public_feed_readback_completed: $feed_readback
             }' > artifacts/mbti-cross-publish51-production-ops.json
 
       - name: Upload sanitized immutable phase receipt
