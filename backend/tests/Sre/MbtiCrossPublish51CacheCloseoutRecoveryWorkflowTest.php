@@ -39,6 +39,10 @@ final class MbtiCrossPublish51CacheCloseoutRecoveryWorkflowTest extends TestCase
             'mbti_cross_publish51_cache_closeout_recovery',
             'frontend_revalidation_path_count == 6',
             'source_found_count == 3',
+            'closeout_state=recovery_ready',
+            'closeout_state=already_closed',
+            '.closeout_state == "recovery_ready"',
+            '.closeout_state == "already_closed"',
             'public_api_readback_completed == true',
             'public_page_readback_completed == true',
             'public_feed_readback_completed == true',
@@ -67,6 +71,11 @@ final class MbtiCrossPublish51CacheCloseoutRecoveryWorkflowTest extends TestCase
         $this->assertStringNotContainsString('rollback --execute', $workflow);
         $this->assertStringNotContainsString('request-indexing', $workflow);
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'curl --http1.1 -fsS --retry 3'),
+            'Canonical feed reads must avoid the observed HTTP/2 truncation boundary.',
+        );
     }
 
     #[Test]
