@@ -27,12 +27,12 @@ for hash_value in \
   "${EVIDENCE_SOURCE_ORIGINAL_CONFIG_SHA256:-}" \
   "${EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256:-}" \
   "${EVIDENCE_TARGET_PATH_SHA256:-}" \
-  "${EVIDENCE_TARGET_CURRENT_SHA256:-}" \
-  "${EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256:-}"; do
+  "${EVIDENCE_TARGET_CURRENT_SHA256:-}"; do
   [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
 done
 if [ "$MODE" = apply ]; then
   [[ "${EXPECTED_BACKUP_SHA256:-}" =~ ^[0-9a-f]{64}$ ]]
+  [[ "${EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256:-}" =~ ^[0-9a-f]{64}$ ]]
   [[ "${EXPECTED_RESIDUE_SET_SHA256:-}" =~ ^[0-9a-f]{64}$ ]]
   [[ "${EXPECTED_RESIDUE_FILE_COUNT:-}" =~ ^[1-5]$ ]]
   test "${EXPECTED_VALIDATION_PROCESS_STATE:-}" = absent
@@ -87,7 +87,10 @@ foreign_runtime_fingerprint_sha256="$(
     | sha256sum \
     | awk '{print $1}'
 )"
-test "$foreign_runtime_fingerprint_sha256" = "$EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
+[[ "$foreign_runtime_fingerprint_sha256" =~ ^[0-9a-f]{64}$ ]]
+if [ "$MODE" = apply ]; then
+  test "$foreign_runtime_fingerprint_sha256" = "$EXPECTED_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
+fi
 
 failure_gate=WORKER_STATE
 worker_pid="$(sudo -n "$supervisorctl_path" pid fap-queue-ops:fap-queue-ops_00 2>/dev/null)"
