@@ -55,8 +55,10 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         );
         self::assertSame('sc-domain:fermatmind.com', data_get($package, 'source_evidence.property'));
         self::assertSame('web', data_get($package, 'source_evidence.search_type'));
+        self::assertSame(3, data_get($package, 'source_evidence.finalization_lag_days'));
+        self::assertSame(10, data_get($package, 'source_evidence.max_report_age_days'));
         self::assertSame(
-            'ec37f9d1f0bfacab313639c8500e63d7330d2f7d59358f2f4b557e53a8fc3c5e',
+            'd74bbd73a96236016fcdb79fe08ccf2d3c9e1f23ac36ecf12e6943f34e14ff64',
             $package['package_sha256']
         );
         self::assertSame(
@@ -86,6 +88,8 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $target['review_target_sha256']);
             self::assertNotEmpty(data_get($target, 'claim_boundary.required_disclaimer'));
             self::assertGreaterThanOrEqual(2, count($target['source_refs']));
+            self::assertSame(3, data_get($target, 'gsc_provenance.finalization_lag_days'));
+            self::assertSame(10, data_get($target, 'gsc_provenance.max_report_age_days'));
         }
 
         foreach ($package['negative_guarantees'] as $allowed) {
@@ -703,6 +707,158 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         }
     }
 
+    public function test_it_enforces_gsc_finalization_and_freshness_bounds(): void
+    {
+        [$directory, $evidence] = $this->mutableFixture();
+        $originalLag = config('seo_intel.gsc_backfill_lag_days');
+        $originalMaxReportAge = config('seo_intel.gsc_data_quality.max_report_age_days');
+
+        try {
+            config()->set('seo_intel.gsc_backfill_lag_days', 3);
+            config()->set('seo_intel.gsc_data_quality.max_report_age_days', 10);
+
+            $windows = [
+                'exact_finalization_boundary' => [
+                    'previous' => ['start' => '2026-05-29', 'end' => '2026-06-25'],
+                    'current' => ['start' => '2026-06-26', 'end' => '2026-07-23'],
+                    'valid' => true,
+                ],
+                'exact_freshness_boundary' => [
+                    'previous' => ['start' => '2026-05-24', 'end' => '2026-06-19'],
+                    'current' => ['start' => '2026-06-20', 'end' => '2026-07-16'],
+                    'valid' => true,
+                ],
+                'non_finalized_current_window' => [
+                    'previous' => ['start' => '2026-06-01', 'end' => '2026-06-27'],
+                    'current' => ['start' => '2026-06-28', 'end' => '2026-07-24'],
+                    'valid' => false,
+                ],
+                'stale_current_window' => [
+                    'previous' => ['start' => '2026-05-23', 'end' => '2026-06-18'],
+                    'current' => ['start' => '2026-06-19', 'end' => '2026-07-15'],
+                    'valid' => false,
+                ],
+            ];
+
+            foreach ($windows as $window) {
+                $mutated = $evidence;
+                $mutated['gsc']['previous_window'] = $window['previous'];
+                $mutated['gsc']['current_window'] = $window['current'];
+                $this->writeJson($directory.'/live-gsc-evidence.v1.json', $mutated);
+                $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+                $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                    $directory.'/live-gsc-evidence.v1.json',
+                    $evidenceSha
+                );
+
+                if ($window['valid']) {
+                    self::assertNotContains('gsc_comparison_windows_invalid', $package['issues']);
+                } else {
+                    self::assertContains('gsc_comparison_windows_invalid', $package['issues']);
+                }
+            }
+
+            config()->set('seo_intel.gsc_data_quality.max_report_age_days', 2);
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+            $invalidBounds = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+            self::assertContains('gsc_comparison_windows_invalid', $invalidBounds['issues']);
+        } finally {
+            config()->set('seo_intel.gsc_backfill_lag_days', $originalLag);
+            config()->set('seo_intel.gsc_data_quality.max_report_age_days', $originalMaxReportAge);
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_enforces_the_impression_position_zero_relationship_for_targets_and_cohort_rows(): void
+    {
+        [$directory, $evidence, , $pageCohort] = $this->mutableFixture();
+
+        try {
+            $targetUrl = $evidence['targets'][0]['canonical_url'];
+            $evidence['targets'][0]['gsc_page']['current_position'] = 0;
+            $pageCohort['rows'][0]['current_position'] = 0;
+            $this->writeJson($directory.'/live-gsc-page-cohort-hashes.v1.json', $pageCohort);
+            $evidence['gsc']['page_cohort_artifact']['sha256'] = hash_file(
+                'sha256',
+                $directory.'/live-gsc-page-cohort-hashes.v1.json'
+            );
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $positiveImpressionsWithZeroPosition = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+            self::assertContains(
+                'gsc_impression_position_relationship_invalid:'.$targetUrl,
+                $positiveImpressionsWithZeroPosition['issues']
+            );
+            self::assertContains('page_cohort_row_invalid', $positiveImpressionsWithZeroPosition['issues']);
+
+            $evidence = json_decode(File::get($this->evidencePath), true, 512, JSON_THROW_ON_ERROR);
+            $pageCohort = json_decode(
+                File::get(dirname($this->evidencePath).'/live-gsc-page-cohort-hashes.v1.json'),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
+            );
+            $targetUrl = $evidence['targets'][1]['canonical_url'];
+            $evidence['targets'][1]['gsc_page']['current_clicks'] = 0;
+            $evidence['targets'][1]['gsc_page']['current_impressions'] = 0;
+            $evidence['targets'][1]['gsc_page']['click_delta'] = -1;
+            $evidence['targets'][1]['gsc_page']['impression_delta'] = -406;
+            $evidence['targets'][1]['gsc_page']['current_position'] = 1.0;
+            $pageCohort['rows'][1]['current_clicks'] = 0;
+            $pageCohort['rows'][1]['current_impressions'] = 0;
+            $pageCohort['rows'][1]['click_delta'] = -1;
+            $pageCohort['rows'][1]['impression_delta'] = -406;
+            $pageCohort['rows'][1]['current_position'] = 1.0;
+            $this->writeJson($directory.'/live-gsc-page-cohort-hashes.v1.json', $pageCohort);
+            $evidence['gsc']['page_cohort_artifact']['sha256'] = hash_file(
+                'sha256',
+                $directory.'/live-gsc-page-cohort-hashes.v1.json'
+            );
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $zeroImpressionsWithPositivePosition = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+            self::assertContains(
+                'gsc_impression_position_relationship_invalid:'.$targetUrl,
+                $zeroImpressionsWithPositivePosition['issues']
+            );
+            self::assertContains('page_cohort_row_invalid', $zeroImpressionsWithPositivePosition['issues']);
+
+            $evidence['targets'][1]['gsc_page']['current_position'] = 0;
+            $pageCohort['rows'][1]['current_position'] = 0;
+            $this->writeJson($directory.'/live-gsc-page-cohort-hashes.v1.json', $pageCohort);
+            $evidence['gsc']['page_cohort_artifact']['sha256'] = hash_file(
+                'sha256',
+                $directory.'/live-gsc-page-cohort-hashes.v1.json'
+            );
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $zeroImpressionsWithZeroPosition = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+            self::assertNotContains(
+                'gsc_impression_position_relationship_invalid:'.$targetUrl,
+                $zeroImpressionsWithZeroPosition['issues']
+            );
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
     public function test_it_requires_exact_gsc_property_export_identity_and_complete_recovery_metadata(): void
     {
         [$directory, $evidence] = $this->mutableFixture();
@@ -1217,6 +1373,27 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             self::assertFalse($cohortMutated['approval_eligible']);
         } finally {
             File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_binds_gsc_finalization_and_freshness_bounds_into_each_review_target_hash(): void
+    {
+        $planner = app(ArticleRecoveryBatchPlanner::class);
+        $baseline = $planner->plan($this->evidencePath, self::EVIDENCE_SHA256);
+        $originalLag = config('seo_intel.gsc_backfill_lag_days');
+
+        try {
+            config()->set('seo_intel.gsc_backfill_lag_days', 2);
+            $changedBounds = $planner->plan($this->evidencePath, self::EVIDENCE_SHA256);
+
+            self::assertNotSame(
+                data_get($baseline, 'targets.0.review_target_sha256'),
+                data_get($changedBounds, 'targets.0.review_target_sha256')
+            );
+            self::assertSame(2, data_get($changedBounds, 'targets.0.gsc_provenance.finalization_lag_days'));
+            self::assertSame(10, data_get($changedBounds, 'targets.0.gsc_provenance.max_report_age_days'));
+        } finally {
+            config()->set('seo_intel.gsc_backfill_lag_days', $originalLag);
         }
     }
 
