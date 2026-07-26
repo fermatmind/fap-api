@@ -100126,8 +100126,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "ready_to_merge",
-  "commit_sha": "a67697c0c84d4c0bcd2d0a0b00b5fd42ca1c3d0d",
+  "status": "ranking_review_binding_and_host_normalization_local_checks_passed_github_checks_pending",
+  "commit_sha": "1a80a68a8738c7570caf0ed756a7c9a048214390",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100144,21 +100144,21 @@
       },
     "focused_recovery_tests": {
       "status": "passed",
-      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, opaque page IDs, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, query-count conservation, source/claim boundaries, exact recursive evidence schemas, credential/private-host rejection, comparison chronology, query-export review binding, symlink-safe atomic artifact writes, exact FermatMind web property provenance, raw export hashes/counts, and independently complete recovery title/description candidates. Recovery plus ReviewPolicyRegistry passed 38 tests / 687 assertions."
+      "evidence": "Final focused validation covers the complete 54-row contextual cohort and cutoff, opaque page IDs, exact-five deterministic output, performance deterioration eligibility, immutable package hashes, query-count conservation, source/claim boundaries, exact recursive evidence schemas, credential/private-host rejection, comparison chronology, query-export and full ranking/authority review binding, symlink-safe atomic artifact writes, exact FermatMind web property provenance, raw export hashes/counts, and independently complete recovery title/description candidates. Recovery plus ReviewPolicyRegistry passed 39 tests / 690 assertions."
       },
     "required_local_checks": {
       "status": "passed_review_repairs",
-      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 38 tests / 687 assertions. Scoped Pint and git diff --check passed; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and operator-authorized Big Five freeze-classifier checks remain passed. The documented command intentionally exits 1, repeats with changed=false, and reports business_write=false, blocked_formal_gsc_readmodel_gate, package SHA 057f1e88800b0fea500d0354092318a4461028ebc7c39659428f83129fa399c1, artifact SHA fca2cca31e48715b51a85ee525873cfcca8358e0fc507afff86f94abdf2950ca, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
+      "evidence": "The final recovery plus ReviewPolicyRegistry run passed 39 tests / 690 assertions. Scoped Pint and git diff --check passed; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and operator-authorized Big Five freeze-classifier checks remain passed. The documented command intentionally exits 1, repeats with changed=false, and reports business_write=false, blocked_formal_gsc_readmodel_gate, package SHA 7b55d212ceabf0d574e60df6a2c557fdde1b025a06886017fc7cd98bf44d2d4b, artifact SHA 83719bc66b332394ef6a319062f75fbe2d9998df769c42e31220925d1f930d8c, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
-      "status": "passed",
-      "evidence": "All nine GitHub checks passed at exact current head 69218979660d93b435e68c4f1541d9a13b010382, including verify-bigfive, verify-mbti-legacy, verify-mbti-v2, hygiene, supply-chain, content-pack validation, and Semgrep. Current-head Codex review completed with no active unresolved thread."
+      "status": "pending_after_review_repair",
+      "evidence": "All nine GitHub checks passed at prior reviewed head 69218979660d93b435e68c4f1541d9a13b010382. The ready-ledger review then identified missing rank/GSC evidence in each target review hash and trailing-dot internal host bypass. Exact implementation head 1a80a68a8738c7570caf0ed756a7c9a048214390 binds the complete target identity/current authority/GSC page and rejects trailing-dot plus numeric/hex host forms; a fresh GitHub run is pending."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
   "failure_reason": null,
@@ -100322,8 +100322,13 @@
       "at": "2026-07-26T09:31:40Z",
       "status": "ready_to_merge",
       "note": "All nine GitHub checks passed at exact current head 69218979660d93b435e68c4f1541d9a13b010382, including verify-bigfive. Current-head Codex review completed with no active unresolved thread. The ledger binds exact reviewed implementation head a67697c0c84d4c0bcd2d0a0b00b5fd42ca1c3d0d; exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier regression only. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
+    },
+    {
+      "at": "2026-07-26T09:35:27Z",
+      "status": "ranking_review_binding_and_host_normalization_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger review found that review_target_sha256 omitted rank/GSC evidence and trailing-dot internal hosts could bypass suffix checks. Review material now binds rank, article identity, locale/slug, complete current authority, complete GSC page metrics, query evidence, recovery, sources, and claims. Source validation rejects root-dot absolute spellings and numeric/hex resolver forms. Recovery plus ReviewPolicyRegistry passed 39/690, scoped Pint/diff checks passed, and the deterministic command repeated changed=false with package SHA 7b55d212ceabf0d574e60df6a2c557fdde1b025a06886017fc7cd98bf44d2d4b and artifact SHA 83719bc66b332394ef6a319062f75fbe2d9998df769c42e31220925d1f930d8c. GitHub checks are pending; no production or business write occurred."
     }
   ],
-  "updated_at": "2026-07-26T09:31:40Z"
+  "updated_at": "2026-07-26T09:35:27Z"
 }
 }
