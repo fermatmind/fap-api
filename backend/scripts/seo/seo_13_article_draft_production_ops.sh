@@ -22,12 +22,16 @@ fail_receipt() {
     jq -n \
         --arg mode "${SEO13_MODE:-unknown}" \
         --arg stage "$stage" \
+        --arg release_sha "${EXPECTED_RELEASE_SHA:-}" \
+        --arg release_name "${EXPECTED_RELEASE_NAME:-}" \
         --argjson write_execution "$write_execution" \
         '{
             contract_version: "seo13.article_draft.production_ops.v1",
             status: "FAIL_CLOSED",
             mode: $mode,
             failed_stage: $stage,
+            release_sha: $release_sha,
+            release_name: $release_name,
             production_write_execution: $write_execution
         }'
     exit 1
