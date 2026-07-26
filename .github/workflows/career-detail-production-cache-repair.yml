@@ -375,11 +375,23 @@ jobs:
             --name "$artifact_name" \
             --dir artifacts/authorized-preflight
           packet="artifacts/authorized-preflight/authorization-packet.json"
+          authorized_preflight="artifacts/authorized-preflight/preflight.json"
           test -f "$packet"
+          test -f "$authorized_preflight"
+          authorized_coverage_state="$(jq -r '.coverage_state' "$authorized_preflight")"
+          [[ "$authorized_coverage_state" =~ ^[MALG]+$ ]]
+          test "${#authorized_coverage_state}" -eq "$MINIMUM_TARGETS"
+          authorized_coverage_state_sha256="$(
+            printf '%s' "$authorized_coverage_state" | sha256sum | awk '{print $1}'
+          )"
+          [[ "$authorized_coverage_state_sha256" =~ ^[0-9a-f]{64}$ ]]
+          test "$(jq -r '.coverage_state_sha256' "$authorized_preflight")" = \
+            "$authorized_coverage_state_sha256"
           jq -e \
             --argjson preflight_run_id "$AUTHORIZATION_PREFLIGHT_RUN_ID" \
             --argjson preflight_run_attempt "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT" \
             --arg coverage_fingerprint "$EXPECTED_COVERAGE_FINGERPRINT_SHA256" \
+            --arg coverage_state_sha256 "$authorized_coverage_state_sha256" \
             --arg control_plane_sha "$CONTROL_PLANE_SHA" \
             --arg runner_sha256 "$RUNNER_SHA256" \
             --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
@@ -395,6 +407,7 @@ jobs:
              and .preflight_run_id == $preflight_run_id
              and .preflight_run_attempt == $preflight_run_attempt
              and .coverage_fingerprint_sha256 == $coverage_fingerprint
+             and .coverage_state_sha256 == $coverage_state_sha256
              and .control_plane_sha == $control_plane_sha
              and .runner_sha256 == $runner_sha256
              and .active_revision == $active_revision
@@ -509,8 +522,15 @@ jobs:
             preflight_receipt="artifacts/current-preflight.json"
           fi
           runner_expected_missing="$EXPECTED_MISSING_POINTER_COUNT"
+          authorized_coverage_state=""
           if [ "$MODE" = "verify_only" ]; then
             runner_expected_missing=""
+          elif [ "$MODE" = "bootstrap_and_verify" ]; then
+            authorized_coverage_state="$(
+              jq -r '.coverage_state' artifacts/authorized-preflight/preflight.json
+            )"
+            [[ "$authorized_coverage_state" =~ ^[MALG]+$ ]]
+            test "${#authorized_coverage_state}" -eq "$MINIMUM_TARGETS"
           fi
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
@@ -519,20 +539,26 @@ jobs:
 
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=preflight FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$runner_expected_missing' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$EXPECTED_COVERAGE_FINGERPRINT_SHA256' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
+            "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=preflight FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$runner_expected_missing' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$EXPECTED_COVERAGE_FINGERPRINT_SHA256' FM_CAREER_AUTHORIZED_COVERAGE_STATE='$authorized_coverage_state' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
             < "$RUNNER_PATH" > "$preflight_receipt" 2>/dev/null
 
-          observed_missing_pointer_count="$EXPECTED_MISSING_POINTER_COUNT"
-          if [ "$MODE" = "verify_only" ]; then
-            observed_missing_pointer_count="$(jq -r '.coverage.missing_pointer_count' "$preflight_receipt")"
-          fi
+          observed_missing_pointer_count="$(
+            jq -r '.coverage.missing_pointer_count' "$preflight_receipt"
+          )"
           [[ "$observed_missing_pointer_count" =~ ^(0|[1-9][0-9]{0,3})$ ]]
           test "$observed_missing_pointer_count" -le "$MINIMUM_TARGETS"
+          expected_preflight_concurrent_gain=0
+          if [ "$MODE" = "bootstrap_and_verify" ]; then
+            test "$observed_missing_pointer_count" -le "$EXPECTED_MISSING_POINTER_COUNT"
+            expected_preflight_concurrent_gain=$((EXPECTED_MISSING_POINTER_COUNT - observed_missing_pointer_count))
+          fi
 
           jq -e \
+            --arg mode "$MODE" \
             --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
             --arg expected_fingerprint "$EXPECTED_COVERAGE_FINGERPRINT_SHA256" \
             --argjson expected_missing "$observed_missing_pointer_count" \
+            --argjson expected_preflight_concurrent_gain "$expected_preflight_concurrent_gain" \
             --argjson expected_targets "$MINIMUM_TARGETS" \
             --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
             --argjson retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
@@ -545,10 +571,21 @@ jobs:
              and .retry_limit == $retry_limit
              and .batch_size == $batch_size
              and (.coverage_fingerprint_sha256 | test("^[0-9a-f]{64}$"))
-             and ($expected_fingerprint == "" or .coverage_fingerprint_sha256 == $expected_fingerprint)
+             and (.coverage_state | test("^[MALG]+$"))
+             and (.coverage_state | length) == $expected_targets
+             and (.coverage_state_sha256 | test("^[0-9a-f]{64}$"))
+             and (
+               if $mode == "bootstrap_and_verify" then
+                 .authorized_coverage_fingerprint_sha256 == $expected_fingerprint
+                 and .concurrent_coverage_gain_count == $expected_preflight_concurrent_gain
+               else
+                 .authorized_coverage_fingerprint_sha256 == null
+                 and ($expected_fingerprint == "" or .coverage_fingerprint_sha256 == $expected_fingerprint)
+                 and .concurrent_coverage_gain_count == 0
+               end
+             )
              and .cache_write_count == 0
              and .owned_cache_write_count == 0
-             and .concurrent_coverage_gain_count == 0
              and .failure_count == 0
              and .queue_dispatch_count == 0
              and .database_write_count == 0
@@ -563,11 +600,13 @@ jobs:
 
           if [ "$MODE" = "verify_only" ]; then
             coverage_fingerprint="$(jq -r '.coverage_fingerprint_sha256' "$preflight_receipt")"
+            coverage_state_sha256="$(jq -r '.coverage_state_sha256' "$preflight_receipt")"
             jq -n \
               --arg contract_version "career.candidate_exact_cache_bootstrap.authorization.v2" \
               --argjson preflight_run_id "$GITHUB_RUN_ID" \
               --argjson preflight_run_attempt "$GITHUB_RUN_ATTEMPT" \
               --arg coverage_fingerprint_sha256 "$coverage_fingerprint" \
+              --arg coverage_state_sha256 "$coverage_state_sha256" \
               --arg control_plane_sha "$CONTROL_PLANE_SHA" \
               --arg runner_sha256 "$RUNNER_SHA256" \
               --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
@@ -584,6 +623,7 @@ jobs:
                 preflight_run_id: $preflight_run_id,
                 preflight_run_attempt: $preflight_run_attempt,
                 coverage_fingerprint_sha256: $coverage_fingerprint_sha256,
+                coverage_state_sha256: $coverage_state_sha256,
                 control_plane_sha: $control_plane_sha,
                 runner_sha256: $runner_sha256,
                 active_revision: $active_revision,
@@ -729,16 +769,30 @@ jobs:
           }
 
           total_owned_writes=0
-          total_concurrent_coverage_gain=0
-          expected_remaining="$EXPECTED_MISSING_POINTER_COUNT"
-          expected_fingerprint="$EXPECTED_COVERAGE_FINGERPRINT_SHA256"
+          total_concurrent_coverage_gain="$(
+            jq -r '.concurrent_coverage_gain_count' artifacts/current-preflight.json
+          )"
+          expected_remaining="$(
+            jq -r '.coverage.missing_pointer_count' artifacts/current-preflight.json
+          )"
+          expected_fingerprint="$(
+            jq -r '.coverage_fingerprint_sha256' artifacts/current-preflight.json
+          )"
+          expected_state="$(jq -r '.coverage_state' artifacts/current-preflight.json)"
+          [[ "$total_concurrent_coverage_gain" =~ ^(0|[1-9][0-9]*)$ ]]
+          [[ "$expected_remaining" =~ ^(0|[1-9][0-9]*)$ ]]
+          test $((expected_remaining + total_concurrent_coverage_gain)) -eq \
+            "$EXPECTED_MISSING_POINTER_COUNT"
+          [[ "$expected_fingerprint" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$expected_state" =~ ^[MALG]+$ ]]
+          test "${#expected_state}" -eq "$MINIMUM_TARGETS"
           offset=0
           while [ "$offset" -lt "$MINIMUM_TARGETS" ]; do
             verify_identity
             receipt="artifacts/candidate-exact-batch-${offset}.json"
             if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
               -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=batch FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$expected_remaining' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$expected_fingerprint' FM_CAREER_BATCH_OFFSET='$offset' FM_CAREER_BATCH_SIZE='$BOOTSTRAP_BATCH_SIZE' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
+              "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=batch FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$expected_remaining' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$expected_fingerprint' FM_CAREER_AUTHORIZED_COVERAGE_STATE='$expected_state' FM_CAREER_BATCH_OFFSET='$offset' FM_CAREER_BATCH_SIZE='$BOOTSTRAP_BATCH_SIZE' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
               < "$RUNNER_PATH" > "$receipt" 2>/dev/null; then
               echo "candidate-exact cache batch failed; inspect the sanitized receipt." >&2
               exit 1
@@ -746,13 +800,17 @@ jobs:
 
             owned_writes="$(jq -r '.owned_cache_write_count' "$receipt")"
             concurrent_gain="$(jq -r '.concurrent_coverage_gain_count' "$receipt")"
+            pre_batch_concurrent_gain="$(
+              jq -r '.pre_batch_concurrent_coverage_gain_count' "$receipt"
+            )"
             pre_remaining="$(jq -r '.pre_batch_coverage.missing_pointer_count' "$receipt")"
             post_remaining="$(jq -r '.post_batch_coverage.missing_pointer_count' "$receipt")"
             [[ "$owned_writes" =~ ^(0|[1-9][0-9]*)$ ]]
             [[ "$concurrent_gain" =~ ^(0|[1-9][0-9]*)$ ]]
+            [[ "$pre_batch_concurrent_gain" =~ ^(0|[1-9][0-9]*)$ ]]
             [[ "$pre_remaining" =~ ^(0|[1-9][0-9]*)$ ]]
             [[ "$post_remaining" =~ ^(0|[1-9][0-9]*)$ ]]
-            test "$pre_remaining" -eq "$expected_remaining"
+            test $((pre_remaining + pre_batch_concurrent_gain)) -eq "$expected_remaining"
             test "$post_remaining" -le "$pre_remaining"
             coverage_gain=$((pre_remaining - post_remaining))
             test "$coverage_gain" -eq $((owned_writes + concurrent_gain))
@@ -761,9 +819,11 @@ jobs:
               --argjson offset "$offset" \
               --argjson owned_writes "$owned_writes" \
               --argjson concurrent_gain "$concurrent_gain" \
+              --argjson pre_batch_concurrent_gain "$pre_batch_concurrent_gain" \
               --argjson pre_remaining "$pre_remaining" \
               --argjson post_remaining "$post_remaining" \
               --arg expected_fingerprint "$expected_fingerprint" \
+              --argjson expected_targets "$MINIMUM_TARGETS" \
               --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
               --argjson retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
               --argjson batch_size "$BOOTSTRAP_BATCH_SIZE" \
@@ -778,6 +838,7 @@ jobs:
                and .cache_write_count == $owned_writes
                and .owned_cache_write_count == $owned_writes
                and .concurrent_coverage_gain_count == $concurrent_gain
+               and .pre_batch_concurrent_coverage_gain_count == $pre_batch_concurrent_gain
                and .failure_count == 0
                and .failure_stage == null
                and .error_category == null
@@ -786,8 +847,11 @@ jobs:
                and .retry_count <= .attempt_count
                and .queue_dispatch_count == 0
                and .database_write_count == 0
-               and .pre_coverage_fingerprint_sha256 == $expected_fingerprint
+               and .authorized_pre_coverage_fingerprint_sha256 == $expected_fingerprint
+               and (.pre_coverage_fingerprint_sha256 | test("^[0-9a-f]{64}$"))
                and (.post_coverage_fingerprint_sha256 | test("^[0-9a-f]{64}$"))
+               and (.post_coverage_state | test("^[MALG]+$"))
+               and (.post_coverage_state | length) == $expected_targets
                and .pre_batch_coverage.missing_pointer_count == $pre_remaining
                and .post_batch_coverage.missing_pointer_count == $post_remaining
                and (
@@ -799,9 +863,10 @@ jobs:
                and .post_batch_coverage.excluded_count == 0' \
               "$receipt" >/dev/null
             total_owned_writes=$((total_owned_writes + owned_writes))
-            total_concurrent_coverage_gain=$((total_concurrent_coverage_gain + concurrent_gain))
+            total_concurrent_coverage_gain=$((total_concurrent_coverage_gain + pre_batch_concurrent_gain + concurrent_gain))
             expected_remaining="$post_remaining"
             expected_fingerprint="$(jq -r '.post_coverage_fingerprint_sha256' "$receipt")"
+            expected_state="$(jq -r '.post_coverage_state' "$receipt")"
             offset=$((offset + BOOTSTRAP_BATCH_SIZE))
           done
           total_coverage_gain=$((total_owned_writes + total_concurrent_coverage_gain))
