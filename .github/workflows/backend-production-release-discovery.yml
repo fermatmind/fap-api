@@ -1,0 +1,388 @@
+name: Backend Production Release Discovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      operator_approval_phrase:
+        description: "Exact approval for read-only production release identity discovery"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    name: Discover backend production releases without writes
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
+    env:
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+
+    steps:
+      - name: Validate main and exact read-only approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          expected="I explicitly approve read-only backend production release identity discovery."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+
+      - name: Check out exact main control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Bind exact current main control plane
+        shell: bash
+        run: |
+          set -euo pipefail
+          control_plane_sha="$(git rev-parse HEAD)"
+          test "$control_plane_sha" = "$GITHUB_SHA"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$control_plane_sha" = "$(git rev-parse origin/main)"
+          echo "CONTROL_PLANE_SHA=$control_plane_sha" >> "$GITHUB_ENV"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Read managed production release identities
+        shell: bash
+        env:
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+
+          if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH=$q_deploy_path bash -s" \
+            <<'REMOTE' > artifacts/remote-releases.json 2>/dev/null
+          set -Eeuo pipefail
+
+          releases_root="$(readlink -f "$DEPLOY_PATH/releases")"
+          test -d "$releases_root"
+          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+
+          current_release="$(readlink -f "$DEPLOY_PATH/current")"
+          case "$current_release" in
+            "$releases_root"/*) ;;
+            *) exit 1 ;;
+          esac
+          test -d "$current_release"
+
+          active_release_name="$(basename "$current_release")"
+          [[ "$active_release_name" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          test -f "$current_release/REVISION"
+          active_revision="$(tr -d '\r\n' < "$current_release/REVISION")"
+          [[ "$active_revision" =~ ^[0-9a-f]{40}$ ]]
+
+          mapfile -t release_names < <(
+            find "$releases_root" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
+              | LC_ALL=C sort
+          )
+          test "${#release_names[@]}" -ge 1
+          test "${#release_names[@]}" -le 50
+
+          inactive_releases='[]'
+          for release_name in "${release_names[@]}"; do
+            [[ "$release_name" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+            release_path="$releases_root/$release_name"
+            resolved_release="$(readlink -f "$release_path")"
+            test "$resolved_release" = "$release_path"
+            test -f "$release_path/REVISION"
+            revision="$(tr -d '\r\n' < "$release_path/REVISION")"
+            [[ "$revision" =~ ^[0-9a-f]{40}$ ]]
+            if [ "$resolved_release" = "$current_release" ]; then
+              continue
+            fi
+            inactive_releases="$(
+              jq -c \
+                --arg release_name "$release_name" \
+                --arg revision "$revision" \
+                '. + [{release_name: $release_name, revision: $revision}]' \
+                <<<"$inactive_releases"
+            )"
+          done
+
+          jq -n \
+            --arg active_release_name "$active_release_name" \
+            --arg active_revision "$active_revision" \
+            --argjson managed_release_count "${#release_names[@]}" \
+            --argjson inactive_releases "$inactive_releases" \
+            '{
+              schema_version: "backend-production-release-remote-read.v1",
+              active: {
+                release_name: $active_release_name,
+                revision: $active_revision
+              },
+              managed_release_count: $managed_release_count,
+              inactive_releases: $inactive_releases,
+              deploy_lock_present: false
+            }'
+          REMOTE
+          then
+            echo "PRODUCTION_RELEASE_DISCOVERY_REMOTE_READ_FAILED" >&2
+            exit 1
+          fi
+
+          jq -e '
+            .schema_version == "backend-production-release-remote-read.v1"
+            and (.active.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
+            and (.active.revision | test("^[0-9a-f]{40}$"))
+            and .managed_release_count >= 1
+            and .managed_release_count <= 50
+            and (.inactive_releases | type == "array")
+            and ([.inactive_releases[] |
+              (.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
+              and (.revision | test("^[0-9a-f]{40}$"))
+            ] | all)
+            and .deploy_lock_present == false
+          ' artifacts/remote-releases.json >/dev/null
+
+      - name: Bind inactive releases to exact staging evidence
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          runs_pages="$(
+            gh api --paginate --slurp \
+              "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/runs?branch=main&per_page=100"
+          )"
+          runs_json="$(jq -c '[.[].workflow_runs[]] | {workflow_runs: .}' <<<"$runs_pages")"
+          candidates='[]'
+
+          while IFS= read -r candidate; do
+            release_name="$(jq -r '.release_name' <<<"$candidate")"
+            revision="$(jq -r '.revision' <<<"$candidate")"
+            main_reachable=false
+            if git cat-file -e "${revision}^{commit}" 2>/dev/null \
+              && git merge-base --is-ancestor "$revision" origin/main; then
+              main_reachable=true
+            fi
+
+            staging_run_id=null
+            staging_run_attempt=null
+            mapfile -t matching_run_ids < <(
+              jq -r \
+                --arg revision "$revision" \
+                '.workflow_runs
+                 | map(select(
+                     .name == "Deploy Application"
+                     and .path == ".github/workflows/deploy.yml"
+                     and (.event == "push" or .event == "workflow_dispatch")
+                     and .status == "completed"
+                     and .conclusion == "success"
+                     and .head_branch == "main"
+                     and .head_sha == $revision
+                   ))
+                 | sort_by(.id)
+                 | reverse
+                 | .[].id' \
+                <<<"$runs_json"
+            )
+            for run_id in "${matching_run_ids[@]}"; do
+              jobs_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/jobs?per_page=100")"
+              if jq -e \
+                '([.jobs[] |
+                    select(.name == "Deploy checks (staging)" and .conclusion == "success")] | length) == 1
+                 and ([.jobs[] |
+                    select(.name == "Deploy (staging)" and .conclusion == "success")] | length) == 1' \
+                <<<"$jobs_json" >/dev/null; then
+                staging_run_id="$run_id"
+                staging_run_attempt="$(
+                  jq -r \
+                    --argjson run_id "$run_id" \
+                    '.workflow_runs[] | select(.id == $run_id) | .run_attempt' \
+                    <<<"$runs_json"
+                )"
+                break
+              fi
+            done
+
+            staging_evidence_valid=false
+            if [ "$staging_run_id" != null ]; then
+              staging_evidence_valid=true
+            fi
+            eligible=false
+            if [ "$main_reachable" = true ] && [ "$staging_evidence_valid" = true ]; then
+              eligible=true
+            fi
+
+            enriched="$(
+              jq -n \
+                --arg release_name "$release_name" \
+                --arg revision "$revision" \
+                --argjson main_reachable "$main_reachable" \
+                --argjson staging_run_id "$staging_run_id" \
+                --argjson staging_run_attempt "$staging_run_attempt" \
+                --argjson staging_evidence_valid "$staging_evidence_valid" \
+                --argjson eligible "$eligible" \
+                '{
+                  release_name: $release_name,
+                  revision: $revision,
+                  main_reachable: $main_reachable,
+                  staging_run_id: $staging_run_id,
+                  staging_run_attempt: $staging_run_attempt,
+                  staging_evidence_valid: $staging_evidence_valid,
+                  eligible: $eligible
+                }'
+            )"
+            candidates="$(jq -c --argjson candidate "$enriched" '. + [$candidate]' <<<"$candidates")"
+          done < <(jq -c '.inactive_releases[]' artifacts/remote-releases.json)
+
+          active_revision="$(jq -r '.active.revision' artifacts/remote-releases.json)"
+          active_main_reachable=false
+          if git cat-file -e "${active_revision}^{commit}" 2>/dev/null \
+            && git merge-base --is-ancestor "$active_revision" origin/main; then
+            active_main_reachable=true
+          fi
+
+          selected_candidate="$(
+            jq -c \
+              '[.[] | select(.eligible == true)]
+               | if length == 0 then null else max_by(.staging_run_id) end' \
+              <<<"$candidates"
+          )"
+          status="READY"
+          if [ "$selected_candidate" = null ]; then
+            status="NO_ELIGIBLE_INACTIVE_CANDIDATE"
+          fi
+
+          jq -n \
+            --arg status "$status" \
+            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
+            --argjson active "$(jq -c '.active' artifacts/remote-releases.json)" \
+            --argjson active_main_reachable "$active_main_reachable" \
+            --argjson managed_release_count "$(jq -r '.managed_release_count' artifacts/remote-releases.json)" \
+            --argjson inactive_releases "$candidates" \
+            --argjson selected_candidate "$selected_candidate" \
+            '{
+              schema_version: "backend-production-release-discovery.v1",
+              status: $status,
+              control_plane_sha: $control_plane_sha,
+              active: ($active + {main_reachable: $active_main_reachable}),
+              managed_release_count: $managed_release_count,
+              inactive_releases: $inactive_releases,
+              selected_candidate: $selected_candidate,
+              checks: {
+                current_symlink_resolved: true,
+                active_revision_valid: true,
+                deploy_lock_absent: true,
+                managed_release_count_bounded: true,
+                staging_evidence_exact: true
+              },
+              negative_guarantees: {
+                deploy: false,
+                candidate_activation: false,
+                cache_write: false,
+                queue_dispatch: false,
+                database_write: false,
+                cms_write: false,
+                migration: false,
+                process_restart: false,
+                remote_file_write: false,
+                raw_log_read: false,
+                search_submit: false
+              },
+              writes_committed: false
+            }' > artifacts/backend-production-release-discovery.json
+
+          jq -e '
+            .schema_version == "backend-production-release-discovery.v1"
+            and (.status == "READY" or .status == "NO_ELIGIBLE_INACTIVE_CANDIDATE")
+            and (.control_plane_sha | test("^[0-9a-f]{40}$"))
+            and (.active.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
+            and (.active.revision | test("^[0-9a-f]{40}$"))
+            and (.active.main_reachable | type == "boolean")
+            and (.inactive_releases | type == "array")
+            and ([.inactive_releases[] |
+              (.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
+              and (.revision | test("^[0-9a-f]{40}$"))
+              and (.main_reachable | type == "boolean")
+              and (.staging_evidence_valid | type == "boolean")
+              and (.eligible | type == "boolean")
+            ] | all)
+            and (
+              if .status == "READY" then
+                .selected_candidate != null
+                and .selected_candidate.eligible == true
+              else
+                .selected_candidate == null
+              end
+            )
+            and .negative_guarantees.remote_file_write == false
+            and .negative_guarantees.database_write == false
+            and .negative_guarantees.candidate_activation == false
+            and .writes_committed == false
+          ' artifacts/backend-production-release-discovery.json >/dev/null
+
+      - name: Publish safe discovery summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          status="$(jq -r '.status' artifacts/backend-production-release-discovery.json)"
+          inactive_count="$(jq -r '.inactive_releases | length' artifacts/backend-production-release-discovery.json)"
+          eligible_count="$(jq -r '[.inactive_releases[] | select(.eligible == true)] | length' artifacts/backend-production-release-discovery.json)"
+          {
+            echo "## Backend production release discovery"
+            echo
+            echo "- Status: ${status}"
+            echo "- Active release identity: discovered"
+            echo "- Inactive releases: ${inactive_count}"
+            echo "- Exact-staging eligible candidates: ${eligible_count}"
+            echo "- Writes committed: false"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload safe discovery artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-production-release-discovery-${{ github.run_id }}
+          path: artifacts/backend-production-release-discovery.json
+          if-no-files-found: error
+          retention-days: 30
