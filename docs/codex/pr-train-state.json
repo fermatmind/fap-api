@@ -1,4 +1,70 @@
 {
+  "MBTI-CROSS-PUBLISH-51": {
+    "id": "MBTI-CROSS-PUBLISH-51",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-cross-publish-51",
+    "title": "MBTI-CROSS-PUBLISH-51: publish exact-three cross-type comparisons",
+    "depends_on": [
+      "MBTI-CROSS-PUBLISHER-49",
+      "MBTI-CROSS-AUTHORITY-50"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3227 merged as f028eb5d86947c8ef2e3b84244fc363cfdeee224 and PR #3229 merged as fe0b411ac90adf63b56290249138668d6439e3cd; both are ancestors of active production SHA 3f4648e2e166e8d482009a5c3ef864489703e013."
+      },
+      "production_prestate": {
+        "status": "passed",
+        "evidence": "Read-only public API preflight on 2026-07-26 returned 404 for exactly enfp-vs-entp, estj-vs-entj, and isfp-vs-infp, proving the DB-authoritative runtime does not expose the local draft package."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "This PR adds the protected control plane and tests only. It does not execute production content/indexability writes, deploy code, submit sitemap, or request search indexing."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 82 assertions; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed, including Big Five 1601 tests / 195611 assertions, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts were removed or restored to HEAD."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": false,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-26T04:49:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main c78872709d794e52a87e71d30b969d630fde1b50 after the separately authorized ops shared-to-dedicated migration and residue cleanup closed successfully. Scope is the Publisher 49 protected production control plane, sanitized evidence, tests, rule impact, and train metadata only; no production content/indexability write is authorized or attempted."
+      },
+      {
+        "at": "2026-07-26T05:06:00Z",
+        "status": "local_validation_passed",
+        "note": "The four-phase protected workflow binds content and indexability apply separately to exact latest control-plane/active SHAs, immutable matching preflight receipts, Approval 48 hashes, exact command-generated approval phrases, and a fixed three-slug set. All manifest checks passed; no production content/indexability write, deploy, restart, sitemap submission, or search request was executed."
+      }
+    ],
+    "updated_at": "2026-07-26T05:06:00Z"
+  },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
     "repo": "fap-api",
@@ -99656,9 +99722,9 @@
     "depends_on": [
       "MBTI-CROSS-PUBLISHER-49"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "status": "merged",
+    "commit_sha": "fe0b411ac90adf63b56290249138668d6439e3cd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3229",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -99681,12 +99747,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-23T07:59:09Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -99714,9 +99780,14 @@
         "at": "2026-07-23T07:44:26Z",
         "status": "ready_to_merge",
         "note": "Exact head b1fab1696c623ca70f025bae5cf4d6c22a64f8ee passed all nine checks. GitHub reports CLEAN/MERGEABLE, the diff remains exactly the five allowed paths, no review threads exist, and exact-head inspection found no unresolved issue. This following ledger-only transition must rerun all required checks before squash merge."
+      },
+      {
+        "at": "2026-07-26T04:49:00Z",
+        "status": "merged",
+        "note": "Reconciled from GitHub truth while starting MBTI-CROSS-PUBLISH-51: PR #3229 is MERGED as fe0b411ac90adf63b56290249138668d6439e3cd, the merge is contained in current origin/main and active production SHA 3f4648e2e166e8d482009a5c3ef864489703e013, both task branches are absent, and the exact-three public 404 pre-state confirms the DB-only authority boundary remains active without local fallback."
       }
     ],
-    "updated_at": "2026-07-23T07:44:26Z"
+    "updated_at": "2026-07-26T04:49:00Z"
   },
   "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01": {
     "id": "SAEP-PROPOSED-API-PER02-MBTI-EN64-INTERNAL-LINK-PROMOTION-01",

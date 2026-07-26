@@ -128,7 +128,7 @@ prs:
     base: main
     branch: codex/mbti-cross-authority-50
     title: "MBTI-CROSS-AUTHORITY-50: make cross-type comparison runtime DB-authoritative"
-    status: ready_to_merge
+    status: merged
     depends_on:
       - MBTI-CROSS-PUBLISHER-49
     train_scope: mbti_cross_type_comparison_db_runtime_authority
@@ -173,6 +173,57 @@ prs:
     database_mutation: false
     cms_mutation: false
     api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: MBTI-CROSS-PUBLISH-51
+    repo: fap-api
+    base: main
+    branch: codex/mbti-cross-publish-51
+    title: "MBTI-CROSS-PUBLISH-51: publish exact-three cross-type comparisons"
+    status: local_validation_passed
+    depends_on:
+      - MBTI-CROSS-PUBLISHER-49
+      - MBTI-CROSS-AUTHORITY-50
+    train_scope: mbti_cross_exact_three_controlled_production_operation
+    scope:
+      - Add one protected production workflow for immutable content and indexability preflight/apply receipts around the existing Publisher 49 commands.
+      - Bind every apply to the exact latest control-plane SHA, exact active application SHA, immutable successful same-phase preflight, Approval 48 package and authorization hashes, and the exact command-generated operator phrase.
+      - Keep the content phase limited to enfp-vs-entp, estj-vs-entj, and isfp-vs-infp and held at noindex/outside sitemap and llms.
+      - Keep the independent indexability phase body-preserving, search-submission-ineligible, and limited to the same exact three records.
+      - Emit sanitized receipts without content bodies, credentials, topology, or raw remote errors.
+    allowed_paths:
+      - .github/workflows/mbti-cross-publish51-production-ops.yml
+      - backend/tests/Sre/MbtiCrossPublish51ProductionOpsWorkflowTest.php
+      - AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change Publisher 49 commands/services, DB-authority runtime code, routes, migrations, frontend behavior, package content, or any comparison outside the exact three-slug set.
+      - Execute production content or indexability writes before the separately exact receipt-bound operator authorization for that phase.
+      - Deploy code, move the active symlink, restart workers, submit sitemap, request search indexing, or execute any GSC/Search Channel mutation.
+      - Put raw content bodies, credentials, production topology, remote paths, or raw remote errors in logs or artifacts.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/mbti-cross-publish51-production-ops.yml'); puts 'workflow yaml ok'"
+      - actionlint .github/workflows/mbti-cross-publish51-production-ops.yml
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Sre/MbtiCrossPublish51ProductionOpsWorkflowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Sre/MbtiCrossPublish51ProductionOpsWorkflowTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
     publish_allowed: false
     search_channel_action: false
     deploy_allowed: false
