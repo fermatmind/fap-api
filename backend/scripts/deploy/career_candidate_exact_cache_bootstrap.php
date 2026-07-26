@@ -121,12 +121,18 @@ final class CareerCandidateExactCacheBootstrapRunner
             100000,
             'INVALID_EXPECTED_TARGETS',
         );
-        $expectedMissing = self::integer(
-            self::required($environment, 'FM_CAREER_EXPECTED_MISSING'),
-            0,
-            $expectedTargets,
-            'INVALID_EXPECTED_MISSING',
-        );
+        $expectedMissingInput = trim((string) ($environment['FM_CAREER_EXPECTED_MISSING'] ?? ''));
+        $expectedMissing = null;
+        if ($expectedMissingInput !== '') {
+            $expectedMissing = self::integer(
+                $expectedMissingInput,
+                0,
+                $expectedTargets,
+                'INVALID_EXPECTED_MISSING',
+            );
+        } elseif ($mode !== 'preflight') {
+            self::fail('INVALID_EXPECTED_MISSING');
+        }
         self::integer(
             self::required($environment, 'FM_CAREER_OFFLINE_BUILD_BUDGET_MS'),
             self::OFFLINE_BUILD_BUDGET_MS,
@@ -174,7 +180,12 @@ final class CareerCandidateExactCacheBootstrapRunner
         $conversion = $app->make($conversionClass);
         $inspect = static fn (): array => $coverage->inspect(['en', 'zh-CN'], 0);
         $inspection = $inspect();
-        self::assertInspection($inspection, $expectedTargets, $expectedMissing, true);
+        self::assertInspection(
+            $inspection,
+            $expectedTargets,
+            $expectedMissing ?? $expectedTargets,
+            $expectedMissing !== null,
+        );
         $coverageFingerprint = self::coverageFingerprint($inspection);
         $expectedCoverageFingerprint = trim(
             (string) ($environment['FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT'] ?? ''),

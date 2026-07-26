@@ -54,9 +54,9 @@ on:
         required: true
         type: string
       expected_missing_pointer_count:
-        description: "Exact read-only preflight missing_pointer_count (0-2092)"
-        required: true
-        default: "2090"
+        description: "Required for diagnose/bootstrap; omit for verify_only discovery"
+        required: false
+        default: ""
         type: string
       diagnostic_target_slug:
         description: "Required only for diagnose_target; one exact lowercase canonical slug"
@@ -129,11 +129,10 @@ jobs:
           # require distinct resolved active and candidate release paths.
           [[ "$CANDIDATE_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
           [[ "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]
-          [[ "$EXPECTED_MISSING_POINTER_COUNT" =~ ^(0|[1-9][0-9]{0,3})$ ]]
-          test "$EXPECTED_MISSING_POINTER_COUNT" -le "$MINIMUM_TARGETS"
 
           case "$MODE" in
             verify_only)
+              test -z "$EXPECTED_MISSING_POINTER_COUNT"
               if [ -n "$OPERATOR_APPROVAL_PHRASE" ]; then
                 echo "verify_only refuses an operator approval phrase." >&2
                 exit 2
@@ -148,6 +147,8 @@ jobs:
               test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
               ;;
             diagnose_target)
+              [[ "$EXPECTED_MISSING_POINTER_COUNT" =~ ^(0|[1-9][0-9]{0,3})$ ]]
+              test "$EXPECTED_MISSING_POINTER_COUNT" -le "$MINIMUM_TARGETS"
               test "$EXPECTED_MISSING_POINTER_COUNT" -gt 0
               [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
               [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
@@ -171,6 +172,8 @@ jobs:
               fi
               ;;
             bootstrap_and_verify)
+              [[ "$EXPECTED_MISSING_POINTER_COUNT" =~ ^(0|[1-9][0-9]{0,3})$ ]]
+              test "$EXPECTED_MISSING_POINTER_COUNT" -le "$MINIMUM_TARGETS"
               test -z "$DIAGNOSTIC_TARGET_SLUG"
               test -z "$DIAGNOSTIC_TARGET_LOCALE"
               test "$EXECUTE_DIAGNOSTIC_WRITE" = "false"
@@ -505,6 +508,10 @@ jobs:
           if [ "$MODE" = "bootstrap_and_verify" ]; then
             preflight_receipt="artifacts/current-preflight.json"
           fi
+          runner_expected_missing="$EXPECTED_MISSING_POINTER_COUNT"
+          if [ "$MODE" = "verify_only" ]; then
+            runner_expected_missing=""
+          fi
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "set -euo pipefail; test -x /usr/bin/php; test -x /usr/bin/timeout; sudo -n -u www-data -- test -r '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend/vendor/autoload.php'; sudo -n -u www-data -- test -w '$DEPLOY_PATH/releases/$CANDIDATE_RELEASE_NAME/backend/storage/framework/cache/data'" \
@@ -512,13 +519,20 @@ jobs:
 
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=preflight FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$EXPECTED_MISSING_POINTER_COUNT' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$EXPECTED_COVERAGE_FINGERPRINT_SHA256' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
+            "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=preflight FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$runner_expected_missing' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$EXPECTED_COVERAGE_FINGERPRINT_SHA256' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
             < "$RUNNER_PATH" > "$preflight_receipt" 2>/dev/null
+
+          observed_missing_pointer_count="$EXPECTED_MISSING_POINTER_COUNT"
+          if [ "$MODE" = "verify_only" ]; then
+            observed_missing_pointer_count="$(jq -r '.coverage.missing_pointer_count' "$preflight_receipt")"
+          fi
+          [[ "$observed_missing_pointer_count" =~ ^(0|[1-9][0-9]{0,3})$ ]]
+          test "$observed_missing_pointer_count" -le "$MINIMUM_TARGETS"
 
           jq -e \
             --arg candidate_sha "$CANDIDATE_RELEASE_REVISION" \
             --arg expected_fingerprint "$EXPECTED_COVERAGE_FINGERPRINT_SHA256" \
-            --argjson expected_missing "$EXPECTED_MISSING_POINTER_COUNT" \
+            --argjson expected_missing "$observed_missing_pointer_count" \
             --argjson expected_targets "$MINIMUM_TARGETS" \
             --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
             --argjson retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
@@ -561,7 +575,7 @@ jobs:
               --arg candidate_release "$CANDIDATE_RELEASE_NAME" \
               --arg staging_run_id "$STAGING_RUN_ID" \
               --argjson expected_targets "$MINIMUM_TARGETS" \
-              --argjson missing_pointer_count "$EXPECTED_MISSING_POINTER_COUNT" \
+              --argjson missing_pointer_count "$observed_missing_pointer_count" \
               --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
               --argjson retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
               --argjson batch_size "$BOOTSTRAP_BATCH_SIZE" \

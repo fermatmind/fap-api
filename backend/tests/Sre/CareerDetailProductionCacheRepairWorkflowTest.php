@@ -62,6 +62,16 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $source = $this->workflowSource();
 
         $this->assertStringContainsString('verify_only refuses an operator approval phrase.', $source);
+        $this->assertStringContainsString('test -z "$EXPECTED_MISSING_POINTER_COUNT"', $source);
+        $this->assertStringContainsString('runner_expected_missing=""', $source);
+        $this->assertStringContainsString(
+            'observed_missing_pointer_count="$(jq -r \'.coverage.missing_pointer_count\' "$preflight_receipt")"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '--argjson missing_pointer_count "$observed_missing_pointer_count"',
+            $source,
+        );
         $this->assertStringContainsString('FM_CAREER_MODE=preflight', $source);
         $this->assertStringContainsString('/usr/bin/timeout 720 /usr/bin/php', $source);
         $this->assertStringContainsString('career.candidate_exact_cache_bootstrap.v2', $source);
@@ -105,6 +115,10 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString(
             'production Career inactive-candidate exact cache bootstrap with authorization preflight run ${AUTHORIZATION_PREFLIGHT_RUN_ID} coverage fingerprint ${EXPECTED_COVERAGE_FINGERPRINT_SHA256}',
             $source,
+        );
+        $this->assertGreaterThanOrEqual(
+            2,
+            substr_count($source, 'test "$EXPECTED_MISSING_POINTER_COUNT" -le "$MINIMUM_TARGETS"'),
         );
         $this->assertStringContainsString(
             'with offline build budget ${OFFLINE_BUILD_BUDGET_MS}ms, retry limit ${BOOTSTRAP_RETRY_LIMIT} and batch size ${BOOTSTRAP_BATCH_SIZE}',
