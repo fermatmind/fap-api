@@ -747,6 +747,16 @@ final class ArticleRecoveryBatchPlanner
                     'query_export.retained_query_count',
                     0,
                 ),
+                'private_query_export_zip_sha256' => (string) data_get(
+                    $target,
+                    'query_export.zip_sha256',
+                    '',
+                ),
+                'private_query_export_csv_sha256' => (string) data_get(
+                    $target,
+                    'query_export.csv_sha256',
+                    '',
+                ),
                 'query_summary_artifact_sha256' => $queryArtifactSha256,
                 'target_query_summary_sha256' => $targetQuerySummarySha256,
             ];
@@ -775,6 +785,8 @@ final class ArticleRecoveryBatchPlanner
                 'gsc_page' => (array) ($target['gsc_page'] ?? []),
                 'query_evidence_state' => (string) data_get($target, 'query_export.evidence_state', ''),
                 'retained_query_count' => (int) data_get($target, 'query_export.retained_query_count', 0),
+                'private_query_export_zip_sha256' => (string) data_get($target, 'query_export.zip_sha256', ''),
+                'private_query_export_csv_sha256' => (string) data_get($target, 'query_export.csv_sha256', ''),
                 'query_summary_artifact_sha256' => $queryArtifactSha256,
                 'target_query_summary_sha256' => $targetQuerySummarySha256,
                 'proposed_recovery' => (array) ($target['proposed_recovery'] ?? []),

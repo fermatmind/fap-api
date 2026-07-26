@@ -54,7 +54,7 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             data_get($package, 'source_evidence.page_cohort_artifact_sha256')
         );
         self::assertSame(
-            '31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768',
+            '543f1099a8cc8efeb9704f03eed912143fdfb356fd5ba5c1015ce0d3a8e07dec',
             $package['package_sha256']
         );
         self::assertSame(
@@ -156,6 +156,48 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         self::assertFalse(data_get($output, 'command.ok'));
         self::assertSame(['artifact_dir_required'], data_get($output, 'command.issues'));
         self::assertSame('artifact_dir_required', data_get($output, 'artifact.issue'));
+    }
+
+    public function test_it_rejects_symlinked_artifact_directories_and_destinations(): void
+    {
+        $suffix = bin2hex(random_bytes(4));
+        $realDirectory = storage_path('framework/testing/seo-10k-real-'.$suffix);
+        $linkedDirectory = storage_path('framework/testing/seo-10k-link-'.$suffix);
+        $artifactDirectory = storage_path('framework/testing/seo-10k-destination-'.$suffix);
+        $victimPath = storage_path('framework/testing/seo-10k-victim-'.$suffix.'.json');
+        $artifactPath = $artifactDirectory.'/seo-10k-article-recovery-batch-01.dry-run.json';
+
+        try {
+            File::ensureDirectoryExists($realDirectory);
+            self::assertTrue(symlink($realDirectory, $linkedDirectory));
+            self::assertSame(1, Artisan::call('seo-ops:article-recovery-batch', [
+                '--evidence' => $this->evidencePath,
+                '--confirm-evidence-sha256' => self::EVIDENCE_SHA256,
+                '--artifact-dir' => $linkedDirectory,
+                '--json' => true,
+            ]));
+            $directoryOutput = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+            self::assertSame('artifact_dir_unsafe', data_get($directoryOutput, 'artifact.issue'));
+
+            File::ensureDirectoryExists($artifactDirectory);
+            File::put($victimPath, "must remain unchanged\n");
+            self::assertTrue(symlink($victimPath, $artifactPath));
+            self::assertSame(1, Artisan::call('seo-ops:article-recovery-batch', [
+                '--evidence' => $this->evidencePath,
+                '--confirm-evidence-sha256' => self::EVIDENCE_SHA256,
+                '--artifact-dir' => $artifactDirectory,
+                '--json' => true,
+            ]));
+            $destinationOutput = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+            self::assertSame('artifact_destination_unsafe', data_get($destinationOutput, 'artifact.issue'));
+            self::assertSame("must remain unchanged\n", File::get($victimPath));
+        } finally {
+            File::delete($artifactPath);
+            File::delete($linkedDirectory);
+            File::delete($victimPath);
+            File::deleteDirectory($artifactDirectory);
+            File::deleteDirectory($realDirectory);
+        }
     }
 
     public function test_it_fails_closed_when_the_pre_sanitization_owner_check_reports_a_conflict(): void
@@ -892,6 +934,41 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             self::assertMatchesRegularExpression(
                 '/^[a-f0-9]{64}$/',
                 data_get($mutated, 'targets.0.target_query_summary_sha256')
+            );
+            self::assertFalse($mutated['approval_eligible']);
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_binds_each_private_query_export_identity_into_the_review_target_hash(): void
+    {
+        $planner = app(ArticleRecoveryBatchPlanner::class);
+        $baseline = $planner->plan($this->evidencePath, self::EVIDENCE_SHA256);
+        [$directory, $evidence] = $this->mutableFixture();
+
+        try {
+            $evidence['targets'][0]['query_export']['zip_sha256'] = str_repeat('a', 64);
+            $evidence['targets'][0]['query_export']['csv_sha256'] = str_repeat('b', 64);
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $mutated = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertNotSame(
+                data_get($baseline, 'targets.0.review_target_sha256'),
+                data_get($mutated, 'targets.0.review_target_sha256')
+            );
+            self::assertSame(
+                str_repeat('a', 64),
+                data_get($mutated, 'targets.0.private_query_export_zip_sha256')
+            );
+            self::assertSame(
+                str_repeat('b', 64),
+                data_get($mutated, 'targets.0.private_query_export_csv_sha256')
             );
             self::assertFalse($mutated['approval_eligible']);
         } finally {

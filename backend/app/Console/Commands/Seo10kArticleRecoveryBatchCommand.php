@@ -72,23 +72,54 @@ final class Seo10kArticleRecoveryBatchCommand extends Command
         if ($artifactDir === '') {
             return ['ok' => false, 'issue' => 'artifact_dir_required'];
         }
+        if (is_link($artifactDir)) {
+            return ['ok' => false, 'issue' => 'artifact_dir_unsafe'];
+        }
 
         try {
             File::ensureDirectoryExists($artifactDir);
         } catch (Throwable) {
             return ['ok' => false, 'issue' => 'artifact_dir_unwritable'];
         }
-        if (! is_dir($artifactDir) || ! is_writable($artifactDir)) {
+        if (is_link($artifactDir) || ! is_dir($artifactDir) || ! is_writable($artifactDir)) {
             return ['ok' => false, 'issue' => 'artifact_dir_unwritable'];
         }
 
-        $path = rtrim($artifactDir, DIRECTORY_SEPARATOR)
+        $resolvedArtifactDir = realpath($artifactDir);
+        if (! is_string($resolvedArtifactDir)) {
+            return ['ok' => false, 'issue' => 'artifact_dir_unwritable'];
+        }
+
+        $path = rtrim($resolvedArtifactDir, DIRECTORY_SEPARATOR)
             .DIRECTORY_SEPARATOR
             .'seo-10k-article-recovery-batch-01.dry-run.json';
+        if (is_link($path) || (file_exists($path) && ! is_file($path))) {
+            return ['ok' => false, 'issue' => 'artifact_destination_unsafe'];
+        }
+
         $bytes = $planner->prettyJson($package);
         $changed = ! is_file($path) || (string) file_get_contents($path) !== $bytes;
-        if ($changed && file_put_contents($path, $bytes, LOCK_EX) === false) {
-            return ['ok' => false, 'issue' => 'artifact_write_failed'];
+        if ($changed) {
+            try {
+                $temporaryPath = tempnam($resolvedArtifactDir, '.seo-recovery-');
+            } catch (Throwable) {
+                return ['ok' => false, 'issue' => 'artifact_write_failed'];
+            }
+            if (! is_string($temporaryPath)) {
+                return ['ok' => false, 'issue' => 'artifact_write_failed'];
+            }
+
+            try {
+                if (is_link($temporaryPath)
+                    || file_put_contents($temporaryPath, $bytes, LOCK_EX) !== strlen($bytes)
+                    || ! rename($temporaryPath, $path)) {
+                    return ['ok' => false, 'issue' => 'artifact_write_failed'];
+                }
+            } finally {
+                if (file_exists($temporaryPath) || is_link($temporaryPath)) {
+                    File::delete($temporaryPath);
+                }
+            }
         }
 
         return [
