@@ -533,7 +533,8 @@ jobs:
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
           set +e
-          result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          result="$(timeout --signal=TERM --kill-after=10s 180s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH='$DEPLOY_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-preflight-ssh.err")"
@@ -749,9 +750,18 @@ jobs:
           failure_gate=INSTALLED_CONFIG_HASH
           test "$(sudo -n sha256sum "$OPS_CONFIG_PATH" | awk '{print $1}')" = "$EXPECTED_RENDERED_SHA256"
           failure_gate=SUPERVISORCTL_PATH
-          supervisord_path="$(command -v supervisord)"
+          python3_path="$(command -v python3)"
           failure_gate=SUPERVISOR_CONFIG
-          sudo -n "$supervisord_path" -t >/dev/null 2>&1
+          sudo -n "$python3_path" - /etc/supervisor/supervisord.conf >/dev/null 2>&1 <<'PY'
+          import sys
+
+          from supervisor.options import ServerOptions
+
+          if len(sys.argv) != 2:
+              raise SystemExit(2)
+
+          ServerOptions().realize(args=["-c", sys.argv[1]])
+          PY
           failure_gate=SUPERVISOR_REREAD
           sudo -n "$supervisorctl_path" reread >/dev/null
           if [ "$program_present_before" = true ] && [ "$config_changed" = false ]; then
@@ -809,7 +819,8 @@ jobs:
           )"
           remote_b64="$(printf '%s' "$remote_script" | base64 | tr -d '\n')"
           set +e
-          result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          result="$(timeout --signal=TERM --kill-after=10s 180s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' EXPECTED_PROGRAM_PRESENT_BEFORE='$EXPECTED_PROGRAM_PRESENT_BEFORE' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-apply-ssh.err")"

@@ -151,7 +151,9 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'test "$(printf \'%s\' "$OPS_CONFIG_PATH" | sha256sum | awk \'{print $1}\')" = "$EXPECTED_CONFIG_PATH_SHA256"',
             'sudo -n install -o root -g root -m 0600 "$OPS_CONFIG_PATH" "$backup"',
             'sudo -n install -o root -g root -m 0644 "$candidate" "$OPS_CONFIG_PATH"',
-            'sudo -n "$supervisord_path" -t',
+            'from supervisor.options import ServerOptions',
+            'ServerOptions().realize(args=["-c", sys.argv[1]])',
+            'timeout --signal=TERM --kill-after=10s 180s',
             'sudo -n "$supervisorctl_path" update fap-queue-ops',
             'sudo -n "$supervisorctl_path" restart fap-queue-ops:fap-queue-ops_00',
             'OPS_QUEUE_REMOTE_PREFLIGHT_FAILED',
@@ -246,6 +248,15 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertStringNotContainsString(
             '-name fap-queue-ops.conf -print',
             $workflow,
+        );
+        $this->assertStringNotContainsString(
+            'sudo -n "$supervisord_path" -t',
+            $workflow,
+        );
+        $this->assertStringNotContainsString('Supervisord(', $workflow);
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'timeout --signal=TERM --kill-after=10s 180s'),
         );
     }
 
