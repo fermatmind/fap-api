@@ -81,6 +81,25 @@ supervisorctl_path="$(command -v supervisorctl)"
 python3_path="$(command -v python3)"
 grep_path="$(command -v grep)"
 
+failure_gate=STALE_VALIDATION_RESIDUE
+stale_validation_process_count="$(
+  ps -eo comm=,args= \
+    | awk '
+      $1 == "supervisord" \
+        && $0 ~ /(^|[[:space:]])-c[[:space:]]+\/tmp\/fap-ops-shared-migration-[0-9]+\.supervisord\.conf([[:space:]]|$)/ {
+          count++
+        }
+      END {print count+0}
+    '
+)"
+stale_validation_artifact_count="$(
+  sudo -n find /tmp -maxdepth 1 -type f \
+    -name 'fap-ops-shared-migration-*' -printf '.' 2>/dev/null \
+    | wc -c
+)"
+test "$stale_validation_process_count" = 0
+test "$stale_validation_artifact_count" = 0
+
 validate_supervisor_config() {
   local config_path="$1"
 
