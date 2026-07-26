@@ -149,6 +149,7 @@ jobs:
                  and .discoverability_state == "released"
                  and .record_count == 3
                  and .exact_slugs == ["enfp-vs-entp","estj-vs-entj","isfp-vs-infp"]
+                 and .closeout_state == "recovery_ready"
                  and .source_missing_count == 3
                  and .feed_missing_count == 9
                  and .cache_write_count == 0
@@ -347,7 +348,7 @@ jobs:
           trap 'rm -rf "$feed_dir"' EXIT
           : >"$feed_dir/absence.txt"
           for surface in sitemap.xml llms.txt llms-full.txt; do
-            curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+            curl --http1.1 -fsS --retry 3 --retry-delay 2 --retry-all-errors \
               --connect-timeout 10 --max-time 60 \
               -H 'Cache-Control: no-cache' \
               "https://fermatmind.com/$surface" >"$feed_dir/$surface"
@@ -376,12 +377,21 @@ jobs:
           echo count($endpoints);
           ')"
 
+          source_missing_count="$(jq -r '.source_missing_count' <<<"$source_state")"
+          if [ "$source_missing_count" = 3 ] && [ "$feed_missing_count" = 9 ]; then
+            closeout_state=recovery_ready
+          elif [ "$source_missing_count" = 0 ] && [ "$feed_missing_count" = 0 ]; then
+            closeout_state=already_closed
+          else
+            echo "MBTI_CROSS_PUBLISH51_CACHE_CLOSEOUT_AMBIGUOUS_STATE" >&2
+            exit 1
+          fi
+
           if [ "$MODE" = preflight ]; then
-            test "$(jq -r '.source_missing_count' <<<"$source_state")" = 3
-            test "$feed_missing_count" = 9
             jq -c \
               --arg frontend_revision "$frontend_revision" \
               --arg feed_absence_sha256 "$feed_absence_sha256" \
+              --arg closeout_state "$closeout_state" \
               --argjson feed_missing_count "$feed_missing_count" \
               --argjson endpoint_count "$cache_endpoint_count" \
               --argjson source_state "$source_state" \
@@ -389,8 +399,9 @@ jobs:
                 frontend_revision: $frontend_revision,
                 feed_absence_sha256: $feed_absence_sha256,
                 feed_missing_count: $feed_missing_count,
+                closeout_state: $closeout_state,
                 frontend_revalidation_endpoint_count: $endpoint_count,
-                cache_closeout_ready: true,
+                cache_closeout_ready: ($closeout_state == "recovery_ready"),
                 cache_write_count: 0,
                 database_write_count: 0,
                 body_mutation_count: 0,
@@ -399,8 +410,7 @@ jobs:
           else
             test "$(jq -r '.source_cache_sha256' <<<"$source_state")" = "$EXPECTED_SOURCE_CACHE_SHA256"
             test "$feed_absence_sha256" = "$EXPECTED_FEED_ABSENCE_SHA256"
-            test "$(jq -r '.source_missing_count' <<<"$source_state")" = 3
-            test "$feed_missing_count" = 9
+            test "$closeout_state" = recovery_ready
 
             php -r '
             require getcwd()."/vendor/autoload.php";
@@ -501,7 +511,7 @@ jobs:
             ' >/dev/null
 
             for surface in sitemap.xml llms.txt llms-full.txt; do
-              curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+              curl --http1.1 -fsS --retry 3 --retry-delay 2 --retry-all-errors \
                 --connect-timeout 10 --max-time 60 \
                 -H 'Cache-Control: no-cache' \
                 "https://fermatmind.com/$surface" >"$feed_dir/$surface.post"
@@ -603,9 +613,15 @@ jobs:
 
           if [ "$MODE" = preflight ]; then
             jq -e '
-              .source_missing_count == 3
-              and .feed_missing_count == 9
-              and .cache_closeout_ready == true
+              ((.closeout_state == "recovery_ready"
+                and .source_missing_count == 3
+                and .feed_missing_count == 9
+                and .cache_closeout_ready == true)
+               or
+               (.closeout_state == "already_closed"
+                and .source_missing_count == 0
+                and .feed_missing_count == 0
+                and .cache_closeout_ready == false))
               and .frontend_revalidation_endpoint_count > 0
               and .cache_write_count == 0
               and (.source_cache_sha256 | test("^[0-9a-f]{64}$"))
@@ -633,6 +649,7 @@ jobs:
             --arg fingerprint "$CONTENT_FINGERPRINT_SHA256" \
             --arg source "$(jq -r '.source_cache_sha256' <<<"$result")" \
             --arg absence "$(jq -r '.feed_absence_sha256' <<<"$result")" \
+            --arg closeout_state "$(jq -r '.closeout_state // "applied"' <<<"$result")" \
             --arg approval "$approval_sha256" \
             --argjson source_missing "$(jq '.source_missing_count' <<<"$result")" \
             --argjson feed_missing "$(jq '.feed_missing_count' <<<"$result")" \
@@ -654,6 +671,7 @@ jobs:
               exact_slugs: ["enfp-vs-entp","estj-vs-entj","isfp-vs-infp"],
               source_cache_sha256: $source,
               feed_absence_sha256: $absence,
+              closeout_state: $closeout_state,
               source_missing_count: $source_missing,
               feed_missing_count: $feed_missing,
               cache_write_count: $cache_writes,
