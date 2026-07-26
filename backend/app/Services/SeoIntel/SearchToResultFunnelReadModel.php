@@ -132,6 +132,9 @@ final class SearchToResultFunnelReadModel
         if ((int) $gsc['data_origin_issue_count'] > 0) {
             $gscIssues[] = 'gsc_data_origin_not_allowed';
         }
+        if ((int) $gsc['non_final_state_issue_count'] > 0) {
+            $gscIssues[] = 'gsc_data_state_not_final';
+        }
         if ($gscIssues !== []) {
             return $this->blockedReport(
                 $fromDate->toDateString(),
@@ -142,6 +145,13 @@ final class SearchToResultFunnelReadModel
 
         $hashes = array_values(array_unique(array_column($gsc['rows'], 'canonical_url_hash')));
         $urlTruth = $this->urlTruthByHash($connection, $hashes);
+        if (array_diff($hashes, array_keys($urlTruth)) !== []) {
+            return $this->blockedReport(
+                $fromDate->toDateString(),
+                $toDate->toDateString(),
+                ['url_truth_missing_for_gsc_hash'],
+            );
+        }
         $funnel = $this->funnelByDateHashAndEngine(
             $connection,
             $fromDate->toDateString(),
@@ -260,7 +270,7 @@ final class SearchToResultFunnelReadModel
     }
 
     /**
-     * @return array{rows:list<array<string,mixed>>,private_exclusion_count:int,invalid_hash_exclusion_count:int,data_origin_issue_count:int}
+     * @return array{rows:list<array<string,mixed>>,private_exclusion_count:int,invalid_hash_exclusion_count:int,data_origin_issue_count:int,non_final_state_issue_count:int}
      */
     private function gscAggregates(
         string $connection,
@@ -276,6 +286,7 @@ final class SearchToResultFunnelReadModel
                 'canonical_url_hash',
                 'canonical_url',
                 'source_engine',
+                'data_state',
                 'clicks',
                 'impressions',
                 'metadata_json',
@@ -288,6 +299,7 @@ final class SearchToResultFunnelReadModel
         $privateExclusionCount = 0;
         $invalidHashExclusionCount = 0;
         $dataOriginIssueCount = 0;
+        $nonFinalStateIssueCount = 0;
         $allowedOrigins = $this->stringList(config(
             'seo_intel.gsc_data_quality.allowed_data_origins',
             ['live_gsc_api'],
@@ -298,6 +310,12 @@ final class SearchToResultFunnelReadModel
         ));
 
         foreach ($query->get() as $row) {
+            if (strtolower(trim((string) ($row->data_state ?? ''))) !== 'final') {
+                $nonFinalStateIssueCount++;
+
+                continue;
+            }
+
             $hash = strtolower(trim((string) ($row->canonical_url_hash ?? '')));
             if (! $this->validHash($hash)) {
                 $invalidHashExclusionCount++;
@@ -352,6 +370,7 @@ final class SearchToResultFunnelReadModel
             'private_exclusion_count' => $privateExclusionCount,
             'invalid_hash_exclusion_count' => $invalidHashExclusionCount,
             'data_origin_issue_count' => $dataOriginIssueCount,
+            'non_final_state_issue_count' => $nonFinalStateIssueCount,
         ];
     }
 

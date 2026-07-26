@@ -10,6 +10,8 @@ GSC page aggregates to existing product funnel aggregates.
 - Public/indexability authority: `seo_urls`
 - Join grain: `report_date + canonical_url_hash + source_engine`
 - GSC rows are collapsed to page level across query/device/country dimensions.
+- Only `data_state=final` rows may enter the aggregate. Any provisional or
+  otherwise non-final row blocks the requested report window.
 - `data_origin` remains visible and is read from sanitized GSC metadata. Only
   origins allowed by `seo_intel.gsc_data_quality` may enter a report; a
   forbidden, unknown, or mixed trusted/untrusted source blocks the complete
@@ -18,7 +20,9 @@ GSC page aggregates to existing product funnel aggregates.
 
 The output uses only the SHA-256 canonical URL hash. It never returns a raw URL,
 raw query, result identifier, attempt identifier, order identifier, recovery
-token, or payment identifier.
+token, or payment identifier. Every GSC hash must resolve to an existing URL
+Truth row; an unknown hash blocks the report so a potentially private imported
+hash cannot be emitted without an approved privacy classification.
 
 ## Product event mapping
 
@@ -59,7 +63,8 @@ php artisan seo-intel:search-to-result-funnel-report \
 
 Both dates are required and inclusive. The command is read-only and returns a
 non-zero exit code for an invalid window, missing required source schema, empty
-GSC evidence, an empty page-family result, or a disallowed GSC data origin.
+GSC evidence, an empty page-family result, a disallowed GSC data origin, a
+non-final GSC row, or a missing URL Truth classification.
 
 ## Boundaries
 
@@ -68,8 +73,9 @@ GSC evidence, an empty page-family result, or a disallowed GSC data origin.
   `seo_intel.core_entry_slo.private_path_segments`; it excludes nested `take`,
   `result`, `attempt`, `order`, `recovery`, `payment`, `checkout`, `report`,
   `share`, and `account` flows before output.
-- Unknown and non-indexable hashes may retain privacy-safe search/funnel
-  observation, but never count as valid indexed product starts.
+- Missing URL Truth hashes fail closed without output. Existing non-indexable or
+  non-authoritative rows may retain hash-only observation, but never count as
+  valid indexed product starts.
 - No database/CMS write, publication/indexability change, Search Channel action,
   URL submission, sitemap submission, external API call, migration, or deploy is
   performed.
