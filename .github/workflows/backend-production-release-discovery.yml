@@ -98,10 +98,10 @@ jobs:
           mkdir -p artifacts
           printf -v q_deploy_path '%q' "$DEPLOY_PATH"
 
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+          if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH=$q_deploy_path bash -s" \
-            <<'REMOTE' > artifacts/remote-releases.json
+            <<'REMOTE' > artifacts/remote-releases.json 2>/dev/null
           set -Eeuo pipefail
 
           releases_root="$(readlink -f "$DEPLOY_PATH/releases")"
@@ -165,6 +165,10 @@ jobs:
               deploy_lock_present: false
             }'
           REMOTE
+          then
+            echo "PRODUCTION_RELEASE_DISCOVERY_REMOTE_READ_FAILED" >&2
+            exit 1
+          fi
 
           jq -e '
             .schema_version == "backend-production-release-remote-read.v1"
@@ -186,10 +190,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          runs_json="$(
-            gh api \
+          runs_pages="$(
+            gh api --paginate --slurp \
               "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/runs?branch=main&per_page=100"
           )"
+          runs_json="$(jq -c '[.[].workflow_runs[]] | {workflow_runs: .}' <<<"$runs_pages")"
           candidates='[]'
 
           while IFS= read -r candidate; do

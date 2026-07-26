@@ -50,6 +50,8 @@ final class BackendProductionReleaseDiscoveryWorkflowTest extends TestCase
             'test -f "$release_path/REVISION"',
             'backend-production-release-remote-read.v1',
             'deploy_lock_present: false',
+            '2>/dev/null',
+            'PRODUCTION_RELEASE_DISCOVERY_REMOTE_READ_FAILED',
         ] as $contract) {
             $this->assertStringContainsString($contract, $remote);
         }
@@ -79,6 +81,8 @@ final class BackendProductionReleaseDiscoveryWorkflowTest extends TestCase
 
         foreach ([
             'git merge-base --is-ancestor "$revision" origin/main',
+            'gh api --paginate --slurp',
+            "'[.[].workflow_runs[]] | {workflow_runs: .}'",
             '.name == "Deploy Application"',
             '.path == ".github/workflows/deploy.yml"',
             '.head_branch == "main"',
