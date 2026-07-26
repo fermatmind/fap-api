@@ -136,10 +136,23 @@ final class ArticleRecoveryBatchPlanner
         $this->validateTopLevel($evidence, $targets, $issues);
         $querySummary = $this->validateQueryEvidence($targets, $queryArtifact['payload'], $issues);
         $this->validatePageCohortEvidence($evidence, $targets, $pageCohortArtifact['payload'], $issues);
+        $gscReviewProvenance = [
+            'source_evidence_sha256' => $loaded['sha256'],
+            'page_cohort_artifact_sha256' => $pageCohortArtifact['sha256'],
+            'observed_at' => (string) ($evidence['observed_at'] ?? ''),
+            'data_origin' => (string) data_get($evidence, 'gsc.data_origin', ''),
+            'source_engine' => (string) data_get($evidence, 'gsc.source_engine', ''),
+            'property' => (string) data_get($evidence, 'gsc.property', ''),
+            'search_type' => (string) data_get($evidence, 'gsc.search_type', ''),
+            'current_window' => (array) data_get($evidence, 'gsc.current_window', []),
+            'previous_window' => (array) data_get($evidence, 'gsc.previous_window', []),
+            'page_export' => (array) data_get($evidence, 'gsc.page_export', []),
+        ];
         $targetPlans = $this->validateTargets(
             $targets,
             $queryArtifact['payload'],
             $queryArtifact['sha256'],
+            $gscReviewProvenance,
             $issues,
         );
         $this->validateTargetSetSha($evidence, $targets, $issues);
@@ -694,6 +707,7 @@ final class ArticleRecoveryBatchPlanner
     /**
      * @param  list<mixed>  $targets
      * @param  array<string, mixed>  $queryArtifact
+     * @param  array<string, mixed>  $gscReviewProvenance
      * @param  list<string>  $issues
      * @return list<array<string, mixed>>
      */
@@ -701,6 +715,7 @@ final class ArticleRecoveryBatchPlanner
         array $targets,
         array $queryArtifact,
         string $queryArtifactSha256,
+        array $gscReviewProvenance,
         array &$issues,
     ): array {
         $plans = [];
@@ -783,6 +798,7 @@ final class ArticleRecoveryBatchPlanner
                 'page_evidence_id' => (string) ($target['page_evidence_id'] ?? ''),
                 'current_authority' => (array) ($target['current_authority'] ?? []),
                 'gsc_page' => (array) ($target['gsc_page'] ?? []),
+                'gsc_provenance' => $gscReviewProvenance,
                 'query_evidence' => $queryReviewEvidence,
                 'proposed_recovery' => (array) ($target['proposed_recovery'] ?? []),
                 'source_refs' => (array) ($target['source_refs'] ?? []),
@@ -801,6 +817,7 @@ final class ArticleRecoveryBatchPlanner
                 'current_content_sha256' => (string) data_get($target, 'current_authority.content_sha256', ''),
                 'current_seo_sha256' => (string) data_get($target, 'current_authority.seo_sha256', ''),
                 'gsc_page' => (array) ($target['gsc_page'] ?? []),
+                'gsc_provenance' => $gscReviewProvenance,
                 'query_evidence_state' => (string) data_get($target, 'query_export.evidence_state', ''),
                 'retained_query_count' => (int) data_get($target, 'query_export.retained_query_count', 0),
                 'private_query_export_zip_sha256' => (string) data_get($target, 'query_export.zip_sha256', ''),
@@ -1478,9 +1495,9 @@ final class ArticleRecoveryBatchPlanner
         $currentStart = $this->exactDate((string) ($currentWindow['start'] ?? ''));
         $currentEnd = $this->exactDate((string) ($currentWindow['end'] ?? ''));
 
-        try {
-            $observed = new \DateTimeImmutable($observedAt);
-        } catch (\Exception) {
+        $observed = $this->exactUtcTimestamp($observedAt);
+        if ($observed === null
+            || $observed > new \DateTimeImmutable('now', new \DateTimeZone('UTC'))) {
             return false;
         }
 
@@ -1504,6 +1521,22 @@ final class ArticleRecoveryBatchPlanner
             && ($errors === false || ($errors['warning_count'] === 0 && $errors['error_count'] === 0))
             && $date->format('Y-m-d') === $value
                 ? $date
+                : null;
+    }
+
+    private function exactUtcTimestamp(string $value): ?\DateTimeImmutable
+    {
+        $timestamp = \DateTimeImmutable::createFromFormat(
+            '!Y-m-d\TH:i:s\Z',
+            $value,
+            new \DateTimeZone('UTC'),
+        );
+        $errors = \DateTimeImmutable::getLastErrors();
+
+        return $timestamp instanceof \DateTimeImmutable
+            && ($errors === false || ($errors['warning_count'] === 0 && $errors['error_count'] === 0))
+            && $timestamp->format('Y-m-d\TH:i:s\Z') === $value
+                ? $timestamp
                 : null;
     }
 

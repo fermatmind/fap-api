@@ -56,7 +56,7 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         self::assertSame('sc-domain:fermatmind.com', data_get($package, 'source_evidence.property'));
         self::assertSame('web', data_get($package, 'source_evidence.search_type'));
         self::assertSame(
-            '7b55d212ceabf0d574e60df6a2c557fdde1b025a06886017fc7cd98bf44d2d4b',
+            'ec37f9d1f0bfacab313639c8500e63d7330d2f7d59358f2f4b557e53a8fc3c5e',
             $package['package_sha256']
         );
         self::assertSame(
@@ -632,6 +632,16 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
                     'current' => ['start' => '2026-06-26', 'end' => '2026-07-22'],
                     'observed_at' => '2026-07-26T04:35:35Z',
                 ],
+                [
+                    'previous' => ['start' => '2026-05-29', 'end' => '2026-06-25'],
+                    'current' => ['start' => '2026-06-26', 'end' => '2026-07-23'],
+                    'observed_at' => 'tomorrow',
+                ],
+                [
+                    'previous' => ['start' => '2026-05-29', 'end' => '2026-06-25'],
+                    'current' => ['start' => '2026-06-26', 'end' => '2026-07-23'],
+                    'observed_at' => '2999-07-26T04:35:35Z',
+                ],
             ];
 
             foreach ($invalidWindows as $invalidWindow) {
@@ -1067,6 +1077,62 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
                 data_get($mutated, 'targets.0.gsc_page')
             );
             self::assertFalse($mutated['approval_eligible']);
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_binds_global_gsc_provenance_into_each_review_target_hash(): void
+    {
+        $planner = app(ArticleRecoveryBatchPlanner::class);
+        $baseline = $planner->plan($this->evidencePath, self::EVIDENCE_SHA256);
+        [$directory, $evidence, , $pageCohort] = $this->mutableFixture();
+
+        try {
+            $evidence['gsc']['page_export']['zip_sha256'] = str_repeat('a', 64);
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+            $pageExportMutated = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertNotSame(
+                data_get($baseline, 'targets.0.review_target_sha256'),
+                data_get($pageExportMutated, 'targets.0.review_target_sha256')
+            );
+            self::assertSame(
+                str_repeat('a', 64),
+                data_get($pageExportMutated, 'targets.0.gsc_provenance.page_export.zip_sha256')
+            );
+
+            $pageCohort['source_csv_sha256'] = str_repeat('b', 64);
+            $evidence['gsc']['page_export']['csv_sha256'] = str_repeat('b', 64);
+            $this->writeJson($directory.'/live-gsc-page-cohort-hashes.v1.json', $pageCohort);
+            $evidence['gsc']['page_cohort_artifact']['sha256'] = hash_file(
+                'sha256',
+                $directory.'/live-gsc-page-cohort-hashes.v1.json'
+            );
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+            $cohortMutated = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertNotSame(
+                data_get($pageExportMutated, 'targets.0.review_target_sha256'),
+                data_get($cohortMutated, 'targets.0.review_target_sha256')
+            );
+            self::assertSame(
+                $evidence['gsc']['page_cohort_artifact']['sha256'],
+                data_get($cohortMutated, 'targets.0.gsc_provenance.page_cohort_artifact_sha256')
+            );
+            self::assertSame(
+                $evidenceSha,
+                data_get($cohortMutated, 'targets.0.gsc_provenance.source_evidence_sha256')
+            );
+            self::assertFalse($cohortMutated['approval_eligible']);
         } finally {
             File::deleteDirectory($directory);
         }
