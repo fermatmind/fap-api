@@ -154,7 +154,13 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'from supervisor.options import ServerOptions',
             'ServerOptions().realize(args=["-c", sys.argv[1]])',
             'timeout --signal=TERM --kill-after=10s 180s',
-            'QUEUE_PROBE_PHP_B64=\'$queue_probe_b64\' timeout --signal=TERM --kill-after=10s 150s bash',
+            'scripts/deploy/run_remote_control_process_group.py',
+            'REMOTE_CONTROL_TIMEOUT_SECONDS=150',
+            'REMOTE_CONTROL_TERM_GRACE_SECONDS=10',
+            'REMOTE_CONTROL_RUN_USER=\'$DEPLOY_USER\'',
+            '--build-privileged-launcher',
+            'bash -o pipefail -lc',
+            'base64 -d | sudo -n python3',
             'sudo -n "$supervisorctl_path" update fap-queue-ops',
             'sudo -n "$supervisorctl_path" restart fap-queue-ops:fap-queue-ops_00',
             'OPS_QUEUE_REMOTE_PREFLIGHT_FAILED',
@@ -259,9 +265,13 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             2,
             substr_count($workflow, 'timeout --signal=TERM --kill-after=10s 180s'),
         );
+        $this->assertStringNotContainsString(
+            'timeout --signal=TERM --kill-after=10s 150s bash',
+            $workflow,
+        );
         $this->assertSame(
             2,
-            substr_count($workflow, 'timeout --signal=TERM --kill-after=10s 150s bash'),
+            substr_count($workflow, 'scripts/deploy/run_remote_control_process_group.py'),
         );
     }
 
