@@ -100545,9 +100545,9 @@
     "branch": "codex/saep-proposed-api-per02-mbti-base-type-discoverability-02",
     "title": "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02: add canonical MBTI base types to sitemap authority",
     "depends_on": [],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "pr_open_checks_pending",
+    "commit_sha": "8fc47dc89292e2ddcd8a62a73fc1e51dcb366f64",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3313",
     "checks": {
       "web_production_dependency": {
         "status": "passed",
@@ -100607,8 +100607,13 @@
         "at": "2026-07-26T14:55:00Z",
         "status": "local_validation_passed",
         "note": "The complete declared local validation passed after the rebase: syntax, focused sitemap tests (24 tests/885 assertions), Pint, Composer validation/audit, ci_verify_mbti, YAML/JSON parsing, diff checks and exact seven-file scope validation. Big Five generated validation artifacts were restored and are not part of the PR."
+      },
+      {
+        "at": "2026-07-26T15:05:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #3313 from exact rebased head 8fc47dc89292e2ddcd8a62a73fc1e51dcb366f64. Required GitHub checks, exact-head review, zero unresolved threads and mergeability remain mandatory."
       }
     ],
-    "updated_at": "2026-07-26T14:55:00Z"
+    "updated_at": "2026-07-26T15:05:00Z"
   }
 }
