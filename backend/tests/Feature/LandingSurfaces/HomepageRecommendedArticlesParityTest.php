@@ -47,48 +47,22 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
         config(['app.frontend_url' => 'https://fermatmind.com']);
         Carbon::setTestNow(Carbon::create(2026, 5, 27, 0, 0, 0, 'UTC'));
 
-        $this->createHomeSurface('en', $this->enSlugs);
-        $this->createHomeSurface('zh-CN', $this->zhSlugs);
+        $this->createHomeSurface('en');
+        $this->createHomeSurface('zh-CN');
 
-        foreach (array_slice($this->enSlugs, 0, 3) as $slug) {
+        foreach ($this->enSlugs as $slug) {
             $this->createArticle($slug, 'en', true);
-        }
-
-        foreach (array_slice($this->enSlugs, 3) as $slug) {
-            $this->createArticle($slug, 'en', false);
         }
 
         foreach ($this->zhSlugs as $slug) {
             $this->createArticle($slug, 'zh-CN', true);
         }
 
-        $migration = require database_path('migrations/2026_05_27_000100_backfill_homepage_recommended_en_article_media_taxonomy.php');
-        $migration->up();
-
         $this->assertRecommendedArticlesAreRenderEligible('en', $this->enSlugs);
         $this->assertRecommendedArticlesAreRenderEligible('zh-CN', $this->zhSlugs);
-
-        $this->assertBackfilledEnglishArticle(
-            'best-valentines-date-by-personality-and-relationship-science',
-            'Relationships and Love',
-            'Valentine\'s Day',
-        );
-        $this->assertBackfilledEnglishArticle(
-            'are-infj-men-rare-or-socially-silenced',
-            'Personality Psychology',
-            'Self-Silencing',
-        );
-        $this->assertBackfilledEnglishArticle(
-            'which-love-script-fits-you-best',
-            'Relationships and Love',
-            'Love Styles',
-        );
     }
 
-    /**
-     * @param  list<string>  $slugs
-     */
-    private function createHomeSurface(string $locale, array $slugs): void
+    private function createHomeSurface(string $locale): void
     {
         $surface = LandingSurface::query()->create([
             'org_id' => 0,
@@ -110,11 +84,9 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
             'block_type' => 'articles',
             'title' => $locale === 'zh-CN' ? '推荐阅读' : 'Recommended reading',
             'payload_json' => [
-                'items' => array_map(
-                    static fn (string $slug): array => ['article' => ['slug' => $slug]],
-                    $slugs,
-                ),
+                'selection_mode' => 'latest_published_indexable',
                 'limit' => 6,
+                'pinned_slugs' => [],
             ],
             'sort_order' => 10,
             'is_enabled' => true,
@@ -211,6 +183,8 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
         $items = data_get($block, 'payload_json.items');
         $this->assertIsArray($items);
         $this->assertCount(6, $items);
+        $this->assertSame('latest_published_indexable', data_get($block, 'payload_json.selection_mode'));
+        $this->assertSame([], data_get($block, 'payload_json.pinned_slugs'));
         $this->assertEqualsCanonicalizing(
             $expectedSlugs,
             array_map(static fn (array $item): string => (string) data_get($item, 'article.slug'), $items),
@@ -231,31 +205,8 @@ final class HomepageRecommendedArticlesParityTest extends TestCase
             $this->assertNotEmpty(data_get($article, 'cover_image_variants.hero'));
             $this->assertNotEmpty(data_get($article, 'category.name'));
             $this->assertNotEmpty(data_get($article, 'tags.0.name'));
+            $this->assertArrayNotHasKey('is_pinned', $item);
         }
-    }
-
-    private function assertBackfilledEnglishArticle(string $slug, string $categoryName, string $expectedTagName): void
-    {
-        $article = Article::query()
-            ->withoutGlobalScopes()
-            ->with([
-                'category' => fn ($query) => $query->withoutGlobalScopes(),
-                'tags' => fn ($query) => $query->withoutGlobalScopes(),
-                'seoMeta',
-            ])
-            ->where('org_id', 0)
-            ->where('locale', 'en')
-            ->where('slug', $slug)
-            ->firstOrFail();
-
-        $this->assertSame($this->coverUrl($slug), (string) $article->cover_image_url);
-        $this->assertNotEmpty((string) $article->cover_image_alt);
-        $this->assertSame(1200, (int) $article->cover_image_width);
-        $this->assertSame(675, (int) $article->cover_image_height);
-        $this->assertSame($this->coverUrl($slug), data_get($article->cover_image_variants, 'hero'));
-        $this->assertSame($categoryName, (string) $article->category?->name);
-        $this->assertContains($expectedTagName, $article->tags->pluck('name')->all());
-        $this->assertSame($this->coverUrl($slug), (string) $article->seoMeta?->og_image_url);
     }
 
     private function category(string $locale): ArticleCategory
