@@ -22,6 +22,7 @@ use App\Services\Cms\PersonalityProfileService;
 use App\Services\Cms\TopicProfileSeoService;
 use App\Services\Scale\ScaleDiscoverabilityPolicy;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\CanonicalFrontendUrl;
 use Illuminate\Support\Carbon;
 
 class SitemapGenerator
@@ -564,7 +565,7 @@ class SitemapGenerator
             return false;
         }
 
-        $expectedCanonical = rtrim((string) config('app.frontend_url', config('app.url', '')), '/')
+        $expectedCanonical = CanonicalFrontendUrl::fromConfig()
             .'/'.$segment.'/personality/'.strtolower($baseTypeCode);
         if ($canonical === null || $canonical !== $expectedCanonical) {
             return false;

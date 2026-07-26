@@ -787,6 +787,22 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $xml);
     }
 
+    public function test_generate_exports_mbti_base_profile_with_the_normalized_frontend_origin(): void
+    {
+        config(['app.frontend_url' => 'http://www.fermatmind.com']);
+
+        $this->createPersonalityProfile([
+            'type_code' => 'INTJ',
+            'canonical_type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+        ]);
+
+        $xml = (string) ($this->generateSitemap()['xml'] ?? '');
+
+        $this->assertStringContainsString('<loc>https://fermatmind.com/en/personality/intj</loc>', $xml);
+    }
+
     public function test_generate_excludes_held_personality_variants_and_at_comparisons(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);

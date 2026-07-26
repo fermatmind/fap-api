@@ -100622,8 +100622,13 @@
         "at": "2026-07-26T15:35:00Z",
         "status": "pr_open_checks_pending",
         "note": "The SitemapXmlTest repair, expanded focused sitemap suite and MBTI verification rerun completed locally. Generated Big Five compiled artifacts were restored; the new PR head must obtain a fresh exact remote required-check set."
+      },
+      {
+        "at": "2026-07-26T15:45:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "Resolved the exact-head P2 review finding: MBTI base expected canonical URLs now use CanonicalFrontendUrl::fromConfig(), with a focused www/HTTP normalization regression test. The next pushed head requires a fresh full remote-check set."
       }
     ],
-    "updated_at": "2026-07-26T15:35:00Z"
+    "updated_at": "2026-07-26T15:45:00Z"
   }
 }
