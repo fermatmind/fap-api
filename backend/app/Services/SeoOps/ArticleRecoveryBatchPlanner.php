@@ -1037,8 +1037,7 @@ final class ArticleRecoveryBatchPlanner
                 '_',
                 mb_strtolower(rawurldecode((string) $key), 'UTF-8'),
             );
-            if (is_string($normalizedKey)
-                && in_array(trim($normalizedKey, '_'), self::CREDENTIAL_KEYS, true)) {
+            if (is_string($normalizedKey) && $this->isCredentialKey($normalizedKey)) {
                 return true;
             }
             if (is_array($value) && $this->hasCredentialParameterKey($value)) {
@@ -1066,6 +1065,18 @@ final class ArticleRecoveryBatchPlanner
             && $value >= 0;
     }
 
+    private function isCredentialKey(string $normalizedKey): bool
+    {
+        $paddedKey = '_'.trim($normalizedKey, '_').'_';
+        foreach (self::CREDENTIAL_KEYS as $credentialKey) {
+            if (str_contains($paddedKey, '_'.$credentialKey.'_')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * @param  array<string, mixed>  $payload
      * @return list<string>
@@ -1082,7 +1093,8 @@ final class ArticleRecoveryBatchPlanner
                         mb_strtolower(rawurldecode($key), 'UTF-8'),
                     );
                     if (is_string($normalizedKey)
-                        && in_array(trim($normalizedKey, '_'), self::FORBIDDEN_KEYS, true)) {
+                        && (in_array(trim($normalizedKey, '_'), self::FORBIDDEN_KEYS, true)
+                            || $this->isCredentialKey($normalizedKey))) {
                         $found[] = $key;
                     }
                 }

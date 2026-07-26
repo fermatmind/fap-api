@@ -100126,8 +100126,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "ready_to_merge",
-  "commit_sha": "bd62fc03eeae1f361874aad55ba56efce0b38ffa",
+  "status": "prefixed_url_credential_review_repair_local_checks_passed_github_checks_pending",
+  "commit_sha": "6c320014b7c98e09ccbe30221f6e7b36c9e94c35",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100148,17 +100148,17 @@
       },
     "required_local_checks": {
       "status": "passed_review_repairs",
-      "evidence": "The final recovery suite passed 20 tests / 282 assertions and the combined recovery plus ReviewPolicyRegistry run passed 31/639. Both Big Five classifier assertions passed 2/6. Scoped Pint passed 4 files, composer validate --strict passed, composer audit found no advisories, all content-pack JSON parsed, and git diff --check passed. The documented deterministic command intentionally exits 1 twice, with the repeat reporting changed=false, candidate_package_built=true, approval_eligible=false, business_write=false, status=blocked_formal_gsc_readmodel_gate, package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact file SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and opaque full-cohort artifact SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
+      "evidence": "The final recovery suite passed 20 tests / 284 assertions and the combined recovery plus ReviewPolicyRegistry run passed 31/641. Both Big Five classifier assertions passed 2/6. Scoped Pint passed, composer validate --strict passed, composer audit found no advisories, all content-pack JSON parsed, and git diff --check passed. The documented deterministic command intentionally exits 1 twice, with the repeat reporting changed=false, candidate_package_built=true, approval_eligible=false, business_write=false, status=blocked_formal_gsc_readmodel_gate, package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact file SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and opaque full-cohort artifact SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
-      "status": "passed",
-      "evidence": "All nine GitHub checks passed at exact reviewed repair head bd62fc03eeae1f361874aad55ba56efce0b38ffa: hygiene, supply-chain, content-pack-build-validation, Semgrep OSS, Code Scanning Semgrep blocking and SARIF upload, verify-mbti-legacy, verify-mbti-v2, and verify-bigfive. Codex review is bound to that exact head and reports no finding; no active unresolved review thread remains."
+      "status": "pending_after_review_repair",
+      "evidence": "All nine GitHub checks passed at ready-ledger head 6c320014b7c98e09ccbe30221f6e7b36c9e94c35. Its automatic review then identified one P2: provider-prefixed credential parameter names could bypass exact key matching. The repair rejects normalized credential tokens at exact, prefix, or suffix boundaries and adds focused x-api-key, github_token, and db-password regressions; a new GitHub run is pending after commit and push."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
   "failure_reason": null,
@@ -100282,8 +100282,13 @@
       "at": "2026-07-26T08:12:18Z",
       "status": "ready_to_merge",
       "note": "All nine GitHub checks passed at exact reviewed repair head bd62fc03eeae1f361874aad55ba56efce0b38ffa, including verify-bigfive. Current-head Codex review completed with no finding and no active unresolved thread. Exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier test only for the corresponding freeze regression. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:21:35Z",
+      "status": "prefixed_url_credential_review_repair_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger head completed all nine checks, but its refreshed review found provider-prefixed credential URL parameters could bypass exact normalized key membership. Source URL validation now rejects each credential key at exact, prefix, or suffix token boundaries; focused coverage proves x-api-key, github_token, and db-password fail closed in addition to userinfo, percent-encoded access_token, client-secret, refresh_token, authorization, and cookie. Recovery plus review-registry passed 31/641, Big Five classifier passed 2/6, and scoped Pint passed. No production or business write occurred."
     }
   ],
-  "updated_at": "2026-07-26T08:12:18Z"
+  "updated_at": "2026-07-26T08:21:35Z"
 }
 }

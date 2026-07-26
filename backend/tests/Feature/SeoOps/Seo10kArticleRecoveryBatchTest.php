@@ -381,6 +381,10 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             $evidence['targets'][1]['source_refs'][1]['url'] = 'https://example.org/paper?refresh_token=secret';
             $evidence['targets'][2]['source_refs'][0]['url'] = 'https://example.org/paper?authorization=secret';
             $evidence['targets'][2]['source_refs'][1]['url'] = 'https://example.org/paper?cookie=secret';
+            $evidence['targets'][3]['source_refs'][0]['url'] = 'https://example.org/paper?x-api-key=secret';
+            $evidence['targets'][3]['source_refs'][1]['url'] = 'https://example.org/paper?github_token=secret';
+            $evidence['targets'][4]['source_refs'][0]['url'] = 'https://example.org/paper?db-password=secret';
+            $evidence['targets'][4]['source_refs'][1]['url'] = 'https://example.org/paper?provider-token-version=secret';
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
             $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
 
@@ -399,6 +403,14 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
                 'source_ref_invalid:'.$evidence['targets'][2]['canonical_url'],
                 $package['issues']
             );
+            self::assertContains(
+                'source_ref_invalid:'.$evidence['targets'][3]['canonical_url'],
+                $package['issues']
+            );
+            self::assertContains(
+                'source_ref_invalid:'.$evidence['targets'][4]['canonical_url'],
+                $package['issues']
+            );
             self::assertFalse($package['would_write']);
         } finally {
             File::deleteDirectory($directory);
@@ -412,6 +424,8 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         try {
             $evidence['targets'][0]['source_refs'][0]['api_key'] = 'must-not-persist';
             $evidence['targets'][1]['proposed_recovery']['client-secret'] = 'must-not-persist';
+            $evidence['targets'][2]['claim_boundary']['provider_x_api_key_value'] = 'must-not-persist';
+            $evidence['targets'][3]['source_refs'][0]['github_token_value'] = 'must-not-persist';
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
             $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
 
