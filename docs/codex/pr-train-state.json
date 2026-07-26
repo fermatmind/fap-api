@@ -9,8 +9,8 @@
       "MBTI-CROSS-PUBLISHER-49",
       "MBTI-CROSS-AUTHORITY-50"
     ],
-    "status": "github_review_repairing",
-    "commit_sha": "pending_remote_pr_head",
+    "status": "ready_to_merge",
+    "commit_sha": "ad8eb5e2ce726527415d9cc8998b36e5b93d7f86",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3294",
     "checks": {
       "dependency": {
@@ -30,14 +30,14 @@
         "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 86 assertions after all three review repairs; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed, including Big Five 1601 tests / 195611 assertions, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts were removed or restored to HEAD."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact reviewed head ad8eb5e2ce726527415d9cc8998b36e5b93d7f86 passed all 9 GitHub checks: hygiene, supply-chain, content-pack-build-validation, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. All three actionable review threads were repaired in scope and resolved."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -76,9 +76,14 @@
         "at": "2026-07-26T05:22:00Z",
         "status": "github_review_repairing",
         "note": "The repaired head a8831fbd9 passed all 9 GitHub checks, then exact-head review identified a production deployment race. The production-control job now shares deploy-${{ github.repository }}-production with the production deploy workflow, preserving the workflow-level self-serialization while preventing a deploy from crossing the publisher transaction. Workflow YAML, actionlint, focused SRE tests 3/86, Pint, and diff checks passed; fresh exact-head checks remain mandatory."
+      },
+      {
+        "at": "2026-07-26T05:30:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact head ad8eb5e2ce726527415d9cc8998b36e5b93d7f86 passed all 9 required GitHub checks, all three actionable review threads are resolved, mergeability is CLEAN, and the PR remains limited to the declared five paths. This ledger-only transition records readiness; its resulting exact head must also pass required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-26T05:22:00Z"
+    "updated_at": "2026-07-26T05:30:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
