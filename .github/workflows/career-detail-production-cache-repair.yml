@@ -95,6 +95,7 @@ jobs:
     env:
       MINIMUM_TARGETS: "2092"
       BOOTSTRAP_BATCH_SIZE: "10"
+      BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS: "2"
       OFFLINE_BUILD_BUDGET_MS: "5000"
       BOOTSTRAP_RETRY_LIMIT: "1"
       RUNNER_PATH: "backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php"
@@ -183,7 +184,7 @@ jobs:
               [[ "$AUTHORIZATION_PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
               [[ "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
               [[ "$EXPECTED_COVERAGE_FINGERPRINT_SHA256" =~ ^[0-9a-f]{64}$ ]]
-              expected_phrase="I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run ${AUTHORIZATION_PREFLIGHT_RUN_ID} coverage fingerprint ${EXPECTED_COVERAGE_FINGERPRINT_SHA256} control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} runner SHA256 ${EXPECTED_RUNNER_SHA256} active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets with offline build budget ${OFFLINE_BUILD_BUDGET_MS}ms, retry limit ${BOOTSTRAP_RETRY_LIMIT} and batch size ${BOOTSTRAP_BATCH_SIZE}; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation."
+              expected_phrase="I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run ${AUTHORIZATION_PREFLIGHT_RUN_ID} coverage fingerprint ${EXPECTED_COVERAGE_FINGERPRINT_SHA256} control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} runner SHA256 ${EXPECTED_RUNNER_SHA256} active SHA ${EXPECTED_ACTIVE_REVISION} using exact staging run ${STAGING_RUN_ID} and inactive candidate SHA ${CANDIDATE_RELEASE_REVISION} release ${CANDIDATE_RELEASE_NAME} for exactly ${EXPECTED_MISSING_POINTER_COUNT} missing pointers across ${MINIMUM_TARGETS} targets with offline build budget ${OFFLINE_BUILD_BUDGET_MS}ms, retry limit ${BOOTSTRAP_RETRY_LIMIT}, batch size ${BOOTSTRAP_BATCH_SIZE} and dense-batch cooldown ${BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS}s; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation."
               if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
                 echo "operator_approval_phrase does not match the exact candidate-exact cache bootstrap authorization." >&2
                 exit 2
@@ -403,6 +404,7 @@ jobs:
             --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
             --argjson retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
             --argjson batch_size "$BOOTSTRAP_BATCH_SIZE" \
+            --argjson dense_batch_cooldown_seconds "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS" \
             '.contract_version == "career.candidate_exact_cache_bootstrap.authorization.v2"
              and .preflight_run_id == $preflight_run_id
              and .preflight_run_attempt == $preflight_run_attempt
@@ -419,6 +421,7 @@ jobs:
              and .offline_build_budget_ms == $offline_build_budget_ms
              and .retry_limit == $retry_limit
              and .batch_size == $batch_size
+             and .dense_batch_cooldown_seconds == $dense_batch_cooldown_seconds
              and .cache_write_count == 0
              and .owned_cache_write_count == 0
              and .concurrent_coverage_gain_count == 0
@@ -618,6 +621,7 @@ jobs:
               --argjson offline_build_budget_ms "$OFFLINE_BUILD_BUDGET_MS" \
               --argjson retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
               --argjson batch_size "$BOOTSTRAP_BATCH_SIZE" \
+              --argjson dense_batch_cooldown_seconds "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS" \
               '{
                 contract_version: $contract_version,
                 preflight_run_id: $preflight_run_id,
@@ -635,6 +639,7 @@ jobs:
                 offline_build_budget_ms: $offline_build_budget_ms,
                 retry_limit: $retry_limit,
                 batch_size: $batch_size,
+                dense_batch_cooldown_seconds: $dense_batch_cooldown_seconds,
                 cache_write_count: 0,
                 owned_cache_write_count: 0,
                 concurrent_coverage_gain_count: 0,
@@ -804,19 +809,28 @@ jobs:
                 --argjson offset "$offset" \
                 '.contract_version == "career.candidate_exact_cache_bootstrap.v2"
                  and .status == "failed"
-                 and .error_code == "CANDIDATE_RUNTIME_INITIALIZATION_FAILED"
                  and .batch_offset == $offset
                  and .cache_write_count == 0
                  and .owned_cache_write_count == 0
                  and .failure_count == 1
-                 and (.failure_stage | IN(
-                   "load_candidate_application",
-                   "bootstrap_candidate_kernel",
-                   "validate_candidate_services",
-                   "install_database_guard",
-                   "resolve_candidate_services"
-                 ))
-                 and .error_category == "database_transient_read"
+                 and (
+                   (
+                     .error_code == "CANDIDATE_RUNTIME_INITIALIZATION_FAILED"
+                     and (.failure_stage | IN(
+                       "load_candidate_application",
+                       "bootstrap_candidate_kernel",
+                       "validate_candidate_services",
+                       "install_database_guard",
+                       "resolve_candidate_services"
+                     ))
+                     and .error_category == "database_transient_read"
+                   )
+                   or (
+                     .error_code == "UNEXPECTED_RUNNER_FAILURE"
+                     and .failure_stage == "initialize_candidate_runtime"
+                     and .error_category == "unexpected"
+                   )
+                 )
                  and .attempt_count == 1
                  and .retry_count == 0
                  and .queue_dispatch_count == 0
@@ -831,7 +845,7 @@ jobs:
                 mv "$receipt" "$first_attempt_receipt"
                 runtime_initialization_retry_count=$((runtime_initialization_retry_count + 1))
                 verify_identity
-                sleep 0.5
+                sleep "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS"
                 if ! run_candidate_batch "$receipt"; then
                   echo "candidate-exact cache batch failed after one safe runtime initialization retry; inspect the sanitized receipts." >&2
                   exit 1
@@ -911,7 +925,11 @@ jobs:
             expected_remaining="$post_remaining"
             expected_fingerprint="$(jq -r '.post_coverage_fingerprint_sha256' "$receipt")"
             expected_state="$(jq -r '.post_coverage_state' "$receipt")"
-            offset=$((offset + BOOTSTRAP_BATCH_SIZE))
+            next_offset=$((offset + BOOTSTRAP_BATCH_SIZE))
+            if [ "$owned_writes" -gt 0 ] && [ "$next_offset" -lt "$MINIMUM_TARGETS" ]; then
+              sleep "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS"
+            fi
+            offset="$next_offset"
           done
           total_coverage_gain=$((total_owned_writes + total_concurrent_coverage_gain))
           test "$total_coverage_gain" -eq "$EXPECTED_MISSING_POINTER_COUNT"
@@ -924,6 +942,7 @@ jobs:
             --argjson total_coverage_gain_count "$total_coverage_gain" \
             --argjson runtime_initialization_retry_count "$runtime_initialization_retry_count" \
             --argjson runtime_initialization_retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
+            --argjson dense_batch_cooldown_seconds "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS" \
             '{
               contract_version: "career.candidate_exact_cache_bootstrap.progress.v1",
               initial_missing_pointer_count: $initial_missing_pointer_count,
@@ -933,6 +952,7 @@ jobs:
               total_coverage_gain_count: $total_coverage_gain_count,
               runtime_initialization_retry_count: $runtime_initialization_retry_count,
               runtime_initialization_retry_limit_per_batch: $runtime_initialization_retry_limit,
+              dense_batch_cooldown_seconds: $dense_batch_cooldown_seconds,
               queue_dispatch_count: 0,
               database_write_count: 0
             }' > artifacts/cache-bootstrap-progress.json

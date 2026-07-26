@@ -264,21 +264,30 @@ high-density conversion-closure precompute to at most five slugs. The
 candidate precomputes conversion closure with one events read, one shortlist
 aggregation, and one feedback aggregation per batch, then calls its own
 offline synchronous detail warmer only for rows still marked repairable.
+After a batch owns one or more cache writes, the workflow waits two seconds
+before starting the next candidate process so high-density batches cannot
+immediately stack runtime initialization pressure.
 The public HTTP warmer retains its separate 2,000ms budget. Only
 `build_budget_exceeded` and transient database reads receive one bounded retry
-after 500ms; permanent database, cache publish, payload, and unexpected errors
-stop immediately. This same rule wraps the candidate's full coverage read
-before each batch: an explicitly classified transient database read gets one
-500ms retry, while a permanent or unclassified failure stops before that batch
-owns any write. Pre-batch failures retain the safe batch offset, stage,
-category, attempt count, and retry count. Candidate-runtime initialization is
-split into application load, kernel bootstrap, service validation, database
-guard installation, and service resolution. If one of those stages reports an
+after 500ms; permanent database, cache publish, payload, and unexpected
+per-target build errors stop immediately. This same rule wraps the candidate's
+full coverage read before each batch: an explicitly classified transient
+database read gets one 500ms retry, while a permanent or unclassified failure
+stops before that batch owns any write. Pre-batch failures retain the safe
+batch offset, stage, category, attempt count, and retry count.
+Candidate-runtime initialization is split into application load, kernel
+bootstrap, service validation, database guard installation, and service
+resolution. If one of those stages reports an
 explicit transient database read with zero writes, the workflow preserves the
 sanitized first-attempt receipt, revalidates exact active/candidate/lock
-identity, waits 500ms, and starts exactly one fresh PHP process. It never
-retries a permanent or unclassified initialization failure, and it never
-reuses a partially initialized Laravel process. Receipts contain only safe
+identity, waits two seconds, and starts exactly one fresh PHP process. The same
+single fresh-process recovery is allowed for the top-level sanitized
+`UNEXPECTED_RUNNER_FAILURE` only when it reports
+`initialize_candidate_runtime`, zero cache/queue/database writes, and no
+target, slug, locale, message, or cache key. A second failure, a permanent
+classified failure, or any failure outside that exact zero-write boundary
+stops immediately. The workflow never reuses a partially initialized Laravel
+process. Receipts contain only safe
 failure stage/category, build timings, row-index hash, and pre/post coverage
 fingerprints. They never contain target identity, query text, exception text,
 cache keys, or SSH routing data.
@@ -327,7 +336,7 @@ secrets; there is no Actions-variable fallback.
 The exact write authorization format is:
 
 ```text
-I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run <PREFLIGHT_RUN_ID> coverage fingerprint <COVERAGE_SHA256> control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets with offline build budget 5000ms, retry limit 1 and batch size 10; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
+I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run <PREFLIGHT_RUN_ID> coverage fingerprint <COVERAGE_SHA256> control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets with offline build budget 5000ms, retry limit 1, batch size 10 and dense-batch cooldown 2s; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
 ```
 
 ## fap-web handling in V1

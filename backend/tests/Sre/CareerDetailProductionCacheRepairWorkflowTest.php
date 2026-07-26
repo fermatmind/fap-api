@@ -125,14 +125,24 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
             substr_count($source, 'test "$EXPECTED_MISSING_POINTER_COUNT" -le "$MINIMUM_TARGETS"'),
         );
         $this->assertStringContainsString(
-            'with offline build budget ${OFFLINE_BUILD_BUDGET_MS}ms, retry limit ${BOOTSTRAP_RETRY_LIMIT} and batch size ${BOOTSTRAP_BATCH_SIZE}',
+            'with offline build budget ${OFFLINE_BUILD_BUDGET_MS}ms, retry limit ${BOOTSTRAP_RETRY_LIMIT}, batch size ${BOOTSTRAP_BATCH_SIZE} and dense-batch cooldown ${BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS}s',
             $source,
         );
         $this->assertStringContainsString('BOOTSTRAP_BATCH_SIZE: "10"', $source);
+        $this->assertStringContainsString('BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS: "2"', $source);
         $this->assertStringContainsString('OFFLINE_BUILD_BUDGET_MS: "5000"', $source);
         $this->assertStringContainsString('BOOTSTRAP_RETRY_LIMIT: "1"', $source);
         $this->assertStringContainsString('while [ "$offset" -lt "$MINIMUM_TARGETS" ]; do', $source);
-        $this->assertStringContainsString('offset=$((offset + BOOTSTRAP_BATCH_SIZE))', $source);
+        $this->assertStringContainsString('next_offset=$((offset + BOOTSTRAP_BATCH_SIZE))', $source);
+        $this->assertStringContainsString(
+            'if [ "$owned_writes" -gt 0 ] && [ "$next_offset" -lt "$MINIMUM_TARGETS" ]; then',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'sleep "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS"',
+            $source,
+        );
+        $this->assertStringContainsString('offset="$next_offset"', $source);
         $this->assertStringContainsString(
             'FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT=\'$expected_fingerprint\'',
             $source,
@@ -246,13 +256,21 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
     }
 
     #[Test]
-    public function bootstrap_retries_only_an_explicit_transient_runtime_initialization_in_a_fresh_process(): void
+    public function bootstrap_retries_only_a_sanitized_zero_write_runtime_initialization_in_a_fresh_process(): void
     {
         $source = $this->workflowSource();
 
         $this->assertStringContainsString('run_candidate_batch()', $source);
         $this->assertStringContainsString(
             '.error_code == "CANDIDATE_RUNTIME_INITIALIZATION_FAILED"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.error_code == "UNEXPECTED_RUNNER_FAILURE"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.failure_stage == "initialize_candidate_runtime"',
             $source,
         );
         foreach ([
@@ -269,7 +287,10 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString('.owned_cache_write_count == 0', $source);
         $this->assertStringContainsString('.attempt_count == 1', $source);
         $this->assertStringContainsString('.retry_count == 0', $source);
-        $this->assertStringContainsString('sleep 0.5', $source);
+        $this->assertStringContainsString(
+            'sleep "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS"',
+            $source,
+        );
         $this->assertStringContainsString('verify_identity', $source);
         $retryBoundary = substr(
             $source,
@@ -277,12 +298,12 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
             500,
         );
         $this->assertLessThan(
-            strpos($retryBoundary, 'sleep 0.5'),
+            strpos($retryBoundary, 'sleep "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS"'),
             strpos($retryBoundary, 'verify_identity'),
         );
         $this->assertLessThan(
             strpos($retryBoundary, 'run_candidate_batch "$receipt"'),
-            strpos($retryBoundary, 'sleep 0.5'),
+            strpos($retryBoundary, 'sleep "$BOOTSTRAP_DENSE_BATCH_COOLDOWN_SECONDS"'),
         );
         $this->assertStringContainsString(
             'candidate-exact-batch-${offset}-runtime-attempt-1.json',
@@ -294,6 +315,10 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         );
         $this->assertStringContainsString(
             'runtime_initialization_retry_limit_per_batch: $runtime_initialization_retry_limit',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'dense_batch_cooldown_seconds: $dense_batch_cooldown_seconds',
             $source,
         );
         $this->assertStringContainsString(
