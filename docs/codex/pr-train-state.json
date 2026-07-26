@@ -99973,8 +99973,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-QUERY-OWNER-URL-TRUTH-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "3e576fee0666d2de1022890b235afa87cd1ca262",
+    "status": "github_checks_pending",
+    "commit_sha": "5ad75590ad558ba6f6c32e81019f56bb5a22b06e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
     "checks": {
       "dependency": {
@@ -99987,17 +99987,17 @@
       },
       "required_local_checks": {
         "status": "passed",
-        "evidence": "Focused Task 7 tests passed 7/67; the operator-authorized classifier branch-diff and regression tests passed 2/6; scoped Pint passed 4 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 7/7 authorized paths."
+        "evidence": "After the seven review repairs, focused Task 7 tests passed 9/92; the operator-authorized classifier branch-diff and regression tests passed 2/6; scoped Pint passed 4 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 7/7 authorized paths."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "All 9 required checks passed on final post-rebase head 3e576fee0666d2de1022890b235afa87cd1ca262: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS."
+        "status": "pending",
+        "evidence": "All 9 required checks passed on ready-to-merge head 32e4704395253614c6ece39003dd98835b44f5ea, but are stale after seven same-scope review repairs. The expanded local suite passed and the review-repair commit is ready for a fresh complete GitHub check set."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -100056,8 +100056,23 @@
         "at": "2026-07-26T02:07:57Z",
         "status": "ready_to_merge",
         "note": "All 9 required checks passed on final post-rebase head 3e576fee0666d2de1022890b235afa87cd1ca262. GitHub reports the PR CLEAN and MERGEABLE with no blocking review decision; exact scope remains 7/7 authorized paths. Recording ready_to_merge before the ledger-only closeout head is rechecked."
+      },
+      {
+        "at": "2026-07-26T02:20:38Z",
+        "status": "review_repairs_local_checks_pending",
+        "note": "The ready-to-merge ledger head passed all 9 checks, but final review-comment inspection found seven actionable same-scope correctness findings. Implemented repairs in the existing Task 7 service/test/docs paths: configured authority union including backend_public_surface; canonical nested private-path policy; shared prod/production environment handling; fail-closed GSC origin and empty-evidence gates; canonical locale casing; and HTTPS same-host canonical URL validation. Expanded focused regression coverage now passes 9 tests / 92 assertions; full local manifest revalidation remains pending."
+      },
+      {
+        "at": "2026-07-26T02:21:28Z",
+        "status": "review_repairs_local_checks_passed",
+        "note": "All review-repair local checks passed: Task 7 feature suite 9/92, freeze classifier 2/6, scoped Pint 4 files, Composer validate/audit, command discovery, YAML/JSON parsing, git diff checks, and exact 7/7 path scope. A fresh complete GitHub check set is required after push."
+      },
+      {
+        "at": "2026-07-26T02:21:58Z",
+        "status": "github_checks_pending",
+        "note": "Committed all seven same-scope review repairs and expanded regressions. The exact 7-path branch is ready to push for a fresh complete GitHub required-check set."
       }
     ],
-    "updated_at": "2026-07-26T02:07:57Z"
+    "updated_at": "2026-07-26T02:21:58Z"
   }
 }

@@ -10,9 +10,10 @@ GSC page aggregates to existing product funnel aggregates.
 - Public/indexability authority: `seo_urls`
 - Join grain: `report_date + canonical_url_hash + source_engine`
 - GSC rows are collapsed to page level across query/device/country dimensions.
-- `data_origin` remains visible and is read from sanitized GSC metadata. If one
-  page aggregate contains multiple origins, the row reports `data_origin=mixed`
-  plus the sorted `data_origins` list without duplicating product counts.
+- `data_origin` remains visible and is read from sanitized GSC metadata. Only
+  origins allowed by `seo_intel.gsc_data_quality` may enter a report; a
+  forbidden, unknown, or mixed trusted/untrusted source blocks the complete
+  window instead of contaminating its metrics.
 - `page_family` comes from backend URL Truth `page_entity_type`.
 
 The output uses only the SHA-256 canonical URL hash. It never returns a raw URL,
@@ -37,8 +38,13 @@ it does not claim user-level or causal attribution.
 a backend-authoritative, public, non-private `seo_urls` row with
 `indexability_state=indexable`, and the event aggregate is production traffic.
 The accepted URL Truth authorities are `backend_cms`, `backend_registry`,
-`backend_sitemap_source`, and `scale_catalog`; an arbitrary non-backend source
-cannot validate a product start.
+`backend_sitemap_source`, `scale_catalog`, and configured
+`search_channel_queue.approved_source_authorities` such as
+`backend_public_surface`; an arbitrary non-backend source cannot validate a
+product start. The canonical URL must also be HTTPS on the configured public
+canonical host and contain no credentials, query, or fragment. Both
+`environment=production` and the shared `environment=prod` alias are production
+traffic.
 
 ## Command
 
@@ -52,13 +58,16 @@ php artisan seo-intel:search-to-result-funnel-report \
 ```
 
 Both dates are required and inclusive. The command is read-only and returns a
-non-zero exit code for an invalid window or missing required source schema.
+non-zero exit code for an invalid window, missing required source schema, empty
+GSC evidence, an empty page-family result, or a disallowed GSC data origin.
 
 ## Boundaries
 
 - GSC is search observation only, never order, payment, purchase, or revenue truth.
-- Private `result`, `attempt`, `order`, `recovery`, and `payment` route families
-  are excluded before output.
+- The canonical private-path policy is read from
+  `seo_intel.core_entry_slo.private_path_segments`; it excludes nested `take`,
+  `result`, `attempt`, `order`, `recovery`, `payment`, `checkout`, `report`,
+  `share`, and `account` flows before output.
 - Unknown and non-indexable hashes may retain privacy-safe search/funnel
   observation, but never count as valid indexed product starts.
 - No database/CMS write, publication/indexability change, Search Channel action,

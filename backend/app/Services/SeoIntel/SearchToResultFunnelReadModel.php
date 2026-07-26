@@ -35,6 +35,7 @@ final class SearchToResultFunnelReadModel
      * @var list<string>
      */
     private const PRIVATE_PATH_SEGMENTS = [
+        'take',
         'result',
         'results',
         'attempt',
@@ -46,6 +47,11 @@ final class SearchToResultFunnelReadModel
         'payment',
         'payments',
         'pay',
+        'checkout',
+        'report',
+        'reports',
+        'share',
+        'account',
     ];
 
     /**
@@ -59,6 +65,10 @@ final class SearchToResultFunnelReadModel
         'smoke',
         'test',
     ];
+
+    public function __construct(
+        private readonly InternalTrafficFilter $internalTrafficFilter,
+    ) {}
 
     /**
      * @return array<string, mixed>
@@ -115,6 +125,21 @@ final class SearchToResultFunnelReadModel
             $toDate->toDateString(),
             $normalizedSourceEngine,
         );
+        $gscIssues = [];
+        if (count($gsc['rows']) < max(1, (int) config('seo_intel.gsc_data_quality.min_rows', 1))) {
+            $gscIssues[] = 'gsc_rows_insufficient';
+        }
+        if ((int) $gsc['data_origin_issue_count'] > 0) {
+            $gscIssues[] = 'gsc_data_origin_not_allowed';
+        }
+        if ($gscIssues !== []) {
+            return $this->blockedReport(
+                $fromDate->toDateString(),
+                $toDate->toDateString(),
+                $gscIssues,
+            );
+        }
+
         $hashes = array_values(array_unique(array_column($gsc['rows'], 'canonical_url_hash')));
         $urlTruth = $this->urlTruthByHash($connection, $hashes);
         $funnel = $this->funnelByDateHashAndEngine(
@@ -184,6 +209,14 @@ final class SearchToResultFunnelReadModel
             ];
         }
 
+        if ($rows === []) {
+            return $this->blockedReport(
+                $fromDate->toDateString(),
+                $toDate->toDateString(),
+                ['gsc_rows_insufficient'],
+            );
+        }
+
         usort($rows, static fn (array $left, array $right): int => [
             $left['report_date'],
             $left['canonical_url_hash'],
@@ -227,7 +260,7 @@ final class SearchToResultFunnelReadModel
     }
 
     /**
-     * @return array{rows:list<array<string,mixed>>,private_exclusion_count:int,invalid_hash_exclusion_count:int}
+     * @return array{rows:list<array<string,mixed>>,private_exclusion_count:int,invalid_hash_exclusion_count:int,data_origin_issue_count:int}
      */
     private function gscAggregates(
         string $connection,
@@ -254,6 +287,15 @@ final class SearchToResultFunnelReadModel
         $rows = [];
         $privateExclusionCount = 0;
         $invalidHashExclusionCount = 0;
+        $dataOriginIssueCount = 0;
+        $allowedOrigins = $this->stringList(config(
+            'seo_intel.gsc_data_quality.allowed_data_origins',
+            ['live_gsc_api'],
+        ));
+        $forbiddenOrigins = $this->stringList(config(
+            'seo_intel.gsc_data_quality.forbidden_data_origins',
+            ['fixture', 'mock', 'static_artifact', 'unknown'],
+        ));
 
         foreach ($query->get() as $row) {
             $hash = strtolower(trim((string) ($row->canonical_url_hash ?? '')));
@@ -273,6 +315,14 @@ final class SearchToResultFunnelReadModel
                 $engine = 'unknown';
             }
             $origin = $this->dataOrigin($row->metadata_json ?? null);
+            if (
+                ! in_array($origin, $allowedOrigins, true)
+                || in_array($origin, $forbiddenOrigins, true)
+            ) {
+                $dataOriginIssueCount++;
+
+                continue;
+            }
             $key = $this->key([(string) $row->report_date, $hash, $engine]);
             $rows[$key] ??= [
                 'report_date' => substr((string) $row->report_date, 0, 10),
@@ -301,6 +351,7 @@ final class SearchToResultFunnelReadModel
             'rows' => $aggregates,
             'private_exclusion_count' => $privateExclusionCount,
             'invalid_hash_exclusion_count' => $invalidHashExclusionCount,
+            'data_origin_issue_count' => $dataOriginIssueCount,
         ];
     }
 
@@ -336,10 +387,11 @@ final class SearchToResultFunnelReadModel
                 $private = (bool) ($row->is_private_flow ?? false)
                     || $this->isPrivateUrl($row->canonical_url ?? null);
                 $pageFamily = $this->dimension($row->page_entity_type ?? null, 64);
-                $locale = $this->dimension($row->locale ?? null, 16);
+                $locale = $this->locale($row->locale ?? null);
                 $sourceAuthority = $this->dimension($row->source_authority ?? null, 64);
                 $authorityOwned = is_string($sourceAuthority)
-                    && in_array($sourceAuthority, self::URL_TRUTH_AUTHORITIES, true);
+                    && in_array($sourceAuthority, $this->urlTruthAuthorities(), true);
+                $publicCanonical = $this->publicCanonicalUrl($row->canonical_url ?? null);
                 $current = $truth[$hash] ?? null;
 
                 if ($current === null) {
@@ -347,7 +399,8 @@ final class SearchToResultFunnelReadModel
                         'private' => $private,
                         'indexable' => ! $private
                             && (string) ($row->indexability_state ?? '') === 'indexable'
-                            && $authorityOwned,
+                            && $authorityOwned
+                            && $publicCanonical,
                         'page_family' => is_string($pageFamily) ? $pageFamily : 'unknown',
                         'locale' => is_string($locale) ? $locale : null,
                     ];
@@ -359,7 +412,8 @@ final class SearchToResultFunnelReadModel
                 $truth[$hash]['indexable'] = (bool) $current['indexable']
                     && ! $private
                     && (string) ($row->indexability_state ?? '') === 'indexable'
-                    && $authorityOwned;
+                    && $authorityOwned
+                    && $publicCanonical;
                 if ((string) $current['page_family'] !== (is_string($pageFamily) ? $pageFamily : 'unknown')) {
                     $truth[$hash]['page_family'] = 'unknown';
                 }
@@ -576,10 +630,12 @@ final class SearchToResultFunnelReadModel
     private function nonProductTraffic(mixed $trafficQuality, mixed $environment): bool
     {
         $trafficQuality = strtolower(trim((string) ($trafficQuality ?? '')));
-        $environment = strtolower(trim((string) ($environment ?? '')));
 
         return in_array($trafficQuality, self::NON_PRODUCT_TRAFFIC, true)
-            || ($environment !== '' && $environment !== 'production');
+            || $this->internalTrafficFilter->shouldExclude([
+                'traffic_quality' => $trafficQuality,
+                'environment' => $environment,
+            ]);
     }
 
     private function isPrivateUrl(mixed $url): bool
@@ -602,11 +658,98 @@ final class SearchToResultFunnelReadModel
             return false;
         }
 
-        $firstContentSegment = in_array($segments[0], ['en', 'zh', 'zh-cn', 'zh-tw'], true)
-            ? ($segments[1] ?? '')
-            : $segments[0];
+        $privateSegments = $this->stringList(config(
+            'seo_intel.core_entry_slo.private_path_segments',
+            self::PRIVATE_PATH_SEGMENTS,
+        ));
 
-        return in_array($firstContentSegment, self::PRIVATE_PATH_SEGMENTS, true);
+        return array_intersect($segments, $privateSegments) !== [];
+    }
+
+    private function locale(mixed $value): string|false|null
+    {
+        if ($value === null) {
+            return null;
+        }
+        if (! is_scalar($value)) {
+            return false;
+        }
+
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return null;
+        }
+        if (
+            strlen($normalized) > 16
+            || preg_match('/^[A-Za-z0-9][A-Za-z0-9._-]*$/', $normalized) !== 1
+        ) {
+            return false;
+        }
+
+        $parts = explode('-', strtolower($normalized));
+        if (isset($parts[1]) && preg_match('/^[a-z]{2}$/', $parts[1]) === 1) {
+            $parts[1] = strtoupper($parts[1]);
+        }
+
+        return implode('-', $parts);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function urlTruthAuthorities(): array
+    {
+        return array_values(array_unique([
+            ...self::URL_TRUTH_AUTHORITIES,
+            ...$this->stringList(config(
+                'seo_intel.search_channel_queue.approved_source_authorities',
+                [],
+            )),
+        ]));
+    }
+
+    private function publicCanonicalUrl(mixed $url): bool
+    {
+        if (! is_scalar($url) || trim((string) $url) === '') {
+            return false;
+        }
+
+        $parts = parse_url(trim((string) $url));
+        if (
+            $parts === false
+            || isset($parts['query'])
+            || isset($parts['fragment'])
+            || isset($parts['user'])
+            || isset($parts['pass'])
+        ) {
+            return false;
+        }
+
+        $expectedHost = strtolower((string) parse_url(
+            (string) config('seo_intel.public_canonical_host', 'https://fermatmind.com'),
+            PHP_URL_HOST,
+        ));
+
+        return strtolower((string) ($parts['scheme'] ?? '')) === 'https'
+            && strtolower((string) ($parts['host'] ?? '')) === $expectedHost
+            && $expectedHost !== '';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function stringList(mixed $values): array
+    {
+        $normalized = [];
+
+        foreach (is_array($values) ? $values : [] as $value) {
+            $value = $this->dimension($value, 64);
+            if (is_string($value)) {
+                $normalized[$value] = true;
+            }
+        }
+
+        return array_keys($normalized);
     }
 
     private function validHash(string $hash): bool

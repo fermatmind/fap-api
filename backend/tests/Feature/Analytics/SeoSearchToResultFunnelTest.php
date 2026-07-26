@@ -44,7 +44,7 @@ final class SeoSearchToResultFunnelTest extends TestCase
     {
         $url = 'https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types';
         $hash = hash('sha256', $url);
-        $this->insertUrlTruth($hash, $url, 'test_detail', true);
+        $this->insertUrlTruth($hash, $url, 'test_detail', true, 'backend_public_surface', 'zh-CN');
         $this->insertGsc($hash, 600, 24);
         $this->insertGsc($hash, 400, 16);
         $this->insertFunnel($hash, 30, 24, 20);
@@ -62,7 +62,7 @@ final class SeoSearchToResultFunnelTest extends TestCase
         $this->assertSame('live_gsc_api', data_get($report, 'rows.0.data_origin'));
         $this->assertSame(['live_gsc_api'], data_get($report, 'rows.0.data_origins'));
         $this->assertSame('test_detail', data_get($report, 'rows.0.page_family'));
-        $this->assertSame('en', data_get($report, 'rows.0.locale'));
+        $this->assertSame('zh-CN', data_get($report, 'rows.0.locale'));
         $this->assertTrue((bool) data_get($report, 'rows.0.indexed_url'));
         $this->assertTrue((bool) data_get($report, 'rows.0.indexed_url_has_valid_product_start'));
         $this->assertSame(1000, data_get($report, 'rows.0.metrics.impressions'));
@@ -123,7 +123,7 @@ final class SeoSearchToResultFunnelTest extends TestCase
     }
 
     #[Test]
-    public function it_preserves_mixed_data_origins_without_duplicating_product_events(): void
+    public function it_fails_closed_when_gsc_contains_a_forbidden_data_origin(): void
     {
         $url = 'https://fermatmind.com/en/tests/mbti';
         $hash = hash('sha256', $url);
@@ -137,12 +137,12 @@ final class SeoSearchToResultFunnelTest extends TestCase
             '2026-07-20',
         );
 
-        $this->assertSame(1, $report['row_count'] ?? null);
-        $this->assertSame('mixed', data_get($report, 'rows.0.data_origin'));
-        $this->assertSame(['fixture', 'live_gsc_api'], data_get($report, 'rows.0.data_origins'));
-        $this->assertSame(500, data_get($report, 'rows.0.metrics.impressions'));
-        $this->assertSame(10, data_get($report, 'rows.0.metrics.start_test_count'));
-        $this->assertSame(10, data_get($report, 'totals.start_test_count'));
+        $this->assertFalse($report['ok'] ?? true);
+        $this->assertSame('blocked', $report['status'] ?? null);
+        $this->assertContains('gsc_data_origin_not_allowed', $report['issues'] ?? []);
+        $this->assertSame([], $report['rows'] ?? null);
+        $this->assertSame(0, data_get($report, 'totals.impressions'));
+        $this->assertSame(0, data_get($report, 'totals.start_test_count'));
     }
 
     #[Test]
@@ -154,6 +154,11 @@ final class SeoSearchToResultFunnelTest extends TestCase
             'https://fermatmind.com/en/orders/raw-order-id',
             'https://fermatmind.com/en/recovery/raw-recovery-token',
             'https://fermatmind.com/en/payments/raw-payment-id',
+            'https://fermatmind.com/en/tests/mbti/raw-take-id/take',
+            'https://fermatmind.com/en/tests/mbti/checkout/raw-checkout-id',
+            'https://fermatmind.com/en/tests/mbti/report/raw-report-id',
+            'https://fermatmind.com/en/tests/mbti/share/raw-share-id',
+            'https://fermatmind.com/en/account/raw-account-id',
         ];
 
         foreach ($privateUrls as $index => $url) {
@@ -168,7 +173,7 @@ final class SeoSearchToResultFunnelTest extends TestCase
         $this->insertUrlTruth($publicHash, $publicUrl, 'test_detail', true);
         $this->insertGsc($publicHash, 500, 25);
         $this->insertFunnel($publicHash, 9, 8, 7, trafficQuality: 'qa');
-        $this->insertFunnel($publicHash, 5, 4, 3);
+        $this->insertFunnel($publicHash, 5, 4, 3, environment: 'prod');
 
         $report = app(SearchToResultFunnelReadModel::class)->report(
             '2026-07-20',
@@ -177,7 +182,7 @@ final class SeoSearchToResultFunnelTest extends TestCase
         $encoded = json_encode($report, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
 
         $this->assertSame(1, $report['row_count'] ?? null);
-        $this->assertSame(5, $report['private_url_exclusion_count'] ?? null);
+        $this->assertSame(10, $report['private_url_exclusion_count'] ?? null);
         $this->assertSame(1, $report['non_product_traffic_exclusion_count'] ?? null);
         $this->assertSame($publicHash, data_get($report, 'rows.0.canonical_url_hash'));
         $this->assertSame(5, data_get($report, 'rows.0.metrics.start_test_count'));
@@ -189,9 +194,76 @@ final class SeoSearchToResultFunnelTest extends TestCase
             'raw-order-id',
             'raw-recovery-token',
             'raw-payment-id',
+            'raw-take-id',
+            'raw-checkout-id',
+            'raw-report-id',
+            'raw-share-id',
+            'raw-account-id',
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $encoded);
         }
+    }
+
+    #[Test]
+    public function drifted_canonical_urls_never_validate_a_product_start(): void
+    {
+        $urls = [
+            'http://fermatmind.com/en/tests/http-owner',
+            'https://example.com/en/tests/off-domain-owner',
+            'https://fermatmind.com/en/tests/query-owner?attempt=private',
+            'https://user:secret@fermatmind.com/en/tests/credential-owner',
+        ];
+
+        foreach ($urls as $index => $url) {
+            $hash = hash('sha256', $url);
+            $this->insertUrlTruth($hash, $url, 'test_detail', true);
+            $this->insertGsc($hash, 100 + $index, 10 + $index);
+            $this->insertFunnel($hash, 4, 3, 2);
+        }
+
+        $report = app(SearchToResultFunnelReadModel::class)->report(
+            '2026-07-20',
+            '2026-07-20',
+        );
+
+        $this->assertTrue($report['ok'] ?? false);
+        $this->assertSame(4, $report['row_count'] ?? null);
+        $this->assertSame(16, data_get($report, 'totals.start_test_count'));
+        $this->assertSame(0, data_get($report, 'totals.valid_product_start_count'));
+        foreach ($report['rows'] ?? [] as $row) {
+            $this->assertFalse((bool) ($row['indexed_url'] ?? true));
+            $this->assertFalse((bool) ($row['indexed_url_has_valid_product_start'] ?? true));
+        }
+    }
+
+    #[Test]
+    public function empty_gsc_windows_and_empty_page_family_filters_fail_closed(): void
+    {
+        $emptyWindow = app(SearchToResultFunnelReadModel::class)->report(
+            '2026-07-20',
+            '2026-07-20',
+        );
+
+        $this->assertFalse($emptyWindow['ok'] ?? true);
+        $this->assertSame('blocked', $emptyWindow['status'] ?? null);
+        $this->assertContains('gsc_rows_insufficient', $emptyWindow['issues'] ?? []);
+        $this->assertSame(0, data_get($emptyWindow, 'totals.impressions'));
+
+        $url = 'https://fermatmind.com/en/tests/mbti';
+        $hash = hash('sha256', $url);
+        $this->insertUrlTruth($hash, $url, 'test_detail', true);
+        $this->insertGsc($hash, 100, 10);
+
+        $emptyFamily = app(SearchToResultFunnelReadModel::class)->report(
+            '2026-07-20',
+            '2026-07-20',
+            'article',
+        );
+
+        $this->assertFalse($emptyFamily['ok'] ?? true);
+        $this->assertSame('blocked', $emptyFamily['status'] ?? null);
+        $this->assertContains('gsc_rows_insufficient', $emptyFamily['issues'] ?? []);
+        $this->assertSame([], $emptyFamily['rows'] ?? null);
     }
 
     #[Test]
@@ -327,11 +399,12 @@ final class SeoSearchToResultFunnelTest extends TestCase
         string $pageFamily,
         bool $indexable,
         string $sourceAuthority = 'backend_cms',
+        string $locale = 'en',
     ): void {
         DB::connection('seo_intel')->table('seo_urls')->insert([
             'canonical_url_hash' => $hash,
             'canonical_url' => $url,
-            'locale' => 'en',
+            'locale' => $locale,
             'page_entity_type' => $pageFamily,
             'source_authority' => $sourceAuthority,
             'indexability_state' => $indexable ? 'indexable' : 'noindex',
@@ -370,13 +443,14 @@ final class SeoSearchToResultFunnelTest extends TestCase
         string $date = '2026-07-20',
         string $sourceEngine = 'google',
         string $trafficQuality = 'production_user',
+        string $environment = 'production',
     ): void {
         DB::connection('seo_intel')->table('seo_event_funnel_daily')->insert([
             'report_date' => $date,
             'canonical_url_hash' => $hash,
             'source_engine' => $sourceEngine,
             'traffic_quality' => $trafficQuality,
-            'environment' => 'production',
+            'environment' => $environment,
             'start_attempt_count' => $starts,
             'submit_attempt_count' => $completes,
             'view_result_count' => $views,
