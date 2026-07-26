@@ -477,6 +477,12 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
 
         try {
             $evidence['targets'][0]['proposed_recovery']['search_terms'] = ['must-not-persist'];
+            $evidence['targets'][1]['proposed_recovery']['visible_section_actions'][] = [
+                'search_terms' => ['must-not-persist'],
+            ];
+            $evidence['targets'][2]['claim_boundary']['allowed_claims'][] = [
+                'raw_evidence' => 'must-not-persist',
+            ];
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
             $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
 

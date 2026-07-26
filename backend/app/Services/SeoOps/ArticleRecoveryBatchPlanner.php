@@ -1225,6 +1225,7 @@ final class ArticleRecoveryBatchPlanner
                     'bypass_allowed',
                     'required_checks',
                 ])
+                || ! $this->isStringList(data_get($payload, 'manual_review_gate.required_checks'))
                 || ! $this->hasExactKeys((array) ($payload['observation_contract'] ?? []), [
                     'anchor',
                     'windows',
@@ -1232,6 +1233,8 @@ final class ArticleRecoveryBatchPlanner
                     'second_batch_locked_until',
                     'automatic_second_batch_allowed',
                 ])
+                || ! $this->isStringList(data_get($payload, 'observation_contract.windows'))
+                || ! $this->isStringList(data_get($payload, 'observation_contract.metrics'))
                 || ! $this->hasExactKeys((array) ($payload['negative_guarantees'] ?? []), [
                     'database_write',
                     'cms_write',
@@ -1300,11 +1303,15 @@ final class ArticleRecoveryBatchPlanner
                         'meta_description_candidate',
                         'visible_section_actions',
                     ])
+                    || ! $this->isStringList(data_get($target, 'proposed_recovery.visible_section_actions'))
                     || ! $this->hasExactKeys((array) ($target['claim_boundary'] ?? []), [
                         'allowed_claims',
                         'prohibited_claims',
                         'required_disclaimer',
-                    ])) {
+                    ])
+                    || ! $this->isStringList(data_get($target, 'claim_boundary.allowed_claims'))
+                    || ! $this->isStringList(data_get($target, 'claim_boundary.prohibited_claims'))
+                    || ! array_is_list((array) ($target['source_refs'] ?? []))) {
                     return false;
                 }
                 foreach ((array) ($target['source_refs'] ?? []) as $sourceRef) {
@@ -1330,10 +1337,12 @@ final class ArticleRecoveryBatchPlanner
                 'exclusion_policy',
                 'cross_target_owner_conflict_check',
                 'target_summaries',
-            ]) || ! $this->hasExactKeys(
-                (array) ($payload['cross_target_owner_conflict_check'] ?? []),
-                ['performed_before_sanitization', 'conflict_count'],
-            )) {
+            ])
+                || ! $this->isStringList($payload['exclusion_policy'] ?? null)
+                || ! $this->hasExactKeys(
+                    (array) ($payload['cross_target_owner_conflict_check'] ?? []),
+                    ['performed_before_sanitization', 'conflict_count'],
+                )) {
                 return false;
             }
 
@@ -1376,7 +1385,9 @@ final class ArticleRecoveryBatchPlanner
             ])
                 || ! $this->hasExactKeys((array) ($payload['current_window'] ?? []), ['start', 'end'])
                 || ! $this->hasExactKeys((array) ($payload['previous_window'] ?? []), ['start', 'end'])
-                || ! $this->hasExactKeys((array) ($payload['cutoff_attestation'] ?? []), ['rank_5', 'rank_6'])) {
+                || ! $this->hasExactKeys((array) ($payload['cutoff_attestation'] ?? []), ['rank_5', 'rank_6'])
+                || ! $this->isStringList($payload['top_five_page_evidence_ids'] ?? null)
+                || ! array_is_list((array) ($payload['rows'] ?? []))) {
                 return false;
             }
 
@@ -1463,6 +1474,13 @@ final class ArticleRecoveryBatchPlanner
         sort($expectedKeys);
 
         return $actualKeys === $expectedKeys;
+    }
+
+    private function isStringList(mixed $value): bool
+    {
+        return is_array($value)
+            && array_is_list($value)
+            && array_all($value, static fn (mixed $item): bool => is_string($item));
     }
 
     /**
