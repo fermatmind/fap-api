@@ -9,8 +9,8 @@
       "MBTI-CROSS-PUBLISHER-49",
       "MBTI-CROSS-AUTHORITY-50"
     ],
-    "status": "github_review_repairing",
-    "commit_sha": "61aa82545f6095af79af19ab704fbd6a02dd54c7",
+    "status": "ready_to_merge",
+    "commit_sha": "5a3b35fe46dc087b63cef2a2adbf4048184c9d36",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3294",
     "checks": {
       "dependency": {
@@ -30,14 +30,14 @@
         "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 105 assertions after the canonical sitemap review repair; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed after the final repair, including Big Five 1601 tests / 195611 assertions, Enneagram 10 / 369, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts and exact CI test packages were restored or removed, leaving only the declared PR scope."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "Exact head d60d0dccd5de48542a07ff03b7221b91fa566981 passed all 9 GitHub checks, then exact-head review identified that the frontend path set omitted canonical /sitemap.xml and public readback used a query-busted cache key. Fresh checks are required after the in-scope canonical-cache repair."
+        "status": "passed",
+        "evidence": "Exact implementation head 5a3b35fe46dc087b63cef2a2adbf4048184c9d36 passed all 9 GitHub checks. Exact-head Codex review reported no major issues, every review thread is resolved, mergeability is CLEAN, and the complete PR remains limited to the exact five declared paths. The resulting ledger-only readiness head must also pass required checks before merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -116,9 +116,14 @@
         "at": "2026-07-26T07:32:00Z",
         "status": "github_review_repairing",
         "note": "Exact head eab52308e passed all 9 GitHub checks, then exact-head review found that Phase A could leave cached public 404 pages and Phase B could enumerate broken detail pages without detecting them. The scoped repair makes Phase A revalidate exactly three comparison paths and verify 200 noindex/canonical HTML before PASS_APPLY, while Phase B now verifies 200 index/canonical HTML for the same exact three paths in addition to canonical feed membership. Receipts expose only completion booleans/counts; page bodies remain ephemeral."
+      },
+      {
+        "at": "2026-07-26T07:48:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 5a3b35fe46dc087b63cef2a2adbf4048184c9d36 passed all 9 required GitHub checks, exact-head Codex review found no major issues, all review threads are resolved, mergeability is CLEAN, and scope remains the exact five declared paths. This ledger-only transition records readiness; its resulting head must independently pass checks and review before squash merge. Production fap-web deploy and all production content/indexability/search actions remain unexecuted."
       }
     ],
-    "updated_at": "2026-07-26T07:32:00Z"
+    "updated_at": "2026-07-26T07:48:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
