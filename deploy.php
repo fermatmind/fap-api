@@ -742,7 +742,7 @@ BASH,
         return;
     }
 
-    run($heartbeatCommand.<<<'BASH'
+    run($heartbeatCommand."\n".<<<'BASH'
 if [ "$status" -ne 0 ]; then
   echo "career_warm_public_authority_cache_nonblocking_failure=$status"
   echo "Continuing deploy because DEPLOY_CAREER_WARM_CACHE_STRICT is not true."
