@@ -40,6 +40,18 @@ final class ArticleRecoveryBatchPlanner
     ];
 
     /**
+     * @var list<string>
+     */
+    private const REQUIRED_OBSERVATION_METRICS = [
+        'page_clicks',
+        'page_impressions',
+        'page_ctr',
+        'page_average_position',
+        'query_owner_conflicts',
+        'canonical_robots_and_indexability',
+    ];
+
+    /**
      * Normalized secret-bearing keys forbidden in both structured evidence
      * and source URL query parameters.
      *
@@ -1003,7 +1015,9 @@ final class ArticleRecoveryBatchPlanner
         }
 
         $observation = (array) ($evidence['observation_contract'] ?? []);
-        if ((array) ($observation['windows'] ?? []) !== ['D1', 'D7', 'D14', 'D28']
+        if (($observation['anchor'] ?? null) !== 'future_manual_publish_receipt.published_at'
+            || array_values((array) ($observation['windows'] ?? [])) !== ['D1', 'D7', 'D14', 'D28']
+            || array_values((array) ($observation['metrics'] ?? [])) !== self::REQUIRED_OBSERVATION_METRICS
             || ($observation['second_batch_locked_until'] ?? null) !== 'D28_review_completed'
             || ($observation['automatic_second_batch_allowed'] ?? null) !== false) {
             $issues[] = 'observation_contract_invalid';
@@ -1072,47 +1086,9 @@ final class ArticleRecoveryBatchPlanner
             && $this->isPublicSourceHost($host)
             && ! isset($parts['user'])
             && ! isset($parts['pass'])
+            && ! isset($parts['query'])
             && ! isset($parts['fragment'])
-            && ! $this->hasCredentialQueryParameter((string) ($parts['query'] ?? ''))
             && ! str_ends_with($host, 'fermatmind.com');
-    }
-
-    private function hasCredentialQueryParameter(string $query): bool
-    {
-        if ($query === '') {
-            return false;
-        }
-
-        parse_str($query, $parameters);
-
-        return $this->hasCredentialParameterKey($parameters);
-    }
-
-    /**
-     * @param  array<string, mixed>  $parameters
-     */
-    private function hasCredentialParameterKey(array $parameters): bool
-    {
-        foreach ($parameters as $key => $value) {
-            $keyWithCamelBoundaries = preg_replace(
-                ['/(?<=[a-z0-9])(?=[A-Z])/', '/(?<=[A-Z])(?=[A-Z][a-z])/'],
-                '_',
-                rawurldecode((string) $key),
-            );
-            $normalizedKey = preg_replace(
-                '/[^a-z0-9]+/',
-                '_',
-                mb_strtolower((string) $keyWithCamelBoundaries, 'UTF-8'),
-            );
-            if (is_string($normalizedKey) && $this->isCredentialKey($normalizedKey)) {
-                return true;
-            }
-            if (is_array($value) && $this->hasCredentialParameterKey($value)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private function validHash(string $value): bool

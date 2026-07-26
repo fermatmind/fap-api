@@ -413,7 +413,39 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
         }
     }
 
-    public function test_it_rejects_credentials_embedded_in_source_urls(): void
+    public function test_it_requires_the_exact_observation_contract(): void
+    {
+        [$directory, $evidence] = $this->mutableFixture();
+
+        try {
+            foreach ([
+                ['anchor' => 'observed_at'],
+                ['metrics' => []],
+                ['metrics' => ['page_clicks']],
+            ] as $invalidContract) {
+                $mutated = $evidence;
+                $mutated['observation_contract'] = [
+                    ...$mutated['observation_contract'],
+                    ...$invalidContract,
+                ];
+                $this->writeJson($directory.'/live-gsc-evidence.v1.json', $mutated);
+                $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+                $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                    $directory.'/live-gsc-evidence.v1.json',
+                    $evidenceSha
+                );
+
+                self::assertFalse($package['ok']);
+                self::assertContains('observation_contract_invalid', $package['issues']);
+                self::assertFalse($package['would_write']);
+            }
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_rejects_userinfo_and_all_query_strings_in_source_urls(): void
     {
         [$directory, $evidence] = $this->mutableFixture();
 
@@ -447,6 +479,11 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             $evidence['targets'][3]['source_refs'][] = [
                 'id' => 'collapsed-api-key',
                 'url' => 'https://example.org/paper?apikey=secret',
+                'authority_type' => 'research',
+            ];
+            $evidence['targets'][4]['source_refs'][] = [
+                'id' => 'unrecognized-signed-url',
+                'url' => 'https://example.org/private.pdf?sv=2024-01-01&sig=TOPSECRET',
                 'authority_type' => 'research',
             ];
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
