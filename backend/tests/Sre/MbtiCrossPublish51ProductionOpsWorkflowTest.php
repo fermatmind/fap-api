@@ -154,7 +154,8 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             'X-FM-Content-Release-Token',
             'https://fermatmind.com/${surface}',
             'https://fermatmind.com/revision',
-            'EXPECTED_FRONTEND_REVISION: 841280ab35945e2c1454f5ac18ea3ededdfab5b6',
+            'EXPECTED_FRONTEND_REVISION: 5e3b2e874c942b3021e662428eb97b3893de0153',
+            'grep -E \'<meta name="robots" content="noindex, follow(, (noarchive|nocache))*"/>\'',
             "EXPECTED_FRONTEND_REVISION='\$EXPECTED_FRONTEND_REVISION'",
             '--max-redirs 0',
             '.revision | select(. == $expected)',
@@ -189,7 +190,7 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             5,
             substr_count(
                 $workflow,
-                'and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"',
+                'and .frontend_revision == "5e3b2e874c942b3021e662428eb97b3893de0153"',
             ),
             'Both phase receipts and all four live operations must bind the frontend revision.',
         );
@@ -202,12 +203,20 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             'The pinned frontend revision must be forwarded into the quoted remote shell.',
         );
         $this->assertSame(
-            2,
+            1,
             substr_count(
                 $workflow,
                 'grep -F \'<meta name="robots" content=',
             ),
-            'Both content and indexability apply must verify the exact public page robots projection.',
+            'Indexability apply must verify the exact public page robots projection.',
+        );
+        $this->assertSame(
+            1,
+            substr_count(
+                $workflow,
+                'grep -E \'<meta name="robots" content="noindex, follow(, (noarchive|nocache))*"/>\'',
+            ),
+            'Content apply must accept only the safe noindex,follow projection and optional noarchive/nocache directives.',
         );
         $this->assertStringContainsString(
             '"X-FM-Content-Release-Source" => "mbti_cross_publish51_content_apply"',

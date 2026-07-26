@@ -148,7 +148,7 @@ jobs:
                  and .content_write_count == 0
                  and .indexability_write_count == 0
                  and .search_submission_count == 0
-                 and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
+                 and .frontend_revision == "5e3b2e874c942b3021e662428eb97b3893de0153"
                  and (if $mode == "indexability_preflight"
                       then .cache_closeout_ready == true
                            and .frontend_revalidation_endpoint_count > 0
@@ -233,7 +233,7 @@ jobs:
           DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
           EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
           EXPECTED_STATE_SHA256: ${{ needs.eligibility.outputs.expected_state_sha256 }}
-          EXPECTED_FRONTEND_REVISION: 841280ab35945e2c1454f5ac18ea3ededdfab5b6
+          EXPECTED_FRONTEND_REVISION: 5e3b2e874c942b3021e662428eb97b3893de0153
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           PACKAGE_SHA256: 604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae
           EDITORIAL_AUTHORIZATION_SHA256: be4f17484334074cf2c90d57898ab80b6074093b2510a4b7b4b0432a164b4670
@@ -374,7 +374,7 @@ jobs:
                   --connect-timeout 10 --max-time 60 \
                   -H 'Cache-Control: no-cache' \
                   "$page_url" >"$page_readback_dir/$slug.html"
-                grep -F '<meta name="robots" content="noindex, follow"/>' \
+                grep -E '<meta name="robots" content="noindex, follow(, (noarchive|nocache))*"/>' \
                   "$page_readback_dir/$slug.html" >/dev/null
                 grep -F "<link rel=\"canonical\" href=\"$page_url\"/>" \
                   "$page_readback_dir/$slug.html" >/dev/null
@@ -612,7 +612,7 @@ jobs:
                 and .sitemap_or_llms_mutated == false
                 and .cache_closeout_ready == true
                 and .frontend_revalidation_endpoint_count > 0
-                and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
+                and .frontend_revision == "5e3b2e874c942b3021e662428eb97b3893de0153"
                 and (.readback | length) == 3' <<<"$result" >/dev/null
               ;;
             content_apply)
@@ -626,7 +626,7 @@ jobs:
                  and (.content_readback_sha256 | test("^[0-9a-f]{64}$"))
                  and .indexability_mutated == false
                  and .sitemap_or_llms_mutated == false
-                 and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
+                 and .frontend_revision == "5e3b2e874c942b3021e662428eb97b3893de0153"
                  and .content_cache_closeout_completed == true
                  and .content_frontend_revalidation_path_count == 3
                  and .public_page_readback_completed == true
@@ -657,7 +657,7 @@ jobs:
                 and .body_mutated == false
                 and .cache_closeout_ready == true
                 and .frontend_revalidation_endpoint_count > 0
-                and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
+                and .frontend_revision == "5e3b2e874c942b3021e662428eb97b3893de0153"
                 and (.readback | length) == 3' <<<"$result" >/dev/null
               ;;
             indexability_apply)
@@ -673,7 +673,7 @@ jobs:
                  and .cache_closeout_completed == true
                  and .backend_cache_key_count == 5
                  and .frontend_revalidation_path_count == 6
-                 and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
+                 and .frontend_revision == "5e3b2e874c942b3021e662428eb97b3893de0153"
                  and .public_page_readback_completed == true
                  and .public_page_count == 3
                  and .public_feed_readback_completed == true
