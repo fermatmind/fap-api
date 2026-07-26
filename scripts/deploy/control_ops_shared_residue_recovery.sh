@@ -24,7 +24,8 @@ failure_gate=INPUTS
 [[ "${FAILED_RUN_ID:-}" =~ ^[1-9][0-9]*$ ]]
 for hash_value in \
   "${EVIDENCE_SOURCE_PATH_SHA256:-}" \
-  "${EVIDENCE_SOURCE_CONFIG_SHA256:-}" \
+  "${EVIDENCE_SOURCE_ORIGINAL_CONFIG_SHA256:-}" \
+  "${EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256:-}" \
   "${EVIDENCE_TARGET_PATH_SHA256:-}" \
   "${EVIDENCE_TARGET_CURRENT_SHA256:-}" \
   "${EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256:-}"; do
@@ -36,6 +37,8 @@ if [ "$MODE" = apply ]; then
   [[ "${EXPECTED_RESIDUE_FILE_COUNT:-}" =~ ^[1-5]$ ]]
   test "${EXPECTED_VALIDATION_PROCESS_STATE:-}" = absent
   test "${EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256:-}" = "$zero_sha256"
+  test "${EXPECTED_MIGRATION_PROCESS_STATE:-}" = absent
+  test "${EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256:-}" = "$zero_sha256"
 fi
 
 failure_gate=DEPLOY_ROOT
@@ -125,28 +128,44 @@ mapfile -t config_candidates < <(
     | sort -u
 )
 test "${#config_candidates[@]}" -eq 1
-source_path="${config_candidates[0]}"
-[[ "$source_path" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]
-test "$source_path" != "$target_path"
-source_path_sha256="$(printf '%s' "$source_path" | sha256sum | awk '{print $1}')"
-source_config_sha256="$(sudo -n sha256sum "$source_path" | awk '{print $1}')"
+target_current_path="${config_candidates[0]}"
+test "$target_current_path" = "$target_path"
 target_path_sha256="$(printf '%s' "$target_path" | sha256sum | awk '{print $1}')"
-target_current_sha256="$zero_sha256"
-sudo -n test ! -e "$target_path"
-test "$source_path_sha256" = "$EVIDENCE_SOURCE_PATH_SHA256"
-test "$source_config_sha256" = "$EVIDENCE_SOURCE_CONFIG_SHA256"
+target_current_sha256="$(sudo -n sha256sum "$target_path" | awk '{print $1}')"
 test "$target_path_sha256" = "$EVIDENCE_TARGET_PATH_SHA256"
 test "$target_current_sha256" = "$EVIDENCE_TARGET_CURRENT_SHA256"
-test "$(sudo -n "$grep_path" -Fxc '[program:fap-queue-ops]' "$source_path")" -eq 1
-test "$(sudo -n "$grep_path" -Ec '^\[[^]]+\][[:space:]]*$' "$source_path")" -eq 3
-test "$(sudo -n "$grep_path" -Ec '^\[program:[^]]+\][[:space:]]*$' "$source_path")" -eq 3
+test "$(sudo -n "$grep_path" -Fxc '[program:fap-queue-ops]' "$target_path")" -eq 1
+test "$(sudo -n "$grep_path" -Ec '^\[[^]]+\][[:space:]]*$' "$target_path")" -eq 1
+test "$(sudo -n "$grep_path" -Ec '^\[program:[^]]+\][[:space:]]*$' "$target_path")" -eq 1
+
+mapfile -t source_candidates < <(
+  while IFS= read -r candidate; do
+    if [ "$candidate" != "$target_path" ] \
+      && [ "$(sudo -n sha256sum "$candidate" | awk '{print $1}')" = "$EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256" ]; then
+      printf '%s\n' "$candidate"
+    fi
+  done < <(
+    sudo -n find /etc/supervisor /opt/1panel -type f \
+      \( -name '*.conf' -o -name '*.ini' \) -size -128k -print 2>/dev/null \
+      | sort -u
+  )
+)
+test "${#source_candidates[@]}" -eq 1
+source_path="${source_candidates[0]}"
+[[ "$source_path" =~ ^/(etc/supervisor|opt/1panel)(/[A-Za-z0-9._-]+)+\.(conf|ini)$ ]]
+source_path_sha256="$(printf '%s' "$source_path" | sha256sum | awk '{print $1}')"
+source_original_config_sha256="$EVIDENCE_SOURCE_ORIGINAL_CONFIG_SHA256"
+source_current_config_sha256="$(sudo -n sha256sum "$source_path" | awk '{print $1}')"
+test "$source_path_sha256" = "$EVIDENCE_SOURCE_PATH_SHA256"
+test "$source_current_config_sha256" = "$EVIDENCE_SOURCE_CURRENT_CONFIG_SHA256"
+test "$(sudo -n "$grep_path" -Fxc '[program:fap-queue-ops]' "$source_path")" -eq 0
 
 failure_gate=BACKUP
 backup_path="$DEPLOY_PATH/shared/ops-supervisor-migration-backups/shared-source-${FAILED_RUN_ID}.conf"
 [[ "$backup_path" =~ ^/[A-Za-z0-9._/-]+/shared/ops-supervisor-migration-backups/shared-source-[0-9]+\.conf$ ]]
 sudo -n test -f "$backup_path"
 backup_sha256="$(sudo -n sha256sum "$backup_path" | awk '{print $1}')"
-test "$backup_sha256" = "$source_config_sha256"
+test "$backup_sha256" = "$source_original_config_sha256"
 
 failure_gate=RESIDUE_SET
 residue_prefix="/tmp/fap-ops-shared-migration-${FAILED_RUN_ID}"
@@ -197,6 +216,19 @@ test "$validation_process_count" = 0
 validation_process_state=absent
 validation_process_fingerprint_sha256="$zero_sha256"
 
+failure_gate=MIGRATION_PROCESS_ABSENT
+migration_process_count="$(
+  ps -eo comm=,args= \
+    | awk -v residue_prefix="$residue_prefix" '
+      ($1 == "bash" || $1 == "sh" || $1 == "supervisord" || $1 ~ /^python([0-9.]*)?$/) \
+        && index($0, residue_prefix) > 0 {count++}
+      END {print count+0}
+    '
+)"
+test "$migration_process_count" = 0
+migration_process_state=absent
+migration_process_fingerprint_sha256="$zero_sha256"
+
 deleted_residue_file_count=0
 if [ "$MODE" = apply ]; then
   failure_gate=APPLY_RECEIPT_BINDING
@@ -205,6 +237,8 @@ if [ "$MODE" = apply ]; then
   test "$residue_file_count" = "$EXPECTED_RESIDUE_FILE_COUNT"
   test "$validation_process_state" = "$EXPECTED_VALIDATION_PROCESS_STATE"
   test "$validation_process_fingerprint_sha256" = "$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256"
+  test "$migration_process_state" = "$EXPECTED_MIGRATION_PROCESS_STATE"
+  test "$migration_process_fingerprint_sha256" = "$EXPECTED_MIGRATION_PROCESS_FINGERPRINT_SHA256"
 
   failure_gate=DELETE_EXACT_RESIDUE
   for discovered_path in "${discovered_residue_paths[@]}"; do
@@ -226,9 +260,17 @@ if [ "$MODE" = apply ]; then
         END {print count+0}
       '
   )" = 0
+  test "$(
+    ps -eo comm=,args= \
+      | awk -v residue_prefix="$residue_prefix" '
+        ($1 == "bash" || $1 == "sh" || $1 == "supervisord" || $1 ~ /^python([0-9.]*)?$/) \
+          && index($0, residue_prefix) > 0 {count++}
+        END {print count+0}
+      '
+  )" = 0
   test "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
-  test "$(sudo -n sha256sum "$source_path" | awk '{print $1}')" = "$source_config_sha256"
-  sudo -n test ! -e "$target_path"
+  test "$(sudo -n sha256sum "$source_path" | awk '{print $1}')" = "$source_current_config_sha256"
+  test "$(sudo -n sha256sum "$target_path" | awk '{print $1}')" = "$target_current_sha256"
   test "$(sudo -n sha256sum "$backup_path" | awk '{print $1}')" = "$backup_sha256"
   post_status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
   test "$(
@@ -257,7 +299,8 @@ trap - ERR
 printf 'active_revision=%s\n' "$active_revision"
 printf 'failed_run_id=%s\n' "$FAILED_RUN_ID"
 printf 'source_path_sha256=%s\n' "$source_path_sha256"
-printf 'source_config_sha256=%s\n' "$source_config_sha256"
+printf 'source_original_config_sha256=%s\n' "$source_original_config_sha256"
+printf 'source_current_config_sha256=%s\n' "$source_current_config_sha256"
 printf 'target_path_sha256=%s\n' "$target_path_sha256"
 printf 'target_current_sha256=%s\n' "$target_current_sha256"
 printf 'backup_sha256=%s\n' "$backup_sha256"
@@ -269,6 +312,8 @@ printf 'residue_file_count=%s\n' "$residue_file_count"
 printf 'residue_set_sha256=%s\n' "$residue_set_sha256"
 printf 'validation_process_state=%s\n' "$validation_process_state"
 printf 'validation_process_fingerprint_sha256=%s\n' "$validation_process_fingerprint_sha256"
+printf 'migration_process_state=%s\n' "$migration_process_state"
+printf 'migration_process_fingerprint_sha256=%s\n' "$migration_process_fingerprint_sha256"
 printf 'deleted_residue_file_count=%s\n' "$deleted_residue_file_count"
 if [ "$MODE" = apply ]; then
   printf 'status=PASS_APPLY\n'
