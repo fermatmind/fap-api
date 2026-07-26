@@ -99872,8 +99872,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "587dd40d8750f3b52a9c8fa46ceb0654cfc733a7",
+    "status": "ready_to_merge",
+    "commit_sha": "4a93f06f6b568fc7e648f6d4ac791a612fd9c5af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
     "checks": {
       "dependency": {
@@ -99889,8 +99889,8 @@
         "evidence": "Passed focused tests (11 tests / 68 assertions), scoped Pint (7 files), the exact migration through php artisan migrate --force against a disposable local SQLite database, API route listing (220 routes), composer validate --strict, composer audit (no advisories), YAML parse, JSON parse, git diff --check, and exact changed-file validation (10/10 authorized paths). The first disposable-migration wrapper invocation had a php -r namespace escaping syntax error before Laravel boot; the corrected wrapper ran the migration and verified all three tables."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "The prior verify-bigfive-only failure at f56f00d6b77495d3f60bba941b993151749f8db0 is repaired locally by the exact-file classifier regression at implementation commit 587dd40d8750f3b52a9c8fa46ceb0654cfc733a7. A fresh complete GitHub required-check run is required before merge."
+        "status": "passed",
+        "evidence": "Exact PR head 4a93f06f6b568fc7e648f6d4ac791a612fd9c5af passed all nine required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. The formerly failing verify-bigfive job passed in 5m49s."
       },
       "same_scope_freeze_classifier_fix": {
         "status": "passed",
@@ -99949,8 +99949,13 @@
         "at": "2026-07-26T01:06:14Z",
         "status": "github_checks_pending",
         "note": "Committed the authorized same-scope classifier repair at 587dd40d8750f3b52a9c8fa46ceb0654cfc733a7 after all focused, formatting, manifest, ledger, diff, and 11/11 scope checks passed. The branch includes latest origin/main and now awaits a fresh complete GitHub required-check run."
+      },
+      {
+        "at": "2026-07-26T01:14:53Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 4a93f06f6b568fc7e648f6d4ac791a612fd9c5af passed all nine required checks, including verify-bigfive. GitHub reports MERGEABLE/CLEAN, the branch is not behind origin/main, there are zero unresolved review threads, and the diff remains exactly 11/11 authorized paths. This final ledger-only transition must itself pass all required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-26T01:06:14Z"
+    "updated_at": "2026-07-26T01:14:53Z"
   }
 }
