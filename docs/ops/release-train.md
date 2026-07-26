@@ -211,6 +211,30 @@ wrapper is copied into the remote release. The release checkout, tree, and
 tree, or control drift fails before remote mutation. No other candidate may use
 this exception.
 
+Inactive candidate materialization uses the protected production workflow's
+`candidate_only` mode. A non-fast-path candidate does not have to equal the
+moving tip of `origin/main`; it must be the exact SHA from a successful staging
+run and remain an ancestor of both the workflow control-plane SHA and the
+write-time `origin/main`. The current active revision must remain an ancestor of
+that candidate and must match the remote `REVISION` immediately before any
+write. Its exact authorization phrase is:
+
+```text
+I explicitly approve bounded backend inactive candidate materialization for exact SHA <CANDIDATE_SHA> using exact staging run <STAGING_RUN_ID> from active SHA <ACTIVE_SHA>, excluding all newer main commits, release <RELEASE_ID>; distinct inactive release path, zero activation.
+```
+
+The workflow refetches `origin/main` after entering the protected production
+job, revalidates every bound identity and ancestry edge, and fails closed on
+drift. It may only run `deploy:candidate-only`; it may not activate a symlink,
+deploy the application, migrate, mutate CMS/database authority, warm public
+caches, dispatch/restart queues, publish, or change sitemap, llms, search, or
+PR23 state. Its sanitized
+`backend.inactive_candidate_materialization.v2` receipt binds the actual
+control-plane workflow SHA, candidate SHA, exact staging run, current active
+revision, inactive release, and write-time main SHA while recording that newer
+main commits were excluded. The exact-active same-SHA fast path remains a
+separate staging-waived exception with its existing exact authorization phrase.
+
 Any cache-only repair against the inactive candidate must repeat this exact
 production/bridge/path/status/blob proof before accepting the otherwise
 non-ancestral active revision; it may not weaken the proof to a SHA allowlist.
