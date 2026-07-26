@@ -1,5 +1,6 @@
 import importlib.util
 import os
+import re
 import stat
 import subprocess
 import sys
@@ -321,6 +322,33 @@ class ReleaseTrainDeployAdapterIntegrationTest(unittest.TestCase):
 
 
 class DeployPhpCareerWarmCachePolicyTest(unittest.TestCase):
+    @staticmethod
+    def _render_warm_script(deploy_php: str, strict: bool) -> str:
+        heartbeat = re.search(
+            r"\$heartbeatCommand = sprintf\(\n"
+            r"\s+<<<'BASH'\n(?P<body>.*?)\nBASH,\n"
+            r"\s+\$command,\n\s+\);",
+            deploy_php,
+            re.DOTALL,
+        )
+        if heartbeat is None:
+            raise AssertionError("Career warm heartbeat template not found")
+
+        script = heartbeat.group("body").replace("%s", "true")
+        if strict:
+            return script + '\nexit "$status"'
+
+        nonblocking = re.search(
+            r'run\(\$heartbeatCommand\."\\n"\.<<<\'BASH\'\n'
+            r"(?P<body>.*?)\nBASH\);",
+            deploy_php,
+            re.DOTALL,
+        )
+        if nonblocking is None:
+            raise AssertionError("Career warm nonblocking suffix not found")
+
+        return script + "\n" + nonblocking.group("body")
+
     def test_career_warm_cache_is_nonblocking_by_default_with_strict_override(self):
         deploy_php = (ROOT / "deploy.php").read_text(encoding="utf-8")
 
@@ -339,6 +367,20 @@ class DeployPhpCareerWarmCachePolicyTest(unittest.TestCase):
         self.assertIn('wait "$warm_pid"', deploy_php)
         self.assertNotIn('echo "$warm_pid"', deploy_php)
         self.assertIn("exit 0", deploy_php)
+
+    def test_rendered_career_warm_scripts_are_valid_bash(self):
+        deploy_php = (ROOT / "deploy.php").read_text(encoding="utf-8")
+
+        for strict in (False, True):
+            with self.subTest(strict=strict):
+                script = self._render_warm_script(deploy_php, strict)
+                proc = subprocess.run(
+                    ["bash", "-n"],
+                    input=script,
+                    text=True,
+                    capture_output=True,
+                )
+                self.assertEqual(proc.returncode, 0, proc.stderr)
 
 
 class _FakeGitHub:
