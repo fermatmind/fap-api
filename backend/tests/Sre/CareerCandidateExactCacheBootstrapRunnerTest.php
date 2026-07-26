@@ -38,6 +38,9 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($inspection),
             $receipt['coverage_fingerprint_sha256'],
         );
+        $this->assertSame('AM', $receipt['coverage_state']);
+        $this->assertSame(hash('sha256', 'AM'), $receipt['coverage_state_sha256']);
+        $this->assertNull($receipt['authorized_coverage_fingerprint_sha256']);
         $this->assertArrayNotHasKey('rows', $receipt);
     }
 
@@ -406,6 +409,133 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
     }
 
     #[Test]
+    public function authorized_preflight_accepts_only_monotonic_missing_to_covered_gain(): void
+    {
+        $authorized = $this->inspection([
+            $this->row('stable', 'en', false, 'ready_active'),
+            $this->row('gained', 'zh-CN', true, 'missing_pointer'),
+            $this->row('remaining', 'en', true, 'missing_pointer'),
+        ]);
+        $current = $this->inspection([
+            $this->row('stable', 'en', false, 'ready_active'),
+            $this->row('gained', 'zh-CN', false, 'ready_active'),
+            $this->row('remaining', 'en', true, 'missing_pointer'),
+        ]);
+        $authorizedState = CareerCandidateExactCacheBootstrapRunner::coverageState($authorized);
+        $authorizedFingerprint = CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($authorized);
+
+        $gain = CareerCandidateExactCacheBootstrapRunner::assertAuthorizedPreflightTransition(
+            $current,
+            $authorizedState,
+            $authorizedFingerprint,
+            3,
+            2,
+        );
+        $receipt = CareerCandidateExactCacheBootstrapRunner::preflightReceipt(
+            str_repeat('a', 40),
+            $current,
+            $gain,
+            $authorizedFingerprint,
+        );
+        $batchReceipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+            str_repeat('a', 40),
+            $current,
+            0,
+            50,
+            fn (array $slugs): array => $this->closures($slugs),
+            fn (): array => $this->warmSuccess(10),
+            fn (): array => $this->inspection([
+                $this->row('stable', 'en', false, 'ready_active'),
+                $this->row('gained', 'zh-CN', false, 'ready_active'),
+                $this->row('remaining', 'en', false, 'ready_active'),
+            ]),
+            3,
+            null,
+            $gain,
+            $authorizedFingerprint,
+        );
+
+        $this->assertSame(1, $gain);
+        $this->assertSame(1, $receipt['concurrent_coverage_gain_count']);
+        $this->assertSame($authorizedFingerprint, $receipt['authorized_coverage_fingerprint_sha256']);
+        $this->assertSame('AAM', $receipt['coverage_state']);
+        $this->assertStringNotContainsString('gained', json_encode($receipt, JSON_THROW_ON_ERROR));
+        $this->assertSame(1, $batchReceipt['pre_batch_concurrent_coverage_gain_count']);
+        $this->assertSame(
+            $authorizedFingerprint,
+            $batchReceipt['authorized_pre_coverage_fingerprint_sha256'],
+        );
+        $this->assertSame('AAA', $batchReceipt['post_coverage_state']);
+    }
+
+    #[Test]
+    public function authorized_preflight_rejects_non_monotonic_or_unbound_state(): void
+    {
+        $authorized = $this->inspection([
+            $this->row('stable', 'en', false, 'ready_active'),
+            $this->row('missing', 'zh-CN', true, 'missing_pointer'),
+        ]);
+        $state = CareerCandidateExactCacheBootstrapRunner::coverageState($authorized);
+        $fingerprint = CareerCandidateExactCacheBootstrapRunner::coverageFingerprint($authorized);
+
+        foreach ([
+            [
+                $this->inspection([
+                    $this->row('stable', 'en', false, 'ready_lkg'),
+                    $this->row('missing', 'zh-CN', true, 'missing_pointer'),
+                ]),
+                $state,
+                $fingerprint,
+                1,
+                'AUTHORIZED_COVERED_CLASSIFICATION_DRIFT',
+            ],
+            [
+                $this->inspection([
+                    $this->row('changed-identity', 'en', false, 'ready_active'),
+                    $this->row('missing', 'zh-CN', true, 'missing_pointer'),
+                ]),
+                $state,
+                $fingerprint,
+                1,
+                'AUTHORIZED_COVERAGE_FINGERPRINT_DRIFT',
+            ],
+            [$authorized, 'AX', $fingerprint, 1, 'INVALID_AUTHORIZED_COVERAGE_STATE'],
+            [$authorized, $state, $fingerprint, 0, 'AUTHORIZED_MISSING_COUNT_DRIFT'],
+        ] as [$current, $authorizedState, $authorizedFingerprint, $missing, $safeCode]) {
+            try {
+                CareerCandidateExactCacheBootstrapRunner::assertAuthorizedPreflightTransition(
+                    $current,
+                    $authorizedState,
+                    $authorizedFingerprint,
+                    2,
+                    $missing,
+                );
+                $this->fail('Expected authorized coverage transition rejection.');
+            } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+                $this->assertSame($safeCode, $failure->safeCode);
+            }
+        }
+
+        try {
+            CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+                str_repeat('a', 40),
+                $authorized,
+                0,
+                50,
+                static fn (): array => [],
+                static fn (): array => [],
+                static fn (): array => $authorized,
+                2,
+                null,
+                -1,
+            );
+            $this->fail('Expected invalid authorized batch state rejection.');
+        } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+            $this->assertSame('INVALID_AUTHORIZED_BATCH_STATE', $failure->safeCode);
+        }
+    }
+
+    #[Test]
     public function exact_target_diagnostic_defaults_to_zero_writes_and_redacts_identity(): void
     {
         $inspection = $this->inspection([
@@ -688,7 +818,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
                 'missing_payload_count' => $counts['missing_payload'],
                 'broken_count' => $broken,
                 'excluded_count' => $excluded,
-                'coverage_ratio' => $eligible === 0 ? 1 : $covered / $eligible,
+                'coverage_ratio' => $eligible === 0 ? 1.0 : round($covered / $eligible, 6),
                 'status' => ($counts['missing_pointer'] + $counts['missing_payload'] + $broken) === 0
                     ? 'ready'
                     : 'incomplete',

@@ -65,7 +65,7 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString('test -z "$EXPECTED_MISSING_POINTER_COUNT"', $source);
         $this->assertStringContainsString('runner_expected_missing=""', $source);
         $this->assertStringContainsString(
-            'observed_missing_pointer_count="$(jq -r \'.coverage.missing_pointer_count\' "$preflight_receipt")"',
+            'jq -r \'.coverage.missing_pointer_count\' "$preflight_receipt"',
             $source,
         );
         $this->assertStringContainsString(
@@ -79,6 +79,7 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString('preflight_run_id: $preflight_run_id', $source);
         $this->assertStringContainsString('preflight_run_attempt: $preflight_run_attempt', $source);
         $this->assertStringContainsString('coverage_fingerprint_sha256: $coverage_fingerprint_sha256', $source);
+        $this->assertStringContainsString('coverage_state_sha256: $coverage_state_sha256', $source);
         $this->assertStringContainsString('offline_build_budget_ms: $offline_build_budget_ms', $source);
         $this->assertStringContainsString('retry_limit: $retry_limit', $source);
         $this->assertStringContainsString('batch_size: $batch_size', $source);
@@ -102,7 +103,10 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         $this->assertStringContainsString('Career detail production cache repair (verify_only)', $source);
         $this->assertStringContainsString('gh run download "$AUTHORIZATION_PREFLIGHT_RUN_ID"', $source);
         $this->assertStringContainsString('artifacts/authorized-preflight/authorization-packet.json', $source);
+        $this->assertStringContainsString('artifacts/authorized-preflight/preflight.json', $source);
         $this->assertStringContainsString('.coverage_fingerprint_sha256 == $coverage_fingerprint', $source);
+        $this->assertStringContainsString('.coverage_state_sha256 == $coverage_state_sha256', $source);
+        $this->assertStringContainsString('test "${#authorized_coverage_state}" -eq "$MINIMUM_TARGETS"', $source);
         $this->assertStringContainsString('INTERVENING_BOOTSTRAP_RUN', $source);
         $this->assertStringContainsString('Career detail production cache repair (bootstrap_and_verify)', $source);
     }
@@ -167,6 +171,46 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
         );
         $this->assertStringContainsString(
             'concurrent_gain="$(jq -r \'.concurrent_coverage_gain_count\' "$receipt")"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            "jq -r '.concurrent_coverage_gain_count' artifacts/current-preflight.json",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "jq -r '.coverage.missing_pointer_count' artifacts/current-preflight.json",
+            $source,
+        );
+        $this->assertStringContainsString(
+            'FM_CAREER_AUTHORIZED_COVERAGE_STATE=\'$authorized_coverage_state\'',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'FM_CAREER_AUTHORIZED_COVERAGE_STATE=\'$expected_state\'',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'test $((expected_remaining + total_concurrent_coverage_gain)) -eq',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'test $((pre_remaining + pre_batch_concurrent_gain)) -eq "$expected_remaining"',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.authorized_coverage_fingerprint_sha256 == $expected_fingerprint',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.authorized_pre_coverage_fingerprint_sha256 == $expected_fingerprint',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.pre_batch_concurrent_coverage_gain_count == $pre_batch_concurrent_gain',
+            $source,
+        );
+        $this->assertStringContainsString(
+            "expected_state=\"\$(jq -r '.post_coverage_state' \"\$receipt\")\"",
             $source,
         );
         $this->assertStringContainsString(

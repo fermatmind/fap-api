@@ -42,6 +42,7 @@ final class CareerCandidateExactCacheBootstrapRunner
         'FM_CAREER_EXPECTED_TARGETS',
         'FM_CAREER_EXPECTED_MISSING',
         'FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT',
+        'FM_CAREER_AUTHORIZED_COVERAGE_STATE',
         'FM_CAREER_BATCH_OFFSET',
         'FM_CAREER_BATCH_SIZE',
         'FM_CAREER_OFFLINE_BUILD_BUDGET_MS',
@@ -180,28 +181,54 @@ final class CareerCandidateExactCacheBootstrapRunner
         $conversion = $app->make($conversionClass);
         $inspect = static fn (): array => $coverage->inspect(['en', 'zh-CN'], 0);
         $inspection = $inspect();
-        self::assertInspection(
-            $inspection,
-            $expectedTargets,
-            $expectedMissing ?? $expectedTargets,
-            $expectedMissing !== null,
-        );
         $coverageFingerprint = self::coverageFingerprint($inspection);
         $expectedCoverageFingerprint = trim(
             (string) ($environment['FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT'] ?? ''),
         );
-        if (
-            $expectedCoverageFingerprint !== ''
-            && (
-                preg_match('/^[0-9a-f]{64}$/D', $expectedCoverageFingerprint) !== 1
-                || ! hash_equals($expectedCoverageFingerprint, $coverageFingerprint)
-            )
-        ) {
-            self::fail('COVERAGE_FINGERPRINT_DRIFT');
+        $authorizedCoverageState = trim(
+            (string) ($environment['FM_CAREER_AUTHORIZED_COVERAGE_STATE'] ?? ''),
+        );
+        $preflightConcurrentCoverageGain = 0;
+        if ($authorizedCoverageState !== '') {
+            if (
+                ! in_array($mode, ['preflight', 'batch'], true)
+                || $expectedMissing === null
+                || preg_match('/^[0-9a-f]{64}$/D', $expectedCoverageFingerprint) !== 1
+            ) {
+                self::fail('INVALID_AUTHORIZED_COVERAGE_STATE');
+            }
+            $preflightConcurrentCoverageGain = self::assertAuthorizedPreflightTransition(
+                $inspection,
+                $authorizedCoverageState,
+                $expectedCoverageFingerprint,
+                $expectedTargets,
+                $expectedMissing,
+            );
+        } else {
+            self::assertInspection(
+                $inspection,
+                $expectedTargets,
+                $expectedMissing ?? $expectedTargets,
+                $expectedMissing !== null,
+            );
+            if (
+                $expectedCoverageFingerprint !== ''
+                && (
+                    preg_match('/^[0-9a-f]{64}$/D', $expectedCoverageFingerprint) !== 1
+                    || ! hash_equals($expectedCoverageFingerprint, $coverageFingerprint)
+                )
+            ) {
+                self::fail('COVERAGE_FINGERPRINT_DRIFT');
+            }
         }
 
         if ($mode === 'preflight') {
-            return self::preflightReceipt($expectedCandidateSha, $inspection);
+            return self::preflightReceipt(
+                $expectedCandidateSha,
+                $inspection,
+                $preflightConcurrentCoverageGain,
+                $authorizedCoverageState === '' ? null : $expectedCoverageFingerprint,
+            );
         }
 
         if ($mode === 'diagnose_target') {
@@ -245,6 +272,9 @@ final class CareerCandidateExactCacheBootstrapRunner
                 ->warmJobDetailPayloadForOfflineBootstrap($slug, $locale, $closure),
             $inspect,
             $expectedTargets,
+            null,
+            $preflightConcurrentCoverageGain,
+            $authorizedCoverageState === '' ? null : $expectedCoverageFingerprint,
         );
     }
 
@@ -252,8 +282,14 @@ final class CareerCandidateExactCacheBootstrapRunner
      * @param  array<string, mixed>  $inspection
      * @return array<string, mixed>
      */
-    public static function preflightReceipt(string $candidateSha, array $inspection): array
-    {
+    public static function preflightReceipt(
+        string $candidateSha,
+        array $inspection,
+        int $concurrentCoverageGain = 0,
+        ?string $authorizedCoverageFingerprint = null,
+    ): array {
+        $coverageState = self::coverageState($inspection);
+
         return [
             'contract_version' => self::CONTRACT_VERSION,
             'mode' => 'preflight',
@@ -267,11 +303,14 @@ final class CareerCandidateExactCacheBootstrapRunner
             'repairable_target_count' => self::repairableCount($inspection),
             'cache_write_count' => 0,
             'owned_cache_write_count' => 0,
-            'concurrent_coverage_gain_count' => 0,
+            'concurrent_coverage_gain_count' => $concurrentCoverageGain,
             'failure_count' => 0,
             'queue_dispatch_count' => 0,
             'database_write_count' => 0,
+            'authorized_coverage_fingerprint_sha256' => $authorizedCoverageFingerprint,
             'coverage_fingerprint_sha256' => self::coverageFingerprint($inspection),
+            'coverage_state' => $coverageState,
+            'coverage_state_sha256' => hash('sha256', $coverageState),
             'coverage' => self::safeCoverage($inspection['report'] ?? []),
         ];
     }
@@ -293,9 +332,21 @@ final class CareerCandidateExactCacheBootstrapRunner
         Closure $postInspect,
         int $expectedTargets,
         ?Closure $retryDelay = null,
+        int $preBatchConcurrentCoverageGain = 0,
+        ?string $authorizedPreFingerprint = null,
     ): array {
         if (! self::isValidBatchOffset($offset, $expectedTargets) || $batchSize !== self::BATCH_SIZE) {
             self::fail('INVALID_BATCH_BOUNDARY');
+        }
+        if (
+            $preBatchConcurrentCoverageGain < 0
+            || $preBatchConcurrentCoverageGain > $expectedTargets
+            || (
+                $authorizedPreFingerprint !== null
+                && preg_match('/^[0-9a-f]{64}$/D', $authorizedPreFingerprint) !== 1
+            )
+        ) {
+            self::fail('INVALID_AUTHORIZED_BATCH_STATE');
         }
 
         $rows = $inspection['rows'] ?? null;
@@ -489,6 +540,7 @@ final class CareerCandidateExactCacheBootstrapRunner
             'cache_write_count' => $writes,
             'owned_cache_write_count' => $writes,
             'concurrent_coverage_gain_count' => $concurrentCoverageGain,
+            'pre_batch_concurrent_coverage_gain_count' => $preBatchConcurrentCoverageGain,
             'failure_count' => 0,
             'failure_stage' => null,
             'error_category' => null,
@@ -500,8 +552,10 @@ final class CareerCandidateExactCacheBootstrapRunner
             'failed_target_index_sha256' => null,
             'queue_dispatch_count' => 0,
             'database_write_count' => 0,
+            'authorized_pre_coverage_fingerprint_sha256' => $authorizedPreFingerprint,
             'pre_coverage_fingerprint_sha256' => $preFingerprint,
             'post_coverage_fingerprint_sha256' => $postFingerprint,
+            'post_coverage_state' => self::coverageState($postInspection),
             'pre_batch_coverage' => self::safeCoverage($inspection['report'] ?? []),
             'post_batch_coverage' => self::safeCoverage($postInspection['report'] ?? []),
         ];
@@ -759,6 +813,109 @@ final class CareerCandidateExactCacheBootstrapRunner
             'rows' => $rows,
             'coverage' => self::safeCoverage($inspection['report'] ?? []),
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+    }
+
+    /** @param array<string, mixed> $inspection */
+    public static function coverageState(array $inspection): string
+    {
+        $codes = [
+            'missing_pointer' => 'M',
+            'ready_active' => 'A',
+            'ready_lkg' => 'L',
+            'legacy_migratable' => 'G',
+        ];
+        $state = '';
+        foreach (array_values($inspection['rows'] ?? []) as $row) {
+            if (! is_array($row) || ! isset($codes[$row['classification'] ?? ''])) {
+                self::fail('INVALID_COVERAGE_STATE');
+            }
+            $state .= $codes[$row['classification']];
+        }
+
+        return $state;
+    }
+
+    /**
+     * @param  array<string, mixed>  $inspection
+     */
+    public static function assertAuthorizedPreflightTransition(
+        array $inspection,
+        string $authorizedState,
+        string $authorizedFingerprint,
+        int $expectedTargets,
+        int $authorizedMissing,
+    ): int {
+        self::assertInspectionBoundary($inspection, $expectedTargets);
+        if (
+            strlen($authorizedState) !== $expectedTargets
+            || preg_match('/^[MALG]+$/D', $authorizedState) !== 1
+        ) {
+            self::fail('INVALID_AUTHORIZED_COVERAGE_STATE');
+        }
+        if (substr_count($authorizedState, 'M') !== $authorizedMissing) {
+            self::fail('AUTHORIZED_MISSING_COUNT_DRIFT');
+        }
+
+        $classifications = [
+            'M' => 'missing_pointer',
+            'A' => 'ready_active',
+            'L' => 'ready_lkg',
+            'G' => 'legacy_migratable',
+        ];
+        $authorizedRows = [];
+        foreach (array_values($inspection['rows']) as $index => $row) {
+            $classification = $classifications[$authorizedState[$index]];
+            $authorizedRows[] = [
+                'slug' => $row['slug'],
+                'locale' => $row['locale'],
+                'classification' => $classification,
+                'repairable' => $classification === 'missing_pointer',
+            ];
+        }
+        $authorizedCovered = $expectedTargets - $authorizedMissing;
+        $authorizedInspection = [
+            'rows' => $authorizedRows,
+            'report' => [
+                'contract_version' => 'career.job_detail_cache_coverage.v1',
+                'expected_target_count' => $expectedTargets,
+                'eligible_target_count' => $expectedTargets,
+                'covered_target_count' => $authorizedCovered,
+                'missing_pointer_count' => $authorizedMissing,
+                'missing_payload_count' => 0,
+                'broken_count' => 0,
+                'excluded_count' => 0,
+                'coverage_ratio' => $expectedTargets === 0
+                    ? 1.0
+                    : round($authorizedCovered / $expectedTargets, 6),
+                'status' => $authorizedMissing === 0 ? 'ready' : 'incomplete',
+            ],
+        ];
+        if (! hash_equals($authorizedFingerprint, self::coverageFingerprint($authorizedInspection))) {
+            self::fail('AUTHORIZED_COVERAGE_FINGERPRINT_DRIFT');
+        }
+
+        foreach ($authorizedRows as $index => $authorizedRow) {
+            $currentClassification = (string) $inspection['rows'][$index]['classification'];
+            if (
+                self::classificationIsCovered((string) $authorizedRow['classification'])
+                && $currentClassification !== $authorizedRow['classification']
+            ) {
+                self::fail('AUTHORIZED_COVERED_CLASSIFICATION_DRIFT');
+            }
+        }
+        $transition = self::assertMonotonicCoverageTransition(
+            $authorizedInspection,
+            $inspection,
+            [],
+            $expectedTargets,
+        );
+        $gain = $transition['concurrent_coverage_gain_count'];
+        $currentMissing = (int) $inspection['report']['missing_pointer_count'];
+        if ($gain !== $authorizedMissing - $currentMissing) {
+            self::fail('AUTHORIZED_COVERAGE_GAIN_DRIFT');
+        }
+
+        return $gain;
     }
 
     public static function targetIndexHash(
