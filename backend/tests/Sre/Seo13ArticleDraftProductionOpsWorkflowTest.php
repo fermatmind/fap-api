@@ -21,6 +21,7 @@ final class Seo13ArticleDraftProductionOpsWorkflowTest extends TestCase
         $this->assertStringContainsString('permissions:', $workflow);
         $this->assertStringContainsString('actions: read', $workflow);
         $this->assertStringContainsString('contents: read', $workflow);
+        $this->assertSame(1, substr_count($workflow, 'fetch-depth: 0'));
         $this->assertStringContainsString('git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main', $workflow);
         $this->assertStringContainsString('gh run download "$PREFLIGHT_RUN_ID"', $workflow);
         $this->assertStringContainsString('.status == "PASS_PREFLIGHT"', $workflow);
