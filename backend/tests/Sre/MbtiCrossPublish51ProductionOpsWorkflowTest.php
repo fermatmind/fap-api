@@ -44,6 +44,8 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             'application_deploy_count: 0',
             'symlink_write_count: 0',
             'worker_restart_count: 0',
+            '--argjson frontend_endpoint_count "$(jq \'.frontend_revalidation_endpoint_count // 0\' <<<"$result")"',
+            'frontend_revalidation_endpoint_count: $frontend_endpoint_count',
         ] as $contract) {
             $this->assertStringContainsString($contract, $workflow);
         }
