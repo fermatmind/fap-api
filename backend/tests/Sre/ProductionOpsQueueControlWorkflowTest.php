@@ -240,6 +240,10 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
         $this->assertSame(1, substr_count($workflow, 'failure_gate=STRIPPED_SOURCE_HASH'));
         $this->assertSame(1, substr_count($workflow, 'failure_gate=STRIPPED_SOURCE_COUNTS'));
         $this->assertSame(1, substr_count($workflow, 'failure_gate=FOREIGN_RUNTIME_FINGERPRINT'));
+        $this->assertLessThan(
+            strpos($workflow, 'if [ "$config_layout" = SHARED ]; then'),
+            strpos($workflow, 'failure_gate=FOREIGN_RUNTIME_FINGERPRINT'),
+        );
         $this->assertSame(
             4,
             substr_count($workflow, '$0 == "[program:fap-queue-ops]" { in_ops=1; next }'),

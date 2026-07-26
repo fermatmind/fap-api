@@ -45,6 +45,8 @@ final class ProductionOpsSharedResidueRecoveryWorkflowTest extends TestCase
             '.config_layout == "DEDICATED"',
             '.runtime_config_current == true',
             '.convergence_required == false',
+            '.foreign_runtime_fingerprint_sha256 != ("0" * 64)',
+            'foreign_runtime_fingerprint_sha256="$(jq -r \'.foreign_runtime_fingerprint_sha256\' "$current_evidence_receipt")"',
             '.production_write_execution == false',
             'PASS_PREFLIGHT',
             'PASS_APPLY',

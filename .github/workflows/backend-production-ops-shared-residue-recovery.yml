@@ -232,7 +232,7 @@ jobs:
           source_original_config_sha256="$(jq -r '.current_config_sha256' "$evidence_receipt")"
           source_current_config_sha256="$(jq -r '.stripped_source_sha256' "$evidence_receipt")"
           source_target_path_sha256="$(jq -r '.managed_target_path_sha256' "$evidence_receipt")"
-          foreign_runtime_fingerprint_sha256="$(jq -r '.foreign_runtime_fingerprint_sha256' "$evidence_receipt")"
+          source_foreign_runtime_fingerprint_sha256="$(jq -r '.foreign_runtime_fingerprint_sha256' "$evidence_receipt")"
 
           current_evidence_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${CURRENT_EVIDENCE_RUN_ID}")"
           jq -e \
@@ -267,6 +267,8 @@ jobs:
              and .runtime_cwd_current == true
              and .runtime_config_current == true
              and .convergence_required == false
+             and (.foreign_runtime_fingerprint_sha256 | test("^[0-9a-f]{64}$"))
+             and .foreign_runtime_fingerprint_sha256 != ("0" * 64)
              and .ops_pending_total == 0
              and .live_process_verified == true
              and .production_write_execution == false
@@ -280,12 +282,14 @@ jobs:
           target_path_sha256="$(jq -r '.config_path_sha256' "$current_evidence_receipt")"
           target_current_sha256="$(jq -r '.current_config_sha256' "$current_evidence_receipt")"
           target_rendered_sha256="$(jq -r '.rendered_sha256' "$current_evidence_receipt")"
+          foreign_runtime_fingerprint_sha256="$(jq -r '.foreign_runtime_fingerprint_sha256' "$current_evidence_receipt")"
           test "$source_target_path_sha256" = "$target_path_sha256"
           test "$target_current_sha256" = "$target_rendered_sha256"
           for hash_value in \
             "$source_path_sha256" "$source_original_config_sha256" \
             "$source_current_config_sha256" "$target_path_sha256" \
-            "$target_current_sha256" "$foreign_runtime_fingerprint_sha256"; do
+            "$target_current_sha256" "$source_foreign_runtime_fingerprint_sha256" \
+            "$foreign_runtime_fingerprint_sha256"; do
             [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
           done
 

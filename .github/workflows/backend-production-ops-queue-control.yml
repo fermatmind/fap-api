@@ -345,7 +345,22 @@ jobs:
           stripped_exact_program_section_count=0
           stripped_total_section_count=0
           stripped_program_section_count=0
-          foreign_runtime_fingerprint_sha256="$zero_sha256"
+          failure_gate=FOREIGN_RUNTIME_FINGERPRINT
+          foreign_runtime_fingerprint_sha256="$(
+            awk '
+              $1 !~ /^fap-queue-ops(:|$)/ {
+                pid=""
+                for (i=3; i<=NF; i++) {
+                  if ($i == "pid") {
+                    pid=$(i+1)
+                    gsub(/,/, "", pid)
+                  }
+                }
+                print $1 "\t" $2 "\t" pid
+              }
+            ' <<<"$status_lines" | sort | sha256sum | awk '{print $1}'
+          )"
+          [[ "$foreign_runtime_fingerprint_sha256" =~ ^[0-9a-f]{64}$ ]]
           migration_supported=false
           if awk '$1 ~ /^fap-queue-ops(:|$)/ {found=1} END {exit !found}' <<<"$status_lines"; then
             program_present=true
@@ -435,22 +450,6 @@ jobs:
             test "$stripped_exact_program_section_count" -eq 0
             test "$stripped_total_section_count" -eq $((config_total_section_count - 1))
             test "$stripped_program_section_count" -eq "$config_foreign_program_section_count"
-            failure_gate=FOREIGN_RUNTIME_FINGERPRINT
-            foreign_runtime_fingerprint_sha256="$(
-              awk '
-                $1 !~ /^fap-queue-ops(:|$)/ {
-                  pid=""
-                  for (i=3; i<=NF; i++) {
-                    if ($i == "pid") {
-                      pid=$(i+1)
-                      gsub(/,/, "", pid)
-                    }
-                  }
-                  print $1 "\t" $2 "\t" pid
-                }
-              ' <<<"$status_lines" | sort | sha256sum | awk '{print $1}'
-            )"
-            [[ "$foreign_runtime_fingerprint_sha256" =~ ^[0-9a-f]{64}$ ]]
             if [ "$config_total_section_count" -eq 3 ] \
               && [ "$config_foreign_program_section_count" -eq 2 ] \
               && [ "$stripped_total_section_count" -eq 2 ] \
