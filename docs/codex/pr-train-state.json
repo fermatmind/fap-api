@@ -100126,7 +100126,7 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "ranking_review_binding_and_host_normalization_local_checks_passed_github_checks_pending",
+  "status": "ready_to_merge",
   "commit_sha": "1a80a68a8738c7570caf0ed756a7c9a048214390",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
@@ -100151,14 +100151,14 @@
       "evidence": "The final recovery plus ReviewPolicyRegistry run passed 39 tests / 690 assertions. Scoped Pint and git diff --check passed; earlier same-branch Composer validate --strict, Composer audit, content-pack JSON, and operator-authorized Big Five freeze-classifier checks remain passed. The documented command intentionally exits 1, repeats with changed=false, and reports business_write=false, blocked_formal_gsc_readmodel_gate, package SHA 7b55d212ceabf0d574e60df6a2c557fdde1b025a06886017fc7cd98bf44d2d4b, artifact SHA 83719bc66b332394ef6a319062f75fbe2d9998df769c42e31220925d1f930d8c, evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and cohort SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
-      "status": "pending_after_review_repair",
-      "evidence": "All nine GitHub checks passed at prior reviewed head 69218979660d93b435e68c4f1541d9a13b010382. The ready-ledger review then identified missing rank/GSC evidence in each target review hash and trailing-dot internal host bypass. Exact implementation head 1a80a68a8738c7570caf0ed756a7c9a048214390 binds the complete target identity/current authority/GSC page and rejects trailing-dot plus numeric/hex host forms; a fresh GitHub run is pending."
+      "status": "passed",
+      "evidence": "All nine GitHub checks passed at exact reviewed head ab49367d23f47c91464c64e805991b20e16f6252, including verify-bigfive. The reviewed implementation candidate remains 1a80a68a8738c7570caf0ed756a7c9a048214390; the current review has zero active unresolved non-outdated threads."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
   "failure_reason": null,
@@ -100327,8 +100327,13 @@
       "at": "2026-07-26T09:35:27Z",
       "status": "ranking_review_binding_and_host_normalization_local_checks_passed_github_checks_pending",
       "note": "The ready-ledger review found that review_target_sha256 omitted rank/GSC evidence and trailing-dot internal hosts could bypass suffix checks. Review material now binds rank, article identity, locale/slug, complete current authority, complete GSC page metrics, query evidence, recovery, sources, and claims. Source validation rejects root-dot absolute spellings and numeric/hex resolver forms. Recovery plus ReviewPolicyRegistry passed 39/690, scoped Pint/diff checks passed, and the deterministic command repeated changed=false with package SHA 7b55d212ceabf0d574e60df6a2c557fdde1b025a06886017fc7cd98bf44d2d4b and artifact SHA 83719bc66b332394ef6a319062f75fbe2d9998df769c42e31220925d1f930d8c. GitHub checks are pending; no production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T09:44:11Z",
+      "status": "ready_to_merge",
+      "note": "All nine GitHub checks passed at exact reviewed head ab49367d23f47c91464c64e805991b20e16f6252, including verify-bigfive. Current-head Codex review is bound to that head with zero active unresolved non-outdated threads. The ledger continues to bind implementation candidate 1a80a68a8738c7570caf0ed756a7c9a048214390; exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier regression only. This ledger-only commit must itself pass all required checks and exact-head review before squash merge. No production, database, CMS, publication, search, indexing, scheduler, queue, or deploy action occurred."
     }
   ],
-  "updated_at": "2026-07-26T09:35:27Z"
+  "updated_at": "2026-07-26T09:44:11Z"
 }
 }
