@@ -158,8 +158,12 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             '.revision | select(. == $expected)',
             'frontend_revision: $frontend_revision',
             'frontend_revalidation_path_count: 6',
+            'content_frontend_revalidation_path_count: 3',
             'cache_closeout_ready',
             'cache_closeout_completed',
+            'content_cache_closeout_completed',
+            'public_page_readback_completed',
+            'public_page_count: 3',
             'public_feed_readback_completed',
             'artifacts/mbti-cross-publish51-production-ops.json',
         ] as $contract) {
@@ -194,6 +198,18 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
                 "EXPECTED_FRONTEND_REVISION='\$EXPECTED_FRONTEND_REVISION'",
             ),
             'The pinned frontend revision must be forwarded into the quoted remote shell.',
+        );
+        $this->assertSame(
+            2,
+            substr_count(
+                $workflow,
+                'grep -F \'<meta name="robots" content=',
+            ),
+            'Both content and indexability apply must verify the exact public page robots projection.',
+        );
+        $this->assertStringContainsString(
+            '"X-FM-Content-Release-Source" => "mbti_cross_publish51_content_apply"',
+            $workflow,
         );
     }
 

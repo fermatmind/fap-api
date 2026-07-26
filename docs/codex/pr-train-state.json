@@ -111,9 +111,14 @@
         "at": "2026-07-26T07:17:00Z",
         "status": "github_review_repairing",
         "note": "Exact head b583dc3ad passed all 9 GitHub checks, then exact-head review found the pinned frontend revision was not forwarded into the quoted SSH remote environment and would fail under remote set -u. The scoped repair explicitly forwards EXPECTED_FRONTEND_REVISION alongside the other exact operation inputs and adds a single-occurrence regression assertion. No production action was executed."
+      },
+      {
+        "at": "2026-07-26T07:32:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact head eab52308e passed all 9 GitHub checks, then exact-head review found that Phase A could leave cached public 404 pages and Phase B could enumerate broken detail pages without detecting them. The scoped repair makes Phase A revalidate exactly three comparison paths and verify 200 noindex/canonical HTML before PASS_APPLY, while Phase B now verifies 200 index/canonical HTML for the same exact three paths in addition to canonical feed membership. Receipts expose only completion booleans/counts; page bodies remain ephemeral."
       }
     ],
-    "updated_at": "2026-07-26T07:17:00Z"
+    "updated_at": "2026-07-26T07:32:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",

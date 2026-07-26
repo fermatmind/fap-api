@@ -275,11 +275,98 @@ jobs:
               ;;
             content_apply)
               approval="$(printf '%s' "$APPROVAL_B64" | base64 -d)"
-              php artisan personality:mbti-cross-publisher49-content \
+              publisher_result="$(php artisan personality:mbti-cross-publisher49-content \
                 --execute \
                 --expected-current-state-sha256="$EXPECTED_STATE_SHA256" \
                 --production-authorization="$approval" \
-                --json --no-interaction --no-ansi
+                --json --no-interaction --no-ansi)"
+              jq -e '
+                .ok == true
+                and .artifact == "mbti.cross.publisher49.content.v1"
+                and .mode == "write"
+                and (.status == "published_noindex" or .status == "already_applied")' \
+                <<<"$publisher_result" >/dev/null
+
+              php -r '
+              require getcwd()."/vendor/autoload.php";
+              $app = require getcwd()."/bootstrap/app.php";
+              $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+              $paths = [
+                  "/zh/personality/enfp-vs-entp",
+                  "/zh/personality/estj-vs-entj",
+                  "/zh/personality/isfp-vs-infp",
+              ];
+              $endpoints = array_values(array_filter(array_map(
+                  static fn (mixed $value): string => trim((string) $value),
+                  (array) config("ops.content_release_observability.cache_invalidation_urls", [])
+              )));
+              $secret = trim((string) config("ops.content_release_observability.cache_invalidation_secret", ""));
+              if ($endpoints === [] || $secret === "") {
+                  throw new RuntimeException("Bounded frontend cache revalidation is not configured.");
+              }
+              $payload = [
+                  "event" => "content_release_revalidate",
+                  "source" => "mbti_cross_publish51_content_apply",
+                  "content" => [
+                      "type" => "mbti-cross-comparison",
+                      "id" => 0,
+                      "org_id" => 0,
+                      "title" => "MBTI cross comparison exact-three noindex publish",
+                      "slug" => "exact-three",
+                      "locale" => "zh-CN",
+                      "status" => "published",
+                      "visibility" => "public",
+                  ],
+                  "cache_signal" => [
+                      "kind" => "invalidate",
+                      "paths" => $paths,
+                      "urls" => $paths,
+                  ],
+              ];
+              foreach ($endpoints as $endpoint) {
+                  $response = Illuminate\Support\Facades\Http::acceptJson()
+                      ->timeout(15)
+                      ->withHeaders([
+                          "X-FM-Content-Release-Source" => "mbti_cross_publish51_content_apply",
+                          "X-FM-Content-Release-Token" => $secret,
+                      ])
+                      ->post($endpoint, $payload);
+                  $body = $response->json();
+                  $revalidated = is_array($body) ? (array) ($body["revalidated_paths"] ?? []) : [];
+                  $rejected = is_array($body) ? (array) ($body["rejected_paths"] ?? []) : [];
+                  sort($revalidated);
+                  $expected = $paths;
+                  sort($expected);
+                  if (! $response->successful() || $rejected !== [] || $revalidated !== $expected) {
+                      throw new RuntimeException("Bounded frontend noindex revalidation failed.");
+                  }
+              }
+              ' >/dev/null
+
+              page_readback_dir="$(mktemp -d)"
+              trap 'rm -rf "$page_readback_dir"' EXIT
+              for slug in enfp-vs-entp estj-vs-entj isfp-vs-infp; do
+                page_url="https://fermatmind.com/zh/personality/$slug"
+                curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+                  --connect-timeout 10 --max-time 60 \
+                  -H 'Cache-Control: no-cache' \
+                  "$page_url" >"$page_readback_dir/$slug.html"
+                grep -F '<meta name="robots" content="noindex, follow"/>' \
+                  "$page_readback_dir/$slug.html" >/dev/null
+                grep -F "<link rel=\"canonical\" href=\"$page_url\"/>" \
+                  "$page_readback_dir/$slug.html" >/dev/null
+              done
+              rm -rf "$page_readback_dir"
+              trap - EXIT
+
+              jq -c \
+                '. + {
+                  content_cache_closeout_completed: true,
+                  content_frontend_revalidation_path_count: 3,
+                  public_page_readback_completed: true,
+                  public_page_count: 3
+                }' <<<"$publisher_result"
               ;;
             indexability_preflight)
               publisher_result="$(php artisan personality:mbti-cross-publisher49-indexability \
@@ -421,6 +508,14 @@ jobs:
                 grep -F "$expected_url" "$readback_dir/sitemap.xml" >/dev/null
                 grep -F "$expected_url" "$readback_dir/llms.txt" >/dev/null
                 grep -F "$expected_url" "$readback_dir/llms-full.txt" >/dev/null
+                curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
+                  --connect-timeout 10 --max-time 60 \
+                  -H 'Cache-Control: no-cache' \
+                  "$expected_url" >"$readback_dir/$slug.html"
+                grep -F '<meta name="robots" content="index, follow"/>' \
+                  "$readback_dir/$slug.html" >/dev/null
+                grep -F "<link rel=\"canonical\" href=\"$expected_url\"/>" \
+                  "$readback_dir/$slug.html" >/dev/null
               done
               rm -rf "$readback_dir"
               trap - EXIT
@@ -432,6 +527,8 @@ jobs:
                   backend_cache_key_count: 5,
                   frontend_revalidation_path_count: 6,
                   frontend_revision: $frontend_revision,
+                  public_page_readback_completed: true,
+                  public_page_count: 3,
                   public_feed_readback_completed: true,
                   public_feed_count: 3
                 }' <<<"$publisher_result"
@@ -484,6 +581,10 @@ jobs:
                  and (.content_readback_sha256 | test("^[0-9a-f]{64}$"))
                  and .indexability_mutated == false
                  and .sitemap_or_llms_mutated == false
+                 and .content_cache_closeout_completed == true
+                 and .content_frontend_revalidation_path_count == 3
+                 and .public_page_readback_completed == true
+                 and .public_page_count == 3
                  and (.readback | length) == 3
                  and all(.readback[];
                    .publish_status == "published"
@@ -527,6 +628,8 @@ jobs:
                  and .backend_cache_key_count == 5
                  and .frontend_revalidation_path_count == 6
                  and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
+                 and .public_page_readback_completed == true
+                 and .public_page_count == 3
                  and .public_feed_readback_completed == true
                  and .public_feed_count == 3
                  and (.readback | length) == 3
@@ -567,6 +670,8 @@ jobs:
             --argjson indexability_committed "$(jq '.indexability_write_committed // false' <<<"$result")" \
             --argjson cache_ready "$(jq '.cache_closeout_ready // false' <<<"$result")" \
             --argjson cache_closeout "$(jq '.cache_closeout_completed // false' <<<"$result")" \
+            --argjson content_cache_closeout "$(jq '.content_cache_closeout_completed // false' <<<"$result")" \
+            --argjson page_readback "$(jq '.public_page_readback_completed // false' <<<"$result")" \
             --argjson feed_readback "$(jq '.public_feed_readback_completed // false' <<<"$result")" \
             '{
               contract_version: "mbti.cross.publish51.production_ops.v1",
@@ -599,6 +704,8 @@ jobs:
               worker_restart_count: 0,
               cache_closeout_ready: $cache_ready,
               cache_closeout_completed: $cache_closeout,
+              content_cache_closeout_completed: $content_cache_closeout,
+              public_page_readback_completed: $page_readback,
               public_feed_readback_completed: $feed_readback
             }' > artifacts/mbti-cross-publish51-production-ops.json
 
