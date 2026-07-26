@@ -5,6 +5,7 @@ namespace Tests\Feature\SEO;
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -184,7 +185,25 @@ class SitemapSourceApiTest extends TestCase
             'items' => $items,
         ], JSON_THROW_ON_ERROR));
 
-        app(PublicCareerAuthorityResponseCache::class)->warm();
+        app()->forgetInstance(CareerRuntimePublishProjectionVisibility::class);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach ($items as $item) {
+            if (! is_array($item)
+                || ($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED
+                || ($item['detail_route_enabled'] ?? false) !== true
+                || ($item['release_gate_pass'] ?? false) !== true) {
+                continue;
+            }
+
+            $cache->warmJobDetailPayload(
+                (string) ($item['slug'] ?? ''),
+                (string) ($item['locale'] ?? 'en'),
+                true,
+            );
+        }
+
+        $cache->warm();
     }
 
     /**
