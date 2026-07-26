@@ -86006,7 +86006,7 @@
     "depends_on": [
       "MBTI-CMS-29"
     ],
-    "status": "github_checks_failed_current_scope_fix_in_progress",
+    "status": "pr_open_checks_pending",
     "commit_sha": "e08f3a29f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2928",
     "failure_reason": null,
@@ -100545,8 +100545,8 @@
     "branch": "codex/saep-proposed-api-per02-mbti-base-type-discoverability-02",
     "title": "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02: add canonical MBTI base types to sitemap authority",
     "depends_on": [],
-    "status": "pr_open_checks_pending",
-    "commit_sha": "8fc47dc89292e2ddcd8a62a73fc1e51dcb366f64",
+    "status": "ready_to_merge",
+    "commit_sha": "e4b523b720009d21a5ab6e6c5733b0f2a3cf6fc7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3313",
     "checks": {
       "web_production_dependency": {
@@ -100566,21 +100566,21 @@
         "evidence": "After rebasing onto independent baseline repair PR #3312 (8ed512841cabf45fc92fa6cf43955333073029e3), the complete SitemapGeneratorTest and SitemapSourceApiTest selection passed: 24 tests, 885 assertions, with only isolated-worktree missing-.env warnings."
       },
       "ci_verify_mbti": {
-        "status": "rerun_completed_remote_revalidation_pending",
-        "evidence": "The local MBTI verification reran after the SitemapXmlTest correction. Exact remote required checks on the new head remain the merge gate."
+        "status": "passed",
+        "evidence": "The complete local ci_verify_mbti.sh rerun exited 0 after the classifier repair, including 1604 Big Five tests with 195617 assertions, 95 personality authority tests with 5883 assertions, and the remaining MBTI, OpenAPI, security, migration and dependency gates."
       },
       "verify_bigfive": {
-        "status": "failed_current_scope_fix_in_progress",
-        "evidence": "Exact head 6064279e6dbced53e51358e7319de6534deba592 passed 8/9 required checks but BigFiveResultPageV2CoreBodyPreviewTest rejected the exact LlmsController sitemap-only exclusion as an unclassified MBTI runtime change. The same PR now adds a changed-lines-exact fail-closed classifier contract; broader llms changes remain blocked."
+        "status": "passed_exact_head",
+        "evidence": "Exact repaired implementation head e4b523b720009d21a5ab6e6c5733b0f2a3cf6fc7 passed verify-bigfive and all nine required GitHub checks. Its exact changed-lines classifier admits only the four-letter MBTI base llms exclusion and keeps variant, comparison and additional llms behavior blocked."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
-    "failure_reason": "Exact head 6064279e6dbced53e51358e7319de6534deba592 failed verify-bigfive because the four-letter MBTI base llms exclusion was not represented in the runtime-freeze classifier. Repair remains within the current sitemap-only scope.",
+    "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -100641,8 +100641,13 @@
         "at": "2026-07-26T16:50:00Z",
         "status": "github_checks_failed_current_scope_fix_in_progress",
         "note": "Exact head 6064279e6dbced53e51358e7319de6534deba592 passed eight required checks and failed verify-bigfive only because LlmsController was not classified. The repair removes unrelated formatting noise and admits only the exact four-letter MBTI base exclusion changed lines; variant, comparison and any additional llms behavior remain fail-closed."
+      },
+      {
+        "at": "2026-07-26T17:15:00Z",
+        "status": "ready_to_merge",
+        "note": "Repaired implementation head e4b523b720009d21a5ab6e6c5733b0f2a3cf6fc7 passed all nine required GitHub checks, exact-head Codex review completed, the complete local validation exited 0, and scope remained the declared ten files. This ledger-tail correction restores unrelated MBTI-CMS-28A state and binds the verified implementation head; the ledger-tail head must independently pass required checks before merge."
       }
     ],
-    "updated_at": "2026-07-26T16:50:00Z"
+    "updated_at": "2026-07-26T17:15:00Z"
   }
 }
