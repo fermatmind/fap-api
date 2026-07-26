@@ -27,11 +27,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 102 assertions after the complete review-repair series; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed, including Big Five 1601 tests / 195611 assertions, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts were removed or restored to HEAD."
+        "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 105 assertions after the canonical sitemap review repair; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed after the final repair, including Big Five 1601 tests / 195611 assertions, Enneagram 10 / 369, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts and exact CI test packages were restored or removed, leaving only the declared PR scope."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "Exact head f4e881c1bcfe9b8a8f5c0e5d39e2cf639fc6eba4 passed all 9 GitHub checks, then exact-head review identified a Phase B discoverability-cache closeout gap. Fresh checks are required after the in-scope repair."
+        "evidence": "Exact head d60d0dccd5de48542a07ff03b7221b91fa566981 passed all 9 GitHub checks, then exact-head review identified that the frontend path set omitted canonical /sitemap.xml and public readback used a query-busted cache key. Fresh checks are required after the in-scope canonical-cache repair."
       }
     },
     "scope_validation": {
@@ -91,9 +91,14 @@
         "at": "2026-07-26T05:47:00Z",
         "status": "github_review_repairing",
         "note": "The Phase B cache/readback repair passed workflow YAML, actionlint, focused SRE tests 3/102, scoped Pint, ledger JSON, and diff checks. The immutable preflight receipt now proves closeout readiness; PASS_APPLY requires five exact backend cache keys invalidated, successful sitemap-source warm, five bounded frontend paths revalidated, and all three exact comparison URLs present in sitemap.xml, llms.txt, and llms-full.txt. No search submission, deploy, symlink, restart, or automatic rollback path was added."
+      },
+      {
+        "at": "2026-07-26T06:42:00Z",
+        "status": "github_review_repairing",
+        "note": "After all 9 checks passed on d60d0dccd, exact-head review found that query-busted sitemap readback could bypass a stale canonical cache entry. The blocking fap-web baseline repair PR #1810 merged at 841280ab35945e2c1454f5ac18ea3ededdfab5b6 and passed staging, while its exact-SHA production deployment remains separately unauthorized. This branch rebased onto current origin/main c7e94b7938e6dd4e3bc57c4e6cd101e42b159082; Phase B now revalidates six exact frontend paths including /sitemap.xml and reads all three canonical feeds without query parameters. Workflow YAML, actionlint, focused SRE tests 3/105, scoped Pint, Composer strict validation and audit pass. No production deploy, content/indexability write, sitemap/llms submission, or search action was executed."
       }
     ],
-    "updated_at": "2026-07-26T05:47:00Z"
+    "updated_at": "2026-07-26T06:42:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",

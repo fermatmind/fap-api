@@ -332,6 +332,7 @@ jobs:
                   "/zh/personality/enfp-vs-entp",
                   "/zh/personality/estj-vs-entj",
                   "/zh/personality/isfp-vs-infp",
+                  "/sitemap.xml",
                   "/llms.txt",
                   "/llms-full.txt",
               ];
@@ -390,7 +391,7 @@ jobs:
                   curl -fsS --retry 3 --retry-delay 2 --retry-all-errors \
                     --connect-timeout 10 --max-time 60 \
                     -H 'Cache-Control: no-cache' \
-                    "https://fermatmind.com/${surface}?mbti_cross_publish51=${EXPECTED_STATE_SHA256}" \
+                    "https://fermatmind.com/${surface}" \
                     >"$readback_dir/$surface"
                 ) &
                 readback_pids+=("$!")
@@ -411,7 +412,7 @@ jobs:
                 '. + {
                   cache_closeout_completed: true,
                   backend_cache_key_count: 5,
-                  frontend_revalidation_path_count: 5,
+                  frontend_revalidation_path_count: 6,
                   public_feed_readback_completed: true,
                   public_feed_count: 3
                 }' <<<"$publisher_result"
@@ -504,7 +505,7 @@ jobs:
                  and .body_mutated == false
                  and .cache_closeout_completed == true
                  and .backend_cache_key_count == 5
-                 and .frontend_revalidation_path_count == 5
+                 and .frontend_revalidation_path_count == 6
                  and .public_feed_readback_completed == true
                  and .public_feed_count == 3
                  and (.readback | length) == 3

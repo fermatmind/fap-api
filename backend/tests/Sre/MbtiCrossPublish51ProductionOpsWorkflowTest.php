@@ -146,10 +146,12 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             '"/zh/personality/enfp-vs-entp"',
             '"/zh/personality/estj-vs-entj"',
             '"/zh/personality/isfp-vs-infp"',
+            '"/sitemap.xml"',
             '"/llms.txt"',
             '"/llms-full.txt"',
             'X-FM-Content-Release-Token',
-            'https://fermatmind.com/${surface}?mbti_cross_publish51=${EXPECTED_STATE_SHA256}',
+            'https://fermatmind.com/${surface}',
+            'frontend_revalidation_path_count: 6',
             'cache_closeout_ready',
             'cache_closeout_completed',
             'public_feed_readback_completed',
@@ -166,6 +168,11 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('path: artifacts/**', $workflow);
         $this->assertStringNotContainsString('tee artifacts', $workflow);
         $this->assertStringNotContainsString('echo "$result"', $workflow);
+        $this->assertStringNotContainsString(
+            '?mbti_cross_publish51=',
+            $workflow,
+            'Public feed readback must use the unmodified canonical cache key.',
+        );
     }
 
     private function workflow(): string
