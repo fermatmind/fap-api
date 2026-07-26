@@ -128,7 +128,7 @@ final class CareerDetailProductionCacheRepairWorkflowTest extends TestCase
             'with offline build budget ${OFFLINE_BUILD_BUDGET_MS}ms, retry limit ${BOOTSTRAP_RETRY_LIMIT} and batch size ${BOOTSTRAP_BATCH_SIZE}',
             $source,
         );
-        $this->assertStringContainsString('BOOTSTRAP_BATCH_SIZE: "50"', $source);
+        $this->assertStringContainsString('BOOTSTRAP_BATCH_SIZE: "10"', $source);
         $this->assertStringContainsString('OFFLINE_BUILD_BUDGET_MS: "5000"', $source);
         $this->assertStringContainsString('BOOTSTRAP_RETRY_LIMIT: "1"', $source);
         $this->assertStringContainsString('while [ "$offset" -lt "$MINIMUM_TARGETS" ]; do', $source);

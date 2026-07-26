@@ -28,7 +28,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
         );
 
         $this->assertSame('career.candidate_exact_cache_bootstrap.v2', $receipt['contract_version']);
-        $this->assertSame(50, $receipt['batch_size']);
+        $this->assertSame(10, $receipt['batch_size']);
         $this->assertSame(5000, $receipt['offline_build_budget_ms']);
         $this->assertSame(1, $receipt['retry_limit']);
         $this->assertSame(0, $receipt['cache_write_count']);
@@ -44,6 +44,48 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
         $this->assertSame(hash('sha256', 'AM'), $receipt['coverage_state_sha256']);
         $this->assertNull($receipt['authorized_coverage_fingerprint_sha256']);
         $this->assertArrayNotHasKey('rows', $receipt);
+    }
+
+    #[Test]
+    public function high_density_batch_precomputes_at_most_five_bilingual_slugs(): void
+    {
+        $missingRows = [];
+        $readyRows = [];
+        for ($index = 0; $index < 5; $index++) {
+            $slug = 'high-density-'.$index;
+            foreach (['en', 'zh-CN'] as $locale) {
+                $missingRows[] = $this->row($slug, $locale, true, 'missing_pointer');
+                $readyRows[] = $this->row($slug, $locale, false, 'ready_active');
+            }
+        }
+
+        $precomputedSlugs = [];
+        $warmCalls = 0;
+        $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
+            str_repeat('b', 40),
+            $this->inspection($missingRows),
+            0,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
+            function (array $slugs) use (&$precomputedSlugs): array {
+                $precomputedSlugs = $slugs;
+
+                return $this->closures($slugs);
+            },
+            function () use (&$warmCalls): array {
+                $warmCalls++;
+
+                return $this->warmSuccess(100);
+            },
+            fn (): array => $this->inspection($readyRows),
+            count($missingRows),
+        );
+
+        $this->assertSame(10, CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE);
+        $this->assertCount(5, $precomputedSlugs);
+        $this->assertSame(10, $warmCalls);
+        $this->assertSame(10, $receipt['repairable_target_count']);
+        $this->assertSame(10, $receipt['owned_cache_write_count']);
+        $this->assertSame(0, $receipt['post_batch_coverage']['missing_pointer_count']);
     }
 
     #[Test]
@@ -90,7 +132,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             str_repeat('b', 40),
             $inspection,
             0,
-            50,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             fn (array $slugs): array => $this->closures($slugs),
             function () use (&$calls): array {
                 $calls++;
@@ -127,7 +169,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             str_repeat('c', 40),
             $inspection,
             0,
-            50,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             fn (array $slugs): array => $this->closures($slugs),
             function () use (&$transientCalls): array {
                 $transientCalls++;
@@ -156,7 +198,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
                 str_repeat('d', 40),
                 $inspection,
                 0,
-                50,
+                CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
                 fn (array $slugs): array => $this->closures($slugs),
                 function () use (&$calls, $stage, $category): array {
                     $calls++;
@@ -345,7 +387,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             str_repeat('e', 40),
             $inspection,
             0,
-            50,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             fn (array $slugs): array => $this->closures($slugs),
             function () use (&$calls): array {
                 $calls++;
@@ -382,7 +424,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             str_repeat('f', 40),
             $inspection,
             0,
-            50,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             fn (array $slugs): array => $this->closures($slugs),
             function (string $slug) use (&$warmed): array {
                 $warmed[] = $slug;
@@ -419,7 +461,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             str_repeat('1', 40),
             $this->inspection($beforeRows),
             0,
-            50,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             fn (array $slugs): array => $this->closures($slugs),
             fn (): array => $this->warmSuccess(10),
             fn (): array => $this->inspection($afterRows),
@@ -447,7 +489,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             str_repeat('2', 40),
             $inspection,
             0,
-            50,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             fn (array $slugs): array => $this->closures($slugs),
             fn (): array => $this->warmSuccess(10),
             static fn (): array => $inspection,
@@ -491,7 +533,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
                 str_repeat('3', 40),
                 $before,
                 0,
-                50,
+                CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
                 fn (array $slugs): array => $this->closures($slugs),
                 fn (): array => $this->warmSuccess(10),
                 static fn (): array => $after,
@@ -505,18 +547,18 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
     }
 
     #[Test]
-    public function offsets_are_exact_multiples_of_fifty_and_final_batch_has_forty_two_rows(): void
+    public function offsets_are_exact_multiples_of_ten_and_final_batch_has_two_rows(): void
     {
-        $this->assertSame(42, count(array_filter(
+        $this->assertSame(210, count(array_filter(
             range(0, 2091),
             static fn (int $offset): bool => CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(
                 $offset,
                 2092,
             ),
         )));
-        $this->assertTrue(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(2050, 2092));
+        $this->assertTrue(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(2090, 2092));
         $this->assertFalse(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(2092, 2092));
-        $this->assertFalse(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(51, 2092));
+        $this->assertFalse(CareerCandidateExactCacheBootstrapRunner::isValidBatchOffset(11, 2092));
 
         $rows = [];
         for ($index = 0; $index < 2092; $index++) {
@@ -526,15 +568,15 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
         $receipt = CareerCandidateExactCacheBootstrapRunner::batchReceipt(
             str_repeat('1', 40),
             $inspection,
-            2050,
-            50,
+            2090,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             static fn (): array => [],
             static fn (): array => throw new \RuntimeException('Ready targets must never warm.'),
             static fn (): array => $inspection,
             2092,
         );
 
-        $this->assertSame(42, $receipt['inspected_target_count']);
+        $this->assertSame(2, $receipt['inspected_target_count']);
         $this->assertSame(0, $receipt['cache_write_count']);
     }
 
@@ -602,7 +644,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             str_repeat('a', 40),
             $current,
             0,
-            50,
+            CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
             fn (array $slugs): array => $this->closures($slugs),
             fn (): array => $this->warmSuccess(10),
             fn (): array => $this->inspection([
@@ -682,7 +724,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
                 str_repeat('a', 40),
                 $authorized,
                 0,
-                50,
+                CareerCandidateExactCacheBootstrapRunner::BATCH_SIZE,
                 static fn (): array => [],
                 static fn (): array => [],
                 static fn (): array => $authorized,
@@ -882,7 +924,7 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
                 'FM_CAREER_CANDIDATE_SHA' => str_repeat('2', 40),
                 'FM_CAREER_EXPECTED_TARGETS' => '2092',
                 'FM_CAREER_BATCH_OFFSET' => '0',
-                'FM_CAREER_BATCH_SIZE' => '50',
+                'FM_CAREER_BATCH_SIZE' => '10',
                 'FM_CAREER_OFFLINE_BUILD_BUDGET_MS' => '5000',
                 'FM_CAREER_RETRY_LIMIT' => '1',
             ]);

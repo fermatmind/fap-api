@@ -94,7 +94,7 @@ jobs:
       cancel-in-progress: false
     env:
       MINIMUM_TARGETS: "2092"
-      BOOTSTRAP_BATCH_SIZE: "50"
+      BOOTSTRAP_BATCH_SIZE: "10"
       OFFLINE_BUILD_BUDGET_MS: "5000"
       BOOTSTRAP_RETRY_LIMIT: "1"
       RUNNER_PATH: "backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php"

@@ -251,17 +251,19 @@ fail-closed database guard, validates the exact 2,092-row coverage boundary,
 and emits a v2 authorization artifact bound to the workflow run id/attempt,
 control-plane SHA, runner SHA256, release identity, coverage fingerprint,
 counts, a SHA-bound 2,092-character redacted classification state, 5,000ms
-offline budget, one retry, 50-row batch size, and zero-write evidence.
+offline budget, one retry, 10-row batch size, and zero-write evidence.
 `bootstrap_and_verify` must download that exact successful immutable artifact,
 reject v1 packets, and prove there was no intervening bootstrap run. Before any
 cache write, the streamed runner combines the authorized classification state
 with the current ordered target identities and must reconstruct the exact
 operator-authorized coverage fingerprint.
 
-Each 50-row batch runs as the application runtime user with a 720-second
-limit. The candidate precomputes conversion closure with one events read, one
-shortlist aggregation, and one feedback aggregation per batch, then calls its
-own offline synchronous detail warmer only for rows still marked repairable.
+Each 10-row batch runs as the application runtime user with a 720-second
+limit. Because every canonical slug has two locale rows, this bounds one
+high-density conversion-closure precompute to at most five slugs. The
+candidate precomputes conversion closure with one events read, one shortlist
+aggregation, and one feedback aggregation per batch, then calls its own
+offline synchronous detail warmer only for rows still marked repairable.
 The public HTTP warmer retains its separate 2,000ms budget. Only
 `build_budget_exceeded` and transient database reads receive one bounded retry
 after 500ms; permanent database, cache publish, payload, and unexpected errors
@@ -325,7 +327,7 @@ secrets; there is no Actions-variable fallback.
 The exact write authorization format is:
 
 ```text
-I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run <PREFLIGHT_RUN_ID> coverage fingerprint <COVERAGE_SHA256> control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets with offline build budget 5000ms, retry limit 1 and batch size 50; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
+I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run <PREFLIGHT_RUN_ID> coverage fingerprint <COVERAGE_SHA256> control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets with offline build budget 5000ms, retry limit 1 and batch size 10; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
 ```
 
 ## fap-web handling in V1
