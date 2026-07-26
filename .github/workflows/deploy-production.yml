@@ -320,7 +320,7 @@ jobs:
                       echo "code-only scope refused an unreviewed immutable sitemap control hash." >&2
                     }
                     ;;
-                  .github/workflows/backend-production-verify-only.yml|.github/workflows/backend-production-ops-queue-control.yml|deploy/supervisor/fap-queue-ops.conf.template|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)
+                  .github/workflows/backend-production-release-discovery.yml|.github/workflows/backend-production-verify-only.yml|.github/workflows/backend-production-ops-queue-control.yml|deploy/supervisor/fap-queue-ops.conf.template|AGENTS.md|backend/AGENTS.md|backend/docs/career/job-detail-atomic-exposure.md|backend/scripts/deploy/verify_scale_lookup.sh|docs/operations/generated/solo-owner-review-surface-registry.v1.json|docs/operations/solo-owner-review-protocol.md|docs/ops/release-train.md)
                     echo "code-only scope accepted audited release support path: $path"
                     ;;
                   backend/database/*|backend/content_assets/*|backend/content_packs/*|backend/content_baselines/*|content_assets/*|content_packages/*|content_baselines/*|docs/seo/*|backend/storage/*|backend/app/Services/Cms/*|backend/app/Filament/*|backend/app/Models/*|backend/resources/views/*)

@@ -257,6 +257,18 @@ failure stage/category, build timings, row-index hash, and pre/post coverage
 fingerprints. They never contain target identity, query text, exception text,
 cache keys, or SSH routing data.
 
+When an operator does not know the exact production release inputs,
+`Backend Production Release Discovery` is the controlled read-only authority.
+It runs only from exact latest `main` under the production deployment concurrency
+group, refuses an active deploy lock, resolves the managed `current` symlink, and
+reads at most 50 managed release `REVISION` files. On the runner it binds each
+inactive release to `origin/main` ancestry and an exact successful
+`Deploy Application` staging run. Its artifact contains only release names,
+commit SHAs, staging run IDs/attempts, eligibility booleans, and zero-write
+attestations. It never deploys, activates, warms caches, dispatches queues,
+migrates, mutates CMS/database authority, writes remote files, restarts
+processes, reads raw logs, or submits search URLs.
+
 A successful batch must read back every target written by that batch as
 covered. Because the derived Career cache is shared with the live read-through
 warmer, targets may independently move from `missing_pointer` to a covered
