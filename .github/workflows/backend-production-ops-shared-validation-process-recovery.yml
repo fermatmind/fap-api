@@ -1,0 +1,612 @@
+name: Backend Production Ops Shared Validation Process Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only preflight or exact authorized validation-process stop
+        required: true
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this recovery control
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production application SHA
+        required: true
+        type: string
+      evidence_run_id:
+        description: Exact successful v5 queue-control preflight run
+        required: true
+        type: string
+      evidence_run_attempt:
+        description: Exact successful v5 queue-control preflight attempt
+        required: true
+        type: string
+      failed_run_id:
+        description: Exact failed shared migration run that owns the process
+        required: true
+        type: string
+      failed_run_attempt:
+        description: Exact failed shared migration attempt
+        required: true
+        type: string
+      expected_failed_control_plane_sha:
+        description: Exact control-plane SHA used by the failed migration
+        required: true
+        type: string
+      expected_main_runtime_fingerprint_sha256:
+        description: Apply-only exact main Supervisor runtime fingerprint
+        required: false
+        type: string
+      expected_ops_worker_pid_sha256:
+        description: Apply-only exact primary ops worker PID hash
+        required: false
+        type: string
+      expected_validation_config_sha256:
+        description: Apply-only exact temporary validation config SHA256
+        required: false
+        type: string
+      expected_validation_pid_file_sha256:
+        description: Apply-only exact temporary validation pid-file SHA256
+        required: false
+        type: string
+      expected_validation_process_fingerprint_sha256:
+        description: Apply-only exact temporary supervisord fingerprint
+        required: false
+        type: string
+      expected_validation_descendant_count:
+        description: Apply-only exact temporary process descendant count
+        required: false
+        type: string
+      expected_validation_tree_sha256:
+        description: Apply-only exact temporary process-tree SHA256
+        required: false
+        type: string
+      expected_validation_duplicate_ops_count:
+        description: Apply-only exact duplicate ops worker count; must be 1
+        required: false
+        type: string
+      expected_system_ops_worker_count:
+        description: Apply-only exact total ops worker count; must be 2
+        required: false
+        type: string
+      preflight_run_id:
+        description: Apply-only immutable process recovery preflight run id
+        required: false
+        type: string
+      preflight_run_attempt:
+        description: Apply-only immutable process recovery preflight attempt
+        required: false
+        type: string
+      operator_approval_phrase:
+        description: Apply-only exact receipt-bound operator approval
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: backend-production-ops-shared-validation-process-recovery
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Resolve exact validation process recovery eligibility
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.validate.outputs.mode }}
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      active_revision: ${{ steps.validate.outputs.active_revision }}
+      evidence_run_id: ${{ steps.validate.outputs.evidence_run_id }}
+      evidence_run_attempt: ${{ steps.validate.outputs.evidence_run_attempt }}
+      failed_run_id: ${{ steps.validate.outputs.failed_run_id }}
+      failed_run_attempt: ${{ steps.validate.outputs.failed_run_attempt }}
+      source_path_sha256: ${{ steps.validate.outputs.source_path_sha256 }}
+      source_config_sha256: ${{ steps.validate.outputs.source_config_sha256 }}
+      target_path_sha256: ${{ steps.validate.outputs.target_path_sha256 }}
+      target_current_sha256: ${{ steps.validate.outputs.target_current_sha256 }}
+      foreign_runtime_fingerprint_sha256: ${{ steps.validate.outputs.foreign_runtime_fingerprint_sha256 }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate exact controls and immutable evidence
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EVIDENCE_RUN_ID: ${{ inputs.evidence_run_id }}
+          EVIDENCE_RUN_ATTEMPT: ${{ inputs.evidence_run_attempt }}
+          FAILED_RUN_ID: ${{ inputs.failed_run_id }}
+          FAILED_RUN_ATTEMPT: ${{ inputs.failed_run_attempt }}
+          EXPECTED_FAILED_CONTROL_PLANE_SHA: ${{ inputs.expected_failed_control_plane_sha }}
+          EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256: ${{ inputs.expected_main_runtime_fingerprint_sha256 }}
+          EXPECTED_OPS_WORKER_PID_SHA256: ${{ inputs.expected_ops_worker_pid_sha256 }}
+          EXPECTED_VALIDATION_CONFIG_SHA256: ${{ inputs.expected_validation_config_sha256 }}
+          EXPECTED_VALIDATION_PID_FILE_SHA256: ${{ inputs.expected_validation_pid_file_sha256 }}
+          EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256: ${{ inputs.expected_validation_process_fingerprint_sha256 }}
+          EXPECTED_VALIDATION_DESCENDANT_COUNT: ${{ inputs.expected_validation_descendant_count }}
+          EXPECTED_VALIDATION_TREE_SHA256: ${{ inputs.expected_validation_tree_sha256 }}
+          EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT: ${{ inputs.expected_validation_duplicate_ops_count }}
+          EXPECTED_SYSTEM_OPS_WORKER_COUNT: ${{ inputs.expected_system_ops_worker_count }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          control_script="scripts/deploy/control_ops_shared_validation_process.sh"
+          process_group_runner="scripts/deploy/run_remote_control_process_group.py"
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_FAILED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EVIDENCE_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EVIDENCE_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          bash -n "$control_script"
+          python3 -m py_compile "$process_group_runner"
+
+          failed_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_RUN_ID}")"
+          jq -e \
+            --arg sha "$EXPECTED_FAILED_CONTROL_PLANE_SHA" \
+            --argjson attempt "$FAILED_RUN_ATTEMPT" \
+            '.name == "Backend Production Ops Shared Config Migration"
+             and .path == ".github/workflows/backend-production-ops-shared-config-migration.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and (.conclusion == "cancelled" or .conclusion == "failure")
+             and .head_branch == "main"
+             and .head_sha == $sha
+             and .run_attempt == $attempt' <<<"$failed_run_json" >/dev/null
+
+          evidence_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${EVIDENCE_RUN_ID}")"
+          jq -e \
+            --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+            --argjson attempt "$EVIDENCE_RUN_ATTEMPT" \
+            '.name == "Backend Production Ops Queue Control"
+             and .path == ".github/workflows/backend-production-ops-queue-control.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == $sha
+             and .run_attempt == $attempt' <<<"$evidence_run_json" >/dev/null
+          evidence_dir="$(mktemp -d)"
+          gh run download "$EVIDENCE_RUN_ID" \
+            --name "backend-production-ops-queue-preflight-${EVIDENCE_RUN_ID}-${EVIDENCE_RUN_ATTEMPT}" \
+            --dir "$evidence_dir"
+          evidence_receipt="$evidence_dir/backend-production-ops-queue-control.json"
+          test -f "$evidence_receipt"
+          jq -e \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            '.contract_version == "backend.production_ops_queue_control.v5"
+             and .mode == "preflight"
+             and .status == "PASS_PREFLIGHT"
+             and .control_plane_sha == $control
+             and .active_revision == $active
+             and .config_layout == "SHARED"
+             and .config_exact_program_section_count == 1
+             and .config_total_section_count == 3
+             and .config_foreign_program_section_count == 2
+             and .managed_target_current_sha256 == ("0" * 64)
+             and .ops_pending_total == 0
+             and .live_process_verified == true
+             and .production_write_execution == false
+             and .config_write_count == 0
+             and .application_deploy_count == 0
+             and .symlink_write_count == 0
+             and .cms_or_database_authority_write_count == 0
+             and .publication_or_discoverability_write_count == 0' \
+            "$evidence_receipt" >/dev/null
+
+          source_path_sha256="$(jq -r '.config_path_sha256' "$evidence_receipt")"
+          source_config_sha256="$(jq -r '.current_config_sha256' "$evidence_receipt")"
+          target_path_sha256="$(jq -r '.managed_target_path_sha256' "$evidence_receipt")"
+          target_current_sha256="$(jq -r '.managed_target_current_sha256' "$evidence_receipt")"
+          foreign_runtime_fingerprint_sha256="$(jq -r '.foreign_runtime_fingerprint_sha256' "$evidence_receipt")"
+          for hash_value in \
+            "$source_path_sha256" "$source_config_sha256" "$target_path_sha256" \
+            "$target_current_sha256" "$foreign_runtime_fingerprint_sha256"; do
+            [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
+          done
+
+          if [ "$MODE" = preflight ]; then
+            test -z "$EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256"
+            test -z "$EXPECTED_OPS_WORKER_PID_SHA256"
+            test -z "$EXPECTED_VALIDATION_CONFIG_SHA256"
+            test -z "$EXPECTED_VALIDATION_PID_FILE_SHA256"
+            test -z "$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256"
+            test -z "$EXPECTED_VALIDATION_DESCENDANT_COUNT"
+            test -z "$EXPECTED_VALIDATION_TREE_SHA256"
+            test -z "$EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT"
+            test -z "$EXPECTED_SYSTEM_OPS_WORKER_COUNT"
+            test -z "$PREFLIGHT_RUN_ID"
+            test -z "$PREFLIGHT_RUN_ATTEMPT"
+            test -z "$OPERATOR_APPROVAL_PHRASE"
+          else
+            test "$MODE" = apply
+            for hash_value in \
+              "$EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256" \
+              "$EXPECTED_OPS_WORKER_PID_SHA256" \
+              "$EXPECTED_VALIDATION_CONFIG_SHA256" \
+              "$EXPECTED_VALIDATION_PID_FILE_SHA256" \
+              "$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256" \
+              "$EXPECTED_VALIDATION_TREE_SHA256"; do
+              [[ "$hash_value" =~ ^[0-9a-f]{64}$ ]]
+            done
+            [[ "$EXPECTED_VALIDATION_DESCENDANT_COUNT" =~ ^([1-9]|10)$ ]]
+            test "$EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT" = 1
+            test "$EXPECTED_SYSTEM_OPS_WORKER_COUNT" = 2
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+            expected_phrase="I explicitly approve production fap-api stop of the stale shared-migration validation process from failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT} using process recovery preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} and v5 evidence run ${EVIDENCE_RUN_ID} attempt ${EVIDENCE_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} source-path SHA256 ${source_path_sha256} source-config SHA256 ${source_config_sha256} target-path SHA256 ${target_path_sha256} target-current SHA256 ${target_current_sha256} foreign-runtime SHA256 ${foreign_runtime_fingerprint_sha256} main-runtime SHA256 ${EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256} ops-worker-pid SHA256 ${EXPECTED_OPS_WORKER_PID_SHA256} validation-config SHA256 ${EXPECTED_VALIDATION_CONFIG_SHA256} validation-pid-file SHA256 ${EXPECTED_VALIDATION_PID_FILE_SHA256} validation-process SHA256 ${EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256} validation-tree SHA256 ${EXPECTED_VALIDATION_TREE_SHA256} validation-descendant-count ${EXPECTED_VALIDATION_DESCENDANT_COUNT} validation-duplicate-ops-count ${EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT} system-ops-worker-count ${EXPECTED_SYSTEM_OPS_WORKER_COUNT}; send TERM only to the exact attested temporary supervisord, require its entire attested tree to exit, preserve the main Supervisor programs/PIDs and formal configs, leave all residue files for separate recovery, and stop without automatic KILL or rollback; no deploy/symlink/application-migration/CMS/database-authority/publication/sitemap/llms/search/PR23."
+            test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+            preflight_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+            jq -e \
+              --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+              --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+              '.name == "Backend Production Ops Shared Validation Process Recovery"
+               and .path == ".github/workflows/backend-production-ops-shared-validation-process-recovery.yml"
+               and .event == "workflow_dispatch"
+               and .status == "completed"
+               and .conclusion == "success"
+               and .head_branch == "main"
+               and .head_sha == $sha
+               and .run_attempt == $attempt' <<<"$preflight_run_json" >/dev/null
+            preflight_dir="$(mktemp -d)"
+            gh run download "$PREFLIGHT_RUN_ID" \
+              --name "backend-production-ops-shared-validation-process-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+              --dir "$preflight_dir"
+            preflight_receipt="$preflight_dir/backend-production-ops-shared-validation-process-recovery.json"
+            test -f "$preflight_receipt"
+            jq -e \
+              --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg evidence_run_id "$EVIDENCE_RUN_ID" \
+              --arg evidence_run_attempt "$EVIDENCE_RUN_ATTEMPT" \
+              --arg failed_run_id "$FAILED_RUN_ID" \
+              --arg failed_run_attempt "$FAILED_RUN_ATTEMPT" \
+              --arg source_path "$source_path_sha256" \
+              --arg source_config "$source_config_sha256" \
+              --arg target_path "$target_path_sha256" \
+              --arg target_current "$target_current_sha256" \
+              --arg foreign_runtime "$foreign_runtime_fingerprint_sha256" \
+              --arg main_runtime "$EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256" \
+              --arg ops_worker_pid "$EXPECTED_OPS_WORKER_PID_SHA256" \
+              --arg validation_config "$EXPECTED_VALIDATION_CONFIG_SHA256" \
+              --arg validation_pid_file "$EXPECTED_VALIDATION_PID_FILE_SHA256" \
+              --arg validation_process "$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256" \
+              --arg validation_tree "$EXPECTED_VALIDATION_TREE_SHA256" \
+              --argjson validation_descendant_count "$EXPECTED_VALIDATION_DESCENDANT_COUNT" \
+              --argjson run_id "$PREFLIGHT_RUN_ID" \
+              --argjson run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
+              '.contract_version == "backend.production_ops_shared_validation_process_recovery.v1"
+               and .mode == "preflight"
+               and .status == "PASS_PREFLIGHT"
+               and .run_id == ($run_id|tostring)
+               and .run_attempt == ($run_attempt|tostring)
+               and .evidence_run_id == $evidence_run_id
+               and .evidence_run_attempt == $evidence_run_attempt
+               and .failed_run_id == $failed_run_id
+               and .failed_run_attempt == $failed_run_attempt
+               and .control_plane_sha == $control
+               and .active_revision == $active
+               and .source_path_sha256 == $source_path
+               and .source_config_sha256 == $source_config
+               and .target_path_sha256 == $target_path
+               and .target_current_sha256 == $target_current
+               and .foreign_runtime_fingerprint_sha256 == $foreign_runtime
+               and .main_runtime_fingerprint_sha256 == $main_runtime
+               and .ops_worker_pid_sha256 == $ops_worker_pid
+               and .validation_config_sha256 == $validation_config
+               and .validation_pid_file_sha256 == $validation_pid_file
+               and .validation_process_state == "present"
+               and .validation_process_fingerprint_sha256 == $validation_process
+               and .validation_tree_sha256 == $validation_tree
+               and .validation_descendant_count == $validation_descendant_count
+               and .validation_duplicate_ops_count == 1
+               and .system_ops_worker_count == 2
+               and .ops_pending_total == 0
+               and .production_write_execution == false
+               and .validation_process_stop_count == 0' "$preflight_receipt" >/dev/null
+          fi
+
+          {
+            echo "mode=$MODE"
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "active_revision=$EXPECTED_ACTIVE_REVISION"
+            echo "evidence_run_id=$EVIDENCE_RUN_ID"
+            echo "evidence_run_attempt=$EVIDENCE_RUN_ATTEMPT"
+            echo "failed_run_id=$FAILED_RUN_ID"
+            echo "failed_run_attempt=$FAILED_RUN_ATTEMPT"
+            echo "source_path_sha256=$source_path_sha256"
+            echo "source_config_sha256=$source_config_sha256"
+            echo "target_path_sha256=$target_path_sha256"
+            echo "target_current_sha256=$target_current_sha256"
+            echo "foreign_runtime_fingerprint_sha256=$foreign_runtime_fingerprint_sha256"
+          } >> "$GITHUB_OUTPUT"
+
+  control:
+    name: Preflight or stop exact temporary validation process
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run exact validation process recovery control
+        id: control
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          FAILED_RUN_ID: ${{ needs.eligibility.outputs.failed_run_id }}
+          EVIDENCE_SOURCE_PATH_SHA256: ${{ needs.eligibility.outputs.source_path_sha256 }}
+          EVIDENCE_SOURCE_CONFIG_SHA256: ${{ needs.eligibility.outputs.source_config_sha256 }}
+          EVIDENCE_TARGET_PATH_SHA256: ${{ needs.eligibility.outputs.target_path_sha256 }}
+          EVIDENCE_TARGET_CURRENT_SHA256: ${{ needs.eligibility.outputs.target_current_sha256 }}
+          EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ needs.eligibility.outputs.foreign_runtime_fingerprint_sha256 }}
+          EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256: ${{ inputs.expected_main_runtime_fingerprint_sha256 }}
+          EXPECTED_OPS_WORKER_PID_SHA256: ${{ inputs.expected_ops_worker_pid_sha256 }}
+          EXPECTED_VALIDATION_CONFIG_SHA256: ${{ inputs.expected_validation_config_sha256 }}
+          EXPECTED_VALIDATION_PID_FILE_SHA256: ${{ inputs.expected_validation_pid_file_sha256 }}
+          EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256: ${{ inputs.expected_validation_process_fingerprint_sha256 }}
+          EXPECTED_VALIDATION_DESCENDANT_COUNT: ${{ inputs.expected_validation_descendant_count }}
+          EXPECTED_VALIDATION_TREE_SHA256: ${{ inputs.expected_validation_tree_sha256 }}
+          EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT: ${{ inputs.expected_validation_duplicate_ops_count }}
+          EXPECTED_SYSTEM_OPS_WORKER_COUNT: ${{ inputs.expected_system_ops_worker_count }}
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          control_b64="$(base64 -w 0 scripts/deploy/control_ops_shared_validation_process.sh)"
+          process_group_runner_b64="$(base64 -w 0 scripts/deploy/run_remote_control_process_group.py)"
+          process_group_forward_env_keys="MODE,DEPLOY_PATH,EXPECTED_ACTIVE_REVISION,FAILED_RUN_ID,EVIDENCE_SOURCE_PATH_SHA256,EVIDENCE_SOURCE_CONFIG_SHA256,EVIDENCE_TARGET_PATH_SHA256,EVIDENCE_TARGET_CURRENT_SHA256,EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256,EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256,EXPECTED_OPS_WORKER_PID_SHA256,EXPECTED_VALIDATION_CONFIG_SHA256,EXPECTED_VALIDATION_PID_FILE_SHA256,EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256,EXPECTED_VALIDATION_DESCENDANT_COUNT,EXPECTED_VALIDATION_TREE_SHA256,EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT,EXPECTED_SYSTEM_OPS_WORKER_COUNT"
+
+          set +e
+          result="$(timeout --signal=TERM --kill-after=10s 180s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' FAILED_RUN_ID='$FAILED_RUN_ID' EVIDENCE_SOURCE_PATH_SHA256='$EVIDENCE_SOURCE_PATH_SHA256' EVIDENCE_SOURCE_CONFIG_SHA256='$EVIDENCE_SOURCE_CONFIG_SHA256' EVIDENCE_TARGET_PATH_SHA256='$EVIDENCE_TARGET_PATH_SHA256' EVIDENCE_TARGET_CURRENT_SHA256='$EVIDENCE_TARGET_CURRENT_SHA256' EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256='$EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256' EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256='$EXPECTED_MAIN_RUNTIME_FINGERPRINT_SHA256' EXPECTED_OPS_WORKER_PID_SHA256='$EXPECTED_OPS_WORKER_PID_SHA256' EXPECTED_VALIDATION_CONFIG_SHA256='$EXPECTED_VALIDATION_CONFIG_SHA256' EXPECTED_VALIDATION_PID_FILE_SHA256='$EXPECTED_VALIDATION_PID_FILE_SHA256' EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256='$EXPECTED_VALIDATION_PROCESS_FINGERPRINT_SHA256' EXPECTED_VALIDATION_DESCENDANT_COUNT='$EXPECTED_VALIDATION_DESCENDANT_COUNT' EXPECTED_VALIDATION_TREE_SHA256='$EXPECTED_VALIDATION_TREE_SHA256' EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT='$EXPECTED_VALIDATION_DUPLICATE_OPS_COUNT' EXPECTED_SYSTEM_OPS_WORKER_COUNT='$EXPECTED_SYSTEM_OPS_WORKER_COUNT' REMOTE_CONTROL_B64='$control_b64' REMOTE_CONTROL_RUNNER_B64='$process_group_runner_b64' REMOTE_CONTROL_FORWARD_ENV_KEYS='$process_group_forward_env_keys' REMOTE_CONTROL_TIMEOUT_SECONDS=150 REMOTE_CONTROL_TERM_GRACE_SECONDS=10 REMOTE_CONTROL_RUN_USER='$DEPLOY_USER' bash -o pipefail -lc 'printf %s \$REMOTE_CONTROL_RUNNER_B64 | base64 -d | python3 - --build-privileged-launcher | base64 -d | sudo -n python3'" \
+            2>"$RUNNER_TEMP/ops-shared-validation-process-recovery.err")"
+          ssh_rc=$?
+          set -e
+          if [ "$ssh_rc" -ne 0 ]; then
+            failure_code="$(grep -Eo 'OPS_SHARED_VALIDATION_PROCESS_GATE_FAILED:[A-Z0-9_]+' \
+              "$RUNNER_TEMP/ops-shared-validation-process-recovery.err" | tail -n 1 || true)"
+            if [[ "$failure_code" =~ ^OPS_SHARED_VALIDATION_PROCESS_GATE_FAILED:[A-Z0-9_]+$ ]]; then
+              echo "$failure_code" >&2
+            else
+              echo "OPS_SHARED_VALIDATION_PROCESS_REMOTE_FAILED" >&2
+            fi
+            exit "$ssh_rc"
+          fi
+
+          known_keys='^(active_revision|failed_run_id|source_path_sha256|source_config_sha256|target_path_sha256|target_current_sha256|foreign_runtime_fingerprint_sha256|main_runtime_fingerprint_sha256|ops_worker_pid_sha256|validation_config_sha256|validation_pid_file_sha256|validation_process_state|validation_process_fingerprint_sha256|validation_descendant_count|validation_tree_sha256|validation_duplicate_ops_count|system_ops_worker_count|ops_pending_total|validation_process_stop_count|status|production_write_execution|residue_delete_count|source_config_write_count|target_config_write_count|backup_write_count|worker_restart_count|application_deploy_count|symlink_write_count|application_migration_count|cms_or_database_authority_write_count|publication_or_discoverability_write_count)='
+          test -z "$(grep -Ev "$known_keys" <<<"$result" || true)"
+          value() {
+            local key="$1"
+            awk -F= -v key="$key" '$1 == key {print substr($0, length(key) + 2)}' <<<"$result"
+          }
+          for key in \
+            active_revision failed_run_id source_path_sha256 source_config_sha256 \
+            target_path_sha256 target_current_sha256 foreign_runtime_fingerprint_sha256 \
+            main_runtime_fingerprint_sha256 ops_worker_pid_sha256 \
+            validation_config_sha256 validation_pid_file_sha256 validation_process_state \
+            validation_process_fingerprint_sha256 validation_descendant_count \
+            validation_tree_sha256 validation_duplicate_ops_count system_ops_worker_count \
+            ops_pending_total validation_process_stop_count status production_write_execution \
+            residue_delete_count source_config_write_count target_config_write_count \
+            backup_write_count worker_restart_count application_deploy_count \
+            symlink_write_count application_migration_count \
+            cms_or_database_authority_write_count publication_or_discoverability_write_count; do
+            field_value="$(value "$key")"
+            test -n "$field_value"
+            echo "$key=$field_value" >> "$GITHUB_OUTPUT"
+          done
+          test "$(value active_revision)" = "$EXPECTED_ACTIVE_REVISION"
+          test "$(value failed_run_id)" = "$FAILED_RUN_ID"
+          test "$(value source_path_sha256)" = "$EVIDENCE_SOURCE_PATH_SHA256"
+          test "$(value source_config_sha256)" = "$EVIDENCE_SOURCE_CONFIG_SHA256"
+          test "$(value target_path_sha256)" = "$EVIDENCE_TARGET_PATH_SHA256"
+          test "$(value target_current_sha256)" = "$EVIDENCE_TARGET_CURRENT_SHA256"
+          test "$(value foreign_runtime_fingerprint_sha256)" = "$EVIDENCE_FOREIGN_RUNTIME_FINGERPRINT_SHA256"
+          test "$(value validation_process_state)" = present
+          test "$(value validation_duplicate_ops_count)" = 1
+          test "$(value system_ops_worker_count)" = 2
+          test "$(value ops_pending_total)" = 0
+          for zero_key in \
+            residue_delete_count source_config_write_count target_config_write_count \
+            backup_write_count worker_restart_count application_deploy_count \
+            symlink_write_count application_migration_count \
+            cms_or_database_authority_write_count publication_or_discoverability_write_count; do
+            test "$(value "$zero_key")" = 0
+          done
+          if [ "$MODE" = preflight ]; then
+            test "$(value status)" = PASS_PREFLIGHT
+            test "$(value production_write_execution)" = false
+            test "$(value validation_process_stop_count)" = 0
+          else
+            test "$(value status)" = PASS_APPLY
+            test "$(value production_write_execution)" = true
+            test "$(value validation_process_stop_count)" = 1
+          fi
+
+      - name: Build sanitized immutable process recovery receipt
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+          EVIDENCE_RUN_ID: ${{ needs.eligibility.outputs.evidence_run_id }}
+          EVIDENCE_RUN_ATTEMPT: ${{ needs.eligibility.outputs.evidence_run_attempt }}
+          FAILED_RUN_ID: ${{ needs.eligibility.outputs.failed_run_id }}
+          FAILED_RUN_ATTEMPT: ${{ needs.eligibility.outputs.failed_run_attempt }}
+          ACTIVE_REVISION: ${{ steps.control.outputs.active_revision }}
+          STATUS: ${{ steps.control.outputs.status }}
+          SOURCE_PATH_SHA256: ${{ steps.control.outputs.source_path_sha256 }}
+          SOURCE_CONFIG_SHA256: ${{ steps.control.outputs.source_config_sha256 }}
+          TARGET_PATH_SHA256: ${{ steps.control.outputs.target_path_sha256 }}
+          TARGET_CURRENT_SHA256: ${{ steps.control.outputs.target_current_sha256 }}
+          FOREIGN_RUNTIME_FINGERPRINT_SHA256: ${{ steps.control.outputs.foreign_runtime_fingerprint_sha256 }}
+          MAIN_RUNTIME_FINGERPRINT_SHA256: ${{ steps.control.outputs.main_runtime_fingerprint_sha256 }}
+          OPS_WORKER_PID_SHA256: ${{ steps.control.outputs.ops_worker_pid_sha256 }}
+          VALIDATION_CONFIG_SHA256: ${{ steps.control.outputs.validation_config_sha256 }}
+          VALIDATION_PID_FILE_SHA256: ${{ steps.control.outputs.validation_pid_file_sha256 }}
+          VALIDATION_PROCESS_STATE: ${{ steps.control.outputs.validation_process_state }}
+          VALIDATION_PROCESS_FINGERPRINT_SHA256: ${{ steps.control.outputs.validation_process_fingerprint_sha256 }}
+          VALIDATION_DESCENDANT_COUNT: ${{ steps.control.outputs.validation_descendant_count }}
+          VALIDATION_TREE_SHA256: ${{ steps.control.outputs.validation_tree_sha256 }}
+          VALIDATION_DUPLICATE_OPS_COUNT: ${{ steps.control.outputs.validation_duplicate_ops_count }}
+          SYSTEM_OPS_WORKER_COUNT: ${{ steps.control.outputs.system_ops_worker_count }}
+          OPS_PENDING_TOTAL: ${{ steps.control.outputs.ops_pending_total }}
+          VALIDATION_PROCESS_STOP_COUNT: ${{ steps.control.outputs.validation_process_stop_count }}
+          PRODUCTION_WRITE_EXECUTION: ${{ steps.control.outputs.production_write_execution }}
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-ops-shared-validation-process-recovery.json"
+          jq -n \
+            --arg contract_version "backend.production_ops_shared_validation_process_recovery.v1" \
+            --arg mode "$MODE" \
+            --arg status "$STATUS" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg evidence_run_id "$EVIDENCE_RUN_ID" \
+            --arg evidence_run_attempt "$EVIDENCE_RUN_ATTEMPT" \
+            --arg failed_run_id "$FAILED_RUN_ID" \
+            --arg failed_run_attempt "$FAILED_RUN_ATTEMPT" \
+            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
+            --arg active_revision "$ACTIVE_REVISION" \
+            --arg source_path_sha256 "$SOURCE_PATH_SHA256" \
+            --arg source_config_sha256 "$SOURCE_CONFIG_SHA256" \
+            --arg target_path_sha256 "$TARGET_PATH_SHA256" \
+            --arg target_current_sha256 "$TARGET_CURRENT_SHA256" \
+            --arg foreign_runtime_fingerprint_sha256 "$FOREIGN_RUNTIME_FINGERPRINT_SHA256" \
+            --arg main_runtime_fingerprint_sha256 "$MAIN_RUNTIME_FINGERPRINT_SHA256" \
+            --arg ops_worker_pid_sha256 "$OPS_WORKER_PID_SHA256" \
+            --arg validation_config_sha256 "$VALIDATION_CONFIG_SHA256" \
+            --arg validation_pid_file_sha256 "$VALIDATION_PID_FILE_SHA256" \
+            --arg validation_process_state "$VALIDATION_PROCESS_STATE" \
+            --arg validation_process_fingerprint_sha256 "$VALIDATION_PROCESS_FINGERPRINT_SHA256" \
+            --argjson validation_descendant_count "$VALIDATION_DESCENDANT_COUNT" \
+            --arg validation_tree_sha256 "$VALIDATION_TREE_SHA256" \
+            --argjson validation_duplicate_ops_count "$VALIDATION_DUPLICATE_OPS_COUNT" \
+            --argjson system_ops_worker_count "$SYSTEM_OPS_WORKER_COUNT" \
+            --argjson ops_pending_total "$OPS_PENDING_TOTAL" \
+            --argjson validation_process_stop_count "$VALIDATION_PROCESS_STOP_COUNT" \
+            --argjson production_write_execution "$PRODUCTION_WRITE_EXECUTION" \
+            '{
+              contract_version: $contract_version,
+              mode: $mode,
+              status: $status,
+              run_id: $run_id,
+              run_attempt: $run_attempt,
+              evidence_run_id: $evidence_run_id,
+              evidence_run_attempt: $evidence_run_attempt,
+              failed_run_id: $failed_run_id,
+              failed_run_attempt: $failed_run_attempt,
+              control_plane_sha: $control_plane_sha,
+              active_revision: $active_revision,
+              source_path_sha256: $source_path_sha256,
+              source_config_sha256: $source_config_sha256,
+              target_path_sha256: $target_path_sha256,
+              target_current_sha256: $target_current_sha256,
+              foreign_runtime_fingerprint_sha256: $foreign_runtime_fingerprint_sha256,
+              main_runtime_fingerprint_sha256: $main_runtime_fingerprint_sha256,
+              ops_worker_pid_sha256: $ops_worker_pid_sha256,
+              validation_config_sha256: $validation_config_sha256,
+              validation_pid_file_sha256: $validation_pid_file_sha256,
+              validation_process_state: $validation_process_state,
+              validation_process_fingerprint_sha256: $validation_process_fingerprint_sha256,
+              validation_descendant_count: $validation_descendant_count,
+              validation_tree_sha256: $validation_tree_sha256,
+              validation_duplicate_ops_count: $validation_duplicate_ops_count,
+              system_ops_worker_count: $system_ops_worker_count,
+              ops_pending_total: $ops_pending_total,
+              validation_process_stop_count: $validation_process_stop_count,
+              production_write_execution: $production_write_execution,
+              residue_delete_count: 0,
+              source_config_write_count: 0,
+              target_config_write_count: 0,
+              backup_write_count: 0,
+              worker_restart_count: 0,
+              application_deploy_count: 0,
+              symlink_write_count: 0,
+              application_migration_count: 0,
+              cms_or_database_authority_write_count: 0,
+              publication_or_discoverability_write_count: 0,
+              automatic_kill_count: 0,
+              automatic_rollback_count: 0
+            }' > "$receipt"
+          jq -e \
+            '.validation_process_state == "present"
+             and .validation_duplicate_ops_count == 1
+             and .system_ops_worker_count == 2
+             and .ops_pending_total == 0
+             and .residue_delete_count == 0
+             and .source_config_write_count == 0
+             and .target_config_write_count == 0
+             and .backup_write_count == 0
+             and .worker_restart_count == 0
+             and .application_deploy_count == 0
+             and .symlink_write_count == 0
+             and .application_migration_count == 0
+             and .cms_or_database_authority_write_count == 0
+             and .publication_or_discoverability_write_count == 0
+             and .automatic_kill_count == 0
+             and .automatic_rollback_count == 0' "$receipt" >/dev/null
+
+      - name: Upload immutable validation process recovery receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-production-ops-shared-validation-process-${{ needs.eligibility.outputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/backend-production-ops-shared-validation-process-recovery.json
+          if-no-files-found: error
+          retention-days: 30
