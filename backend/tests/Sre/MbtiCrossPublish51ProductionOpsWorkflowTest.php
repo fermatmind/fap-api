@@ -77,6 +77,7 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             '.run_attempt == $attempt',
             'gh run download "$PREFLIGHT_RUN_ID"',
             'environment: production',
+            'group: deploy-${{ github.repository }}-production',
             'ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}',
             'SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}',
             'DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}',
@@ -94,6 +95,11 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
         }
 
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
+        $this->assertSame(
+            1,
+            substr_count($workflow, 'group: deploy-${{ github.repository }}-production'),
+            'The production operation must share the deployment mutex.',
+        );
         $this->assertSame(
             2,
             substr_count($workflow, 'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"'),

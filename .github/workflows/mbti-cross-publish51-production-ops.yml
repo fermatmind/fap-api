@@ -172,6 +172,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 10
+    concurrency:
+      group: deploy-${{ github.repository }}-production
+      cancel-in-progress: false
     steps:
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6

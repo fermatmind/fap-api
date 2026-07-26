@@ -27,7 +27,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 82 assertions; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed, including Big Five 1601 tests / 195611 assertions, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts were removed or restored to HEAD."
+        "evidence": "Workflow YAML and actionlint passed; focused SRE test passed 3 tests / 86 assertions after all three review repairs; scoped Pint, Composer strict validation/audit, manifest YAML, ledger JSON, and diff checks passed. The complete backend/scripts/ci_verify_mbti.sh passed, including Big Five 1601 tests / 195611 assertions, Personality authority 92 / 5878, MBTI end-to-end, migrations, security, OpenAPI, dependency, and downstream gates. Verification-generated Big Five artifacts were removed or restored to HEAD."
       },
       "github_required_checks": {
         "status": "pending",
@@ -71,9 +71,14 @@
         "at": "2026-07-26T05:11:00Z",
         "status": "github_review_repairing",
         "note": "Inspected two actionable automated review findings before any retry. The production job now revalidates latest origin/main after environment approval immediately before remote execution, and content preflight rejects already_released rather than advertising an apply state its held-state assertions cannot accept. Actionlint, workflow YAML, focused SRE tests 3/84, Pint, and diff checks passed."
+      },
+      {
+        "at": "2026-07-26T05:22:00Z",
+        "status": "github_review_repairing",
+        "note": "The repaired head a8831fbd9 passed all 9 GitHub checks, then exact-head review identified a production deployment race. The production-control job now shares deploy-${{ github.repository }}-production with the production deploy workflow, preserving the workflow-level self-serialization while preventing a deploy from crossing the publisher transaction. Workflow YAML, actionlint, focused SRE tests 3/86, Pint, and diff checks passed; fresh exact-head checks remain mandatory."
       }
     ],
-    "updated_at": "2026-07-26T05:11:00Z"
+    "updated_at": "2026-07-26T05:22:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
