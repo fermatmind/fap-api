@@ -1,0 +1,59 @@
+{
+  "schema": "fermatmind-seo-10k-article-recovery-query-summary.v1",
+  "task": "SEO-10K-ARTICLE-RECOVERY-BATCH-01",
+  "data_origin": "live_gsc_browser_export",
+  "source_engine": "google",
+  "privacy_model": "counts_only_no_query_text_or_unkeyed_digest",
+  "raw_query_persisted": false,
+  "unkeyed_query_digest_persisted": false,
+  "exclusion_policy": [
+    "site_operator",
+    "brand_or_mixed"
+  ],
+  "target_summaries": {
+    "https://fermatmind.com/en/articles/what-is-riasec-holland-code-career-interest-test": {
+      "evidence_state": "available",
+      "retained_query_count": 162,
+      "excluded": {
+        "site_operator": 1,
+        "brand_or_mixed": 0
+      }
+    },
+    "https://fermatmind.com/zh/articles/college-major-choice-holland-mbti-career-test": {
+      "evidence_state": "available",
+      "retained_query_count": 1,
+      "excluded": {
+        "site_operator": 1,
+        "brand_or_mixed": 0
+      }
+    },
+    "https://fermatmind.com/zh/articles/how-personality-shapes-attitude-toward-ai": {
+      "evidence_state": "available",
+      "retained_query_count": 1,
+      "excluded": {
+        "site_operator": 0,
+        "brand_or_mixed": 0
+      }
+    },
+    "https://fermatmind.com/en/articles/mbti-personality-test-science-vs-pseudoscience": {
+      "evidence_state": "privacy_threshold_suppressed",
+      "retained_query_count": 0,
+      "excluded": {
+        "site_operator": 0,
+        "brand_or_mixed": 0
+      }
+    },
+    "https://fermatmind.com/zh/articles/iq-test-tool-guide": {
+      "evidence_state": "available",
+      "retained_query_count": 3,
+      "excluded": {
+        "site_operator": 0,
+        "brand_or_mixed": 0
+      }
+    }
+  },
+  "cross_target_owner_conflict_check": {
+    "performed_before_sanitization": true,
+    "conflict_count": 0
+  }
+}

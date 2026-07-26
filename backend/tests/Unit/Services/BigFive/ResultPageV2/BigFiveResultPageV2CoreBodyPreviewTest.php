@@ -200,6 +200,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_seo_10k_article_recovery_batch_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/Seo10kArticleRecoveryBatchCommand.php',
+            'backend/app/Services/SeoOps/ArticleRecoveryBatchPlanner.php',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-evidence.v1.json',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-page-cohort-hashes.v1.json',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-query-summary.v1.json',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/seo-10k-article-recovery-batch-01.dry-run.json',
+        ];
+        $blocked = [
+            'backend/app/Services/SeoOps/FutureArticleRecoveryPublisher.php',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-query-hashes.v1.json',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-02/live-gsc-evidence.v1.json',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_new_solo_owner_review_foundation_files(): void
     {
         $allowed = [
@@ -7685,6 +7706,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeo10kArticleRecoveryBatchFile($file)) {
+                continue;
+            }
+
             if ($this->isTestMetricsDailyReadModelFile($file)) {
                 continue;
             }
@@ -11476,6 +11501,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php'
             || str_starts_with($file, 'backend/app/Services/Analytics/ProviderFreshness/');
+    }
+
+    private function isSeo10kArticleRecoveryBatchFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/Seo10kArticleRecoveryBatchCommand.php',
+            'backend/app/Services/SeoOps/ArticleRecoveryBatchPlanner.php',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-evidence.v1.json',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-page-cohort-hashes.v1.json',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-query-summary.v1.json',
+            'backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/seo-10k-article-recovery-batch-01.dry-run.json',
+        ], true);
     }
 
     private function isTestMetricsDailyReadModelFile(string $file): bool

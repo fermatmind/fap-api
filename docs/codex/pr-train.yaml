@@ -47007,3 +47007,54 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: SEO-10K-ARTICLE-RECOVERY-BATCH-01
+    repo: fap-api
+    base: main
+    branch: codex/seo-10k-article-recovery-batch-01
+    title: "SEO-10K-ARTICLE-RECOVERY-BATCH-01 recover five existing article owners"
+    status: in_progress
+    depends_on:
+      - SEO-10K-GSC-BOUNDED-BACKFILL-01
+      - SEO-QUERY-OWNER-URL-TRUTH-01
+      - SEO-SEARCH-TO-RESULT-FUNNEL-01
+    train_scope: seo_10k_article_recovery_batch
+    scope:
+      - Select exactly five existing backend-authoritative article URLs with verified current GSC performance deterioration, prioritizing click loss and then click-flat impression loss through a deterministic page-level ranking.
+      - Persist only sanitized live GSC page evidence and counts-only query summaries, with the owner-conflict check performed before sanitization, zero cross-target conflicts, and an explicit privacy-threshold hold.
+      - Bind the exact current content SHA, SEO SHA, target-set SHA, source references, claim boundaries, and per-target manual-review SHA.
+      - Produce a deterministic local dry-run package with no business write and lock any second batch until a future separately authorized publication completes D1, D7, D14, and D28 review.
+    allowed_paths:
+      - backend/content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/**
+      - backend/app/Console/Commands/Seo10kArticleRecoveryBatchCommand.php
+      - backend/app/Services/SeoOps/ArticleRecoveryBatchPlanner.php
+      - backend/tests/Feature/SeoOps/Seo10kArticleRecoveryBatchTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/article-recovery-batch.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create a new URL, store raw GSC queries or unkeyed query digests, infer privacy-suppressed query text, or assign one source query to multiple target owners.
+      - Write or publish CMS/article content, change database/publication/indexability/canonical/sitemap/llms state, or add a frontend editorial fallback.
+      - Enqueue Search Channel work, submit URLs or sitemaps, request indexing, add a scheduler or queue, deploy, or automatically start a second batch.
+      - Treat GSC as article authority or bypass the exact current authority hashes and per-target manual-review gate.
+    validation:
+      - cd backend && php artisan test tests/Feature/SeoOps/Seo10kArticleRecoveryBatchTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/Seo10kArticleRecoveryBatchCommand.php app/Services/SeoOps/ArticleRecoveryBatchPlanner.php tests/Feature/SeoOps/Seo10kArticleRecoveryBatchTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
