@@ -103,6 +103,7 @@ use App\Http\Middleware\PublicApiCacheHeaders;
 use App\Http\Middleware\RecordPublicContentRuntime;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\SetOpsRequestContext;
+use App\Models\PersonalityPublicContentAsset;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\StartSession;
@@ -674,8 +675,12 @@ Route::prefix('v0.5')->group(function () {
         Route::get('/career-recommendations/mbti', [CareerRecommendationController::class, 'index']);
         Route::get('/career-recommendations/mbti/{type}', [CareerRecommendationController::class, 'show']);
         Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);
-        Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);
-        Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);
+        Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode'])
+            ->whereIn('framework', PersonalityPublicContentAsset::FRAMEWORKS)
+            ->whereIn('entityType', PersonalityPublicContentAsset::ENTITY_TYPES);
+        Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show'])
+            ->whereIn('framework', PersonalityPublicContentAsset::FRAMEWORKS)
+            ->where('slug', '[A-Za-z0-9][A-Za-z0-9/-]{0,159}');
         Route::get('/personality', [PersonalityController::class, 'index']);
         Route::get('/personality/comparisons', [PersonalityController::class, 'comparisonIndex']);
         Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);
