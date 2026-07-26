@@ -13,8 +13,14 @@ use Throwable;
 
 final class CareerCandidateExactCacheBootstrapFailure extends RuntimeException
 {
-    public function __construct(public readonly string $safeCode)
-    {
+    public function __construct(
+        public readonly string $safeCode,
+        public readonly ?string $failureStage = null,
+        public readonly ?string $errorCategory = null,
+        public readonly int $attemptCount = 0,
+        public readonly int $retryCount = 0,
+        public readonly ?int $batchOffset = null,
+    ) {
         parent::__construct($safeCode);
     }
 }
@@ -70,6 +76,8 @@ final class CareerCandidateExactCacheBootstrapRunner
 
     /** @var list<string> */
     private const SAFE_FAILURE_STAGES = [
+        'initialize_candidate_runtime',
+        'pre_batch_coverage',
         'precompute_conversion_closure',
         'build_detail_payload',
         'publish_cache_payload',
@@ -85,17 +93,34 @@ final class CareerCandidateExactCacheBootstrapRunner
 
     public static function main(): int
     {
+        $environment = self::environment();
+        $batchOffset = self::safeBatchOffset($environment);
+
         try {
-            $receipt = self::execute(self::environment());
+            $receipt = self::execute($environment);
             self::emit($receipt);
 
             return (int) ($receipt['failure_count'] ?? 0) === 0 ? 0 : 1;
         } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
-            self::emit(self::failureReceipt($failure->safeCode));
+            self::emit(self::failureReceipt(
+                $failure->safeCode,
+                $failure->failureStage,
+                $failure->errorCategory,
+                $failure->attemptCount,
+                $failure->retryCount,
+                $failure->batchOffset ?? $batchOffset,
+            ));
 
             return 1;
         } catch (Throwable) {
-            self::emit(self::failureReceipt('UNEXPECTED_RUNNER_FAILURE'));
+            self::emit(self::failureReceipt(
+                'UNEXPECTED_RUNNER_FAILURE',
+                'initialize_candidate_runtime',
+                'unexpected',
+                1,
+                0,
+                $batchOffset,
+            ));
 
             return 1;
         }
@@ -180,7 +205,8 @@ final class CareerCandidateExactCacheBootstrapRunner
         $cache = $app->make($cacheClass);
         $conversion = $app->make($conversionClass);
         $inspect = static fn (): array => $coverage->inspect(['en', 'zh-CN'], 0);
-        $inspection = $inspect();
+        $inspectionRead = self::coverageInspectionWithRetry($inspect);
+        $inspection = $inspectionRead['inspection'];
         $coverageFingerprint = self::coverageFingerprint($inspection);
         $expectedCoverageFingerprint = trim(
             (string) ($environment['FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT'] ?? ''),
@@ -228,6 +254,8 @@ final class CareerCandidateExactCacheBootstrapRunner
                 $inspection,
                 $preflightConcurrentCoverageGain,
                 $authorizedCoverageState === '' ? null : $expectedCoverageFingerprint,
+                $inspectionRead['attempt_count'],
+                $inspectionRead['retry_count'],
             );
         }
 
@@ -275,6 +303,69 @@ final class CareerCandidateExactCacheBootstrapRunner
             null,
             $preflightConcurrentCoverageGain,
             $authorizedCoverageState === '' ? null : $expectedCoverageFingerprint,
+            $inspectionRead['attempt_count'],
+            $inspectionRead['retry_count'],
+        );
+    }
+
+    /**
+     * Retry only an explicitly classified transient database read. This
+     * envelope covers the candidate's initial full coverage inspection before
+     * a batch can own any cache write.
+     *
+     * @param  Closure(): array<string, mixed>  $inspect
+     * @return array{inspection: array<string, mixed>, attempt_count: int, retry_count: int}
+     */
+    public static function coverageInspectionWithRetry(
+        Closure $inspect,
+        ?Closure $retryDelay = null,
+    ): array {
+        $attemptCount = 0;
+        $retryCount = 0;
+        $delay = $retryDelay ?? static fn (): int => usleep(self::RETRY_DELAY_MS * 1000);
+
+        for ($attempt = 0; $attempt <= self::RETRY_LIMIT; $attempt++) {
+            $attemptCount++;
+
+            try {
+                $inspection = $inspect();
+                if (! is_array($inspection)) {
+                    throw new RuntimeException('Invalid coverage inspection.');
+                }
+
+                return [
+                    'inspection' => $inspection,
+                    'attempt_count' => $attemptCount,
+                    'retry_count' => $retryCount,
+                ];
+            } catch (Throwable $throwable) {
+                $category = self::safeThrowableCategory($throwable);
+                if (
+                    $attempt < self::RETRY_LIMIT
+                    && $category === 'database_transient_read'
+                ) {
+                    $retryCount++;
+                    $delay();
+
+                    continue;
+                }
+
+                throw new CareerCandidateExactCacheBootstrapFailure(
+                    'PRE_BATCH_COVERAGE_READ_FAILED',
+                    'pre_batch_coverage',
+                    $category,
+                    $attemptCount,
+                    $retryCount,
+                );
+            }
+        }
+
+        throw new CareerCandidateExactCacheBootstrapFailure(
+            'PRE_BATCH_COVERAGE_READ_FAILED',
+            'pre_batch_coverage',
+            'unexpected',
+            $attemptCount,
+            $retryCount,
         );
     }
 
@@ -287,6 +378,8 @@ final class CareerCandidateExactCacheBootstrapRunner
         array $inspection,
         int $concurrentCoverageGain = 0,
         ?string $authorizedCoverageFingerprint = null,
+        int $preBatchReadAttemptCount = 1,
+        int $preBatchReadRetryCount = 0,
     ): array {
         $coverageState = self::coverageState($inspection);
 
@@ -299,6 +392,8 @@ final class CareerCandidateExactCacheBootstrapRunner
             'batch_size' => self::BATCH_SIZE,
             'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
             'retry_limit' => self::RETRY_LIMIT,
+            'pre_batch_read_attempt_count' => $preBatchReadAttemptCount,
+            'pre_batch_read_retry_count' => $preBatchReadRetryCount,
             'inspected_target_count' => (int) ($inspection['report']['expected_target_count'] ?? 0),
             'repairable_target_count' => self::repairableCount($inspection),
             'cache_write_count' => 0,
@@ -334,6 +429,8 @@ final class CareerCandidateExactCacheBootstrapRunner
         ?Closure $retryDelay = null,
         int $preBatchConcurrentCoverageGain = 0,
         ?string $authorizedPreFingerprint = null,
+        int $preBatchReadAttemptCount = 1,
+        int $preBatchReadRetryCount = 0,
     ): array {
         if (! self::isValidBatchOffset($offset, $expectedTargets) || $batchSize !== self::BATCH_SIZE) {
             self::fail('INVALID_BATCH_BOUNDARY');
@@ -535,6 +632,8 @@ final class CareerCandidateExactCacheBootstrapRunner
             'batch_size' => $batchSize,
             'offline_build_budget_ms' => self::OFFLINE_BUILD_BUDGET_MS,
             'retry_limit' => self::RETRY_LIMIT,
+            'pre_batch_read_attempt_count' => $preBatchReadAttemptCount,
+            'pre_batch_read_retry_count' => $preBatchReadRetryCount,
             'inspected_target_count' => count($batch),
             'repairable_target_count' => count($repairableRows),
             'cache_write_count' => $writes,
@@ -1387,29 +1486,52 @@ final class CareerCandidateExactCacheBootstrapRunner
     }
 
     /** @return array<string, float|int|string|null> */
-    private static function failureReceipt(string $errorCode): array
-    {
+    public static function failureReceipt(
+        string $errorCode,
+        ?string $failureStage = null,
+        ?string $errorCategory = null,
+        int $attemptCount = 0,
+        int $retryCount = 0,
+        ?int $batchOffset = null,
+    ): array {
         return [
             'contract_version' => self::CONTRACT_VERSION,
             'status' => 'failed',
             'error_code' => $errorCode,
+            'batch_offset' => $batchOffset,
             'cache_write_count' => 0,
             'owned_cache_write_count' => 0,
             'concurrent_coverage_gain_count' => 0,
             'failure_count' => 1,
-            'failure_stage' => null,
-            'error_category' => null,
+            'failure_stage' => $failureStage === null ? null : self::safeFailureStage($failureStage),
+            'error_category' => $errorCategory === null ? null : self::safeErrorCategory($errorCategory),
             'build_ms' => 0.0,
             'batch_build_ms_total' => 0.0,
             'batch_build_ms_max' => 0.0,
-            'attempt_count' => 0,
-            'retry_count' => 0,
+            'attempt_count' => max(0, $attemptCount),
+            'retry_count' => max(0, min($retryCount, $attemptCount)),
             'failed_target_index_sha256' => null,
             'pre_coverage_fingerprint_sha256' => null,
             'post_coverage_fingerprint_sha256' => null,
             'queue_dispatch_count' => 0,
             'database_write_count' => 0,
         ];
+    }
+
+    /**
+     * @param  array<string, string>  $environment
+     */
+    private static function safeBatchOffset(array $environment): ?int
+    {
+        $value = $environment['FM_CAREER_BATCH_OFFSET'] ?? '';
+        if (preg_match('/^(?:0|[1-9][0-9]*)$/D', $value) !== 1) {
+            return null;
+        }
+        $offset = (int) $value;
+
+        return $offset <= 100000 && $offset % self::BATCH_SIZE === 0
+            ? $offset
+            : null;
     }
 
     /** @param array<string, mixed> $receipt */

@@ -6,6 +6,7 @@ namespace Tests\Sre;
 
 use FermatMind\Deploy\CareerCandidateExactCacheBootstrapFailure;
 use FermatMind\Deploy\CareerCandidateExactCacheBootstrapRunner;
+use PDOException;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -169,6 +170,94 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             $this->assertSame(0, $receipt['retry_count']);
             $this->assertSame($category, $receipt['error_category']);
         }
+    }
+
+    #[Test]
+    public function pre_batch_coverage_read_retries_only_a_transient_database_failure(): void
+    {
+        $inspection = $this->inspection([
+            $this->row('private-target', 'en', true, 'missing_pointer'),
+        ]);
+        $calls = 0;
+        $delays = 0;
+
+        $result = CareerCandidateExactCacheBootstrapRunner::coverageInspectionWithRetry(
+            function () use (&$calls, $inspection): array {
+                $calls++;
+                if ($calls === 1) {
+                    $exception = new PDOException('redacted');
+                    $exception->errorInfo = ['HY000', 2006, 'redacted'];
+
+                    throw $exception;
+                }
+
+                return $inspection;
+            },
+            function () use (&$delays): void {
+                $delays++;
+            },
+        );
+
+        $this->assertSame($inspection, $result['inspection']);
+        $this->assertSame(2, $result['attempt_count']);
+        $this->assertSame(1, $result['retry_count']);
+        $this->assertSame(2, $calls);
+        $this->assertSame(1, $delays);
+    }
+
+    #[Test]
+    public function pre_batch_coverage_read_does_not_retry_a_permanent_database_failure(): void
+    {
+        $calls = 0;
+        $delays = 0;
+
+        try {
+            CareerCandidateExactCacheBootstrapRunner::coverageInspectionWithRetry(
+                function () use (&$calls): array {
+                    $calls++;
+                    $exception = new PDOException('private database detail');
+                    $exception->errorInfo = ['42000', 1064, 'private database detail'];
+
+                    throw $exception;
+                },
+                function () use (&$delays): void {
+                    $delays++;
+                },
+            );
+            $this->fail('Expected pre-batch coverage read failure.');
+        } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+            $this->assertSame('PRE_BATCH_COVERAGE_READ_FAILED', $failure->safeCode);
+            $this->assertSame('pre_batch_coverage', $failure->failureStage);
+            $this->assertSame('database_permanent_read', $failure->errorCategory);
+            $this->assertSame(1, $failure->attemptCount);
+            $this->assertSame(0, $failure->retryCount);
+        }
+
+        $this->assertSame(1, $calls);
+        $this->assertSame(0, $delays);
+    }
+
+    #[Test]
+    public function outer_failure_receipt_keeps_only_safe_stage_category_and_batch_offset(): void
+    {
+        $receipt = CareerCandidateExactCacheBootstrapRunner::failureReceipt(
+            'PRE_BATCH_COVERAGE_READ_FAILED',
+            'pre_batch_coverage',
+            'database_transient_read',
+            2,
+            1,
+            550,
+        );
+        $encoded = json_encode($receipt, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(550, $receipt['batch_offset']);
+        $this->assertSame('pre_batch_coverage', $receipt['failure_stage']);
+        $this->assertSame('database_transient_read', $receipt['error_category']);
+        $this->assertSame(2, $receipt['attempt_count']);
+        $this->assertSame(1, $receipt['retry_count']);
+        $this->assertStringNotContainsString('private', $encoded);
+        $this->assertStringNotContainsString('exception', $encoded);
+        $this->assertStringNotContainsString('sql', $encoded);
     }
 
     #[Test]

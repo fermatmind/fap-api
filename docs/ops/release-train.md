@@ -230,9 +230,15 @@ own offline synchronous detail warmer only for rows still marked repairable.
 The public HTTP warmer retains its separate 2,000ms budget. Only
 `build_budget_exceeded` and transient database reads receive one bounded retry
 after 500ms; permanent database, cache publish, payload, and unexpected errors
-stop immediately. Receipts contain only safe failure stage/category, build
-timings, row-index hash, and pre/post coverage fingerprints. They never contain
-target identity, query text, exception text, cache keys, or SSH routing data.
+stop immediately. This same rule wraps the candidate's full coverage read
+before each batch: an explicitly classified transient database read gets one
+500ms retry, while a permanent or unclassified failure stops before that batch
+owns any write. Pre-batch failures retain the safe batch offset, stage,
+category, attempt count, and retry count. Candidate-runtime initialization
+failures are classified separately and are never retried. Receipts contain
+only safe failure stage/category, build timings, row-index hash, and pre/post
+coverage fingerprints. They never contain target identity, query text,
+exception text, cache keys, or SSH routing data.
 
 A successful batch must read back every target written by that batch as
 covered. Because the derived Career cache is shared with the live read-through
