@@ -536,5 +536,22 @@
     "required_checks_affected": false,
     "recommended_follow_up": "Give each local verification process a unique SQLite database path or serialize suites that currently share /tmp/fap-ci.sqlite.",
     "train_continued": true
+  },
+  {
+    "observed_at": "2026-07-26T14:20:00Z",
+    "repo": "fap-api",
+    "pr_id": "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02",
+    "branch": "codex/saep-proposed-api-per02-mbti-base-type-discoverability-02",
+    "blocker_type": "PREEXISTING_CAREER_SITEMAP_SOURCE_TEST_FAILURE",
+    "evidence": [
+      "On origin/main a864792d3b0564503a9e91df039c396dcb68ca78, SitemapSourceApiTest relied on a projection artifact without first materializing its required published Career detail read models.",
+      "The new MBTI base sitemap test passed independently; the four failing assertions covered agricultural-inspectors, data-scientists, civil-engineers, and electrical-engineers only.",
+      "Independent baseline repair PR #3312 added the missing test-fixture warming sequence and merged at 8ed512841cabf45fc92fa6cf43955333073029e3 with all nine required checks green."
+    ],
+    "why_not_current_pr_scope": "The failure and repair concern the existing Career runtime test fixture, not MBTI personality sitemap enumeration.",
+    "required_checks_affected": true,
+    "recommended_follow_up": "This PR was rebased on the merged repair and must rerun its complete declared local validation and required GitHub checks.",
+    "status": "repaired_by_independent_baseline_pr",
+    "train_continued": true
   }
 ]

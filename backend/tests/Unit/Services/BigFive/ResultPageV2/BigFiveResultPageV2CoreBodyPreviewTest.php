@@ -3302,6 +3302,35 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_mbti_base_llms_exclusion(): void
+    {
+        $file = 'backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php';
+        $allowed = [
+            "+            if (preg_match('#^/(?:en|zh)/personality/[a-z]{4}$#', \$path) === 1) {",
+            '+                return false;',
+            '+            }',
+            '+',
+        ];
+        $expandedToVariants = [
+            "+            if (preg_match('#^/(?:en|zh)/personality/[a-z]{4}(?:-[at])?$#', \$path) === 1) {",
+            '+                return false;',
+            '+            }',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            [$file],
+            '',
+            '',
+            llmsControllerChangedLines: $allowed,
+        ));
+        $this->assertSame([$file], $this->mbtiImpactingRuntimeChanges(
+            [$file],
+            '',
+            '',
+            llmsControllerChangedLines: $expandedToVariants,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_runtime_publish_projection_owner_changes(): void
     {
         $changed = [
@@ -6425,6 +6454,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $opsAccessControlChangedLines = null,
         ?array $scaleLookupControllerChangedLines = null,
         ?array $soloOwnerReviewFoundationAddedFiles = null,
+        ?array $llmsControllerChangedLines = null,
     ): array {
         $impacting = [];
         $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
@@ -7331,6 +7361,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareerPolicyClaimGuardFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php'
+                && $this->llmsControllerDiffIsMbtiBaseExclusionOnly(
+                    $llmsControllerChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -10887,6 +10930,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SEO/SitemapGenerator.php',
             'backend/app/Services/SEO/SitemapCache.php',
         ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function llmsControllerDiffIsMbtiBaseExclusionOnly(array $changedLines): bool
+    {
+        $normalized = array_values(array_filter(array_map(
+            static function (string $line): ?string {
+                if (! in_array($line[0] ?? '', ['+', '-'], true)) {
+                    return null;
+                }
+
+                $body = trim(substr($line, 1));
+
+                return $body === '' ? null : $line[0].$body;
+            },
+            $changedLines,
+        )));
+
+        return $normalized === [
+            "+if (preg_match('#^/(?:en|zh)/personality/[a-z]{4}$#', \$path) === 1) {",
+            '+return false;',
+            '+}',
+        ];
     }
 
     private function isCareerRuntimePublishProjectionFile(string $file): bool

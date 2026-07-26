@@ -229,6 +229,61 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02
+    repo: fap-api
+    base: main
+    depends_on: []
+    branch: codex/saep-proposed-api-per02-mbti-base-type-discoverability-02
+    title: "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02: add canonical MBTI base types to sitemap authority"
+    train_scope: per02_mbti_base_type_discoverability
+    status: user_authorized
+    mode: execute
+    scope:
+      - Add only canonical MBTI base profile URLs to backend sitemap authority after the saved 32/32 Web production readback dependency.
+      - Require the existing published, public and indexable profile gates, a canonical four-letter base slug, a self-canonical backend URL and an index-follow robots policy.
+      - Preserve the existing A/T variant, same-type comparison, cross-type comparison, personality hub and all non-personality sitemap cohorts.
+    allowed_paths:
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/SEO/SitemapSourceApiTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify CMS content, profile revisions, publication, indexability, schema, routes, public API schema, llms, Search, frontend code or production data.
+      - Enumerate redirects, private routes, query URLs, attempts, reports, non-canonical base slugs or any profile failing an existing gate.
+      - Deploy, warm or clear production cache, submit sitemap or perform a production/CMS/database/Search write.
+    validation:
+      - php -l backend/app/Services/SEO/SitemapGenerator.php
+      - php -l backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - php -l backend/tests/Feature/SEO/SitemapSourceApiTest.php
+      - php -l backend/tests/Feature/SEO/SitemapXmlTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapXmlTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_freeze_classifier_ignores_only_mbti_base_llms_exclusion|runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapXmlTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: SAEP-PROPOSED-API-PER02-MBTI64-EN64-BOUNDED-DRAFT-01
     repo: fap-api
     base: main

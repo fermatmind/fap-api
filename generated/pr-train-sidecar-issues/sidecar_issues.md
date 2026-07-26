@@ -605,3 +605,21 @@
 - recommended follow-up:
   - Give each local verification process a unique SQLite database path or serialize suites that currently share `/tmp/fap-ci.sqlite`.
 - whether train continued: `true`
+
+## PER-02 MBTI base sitemap Career fixture baseline repair
+
+- observed at: `2026-07-26T14:20:00Z`
+- repo: `fap-api`
+- PR id / branch: `SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02` / `codex/saep-proposed-api-per02-mbti-base-type-discoverability-02`
+- blocker type: `PREEXISTING_CAREER_SITEMAP_SOURCE_TEST_FAILURE`
+- evidence:
+  - On `origin/main` `a864792d3b0564503a9e91df039c396dcb68ca78`, `SitemapSourceApiTest` wrote a Career projection fixture without materializing the required published detail read models before rebuilding the directory authority cache.
+  - The MBTI base sitemap test passed independently; the four failing assertions covered only Career fixtures for `agricultural-inspectors`, `data-scientists`, `civil-engineers`, and `electrical-engineers`.
+  - Independent baseline repair PR #3312 added the missing fixture warming sequence and merged at `8ed512841cabf45fc92fa6cf43955333073029e3` with all nine required checks green.
+- why not current PR scope:
+  - The failure and repair concern the existing Career runtime test fixture, not MBTI personality sitemap enumeration.
+- whether required checks are affected: `true`
+- recommended follow-up:
+  - This PR was rebased on the merged repair and must rerun its complete declared local validation and required GitHub checks.
+- status: `repaired_by_independent_baseline_pr`
+- whether train continued: `true`

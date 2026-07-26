@@ -148,6 +148,10 @@ class LlmsController extends Controller
     private function personalityPaths(array $urls, string $baseUrl): array
     {
         return $this->filterAndSort($urls, static function (string $path): bool {
+            if (preg_match('#^/(?:en|zh)/personality/[a-z]{4}$#', $path) === 1) {
+                return false;
+            }
+
             return str_starts_with($path, '/en/personality/')
                 || str_starts_with($path, '/zh/personality/')
                 || $path === '/en/personality'

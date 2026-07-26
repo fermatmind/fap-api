@@ -709,8 +709,8 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/en/personality/intj-a', $xml);
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/personality/intj-t', $xml);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $xml);
-        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $xml);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $xml);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality/intj</loc>', $xml);
 
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/entj', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/personality/entp', $xml);
@@ -732,6 +732,75 @@ class SitemapGeneratorTest extends TestCase
         $this->assertSame('AboutPage', data_get($seoService->buildJsonLd($eligibleEn, $eligibleEnVariant), '@type'));
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, $eligibleEnVariant), 'canonical'), $xml);
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, $eligibleZhVariant), 'canonical'), $xml);
+    }
+
+    public function test_generate_exports_exactly_the_public_indexable_canonical_mbti_base_cohort(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+            foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
+                $this->createPersonalityProfile([
+                    'type_code' => $typeCode,
+                    'canonical_type_code' => $typeCode,
+                    'slug' => strtolower($typeCode),
+                    'locale' => $locale,
+                ]);
+            }
+        }
+
+        $payload = $this->generateSitemap();
+        $locations = collect(array_keys($this->sitemapEntries((string) ($payload['xml'] ?? ''))))
+            ->filter(static fn (string $location): bool => preg_match('#/(?:en|zh)/personality/[a-z]{4}$#', $location) === 1)
+            ->sort()
+            ->values()
+            ->all();
+
+        $expected = collect(PersonalityProfile::BASE_TYPE_CODES)
+            ->flatMap(static fn (string $typeCode): array => [
+                'https://staging.fermatmind.com/en/personality/'.strtolower($typeCode),
+                'https://staging.fermatmind.com/zh/personality/'.strtolower($typeCode),
+            ])
+            ->sort()
+            ->values()
+            ->all();
+
+        $this->assertCount(32, $locations);
+        $this->assertSame($expected, $locations);
+        $this->assertSame(count($locations), count(array_unique($locations)));
+    }
+
+    public function test_generate_excludes_noindex_mbti_base_profile_even_when_its_database_gate_is_open(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $profile = $this->createPersonalityProfile([
+            'type_code' => 'INTJ',
+            'canonical_type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+        ]);
+        $this->createPersonalitySeoMeta($profile, ['robots' => 'noindex,follow']);
+
+        $xml = (string) ($this->generateSitemap()['xml'] ?? '');
+
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/personality/intj</loc>', $xml);
+    }
+
+    public function test_generate_exports_mbti_base_profile_with_the_normalized_frontend_origin(): void
+    {
+        config(['app.frontend_url' => 'http://www.fermatmind.com']);
+
+        $this->createPersonalityProfile([
+            'type_code' => 'INTJ',
+            'canonical_type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+        ]);
+
+        $xml = (string) ($this->generateSitemap()['xml'] ?? '');
+
+        $this->assertStringContainsString('<loc>https://fermatmind.com/en/personality/intj</loc>', $xml);
     }
 
     public function test_generate_excludes_held_personality_variants_and_at_comparisons(): void
