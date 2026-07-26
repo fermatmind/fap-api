@@ -106,9 +106,14 @@
         "at": "2026-07-26T07:02:00Z",
         "status": "github_review_repairing",
         "note": "Exact head f6346b904 passed eight checks while verify-bigfive was still running, then exact-head review found that Phase B preflight did not prove the deployed frontend could perform the six-path cache closeout before committing indexability. The scoped repair now performs a read-only, no-redirect public /revision probe and requires exact fap-web SHA 841280ab35945e2c1454f5ac18ea3ededdfab5b6 in both indexability preflight and apply before any database mutation. The immutable receipt records and revalidates that frontend revision. The approved fap-web deployment remains unexecuted, so this preflight is intentionally fail-closed until that separately gated deploy succeeds."
+      },
+      {
+        "at": "2026-07-26T07:17:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact head b583dc3ad passed all 9 GitHub checks, then exact-head review found the pinned frontend revision was not forwarded into the quoted SSH remote environment and would fail under remote set -u. The scoped repair explicitly forwards EXPECTED_FRONTEND_REVISION alongside the other exact operation inputs and adds a single-occurrence regression assertion. No production action was executed."
       }
     ],
-    "updated_at": "2026-07-26T07:02:00Z"
+    "updated_at": "2026-07-26T07:17:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",

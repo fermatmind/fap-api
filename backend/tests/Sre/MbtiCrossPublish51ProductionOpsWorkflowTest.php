@@ -153,6 +153,7 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             'https://fermatmind.com/${surface}',
             'https://fermatmind.com/revision',
             'EXPECTED_FRONTEND_REVISION: 841280ab35945e2c1454f5ac18ea3ededdfab5b6',
+            "EXPECTED_FRONTEND_REVISION='\$EXPECTED_FRONTEND_REVISION'",
             '--max-redirs 0',
             '.revision | select(. == $expected)',
             'frontend_revision: $frontend_revision',
@@ -185,6 +186,14 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
                 'and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"',
             ),
             'The immutable preflight receipt, live preflight, and live apply must all bind the frontend revision.',
+        );
+        $this->assertSame(
+            1,
+            substr_count(
+                $workflow,
+                "EXPECTED_FRONTEND_REVISION='\$EXPECTED_FRONTEND_REVISION'",
+            ),
+            'The pinned frontend revision must be forwarded into the quoted remote shell.',
         );
     }
 

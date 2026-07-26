@@ -247,7 +247,7 @@ jobs:
           result="$(timeout --signal=TERM --kill-after=10s 300s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_STATE_SHA256='$EXPECTED_STATE_SHA256' APPROVAL_B64='$approval_b64' timeout --signal=TERM --kill-after=10s 270s bash -s" \
+            "MODE='$MODE' DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_STATE_SHA256='$EXPECTED_STATE_SHA256' EXPECTED_FRONTEND_REVISION='$EXPECTED_FRONTEND_REVISION' APPROVAL_B64='$approval_b64' timeout --signal=TERM --kill-after=10s 270s bash -s" \
             2>"$RUNNER_TEMP/mbti-cross-publish51.err" <<'REMOTE'
           set -euo pipefail
           current="$(readlink -f "$DEPLOY_PATH/current")"
