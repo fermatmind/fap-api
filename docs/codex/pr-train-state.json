@@ -100126,8 +100126,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "ready_to_merge",
-  "commit_sha": "9cc66480cbf1e3f976813bf47c0ad105b9d83106",
+  "status": "url_credential_and_documented_sha_review_repairs_local_checks_passed_github_checks_pending",
+  "commit_sha": "9bf5924a5bec34e42d7455c14d033d5333a83359",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100148,17 +100148,17 @@
       },
     "required_local_checks": {
       "status": "passed_review_repairs",
-      "evidence": "The final recovery suite passed 20 tests / 280 assertions and the combined recovery plus ReviewPolicyRegistry run passed 31/637. Both Big Five classifier assertions passed 2/6. Scoped Pint passed 4 files, composer validate --strict passed, composer audit found no advisories, all content-pack JSON parsed, and git diff --check passed. The deterministic command intentionally exits 1 with changed=false, candidate_package_built=true, approval_eligible=false, status=blocked_formal_gsc_readmodel_gate, package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact file SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and opaque full-cohort artifact SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
+      "evidence": "The final recovery suite passed 20 tests / 282 assertions and the combined recovery plus ReviewPolicyRegistry run passed 31/639. Both Big Five classifier assertions passed 2/6. Scoped Pint passed 4 files, composer validate --strict passed, composer audit found no advisories, all content-pack JSON parsed, and git diff --check passed. The documented deterministic command intentionally exits 1 twice, with the repeat reporting changed=false, candidate_package_built=true, approval_eligible=false, business_write=false, status=blocked_formal_gsc_readmodel_gate, package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768, artifact file SHA f7965a55f06e4d8261af0be3444fafbdc94a8f806d2a5e33283971456be63090, exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03, query-summary SHA 98af9c228077c42c4e61b4ceed3a26f1a0db24a627fa87a4d6dde05c06f1c695, and opaque full-cohort artifact SHA a3f09f3616bdccb079fb96912b2608a3e62fae6f5a0730a9800d2b375a540dcb."
       },
     "github_required_checks": {
-      "status": "passed",
-      "evidence": "All nine GitHub checks passed at exact reviewed implementation head 9cc66480cbf1e3f976813bf47c0ad105b9d83106: hygiene, supply-chain, content-pack-build-validation, Semgrep OSS, Code Scanning Semgrep blocking and SARIF upload, verify-mbti-legacy, verify-mbti-v2, and verify-bigfive. Codex review is bound to that exact head; all implementation findings are repaired and no active unresolved review thread remains."
+      "status": "pending_after_review_repairs",
+      "evidence": "All nine GitHub checks passed at ready-ledger head 9bf5924a5bec34e42d7455c14d033d5333a83359. Its automatic review then identified two P2s: source URL credential keys were narrower than the structured forbidden-key set, and the operator runbook retained a stale evidence SHA. Both are repaired within existing Task 8 paths with focused regression and an exact dry-run replay; a new GitHub run is pending after commit and push."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
   "failure_reason": null,
@@ -100272,8 +100272,13 @@
       "at": "2026-07-26T07:54:36Z",
       "status": "ready_to_merge",
       "note": "All nine GitHub checks passed at exact reviewed implementation head 9cc66480cbf1e3f976813bf47c0ad105b9d83106, including verify-bigfive. The current-head Codex review found no remaining implementation issue; its sole ledger comment incorrectly treated the still-open PR as merged and was resolved with the repository rule that merge SHA/time/cleanup facts cannot be pre-filled. Exact scope remains the eleven Task 8 allowed paths, including the operator-authorized Big Five classifier test only for the corresponding freeze regression. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-26T08:03:34Z",
+      "status": "url_credential_and_documented_sha_review_repairs_local_checks_passed_github_checks_pending",
+      "note": "The ready-ledger head completed all nine checks, but its refreshed review found that source URL credential parameters did not yet cover client_secret, refresh_token, authorization, and cookie, and that the documented command still used the pre-opaque-ID evidence SHA. URL query keys now use the same normalized credential-key authority as structured evidence; focused fixtures cover userinfo, percent-encoded access_token, client-secret, refresh_token, authorization, and cookie. The runbook now carries exact evidence SHA 69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03 and the copied command was replayed twice with intentional exit 1, changed=false on repeat, business_write=false, and package SHA 31d06c9ba0d69690a064c2dc9fd4ea90e97cf7279bbf9888ce1a9d613d5cb768. Recovery plus review-registry passed 31/639, Big Five classifier passed 2/6, and scoped Pint passed. No production or business write occurred."
     }
   ],
-  "updated_at": "2026-07-26T07:54:36Z"
+  "updated_at": "2026-07-26T08:03:34Z"
 }
 }

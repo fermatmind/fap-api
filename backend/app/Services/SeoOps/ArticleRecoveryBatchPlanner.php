@@ -39,6 +39,35 @@ final class ArticleRecoveryBatchPlanner
         'candidate_title_and_description_are_approved',
     ];
 
+    /**
+     * Normalized secret-bearing keys forbidden in both structured evidence
+     * and source URL query parameters.
+     *
+     * @var list<string>
+     */
+    private const CREDENTIAL_KEYS = [
+        'access_token',
+        'api_key',
+        'api_secret',
+        'authorization',
+        'auth_token',
+        'bearer_token',
+        'client_secret',
+        'cookie',
+        'credential',
+        'credentials',
+        'id_token',
+        'password',
+        'passwd',
+        'private_key',
+        'refresh_token',
+        'secret',
+        'session_token',
+        'signature',
+        'signing_key',
+        'token',
+    ];
+
     public function __construct(
         private readonly string $lockedEvidenceSha256 = self::EXPECTED_EVIDENCE_SHA256,
     ) {}
@@ -1003,10 +1032,13 @@ final class ArticleRecoveryBatchPlanner
     private function hasCredentialParameterKey(array $parameters): bool
     {
         foreach ($parameters as $key => $value) {
-            if (preg_match(
-                '/^(?:access[_-]?token|api[_-]?key|credential|password|passwd|secret|signature|token)$/i',
-                rawurldecode((string) $key),
-            )) {
+            $normalizedKey = preg_replace(
+                '/[^a-z0-9]+/',
+                '_',
+                mb_strtolower(rawurldecode((string) $key), 'UTF-8'),
+            );
+            if (is_string($normalizedKey)
+                && in_array(trim($normalizedKey, '_'), self::CREDENTIAL_KEYS, true)) {
                 return true;
             }
             if (is_array($value) && $this->hasCredentialParameterKey($value)) {

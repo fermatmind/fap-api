@@ -23,7 +23,7 @@ From `backend/`:
 ```bash
 php artisan seo-ops:article-recovery-batch \
   --evidence=content_packs/seo/SEO-10K-ARTICLE-RECOVERY-BATCH-01/live-gsc-evidence.v1.json \
-  --confirm-evidence-sha256=b3b1e39ad318d8ad59becd61be804e1ba81ff56707489483bfb77b9d21b75fed \
+  --confirm-evidence-sha256=69eb07235831602faea7241b965c44561aeae68fe6e6e141d3a8e87d7d0fff03 \
   --artifact-dir=/tmp/seo-10k-article-recovery-batch-01 \
   --json
 ```

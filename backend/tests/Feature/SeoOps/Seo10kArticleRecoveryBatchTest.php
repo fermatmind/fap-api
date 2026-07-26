@@ -377,6 +377,10 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             $url = $evidence['targets'][0]['canonical_url'];
             $evidence['targets'][0]['source_refs'][0]['url'] = 'https://token:secret@example.org/paper';
             $evidence['targets'][0]['source_refs'][1]['url'] = 'https://example.org/paper?access%5Ftoken=secret';
+            $evidence['targets'][1]['source_refs'][0]['url'] = 'https://example.org/paper?client-secret=secret';
+            $evidence['targets'][1]['source_refs'][1]['url'] = 'https://example.org/paper?refresh_token=secret';
+            $evidence['targets'][2]['source_refs'][0]['url'] = 'https://example.org/paper?authorization=secret';
+            $evidence['targets'][2]['source_refs'][1]['url'] = 'https://example.org/paper?cookie=secret';
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
             $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
 
@@ -387,6 +391,14 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
 
             self::assertFalse($package['ok']);
             self::assertContains('source_ref_invalid:'.$url, $package['issues']);
+            self::assertContains(
+                'source_ref_invalid:'.$evidence['targets'][1]['canonical_url'],
+                $package['issues']
+            );
+            self::assertContains(
+                'source_ref_invalid:'.$evidence['targets'][2]['canonical_url'],
+                $package['issues']
+            );
             self::assertFalse($package['would_write']);
         } finally {
             File::deleteDirectory($directory);
