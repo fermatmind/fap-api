@@ -11,9 +11,7 @@ use Illuminate\Http\Response;
 class LlmsController extends Controller
 {
     private const LLMS_TXT_CACHE_KEY = 'seo:llms-txt:v1:body';
-
     private const LLMS_FULL_TXT_CACHE_KEY = 'seo:llms-full-txt:v1:body';
-
     private const CACHE_TTL_SECONDS = 600;
 
     public function llmsTxt(SitemapGenerator $generator): Response
@@ -61,7 +59,7 @@ class LlmsController extends Controller
         $lines = [
             "# {$siteName} llms.txt",
             "Site: {$baseUrl}",
-            'Languages: en, zh',
+            "Languages: en, zh",
             '',
             'Primary Entries:',
             ...array_map(fn (string $url): string => "- {$url}", $primary),
@@ -100,7 +98,7 @@ class LlmsController extends Controller
         $lines = [
             "# {$siteName} llms-full.txt",
             "Site: {$baseUrl}",
-            'Languages: en, zh',
+            "Languages: en, zh",
             "Total indexable entries: {$count}",
             '',
             '## Primary',

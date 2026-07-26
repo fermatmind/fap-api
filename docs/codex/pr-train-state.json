@@ -86006,7 +86006,7 @@
     "depends_on": [
       "MBTI-CMS-29"
     ],
-    "status": "pr_open_checks_pending",
+    "status": "github_checks_failed_current_scope_fix_in_progress",
     "commit_sha": "e08f3a29f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2928",
     "failure_reason": null,
@@ -100568,6 +100568,10 @@
       "ci_verify_mbti": {
         "status": "rerun_completed_remote_revalidation_pending",
         "evidence": "The local MBTI verification reran after the SitemapXmlTest correction. Exact remote required checks on the new head remain the merge gate."
+      },
+      "verify_bigfive": {
+        "status": "failed_current_scope_fix_in_progress",
+        "evidence": "Exact head 6064279e6dbced53e51358e7319de6534deba592 passed 8/9 required checks but BigFiveResultPageV2CoreBodyPreviewTest rejected the exact LlmsController sitemap-only exclusion as an unclassified MBTI runtime change. The same PR now adds a changed-lines-exact fail-closed classifier contract; broader llms changes remain blocked."
       }
     },
     "scope_validation": {
@@ -100576,7 +100580,7 @@
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
-    "failure_reason": null,
+    "failure_reason": "Exact head 6064279e6dbced53e51358e7319de6534deba592 failed verify-bigfive because the four-letter MBTI base llms exclusion was not represented in the runtime-freeze classifier. Repair remains within the current sitemap-only scope.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -100632,8 +100636,13 @@
         "at": "2026-07-26T16:00:00Z",
         "status": "pr_open_checks_pending",
         "note": "Addressed two exact-head P2 findings: base profiles require exact index,follow robots, and LlmsController explicitly excludes four-letter MBTI base paths so this sitemap-only PR cannot expand llms.txt or llms-full.txt. Fresh remote checks are required."
+      },
+      {
+        "at": "2026-07-26T16:50:00Z",
+        "status": "github_checks_failed_current_scope_fix_in_progress",
+        "note": "Exact head 6064279e6dbced53e51358e7319de6534deba592 passed eight required checks and failed verify-bigfive only because LlmsController was not classified. The repair removes unrelated formatting noise and admits only the exact four-letter MBTI base exclusion changed lines; variant, comparison and any additional llms behavior remain fail-closed."
       }
     ],
-    "updated_at": "2026-07-26T16:00:00Z"
+    "updated_at": "2026-07-26T16:50:00Z"
   }
 }

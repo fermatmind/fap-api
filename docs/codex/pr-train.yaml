@@ -248,6 +248,7 @@ prs:
       - backend/tests/Feature/SEO/SitemapGeneratorTest.php
       - backend/tests/Feature/SEO/SitemapSourceApiTest.php
       - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
       - generated/pr-train-sidecar-issues/**
@@ -260,7 +261,9 @@ prs:
       - php -l backend/tests/Feature/SEO/SitemapGeneratorTest.php
       - php -l backend/tests/Feature/SEO/SitemapSourceApiTest.php
       - php -l backend/tests/Feature/SEO/SitemapXmlTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapXmlTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_freeze_classifier_ignores_only_mbti_base_llms_exclusion|runtime_paths_have_no_uncommitted_diff' --no-ansi
       - cd backend && vendor/bin/pint --test app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapXmlTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction
