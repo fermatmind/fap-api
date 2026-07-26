@@ -385,6 +385,26 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
             $evidence['targets'][3]['source_refs'][1]['url'] = 'https://example.org/paper?github_token=secret';
             $evidence['targets'][4]['source_refs'][0]['url'] = 'https://example.org/paper?db-password=secret';
             $evidence['targets'][4]['source_refs'][1]['url'] = 'https://example.org/paper?provider-token-version=secret';
+            $evidence['targets'][0]['source_refs'][] = [
+                'id' => 'camel-api-key',
+                'url' => 'https://example.org/paper?apiKey=secret',
+                'authority_type' => 'research',
+            ];
+            $evidence['targets'][1]['source_refs'][] = [
+                'id' => 'camel-access-token',
+                'url' => 'https://example.org/paper?accessToken=secret',
+                'authority_type' => 'research',
+            ];
+            $evidence['targets'][2]['source_refs'][] = [
+                'id' => 'camel-client-secret',
+                'url' => 'https://example.org/paper?clientSecret=secret',
+                'authority_type' => 'research',
+            ];
+            $evidence['targets'][3]['source_refs'][] = [
+                'id' => 'collapsed-api-key',
+                'url' => 'https://example.org/paper?apikey=secret',
+                'authority_type' => 'research',
+            ];
             $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
             $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
 
@@ -411,6 +431,73 @@ final class Seo10kArticleRecoveryBatchTest extends TestCase
                 'source_ref_invalid:'.$evidence['targets'][4]['canonical_url'],
                 $package['issues']
             );
+            self::assertFalse($package['would_write']);
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_rejects_non_allowlisted_fields_in_sanitized_artifacts(): void
+    {
+        [$directory, $evidence, $queryArtifact, $pageCohort] = $this->mutableFixture();
+
+        try {
+            $firstUrl = $evidence['targets'][0]['canonical_url'];
+            $queryArtifact['target_summaries'][$firstUrl]['queries'] = ['must-not-persist'];
+            $pageCohort['rows'][0]['raw_url'] = 'https://private.invalid/article';
+            $this->writeJson($directory.'/live-gsc-query-summary.v1.json', $queryArtifact);
+            $this->writeJson($directory.'/live-gsc-page-cohort-hashes.v1.json', $pageCohort);
+            $evidence['gsc']['query_summary_artifact']['sha256'] = hash_file(
+                'sha256',
+                $directory.'/live-gsc-query-summary.v1.json'
+            );
+            $evidence['gsc']['page_cohort_artifact']['sha256'] = hash_file(
+                'sha256',
+                $directory.'/live-gsc-page-cohort-hashes.v1.json'
+            );
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertFalse($package['ok']);
+            self::assertContains('artifact_field_allowlist_invalid', $package['issues']);
+            self::assertFalse($package['would_write']);
+        } finally {
+            File::deleteDirectory($directory);
+        }
+    }
+
+    public function test_it_rejects_private_or_internal_source_reference_hosts(): void
+    {
+        [$directory, $evidence] = $this->mutableFixture();
+
+        try {
+            $privateUrls = [
+                'https://localhost/private',
+                'https://10.0.0.1/evidence',
+                'https://169.254.169.254/latest/meta-data',
+                'https://[::1]/private',
+                'https://evidence.internal/private',
+            ];
+            foreach ($privateUrls as $index => $privateUrl) {
+                $evidence['targets'][$index]['source_refs'][0]['url'] = $privateUrl;
+            }
+            $this->writeJson($directory.'/live-gsc-evidence.v1.json', $evidence);
+            $evidenceSha = hash_file('sha256', $directory.'/live-gsc-evidence.v1.json');
+
+            $package = (new ArticleRecoveryBatchPlanner($evidenceSha))->plan(
+                $directory.'/live-gsc-evidence.v1.json',
+                $evidenceSha
+            );
+
+            self::assertFalse($package['ok']);
+            foreach ($evidence['targets'] as $target) {
+                self::assertContains('source_ref_invalid:'.$target['canonical_url'], $package['issues']);
+            }
             self::assertFalse($package['would_write']);
         } finally {
             File::deleteDirectory($directory);

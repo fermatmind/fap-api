@@ -271,6 +271,9 @@ final class ArticleRecoveryBatchPlanner
         if ($this->forbiddenKeys($payload) !== []) {
             $issues[] = 'forbidden_raw_or_private_field_present';
         }
+        if (! $this->artifactSchemaKeysAreExact($payload, $expectedSchema)) {
+            $issues[] = 'artifact_field_allowlist_invalid';
+        }
 
         return [
             'payload' => $payload,
@@ -1004,15 +1007,17 @@ final class ArticleRecoveryBatchPlanner
     private function safeSourceUrl(string $url): bool
     {
         $parts = parse_url($url);
+        $host = mb_strtolower(trim((string) ($parts['host'] ?? ''), '[]'), 'UTF-8');
 
         return is_array($parts)
             && ($parts['scheme'] ?? null) === 'https'
-            && trim((string) ($parts['host'] ?? '')) !== ''
+            && $host !== ''
+            && $this->isPublicSourceHost($host)
             && ! isset($parts['user'])
             && ! isset($parts['pass'])
             && ! isset($parts['fragment'])
             && ! $this->hasCredentialQueryParameter((string) ($parts['query'] ?? ''))
-            && ! str_ends_with(mb_strtolower((string) ($parts['host'] ?? ''), 'UTF-8'), 'fermatmind.com');
+            && ! str_ends_with($host, 'fermatmind.com');
     }
 
     private function hasCredentialQueryParameter(string $query): bool
@@ -1032,10 +1037,15 @@ final class ArticleRecoveryBatchPlanner
     private function hasCredentialParameterKey(array $parameters): bool
     {
         foreach ($parameters as $key => $value) {
+            $keyWithCamelBoundaries = preg_replace(
+                ['/(?<=[a-z0-9])(?=[A-Z])/', '/(?<=[A-Z])(?=[A-Z][a-z])/'],
+                '_',
+                rawurldecode((string) $key),
+            );
             $normalizedKey = preg_replace(
                 '/[^a-z0-9]+/',
                 '_',
-                mb_strtolower(rawurldecode((string) $key), 'UTF-8'),
+                mb_strtolower((string) $keyWithCamelBoundaries, 'UTF-8'),
             );
             if (is_string($normalizedKey) && $this->isCredentialKey($normalizedKey)) {
                 return true;
@@ -1069,12 +1079,146 @@ final class ArticleRecoveryBatchPlanner
     {
         $paddedKey = '_'.trim($normalizedKey, '_').'_';
         foreach (self::CREDENTIAL_KEYS as $credentialKey) {
-            if (str_contains($paddedKey, '_'.$credentialKey.'_')) {
+            $collapsedCredentialKey = str_replace('_', '', $credentialKey);
+            if (str_contains($paddedKey, '_'.$credentialKey.'_')
+                || str_contains($paddedKey, '_'.$collapsedCredentialKey.'_')) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    private function isPublicSourceHost(string $host): bool
+    {
+        if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
+            return filter_var(
+                $host,
+                FILTER_VALIDATE_IP,
+                FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE,
+            ) !== false;
+        }
+
+        if (! str_contains($host, '.')) {
+            return false;
+        }
+
+        foreach (['localhost', 'local', 'internal', 'home', 'lan'] as $privateSuffix) {
+            if ($host === $privateSuffix || str_ends_with($host, '.'.$privateSuffix)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function artifactSchemaKeysAreExact(array $payload, string $schema): bool
+    {
+        if ($schema === self::QUERY_SCHEMA) {
+            if (! $this->hasExactKeys($payload, [
+                'schema',
+                'task',
+                'data_origin',
+                'source_engine',
+                'privacy_model',
+                'raw_query_persisted',
+                'unkeyed_query_digest_persisted',
+                'exclusion_policy',
+                'cross_target_owner_conflict_check',
+                'target_summaries',
+            ]) || ! $this->hasExactKeys(
+                (array) ($payload['cross_target_owner_conflict_check'] ?? []),
+                ['performed_before_sanitization', 'conflict_count'],
+            )) {
+                return false;
+            }
+
+            foreach ((array) ($payload['target_summaries'] ?? []) as $summary) {
+                if (! is_array($summary)
+                    || ! $this->hasExactKeys($summary, ['retained_query_count', 'excluded', 'evidence_state'])
+                    || ! $this->hasExactKeys(
+                        (array) ($summary['excluded'] ?? []),
+                        ['site_operator', 'brand_or_mixed'],
+                    )) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        if ($schema === self::PAGE_COHORT_SCHEMA) {
+            if (! $this->hasExactKeys($payload, [
+                'schema',
+                'task',
+                'data_origin',
+                'source_engine',
+                'search_type',
+                'evidence_role',
+                'formal_readmodel_gate_passed',
+                'raw_url_persisted',
+                'unkeyed_url_digest_persisted',
+                'identifier_model',
+                'current_window',
+                'previous_window',
+                'source_csv_sha256',
+                'source_total_row_count',
+                'article_row_count',
+                'selection_rule',
+                'eligibility_rule',
+                'rows',
+                'top_five_page_evidence_ids',
+                'cutoff_attestation',
+            ])
+                || ! $this->hasExactKeys((array) ($payload['current_window'] ?? []), ['start', 'end'])
+                || ! $this->hasExactKeys((array) ($payload['previous_window'] ?? []), ['start', 'end'])
+                || ! $this->hasExactKeys((array) ($payload['cutoff_attestation'] ?? []), ['rank_5', 'rank_6'])) {
+                return false;
+            }
+
+            $rowKeys = [
+                'rank',
+                'current_clicks',
+                'previous_clicks',
+                'click_delta',
+                'current_impressions',
+                'previous_impressions',
+                'impression_delta',
+                'current_position',
+                'previous_position',
+                'page_evidence_id',
+            ];
+            foreach ((array) ($payload['rows'] ?? []) as $row) {
+                if (! is_array($row) || ! $this->hasExactKeys($row, $rowKeys)) {
+                    return false;
+                }
+            }
+            foreach ((array) ($payload['cutoff_attestation'] ?? []) as $row) {
+                if (! is_array($row) || ! $this->hasExactKeys($row, $rowKeys)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  list<string>  $expectedKeys
+     */
+    private function hasExactKeys(array $payload, array $expectedKeys): bool
+    {
+        $actualKeys = array_keys($payload);
+        sort($actualKeys);
+        sort($expectedKeys);
+
+        return $actualKeys === $expectedKeys;
     }
 
     /**
@@ -1087,10 +1231,15 @@ final class ArticleRecoveryBatchPlanner
         $walk = function (array $node) use (&$walk, &$found): void {
             foreach ($node as $key => $value) {
                 if (is_string($key)) {
+                    $keyWithCamelBoundaries = preg_replace(
+                        ['/(?<=[a-z0-9])(?=[A-Z])/', '/(?<=[A-Z])(?=[A-Z][a-z])/'],
+                        '_',
+                        rawurldecode($key),
+                    );
                     $normalizedKey = preg_replace(
                         '/[^a-z0-9]+/',
                         '_',
-                        mb_strtolower(rawurldecode($key), 'UTF-8'),
+                        mb_strtolower((string) $keyWithCamelBoundaries, 'UTF-8'),
                     );
                     if (is_string($normalizedKey)
                         && (in_array(trim($normalizedKey, '_'), self::FORBIDDEN_KEYS, true)
