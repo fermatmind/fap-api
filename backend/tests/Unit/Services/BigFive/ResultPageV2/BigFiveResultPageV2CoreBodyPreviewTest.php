@@ -2177,6 +2177,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_seo_search_to_result_funnel_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/SeoIntelSearchToResultFunnelReportCommand.php',
+            'backend/app/Services/SeoIntel/SearchToResultFunnelReadModel.php',
+        ];
+        $blocked = [
+            'backend/app/Services/SeoIntel/SearchToResultFunnelWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_drift_foundation_files(): void
     {
         $changed = [
@@ -6919,6 +6934,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoSearchToResultFunnelFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelDriftFoundationFile($file)) {
                 continue;
             }
@@ -9337,6 +9356,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/Seo/QueryUrlBinding.php',
             'backend/app/Services/SeoIntel/QueryOwnerUrlTruthReadModel.php',
             'backend/database/migrations/seo_intel/2026_07_24_060000_create_seo_query_owner_url_truth_tables.php',
+        ], true);
+    }
+
+    private function isSeoSearchToResultFunnelFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelSearchToResultFunnelReportCommand.php',
+            'backend/app/Services/SeoIntel/SearchToResultFunnelReadModel.php',
         ], true);
     }
 

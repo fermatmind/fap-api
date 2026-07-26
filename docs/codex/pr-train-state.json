@@ -99973,8 +99973,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-QUERY-OWNER-URL-TRUTH-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "f96658b25956a8b6a04e017cc2343f14c2eaf721",
+    "status": "github_checks_retry_pending",
+    "commit_sha": "8fe2795b24fbdc7bf75d78439d55cde546bf6f3f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
     "checks": {
       "dependency": {
@@ -99990,8 +99990,8 @@
         "evidence": "Focused tests passed 7/67; scoped Pint passed 3 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 6/6 authorized paths."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3283 is open for implementation commit f96658b25956a8b6a04e017cc2343f14c2eaf721; the complete required-check set must pass before merge."
+        "status": "retry_pending",
+        "evidence": "The operator-authorized classifier repair passed the exact branch-diff test plus its positive/negative regression: 2 tests / 6 assertions. The Task 7 feature suite also passed 7/67, scoped Pint passed 4 files, and all remaining local manifest checks passed. A new GitHub required-check run is pending push."
       }
     },
     "scope_validation": {
@@ -100026,8 +100026,23 @@
         "at": "2026-07-26T01:38:18Z",
         "status": "github_checks_pending",
         "note": "Committed the exact 6-path Task 7 scope at f96658b25956a8b6a04e017cc2343f14c2eaf721, pushed codex/seo-search-to-result-funnel-01, and opened PR #3283. GitHub required checks are pending; no production-side or external action occurred."
+      },
+      {
+        "at": "2026-07-26T01:47:12Z",
+        "status": "github_required_check_failed_scope_authority_needed",
+        "note": "PR #3283 passed 8/9 required checks. verify-bigfive alone failed after 1598 tests passed because BigFiveResultPageV2CoreBodyPreviewTest.php classified the new read-only SeoIntel service and report command as frozen runtime paths. The exact rejected paths are backend/app/Console/Commands/SeoIntelSearchToResultFunnelReportCommand.php and backend/app/Services/SeoIntel/SearchToResultFunnelReadModel.php. No classifier edit was made because its test file is outside Task 7 allowed paths; explicit authorization is required for the minimal regression."
+      },
+      {
+        "at": "2026-07-26T01:49:37Z",
+        "status": "github_required_check_repair_in_progress",
+        "note": "The operator explicitly authorized backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php as Task 7's seventh allowed path solely for the corresponding freeze-classifier regression. The repair allowlists only the two Task 7 read-only SeoIntel paths and retains negative controls for a hypothetical writer plus the Big Five runtime service."
+      },
+      {
+        "at": "2026-07-26T01:50:32Z",
+        "status": "github_checks_retry_pending",
+        "note": "The exact classifier branch-diff test and positive/negative regression passed 2 tests / 6 assertions. The Task 7 feature suite passed 7/67, scoped Pint passed all 4 files, Composer validate/audit passed, YAML and JSON parsed, git diff checks passed, and the branch is limited to the exact 7/7 authorized paths. GitHub retry is pending push."
       }
     ],
-    "updated_at": "2026-07-26T01:38:18Z"
+    "updated_at": "2026-07-26T01:50:32Z"
   }
 }
