@@ -99872,8 +99872,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-10K-SITEMAP-FAMILY-OBSERVABILITY-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "4a93f06f6b568fc7e648f6d4ac791a612fd9c5af",
+    "status": "merged",
+    "commit_sha": "bd5d317c76cc6f858bc0e2f3c853df2bef248d94",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3280",
     "checks": {
       "dependency": {
@@ -99900,13 +99900,13 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-26T01:23:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -99954,8 +99954,160 @@
         "at": "2026-07-26T01:14:53Z",
         "status": "ready_to_merge",
         "note": "Exact head 4a93f06f6b568fc7e648f6d4ac791a612fd9c5af passed all nine required checks, including verify-bigfive. GitHub reports MERGEABLE/CLEAN, the branch is not behind origin/main, there are zero unresolved review threads, and the diff remains exactly 11/11 authorized paths. This final ledger-only transition must itself pass all required checks before squash merge."
+      },
+      {
+        "at": "2026-07-26T01:34:42Z",
+        "status": "merged",
+        "note": "GitHub reports PR #3280 MERGED at bd5d317c76cc6f858bc0e2f3c853df2bef248d94 after the final ledger-only head passed all nine required checks. origin/main contains the merge, local main was fast-forwarded while preserving unrelated operator changes, the remote and local task branches were deleted, the isolated worktree was removed, and post-merge focused validation passed 11 tests / 69 assertions plus 2 classifier tests / 6 assertions."
       }
     ],
-    "updated_at": "2026-07-26T01:14:53Z"
+    "updated_at": "2026-07-26T01:34:42Z"
+  },
+  "SEO-SEARCH-TO-RESULT-FUNNEL-01": {
+    "id": "SEO-SEARCH-TO-RESULT-FUNNEL-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-search-to-result-funnel-01",
+    "title": "SEO-SEARCH-TO-RESULT-FUNNEL-01 connect search landing to product outcomes",
+    "depends_on": [
+      "SEO-10K-GSC-BOUNDED-BACKFILL-01",
+      "SEO-QUERY-OWNER-URL-TRUTH-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "dc7d34a4215a811ca3f1e8ff03febee1061fd00d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 3 PR #3276 is MERGED at 3f4648e2e166e8d482009a5c3ef864489703e013 and Task 6 PR #3280 is MERGED at bd5d317c76cc6f858bc0e2f3c853df2bef248d94; exact fap-api origin/main contains both merge commits."
+      },
+      "focused_search_to_result_tests": {
+        "status": "passed",
+        "evidence": "The final focused suite passed 7 tests / 67 assertions covering page aggregation, historical-column-to-canonical event mapping, date/source/family filtering, mixed data-origin deduplication, private URL and non-product traffic exclusion, backend URL Truth authority/indexability gates, command zero-write behavior, and missing-schema fail-closed behavior. The first invocation stopped before Laravel boot because the new isolated worktree had no vendor directory; reusing the primary vendor symlink exposed a pre-existing absolute Composer classmap pointing to a removed temporary worktree. A private ignored vendor copy was created and its autoload rebuilt without tracked changes before the actual tests ran."
+      },
+      "required_local_checks": {
+        "status": "passed",
+        "evidence": "After all eleven review repairs, focused Task 7 tests passed 11/106; the operator-authorized classifier branch-diff and regression tests passed 2/6; scoped Pint passed 4 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 7/7 authorized paths."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "All 9 required checks passed on final ledger head b8daa28069c8a4602dc0db20951adcd63add3f8e after the eleven same-scope review repairs. GitHub reports CLEAN and MERGEABLE, and all review threads are resolved."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-26T01:34:42Z",
+        "status": "implementation_in_progress",
+        "note": "Started Task 7 from exact fap-api origin/main bd5d317c76cc6f858bc0e2f3c853df2bef248d94 in an isolated worktree after both declared dependencies were verified merged. Scope is a read-only hash/date/source/data-origin/page-family projection over existing GSC, funnel, and URL Truth tables; no migration, database/CMS write, external API call, publication/indexability/sitemap/llms/Search Channel action, URL submission, or deploy is authorized or attempted."
+      },
+      {
+        "at": "2026-07-26T01:37:08Z",
+        "status": "local_checks_passed",
+        "note": "Task 7 now aggregates GSC rows to page/date/source grain, preserves safe data origins without duplicating product events, maps existing start/submit/view columns to canonical product metrics, and counts valid starts only for production traffic on backend-authoritative public indexable URL Truth rows. Focused tests passed 7/67, scoped Pint passed, dependency and command checks passed, composer validate/audit passed, and the exact diff is 6/6 authorized paths. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-26T01:38:18Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact 6-path Task 7 scope at f96658b25956a8b6a04e017cc2343f14c2eaf721, pushed codex/seo-search-to-result-funnel-01, and opened PR #3283. GitHub required checks are pending; no production-side or external action occurred."
+      },
+      {
+        "at": "2026-07-26T01:47:12Z",
+        "status": "github_required_check_failed_scope_authority_needed",
+        "note": "PR #3283 passed 8/9 required checks. verify-bigfive alone failed after 1598 tests passed because BigFiveResultPageV2CoreBodyPreviewTest.php classified the new read-only SeoIntel service and report command as frozen runtime paths. The exact rejected paths are backend/app/Console/Commands/SeoIntelSearchToResultFunnelReportCommand.php and backend/app/Services/SeoIntel/SearchToResultFunnelReadModel.php. No classifier edit was made because its test file is outside Task 7 allowed paths; explicit authorization is required for the minimal regression."
+      },
+      {
+        "at": "2026-07-26T01:49:37Z",
+        "status": "github_required_check_repair_in_progress",
+        "note": "The operator explicitly authorized backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php as Task 7's seventh allowed path solely for the corresponding freeze-classifier regression. The repair allowlists only the two Task 7 read-only SeoIntel paths and retains negative controls for a hypothetical writer plus the Big Five runtime service."
+      },
+      {
+        "at": "2026-07-26T01:50:32Z",
+        "status": "github_checks_retry_pending",
+        "note": "The exact classifier branch-diff test and positive/negative regression passed 2 tests / 6 assertions. The Task 7 feature suite passed 7/67, scoped Pint passed all 4 files, Composer validate/audit passed, YAML and JSON parsed, git diff checks passed, and the branch is limited to the exact 7/7 authorized paths. GitHub retry is pending push."
+      },
+      {
+        "at": "2026-07-26T01:51:02Z",
+        "status": "github_checks_pending",
+        "note": "Committed the operator-authorized classifier repair at 415d96e6e4b2ac257ca8f5c6be8edfd7f64c5e84. The exact 7-path Task 7 branch is ready to push for the required GitHub check retry."
+      },
+      {
+        "at": "2026-07-26T02:00:13Z",
+        "status": "github_checks_pending",
+        "note": "All 9 required checks passed on head d0358c40cedb8645d1d83d7cb062856865e0b70f, but origin/main advanced by independent deploy repair #3284 during validation. Cleanly rebased the exact 7-path Task 7 branch onto origin/main a2318ec915e6b321f79ac5b9f38bb80b3a6b2e25 and force-pushed with lease. Rebased head 4e15b00553fa118ff9c9e08acf018c7ed65a7b2a must pass a fresh complete required-check set before merge."
+      },
+      {
+        "at": "2026-07-26T02:07:57Z",
+        "status": "ready_to_merge",
+        "note": "All 9 required checks passed on final post-rebase head 3e576fee0666d2de1022890b235afa87cd1ca262. GitHub reports the PR CLEAN and MERGEABLE with no blocking review decision; exact scope remains 7/7 authorized paths. Recording ready_to_merge before the ledger-only closeout head is rechecked."
+      },
+      {
+        "at": "2026-07-26T02:20:38Z",
+        "status": "review_repairs_local_checks_pending",
+        "note": "The ready-to-merge ledger head passed all 9 checks, but final review-comment inspection found seven actionable same-scope correctness findings. Implemented repairs in the existing Task 7 service/test/docs paths: configured authority union including backend_public_surface; canonical nested private-path policy; shared prod/production environment handling; fail-closed GSC origin and empty-evidence gates; canonical locale casing; and HTTPS same-host canonical URL validation. Expanded focused regression coverage now passes 9 tests / 92 assertions; full local manifest revalidation remains pending."
+      },
+      {
+        "at": "2026-07-26T02:21:28Z",
+        "status": "review_repairs_local_checks_passed",
+        "note": "All review-repair local checks passed: Task 7 feature suite 9/92, freeze classifier 2/6, scoped Pint 4 files, Composer validate/audit, command discovery, YAML/JSON parsing, git diff checks, and exact 7/7 path scope. A fresh complete GitHub check set is required after push."
+      },
+      {
+        "at": "2026-07-26T02:21:58Z",
+        "status": "github_checks_pending",
+        "note": "Committed all seven same-scope review repairs and expanded regressions. The exact 7-path branch is ready to push for a fresh complete GitHub required-check set."
+      },
+      {
+        "at": "2026-07-26T02:33:30Z",
+        "status": "review_repairs_local_checks_passed",
+        "note": "After head f697dcc47793bded998e24edc971eb40497e4fba passed all 9 checks, automated review found two additional P1 issues: imported GSC rows have null canonical URLs, so missing URL Truth hashes could expose stable private hashes; and non-final GSC rows could affect metrics. The read model now blocks any missing URL Truth classification and any non-final data state. Expanded local validation passed Task 7 tests 10/101, classifier 2/6, Pint 4 files, Composer validate/audit, command discovery, YAML/JSON, diff checks, and exact 7/7 scope."
+      },
+      {
+        "at": "2026-07-26T02:34:07Z",
+        "status": "github_checks_pending",
+        "note": "Committed the two additional P1 review repairs and expanded regressions at 17bb913d4d40dc6e942f0ddf9329986ee44dec2e. The exact 7-path branch is ready for a fresh complete GitHub required-check set."
+      },
+      {
+        "at": "2026-07-26T02:43:51Z",
+        "status": "review_repairs_local_checks_passed",
+        "note": "After head fbabd764b2f2a58414c0744d116f9f6ff4df8b84 passed all 9 checks, automated review found one additional P1: a stored URL Truth hash could mismatch its canonical URL and bypass the missing-classification guard. URL Truth rows now require exact sha256(canonical_url) equality or fail closed as missing Truth. Local validation again passed Task 7 tests 10/101, classifier 2/6, Pint 4 files, Composer validate/audit, command discovery, YAML/JSON, diff checks, and exact 7/7 scope."
+      },
+      {
+        "at": "2026-07-26T02:44:17Z",
+        "status": "github_checks_pending",
+        "note": "Committed the URL Truth hash-integrity repair and regression at 697144060a891710eeba2f539e34906dccf08a4d. The exact 7-path branch is ready for a fresh complete GitHub required-check set."
+      },
+      {
+        "at": "2026-07-26T02:53:49Z",
+        "status": "review_repairs_local_checks_passed",
+        "note": "After head ef98d63b9d1ac555ada5606e3653b629a345fd0a passed all 9 checks, automated review found one additional P1: absent seo_event_funnel_daily rows were represented as genuine zero product outcomes. Every GSC row that survives page-family/privacy gates must now have a materialized same-grain funnel row or the report blocks with product_funnel_evidence_missing. Local validation passed Task 7 tests 11/106, classifier 2/6, Pint 4 files, Composer validate/audit, command discovery, YAML/JSON, diff checks, and exact 7/7 scope."
+      },
+      {
+        "at": "2026-07-26T02:54:16Z",
+        "status": "github_checks_pending",
+        "note": "Committed the product-funnel evidence completeness repair and regression at dc7d34a4215a811ca3f1e8ff03febee1061fd00d. The exact 7-path branch is ready for a fresh complete GitHub required-check set."
+      },
+      {
+        "at": "2026-07-26T03:02:51Z",
+        "status": "ready_to_merge",
+        "note": "All 9 required checks passed on final ledger head b8daa28069c8a4602dc0db20951adcd63add3f8e after eleven same-scope review repairs. GitHub reports CLEAN and MERGEABLE, all review threads are resolved, and the exact branch scope remains 7/7 authorized paths. Recording ready_to_merge before the final ledger-only head is rechecked."
+      }
+    ],
+    "updated_at": "2026-07-26T03:02:51Z"
   }
 }
