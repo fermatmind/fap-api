@@ -23,6 +23,10 @@ final class ArticleRecoveryBatchPlanner
 
     private const EXPECTED_TARGET_COUNT = 5;
 
+    private const DEFAULT_FINALIZATION_LAG_DAYS = 3;
+
+    private const DEFAULT_MAX_REPORT_AGE_DAYS = 10;
+
     private const PERFORMANCE_DETERIORATION_RULE = 'click_delta_lt_0_or_click_delta_eq_0_and_impression_delta_lt_0';
 
     /**
@@ -145,7 +149,8 @@ final class ArticleRecoveryBatchPlanner
         }
 
         $targets = array_values((array) ($evidence['targets'] ?? []));
-        $this->validateTopLevel($evidence, $targets, $issues);
+        $gscQualityBounds = $this->gscQualityBounds();
+        $this->validateTopLevel($evidence, $targets, $gscQualityBounds, $issues);
         $querySummary = $this->validateQueryEvidence($targets, $queryArtifact['payload'], $issues);
         $this->validatePageCohortEvidence($evidence, $targets, $pageCohortArtifact['payload'], $issues);
         $gscReviewProvenance = [
@@ -158,6 +163,8 @@ final class ArticleRecoveryBatchPlanner
             'search_type' => (string) data_get($evidence, 'gsc.search_type', ''),
             'current_window' => (array) data_get($evidence, 'gsc.current_window', []),
             'previous_window' => (array) data_get($evidence, 'gsc.previous_window', []),
+            'finalization_lag_days' => $gscQualityBounds['finalization_lag_days'],
+            'max_report_age_days' => $gscQualityBounds['max_report_age_days'],
             'page_export' => (array) data_get($evidence, 'gsc.page_export', []),
         ];
         $targetPlans = $this->validateTargets(
@@ -213,6 +220,8 @@ final class ArticleRecoveryBatchPlanner
                 'evidence_role' => 'contextual_candidate_ranking_only',
                 'current_window' => (array) data_get($evidence, 'gsc.current_window', []),
                 'previous_window' => (array) data_get($evidence, 'gsc.previous_window', []),
+                'finalization_lag_days' => $gscQualityBounds['finalization_lag_days'],
+                'max_report_age_days' => $gscQualityBounds['max_report_age_days'],
             ],
             'selection' => [
                 'rule' => (string) data_get($evidence, 'selection.rule', ''),
@@ -352,10 +361,15 @@ final class ArticleRecoveryBatchPlanner
     /**
      * @param  array<string, mixed>  $evidence
      * @param  list<mixed>  $targets
+     * @param  array{finalization_lag_days: mixed, max_report_age_days: mixed}  $gscQualityBounds
      * @param  list<string>  $issues
      */
-    private function validateTopLevel(array $evidence, array $targets, array &$issues): void
-    {
+    private function validateTopLevel(
+        array $evidence,
+        array $targets,
+        array $gscQualityBounds,
+        array &$issues,
+    ): void {
         if (($evidence['task'] ?? null) !== self::TASK) {
             $issues[] = 'task_invalid';
         }
@@ -397,6 +411,7 @@ final class ArticleRecoveryBatchPlanner
             (array) data_get($evidence, 'gsc.previous_window', []),
             (array) data_get($evidence, 'gsc.current_window', []),
             (string) ($evidence['observed_at'] ?? ''),
+            $gscQualityBounds,
         )) {
             $issues[] = 'gsc_comparison_windows_invalid';
         }
@@ -643,7 +658,15 @@ final class ArticleRecoveryBatchPlanner
                 || $currentClicks > $currentImpressions
                 || $previousClicks > $previousImpressions
                 || ! $this->validPosition($row['current_position'] ?? null)
-                || ! $this->validPosition($row['previous_position'] ?? null)) {
+                || ! $this->validPosition($row['previous_position'] ?? null)
+                || ! $this->validImpressionPositionRelationship(
+                    $currentImpressions,
+                    $row['current_position'] ?? null,
+                )
+                || ! $this->validImpressionPositionRelationship(
+                    $previousImpressions,
+                    $row['previous_position'] ?? null,
+                )) {
                 $issues[] = 'page_cohort_row_invalid';
             }
             if ($countsAreIntegers && $previousLossKey !== null && $lossKey < $previousLossKey) {
@@ -946,6 +969,14 @@ final class ArticleRecoveryBatchPlanner
                 $issues[] = 'gsc_position_invalid:'.$url;
             }
         }
+        foreach ([
+            ['impressions' => $currentImpressions, 'position' => $page['current_position'] ?? null],
+            ['impressions' => $previousImpressions, 'position' => $page['previous_position'] ?? null],
+        ] as $metric) {
+            if (! $this->validImpressionPositionRelationship($metric['impressions'], $metric['position'])) {
+                $issues[] = 'gsc_impression_position_relationship_invalid:'.$url;
+            }
+        }
         foreach (['zip_sha256', 'csv_sha256'] as $field) {
             if (! $this->validHash((string) data_get($target, 'query_export.'.$field, ''))) {
                 $issues[] = 'query_export_'.$field.'_invalid:'.$url;
@@ -1128,6 +1159,32 @@ final class ArticleRecoveryBatchPlanner
         return (is_int($value) || is_float($value))
             && is_finite((float) $value)
             && $value >= 0;
+    }
+
+    private function validImpressionPositionRelationship(mixed $impressions, mixed $position): bool
+    {
+        if (! is_int($impressions) || $impressions < 0 || ! $this->validPosition($position)) {
+            return false;
+        }
+
+        return $impressions === 0 ? (float) $position === 0.0 : (float) $position > 0.0;
+    }
+
+    /**
+     * @return array{finalization_lag_days: mixed, max_report_age_days: mixed}
+     */
+    private function gscQualityBounds(): array
+    {
+        return [
+            'finalization_lag_days' => config(
+                'seo_intel.gsc_backfill_lag_days',
+                self::DEFAULT_FINALIZATION_LAG_DAYS,
+            ),
+            'max_report_age_days' => config(
+                'seo_intel.gsc_data_quality.max_report_age_days',
+                self::DEFAULT_MAX_REPORT_AGE_DAYS,
+            ),
+        ];
     }
 
     private function isCredentialKey(string $normalizedKey): bool
@@ -1482,11 +1539,13 @@ final class ArticleRecoveryBatchPlanner
     /**
      * @param  array<string, mixed>  $previousWindow
      * @param  array<string, mixed>  $currentWindow
+     * @param  array{finalization_lag_days: mixed, max_report_age_days: mixed}  $gscQualityBounds
      */
     private function validComparisonWindows(
         array $previousWindow,
         array $currentWindow,
         string $observedAt,
+        array $gscQualityBounds,
     ): bool {
         $previousStart = $this->exactDate((string) ($previousWindow['start'] ?? ''));
         $previousEnd = $this->exactDate((string) ($previousWindow['end'] ?? ''));
@@ -1499,11 +1558,25 @@ final class ArticleRecoveryBatchPlanner
             return false;
         }
 
+        $finalizationLagDays = $gscQualityBounds['finalization_lag_days'];
+        $maxReportAgeDays = $gscQualityBounds['max_report_age_days'];
+        if (! is_int($finalizationLagDays)
+            || ! is_int($maxReportAgeDays)
+            || $finalizationLagDays < 0
+            || $maxReportAgeDays < $finalizationLagDays) {
+            return false;
+        }
+
+        $observedDate = $observed->setTime(0, 0);
+        $latestFinalizedDate = $observedDate->modify('-'.$finalizationLagDays.' days');
+        $oldestAcceptableDate = $observedDate->modify('-'.$maxReportAgeDays.' days');
+
         if ($previousStart === null || $previousEnd === null || $currentStart === null || $currentEnd === null
             || $previousStart > $previousEnd
             || $currentStart > $currentEnd
             || $currentStart != $previousEnd->modify('+1 day')
-            || $currentEnd > $observed->setTime(0, 0)) {
+            || $currentEnd > $latestFinalizedDate
+            || $currentEnd < $oldestAcceptableDate) {
             return false;
         }
 
