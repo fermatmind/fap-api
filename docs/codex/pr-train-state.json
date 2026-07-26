@@ -100566,8 +100566,8 @@
         "evidence": "After rebasing onto independent baseline repair PR #3312 (8ed512841cabf45fc92fa6cf43955333073029e3), the complete SitemapGeneratorTest and SitemapSourceApiTest selection passed: 24 tests, 885 assertions, with only isolated-worktree missing-.env warnings."
       },
       "ci_verify_mbti": {
-        "status": "passed",
-        "evidence": "The declared MBTI verification script completed on the rebased worktree; generated Big Five compiled artifacts were restored to the committed bytes and excluded from this PR."
+        "status": "rerun_completed_remote_revalidation_pending",
+        "evidence": "The local MBTI verification reran after the SitemapXmlTest correction. Exact remote required checks on the new head remain the merge gate."
       }
     },
     "scope_validation": {
@@ -100612,8 +100612,18 @@
         "at": "2026-07-26T15:05:00Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #3313 from exact rebased head 8fc47dc89292e2ddcd8a62a73fc1e51dcb366f64. Required GitHub checks, exact-head review, zero unresolved threads and mergeability remain mandatory."
+      },
+      {
+        "at": "2026-07-26T15:15:00Z",
+        "status": "github_checks_failed_current_scope_fix_in_progress",
+        "note": "Exact head f2dd21c9bbe87a08662a2c3f8d5d1ab3b2ce21d5 failed verify-mbti-legacy and verify-mbti-v2 on stale SitemapXmlTest base-URL absence assertions. The fix adds only the affected sitemap XML contract to this PR's allowlist and changes those assertions to require the new canonical base URLs."
+      },
+      {
+        "at": "2026-07-26T15:35:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "The SitemapXmlTest repair, expanded focused sitemap suite and MBTI verification rerun completed locally. Generated Big Five compiled artifacts were restored; the new PR head must obtain a fresh exact remote required-check set."
       }
     ],
-    "updated_at": "2026-07-26T15:05:00Z"
+    "updated_at": "2026-07-26T15:35:00Z"
   }
 }
