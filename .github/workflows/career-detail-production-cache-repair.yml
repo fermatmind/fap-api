@@ -768,7 +768,16 @@ jobs:
               2>/dev/null
           }
 
+          run_candidate_batch() {
+            local output_receipt="$1"
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=batch FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$expected_remaining' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$expected_fingerprint' FM_CAREER_AUTHORIZED_COVERAGE_STATE='$expected_state' FM_CAREER_BATCH_OFFSET='$offset' FM_CAREER_BATCH_SIZE='$BOOTSTRAP_BATCH_SIZE' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
+              < "$RUNNER_PATH" > "$output_receipt" 2>/dev/null
+          }
+
           total_owned_writes=0
+          runtime_initialization_retry_count=0
           total_concurrent_coverage_gain="$(
             jq -r '.concurrent_coverage_gain_count' artifacts/current-preflight.json
           )"
@@ -790,12 +799,47 @@ jobs:
           while [ "$offset" -lt "$MINIMUM_TARGETS" ]; do
             verify_identity
             receipt="artifacts/candidate-exact-batch-${offset}.json"
-            if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "sudo -n -u www-data -- env FM_CAREER_RUNNER_EXECUTE=1 FM_CAREER_MODE=batch FM_CAREER_MANAGED_RELEASES_ROOT='$DEPLOY_PATH/releases' FM_CAREER_CANDIDATE_RELEASE='$CANDIDATE_RELEASE_NAME' FM_CAREER_CANDIDATE_SHA='$CANDIDATE_RELEASE_REVISION' FM_CAREER_EXPECTED_TARGETS='$MINIMUM_TARGETS' FM_CAREER_EXPECTED_MISSING='$expected_remaining' FM_CAREER_EXPECTED_COVERAGE_FINGERPRINT='$expected_fingerprint' FM_CAREER_AUTHORIZED_COVERAGE_STATE='$expected_state' FM_CAREER_BATCH_OFFSET='$offset' FM_CAREER_BATCH_SIZE='$BOOTSTRAP_BATCH_SIZE' FM_CAREER_OFFLINE_BUILD_BUDGET_MS='$OFFLINE_BUILD_BUDGET_MS' FM_CAREER_RETRY_LIMIT='$BOOTSTRAP_RETRY_LIMIT' /usr/bin/timeout 720 /usr/bin/php" \
-              < "$RUNNER_PATH" > "$receipt" 2>/dev/null; then
-              echo "candidate-exact cache batch failed; inspect the sanitized receipt." >&2
-              exit 1
+            if ! run_candidate_batch "$receipt"; then
+              if jq -e \
+                --argjson offset "$offset" \
+                '.contract_version == "career.candidate_exact_cache_bootstrap.v2"
+                 and .status == "failed"
+                 and .error_code == "CANDIDATE_RUNTIME_INITIALIZATION_FAILED"
+                 and .batch_offset == $offset
+                 and .cache_write_count == 0
+                 and .owned_cache_write_count == 0
+                 and .failure_count == 1
+                 and (.failure_stage | IN(
+                   "load_candidate_application",
+                   "bootstrap_candidate_kernel",
+                   "validate_candidate_services",
+                   "install_database_guard",
+                   "resolve_candidate_services"
+                 ))
+                 and .error_category == "database_transient_read"
+                 and .attempt_count == 1
+                 and .retry_count == 0
+                 and .queue_dispatch_count == 0
+                 and .database_write_count == 0
+                 and (.target? == null)
+                 and (.slug? == null)
+                 and (.locale? == null)
+                 and (.message? == null)
+                 and (.cache_key? == null)' \
+                "$receipt" >/dev/null; then
+                first_attempt_receipt="artifacts/candidate-exact-batch-${offset}-runtime-attempt-1.json"
+                mv "$receipt" "$first_attempt_receipt"
+                runtime_initialization_retry_count=$((runtime_initialization_retry_count + 1))
+                verify_identity
+                sleep 0.5
+                if ! run_candidate_batch "$receipt"; then
+                  echo "candidate-exact cache batch failed after one safe runtime initialization retry; inspect the sanitized receipts." >&2
+                  exit 1
+                fi
+              else
+                echo "candidate-exact cache batch failed outside the safe runtime initialization retry boundary; inspect the sanitized receipt." >&2
+                exit 1
+              fi
             fi
 
             owned_writes="$(jq -r '.owned_cache_write_count' "$receipt")"
@@ -878,6 +922,8 @@ jobs:
             --argjson owned_cache_write_count "$total_owned_writes" \
             --argjson concurrent_coverage_gain_count "$total_concurrent_coverage_gain" \
             --argjson total_coverage_gain_count "$total_coverage_gain" \
+            --argjson runtime_initialization_retry_count "$runtime_initialization_retry_count" \
+            --argjson runtime_initialization_retry_limit "$BOOTSTRAP_RETRY_LIMIT" \
             '{
               contract_version: "career.candidate_exact_cache_bootstrap.progress.v1",
               initial_missing_pointer_count: $initial_missing_pointer_count,
@@ -885,6 +931,8 @@ jobs:
               owned_cache_write_count: $owned_cache_write_count,
               concurrent_coverage_gain_count: $concurrent_coverage_gain_count,
               total_coverage_gain_count: $total_coverage_gain_count,
+              runtime_initialization_retry_count: $runtime_initialization_retry_count,
+              runtime_initialization_retry_limit_per_batch: $runtime_initialization_retry_limit,
               queue_dispatch_count: 0,
               database_write_count: 0
             }' > artifacts/cache-bootstrap-progress.json
