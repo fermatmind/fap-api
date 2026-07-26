@@ -566,7 +566,6 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
                 'FM_CAREER_CANDIDATE_RELEASE' => $release,
                 'FM_CAREER_CANDIDATE_SHA' => str_repeat('2', 40),
                 'FM_CAREER_EXPECTED_TARGETS' => '2092',
-                'FM_CAREER_EXPECTED_MISSING' => '2090',
                 'FM_CAREER_OFFLINE_BUILD_BUDGET_MS' => '5000',
                 'FM_CAREER_RETRY_LIMIT' => '1',
             ]);
@@ -578,6 +577,27 @@ final class CareerCandidateExactCacheBootstrapRunnerTest extends TestCase
             @rmdir($root.'/'.$release.'/backend');
             @rmdir($root.'/'.$release);
             @rmdir($root);
+        }
+    }
+
+    #[Test]
+    public function write_mode_requires_an_exact_expected_missing_count(): void
+    {
+        try {
+            CareerCandidateExactCacheBootstrapRunner::execute([
+                'FM_CAREER_MODE' => 'batch',
+                'FM_CAREER_MANAGED_RELEASES_ROOT' => '/managed/releases',
+                'FM_CAREER_CANDIDATE_RELEASE' => 'candidate-release',
+                'FM_CAREER_CANDIDATE_SHA' => str_repeat('2', 40),
+                'FM_CAREER_EXPECTED_TARGETS' => '2092',
+                'FM_CAREER_BATCH_OFFSET' => '0',
+                'FM_CAREER_BATCH_SIZE' => '50',
+                'FM_CAREER_OFFLINE_BUILD_BUDGET_MS' => '5000',
+                'FM_CAREER_RETRY_LIMIT' => '1',
+            ]);
+            $this->fail('Expected missing-count requirement.');
+        } catch (CareerCandidateExactCacheBootstrapFailure $failure) {
+            $this->assertSame('INVALID_EXPECTED_MISSING', $failure->safeCode);
         }
     }
 
