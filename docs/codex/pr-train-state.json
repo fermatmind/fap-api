@@ -99973,8 +99973,8 @@
       "SEO-10K-GSC-BOUNDED-BACKFILL-01",
       "SEO-QUERY-OWNER-URL-TRUTH-01"
     ],
-    "status": "github_checks_retry_pending",
-    "commit_sha": "8fe2795b24fbdc7bf75d78439d55cde546bf6f3f",
+    "status": "github_checks_pending",
+    "commit_sha": "415d96e6e4b2ac257ca8f5c6be8edfd7f64c5e84",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3283",
     "checks": {
       "dependency": {
@@ -99990,8 +99990,8 @@
         "evidence": "Focused tests passed 7/67; scoped Pint passed 3 files; composer validate --strict passed; composer audit reported no advisories; command discovery passed; manifest YAML and ledger JSON parsed; git diff checks passed; exact changed-file validation passed for all 6/6 authorized paths."
       },
       "github_required_checks": {
-        "status": "retry_pending",
-        "evidence": "The operator-authorized classifier repair passed the exact branch-diff test plus its positive/negative regression: 2 tests / 6 assertions. The Task 7 feature suite also passed 7/67, scoped Pint passed 4 files, and all remaining local manifest checks passed. A new GitHub required-check run is pending push."
+        "status": "pending",
+        "evidence": "The operator-authorized classifier repair passed the exact branch-diff test plus its positive/negative regression: 2 tests / 6 assertions. The Task 7 feature suite also passed 7/67, scoped Pint passed 4 files, and all remaining local manifest checks passed. Repair commit 415d96e6e4b2ac257ca8f5c6be8edfd7f64c5e84 is ready for the GitHub required-check retry."
       }
     },
     "scope_validation": {
@@ -100041,8 +100041,13 @@
         "at": "2026-07-26T01:50:32Z",
         "status": "github_checks_retry_pending",
         "note": "The exact classifier branch-diff test and positive/negative regression passed 2 tests / 6 assertions. The Task 7 feature suite passed 7/67, scoped Pint passed all 4 files, Composer validate/audit passed, YAML and JSON parsed, git diff checks passed, and the branch is limited to the exact 7/7 authorized paths. GitHub retry is pending push."
+      },
+      {
+        "at": "2026-07-26T01:51:02Z",
+        "status": "github_checks_pending",
+        "note": "Committed the operator-authorized classifier repair at 415d96e6e4b2ac257ca8f5c6be8edfd7f64c5e84. The exact 7-path Task 7 branch is ready to push for the required GitHub check retry."
       }
     ],
-    "updated_at": "2026-07-26T01:50:32Z"
+    "updated_at": "2026-07-26T01:51:02Z"
   }
 }
