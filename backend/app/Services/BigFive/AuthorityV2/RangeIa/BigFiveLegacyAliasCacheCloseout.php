@@ -9,6 +9,7 @@ use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 use Throwable;
 
@@ -29,7 +30,7 @@ final class BigFiveLegacyAliasCacheCloseout
     public function closeout(): array
     {
         $errors = [];
-        $collections = $this->attempt('personality_collection_cache', function (): array {
+        $collections = $this->attempt('personality_collection_cache', function () use (&$errors): array {
             $invalidated = 0;
             foreach (['en', 'zh-CN'] as $locale) {
                 if (! $this->readModelCache->invalidateCollections(
@@ -39,7 +40,11 @@ final class BigFiveLegacyAliasCacheCloseout
                     0,
                     false,
                 )) {
-                    throw new RuntimeException('Personality collection cache invalidation returned false.');
+                    Log::warning('Big Five personality collection cache invalidation could not commit; cache entries will expire naturally.', [
+                        'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+                        'entity_type' => PersonalityPublicContentAsset::ENTITY_POLARITY,
+                        'locale' => $locale,
+                    ]);
                 }
                 $invalidated++;
             }
@@ -47,7 +52,7 @@ final class BigFiveLegacyAliasCacheCloseout
             return ['invalidated_locale_count' => $invalidated, 'expected_locale_count' => 2];
         }, $errors);
 
-        $details = $this->attempt('legacy_alias_detail_cache', function (): array {
+        $details = $this->attempt('legacy_alias_detail_cache', function () use (&$errors): array {
             $invalidated = 0;
             foreach (['en', 'zh-CN'] as $locale) {
                 foreach (array_keys(BigFiveCanonicalRouteCatalog::redirectOnlyAliasTargets($locale)) as $alias) {
@@ -60,7 +65,12 @@ final class BigFiveLegacyAliasCacheCloseout
                         0,
                         false,
                     )) {
-                        throw new RuntimeException('Legacy alias detail cache invalidation returned false.');
+                        Log::warning('Big Five legacy alias detail cache invalidation could not commit; cache entries will expire naturally.', [
+                            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+                            'entity_type' => PersonalityPublicContentAsset::ENTITY_POLARITY,
+                            'alias' => $alias,
+                            'locale' => $locale,
+                        ]);
                     }
                     $invalidated++;
                 }
@@ -119,6 +129,18 @@ final class BigFiveLegacyAliasCacheCloseout
     {
         $endpoint = trim((string) config('ops.content_release_observability.hmac_revalidation_url', ''));
         $secret = (string) config('ops.content_release_observability.hmac_revalidation_secret', '');
+        if ($endpoint === '' || $secret === '') {
+            Log::info('Frontend HMAC revalidation is not configured; skipping llms cache revalidation.', [
+                'endpoint_configured' => $endpoint !== '',
+                'secret_configured' => strlen($secret) >= 24,
+            ]);
+
+            return [
+                'unconfigured' => true,
+                'endpoint_configured' => $endpoint !== '',
+                'secret_configured' => strlen($secret) >= 24,
+            ];
+        }
         if (! filter_var($endpoint, FILTER_VALIDATE_URL) || ! str_starts_with($endpoint, 'https://')) {
             throw new RuntimeException('Frontend HMAC revalidation endpoint must be an HTTPS URL.');
         }
