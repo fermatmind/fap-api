@@ -10,7 +10,7 @@
       "MBTI-CROSS-AUTHORITY-50"
     ],
     "status": "github_review_repairing",
-    "commit_sha": "ad8eb5e2ce726527415d9cc8998b36e5b93d7f86",
+    "commit_sha": "61aa82545f6095af79af19ab704fbd6a02dd54c7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3294",
     "checks": {
       "dependency": {
@@ -96,9 +96,14 @@
         "at": "2026-07-26T06:42:00Z",
         "status": "github_review_repairing",
         "note": "After all 9 checks passed on d60d0dccd, exact-head review found that query-busted sitemap readback could bypass a stale canonical cache entry. The blocking fap-web baseline repair PR #1810 merged at 841280ab35945e2c1454f5ac18ea3ededdfab5b6 and passed staging, while its exact-SHA production deployment remains separately unauthorized. This branch rebased onto current origin/main c7e94b7938e6dd4e3bc57c4e6cd101e42b159082; Phase B now revalidates six exact frontend paths including /sitemap.xml and reads all three canonical feeds without query parameters. Workflow YAML, actionlint, focused SRE tests 3/105, scoped Pint, Composer strict validation and audit pass. No production deploy, content/indexability write, sitemap/llms submission, or search action was executed."
+      },
+      {
+        "at": "2026-07-26T06:50:00Z",
+        "status": "github_checks_pending",
+        "note": "The canonical-cache repair passed the complete manifest validation chain and was committed as 61aa82545f6095af79af19ab704fbd6a02dd54c7 after rebasing onto current main. Only the workflow, focused SRE contract, and ledger changed in this repair; the complete PR still contains exactly the five declared paths. Fresh exact-head GitHub checks and review are mandatory. Production fap-web deployment and all production content/indexability/search mutations remain unexecuted."
       }
     ],
-    "updated_at": "2026-07-26T06:42:00Z"
+    "updated_at": "2026-07-26T06:50:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
