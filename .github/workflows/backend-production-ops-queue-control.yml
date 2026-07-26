@@ -536,7 +536,7 @@ jobs:
           result="$(timeout --signal=TERM --kill-after=10s 180s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' QUEUE_PROBE_PHP_B64='$queue_probe_b64' timeout --signal=TERM --kill-after=10s 150s bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-preflight-ssh.err")"
           ssh_rc=$?
           set -e
@@ -822,7 +822,7 @@ jobs:
           result="$(timeout --signal=TERM --kill-after=10s 180s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' EXPECTED_PROGRAM_PRESENT_BEFORE='$EXPECTED_PROGRAM_PRESENT_BEFORE' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
+            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_CONFIG_PATH_SHA256='$EXPECTED_CONFIG_PATH_SHA256' EXPECTED_CURRENT_CONFIG_SHA256='$EXPECTED_CURRENT_CONFIG_SHA256' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_RENDERED_SHA256='$EXPECTED_RENDERED_SHA256' EXPECTED_PROGRAM_PRESENT_BEFORE='$EXPECTED_PROGRAM_PRESENT_BEFORE' CONTROL_RUN_ID='$GITHUB_RUN_ID' CONFIG_B64='$config_b64' QUEUE_PROBE_PHP_B64='$queue_probe_b64' timeout --signal=TERM --kill-after=10s 150s bash -lc 'printf %s $remote_b64 | base64 -d | bash'" \
             2>"$RUNNER_TEMP/ops-queue-apply-ssh.err")"
           ssh_rc=$?
           set -e
