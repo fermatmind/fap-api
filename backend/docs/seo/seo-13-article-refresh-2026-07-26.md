@@ -231,3 +231,14 @@ GSC Request Indexing, URL Inspection, sitemap submission, Search Channel enqueue
 ## Repository rule impact
 
 CMS/backend Article records remain the only public content and SEO authority. The frontend receives no fallback copy. Existing routes, canonicals, discoverability eligibility, media authority, and private-flow exclusions remain unchanged. The generator is a deterministic repository helper for the exact package; it performs no CMS, database, deploy, or search write.
+
+## Production draft control plane
+
+The workflow `.github/workflows/seo-13-article-draft-production-ops.yml` is the only Codex-assisted production lane for creating this cohort's working revisions.
+
+1. Run `preflight` from the exact latest `main` control-plane SHA against the exact active application SHA and release name. This phase is read-only and emits an immutable receipt containing the 13 current published-revision locks, proposed body hashes, a state SHA, and the exact apply approval phrase.
+2. Obtain the operator's verbatim confirmation of that emitted phrase.
+3. Run `apply` with the successful preflight run id, attempt, state SHA, and exact phrase. Eligibility downloads and validates the immutable receipt, and the remote runner repeats all 13 preflights before its first CMS write.
+4. Apply creates exactly 13 isolated `human_review` working revisions. It does not promote any revision and keeps schema, hreflang, search submission, revalidation, sitemap, and llms changes held.
+
+Authenticated preview QA, editorial approval, controlled promotion, public smoke, and closeout remain later, separately evidenced phases. A successful draft receipt does not authorize or prove publication.
