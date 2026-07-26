@@ -9,8 +9,8 @@
       "MBTI-CROSS-PUBLISHER-49",
       "MBTI-CROSS-AUTHORITY-50"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "e5a1d5d8009f6e61cffc3e7b855fa4db7921c2c0",
+    "status": "merged_then_controlled_publish_completed",
+    "commit_sha": "0c4b7099088c24ae12096dd11f6657f02037c211",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3294",
     "checks": {
       "dependency": {
@@ -32,21 +32,52 @@
       "github_required_checks": {
         "status": "passed",
         "evidence": "Exact implementation head e5a1d5d8009f6e61cffc3e7b855fa4db7921c2c0 passed all 9 GitHub checks. Exact-head Codex review reported no major issues, every review thread is resolved, mergeability is CLEAN, and the complete PR remains limited to the exact five declared paths. The resulting manifest/ledger-only readiness head must also pass required checks before merge."
+      },
+      "pr_merge_reconciliation": {
+        "status": "passed",
+        "evidence": "GitHub reports PR #3294 MERGED at 2026-07-26T08:27:40Z as 0c4b7099088c24ae12096dd11f6657f02037c211. Current origin/main contains that squash merge, the remote codex/mbti-cross-publish-51 branch is absent, and no local task branch or worktree remains."
+      },
+      "production_content_phase": {
+        "status": "passed",
+        "evidence": "After the exact operator authorization for package 604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae and authorization be4f17484334074cf2c90d57898ab80b6074093b2510a4b7b4b0432a164b4670, the exact-three content transaction committed. Read-only run 30198140563/1 proves operation_status already_applied, record_count 3, current/desired state 6c2bba0dc2d5f9a48f9d87c63c7422f48491854b4f0ecdd558bb6a23f975b18c, content readback a8933ce064815c0d7815cfc968ffd6957b310dc3bd42adfa16033e13c5b79afd, discoverability held, and zero additional writes."
+      },
+      "production_indexability_phase": {
+        "status": "passed",
+        "evidence": "After the separate exact indexability authorization, the exact-three discoverability transaction committed without body mutation. Read-only run 30199461078/1 proves operation_status already_released, discoverability_state released, content readback a8933ce064815c0d7815cfc968ffd6957b310dc3bd42adfa16033e13c5b79afd, content fingerprint 06a076d1492f9a35f9c1e8f7eef94e47d573dd306c49097140f98eb324bb0659, rollback manifest 3e7c182a150dab8758e231b2495acb2487ef1b236ea66e01fdc8337d3682c6a2, active backend 3f4648e2e166e8d482009a5c3ef864489703e013, active frontend 5e3b2e874c942b3021e662428eb97b3893de0153, and zero additional writes."
+      },
+      "cache_closeout": {
+        "status": "passed",
+        "evidence": "The failed Phase B apply stopped after DB commit and before its receipt. PR #3307 added a cache-only recovery boundary and PR #3308 made its preflight recognize natural completion. Read-only recovery run 30200498373/1 returned PASS_PREFLIGHT with closeout_state already_closed, source cache SHA 7fce9df1f1f2b7a8470ce87c1ceaea874f3918dcf86a26d04a4e3f2f5c3efdda, empty feed-absence SHA e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, source_missing_count 0, feed_missing_count 0, and zero cache/DB/body/publication/indexability/deploy/restart/submission writes. No recovery apply was executed."
+      },
+      "public_exact_three_readback": {
+        "status": "passed",
+        "evidence": "Independent production readback passed all three exact slugs. Each public API is database-authoritative, approved, published, public, indexable, sitemap/llms eligible, robots index,follow, canonical exact, 8 content sections plus the visible summary section (9 rendered sections), 8 FAQ entries, one H1, and two JSON-LD scripts. Source SHAs remain a7b14d279daa3d2ccaaffa9442b5254f8e6f75e1ea0d3bf7a5c08817b912af7e, b73514962b2d72be47c9004f2b5e5fb7572ea82f918c2a0f5a3374e15b2f36cc, and 41e62902dae206acc8735b19ff7e698fd51b5a609d2aeb34bb02556867399a65. All three exact canonicals are present in sitemap.xml, llms.txt, and llms-full.txt."
+      },
+      "search_hold": {
+        "status": "passed",
+        "evidence": "All production receipts report zero search submissions. No sitemap submission, llms submission, URL Inspection write, IndexNow/Baidu push, or indexing request was executed."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true,
+      "production_content_write_completed": true,
+      "production_indexability_release_completed": true,
+      "exact_three_public_readback_passed": true,
+      "sitemap_membership_passed": true,
+      "llms_membership_passed": true,
+      "llms_full_membership_passed": true,
+      "search_submission_forbidden": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
+    "merged_at": "2026-07-26T08:27:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": true,
+    "database_mutation": true,
+    "cms_mutation": true,
     "api_runtime_change": false,
     "publish_allowed": false,
     "search_channel_action": false,
@@ -131,9 +162,14 @@
         "at": "2026-07-26T08:17:00Z",
         "status": "ready_to_merge",
         "note": "Exact implementation head e5a1d5d8009f6e61cffc3e7b855fa4db7921c2c0 passed all 9 required GitHub checks, exact-head Codex review found no major issues, all review threads are resolved, mergeability is CLEAN, and the exact five-path scope is preserved. Manifest and state advance together to ready_to_merge; the resulting metadata-only head must independently pass checks and review before squash merge."
+      },
+      {
+        "at": "2026-07-26T14:15:26Z",
+        "status": "merged_then_controlled_publish_completed",
+        "note": "Reconciled PR #3294 as merged and cleaned, then recorded the separately authorized Phase A content and Phase B indexability transactions. Postwrite receipts 30198140563/1 and 30199461078/1 prove exact-three DB authority, released discoverability, stable content readback/fingerprint, and zero additional writes. Recovery preflight 30200498373/1 proves the scheduled authority-cache warm already completed source/feed closeout with 0/0 missing and zero recovery writes, so no cache apply was executed. Independent API/page/feed readback passed exact-three database authority, complete visible body/FAQ/JSON-LD/canonical/index robots, and membership in sitemap, llms.txt, and llms-full.txt. Search submission remained held and unexecuted."
       }
     ],
-    "updated_at": "2026-07-26T08:17:00Z"
+    "updated_at": "2026-07-26T14:15:26Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
