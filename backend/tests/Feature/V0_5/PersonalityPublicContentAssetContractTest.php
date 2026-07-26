@@ -175,6 +175,20 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertJsonPath('pagination.total', 0)
             ->assertJsonCount(0, 'items');
 
+        $routes = $this->app['router']->getRoutes();
+        $this->assertSame(
+            'showByCode',
+            $routes->match(\Illuminate\Http\Request::create('/api/v0.5/personality-content-assets/big_five/domain/openness'))->getActionMethod()
+        );
+        $this->assertSame(
+            'showByCode',
+            $routes->match(\Illuminate\Http\Request::create('/api/v0.5/personality-content-assets/enneagram/center/gut'))->getActionMethod()
+        );
+        $this->assertSame(
+            'show',
+            $routes->match(\Illuminate\Http\Request::create('/api/v0.5/personality-content-assets/big_five/big-five/openness'))->getActionMethod()
+        );
+
         $this->getJson('/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en')
             ->assertOk()
             ->assertJsonPath('personality_public_content_asset_v1.code', 'openness')
@@ -266,6 +280,47 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             'Existing Imagination Detail',
             PersonalityPublicContentAsset::query()->where('entity_key', 'imagination')->value('title')
         );
+    }
+
+    public function test_public_asset_routes_disambiguate_typed_codes_from_bounded_slugs(): void
+    {
+        $bigFive = PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'openness',
+            'slug' => 'big-five/openness',
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'published_at' => now(),
+        ]));
+        $enneagram = PersonalityPublicContentAsset::query()->create($this->assetAttributes([
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CENTER,
+            'entity_key' => 'gut',
+            'slug' => 'enneagram/centers/gut',
+            'title' => 'Gut Center',
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'published_at' => now(),
+        ]));
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.id', $bigFive->id);
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/center/gut?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.id', $enneagram->id);
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/big-five/openness?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.id', $bigFive->id)
+            ->assertJsonPath('personality_public_content_asset_v1.slug', 'big-five/openness');
+
+        $this->getJson('/api/v0.5/personality-content-assets/unknown/big-five/openness?locale=en')
+            ->assertNotFound();
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/big.five/openness?locale=en')
+            ->assertNotFound();
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/'.str_repeat('a', 161).'?locale=en')
+            ->assertNotFound();
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/not-an-entity/missing?locale=en')
+            ->assertNotFound()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
     }
 
     public function test_write_import_rolls_back_the_entire_package_when_a_later_write_fails(): void

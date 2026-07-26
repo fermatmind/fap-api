@@ -5897,6 +5897,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_personality_public_asset_route_disambiguation_only(): void
+    {
+        $changed = ['backend/routes/api.php'];
+        $routeChangedLines = [
+            '+use App\\Models\\PersonalityPublicContentAsset;',
+            "-        Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);",
+            "-        Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
+            "+        Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode'])",
+            "+            ->whereIn('framework', PersonalityPublicContentAsset::FRAMEWORKS)",
+            "+            ->whereIn('entityType', PersonalityPublicContentAsset::ENTITY_TYPES);",
+            "+        Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show'])",
+            "+            ->whereIn('framework', PersonalityPublicContentAsset::FRAMEWORKS)",
+            "+            ->where('slug', '[A-Za-z0-9][A-Za-z0-9/-]{0,159}');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_api_cache_header_wiring_only(): void
     {
         $changed = [
@@ -14172,6 +14190,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);",
             "+    Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);",
             "+    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
+            '+use App\\Models\\PersonalityPublicContentAsset;',
+            "-        Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);",
+            "-        Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
+            "+        Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode'])",
+            "+            ->whereIn('framework', PersonalityPublicContentAsset::FRAMEWORKS)",
+            "+            ->whereIn('entityType', PersonalityPublicContentAsset::ENTITY_TYPES);",
+            "+        Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show'])",
+            "+            ->whereIn('framework', PersonalityPublicContentAsset::FRAMEWORKS)",
+            "+            ->where('slug', '[A-Za-z0-9][A-Za-z0-9/-]{0,159}');",
         ];
 
         foreach ($changedLines as $line) {
