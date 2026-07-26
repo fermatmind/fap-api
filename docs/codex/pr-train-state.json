@@ -9,7 +9,7 @@
       "MBTI-CROSS-PUBLISHER-49",
       "MBTI-CROSS-AUTHORITY-50"
     ],
-    "status": "github_checks_pending",
+    "status": "github_review_repairing",
     "commit_sha": "pending_remote_pr_head",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3294",
     "checks": {
@@ -66,9 +66,14 @@
         "at": "2026-07-26T05:08:00Z",
         "status": "github_checks_pending",
         "note": "Committed the exact five-path implementation as 4953c299e, pushed codex/mbti-cross-publish-51, and opened PR #3294. Required GitHub checks and exact-head review remain mandatory before merge; production content and indexability actions remain separately unauthorized."
+      },
+      {
+        "at": "2026-07-26T05:11:00Z",
+        "status": "github_review_repairing",
+        "note": "Inspected two actionable automated review findings before any retry. The production job now revalidates latest origin/main after environment approval immediately before remote execution, and content preflight rejects already_released rather than advertising an apply state its held-state assertions cannot accept. Actionlint, workflow YAML, focused SRE tests 3/84, Pint, and diff checks passed."
       }
     ],
-    "updated_at": "2026-07-26T05:08:00Z"
+    "updated_at": "2026-07-26T05:11:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",

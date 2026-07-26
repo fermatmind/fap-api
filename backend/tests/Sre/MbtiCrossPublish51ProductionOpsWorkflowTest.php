@@ -70,6 +70,7 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
         foreach ([
             'test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
+            'Revalidate latest control plane immediately before production operation',
             '.conclusion == "success"',
             '.head_branch == "main"',
             '.head_sha == $sha',
@@ -93,6 +94,11 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
         }
 
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
+        $this->assertSame(
+            2,
+            substr_count($workflow, 'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"'),
+            'Latest main must be checked during eligibility and again after environment approval.',
+        );
         $this->assertStringNotContainsString(
             'cat "$RUNNER_TEMP/mbti-cross-publish51.err"',
             $workflow,

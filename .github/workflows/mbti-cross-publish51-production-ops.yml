@@ -201,6 +201,16 @@ jobs:
           ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
             || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
+      - name: Revalidate latest control plane immediately before production operation
+        shell: bash
+        env:
+          EXPECTED_CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
       - name: Run fixed production publisher phase
         id: operation
         shell: bash
@@ -290,7 +300,7 @@ jobs:
               jq -e '
                 .artifact == "mbti.cross.publisher49.content.v1"
                 and .mode == "dry_run"
-                and (.status == "ready" or .status == "already_applied" or .status == "already_released")
+                and (.status == "ready" or .status == "already_applied")
                 and (.current_state_sha256 | test("^[0-9a-f]{64}$"))
                 and (.desired_state_sha256 | test("^[0-9a-f]{64}$"))
                 and .writes_committed == false
