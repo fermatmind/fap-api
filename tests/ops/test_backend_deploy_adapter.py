@@ -329,7 +329,15 @@ class DeployPhpCareerWarmCachePolicyTest(unittest.TestCase):
         self.assertIn("career_warm_public_authority_cache_nonblocking_failure", deploy_php)
         self.assertIn("Continuing deploy because DEPLOY_CAREER_WARM_CACHE_STRICT is not true.", deploy_php)
         self.assertIn("if ($strictWarmCache)", deploy_php)
-        self.assertIn("run($command);", deploy_php)
+        self.assertIn("run($heartbeatCommand.\"\\n\".'exit \"$status\"');", deploy_php)
+        self.assertIn("%s &", deploy_php)
+        self.assertIn("warm_pid=$!", deploy_php)
+        self.assertIn('trap \'cleanup_warm; exit 143\' HUP INT TERM', deploy_php)
+        self.assertIn('while kill -0 "$warm_pid" 2>/dev/null; do', deploy_php)
+        self.assertIn('echo "career_warm_heartbeat=running"', deploy_php)
+        self.assertIn('sleep 20', deploy_php)
+        self.assertIn('wait "$warm_pid"', deploy_php)
+        self.assertNotIn('echo "$warm_pid"', deploy_php)
         self.assertIn("exit 0", deploy_php)
 
 
