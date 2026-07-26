@@ -101,9 +101,14 @@
         "at": "2026-07-26T06:50:00Z",
         "status": "github_checks_pending",
         "note": "The canonical-cache repair passed the complete manifest validation chain and was committed as 61aa82545f6095af79af19ab704fbd6a02dd54c7 after rebasing onto current main. Only the workflow, focused SRE contract, and ledger changed in this repair; the complete PR still contains exactly the five declared paths. Fresh exact-head GitHub checks and review are mandatory. Production fap-web deployment and all production content/indexability/search mutations remain unexecuted."
+      },
+      {
+        "at": "2026-07-26T07:02:00Z",
+        "status": "github_review_repairing",
+        "note": "Exact head f6346b904 passed eight checks while verify-bigfive was still running, then exact-head review found that Phase B preflight did not prove the deployed frontend could perform the six-path cache closeout before committing indexability. The scoped repair now performs a read-only, no-redirect public /revision probe and requires exact fap-web SHA 841280ab35945e2c1454f5ac18ea3ededdfab5b6 in both indexability preflight and apply before any database mutation. The immutable receipt records and revalidates that frontend revision. The approved fap-web deployment remains unexecuted, so this preflight is intentionally fail-closed until that separately gated deploy succeeds."
       }
     ],
-    "updated_at": "2026-07-26T06:50:00Z"
+    "updated_at": "2026-07-26T07:02:00Z"
   },
   "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01": {
     "id": "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",

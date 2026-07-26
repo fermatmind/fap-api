@@ -150,6 +150,7 @@ jobs:
                  and .search_submission_count == 0
                  and (if $mode == "indexability_preflight"
                       then .cache_closeout_ready == true
+                           and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
                       else true
                       end)
                  and (if $mode == "content_preflight"
@@ -229,6 +230,7 @@ jobs:
           DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
           EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
           EXPECTED_STATE_SHA256: ${{ needs.eligibility.outputs.expected_state_sha256 }}
+          EXPECTED_FRONTEND_REVISION: 841280ab35945e2c1454f5ac18ea3ededdfab5b6
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           PACKAGE_SHA256: 604851b56031d22d48036e87a5358bf85c9e13268655dbe36d2ab798b3f58dae
           EDITORIAL_AUTHORIZATION_SHA256: be4f17484334074cf2c90d57898ab80b6074093b2510a4b7b4b0432a164b4670
@@ -253,6 +255,19 @@ jobs:
           test "$(tr -d '\r\n' < "$current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
           cd "$current/backend"
+          frontend_revision=""
+          if [ "$MODE" = indexability_preflight ] || [ "$MODE" = indexability_apply ]; then
+            frontend_revision="$(
+              curl -fsS --proto '=https' --max-redirs 0 \
+                --connect-timeout 10 --max-time 30 \
+                -H 'Accept: application/json' \
+                -H 'Cache-Control: no-cache' \
+                https://fermatmind.com/revision \
+                | jq -er --arg expected "$EXPECTED_FRONTEND_REVISION" \
+                    '.revision | select(. == $expected)'
+            )"
+            test "$frontend_revision" = "$EXPECTED_FRONTEND_REVISION"
+          fi
           case "$MODE" in
             content_preflight)
               php artisan personality:mbti-cross-publisher49-content \
@@ -285,9 +300,11 @@ jobs:
               ')"
               jq -c \
                 --argjson endpoint_count "$cache_endpoint_count" \
+                --arg frontend_revision "$frontend_revision" \
                 '. + {
                   cache_closeout_ready: true,
-                  frontend_revalidation_endpoint_count: $endpoint_count
+                  frontend_revalidation_endpoint_count: $endpoint_count,
+                  frontend_revision: $frontend_revision
                 }' <<<"$publisher_result"
               ;;
             indexability_apply)
@@ -409,10 +426,12 @@ jobs:
               trap - EXIT
 
               jq -c \
+                --arg frontend_revision "$frontend_revision" \
                 '. + {
                   cache_closeout_completed: true,
                   backend_cache_key_count: 5,
                   frontend_revalidation_path_count: 6,
+                  frontend_revision: $frontend_revision,
                   public_feed_readback_completed: true,
                   public_feed_count: 3
                 }' <<<"$publisher_result"
@@ -491,6 +510,7 @@ jobs:
                 and .body_mutated == false
                 and .cache_closeout_ready == true
                 and .frontend_revalidation_endpoint_count > 0
+                and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
                 and (.readback | length) == 3' <<<"$result" >/dev/null
               ;;
             indexability_apply)
@@ -506,6 +526,7 @@ jobs:
                  and .cache_closeout_completed == true
                  and .backend_cache_key_count == 5
                  and .frontend_revalidation_path_count == 6
+                 and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"
                  and .public_feed_readback_completed == true
                  and .public_feed_count == 3
                  and (.readback | length) == 3
@@ -537,6 +558,7 @@ jobs:
             --arg desired_state "$(jq -r '.desired_state_sha256 // .postwrite_state_sha256 // ""' <<<"$result")" \
             --arg content_readback "$(jq -r '.content_readback_sha256 // .required_content_readback_sha256 // ""' <<<"$result")" \
             --arg content_fingerprint "$(jq -r '.content_fingerprint_sha256 // ""' <<<"$result")" \
+            --arg frontend_revision "$(jq -r '.frontend_revision // ""' <<<"$result")" \
             --arg discoverability "$(jq -r '.discoverability_state // "held"' <<<"$result")" \
             --arg rollback "$rollback_sha256" \
             --arg approval "$approval_sha256" \
@@ -563,6 +585,7 @@ jobs:
               desired_state_sha256: $desired_state,
               content_readback_sha256: $content_readback,
               content_fingerprint_sha256: $content_fingerprint,
+              frontend_revision: $frontend_revision,
               discoverability_state: $discoverability,
               rollback_manifest_sha256: $rollback,
               operator_approval_phrase_sha256: $approval,

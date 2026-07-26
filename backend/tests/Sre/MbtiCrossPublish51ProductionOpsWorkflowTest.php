@@ -151,6 +151,11 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             '"/llms-full.txt"',
             'X-FM-Content-Release-Token',
             'https://fermatmind.com/${surface}',
+            'https://fermatmind.com/revision',
+            'EXPECTED_FRONTEND_REVISION: 841280ab35945e2c1454f5ac18ea3ededdfab5b6',
+            '--max-redirs 0',
+            '.revision | select(. == $expected)',
+            'frontend_revision: $frontend_revision',
             'frontend_revalidation_path_count: 6',
             'cache_closeout_ready',
             'cache_closeout_completed',
@@ -172,6 +177,14 @@ final class MbtiCrossPublish51ProductionOpsWorkflowTest extends TestCase
             '?mbti_cross_publish51=',
             $workflow,
             'Public feed readback must use the unmodified canonical cache key.',
+        );
+        $this->assertSame(
+            3,
+            substr_count(
+                $workflow,
+                'and .frontend_revision == "841280ab35945e2c1454f5ac18ea3ededdfab5b6"',
+            ),
+            'The immutable preflight receipt, live preflight, and live apply must all bind the frontend revision.',
         );
     }
 
