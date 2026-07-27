@@ -174,7 +174,7 @@ class SitemapSourceCacheTest extends TestCase
         ], 86400);
 
         $this->mock(SitemapGenerator::class, function ($mock): void {
-            $mock->shouldReceive('generateUrls')
+            $mock->shouldReceive('generateSitemapUrls')
                 ->once()
                 ->andThrow(new \RuntimeException('simulated sitemap generator failure'));
         });

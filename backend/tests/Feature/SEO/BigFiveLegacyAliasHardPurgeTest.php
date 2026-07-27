@@ -6,6 +6,7 @@ namespace Tests\Feature\SEO;
 
 use App\Console\Commands\PersonalityBigFiveLegacyAliasesPurge;
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
+use App\Models\ContentPage;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\BigFive\AuthorityV2\RangeIa\BigFiveLegacyAliasHardPurge;
@@ -352,14 +353,125 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $this->seedBoundary(includeAliases: false);
+        foreach (['methodology', 'source-review-policy'] as $slug) {
+            ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
+                'org_id' => 0,
+                'slug' => $slug,
+                'path' => '/zh/personality/big-five/'.$slug,
+                'canonical_path' => '/zh/personality/big-five/'.$slug,
+                'kind' => ContentPage::KIND_POLICY,
+                'locale' => 'zh-CN',
+                'title' => $slug,
+                'content_md' => 'Reserved Big Five namespace fixture.',
+                'status' => ContentPage::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => true,
+                'published_at' => now(),
+            ]));
+        }
+        foreach ([
+            'query-bearing-hub' => '/zh/personality/big-five?preview=1',
+            'fragment-bearing-hub' => '/zh/personality/big-five#preview',
+            'encoded-query-bearing-hub' => '/zh/personality/big-five%3Fpreview=1',
+            'encoded-fragment-bearing-hub' => '/zh/personality/big-five%23preview',
+            'dot-segment-methodology' => '/zh/personality/x/../big-five/methodology',
+            'encoded-methodology' => '/zh/personality/%62ig-five/methodology',
+            'backslash-methodology' => '/zh/personality\big-five/methodology',
+            'control-character-methodology' => "/zh/personality/bi\ng-five/methodology",
+        ] as $slug => $canonicalPath) {
+            ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
+                'org_id' => 0,
+                'slug' => $slug,
+                'path' => '/zh/'.$slug,
+                'canonical_path' => $canonicalPath,
+                'kind' => ContentPage::KIND_POLICY,
+                'locale' => 'zh-CN',
+                'title' => $slug,
+                'content_md' => 'Reserved Big Five namespace query or fragment fixture.',
+                'status' => ContentPage::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => true,
+                'published_at' => now(),
+            ]));
+        }
         app(PublicCareerAuthorityResponseCache::class)->warm();
 
-        $paths = collect(app(SitemapGenerator::class)->generateUrls())
+        $authorityPaths = collect(app(SitemapGenerator::class)->generateUrls())->pluck('loc');
+        self::assertContains('https://fermatmind.com/zh/personality/big-five/methodology', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five/source-review-policy', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five?preview=1', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five#preview', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five%3Fpreview=1', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five%23preview', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/x/../big-five/methodology', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/%62ig-five/methodology', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality\big-five/methodology', $authorityPaths);
+        self::assertContains("https://fermatmind.com/zh/personality/bi\ng-five/methodology", $authorityPaths);
+
+        $eligibleShadowPath = '/en/personality/big-five/openness';
+        PersonalityPublicContentAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'aaa-shadow-openness',
+            'slug' => 'enneagram/aaa-shadow-openness',
+            'locale' => 'en',
+            'title' => 'Earlier Enneagram shadow',
+            'summary' => 'summary',
+            'content_sections_json' => [['key' => 'body', 'title' => 'Body', 'body_md' => 'Body']],
+            'seo_json' => [],
+            'canonical_json' => ['path' => $eligibleShadowPath],
+            'hreflang_json' => ['en' => $eligibleShadowPath],
+            'faq_json' => [],
+            'schema_json' => [],
+            'method_boundary_json' => [],
+            'evidence_notes_json' => [],
+            'authority_json' => [],
+            'internal_links_json' => [],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'seo_discoverability_released',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'test-eligible-cross-framework-shadow',
+            'source_hash' => str_repeat('d', 64),
+        ]);
+        $eligibleShadowEntry = collect(app(SitemapGenerator::class)->generateSitemapUrls())
+            ->firstWhere('loc', 'https://fermatmind.com'.$eligibleShadowPath);
+        self::assertIsArray($eligibleShadowEntry);
+        self::assertStringContainsString(
+            'personality-public-content:big-five:',
+            (string) ($eligibleShadowEntry['slug'] ?? ''),
+        );
+
+        $paths = collect(app(SitemapGenerator::class)->generateSitemapUrls())
             ->pluck('loc')
             ->filter(static fn (mixed $path): bool => is_string($path) && str_contains($path, '/personality/big-five'))
             ->values();
+        $expectedPaths = array_map(
+            static fn (string $path): string => 'https://fermatmind.com'.$path,
+            BigFiveCanonicalRouteCatalog::canonicalPaths(),
+        );
+        sort($expectedPaths, SORT_STRING);
 
+        self::assertSame($expectedPaths, $paths->all());
         self::assertCount(104, $paths);
+        self::assertCount(104, BigFiveCanonicalRouteCatalog::canonicalPaths());
+        self::assertFalse(BigFiveCanonicalRouteCatalog::isCanonicalPath('/zh/personality/big-five/methodology'));
+        self::assertFalse(BigFiveCanonicalRouteCatalog::isCanonicalPath('/zh/personality/big-five/source-review-policy'));
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five/methodology', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five/source-review-policy', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five?preview=1', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five#preview', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five%3Fpreview=1', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five%23preview', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/x/../big-five/methodology', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/%62ig-five/methodology', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality\big-five/methodology', $paths->all());
+        self::assertNotContains("https://fermatmind.com/zh/personality/bi\ng-five/methodology", $paths->all());
         self::assertSame(104, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
             ->whereIn('locale', ['en', 'zh-CN'])
@@ -369,6 +481,72 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             self::assertNotContains('https://fermatmind.com'.$alias, $paths->all());
             self::assertContains('https://fermatmind.com'.$target, $paths->all());
         }
+
+        $depublishedPath = '/en/personality/big-five/openness';
+        $depublishedAsset = PersonalityPublicContentAsset::query()
+            ->withoutGlobalScopes()
+            ->get()
+            ->first(static fn (PersonalityPublicContentAsset $asset): bool => data_get(
+                $asset->canonical_json,
+                'path',
+            ) === $depublishedPath);
+        self::assertInstanceOf(PersonalityPublicContentAsset::class, $depublishedAsset);
+        $depublishedAsset->forceFill(['sitemap_eligible' => false])->save();
+        PersonalityPublicContentAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'shadow-openness',
+            'slug' => 'enneagram/shadow-openness',
+            'locale' => 'en',
+            'title' => 'Enneagram shadow',
+            'summary' => 'summary',
+            'content_sections_json' => [['key' => 'body', 'title' => 'Body', 'body_md' => 'Body']],
+            'seo_json' => [],
+            'canonical_json' => ['path' => $depublishedPath],
+            'hreflang_json' => ['en' => $depublishedPath],
+            'faq_json' => [],
+            'schema_json' => [],
+            'method_boundary_json' => [],
+            'evidence_notes_json' => [],
+            'authority_json' => [],
+            'internal_links_json' => [],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'seo_discoverability_released',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'test-cross-framework-shadow',
+            'source_hash' => str_repeat('c', 64),
+        ]);
+        ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
+            'org_id' => 0,
+            'slug' => 'big-five-openness-shadow',
+            'path' => $depublishedPath,
+            'canonical_path' => $depublishedPath,
+            'kind' => ContentPage::KIND_POLICY,
+            'locale' => 'en',
+            'title' => 'Big Five openness shadow',
+            'content_md' => 'A ContentPage must not replace an ineligible Big Five authority asset.',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now(),
+        ]));
+
+        self::assertContains(
+            'https://fermatmind.com'.$depublishedPath,
+            collect(app(SitemapGenerator::class)->generateUrls())->pluck('loc')->all(),
+        );
+        $depublishedSitemapPaths = collect(app(SitemapGenerator::class)->generateSitemapUrls())
+            ->pluck('loc')
+            ->filter(static fn (mixed $path): bool => is_string($path) && str_contains($path, '/personality/big-five'))
+            ->values();
+        self::assertNotContains('https://fermatmind.com'.$depublishedPath, $depublishedSitemapPaths->all());
+        self::assertCount(103, $depublishedSitemapPaths);
     }
 
     /** @return array{PersonalityPublicContentAsset,PersonalityPublicContentAsset} */

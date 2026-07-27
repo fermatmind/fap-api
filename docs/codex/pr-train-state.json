@@ -100983,5 +100983,153 @@
         }
       ],
       "updated_at": "2026-07-27T07:15:49Z"
+  },
+  "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01": {
+    "id": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
+    "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
+    "status": "ready_to_merge",
+    "depends_on": [],
+    "commit_sha": "18a415e87c0b69dde30925a223f9bf6cb111a624",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
+    "checks": {
+      "focused_big_five_sitemap_contract": "passed: 16 tests, 161 assertions",
+      "sitemap_generator_and_source_contracts": "passed: 55 tests, 1356 assertions",
+      "pint_scoped": "passed",
+      "composer_validate_strict": "passed",
+      "composer_audit_locked": "passed: 0 advisories",
+      "ci_verify_mbti": "passed: full repository gate",
+      "yaml_json_and_diff_scope": "passed",
+      "github_required_checks": "passed: 9/9 on exact implementation head 18a415e87c0b69dde30925a223f9bf6cb111a624",
+      "exact_head_review": "passed: exact implementation head 18a415e87c0b69dde30925a223f9bf6cb111a624 reviewed; only this mandatory ledger-binding tail remained"
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-27T06:14:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 1d08b9de680a2170ce4e37ba95d2f39dbe4b91a0 after classifier prerequisite PR #3336 merged. Scope is limited to the Big Five reserved sitemap namespace gate, focused test, and exact train metadata. No production, CMS, database, cache, Search, sitemap warm, publication, indexing, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-27T06:27:00Z",
+        "status": "local_validation_passed",
+        "note": "Initial exact scope passed focused Big Five sitemap tests, sitemap generator/source contracts, scoped Pint, Composer validate/audit, the complete ci_verify_mbti gate, YAML/JSON parsing, and diff validation. Generated Big Five compiled timestamps from the full verification were restored to their exact pre-test bytes and excluded from scope."
+      },
+      {
+        "at": "2026-07-27T06:29:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed initial implementation at 915608f4374e2dd9fb68003fcf0b6c528457a866, pushed the task branch, and opened PR #3337. No production or cache action occurred."
+      },
+      {
+        "at": "2026-07-27T06:40:00Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact-head review identified query or fragment-bearing Big Five URLs passing path-only catalog validation. The gate now rejects both components fail-closed; focused and complete sitemap contracts pass."
+      },
+      {
+        "at": "2026-07-27T06:49:00Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Exact-head review identified dot-segment and percent-encoded aliases. The gate repeatedly decodes and removes dot segments for reserved-namespace detection, rejecting every non-normalized Big Five candidate."
+      },
+      {
+        "at": "2026-07-27T06:56:00Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified WHATWG backslash normalization and stale ledger evidence. Backslash-normalized reserved paths now fail closed and the ledger binds the validated implementation."
+      },
+      {
+        "at": "2026-07-27T07:06:00Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified PHP/browser disagreement for embedded ASCII controls. Every sitemap loc containing an ASCII control now fails before parse_url."
+      },
+      {
+        "at": "2026-07-27T07:14:00Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified a P1 scope violation because LlmsController consumes generateUrls. Implementation 6ea26cd8c2a851e98cf59a901fbea8e6846c9a76 moves the gate into sitemap-only generateSitemapUrls, binds XML and sitemap-source consumers to it, and preserves llms authority behavior. Focused contracts pass with 62 assertions and sitemap generator/source contracts pass with 886 assertions."
+      },
+      {
+        "at": "2026-07-27T07:21:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact head fc8556f509bd55da2f93f13325456c55acc4397d passed all nine required checks and exact-head review. XML cache activation remains intentionally deferred until the separately authorized post-Career sitemap closeout."
+      },
+      {
+        "at": "2026-07-27T07:27:00Z",
+        "status": "github_checks_pending",
+        "note": "Before merge, independent Career PR #3333 advanced origin/main to 9368de31c and overlapped SitemapGenerator, SitemapSourceController, Big Five tests, and both train ledgers. Merged latest main in the isolated worktree, preserved both runtime semantics and both ledger entries, and reset exact-head checks/review to pending. No product or production write occurred."
+      },
+      {
+        "at": "2026-07-27T07:37:00Z",
+        "status": "github_checks_pending",
+        "note": "Latest-main integration passed the focused Big Five sitemap contract (62 assertions), complete sitemap generator/source contracts (886 assertions), scoped Pint, Composer validate/audit, and the full ci_verify_mbti repository gate. Generated Big Five compiled artifacts were restored to their exact tracked bytes and excluded from scope. Fresh exact-head GitHub checks and review remain pending."
+      },
+      {
+        "at": "2026-07-27T07:42:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 43c3749e66b6ddeefb4fe4f575434e628c1d6d9f passed all nine required checks, exact-head Codex review reported no major issues, review threads are 0, and GitHub reports MERGEABLE/CLEAN. This ledger-only tail records the mandatory ready_to_merge transition; production deploy and cache actions remain unauthorized."
+      },
+      {
+        "at": "2026-07-27T08:03:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review found encoded query/fragment delimiters could bypass reserved-namespace classification. The initial focused retry exposed an invalid regex delimiter and failed before assertions; the scoped fix escapes the delimiter, rejects decoded ?/# boundaries fail-closed, and passes the focused contract (66 assertions), the complete sitemap generator/source/Big Five suite (1041 assertions), scoped Pint, YAML/JSON parsing, and diff validation."
+      },
+      {
+        "at": "2026-07-27T08:22:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review identified that a canonical-path ContentPage could replace a depublished Big Five authority row. The sitemap-only gate now requires each reserved canonical URL to be emitted by the eligible Big Five asset producer as well as the canonical catalog. The focused contract passes with 70 assertions, the complete sitemap suite passes with 1045 assertions, scoped Pint passes, and the full ci_verify_mbti repository gate passes. Generated compiled artifacts were restored to exact tracked bytes."
+      },
+      {
+        "at": "2026-07-27T08:42:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review identified a two-query authority time-of-check/time-of-use window. Sitemap generation now reads the personality public-content authority once and reuses that immutable in-process snapshot for both merged enumeration and Big Five eligibility filtering. Focused and complete sitemap contracts, scoped Pint, and the full ci_verify_mbti repository gate pass; generated compiled artifacts were restored to exact tracked bytes."
+      },
+      {
+        "at": "2026-07-27T08:51:00Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified cross-framework authority shadowing and stale merge-readiness evidence. The single snapshot now preserves an internal framework marker, admits reserved Big Five eligibility only from Big Five rows, strips the marker before public enumeration, and resets manifest/state to pending until fresh exact-head checks and review complete."
+      },
+      {
+        "at": "2026-07-27T08:59:00Z",
+        "status": "github_checks_pending",
+        "note": "Cross-framework authority provenance fix passed the focused Big Five sitemap contract (70 assertions), the complete sitemap suite (1045 assertions), scoped Pint, and the full ci_verify_mbti repository gate. Generated compiled artifacts were restored to exact tracked bytes; fresh exact-head required checks and review remain pending."
+      },
+      {
+        "at": "2026-07-27T09:06:00Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review identified that framework provenance was stripped before URL deduplication, allowing an earlier Enneagram duplicate to supply slug/lastmod for an otherwise eligible Big Five canonical URL. The scoped fix makes Big Five authority win duplicate resolution before removing the internal marker and adds a positive cross-framework shadow regression."
+      },
+      {
+        "at": "2026-07-27T09:23:00Z",
+        "status": "same_scope_contract_fix_in_progress",
+        "note": "The full ci_verify_mbti repository gate passed after the provenance-aware dedupe fix. An additional sitemap cache contract run found its failure-path mock still expected the pre-PR generateUrls consumer instead of the sitemap-only generateSitemapUrls consumer. The same-scope one-line contract repair and its exact test path are now declared before rerunning the sitemap suite."
+      },
+      {
+        "at": "2026-07-27T09:26:00Z",
+        "status": "github_checks_pending",
+        "note": "Final local scope passes: focused Big Five contract 16 tests / 161 assertions, complete sitemap generator/XML/source/cache suite 55 tests / 1356 assertions, scoped Pint, and the full ci_verify_mbti repository gate. Generated compiled artifacts were restored to exact tracked bytes; fresh exact-head checks and review are required."
+      },
+      {
+        "at": "2026-07-27T09:33:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 18a415e87c0b69dde30925a223f9bf6cb111a624 passed all nine required checks, Codex exact-head review, and 0 unresolved implementation threads; GitHub reports CLEAN/MERGEABLE. Manifest and ledger now bind that implementation head as ready_to_merge. This metadata-only tail must independently repeat required checks and exact-head review before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-27T09:33:00Z"
   }
 }

@@ -62,7 +62,7 @@ class SitemapGenerator
 
     public function generate(): array
     {
-        $urls = $this->generateUrls();
+        $urls = $this->generateSitemapUrls();
 
         $slugList = [];
         $maxUpdatedAt = null;
@@ -96,13 +96,24 @@ class SitemapGenerator
 
     public function generateUrls(): array
     {
+        return $this->generateUrlsFromAuthoritySnapshot(
+            $this->getPersonalityPublicContentAssetUrls(),
+        );
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $personalityPublicContentAssetUrls
+     * @return array<int, array<string, mixed>>
+     */
+    private function generateUrlsFromAuthoritySnapshot(array $personalityPublicContentAssetUrls): array
+    {
         $urls = array_merge(
             $this->getScaleUrls(),
             $this->getArticleUrls(),
             $this->getCareerJobUrls(),
             $this->getCareerGuideUrls(),
             $this->getPersonalityUrls(),
-            $this->getPersonalityPublicContentAssetUrls(),
+            $personalityPublicContentAssetUrls,
             $this->getPersonalityComparisonUrls(),
             $this->getTopicUrls(),
             $this->getContentPageUrls(),
@@ -110,7 +121,15 @@ class SitemapGenerator
         );
 
         $urls = collect($urls)
+            ->sortBy(static fn (array $url): int => (
+                ($url['__authority_framework'] ?? null) === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE
+            ) ? 0 : 1)
             ->unique('loc')
+            ->map(static function (array $url): array {
+                unset($url['__authority_framework']);
+
+                return $url;
+            })
             ->values()
             ->all();
 
@@ -119,6 +138,61 @@ class SitemapGenerator
         });
 
         return $urls;
+    }
+
+    public function generateSitemapUrls(): array
+    {
+        $personalityPublicContentAssetUrls = $this->getPersonalityPublicContentAssetUrls();
+        $eligibleBigFiveLocs = collect($personalityPublicContentAssetUrls)
+            ->filter(static function (array $url): bool {
+                if (($url['__authority_framework'] ?? null) !== PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
+                    return false;
+                }
+
+                $loc = trim((string) ($url['loc'] ?? ''));
+                $path = parse_url($loc, PHP_URL_PATH);
+
+                return is_string($path) && BigFiveCanonicalRouteCatalog::isCanonicalPath($path);
+            })
+            ->mapWithKeys(static fn (array $url): array => [(string) $url['loc'] => true])
+            ->all();
+
+        return collect($this->generateUrlsFromAuthoritySnapshot($personalityPublicContentAssetUrls))
+            ->filter(static function (array $url) use ($eligibleBigFiveLocs): bool {
+                $loc = trim((string) ($url['loc'] ?? ''));
+                if (preg_match('/[\x00-\x1F\x7F]/', $loc) === 1) {
+                    return false;
+                }
+
+                $parts = parse_url($loc);
+                $path = is_array($parts) ? ($parts['path'] ?? null) : null;
+                if (! is_string($path)) {
+                    return true;
+                }
+
+                $normalizedPath = self::normalizePathForReservedNamespace($path);
+                $isReservedBigFivePath = preg_match(
+                    '#^/(?:en|zh)/personality/big-five(?:[/?\#]|$)#',
+                    $path,
+                ) === 1 || preg_match(
+                    '#^/(?:en|zh)/personality/big-five(?:[/?\#]|$)#',
+                    $normalizedPath,
+                ) === 1;
+                if (! $isReservedBigFivePath) {
+                    return true;
+                }
+
+                if (array_key_exists('query', $parts) || array_key_exists('fragment', $parts)) {
+                    return false;
+                }
+
+                return hash_equals($path, $normalizedPath)
+                    && BigFiveCanonicalRouteCatalog::isCanonicalPath($path)
+                    && isset($eligibleBigFiveLocs[$loc]);
+            })
+            ->unique('loc')
+            ->values()
+            ->all();
     }
 
     public function generateApprovedCareerJobDetailUrls(): array
@@ -415,6 +489,7 @@ class SitemapGenerator
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => 'personality-public-content:'.$frameworkKey.':'.($row->locale === 'en' ? 'en' : 'zh').':'.strtolower((string) $row->entity_key),
                 'updated_at' => $lastmod->toDateTimeString(),
+                '__authority_framework' => $framework,
             ];
         }
 
@@ -1220,6 +1295,34 @@ class SitemapGenerator
         $lines[] = '</urlset>';
 
         return implode("\n", $lines)."\n";
+    }
+
+    private static function normalizePathForReservedNamespace(string $path): string
+    {
+        $decodedPath = $path;
+        $remainingPasses = strlen($path) + 1;
+        do {
+            $previousPath = $decodedPath;
+            $decodedPath = rawurldecode($decodedPath);
+            $remainingPasses--;
+        } while ($decodedPath !== $previousPath && $remainingPasses > 0);
+        $decodedPath = str_replace('\\', '/', $decodedPath);
+
+        $segments = [];
+        foreach (explode('/', $decodedPath) as $segment) {
+            if ($segment === '' || $segment === '.') {
+                continue;
+            }
+            if ($segment === '..') {
+                array_pop($segments);
+
+                continue;
+            }
+
+            $segments[] = $segment;
+        }
+
+        return '/'.implode('/', $segments);
     }
 
     private function formatLastmod(?Carbon $updatedAt): string
