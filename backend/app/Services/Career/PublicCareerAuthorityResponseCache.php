@@ -6,6 +6,7 @@ namespace App\Services\Career;
 
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Resources\Career\CareerDatasetHubResource;
 use App\Http\Resources\Career\CareerDatasetMethodResource;
@@ -347,6 +348,90 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             && $this->jobDetailProjectionItemIsPublished(
                 $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale),
             );
+    }
+
+    /**
+     * Resolve one request-bounded publication snapshot without rehydrating the
+     * materialized projection once per slug and locale.
+     *
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @return array<string,array<string,bool>>
+     */
+    public function jobDetailPublishedSnapshot(array $slugs, array $locales): array
+    {
+        $published = [];
+        foreach ($this->jobDetailPublicationSnapshot($slugs, $locales) as $slug => $localesBySlug) {
+            foreach ($localesBySlug as $locale => $evidence) {
+                $published[$slug][$locale] = $evidence['published'];
+            }
+        }
+
+        return $published;
+    }
+
+    /**
+     * Return the exact payload/version whose publication authority was checked,
+     * so downstream quality and review reads cannot drift onto another active
+     * pointer after accepting a boolean from an earlier version.
+     *
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @return array<string,array<string,array{published:bool,classification:string,version:string|null,payload:array<string,mixed>|null}>>
+     */
+    public function jobDetailPublicationSnapshot(array $slugs, array $locales): array
+    {
+        $normalizedSlugs = array_values(array_unique(array_filter(array_map(
+            static fn (string $slug): string => strtolower(trim($slug)),
+            $slugs,
+        ))));
+        $normalizedLocales = array_values(array_unique(array_map(
+            fn (string $locale): string => $this->normalizePublicLocale($locale),
+            $locales,
+        )));
+        $snapshot = $this->runtimePublishProjection instanceof CareerRuntimePublishProjectionCoverageSnapshot
+            ? $this->runtimePublishProjection->jobDetailCoverageItems($normalizedLocales)
+            : null;
+
+        $evidence = [];
+        foreach ($normalizedSlugs as $slug) {
+            foreach ($normalizedLocales as $locale) {
+                $item = is_array($snapshot)
+                    ? ($snapshot[$slug.'|'.$locale] ?? null)
+                    : $this->runtimePublishProjection->itemForSlug($slug, $locale);
+                $materializedItem = is_array($item) ? $item : null;
+                $readiness = $this->jobDetailCacheReadiness($slug, $locale);
+                $classification = (string) ($readiness['classification'] ?? '');
+                $version = is_string($readiness['version'] ?? null)
+                    ? $readiness['version']
+                    : null;
+                $payload = is_array($readiness['payload'] ?? null)
+                    ? $readiness['payload']
+                    : null;
+                $published = $payload !== null && in_array(
+                    $classification,
+                    ['ready_active', 'ready_lkg', 'legacy_migratable'],
+                    true,
+                ) && (
+                    $this->jobDetailProjectionItemIsPublished($materializedItem)
+                    || (
+                        $classification === 'ready_active'
+                        && $version !== null
+                        && $this->jobDetailProjectionItemIsPublished(
+                            $this->jobDetailExposureProjectionForVersion($slug, $locale, $version),
+                        )
+                    )
+                );
+                $evidence[$slug][$locale] = [
+                    'published' => $published,
+                    'classification' => $classification,
+                    'version' => $version,
+                    'payload' => $payload,
+                ];
+            }
+        }
+
+        return $evidence;
     }
 
     private function dispatchJobDetailWarm(string $slug, string $publicLocale): void
@@ -1904,6 +1989,22 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         $materializedItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+
+        return $this->effectiveJobDetailProjectionItemFromMaterialized(
+            $normalizedSlug,
+            $normalizedLocale,
+            $materializedItem,
+        );
+    }
+
+    /** @param array<string, mixed>|null $materializedItem */
+    private function effectiveJobDetailProjectionItemFromMaterialized(
+        string $slug,
+        string $publicLocale,
+        ?array $materializedItem,
+    ): ?array {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         if ($this->jobDetailProjectionItemIsPublished($materializedItem)) {
             return $materializedItem;
         }
@@ -1935,6 +2036,27 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         }
 
         return $exposureProjection;
+    }
+
+    /** @return array<string,mixed>|null */
+    private function jobDetailExposureProjectionForVersion(
+        string $slug,
+        string $publicLocale,
+        string $version,
+    ): ?array {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $exposureProjection = Cache::get($this->jobDetailExposureProjectionVersionKey(
+            $normalizedSlug,
+            $normalizedLocale,
+            $version,
+        ));
+
+        return $this->jobDetailExposureProjectionSnapshotIsValid(
+            $exposureProjection,
+            $normalizedSlug,
+            $normalizedLocale,
+        ) ? $exposureProjection : null;
     }
 
     private function jobDetailExposureProjectionSnapshotIsValid(

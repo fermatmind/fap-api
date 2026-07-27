@@ -85,6 +85,22 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('items.0.search_entry_authority.review_state', 'unknown');
     }
 
+    public function test_unapproved_detail_skips_redundant_publication_refresh(): void
+    {
+        $bridge = app(CareerPilotReviewEvidenceBridge::class);
+        $payload = app(PublicCareerAuthorityResponseCache::class)->jobDetailPayload(self::SLUG, 'en');
+        $this->assertIsArray($payload);
+
+        Cache::partialMock()
+            ->shouldReceive('get')
+            ->never();
+
+        $projected = $bridge->projectDetailPayload(self::SLUG, $payload);
+
+        $this->assertSame('unknown', data_get($projected, 'trust_manifest.review_state'));
+        $this->assertSame('ineligible', data_get($projected, 'search_entry_tier'));
+    }
+
     public function test_exact_approved_all_evidence_projects_only_public_review_fields(): void
     {
         $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
@@ -338,6 +354,70 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('trust_manifest.review_state', 'unknown');
+    }
+
+    public function test_cached_approval_cannot_keep_index_eligible_after_opposite_locale_target_drift(): void
+    {
+        $bridge = app(CareerPilotReviewEvidenceBridge::class);
+        $package = $bridge->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $before = $bridge->projectJobIndexPayload($cache->jobIndexPayload('en'), 'en');
+        $this->assertSame('approved', data_get($before, 'items.0.trust_summary.review_state'));
+
+        $cache->publishJobDetailReadModel(
+            self::SLUG,
+            'zh-CN',
+            $this->detailPayload('zh-CN', '已漂移但仍足够厚的当前可见中文内容'),
+        );
+        $after = $bridge->projectJobIndexPayload($cache->jobIndexPayload('en'), 'en');
+
+        $this->assertSame('unknown', data_get($after, 'items.0.trust_summary.review_state'));
+        $this->assertSame('ineligible', data_get($after, 'items.0.search_entry_tier'));
+        $this->assertContains(
+            'reviewer_evidence_not_current',
+            data_get($after, 'items.0.search_entry_authority.reason_codes'),
+        );
+    }
+
+    public function test_transient_publication_revalidation_failure_downgrades_without_breaking_detail(): void
+    {
+        $bridge = app(CareerPilotReviewEvidenceBridge::class);
+        $package = $bridge->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+        $payload = app(PublicCareerAuthorityResponseCache::class)->jobDetailPayload(self::SLUG, 'en');
+        $this->assertIsArray($payload);
+        $approved = $bridge->projectDetailPayload(self::SLUG, $payload);
+        $this->assertSame('approved', data_get($approved, 'trust_manifest.review_state'));
+
+        Cache::partialMock()
+            ->shouldReceive('get')
+            ->andThrow(new \RuntimeException('transient publication cache failure'));
+
+        $downgraded = $bridge->projectDetailPayload(self::SLUG, $payload);
+
+        $this->assertSame('unknown', data_get($downgraded, 'trust_manifest.review_state'));
+        $this->assertSame('ineligible', data_get($downgraded, 'search_entry_tier'));
+        $this->assertContains(
+            'reviewer_evidence_not_current',
+            data_get($downgraded, 'search_entry_authority.reason_codes'),
+        );
     }
 
     private function publishBilingualDetails(
