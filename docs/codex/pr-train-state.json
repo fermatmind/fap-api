@@ -100808,8 +100808,8 @@
     "depends_on": [
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
-    "status": "implementation_in_progress",
-    "commit_sha": null,
+    "status": "local_checks_passed",
+    "commit_sha": "2cd0de943aded96f754acc5b2ac3de4997b6d229",
     "pr_url": null,
     "checks": {
       "dependencies": {
@@ -100867,11 +100867,11 @@
         "note": "Focused and directly related regressions passed. Candidate receipts now expose exact current EN/zh-CN content and SEO SHAs bound to all six reviewer targets, and the public projection defers high-density Tier A cache reads until exact approved review evidence is present. Local non-test authority correctly returned HOLD because the isolated developer cache lacks the exact 50 active/LKG entries; it created no artifact and performed no authority write."
       },
       {
-        "at": "2026-07-27T03:32:00Z",
+        "at": "2026-07-27T03:32:23Z",
         "status": "local_checks_passed",
         "note": "The branch-diff classifier produced the exact conditional failure required by the goal, rejecting only the three quality services and exact batch-01 manifest. Added the authorized exact-path-only classifier exemption and positive/negative regression; future batch, publisher, and Big Five runtime paths remain blocked. All declared local checks now pass."
       }
     ],
-    "updated_at": "2026-07-27T03:32:00Z"
+    "updated_at": "2026-07-27T03:32:23Z"
   }
 }
