@@ -6,6 +6,14 @@ Status: implemented, imported, promoted, verified, and released through the back
 
 This document is the backend technical closeout for the Chinese MBTI public personality cohort. It records the authority model, release gates, operator commands, and verified evidence after the 15-PR full-asset train. It is not a production write authorization and must not be used as one.
 
+> Historical baseline: this document freezes the 52-URL state reached on
+> 2026-07-15. The subsequent 45→53 comparison train expanded the cohort to 55
+> URLs and is recorded in
+> [MBTI Comparison Authority Train 45→53 Closeout](./mbti-comparison-authority-train-45-53-closeout-2026-07-28.md).
+> Read the newer closeout for the current comparison projection, release, and
+> monitoring contracts. The hashes in either document are evidence receipts,
+> not reusable authorization.
+
 ## Released cohort
 
 | Surface | Count | Authority |
