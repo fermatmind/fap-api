@@ -426,6 +426,10 @@ final class CareerPilotReviewEvidenceBridge
                 ? $projection['last_reviewed_at']
                 : null,
             publishTrack: $publishTrack,
+            // No backend quality-tier authority is projected into the current public
+            // payload. Keep this independent gate unknown until a bounded quality
+            // package supplies an exact classification.
+            contentQualityTier: null,
         );
     }
 

@@ -23,6 +23,7 @@ final class CareerSearchEntryTierContractTest extends TestCase
                 'approved',
                 '2026-07-26T00:00:00Z',
                 'stable',
+                CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             );
 
             $this->assertSame('ineligible', $authority['search_entry_tier'], $slug);
@@ -39,6 +40,7 @@ final class CareerSearchEntryTierContractTest extends TestCase
         string $reviewState,
         ?string $lastReviewedAt,
         ?string $publishTrack,
+        ?string $contentQualityTier,
         string $expectedTier,
         bool $expectedEligible,
         string $expectedQualityTier,
@@ -51,6 +53,7 @@ final class CareerSearchEntryTierContractTest extends TestCase
             $reviewState,
             $lastReviewedAt,
             $publishTrack,
+            $contentQualityTier,
         );
 
         $this->assertSame(CareerSearchEntryTierResolver::SCHEMA_VERSION, $authority['schema_version']);
@@ -64,7 +67,7 @@ final class CareerSearchEntryTierContractTest extends TestCase
         $this->assertSame($expectedReasons, $authority['reason_codes']);
     }
 
-    /** @return iterable<string,array{string,bool,bool,string,string|null,string|null,string,bool,string,list<string>}> */
+    /** @return iterable<string,array{string,bool,bool,string,string|null,string|null,string|null,string,bool,string,list<string>}> */
     public static function classificationCases(): iterable
     {
         yield 'stable requires every independent gate' => [
@@ -74,9 +77,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             'stable',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'stable',
             true,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             [],
         ];
 
@@ -87,9 +91,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             'candidate',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'approved_candidate',
             true,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             [],
         ];
 
@@ -100,9 +105,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'unknown',
             null,
             'stable',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'unqualified',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['reviewer_evidence_not_current'],
         ];
 
@@ -113,9 +119,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             'stable',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['not_publicly_visible'],
         ];
 
@@ -126,9 +133,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             'stable',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['robots_not_indexable'],
         ];
 
@@ -139,9 +147,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             'review_needed',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['publish_track_review_needed'],
         ];
 
@@ -152,9 +161,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             'hold',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['publish_track_hold'],
         ];
 
@@ -165,9 +175,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             null,
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['publish_track_unknown'],
         ];
 
@@ -178,9 +189,10 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             '2026-07-26T00:00:00Z',
             'stable',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'reviewed_bilingual_current',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['held_slug'],
         ];
 
@@ -191,10 +203,53 @@ final class CareerSearchEntryTierContractTest extends TestCase
             'approved',
             null,
             'stable',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             'ineligible',
             false,
-            'unqualified',
+            CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
             ['reviewer_evidence_not_current'],
+        ];
+
+        yield 'review approval cannot replace an unknown content quality tier' => [
+            'quality-unknown-career',
+            true,
+            true,
+            'approved',
+            '2026-07-26T00:00:00Z',
+            'stable',
+            null,
+            'ineligible',
+            false,
+            'unknown',
+            ['content_quality_tier_unknown'],
+        ];
+
+        yield 'tier b content remains ineligible after reviewer approval' => [
+            'quality-watchlist-career',
+            true,
+            true,
+            'approved',
+            '2026-07-26T00:00:00Z',
+            'stable',
+            'tier_b_content_watchlist_schema_sample_required',
+            'ineligible',
+            false,
+            'tier_b_content_watchlist_schema_sample_required',
+            ['content_quality_tier_ineligible'],
+        ];
+
+        yield 'tier d content remains ineligible after reviewer approval' => [
+            'quality-held-career',
+            true,
+            true,
+            'approved',
+            '2026-07-26T00:00:00Z',
+            'candidate',
+            'tier_d_hold_not_search_entry',
+            'ineligible',
+            false,
+            'tier_d_hold_not_search_entry',
+            ['content_quality_tier_ineligible'],
         ];
     }
 }

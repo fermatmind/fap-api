@@ -103,14 +103,18 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('trust_manifest.review_state', 'approved')
             ->assertJsonPath('trust_manifest.reviewer', null)
             ->assertJsonPath('search_entry_tier', 'ineligible')
-            ->assertJsonPath('search_entry_authority.content_quality_tier', 'reviewed_bilingual_current')
+            ->assertJsonPath('search_entry_authority.content_quality_tier', 'unknown')
+            ->assertJsonPath(
+                'search_entry_authority.reason_codes',
+                ['content_quality_tier_unknown', 'publish_track_unsupported'],
+            )
             ->assertJsonPath('search_entry_authority.publish_track', 'runtime_publish_projection');
         $index = $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
             ->assertJsonPath('items.0.trust_summary.reviewer', null)
             ->assertJsonPath('items.0.search_entry_tier', 'ineligible')
-            ->assertJsonPath('items.0.search_entry_authority.content_quality_tier', 'reviewed_bilingual_current');
+            ->assertJsonPath('items.0.search_entry_authority.content_quality_tier', 'unknown');
         $this->getJson('/api/v0.5/career/jobs?locale=en-US')
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'approved');
@@ -308,7 +312,12 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('search_entry_authority.robots_indexable', false)
             ->assertJsonPath(
                 'search_entry_authority.reason_codes',
-                ['robots_not_indexable', 'reviewer_evidence_not_current', 'publish_track_unsupported'],
+                [
+                    'robots_not_indexable',
+                    'reviewer_evidence_not_current',
+                    'content_quality_tier_unknown',
+                    'publish_track_unsupported',
+                ],
             );
     }
 

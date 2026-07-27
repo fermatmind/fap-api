@@ -100679,7 +100679,7 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "post_rebase_github_checks_pending",
+    "status": "review_repair_in_progress",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
@@ -100704,8 +100704,12 @@
         "evidence": "After the conditionally authorized classifier repair, the focused classifier selection passed 2 tests / 6 assertions; related Career/review suites passed 56 tests / 1422 assertions; scoped Pint passed all 121 selected files. API route discovery remains 224 lines; Composer strict validation/audit passed; manifest YAML and ledger JSON parsed; diff checks passed; and exact changed-file scope contains only the eight authorized paths."
       },
       "github_required_checks": {
-        "status": "passed_superseded_by_rebase",
-        "evidence": "Exact repaired head a59fa4daaa091c9237f5f52ab43b8bf953480810 passed all nine required checks, including verify-bigfive in 5m26s. The P1 classifier review thread is resolved. origin/main then advanced by independent SEO-13 ops PRs #3327 and #3328, so the clean rebased head requires a fresh complete exact-head check set."
+        "status": "passed_before_review_repair",
+        "evidence": "Exact rebased head 7d674fc03facc5700d31c5edff3d4a687456e170 passed all nine required checks. Exact-head review then found that the resolver incorrectly inferred content quality from reviewer approval, so a fresh complete check set is required after the same-scope repair."
+      },
+      "exact_head_review": {
+        "status": "repair_in_progress",
+        "evidence": "Unresolved P1 thread PRRT_kwDOQn6xoM6T6s_w requires content quality to remain an independent authoritative input. Current re-audit evidence is Tier A 0 / Tier B 1 / Tier D 1045; reviewer approval must not make Tier B or Tier D eligible."
       }
     },
     "scope_validation": {
@@ -100766,8 +100770,13 @@
         "at": "2026-07-27T01:59:14Z",
         "status": "post_rebase_github_checks_pending",
         "note": "All nine required checks passed at repaired head a59fa4daaa091c9237f5f52ab43b8bf953480810 and its only P1 review thread is resolved. origin/main advanced by independent SEO-13 ops PRs #3327 and #3328 touching only their script/test paths. Cleanly rebased PR1 onto origin/main 7e2e048c7c6d32cdb7c4975783fe925f63310840; related suites passed 56/1422, classifier 2/6, Pint 121 files, route/Composer/parser/diff/scope gates. Fresh exact-head GitHub checks are required after force-push with lease."
+      },
+      {
+        "at": "2026-07-27T02:10:41Z",
+        "status": "review_repair_in_progress",
+        "note": "Exact rebased head 7d674fc03facc5700d31c5edff3d4a687456e170 passed all nine required checks, then exact-head review found that content_quality_tier was incorrectly derived from reviewer evidence. The same-scope repair makes quality tier an explicit independent resolver input, admits only tier_a_controlled_search_entry_candidate, and fails closed for unknown, Tier B, Tier D, and unsupported classifications. The current public bridge supplies null because no backend-bound quality package exists yet; approved review evidence therefore cannot silently promote current Tier B/D content. Focused resolver and bridge tests passed 23 tests / 201 assertions. No production or external write occurred."
       }
     ],
-    "updated_at": "2026-07-27T01:59:14Z"
+    "updated_at": "2026-07-27T02:10:41Z"
   }
 }
