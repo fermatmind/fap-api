@@ -74,8 +74,7 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
             self::CONTROL_PLANE_SHA,
             self::ACTIVE_REVISION,
         );
-        config()->set('app.mbti_index52_test_active_revision', self::ACTIVE_REVISION);
-        config()->set('app.mbti_index52_control_plane_sha', str_repeat('3', 40));
+        config()->set('app.mbti_index52_test_active_revision', str_repeat('4', 40));
         try {
             $service->publish(
                 $package,
@@ -85,11 +84,11 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
                 self::ACTIVE_REVISION,
                 $plan['required_production_authorization'],
             );
-            self::fail('Changed control-plane SHA unexpectedly passed the write gate.');
+            self::fail('Changed active revision unexpectedly passed the write gate.');
         } catch (\RuntimeException $exception) {
-            self::assertSame('Production release binding changed before transaction.', $exception->getMessage());
+            self::assertSame('Active production release changed before transaction.', $exception->getMessage());
         }
-        config()->set('app.mbti_index52_control_plane_sha', self::CONTROL_PLANE_SHA);
+        config()->set('app.mbti_index52_test_active_revision', self::ACTIVE_REVISION);
         $beforeCross = MbtiCrossTypeComparisonAuthority::query()->where('slug', 'intj-vs-intp')->firstOrFail();
         $beforeContent = (array) $beforeCross->content_payload_json;
         $beforeInvariants = $beforeCross->only([

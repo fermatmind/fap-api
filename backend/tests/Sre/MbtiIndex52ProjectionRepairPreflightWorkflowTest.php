@@ -12,6 +12,7 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
     {
         $workflow = (string) file_get_contents(dirname(__DIR__, 3).'/.github/workflows/mbti-index52-projection-repair-preflight.yml');
         $runner = (string) file_get_contents(dirname(__DIR__, 2).'/scripts/seo/mbti_index52_projection_repair_streamed_preflight.php');
+        $service = (string) file_get_contents(dirname(__DIR__, 2).'/app/Services/Cms/MbtiIndex52ProjectionRepairService.php');
 
         self::assertStringContainsString('name: MBTI INDEX52 Projection Repair Preflight', $workflow);
         self::assertStringContainsString('environment: production', $workflow);
@@ -40,5 +41,8 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('false', $runner);
         self::assertStringNotContainsString('->save(', $runner);
         self::assertStringNotContainsString('DB::transaction', $runner);
+        self::assertStringNotContainsString('mbti_index52_control_plane_sha', $service);
+        self::assertStringContainsString('assertReleaseBinding($expectedControlPlaneSha, $expectedActiveRevision)', $service);
+        self::assertStringContainsString('runtimeActiveRevision()', $service);
     }
 }

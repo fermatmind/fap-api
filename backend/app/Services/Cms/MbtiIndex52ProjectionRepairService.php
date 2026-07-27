@@ -97,11 +97,11 @@ final class MbtiIndex52ProjectionRepairService
             $expectedControlPlaneSha,
             $expectedActiveRevision,
         ): array {
-            if (! hash_equals(
-                $expectedControlPlaneSha,
-                (string) config('app.mbti_index52_control_plane_sha'),
-            ) || ! hash_equals($expectedActiveRevision, $this->runtimeActiveRevision())) {
-                throw new RuntimeException('Production release binding changed before transaction.');
+            // The protected caller attests the exact streamed control-plane checkout;
+            // only the deployed active release can be independently re-read here.
+            $this->assertReleaseBinding($expectedControlPlaneSha, $expectedActiveRevision);
+            if (! hash_equals($expectedActiveRevision, $this->runtimeActiveRevision())) {
+                throw new RuntimeException('Active production release changed before transaction.');
             }
             $before = $this->snapshot($records, true);
             $beforeSha = $this->packageContract->sha($before);
