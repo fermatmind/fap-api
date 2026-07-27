@@ -25,6 +25,15 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             'contents: read',
             'git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main',
             'test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"',
+            'SEO 13 Article Review Approval Production Ops',
+            'seo-13-article-review-approval-apply-${REVIEW_RUN_ID}-${REVIEW_RUN_ATTEMPT}',
+            '.contract_version == "seo13.article_review_approval.production_ops.v1"',
+            '.review_approval_write_count == 13',
+            '.review_approval_run_id == 30231516428',
+            '.review_approval_run_attempt == 1',
+            '.review_approval_control_plane_sha == "685ab5bf90b7168854f6f200f058400f37bed99e"',
+            '.review_approval_state_sha256 == "ab9ce8dbf7292f1630b1dc28f0c209febf936160978f44fd2ce0f355596c262d"',
+            '.review_approval_revision_set_sha256 == "b6851fd8cdbacedafb5d7d3dfa30ae65320ec636c0765f90c38fc9f1f8581466"',
             'gh run download "$PREFLIGHT_RUN_ID"',
             '.status == "PASS_PREFLIGHT"',
             '.status == "FAIL_CLOSED"',
@@ -127,6 +136,13 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
         $this->assertStringContainsString("private const SEO13_BATCH = 'seo13-20260726';", $command);
         $this->assertStringContainsString('big5-v2-f29331ce54d2f28a7051702932c39aaf69d2bf61', $command);
         $this->assertStringContainsString('big5-v2-8381cc150e7180b365a397ce3e3a25e2626b8970', $command);
+        $this->assertStringContainsString("'locale' => 'zh-CN'", $command);
+        $this->assertStringContainsString('SEO13_COHORT_LOCK_FILE_SHA256', $command);
+        $this->assertStringContainsString('lockedContentTargets()', $command);
+        $this->assertStringContainsString('contentLockErrors(', $command);
+        $this->assertStringContainsString('content_set_working_revision_title_hash_mismatch', $this->readRepoFile(
+            'backend/tests/Feature/Console/Seo13ArticleAtomicPromotionCommandTest.php',
+        ));
         $this->assertStringNotContainsString("'translation_group_id' => 'article-'.\$target[0]", $command);
         $this->assertStringContainsString('promoteExistingWorkingRevisionsAtomically(', $command);
         $this->assertStringContainsString('DB::transaction(function () use (', $service);

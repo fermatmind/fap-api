@@ -29,6 +29,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
     private const SEO13_TARGET_SET_SHA256 = '67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f934c';
 
+    private const SEO13_COHORT_LOCK_FILE_SHA256 = '212b4b298244ba3ed89a1a999d5ea2019332d33694e67e73093b45f275a56166';
+
+    private const SEO13_COHORT_PATH = 'docs/seo/import-packages/seo-13-article-refresh-2026-07-26';
+
     private const PRIVATE_ROUTE_PATTERN = '~(?<![A-Za-z0-9_-])/(?:result|results|orders|order|share|pay|payment|history|take)(?:/|[?#\s)"\']|$)~i';
 
     private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:result_id|order_id|payment_id|token|score|user_id|report_id)=/i';
@@ -385,6 +389,19 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         $rows = [];
         $errors = [];
 
+        try {
+            $contentLocks = $this->lockedContentTargets();
+        } catch (Throwable) {
+            $snapshot = $this->emptyBatchSnapshot();
+            $snapshot['errors'][] = $this->issue(
+                'content_set',
+                'content_set_lock_invalid',
+                'The committed SEO 13 content cohort is missing, malformed, or has drifted.',
+            );
+
+            return $snapshot;
+        }
+
         foreach ($this->seo13Targets() as $target) {
             $row = $this->preflight(
                 $target['article_id'],
@@ -394,6 +411,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 identityLock: $target,
                 claimWarningAcknowledged: false,
             );
+            foreach ($this->contentLockErrors($row, $contentLocks[$target['article_id']] ?? null) as $error) {
+                $row['errors'][] = $error;
+                $row['ok'] = false;
+            }
             $rows[] = $row;
             foreach ((array) ($row['errors'] ?? []) as $error) {
                 if (is_array($error)) {
@@ -446,6 +467,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
     {
         return [
             'article_id' => (int) ($row['article_id'] ?? 0),
+            'locale' => (string) ($row['locale'] ?? ''),
             'slug' => (string) ($row['slug'] ?? ''),
             'translation_group_id' => (string) ($row['translation_group_id'] ?? ''),
             'canonical_url' => (string) ($row['canonical_url'] ?? ''),
@@ -628,6 +650,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
      *   working_revision_id:int,
      *   current_published_revision_id:int,
      *   translation_group_id:string,
+     *   locale:string,
      *   slug:string,
      *   canonical:string
      * }>
@@ -656,11 +679,171 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 'working_revision_id' => $target[1],
                 'current_published_revision_id' => $target[2],
                 'translation_group_id' => $target[4],
+                'locale' => 'zh-CN',
                 'slug' => $target[3],
                 'canonical' => 'https://fermatmind.com/zh/articles/'.$target[3],
             ],
             $targets,
         );
+    }
+
+    /**
+     * @return array<int,array{
+     *   article_id:int,
+     *   slug:string,
+     *   translation_group_id:string,
+     *   locale:string,
+     *   canonical:string,
+     *   working_revision_body_hash:string,
+     *   working_revision_title_hash:string,
+     *   working_revision_excerpt_hash:string,
+     *   working_revision_seo_title_hash:string,
+     *   working_revision_seo_description_hash:string
+     * }>
+     */
+    private function lockedContentTargets(): array
+    {
+        $root = realpath(base_path(self::SEO13_COHORT_PATH));
+        if (! is_string($root)) {
+            throw new RuntimeException('content_set_root_missing');
+        }
+
+        $lockPath = $root.DIRECTORY_SEPARATOR.'cohort.lock.json';
+        $lockFileHash = hash_file('sha256', $lockPath);
+        if (! is_string($lockFileHash) || ! hash_equals(self::SEO13_COHORT_LOCK_FILE_SHA256, $lockFileHash)) {
+            throw new RuntimeException('content_set_lock_file_drift');
+        }
+
+        $lockContents = file_get_contents($lockPath);
+        if (! is_string($lockContents)) {
+            throw new RuntimeException('content_set_lock_unreadable');
+        }
+        $cohort = json_decode($lockContents, true, flags: JSON_THROW_ON_ERROR);
+        if (! is_array($cohort)
+            || (int) ($cohort['target_count'] ?? 0) !== self::SEO13_TARGET_COUNT
+            || ! hash_equals(self::SEO13_CONTENT_SET_SHA256, (string) ($cohort['content_set_sha256'] ?? ''))
+            || ! hash_equals(self::SEO13_TARGET_SET_SHA256, (string) ($cohort['target_set_sha256'] ?? ''))
+            || count((array) ($cohort['packages'] ?? [])) !== self::SEO13_TARGET_COUNT) {
+            throw new RuntimeException('content_set_contract_mismatch');
+        }
+
+        $targets = [];
+        foreach ((array) $cohort['packages'] as $package) {
+            if (! is_array($package)) {
+                throw new RuntimeException('content_set_package_invalid');
+            }
+
+            $cmsPath = null;
+            foreach ((array) ($package['files'] ?? []) as $file) {
+                if (! is_array($file)) {
+                    throw new RuntimeException('content_set_file_invalid');
+                }
+                $relativePath = (string) ($file['path'] ?? '');
+                $expectedHash = (string) ($file['sha256'] ?? '');
+                $resolvedPath = realpath($root.DIRECTORY_SEPARATOR.$relativePath);
+                if (! is_string($resolvedPath)
+                    || ! str_starts_with($resolvedPath, $root.DIRECTORY_SEPARATOR)
+                    || preg_match('/^[0-9a-f]{64}$/', $expectedHash) !== 1) {
+                    throw new RuntimeException('content_set_file_path_invalid');
+                }
+                $actualHash = hash_file('sha256', $resolvedPath);
+                if (! is_string($actualHash) || ! hash_equals($expectedHash, $actualHash)) {
+                    throw new RuntimeException('content_set_file_hash_drift');
+                }
+                if (str_contains($relativePath, '/cms/CMS_FIELDS_UPDATE_')) {
+                    $cmsPath = $resolvedPath;
+                }
+            }
+
+            if (! is_string($cmsPath)) {
+                throw new RuntimeException('content_set_cms_fields_missing');
+            }
+            $cmsContents = file_get_contents($cmsPath);
+            if (! is_string($cmsContents)) {
+                throw new RuntimeException('content_set_cms_fields_unreadable');
+            }
+            $cms = json_decode($cmsContents, true, flags: JSON_THROW_ON_ERROR);
+            if (! is_array($cms)) {
+                throw new RuntimeException('content_set_cms_fields_invalid');
+            }
+
+            $articleId = (int) ($package['article_id'] ?? 0);
+            $slug = (string) ($package['slug'] ?? '');
+            $bodyRelativePath = $slug.DIRECTORY_SEPARATOR.(string) ($cms['body_markdown_file'] ?? '');
+            $bodyPath = realpath($root.DIRECTORY_SEPARATOR.$bodyRelativePath);
+            if ($articleId <= 0
+                || isset($targets[$articleId])
+                || (int) ($cms['target_article_id'] ?? 0) !== $articleId
+                || (string) ($cms['slug'] ?? '') !== $slug
+                || (string) ($cms['translation_group_id'] ?? '') !== (string) ($package['translation_group_id'] ?? '')
+                || (string) ($cms['locale'] ?? '') !== 'zh-CN'
+                || ! is_string($bodyPath)
+                || ! str_starts_with($bodyPath, $root.DIRECTORY_SEPARATOR)) {
+                throw new RuntimeException('content_set_identity_mismatch');
+            }
+            $body = file_get_contents($bodyPath);
+            if (! is_string($body)) {
+                throw new RuntimeException('content_set_body_unreadable');
+            }
+
+            $targets[$articleId] = [
+                'article_id' => $articleId,
+                'slug' => $slug,
+                'translation_group_id' => (string) $package['translation_group_id'],
+                'locale' => 'zh-CN',
+                'canonical' => (string) ($cms['canonical_url'] ?? ''),
+                'working_revision_body_hash' => $this->bodyHash($body),
+                'working_revision_title_hash' => $this->textHash((string) ($cms['title'] ?? '')),
+                'working_revision_excerpt_hash' => $this->textHash((string) ($cms['excerpt'] ?? '')),
+                'working_revision_seo_title_hash' => $this->textHash((string) ($cms['meta_title'] ?? '')),
+                'working_revision_seo_description_hash' => $this->textHash((string) ($cms['meta_description'] ?? '')),
+            ];
+        }
+
+        ksort($targets);
+
+        return $targets;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @param  array<string,mixed>|null  $lock
+     * @return list<array<string,mixed>>
+     */
+    private function contentLockErrors(array $row, ?array $lock): array
+    {
+        if ($lock === null) {
+            return [$this->issue('content_set', 'content_set_target_missing', 'Article is missing from the locked content cohort.')];
+        }
+
+        $errors = [];
+        foreach ([
+            'article_id',
+            'locale',
+            'slug',
+            'translation_group_id',
+            'canonical_url' => 'canonical',
+            'working_revision_body_hash',
+            'working_revision_title_hash',
+            'working_revision_excerpt_hash',
+            'working_revision_seo_title_hash',
+            'working_revision_seo_description_hash',
+        ] as $rowField => $lockField) {
+            if (is_int($rowField)) {
+                $rowField = $lockField;
+            }
+            $actual = (string) ($row[$rowField] ?? '');
+            $expected = (string) ($lock[$lockField] ?? '');
+            if ($actual !== $expected) {
+                $errors[] = $this->issue(
+                    "content_set.{$rowField}",
+                    "content_set_{$rowField}_mismatch",
+                    "Live {$rowField} does not match the committed SEO 13 content cohort.",
+                );
+            }
+        }
+
+        return $errors;
     }
 
     private function deterministicHash(mixed $value): string
@@ -756,6 +939,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             ->first();
 
         $expectedTranslationGroupId = trim((string) ($identityLock['translation_group_id'] ?? $this->option('translation-group-id')));
+        $expectedLocale = trim((string) ($identityLock['locale'] ?? ''));
         $expectedSlug = trim((string) ($identityLock['slug'] ?? $this->option('expected-slug')));
         $expectedCanonical = trim((string) ($identityLock['canonical'] ?? $this->option('expected-canonical')));
         $bodyHash = $workingRevision instanceof ArticleTranslationRevision
@@ -804,6 +988,19 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             $errors[] = $this->issue('translation-group-id', 'translation_group_lock_required', 'Expected translation group lock is required.');
         } elseif ((string) $article->translation_group_id !== $expectedTranslationGroupId) {
             $errors[] = $this->issue('translation_group_id', 'translation_group_mismatch', 'Article translation group does not match expected lock.');
+        }
+
+        if ($identityLock !== null && (
+            $expectedLocale === ''
+            || (string) $article->locale !== $expectedLocale
+            || ! $workingRevision instanceof ArticleTranslationRevision
+            || (string) $workingRevision->locale !== $expectedLocale
+            || ! $import instanceof ArticleEditorialPackageImport
+            || (string) $import->locale !== $expectedLocale
+            || ! $seoMeta instanceof ArticleSeoMeta
+            || (string) $seoMeta->locale !== $expectedLocale
+        )) {
+            $errors[] = $this->issue('locale', 'locale_lock_mismatch', 'Article locale does not match the exact batch locale lock.');
         }
 
         if ($expectedSlug === '') {

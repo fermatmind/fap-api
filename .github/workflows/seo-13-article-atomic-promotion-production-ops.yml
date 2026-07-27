@@ -68,6 +68,11 @@ jobs:
       release_name: ${{ steps.validate.outputs.release_name }}
       state_sha256: ${{ steps.validate.outputs.state_sha256 }}
       revision_set_sha256: ${{ steps.validate.outputs.revision_set_sha256 }}
+      review_run_id: ${{ steps.validate.outputs.review_run_id }}
+      review_run_attempt: ${{ steps.validate.outputs.review_run_attempt }}
+      review_control_plane_sha: ${{ steps.validate.outputs.review_control_plane_sha }}
+      review_state_sha256: ${{ steps.validate.outputs.review_state_sha256 }}
+      review_revision_set_sha256: ${{ steps.validate.outputs.review_revision_set_sha256 }}
     steps:
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -91,6 +96,13 @@ jobs:
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           CONTENT_SET_SHA256: b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e
           TARGET_SET_SHA256: 67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f934c
+          REVIEW_RUN_ID: "30231516428"
+          REVIEW_RUN_ATTEMPT: "1"
+          REVIEW_CONTROL_PLANE_SHA: 685ab5bf90b7168854f6f200f058400f37bed99e
+          REVIEW_RELEASE_SHA: 672d730d606f11de3e666aab8ce71a3285b5f640
+          REVIEW_RELEASE_NAME: career-detail-cache-repair-bootstrap-672d730-30228559158-1
+          REVIEW_STATE_SHA256: ab9ce8dbf7292f1630b1dc28f0c209febf936160978f44fd2ce0f355596c262d
+          REVIEW_REVISION_SET_SHA256: b6851fd8cdbacedafb5d7d3dfa30ae65320ec636c0765f90c38fc9f1f8581466
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
@@ -103,6 +115,64 @@ jobs:
           test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
           git fetch --no-tags origin "$EXPECTED_RELEASE_SHA"
           git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+
+          review_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${REVIEW_RUN_ID}")"
+          jq -e \
+            --arg sha "$REVIEW_CONTROL_PLANE_SHA" \
+            --argjson attempt "$REVIEW_RUN_ATTEMPT" \
+            '.name == "SEO 13 Article Review Approval Production Ops"
+             and .path == ".github/workflows/seo-13-article-review-approval-production-ops.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == $sha
+             and .run_attempt == $attempt' <<<"$review_run_json" >/dev/null
+
+          review_receipt_dir="$(mktemp -d)"
+          gh run download "$REVIEW_RUN_ID" \
+            --name "seo-13-article-review-approval-apply-${REVIEW_RUN_ID}-${REVIEW_RUN_ATTEMPT}" \
+            --dir "$review_receipt_dir"
+          review_receipt="$review_receipt_dir/seo-13-article-review-approval-production-ops.json"
+          test -f "$review_receipt"
+          jq -e \
+            --arg control "$REVIEW_CONTROL_PLANE_SHA" \
+            --arg release "$REVIEW_RELEASE_SHA" \
+            --arg release_name "$REVIEW_RELEASE_NAME" \
+            --arg state "$REVIEW_STATE_SHA256" \
+            --arg revisions "$REVIEW_REVISION_SET_SHA256" \
+            --arg content "$CONTENT_SET_SHA256" \
+            --arg targets "$TARGET_SET_SHA256" \
+            --argjson run_id "$REVIEW_RUN_ID" \
+            --argjson run_attempt "$REVIEW_RUN_ATTEMPT" \
+            '.contract_version == "seo13.article_review_approval.production_ops.v1"
+             and .status == "PASS_APPLY"
+             and .mode == "apply"
+             and .control_plane_sha == $control
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .preflight_state_sha256 == $state
+             and .revision_set_sha256 == $revisions
+             and .content_set_sha256 == $content
+             and .target_set_sha256 == $targets
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $run_attempt
+             and .reviewed_by_admin_user_id == 1
+             and .target_count == 13
+             and (.rows | length) == 13
+             and ([.rows[].article_id] | sort) == [1,2,5,6,7,9,10,11,12,13,14,15,16]
+             and ([.rows[].working_revision_status] | all(. == "approved"))
+             and ([.rows[].han_character_count] | all(. >= 2000))
+             and .production_write_execution == true
+             and .review_approval_write_count == 13
+             and .publish_count == 0
+             and .schema_write_count == 0
+             and .hreflang_write_count == 0
+             and .search_submission_count == 0
+             and .revalidation_count == 0
+             and .sitemap_write_count == 0
+             and .llms_write_count == 0
+             and .deploy_count == 0' "$review_receipt" >/dev/null
 
           case "$MODE" in
             preflight)
@@ -155,6 +225,11 @@ jobs:
                  and .revision_set_sha256 == $revisions
                  and .content_set_sha256 == $content
                  and .target_set_sha256 == $targets
+                 and .review_approval_run_id == 30231516428
+                 and .review_approval_run_attempt == 1
+                 and .review_approval_control_plane_sha == "685ab5bf90b7168854f6f200f058400f37bed99e"
+                 and .review_approval_state_sha256 == "ab9ce8dbf7292f1630b1dc28f0c209febf936160978f44fd2ce0f355596c262d"
+                 and .review_approval_revision_set_sha256 == "b6851fd8cdbacedafb5d7d3dfa30ae65320ec636c0765f90c38fc9f1f8581466"
                  and .target_count == 13
                  and (.rows | length) == 13
                  and .production_write_execution == false
@@ -186,6 +261,11 @@ jobs:
             echo "release_name=$EXPECTED_RELEASE_NAME"
             echo "state_sha256=$EXPECTED_STATE_SHA256"
             echo "revision_set_sha256=$EXPECTED_REVISION_SET_SHA256"
+            echo "review_run_id=$REVIEW_RUN_ID"
+            echo "review_run_attempt=$REVIEW_RUN_ATTEMPT"
+            echo "review_control_plane_sha=$REVIEW_CONTROL_PLANE_SHA"
+            echo "review_state_sha256=$REVIEW_STATE_SHA256"
+            echo "review_revision_set_sha256=$REVIEW_REVISION_SET_SHA256"
           } >> "$GITHUB_OUTPUT"
 
   operate:
@@ -209,6 +289,11 @@ jobs:
       EXPECTED_RELEASE_NAME: ${{ needs.eligibility.outputs.release_name }}
       EXPECTED_STATE_SHA256: ${{ needs.eligibility.outputs.state_sha256 }}
       EXPECTED_REVISION_SET_SHA256: ${{ needs.eligibility.outputs.revision_set_sha256 }}
+      REVIEW_RUN_ID: ${{ needs.eligibility.outputs.review_run_id }}
+      REVIEW_RUN_ATTEMPT: ${{ needs.eligibility.outputs.review_run_attempt }}
+      REVIEW_CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.review_control_plane_sha }}
+      REVIEW_STATE_SHA256: ${{ needs.eligibility.outputs.review_state_sha256 }}
+      REVIEW_REVISION_SET_SHA256: ${{ needs.eligibility.outputs.review_revision_set_sha256 }}
     steps:
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -289,10 +374,20 @@ jobs:
               --arg control "$CONTROL_PLANE_SHA" \
               --argjson run_id "$GITHUB_RUN_ID" \
               --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
+              --argjson review_run_id "$REVIEW_RUN_ID" \
+              --argjson review_run_attempt "$REVIEW_RUN_ATTEMPT" \
+              --arg review_control "$REVIEW_CONTROL_PLANE_SHA" \
+              --arg review_state "$REVIEW_STATE_SHA256" \
+              --arg review_revisions "$REVIEW_REVISION_SET_SHA256" \
               '. + {
                 control_plane_sha: $control,
                 workflow_run_id: $run_id,
-                workflow_run_attempt: $run_attempt
+                workflow_run_attempt: $run_attempt,
+                review_approval_run_id: $review_run_id,
+                review_approval_run_attempt: $review_run_attempt,
+                review_approval_control_plane_sha: $review_control,
+                review_approval_state_sha256: $review_state,
+                review_approval_revision_set_sha256: $review_revisions
               }' artifacts/remote-receipt.json \
               > artifacts/seo-13-article-atomic-promotion-production-ops.json
             exit "$remote_status"
@@ -331,10 +426,20 @@ jobs:
             --arg control "$CONTROL_PLANE_SHA" \
             --argjson run_id "$GITHUB_RUN_ID" \
             --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --argjson review_run_id "$REVIEW_RUN_ID" \
+            --argjson review_run_attempt "$REVIEW_RUN_ATTEMPT" \
+            --arg review_control "$REVIEW_CONTROL_PLANE_SHA" \
+            --arg review_state "$REVIEW_STATE_SHA256" \
+            --arg review_revisions "$REVIEW_REVISION_SET_SHA256" \
             '. + {
               control_plane_sha: $control,
               workflow_run_id: $run_id,
-              workflow_run_attempt: $run_attempt
+              workflow_run_attempt: $run_attempt,
+              review_approval_run_id: $review_run_id,
+              review_approval_run_attempt: $review_run_attempt,
+              review_approval_control_plane_sha: $review_control,
+              review_approval_state_sha256: $review_state,
+              review_approval_revision_set_sha256: $review_revisions
             }' artifacts/remote-receipt.json \
             > artifacts/seo-13-article-atomic-promotion-production-ops.json
 

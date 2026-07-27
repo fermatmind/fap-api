@@ -227,6 +227,41 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
         }
     }
 
+    public function test_batch_rejects_committed_content_title_drift(): void
+    {
+        $this->createCohort();
+        ArticleTranslationRevision::query()
+            ->withoutGlobalScopes()
+            ->whereKey(446)
+            ->update(['title' => '已漂移的工作修订标题']);
+
+        $exitCode = Artisan::call('articles:promote-existing-working-revision', $this->dryRunOptions());
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains(
+            'content_set_working_revision_title_hash_mismatch',
+            array_column($payload['errors'], 'code'),
+        );
+        $this->assertSame(0, $payload['publish_count']);
+    }
+
+    public function test_batch_rejects_locale_drift(): void
+    {
+        $this->createCohort();
+        Article::query()->withoutGlobalScopes()->whereKey(16)->update(['locale' => 'en']);
+        ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey(435)->update(['locale' => 'en']);
+
+        $exitCode = Artisan::call('articles:promote-existing-working-revision', $this->dryRunOptions());
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('locale_lock_mismatch', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, $payload['publish_count']);
+    }
+
     public function test_batch_rejects_private_routes_even_when_import_hash_matches(): void
     {
         $this->createCohort();
@@ -362,7 +397,8 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
         foreach (self::TARGETS as $index => $target) {
             $articleId = $target['article_id'];
             $group = $target['translation_group_id'];
-            $body = $articleId === $shortArticleId ? '短正文。' : $this->longBody($articleId);
+            $lockedContent = $this->lockedContent($articleId);
+            $body = $articleId === $shortArticleId ? '短正文。' : $lockedContent['body'];
             $publishedBody = "## 旧版本\n\n旧正文 {$articleId}。";
             $canonical = 'https://fermatmind.com/zh/articles/'.$target['slug'];
 
@@ -421,11 +457,11 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
                     'source_locale' => 'zh-CN',
                     'revision_number' => 2,
                     'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
-                    'title' => "SEO 13 新标题 {$articleId}",
-                    'excerpt' => "SEO 13 新摘要 {$articleId}",
+                    'title' => $lockedContent['title'],
+                    'excerpt' => $lockedContent['excerpt'],
                     'content_md' => $body,
-                    'seo_title' => "SEO 13 新 SEO 标题 {$articleId} | FermatMind",
-                    'seo_description' => "SEO 13 新 SEO 描述 {$articleId}。",
+                    'seo_title' => $lockedContent['seo_title'],
+                    'seo_description' => $lockedContent['seo_description'],
                     'reviewed_by' => 1,
                     'reviewed_at' => now()->subMinutes(10),
                     'approved_at' => now()->subMinutes(5),
@@ -456,7 +492,7 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
                 'article_id' => $articleId,
                 'slug' => $target['slug'],
                 'locale' => 'zh-CN',
-                'title' => "SEO 13 新标题 {$articleId}",
+                'title' => $lockedContent['title'],
                 'content_track' => 'seo_content_package_existing_article_update',
                 'status' => ArticleEditorialPackageImport::STATUS_IMPORTED,
                 'intended_status' => 'working_revision_human_review',
@@ -482,6 +518,40 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
                 'references_count' => 3,
             ]);
         }
+    }
+
+    /**
+     * @return array{title:string,excerpt:string,seo_title:string,seo_description:string,body:string}
+     */
+    private function lockedContent(int $articleId): array
+    {
+        $root = dirname(__DIR__, 3).'/docs/seo/import-packages/seo-13-article-refresh-2026-07-26';
+        $cohort = json_decode(
+            (string) file_get_contents($root.'/cohort.lock.json'),
+            true,
+            flags: JSON_THROW_ON_ERROR,
+        );
+        $package = collect($cohort['packages'])->firstWhere('article_id', $articleId);
+        $this->assertIsArray($package);
+        $cmsRelativePath = collect($package['files'])
+            ->pluck('path')
+            ->first(static fn (string $path): bool => str_contains($path, '/cms/CMS_FIELDS_UPDATE_'));
+        $this->assertIsString($cmsRelativePath);
+        $cms = json_decode(
+            (string) file_get_contents($root.'/'.$cmsRelativePath),
+            true,
+            flags: JSON_THROW_ON_ERROR,
+        );
+        $body = file_get_contents($root.'/'.$package['slug'].'/'.$cms['body_markdown_file']);
+        $this->assertIsString($body);
+
+        return [
+            'title' => (string) $cms['title'],
+            'excerpt' => (string) $cms['excerpt'],
+            'seo_title' => (string) $cms['meta_title'],
+            'seo_description' => (string) $cms['meta_description'],
+            'body' => $body,
+        ];
     }
 
     private function longBody(int $articleId): string

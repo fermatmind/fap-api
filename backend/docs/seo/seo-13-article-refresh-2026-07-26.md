@@ -170,6 +170,17 @@ all 13 article/revision/slug/canonical identities, reader-facing content and
 SEO hashes, eligibility holds, the target set, and the content set. It emits
 one immutable apply phrase:
 
+Before either promotion mode can run, workflow eligibility also downloads and
+validates the immutable successful review-approval apply receipt from run
+`30231516428`, attempt `1`. That receipt binds the exact 13 approved working
+revision IDs and authenticated-preview/editorial-review evidence to content set
+`b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e`.
+The deployed command independently verifies the committed cohort lock and
+every package file hash, then compares each live `zh-CN` working revision's
+title, excerpt, body, SEO title, SEO description, canonical, slug, and
+translation group against that cohort. Any receipt, package, locale, or
+reader-facing field drift fails before a write.
+
 ```text
 I explicitly approve SEO 13 atomic public promotion for SHA <RELEASE_SHA> release <RELEASE_NAME> preflight run <RUN_ID> attempt <ATTEMPT> state <STATE_SHA> revision set <REVISION_SET_SHA> content set b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e; publish exactly 13 approved working revisions and keep schema, hreflang, search, revalidation, sitemap eligibility, llms eligibility, GSC, URL Inspection, and deploy changes held.
 ```
