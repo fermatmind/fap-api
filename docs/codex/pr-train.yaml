@@ -1391,7 +1391,7 @@ prs:
     branch: codex/mbti-comp-projection-45
     title: "MBTI-COMP-PROJECTION-45: repair A/T comparison public projection"
     train_scope: mbti_at_comparison_public_projection_sections
-    status: user_authorized
+    status: merged
     mode: execute
     scope:
       - Project the backend-authoritative payload_json.sections written by the approved A/T promotion/import path into the public comparison API for all sixteen A/T pages.
@@ -1434,7 +1434,7 @@ prs:
     branch: codex/mbti-comp-runtime-46
     title: "MBTI-COMP-RUNTIME-46: deploy and accept all A/T comparison pages"
     train_scope: mbti_at_comparison_production_deploy_and_acceptance
-    status: user_authorized
+    status: merged
     mode: execute
     type: production_operation_report_docs_generated_test
     scope:
