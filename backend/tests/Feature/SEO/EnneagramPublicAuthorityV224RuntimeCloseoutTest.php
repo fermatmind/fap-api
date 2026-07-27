@@ -948,7 +948,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $asset->update([
             'content_sections_json' => [[
                 'key' => 'punctuation-boundary',
-                'body_md' => 'Keep the boundary clear: this remains visible.',
+                'body_md' => 'Keep the boundary clear:this remains visible. 这个框架强调：类型描述仍然可见。',
             ]],
         ]);
         $this->fakeRuntimeHttp($report, splitInlinePunctuationHtml: true);
@@ -2851,7 +2851,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         if ($sectionBody !== '') {
                             $renderedSectionBody = (string) Str::markdown($sectionBody);
                             $sectionHtml .= $splitInlinePunctuationHtml
-                                ? str_replace(':', '<span>:</span>', $renderedSectionBody)
+                                ? str_replace(
+                                    [':', '：'],
+                                    ['<span>:</span>', '<span>：</span>'],
+                                    $renderedSectionBody,
+                                )
                                 : $renderedSectionBody;
                         }
                         $sectionHtml .= '</section>';
