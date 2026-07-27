@@ -1678,27 +1678,53 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
-    public function test_discoverability_snapshot_rejects_duplicate_urls_on_every_surface(): void
+    public function test_discoverability_snapshot_rejects_duplicate_sitemap_urls_but_normalizes_text_references_as_sets(): void
     {
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
         $discoverabilityState = (object) ['duplicate_surface' => null];
 
-        foreach (['sitemap', 'llms', 'llms_full'] as $surface) {
+        $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
+        $baseline = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+            $report,
+            'https://frontend.test',
+        );
+
+        $discoverabilityState->duplicate_surface = 'sitemap';
+        $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+                $report,
+                'https://frontend.test',
+            );
+            $this->fail('Expected duplicate sitemap URL to fail closed.');
+        } catch (\RuntimeException $exception) {
+            $this->assertSame(
+                'Discoverability URL set contains a duplicate normalized public path.',
+                $exception->getMessage(),
+            );
+        }
+
+        foreach (['llms', 'llms_full'] as $surface) {
             $discoverabilityState->duplicate_surface = $surface;
             $this->fakeRuntimeHttp($report, discoverabilityState: $discoverabilityState);
-            try {
-                app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
-                    $report,
-                    'https://frontend.test',
-                );
-                $this->fail('Expected duplicate discoverability URL to fail: '.$surface);
-            } catch (\RuntimeException $exception) {
-                $this->assertSame(
-                    'Discoverability URL set contains a duplicate normalized public path.',
-                    $exception->getMessage(),
-                );
-            }
+            $snapshot = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->snapshot(
+                $report,
+                'https://frontend.test',
+            );
+
+            $this->assertSame(
+                data_get($baseline, 'url_sets.'.$surface.'.url_count'),
+                data_get($snapshot, 'url_sets.'.$surface.'.url_count'),
+            );
+            $this->assertSame(
+                data_get($baseline, 'url_sets.'.$surface.'.url_set_sha256'),
+                data_get($snapshot, 'url_sets.'.$surface.'.url_set_sha256'),
+            );
+            $this->assertSame(
+                data_get($baseline, 'url_sets.'.$surface.'.enneagram_url_set_sha256'),
+                data_get($snapshot, 'url_sets.'.$surface.'.enneagram_url_set_sha256'),
+            );
         }
     }
 

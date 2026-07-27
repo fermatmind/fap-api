@@ -1101,7 +1101,12 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     {
         preg_match_all('#<loc>\s*([^<]+)\s*</loc>#i', $response->body(), $matches);
 
-        return $this->normalizedUrlPaths($matches[1] ?? [], $frontendBaseUrl, true);
+        return $this->normalizedUrlPaths(
+            $matches[1] ?? [],
+            $frontendBaseUrl,
+            requireCanonicalSitemapUrl: true,
+            rejectDuplicatePaths: true,
+        );
     }
 
     /** @return list<string> */
@@ -1109,7 +1114,11 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     {
         preg_match_all('#https?://[^\s<>()"\']+|(?<![A-Za-z0-9:/])/(?!/)[^\s<>()"\']+#i', $text, $matches);
 
-        return $this->normalizedUrlPaths($matches[0] ?? [], $frontendBaseUrl);
+        return $this->normalizedUrlPaths(
+            $matches[0] ?? [],
+            $frontendBaseUrl,
+            rejectDuplicatePaths: false,
+        );
     }
 
     /** @param list<string> $urls @return list<string> */
@@ -1117,6 +1126,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         array $urls,
         ?string $frontendBaseUrl = null,
         bool $requireCanonicalSitemapUrl = false,
+        bool $rejectDuplicatePaths = true,
     ): array {
         $expectedOrigin = $frontendBaseUrl !== null ? $this->canonicalOrigin($frontendBaseUrl) : null;
         $paths = [];
@@ -1149,7 +1159,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 $paths[] = $path;
             }
         }
-        if (count($paths) !== count(array_unique($paths))) {
+        if ($rejectDuplicatePaths && count($paths) !== count(array_unique($paths))) {
             throw new RuntimeException('Discoverability URL set contains a duplicate normalized public path.');
         }
         $paths = array_values(array_unique($paths));
