@@ -1368,7 +1368,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5)),
         ) ?? '';
 
-        return preg_replace('/\s+([?？!！:：;；])/u', '$1', $normalized) ?? $normalized;
+        return preg_replace('/\s*([?？!！:：;；])\s*/u', '$1', $normalized) ?? $normalized;
     }
 
     /** @param list<string> $issues */
