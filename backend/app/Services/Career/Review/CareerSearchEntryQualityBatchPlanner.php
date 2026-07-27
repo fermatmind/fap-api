@@ -67,6 +67,7 @@ final class CareerSearchEntryQualityBatchPlanner
         $reviewPackage = $this->reviewBridge->buildPackage(
             $slugs,
             $this->evaluator->publicationSnapshot($slugs),
+            $this->evaluator->indexSnapshot($slugs),
         );
         $targetsBySlug = [];
         foreach ($reviewPackage['targets'] as $target) {

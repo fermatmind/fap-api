@@ -74,8 +74,11 @@ final class CareerPilotReviewEvidenceBridge
      * @param  list<string>  $slugs
      * @return array{schema_version:string,scope_type:string,scope_identity:string,slugs:list<string>,targets:list<array{identity:string,sha256:string}>,target_count:int,target_set_sha256:string,package_sha256:string,index_item_sha256_by_slug:array<string,array<string,string>>}
      */
-    public function buildPackage(array $slugs, ?array $publicationSnapshot = null): array
-    {
+    public function buildPackage(
+        array $slugs,
+        ?array $publicationSnapshot = null,
+        ?array $indexItemSnapshot = null,
+    ): array {
         $normalizedSlugs = array_values(array_unique(array_filter(array_map(
             static fn (mixed $slug): string => strtolower(trim((string) $slug)),
             $slugs,
@@ -91,7 +94,7 @@ final class CareerPilotReviewEvidenceBridge
             }
         }
 
-        $indexItems = $this->exactIndexItems($normalizedSlugs);
+        $indexItems = $indexItemSnapshot ?? $this->exactIndexItems($normalizedSlugs);
         $publication = $publicationSnapshot
             ?? $this->responseCache->jobDetailPublicationSnapshot($normalizedSlugs, self::LOCALES);
         $indexItemShaBySlug = [];
@@ -111,7 +114,14 @@ final class CareerPilotReviewEvidenceBridge
                     ));
                 }
 
-                $indexItem = $indexItems[$locale][$slug];
+                $indexItem = $indexItems[$locale][$slug] ?? null;
+                if (! is_array($indexItem)) {
+                    throw new \RuntimeException(sprintf(
+                        'Career pilot review target requires one exact index entry: %s %s.',
+                        $slug,
+                        $locale,
+                    ));
+                }
                 $indexItemShaBySlug[$slug][$locale] = $this->indexItemSha($indexItem);
                 foreach ($this->targetPayloads($payload, $indexItem) as $kind => $targetPayload) {
                     $targets[] = [
@@ -581,9 +591,10 @@ final class CareerPilotReviewEvidenceBridge
         $lastReviewedAt = is_string($projection['last_reviewed_at'] ?? null)
             ? $projection['last_reviewed_at']
             : null;
-        $contentQualityTier = $reviewState === 'approved' && $lastReviewedAt !== null
-            ? $this->searchEntryQualityEvaluator->qualityTierForSlug($slug)
-            : null;
+        // Review binding is evidence-only. It must never stand in for the
+        // separately authorized controlled apply that can make a candidate
+        // search-entry eligible.
+        $contentQualityTier = null;
 
         return $this->searchEntryTierResolver->resolve(
             slug: $slug,

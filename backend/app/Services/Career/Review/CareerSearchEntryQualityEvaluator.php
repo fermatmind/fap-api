@@ -195,6 +195,30 @@ final class CareerSearchEntryQualityEvaluator
         return $snapshot;
     }
 
+    /**
+     * Return the exact request-bounded index items already used by evaluation,
+     * so package hashing cannot drift onto a later pointer.
+     *
+     * @param  list<string>  $slugs
+     * @return array<string,array<string,array<string,mixed>>>
+     */
+    public function indexSnapshot(array $slugs): array
+    {
+        $snapshot = [];
+        foreach (self::LOCALES as $locale) {
+            foreach ($slugs as $slug) {
+                $normalizedSlug = strtolower(trim($slug));
+                $item = $this->exactIndexItem($normalizedSlug, $locale);
+                if ($item === null) {
+                    throw new \RuntimeException('Career quality index snapshot is incomplete.');
+                }
+                $snapshot[$locale][$normalizedSlug] = $item;
+            }
+        }
+
+        return $snapshot;
+    }
+
     /** @return array<string,mixed> */
     private function localeEvidence(string $slug, string $locale): array
     {

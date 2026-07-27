@@ -16,6 +16,7 @@ use App\Services\Career\Review\CareerSearchEntryQualityBatchPlanner;
 use App\Services\Career\Review\CareerSearchEntryQualityEvaluator;
 use App\Services\Career\Review\CareerSearchEntryTierResolver;
 use App\Services\ReviewGovernance\CareerSeoReviewAttestationService;
+use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -351,7 +352,7 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $planner->verify($package);
     }
 
-    public function test_exact_review_binding_projects_stable_and_approved_candidate_without_conflating_quality(): void
+    public function test_exact_review_binding_remains_ineligible_without_controlled_apply_evidence(): void
     {
         config()->set('review_governance.mode', 'solo_owner');
         config()->set('review_governance.solo_owner_admin_user_id', 1);
@@ -378,16 +379,47 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
             $this->responseCache->jobDetailPayload($slugs[1], 'en'),
         );
 
-        $this->assertSame('stable', $stable['search_entry_tier']);
-        $this->assertSame('approved_candidate', $candidate['search_entry_tier']);
+        $this->assertSame('ineligible', $stable['search_entry_tier']);
+        $this->assertSame('ineligible', $candidate['search_entry_tier']);
         foreach ([$stable, $candidate] as $payload) {
-            $this->assertTrue($payload['search_entry_authority']['search_entry_eligible']);
+            $this->assertFalse($payload['search_entry_authority']['search_entry_eligible']);
             $this->assertSame('approved', $payload['search_entry_authority']['review_state']);
-            $this->assertSame(
-                CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
-                $payload['search_entry_authority']['content_quality_tier'],
+            $this->assertSame('unknown', $payload['search_entry_authority']['content_quality_tier']);
+            $this->assertContains(
+                'content_quality_tier_unknown',
+                $payload['search_entry_authority']['reason_codes'],
             );
         }
+    }
+
+    public function test_review_package_reuses_the_index_snapshot_qualified_by_evaluator(): void
+    {
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $evaluator = app(CareerSearchEntryQualityEvaluator::class);
+        $this->assertSame([], $evaluator->evaluate($slug)['blockers']);
+        $indexSnapshot = $evaluator->indexSnapshot([$slug]);
+        $originalItem = $indexSnapshot['en'][$slug];
+
+        $en = $this->responseCache->jobIndexPayload('en');
+        $zh = $this->responseCache->jobIndexPayload('zh-CN');
+        foreach ($en['items'] as &$item) {
+            if (data_get($item, 'identity.canonical_slug') === $slug) {
+                $item['seo_contract']['robots_policy'] = 'noindex,follow';
+            }
+        }
+        unset($item);
+        $this->responseCache->publishJobIndexReadModelsAtomically(['en' => $en, 'zh-CN' => $zh]);
+
+        $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage(
+            [$slug],
+            $evaluator->publicationSnapshot([$slug]),
+            $indexSnapshot,
+        );
+
+        $this->assertSame(
+            hash('sha256', app(ReviewAttestationCanonicalizer::class)->encode($originalItem)),
+            $package['index_item_sha256_by_slug'][$slug]['en'],
+        );
     }
 
     public function test_detail_projection_rejects_payload_that_drifted_after_approved_projection_was_cached(): void
