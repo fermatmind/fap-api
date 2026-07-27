@@ -100809,7 +100809,7 @@
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
     "status": "github_checks_pending",
-      "commit_sha": "9020516dc3046c2d97508997735490373b6943f3",
+      "commit_sha": "c10cc09a63ab4e0df7981bdea3ae54c6ed46be9a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
@@ -100822,7 +100822,7 @@
       },
       "focused_tests": {
         "status": "passed",
-          "evidence": "The deterministic batch plus reviewer bridge suites pass 31 warning-only tests / 1538 assertions. ReviewPolicyRegistryTest passes 11 tests / 354 assertions; the related tier contract and publish-track run passes 14 tests plus 4 warning-only tests / 143 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, source identity requirements with empty-wrapper and usage-only rejection, full expected-package self-authentication and canonical comparison, all populated detail/index canonical fields matching the exact locale route, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and request-memoized contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, the exact evaluator-qualified job-index snapshot reused for package hashing, same-version ready_active exposure-snapshot authority, review-only binding remaining runtime-ineligible without controlled apply evidence, request-time full bilingual target revalidation after cached approval, transient revalidation failure downgrade without a detail 500, zero redundant publication refresh for unapproved detail projections, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
+          "evidence": "The deterministic batch plus reviewer bridge suites pass 32 warning-only tests / 1540 assertions. ReviewPolicyRegistryTest passes 11 tests / 354 assertions; the related tier contract and publish-track run passes 14 tests plus 4 warning-only tests / 143 assertions. Coverage includes the exact 50 upper and lower boundary, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, source identity requirements with empty-wrapper and usage-only rejection, full expected-package self-authentication and canonical comparison, all populated detail/index canonical fields matching the exact locale route, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and request-memoized contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, the exact evaluator-qualified job-index snapshot reused for package hashing, same-version ready_active exposure-snapshot authority, review-only binding remaining runtime-ineligible without controlled apply evidence, request-time full bilingual target revalidation after cached approval, transient revalidation failure downgrade without a detail 500, zero redundant publication refresh for unapproved detail projections, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
       },
       "required_local_checks": {
         "status": "passed",
@@ -100970,8 +100970,13 @@
           "at": "2026-07-27T06:57:11Z",
           "status": "github_checks_pending",
           "note": "Before merge, origin/main advanced from acf616ae76b5691afb30582be607360a5030830f to da8f9253d1f96fc5049f42809b112ba6aa16cfd1 through six independent deploy, SEO-13, article, and Enneagram commits with zero changed-path intersection. Rebased all PR2 commits cleanly; rewritten implementation head 9020516dc3046c2d97508997735490373b6943f3 passes the exact manifest test selection, ReviewPolicyRegistry, the branch-diff classifier, Pint across 501 files, Composer strict validation/audit, YAML/JSON, diff, and scope checks. Fresh exact-head GitHub checks and review are mandatory after force-push."
+        },
+        {
+          "at": "2026-07-27T07:07:04Z",
+          "status": "review_fixes_validated",
+          "note": "Exact latest-main head 027fefbcdf0ab4b830f798acb8cc184f483a3b2f passed all nine required checks in runs 30244442974 and 30244443164, then exact-head review found that expected_candidate_count and the candidate rows could be synchronously reduced below the locked first fifty. Manifest validation now requires exactly 50 expected rows as well as max 50, and a truncation regression proves fail-closed behavior. The focused batch passes 20 warning-only tests / 1444 assertions and scoped Pint/diff checks pass; a fresh exact-head CI/review cycle remains required."
         }
       ],
-      "updated_at": "2026-07-27T06:57:11Z"
+      "updated_at": "2026-07-27T07:07:04Z"
   }
 }
