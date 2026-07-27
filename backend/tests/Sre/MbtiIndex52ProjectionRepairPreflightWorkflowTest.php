@@ -46,6 +46,12 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString("bootstrap/cache'", $runner);
         self::assertStringContainsString('Read-only Laravel bootstrap directory precondition mismatch.', $runner);
         self::assertStringContainsString('if (! is_dir($directory))', $runner);
+        self::assertStringContainsString('$packageManifestPath', $runner);
+        self::assertStringContainsString('$serviceManifestPath', $runner);
+        self::assertStringContainsString("vendor/composer/installed.php'", $runner);
+        self::assertStringContainsString("composer.lock'", $runner);
+        self::assertStringContainsString('Read-only Laravel bootstrap cache freshness mismatch.', $runner);
+        self::assertStringContainsString("array_keys(\$serviceManifest) !== ['providers', 'eager', 'deferred', 'when']", $runner);
         self::assertStringContainsString('$expectedControlPlaneSha', $runner);
         self::assertStringContainsString('$expectedActiveRevision', $runner);
         self::assertStringContainsString('StreamedMbtiIndex52', $runner);

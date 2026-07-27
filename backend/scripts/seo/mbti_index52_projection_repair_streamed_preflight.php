@@ -25,6 +25,38 @@ foreach ($requiredRuntimeDirectories as $directory) {
         throw new RuntimeException('Read-only Laravel bootstrap directory precondition mismatch.');
     }
 }
+$packageManifestPath = $current.'/backend/bootstrap/cache/packages.php';
+$serviceManifestPath = $current.'/backend/bootstrap/cache/services.php';
+$dependencyMetadataPaths = [
+    $current.'/backend/vendor/composer/installed.php',
+    $current.'/backend/composer.lock',
+];
+foreach ([$packageManifestPath, $serviceManifestPath, ...$dependencyMetadataPaths] as $path) {
+    if (! is_file($path) || ! is_readable($path)) {
+        throw new RuntimeException('Read-only Laravel bootstrap cache precondition mismatch.');
+    }
+}
+$dependencyMetadataMtime = max(array_map(
+    static fn (string $path): int => (int) filemtime($path),
+    $dependencyMetadataPaths,
+));
+if ((int) filemtime($packageManifestPath) < $dependencyMetadataMtime
+    || (int) filemtime($serviceManifestPath) < $dependencyMetadataMtime
+) {
+    throw new RuntimeException('Read-only Laravel bootstrap cache freshness mismatch.');
+}
+$packageManifest = require $packageManifestPath;
+$serviceManifest = require $serviceManifestPath;
+if (! is_array($packageManifest) || $packageManifest === []
+    || ! is_array($serviceManifest)
+    || array_keys($serviceManifest) !== ['providers', 'eager', 'deferred', 'when']
+    || ! is_array($serviceManifest['providers'])
+    || ! is_array($serviceManifest['eager'])
+    || ! is_array($serviceManifest['deferred'])
+    || ! is_array($serviceManifest['when'])
+) {
+    throw new RuntimeException('Read-only Laravel bootstrap cache shape mismatch.');
+}
 
 chdir($current.'/backend');
 require 'vendor/autoload.php';
