@@ -58,6 +58,23 @@ final class Seo13ArticleReviewApprovalProductionOpsWorkflowTest extends TestCase
         $this->assertStringContainsString('DB::transaction', $runner);
         $this->assertStringContainsString('STATUS_HUMAN_REVIEW', $runner);
         $this->assertStringContainsString('STATUS_APPROVED', $runner);
+        foreach ([
+            'cohort_runtime_contract',
+            'reviewer_identity',
+            'review_governance',
+            'revision_identity',
+            'public_surface',
+            'import_gate',
+            'editorial_completeness',
+            'state_lock',
+            'transaction_lock',
+            'approval_readback',
+            'application_runtime',
+        ] as $safeFailureStage) {
+            $this->assertStringContainsString($safeFailureStage, $runner);
+        }
+        $this->assertStringNotContainsString('$exception->getTrace', $runner);
+        $this->assertStringNotContainsString('$exception->getFile', $runner);
         $this->assertStringContainsString('review_approval_write_count: (if $mode == "apply" then 13 else 0 end)', $runner);
         $this->assertStringContainsString('publish_count: 0', $runner);
         $this->assertStringContainsString('schema_write_count: 0', $runner);
