@@ -100679,7 +100679,7 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "github_checks_pending",
+    "status": "github_checks_retry_pending",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
@@ -100701,7 +100701,11 @@
       },
       "required_local_checks": {
         "status": "passed",
-        "evidence": "Scoped Pint passed all 120 selected Career/CMS/resource/test files; API route discovery returned 224 lines; Composer strict validation and audit passed with no advisories; manifest YAML and ledger JSON parsed; git diff checks passed; and exact changed-file scope contains only seven authorized paths."
+        "evidence": "After the conditionally authorized classifier repair, the focused classifier selection passed 2 tests / 6 assertions; related Career/review suites passed 56 tests / 1422 assertions; scoped Pint passed all 121 selected files. API route discovery remains 224 lines; Composer strict validation/audit passed; manifest YAML and ledger JSON parsed; diff checks passed; and exact changed-file scope contains only the eight authorized paths."
+      },
+      "github_required_checks": {
+        "status": "failed_repairing",
+        "evidence": "Exact ledger head 66ac735dd passed eight required checks. verify-bigfive passed 1602 tests / 195612 assertions and failed only because the branch-diff classifier did not yet exempt the exact new CareerSearchEntryTierResolver.php path. The goal conditionally authorizes only that classifier exemption plus positive/negative regressions."
       }
     },
     "scope_validation": {
@@ -100747,8 +100751,18 @@
         "at": "2026-07-27T01:37:12Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact seven-path PR1 branch and opened PR #3326 at implementation head 838bfd03346c38b146602a16eb5109c53e73ba21 with the required what/why/validation/deferred boundaries. GitHub required checks and exact-head review are pending. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-27T01:47:22Z",
+        "status": "github_check_repair_in_progress",
+        "note": "Exact ledger head 66ac735dd passed eight of nine required checks. verify-bigfive passed 1602 tests / 195612 assertions and failed only the branch-diff classifier on backend/app/Services/Career/Review/CareerSearchEntryTierResolver.php. Activating the goal's conditional authorization for the Big Five classifier test file: exempt only that exact resolver and add negative controls for a future quality batch, publisher, adjacent resolver, and Big Five runtime. No required check is overridden."
+      },
+      {
+        "at": "2026-07-27T01:49:00Z",
+        "status": "github_checks_retry_pending",
+        "note": "The exact resolver classifier exemption and positive/negative regressions passed 2 tests / 6 assertions. Related Career and review suites passed 56 tests / 1422 assertions, and scoped Pint passed 121 files. The branch now contains exactly eight authorized paths; a fresh complete GitHub required-check set is mandatory after push."
       }
     ],
-    "updated_at": "2026-07-27T01:37:12Z"
+    "updated_at": "2026-07-27T01:49:00Z"
   }
 }

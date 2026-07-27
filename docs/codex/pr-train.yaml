@@ -65,7 +65,7 @@ prs:
     base: main
     branch: codex/career-search-entry-tier-contract-01
     title: "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01 add career search-entry authority"
-    status: github_checks_pending
+    status: github_checks_retry_pending
     depends_on:
       - CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01
       - CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01
@@ -85,7 +85,6 @@ prs:
       - backend/docs/seo/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
-    conditional_allowed_paths:
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
     do_not:
       - Modify Career runtime controllers, routes, or migrations.
