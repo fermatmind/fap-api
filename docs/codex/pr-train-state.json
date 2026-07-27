@@ -100679,8 +100679,8 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "96d199f0aececb37553b481d29760ec51aacfa42",
+    "status": "merged",
+    "commit_sha": "acf616ae76b5691afb30582be607360a5030830f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
       "dependencies": {
@@ -100716,12 +100716,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-27T02:54:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -100790,8 +100790,198 @@
         "at": "2026-07-27T02:40:47Z",
         "status": "ready_to_merge",
         "note": "Exact latest-main rebased head 2cb60522c2853042fb58354d40da643067e558b7 passed all nine required GitHub checks, Codex exact-head review found no major issues, all review threads are resolved, PR is CLEAN/MERGEABLE, local validation remains green, and the eight changed paths remain exactly within scope. This ready_to_merge ledger tail must independently pass required checks before squash merge."
+      },
+      {
+        "at": "2026-07-27T02:54:22Z",
+        "status": "merged",
+        "note": "Final ledger head 62286fdf2fac0031289b43508d6602f3c6f6c263 passed all nine required checks and Codex exact-head review with no major issues. PR #3326 squash-merged as acf616ae76b5691afb30582be607360a5030830f; GitHub and origin/main contain the merge, the remote branch is absent, and the clean isolated task worktree plus local branch were removed. The dirty primary clone was not modified."
       }
     ],
-    "updated_at": "2026-07-27T02:40:47Z"
+    "updated_at": "2026-07-27T02:54:22Z"
+  },
+  "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01": {
+    "id": "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-search-entry-quality-batch-01",
+    "title": "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01 prepare first fifty career entries",
+    "depends_on": [
+      "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
+    ],
+    "status": "ready_to_merge",
+      "commit_sha": "15ea6599e0e3780b892f01026d42361cec40e24b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
+    "checks": {
+      "dependencies": {
+        "status": "passed",
+        "evidence": "PR #3326 merged as acf616ae76b5691afb30582be607360a5030830f and the exact merge is present on fap-api origin/main."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "PR2 is bounded code, one exact 50-slug content-pack manifest, and dry-run/read projection only. Production deploy, controlled Task12 apply, CMS/database/cache/queue/publication/indexability/sitemap/llms/Search Channel writes, URL submission, and held-slug release remain prohibited."
+      },
+      "focused_tests": {
+        "status": "passed",
+          "evidence": "The deterministic batch plus reviewer bridge suites pass 32 warning-only tests / 1540 assertions. ReviewPolicyRegistryTest passes 11 tests / 354 assertions; the related tier contract and publish-track run passes 14 tests plus 4 warning-only tests / 143 assertions. Coverage includes the exact 50 upper and lower boundary, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, source identity requirements with empty-wrapper and usage-only rejection, full expected-package self-authentication and canonical comparison, all populated detail/index canonical fields matching the exact locale route, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and request-memoized contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, the exact evaluator-qualified job-index snapshot reused for package hashing, same-version ready_active exposure-snapshot authority, review-only binding remaining runtime-ineligible without controlled apply evidence, request-time full bilingual target revalidation after cached approval, transient revalidation failure downgrade without a detail 500, zero redundant publication refresh for unapproved detail projections, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
+      },
+      "required_local_checks": {
+        "status": "passed",
+          "evidence": "Focused and related Career tests passed; ReviewPolicyRegistryTest passes all 11 architecture assertions including registered manual-review surface declarations; Pint passed across 502 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact latest-main head 15ea6599e0e3780b892f01026d42361cec40e24b passed all nine required GitHub checks in runs 30245013349 and 30245013385."
+      },
+      "exact_head_review": {
+        "status": "passed",
+        "evidence": "Codex exact-head review completed for 15ea6599e0e3780b892f01026d42361cec40e24b with no major issues; all review threads are resolved and PR #3333 is CLEAN/MERGEABLE."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-27T03:20:58Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact PR1 merge acf616ae76b5691afb30582be607360a5030830f in an isolated worktree. Locked one exact 50-slug non-held pool from the 114 effective stable/candidate members and implemented bounded bilingual quality evaluation, deterministic dry-run packaging, exact reviewer targets, drift verification, and zero-write guarantees. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-27T03:27:17Z",
+        "status": "focused_tests_passed",
+        "note": "Focused and directly related regressions passed. Candidate receipts now expose exact current EN/zh-CN content and SEO SHAs bound to all six reviewer targets, and the public projection defers high-density Tier A cache reads until exact approved review evidence is present. Local non-test authority correctly returned HOLD because the isolated developer cache lacks the exact 50 active/LKG entries; it created no artifact and performed no authority write."
+      },
+      {
+        "at": "2026-07-27T03:32:23Z",
+        "status": "local_checks_passed",
+        "note": "The branch-diff classifier produced the exact conditional failure required by the goal, rejecting only the three quality services and exact batch-01 manifest. Added the authorized exact-path-only classifier exemption and positive/negative regression; future batch, publisher, and Big Five runtime paths remain blocked. All declared local checks now pass."
+      },
+      {
+        "at": "2026-07-27T03:33:24Z",
+        "status": "github_checks_pending",
+        "note": "Pushed exact scoped head 653a2c28e0bee8a4693f09b97ddf0b099787e0da and opened PR #3333. Awaiting all required exact-head checks and review."
+      },
+      {
+        "at": "2026-07-27T03:44:23Z",
+        "status": "review_fixes_validated",
+        "note": "All nine checks passed on prior head 68009f90c83835407b9dbc43b5851f18a42210d2, but Codex review of the preceding head found two valid issues. Moved the conditional classifier path into the PR2 allowed-path entry and bound approved detail projection to the exact payload returned plus current index target hashes, failing closed across pointer drift. Added the race regression and reran all focused, related, classifier, and formatting gates successfully; a fresh exact-head CI/review cycle is required."
+      },
+        {
+          "at": "2026-07-27T03:57:05Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 2b1d479d7786b4cb3471c6155cee7908774d5db9, then exact-head Codex review found reader-safe hashing and repeated projection hydration risks. Review targets now project the same reader-safe values as the public controller and bind its source SHA. Publication authority is loaded through exactly two cohort snapshots during a 50-entry build, with no per-slug projection lookups, while retaining published/detail-route/robots/release-gate requirements. Focused and committed branch-diff classifier tests pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:07:49Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 7ad4270f7ca9a17d5790f0638db06ed3a8202052, then exact-head Codex review found that the new bulk publication path omitted the existing ready_active plus same-version exposure-snapshot authority. The bulk path now preserves the exact single-read semantics without reintroducing per-slug runtime projection hydration, and a focused regression proves the stale materialized-candidate transition. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:18:21Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 14b133853b5535424c60d5bc5889167d271defcc, then exact-head Codex review found that recursive visible-character counting included placeholder and contract metadata. Quality thickness now counts only an explicit reader-visible prose field vocabulary while excluding paths, hrefs, identifiers, source pointers, module state, and placeholder policy. A 24-placeholder regression remains below the 500-character threshold and fails closed. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:28:09Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head ce419ab445457b434833af194cd9e5c6b72c40cf, then exact-head Codex review found two fail-open evidence boundaries. Display-source wrappers now unwrap and require meaningful references instead of accepting source_refs_contract metadata, and expected artifacts now authenticate their complete canonical package before comparison to current authority. Empty references and nested artifact tampering both fail closed in focused regressions. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:37:20Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 5e64499af11305f7fb720ff419b3c935ce7c0b19, then exact-head Codex review found that human-readable HOLD output omitted its actionable error. The command now emits the exact non-JSON failure reason while retaining generic JSON errors, with an invalid expected-package path regression. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:47:46Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head b36e7b14f83200706c1991aed9363bf952a3ec1d, then exact-head Codex review found a publication-version race and missing index canonical equality gate. Publication evidence now carries the exact validated classification, version, and payload; quality evaluation and review-target hashing share one request-bounded cohort fence, while independent build/verify calls reset it to detect drift. Index entries must match the exact locale-and-slug canonical. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:57:23Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head cd22b37f0cfb304c1b41f2b905ce0ea3c387ab5b, then exact-head Codex review found that a request-cached approval could outlive later bilingual target drift during index projection. Detail and index projection now revalidate all six current bilingual target hashes against the approved projection using the same publication fence before retaining review approval or Tier A. An opposite-locale drift regression proves immediate unknown/ineligible fallback. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T05:08:01Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks and exact-head review passed on dfc5096fd3214730bb3a5bb0e684f72eab4afa69, then the review exposed two additional fail-open quality boundaries. Every populated canonical field must now match the exact locale-and-slug route, and source objects require a meaningful label/reference or valid public HTTP(S) URL rather than key/usage metadata alone. The focused batch plus reviewer bridge passes 28 warning-only tests / 1515 assertions, scoped Pint and diff checks pass, and a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T05:20:01Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 85cfc8164fa2229d99a3dac8545e31fd5df4f3bc, then exact-head Codex review found that a transient second publication lookup could escape the freshness gate and turn an already-readable cached detail into a 500. Publication refresh is now exception-bounded for both detail and index projection: any failure removes approval and search eligibility while preserving the cached response. The focused batch plus reviewer bridge passes 29 warning-only tests / 1520 assertions, scoped Pint and diff checks pass, and a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T05:30:26Z",
+          "status": "ready_to_merge",
+          "note": "Exact head eafc43525cc6aed47fea5f7595f9d2aa2d1292cf passed all nine required checks in runs 30239479173 and 30239479152. Codex exact-head review reported no major issues and all review threads are resolved. Local and GitHub scope validation pass; a final ledger-only tail head must repeat exact-head CI/review before squash merge."
+        },
+        {
+          "at": "2026-07-27T05:41:49Z",
+          "status": "review_fixes_validated",
+          "note": "Final ledger-only head 0f2f6772f442b3c49c60f7f6b9eb0452dc7e53e3 passed all nine required checks in runs 30239960560 and 30239960565, then exact-head Codex review found a redundant publication refresh on the common unapproved detail path. Refresh now returns immediately with no approved slugs and primes approved slugs only. The focused batch plus reviewer bridge passes 30 warning-only tests / 1524 assertions; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T05:50:21Z",
+          "status": "ready_to_merge",
+          "note": "Exact head 1aa1fe50b8517410d8d814766151f0e7fe64e484 passed all nine required checks in runs 30240508933 and 30240508932. Codex exact-head review reported no major issues, all review threads are resolved, and the PR is clean and mergeable. Local and GitHub scope validation pass; the final ledger-only tail head must repeat exact-head CI/review before squash merge."
+        },
+        {
+          "at": "2026-07-27T05:59:26Z",
+          "status": "review_fixes_validated",
+          "note": "Final ledger-only head 4c1b2f9598f639dcebd6e2b4e0610ac5a9e0fdf3 passed all nine required checks in runs 30240909640 and 30240909646, then exact-head Codex review found repeated controller contract hashing across approved cohort reconstruction and currency validation. The immutable controller SHA is now memoized once per projector instance/request. The focused batch plus reviewer bridge passes 30 warning-only tests / 1526 assertions; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T06:09:37Z",
+          "status": "review_fixes_validated",
+          "note": "Exact head 53c029daba1ec5c65a2d8ccf391f882970ffe621 passed all nine required checks in runs 30241342188 and 30241341815, then exact-head Codex review found missing registered review-surface declarations on the new planner and evaluator manual-review gates. Both now declare career_trust_manifest. ReviewPolicyRegistryTest passes all 11 architecture assertions and the focused Career suites pass 30 warning-only tests; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T06:26:17Z",
+          "status": "ready_to_merge",
+          "note": "Exact head 177439d8629c0102d3a54b550d48cfa0cf7eac30 passed all nine required checks in runs 30241866953 and 30241866951. Codex exact-head review is present, all review threads are resolved, and the PR is clean and mergeable. Local and GitHub scope validation pass; the final ledger-only tail head must repeat exact-head CI/review before squash merge."
+        },
+        {
+          "at": "2026-07-27T06:38:16Z",
+          "status": "review_fixes_validated",
+          "note": "Final ledger-only head c42a655469623ae8688e1432e385889da5c895c9 passed all nine required checks in runs 30242767139 and 30242767179, then exact-head Codex review found three valid boundaries. Review-only approved_all binding can no longer supply runtime Tier A without separate controlled apply evidence; package hashing now reuses the exact evaluator-qualified job-index snapshot; and ledger plus manifest lifecycle are both pending for the fresh head. Architecture, focused Career, tier, publish-track, Pint, and diff checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T06:46:50Z",
+          "status": "ready_to_merge",
+          "note": "Exact head c3acf1e729ba9423d5abd1661d47ec3fceb9ff93 passed all nine required checks in runs 30243428893 and 30243428860. Codex exact-head review reported no major issues, all review threads are resolved, the PR is CLEAN/MERGEABLE, and local plus GitHub scope validation pass. Manifest and ledger now share ready_to_merge; this final metadata-only tail head must independently repeat exact-head CI/review before squash merge."
+        },
+        {
+          "at": "2026-07-27T06:57:11Z",
+          "status": "github_checks_pending",
+          "note": "Before merge, origin/main advanced from acf616ae76b5691afb30582be607360a5030830f to da8f9253d1f96fc5049f42809b112ba6aa16cfd1 through six independent deploy, SEO-13, article, and Enneagram commits with zero changed-path intersection. Rebased all PR2 commits cleanly; rewritten implementation head 9020516dc3046c2d97508997735490373b6943f3 passes the exact manifest test selection, ReviewPolicyRegistry, the branch-diff classifier, Pint across 501 files, Composer strict validation/audit, YAML/JSON, diff, and scope checks. Fresh exact-head GitHub checks and review are mandatory after force-push."
+        },
+        {
+          "at": "2026-07-27T07:07:04Z",
+          "status": "review_fixes_validated",
+          "note": "Exact latest-main head 027fefbcdf0ab4b830f798acb8cc184f483a3b2f passed all nine required checks in runs 30244442974 and 30244443164, then exact-head review found that expected_candidate_count and the candidate rows could be synchronously reduced below the locked first fifty. Manifest validation now requires exactly 50 expected rows as well as max 50, and a truncation regression proves fail-closed behavior. The focused batch passes 20 warning-only tests / 1444 assertions and scoped Pint/diff checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T07:15:49Z",
+          "status": "ready_to_merge",
+          "note": "Exact latest-main head 15ea6599e0e3780b892f01026d42361cec40e24b passed all nine required checks in runs 30245013349 and 30245013385. Codex exact-head review reported no major issues, all review threads are resolved, the PR is CLEAN/MERGEABLE, and the exact 15 changed paths remain in scope. Manifest and ledger now share ready_to_merge; this final metadata-only tail head must independently repeat exact-head CI/review before squash merge."
+        }
+      ],
+      "updated_at": "2026-07-27T07:15:49Z"
   }
 }

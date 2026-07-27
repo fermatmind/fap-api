@@ -57,7 +57,7 @@ final class CareerPilotReviewEvidenceBridge
         'exceptions_json',
     ];
 
-    /** @var array<string, array{review_state:string,last_reviewed_at:string|null,index_item_sha256_by_locale?:array<string,string>}>|null */
+    /** @var array<string, array{review_state:string,last_reviewed_at:string|null,index_item_sha256_by_locale?:array<string,string>,target_sha256_by_locale_and_kind?:array<string,array<string,string>>}>|null */
     private ?array $requestProjection = null;
 
     public function __construct(
@@ -66,14 +66,19 @@ final class CareerPilotReviewEvidenceBridge
         private readonly ReviewAttestationCanonicalizer $canonicalizer,
         private readonly CareerPublishTrackResolver $publishTrackResolver,
         private readonly CareerSearchEntryTierResolver $searchEntryTierResolver,
+        private readonly CareerSearchEntryQualityEvaluator $searchEntryQualityEvaluator,
+        private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
     ) {}
 
     /**
      * @param  list<string>  $slugs
      * @return array{schema_version:string,scope_type:string,scope_identity:string,slugs:list<string>,targets:list<array{identity:string,sha256:string}>,target_count:int,target_set_sha256:string,package_sha256:string,index_item_sha256_by_slug:array<string,array<string,string>>}
      */
-    public function buildPackage(array $slugs): array
-    {
+    public function buildPackage(
+        array $slugs,
+        ?array $publicationSnapshot = null,
+        ?array $indexItemSnapshot = null,
+    ): array {
         $normalizedSlugs = array_values(array_unique(array_filter(array_map(
             static fn (mixed $slug): string => strtolower(trim((string) $slug)),
             $slugs,
@@ -89,16 +94,19 @@ final class CareerPilotReviewEvidenceBridge
             }
         }
 
-        $indexItems = $this->exactIndexItems($normalizedSlugs);
+        $indexItems = $indexItemSnapshot ?? $this->exactIndexItems($normalizedSlugs);
+        $publication = $publicationSnapshot
+            ?? $this->responseCache->jobDetailPublicationSnapshot($normalizedSlugs, self::LOCALES);
         $indexItemShaBySlug = [];
         $targets = [];
         foreach ($normalizedSlugs as $slug) {
             foreach (self::LOCALES as $locale) {
-                $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
-                $payload = $readiness['payload'];
+                $evidence = $publication[$slug][$locale] ?? null;
+                $payload = is_array($evidence) ? ($evidence['payload'] ?? null) : null;
                 if (! is_array($payload)
-                    || ! in_array($readiness['classification'], ['ready_active', 'ready_lkg'], true)
-                    || ! $this->responseCache->jobDetailCacheIsReady($slug, $locale)) {
+                    || ! in_array($evidence['classification'] ?? null, ['ready_active', 'ready_lkg'], true)
+                    || ($evidence['published'] ?? false) !== true
+                ) {
                     throw new \RuntimeException(sprintf(
                         'Career pilot review target is not available from active/LKG detail authority: %s %s.',
                         $slug,
@@ -106,7 +114,14 @@ final class CareerPilotReviewEvidenceBridge
                     ));
                 }
 
-                $indexItem = $indexItems[$locale][$slug];
+                $indexItem = $indexItems[$locale][$slug] ?? null;
+                if (! is_array($indexItem)) {
+                    throw new \RuntimeException(sprintf(
+                        'Career pilot review target requires one exact index entry: %s %s.',
+                        $slug,
+                        $locale,
+                    ));
+                }
                 $indexItemShaBySlug[$slug][$locale] = $this->indexItemSha($indexItem);
                 foreach ($this->targetPayloads($payload, $indexItem) as $kind => $targetPayload) {
                     $targets[] = [
@@ -151,6 +166,13 @@ final class CareerPilotReviewEvidenceBridge
 
         $projection = $this->projectionBySlug()[strtolower(trim($slug))]
             ?? self::UNAPPROVED_PROJECTION;
+        $currentTargets = $this->refreshTargetCurrencyBySlug([
+            strtolower(trim($slug)) => $projection,
+        ]);
+        if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection)
+            || ! ($currentTargets[strtolower(trim($slug))] ?? false)) {
+            $projection = self::UNAPPROVED_PROJECTION;
+        }
 
         $payload['trust_manifest'] = array_merge(
             $payload['trust_manifest'],
@@ -167,19 +189,22 @@ final class CareerPilotReviewEvidenceBridge
     public function projectJobIndexPayload(array $payload, string $publicLocale): array
     {
         $projections = $this->projectionBySlug();
+        $currentTargets = $this->refreshTargetCurrencyBySlug($projections);
         $locale = $this->normalizeLocale($publicLocale);
         if (! is_array($payload['items'] ?? null)) {
             return $payload;
         }
 
-        $payload['items'] = array_map(function (mixed $item) use ($projections, $locale): mixed {
+        $payload['items'] = array_map(function (mixed $item) use ($projections, $currentTargets, $locale): mixed {
             if (! is_array($item) || ! is_array($item['trust_summary'] ?? null)) {
                 return $item;
             }
             $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
             $projection = $projections[$slug] ?? self::UNAPPROVED_PROJECTION;
             $expectedIndexSha = $projection['index_item_sha256_by_locale'][$locale] ?? null;
-            if (! is_string($expectedIndexSha) || ! hash_equals($expectedIndexSha, $this->indexItemSha($item))) {
+            if (! is_string($expectedIndexSha)
+                || ! hash_equals($expectedIndexSha, $this->indexItemSha($item))
+                || ! ($currentTargets[$slug] ?? false)) {
                 $projection = self::UNAPPROVED_PROJECTION;
             }
             $item['trust_summary'] = array_merge(
@@ -194,6 +219,94 @@ final class CareerPilotReviewEvidenceBridge
         }, $payload['items']);
 
         return $payload;
+    }
+
+    /**
+     * A second publication read is a freshness gate, not page availability
+     * authority. Any transient failure must remove approval and indexability
+     * without turning an already-readable cached response into a 500.
+     *
+     * @param  array<string,array<string,mixed>>  $projections
+     * @return array<string,bool>
+     */
+    private function refreshTargetCurrencyBySlug(array $projections): array
+    {
+        $approvedSlugs = array_keys(array_filter(
+            $projections,
+            static fn (array $projection): bool => ($projection['review_state'] ?? null) === 'approved',
+        ));
+        if ($approvedSlugs === []) {
+            return [];
+        }
+
+        try {
+            $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
+            $this->searchEntryQualityEvaluator->primePublicationSnapshot($approvedSlugs);
+
+            return $this->currentTargetCurrencyBySlug($projections);
+        } catch (\Throwable) {
+            return array_fill_keys($approvedSlugs, false);
+        }
+    }
+
+    /**
+     * Revalidate all bilingual detail target kinds against the exact
+     * publication fence used by the quality evaluator. This closes the
+     * request-local window where an approved projection was cached before a
+     * detail or opposite-locale payload changed.
+     *
+     * @param  array<string,array<string,mixed>>  $projections
+     * @return array<string,bool>
+     */
+    private function currentTargetCurrencyBySlug(array $projections): array
+    {
+        $slugs = array_keys(array_filter(
+            $projections,
+            static fn (array $projection): bool => ($projection['review_state'] ?? null) === 'approved',
+        ));
+        if ($slugs === []) {
+            return [];
+        }
+
+        try {
+            $publication = $this->searchEntryQualityEvaluator->publicationSnapshot($slugs);
+            $indexItems = $this->exactIndexItems($slugs);
+        } catch (\Throwable) {
+            return array_fill_keys($slugs, false);
+        }
+
+        $current = [];
+        foreach ($slugs as $slug) {
+            $current[$slug] = true;
+            foreach (self::LOCALES as $locale) {
+                $evidence = $publication[$slug][$locale] ?? null;
+                $payload = is_array($evidence) ? ($evidence['payload'] ?? null) : null;
+                $expected = $projections[$slug]['target_sha256_by_locale_and_kind'][$locale] ?? null;
+                if (! is_array($payload)
+                    || ! is_array($expected)
+                    || ! in_array($evidence['classification'] ?? null, ['ready_active', 'ready_lkg'], true)
+                    || ($evidence['published'] ?? false) !== true) {
+                    $current[$slug] = false;
+
+                    break;
+                }
+
+                foreach ($this->targetPayloads($payload, $indexItems[$locale][$slug]) as $kind => $target) {
+                    $expectedSha = $expected[$kind] ?? null;
+                    if (! is_string($expectedSha)
+                        || ! hash_equals(
+                            $expectedSha,
+                            hash('sha256', $this->canonicalizer->encode($target)),
+                        )) {
+                        $current[$slug] = false;
+
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        return $current;
     }
 
     /**
@@ -267,11 +380,13 @@ final class CareerPilotReviewEvidenceBridge
             }
 
             $reviewedAt = $attestation->attested_at?->utc()->toISOString();
+            $targetShasBySlug = $this->targetShasBySlug($package['targets']);
             foreach ($unresolvedSlugs as $slug) {
                 $resolved[$slug] = [
                     'review_state' => 'approved',
                     'last_reviewed_at' => $reviewedAt,
                     'index_item_sha256_by_locale' => $package['index_item_sha256_by_slug'][$slug],
+                    'target_sha256_by_locale_and_kind' => $targetShasBySlug[$slug],
                 ];
             }
         }
@@ -305,6 +420,59 @@ final class CareerPilotReviewEvidenceBridge
         return count($attestation->targetEvidences) === count($slugs) * count(self::LOCALES) * count(self::TARGET_KINDS)
             ? $slugs
             : [];
+    }
+
+    /**
+     * @param  list<array{identity:string,sha256:string}>  $targets
+     * @return array<string,array<string,array<string,string>>>
+     */
+    private function targetShasBySlug(array $targets): array
+    {
+        $resolved = [];
+        foreach ($targets as $target) {
+            $parts = explode(':', $target['identity']);
+            if (count($parts) !== 4) {
+                throw new \RuntimeException('Career pilot review target identity is invalid.');
+            }
+            [, $slug, $locale, $kind] = $parts;
+            $resolved[$slug][$locale][$kind] = $target['sha256'];
+        }
+
+        return $resolved;
+    }
+
+    /** @param array<string,mixed> $payload @param array<string,mixed> $projection */
+    private function detailPayloadMatchesProjection(string $slug, array $payload, array $projection): bool
+    {
+        if (($projection['review_state'] ?? null) !== 'approved') {
+            return true;
+        }
+
+        $locale = $this->normalizeLocale((string) data_get($payload, 'locale_policy.locale', ''));
+        $expected = $projection['target_sha256_by_locale_and_kind'][$locale] ?? null;
+        if (! is_array($expected)) {
+            return false;
+        }
+
+        try {
+            $indexItem = $this->exactIndexItems([strtolower(trim($slug))])[$locale][strtolower(trim($slug))];
+            $currentTargets = $this->targetPayloads($payload, $indexItem);
+        } catch (\Throwable) {
+            return false;
+        }
+
+        foreach (self::TARGET_KINDS as $kind) {
+            $expectedSha = $expected[$kind] ?? null;
+            if (! is_string($expectedSha)
+                || ! hash_equals(
+                    $expectedSha,
+                    hash('sha256', $this->canonicalizer->encode($currentTargets[$kind])),
+                )) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @param array<string,mixed> $payload @param array<string,mixed> $indexItem @return array<string,array<string,mixed>> */
@@ -341,7 +509,10 @@ final class CareerPilotReviewEvidenceBridge
                     is_array($payload['trust_manifest'] ?? null) ? $payload['trust_manifest'] : [],
                     ['review_state', 'last_reviewed_at', 'reviewer'],
                 ),
-                'complete_public_detail_projection' => $this->reviewablePublicDetailPayload($payload),
+                'reader_safe_projection_contract_sha256' => $this->readerSafeProjector->contractSha256(),
+                'complete_public_detail_projection' => $this->reviewablePublicDetailPayload(
+                    $this->readerSafeProjector->project($payload),
+                ),
             ],
         ];
     }
@@ -416,20 +587,23 @@ final class CareerPilotReviewEvidenceBridge
         } catch (\Throwable) {
             $publishTrack = null;
         }
+        $reviewState = (string) ($projection['review_state'] ?? 'unknown');
+        $lastReviewedAt = is_string($projection['last_reviewed_at'] ?? null)
+            ? $projection['last_reviewed_at']
+            : null;
+        // Review binding is evidence-only. It must never stand in for the
+        // separately authorized controlled apply that can make a candidate
+        // search-entry eligible.
+        $contentQualityTier = null;
 
         return $this->searchEntryTierResolver->resolve(
             slug: $slug,
             publicVisibility: true,
             robotsIndexable: $this->robotsIndexable($publicPayload['seo_contract'] ?? null),
-            reviewState: (string) ($projection['review_state'] ?? 'unknown'),
-            lastReviewedAt: is_string($projection['last_reviewed_at'] ?? null)
-                ? $projection['last_reviewed_at']
-                : null,
+            reviewState: $reviewState,
+            lastReviewedAt: $lastReviewedAt,
             publishTrack: $publishTrack,
-            // No backend quality-tier authority is projected into the current public
-            // payload. Keep this independent gate unknown until a bounded quality
-            // package supplies an exact classification.
-            contentQualityTier: null,
+            contentQualityTier: $contentQualityTier,
         );
     }
 

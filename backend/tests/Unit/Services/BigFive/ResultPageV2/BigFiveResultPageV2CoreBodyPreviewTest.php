@@ -200,6 +200,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_career_search_entry_quality_batch_01_files(): void
+    {
+        $allowed = [
+            'backend/app/Services/Career/Review/CareerJobDetailReaderSafeReviewProjector.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchManifestReader.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchPlanner.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityEvaluator.php',
+            'backend/content_packs/career/CAREER-SEARCH-ENTRY-QUALITY-BATCH-01/manifest.json',
+        ];
+        $blocked = [
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchPublisher.php',
+            'backend/content_packs/career/CAREER-SEARCH-ENTRY-QUALITY-BATCH-02/manifest.json',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_seo_10k_article_recovery_batch_files(): void
     {
         $allowed = [
@@ -6542,6 +6561,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerSearchEntryQualityBatchFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCareerBridgeContractFile($file)) {
                 continue;
             }
@@ -8462,6 +8485,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerSearchEntryTierContractFile(string $file): bool
     {
         return $file === 'backend/app/Services/Career/Review/CareerSearchEntryTierResolver.php';
+    }
+
+    private function isCareerSearchEntryQualityBatchFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Career/Review/CareerJobDetailReaderSafeReviewProjector.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchManifestReader.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchPlanner.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityEvaluator.php',
+            'backend/content_packs/career/CAREER-SEARCH-ENTRY-QUALITY-BATCH-01/manifest.json',
+        ], true);
     }
 
     private function isBigFiveCareerBridgeContractFile(string $file): bool
