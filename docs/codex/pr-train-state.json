@@ -100808,9 +100808,9 @@
     "depends_on": [
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
-    "status": "local_checks_passed",
-    "commit_sha": "2cd0de943aded96f754acc5b2ac3de4997b6d229",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "653a2c28e0bee8a4693f09b97ddf0b099787e0da",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
         "status": "passed",
@@ -100870,8 +100870,13 @@
         "at": "2026-07-27T03:32:23Z",
         "status": "local_checks_passed",
         "note": "The branch-diff classifier produced the exact conditional failure required by the goal, rejecting only the three quality services and exact batch-01 manifest. Added the authorized exact-path-only classifier exemption and positive/negative regression; future batch, publisher, and Big Five runtime paths remain blocked. All declared local checks now pass."
+      },
+      {
+        "at": "2026-07-27T03:33:24Z",
+        "status": "github_checks_pending",
+        "note": "Pushed exact scoped head 653a2c28e0bee8a4693f09b97ddf0b099787e0da and opened PR #3333. Awaiting all required exact-head checks and review."
       }
     ],
-    "updated_at": "2026-07-27T03:32:23Z"
+    "updated_at": "2026-07-27T03:33:24Z"
   }
 }
