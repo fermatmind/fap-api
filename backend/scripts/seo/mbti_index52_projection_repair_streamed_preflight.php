@@ -23,8 +23,9 @@ eval(base64_decode('__PACKAGE_CLASS_B64__', true) ?: throw new RuntimeException(
 eval(base64_decode('__SERVICE_CLASS_B64__', true) ?: throw new RuntimeException('Service class payload invalid.'));
 $package = json_decode(base64_decode('__PACKAGE_JSON_B64__', true) ?: '', true, flags: JSON_THROW_ON_ERROR);
 $authorization = json_decode(base64_decode('__AUTHORIZATION_JSON_B64__', true) ?: '', true, flags: JSON_THROW_ON_ERROR);
+$atSourcePrestate = json_decode(base64_decode('__AT_SOURCE_PRESTATE_JSON_B64__', true) ?: '', true, flags: JSON_THROW_ON_ERROR);
 
-$contract = new App\Services\Cms\StreamedMbtiIndex52\MbtiIndex52ProjectionRepairPackage;
+$contract = new App\Services\Cms\StreamedMbtiIndex52\MbtiIndex52ProjectionRepairPackage($atSourcePrestate);
 $service = new App\Services\Cms\StreamedMbtiIndex52\MbtiIndex52ProjectionRepairService($contract);
 $plan = $service->plan(
     $package,

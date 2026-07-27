@@ -31,10 +31,13 @@ final class MbtiIndex52ProjectionRepairPackage
         'enfp-vs-entp', 'estj-vs-entj', 'isfp-vs-infp',
     ];
 
+    /** @param array<string,mixed>|null $sourcePrestateOverride */
+    public function __construct(private readonly ?array $sourcePrestateOverride = null) {}
+
     /** @return list<array<string,mixed>> */
     public function validate(array $package, array $authorization): array
     {
-        $sourcePrestate = (array) json_decode(
+        $sourcePrestate = $this->sourcePrestateOverride ?? (array) json_decode(
             (string) file_get_contents(base_path(self::AT_SOURCE_PRESTATE_PATH)),
             true,
             flags: JSON_THROW_ON_ERROR,

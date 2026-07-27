@@ -101,6 +101,7 @@ jobs:
               "__SERVICE_CLASS_B64__" => base64_encode($isolatedSource("backend/app/Services/Cms/MbtiIndex52ProjectionRepairService.php")),
               "__PACKAGE_JSON_B64__" => base64_encode(file_get_contents("backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json")),
               "__AUTHORIZATION_JSON_B64__" => base64_encode(file_get_contents("backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-operator-authorization-2026-07-27.json")),
+              "__AT_SOURCE_PRESTATE_JSON_B64__" => base64_encode(file_get_contents("backend/content_assets/personality_public/mbti-index52-at-source-prestate-2026-07-27.json")),
             ];
             $runner = strtr(file_get_contents("backend/scripts/seo/mbti_index52_projection_repair_streamed_preflight.php"), $replace);
             file_put_contents(getenv("RUNNER_TEMP")."/mbti-index52-preflight.php", $runner);

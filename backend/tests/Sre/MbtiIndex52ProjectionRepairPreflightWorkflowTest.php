@@ -27,6 +27,8 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('EXPECTED_CONTROL_PLANE_SHA=$q_control', $workflow);
         self::assertStringContainsString('StreamedMbtiIndex52', $workflow);
         self::assertStringContainsString('$isolatedSource', $workflow);
+        self::assertStringContainsString('__AT_SOURCE_PRESTATE_JSON_B64__', $workflow);
+        self::assertStringContainsString('mbti-index52-at-source-prestate-2026-07-27.json', $workflow);
         self::assertStringContainsString('09ccf33ba462b53da57087667e948069f8b22d7a4f48fa4134a357d71716d95f', $workflow);
         self::assertStringContainsString('e3d256d930135bd228055b40a4bf9c6441a35e3e89252f08028065e490e8b402', $workflow);
         self::assertStringContainsString('< "$RUNNER_TEMP/mbti-index52-preflight.php"', $workflow);
@@ -42,6 +44,8 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('$expectedControlPlaneSha', $runner);
         self::assertStringContainsString('$expectedActiveRevision', $runner);
         self::assertStringContainsString('StreamedMbtiIndex52', $runner);
+        self::assertStringContainsString('$atSourcePrestate', $runner);
+        self::assertStringContainsString('MbtiIndex52ProjectionRepairPackage($atSourcePrestate)', $runner);
         self::assertStringNotContainsString('class_exists(', $runner);
         self::assertStringContainsString('writes_committed', $runner);
         self::assertStringContainsString('false', $runner);
