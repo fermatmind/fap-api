@@ -147,39 +147,64 @@ The generic Filament editorial-review queue is not used for this cohort because 
 
 ## Production stage 4: controlled promotion
 
-Run a fresh dry-run for each approved working revision:
+The promotion cohort is now a fixed atomic batch. Do not loop the legacy
+single-article command 13 times: that can leave a partially published cohort.
+The active backend release must contain the batch-capable command and the
+protected production workflow before any production preflight.
+
+Run the batch dry-run against the exact active release:
 
 ```bash
 cd <DEPLOYED_BACKEND_RELEASE>/backend
 php artisan articles:promote-existing-working-revision \
-  --article-id=<ARTICLE_ID> \
-  --working-revision-id=<WORKING_REVISION_ID> \
-  --current-published-revision-id=<CURRENT_PUBLISHED_REVISION_ID> \
-  --translation-group-id=<TRANSLATION_GROUP_ID> \
-  --expected-slug=<SLUG> \
-  --expected-canonical=https://fermatmind.com/zh/articles/<SLUG> \
+  --batch=seo13-20260726 \
+  --expected-target-count=13 \
   --dry-run \
   --json
 ```
 
-Each successful dry-run emits its exact confirmation:
+The repository control plane is
+`.github/workflows/seo-13-article-atomic-promotion-production-ops.yml`.
+Its `preflight` mode is read-only and binds the current production release,
+all 13 article/revision/slug/canonical identities, reader-facing content and
+SEO hashes, eligibility holds, the target set, and the content set. It emits
+one immutable apply phrase:
+
+Before either promotion mode can run, workflow eligibility also downloads and
+validates the immutable successful review-approval apply receipt from run
+`30231516428`, attempt `1`. That receipt binds the exact 13 approved working
+revision IDs and editorial-review evidence to content set
+`b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e`.
+Authenticated-preview QA is independently recorded in the immutable
+`docs/seo/evidence/seo-13-authenticated-preview-qa-2026-07-27.json` contract,
+whose locked SHA-256 is
+`d8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9`.
+It binds all 13 article IDs, slugs, `zh-CN` locales, working revision IDs,
+title/body hashes, one rendered H1, visible quick-answer/FAQ/reference
+sections, and the noindex/no-store preview boundary.
+The deployed command independently verifies the committed cohort lock and
+every package file hash, then compares each live `zh-CN` working revision's
+title, excerpt, body, SEO title, SEO description, canonical, slug, and
+translation group against that cohort. Any receipt, package, locale, or
+reader-facing field drift fails before a write.
 
 ```text
-I explicitly approve Codex to promote article id <ARTICLE_ID> working revision <WORKING_REVISION_ID> after preflight passes.
+I explicitly approve SEO 13 atomic public promotion for SHA <RELEASE_SHA> release <RELEASE_NAME> preflight run <RUN_ID> attempt <ATTEMPT> state <STATE_SHA> revision set <REVISION_SET_SHA> content set b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e; publish exactly 13 approved working revisions and keep schema, hreflang, search, revalidation, sitemap eligibility, llms eligibility, GSC, URL Inspection, and deploy changes held.
 ```
 
-The operator must confirm the exact 13 emitted phrases for the exact working revisions. Then execute each promotion in the same controlled release window:
+After the operator confirms that exact phrase, `apply` downloads and validates
+the immutable preflight receipt. The deployed command rechecks the approved
+state under deterministic row locks and promotes all 13 revisions in one
+outer database transaction:
 
 ```bash
 cd <DEPLOYED_BACKEND_RELEASE>/backend
 php artisan articles:promote-existing-working-revision \
-  --article-id=<ARTICLE_ID> \
-  --working-revision-id=<WORKING_REVISION_ID> \
-  --current-published-revision-id=<CURRENT_PUBLISHED_REVISION_ID> \
-  --translation-group-id=<TRANSLATION_GROUP_ID> \
-  --expected-slug=<SLUG> \
-  --expected-canonical=https://fermatmind.com/zh/articles/<SLUG> \
-  --confirm="<EXACT_CONFIRMATION_FROM_PREFLIGHT>" \
+  --batch=seo13-20260726 \
+  --expected-target-count=13 \
+  --expected-state-sha256=<STATE_SHA> \
+  --expected-revision-set-sha256=<REVISION_SET_SHA> \
+  --confirm="<COMMAND_CONFIRMATION_DERIVED_FROM_THE_APPROVED_RECEIPT>" \
   --preview-approved \
   --schema-hold \
   --hreflang-hold \
@@ -191,7 +216,14 @@ php artisan articles:promote-existing-working-revision \
   --json
 ```
 
-The runtime is per-article rather than transactionally atomic across all 13 records. “One full release” therefore means one locked cohort and one controlled release window. It does not permit skipping a failed record or publishing an unreviewed remainder.
+The atomic transaction updates only the article projections, the 13 new
+published revisions, the 13 previous revision statuses, and the working
+revision SEO title/description fields. It records one batch audit inside the
+same transaction. Follow-up dispatch, frontend revalidation, discoverability
+cache invalidation, schema/hreflang release, search, sitemap/llms eligibility
+writes, GSC, URL Inspection, and deploy actions remain held. Any identity,
+content, SEO, approval, import-gate, claim, private-URL, or readback failure
+rolls back the whole batch.
 
 ## Production stage 5: public readback
 
@@ -261,6 +293,13 @@ Authenticated preview QA, editorial approval, controlled promotion, public smoke
 - forbidden draft/review markers: 0
 - private URL guard findings: 0
 - images missing alt text: 0
+- editorial review approval apply: run `30231516428`, attempt `1`, `PASS_APPLY`
+- review-approved working revisions: 13/13
+- review approval writes: 13
 - publication, schema, hreflang, search, revalidation, sitemap, and llms remained held
 
-This evidence authorizes neither editorial approval nor promotion by itself. The review-approval preflight must rediscover and bind the exact live revision set before the operator confirms its emitted phrase.
+This evidence authorizes neither deployment nor promotion by itself. The
+atomic promotion control plane must first be deployed through the separately
+authorized exact-SHA backend release lane. Its production preflight must then
+rediscover and bind the exact live approved revision set before the operator
+confirms the emitted promotion phrase.

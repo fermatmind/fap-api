@@ -14,13 +14,40 @@ use App\Services\Cms\ArticlePublishService;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use RuntimeException;
+use Throwable;
 
 /**
  * @review-surface article
  */
 final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 {
+    private const SEO13_BATCH = 'seo13-20260726';
+
+    private const SEO13_TARGET_COUNT = 13;
+
+    private const SEO13_CONTENT_SET_SHA256 = 'b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e';
+
+    private const SEO13_TARGET_SET_SHA256 = '67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f934c';
+
+    private const SEO13_COHORT_LOCK_FILE_SHA256 = '212b4b298244ba3ed89a1a999d5ea2019332d33694e67e73093b45f275a56166';
+
+    private const SEO13_COHORT_PATH = 'docs/seo/import-packages/seo-13-article-refresh-2026-07-26';
+
+    private const SEO13_PREVIEW_EVIDENCE_PATH = 'docs/seo/evidence/seo-13-authenticated-preview-qa-2026-07-27.json';
+
+    private const SEO13_PREVIEW_EVIDENCE_SHA256 = 'd8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9';
+
+    private const SEO13_PREVIEW_REVISION_SET_SHA256 = 'ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95';
+
+    private const PRIVATE_ROUTE_PATTERN = '~(?<![A-Za-z0-9_-])/(?:result|results|orders|order|share|pay|payment|history|take)(?:/|[?#\s)"\']|$)~i';
+
+    private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:result_id|order_id|payment_id|token|score|user_id|report_id)=/i';
+
     protected $signature = 'articles:promote-existing-working-revision
+        {--batch= : Fixed controlled batch name; supported value: seo13-20260726}
+        {--expected-target-count= : Exact batch target count lock}
+        {--expected-state-sha256= : Execute-only immutable preflight state lock}
+        {--expected-revision-set-sha256= : Execute-only immutable revision-set lock}
         {--article-id= : Exact already-published article id}
         {--working-revision-id= : Exact approved working revision id to promote}
         {--current-published-revision-id= : Exact currently-published revision id lock}
@@ -50,6 +77,11 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
+        $batch = trim((string) $this->option('batch'));
+        if ($batch !== '') {
+            return $this->handleBatch($publisher, $auditLogger, $batch);
+        }
+
         $articleId = $this->positiveIntOption('article-id');
         $workingRevisionId = $this->positiveIntOption('working-revision-id');
         $currentPublishedRevisionId = $this->positiveIntOption('current-published-revision-id');
@@ -171,6 +203,806 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         return ($summary['ok'] ?? false) ? self::SUCCESS : self::FAILURE;
     }
 
+    private function handleBatch(
+        ArticlePublishService $publisher,
+        AuditLogger $auditLogger,
+        string $batch,
+    ): int {
+        $dryRun = (bool) $this->option('dry-run');
+        $execute = (bool) $this->option('execute');
+        $expectedTargetCount = $this->positiveIntOption('expected-target-count');
+        $expectedState = trim((string) $this->option('expected-state-sha256'));
+        $expectedRevisionSet = trim((string) $this->option('expected-revision-set-sha256'));
+        $confirmation = trim((string) $this->option('confirm'));
+        $errors = [];
+
+        if ($batch !== self::SEO13_BATCH) {
+            $errors[] = $this->issue('batch', 'unsupported_batch', 'Only the locked SEO 13 batch is supported.');
+        }
+        if ($expectedTargetCount !== self::SEO13_TARGET_COUNT) {
+            $errors[] = $this->issue(
+                'expected-target-count',
+                'target_count_lock_mismatch',
+                'The SEO 13 batch requires an exact target count of 13.',
+            );
+        }
+        if ($dryRun === $execute) {
+            $errors[] = $this->issue('mode', 'exactly_one_mode_required', 'Choose exactly one of --dry-run or --execute.');
+        }
+        foreach ([
+            'article-id',
+            'working-revision-id',
+            'current-published-revision-id',
+            'translation-group-id',
+            'expected-slug',
+            'expected-canonical',
+            'ack-claim-warning',
+        ] as $singleOption) {
+            if (trim((string) $this->option($singleOption)) !== '') {
+                $errors[] = $this->issue(
+                    $singleOption,
+                    'single_target_option_forbidden_in_batch',
+                    'Single-target identity options cannot be combined with --batch.',
+                );
+            }
+        }
+
+        if ($execute) {
+            foreach ($this->requiredHoldOptions() as $option) {
+                if (! (bool) $this->option($option)) {
+                    $errors[] = $this->issue($option, 'required_hold_flag_missing', "Execute requires --{$option}.");
+                }
+            }
+            if (! (bool) $this->option('preview-approved')) {
+                $errors[] = $this->issue(
+                    'preview-approved',
+                    'preview_approval_required',
+                    'Authenticated preview QA acknowledgement is required before batch execute.',
+                );
+            }
+            foreach ([
+                'expected-state-sha256' => $expectedState,
+                'expected-revision-set-sha256' => $expectedRevisionSet,
+            ] as $field => $hash) {
+                if (preg_match('/^[0-9a-f]{64}$/', $hash) !== 1) {
+                    $errors[] = $this->issue($field, 'sha256_lock_required', "Execute requires a valid --{$field}.");
+                }
+            }
+        } elseif ($expectedState !== '' || $expectedRevisionSet !== '' || $confirmation !== '') {
+            $errors[] = $this->issue(
+                'preflight-locks',
+                'execute_only_lock_supplied',
+                'Dry-run must discover state and cannot accept execute-only state, revision-set, or confirmation locks.',
+            );
+        }
+
+        $snapshot = $batch === self::SEO13_BATCH
+            ? $this->batchSnapshot()
+            : $this->emptyBatchSnapshot();
+        $errors = array_merge($errors, $snapshot['errors']);
+        $stateSha = (string) $snapshot['preflight_state_sha256'];
+        $revisionSetSha = (string) $snapshot['revision_set_sha256'];
+        $expectedConfirmation = $this->expectedBatchConfirmation($stateSha, $revisionSetSha);
+
+        if ($execute && $errors === []) {
+            if (! hash_equals($expectedState, $stateSha)) {
+                $errors[] = $this->issue('expected-state-sha256', 'preflight_state_drift', 'Live batch state no longer matches the approved preflight.');
+            }
+            if (! hash_equals($expectedRevisionSet, $revisionSetSha)) {
+                $errors[] = $this->issue(
+                    'expected-revision-set-sha256',
+                    'revision_set_drift',
+                    'Live batch revision set no longer matches the approved preflight.',
+                );
+            }
+            if (! hash_equals($expectedConfirmation, $confirmation)) {
+                $errors[] = $this->issue(
+                    'confirm',
+                    'confirmation_mismatch',
+                    'Exact batch confirmation phrase is required before atomic promotion.',
+                    ['expected_confirmation' => $expectedConfirmation],
+                );
+            }
+        }
+
+        $summary = $this->batchSummary(
+            ok: $errors === [],
+            dryRun: $dryRun,
+            execute: $execute,
+            snapshot: $snapshot,
+            errors: $errors,
+            expectedConfirmation: $expectedConfirmation,
+        );
+
+        if ($execute && $errors === []) {
+            try {
+                $summary = $publisher->promoteExistingWorkingRevisionsAtomically(
+                    $this->seo13Targets(),
+                    validateLockedBatch: function () use ($expectedState, $expectedRevisionSet): array {
+                        $lockedSnapshot = $this->batchSnapshot();
+                        if ($lockedSnapshot['errors'] !== []) {
+                            throw new RuntimeException('locked_preflight_failed');
+                        }
+                        if (! hash_equals($expectedState, (string) $lockedSnapshot['preflight_state_sha256'])) {
+                            throw new RuntimeException('locked_preflight_state_drift');
+                        }
+                        if (! hash_equals($expectedRevisionSet, (string) $lockedSnapshot['revision_set_sha256'])) {
+                            throw new RuntimeException('locked_revision_set_drift');
+                        }
+
+                        return $lockedSnapshot;
+                    },
+                    transactionGuard: fn (
+                        Article $lockedArticle,
+                        ArticleTranslationRevision $lockedRevision,
+                    ) => $this->assertEditorialCompleteness($lockedArticle, $lockedRevision),
+                    validateReadback: function (array $lockedSnapshot) use (
+                        $auditLogger,
+                        $confirmation,
+                        $expectedState,
+                        $expectedRevisionSet,
+                    ): array {
+                        $readback = $this->batchSnapshot(afterPromotion: true);
+                        $this->assertBatchPromotionReadback($lockedSnapshot, $readback);
+                        $this->logBatchPromotion($auditLogger, $lockedSnapshot, $readback, $confirmation);
+
+                        return $this->batchSummary(
+                            ok: true,
+                            dryRun: false,
+                            execute: true,
+                            snapshot: $readback,
+                            errors: [],
+                            expectedConfirmation: $this->expectedBatchConfirmation(
+                                $expectedState,
+                                $expectedRevisionSet,
+                            ),
+                            beforeSnapshot: $lockedSnapshot,
+                        );
+                    },
+                );
+            } catch (Throwable $exception) {
+                $errors[] = $this->issue(
+                    'promotion',
+                    'atomic_batch_promotion_failed',
+                    $this->safeBatchFailure($exception),
+                );
+                $summary = $this->batchSummary(
+                    ok: false,
+                    dryRun: false,
+                    execute: true,
+                    snapshot: $snapshot,
+                    errors: $errors,
+                    expectedConfirmation: $expectedConfirmation,
+                );
+            }
+        }
+
+        $this->emitSummary($summary);
+
+        return ($summary['ok'] ?? false) ? self::SUCCESS : self::FAILURE;
+    }
+
+    /**
+     * @return array{
+     *   rows:list<array<string,mixed>>,
+     *   errors:list<array<string,mixed>>,
+     *   preflight_state_sha256:string,
+     *   revision_set_sha256:string
+     * }
+     */
+    private function batchSnapshot(bool $afterPromotion = false): array
+    {
+        $rows = [];
+        $errors = [];
+
+        try {
+            $contentLocks = $this->lockedContentTargets();
+            $previewLocks = $this->lockedPreviewTargets();
+        } catch (Throwable) {
+            $snapshot = $this->emptyBatchSnapshot();
+            $snapshot['errors'][] = $this->issue(
+                'content_set',
+                'content_set_lock_invalid',
+                'The committed SEO 13 content cohort is missing, malformed, or has drifted.',
+            );
+
+            return $snapshot;
+        }
+
+        foreach ($this->seo13Targets() as $target) {
+            $row = $this->preflight(
+                $target['article_id'],
+                $target['working_revision_id'],
+                $target['current_published_revision_id'],
+                afterPromotion: $afterPromotion,
+                identityLock: $target,
+                claimWarningAcknowledged: false,
+            );
+            foreach ($this->contentLockErrors($row, $contentLocks[$target['article_id']] ?? null) as $error) {
+                $row['errors'][] = $error;
+                $row['ok'] = false;
+            }
+            foreach ($this->previewLockErrors($row, $previewLocks[$target['article_id']] ?? null) as $error) {
+                $row['errors'][] = $error;
+                $row['ok'] = false;
+            }
+            $rows[] = $row;
+            foreach ((array) ($row['errors'] ?? []) as $error) {
+                if (is_array($error)) {
+                    $errors[] = ['article_id' => $target['article_id']] + $error;
+                }
+            }
+        }
+
+        $revisionSet = array_map(
+            static fn (array $row): array => [
+                'article_id' => (int) ($row['article_id'] ?? 0),
+                'working_revision_id' => (int) ($row['working_revision_id'] ?? 0),
+                'current_published_revision_id' => (int) ($row['current_published_revision_id'] ?? 0),
+            ],
+            $rows,
+        );
+        $stateRows = array_map(fn (array $row): array => $this->batchStateRow($row), $rows);
+
+        return [
+            'rows' => $rows,
+            'errors' => $errors,
+            'preflight_state_sha256' => $this->deterministicHash($stateRows),
+            'revision_set_sha256' => $this->deterministicHash($revisionSet),
+        ];
+    }
+
+    /**
+     * @return array{
+     *   rows:list<array<string,mixed>>,
+     *   errors:list<array<string,mixed>>,
+     *   preflight_state_sha256:string,
+     *   revision_set_sha256:string
+     * }
+     */
+    private function emptyBatchSnapshot(): array
+    {
+        return [
+            'rows' => [],
+            'errors' => [],
+            'preflight_state_sha256' => str_repeat('0', 64),
+            'revision_set_sha256' => str_repeat('0', 64),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    private function batchStateRow(array $row): array
+    {
+        return [
+            'article_id' => (int) ($row['article_id'] ?? 0),
+            'locale' => (string) ($row['locale'] ?? ''),
+            'slug' => (string) ($row['slug'] ?? ''),
+            'translation_group_id' => (string) ($row['translation_group_id'] ?? ''),
+            'canonical_url' => (string) ($row['canonical_url'] ?? ''),
+            'status' => (string) ($row['status'] ?? ''),
+            'is_public' => (bool) ($row['is_public'] ?? false),
+            'is_indexable' => (bool) ($row['is_indexable'] ?? false),
+            'sitemap_eligible' => (bool) ($row['sitemap_eligible'] ?? false),
+            'llms_eligible' => (bool) ($row['llms_eligible'] ?? false),
+            'published_revision_id' => (int) ($row['published_revision_id'] ?? 0),
+            'working_revision_id' => (int) ($row['working_revision_id'] ?? 0),
+            'working_revision_status' => (string) ($row['working_revision_status'] ?? ''),
+            'working_revision_body_hash' => (string) ($row['working_revision_body_hash'] ?? ''),
+            'working_revision_title_hash' => (string) ($row['working_revision_title_hash'] ?? ''),
+            'working_revision_excerpt_hash' => (string) ($row['working_revision_excerpt_hash'] ?? ''),
+            'working_revision_seo_title_hash' => (string) ($row['working_revision_seo_title_hash'] ?? ''),
+            'working_revision_seo_description_hash' => (string) ($row['working_revision_seo_description_hash'] ?? ''),
+            'seo_title_hash' => (string) ($row['seo_title_hash'] ?? ''),
+            'seo_description_hash' => (string) ($row['seo_description_hash'] ?? ''),
+            'seo_schema_hash' => (string) ($row['seo_schema_hash'] ?? ''),
+            'seo_robots' => (string) ($row['seo_robots'] ?? ''),
+            'import_id' => (int) ($row['import_id'] ?? 0),
+            'import_status' => (string) ($row['import_status'] ?? ''),
+            'claim_status' => (string) ($row['claim_status'] ?? ''),
+            'han_character_count' => (int) data_get($row, 'editorial_completeness.actual_han_characters', 0),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $before
+     * @param  array<string,mixed>  $after
+     */
+    private function assertBatchPromotionReadback(array $before, array $after): void
+    {
+        if ($after['errors'] !== [] || count($after['rows']) !== self::SEO13_TARGET_COUNT) {
+            throw new RuntimeException('post_promotion_preflight_failed');
+        }
+
+        $beforeById = collect($before['rows'])->keyBy('article_id');
+        foreach ($after['rows'] as $row) {
+            $articleId = (int) ($row['article_id'] ?? 0);
+            $previous = $beforeById->get($articleId);
+            if (! is_array($previous)) {
+                throw new RuntimeException('post_promotion_target_set_drift');
+            }
+            if ((int) ($row['published_revision_id'] ?? 0) !== (int) ($row['working_revision_id'] ?? 0)
+                || (string) ($row['working_revision_status'] ?? '') !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+                throw new RuntimeException('post_promotion_revision_readback_failed');
+            }
+            foreach ([
+                'slug',
+                'translation_group_id',
+                'canonical_url',
+                'is_public',
+                'is_indexable',
+                'sitemap_eligible',
+                'llms_eligible',
+                'seo_schema_hash',
+                'seo_robots',
+            ] as $heldField) {
+                if (($row[$heldField] ?? null) !== ($previous[$heldField] ?? null)) {
+                    throw new RuntimeException('post_promotion_hold_drift');
+                }
+            }
+            if ((string) ($row['seo_title_hash'] ?? '') !== (string) ($previous['working_revision_seo_title_hash'] ?? '')
+                || (string) ($row['seo_description_hash'] ?? '') !== (string) ($previous['working_revision_seo_description_hash'] ?? '')) {
+                throw new RuntimeException('post_promotion_seo_readback_failed');
+            }
+
+            $oldRevision = ArticleTranslationRevision::query()
+                ->withoutGlobalScopes()
+                ->find((int) ($previous['current_published_revision_id'] ?? 0));
+            if (! $oldRevision instanceof ArticleTranslationRevision
+                || (string) $oldRevision->revision_status !== ArticleTranslationRevision::STATUS_STALE) {
+                throw new RuntimeException('previous_revision_not_stale');
+            }
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $snapshot
+     * @param  list<array<string,mixed>>  $errors
+     * @param  array<string,mixed>|null  $beforeSnapshot
+     * @return array<string,mixed>
+     */
+    private function batchSummary(
+        bool $ok,
+        bool $dryRun,
+        bool $execute,
+        array $snapshot,
+        array $errors,
+        string $expectedConfirmation,
+        ?array $beforeSnapshot = null,
+    ): array {
+        return [
+            'contract_version' => 'seo13.article_atomic_promotion.v1',
+            'ok' => $ok,
+            'dry_run' => $dryRun,
+            'execute' => $execute,
+            'action' => $execute ? 'promote_seo13_atomic_batch' : 'would_promote_seo13_atomic_batch',
+            'batch' => self::SEO13_BATCH,
+            'target_count' => count($snapshot['rows']),
+            'content_set_sha256' => self::SEO13_CONTENT_SET_SHA256,
+            'target_set_sha256' => self::SEO13_TARGET_SET_SHA256,
+            'preview_evidence_sha256' => self::SEO13_PREVIEW_EVIDENCE_SHA256,
+            'preview_revision_set_sha256' => self::SEO13_PREVIEW_REVISION_SET_SHA256,
+            'preflight_state_sha256' => $beforeSnapshot['preflight_state_sha256']
+                ?? $snapshot['preflight_state_sha256'],
+            'revision_set_sha256' => $beforeSnapshot['revision_set_sha256']
+                ?? $snapshot['revision_set_sha256'],
+            'expected_confirmation' => $expectedConfirmation,
+            'preview_approved' => (bool) $this->option('preview-approved'),
+            'hold_flags' => $this->holdFlags(),
+            'rows' => $snapshot['rows'],
+            'errors' => $errors,
+            'production_write_execution' => $ok && $execute,
+            'publish_count' => $ok && $execute ? self::SEO13_TARGET_COUNT : 0,
+            'schema_write_count' => 0,
+            'hreflang_write_count' => 0,
+            'search_submission_count' => 0,
+            'revalidation_count' => 0,
+            'sitemap_eligibility_write_count' => 0,
+            'llms_eligibility_write_count' => 0,
+            'queue_dispatch_count' => 0,
+            'gsc_request_count' => 0,
+            'url_inspection_count' => 0,
+            'deploy_count' => 0,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $before
+     * @param  array<string,mixed>  $after
+     */
+    private function logBatchPromotion(
+        AuditLogger $auditLogger,
+        array $before,
+        array $after,
+        string $confirmation,
+    ): void {
+        $auditLogger->log(
+            Request::create('/ops/articles/promote-existing-working-revision/batch', 'POST'),
+            'codex_controlled_seo13_atomic_working_revision_promotion',
+            'article_batch',
+            self::SEO13_BATCH,
+            [
+                'confirmation_sha256' => hash('sha256', $confirmation),
+                'target_count' => self::SEO13_TARGET_COUNT,
+                'content_set_sha256' => self::SEO13_CONTENT_SET_SHA256,
+                'target_set_sha256' => self::SEO13_TARGET_SET_SHA256,
+                'preview_evidence_sha256' => self::SEO13_PREVIEW_EVIDENCE_SHA256,
+                'preview_revision_set_sha256' => self::SEO13_PREVIEW_REVISION_SET_SHA256,
+                'preflight_state_sha256' => (string) $before['preflight_state_sha256'],
+                'revision_set_sha256' => (string) $before['revision_set_sha256'],
+                'published_revision_set_sha256' => $this->deterministicHash(array_map(
+                    static fn (array $row): array => [
+                        'article_id' => (int) ($row['article_id'] ?? 0),
+                        'published_revision_id' => (int) ($row['published_revision_id'] ?? 0),
+                    ],
+                    $after['rows'],
+                )),
+                'hold_flags' => $this->holdFlags(),
+                'preview_approved' => true,
+                'follow_up_dispatch' => false,
+                'discoverability_cache_invalidation' => false,
+            ],
+            reason: 'seo13_atomic_existing_article_working_revision_promotion',
+            result: 'success',
+        );
+    }
+
+    private function expectedBatchConfirmation(string $stateSha, string $revisionSetSha): string
+    {
+        return 'I explicitly approve Codex to atomically promote SEO 13 batch '
+            .self::SEO13_BATCH
+            .' state '.$stateSha
+            .' revision set '.$revisionSetSha
+            .' content set '.self::SEO13_CONTENT_SET_SHA256
+            .' after preflight passes.';
+    }
+
+    /**
+     * @return list<array{
+     *   article_id:int,
+     *   working_revision_id:int,
+     *   current_published_revision_id:int,
+     *   translation_group_id:string,
+     *   locale:string,
+     *   slug:string,
+     *   canonical:string
+     * }>
+     */
+    private function seo13Targets(): array
+    {
+        $targets = [
+            [1, 446, 341, 'big-five-growth-guide', 'big5-v2-f29331ce54d2f28a7051702932c39aaf69d2bf61'],
+            [2, 445, 347, 'big-five-narrative-portrait', 'big5-v2-8381cc150e7180b365a397ce3e3a25e2626b8970'],
+            [5, 444, 5, 'iq-test-growth-guide', 'article-5'],
+            [6, 443, 6, 'iq-test-narrative-portrait', 'article-6'],
+            [7, 442, 7, 'iq-test-tool-guide', 'article-7'],
+            [9, 441, 9, 'mbti-growth-guide', 'article-9'],
+            [10, 440, 10, 'mbti-narrative-portrait', 'article-10'],
+            [11, 436, 30, 'are-infj-men-rare-or-socially-silenced', 'article-11'],
+            [12, 437, 31, 'best-valentines-date-by-personality-and-relationship-science', 'article-12'],
+            [13, 439, 32, 'childhood-dream-job-still-shapes-career-choice', 'article-13'],
+            [14, 438, 33, 'how-16-personality-types-talk-to-an-ai-coach', 'article-14'],
+            [15, 434, 34, 'how-personality-shapes-attitude-toward-ai', 'article-15'],
+            [16, 435, 35, 'which-love-script-fits-you-best', 'article-16'],
+        ];
+
+        return array_map(
+            static fn (array $target): array => [
+                'article_id' => $target[0],
+                'working_revision_id' => $target[1],
+                'current_published_revision_id' => $target[2],
+                'translation_group_id' => $target[4],
+                'locale' => 'zh-CN',
+                'slug' => $target[3],
+                'canonical' => 'https://fermatmind.com/zh/articles/'.$target[3],
+            ],
+            $targets,
+        );
+    }
+
+    /**
+     * @return array<int,array{
+     *   article_id:int,
+     *   slug:string,
+     *   translation_group_id:string,
+     *   locale:string,
+     *   canonical:string,
+     *   working_revision_body_hash:string,
+     *   working_revision_title_hash:string,
+     *   working_revision_excerpt_hash:string,
+     *   working_revision_seo_title_hash:string,
+     *   working_revision_seo_description_hash:string
+     * }>
+     */
+    private function lockedContentTargets(): array
+    {
+        $root = realpath(base_path(self::SEO13_COHORT_PATH));
+        if (! is_string($root)) {
+            throw new RuntimeException('content_set_root_missing');
+        }
+
+        $lockPath = $root.DIRECTORY_SEPARATOR.'cohort.lock.json';
+        $lockFileHash = hash_file('sha256', $lockPath);
+        if (! is_string($lockFileHash) || ! hash_equals(self::SEO13_COHORT_LOCK_FILE_SHA256, $lockFileHash)) {
+            throw new RuntimeException('content_set_lock_file_drift');
+        }
+
+        $lockContents = file_get_contents($lockPath);
+        if (! is_string($lockContents)) {
+            throw new RuntimeException('content_set_lock_unreadable');
+        }
+        $cohort = json_decode($lockContents, true, flags: JSON_THROW_ON_ERROR);
+        if (! is_array($cohort)
+            || (int) ($cohort['target_count'] ?? 0) !== self::SEO13_TARGET_COUNT
+            || ! hash_equals(self::SEO13_CONTENT_SET_SHA256, (string) ($cohort['content_set_sha256'] ?? ''))
+            || ! hash_equals(self::SEO13_TARGET_SET_SHA256, (string) ($cohort['target_set_sha256'] ?? ''))
+            || count((array) ($cohort['packages'] ?? [])) !== self::SEO13_TARGET_COUNT) {
+            throw new RuntimeException('content_set_contract_mismatch');
+        }
+
+        $targets = [];
+        foreach ((array) $cohort['packages'] as $package) {
+            if (! is_array($package)) {
+                throw new RuntimeException('content_set_package_invalid');
+            }
+
+            $cmsPath = null;
+            foreach ((array) ($package['files'] ?? []) as $file) {
+                if (! is_array($file)) {
+                    throw new RuntimeException('content_set_file_invalid');
+                }
+                $relativePath = (string) ($file['path'] ?? '');
+                $expectedHash = (string) ($file['sha256'] ?? '');
+                $resolvedPath = realpath($root.DIRECTORY_SEPARATOR.$relativePath);
+                if (! is_string($resolvedPath)
+                    || ! str_starts_with($resolvedPath, $root.DIRECTORY_SEPARATOR)
+                    || preg_match('/^[0-9a-f]{64}$/', $expectedHash) !== 1) {
+                    throw new RuntimeException('content_set_file_path_invalid');
+                }
+                $actualHash = hash_file('sha256', $resolvedPath);
+                if (! is_string($actualHash) || ! hash_equals($expectedHash, $actualHash)) {
+                    throw new RuntimeException('content_set_file_hash_drift');
+                }
+                if (str_contains($relativePath, '/cms/CMS_FIELDS_UPDATE_')) {
+                    $cmsPath = $resolvedPath;
+                }
+            }
+
+            if (! is_string($cmsPath)) {
+                throw new RuntimeException('content_set_cms_fields_missing');
+            }
+            $cmsContents = file_get_contents($cmsPath);
+            if (! is_string($cmsContents)) {
+                throw new RuntimeException('content_set_cms_fields_unreadable');
+            }
+            $cms = json_decode($cmsContents, true, flags: JSON_THROW_ON_ERROR);
+            if (! is_array($cms)) {
+                throw new RuntimeException('content_set_cms_fields_invalid');
+            }
+
+            $articleId = (int) ($package['article_id'] ?? 0);
+            $slug = (string) ($package['slug'] ?? '');
+            $bodyRelativePath = $slug.DIRECTORY_SEPARATOR.(string) ($cms['body_markdown_file'] ?? '');
+            $bodyPath = realpath($root.DIRECTORY_SEPARATOR.$bodyRelativePath);
+            if ($articleId <= 0
+                || isset($targets[$articleId])
+                || (int) ($cms['target_article_id'] ?? 0) !== $articleId
+                || (string) ($cms['slug'] ?? '') !== $slug
+                || (string) ($cms['translation_group_id'] ?? '') !== (string) ($package['translation_group_id'] ?? '')
+                || (string) ($cms['locale'] ?? '') !== 'zh-CN'
+                || ! is_string($bodyPath)
+                || ! str_starts_with($bodyPath, $root.DIRECTORY_SEPARATOR)) {
+                throw new RuntimeException('content_set_identity_mismatch');
+            }
+            $body = file_get_contents($bodyPath);
+            if (! is_string($body)) {
+                throw new RuntimeException('content_set_body_unreadable');
+            }
+            $normalizedBody = preg_replace("/\r\n?/", "\n", $body);
+            if (preg_match('/\A---\n.*?\n---\n(.*)\z/s', $normalizedBody, $matches) === 1) {
+                $body = (string) $matches[1];
+            }
+
+            $targets[$articleId] = [
+                'article_id' => $articleId,
+                'slug' => $slug,
+                'translation_group_id' => (string) $package['translation_group_id'],
+                'locale' => 'zh-CN',
+                'canonical' => (string) ($cms['canonical_url'] ?? ''),
+                'working_revision_body_hash' => $this->bodyHash($body),
+                'working_revision_title_hash' => $this->textHash((string) ($cms['title'] ?? '')),
+                'working_revision_excerpt_hash' => $this->textHash((string) ($cms['excerpt'] ?? '')),
+                'working_revision_seo_title_hash' => $this->textHash((string) ($cms['meta_title'] ?? '')),
+                'working_revision_seo_description_hash' => $this->textHash((string) ($cms['meta_description'] ?? '')),
+            ];
+        }
+
+        ksort($targets);
+
+        return $targets;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @param  array<string,mixed>|null  $lock
+     * @return list<array<string,mixed>>
+     */
+    private function contentLockErrors(array $row, ?array $lock): array
+    {
+        if ($lock === null) {
+            return [$this->issue('content_set', 'content_set_target_missing', 'Article is missing from the locked content cohort.')];
+        }
+
+        $errors = [];
+        foreach ([
+            'article_id',
+            'locale',
+            'slug',
+            'translation_group_id',
+            'canonical_url' => 'canonical',
+            'working_revision_body_hash',
+            'working_revision_title_hash',
+            'working_revision_excerpt_hash',
+            'working_revision_seo_title_hash',
+            'working_revision_seo_description_hash',
+        ] as $rowField => $lockField) {
+            if (is_int($rowField)) {
+                $rowField = $lockField;
+            }
+            $actual = (string) ($row[$rowField] ?? '');
+            $expected = (string) ($lock[$lockField] ?? '');
+            if ($actual !== $expected) {
+                $errors[] = $this->issue(
+                    "content_set.{$rowField}",
+                    "content_set_{$rowField}_mismatch",
+                    "Live {$rowField} does not match the committed SEO 13 content cohort.",
+                );
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return array<int,array<string,mixed>>
+     */
+    private function lockedPreviewTargets(): array
+    {
+        $path = base_path(self::SEO13_PREVIEW_EVIDENCE_PATH);
+        $fileHash = hash_file('sha256', $path);
+        if (! is_string($fileHash) || ! hash_equals(self::SEO13_PREVIEW_EVIDENCE_SHA256, $fileHash)) {
+            throw new RuntimeException('preview_evidence_file_drift');
+        }
+        $contents = file_get_contents($path);
+        if (! is_string($contents)) {
+            throw new RuntimeException('preview_evidence_unreadable');
+        }
+        $evidence = json_decode($contents, true, flags: JSON_THROW_ON_ERROR);
+        if (! is_array($evidence)
+            || (string) ($evidence['contract_version'] ?? '') !== 'seo13.authenticated_preview_qa.v1'
+            || (string) ($evidence['status'] ?? '') !== 'PASS'
+            || (string) ($evidence['evidence_source'] ?? '') !== 'solo_owner_authenticated_cms_preview'
+            || (string) ($evidence['attestation_source_commit_sha'] ?? '') !== '320601d73f8726046ef4ee662f9025cb97334db5'
+            || (string) ($evidence['attestation_source_file_sha256'] ?? '') !== '217d6bb81fdf7229df471b4aadbf3a9a2dec8fbda8d5b0fe20ab6cfdfda29e6d'
+            || (int) ($evidence['identity_source_review_approval_run_id'] ?? 0) !== 30231516428
+            || (int) ($evidence['identity_source_review_approval_run_attempt'] ?? 0) !== 1
+            || (string) ($evidence['source_release_sha'] ?? '') !== 'de9865c8cdde21a6359b60052f426f867abe0ead'
+            || (int) ($evidence['draft_apply_run_id'] ?? 0) !== 30228428454
+            || (int) ($evidence['draft_apply_run_attempt'] ?? 0) !== 1
+            || ! hash_equals(self::SEO13_CONTENT_SET_SHA256, (string) ($evidence['content_set_sha256'] ?? ''))
+            || ! hash_equals(self::SEO13_TARGET_SET_SHA256, (string) ($evidence['target_set_sha256'] ?? ''))
+            || ! hash_equals(self::SEO13_PREVIEW_REVISION_SET_SHA256, (string) ($evidence['preview_revision_set_sha256'] ?? ''))
+            || (int) ($evidence['target_count'] ?? 0) !== self::SEO13_TARGET_COUNT
+            || (string) data_get($evidence, 'preview_boundary.robots') !== 'noindex,noarchive,nosnippet'
+            || (string) data_get($evidence, 'preview_boundary.banner') !== 'Draft preview only'
+            || (string) data_get($evidence, 'preview_boundary.cache_control') !== 'no-store'
+            || (int) ($evidence['forbidden_marker_count'] ?? -1) !== 0
+            || (int) ($evidence['private_url_finding_count'] ?? -1) !== 0
+            || (int) ($evidence['missing_image_alt_count'] ?? -1) !== 0
+            || count((array) ($evidence['rows'] ?? [])) !== self::SEO13_TARGET_COUNT) {
+            throw new RuntimeException('preview_evidence_contract_mismatch');
+        }
+
+        $targets = [];
+        foreach ((array) $evidence['rows'] as $row) {
+            if (! is_array($row)
+                || (string) ($row['authenticated_preview_status'] ?? '') !== 'passed'
+                || (int) ($row['rendered_h1_count'] ?? 0) !== 1
+                || ($row['visible_quick_answer'] ?? false) !== true
+                || ($row['visible_faq'] ?? false) !== true
+                || ($row['visible_references'] ?? false) !== true) {
+                throw new RuntimeException('preview_evidence_row_failed');
+            }
+            $articleId = (int) ($row['article_id'] ?? 0);
+            if ($articleId <= 0 || isset($targets[$articleId])) {
+                throw new RuntimeException('preview_evidence_target_invalid');
+            }
+            $targets[$articleId] = $row;
+        }
+        ksort($targets);
+
+        return $targets;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @param  array<string,mixed>|null  $lock
+     * @return list<array<string,mixed>>
+     */
+    private function previewLockErrors(array $row, ?array $lock): array
+    {
+        if ($lock === null) {
+            return [$this->issue('preview_evidence', 'preview_evidence_target_missing', 'Article is missing from the authenticated-preview evidence.')];
+        }
+
+        $errors = [];
+        foreach ([
+            'article_id' => 'article_id',
+            'locale' => 'locale',
+            'slug' => 'slug',
+            'working_revision_id' => 'working_revision_id',
+            'working_revision_title_hash' => 'title_sha256',
+            'working_revision_body_hash' => 'body_sha256',
+        ] as $rowField => $lockField) {
+            if ((string) ($row[$rowField] ?? '') !== (string) ($lock[$lockField] ?? '')) {
+                $errors[] = $this->issue(
+                    "preview_evidence.{$rowField}",
+                    "preview_evidence_{$rowField}_mismatch",
+                    "Live {$rowField} does not match the authenticated-preview evidence.",
+                );
+            }
+        }
+
+        return $errors;
+    }
+
+    private function deterministicHash(mixed $value): string
+    {
+        return hash(
+            'sha256',
+            (string) json_encode(
+                $this->sortRecursively($value),
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE
+            )
+        );
+    }
+
+    private function sortRecursively(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        if (array_is_list($value)) {
+            return array_map(fn (mixed $item): mixed => $this->sortRecursively($item), $value);
+        }
+
+        ksort($value);
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->sortRecursively($item);
+        }
+
+        return $value;
+    }
+
+    private function safeBatchFailure(Throwable $exception): string
+    {
+        return match ($exception->getMessage()) {
+            'locked_preflight_failed',
+            'locked_preflight_state_drift',
+            'locked_revision_set_drift',
+            'post_promotion_preflight_failed',
+            'post_promotion_target_set_drift',
+            'post_promotion_revision_readback_failed',
+            'post_promotion_hold_drift',
+            'post_promotion_seo_readback_failed',
+            'previous_revision_not_stale' => $exception->getMessage(),
+            default => 'atomic_batch_runtime_failed',
+        };
+    }
+
     private function positiveIntOption(string $option): int
     {
         $value = $this->option($option);
@@ -190,7 +1022,9 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         int $articleId,
         int $workingRevisionId,
         int $currentPublishedRevisionId,
-        bool $afterPromotion = false
+        bool $afterPromotion = false,
+        ?array $identityLock = null,
+        bool $claimWarningAcknowledged = false,
     ): array {
         $article = Article::query()
             ->withoutGlobalScopes()
@@ -216,9 +1050,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             ->latest('id')
             ->first();
 
-        $expectedTranslationGroupId = trim((string) $this->option('translation-group-id'));
-        $expectedSlug = trim((string) $this->option('expected-slug'));
-        $expectedCanonical = trim((string) $this->option('expected-canonical'));
+        $expectedTranslationGroupId = trim((string) ($identityLock['translation_group_id'] ?? $this->option('translation-group-id')));
+        $expectedLocale = trim((string) ($identityLock['locale'] ?? ''));
+        $expectedSlug = trim((string) ($identityLock['slug'] ?? $this->option('expected-slug')));
+        $expectedCanonical = trim((string) ($identityLock['canonical'] ?? $this->option('expected-canonical')));
         $bodyHash = $workingRevision instanceof ArticleTranslationRevision
             ? $this->bodyHash((string) $workingRevision->content_md)
             : '';
@@ -265,6 +1100,19 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             $errors[] = $this->issue('translation-group-id', 'translation_group_lock_required', 'Expected translation group lock is required.');
         } elseif ((string) $article->translation_group_id !== $expectedTranslationGroupId) {
             $errors[] = $this->issue('translation_group_id', 'translation_group_mismatch', 'Article translation group does not match expected lock.');
+        }
+
+        if ($identityLock !== null && (
+            $expectedLocale === ''
+            || (string) $article->locale !== $expectedLocale
+            || ! $workingRevision instanceof ArticleTranslationRevision
+            || (string) $workingRevision->locale !== $expectedLocale
+            || ! $import instanceof ArticleEditorialPackageImport
+            || (string) $import->locale !== $expectedLocale
+            || ! $seoMeta instanceof ArticleSeoMeta
+            || (string) $seoMeta->locale !== $expectedLocale
+        )) {
+            $errors[] = $this->issue('locale', 'locale_lock_mismatch', 'Article locale does not match the exact batch locale lock.');
         }
 
         if ($expectedSlug === '') {
@@ -391,7 +1239,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 $errors[] = $this->issue('claim', 'claim_warning_not_boundary_context', 'Claim warnings include non-boundary context matches.');
             }
 
-            if ((int) $this->positiveIntOption('ack-claim-warning') !== $articleId) {
+            if (! $claimWarningAcknowledged && (int) $this->positiveIntOption('ack-claim-warning') !== $articleId) {
                 $errors[] = $this->issue('claim', 'claim_warning_ack_required', 'Boundary-context claim warnings must be explicitly acknowledged for this article.');
             }
         }
@@ -428,6 +1276,27 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 $errors[] = $issue;
             }
         }
+        $readerFacingText = implode("\n", [
+            (string) ($workingRevision?->title ?? ''),
+            (string) ($workingRevision?->excerpt ?? ''),
+            (string) ($workingRevision?->content_md ?? ''),
+            (string) ($workingRevision?->seo_title ?? ''),
+            (string) ($workingRevision?->seo_description ?? ''),
+        ]);
+        if (preg_match(self::PRIVATE_ROUTE_PATTERN, $readerFacingText) === 1) {
+            $errors[] = $this->issue(
+                'working_revision.private_url_guard',
+                'private_route_found_in_working_revision',
+                'Private routes are forbidden in the promoted working revision.',
+            );
+        }
+        if (preg_match(self::SENSITIVE_QUERY_PATTERN, $readerFacingText) === 1) {
+            $errors[] = $this->issue(
+                'working_revision.private_url_guard',
+                'sensitive_query_key_found_in_working_revision',
+                'Sensitive query keys are forbidden in the promoted working revision.',
+            );
+        }
 
         return [
             'article_id' => (int) $article->id,
@@ -445,11 +1314,20 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             'working_revision_id' => $workingRevisionId,
             'working_revision_status' => $workingRevision?->revision_status,
             'working_revision_body_hash' => $bodyHash,
+            'working_revision_title_hash' => $this->textHash((string) ($workingRevision?->title ?? '')),
+            'working_revision_excerpt_hash' => $this->textHash((string) ($workingRevision?->excerpt ?? '')),
+            'working_revision_seo_title_hash' => $this->textHash((string) ($workingRevision?->seo_title ?? '')),
+            'working_revision_seo_description_hash' => $this->textHash((string) ($workingRevision?->seo_description ?? '')),
+            'seo_title_hash' => $this->textHash((string) ($seoMeta?->seo_title ?? '')),
+            'seo_description_hash' => $this->textHash((string) ($seoMeta?->seo_description ?? '')),
+            'seo_schema_hash' => $this->jsonHash($seoMeta?->schema_json),
+            'seo_robots' => (string) ($seoMeta?->robots ?? ''),
             'import_id' => $import?->id,
             'import_status' => $import?->status,
             'import_content_track' => $import?->content_track,
             'claim_status' => $claimStatus,
-            'claim_warning_acknowledged' => (int) $this->positiveIntOption('ack-claim-warning') === $articleId,
+            'claim_warning_acknowledged' => $claimWarningAcknowledged
+                || (int) $this->positiveIntOption('ack-claim-warning') === $articleId,
             'media_status' => $mediaStatus,
             'references_status' => $referencesStatus,
             'references_count' => (int) ($import?->references_count ?? 0),
@@ -517,6 +1395,22 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
     private function bodyHash(string $body): string
     {
         return hash('sha256', preg_replace("/\r\n?/", "\n", trim($body)));
+    }
+
+    private function textHash(string $value): string
+    {
+        return hash('sha256', preg_replace("/\r\n?/", "\n", trim($value)));
+    }
+
+    private function jsonHash(mixed $value): string
+    {
+        return hash(
+            'sha256',
+            (string) json_encode(
+                $value,
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE
+            )
+        );
     }
 
     private function canonicalPath(string $canonical): string
