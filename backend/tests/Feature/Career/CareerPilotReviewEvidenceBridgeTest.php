@@ -73,11 +73,16 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
             ->assertOk()
             ->assertJsonPath('trust_manifest.review_state', 'unknown')
-            ->assertJsonPath('trust_manifest.last_reviewed_at', null);
+            ->assertJsonPath('trust_manifest.last_reviewed_at', null)
+            ->assertJsonPath('search_entry_tier', 'ineligible')
+            ->assertJsonPath('search_entry_authority.review_state', 'unknown')
+            ->assertJsonPath('search_entry_authority.search_entry_eligible', false);
         $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
-            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null);
+            ->assertJsonPath('items.0.trust_summary.last_reviewed_at', null)
+            ->assertJsonPath('items.0.search_entry_tier', 'ineligible')
+            ->assertJsonPath('items.0.search_entry_authority.review_state', 'unknown');
     }
 
     public function test_exact_approved_all_evidence_projects_only_public_review_fields(): void
@@ -96,11 +101,16 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         $detail = $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
             ->assertOk()
             ->assertJsonPath('trust_manifest.review_state', 'approved')
-            ->assertJsonPath('trust_manifest.reviewer', null);
+            ->assertJsonPath('trust_manifest.reviewer', null)
+            ->assertJsonPath('search_entry_tier', 'ineligible')
+            ->assertJsonPath('search_entry_authority.content_quality_tier', 'reviewed_bilingual_current')
+            ->assertJsonPath('search_entry_authority.publish_track', 'runtime_publish_projection');
         $index = $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'approved')
-            ->assertJsonPath('items.0.trust_summary.reviewer', null);
+            ->assertJsonPath('items.0.trust_summary.reviewer', null)
+            ->assertJsonPath('items.0.search_entry_tier', 'ineligible')
+            ->assertJsonPath('items.0.search_entry_authority.content_quality_tier', 'reviewed_bilingual_current');
         $this->getJson('/api/v0.5/career/jobs?locale=en-US')
             ->assertOk()
             ->assertJsonPath('items.0.trust_summary.review_state', 'approved');
@@ -154,7 +164,12 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('trust_manifest.review_state', 'unknown')
-            ->assertJsonPath('trust_manifest.last_reviewed_at', null);
+            ->assertJsonPath('trust_manifest.last_reviewed_at', null)
+            ->assertJsonPath('search_entry_tier', 'ineligible')
+            ->assertJsonPath(
+                'search_entry_authority.reason_codes.0',
+                'reviewer_evidence_not_current',
+            );
     }
 
     public function test_newer_overlapping_rejection_cannot_be_overridden_by_older_approval(): void
@@ -221,7 +236,12 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         ]);
         $this->getJson('/api/v0.5/career/jobs?locale=en')
             ->assertOk()
-            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown');
+            ->assertJsonPath('items.0.trust_summary.review_state', 'unknown')
+            ->assertJsonPath('items.0.search_entry_tier', 'ineligible')
+            ->assertJsonPath(
+                'items.0.search_entry_authority.reason_codes.0',
+                'reviewer_evidence_not_current',
+            );
     }
 
     public function test_legacy_or_cold_detail_cache_fails_without_promotion_or_dispatch(): void
@@ -266,6 +286,32 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('trust_manifest.review_state', 'unknown');
     }
 
+    public function test_current_seo_sha_drift_makes_search_entry_ineligible(): void
+    {
+        $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+
+        $this->publishBilingualDetails(robotsPolicy: 'noindex,follow');
+
+        $this->getJson('/api/v0.5/career/jobs/'.self::SLUG.'?locale=en')
+            ->assertOk()
+            ->assertJsonPath('trust_manifest.review_state', 'unknown')
+            ->assertJsonPath('search_entry_tier', 'ineligible')
+            ->assertJsonPath('search_entry_authority.robots_indexable', false)
+            ->assertJsonPath(
+                'search_entry_authority.reason_codes',
+                ['robots_not_indexable', 'reviewer_evidence_not_current', 'publish_track_unsupported'],
+            );
+    }
+
     public function test_unlisted_public_detail_field_drift_fails_closed(): void
     {
         $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
@@ -290,10 +336,11 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         string $trustSource = 'current public source evidence',
         int $score = 42,
         string $alias = 'current public alias',
+        string $robotsPolicy = 'index,follow',
     ): void {
         $cache = app(PublicCareerAuthorityResponseCache::class);
-        $cache->publishJobDetailReadModel(self::SLUG, 'en', $this->detailPayload('en', $englishContent, $trustSource, $score, $alias));
-        $cache->publishJobDetailReadModel(self::SLUG, 'zh-CN', $this->detailPayload('zh-CN', '当前可见中文内容', $trustSource, $score, $alias));
+        $cache->publishJobDetailReadModel(self::SLUG, 'en', $this->detailPayload('en', $englishContent, $trustSource, $score, $alias, $robotsPolicy));
+        $cache->publishJobDetailReadModel(self::SLUG, 'zh-CN', $this->detailPayload('zh-CN', '当前可见中文内容', $trustSource, $score, $alias, $robotsPolicy));
     }
 
     /** @return array<string,mixed> */
@@ -303,6 +350,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         string $trustSource = 'current public source evidence',
         int $score = 42,
         string $alias = 'current public alias',
+        string $robotsPolicy = 'index,follow',
     ): array {
         $prefix = $locale === 'en' ? '/en' : '/zh';
 
@@ -331,8 +379,8 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             'seo_contract' => [
                 'canonical_path' => $prefix.'/career/jobs/'.self::SLUG,
                 'canonical_target' => $prefix.'/career/jobs/'.self::SLUG,
-                'robots_policy' => 'index,follow',
-                'index_eligible' => true,
+                'robots_policy' => $robotsPolicy,
+                'index_eligible' => $robotsPolicy === 'index,follow',
             ],
             'structured_data' => ['occupation' => ['@type' => 'Occupation']],
         ];
@@ -351,6 +399,10 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
                     'review_state' => 'approved',
                     'last_reviewed_at' => '2026-07-01T00:00:00Z',
                     'reviewer' => null,
+                ],
+                'seo_contract' => [
+                    'robots_policy' => 'index,follow',
+                    'index_eligible' => true,
                 ],
             ]],
         ];

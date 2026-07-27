@@ -60,6 +60,61 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CAREER-SEARCH-ENTRY-TIER-CONTRACT-01
+    repo: fap-api
+    base: main
+    branch: codex/career-search-entry-tier-contract-01
+    title: "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01 add career search-entry authority"
+    status: local_checks_passed
+    depends_on:
+      - CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01
+      - CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01
+      - CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01
+    train_scope: career_search_entry_tier_contract
+    scope:
+      - Add a backend-authoritative read-only search_entry_tier projection.
+      - Keep public visibility, robots indexability, search-entry eligibility, review state, publish track, and content quality tier separate.
+      - Reuse exact bilingual reviewer-evidence SHA invalidation, publish-track resolution, public API projection, and held-slug authority.
+      - Fail closed for review_needed, hold, held slugs, stale or missing reviewer evidence, bilingual/content/SEO drift, and unknown publish tracks.
+    allowed_paths:
+      - backend/app/Services/Career/**
+      - backend/app/Http/Resources/**
+      - backend/app/Http/Controllers/API/V0_5/Cms/Career*
+      - backend/tests/Feature/Career/**
+      - backend/docs/career/**
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    conditional_allowed_paths:
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+    do_not:
+      - Modify Career runtime controllers, routes, or migrations.
+      - Promote, publish, mutate indexability, or change sitemap or llms state.
+      - Write CMS or database state, execute Search Channel actions, release held slugs, add frontend fallback, or deploy.
+    validation:
+      - cd backend && php artisan test tests/Feature/Career/CareerSearchEntryTierContractTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php tests/Unit/Services/Career/CareerPublishTrackResolverTest.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Career app/Http/Resources app/Http/Controllers/API/V0_5/Cms tests/Feature/Career/CareerSearchEntryTierContractTest.php
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && composer validate --strict
+      - cd backend && composer audit
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-CROSS-PUBLISHER-49
     repo: fap-api
     base: main
