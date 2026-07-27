@@ -345,12 +345,15 @@ final class Mbti64CrossTypeComparisonPublicReadModel
 
             $href = $this->stringValue($link['href'] ?? null);
             $label = $this->stringValue($link['label'] ?? $link['anchor_text'] ?? null);
-            if ($href === null || $label === null || ! $this->isSafePublicHref($href)) {
+            $anchor = $this->stringValue($link['anchor_text'] ?? $link['label'] ?? null);
+            if ($href === null || $label === null || $anchor === null || ! $this->isSafePublicHref($href)) {
                 continue;
             }
 
             $projection = [
                 'href' => $href,
+                'anchor_text' => $anchor,
+                'link_intent' => $this->stringValue($link['link_intent'] ?? null) ?? 'related_public_page',
                 'label' => $label,
             ];
             $reason = $this->stringValue($link['reason'] ?? null);

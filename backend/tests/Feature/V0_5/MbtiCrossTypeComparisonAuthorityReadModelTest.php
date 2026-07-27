@@ -105,6 +105,8 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
             ->assertJsonPath('comparison_public_projection_v1.sections.1.rows.0.dimension', '判断入口')
             ->assertJsonPath('comparison_public_projection_v1.faq.0.question', 'ISTJ 和 ISFJ 最大区别是什么？')
             ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/zh/personality/istj-a')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.anchor_text', '查看 ISTJ-A')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.link_intent', 'related_public_page')
             ->assertJsonPath('comparison_public_projection_v1.internal_links.0.label', '查看 ISTJ-A')
             ->assertJsonPath('comparison_public_projection_v1.internal_links.0.reason', '左侧类型详情')
             ->assertJsonMissingPath('comparison_public_projection_v1.alternates.en')
@@ -152,6 +154,23 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         self::assertStringNotContainsString('/zh/orders', (string) $response->getContent());
         self::assertStringNotContainsString('order_no=', (string) $response->getContent());
 
+    }
+
+    public function test_cross_type_comparison_preserves_v1_internal_link_fields_while_adding_normalized_fields(): void
+    {
+        $this->createAuthority([
+            'slug' => 'istj-vs-isfj',
+            'left_type_code' => 'ISTJ',
+            'right_type_code' => 'ISFJ',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality/comparisons/istj-vs-isfj?locale=zh-CN');
+
+        $response->assertOk()
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/zh/personality/istj-a')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.anchor_text', 'ISTJ-A')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.link_intent', 'left_variant')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.label', 'ISTJ-A');
     }
 
     public function test_cross_type_comparison_keeps_a_row_only_quick_judgment_table(): void
