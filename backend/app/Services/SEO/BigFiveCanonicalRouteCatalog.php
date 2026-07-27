@@ -152,6 +152,26 @@ final class BigFiveCanonicalRouteCatalog
         }, $entries));
     }
 
+    /** @return list<string> */
+    public static function canonicalPaths(): array
+    {
+        $paths = [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            foreach (self::canonicalEntries($locale) as $entry) {
+                $paths[] = $entry['path'];
+            }
+        }
+
+        sort($paths, SORT_STRING);
+
+        return $paths;
+    }
+
+    public static function isCanonicalPath(string $path): bool
+    {
+        return in_array($path, self::canonicalPaths(), true);
+    }
+
     private static function polaritySuffix(string $locale, string $entityKey): ?string
     {
         if (in_array($entityKey, self::V2_RANGES, true)) {

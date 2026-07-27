@@ -177,6 +177,51 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01
+    repo: fap-api
+    base: main
+    branch: codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01
+    title: "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace"
+    status: in_progress
+    depends_on: []
+    train_scope: parity06_big_five_sitemap_reserved_namespace
+    scope:
+      - Enforce the backend Big Five canonical route catalog as the sole sitemap authority for the reserved /en|zh/personality/big-five namespace.
+      - Reject public ContentPage and other source rows that resolve to unknown, redirect-only, or non-canonical Big Five paths.
+      - Preserve the exact 104 canonical Big Five URLs and all non-Big-Five sitemap cohorts.
+    allowed_paths:
+      - backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify CMS ContentPage authority, content, publication, indexability, schema, or frontend routes.
+      - Change Career, MBTI, Enneagram, llms, Search Channel, URL submission, deployment, or cache behavior.
+      - Execute a production deploy, sitemap warm, CMS/DB/cache/Search write, publish, or indexing action.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php --filter=test_sitemap_keeps_only_104_canonical_big_five_paths --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapSourceApiTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/SEO/BigFiveCanonicalRouteCatalog.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: MBTI-CROSS-AUTHORITY-50
     repo: fap-api
     base: main

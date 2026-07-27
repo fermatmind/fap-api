@@ -100793,5 +100793,56 @@
       }
     ],
     "updated_at": "2026-07-27T02:40:47Z"
+  },
+  "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01": {
+    "id": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
+    "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
+    "status": "local_validation_passed",
+    "depends_on": [],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "focused_big_five_sitemap_contract": "passed: 1 test, 48 assertions",
+      "sitemap_generator_and_source_contracts": "passed: 25 tests, 886 assertions",
+      "pint_scoped": "passed",
+      "composer_validate_strict": "passed",
+      "composer_audit_locked": "passed: 0 advisories",
+      "ci_verify_mbti": "passed: full repository gate",
+      "yaml_json_and_diff_scope": "passed"
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-27T06:14:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 1d08b9de680a2170ce4e37ba95d2f39dbe4b91a0 after classifier prerequisite PR #3336 merged. Scope is limited to the Big Five reserved sitemap namespace gate, focused test, and exact train metadata. No production, CMS, database, cache, Search, sitemap warm, publication, indexing, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-27T06:27:00Z",
+        "status": "local_validation_passed",
+        "note": "Exact five-file scope passed focused Big Five sitemap tests, sitemap generator/source contracts, scoped Pint, Composer validate/audit, the complete ci_verify_mbti gate, YAML/JSON parsing, and diff validation. Generated Big Five compiled timestamps from the full verification were restored to their exact pre-test bytes and excluded from scope."
+      }
+    ],
+    "updated_at": "2026-07-27T06:27:00Z"
   }
 }
