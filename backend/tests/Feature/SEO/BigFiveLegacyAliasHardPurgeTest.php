@@ -394,7 +394,17 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         }
         app(PublicCareerAuthorityResponseCache::class)->warm();
 
-        $paths = collect(app(SitemapGenerator::class)->generateUrls())
+        $authorityPaths = collect(app(SitemapGenerator::class)->generateUrls())->pluck('loc');
+        self::assertContains('https://fermatmind.com/zh/personality/big-five/methodology', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five/source-review-policy', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five?preview=1', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five#preview', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/x/../big-five/methodology', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/%62ig-five/methodology', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality\big-five/methodology', $authorityPaths);
+        self::assertContains("https://fermatmind.com/zh/personality/bi\ng-five/methodology", $authorityPaths);
+
+        $paths = collect(app(SitemapGenerator::class)->generateSitemapUrls())
             ->pluck('loc')
             ->filter(static fn (mixed $path): bool => is_string($path) && str_contains($path, '/personality/big-five'))
             ->values();

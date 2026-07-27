@@ -62,7 +62,7 @@ class SitemapGenerator
 
     public function generate(): array
     {
-        $urls = $this->generateUrls();
+        $urls = $this->generateSitemapUrls();
 
         $slugList = [];
         $maxUpdatedAt = null;
@@ -110,6 +110,20 @@ class SitemapGenerator
         );
 
         $urls = collect($urls)
+            ->unique('loc')
+            ->values()
+            ->all();
+
+        usort($urls, static function (array $a, array $b): int {
+            return strcmp((string) ($a['loc'] ?? ''), (string) ($b['loc'] ?? ''));
+        });
+
+        return $urls;
+    }
+
+    public function generateSitemapUrls(): array
+    {
+        return collect($this->generateUrls())
             ->filter(static function (array $url): bool {
                 $loc = trim((string) ($url['loc'] ?? ''));
                 if (preg_match('/[\x00-\x1F\x7F]/', $loc) === 1) {
@@ -144,12 +158,6 @@ class SitemapGenerator
             ->unique('loc')
             ->values()
             ->all();
-
-        usort($urls, static function (array $a, array $b): int {
-            return strcmp((string) ($a['loc'] ?? ''), (string) ($b['loc'] ?? ''));
-        });
-
-        return $urls;
     }
 
     public function generateApprovedCareerJobDetailUrls(): array

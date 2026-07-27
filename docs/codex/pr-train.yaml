@@ -192,6 +192,7 @@ prs:
     allowed_paths:
       - backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php
       - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php
       - backend/tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -202,7 +203,7 @@ prs:
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php --filter=test_sitemap_keeps_only_104_canonical_big_five_paths --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapSourceApiTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/SEO/BigFiveCanonicalRouteCatalog.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php
+      - cd backend && vendor/bin/pint --test app/Services/SEO/BigFiveCanonicalRouteCatalog.php app/Services/SEO/SitemapGenerator.php app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction
       - bash backend/scripts/ci_verify_mbti.sh

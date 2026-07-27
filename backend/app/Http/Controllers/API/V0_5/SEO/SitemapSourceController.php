@@ -68,7 +68,7 @@ class SitemapSourceController extends Controller
      */
     public function buildPayload(SitemapGenerator $generator, CareerRuntimePublishProjectionLookup $projection): array
     {
-        $items = collect($generator->generateUrls())
+        $items = collect($generator->generateSitemapUrls())
             ->map(static function (array $item): array {
                 return [
                     'loc' => (string) ($item['loc'] ?? ''),
