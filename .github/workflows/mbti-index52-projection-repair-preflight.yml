@@ -1,0 +1,159 @@
+name: MBTI INDEX52 Projection Repair Preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing the immutable package and streamed read-only control
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production fap-api SHA
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mbti-index52-projection-repair-preflight
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Read-only exact-23 production preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    env:
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      PACKAGE_SHA256: ea4801ff5af8d0d7279137d2f4ebbaa263bdc4a959f5c880ba023dd2d0fed641
+      AUTHORIZATION_SHA256: 59103fbf6eae4effc81fec844bbbf8d3ae8bb7100513407821074787a641253c
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate immutable latest-main control plane
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(jq -r .package_sha256 backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json)" = "$PACKAGE_SHA256"
+          test "$(jq -r .authorization_sha256 backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-operator-authorization-2026-07-27.json)" = "$AUTHORIZATION_SHA256"
+
+      - name: Configure protected production SSH
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Pin protected production host key
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          test -n "$SSH_KNOWN_HOSTS"
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Build immutable streamed read-only runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          # shellcheck disable=SC2016
+          php -r '
+            $replace = [
+              "__PACKAGE_CLASS_B64__" => base64_encode(preg_replace("/^<\\?php\\s*/", "", file_get_contents("backend/app/Services/Cms/MbtiIndex52ProjectionRepairPackage.php"))),
+              "__SERVICE_CLASS_B64__" => base64_encode(preg_replace("/^<\\?php\\s*/", "", file_get_contents("backend/app/Services/Cms/MbtiIndex52ProjectionRepairService.php"))),
+              "__PACKAGE_JSON_B64__" => base64_encode(file_get_contents("backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json")),
+              "__AUTHORIZATION_JSON_B64__" => base64_encode(file_get_contents("backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-operator-authorization-2026-07-27.json")),
+            ];
+            $runner = strtr(file_get_contents("backend/scripts/seo/mbti_index52_projection_repair_streamed_preflight.php"), $replace);
+            file_put_contents(getenv("RUNNER_TEMP")."/mbti-index52-preflight.php", $runner);
+          '
+          php -l "$RUNNER_TEMP/mbti-index52-preflight.php"
+
+      - name: Revalidate control plane immediately before production read
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+      - name: Run streamed production preflight without remote writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_active '%q' "$EXPECTED_ACTIVE_REVISION"
+          timeout --signal=TERM --kill-after=10s 300s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "DEPLOY_PATH=$q_path EXPECTED_ACTIVE_REVISION=$q_active timeout --signal=TERM --kill-after=10s 270s php" \
+              < "$RUNNER_TEMP/mbti-index52-preflight.php" \
+              > artifacts/remote-preflight.json
+          jq -e \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg package "$PACKAGE_SHA256" \
+            --arg authorization "$AUTHORIZATION_SHA256" \
+            '.contract_version == "mbti.index52.comparison_projection_repair.production_preflight.v1"
+             and .status == "PASS_PREFLIGHT"
+             and .active_revision == $active
+             and .record_count == 23
+             and .at_comparison_count == 16
+             and .cross_type_comparison_count == 7
+             and (.exact_slugs | length) == 23
+             and .package_sha256 == $package
+             and .authorization_sha256 == $authorization
+             and (.current_state_sha256 | test("^[0-9a-f]{64}$"))
+             and (.desired_state_sha256 | test("^[0-9a-f]{64}$"))
+             and (.rollback_manifest_sha256 | test("^[0-9a-f]{64}$"))
+             and (.readback_contract_sha256 | test("^[0-9a-f]{64}$"))
+             and (.production_authorization_sha256 | test("^[0-9a-f]{64}$"))
+             and .writes_committed == false
+             and .body_or_faq_mutated == false
+             and .publication_or_indexability_mutated == false
+             and .sitemap_or_llms_mutated == false
+             and .search_submission_executed == false' \
+            artifacts/remote-preflight.json >/dev/null
+          jq \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            '. + {
+              control_plane_sha: $control,
+              mode: "preflight",
+              production_write_execution: false,
+              remote_file_write_count: 0,
+              deploy_execution: false
+            }' artifacts/remote-preflight.json \
+            > artifacts/mbti-index52-projection-repair-preflight.json
+          rm artifacts/remote-preflight.json
+
+      - name: Upload sanitized immutable preflight receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: mbti-index52-projection-repair-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/mbti-index52-projection-repair-preflight.json
+          if-no-files-found: error
+          retention-days: 30

@@ -1087,6 +1087,7 @@ final class PersonalityPublicApiTest extends TestCase
             'body_md' => 'INTJ-A and INTJ-T share the Architect core.',
             'payload_json' => [
                 'source' => 'mbti64_comparison_draft_v2_1',
+                'claim_boundary' => 'Use this comparison for reflection, not diagnosis or selection.',
                 'seo' => [
                     'seo_title' => 'INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind',
                     'seo_description' => 'Compare INTJ-A and INTJ-T by confidence, stress recovery and work style.',
@@ -1151,6 +1152,9 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('comparison_public_projection_v1.comparison_blocks.1.key', 'core_traits_comparison')
             ->assertJsonPath('comparison_public_projection_v1.faq.0.question', 'Is INTJ-A better than INTJ-T?')
             ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/en/personality/intj-a')
+            ->assertJsonPath('comparison_public_projection_v1.claim_boundary', 'Use this comparison for reflection, not diagnosis or selection.')
+            ->assertJsonPath('claim_boundary', 'Use this comparison for reflection, not diagnosis or selection.')
+            ->assertJsonPath('sections.0.section_key', 'mbti64_comparison_a_vs_t')
             ->assertJsonPath('landing_surface_v1.summary_blocks.0.title', 'INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind')
             ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', '/en/personality/intj-a')
             ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'Is INTJ-A better than INTJ-T?')

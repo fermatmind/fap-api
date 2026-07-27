@@ -136,6 +136,8 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'sections' => is_array($payload['sections'] ?? null) ? $payload['sections'] : [],
             'faq' => is_array($payload['faq'] ?? null) ? $payload['faq'] : [],
             'internal_links' => is_array($payload['internal_links'] ?? null) ? $payload['internal_links'] : [],
+            'answer_surface_v1' => is_array($payload['answer_surface_v1'] ?? null) ? $payload['answer_surface_v1'] : [],
+            'alternates' => is_array($payload['alternates'] ?? null) ? $payload['alternates'] : [],
             'claim_boundary' => (string) ($authority->claim_boundary ?: ($payload['claim_boundary'] ?? '')),
             'source_notes' => is_array($payload['source_notes'] ?? null) ? $payload['source_notes'] : [],
             'source_package_id' => (string) ($authority->source_package_id ?? ''),
@@ -226,12 +228,11 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'seo_description' => (string) $asset['seo_description'],
             'summary' => (string) $asset['summary'],
             'canonical_url' => $canonicalUrl,
-            'alternates' => [
-                self::LOCALE => $canonicalUrl,
-            ],
+            'alternates' => $this->alternates($asset, $slug, $canonicalUrl),
             'sections' => $sections,
             'faq' => $faq,
             'internal_links' => $internalLinks,
+            'answer_surface_v1' => is_array($asset['answer_surface_v1'] ?? null) ? $asset['answer_surface_v1'] : [],
             'claim_boundary' => (string) $asset['claim_boundary'],
             'source_notes' => $this->sourceNotes($asset),
             'source_refs' => $this->sourceRefs($asset),
@@ -343,19 +344,42 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             }
 
             $href = $this->stringValue($link['href'] ?? null);
-            $anchor = $this->stringValue($link['anchor_text'] ?? null);
-            if ($href === null || $anchor === null || ! $this->isSafePublicHref($href)) {
+            $label = $this->stringValue($link['label'] ?? $link['anchor_text'] ?? null);
+            if ($href === null || $label === null || ! $this->isSafePublicHref($href)) {
                 continue;
             }
 
-            $links[] = [
+            $projection = [
                 'href' => $href,
-                'anchor_text' => $anchor,
-                'link_intent' => $this->stringValue($link['link_intent'] ?? null) ?? 'related_public_page',
+                'label' => $label,
             ];
+            $reason = $this->stringValue($link['reason'] ?? null);
+            if ($reason !== null) {
+                $projection['reason'] = $reason;
+            }
+            $links[] = $projection;
         }
 
         return $links;
+    }
+
+    /** @return array<string,string> */
+    private function alternates(array $asset, string $slug, ?string $canonicalUrl): array
+    {
+        if ($canonicalUrl === null) {
+            return [];
+        }
+        $expected = [
+            'en' => $this->canonicalUrl($slug, 'en'),
+            self::LOCALE => $canonicalUrl,
+        ];
+        $authority = is_array($asset['alternates'] ?? null) ? $asset['alternates'] : [];
+
+        return $expected['en'] !== null
+            && ($authority['en'] ?? null) === $expected['en']
+            && ($authority[self::LOCALE] ?? null) === $expected[self::LOCALE]
+                ? $expected
+                : [self::LOCALE => $canonicalUrl];
     }
 
     /**

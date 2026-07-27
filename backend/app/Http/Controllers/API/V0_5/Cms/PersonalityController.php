@@ -408,6 +408,9 @@ class PersonalityController extends Controller
                 'ok' => true,
                 'comparison' => $crossTypeComparison,
                 'comparison_public_projection_v1' => $crossTypeComparison,
+                'answer_surface_v1' => is_array($crossTypeComparison['answer_surface_v1'] ?? null)
+                    ? $crossTypeComparison['answer_surface_v1']
+                    : [],
                 'seo_meta' => $this->comparisonSeoMetaPayload($meta),
                 'jsonld' => $jsonLd,
                 'seo_surface_v1' => $seoSurface,
@@ -496,6 +499,8 @@ class PersonalityController extends Controller
             'ok' => true,
             'comparison' => $comparisonProjection,
             'comparison_public_projection_v1' => $comparisonProjection,
+            'sections' => $comparisonOverlay !== null ? [$comparisonOverlay['section']] : [],
+            'claim_boundary' => $comparisonProjection['claim_boundary'] ?? null,
             'seo_meta' => $this->comparisonSeoMetaPayload($meta),
             'jsonld' => $jsonLd,
             'seo_surface_v1' => $seoSurface,
@@ -914,6 +919,7 @@ class PersonalityController extends Controller
             'content' => $content,
             'faq' => is_array($content['faq'] ?? null) ? array_values((array) $content['faq']) : (is_array($payload['faq'] ?? null) ? array_values((array) $payload['faq']) : []),
             'internal_links' => is_array($content['internal_links'] ?? null) ? array_values((array) $content['internal_links']) : (is_array($payload['internal_links'] ?? null) ? array_values((array) $payload['internal_links']) : []),
+            'claim_boundary' => $this->normalizedString($payload['claim_boundary'] ?? null),
             'source' => $this->normalizedString($payload['source'] ?? null) ?? 'mbti64_comparison_a_vs_t',
             'snapshot_key' => $this->normalizedString($payload['snapshot_key'] ?? null),
             'indexability_held' => (bool) ($payload['indexability_held'] ?? false),
@@ -973,6 +979,7 @@ class PersonalityController extends Controller
         )));
         $projection['faq'] = $faq;
         $projection['internal_links'] = $internalLinks;
+        $projection['claim_boundary'] = $comparisonOverlay['claim_boundary'] ?? null;
         $projection['overlay_source'] = [
             'section_key' => 'mbti64_comparison_a_vs_t',
             'source' => $comparisonOverlay['source'] ?? 'mbti64_comparison_a_vs_t',
