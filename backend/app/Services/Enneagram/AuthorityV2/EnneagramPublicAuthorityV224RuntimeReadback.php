@@ -1362,7 +1362,13 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
 
     private function normalizedVisibleText(string $value): string
     {
-        return preg_replace('/\s+/u', ' ', trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5))) ?? '';
+        $normalized = preg_replace(
+            '/\s+/u',
+            ' ',
+            trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5)),
+        ) ?? '';
+
+        return preg_replace('/\s+([?？!！:：;；])/u', '$1', $normalized) ?? $normalized;
     }
 
     /** @param list<string> $issues */
