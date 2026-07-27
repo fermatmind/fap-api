@@ -124,6 +124,9 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             'sort_by(.article_id, .field, .code)',
             'test("^[A-Za-z0-9_.-]{1,128}$")',
             'test("^[a-z0-9_]{1,128}$")',
+            'install_error_trap()',
+            'install_error_trap',
+            'trap - ERR',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }
@@ -132,6 +135,16 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             2,
             substr_count($runner, 'php artisan articles:promote-existing-working-revision'),
             'The runner may perform one dry-run and one atomic apply, never 13 per-article promotions.',
+        );
+        $this->assertSame(
+            4,
+            substr_count($runner, 'install_error_trap'),
+            'The runner must declare the trap installer, install it initially, and restore it after both bounded command captures.',
+        );
+        $this->assertSame(
+            3,
+            substr_count($runner, 'trap - ERR'),
+            'The runner must clear the trap in its handler and around both bounded command captures.',
         );
         $this->assertStringNotContainsString('for target in', $runner);
         $this->assertStringNotContainsString('while read', $runner);

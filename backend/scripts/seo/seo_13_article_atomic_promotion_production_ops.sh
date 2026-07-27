@@ -60,7 +60,11 @@ emit_failure() {
         } + $failure_diagnostics'
 }
 
-trap 'status=$?; trap - ERR; emit_failure "$stage"; exit "$status"' ERR
+install_error_trap() {
+    trap 'status=$?; trap - ERR; emit_failure "$stage"; exit "$status"' ERR
+}
+
+install_error_trap
 
 stage='validate_inputs'
 mode="${SEO13_PROMOTION_MODE:-}"
@@ -110,6 +114,7 @@ test -f "$current_release/backend/vendor/autoload.php"
 
 stage='run_command_preflight'
 cd "$current_release/backend"
+trap - ERR
 set +e
 preflight_json="$(
     php artisan articles:promote-existing-working-revision \
@@ -123,6 +128,7 @@ preflight_json="$(
 )"
 preflight_status=$?
 set -e
+install_error_trap
 if [ "$preflight_status" -ne 0 ]; then
     if jq -e '
         .contract_version == "seo13.article_atomic_promotion.v1"
@@ -305,6 +311,7 @@ test "$(tr -d '\r\n' < "$latest_current_release/REVISION")" = "$expected_release
 
 stage='run_command_apply'
 write_state='indeterminate'
+trap - ERR
 set +e
 apply_json="$(
     php artisan articles:promote-existing-working-revision \
@@ -328,6 +335,7 @@ apply_json="$(
 )"
 apply_status=$?
 set -e
+install_error_trap
 test "$apply_status" -eq 0
 write_state='committed'
 
