@@ -1053,6 +1053,107 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_pre_readback_accepts_exact_fail_closed_pre_promotion_metadata_without_weakening_post(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $asset->forceFill([
+                'hreflang_json' => [],
+                'faq_json' => [[
+                    'q' => 'What does this page explain?',
+                    'a' => 'It explains a **bounded** observation pattern.',
+                ]],
+            ])->save();
+        }
+        $this->fakeRuntimeHttp(
+            $report,
+            prePromotionFailClosed: true,
+            globalPrivateSurfaceReferences: true,
+        );
+
+        $result = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'canary-00',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+
+        $this->assertSame(8, $result['target_count']);
+        $this->assertSame(0, $result['metadata_authority_exact_count']);
+        $this->assertSame(0, $result['metadata_authority_derived_count']);
+        $this->assertSame(8, $result['metadata_fail_closed_count']);
+        $this->assertSame(0, $result['schema_authority_exact_count']);
+        $this->assertSame(8, $result['schema_fail_closed_count']);
+        $this->assertSame([false], array_values(array_unique(array_column($result['rows'], 'metadata_authority_exact'))));
+        $this->assertSame([false], array_values(array_unique(array_column($result['rows'], 'schema_authority_exact'))));
+        $this->assertSame([], array_merge(...array_column($result['rows'], 'issues')));
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'post',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected post-readback to continue requiring exact promoted metadata authority.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_hreflang_url_mismatch', $exception->getMessage());
+            $this->assertStringContainsString('html_title_or_h1_mismatch', $exception->getMessage());
+            $this->assertStringContainsString('html_canonical_mismatch', $exception->getMessage());
+        }
+    }
+
+    public function test_pre_readback_accepts_frontend_derived_x_default_but_post_requires_backend_exact_x_default(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $hreflang = is_array($asset->hreflang_json) ? $asset->hreflang_json : [];
+            unset($hreflang['x-default']);
+            $asset->forceFill(['hreflang_json' => $hreflang])->save();
+        }
+        $this->fakeRuntimeHttp($report);
+
+        $result = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'canary-00',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+
+        $this->assertSame(8, $result['target_count']);
+        $this->assertSame(0, $result['metadata_authority_exact_count']);
+        $this->assertSame(8, $result['metadata_authority_derived_count']);
+        $this->assertSame(0, $result['metadata_fail_closed_count']);
+        $this->assertSame([false], array_values(array_unique(array_column($result['rows'], 'metadata_authority_exact'))));
+        $this->assertSame([], array_merge(...array_column($result['rows'], 'issues')));
+
+        try {
+            app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+                'post',
+                'canary-00',
+                $report,
+                'https://api.test',
+                'https://frontend.test',
+                self::BACKEND_SHA,
+                self::FRONTEND_SHA,
+            );
+            $this->fail('Expected post-readback to require backend-authoritative x-default.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('api_hreflang_url_mismatch_x-default', $exception->getMessage());
+        }
+    }
+
     public function test_readback_accepts_faq_schema_matching_the_public_faq(): void
     {
         $this->seedPublishedEstate();
@@ -2403,6 +2504,8 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         ?string $duplicateCanonicalUrl = null,
         ?string $apiHreflangUrlOverride = null,
         string $frontendBaseUrl = 'https://frontend.test',
+        bool $prePromotionFailClosed = false,
+        bool $globalPrivateSurfaceReferences = false,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => $frontendBaseUrl.$path, $paths);
@@ -2410,7 +2513,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByNestedAtRule, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $frontendBaseUrl, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByNestedAtRule, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $frontendBaseUrl, $globalPrivateSurfaceReferences, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $prePromotionFailClosed, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2535,13 +2638,23 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                         'canonical_path' => (string) data_get($asset->canonical_json, 'path'),
                         'canonical' => $apiCanonical,
                         'hreflang' => $hreflang,
-                        'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
+                        'faq' => array_map(
+                            static fn (array $faq): array => [
+                                'question' => (string) ($faq['question'] ?? $faq['q'] ?? ''),
+                                'answer' => (string) ($faq['answer'] ?? $faq['a'] ?? ''),
+                            ],
+                            array_values(array_filter(
+                                is_array($asset->faq_json) ? $asset->faq_json : [],
+                                'is_array',
+                            )),
+                        ),
                         'media' => ['hero' => null, 'inline' => [], 'og' => null],
                         'review_state' => $stalePublicPayload ? 'stale_review_state' : $publicReview['review_state'],
                         'source_package' => $stalePublicPayload ? 'stale-public-package' : $asset->source_package,
                         'source_hash' => $stalePublicPayload ? str_repeat('f', 64) : $asset->source_hash,
                     ],
                     'personality_public_content_asset_v2' => [
+                        'schema_eligible' => ! $prePromotionFailClosed,
                         'visible_evidence' => $visibleEvidence,
                         'editorial_authority' => $publicReview,
                         'operator_supplied_value' => $privateReviewerLeak,
@@ -2591,10 +2704,21 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     : (is_array($asset->content_sections_json) ? $asset->content_sections_json : []);
                 $renderedFaq = is_array($asset->faq_json) ? $asset->faq_json : [];
                 $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
-                $title = htmlspecialchars($renderedTitle, ENT_QUOTES | ENT_HTML5);
-                $summary = htmlspecialchars($renderedSummary, ENT_QUOTES | ENT_HTML5);
+                $title = htmlspecialchars(
+                    $prePromotionFailClosed ? 'FermatMind' : $renderedTitle,
+                    ENT_QUOTES | ENT_HTML5,
+                );
+                $headingTitle = htmlspecialchars($renderedTitle, ENT_QUOTES | ENT_HTML5);
+                $summary = htmlspecialchars(
+                    $prePromotionFailClosed
+                        ? 'FermatMind assessments and personality tests.'
+                        : $renderedSummary,
+                    ENT_QUOTES | ENT_HTML5,
+                );
                 $robots = htmlspecialchars(
-                    $robotsHtmlOverride ?? (string) $asset->robots,
+                    $robotsHtmlOverride ?? ($prePromotionFailClosed
+                        ? 'noindex, follow, noarchive, nocache'
+                        : (string) $asset->robots),
                     ENT_QUOTES | ENT_HTML5,
                 );
                 $canonical = htmlspecialchars(
@@ -2615,6 +2739,20 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     $hreflang[] = '<link rel="alternate" hreflang="'
                         .htmlspecialchars((string) $language, ENT_QUOTES | ENT_HTML5)
                         .'" href="'.htmlspecialchars($href, ENT_QUOTES | ENT_HTML5).'">';
+                }
+                $normalizedAssetHreflang = array_change_key_case((array) $asset->hreflang_json, CASE_LOWER);
+                if (! $prePromotionFailClosed
+                    && ! isset($normalizedAssetHreflang['x-default'])
+                    && isset($normalizedAssetHreflang['en'], $normalizedAssetHreflang['zh-cn'])) {
+                    $hreflang[] = '<link rel="alternate" hreflang="x-default" href="'
+                        .htmlspecialchars(
+                            $frontendBaseUrl.(string) parse_url(
+                                (string) $normalizedAssetHreflang['en'],
+                                PHP_URL_PATH,
+                            ),
+                            ENT_QUOTES | ENT_HTML5,
+                        )
+                        .'">';
                 }
                 if ($tokenizedHreflangConflict) {
                     $hreflang[] = '<link rel="alternate stylesheet" hreflang="en" '
@@ -2683,7 +2821,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     }
                     $faqSchemaEntities[] = $schemaEntity;
                 }
-                $faqSchemaHtml = $emitFaqSchema
+                $faqSchemaHtml = $emitFaqSchema && ! $prePromotionFailClosed
                     ? '<script type="application/ld+json">'.json_encode([
                         '@context' => 'https://schema.org',
                         '@type' => 'FAQPage',
@@ -2752,18 +2890,26 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $duplicateRobots = $duplicateRobotsMeta
                     ? '<meta name="robots" content="noindex,nofollow">'
                     : '';
+                $canonicalHtml = $prePromotionFailClosed
+                    ? ''
+                    : '<link rel="canonical" href="'.$canonical.'">'.$duplicateCanonical.implode('', $hreflang);
+                $globalPrivateHtml = $globalPrivateSurfaceReferences
+                    ? '<nav><a href="/account">Account</a></nav>'
+                        .'<script type="application/json">{"/api/v0.5/personality-content-assets":true}</script>'
+                    : '';
 
                 return Http::response('<!doctype html><html><head><title>'.$title.'</title>'
                     .'<meta name="description" content="'.$summary.'">'
                     .'<meta name="robots" content="'.$robots.'">'
                     .$duplicateRobots
-                    .'<link rel="canonical" href="'.$canonical.'">'
-                    .$duplicateCanonical
-                    .implode('', $hreflang)
+                    .$canonicalHtml
                     .$faqSchemaHtml
                     .$stylesheetVisibilityHead
                     .$standardMediaHead
-                    .'</head><body><h1>'.$title.'</h1><main>'.$summary.$sectionHtml.$faqHtml.$evidenceHtml.$privateLink.$standardMediaBody.'</main>'.$hydrationScript.$privateValue.'</body></html>');
+                    .'</head><body>'.$globalPrivateHtml.'<h1>'.$headingTitle.'</h1><main>'
+                    .htmlspecialchars($renderedSummary, ENT_QUOTES | ENT_HTML5)
+                    .$sectionHtml.$faqHtml.$evidenceHtml.$privateLink.$standardMediaBody
+                    .'</main>'.$hydrationScript.$privateValue.'</body></html>');
             }
 
             return Http::response(['ok' => false], 404);
