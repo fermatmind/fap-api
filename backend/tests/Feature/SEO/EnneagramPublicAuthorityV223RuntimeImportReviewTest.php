@@ -13,6 +13,7 @@ use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV205RevisionWorkspaceWriter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV223ReviewEvidenceBinder;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -166,7 +167,7 @@ final class EnneagramPublicAuthorityV223RuntimeImportReviewTest extends TestCase
             ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null)
             ->assertJsonPath(
                 'personality_public_content_asset_v2.editorial_authority.review_state',
-                EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED,
+                PublicReviewContract::APPROVED,
             )
             ->assertJsonPath('personality_public_content_asset_v2.schema_eligible', true)
             ->assertJsonCount(count($expectedHub['internal_links_json']), 'personality_public_content_asset_v1.internal_links');

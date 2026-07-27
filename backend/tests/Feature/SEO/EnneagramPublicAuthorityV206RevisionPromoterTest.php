@@ -8,6 +8,7 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Models\PersonalityPublicContentAssetRevisionReview;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV206RevisionPromoter;
+use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -73,9 +74,9 @@ final class EnneagramPublicAuthorityV206RevisionPromoterTest extends TestCase
                 ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.reviewer', null)
                 ->assertJsonPath(
                     'personality_public_content_asset_v2.editorial_authority.review_state',
-                    EnneagramPublicAuthorityV206RevisionPromoter::STATE_HUMAN_REVIEW_APPROVED,
+                    PublicReviewContract::APPROVED,
                 )
-                ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.last_reviewed_at', '2026-07-15T12:00:00+00:00');
+                ->assertJsonPath('personality_public_content_asset_v2.editorial_authority.last_reviewed_at', '2026-07-15T12:00:00.000000Z');
             $this->assertStringNotContainsString('Private Reviewer', (string) $public->getContent());
 
             $databaseBeforeRollbackPreflight = $this->databaseFingerprint();
