@@ -378,8 +378,24 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 $item = is_array($snapshot)
                     ? ($snapshot[$slug.'|'.$locale] ?? null)
                     : $this->runtimePublishProjection->itemForSlug($slug, $locale);
-                $published[$slug][$locale] = $this->jobDetailProjectionItemIsPublished(
-                    is_array($item) ? $item : null,
+                $materializedItem = is_array($item) ? $item : null;
+                $readiness = $this->jobDetailCacheReadiness($slug, $locale);
+                $published[$slug][$locale] = in_array(
+                    $readiness['classification'],
+                    ['ready_active', 'ready_lkg', 'legacy_migratable'],
+                    true,
+                ) && (
+                    $this->jobDetailProjectionItemIsPublished($materializedItem)
+                    || (
+                        $readiness['classification'] === 'ready_active'
+                        && $this->jobDetailProjectionItemIsPublished(
+                            $this->effectiveJobDetailProjectionItemFromMaterialized(
+                                $slug,
+                                $locale,
+                                $materializedItem,
+                            ),
+                        )
+                    )
                 );
             }
         }
@@ -1942,6 +1958,22 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         $materializedItem = $this->runtimePublishProjection->itemForSlug($normalizedSlug, $normalizedLocale);
+
+        return $this->effectiveJobDetailProjectionItemFromMaterialized(
+            $normalizedSlug,
+            $normalizedLocale,
+            $materializedItem,
+        );
+    }
+
+    /** @param array<string, mixed>|null $materializedItem */
+    private function effectiveJobDetailProjectionItemFromMaterialized(
+        string $slug,
+        string $publicLocale,
+        ?array $materializedItem,
+    ): ?array {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         if ($this->jobDetailProjectionItemIsPublished($materializedItem)) {
             return $materializedItem;
         }

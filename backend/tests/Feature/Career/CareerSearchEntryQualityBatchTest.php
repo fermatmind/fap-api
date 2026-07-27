@@ -257,6 +257,51 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $this->assertSame(50, app(CareerSearchEntryQualityBatchPlanner::class)->build()['candidate_count']);
     }
 
+    public function test_bulk_publication_snapshot_preserves_same_version_active_exposure_authority(): void
+    {
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $materializedCandidate = [
+            $slug.'|en' => [
+                'slug' => $slug,
+                'locale' => 'en',
+                'runtime_publish_state' => 'candidate',
+                'detail_route_enabled' => false,
+                'robots_indexable' => false,
+                'release_gate_pass' => false,
+            ],
+        ];
+        $runtimeProjection = \Mockery::mock(
+            CareerRuntimePublishProjectionVisibility::class
+                .', '.CareerRuntimePublishProjectionCoverageSnapshot::class,
+        );
+        $runtimeProjection->shouldReceive('jobDetailCoverageItems')
+            ->once()
+            ->with(['en'])
+            ->andReturn($materializedCandidate);
+        $runtimeProjection->shouldNotReceive('itemForSlug');
+        $this->app->instance(CareerRuntimePublishProjectionVisibility::class, $runtimeProjection);
+        $this->app->forgetInstance(PublicCareerAuthorityResponseCache::class);
+        $responseCache = app(PublicCareerAuthorityResponseCache::class);
+        $responseCache->publishJobDetailReadModel(
+            $slug,
+            'en',
+            $this->detailPayload($slug, 'en'),
+            [
+                'slug' => $slug,
+                'locale' => 'en',
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+        );
+
+        $this->assertSame(
+            [$slug => ['en' => true]],
+            $responseCache->jobDetailPublishedSnapshot([$slug], ['en']),
+        );
+    }
+
     public function test_content_seo_or_review_target_drift_rejects_exact_package(): void
     {
         $planner = app(CareerSearchEntryQualityBatchPlanner::class);
