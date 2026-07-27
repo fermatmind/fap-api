@@ -100800,10 +100800,10 @@
     "base": "main",
     "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "915608f4374e2dd9fb68003fcf0b6c528457a866",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
     "checks": {
       "focused_big_five_sitemap_contract": "passed: 1 test, 48 assertions",
       "sitemap_generator_and_source_contracts": "passed: 25 tests, 886 assertions",
@@ -100841,8 +100841,13 @@
         "at": "2026-07-27T06:27:00Z",
         "status": "local_validation_passed",
         "note": "Exact five-file scope passed focused Big Five sitemap tests, sitemap generator/source contracts, scoped Pint, Composer validate/audit, the complete ci_verify_mbti gate, YAML/JSON parsing, and diff validation. Generated Big Five compiled timestamps from the full verification were restored to their exact pre-test bytes and excluded from scope."
+      },
+      {
+        "at": "2026-07-27T06:29:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed exact five-file scope at 915608f4374e2dd9fb68003fcf0b6c528457a866, pushed the task branch, and opened PR #3337. Required GitHub checks and exact-head review are pending; no production or cache action occurred."
       }
     ],
-    "updated_at": "2026-07-27T06:27:00Z"
+    "updated_at": "2026-07-27T06:29:00Z"
   }
 }
