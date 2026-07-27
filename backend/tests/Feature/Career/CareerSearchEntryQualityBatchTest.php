@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use App\Services\Career\Review\CareerPilotReviewEvidenceBridge;
 use App\Services\Career\Review\CareerSearchEntryQualityBatchManifestReader;
 use App\Services\Career\Review\CareerSearchEntryQualityBatchPlanner;
@@ -186,6 +189,72 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         } finally {
             @unlink($path);
         }
+    }
+
+    public function test_review_targets_bind_reader_safe_payload_and_controller_contract(): void
+    {
+        $projector = app(CareerJobDetailReaderSafeReviewProjector::class);
+        $controllerReflection = new \ReflectionClass(CareerJobDetailController::class);
+        $internalKeys = $controllerReflection->getConstant('INTERNAL_READER_PAYLOAD_KEYS');
+        $replacements = $controllerReflection->getConstant('RAW_READER_PAYLOAD_VALUE_REPLACEMENTS');
+        $this->assertIsArray($internalKeys);
+        $this->assertIsArray($replacements);
+        $payload = [
+            ...array_fill_keys($internalKeys, 'private'),
+            'summary' => implode(' | ', array_keys($replacements)),
+            'nested' => ['row_hash' => 'private', 'label' => 'raw enum'],
+        ];
+        $projected = $projector->project($payload);
+        $controllerProjection = new \ReflectionMethod(CareerJobDetailController::class, 'projectReaderSafePayload');
+        $expected = $controllerProjection->invoke(app(CareerJobDetailController::class), $payload);
+
+        $this->assertArrayNotHasKey('source_id', $projected);
+        $this->assertArrayNotHasKey('row_hash', $projected['nested']);
+        $this->assertSame($expected, $projected);
+        $this->assertSame(
+            hash_file(
+                'sha256',
+                app_path('Http/Controllers/API/V0_5/Career/CareerJobDetailController.php'),
+            ),
+            $projector->contractSha256(),
+        );
+    }
+
+    public function test_batch_build_does_not_repeat_runtime_projection_lookups(): void
+    {
+        $snapshot = [];
+        foreach ($this->manifestReader->read()['candidates'] as $candidate) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $snapshot[$candidate['canonical_slug'].'|'.$locale] = [
+                    'slug' => $candidate['canonical_slug'],
+                    'locale' => $locale,
+                    'runtime_publish_state' => 'published',
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ];
+            }
+        }
+        $runtimeProjection = \Mockery::mock(
+            CareerRuntimePublishProjectionVisibility::class
+                .', '.CareerRuntimePublishProjectionCoverageSnapshot::class,
+        );
+        $runtimeProjection->shouldReceive('jobDetailCoverageItems')
+            ->twice()
+            ->with(['en', 'zh-CN'])
+            ->andReturn($snapshot);
+        $runtimeProjection->shouldNotReceive('itemForSlug');
+        $this->app->instance(CareerRuntimePublishProjectionVisibility::class, $runtimeProjection);
+        foreach ([
+            PublicCareerAuthorityResponseCache::class,
+            CareerSearchEntryQualityEvaluator::class,
+            CareerPilotReviewEvidenceBridge::class,
+            CareerSearchEntryQualityBatchPlanner::class,
+        ] as $abstract) {
+            $this->app->forgetInstance($abstract);
+        }
+
+        $this->assertSame(50, app(CareerSearchEntryQualityBatchPlanner::class)->build()['candidate_count']);
     }
 
     public function test_content_seo_or_review_target_drift_rejects_exact_package(): void

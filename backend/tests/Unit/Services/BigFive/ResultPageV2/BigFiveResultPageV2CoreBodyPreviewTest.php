@@ -203,6 +203,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_only_career_search_entry_quality_batch_01_files(): void
     {
         $allowed = [
+            'backend/app/Services/Career/Review/CareerJobDetailReaderSafeReviewProjector.php',
             'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchManifestReader.php',
             'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchPlanner.php',
             'backend/app/Services/Career/Review/CareerSearchEntryQualityEvaluator.php',
@@ -8489,6 +8490,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerSearchEntryQualityBatchFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Services/Career/Review/CareerJobDetailReaderSafeReviewProjector.php',
             'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchManifestReader.php',
             'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchPlanner.php',
             'backend/app/Services/Career/Review/CareerSearchEntryQualityEvaluator.php',

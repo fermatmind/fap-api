@@ -6,6 +6,7 @@ namespace App\Services\Career;
 
 use App\Domain\Career\Publish\CareerJobDetailExposureReadiness;
 use App\Domain\Career\Publish\CareerLaunchGovernanceClosureService;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Resources\Career\CareerDatasetHubResource;
 use App\Http\Resources\Career\CareerDatasetMethodResource;
@@ -347,6 +348,43 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             && $this->jobDetailProjectionItemIsPublished(
                 $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale),
             );
+    }
+
+    /**
+     * Resolve one request-bounded publication snapshot without rehydrating the
+     * materialized projection once per slug and locale.
+     *
+     * @param  list<string>  $slugs
+     * @param  list<string>  $locales
+     * @return array<string,array<string,bool>>
+     */
+    public function jobDetailPublishedSnapshot(array $slugs, array $locales): array
+    {
+        $normalizedSlugs = array_values(array_unique(array_filter(array_map(
+            static fn (string $slug): string => strtolower(trim($slug)),
+            $slugs,
+        ))));
+        $normalizedLocales = array_values(array_unique(array_map(
+            fn (string $locale): string => $this->normalizePublicLocale($locale),
+            $locales,
+        )));
+        $snapshot = $this->runtimePublishProjection instanceof CareerRuntimePublishProjectionCoverageSnapshot
+            ? $this->runtimePublishProjection->jobDetailCoverageItems($normalizedLocales)
+            : null;
+
+        $published = [];
+        foreach ($normalizedSlugs as $slug) {
+            foreach ($normalizedLocales as $locale) {
+                $item = is_array($snapshot)
+                    ? ($snapshot[$slug.'|'.$locale] ?? null)
+                    : $this->runtimePublishProjection->itemForSlug($slug, $locale);
+                $published[$slug][$locale] = $this->jobDetailProjectionItemIsPublished(
+                    is_array($item) ? $item : null,
+                );
+            }
+        }
+
+        return $published;
     }
 
     private function dispatchJobDetailWarm(string $slug, string $publicLocale): void

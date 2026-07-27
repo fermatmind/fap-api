@@ -21,6 +21,7 @@ final class CareerSearchEntryQualityBatchPlanner
     public function build(): array
     {
         $manifest = $this->manifestReader->read();
+        $this->evaluator->primePublicationSnapshot(array_column($manifest['candidates'], 'canonical_slug'));
         $evaluations = array_map(
             fn (array $candidate): array => $this->evaluator->evaluate($candidate['canonical_slug']),
             $manifest['candidates'],

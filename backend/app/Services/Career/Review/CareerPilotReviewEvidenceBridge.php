@@ -67,6 +67,7 @@ final class CareerPilotReviewEvidenceBridge
         private readonly CareerPublishTrackResolver $publishTrackResolver,
         private readonly CareerSearchEntryTierResolver $searchEntryTierResolver,
         private readonly CareerSearchEntryQualityEvaluator $searchEntryQualityEvaluator,
+        private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
     ) {}
 
     /**
@@ -91,6 +92,7 @@ final class CareerPilotReviewEvidenceBridge
         }
 
         $indexItems = $this->exactIndexItems($normalizedSlugs);
+        $published = $this->responseCache->jobDetailPublishedSnapshot($normalizedSlugs, self::LOCALES);
         $indexItemShaBySlug = [];
         $targets = [];
         foreach ($normalizedSlugs as $slug) {
@@ -99,7 +101,8 @@ final class CareerPilotReviewEvidenceBridge
                 $payload = $readiness['payload'];
                 if (! is_array($payload)
                     || ! in_array($readiness['classification'], ['ready_active', 'ready_lkg'], true)
-                    || ! $this->responseCache->jobDetailCacheIsReady($slug, $locale)) {
+                    || ($published[$slug][$locale] ?? false) !== true
+                ) {
                     throw new \RuntimeException(sprintf(
                         'Career pilot review target is not available from active/LKG detail authority: %s %s.',
                         $slug,
@@ -152,6 +155,7 @@ final class CareerPilotReviewEvidenceBridge
 
         $projection = $this->projectionBySlug()[strtolower(trim($slug))]
             ?? self::UNAPPROVED_PROJECTION;
+        $this->searchEntryQualityEvaluator->primePublicationSnapshot([strtolower(trim($slug))]);
         if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection)) {
             $projection = self::UNAPPROVED_PROJECTION;
         }
@@ -171,6 +175,7 @@ final class CareerPilotReviewEvidenceBridge
     public function projectJobIndexPayload(array $payload, string $publicLocale): array
     {
         $projections = $this->projectionBySlug();
+        $this->searchEntryQualityEvaluator->primePublicationSnapshot(array_keys($projections));
         $locale = $this->normalizeLocale($publicLocale);
         if (! is_array($payload['items'] ?? null)) {
             return $payload;
@@ -400,7 +405,10 @@ final class CareerPilotReviewEvidenceBridge
                     is_array($payload['trust_manifest'] ?? null) ? $payload['trust_manifest'] : [],
                     ['review_state', 'last_reviewed_at', 'reviewer'],
                 ),
-                'complete_public_detail_projection' => $this->reviewablePublicDetailPayload($payload),
+                'reader_safe_projection_contract_sha256' => $this->readerSafeProjector->contractSha256(),
+                'complete_public_detail_projection' => $this->reviewablePublicDetailPayload(
+                    $this->readerSafeProjector->project($payload),
+                ),
             ],
         ];
     }

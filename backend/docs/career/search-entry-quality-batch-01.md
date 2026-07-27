@@ -18,6 +18,9 @@ The package deliberately distinguishes current and target state:
 - `content_quality_tier` is Tier A only while the current bilingual evidence continues to pass.
 - each candidate includes six exact review targets: content, SEO, and visible claims for EN and zh-CN.
 - `current_content_sha256_by_locale` and `current_seo_sha256_by_locale` are the explicit EN/zh-CN hashes from those current review targets; `review_target_sha256_by_identity` preserves every per-target review SHA.
+- visible-claims targets hash the same reader-safe value projection used by the public detail controller and bind the controller source SHA, so sanitization changes invalidate prior review evidence.
+
+Publication evidence is loaded through one bulk materialized-projection snapshot per quality evaluator or reviewer package. The 50-entry list path never rehydrates the full projection per slug/locale, and detail projection reuses request-memoized cohort evidence.
 
 Build a zero-write package:
 

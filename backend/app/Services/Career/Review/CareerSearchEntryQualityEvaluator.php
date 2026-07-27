@@ -20,6 +20,9 @@ final class CareerSearchEntryQualityEvaluator
     /** @var array<string,array<string,list<array<string,mixed>>>> */
     private array $indexItemsByLocaleAndSlug = [];
 
+    /** @var array<string,array<string,bool>> */
+    private array $publishedBySlugAndLocale = [];
+
     public function __construct(
         private readonly CareerSearchEntryQualityBatchManifestReader $manifestReader,
         private readonly PublicCareerAuthorityResponseCache $responseCache,
@@ -106,15 +109,32 @@ final class CareerSearchEntryQualityEvaluator
             : null;
     }
 
+    /** @param list<string> $slugs */
+    public function primePublicationSnapshot(array $slugs): void
+    {
+        $missing = array_values(array_filter(array_unique(array_map(
+            static fn (string $slug): string => strtolower(trim($slug)),
+            $slugs,
+        )), fn (string $slug): bool => $slug !== '' && ! isset($this->publishedBySlugAndLocale[$slug])));
+        if ($missing === []) {
+            return;
+        }
+
+        foreach ($this->responseCache->jobDetailPublishedSnapshot($missing, self::LOCALES) as $slug => $locales) {
+            $this->publishedBySlugAndLocale[$slug] = $locales;
+        }
+    }
+
     /** @return array<string,mixed> */
     private function localeEvidence(string $slug, string $locale): array
     {
         $blockers = [];
+        $this->primePublicationSnapshot([$slug]);
         $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
         $payload = $readiness['payload'] ?? null;
         if (! is_array($payload)
             || ! in_array($readiness['classification'] ?? null, ['ready_active', 'ready_lkg'], true)
-            || ! $this->responseCache->jobDetailCacheIsReady($slug, $locale)) {
+            || ($this->publishedBySlugAndLocale[$slug][$locale] ?? false) !== true) {
             return $this->blockedLocale($slug, $locale, ['bilingual_detail_not_ready']);
         }
 
