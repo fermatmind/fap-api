@@ -13,6 +13,18 @@ if ($current === false
 ) {
     throw new RuntimeException('Active production release precondition mismatch.');
 }
+$requiredRuntimeDirectories = [
+    $current.'/backend/storage/framework/cache',
+    $current.'/backend/storage/framework/sessions',
+    $current.'/backend/storage/framework/views',
+    $current.'/backend/storage/framework/testing',
+    $current.'/backend/bootstrap/cache',
+];
+foreach ($requiredRuntimeDirectories as $directory) {
+    if (! is_dir($directory)) {
+        throw new RuntimeException('Read-only Laravel bootstrap directory precondition mismatch.');
+    }
+}
 
 chdir($current.'/backend');
 require 'vendor/autoload.php';

@@ -41,6 +41,11 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringNotContainsString('workflow_dispatch:', str_replace("  workflow_dispatch:\n", '', $workflow));
 
         self::assertStringContainsString("file_exists(\$deployPath.'/.dep/deploy.lock')", $runner);
+        self::assertStringContainsString('$requiredRuntimeDirectories', $runner);
+        self::assertStringContainsString("storage/framework/testing'", $runner);
+        self::assertStringContainsString("bootstrap/cache'", $runner);
+        self::assertStringContainsString('Read-only Laravel bootstrap directory precondition mismatch.', $runner);
+        self::assertStringContainsString('if (! is_dir($directory))', $runner);
         self::assertStringContainsString('$expectedControlPlaneSha', $runner);
         self::assertStringContainsString('$expectedActiveRevision', $runner);
         self::assertStringContainsString('StreamedMbtiIndex52', $runner);
