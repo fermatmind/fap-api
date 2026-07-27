@@ -100808,8 +100808,8 @@
     "depends_on": [
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
-    "status": "github_checks_pending",
-      "commit_sha": "474a3a9345a97a846738f233e7a45e30d3ac0c5d",
+    "status": "ready_to_merge",
+      "commit_sha": "177439d8629c0102d3a54b550d48cfa0cf7eac30",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
@@ -100829,18 +100829,18 @@
           "evidence": "Focused and related Career tests passed; ReviewPolicyRegistryTest passes all 11 architecture assertions including registered manual-review surface declarations; Pint passed across 502 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact head 177439d8629c0102d3a54b550d48cfa0cf7eac30 passed all nine checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Workflow runs: 30241866953 and 30241866951."
       },
       "exact_head_review": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Codex exact-head review was submitted for 177439d8629c0102d3a54b550d48cfa0cf7eac30 at 2026-07-27T06:17:22Z; all review threads are resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -100950,8 +100950,13 @@
           "at": "2026-07-27T06:09:37Z",
           "status": "review_fixes_validated",
           "note": "Exact head 53c029daba1ec5c65a2d8ccf391f882970ffe621 passed all nine required checks in runs 30241342188 and 30241341815, then exact-head Codex review found missing registered review-surface declarations on the new planner and evaluator manual-review gates. Both now declare career_trust_manifest. ReviewPolicyRegistryTest passes all 11 architecture assertions and the focused Career suites pass 30 warning-only tests; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T06:26:17Z",
+          "status": "ready_to_merge",
+          "note": "Exact head 177439d8629c0102d3a54b550d48cfa0cf7eac30 passed all nine required checks in runs 30241866953 and 30241866951. Codex exact-head review is present, all review threads are resolved, and the PR is clean and mergeable. Local and GitHub scope validation pass; the final ledger-only tail head must repeat exact-head CI/review before squash merge."
         }
       ],
-      "updated_at": "2026-07-27T06:09:37Z"
+      "updated_at": "2026-07-27T06:26:17Z"
   }
 }
