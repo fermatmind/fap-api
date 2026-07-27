@@ -100808,8 +100808,8 @@
     "depends_on": [
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
-    "status": "ready_to_merge",
-      "commit_sha": "177439d8629c0102d3a54b550d48cfa0cf7eac30",
+    "status": "github_checks_pending",
+      "commit_sha": "916ce771ecc8ed8a9d3f58a4c3b45c824380c023",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
@@ -100822,25 +100822,25 @@
       },
       "focused_tests": {
         "status": "passed",
-          "evidence": "The deterministic batch suite passes 18 warning-only tests / 1438 assertions; combined with the reviewer bridge it passes 30 warning-only tests / 1526 assertions. The related tier contract and publish-track run passes 14 tests plus 4 warning-only tests / 143 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, source identity requirements with empty-wrapper and usage-only rejection, full expected-package self-authentication and canonical comparison, all populated detail/index canonical fields matching the exact locale route, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and request-memoized contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, same-version ready_active exposure-snapshot authority, request-time full bilingual target revalidation after cached approval, transient revalidation failure downgrade without a detail 500, zero redundant publication refresh for unapproved detail projections, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
+          "evidence": "The deterministic batch plus reviewer bridge suites pass 31 warning-only tests / 1538 assertions. ReviewPolicyRegistryTest passes 11 tests / 354 assertions; the related tier contract and publish-track run passes 14 tests plus 4 warning-only tests / 143 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, source identity requirements with empty-wrapper and usage-only rejection, full expected-package self-authentication and canonical comparison, all populated detail/index canonical fields matching the exact locale route, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and request-memoized contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, the exact evaluator-qualified job-index snapshot reused for package hashing, same-version ready_active exposure-snapshot authority, review-only binding remaining runtime-ineligible without controlled apply evidence, request-time full bilingual target revalidation after cached approval, transient revalidation failure downgrade without a detail 500, zero redundant publication refresh for unapproved detail projections, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
       },
       "required_local_checks": {
         "status": "passed",
           "evidence": "Focused and related Career tests passed; ReviewPolicyRegistryTest passes all 11 architecture assertions including registered manual-review surface declarations; Pint passed across 502 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact head 177439d8629c0102d3a54b550d48cfa0cf7eac30 passed all nine checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Workflow runs: 30241866953 and 30241866951."
+        "status": "pending",
+        "evidence": null
       },
       "exact_head_review": {
-        "status": "passed",
-        "evidence": "Codex exact-head review was submitted for 177439d8629c0102d3a54b550d48cfa0cf7eac30 at 2026-07-27T06:17:22Z; all review threads are resolved."
+        "status": "pending",
+        "evidence": null
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
-      "local_validation_passed": true,
-      "github_checks_green": true,
+      "local_validation_passed": false,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -100955,8 +100955,13 @@
           "at": "2026-07-27T06:26:17Z",
           "status": "ready_to_merge",
           "note": "Exact head 177439d8629c0102d3a54b550d48cfa0cf7eac30 passed all nine required checks in runs 30241866953 and 30241866951. Codex exact-head review is present, all review threads are resolved, and the PR is clean and mergeable. Local and GitHub scope validation pass; the final ledger-only tail head must repeat exact-head CI/review before squash merge."
+        },
+        {
+          "at": "2026-07-27T06:38:16Z",
+          "status": "review_fixes_validated",
+          "note": "Final ledger-only head c42a655469623ae8688e1432e385889da5c895c9 passed all nine required checks in runs 30242767139 and 30242767179, then exact-head Codex review found three valid boundaries. Review-only approved_all binding can no longer supply runtime Tier A without separate controlled apply evidence; package hashing now reuses the exact evaluator-qualified job-index snapshot; and ledger plus manifest lifecycle are both pending for the fresh head. Architecture, focused Career, tier, publish-track, Pint, and diff checks pass; a fresh exact-head CI/review cycle remains required."
         }
       ],
-      "updated_at": "2026-07-27T06:26:17Z"
+      "updated_at": "2026-07-27T06:38:16Z"
   }
 }
