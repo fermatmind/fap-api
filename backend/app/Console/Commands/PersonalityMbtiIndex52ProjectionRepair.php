@@ -19,6 +19,8 @@ final class PersonalityMbtiIndex52ProjectionRepair extends Command
         {--authorization= : Exact dry-run-only operator authorization asset}
         {--execute : Execute the separately authorized exact-23 projection write}
         {--expected-current-state-sha256= : Exact production dry-run current-state SHA}
+        {--expected-control-plane-sha= : Exact merged control-plane SHA}
+        {--expected-active-revision= : Exact active production fap-api SHA}
         {--production-authorization= : Exact production write authorization phrase}
         {--output= : Optional machine-readable evidence path}
         {--json : Emit JSON}';
@@ -34,9 +36,16 @@ final class PersonalityMbtiIndex52ProjectionRepair extends Command
                     $package,
                     $authorization,
                     trim((string) $this->option('expected-current-state-sha256')),
+                    trim((string) $this->option('expected-control-plane-sha')),
+                    trim((string) $this->option('expected-active-revision')),
                     (string) $this->option('production-authorization'),
                 )
-                : $service->plan($package, $authorization);
+                : $service->plan(
+                    $package,
+                    $authorization,
+                    trim((string) $this->option('expected-control-plane-sha')),
+                    trim((string) $this->option('expected-active-revision')),
+                );
         } catch (Throwable $exception) {
             $summary = [
                 'artifact' => MbtiIndex52ProjectionRepairService::CONTRACT,

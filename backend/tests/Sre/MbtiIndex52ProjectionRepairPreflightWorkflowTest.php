@@ -17,6 +17,7 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('environment: production', $workflow);
         self::assertStringContainsString('test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"', $workflow);
         self::assertStringContainsString('EXPECTED_ACTIVE_REVISION', $workflow);
+        self::assertStringContainsString('EXPECTED_CONTROL_PLANE_SHA=$q_control', $workflow);
         self::assertStringContainsString('ea4801ff5af8d0d7279137d2f4ebbaa263bdc4a959f5c880ba023dd2d0fed641', $workflow);
         self::assertStringContainsString('59103fbf6eae4effc81fec844bbbf8d3ae8bb7100513407821074787a641253c', $workflow);
         self::assertStringContainsString('< "$RUNNER_TEMP/mbti-index52-preflight.php"', $workflow);
@@ -29,6 +30,8 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringNotContainsString('workflow_dispatch:', str_replace("  workflow_dispatch:\n", '', $workflow));
 
         self::assertStringContainsString("file_exists(\$deployPath.'/.dep/deploy.lock')", $runner);
+        self::assertStringContainsString('$expectedControlPlaneSha', $runner);
+        self::assertStringContainsString('$expectedActiveRevision', $runner);
         self::assertStringContainsString('writes_committed', $runner);
         self::assertStringContainsString('false', $runner);
         self::assertStringNotContainsString('->save(', $runner);

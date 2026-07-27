@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 $deployPath = (string) getenv('DEPLOY_PATH');
+$expectedControlPlaneSha = (string) getenv('EXPECTED_CONTROL_PLANE_SHA');
 $expectedActiveRevision = (string) getenv('EXPECTED_ACTIVE_REVISION');
 $current = realpath($deployPath.'/current');
 if ($current === false
@@ -29,11 +30,17 @@ $authorization = json_decode(base64_decode('__AUTHORIZATION_JSON_B64__', true) ?
 
 $contract = new App\Services\Cms\MbtiIndex52ProjectionRepairPackage;
 $service = new App\Services\Cms\MbtiIndex52ProjectionRepairService($contract);
-$plan = $service->plan($package, $authorization);
+$plan = $service->plan(
+    $package,
+    $authorization,
+    $expectedControlPlaneSha,
+    $expectedActiveRevision,
+);
 
 echo json_encode([
     'contract_version' => 'mbti.index52.comparison_projection_repair.production_preflight.v1',
     'status' => ($plan['ok'] ?? false) === true ? 'PASS_PREFLIGHT' : 'HOLD',
+    'control_plane_sha' => $expectedControlPlaneSha,
     'active_revision' => $expectedActiveRevision,
     'record_count' => $plan['record_count'] ?? null,
     'at_comparison_count' => $plan['at_comparison_count'] ?? null,

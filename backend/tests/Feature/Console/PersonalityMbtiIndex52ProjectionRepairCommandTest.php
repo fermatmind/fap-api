@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSection;
+use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\MbtiIndex52ProjectionRepairPackage;
 use App\Services\Cms\MbtiIndex52ProjectionRepairService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,11 +18,19 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const CONTROL_PLANE_SHA = '1111111111111111111111111111111111111111';
+
+    private const ACTIVE_REVISION = '2222222222222222222222222222222222222222';
+
     public function test_dry_run_binds_exact_23_and_writes_nothing(): void
     {
         [$package, $authorization] = $this->seedExactCohort();
 
-        self::assertSame(0, Artisan::call('personality:mbti-index52-projection-repair', ['--json' => true]));
+        self::assertSame(0, Artisan::call('personality:mbti-index52-projection-repair', [
+            '--expected-control-plane-sha' => self::CONTROL_PLANE_SHA,
+            '--expected-active-revision' => self::ACTIVE_REVISION,
+            '--json' => true,
+        ]));
         $summary = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
 
         self::assertTrue($summary['ok']);
@@ -48,14 +57,40 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
         $tampered['records'][0]['patch']['claim_boundary'] .= ' drift';
         $this->app->make(MbtiIndex52ProjectionRepairService::class);
         $this->expectExceptionMessage('package hash or contract mismatch');
-        $this->app->make(MbtiIndex52ProjectionRepairService::class)->plan($tampered, $authorization);
+        $this->app->make(MbtiIndex52ProjectionRepairService::class)->plan(
+            $tampered,
+            $authorization,
+            self::CONTROL_PLANE_SHA,
+            self::ACTIVE_REVISION,
+        );
     }
 
     public function test_exact_authorization_updates_only_projection_fields_atomically(): void
     {
         [$package, $authorization] = $this->seedExactCohort();
         $service = $this->app->make(MbtiIndex52ProjectionRepairService::class);
-        $plan = $service->plan($package, $authorization);
+        $plan = $service->plan(
+            $package,
+            $authorization,
+            self::CONTROL_PLANE_SHA,
+            self::ACTIVE_REVISION,
+        );
+        config()->set('app.mbti_index52_test_active_revision', self::ACTIVE_REVISION);
+        config()->set('app.mbti_index52_control_plane_sha', str_repeat('3', 40));
+        try {
+            $service->publish(
+                $package,
+                $authorization,
+                $plan['current_state_sha256'],
+                self::CONTROL_PLANE_SHA,
+                self::ACTIVE_REVISION,
+                $plan['required_production_authorization'],
+            );
+            self::fail('Changed control-plane SHA unexpectedly passed the write gate.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('Production release binding changed before transaction.', $exception->getMessage());
+        }
+        config()->set('app.mbti_index52_control_plane_sha', self::CONTROL_PLANE_SHA);
         $beforeCross = MbtiCrossTypeComparisonAuthority::query()->where('slug', 'intj-vs-intp')->firstOrFail();
         $beforeContent = (array) $beforeCross->content_payload_json;
         $beforeInvariants = $beforeCross->only([
@@ -66,6 +101,8 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
         self::assertSame(0, Artisan::call('personality:mbti-index52-projection-repair', [
             '--execute' => true,
             '--expected-current-state-sha256' => $plan['current_state_sha256'],
+            '--expected-control-plane-sha' => self::CONTROL_PLANE_SHA,
+            '--expected-active-revision' => self::ACTIVE_REVISION,
             '--production-authorization' => $plan['required_production_authorization'],
             '--json' => true,
         ]));
@@ -73,6 +110,8 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
 
         self::assertTrue($summary['writes_committed']);
         self::assertSame('projection_repair_committed', $summary['status']);
+        self::assertSame(self::CONTROL_PLANE_SHA, $summary['control_plane_sha']);
+        self::assertSame(self::ACTIVE_REVISION, $summary['active_revision']);
         self::assertFalse($summary['body_or_faq_mutated']);
         self::assertFalse($summary['publication_or_indexability_mutated']);
         $afterCross = $beforeCross->fresh();
@@ -85,6 +124,14 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
         self::assertSame(
             'https://fermatmind.com/en/personality/intj-vs-intp',
             $afterCross->content_payload_json['alternates']['en'],
+        );
+        $englishAlternate = $this->app->make(Mbti64CrossTypeComparisonPublicReadModel::class)
+            ->find('intj-vs-intp', 'en');
+        self::assertIsArray($englishAlternate);
+        self::assertSame('en', $englishAlternate['locale']);
+        self::assertSame(
+            'https://fermatmind.com/en/personality/intj-vs-intp',
+            $englishAlternate['canonical_url'],
         );
         self::assertNotEmpty(data_get(
             PersonalityProfileSection::query()->whereHas('profile', fn ($query) => $query->where('canonical_type_code', 'INTJ'))

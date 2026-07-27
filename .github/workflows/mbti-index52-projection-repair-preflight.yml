@@ -107,19 +107,22 @@ jobs:
           set -euo pipefail
           mkdir -p artifacts
           printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_control '%q' "$EXPECTED_CONTROL_PLANE_SHA"
           printf -v q_active '%q' "$EXPECTED_ACTIVE_REVISION"
           timeout --signal=TERM --kill-after=10s 300s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
               -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "DEPLOY_PATH=$q_path EXPECTED_ACTIVE_REVISION=$q_active timeout --signal=TERM --kill-after=10s 270s php" \
+              "DEPLOY_PATH=$q_path EXPECTED_CONTROL_PLANE_SHA=$q_control EXPECTED_ACTIVE_REVISION=$q_active timeout --signal=TERM --kill-after=10s 270s php" \
               < "$RUNNER_TEMP/mbti-index52-preflight.php" \
               > artifacts/remote-preflight.json
           jq -e \
             --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
             --arg package "$PACKAGE_SHA256" \
             --arg authorization "$AUTHORIZATION_SHA256" \
             '.contract_version == "mbti.index52.comparison_projection_repair.production_preflight.v1"
              and .status == "PASS_PREFLIGHT"
+             and .control_plane_sha == $control
              and .active_revision == $active
              and .record_count == 23
              and .at_comparison_count == 16

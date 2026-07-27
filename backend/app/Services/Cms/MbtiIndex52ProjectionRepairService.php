@@ -18,8 +18,13 @@ final class MbtiIndex52ProjectionRepairService
     public function __construct(private readonly MbtiIndex52ProjectionRepairPackage $packageContract) {}
 
     /** @return array<string,mixed> */
-    public function plan(array $package, array $authorization): array
-    {
+    public function plan(
+        array $package,
+        array $authorization,
+        string $controlPlaneSha,
+        string $activeRevision,
+    ): array {
+        $this->assertReleaseBinding($controlPlaneSha, $activeRevision);
         $records = $this->packageContract->validate($package, $authorization);
         $before = $this->snapshot($records, false);
         $desired = $this->desired($before, $records);
@@ -27,7 +32,11 @@ final class MbtiIndex52ProjectionRepairService
         $desiredSha = $this->packageContract->sha($desired);
         $rollback = $this->rollbackManifest($before);
         $readback = $this->readbackContract($desired);
-        $phrase = $this->expectedProductionAuthorization($currentSha);
+        $phrase = $this->expectedProductionAuthorization(
+            $currentSha,
+            $controlPlaneSha,
+            $activeRevision,
+        );
 
         return [
             'artifact' => self::CONTRACT,
@@ -40,6 +49,8 @@ final class MbtiIndex52ProjectionRepairService
             'exact_slugs' => [...MbtiIndex52ProjectionRepairPackage::AT_SLUGS, ...MbtiIndex52ProjectionRepairPackage::CROSS_SLUGS],
             'package_sha256' => MbtiIndex52ProjectionRepairPackage::PACKAGE_SHA256,
             'authorization_sha256' => MbtiIndex52ProjectionRepairPackage::AUTHORIZATION_SHA256,
+            'control_plane_sha' => $controlPlaneSha,
+            'active_revision' => $activeRevision,
             'current_state_sha256' => $currentSha,
             'desired_state_sha256' => $desiredSha,
             'rollback_manifest_sha256' => $this->packageContract->sha($rollback),
@@ -61,16 +72,37 @@ final class MbtiIndex52ProjectionRepairService
         array $package,
         array $authorization,
         string $expectedCurrentStateSha256,
+        string $expectedControlPlaneSha,
+        string $expectedActiveRevision,
         string $productionAuthorization,
     ): array {
         $records = $this->packageContract->validate($package, $authorization);
+        $this->assertReleaseBinding($expectedControlPlaneSha, $expectedActiveRevision);
         if (! preg_match('/^[a-f0-9]{64}$/', $expectedCurrentStateSha256)
-            || ! hash_equals($this->expectedProductionAuthorization($expectedCurrentStateSha256), $productionAuthorization)
+            || ! hash_equals(
+                $this->expectedProductionAuthorization(
+                    $expectedCurrentStateSha256,
+                    $expectedControlPlaneSha,
+                    $expectedActiveRevision,
+                ),
+                $productionAuthorization,
+            )
         ) {
             throw new RuntimeException('Exact production projection-repair authorization is required.');
         }
 
-        return DB::transaction(function () use ($records, $expectedCurrentStateSha256): array {
+        return DB::transaction(function () use (
+            $records,
+            $expectedCurrentStateSha256,
+            $expectedControlPlaneSha,
+            $expectedActiveRevision,
+        ): array {
+            if (! hash_equals(
+                $expectedControlPlaneSha,
+                (string) config('app.mbti_index52_control_plane_sha'),
+            ) || ! hash_equals($expectedActiveRevision, $this->runtimeActiveRevision())) {
+                throw new RuntimeException('Production release binding changed before transaction.');
+            }
             $before = $this->snapshot($records, true);
             $beforeSha = $this->packageContract->sha($before);
             if (! hash_equals($expectedCurrentStateSha256, $beforeSha)) {
@@ -104,6 +136,8 @@ final class MbtiIndex52ProjectionRepairService
                 'exact_slugs' => [...MbtiIndex52ProjectionRepairPackage::AT_SLUGS, ...MbtiIndex52ProjectionRepairPackage::CROSS_SLUGS],
                 'package_sha256' => MbtiIndex52ProjectionRepairPackage::PACKAGE_SHA256,
                 'authorization_sha256' => MbtiIndex52ProjectionRepairPackage::AUTHORIZATION_SHA256,
+                'control_plane_sha' => $expectedControlPlaneSha,
+                'active_revision' => $expectedActiveRevision,
                 'prewrite_state_sha256' => $beforeSha,
                 'postwrite_state_sha256' => $this->packageContract->sha($after),
                 'rollback_manifest_sha256' => $this->packageContract->sha($rollback),
@@ -119,13 +153,44 @@ final class MbtiIndex52ProjectionRepairService
         }, 3);
     }
 
-    public function expectedProductionAuthorization(string $currentStateSha256): string
-    {
+    public function expectedProductionAuthorization(
+        string $currentStateSha256,
+        string $controlPlaneSha,
+        string $activeRevision,
+    ): string {
         return 'I explicitly approve MBTI-INDEX-52 production comparison projection repair for package SHA '
             .MbtiIndex52ProjectionRepairPackage::PACKAGE_SHA256.' authorization SHA '
             .MbtiIndex52ProjectionRepairPackage::AUTHORIZATION_SHA256.' current state SHA '
-            .$currentStateSha256.' covering exact 16 A/T and 7 cross-comparison zh-CN records; '
+            .$currentStateSha256.' control-plane SHA '.$controlPlaneSha
+            .' active SHA '.$activeRevision
+            .' covering exact 16 A/T and 7 cross-comparison zh-CN records; '
             .'no body/FAQ/publication/indexability/sitemap/llms/search changes.';
+    }
+
+    private function assertReleaseBinding(string $controlPlaneSha, string $activeRevision): void
+    {
+        if (preg_match('/^[a-f0-9]{40}$/', $controlPlaneSha) !== 1
+            || preg_match('/^[a-f0-9]{40}$/', $activeRevision) !== 1
+        ) {
+            throw new RuntimeException('Exact control-plane and active release SHAs are required.');
+        }
+    }
+
+    private function runtimeActiveRevision(): string
+    {
+        if (app()->environment('testing')) {
+            $override = trim((string) config('app.mbti_index52_test_active_revision'));
+            if (preg_match('/^[a-f0-9]{40}$/', $override) === 1) {
+                return $override;
+            }
+        }
+        $revisionPath = dirname(base_path()).'/REVISION';
+        $revision = is_file($revisionPath) ? trim((string) file_get_contents($revisionPath)) : '';
+        if (preg_match('/^[a-f0-9]{40}$/', $revision) !== 1) {
+            throw new RuntimeException('Active production revision is unavailable.');
+        }
+
+        return $revision;
     }
 
     /** @param list<array<string,mixed>> $records @return list<array<string,mixed>> */

@@ -150,6 +150,18 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         self::assertGreaterThanOrEqual(3, count((array) $response->json('comparison_public_projection_v1.internal_links')));
         self::assertStringNotContainsString('/zh/orders', (string) $response->getContent());
         self::assertStringNotContainsString('order_no=', (string) $response->getContent());
+
+        $english = $this->getJson('/api/v0.5/personality/comparisons/istj-vs-isfj?locale=en');
+        $english->assertOk()
+            ->assertJsonPath('comparison_public_projection_v1.locale', 'en')
+            ->assertJsonPath(
+                'comparison_public_projection_v1.canonical_url',
+                'https://fermatmind.com/en/personality/istj-vs-isfj',
+            )
+            ->assertJsonPath(
+                'comparison_public_projection_v1.alternates.zh-CN',
+                'https://fermatmind.com/zh/personality/istj-vs-isfj',
+            );
     }
 
     public function test_cross_type_comparison_keeps_a_row_only_quick_judgment_table(): void
