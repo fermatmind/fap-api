@@ -683,16 +683,17 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if ($title === '' || $h1 === '' || $description === '') {
             $issues[] = 'html_title_description_or_h1_missing';
         }
-        $expectedTitle = trim((string) ($v1['title'] ?? ''));
+        $expectedHeadingTitle = trim((string) ($v1['title'] ?? ''));
+        $expectedDocumentTitle = trim((string) data_get($v1, 'seo.title', $expectedHeadingTitle));
         $expectedDescription = trim((string) data_get($v1, 'seo.description', $v1['summary'] ?? ''));
         $metadataAuthorityExact = $this->apiMetadataAuthorityExact($v1, $path, $frontendBaseUrl);
         $metadataAuthorityRenderable = $metadataAuthorityExact
             || ($phase === 'pre' && $this->apiMetadataAuthorityRenderable($v1, $path, $frontendBaseUrl));
-        if ($expectedTitle !== '' && ! str_contains($h1, $expectedTitle)) {
+        if ($expectedHeadingTitle !== '' && ! str_contains($h1, $expectedHeadingTitle)) {
             $issues[] = 'html_title_or_h1_mismatch';
         }
         if ($phase === 'post' || $metadataAuthorityRenderable) {
-            if ($expectedTitle !== '' && ! str_contains($title, $expectedTitle)) {
+            if ($expectedDocumentTitle !== '' && ! str_contains($title, $expectedDocumentTitle)) {
                 $issues[] = 'html_title_or_h1_mismatch';
             }
             if ($expectedDescription !== '' && $description !== $expectedDescription) {
