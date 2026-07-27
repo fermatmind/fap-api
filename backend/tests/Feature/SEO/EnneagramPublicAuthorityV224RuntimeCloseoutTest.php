@@ -17,9 +17,12 @@ use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Services\ReviewGovernance\ReviewAttestationFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
 
 final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
@@ -458,9 +461,11 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         $revisionExisted = File::isFile($revisionPath);
         $revisionContents = $revisionExisted ? File::get($revisionPath) : null;
         $previousApiUrl = config('app.url');
+        $previousPublicApiUrl = config('app.public_api_url');
         $previousFrontendUrl = config('app.frontend_url');
         File::put($revisionPath, self::BACKEND_SHA);
-        config()->set('app.url', 'https://api.fermatmind.com');
+        config()->set('app.url', 'https://ops.fermatmind.com');
+        config()->set('app.public_api_url', 'https://api.fermatmind.com');
         config()->set('app.frontend_url', 'https://fermatmind.com');
         app()->detectEnvironment(static fn (): string => 'production');
         $redirectsDisabled = false;
@@ -494,6 +499,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         } finally {
             app()->detectEnvironment(static fn (): string => $previousEnvironment);
             config()->set('app.url', $previousApiUrl);
+            config()->set('app.public_api_url', $previousPublicApiUrl);
             config()->set('app.frontend_url', $previousFrontendUrl);
             if ($revisionExisted && is_string($revisionContents)) {
                 File::put($revisionPath, $revisionContents);
@@ -1961,58 +1967,70 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
-    public function test_production_runtime_commands_reject_non_public_or_unconfigured_origins_before_http_or_writes(): void
-    {
+    #[DataProvider('invalidProductionRuntimeOriginProvider')]
+    public function test_production_runtime_commands_reject_non_public_or_unconfigured_origins_before_http_or_writes(
+        string $option,
+        string $invalidOrigin,
+    ): void {
         $this->seedPublishedEstate();
         $report = $this->releaseReport();
         $registerPath = storage_path('framework/testing/enneagram-v224-private-register-'.bin2hex(random_bytes(4)).'.json');
         $previousEnvironment = app()->environment();
         $previousApiUrl = config('app.url');
+        $previousPublicApiUrl = config('app.public_api_url');
         $previousFrontendUrl = config('app.frontend_url');
         File::ensureDirectoryExists(dirname($registerPath));
         File::put($registerPath, json_encode($this->reviewRegister($report), JSON_THROW_ON_ERROR));
-        config()->set('app.url', 'https://api.fermatmind.com');
+        config()->set('app.url', 'https://ops.fermatmind.com');
+        config()->set('app.public_api_url', 'https://api.fermatmind.com');
         config()->set('app.frontend_url', 'https://fermatmind.com');
         app()->detectEnvironment(static fn (): string => 'production');
+        $this->assertSame('https://api.fermatmind.com', config('app.public_api_url'));
         Http::fake();
-        $invalidOrigins = [
-            ['api-base-url', 'https://localhost'],
-            ['api-base-url', 'https://127.0.0.1'],
-            ['frontend-base-url', 'https://10.0.0.1'],
-            ['api-base-url', 'https://staging-api.fermatmind.com'],
-        ];
 
         try {
-            foreach ($invalidOrigins as [$option, $invalidOrigin]) {
-                $origins = [
-                    '--api-base-url' => 'https://api.fermatmind.com',
-                    '--frontend-base-url' => 'https://fermatmind.com',
-                ];
-                $origins['--'.$option] = $invalidOrigin;
+            $origins = [
+                '--api-base-url' => 'https://api.fermatmind.com',
+                '--frontend-base-url' => 'https://fermatmind.com',
+            ];
+            $origins['--'.$option] = $invalidOrigin;
 
-                $this->artisan('personality:enneagram-authority-v2-runtime-closeout', [
-                    '--preflight' => true,
-                    '--review-register' => $registerPath,
-                    '--backend-deployed-sha' => self::BACKEND_SHA,
-                    '--frontend-deployed-sha' => self::FRONTEND_SHA,
-                    ...$origins,
-                ])
-                    ->expectsOutputToContain('--'.$option.' must use the configured public production origin.')
-                    ->expectsOutputToContain('status=FAIL_CLOSED_NO_WRITES')
-                    ->expectsOutputToContain('writes_committed=0')
-                    ->assertFailed();
+            $closeoutBuffer = new BufferedOutput;
+            $closeoutExit = Artisan::call('personality:enneagram-authority-v2-runtime-closeout', [
+                '--preflight' => true,
+                '--review-register' => $registerPath,
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--json' => true,
+                ...$origins,
+            ], $closeoutBuffer);
+            $closeoutOutput = $closeoutBuffer->fetch();
+            $this->assertSame(1, $closeoutExit, $closeoutOutput);
+            $closeoutResult = json_decode($closeoutOutput, true, 512, JSON_THROW_ON_ERROR);
+            $this->assertSame(
+                '--'.$option.' must use the configured public production origin.',
+                $closeoutResult['error'] ?? null,
+            );
+            $this->assertSame('FAIL_CLOSED_NO_WRITES', $closeoutResult['status'] ?? null);
+            $this->assertFalse($closeoutResult['writes_committed'] ?? null);
 
-                $this->artisan('personality:enneagram-authority-v2-runtime-readback', [
-                    '--phase' => 'pre',
-                    '--batch' => 'canary-00',
-                    '--backend-deployed-sha' => self::BACKEND_SHA,
-                    '--frontend-deployed-sha' => self::FRONTEND_SHA,
-                    ...$origins,
-                ])
-                    ->expectsOutputToContain('--'.$option.' must use the configured public production origin.')
-                    ->expectsOutputToContain('status=FAIL_CLOSED')
-                    ->assertFailed();
-            }
+            $readbackBuffer = new BufferedOutput;
+            $readbackExit = Artisan::call('personality:enneagram-authority-v2-runtime-readback', [
+                '--phase' => 'pre',
+                '--batch' => 'canary-00',
+                '--backend-deployed-sha' => self::BACKEND_SHA,
+                '--frontend-deployed-sha' => self::FRONTEND_SHA,
+                '--json' => true,
+                ...$origins,
+            ], $readbackBuffer);
+            $readbackOutput = $readbackBuffer->fetch();
+            $this->assertSame(1, $readbackExit, $readbackOutput);
+            $readbackResult = json_decode($readbackOutput, true, 512, JSON_THROW_ON_ERROR);
+            $this->assertSame(
+                '--'.$option.' must use the configured public production origin.',
+                $readbackResult['error'] ?? null,
+            );
+            $this->assertSame('FAIL_CLOSED', $readbackResult['status'] ?? null);
 
             Http::assertNothingSent();
             $this->assertSame(0, PersonalityPublicContentAssetRevision::query()->count());
@@ -2021,9 +2039,21 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         } finally {
             app()->detectEnvironment(static fn (): string => $previousEnvironment);
             config()->set('app.url', $previousApiUrl);
+            config()->set('app.public_api_url', $previousPublicApiUrl);
             config()->set('app.frontend_url', $previousFrontendUrl);
             File::delete($registerPath);
         }
+    }
+
+    /** @return array<string,array{string,string}> */
+    public static function invalidProductionRuntimeOriginProvider(): array
+    {
+        return [
+            'localhost API' => ['api-base-url', 'https://localhost'],
+            'loopback API' => ['api-base-url', 'https://127.0.0.1'],
+            'private frontend' => ['frontend-base-url', 'https://10.0.0.1'],
+            'unconfigured staging API' => ['api-base-url', 'https://staging-api.fermatmind.com'],
+        ];
     }
 
     public function test_console_rejects_frontend_revision_probe_on_a_different_origin_before_any_write(): void

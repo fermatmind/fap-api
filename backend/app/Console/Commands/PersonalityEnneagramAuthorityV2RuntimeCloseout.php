@@ -117,7 +117,7 @@ final class PersonalityEnneagramAuthorityV2RuntimeCloseout extends Command
         $apiBaseUrl = $manifest->publicRuntimeOrigin(
             $this->requiredHttpsOrigin('api-base-url'),
             '--api-base-url',
-            $testingOverride ? null : (string) config('app.url', ''),
+            $testingOverride ? null : (string) config('app.public_api_url', ''),
         );
         $frontendBaseUrl = $manifest->publicRuntimeOrigin(
             $this->requiredHttpsOrigin('frontend-base-url'),
