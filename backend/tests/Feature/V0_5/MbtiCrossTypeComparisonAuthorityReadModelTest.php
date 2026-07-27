@@ -62,6 +62,22 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
     public function test_cross_type_comparison_detail_reads_database_authority_payload(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
+        $contentPayload = $this->contentPayload();
+        $contentPayload['internal_links'][0] = [
+            'label' => '查看 ISTJ-A',
+            'href' => '/zh/personality/istj-a',
+            'reason' => '左侧类型详情',
+        ];
+        $contentPayload['answer_surface_v1'] = [
+            'summary_blocks' => [['key' => 'summary', 'title' => '摘要', 'body' => 'ISTJ 与 ISFJ 的差异摘要。']],
+            'faq_blocks' => $contentPayload['faq'],
+            'compare_blocks' => [['key' => 'compare', 'title' => '最大区别', 'body' => '规则执行与照护判断。']],
+            'next_step_blocks' => [['key' => 'next', 'title' => '查看 ISTJ-A', 'body' => '左侧类型详情', 'href' => '/zh/personality/istj-a']],
+        ];
+        $contentPayload['alternates'] = [
+            'en' => 'https://fermatmind.com/en/personality/istj-vs-isfj',
+            'zh-CN' => 'https://fermatmind.com/zh/personality/istj-vs-isfj',
+        ];
 
         $this->createAuthority([
             'slug' => 'istj-vs-isfj',
@@ -71,6 +87,7 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
             'seo_title' => 'ISTJ 和 ISFJ 的区别 | FermatMind',
             'seo_description' => 'ISTJ 和 ISFJ 的区别测试描述',
             'summary' => 'ISTJ 更容易从规则和责任入口判断，ISFJ 更容易从照护和关系稳定入口判断。',
+            'content_payload_json' => $contentPayload,
             'source_package_id' => 'mbti-content15-top-blocker-batch',
             'source_sha256' => hash('sha256', 'istj-vs-isfj-authority-fixture'),
         ]);
@@ -88,6 +105,13 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
             ->assertJsonPath('comparison_public_projection_v1.sections.1.rows.0.dimension', '判断入口')
             ->assertJsonPath('comparison_public_projection_v1.faq.0.question', 'ISTJ 和 ISFJ 最大区别是什么？')
             ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/zh/personality/istj-a')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.anchor_text', '查看 ISTJ-A')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.link_intent', 'related_public_page')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.label', '查看 ISTJ-A')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.reason', '左侧类型详情')
+            ->assertJsonMissingPath('comparison_public_projection_v1.alternates.en')
+            ->assertJsonPath('comparison_public_projection_v1.alternates.zh-CN', 'https://fermatmind.com/zh/personality/istj-vs-isfj')
+            ->assertJsonPath('answer_surface_v1.summary_blocks.0.body', 'ISTJ 与 ISFJ 的差异摘要。')
             ->assertJsonPath('comparison_public_projection_v1.source_refs.0', 'mbti-content15-top-blocker-batch')
             ->assertJsonPath('comparison_public_projection_v1.authority_source', 'database')
             ->assertJsonPath('comparison_public_projection_v1.is_indexable', false)
@@ -129,6 +153,24 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         self::assertGreaterThanOrEqual(3, count((array) $response->json('comparison_public_projection_v1.internal_links')));
         self::assertStringNotContainsString('/zh/orders', (string) $response->getContent());
         self::assertStringNotContainsString('order_no=', (string) $response->getContent());
+
+    }
+
+    public function test_cross_type_comparison_preserves_v1_internal_link_fields_while_adding_normalized_fields(): void
+    {
+        $this->createAuthority([
+            'slug' => 'istj-vs-isfj',
+            'left_type_code' => 'ISTJ',
+            'right_type_code' => 'ISFJ',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality/comparisons/istj-vs-isfj?locale=zh-CN');
+
+        $response->assertOk()
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/zh/personality/istj-a')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.anchor_text', 'ISTJ-A')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.link_intent', 'left_variant')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.label', 'ISTJ-A');
     }
 
     public function test_cross_type_comparison_keeps_a_row_only_quick_judgment_table(): void

@@ -58,6 +58,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'mbti_index52_test_active_revision' => null,
+
     'public_api_url' => env('PUBLIC_API_URL', 'https://api.fermatmind.com'),
 
     'frontend_url' => env('FRONTEND_URL', 'https://fermatmind.com'),
