@@ -91,6 +91,7 @@ final class CareerBuildSearchEntryQualityBatchCommand extends Command
         } else {
             foreach ([
                 'status',
+                'error',
                 'candidate_count',
                 'bilingual_url_count',
                 'target_set_sha256',

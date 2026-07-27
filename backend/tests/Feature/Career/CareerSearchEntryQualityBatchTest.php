@@ -201,6 +201,23 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         }
     }
 
+    public function test_command_human_readable_hold_includes_actionable_error(): void
+    {
+        $path = storage_path('framework/testing/missing-career-search-entry-quality-batch.json');
+        @unlink($path);
+
+        $this->assertSame(1, Artisan::call('career:build-search-entry-quality-batch', [
+            '--expected-package' => $path,
+        ]));
+        $output = Artisan::output();
+
+        $this->assertStringContainsString('status=HOLD_CAREER_SEARCH_ENTRY_QUALITY_BATCH', $output);
+        $this->assertStringContainsString(
+            'error=Expected Career quality package path is invalid.',
+            $output,
+        );
+    }
+
     public function test_review_targets_bind_reader_safe_payload_and_controller_contract(): void
     {
         $projector = app(CareerJobDetailReaderSafeReviewProjector::class);
