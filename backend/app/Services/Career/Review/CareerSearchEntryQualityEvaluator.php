@@ -217,12 +217,13 @@ final class CareerSearchEntryQualityEvaluator
         }
 
         $expectedPath = ($locale === 'en' ? '/en' : '/zh').'/career/jobs/'.$slug;
-        $canonical = $this->firstString([
+        $canonicalFields = [
             data_get($payload, 'seo_contract.canonical_url'),
             data_get($payload, 'seo_contract.canonical_target'),
             data_get($payload, 'seo_contract.canonical_path'),
-        ]);
-        if ($canonical !== $expectedPath) {
+        ];
+        $canonical = $this->firstString($canonicalFields);
+        if (! $this->canonicalFieldsMatch($canonicalFields, $expectedPath)) {
             $blockers[] = 'canonical_url_mismatch';
         }
         if (! $this->robotsIndexable(data_get($payload, 'seo_contract'))) {
@@ -234,11 +235,11 @@ final class CareerSearchEntryQualityEvaluator
             $blockers[] = 'index_item_missing_or_duplicate';
         } elseif (! $this->robotsIndexable($indexItem['seo_contract'] ?? null)) {
             $blockers[] = 'index_item_not_indexable';
-        } elseif ($this->firstString([
+        } elseif (! $this->canonicalFieldsMatch([
             data_get($indexItem, 'seo_contract.canonical_url'),
             data_get($indexItem, 'seo_contract.canonical_target'),
             data_get($indexItem, 'seo_contract.canonical_path'),
-        ]) !== $expectedPath) {
+        ], $expectedPath)) {
             $blockers[] = 'index_item_canonical_mismatch';
         }
 
@@ -356,15 +357,18 @@ final class CareerSearchEntryQualityEvaluator
                 if (is_string($source) && trim($source) !== '') {
                     $normalized[] = ['label' => trim($source)];
                 } elseif (is_array($source)) {
+                    $label = $this->nullableString($source['label'] ?? $source['source'] ?? $source['ref'] ?? null);
+                    $url = $this->publicSourceUrl($source['url'] ?? null);
+                    if ($label === null && $url === null) {
+                        continue;
+                    }
                     $public = array_filter([
                         'key' => $this->nullableString($source['key'] ?? null),
-                        'label' => $this->nullableString($source['label'] ?? $source['source'] ?? $source['ref'] ?? null),
-                        'url' => $this->nullableString($source['url'] ?? null),
+                        'label' => $label,
+                        'url' => $url,
                         'usage' => $this->nullableString($source['usage'] ?? null),
                     ], static fn (mixed $value): bool => $value !== null);
-                    if ($public !== []) {
-                        $normalized[] = $public;
-                    }
+                    $normalized[] = $public;
                 }
             }
             if ($normalized !== []) {
@@ -507,6 +511,30 @@ final class CareerSearchEntryQualityEvaluator
         }
 
         return null;
+    }
+
+    private function canonicalFieldsMatch(array $values, string $expectedPath): bool
+    {
+        $canonicals = array_values(array_filter(
+            array_map($this->nullableString(...), $values),
+            static fn (?string $value): bool => $value !== null,
+        ));
+
+        return $canonicals !== []
+            && array_all($canonicals, static fn (string $value): bool => $value === $expectedPath);
+    }
+
+    private function publicSourceUrl(mixed $value): ?string
+    {
+        $url = $this->nullableString($value);
+        if ($url === null || filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return null;
+        }
+
+        return in_array(strtolower((string) parse_url($url, PHP_URL_SCHEME)), ['http', 'https'], true)
+            && is_string(parse_url($url, PHP_URL_HOST))
+            ? $url
+            : null;
     }
 
     private function nullableString(mixed $value): ?string

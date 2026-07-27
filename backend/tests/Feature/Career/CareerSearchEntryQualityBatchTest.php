@@ -503,6 +503,38 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $this->assertContains('source_references_missing', $locale['blockers']);
     }
 
+    public function test_source_usage_metadata_without_identity_is_not_evidence(): void
+    {
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $payload = $this->detailPayload($slug, 'en');
+        $payload['display_surface_v1']['sources'] = [
+            'references' => [[
+                'key' => 'internal-only-key',
+                'usage' => 'Career evidence validation.',
+                'url' => 'not-a-public-url',
+            ]],
+        ];
+        $this->responseCache->publishJobDetailReadModel($slug, 'en', $payload);
+
+        $locale = app(CareerSearchEntryQualityEvaluator::class)->evaluate($slug)['locales']['en'];
+
+        $this->assertSame([], $locale['source_references']);
+        $this->assertContains('source_references_missing', $locale['blockers']);
+    }
+
+    public function test_every_populated_detail_canonical_field_must_match(): void
+    {
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $payload = $this->detailPayload($slug, 'en');
+        $payload['seo_contract']['canonical_url'] = '/en/career/jobs/'.$slug;
+        $payload['seo_contract']['canonical_path'] = '/zh/career/jobs/'.$slug;
+        $this->responseCache->publishJobDetailReadModel($slug, 'en', $payload);
+
+        $locale = app(CareerSearchEntryQualityEvaluator::class)->evaluate($slug)['locales']['en'];
+
+        $this->assertContains('canonical_url_mismatch', $locale['blockers']);
+    }
+
     public function test_index_item_canonical_must_match_exact_locale_and_slug(): void
     {
         $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
@@ -510,6 +542,7 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $zh = $this->responseCache->jobIndexPayload('zh-CN');
         foreach ($en['items'] as &$item) {
             if (data_get($item, 'identity.canonical_slug') === $slug) {
+                $item['seo_contract']['canonical_url'] = '/en/career/jobs/'.$slug;
                 $item['seo_contract']['canonical_path'] = '/zh/career/jobs/'.$slug;
             }
         }
