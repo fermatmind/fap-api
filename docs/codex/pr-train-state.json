@@ -100679,7 +100679,7 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "post_rebase_github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "96d199f0aececb37553b481d29760ec51aacfa42",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
@@ -100704,18 +100704,18 @@
         "evidence": "After rebasing onto origin/main 685ab5bf90b7168854f6f200f058400f37bed99e, the related Career/review selection passed 59 tests / 1450 assertions and the focused classifier selection passed 2 tests / 6 assertions. Scoped Pint passed all 120 selected files. API route discovery remains 224 lines; Composer strict validation/audit passed; manifest YAML and ledger JSON parsed; diff checks passed; and exact changed-file scope contains only the eight authorized paths."
       },
       "github_required_checks": {
-        "status": "passed_superseded_by_rebase",
-        "evidence": "Exact repaired head 27f036467ee2f76d5b2d67d812279e3eaaf92db2 passed all nine required checks. origin/main then advanced by independent Enneagram PR #3330, so a fresh complete exact-head check set is mandatory after the clean rebase onto a538c5034f33f2d004051b25d6662f69c7c558c2."
+        "status": "passed",
+        "evidence": "Exact latest-main rebased head 2cb60522c2853042fb58354d40da643067e558b7 passed all nine required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload."
       },
       "exact_head_review": {
-        "status": "passed_superseded_by_rebase",
-        "evidence": "P1 thread PRRT_kwDOQn6xoM6T6s_w is resolved and Codex exact-head review found no major issues at 27f036467ee2f76d5b2d67d812279e3eaaf92db2. The clean rebase rewrote the head, so fresh exact-head review is required."
+        "status": "passed",
+        "evidence": "P1 thread PRRT_kwDOQn6xoM6T6s_w remains resolved and Codex exact-head review found no major issues at 2cb60522c2853042fb58354d40da643067e558b7."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -100785,8 +100785,13 @@
         "at": "2026-07-27T02:28:38Z",
         "status": "post_rebase_github_checks_pending",
         "note": "Repaired head 27f036467ee2f76d5b2d67d812279e3eaaf92db2 passed all nine required checks and Codex exact-head review found no major issues. Before ready_to_merge, origin/main advanced by independent Enneagram PR #3330 touching only Enneagram runtime/readback files. Rebased cleanly onto a538c5034f33f2d004051b25d6662f69c7c558c2; rewritten implementation head 96d199f0aececb37553b481d29760ec51aacfa42 passed related tests 59/1450, classifier 2/6, Pint 120 files, route/Composer/parser/diff/scope gates. Fresh exact-head checks and review are required."
+      },
+      {
+        "at": "2026-07-27T02:40:47Z",
+        "status": "ready_to_merge",
+        "note": "Exact latest-main rebased head 2cb60522c2853042fb58354d40da643067e558b7 passed all nine required GitHub checks, Codex exact-head review found no major issues, all review threads are resolved, PR is CLEAN/MERGEABLE, local validation remains green, and the eight changed paths remain exactly within scope. This ready_to_merge ledger tail must independently pass required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-27T02:28:38Z"
+    "updated_at": "2026-07-27T02:40:47Z"
   }
 }
