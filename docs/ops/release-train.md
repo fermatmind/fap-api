@@ -197,6 +197,18 @@ child fails; strict mode preserves the same heartbeat but remains fail closed.
 The heartbeat does not retry the warm and does not change CMS, database
 authority, publication, sitemap, llms, search, or candidate activation.
 
+Production queue convergence resolves each configured Supervisor entry as an
+exact process group (`<program>:*`) or, only when that group is absent, as an
+exact single process. The versioned
+`backend/scripts/deploy/restart_supervisor_program_group.sh` helper retries a
+transient inventory/restart race at most three times with a two-second delay,
+requires every resolved process to return to `RUNNING`, and never falls back
+from a known group to an unverified bare name. Required groups fail closed;
+missing or failed optional groups remain non-blocking. The helper emits only
+the configured program label, bounded attempt count, and pass/fail category;
+it does not print Supervisor output, PIDs, commands, paths, hosts, or routing
+metadata.
+
 The exact bridge candidate `49038deb50cda789e4365ea42068832ed28d6023`
 predates the bounded, non-blocking sitemap-source warm helper. When that exact
 candidate and staging run `29977064260` are selected, the production workflow

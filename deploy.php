@@ -1136,20 +1136,34 @@ task('queue:reload-workers', function () {
             'if [ -x '.escapeshellarg($supervisorctl).' ]; then echo '.escapeshellarg($supervisorctl).'; else command -v supervisorctl; fi'
         ));
         $quotedSupervisorctl = escapeshellarg($resolvedSupervisorctl);
+        $supervisorRestartScript = escapeshellarg('{{release_path}}/backend/scripts/deploy/restart_supervisor_program_group.sh');
+        $quotedSudo = escapeshellarg('/usr/bin/sudo');
+        $restartSupervisorProgram = static function (string $program, bool $required) use (
+            $quotedSupervisorctl,
+            $quotedSudo,
+            $supervisorRestartScript
+        ): string {
+            $quotedProgram = escapeshellarg($program);
+            $quotedRequired = escapeshellarg($required ? 'true' : 'false');
+
+            return "bash {$supervisorRestartScript}"
+                ." --supervisorctl={$quotedSupervisorctl}"
+                ." --sudo={$quotedSudo}"
+                ." --program={$quotedProgram}"
+                .' --attempts=3'
+                .' --delay-seconds=2'
+                ." --required={$quotedRequired}";
+        };
 
         run("sudo -n {$quotedSupervisorctl} reread");
         run("sudo -n {$quotedSupervisorctl} update");
 
         foreach ($requiredPrograms as $program) {
-            $quotedProgramAll = escapeshellarg($program.':*');
-            $quotedProgram = escapeshellarg($program);
-            run("sudo -n {$quotedSupervisorctl} restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram}");
+            run($restartSupervisorProgram($program, true));
         }
 
         foreach ($optionalPrograms as $program) {
-            $quotedProgramAll = escapeshellarg($program.':*');
-            $quotedProgram = escapeshellarg($program);
-            run("sudo -n {$quotedSupervisorctl} restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram} >/dev/null 2>&1 || true");
+            run($restartSupervisorProgram($program, false));
         }
 
         if ($legacySystemdService !== '') {

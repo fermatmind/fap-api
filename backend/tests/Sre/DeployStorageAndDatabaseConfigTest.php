@@ -731,6 +731,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     public function code_only_deploy_task_excludes_application_data_and_authority_mutations(): void
     {
         $source = $this->readRepoFile('deploy.php');
+        $restartScript = $this->readRepoFile('backend/scripts/deploy/restart_supervisor_program_group.sh');
         $start = strpos($source, "task('deploy:code-only', [");
         $this->assertNotFalse($start);
         $end = strpos($source, ']);', (int) $start);
@@ -808,6 +809,22 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("static fn (string \$program): bool => \$program !== 'fap-queue-ops'", $source);
         $this->assertStringContainsString('Require the ops queue worker for the production approval runtime topology', $source);
         $this->assertStringContainsString('production approval runtime requires the supervisor ops queue reload path', $source);
+        $this->assertStringContainsString(
+            '{{release_path}}/backend/scripts/deploy/restart_supervisor_program_group.sh',
+            $source,
+        );
+        $this->assertStringContainsString("' --attempts=3'", $source);
+        $this->assertStringContainsString("' --delay-seconds=2'", $source);
+        $this->assertStringNotContainsString(
+            'restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram}',
+            $source,
+        );
+        $this->assertStringContainsString('target_exists "${program}:*" "group"', $restartScript);
+        $this->assertStringContainsString('target_is_running "$target" "$target_kind"', $restartScript);
+        $this->assertStringContainsString(
+            'supervisor_program_restart_failed program=%s attempts=%s',
+            $restartScript,
+        );
         $this->assertStringNotContainsString("task('ensure:required-ops-queue-supervisor-program'", $source);
         $this->assertStringContainsString("after('deploy:symlink', 'queue:reload-workers');", $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);
