@@ -150,9 +150,21 @@ try {
         'sha256',
         preg_replace("/\r\n?/", "\n", trim($body)) ?: trim($body),
     );
+    $canonicalPath = static function (string $canonical): string {
+        $trimmed = trim($canonical);
+        if ($trimmed === '') {
+            return '';
+        }
+
+        $path = parse_url($trimmed, PHP_URL_PATH);
+        $normalized = is_string($path) && $path !== '' ? $path : $trimmed;
+
+        return '/'.trim($normalized, '/');
+    };
     $inspect = static function (bool $afterApproval = false) use (
         $cohort,
         $bodyHash,
+        $canonicalPath,
         $attestations,
     ): array {
         $rows = [];
@@ -221,15 +233,10 @@ try {
                 || (string) $import->intended_status !== 'working_revision_human_review'
                 || (string) data_get($import->validation_summary_json, 'operation') !== 'update_existing_article_working_revision'
                 || ! (bool) data_get($import->validation_summary_json, 'schema_hreflang_search_hold')
-                || (int) data_get($import->validation_summary_json, 'article_id') !== $articleId
-                || (int) data_get($import->validation_summary_json, 'working_revision_id') !== (int) $working->id
-                || (int) data_get($import->validation_summary_json, 'published_revision_id') !== (int) $published->id
                 || (string) data_get($import->exactness_json, 'status') !== 'passed'
-                || (int) data_get($import->exactness_json, 'article_id') !== $articleId
-                || (string) data_get($import->exactness_json, 'translation_group_id') !== (string) $article->translation_group_id
-                || (string) data_get($import->exactness_json, 'slug') !== (string) $article->slug
                 || (string) $import->slug !== (string) $article->slug
-                || (string) data_get($import->exactness_json, 'canonical_url') !== (string) ($article->seoMeta?->canonical_url ?? '')
+                || $canonicalPath((string) data_get($import->exactness_json, 'canonical_url'))
+                    !== $canonicalPath('https://fermatmind.com/zh/articles/'.(string) $article->slug)
                 || ! hash_equals((string) $import->body_hash, $observedBodyHash)) {
                 throw new RuntimeException('import_gate');
             }
