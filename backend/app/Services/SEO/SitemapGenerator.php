@@ -111,9 +111,14 @@ class SitemapGenerator
 
         $urls = collect($urls)
             ->filter(static function (array $url): bool {
-                $path = parse_url(trim((string) ($url['loc'] ?? '')), PHP_URL_PATH);
+                $parts = parse_url(trim((string) ($url['loc'] ?? '')));
+                $path = is_array($parts) ? ($parts['path'] ?? null) : null;
                 if (! is_string($path) || preg_match('#^/(?:en|zh)/personality/big-five(?:/|$)#', $path) !== 1) {
                     return true;
+                }
+
+                if (array_key_exists('query', $parts) || array_key_exists('fragment', $parts)) {
+                    return false;
                 }
 
                 return BigFiveCanonicalRouteCatalog::isCanonicalPath($path);

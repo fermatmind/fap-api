@@ -100800,7 +100800,7 @@
     "base": "main",
     "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
-    "status": "github_checks_pending",
+    "status": "review_fix_local_validation_passed",
     "depends_on": [],
     "commit_sha": "915608f4374e2dd9fb68003fcf0b6c528457a866",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
@@ -100846,8 +100846,13 @@
         "at": "2026-07-27T06:29:00Z",
         "status": "github_checks_pending",
         "note": "Committed exact five-file scope at 915608f4374e2dd9fb68003fcf0b6c528457a866, pushed the task branch, and opened PR #3337. Required GitHub checks and exact-head review are pending; no production or cache action occurred."
+      },
+      {
+        "at": "2026-07-27T06:40:00Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine required checks passed on head 16acbc1255f31a5627c8f1878300bd73727f0930. Exact-head review then identified one in-scope P2: query or fragment-bearing Big Five URLs could pass path-only catalog validation. The gate now rejects both URL components fail-closed; positive and negative focused contracts pass with 50 assertions, the full sitemap generator/source suite remains at 886 assertions, and scoped Pint passes."
       }
     ],
-    "updated_at": "2026-07-27T06:29:00Z"
+    "updated_at": "2026-07-27T06:40:00Z"
   }
 }

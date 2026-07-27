@@ -369,6 +369,25 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
                 'published_at' => now(),
             ]));
         }
+        foreach ([
+            'query-bearing-hub' => '/zh/personality/big-five?preview=1',
+            'fragment-bearing-hub' => '/zh/personality/big-five#preview',
+        ] as $slug => $canonicalPath) {
+            ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
+                'org_id' => 0,
+                'slug' => $slug,
+                'path' => '/zh/'.$slug,
+                'canonical_path' => $canonicalPath,
+                'kind' => ContentPage::KIND_POLICY,
+                'locale' => 'zh-CN',
+                'title' => $slug,
+                'content_md' => 'Reserved Big Five namespace query or fragment fixture.',
+                'status' => ContentPage::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => true,
+                'published_at' => now(),
+            ]));
+        }
         app(PublicCareerAuthorityResponseCache::class)->warm();
 
         $paths = collect(app(SitemapGenerator::class)->generateUrls())
@@ -388,6 +407,8 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         self::assertFalse(BigFiveCanonicalRouteCatalog::isCanonicalPath('/zh/personality/big-five/source-review-policy'));
         self::assertNotContains('https://fermatmind.com/zh/personality/big-five/methodology', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality/big-five/source-review-policy', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five?preview=1', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five#preview', $paths->all());
         self::assertSame(104, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
             ->whereIn('locale', ['en', 'zh-CN'])
