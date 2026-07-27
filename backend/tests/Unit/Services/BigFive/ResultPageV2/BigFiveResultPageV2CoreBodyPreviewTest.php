@@ -1100,6 +1100,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_index52_projection_repair_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityMbtiIndex52ProjectionRepair.php',
+            'backend/app/Services/Cms/MbtiIndex52ProjectionRepairPackage.php',
+            'backend/app/Services/Cms/MbtiIndex52ProjectionRepairService.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Cms/MbtiIndex53ProjectionPublisher.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_cms_import_draft_dry_run_files(): void
     {
         $changed = [
@@ -6649,6 +6665,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiIndex52ProjectionRepairFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCmsImportDraftDryRunFile($file)) {
                 continue;
             }
@@ -8688,6 +8708,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/MbtiCrossPublisher49ContentService.php',
             'backend/app/Services/Cms/MbtiCrossPublisher49IndexabilityService.php',
             'backend/app/Services/Cms/MbtiCrossPublisher49Package.php',
+        ], true);
+    }
+
+    private function isMbtiIndex52ProjectionRepairFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbtiIndex52ProjectionRepair.php',
+            'backend/app/Services/Cms/MbtiIndex52ProjectionRepairPackage.php',
+            'backend/app/Services/Cms/MbtiIndex52ProjectionRepairService.php',
         ], true);
     }
 
