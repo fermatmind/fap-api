@@ -1257,6 +1257,7 @@ class SitemapGenerator
             $decodedPath = rawurldecode($decodedPath);
             $remainingPasses--;
         } while ($decodedPath !== $previousPath && $remainingPasses > 0);
+        $decodedPath = str_replace('\\', '/', $decodedPath);
 
         $segments = [];
         foreach (explode('/', $decodedPath) as $segment) {
