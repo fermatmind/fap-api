@@ -117,6 +117,16 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             "write_state='committed'",
             "stage='revalidate_active_release_before_apply'",
             'latest_current_release="$(readlink -f "$deploy_path/current")"',
+            "stage='command_preflight_rejected'",
+            'command_error_count',
+            'command_error_set_sha256',
+            'command_error_codes',
+            'sort_by(.article_id, .field, .code)',
+            'test("^[A-Za-z0-9_.-]{1,128}$")',
+            'test("^[a-z0-9_]{1,128}$")',
+            'install_error_trap()',
+            'install_error_trap',
+            'trap - ERR',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }
@@ -126,6 +136,16 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             substr_count($runner, 'php artisan articles:promote-existing-working-revision'),
             'The runner may perform one dry-run and one atomic apply, never 13 per-article promotions.',
         );
+        $this->assertSame(
+            4,
+            substr_count($runner, 'install_error_trap'),
+            'The runner must declare the trap installer, install it initially, and restore it after both bounded command captures.',
+        );
+        $this->assertSame(
+            3,
+            substr_count($runner, 'trap - ERR'),
+            'The runner must clear the trap in its handler and around both bounded command captures.',
+        );
         $this->assertStringNotContainsString('for target in', $runner);
         $this->assertStringNotContainsString('while read', $runner);
         $this->assertStringNotContainsString('articles:release-closeout', $runner);
@@ -134,6 +154,9 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
         $this->assertStringNotContainsString('php artisan migrate', $runner);
         $this->assertStringNotContainsString('queue:restart', $runner);
         $this->assertStringNotContainsString('deploy:symlink', $runner);
+        $this->assertStringNotContainsString('.message', $runner);
+        $this->assertStringNotContainsString('exception', strtolower($runner));
+        $this->assertStringNotContainsString('content_md', $runner);
     }
 
     public function test_command_disables_per_article_audit_follow_up_and_discoverability_cache_flush(): void
