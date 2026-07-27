@@ -100990,7 +100990,7 @@
     "base": "main",
     "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [],
     "commit_sha": "6ea26cd8c2a851e98cf59a901fbea8e6846c9a76",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
@@ -101002,13 +101002,13 @@
       "composer_audit_locked": "passed: 0 advisories",
       "ci_verify_mbti": "passed: full repository gate",
       "yaml_json_and_diff_scope": "passed",
-      "github_required_checks": "pending on latest-main merge head",
-      "exact_head_review": "pending on latest-main merge head"
+      "github_required_checks": "passed: 9/9 on exact head 43c3749e66b6ddeefb4fe4f575434e628c1d6d9f",
+      "exact_head_review": "passed: no major issues on exact head 43c3749e66b6ddeefb4fe4f575434e628c1d6d9f; 0 unresolved threads"
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101078,8 +101078,13 @@
         "at": "2026-07-27T07:37:00Z",
         "status": "github_checks_pending",
         "note": "Latest-main integration passed the focused Big Five sitemap contract (62 assertions), complete sitemap generator/source contracts (886 assertions), scoped Pint, Composer validate/audit, and the full ci_verify_mbti repository gate. Generated Big Five compiled artifacts were restored to their exact tracked bytes and excluded from scope. Fresh exact-head GitHub checks and review remain pending."
+      },
+      {
+        "at": "2026-07-27T07:42:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 43c3749e66b6ddeefb4fe4f575434e628c1d6d9f passed all nine required checks, exact-head Codex review reported no major issues, review threads are 0, and GitHub reports MERGEABLE/CLEAN. This ledger-only tail records the mandatory ready_to_merge transition; production deploy and cache actions remain unauthorized."
       }
     ],
-    "updated_at": "2026-07-27T07:37:00Z"
+    "updated_at": "2026-07-27T07:42:00Z"
   }
 }
