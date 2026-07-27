@@ -146,6 +146,38 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('non-standard deployment requires exact-SHA staging evidence or an exact isolated Runtime 46 receipt.', $eligibility);
     }
 
+    public function test_index52_isolated_candidate_composes_only_staged_read_model_blobs_without_authority_writes(): void
+    {
+        $workflow = $this->workflow();
+        $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
+        $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
+        $codeOnlyStart = strpos($deployer, "task('deploy:code-only', [");
+        $this->assertIsInt($codeOnlyStart);
+        $codeOnlyEnd = strpos($deployer, ']);', $codeOnlyStart);
+        $this->assertIsInt($codeOnlyEnd);
+        $codeOnlyTask = substr($deployer, $codeOnlyStart, $codeOnlyEnd - $codeOnlyStart + 3);
+
+        foreach ([
+            'INDEX52_CANDIDATE_SHA="9d2877a7e519f768fd741398e76777620770fb71"',
+            'INDEX52_ACTIVE_SHA="e7ed3b9e894730ff0f973687eb552337db5c6db9"',
+            'INDEX52_STAGED_MAIN_SHA="e9166c5eae03ad13c7ef616b9ca7c528d14bd582"',
+            'INDEX52_STAGING_RUN_ID="30268270565"',
+            'INDEX52_PATCH_SHA256="2cf768ab7896be204b983c377bce5d1b00771f6a5c2dd62c82d5c265b0748f00"',
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php',
+            'staging evidence accepted: exact isolated INDEX-52 runtime candidate is byte-identical to the staged main read model.',
+            'Code-only production deploy accepted exact isolated INDEX-52 runtime candidate with staged-main-byte-identical scoped files.',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $eligibility);
+        }
+
+        $this->assertStringNotContainsString('artisan:migrate', $codeOnlyTask);
+        $this->assertStringNotContainsString('artisan:scales:seed-default', $codeOnlyTask);
+        $this->assertStringNotContainsString('cms:import-landing-surface-baselines', $codeOnlyTask);
+        $this->assertStringNotContainsString('cms:import-content-page-baselines', $codeOnlyTask);
+        $this->assertStringContainsString("'deploy:publish'", $codeOnlyTask);
+    }
+
     public function test_revision_queue_restart_and_both_smoke_steps_are_mandatory(): void
     {
         $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';
