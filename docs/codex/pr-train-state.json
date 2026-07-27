@@ -100679,8 +100679,8 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "github_checks_retry_pending",
-    "commit_sha": "479b35af002a7aa7bbe706f7d7642d1e83621c79",
+    "status": "post_rebase_github_checks_pending",
+    "commit_sha": "96d199f0aececb37553b481d29760ec51aacfa42",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
       "dependencies": {
@@ -100704,12 +100704,12 @@
         "evidence": "After rebasing onto origin/main 685ab5bf90b7168854f6f200f058400f37bed99e, the related Career/review selection passed 59 tests / 1450 assertions and the focused classifier selection passed 2 tests / 6 assertions. Scoped Pint passed all 120 selected files. API route discovery remains 224 lines; Composer strict validation/audit passed; manifest YAML and ledger JSON parsed; diff checks passed; and exact changed-file scope contains only the eight authorized paths."
       },
       "github_required_checks": {
-        "status": "retry_pending",
-        "evidence": "Exact rebased head 7d674fc03facc5700d31c5edff3d4a687456e170 passed all nine required checks before the quality-tier review repair. A fresh complete exact-head check set is mandatory after pushing implementation head 479b35af002a7aa7bbe706f7d7642d1e83621c79 and its ledger tail."
+        "status": "passed_superseded_by_rebase",
+        "evidence": "Exact repaired head 27f036467ee2f76d5b2d67d812279e3eaaf92db2 passed all nine required checks. origin/main then advanced by independent Enneagram PR #3330, so a fresh complete exact-head check set is mandatory after the clean rebase onto a538c5034f33f2d004051b25d6662f69c7c558c2."
       },
       "exact_head_review": {
-        "status": "repair_implemented_review_pending",
-        "evidence": "P1 thread PRRT_kwDOQn6xoM6T6s_w is addressed in implementation head 479b35af002a7aa7bbe706f7d7642d1e83621c79: content quality is now an explicit independent resolver input; only exact Tier A is eligible; unknown, Tier B, Tier D, and unsupported values fail closed; the current public bridge supplies unknown rather than deriving quality from reviewer approval. Fresh exact-head review is pending."
+        "status": "passed_superseded_by_rebase",
+        "evidence": "P1 thread PRRT_kwDOQn6xoM6T6s_w is resolved and Codex exact-head review found no major issues at 27f036467ee2f76d5b2d67d812279e3eaaf92db2. The clean rebase rewrote the head, so fresh exact-head review is required."
       }
     },
     "scope_validation": {
@@ -100780,8 +100780,13 @@
         "at": "2026-07-27T02:16:13Z",
         "status": "github_checks_retry_pending",
         "note": "Rebased the same-scope P1 repair cleanly onto independent origin/main 685ab5bf90b7168854f6f200f058400f37bed99e. Implementation head 479b35af002a7aa7bbe706f7d7642d1e83621c79 passed related Career/review tests 59/1450, classifier tests 2/6, Pint 120 files, route 224 lines, Composer strict validation/audit, YAML/JSON parsing, diff checks, and exact eight-path scope validation. Fresh exact-head GitHub checks and review are required after force-push with lease."
+      },
+      {
+        "at": "2026-07-27T02:28:38Z",
+        "status": "post_rebase_github_checks_pending",
+        "note": "Repaired head 27f036467ee2f76d5b2d67d812279e3eaaf92db2 passed all nine required checks and Codex exact-head review found no major issues. Before ready_to_merge, origin/main advanced by independent Enneagram PR #3330 touching only Enneagram runtime/readback files. Rebased cleanly onto a538c5034f33f2d004051b25d6662f69c7c558c2; rewritten implementation head 96d199f0aececb37553b481d29760ec51aacfa42 passed related tests 59/1450, classifier 2/6, Pint 120 files, route/Composer/parser/diff/scope gates. Fresh exact-head checks and review are required."
       }
     ],
-    "updated_at": "2026-07-27T02:16:13Z"
+    "updated_at": "2026-07-27T02:28:38Z"
   }
 }
