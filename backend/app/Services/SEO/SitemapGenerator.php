@@ -111,7 +111,12 @@ class SitemapGenerator
 
         $urls = collect($urls)
             ->filter(static function (array $url): bool {
-                $parts = parse_url(trim((string) ($url['loc'] ?? '')));
+                $loc = trim((string) ($url['loc'] ?? ''));
+                if (preg_match('/[\x00-\x1F\x7F]/', $loc) === 1) {
+                    return false;
+                }
+
+                $parts = parse_url($loc);
                 $path = is_array($parts) ? ($parts['path'] ?? null) : null;
                 if (! is_string($path)) {
                     return true;

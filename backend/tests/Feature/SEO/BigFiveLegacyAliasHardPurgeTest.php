@@ -375,6 +375,7 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             'dot-segment-methodology' => '/zh/personality/x/../big-five/methodology',
             'encoded-methodology' => '/zh/personality/%62ig-five/methodology',
             'backslash-methodology' => '/zh/personality\big-five/methodology',
+            'control-character-methodology' => "/zh/personality/bi\ng-five/methodology",
         ] as $slug => $canonicalPath) {
             ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
                 'org_id' => 0,
@@ -415,6 +416,7 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         self::assertNotContains('https://fermatmind.com/zh/personality/x/../big-five/methodology', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality/%62ig-five/methodology', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality\big-five/methodology', $paths->all());
+        self::assertNotContains("https://fermatmind.com/zh/personality/bi\ng-five/methodology", $paths->all());
         self::assertSame(104, PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
             ->whereIn('locale', ['en', 'zh-CN'])
