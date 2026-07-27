@@ -101093,8 +101093,13 @@
         "at": "2026-07-27T08:22:00Z",
         "status": "ready_to_merge",
         "note": "Exact-head review identified that a canonical-path ContentPage could replace a depublished Big Five authority row. The sitemap-only gate now requires each reserved canonical URL to be emitted by the eligible Big Five asset producer as well as the canonical catalog. The focused contract passes with 70 assertions, the complete sitemap suite passes with 1045 assertions, scoped Pint passes, and the full ci_verify_mbti repository gate passes. Generated compiled artifacts were restored to exact tracked bytes."
+      },
+      {
+        "at": "2026-07-27T08:42:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review identified a two-query authority time-of-check/time-of-use window. Sitemap generation now reads the personality public-content authority once and reuses that immutable in-process snapshot for both merged enumeration and Big Five eligibility filtering. Focused and complete sitemap contracts, scoped Pint, and the full ci_verify_mbti repository gate pass; generated compiled artifacts were restored to exact tracked bytes."
       }
     ],
-    "updated_at": "2026-07-27T08:22:00Z"
+    "updated_at": "2026-07-27T08:42:00Z"
   }
 }

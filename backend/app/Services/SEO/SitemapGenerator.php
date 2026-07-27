@@ -96,13 +96,24 @@ class SitemapGenerator
 
     public function generateUrls(): array
     {
+        return $this->generateUrlsFromAuthoritySnapshot(
+            $this->getPersonalityPublicContentAssetUrls(),
+        );
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $personalityPublicContentAssetUrls
+     * @return array<int, array<string, mixed>>
+     */
+    private function generateUrlsFromAuthoritySnapshot(array $personalityPublicContentAssetUrls): array
+    {
         $urls = array_merge(
             $this->getScaleUrls(),
             $this->getArticleUrls(),
             $this->getCareerJobUrls(),
             $this->getCareerGuideUrls(),
             $this->getPersonalityUrls(),
-            $this->getPersonalityPublicContentAssetUrls(),
+            $personalityPublicContentAssetUrls,
             $this->getPersonalityComparisonUrls(),
             $this->getTopicUrls(),
             $this->getContentPageUrls(),
@@ -123,7 +134,8 @@ class SitemapGenerator
 
     public function generateSitemapUrls(): array
     {
-        $eligibleBigFiveLocs = collect($this->getPersonalityPublicContentAssetUrls())
+        $personalityPublicContentAssetUrls = $this->getPersonalityPublicContentAssetUrls();
+        $eligibleBigFiveLocs = collect($personalityPublicContentAssetUrls)
             ->filter(static function (array $url): bool {
                 $loc = trim((string) ($url['loc'] ?? ''));
                 $path = parse_url($loc, PHP_URL_PATH);
@@ -133,7 +145,7 @@ class SitemapGenerator
             ->mapWithKeys(static fn (array $url): array => [(string) $url['loc'] => true])
             ->all();
 
-        return collect($this->generateUrls())
+        return collect($this->generateUrlsFromAuthoritySnapshot($personalityPublicContentAssetUrls))
             ->filter(static function (array $url) use ($eligibleBigFiveLocs): bool {
                 $loc = trim((string) ($url['loc'] ?? ''));
                 if (preg_match('/[\x00-\x1F\x7F]/', $loc) === 1) {
