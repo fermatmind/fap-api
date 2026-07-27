@@ -100990,25 +100990,25 @@
     "base": "main",
     "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "depends_on": [],
     "commit_sha": "6ea26cd8c2a851e98cf59a901fbea8e6846c9a76",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
     "checks": {
-      "focused_big_five_sitemap_contract": "passed: 1 test, 62 assertions",
-      "sitemap_generator_and_source_contracts": "passed: 25 tests, 886 assertions",
+      "focused_big_five_sitemap_contract": "passed: 1 test, 70 assertions",
+      "sitemap_generator_and_source_contracts": "passed: complete sitemap suite, 1045 assertions",
       "pint_scoped": "passed",
       "composer_validate_strict": "passed",
       "composer_audit_locked": "passed: 0 advisories",
       "ci_verify_mbti": "passed: full repository gate",
       "yaml_json_and_diff_scope": "passed",
-      "github_required_checks": "passed: 9/9 on exact head 43c3749e66b6ddeefb4fe4f575434e628c1d6d9f",
-      "exact_head_review": "passed: no major issues on exact head 43c3749e66b6ddeefb4fe4f575434e628c1d6d9f; 0 unresolved threads"
+      "github_required_checks": "pending on final cross-framework authority fix head",
+      "exact_head_review": "pending on final cross-framework authority fix head"
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101098,8 +101098,18 @@
         "at": "2026-07-27T08:42:00Z",
         "status": "ready_to_merge",
         "note": "Exact-head review identified a two-query authority time-of-check/time-of-use window. Sitemap generation now reads the personality public-content authority once and reuses that immutable in-process snapshot for both merged enumeration and Big Five eligibility filtering. Focused and complete sitemap contracts, scoped Pint, and the full ci_verify_mbti repository gate pass; generated compiled artifacts were restored to exact tracked bytes."
+      },
+      {
+        "at": "2026-07-27T08:51:00Z",
+        "status": "github_checks_pending",
+        "note": "Exact-head review identified cross-framework authority shadowing and stale merge-readiness evidence. The single snapshot now preserves an internal framework marker, admits reserved Big Five eligibility only from Big Five rows, strips the marker before public enumeration, and resets manifest/state to pending until fresh exact-head checks and review complete."
+      },
+      {
+        "at": "2026-07-27T08:59:00Z",
+        "status": "github_checks_pending",
+        "note": "Cross-framework authority provenance fix passed the focused Big Five sitemap contract (70 assertions), the complete sitemap suite (1045 assertions), scoped Pint, and the full ci_verify_mbti repository gate. Generated compiled artifacts were restored to exact tracked bytes; fresh exact-head required checks and review remain pending."
       }
     ],
-    "updated_at": "2026-07-27T08:42:00Z"
+    "updated_at": "2026-07-27T08:59:00Z"
   }
 }

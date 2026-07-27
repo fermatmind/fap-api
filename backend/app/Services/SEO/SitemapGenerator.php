@@ -121,6 +121,11 @@ class SitemapGenerator
         );
 
         $urls = collect($urls)
+            ->map(static function (array $url): array {
+                unset($url['__authority_framework']);
+
+                return $url;
+            })
             ->unique('loc')
             ->values()
             ->all();
@@ -137,6 +142,10 @@ class SitemapGenerator
         $personalityPublicContentAssetUrls = $this->getPersonalityPublicContentAssetUrls();
         $eligibleBigFiveLocs = collect($personalityPublicContentAssetUrls)
             ->filter(static function (array $url): bool {
+                if (($url['__authority_framework'] ?? null) !== PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE) {
+                    return false;
+                }
+
                 $loc = trim((string) ($url['loc'] ?? ''));
                 $path = parse_url($loc, PHP_URL_PATH);
 
@@ -477,6 +486,7 @@ class SitemapGenerator
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => 'personality-public-content:'.$frameworkKey.':'.($row->locale === 'en' ? 'en' : 'zh').':'.strtolower((string) $row->entity_key),
                 'updated_at' => $lastmod->toDateTimeString(),
+                '__authority_framework' => $framework,
             ];
         }
 

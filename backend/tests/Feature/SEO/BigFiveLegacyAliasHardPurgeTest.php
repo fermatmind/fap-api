@@ -453,6 +453,36 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             ) === $depublishedPath);
         self::assertInstanceOf(PersonalityPublicContentAsset::class, $depublishedAsset);
         $depublishedAsset->forceFill(['sitemap_eligible' => false])->save();
+        PersonalityPublicContentAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'shadow-openness',
+            'slug' => 'enneagram/shadow-openness',
+            'locale' => 'en',
+            'title' => 'Enneagram shadow',
+            'summary' => 'summary',
+            'content_sections_json' => [['key' => 'body', 'title' => 'Body', 'body_md' => 'Body']],
+            'seo_json' => [],
+            'canonical_json' => ['path' => $depublishedPath],
+            'hreflang_json' => ['en' => $depublishedPath],
+            'faq_json' => [],
+            'schema_json' => [],
+            'method_boundary_json' => [],
+            'evidence_notes_json' => [],
+            'authority_json' => [],
+            'internal_links_json' => [],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'seo_discoverability_released',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'test-cross-framework-shadow',
+            'source_hash' => str_repeat('c', 64),
+        ]);
         ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
             'org_id' => 0,
             'slug' => 'big-five-openness-shadow',
