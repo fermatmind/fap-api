@@ -96,6 +96,8 @@ jobs:
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           CONTENT_SET_SHA256: b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e
           TARGET_SET_SHA256: 67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f934c
+          PREVIEW_EVIDENCE_SHA256: d8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9
+          PREVIEW_REVISION_SET_SHA256: ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95
           REVIEW_RUN_ID: "30231516428"
           REVIEW_RUN_ATTEMPT: "1"
           REVIEW_CONTROL_PLANE_SHA: 685ab5bf90b7168854f6f200f058400f37bed99e
@@ -115,6 +117,48 @@ jobs:
           test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
           git fetch --no-tags origin "$EXPECTED_RELEASE_SHA"
           git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+
+          preview_evidence="backend/docs/seo/evidence/seo-13-authenticated-preview-qa-2026-07-27.json"
+          printf '%s  %s\n' "$PREVIEW_EVIDENCE_SHA256" "$preview_evidence" | sha256sum -c -
+          preview_attestation_commit="320601d73f8726046ef4ee662f9025cb97334db5"
+          preview_attestation_path="backend/docs/seo/seo-13-article-refresh-2026-07-26.md"
+          test "$(git rev-parse "${preview_attestation_commit}:${preview_attestation_path}")" = \
+            "94e54aef74ba974e383d21c0b59b5bacdaeded13"
+          test "$(git show "${preview_attestation_commit}:${preview_attestation_path}" | sha256sum | awk '{print $1}')" = \
+            "217d6bb81fdf7229df471b4aadbf3a9a2dec8fbda8d5b0fe20ab6cfdfda29e6d"
+          jq -e \
+            --arg content "$CONTENT_SET_SHA256" \
+            --arg targets "$TARGET_SET_SHA256" \
+            --arg preview_revisions "$PREVIEW_REVISION_SET_SHA256" \
+            '.contract_version == "seo13.authenticated_preview_qa.v1"
+             and .status == "PASS"
+             and .evidence_source == "solo_owner_authenticated_cms_preview"
+             and .attestation_source_commit_sha == "320601d73f8726046ef4ee662f9025cb97334db5"
+             and .attestation_source_file_sha256 == "217d6bb81fdf7229df471b4aadbf3a9a2dec8fbda8d5b0fe20ab6cfdfda29e6d"
+             and .identity_source_review_approval_run_id == 30231516428
+             and .identity_source_review_approval_run_attempt == 1
+             and .source_release_sha == "de9865c8cdde21a6359b60052f426f867abe0ead"
+             and .draft_apply_run_id == 30228428454
+             and .draft_apply_run_attempt == 1
+             and .content_set_sha256 == $content
+             and .target_set_sha256 == $targets
+             and .preview_revision_set_sha256 == $preview_revisions
+             and .target_count == 13
+             and (.rows | length) == 13
+             and ([.rows[].article_id] | sort) == [1,2,5,6,7,9,10,11,12,13,14,15,16]
+             and ([.rows[].working_revision_id] | sort) == [434,435,436,437,438,439,440,441,442,443,444,445,446]
+             and ([.rows[].locale] | all(. == "zh-CN"))
+             and ([.rows[].authenticated_preview_status] | all(. == "passed"))
+             and ([.rows[].rendered_h1_count] | all(. == 1))
+             and ([.rows[].visible_quick_answer] | all(. == true))
+             and ([.rows[].visible_faq] | all(. == true))
+             and ([.rows[].visible_references] | all(. == true))
+             and .preview_boundary.robots == "noindex,noarchive,nosnippet"
+             and .preview_boundary.banner == "Draft preview only"
+             and .preview_boundary.cache_control == "no-store"
+             and .forbidden_marker_count == 0
+             and .private_url_finding_count == 0
+             and .missing_image_alt_count == 0' "$preview_evidence" >/dev/null
 
           review_run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${REVIEW_RUN_ID}")"
           jq -e \
@@ -225,6 +269,8 @@ jobs:
                  and .revision_set_sha256 == $revisions
                  and .content_set_sha256 == $content
                  and .target_set_sha256 == $targets
+                 and .preview_evidence_sha256 == "d8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9"
+                 and .preview_revision_set_sha256 == "ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95"
                  and .review_approval_run_id == 30231516428
                  and .review_approval_run_attempt == 1
                  and .review_approval_control_plane_sha == "685ab5bf90b7168854f6f200f058400f37bed99e"
@@ -403,6 +449,8 @@ jobs:
              and .release_name == $release_name
              and .target_count == 13
              and (.rows | length) == 13
+             and .preview_evidence_sha256 == "d8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9"
+             and .preview_revision_set_sha256 == "ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95"
              and (if $mode == "preflight"
                   then .status == "PASS_PREFLIGHT"
                        and .production_write_execution == false

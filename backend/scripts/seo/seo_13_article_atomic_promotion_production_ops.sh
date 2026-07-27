@@ -5,6 +5,8 @@ set -Eeuo pipefail
 contract_version='seo13.article_atomic_promotion.production_ops.v1'
 content_set_sha256='b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e'
 target_set_sha256='67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f934c'
+preview_evidence_sha256='d8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9'
+preview_revision_set_sha256='ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95'
 stage='bootstrap'
 release_sha=''
 release_name=''
@@ -121,6 +123,8 @@ stage='validate_command_preflight'
 jq -e \
     --arg content "$content_set_sha256" \
     --arg targets "$target_set_sha256" \
+    --arg preview_evidence "$preview_evidence_sha256" \
+    --arg preview_revisions "$preview_revision_set_sha256" \
     '
         .contract_version == "seo13.article_atomic_promotion.v1"
         and .ok == true
@@ -145,6 +149,8 @@ jq -e \
         and ([.rows[].seo_robots] | all(. == "index,follow"))
         and .content_set_sha256 == $content
         and .target_set_sha256 == $targets
+        and .preview_evidence_sha256 == $preview_evidence
+        and .preview_revision_set_sha256 == $preview_revisions
         and (.preflight_state_sha256 | test("^[0-9a-f]{64}$"))
         and (.revision_set_sha256 | test("^[0-9a-f]{64}$"))
         and .production_write_execution == false
@@ -172,6 +178,8 @@ if [ "$mode" = 'preflight' ]; then
         --arg release_name "$release_name" \
         --arg content "$content_set_sha256" \
         --arg targets "$target_set_sha256" \
+        --arg preview_evidence "$preview_evidence_sha256" \
+        --arg preview_revisions "$preview_revision_set_sha256" \
         --arg state "$state_sha256" \
         --arg revisions "$revision_set_sha256" \
         --argjson rows "$(jq -c '[.rows[] | {
@@ -204,6 +212,8 @@ if [ "$mode" = 'preflight' ]; then
             release_name: $release_name,
             content_set_sha256: $content,
             target_set_sha256: $targets,
+            preview_evidence_sha256: $preview_evidence,
+            preview_revision_set_sha256: $preview_revisions,
             preflight_state_sha256: $state,
             revision_set_sha256: $revisions,
             target_count: 13,
@@ -269,6 +279,8 @@ stage='validate_apply_readback'
 jq -e \
     --arg content "$content_set_sha256" \
     --arg targets "$target_set_sha256" \
+    --arg preview_evidence "$preview_evidence_sha256" \
+    --arg preview_revisions "$preview_revision_set_sha256" \
     --arg state "$expected_state_sha256" \
     --arg revisions "$expected_revision_set_sha256" \
     '
@@ -282,6 +294,8 @@ jq -e \
         and ([.rows[] | .published_revision_id == .working_revision_id] | all)
         and .content_set_sha256 == $content
         and .target_set_sha256 == $targets
+        and .preview_evidence_sha256 == $preview_evidence
+        and .preview_revision_set_sha256 == $preview_revisions
         and .preflight_state_sha256 == $state
         and .revision_set_sha256 == $revisions
         and .production_write_execution == true
@@ -305,6 +319,8 @@ jq -n \
     --arg release_name "$release_name" \
     --arg content "$content_set_sha256" \
     --arg targets "$target_set_sha256" \
+    --arg preview_evidence "$preview_evidence_sha256" \
+    --arg preview_revisions "$preview_revision_set_sha256" \
     --arg state "$expected_state_sha256" \
     --arg revisions "$expected_revision_set_sha256" \
     --argjson rows "$(jq -c '[.rows[] | {
@@ -337,6 +353,8 @@ jq -n \
         release_name: $release_name,
         content_set_sha256: $content,
         target_set_sha256: $targets,
+        preview_evidence_sha256: $preview_evidence,
+        preview_revision_set_sha256: $preview_revisions,
         preflight_state_sha256: $state,
         revision_set_sha256: $revisions,
         target_count: 13,

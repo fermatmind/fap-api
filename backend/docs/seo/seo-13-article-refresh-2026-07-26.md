@@ -173,8 +173,15 @@ one immutable apply phrase:
 Before either promotion mode can run, workflow eligibility also downloads and
 validates the immutable successful review-approval apply receipt from run
 `30231516428`, attempt `1`. That receipt binds the exact 13 approved working
-revision IDs and authenticated-preview/editorial-review evidence to content set
+revision IDs and editorial-review evidence to content set
 `b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e`.
+Authenticated-preview QA is independently recorded in the immutable
+`docs/seo/evidence/seo-13-authenticated-preview-qa-2026-07-27.json` contract,
+whose locked SHA-256 is
+`d8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9`.
+It binds all 13 article IDs, slugs, `zh-CN` locales, working revision IDs,
+title/body hashes, one rendered H1, visible quick-answer/FAQ/reference
+sections, and the noindex/no-store preview boundary.
 The deployed command independently verifies the committed cohort lock and
 every package file hash, then compares each live `zh-CN` working revision's
 title, excerpt, body, SEO title, SEO description, canonical, slug, and

@@ -33,6 +33,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
     private const SEO13_COHORT_PATH = 'docs/seo/import-packages/seo-13-article-refresh-2026-07-26';
 
+    private const SEO13_PREVIEW_EVIDENCE_PATH = 'docs/seo/evidence/seo-13-authenticated-preview-qa-2026-07-27.json';
+
+    private const SEO13_PREVIEW_EVIDENCE_SHA256 = 'd8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9';
+
+    private const SEO13_PREVIEW_REVISION_SET_SHA256 = 'ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95';
+
     private const PRIVATE_ROUTE_PATTERN = '~(?<![A-Za-z0-9_-])/(?:result|results|orders|order|share|pay|payment|history|take)(?:/|[?#\s)"\']|$)~i';
 
     private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:result_id|order_id|payment_id|token|score|user_id|report_id)=/i';
@@ -391,6 +397,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
         try {
             $contentLocks = $this->lockedContentTargets();
+            $previewLocks = $this->lockedPreviewTargets();
         } catch (Throwable) {
             $snapshot = $this->emptyBatchSnapshot();
             $snapshot['errors'][] = $this->issue(
@@ -412,6 +419,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 claimWarningAcknowledged: false,
             );
             foreach ($this->contentLockErrors($row, $contentLocks[$target['article_id']] ?? null) as $error) {
+                $row['errors'][] = $error;
+                $row['ok'] = false;
+            }
+            foreach ($this->previewLockErrors($row, $previewLocks[$target['article_id']] ?? null) as $error) {
                 $row['errors'][] = $error;
                 $row['ok'] = false;
             }
@@ -571,6 +582,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             'target_count' => count($snapshot['rows']),
             'content_set_sha256' => self::SEO13_CONTENT_SET_SHA256,
             'target_set_sha256' => self::SEO13_TARGET_SET_SHA256,
+            'preview_evidence_sha256' => self::SEO13_PREVIEW_EVIDENCE_SHA256,
+            'preview_revision_set_sha256' => self::SEO13_PREVIEW_REVISION_SET_SHA256,
             'preflight_state_sha256' => $beforeSnapshot['preflight_state_sha256']
                 ?? $snapshot['preflight_state_sha256'],
             'revision_set_sha256' => $beforeSnapshot['revision_set_sha256']
@@ -615,6 +628,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 'target_count' => self::SEO13_TARGET_COUNT,
                 'content_set_sha256' => self::SEO13_CONTENT_SET_SHA256,
                 'target_set_sha256' => self::SEO13_TARGET_SET_SHA256,
+                'preview_evidence_sha256' => self::SEO13_PREVIEW_EVIDENCE_SHA256,
+                'preview_revision_set_sha256' => self::SEO13_PREVIEW_REVISION_SET_SHA256,
                 'preflight_state_sha256' => (string) $before['preflight_state_sha256'],
                 'revision_set_sha256' => (string) $before['revision_set_sha256'],
                 'published_revision_set_sha256' => $this->deterministicHash(array_map(
@@ -785,6 +800,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             if (! is_string($body)) {
                 throw new RuntimeException('content_set_body_unreadable');
             }
+            $normalizedBody = preg_replace("/\r\n?/", "\n", $body);
+            if (preg_match('/\A---\n.*?\n---\n(.*)\z/s', $normalizedBody, $matches) === 1) {
+                $body = (string) $matches[1];
+            }
 
             $targets[$articleId] = [
                 'article_id' => $articleId,
@@ -839,6 +858,99 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                     "content_set.{$rowField}",
                     "content_set_{$rowField}_mismatch",
                     "Live {$rowField} does not match the committed SEO 13 content cohort.",
+                );
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return array<int,array<string,mixed>>
+     */
+    private function lockedPreviewTargets(): array
+    {
+        $path = base_path(self::SEO13_PREVIEW_EVIDENCE_PATH);
+        $fileHash = hash_file('sha256', $path);
+        if (! is_string($fileHash) || ! hash_equals(self::SEO13_PREVIEW_EVIDENCE_SHA256, $fileHash)) {
+            throw new RuntimeException('preview_evidence_file_drift');
+        }
+        $contents = file_get_contents($path);
+        if (! is_string($contents)) {
+            throw new RuntimeException('preview_evidence_unreadable');
+        }
+        $evidence = json_decode($contents, true, flags: JSON_THROW_ON_ERROR);
+        if (! is_array($evidence)
+            || (string) ($evidence['contract_version'] ?? '') !== 'seo13.authenticated_preview_qa.v1'
+            || (string) ($evidence['status'] ?? '') !== 'PASS'
+            || (string) ($evidence['evidence_source'] ?? '') !== 'solo_owner_authenticated_cms_preview'
+            || (string) ($evidence['attestation_source_commit_sha'] ?? '') !== '320601d73f8726046ef4ee662f9025cb97334db5'
+            || (string) ($evidence['attestation_source_file_sha256'] ?? '') !== '217d6bb81fdf7229df471b4aadbf3a9a2dec8fbda8d5b0fe20ab6cfdfda29e6d'
+            || (int) ($evidence['identity_source_review_approval_run_id'] ?? 0) !== 30231516428
+            || (int) ($evidence['identity_source_review_approval_run_attempt'] ?? 0) !== 1
+            || (string) ($evidence['source_release_sha'] ?? '') !== 'de9865c8cdde21a6359b60052f426f867abe0ead'
+            || (int) ($evidence['draft_apply_run_id'] ?? 0) !== 30228428454
+            || (int) ($evidence['draft_apply_run_attempt'] ?? 0) !== 1
+            || ! hash_equals(self::SEO13_CONTENT_SET_SHA256, (string) ($evidence['content_set_sha256'] ?? ''))
+            || ! hash_equals(self::SEO13_TARGET_SET_SHA256, (string) ($evidence['target_set_sha256'] ?? ''))
+            || ! hash_equals(self::SEO13_PREVIEW_REVISION_SET_SHA256, (string) ($evidence['preview_revision_set_sha256'] ?? ''))
+            || (int) ($evidence['target_count'] ?? 0) !== self::SEO13_TARGET_COUNT
+            || (string) data_get($evidence, 'preview_boundary.robots') !== 'noindex,noarchive,nosnippet'
+            || (string) data_get($evidence, 'preview_boundary.banner') !== 'Draft preview only'
+            || (string) data_get($evidence, 'preview_boundary.cache_control') !== 'no-store'
+            || (int) ($evidence['forbidden_marker_count'] ?? -1) !== 0
+            || (int) ($evidence['private_url_finding_count'] ?? -1) !== 0
+            || (int) ($evidence['missing_image_alt_count'] ?? -1) !== 0
+            || count((array) ($evidence['rows'] ?? [])) !== self::SEO13_TARGET_COUNT) {
+            throw new RuntimeException('preview_evidence_contract_mismatch');
+        }
+
+        $targets = [];
+        foreach ((array) $evidence['rows'] as $row) {
+            if (! is_array($row)
+                || (string) ($row['authenticated_preview_status'] ?? '') !== 'passed'
+                || (int) ($row['rendered_h1_count'] ?? 0) !== 1
+                || ($row['visible_quick_answer'] ?? false) !== true
+                || ($row['visible_faq'] ?? false) !== true
+                || ($row['visible_references'] ?? false) !== true) {
+                throw new RuntimeException('preview_evidence_row_failed');
+            }
+            $articleId = (int) ($row['article_id'] ?? 0);
+            if ($articleId <= 0 || isset($targets[$articleId])) {
+                throw new RuntimeException('preview_evidence_target_invalid');
+            }
+            $targets[$articleId] = $row;
+        }
+        ksort($targets);
+
+        return $targets;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @param  array<string,mixed>|null  $lock
+     * @return list<array<string,mixed>>
+     */
+    private function previewLockErrors(array $row, ?array $lock): array
+    {
+        if ($lock === null) {
+            return [$this->issue('preview_evidence', 'preview_evidence_target_missing', 'Article is missing from the authenticated-preview evidence.')];
+        }
+
+        $errors = [];
+        foreach ([
+            'article_id' => 'article_id',
+            'locale' => 'locale',
+            'slug' => 'slug',
+            'working_revision_id' => 'working_revision_id',
+            'working_revision_title_hash' => 'title_sha256',
+            'working_revision_body_hash' => 'body_sha256',
+        ] as $rowField => $lockField) {
+            if ((string) ($row[$rowField] ?? '') !== (string) ($lock[$lockField] ?? '')) {
+                $errors[] = $this->issue(
+                    "preview_evidence.{$rowField}",
+                    "preview_evidence_{$rowField}_mismatch",
+                    "Live {$rowField} does not match the authenticated-preview evidence.",
                 );
             }
         }

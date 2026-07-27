@@ -64,6 +64,18 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
         $this->assertFalse($payload['production_write_execution']);
         $this->assertSame(13, $payload['target_count']);
         $this->assertCount(13, $payload['rows']);
+        $this->assertSame(
+            'd8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9',
+            $payload['preview_evidence_sha256'],
+        );
+        $this->assertSame(
+            'ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95',
+            $payload['preview_revision_set_sha256'],
+        );
+        $this->assertSame(
+            '107d577dbbb14a7a4ae55bed4f414e2ebfed6bc9b12b7f55284a7f02e4f944db',
+            $payload['rows'][0]['working_revision_body_hash'],
+        );
         $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $payload['preflight_state_sha256']);
         $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $payload['revision_set_sha256']);
         $this->assertSame($before, $this->revisionState());
@@ -544,6 +556,10 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
         );
         $body = file_get_contents($root.'/'.$package['slug'].'/'.$cms['body_markdown_file']);
         $this->assertIsString($body);
+        $normalizedBody = preg_replace("/\r\n?/", "\n", $body);
+        if (preg_match('/\A---\n.*?\n---\n(.*)\z/s', $normalizedBody, $matches) === 1) {
+            $body = (string) $matches[1];
+        }
 
         return [
             'title' => (string) $cms['title'],

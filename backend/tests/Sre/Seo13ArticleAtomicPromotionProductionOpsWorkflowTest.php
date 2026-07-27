@@ -34,6 +34,14 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             '.review_approval_control_plane_sha == "685ab5bf90b7168854f6f200f058400f37bed99e"',
             '.review_approval_state_sha256 == "ab9ce8dbf7292f1630b1dc28f0c209febf936160978f44fd2ce0f355596c262d"',
             '.review_approval_revision_set_sha256 == "b6851fd8cdbacedafb5d7d3dfa30ae65320ec636c0765f90c38fc9f1f8581466"',
+            'seo13.authenticated_preview_qa.v1',
+            'd8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9',
+            'ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95',
+            '320601d73f8726046ef4ee662f9025cb97334db5',
+            '94e54aef74ba974e383d21c0b59b5bacdaeded13',
+            '217d6bb81fdf7229df471b4aadbf3a9a2dec8fbda8d5b0fe20ab6cfdfda29e6d',
+            '.authenticated_preview_status] | all(. == "passed")',
+            '.rendered_h1_count] | all(. == 1)',
             'gh run download "$PREFLIGHT_RUN_ID"',
             '.status == "PASS_PREFLIGHT"',
             '.status == "FAIL_CLOSED"',
@@ -77,6 +85,8 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             'seo13.article_atomic_promotion.production_ops.v1',
             'b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e',
             '67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f934c',
+            'd8ec2e4ba7bbc3c920cadcddfb7dabf5c632a006bb168c7ce51fee8b888f1fa9',
+            'ffbfd7f0396a7adce52e050642bb05050e25693e092b078cd67d75efe2d7ca95',
             '--batch=seo13-20260726',
             '--expected-target-count=13',
             '--expected-state-sha256="$expected_state_sha256"',
@@ -140,6 +150,8 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
         $this->assertStringContainsString('SEO13_COHORT_LOCK_FILE_SHA256', $command);
         $this->assertStringContainsString('lockedContentTargets()', $command);
         $this->assertStringContainsString('contentLockErrors(', $command);
+        $this->assertStringContainsString('lockedPreviewTargets()', $command);
+        $this->assertStringContainsString('previewLockErrors(', $command);
         $this->assertStringContainsString('content_set_working_revision_title_hash_mismatch', $this->readRepoFile(
             'backend/tests/Feature/Console/Seo13ArticleAtomicPromotionCommandTest.php',
         ));
