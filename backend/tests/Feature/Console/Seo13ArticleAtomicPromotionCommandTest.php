@@ -26,22 +26,28 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
     private const BATCH = 'seo13-20260726';
 
     /**
-     * @var list<array{article_id:int,working_revision_id:int,published_revision_id:int,slug:string}>
+     * @var list<array{
+     *   article_id:int,
+     *   working_revision_id:int,
+     *   published_revision_id:int,
+     *   slug:string,
+     *   translation_group_id:string
+     * }>
      */
     private const TARGETS = [
-        ['article_id' => 1, 'working_revision_id' => 446, 'published_revision_id' => 341, 'slug' => 'big-five-growth-guide'],
-        ['article_id' => 2, 'working_revision_id' => 445, 'published_revision_id' => 347, 'slug' => 'big-five-narrative-portrait'],
-        ['article_id' => 5, 'working_revision_id' => 444, 'published_revision_id' => 5, 'slug' => 'iq-test-growth-guide'],
-        ['article_id' => 6, 'working_revision_id' => 443, 'published_revision_id' => 6, 'slug' => 'iq-test-narrative-portrait'],
-        ['article_id' => 7, 'working_revision_id' => 442, 'published_revision_id' => 7, 'slug' => 'iq-test-tool-guide'],
-        ['article_id' => 9, 'working_revision_id' => 441, 'published_revision_id' => 9, 'slug' => 'mbti-growth-guide'],
-        ['article_id' => 10, 'working_revision_id' => 440, 'published_revision_id' => 10, 'slug' => 'mbti-narrative-portrait'],
-        ['article_id' => 11, 'working_revision_id' => 436, 'published_revision_id' => 30, 'slug' => 'are-infj-men-rare-or-socially-silenced'],
-        ['article_id' => 12, 'working_revision_id' => 437, 'published_revision_id' => 31, 'slug' => 'best-valentines-date-by-personality-and-relationship-science'],
-        ['article_id' => 13, 'working_revision_id' => 439, 'published_revision_id' => 32, 'slug' => 'childhood-dream-job-still-shapes-career-choice'],
-        ['article_id' => 14, 'working_revision_id' => 438, 'published_revision_id' => 33, 'slug' => 'how-16-personality-types-talk-to-an-ai-coach'],
-        ['article_id' => 15, 'working_revision_id' => 434, 'published_revision_id' => 34, 'slug' => 'how-personality-shapes-attitude-toward-ai'],
-        ['article_id' => 16, 'working_revision_id' => 435, 'published_revision_id' => 35, 'slug' => 'which-love-script-fits-you-best'],
+        ['article_id' => 1, 'working_revision_id' => 446, 'published_revision_id' => 341, 'slug' => 'big-five-growth-guide', 'translation_group_id' => 'big5-v2-f29331ce54d2f28a7051702932c39aaf69d2bf61'],
+        ['article_id' => 2, 'working_revision_id' => 445, 'published_revision_id' => 347, 'slug' => 'big-five-narrative-portrait', 'translation_group_id' => 'big5-v2-8381cc150e7180b365a397ce3e3a25e2626b8970'],
+        ['article_id' => 5, 'working_revision_id' => 444, 'published_revision_id' => 5, 'slug' => 'iq-test-growth-guide', 'translation_group_id' => 'article-5'],
+        ['article_id' => 6, 'working_revision_id' => 443, 'published_revision_id' => 6, 'slug' => 'iq-test-narrative-portrait', 'translation_group_id' => 'article-6'],
+        ['article_id' => 7, 'working_revision_id' => 442, 'published_revision_id' => 7, 'slug' => 'iq-test-tool-guide', 'translation_group_id' => 'article-7'],
+        ['article_id' => 9, 'working_revision_id' => 441, 'published_revision_id' => 9, 'slug' => 'mbti-growth-guide', 'translation_group_id' => 'article-9'],
+        ['article_id' => 10, 'working_revision_id' => 440, 'published_revision_id' => 10, 'slug' => 'mbti-narrative-portrait', 'translation_group_id' => 'article-10'],
+        ['article_id' => 11, 'working_revision_id' => 436, 'published_revision_id' => 30, 'slug' => 'are-infj-men-rare-or-socially-silenced', 'translation_group_id' => 'article-11'],
+        ['article_id' => 12, 'working_revision_id' => 437, 'published_revision_id' => 31, 'slug' => 'best-valentines-date-by-personality-and-relationship-science', 'translation_group_id' => 'article-12'],
+        ['article_id' => 13, 'working_revision_id' => 439, 'published_revision_id' => 32, 'slug' => 'childhood-dream-job-still-shapes-career-choice', 'translation_group_id' => 'article-13'],
+        ['article_id' => 14, 'working_revision_id' => 438, 'published_revision_id' => 33, 'slug' => 'how-16-personality-types-talk-to-an-ai-coach', 'translation_group_id' => 'article-14'],
+        ['article_id' => 15, 'working_revision_id' => 434, 'published_revision_id' => 34, 'slug' => 'how-personality-shapes-attitude-toward-ai', 'translation_group_id' => 'article-15'],
+        ['article_id' => 16, 'working_revision_id' => 435, 'published_revision_id' => 35, 'slug' => 'which-love-script-fits-you-best', 'translation_group_id' => 'article-16'],
     ];
 
     public function test_batch_dry_run_locks_exact_thirteen_without_writes(): void
@@ -355,7 +361,7 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
 
         foreach (self::TARGETS as $index => $target) {
             $articleId = $target['article_id'];
-            $group = 'article-'.$articleId;
+            $group = $target['translation_group_id'];
             $body = $articleId === $shortArticleId ? '短正文。' : $this->longBody($articleId);
             $publishedBody = "## 旧版本\n\n旧正文 {$articleId}。";
             $canonical = 'https://fermatmind.com/zh/articles/'.$target['slug'];

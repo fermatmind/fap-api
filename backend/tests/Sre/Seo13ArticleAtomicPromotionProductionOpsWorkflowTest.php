@@ -125,6 +125,9 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
         $service = $this->readRepoFile('backend/app/Services/Cms/ArticlePublishService.php');
 
         $this->assertStringContainsString("private const SEO13_BATCH = 'seo13-20260726';", $command);
+        $this->assertStringContainsString('big5-v2-f29331ce54d2f28a7051702932c39aaf69d2bf61', $command);
+        $this->assertStringContainsString('big5-v2-8381cc150e7180b365a397ce3e3a25e2626b8970', $command);
+        $this->assertStringNotContainsString("'translation_group_id' => 'article-'.\$target[0]", $command);
         $this->assertStringContainsString('promoteExistingWorkingRevisionsAtomically(', $command);
         $this->assertStringContainsString('DB::transaction(function () use (', $service);
         $this->assertStringContainsString('recordReleaseAudit: false', $service);

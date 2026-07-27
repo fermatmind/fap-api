@@ -635,19 +635,19 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
     private function seo13Targets(): array
     {
         $targets = [
-            [1, 446, 341, 'big-five-growth-guide'],
-            [2, 445, 347, 'big-five-narrative-portrait'],
-            [5, 444, 5, 'iq-test-growth-guide'],
-            [6, 443, 6, 'iq-test-narrative-portrait'],
-            [7, 442, 7, 'iq-test-tool-guide'],
-            [9, 441, 9, 'mbti-growth-guide'],
-            [10, 440, 10, 'mbti-narrative-portrait'],
-            [11, 436, 30, 'are-infj-men-rare-or-socially-silenced'],
-            [12, 437, 31, 'best-valentines-date-by-personality-and-relationship-science'],
-            [13, 439, 32, 'childhood-dream-job-still-shapes-career-choice'],
-            [14, 438, 33, 'how-16-personality-types-talk-to-an-ai-coach'],
-            [15, 434, 34, 'how-personality-shapes-attitude-toward-ai'],
-            [16, 435, 35, 'which-love-script-fits-you-best'],
+            [1, 446, 341, 'big-five-growth-guide', 'big5-v2-f29331ce54d2f28a7051702932c39aaf69d2bf61'],
+            [2, 445, 347, 'big-five-narrative-portrait', 'big5-v2-8381cc150e7180b365a397ce3e3a25e2626b8970'],
+            [5, 444, 5, 'iq-test-growth-guide', 'article-5'],
+            [6, 443, 6, 'iq-test-narrative-portrait', 'article-6'],
+            [7, 442, 7, 'iq-test-tool-guide', 'article-7'],
+            [9, 441, 9, 'mbti-growth-guide', 'article-9'],
+            [10, 440, 10, 'mbti-narrative-portrait', 'article-10'],
+            [11, 436, 30, 'are-infj-men-rare-or-socially-silenced', 'article-11'],
+            [12, 437, 31, 'best-valentines-date-by-personality-and-relationship-science', 'article-12'],
+            [13, 439, 32, 'childhood-dream-job-still-shapes-career-choice', 'article-13'],
+            [14, 438, 33, 'how-16-personality-types-talk-to-an-ai-coach', 'article-14'],
+            [15, 434, 34, 'how-personality-shapes-attitude-toward-ai', 'article-15'],
+            [16, 435, 35, 'which-love-script-fits-you-best', 'article-16'],
         ];
 
         return array_map(
@@ -655,7 +655,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 'article_id' => $target[0],
                 'working_revision_id' => $target[1],
                 'current_published_revision_id' => $target[2],
-                'translation_group_id' => 'article-'.$target[0],
+                'translation_group_id' => $target[4],
                 'slug' => $target[3],
                 'canonical' => 'https://fermatmind.com/zh/articles/'.$target[3],
             ],
