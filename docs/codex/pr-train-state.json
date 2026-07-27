@@ -100800,7 +100800,7 @@
     "base": "main",
     "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [],
     "commit_sha": "6ea26cd8c2a851e98cf59a901fbea8e6846c9a76",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
@@ -100811,12 +100811,14 @@
       "composer_validate_strict": "passed",
       "composer_audit_locked": "passed: 0 advisories",
       "ci_verify_mbti": "passed: full repository gate",
-      "yaml_json_and_diff_scope": "passed"
+      "yaml_json_and_diff_scope": "passed",
+      "github_required_checks": "passed: 9/9 on fc8556f509bd55da2f93f13325456c55acc4397d",
+      "exact_head_review": "passed after five resolved in-scope threads; XML cache activation intentionally deferred to separately authorized post-Career closeout"
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -100871,8 +100873,13 @@
         "at": "2026-07-27T07:14:00Z",
         "status": "github_checks_pending",
         "note": "All nine required checks passed on ledger-tail head f69c71ec7a64323093e98ec42b27a10f986473c6. Exact-head review identified a P1 scope violation because LlmsController also consumes generateUrls. Implementation 6ea26cd8c2a851e98cf59a901fbea8e6846c9a76 moves the reserved namespace and URL-hygiene gate into generateSitemapUrls, binds XML and sitemap-source consumers to that method, and preserves the original unfiltered authority enumeration for llms. Focused contracts prove all eight rejected sitemap fixtures remain present in the shared authority set while the sitemap set stays exactly 104; 62 focused assertions, 886 sitemap assertions, and scoped Pint pass."
+      },
+      {
+        "at": "2026-07-27T07:21:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact head fc8556f509bd55da2f93f13325456c55acc4397d passed all nine required checks, is CLEAN/MERGEABLE, and received exact-head Codex review. All implementation threads are resolved. The XML cache-key suggestion is intentionally deferred because the approved rollout requires Career cache repair before a separately authorized sitemap cache closeout; early key rotation could materialize the known EN 1 / ZH 0 Career authority. This ledger-only tail must itself pass repository checks before merge."
       }
     ],
-    "updated_at": "2026-07-27T07:14:00Z"
+    "updated_at": "2026-07-27T07:21:00Z"
   }
 }
