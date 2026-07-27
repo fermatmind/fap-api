@@ -100679,9 +100679,9 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
       "dependencies": {
         "status": "passed",
@@ -100742,8 +100742,13 @@
         "at": "2026-07-27T01:37:00Z",
         "status": "local_validation_passed",
         "note": "The resolver now explicitly declares the existing registered career_trust_manifest surface. The complete related selection passed 56 tests / 1422 assertions, including ReviewPolicyRegistry, and remains on the seven authorized PR1 paths. Final formatting, dependency, parser, diff, and scope checks are being repeated on the rebased repair head."
+      },
+      {
+        "at": "2026-07-27T01:37:12Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact seven-path PR1 branch and opened PR #3326 at implementation head 838bfd03346c38b146602a16eb5109c53e73ba21 with the required what/why/validation/deferred boundaries. GitHub required checks and exact-head review are pending. No production or external write occurred."
       }
     ],
-    "updated_at": "2026-07-27T01:37:00Z"
+    "updated_at": "2026-07-27T01:37:12Z"
   }
 }
