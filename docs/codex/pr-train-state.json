@@ -100800,12 +100800,12 @@
     "base": "main",
     "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
-    "status": "review_fix_local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "915608f4374e2dd9fb68003fcf0b6c528457a866",
+    "commit_sha": "d285d88b1741953c51b389b048da544b6cf1c724",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
     "checks": {
-      "focused_big_five_sitemap_contract": "passed: 1 test, 48 assertions",
+      "focused_big_five_sitemap_contract": "passed: 1 test, 53 assertions",
       "sitemap_generator_and_source_contracts": "passed: 25 tests, 886 assertions",
       "pint_scoped": "passed",
       "composer_validate_strict": "passed",
@@ -100856,8 +100856,13 @@
         "at": "2026-07-27T06:49:00Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine required checks passed on head cf33e90ee8fecf2461f7331a2f678e97232f37b9. Exact-head review identified a second in-scope P2 for dot-segment and percent-encoded reserved namespace aliases. The gate now repeatedly decodes and removes dot segments solely for reserved-namespace detection, rejects any non-normalized Big Five candidate, and retains exact canonical catalog matching. Four negative URL-shape fixtures pass with 52 focused assertions; the 886-assertion sitemap suite and scoped Pint remain green."
+      },
+      {
+        "at": "2026-07-27T06:56:00Z",
+        "status": "github_checks_pending",
+        "note": "All nine required checks passed on head 64799e152a309393f788f82c2bbc4327c037ab0a. Exact-head review identified a third in-scope P2 for WHATWG backslash normalization plus stale canonical ledger evidence. Backslashes now normalize only for reserved-namespace detection and therefore fail closed; the focused contract passes with 53 assertions and the 886-assertion sitemap suite remains green. Canonical commit_sha is rebound to validated implementation commit d285d88b1741953c51b389b048da544b6cf1c724; this ledger-tail commit does not change runtime behavior."
       }
     ],
-    "updated_at": "2026-07-27T06:49:00Z"
+    "updated_at": "2026-07-27T06:56:00Z"
   }
 }
