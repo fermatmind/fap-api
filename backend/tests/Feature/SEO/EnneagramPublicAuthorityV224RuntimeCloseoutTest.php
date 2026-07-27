@@ -1143,6 +1143,31 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_readback_compares_document_title_to_seo_title_and_h1_to_public_title(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        foreach (PersonalityPublicContentAsset::query()->get() as $asset) {
+            $seo = is_array($asset->seo_json) ? $asset->seo_json : [];
+            $seo['title'] = 'SEO authority for '.$asset->asset_key;
+            $asset->forceFill(['seo_json' => $seo])->save();
+        }
+        $this->fakeRuntimeHttp($report);
+
+        $result = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'canary-00',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+
+        $this->assertSame(8, $result['target_count']);
+        $this->assertSame([], array_merge(...array_column($result['rows'], 'issues')));
+    }
+
     public function test_pre_readback_accepts_frontend_derived_x_default_but_post_requires_backend_exact_x_default(): void
     {
         $this->seedPublishedEstate();
@@ -2756,6 +2781,9 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                     return Http::response('not found', 404);
                 }
                 $renderedTitle = $stalePublicPayload ? 'Stale cached Enneagram authority' : (string) $asset->title;
+                $renderedSeoTitle = $stalePublicPayload
+                    ? $renderedTitle
+                    : (string) data_get($asset->seo_json, 'title', $renderedTitle);
                 $renderedSummary = $stalePublicPayload ? 'Stale cached backend-authoritative public content.' : (string) $asset->summary;
                 $renderedSections = $stalePublicPayload
                     ? [['key' => 'stale', 'title' => 'Stale section', 'body_md' => 'Stale cached section body.']]
@@ -2763,7 +2791,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                 $renderedFaq = is_array($asset->faq_json) ? $asset->faq_json : [];
                 $authority = is_array($asset->authority_json) ? $asset->authority_json : [];
                 $title = htmlspecialchars(
-                    $prePromotionFailClosed ? 'FermatMind' : $renderedTitle,
+                    $prePromotionFailClosed ? 'FermatMind' : $renderedSeoTitle,
                     ENT_QUOTES | ENT_HTML5,
                 );
                 $headingTitle = htmlspecialchars($renderedTitle, ENT_QUOTES | ENT_HTML5);
