@@ -408,6 +408,45 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         self::assertContains('https://fermatmind.com/zh/personality\big-five/methodology', $authorityPaths);
         self::assertContains("https://fermatmind.com/zh/personality/bi\ng-five/methodology", $authorityPaths);
 
+        $eligibleShadowPath = '/en/personality/big-five/openness';
+        PersonalityPublicContentAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_CORE_TYPE,
+            'entity_key' => 'aaa-shadow-openness',
+            'slug' => 'enneagram/aaa-shadow-openness',
+            'locale' => 'en',
+            'title' => 'Earlier Enneagram shadow',
+            'summary' => 'summary',
+            'content_sections_json' => [['key' => 'body', 'title' => 'Body', 'body_md' => 'Body']],
+            'seo_json' => [],
+            'canonical_json' => ['path' => $eligibleShadowPath],
+            'hreflang_json' => ['en' => $eligibleShadowPath],
+            'faq_json' => [],
+            'schema_json' => [],
+            'method_boundary_json' => [],
+            'evidence_notes_json' => [],
+            'authority_json' => [],
+            'internal_links_json' => [],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+            'is_public' => true,
+            'index_eligible' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
+            'review_state' => 'seo_discoverability_released',
+            'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
+            'source_package' => 'test-eligible-cross-framework-shadow',
+            'source_hash' => str_repeat('d', 64),
+        ]);
+        $eligibleShadowEntry = collect(app(SitemapGenerator::class)->generateSitemapUrls())
+            ->firstWhere('loc', 'https://fermatmind.com'.$eligibleShadowPath);
+        self::assertIsArray($eligibleShadowEntry);
+        self::assertStringContainsString(
+            'personality-public-content:big-five:',
+            (string) ($eligibleShadowEntry['slug'] ?? ''),
+        );
+
         $paths = collect(app(SitemapGenerator::class)->generateSitemapUrls())
             ->pluck('loc')
             ->filter(static fn (mixed $path): bool => is_string($path) && str_contains($path, '/personality/big-five'))

@@ -100995,8 +100995,8 @@
     "commit_sha": "6ea26cd8c2a851e98cf59a901fbea8e6846c9a76",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
     "checks": {
-      "focused_big_five_sitemap_contract": "passed: 1 test, 70 assertions",
-      "sitemap_generator_and_source_contracts": "passed: complete sitemap suite, 1045 assertions",
+      "focused_big_five_sitemap_contract": "passed: 16 tests, 161 assertions",
+      "sitemap_generator_and_source_contracts": "passed: 55 tests, 1356 assertions",
       "pint_scoped": "passed",
       "composer_validate_strict": "passed",
       "composer_audit_locked": "passed: 0 advisories",
@@ -101108,8 +101108,23 @@
         "at": "2026-07-27T08:59:00Z",
         "status": "github_checks_pending",
         "note": "Cross-framework authority provenance fix passed the focused Big Five sitemap contract (70 assertions), the complete sitemap suite (1045 assertions), scoped Pint, and the full ci_verify_mbti repository gate. Generated compiled artifacts were restored to exact tracked bytes; fresh exact-head required checks and review remain pending."
+      },
+      {
+        "at": "2026-07-27T09:06:00Z",
+        "status": "same_scope_review_fix_in_progress",
+        "note": "Exact-head review identified that framework provenance was stripped before URL deduplication, allowing an earlier Enneagram duplicate to supply slug/lastmod for an otherwise eligible Big Five canonical URL. The scoped fix makes Big Five authority win duplicate resolution before removing the internal marker and adds a positive cross-framework shadow regression."
+      },
+      {
+        "at": "2026-07-27T09:23:00Z",
+        "status": "same_scope_contract_fix_in_progress",
+        "note": "The full ci_verify_mbti repository gate passed after the provenance-aware dedupe fix. An additional sitemap cache contract run found its failure-path mock still expected the pre-PR generateUrls consumer instead of the sitemap-only generateSitemapUrls consumer. The same-scope one-line contract repair and its exact test path are now declared before rerunning the sitemap suite."
+      },
+      {
+        "at": "2026-07-27T09:26:00Z",
+        "status": "github_checks_pending",
+        "note": "Final local scope passes: focused Big Five contract 16 tests / 161 assertions, complete sitemap generator/XML/source/cache suite 55 tests / 1356 assertions, scoped Pint, and the full ci_verify_mbti repository gate. Generated compiled artifacts were restored to exact tracked bytes; fresh exact-head checks and review are required."
       }
     ],
-    "updated_at": "2026-07-27T08:59:00Z"
+    "updated_at": "2026-07-27T09:26:00Z"
   }
 }

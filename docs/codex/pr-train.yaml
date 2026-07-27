@@ -246,6 +246,7 @@ prs:
       - backend/app/Services/SEO/SitemapGenerator.php
       - backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php
       - backend/tests/Feature/SEO/BigFiveLegacyAliasHardPurgeTest.php
+      - backend/tests/Feature/SEO/SitemapSourceCacheTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:

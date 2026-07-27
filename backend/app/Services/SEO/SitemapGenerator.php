@@ -121,12 +121,15 @@ class SitemapGenerator
         );
 
         $urls = collect($urls)
+            ->sortBy(static fn (array $url): int => (
+                ($url['__authority_framework'] ?? null) === PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE
+            ) ? 0 : 1)
+            ->unique('loc')
             ->map(static function (array $url): array {
                 unset($url['__authority_framework']);
 
                 return $url;
             })
-            ->unique('loc')
             ->values()
             ->all();
 
