@@ -100,25 +100,24 @@ use App\Services\Cms\CmsEditorialReviewAttestationService;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\DB;
 
-/**
- * @review-surface article
- * @review-surface article_translation_revision
- */
-
-$backendRoot = (string) getcwd();
-require $backendRoot.'/vendor/autoload.php';
-$app = require $backendRoot.'/bootstrap/app.php';
-$app->make(Kernel::class)->bootstrap();
-
-$fail = static function (): never {
+$fail = static function (string $stage): never {
     echo json_encode([
         'ok' => false,
-        'failed_stage' => 'application_review_phase',
+        'failed_stage' => $stage,
     ], JSON_UNESCAPED_SLASHES).PHP_EOL;
     exit(1);
 };
 
 try {
+    /**
+     * @review-surface article
+     * @review-surface article_translation_revision
+     */
+    $backendRoot = (string) getcwd();
+    require $backendRoot.'/vendor/autoload.php';
+    $app = require $backendRoot.'/bootstrap/app.php';
+    $app->make(Kernel::class)->bootstrap();
+
     $mode = (string) getenv('SEO13_REVIEW_MODE');
     $expectedStateSha256 = (string) getenv('EXPECTED_STATE_SHA256');
     $contentSetSha256 = (string) getenv('CONTENT_SET_SHA256');
@@ -131,18 +130,20 @@ try {
     );
 
     if ($mode !== 'preflight' && $mode !== 'apply') {
-        $fail();
+        $fail('invalid_mode');
     }
     if (($cohort['content_set_sha256'] ?? null) !== $contentSetSha256
         || ($cohort['target_set_sha256'] ?? null) !== $targetSetSha256
-        || count((array) ($cohort['packages'] ?? [])) !== 13
-        || ! AdminUser::query()->whereKey($adminUserId)->exists()) {
-        $fail();
+        || count((array) ($cohort['packages'] ?? [])) !== 13) {
+        $fail('cohort_runtime_contract');
+    }
+    if (! AdminUser::query()->whereKey($adminUserId)->exists()) {
+        $fail('reviewer_identity');
     }
 
     $attestations = app(CmsEditorialReviewAttestationService::class);
     if (! $attestations->isConfiguredSoloOwner($adminUserId)) {
-        $fail();
+        $fail('review_governance');
     }
 
     $bodyHash = static fn (string $body): string => hash(
@@ -202,15 +203,19 @@ try {
                 || (string) $working->translation_group_id !== (string) $article->translation_group_id
                 || (int) $working->article_id !== $articleId
                 || (int) $working->id === (int) $published->id
-                || (string) $working->revision_status !== $expectedRevisionStatus
-                || (string) $article->status !== 'published'
+                || (string) $working->revision_status !== $expectedRevisionStatus) {
+                throw new RuntimeException('revision_identity');
+            }
+            if ((string) $article->status !== 'published'
                 || ! (bool) $article->is_public
                 || ! (bool) $article->is_indexable
                 || ! (bool) $article->sitemap_eligible
                 || ! (bool) $article->llms_eligible
                 || (string) ($article->seoMeta?->robots ?? '') !== 'index,follow'
-                || ! (bool) ($article->seoMeta?->is_indexable ?? false)
-                || (string) $import->content_track !== 'seo_content_package_existing_article_update'
+                || ! (bool) ($article->seoMeta?->is_indexable ?? false)) {
+                throw new RuntimeException('public_surface');
+            }
+            if ((string) $import->content_track !== 'seo_content_package_existing_article_update'
                 || ! in_array((string) $import->status, [
                     ArticleEditorialPackageImport::STATUS_IMPORTED,
                     ArticleEditorialPackageImport::STATUS_WARNING,
@@ -227,9 +232,11 @@ try {
                 || (string) data_get($import->exactness_json, 'slug') !== (string) $article->slug
                 || (string) $import->slug !== (string) $article->slug
                 || (string) data_get($import->exactness_json, 'canonical_url') !== (string) ($article->seoMeta?->canonical_url ?? '')
-                || ! hash_equals((string) $import->body_hash, $observedBodyHash)
-                || ($completeness['ok'] ?? false) !== true) {
-                throw new RuntimeException('locked_precondition_failed');
+                || ! hash_equals((string) $import->body_hash, $observedBodyHash)) {
+                throw new RuntimeException('import_gate');
+            }
+            if (($completeness['ok'] ?? false) !== true) {
+                throw new RuntimeException('editorial_completeness');
             }
 
             if ($afterApproval
@@ -238,7 +245,7 @@ try {
                     || $working->approved_at === null
                     || ! $attestations->hasApprovedEvidence('article', $article)
                     || ! $attestations->hasApprovedEvidence('article_translation_revision', $working))) {
-                throw new RuntimeException('approval_readback_failed');
+                throw new RuntimeException('approval_readback');
             }
 
             $rows[] = [
@@ -282,7 +289,7 @@ try {
     if ($mode === 'apply') {
         if (! preg_match('/^[0-9a-f]{64}$/', $expectedStateSha256)
             || ! hash_equals($expectedStateSha256, $preflightStateSha256)) {
-            $fail();
+            $fail('state_lock');
         }
 
         DB::transaction(static function () use ($rows, $bodyHash, $adminUserId): void {
@@ -296,7 +303,7 @@ try {
                 if ((int) $article->working_revision_id !== (int) $row['working_revision_id']
                     || (int) $article->published_revision_id !== (int) $row['published_revision_id']
                     || ! hash_equals((string) $row['body_sha256'], $bodyHash((string) $article->workingRevision?->content_md))) {
-                    throw new RuntimeException('transaction_lock_mismatch');
+                    throw new RuntimeException('transaction_lock');
                 }
                 $workflow->approveEditorialWorkingRevision($article, $adminUserId);
             }
@@ -315,14 +322,37 @@ try {
         'reviewed_by_admin_user_id' => $adminUserId,
         'rows' => $rows,
     ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR).PHP_EOL;
-} catch (Throwable) {
-    $fail();
+} catch (Throwable $exception) {
+    $allowedStages = [
+        'revision_missing',
+        'revision_identity',
+        'public_surface',
+        'import_gate',
+        'editorial_completeness',
+        'state_lock',
+        'transaction_lock',
+        'approval_readback',
+    ];
+    $stage = in_array($exception->getMessage(), $allowedStages, true)
+        ? $exception->getMessage()
+        : 'application_runtime';
+    $fail($stage);
 }
 PHP
 )"
 application_status=$?
 set -e
-test "$application_status" -eq 0 || fail_receipt "application_review_phase_failed"
+if [ "$application_status" -ne 0 ]; then
+    application_stage="$(jq -r '.failed_stage // empty' <<<"$application_summary" 2>/dev/null || true)"
+    case "$application_stage" in
+        invalid_mode|cohort_runtime_contract|reviewer_identity|review_governance|revision_missing|revision_identity|public_surface|import_gate|editorial_completeness|state_lock|transaction_lock|approval_readback|application_runtime)
+            fail_receipt "$application_stage"
+            ;;
+        *)
+            fail_receipt "application_review_phase_failed"
+            ;;
+    esac
+fi
 
 jq -e \
     --arg mode "$SEO13_REVIEW_MODE" \
