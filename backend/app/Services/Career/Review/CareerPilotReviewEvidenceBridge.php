@@ -74,7 +74,7 @@ final class CareerPilotReviewEvidenceBridge
      * @param  list<string>  $slugs
      * @return array{schema_version:string,scope_type:string,scope_identity:string,slugs:list<string>,targets:list<array{identity:string,sha256:string}>,target_count:int,target_set_sha256:string,package_sha256:string,index_item_sha256_by_slug:array<string,array<string,string>>}
      */
-    public function buildPackage(array $slugs): array
+    public function buildPackage(array $slugs, ?array $publicationSnapshot = null): array
     {
         $normalizedSlugs = array_values(array_unique(array_filter(array_map(
             static fn (mixed $slug): string => strtolower(trim((string) $slug)),
@@ -92,16 +92,17 @@ final class CareerPilotReviewEvidenceBridge
         }
 
         $indexItems = $this->exactIndexItems($normalizedSlugs);
-        $published = $this->responseCache->jobDetailPublishedSnapshot($normalizedSlugs, self::LOCALES);
+        $publication = $publicationSnapshot
+            ?? $this->responseCache->jobDetailPublicationSnapshot($normalizedSlugs, self::LOCALES);
         $indexItemShaBySlug = [];
         $targets = [];
         foreach ($normalizedSlugs as $slug) {
             foreach (self::LOCALES as $locale) {
-                $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
-                $payload = $readiness['payload'];
+                $evidence = $publication[$slug][$locale] ?? null;
+                $payload = is_array($evidence) ? ($evidence['payload'] ?? null) : null;
                 if (! is_array($payload)
-                    || ! in_array($readiness['classification'], ['ready_active', 'ready_lkg'], true)
-                    || ($published[$slug][$locale] ?? false) !== true
+                    || ! in_array($evidence['classification'] ?? null, ['ready_active', 'ready_lkg'], true)
+                    || ($evidence['published'] ?? false) !== true
                 ) {
                     throw new \RuntimeException(sprintf(
                         'Career pilot review target is not available from active/LKG detail authority: %s %s.',

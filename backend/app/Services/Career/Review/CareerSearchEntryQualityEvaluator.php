@@ -58,8 +58,8 @@ final class CareerSearchEntryQualityEvaluator
     /** @var array<string,array<string,list<array<string,mixed>>>> */
     private array $indexItemsByLocaleAndSlug = [];
 
-    /** @var array<string,array<string,bool>> */
-    private array $publishedBySlugAndLocale = [];
+    /** @var array<string,array<string,array{published:bool,classification:string,version:string|null,payload:array<string,mixed>|null}>> */
+    private array $publicationBySlugAndLocale = [];
 
     public function __construct(
         private readonly CareerSearchEntryQualityBatchManifestReader $manifestReader,
@@ -147,20 +147,51 @@ final class CareerSearchEntryQualityEvaluator
             : null;
     }
 
+    public function resetEvaluationSnapshot(): void
+    {
+        $this->evaluations = [];
+        $this->indexItemsByLocaleAndSlug = [];
+        $this->publicationBySlugAndLocale = [];
+    }
+
     /** @param list<string> $slugs */
     public function primePublicationSnapshot(array $slugs): void
     {
         $missing = array_values(array_filter(array_unique(array_map(
             static fn (string $slug): string => strtolower(trim($slug)),
             $slugs,
-        )), fn (string $slug): bool => $slug !== '' && ! isset($this->publishedBySlugAndLocale[$slug])));
+        )), fn (string $slug): bool => $slug !== '' && ! isset($this->publicationBySlugAndLocale[$slug])));
         if ($missing === []) {
             return;
         }
 
-        foreach ($this->responseCache->jobDetailPublishedSnapshot($missing, self::LOCALES) as $slug => $locales) {
-            $this->publishedBySlugAndLocale[$slug] = $locales;
+        foreach ($this->responseCache->jobDetailPublicationSnapshot($missing, self::LOCALES) as $slug => $locales) {
+            $this->publicationBySlugAndLocale[$slug] = $locales;
         }
+    }
+
+    /**
+     * Return the same request-bounded payload/version evidence consumed by
+     * quality evaluation so review-target hashing can share that exact fence.
+     *
+     * @param  list<string>  $slugs
+     * @return array<string,array<string,array{published:bool,classification:string,version:string|null,payload:array<string,mixed>|null}>>
+     */
+    public function publicationSnapshot(array $slugs): array
+    {
+        $this->primePublicationSnapshot($slugs);
+        $snapshot = [];
+        foreach (array_values(array_unique(array_map(
+            static fn (string $slug): string => strtolower(trim($slug)),
+            $slugs,
+        ))) as $slug) {
+            if ($slug === '' || ! isset($this->publicationBySlugAndLocale[$slug])) {
+                throw new \RuntimeException('Career quality publication snapshot is incomplete.');
+            }
+            $snapshot[$slug] = $this->publicationBySlugAndLocale[$slug];
+        }
+
+        return $snapshot;
     }
 
     /** @return array<string,mixed> */
@@ -168,11 +199,11 @@ final class CareerSearchEntryQualityEvaluator
     {
         $blockers = [];
         $this->primePublicationSnapshot([$slug]);
-        $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
-        $payload = $readiness['payload'] ?? null;
+        $publication = $this->publicationBySlugAndLocale[$slug][$locale] ?? null;
+        $payload = is_array($publication) ? ($publication['payload'] ?? null) : null;
         if (! is_array($payload)
-            || ! in_array($readiness['classification'] ?? null, ['ready_active', 'ready_lkg'], true)
-            || ($this->publishedBySlugAndLocale[$slug][$locale] ?? false) !== true) {
+            || ! in_array($publication['classification'] ?? null, ['ready_active', 'ready_lkg'], true)
+            || ($publication['published'] ?? false) !== true) {
             return $this->blockedLocale($slug, $locale, ['bilingual_detail_not_ready']);
         }
 
@@ -203,6 +234,12 @@ final class CareerSearchEntryQualityEvaluator
             $blockers[] = 'index_item_missing_or_duplicate';
         } elseif (! $this->robotsIndexable($indexItem['seo_contract'] ?? null)) {
             $blockers[] = 'index_item_not_indexable';
+        } elseif ($this->firstString([
+            data_get($indexItem, 'seo_contract.canonical_url'),
+            data_get($indexItem, 'seo_contract.canonical_target'),
+            data_get($indexItem, 'seo_contract.canonical_path'),
+        ]) !== $expectedPath) {
+            $blockers[] = 'index_item_canonical_mismatch';
         }
 
         $displayContent = data_get($payload, 'display_surface_v1.page.content');

@@ -267,7 +267,7 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
                 .', '.CareerRuntimePublishProjectionCoverageSnapshot::class,
         );
         $runtimeProjection->shouldReceive('jobDetailCoverageItems')
-            ->twice()
+            ->once()
             ->with(['en', 'zh-CN'])
             ->andReturn($snapshot);
         $runtimeProjection->shouldNotReceive('itemForSlug');
@@ -302,7 +302,7 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
                 .', '.CareerRuntimePublishProjectionCoverageSnapshot::class,
         );
         $runtimeProjection->shouldReceive('jobDetailCoverageItems')
-            ->once()
+            ->twice()
             ->with(['en'])
             ->andReturn($materializedCandidate);
         $runtimeProjection->shouldNotReceive('itemForSlug');
@@ -327,6 +327,11 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
             [$slug => ['en' => true]],
             $responseCache->jobDetailPublishedSnapshot([$slug], ['en']),
         );
+        $publication = $responseCache->jobDetailPublicationSnapshot([$slug], ['en']);
+        $this->assertTrue($publication[$slug]['en']['published']);
+        $this->assertSame('ready_active', $publication[$slug]['en']['classification']);
+        $this->assertIsString($publication[$slug]['en']['version']);
+        $this->assertSame($slug, data_get($publication[$slug]['en']['payload'], 'identity.canonical_slug'));
     }
 
     public function test_content_seo_or_review_target_drift_rejects_exact_package(): void
@@ -498,6 +503,28 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $this->assertContains('source_references_missing', $locale['blockers']);
     }
 
+    public function test_index_item_canonical_must_match_exact_locale_and_slug(): void
+    {
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $en = $this->responseCache->jobIndexPayload('en');
+        $zh = $this->responseCache->jobIndexPayload('zh-CN');
+        foreach ($en['items'] as &$item) {
+            if (data_get($item, 'identity.canonical_slug') === $slug) {
+                $item['seo_contract']['canonical_path'] = '/zh/career/jobs/'.$slug;
+            }
+        }
+        unset($item);
+        $this->responseCache->publishJobIndexReadModelsAtomically([
+            'en' => $en,
+            'zh-CN' => $zh,
+        ]);
+
+        $evaluation = app(CareerSearchEntryQualityEvaluator::class)->evaluate($slug);
+
+        $this->assertContains('en:index_item_canonical_mismatch', $evaluation['blockers']);
+        $this->assertSame('ineligible', $evaluation['content_quality_tier']);
+    }
+
     public function test_missing_bilingual_authority_fails_closed(): void
     {
         Cache::flush();
@@ -520,7 +547,11 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
                     'identity' => ['canonical_slug' => $slug],
                     'titles' => ['canonical_en' => str($slug)->replace('-', ' ')->title()->toString()],
                     'trust_summary' => ['review_state' => 'unknown', 'last_reviewed_at' => null],
-                    'seo_contract' => ['robots_policy' => 'index,follow', 'index_eligible' => true],
+                    'seo_contract' => [
+                        'canonical_path' => ($locale === 'en' ? '/en' : '/zh').'/career/jobs/'.$slug,
+                        'robots_policy' => 'index,follow',
+                        'index_eligible' => true,
+                    ],
                 ];
             }
         }

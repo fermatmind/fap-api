@@ -20,8 +20,10 @@ final class CareerSearchEntryQualityBatchPlanner
     /** @return array<string,mixed> */
     public function build(): array
     {
+        $this->evaluator->resetEvaluationSnapshot();
         $manifest = $this->manifestReader->read();
-        $this->evaluator->primePublicationSnapshot(array_column($manifest['candidates'], 'canonical_slug'));
+        $manifestSlugs = array_column($manifest['candidates'], 'canonical_slug');
+        $this->evaluator->primePublicationSnapshot($manifestSlugs);
         $evaluations = array_map(
             fn (array $candidate): array => $this->evaluator->evaluate($candidate['canonical_slug']),
             $manifest['candidates'],
@@ -61,7 +63,10 @@ final class CareerSearchEntryQualityBatchPlanner
             throw new \RuntimeException('Career search-entry quality batch candidate count failed closed.');
         }
 
-        $reviewPackage = $this->reviewBridge->buildPackage($slugs);
+        $reviewPackage = $this->reviewBridge->buildPackage(
+            $slugs,
+            $this->evaluator->publicationSnapshot($slugs),
+        );
         $targetsBySlug = [];
         foreach ($reviewPackage['targets'] as $target) {
             $parts = explode(':', $target['identity']);
