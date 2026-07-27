@@ -199,3 +199,23 @@ Sidecar issue record format:
 ## Rollback recommendation boundary
 
 Recommend rollback only when the deployed release is active and introduces a production-impacting regression that cannot be mitigated safely within the current release. Missing arbitrary public-origin `/api/healthz` `200` is not by itself a rollback condition because production healthz is allowlist-only.
+## Backend nginx fail-closed recovery
+
+When the production deploy health baseline reports simultaneous `502` responses
+before Deployer runs, use `Backend Production Nginx Recovery`. The workflow is
+limited to a failed/inactive `nginx.service` whose current configuration passes
+`nginx -t`.
+
+1. Run `verify_only` with the exact active production revision. It performs no
+   remote mutation and emits the config-set SHA256 and a sanitized receipt.
+2. Review the successful preflight artifact and provide the exact phrase emitted
+   by the workflow contract, binding the preflight run, control-plane SHA, active
+   SHA, and config-set SHA256.
+3. Run `recover_and_verify`. It revalidates all identities, starts only nginx,
+   then requires public health, flags, and Big Five authority evidence to pass.
+
+The workflow never edits nginx configuration, deploys application code, changes
+the active symlink, runs migrations, touches CMS/database authority, cache,
+queues, publication, sitemap, llms, search, or PR23. A configuration change or
+any broader recovery requires a separate versioned infra change and exact
+authorization.
