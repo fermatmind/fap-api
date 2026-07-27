@@ -100679,8 +100679,8 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "96d199f0aececb37553b481d29760ec51aacfa42",
+    "status": "merged",
+    "commit_sha": "acf616ae76b5691afb30582be607360a5030830f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
       "dependencies": {
@@ -100716,12 +100716,12 @@
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-27T02:54:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -100790,8 +100790,88 @@
         "at": "2026-07-27T02:40:47Z",
         "status": "ready_to_merge",
         "note": "Exact latest-main rebased head 2cb60522c2853042fb58354d40da643067e558b7 passed all nine required GitHub checks, Codex exact-head review found no major issues, all review threads are resolved, PR is CLEAN/MERGEABLE, local validation remains green, and the eight changed paths remain exactly within scope. This ready_to_merge ledger tail must independently pass required checks before squash merge."
+      },
+      {
+        "at": "2026-07-27T02:54:22Z",
+        "status": "merged",
+        "note": "Final ledger head 62286fdf2fac0031289b43508d6602f3c6f6c263 passed all nine required checks and Codex exact-head review with no major issues. PR #3326 squash-merged as acf616ae76b5691afb30582be607360a5030830f; GitHub and origin/main contain the merge, the remote branch is absent, and the clean isolated task worktree plus local branch were removed. The dirty primary clone was not modified."
       }
     ],
-    "updated_at": "2026-07-27T02:40:47Z"
+    "updated_at": "2026-07-27T02:54:22Z"
+  },
+  "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01": {
+    "id": "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-search-entry-quality-batch-01",
+    "title": "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01 prepare first fifty career entries",
+    "depends_on": [
+      "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
+    ],
+    "status": "implementation_in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependencies": {
+        "status": "passed",
+        "evidence": "PR #3326 merged as acf616ae76b5691afb30582be607360a5030830f and the exact merge is present on fap-api origin/main."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "PR2 is bounded code, one exact 50-slug content-pack manifest, and dry-run/read projection only. Production deploy, controlled Task12 apply, CMS/database/cache/queue/publication/indexability/sitemap/llms/Search Channel writes, URL submission, and held-slug release remain prohibited."
+      },
+      "focused_tests": {
+        "status": "passed",
+        "evidence": "The deterministic batch suite passes 8 tests / 1403 assertions. The combined batch, reviewer bridge, tier contract, and publish-track regression run passes 14 tests plus 21 warning-only tests / 1621 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, drift verification, zero state writes, and command idempotency."
+      },
+      "required_local_checks": {
+        "status": "passed",
+        "evidence": "Focused and related Career tests passed; Pint passed across 499 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      },
+      "exact_head_review": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": false,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-27T03:20:58Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact PR1 merge acf616ae76b5691afb30582be607360a5030830f in an isolated worktree. Locked one exact 50-slug non-held pool from the 114 effective stable/candidate members and implemented bounded bilingual quality evaluation, deterministic dry-run packaging, exact reviewer targets, drift verification, and zero-write guarantees. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-27T03:27:17Z",
+        "status": "focused_tests_passed",
+        "note": "Focused and directly related regressions passed. Candidate receipts now expose exact current EN/zh-CN content and SEO SHAs bound to all six reviewer targets, and the public projection defers high-density Tier A cache reads until exact approved review evidence is present. Local non-test authority correctly returned HOLD because the isolated developer cache lacks the exact 50 active/LKG entries; it created no artifact and performed no authority write."
+      },
+      {
+        "at": "2026-07-27T03:32:00Z",
+        "status": "local_checks_passed",
+        "note": "The branch-diff classifier produced the exact conditional failure required by the goal, rejecting only the three quality services and exact batch-01 manifest. Added the authorized exact-path-only classifier exemption and positive/negative regression; future batch, publisher, and Big Five runtime paths remain blocked. All declared local checks now pass."
+      }
+    ],
+    "updated_at": "2026-07-27T03:32:00Z"
   }
 }

@@ -65,7 +65,7 @@ prs:
     base: main
     branch: codex/career-search-entry-tier-contract-01
     title: "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01 add career search-entry authority"
-    status: ready_to_merge
+    status: merged
     depends_on:
       - CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01
       - CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01
@@ -81,6 +81,7 @@ prs:
       - backend/app/Http/Resources/**
       - backend/app/Http/Controllers/API/V0_5/Cms/Career*
       - backend/tests/Feature/Career/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/career/**
       - backend/docs/seo/**
       - docs/codex/pr-train.yaml
@@ -95,6 +96,57 @@ prs:
       - cd backend && php artisan test tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php tests/Unit/Services/Career/CareerPublishTrackResolverTest.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
       - cd backend && vendor/bin/pint --test app/Services/Career app/Http/Resources app/Http/Controllers/API/V0_5/Cms tests/Feature/Career/CareerSearchEntryTierContractTest.php
       - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && composer validate --strict
+      - cd backend && composer audit
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-SEARCH-ENTRY-QUALITY-BATCH-01
+    repo: fap-api
+    base: main
+    branch: codex/career-search-entry-quality-batch-01
+    title: "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01 prepare first fifty career entries"
+    status: implementation_in_progress
+    depends_on:
+      - CAREER-SEARCH-ENTRY-TIER-CONTRACT-01
+    train_scope: career_search_entry_quality_batch_01
+    scope:
+      - Lock one exact non-held pool of no more than 50 effective stable/candidate Career slugs.
+      - Validate deterministic bilingual visible content, source, claim, FAQ, internal-link, canonical, robots, index-entry, publish-track, and reviewer-target evidence.
+      - Emit exact dry-run package, target-set, per-target hashes, candidate ordering, and zero-write guarantees.
+      - Project Tier A only while current bounded bilingual evidence passes; keep review and current search-entry eligibility fail-closed until exact controlled apply.
+    allowed_paths:
+      - backend/app/Console/Commands/Career*
+      - backend/app/Services/Career/**
+      - backend/content_packs/career/CAREER-SEARCH-ENTRY-QUALITY-BATCH-01/**
+      - backend/tests/Feature/Career/**
+      - backend/docs/career/**
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Process all 1046 entries, substitute later candidates, expand to a second batch, or lower a quality gate.
+      - Publish, mutate CMS/database/cache/queue/publication/indexability/sitemap/llms, execute Search Channel, submit URLs, deploy, or release held slugs.
+      - Modify routes, migrations, non-Career runtime, frontend fallback, or any other content pack.
+    validation:
+      - cd backend && php artisan test tests/Feature/Career/CareerSearchEntryQualityBatchTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerPilotReviewEvidenceBridgeTest.php tests/Feature/Career/CareerSearchEntryTierContractTest.php tests/Unit/Services/Career/CareerPublishTrackResolverTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|runtime_freeze_classifier_ignores_only_career_search_entry_quality_batch_01_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands app/Services/Career tests/Feature/Career/CareerSearchEntryQualityBatchTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

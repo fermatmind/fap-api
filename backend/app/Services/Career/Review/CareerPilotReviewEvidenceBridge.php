@@ -66,6 +66,7 @@ final class CareerPilotReviewEvidenceBridge
         private readonly ReviewAttestationCanonicalizer $canonicalizer,
         private readonly CareerPublishTrackResolver $publishTrackResolver,
         private readonly CareerSearchEntryTierResolver $searchEntryTierResolver,
+        private readonly CareerSearchEntryQualityEvaluator $searchEntryQualityEvaluator,
     ) {}
 
     /**
@@ -416,20 +417,22 @@ final class CareerPilotReviewEvidenceBridge
         } catch (\Throwable) {
             $publishTrack = null;
         }
+        $reviewState = (string) ($projection['review_state'] ?? 'unknown');
+        $lastReviewedAt = is_string($projection['last_reviewed_at'] ?? null)
+            ? $projection['last_reviewed_at']
+            : null;
+        $contentQualityTier = $reviewState === 'approved' && $lastReviewedAt !== null
+            ? $this->searchEntryQualityEvaluator->qualityTierForSlug($slug)
+            : null;
 
         return $this->searchEntryTierResolver->resolve(
             slug: $slug,
             publicVisibility: true,
             robotsIndexable: $this->robotsIndexable($publicPayload['seo_contract'] ?? null),
-            reviewState: (string) ($projection['review_state'] ?? 'unknown'),
-            lastReviewedAt: is_string($projection['last_reviewed_at'] ?? null)
-                ? $projection['last_reviewed_at']
-                : null,
+            reviewState: $reviewState,
+            lastReviewedAt: $lastReviewedAt,
             publishTrack: $publishTrack,
-            // No backend quality-tier authority is projected into the current public
-            // payload. Keep this independent gate unknown until a bounded quality
-            // package supplies an exact classification.
-            contentQualityTier: null,
+            contentQualityTier: $contentQualityTier,
         );
     }
 
