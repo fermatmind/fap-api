@@ -243,6 +243,42 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         }
     }
 
+    public function test_detail_projection_rejects_payload_that_drifted_after_approved_projection_was_cached(): void
+    {
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', 1);
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $bridge = app(CareerPilotReviewEvidenceBridge::class);
+        $package = $bridge->buildPackage([$slug]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+        $bridge->projectJobIndexPayload($this->responseCache->jobIndexPayload('en'), 'en');
+
+        $this->responseCache->publishJobDetailReadModel(
+            $slug,
+            'en',
+            $this->detailPayload($slug, 'en', ['identity' => ['public_alias' => 'drifted-after-review']]),
+        );
+        $projected = $bridge->projectDetailPayload(
+            $slug,
+            $this->responseCache->jobDetailPayload($slug, 'en'),
+        );
+
+        $this->assertSame('unknown', $projected['trust_manifest']['review_state']);
+        $this->assertSame('ineligible', $projected['search_entry_tier']);
+        $this->assertContains(
+            'reviewer_evidence_not_current',
+            $projected['search_entry_authority']['reason_codes'],
+        );
+    }
+
     public function test_quality_gaps_are_independently_rejected_without_backfill(): void
     {
         $rows = $this->manifestReader->read()['candidates'];

@@ -57,7 +57,7 @@ final class CareerPilotReviewEvidenceBridge
         'exceptions_json',
     ];
 
-    /** @var array<string, array{review_state:string,last_reviewed_at:string|null,index_item_sha256_by_locale?:array<string,string>}>|null */
+    /** @var array<string, array{review_state:string,last_reviewed_at:string|null,index_item_sha256_by_locale?:array<string,string>,target_sha256_by_locale_and_kind?:array<string,array<string,string>>}>|null */
     private ?array $requestProjection = null;
 
     public function __construct(
@@ -152,6 +152,9 @@ final class CareerPilotReviewEvidenceBridge
 
         $projection = $this->projectionBySlug()[strtolower(trim($slug))]
             ?? self::UNAPPROVED_PROJECTION;
+        if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection)) {
+            $projection = self::UNAPPROVED_PROJECTION;
+        }
 
         $payload['trust_manifest'] = array_merge(
             $payload['trust_manifest'],
@@ -268,11 +271,13 @@ final class CareerPilotReviewEvidenceBridge
             }
 
             $reviewedAt = $attestation->attested_at?->utc()->toISOString();
+            $targetShasBySlug = $this->targetShasBySlug($package['targets']);
             foreach ($unresolvedSlugs as $slug) {
                 $resolved[$slug] = [
                     'review_state' => 'approved',
                     'last_reviewed_at' => $reviewedAt,
                     'index_item_sha256_by_locale' => $package['index_item_sha256_by_slug'][$slug],
+                    'target_sha256_by_locale_and_kind' => $targetShasBySlug[$slug],
                 ];
             }
         }
@@ -306,6 +311,59 @@ final class CareerPilotReviewEvidenceBridge
         return count($attestation->targetEvidences) === count($slugs) * count(self::LOCALES) * count(self::TARGET_KINDS)
             ? $slugs
             : [];
+    }
+
+    /**
+     * @param  list<array{identity:string,sha256:string}>  $targets
+     * @return array<string,array<string,array<string,string>>>
+     */
+    private function targetShasBySlug(array $targets): array
+    {
+        $resolved = [];
+        foreach ($targets as $target) {
+            $parts = explode(':', $target['identity']);
+            if (count($parts) !== 4) {
+                throw new \RuntimeException('Career pilot review target identity is invalid.');
+            }
+            [, $slug, $locale, $kind] = $parts;
+            $resolved[$slug][$locale][$kind] = $target['sha256'];
+        }
+
+        return $resolved;
+    }
+
+    /** @param array<string,mixed> $payload @param array<string,mixed> $projection */
+    private function detailPayloadMatchesProjection(string $slug, array $payload, array $projection): bool
+    {
+        if (($projection['review_state'] ?? null) !== 'approved') {
+            return true;
+        }
+
+        $locale = $this->normalizeLocale((string) data_get($payload, 'locale_policy.locale', ''));
+        $expected = $projection['target_sha256_by_locale_and_kind'][$locale] ?? null;
+        if (! is_array($expected)) {
+            return false;
+        }
+
+        try {
+            $indexItem = $this->exactIndexItems([strtolower(trim($slug))])[$locale][strtolower(trim($slug))];
+            $currentTargets = $this->targetPayloads($payload, $indexItem);
+        } catch (\Throwable) {
+            return false;
+        }
+
+        foreach (self::TARGET_KINDS as $kind) {
+            $expectedSha = $expected[$kind] ?? null;
+            if (! is_string($expectedSha)
+                || ! hash_equals(
+                    $expectedSha,
+                    hash('sha256', $this->canonicalizer->encode($currentTargets[$kind])),
+                )) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @param array<string,mixed> $payload @param array<string,mixed> $indexItem @return array<string,array<string,mixed>> */

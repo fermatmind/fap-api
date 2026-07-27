@@ -100822,7 +100822,7 @@
       },
       "focused_tests": {
         "status": "passed",
-        "evidence": "The deterministic batch suite passes 8 tests / 1403 assertions. The combined batch, reviewer bridge, tier contract, and publish-track regression run passes 14 tests plus 21 warning-only tests / 1621 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, drift verification, zero state writes, and command idempotency."
+        "evidence": "The deterministic batch suite passes 9 warning-only tests / 1406 assertions. The related reviewer bridge, tier contract, and publish-track run passes 14 tests plus 13 warning-only tests / 218 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
       },
       "required_local_checks": {
         "status": "passed",
@@ -100875,8 +100875,13 @@
         "at": "2026-07-27T03:33:24Z",
         "status": "github_checks_pending",
         "note": "Pushed exact scoped head 653a2c28e0bee8a4693f09b97ddf0b099787e0da and opened PR #3333. Awaiting all required exact-head checks and review."
+      },
+      {
+        "at": "2026-07-27T03:44:23Z",
+        "status": "review_fixes_validated",
+        "note": "All nine checks passed on prior head 68009f90c83835407b9dbc43b5851f18a42210d2, but Codex review of the preceding head found two valid issues. Moved the conditional classifier path into the PR2 allowed-path entry and bound approved detail projection to the exact payload returned plus current index target hashes, failing closed across pointer drift. Added the race regression and reran all focused, related, classifier, and formatting gates successfully; a fresh exact-head CI/review cycle is required."
       }
     ],
-    "updated_at": "2026-07-27T03:33:24Z"
+    "updated_at": "2026-07-27T03:44:23Z"
   }
 }
