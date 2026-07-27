@@ -8,6 +8,7 @@ target_set_sha256='67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f9
 stage='bootstrap'
 release_sha=''
 release_name=''
+write_state='none'
 
 emit_failure() {
     local failed_stage="$1"
@@ -17,6 +18,7 @@ emit_failure() {
         --arg release_sha "$release_sha" \
         --arg release_name "$release_name" \
         --arg failed_stage "$failed_stage" \
+        --arg write_state "$write_state" \
         '{
             contract_version: $contract_version,
             status: "FAIL_CLOSED",
@@ -24,8 +26,19 @@ emit_failure() {
             release_sha: $release_sha,
             release_name: $release_name,
             failed_stage: $failed_stage,
-            production_write_execution: false,
-            publish_count: 0,
+            write_state: $write_state,
+            production_write_execution: (
+                if $write_state == "committed" then true
+                elif $write_state == "none" then false
+                else null
+                end
+            ),
+            publish_count: (
+                if $write_state == "committed" then 13
+                elif $write_state == "none" then 0
+                else null
+                end
+            ),
             schema_write_count: 0,
             hreflang_write_count: 0,
             search_submission_count: 0,
@@ -216,7 +229,16 @@ test "$state_sha256" = "$expected_state_sha256"
 test "$revision_set_sha256" = "$expected_revision_set_sha256"
 command_confirmation="$(jq -er '.expected_confirmation' <<<"$preflight_json")"
 
+stage='revalidate_active_release_before_apply'
+test ! -e "$deploy_path/.dep/deploy.lock"
+latest_current_release="$(readlink -f "$deploy_path/current")"
+test "$latest_current_release" = "$current_release"
+test "$(basename "$latest_current_release")" = "$expected_release_name"
+test -f "$latest_current_release/REVISION"
+test "$(tr -d '\r\n' < "$latest_current_release/REVISION")" = "$expected_release_sha"
+
 stage='run_command_apply'
+write_state='indeterminate'
 set +e
 apply_json="$(
     php artisan articles:promote-existing-working-revision \
@@ -241,6 +263,7 @@ apply_json="$(
 apply_status=$?
 set -e
 test "$apply_status" -eq 0
+write_state='committed'
 
 stage='validate_apply_readback'
 jq -e \
@@ -318,6 +341,7 @@ jq -n \
         revision_set_sha256: $revisions,
         target_count: 13,
         rows: $rows,
+        write_state: "committed",
         production_write_execution: true,
         publish_count: 13,
         schema_write_count: 0,

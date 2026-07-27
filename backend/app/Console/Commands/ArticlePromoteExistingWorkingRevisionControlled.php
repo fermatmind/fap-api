@@ -392,7 +392,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 $target['current_published_revision_id'],
                 afterPromotion: $afterPromotion,
                 identityLock: $target,
-                claimWarningAcknowledged: true,
+                claimWarningAcknowledged: false,
             );
             $rows[] = $row;
             foreach ((array) ($row['errors'] ?? []) as $error) {

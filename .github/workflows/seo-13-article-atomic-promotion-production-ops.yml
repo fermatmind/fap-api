@@ -100,6 +100,7 @@ jobs:
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
           git fetch --no-tags origin "$EXPECTED_RELEASE_SHA"
           git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
 
@@ -192,13 +193,16 @@ jobs:
     needs: eligibility
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: deploy-${{ github.repository }}-production
+      cancel-in-progress: false
     environment: production
     env:
-      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
-      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
-      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
-      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
-      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
       MODE: ${{ needs.eligibility.outputs.mode }}
       CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
       EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}

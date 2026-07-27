@@ -255,6 +255,33 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
         $this->assertSame(0, $payload['publish_count']);
     }
 
+    public function test_batch_rejects_claim_warnings_instead_of_implicitly_acknowledging_them(): void
+    {
+        $this->createCohort();
+        ArticleEditorialPackageImport::query()
+            ->withoutGlobalScopes()
+            ->where('article_id', 16)
+            ->latest('id')
+            ->firstOrFail()
+            ->forceFill([
+                'claim_result_json' => [
+                    'status' => 'warning',
+                    'matches' => [
+                        ['boundary_context' => true],
+                    ],
+                ],
+            ])
+            ->save();
+
+        $exitCode = Artisan::call('articles:promote-existing-working-revision', $this->dryRunOptions());
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('claim_warning_ack_required', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, $payload['publish_count']);
+    }
+
     public function test_non_batch_callers_cannot_suppress_release_audit_or_cache_invalidation(): void
     {
         $this->createCohort();

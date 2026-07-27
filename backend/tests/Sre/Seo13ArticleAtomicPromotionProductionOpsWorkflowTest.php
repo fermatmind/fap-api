@@ -24,6 +24,7 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             'actions: read',
             'contents: read',
             'git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main',
+            'test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'gh run download "$PREFLIGHT_RUN_ID"',
             '.status == "PASS_PREFLIGHT"',
             '.status == "FAIL_CLOSED"',
@@ -40,8 +41,9 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             '.url_inspection_count == 0',
             '.deploy_count == 0',
             'if: always()',
-            'vars.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_HOST',
             'secrets.SSH_PRIVATE_KEY',
+            'group: deploy-${{ github.repository }}-production',
             'publish exactly 13 approved working revisions',
         ] as $required) {
             $this->assertStringContainsString($required, $workflow);
@@ -50,6 +52,7 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
         $this->assertSame(1, substr_count($workflow, 'fetch-depth: 0'));
         $this->assertStringNotContainsString('139.224.', $workflow);
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow);
+        $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
         $this->assertStringNotContainsString('php artisan migrate', $workflow);
         $this->assertStringNotContainsString('queue:restart', $workflow);
         $this->assertStringNotContainsString('deploy:symlink', $workflow);
@@ -91,6 +94,10 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             'gsc_request_count: 0',
             'url_inspection_count: 0',
             'deploy_count: 0',
+            "write_state='indeterminate'",
+            "write_state='committed'",
+            "stage='revalidate_active_release_before_apply'",
+            'latest_current_release="$(readlink -f "$deploy_path/current")"',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }
