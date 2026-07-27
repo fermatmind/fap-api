@@ -100990,9 +100990,9 @@
     "base": "main",
     "branch": "codex/saep-proposed-api-parity06-big-five-sitemap-reserved-namespace-gate-01",
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "6ea26cd8c2a851e98cf59a901fbea8e6846c9a76",
+    "commit_sha": "18a415e87c0b69dde30925a223f9bf6cb111a624",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
     "checks": {
       "focused_big_five_sitemap_contract": "passed: 16 tests, 161 assertions",
@@ -101002,13 +101002,13 @@
       "composer_audit_locked": "passed: 0 advisories",
       "ci_verify_mbti": "passed: full repository gate",
       "yaml_json_and_diff_scope": "passed",
-      "github_required_checks": "pending on final cross-framework authority fix head",
-      "exact_head_review": "pending on final cross-framework authority fix head"
+      "github_required_checks": "passed: 9/9 on exact implementation head 18a415e87c0b69dde30925a223f9bf6cb111a624",
+      "exact_head_review": "passed: exact implementation head 18a415e87c0b69dde30925a223f9bf6cb111a624 reviewed; only this mandatory ledger-binding tail remained"
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101123,8 +101123,13 @@
         "at": "2026-07-27T09:26:00Z",
         "status": "github_checks_pending",
         "note": "Final local scope passes: focused Big Five contract 16 tests / 161 assertions, complete sitemap generator/XML/source/cache suite 55 tests / 1356 assertions, scoped Pint, and the full ci_verify_mbti repository gate. Generated compiled artifacts were restored to exact tracked bytes; fresh exact-head checks and review are required."
+      },
+      {
+        "at": "2026-07-27T09:33:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 18a415e87c0b69dde30925a223f9bf6cb111a624 passed all nine required checks, Codex exact-head review, and 0 unresolved implementation threads; GitHub reports CLEAN/MERGEABLE. Manifest and ledger now bind that implementation head as ready_to_merge. This metadata-only tail must independently repeat required checks and exact-head review before squash merge."
       }
     ],
-    "updated_at": "2026-07-27T09:26:00Z"
+    "updated_at": "2026-07-27T09:33:00Z"
   }
 }
