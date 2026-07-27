@@ -101083,8 +101083,13 @@
         "at": "2026-07-27T07:42:00Z",
         "status": "ready_to_merge",
         "note": "Exact head 43c3749e66b6ddeefb4fe4f575434e628c1d6d9f passed all nine required checks, exact-head Codex review reported no major issues, review threads are 0, and GitHub reports MERGEABLE/CLEAN. This ledger-only tail records the mandatory ready_to_merge transition; production deploy and cache actions remain unauthorized."
+      },
+      {
+        "at": "2026-07-27T08:03:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review found encoded query/fragment delimiters could bypass reserved-namespace classification. The initial focused retry exposed an invalid regex delimiter and failed before assertions; the scoped fix escapes the delimiter, rejects decoded ?/# boundaries fail-closed, and passes the focused contract (66 assertions), the complete sitemap generator/source/Big Five suite (1041 assertions), scoped Pint, YAML/JSON parsing, and diff validation."
       }
     ],
-    "updated_at": "2026-07-27T07:42:00Z"
+    "updated_at": "2026-07-27T08:03:00Z"
   }
 }

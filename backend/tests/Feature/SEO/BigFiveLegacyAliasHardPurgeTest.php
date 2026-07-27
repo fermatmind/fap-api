@@ -372,6 +372,8 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         foreach ([
             'query-bearing-hub' => '/zh/personality/big-five?preview=1',
             'fragment-bearing-hub' => '/zh/personality/big-five#preview',
+            'encoded-query-bearing-hub' => '/zh/personality/big-five%3Fpreview=1',
+            'encoded-fragment-bearing-hub' => '/zh/personality/big-five%23preview',
             'dot-segment-methodology' => '/zh/personality/x/../big-five/methodology',
             'encoded-methodology' => '/zh/personality/%62ig-five/methodology',
             'backslash-methodology' => '/zh/personality\big-five/methodology',
@@ -399,6 +401,8 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         self::assertContains('https://fermatmind.com/zh/personality/big-five/source-review-policy', $authorityPaths);
         self::assertContains('https://fermatmind.com/zh/personality/big-five?preview=1', $authorityPaths);
         self::assertContains('https://fermatmind.com/zh/personality/big-five#preview', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five%3Fpreview=1', $authorityPaths);
+        self::assertContains('https://fermatmind.com/zh/personality/big-five%23preview', $authorityPaths);
         self::assertContains('https://fermatmind.com/zh/personality/x/../big-five/methodology', $authorityPaths);
         self::assertContains('https://fermatmind.com/zh/personality/%62ig-five/methodology', $authorityPaths);
         self::assertContains('https://fermatmind.com/zh/personality\big-five/methodology', $authorityPaths);
@@ -423,6 +427,8 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
         self::assertNotContains('https://fermatmind.com/zh/personality/big-five/source-review-policy', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality/big-five?preview=1', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality/big-five#preview', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five%3Fpreview=1', $paths->all());
+        self::assertNotContains('https://fermatmind.com/zh/personality/big-five%23preview', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality/x/../big-five/methodology', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality/%62ig-five/methodology', $paths->all());
         self::assertNotContains('https://fermatmind.com/zh/personality\big-five/methodology', $paths->all());

@@ -138,10 +138,10 @@ class SitemapGenerator
 
                 $normalizedPath = self::normalizePathForReservedNamespace($path);
                 $isReservedBigFivePath = preg_match(
-                    '#^/(?:en|zh)/personality/big-five(?:/|$)#',
+                    '#^/(?:en|zh)/personality/big-five(?:[/?\#]|$)#',
                     $path,
                 ) === 1 || preg_match(
-                    '#^/(?:en|zh)/personality/big-five(?:/|$)#',
+                    '#^/(?:en|zh)/personality/big-five(?:[/?\#]|$)#',
                     $normalizedPath,
                 ) === 1;
                 if (! $isReservedBigFivePath) {
