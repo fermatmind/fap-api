@@ -167,6 +167,14 @@ jobs:
             > artifacts/mbti-index52-projection-repair-preflight.json
           rm artifacts/remote-preflight.json
 
+      - name: Revalidate latest main after production read
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
       - name: Upload sanitized immutable preflight receipt
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

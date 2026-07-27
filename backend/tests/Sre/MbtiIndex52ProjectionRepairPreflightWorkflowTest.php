@@ -17,6 +17,11 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('name: MBTI INDEX52 Projection Repair Preflight', $workflow);
         self::assertStringContainsString('environment: production', $workflow);
         self::assertStringContainsString('test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"', $workflow);
+        self::assertSame(3, substr_count(
+            $workflow,
+            'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
+        ));
+        self::assertStringContainsString('Revalidate latest main after production read', $workflow);
         self::assertStringContainsString('EXPECTED_ACTIVE_REVISION', $workflow);
         self::assertStringContainsString('EXPECTED_CONTROL_PLANE_SHA=$q_control', $workflow);
         self::assertStringContainsString('StreamedMbtiIndex52', $workflow);
