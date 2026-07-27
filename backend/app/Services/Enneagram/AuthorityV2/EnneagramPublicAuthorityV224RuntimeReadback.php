@@ -92,6 +92,18 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $urlSets = $batch === 'all'
             ? $this->urlSets($frontendBaseUrl, array_column($targets, 'path'))
             : null;
+        $metadataAuthorityExactCount = count(array_filter(
+            $rows,
+            static fn (array $row): bool => ($row['metadata_authority_exact'] ?? false) === true,
+        ));
+        $metadataAuthorityDerivedCount = count(array_filter(
+            $rows,
+            static fn (array $row): bool => ($row['metadata_render_state'] ?? null) === 'derived_x_default',
+        ));
+        $schemaAuthorityExactCount = count(array_filter(
+            $rows,
+            static fn (array $row): bool => ($row['schema_authority_exact'] ?? false) === true,
+        ));
 
         return [
             'schema_version' => 'enneagram_public_authority_v2_runtime_readback.v1',
@@ -110,6 +122,11 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'stable_identity_discoverability_fingerprint' => $projection['stable_identity_discoverability_fingerprint'],
             'url_sets' => $urlSets,
             'rows' => $rows,
+            'metadata_authority_exact_count' => $metadataAuthorityExactCount,
+            'metadata_authority_derived_count' => $metadataAuthorityDerivedCount,
+            'metadata_fail_closed_count' => count($rows) - $metadataAuthorityExactCount - $metadataAuthorityDerivedCount,
+            'schema_authority_exact_count' => $schemaAuthorityExactCount,
+            'schema_fail_closed_count' => count($rows) - $schemaAuthorityExactCount,
             'private_data_exposed_count' => 0,
             'non_empty_media_count' => 0,
             'writes_committed' => false,
@@ -157,7 +174,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         if (($payload['ok'] ?? false) !== true || $v1 === []) {
             $issues[] = 'api_contract_missing';
         }
-        $this->assertNoSensitiveValues($api->body(), $sensitiveValues, 'api', $issues);
+        $this->assertNoSensitiveValues($api->body(), $sensitiveValues, 'api', $issues, true);
         foreach ([
             'framework' => PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM,
             'entity_type' => (string) $target['entity_type'],
@@ -176,7 +193,20 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             $issues[] = 'api_media_not_empty';
         }
         $this->assertApiPayloadMatchesCurrentPublicAsset($target, $v1, $issues);
-        $this->validateApiDiscoverabilityUrls($target, $v1, $frontendBaseUrl, $issues);
+        $metadataAuthorityExact = $this->validateApiDiscoverabilityUrls(
+            $phase,
+            $target,
+            $v1,
+            $frontendBaseUrl,
+            $issues,
+        );
+        $metadataAuthorityRenderable = $metadataAuthorityExact
+            || ($phase === 'pre' && $this->apiMetadataAuthorityRenderable(
+                $v1,
+                (string) $target['path'],
+                $frontendBaseUrl,
+            ));
+        $schemaAuthorityExact = $this->schemaAuthorityExact($v2);
         if ($phase === 'post') {
             if (($v1['source_hash'] ?? null) !== $target['asset_sha256']
                 || ($v1['source_package'] ?? null) !== EnneagramPublicAuthorityV205RevisionWorkspaceWriter::SOURCE_PACKAGE
@@ -216,6 +246,12 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'source_package' => $v1['source_package'] ?? null,
             'source_hash' => $v1['source_hash'] ?? null,
             'media_empty' => $this->normalizedMedia($v1['media'] ?? null) === ['hero' => null, 'inline' => [], 'og' => null],
+            'metadata_authority_exact' => $metadataAuthorityExact,
+            'metadata_render_state' => $metadataAuthorityExact
+                ? 'exact'
+                : ($metadataAuthorityRenderable ? 'derived_x_default' : 'fail_closed'),
+            'schema_authority_exact' => $schemaAuthorityExact,
+            'schema_render_state' => $schemaAuthorityExact ? 'exact' : 'fail_closed',
             'reviewer_public' => false,
             'issues' => $issues,
             'ok' => $issues === [],
@@ -268,7 +304,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'canonical_path' => (string) data_get($asset->canonical_json, 'path', ''),
             'canonical' => is_array($asset->canonical_json) ? $asset->canonical_json : [],
             'hreflang' => $this->normalizedHreflangUrls($asset->hreflang_json),
-            'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
+            'faq' => $this->normalizedFaq($asset->faq_json),
             'source_package' => $asset->source_package,
             'source_hash' => $asset->source_hash,
             'review_state' => $this->publicReviewContract->normalizeState($asset->review_state),
@@ -282,7 +318,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             'canonical_path' => (string) ($v1['canonical_path'] ?? ''),
             'canonical' => is_array($v1['canonical'] ?? null) ? $v1['canonical'] : [],
             'hreflang' => $this->normalizedHreflangUrls($v1['hreflang'] ?? null),
-            'faq' => is_array($v1['faq'] ?? null) ? $v1['faq'] : [],
+            'faq' => $this->normalizedFaq($v1['faq'] ?? null),
             'source_package' => $v1['source_package'] ?? null,
             'source_hash' => $v1['source_hash'] ?? null,
             'review_state' => (string) ($v1['review_state'] ?? ''),
@@ -294,11 +330,12 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
 
     /** @param array<string,mixed> $target @param array<string,mixed> $v1 @param list<string> $issues */
     private function validateApiDiscoverabilityUrls(
+        string $phase,
         array $target,
         array $v1,
         string $frontendBaseUrl,
         array &$issues,
-    ): void {
+    ): bool {
         $path = (string) $target['path'];
         $canonical = is_array($v1['canonical'] ?? null) ? $v1['canonical'] : [];
         if (trim((string) ($canonical['path'] ?? '')) !== $path
@@ -330,11 +367,15 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         foreach ($requiredLanguages as $language) {
             $reference = trim((string) ($hreflang[$language] ?? ''));
             $expectedPath = (string) ($expectedPaths[$language] ?? '');
-            if ($expectedPath === ''
-                || ! $this->isExactFrontendReference($reference, $frontendBaseUrl, $expectedPath)) {
+            if ($reference === '' && $phase === 'pre') {
+                continue;
+            }
+            if ($expectedPath === '' || ! $this->isExactFrontendReference($reference, $frontendBaseUrl, $expectedPath)) {
                 $issues[] = 'api_hreflang_url_mismatch_'.$language;
             }
         }
+
+        return $this->hasExactRequiredHreflang($hreflang, $frontendBaseUrl, $expectedPaths);
     }
 
     /** @param array<string,mixed> $target @param array<string,mixed> $v2 @param list<string> $issues */
@@ -564,7 +605,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
                 break;
             }
         }
-        $this->assertNoSensitiveValues($html, $sensitiveValues, 'html', $issues);
+        $this->assertNoSensitiveValues($html, $sensitiveValues, 'html', $issues, false);
 
         $dom = new DOMDocument;
         $previous = libxml_use_internal_errors(true);
@@ -577,6 +618,14 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             return;
         }
         $xpath = new DOMXPath($dom);
+        $textIncludingHiddenMarkup = preg_replace('/<[^>]+>/', '', $html) ?? $html;
+        $this->assertNoSensitiveValues(
+            $textIncludingHiddenMarkup,
+            $sensitiveValues,
+            'html',
+            $issues,
+            false,
+        );
         $standardMedia = $xpath->query(
             '//meta[@content and ('
             .'starts-with(translate(@property,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"),"og:image")'
@@ -636,31 +685,60 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         }
         $expectedTitle = trim((string) ($v1['title'] ?? ''));
         $expectedDescription = trim((string) data_get($v1, 'seo.description', $v1['summary'] ?? ''));
-        if ($expectedTitle !== '' && (! str_contains($title, $expectedTitle) || ! str_contains($h1, $expectedTitle))) {
+        $metadataAuthorityExact = $this->apiMetadataAuthorityExact($v1, $path, $frontendBaseUrl);
+        $metadataAuthorityRenderable = $metadataAuthorityExact
+            || ($phase === 'pre' && $this->apiMetadataAuthorityRenderable($v1, $path, $frontendBaseUrl));
+        if ($expectedTitle !== '' && ! str_contains($h1, $expectedTitle)) {
             $issues[] = 'html_title_or_h1_mismatch';
         }
-        if ($expectedDescription !== '' && $description !== $expectedDescription) {
-            $issues[] = 'html_description_mismatch';
+        if ($phase === 'post' || $metadataAuthorityRenderable) {
+            if ($expectedTitle !== '' && ! str_contains($title, $expectedTitle)) {
+                $issues[] = 'html_title_or_h1_mismatch';
+            }
+            if ($expectedDescription !== '' && $description !== $expectedDescription) {
+                $issues[] = 'html_description_mismatch';
+            }
+            $expectedRobots = $this->normalizedRobotsDirective((string) ($v1['robots'] ?? ''));
+            if ($expectedRobots === ''
+                || $robotsNodes === false
+                || $robotsNodes->length !== 1
+                || $this->normalizedRobotsDirective($robots) !== $expectedRobots) {
+                $issues[] = 'html_robots_mismatch';
+            }
+            if ($canonicalNodes === false
+                || $canonicalNodes->length !== 1
+                || ! $this->isExactFrontendUrl($canonical, $frontendBaseUrl, $path)) {
+                $issues[] = 'html_canonical_mismatch';
+            }
+            $expectedHtmlHreflang = is_array($v1['hreflang'] ?? null) ? $v1['hreflang'] : [];
+            if ($phase === 'pre'
+                && ! array_key_exists('x-default', $this->normalizedHreflangUrls($expectedHtmlHreflang))
+                && trim((string) data_get($expectedHtmlHreflang, 'en', '')) !== '') {
+                $expectedHtmlHreflang['x-default'] = (string) data_get($expectedHtmlHreflang, 'en');
+            }
+            $this->validateHreflang(
+                $xpath,
+                $expectedHtmlHreflang,
+                $frontendBaseUrl,
+                $issues,
+            );
+        } else {
+            $failClosedRobots = $this->normalizedRobotsDirective($robots);
+            if ($robotsNodes === false
+                || $robotsNodes->length !== 1
+                || ! str_contains($failClosedRobots, 'noindex')
+                || ! str_contains($failClosedRobots, 'follow')
+                || str_contains($failClosedRobots, 'nofollow')) {
+                $issues[] = 'html_pre_metadata_not_fail_closed';
+            }
+            if (($canonicalNodes !== false && $canonicalNodes->length !== 0)
+                || $this->htmlHreflangLinkCount($xpath) !== 0) {
+                $issues[] = 'html_pre_metadata_not_fail_closed';
+            }
         }
-        $expectedRobots = $this->normalizedRobotsDirective((string) ($v1['robots'] ?? ''));
-        if ($expectedRobots === ''
-            || $robotsNodes === false
-            || $robotsNodes->length !== 1
-            || $this->normalizedRobotsDirective($robots) !== $expectedRobots) {
-            $issues[] = 'html_robots_mismatch';
-        }
-        if ($canonicalNodes === false
-            || $canonicalNodes->length !== 1
-            || ! $this->isExactFrontendUrl($canonical, $frontendBaseUrl, $path)) {
-            $issues[] = 'html_canonical_mismatch';
-        }
-        $this->validateHreflang(
-            $xpath,
-            is_array($v1['hreflang'] ?? null) ? $v1['hreflang'] : [],
-            $frontendBaseUrl,
-            $issues,
-        );
-        foreach ($xpath->query('//a[@href]') ?: [] as $link) {
+        foreach ($xpath->query(
+            '//main//a[@href] | //article//a[@href] | //*[@role="main"]//a[@href]',
+        ) ?: [] as $link) {
             if (! $link instanceof DOMElement) {
                 continue;
             }
@@ -674,7 +752,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         $this->markStylesheetHiddenElements($xpath, $issues);
         $visible = $this->normalizedRenderableBodyText($xpath);
         if (! in_array('html_private_reviewer_exposed', $issues, true)) {
-            $this->assertNoSensitiveValues($visible, $sensitiveValues, 'html', $issues);
+            $this->assertNoSensitiveValues($visible, $sensitiveValues, 'html', $issues, false);
         }
         $this->validateVisibleSections(
             is_array($v1['sections'] ?? null) ? $v1['sections'] : [],
@@ -743,7 +821,11 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         }
         ksort($expectedFaqAnswers);
         ksort($observedFaqAnswers);
-        if ($faqSchemaInvalid || $expectedFaqAnswers !== $observedFaqAnswers) {
+        $schemaAuthorityExact = $this->schemaAuthorityExact($v2);
+        $schemaExpected = $phase === 'post' || $schemaAuthorityExact;
+        if ($faqSchemaInvalid
+            || ($schemaExpected && $expectedFaqAnswers !== $observedFaqAnswers)
+            || (! $schemaExpected && $observedFaqAnswers !== [])) {
             $issues[] = 'html_schema_faq_mismatch';
         }
     }
@@ -759,6 +841,27 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     private function normalizedRobotsDirective(string $value): string
     {
         return strtolower((string) preg_replace('/\s+/', '', trim($value)));
+    }
+
+    /** @return list<array{question:string,answer:string}> */
+    private function normalizedFaq(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $faq = [];
+        foreach ($value as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            $faq[] = [
+                'question' => trim((string) ($item['question'] ?? $item['q'] ?? '')),
+                'answer' => trim((string) ($item['answer'] ?? $item['a'] ?? '')),
+            ];
+        }
+
+        return $faq;
     }
 
     /** @return array<string,mixed> */
@@ -786,6 +889,86 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
         ksort($urls);
 
         return $urls;
+    }
+
+    /** @param array<string,string> $hreflang @param array<string,string> $expectedPaths */
+    private function hasExactRequiredHreflang(
+        array $hreflang,
+        string $frontendBaseUrl,
+        array $expectedPaths,
+    ): bool {
+        foreach (['en', 'zh-cn', 'x-default'] as $language) {
+            $reference = trim((string) ($hreflang[$language] ?? ''));
+            $expectedPath = (string) ($expectedPaths[$language] ?? '');
+            if ($expectedPath === ''
+                || ! $this->isExactFrontendReference($reference, $frontendBaseUrl, $expectedPath)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /** @param array<string,mixed> $v1 */
+    private function apiMetadataAuthorityExact(array $v1, string $path, string $frontendBaseUrl): bool
+    {
+        $canonical = is_array($v1['canonical'] ?? null) ? $v1['canonical'] : [];
+        if (trim((string) ($canonical['path'] ?? '')) !== $path) {
+            return false;
+        }
+        $routeSuffix = preg_replace('#^/(?:en|zh)/#', '/', $path);
+        if (! is_string($routeSuffix)) {
+            return false;
+        }
+
+        return $this->hasExactRequiredHreflang(
+            $this->normalizedHreflangUrls($v1['hreflang'] ?? null),
+            $frontendBaseUrl,
+            [
+                'en' => '/en'.$routeSuffix,
+                'zh-cn' => '/zh'.$routeSuffix,
+                'x-default' => '/en'.$routeSuffix,
+            ],
+        );
+    }
+
+    /** @param array<string,mixed> $v1 */
+    private function apiMetadataAuthorityRenderable(array $v1, string $path, string $frontendBaseUrl): bool
+    {
+        $canonical = is_array($v1['canonical'] ?? null) ? $v1['canonical'] : [];
+        if (trim((string) ($canonical['path'] ?? '')) !== $path) {
+            return false;
+        }
+        $routeSuffix = preg_replace('#^/(?:en|zh)/#', '/', $path);
+        if (! is_string($routeSuffix)) {
+            return false;
+        }
+        $hreflang = $this->normalizedHreflangUrls($v1['hreflang'] ?? null);
+
+        return $this->isExactFrontendReference(
+            trim((string) ($hreflang['en'] ?? '')),
+            $frontendBaseUrl,
+            '/en'.$routeSuffix,
+        ) && $this->isExactFrontendReference(
+            trim((string) ($hreflang['zh-cn'] ?? '')),
+            $frontendBaseUrl,
+            '/zh'.$routeSuffix,
+        );
+    }
+
+    /** @param array<string,mixed> $v2 */
+    private function schemaAuthorityExact(array $v2): bool
+    {
+        return data_get($v2, 'schema_eligible') === true;
+    }
+
+    private function htmlHreflangLinkCount(DOMXPath $xpath): int
+    {
+        $nodes = $xpath->query(
+            '//link[contains(concat(" ",normalize-space(translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz"))," ")," alternate ") and @hreflang]',
+        );
+
+        return $nodes === false ? 0 : $nodes->length;
     }
 
     /** @param array<int|string,mixed> $schema */
@@ -1256,7 +1439,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
 
         $text = '';
         foreach ($nodes as $node) {
-            $text .= (string) $node->nodeValue;
+            $text .= ' '.(string) $node->nodeValue;
         }
 
         return $this->normalizedVisibleText($text);
@@ -1313,8 +1496,13 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
     }
 
     /** @param list<string> $sensitiveValues @param list<string> $issues */
-    private function assertNoSensitiveValues(string $body, array $sensitiveValues, string $surface, array &$issues): void
-    {
+    private function assertNoSensitiveValues(
+        string $body,
+        array $sensitiveValues,
+        string $surface,
+        array &$issues,
+        bool $scanPrivateRuntimePaths,
+    ): void {
         $decodedBody = html_entity_decode($body, ENT_QUOTES | ENT_HTML5);
         $caseFoldedBody = mb_strtolower($body, 'UTF-8');
         $caseFoldedDecodedBody = mb_strtolower($decodedBody, 'UTF-8');
@@ -1329,7 +1517,7 @@ final class EnneagramPublicAuthorityV224RuntimeReadback
             }
         }
         if (preg_match('~(?:"reviewer_name"|rollback[_-]?token)~i', $body) === 1
-            || $this->containsPrivateRuntimePath($decodedBody)) {
+            || ($scanPrivateRuntimePaths && $this->containsPrivateRuntimePath($decodedBody))) {
             $issues[] = $surface.'_private_data_marker_exposed';
         }
     }
