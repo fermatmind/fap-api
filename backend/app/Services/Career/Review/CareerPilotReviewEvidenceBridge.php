@@ -225,10 +225,13 @@ final class CareerPilotReviewEvidenceBridge
             $projections,
             static fn (array $projection): bool => ($projection['review_state'] ?? null) === 'approved',
         ));
+        if ($approvedSlugs === []) {
+            return [];
+        }
 
         try {
             $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
-            $this->searchEntryQualityEvaluator->primePublicationSnapshot(array_keys($projections));
+            $this->searchEntryQualityEvaluator->primePublicationSnapshot($approvedSlugs);
 
             return $this->currentTargetCurrencyBySlug($projections);
         } catch (\Throwable) {

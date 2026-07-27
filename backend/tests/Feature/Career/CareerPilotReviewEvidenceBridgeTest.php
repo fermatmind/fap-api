@@ -85,6 +85,22 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('items.0.search_entry_authority.review_state', 'unknown');
     }
 
+    public function test_unapproved_detail_skips_redundant_publication_refresh(): void
+    {
+        $bridge = app(CareerPilotReviewEvidenceBridge::class);
+        $payload = app(PublicCareerAuthorityResponseCache::class)->jobDetailPayload(self::SLUG, 'en');
+        $this->assertIsArray($payload);
+
+        Cache::partialMock()
+            ->shouldReceive('get')
+            ->never();
+
+        $projected = $bridge->projectDetailPayload(self::SLUG, $payload);
+
+        $this->assertSame('unknown', data_get($projected, 'trust_manifest.review_state'));
+        $this->assertSame('ineligible', data_get($projected, 'search_entry_tier'));
+    }
+
     public function test_exact_approved_all_evidence_projects_only_public_review_fields(): void
     {
         $package = app(CareerPilotReviewEvidenceBridge::class)->buildPackage([self::SLUG]);
