@@ -6,6 +6,7 @@ namespace App\Services\Career\Review;
 
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 
+/** @review-surface career_trust_manifest */
 final class CareerSearchEntryQualityBatchPlanner
 {
     public const SCHEMA_VERSION = 'career.search_entry_quality_batch.v1';

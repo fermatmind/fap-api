@@ -8,6 +8,7 @@ use App\Services\Career\Dataset\CareerPublishTrackResolver;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
 
+/** @review-surface career_trust_manifest */
 final class CareerSearchEntryQualityEvaluator
 {
     private const LOCALES = ['en', 'zh-CN'];
