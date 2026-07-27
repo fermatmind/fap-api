@@ -422,6 +422,39 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         app(CareerSearchEntryQualityBatchPlanner::class)->build();
     }
 
+    public function test_placeholder_and_contract_metadata_cannot_satisfy_visible_prose_thickness(): void
+    {
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $payload = $this->detailPayload($slug, 'en');
+        $placeholders = [];
+        foreach (range(1, 24) as $index) {
+            $placeholders['placeholder_'.$index] = [
+                'module_key' => str_repeat('not-visible-module-key-', 4),
+                'module_state' => str_repeat('pending_reviewed_locale_content-', 4),
+                'content_available' => false,
+                'source' => str_repeat('component_order_contract-', 4),
+                'placeholder_policy' => str_repeat('no_cross_locale_editorial_copy_generated-', 4),
+                'href' => '/en/'.str_repeat('not-visible-path-', 4),
+            ];
+        }
+        $payload['display_surface_v1']['page']['content'] = array_merge([
+            'hero' => ['title' => 'Thin', 'quick_answer' => 'Thin'],
+            'primary_cta' => ['href' => '/en/tests/holland-career-interest-test-riasec'],
+            'faq_block' => ['items' => [[
+                'question' => 'Is this a guaranteed outcome?',
+                'answer' => 'No. It is bounded evidence for exploration.',
+            ]]],
+            'boundary_notice' => ['body' => 'No guarantees.'],
+            'final_cta' => ['href' => '/en/career'],
+        ], $placeholders);
+        $this->responseCache->publishJobDetailReadModel($slug, 'en', $payload);
+
+        $locale = app(CareerSearchEntryQualityEvaluator::class)->evaluate($slug)['locales']['en'];
+
+        $this->assertLessThan(500, $locale['visible_character_count']);
+        $this->assertContains('visible_content_too_thin', $locale['blockers']);
+    }
+
     public function test_missing_bilingual_authority_fails_closed(): void
     {
         Cache::flush();

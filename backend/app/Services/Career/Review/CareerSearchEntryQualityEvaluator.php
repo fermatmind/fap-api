@@ -14,6 +14,44 @@ final class CareerSearchEntryQualityEvaluator
 
     private const MIN_VISIBLE_CHARACTERS = 500;
 
+    /**
+     * Keys whose string values are rendered as reader-facing prose. Contract
+     * metadata, identifiers, paths, hrefs, source pointers, and placeholder
+     * state are deliberately absent.
+     */
+    private const VISIBLE_PROSE_FIELDS = [
+        'answer',
+        'body',
+        'body_md',
+        'boundary',
+        'caption',
+        'caveat',
+        'caution',
+        'content_body_md',
+        'copy',
+        'definition',
+        'definition_block',
+        'description',
+        'explanation',
+        'fit',
+        'h1',
+        'items',
+        'label',
+        'limitation',
+        'note',
+        'notice',
+        'primary',
+        'question',
+        'quick_answer',
+        'rows',
+        'summary',
+        'subtitle',
+        'text',
+        'title',
+        'traits',
+        'warning',
+    ];
+
     /** @var array<string,array<string,mixed>> */
     private array $evaluations = [];
 
@@ -174,7 +212,7 @@ final class CareerSearchEntryQualityEvaluator
                 'content_sections' => $payload['content_sections'] ?? [],
                 'content_body_md' => $payload['content_body_md'] ?? null,
             ];
-        $visibleText = implode("\n", $this->strings($visibleContent));
+        $visibleText = implode("\n", $this->visibleProseStrings($visibleContent));
         $visibleCharacters = mb_strlen(preg_replace('/\s+/u', '', $visibleText) ?? '');
         if ($visibleCharacters < self::MIN_VISIBLE_CHARACTERS) {
             $blockers[] = 'visible_content_too_thin';
@@ -377,17 +415,22 @@ final class CareerSearchEntryQualityEvaluator
     }
 
     /** @return list<string> */
-    private function strings(mixed $value): array
+    private function visibleProseStrings(mixed $value, ?string $field = null): array
     {
         if (is_string($value)) {
-            return trim($value) === '' ? [] : [trim($value)];
+            return trim($value) === '' || ! in_array($field, self::VISIBLE_PROSE_FIELDS, true)
+                ? []
+                : [trim($value)];
         }
         if (! is_array($value)) {
             return [];
         }
         $strings = [];
-        foreach ($value as $child) {
-            array_push($strings, ...$this->strings($child));
+        foreach ($value as $key => $child) {
+            array_push(
+                $strings,
+                ...$this->visibleProseStrings($child, is_string($key) ? $key : $field),
+            );
         }
 
         return $strings;
