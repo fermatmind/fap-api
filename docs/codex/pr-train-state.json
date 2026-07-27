@@ -100809,7 +100809,7 @@
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
     "status": "github_checks_pending",
-      "commit_sha": "7239f61247c73273941d7eeb8d010a6964b8b677",
+      "commit_sha": "0d3c0b1f194b84183e30efd2a70aed017785fe18",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
@@ -100822,7 +100822,7 @@
       },
       "focused_tests": {
         "status": "passed",
-          "evidence": "The deterministic batch suite passes 18 warning-only tests / 1436 assertions; combined with the reviewer bridge it passes 28 warning-only tests / 1515 assertions. The related tier contract and publish-track run passes 14 tests plus 4 warning-only tests / 143 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, source identity requirements with empty-wrapper and usage-only rejection, full expected-package self-authentication and canonical comparison, all populated detail/index canonical fields matching the exact locale route, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, same-version ready_active exposure-snapshot authority, request-time full bilingual target revalidation after cached approval, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
+          "evidence": "The deterministic batch suite passes 18 warning-only tests / 1436 assertions; combined with the reviewer bridge it passes 29 warning-only tests / 1520 assertions. The related tier contract and publish-track run passes 14 tests plus 4 warning-only tests / 143 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, source identity requirements with empty-wrapper and usage-only rejection, full expected-package self-authentication and canonical comparison, all populated detail/index canonical fields matching the exact locale route, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, same-version ready_active exposure-snapshot authority, request-time full bilingual target revalidation after cached approval, transient revalidation failure downgrade without a detail 500, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
       },
       "required_local_checks": {
         "status": "passed",
@@ -100920,8 +100920,13 @@
           "at": "2026-07-27T05:08:01Z",
           "status": "review_fixes_validated",
           "note": "All nine checks and exact-head review passed on dfc5096fd3214730bb3a5bb0e684f72eab4afa69, then the review exposed two additional fail-open quality boundaries. Every populated canonical field must now match the exact locale-and-slug route, and source objects require a meaningful label/reference or valid public HTTP(S) URL rather than key/usage metadata alone. The focused batch plus reviewer bridge passes 28 warning-only tests / 1515 assertions, scoped Pint and diff checks pass, and a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T05:20:01Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 85cfc8164fa2229d99a3dac8545e31fd5df4f3bc, then exact-head Codex review found that a transient second publication lookup could escape the freshness gate and turn an already-readable cached detail into a 500. Publication refresh is now exception-bounded for both detail and index projection: any failure removes approval and search eligibility while preserving the cached response. The focused batch plus reviewer bridge passes 29 warning-only tests / 1520 assertions, scoped Pint and diff checks pass, and a fresh exact-head CI/review cycle remains required."
         }
       ],
-      "updated_at": "2026-07-27T05:08:01Z"
+      "updated_at": "2026-07-27T05:20:01Z"
   }
 }
