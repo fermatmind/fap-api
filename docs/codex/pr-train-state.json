@@ -100809,7 +100809,7 @@
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "653a2c28e0bee8a4693f09b97ddf0b099787e0da",
+      "commit_sha": "6d60d0e1ef4def6b1efe2372c840c706ab074549",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
@@ -100822,11 +100822,11 @@
       },
       "focused_tests": {
         "status": "passed",
-        "evidence": "The deterministic batch suite passes 11 warning-only tests / 1415 assertions. The related reviewer bridge, tier contract, and publish-track run passes 14 tests plus 13 warning-only tests / 218 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and contract SHA, two bulk publication snapshots with zero per-slug projection lookups, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
+          "evidence": "The deterministic batch suite passes 12 warning-only tests / 1418 assertions. The related reviewer bridge, tier contract, and publish-track run passes 14 tests plus 13 warning-only tests / 218 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and contract SHA, two bulk publication snapshots with zero per-slug projection lookups, same-version ready_active exposure-snapshot authority, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
       },
       "required_local_checks": {
         "status": "passed",
-        "evidence": "Focused and related Career tests passed; Pint passed across 499 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
+          "evidence": "Focused and related Career tests passed; Pint passed across 501 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
       },
       "github_required_checks": {
         "status": "pending",
@@ -100881,12 +100881,17 @@
         "status": "review_fixes_validated",
         "note": "All nine checks passed on prior head 68009f90c83835407b9dbc43b5851f18a42210d2, but Codex review of the preceding head found two valid issues. Moved the conditional classifier path into the PR2 allowed-path entry and bound approved detail projection to the exact payload returned plus current index target hashes, failing closed across pointer drift. Added the race regression and reran all focused, related, classifier, and formatting gates successfully; a fresh exact-head CI/review cycle is required."
       },
-      {
-        "at": "2026-07-27T03:57:05Z",
-        "status": "review_fixes_validated",
-        "note": "All nine checks passed on head 2b1d479d7786b4cb3471c6155cee7908774d5db9, then exact-head Codex review found reader-safe hashing and repeated projection hydration risks. Review targets now project the same reader-safe values as the public controller and bind its source SHA. Publication authority is loaded through exactly two cohort snapshots during a 50-entry build, with no per-slug projection lookups, while retaining published/detail-route/robots/release-gate requirements. Focused and committed branch-diff classifier tests pass; a fresh exact-head CI/review cycle remains required."
-      }
-    ],
-    "updated_at": "2026-07-27T03:57:05Z"
+        {
+          "at": "2026-07-27T03:57:05Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 2b1d479d7786b4cb3471c6155cee7908774d5db9, then exact-head Codex review found reader-safe hashing and repeated projection hydration risks. Review targets now project the same reader-safe values as the public controller and bind its source SHA. Publication authority is loaded through exactly two cohort snapshots during a 50-entry build, with no per-slug projection lookups, while retaining published/detail-route/robots/release-gate requirements. Focused and committed branch-diff classifier tests pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:07:49Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head 7ad4270f7ca9a17d5790f0638db06ed3a8202052, then exact-head Codex review found that the new bulk publication path omitted the existing ready_active plus same-version exposure-snapshot authority. The bulk path now preserves the exact single-read semantics without reintroducing per-slug runtime projection hydration, and a focused regression proves the stale materialized-candidate transition. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        }
+      ],
+      "updated_at": "2026-07-27T04:07:49Z"
   }
 }
