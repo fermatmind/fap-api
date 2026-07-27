@@ -389,6 +389,39 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function index52_isolated_runtime_candidate_is_pinned_to_active_staged_and_main_identical_blobs(): void
+    {
+        $source = $this->readRepoFile('.github/workflows/deploy-production.yml');
+
+        foreach ([
+            'isolated_index52: ${{ steps.resolve_deploy_mode.outputs.isolated_index52 }}',
+            'INDEX52_CANDIDATE_SHA="9d2877a7e519f768fd741398e76777620770fb71"',
+            'INDEX52_ACTIVE_SHA="e7ed3b9e894730ff0f973687eb552337db5c6db9"',
+            'INDEX52_STAGED_MAIN_SHA="e9166c5eae03ad13c7ef616b9ca7c528d14bd582"',
+            'INDEX52_STAGING_RUN_ID="30268270565"',
+            'INDEX52_PATCH_SHA256="2cf768ab7896be204b983c377bce5d1b00771f6a5c2dd62c82d5c265b0748f00"',
+            'test "$(git rev-parse "${DEPLOY_SHA}^")" = "$INDEX52_ACTIVE_SHA"',
+            'test "$(git diff --no-renames --name-only "$INDEX52_ACTIVE_SHA" "$DEPLOY_SHA" | sort)" = "$index52_expected_files"',
+            'test "$(git rev-parse "${DEPLOY_SHA}:${path}")" = "$(git rev-parse "${STAGING_SHA}:${path}")"',
+            'ISOLATED_INDEX52: ${{ steps.resolve_deploy_mode.outputs.isolated_index52 }}',
+            'test "$(git rev-parse "${DEPLOY_SHA}:${path}")" = "$(git rev-parse "${LATEST_MAIN_SHA}:${path}")"',
+            'Code-only production deploy accepted exact isolated INDEX-52 runtime candidate with staged-main-byte-identical scoped files.',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $source);
+        }
+
+        $this->assertSame(2, substr_count(
+            $source,
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php'
+        ));
+        $this->assertSame(3, substr_count(
+            $source,
+            'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php'
+        ));
+        $this->assertStringContainsString("task('deploy:code-only', [", $this->readRepoFile('deploy.php'));
+    }
+
+    #[Test]
     public function deploy_application_manual_entry_is_staging_only(): void
     {
         $source = $this->readRepoFile('.github/workflows/deploy.yml');
