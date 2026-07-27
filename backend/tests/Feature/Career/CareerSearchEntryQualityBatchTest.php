@@ -238,13 +238,14 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $this->assertArrayNotHasKey('source_id', $projected);
         $this->assertArrayNotHasKey('row_hash', $projected['nested']);
         $this->assertSame($expected, $projected);
-        $this->assertSame(
-            hash_file(
-                'sha256',
-                app_path('Http/Controllers/API/V0_5/Career/CareerJobDetailController.php'),
-            ),
-            $projector->contractSha256(),
+        $expectedContractSha = hash_file(
+            'sha256',
+            app_path('Http/Controllers/API/V0_5/Career/CareerJobDetailController.php'),
         );
+        $this->assertSame($expectedContractSha, $projector->contractSha256());
+        $this->assertSame($expectedContractSha, $projector->contractSha256());
+        $memoizedSha = new \ReflectionProperty($projector, 'contractSha256');
+        $this->assertSame($expectedContractSha, $memoizedSha->getValue($projector));
     }
 
     public function test_batch_build_does_not_repeat_runtime_projection_lookups(): void

@@ -6,6 +6,8 @@ namespace App\Services\Career\Review;
 
 final class CareerJobDetailReaderSafeReviewProjector
 {
+    private ?string $contractSha256 = null;
+
     private const INTERNAL_READER_PAYLOAD_KEYS = [
         'source_id',
         'source_ids',
@@ -57,12 +59,16 @@ final class CareerJobDetailReaderSafeReviewProjector
 
     public function contractSha256(): string
     {
+        if ($this->contractSha256 !== null) {
+            return $this->contractSha256;
+        }
+
         $path = app_path('Http/Controllers/API/V0_5/Career/CareerJobDetailController.php');
         $sha = is_file($path) ? hash_file('sha256', $path) : false;
         if (! is_string($sha) || preg_match('/^[a-f0-9]{64}$/', $sha) !== 1) {
             throw new \RuntimeException('Career reader-safe projection contract is unavailable.');
         }
 
-        return $sha;
+        return $this->contractSha256 = $sha;
     }
 }
