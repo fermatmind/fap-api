@@ -100697,7 +100697,7 @@
       },
       "focused_tests": {
         "status": "passed",
-        "evidence": "The new tier contract plus reviewer bridge, publish-track resolver, directory held-slug authority, display-surface held regression, public privacy assertions, and ReviewPolicyRegistry suites passed 56 tests / 1420 assertions. Exact content, SEO, public-evidence, bilingual, and index-entry SHA drift remains fail-closed."
+        "evidence": "After the review-surface annotation repair, the new tier contract plus reviewer bridge, publish-track resolver, directory held-slug authority, display-surface held regression, public privacy assertions, and ReviewPolicyRegistry suites passed 56 tests / 1422 assertions. Exact content, SEO, public-evidence, bilingual, and index-entry SHA drift remains fail-closed."
       },
       "required_local_checks": {
         "status": "passed",
@@ -100732,8 +100732,18 @@
         "at": "2026-07-27T01:34:10Z",
         "status": "local_validation_passed",
         "note": "Implemented the read-only backend authority with independent visibility, robots, review, publish-track, content-quality, eligibility, and tier fields. Stable and approved_candidate require current exact bilingual approval plus an eligible existing track; review_needed, hold, all three permanent held slugs, missing/stale evidence, content/SEO/index-entry drift, noindex, hidden visibility, and unknown tracks fail closed. All declared local checks passed across exactly seven authorized paths. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-27T01:36:00Z",
+        "status": "local_check_repair_in_progress",
+        "note": "After the clean rebase onto independent origin/main f6cf998ae03613191f0f95b0efc5914101d4b38b, 55 related tests remained green and ReviewPolicyRegistry alone failed because the newly committed resolver contains manual-review eligibility markers without an explicit surface annotation. The resolver reuses the existing career_trust_manifest gate, so the same-scope repair adds only @review-surface career_trust_manifest; no registry, policy, production, or write behavior changes."
+      },
+      {
+        "at": "2026-07-27T01:37:00Z",
+        "status": "local_validation_passed",
+        "note": "The resolver now explicitly declares the existing registered career_trust_manifest surface. The complete related selection passed 56 tests / 1422 assertions, including ReviewPolicyRegistry, and remains on the seven authorized PR1 paths. Final formatting, dependency, parser, diff, and scope checks are being repeated on the rebased repair head."
       }
     ],
-    "updated_at": "2026-07-27T01:34:10Z"
+    "updated_at": "2026-07-27T01:37:00Z"
   }
 }

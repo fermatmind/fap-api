@@ -8,6 +8,8 @@ use App\Services\Career\CareerDirectoryAuthorityService;
 
 /**
  * Fail-closed, read-only search-entry classification over existing Career authority.
+ *
+ * @review-surface career_trust_manifest
  */
 final class CareerSearchEntryTierResolver
 {
