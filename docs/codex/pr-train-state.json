@@ -100802,10 +100802,10 @@
     "title": "SAEP-PROPOSED-API-PARITY06-BIG-FIVE-SITEMAP-RESERVED-NAMESPACE-GATE-01: enforce canonical Big Five sitemap namespace",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "d69d5a72ea7fa9b0ff0ae9c9d131e99f79a12c1e",
+    "commit_sha": "6ea26cd8c2a851e98cf59a901fbea8e6846c9a76",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3337",
     "checks": {
-      "focused_big_five_sitemap_contract": "passed: 1 test, 54 assertions",
+      "focused_big_five_sitemap_contract": "passed: 1 test, 62 assertions",
       "sitemap_generator_and_source_contracts": "passed: 25 tests, 886 assertions",
       "pint_scoped": "passed",
       "composer_validate_strict": "passed",
@@ -100866,8 +100866,13 @@
         "at": "2026-07-27T07:06:00Z",
         "status": "github_checks_pending",
         "note": "All nine required checks passed on ledger-tail head f92a5ae02607ec73b88b2be39bfe1c876da30b00. Exact-head review identified a fourth in-scope P2: PHP and URL consumers normalize embedded ASCII controls differently. The generator now rejects every sitemap loc containing ASCII control characters before parse_url; the newline-split Big Five fixture is excluded, the focused contract passes with 54 assertions, and the 886-assertion sitemap suite remains green. Canonical commit_sha is rebound to validated implementation d69d5a72ea7fa9b0ff0ae9c9d131e99f79a12c1e."
+      },
+      {
+        "at": "2026-07-27T07:14:00Z",
+        "status": "github_checks_pending",
+        "note": "All nine required checks passed on ledger-tail head f69c71ec7a64323093e98ec42b27a10f986473c6. Exact-head review identified a P1 scope violation because LlmsController also consumes generateUrls. Implementation 6ea26cd8c2a851e98cf59a901fbea8e6846c9a76 moves the reserved namespace and URL-hygiene gate into generateSitemapUrls, binds XML and sitemap-source consumers to that method, and preserves the original unfiltered authority enumeration for llms. Focused contracts prove all eight rejected sitemap fixtures remain present in the shared authority set while the sitemap set stays exactly 104; 62 focused assertions, 886 sitemap assertions, and scoped Pint pass."
       }
     ],
-    "updated_at": "2026-07-27T07:06:00Z"
+    "updated_at": "2026-07-27T07:14:00Z"
   }
 }
