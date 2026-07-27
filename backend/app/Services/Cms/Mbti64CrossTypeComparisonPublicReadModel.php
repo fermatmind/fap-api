@@ -228,7 +228,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'seo_description' => (string) $asset['seo_description'],
             'summary' => (string) $asset['summary'],
             'canonical_url' => $canonicalUrl,
-            'alternates' => $this->alternates($asset, $slug, $canonicalUrl),
+            'alternates' => $this->alternates($canonicalUrl),
             'sections' => $sections,
             'faq' => $faq,
             'internal_links' => $internalLinks,
@@ -364,22 +364,13 @@ final class Mbti64CrossTypeComparisonPublicReadModel
     }
 
     /** @return array<string,string> */
-    private function alternates(array $asset, string $slug, ?string $canonicalUrl): array
+    private function alternates(?string $canonicalUrl): array
     {
         if ($canonicalUrl === null) {
             return [];
         }
-        $expected = [
-            'en' => $this->canonicalUrl($slug, 'en'),
-            self::LOCALE => $canonicalUrl,
-        ];
-        $authority = is_array($asset['alternates'] ?? null) ? $asset['alternates'] : [];
 
-        return $expected['en'] !== null
-            && ($authority['en'] ?? null) === $expected['en']
-            && ($authority[self::LOCALE] ?? null) === $expected[self::LOCALE]
-                ? $expected
-                : [self::LOCALE => $canonicalUrl];
+        return [self::LOCALE => $canonicalUrl];
     }
 
     /**

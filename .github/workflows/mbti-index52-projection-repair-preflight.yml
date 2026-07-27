@@ -82,9 +82,23 @@ jobs:
           set -euo pipefail
           # shellcheck disable=SC2016
           php -r '
+            $isolatedSource = static function (string $path): string {
+              $source = preg_replace("/^<\\?php\\s*/", "", file_get_contents($path));
+              $source = str_replace(
+                "namespace App\\\\Services\\\\Cms;",
+                "namespace App\\\\Services\\\\Cms\\\\StreamedMbtiIndex52;",
+                $source,
+                $replacementCount,
+              );
+              if ($replacementCount !== 1) {
+                throw new RuntimeException("Unable to isolate streamed control-plane class.");
+              }
+
+              return $source;
+            };
             $replace = [
-              "__PACKAGE_CLASS_B64__" => base64_encode(preg_replace("/^<\\?php\\s*/", "", file_get_contents("backend/app/Services/Cms/MbtiIndex52ProjectionRepairPackage.php"))),
-              "__SERVICE_CLASS_B64__" => base64_encode(preg_replace("/^<\\?php\\s*/", "", file_get_contents("backend/app/Services/Cms/MbtiIndex52ProjectionRepairService.php"))),
+              "__PACKAGE_CLASS_B64__" => base64_encode($isolatedSource("backend/app/Services/Cms/MbtiIndex52ProjectionRepairPackage.php")),
+              "__SERVICE_CLASS_B64__" => base64_encode($isolatedSource("backend/app/Services/Cms/MbtiIndex52ProjectionRepairService.php")),
               "__PACKAGE_JSON_B64__" => base64_encode(file_get_contents("backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json")),
               "__AUTHORIZATION_JSON_B64__" => base64_encode(file_get_contents("backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-operator-authorization-2026-07-27.json")),
             ];
