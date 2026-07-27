@@ -940,6 +940,33 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         }
     }
 
+    public function test_html_readback_normalizes_inline_punctuation_text_nodes(): void
+    {
+        $this->seedPublishedEstate();
+        $report = $this->releaseReport();
+        $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()->firstOrFail();
+        $asset->update([
+            'content_sections_json' => [[
+                'key' => 'punctuation-boundary',
+                'body_md' => 'Keep the boundary clear: this remains visible.',
+            ]],
+        ]);
+        $this->fakeRuntimeHttp($report, splitInlinePunctuationHtml: true);
+
+        $result = app(EnneagramPublicAuthorityV224RuntimeReadback::class)->run(
+            'pre',
+            'canary-00',
+            $report,
+            'https://api.test',
+            'https://frontend.test',
+            self::BACKEND_SHA,
+            self::FRONTEND_SHA,
+        );
+
+        $this->assertSame(8, $result['target_count']);
+        $this->assertSame([], array_merge(...array_column($result['rows'], 'issues')));
+    }
+
     public function test_pre_readback_rejects_stale_api_and_html_payload_against_current_database(): void
     {
         $this->seedPublishedEstate();
@@ -2536,6 +2563,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
         string $frontendBaseUrl = 'https://frontend.test',
         bool $prePromotionFailClosed = false,
         bool $globalPrivateSurfaceReferences = false,
+        bool $splitInlinePunctuationHtml = false,
     ): void {
         $paths = array_column($report['asset_records'], 'path');
         $urls = array_map(static fn (string $path): string => $frontendBaseUrl.$path, $paths);
@@ -2543,7 +2571,7 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
             $urls[0] = $discoverabilityUrlOverride;
         }
         $baseUrlText = implode("\n", $urls);
-        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByNestedAtRule, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $frontendBaseUrl, $globalPrivateSurfaceReferences, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $prePromotionFailClosed, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
+        Http::fake(function (Request $request) use ($apiCanonicalUrlOverride, $apiHreflangUrlOverride, $authorityContentHiddenByNestedAtRule, $authorityContentHiddenByStylesheet, $authorityContentHiddenStyle, $authorityContentOnlyInHydrationScript, $baseUrlText, $canonicalUrlOverride, $discoverabilityState, $duplicateCanonicalUrl, $duplicateRobotsMeta, $emitFaqSchema, $faqSchemaAnswerOverride, $frontendBaseUrl, $globalPrivateSurfaceReferences, $hreflangUrlOverride, $omitFaqAnswerHtml, $omitFaqSchemaAnswer, $omitSectionHtml, $omitVisibleEvidence, $omitVisibleEvidenceLimitations, $partialVisibleEvidence, $prePromotionFailClosed, $privateReviewerLeak, $privateRouteLeak, $redirectSurface, $rejectRevalidation, $robotsHtmlOverride, $splitInlinePunctuationHtml, $splitPrivateReviewerHtml, $staleHreflangPayload, $stalePublicPayload, $standardMediaLeak, $tokenizedHreflangConflict): \GuzzleHttp\Promise\PromiseInterface|\Illuminate\Http\Client\Response {
             $url = $request->url();
             $additionalUrl = is_object($discoverabilityState) && is_string($discoverabilityState->additional_url ?? null)
                 ? trim($discoverabilityState->additional_url)
@@ -2821,7 +2849,10 @@ final class EnneagramPublicAuthorityV224RuntimeCloseoutTest extends TestCase
                             $sectionHtml .= '<h2>'.htmlspecialchars($sectionTitle, ENT_QUOTES | ENT_HTML5).'</h2>';
                         }
                         if ($sectionBody !== '') {
-                            $sectionHtml .= (string) Str::markdown($sectionBody);
+                            $renderedSectionBody = (string) Str::markdown($sectionBody);
+                            $sectionHtml .= $splitInlinePunctuationHtml
+                                ? str_replace(':', '<span>:</span>', $renderedSectionBody)
+                                : $renderedSectionBody;
                         }
                         $sectionHtml .= '</section>';
                     }
