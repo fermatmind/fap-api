@@ -151,7 +151,7 @@ jobs:
           rm artifacts/remote-preflight.json
 
       - name: Upload sanitized immutable preflight receipt
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: mbti-index52-projection-repair-preflight-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/mbti-index52-projection-repair-preflight.json
