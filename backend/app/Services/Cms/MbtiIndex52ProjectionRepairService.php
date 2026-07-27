@@ -26,7 +26,7 @@ final class MbtiIndex52ProjectionRepairService
     ): array {
         $this->assertReleaseBinding($controlPlaneSha, $activeRevision);
         $records = $this->packageContract->validate($package, $authorization);
-        $before = $this->snapshot($records, false);
+        $before = $this->snapshot($records, false, true);
         $desired = $this->desired($before, $records);
         $currentSha = $this->packageContract->sha($before);
         $desiredSha = $this->packageContract->sha($desired);
@@ -103,7 +103,7 @@ final class MbtiIndex52ProjectionRepairService
             if (! hash_equals($expectedActiveRevision, $this->runtimeActiveRevision())) {
                 throw new RuntimeException('Active production release changed before transaction.');
             }
-            $before = $this->snapshot($records, true);
+            $before = $this->snapshot($records, true, true);
             $beforeSha = $this->packageContract->sha($before);
             if (! hash_equals($expectedCurrentStateSha256, $beforeSha)) {
                 throw new RuntimeException('Production current-state SHA-256 precondition mismatch.');
@@ -122,7 +122,7 @@ final class MbtiIndex52ProjectionRepairService
                     $authority->save();
                 }
             }
-            $after = $this->snapshot($records, true);
+            $after = $this->snapshot($records, true, false);
             if (! hash_equals($this->packageContract->sha($desired), $this->packageContract->sha($after))) {
                 throw new RuntimeException('Atomic exact-23 projection repair readback mismatch.');
             }
@@ -195,7 +195,7 @@ final class MbtiIndex52ProjectionRepairService
     }
 
     /** @param list<array<string,mixed>> $records @return list<array<string,mixed>> */
-    private function snapshot(array $records, bool $lock): array
+    private function snapshot(array $records, bool $lock, bool $assertSourceRevision): array
     {
         $rows = [];
         foreach ($records as $record) {
@@ -216,6 +216,14 @@ final class MbtiIndex52ProjectionRepairService
                     throw new RuntimeException("Missing enabled A/T comparison authority: {$slug}");
                 }
                 $payload = (array) $section->payload_json;
+                if ($assertSourceRevision
+                    && ! hash_equals(
+                        (string) $record['source_revision_sha256'],
+                        $this->packageContract->sha($payload),
+                    )
+                ) {
+                    throw new RuntimeException("A/T comparison authority pre-state mismatch: {$slug}");
+                }
                 $this->assertSectionFingerprint($record, $this->normalizeSections($payload['sections'] ?? []));
                 $rows[] = [
                     'slug' => $slug,

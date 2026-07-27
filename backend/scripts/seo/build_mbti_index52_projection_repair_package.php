@@ -13,7 +13,15 @@ $backend = dirname(__DIR__, 2);
 $repo = dirname($backend);
 $output = $backend.'/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json';
 $authorizationOutput = $backend.'/content_assets/personality_public/mbti-index52-comparison-projection-repair-operator-authorization-2026-07-27.json';
+$atSourcePrestateOutput = $backend.'/content_assets/personality_public/mbti-index52-at-source-prestate-2026-07-27.json';
 $atSourceDir = $backend.'/docs/seo/import-packages/mbti-comparison-content-assets-draft-20260702/comparisons';
+$atSourcePrestate = atSourcePrestate($atSourcePrestateOutput);
+$atSourcePayloads = [];
+foreach ((array) ($atSourcePrestate['records'] ?? []) as $record) {
+    if (is_array($record)) {
+        $atSourcePayloads[(string) ($record['slug'] ?? '')] = (array) ($record['payload_json'] ?? []);
+    }
+}
 $approvedCross = jsonFile($backend.'/content_assets/personality_public/mbti-cross-approval-48-package-2026-07-23.json');
 $approvedCrossBySlug = [];
 foreach ((array) ($approvedCross['records'] ?? []) as $record) {
@@ -37,12 +45,16 @@ foreach (BASE_TYPES as $baseType) {
     if ($claimBoundary === '') {
         throw new RuntimeException("{$slug} approved claim boundary is missing.");
     }
+    $sourcePayload = $atSourcePayloads[$slug] ?? null;
+    if (! is_array($sourcePayload) || $sourcePayload === []) {
+        throw new RuntimeException("{$slug} exact A/T storage pre-state is missing.");
+    }
     $records[] = [
         'slug' => $slug,
         'locale' => 'zh-CN',
         'record_kind' => 'at_comparison',
         'source_authority' => 'personality_profile_sections.mbti64_comparison_a_vs_t',
-        'source_revision_sha256' => (string) ($projection['overlay_source']['payload_sha256'] ?? hashJson($projection)),
+        'source_revision_sha256' => hashJson($sourcePayload),
         'expected_runtime_sections_count' => 9,
         'expected_runtime_sections' => $sections,
         'expected_runtime_sections_sha256' => hashJson($sections),
@@ -99,6 +111,11 @@ $package = [
         'allowed_patch_fields' => ['runtime_sections', 'claim_boundary', 'internal_links', 'answer_surface_v1'],
         'held_gap_fields' => ['alternates.en'],
     ],
+    'source_prestate' => [
+        'asset' => 'content_assets/personality_public/mbti-index52-at-source-prestate-2026-07-27.json',
+        'asset_sha256' => (string) $atSourcePrestate['asset_sha256'],
+        'production_active_revision' => (string) $atSourcePrestate['production_active_revision'],
+    ],
     'records' => $records,
     'rollback_contract' => [
         'contract' => 'mbti.index52.comparison_projection_repair.rollback.v1',
@@ -153,8 +170,62 @@ fwrite(STDOUT, json_encode([
     'package_sha256' => $package['package_sha256'],
     'authorization_path' => substr($authorizationOutput, strlen($repo) + 1),
     'authorization_sha256' => $authorization['authorization_sha256'],
+    'at_source_prestate_sha256' => $atSourcePrestate['asset_sha256'],
     'record_count' => count($records),
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR).PHP_EOL);
+
+/** @return array<string,mixed> */
+function atSourcePrestate(string $path): array
+{
+    $captured = trim((string) getenv('MBTI_INDEX52_AT_SOURCE_PRESTATE_JSON'));
+    if ($captured !== '') {
+        $decoded = json_decode($captured, true, flags: JSON_THROW_ON_ERROR);
+        if (! is_array($decoded)) {
+            throw new RuntimeException('Captured A/T source pre-state must be a JSON object.');
+        }
+        $asset = [
+            'schema_version' => 'mbti.index52.at_source_prestate.v1',
+            'captured_at' => '2026-07-27T00:00:00Z',
+            'production_active_revision' => (string) ($decoded['production_active_revision'] ?? ''),
+            'records' => array_values((array) ($decoded['records'] ?? [])),
+        ];
+        foreach ($asset['records'] as &$record) {
+            if (is_array($record)) {
+                $record['storage_payload_sha256'] = hashJson($record['payload_json'] ?? []);
+            }
+        }
+        unset($record);
+        $asset['asset_sha256'] = hashJson($asset);
+        writeJson($path, $asset);
+    } else {
+        $asset = jsonFile($path);
+    }
+
+    $core = $asset;
+    unset($core['asset_sha256']);
+    $expectedSlugs = array_map(
+        static fn (string $type): string => $type.'-a-vs-'.$type.'-t',
+        BASE_TYPES,
+    );
+    if (preg_match('/^[a-f0-9]{40}$/', (string) ($asset['production_active_revision'] ?? '')) !== 1
+        || ! hash_equals((string) ($asset['asset_sha256'] ?? ''), hashJson($core))
+        || array_column((array) ($asset['records'] ?? []), 'slug') !== $expectedSlugs
+    ) {
+        throw new RuntimeException('Exact ordered A/T source pre-state asset is invalid.');
+    }
+    foreach ((array) $asset['records'] as $record) {
+        if (! is_array($record)
+            || ! hash_equals(
+                (string) ($record['storage_payload_sha256'] ?? ''),
+                hashJson($record['payload_json'] ?? []),
+            )
+        ) {
+            throw new RuntimeException('A/T source pre-state payload hash mismatch.');
+        }
+    }
+
+    return $asset;
+}
 
 /** @return array<string,mixed> */
 function liveComparison(string $slug): array

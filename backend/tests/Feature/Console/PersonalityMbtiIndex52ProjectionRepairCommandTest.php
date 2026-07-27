@@ -127,11 +127,33 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
         ));
     }
 
+    public function test_at_non_section_source_drift_fails_before_any_write(): void
+    {
+        $this->seedExactCohort();
+        $section = PersonalityProfileSection::query()
+            ->where('section_key', 'mbti64_comparison_a_vs_t')
+            ->firstOrFail();
+        $payload = (array) $section->payload_json;
+        $payload['faq'][] = ['question' => 'unreviewed drift?', 'answer' => 'must fail.'];
+        $section->payload_json = $payload;
+        $section->save();
+
+        $this->expectExceptionMessage('A/T comparison authority pre-state mismatch');
+        $this->app->make(MbtiIndex52ProjectionRepairService::class)->plan(
+            $this->jsonAsset(base_path(MbtiIndex52ProjectionRepairPackage::PACKAGE_PATH)),
+            $this->jsonAsset(base_path(MbtiIndex52ProjectionRepairPackage::AUTHORIZATION_PATH)),
+            self::CONTROL_PLANE_SHA,
+            self::ACTIVE_REVISION,
+        );
+    }
+
     /** @return array{array<string,mixed>,array<string,mixed>} */
     private function seedExactCohort(): array
     {
         $package = $this->jsonAsset(base_path(MbtiIndex52ProjectionRepairPackage::PACKAGE_PATH));
         $authorization = $this->jsonAsset(base_path(MbtiIndex52ProjectionRepairPackage::AUTHORIZATION_PATH));
+        $atSourcePrestate = $this->jsonAsset(base_path(MbtiIndex52ProjectionRepairPackage::AT_SOURCE_PRESTATE_PATH));
+        $atSourcePrestateBySlug = collect($atSourcePrestate['records'])->keyBy('slug');
 
         foreach ($package['records'] as $record) {
             if ($record['record_kind'] === 'at_comparison') {
@@ -157,11 +179,7 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
                     'title' => $type.' A/T',
                     'render_variant' => 'rich_text',
                     'body_md' => 'existing summary',
-                    'payload_json' => [
-                        'sections' => $record['expected_runtime_sections'],
-                        'faq' => [['question' => 'existing?', 'answer' => 'existing.']],
-                        'internal_links' => [],
-                    ],
+                    'payload_json' => $atSourcePrestateBySlug->get((string) $record['slug'])['payload_json'],
                     'sort_order' => 920,
                     'is_enabled' => true,
                 ]);

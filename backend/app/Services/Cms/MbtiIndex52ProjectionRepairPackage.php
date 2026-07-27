@@ -13,9 +13,11 @@ final class MbtiIndex52ProjectionRepairPackage
 
     public const AUTHORIZATION_PATH = 'content_assets/personality_public/mbti-index52-comparison-projection-repair-operator-authorization-2026-07-27.json';
 
-    public const PACKAGE_SHA256 = 'ead55f273b755ac4d93f5d71246c10b374bb4e936fb3bbe1128872599a5c434b';
+    public const AT_SOURCE_PRESTATE_PATH = 'content_assets/personality_public/mbti-index52-at-source-prestate-2026-07-27.json';
 
-    public const AUTHORIZATION_SHA256 = '1020c5b3cc9a2914f18d30805b9e4b326e3acbdb811eff5dcd52ff3e47b578ef';
+    public const PACKAGE_SHA256 = '09ccf33ba462b53da57087667e948069f8b22d7a4f48fa4134a357d71716d95f';
+
+    public const AUTHORIZATION_SHA256 = 'e3d256d930135bd228055b40a4bf9c6441a35e3e89252f08028065e490e8b402';
 
     public const AT_SLUGS = [
         'intj-a-vs-intj-t', 'intp-a-vs-intp-t', 'entj-a-vs-entj-t', 'entp-a-vs-entp-t',
@@ -32,6 +34,24 @@ final class MbtiIndex52ProjectionRepairPackage
     /** @return list<array<string,mixed>> */
     public function validate(array $package, array $authorization): array
     {
+        $sourcePrestate = (array) json_decode(
+            (string) file_get_contents(base_path(self::AT_SOURCE_PRESTATE_PATH)),
+            true,
+            flags: JSON_THROW_ON_ERROR,
+        );
+        $sourcePrestateCore = $sourcePrestate;
+        unset($sourcePrestateCore['asset_sha256']);
+        if (! hash_equals((string) ($sourcePrestate['asset_sha256'] ?? ''), $this->sha($sourcePrestateCore))
+            || ! hash_equals(
+                (string) data_get($package, 'source_prestate.asset_sha256', ''),
+                (string) ($sourcePrestate['asset_sha256'] ?? ''),
+            )
+        ) {
+            throw new RuntimeException('INDEX-52 A/T source pre-state asset mismatch.');
+        }
+        $sourcePrestateBySlug = collect((array) ($sourcePrestate['records'] ?? []))
+            ->keyBy('slug');
+
         $packageCore = $package;
         unset($packageCore['package_sha256']);
         if (! hash_equals(self::PACKAGE_SHA256, $this->sha($packageCore))
@@ -93,6 +113,17 @@ final class MbtiIndex52ProjectionRepairPackage
             }
             if ($isAt && trim((string) ($patch['claim_boundary'] ?? '')) === '') {
                 throw new RuntimeException("Projection repair A/T record {$index} lacks claim boundary.");
+            }
+            if ($isAt) {
+                $sourceRecord = $sourcePrestateBySlug->get((string) $record['slug']);
+                if (! is_array($sourceRecord)
+                    || ! hash_equals(
+                        (string) ($record['source_revision_sha256'] ?? ''),
+                        $this->sha($sourceRecord['payload_json'] ?? []),
+                    )
+                ) {
+                    throw new RuntimeException("Projection repair A/T record {$index} source revision mismatch.");
+                }
             }
             if (! $isAt) {
                 $links = $patch['internal_links'] ?? null;

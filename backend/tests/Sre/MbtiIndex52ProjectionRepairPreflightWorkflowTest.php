@@ -27,8 +27,8 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('EXPECTED_CONTROL_PLANE_SHA=$q_control', $workflow);
         self::assertStringContainsString('StreamedMbtiIndex52', $workflow);
         self::assertStringContainsString('$isolatedSource', $workflow);
-        self::assertStringContainsString('ead55f273b755ac4d93f5d71246c10b374bb4e936fb3bbe1128872599a5c434b', $workflow);
-        self::assertStringContainsString('1020c5b3cc9a2914f18d30805b9e4b326e3acbdb811eff5dcd52ff3e47b578ef', $workflow);
+        self::assertStringContainsString('09ccf33ba462b53da57087667e948069f8b22d7a4f48fa4134a357d71716d95f', $workflow);
+        self::assertStringContainsString('e3d256d930135bd228055b40a4bf9c6441a35e3e89252f08028065e490e8b402', $workflow);
         self::assertStringContainsString('< "$RUNNER_TEMP/mbti-index52-preflight.php"', $workflow);
         self::assertStringContainsString('remote_file_write_count: 0', $workflow);
         self::assertStringContainsString('production_write_execution: false', $workflow);
