@@ -1058,10 +1058,37 @@ jobs:
             echo "Immutable standard candidate is already deployed; refusing a redundant production mutation." >&2
             exit 1
           fi
+          AUDITED_IDX52_CANDIDATE_SHA="9d2877a7e519f768fd741398e76777620770fb71"
+          verify_audited_idx52_convergence_baseline() {
+            local idx52_path idx52_production_blob idx52_deploy_blob
+            local -a idx52_expected_paths
+            idx52_expected_paths=(
+              backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+              backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+            )
+            [ "$CURRENT_PRODUCTION_SHA" = "$AUDITED_IDX52_CANDIDATE_SHA" ] || {
+              echo "INDEX-52 convergence baseline refused an unreviewed production revision." >&2
+              return 1
+            }
+            [ "$STAGING_SHA" = "$DEPLOY_SHA" ] || {
+              echo "INDEX-52 convergence baseline requires exact-SHA staging evidence." >&2
+              return 1
+            }
+            for idx52_path in "${idx52_expected_paths[@]}"; do
+              idx52_production_blob="$(git rev-parse "${CURRENT_PRODUCTION_SHA}:${idx52_path}")" || return 1
+              idx52_deploy_blob="$(git rev-parse "${DEPLOY_SHA}:${idx52_path}")" || return 1
+              [ "$idx52_production_blob" = "$idx52_deploy_blob" ] || {
+                echo "INDEX-52 convergence baseline refused blob drift at ${idx52_path}." >&2
+                return 1
+              }
+            done
+          }
           PRODUCTION_BASELINE_MODE="linear_ancestor"
           if ! git merge-base --is-ancestor "$CURRENT_PRODUCTION_SHA" "$DEPLOY_SHA"; then
             if verify_audited_runtime46_subsumed_baseline; then
               PRODUCTION_BASELINE_MODE="runtime46_patch_subsumed"
+            elif verify_audited_idx52_convergence_baseline; then
+              PRODUCTION_BASELINE_MODE="idx52_convergence"
             else
               echo "Immutable standard candidate would not safely advance the current production revision." >&2
               exit 1
