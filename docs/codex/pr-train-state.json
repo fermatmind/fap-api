@@ -100809,7 +100809,7 @@
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
     "status": "github_checks_pending",
-      "commit_sha": "ee949ef7613bddd9df1745b23a28f64eb555bab3",
+      "commit_sha": "474a3a9345a97a846738f233e7a45e30d3ac0c5d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
@@ -100826,7 +100826,7 @@
       },
       "required_local_checks": {
         "status": "passed",
-          "evidence": "Focused and related Career tests passed; Pint passed across 502 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
+          "evidence": "Focused and related Career tests passed; ReviewPolicyRegistryTest passes all 11 architecture assertions including registered manual-review surface declarations; Pint passed across 502 scoped files; composer validate --strict and composer audit passed; YAML/JSON parsing and git diff checks passed. The Big Five runtime branch-diff classifier first rejected exactly the three Task 11 quality services and exact batch-01 manifest, activating the goal's conditional authorization. Its minimal exact-path exemption plus positive/negative regression now passes 2 tests / 6 assertions and continues to reject a future batch, publisher, and Big Five runtime."
       },
       "github_required_checks": {
         "status": "pending",
@@ -100945,8 +100945,13 @@
           "at": "2026-07-27T05:59:26Z",
           "status": "review_fixes_validated",
           "note": "Final ledger-only head 4c1b2f9598f639dcebd6e2b4e0610ac5a9e0fdf3 passed all nine required checks in runs 30240909640 and 30240909646, then exact-head Codex review found repeated controller contract hashing across approved cohort reconstruction and currency validation. The immutable controller SHA is now memoized once per projector instance/request. The focused batch plus reviewer bridge passes 30 warning-only tests / 1526 assertions; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T06:09:37Z",
+          "status": "review_fixes_validated",
+          "note": "Exact head 53c029daba1ec5c65a2d8ccf391f882970ffe621 passed all nine required checks in runs 30241342188 and 30241341815, then exact-head Codex review found missing registered review-surface declarations on the new planner and evaluator manual-review gates. Both now declare career_trust_manifest. ReviewPolicyRegistryTest passes all 11 architecture assertions and the focused Career suites pass 30 warning-only tests; a fresh exact-head CI/review cycle remains required."
         }
       ],
-      "updated_at": "2026-07-27T05:59:26Z"
+      "updated_at": "2026-07-27T06:09:37Z"
   }
 }
