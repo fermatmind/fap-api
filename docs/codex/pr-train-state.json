@@ -98784,8 +98784,8 @@
     "branch": "codex/mbti-comp-projection-45",
     "title": "MBTI-COMP-PROJECTION-45: repair A/T comparison public projection",
     "depends_on": [],
-    "status": "ready_to_merge",
-    "commit_sha": "b231c18aa4dabbe0a926d8561eae6faf8ad40918",
+    "status": "merged",
+    "commit_sha": "781d1636b2c74f5852076a5864b681910a1e0e47",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3175",
     "checks": {
       "authorization": {
@@ -98802,19 +98802,19 @@
       },
       "github_checks": {
         "status": "passed",
-        "evidence": "All nine GitHub checks passed on exact validated code head b231c18aa4dabbe0a926d8561eae6faf8ad40918: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. GitHub reports OPEN/CLEAN/MERGEABLE."
+        "evidence": "All nine GitHub checks passed on exact validated code head b231c18aa4dabbe0a926d8561eae6faf8ad40918: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. Post-merge reconciliation verified PR #3175 squash-merged as 781d1636b2c74f5852076a5864b681910a1e0e47 and that merge remains contained by origin/main."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-18T16:49:34Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -98857,9 +98857,14 @@
         "at": "2026-07-18T16:41:40Z",
         "status": "ready_to_merge",
         "note": "All nine GitHub checks passed on exact validated code head b231c18aa4dabbe0a926d8561eae6faf8ad40918. The single controller review thread is resolved, the exact four-path scope is intact, GitHub reports OPEN/CLEAN/MERGEABLE, and commit_sha now identifies the reviewed code head containing the malformed-section fix and current main. This ledger-only transition must pass its own exact-head checks before squash merge."
+      },
+      {
+        "at": "2026-07-27T18:07:31Z",
+        "status": "merged",
+        "note": "Post-merge reconciliation verified GitHub PR #3175 is MERGED at 2026-07-18T16:49:34Z as 781d1636b2c74f5852076a5864b681910a1e0e47, that the merge is contained by current fap-api origin/main, and that codex/mbti-comp-projection-45 is absent locally and remotely. This records source-control closeout only and performs no deploy, CMS/database write, publication/indexability mutation, sitemap/llms change, or search action."
       }
     ],
-    "updated_at": "2026-07-18T16:41:40Z"
+    "updated_at": "2026-07-27T18:07:31Z"
   },
   "BIG5-EN52-TRANSLATION-AUTHORITY-01": {
     "id": "BIG5-EN52-TRANSLATION-AUTHORITY-01",
@@ -99473,8 +99478,8 @@
     "branch": "codex/mbti-comp-runtime-46",
     "title": "MBTI-COMP-RUNTIME-46: deploy and accept all A/T comparison pages",
     "depends_on": ["MBTI-COMP-PROJECTION-45"],
-    "status": "ready_to_merge",
-    "commit_sha": "f2048e239e20290c8828c660f7c9d8569c02779e",
+    "status": "merged",
+    "commit_sha": "e225b8fd0b70a4295f36d88b77d61d38ee0380bf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3206",
     "checks": {
       "authorization": {"status": "passed", "evidence": "The operator separately authorized the exact code-only production SHA bc0ed833bc9aae1473ab37f1dead2517e1aff618 and the exact single-record INTP package/payload/promotion authorization hashes. No authorization was inferred for publication, indexability, sitemap, llms, Search Channel, GSC, or indexing requests."},
@@ -99483,13 +99488,13 @@
       "single_record_content_revision": {"status": "passed", "evidence": "Dry-run 29674866867 passed. Initial write 29675163335 promoted the exact revision and then successfully restored the previous public section through automatic rollback after a newline-only canonical hash-control mismatch. PR #3205 fixed only canonical hashing; retry 29675471856 promoted revision 212 and passed exact nine-section readback. Publication, indexability, sitemap, llms, and search state remained unchanged."},
       "production_acceptance": {"status": "passed", "evidence": "Public HTTPS readback completed at 2026-07-19T06:44:00.120Z: all 16 A/T APIs and all 16 visible pages returned 200 with exact ordered 9 sections, non-empty content, 5 FAQs, exact canonical, index,follow robots, JSON-LD, and visible authoritative section titles. Per-target canonical section and projection SHA-256 fingerprints are locked in the generated report."},
       "local_validation": {"status": "passed", "evidence": "Focused report contract passed 3 tests and 154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and exact five-path scope validation passed. This operation closeout changes only docs/generated/test and train metadata, so runtime route, migration, curl, and full ci_verify_mbti.sh commands are not applicable."},
-      "github_required_checks": {"status": "passed", "evidence": "Reviewed head f2048e239e20290c8828c660f7c9d8569c02779e passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload. The first P2 review identified the transient SECURITY-103 ledger pointer drift; head 407e70343 restored that object to origin/main and the final PR diff contains no SECURITY-103 change. The second P2 correctly required this Runtime46 commit pointer to advance from the initial evidence commit to the reviewed f2048e239 head; the following commit changes only that pointer and this evidence note."}
+      "github_required_checks": {"status": "passed", "evidence": "Reviewed head f2048e239e20290c8828c660f7c9d8569c02779e passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload. The first P2 review identified the transient SECURITY-103 ledger pointer drift; head 407e70343 restored that object to origin/main and the final PR diff contains no SECURITY-103 change. Post-merge reconciliation verified PR #3206 squash-merged as e225b8fd0b70a4295f36d88b77d61d38ee0380bf and that merge remains contained by origin/main."}
     },
-    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": false},
+    "scope_validation": {"allowed_paths_only": true, "local_validation_passed": true, "github_checks_green": true, "post_merge_revalidated": true},
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-19T07:17:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": true,
     "database_mutation": true,
     "cms_mutation": true,
@@ -99506,9 +99511,10 @@
       {"at": "2026-07-19T06:49:07Z", "status": "local_validation_passed", "note": "The focused operation-report contract passed 3 tests/154 assertions; scoped Pint, JSON/YAML parsing, git diff checks, and the exact five-path scope passed. Runtime route, migration, curl, and full ci_verify_mbti.sh checks are not applicable to this docs/generated/test-only closeout."},
       {"at": "2026-07-19T06:51:40Z", "status": "github_checks_pending", "note": "Pushed the exact five-path closeout scope and opened PR #3206. Merge remains gated on every required GitHub check, clean scope, mergeability, and zero unresolved actionable review threads."},
       {"at": "2026-07-19T07:00:54Z", "status": "ready_to_merge", "note": "All 9 GitHub checks passed on reviewed head 407e70343. The sole P2 review correctly identified a transient scope-out ledger pointer; that pointer was already restored to origin/main, the final diff is exactly the five allowed Runtime46 paths, the thread is resolved, and GitHub reports CLEAN/MERGEABLE."},
-      {"at": "2026-07-19T07:09:16Z", "status": "review_fix_local_validation_passed", "note": "The refreshed review correctly identified that Runtime46 commit_sha still referenced the initial evidence commit. Advanced it to exact reviewed all-green head f2048e239e20290c8828c660f7c9d8569c02779e; the following commit changes only this Runtime46 pointer and its evidence note before the final GitHub checks rerun."}
+      {"at": "2026-07-19T07:09:16Z", "status": "review_fix_local_validation_passed", "note": "The refreshed review correctly identified that Runtime46 commit_sha still referenced the initial evidence commit. Advanced it to exact reviewed all-green head f2048e239e20290c8828c660f7c9d8569c02779e; the following commit changes only this Runtime46 pointer and its evidence note before the final GitHub checks rerun."},
+      {"at": "2026-07-27T18:07:31Z", "status": "merged", "note": "Post-merge reconciliation verified GitHub PR #3206 is MERGED at 2026-07-19T07:17:19Z as e225b8fd0b70a4295f36d88b77d61d38ee0380bf, that the merge is contained by current fap-api origin/main, and that codex/mbti-comp-runtime-46 is absent locally and remotely. The previously authorized Runtime46 production deployment and single-record repair evidence are preserved unchanged; this reconciliation itself performs no production, CMS/database, publication/indexability, sitemap/llms, or search action."}
     ],
-    "updated_at": "2026-07-19T07:09:16Z"
+    "updated_at": "2026-07-27T18:07:31Z"
   },
   "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01": {
     "id": "SAEP-PROPOSED-API-ROOT5-NO-MUTATION-DEPLOY-PATH-01",
