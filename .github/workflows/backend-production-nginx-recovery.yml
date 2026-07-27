@@ -1,0 +1,287 @@
+name: Backend Production Nginx Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "verify_only is read-only; recover_and_verify starts only the failed nginx service"
+        required: true
+        default: verify_only
+        type: choice
+        options:
+          - verify_only
+          - recover_and_verify
+      expected_active_sha:
+        description: "Exact active production REVISION"
+        required: true
+        type: string
+      preflight_run_id:
+        description: "Successful immutable verify_only run required for recovery"
+        required: false
+        default: ""
+        type: string
+      expected_config_set_sha256:
+        description: "Exact nginx -T config-set SHA256 from verify_only"
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        description: "Exact preflight/config/SHA-bound recovery authorization"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  control:
+    name: Verify or recover backend nginx
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: backend-production-nginx-recovery
+      cancel-in-progress: false
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - name: Validate exact recovery contract
+        id: contract
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECOVERY_MODE: ${{ inputs.mode }}
+          EXPECTED_ACTIVE_SHA: ${{ inputs.expected_active_sha }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          EXPECTED_CONFIG_SET_SHA256: ${{ inputs.expected_config_set_sha256 }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          [[ "$EXPECTED_ACTIVE_SHA" =~ ^[0-9a-f]{40}$ ]]
+
+          case "$RECOVERY_MODE" in
+            verify_only)
+              test -z "$PREFLIGHT_RUN_ID"
+              test -z "$EXPECTED_CONFIG_SET_SHA256"
+              test -z "$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            recover_and_verify)
+              [[ "$PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
+              [[ "$EXPECTED_CONFIG_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              expected_phrase="I explicitly approve production fap-api nginx recovery from preflight run ${PREFLIGHT_RUN_ID} with control-plane SHA ${GITHUB_SHA} active SHA ${EXPECTED_ACTIVE_SHA} nginx config-set SHA256 ${EXPECTED_CONFIG_SET_SHA256}; start only the failed nginx service after exact config and runtime revalidation, no deploy/symlink/migration/CMS/database-authority/cache/queue/publication/sitemap/llms/search/PR23."
+              test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+              run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+              jq -e \
+                --arg sha "$GITHUB_SHA" \
+                '.name == "Backend Production Nginx Recovery"
+                 and .path == ".github/workflows/backend-production-nginx-recovery.yml"
+                 and .event == "workflow_dispatch"
+                 and .status == "completed"
+                 and .conclusion == "success"
+                 and .head_branch == "main"
+                 and .head_sha == $sha' <<<"$run_json" >/dev/null
+
+              mkdir -p preflight
+              gh run download "$PREFLIGHT_RUN_ID" \
+                --name "backend-nginx-recovery-preflight-${PREFLIGHT_RUN_ID}" \
+                --dir preflight
+              jq -e \
+                --arg control_sha "$GITHUB_SHA" \
+                --arg active_sha "$EXPECTED_ACTIVE_SHA" \
+                --arg config_sha "$EXPECTED_CONFIG_SET_SHA256" \
+                '.contract_version == "backend.production.nginx-recovery.v1"
+                 and .mode == "verify_only"
+                 and .control_plane_sha == $control_sha
+                 and .active_sha == $active_sha
+                 and .nginx_config_set_sha256 == $config_sha
+                 and .nginx_config_test_passed == true
+                 and .nginx_service_state != "active"
+                 and .nginx_master_count == 0
+                 and .mutation_attempted == false' \
+                preflight/receipt.json >/dev/null
+              ;;
+            *)
+              echo "Unsupported recovery mode." >&2
+              exit 2
+              ;;
+          esac
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known_hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Inspect and optionally recover exact nginx runtime
+        id: runtime
+        shell: bash
+        env:
+          RECOVERY_MODE: ${{ inputs.mode }}
+          EXPECTED_ACTIVE_SHA: ${{ inputs.expected_active_sha }}
+          EXPECTED_CONFIG_SET_SHA256: ${{ inputs.expected_config_set_sha256 }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_PORT" =~ ^[0-9]+$ ]]
+          test -n "$DEPLOY_USER"
+          test -n "$DEPLOY_HOST"
+          [[ "$HEALTHCHECK_URL" =~ ^https://[^/]+/api/healthz$ ]]
+
+          remote_output="$(
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "bash -s -- '$RECOVERY_MODE' '$EXPECTED_ACTIVE_SHA' '$EXPECTED_CONFIG_SET_SHA256'" <<'REMOTE'
+          set -euo pipefail
+          mode="$1"
+          expected_active_sha="$2"
+          expected_config_sha="$3"
+
+          worker_pid="$(pgrep -f 'artisan queue:work' | head -n 1)"
+          test -n "$worker_pid"
+          worker_cwd="$(sudo readlink -f "/proc/${worker_pid}/cwd")"
+          if [ -f "${worker_cwd}/REVISION" ]; then
+            active_sha="$(tr -d '\r\n' < "${worker_cwd}/REVISION")"
+          else
+            active_sha="$(tr -d '\r\n' < "${worker_cwd}/../REVISION")"
+          fi
+          test "$active_sha" = "$expected_active_sha"
+
+          config_dump="$(sudo nginx -T 2>&1)"
+          config_sha="$(printf '%s' "$config_dump" | sha256sum | awk '{print $1}')"
+          sudo nginx -t >/dev/null 2>&1
+          service_state="$(sudo systemctl is-active nginx 2>/dev/null || true)"
+          master_count="$(pgrep -c -f '[n]ginx: master process' || true)"
+
+          mutation_attempted=false
+          if [ "$mode" = recover_and_verify ]; then
+            test "$config_sha" = "$expected_config_sha"
+            case "$service_state" in
+              failed|inactive) ;;
+              *)
+                echo "NGINX_RECOVERY_STATE_DRIFT" >&2
+                exit 1
+                ;;
+            esac
+            test "$master_count" -eq 0
+            mutation_attempted=true
+            timeout 30 sudo systemctl start nginx
+            test "$(sudo systemctl is-active nginx)" = active
+            master_count="$(pgrep -c -f '[n]ginx: master process')"
+            test "$master_count" -ge 1
+            service_state=active
+          fi
+
+          printf 'active_sha=%s\n' "$active_sha"
+          printf 'config_sha=%s\n' "$config_sha"
+          printf 'service_state=%s\n' "$service_state"
+          printf 'master_count=%s\n' "$master_count"
+          printf 'mutation_attempted=%s\n' "$mutation_attempted"
+          REMOTE
+          )"
+
+          active_sha="$(awk -F= '$1=="active_sha"{print $2}' <<<"$remote_output")"
+          config_sha="$(awk -F= '$1=="config_sha"{print $2}' <<<"$remote_output")"
+          service_state="$(awk -F= '$1=="service_state"{print $2}' <<<"$remote_output")"
+          master_count="$(awk -F= '$1=="master_count"{print $2}' <<<"$remote_output")"
+          mutation_attempted="$(awk -F= '$1=="mutation_attempted"{print $2}' <<<"$remote_output")"
+          [[ "$active_sha" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$config_sha" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$master_count" =~ ^[0-9]+$ ]]
+          [[ "$mutation_attempted" =~ ^(true|false)$ ]]
+
+          public_origin="${HEALTHCHECK_URL%/api/healthz}"
+          health_status="$(curl -sS --connect-timeout 5 --max-time 15 \
+            -o /dev/null -w '%{http_code}' "$HEALTHCHECK_URL" || true)"
+          flags_status="$(curl -sS --connect-timeout 5 --max-time 15 \
+            -o /dev/null -w '%{http_code}' "${public_origin}/api/v0.3/flags" || true)"
+          bigfive_body="$(mktemp)"
+          bigfive_status="$(curl -sS --connect-timeout 5 --max-time 15 \
+            -o "$bigfive_body" -w '%{http_code}' \
+            "${public_origin}/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN" || true)"
+          bigfive_contract=false
+          if [ "$bigfive_status" = 200 ] \
+            && jq -e '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))' \
+              "$bigfive_body" >/dev/null 2>&1; then
+            bigfive_contract=true
+          fi
+          rm -f "$bigfive_body"
+
+          if [ "$RECOVERY_MODE" = recover_and_verify ]; then
+            test "$service_state" = active
+            test "$mutation_attempted" = true
+            test "$health_status" = 404
+            test "$flags_status" = 200
+            test "$bigfive_status" = 200
+            test "$bigfive_contract" = true
+          else
+            test "$mutation_attempted" = false
+          fi
+
+          jq -n \
+            --arg contract_version "backend.production.nginx-recovery.v1" \
+            --arg mode "$RECOVERY_MODE" \
+            --arg control_plane_sha "$GITHUB_SHA" \
+            --arg active_sha "$active_sha" \
+            --arg config_sha "$config_sha" \
+            --arg service_state "$service_state" \
+            --argjson master_count "$master_count" \
+            --arg health_status "$health_status" \
+            --arg flags_status "$flags_status" \
+            --arg bigfive_status "$bigfive_status" \
+            --argjson bigfive_contract "$bigfive_contract" \
+            --argjson mutation_attempted "$mutation_attempted" \
+            '{
+              contract_version: $contract_version,
+              mode: $mode,
+              control_plane_sha: $control_plane_sha,
+              active_sha: $active_sha,
+              nginx_config_set_sha256: $config_sha,
+              nginx_config_test_passed: true,
+              nginx_service_state: $service_state,
+              nginx_master_count: $master_count,
+              public_health_status: $health_status,
+              public_flags_status: $flags_status,
+              public_bigfive_status: $bigfive_status,
+              public_bigfive_contract_passed: $bigfive_contract,
+              mutation_attempted: $mutation_attempted
+            }' > receipt.json
+          echo "config_sha=$config_sha" >> "$GITHUB_OUTPUT"
+          echo "service_state=$service_state" >> "$GITHUB_OUTPUT"
+          echo "Backend nginx recovery receipt generated without routing metadata."
+
+      - name: Upload immutable preflight receipt
+        if: ${{ inputs.mode == 'verify_only' }}
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: backend-nginx-recovery-preflight-${{ github.run_id }}
+          path: receipt.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload recovery receipt
+        if: ${{ inputs.mode == 'recover_and_verify' }}
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: backend-nginx-recovery-${{ github.run_id }}
+          path: receipt.json
+          if-no-files-found: error
+          retention-days: 14
