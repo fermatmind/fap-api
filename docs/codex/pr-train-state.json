@@ -180,8 +180,8 @@
     "depends_on": [
       "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01"
     ],
-    "status": "github_review_repairing",
-    "commit_sha": null,
+    "status": "merged",
+    "commit_sha": "9aaf047f0cbb27e1b10440b9856a74d16e5e6ce0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3220",
     "checks": {
       "authorization": {
@@ -197,20 +197,24 @@
         "evidence": "After rebasing onto latest origin/main, focused publish-track resolver, full-dataset authority, Dataset API, batch manifest validator, and 1046/2092 directory/held regression suites passed 19 tests / 506 assertions. PHP syntax, 224-line API route inventory, scoped Pint, Composer strict validation/audit, reconciliation JSON, train YAML/state JSON, git diff, and exact allowed-path scope checks passed. No production, CMS/database, sitemap, indexability, runtime cohort, Search Channel, or URL-submission action occurred."
       },
       "github_required_checks": {
-        "status": "failed_repairing",
-        "evidence": "Final head d634ab8cde2b7920bdac1b1f0f56546115e113df passed 8 checks and failed only verify-bigfive after 1592 tests because the MBTI/Big Five runtime-freeze classifier had no exact exemption for the two new Career publish-track resolver classes. The repair is limited to the existing classifier and its positive/negative regression coverage; no required check is overridden."
+        "status": "passed",
+        "evidence": "GitHub reports PR #3220 merged after its exact final head satisfied required checks and review."
+      },
+      "merge_reconciliation": {
+        "status": "passed",
+        "evidence": "GitHub reports PR #3220 MERGED at 2026-07-23T04:07:11Z as 9aaf047f0cbb27e1b10440b9856a74d16e5e6ce0. Exact origin/main contains the squash merge; the remote and local task branches are absent and no task worktree remains."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-23T04:07:11Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -259,9 +263,14 @@
         "at": "2026-07-23T04:40:00Z",
         "status": "github_review_repairing",
         "note": "Repair head 1ded54903787d7ac2cd881f3fd3313594f0a074e passed all nine GitHub checks. Latest review then identified that the legacy 342 baseline member database-administrators-and-architects was relying on generic review_needed fallback instead of explicit audit evidence. Adding a separate legacy-baseline reconciliation record while preserving the original three current 1046 gaps and without changing runtime cohort, indexability, held exposure, or pilot eligibility."
+      },
+      {
+        "at": "2026-07-27T01:31:13Z",
+        "status": "merged",
+        "note": "Reconciled stale ledger state from external truth: GitHub reports PR #3220 MERGED at 9aaf047f0cbb27e1b10440b9856a74d16e5e6ce0, exact origin/main contains that commit, and the remote/local task branches and task worktree are absent. This bookkeeping change performs no production, CMS, database, search, submission, or deploy action."
       }
     ],
-    "updated_at": "2026-07-23T04:40:00Z"
+    "updated_at": "2026-07-27T01:31:13Z"
   },
   "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01": {
     "id": "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",
@@ -100303,8 +100312,8 @@
       "SEO-QUERY-OWNER-URL-TRUTH-01",
       "SEO-SEARCH-TO-RESULT-FUNNEL-01"
     ],
-  "status": "ready_to_merge",
-  "commit_sha": "eb1f3d22a017a6bf7edefbbb39cb4e060c1b7859",
+  "status": "merged",
+  "commit_sha": "29b3e56c286f2a1f832e5a013d9f766c61cb13df",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3295",
     "checks": {
       "dependency": {
@@ -100330,18 +100339,22 @@
     "github_required_checks": {
       "status": "passed",
       "evidence": "All nine GitHub checks passed at exact head 927133fdb4b6f1e24ff2d2285abfc78c7d37058c, including verify-bigfive. Exact-head Codex review reported no major issues and there are zero active unresolved non-outdated threads. The reviewed implementation candidate is eb1f3d22a017a6bf7edefbbb39cb4e060c1b7859."
+    },
+    "merge_reconciliation": {
+      "status": "passed",
+      "evidence": "GitHub reports PR #3295 MERGED at 2026-07-26T10:53:32Z as 29b3e56c286f2a1f832e5a013d9f766c61cb13df. Exact origin/main contains the squash merge; the remote and local task branches are absent and no task worktree remains."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
   "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-26T10:53:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -100534,9 +100547,14 @@
       "at": "2026-07-26T10:45:13Z",
       "status": "ready_to_merge",
       "note": "All nine GitHub checks passed at exact head 927133fdb4b6f1e24ff2d2285abfc78c7d37058c, including verify-bigfive. Exact-head Codex review reported no major issues, active unresolved non-outdated threads are zero, GitHub reports CLEAN/MERGEABLE, the isolated worktree is clean, and semantic scope remains exactly eleven allowed Task 8 paths including the operator-authorized Big Five classifier regression only. This final ledger-only commit must itself pass the complete exact-head check and review cycle before squash merge. No production or business write occurred."
+    },
+    {
+      "at": "2026-07-27T01:31:13Z",
+      "status": "merged",
+      "note": "Reconciled stale ledger state from external truth: GitHub reports PR #3295 MERGED at 29b3e56c286f2a1f832e5a013d9f766c61cb13df, exact origin/main contains that commit, and the remote/local task branches and task worktree are absent. This bookkeeping change performs no production, CMS, database, search, submission, or deploy action."
     }
   ],
-  "updated_at": "2026-07-26T10:45:13Z"
+  "updated_at": "2026-07-27T01:31:13Z"
   },
   "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02": {
     "id": "SAEP-PROPOSED-API-PER02-MBTI-BASE-TYPE-DISCOVERABILITY-02",
@@ -100649,5 +100667,131 @@
       }
     ],
     "updated_at": "2026-07-26T17:15:00Z"
+  },
+  "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01": {
+    "id": "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-search-entry-tier-contract-01",
+    "title": "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01 add career search-entry authority",
+    "depends_on": [
+      "CAREER-PILOT-REVIEW-EVIDENCE-BRIDGE-01",
+      "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
+      "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "96d199f0aececb37553b481d29760ec51aacfa42",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
+    "checks": {
+      "dependencies": {
+        "status": "passed",
+        "evidence": "fap-api PR #3214 merged as 65765dde98a9ac96bf6a67ae514a6730bc7fab71 and PR #3220 merged as 9aaf047f0cbb27e1b10440b9856a74d16e5e6ce0; fap-web PR #1798 merged as aad94bdbfb54394ad8e61d92e0a29607bfd91c8b. Each exact merge is present on its repository origin/main."
+      },
+      "fresh_production_authority_gate": {
+        "status": "passed",
+        "evidence": "Fresh read-only discovery 30229001323, Career verify-only 30229075668, backend verify-only 30229131495, and bilingual public API readback prove active SHA 672d730d606f11de3e666aab8ce71a3285b5f640, 2092/2092 exact cache coverage, 1046 unique EN and 1046 unique zh-CN public slugs, zero missing/broken/excluded targets, held-slug absence, healthy runtime, and zero production writes."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "This PR is code and read-only projection only. Production deployment, CMS/database/cache/publication/indexability/sitemap/llms/Search Channel writes, URL submissions, and held-slug release are prohibited and were not executed."
+      },
+      "focused_tests": {
+        "status": "passed",
+        "evidence": "After the review-surface annotation repair, the new tier contract plus reviewer bridge, publish-track resolver, directory held-slug authority, display-surface held regression, public privacy assertions, and ReviewPolicyRegistry suites passed 56 tests / 1422 assertions. Exact content, SEO, public-evidence, bilingual, and index-entry SHA drift remains fail-closed."
+      },
+      "required_local_checks": {
+        "status": "passed",
+        "evidence": "After rebasing onto origin/main 685ab5bf90b7168854f6f200f058400f37bed99e, the related Career/review selection passed 59 tests / 1450 assertions and the focused classifier selection passed 2 tests / 6 assertions. Scoped Pint passed all 120 selected files. API route discovery remains 224 lines; Composer strict validation/audit passed; manifest YAML and ledger JSON parsed; diff checks passed; and exact changed-file scope contains only the eight authorized paths."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact latest-main rebased head 2cb60522c2853042fb58354d40da643067e558b7 passed all nine required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and semgrep SARIF upload."
+      },
+      "exact_head_review": {
+        "status": "passed",
+        "evidence": "P1 thread PRRT_kwDOQn6xoM6T6s_w remains resolved and Codex exact-head review found no major issues at 2cb60522c2853042fb58354d40da643067e558b7."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-27T01:31:13Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact fap-api origin/main 320601d73f8726046ef4ee662f9025cb97334db5 in an isolated worktree after the fresh Career production authority gate and all three dependencies passed. The implementation reuses the existing exact bilingual reviewer bridge, publish-track resolver, public API projection, and permanent held-slug authority. No production, CMS, database, cache, publication, indexability, sitemap, llms, Search Channel, URL-submission, or deploy write occurred."
+      },
+      {
+        "at": "2026-07-27T01:34:10Z",
+        "status": "local_validation_passed",
+        "note": "Implemented the read-only backend authority with independent visibility, robots, review, publish-track, content-quality, eligibility, and tier fields. Stable and approved_candidate require current exact bilingual approval plus an eligible existing track; review_needed, hold, all three permanent held slugs, missing/stale evidence, content/SEO/index-entry drift, noindex, hidden visibility, and unknown tracks fail closed. All declared local checks passed across exactly seven authorized paths. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-27T01:36:00Z",
+        "status": "local_check_repair_in_progress",
+        "note": "After the clean rebase onto independent origin/main f6cf998ae03613191f0f95b0efc5914101d4b38b, 55 related tests remained green and ReviewPolicyRegistry alone failed because the newly committed resolver contains manual-review eligibility markers without an explicit surface annotation. The resolver reuses the existing career_trust_manifest gate, so the same-scope repair adds only @review-surface career_trust_manifest; no registry, policy, production, or write behavior changes."
+      },
+      {
+        "at": "2026-07-27T01:37:00Z",
+        "status": "local_validation_passed",
+        "note": "The resolver now explicitly declares the existing registered career_trust_manifest surface. The complete related selection passed 56 tests / 1422 assertions, including ReviewPolicyRegistry, and remains on the seven authorized PR1 paths. Final formatting, dependency, parser, diff, and scope checks are being repeated on the rebased repair head."
+      },
+      {
+        "at": "2026-07-27T01:37:12Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact seven-path PR1 branch and opened PR #3326 at implementation head 838bfd03346c38b146602a16eb5109c53e73ba21 with the required what/why/validation/deferred boundaries. GitHub required checks and exact-head review are pending. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-27T01:47:22Z",
+        "status": "github_check_repair_in_progress",
+        "note": "Exact ledger head 66ac735dd passed eight of nine required checks. verify-bigfive passed 1602 tests / 195612 assertions and failed only the branch-diff classifier on backend/app/Services/Career/Review/CareerSearchEntryTierResolver.php. Activating the goal's conditional authorization for the Big Five classifier test file: exempt only that exact resolver and add negative controls for a future quality batch, publisher, adjacent resolver, and Big Five runtime. No required check is overridden."
+      },
+      {
+        "at": "2026-07-27T01:49:00Z",
+        "status": "github_checks_retry_pending",
+        "note": "The exact resolver classifier exemption and positive/negative regressions passed 2 tests / 6 assertions. Related Career and review suites passed 56 tests / 1422 assertions, and scoped Pint passed 121 files. The branch now contains exactly eight authorized paths; a fresh complete GitHub required-check set is mandatory after push."
+      },
+      {
+        "at": "2026-07-27T01:59:14Z",
+        "status": "post_rebase_github_checks_pending",
+        "note": "All nine required checks passed at repaired head a59fa4daaa091c9237f5f52ab43b8bf953480810 and its only P1 review thread is resolved. origin/main advanced by independent SEO-13 ops PRs #3327 and #3328 touching only their script/test paths. Cleanly rebased PR1 onto origin/main 7e2e048c7c6d32cdb7c4975783fe925f63310840; related suites passed 56/1422, classifier 2/6, Pint 121 files, route/Composer/parser/diff/scope gates. Fresh exact-head GitHub checks are required after force-push with lease."
+      },
+      {
+        "at": "2026-07-27T02:10:41Z",
+        "status": "review_repair_in_progress",
+        "note": "Exact rebased head 7d674fc03facc5700d31c5edff3d4a687456e170 passed all nine required checks, then exact-head review found that content_quality_tier was incorrectly derived from reviewer evidence. The same-scope repair makes quality tier an explicit independent resolver input, admits only tier_a_controlled_search_entry_candidate, and fails closed for unknown, Tier B, Tier D, and unsupported classifications. The current public bridge supplies null because no backend-bound quality package exists yet; approved review evidence therefore cannot silently promote current Tier B/D content. Focused resolver and bridge tests passed 23 tests / 201 assertions. No production or external write occurred."
+      },
+      {
+        "at": "2026-07-27T02:16:13Z",
+        "status": "github_checks_retry_pending",
+        "note": "Rebased the same-scope P1 repair cleanly onto independent origin/main 685ab5bf90b7168854f6f200f058400f37bed99e. Implementation head 479b35af002a7aa7bbe706f7d7642d1e83621c79 passed related Career/review tests 59/1450, classifier tests 2/6, Pint 120 files, route 224 lines, Composer strict validation/audit, YAML/JSON parsing, diff checks, and exact eight-path scope validation. Fresh exact-head GitHub checks and review are required after force-push with lease."
+      },
+      {
+        "at": "2026-07-27T02:28:38Z",
+        "status": "post_rebase_github_checks_pending",
+        "note": "Repaired head 27f036467ee2f76d5b2d67d812279e3eaaf92db2 passed all nine required checks and Codex exact-head review found no major issues. Before ready_to_merge, origin/main advanced by independent Enneagram PR #3330 touching only Enneagram runtime/readback files. Rebased cleanly onto a538c5034f33f2d004051b25d6662f69c7c558c2; rewritten implementation head 96d199f0aececb37553b481d29760ec51aacfa42 passed related tests 59/1450, classifier 2/6, Pint 120 files, route/Composer/parser/diff/scope gates. Fresh exact-head checks and review are required."
+      },
+      {
+        "at": "2026-07-27T02:40:47Z",
+        "status": "ready_to_merge",
+        "note": "Exact latest-main rebased head 2cb60522c2853042fb58354d40da643067e558b7 passed all nine required GitHub checks, Codex exact-head review found no major issues, all review threads are resolved, PR is CLEAN/MERGEABLE, local validation remains green, and the eight changed paths remain exactly within scope. This ready_to_merge ledger tail must independently pass required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-27T02:40:47Z"
   }
 }

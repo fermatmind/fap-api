@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career\Review;
 
 use App\Models\ReviewAttestation;
+use App\Services\Career\Dataset\CareerPublishTrackResolver;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\ReviewGovernance\CareerSeoReviewAttestationService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
@@ -63,6 +64,8 @@ final class CareerPilotReviewEvidenceBridge
         private readonly PublicCareerAuthorityResponseCache $responseCache,
         private readonly CareerSeoReviewAttestationService $reviews,
         private readonly ReviewAttestationCanonicalizer $canonicalizer,
+        private readonly CareerPublishTrackResolver $publishTrackResolver,
+        private readonly CareerSearchEntryTierResolver $searchEntryTierResolver,
     ) {}
 
     /**
@@ -153,6 +156,9 @@ final class CareerPilotReviewEvidenceBridge
             $payload['trust_manifest'],
             Arr::only($projection, ['review_state', 'last_reviewed_at']),
         );
+        $authority = $this->searchEntryAuthority($slug, $projection, $payload);
+        $payload['search_entry_tier'] = $authority['search_entry_tier'];
+        $payload['search_entry_authority'] = $authority;
 
         return $payload;
     }
@@ -180,6 +186,9 @@ final class CareerPilotReviewEvidenceBridge
                 $item['trust_summary'],
                 Arr::only($projection, ['review_state', 'last_reviewed_at']),
             );
+            $authority = $this->searchEntryAuthority($slug, $projection, $item);
+            $item['search_entry_tier'] = $authority['search_entry_tier'];
+            $item['search_entry_authority'] = $authority;
 
             return $item;
         }, $payload['items']);
@@ -393,5 +402,53 @@ final class CareerPilotReviewEvidenceBridge
     private function normalizeLocale(string $locale): string
     {
         return in_array(strtolower(trim($locale)), ['en', 'en-us'], true) ? 'en' : 'zh-CN';
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @param  array<string,mixed>  $publicPayload
+     * @return array<string,mixed>
+     */
+    private function searchEntryAuthority(string $slug, array $projection, array $publicPayload): array
+    {
+        try {
+            $publishTrack = $this->publishTrackResolver->resolve($slug, $publicPayload);
+        } catch (\Throwable) {
+            $publishTrack = null;
+        }
+
+        return $this->searchEntryTierResolver->resolve(
+            slug: $slug,
+            publicVisibility: true,
+            robotsIndexable: $this->robotsIndexable($publicPayload['seo_contract'] ?? null),
+            reviewState: (string) ($projection['review_state'] ?? 'unknown'),
+            lastReviewedAt: is_string($projection['last_reviewed_at'] ?? null)
+                ? $projection['last_reviewed_at']
+                : null,
+            publishTrack: $publishTrack,
+            // No backend quality-tier authority is projected into the current public
+            // payload. Keep this independent gate unknown until a bounded quality
+            // package supplies an exact classification.
+            contentQualityTier: null,
+        );
+    }
+
+    private function robotsIndexable(mixed $seoContract): bool
+    {
+        if (! is_array($seoContract) || ($seoContract['index_eligible'] ?? null) !== true) {
+            return false;
+        }
+
+        $tokens = array_values(array_filter(array_map(
+            static fn (string $token): string => strtolower(trim($token)),
+            explode(',', is_string($seoContract['robots_policy'] ?? null)
+                ? $seoContract['robots_policy']
+                : ''),
+        )));
+
+        return in_array('index', $tokens, true)
+            && in_array('follow', $tokens, true)
+            && ! in_array('noindex', $tokens, true)
+            && ! in_array('nofollow', $tokens, true);
     }
 }

@@ -341,6 +341,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_career_search_entry_tier_contract(): void
+    {
+        $allowed = [
+            'backend/app/Services/Career/Review/CareerSearchEntryTierResolver.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Career/CareerSearchEntryQualityBatchPlanner.php',
+            'backend/app/Services/Career/CareerSearchEntryPublisher.php',
+            'backend/app/Services/Career/Review/FutureCareerSearchEntryResolver.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_solo_owner_ops_approval_files(): void
     {
         $allowed = [
@@ -6522,6 +6538,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerSearchEntryTierContractFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCareerBridgeContractFile($file)) {
                 continue;
             }
@@ -8437,6 +8457,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Dataset/CareerPublishTrackReconciliationReader.php',
             'backend/app/Services/Career/Dataset/CareerPublishTrackResolver.php',
         ], true);
+    }
+
+    private function isCareerSearchEntryTierContractFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Career/Review/CareerSearchEntryTierResolver.php';
     }
 
     private function isBigFiveCareerBridgeContractFile(string $file): bool
