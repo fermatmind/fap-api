@@ -100809,7 +100809,7 @@
       "CAREER-SEARCH-ENTRY-TIER-CONTRACT-01"
     ],
     "status": "github_checks_pending",
-      "commit_sha": "098217e5006dd143f2a3a8970b12a6c55e733ecc",
+      "commit_sha": "a1f51b95672f72055ae34154b8b701d54d5d35e1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3333",
     "checks": {
       "dependencies": {
@@ -100822,7 +100822,7 @@
       },
       "focused_tests": {
         "status": "passed",
-          "evidence": "The deterministic batch suite passes 15 warning-only tests / 1427 assertions. The related reviewer bridge, tier contract, and publish-track run passes 14 tests plus 13 warning-only tests / 218 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, normalized display-source references with empty-wrapper rejection, full expected-package self-authentication and canonical comparison, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and contract SHA, two bulk publication snapshots with zero per-slug projection lookups, same-version ready_active exposure-snapshot authority, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
+          "evidence": "The deterministic batch suite passes 16 warning-only tests / 1433 assertions. The related reviewer bridge, tier contract, and publish-track run passes 14 tests plus 13 warning-only tests / 218 assertions. Coverage includes the exact 50 upper bound, held exclusion, bilingual completeness, stable/candidate ordering, quality scoring from reader-visible prose only, placeholder/contract-metadata exclusion, normalized display-source references with empty-wrapper rejection, full expected-package self-authentication and canonical comparison, actionable human-readable HOLD diagnostics, explicit EN/zh-CN current content and SEO SHA binding to all per-target review hashes, reader-safe controller parity and contract SHA, one shared version/payload-fenced cohort publication snapshot with zero per-slug projection lookups, same-version ready_active exposure-snapshot authority, exact index canonical matching, source/claim/FAQ/link gates, insufficient-candidate closure, missing authority, identical reruns, exact review projection, pointer-race payload binding, drift verification, zero state writes, and command idempotency."
       },
       "required_local_checks": {
         "status": "passed",
@@ -100905,8 +100905,13 @@
           "at": "2026-07-27T04:37:20Z",
           "status": "review_fixes_validated",
           "note": "All nine checks passed on head 5e64499af11305f7fb720ff419b3c935ce7c0b19, then exact-head Codex review found that human-readable HOLD output omitted its actionable error. The command now emits the exact non-JSON failure reason while retaining generic JSON errors, with an invalid expected-package path regression. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
+        },
+        {
+          "at": "2026-07-27T04:47:46Z",
+          "status": "review_fixes_validated",
+          "note": "All nine checks passed on head b36e7b14f83200706c1991aed9363bf952a3ec1d, then exact-head Codex review found a publication-version race and missing index canonical equality gate. Publication evidence now carries the exact validated classification, version, and payload; quality evaluation and review-target hashing share one request-bounded cohort fence, while independent build/verify calls reset it to detect drift. Index entries must match the exact locale-and-slug canonical. All declared local checks pass; a fresh exact-head CI/review cycle remains required."
         }
       ],
-      "updated_at": "2026-07-27T04:37:20Z"
+      "updated_at": "2026-07-27T04:47:46Z"
   }
 }
