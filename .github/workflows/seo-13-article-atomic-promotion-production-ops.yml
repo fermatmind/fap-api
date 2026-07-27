@@ -1,0 +1,354 @@
+name: SEO 13 Article Atomic Promotion Production Ops
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Preflight is read-only; apply atomically promotes exactly 13 locked revisions
+        required: true
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control plane
+        required: true
+        type: string
+      expected_release_sha:
+        description: Exact active production application SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact active production release name
+        required: true
+        type: string
+      expected_state_sha256:
+        description: Apply only; immutable preflight state SHA
+        required: false
+        default: ""
+        type: string
+      expected_revision_set_sha256:
+        description: Apply only; immutable preflight revision-set SHA
+        required: false
+        default: ""
+        type: string
+      preflight_run_id:
+        description: Apply only; immutable successful preflight run id
+        required: false
+        default: ""
+        type: string
+      preflight_run_attempt:
+        description: Apply only; immutable successful preflight attempt
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        description: Apply only; exact receipt-bound approval phrase emitted by preflight
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: seo-13-article-atomic-promotion-production-ops
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Validate exact control plane and immutable promotion approval
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      mode: ${{ steps.validate.outputs.mode }}
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      release_sha: ${{ steps.validate.outputs.release_sha }}
+      release_name: ${{ steps.validate.outputs.release_name }}
+      state_sha256: ${{ steps.validate.outputs.state_sha256 }}
+      revision_set_sha256: ${{ steps.validate.outputs.revision_set_sha256 }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Validate latest main and apply receipt
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+          EXPECTED_STATE_SHA256: ${{ inputs.expected_state_sha256 }}
+          EXPECTED_REVISION_SET_SHA256: ${{ inputs.expected_revision_set_sha256 }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          CONTENT_SET_SHA256: b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e
+          TARGET_SET_SHA256: 67ecf80ba9a7ec3fc730bba43242005ffd84c5cedb328b62a1aa2dde2d4f934c
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          git fetch --no-tags origin "$EXPECTED_RELEASE_SHA"
+          git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+
+          case "$MODE" in
+            preflight)
+              test -z "$EXPECTED_STATE_SHA256"
+              test -z "$EXPECTED_REVISION_SET_SHA256"
+              test -z "$PREFLIGHT_RUN_ID"
+              test -z "$PREFLIGHT_RUN_ATTEMPT"
+              test -z "$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            apply)
+              [[ "$EXPECTED_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$EXPECTED_REVISION_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+              [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+
+              run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+              jq -e \
+                --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+                --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+                '.name == "SEO 13 Article Atomic Promotion Production Ops"
+                 and .path == ".github/workflows/seo-13-article-atomic-promotion-production-ops.yml"
+                 and .event == "workflow_dispatch"
+                 and .status == "completed"
+                 and .conclusion == "success"
+                 and .head_branch == "main"
+                 and .head_sha == $sha
+                 and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+
+              receipt_dir="$(mktemp -d)"
+              gh run download "$PREFLIGHT_RUN_ID" \
+                --name "seo-13-article-atomic-promotion-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+                --dir "$receipt_dir"
+              receipt="$receipt_dir/seo-13-article-atomic-promotion-production-ops.json"
+              test -f "$receipt"
+              jq -e \
+                --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+                --arg release "$EXPECTED_RELEASE_SHA" \
+                --arg release_name "$EXPECTED_RELEASE_NAME" \
+                --arg state "$EXPECTED_STATE_SHA256" \
+                --arg revisions "$EXPECTED_REVISION_SET_SHA256" \
+                --arg content "$CONTENT_SET_SHA256" \
+                --arg targets "$TARGET_SET_SHA256" \
+                '.contract_version == "seo13.article_atomic_promotion.production_ops.v1"
+                 and .status == "PASS_PREFLIGHT"
+                 and .mode == "preflight"
+                 and .control_plane_sha == $control
+                 and .release_sha == $release
+                 and .release_name == $release_name
+                 and .preflight_state_sha256 == $state
+                 and .revision_set_sha256 == $revisions
+                 and .content_set_sha256 == $content
+                 and .target_set_sha256 == $targets
+                 and .target_count == 13
+                 and (.rows | length) == 13
+                 and .production_write_execution == false
+                 and .publish_count == 0
+                 and .schema_write_count == 0
+                 and .hreflang_write_count == 0
+                 and .search_submission_count == 0
+                 and .revalidation_count == 0
+                 and .sitemap_eligibility_write_count == 0
+                 and .llms_eligibility_write_count == 0
+                 and .queue_dispatch_count == 0
+                 and .gsc_request_count == 0
+                 and .url_inspection_count == 0
+                 and .deploy_count == 0' "$receipt" >/dev/null
+
+              expected_phrase="I explicitly approve SEO 13 atomic public promotion for SHA ${EXPECTED_RELEASE_SHA} release ${EXPECTED_RELEASE_NAME} preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} state ${EXPECTED_STATE_SHA256} revision set ${EXPECTED_REVISION_SET_SHA256} content set ${CONTENT_SET_SHA256}; publish exactly 13 approved working revisions and keep schema, hreflang, search, revalidation, sitemap eligibility, llms eligibility, GSC, URL Inspection, and deploy changes held."
+              test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+              ;;
+            *)
+              echo "Unsupported mode." >&2
+              exit 2
+              ;;
+          esac
+
+          {
+            echo "mode=$MODE"
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "release_sha=$EXPECTED_RELEASE_SHA"
+            echo "release_name=$EXPECTED_RELEASE_NAME"
+            echo "state_sha256=$EXPECTED_STATE_SHA256"
+            echo "revision_set_sha256=$EXPECTED_REVISION_SET_SHA256"
+          } >> "$GITHUB_OUTPUT"
+
+  operate:
+    name: Run exact SEO 13 atomic promotion phase
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    env:
+      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      MODE: ${{ needs.eligibility.outputs.mode }}
+      CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+      EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}
+      EXPECTED_RELEASE_NAME: ${{ needs.eligibility.outputs.release_name }}
+      EXPECTED_STATE_SHA256: ${{ needs.eligibility.outputs.state_sha256 }}
+      EXPECTED_REVISION_SET_SHA256: ${{ needs.eligibility.outputs.revision_set_sha256 }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          echo "Protected production topology validation passed without disclosing values."
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run streamed exact phase against active release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          printf -v q_mode '%q' "$MODE"
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_release_sha '%q' "$EXPECTED_RELEASE_SHA"
+          printf -v q_release_name '%q' "$EXPECTED_RELEASE_NAME"
+          printf -v q_state_sha '%q' "$EXPECTED_STATE_SHA256"
+          printf -v q_revision_set '%q' "$EXPECTED_REVISION_SET_SHA256"
+
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "SEO13_PROMOTION_MODE=$q_mode DEPLOY_PATH=$q_deploy_path EXPECTED_RELEASE_SHA=$q_release_sha EXPECTED_RELEASE_NAME=$q_release_name EXPECTED_STATE_SHA256=$q_state_sha EXPECTED_REVISION_SET_SHA256=$q_revision_set bash -s" \
+            < backend/scripts/seo/seo_13_article_atomic_promotion_production_ops.sh \
+            > artifacts/remote-receipt.json
+          remote_status=$?
+          set -e
+
+          if [ "$remote_status" -ne 0 ]; then
+            jq -e \
+              --arg mode "$MODE" \
+              --arg release "$EXPECTED_RELEASE_SHA" \
+              --arg release_name "$EXPECTED_RELEASE_NAME" \
+              '.contract_version == "seo13.article_atomic_promotion.production_ops.v1"
+               and .status == "FAIL_CLOSED"
+               and .mode == $mode
+               and .release_sha == $release
+               and .release_name == $release_name
+               and (.failed_stage | type == "string" and length > 0)' \
+              artifacts/remote-receipt.json >/dev/null
+            jq \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --argjson run_id "$GITHUB_RUN_ID" \
+              --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
+              '. + {
+                control_plane_sha: $control,
+                workflow_run_id: $run_id,
+                workflow_run_attempt: $run_attempt
+              }' artifacts/remote-receipt.json \
+              > artifacts/seo-13-article-atomic-promotion-production-ops.json
+            exit "$remote_status"
+          fi
+
+          jq -e \
+            --arg mode "$MODE" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            '.contract_version == "seo13.article_atomic_promotion.production_ops.v1"
+             and .mode == $mode
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .target_count == 13
+             and (.rows | length) == 13
+             and (if $mode == "preflight"
+                  then .status == "PASS_PREFLIGHT"
+                       and .production_write_execution == false
+                       and .publish_count == 0
+                  else .status == "PASS_APPLY"
+                       and .production_write_execution == true
+                       and .publish_count == 13
+                  end)
+             and .schema_write_count == 0
+             and .hreflang_write_count == 0
+             and .search_submission_count == 0
+             and .revalidation_count == 0
+             and .sitemap_eligibility_write_count == 0
+             and .llms_eligibility_write_count == 0
+             and .queue_dispatch_count == 0
+             and .gsc_request_count == 0
+             and .url_inspection_count == 0
+             and .deploy_count == 0' artifacts/remote-receipt.json >/dev/null
+
+          jq \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --argjson run_id "$GITHUB_RUN_ID" \
+            --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '. + {
+              control_plane_sha: $control,
+              workflow_run_id: $run_id,
+              workflow_run_attempt: $run_attempt
+            }' artifacts/remote-receipt.json \
+            > artifacts/seo-13-article-atomic-promotion-production-ops.json
+
+          if [ "$MODE" = "preflight" ]; then
+            state_sha="$(jq -er '.preflight_state_sha256' artifacts/seo-13-article-atomic-promotion-production-ops.json)"
+            revision_set="$(jq -er '.revision_set_sha256' artifacts/seo-13-article-atomic-promotion-production-ops.json)"
+            phrase="I explicitly approve SEO 13 atomic public promotion for SHA ${EXPECTED_RELEASE_SHA} release ${EXPECTED_RELEASE_NAME} preflight run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT} state ${state_sha} revision set ${revision_set} content set b58959e613d6abdf1123da09811f7c78c87c73f1e26b70ef3d542506d089432e; publish exactly 13 approved working revisions and keep schema, hreflang, search, revalidation, sitemap eligibility, llms eligibility, GSC, URL Inspection, and deploy changes held."
+            jq --arg phrase "$phrase" '. + {exact_apply_approval_phrase: $phrase}' \
+              artifacts/seo-13-article-atomic-promotion-production-ops.json \
+              > artifacts/final-receipt.json
+            mv artifacts/final-receipt.json artifacts/seo-13-article-atomic-promotion-production-ops.json
+          fi
+
+      - name: Upload sanitized immutable receipt
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: seo-13-article-atomic-promotion-${{ needs.eligibility.outputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/seo-13-article-atomic-promotion-production-ops.json
+          if-no-files-found: error
+          retention-days: 30

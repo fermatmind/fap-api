@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\Article;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
@@ -16,6 +17,8 @@ use RuntimeException;
 
 final class ArticlePublishService
 {
+    private const SEO13_ATOMIC_PROMOTION_SOURCE = 'seo13_atomic_existing_article_working_revision_promotion';
+
     public function __construct(
         private readonly SeoDiscoverabilityCacheInvalidator $seoDiscoverabilityCacheInvalidator,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
@@ -97,6 +100,8 @@ final class ArticlePublishService
         string $source = 'existing_article_controlled_promotion',
         bool $dispatchFollowUp = true,
         ?Closure $transactionGuard = null,
+        bool $recordReleaseAudit = true,
+        bool $invalidateDiscoverabilityCaches = true,
     ): Article {
         if ($articleId <= 0) {
             throw new InvalidArgumentException('article_id must be positive.');
@@ -108,6 +113,15 @@ final class ArticlePublishService
 
         if ($currentPublishedRevisionId <= 0) {
             throw new InvalidArgumentException('current_published_revision_id must be positive.');
+        }
+
+        $suppressesDefaultSideEffects = ! $recordReleaseAudit || ! $invalidateDiscoverabilityCaches;
+        if ($suppressesDefaultSideEffects
+            && $source !== 'seo13_atomic_existing_article_working_revision_promotion') {
+            throw new InvalidArgumentException('promotion side effects may be held only by the locked SEO 13 atomic lane.');
+        }
+        if (! $recordReleaseAudit && $dispatchFollowUp) {
+            throw new InvalidArgumentException('follow-up dispatch cannot run when release audit is held.');
         }
 
         $article = DB::transaction(function () use ($articleId, $workingRevisionId, $currentPublishedRevisionId, $transactionGuard): Article {
@@ -234,10 +248,126 @@ final class ArticlePublishService
             return $article->fresh(['publishedRevision', 'workingRevision', 'seoMeta']) ?? $article;
         });
 
-        ContentReleaseAudit::log('article', $article, $source, $dispatchFollowUp);
-        $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+        if ($recordReleaseAudit) {
+            ContentReleaseAudit::log('article', $article, $source, $dispatchFollowUp);
+        }
+
+        if ($invalidateDiscoverabilityCaches) {
+            $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+        }
 
         return $article;
+    }
+
+    /**
+     * @param  list<array{
+     *   article_id:int,
+     *   working_revision_id:int,
+     *   current_published_revision_id:int
+     * }>  $targets
+     * @return array<string,mixed>
+     */
+    public function promoteExistingWorkingRevisionsAtomically(
+        array $targets,
+        Closure $validateLockedBatch,
+        Closure $transactionGuard,
+        Closure $validateReadback,
+    ): array {
+        if (count($targets) !== 13) {
+            throw new InvalidArgumentException('SEO 13 atomic promotion requires exactly 13 targets.');
+        }
+
+        $articleIds = [];
+        $revisionIds = [];
+        foreach ($targets as $target) {
+            $articleId = (int) ($target['article_id'] ?? 0);
+            $workingRevisionId = (int) ($target['working_revision_id'] ?? 0);
+            $publishedRevisionId = (int) ($target['current_published_revision_id'] ?? 0);
+            if ($articleId <= 0 || $workingRevisionId <= 0 || $publishedRevisionId <= 0) {
+                throw new InvalidArgumentException('SEO 13 atomic promotion target identities must be positive.');
+            }
+            if ($workingRevisionId === $publishedRevisionId) {
+                throw new InvalidArgumentException('SEO 13 atomic promotion revisions must be isolated.');
+            }
+
+            $articleIds[] = $articleId;
+            $revisionIds[] = $workingRevisionId;
+            $revisionIds[] = $publishedRevisionId;
+        }
+
+        if (count(array_unique($articleIds)) !== 13 || count(array_unique($revisionIds)) !== 26) {
+            throw new InvalidArgumentException('SEO 13 atomic promotion target identities must be unique.');
+        }
+
+        sort($articleIds, SORT_NUMERIC);
+        sort($revisionIds, SORT_NUMERIC);
+
+        return DB::transaction(function () use (
+            $targets,
+            $articleIds,
+            $revisionIds,
+            $validateLockedBatch,
+            $transactionGuard,
+            $validateReadback,
+        ): array {
+            $lockedArticleCount = Article::query()
+                ->withoutGlobalScopes()
+                ->whereIn('id', $articleIds)
+                ->orderBy('id')
+                ->lockForUpdate()
+                ->get()
+                ->count();
+            $lockedRevisionCount = ArticleTranslationRevision::query()
+                ->withoutGlobalScopes()
+                ->whereIn('id', $revisionIds)
+                ->orderBy('id')
+                ->lockForUpdate()
+                ->get()
+                ->count();
+            $lockedSeoCount = ArticleSeoMeta::query()
+                ->withoutGlobalScopes()
+                ->whereIn('article_id', $articleIds)
+                ->orderBy('article_id')
+                ->lockForUpdate()
+                ->get()
+                ->count();
+            ArticleEditorialPackageImport::query()
+                ->withoutGlobalScopes()
+                ->whereIn('article_id', $articleIds)
+                ->orderBy('article_id')
+                ->orderBy('id')
+                ->lockForUpdate()
+                ->get();
+
+            if ($lockedArticleCount !== 13 || $lockedRevisionCount !== 26 || $lockedSeoCount !== 13) {
+                throw new RuntimeException('SEO 13 atomic promotion locked identity set is incomplete.');
+            }
+
+            $lockedState = $validateLockedBatch();
+            if (! is_array($lockedState)) {
+                throw new RuntimeException('SEO 13 atomic promotion locked validation returned invalid state.');
+            }
+
+            foreach ($targets as $target) {
+                $this->promoteExistingWorkingRevision(
+                    (int) $target['article_id'],
+                    (int) $target['working_revision_id'],
+                    (int) $target['current_published_revision_id'],
+                    self::SEO13_ATOMIC_PROMOTION_SOURCE,
+                    dispatchFollowUp: false,
+                    transactionGuard: $transactionGuard,
+                    recordReleaseAudit: false,
+                    invalidateDiscoverabilityCaches: false,
+                );
+            }
+
+            $readback = $validateReadback($lockedState);
+            if (! is_array($readback)) {
+                throw new RuntimeException('SEO 13 atomic promotion readback returned invalid state.');
+            }
+
+            return $readback;
+        }, 1);
     }
 
     private function assertPublishable(Article $article): void
