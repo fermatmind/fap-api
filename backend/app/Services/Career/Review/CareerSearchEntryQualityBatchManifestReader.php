@@ -55,8 +55,7 @@ final class CareerSearchEntryQualityBatchManifestReader
         $maximum = (int) ($decoded['max_candidate_count'] ?? 0);
         $candidates = $decoded['candidates'] ?? null;
         if (! is_array($candidates)
-            || $expected < 1
-            || $expected > self::MAX_CANDIDATES
+            || $expected !== self::MAX_CANDIDATES
             || $maximum !== self::MAX_CANDIDATES
             || count($candidates) !== $expected) {
             throw new \RuntimeException('Career search-entry quality manifest count boundary is invalid.');

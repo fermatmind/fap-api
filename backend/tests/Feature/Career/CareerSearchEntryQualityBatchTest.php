@@ -90,6 +90,23 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         }
     }
 
+    public function test_manifest_rejects_a_synchronously_truncated_cohort(): void
+    {
+        $manifest = $this->manifestReader->read();
+        $manifest['expected_candidate_count'] = 49;
+        array_pop($manifest['candidates']);
+        $path = storage_path('framework/testing/career-search-entry-quality-batch-truncated.json');
+        file_put_contents($path, json_encode($manifest, JSON_THROW_ON_ERROR));
+
+        try {
+            $this->expectException(\RuntimeException::class);
+            $this->expectExceptionMessage('count boundary');
+            $this->manifestReader->read($path);
+        } finally {
+            @unlink($path);
+        }
+    }
+
     public function test_dry_run_is_deterministic_bilingual_bounded_and_zero_write(): void
     {
         $writes = [];
