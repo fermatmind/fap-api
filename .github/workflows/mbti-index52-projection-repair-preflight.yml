@@ -85,8 +85,8 @@ jobs:
             $isolatedSource = static function (string $path): string {
               $source = preg_replace("/^<\\?php\\s*/", "", file_get_contents($path));
               $source = str_replace(
-                "namespace App\\\\Services\\\\Cms;",
-                "namespace App\\\\Services\\\\Cms\\\\StreamedMbtiIndex52;",
+                "namespace App\\Services\\Cms;",
+                "namespace App\\Services\\Cms\\StreamedMbtiIndex52;",
                 $source,
                 $replacementCount,
               );

@@ -66,4 +66,26 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('assertReleaseBinding($expectedControlPlaneSha, $expectedActiveRevision)', $service);
         self::assertStringContainsString('runtimeActiveRevision()', $service);
     }
+
+    public function test_streamed_class_namespace_replacement_matches_both_sources(): void
+    {
+        foreach ([
+            dirname(__DIR__, 2).'/app/Services/Cms/MbtiIndex52ProjectionRepairPackage.php',
+            dirname(__DIR__, 2).'/app/Services/Cms/MbtiIndex52ProjectionRepairService.php',
+        ] as $path) {
+            $source = (string) preg_replace('/^<\?php\s*/', '', (string) file_get_contents($path));
+            $isolated = str_replace(
+                'namespace App\\Services\\Cms;',
+                'namespace App\\Services\\Cms\\StreamedMbtiIndex52;',
+                $source,
+                $replacementCount,
+            );
+
+            self::assertSame(1, $replacementCount, $path);
+            self::assertStringContainsString(
+                'namespace App\\Services\\Cms\\StreamedMbtiIndex52;',
+                $isolated,
+            );
+        }
+    }
 }
