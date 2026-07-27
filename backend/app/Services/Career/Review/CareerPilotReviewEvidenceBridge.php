@@ -156,12 +156,11 @@ final class CareerPilotReviewEvidenceBridge
 
         $projection = $this->projectionBySlug()[strtolower(trim($slug))]
             ?? self::UNAPPROVED_PROJECTION;
-        $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
-        $this->searchEntryQualityEvaluator->primePublicationSnapshot([strtolower(trim($slug))]);
+        $currentTargets = $this->refreshTargetCurrencyBySlug([
+            strtolower(trim($slug)) => $projection,
+        ]);
         if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection)
-            || ! ($this->currentTargetCurrencyBySlug([
-                strtolower(trim($slug)) => $projection,
-            ])[strtolower(trim($slug))] ?? false)) {
+            || ! ($currentTargets[strtolower(trim($slug))] ?? false)) {
             $projection = self::UNAPPROVED_PROJECTION;
         }
 
@@ -180,9 +179,7 @@ final class CareerPilotReviewEvidenceBridge
     public function projectJobIndexPayload(array $payload, string $publicLocale): array
     {
         $projections = $this->projectionBySlug();
-        $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
-        $this->searchEntryQualityEvaluator->primePublicationSnapshot(array_keys($projections));
-        $currentTargets = $this->currentTargetCurrencyBySlug($projections);
+        $currentTargets = $this->refreshTargetCurrencyBySlug($projections);
         $locale = $this->normalizeLocale($publicLocale);
         if (! is_array($payload['items'] ?? null)) {
             return $payload;
@@ -212,6 +209,31 @@ final class CareerPilotReviewEvidenceBridge
         }, $payload['items']);
 
         return $payload;
+    }
+
+    /**
+     * A second publication read is a freshness gate, not page availability
+     * authority. Any transient failure must remove approval and indexability
+     * without turning an already-readable cached response into a 500.
+     *
+     * @param  array<string,array<string,mixed>>  $projections
+     * @return array<string,bool>
+     */
+    private function refreshTargetCurrencyBySlug(array $projections): array
+    {
+        $approvedSlugs = array_keys(array_filter(
+            $projections,
+            static fn (array $projection): bool => ($projection['review_state'] ?? null) === 'approved',
+        ));
+
+        try {
+            $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
+            $this->searchEntryQualityEvaluator->primePublicationSnapshot(array_keys($projections));
+
+            return $this->currentTargetCurrencyBySlug($projections);
+        } catch (\Throwable) {
+            return array_fill_keys($approvedSlugs, false);
+        }
     }
 
     /**

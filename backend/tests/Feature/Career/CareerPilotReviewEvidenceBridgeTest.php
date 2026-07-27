@@ -372,6 +372,38 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         );
     }
 
+    public function test_transient_publication_revalidation_failure_downgrades_without_breaking_detail(): void
+    {
+        $bridge = app(CareerPilotReviewEvidenceBridge::class);
+        $package = $bridge->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+        $payload = app(PublicCareerAuthorityResponseCache::class)->jobDetailPayload(self::SLUG, 'en');
+        $this->assertIsArray($payload);
+        $approved = $bridge->projectDetailPayload(self::SLUG, $payload);
+        $this->assertSame('approved', data_get($approved, 'trust_manifest.review_state'));
+
+        Cache::partialMock()
+            ->shouldReceive('get')
+            ->andThrow(new \RuntimeException('transient publication cache failure'));
+
+        $downgraded = $bridge->projectDetailPayload(self::SLUG, $payload);
+
+        $this->assertSame('unknown', data_get($downgraded, 'trust_manifest.review_state'));
+        $this->assertSame('ineligible', data_get($downgraded, 'search_entry_tier'));
+        $this->assertContains(
+            'reviewer_evidence_not_current',
+            data_get($downgraded, 'search_entry_authority.reason_codes'),
+        );
+    }
+
     private function publishBilingualDetails(
         string $englishContent = 'current visible English content',
         string $trustSource = 'current public source evidence',
