@@ -58,6 +58,13 @@ final class Seo13ArticleReviewApprovalProductionOpsWorkflowTest extends TestCase
         $this->assertStringContainsString('DB::transaction', $runner);
         $this->assertStringContainsString('STATUS_HUMAN_REVIEW', $runner);
         $this->assertStringContainsString('STATUS_APPROVED', $runner);
+        $this->assertStringContainsString('! (bool) $article->is_public', $runner);
+        $this->assertStringContainsString('! (bool) $article->is_indexable', $runner);
+        $this->assertStringContainsString('! (bool) $article->sitemap_eligible', $runner);
+        $this->assertStringContainsString('! (bool) $article->llms_eligible', $runner);
+        $this->assertStringContainsString("data_get(\$import->exactness_json, 'canonical_url')", $runner);
+        $this->assertStringNotContainsString("\$article->seoMeta?->robots", $runner);
+        $this->assertStringNotContainsString("\$article->seoMeta?->is_indexable", $runner);
         foreach ([
             'cohort_runtime_contract',
             'reviewer_identity',
