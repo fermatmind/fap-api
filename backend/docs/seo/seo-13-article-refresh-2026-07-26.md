@@ -136,10 +136,14 @@ For every new working revision:
 2. compare title, excerpt, body, SEO title, and SEO description with the exact package;
 3. verify visible Markdown, tables, internal anchors, source URLs, and mobile readability;
 4. confirm no forbidden marker, private URL, unsupported percentile, official-affiliation implication, diagnosis, hiring use, or outcome guarantee;
-5. approve the exact working revision through the existing Filament editorial-review workflow under the repository `solo_owner` policy;
-6. record the exact article ID, working revision ID, reviewer, reviewed timestamp, approved timestamp, body hash, and preview result.
+5. bind the authenticated preview result to the exact revision set through `.github/workflows/seo-13-article-review-approval-production-ops.yml`;
+6. obtain the receipt-bound operator phrase emitted by its read-only `preflight`;
+7. run `apply` only for that immutable state; the streamed runner uses the active release's existing `ArticleTranslationWorkflowService::approveEditorialWorkingRevision` and repository `solo_owner` attestation policy;
+8. record the exact article ID, working revision ID, reviewer, reviewed timestamp, approved timestamp, body hash, and preview result.
 
 Approval is review evidence only. It does not authorize publication.
+
+The generic Filament editorial-review queue is not used for this cohort because it intentionally enumerates `status=draft` records. These are already-published articles with isolated working revisions, so changing their public Article status merely to expose them in that queue would violate the existing-route hold.
 
 ## Production stage 4: controlled promotion
 
@@ -242,3 +246,21 @@ The workflow `.github/workflows/seo-13-article-draft-production-ops.yml` is the 
 4. Apply creates exactly 13 isolated `human_review` working revisions. It does not promote any revision and keeps schema, hreflang, search submission, revalidation, sitemap, and llms changes held.
 
 Authenticated preview QA, editorial approval, controlled promotion, public smoke, and closeout remain later, separately evidenced phases. A successful draft receipt does not authorize or prove publication.
+
+## Production draft and preview evidence
+
+- active application SHA: `de9865c8cdde21a6359b60052f426f867abe0ead`
+- active release: `seo-13-article-refresh-20260727-de9865c8-30215056008-1`
+- draft preflight: run `30222641581`, attempt `1`
+- draft preflight state: `e1426e1ce08db8a0388a424a069ef33bff0a86283f303b7d29327154b341e743`
+- draft apply: run `30228428454`, attempt `1`, `PASS_APPLY`
+- applied revision set: `883c4b62c51c35be9364862d29dae3261e94323151bdd8231d53c11274d5dbb5`
+- authenticated preview QA: 13/13 exact working revision IDs matched; 13/13 titles matched; each page rendered exactly one H1 and the visible `快速答案`, `常见问题`, and `参考来源` sections
+- visible Han-character range: 2,111–2,460 per article
+- preview boundary: `noindex,noarchive,nosnippet`, `Draft preview only`, no-store
+- forbidden draft/review markers: 0
+- private URL guard findings: 0
+- images missing alt text: 0
+- publication, schema, hreflang, search, revalidation, sitemap, and llms remained held
+
+This evidence authorizes neither editorial approval nor promotion by itself. The review-approval preflight must rediscover and bind the exact live revision set before the operator confirms its emitted phrase.
