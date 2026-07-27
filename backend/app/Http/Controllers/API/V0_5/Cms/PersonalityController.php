@@ -499,7 +499,7 @@ class PersonalityController extends Controller
             'ok' => true,
             'comparison' => $comparisonProjection,
             'comparison_public_projection_v1' => $comparisonProjection,
-            'sections' => $comparisonOverlay !== null ? [$comparisonOverlay['section']] : [],
+            'sections' => $this->comparisonRuntimeSections($comparisonOverlay, $comparisonProjection),
             'claim_boundary' => $comparisonProjection['claim_boundary'] ?? null,
             'seo_meta' => $this->comparisonSeoMetaPayload($meta),
             'jsonld' => $jsonLd,
@@ -994,6 +994,62 @@ class PersonalityController extends Controller
         }
 
         return $projection;
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $comparisonOverlay
+     * @param  array<string,mixed>  $projection
+     * @return list<array<string,mixed>>
+     */
+    private function comparisonRuntimeSections(?array $comparisonOverlay, array $projection): array
+    {
+        $sections = $projection['sections'] ?? null;
+        $sourceSection = $comparisonOverlay['section'] ?? null;
+        if (! is_array($sections) || $sections === [] || ! is_array($sourceSection)) {
+            return [];
+        }
+
+        $content = [];
+        foreach ($sections as $section) {
+            if (! is_array($section)) {
+                return [];
+            }
+            $key = $this->normalizedString($section['id'] ?? $section['key'] ?? null);
+            $title = $this->normalizedString($section['title'] ?? null);
+            $body = array_values(array_filter(array_map(
+                fn (mixed $value): ?string => $this->normalizedString($value),
+                is_array($section['body'] ?? null) ? $section['body'] : [$section['body'] ?? null],
+            )));
+            $rows = is_array($section['rows'] ?? null) ? array_values($section['rows']) : [];
+            if ($key === null || $title === null || ($body === [] && $rows === [])) {
+                return [];
+            }
+            $content[$key] = [
+                'title' => $title,
+                'body' => implode("\n\n", $body),
+                ...($rows !== [] ? ['rows' => $rows] : []),
+            ];
+        }
+
+        return [[
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'title' => $sourceSection['title'] ?? null,
+            'render_variant' => $sourceSection['render_variant'] ?? 'rich_text',
+            'body_md' => $projection['description'] ?? null,
+            'body_html' => null,
+            'payload_json' => [
+                'content' => $content,
+                'faq' => is_array($projection['faq'] ?? null) ? array_values($projection['faq']) : [],
+                'internal_links' => is_array($projection['internal_links'] ?? null)
+                    ? array_values($projection['internal_links'])
+                    : [],
+                'raw_row' => [
+                    'method_boundary' => $projection['claim_boundary'] ?? null,
+                ],
+            ],
+            'sort_order' => $sourceSection['sort_order'] ?? 920,
+            'is_enabled' => true,
+        ]];
     }
 
     /**
