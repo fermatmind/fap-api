@@ -101088,8 +101088,13 @@
         "at": "2026-07-27T08:03:00Z",
         "status": "ready_to_merge",
         "note": "Exact-head review found encoded query/fragment delimiters could bypass reserved-namespace classification. The initial focused retry exposed an invalid regex delimiter and failed before assertions; the scoped fix escapes the delimiter, rejects decoded ?/# boundaries fail-closed, and passes the focused contract (66 assertions), the complete sitemap generator/source/Big Five suite (1041 assertions), scoped Pint, YAML/JSON parsing, and diff validation."
+      },
+      {
+        "at": "2026-07-27T08:22:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact-head review identified that a canonical-path ContentPage could replace a depublished Big Five authority row. The sitemap-only gate now requires each reserved canonical URL to be emitted by the eligible Big Five asset producer as well as the canonical catalog. The focused contract passes with 70 assertions, the complete sitemap suite passes with 1045 assertions, scoped Pint passes, and the full ci_verify_mbti repository gate passes. Generated compiled artifacts were restored to exact tracked bytes."
       }
     ],
-    "updated_at": "2026-07-27T08:03:00Z"
+    "updated_at": "2026-07-27T08:22:00Z"
   }
 }

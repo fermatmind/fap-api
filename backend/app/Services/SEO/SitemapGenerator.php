@@ -123,8 +123,18 @@ class SitemapGenerator
 
     public function generateSitemapUrls(): array
     {
-        return collect($this->generateUrls())
+        $eligibleBigFiveLocs = collect($this->getPersonalityPublicContentAssetUrls())
             ->filter(static function (array $url): bool {
+                $loc = trim((string) ($url['loc'] ?? ''));
+                $path = parse_url($loc, PHP_URL_PATH);
+
+                return is_string($path) && BigFiveCanonicalRouteCatalog::isCanonicalPath($path);
+            })
+            ->mapWithKeys(static fn (array $url): array => [(string) $url['loc'] => true])
+            ->all();
+
+        return collect($this->generateUrls())
+            ->filter(static function (array $url) use ($eligibleBigFiveLocs): bool {
                 $loc = trim((string) ($url['loc'] ?? ''));
                 if (preg_match('/[\x00-\x1F\x7F]/', $loc) === 1) {
                     return false;
@@ -153,7 +163,8 @@ class SitemapGenerator
                 }
 
                 return hash_equals($path, $normalizedPath)
-                    && BigFiveCanonicalRouteCatalog::isCanonicalPath($path);
+                    && BigFiveCanonicalRouteCatalog::isCanonicalPath($path)
+                    && isset($eligibleBigFiveLocs[$loc]);
             })
             ->unique('loc')
             ->values()

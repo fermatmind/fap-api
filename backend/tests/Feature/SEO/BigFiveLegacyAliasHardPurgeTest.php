@@ -442,6 +442,42 @@ final class BigFiveLegacyAliasHardPurgeTest extends TestCase
             self::assertNotContains('https://fermatmind.com'.$alias, $paths->all());
             self::assertContains('https://fermatmind.com'.$target, $paths->all());
         }
+
+        $depublishedPath = '/en/personality/big-five/openness';
+        $depublishedAsset = PersonalityPublicContentAsset::query()
+            ->withoutGlobalScopes()
+            ->get()
+            ->first(static fn (PersonalityPublicContentAsset $asset): bool => data_get(
+                $asset->canonical_json,
+                'path',
+            ) === $depublishedPath);
+        self::assertInstanceOf(PersonalityPublicContentAsset::class, $depublishedAsset);
+        $depublishedAsset->forceFill(['sitemap_eligible' => false])->save();
+        ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
+            'org_id' => 0,
+            'slug' => 'big-five-openness-shadow',
+            'path' => $depublishedPath,
+            'canonical_path' => $depublishedPath,
+            'kind' => ContentPage::KIND_POLICY,
+            'locale' => 'en',
+            'title' => 'Big Five openness shadow',
+            'content_md' => 'A ContentPage must not replace an ineligible Big Five authority asset.',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now(),
+        ]));
+
+        self::assertContains(
+            'https://fermatmind.com'.$depublishedPath,
+            collect(app(SitemapGenerator::class)->generateUrls())->pluck('loc')->all(),
+        );
+        $depublishedSitemapPaths = collect(app(SitemapGenerator::class)->generateSitemapUrls())
+            ->pluck('loc')
+            ->filter(static fn (mixed $path): bool => is_string($path) && str_contains($path, '/personality/big-five'))
+            ->values();
+        self::assertNotContains('https://fermatmind.com'.$depublishedPath, $depublishedSitemapPaths->all());
+        self::assertCount(103, $depublishedSitemapPaths);
     }
 
     /** @return array{PersonalityPublicContentAsset,PersonalityPublicContentAsset} */
