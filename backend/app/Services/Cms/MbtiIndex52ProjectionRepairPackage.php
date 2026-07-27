@@ -13,9 +13,9 @@ final class MbtiIndex52ProjectionRepairPackage
 
     public const AUTHORIZATION_PATH = 'content_assets/personality_public/mbti-index52-comparison-projection-repair-operator-authorization-2026-07-27.json';
 
-    public const PACKAGE_SHA256 = 'ea4801ff5af8d0d7279137d2f4ebbaa263bdc4a959f5c880ba023dd2d0fed641';
+    public const PACKAGE_SHA256 = 'ead55f273b755ac4d93f5d71246c10b374bb4e936fb3bbe1128872599a5c434b';
 
-    public const AUTHORIZATION_SHA256 = '59103fbf6eae4effc81fec844bbbf8d3ae8bb7100513407821074787a641253c';
+    public const AUTHORIZATION_SHA256 = '1020c5b3cc9a2914f18d30805b9e4b326e3acbdb811eff5dcd52ff3e47b578ef';
 
     public const AT_SLUGS = [
         'intj-a-vs-intj-t', 'intp-a-vs-intp-t', 'entj-a-vs-entj-t', 'entp-a-vs-entp-t',
@@ -76,7 +76,7 @@ final class MbtiIndex52ProjectionRepairPackage
             }
             $isAt = $index < 16;
             $patch = $record['patch'] ?? null;
-            $expectedKeys = $isAt ? ['claim_boundary'] : ['internal_links', 'answer_surface_v1', 'alternates'];
+            $expectedKeys = $isAt ? ['claim_boundary'] : ['internal_links', 'answer_surface_v1'];
             if (($record['record_kind'] ?? null) !== ($isAt ? 'at_comparison' : 'cross_type_comparison')
                 || ! is_array($patch)
                 || array_keys($patch) !== $expectedKeys
@@ -97,7 +97,7 @@ final class MbtiIndex52ProjectionRepairPackage
             if (! $isAt) {
                 $links = $patch['internal_links'] ?? null;
                 $surface = $patch['answer_surface_v1'] ?? null;
-                $alternates = $patch['alternates'] ?? null;
+                $englishGap = $record['english_alternate_authority_gap'] ?? null;
                 $expectedLinks = in_array($record['slug'], array_slice(self::CROSS_SLUGS, 4), true) ? 7 : 5;
                 if (! is_array($links) || count($links) !== $expectedLinks
                     || ! is_array($surface)
@@ -105,8 +105,10 @@ final class MbtiIndex52ProjectionRepairPackage
                     || ! is_array($surface['faq_blocks'] ?? null)
                     || ! is_array($surface['compare_blocks'] ?? null)
                     || ! is_array($surface['next_step_blocks'] ?? null)
-                    || ($alternates['en'] ?? null) !== 'https://fermatmind.com/en/personality/'.$record['slug']
-                    || ($alternates['zh-CN'] ?? null) !== 'https://fermatmind.com/zh/personality/'.$record['slug']
+                    || ! is_array($englishGap)
+                    || ($englishGap['status'] ?? null) !== 'held_missing_en_backend_record'
+                    || ($englishGap['expected_en_canonical'] ?? null) !== 'https://fermatmind.com/en/personality/'.$record['slug']
+                    || ($englishGap['production_write_authorized'] ?? null) !== false
                 ) {
                     throw new RuntimeException("Projection repair cross record {$index} shape mismatch.");
                 }

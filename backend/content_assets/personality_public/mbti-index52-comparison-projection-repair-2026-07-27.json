@@ -36,7 +36,9 @@
             "runtime_sections",
             "claim_boundary",
             "internal_links",
-            "answer_surface_v1",
+            "answer_surface_v1"
+        ],
+        "held_gap_fields": [
             "alternates.en"
         ]
     },
@@ -1697,6 +1699,11 @@
                 }
             ],
             "expected_runtime_sections_sha256": "ae8507ca425ba0d72f3426322249a9663dbc50ecd6f3fa545acc04068a28f436",
+            "english_alternate_authority_gap": {
+                "status": "held_missing_en_backend_record",
+                "expected_en_canonical": "https://fermatmind.com/en/personality/intj-vs-intp",
+                "production_write_authorized": false
+            },
             "patch": {
                 "internal_links": [
                     {
@@ -1821,10 +1828,6 @@
                             "kind": "backend_authoritative_internal_link"
                         }
                     ]
-                },
-                "alternates": {
-                    "en": "https://fermatmind.com/en/personality/intj-vs-intp",
-                    "zh-CN": "https://fermatmind.com/zh/personality/intj-vs-intp"
                 }
             }
         },
@@ -1900,6 +1903,11 @@
                 }
             ],
             "expected_runtime_sections_sha256": "cde62cdb162beb144cdbc2d7404df4cce2e4ab6bf79ef8f8eff6d78431d61686",
+            "english_alternate_authority_gap": {
+                "status": "held_missing_en_backend_record",
+                "expected_en_canonical": "https://fermatmind.com/en/personality/entj-vs-intj",
+                "production_write_authorized": false
+            },
             "patch": {
                 "internal_links": [
                     {
@@ -2024,10 +2032,6 @@
                             "kind": "backend_authoritative_internal_link"
                         }
                     ]
-                },
-                "alternates": {
-                    "en": "https://fermatmind.com/en/personality/entj-vs-intj",
-                    "zh-CN": "https://fermatmind.com/zh/personality/entj-vs-intj"
                 }
             }
         },
@@ -2103,6 +2107,11 @@
                 }
             ],
             "expected_runtime_sections_sha256": "a6f7528360303a4cbd2f59108e941ff0f1154fc343ddf3045389c6a3c149056e",
+            "english_alternate_authority_gap": {
+                "status": "held_missing_en_backend_record",
+                "expected_en_canonical": "https://fermatmind.com/en/personality/infj-vs-infp",
+                "production_write_authorized": false
+            },
             "patch": {
                 "internal_links": [
                     {
@@ -2227,10 +2236,6 @@
                             "kind": "backend_authoritative_internal_link"
                         }
                     ]
-                },
-                "alternates": {
-                    "en": "https://fermatmind.com/en/personality/infj-vs-infp",
-                    "zh-CN": "https://fermatmind.com/zh/personality/infj-vs-infp"
                 }
             }
         },
@@ -2306,6 +2311,11 @@
                 }
             ],
             "expected_runtime_sections_sha256": "c7dd04a1a45d67e801faa29d4bc13d4c2cc454ef795832d87ef61f5e6f7e2450",
+            "english_alternate_authority_gap": {
+                "status": "held_missing_en_backend_record",
+                "expected_en_canonical": "https://fermatmind.com/en/personality/istj-vs-isfj",
+                "production_write_authorized": false
+            },
             "patch": {
                 "internal_links": [
                     {
@@ -2430,10 +2440,6 @@
                             "kind": "backend_authoritative_internal_link"
                         }
                     ]
-                },
-                "alternates": {
-                    "en": "https://fermatmind.com/en/personality/istj-vs-isfj",
-                    "zh-CN": "https://fermatmind.com/zh/personality/istj-vs-isfj"
                 }
             }
         },
@@ -2535,6 +2541,11 @@
                 }
             ],
             "expected_runtime_sections_sha256": "bba4469493a1c197d40a8270e34ca46cac4c54b778639661e191373463d8675f",
+            "english_alternate_authority_gap": {
+                "status": "held_missing_en_backend_record",
+                "expected_en_canonical": "https://fermatmind.com/en/personality/enfp-vs-entp",
+                "production_write_authorized": false
+            },
             "patch": {
                 "internal_links": [
                     {
@@ -2718,10 +2729,6 @@
                             "kind": "backend_authoritative_internal_link"
                         }
                     ]
-                },
-                "alternates": {
-                    "en": "https://fermatmind.com/en/personality/enfp-vs-entp",
-                    "zh-CN": "https://fermatmind.com/zh/personality/enfp-vs-entp"
                 }
             }
         },
@@ -2825,6 +2832,11 @@
                 }
             ],
             "expected_runtime_sections_sha256": "21c168504e4f98e712503dfd43ce142245a1e3f27fcb28808eb164da1ad9b31c",
+            "english_alternate_authority_gap": {
+                "status": "held_missing_en_backend_record",
+                "expected_en_canonical": "https://fermatmind.com/en/personality/estj-vs-entj",
+                "production_write_authorized": false
+            },
             "patch": {
                 "internal_links": [
                     {
@@ -3008,10 +3020,6 @@
                             "kind": "backend_authoritative_internal_link"
                         }
                     ]
-                },
-                "alternates": {
-                    "en": "https://fermatmind.com/en/personality/estj-vs-entj",
-                    "zh-CN": "https://fermatmind.com/zh/personality/estj-vs-entj"
                 }
             }
         },
@@ -3112,6 +3120,11 @@
                 }
             ],
             "expected_runtime_sections_sha256": "d2823ef24eeb178686b8530eb71cb32642e56fbb44dc6e501c7b6049b462b225",
+            "english_alternate_authority_gap": {
+                "status": "held_missing_en_backend_record",
+                "expected_en_canonical": "https://fermatmind.com/en/personality/isfp-vs-infp",
+                "production_write_authorized": false
+            },
             "patch": {
                 "internal_links": [
                     {
@@ -3295,10 +3308,6 @@
                             "kind": "backend_authoritative_internal_link"
                         }
                     ]
-                },
-                "alternates": {
-                    "en": "https://fermatmind.com/en/personality/isfp-vs-infp",
-                    "zh-CN": "https://fermatmind.com/zh/personality/isfp-vs-infp"
                 }
             }
         }
@@ -3317,7 +3326,8 @@
         "require_claim_boundary": true,
         "require_cross_internal_links": true,
         "require_cross_answer_surface_v1": true,
-        "require_cross_english_alternate": true,
+        "require_cross_english_alternate": false,
+        "require_english_alternate_hold_without_en_backend_record": true,
         "preserve_publication_and_indexability": true
     },
     "safety_boundary": {
@@ -3327,5 +3337,5 @@
         "search_submission_authorized": false,
         "production_write_authorized": false
     },
-    "package_sha256": "ea4801ff5af8d0d7279137d2f4ebbaa263bdc4a959f5c880ba023dd2d0fed641"
+    "package_sha256": "ead55f273b755ac4d93f5d71246c10b374bb4e936fb3bbe1128872599a5c434b"
 }

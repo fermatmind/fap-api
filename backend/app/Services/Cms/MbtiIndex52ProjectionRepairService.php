@@ -164,6 +164,7 @@ final class MbtiIndex52ProjectionRepairService
             .$currentStateSha256.' control-plane SHA '.$controlPlaneSha
             .' active SHA '.$activeRevision
             .' covering exact 16 A/T and 7 cross-comparison zh-CN records; '
+            .'English alternate remains held pending a real en backend authority record; '
             .'no body/FAQ/publication/indexability/sitemap/llms/search changes.';
     }
 
@@ -274,7 +275,7 @@ final class MbtiIndex52ProjectionRepairService
             if ($row['record_kind'] === 'at_comparison') {
                 $payload['claim_boundary'] = $patch['claim_boundary'];
             } else {
-                foreach (['internal_links', 'answer_surface_v1', 'alternates'] as $key) {
+                foreach (['internal_links', 'answer_surface_v1'] as $key) {
                     $payload[$key] = $patch[$key];
                 }
             }
@@ -305,7 +306,8 @@ final class MbtiIndex52ProjectionRepairService
             'contract' => 'mbti.index52.comparison_projection_repair.readback.v1',
             'exact_slugs' => array_column($desired, 'slug'),
             'desired_state_sha256' => $this->packageContract->sha($desired),
-            'required_public_fields' => ['sections', 'claim_boundary', 'internal_links', 'answer_surface_v1', 'alternates.en'],
+            'required_public_fields' => ['sections', 'claim_boundary', 'internal_links', 'answer_surface_v1'],
+            'english_alternate_authority' => 'held_missing_en_backend_record',
             'preserve_body_and_faq' => true,
             'preserve_publication_and_indexability' => true,
         ];

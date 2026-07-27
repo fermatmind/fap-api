@@ -22,8 +22,6 @@ final class Mbti64CrossTypeComparisonPublicReadModel
 
     private const LOCALE = 'zh-CN';
 
-    private const ALTERNATE_LOCALE = 'en';
-
     public function __construct(private readonly PublicReviewContract $publicReviewContract) {}
 
     /**
@@ -31,15 +29,12 @@ final class Mbti64CrossTypeComparisonPublicReadModel
      */
     public function list(string $locale): array
     {
-        if (! in_array($locale, [self::LOCALE, self::ALTERNATE_LOCALE], true)) {
+        if ($locale !== self::LOCALE) {
             return [];
         }
 
         $items = [];
         foreach ($this->authorityAssetsBySlug() as $asset) {
-            if (! $this->hasLocaleAuthority($asset, $locale)) {
-                continue;
-            }
             $item = $this->listItem($asset, $locale);
             if ($item !== null) {
                 $items[] = $item;
@@ -57,14 +52,12 @@ final class Mbti64CrossTypeComparisonPublicReadModel
     public function find(string $slug, string $locale): ?array
     {
         $normalizedSlug = strtolower(trim($slug));
-        if (! in_array($locale, [self::LOCALE, self::ALTERNATE_LOCALE], true)
-            || ! $this->isCrossTypeSlug($normalizedSlug)
-        ) {
+        if ($locale !== self::LOCALE || ! $this->isCrossTypeSlug($normalizedSlug)) {
             return null;
         }
 
         $asset = $this->authorityAssetsBySlug()[$normalizedSlug] ?? null;
-        if (! is_array($asset) || ! $this->hasLocaleAuthority($asset, $locale)) {
+        if (! is_array($asset)) {
             return null;
         }
 
@@ -378,31 +371,15 @@ final class Mbti64CrossTypeComparisonPublicReadModel
         }
         $expected = [
             'en' => $this->canonicalUrl($slug, 'en'),
-            self::LOCALE => $this->canonicalUrl($slug, self::LOCALE),
+            self::LOCALE => $canonicalUrl,
         ];
         $authority = is_array($asset['alternates'] ?? null) ? $asset['alternates'] : [];
 
         return $expected['en'] !== null
             && ($authority['en'] ?? null) === $expected['en']
-            && $expected[self::LOCALE] !== null
             && ($authority[self::LOCALE] ?? null) === $expected[self::LOCALE]
                 ? $expected
                 : [self::LOCALE => $canonicalUrl];
-    }
-
-    private function hasLocaleAuthority(array $asset, string $locale): bool
-    {
-        if ($locale === self::LOCALE) {
-            return true;
-        }
-        if ($locale !== self::ALTERNATE_LOCALE) {
-            return false;
-        }
-        $slug = (string) ($asset['slug'] ?? '');
-        $authority = is_array($asset['alternates'] ?? null) ? $asset['alternates'] : [];
-
-        return ($authority[self::ALTERNATE_LOCALE] ?? null) === $this->canonicalUrl($slug, self::ALTERNATE_LOCALE)
-            && ($authority[self::LOCALE] ?? null) === $this->canonicalUrl($slug, self::LOCALE);
     }
 
     /**

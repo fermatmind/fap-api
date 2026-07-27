@@ -18,8 +18,8 @@ final class MbtiIndex52ProjectionRepairPreflightWorkflowTest extends TestCase
         self::assertStringContainsString('test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"', $workflow);
         self::assertStringContainsString('EXPECTED_ACTIVE_REVISION', $workflow);
         self::assertStringContainsString('EXPECTED_CONTROL_PLANE_SHA=$q_control', $workflow);
-        self::assertStringContainsString('ea4801ff5af8d0d7279137d2f4ebbaa263bdc4a959f5c880ba023dd2d0fed641', $workflow);
-        self::assertStringContainsString('59103fbf6eae4effc81fec844bbbf8d3ae8bb7100513407821074787a641253c', $workflow);
+        self::assertStringContainsString('ead55f273b755ac4d93f5d71246c10b374bb4e936fb3bbe1128872599a5c434b', $workflow);
+        self::assertStringContainsString('1020c5b3cc9a2914f18d30805b9e4b326e3acbdb811eff5dcd52ff3e47b578ef', $workflow);
         self::assertStringContainsString('< "$RUNNER_TEMP/mbti-index52-preflight.php"', $workflow);
         self::assertStringContainsString('remote_file_write_count: 0', $workflow);
         self::assertStringContainsString('production_write_execution: false', $workflow);

@@ -74,13 +74,14 @@ foreach ([...ORIGINAL_CROSS, ...RELEASED_CROSS] as $slug) {
         'expected_runtime_sections_count' => count($sections),
         'expected_runtime_sections' => $sections,
         'expected_runtime_sections_sha256' => hashJson($sections),
+        'english_alternate_authority_gap' => [
+            'status' => 'held_missing_en_backend_record',
+            'expected_en_canonical' => 'https://fermatmind.com/en/personality/'.$slug,
+            'production_write_authorized' => false,
+        ],
         'patch' => [
             'internal_links' => $links,
             'answer_surface_v1' => answerSurface($projection, $sections, $faq, $links),
-            'alternates' => [
-                'en' => 'https://fermatmind.com/en/personality/'.$slug,
-                'zh-CN' => 'https://fermatmind.com/zh/personality/'.$slug,
-            ],
         ],
     ];
 }
@@ -95,7 +96,8 @@ $package = [
         'at_comparison_count' => 16,
         'cross_type_comparison_count' => 7,
         'exact_slugs' => array_column($records, 'slug'),
-        'allowed_patch_fields' => ['runtime_sections', 'claim_boundary', 'internal_links', 'answer_surface_v1', 'alternates.en'],
+        'allowed_patch_fields' => ['runtime_sections', 'claim_boundary', 'internal_links', 'answer_surface_v1'],
+        'held_gap_fields' => ['alternates.en'],
     ],
     'records' => $records,
     'rollback_contract' => [
@@ -112,7 +114,8 @@ $package = [
         'require_claim_boundary' => true,
         'require_cross_internal_links' => true,
         'require_cross_answer_surface_v1' => true,
-        'require_cross_english_alternate' => true,
+        'require_cross_english_alternate' => false,
+        'require_english_alternate_hold_without_en_backend_record' => true,
         'preserve_publication_and_indexability' => true,
     ],
     'safety_boundary' => [

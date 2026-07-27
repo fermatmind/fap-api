@@ -33,8 +33,8 @@ jobs:
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
       DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-      PACKAGE_SHA256: ea4801ff5af8d0d7279137d2f4ebbaa263bdc4a959f5c880ba023dd2d0fed641
-      AUTHORIZATION_SHA256: 59103fbf6eae4effc81fec844bbbf8d3ae8bb7100513407821074787a641253c
+      PACKAGE_SHA256: ead55f273b755ac4d93f5d71246c10b374bb4e936fb3bbe1128872599a5c434b
+      AUTHORIZATION_SHA256: 1020c5b3cc9a2914f18d30805b9e4b326e3acbdb811eff5dcd52ff3e47b578ef
     steps:
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6

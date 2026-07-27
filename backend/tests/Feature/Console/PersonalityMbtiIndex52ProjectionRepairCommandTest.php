@@ -7,7 +7,6 @@ namespace Tests\Feature\Console;
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSection;
-use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\MbtiIndex52ProjectionRepairPackage;
 use App\Services\Cms\MbtiIndex52ProjectionRepairService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -121,18 +120,7 @@ final class PersonalityMbtiIndex52ProjectionRepairCommandTest extends TestCase
         self::assertSame($beforeContent['faq'], $afterCross->content_payload_json['faq']);
         self::assertCount(5, $afterCross->content_payload_json['internal_links']);
         self::assertNotEmpty($afterCross->content_payload_json['answer_surface_v1']);
-        self::assertSame(
-            'https://fermatmind.com/en/personality/intj-vs-intp',
-            $afterCross->content_payload_json['alternates']['en'],
-        );
-        $englishAlternate = $this->app->make(Mbti64CrossTypeComparisonPublicReadModel::class)
-            ->find('intj-vs-intp', 'en');
-        self::assertIsArray($englishAlternate);
-        self::assertSame('en', $englishAlternate['locale']);
-        self::assertSame(
-            'https://fermatmind.com/en/personality/intj-vs-intp',
-            $englishAlternate['canonical_url'],
-        );
+        self::assertArrayNotHasKey('alternates', $afterCross->content_payload_json);
         self::assertNotEmpty(data_get(
             PersonalityProfileSection::query()->whereHas('profile', fn ($query) => $query->where('canonical_type_code', 'INTJ'))
                 ->where('section_key', 'mbti64_comparison_a_vs_t')->firstOrFail()->payload_json,
