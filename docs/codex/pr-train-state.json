@@ -100679,7 +100679,7 @@
       "CAREER-PUBLISH-TRACK-COVERAGE-RECONCILE-01",
       "CAREER-SEARCH-ENTRY-QUALITY-REAUDIT-01"
     ],
-    "status": "github_checks_retry_pending",
+    "status": "post_rebase_github_checks_pending",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3326",
     "checks": {
@@ -100704,8 +100704,8 @@
         "evidence": "After the conditionally authorized classifier repair, the focused classifier selection passed 2 tests / 6 assertions; related Career/review suites passed 56 tests / 1422 assertions; scoped Pint passed all 121 selected files. API route discovery remains 224 lines; Composer strict validation/audit passed; manifest YAML and ledger JSON parsed; diff checks passed; and exact changed-file scope contains only the eight authorized paths."
       },
       "github_required_checks": {
-        "status": "failed_repairing",
-        "evidence": "Exact ledger head 66ac735dd passed eight required checks. verify-bigfive passed 1602 tests / 195612 assertions and failed only because the branch-diff classifier did not yet exempt the exact new CareerSearchEntryTierResolver.php path. The goal conditionally authorizes only that classifier exemption plus positive/negative regressions."
+        "status": "passed_superseded_by_rebase",
+        "evidence": "Exact repaired head a59fa4daaa091c9237f5f52ab43b8bf953480810 passed all nine required checks, including verify-bigfive in 5m26s. The P1 classifier review thread is resolved. origin/main then advanced by independent SEO-13 ops PRs #3327 and #3328, so the clean rebased head requires a fresh complete exact-head check set."
       }
     },
     "scope_validation": {
@@ -100761,8 +100761,13 @@
         "at": "2026-07-27T01:49:00Z",
         "status": "github_checks_retry_pending",
         "note": "The exact resolver classifier exemption and positive/negative regressions passed 2 tests / 6 assertions. Related Career and review suites passed 56 tests / 1422 assertions, and scoped Pint passed 121 files. The branch now contains exactly eight authorized paths; a fresh complete GitHub required-check set is mandatory after push."
+      },
+      {
+        "at": "2026-07-27T01:59:14Z",
+        "status": "post_rebase_github_checks_pending",
+        "note": "All nine required checks passed at repaired head a59fa4daaa091c9237f5f52ab43b8bf953480810 and its only P1 review thread is resolved. origin/main advanced by independent SEO-13 ops PRs #3327 and #3328 touching only their script/test paths. Cleanly rebased PR1 onto origin/main 7e2e048c7c6d32cdb7c4975783fe925f63310840; related suites passed 56/1422, classifier 2/6, Pint 121 files, route/Composer/parser/diff/scope gates. Fresh exact-head GitHub checks are required after force-push with lease."
       }
     ],
-    "updated_at": "2026-07-27T01:49:00Z"
+    "updated_at": "2026-07-27T01:59:14Z"
   }
 }
