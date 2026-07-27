@@ -186,6 +186,16 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
             $this->assertSame($first['package_sha256'], $verified['package_sha256']);
             $this->assertSame($first['target_set_sha256'], $verified['target_set_sha256']);
             $this->assertSame($first['quality_package_sha256'], $verified['quality_package_sha256']);
+
+            $tampered = $first;
+            $tampered['candidates'][0]['locales']['en']['visible_character_count']++;
+            file_put_contents($path, json_encode($tampered, JSON_THROW_ON_ERROR));
+            $this->assertSame(1, Artisan::call('career:build-search-entry-quality-batch', [
+                '--expected-package' => $path,
+                '--json' => true,
+            ]));
+            $rejected = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
+            $this->assertSame('HOLD_CAREER_SEARCH_ENTRY_QUALITY_BATCH', $rejected['status']);
         } finally {
             @unlink($path);
         }
@@ -455,6 +465,22 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $this->assertContains('visible_content_too_thin', $locale['blockers']);
     }
 
+    public function test_source_contract_metadata_cannot_replace_empty_reference_entries(): void
+    {
+        $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
+        $payload = $this->detailPayload($slug, 'en');
+        $payload['display_surface_v1']['sources'] = [
+            'references' => [],
+            'source_refs_contract' => 'claim_level_source_refs_normalized_from_workbook',
+        ];
+        $this->responseCache->publishJobDetailReadModel($slug, 'en', $payload);
+
+        $locale = app(CareerSearchEntryQualityEvaluator::class)->evaluate($slug)['locales']['en'];
+
+        $this->assertSame([], $locale['source_references']);
+        $this->assertContains('source_references_missing', $locale['blockers']);
+    }
+
     public function test_missing_bilingual_authority_fails_closed(): void
     {
         Cache::flush();
@@ -544,11 +570,14 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
                         'final_cta' => ['href' => $prefix.'/career'],
                     ],
                 ],
-                'sources' => [[
-                    'key' => 'bounded_fixture_source',
-                    'label' => 'Bounded public career source',
-                    'usage' => 'Career evidence validation.',
-                ]],
+                'sources' => [
+                    'references' => [[
+                        'key' => 'bounded_fixture_source',
+                        'label' => 'Bounded public career source',
+                        'usage' => 'Career evidence validation.',
+                    ]],
+                    'source_refs_contract' => 'claim_level_source_refs_normalized_from_workbook',
+                ],
                 'claim_permissions' => [
                     'allow_strong_claim' => false,
                     'allow_salary_comparison' => false,
@@ -584,7 +613,10 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
             'thin' => ['display_surface_v1' => ['page' => ['content' => [
                 'hero' => ['title' => 'thin', 'quick_answer' => 'thin'],
             ]]]],
-            'sources' => ['display_surface_v1' => ['sources' => [null]]],
+            'sources' => ['display_surface_v1' => ['sources' => [
+                'references' => [null],
+                'source_refs_contract' => 'claim_level_source_refs_normalized_from_workbook',
+            ]]],
             'claims' => [
                 'display_surface_v1' => ['claim_permissions' => [
                     'allow_strong_claim' => 'unknown',

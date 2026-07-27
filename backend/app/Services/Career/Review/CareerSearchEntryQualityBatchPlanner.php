@@ -129,6 +129,20 @@ final class CareerSearchEntryQualityBatchPlanner
     /** @param array<string,mixed> $expected @return array<string,mixed> */
     public function verify(array $expected): array
     {
+        foreach (['status', 'output_path', 'expected_package_verified'] as $envelopeField) {
+            unset($expected[$envelopeField]);
+        }
+        $claimedExpectedSha = $expected['quality_package_sha256'] ?? null;
+        $unsignedExpected = $expected;
+        unset($unsignedExpected['quality_package_sha256']);
+        $computedExpectedSha = hash('sha256', $this->canonicalizer->encode($unsignedExpected));
+        if (! is_string($claimedExpectedSha)
+            || ! hash_equals($computedExpectedSha, $claimedExpectedSha)) {
+            throw new \RuntimeException(
+                'Career search-entry quality expected package authentication failed.',
+            );
+        }
+
         $current = $this->build();
         foreach ([
             'quality_package_sha256',
@@ -142,6 +156,14 @@ final class CareerSearchEntryQualityBatchPlanner
             if (($expected[$field] ?? null) !== $current[$field]) {
                 throw new \RuntimeException('Career search-entry quality batch drift detected at '.$field.'.');
             }
+        }
+        if (! hash_equals(
+            hash('sha256', $this->canonicalizer->encode($current)),
+            hash('sha256', $this->canonicalizer->encode($expected)),
+        )) {
+            throw new \RuntimeException(
+                'Career search-entry quality batch drift detected in complete package.',
+            );
         }
 
         return $current;

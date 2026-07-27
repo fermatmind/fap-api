@@ -308,6 +308,12 @@ final class CareerSearchEntryQualityEvaluator
             if (! is_array($sources) || $sources === []) {
                 continue;
             }
+            if (array_key_exists('references', $sources)) {
+                $sources = $sources['references'];
+                if (! is_array($sources) || $sources === []) {
+                    continue;
+                }
+            }
             $normalized = [];
             foreach ($sources as $source) {
                 if (is_string($source) && trim($source) !== '') {
