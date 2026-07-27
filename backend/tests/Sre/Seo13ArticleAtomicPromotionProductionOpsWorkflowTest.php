@@ -117,6 +117,13 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             "write_state='committed'",
             "stage='revalidate_active_release_before_apply'",
             'latest_current_release="$(readlink -f "$deploy_path/current")"',
+            "stage='command_preflight_rejected'",
+            'command_error_count',
+            'command_error_set_sha256',
+            'command_error_codes',
+            'sort_by(.article_id, .field, .code)',
+            'test("^[A-Za-z0-9_.-]{1,128}$")',
+            'test("^[a-z0-9_]{1,128}$")',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }
@@ -134,6 +141,9 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
         $this->assertStringNotContainsString('php artisan migrate', $runner);
         $this->assertStringNotContainsString('queue:restart', $runner);
         $this->assertStringNotContainsString('deploy:symlink', $runner);
+        $this->assertStringNotContainsString('.message', $runner);
+        $this->assertStringNotContainsString('exception', strtolower($runner));
+        $this->assertStringNotContainsString('content_md', $runner);
     }
 
     public function test_command_disables_per_article_audit_follow_up_and_discoverability_cache_flush(): void

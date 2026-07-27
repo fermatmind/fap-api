@@ -11,6 +11,11 @@ stage='bootstrap'
 release_sha=''
 release_name=''
 write_state='none'
+failure_diagnostics='{
+    "command_error_count": 0,
+    "command_error_set_sha256": "",
+    "command_error_codes": []
+}'
 
 emit_failure() {
     local failed_stage="$1"
@@ -21,6 +26,7 @@ emit_failure() {
         --arg release_name "$release_name" \
         --arg failed_stage "$failed_stage" \
         --arg write_state "$write_state" \
+        --argjson failure_diagnostics "$failure_diagnostics" \
         '{
             contract_version: $contract_version,
             status: "FAIL_CLOSED",
@@ -51,7 +57,7 @@ emit_failure() {
             gsc_request_count: 0,
             url_inspection_count: 0,
             deploy_count: 0
-        }'
+        } + $failure_diagnostics'
 }
 
 trap 'status=$?; trap - ERR; emit_failure "$stage"; exit "$status"' ERR
@@ -117,7 +123,57 @@ preflight_json="$(
 )"
 preflight_status=$?
 set -e
-test "$preflight_status" -eq 0
+if [ "$preflight_status" -ne 0 ]; then
+    if jq -e '
+        .contract_version == "seo13.article_atomic_promotion.v1"
+        and .ok == false
+        and .dry_run == true
+        and .execute == false
+        and (.errors | type == "array" and length > 0 and length <= 128)
+        and ([.errors[] |
+            ((.article_id // 0) | type == "number"),
+            (.field | type == "string" and test("^[A-Za-z0-9_.-]{1,128}$")),
+            (.code | type == "string" and test("^[a-z0-9_]{1,128}$"))
+        ] | all)
+        and .production_write_execution == false
+        and .publish_count == 0
+        and .schema_write_count == 0
+        and .hreflang_write_count == 0
+        and .search_submission_count == 0
+        and .revalidation_count == 0
+        and .sitemap_eligibility_write_count == 0
+        and .llms_eligibility_write_count == 0
+        and .queue_dispatch_count == 0
+        and .gsc_request_count == 0
+        and .url_inspection_count == 0
+        and .deploy_count == 0
+    ' <<<"$preflight_json" >/dev/null; then
+        safe_error_codes="$(
+            jq -c '[
+                .errors[] | {
+                    article_id: (.article_id // 0),
+                    field,
+                    code
+                }
+            ] | sort_by(.article_id, .field, .code)' <<<"$preflight_json"
+        )"
+        safe_error_set_sha256="$(
+            printf '%s' "$safe_error_codes" | sha256sum | awk '{print $1}'
+        )"
+        failure_diagnostics="$(
+            jq -cn \
+                --arg hash "$safe_error_set_sha256" \
+                --argjson errors "$safe_error_codes" \
+                '{
+                    command_error_count: ($errors | length),
+                    command_error_set_sha256: $hash,
+                    command_error_codes: $errors
+                }'
+        )"
+        stage='command_preflight_rejected'
+    fi
+    false
+fi
 
 stage='validate_command_preflight'
 jq -e \
