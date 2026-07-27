@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: mbti-index52-projection-repair-preflight
+  group: deploy-${{ github.repository }}-production
   cancel-in-progress: false
 
 jobs:
