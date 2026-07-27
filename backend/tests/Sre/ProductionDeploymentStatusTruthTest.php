@@ -438,6 +438,25 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $eligibility
         );
         $this->assertStringContainsString(
+            'backend/scripts/seo/seo_13_article_atomic_promotion_production_ops.sh',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_SEO13_PREFLIGHT_RUNNER_SHA256="4553f279b20c4e8b8db0fca114b783896242ec189e75abc4e61c1e8d6643343f"',
+            $eligibility
+        );
+        $this->assertStringContainsString(
+            'code-only scope refused an unreviewed SEO13 preflight runner hash.',
+            $eligibility
+        );
+        $this->assertSame(
+            '4553f279b20c4e8b8db0fca114b783896242ec189e75abc4e61c1e8d6643343f',
+            hash_file(
+                'sha256',
+                dirname(__DIR__, 3).'/backend/scripts/seo/seo_13_article_atomic_promotion_production_ops.sh'
+            )
+        );
+        $this->assertStringContainsString(
             'code-only scope classification accepted the exact audited Runtime 46 subsumed baseline.',
             $eligibility
         );
