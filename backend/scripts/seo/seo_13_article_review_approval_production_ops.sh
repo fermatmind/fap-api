@@ -210,9 +210,7 @@ try {
                 || ! (bool) $article->is_public
                 || ! (bool) $article->is_indexable
                 || ! (bool) $article->sitemap_eligible
-                || ! (bool) $article->llms_eligible
-                || (string) ($article->seoMeta?->robots ?? '') !== 'index,follow'
-                || ! (bool) ($article->seoMeta?->is_indexable ?? false)) {
+                || ! (bool) $article->llms_eligible) {
                 throw new RuntimeException('public_surface');
             }
             if ((string) $import->content_track !== 'seo_content_package_existing_article_update'
