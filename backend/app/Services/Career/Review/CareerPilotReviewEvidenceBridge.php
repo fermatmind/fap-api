@@ -156,8 +156,12 @@ final class CareerPilotReviewEvidenceBridge
 
         $projection = $this->projectionBySlug()[strtolower(trim($slug))]
             ?? self::UNAPPROVED_PROJECTION;
+        $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
         $this->searchEntryQualityEvaluator->primePublicationSnapshot([strtolower(trim($slug))]);
-        if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection)) {
+        if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection)
+            || ! ($this->currentTargetCurrencyBySlug([
+                strtolower(trim($slug)) => $projection,
+            ])[strtolower(trim($slug))] ?? false)) {
             $projection = self::UNAPPROVED_PROJECTION;
         }
 
@@ -176,20 +180,24 @@ final class CareerPilotReviewEvidenceBridge
     public function projectJobIndexPayload(array $payload, string $publicLocale): array
     {
         $projections = $this->projectionBySlug();
+        $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
         $this->searchEntryQualityEvaluator->primePublicationSnapshot(array_keys($projections));
+        $currentTargets = $this->currentTargetCurrencyBySlug($projections);
         $locale = $this->normalizeLocale($publicLocale);
         if (! is_array($payload['items'] ?? null)) {
             return $payload;
         }
 
-        $payload['items'] = array_map(function (mixed $item) use ($projections, $locale): mixed {
+        $payload['items'] = array_map(function (mixed $item) use ($projections, $currentTargets, $locale): mixed {
             if (! is_array($item) || ! is_array($item['trust_summary'] ?? null)) {
                 return $item;
             }
             $slug = strtolower(trim((string) data_get($item, 'identity.canonical_slug', '')));
             $projection = $projections[$slug] ?? self::UNAPPROVED_PROJECTION;
             $expectedIndexSha = $projection['index_item_sha256_by_locale'][$locale] ?? null;
-            if (! is_string($expectedIndexSha) || ! hash_equals($expectedIndexSha, $this->indexItemSha($item))) {
+            if (! is_string($expectedIndexSha)
+                || ! hash_equals($expectedIndexSha, $this->indexItemSha($item))
+                || ! ($currentTargets[$slug] ?? false)) {
                 $projection = self::UNAPPROVED_PROJECTION;
             }
             $item['trust_summary'] = array_merge(
@@ -204,6 +212,66 @@ final class CareerPilotReviewEvidenceBridge
         }, $payload['items']);
 
         return $payload;
+    }
+
+    /**
+     * Revalidate all bilingual detail target kinds against the exact
+     * publication fence used by the quality evaluator. This closes the
+     * request-local window where an approved projection was cached before a
+     * detail or opposite-locale payload changed.
+     *
+     * @param  array<string,array<string,mixed>>  $projections
+     * @return array<string,bool>
+     */
+    private function currentTargetCurrencyBySlug(array $projections): array
+    {
+        $slugs = array_keys(array_filter(
+            $projections,
+            static fn (array $projection): bool => ($projection['review_state'] ?? null) === 'approved',
+        ));
+        if ($slugs === []) {
+            return [];
+        }
+
+        try {
+            $publication = $this->searchEntryQualityEvaluator->publicationSnapshot($slugs);
+            $indexItems = $this->exactIndexItems($slugs);
+        } catch (\Throwable) {
+            return array_fill_keys($slugs, false);
+        }
+
+        $current = [];
+        foreach ($slugs as $slug) {
+            $current[$slug] = true;
+            foreach (self::LOCALES as $locale) {
+                $evidence = $publication[$slug][$locale] ?? null;
+                $payload = is_array($evidence) ? ($evidence['payload'] ?? null) : null;
+                $expected = $projections[$slug]['target_sha256_by_locale_and_kind'][$locale] ?? null;
+                if (! is_array($payload)
+                    || ! is_array($expected)
+                    || ! in_array($evidence['classification'] ?? null, ['ready_active', 'ready_lkg'], true)
+                    || ($evidence['published'] ?? false) !== true) {
+                    $current[$slug] = false;
+
+                    break;
+                }
+
+                foreach ($this->targetPayloads($payload, $indexItems[$locale][$slug]) as $kind => $target) {
+                    $expectedSha = $expected[$kind] ?? null;
+                    if (! is_string($expectedSha)
+                        || ! hash_equals(
+                            $expectedSha,
+                            hash('sha256', $this->canonicalizer->encode($target)),
+                        )) {
+                        $current[$slug] = false;
+
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        return $current;
     }
 
     /**

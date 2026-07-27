@@ -340,6 +340,38 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
             ->assertJsonPath('trust_manifest.review_state', 'unknown');
     }
 
+    public function test_cached_approval_cannot_keep_index_eligible_after_opposite_locale_target_drift(): void
+    {
+        $bridge = app(CareerPilotReviewEvidenceBridge::class);
+        $package = $bridge->buildPackage([self::SLUG]);
+        app(CareerSeoReviewAttestationService::class)->createAndBindReview(
+            surfaceId: CareerPilotReviewEvidenceBridge::SURFACE_ID,
+            scopeType: CareerPilotReviewEvidenceBridge::SCOPE_TYPE,
+            scopeIdentity: $package['scope_identity'],
+            decision: 'approved_all',
+            authoritativeTargets: $package['targets'],
+            actorAdminUserId: 1,
+            packageSha256: $package['package_sha256'],
+        );
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $before = $bridge->projectJobIndexPayload($cache->jobIndexPayload('en'), 'en');
+        $this->assertSame('approved', data_get($before, 'items.0.trust_summary.review_state'));
+
+        $cache->publishJobDetailReadModel(
+            self::SLUG,
+            'zh-CN',
+            $this->detailPayload('zh-CN', '已漂移但仍足够厚的当前可见中文内容'),
+        );
+        $after = $bridge->projectJobIndexPayload($cache->jobIndexPayload('en'), 'en');
+
+        $this->assertSame('unknown', data_get($after, 'items.0.trust_summary.review_state'));
+        $this->assertSame('ineligible', data_get($after, 'items.0.search_entry_tier'));
+        $this->assertContains(
+            'reviewer_evidence_not_current',
+            data_get($after, 'items.0.search_entry_authority.reason_codes'),
+        );
+    }
+
     private function publishBilingualDetails(
         string $englishContent = 'current visible English content',
         string $trustSource = 'current public source evidence',
