@@ -100851,8 +100851,13 @@
         "at": "2026-07-27T06:40:00Z",
         "status": "review_fix_local_validation_passed",
         "note": "All nine required checks passed on head 16acbc1255f31a5627c8f1878300bd73727f0930. Exact-head review then identified one in-scope P2: query or fragment-bearing Big Five URLs could pass path-only catalog validation. The gate now rejects both URL components fail-closed; positive and negative focused contracts pass with 50 assertions, the full sitemap generator/source suite remains at 886 assertions, and scoped Pint passes."
+      },
+      {
+        "at": "2026-07-27T06:49:00Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "All nine required checks passed on head cf33e90ee8fecf2461f7331a2f678e97232f37b9. Exact-head review identified a second in-scope P2 for dot-segment and percent-encoded reserved namespace aliases. The gate now repeatedly decodes and removes dot segments solely for reserved-namespace detection, rejects any non-normalized Big Five candidate, and retains exact canonical catalog matching. Four negative URL-shape fixtures pass with 52 focused assertions; the 886-assertion sitemap suite and scoped Pint remain green."
       }
     ],
-    "updated_at": "2026-07-27T06:40:00Z"
+    "updated_at": "2026-07-27T06:49:00Z"
   }
 }

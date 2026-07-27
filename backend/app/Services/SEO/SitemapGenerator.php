@@ -113,7 +113,19 @@ class SitemapGenerator
             ->filter(static function (array $url): bool {
                 $parts = parse_url(trim((string) ($url['loc'] ?? '')));
                 $path = is_array($parts) ? ($parts['path'] ?? null) : null;
-                if (! is_string($path) || preg_match('#^/(?:en|zh)/personality/big-five(?:/|$)#', $path) !== 1) {
+                if (! is_string($path)) {
+                    return true;
+                }
+
+                $normalizedPath = self::normalizePathForReservedNamespace($path);
+                $isReservedBigFivePath = preg_match(
+                    '#^/(?:en|zh)/personality/big-five(?:/|$)#',
+                    $path,
+                ) === 1 || preg_match(
+                    '#^/(?:en|zh)/personality/big-five(?:/|$)#',
+                    $normalizedPath,
+                ) === 1;
+                if (! $isReservedBigFivePath) {
                     return true;
                 }
 
@@ -121,7 +133,8 @@ class SitemapGenerator
                     return false;
                 }
 
-                return BigFiveCanonicalRouteCatalog::isCanonicalPath($path);
+                return hash_equals($path, $normalizedPath)
+                    && BigFiveCanonicalRouteCatalog::isCanonicalPath($path);
             })
             ->unique('loc')
             ->values()
@@ -1233,6 +1246,33 @@ class SitemapGenerator
         $lines[] = '</urlset>';
 
         return implode("\n", $lines)."\n";
+    }
+
+    private static function normalizePathForReservedNamespace(string $path): string
+    {
+        $decodedPath = $path;
+        $remainingPasses = strlen($path) + 1;
+        do {
+            $previousPath = $decodedPath;
+            $decodedPath = rawurldecode($decodedPath);
+            $remainingPasses--;
+        } while ($decodedPath !== $previousPath && $remainingPasses > 0);
+
+        $segments = [];
+        foreach (explode('/', $decodedPath) as $segment) {
+            if ($segment === '' || $segment === '.') {
+                continue;
+            }
+            if ($segment === '..') {
+                array_pop($segments);
+
+                continue;
+            }
+
+            $segments[] = $segment;
+        }
+
+        return '/'.implode('/', $segments);
     }
 
     private function formatLastmod(?Carbon $updatedAt): string
