@@ -11,7 +11,9 @@ use Illuminate\Http\Response;
 class LlmsController extends Controller
 {
     private const LLMS_TXT_CACHE_KEY = 'seo:llms-txt:v1:body';
+
     private const LLMS_FULL_TXT_CACHE_KEY = 'seo:llms-full-txt:v1:body';
+
     private const CACHE_TTL_SECONDS = 600;
 
     public function llmsTxt(SitemapGenerator $generator): Response
@@ -46,7 +48,7 @@ class LlmsController extends Controller
 
     private function buildLlmsTxt(SitemapGenerator $generator): string
     {
-        $urls = $generator->generateUrls();
+        $urls = $generator->generateLlmsUrls();
         $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
         $siteName = 'FermatMind';
 
@@ -59,7 +61,7 @@ class LlmsController extends Controller
         $lines = [
             "# {$siteName} llms.txt",
             "Site: {$baseUrl}",
-            "Languages: en, zh",
+            'Languages: en, zh',
             '',
             'Primary Entries:',
             ...array_map(fn (string $url): string => "- {$url}", $primary),
@@ -73,7 +75,7 @@ class LlmsController extends Controller
             'Indexable Career:',
             ...array_map(fn (string $url): string => "- {$url}", $career),
             '',
-            'Indexable Help:',
+            'Indexable Articles & Help:',
             ...array_map(fn (string $url): string => "- {$url}", $help),
             '',
         ];
@@ -83,7 +85,7 @@ class LlmsController extends Controller
 
     private function buildLlmsFullTxt(SitemapGenerator $generator): string
     {
-        $urls = $generator->generateUrls();
+        $urls = $generator->generateLlmsUrls();
         $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
         $siteName = 'FermatMind';
 
@@ -98,7 +100,7 @@ class LlmsController extends Controller
         $lines = [
             "# {$siteName} llms-full.txt",
             "Site: {$baseUrl}",
-            "Languages: en, zh",
+            'Languages: en, zh',
             "Total indexable entries: {$count}",
             '',
             '## Primary',
@@ -191,13 +193,16 @@ class LlmsController extends Controller
     {
         return $this->filterAndSort($urls, static function (string $path): bool {
             $isHelp = str_starts_with($path, '/en/help/') || str_starts_with($path, '/zh/help/');
+            $isArticle = $path === '/en/articles' || $path === '/zh/articles'
+                || str_starts_with($path, '/en/articles/')
+                || str_starts_with($path, '/zh/articles/');
             $isStatic = in_array($path, [
                 '/en/method-boundaries', '/zh/method-boundaries',
                 '/en/reliability-validity', '/zh/reliability-validity',
                 '/en/privacy', '/zh/privacy',
             ], true);
 
-            return $isHelp || $isStatic;
+            return $isHelp || $isArticle || $isStatic;
         });
     }
 
