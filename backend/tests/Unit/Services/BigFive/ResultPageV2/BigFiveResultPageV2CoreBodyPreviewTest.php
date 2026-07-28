@@ -478,6 +478,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_only_registered_enneagram_public_authority_v2_non_runtime_files(): void
     {
         $allowed = [
+            'backend/app/Console/Commands/ContentReleaseSecretVerify.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2ReviewEvidenceBinder.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionPromoter.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionWorkspace.php',
@@ -9030,6 +9031,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isEnneagramPublicAuthorityV2FrozenNonRuntimeFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/ContentReleaseSecretVerify.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2ReviewEvidenceBinder.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionPromoter.php',
             'backend/app/Console/Commands/PersonalityEnneagramAuthorityV2RevisionWorkspace.php',
