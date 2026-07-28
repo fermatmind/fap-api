@@ -38,10 +38,21 @@ exec "$@"
 BASH);
         file_put_contents($this->temporaryDirectory.'/php', <<<'BASH'
 #!/usr/bin/env bash
-printf '%s\t%s\t%s\n' \
+high="${FAKE_HIGH_PENDING:-0}"
+default="${FAKE_DEFAULT_PENDING:-0}"
+reports="${FAKE_REPORTS_PENDING:-0}"
+class="${FAKE_JOB_CLASS:-App.Jobs.Career.WarmCareerJobDetailProjection}"
+classes="$(printf '{"high":{"%s":%s},"default":{"%s":%s},"reports":{"%s":%s}}' \
+  "$class" "$high" "$class" "$default" "$class" "$reports")"
+classes_b64="$(printf '%s' "$classes" | base64 | tr -d '\n')"
+printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
   "${FAKE_HIGH_PENDING:-0}" \
   "${FAKE_DEFAULT_PENDING:-0}" \
-  "${FAKE_REPORTS_PENDING:-0}"
+  "${FAKE_REPORTS_PENDING:-0}" \
+  "${FAKE_UNKNOWN_CLASS_COUNT:-0}" \
+  "${FAKE_OLDEST_PENDING_SECONDS:-120}" \
+  "${FAKE_BACKLOG_SNAPSHOT_SHA256:-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}" \
+  "$classes_b64"
 BASH);
         file_put_contents($this->temporaryDirectory.'/ps', <<<'BASH'
 #!/usr/bin/env bash
@@ -114,6 +125,17 @@ BASH);
         $this->assertSame('0', $fields[5]);
         $this->assertSame('true', $fields[9]);
         $this->assertSame('true', $fields[10]);
+        $this->assertSame('0', $fields[12]);
+        $this->assertSame('120', $fields[13]);
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $fields[14]);
+        $this->assertSame(
+            [
+                'high' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 0],
+                'default' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 0],
+                'reports' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 0],
+            ],
+            json_decode(base64_decode($fields[15]), true, flags: JSON_THROW_ON_ERROR),
+        );
         $this->assertSame("default_stopped\n", file_get_contents($this->temporaryDirectory.'/state'));
 
         $apply = $this->runControl('apply', $fields[2]);
@@ -154,6 +176,17 @@ BASH);
         $this->assertSame('2', $fields[8]);
         $this->assertSame('true', $fields[9]);
         $this->assertSame('false', $fields[10]);
+        $this->assertSame('0', $fields[12]);
+        $this->assertSame('120', $fields[13]);
+        $this->assertSame(
+            [
+                'high' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 2],
+                'default' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 2],
+                'reports' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 2],
+            ],
+            json_decode(base64_decode($fields[15]), true, flags: JSON_THROW_ON_ERROR),
+        );
+        $this->assertStringNotContainsString('private-payload-value', $preflight->getOutput());
         $this->assertSame("default_stopped\n", file_get_contents($this->temporaryDirectory.'/state'));
 
         $apply = $this->runControl('apply', $fields[2], '2');
@@ -183,7 +216,7 @@ BASH);
             $workflow,
         );
         $this->assertStringContainsString(
-            '.contract_version == "backend.production_required_queue_runtime_control.v2"',
+            '.contract_version == "backend.production_required_queue_runtime_control.v3"',
             $workflow,
         );
         $this->assertStringContainsString(
@@ -204,6 +237,18 @@ BASH);
         );
         $this->assertStringNotContainsString(
             'supervisorctl restart all',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            'job_class_counts',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            'backlog_snapshot_sha256',
+            $workflow,
+        );
+        $this->assertStringNotContainsString(
+            'payload:',
             $workflow,
         );
     }

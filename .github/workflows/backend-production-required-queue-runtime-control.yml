@@ -145,7 +145,7 @@ jobs:
                 --arg state_sha "$EXPECTED_STATE_SHA256" \
                 --arg run_id "$PREFLIGHT_RUN_ID" \
                 --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-                '.contract_version == "backend.production_required_queue_runtime_control.v2"
+                '.contract_version == "backend.production_required_queue_runtime_control.v3"
                  and .mode == "preflight"
                  and .status == "PASS_PREFLIGHT"
                  and .run_id == $run_id
@@ -156,6 +156,7 @@ jobs:
                  and .target_set_sha256 == $target_sha
                  and .state_sha256 == $state_sha
                  and .pending_total == 0
+                 and .unknown_class_count == 0
                  and .convergence_required == true
                  and .apply_supported == true
                  and .deploy_lock_present == false
@@ -263,7 +264,7 @@ jobs:
           fi
 
           if [ "$MODE" = preflight ]; then
-            IFS=$'\t' read -r active target_sha state_sha default_state reports_state pending_total high_pending default_pending reports_pending convergence_required apply_supported foreign_sha <<<"$result"
+            IFS=$'\t' read -r active target_sha state_sha default_state reports_state pending_total high_pending default_pending reports_pending convergence_required apply_supported foreign_sha unknown_class_count oldest_pending_seconds backlog_snapshot_sha256 job_class_counts_b64 <<<"$result"
             test "$active" = "$EXPECTED_ACTIVE_REVISION"
             [[ "$target_sha" =~ ^[0-9a-f]{64}$ ]]
             [[ "$state_sha" =~ ^[0-9a-f]{64}$ ]]
@@ -277,6 +278,20 @@ jobs:
             [[ "$convergence_required" =~ ^(true|false)$ ]]
             [[ "$apply_supported" =~ ^(true|false)$ ]]
             [[ "$foreign_sha" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$unknown_class_count" =~ ^[0-9]+$ ]]
+            [[ "$oldest_pending_seconds" =~ ^[0-9]+$ ]]
+            [[ "$backlog_snapshot_sha256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$job_class_counts_b64" =~ ^[A-Za-z0-9+/=]+$ ]]
+            decoded_job_class_counts="$(printf '%s' "$job_class_counts_b64" | base64 --decode)"
+            jq -e '
+              type == "object"
+              and (keys | sort) == ["default", "high", "reports"]
+              and all(.[]; type == "object")
+              and all(.[][]; type == "number" and . >= 0 and floor == .)
+            ' <<<"$decoded_job_class_counts" >/dev/null
+            classified_total="$(jq '[.[][]] | add // 0' <<<"$decoded_job_class_counts")"
+            test "$classified_total" -eq "$pending_total"
+            test "$unknown_class_count" -le "$pending_total"
             {
               echo "target_set_sha256=$target_sha"
               echo "state_sha256=$state_sha"
@@ -288,6 +303,10 @@ jobs:
               echo "reports_pending=$reports_pending"
               echo "convergence_required=$convergence_required"
               echo "apply_supported=$apply_supported"
+              echo "unknown_class_count=$unknown_class_count"
+              echo "oldest_pending_seconds=$oldest_pending_seconds"
+              echo "backlog_snapshot_sha256=$backlog_snapshot_sha256"
+              echo "job_class_counts_b64=$job_class_counts_b64"
               echo "after_state_sha256=$(printf '0%.0s' {1..64})"
             } >> "$GITHUB_OUTPUT"
           else
@@ -307,6 +326,10 @@ jobs:
               echo "reports_pending=0"
               echo "convergence_required=false"
               echo "apply_supported=false"
+              echo "unknown_class_count=0"
+              echo "oldest_pending_seconds=0"
+              echo "backlog_snapshot_sha256=$(printf '' | sha256sum | awk '{print $1}')"
+              echo "job_class_counts_b64=$(printf '%s' '{"high":{},"default":{},"reports":{}}' | base64 -w0)"
               echo "after_state_sha256=$after_state_sha"
             } >> "$GITHUB_OUTPUT"
           fi
@@ -330,6 +353,10 @@ jobs:
           REPORTS_PENDING: ${{ steps.execute.outputs.reports_pending }}
           CONVERGENCE_REQUIRED: ${{ steps.execute.outputs.convergence_required }}
           APPLY_SUPPORTED: ${{ steps.execute.outputs.apply_supported }}
+          UNKNOWN_CLASS_COUNT: ${{ steps.execute.outputs.unknown_class_count }}
+          OLDEST_PENDING_SECONDS: ${{ steps.execute.outputs.oldest_pending_seconds }}
+          BACKLOG_SNAPSHOT_SHA256: ${{ steps.execute.outputs.backlog_snapshot_sha256 }}
+          JOB_CLASS_COUNTS_B64: ${{ steps.execute.outputs.job_class_counts_b64 }}
         run: |
           set -euo pipefail
           mkdir -p artifacts
@@ -339,6 +366,13 @@ jobs:
             status=PASS_PREFLIGHT
             production_write_execution=false
           fi
+          job_class_counts="$(printf '%s' "$JOB_CLASS_COUNTS_B64" | base64 --decode)"
+          jq -e '
+            type == "object"
+            and (keys | sort) == ["default", "high", "reports"]
+            and all(.[]; type == "object")
+            and all(.[][]; type == "number" and . >= 0 and floor == .)
+          ' <<<"$job_class_counts" >/dev/null
           jq -n \
             --arg mode "$MODE" \
             --arg status "$status" \
@@ -358,9 +392,13 @@ jobs:
             --argjson reports_pending "$REPORTS_PENDING" \
             --argjson convergence "$CONVERGENCE_REQUIRED" \
             --argjson apply_supported "$APPLY_SUPPORTED" \
+            --argjson unknown_class_count "$UNKNOWN_CLASS_COUNT" \
+            --argjson oldest_pending_seconds "$OLDEST_PENDING_SECONDS" \
+            --arg backlog_snapshot_sha256 "$BACKLOG_SNAPSHOT_SHA256" \
+            --argjson job_class_counts "$job_class_counts" \
             --argjson write "$production_write_execution" \
             '{
-              contract_version: "backend.production_required_queue_runtime_control.v2",
+              contract_version: "backend.production_required_queue_runtime_control.v3",
               mode: $mode,
               status: $status,
               run_id: $run_id,
@@ -381,6 +419,10 @@ jobs:
                 default: $default_pending,
                 reports: $reports_pending
               },
+              job_class_counts: $job_class_counts,
+              unknown_class_count: $unknown_class_count,
+              oldest_pending_seconds: $oldest_pending_seconds,
+              backlog_snapshot_sha256: $backlog_snapshot_sha256,
               convergence_required: $convergence,
               apply_supported: $apply_supported,
               deploy_lock_present: false,
@@ -401,10 +443,13 @@ jobs:
               }
             }' > artifacts/backend-production-required-queue-runtime-control.json
           jq -e \
-            '.contract_version == "backend.production_required_queue_runtime_control.v2"
+            '.contract_version == "backend.production_required_queue_runtime_control.v3"
              and .pending_total == (
                .pending_by_queue.high + .pending_by_queue.default + .pending_by_queue.reports
              )
+             and .pending_total == ([.job_class_counts[][]] | add // 0)
+             and .unknown_class_count <= .pending_total
+             and (.backlog_snapshot_sha256 | test("^[0-9a-f]{64}$"))
              and .deploy_lock_present == false
              and .deploy_like_process_count == 0
              and .negative_guarantees.search_submission == false
@@ -443,8 +488,13 @@ jobs:
           HIGH_PENDING: ${{ steps.execute.outputs.high_pending }}
           DEFAULT_PENDING: ${{ steps.execute.outputs.default_pending }}
           REPORTS_PENDING: ${{ steps.execute.outputs.reports_pending }}
+          UNKNOWN_CLASS_COUNT: ${{ steps.execute.outputs.unknown_class_count }}
+          OLDEST_PENDING_SECONDS: ${{ steps.execute.outputs.oldest_pending_seconds }}
+          BACKLOG_SNAPSHOT_SHA256: ${{ steps.execute.outputs.backlog_snapshot_sha256 }}
+          JOB_CLASS_COUNTS_B64: ${{ steps.execute.outputs.job_class_counts_b64 }}
         run: |
           set -euo pipefail
+          job_class_counts="$(printf '%s' "$JOB_CLASS_COUNTS_B64" | base64 --decode)"
           {
             echo "## Required queue runtime diagnostic"
             echo
@@ -453,6 +503,14 @@ jobs:
             echo "- high pending: $HIGH_PENDING"
             echo "- default pending: $DEFAULT_PENDING"
             echo "- reports pending: $REPORTS_PENDING"
+            echo "- unknown job classes: $UNKNOWN_CLASS_COUNT"
+            echo "- oldest pending seconds: $OLDEST_PENDING_SECONDS"
+            echo "- backlog snapshot SHA-256: $BACKLOG_SNAPSHOT_SHA256"
+            echo "- job classes by queue:"
+            jq -r 'to_entries[] as $queue
+              | $queue.value
+              | to_entries[]
+              | "  - \($queue.key): \(.key) = \(.value)"' <<<"$job_class_counts"
             echo "- apply authorization: not generated"
             echo "- production writes: zero"
           } >> "$GITHUB_STEP_SUMMARY"
