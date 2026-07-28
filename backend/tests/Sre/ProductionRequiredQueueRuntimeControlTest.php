@@ -247,6 +247,28 @@ BASH);
             'backlog_snapshot_sha256',
             $workflow,
         );
+        $this->assertStringContainsString(
+            'REQUIRED_QUEUE_RESULT_FAILED:%s',
+            $workflow,
+        );
+        foreach ([
+            'FIELD_SHAPE',
+            'IDENTITY',
+            'HASH',
+            'STATE',
+            'SCALAR',
+            'QUEUE_TOTAL',
+            'BOOLEAN',
+            'CLASS_B64',
+            'CLASS_JSON',
+            'CLASS_TOTAL',
+            'UNKNOWN_TOTAL',
+        ] as $safeFailureCategory) {
+            $this->assertStringContainsString(
+                'parser_fail '.$safeFailureCategory,
+                $workflow,
+            );
+        }
         $this->assertStringNotContainsString(
             'payload:',
             $workflow,
