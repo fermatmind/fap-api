@@ -64,13 +64,12 @@ read_status() {
 }
 
 queue_pending_counts() {
-  "$sudo_path" -n -u www-data /usr/bin/env \
-    CURRENT_RELEASE_BACKEND="$current_release/backend" \
-    "$php_path" -d display_errors=0 2>/dev/null <<'PHP'
+  "$sudo_path" -n -u www-data \
+    "$php_path" -d display_errors=0 -- "$current_release/backend" 2>/dev/null <<'PHP'
 <?php
 
 try {
-    $base = getenv('CURRENT_RELEASE_BACKEND');
+    $base = $argv[1] ?? null;
     if (! is_string($base) || $base === '') {
         throw new RuntimeException('invalid base');
     }
@@ -307,7 +306,11 @@ foreign_fingerprint() {
 status_before="$(read_status)"
 state_material_before="$(snapshot "$status_before")"
 foreign_before="$(foreign_fingerprint "$status_before")"
+set +e
 pending_counts="$(queue_pending_counts)"
+queue_probe_rc=$?
+set -e
+[[ "$queue_probe_rc" -eq 0 ]] || fail QUEUE_PROBE
 IFS=$'\t' read -r high_pending default_pending reports_pending unknown_class_count oldest_pending_seconds backlog_snapshot_sha256 job_class_counts_b64 <<<"$pending_counts"
 [[ "$high_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
 [[ "$default_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
