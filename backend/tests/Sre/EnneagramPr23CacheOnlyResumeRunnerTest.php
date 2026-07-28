@@ -155,7 +155,9 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
             'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256',
             $source,
         );
-        $this->assertStringContainsString('POST_READBACK_SNAPSHOT_DRIFT', $source);
+        $this->assertStringContainsString('POST_READBACK_PUBLIC_PROJECTION_DRIFT', $source);
+        $this->assertStringContainsString('POST_READBACK_DISCOVERABILITY_DRIFT', $source);
+        $this->assertStringContainsString('POST_READBACK_URL_SETS_DRIFT', $source);
     }
 
     #[Test]
@@ -380,6 +382,60 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
             } catch (RuntimeException $exception) {
                 $this->assertSame('INVALID_POST_READBACK_MAX_ATTEMPTS', $exception->getMessage());
             }
+        }
+    }
+
+    #[Test]
+    public function post_readback_snapshot_retries_bounded_safe_drift_and_preserves_failure_classification(): void
+    {
+        $attempts = 0;
+        $pauses = 0;
+        $result = EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackSnapshot(
+            static function () use (&$attempts): string {
+                $attempts++;
+                if ($attempts < 3) {
+                    throw new RuntimeException('POST_READBACK_URL_SETS_DRIFT');
+                }
+
+                return 'converged';
+            },
+            static function () use (&$pauses): void {
+                $pauses++;
+            },
+        );
+
+        $this->assertSame('converged', $result);
+        $this->assertSame(3, $attempts);
+        $this->assertSame(2, $pauses);
+
+        $attempts = 0;
+        try {
+            EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackSnapshot(
+                static function () use (&$attempts): never {
+                    $attempts++;
+                    throw new RuntimeException('POST_READBACK_PUBLIC_PROJECTION_DRIFT');
+                },
+                static function (): void {},
+            );
+            $this->fail('Persistent snapshot drift must remain fail closed.');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('POST_READBACK_PUBLIC_PROJECTION_DRIFT', $exception->getMessage());
+            $this->assertSame(3, $attempts);
+        }
+
+        $attempts = 0;
+        try {
+            EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackSnapshot(
+                static function () use (&$attempts): never {
+                    $attempts++;
+                    throw new RuntimeException('PERMANENT_SNAPSHOT_FAILURE');
+                },
+                static function (): void {},
+            );
+            $this->fail('Unclassified snapshot failures must not be retried.');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('PERMANENT_SNAPSHOT_FAILURE', $exception->getMessage());
+            $this->assertSame(1, $attempts);
         }
     }
 }
