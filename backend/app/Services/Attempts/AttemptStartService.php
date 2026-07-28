@@ -15,6 +15,7 @@ use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\RiasecPackLoader;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Enneagram\EnneagramFormCatalog;
+use App\Services\Eq\Eq60FormCatalog;
 use App\Services\Iq\IqOwnerOriginal30BankService;
 use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Observability\BigFiveTelemetry;
@@ -170,6 +171,16 @@ class AttemptStartService
             $resolvedMeasurementContractVersion = trim((string) ($resolvedForm['measurement_contract_version'] ?? ''));
             $resolvedScoreSpaceVersion = trim((string) ($resolvedForm['score_space_version'] ?? ''));
             $resolvedCompareCompatibilityGroup = trim((string) ($resolvedForm['compare_compatibility_group'] ?? ''));
+        } elseif ($this->isEq60Scale($scaleCode)) {
+            $resolvedForm = $this->eq60FormCatalog()->resolve($dto->formCode, $packId);
+            $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+            $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+            $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
+            $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? '');
+            $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
+            $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
+            $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
+            $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
         } elseif (strtoupper($scaleCode) === IqOwnerOriginal30BankService::LEGACY_SCALE_CODE
             || strtoupper($scaleCode) === IqOwnerOriginal30BankService::SCALE_CODE
         ) {
@@ -801,6 +812,16 @@ class AttemptStartService
         return app(RiasecFormCatalog::class);
     }
 
+    private function eq60FormCatalog(): Eq60FormCatalog
+    {
+        return app(Eq60FormCatalog::class);
+    }
+
+    private function isEq60Scale(string $scaleCode): bool
+    {
+        return in_array(strtoupper(trim($scaleCode)), ['EQ_60', 'EQ_EMOTIONAL_INTELLIGENCE'], true);
+    }
+
     private function identityWriteProjector(): ScaleIdentityWriteProjector
     {
         return app(ScaleIdentityWriteProjector::class);
@@ -865,7 +886,7 @@ class AttemptStartService
             return $count;
         }
 
-        if (strtoupper($scaleCode) === 'EQ_60') {
+        if ($this->isEq60Scale($scaleCode)) {
             $count = $this->eq60PackLoader->getQuestionCount($dirVersion);
             if ($count <= 0) {
                 $this->logAndThrowContentPackError('EQ60_QUESTIONS_MISSING', $packId, $dirVersion, 'questions_eq60_bilingual.csv');
@@ -962,7 +983,7 @@ class AttemptStartService
             'BIG5_OCEAN' => $this->bigFivePackLoader->resolveManifestHash($dirVersion),
             'CLINICAL_COMBO_68' => $this->clinicalPackLoader->resolveManifestHash($dirVersion),
             'SDS_20' => $this->sds20PackLoader->resolveManifestHash($dirVersion),
-            'EQ_60' => $this->eq60PackLoader->resolveManifestHash($dirVersion),
+            'EQ_60', 'EQ_EMOTIONAL_INTELLIGENCE' => $this->eq60PackLoader->resolveManifestHash($dirVersion),
             'ENNEAGRAM' => $this->enneagramPackLoader()->resolveManifestHash($dirVersion),
             'RIASEC' => $this->riasecPackLoader()->resolveManifestHash($dirVersion),
             default => '',
@@ -975,7 +996,7 @@ class AttemptStartService
             'BIG5_OCEAN' => 'v3',
             'CLINICAL_COMBO_68' => 'v1.0_2026',
             'SDS_20' => 'v2.0_Factor_Logic',
-            'EQ_60' => 'v1.0_normed_validity',
+            'EQ_60', 'EQ_EMOTIONAL_INTELLIGENCE' => 'v1.0_normed_validity',
             'ENNEAGRAM' => 'enneagram_v1.0.0',
             'RIASEC' => 'riasec_v1.0.0',
             default => '',

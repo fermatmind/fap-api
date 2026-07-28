@@ -240,6 +240,17 @@ return [
             ],
         ],
     ],
+    'eq60_forms' => [
+        'default_form_code' => 'eq_60',
+        'forms' => [
+            'eq_60' => [
+                'dir_version' => 'v1',
+                'question_count' => 60,
+                'form_kind' => 'standard',
+                'aliases' => [],
+            ],
+        ],
+    ],
 
     // ✅ 默认 region/locale 也钉死到 CN_MAINLAND/zh-CN（仍保留 fallback 机制）
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),
