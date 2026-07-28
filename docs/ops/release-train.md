@@ -205,9 +205,20 @@ transient inventory/restart race at most three times with a two-second delay,
 requires every resolved process to return to `RUNNING`, and never falls back
 from a known group to an unverified bare name. Required groups fail closed;
 missing or failed optional groups remain non-blocking. The helper emits only
-the configured program label, bounded attempt count, and pass/fail category;
-it does not print Supervisor output, PIDs, commands, paths, hosts, or routing
-metadata.
+the configured program label, bounded attempt count, heartbeat, timeout, and
+pass/fail category; it does not print Supervisor output, PIDs, commands, paths,
+hosts, or routing metadata. A Supervisor restart may legitimately wait for the
+configured 360-second graceful worker stop window, so the exact restart child
+is bounded to 390 seconds and emits a sanitized heartbeat every 20 seconds.
+Each required or optional program reload receives a 1,200-second Deployer
+command budget so all three 390-second attempts and their bounded retry delays
+fit without changing the global command timeout.
+HUP/INT/TERM terminates that exact bounded child, timeout remains fail closed,
+and the helper preserves the real restart result before checking `RUNNING`.
+The wrapper and its monitored Supervisor command run in one isolated process
+group; signal cleanup sends `TERM` to only that group, waits at most five
+seconds, then sends `KILL` to the same group so a non-cooperative wrapper cannot
+orphan the restart after the deploy session exits.
 
 The exact bridge candidate `49038deb50cda789e4365ea42068832ed28d6023`
 predates the bounded, non-blocking sitemap-source warm helper. When that exact

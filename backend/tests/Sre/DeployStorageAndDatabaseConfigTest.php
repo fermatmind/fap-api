@@ -852,6 +852,17 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         );
         $this->assertStringContainsString("' --attempts=3'", $source);
         $this->assertStringContainsString("' --delay-seconds=2'", $source);
+        $this->assertStringContainsString("' --restart-timeout-seconds=390'", $source);
+        $this->assertStringContainsString("' --heartbeat-seconds=20'", $source);
+        $this->assertStringContainsString('" --timeout-bin={$quotedTimeout}"', $source);
+        $this->assertSame(
+            2,
+            substr_count($source, 'run($restartSupervisorProgram($program, '),
+        );
+        $this->assertSame(
+            2,
+            substr_count($source, '), timeout: 1200);'),
+        );
         $this->assertStringNotContainsString(
             'restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram}',
             $source,
@@ -862,6 +873,19 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'supervisor_program_restart_failed program=%s attempts=%s',
             $restartScript,
         );
+        $this->assertStringContainsString(
+            'supervisor_program_restart_heartbeat program=%s attempt=%s',
+            $restartScript,
+        );
+        $this->assertStringContainsString(
+            'supervisor_program_restart_timeout program=%s attempt=%s',
+            $restartScript,
+        );
+        $this->assertStringContainsString('--kill-after=5s', $restartScript);
+        $this->assertStringContainsString('trap \'cleanup_restart; exit 143\' HUP INT TERM', $restartScript);
+        $this->assertStringContainsString('active_restart_pgid=$active_restart_pid', $restartScript);
+        $this->assertStringContainsString('kill -TERM -- "-$active_restart_pgid"', $restartScript);
+        $this->assertStringContainsString('kill -KILL -- "-$active_restart_pgid"', $restartScript);
         $this->assertStringNotContainsString("task('ensure:required-ops-queue-supervisor-program'", $source);
         $this->assertStringContainsString("after('deploy:symlink', 'queue:reload-workers');", $source);
         $this->assertStringNotContainsString('Skip queue worker reload in code_only deploy mode', $source);

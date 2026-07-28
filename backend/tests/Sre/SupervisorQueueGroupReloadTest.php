@@ -27,6 +27,38 @@ if [[ "${1:-}" == "-n" ]]; then
 fi
 exec "$@"
 BASH);
+        file_put_contents($this->temporaryDirectory.'/timeout', <<<'BASH'
+#!/usr/bin/env bash
+set -euo pipefail
+while [[ "${1:-}" == --signal=* || "${1:-}" == --kill-after=* ]]; do
+  shift
+done
+[[ "${1:-}" =~ ^[0-9]+s$ ]]
+shift
+if [[ "${FAKE_TIMEOUT_FORCE:-false}" == "true" ]]; then
+  exit 124
+fi
+if [[ "${FAKE_TIMEOUT_FORCE_KILL:-false}" == "true" ]]; then
+  kill -KILL "$$"
+fi
+"$@" &
+child_pid=$!
+cleanup_child() {
+  kill -TERM "$child_pid" 2>/dev/null || true
+  wait "$child_pid" 2>/dev/null || true
+  exit 143
+}
+if [[ "${FAKE_TIMEOUT_IGNORE_TERM:-false}" == "true" ]]; then
+  trap '' TERM
+else
+  trap cleanup_child HUP INT TERM
+fi
+set +e
+wait "$child_pid"
+status=$?
+set -e
+exit "$status"
+BASH);
         file_put_contents($this->temporaryDirectory.'/supervisorctl', <<<'BASH'
 #!/usr/bin/env bash
 set -euo pipefail
@@ -61,6 +93,23 @@ case "$command" in
     if [[ "${FAKE_FAIL_FIRST_RESTART:-false}" == "true" && "$count" -eq 1 ]]; then
       exit 1
     fi
+    if [[ -n "${FAKE_RESTART_PID_FILE:-}" ]]; then
+      printf '%s' "$$" > "$FAKE_RESTART_PID_FILE"
+    fi
+    if [[ "${FAKE_SLOW_RESTART:-false}" == "true" ]]; then
+      sleep_pid=""
+      cleanup_restart() {
+        if [[ -n "$sleep_pid" ]] && kill -0 "$sleep_pid" 2>/dev/null; then
+          kill -TERM "$sleep_pid" 2>/dev/null || true
+          wait "$sleep_pid" 2>/dev/null || true
+        fi
+        exit 143
+      }
+      trap cleanup_restart HUP INT TERM
+      sleep "${FAKE_SLOW_RESTART_SECONDS:-2}" &
+      sleep_pid=$!
+      wait "$sleep_pid"
+    fi
     exit 0
     ;;
 esac
@@ -69,6 +118,7 @@ exit 2
 BASH);
 
         chmod($this->temporaryDirectory.'/sudo', 0700);
+        chmod($this->temporaryDirectory.'/timeout', 0700);
         chmod($this->temporaryDirectory.'/supervisorctl', 0700);
     }
 
@@ -136,17 +186,140 @@ BASH);
         );
     }
 
-    private function runScript(string $mode, bool $failFirstRestart, bool $required): Process
+    #[Test]
+    public function a_slow_supervisor_restart_emits_only_sanitized_heartbeats_and_preserves_success(): void
     {
+        $process = $this->runScript('group', false, true, slowRestart: true);
+
+        $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
+        $this->assertStringContainsString(
+            'supervisor_program_restart_heartbeat program=fap-queue-default-high attempt=1',
+            $process->getOutput(),
+        );
+        $this->assertStringContainsString(
+            'supervisor_program_restart_pass program=fap-queue-default-high attempts=1',
+            $process->getOutput(),
+        );
+        $this->assertStringNotContainsString('pid ', $process->getOutput().$process->getErrorOutput());
+    }
+
+    #[Test]
+    public function a_supervisor_restart_timeout_is_classified_and_fails_closed(): void
+    {
+        $process = $this->runScript('group', false, true, forceTimeout: true);
+
+        $this->assertFalse($process->isSuccessful());
+        $this->assertSame(1, $process->getExitCode());
+        $this->assertSame(
+            3,
+            substr_count(
+                $process->getErrorOutput(),
+                'supervisor_program_restart_timeout program=fap-queue-default-high attempt=',
+            ),
+        );
+        $this->assertStringContainsString(
+            'supervisor_program_restart_failed program=fap-queue-default-high attempts=3',
+            $process->getErrorOutput(),
+        );
+    }
+
+    #[Test]
+    public function a_force_killed_timeout_does_not_leak_the_job_command_or_pid(): void
+    {
+        $process = $this->runScript('group', false, true, forceKill: true);
+        $combinedOutput = $process->getOutput().$process->getErrorOutput();
+
+        $this->assertFalse($process->isSuccessful());
+        $this->assertSame(1, $process->getExitCode());
+        $this->assertSame(
+            3,
+            substr_count(
+                $process->getErrorOutput(),
+                'supervisor_program_restart_timeout program=fap-queue-default-high attempt=',
+            ),
+        );
+        $this->assertStringNotContainsString('Killed', $combinedOutput);
+        $this->assertStringNotContainsString($this->temporaryDirectory, $combinedOutput);
+        $this->assertStringNotContainsString('supervisorctl restart', $combinedOutput);
+    }
+
+    #[Test]
+    public function termination_stops_the_exact_restart_child_and_returns_signal_status(): void
+    {
+        $restartPidFile = $this->temporaryDirectory.'/restart.pid';
+        $process = $this->makeProcess(
+            'group',
+            false,
+            true,
+            slowRestart: true,
+            slowRestartSeconds: 20,
+            restartPidFile: $restartPidFile,
+            timeoutIgnoresTerm: true,
+        );
+        $process->start();
+
+        for ($attempt = 0; $attempt < 100 && ! is_file($restartPidFile); $attempt++) {
+            usleep(20_000);
+        }
+
+        $this->assertFileExists($restartPidFile);
+        $restartPid = (int) file_get_contents($restartPidFile);
+        $this->assertGreaterThan(1, $restartPid);
+
+        $process->signal(SIGTERM);
+        $this->assertSame(143, $process->wait());
+
+        for ($attempt = 0; $attempt < 100 && posix_kill($restartPid, 0); $attempt++) {
+            usleep(20_000);
+        }
+
+        $this->assertFalse(posix_kill($restartPid, 0), 'The exact Supervisor restart child remained alive.');
+    }
+
+    private function runScript(
+        string $mode,
+        bool $failFirstRestart,
+        bool $required,
+        bool $slowRestart = false,
+        bool $forceTimeout = false,
+        bool $forceKill = false,
+    ): Process {
+        $process = $this->makeProcess(
+            $mode,
+            $failFirstRestart,
+            $required,
+            $slowRestart,
+            $forceTimeout,
+            $forceKill,
+        );
+        $process->run();
+
+        return $process;
+    }
+
+    private function makeProcess(
+        string $mode,
+        bool $failFirstRestart,
+        bool $required,
+        bool $slowRestart = false,
+        bool $forceTimeout = false,
+        bool $forceKill = false,
+        int $slowRestartSeconds = 2,
+        string $restartPidFile = '',
+        bool $timeoutIgnoresTerm = false,
+    ): Process {
         $process = new Process(
             [
                 'bash',
                 base_path('scripts/deploy/restart_supervisor_program_group.sh'),
                 '--supervisorctl='.$this->temporaryDirectory.'/supervisorctl',
                 '--sudo='.$this->temporaryDirectory.'/sudo',
+                '--timeout-bin='.$this->temporaryDirectory.'/timeout',
                 '--program=fap-queue-default-high',
                 '--attempts=3',
                 '--delay-seconds=0',
+                '--restart-timeout-seconds=30',
+                '--heartbeat-seconds=1',
                 '--required='.($required ? 'true' : 'false'),
             ],
             base_path(),
@@ -155,10 +328,15 @@ BASH);
                 'FAKE_MODE' => $mode,
                 'FAKE_STATE_FILE' => $this->temporaryDirectory.'/state',
                 'FAKE_FAIL_FIRST_RESTART' => $failFirstRestart ? 'true' : 'false',
+                'FAKE_SLOW_RESTART' => $slowRestart ? 'true' : 'false',
+                'FAKE_TIMEOUT_FORCE' => $forceTimeout ? 'true' : 'false',
+                'FAKE_TIMEOUT_FORCE_KILL' => $forceKill ? 'true' : 'false',
+                'FAKE_TIMEOUT_IGNORE_TERM' => $timeoutIgnoresTerm ? 'true' : 'false',
+                'FAKE_SLOW_RESTART_SECONDS' => (string) $slowRestartSeconds,
+                'FAKE_RESTART_PID_FILE' => $restartPidFile,
             ],
         );
         $process->setTimeout(10);
-        $process->run();
 
         return $process;
     }
