@@ -97089,9 +97089,9 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E",
       "separate_exact_sha_production_authorization"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "80d9fa0b24cb9c8040a13208c0f619fd2623aeb3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3364",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -97104,6 +97104,10 @@
       "evidence_archive": {
         "status": "passed",
         "evidence": "Three redacted Git-safe closeout artifacts are confined to the manifest-allowed runtime-closeout-23 directory. Sensitive-field scans, 258 Enneagram V2 tests with 29,261 assertions, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-file scope validation passed. No production action is part of this PR."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #3364 is open from the exact four-file closeout branch; required checks are pending."
       }
     },
     "scope_validation": {
@@ -97148,9 +97152,14 @@
         "at": "2026-07-28T11:54:53Z",
         "status": "local_validation_passed",
         "note": "Sensitive-field scanning, 258 Enneagram V2 tests with 29,261 assertions, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-file allowed-path validation passed."
+      },
+      {
+        "at": "2026-07-28T11:56:07Z",
+        "status": "github_checks_pending",
+        "note": "Committed the initial redacted evidence as 80d9fa0b24cb9c8040a13208c0f619fd2623aeb3, pushed the exact four-file branch, and opened PR #3364. Required checks are pending."
       }
     ],
-    "updated_at": "2026-07-28T11:54:53Z"
+    "updated_at": "2026-07-28T11:56:07Z"
   },
   "ANALYTICS-FRESHNESS-RECONCILE-03": {
     "id": "ANALYTICS-FRESHNESS-RECONCILE-03",
