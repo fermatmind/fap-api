@@ -4033,8 +4033,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/ArticlePublishControlled.php',
             'backend/app/Console/Commands/ArticlePromoteExistingWorkingRevisionControlled.php',
+            'backend/app/Console/Commands/ArticleSeo13LegacyMetadataBootstrap.php',
             'backend/app/Console/Kernel.php',
             'backend/app/Services/Cms/ArticleEditorialCompletenessGate.php',
+            'backend/app/Services/Cms/Seo13LegacyArticleMetadataBootstrapService.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\ArticlePublishControlled;',
@@ -10191,8 +10193,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/ArticlePublishControlled.php',
             'backend/app/Console/Commands/ArticlePromoteExistingWorkingRevisionControlled.php',
+            'backend/app/Console/Commands/ArticleSeo13LegacyMetadataBootstrap.php',
             'backend/app/Services/Cms/ArticleEditorialCompletenessGate.php',
             'backend/app/Services/Cms/ArticlePublishService.php',
+            'backend/app/Services/Cms/Seo13LegacyArticleMetadataBootstrapService.php',
         ], true);
     }
 
