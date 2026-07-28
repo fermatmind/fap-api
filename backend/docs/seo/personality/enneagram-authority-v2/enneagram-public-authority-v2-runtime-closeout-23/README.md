@@ -2,6 +2,10 @@
 
 Final status: `completed_with_recorded_authorization_drift_and_cache_recovery`.
 
+For the consolidated architecture, authority boundaries, operator state
+machine, recovery rules, and the 2026-07-16 through 2026-07-28 rollout
+timeline, see `../README.md`.
+
 This directory is the redacted, Git-safe closeout record for the Enneagram
 Authority V2 production rollout. It records receipt hashes, immutable GitHub
 Actions run identifiers, counts, status codes, and public projection
