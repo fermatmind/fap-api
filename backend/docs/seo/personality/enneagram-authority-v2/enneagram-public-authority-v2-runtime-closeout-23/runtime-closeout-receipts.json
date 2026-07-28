@@ -1,0 +1,77 @@
+{
+  "schema_version": "enneagram_public_authority_v2_runtime_closeout_23_receipts.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
+  "classification": "redacted_git_safe",
+  "status": "completed_with_recorded_authorization_drift_and_cache_recovery",
+  "runtime_identities": {
+    "promotion_backend_sha": "9d41a0f1e329fe317c30c6732a1c5efb6b57b38c",
+    "recovery_backend_sha": "256c7882c0c47347ec9497dc4ab1ce2cfb8a80c0",
+    "frontend_sha": "e6369b6525d80fb735fa09c7cc341762051d554f",
+    "final_control_plane_sha": "dc897f88f4b0220c997ee3a7c7833c5be362e12c",
+    "final_runner_sha256": "f77c1e650857ff144b547ebfc0eab98adf28fafbde35fcc2ce03e65c9fb66204"
+  },
+  "release_evidence": {
+    "package_sha256": "2526762097cb661630aad10076179f6171e568913c89a87c233941191ade2199",
+    "release_report_sha256": "2fe85386587bd45968ec41bb8db7b38f82d2f9d9b07bda594a47cbfc218bfc56",
+    "review_attestation_sha256": "feb56701defcff706f93f7d9f8152c1c450376f8411a01e60a601a2f62da424e",
+    "initial_authorization_packet_sha256": "4e4e2a2a9aa60fe726f40888266d986fa1df9b469a8c3d33b486c5dfd78d4694"
+  },
+  "receipts": {
+    "original_partial_closeout": {
+      "sha256": "d35f2905e4079431ffa8bbfdd535b74cb6ce2d748167bf3a23ebf9f572afc402",
+      "status": "FAIL_CLOSED_PARTIAL_WRITES_COMMITTED",
+      "failure_stage": "frontend_revalidation",
+      "writes_committed": true
+    },
+    "runtime_config_apply": {
+      "run_id": 30333691762,
+      "run_attempt": 1,
+      "sha256": "7e78a73b79312ab9989d9debbc8d06fcc3ce7856591f02bfa3a06bc068151e94",
+      "status": "PASS_RUNTIME_CONFIG_CONVERGED",
+      "runtime_setting_write_count": 3
+    },
+    "cache_only_hmac_execute": {
+      "run_id": 30343606780,
+      "run_attempt": 1,
+      "sha256": "1cf4c1cadc7fc29202ac762bbeea3f03416a6d9f92ae486f641a73fa87bceedd",
+      "status": "FAIL_CLOSED",
+      "failure_stage": "post_readback_canary-00",
+      "frontend_revalidation_committed": true
+    },
+    "final_post_readback": {
+      "run_id": 30355435632,
+      "run_attempt": 1,
+      "sha256": "c1b136346a552b6e7bffebc97e09f32b949689d5ff3f51f80492518695293ae5",
+      "status": "PASS_POST_READBACK_ONLY",
+      "writes_committed": false
+    }
+  },
+  "production_counts": {
+    "working_import_committed": 116,
+    "review_bind_committed": 116,
+    "atomic_promotion_committed": 116,
+    "revalidation_path_count": 116,
+    "accepted_revalidation_path_count": 116,
+    "rejected_revalidation_path_count": 0,
+    "readback_batch_count": 10,
+    "api_read_count": 116,
+    "html_read_count": 116,
+    "private_data_exposed_count": 0,
+    "non_empty_media_count": 0,
+    "media_write_count": 0
+  },
+  "readback_plan": {
+    "canary-00": 8,
+    "readback-01..09": "9x12",
+    "total": 116
+  },
+  "final_fingerprints": {
+    "state_sha256": "44cf22e006a3fa7287b4df85042c46038d14c442ed3bf3258e55af473ef932ef",
+    "public_projection_sha256": "c1248e9a80f1f64a27e7d25f50a61be6fb2e1174d82c35b5829e42f07056b908",
+    "stable_identity_discoverability_sha256": "8032bac9cd352912685739ea4d86c03a1f763fa47590b118b628065e51d51203",
+    "url_sets_sha256": "e29c0956c55b5292c0e02d00c1fea4105905cd8969891b76e8ea4a33a0611df0"
+  },
+  "rollback_token_sha256": "8c1b9239070ec6113c58858655441d2a96d185d465722a811e602dfdc736644d",
+  "automatic_rollback": false,
+  "closeout_pr_production_execution": false
+}
