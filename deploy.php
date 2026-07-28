@@ -1001,7 +1001,7 @@ task('guard:queue-reload-capability', function () {
                 }
 
                 $programPattern = '^'.preg_quote($program, '/').'(:|$)';
-                $statusCommand = "sudo -n {$quotedSupervisorctl} status 2>/dev/null"
+                $statusCommand = "{ sudo -n {$quotedSupervisorctl} status 2>/dev/null || true; }"
                     .' | awk -v pattern='.escapeshellarg($programPattern)
                     ." '\$1 ~ pattern { found=1; if (\$2 != \"RUNNING\") bad=1 } END { exit !(found && !bad) }'";
                 if (! test($statusCommand)) {

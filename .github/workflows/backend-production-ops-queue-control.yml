@@ -325,7 +325,7 @@ jobs:
           failure_gate=SUPERVISORCTL_PATH
           supervisorctl_path="$(command -v supervisorctl)"
           failure_gate=SUPERVISOR_STATUS
-          status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"
+          status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"
           failure_gate=GREP_PATH
           grep_path="$(command -v grep)"
           program_present=false

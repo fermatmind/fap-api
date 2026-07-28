@@ -52,7 +52,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'ops_pending_total="$(sudo -n -u www-data php -d display_errors=0 -r "$probe_code" "$DEPLOY_PATH/current/backend" 2>/dev/null)"',
             'test "$active_revision" = "$EXPECTED_ACTIVE_REVISION"',
             'test "$rendered_sha256" = "$EXPECTED_RENDERED_SHA256"',
-            'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null)"',
+            'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
             'if [ "$current_config_sha256" != "$zero_sha256" ]; then',
             '[ "$current_config_sha256" != "$EXPECTED_RENDERED_SHA256" ] && convergence_required=true',
             'test "$(ps -o user= -p "$worker_pid" | awk \'{$1=$1; print}\')" = www-data',
@@ -202,7 +202,7 @@ final class ProductionOpsQueueControlWorkflowTest extends TestCase
             'cat "$RUNNER_TEMP/ops-queue-apply-ssh.err"',
             $workflow,
         );
-        $this->assertStringNotContainsString(
+        $this->assertStringContainsString(
             'status_lines="$(sudo -n "$supervisorctl_path" status 2>/dev/null || true)"',
             $workflow,
         );

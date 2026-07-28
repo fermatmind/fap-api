@@ -62,6 +62,10 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $deployer,
         );
         $this->assertStringContainsString("\$requiredPrograms[] = 'fap-queue-ops';", $deployer);
+        $this->assertStringContainsString(
+            '{ sudo -n {$quotedSupervisorctl} status 2>/dev/null || true; }',
+            $deployer,
+        );
         $this->assertStringContainsString('END { exit !(found && !bad) }', $deployer);
         $this->assertStringContainsString(
             'staging has unmanaged Laravel queue workers; configure a queue manager before deployment',
