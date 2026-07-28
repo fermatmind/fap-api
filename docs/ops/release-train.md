@@ -359,17 +359,19 @@ config-cache value without deploying application code. `preflight` is
 read-only. It binds the exact latest-main control-plane SHA, active production
 revision, shared environment SHA, active config-cache SHA, committed
 `config/ops.php` SHA, source credential bundle SHA, runtime fingerprint, deploy
-lock absence, and whether the cached value is stale. Receipts contain hashes,
-booleans, and counts only; neither the shared secret nor SSH routing metadata
-is emitted.
+lock absence, current environment owner/group/mode, runtime readability, and
+whether the cached value is stale. Receipts contain hashes, booleans, IDs, and
+counts only; neither the shared secret nor SSH routing metadata is emitted.
 
 `apply` downloads the immutable successful preflight receipt and requires a
 separate exact authorization. It atomically updates only
 `CONTENT_RELEASE_REVALIDATE_SECRET` and
 `ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL` in the Deployer shared backend
-environment, then runs only Laravel `config:cache` as the application runtime
-user. It does not deploy or activate a release, run migrations, mutate CMS or
-database authority, revalidate public caches, restart queues or services,
+environment, retaining the existing owner/group and normalizing only its mode
+to `0640`. The runner proves `www-data` can read the environment before it runs
+Laravel `config:cache`, and repeats that permission and exact bundle proof
+afterward. It does not deploy or activate a release, run migrations, mutate CMS
+or database authority, revalidate public caches, restart queues or services,
 publish, alter sitemap/llms/search state, execute PR23, or roll back
 automatically. A failure after the environment write is reported as a partial
 config write and stops.
@@ -377,7 +379,7 @@ config write and stops.
 The exact apply authorization format is:
 
 ```text
-I explicitly approve production fap-api content-release revalidation config convergence from preflight run <PREFLIGHT_RUN_ID> attempt <PREFLIGHT_RUN_ATTEMPT> with control-plane SHA <CONTROL_SHA> active SHA <ACTIVE_SHA> environment SHA256 <ENV_SHA256> config-cache SHA256 <CONFIG_CACHE_SHA256> config-source SHA256 <CONFIG_SOURCE_SHA256> runtime fingerprint <RUNTIME_FINGERPRINT_SHA256> source bundle SHA256 <SOURCE_BUNDLE_SHA256>; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback.
+I explicitly approve production fap-api content-release revalidation config convergence from preflight run <PREFLIGHT_RUN_ID> attempt <PREFLIGHT_RUN_ATTEMPT> with control-plane SHA <CONTROL_SHA> active SHA <ACTIVE_SHA> environment SHA256 <ENV_SHA256> config-cache SHA256 <CONFIG_CACHE_SHA256> config-source SHA256 <CONFIG_SOURCE_SHA256> runtime fingerprint <RUNTIME_FINGERPRINT_SHA256> source bundle SHA256 <SOURCE_BUNDLE_SHA256>; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, normalize only shared backend .env mode to 0640 while retaining owner/group, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback.
 ```
 
 ## fap-web handling in V1

@@ -22,7 +22,9 @@ WRITES_COMMITTED=false
 ENV_SETTING_WRITE_COUNT=0
 CONFIG_CACHE_REBUILD_ATTEMPTED=false
 CONFIG_CACHE_REBUILD_COMMITTED=false
+ENV_PERMISSION_NORMALIZED=false
 SECRET_PATTERN='^[A-Za-z0-9_-]+$'
+TARGET_ENV_MODE='0640'
 
 fail() {
   jq -cnS \
@@ -31,6 +33,7 @@ fail() {
     --argjson env_setting_write_count "$ENV_SETTING_WRITE_COUNT" \
     --argjson config_cache_rebuild_attempted "$CONFIG_CACHE_REBUILD_ATTEMPTED" \
     --argjson config_cache_rebuild_committed "$CONFIG_CACHE_REBUILD_COMMITTED" \
+    --argjson env_permission_normalized "$ENV_PERMISSION_NORMALIZED" \
     '{
       ok: false,
       status: (if $writes_committed then "FAIL_CLOSED_PARTIAL_CONFIG_WRITE" else "FAIL_CLOSED_NO_WRITES" end),
@@ -39,6 +42,7 @@ fail() {
       env_setting_write_count: $env_setting_write_count,
       config_cache_rebuild_attempted: $config_cache_rebuild_attempted,
       config_cache_rebuild_committed: $config_cache_rebuild_committed,
+      env_permission_normalized: $env_permission_normalized,
       application_deploy: false,
       symlink_activation: false,
       migration: false,
@@ -89,6 +93,22 @@ env_value() {
   printf '%s' "$value"
 }
 
+file_metadata() {
+  # $argv is evaluated by PHP, not Bash.
+  # shellcheck disable=SC2016
+  php -r '
+    $state = stat($argv[1]);
+    if ($state === false) {
+        exit(1);
+    }
+    echo json_encode([
+        "mode" => sprintf("%04o", $state["mode"] & 0777),
+        "uid" => (string) $state["uid"],
+        "gid" => (string) $state["gid"],
+    ], JSON_THROW_ON_ERROR);
+  ' "$1"
+}
+
 cached_bundle_state() {
   CACHE_FILE="$CONFIG_CACHE_FILE" php <<'PHP'
 <?php
@@ -125,6 +145,10 @@ runtime_state() {
   local cached_state="$7"
   local deploy_lock_present="$8"
   local source_ready="$9"
+  local env_mode="${10}"
+  local env_uid="${11}"
+  local env_gid="${12}"
+  local env_runtime_readable="${13}"
 
   jq -cnS \
     --arg schema_version "content_release_revalidation_config_cache.v1" \
@@ -140,6 +164,11 @@ runtime_state() {
     --argjson cached "$cached_state" \
     --argjson deploy_lock_present "$deploy_lock_present" \
     --argjson source_ready "$source_ready" \
+    --arg env_mode "$env_mode" \
+    --arg env_target_mode "$TARGET_ENV_MODE" \
+    --arg env_uid "$env_uid" \
+    --arg env_gid "$env_gid" \
+    --argjson env_runtime_readable "$env_runtime_readable" \
     '{
       schema_version: $schema_version,
       mode: $mode,
@@ -161,6 +190,15 @@ runtime_state() {
       config_residue_present: (
         $cached.secret_present
         and $cached.bundle_sha256 != $source_bundle_sha256
+      ),
+      env_mode: $env_mode,
+      env_target_mode: $env_target_mode,
+      env_uid: $env_uid,
+      env_gid: $env_gid,
+      env_runtime_readable: $env_runtime_readable,
+      env_permission_repair_required: (
+        $env_mode != $env_target_mode
+        or $env_runtime_readable == false
       ),
       deploy_lock_present: $deploy_lock_present,
       production_write_execution: false,
@@ -193,6 +231,11 @@ write_managed_env() {
 <?php
 $target = getenv('ENV_FILE') ?: '';
 $temp = getenv('TEMP_FILE') ?: '';
+$targetOwner = fileowner($target);
+$targetGroup = filegroup($target);
+if ($targetOwner === false || $targetGroup === false) {
+    exit(5);
+}
 $values = [
     'CONTENT_RELEASE_REVALIDATE_SECRET' => getenv('CONTENT_RELEASE_REVALIDATE_SECRET') ?: '',
     'ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL' => getenv('ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL') ?: '',
@@ -215,7 +258,14 @@ foreach ($values as $key => $value) {
 if (file_put_contents($temp, implode("\n", $lines)."\n", LOCK_EX) === false) {
     exit(3);
 }
-chmod($temp, 0600);
+if (fileowner($temp) !== $targetOwner) {
+    @unlink($temp);
+    exit(5);
+}
+if (! chown($temp, $targetOwner) || ! chgrp($temp, $targetGroup) || ! chmod($temp, 0640)) {
+    @unlink($temp);
+    exit(6);
+}
 if (! rename($temp, $target)) {
     @unlink($temp);
     exit(4);
@@ -268,6 +318,14 @@ ENV_SECRET="$(env_value CONTENT_RELEASE_REVALIDATE_SECRET)"
 ENV_URL="$(env_value ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL)"
 ENV_BUNDLE_SHA256="$(bundle_sha256 "$ENV_SECRET" "$ENV_URL")"
 ENV_SHA256="$(file_sha256 "$ENV_FILE")"
+ENV_METADATA="$(file_metadata "$ENV_FILE")" || fail "ENV_METADATA_READ_FAILED"
+ENV_MODE="$(jq -r '.mode' <<<"$ENV_METADATA")"
+ENV_UID="$(jq -r '.uid' <<<"$ENV_METADATA")"
+ENV_GID="$(jq -r '.gid' <<<"$ENV_METADATA")"
+ENV_RUNTIME_READABLE=false
+if sudo -n -u www-data -- test -r "$ENV_FILE"; then
+  ENV_RUNTIME_READABLE=true
+fi
 CONFIG_CACHE_SHA256="$(file_sha256 "$CONFIG_CACHE_FILE")"
 CONFIG_SOURCE_SHA256="$(file_sha256 "$CONFIG_SOURCE_FILE")"
 CACHED_STATE="$(cached_bundle_state)" || fail "CONFIG_CACHE_INSPECTION_FAILED"
@@ -282,7 +340,11 @@ STATE="$(runtime_state \
   "$ENV_BUNDLE_SHA256" \
   "$CACHED_STATE" \
   "$DEPLOY_LOCK_PRESENT" \
-  "$SOURCE_READY")" || fail "RUNTIME_STATE_BUILD_FAILED"
+  "$SOURCE_READY" \
+  "$ENV_MODE" \
+  "$ENV_UID" \
+  "$ENV_GID" \
+  "$ENV_RUNTIME_READABLE")" || fail "RUNTIME_STATE_BUILD_FAILED"
 RUNTIME_FINGERPRINT_SHA256="$(printf '%s' "$STATE" | runtime_fingerprint_sha256)"
 APPLY_READY="$(jq -r '
   .active_revision_matches
@@ -318,12 +380,14 @@ fi
 [[ "$SOURCE_BUNDLE_SHA256" == "$EXPECTED_SOURCE_BUNDLE_SHA256" ]] || fail "SOURCE_BUNDLE_DRIFT"
 [[ "$APPLY_READY" == "true" ]] || fail "PREFLIGHT_NOT_READY"
 
-EXPECTED_PHRASE="I explicitly approve production fap-api content-release revalidation config convergence from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_SHA} environment SHA256 ${EXPECTED_ENV_SHA256} config-cache SHA256 ${EXPECTED_CONFIG_CACHE_SHA256} config-source SHA256 ${EXPECTED_CONFIG_SOURCE_SHA256} runtime fingerprint ${EXPECTED_RUNTIME_FINGERPRINT_SHA256} source bundle SHA256 ${EXPECTED_SOURCE_BUNDLE_SHA256}; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback."
+EXPECTED_PHRASE="I explicitly approve production fap-api content-release revalidation config convergence from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_SHA} environment SHA256 ${EXPECTED_ENV_SHA256} config-cache SHA256 ${EXPECTED_CONFIG_CACHE_SHA256} config-source SHA256 ${EXPECTED_CONFIG_SOURCE_SHA256} runtime fingerprint ${EXPECTED_RUNTIME_FINGERPRINT_SHA256} source bundle SHA256 ${EXPECTED_SOURCE_BUNDLE_SHA256}; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, normalize only shared backend .env mode to 0640 while retaining owner/group, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback."
 [[ "$AUTHORIZATION_PHRASE" == "$EXPECTED_PHRASE" ]] || fail "AUTHORIZATION_PHRASE_MISMATCH"
 
 write_managed_env || fail "ENV_WRITE_FAILED"
 WRITES_COMMITTED=true
 ENV_SETTING_WRITE_COUNT=2
+ENV_PERMISSION_NORMALIZED=true
+sudo -n -u www-data -- test -r "$ENV_FILE" || fail "ENV_NOT_READABLE_BY_RUNTIME"
 CONFIG_CACHE_REBUILD_ATTEMPTED=true
 (
   cd "$BACKEND_DIR"
@@ -337,6 +401,16 @@ CONFIG_CACHE_REBUILD_COMMITTED=true
   || fail "POST_APPLY_ACTIVE_REVISION_DRIFT"
 
 POST_ENV_SHA256="$(file_sha256 "$ENV_FILE")"
+POST_ENV_METADATA="$(file_metadata "$ENV_FILE")" || fail "POST_ENV_METADATA_READ_FAILED"
+POST_ENV_MODE="$(jq -r '.mode' <<<"$POST_ENV_METADATA")"
+POST_ENV_UID="$(jq -r '.uid' <<<"$POST_ENV_METADATA")"
+POST_ENV_GID="$(jq -r '.gid' <<<"$POST_ENV_METADATA")"
+POST_ENV_RUNTIME_READABLE=false
+if sudo -n -u www-data -- test -r "$ENV_FILE"; then
+  POST_ENV_RUNTIME_READABLE=true
+fi
+[[ "$POST_ENV_MODE" == "$TARGET_ENV_MODE" && "$POST_ENV_RUNTIME_READABLE" == "true" ]] \
+  || fail "POST_ENV_PERMISSION_MISMATCH"
 POST_CONFIG_CACHE_SHA256="$(file_sha256 "$CONFIG_CACHE_FILE")"
 POST_ENV_SECRET="$(env_value CONTENT_RELEASE_REVALIDATE_SECRET)"
 POST_ENV_URL="$(env_value ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL)"
@@ -355,7 +429,11 @@ POST_STATE="$(runtime_state \
   "$POST_ENV_BUNDLE_SHA256" \
   "$POST_CACHED_STATE" \
   "false" \
-  "true")" || fail "POST_RUNTIME_STATE_BUILD_FAILED"
+  "true" \
+  "$POST_ENV_MODE" \
+  "$POST_ENV_UID" \
+  "$POST_ENV_GID" \
+  "$POST_ENV_RUNTIME_READABLE")" || fail "POST_RUNTIME_STATE_BUILD_FAILED"
 POST_FINGERPRINT_SHA256="$(printf '%s' "$POST_STATE" | runtime_fingerprint_sha256)"
 
 jq -cS \
@@ -367,6 +445,7 @@ jq -cS \
     production_write_execution: true,
     writes_committed: true,
     env_setting_write_count: 2,
+    env_permission_normalized: true,
     config_cache_rebuild_attempted: true,
     config_cache_rebuild_committed: true
   }' <<<"$POST_STATE"

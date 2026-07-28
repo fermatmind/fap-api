@@ -41,6 +41,7 @@ final class ContentReleaseRevalidationConfigCacheRunnerTest extends TestCase
             $this->fixtureRoot.'/shared/backend/.env',
             "APP_ENV=production\nCONTENT_RELEASE_REVALIDATE_SECRET=wrong_secret_with_sufficient_entropy\n",
         );
+        chmod($this->fixtureRoot.'/shared/backend/.env', 0600);
         File::put(
             $release.'/backend/bootstrap/cache/config.php',
             "<?php return ['ops' => ['content_release_observability' => ['hmac_revalidation_secret' => 'wrong_secret_with_sufficient_entropy', 'hmac_revalidation_url' => 'https://old.example.test/revalidate']]];\n",
@@ -75,6 +76,10 @@ PHP,
 #!/usr/bin/env bash
 set -euo pipefail
 while [[ "${1:-}" == -* || "${1:-}" == "www-data" ]]; do shift; done
+if [[ "${1:-}" == "test" && "${2:-}" == "-r" ]]; then
+  php -r 'exit((fileperms($argv[1]) & 0040) !== 0 ? 0 : 1);' "$3"
+  exit $?
+fi
 exec "$@"
 BASH,
         );
@@ -109,6 +114,10 @@ BASH,
         $this->assertSame('PASS_AUTHORIZATION_REQUIRED', $receipt['status']);
         $this->assertTrue($receipt['apply_ready']);
         $this->assertTrue($receipt['config_residue_present']);
+        $this->assertSame('0600', $receipt['env_mode']);
+        $this->assertSame('0640', $receipt['env_target_mode']);
+        $this->assertFalse($receipt['env_runtime_readable']);
+        $this->assertTrue($receipt['env_permission_repair_required']);
         $this->assertFalse($receipt['writes_committed']);
         $this->assertSame($beforeEnv, hash_file('sha256', $this->fixtureRoot.'/shared/backend/.env'));
         $this->assertSame($beforeCache, hash_file('sha256', $this->fixtureRoot.'/current/backend/bootstrap/cache/config.php'));
@@ -120,7 +129,7 @@ BASH,
         $runId = '123456';
         $attempt = '1';
         $phrase = sprintf(
-            'I explicitly approve production fap-api content-release revalidation config convergence from preflight run %s attempt %s with control-plane SHA %s active SHA %s environment SHA256 %s config-cache SHA256 %s config-source SHA256 %s runtime fingerprint %s source bundle SHA256 %s; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback.',
+            'I explicitly approve production fap-api content-release revalidation config convergence from preflight run %s attempt %s with control-plane SHA %s active SHA %s environment SHA256 %s config-cache SHA256 %s config-source SHA256 %s runtime fingerprint %s source bundle SHA256 %s; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, normalize only shared backend .env mode to 0640 while retaining owner/group, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback.',
             $runId,
             $attempt,
             self::CONTROL_SHA,
@@ -149,10 +158,15 @@ BASH,
         $this->assertSame('PASS_CONFIG_CACHE_CONVERGED', $receipt['status']);
         $this->assertTrue($receipt['writes_committed']);
         $this->assertSame(2, $receipt['env_setting_write_count']);
+        $this->assertTrue($receipt['env_permission_normalized']);
         $this->assertTrue($receipt['config_cache_rebuild_committed']);
         $this->assertTrue($receipt['env_matches_source']);
         $this->assertTrue($receipt['cached_config_matches_source']);
         $this->assertFalse($receipt['config_residue_present']);
+        $this->assertSame('0640', $receipt['env_mode']);
+        $this->assertTrue($receipt['env_runtime_readable']);
+        $this->assertFalse($receipt['env_permission_repair_required']);
+        $this->assertSame(0640, fileperms($this->fixtureRoot.'/shared/backend/.env') & 0777);
 
         $env = File::get($this->fixtureRoot.'/shared/backend/.env');
         $this->assertStringContainsString('APP_ENV=production', $env);
@@ -179,6 +193,8 @@ BASH,
             'SOURCE_BUNDLE_DRIFT',
             'AUTHORIZATION_PHRASE_MISMATCH',
             'DEPLOY_LOCK_PRESENT',
+            'ENV_NOT_READABLE_BY_RUNTIME',
+            'POST_ENV_PERMISSION_MISMATCH',
             'FAIL_CLOSED_PARTIAL_CONFIG_WRITE',
         ] as $expected) {
             $this->assertStringContainsString($expected, $runner);
