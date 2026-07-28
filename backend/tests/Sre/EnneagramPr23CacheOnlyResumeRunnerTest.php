@@ -158,6 +158,43 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
     }
 
     #[Test]
+    public function post_readback_only_mode_is_source_receipt_bound_and_never_revalidates_again(): void
+    {
+        $source = (string) file_get_contents(
+            dirname(__DIR__, 2).'/scripts/deploy/enneagram_pr23_cache_only_resume.php',
+        );
+
+        $this->assertStringContainsString("'post_readback_only'", $source);
+        $this->assertStringContainsString(
+            "'FM_ENNEAGRAM_SOURCE_EXECUTE_RUN_ID'",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "'FM_ENNEAGRAM_SOURCE_EXECUTE_RECEIPT_SHA256'",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "'status' => 'PASS_POST_READBACK_ONLY'",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "'source_frontend_revalidation_committed' => true",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "'frontend_revalidation_attempted' => false",
+            $source,
+        );
+        $this->assertStringContainsString("'writes_committed' => false", $source);
+
+        $postReadbackBranch = strstr($source, "if (\$mode === 'post_readback_only')");
+        $this->assertIsString($postReadbackBranch);
+        $postReadbackBranch = strstr($postReadbackBranch, 'self::$failureStage = \'validate_execute_authorization\';', true);
+        $this->assertIsString($postReadbackBranch);
+        $this->assertStringNotContainsString('->revalidateFrontend(', $postReadbackBranch);
+    }
+
+    #[Test]
     public function transient_snapshot_reads_retry_twice_but_permanent_failures_do_not_retry(): void
     {
         $attempts = 0;
