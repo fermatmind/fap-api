@@ -6,6 +6,9 @@ mode="${MODE:-}"
 deploy_path="${DEPLOY_PATH:-}"
 expected_active_revision="${EXPECTED_ACTIVE_REVISION:-}"
 expected_state_sha256="${EXPECTED_STATE_SHA256:-}"
+expected_backlog_snapshot_sha256="${EXPECTED_BACKLOG_SNAPSHOT_SHA256:-}"
+expected_job_class_counts_sha256="${EXPECTED_JOB_CLASS_COUNTS_SHA256:-}"
+expected_pending_total="${EXPECTED_PENDING_TOTAL:-}"
 supervisorctl_path="${SUPERVISORCTL_PATH:-/usr/bin/supervisorctl}"
 php_path="${PHP_PATH:-/usr/bin/php}"
 sudo_path="${SUDO_PATH:-/usr/bin/sudo}"
@@ -17,7 +20,7 @@ fail() {
   exit 1
 }
 
-[[ "$mode" =~ ^(preflight|apply)$ ]] || fail INVALID_MODE
+[[ "$mode" =~ ^(preflight|apply|backlog_apply)$ ]] || fail INVALID_MODE
 [[ "$deploy_path" =~ ^/[A-Za-z0-9._/-]+$ ]] || fail INVALID_DEPLOY_PATH
 [[ "$deploy_path" != *".."* ]] || fail INVALID_DEPLOY_PATH
 [[ "$expected_active_revision" =~ ^[0-9a-f]{40}$ ]] || fail INVALID_ACTIVE_REVISION
@@ -29,8 +32,21 @@ fail() {
 [[ "$sudo_path" != *".."* ]] || fail INVALID_SUDO_PATH
 if [[ "$mode" == "apply" ]]; then
   [[ "$expected_state_sha256" =~ ^[0-9a-f]{64}$ ]] || fail INVALID_STATE_SHA
+  [[ -z "$expected_backlog_snapshot_sha256" ]] || fail UNEXPECTED_BACKLOG_SNAPSHOT
+  [[ -z "$expected_job_class_counts_sha256" ]] || fail UNEXPECTED_JOB_CLASS_COUNTS
+  [[ -z "$expected_pending_total" ]] || fail UNEXPECTED_PENDING_TOTAL
+elif [[ "$mode" == "backlog_apply" ]]; then
+  [[ "$expected_state_sha256" =~ ^[0-9a-f]{64}$ ]] || fail INVALID_STATE_SHA
+  [[ "$expected_backlog_snapshot_sha256" =~ ^[0-9a-f]{64}$ ]] \
+    || fail INVALID_BACKLOG_SNAPSHOT
+  [[ "$expected_job_class_counts_sha256" =~ ^[0-9a-f]{64}$ ]] \
+    || fail INVALID_JOB_CLASS_COUNTS
+  [[ "$expected_pending_total" =~ ^[1-9][0-9]*$ ]] || fail INVALID_PENDING_TOTAL
 else
   [[ -z "$expected_state_sha256" ]] || fail UNEXPECTED_STATE_SHA
+  [[ -z "$expected_backlog_snapshot_sha256" ]] || fail UNEXPECTED_BACKLOG_SNAPSHOT
+  [[ -z "$expected_job_class_counts_sha256" ]] || fail UNEXPECTED_JOB_CLASS_COUNTS
+  [[ -z "$expected_pending_total" ]] || fail UNEXPECTED_PENDING_TOTAL
 fi
 [[ -x "$supervisorctl_path" ]] || fail SUPERVISORCTL_UNAVAILABLE
 
@@ -323,11 +339,25 @@ IFS=$'\t' read -r high_pending default_pending reports_pending unknown_class_cou
 [[ "$oldest_pending_seconds" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
 [[ "$backlog_snapshot_sha256" =~ ^[0-9a-f]{64}$ ]] || fail QUEUE_PROBE
 [[ "$job_class_counts_b64" =~ ^[A-Za-z0-9+/=]+$ ]] || fail QUEUE_PROBE
+job_class_counts_sha256="$(
+  printf '%s' "$job_class_counts_b64" | base64 --decode | sha256sum | awk '{print $1}'
+)"
+[[ "$job_class_counts_sha256" =~ ^[0-9a-f]{64}$ ]] || fail QUEUE_PROBE
 pending_total=$((high_pending + default_pending + reports_pending))
 [[ "$pending_total" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
 (( unknown_class_count <= pending_total )) || fail QUEUE_PROBE
 if [[ "$mode" == "apply" && "$pending_total" != "0" ]]; then
   fail QUEUE_BACKLOG_PRESENT
+fi
+if [[ "$mode" == "backlog_apply" ]]; then
+  [[ "$pending_total" == "$expected_pending_total" ]] || fail PENDING_TOTAL_DRIFT
+  [[ "$backlog_snapshot_sha256" == "$expected_backlog_snapshot_sha256" ]] \
+    || fail BACKLOG_SNAPSHOT_DRIFT
+  [[ "$job_class_counts_sha256" == "$expected_job_class_counts_sha256" ]] \
+    || fail JOB_CLASS_COUNTS_DRIFT
+  [[ "$unknown_class_count" == "0" ]] || fail UNKNOWN_JOB_CLASS
+  [[ "$high_pending" == "0" && "$reports_pending" == "0" ]] \
+    || fail UNEXPECTED_QUEUE_BACKLOG
 fi
 target_set_sha256="$(printf '%s\n' "${programs[@]}" | sha256sum | awk '{print $1}')"
 state_sha256="$(
@@ -352,12 +382,12 @@ if [[ "$mode" == "preflight" ]]; then
   if [[ "$convergence_required" == true && "$pending_total" == "0" ]]; then
     apply_supported=true
   fi
-  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
     "$active_revision" "$target_set_sha256" "$state_sha256" "$default_state" \
     "$reports_state" "$pending_total" "$high_pending" "$default_pending" \
     "$reports_pending" "$convergence_required" "$apply_supported" "$foreign_before" \
     "$unknown_class_count" "$oldest_pending_seconds" "$backlog_snapshot_sha256" \
-    "$job_class_counts_b64"
+    "$job_class_counts_b64" "$job_class_counts_sha256"
   exit 0
 fi
 

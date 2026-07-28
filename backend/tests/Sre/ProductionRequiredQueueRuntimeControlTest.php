@@ -208,6 +208,65 @@ BASH);
     }
 
     #[Test]
+    public function backlog_apply_restarts_only_after_exact_class_count_and_snapshot_revalidation(): void
+    {
+        $pending = [
+            'FAKE_HIGH_PENDING' => '0',
+            'FAKE_DEFAULT_PENDING' => '2',
+            'FAKE_REPORTS_PENDING' => '0',
+        ];
+        $preflight = $this->runControl('preflight', '', '0', $pending);
+
+        $this->assertTrue($preflight->isSuccessful(), $preflight->getErrorOutput());
+        $fields = explode("\t", trim($preflight->getOutput()));
+        $this->assertCount(17, $fields);
+        $this->assertSame('2', $fields[5]);
+        $this->assertSame('0', $fields[6]);
+        $this->assertSame('2', $fields[7]);
+        $this->assertSame('0', $fields[8]);
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $fields[16]);
+
+        $binding = [
+            ...$pending,
+            'EXPECTED_BACKLOG_SNAPSHOT_SHA256' => $fields[14],
+            'EXPECTED_JOB_CLASS_COUNTS_SHA256' => $fields[16],
+            'EXPECTED_PENDING_TOTAL' => '2',
+        ];
+        $apply = $this->runControl('backlog_apply', $fields[2], '0', $binding);
+
+        $this->assertTrue($apply->isSuccessful(), $apply->getErrorOutput());
+        $this->assertSame("all_running\n", file_get_contents($this->temporaryDirectory.'/state'));
+    }
+
+    #[Test]
+    public function backlog_apply_fails_closed_when_the_pending_total_drifted(): void
+    {
+        $pending = [
+            'FAKE_HIGH_PENDING' => '0',
+            'FAKE_DEFAULT_PENDING' => '2',
+            'FAKE_REPORTS_PENDING' => '0',
+        ];
+        $preflight = $this->runControl('preflight', '', '0', $pending);
+        $fields = explode("\t", trim($preflight->getOutput()));
+
+        $apply = $this->runControl('backlog_apply', $fields[2], '0', [
+            'FAKE_HIGH_PENDING' => '0',
+            'FAKE_DEFAULT_PENDING' => '3',
+            'FAKE_REPORTS_PENDING' => '0',
+            'EXPECTED_BACKLOG_SNAPSHOT_SHA256' => $fields[14],
+            'EXPECTED_JOB_CLASS_COUNTS_SHA256' => $fields[16],
+            'EXPECTED_PENDING_TOTAL' => '2',
+        ]);
+
+        $this->assertFalse($apply->isSuccessful());
+        $this->assertStringContainsString(
+            'REQUIRED_QUEUE_CONTROL_FAILED:PENDING_TOTAL_DRIFT',
+            $apply->getErrorOutput(),
+        );
+        $this->assertSame("default_stopped\n", file_get_contents($this->temporaryDirectory.'/state'));
+    }
+
+    #[Test]
     public function workflow_binds_latest_main_receipt_and_has_no_unscoped_runtime_target(): void
     {
         $workflow = file_get_contents(
@@ -224,7 +283,7 @@ BASH);
             $workflow,
         );
         $this->assertStringContainsString(
-            '.contract_version == "backend.production_required_queue_runtime_control.v3"',
+            '.contract_version == "backend.production_required_queue_runtime_control.v4"',
             $workflow,
         );
         $this->assertStringContainsString(
@@ -233,6 +292,14 @@ BASH);
         );
         $this->assertStringContainsString(
             'restart only non-running fap-queue-default-high and fap-queue-reports workers',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            'required queue backlog recovery from preflight run',
+            $workflow,
+        );
+        $this->assertStringContainsString(
+            'App\\\\Jobs\\\\ProcessAttemptSubmissionJob',
             $workflow,
         );
         $this->assertStringContainsString(
@@ -270,6 +337,7 @@ BASH);
             'CLASS_B64',
             'CLASS_JSON',
             'CLASS_TOTAL',
+            'CLASS_HASH',
             'UNKNOWN_TOTAL',
         ] as $safeFailureCategory) {
             $this->assertStringContainsString(
@@ -304,11 +372,12 @@ BASH);
         string $mode,
         string $expectedStateSha256 = '',
         string $pendingTotal = '0',
+        array $environmentOverrides = [],
     ): Process {
         $process = new Process(
             ['bash', base_path('scripts/deploy/control_required_supervisor_programs.sh')],
             base_path(),
-            [
+            array_merge([
                 'MODE' => $mode,
                 'DEPLOY_PATH' => $this->temporaryDirectory.'/deploy',
                 'EXPECTED_ACTIVE_REVISION' => $this->releaseSha,
@@ -321,7 +390,7 @@ BASH);
                 'FAKE_DEFAULT_PENDING' => $pendingTotal,
                 'FAKE_REPORTS_PENDING' => $pendingTotal,
                 'PATH' => $this->temporaryDirectory.':'.getenv('PATH'),
-            ],
+            ], $environmentOverrides),
         );
         $process->setTimeout(10);
         $process->run();
