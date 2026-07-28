@@ -142,6 +142,19 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
         $this->assertStringNotContainsString('->save(', $source);
         $this->assertStringNotContainsString('->update(', $source);
         $this->assertStringNotContainsString('->create(', $source);
+        $this->assertStringContainsString(
+            'FM_ENNEAGRAM_AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'FM_ENNEAGRAM_AUTHORIZED_DISCOVERABILITY_FINGERPRINT',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256',
+            $source,
+        );
+        $this->assertStringContainsString('POST_READBACK_SNAPSHOT_DRIFT', $source);
     }
 
     #[Test]

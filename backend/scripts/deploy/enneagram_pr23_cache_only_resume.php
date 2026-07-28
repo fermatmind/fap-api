@@ -107,22 +107,22 @@ final class EnneagramPr23CacheOnlyResumeRunner
         $services = self::services();
         self::$failureStage = 'validate_promotion_state';
         $state = self::productionState($releaseReport, $bindings, $services['manifest']);
-        self::$failureStage = 'read_runtime_snapshot';
-        $snapshot = self::retryTransientRead(
-            static fn (): array => $services['readback']->snapshot(
-                $releaseReport,
-                $bindings['frontend_origin'],
-            ),
-        );
-        $safeState = $state;
-        unset($safeState['private_reviewer_names']);
-        $stateFingerprint = self::fingerprint([
-            'bindings' => $bindings,
-            'state' => $safeState,
-            'snapshot' => $snapshot,
-        ]);
 
         if ($mode === 'preflight') {
+            self::$failureStage = 'read_runtime_snapshot';
+            $snapshot = self::retryTransientRead(
+                static fn (): array => $services['readback']->snapshot(
+                    $releaseReport,
+                    $bindings['frontend_origin'],
+                ),
+            );
+            $safeState = $state;
+            unset($safeState['private_reviewer_names']);
+            $stateFingerprint = self::fingerprint([
+                'bindings' => $bindings,
+                'state' => $safeState,
+                'snapshot' => $snapshot,
+            ]);
             self::$failureStage = 'build_preflight_authorization';
             $phrase = self::authorizationPhrase(
                 (int) $bindings['preflight_run_id'],
@@ -148,12 +148,22 @@ final class EnneagramPr23CacheOnlyResumeRunner
             self::required($environment, 'FM_ENNEAGRAM_EXPECTED_STATE_FINGERPRINT'),
             'INVALID_EXPECTED_STATE_FINGERPRINT',
         );
-        if (! hash_equals(
-            self::required($environment, 'FM_ENNEAGRAM_EXPECTED_STATE_FINGERPRINT'),
-            $stateFingerprint,
-        )) {
-            throw new RuntimeException('STATE_FINGERPRINT_DRIFT');
-        }
+        $stateFingerprint = self::required(
+            $environment,
+            'FM_ENNEAGRAM_EXPECTED_STATE_FINGERPRINT',
+        );
+        $authorizedProjectionFingerprint = self::hash(self::required(
+            $environment,
+            'FM_ENNEAGRAM_AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT',
+        ));
+        $authorizedDiscoverabilityFingerprint = self::hash(self::required(
+            $environment,
+            'FM_ENNEAGRAM_AUTHORIZED_DISCOVERABILITY_FINGERPRINT',
+        ));
+        $authorizedUrlSetsSha256 = self::hash(self::required(
+            $environment,
+            'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256',
+        ));
         $expectedPhrase = self::authorizationPhrase(
             (int) $bindings['preflight_run_id'],
             (int) $bindings['preflight_run_attempt'],
@@ -213,7 +223,18 @@ final class EnneagramPr23CacheOnlyResumeRunner
                 $bindings['frontend_origin'],
             ),
         );
-        if (! hash_equals(self::fingerprint($snapshot), self::fingerprint($postSnapshot))) {
+        if (! hash_equals(
+            $authorizedProjectionFingerprint,
+            (string) $postSnapshot['public_projection_fingerprint'],
+        )
+            || ! hash_equals(
+                $authorizedDiscoverabilityFingerprint,
+                (string) $postSnapshot['stable_identity_discoverability_fingerprint'],
+            )
+            || ! hash_equals(
+                $authorizedUrlSetsSha256,
+                self::fingerprint($postSnapshot['url_sets']),
+            )) {
             throw new RuntimeException('POST_READBACK_SNAPSHOT_DRIFT');
         }
 
@@ -567,6 +588,9 @@ final class EnneagramPr23CacheOnlyResumeRunner
             'FM_ENNEAGRAM_API_ORIGIN',
             'FM_ENNEAGRAM_FRONTEND_ORIGIN',
             'FM_ENNEAGRAM_EXPECTED_STATE_FINGERPRINT',
+            'FM_ENNEAGRAM_AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT',
+            'FM_ENNEAGRAM_AUTHORIZED_DISCOVERABILITY_FINGERPRINT',
+            'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256',
             'FM_ENNEAGRAM_AUTHORIZATION_PHRASE',
         ];
         $environment = [];
