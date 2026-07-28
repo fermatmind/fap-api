@@ -200,6 +200,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq60_form_catalog(): void
+    {
+        $allowed = [
+            'backend/app/Services/Eq/Eq60FormCatalog.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_career_search_entry_quality_batch_01_files(): void
     {
         $allowed = [
@@ -10780,6 +10789,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Content/Eq60ContentCompileService.php',
             'backend/app/Services/Content/Eq60ContentLintService.php',
             'backend/app/Services/Content/Eq60PackLoader.php',
+            'backend/app/Services/Eq/Eq60FormCatalog.php',
             'backend/app/Services/Eq/EqCrossAssessmentContextGuard.php',
             'backend/app/Services/Report/Eq60ReportComposer.php',
             'backend/database/seeders/CiScalesRegistrySeeder.php',
