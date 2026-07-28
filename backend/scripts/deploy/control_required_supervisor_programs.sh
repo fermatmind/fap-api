@@ -225,7 +225,11 @@ try {
     sort($snapshotMaterial, SORT_STRING);
     $snapshotSha256 = hash('sha256', implode("\n", $snapshotMaterial));
     $classification = json_encode(
-        $classCounts,
+        [
+            'high' => (object) $classCounts['high'],
+            'default' => (object) $classCounts['default'],
+            'reports' => (object) $classCounts['reports'],
+        ],
         JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES,
     );
 
