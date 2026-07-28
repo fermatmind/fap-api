@@ -131,7 +131,8 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
             "'writes_committed' => self::\$frontendRevalidationCommitted",
             $source,
         );
-        $this->assertStringContainsString("->run(\n                'post',", $source);
+        $this->assertStringContainsString('$readbackService->run(', $source);
+        $this->assertStringContainsString("'post',", $source);
         $this->assertStringNotContainsString('->invalidatePreservingLkg(', $source);
         $this->assertStringNotContainsString('->warmAndVerifyFresh(', $source);
         $this->assertStringNotContainsString('EnneagramPublicAuthorityV224RuntimeCloseout', $source);
@@ -290,6 +291,62 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
                 static function (): void {},
             );
             $this->fail('URL-set contract drift must not be retried.');
+        } catch (RuntimeException) {
+            $this->assertSame(1, $attempts);
+        }
+    }
+
+    #[Test]
+    public function post_readback_retries_one_stale_while_revalidate_mismatch_but_not_permanent_errors(): void
+    {
+        $attempts = 0;
+        $pauses = 0;
+        $result = EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackBatch(
+            static function () use (&$attempts): string {
+                $attempts++;
+                if ($attempts === 1) {
+                    throw new RuntimeException(
+                        'Runtime readback mismatch: redacted-target:html_title_mismatch.',
+                    );
+                }
+
+                return 'ok';
+            },
+            static function () use (&$pauses): void {
+                $pauses++;
+            },
+        );
+
+        $this->assertSame('ok', $result);
+        $this->assertSame(2, $attempts);
+        $this->assertSame(1, $pauses);
+
+        $attempts = 0;
+        try {
+            EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackBatch(
+                static function () use (&$attempts): never {
+                    $attempts++;
+                    throw new RuntimeException(
+                        'Runtime readback mismatch: redacted-target:html_title_mismatch.',
+                    );
+                },
+                static function (): void {},
+            );
+            $this->fail('A persistent readback mismatch must fail after one retry.');
+        } catch (RuntimeException) {
+            $this->assertSame(2, $attempts);
+        }
+
+        $attempts = 0;
+        try {
+            EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackBatch(
+                static function () use (&$attempts): never {
+                    $attempts++;
+                    throw new RuntimeException('POST_READBACK_SNAPSHOT_DRIFT');
+                },
+                static function (): void {},
+            );
+            $this->fail('A non-readback-mismatch error must not be retried.');
         } catch (RuntimeException) {
             $this->assertSame(1, $attempts);
         }

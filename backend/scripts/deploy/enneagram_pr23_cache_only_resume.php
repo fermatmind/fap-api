@@ -446,6 +446,29 @@ final class EnneagramPr23CacheOnlyResumeRunner
         throw new RuntimeException('TRANSIENT_READ_RETRY_EXHAUSTED');
     }
 
+    public static function retryPostReadbackBatch(callable $operation, ?callable $pause = null): mixed
+    {
+        $pause ??= static function (): void {
+            usleep(1_000_000);
+        };
+
+        for ($attempt = 1; $attempt <= 2; $attempt++) {
+            try {
+                return $operation();
+            } catch (Throwable $exception) {
+                $isRetryable = $exception instanceof ConnectionException
+                    || ($exception instanceof RuntimeException
+                        && str_starts_with($exception->getMessage(), 'Runtime readback mismatch:'));
+                if (! $isRetryable || $attempt === 2) {
+                    throw $exception;
+                }
+                $pause();
+            }
+        }
+
+        throw new RuntimeException('POST_READBACK_RETRY_EXHAUSTED');
+    }
+
     private static function isTransientReadFailure(Throwable $throwable): bool
     {
         if ($throwable instanceof ConnectionException) {
@@ -625,16 +648,18 @@ final class EnneagramPr23CacheOnlyResumeRunner
         $batchReceipts = [];
         foreach (self::BATCH_NAMES as $batchName) {
             self::$failureStage = 'post_readback_'.$batchName;
-            $readback = $readbackService->run(
-                'post',
-                $batchName,
-                $releaseReport,
-                $bindings['api_origin'],
-                $bindings['frontend_origin'],
-                $bindings['backend_sha'],
-                $bindings['frontend_sha'],
-                false,
-                $privateReviewerNames,
+            $readback = self::retryPostReadbackBatch(
+                static fn (): array => $readbackService->run(
+                    'post',
+                    $batchName,
+                    $releaseReport,
+                    $bindings['api_origin'],
+                    $bindings['frontend_origin'],
+                    $bindings['backend_sha'],
+                    $bindings['frontend_sha'],
+                    false,
+                    $privateReviewerNames,
+                ),
             );
             $batchReceipts[] = self::safeReadbackReceipt($readback);
         }
