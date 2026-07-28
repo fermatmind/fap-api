@@ -64,9 +64,186 @@ read_status() {
 }
 
 queue_pending_counts() {
-  local probe=""
-  probe='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $targets=[["redis","high"],["redis","default"],["database","reports"]]; $sizes=[]; foreach($targets as [$connection,$name]){$size=Illuminate\Support\Facades\Queue::connection($connection)->size($name); if(!is_int($size)&&!ctype_digit((string)$size)){throw new RuntimeException("invalid size");} $sizes[]=(int)$size;} echo implode("\t",$sizes),PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
-  "$sudo_path" -n -u www-data "$php_path" -d display_errors=0 -r "$probe" "$current_release/backend" 2>/dev/null
+  "$sudo_path" -n -u www-data /usr/bin/env \
+    CURRENT_RELEASE_BACKEND="$current_release/backend" \
+    "$php_path" -d display_errors=0 2>/dev/null <<'PHP'
+<?php
+
+try {
+    $base = getenv('CURRENT_RELEASE_BACKEND');
+    if (! is_string($base) || $base === '') {
+        throw new RuntimeException('invalid base');
+    }
+
+    require $base.'/vendor/autoload.php';
+    $app = require $base.'/bootstrap/app.php';
+    $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+    $kernel->bootstrap();
+
+    $queueSizes = static function (): array {
+        $targets = [
+            'high' => ['redis', 'high'],
+            'default' => ['redis', 'default'],
+            'reports' => ['database_reports', 'reports'],
+        ];
+        $sizes = [];
+        foreach ($targets as $key => [$connection, $queue]) {
+            $size = Illuminate\Support\Facades\Queue::connection($connection)->size($queue);
+            if (! is_int($size) && ! ctype_digit((string) $size)) {
+                throw new RuntimeException('invalid size');
+            }
+            $sizes[$key] = (int) $size;
+        }
+
+        return $sizes;
+    };
+
+    $classify = static function (string $payload): string {
+        $decoded = json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
+        if (! is_array($decoded)) {
+            return 'UNKNOWN';
+        }
+        $candidates = [
+            $decoded['displayName'] ?? null,
+            $decoded['data']['commandName'] ?? null,
+            $decoded['job'] ?? null,
+        ];
+        foreach ($candidates as $candidate) {
+            if (is_string($candidate)
+                && preg_match('/\A[A-Za-z_][A-Za-z0-9_\\\\.]*\z/', $candidate) === 1) {
+                return $candidate;
+            }
+        }
+
+        return 'UNKNOWN';
+    };
+
+    $before = $queueSizes();
+    $payloads = ['high' => [], 'default' => [], 'reports' => []];
+    $createdAt = ['high' => [], 'default' => [], 'reports' => []];
+    $snapshotMaterial = [];
+
+    $redisConnection = (string) config('queue.connections.redis.connection', 'default');
+    if (preg_match('/\A[A-Za-z0-9_.-]+\z/', $redisConnection) !== 1) {
+        throw new RuntimeException('invalid redis connection');
+    }
+    $redis = Illuminate\Support\Facades\Redis::connection($redisConnection);
+    foreach (['high', 'default'] as $queue) {
+        foreach (['ready' => '', 'delayed' => ':delayed', 'reserved' => ':reserved'] as $bucket => $suffix) {
+            $key = 'queues:'.$queue.$suffix;
+            $items = $bucket === 'ready'
+                ? $redis->lrange($key, 0, -1)
+                : $redis->zrange($key, 0, -1);
+            if (! is_array($items)) {
+                throw new RuntimeException('invalid redis payload set');
+            }
+            foreach ($items as $payload) {
+                if (! is_string($payload)) {
+                    throw new RuntimeException('invalid redis payload');
+                }
+                $payloads[$queue][] = $payload;
+                $decoded = json_decode($payload, true);
+                $payloadCreatedAt = is_array($decoded) ? ($decoded['createdAt'] ?? null) : null;
+                if (is_int($payloadCreatedAt) || ctype_digit((string) $payloadCreatedAt)) {
+                    $createdAt[$queue][] = (int) $payloadCreatedAt;
+                }
+                $snapshotMaterial[] = $queue.'|'.$bucket.'|'.hash('sha256', $payload);
+            }
+        }
+    }
+
+    $reportsConfig = config('queue.connections.database_reports');
+    if (! is_array($reportsConfig)) {
+        throw new RuntimeException('invalid reports config');
+    }
+    $databaseConnection = $reportsConfig['connection'] ?? null;
+    $reportsTable = (string) ($reportsConfig['table'] ?? '');
+    $reportsQueue = (string) ($reportsConfig['queue'] ?? 'reports');
+    if (($databaseConnection !== null
+            && (! is_string($databaseConnection)
+                || preg_match('/\A[A-Za-z0-9_.-]+\z/', $databaseConnection) !== 1))
+        || preg_match('/\A[A-Za-z0-9_]+\z/', $reportsTable) !== 1
+        || preg_match('/\A[A-Za-z0-9_.-]+\z/', $reportsQueue) !== 1) {
+        throw new RuntimeException('invalid reports database config');
+    }
+
+    $database = Illuminate\Support\Facades\DB::connection($databaseConnection);
+    $database->listen(static function ($query): void {
+        $sql = ltrim((string) $query->sql);
+        if (preg_match('/\Aselect\b/i', $sql) !== 1) {
+            throw new RuntimeException('non-read query');
+        }
+    });
+    $rows = $database->table($reportsTable)
+        ->where('queue', $reportsQueue)
+        ->orderBy('id')
+        ->get(['payload', 'created_at']);
+    foreach ($rows as $row) {
+        $payload = $row->payload ?? null;
+        if (! is_string($payload)) {
+            throw new RuntimeException('invalid database payload');
+        }
+        $payloads['reports'][] = $payload;
+        $timestamp = $row->created_at ?? null;
+        if (is_int($timestamp) || ctype_digit((string) $timestamp)) {
+            $createdAt['reports'][] = (int) $timestamp;
+        }
+        $snapshotMaterial[] = 'reports|ready|'.hash('sha256', $payload);
+    }
+
+    $after = $queueSizes();
+    if ($before !== $after) {
+        throw new RuntimeException('queue size drift');
+    }
+    foreach ($before as $queue => $count) {
+        if (count($payloads[$queue]) !== $count) {
+            throw new RuntimeException('payload count drift');
+        }
+    }
+
+    $classCounts = ['high' => [], 'default' => [], 'reports' => []];
+    $unknownClassCount = 0;
+    foreach ($payloads as $queue => $items) {
+        foreach ($items as $payload) {
+            try {
+                $class = $classify($payload);
+            } catch (Throwable) {
+                $class = 'UNKNOWN';
+            }
+            $classCounts[$queue][$class] = ($classCounts[$queue][$class] ?? 0) + 1;
+            if ($class === 'UNKNOWN') {
+                $unknownClassCount++;
+            }
+        }
+        ksort($classCounts[$queue], SORT_STRING);
+    }
+
+    $timestamps = array_merge(...array_values($createdAt));
+    $oldestPendingSeconds = 0;
+    if ($timestamps !== []) {
+        $oldestPendingSeconds = max(0, time() - min($timestamps));
+    }
+    sort($snapshotMaterial, SORT_STRING);
+    $snapshotSha256 = hash('sha256', implode("\n", $snapshotMaterial));
+    $classification = json_encode(
+        $classCounts,
+        JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES,
+    );
+
+    echo implode("\t", [
+        $before['high'],
+        $before['default'],
+        $before['reports'],
+        $unknownClassCount,
+        $oldestPendingSeconds,
+        $snapshotSha256,
+        base64_encode($classification),
+    ]), PHP_EOL;
+} catch (Throwable) {
+    echo 'PROBE_FAILED', PHP_EOL;
+    exit(1);
+}
+PHP
 }
 
 snapshot() {
@@ -131,20 +308,26 @@ status_before="$(read_status)"
 state_material_before="$(snapshot "$status_before")"
 foreign_before="$(foreign_fingerprint "$status_before")"
 pending_counts="$(queue_pending_counts)"
-IFS=$'\t' read -r high_pending default_pending reports_pending <<<"$pending_counts"
+IFS=$'\t' read -r high_pending default_pending reports_pending unknown_class_count oldest_pending_seconds backlog_snapshot_sha256 job_class_counts_b64 <<<"$pending_counts"
 [[ "$high_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
 [[ "$default_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
 [[ "$reports_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
+[[ "$unknown_class_count" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
+[[ "$oldest_pending_seconds" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
+[[ "$backlog_snapshot_sha256" =~ ^[0-9a-f]{64}$ ]] || fail QUEUE_PROBE
+[[ "$job_class_counts_b64" =~ ^[A-Za-z0-9+/=]+$ ]] || fail QUEUE_PROBE
 pending_total=$((high_pending + default_pending + reports_pending))
 [[ "$pending_total" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
+(( unknown_class_count <= pending_total )) || fail QUEUE_PROBE
 if [[ "$mode" == "apply" && "$pending_total" != "0" ]]; then
   fail QUEUE_BACKLOG_PRESENT
 fi
 target_set_sha256="$(printf '%s\n' "${programs[@]}" | sha256sum | awk '{print $1}')"
 state_sha256="$(
-  printf '%s\n%s\n%s\n%s\n%s\n%s\n%s\n' \
+  printf '%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n' \
     "$active_revision" "$target_set_sha256" "$high_pending" "$default_pending" \
-    "$reports_pending" "$foreign_before" "$state_material_before" \
+    "$reports_pending" "$unknown_class_count" "$backlog_snapshot_sha256" \
+    "$foreign_before" "$state_material_before" \
     | sha256sum | awk '{print $1}'
 )"
 
@@ -162,10 +345,12 @@ if [[ "$mode" == "preflight" ]]; then
   if [[ "$convergence_required" == true && "$pending_total" == "0" ]]; then
     apply_supported=true
   fi
-  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
     "$active_revision" "$target_set_sha256" "$state_sha256" "$default_state" \
     "$reports_state" "$pending_total" "$high_pending" "$default_pending" \
-    "$reports_pending" "$convergence_required" "$apply_supported" "$foreign_before"
+    "$reports_pending" "$convergence_required" "$apply_supported" "$foreign_before" \
+    "$unknown_class_count" "$oldest_pending_seconds" "$backlog_snapshot_sha256" \
+    "$job_class_counts_b64"
   exit 0
 fi
 
