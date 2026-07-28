@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Sre;
 
 use FermatMind\Deploy\EnneagramPr23CacheOnlyResumeRunner;
+use Illuminate\Http\Client\ConnectionException;
 use PHPUnit\Framework\Attributes\Test;
+use RuntimeException;
 use Tests\TestCase;
 
 require_once __DIR__.'/../../scripts/deploy/enneagram_pr23_cache_only_resume.php';
@@ -140,5 +142,44 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
         $this->assertStringNotContainsString('->save(', $source);
         $this->assertStringNotContainsString('->update(', $source);
         $this->assertStringNotContainsString('->create(', $source);
+    }
+
+    #[Test]
+    public function transient_snapshot_reads_retry_twice_but_permanent_failures_do_not_retry(): void
+    {
+        $attempts = 0;
+        $pauses = 0;
+        $result = EnneagramPr23CacheOnlyResumeRunner::retryTransientRead(
+            static function () use (&$attempts): string {
+                $attempts++;
+                if ($attempts < 3) {
+                    throw new ConnectionException('redacted transient read failure');
+                }
+
+                return 'ok';
+            },
+            static function () use (&$pauses): void {
+                $pauses++;
+            },
+        );
+
+        $this->assertSame('ok', $result);
+        $this->assertSame(3, $attempts);
+        $this->assertSame(2, $pauses);
+
+        $attempts = 0;
+        try {
+            EnneagramPr23CacheOnlyResumeRunner::retryTransientRead(
+                static function () use (&$attempts): never {
+                    $attempts++;
+                    throw new RuntimeException('permanent');
+                },
+                static function (): void {},
+            );
+            $this->fail('Permanent failures must not be retried.');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('permanent', $exception->getMessage());
+        }
+        $this->assertSame(1, $attempts);
     }
 }
