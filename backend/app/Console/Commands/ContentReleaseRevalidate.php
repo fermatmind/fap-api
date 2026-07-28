@@ -6,6 +6,8 @@ namespace App\Console\Commands;
 
 use App\Filament\Ops\Support\ContentReleaseFollowUp;
 use App\Models\Article;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ContentReleasePathPlanner;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -17,6 +19,10 @@ final class ContentReleaseRevalidate extends Command
         {--article-id= : Article id when --type=article}
         {--article-ids= : Comma-separated article ids when --type=article-taxonomy}
         {--expected-slugs= : Comma-separated expected slugs in article-id order for identity locks}
+        {--expected-published-revision-ids= : Comma-separated published revision ids in article-id order}
+        {--expected-state-sha256= : Execute-only exact taxonomy state SHA256}
+        {--expected-content-set-sha256= : Execute-only exact published content-set SHA256}
+        {--require-state-lock : Require revision, state, and content locks for taxonomy revalidation}
         {--include-index= : Article index path to include for taxonomy-only revalidation}
         {--source=manual_revalidate : Safe audit/source label}
         {--dry-run : Plan paths without posting to configured revalidation endpoints}
@@ -114,6 +120,14 @@ final class ContentReleaseRevalidate extends Command
     {
         $articleIds = $this->integerList((string) $this->option('article-ids'), 'article_ids', $issues);
         $expectedSlugs = $this->stringList((string) $this->option('expected-slugs'));
+        $expectedPublishedRevisionIds = $this->integerList(
+            (string) $this->option('expected-published-revision-ids'),
+            'expected_published_revision_ids',
+            $issues,
+        );
+        $expectedStateSha256 = trim((string) $this->option('expected-state-sha256'));
+        $expectedContentSetSha256 = trim((string) $this->option('expected-content-set-sha256'));
+        $requireStateLock = (bool) $this->option('require-state-lock');
         $includeIndex = trim((string) $this->option('include-index'));
 
         if ($articleIds === []) {
@@ -121,6 +135,18 @@ final class ContentReleaseRevalidate extends Command
         }
         if ($expectedSlugs !== [] && count($expectedSlugs) !== count($articleIds)) {
             $issues[] = 'expected_slug_count_mismatch';
+        }
+        if ($expectedPublishedRevisionIds !== [] && count($expectedPublishedRevisionIds) !== count($articleIds)) {
+            $issues[] = 'expected_published_revision_id_count_mismatch';
+        }
+        if ($requireStateLock && count($expectedPublishedRevisionIds) !== count($articleIds)) {
+            $issues[] = 'expected_published_revision_ids_required';
+        }
+        if ($requireStateLock && $execute && ! $this->isSha256($expectedStateSha256)) {
+            $issues[] = 'expected_state_sha256_required';
+        }
+        if ($requireStateLock && $execute && ! $this->isSha256($expectedContentSetSha256)) {
+            $issues[] = 'expected_content_set_sha256_required';
         }
         if ($includeIndex === '') {
             $issues[] = 'include_index_required';
@@ -141,11 +167,16 @@ final class ContentReleaseRevalidate extends Command
             : [];
         $indexLocale = str_starts_with($includeIndex, '/zh/') ? 'zh' : (str_starts_with($includeIndex, '/en/') ? 'en' : null);
         $articleSummaries = [];
+        $contentRows = [];
+        $stateRows = [];
 
         foreach ($articles as $index => $article) {
             $slug = trim((string) $article->slug);
             $locale = $this->localeSegment((string) $article->locale);
             $expectedSlug = $expectedSlugs[$index] ?? null;
+            $expectedPublishedRevisionId = $expectedPublishedRevisionIds[$index] ?? null;
+            $publishedRevision = $article->publishedRevision;
+            $seoMeta = $article->seoMeta;
 
             if ($expectedSlug !== null && $slug !== $expectedSlug) {
                 $issues[] = 'expected_slug_mismatch';
@@ -156,38 +187,113 @@ final class ContentReleaseRevalidate extends Command
             if ($indexLocale !== null && $locale !== $indexLocale) {
                 $issues[] = 'include_index_locale_mismatch';
             }
+            if ($expectedPublishedRevisionId !== null
+                && (int) ($article->published_revision_id ?? 0) !== $expectedPublishedRevisionId) {
+                $issues[] = 'expected_published_revision_id_mismatch';
+            }
+            if ($requireStateLock) {
+                if ((string) $article->status !== 'published' || ! (bool) $article->is_public) {
+                    $issues[] = 'article_not_publicly_published';
+                }
+                if (! $publishedRevision instanceof ArticleTranslationRevision
+                    || (int) $publishedRevision->article_id !== (int) $article->id
+                    || (int) $publishedRevision->org_id !== (int) $article->org_id
+                    || (string) $publishedRevision->locale !== (string) $article->locale
+                    || (string) $publishedRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+                    $issues[] = 'published_revision_lock_invalid';
+                }
+                if (! $seoMeta instanceof ArticleSeoMeta) {
+                    $issues[] = 'seo_meta_missing';
+                }
+                if ($publishedRevision instanceof ArticleTranslationRevision
+                    && (
+                        (string) $article->title !== (string) $publishedRevision->title
+                        || (string) $article->excerpt !== (string) $publishedRevision->excerpt
+                        || (string) $article->content_md !== (string) $publishedRevision->content_md
+                        || (string) ($seoMeta?->seo_title ?? '') !== (string) $publishedRevision->seo_title
+                        || (string) ($seoMeta?->seo_description ?? '') !== (string) $publishedRevision->seo_description
+                    )) {
+                    $issues[] = 'published_projection_content_mismatch';
+                }
+            }
 
             if ($slug !== '' && $this->isCanonicalSlug($slug)) {
                 $paths[] = "/{$locale}/articles/{$slug}";
             }
 
+            $contentRow = [
+                'article_id' => (int) $article->id,
+                'published_revision_id' => (int) ($article->published_revision_id ?? 0),
+                'title_sha256' => $this->valueHash((string) $article->title),
+                'excerpt_sha256' => $this->valueHash((string) $article->excerpt),
+                'content_sha256' => $this->valueHash((string) $article->content_md),
+                'seo_title_sha256' => $this->valueHash((string) ($seoMeta?->seo_title ?? '')),
+                'seo_description_sha256' => $this->valueHash((string) ($seoMeta?->seo_description ?? '')),
+            ];
+            $contentRows[] = $contentRow;
+            $stateRows[] = $contentRow + [
+                'slug' => $slug,
+                'locale' => (string) $article->locale,
+                'translation_group_id' => (string) $article->translation_group_id,
+                'working_revision_id' => (int) ($article->working_revision_id ?? 0),
+                'article_status' => (string) $article->status,
+                'published_revision_status' => $publishedRevision instanceof ArticleTranslationRevision
+                    ? (string) $publishedRevision->revision_status
+                    : null,
+                'is_public' => (bool) $article->is_public,
+                'is_indexable' => (bool) $article->is_indexable,
+                'sitemap_eligible' => (bool) $article->sitemap_eligible,
+                'llms_eligible' => (bool) $article->llms_eligible,
+                'canonical_sha256' => $this->valueHash((string) ($seoMeta?->canonical_url ?? '')),
+                'robots' => (string) ($seoMeta?->robots ?? ''),
+                'seo_is_indexable' => (bool) ($seoMeta?->is_indexable ?? false),
+            ];
             $articleSummaries[] = [
                 'id' => (int) $article->id,
                 'slug' => $slug,
                 'locale' => (string) $article->locale,
+                'published_revision_id' => (int) ($article->published_revision_id ?? 0),
                 'canonical_path' => $slug !== '' && $this->isCanonicalSlug($slug) ? "/{$locale}/articles/{$slug}" : null,
             ];
         }
 
         $paths = array_values(array_unique($paths));
+        $stateSha256 = $this->deterministicHash($stateRows);
+        $contentSetSha256 = $this->deterministicHash($contentRows);
+        if ($requireStateLock && $execute && $this->isSha256($expectedStateSha256)
+            && ! hash_equals($expectedStateSha256, $stateSha256)) {
+            $issues[] = 'expected_state_sha256_mismatch';
+        }
+        if ($requireStateLock && $execute && $this->isSha256($expectedContentSetSha256)
+            && ! hash_equals($expectedContentSetSha256, $contentSetSha256)) {
+            $issues[] = 'expected_content_set_sha256_mismatch';
+        }
         $issues = $this->validateExecuteRuntime($execute, $issues);
         $ok = $issues === [];
         $action = $execute ? 'taxonomy_only_revalidation_dispatched' : 'would_revalidate_article_taxonomy_paths';
 
+        if ($ok && $execute) {
+            try {
+                ContentReleaseFollowUp::dispatchExplicitPaths(
+                    'article-taxonomy',
+                    $this->taxonomyBatchRecord($articleIds, $indexLocale ?? 'zh'),
+                    $paths,
+                    $this->safeSource(),
+                    Request::create('/ops/content-release/revalidate-command', 'POST'),
+                    [
+                        'article_ids' => $articleIds,
+                        'path_scope' => 'taxonomy_only',
+                    ],
+                    broadcast: false,
+                    throwOnFailure: true,
+                );
+            } catch (\Throwable) {
+                $issues[] = 'revalidation_dispatch_failed';
+                $ok = false;
+            }
+        }
         if (! $ok) {
             $action = 'will_skip';
-        } elseif ($execute) {
-            ContentReleaseFollowUp::dispatchExplicitPaths(
-                'article-taxonomy',
-                $this->taxonomyBatchRecord($articleIds, $indexLocale ?? 'zh'),
-                $paths,
-                $this->safeSource(),
-                Request::create('/ops/content-release/revalidate-command', 'POST'),
-                [
-                    'article_ids' => $articleIds,
-                    'path_scope' => 'taxonomy_only',
-                ]
-            );
         }
 
         return $this->baseSummary($ok, $dryRun, $action, 'article-taxonomy', $paths, $issues) + [
@@ -195,10 +301,16 @@ final class ContentReleaseRevalidate extends Command
             'article_ids' => $articleIds,
             'articles' => $articleSummaries,
             'include_index' => $includeIndex !== '' ? $includeIndex : null,
+            'state_lock_required' => $requireStateLock,
+            'state_sha256' => $stateSha256,
+            'content_set_sha256' => $contentSetSha256,
             'allowed_path_scope' => 'taxonomy_only',
             'excluded_path_classes' => ['home', 'llms', 'topics', 'tests', 'search', 'schema_hreflang', 'sitemap'],
             'sitemap_llms_mutation_attempted' => false,
             'schema_hreflang_write_attempted' => false,
+            'broadcast_attempted' => false,
+            'cms_authority_write_count' => 0,
+            'database_authority_write_count' => 0,
         ];
     }
 
@@ -319,6 +431,27 @@ final class ContentReleaseRevalidate extends Command
     private function isCanonicalSlug(string $slug): bool
     {
         return preg_match('/^[a-z0-9][a-z0-9-]*$/', $slug) === 1;
+    }
+
+    private function isSha256(string $value): bool
+    {
+        return preg_match('/^[0-9a-f]{64}$/', $value) === 1;
+    }
+
+    private function valueHash(string $value): string
+    {
+        return hash('sha256', preg_replace("/\r\n?/", "\n", trim($value)));
+    }
+
+    private function deterministicHash(mixed $value): string
+    {
+        return hash(
+            'sha256',
+            (string) json_encode(
+                $value,
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE,
+            ),
+        );
     }
 
     /**

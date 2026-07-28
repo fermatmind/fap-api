@@ -6,6 +6,7 @@ namespace Tests\Feature\Console;
 
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
@@ -211,6 +212,138 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         });
     }
 
+    public function test_state_locked_taxonomy_revalidation_binds_published_revision_and_content_hashes(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        config()->set('ops.content_release_observability.broadcast_webhook', 'https://broadcast.example.test/hook');
+        Http::fake([
+            'https://cache.example.test/*' => Http::response(['ok' => true], 200),
+            'https://broadcast.example.test/*' => Http::response(['ok' => true], 200),
+        ]);
+
+        $article = $this->articleWithSeoMeta('zh-CN', [], 'taxonomy-locked');
+        $revision = $this->attachPublishedRevision($article);
+
+        $preflightExit = Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => (string) $article->id,
+            '--expected-slugs' => 'taxonomy-locked',
+            '--expected-published-revision-ids' => (string) $revision->id,
+            '--require-state-lock' => true,
+            '--include-index' => '/zh/articles',
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $preflight = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(0, $preflightExit, Artisan::output());
+        $this->assertTrue((bool) ($preflight['state_lock_required'] ?? false));
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) ($preflight['state_sha256'] ?? ''));
+        $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) ($preflight['content_set_sha256'] ?? ''));
+        $this->assertSame(0, $preflight['cms_authority_write_count'] ?? null);
+        Http::assertNothingSent();
+
+        $applyExit = Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => (string) $article->id,
+            '--expected-slugs' => 'taxonomy-locked',
+            '--expected-published-revision-ids' => (string) $revision->id,
+            '--expected-state-sha256' => (string) $preflight['state_sha256'],
+            '--expected-content-set-sha256' => (string) $preflight['content_set_sha256'],
+            '--require-state-lock' => true,
+            '--include-index' => '/zh/articles',
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $apply = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(0, $applyExit, Artisan::output());
+        $this->assertSame('taxonomy_only_revalidation_dispatched', $apply['action'] ?? null);
+        $this->assertSame((string) $preflight['state_sha256'], $apply['state_sha256'] ?? null);
+        $this->assertSame((string) $preflight['content_set_sha256'], $apply['content_set_sha256'] ?? null);
+        Http::assertSentCount(1);
+        Http::assertNotSent(static fn ($request): bool => str_contains($request->url(), 'broadcast.example.test'));
+    }
+
+    public function test_state_locked_taxonomy_revalidation_fails_closed_on_projection_drift(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake();
+
+        $article = $this->articleWithSeoMeta('zh-CN', [], 'taxonomy-drift');
+        $revision = $this->attachPublishedRevision($article);
+
+        Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => (string) $article->id,
+            '--expected-slugs' => 'taxonomy-drift',
+            '--expected-published-revision-ids' => (string) $revision->id,
+            '--require-state-lock' => true,
+            '--include-index' => '/zh/articles',
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $preflight = $this->jsonOutput(Artisan::output());
+
+        $article->forceFill(['content_md' => 'drifted public projection'])->save();
+
+        $exitCode = Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => (string) $article->id,
+            '--expected-slugs' => 'taxonomy-drift',
+            '--expected-published-revision-ids' => (string) $revision->id,
+            '--expected-state-sha256' => (string) $preflight['state_sha256'],
+            '--expected-content-set-sha256' => (string) $preflight['content_set_sha256'],
+            '--require-state-lock' => true,
+            '--include-index' => '/zh/articles',
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertContains('published_projection_content_mismatch', $payload['issues'] ?? []);
+        $this->assertContains('expected_state_sha256_mismatch', $payload['issues'] ?? []);
+        $this->assertContains('expected_content_set_sha256_mismatch', $payload['issues'] ?? []);
+        Http::assertNothingSent();
+    }
+
+    public function test_taxonomy_revalidation_fails_closed_when_frontend_rejects_the_signal(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake([
+            'https://cache.example.test/*' => Http::response(['ok' => false], 503),
+        ]);
+
+        $article = $this->articleWithSeoMeta('zh-CN', [], 'taxonomy-rejected');
+
+        $exitCode = Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => (string) $article->id,
+            '--expected-slugs' => 'taxonomy-rejected',
+            '--include-index' => '/zh/articles',
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertSame('will_skip', $payload['action'] ?? null);
+        $this->assertContains('revalidation_dispatch_failed', $payload['issues'] ?? []);
+        Http::assertSentCount(1);
+    }
+
     public function test_article_taxonomy_blocks_slug_lock_mismatch_without_posting(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
@@ -300,6 +433,33 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         ]);
 
         return $article->fresh(['seoMeta']) ?? $article;
+    }
+
+    private function attachPublishedRevision(Article $article): ArticleTranslationRevision
+    {
+        $seoMeta = $article->seoMeta()->firstOrFail();
+        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
+            'org_id' => (int) $article->org_id,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => (string) $article->locale,
+            'source_locale' => (string) $article->locale,
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => (string) $article->title,
+            'excerpt' => (string) $article->excerpt,
+            'content_md' => (string) $article->content_md,
+            'seo_title' => (string) $seoMeta->seo_title,
+            'seo_description' => (string) $seoMeta->seo_description,
+            'published_at' => now(),
+        ]);
+        $article->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'published_revision_id' => (int) $revision->id,
+        ])->save();
+
+        return $revision;
     }
 
     /**

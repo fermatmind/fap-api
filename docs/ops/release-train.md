@@ -570,3 +570,21 @@ This recovery lane never imports working revisions, binds review evidence,
 promotes or rolls back pointers, invalidates or warms backend caches, deploys,
 migrates, restarts queues/services, mutates CMS/database authority, or reruns
 PR23. Failure after the HMAC request stops without automatic rollback.
+
+## SEO 13 article page revalidation
+
+After the exact 13 approved SEO article revisions have been atomically promoted
+and public readback reports stale frontend HTML, use the protected
+`SEO 13 Article Revalidation Production Ops` workflow. Its `preflight` mode is
+read-only and locks the latest active backend release, the fixed article IDs,
+slugs, published revision IDs, public projection state SHA, and published
+content-set SHA.
+
+Its separately authorized `apply` mode rechecks that immutable receipt and may
+send one taxonomy-only cache signal containing exactly `/zh/articles` plus the
+13 Chinese article detail paths. It suppresses the generic content-release
+broadcast webhook and does not change CMS/database authority, publication,
+schema, hreflang, sitemap or llms eligibility/cache, Search Channel, GSC, URL
+Inspection, deployment, migration, symlink, or queue state. After apply, rerun
+the complete public article verifier before opening any later schema or
+discoverability gate.
