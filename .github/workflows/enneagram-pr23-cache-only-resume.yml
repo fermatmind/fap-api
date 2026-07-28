@@ -298,6 +298,17 @@ jobs:
              and .state_fingerprint_sha256 == $state
              and .authorization_phrase == $phrase
              and .writes_committed == false' "$receipt" >/dev/null
+          authorized_projection="$(jq -r '.public_projection_fingerprint' "$receipt")"
+          authorized_discoverability="$(
+            jq -r '.stable_identity_discoverability_fingerprint' "$receipt"
+          )"
+          authorized_url_sets="$(jq -r '.url_sets_sha256' "$receipt")"
+          [[ "$authorized_projection" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$authorized_discoverability" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$authorized_url_sets" =~ ^[0-9a-f]{64}$ ]]
+          echo "AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT=$authorized_projection" >> "$GITHUB_ENV"
+          echo "AUTHORIZED_DISCOVERABILITY_FINGERPRINT=$authorized_discoverability" >> "$GITHUB_ENV"
+          echo "AUTHORIZED_URL_SETS_SHA256=$authorized_url_sets" >> "$GITHUB_ENV"
 
       - name: Reject intervening cache-only execute runs
         if: inputs.mode == 'execute'
@@ -383,6 +394,9 @@ jobs:
             printf 'FM_ENNEAGRAM_API_ORIGIN=%q ' "$API_ORIGIN"
             printf 'FM_ENNEAGRAM_FRONTEND_ORIGIN=%q ' "$FRONTEND_ORIGIN"
             printf 'FM_ENNEAGRAM_EXPECTED_STATE_FINGERPRINT=%q ' "$EXPECTED_STATE_FINGERPRINT_SHA256"
+            printf 'FM_ENNEAGRAM_AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT=%q ' "${AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT:-}"
+            printf 'FM_ENNEAGRAM_AUTHORIZED_DISCOVERABILITY_FINGERPRINT=%q ' "${AUTHORIZED_DISCOVERABILITY_FINGERPRINT:-}"
+            printf 'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256=%q ' "${AUTHORIZED_URL_SETS_SHA256:-}"
             printf 'FM_ENNEAGRAM_AUTHORIZATION_PHRASE=%q ' "$AUTHORIZATION_PHRASE"
             printf '/usr/bin/timeout 5400 /usr/bin/php'
           )"

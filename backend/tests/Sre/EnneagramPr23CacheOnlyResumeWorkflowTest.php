@@ -73,6 +73,15 @@ final class EnneagramPr23CacheOnlyResumeWorkflowTest extends TestCase
         $this->assertStringContainsString('.html_read_count == 116', $source);
         $this->assertStringContainsString('.backend_cache_invalidation_committed == false', $source);
         $this->assertStringContainsString('.pr23_rerun == false', $source);
+        $this->assertStringContainsString(
+            'AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT',
+            $source,
+        );
+        $this->assertStringContainsString(
+            'AUTHORIZED_DISCOVERABILITY_FINGERPRINT',
+            $source,
+        );
+        $this->assertStringContainsString('AUTHORIZED_URL_SETS_SHA256', $source);
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $source);
         $this->assertStringNotContainsString('supervisorctl', $source);
         $this->assertStringNotContainsString('deploy:symlink', $source);
