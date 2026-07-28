@@ -281,6 +281,60 @@ Required acceptance:
 - Big Five article descriptions no longer expose the forbidden review marker;
 - the six prior `Evidence Note**` rendering artifacts are absent.
 
+## Production stage 6: page revalidation and schema release
+
+Page revalidation and schema release are two separate receipt-bound phases.
+Neither phase changes publication, sitemap/llms eligibility, or search
+submission.
+
+First use
+`.github/workflows/seo-13-article-revalidation-production-ops.yml`. Its
+read-only preflight binds the 13 new published revision IDs, exact public
+content hashes, and the 14 allowed frontend paths (`/zh/articles` plus the 13
+detail routes). Apply dispatches only those revalidation paths. After it
+passes, repeat the complete public readback before any schema operation.
+
+Then use
+`.github/workflows/seo-13-article-schema-release-production-ops.yml`. Its
+preflight executes `articles:seo13-schema-release --dry-run --json` against
+the exact active latest-main release. For every target it:
+
+- locks article ID, slug, `zh-CN` locale, translation group, canonical, and
+  the expected new published revision ID;
+- proves Article projection and SEO fields match that published revision;
+- parses only the visible `## 常见问题` section from published Markdown;
+- binds four to eight visible question/answer pairs without including their
+  text in the production artifact;
+- derives visible author, reviewer, review timestamp, and reference-source
+  provenance for the two Big Five published revisions from their locked
+  review fields and visible `## 参考来源` sections;
+- validates Article and Breadcrumb authority fragments plus FAQPage parity;
+- verifies the hreflang gate is not enabled;
+- binds state, content-set, target-set, FAQ-set, sitemap eligibility, and
+  llms eligibility fingerprints.
+
+Apply requires the exact phrase emitted by that preflight. One database
+transaction updates exactly 13 `article_seo_meta.schema_json` rows, binds
+`created_by` and `authority_metadata_json` on exactly two Big Five published
+revisions, and writes one private audit record. It enables Article,
+Breadcrumb, and visible FAQ schema together. No title, excerpt, body, SEO
+field, revision state, reviewer, or publication timestamp changes. Any
+identity, revision, content, canonical, visible FAQ, Big Five provenance,
+JSON-LD, hash, or readback failure rolls back all 15 authority/schema writes.
+It does not change hreflang, publication, indexability,
+revalidation, sitemap/llms eligibility or cache state, Search Channel, GSC,
+URL Inspection, queues, or deployment.
+
+The receipt-bound operator phrase has this form:
+
+```text
+I explicitly approve SEO 13 atomic schema release for SHA <RELEASE_SHA> release <RELEASE_NAME> preflight run <RUN_ID> attempt <ATTEMPT> state <STATE_SHA> content set <CONTENT_SET_SHA> target set <TARGET_SET_SHA>; bind visible provenance for exactly 2 Big Five published revisions, enable Article, Breadcrumb, and visible FAQ schema for exactly 13 published revisions, and keep hreflang, publication, revalidation, sitemap eligibility, llms eligibility, sitemap cache, llms cache, search, GSC, URL Inspection, and deploy held.
+```
+
+Hreflang remains held for this cohort. No English article or reciprocal
+alternate is modified. The final closeout records
+`no_verified_reciprocal_counterpart`.
+
 Run read-only closeout per article:
 
 ```bash
