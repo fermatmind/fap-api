@@ -616,3 +616,24 @@ and cache refresh, Search Channel, GSC, URL Inspection, queues, migrations,
 symlink activation, and deployment held. Any failed target rolls back all 13
 schema writes. Hreflang remains disabled with
 `no_verified_reciprocal_counterpart` deferred to closeout.
+
+## SEO 13 article derived discoverability cache refresh
+
+Use
+`.github/workflows/seo-13-article-discoverability-cache-refresh-production-ops.yml`
+only after the separate page-revalidation, public readback, and schema-release
+receipts pass for all 13 SEO targets. Preflight is read-only and requires the
+exact latest active backend release, the fixed published revision set, complete
+schema release, unchanged sitemap/llms eligibility, configured bounded frontend
+revalidation, and exact-once canonical projection in both sitemap and llms
+source sets.
+
+Apply is separately authorized by the exact phrase emitted in the immutable
+preflight artifact. It may invalidate only the six named sitemap/llms derived
+cache keys, warm the sitemap source, XML/ETag, llms and llms-full bodies, and
+revalidate only `/sitemap.xml`, `/llms.txt`, and `/llms-full.txt`. Public
+readback requires all 13 canonicals exactly once on all three surfaces.
+
+This cache-only lane never changes CMS/database authority, publication,
+schema, hreflang, sitemap/llms eligibility, Search Channel, GSC, URL
+Inspection, queue state, migrations, symlink activation, or deployment.

@@ -335,6 +335,39 @@ Hreflang remains held for this cohort. No English article or reciprocal
 alternate is modified. The final closeout records
 `no_verified_reciprocal_counterpart`.
 
+## Production stage 7: derived discoverability cache refresh
+
+Only after page revalidation, complete public readback, and the atomic schema
+release pass for all 13 targets, use
+`.github/workflows/seo-13-article-discoverability-cache-refresh-production-ops.yml`.
+This is a cache-only receipt-bound phase. Its read-only preflight requires the
+exact 13 published revision IDs, all three schema gates released, unchanged
+sitemap/llms eligibility, and each locked canonical appearing exactly once in
+both the live sitemap source projection and llms source projection.
+
+Apply downloads and validates that immutable receipt, rechecks the active
+latest-main release and all three authority hashes, then invalidates only:
+
+- `seo:sitemap-source:v1:fresh`;
+- `seo:sitemap-source:v1:stale`;
+- `seo:sitemap:xml:v6`;
+- `seo:sitemap:etag:v6`;
+- `seo:llms-txt:v1:body`;
+- `seo:llms-full-txt:v1:body`.
+
+It immediately warms the sitemap source, sitemap XML/ETag, `llms.txt`, and
+`llms-full.txt`, then revalidates only `/sitemap.xml`, `/llms.txt`, and
+`/llms-full.txt` on the frontend. Final readback requires every one of the 13
+canonicals to appear exactly once in each public surface. The phase performs
+no CMS/database-authority, publication, schema, hreflang, eligibility, search,
+GSC, URL Inspection, queue, migration, symlink, or deploy write.
+
+The receipt-bound operator phrase has this form:
+
+```text
+I explicitly approve SEO 13 discoverability cache refresh for SHA <RELEASE_SHA> release <RELEASE_NAME> preflight run <RUN_ID> attempt <ATTEMPT> state <STATE_SHA> content set <CONTENT_SET_SHA> target set <TARGET_SET_SHA>; refresh only six backend sitemap/llms cache keys and frontend /sitemap.xml, /llms.txt, /llms-full.txt, keep CMS authority, publication, schema, hreflang, sitemap eligibility, llms eligibility, search, GSC, URL Inspection, queue, and deploy held.
+```
+
 Run read-only closeout per article:
 
 ```bash
