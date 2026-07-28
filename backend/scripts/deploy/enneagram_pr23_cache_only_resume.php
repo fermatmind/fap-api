@@ -475,6 +475,34 @@ final class EnneagramPr23CacheOnlyResumeRunner
         throw new RuntimeException('POST_READBACK_RETRY_EXHAUSTED');
     }
 
+    public static function retryPostReadbackSnapshot(
+        callable $operation,
+        ?callable $pause = null,
+    ): mixed {
+        $pause ??= static function (): void {
+            usleep(1_000_000);
+        };
+
+        for ($attempt = 1; $attempt <= 3; $attempt++) {
+            try {
+                return $operation();
+            } catch (Throwable $exception) {
+                $isRetryable = $exception instanceof ConnectionException
+                    || ($exception instanceof RuntimeException
+                        && preg_match(
+                            '/^POST_READBACK_(PUBLIC_PROJECTION|DISCOVERABILITY|URL_SETS)_DRIFT$/D',
+                            $exception->getMessage(),
+                        ) === 1);
+                if (! $isRetryable || $attempt === 3) {
+                    throw $exception;
+                }
+                $pause();
+            }
+        }
+
+        throw new RuntimeException('POST_READBACK_SNAPSHOT_RETRY_EXHAUSTED');
+    }
+
     private static function isTransientReadFailure(Throwable $throwable): bool
     {
         if ($throwable instanceof ConnectionException) {
@@ -687,28 +715,42 @@ final class EnneagramPr23CacheOnlyResumeRunner
         string $authorizedUrlSetsSha256,
     ): array {
         self::$failureStage = 'post_readback_snapshot';
-        $postSnapshot = self::retryTransientRead(
-            static fn (): array => $readbackService->snapshot(
+
+        return self::retryPostReadbackSnapshot(
+            static function () use (
+                $readbackService,
                 $releaseReport,
                 $frontendOrigin,
-            ),
-        );
-        if (! hash_equals(
-            $authorizedProjectionFingerprint,
-            (string) $postSnapshot['public_projection_fingerprint'],
-        )
-            || ! hash_equals(
+                $authorizedProjectionFingerprint,
                 $authorizedDiscoverabilityFingerprint,
-                (string) $postSnapshot['stable_identity_discoverability_fingerprint'],
-            )
-            || ! hash_equals(
                 $authorizedUrlSetsSha256,
-                self::fingerprint($postSnapshot['url_sets']),
-            )) {
-            throw new RuntimeException('POST_READBACK_SNAPSHOT_DRIFT');
-        }
+            ): array {
+                $postSnapshot = $readbackService->snapshot(
+                    $releaseReport,
+                    $frontendOrigin,
+                );
+                if (! hash_equals(
+                    $authorizedProjectionFingerprint,
+                    (string) $postSnapshot['public_projection_fingerprint'],
+                )) {
+                    throw new RuntimeException('POST_READBACK_PUBLIC_PROJECTION_DRIFT');
+                }
+                if (! hash_equals(
+                    $authorizedDiscoverabilityFingerprint,
+                    (string) $postSnapshot['stable_identity_discoverability_fingerprint'],
+                )) {
+                    throw new RuntimeException('POST_READBACK_DISCOVERABILITY_DRIFT');
+                }
+                if (! hash_equals(
+                    $authorizedUrlSetsSha256,
+                    self::fingerprint($postSnapshot['url_sets']),
+                )) {
+                    throw new RuntimeException('POST_READBACK_URL_SETS_DRIFT');
+                }
 
-        return $postSnapshot;
+                return $postSnapshot;
+            },
+        );
     }
 
     private static function bootstrapApplication(string $backend): void

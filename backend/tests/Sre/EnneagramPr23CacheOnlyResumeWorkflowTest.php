@@ -72,6 +72,7 @@ final class EnneagramPr23CacheOnlyResumeWorkflowTest extends TestCase
             $source,
         );
         $this->assertStringContainsString('/proc/[0-9]*/environ', $source);
+        $this->assertStringContainsString('[ -r "$environment" ] || continue', $source);
         $this->assertStringContainsString('< "$RUNNER_PATH" > "$receipt"', $source);
         $this->assertStringContainsString('.accepted_revalidation_path_count == 116', $source);
         $this->assertStringContainsString('.rejected_revalidation_path_count == 0', $source);

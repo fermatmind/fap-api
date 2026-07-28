@@ -529,7 +529,7 @@ jobs:
           fi
           remote_command="$(
             printf 'test ! -e %q/.dep/deploy.lock && ' "$DEPLOY_PATH"
-            printf 'sudo -n -u www-data -- /bin/sh -c %q && ' 'for environment in /proc/[0-9]*/environ; do if tr "\0" "\n" < "$environment" 2>/dev/null | grep -qx "FM_ENNEAGRAM_RUNNER_EXECUTE=1"; then exit 1; fi; done'
+            printf 'sudo -n -u www-data -- /bin/sh -c %q && ' 'for environment in /proc/[0-9]*/environ; do [ -r "$environment" ] || continue; if tr "\0" "\n" < "$environment" | grep -qx "FM_ENNEAGRAM_RUNNER_EXECUTE=1"; then exit 1; fi; done'
             printf 'active_backend=$(readlink -f %q/current/backend) && test -n \"$active_backend\" && sudo -n -u www-data -- env ' "$DEPLOY_PATH"
             printf 'FM_ENNEAGRAM_RESUME_MODE=%q ' "$MODE"
             printf 'FM_ENNEAGRAM_RUNNER_EXECUTE=1 '
