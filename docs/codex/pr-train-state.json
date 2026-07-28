@@ -97089,8 +97089,8 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E",
       "separate_exact_sha_production_authorization"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "80d9fa0b24cb9c8040a13208c0f619fd2623aeb3",
+    "status": "ready_to_merge",
+    "commit_sha": "36f7a54a783c9ece18b3ca7e745c93238a483699",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3364",
     "checks": {
       "dependency": {
@@ -97106,14 +97106,14 @@
         "evidence": "Three redacted Git-safe closeout artifacts are confined to the manifest-allowed runtime-closeout-23 directory. Sensitive-field scans, 258 Enneagram V2 tests with 29,261 assertions, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-file scope validation passed. No production action is part of this PR."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #3364 is open from the exact four-file closeout branch; required checks are pending."
+        "status": "passed",
+        "evidence": "PR #3364 required checks passed on head 36f7a54a783c9ece18b3ca7e745c93238a483699. The final ready-to-merge ledger update requires its own check cycle before squash merge."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97157,9 +97157,14 @@
         "at": "2026-07-28T11:56:07Z",
         "status": "github_checks_pending",
         "note": "Committed the initial redacted evidence as 80d9fa0b24cb9c8040a13208c0f619fd2623aeb3, pushed the exact four-file branch, and opened PR #3364. Required checks are pending."
+      },
+      {
+        "at": "2026-07-28T12:04:57Z",
+        "status": "ready_to_merge",
+        "note": "All required checks passed on head 36f7a54a783c9ece18b3ca7e745c93238a483699. Exact four-file scope and redaction boundaries remain intact; the final ledger-only update must pass its own required check cycle before merge."
       }
     ],
-    "updated_at": "2026-07-28T11:56:07Z"
+    "updated_at": "2026-07-28T12:04:57Z"
   },
   "ANALYTICS-FRESHNESS-RECONCILE-03": {
     "id": "ANALYTICS-FRESHNESS-RECONCILE-03",
