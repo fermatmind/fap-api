@@ -368,17 +368,40 @@ The receipt-bound operator phrase has this form:
 I explicitly approve SEO 13 discoverability cache refresh for SHA <RELEASE_SHA> release <RELEASE_NAME> preflight run <RUN_ID> attempt <ATTEMPT> state <STATE_SHA> content set <CONTENT_SET_SHA> target set <TARGET_SET_SHA>; refresh only six backend sitemap/llms cache keys and frontend /sitemap.xml, /llms.txt, /llms-full.txt, keep CMS authority, publication, schema, hreflang, sitemap eligibility, llms eligibility, search, GSC, URL Inspection, queue, and deploy held.
 ```
 
-Run read-only closeout per article:
+## Production stage 8: batch closeout and public QA
 
-```bash
-cd <DEPLOYED_BACKEND_RELEASE>/backend
-php artisan articles:release-closeout \
-  --article-id=<ARTICLE_ID> \
-  --expected-slug=<SLUG> \
-  --json
+After the cache refresh readback passes, use the read-only workflow
+`.github/workflows/seo-13-article-release-closeout-production-ops.yml`.
+It requires an exact latest-main control-plane SHA, exact active production
+SHA and release name, and this exact read-only authorization form:
+
+```text
+I explicitly approve read-only SEO 13 release closeout for SHA <RELEASE_SHA> release <RELEASE_NAME>; inspect exact 13 public articles, schema, hreflang hold, sitemap, llms, search hold, and cannibalization with zero writes.
 ```
 
-GSC Request Indexing, URL Inspection, sitemap submission, Search Channel enqueue, and any discoverability mutation are explicitly excluded. SEO observation may be scheduled separately after the released URL Truth and public smoke evidence pass.
+The streamed runner calls the batch-only
+`articles:seo13-release-closeout --json` command and then checks all 13 public
+API and Chinese HTML routes. Closeout requires:
+
+- the exact 13 new published revisions and all 13 superseded revisions still
+  traceable as `stale`;
+- the exact title, excerpt, public body, SEO title, SEO description, canonical,
+  robots, indexability, schema, visible FAQ, and held hreflang state;
+- at least 2,000 visible Han characters plus the visible `快速答案`, `常见问题`,
+  and `参考来源` sections;
+- every canonical exactly once in sitemap, `llms.txt`, and `llms-full.txt`;
+- zero SEO Search Channel queue items, IndexNow submissions, Baidu submissions,
+  GSC requests, and URL Inspection requests for the cohort;
+- no exact title/description duplicate, canonical collision, or deterministic
+  near-duplicate title involving the cohort across all published Chinese SEO
+  articles.
+
+The artifact contains hashes, counts, IDs, states, and D1/D7/D14/D28
+monitoring windows only. It contains no article bodies, descriptions, private
+URLs, topology, raw errors, or credentials and performs no production write.
+GSC Request Indexing, URL Inspection, sitemap submission, Search Channel
+enqueue, and any additional discoverability mutation remain explicitly
+excluded from this task line.
 
 ## Repository rule impact
 
