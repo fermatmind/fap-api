@@ -382,6 +382,33 @@ The exact apply authorization format is:
 I explicitly approve production fap-api content-release revalidation config convergence from preflight run <PREFLIGHT_RUN_ID> attempt <PREFLIGHT_RUN_ATTEMPT> with control-plane SHA <CONTROL_SHA> active SHA <ACTIVE_SHA> environment SHA256 <ENV_SHA256> config-cache SHA256 <CONFIG_CACHE_SHA256> config-source SHA256 <CONFIG_SOURCE_SHA256> runtime fingerprint <RUNTIME_FINGERPRINT_SHA256> source bundle SHA256 <SOURCE_BUNDLE_SHA256>; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, normalize only shared backend .env mode to 0640 while retaining owner/group, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback.
 ```
 
+## Content-release dotenv comment recovery
+
+`Content Release Revalidation Dotenv Recovery` is a separate, incident-only
+control for a shared backend `.env` that contains historical prose lines without
+Dotenv comment markers. Its `preflight` mode is read-only and uses the active
+release's installed Dotenv parser. It binds the exact latest-main control-plane
+SHA, active release SHA, environment/config hashes, source credential bundle,
+runtime fingerprint, exact malformed-line count and line-set hash, and the
+parser-valid candidate environment hash. It never emits the malformed text,
+environment assignments, secret values, or SSH routing metadata.
+
+The separately authorized `apply` mode may prefix only that exact set of
+nonempty, noncomment, nonassignment lines with `# `. It preserves every
+environment assignment and the existing owner/group, keeps mode `0640`,
+revalidates the resulting file with the active release's Dotenv parser, and
+rebuilds only Laravel's config cache as `www-data`. Any hash, line set,
+permission, deploy-lock, active-revision, parser, or cached-bundle drift fails
+closed. It performs no application deploy, symlink activation, migration,
+CMS/database-authority write, public-cache revalidation, queue/service restart,
+publication, sitemap/llms/search operation, PR23 action, or automatic rollback.
+
+The exact recovery authorization format is:
+
+```text
+I explicitly approve production fap-api dotenv comment recovery from preflight run <PREFLIGHT_RUN_ID> attempt <PREFLIGHT_RUN_ATTEMPT> with control-plane SHA <CONTROL_SHA> active SHA <ACTIVE_SHA> environment SHA256 <ENV_SHA256> config-cache SHA256 <CONFIG_CACHE_SHA256> config-source SHA256 <CONFIG_SOURCE_SHA256> runtime fingerprint <RUNTIME_FINGERPRINT_SHA256> source bundle SHA256 <SOURCE_BUNDLE_SHA256> malformed line count <MALFORMED_LINE_COUNT> malformed line set SHA256 <MALFORMED_LINE_SET_SHA256> candidate environment SHA256 <CANDIDATE_ENV_SHA256>; prefix only the exact malformed non-assignment lines with comment markers, preserve every environment assignment and owner/group/mode 0640, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback.
+```
+
 ## fap-web handling in V1
 - `fap-web` is a reference only.
 - No production write operation is implemented for `fap-web` in this phase.
