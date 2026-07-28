@@ -264,34 +264,50 @@ jobs:
           fi
 
           if [ "$MODE" = preflight ]; then
+            parser_fail() {
+              printf 'REQUIRED_QUEUE_RESULT_FAILED:%s\n' "$1" >&2
+              exit 1
+            }
+            [[ "$result" != *$'\n'* ]] || parser_fail FIELD_SHAPE
+            field_count="$(awk -F $'\t' '{print NF}' <<<"$result")"
+            test "$field_count" -eq 16 || parser_fail FIELD_SHAPE
             IFS=$'\t' read -r active target_sha state_sha default_state reports_state pending_total high_pending default_pending reports_pending convergence_required apply_supported foreign_sha unknown_class_count oldest_pending_seconds backlog_snapshot_sha256 job_class_counts_b64 <<<"$result"
-            test "$active" = "$EXPECTED_ACTIVE_REVISION"
-            [[ "$target_sha" =~ ^[0-9a-f]{64}$ ]]
-            [[ "$state_sha" =~ ^[0-9a-f]{64}$ ]]
-            [[ "$default_state" =~ ^(RUNNING|NOT_RUNNING)$ ]]
-            [[ "$reports_state" =~ ^(RUNNING|NOT_RUNNING)$ ]]
-            [[ "$pending_total" =~ ^[0-9]+$ ]]
-            [[ "$high_pending" =~ ^[0-9]+$ ]]
-            [[ "$default_pending" =~ ^[0-9]+$ ]]
-            [[ "$reports_pending" =~ ^[0-9]+$ ]]
-            test "$pending_total" -eq $((high_pending + default_pending + reports_pending))
-            [[ "$convergence_required" =~ ^(true|false)$ ]]
-            [[ "$apply_supported" =~ ^(true|false)$ ]]
-            [[ "$foreign_sha" =~ ^[0-9a-f]{64}$ ]]
-            [[ "$unknown_class_count" =~ ^[0-9]+$ ]]
-            [[ "$oldest_pending_seconds" =~ ^[0-9]+$ ]]
-            [[ "$backlog_snapshot_sha256" =~ ^[0-9a-f]{64}$ ]]
-            [[ "$job_class_counts_b64" =~ ^[A-Za-z0-9+/=]+$ ]]
-            decoded_job_class_counts="$(printf '%s' "$job_class_counts_b64" | base64 --decode)"
+            test "$active" = "$EXPECTED_ACTIVE_REVISION" || parser_fail IDENTITY
+            [[ "$target_sha" =~ ^[0-9a-f]{64}$ ]] || parser_fail HASH
+            [[ "$state_sha" =~ ^[0-9a-f]{64}$ ]] || parser_fail HASH
+            [[ "$default_state" =~ ^(RUNNING|NOT_RUNNING)$ ]] || parser_fail STATE
+            [[ "$reports_state" =~ ^(RUNNING|NOT_RUNNING)$ ]] || parser_fail STATE
+            [[ "$pending_total" =~ ^[0-9]+$ ]] || parser_fail SCALAR
+            [[ "$high_pending" =~ ^[0-9]+$ ]] || parser_fail SCALAR
+            [[ "$default_pending" =~ ^[0-9]+$ ]] || parser_fail SCALAR
+            [[ "$reports_pending" =~ ^[0-9]+$ ]] || parser_fail SCALAR
+            test "$pending_total" -eq $((high_pending + default_pending + reports_pending)) \
+              || parser_fail QUEUE_TOTAL
+            [[ "$convergence_required" =~ ^(true|false)$ ]] || parser_fail BOOLEAN
+            [[ "$apply_supported" =~ ^(true|false)$ ]] || parser_fail BOOLEAN
+            [[ "$foreign_sha" =~ ^[0-9a-f]{64}$ ]] || parser_fail HASH
+            [[ "$unknown_class_count" =~ ^[0-9]+$ ]] || parser_fail SCALAR
+            [[ "$oldest_pending_seconds" =~ ^[0-9]+$ ]] || parser_fail SCALAR
+            [[ "$backlog_snapshot_sha256" =~ ^[0-9a-f]{64}$ ]] || parser_fail HASH
+            [[ "$job_class_counts_b64" =~ ^[A-Za-z0-9+/=]+$ ]] || parser_fail CLASS_B64
+            if ! decoded_job_class_counts="$(
+              printf '%s' "$job_class_counts_b64" | base64 --decode
+            )"; then
+              parser_fail CLASS_B64
+            fi
             jq -e '
               type == "object"
               and (keys | sort) == ["default", "high", "reports"]
               and all(.[]; type == "object")
               and all(.[][]; type == "number" and . >= 0 and floor == .)
-            ' <<<"$decoded_job_class_counts" >/dev/null
-            classified_total="$(jq '[.[][]] | add // 0' <<<"$decoded_job_class_counts")"
-            test "$classified_total" -eq "$pending_total"
-            test "$unknown_class_count" -le "$pending_total"
+            ' <<<"$decoded_job_class_counts" >/dev/null || parser_fail CLASS_JSON
+            if ! classified_total="$(
+              jq '[.[][]] | add // 0' <<<"$decoded_job_class_counts"
+            )"; then
+              parser_fail CLASS_JSON
+            fi
+            test "$classified_total" -eq "$pending_total" || parser_fail CLASS_TOTAL
+            test "$unknown_class_count" -le "$pending_total" || parser_fail UNKNOWN_TOTAL
             {
               echo "target_set_sha256=$target_sha"
               echo "state_sha256=$state_sha"
