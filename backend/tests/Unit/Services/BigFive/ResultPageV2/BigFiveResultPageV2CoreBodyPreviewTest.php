@@ -376,6 +376,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_career_search_entry_batch_control_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/CareerControlSearchEntryQualityBatchCommand.php',
+            'backend/app/Console/Commands/CareerReviewSearchEntryQualityBatchCommand.php',
+            'backend/app/Models/CareerSearchEntryQualityBatchOperation.php',
+            'backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchApplyAuthority.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchControlService.php',
+            'backend/database/migrations/2026_07_28_000100_create_career_search_entry_quality_batch_operations_table.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchPublisher.php',
+            'backend/database/migrations/2026_07_28_000200_create_career_search_entry_batch_two_operations_table.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_solo_owner_ops_approval_files(): void
     {
         $allowed = [
@@ -6581,6 +6602,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerSearchEntryQualityBatchControlFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCareerBridgeContractFile($file)) {
                 continue;
             }
@@ -8515,6 +8540,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchPlanner.php',
             'backend/app/Services/Career/Review/CareerSearchEntryQualityEvaluator.php',
             'backend/content_packs/career/CAREER-SEARCH-ENTRY-QUALITY-BATCH-01/manifest.json',
+        ], true);
+    }
+
+    private function isCareerSearchEntryQualityBatchControlFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Models/CareerSearchEntryQualityBatchOperation.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchApplyAuthority.php',
+            'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchControlService.php',
+            'backend/database/migrations/2026_07_28_000100_create_career_search_entry_quality_batch_operations_table.php',
         ], true);
     }
 
