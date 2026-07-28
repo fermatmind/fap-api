@@ -1,0 +1,413 @@
+name: Backend Production Required Queue Runtime Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only preflight or exact-authorized apply
+        required: true
+        default: preflight
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control plane
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active backend REVISION
+        required: true
+        type: string
+      expected_runner_sha256:
+        description: Exact SHA-256 of the required queue control runner
+        required: true
+        type: string
+      expected_target_set_sha256:
+        description: Apply only; target-set SHA-256 from preflight
+        required: false
+        default: ""
+        type: string
+      expected_state_sha256:
+        description: Apply only; runtime state SHA-256 from preflight
+        required: false
+        default: ""
+        type: string
+      preflight_run_id:
+        description: Apply only; immutable successful preflight run id
+        required: false
+        default: ""
+        type: string
+      preflight_run_attempt:
+        description: Apply only; immutable successful preflight run attempt
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        description: Apply only; exact receipt-bound authorization phrase
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: backend-production-required-queue-runtime-control
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Validate required queue runtime control eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      mode: ${{ steps.validate.outputs.mode }}
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      active_revision: ${{ steps.validate.outputs.active_revision }}
+      runner_sha256: ${{ steps.validate.outputs.runner_sha256 }}
+      target_set_sha256: ${{ steps.validate.outputs.target_set_sha256 }}
+      state_sha256: ${{ steps.validate.outputs.state_sha256 }}
+    steps:
+      - name: Checkout exact main control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Validate exact control and immutable preflight binding
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+          EXPECTED_RUNNER_SHA256: ${{ inputs.expected_runner_sha256 }}
+          EXPECTED_TARGET_SET_SHA256: ${{ inputs.expected_target_set_sha256 }}
+          EXPECTED_STATE_SHA256: ${{ inputs.expected_state_sha256 }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          runner="backend/scripts/deploy/control_required_supervisor_programs.sh"
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(sha256sum "$runner" | awk '{print $1}')" = "$EXPECTED_RUNNER_SHA256"
+
+          case "$MODE" in
+            preflight)
+              test -z "$EXPECTED_TARGET_SET_SHA256"
+              test -z "$EXPECTED_STATE_SHA256"
+              test -z "$PREFLIGHT_RUN_ID"
+              test -z "$PREFLIGHT_RUN_ATTEMPT"
+              test -z "$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            apply)
+              [[ "$EXPECTED_TARGET_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$EXPECTED_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
+              [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
+              expected_phrase="I explicitly approve production fap-api required queue runtime convergence from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} with control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA} active SHA ${EXPECTED_ACTIVE_REVISION} runner SHA256 ${EXPECTED_RUNNER_SHA256} target-set SHA256 ${EXPECTED_TARGET_SET_SHA256} state SHA256 ${EXPECTED_STATE_SHA256}; restart only non-running fap-queue-default-high and fap-queue-reports workers with zero pending jobs, no deploy/symlink/migration/CMS/database-authority/publication/schema/hreflang/revalidation/sitemap/llms/search."
+              test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+              run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+              jq -e \
+                --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+                --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+                '.name == "Backend Production Required Queue Runtime Control"
+                 and .path == ".github/workflows/backend-production-required-queue-runtime-control.yml"
+                 and .event == "workflow_dispatch"
+                 and .status == "completed"
+                 and .conclusion == "success"
+                 and .head_branch == "main"
+                 and .head_sha == $sha
+                 and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+
+              receipt_dir="$(mktemp -d)"
+              gh run download "$PREFLIGHT_RUN_ID" \
+                --name "backend-production-required-queue-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+                --dir "$receipt_dir"
+              receipt="$receipt_dir/backend-production-required-queue-runtime-control.json"
+              test -f "$receipt"
+              jq -e \
+                --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+                --arg active "$EXPECTED_ACTIVE_REVISION" \
+                --arg runner_sha "$EXPECTED_RUNNER_SHA256" \
+                --arg target_sha "$EXPECTED_TARGET_SET_SHA256" \
+                --arg state_sha "$EXPECTED_STATE_SHA256" \
+                --arg run_id "$PREFLIGHT_RUN_ID" \
+                --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
+                '.contract_version == "backend.production_required_queue_runtime_control.v1"
+                 and .mode == "preflight"
+                 and .status == "PASS_PREFLIGHT"
+                 and .run_id == $run_id
+                 and .run_attempt == $run_attempt
+                 and .control_plane_sha == $control
+                 and .active_revision == $active
+                 and .runner_sha256 == $runner_sha
+                 and .target_set_sha256 == $target_sha
+                 and .state_sha256 == $state_sha
+                 and .pending_total == 0
+                 and .convergence_required == true
+                 and .deploy_lock_present == false
+                 and .deploy_like_process_count == 0
+                 and .production_write_execution == false' "$receipt" >/dev/null
+              ;;
+            *)
+              exit 2
+              ;;
+          esac
+
+          {
+            echo "mode=$MODE"
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "active_revision=$EXPECTED_ACTIVE_REVISION"
+            echo "runner_sha256=$EXPECTED_RUNNER_SHA256"
+            echo "target_set_sha256=$EXPECTED_TARGET_SET_SHA256"
+            echo "state_sha256=$EXPECTED_STATE_SHA256"
+          } >> "$GITHUB_OUTPUT"
+          echo "Exact required queue control eligibility passed."
+
+  control:
+    name: Preflight or apply required queue runtime control
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST"
+          test -n "$DEPLOY_PORT"
+          test -n "$SSH_KNOWN_HOSTS"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+          echo "Pinned known-host validation passed."
+
+      - name: Execute bounded required queue control
+        id: execute
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          EXPECTED_ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          EXPECTED_RUNNER_SHA256: ${{ needs.eligibility.outputs.runner_sha256 }}
+          EXPECTED_TARGET_SET_SHA256: ${{ needs.eligibility.outputs.target_set_sha256 }}
+          EXPECTED_STATE_SHA256: ${{ needs.eligibility.outputs.state_sha256 }}
+        run: |
+          set -euo pipefail
+          runner="backend/scripts/deploy/control_required_supervisor_programs.sh"
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          test "$(sha256sum "$runner" | awk '{print $1}')" = "$EXPECTED_RUNNER_SHA256"
+
+          printf -v q_mode '%q' "$MODE"
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_active '%q' "$EXPECTED_ACTIVE_REVISION"
+          printf -v q_state '%q' "$EXPECTED_STATE_SHA256"
+          set +e
+          result="$(
+            timeout --signal=TERM --kill-after=10s 180s \
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+                "MODE=$q_mode DEPLOY_PATH=$q_path EXPECTED_ACTIVE_REVISION=$q_active EXPECTED_STATE_SHA256=$q_state bash -s" \
+                < "$runner" 2>"$RUNNER_TEMP/required-queue-control.err"
+          )"
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            safe_failure="$(grep -Eo 'REQUIRED_QUEUE_CONTROL_FAILED:[A-Z0-9_-]+' \
+              "$RUNNER_TEMP/required-queue-control.err" | tail -n 1 || true)"
+            if [[ "$safe_failure" =~ ^REQUIRED_QUEUE_CONTROL_FAILED:[A-Z0-9_-]+$ ]]; then
+              echo "$safe_failure" >&2
+            else
+              echo "REQUIRED_QUEUE_CONTROL_REMOTE_FAILURE" >&2
+            fi
+            exit "$rc"
+          fi
+
+          if [ "$MODE" = preflight ]; then
+            IFS=$'\t' read -r active target_sha state_sha default_state reports_state pending_total convergence_required foreign_sha <<<"$result"
+            test "$active" = "$EXPECTED_ACTIVE_REVISION"
+            [[ "$target_sha" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$state_sha" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$default_state" =~ ^(RUNNING|NOT_RUNNING)$ ]]
+            [[ "$reports_state" =~ ^(RUNNING|NOT_RUNNING)$ ]]
+            test "$pending_total" = 0
+            [[ "$convergence_required" =~ ^(true|false)$ ]]
+            [[ "$foreign_sha" =~ ^[0-9a-f]{64}$ ]]
+            {
+              echo "target_set_sha256=$target_sha"
+              echo "state_sha256=$state_sha"
+              echo "default_state=$default_state"
+              echo "reports_state=$reports_state"
+              echo "pending_total=$pending_total"
+              echo "convergence_required=$convergence_required"
+              echo "after_state_sha256=$(printf '0%.0s' {1..64})"
+            } >> "$GITHUB_OUTPUT"
+          else
+            IFS=$'\t' read -r active target_sha state_sha after_state_sha <<<"$result"
+            test "$active" = "$EXPECTED_ACTIVE_REVISION"
+            test "$target_sha" = "$EXPECTED_TARGET_SET_SHA256"
+            test "$state_sha" = "$EXPECTED_STATE_SHA256"
+            [[ "$after_state_sha" =~ ^[0-9a-f]{64}$ ]]
+            {
+              echo "target_set_sha256=$target_sha"
+              echo "state_sha256=$state_sha"
+              echo "default_state=RUNNING"
+              echo "reports_state=RUNNING"
+              echo "pending_total=0"
+              echo "convergence_required=false"
+              echo "after_state_sha256=$after_state_sha"
+            } >> "$GITHUB_OUTPUT"
+          fi
+          echo "Bounded required queue control completed without raw runtime output."
+
+      - name: Generate sanitized immutable receipt
+        shell: bash
+        env:
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+          ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          RUNNER_SHA256: ${{ needs.eligibility.outputs.runner_sha256 }}
+          TARGET_SET_SHA256: ${{ steps.execute.outputs.target_set_sha256 }}
+          STATE_SHA256: ${{ steps.execute.outputs.state_sha256 }}
+          AFTER_STATE_SHA256: ${{ steps.execute.outputs.after_state_sha256 }}
+          DEFAULT_STATE: ${{ steps.execute.outputs.default_state }}
+          REPORTS_STATE: ${{ steps.execute.outputs.reports_state }}
+          PENDING_TOTAL: ${{ steps.execute.outputs.pending_total }}
+          CONVERGENCE_REQUIRED: ${{ steps.execute.outputs.convergence_required }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          status=PASS_APPLY
+          production_write_execution=true
+          if [ "$MODE" = preflight ]; then
+            status=PASS_PREFLIGHT
+            production_write_execution=false
+          fi
+          jq -n \
+            --arg mode "$MODE" \
+            --arg status "$status" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg active "$ACTIVE_REVISION" \
+            --arg runner "$RUNNER_SHA256" \
+            --arg target "$TARGET_SET_SHA256" \
+            --arg state "$STATE_SHA256" \
+            --arg after_state "$AFTER_STATE_SHA256" \
+            --arg default_state "$DEFAULT_STATE" \
+            --arg reports_state "$REPORTS_STATE" \
+            --argjson pending "$PENDING_TOTAL" \
+            --argjson convergence "$CONVERGENCE_REQUIRED" \
+            --argjson write "$production_write_execution" \
+            '{
+              contract_version: "backend.production_required_queue_runtime_control.v1",
+              mode: $mode,
+              status: $status,
+              run_id: $run_id,
+              run_attempt: $run_attempt,
+              control_plane_sha: $control,
+              active_revision: $active,
+              runner_sha256: $runner,
+              target_set_sha256: $target,
+              state_sha256: $state,
+              after_state_sha256: $after_state,
+              target_states: {
+                "fap-queue-default-high": $default_state,
+                "fap-queue-reports": $reports_state
+              },
+              pending_total: $pending,
+              convergence_required: $convergence,
+              deploy_lock_present: false,
+              deploy_like_process_count: 0,
+              production_write_execution: $write,
+              negative_guarantees: {
+                deploy: false,
+                symlink: false,
+                migration: false,
+                cms_or_database_authority: false,
+                publication: false,
+                schema: false,
+                hreflang: false,
+                revalidation: false,
+                sitemap_or_llms: false,
+                search_submission: false,
+                remote_file_write: false
+              }
+            }' > artifacts/backend-production-required-queue-runtime-control.json
+          jq -e \
+            '.contract_version == "backend.production_required_queue_runtime_control.v1"
+             and .pending_total == 0
+             and .deploy_lock_present == false
+             and .deploy_like_process_count == 0
+             and .negative_guarantees.search_submission == false
+             and .negative_guarantees.remote_file_write == false' \
+            artifacts/backend-production-required-queue-runtime-control.json >/dev/null
+
+      - name: Publish exact preflight authorization
+        if: needs.eligibility.outputs.mode == 'preflight'
+        shell: bash
+        env:
+          CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+          ACTIVE_REVISION: ${{ needs.eligibility.outputs.active_revision }}
+          RUNNER_SHA256: ${{ needs.eligibility.outputs.runner_sha256 }}
+          TARGET_SET_SHA256: ${{ steps.execute.outputs.target_set_sha256 }}
+          STATE_SHA256: ${{ steps.execute.outputs.state_sha256 }}
+          CONVERGENCE_REQUIRED: ${{ steps.execute.outputs.convergence_required }}
+        run: |
+          set -euo pipefail
+          test "$CONVERGENCE_REQUIRED" = true
+          phrase="I explicitly approve production fap-api required queue runtime convergence from preflight run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT} with control-plane SHA ${CONTROL_PLANE_SHA} active SHA ${ACTIVE_REVISION} runner SHA256 ${RUNNER_SHA256} target-set SHA256 ${TARGET_SET_SHA256} state SHA256 ${STATE_SHA256}; restart only non-running fap-queue-default-high and fap-queue-reports workers with zero pending jobs, no deploy/symlink/migration/CMS/database-authority/publication/schema/hreflang/revalidation/sitemap/llms/search."
+          {
+            echo "## Required queue runtime preflight"
+            echo
+            echo '```text'
+            echo "$phrase"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "Exact receipt-bound authorization generated."
+
+      - name: Upload immutable control receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-production-required-queue-${{ needs.eligibility.outputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/backend-production-required-queue-runtime-control.json
+          if-no-files-found: error
+          retention-days: 30
