@@ -38,7 +38,10 @@ exec "$@"
 BASH);
         file_put_contents($this->temporaryDirectory.'/php', <<<'BASH'
 #!/usr/bin/env bash
-printf '%s\n' "${FAKE_PENDING_TOTAL:-0}"
+printf '%s\t%s\t%s\n' \
+  "${FAKE_HIGH_PENDING:-0}" \
+  "${FAKE_DEFAULT_PENDING:-0}" \
+  "${FAKE_REPORTS_PENDING:-0}"
 BASH);
         file_put_contents($this->temporaryDirectory.'/ps', <<<'BASH'
 #!/usr/bin/env bash
@@ -109,7 +112,8 @@ BASH);
         $this->assertSame('NOT_RUNNING', $fields[3]);
         $this->assertSame('RUNNING', $fields[4]);
         $this->assertSame('0', $fields[5]);
-        $this->assertSame('true', $fields[6]);
+        $this->assertSame('true', $fields[9]);
+        $this->assertSame('true', $fields[10]);
         $this->assertSame("default_stopped\n", file_get_contents($this->temporaryDirectory.'/state'));
 
         $apply = $this->runControl('apply', $fields[2]);
@@ -138,14 +142,26 @@ BASH);
     }
 
     #[Test]
-    public function preflight_fails_closed_when_any_target_queue_has_pending_work(): void
+    public function preflight_reports_backlog_without_writes_and_apply_remains_fail_closed(): void
     {
         $preflight = $this->runControl('preflight', '', '2');
 
-        $this->assertFalse($preflight->isSuccessful());
+        $this->assertTrue($preflight->isSuccessful(), $preflight->getErrorOutput());
+        $fields = explode("\t", trim($preflight->getOutput()));
+        $this->assertSame('6', $fields[5]);
+        $this->assertSame('2', $fields[6]);
+        $this->assertSame('2', $fields[7]);
+        $this->assertSame('2', $fields[8]);
+        $this->assertSame('true', $fields[9]);
+        $this->assertSame('false', $fields[10]);
+        $this->assertSame("default_stopped\n", file_get_contents($this->temporaryDirectory.'/state'));
+
+        $apply = $this->runControl('apply', $fields[2], '2');
+
+        $this->assertFalse($apply->isSuccessful());
         $this->assertStringContainsString(
             'REQUIRED_QUEUE_CONTROL_FAILED:QUEUE_BACKLOG_PRESENT',
-            $preflight->getErrorOutput(),
+            $apply->getErrorOutput(),
         );
         $this->assertSame("default_stopped\n", file_get_contents($this->temporaryDirectory.'/state'));
     }
@@ -167,7 +183,7 @@ BASH);
             $workflow,
         );
         $this->assertStringContainsString(
-            '.contract_version == "backend.production_required_queue_runtime_control.v1"',
+            '.contract_version == "backend.production_required_queue_runtime_control.v2"',
             $workflow,
         );
         $this->assertStringContainsString(
@@ -209,7 +225,9 @@ BASH);
                 'PHP_PATH' => $this->temporaryDirectory.'/php',
                 'SUDO_PATH' => $this->temporaryDirectory.'/sudo',
                 'FAKE_STATE_FILE' => $this->temporaryDirectory.'/state',
-                'FAKE_PENDING_TOTAL' => $pendingTotal,
+                'FAKE_HIGH_PENDING' => $pendingTotal,
+                'FAKE_DEFAULT_PENDING' => $pendingTotal,
+                'FAKE_REPORTS_PENDING' => $pendingTotal,
                 'PATH' => $this->temporaryDirectory.':'.getenv('PATH'),
             ],
         );

@@ -145,7 +145,7 @@ jobs:
                 --arg state_sha "$EXPECTED_STATE_SHA256" \
                 --arg run_id "$PREFLIGHT_RUN_ID" \
                 --arg run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-                '.contract_version == "backend.production_required_queue_runtime_control.v1"
+                '.contract_version == "backend.production_required_queue_runtime_control.v2"
                  and .mode == "preflight"
                  and .status == "PASS_PREFLIGHT"
                  and .run_id == $run_id
@@ -157,6 +157,7 @@ jobs:
                  and .state_sha256 == $state_sha
                  and .pending_total == 0
                  and .convergence_required == true
+                 and .apply_supported == true
                  and .deploy_lock_present == false
                  and .deploy_like_process_count == 0
                  and .production_write_execution == false' "$receipt" >/dev/null
@@ -262,14 +263,19 @@ jobs:
           fi
 
           if [ "$MODE" = preflight ]; then
-            IFS=$'\t' read -r active target_sha state_sha default_state reports_state pending_total convergence_required foreign_sha <<<"$result"
+            IFS=$'\t' read -r active target_sha state_sha default_state reports_state pending_total high_pending default_pending reports_pending convergence_required apply_supported foreign_sha <<<"$result"
             test "$active" = "$EXPECTED_ACTIVE_REVISION"
             [[ "$target_sha" =~ ^[0-9a-f]{64}$ ]]
             [[ "$state_sha" =~ ^[0-9a-f]{64}$ ]]
             [[ "$default_state" =~ ^(RUNNING|NOT_RUNNING)$ ]]
             [[ "$reports_state" =~ ^(RUNNING|NOT_RUNNING)$ ]]
-            test "$pending_total" = 0
+            [[ "$pending_total" =~ ^[0-9]+$ ]]
+            [[ "$high_pending" =~ ^[0-9]+$ ]]
+            [[ "$default_pending" =~ ^[0-9]+$ ]]
+            [[ "$reports_pending" =~ ^[0-9]+$ ]]
+            test "$pending_total" -eq $((high_pending + default_pending + reports_pending))
             [[ "$convergence_required" =~ ^(true|false)$ ]]
+            [[ "$apply_supported" =~ ^(true|false)$ ]]
             [[ "$foreign_sha" =~ ^[0-9a-f]{64}$ ]]
             {
               echo "target_set_sha256=$target_sha"
@@ -277,7 +283,11 @@ jobs:
               echo "default_state=$default_state"
               echo "reports_state=$reports_state"
               echo "pending_total=$pending_total"
+              echo "high_pending=$high_pending"
+              echo "default_pending=$default_pending"
+              echo "reports_pending=$reports_pending"
               echo "convergence_required=$convergence_required"
+              echo "apply_supported=$apply_supported"
               echo "after_state_sha256=$(printf '0%.0s' {1..64})"
             } >> "$GITHUB_OUTPUT"
           else
@@ -292,7 +302,11 @@ jobs:
               echo "default_state=RUNNING"
               echo "reports_state=RUNNING"
               echo "pending_total=0"
+              echo "high_pending=0"
+              echo "default_pending=0"
+              echo "reports_pending=0"
               echo "convergence_required=false"
+              echo "apply_supported=false"
               echo "after_state_sha256=$after_state_sha"
             } >> "$GITHUB_OUTPUT"
           fi
@@ -311,7 +325,11 @@ jobs:
           DEFAULT_STATE: ${{ steps.execute.outputs.default_state }}
           REPORTS_STATE: ${{ steps.execute.outputs.reports_state }}
           PENDING_TOTAL: ${{ steps.execute.outputs.pending_total }}
+          HIGH_PENDING: ${{ steps.execute.outputs.high_pending }}
+          DEFAULT_PENDING: ${{ steps.execute.outputs.default_pending }}
+          REPORTS_PENDING: ${{ steps.execute.outputs.reports_pending }}
           CONVERGENCE_REQUIRED: ${{ steps.execute.outputs.convergence_required }}
+          APPLY_SUPPORTED: ${{ steps.execute.outputs.apply_supported }}
         run: |
           set -euo pipefail
           mkdir -p artifacts
@@ -335,10 +353,14 @@ jobs:
             --arg default_state "$DEFAULT_STATE" \
             --arg reports_state "$REPORTS_STATE" \
             --argjson pending "$PENDING_TOTAL" \
+            --argjson high_pending "$HIGH_PENDING" \
+            --argjson default_pending "$DEFAULT_PENDING" \
+            --argjson reports_pending "$REPORTS_PENDING" \
             --argjson convergence "$CONVERGENCE_REQUIRED" \
+            --argjson apply_supported "$APPLY_SUPPORTED" \
             --argjson write "$production_write_execution" \
             '{
-              contract_version: "backend.production_required_queue_runtime_control.v1",
+              contract_version: "backend.production_required_queue_runtime_control.v2",
               mode: $mode,
               status: $status,
               run_id: $run_id,
@@ -354,7 +376,13 @@ jobs:
                 "fap-queue-reports": $reports_state
               },
               pending_total: $pending,
+              pending_by_queue: {
+                high: $high_pending,
+                default: $default_pending,
+                reports: $reports_pending
+              },
               convergence_required: $convergence,
+              apply_supported: $apply_supported,
               deploy_lock_present: false,
               deploy_like_process_count: 0,
               production_write_execution: $write,
@@ -373,8 +401,10 @@ jobs:
               }
             }' > artifacts/backend-production-required-queue-runtime-control.json
           jq -e \
-            '.contract_version == "backend.production_required_queue_runtime_control.v1"
-             and .pending_total == 0
+            '.contract_version == "backend.production_required_queue_runtime_control.v2"
+             and .pending_total == (
+               .pending_by_queue.high + .pending_by_queue.default + .pending_by_queue.reports
+             )
              and .deploy_lock_present == false
              and .deploy_like_process_count == 0
              and .negative_guarantees.search_submission == false
@@ -382,7 +412,7 @@ jobs:
             artifacts/backend-production-required-queue-runtime-control.json >/dev/null
 
       - name: Publish exact preflight authorization
-        if: needs.eligibility.outputs.mode == 'preflight'
+        if: needs.eligibility.outputs.mode == 'preflight' && steps.execute.outputs.apply_supported == 'true'
         shell: bash
         env:
           CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
@@ -403,6 +433,29 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           echo "Exact receipt-bound authorization generated."
+
+      - name: Publish safe backlog diagnostic
+        if: needs.eligibility.outputs.mode == 'preflight' && steps.execute.outputs.apply_supported != 'true'
+        shell: bash
+        env:
+          DEFAULT_STATE: ${{ steps.execute.outputs.default_state }}
+          REPORTS_STATE: ${{ steps.execute.outputs.reports_state }}
+          HIGH_PENDING: ${{ steps.execute.outputs.high_pending }}
+          DEFAULT_PENDING: ${{ steps.execute.outputs.default_pending }}
+          REPORTS_PENDING: ${{ steps.execute.outputs.reports_pending }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## Required queue runtime diagnostic"
+            echo
+            echo "- fap-queue-default-high state: $DEFAULT_STATE"
+            echo "- fap-queue-reports state: $REPORTS_STATE"
+            echo "- high pending: $HIGH_PENDING"
+            echo "- default pending: $DEFAULT_PENDING"
+            echo "- reports pending: $REPORTS_PENDING"
+            echo "- apply authorization: not generated"
+            echo "- production writes: zero"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload immutable control receipt
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

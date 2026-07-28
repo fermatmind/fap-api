@@ -63,9 +63,9 @@ read_status() {
   printf '%s\n' "$output"
 }
 
-queue_pending_total() {
+queue_pending_counts() {
   local probe=""
-  probe='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $targets=[["redis","high"],["redis","default"],["database","reports"]]; $total=0; foreach($targets as [$connection,$name]){$size=Illuminate\Support\Facades\Queue::connection($connection)->size($name); if(!is_int($size)&&!ctype_digit((string)$size)){throw new RuntimeException("invalid size");} $total+=(int)$size;} echo $total,PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
+  probe='try { $base=$argv[1]; require $base."/vendor/autoload.php"; $app=require $base."/bootstrap/app.php"; $kernel=$app->make(Illuminate\Contracts\Console\Kernel::class); $kernel->bootstrap(); $targets=[["redis","high"],["redis","default"],["database","reports"]]; $sizes=[]; foreach($targets as [$connection,$name]){$size=Illuminate\Support\Facades\Queue::connection($connection)->size($name); if(!is_int($size)&&!ctype_digit((string)$size)){throw new RuntimeException("invalid size");} $sizes[]=(int)$size;} echo implode("\t",$sizes),PHP_EOL; } catch (Throwable $e) { echo "PROBE_FAILED",PHP_EOL; exit(1); }'
   "$sudo_path" -n -u www-data "$php_path" -d display_errors=0 -r "$probe" "$current_release/backend" 2>/dev/null
 }
 
@@ -130,13 +130,21 @@ foreign_fingerprint() {
 status_before="$(read_status)"
 state_material_before="$(snapshot "$status_before")"
 foreign_before="$(foreign_fingerprint "$status_before")"
-pending_total="$(queue_pending_total)"
+pending_counts="$(queue_pending_counts)"
+IFS=$'\t' read -r high_pending default_pending reports_pending <<<"$pending_counts"
+[[ "$high_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
+[[ "$default_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
+[[ "$reports_pending" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
+pending_total=$((high_pending + default_pending + reports_pending))
 [[ "$pending_total" =~ ^[0-9]+$ ]] || fail QUEUE_PROBE
-[[ "$pending_total" == "0" ]] || fail QUEUE_BACKLOG_PRESENT
+if [[ "$mode" == "apply" && "$pending_total" != "0" ]]; then
+  fail QUEUE_BACKLOG_PRESENT
+fi
 target_set_sha256="$(printf '%s\n' "${programs[@]}" | sha256sum | awk '{print $1}')"
 state_sha256="$(
-  printf '%s\n%s\n%s\n%s\n%s\n' \
-    "$active_revision" "$target_set_sha256" "$pending_total" "$foreign_before" "$state_material_before" \
+  printf '%s\n%s\n%s\n%s\n%s\n%s\n%s\n' \
+    "$active_revision" "$target_set_sha256" "$high_pending" "$default_pending" \
+    "$reports_pending" "$foreign_before" "$state_material_before" \
     | sha256sum | awk '{print $1}'
 )"
 
@@ -150,9 +158,14 @@ if [[ "$mode" == "preflight" ]]; then
   if [[ "$default_state" != "RUNNING" || "$reports_state" != "RUNNING" ]]; then
     convergence_required=true
   fi
-  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+  apply_supported=false
+  if [[ "$convergence_required" == true && "$pending_total" == "0" ]]; then
+    apply_supported=true
+  fi
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
     "$active_revision" "$target_set_sha256" "$state_sha256" "$default_state" \
-    "$reports_state" "$pending_total" "$convergence_required" "$foreign_before"
+    "$reports_state" "$pending_total" "$high_pending" "$default_pending" \
+    "$reports_pending" "$convergence_required" "$apply_supported" "$foreign_before"
   exit 0
 fi
 
