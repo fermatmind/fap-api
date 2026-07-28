@@ -343,8 +343,8 @@ final class EnneagramPr23CacheOnlyResumeRunner
         for ($attempt = 1; $attempt <= 3; $attempt++) {
             try {
                 return $operation();
-            } catch (ConnectionException $exception) {
-                if ($attempt === 3) {
+            } catch (Throwable $exception) {
+                if (! self::isTransientReadFailure($exception) || $attempt === 3) {
                     throw $exception;
                 }
                 $pause();
@@ -352,6 +352,19 @@ final class EnneagramPr23CacheOnlyResumeRunner
         }
 
         throw new RuntimeException('TRANSIENT_READ_RETRY_EXHAUSTED');
+    }
+
+    private static function isTransientReadFailure(Throwable $throwable): bool
+    {
+        if ($throwable instanceof ConnectionException) {
+            return true;
+        }
+
+        return $throwable instanceof RuntimeException
+            && preg_match(
+                '/URL-set readback failed with HTTP (?:408|425|429|5[0-9]{2})\./D',
+                $throwable->getMessage(),
+            ) === 1;
     }
 
     /** @return array{manifest:EnneagramPublicAuthorityV224RuntimeManifest,cache:EnneagramPublicAuthorityV224CacheCoordinator,readback:EnneagramPublicAuthorityV224RuntimeReadback} */
@@ -641,6 +654,15 @@ final class EnneagramPr23CacheOnlyResumeRunner
         }
 
         $code = strtoupper(trim($throwable->getMessage()));
+        if (preg_match('/^[A-Z_]+ URL-SET READBACK FAILED WITH HTTP [0-9]{3}\\.$/D', $code) === 1) {
+            return 'URL_SET_HTTP_READ_FAILURE';
+        }
+        if (str_contains($code, 'ENNEAGRAM URL SUBSET DOES NOT MATCH')) {
+            return 'URL_SET_SUBSET_DRIFT';
+        }
+        if (str_contains($code, 'DISCOVERABILITY SET IS NOT EXACTLY 116 PATHS')) {
+            return 'EXPECTED_URL_SET_COUNT_DRIFT';
+        }
 
         if (preg_match('/^[A-Z0-9_]{3,80}$/D', $code) === 1) {
             return $code;

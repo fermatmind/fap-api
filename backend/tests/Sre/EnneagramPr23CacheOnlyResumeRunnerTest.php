@@ -182,4 +182,66 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
         }
         $this->assertSame(1, $attempts);
     }
+
+    #[Test]
+    public function transient_url_set_http_statuses_retry_but_contract_drift_does_not(): void
+    {
+        foreach ([408, 425, 429, 500, 502, 503, 599] as $status) {
+            $attempts = 0;
+            $result = EnneagramPr23CacheOnlyResumeRunner::retryTransientRead(
+                static function () use (&$attempts, $status): string {
+                    $attempts++;
+                    if ($attempts === 1) {
+                        throw new RuntimeException(
+                            "llms_full URL-set readback failed with HTTP {$status}.",
+                        );
+                    }
+
+                    return 'ok';
+                },
+                static function (): void {},
+            );
+
+            $this->assertSame('ok', $result);
+            $this->assertSame(2, $attempts);
+        }
+
+        foreach ([400, 401, 403, 404] as $status) {
+            $attempts = 0;
+            try {
+                EnneagramPr23CacheOnlyResumeRunner::retryTransientRead(
+                    static function () use (&$attempts, $status): never {
+                        $attempts++;
+                        throw new RuntimeException(
+                            "llms_full URL-set readback failed with HTTP {$status}.",
+                        );
+                    },
+                    static function (): void {},
+                );
+                $this->fail('Permanent HTTP failures must not be retried.');
+            } catch (RuntimeException $exception) {
+                $this->assertSame(
+                    "llms_full URL-set readback failed with HTTP {$status}.",
+                    $exception->getMessage(),
+                );
+            }
+            $this->assertSame(1, $attempts);
+        }
+
+        $attempts = 0;
+        try {
+            EnneagramPr23CacheOnlyResumeRunner::retryTransientRead(
+                static function () use (&$attempts): never {
+                    $attempts++;
+                    throw new RuntimeException(
+                        'llms_full Enneagram URL subset does not match the exact 116 public paths.',
+                    );
+                },
+                static function (): void {},
+            );
+            $this->fail('URL-set contract drift must not be retried.');
+        } catch (RuntimeException) {
+            $this->assertSame(1, $attempts);
+        }
+    }
 }
