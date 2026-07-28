@@ -528,7 +528,9 @@ jobs:
             bound_run_attempt="$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT"
           fi
           remote_command="$(
-            printf 'test ! -e %q/.dep/deploy.lock && active_backend=$(readlink -f %q/current/backend) && test -n \"$active_backend\" && sudo -n -u www-data -- env ' "$DEPLOY_PATH" "$DEPLOY_PATH"
+            printf 'test ! -e %q/.dep/deploy.lock && ' "$DEPLOY_PATH"
+            printf 'sudo -n -u www-data -- /bin/sh -c %q && ' 'for environment in /proc/[0-9]*/environ; do if tr "\0" "\n" < "$environment" 2>/dev/null | grep -qx "FM_ENNEAGRAM_RUNNER_EXECUTE=1"; then exit 1; fi; done'
+            printf 'active_backend=$(readlink -f %q/current/backend) && test -n \"$active_backend\" && sudo -n -u www-data -- env ' "$DEPLOY_PATH"
             printf 'FM_ENNEAGRAM_RESUME_MODE=%q ' "$MODE"
             printf 'FM_ENNEAGRAM_RUNNER_EXECUTE=1 '
             printf 'FM_ENNEAGRAM_ACTIVE_BACKEND="$active_backend" '
@@ -565,6 +567,8 @@ jobs:
             -o BatchMode=yes \
             -o StrictHostKeyChecking=yes \
             -o ConnectTimeout=10 \
+            -o ServerAliveInterval=30 \
+            -o ServerAliveCountMax=6 \
             -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" \
             "$remote_command" \
