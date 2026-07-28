@@ -11,6 +11,7 @@ use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224CacheCoordina
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeManifest;
 use App\Services\Enneagram\AuthorityV2\EnneagramPublicAuthorityV224RuntimeReadback;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 use Throwable;
@@ -45,10 +46,13 @@ final class EnneagramPr23CacheOnlyResumeRunner
 
     private static bool $frontendRevalidationCommitted = false;
 
+    private static string $failureStage = 'runner_startup';
+
     public static function main(): int
     {
         self::$frontendRevalidationAttempted = false;
         self::$frontendRevalidationCommitted = false;
+        self::$failureStage = 'runner_startup';
 
         try {
             self::emit(self::execute(self::environment()));
@@ -59,6 +63,7 @@ final class EnneagramPr23CacheOnlyResumeRunner
                 'contract_version' => self::CONTRACT_VERSION,
                 'ok' => false,
                 'status' => 'FAIL_CLOSED',
+                'failure_stage' => self::$failureStage,
                 'safe_error_code' => self::safeErrorCode($throwable),
                 'writes_committed' => self::$frontendRevalidationCommitted,
                 'frontend_revalidation_attempted' => self::$frontendRevalidationAttempted,
@@ -82,22 +87,33 @@ final class EnneagramPr23CacheOnlyResumeRunner
     /** @param array<string,string> $environment @return array<string,mixed> */
     public static function execute(array $environment): array
     {
+        self::$failureStage = 'validate_inputs';
         $mode = self::required($environment, 'FM_ENNEAGRAM_RESUME_MODE');
         if (! in_array($mode, ['preflight', 'execute'], true)) {
             throw new RuntimeException('INVALID_MODE');
         }
 
+        self::$failureStage = 'bootstrap_active_runtime';
         $activeBackend = self::managedBackendPath(
             self::required($environment, 'FM_ENNEAGRAM_ACTIVE_BACKEND'),
             self::required($environment, 'FM_ENNEAGRAM_MANAGED_DEPLOY_ROOT'),
         );
         self::bootstrapApplication($activeBackend);
 
+        self::$failureStage = 'bind_runtime_identity';
         $bindings = self::bindings($environment, $activeBackend);
+        self::$failureStage = 'validate_release_evidence';
         $releaseReport = self::releaseReport($activeBackend, $bindings);
         $services = self::services();
+        self::$failureStage = 'validate_promotion_state';
         $state = self::productionState($releaseReport, $bindings, $services['manifest']);
-        $snapshot = $services['readback']->snapshot($releaseReport, $bindings['frontend_origin']);
+        self::$failureStage = 'read_runtime_snapshot';
+        $snapshot = self::retryTransientRead(
+            static fn (): array => $services['readback']->snapshot(
+                $releaseReport,
+                $bindings['frontend_origin'],
+            ),
+        );
         $safeState = $state;
         unset($safeState['private_reviewer_names']);
         $stateFingerprint = self::fingerprint([
@@ -107,6 +123,7 @@ final class EnneagramPr23CacheOnlyResumeRunner
         ]);
 
         if ($mode === 'preflight') {
+            self::$failureStage = 'build_preflight_authorization';
             $phrase = self::authorizationPhrase(
                 (int) $bindings['preflight_run_id'],
                 (int) $bindings['preflight_run_attempt'],
@@ -126,6 +143,7 @@ final class EnneagramPr23CacheOnlyResumeRunner
             return self::preflightReceipt($bindings, $state, $snapshot, $stateFingerprint, $phrase);
         }
 
+        self::$failureStage = 'validate_execute_authorization';
         self::assertHash(
             self::required($environment, 'FM_ENNEAGRAM_EXPECTED_STATE_FINGERPRINT'),
             'INVALID_EXPECTED_STATE_FINGERPRINT',
@@ -155,12 +173,14 @@ final class EnneagramPr23CacheOnlyResumeRunner
             throw new RuntimeException('AUTHORIZATION_PHRASE_MISMATCH');
         }
 
+        self::$failureStage = 'validate_revalidation_runtime_config';
         $secret = (string) config('ops.content_release_observability.hmac_revalidation_secret', '');
         $endpoint = (string) config('ops.content_release_observability.hmac_revalidation_url', '');
         if (strlen($secret) < 24 || ! self::isHttpsUrl($endpoint)) {
             throw new RuntimeException('RUNTIME_REVALIDATION_CONFIG_UNAVAILABLE');
         }
 
+        self::$failureStage = 'frontend_hmac_revalidation';
         self::$frontendRevalidationAttempted = true;
         $revalidation = $services['cache']->revalidateFrontend($releaseReport, $endpoint, $secret);
         if (($revalidation['ok'] ?? false) !== true
@@ -172,6 +192,7 @@ final class EnneagramPr23CacheOnlyResumeRunner
 
         $batchReceipts = [];
         foreach (self::BATCH_NAMES as $batchName) {
+            self::$failureStage = 'post_readback_'.$batchName;
             $readback = $services['readback']->run(
                 'post',
                 $batchName,
@@ -185,7 +206,13 @@ final class EnneagramPr23CacheOnlyResumeRunner
             );
             $batchReceipts[] = self::safeReadbackReceipt($readback);
         }
-        $postSnapshot = $services['readback']->snapshot($releaseReport, $bindings['frontend_origin']);
+        self::$failureStage = 'post_readback_snapshot';
+        $postSnapshot = self::retryTransientRead(
+            static fn (): array => $services['readback']->snapshot(
+                $releaseReport,
+                $bindings['frontend_origin'],
+            ),
+        );
         if (! hash_equals(self::fingerprint($snapshot), self::fingerprint($postSnapshot))) {
             throw new RuntimeException('POST_READBACK_SNAPSHOT_DRIFT');
         }
@@ -305,6 +332,26 @@ final class EnneagramPr23CacheOnlyResumeRunner
         string $stateFingerprint,
     ): string {
         return "I explicitly approve production Enneagram PR23 cache-only resume from preflight run {$preflightRunId} attempt {$preflightRunAttempt} with control-plane SHA {$controlPlaneSha} runner SHA256 {$runnerSha256} backend SHA {$backendSha} frontend SHA {$frontendSha} package SHA256 {$packageSha256} release-report SHA256 {$releaseReportSha256} runtime-config apply run {$runtimeConfigApplyRunId} attempt {$runtimeConfigApplyRunAttempt} receipt SHA256 {$runtimeConfigReceiptSha256} rollback-token SHA256 {$rollbackTokenSha256} state fingerprint {$stateFingerprint}; revalidate exactly 116 frontend paths by HMAC, then run post-readback canary 8 plus 9x12, no import/review-bind/promotion/rollback/backend-cache-invalidation/deploy/symlink/migration/CMS/database-authority/queue/restart/publication/sitemap/llms/search/PR23-rerun/automatic-rollback.";
+    }
+
+    public static function retryTransientRead(callable $operation, ?callable $pause = null): mixed
+    {
+        $pause ??= static function (): void {
+            usleep(500_000);
+        };
+
+        for ($attempt = 1; $attempt <= 3; $attempt++) {
+            try {
+                return $operation();
+            } catch (ConnectionException $exception) {
+                if ($attempt === 3) {
+                    throw $exception;
+                }
+                $pause();
+            }
+        }
+
+        throw new RuntimeException('TRANSIENT_READ_RETRY_EXHAUSTED');
     }
 
     /** @return array{manifest:EnneagramPublicAuthorityV224RuntimeManifest,cache:EnneagramPublicAuthorityV224CacheCoordinator,readback:EnneagramPublicAuthorityV224RuntimeReadback} */
@@ -589,9 +636,19 @@ final class EnneagramPr23CacheOnlyResumeRunner
 
     private static function safeErrorCode(Throwable $throwable): string
     {
+        if ($throwable instanceof ConnectionException) {
+            return 'TRANSIENT_HTTP_READ_FAILURE';
+        }
+
         $code = strtoupper(trim($throwable->getMessage()));
 
-        return preg_match('/^[A-Z0-9_]{3,80}$/D', $code) === 1 ? $code : 'UNEXPECTED_FAILURE';
+        if (preg_match('/^[A-Z0-9_]{3,80}$/D', $code) === 1) {
+            return $code;
+        }
+
+        $stage = preg_replace('/[^A-Z0-9_]+/', '_', strtoupper(self::$failureStage));
+
+        return ($stage !== null && $stage !== '' ? $stage : 'UNEXPECTED').'_FAILED';
     }
 
     /** @param array<string,mixed> $receipt */
