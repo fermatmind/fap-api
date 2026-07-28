@@ -350,5 +350,36 @@ final class EnneagramPr23CacheOnlyResumeRunnerTest extends TestCase
         } catch (RuntimeException) {
             $this->assertSame(1, $attempts);
         }
+
+        $attempts = 0;
+        $result = EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackBatch(
+            static function () use (&$attempts): string {
+                $attempts++;
+                if ($attempts < 4) {
+                    throw new RuntimeException(
+                        'Runtime readback mismatch: redacted-target:html_title_mismatch.',
+                    );
+                }
+
+                return 'converged';
+            },
+            static function (): void {},
+            4,
+        );
+        $this->assertSame('converged', $result);
+        $this->assertSame(4, $attempts);
+
+        foreach ([0, 14] as $invalidMaxAttempts) {
+            try {
+                EnneagramPr23CacheOnlyResumeRunner::retryPostReadbackBatch(
+                    static fn (): string => 'unreachable',
+                    static function (): void {},
+                    $invalidMaxAttempts,
+                );
+                $this->fail('Invalid post-readback attempt bounds must fail closed.');
+            } catch (RuntimeException $exception) {
+                $this->assertSame('INVALID_POST_READBACK_MAX_ATTEMPTS', $exception->getMessage());
+            }
+        }
     }
 }
