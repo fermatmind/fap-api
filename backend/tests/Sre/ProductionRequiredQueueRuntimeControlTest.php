@@ -42,8 +42,16 @@ high="${FAKE_HIGH_PENDING:-0}"
 default="${FAKE_DEFAULT_PENDING:-0}"
 reports="${FAKE_REPORTS_PENDING:-0}"
 class="${FAKE_JOB_CLASS:-App.Jobs.Career.WarmCareerJobDetailProjection}"
-classes="$(printf '{"high":{"%s":%s},"default":{"%s":%s},"reports":{"%s":%s}}' \
-  "$class" "$high" "$class" "$default" "$class" "$reports")"
+class_map() {
+  local count="$1"
+  if [ "$count" -eq 0 ]; then
+    printf '{}'
+  else
+    printf '{"%s":%s}' "$class" "$count"
+  fi
+}
+classes="$(printf '{"high":%s,"default":%s,"reports":%s}' \
+  "$(class_map "$high")" "$(class_map "$default")" "$(class_map "$reports")")"
 classes_b64="$(printf '%s' "$classes" | base64 | tr -d '\n')"
 printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
   "${FAKE_HIGH_PENDING:-0}" \
@@ -130,9 +138,9 @@ BASH);
         $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', $fields[14]);
         $this->assertSame(
             [
-                'high' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 0],
-                'default' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 0],
-                'reports' => ['App.Jobs.Career.WarmCareerJobDetailProjection' => 0],
+                'high' => [],
+                'default' => [],
+                'reports' => [],
             ],
             json_decode(base64_decode($fields[15]), true, flags: JSON_THROW_ON_ERROR),
         );
