@@ -1,0 +1,75 @@
+{
+  "schema_version": "enneagram_public_authority_v2_runtime_closeout_23_retrospective.v1",
+  "artifact": "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-CLOSEOUT-23",
+  "classification": "redacted_git_safe",
+  "final_status": "completed_with_recorded_authorization_drift_and_cache_recovery",
+  "incidents": [
+    {
+      "sequence": 1,
+      "classification": "AUTHORIZATION_DRIFT",
+      "status": "RECORDED_NOT_EXCUSED",
+      "authorized_phrase_sha256": "52299c42be2c795105df61c15550cf7ca43617d57746d4948dd2a6d1ca810532",
+      "preflight_fingerprint_changed": true,
+      "authorization_continuity_verified": false,
+      "safe_error_code": "EXECUTE_PHRASE_SHA_MISMATCH_AFTER_PREFLIGHT_REFRESH"
+    },
+    {
+      "sequence": 2,
+      "classification": "PARTIAL_CLOSEOUT",
+      "status": "PROMOTION_COMMITTED_REVALIDATION_FAILED",
+      "receipt_sha256": "d35f2905e4079431ffa8bbfdd535b74cb6ce2d748167bf3a23ebf9f572afc402",
+      "working_import_count": 116,
+      "review_bind_count": 116,
+      "promotion_count": 116,
+      "automatic_rollback": false,
+      "safe_error_code": "FRONTEND_REVALIDATION_FAILED"
+    },
+    {
+      "sequence": 3,
+      "classification": "RUNTIME_CONFIG_RECOVERY",
+      "status": "PASS_RUNTIME_CONFIG_CONVERGED",
+      "run_id": 30333691762,
+      "run_attempt": 1,
+      "receipt_sha256": "7e78a73b79312ab9989d9debbc8d06fcc3ce7856591f02bfa3a06bc068151e94",
+      "runtime_setting_write_count": 3
+    },
+    {
+      "sequence": 4,
+      "classification": "CACHE_ONLY_REVALIDATION",
+      "status": "REVALIDATION_COMMITTED_POST_READBACK_DEFERRED",
+      "run_id": 30343606780,
+      "run_attempt": 1,
+      "receipt_sha256": "1cf4c1cadc7fc29202ac762bbeea3f03416a6d9f92ae486f641a73fa87bceedd",
+      "accepted_path_count": 116,
+      "rejected_path_count": 0,
+      "safe_error_code": "POST_READBACK_CANARY_00_FAILED"
+    },
+    {
+      "sequence": 5,
+      "classification": "ZERO_WRITE_POST_READBACK_RECOVERY",
+      "status": "PASS_POST_READBACK_ONLY",
+      "run_id": 30355435632,
+      "run_attempt": 1,
+      "receipt_sha256": "c1b136346a552b6e7bffebc97e09f32b949689d5ff3f51f80492518695293ae5",
+      "readback_batch_count": 10,
+      "api_read_count": 116,
+      "html_read_count": 116,
+      "private_data_exposed_count": 0,
+      "non_empty_media_count": 0,
+      "writes_committed": false
+    }
+  ],
+  "control_plane_repair_prs": [
+    3355,
+    3356,
+    3357,
+    3358,
+    3359,
+    3360,
+    3361,
+    3362,
+    3363
+  ],
+  "prohibited_material_committed": false,
+  "production_action_in_closeout_pr": false
+}

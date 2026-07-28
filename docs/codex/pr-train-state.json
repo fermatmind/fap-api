@@ -97089,19 +97089,31 @@
       "ENNEAGRAM-PUBLIC-AUTHORITY-V2-RUNTIME-READBACK-22E",
       "separate_exact_sha_production_authorization"
     ],
-    "status": "pending_production_authorization",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "ready_to_merge",
+    "commit_sha": "36f7a54a783c9ece18b3ca7e745c93238a483699",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3364",
     "checks": {
       "dependency": {
-        "status": "pending",
-        "evidence": "22A-22E are merged and cleaned. Artifacts-only review generator PR #3155 and frontend same-origin deployed-revision endpoint PR #1781 are merged, green, and cleaned. PR23 remains pending confirmed asynchronous backend/frontend deployed SHAs, a completed private 116-row review register, a successful pre-readback, and separate authorization of the generated exact-SHA packet."
+        "status": "passed",
+        "evidence": "22A-22E and the required control-plane repair PRs are merged. Production working import, review bind, and atomic promotion committed 116/116/116. Cache-only HMAC revalidation committed 116 accepted and 0 rejected paths. Final post-readback run 30355435632 attempt 1 passed 10 batches with 116 API and 116 HTML reads, zero private-data exposure, and zero non-empty media."
+      },
+      "production_closeout": {
+        "status": "passed_with_recorded_authorization_drift",
+        "evidence": "Original partial closeout receipt SHA256 d35f2905e4079431ffa8bbfdd535b74cb6ce2d748167bf3a23ebf9f572afc402 records promotion committed before frontend revalidation failed. Authorization continuity is explicitly classified AUTHORIZATION_DRIFT and is not represented as an exact match. Runtime-config apply receipt SHA256 7e78a73b79312ab9989d9debbc8d06fcc3ce7856591f02bfa3a06bc068151e94, cache-only execute receipt SHA256 1cf4c1cadc7fc29202ac762bbeea3f03416a6d9f92ae486f641a73fa87bceedd, and final zero-write post-readback receipt SHA256 c1b136346a552b6e7bffebc97e09f32b949689d5ff3f51f80492518695293ae5 provide the recovery chain."
+      },
+      "evidence_archive": {
+        "status": "passed",
+        "evidence": "Three redacted Git-safe closeout artifacts are confined to the manifest-allowed runtime-closeout-23 directory. Sensitive-field scans, 258 Enneagram V2 tests with 29,261 assertions, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-file scope validation passed. No production action is part of this PR."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "PR #3364 required checks passed on head 36f7a54a783c9ece18b3ca7e745c93238a483699. The final ready-to-merge ledger update requires its own check cycle before squash merge."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": false,
-      "local_validation_passed": false,
-      "github_checks_green": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -97114,6 +97126,7 @@
     "api_runtime_change": true,
     "publish_allowed": true,
     "deploy_allowed": false,
+    "closeout_pr_production_execution": false,
     "transitions": [
       {
         "at": "2026-07-15T01:12:16Z",
@@ -97129,9 +97142,29 @@
         "at": "2026-07-17T14:03:30Z",
         "status": "readiness_prerequisites_reconciled",
         "note": "Recorded merged-and-cleaned 22E plus merged, green, and cleaned artifacts-only PR #3155 and frontend revision-endpoint PR #1781. PR23 was not started: deployed-SHA confirmation, private review register, pre-readback, and separate exact-SHA authorization are still required; deployment and production writes remain zero."
+      },
+      {
+        "at": "2026-07-28T11:49:31Z",
+        "status": "runtime_closeout_evidence_prepared",
+        "note": "Prepared the final Git-safe closeout record after 116/116/116 import, review bind, and promotion; 116 accepted cache-only revalidation paths; and successful run 30355435632 attempt 1 with 116 API plus 116 HTML reads. Authorization continuity remains explicitly classified AUTHORIZATION_DRIFT. This documentation PR performs no production action."
+      },
+      {
+        "at": "2026-07-28T11:54:53Z",
+        "status": "local_validation_passed",
+        "note": "Sensitive-field scanning, 258 Enneagram V2 tests with 29,261 assertions, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-file allowed-path validation passed."
+      },
+      {
+        "at": "2026-07-28T11:56:07Z",
+        "status": "github_checks_pending",
+        "note": "Committed the initial redacted evidence as 80d9fa0b24cb9c8040a13208c0f619fd2623aeb3, pushed the exact four-file branch, and opened PR #3364. Required checks are pending."
+      },
+      {
+        "at": "2026-07-28T12:04:57Z",
+        "status": "ready_to_merge",
+        "note": "All required checks passed on head 36f7a54a783c9ece18b3ca7e745c93238a483699. Exact four-file scope and redaction boundaries remain intact; the final ledger-only update must pass its own required check cycle before merge."
       }
     ],
-    "updated_at": "2026-07-17T14:03:30Z"
+    "updated_at": "2026-07-28T12:04:57Z"
   },
   "ANALYTICS-FRESHNESS-RECONCILE-03": {
     "id": "ANALYTICS-FRESHNESS-RECONCILE-03",
