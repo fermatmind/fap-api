@@ -1,0 +1,294 @@
+name: Content Release Revalidation Config Cache
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only preflight or exact-authorized apply
+        required: true
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this workflow
+        required: true
+        type: string
+      expected_active_sha:
+        description: Exact currently active backend SHA
+        required: true
+        type: string
+      preflight_run_id:
+        description: Apply-only immutable successful preflight run id
+        required: false
+        type: string
+      preflight_run_attempt:
+        description: Apply-only immutable successful preflight run attempt
+        required: false
+        type: string
+      expected_env_sha256:
+        description: Apply-only exact shared environment SHA256
+        required: false
+        type: string
+      expected_config_cache_sha256:
+        description: Apply-only exact active Laravel config cache SHA256
+        required: false
+        type: string
+      expected_config_source_sha256:
+        description: Apply-only exact active config/ops.php SHA256
+        required: false
+        type: string
+      expected_runtime_fingerprint_sha256:
+        description: Apply-only exact runtime fingerprint
+        required: false
+        type: string
+      expected_source_bundle_sha256:
+        description: Apply-only exact secret and URL source bundle SHA256
+        required: false
+        type: string
+      authorization_phrase:
+        description: Apply-only exact authorization phrase
+        required: false
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  config-cache:
+    name: Preflight or converge backend revalidation config
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+    env:
+      MODE: ${{ inputs.mode }}
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_SHA: ${{ inputs.expected_active_sha }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      EXPECTED_ENV_SHA256: ${{ inputs.expected_env_sha256 }}
+      EXPECTED_CONFIG_CACHE_SHA256: ${{ inputs.expected_config_cache_sha256 }}
+      EXPECTED_CONFIG_SOURCE_SHA256: ${{ inputs.expected_config_source_sha256 }}
+      EXPECTED_RUNTIME_FINGERPRINT_SHA256: ${{ inputs.expected_runtime_fingerprint_sha256 }}
+      EXPECTED_SOURCE_BUNDLE_SHA256: ${{ inputs.expected_source_bundle_sha256 }}
+      AUTHORIZATION_PHRASE: ${{ inputs.authorization_phrase }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Validate exact control-plane inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$MODE" = preflight -o "$MODE" = apply
+          test "$EXPECTED_CONTROL_PLANE_SHA" = "$GITHUB_SHA"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          if [ "$MODE" = preflight ]; then
+            test -z "$AUTHORIZATION_PHRASE"
+          else
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[0-9]+$ ]]
+            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
+            [[ "$EXPECTED_ENV_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_CONFIG_CACHE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_CONFIG_SOURCE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_RUNTIME_FINGERPRINT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_SOURCE_BUNDLE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            test -n "$AUTHORIZATION_PHRASE"
+          fi
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Confirm control plane remains latest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+      - name: Verify required checks are green
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          INPUT_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+        with:
+          script: |
+            const sha = process.env.INPUT_CONTROL_PLANE_SHA || '';
+            const required = [
+              'content-pack-build-validate',
+              'hygiene',
+              'supply-chain',
+              'verify-bigfive',
+              'verify-mbti-legacy',
+              'verify-mbti-v2',
+            ];
+            const runs = await github.paginate(github.rest.checks.listForRef, {
+              ...context.repo,
+              ref: sha,
+              per_page: 100,
+            });
+            for (const name of required) {
+              const run = runs
+                .filter((item) => item.name === name)
+                .sort((a, b) => Number(b.id) - Number(a.id))[0];
+              if (!run || run.status !== 'completed' || run.conclusion !== 'success') {
+                core.setFailed(`Required check is not green: ${name}.`);
+                return;
+              }
+            }
+
+      - name: Validate immutable preflight receipt
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+          jq -e \
+            --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+            --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+            '.status == "completed"
+             and .conclusion == "success"
+             and .event == "workflow_dispatch"
+             and .head_sha == $sha
+             and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+          test "$(jq -r '.path' <<<"$run_json")" = \
+            ".github/workflows/content-release-revalidation-config-cache.yml"
+          preflight_dir="$(mktemp -d)"
+          gh run download "$PREFLIGHT_RUN_ID" \
+            --name "content-release-config-cache-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+            --dir "$preflight_dir"
+          receipt="$preflight_dir/content-release-revalidation-config-cache.json"
+          test -f "$receipt"
+          jq -e \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_SHA" \
+            --arg env_sha "$EXPECTED_ENV_SHA256" \
+            --arg cache_sha "$EXPECTED_CONFIG_CACHE_SHA256" \
+            --arg source_sha "$EXPECTED_CONFIG_SOURCE_SHA256" \
+            --arg runtime_sha "$EXPECTED_RUNTIME_FINGERPRINT_SHA256" \
+            --arg bundle_sha "$EXPECTED_SOURCE_BUNDLE_SHA256" \
+            '.mode == "preflight"
+             and .ok == true
+             and .apply_ready == true
+             and .production_write_execution == false
+             and .writes_committed == false
+             and .control_plane_sha == $control
+             and .active_backend_sha == $active
+             and .env_sha256 == $env_sha
+             and .config_cache_sha256 == $cache_sha
+             and .config_source_sha256 == $source_sha
+             and .runtime_fingerprint_sha256 == $runtime_sha
+             and .source_bundle_sha256 == $bundle_sha' "$receipt" >/dev/null
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Run bounded backend config-cache control
+        id: control
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          CONTENT_RELEASE_REVALIDATE_SECRET: ${{ secrets.CONTENT_RELEASE_REVALIDATE_SECRET }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST"
+          test -n "$DEPLOY_USER"
+          [[ "$DEPLOY_PORT" =~ ^[0-9]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          receipt="$RUNNER_TEMP/content-release-revalidation-config-cache.json"
+          set +e
+          {
+            printf 'export MODE=%q\n' "$MODE"
+            printf 'export DEPLOY_PATH=%q\n' "$DEPLOY_PATH"
+            printf 'export MANAGED_DEPLOY_PATH=%q\n' "$DEPLOY_PATH"
+            printf 'export EXPECTED_CONTROL_PLANE_SHA=%q\n' "$EXPECTED_CONTROL_PLANE_SHA"
+            printf 'export EXPECTED_ACTIVE_SHA=%q\n' "$EXPECTED_ACTIVE_SHA"
+            printf 'export PREFLIGHT_RUN_ID=%q\n' "$PREFLIGHT_RUN_ID"
+            printf 'export PREFLIGHT_RUN_ATTEMPT=%q\n' "$PREFLIGHT_RUN_ATTEMPT"
+            printf 'export EXPECTED_ENV_SHA256=%q\n' "$EXPECTED_ENV_SHA256"
+            printf 'export EXPECTED_CONFIG_CACHE_SHA256=%q\n' "$EXPECTED_CONFIG_CACHE_SHA256"
+            printf 'export EXPECTED_CONFIG_SOURCE_SHA256=%q\n' "$EXPECTED_CONFIG_SOURCE_SHA256"
+            printf 'export EXPECTED_RUNTIME_FINGERPRINT_SHA256=%q\n' "$EXPECTED_RUNTIME_FINGERPRINT_SHA256"
+            printf 'export EXPECTED_SOURCE_BUNDLE_SHA256=%q\n' "$EXPECTED_SOURCE_BUNDLE_SHA256"
+            printf 'export AUTHORIZATION_PHRASE=%q\n' "$AUTHORIZATION_PHRASE"
+            printf 'export CONTENT_RELEASE_REVALIDATE_SECRET=%q\n' "$CONTENT_RELEASE_REVALIDATE_SECRET"
+            cat backend/scripts/deploy/content_release_revalidation_config_cache.sh
+          } | ssh \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes \
+            -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "bash -s" \
+            > "$receipt"
+          runner_status=$?
+          set -e
+          cp "$receipt" content-release-revalidation-config-cache.json
+          jq -e '.secret_values_output == false' "$receipt" >/dev/null
+          if [ "$runner_status" -ne 0 ]; then
+            jq -e '.ok == false' "$receipt" >/dev/null
+            exit "$runner_status"
+          fi
+          if [ "$MODE" = preflight ]; then
+            jq -e \
+              '.mode == "preflight"
+               and .ok == true
+               and .production_write_execution == false
+               and .writes_committed == false
+               and .application_deploy == false
+               and .public_cache_revalidation == false' "$receipt" >/dev/null
+          else
+            jq -e \
+              '.mode == "apply"
+               and .ok == true
+               and .status == "PASS_CONFIG_CACHE_CONVERGED"
+               and .writes_committed == true
+               and .env_setting_write_count == 2
+               and .config_cache_rebuild_committed == true
+               and .application_deploy == false
+               and .public_cache_revalidation == false' "$receipt" >/dev/null
+          fi
+
+      - name: Upload preflight receipt
+        if: always() && inputs.mode == 'preflight'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: content-release-config-cache-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: content-release-revalidation-config-cache.json
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Upload apply receipt
+        if: always() && inputs.mode == 'apply'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: content-release-config-cache-apply-${{ github.run_id }}-${{ github.run_attempt }}
+          path: content-release-revalidation-config-cache.json
+          retention-days: 14
+          if-no-files-found: error

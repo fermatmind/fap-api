@@ -351,6 +351,35 @@ The exact write authorization format is:
 I explicitly approve production Career inactive-candidate exact cache bootstrap with authorization preflight run <PREFLIGHT_RUN_ID> coverage fingerprint <COVERAGE_SHA256> control-plane SHA <CONTROL_SHA> runner SHA256 <RUNNER_SHA256> active SHA <ACTIVE_SHA> using exact staging run <STAGING_RUN> and inactive candidate SHA <CANDIDATE_SHA> release <RELEASE> for exactly <MISSING> missing pointers across 2092 targets with offline build budget 5000ms, retry limit 1, batch size 10 and dense-batch cooldown 2s; candidate-code synchronous cache-only batches, no active default worker/queue/CMS/DB-authority/publication/indexability/sitemap/llms/search/candidate activation.
 ```
 
+## Content-release revalidation config-cache convergence
+
+`Content Release Revalidation Config Cache` is the protected backend control
+for repairing the shared HMAC configuration and clearing a stale Laravel
+config-cache value without deploying application code. `preflight` is
+read-only. It binds the exact latest-main control-plane SHA, active production
+revision, shared environment SHA, active config-cache SHA, committed
+`config/ops.php` SHA, source credential bundle SHA, runtime fingerprint, deploy
+lock absence, and whether the cached value is stale. Receipts contain hashes,
+booleans, and counts only; neither the shared secret nor SSH routing metadata
+is emitted.
+
+`apply` downloads the immutable successful preflight receipt and requires a
+separate exact authorization. It atomically updates only
+`CONTENT_RELEASE_REVALIDATE_SECRET` and
+`ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL` in the Deployer shared backend
+environment, then runs only Laravel `config:cache` as the application runtime
+user. It does not deploy or activate a release, run migrations, mutate CMS or
+database authority, revalidate public caches, restart queues or services,
+publish, alter sitemap/llms/search state, execute PR23, or roll back
+automatically. A failure after the environment write is reported as a partial
+config write and stops.
+
+The exact apply authorization format is:
+
+```text
+I explicitly approve production fap-api content-release revalidation config convergence from preflight run <PREFLIGHT_RUN_ID> attempt <PREFLIGHT_RUN_ATTEMPT> with control-plane SHA <CONTROL_SHA> active SHA <ACTIVE_SHA> environment SHA256 <ENV_SHA256> config-cache SHA256 <CONFIG_CACHE_SHA256> config-source SHA256 <CONFIG_SOURCE_SHA256> runtime fingerprint <RUNTIME_FINGERPRINT_SHA256> source bundle SHA256 <SOURCE_BUNDLE_SHA256>; write only CONTENT_RELEASE_REVALIDATE_SECRET and ENNEAGRAM_AUTHORITY_V2_REVALIDATION_URL, rebuild only Laravel config cache, no deploy/symlink/migration/CMS/database-authority/public-cache-revalidation/queue/service-restart/publication/sitemap/llms/search/PR23/automatic rollback.
+```
+
 ## fap-web handling in V1
 - `fap-web` is a reference only.
 - No production write operation is implemented for `fap-web` in this phase.
