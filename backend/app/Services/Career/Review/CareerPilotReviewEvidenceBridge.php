@@ -66,6 +66,7 @@ final class CareerPilotReviewEvidenceBridge
         private readonly ReviewAttestationCanonicalizer $canonicalizer,
         private readonly CareerPublishTrackResolver $publishTrackResolver,
         private readonly CareerSearchEntryTierResolver $searchEntryTierResolver,
+        private readonly CareerSearchEntryQualityBatchApplyAuthority $searchEntryApplyAuthority,
         private readonly CareerSearchEntryQualityEvaluator $searchEntryQualityEvaluator,
         private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
     ) {}
@@ -385,6 +386,11 @@ final class CareerPilotReviewEvidenceBridge
                 $resolved[$slug] = [
                     'review_state' => 'approved',
                     'last_reviewed_at' => $reviewedAt,
+                    'review_attestation_id' => (int) $attestation->id,
+                    'review_evidence_sha256' => (string) $attestation->evidence_sha256,
+                    'package_sha256' => (string) $attestation->package_sha256,
+                    'target_set_sha256' => (string) $attestation->target_set_sha256,
+                    'target_count' => (int) $attestation->target_count,
                     'index_item_sha256_by_locale' => $package['index_item_sha256_by_slug'][$slug],
                     'target_sha256_by_locale_and_kind' => $targetShasBySlug[$slug],
                 ];
@@ -591,10 +597,9 @@ final class CareerPilotReviewEvidenceBridge
         $lastReviewedAt = is_string($projection['last_reviewed_at'] ?? null)
             ? $projection['last_reviewed_at']
             : null;
-        // Review binding is evidence-only. It must never stand in for the
-        // separately authorized controlled apply that can make a candidate
-        // search-entry eligible.
-        $contentQualityTier = null;
+        // Review binding remains evidence-only. The separate append-only apply
+        // authority must match the exact current review package and be active.
+        $contentQualityTier = $this->searchEntryApplyAuthority->contentQualityTier($projection);
 
         return $this->searchEntryTierResolver->resolve(
             slug: $slug,

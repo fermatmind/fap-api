@@ -7,10 +7,12 @@ namespace Tests\Feature\Career;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionCoverageSnapshot;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
+use App\Models\CareerSearchEntryQualityBatchOperation;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use App\Services\Career\Review\CareerPilotReviewEvidenceBridge;
+use App\Services\Career\Review\CareerSearchEntryQualityBatchControlService;
 use App\Services\Career\Review\CareerSearchEntryQualityBatchManifestReader;
 use App\Services\Career\Review\CareerSearchEntryQualityBatchPlanner;
 use App\Services\Career\Review\CareerSearchEntryQualityEvaluator;
@@ -236,6 +238,70 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         );
     }
 
+    public function test_control_commands_keep_review_and_apply_as_separate_exact_transitions(): void
+    {
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', 1);
+        $path = storage_path('framework/testing/career-search-entry-quality-command-control.json');
+        file_put_contents(
+            $path,
+            json_encode(app(CareerSearchEntryQualityBatchPlanner::class)->build(), JSON_THROW_ON_ERROR),
+        );
+
+        try {
+            $reviewBase = [
+                '--expected-package' => $path,
+                '--actor-admin-user-id' => 1,
+                '--json' => true,
+            ];
+            $this->assertSame(0, Artisan::call(
+                'career:review-search-entry-quality-batch',
+                $reviewBase,
+            ));
+            $reviewPreflight = json_decode(
+                trim(Artisan::output()),
+                true,
+                512,
+                JSON_THROW_ON_ERROR,
+            );
+            $this->assertSame('PASS_REVIEW_PREFLIGHT', $reviewPreflight['status']);
+            $this->assertDatabaseCount('career_search_entry_quality_batch_operations', 0);
+
+            $this->assertSame(0, Artisan::call(
+                'career:review-search-entry-quality-batch',
+                [...$reviewBase, '--bind' => true],
+            ));
+            $review = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
+            $this->assertSame('PASS_REVIEW_BOUND', $review['status']);
+
+            $operationBase = [
+                '--expected-package' => $path,
+                '--active-release-sha' => str_repeat('d', 40),
+                '--active-release-name' => 'career-search-entry-batch-command',
+                '--operation-id' => 'CAREER-SEARCH-ENTRY-BATCH-01-APPLY:command',
+                '--rollback-identifier' => 'career-search-entry-batch-01:command',
+                '--actor-admin-user-id' => 1,
+                '--expected-review-evidence-sha256' => $review['review_evidence_sha256'],
+                '--json' => true,
+            ];
+            foreach ([
+                'preflight' => 'PASS_APPLY_PREFLIGHT',
+                'apply' => 'PASS_APPLY_COMMITTED',
+                'readback' => 'PASS_APPLY_READBACK',
+            ] as $mode => $status) {
+                $this->assertSame(0, Artisan::call(
+                    'career:control-search-entry-quality-batch',
+                    [...$operationBase, '--mode' => $mode],
+                ));
+                $receipt = json_decode(trim(Artisan::output()), true, 512, JSON_THROW_ON_ERROR);
+                $this->assertSame($status, $receipt['status']);
+            }
+            $this->assertDatabaseCount('career_search_entry_quality_batch_operations', 1);
+        } finally {
+            @unlink($path);
+        }
+    }
+
     public function test_review_targets_bind_reader_safe_payload_and_controller_contract(): void
     {
         $projector = app(CareerJobDetailReaderSafeReviewProjector::class);
@@ -406,6 +472,160 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
                 'content_quality_tier_unknown',
                 $payload['search_entry_authority']['reason_codes'],
             );
+        }
+    }
+
+    public function test_review_apply_readback_and_append_only_rollback_are_exact_and_separate(): void
+    {
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', 1);
+        $planner = app(CareerSearchEntryQualityBatchPlanner::class);
+        $package = $planner->build();
+        $path = storage_path('framework/testing/career-search-entry-quality-control.json');
+        file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR));
+        $control = app(CareerSearchEntryQualityBatchControlService::class);
+
+        try {
+            $preflight = $control->reviewPreflight($path, 1);
+            $this->assertSame('PASS_REVIEW_PREFLIGHT', $preflight['status']);
+            $this->assertSame('awaiting_exact_approved_all_binding', $preflight['review_state']);
+            $this->assertSame(0, $preflight['review_write_count']);
+            $this->assertDatabaseCount('review_attestations', 0);
+            $this->assertDatabaseCount('career_search_entry_quality_batch_operations', 0);
+
+            $review = $control->bindReview($path, 1);
+            $this->assertSame('PASS_REVIEW_BOUND', $review['status']);
+            $this->assertSame(300, $review['review_target_evidence_count']);
+            $this->assertSame(301, $review['review_write_count']);
+            $this->assertDatabaseCount('review_attestations', 1);
+            $this->assertDatabaseCount('review_attestation_target_evidences', 300);
+
+            $slug = $package['slugs'][0];
+            $reviewOnly = app(CareerPilotReviewEvidenceBridge::class)->projectDetailPayload(
+                $slug,
+                $this->responseCache->jobDetailPayload($slug, 'en'),
+            );
+            $this->assertSame('approved', data_get($reviewOnly, 'trust_manifest.review_state'));
+            $this->assertSame('ineligible', $reviewOnly['search_entry_tier']);
+
+            $options = [
+                'active_release_sha' => str_repeat('a', 40),
+                'active_release_name' => 'career-search-entry-batch-control-a',
+                'operation_id' => 'CAREER-SEARCH-ENTRY-BATCH-01-APPLY:test',
+                'rollback_identifier' => 'career-search-entry-batch-01:test',
+                'actor_admin_user_id' => 1,
+                'expected_review_evidence_sha256' => $review['review_evidence_sha256'],
+            ];
+            $applyPreflight = $control->operationPreflight($path, $options);
+            $this->assertSame('PASS_APPLY_PREFLIGHT', $applyPreflight['status']);
+            $this->assertSame(0, $applyPreflight['operation_write_count']);
+            $this->assertSame('ineligible', $applyPreflight['search_entry_tier_before']);
+
+            $apply = $control->apply($path, $options);
+            $this->assertSame('PASS_APPLY_COMMITTED', $apply['status']);
+            $this->assertSame(1, $apply['operation_write_count']);
+            $this->assertDatabaseCount('career_search_entry_quality_batch_operations', 1);
+            $repeat = $control->apply($path, $options);
+            $this->assertSame('PASS_APPLY_ALREADY_COMMITTED', $repeat['status']);
+            $this->assertSame(0, $repeat['operation_write_count']);
+            $this->assertSame($apply['operation_receipt_sha256'], $repeat['operation_receipt_sha256']);
+            $this->assertDatabaseCount('career_search_entry_quality_batch_operations', 1);
+
+            $this->app->forgetInstance(CareerPilotReviewEvidenceBridge::class);
+            $eligible = app(CareerPilotReviewEvidenceBridge::class)->projectDetailPayload(
+                $slug,
+                $this->responseCache->jobDetailPayload($slug, 'en'),
+            );
+            $this->assertSame('stable', $eligible['search_entry_tier']);
+            $this->assertTrue($eligible['search_entry_authority']['search_entry_eligible']);
+            $this->assertSame(
+                CareerSearchEntryTierResolver::CONTENT_QUALITY_TIER_CONTROLLED_CANDIDATE,
+                $eligible['search_entry_authority']['content_quality_tier'],
+            );
+
+            $readback = $control->readback($path, $options);
+            $this->assertSame('PASS_APPLY_READBACK', $readback['status']);
+            $this->assertSame('exact_50_eligible', $readback['search_entry_tier_readback']);
+
+            $rollbackOptions = [
+                ...$options,
+                'operation_id' => 'CAREER-SEARCH-ENTRY-BATCH-01-ROLLBACK:test',
+                'expected_apply_receipt_sha256' => $apply['operation_receipt_sha256'],
+                'expected_rollback_authorization_sha256' => $apply['rollback_authorization_sha256'],
+            ];
+            $rollback = $control->rollback($path, $rollbackOptions);
+            $this->assertSame('PASS_ROLLBACK_COMMITTED', $rollback['status']);
+            $this->assertSame('ineligible', $rollback['search_entry_tier_readback']);
+            $this->assertDatabaseCount('career_search_entry_quality_batch_operations', 2);
+
+            $this->app->forgetInstance(CareerPilotReviewEvidenceBridge::class);
+            $rolledBack = app(CareerPilotReviewEvidenceBridge::class)->projectDetailPayload(
+                $slug,
+                $this->responseCache->jobDetailPayload($slug, 'en'),
+            );
+            $this->assertSame('ineligible', $rolledBack['search_entry_tier']);
+            $this->assertFalse($rolledBack['search_entry_authority']['search_entry_eligible']);
+
+            $operation = CareerSearchEntryQualityBatchOperation::query()->firstOrFail();
+            $this->expectException(\LogicException::class);
+            $operation->update(['active_release_name' => 'forbidden']);
+        } finally {
+            @unlink($path);
+        }
+    }
+
+    public function test_apply_rejects_missing_review_wrong_actor_and_package_drift_without_writes(): void
+    {
+        config()->set('review_governance.mode', 'solo_owner');
+        config()->set('review_governance.solo_owner_admin_user_id', 1);
+        $planner = app(CareerSearchEntryQualityBatchPlanner::class);
+        $package = $planner->build();
+        $path = storage_path('framework/testing/career-search-entry-quality-control-hold.json');
+        file_put_contents($path, json_encode($package, JSON_THROW_ON_ERROR));
+        $options = [
+            'active_release_sha' => str_repeat('b', 40),
+            'active_release_name' => 'career-search-entry-batch-control-b',
+            'operation_id' => 'CAREER-SEARCH-ENTRY-BATCH-01-APPLY:hold',
+            'rollback_identifier' => 'career-search-entry-batch-01:hold',
+            'actor_admin_user_id' => 2,
+            'expected_review_evidence_sha256' => str_repeat('c', 64),
+        ];
+
+        try {
+            $control = app(CareerSearchEntryQualityBatchControlService::class);
+            try {
+                $control->operationPreflight($path, $options);
+                $this->fail('Wrong actor must fail closed.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('actor', strtolower($exception->getMessage()));
+            }
+
+            $options['actor_admin_user_id'] = 1;
+            try {
+                $control->operationPreflight($path, $options);
+                $this->fail('Missing review evidence must fail closed.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString('review evidence', strtolower($exception->getMessage()));
+            }
+
+            $review = $control->bindReview($path, 1);
+            $options['expected_review_evidence_sha256'] = $review['review_evidence_sha256'];
+            $tampered = $package;
+            $tampered['candidates'][0]['locales']['en']['visible_character_count']++;
+            file_put_contents($path, json_encode($tampered, JSON_THROW_ON_ERROR));
+            try {
+                $control->apply($path, $options);
+                $this->fail('Package drift must fail closed.');
+            } catch (\RuntimeException $exception) {
+                $this->assertStringContainsString(
+                    'authentication failed',
+                    strtolower($exception->getMessage()),
+                );
+            }
+        } finally {
+            @unlink($path);
+            $this->assertDatabaseCount('review_attestations', 1);
+            $this->assertDatabaseCount('career_search_entry_quality_batch_operations', 0);
         }
     }
 
