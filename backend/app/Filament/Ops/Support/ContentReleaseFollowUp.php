@@ -31,6 +31,8 @@ final class ContentReleaseFollowUp
         string $source,
         Request $request,
         array $contentExtras = [],
+        bool $broadcast = true,
+        bool $throwOnFailure = false,
     ): void {
         $payload = self::payload(
             type: $type,
@@ -41,14 +43,18 @@ final class ContentReleaseFollowUp
             event: 'content_release_revalidate',
         );
 
-        self::dispatchPayload($request, $payload);
+        self::dispatchPayload($request, $payload, $broadcast, $throwOnFailure);
     }
 
     /**
      * @param  array<string, mixed>  $payload
      */
-    private static function dispatchPayload(Request $request, array $payload): void
-    {
+    private static function dispatchPayload(
+        Request $request,
+        array $payload,
+        bool $broadcast = true,
+        bool $throwOnFailure = false,
+    ): void {
         $cacheInvalidationUrls = self::cacheInvalidationUrls();
         $cacheInvalidationSecret = self::cacheInvalidationSecret();
 
@@ -66,13 +72,14 @@ final class ContentReleaseFollowUp
                     action: 'content_release_cache_signal',
                     endpoint: $endpoint,
                     payload: $payload,
-                    alertLabel: 'cache invalidation'
+                    alertLabel: 'cache invalidation',
+                    throwOnFailure: $throwOnFailure,
                 );
             }
         }
 
         $broadcastWebhook = self::broadcastWebhook();
-        if ($broadcastWebhook !== '') {
+        if ($broadcast && $broadcastWebhook !== '') {
             self::postEvent(
                 request: $request,
                 action: 'content_release_broadcast',
@@ -210,6 +217,7 @@ final class ContentReleaseFollowUp
         string $endpoint,
         array $payload,
         string $alertLabel,
+        bool $throwOnFailure = false,
     ): void {
         $audit = app(AuditLogger::class);
         $meta = [
@@ -263,6 +271,10 @@ final class ContentReleaseFollowUp
             );
 
             self::alertFailure($request, $payload, $endpoint, $alertLabel, $exception);
+
+            if ($throwOnFailure) {
+                throw $exception;
+            }
         }
     }
 
