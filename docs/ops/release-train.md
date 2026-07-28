@@ -588,3 +588,31 @@ schema, hreflang, sitemap or llms eligibility/cache, Search Channel, GSC, URL
 Inspection, deployment, migration, symlink, or queue state. After apply, rerun
 the complete public article verifier before opening any later schema or
 discoverability gate.
+
+## SEO 13 article schema release
+
+Use `.github/workflows/seo-13-article-schema-release-production-ops.yml` only
+after atomic publication, public readback, and the separate page-revalidation
+phase pass for all 13 targets. The workflow requires latest `main` to equal
+the exact active application SHA. Preflight is read-only and binds the exact
+published revisions, visible FAQ hashes, state, content set, and target set.
+
+Apply downloads that immutable preflight receipt and requires its exact
+operator phrase. It runs one `articles:seo13-schema-release` transaction that
+updates exactly 13 SEO schema records and enables Article, Breadcrumb, and
+visible FAQ gates together. The visible FAQ authority is derived only from
+each locked published revision's `## 常见问题` section; neither the workflow
+artifact nor logs contain question or answer text.
+
+The same transaction also binds `created_by` and
+`authority_metadata_json` on exactly the two Big Five published revisions.
+Those values are derived from their immutable review fields and visible
+`## 参考来源` entries. The receipt reports two revision authority writes and
+zero article-body writes; no title, excerpt, body, SEO field, revision state,
+reviewer, or publication timestamp changes.
+
+The lane keeps publication, hreflang, revalidation, sitemap/llms eligibility
+and cache refresh, Search Channel, GSC, URL Inspection, queues, migrations,
+symlink activation, and deployment held. Any failed target rolls back all 13
+schema writes. Hreflang remains disabled with
+`no_verified_reciprocal_counterpart` deferred to closeout.
