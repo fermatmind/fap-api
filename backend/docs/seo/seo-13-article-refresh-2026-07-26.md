@@ -152,6 +152,35 @@ single-article command 13 times: that can leave a partially published cohort.
 The active backend release must contain the batch-capable command and the
 protected production workflow before any production preflight.
 
+### Legacy metadata bootstrap prerequisite
+
+Production promotion preflight run `30384203988`, attempt `1`, failed closed
+with zero writes. Its sanitized error set identified one shared legacy-data
+condition on article IDs `5`, `6`, `7`, `9`, and `10`: the old published
+records have no `article_seo_meta` row, category assignment, or tag mappings.
+The reported canonical and locale lock failures are downstream consequences
+of the absent SEO-meta authority, not working-revision content drift.
+
+Before promotion preflight is retried, use the separately protected
+`.github/workflows/seo-13-legacy-metadata-bootstrap-production-ops.yml`.
+Its read-only `preflight` locks the exact five article, published-revision,
+working-revision, taxonomy, and current public-content identities. Its
+receipt-bound `apply` performs one transaction containing exactly:
+
+- 5 SEO-meta inserts using each current old published Article title, excerpt,
+  cover image, and locked self-canonical;
+- 5 category assignments using existing active taxonomy;
+- 21 existing-tag mappings;
+- 1 private audit record.
+
+The bootstrap does not modify article bodies, revision fields or statuses,
+publication, indexability, schema, hreflang, revalidation, sitemap/llms
+eligibility, Search Channel, GSC, URL Inspection, queues, or deployment. A
+partial pre-state, taxonomy drift, article/revision drift, state-hash drift,
+or any non-exact write count fails the whole transaction. After its apply
+receipt and readback pass, rerun the full 13-article promotion preflight; the
+bootstrap receipt alone does not authorize promotion.
+
 Run the batch dry-run against the exact active release:
 
 ```bash
