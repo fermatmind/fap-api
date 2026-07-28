@@ -102,6 +102,28 @@ class SitemapGenerator
     }
 
     /**
+     * @return list<array<string, mixed>>
+     */
+    public function generateLlmsUrls(): array
+    {
+        return collect($this->generateUrls())
+            ->filter(static function (array $url): bool {
+                $slug = (string) ($url['slug'] ?? '');
+                $isArticle = str_starts_with($slug, 'articles:')
+                    || str_starts_with($slug, 'articles-list:');
+
+                return ! $isArticle || ($url['__llms_eligible'] ?? false) === true;
+            })
+            ->map(static function (array $url): array {
+                unset($url['__llms_eligible']);
+
+                return $url;
+            })
+            ->values()
+            ->all();
+    }
+
+    /**
      * @param  array<int, array<string, mixed>>  $personalityPublicContentAssetUrls
      * @return array<int, array<string, mixed>>
      */
@@ -265,13 +287,14 @@ class SitemapGenerator
             ->whereIn('locale', ArticleSeoService::SUPPORTED_LOCALES)
             ->whereNotNull('slug')
             ->where('slug', '<>', '')
-            ->select(['slug', 'locale', 'updated_at', 'published_at'])
+            ->select(['slug', 'locale', 'llms_eligible', 'updated_at', 'published_at'])
             ->orderBy('locale')
             ->orderBy('slug')
             ->get();
 
         $urls = [];
         $listLastModified = [];
+        $listLlmsEligible = [];
 
         foreach ($rows as $row) {
             $slug = trim((string) $row->slug);
@@ -297,11 +320,14 @@ class SitemapGenerator
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => 'articles:'.$segment.':'.$slug,
                 'updated_at' => $lastmod->toDateTimeString(),
+                '__llms_eligible' => (bool) $row->llms_eligible,
             ];
 
             if (! isset($listLastModified[$locale]) || $lastmod->gt($listLastModified[$locale])) {
                 $listLastModified[$locale] = $lastmod;
             }
+            $listLlmsEligible[$locale] = ($listLlmsEligible[$locale] ?? false)
+                || (bool) $row->llms_eligible;
         }
 
         foreach ($listLastModified as $locale => $lastmod) {
@@ -315,6 +341,7 @@ class SitemapGenerator
                 'lastmod' => $lastmod->toAtomString(),
                 'slug' => 'articles-list:'.$this->articleSeoService->mapBackendLocaleToFrontendSegment((string) $locale),
                 'updated_at' => $lastmod->toDateTimeString(),
+                '__llms_eligible' => (bool) ($listLlmsEligible[$locale] ?? false),
             ];
         }
 

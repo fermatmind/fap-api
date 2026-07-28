@@ -3413,6 +3413,41 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_article_llms_authority_projection(): void
+    {
+        $file = 'backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php';
+        $allowed = [
+            '-        $urls = $generator->generateUrls();',
+            '+        $urls = $generator->generateLlmsUrls();',
+            '-            "Languages: en, zh",',
+            "+            'Languages: en, zh',",
+            "-            'Indexable Help:',",
+            "+            'Indexable Articles & Help:',",
+            '-        $urls = $generator->generateUrls();',
+            '+        $urls = $generator->generateLlmsUrls();',
+            '-            "Languages: en, zh",',
+            "+            'Languages: en, zh',",
+            "+            \$isArticle = \$path === '/en/articles' || \$path === '/zh/articles'",
+            "+                || str_starts_with(\$path, '/en/articles/')",
+            "+                || str_starts_with(\$path, '/zh/articles/');",
+            '-            return $isHelp || $isStatic;',
+            '+            return $isHelp || $isArticle || $isStatic;',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            [$file],
+            '',
+            '',
+            llmsControllerChangedLines: $allowed,
+        ));
+        $this->assertSame([$file], $this->mbtiImpactingRuntimeChanges(
+            [$file],
+            '',
+            '',
+            llmsControllerChangedLines: [...$allowed, '+        return all_articles();'],
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_runtime_publish_projection_owner_changes(): void
     {
         $changed = [
@@ -7468,11 +7503,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php'
-                && $this->llmsControllerDiffIsMbtiBaseExclusionOnly(
-                    $llmsControllerChangedLines ?? (
-                        $repoRoot !== '' && $baseRef !== ''
-                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
-                            : []
+                && (
+                    $this->llmsControllerDiffIsMbtiBaseExclusionOnly(
+                        $llmsControllerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
+                    )
+                    || $this->llmsControllerDiffIsArticleEligibilityProjectionOnly(
+                        $llmsControllerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
                     )
                 )
             ) {
@@ -11097,6 +11141,43 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+if (preg_match('#^/(?:en|zh)/personality/[a-z]{4}$#', \$path) === 1) {",
             '+return false;',
             '+}',
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function llmsControllerDiffIsArticleEligibilityProjectionOnly(array $changedLines): bool
+    {
+        $normalized = array_values(array_filter(array_map(
+            static function (string $line): ?string {
+                if (! in_array($line[0] ?? '', ['+', '-'], true)) {
+                    return null;
+                }
+
+                $body = trim(substr($line, 1));
+
+                return $body === '' ? null : $line[0].$body;
+            },
+            $changedLines,
+        )));
+
+        return $normalized === [
+            '-$urls = $generator->generateUrls();',
+            '+$urls = $generator->generateLlmsUrls();',
+            '-"Languages: en, zh",',
+            "+'Languages: en, zh',",
+            "-'Indexable Help:',",
+            "+'Indexable Articles & Help:',",
+            '-$urls = $generator->generateUrls();',
+            '+$urls = $generator->generateLlmsUrls();',
+            '-"Languages: en, zh",',
+            "+'Languages: en, zh',",
+            "+\$isArticle = \$path === '/en/articles' || \$path === '/zh/articles'",
+            "+|| str_starts_with(\$path, '/en/articles/')",
+            "+|| str_starts_with(\$path, '/zh/articles/');",
+            '-return $isHelp || $isStatic;',
+            '+return $isHelp || $isArticle || $isStatic;',
         ];
     }
 
