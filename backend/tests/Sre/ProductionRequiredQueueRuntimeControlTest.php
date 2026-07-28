@@ -251,6 +251,23 @@ BASH);
             'payload:',
             $workflow,
         );
+
+        $runner = file_get_contents(
+            base_path('scripts/deploy/control_required_supervisor_programs.sh'),
+        );
+        $this->assertIsString($runner);
+        $this->assertStringContainsString(
+            '"$php_path" -d display_errors=0 -- "$current_release/backend"',
+            $runner,
+        );
+        $this->assertStringNotContainsString(
+            '-u www-data /usr/bin/env',
+            $runner,
+        );
+        $this->assertStringContainsString(
+            '[[ "$queue_probe_rc" -eq 0 ]] || fail QUEUE_PROBE',
+            $runner,
+        );
     }
 
     private function runControl(
