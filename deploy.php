@@ -1138,9 +1138,11 @@ task('queue:reload-workers', function () {
         $quotedSupervisorctl = escapeshellarg($resolvedSupervisorctl);
         $supervisorRestartScript = escapeshellarg('{{release_path}}/backend/scripts/deploy/restart_supervisor_program_group.sh');
         $quotedSudo = escapeshellarg('/usr/bin/sudo');
+        $quotedTimeout = escapeshellarg('/usr/bin/timeout');
         $restartSupervisorProgram = static function (string $program, bool $required) use (
             $quotedSupervisorctl,
             $quotedSudo,
+            $quotedTimeout,
             $supervisorRestartScript
         ): string {
             $quotedProgram = escapeshellarg($program);
@@ -1149,9 +1151,12 @@ task('queue:reload-workers', function () {
             return "bash {$supervisorRestartScript}"
                 ." --supervisorctl={$quotedSupervisorctl}"
                 ." --sudo={$quotedSudo}"
+                ." --timeout-bin={$quotedTimeout}"
                 ." --program={$quotedProgram}"
                 .' --attempts=3'
                 .' --delay-seconds=2'
+                .' --restart-timeout-seconds=390'
+                .' --heartbeat-seconds=20'
                 ." --required={$quotedRequired}";
         };
 
@@ -1159,11 +1164,11 @@ task('queue:reload-workers', function () {
         run("sudo -n {$quotedSupervisorctl} update");
 
         foreach ($requiredPrograms as $program) {
-            run($restartSupervisorProgram($program, true));
+            run($restartSupervisorProgram($program, true), timeout: 1200);
         }
 
         foreach ($optionalPrograms as $program) {
-            run($restartSupervisorProgram($program, false));
+            run($restartSupervisorProgram($program, false), timeout: 1200);
         }
 
         if ($legacySystemdService !== '') {
