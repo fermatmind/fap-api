@@ -90,6 +90,37 @@ final class EnneagramPr23CacheOnlyResumeWorkflowTest extends TestCase
     }
 
     #[Test]
+    public function post_readback_only_binds_the_exact_committed_hmac_receipt_and_performs_zero_writes(): void
+    {
+        $source = $this->workflowSource();
+
+        $this->assertStringContainsString('- post_readback_only', $source);
+        $this->assertStringContainsString('source_execute_run_id:', $source);
+        $this->assertStringContainsString('source_execute_receipt_sha256:', $source);
+        $this->assertStringContainsString(
+            'Bind committed HMAC receipt for post-readback-only resume',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.failure_stage == "post_readback_canary-00"',
+            $source,
+        );
+        $this->assertStringContainsString('.frontend_revalidation_committed == true', $source);
+        $this->assertStringContainsString(
+            'FM_ENNEAGRAM_SOURCE_EXECUTE_RECEIPT_SHA256',
+            $source,
+        );
+        $this->assertStringContainsString(
+            '.status == "PASS_POST_READBACK_ONLY"',
+            $source,
+        );
+        $this->assertStringContainsString('.source_frontend_revalidation_committed == true', $source);
+        $this->assertStringContainsString('.frontend_revalidation_attempted == false', $source);
+        $this->assertStringContainsString('.writes_committed == false', $source);
+        $this->assertStringContainsString('path: post-readback.json', $source);
+    }
+
+    #[Test]
     public function routing_metadata_is_secret_backed_and_step_scoped(): void
     {
         $source = $this->workflowSource();

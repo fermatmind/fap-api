@@ -4,13 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "preflight is read-only; execute performs only frontend HMAC revalidation and post-readback"
+        description: "preflight is read-only; execute performs HMAC plus post-readback; post_readback_only resumes reads from an exact committed-HMAC receipt"
         required: true
         default: preflight
         type: choice
         options:
           - preflight
           - execute
+          - post_readback_only
       expected_control_plane_sha:
         description: "Exact latest fap-api main SHA containing this control plane"
         required: true
@@ -76,6 +77,36 @@ on:
         required: false
         default: ""
         type: string
+      source_execute_run_id:
+        description: "Post-readback-only exact failed execute run whose receipt proves committed HMAC revalidation"
+        required: false
+        default: ""
+        type: string
+      source_execute_run_attempt:
+        description: "Post-readback-only exact source execute attempt"
+        required: false
+        default: ""
+        type: string
+      source_execute_control_plane_sha:
+        description: "Post-readback-only exact source execute control-plane SHA"
+        required: false
+        default: ""
+        type: string
+      source_execute_runner_sha256:
+        description: "Post-readback-only exact source execute runner SHA256"
+        required: false
+        default: ""
+        type: string
+      source_execute_receipt_sha256:
+        description: "Post-readback-only exact sanitized source execute receipt SHA256"
+        required: false
+        default: ""
+        type: string
+      source_execute_receipt_base64:
+        description: "Post-readback-only sanitized source execute receipt, base64 encoded"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   actions: read
@@ -110,6 +141,11 @@ jobs:
       AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT: ${{ inputs.authorization_preflight_run_attempt }}
       EXPECTED_STATE_FINGERPRINT_SHA256: ${{ inputs.expected_state_fingerprint_sha256 }}
       AUTHORIZATION_PHRASE: ${{ inputs.authorization_phrase }}
+      SOURCE_EXECUTE_RUN_ID: ${{ inputs.source_execute_run_id }}
+      SOURCE_EXECUTE_RUN_ATTEMPT: ${{ inputs.source_execute_run_attempt }}
+      SOURCE_EXECUTE_CONTROL_PLANE_SHA: ${{ inputs.source_execute_control_plane_sha }}
+      SOURCE_EXECUTE_RUNNER_SHA256: ${{ inputs.source_execute_runner_sha256 }}
+      SOURCE_EXECUTE_RECEIPT_SHA256: ${{ inputs.source_execute_receipt_sha256 }}
       GH_TOKEN: ${{ github.token }}
 
     steps:
@@ -136,6 +172,11 @@ jobs:
               test -z "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT"
               test -z "$EXPECTED_STATE_FINGERPRINT_SHA256"
               test -z "$AUTHORIZATION_PHRASE"
+              test -z "$SOURCE_EXECUTE_RUN_ID"
+              test -z "$SOURCE_EXECUTE_RUN_ATTEMPT"
+              test -z "$SOURCE_EXECUTE_CONTROL_PLANE_SHA"
+              test -z "$SOURCE_EXECUTE_RUNNER_SHA256"
+              test -z "$SOURCE_EXECUTE_RECEIPT_SHA256"
               ;;
             execute)
               [[ "$EXPECTED_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
@@ -143,6 +184,23 @@ jobs:
               [[ "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
               [[ "$EXPECTED_STATE_FINGERPRINT_SHA256" =~ ^[0-9a-f]{64}$ ]]
               test -n "$AUTHORIZATION_PHRASE"
+              test -z "$SOURCE_EXECUTE_RUN_ID"
+              test -z "$SOURCE_EXECUTE_RUN_ATTEMPT"
+              test -z "$SOURCE_EXECUTE_CONTROL_PLANE_SHA"
+              test -z "$SOURCE_EXECUTE_RUNNER_SHA256"
+              test -z "$SOURCE_EXECUTE_RECEIPT_SHA256"
+              ;;
+            post_readback_only)
+              test -z "$EXPECTED_RUNNER_SHA256"
+              [[ "$AUTHORIZATION_PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+              [[ "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+              [[ "$EXPECTED_STATE_FINGERPRINT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              test -z "$AUTHORIZATION_PHRASE"
+              [[ "$SOURCE_EXECUTE_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+              [[ "$SOURCE_EXECUTE_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+              [[ "$SOURCE_EXECUTE_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+              [[ "$SOURCE_EXECUTE_RUNNER_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$SOURCE_EXECUTE_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
               ;;
             *)
               echo "Unsupported mode." >&2
@@ -310,15 +368,111 @@ jobs:
           echo "AUTHORIZED_DISCOVERABILITY_FINGERPRINT=$authorized_discoverability" >> "$GITHUB_ENV"
           echo "AUTHORIZED_URL_SETS_SHA256=$authorized_url_sets" >> "$GITHUB_ENV"
 
+      - name: Bind committed HMAC receipt for post-readback-only resume
+        if: inputs.mode == 'post_readback_only'
+        shell: bash
+        env:
+          SOURCE_EXECUTE_RECEIPT_BASE64: ${{ inputs.source_execute_receipt_base64 }}
+        run: |
+          set -euo pipefail
+          source_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_EXECUTE_RUN_ID}")"
+          jq -e \
+            --arg sha "$SOURCE_EXECUTE_CONTROL_PLANE_SHA" \
+            --argjson attempt "$SOURCE_EXECUTE_RUN_ATTEMPT" \
+            '.status == "completed"
+             and .conclusion == "failure"
+             and .event == "workflow_dispatch"
+             and .head_sha == $sha
+             and .run_attempt == $attempt' <<<"$source_run" >/dev/null
+          test "$(jq -r '.path' <<<"$source_run")" = \
+            ".github/workflows/enneagram-pr23-cache-only-resume.yml"
+
+          source_receipt="$RUNNER_TEMP/source-execute.json"
+          printf '%s' "$SOURCE_EXECUTE_RECEIPT_BASE64" | base64 --decode > "$source_receipt"
+          test "$(sha256sum "$source_receipt" | awk '{print $1}')" = \
+            "$SOURCE_EXECUTE_RECEIPT_SHA256"
+          jq -e \
+            '.contract_version == "enneagram.pr23.cache_only_resume.v1"
+             and .ok == false
+             and .status == "FAIL_CLOSED"
+             and .failure_stage == "post_readback_canary-00"
+             and .writes_committed == true
+             and .frontend_revalidation_attempted == true
+             and .frontend_revalidation_committed == true
+             and .import_committed == false
+             and .review_bind_committed == false
+             and .promotion_committed == false
+             and .rollback_committed == false
+             and .backend_cache_invalidation_committed == false
+             and .deployment_committed == false
+             and .pr23_rerun == false
+             and .secret_output == false
+             and .nonce_output == false
+             and .signature_output == false' "$source_receipt" >/dev/null
+
+          preflight_run="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${AUTHORIZATION_PREFLIGHT_RUN_ID}"
+          )"
+          jq -e \
+            --arg source_sha "$SOURCE_EXECUTE_CONTROL_PLANE_SHA" \
+            --argjson attempt "$AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT" \
+            '.status == "completed"
+             and .conclusion == "success"
+             and .event == "workflow_dispatch"
+             and .head_sha == $source_sha
+             and .run_attempt == $attempt' <<<"$preflight_run" >/dev/null
+          preflight_dir="$RUNNER_TEMP/source-preflight"
+          mkdir -p "$preflight_dir"
+          gh run download "$AUTHORIZATION_PREFLIGHT_RUN_ID" \
+            --name "enneagram-pr23-cache-only-preflight-${AUTHORIZATION_PREFLIGHT_RUN_ID}-${AUTHORIZATION_PREFLIGHT_RUN_ATTEMPT}" \
+            --dir "$preflight_dir"
+          preflight_receipt="$preflight_dir/preflight.json"
+          jq -e \
+            --arg source_control "$SOURCE_EXECUTE_CONTROL_PLANE_SHA" \
+            --arg source_runner "$SOURCE_EXECUTE_RUNNER_SHA256" \
+            --arg backend "$EXPECTED_BACKEND_SHA" \
+            --arg frontend "$EXPECTED_FRONTEND_SHA" \
+            --arg package "$EXPECTED_PACKAGE_SHA256" \
+            --arg report "$EXPECTED_RELEASE_REPORT_SHA256" \
+            --arg state "$EXPECTED_STATE_FINGERPRINT_SHA256" \
+            '.ok == true
+             and .status == "PASS_CACHE_ONLY_RESUME_PREFLIGHT_AUTHORIZATION_REQUIRED"
+             and .control_plane_sha == $source_control
+             and .runner_sha256 == $source_runner
+             and .backend_sha == $backend
+             and .frontend_sha == $frontend
+             and .package_sha256 == $package
+             and .release_report_sha256 == $report
+             and .state_fingerprint_sha256 == $state
+             and .published_count == 116
+             and .working_count == 116
+             and .approved_review_count == 116
+             and .writes_committed == false' "$preflight_receipt" >/dev/null
+          authorized_projection="$(jq -r '.public_projection_fingerprint' "$preflight_receipt")"
+          authorized_discoverability="$(
+            jq -r '.stable_identity_discoverability_fingerprint' "$preflight_receipt"
+          )"
+          authorized_url_sets="$(jq -r '.url_sets_sha256' "$preflight_receipt")"
+          [[ "$authorized_projection" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$authorized_discoverability" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$authorized_url_sets" =~ ^[0-9a-f]{64}$ ]]
+          echo "AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT=$authorized_projection" >> "$GITHUB_ENV"
+          echo "AUTHORIZED_DISCOVERABILITY_FINGERPRINT=$authorized_discoverability" >> "$GITHUB_ENV"
+          echo "AUTHORIZED_URL_SETS_SHA256=$authorized_url_sets" >> "$GITHUB_ENV"
+
       - name: Reject intervening cache-only execute runs
-        if: inputs.mode == 'execute'
+        if: inputs.mode == 'execute' || inputs.mode == 'post_readback_only'
         shell: bash
         run: |
           set -euo pipefail
           runs="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/actions/workflows/enneagram-pr23-cache-only-resume.yml/runs?event=workflow_dispatch&per_page=100")"
+          lower_bound="$AUTHORIZATION_PREFLIGHT_RUN_ID"
+          if [ "${{ inputs.mode }}" = post_readback_only ]; then
+            lower_bound="$SOURCE_EXECUTE_RUN_ID"
+          fi
           mapfile -t candidates < <(
             jq -r \
-              --argjson preflight "$AUTHORIZATION_PREFLIGHT_RUN_ID" \
+              --argjson preflight "$lower_bound" \
               --argjson current "$GITHUB_RUN_ID" \
               '.workflow_runs[]
                | select(.id > $preflight and .id < $current)
@@ -398,6 +552,11 @@ jobs:
             printf 'FM_ENNEAGRAM_AUTHORIZED_DISCOVERABILITY_FINGERPRINT=%q ' "${AUTHORIZED_DISCOVERABILITY_FINGERPRINT:-}"
             printf 'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256=%q ' "${AUTHORIZED_URL_SETS_SHA256:-}"
             printf 'FM_ENNEAGRAM_AUTHORIZATION_PHRASE=%q ' "$AUTHORIZATION_PHRASE"
+            printf 'FM_ENNEAGRAM_SOURCE_EXECUTE_RUN_ID=%q ' "$SOURCE_EXECUTE_RUN_ID"
+            printf 'FM_ENNEAGRAM_SOURCE_EXECUTE_RUN_ATTEMPT=%q ' "$SOURCE_EXECUTE_RUN_ATTEMPT"
+            printf 'FM_ENNEAGRAM_SOURCE_EXECUTE_CONTROL_PLANE_SHA=%q ' "$SOURCE_EXECUTE_CONTROL_PLANE_SHA"
+            printf 'FM_ENNEAGRAM_SOURCE_EXECUTE_RUNNER_SHA256=%q ' "$SOURCE_EXECUTE_RUNNER_SHA256"
+            printf 'FM_ENNEAGRAM_SOURCE_EXECUTE_RECEIPT_SHA256=%q ' "$SOURCE_EXECUTE_RECEIPT_SHA256"
             printf '/usr/bin/timeout 5400 /usr/bin/php'
           )"
           receipt="$RUNNER_TEMP/cache-only-resume.json"
@@ -412,7 +571,12 @@ jobs:
             < "$RUNNER_PATH" > "$receipt"
           status=$?
           set -e
-          cp "$receipt" "$([ "$MODE" = preflight ] && echo preflight.json || echo execute.json)"
+          case "$MODE" in
+            preflight) receipt_name=preflight.json ;;
+            execute) receipt_name=execute.json ;;
+            post_readback_only) receipt_name=post-readback.json ;;
+          esac
+          cp "$receipt" "$receipt_name"
           jq -e \
             '.secret_output == false
              and .nonce_output == false
@@ -439,7 +603,7 @@ jobs:
                and .writes_committed == false
                and (.authorization_phrase | length > 0)' "$receipt" >/dev/null
             echo "Cache-only preflight passed; exact authorization phrase is in the immutable artifact."
-          else
+          elif [ "$MODE" = execute ]; then
             jq -e \
               '.ok == true
                and .status == "PASS_CACHE_ONLY_REVALIDATION_AND_POST_READBACK"
@@ -450,6 +614,17 @@ jobs:
                and .html_read_count == 116
                and .writes_committed == true
                and .frontend_revalidation_committed == true' "$receipt" >/dev/null
+          else
+            jq -e \
+              '.ok == true
+               and .status == "PASS_POST_READBACK_ONLY"
+               and .source_frontend_revalidation_committed == true
+               and .frontend_revalidation_attempted == false
+               and .frontend_revalidation_committed == false
+               and .readback_batch_count == 10
+               and .api_read_count == 116
+               and .html_read_count == 116
+               and .writes_committed == false' "$receipt" >/dev/null
           fi
 
       - name: Upload immutable cache-only preflight
@@ -467,5 +642,14 @@ jobs:
         with:
           name: enneagram-pr23-cache-only-execute-${{ github.run_id }}-${{ github.run_attempt }}
           path: execute.json
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Upload post-readback-only receipt
+        if: always() && inputs.mode == 'post_readback_only'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: enneagram-pr23-post-readback-${{ github.run_id }}-${{ github.run_attempt }}
+          path: post-readback.json
           retention-days: 14
           if-no-files-found: error

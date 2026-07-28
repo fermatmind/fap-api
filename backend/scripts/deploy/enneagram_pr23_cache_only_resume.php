@@ -89,7 +89,7 @@ final class EnneagramPr23CacheOnlyResumeRunner
     {
         self::$failureStage = 'validate_inputs';
         $mode = self::required($environment, 'FM_ENNEAGRAM_RESUME_MODE');
-        if (! in_array($mode, ['preflight', 'execute'], true)) {
+        if (! in_array($mode, ['preflight', 'execute', 'post_readback_only'], true)) {
             throw new RuntimeException('INVALID_MODE');
         }
 
@@ -141,6 +141,100 @@ final class EnneagramPr23CacheOnlyResumeRunner
             );
 
             return self::preflightReceipt($bindings, $state, $snapshot, $stateFingerprint, $phrase);
+        }
+
+        if ($mode === 'post_readback_only') {
+            self::$failureStage = 'validate_post_readback_source';
+            $stateFingerprint = self::hash(self::required(
+                $environment,
+                'FM_ENNEAGRAM_EXPECTED_STATE_FINGERPRINT',
+            ));
+            $authorizedProjectionFingerprint = self::hash(self::required(
+                $environment,
+                'FM_ENNEAGRAM_AUTHORIZED_PUBLIC_PROJECTION_FINGERPRINT',
+            ));
+            $authorizedDiscoverabilityFingerprint = self::hash(self::required(
+                $environment,
+                'FM_ENNEAGRAM_AUTHORIZED_DISCOVERABILITY_FINGERPRINT',
+            ));
+            $authorizedUrlSetsSha256 = self::hash(self::required(
+                $environment,
+                'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256',
+            ));
+            $sourceExecuteRunId = self::positiveInteger(self::required(
+                $environment,
+                'FM_ENNEAGRAM_SOURCE_EXECUTE_RUN_ID',
+            ));
+            $sourceExecuteRunAttempt = self::positiveInteger(self::required(
+                $environment,
+                'FM_ENNEAGRAM_SOURCE_EXECUTE_RUN_ATTEMPT',
+            ));
+            $sourceExecuteControlPlaneSha = self::gitSha(self::required(
+                $environment,
+                'FM_ENNEAGRAM_SOURCE_EXECUTE_CONTROL_PLANE_SHA',
+            ));
+            $sourceExecuteRunnerSha256 = self::hash(self::required(
+                $environment,
+                'FM_ENNEAGRAM_SOURCE_EXECUTE_RUNNER_SHA256',
+            ));
+            $sourceExecuteReceiptSha256 = self::hash(self::required(
+                $environment,
+                'FM_ENNEAGRAM_SOURCE_EXECUTE_RECEIPT_SHA256',
+            ));
+
+            $batchReceipts = self::runPostReadbackBatches(
+                $services['readback'],
+                $releaseReport,
+                $bindings,
+                $state['private_reviewer_names'],
+            );
+            $postSnapshot = self::postReadbackSnapshot(
+                $services['readback'],
+                $releaseReport,
+                $bindings['frontend_origin'],
+                $authorizedProjectionFingerprint,
+                $authorizedDiscoverabilityFingerprint,
+                $authorizedUrlSetsSha256,
+            );
+
+            return [
+                'contract_version' => self::CONTRACT_VERSION,
+                'ok' => true,
+                'status' => 'PASS_POST_READBACK_ONLY',
+                'control_plane_sha' => $bindings['control_plane_sha'],
+                'runner_sha256' => $bindings['runner_sha256'],
+                'backend_sha' => $bindings['backend_sha'],
+                'frontend_sha' => $bindings['frontend_sha'],
+                'package_sha256' => $bindings['package_sha256'],
+                'state_fingerprint_sha256' => $stateFingerprint,
+                'source_execute_run_id' => $sourceExecuteRunId,
+                'source_execute_run_attempt' => $sourceExecuteRunAttempt,
+                'source_execute_control_plane_sha' => $sourceExecuteControlPlaneSha,
+                'source_execute_runner_sha256' => $sourceExecuteRunnerSha256,
+                'source_execute_receipt_sha256' => $sourceExecuteReceiptSha256,
+                'source_frontend_revalidation_committed' => true,
+                'readback_batch_count' => count($batchReceipts),
+                'api_read_count' => array_sum(array_column($batchReceipts, 'api_read_count')),
+                'html_read_count' => array_sum(array_column($batchReceipts, 'html_read_count')),
+                'batch_receipts' => $batchReceipts,
+                'public_projection_fingerprint' => $postSnapshot['public_projection_fingerprint'],
+                'stable_identity_discoverability_fingerprint' => $postSnapshot['stable_identity_discoverability_fingerprint'],
+                'url_sets_sha256' => self::fingerprint($postSnapshot['url_sets']),
+                'writes_committed' => false,
+                'frontend_revalidation_attempted' => false,
+                'frontend_revalidation_committed' => false,
+                'import_committed' => false,
+                'review_bind_committed' => false,
+                'promotion_committed' => false,
+                'rollback_committed' => false,
+                'backend_cache_invalidation_committed' => false,
+                'deployment_committed' => false,
+                'pr23_rerun' => false,
+                'automatic_rollback' => false,
+                'secret_output' => false,
+                'nonce_output' => false,
+                'signature_output' => false,
+            ];
         }
 
         self::$failureStage = 'validate_execute_authorization';
@@ -200,43 +294,20 @@ final class EnneagramPr23CacheOnlyResumeRunner
         }
         self::$frontendRevalidationCommitted = true;
 
-        $batchReceipts = [];
-        foreach (self::BATCH_NAMES as $batchName) {
-            self::$failureStage = 'post_readback_'.$batchName;
-            $readback = $services['readback']->run(
-                'post',
-                $batchName,
-                $releaseReport,
-                $bindings['api_origin'],
-                $bindings['frontend_origin'],
-                $bindings['backend_sha'],
-                $bindings['frontend_sha'],
-                false,
-                $state['private_reviewer_names'],
-            );
-            $batchReceipts[] = self::safeReadbackReceipt($readback);
-        }
-        self::$failureStage = 'post_readback_snapshot';
-        $postSnapshot = self::retryTransientRead(
-            static fn (): array => $services['readback']->snapshot(
-                $releaseReport,
-                $bindings['frontend_origin'],
-            ),
+        $batchReceipts = self::runPostReadbackBatches(
+            $services['readback'],
+            $releaseReport,
+            $bindings,
+            $state['private_reviewer_names'],
         );
-        if (! hash_equals(
+        $postSnapshot = self::postReadbackSnapshot(
+            $services['readback'],
+            $releaseReport,
+            $bindings['frontend_origin'],
             $authorizedProjectionFingerprint,
-            (string) $postSnapshot['public_projection_fingerprint'],
-        )
-            || ! hash_equals(
-                $authorizedDiscoverabilityFingerprint,
-                (string) $postSnapshot['stable_identity_discoverability_fingerprint'],
-            )
-            || ! hash_equals(
-                $authorizedUrlSetsSha256,
-                self::fingerprint($postSnapshot['url_sets']),
-            )) {
-            throw new RuntimeException('POST_READBACK_SNAPSHOT_DRIFT');
-        }
+            $authorizedDiscoverabilityFingerprint,
+            $authorizedUrlSetsSha256,
+        );
 
         return [
             'contract_version' => self::CONTRACT_VERSION,
@@ -539,6 +610,75 @@ final class EnneagramPr23CacheOnlyResumeRunner
         ];
     }
 
+    /**
+     * @param  array<string,mixed>  $releaseReport
+     * @param  array<string,mixed>  $bindings
+     * @param  list<string>  $privateReviewerNames
+     * @return list<array<string,mixed>>
+     */
+    private static function runPostReadbackBatches(
+        EnneagramPublicAuthorityV224RuntimeReadback $readbackService,
+        array $releaseReport,
+        array $bindings,
+        array $privateReviewerNames,
+    ): array {
+        $batchReceipts = [];
+        foreach (self::BATCH_NAMES as $batchName) {
+            self::$failureStage = 'post_readback_'.$batchName;
+            $readback = $readbackService->run(
+                'post',
+                $batchName,
+                $releaseReport,
+                $bindings['api_origin'],
+                $bindings['frontend_origin'],
+                $bindings['backend_sha'],
+                $bindings['frontend_sha'],
+                false,
+                $privateReviewerNames,
+            );
+            $batchReceipts[] = self::safeReadbackReceipt($readback);
+        }
+
+        return $batchReceipts;
+    }
+
+    /**
+     * @param  array<string,mixed>  $releaseReport
+     * @return array<string,mixed>
+     */
+    private static function postReadbackSnapshot(
+        EnneagramPublicAuthorityV224RuntimeReadback $readbackService,
+        array $releaseReport,
+        string $frontendOrigin,
+        string $authorizedProjectionFingerprint,
+        string $authorizedDiscoverabilityFingerprint,
+        string $authorizedUrlSetsSha256,
+    ): array {
+        self::$failureStage = 'post_readback_snapshot';
+        $postSnapshot = self::retryTransientRead(
+            static fn (): array => $readbackService->snapshot(
+                $releaseReport,
+                $frontendOrigin,
+            ),
+        );
+        if (! hash_equals(
+            $authorizedProjectionFingerprint,
+            (string) $postSnapshot['public_projection_fingerprint'],
+        )
+            || ! hash_equals(
+                $authorizedDiscoverabilityFingerprint,
+                (string) $postSnapshot['stable_identity_discoverability_fingerprint'],
+            )
+            || ! hash_equals(
+                $authorizedUrlSetsSha256,
+                self::fingerprint($postSnapshot['url_sets']),
+            )) {
+            throw new RuntimeException('POST_READBACK_SNAPSHOT_DRIFT');
+        }
+
+        return $postSnapshot;
+    }
+
     private static function bootstrapApplication(string $backend): void
     {
         require_once $backend.'/vendor/autoload.php';
@@ -592,6 +732,11 @@ final class EnneagramPr23CacheOnlyResumeRunner
             'FM_ENNEAGRAM_AUTHORIZED_DISCOVERABILITY_FINGERPRINT',
             'FM_ENNEAGRAM_AUTHORIZED_URL_SETS_SHA256',
             'FM_ENNEAGRAM_AUTHORIZATION_PHRASE',
+            'FM_ENNEAGRAM_SOURCE_EXECUTE_RUN_ID',
+            'FM_ENNEAGRAM_SOURCE_EXECUTE_RUN_ATTEMPT',
+            'FM_ENNEAGRAM_SOURCE_EXECUTE_CONTROL_PLANE_SHA',
+            'FM_ENNEAGRAM_SOURCE_EXECUTE_RUNNER_SHA256',
+            'FM_ENNEAGRAM_SOURCE_EXECUTE_RECEIPT_SHA256',
         ];
         $environment = [];
         foreach ($names as $name) {
