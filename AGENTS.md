@@ -197,3 +197,9 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - Big Five and Enneagram public content backed by `PersonalityPublicContentAsset` is permanently text-only. The database, CMS/import contract, public API, section content, and SEO projection must not support hero, inline, OG, Twitter, Markdown, or HTML images.
 - Historical immutable revisions and release evidence may retain old media keys for audit only; they must never be projected to runtime or used to authorize a future media write.
 - This boundary does not change MBTI product illustrations, test/results media, Articles, Topics, Landing Surfaces, or other CMS media resources.
+
+### Enneagram PR23 Cache-Only Resume Discipline
+- A committed Enneagram Authority V2 promotion with failed frontend revalidation may resume only through the protected `Enneagram PR23 Cache-Only Resume` workflow. The full runtime-closeout executor must not be rerun.
+- Read-only preflight must bind latest exact control-plane/runner SHAs, active backend/frontend revisions, exact package/report hashes, `116/116/116` published revision/revision/review evidence, the exact successful fap-web runtime-config apply run/attempt and sanitized receipt SHA, rollback-token SHA, public/discoverability fingerprints, and sitemap/llms URL-set hashes. It must generate the exact authorization phrase in an immutable artifact.
+- Execute may perform exactly one 116-path frontend HMAC revalidation followed by `canary-00` and `readback-01..09`. It must reject any intervening execute run and stop on the first rejection or readback mismatch without automatic rollback.
+- Import, review bind, promotion, rollback, backend cache invalidation/warm, deploy, symlink, migration, queue/service restart, CMS/database authority mutation, publication/discoverability mutation, search submission, and PR23 rerun are prohibited in this lane.

@@ -534,3 +534,28 @@ URL submission.
 ## Recovery for v1 blockers
 - If production deployment command is unknown, run remains blocked and should be handled by manual platform owner with explicit wrapper configuration.
 - If high-risk path mismatches appear, update manifest scope or narrow file impact.
+
+## Enneagram PR23 cache-only resume
+
+After the one-time Enneagram Authority V2 promotion has committed, a failed
+frontend HMAC revalidation must not be resumed through the full runtime-closeout
+executor. Use the protected `Enneagram PR23 Cache-Only Resume` workflow.
+
+`preflight` is read-only. It binds the latest exact fap-api control-plane and
+runner SHAs, active backend and frontend revisions, release package/report
+hashes, exact `116/116/116` published revision/revision/review evidence, runtime
+config apply run `30333691762` attempt `1` and its sanitized receipt SHA, the
+persisted rollback-token SHA, public/discoverability fingerprints, and current
+sitemap/llms URL-set hashes. Its immutable artifact generates the only accepted
+execute phrase.
+
+`execute` accepts that exact immutable preflight and rejects an intervening
+execute run. It may call only the existing 116-path frontend HMAC revalidation,
+then run `canary-00` followed by `readback-01..09`. Acceptance requires 116
+accepted and zero rejected paths, 116 API reads, 116 HTML reads, zero private
+data, zero media, and unchanged public/discoverability and URL-set fingerprints.
+
+This recovery lane never imports working revisions, binds review evidence,
+promotes or rolls back pointers, invalidates or warms backend caches, deploys,
+migrates, restarts queues/services, mutates CMS/database authority, or reruns
+PR23. Failure after the HMAC request stops without automatic rollback.
