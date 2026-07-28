@@ -65,6 +65,13 @@ final class EnneagramPr23CacheOnlyResumeWorkflowTest extends TestCase
         );
         $this->assertStringContainsString('/usr/bin/timeout 5400 /usr/bin/php', $source);
         $this->assertStringContainsString('FM_ENNEAGRAM_RUNNER_EXECUTE=1', $source);
+        $this->assertStringContainsString('-o ServerAliveInterval=30', $source);
+        $this->assertStringContainsString('-o ServerAliveCountMax=6', $source);
+        $this->assertStringContainsString(
+            'grep -qx "FM_ENNEAGRAM_RUNNER_EXECUTE=1"',
+            $source,
+        );
+        $this->assertStringContainsString('/proc/[0-9]*/environ', $source);
         $this->assertStringContainsString('< "$RUNNER_PATH" > "$receipt"', $source);
         $this->assertStringContainsString('.accepted_revalidation_path_count == 116', $source);
         $this->assertStringContainsString('.rejected_revalidation_path_count == 0', $source);
