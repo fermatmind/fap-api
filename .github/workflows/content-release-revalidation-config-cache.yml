@@ -270,6 +270,9 @@ jobs:
                and .status == "PASS_CONFIG_CACHE_CONVERGED"
                and .writes_committed == true
                and .env_setting_write_count == 2
+               and .env_permission_normalized == true
+               and .env_mode == "0640"
+               and .env_runtime_readable == true
                and .config_cache_rebuild_committed == true
                and .application_deploy == false
                and .public_cache_revalidation == false' "$receipt" >/dev/null
