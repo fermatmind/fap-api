@@ -446,20 +446,26 @@ final class EnneagramPr23CacheOnlyResumeRunner
         throw new RuntimeException('TRANSIENT_READ_RETRY_EXHAUSTED');
     }
 
-    public static function retryPostReadbackBatch(callable $operation, ?callable $pause = null): mixed
-    {
+    public static function retryPostReadbackBatch(
+        callable $operation,
+        ?callable $pause = null,
+        int $maxAttempts = 2,
+    ): mixed {
+        if ($maxAttempts < 1 || $maxAttempts > 13) {
+            throw new RuntimeException('INVALID_POST_READBACK_MAX_ATTEMPTS');
+        }
         $pause ??= static function (): void {
             usleep(1_000_000);
         };
 
-        for ($attempt = 1; $attempt <= 2; $attempt++) {
+        for ($attempt = 1; $attempt <= $maxAttempts; $attempt++) {
             try {
                 return $operation();
             } catch (Throwable $exception) {
                 $isRetryable = $exception instanceof ConnectionException
                     || ($exception instanceof RuntimeException
                         && str_starts_with($exception->getMessage(), 'Runtime readback mismatch:'));
-                if (! $isRetryable || $attempt === 2) {
+                if (! $isRetryable || $attempt === $maxAttempts) {
                     throw $exception;
                 }
                 $pause();
@@ -660,6 +666,7 @@ final class EnneagramPr23CacheOnlyResumeRunner
                     false,
                     $privateReviewerNames,
                 ),
+                maxAttempts: $batchName === 'canary-00' ? 9 : 13,
             );
             $batchReceipts[] = self::safeReadbackReceipt($readback);
         }
