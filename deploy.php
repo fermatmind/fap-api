@@ -735,6 +735,14 @@ task('artisan:scales:seed-default', function () {
     run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' fap:scales:seed-default --no-interaction --ansi');
 });
 
+task('career:public-authority-cache-verified_unchanged', function () {
+    writeln('<info>Career public authority cache fingerprint and readability verified unchanged.</info>');
+});
+
+task('career:public-authority-cache-rebuilt', function () {
+    writeln('<info>Career public authority cache rebuilt for a changed fingerprint.</info>');
+});
+
 task('career:warm-public-authority-cache', function () {
     $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_WARM_CACHE_TIMEOUT') ?: 600);
     $timeoutSeconds = max(180, $timeoutSeconds);
@@ -750,7 +758,7 @@ task('career:warm-public-authority-cache', function () {
     }
 
     $command = sprintf(
-        'timeout --kill-after=%ds %d {{bin/php}} %s career:warm-public-authority-cache --no-interaction --ansi',
+        'timeout --kill-after=%ds %d {{bin/php}} %s career:warm-public-authority-cache --refresh-if-changed --no-interaction --ansi',
         $killAfterSeconds,
         $timeoutSeconds,
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
@@ -783,18 +791,20 @@ BASH,
     );
 
     if ($strictWarmCache) {
-        run($heartbeatCommand."\n".'exit "$status"');
-
-        return;
-    }
-
-    run($heartbeatCommand."\n".<<<'BASH'
+        $output = run($heartbeatCommand."\n".'exit "$status"');
+    } else {
+        $output = run($heartbeatCommand."\n".<<<'BASH'
 if [ "$status" -ne 0 ]; then
   echo "career_warm_public_authority_cache_nonblocking_failure=$status"
   echo "Continuing deploy because DEPLOY_CAREER_WARM_CACHE_STRICT is not true."
 fi
 exit 0
 BASH);
+    }
+
+    if (preg_match('/career_cache_refresh_result=(verified_unchanged|rebuilt)/', $output, $match) === 1) {
+        invoke('career:public-authority-cache-'.$match[1]);
+    }
 });
 
 task('career:verify-public-dataset-cache-equivalence', function () {
