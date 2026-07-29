@@ -68,7 +68,16 @@ class SitemapSourceController extends Controller
      */
     public function buildPayload(SitemapGenerator $generator, CareerRuntimePublishProjectionLookup $projection): array
     {
-        $items = collect($generator->generateSitemapUrls())
+        return $this->buildPayloadFromAuthorityUrls($generator->generateSitemapUrls(), $projection);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $authorityUrls
+     * @return array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}
+     */
+    public function buildPayloadFromAuthorityUrls(array $authorityUrls, CareerRuntimePublishProjectionLookup $projection): array
+    {
+        $items = collect($authorityUrls)
             ->map(static function (array $item): array {
                 return [
                     'loc' => (string) ($item['loc'] ?? ''),

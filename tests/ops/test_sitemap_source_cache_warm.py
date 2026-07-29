@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SCRIPT = ROOT / "backend" / "scripts" / "deploy" / "verify_sitemap_source_cache_warm.sh"
+SCRIPT = ROOT / "backend" / "scripts" / "deploy" / "verify_sitemap_source_cache_refresh.sh"
 DEPLOYER = ROOT / "deploy.php"
 
 
@@ -27,9 +27,12 @@ class SitemapSourceCacheWarmTest(unittest.TestCase):
 
                 printf '%s\n' "$*" >> "$FAKE_WARM_INVOCATION_LOG"
 
-                case "${FAKE_WARM_MODE:-warmed}" in
-                  warmed)
-                    printf '%s\n' '{"status":"warmed","count":104,"elapsed_seconds":1.2}'
+                case "${FAKE_WARM_MODE:-rebuilt}" in
+                  rebuilt)
+                    printf '%s\n' '{"status":"rebuilt","count":104,"elapsed_seconds":1.2}'
+                    ;;
+                  verified_unchanged)
+                    printf '%s\n' '{"status":"verified_unchanged","count":104,"elapsed_seconds":0.2}'
                     ;;
                   fallback)
                     printf '%s\n' '{"status":"fallback_warmed","count":19,"elapsed_seconds":2.3}'
@@ -107,15 +110,27 @@ class SitemapSourceCacheWarmTest(unittest.TestCase):
             return 0
         return len(self.invocation_log.read_text(encoding="utf-8").splitlines())
 
-    def test_warmed_payload_passes_once_with_expected_artisan_flags(self):
-        result = self.run_script(FAKE_WARM_MODE="warmed")
+    def test_rebuilt_payload_passes_once_with_expected_artisan_flags(self):
+        result = self.run_script(FAKE_WARM_MODE="rebuilt")
 
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
         self.assertEqual(1, self.invocation_count())
-        self.assertIn("sitemap_source_cache_warm_status=warmed", result.stdout)
+        self.assertIn("sitemap_source_cache_warm_status=rebuilt", result.stdout)
         invocation = self.invocation_log.read_text(encoding="utf-8")
         self.assertIn("seo:warm-sitemap-source-cache", invocation)
-        self.assertIn("--json --no-interaction --no-ansi", invocation)
+        self.assertIn(
+            "--refresh-if-changed --json --no-interaction --no-ansi",
+            invocation,
+        )
+
+    def test_verified_unchanged_payload_is_an_accepted_safe_result(self):
+        result = self.run_script(FAKE_WARM_MODE="verified_unchanged")
+
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        self.assertIn(
+            "sitemap_source_cache_warm_status=verified_unchanged",
+            result.stdout,
+        )
 
     def test_fallback_warmed_payload_is_an_accepted_safe_result(self):
         result = self.run_script(FAKE_WARM_MODE="fallback")
@@ -202,7 +217,7 @@ class SitemapSourceCacheWarmTest(unittest.TestCase):
         warm_end = deployer.index("task('guard:public-content-release'", warm_start)
         warm_task = deployer[warm_start:warm_end]
 
-        self.assertIn("verify_sitemap_source_cache_warm.sh", warm_task)
+        self.assertIn("verify_sitemap_source_cache_refresh.sh", warm_task)
         self.assertIn("sudo -n -u www-data -- env", warm_task)
         self.assertIn('php_bin="$(command -v {{bin/php}})"', warm_task)
         self.assertIn('SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"', warm_task)
@@ -210,6 +225,12 @@ class SitemapSourceCacheWarmTest(unittest.TestCase):
         self.assertIn("SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS", warm_task)
         self.assertIn("SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS", warm_task)
         self.assertIn("SITEMAP_SOURCE_WARM_STRICT", warm_task)
+        self.assertIn("sitemap-source-cache-verified_unchanged", deployer)
+        self.assertIn("sitemap-source-cache-rebuilt", deployer)
+        self.assertIn(
+            "sitemap_source_cache_warm_status=(verified_unchanged|rebuilt)",
+            warm_task,
+        )
         self.assertNotIn("seo:warm-sitemap-source-cache --json", warm_task)
 
         health_start = deployer.index("task('healthcheck:sitemap-source'")

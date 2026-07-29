@@ -893,12 +893,20 @@ task('career:rollback-public-dataset-cache-equivalence', function () {
     });
 });
 
+task('seo:sitemap-source-cache-verified_unchanged', function () {
+    writeln('<info>Sitemap source cache fingerprint and readability verified unchanged.</info>');
+});
+
+task('seo:sitemap-source-cache-rebuilt', function () {
+    writeln('<info>Sitemap source cache rebuilt for a changed authority fingerprint.</info>');
+});
+
 task('seo:warm-sitemap-source-cache', function () {
     $timeoutSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_TIMEOUT') ?: '180');
     $killAfterSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_KILL_AFTER') ?: '30');
     $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'false');
 
-    run(sprintf(
+    $output = run(sprintf(
         <<<'BASH'
 php_bin="$(command -v {{bin/php}})"
 test -n "$php_bin"
@@ -908,8 +916,12 @@ BASH,
         deployShellArg($timeoutSeconds),
         deployShellArg($killAfterSeconds),
         deployShellArg($strict),
-        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_sitemap_source_cache_warm.sh'),
+        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_sitemap_source_cache_refresh.sh'),
     ));
+
+    if (preg_match('/sitemap_source_cache_warm_status=(verified_unchanged|rebuilt)/', $output, $match) === 1) {
+        invoke('seo:sitemap-source-cache-'.$match[1]);
+    }
 });
 
 task('guard:public-content-release', function () {
