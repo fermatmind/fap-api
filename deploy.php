@@ -402,6 +402,52 @@ BASH);
 before('deploy:symlink', 'guard:expected-release-revision');
 
 /**
+ * Staging consumes the exact successful MySQL/Redis parity receipt verified by
+ * the protected workflow. This task keeps the receipt gate visible in the
+ * Deployer task tree/timing receipt and refuses an unbound deployment.
+ */
+task('guard:ci-parity-receipt', function () {
+    if (currentHost()->getAlias() !== 'staging') {
+        return;
+    }
+
+    $verified = trim((string) (getenv('CI_PARITY_RECEIPT_VERIFIED') ?: ''));
+    $receiptSha = strtolower(trim((string) (getenv('CI_PARITY_RECEIPT_SHA') ?: '')));
+    $deployRevision = strtolower(trim((string) (getenv('DEPLOY_REVISION') ?: '')));
+    $artifactDigest = trim((string) (getenv('CI_PARITY_RECEIPT_ARTIFACT_DIGEST') ?: ''));
+    $configFingerprint = trim((string) (getenv('CI_PARITY_RECEIPT_CONFIG_FINGERPRINT') ?: ''));
+    $runId = trim((string) (getenv('CI_PARITY_RECEIPT_RUN_ID') ?: ''));
+    $runAttempt = trim((string) (getenv('CI_PARITY_RECEIPT_RUN_ATTEMPT') ?: ''));
+
+    if ($verified !== 'true') {
+        throw new \RuntimeException('staging requires a verified CI parity receipt');
+    }
+    if (
+        preg_match('/\A[a-f0-9]{40}\z/', $receiptSha) !== 1
+        || preg_match('/\A[a-f0-9]{40}\z/', $deployRevision) !== 1
+        || ! hash_equals($deployRevision, $receiptSha)
+    ) {
+        throw new \RuntimeException('CI parity receipt SHA does not match the deploy revision');
+    }
+    if (preg_match('/\Asha256:[a-f0-9]{64}\z/', $artifactDigest) !== 1) {
+        throw new \RuntimeException('CI parity receipt artifact digest is missing or malformed');
+    }
+    if (preg_match('/\A[a-f0-9]{64}\z/', $configFingerprint) !== 1) {
+        throw new \RuntimeException('CI parity receipt config fingerprint is missing or malformed');
+    }
+    if (
+        preg_match('/\A[1-9][0-9]*\z/', $runId) !== 1
+        || preg_match('/\A[1-9][0-9]*\z/', $runAttempt) !== 1
+    ) {
+        throw new \RuntimeException('CI parity receipt workflow identity is missing or malformed');
+    }
+
+    writeln('<info>Verified exact-SHA CI parity receipt for staging deployment.</info>');
+});
+
+before('deploy:prepare', 'guard:ci-parity-receipt');
+
+/**
  * Refuse to move the production symlink unless the protected health policy and
  * real public-DNS business routes are healthy. The loopback vhost probe alone
  * cannot prove that the public edge and origin routing reach this service.

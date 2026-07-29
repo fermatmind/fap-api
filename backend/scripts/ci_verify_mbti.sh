@@ -22,16 +22,58 @@ export NO_COLOR=1
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/tmp/psysh_config}"
 mkdir -p "$XDG_CONFIG_HOME" || true
 
-# DB (force CI sqlite)
 export APP_ENV="${APP_ENV:-testing}"
-export DB_CONNECTION=sqlite
-export DB_DATABASE=/tmp/fap-ci.sqlite
-export QUEUE_CONNECTION=sync
-export FAP_ATTEMPT_WRITE_CONNECTION="${FAP_ATTEMPT_WRITE_CONNECTION:-sqlite}"
-
-# Cache (GitHub Actions CI does not start Redis for the MBTI response cache)
-export CONTENT_LOADER_CACHE_STORE=array
-export MBTI_RESPONSE_CACHE_STORE=array
+CI_VERIFY_TOPOLOGY="${CI_VERIFY_TOPOLOGY:-sqlite-sync}"
+CI_VERIFY_PARITY_ONLY="${CI_VERIFY_PARITY_ONLY:-0}"
+case "$CI_VERIFY_TOPOLOGY" in
+  sqlite-sync)
+    [[ "$CI_VERIFY_PARITY_ONLY" == "0" ]] || {
+      echo "[CI][FAIL] parity-only mode requires mysql8-redis6 topology" >&2
+      exit 18
+    }
+    export DB_CONNECTION=sqlite
+    export DB_DATABASE=/tmp/fap-ci.sqlite
+    export QUEUE_CONNECTION=sync
+    export FAP_ATTEMPT_WRITE_CONNECTION=sqlite
+    export CACHE_STORE=array
+    export CONTENT_LOADER_CACHE_STORE=array
+    export MBTI_RESPONSE_CACHE_STORE=array
+    ;;
+  mysql8-redis6)
+    [[ "$CI_VERIFY_PARITY_ONLY" == "1" ]] || {
+      echo "[CI][FAIL] mysql8-redis6 topology is supported only by parity-only mode" >&2
+      exit 18
+    }
+    [[ "${DB_CONNECTION:-}" == "mysql" ]] || {
+      echo "[CI][FAIL] mysql8-redis6 parity requires DB_CONNECTION=mysql" >&2
+      exit 18
+    }
+    [[ "${DB_HOST:-}" == "127.0.0.1" ]] || {
+      echo "[CI][FAIL] mysql8-redis6 parity requires loopback DB_HOST" >&2
+      exit 18
+    }
+    [[ "${DB_PORT:-}" == "3306" && "${DB_DATABASE:-}" == "fap_ci" ]] || {
+      echo "[CI][FAIL] mysql8-redis6 parity database identity is invalid" >&2
+      exit 18
+    }
+    [[ "${QUEUE_CONNECTION:-}" == "redis" ]] || {
+      echo "[CI][FAIL] mysql8-redis6 parity requires QUEUE_CONNECTION=redis" >&2
+      exit 18
+    }
+    [[ "${REDIS_HOST:-}" == "127.0.0.1" && "${REDIS_PORT:-}" == "6379" ]] || {
+      echo "[CI][FAIL] mysql8-redis6 parity Redis identity is invalid" >&2
+      exit 18
+    }
+    export FAP_ATTEMPT_WRITE_CONNECTION=mysql
+    export CACHE_STORE=redis
+    export CONTENT_LOADER_CACHE_STORE=hot_redis
+    export MBTI_RESPONSE_CACHE_STORE=hot_redis
+    ;;
+  *)
+    echo "[CI][FAIL] unsupported CI_VERIFY_TOPOLOGY=$CI_VERIFY_TOPOLOGY" >&2
+    exit 18
+    ;;
+esac
 
 # Content packs (force local driver + repo path)
 export FAP_PACKS_DRIVER=local
@@ -59,6 +101,54 @@ cd "$BACKEND_DIR"
 
 ENV_CREATED=0
 SERVE_PID=""
+
+prepare_ci_database() {
+  if [[ "$CI_VERIFY_TOPOLOGY" == "sqlite-sync" ]]; then
+    bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+    return
+  fi
+
+  php artisan config:clear >/dev/null
+  php artisan migrate:fresh --force --no-interaction
+  php artisan db:seed --class="Database\\Seeders\\CiScalesRegistrySeeder" --force --no-interaction
+  php artisan fap:scales:sync-slugs
+}
+
+verify_parity_services() {
+  if [[ "$CI_VERIFY_TOPOLOGY" != "mysql8-redis6" ]]; then
+    return
+  fi
+
+  php -r '
+  require "vendor/autoload.php";
+  $app = require "bootstrap/app.php";
+  $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+  $kernel->bootstrap();
+  $database = Illuminate\Support\Facades\DB::selectOne("SELECT 1 AS parity_probe");
+  if ((int) ($database->parity_probe ?? 0) !== 1) {
+      fwrite(STDERR, "[CI][FAIL] MySQL parity probe failed\n");
+      exit(18);
+  }
+  $pong = $app->make("redis")->connection()->command("ping");
+  if (! in_array(strtoupper((string) $pong), ["PONG", "1"], true)) {
+      fwrite(STDERR, "[CI][FAIL] Redis parity probe failed\n");
+      exit(18);
+  }
+  $cacheKey = "ci-parity:".bin2hex(random_bytes(8));
+  Illuminate\Support\Facades\Cache::store("redis")->put($cacheKey, "verified", 30);
+  if (Illuminate\Support\Facades\Cache::store("redis")->get($cacheKey) !== "verified") {
+      fwrite(STDERR, "[CI][FAIL] Redis cache parity probe failed\n");
+      exit(18);
+  }
+  Illuminate\Support\Facades\Cache::store("redis")->forget($cacheKey);
+  $queueSize = Illuminate\Support\Facades\Queue::connection("redis")->size("default");
+  if (! is_int($queueSize) || $queueSize < 0) {
+      fwrite(STDERR, "[CI][FAIL] Redis queue parity probe failed\n");
+      exit(18);
+  }
+  echo "[CI] mysql8-redis6 parity topology verified\n";
+  '
+}
 
 # Ensure .env exists + key before any artisan
 if [[ ! -f ".env" ]]; then
@@ -117,9 +207,50 @@ echo "[CI] content packs index artifact OK items=".count($items)."\n";
 '
 fi
 
-# Prepare sqlite + seed scales registry/slugs
-bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+# Prepare the selected CI topology + seed scales registry/slugs.
+prepare_ci_database
+verify_parity_services
 php artisan fap:schema:verify
+
+if [[ "$CI_VERIFY_PARITY_ONLY" == "1" ]]; then
+  echo "[CI] running MySQL/Redis staging parity matrix: legacy"
+  FEATURE_SELFCHECK_V2=false \
+  FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2=false \
+  FEATURE_PAYMENT_WEBHOOK_V2=false \
+  FEATURE_CONTENT_STORE_V2=false \
+    php artisan test \
+      tests/Feature/V0_3/MbtiFormVersionFlowTest.php \
+      tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php \
+      tests/Feature/V0_3/MbtiResponseCacheTest.php \
+      tests/Feature/V0_3/AttemptReportAccessReadTest.php \
+      --no-ansi
+
+  echo "[CI] running MySQL/Redis staging parity matrix: v2"
+  FEATURE_SELFCHECK_V2=true \
+  FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2=true \
+  FEATURE_PAYMENT_WEBHOOK_V2=true \
+  FEATURE_CONTENT_STORE_V2=true \
+    php artisan test \
+      tests/Feature/V0_3/MbtiFormVersionFlowTest.php \
+      tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php \
+      tests/Feature/V0_3/MbtiResponseCacheTest.php \
+      tests/Feature/V0_3/AttemptReportAccessReadTest.php \
+      --no-ansi
+
+  echo "[CI] running MySQL/Redis Big Five and Enneagram parity matrix"
+  php artisan test \
+    tests/Feature/V0_3/BigFiveFormVersionFlowTest.php \
+    tests/Feature/V0_3/BigFiveResultEngineFoundationTest.php \
+    tests/Feature/Content/EnneagramGoldenCasesTest.php \
+    tests/Feature/V0_3/EnneagramAssessmentFlowTest.php \
+    tests/Feature/V0_3/EnneagramReadReportContractTest.php \
+    tests/Feature/Attempts/EnneagramHistorySummaryTest.php \
+    tests/Feature/Report/EnneagramPdfDeliveryTest.php \
+    --no-ansi
+
+  echo "[CI] mysql8-redis6 staging parity gate OK"
+  exit 0
+fi
 
 RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-1}"
 RUN_ENNEAGRAM_GATE="${RUN_ENNEAGRAM_GATE:-1}"
