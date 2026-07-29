@@ -15,6 +15,10 @@ class ScaleRegistryWriter
 
     private const V2_TABLE = 'scales_registry_v2';
 
+    public function __construct(
+        private PublicScaleCatalogCache $publicScaleCatalogCache,
+    ) {}
+
     public function upsertScale(array $payload): ScaleRegistryModel
     {
         $code = strtoupper(trim((string) ($payload['code'] ?? '')));
@@ -26,6 +30,11 @@ class ScaleRegistryWriter
         $data = $payload;
         $data['code'] = $code;
         $data['org_id'] = $orgId;
+        $affectedSlugs = array_values(array_unique(array_filter([
+            ...$this->existingSlugs($orgId, $code),
+            ...$this->decodeJsonArray($data['slugs_json'] ?? null),
+            (string) ($data['primary_slug'] ?? ''),
+        ], static fn (mixed $slug): bool => trim((string) $slug) !== '')));
 
         if ($this->useV2Table()) {
             DB::table(self::V2_TABLE)->upsert(
@@ -57,7 +66,7 @@ class ScaleRegistryWriter
 
         $legacyScale = $this->upsertLegacyIfEligible($data);
         if ($legacyScale) {
-            $this->invalidateCache($orgId, $code);
+            $this->invalidatePublicProjection($orgId, $code, $affectedSlugs);
 
             return $legacyScale;
         }
@@ -69,7 +78,7 @@ class ScaleRegistryWriter
             $scale->setAttribute('slugs_json', $decoded);
         }
 
-        $this->invalidateCache($orgId, $code);
+        $this->invalidatePublicProjection($orgId, $code, $affectedSlugs);
 
         return $scale;
     }
@@ -117,6 +126,7 @@ class ScaleRegistryWriter
         foreach (array_keys($normalized) as $slug) {
             $this->invalidateCache($orgId, null, $slug);
         }
+        $this->publicScaleCatalogCache->bumpGeneration($orgId);
     }
 
     public function invalidateCache(int $orgId = 0, ?string $code = null, ?string $slug = null): void
@@ -129,7 +139,48 @@ class ScaleRegistryWriter
 
         if ($slug !== null) {
             Cache::forget(CacheKeys::scaleRegistryBySlug($orgId, $slug));
+            Cache::forget(CacheKeys::scaleRegistryBySlug($orgId, 'compat:'.$slug));
+            Cache::forget(CacheKeys::scaleRegistryBySlug($orgId, 'canonical:'.$slug));
         }
+    }
+
+    /**
+     * @param  list<mixed>  $slugs
+     */
+    private function invalidatePublicProjection(int $orgId, string $code, array $slugs): void
+    {
+        $this->invalidateCache($orgId, $code);
+        foreach ($slugs as $slug) {
+            $normalized = $this->normalizeSlug((string) $slug);
+            if ($normalized !== '') {
+                $this->invalidateCache($orgId, null, $normalized);
+            }
+        }
+        $this->publicScaleCatalogCache->bumpGeneration($orgId);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function existingSlugs(int $orgId, string $code): array
+    {
+        $table = $this->useV2Table() ? self::V2_TABLE : self::LEGACY_TABLE;
+        if (! Schema::hasTable($table)) {
+            return [];
+        }
+
+        $row = DB::table($table)
+            ->where('org_id', $orgId)
+            ->where('code', $code)
+            ->first(['primary_slug', 'slugs_json']);
+        if (! $row) {
+            return [];
+        }
+
+        return array_values(array_filter([
+            ...$this->decodeJsonArray($row->slugs_json ?? null),
+            (string) ($row->primary_slug ?? ''),
+        ], static fn (mixed $slug): bool => trim((string) $slug) !== ''));
     }
 
     private function normalizeSlug(string $slug): string

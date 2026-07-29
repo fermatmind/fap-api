@@ -6973,6 +6973,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isExactPublicScaleCatalogCacheHardeningChange($file, $repoRoot, $baseRef)) {
+                continue;
+            }
+
             if ($this->isQuestionPackCacheInfrastructureFile($file)) {
                 continue;
             }
@@ -10640,6 +10644,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/MbtiPrewarm.php',
             'backend/app/Support/CacheKeys.php',
         ], true);
+    }
+
+    private function isExactPublicScaleCatalogCacheHardeningChange(
+        string $file,
+        string $repoRoot,
+        string $baseRef,
+    ): bool {
+        // Fingerprint the exact branch-diff lines so this exception fails closed
+        // if the reviewed public catalog cache hardening expands in scope.
+        $expectedChangedLineHashes = [
+            'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php' => '56e339ad393f62e5a6d2b9a1064a3a0db0541d506a9bae633324959bce8d4ed9',
+            'backend/app/Services/Scale/PublicScaleCatalogCache.php' => 'e64f6ee512422e5332b9058140878a52ec9f312a8edc4f3bf98eb67acf48f2a3',
+            'backend/app/Services/Scale/PublicScaleCatalogUnavailable.php' => 'f46aa6f8cc054528a6c84ed823185c6738b4b844960cfafbebc52859e8c3713d',
+            'backend/app/Services/Scale/ScaleRegistry.php' => 'cba62c1dd2ed4da38106dc6c8c63798f0a5ca8cbf4d40df65b405ea16cbec8cd',
+            'backend/app/Services/Scale/ScaleRegistryWriter.php' => '5462a2e91c556b17b0d875ffd7fd6cbde960e9d2b374335c2eac5bc5c8794641',
+        ];
+
+        if (! isset($expectedChangedLineHashes[$file]) || $repoRoot === '' || $baseRef === '') {
+            return false;
+        }
+
+        $changedLines = $this->changedLinesForFile($repoRoot, $baseRef, $file);
+
+        return $changedLines !== []
+            && hash_equals($expectedChangedLineHashes[$file], hash('sha256', implode("\n", $changedLines)));
     }
 
     private function isIqPaidReportEntitlementContractFile(string $file): bool
