@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 final class Seo13ArticleDiscoverabilityCacheRefreshProductionOpsWorkflowTest extends TestCase
 {
-    public function test_workflow_binds_latest_release_and_exact_read_only_preflight_receipt(): void
+    public function test_workflow_binds_latest_control_plane_and_exact_release_preflight_receipt(): void
     {
         $workflow = $this->readRepoFile(
             '.github/workflows/seo-13-article-discoverability-cache-refresh-production-ops.yml',
@@ -27,7 +27,8 @@ final class Seo13ArticleDiscoverabilityCacheRefreshProductionOpsWorkflowTest ext
             'actions: read',
             'contents: read',
             'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
-            'test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"',
+            'git cat-file -e "$EXPECTED_RELEASE_SHA^{commit}"',
+            'git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" "$EXPECTED_CONTROL_PLANE_SHA"',
             'gh run download "$PREFLIGHT_RUN_ID"',
             '.contract_version == "seo13.article_discoverability_cache_refresh.production_ops.v1"',
             '.status == "PASS_PREFLIGHT"',
@@ -67,6 +68,10 @@ final class Seo13ArticleDiscoverabilityCacheRefreshProductionOpsWorkflowTest ext
         }
 
         $this->assertSame(1, substr_count($workflow, 'fetch-depth: 0'));
+        $this->assertStringNotContainsString(
+            'test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"',
+            $workflow,
+        );
         $this->assertStringNotContainsString('vars.PRODUCTION_DEPLOY_', $workflow);
         $this->assertStringNotContainsString('php artisan migrate', $workflow);
         $this->assertStringNotContainsString('queue:restart', $workflow);

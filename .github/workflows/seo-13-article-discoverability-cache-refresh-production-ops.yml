@@ -107,7 +107,8 @@ jobs:
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
-          test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+          git cat-file -e "$EXPECTED_RELEASE_SHA^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" "$EXPECTED_CONTROL_PLANE_SHA"
 
           case "$MODE" in
             preflight)
