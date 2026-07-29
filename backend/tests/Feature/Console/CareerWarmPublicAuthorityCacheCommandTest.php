@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Console\Commands\CareerWarmPublicAuthorityCache;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -15,6 +16,106 @@ use Tests\TestCase;
 final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_refresh_if_changed_rebuilds_once_then_verifies_unchanged_without_switching_versions(): void
+    {
+        $firstExit = Artisan::call('career:warm-public-authority-cache', [
+            '--refresh-if-changed' => true,
+            '--json' => true,
+        ]);
+        $first = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $versions = [
+            'en' => $cache->directoryCacheStatus('en')['active_version'],
+            'zh-CN' => $cache->directoryCacheStatus('zh-CN')['active_version'],
+        ];
+
+        $this->assertSame(0, $firstExit);
+        $this->assertSame('rebuilt', $first['status']);
+        $this->assertSame('fingerprint_missing_or_changed', $first['decision']);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $first['fingerprint_sha256']);
+        $this->assertIsArray(Cache::get(CareerWarmPublicAuthorityCache::FINGERPRINT_CACHE_KEY));
+
+        $secondExit = Artisan::call('career:warm-public-authority-cache', [
+            '--refresh-if-changed' => true,
+            '--json' => true,
+        ]);
+        $second = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $secondExit);
+        $this->assertSame('verified_unchanged', $second['status']);
+        $this->assertSame('fingerprint_and_cache_verified', $second['decision']);
+        $this->assertSame($first['fingerprint_sha256'], $second['fingerprint_sha256']);
+        $this->assertSame($versions['en'], $cache->directoryCacheStatus('en')['active_version']);
+        $this->assertSame($versions['zh-CN'], $cache->directoryCacheStatus('zh-CN')['active_version']);
+
+        $this->artisan('career:warm-public-authority-cache', [
+            '--refresh-if-changed' => true,
+        ])
+            ->expectsOutput('career_cache_refresh_result=verified_unchanged')
+            ->expectsOutput('status=verified_unchanged')
+            ->assertExitCode(0);
+    }
+
+    public function test_authority_schema_and_code_fingerprint_changes_each_force_rebuild(): void
+    {
+        Artisan::call('career:warm-public-authority-cache', [
+            '--refresh-if-changed' => true,
+            '--json' => true,
+        ]);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+
+        foreach ([
+            'authoritative_data_summary_sha256' => str_repeat('a', 64),
+            'cache_schema_version' => 'career.public-authority-cache.changed',
+            'code_fingerprint_sha256' => str_repeat('b', 64),
+        ] as $field => $changedValue) {
+            $receipt = Cache::get(CareerWarmPublicAuthorityCache::FINGERPRINT_CACHE_KEY);
+            $this->assertIsArray($receipt);
+            $receipt[$field] = $changedValue;
+            Cache::forever(CareerWarmPublicAuthorityCache::FINGERPRINT_CACHE_KEY, $receipt);
+            $previousVersion = $cache->directoryCacheStatus('en')['active_version'];
+
+            $exitCode = Artisan::call('career:warm-public-authority-cache', [
+                '--refresh-if-changed' => true,
+                '--json' => true,
+            ]);
+            $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+            $this->assertSame(0, $exitCode, $field);
+            $this->assertSame('rebuilt', $report['status'], $field);
+            $this->assertNotSame($previousVersion, $cache->directoryCacheStatus('en')['active_version'], $field);
+        }
+    }
+
+    public function test_corrupted_fingerprint_or_unreadable_cache_never_claims_unchanged(): void
+    {
+        Artisan::call('career:warm-public-authority-cache', [
+            '--refresh-if-changed' => true,
+            '--json' => true,
+        ]);
+
+        Cache::forever(CareerWarmPublicAuthorityCache::FINGERPRINT_CACHE_KEY, 'corrupted');
+        $corruptedExit = Artisan::call('career:warm-public-authority-cache', [
+            '--refresh-if-changed' => true,
+            '--json' => true,
+        ]);
+        $corrupted = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $corruptedExit);
+        $this->assertSame('rebuilt', $corrupted['status']);
+
+        Cache::forget(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY);
+        $missingCacheExit = Artisan::call('career:warm-public-authority-cache', [
+            '--refresh-if-changed' => true,
+            '--json' => true,
+        ]);
+        $missingCache = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $missingCacheExit);
+        $this->assertSame('rebuilt', $missingCache['status']);
+        $this->assertNotSame('verified_unchanged', $missingCache['status']);
+    }
 
     public function test_command_warms_public_authority_payloads_for_http_reuse(): void
     {
