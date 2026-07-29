@@ -724,7 +724,9 @@ final class AttemptReportAccessReadTest extends TestCase
         $this->createResult($attemptId, 'mbti_144');
 
         if (Schema::hasTable('attempt_invite_unlocks')) {
-            Schema::drop('attempt_invite_unlocks');
+            Schema::withoutForeignKeyConstraints(static function (): void {
+                Schema::drop('attempt_invite_unlocks');
+            });
         }
         SchemaBaseline::clearCache();
 
