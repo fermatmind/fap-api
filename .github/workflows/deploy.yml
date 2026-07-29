@@ -32,6 +32,7 @@ on:
 permissions:
   contents: read
   actions: read
+  attestations: read
 
 env:
   MBTI_RUNTIME46_PRODUCTION_BASE_SHA: "781d1636b2c74f5852076a5864b681910a1e0e47"
@@ -41,32 +42,16 @@ jobs:
     name: Deploy checks (staging)
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    outputs:
+      parity_receipt_verified: ${{ steps.parity.outputs.verified }}
+      parity_receipt_sha: ${{ steps.parity.outputs.sha }}
+      parity_receipt_artifact_digest: ${{ steps.parity.outputs.artifact-digest }}
+      parity_receipt_config_fingerprint: ${{ steps.parity.outputs.config-fingerprint }}
+      parity_receipt_run_id: ${{ steps.parity.outputs.run-id }}
+      parity_receipt_run_attempt: ${{ steps.parity.outputs.run-attempt }}
     concurrency:
       group: deploy-checks-${{ github.repository }}-staging-${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && 'runtime46-isolated' || 'main' }}
       cancel-in-progress: ${{ github.event_name == 'push' }}
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_DATABASE: fap_ci
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - "3306:3306"
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=12
-      redis:
-        image: redis:6-alpine
-        ports:
-          - "6379:6379"
-        options: >-
-          --health-cmd="redis-cli ping || exit 1"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=12
 
     env:
       TARGET: staging
@@ -191,22 +176,113 @@ jobs:
           git update-ref refs/remotes/origin/main "$EXPECTED_RELEASE_SHA"
           test "$(git merge-base origin/main HEAD)" = "$EXPECTED_RELEASE_SHA"
 
-      - name: Gate - ci_verify_mbti (Phase D)
+      - name: Resolve exact-SHA successful CI parity receipt
+        id: parity-artifact
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          RUN_BIG5_OCEAN_GATE: "1"
-          MBTI_CONTENT_PACKAGE: default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: fap_ci
-          DB_USERNAME: root
-          DB_PASSWORD: root
-          QUEUE_CONNECTION: redis
-          REDIS_HOST: 127.0.0.1
-          REDIS_PORT: 6379
+          PARITY_EXPECTED_SHA: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
+        with:
+          script: |
+            const sha = process.env.PARITY_EXPECTED_SHA;
+            const expectedName = `fap-api-parity-receipt-${sha}`;
+            if (!/^[a-f0-9]{40}$/.test(sha)) {
+              core.setFailed("Parity receipt target must be an exact lowercase SHA");
+              return;
+            }
+
+            const deadline = Date.now() + 12 * 60 * 1000;
+            while (Date.now() < deadline) {
+              const response = await github.rest.actions.listWorkflowRuns({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: "ci.yml",
+                branch: "main",
+                event: "push",
+                head_sha: sha,
+                per_page: 20,
+              });
+              const runs = response.data.workflow_runs.filter(
+                (run) => run.head_sha === sha && run.head_branch === "main" && run.event === "push",
+              );
+              for (const run of runs) {
+                if (run.status !== "completed" || run.conclusion !== "success") continue;
+                const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: run.id,
+                  per_page: 100,
+                });
+                const matches = artifacts.data.artifacts.filter(
+                  (artifact) => artifact.name === expectedName && !artifact.expired,
+                );
+                if (matches.length !== 1) continue;
+                const artifact = matches[0];
+                if (!/^sha256:[a-f0-9]{64}$/.test(String(artifact.digest || ""))) {
+                  core.setFailed("Parity receipt artifact is missing its immutable digest");
+                  return;
+                }
+                core.setOutput("artifact-id", String(artifact.id));
+                core.setOutput("artifact-digest", artifact.digest);
+                core.setOutput("run-id", String(run.id));
+                core.setOutput("run-attempt", String(run.run_attempt));
+                return;
+              }
+              await new Promise((resolve) => setTimeout(resolve, 15000));
+            }
+            core.setFailed(`No successful exact-SHA CI parity receipt was found for ${sha}`);
+
+      - name: Verify exact-SHA CI parity receipt
+        id: parity
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PARITY_EXPECTED_SHA: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
+          PARITY_ARTIFACT_ID: ${{ steps.parity-artifact.outputs.artifact-id }}
+          PARITY_ARTIFACT_DIGEST: ${{ steps.parity-artifact.outputs.artifact-digest }}
+          PARITY_RUN_ID: ${{ steps.parity-artifact.outputs.run-id }}
+          PARITY_RUN_ATTEMPT: ${{ steps.parity-artifact.outputs.run-attempt }}
         run: |
           set -euo pipefail
-          bash ./backend/scripts/ci_verify_mbti.sh
+          receipt_root="$RUNNER_TEMP/ci-parity-receipt-${PARITY_EXPECTED_SHA}"
+          receipt_zip="$receipt_root/fap-api-parity-receipt-${PARITY_EXPECTED_SHA}.zip"
+          receipt_name="parity-receipt-${PARITY_EXPECTED_SHA}.json"
+          receipt_path="$receipt_root/$receipt_name"
+          mkdir -p "$receipt_root"
+
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$PARITY_ARTIFACT_ID/zip" \
+            --output "$receipt_zip"
+          actual_artifact_digest="sha256:$(sha256sum "$receipt_zip" | awk '{print $1}')"
+          test "$actual_artifact_digest" = "$PARITY_ARTIFACT_DIGEST"
+
+          gh attestation verify "$receipt_zip" \
+            --repo "$GITHUB_REPOSITORY" \
+            --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/ci.yml" \
+            --source-ref refs/heads/main \
+            --source-digest "$PARITY_EXPECTED_SHA"
+
+          mapfile -t receipt_entries < <(unzip -Z1 "$receipt_zip")
+          test "${#receipt_entries[@]}" -eq 1
+          test "${receipt_entries[0]}" = "$receipt_name"
+          unzip -q "$receipt_zip" -d "$receipt_root"
+
+          verified_receipt="$(php backend/scripts/deploy/ci_parity_receipt.php verify \
+            --receipt="$receipt_path" \
+            --expected-repo="$GITHUB_REPOSITORY" \
+            --expected-sha="$PARITY_EXPECTED_SHA" \
+            --expected-run-id="$PARITY_RUN_ID" \
+            --expected-run-attempt="$PARITY_RUN_ATTEMPT")"
+          config_fingerprint="$(jq -er '.config_fingerprint' <<<"$verified_receipt")"
+          {
+            echo "verified=true"
+            echo "sha=$PARITY_EXPECTED_SHA"
+            echo "artifact-digest=$PARITY_ARTIFACT_DIGEST"
+            echo "config-fingerprint=$config_fingerprint"
+            echo "run-id=$PARITY_RUN_ID"
+            echo "run-attempt=$PARITY_RUN_ATTEMPT"
+          } >> "$GITHUB_OUTPUT"
 
   deploy:
     name: Deploy (staging)
@@ -226,6 +302,12 @@ jobs:
       TARGET: staging
       DEPLOYER_VERSION: "7.5.12"
       DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
+      CI_PARITY_RECEIPT_VERIFIED: ${{ needs.checks.outputs.parity_receipt_verified }}
+      CI_PARITY_RECEIPT_SHA: ${{ needs.checks.outputs.parity_receipt_sha }}
+      CI_PARITY_RECEIPT_ARTIFACT_DIGEST: ${{ needs.checks.outputs.parity_receipt_artifact_digest }}
+      CI_PARITY_RECEIPT_CONFIG_FINGERPRINT: ${{ needs.checks.outputs.parity_receipt_config_fingerprint }}
+      CI_PARITY_RECEIPT_RUN_ID: ${{ needs.checks.outputs.parity_receipt_run_id }}
+      CI_PARITY_RECEIPT_RUN_ATTEMPT: ${{ needs.checks.outputs.parity_receipt_run_attempt }}
       DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
       DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}

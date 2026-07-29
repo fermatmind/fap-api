@@ -295,6 +295,161 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+  verify-staging-parity:
+    name: verify-staging-parity
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs:
+      - hygiene
+      - supply-chain
+      - content-pack-build-validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: fap_ci
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+      redis:
+        image: redis:6-alpine
+        ports:
+          - "6379:6379"
+        options: >-
+          --health-cmd="redis-cli ping || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    env:
+      APP_ENV: testing
+      CI_VERIFY_TOPOLOGY: mysql8-redis6
+      CI_VERIFY_PARITY_ONLY: "1"
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: fap_ci
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      QUEUE_CONNECTION: redis
+      REDIS_HOST: 127.0.0.1
+      REDIS_PORT: 6379
+      RUN_BIG5_OCEAN_GATE: "1"
+      RUN_ENNEAGRAM_GATE: "1"
+      CONTENT_PACKS_INDEX_ARTIFACT_ENABLED: "true"
+      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: >-
+            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
+
+      - name: Setup Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: '24'
+
+      - name: Install CI guard dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes ripgrep
+          rg --version
+
+      - name: Cache Composer
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: |
+            backend/vendor
+            ~/.composer/cache/files
+          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php84-
+
+      - name: Prepare Laravel cache dirs
+        working-directory: backend
+        run: |
+          mkdir -p storage/framework/cache/data
+          mkdir -p storage/framework/views
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/logs
+          mkdir -p storage/app/private/content_packs_index
+          mkdir -p storage/app/private/packs_v2_materialized
+          mkdir -p bootstrap/cache
+          chmod -R ug+rwX storage bootstrap/cache || true
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Ensure Laravel app key
+        working-directory: backend
+        run: |
+          if [ ! -f .env ]; then cp .env.example .env; fi
+          php artisan key:generate --force
+
+      - name: Download content packs index artifact
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: content-packs-index
+          path: backend/storage/app/private/content_packs_index
+
+      - name: Run MySQL and Redis ci_verify_mbti parity gate
+        run: bash ./backend/scripts/ci_verify_mbti.sh
+
+      - name: Create exact-SHA parity receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt_path="$RUNNER_TEMP/parity-receipt-${GITHUB_SHA}.json"
+          php backend/scripts/deploy/ci_parity_receipt.php create \
+            --output="$receipt_path" \
+            --repo="$GITHUB_REPOSITORY" \
+            --sha="$GITHUB_SHA" \
+            --run-id="$GITHUB_RUN_ID" \
+            --run-attempt="$GITHUB_RUN_ATTEMPT"
+          echo "PARITY_RECEIPT_PATH=$receipt_path" >> "$GITHUB_ENV"
+
+      - name: Upload exact-SHA parity receipt
+        id: upload-parity-receipt
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: fap-api-parity-receipt-${{ github.sha }}
+          path: ${{ env.PARITY_RECEIPT_PATH }}
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Attest exact uploaded parity receipt
+        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6 # v4
+        with:
+          subject-name: fap-api-parity-receipt-${{ github.sha }}.zip
+          subject-digest: sha256:${{ steps.upload-parity-receipt.outputs.artifact-digest }}
+
+      - name: Upload parity diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: ci_verify_mbti_mysql8_redis6
+          path: backend/artifacts/verify_mbti
+          if-no-files-found: ignore
+          retention-days: 7
+
   verify-bigfive:
     name: verify-bigfive
     needs:

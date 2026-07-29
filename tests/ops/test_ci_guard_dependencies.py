@@ -24,7 +24,7 @@ def _write_executable(path: Path, source: str) -> None:
 
 
 class CiGuardDependencyTest(unittest.TestCase):
-    def test_mbti_ci_and_staging_install_rg_before_master_guard(self):
+    def test_mbti_ci_jobs_install_rg_before_master_guard_and_staging_reuses_receipt(self):
         install_step = "sudo apt-get install --no-install-recommends --yes ripgrep"
         version_check = "rg --version"
         master_guard = "bash ./backend/scripts/ci_verify_mbti.sh"
@@ -32,7 +32,7 @@ class CiGuardDependencyTest(unittest.TestCase):
         ci_source = CI_WORKFLOW.read_text(encoding="utf-8")
         guarded_workflows = {
             "ci": ci_source[ci_source.index("  verify-mbti:") :],
-            "deploy-staging": DEPLOY_WORKFLOW.read_text(encoding="utf-8"),
+            "ci-parity": ci_source[ci_source.index("  verify-staging-parity:") :],
         }
 
         for workflow, source in guarded_workflows.items():
@@ -42,6 +42,10 @@ class CiGuardDependencyTest(unittest.TestCase):
                 self.assertIn(master_guard, source)
                 self.assertLess(source.index(install_step), source.index(version_check))
                 self.assertLess(source.index(version_check), source.index(master_guard))
+
+        deploy_source = DEPLOY_WORKFLOW.read_text(encoding="utf-8")
+        self.assertNotIn(master_guard, deploy_source)
+        self.assertIn("ci_parity_receipt.php verify", deploy_source)
 
     def test_shared_tool_guard_fails_closed_when_rg_is_missing(self):
         with tempfile.TemporaryDirectory() as tmp:
