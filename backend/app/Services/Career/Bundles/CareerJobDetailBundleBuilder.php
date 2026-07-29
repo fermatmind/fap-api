@@ -102,6 +102,10 @@ final class CareerJobDetailBundleBuilder
                 $publicLocale,
                 $exposureProjectionItem,
                 $conversionClosureOverride,
+            ) ?? $this->buildFromPublishedDocxCareerJob(
+                $normalizedSlug,
+                $publicLocale,
+                $conversionClosureOverride,
             ) ?? $this->buildRuntimePublishedFallbackBundle(
                 $occupation,
                 $normalizedSlug,

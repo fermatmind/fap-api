@@ -589,6 +589,24 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.content.primary_cta.subject_key', 'agricultural-workers-all-other');
     }
 
+    public function test_directory_draft_prefers_published_docx_authority_over_runtime_shell(): void
+    {
+        $slug = 'compliance-officers';
+        $this->configurePublicResolutionPlan([
+            ['slug' => $slug, 'status' => 'already_imported_validated'],
+        ]);
+        $occupation = $this->createDisplayAssetBackedOccupation($slug);
+        $occupation->update(['crosswalk_mode' => 'directory_draft']);
+        $this->createPublishedDocxCareerJob($slug);
+
+        $this->getWarmedJobDetailJson("/api/v0.5/career/jobs/{$slug}?locale=zh-CN")
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', $slug)
+            ->assertJsonPath('locale_policy.crosswalk_mode', 'docx_baseline')
+            ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.docx_baseline.v1')
+            ->assertJsonPath('integrity_summary.integrity_state', 'docx_baseline');
+    }
+
     public function test_runtime_shell_does_not_bypass_projection_release_gate(): void
     {
         $this->configurePublicResolutionPlan([

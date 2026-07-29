@@ -294,6 +294,45 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame('Actor career fit', $surface['page']['content']['hero']['title']);
     }
 
+    public function test_it_localizes_internal_hrefs_to_the_requested_locale(): void
+    {
+        $occupation = $this->createOccupation('actors');
+        $this->createDisplayAsset($occupation, [
+            'page_payload_json' => [
+                'zh' => [
+                    'hero' => ['title' => '演员职业判断'],
+                    'primary_cta' => [
+                        'label' => '开始职业兴趣测试',
+                        'href' => '/en/tests/holland-career-interest-test-riasec | /zh/tests/holland-career-interest-test-riasec',
+                    ],
+                    'final_cta' => [
+                        'label' => '继续探索职业',
+                        'href' => '/en/career',
+                    ],
+                ],
+                'en' => [
+                    'hero' => ['title' => 'Actor career fit'],
+                    'primary_cta' => [
+                        'label' => 'Start the career interest test',
+                        'href' => '/zh/tests/holland-career-interest-test-riasec | /en/tests/holland-career-interest-test-riasec',
+                    ],
+                    'final_cta' => [
+                        'label' => 'Explore careers',
+                        'href' => '/zh/career',
+                    ],
+                ],
+            ],
+        ]);
+
+        $zhSurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+        $enSurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'en');
+
+        $this->assertSame('/zh/tests/holland-career-interest-test-riasec', $zhSurface['page']['content']['primary_cta']['href']);
+        $this->assertSame('/zh/career', $zhSurface['page']['content']['final_cta']['href']);
+        $this->assertSame('/en/tests/holland-career-interest-test-riasec', $enSurface['page']['content']['primary_cta']['href']);
+        $this->assertSame('/en/career', $enSurface['page']['content']['final_cta']['href']);
+    }
+
     public function test_it_holds_zh_surface_when_core_hero_is_english_without_blocking_en(): void
     {
         $occupation = $this->createOccupation('data-scientists');
