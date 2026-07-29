@@ -1285,6 +1285,23 @@ task('guard:shared-permissions', function () {
     );
 });
 
+task('prepare:release-bootstrap-cache-access', function () {
+    $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
+    $group = 'www-data';
+    $ownerGroup = deployOwnerGroupArg($owner, $group);
+    $cacheDir = deployPlaceholderPathArg(
+        '{{release_path}}',
+        'backend/bootstrap/cache',
+    );
+
+    run(
+        'test -d '.$cacheDir
+        .' && test ! -L '.$cacheDir
+        .' && sudo -n /usr/bin/chown '.$ownerGroup.' '.$cacheDir
+        .' && sudo -n /usr/bin/chmod 2775 '.$cacheDir,
+    );
+});
+
 /**
  * ======================================================
  * phpredis 检查
@@ -1960,6 +1977,7 @@ after('guard:no-pending-migrations', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'career:warm-public-authority-cache');
 after('career:warm-public-authority-cache', 'seo:warm-sitemap-source-cache');
 after('seo:warm-sitemap-source-cache', 'guard:public-content-release');
+after('guard:public-content-release', 'prepare:release-bootstrap-cache-access');
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');

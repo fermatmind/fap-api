@@ -206,6 +206,37 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function release_bootstrap_cache_access_is_prepared_without_recursive_permission_repair(): void
+    {
+        $deployer = $this->readRepoFile('deploy.php');
+        $taskStart = strpos($deployer, "task('prepare:release-bootstrap-cache-access'");
+        $taskEnd = is_int($taskStart) ? strpos($deployer, "\n});", $taskStart) : false;
+
+        $this->assertIsInt($taskStart);
+        $this->assertIsInt($taskEnd);
+        $taskBlock = substr($deployer, $taskStart, $taskEnd - $taskStart + 4);
+        $this->assertStringContainsString(
+            "deployPlaceholderPathArg(\n        '{{release_path}}',\n        'backend/bootstrap/cache',",
+            $taskBlock,
+        );
+        $this->assertStringContainsString(
+            "' && sudo -n /usr/bin/chown '.\$ownerGroup.' '.\$cacheDir",
+            $taskBlock,
+        );
+        $this->assertStringContainsString(
+            "' && sudo -n /usr/bin/chmod 2775 '.\$cacheDir",
+            $taskBlock,
+        );
+        $this->assertStringNotContainsString(' -R ', $taskBlock);
+        $this->assertStringNotContainsString('/usr/bin/find', $taskBlock);
+        $this->assertStringNotContainsString('backend/storage', $taskBlock);
+        $this->assertStringContainsString(
+            "after('guard:public-content-release', 'prepare:release-bootstrap-cache-access');",
+            $deployer,
+        );
+    }
+
+    #[Test]
     public function sitemap_cache_warm_uses_the_php_fpm_identity_for_shared_file_cache_writes(): void
     {
         $source = $this->readRepoFile('deploy.php');
