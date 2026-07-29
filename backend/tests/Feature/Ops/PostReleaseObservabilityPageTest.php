@@ -310,7 +310,8 @@ final class PostReleaseObservabilityPageTest extends TestCase
                 && in_array('/en', $paths, true)
                 && in_array('/llms.txt', $paths, true)
                 && in_array('/llms-full.txt', $paths, true)
-                && $request->hasHeader('X-FM-Content-Release-Token');
+                && $this->hasValidRevalidationSignature($request, 'release-secret')
+                && ! $request->hasHeader('X-FM-Content-Release-Token');
         });
         Http::assertSent(function ($request): bool {
             return $request->url() === 'https://broadcast.example.test/content-release'
@@ -566,5 +567,20 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $context->set($orgId, (int) $owner->id, 'admin');
         app()->instance(OrgContext::class, $context);
         EditorialReviewAudit::submit($type, $record);
+    }
+
+    private function hasValidRevalidationSignature(mixed $request, string $secret): bool
+    {
+        $timestamp = (string) ($request->header('X-FM-Content-Release-Timestamp')[0] ?? '');
+        $nonce = (string) ($request->header('X-FM-Content-Release-Nonce')[0] ?? '');
+        $signature = (string) ($request->header('X-FM-Content-Release-Signature')[0] ?? '');
+
+        if (! preg_match('/^\d{10}$/', $timestamp) || ! preg_match('/^[a-f0-9]{32}$/', $nonce)) {
+            return false;
+        }
+
+        $expected = 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$request->body(), $secret);
+
+        return hash_equals($expected, $signature);
     }
 }

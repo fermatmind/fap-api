@@ -135,6 +135,15 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
         }
         $this->assertSame(3, $payload['frontend_revalidation_count']);
         Http::assertSentCount(1);
+        Http::assertSent(function ($request): bool {
+            $paths = (array) data_get($request->data(), 'cache_signal.paths', []);
+
+            return $request->url() === 'https://frontend.example.test/revalidate'
+                && $this->hasValidRevalidationSignature($request, 'test-secret')
+                && ! $request->hasHeader('X-FM-Content-Release-Token')
+                && data_get($request->data(), 'source') === 'seo13_article_discoverability_cache_refresh'
+                && $paths === ['/sitemap.xml', '/llms.txt', '/llms-full.txt'];
+        });
         $this->assertSame($beforeAuthority, $this->authorityState());
         $this->assertIsArray(Cache::get('seo:sitemap-source:v1:fresh'));
         $this->assertNull(Cache::get('seo:sitemap-source:v1:stale'));
@@ -347,6 +356,21 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
 
 - 示例公开来源：https://example.com/source
 MARKDOWN;
+    }
+
+    private function hasValidRevalidationSignature(mixed $request, string $secret): bool
+    {
+        $timestamp = (string) ($request->header('X-FM-Content-Release-Timestamp')[0] ?? '');
+        $nonce = (string) ($request->header('X-FM-Content-Release-Nonce')[0] ?? '');
+        $signature = (string) ($request->header('X-FM-Content-Release-Signature')[0] ?? '');
+
+        if (! preg_match('/^\d{10}$/', $timestamp) || ! preg_match('/^[a-f0-9]{32}$/', $nonce)) {
+            return false;
+        }
+
+        $expected = 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$request->body(), $secret);
+
+        return hash_equals($expected, $signature);
     }
 
     /**

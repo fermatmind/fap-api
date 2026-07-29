@@ -97,7 +97,8 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
             $paths = (array) data_get($request->data(), 'cache_signal.paths', []);
 
             return $request->url() === 'https://cache.example.test/api/content-release/revalidate'
-                && $request->hasHeader('X-FM-Content-Release-Token', 'release-secret')
+                && $this->hasValidRevalidationSignature($request, 'release-secret')
+                && ! $request->hasHeader('X-FM-Content-Release-Token')
                 && in_array('/en/articles/content-release-article', $paths, true)
                 && in_array('/en/topics/big-five', $paths, true)
                 && in_array('/llms-full.txt', $paths, true);
@@ -203,7 +204,8 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
             $paths = (array) data_get($request->data(), 'cache_signal.paths', []);
 
             return $request->url() === 'https://cache.example.test/api/content-release/revalidate'
-                && $request->hasHeader('X-FM-Content-Release-Token', 'release-secret')
+                && $this->hasValidRevalidationSignature($request, 'release-secret')
+                && ! $request->hasHeader('X-FM-Content-Release-Token')
                 && data_get($request->data(), 'event') === 'content_release_revalidate'
                 && data_get($request->data(), 'content.type') === 'article-taxonomy'
                 && data_get($request->data(), 'content.article_ids') === [(int) $article->id]
@@ -460,6 +462,21 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         ])->save();
 
         return $revision;
+    }
+
+    private function hasValidRevalidationSignature(mixed $request, string $secret): bool
+    {
+        $timestamp = (string) ($request->header('X-FM-Content-Release-Timestamp')[0] ?? '');
+        $nonce = (string) ($request->header('X-FM-Content-Release-Nonce')[0] ?? '');
+        $signature = (string) ($request->header('X-FM-Content-Release-Signature')[0] ?? '');
+
+        if (! preg_match('/^\d{10}$/', $timestamp) || ! preg_match('/^[a-f0-9]{32}$/', $nonce)) {
+            return false;
+        }
+
+        $expected = 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$request->body(), $secret);
+
+        return hash_equals($expected, $signature);
     }
 
     /**
