@@ -65,10 +65,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
         $sitemapUrls = $this->locations($this->sitemapGenerator->generateSitemapUrls());
         $llmsUrls = $this->locations($this->sitemapGenerator->generateLlmsUrls());
         $endpoints = $this->frontendEndpoints();
-        $secretPresent = trim((string) config(
-            'ops.content_release_observability.cache_invalidation_secret',
-            '',
-        )) !== '';
+        $secretPresent = $this->frontendSecret() !== '';
         if ($endpoints === []) {
             $errors[] = ['code' => 'frontend_revalidation_endpoints_missing'];
         }
@@ -274,10 +271,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
     private function revalidateFrontend(): void
     {
         $endpoints = $this->frontendEndpoints();
-        $secret = trim((string) config(
-            'ops.content_release_observability.cache_invalidation_secret',
-            '',
-        ));
+        $secret = $this->frontendSecret();
         if ($endpoints === [] || $secret === '') {
             throw new RuntimeException('discoverability_frontend_revalidation_not_configured');
         }
@@ -301,18 +295,19 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
                 'urls' => self::FRONTEND_PATHS,
             ],
         ];
+        $requestBody = $this->jsonBody($payload);
 
         foreach ($endpoints as $endpoint) {
             $response = Http::acceptJson()
                 ->timeout(15)
                 ->withHeaders([
                     'X-FM-Content-Release-Source' => 'seo13_article_discoverability_cache_refresh',
-                    'X-FM-Content-Release-Token' => $secret,
-                ])
-                ->post($endpoint, $payload);
-            $body = $response->json();
-            $revalidated = is_array($body) ? (array) ($body['revalidated_paths'] ?? []) : [];
-            $rejected = is_array($body) ? (array) ($body['rejected_paths'] ?? []) : [];
+                ] + $this->hmacHeaders($secret, $requestBody))
+                ->withBody($requestBody, 'application/json')
+                ->post($endpoint);
+            $responseBody = $response->json();
+            $revalidated = is_array($responseBody) ? (array) ($responseBody['revalidated_paths'] ?? []) : [];
+            $rejected = is_array($responseBody) ? (array) ($responseBody['rejected_paths'] ?? []) : [];
             sort($revalidated);
             $expected = self::FRONTEND_PATHS;
             sort($expected);
@@ -320,5 +315,42 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
                 throw new RuntimeException('discoverability_frontend_revalidation_failed');
             }
         }
+    }
+
+    private function frontendSecret(): string
+    {
+        $hmacSecret = trim((string) config('ops.content_release_observability.hmac_revalidation_secret', ''));
+        if ($hmacSecret !== '') {
+            return $hmacSecret;
+        }
+
+        return trim((string) config('ops.content_release_observability.cache_invalidation_secret', ''));
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function jsonBody(array $payload): string
+    {
+        return (string) json_encode(
+            $payload,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE,
+        );
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    private function hmacHeaders(string $secret, string $body): array
+    {
+        $timestamp = (string) time();
+        $nonce = bin2hex(random_bytes(16));
+        $signature = hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$body, $secret);
+
+        return [
+            'X-FM-Content-Release-Timestamp' => $timestamp,
+            'X-FM-Content-Release-Nonce' => $nonce,
+            'X-FM-Content-Release-Signature' => 'sha256='.$signature,
+        ];
     }
 }

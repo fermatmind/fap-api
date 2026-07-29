@@ -484,7 +484,8 @@ final class ContentReleaseRevalidate extends Command
 
     private function cacheInvalidationSecretPresent(): bool
     {
-        return trim((string) config('ops.content_release_observability.cache_invalidation_secret', '')) !== '';
+        return trim((string) config('ops.content_release_observability.hmac_revalidation_secret', '')) !== ''
+            || trim((string) config('ops.content_release_observability.cache_invalidation_secret', '')) !== '';
     }
 
     private function safeSource(): string

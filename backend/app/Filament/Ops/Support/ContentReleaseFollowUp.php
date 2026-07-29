@@ -238,13 +238,12 @@ final class ContentReleaseFollowUp
                 ]);
 
             $secret = self::cacheInvalidationSecret();
+            $body = self::jsonBody($payload);
             if ($secret !== '' && $action === 'content_release_cache_signal') {
-                $requestBuilder = $requestBuilder->withHeaders([
-                    'X-FM-Content-Release-Token' => $secret,
-                ]);
+                $requestBuilder = $requestBuilder->withHeaders(self::hmacHeaders($secret, $body));
             }
 
-            $response = $requestBuilder->post($endpoint, $payload);
+            $response = $requestBuilder->withBody($body, 'application/json')->post($endpoint);
 
             if (! $response->successful()) {
                 throw new RequestException($response);
@@ -280,7 +279,39 @@ final class ContentReleaseFollowUp
 
     private static function cacheInvalidationSecret(): string
     {
+        $hmacSecret = trim((string) config('ops.content_release_observability.hmac_revalidation_secret', ''));
+        if ($hmacSecret !== '') {
+            return $hmacSecret;
+        }
+
         return trim((string) config('ops.content_release_observability.cache_invalidation_secret', ''));
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private static function jsonBody(array $payload): string
+    {
+        return (string) json_encode(
+            $payload,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE,
+        );
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private static function hmacHeaders(string $secret, string $body): array
+    {
+        $timestamp = (string) time();
+        $nonce = bin2hex(random_bytes(16));
+        $signature = hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$body, $secret);
+
+        return [
+            'X-FM-Content-Release-Timestamp' => $timestamp,
+            'X-FM-Content-Release-Nonce' => $nonce,
+            'X-FM-Content-Release-Signature' => 'sha256='.$signature,
+        ];
     }
 
     /**

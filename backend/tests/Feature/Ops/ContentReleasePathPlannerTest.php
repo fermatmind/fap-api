@@ -125,7 +125,8 @@ final class ContentReleasePathPlannerTest extends TestCase
                 && in_array('/en/articles/content-release-article', $paths, true)
                 && in_array('/en/topics/mbti', $paths, true)
                 && in_array('/llms.txt', $paths, true)
-                && $request->hasHeader('X-FM-Content-Release-Token');
+                && $this->hasValidRevalidationSignature($request, 'release-secret')
+                && ! $request->hasHeader('X-FM-Content-Release-Token');
         });
     }
 
@@ -235,5 +236,20 @@ final class ContentReleasePathPlannerTest extends TestCase
         ]);
 
         return $article->fresh(['seoMeta']) ?? $article;
+    }
+
+    private function hasValidRevalidationSignature(mixed $request, string $secret): bool
+    {
+        $timestamp = (string) ($request->header('X-FM-Content-Release-Timestamp')[0] ?? '');
+        $nonce = (string) ($request->header('X-FM-Content-Release-Nonce')[0] ?? '');
+        $signature = (string) ($request->header('X-FM-Content-Release-Signature')[0] ?? '');
+
+        if (! preg_match('/^\d{10}$/', $timestamp) || ! preg_match('/^[a-f0-9]{32}$/', $nonce)) {
+            return false;
+        }
+
+        $expected = 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$request->body(), $secret);
+
+        return hash_equals($expected, $signature);
     }
 }
