@@ -336,6 +336,11 @@ final class Seo13ArticleSchemaReleaseService
                 : ['ok' => false, 'types' => [], 'faq_count' => 0];
             if (($parity['ok'] ?? false) !== true) {
                 $errors[] = $this->issue($target['article_id'], 'planned_schema_parity_failed');
+                foreach ((array) ($parity['failures'] ?? []) as $failure) {
+                    if (is_string($failure) && preg_match('/^[a-z0-9_]{1,128}$/', $failure) === 1) {
+                        $errors[] = $this->issue($target['article_id'], $failure);
+                    }
+                }
             }
 
             $rows[] = [
@@ -363,6 +368,7 @@ final class Seo13ArticleSchemaReleaseService
                 'faq_sha256' => $this->deterministicHash($faqItems),
                 'planned_json_ld_types' => (array) ($parity['types'] ?? []),
                 'planned_json_ld_faq_count' => (int) ($parity['faq_count'] ?? 0),
+                'planned_schema_parity_failures' => (array) ($parity['failures'] ?? []),
                 'title_sha256' => $this->textHash((string) ($revision?->title ?? '')),
                 'excerpt_sha256' => $this->textHash((string) ($revision?->excerpt ?? '')),
                 'body_sha256' => $this->textHash((string) ($revision?->content_md ?? '')),
@@ -525,7 +531,7 @@ final class Seo13ArticleSchemaReleaseService
     /**
      * @param  array<string,mixed>  $plannedSchema
      * @param  list<array{question:string,answer:string}>  $faqItems
-     * @return array{ok:bool,types:list<string>,faq_count:int}
+     * @return array{ok:bool,types:list<string>,faq_count:int,failures:list<string>}
      */
     private function plannedParity(
         Article $article,
@@ -554,19 +560,40 @@ final class Seo13ArticleSchemaReleaseService
         $articleFragment = data_get($seoPayload, 'article_authority_v1.structured_data_fragments.article');
         $breadcrumbFragment = data_get($seoPayload, 'article_authority_v1.structured_data_fragments.breadcrumb_list');
         $hreflangEnabled = (bool) data_get($plannedSchema, 'editorial_package_v1.hreflang_gate_v1.enabled', false);
+        $failures = [];
+        $canonicalMatches = (string) ($seoPayload['canonical'] ?? '') === (string) $seoMeta->canonical_url;
+        $articleFragmentEnabled = is_array($articleFragment) && ($articleFragment['@type'] ?? null) === 'Article';
+        $breadcrumbFragmentEnabled = is_array($breadcrumbFragment) && ($breadcrumbFragment['@type'] ?? null) === 'BreadcrumbList';
+        $articleTypePresent = in_array('Article', $types, true);
+        $faqTypePresent = in_array('FAQPage', $types, true);
+        $faqItemsMatch = $projectedFaqItems === $faqItems;
+
+        foreach ([
+            'planned_parity_canonical_mismatch' => ! $canonicalMatches,
+            'planned_parity_article_fragment_missing' => ! $articleFragmentEnabled,
+            'planned_parity_breadcrumb_fragment_missing' => ! $breadcrumbFragmentEnabled,
+            'planned_parity_article_type_missing' => ! $articleTypePresent,
+            'planned_parity_faq_type_missing' => ! $faqTypePresent,
+            'planned_parity_faq_items_mismatch' => ! $faqItemsMatch,
+            'planned_parity_hreflang_enabled' => $hreflangEnabled,
+        ] as $code => $failed) {
+            if ($failed) {
+                $failures[] = $code;
+            }
+        }
+
+        foreach ((array) data_get($seoPayload, 'big_five_structured_data_v1.eligibility.blocked_reasons', []) as $blockedReason) {
+            if (is_string($blockedReason) && preg_match('/^[a-z0-9_]{1,96}$/', $blockedReason) === 1) {
+                $failures[] = 'planned_parity_'.$blockedReason;
+            }
+        }
+        $failures = array_values(array_unique($failures));
 
         return [
-            'ok' => (string) ($seoPayload['canonical'] ?? '') === (string) $seoMeta->canonical_url
-                && is_array($articleFragment)
-                && ($articleFragment['@type'] ?? null) === 'Article'
-                && is_array($breadcrumbFragment)
-                && ($breadcrumbFragment['@type'] ?? null) === 'BreadcrumbList'
-                && in_array('Article', $types, true)
-                && in_array('FAQPage', $types, true)
-                && $projectedFaqItems === $faqItems
-                && $hreflangEnabled === false,
+            'ok' => $failures === [],
             'types' => $types,
             'faq_count' => count($projectedFaqItems),
+            'failures' => $failures,
         ];
     }
 

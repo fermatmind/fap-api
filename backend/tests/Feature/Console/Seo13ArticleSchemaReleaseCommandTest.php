@@ -102,8 +102,44 @@ final class Seo13ArticleSchemaReleaseCommandTest extends TestCase
         }
         $this->assertSame(array_fill(0, 13, 4), array_column($payload['rows'], 'faq_count'));
         $this->assertSame(array_fill(0, 13, 4), array_column($payload['rows'], 'planned_json_ld_faq_count'));
+        $this->assertSame(array_fill(0, 13, []), array_column($payload['rows'], 'planned_schema_parity_failures'));
         $this->assertStringNotContainsString('可见回答', Artisan::output());
         $this->assertSame($before, $this->authorityState());
+    }
+
+    public function test_big_five_planned_parity_failure_emits_bounded_diagnostic_codes(): void
+    {
+        $this->createCohort();
+        Article::query()->withoutGlobalScopes()->whereKey(1)->update([
+            'author_name' => '官方合作专家',
+            'reviewer_name' => '官方合作专家',
+        ]);
+
+        $exitCode = Artisan::call('articles:seo13-schema-release', [
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $articleOneCodes = collect($payload['errors'])
+            ->where('article_id', 1)
+            ->pluck('code')
+            ->values()
+            ->all();
+        $this->assertContains('planned_schema_parity_failed', $articleOneCodes);
+        $this->assertContains('planned_parity_current_visible_reviewed_authority_missing', $articleOneCodes);
+        $this->assertContains('planned_parity_article_fragment_missing', $articleOneCodes);
+        $this->assertContains('planned_parity_breadcrumb_fragment_missing', $articleOneCodes);
+
+        $articleOneRow = collect($payload['rows'])->firstWhere('article_id', 1);
+        $this->assertIsArray($articleOneRow);
+        $this->assertContains(
+            'planned_parity_current_visible_reviewed_authority_missing',
+            $articleOneRow['planned_schema_parity_failures'],
+        );
+        $this->assertStringNotContainsString('官方合作专家', Artisan::output());
     }
 
     public function test_execute_releases_all_three_schema_gates_atomically_and_preserves_other_surfaces(): void
