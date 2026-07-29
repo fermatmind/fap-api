@@ -118,6 +118,7 @@ final class CareerJobDisplaySurfaceBuilder
 
         $componentOrder = $this->stripForbiddenKeys($asset->component_order_json ?? []);
         $pageContent = $this->alignPageContentToComponentOrder($pageContent, $componentOrder);
+        $pageContent = $this->localizeInternalHrefs($pageContent, $normalizedLocale);
         $claimPermissions = $this->claimPermissions($occupation, $asset, $pageContent);
         if (! $this->hasRequiredClaimPermissionKeys($claimPermissions)) {
             return null;
@@ -177,6 +178,42 @@ final class CareerJobDisplaySurfaceBuilder
                 'placeholder_policy' => 'no_cross_locale_editorial_copy_generated',
             ];
         }
+
+        return $pageContent;
+    }
+
+    /**
+     * @param  array<string, mixed>  $pageContent
+     * @return array<string, mixed>
+     */
+    private function localizeInternalHrefs(array $pageContent, string $normalizedLocale): array
+    {
+        $expectedPrefix = $normalizedLocale === 'en' ? '/en/' : '/zh/';
+        $otherPrefix = $normalizedLocale === 'en' ? '/zh/' : '/en/';
+
+        array_walk_recursive($pageContent, static function (&$value, $key) use ($expectedPrefix, $otherPrefix): void {
+            if ($key !== 'href' || ! is_string($value)) {
+                return;
+            }
+
+            $href = trim($value);
+            if ($href === '') {
+                return;
+            }
+
+            $candidates = preg_split('/\s*\|\s*/', $href) ?: [];
+            foreach ($candidates as $candidate) {
+                if (str_starts_with($candidate, $expectedPrefix)) {
+                    $value = $candidate;
+
+                    return;
+                }
+            }
+
+            if (str_starts_with($href, $otherPrefix)) {
+                $value = $expectedPrefix.substr($href, strlen($otherPrefix));
+            }
+        });
 
         return $pageContent;
     }
