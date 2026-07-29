@@ -171,8 +171,42 @@ final class Seo13ArticleSchemaReleaseCommandTest extends TestCase
         $this->assertContains('planned_schema_parity_failed', $articleOneCodes);
         $this->assertContains('planned_big_five_authority_metadata_empty', $articleOneCodes);
         $this->assertContains('planned_big_five_visible_sources_missing', $articleOneCodes);
+        $this->assertContains('planned_big_five_revision_visible_sources_missing', $articleOneCodes);
         $this->assertContains('planned_big_five_projected_sources_missing', $articleOneCodes);
         $this->assertStringNotContainsString('示例公开来源', Artisan::output());
+    }
+
+    public function test_big_five_planned_authority_failure_reports_missing_metadata_inputs(): void
+    {
+        $this->createCohort();
+        Article::query()->withoutGlobalScopes()->whereKey(1)->update([
+            'author_name' => '',
+            'reviewer_name' => '',
+        ]);
+        ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey(446)->update([
+            'reviewed_by' => null,
+            'reviewed_at' => null,
+        ]);
+
+        $exitCode = Artisan::call('articles:seo13-schema-release', [
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $articleOneCodes = collect($payload['errors'])
+            ->where('article_id', 1)
+            ->pluck('code')
+            ->values()
+            ->all();
+        $this->assertContains('planned_schema_parity_failed', $articleOneCodes);
+        $this->assertContains('planned_big_five_authority_metadata_empty', $articleOneCodes);
+        $this->assertContains('planned_big_five_reviewed_by_missing', $articleOneCodes);
+        $this->assertContains('planned_big_five_reviewed_at_missing', $articleOneCodes);
+        $this->assertContains('planned_big_five_article_author_name_missing', $articleOneCodes);
+        $this->assertContains('planned_big_five_article_reviewer_name_missing', $articleOneCodes);
+        $this->assertNotContains('planned_big_five_revision_visible_sources_missing', $articleOneCodes);
     }
 
     public function test_execute_releases_all_three_schema_gates_atomically_and_preserves_other_surfaces(): void

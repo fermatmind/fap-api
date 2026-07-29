@@ -618,6 +618,10 @@ final class Seo13ArticleSchemaReleaseService
         if ($plannedAuthorityMetadata === []) {
             $failures[] = 'planned_big_five_authority_metadata_empty';
         }
+        $failures = [
+            ...$failures,
+            ...$this->plannedBigFiveAuthorityInputFailures($article, $revision),
+        ];
 
         $expectedActor = (int) ($revision->reviewed_by ?? 0);
         $expectedIdentity = $expectedActor > 0 ? 'admin_user:'.$expectedActor : '';
@@ -700,6 +704,33 @@ final class Seo13ArticleSchemaReleaseService
         }
 
         return array_values(array_unique($failures));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function plannedBigFiveAuthorityInputFailures(
+        Article $article,
+        ArticleTranslationRevision $revision,
+    ): array {
+        $failures = [];
+        if ((int) ($revision->reviewed_by ?? 0) <= 0) {
+            $failures[] = 'planned_big_five_reviewed_by_missing';
+        }
+        if ($revision->reviewed_at === null) {
+            $failures[] = 'planned_big_five_reviewed_at_missing';
+        }
+        if (trim((string) $article->author_name) === '') {
+            $failures[] = 'planned_big_five_article_author_name_missing';
+        }
+        if (trim((string) $article->reviewer_name) === '') {
+            $failures[] = 'planned_big_five_article_reviewer_name_missing';
+        }
+        if ($this->visibleSources((string) $revision->content_md, (int) $article->id) === []) {
+            $failures[] = 'planned_big_five_revision_visible_sources_missing';
+        }
+
+        return $failures;
     }
 
     /**
