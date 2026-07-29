@@ -188,6 +188,18 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringNotContainsString('provision_shared_permissions.sh', $deployer);
         $this->assertStringNotContainsString('provision_shared_permissions.sh', $deployAdapter);
         $this->assertStringNotContainsString('provision_shared_permissions.sh', $rollbackAdapter);
+        $this->assertStringContainsString(
+            "' -mindepth 1 -maxdepth 1'",
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            "' -exec cp -an -- {} '.\$destination.'/ \\;'",
+            $deployer,
+        );
+        $this->assertStringNotContainsString(
+            "deployPlaceholderPathArg('{{release_path}}', 'content_packages').'/. '",
+            $deployer,
+        );
         $this->assertStringContainsString('backend/storage/app/private/artifacts', $paths);
         $this->assertStringContainsString('backend/storage/framework/cache', $paths);
         $this->assertStringContainsString('content_packages', $paths);
