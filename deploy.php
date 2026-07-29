@@ -1834,8 +1834,16 @@ task('fap:seed_shared_content_packages', function () {
         return;
     }
 
-    run('mkdir -p '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/content_packages'));
-    run('cp -an '.deployPlaceholderPathArg('{{release_path}}', 'content_packages').'/. '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/content_packages').' || true');
+    $source = deployPlaceholderPathArg('{{release_path}}', 'content_packages');
+    $destination = deployPlaceholderPathArg('{{deploy_path}}', 'shared/content_packages');
+
+    run('mkdir -p '.$destination);
+    run(
+        'find '.$source
+        .' -mindepth 1 -maxdepth 1'
+        .' -exec cp -an -- {} '.$destination.'/ \;'
+        .' || true',
+    );
 });
 
 /**

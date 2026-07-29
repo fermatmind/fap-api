@@ -103,6 +103,50 @@ class SharedPermissionsTest(unittest.TestCase):
             self.assertIn("shared_permissions_status=success", verified.stdout)
             self.assertNotIn(str(shared_root), verified.stdout + verified.stderr)
 
+    def test_seed_copy_preserves_preprovisioned_content_packages_root_metadata(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            shared_root = Path(tmp) / "shared"
+            provisioned = self._run(PROVISIONER, shared_root, apply=True)
+            self.assertEqual(provisioned.returncode, 0, provisioned.stdout + provisioned.stderr)
+
+            source = Path(tmp) / "release" / "content_packages"
+            source.mkdir(parents=True)
+            (source / "default").mkdir()
+            (source / "default" / "manifest.json").write_text("{}\n", encoding="utf-8")
+
+            destination = shared_root / "content_packages"
+            before = destination.stat()
+            copied = subprocess.run(
+                [
+                    "find",
+                    str(source),
+                    "-mindepth",
+                    "1",
+                    "-maxdepth",
+                    "1",
+                    "-exec",
+                    "cp",
+                    "-an",
+                    "--",
+                    "{}",
+                    f"{destination}/",
+                    ";",
+                ],
+                text=True,
+                capture_output=True,
+                timeout=5,
+            )
+
+            self.assertEqual(copied.returncode, 0, copied.stdout + copied.stderr)
+            after = destination.stat()
+            self.assertEqual(stat.S_IMODE(after.st_mode), stat.S_IMODE(before.st_mode))
+            self.assertEqual(after.st_uid, before.st_uid)
+            self.assertEqual(after.st_gid, before.st_gid)
+            self.assertEqual(
+                (destination / "default" / "manifest.json").read_text(encoding="utf-8"),
+                "{}\n",
+            )
+
     def test_incorrect_fixture_fails_closed_without_disclosing_root(self):
         with tempfile.TemporaryDirectory() as tmp:
             shared_root = Path(tmp) / "shared"
