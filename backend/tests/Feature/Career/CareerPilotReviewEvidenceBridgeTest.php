@@ -446,7 +446,7 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
         return [
             'bundle_kind' => 'career_job_detail',
             'identity' => ['canonical_slug' => self::SLUG],
-            'locale_policy' => ['locale' => $locale],
+            'locale_policy' => ['truth_market' => 'US'],
             'titles' => ['canonical_en' => 'Reviewed Pilot Career', 'canonical_zh' => '审核试点职业'],
             'truth_layer' => ['summary' => 'Source-bounded public fact.'],
             'alias_index' => [['alias' => $alias, 'locale' => $locale]],
@@ -472,6 +472,9 @@ final class CareerPilotReviewEvidenceBridgeTest extends TestCase
                 'index_eligible' => $robotsPolicy === 'index,follow',
             ],
             'structured_data' => ['occupation' => ['@type' => 'Occupation']],
+            'display_surface_v1' => [
+                'page' => ['locale' => $locale],
+            ],
         ];
     }
 

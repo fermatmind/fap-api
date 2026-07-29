@@ -454,7 +454,11 @@ final class CareerPilotReviewEvidenceBridge
             return true;
         }
 
-        $locale = $this->normalizeLocale((string) data_get($payload, 'locale_policy.locale', ''));
+        $locale = $this->normalizeLocale((string) data_get(
+            $payload,
+            'display_surface_v1.page.locale',
+            '',
+        ));
         $expected = $projection['target_sha256_by_locale_and_kind'][$locale] ?? null;
         if (! is_array($expected)) {
             return false;

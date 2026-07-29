@@ -235,7 +235,11 @@ final class CareerSearchEntryQualityEvaluator
         if (strtolower(trim((string) data_get($payload, 'identity.canonical_slug', ''))) !== $slug) {
             $blockers[] = 'canonical_slug_mismatch';
         }
-        $payloadLocale = strtolower(trim((string) data_get($payload, 'locale_policy.locale', '')));
+        $payloadLocale = strtolower(trim((string) data_get(
+            $payload,
+            'display_surface_v1.page.locale',
+            '',
+        )));
         if (($locale === 'en' && ! in_array($payloadLocale, ['en', 'en-us'], true))
             || ($locale === 'zh-CN' && ! in_array($payloadLocale, ['zh', 'zh-cn'], true))) {
             $blockers[] = 'locale_mismatch';
@@ -255,6 +259,7 @@ final class CareerSearchEntryQualityEvaluator
             $blockers[] = 'robots_not_indexable';
         }
 
+        // The index contract exposes the locale-neutral authority path; detail canonicals remain localized.
         $indexItem = $this->exactIndexItem($slug, $locale);
         if ($indexItem === null) {
             $blockers[] = 'index_item_missing_or_duplicate';
@@ -264,7 +269,7 @@ final class CareerSearchEntryQualityEvaluator
             data_get($indexItem, 'seo_contract.canonical_url'),
             data_get($indexItem, 'seo_contract.canonical_target'),
             data_get($indexItem, 'seo_contract.canonical_path'),
-        ], $expectedPath)) {
+        ], '/career/jobs/'.$slug)) {
             $blockers[] = 'index_item_canonical_mismatch';
         }
 

@@ -805,15 +805,15 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $this->assertContains('canonical_url_mismatch', $locale['blockers']);
     }
 
-    public function test_index_item_canonical_must_match_exact_locale_and_slug(): void
+    public function test_index_item_canonical_must_match_exact_authority_path_and_slug(): void
     {
         $slug = $this->manifestReader->read()['candidates'][0]['canonical_slug'];
         $en = $this->responseCache->jobIndexPayload('en');
         $zh = $this->responseCache->jobIndexPayload('zh-CN');
         foreach ($en['items'] as &$item) {
             if (data_get($item, 'identity.canonical_slug') === $slug) {
-                $item['seo_contract']['canonical_url'] = '/en/career/jobs/'.$slug;
-                $item['seo_contract']['canonical_path'] = '/zh/career/jobs/'.$slug;
+                $item['seo_contract']['canonical_url'] = '/career/jobs/'.$slug;
+                $item['seo_contract']['canonical_path'] = '/career/jobs/wrong-'.$slug;
             }
         }
         unset($item);
@@ -851,7 +851,7 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
                     'titles' => ['canonical_en' => str($slug)->replace('-', ' ')->title()->toString()],
                     'trust_summary' => ['review_state' => 'unknown', 'last_reviewed_at' => null],
                     'seo_contract' => [
-                        'canonical_path' => ($locale === 'en' ? '/en' : '/zh').'/career/jobs/'.$slug,
+                        'canonical_path' => '/career/jobs/'.$slug,
                         'robots_policy' => 'index,follow',
                         'index_eligible' => true,
                     ],
@@ -882,7 +882,7 @@ final class CareerSearchEntryQualityBatchTest extends TestCase
         $payload = [
             'bundle_kind' => 'career_job_detail',
             'identity' => ['canonical_slug' => $slug],
-            'locale_policy' => ['locale' => $locale],
+            'locale_policy' => ['truth_market' => 'US'],
             'titles' => ['canonical_en' => $title, 'canonical_zh' => $title.' 中文'],
             'truth_layer' => ['summary' => 'Source-bounded public fact.'],
             'content_sections' => [['key' => 'overview', 'body_md' => $body]],
