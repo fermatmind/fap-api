@@ -197,7 +197,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source,
         );
         $this->assertStringNotContainsString('SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}', $source);
-        $this->assertStringContainsString('verify_sitemap_source_cache_warm.sh', $source);
+        $this->assertStringContainsString('verify_sitemap_source_cache_refresh.sh', $source);
         $this->assertStringContainsString('SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS', $source);
         $this->assertStringContainsString('SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS', $source);
         $this->assertStringContainsString('SITEMAP_SOURCE_WARM_STRICT', $source);
@@ -1073,6 +1073,21 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('Skip nginx static media route mutation in authority-mutation-free deploy mode', $deployer);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $deployer);
         $this->assertStringContainsString('Skip shared content package copy in authority-mutation-free deploy mode', $deployer);
+    }
+
+    #[Test]
+    public function ordinary_deploy_excludes_cms_baseline_import_tasks_and_hooks(): void
+    {
+        $deployer = $this->readRepoFile('deploy.php');
+
+        $this->assertStringNotContainsString("task('cms:import-landing-surface-baselines'", $deployer);
+        $this->assertStringNotContainsString("task('cms:import-content-page-baselines'", $deployer);
+        $this->assertStringNotContainsString('landing-surfaces:import-local-baseline', $deployer);
+        $this->assertStringNotContainsString('content-pages:import-local-baseline', $deployer);
+        $this->assertStringContainsString(
+            "after('artisan:scales:seed-default', 'career:warm-public-authority-cache');",
+            $deployer,
+        );
     }
 
     private function readRepoFile(string $relativePath): string

@@ -932,14 +932,6 @@ task('guard:public-content-release', function () {
     run('timeout 180 {{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' release:verify-public-content --content-source-dir='.deployPlaceholderPathArg('{{release_path}}', 'content_baselines/content_pages').' --no-interaction --ansi'.$strictCareerFlag);
 });
 
-task('cms:import-landing-surface-baselines', function () {
-    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' landing-surfaces:import-local-baseline --upsert --status=published --source-dir='.deployPlaceholderPathArg('{{release_path}}', 'content_baselines/landing_surfaces').' --no-interaction --ansi');
-});
-
-task('cms:import-content-page-baselines', function () {
-    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' content-pages:import-local-baseline --upsert --status=published --source-dir='.deployPlaceholderPathArg('{{release_path}}', 'content_baselines/content_pages').' --no-interaction --ansi');
-});
-
 task('artisan:view:cache', function () {
     writeln('<comment>Skip artisan:view:cache (no views)</comment>');
 });
@@ -2026,9 +2018,7 @@ after('guard:required-public-static-media-assets', 'ensure:release-public-static
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:scales:seed-default');
-after('artisan:scales:seed-default', 'cms:import-landing-surface-baselines');
-after('cms:import-landing-surface-baselines', 'cms:import-content-page-baselines');
-after('cms:import-content-page-baselines', 'career:warm-public-authority-cache');
+after('artisan:scales:seed-default', 'career:warm-public-authority-cache');
 after('career:warm-public-authority-cache', 'seo:warm-sitemap-source-cache');
 after('seo:warm-sitemap-source-cache', 'guard:public-content-release');
 after('guard:public-content-release', 'ensure:release-runtime-perms');

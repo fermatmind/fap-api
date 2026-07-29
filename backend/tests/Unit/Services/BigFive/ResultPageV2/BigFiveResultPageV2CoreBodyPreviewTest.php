@@ -3210,10 +3210,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes(): void
+    public function test_runtime_freeze_classifier_ignores_cms_baseline_operation_files(): void
     {
         $changed = [
+            'backend/app/Console/Commands/CmsBaselineOperation.php',
             'backend/app/Console/Commands/ContentPagesImportLocalBaseline.php',
+            'backend/app/Console/Commands/LandingSurfacesImportLocalBaseline.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -7388,7 +7390,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isContentPagesLocalBaselineImportPackageFile($file)) {
+            if ($this->isCmsBaselineOperationFile($file)) {
                 continue;
             }
 
@@ -10117,9 +10119,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Services/SeoIntel/TranslationParity/TranslationParityMatrixReadModel.php';
     }
 
-    private function isContentPagesLocalBaselineImportPackageFile(string $file): bool
+    private function isCmsBaselineOperationFile(string $file): bool
     {
-        return $file === 'backend/app/Console/Commands/ContentPagesImportLocalBaseline.php';
+        return in_array($file, [
+            'backend/app/Console/Commands/CmsBaselineOperation.php',
+            'backend/app/Console/Commands/ContentPagesImportLocalBaseline.php',
+            'backend/app/Console/Commands/LandingSurfacesImportLocalBaseline.php',
+        ], true);
     }
 
     private function isScienceContentPageNoWriteGateFile(string $file): bool

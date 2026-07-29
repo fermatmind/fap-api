@@ -15,14 +15,19 @@ final class ContentPagesImportLocalBaseline extends Command
         {--dry-run : Validate and diff without writing to the database}
         {--upsert : Update existing records instead of create-missing only}
         {--status=published : Force imported records to draft or published}
-        {--source-dir= : Override the committed baseline source directory}';
+        {--source-dir= : Override the committed baseline source directory}
+        {--operation-mode= : Explicit initialization/recovery/publish mode for direct writes}
+        {--environment= : Explicit target environment for direct writes}
+        {--operation-authorized : Confirm this low-level write is operator-authorized}
+        {--production-authorization= : Exact production write authorization phrase}';
 
-    protected $description = 'Import committed company and policy page baseline content into ContentPage CMS tables.';
+    protected $description = 'Low-level ContentPage baseline importer; use cms:baseline-operation for initialization, recovery, or explicit publish.';
 
     public function handle(): int
     {
         try {
             $dryRun = (bool) $this->option('dry-run');
+            $this->assertWriteAuthorization($dryRun);
             $upsert = (bool) $this->option('upsert');
             $status = trim((string) $this->option('status'));
             if (! in_array($status, [ContentPage::STATUS_DRAFT, ContentPage::STATUS_PUBLISHED], true)) {
@@ -108,6 +113,32 @@ final class ContentPagesImportLocalBaseline extends Command
             $this->error($throwable->getMessage());
 
             return 1;
+        }
+    }
+
+    private function assertWriteAuthorization(bool $dryRun): void
+    {
+        if ($dryRun || app()->environment('testing')) {
+            return;
+        }
+
+        $mode = strtolower(trim((string) $this->option('operation-mode')));
+        $environment = strtolower(trim((string) $this->option('environment')));
+        if (! in_array($mode, CmsBaselineOperation::MODES, true)
+            || ! in_array($environment, CmsBaselineOperation::ENVIRONMENTS, true)
+            || ! (bool) $this->option('operation-authorized')) {
+            throw new RuntimeException('Direct baseline writes require explicit mode, environment, and operation authorization.');
+        }
+        if (! app()->environment($environment)) {
+            throw new RuntimeException('Direct baseline write environment does not match the runtime environment.');
+        }
+
+        if ($environment === 'production') {
+            $expected = CmsBaselineOperation::productionAuthorizationPhrase($mode);
+            $authorization = trim((string) $this->option('production-authorization'));
+            if ($authorization === '' || ! hash_equals($expected, $authorization)) {
+                throw new RuntimeException('Direct production baseline write requires the exact mode-bound authorization phrase.');
+            }
         }
     }
 
