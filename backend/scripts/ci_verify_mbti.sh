@@ -2,7 +2,15 @@
 set -euo pipefail
 
 # --- CI hard defaults (force deterministic env) ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_PATH="${BASH_SOURCE[0]}"
+if [[ "$SCRIPT_PATH" != */* ]]; then
+  SCRIPT_PATH="./$SCRIPT_PATH"
+fi
+SCRIPT_DIR="$(cd "${SCRIPT_PATH%/*}" && pwd)"
+# shellcheck source=backend/scripts/ci/require_tools.sh
+source "${SCRIPT_DIR}/ci/require_tools.sh"
+require_tools rg php composer curl grep sed lsof cmp
+
 BACKEND_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 REPO_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"
 
@@ -446,14 +454,6 @@ echo "[CI] mvp_strict=$MVP_STRICT"
 # -----------------------------
 # Helpers
 # -----------------------------
-need_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "[CI][FAIL] missing cmd: $1" >&2; exit 2; }; }
-need_cmd curl
-need_cmd php
-need_cmd grep
-need_cmd sed
-need_cmd lsof
-need_cmd cmp
-
 fail() { echo "[CI][FAIL] $*" >&2; exit 1; }
 
 set_curl_auth() {
