@@ -132,6 +132,11 @@ final class Seo13ArticleSchemaReleaseCommandTest extends TestCase
         $this->assertContains('planned_parity_current_visible_reviewed_authority_missing', $articleOneCodes);
         $this->assertContains('planned_parity_article_fragment_missing', $articleOneCodes);
         $this->assertContains('planned_parity_breadcrumb_fragment_missing', $articleOneCodes);
+        $this->assertContains('planned_big_five_author_label_claim_blocked', $articleOneCodes);
+        $this->assertContains('planned_big_five_reviewer_label_claim_blocked', $articleOneCodes);
+        $this->assertContains('planned_big_five_public_authority_ineligible', $articleOneCodes);
+        $this->assertContains('planned_big_five_projected_author_missing', $articleOneCodes);
+        $this->assertContains('planned_big_five_projected_reviewer_missing', $articleOneCodes);
 
         $articleOneRow = collect($payload['rows'])->firstWhere('article_id', 1);
         $this->assertIsArray($articleOneRow);
@@ -140,6 +145,34 @@ final class Seo13ArticleSchemaReleaseCommandTest extends TestCase
             $articleOneRow['planned_schema_parity_failures'],
         );
         $this->assertStringNotContainsString('官方合作专家', Artisan::output());
+    }
+
+    public function test_big_five_planned_authority_failure_reports_missing_visible_sources(): void
+    {
+        $this->createCohort();
+        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail(446);
+        $body = str_replace('## 参考来源', '## 参考资料', (string) $revision->content_md);
+        $revision->forceFill(['content_md' => $body])->saveQuietly();
+        Article::query()->withoutGlobalScopes()->whereKey(1)->update(['content_md' => $body]);
+
+        $exitCode = Artisan::call('articles:seo13-schema-release', [
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $articleOneCodes = collect($payload['errors'])
+            ->where('article_id', 1)
+            ->pluck('code')
+            ->values()
+            ->all();
+        $this->assertContains('planned_schema_parity_failed', $articleOneCodes);
+        $this->assertContains('planned_big_five_authority_metadata_empty', $articleOneCodes);
+        $this->assertContains('planned_big_five_visible_sources_missing', $articleOneCodes);
+        $this->assertContains('planned_big_five_projected_sources_missing', $articleOneCodes);
+        $this->assertStringNotContainsString('示例公开来源', Artisan::output());
     }
 
     public function test_execute_releases_all_three_schema_gates_atomically_and_preserves_other_surfaces(): void
