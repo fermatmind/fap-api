@@ -336,6 +336,62 @@ apply_json="$(
 apply_status=$?
 set -e
 install_error_trap
+if [ "$apply_status" -ne 0 ]; then
+    if jq -e '
+        .contract_version == "seo13.article_atomic_promotion.v1"
+        and .ok == false
+        and .dry_run == false
+        and .execute == true
+        and .target_count == 13
+        and (.errors | type == "array" and length > 0 and length <= 128)
+        and ([.errors[] |
+            ((.article_id // 0) | type == "number"),
+            (.field | type == "string" and test("^[A-Za-z0-9_.-]{1,128}$")),
+            (.code | type == "string" and test("^[a-z0-9_]{1,128}$")),
+            ((.failure_category // "none") | type == "string"
+                and test("^(?:none|locked_preflight_failed|locked_preflight_state_drift|locked_revision_set_drift|post_promotion_preflight_failed|post_promotion_target_set_drift|post_promotion_revision_readback_failed|post_promotion_hold_drift|post_promotion_seo_readback_failed|previous_revision_not_stale|atomic_batch_database_failed|atomic_batch_validation_failed|atomic_batch_runtime_failed)$"))
+        ] | all)
+        and .production_write_execution == false
+        and .publish_count == 0
+        and .schema_write_count == 0
+        and .hreflang_write_count == 0
+        and .search_submission_count == 0
+        and .revalidation_count == 0
+        and .sitemap_eligibility_write_count == 0
+        and .llms_eligibility_write_count == 0
+        and .queue_dispatch_count == 0
+        and .gsc_request_count == 0
+        and .url_inspection_count == 0
+        and .deploy_count == 0
+    ' <<<"$apply_json" >/dev/null; then
+        safe_error_codes="$(
+            jq -c '[
+                .errors[] | {
+                    article_id: (.article_id // 0),
+                    field,
+                    code,
+                    failure_category: (.failure_category // "none")
+                }
+            ] | sort_by(.article_id, .field, .code, .failure_category)' <<<"$apply_json"
+        )"
+        safe_error_set_sha256="$(
+            printf '%s' "$safe_error_codes" | sha256sum | awk '{print $1}'
+        )"
+        failure_diagnostics="$(
+            jq -cn \
+                --arg hash "$safe_error_set_sha256" \
+                --argjson errors "$safe_error_codes" \
+                '{
+                    command_error_count: ($errors | length),
+                    command_error_set_sha256: $hash,
+                    command_error_codes: $errors
+                }'
+        )"
+        write_state='none'
+        stage='command_apply_rejected'
+    fi
+    false
+fi
 test "$apply_status" -eq 0
 write_state='committed'
 

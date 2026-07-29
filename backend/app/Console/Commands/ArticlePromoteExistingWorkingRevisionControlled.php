@@ -12,6 +12,7 @@ use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleEditorialCompletenessGate;
 use App\Services\Cms\ArticlePublishService;
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use RuntimeException;
 use Throwable;
@@ -361,10 +362,12 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                     },
                 );
             } catch (Throwable $exception) {
+                $failureCategory = $this->safeBatchFailure($exception);
                 $errors[] = $this->issue(
                     'promotion',
                     'atomic_batch_promotion_failed',
-                    $this->safeBatchFailure($exception),
+                    $failureCategory,
+                    ['failure_category' => $failureCategory],
                 );
                 $summary = $this->batchSummary(
                     ok: false,
@@ -989,7 +992,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
     private function safeBatchFailure(Throwable $exception): string
     {
-        return match ($exception->getMessage()) {
+        $knownFailure = match ($exception->getMessage()) {
             'locked_preflight_failed',
             'locked_preflight_state_drift',
             'locked_revision_set_drift',
@@ -999,6 +1002,16 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             'post_promotion_hold_drift',
             'post_promotion_seo_readback_failed',
             'previous_revision_not_stale' => $exception->getMessage(),
+            default => null,
+        };
+
+        if (is_string($knownFailure)) {
+            return $knownFailure;
+        }
+
+        return match (true) {
+            $exception instanceof QueryException => 'atomic_batch_database_failed',
+            $exception instanceof \InvalidArgumentException => 'atomic_batch_validation_failed',
             default => 'atomic_batch_runtime_failed',
         };
     }

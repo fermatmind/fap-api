@@ -118,9 +118,14 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
             "stage='revalidate_active_release_before_apply'",
             'latest_current_release="$(readlink -f "$deploy_path/current")"',
             "stage='command_preflight_rejected'",
+            "stage='command_apply_rejected'",
             'command_error_count',
             'command_error_set_sha256',
             'command_error_codes',
+            'failure_category',
+            'atomic_batch_database_failed',
+            'atomic_batch_validation_failed',
+            'atomic_batch_runtime_failed',
             'sort_by(.article_id, .field, .code)',
             'test("^[A-Za-z0-9_.-]{1,128}$")',
             'test("^[a-z0-9_]{1,128}$")',
@@ -186,6 +191,11 @@ final class Seo13ArticleAtomicPromotionProductionOpsWorkflowTest extends TestCas
         $this->assertStringContainsString('dispatchFollowUp: false', $service);
         $this->assertStringContainsString('assertBatchPromotionReadback', $command);
         $this->assertStringContainsString('previous_revision_not_stale', $command);
+        $this->assertStringContainsString('failure_category', $command);
+        $this->assertStringContainsString('QueryException', $command);
+        $this->assertStringContainsString('atomic_batch_database_failed', $command);
+        $this->assertStringContainsString('atomic_batch_validation_failed', $command);
+        $this->assertStringContainsString('atomic_batch_runtime_failed', $command);
         $this->assertStringContainsString('sitemap_eligibility_write_count', $command);
         $this->assertStringContainsString('llms_eligibility_write_count', $command);
         $this->assertStringContainsString('recordReleaseAudit = true', $service);
