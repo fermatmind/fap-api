@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CI_WORKFLOW = ROOT / ".github" / "workflows" / "ci.yml"
+DEPLOY_WORKFLOW = ROOT / ".github" / "workflows" / "deploy.yml"
 MASTER_GUARD = ROOT / "backend" / "scripts" / "ci_verify_mbti.sh"
 TOOL_GUARD = ROOT / "backend" / "scripts" / "ci" / "require_tools.sh"
 PR_GUARDS = (
@@ -23,18 +24,24 @@ def _write_executable(path: Path, source: str) -> None:
 
 
 class CiGuardDependencyTest(unittest.TestCase):
-    def test_mbti_ci_installs_and_verifies_rg_before_master_guard(self):
-        source = CI_WORKFLOW.read_text(encoding="utf-8")
-        mbti_job = source[source.index("  verify-mbti:") :]
+    def test_mbti_ci_and_staging_install_rg_before_master_guard(self):
         install_step = "sudo apt-get install --no-install-recommends --yes ripgrep"
         version_check = "rg --version"
         master_guard = "bash ./backend/scripts/ci_verify_mbti.sh"
 
-        self.assertIn(install_step, mbti_job)
-        self.assertIn(version_check, mbti_job)
-        self.assertIn(master_guard, mbti_job)
-        self.assertLess(mbti_job.index(install_step), mbti_job.index(version_check))
-        self.assertLess(mbti_job.index(version_check), mbti_job.index(master_guard))
+        ci_source = CI_WORKFLOW.read_text(encoding="utf-8")
+        guarded_workflows = {
+            "ci": ci_source[ci_source.index("  verify-mbti:") :],
+            "deploy-staging": DEPLOY_WORKFLOW.read_text(encoding="utf-8"),
+        }
+
+        for workflow, source in guarded_workflows.items():
+            with self.subTest(workflow=workflow):
+                self.assertIn(install_step, source)
+                self.assertIn(version_check, source)
+                self.assertIn(master_guard, source)
+                self.assertLess(source.index(install_step), source.index(version_check))
+                self.assertLess(source.index(version_check), source.index(master_guard))
 
     def test_shared_tool_guard_fails_closed_when_rg_is_missing(self):
         with tempfile.TemporaryDirectory() as tmp:
