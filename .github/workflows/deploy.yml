@@ -31,6 +31,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   MBTI_RUNTIME46_PRODUCTION_BASE_SHA: "781d1636b2c74f5852076a5864b681910a1e0e47"
@@ -270,6 +271,43 @@ jobs:
         with:
           php-version: '8.4'
           coverage: none
+
+      - name: Prepare Deployer timing producer
+        shell: bash
+        run: |
+          set -euo pipefail
+          timing_runner="$RUNNER_TEMP/deployer_task_timing.php"
+          timing_history="$RUNNER_TEMP/download_deployer_timing_history.sh"
+          timing_receipt="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.json"
+          timing_summary="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.md"
+          timing_history_dir="$GITHUB_WORKSPACE/artifacts/deployer-task-timing-history"
+          control_sha="$GITHUB_SHA"
+          git cat-file -e "${control_sha}^{commit}"
+          git show "${control_sha}:backend/scripts/deploy/deployer_task_timing.php" > "$timing_runner"
+          git show "${control_sha}:backend/scripts/deploy/download_deployer_timing_history.sh" > "$timing_history"
+          chmod +x "$timing_runner" "$timing_history"
+          php -l "$timing_runner"
+          bash -n "$timing_history"
+          mkdir -p "$GITHUB_WORKSPACE/artifacts" "$timing_history_dir"
+          deploy_task="deploy"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "${{ inputs.release_mode }}" = "mbti_runtime46_isolated" ]; then
+            deploy_task="deploy:code-only"
+          fi
+          deploy_revision="$(git rev-parse HEAD)"
+          php "$timing_runner" skip \
+            --receipt="$timing_receipt" \
+            --environment="$TARGET" \
+            --sha="$deploy_revision" \
+            --run-id="$GITHUB_RUN_ID" \
+            --run-attempt="$GITHUB_RUN_ATTEMPT" \
+            --task="$deploy_task"
+          {
+            echo "DEPLOY_TIMING_RUNNER=$timing_runner"
+            echo "DEPLOY_TIMING_HISTORY=$timing_history"
+            echo "DEPLOY_TIMING_RECEIPT=$timing_receipt"
+            echo "DEPLOY_TIMING_SUMMARY=$timing_summary"
+            echo "DEPLOY_TIMING_HISTORY_DIR=$timing_history_dir"
+          } >> "$GITHUB_ENV"
 
       - name: Validate protected staging topology
         shell: bash
@@ -528,11 +566,54 @@ jobs:
           export DEPLOY_LOCK_METADATA
           export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
           export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
-          php /tmp/dep.phar "$DEPLOY_TASK" "$TARGET" -f deploy.php \
-            --revision "$DEPLOY_REVISION" \
-            -o release_name="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
-            -o deploy_mode="$DEPLOY_MODE" \
-            --no-interaction
+          php "$DEPLOY_TIMING_RUNNER" run \
+            --receipt="$DEPLOY_TIMING_RECEIPT" \
+            --environment="$TARGET" \
+            --sha="$DEPLOY_REVISION" \
+            --run-id="$GITHUB_RUN_ID" \
+            --run-attempt="$GITHUB_RUN_ATTEMPT" \
+            --deployer-bin=/tmp/dep.phar \
+            --recipe=deploy.php \
+            --task="$DEPLOY_TASK" \
+            -- php /tmp/dep.phar "$DEPLOY_TASK" "$TARGET" -f deploy.php \
+              --revision "$DEPLOY_REVISION" \
+              -o release_name="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+              -o deploy_mode="$DEPLOY_MODE" \
+              --no-interaction
+
+      - name: Collect Deployer timing history
+        if: ${{ always() }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          "$DEPLOY_TIMING_HISTORY" "$TARGET" "$DEPLOY_TIMING_HISTORY_DIR" 20
+
+      - name: Write Deployer timing summary
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          php "$DEPLOY_TIMING_RUNNER" summary \
+            --current="$DEPLOY_TIMING_RECEIPT" \
+            --history-dir="$DEPLOY_TIMING_HISTORY_DIR" \
+            --output="$DEPLOY_TIMING_SUMMARY" \
+            --window=20 \
+            --minimum-samples=3
+          cat "$DEPLOY_TIMING_SUMMARY" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Deployer timing receipt
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: deployer-task-timing-staging
+          path: |
+            artifacts/deployer-task-timing.json
+            artifacts/deployer-task-timing.md
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 90
 
       - name: Healthcheck (post deploy)
         if: steps.stale_guard.outputs.skip_deploy != 'true'

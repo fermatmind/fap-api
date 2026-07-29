@@ -822,6 +822,44 @@ jobs:
           printf '%s  /tmp/dep.phar\n' "$DEPLOYER_SHA256" | sha256sum -c -
           php /tmp/dep.phar --version
 
+      - name: Prepare Deployer timing producer
+        shell: bash
+        run: |
+          set -euo pipefail
+          timing_runner="$RUNNER_TEMP/deployer_task_timing.php"
+          timing_history="$RUNNER_TEMP/download_deployer_timing_history.sh"
+          timing_receipt="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.json"
+          timing_summary="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.md"
+          timing_history_dir="$GITHUB_WORKSPACE/artifacts/deployer-task-timing-history"
+          git cat-file -e "${WORKFLOW_CONTROL_SHA}^{commit}"
+          git show "${WORKFLOW_CONTROL_SHA}:backend/scripts/deploy/deployer_task_timing.php" > "$timing_runner"
+          git show "${WORKFLOW_CONTROL_SHA}:backend/scripts/deploy/download_deployer_timing_history.sh" > "$timing_history"
+          chmod +x "$timing_runner" "$timing_history"
+          php -l "$timing_runner"
+          bash -n "$timing_history"
+          mkdir -p "$GITHUB_WORKSPACE/artifacts" "$timing_history_dir"
+          case "$DEPLOY_MODE" in
+            standard) deploy_task=deploy ;;
+            code_only) deploy_task=deploy:code-only ;;
+            candidate_only) deploy_task=deploy:candidate-only ;;
+            schema_only) deploy_task=deploy:schema-only ;;
+            *) echo "Unsupported resolved deploy mode: $DEPLOY_MODE" >&2; exit 2 ;;
+          esac
+          php "$timing_runner" skip \
+            --receipt="$timing_receipt" \
+            --environment="$TARGET" \
+            --sha="$DEPLOY_SHA" \
+            --run-id="$GITHUB_RUN_ID" \
+            --run-attempt="$GITHUB_RUN_ATTEMPT" \
+            --task="$deploy_task"
+          {
+            echo "DEPLOY_TIMING_RUNNER=$timing_runner"
+            echo "DEPLOY_TIMING_HISTORY=$timing_history"
+            echo "DEPLOY_TIMING_RECEIPT=$timing_receipt"
+            echo "DEPLOY_TIMING_SUMMARY=$timing_summary"
+            echo "DEPLOY_TIMING_HISTORY_DIR=$timing_history_dir"
+          } >> "$GITHUB_ENV"
+
       - name: Set up SSH
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
         with:
@@ -1271,17 +1309,60 @@ jobs:
             export IMMUTABLE_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"
             export IMMUTABLE_SITEMAP_WARM_HELPER_PATH="${{ steps.immutable_candidate_control.outputs.helper_path }}"
           fi
-          php /tmp/dep.phar "$DEPLOY_TASK" production -f "$deployer_recipe" \
-            --revision "$DEPLOY_SHA" \
-            -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
-            -o deploy_mode="$DEPLOY_MODE" \
-            -o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD" \
-            -o require_career_candidate_preflight="$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" \
-            -o career_public_cache_summary_sha256="$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" \
-            -o career_expected_candidate_summary_sha256="$CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256" \
-            -o career_cache_repair_required="$CAREER_CACHE_REPAIR_REQUIRED" \
-            -o schema_only_migration="$APPROVED_MIGRATION" \
-            -vvv --no-interaction
+          php "$DEPLOY_TIMING_RUNNER" run \
+            --receipt="$DEPLOY_TIMING_RECEIPT" \
+            --environment="$TARGET" \
+            --sha="$DEPLOY_SHA" \
+            --run-id="$GITHUB_RUN_ID" \
+            --run-attempt="$GITHUB_RUN_ATTEMPT" \
+            --deployer-bin=/tmp/dep.phar \
+            --recipe="$deployer_recipe" \
+            --task="$DEPLOY_TASK" \
+            -- php /tmp/dep.phar "$DEPLOY_TASK" production -f "$deployer_recipe" \
+              --revision "$DEPLOY_SHA" \
+              -o release_name="${RELEASE_ID}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+              -o deploy_mode="$DEPLOY_MODE" \
+              -o require_ops_queue_reload="$REQUIRE_OPS_QUEUE_RELOAD" \
+              -o require_career_candidate_preflight="$REQUIRE_CAREER_CANDIDATE_PREFLIGHT" \
+              -o career_public_cache_summary_sha256="$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" \
+              -o career_expected_candidate_summary_sha256="$CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256" \
+              -o career_cache_repair_required="$CAREER_CACHE_REPAIR_REQUIRED" \
+              -o schema_only_migration="$APPROVED_MIGRATION" \
+              -vvv --no-interaction
+
+      - name: Collect Deployer timing history
+        if: ${{ always() }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          "$DEPLOY_TIMING_HISTORY" "$TARGET" "$DEPLOY_TIMING_HISTORY_DIR" 20
+
+      - name: Write Deployer timing summary
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          php "$DEPLOY_TIMING_RUNNER" summary \
+            --current="$DEPLOY_TIMING_RECEIPT" \
+            --history-dir="$DEPLOY_TIMING_HISTORY_DIR" \
+            --output="$DEPLOY_TIMING_SUMMARY" \
+            --window=20 \
+            --minimum-samples=3
+          cat "$DEPLOY_TIMING_SUMMARY" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Deployer timing receipt
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: deployer-task-timing-production
+          path: |
+            artifacts/deployer-task-timing.json
+            artifacts/deployer-task-timing.md
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 90
 
       - name: Upload immutable candidate control receipt
         if: ${{ always() && steps.immutable_candidate_control.outputs.enabled == 'true' }}
