@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\PublicSurface\LandingSurfaceContractService;
+use App\Services\Scale\PublicScaleCatalogCache;
+use App\Services\Scale\PublicScaleCatalogUnavailable;
 use App\Services\Scale\PublicScaleFormsProjector;
 use App\Services\Scale\PublicScaleInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -32,6 +34,7 @@ class ScalesLookupController extends Controller
         private ScaleDiscoverabilityPolicy $scaleDiscoverabilityPolicy,
         private OrgContext $orgContext,
         private LandingSurfaceContractService $landingSurfaceContractService,
+        private PublicScaleCatalogCache $publicScaleCatalogCache,
     ) {}
 
     /**
@@ -54,11 +57,22 @@ class ScalesLookupController extends Controller
             $request,
             (string) config('content_packs.default_locale', 'en')
         );
-        // We cannot reliably derive content version before registry resolution, so keep
-        // a request-shape key here and pair it with a short TTL.
-        $cacheKey = CacheKeys::mbtiLookup($orgId, $requestedSlug, $requestedLocale, $allowAlias);
-        $cacheStore = Cache::store((string) config('content_packs.mbti_response_cache_store', 'hot_redis'));
-        $cacheTtl = max(1, (int) config('content_packs.mbti_lookup_cache_ttl_seconds', 600));
+        $generation = $this->publicScaleCatalogCache->generation($orgId);
+        $cacheKey = CacheKeys::publicScaleLookup(
+            $orgId,
+            $requestedSlug,
+            $requestedLocale,
+            $allowAlias,
+            $generation
+        );
+        $configuredCacheStore = trim((string) config('content_packs.public_scale_cache_store', ''));
+        $cacheStore = Cache::store($configuredCacheStore !== ''
+            ? $configuredCacheStore
+            : (string) config('content_packs.mbti_response_cache_store', 'hot_redis'));
+        $cacheTtl = max(1, (int) config(
+            'content_packs.public_scale_lookup_cache_ttl_seconds',
+            config('content_packs.mbti_lookup_cache_ttl_seconds', 600)
+        ));
         $cached = $cacheStore->get($cacheKey);
         if (is_array($cached)) {
             $this->logCacheEvent('lookup_hit', $cacheKey, [
@@ -133,15 +147,13 @@ class ScalesLookupController extends Controller
             ),
         ];
 
-        if (($payload['scale_code'] ?? null) === 'MBTI') {
-            $cacheStore->put($cacheKey, $payload, $cacheTtl);
-            $this->logCacheEvent('lookup_miss', $cacheKey, [
-                'org_id' => $orgId,
-                'slug' => $requestedSlug,
-                'locale' => $locale,
-                'ttl' => $cacheTtl,
-            ]);
-        }
+        $cacheStore->put($cacheKey, $payload, $cacheTtl);
+        $this->logCacheEvent('lookup_miss', $cacheKey, [
+            'org_id' => $orgId,
+            'slug' => $requestedSlug,
+            'locale' => $locale,
+            'ttl' => $cacheTtl,
+        ]);
 
         return $this->cacheableJson($payload, 'miss');
     }
@@ -155,41 +167,53 @@ class ScalesLookupController extends Controller
             $request,
             (string) config('content_packs.default_locale', 'en')
         );
-        $rows = $this->registry->listActivePublic(0);
-        $items = [];
+        try {
+            $result = $this->publicScaleCatalogCache->read(
+                0,
+                $locale,
+                function () use ($locale): array {
+                    $rows = $this->registry->listActivePublicForCatalog(0);
+                    $items = [];
 
-        foreach ($rows as $row) {
-            if (! is_array($row)) {
-                $row = (array) $row;
-            }
+                    foreach ($rows as $row) {
+                        if (! is_array($row)) {
+                            $row = (array) $row;
+                        }
 
-            $primarySlug = trim((string) ($row['primary_slug'] ?? ''));
-            if ($primarySlug === '') {
-                continue;
-            }
+                        $primarySlug = trim((string) ($row['primary_slug'] ?? ''));
+                        if ($primarySlug === '' || ! $this->hasCatalogMetadata($row, $locale)) {
+                            continue;
+                        }
 
-            if (! $this->hasCatalogMetadata($row, $locale)) {
-                continue;
-            }
+                        $items[] = $this->projectCatalogItem($row, $locale);
+                    }
 
-            $items[] = $this->projectCatalogItem($row, $locale);
+                    usort($items, static function (array $a, array $b): int {
+                        $priorityA = (int) ($a['highlight_priority'] ?? 0);
+                        $priorityB = (int) ($b['highlight_priority'] ?? 0);
+                        if ($priorityA !== $priorityB) {
+                            return $priorityB <=> $priorityA;
+                        }
+
+                        return strcmp((string) ($a['title'] ?? ''), (string) ($b['title'] ?? ''));
+                    });
+
+                    return [
+                        'ok' => true,
+                        'locale' => $locale,
+                        'items' => $items,
+                    ];
+                }
+            );
+
+            return $this->cacheableJson($result['payload'], $result['state']);
+        } catch (PublicScaleCatalogUnavailable) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'TEMPORARILY_UNAVAILABLE',
+                'message' => 'scale catalog is temporarily unavailable.',
+            ], 503);
         }
-
-        usort($items, static function (array $a, array $b): int {
-            $priorityA = (int) ($a['highlight_priority'] ?? 0);
-            $priorityB = (int) ($b['highlight_priority'] ?? 0);
-            if ($priorityA !== $priorityB) {
-                return $priorityB <=> $priorityA;
-            }
-
-            return strcmp((string) ($a['title'] ?? ''), (string) ($b['title'] ?? ''));
-        });
-
-        return response()->json([
-            'ok' => true,
-            'locale' => $locale,
-            'items' => $items,
-        ]);
     }
 
     /**

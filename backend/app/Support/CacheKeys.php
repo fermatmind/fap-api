@@ -57,6 +57,42 @@ final class CacheKeys
             .':alias='.(int) $allowAlias;
     }
 
+    public static function publicScaleLookup(
+        int $orgId,
+        string $requestedSlug,
+        string $locale,
+        bool $allowAlias,
+        int $generation,
+    ): string {
+        return self::base().':public_scale:lookup'
+            .':schema='.self::normalizeSegment((string) config('content_packs.public_scale_lookup_schema_version', 'v1'))
+            .':org='.self::normalizeSegment((string) $orgId)
+            .':slug='.self::normalizeSegment($requestedSlug)
+            .':locale='.self::normalizeSegment($locale)
+            .':generation='.max(1, $generation)
+            .':response='.self::responseScaleCodeMode()
+            .':alias='.(int) $allowAlias;
+    }
+
+    public static function publicScaleCatalog(int $orgId, string $locale, int $generation): string
+    {
+        return self::base().':public_scale:catalog'
+            .':schema='.self::normalizeSegment((string) config('content_packs.public_scale_catalog_schema_version', 'v1'))
+            .':org='.self::normalizeSegment((string) $orgId)
+            .':locale='.self::normalizeSegment($locale)
+            .':generation='.max(1, $generation);
+    }
+
+    public static function publicScaleCatalogLock(string $payloadKey): string
+    {
+        return self::base().':public_scale:catalog_lock:'.substr(hash('sha256', $payloadKey), 0, 32);
+    }
+
+    public static function publicScaleRegistryGeneration(int $orgId): string
+    {
+        return self::base().':public_scale:registry_generation:'.max(0, $orgId);
+    }
+
     public static function mbtiQuestions(
         int $orgId,
         string $packId,

@@ -19,6 +19,29 @@ class ScaleRegistry
 
     private const REGISTRY_LEGACY_TABLE = 'scales_registry';
 
+    /**
+     * Every field consumed by ScalesLookupController::projectCatalogItem() or
+     * one of its direct projectors. Keep this projection explicit so a catalog
+     * miss never hydrates the complete registry row.
+     *
+     * @var list<string>
+     */
+    private const PUBLIC_CATALOG_COLUMNS = [
+        'code',
+        'primary_slug',
+        'default_pack_id',
+        'default_dir_version',
+        'default_locale',
+        'capabilities_json',
+        'view_policy_json',
+        'seo_schema_json',
+        'seo_i18n_json',
+        'content_i18n_json',
+        'is_public',
+        'is_active',
+        'is_indexable',
+    ];
+
     public function __construct(
         private ScaleIdentityResolver $identityResolver,
     ) {}
@@ -84,6 +107,23 @@ class ScaleRegistry
         }
 
         Cache::put($cacheKey, $rows, self::CACHE_TTL_SECONDS);
+
+        return $rows;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    public function listActivePublicForCatalog(int $orgId = 0): array
+    {
+        if ($orgId !== 0) {
+            return [];
+        }
+
+        $rows = $this->listActivePublicCatalogFromLegacy();
+        if ($rows === []) {
+            $rows = $this->listActivePublicCatalogFromV2();
+        }
 
         return $rows;
     }
@@ -322,6 +362,35 @@ class ScaleRegistry
     /**
      * @return list<array<string,mixed>>
      */
+    private function listActivePublicCatalogFromLegacy(): array
+    {
+        if (! Schema::hasTable(self::REGISTRY_LEGACY_TABLE)) {
+            return [];
+        }
+
+        try {
+            return $this->registryQueryForOrg(0)
+                ->select(self::PUBLIC_CATALOG_COLUMNS)
+                ->where('org_id', 0)
+                ->where('is_active', true)
+                ->where('is_public', true)
+                ->orderBy('code')
+                ->get()
+                ->map(static fn (ScaleRegistryModel $row): array => $row->toArray())
+                ->all();
+        } catch (\Throwable $e) {
+            Log::warning('[scale_registry] legacy_public_catalog_read_failed', [
+                'source' => 'scale_registry.list_active_public_for_catalog',
+                'exception' => $e::class,
+            ]);
+
+            return [];
+        }
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
     private function listActivePublicFromV2(): array
     {
         if (! $this->canReadPublicFromV2()) {
@@ -340,6 +409,35 @@ class ScaleRegistry
         } catch (\Throwable $e) {
             Log::warning('[scale_registry] v2_public_read_failed', [
                 'source' => 'scale_registry.list_active_public',
+                'exception' => $e::class,
+            ]);
+
+            return [];
+        }
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function listActivePublicCatalogFromV2(): array
+    {
+        if (! $this->canReadPublicFromV2()) {
+            return [];
+        }
+
+        try {
+            return $this->v2RegistryQuery()
+                ->select(self::PUBLIC_CATALOG_COLUMNS)
+                ->where('org_id', 0)
+                ->where('is_active', true)
+                ->where('is_public', true)
+                ->orderBy('code')
+                ->get()
+                ->map(fn (object $row): array => $this->normalizeV2RegistryRow((array) $row))
+                ->all();
+        } catch (\Throwable $e) {
+            Log::warning('[scale_registry] v2_public_catalog_read_failed', [
+                'source' => 'scale_registry.list_active_public_for_catalog',
                 'exception' => $e::class,
             ]);
 
