@@ -146,6 +146,30 @@ class BackendDeployAdapterTest(unittest.TestCase):
             self.assertEqual(args[:6], ["deploy", "production", "-f", str(ROOT / "deploy.php"), "-o", "release_name=adapter-real-mock-test"])
 
 
+class DeployPhpSharedPermissionPolicyTest(unittest.TestCase):
+    def test_deployer_timing_plan_contains_read_only_permission_verification(self):
+        proc = subprocess.run(
+            [
+                str(ROOT / "vendor" / "bin" / "dep"),
+                "tree",
+                "deploy",
+                "-f",
+                str(ROOT / "deploy.php"),
+                "--no-ansi",
+                "--no-interaction",
+            ],
+            cwd=str(ROOT),
+            text=True,
+            capture_output=True,
+        )
+
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.assertIn("guard:shared-permissions", proc.stdout)
+        self.assertNotIn("ensure:shared-perms", proc.stdout)
+        self.assertNotIn("ensure:healthz-deps", proc.stdout)
+        self.assertNotIn("ensure:release-runtime-perms", proc.stdout)
+
+
 class ReleaseTrainDeployAdapterIntegrationTest(unittest.TestCase):
     def test_release_train_dry_run_does_not_execute_deploy_wrapper(self):
         module = _load_release_train_module()
