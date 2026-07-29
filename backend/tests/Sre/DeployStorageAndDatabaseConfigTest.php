@@ -144,46 +144,53 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function deploy_keeps_artifact_parent_dirs_group_writable_without_rewriting_artifacts_tree(): void
+    public function ordinary_deploy_uses_a_bounded_read_only_shared_permissions_guard(): void
     {
-        $source = $this->readRepoFile('deploy.php');
+        $deployer = $this->readRepoFile('deploy.php');
+        $verifier = $this->readRepoFile('backend/scripts/deploy/verify_shared_permissions.sh');
 
-        $this->assertStringContainsString('ensureOwnedWritableDir("{$base}/app", $owner, \'www-data\');', $source);
-        $this->assertStringContainsString('ensureOwnedWritableDir("{$base}/app/private", $owner, \'www-data\');', $source);
-        $this->assertStringContainsString('ensureOwnedWritableDir("{$base}/app/private/artifacts", $owner, \'www-data\');', $source);
-        $this->assertStringNotContainsString('ensureOwnedWritableTree(deploySharedPath($base, \'shared/backend/storage/app/private/artifacts\')', $source);
-        $this->assertDoesNotMatchRegularExpression('/chmod\s+(?:0?777|a\+w|ugo\+rwX)/', $source);
+        $this->assertStringContainsString("set('writable_dirs', []);", $deployer);
+        $this->assertStringContainsString("set('writable_mode', 'skip');", $deployer);
+        $this->assertStringContainsString("task('guard:shared-permissions'", $deployer);
+        $this->assertStringContainsString(
+            "after('deploy:shared', 'guard:shared-permissions');",
+            $deployer,
+        );
+        $this->assertStringContainsString('verify_shared_permissions.sh', $deployer);
+        $this->assertStringNotContainsString('ensureOwnedWritableTree', $deployer);
+        $this->assertStringNotContainsString('ensureOwnedWritableDir', $deployer);
+        $this->assertStringNotContainsString("task('ensure:shared-perms'", $deployer);
+        $this->assertStringNotContainsString("task('ensure:healthz-deps'", $deployer);
+        $this->assertStringNotContainsString("task('ensure:release-runtime-perms'", $deployer);
+
+        foreach (['chmod', 'chown', 'setfacl', 'mkdir', 'find '] as $mutation) {
+            $this->assertStringNotContainsString($mutation, $verifier);
+        }
+        $this->assertStringContainsString('SHARED_PERMISSIONS_RUNTIME_USER', $verifier);
+        $this->assertStringContainsString('run_explicit_shared_permissions_provisioning', $verifier);
+        $this->assertStringContainsString('shared_permissions_status=success', $verifier);
     }
 
     #[Test]
-    public function deploy_keeps_shared_runtime_roots_writable_without_rewriting_historical_trees(): void
+    public function shared_permission_provisioning_is_explicit_idempotent_and_separate_from_deploy(): void
     {
-        $source = $this->readRepoFile('deploy.php');
+        $deployer = $this->readRepoFile('deploy.php');
+        $deployAdapter = $this->readRepoFile('backend/scripts/deploy/deploy_backend.sh');
+        $rollbackAdapter = $this->readRepoFile('backend/scripts/deploy/rollback_backend.sh');
+        $provisioner = $this->readRepoFile('backend/scripts/deploy/provision_shared_permissions.sh');
+        $paths = $this->readRepoFile('backend/scripts/deploy/shared_permissions_paths.txt');
 
-        $this->assertStringContainsString(
-            "'shared/backend/storage/app/private/career_release_ledger'",
-            $source,
-        );
-        $this->assertStringContainsString(
-            "'shared/backend/storage/app/private/career_runtime_publish_projection'",
-            $source,
-        );
-        $this->assertStringContainsString(
-            "ensureOwnedWritableDir(deploySharedPath(\$base, \$relativePath), \$owner, 'www-data');",
-            $source,
-        );
-        $this->assertStringContainsString(
-            "ensureOwnedWritableDir(deploySharedPath(\$base, 'shared/content_packages'), \$owner, 'www-data');",
-            $source,
-        );
-        $this->assertStringNotContainsString(
-            "ensureOwnedWritableTree(deploySharedPath(\$base, \$relativePath), \$owner, 'www-data');",
-            $source,
-        );
-        $this->assertStringNotContainsString(
-            "ensureOwnedWritableTree(deploySharedPath(\$base, 'shared/content_packages'), \$owner, 'www-data');",
-            $source,
-        );
+        $this->assertStringContainsString('SHARED_PERMISSIONS_APPLY', $provisioner);
+        $this->assertStringContainsString('EXPLICIT_PROVISIONING_REQUIRED', $provisioner);
+        $this->assertStringContainsString('chmod 2775', $provisioner);
+        $this->assertStringContainsString('chown', $provisioner);
+        $this->assertStringNotContainsString(' -R ', $provisioner);
+        $this->assertStringNotContainsString('provision_shared_permissions.sh', $deployer);
+        $this->assertStringNotContainsString('provision_shared_permissions.sh', $deployAdapter);
+        $this->assertStringNotContainsString('provision_shared_permissions.sh', $rollbackAdapter);
+        $this->assertStringContainsString('backend/storage/app/private/artifacts', $paths);
+        $this->assertStringContainsString('backend/storage/framework/cache', $paths);
+        $this->assertStringContainsString('content_packages', $paths);
     }
 
     #[Test]

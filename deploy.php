@@ -45,15 +45,11 @@ set('shared_dirs', [
     'content_packages',
 ]);
 
-set('writable_dirs', [
-    'backend/storage',
-    'backend/bootstrap/cache',
-]);
-
-// 使用 chmod，避免 ACL/权限坑
-set('writable_mode', 'chmod');
-set('writable_chmod_mode', '0775');
-set('writable_use_sudo', false);
+// Shared directory ownership and modes belong to explicit server provisioning.
+// Ordinary deploys retain the recipe task for topology compatibility, but it is
+// intentionally a no-op and a separate guard verifies the provisioned state.
+set('writable_dirs', []);
+set('writable_mode', 'skip');
 set('cleanup_use_sudo', true);
 
 /**
@@ -1268,89 +1264,25 @@ task('queue:reload-workers', function () {
     throw new \RuntimeException('unsupported queue_manager ['.$manager.']');
 });
 
-function deploySharedPath(string $base, string $relative): string
-{
-    return rtrim($base, '/').'/'.ltrim($relative, '/');
-}
-
-function ensureOwnedWritableTree(string $path, string $owner = 'ubuntu', string $group = 'www-data'): void
-{
-    $quotedPath = escapeshellarg($path);
-    $quotedOwnerGroup = deployOwnerGroupArg($owner, $group);
-
-    run("sudo -n /usr/bin/mkdir -p {$quotedPath}");
-    run("sudo -n /usr/bin/chown -R {$quotedOwnerGroup} {$quotedPath}");
-    run("sudo -n /usr/bin/find {$quotedPath} -type d -exec chmod 2775 {} \\;");
-    run("sudo -n /usr/bin/find {$quotedPath} -type f -exec chmod 664 {} \\;");
-}
-
-function ensureOwnedWritableDir(string $path, string $owner = 'ubuntu', string $group = 'www-data'): void
-{
-    $quotedPath = escapeshellarg($path);
-    $quotedOwnerGroup = deployOwnerGroupArg($owner, $group);
-
-    run("sudo -n /usr/bin/mkdir -p {$quotedPath}");
-    run("sudo -n /usr/bin/chown {$quotedOwnerGroup} {$quotedPath}");
-    run("sudo -n /usr/bin/chmod 2775 {$quotedPath}");
-}
-
-/**
- * ======================================================
- * 固化权限修复（关键）
- * ======================================================
- */
-task('ensure:shared-perms', function () {
-    $base = get('deploy_path');
+task('guard:shared-permissions', function () {
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
+    $group = 'www-data';
+    $runtimeUser = 'www-data';
+    deployOwnerGroupArg($owner, $group);
 
-    // Shared runtime directories are created with a setgid www-data group. PHP-FPM
-    // can already access their existing contents, so only repair the directory
-    // roots here. Recursively rewriting cache/content trees before every release
-    // makes deploy duration depend on historical runtime data and can prevent the
-    // release switch from being reached.
-    $sharedWritableDirs = [
-        'shared/backend/storage/framework/cache',
-        'shared/backend/storage/framework/sessions',
-        'shared/backend/storage/framework/views',
-        'shared/backend/storage/logs',
-        'shared/backend/storage/app/content-packs',
-        'shared/backend/storage/app/private/career_release_ledger',
-        'shared/backend/storage/app/private/career_runtime_publish_projection',
-        'shared/backend/storage/app/private/packs_v2_materialized',
-    ];
+    $sharedRoot = deployPlaceholderPathArg('{{deploy_path}}', 'shared');
+    $verifier = deployPlaceholderPathArg(
+        '{{release_path}}',
+        'backend/scripts/deploy/verify_shared_permissions.sh',
+    );
 
-    foreach ($sharedWritableDirs as $relativePath) {
-        ensureOwnedWritableDir(deploySharedPath($base, $relativePath), $owner, 'www-data');
-    }
-
-    ensureOwnedWritableDir(deploySharedPath($base, 'shared/content_packages'), $owner, 'www-data');
-});
-
-task('ensure:release-runtime-perms', function () {
-    $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
-    $cacheDir = '{{release_path}}/backend/bootstrap/cache';
-
-    ensureOwnedWritableTree($cacheDir, $owner, 'www-data');
-});
-
-/**
- * ======================================================
- * runtime dirs（healthz 依赖）
- * ======================================================
- */
-task('ensure:healthz-deps', function () {
-    $base = get('deploy_path').'/shared/backend/storage';
-    $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
-
-    ensureOwnedWritableDir("{$base}/app/content-packs", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/app", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/app/private", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/app/private/artifacts", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/app/private/packs_v2_materialized", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/framework/cache", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/framework/sessions", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/framework/views", $owner, 'www-data');
-    ensureOwnedWritableDir("{$base}/logs", $owner, 'www-data');
+    run(
+        'SHARED_PERMISSIONS_ROOT='.$sharedRoot
+        .' SHARED_PERMISSIONS_OWNER='.deployShellArg($owner)
+        .' SHARED_PERMISSIONS_GROUP='.deployShellArg($group)
+        .' SHARED_PERMISSIONS_RUNTIME_USER='.deployShellArg($runtimeUser)
+        .' bash '.$verifier,
+    );
 });
 
 /**
@@ -2002,8 +1934,7 @@ after('deploy:unlock', 'fap:remove-deploy-lock-metadata');
 
 after('deploy:vendors', 'bootstrap-cache:clear-release');
 
-after('deploy:shared', 'ensure:shared-perms');
-after('deploy:shared', 'ensure:healthz-deps');
+after('deploy:shared', 'guard:shared-permissions');
 
 /**
  * vendor 必须先安装完成：
@@ -2021,8 +1952,6 @@ after('guard:no-pending-migrations', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'career:warm-public-authority-cache');
 after('career:warm-public-authority-cache', 'seo:warm-sitemap-source-cache');
 after('seo:warm-sitemap-source-cache', 'guard:public-content-release');
-after('guard:public-content-release', 'ensure:release-runtime-perms');
-
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
