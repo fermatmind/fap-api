@@ -587,6 +587,12 @@ final class Seo13ArticleSchemaReleaseService
                 $failures[] = 'planned_parity_'.$blockedReason;
             }
         }
+        if ($this->isBigFiveTarget((int) $article->id)) {
+            $failures = [
+                ...$failures,
+                ...$this->plannedBigFiveAuthorityFailures($article, $revision, $plannedAuthorityMetadata, $seoPayload),
+            ];
+        }
         $failures = array_values(array_unique($failures));
 
         return [
@@ -595,6 +601,105 @@ final class Seo13ArticleSchemaReleaseService
             'faq_count' => count($projectedFaqItems),
             'failures' => $failures,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $plannedAuthorityMetadata
+     * @param  array<string,mixed>  $seoPayload
+     * @return list<string>
+     */
+    private function plannedBigFiveAuthorityFailures(
+        Article $article,
+        ArticleTranslationRevision $revision,
+        array $plannedAuthorityMetadata,
+        array $seoPayload,
+    ): array {
+        $failures = [];
+        if ($plannedAuthorityMetadata === []) {
+            $failures[] = 'planned_big_five_authority_metadata_empty';
+        }
+
+        $expectedActor = (int) ($revision->reviewed_by ?? 0);
+        $expectedIdentity = $expectedActor > 0 ? 'admin_user:'.$expectedActor : '';
+        $author = data_get($plannedAuthorityMetadata, 'visible_provenance.author');
+        $reviewer = data_get($plannedAuthorityMetadata, 'visible_provenance.reviewer');
+        $sources = data_get($plannedAuthorityMetadata, 'visible_provenance.sources');
+
+        if (! is_array($author)) {
+            $failures[] = 'planned_big_five_author_metadata_missing';
+        } else {
+            if ((string) ($author['identity'] ?? '') !== $expectedIdentity) {
+                $failures[] = 'planned_big_five_author_identity_mismatch';
+            }
+            if (trim((string) ($author['label'] ?? '')) === '') {
+                $failures[] = 'planned_big_five_author_label_missing';
+            } elseif ($this->hasBlockedAuthorityClaim((string) $author['label'])) {
+                $failures[] = 'planned_big_five_author_label_claim_blocked';
+            }
+            if ((string) ($author['role'] ?? '') !== 'editorial_author') {
+                $failures[] = 'planned_big_five_author_role_mismatch';
+            }
+        }
+
+        if (! is_array($reviewer)) {
+            $failures[] = 'planned_big_five_reviewer_metadata_missing';
+        } else {
+            if ((string) ($reviewer['identity'] ?? '') !== $expectedIdentity) {
+                $failures[] = 'planned_big_five_reviewer_identity_mismatch';
+            }
+            if (trim((string) ($reviewer['label'] ?? '')) === '') {
+                $failures[] = 'planned_big_five_reviewer_label_missing';
+            } elseif ($this->hasBlockedAuthorityClaim((string) $reviewer['label'])) {
+                $failures[] = 'planned_big_five_reviewer_label_claim_blocked';
+            }
+            if ((string) ($reviewer['role'] ?? '') !== 'editorial_reviewer') {
+                $failures[] = 'planned_big_five_reviewer_role_mismatch';
+            }
+            if ((string) ($reviewer['review_state'] ?? '') !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+                $failures[] = 'planned_big_five_reviewer_state_mismatch';
+            }
+            if (trim((string) ($reviewer['reviewed_at'] ?? '')) === '') {
+                $failures[] = 'planned_big_five_reviewer_reviewed_at_missing';
+            }
+        }
+
+        if (! is_array($sources) || $sources === []) {
+            $failures[] = 'planned_big_five_visible_sources_missing';
+        } else {
+            foreach ($sources as $source) {
+                if (! is_array($source)) {
+                    $failures[] = 'planned_big_five_source_metadata_invalid';
+
+                    continue;
+                }
+                if (trim((string) ($source['label'] ?? '')) === '') {
+                    $failures[] = 'planned_big_five_source_label_missing';
+                } elseif ($this->hasBlockedAuthorityClaim((string) $source['label'])) {
+                    $failures[] = 'planned_big_five_source_label_claim_blocked';
+                }
+            }
+        }
+
+        if ((bool) data_get($seoPayload, 'big_five_structured_data_v1.current_public_authority_eligible', false) !== true) {
+            $failures[] = 'planned_big_five_public_authority_ineligible';
+        }
+        if (! is_array(data_get($seoPayload, 'big_five_structured_data_v1.visible_alignment.author'))) {
+            $failures[] = 'planned_big_five_projected_author_missing';
+        }
+        if (! is_array(data_get($seoPayload, 'big_five_structured_data_v1.visible_alignment.reviewer_gate'))) {
+            $failures[] = 'planned_big_five_projected_reviewer_missing';
+        }
+        if (count((array) data_get($seoPayload, 'big_five_structured_data_v1.visible_alignment.sources', [])) === 0) {
+            $failures[] = 'planned_big_five_projected_sources_missing';
+        }
+        if (trim((string) data_get($seoPayload, 'big_five_structured_data_v1.visible_alignment.dates.published_at', '')) === '') {
+            $failures[] = 'planned_big_five_projected_published_at_missing';
+        }
+        if (trim((string) data_get($seoPayload, 'big_five_structured_data_v1.visible_alignment.dates.reviewed_at', '')) === '') {
+            $failures[] = 'planned_big_five_projected_reviewed_at_missing';
+        }
+
+        return array_values(array_unique($failures));
     }
 
     /**
@@ -751,6 +856,11 @@ final class Seo13ArticleSchemaReleaseService
         $text = preg_replace('/\s+/u', ' ', trim($text)) ?? trim($text);
 
         return trim($text);
+    }
+
+    private function hasBlockedAuthorityClaim(string $label): bool
+    {
+        return preg_match('/\b(certified|accredited|clinical|medical expert|official partner)\b|官方合作|认证专家|临床审核|医疗专家|权威背书/iu', $label) === 1;
     }
 
     /**
