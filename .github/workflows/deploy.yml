@@ -821,100 +821,16 @@ jobs:
           set -euo pipefail
 
           test "$TARGET" = "staging"
-
-          LOGIN_URL="https://${OPS_HOST}/ops/login"
-          THEME_URL="https://${OPS_HOST}/css/app/ops-theme.css"
-          APP_CSS_URL="https://${OPS_HOST}/css/filament/filament/app.css"
-          FORMS_URL="https://${OPS_HOST}/css/filament/forms/forms.css"
-          SUPPORT_URL="https://${OPS_HOST}/css/filament/support/support.css"
-          APP_JS_URL="https://${OPS_HOST}/js/filament/filament/app.js"
-
-          ssh_remote() {
-            local attempt
-            local rc
-            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
-            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
-
-            for attempt in $(seq 1 "$max_attempts"); do
-              set +e
-              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
-              rc=$?
-              set -e
-
-              if [ "$rc" -eq 0 ]; then
-                return 0
-              fi
-
-              if [ "$rc" -ne 255 ]; then
-                return "$rc"
-              fi
-
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                return "$rc"
-              fi
-
-              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
-              sleep "$retry_delay"
-            done
-          }
-
-          assert_http_200() {
-            local url="$1"
-            ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' '${url}' >/dev/null"
-          }
-
-          retry() {
-            local label="$1"
-            local attempts="$2"
-            shift 2
-
-            for _ in $(seq 1 "$attempts"); do
-              if "$@"; then
-                return 0
-              fi
-              sleep 2
-            done
-
-            echo "${label} failed"
-            return 1
-          }
-
-          echo "Ops login smoke started."
-          retry "Ops login smoke" 5 assert_http_200 "$LOGIN_URL"
-
-          theme_smoke_ok=1
-          echo "Ops theme asset smoke started."
-          if ! retry "Ops theme smoke" 5 assert_http_200 "$THEME_URL"; then
-            echo "Ops theme smoke skipped: theme URL not directly accessible on this target"
-            theme_smoke_ok=0
-          fi
-
-          echo "Ops application CSS smoke started."
-          retry "Ops app.css smoke" 5 assert_http_200 "$APP_CSS_URL"
-
-          echo "Ops forms CSS smoke started."
-          retry "Ops forms.css smoke" 5 assert_http_200 "$FORMS_URL"
-
-          echo "Ops support CSS smoke started."
-          retry "Ops support.css smoke" 5 assert_http_200 "$SUPPORT_URL"
-
-          echo "Ops application JavaScript smoke started."
-          retry "Ops app.js smoke" 5 assert_http_200 "$APP_JS_URL"
-
-          if [ "$theme_smoke_ok" -eq 1 ]; then
-            echo "Ops theme content assertion"
-            retry "Ops theme content assertion" 5 ssh_remote "if curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${THEME_URL}' | grep -Eq '@tailwind|@config|vendor/filament/filament/resources/css/base\\.css'; then exit 1; fi"
-          fi
-
-          echo "Ops login reference assertion"
-          if [ "$theme_smoke_ok" -eq 1 ]; then
-            retry "Ops theme reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/app/ops-theme.css'" || echo "Ops theme reference assertion skipped"
-          fi
-          retry "Ops app.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/filament/app.css'" || echo "Ops app.css reference assertion skipped"
-          retry "Ops forms.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/forms/forms.css'" || echo "Ops forms.css reference assertion skipped"
-          retry "Ops support.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/support/support.css'" || echo "Ops support.css reference assertion skipped"
-          retry "Ops app.js reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'js/filament/filament/app.js'" || echo "Ops app.js reference assertion skipped"
+          smoke_runner="$RUNNER_TEMP/verify_ops_asset_smoke.sh"
+          smoke_remote="$RUNNER_TEMP/ops_asset_smoke_remote.sh"
+          control_sha="$GITHUB_SHA"
+          git cat-file -e "${control_sha}^{commit}"
+          git show "${control_sha}:backend/scripts/deploy/verify_ops_asset_smoke.sh" > "$smoke_runner"
+          git show "${control_sha}:backend/scripts/deploy/ops_asset_smoke_remote.sh" > "$smoke_remote"
+          chmod +x "$smoke_runner" "$smoke_remote"
+          bash -n "$smoke_runner"
+          bash -n "$smoke_remote"
+          bash "$smoke_runner" "$smoke_remote" "$GITHUB_WORKSPACE/artifacts/ops-asset-smoke.json"
 
       - name: Emit exact isolated Runtime 46 staging receipt
         if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
