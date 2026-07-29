@@ -11,6 +11,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
+use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublishService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -145,6 +146,37 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
         $this->assertSame(0, AuditLog::query()->withoutGlobalScopes()
             ->where('action', 'content_release_publish')
             ->count());
+    }
+
+    public function test_batch_execute_replaces_legacy_published_body_h1_with_clean_working_revision(): void
+    {
+        $this->createCohort();
+        Article::query()
+            ->withoutGlobalScopes()
+            ->whereKey(5)
+            ->update([
+                'content_md' => "# 遗留线上标题\n\n这段旧正文会被已审核的工作修订替换。",
+                'content_html' => '<h1>遗留线上标题</h1><p>这段旧正文会被已审核的工作修订替换。</p>',
+            ]);
+
+        Artisan::call('articles:promote-existing-working-revision', $this->dryRunOptions());
+        $preflight = $this->jsonOutput();
+        $this->assertTrue($preflight['ok']);
+
+        $exitCode = Artisan::call(
+            'articles:promote-existing-working-revision',
+            $this->executeOptions($preflight),
+        );
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(13, $payload['publish_count']);
+
+        $article = Article::query()->withoutGlobalScopes()->findOrFail(5);
+        $this->assertFalse(app(ArticleBodyHeadingGuard::class)->containsMarkdownH1((string) $article->content_md));
+        $this->assertNull($article->content_html);
+        $this->assertSame(444, (int) $article->published_revision_id);
     }
 
     public function test_thirteenth_validation_failure_keeps_first_twelve_unpublished(): void

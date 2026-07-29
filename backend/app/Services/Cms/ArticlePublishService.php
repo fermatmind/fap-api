@@ -161,7 +161,7 @@ final class ArticlePublishService
                 throw new RuntimeException('current published revision not found.');
             }
 
-            $this->assertPublishable($article);
+            $this->assertPublishableArticleProjection($article);
 
             $workingRevision = ArticleTranslationRevision::query()
                 ->withoutGlobalScopes()
@@ -372,6 +372,15 @@ final class ArticlePublishService
 
     private function assertPublishable(Article $article): void
     {
+        $this->assertPublishableArticleProjection($article);
+        $this->articleBodyHeadingGuard->assertNoBodyH1(
+            (string) $article->content_md,
+            (string) ($article->content_html ?? '')
+        );
+    }
+
+    private function assertPublishableArticleProjection(Article $article): void
+    {
         if (in_array((string) $article->lifecycle_state, [
             Article::LIFECYCLE_ARCHIVED,
             Article::LIFECYCLE_SOFT_DELETED,
@@ -394,11 +403,6 @@ final class ArticlePublishService
         if (trim((string) $article->content_md) === '') {
             throw new InvalidArgumentException('content_md must exist before publish.');
         }
-
-        $this->articleBodyHeadingGuard->assertNoBodyH1(
-            (string) $article->content_md,
-            (string) ($article->content_html ?? '')
-        );
     }
 
     private function resolvePublishableRevision(Article $article): ArticleTranslationRevision
