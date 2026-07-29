@@ -31,6 +31,12 @@ class SitemapSourceCacheTest extends TestCase
         app(PublicCareerAuthorityResponseCache::class)->warm();
     }
 
+    protected function tearDown(): void
+    {
+        Carbon::setTestNow();
+        parent::tearDown();
+    }
+
     public function test_empty_cache_returns_safe_fallback_without_http_regeneration(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -157,6 +163,77 @@ class SitemapSourceCacheTest extends TestCase
         $this->assertIsArray($fresh);
         $this->assertTrue($fresh['ok']);
         $this->assertNull($stale);
+    }
+
+    public function test_refresh_if_changed_rebuilds_once_then_verifies_unchanged_authority(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+        Carbon::setTestNow('2026-07-29 10:00:00 UTC');
+        $this->seedFingerprintAuthority('fingerprint-unchanged');
+
+        $this->runRefreshIfChanged('rebuilt');
+
+        $receipt = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
+        $fresh = Cache::get('seo:sitemap-source:v1:fresh');
+        $this->assertIsArray($receipt);
+        $this->assertIsArray($fresh);
+
+        Carbon::setTestNow('2026-07-29 10:05:00 UTC');
+        $this->runRefreshIfChanged('verified_unchanged');
+
+        $this->assertSame(
+            $receipt,
+            Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY),
+        );
+        $this->assertSame($fresh, Cache::get('seo:sitemap-source:v1:fresh'));
+    }
+
+    public function test_refresh_if_changed_rebuilds_when_published_indexable_authority_changes(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+        $this->seedFingerprintAuthority('fingerprint-authority-baseline');
+
+        $this->runRefreshIfChanged('rebuilt');
+        $before = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
+        $this->assertIsArray($before);
+
+        $this->appendCareerDirectoryAuthorityFixture('fingerprint-authority-change');
+
+        $this->runRefreshIfChanged('rebuilt');
+        $after = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
+        $fresh = Cache::get('seo:sitemap-source:v1:fresh');
+
+        $this->assertIsArray($after);
+        $this->assertNotSame($before['fingerprint_sha256'], $after['fingerprint_sha256']);
+        $this->assertIsArray($fresh);
+        $this->assertSame('backend_sitemap_generator', $fresh['source']);
+        $this->assertGreaterThan(0, $fresh['count']);
+    }
+
+    public function test_refresh_if_changed_fails_safe_for_corrupt_schema_or_code_receipts(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+        $this->seedFingerprintAuthority('fingerprint-fail-safe');
+
+        $this->runRefreshIfChanged('rebuilt');
+
+        Cache::forever(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY, 'corrupt');
+        $this->runRefreshIfChanged('rebuilt');
+
+        foreach (['cache_schema_version', 'code_fingerprint_sha256'] as $field) {
+            $receipt = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
+            $this->assertIsArray($receipt);
+            $receipt[$field] = str_repeat('0', 64);
+            Cache::forever(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY, $receipt);
+
+            $this->runRefreshIfChanged('rebuilt');
+        }
+
+        Cache::put('seo:sitemap-source:v1:fresh', ['ok' => true, 'count' => 0], 600);
+        $this->runRefreshIfChanged('rebuilt');
     }
 
     public function test_warm_command_replaces_stale_dynamic_cache_with_safe_fallback_when_generator_fails(): void
@@ -401,6 +478,42 @@ class SitemapSourceCacheTest extends TestCase
         ], JSON_THROW_ON_ERROR));
 
         app(PublicCareerAuthorityResponseCache::class)->warm();
+    }
+
+    private function seedFingerprintAuthority(string $slug): void
+    {
+        $this->createDisplayAsset($this->createOccupation($slug, ucwords(str_replace('-', ' ', $slug))));
+        $this->writeProjectionArtifact([
+            $this->projectionItem($slug, 'en'),
+            $this->projectionItem($slug, 'zh'),
+        ]);
+    }
+
+    private function appendCareerDirectoryAuthorityFixture(string $slug): void
+    {
+        foreach (['en', 'zh-CN'] as $locale) {
+            $prefix = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':'.$locale;
+            $version = Cache::get($prefix.':active');
+            $this->assertIsString($version);
+            $payloadKey = $prefix.':versions:'.$version;
+            $payload = Cache::get($payloadKey);
+            $this->assertIsArray($payload);
+            $payload['items'][] = [
+                'slug' => $slug,
+                'canonical_path' => '/'.($locale === 'en' ? 'en' : 'zh').'/career/jobs/'.$slug,
+                'updated_at' => '2026-07-29T12:00:00+00:00',
+                'indexable' => true,
+                'detail_ready' => true,
+            ];
+            Cache::forever($payloadKey, $payload);
+        }
+    }
+
+    private function runRefreshIfChanged(string $expectedStatus): void
+    {
+        $this->artisan('seo:warm-sitemap-source-cache --refresh-if-changed --json --no-ansi')
+            ->expectsOutputToContain('"status":"'.$expectedStatus.'"')
+            ->assertSuccessful();
     }
 
     /**

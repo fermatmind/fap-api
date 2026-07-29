@@ -190,7 +190,7 @@ class ImmutableCandidateSitemapControlTest(unittest.TestCase):
     def test_control_receipt_is_uploaded_without_exposing_topology(self):
         upload_step = self.workflow_step(
             "Upload immutable candidate control receipt",
-            "Restart queue workers through Laravel queue restart",
+            "Verify exact inactive candidate materialization",
         )
 
         self.assertIn("if: ${{ always()", upload_step)
