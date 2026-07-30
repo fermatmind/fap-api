@@ -55,6 +55,34 @@ exact release is active before either Career workflow is dispatched.
    detail API readbacks, and all 100 Career sitemap-membership checks. The
    sanitized receipt records only counts and hashes.
 
+## Stale detail-cache recovery
+
+If the review preflight fails at `exact_package_build` after the authority fix
+is active, first complete a read-only 50-slug / 100-URL public readback. When
+that evidence proves the active/LKG detail payloads still contain the
+deployment-before-fix locale links or thin runtime shells, use:
+
+`Career Search Entry Batch Cache Refresh Production Ops`
+
+The workflow has two separately controlled modes:
+
+1. `preflight` binds exact latest control-plane SHA, active release SHA/name,
+   the checked-in manifest SHA, all 100 payload hashes, and exact stale URL
+   counts. It is zero-write and emits the exact cache-only approval phrase.
+2. `execute` requires that phrase and immutable preflight run/attempt,
+   revalidates the complete pre-refresh state, refreshes only the exact 50
+   manifest slugs in `en` and `zh-CN`, and completes exact quality-package plus
+   100-URL public readback in the same run.
+
+The refresh uses the existing atomic active/LKG detail publication path and
+does not forget prior pointers before replacement. It never changes database
+or CMS authority, publication, indexability, queues, sitemap, llms, Search
+Channel, URL submission, deployment, or non-target state. A failed or
+indeterminate execute is not automatically retried or rolled back. After a
+successful refresh receipt, Task 12 still requires a brand-new review
+preflight; the cache-repair receipt cannot substitute for Task 12 review or
+apply authorization.
+
 The apply phrase keeps CMS content, publication, indexability, cache warm,
 queue dispatch, sitemap/llms mutation or submission, Search Channel, URL
 submission, and deploy held. The operation does not release held slugs or

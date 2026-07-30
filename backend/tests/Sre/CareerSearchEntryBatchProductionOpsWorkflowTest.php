@@ -144,6 +144,81 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
     }
 
+    public function test_cache_refresh_workflow_is_exact_preflight_bound_and_cache_only(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-batch-cache-refresh-production-ops.yml'
+        );
+        $runner = $this->repoFile(
+            'backend/scripts/career/career_search_entry_batch_cache_refresh_production_ops.sh'
+        );
+
+        foreach ([
+            'expected_control_plane_sha:',
+            'expected_release_sha:',
+            'expected_release_name:',
+            'expected_manifest_sha256:',
+            'expected_pre_refresh_readback_sha256:',
+            'expected_bad_href_url_count:',
+            'expected_low_module_url_count:',
+            'preflight_run_id:',
+            'preflight_run_attempt:',
+            'operator_approval_phrase:',
+            'Career Search Entry Batch Cache Refresh Production Ops',
+            'career-search-entry-batch-cache-refresh-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}',
+            '.status == "PASS_PREFLIGHT_REFRESH_REQUIRED"',
+            'refresh exactly 50 slugs and 100 bilingual detail cache targets',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+        foreach ([
+            'career.search_entry_batch.cache_refresh.production_ops.v1',
+            'CAREER-SEARCH-ENTRY-QUALITY-BATCH-01/manifest.json',
+            '.expected_candidate_count == 50',
+            'https://api.fermatmind.com/api/v0.5/career/jobs/',
+            'pre_refresh_public_readback',
+            'bound_pre_refresh_state',
+            'career:warm-public-authority-cache',
+            '--job-detail-locales=en,zh-CN',
+            '--job-detail-only',
+            'post_refresh_exact_package',
+            'career:build-search-entry-quality-batch',
+            'post_refresh_public_readback',
+            '.bad_href_url_count == 0',
+            '.low_module_url_count == 0',
+            'cache_refresh_target_count: 100',
+            'database_write_count: 0',
+            'cms_write_count: 0',
+            'publication_write_count: 0',
+            'indexability_write_count: 0',
+            'queue_dispatch_count: 0',
+            'sitemap_write_count: 0',
+            'llms_write_count: 0',
+            'search_channel_action_count: 0',
+            'url_submission_count: 0',
+            'non_target_write_count: 0',
+            'deploy_count: 0',
+            'rollback_count: 0',
+            'write_state="indeterminate"',
+            'write_state="committed"',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runner);
+        }
+        $this->assertStringNotContainsString('--forget-job-detail', $workflow.$runner);
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$runner);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$runner);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$runner);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('139.224.', $workflow.$runner);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);

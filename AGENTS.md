@@ -152,6 +152,14 @@ Prefer a repo-compatible default implementation and mark options as optional.
 - The Career cache repair workflow may read production routing only from protected environment secrets. It must not use Actions-variable fallback or job-level routing environment. The retired candidate `88dedb58f341e6c92d07754eac7862fa3454dc7c` must never be used again.
 - The workflow remains cache-only and candidate-inactive: no active worker/queue, deployment, symlink activation, migration, CMS/database authority, publication, indexability, sitemap, llms, Search Channel, or automatic rollback action is permitted.
 
+### Career Search-Entry Batch Cache Refresh Discipline
+- The exact `CAREER-SEARCH-ENTRY-QUALITY-BATCH-01` recovery lane may run only through `Career Search Entry Batch Cache Refresh Production Ops` after a Task 12 review preflight fails at `exact_package_build` and read-only evidence proves stale active/LKG Career detail payloads.
+- Preflight is read-only and must bind exact latest control-plane SHA, exact active release SHA/name, the checked-in 50-slug manifest SHA, all 100 bilingual public detail payload hashes, locale/canonical/robots checks, and the exact locale-unsafe-href and thin-module URL counts. It must produce an immutable receipt and workflow-defined exact phrase.
+- Execute requires that exact phrase and successful preflight run/attempt. Immediately before writes it must reproduce the same manifest, active release, complete public payload-set hash, issue counts, and pre-refresh readback hash. Drift fails closed.
+- Execute may synchronously refresh only the exact 50 manifest slugs across `en` and `zh-CN`, exactly 100 detail cache targets, through the active release's existing atomic active/LKG publication path. It must not forget the prior active/LKG pointers before replacement.
+- The same run must prove an exact successful 50-candidate/100-URL/300-review-target quality package and complete 100-URL HTTP, canonical, robots, locale, locale-safe href, and full-module public readback. It must expose only sanitized counts and hashes.
+- A failed or indeterminate execute must not be automatically retried or rolled back. This lane permits no database/CMS authority, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, symlink, migration, restart, or non-target write.
+
 ### PR Train Manifest Discipline
 - Under a concrete execution goal, add an exact missing goal-supplied PR-train manifest/state entry under the standing authorization and continue. Outside an execution goal, stop and report the gap unless the user asks to update the train manifest and state ledger.
 - This stop rule applies only when the user requested a PR-train item. It must not block an explicitly requested ad-hoc PR whose scope does not modify PR-train metadata.
