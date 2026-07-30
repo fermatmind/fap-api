@@ -16,7 +16,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'd15f823cd2c9959d34bf4a9e83327b1ead7519b206c82367fdb9a6b1039d23c2';
+    private const PACKAGE_SHA = '21a6d77b6f3232a01aeb3c0ffc391c6fde15dfc6d40661506c1d4ebca561c536';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -405,18 +405,32 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     $protectedContract = $package['template_contract']['canonical_projection_contract']['premium_teaser']['protected_full_content'];
                     self::assertSame('result_only_authority.premium_full', $protectedContract['authority_bucket']);
                     self::assertSame('asset.section_key', $protectedContract['section_key_from']);
-                    self::assertSame([
+                    $resultPageAccess = [
                         'mbti_access_hub_v1.access_state' => 'ready',
                         'access_level' => 'full',
                         'variant' => 'full',
                         'locked' => false,
                         'mbti_access_hub_v1.report_access.can_view_report' => true,
+                    ];
+                    $pdfAccess = [
+                        ...$resultPageAccess,
                         'mbti_access_hub_v1.pdf_access.can_download_pdf' => true,
-                    ], $protectedContract['required_runtime_access']);
+                    ];
                     self::assertSame([
-                        'full_result.result_page_sections',
-                        'mbti_pdf_payload.result_page_sections',
-                    ], $protectedContract['consumer_fields']);
+                        'full_result.result_page_sections' => $resultPageAccess,
+                        'mbti_pdf_payload.result_page_sections' => $pdfAccess,
+                    ], $protectedContract['consumer_access_contracts']);
+                    $reportReadyPdfPending = [
+                        ...$resultPageAccess,
+                        'mbti_access_hub_v1.pdf_access.can_download_pdf' => false,
+                    ];
+                    $matchesAccessContract = static fn (array $actual, array $required): bool => array_all(
+                        $required,
+                        static fn (mixed $expected, string $key): bool => array_key_exists($key, $actual)
+                            && $actual[$key] === $expected,
+                    );
+                    self::assertTrue($matchesAccessContract($reportReadyPdfPending, $resultPageAccess));
+                    self::assertFalse($matchesAccessContract($reportReadyPdfPending, $pdfAccess));
                     $entitledProjection = [
                         'title' => $renderedContent['title'],
                         'body' => implode("\n\n", [
@@ -641,7 +655,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertTrue(
             $mapping['required_w9_adapter_contract']['must_project_protected_premium_content_only_under_synthetic_entitled_state'],
         );
-        self::assertTrue($mapping['required_w9_adapter_contract']['must_match_exact_runtime_access_contract']);
+        self::assertTrue($mapping['required_w9_adapter_contract']['must_match_exact_pdf_runtime_access_contract']);
         self::assertTrue($mapping['required_w9_adapter_contract']['must_preserve_candidate_row_id_as_card_key']);
         self::assertTrue($mapping['required_w9_adapter_contract']['must_fail_if_any_pdf_candidate_asset_is_not_exercised']);
         self::assertFalse($mapping['required_w9_adapter_contract']['runtime_or_cms_activation_allowed']);

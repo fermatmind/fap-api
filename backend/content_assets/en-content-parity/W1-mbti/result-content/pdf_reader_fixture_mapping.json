@@ -60,7 +60,7 @@
       "tips_from": "rendered content.reflection_prompts",
       "tags": []
     },
-    "premium_source": "result_only_authority.premium_full under the exact ready/full/full unlocked runtime state",
+    "premium_source": "result_only_authority.premium_full under the PDF consumer's exact ready/full/full unlocked, report-viewable, and PDF-downloadable runtime state",
     "reader_text_fields": ["section.title","cards[].title","cards[].description","cards[].bullets[]","cards[].tips[]"],
     "fail_if_description_bullets_or_tips_are_empty": true
   },
@@ -80,7 +80,7 @@
     "must_project_preserved_controls_without_reauthoring": true,
     "must_preserve_sections_and_premium_teaser_buckets": true,
     "must_project_protected_premium_content_only_under_synthetic_entitled_state": true,
-    "must_match_exact_runtime_access_contract": true,
+    "must_match_exact_pdf_runtime_access_contract": true,
     "must_preserve_candidate_row_id_as_card_key": true,
     "must_fail_if_any_pdf_candidate_asset_is_not_exercised": true
   },
