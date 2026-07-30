@@ -304,6 +304,22 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($camelCaseMediaFieldRow['text_only_compliant']);
         $this->assertSame('prohibited_content', $camelCaseMediaFieldRow['recommended_disposition']);
 
+        foreach ([
+            '<svg viewBox="0 0 10 10"><path d="M0 0h10v10z"/></svg>',
+            '<object data="https://private.invalid/embedded-image.svg"></object>',
+        ] as $embeddedMedia) {
+            $working->forceFill(['snapshot_json' => [
+                'attributes' => $this->completeSnapshot('Candidate'),
+                'body' => $embeddedMedia,
+            ]])->saveQuietly();
+            $embeddedMediaResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+            $embeddedMediaRow = collect($embeddedMediaResult['rows'])
+                ->firstWhere('logical_identity', 'domain:openness');
+
+            $this->assertFalse($embeddedMediaRow['text_only_compliant']);
+            $this->assertSame('prohibited_content', $embeddedMediaRow['recommended_disposition']);
+        }
+
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),
             'attemptId' => 'private-camel-case-attempt',
