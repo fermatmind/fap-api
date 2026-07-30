@@ -317,7 +317,7 @@ final class BigFiveEnglishDraftInventory
             })
             ->orderBy('id')
             ->get()
-            ->filter(function (PersonalityPublicContentAsset $asset) use ($redirectOnlyAliases): bool {
+            ->filter(function (PersonalityPublicContentAsset $asset): bool {
                 $keys = [
                     (string) $asset->entity_key,
                     basename((string) $asset->slug),
@@ -325,9 +325,10 @@ final class BigFiveEnglishDraftInventory
                     basename((string) data_get($asset->canonical_json, 'redirect_from', '')),
                 ];
 
-                return collect($keys)->contains(
-                    static fn (string $value): bool => isset($redirectOnlyAliases[$value]),
-                );
+                return collect($keys)->contains(static fn (string $value): bool => (
+                    $value === 'emotional-stability'
+                    || preg_match('/^(?:high|low)-[a-z0-9-]+$/', $value) === 1
+                ));
             })->values();
         $unknownAuthorityRows = $assets->reject(fn (PersonalityPublicContentAsset $asset): bool => (
             $canonical->contains('id', $asset->id) || $aliases->contains('id', $asset->id)
