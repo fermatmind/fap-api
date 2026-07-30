@@ -41,10 +41,13 @@
         },
         "storage_visibility": "inactive_or_draft_authority_only",
         "public_share_projection_allowed": false,
+        "public_personality_projection_allowed": false,
+        "activation_authority_policy": "result-only authority isolation required unless an explicit public-personality section allowlist excludes every package candidate",
         "activation_prerequisites": [
           "independent W9 exact-package approval",
           "result entitlement projection gate",
-          "public share section allowlist or explicit package-section exclusion"
+          "public share section allowlist or explicit package-section exclusion",
+          "result-only authority isolation or explicit public-personality section exclusion"
         ]
       },
       "premium_teaser": {
@@ -61,6 +64,7 @@
         "entitlement_filter_is_not_implemented_by_this_package": true
       },
       "published_cms_share_authority_write_allowed": false,
+      "published_public_personality_authority_write_allowed": false,
       "runtime_or_entitlement_policy_change_allowed": false
     }
   },

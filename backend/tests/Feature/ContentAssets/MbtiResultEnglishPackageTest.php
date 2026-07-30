@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e';
+    private const PACKAGE_SHA = 'f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -214,12 +214,20 @@ final class MbtiResultEnglishPackageTest extends TestCase
         $sectionProjection = $package['template_contract']['canonical_projection_contract']['sections'];
         self::assertSame('inactive_or_draft_authority_only', $sectionProjection['storage_visibility']);
         self::assertFalse($sectionProjection['public_share_projection_allowed']);
+        self::assertFalse($sectionProjection['public_personality_projection_allowed']);
         self::assertContains(
             'public share section allowlist or explicit package-section exclusion',
             $sectionProjection['activation_prerequisites'],
         );
+        self::assertContains(
+            'result-only authority isolation or explicit public-personality section exclusion',
+            $sectionProjection['activation_prerequisites'],
+        );
         self::assertFalse(
             $package['template_contract']['canonical_projection_contract']['published_cms_share_authority_write_allowed'],
+        );
+        self::assertFalse(
+            $package['template_contract']['canonical_projection_contract']['published_public_personality_authority_write_allowed'],
         );
         self::assertFalse(
             $package['template_contract']['canonical_projection_contract']['runtime_or_entitlement_policy_change_allowed'],
@@ -345,6 +353,16 @@ final class MbtiResultEnglishPackageTest extends TestCase
         $matrix = $this->readPackageJson('entitlement_matrix.json');
 
         self::assertSame('same_fields', $matrix['mobile_desktop_authority']);
+        self::assertFalse(
+            $matrix['cross_surface_isolation']['public_personality_profiles']['package_candidate_projection_allowed'],
+        );
+        self::assertFalse(
+            $matrix['cross_surface_isolation']['public_personality_profiles']['published_personality_profile_variant_section_write_allowed'],
+        );
+        self::assertSame(
+            'result-only authority isolation or explicit public-personality section exclusion',
+            $matrix['cross_surface_isolation']['public_personality_profiles']['activation_gate'],
+        );
         self::assertSame([
             'free_result',
             'preview_result',

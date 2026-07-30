@@ -2,6 +2,13 @@
   "schema_version": "fermatmind.en_parity.mbti_result_entitlement_matrix.v1",
   "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
   "mobile_desktop_authority": "same_fields",
+  "cross_surface_isolation": {
+    "public_personality_profiles": {
+      "package_candidate_projection_allowed": false,
+      "published_personality_profile_variant_section_write_allowed": false,
+      "activation_gate": "result-only authority isolation or explicit public-personality section exclusion"
+    }
+  },
   "surfaces": [
     {
       "surface": "free_result",

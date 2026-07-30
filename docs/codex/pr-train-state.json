@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA 386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The digest covers an immutable approval envelope that must exactly equal the manifest locale, status, provenance, counts, gates, and permissions. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through an exact OfferResolver variant selector and commercial_spec to offer_set.cta. The preview surface is a preserved control and cannot consume that locked-upsell candidate. Canonical projection is gated on exact-package importer rendering of the two registered variant slots with unresolved tokens rejected. Every ordinary and premium candidate remains inactive/draft-only; candidate section body/payload is forbidden from published CMS share authority until a separate share allowlist or explicit exclusion gate exists. All controlled permissions remain false."
+        "evidence": "Frozen candidate package SHA f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The digest covers an immutable approval envelope that must exactly equal the manifest locale, status, provenance, counts, gates, and permissions. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through an exact OfferResolver variant selector and commercial_spec to offer_set.cta. The preview surface is a preserved control and cannot consume that locked-upsell candidate. Canonical projection is gated on exact-package importer rendering of the two registered variant slots with unresolved tokens rejected. Every ordinary and premium candidate remains inactive/draft-only; candidate section body/payload is forbidden from published CMS share and public-personality authority until separate exclusion gates or result-only authority isolation exist. All controlled permissions remain false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1056 assertions covering digest-bound approval-envelope equality, canonical registry buckets, pre-projection slot rendering with unresolved-token rejection, deterministic ordinary-section projection, inactive/draft-only storage, public-share exclusion, fail-closed premium teaser projection, exact commercial_spec cta_copy selector/shape, preview exclusion, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1065 assertions covering digest-bound approval-envelope equality, canonical registry buckets, pre-projection slot rendering with unresolved-token rejection, deterministic ordinary-section projection, inactive/draft-only storage, public-share and public-personality exclusion, fail-closed premium teaser projection, exact commercial_spec cta_copy selector/shape, preview exclusion, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101641,8 +101641,13 @@
         "at": "2026-07-30T20:30:59Z",
         "status": "github_checks_pending",
         "note": "Committed the digest-bound approval envelope as implementation commit 4491efe11785e1d2e84dbb098156a6a91463245c. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T20:40:33Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head e936231527cfb531c136db40ba40189b0e43e183 passed all nine required checks with staging parity skipped, then review found one valid P2 public-personality isolation gap. Candidate sections now forbid public personality projection and published PersonalityProfileVariantSection authority writes. Activation requires result-only authority isolation or an explicit public-personality section exclusion in addition to the share-safe gate. Focused validation passed 7 tests/1065 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc."
       }
     ],
-    "updated_at": "2026-07-30T20:30:59Z"
+    "updated_at": "2026-07-30T20:40:33Z"
   }
 }
