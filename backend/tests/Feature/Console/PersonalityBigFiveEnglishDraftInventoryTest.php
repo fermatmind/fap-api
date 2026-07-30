@@ -681,6 +681,29 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($result['ok']);
     }
 
+    public function test_candidate_snapshot_identity_must_match_asset_and_catalog(): void
+    {
+        $asset = $this->createAsset();
+        $working = $this->createRevision($asset, 1, 'working-one', [
+            ...$this->completeSnapshot('Working'),
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'agreeableness',
+            'locale' => 'zh-CN',
+            'slug' => 'big-five/agreeableness',
+            'canonical_json' => ['path' => '/zh/personality/big-five/agreeableness'],
+        ]);
+        $asset->forceFill(['working_revision_id' => $working->id])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($row['candidate_identity_matches']);
+        $this->assertSame('translation_identity_mismatch', $row['recommended_disposition']);
+        $this->assertFalse($result['ok']);
+    }
+
     public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
     {
         $asset = $this->createAsset();

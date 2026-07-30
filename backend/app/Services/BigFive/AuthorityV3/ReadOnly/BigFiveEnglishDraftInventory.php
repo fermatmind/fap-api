@@ -636,6 +636,13 @@ final class BigFiveEnglishDraftInventory
             && ($published === null || (! $pointerEqual && $newer));
         $candidateWorkflowDraft = ! $independentWorkingCandidate
             || (string) $working->workflow_state === PersonalityPublicContentAssetRevision::STATE_DRAFT;
+        $candidateIdentityMatches = ! $independentWorkingCandidate
+            || ($asset !== null && $this->candidateIdentityMatches(
+                $workingSnapshot,
+                $workingContent,
+                $asset,
+                $entry,
+            ));
         $projection = $publishedProjectionLocked && $asset !== null && (bool) $asset->is_public
             && in_array($asset->launch_state, [
                 PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
@@ -647,6 +654,7 @@ final class BigFiveEnglishDraftInventory
         $disposition = match (true) {
             $asset === null || ! $workingActive || ($asset->published_revision_id && ! $publishedBound) => 'blocked_authority_unknown',
             $cjk || $private || ! $textOnly => 'prohibited_content',
+            ! $candidateIdentityMatches => 'translation_identity_mismatch',
             ! $schemaComplete => 'schema_repair_required',
             ! $candidateWorkflowDraft => 'schema_repair_required',
             $published !== null && ! $publishedEn52Locked => 'blocked_authority_unknown',
@@ -684,6 +692,7 @@ final class BigFiveEnglishDraftInventory
             'title_complete' => $titleComplete,
             'summary_complete' => $summaryComplete,
             'candidate_workflow_draft' => $candidateWorkflowDraft,
+            'candidate_identity_matches' => $candidateIdentityMatches,
             'sections_complete' => is_array(data_get($workingContent, 'content_sections_json')),
             'faq_complete' => is_array(data_get($workingContent, 'faq_json')),
             'text_only_compliant' => $textOnly,
@@ -706,6 +715,40 @@ final class BigFiveEnglishDraftInventory
                         : 'current_revision_authority_incomplete'))
                 : null,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $snapshot
+     * @param  array<string,mixed>  $content
+     * @param  array{entity_type:string,entity_key:string,path:string}  $entry
+     */
+    private function candidateIdentityMatches(
+        array $snapshot,
+        array $content,
+        PersonalityPublicContentAsset $asset,
+        array $entry,
+    ): bool {
+        $expected = [
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => $entry['entity_type'],
+            'entity_key' => $entry['entity_key'],
+            'locale' => 'en',
+            'slug' => (string) $asset->slug,
+            'canonical_json.path' => $entry['path'],
+        ];
+
+        foreach ([$snapshot, $content] as $candidate) {
+            foreach ($expected as $key => $value) {
+                $missing = new \stdClass;
+                $actual = data_get($candidate, $key, $missing);
+                if ($actual !== $missing && $actual !== $value) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /** @param array<string,mixed> $expected */

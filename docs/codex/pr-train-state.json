@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, and 30573601659 passed all required jobs at their exact heads. The latest exact-head review added one in-scope text-only finding; its fix passes the 25-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, 30573601659, and 30574341370 passed all required jobs at their exact heads. The latest exact-head review added one in-scope candidate-identity finding; its fix passes the 26-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101318,9 +101318,14 @@
         "at": "2026-07-30T19:19:05Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30573601659 passed, exact-head review identified one remaining text-only semantic mismatch. Media/image keys now fail closed on key presence even when their values are null, empty strings, or empty arrays, matching the EN52 package compiler's authority boundary. The 25-test inventory suite passes 152 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T19:29:05Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30574341370 passed, exact-head review identified one remaining candidate authority-identity gap. Independent working candidates now compare every supplied org, framework, entity type/key, locale, slug, and canonical path against the org-0 backend asset and canonical catalog before translation_identity_mismatch can pass. The 26-test inventory suite passes 155 assertions and the complete runtime-freeze suite passes 395 tests / 808 assertions."
       }
     ],
-    "updated_at": "2026-07-30T19:19:05Z"
+    "updated_at": "2026-07-30T19:29:05Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
