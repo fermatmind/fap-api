@@ -210,9 +210,14 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'write_state="committed"',
             'career_cache_refresh_status=running',
             'sleep 20',
+            'for curl_attempt in 1 2',
+            'if [[ "$curl_attempt" -lt 2 ]]',
+            'sleep 1',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }
+        $this->assertStringNotContainsString('--retry', $runner);
+        $this->assertStringNotContainsString('--fail', $runner);
         $this->assertStringNotContainsString('--forget-job-detail', $workflow.$runner);
         $this->assertStringNotContainsString('php artisan migrate', $workflow.$runner);
         $this->assertStringNotContainsString('queue:restart', $workflow.$runner);
