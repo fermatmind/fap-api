@@ -101191,14 +101191,14 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "CI run 30587176185 passed all required jobs on metadata head f26a84be2b7a06bcbde91885d99b145f997beacf. Exact-head review then found that historical slots were not bound to the observed production revision ids. Implementation 2a11d6128a2010aecb93227dea100d3f06373375 closes that same-scope lineage boundary; required checks must rerun."
+        "status": "pass",
+        "evidence": "CI run 30587864941 and Code Scanning run 30587864845 passed all required jobs on exact metadata head ade80d52e44cbe452d539b54d993d17756ca50ff. Staging parity was skipped as expected and is not required. The only exact-head review finding concerned the already-completed pending-to-ready ledger transition and is resolved by this consistent metadata tail."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101408,9 +101408,14 @@
         "at": "2026-07-30T22:38:10Z",
         "status": "github_checks_pending",
         "note": "After CI run 30587176185 passed all required jobs, exact-head review identified one remaining immutable-lineage gap. Each of the 50 historical slots now requires the exact revision id recorded by the authorized production observation in addition to its package, asset key, source hash, package SHA, workflow state, and transformed snapshot hash. A deleted row recreated with otherwise identical attributes fails closed as missing. All 50 locks cross-check against the durable evidence artifact. The ledger binds implementation 2a11d6128a2010aecb93227dea100d3f06373375. The 30-test inventory suite passes 201 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T22:47:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation 2a11d6128a2010aecb93227dea100d3f06373375 is bound by metadata head ade80d52e44cbe452d539b54d993d17756ca50ff. CI run 30587864941 and Code Scanning run 30587864845 passed all required jobs, GitHub reports CLEAN/MERGEABLE, exact eight-path scope validation is clean, and the implementation review finding is resolved. Manifest, ledger status, check evidence, and scope flags now consistently record ready_to_merge. This metadata-only tail must repeat required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-30T22:38:10Z"
+    "updated_at": "2026-07-30T22:47:00Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
