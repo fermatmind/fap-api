@@ -101177,10 +101177,10 @@
     "base": "main",
     "branch": "codex/api-unlock-01-report-entitlement",
     "title": "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "189ff37b2d8e5e76afbee0dc663fc78b72997c14",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3423",
     "checks": {
       "focused_phpunit": "passed: 34 tests, 447 assertions",
       "pint_scoped": "passed: 7 files",
@@ -101215,8 +101215,13 @@
         "at": "2026-07-30T15:57:14Z",
         "status": "local_validation_passed",
         "note": "The versioned report_unlock.v1 contract, exact CNY 499 SKU gate, provider capability gate, MBTI-only default rollout, IQ hard-disable, canonical source normalization, legacy source compatibility, locked module filtering, and idempotent rewarded_ad grant projection passed 34 focused tests / 447 assertions. Scoped Pint, route inventory, strict Composer validation, YAML/JSON parsing, diff checks, and exact changed-path scope validation passed. No migration, production SKU/config write, secret, deploy, or platform action occurred."
+      },
+      {
+        "at": "2026-07-30T16:00:10Z",
+        "status": "github_checks_pending",
+        "note": "Created PR #3423 from commit 189ff37b2d8e5e76afbee0dc663fc78b72997c14 after exact staged-path review. Required GitHub checks are pending."
       }
     ],
-    "updated_at": "2026-07-30T15:57:14Z"
+    "updated_at": "2026-07-30T16:00:10Z"
   }
 }
