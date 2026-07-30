@@ -139,6 +139,22 @@ indexability, queues, sitemap, llms, Search Channel, URL submission,
 deployment, symlinks, migrations, workers, or non-target state. Merging the
 control does not authorize dispatching either mode.
 
+If resume `preflight` stops with `PUBLIC_SNAPSHOT_INCOMPLETE`, do not rerun it
+or infer target state from the generic failure. Use only
+`Career Search Entry Batch Cache Refresh Resume Preflight Diagnostic` after a
+new exact authorization bound to that failed run/attempt and receipt SHA. The
+diagnostic also binds the original failed execute and recovery receipts,
+rejects any later resume run, and performs one read-only 100-URL observation.
+Its receipt contains only aggregate HTTP, transport, canonical, robots,
+locale, unsafe-href, and thin-module counts plus payload/state hashes. A
+complete observation distinguishes restored baseline from state drift; an
+incomplete observation remains `HOLD_DIAGNOSTIC_SNAPSHOT_INCOMPLETE`.
+
+The diagnostic does not calculate a residual target plan and cannot emit or
+consume execute authorization. It never retries the failed preflight or writes
+cache, database, CMS, queue, publication, indexability, sitemap, llms, Search
+Channel, URL-submission, deployment, rollback, or non-target state.
+
 The apply phrase keeps CMS content, publication, indexability, cache warm,
 queue dispatch, sitemap/llms mutation or submission, Search Channel, URL
 submission, and deploy held. The operation does not release held slugs or
