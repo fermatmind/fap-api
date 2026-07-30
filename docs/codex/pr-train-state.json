@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "4491efe11785e1d2e84dbb098156a6a91463245c",
+    "commit_sha": "82263bedac5b341ee013c65da82e11964b6f11ec",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101646,8 +101646,13 @@
         "at": "2026-07-30T20:40:33Z",
         "status": "review_fix_local_verified",
         "note": "Exact head e936231527cfb531c136db40ba40189b0e43e183 passed all nine required checks with staging parity skipped, then review found one valid P2 public-personality isolation gap. Candidate sections now forbid public personality projection and published PersonalityProfileVariantSection authority writes. Activation requires result-only authority isolation or an explicit public-personality section exclusion in addition to the share-safe gate. Focused validation passed 7 tests/1065 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc."
+      },
+      {
+        "at": "2026-07-30T20:41:43Z",
+        "status": "github_checks_pending",
+        "note": "Committed the public-personality authority isolation repair as implementation commit 82263bedac5b341ee013c65da82e11964b6f11ec. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T20:40:33Z"
+    "updated_at": "2026-07-30T20:41:43Z"
   }
 }
