@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "047291fa24cb594477b52fa61e5981943177c5b4",
+    "commit_sha": "3b22b1e12a6f96951464eff638c7500ca43781f1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101771,8 +101771,13 @@
         "at": "2026-07-30T23:30:00Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 2b9dc5439ae12ffc62b1806e598d5a86f002331a passed all nine required checks with staging parity skipped, then review found the shared protected-premium predicate incorrectly made full result-page content depend on PDF readiness. Split consumer predicates so full_result requires ready/full/full, unlocked, and can_view_report=true, while mbti_pdf_payload additionally requires can_download_pdf=true. A report-readable/PDF-pending fixture proves the split. Focused validation passed 7 tests/1387 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is 21a6d77b6f3232a01aeb3c0ffc391c6fde15dfc6d40661506c1d4ebca561c536. Integrated unrelated origin/main 11262cb0a without conflict; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:32:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the split result-page/PDF predicates, completed the prior b7ab619e5 merge, then integrated exact latest origin/main 11262cb0a. The resulting immutable implementation head is 3b22b1e12a6f96951464eff638c7500ca43781f1; focused validation remains 7 tests/1387 assertions with Pint, deterministic hash, diff, and exact scope checks passing. This metadata-only commit records that pointer; exact-head checks remain pending."
       }
     ],
-    "updated_at": "2026-07-30T23:30:00Z"
+    "updated_at": "2026-07-30T23:32:00Z"
   }
 }
