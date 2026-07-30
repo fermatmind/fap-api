@@ -83,6 +83,7 @@ jobs:
       failed_resume_execute_run_id: ${{ steps.validate.outputs.failed_resume_execute_run_id }}
       failed_resume_execute_run_attempt: ${{ steps.validate.outputs.failed_resume_execute_run_attempt }}
       failed_resume_execute_receipt_sha256: ${{ steps.validate.outputs.failed_resume_execute_receipt_sha256 }}
+      failed_execute_input_binding_sha256: ${{ steps.validate.outputs.failed_execute_input_binding_sha256 }}
       preflight_run_id: ${{ steps.validate.outputs.preflight_run_id }}
       preflight_run_attempt: ${{ steps.validate.outputs.preflight_run_attempt }}
       preflight_receipt_sha256: ${{ steps.validate.outputs.preflight_receipt_sha256 }}
@@ -231,6 +232,24 @@ jobs:
              and .deploy_count == 0
              and .rollback_count == 0' "$failed_receipt" >/dev/null
 
+          failed_execute_log="$(gh run view "$FAILED_RESUME_EXECUTE_RUN_ID" --log)"
+          for binding in \
+            "PREFLIGHT_RUN_ID: ${PREFLIGHT_RUN_ID}" \
+            "PREFLIGHT_RUN_ATTEMPT: ${PREFLIGHT_RUN_ATTEMPT}" \
+            "EXPECTED_PREFLIGHT_STATE_SHA256: ${EXPECTED_PREFLIGHT_STATE_SHA256}" \
+            "EXPECTED_RESUME_TARGET_SET_SHA256: ${EXPECTED_RESUME_TARGET_SET_SHA256}"; do
+            grep -F -- "$binding" <<<"$failed_execute_log" >/dev/null
+          done
+          unset failed_execute_log
+          failed_execute_input_binding_sha256="$(
+            printf '%s\n' \
+              "preflight_run_id=${PREFLIGHT_RUN_ID}" \
+              "preflight_run_attempt=${PREFLIGHT_RUN_ATTEMPT}" \
+              "preflight_state_sha256=${EXPECTED_PREFLIGHT_STATE_SHA256}" \
+              "resume_target_set_sha256=${EXPECTED_RESUME_TARGET_SET_SHA256}" \
+              | sha256sum | awk '{print $1}'
+          )"
+
           preflight_run="$(
             gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}"
           )"
@@ -361,6 +380,7 @@ jobs:
             echo "failed_resume_execute_run_id=$FAILED_RESUME_EXECUTE_RUN_ID"
             echo "failed_resume_execute_run_attempt=$FAILED_RESUME_EXECUTE_RUN_ATTEMPT"
             echo "failed_resume_execute_receipt_sha256=$EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256"
+            echo "failed_execute_input_binding_sha256=$failed_execute_input_binding_sha256"
             echo "preflight_run_id=$PREFLIGHT_RUN_ID"
             echo "preflight_run_attempt=$PREFLIGHT_RUN_ATTEMPT"
             echo "preflight_receipt_sha256=$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
@@ -402,6 +422,7 @@ jobs:
       FAILED_RESUME_EXECUTE_RUN_ID: ${{ needs.eligibility.outputs.failed_resume_execute_run_id }}
       FAILED_RESUME_EXECUTE_RUN_ATTEMPT: ${{ needs.eligibility.outputs.failed_resume_execute_run_attempt }}
       FAILED_RESUME_EXECUTE_RECEIPT_SHA256: ${{ needs.eligibility.outputs.failed_resume_execute_receipt_sha256 }}
+      FAILED_EXECUTE_INPUT_BINDING_SHA256: ${{ needs.eligibility.outputs.failed_execute_input_binding_sha256 }}
       PREFLIGHT_RUN_ID: ${{ needs.eligibility.outputs.preflight_run_id }}
       PREFLIGHT_RUN_ATTEMPT: ${{ needs.eligibility.outputs.preflight_run_attempt }}
       PREFLIGHT_RECEIPT_SHA256: ${{ needs.eligibility.outputs.preflight_receipt_sha256 }}
@@ -622,6 +643,7 @@ jobs:
             --arg runner "$runner_sha256" \
             --arg diagnostic_state "$diagnostic_state_sha256" \
             --arg failed_resume_receipt "$FAILED_RESUME_EXECUTE_RECEIPT_SHA256" \
+            --arg failed_execute_input_binding "$FAILED_EXECUTE_INPUT_BINDING_SHA256" \
             --arg preflight_receipt "$PREFLIGHT_RECEIPT_SHA256" \
             --arg preflight_state "$EXPECTED_PREFLIGHT_STATE_SHA256" \
             --arg targets "$EXPECTED_RESUME_TARGET_SET_SHA256" \
@@ -718,6 +740,7 @@ jobs:
                  failed_resume_execute_run_id: $failed_resume_run,
                  failed_resume_execute_run_attempt: $failed_resume_attempt,
                  failed_resume_execute_receipt_sha256: $failed_resume_receipt,
+                 failed_execute_input_binding_sha256: $failed_execute_input_binding,
                  preflight_run_id: $preflight_run,
                  preflight_run_attempt: $preflight_attempt,
                  preflight_receipt_sha256: $preflight_receipt,
