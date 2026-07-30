@@ -656,6 +656,9 @@ final class BigFiveEnglishDraftInventory
             ], true)
             && $asset->published_at !== null
             && ! $asset->published_at->isFuture();
+        $translationGroupId = data_get($asset?->authority_json, 'translation_group_id');
+        $translationGroupIdSafe = is_string($translationGroupId)
+            && preg_match('/^big-five:[a-z0-9:_-]{1,128}$/', $translationGroupId) === 1;
 
         $disposition = match (true) {
             $asset === null || ! $workingActive || ($asset->published_revision_id && ! $publishedBound) => 'blocked_authority_unknown',
@@ -678,7 +681,8 @@ final class BigFiveEnglishDraftInventory
             'entity_type' => $entry['entity_type'],
             'entity_key' => $entry['entity_key'],
             'locale' => 'en',
-            'translation_group_id' => data_get($asset?->authority_json, 'translation_group_id'),
+            'translation_group_id' => $translationGroupIdSafe ? $translationGroupId : null,
+            'translation_group_id_safe' => $translationGroupIdSafe,
             'working_revision_id' => $working?->id,
             'working_revision_status' => $working?->workflow_state,
             'working_revision_fingerprint_sha256' => $workingFingerprint,
@@ -744,11 +748,16 @@ final class BigFiveEnglishDraftInventory
             'canonical_json.path' => $entry['path'],
         ];
 
-        foreach ([$snapshot, $content] as $candidate) {
-            foreach ($expected as $key => $value) {
-                $missing = new \stdClass;
-                $actual = data_get($candidate, $key, $missing);
-                if ($actual !== $missing && $actual !== $value) {
+        foreach ($expected as $key => $value) {
+            $missing = new \stdClass;
+            $actual = data_get($content, $key, $missing);
+            if ($actual === $missing || $actual !== $value) {
+                return false;
+            }
+
+            if ($snapshot !== $content) {
+                $envelopeValue = data_get($snapshot, $key, $missing);
+                if ($envelopeValue !== $missing && $envelopeValue !== $value) {
                     return false;
                 }
             }

@@ -79,7 +79,9 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'schema_json' => [],
             'method_boundary_json' => [],
             'evidence_notes_json' => [],
-            'authority_json' => ['translation_group_id' => 'big-five:domain:openness'],
+            'authority_json' => [
+                'translation_group_id' => ['token' => 'translation-group-secret-must-not-appear'],
+            ],
             'internal_links_json' => [],
             'is_public' => true,
             'index_eligible' => true,
@@ -126,6 +128,9 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('prohibited_content', $row['recommended_disposition']);
         $this->assertSame($historical->id, $row['historical_draft_revision_id']);
         $this->assertStringNotContainsString('must-never-appear', $encoded);
+        $this->assertStringNotContainsString('translation-group-secret', $encoded);
+        $this->assertNull($row['translation_group_id']);
+        $this->assertFalse($row['translation_group_id_safe']);
         $this->assertSame(
             BigFiveEnglishDraftInventory::DISPOSITIONS,
             array_values(array_unique([...BigFiveEnglishDraftInventory::DISPOSITIONS])),
@@ -703,14 +708,27 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($row['candidate_identity_matches']);
         $this->assertSame('translation_identity_mismatch', $row['recommended_disposition']);
         $this->assertFalse($result['ok']);
+
+        $snapshotWithoutIdentity = $this->completeSnapshot('Working');
+        foreach (['org_id', 'framework', 'entity_type', 'entity_key', 'locale', 'slug', 'canonical_json'] as $key) {
+            unset($snapshotWithoutIdentity[$key]);
+        }
+        $working->forceFill(['snapshot_json' => $snapshotWithoutIdentity])->saveQuietly();
+
+        $missingIdentity = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $missingIdentityRow = collect($missingIdentity['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($missingIdentityRow['candidate_identity_matches']);
+        $this->assertSame('translation_identity_mismatch', $missingIdentityRow['recommended_disposition']);
+        $this->assertFalse($missingIdentity['ok']);
     }
 
     public function test_candidate_sections_and_faq_must_be_non_empty_structured_lists(): void
     {
         $asset = $this->createAsset();
         $working = $this->createRevision($asset, 1, 'working-one', [
-            'title' => 'Working',
-            'summary' => 'A dimensional summary.',
+            ...$this->completeSnapshot('Working'),
             'content_sections_json' => [],
             'faq_json' => [],
         ]);
@@ -1026,10 +1044,17 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             );
             $snapshot = $descriptor['snapshot'] ?? [];
         } elseif ($historical && array_keys($snapshot) === [
+            'org_id',
+            'framework',
+            'entity_type',
+            'entity_key',
+            'locale',
+            'slug',
             'title',
             'summary',
             'content_sections_json',
             'faq_json',
+            'canonical_json',
         ]) {
             $snapshot = $this->historicalSnapshot(
                 (string) $asset->entity_type,
@@ -1068,6 +1093,12 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
     private function completeSnapshot(string $title = 'Openness'): array
     {
         return [
+            'org_id' => 0,
+            'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_DOMAIN,
+            'entity_key' => 'openness',
+            'locale' => 'en',
+            'slug' => 'big-five/openness',
             'title' => $title,
             'summary' => 'A dimensional summary.',
             'content_sections_json' => [[
@@ -1080,6 +1111,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 'question' => 'What does this describe?',
                 'answer' => 'It describes a dimensional tendency.',
             ]],
+            'canonical_json' => ['path' => '/en/personality/big-five/openness'],
         ];
     }
 
