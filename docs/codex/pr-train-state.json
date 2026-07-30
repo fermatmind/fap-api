@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "review_fix_local_checks_passed",
     "depends_on": [],
-    "commit_sha": "4a343538ededc4cde60b2760f01f05e810c4cd09",
+    "commit_sha": "a7af7c99b985214831c925e8dd886dca3ed6cfad",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs through 30583353912 passed all required jobs at their exact heads. The latest exact-head review added one in-scope unregistered alias-shape finding; implementation 4a343538ededc4cde60b2760f01f05e810c4cd09 passes the 28-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs through 30584090809 passed all required jobs at their exact heads. The latest exact-head review added one in-scope distinct-working-pointer validation finding; implementation a7af7c99b985214831c925e8dd886dca3ed6cfad passes the 29-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101383,9 +101383,14 @@
         "at": "2026-07-30T21:36:16Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30583353912 passed, exact-head review identified one remaining unregistered alias-shape gap. The global database alias filter now exactly mirrors the publisher predicate: emotional-stability and every high-* or low-* identity shape fail closed, including shapes outside the locked ten-key redirect catalog. A nonzero-org high-curiosity regression proves the aggregate boundary blocks ok=true. Scoped Pint initially reported the expected mechanical closure cleanup, which was formatted and fully rerun before commit. The ledger binds implementation 4a343538ededc4cde60b2760f01f05e810c4cd09. The 28-test inventory suite passes 182 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T21:46:21Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30584090809 passed, exact-head review identified one remaining distinct-working-pointer validation gap. Candidate workflow, identity, and deep section/FAQ checks now apply to every working pointer distinct from the published pointer regardless of revision number; newer versus stale ordering only selects the final valid disposition after those gates pass. A stale revision with pending_manual_review, zh-CN identity, and empty sections proves fail-closed behavior. The ledger binds implementation a7af7c99b985214831c925e8dd886dca3ed6cfad. The 29-test inventory suite passes 188 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T21:36:16Z"
+    "updated_at": "2026-07-30T21:46:21Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
