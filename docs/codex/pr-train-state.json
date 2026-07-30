@@ -101177,9 +101177,9 @@
     "base": "main",
     "branch": "codex/api-unlock-01-report-entitlement",
     "title": "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract",
-    "status": "review_fix_local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "189ff37b2d8e5e76afbee0dc663fc78b72997c14",
+    "commit_sha": "368f5d9f97128483a33e98ff1e374fd77b0aaa75",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3423",
     "checks": {
       "focused_phpunit": "passed: 36 tests, 562 assertions",
@@ -101187,7 +101187,7 @@
       "route_list": "passed: 24 attempt routes; no route changes",
       "composer_validate": "passed: strict",
       "yaml_json_diff_scope": "passed",
-      "github_required_checks": "failed at b723012bfbc1b6cde9c87b9c11057ab8dd3512c6; same-scope fix validated locally; rerun pending"
+      "github_required_checks": "rerun pending after same-scope fix"
     },
     "scope_validation": {
       "allowed_paths_only": true,
@@ -101225,8 +101225,13 @@
         "at": "2026-07-30T16:11:58Z",
         "status": "review_fix_local_validation_passed",
         "note": "GitHub verify-bigfive exposed two same-scope regressions: the new resolver was not registered in the exact runtime-freeze classifier, and disabled non-MBTI rollouts changed canonical report-access response shape. The fix now projects the new contract only when rollout.state=enabled and adds a single-file classifier exception. MBTI legacy and v2 checks passed on the failed head. Focused resolver/report-access tests, the exact classifier test, Big Five canonical truth fixture test, scoped Pint, syntax, YAML/JSON, and diff checks passed locally. Generated Big Five compiled artifacts created by the canonical test were restored to HEAD and are not in scope."
+      },
+      {
+        "at": "2026-07-30T16:13:06Z",
+        "status": "github_checks_pending",
+        "note": "Pushed same-scope regression fix commit 368f5d9f97128483a33e98ff1e374fd77b0aaa75. Required GitHub checks are rerunning."
       }
     ],
-    "updated_at": "2026-07-30T16:11:58Z"
+    "updated_at": "2026-07-30T16:13:06Z"
   }
 }
