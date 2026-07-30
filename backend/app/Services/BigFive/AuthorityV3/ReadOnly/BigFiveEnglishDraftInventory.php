@@ -290,31 +290,45 @@ final class BigFiveEnglishDraftInventory
             PersonalityPublicContentAsset::ENTITY_FACET_HUB,
         ], true))->values();
 
-        $authorityAssets = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+        $assets = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('org_id', 0)
             ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
-            ->whereIn('locale', ['en', 'zh-CN'])
+            ->where('locale', 'en')
             ->orderBy('id')
             ->get();
-        $assets = $authorityAssets->where('locale', 'en')->values();
         $canonical = $assets->filter(fn (PersonalityPublicContentAsset $asset): bool => $entries->contains(
             fn (array $entry): bool => $entry['entity_type'] === $asset->entity_type
                 && $entry['entity_key'] === $asset->entity_key
                 && $entry['path'] === (string) data_get($asset->canonical_json, 'path'),
         ))->values();
         $redirectOnlyAliases = BigFiveCanonicalRouteCatalog::redirectOnlyAliasTargets('en');
-        $aliases = $authorityAssets->filter(function (PersonalityPublicContentAsset $asset) use ($redirectOnlyAliases): bool {
-            $keys = [
-                (string) $asset->entity_key,
-                basename((string) $asset->slug),
-                basename((string) data_get($asset->canonical_json, 'path', '')),
-                basename((string) data_get($asset->canonical_json, 'redirect_from', '')),
-            ];
+        $aliasSlugs = array_map(
+            static fn (string $alias): string => 'big-five/'.$alias,
+            array_keys($redirectOnlyAliases),
+        );
+        $aliases = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
+            ->where(function ($query) use ($aliasSlugs, $redirectOnlyAliases): void {
+                $query->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+                    ->orWhere(function ($query) use ($redirectOnlyAliases): void {
+                        $query->where('entity_type', PersonalityPublicContentAsset::ENTITY_POLARITY)
+                            ->whereIn('entity_key', array_keys($redirectOnlyAliases));
+                    })
+                    ->orWhereIn('slug', $aliasSlugs);
+            })
+            ->orderBy('id')
+            ->get()
+            ->filter(function (PersonalityPublicContentAsset $asset) use ($redirectOnlyAliases): bool {
+                $keys = [
+                    (string) $asset->entity_key,
+                    basename((string) $asset->slug),
+                    basename((string) data_get($asset->canonical_json, 'path', '')),
+                    basename((string) data_get($asset->canonical_json, 'redirect_from', '')),
+                ];
 
-            return collect($keys)->contains(
-                static fn (string $value): bool => isset($redirectOnlyAliases[$value]),
-            );
-        })->values();
+                return collect($keys)->contains(
+                    static fn (string $value): bool => isset($redirectOnlyAliases[$value]),
+                );
+            })->values();
         $unknownAuthorityRows = $assets->reject(fn (PersonalityPublicContentAsset $asset): bool => (
             $canonical->contains('id', $asset->id) || $aliases->contains('id', $asset->id)
         ))->values();
