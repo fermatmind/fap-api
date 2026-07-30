@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4';
+    private const PACKAGE_SHA = 'dbb00e41019876fb43cb2c59ecff6d1aebe4faeac1d2f3eeaba28b22188c0e3f';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -185,6 +185,17 @@ final class MbtiResultEnglishPackageTest extends TestCase
             self::assertIsArray($asset['content']);
             self::assertNotEmpty($asset['content']);
 
+            if ($asset['asset_kind'] === 'offer_copy_family') {
+                self::assertSame('commercial_spec.variants[].cta_copy', $asset['authority_field']);
+                self::assertSame('offer_set.cta', $asset['consumer_field']);
+                self::assertSame('locked_upsell_only', $asset['entitlement_level']);
+                self::assertSame(
+                    ['title', 'subtitle', 'primary_label', 'secondary_label', 'benefit_bullets', 'badge'],
+                    array_keys($asset['content']),
+                );
+                self::assertNotEmpty($asset['content']['benefit_bullets']);
+            }
+
             $stableIdentities[] = $asset['stable_asset_identity'];
             $readerCopy = json_encode($asset['content'], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
             self::assertDoesNotMatchRegularExpression('/\p{Han}/u', $readerCopy);
@@ -218,17 +229,18 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     $projected = [
                         'title' => $asset['content']['title'],
                         'teaser' => $asset['content']['teaser'],
-                        'payload' => [
-                            'summary_template' => $asset['content']['summary_template'],
-                            'body_template' => $asset['content']['body_template'],
-                            'reflection_prompts' => $asset['content']['reflection_prompts'],
-                        ],
+                        'payload' => null,
                     ];
-                    self::assertNotEmpty($projected['payload']['body_template']);
-                    self::assertNotEmpty($projected['payload']['reflection_prompts']);
+                    self::assertNull($projected['payload']);
+                    self::assertFalse(
+                        $package['template_contract']['canonical_projection_contract']['premium_teaser']['protected_full_content']['public_projection_allowed'],
+                    );
                     self::assertSame(
-                        'existing_full_access_entitlement_only',
-                        $package['template_contract']['canonical_projection_contract']['premium_teaser']['payload_visibility'],
+                        'inactive_or_draft_authority_only',
+                        $package['template_contract']['canonical_projection_contract']['premium_teaser']['protected_full_content']['storage_visibility'],
+                    );
+                    self::assertTrue(
+                        $package['template_contract']['canonical_projection_contract']['premium_teaser']['entitlement_filter_is_not_implemented_by_this_package'],
                     );
                 } else {
                     $projected = [
@@ -335,9 +347,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             $actualMatches,
             array_column($claimReport['forbidden_claim_scan']['matches'], 'phrase'),
         );
-        self::assertSame(['fixed identity'], $actualMatches);
-        self::assertSame('negated_boundary', $claimReport['forbidden_claim_scan']['matches'][0]['context']);
-        self::assertSame('allowed_explicit_rejection', $claimReport['forbidden_claim_scan']['matches'][0]['disposition']);
+        self::assertSame([], $actualMatches);
     }
 
     #[Test]

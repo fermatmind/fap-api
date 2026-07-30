@@ -30,12 +30,15 @@
       "premium_teaser": {
         "title_from": "content.title",
         "teaser_from": "content.teaser",
-        "payload": {
+        "payload": null,
+        "protected_full_content": {
           "summary_template_from": "content.summary_template",
           "body_template_from": "content.body_template",
-          "reflection_prompts_from": "content.reflection_prompts"
+          "reflection_prompts_from": "content.reflection_prompts",
+          "public_projection_allowed": false,
+          "storage_visibility": "inactive_or_draft_authority_only"
         },
-        "payload_visibility": "existing_full_access_entitlement_only"
+        "entitlement_filter_is_not_implemented_by_this_package": true
       },
       "runtime_or_entitlement_policy_change_allowed": false
     }
@@ -45,23 +48,20 @@
       "row_id": "W1-RESULT-CORE-05-OFFER-CTA",
       "stable_asset_identity": "mbti:result:offer-set-and-cta-copy",
       "asset_kind": "offer_copy_family",
-      "authority_field": "offer_set",
-      "entitlement_level": "preview|locked",
+      "authority_field": "commercial_spec.variants[].cta_copy",
+      "consumer_field": "offer_set.cta",
+      "variant_selector": "existing MBTI full-report offer variant for locale en",
+      "entitlement_level": "locked_upsell_only",
       "content": {
-        "preview": {
-          "eyebrow": "Continue your reflection",
-          "title": "Explore the patterns behind your result",
-          "body": "Your free result highlights the main preference pattern. The full report adds structured context for work, communication, growth, and practical experiments without treating the type as a fixed identity.",
-          "primary_cta": "View full report",
-          "secondary_cta": "Keep the free summary"
-        },
-        "locked": {
-          "eyebrow": "Full report",
-          "title": "Unlock the complete interpretation",
-          "body": "Review the deeper sections, reflection prompts, and action experiments tied to this result. Access expands the report; it does not change your score or guarantee a personal, career, or relationship outcome.",
-          "primary_cta": "See access options",
-          "secondary_cta": "Return to summary"
-        }
+        "title": "Unlock the complete interpretation",
+        "subtitle": "Review deeper sections, reflection prompts, and action experiments. Access expands the report; it does not change your score or guarantee a personal, career, or relationship outcome.",
+        "primary_label": "See access options",
+        "secondary_label": "Return to summary",
+        "benefit_bullets": [
+          "Structured context for work, communication, growth, and relationships",
+          "Reflection prompts and practical experiments"
+        ],
+        "badge": "Full report"
       },
       "mobile_desktop_consumption": "same_authority_fields"
     },

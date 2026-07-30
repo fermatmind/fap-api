@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA 1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. A deterministic canonical projection contract preserves section body/prompt content and premium teaser/full-access payload separation, the PDF mapping requires an exact-package W9 fixture adapter, and the claim scan records its negated-boundary phrase. All controlled permissions remain false."
+        "evidence": "Frozen candidate package SHA dbb00e41019876fb43cb2c59ecff6d1aebe4faeac1d2f3eeaba28b22188c0e3f reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. Ordinary sections have deterministic body/prompt projection; premium public projection is fail-closed to title/teaser with protected full templates retained only for inactive/draft authority; and offer copy maps to the existing commercial_spec cta_copy consumer contract. All controlled permissions remain false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/911 assertions covering canonical registry buckets, deterministic builder-facing body/payload projection, premium teaser/full-access payload separation, real PDF payload/adapter assertions, and exact forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/917 assertions covering canonical registry buckets, deterministic ordinary-section projection, fail-closed premium teaser projection, exact commercial_spec cta_copy shape, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA dbb00e41019876fb43cb2c59ecff6d1aebe4faeac1d2f3eeaba28b22188c0e3f, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101580,9 +101580,14 @@
       {
         "at": "2026-07-30T19:14:30Z",
         "status": "review_fix_local_verified",
-        "note": "Addressed the fifth valid P2 with a frozen canonical_projection_contract. The test executes the declared mapping across all canonical assets and proves ordinary section summaries/body paragraphs/prompts and premium teaser/full-access templates/prompts survive builder-facing projection. Focused validation passed 7 tests/911 assertions, Pint, deterministic package hashing, and diff checks."
+        "note": "Addressed the fifth valid P2 with a frozen canonical_projection_contract. That head passed all required checks; exact-head review then found a P1 public-payload leak risk and a P2 offer consumer mismatch. Premium builder-facing projection is now title/teaser with payload null; full templates remain protected inactive/draft source only, and the package explicitly says it implements no entitlement filter. Offer copy now uses the exact OfferResolver cta_copy keys under commercial_spec.variants[] and declares offer_set.cta as the consumer field. Package SHA is dbb00e41019876fb43cb2c59ecff6d1aebe4faeac1d2f3eeaba28b22188c0e3f."
+      },
+      {
+        "at": "2026-07-30T19:25:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the P1/P2 pair: premium public projection now returns payload null and retains full templates only as non-public inactive/draft source, while offer copy freezes the exact OfferResolver cta_copy schema and offer_set.cta consumer lineage. Focused validation passed 7 tests/917 assertions, Pint, deterministic package hashing, and diff checks. No entitlement filter, commerce metadata, importer, or runtime behavior was changed."
       }
     ],
-    "updated_at": "2026-07-30T19:14:30Z"
+    "updated_at": "2026-07-30T19:25:30Z"
   }
 }
