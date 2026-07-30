@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '62f54bbd440c2adca15adb1867a977c1224c4fdc83f827111e8c763216b6acea';
+    private const PACKAGE_SHA = '0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -295,6 +295,18 @@ final class MbtiResultEnglishPackageTest extends TestCase
             self::assertNotSame('', trim($surface['blocked_content']));
             self::assertNotSame('', trim($surface['package_behavior']));
         }
+
+        $surfacesByName = collect($matrix['surfaces'])->keyBy('surface');
+        self::assertNotContains('offer_set', $surfacesByName['preview_result']['authority_fields']);
+        self::assertStringContainsString(
+            'no preview offer candidate',
+            $surfacesByName['preview_result']['package_behavior'],
+        );
+        self::assertContains('offer_set', $surfacesByName['locked_result']['authority_fields']);
+        self::assertStringContainsString(
+            'locked-upsell offer copy',
+            $surfacesByName['module_and_cta_labels']['allowed_content'],
+        );
 
         $assets = $this->readPackageJson('assets.json')['assets'];
         $premiumRows = array_column(array_values(array_filter(

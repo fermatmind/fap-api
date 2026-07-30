@@ -12,10 +12,10 @@
     },
     {
       "surface": "preview_result",
-      "authority_fields": ["profile", "summary_card", "dimensions", "sections", "offer_set"],
-      "allowed_content": "existing preview fields plus preview offer copy",
-      "blocked_content": "locked full-report body",
-      "package_behavior": "copy candidate only"
+      "authority_fields": ["profile", "summary_card", "dimensions", "sections"],
+      "allowed_content": "existing preview fields authorized by the existing access policy",
+      "blocked_content": "locked full-report body and the package locked-upsell offer candidate",
+      "package_behavior": "preserved control; this package produces no preview offer candidate"
     },
     {
       "surface": "locked_result",
@@ -62,7 +62,7 @@
     {
       "surface": "module_and_cta_labels",
       "authority_fields": ["offer_set", "existing fap-web locale labels"],
-      "allowed_content": "package offer copy and preserved renderer labels",
+      "allowed_content": "package locked-upsell offer copy and preserved renderer labels",
       "blocked_content": "frontend editorial fallback",
       "package_behavior": "same authority fields on mobile and desktop"
     },

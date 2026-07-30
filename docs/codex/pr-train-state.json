@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA 62f54bbd440c2adca15adb1867a977c1224c4fdc83f827111e8c763216b6acea reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through commercial_spec to offer_set.cta. Ordinary sections have deterministic body/prompt projection; premium public projection is fail-closed to title/teaser with protected full templates retained only for inactive/draft authority. All controlled permissions remain false."
+        "evidence": "Frozen candidate package SHA 0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through commercial_spec to offer_set.cta. The preview surface is a preserved control and cannot consume that locked-upsell candidate. Ordinary sections have deterministic body/prompt projection; premium public projection is fail-closed to title/teaser with protected full templates retained only for inactive/draft authority. All controlled permissions remain false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/923 assertions covering canonical registry buckets, deterministic ordinary-section projection, fail-closed premium teaser projection, exact commercial_spec cta_copy shape, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 62f54bbd440c2adca15adb1867a977c1224c4fdc83f827111e8c763216b6acea, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/927 assertions covering canonical registry buckets, deterministic ordinary-section projection, fail-closed premium teaser projection, exact commercial_spec cta_copy shape, preview exclusion, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101596,8 +101596,13 @@
         "at": "2026-07-30T19:37:40Z",
         "status": "github_checks_pending",
         "note": "Committed the two review repairs as exact implementation commit d1993f1d25a6ba620d6e9063c4f2a35841c271d6. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T19:47:11Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 0396bf04a77cc1d2bd97d8eb6e991dabdfee6278 passed all nine required checks with staging parity skipped, then review found one valid P2: the entitlement matrix still placed offer_set on preview_result despite the sole CTA candidate being locked_upsell_only. The matrix now keeps preview as a preserved control, excludes offer_set and the package CTA from preview, and reserves package offer copy for locked-upsell surfaces. Focused validation passed 7 tests/927 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a."
       }
     ],
-    "updated_at": "2026-07-30T19:37:40Z"
+    "updated_at": "2026-07-30T19:47:11Z"
   }
 }
