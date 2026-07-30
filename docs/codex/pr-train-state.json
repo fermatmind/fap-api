@@ -101263,8 +101263,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "review_fix_local_verified",
-    "commit_sha": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f90759f0666c3c597f9548a1dcc6139a00c9484c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101312,12 +101312,12 @@
         "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
       },
       "final_head_checks": {
-        "status": "superseded_by_second_review_fix",
-        "evidence": "Head e2e5d4ec7ea7ff0d6f6de5773b83196556c07b58 passed every applicable GitHub check, but refreshed exact-head review found two actionable issues. The corrected head must repeat required checks."
+        "status": "pending",
+        "evidence": "Second review-fix implementation head f90759f0666c3c597f9548a1dcc6139a00c9484c is pushed; required GitHub checks and refreshed exact-head review are pending."
       },
       "codex_review": {
-        "status": "second_round_resolved_locally_pending_rereview",
-        "evidence": "The refreshed review correctly found an unrelated Career manifest status regression and the skipped ISTJ/ISFJ revision shape. The Career status now exactly matches origin/main ready_to_merge, while ISTJ/ISFJ preserves 1-body narrative cardinality and 4-row table cardinality; the focused test no longer exempts that row."
+        "status": "second_round_resolved_pushed_pending_rereview",
+        "evidence": "The refreshed review correctly found an unrelated Career manifest status regression and the skipped ISTJ/ISFJ revision shape. Commit f90759f0666c3c597f9548a1dcc6139a00c9484c restores the Career status to origin/main, preserves ISTJ/ISFJ 1-body narrative and 4-row table cardinality, removes the test exemption, and records responses on both review threads."
       }
     },
     "failure_reason": null,
@@ -101377,8 +101377,13 @@
         "at": "2026-07-30T17:09:30Z",
         "status": "review_fix_local_verified",
         "note": "Exact head e2e5d4ec7ea7ff0d6f6de5773b83196556c07b58 passed all applicable checks, then refreshed Codex review found two valid items: a stale unrelated Career YAML status and ISTJ/ISFJ narrative cardinality 1-to-2. Restored the Career status to origin/main, made all five ISTJ/ISFJ narrative sections 1-to-1, retained the exact four table rows, removed the test exemption, and froze replacement package SHA 6ceac9fca788a8e50bc1182b7c42a3fb79a887b554fd2240df5a4a2d871b73ba. Focused validation passes 6 tests/1076 assertions and Pint."
+      },
+      {
+        "at": "2026-07-30T17:12:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed second review-fix implementation commit f90759f0666c3c597f9548a1dcc6139a00c9484c and replied on both exact review threads. Fresh required checks and refreshed exact-head review are pending."
       }
     ],
-    "updated_at": "2026-07-30T17:09:30Z"
+    "updated_at": "2026-07-30T17:12:15Z"
   }
 }
