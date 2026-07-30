@@ -1839,9 +1839,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_three_channel_report_unlock_contract_service(): void
+    public function test_runtime_freeze_classifier_ignores_three_channel_report_unlock_contract_services(): void
     {
         $changed = [
+            'backend/app/Services/Access/AttemptUnlockProjectionRepairService.php',
             'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
         ];
 
@@ -10850,7 +10851,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isThreeChannelReportUnlockContractFile(string $file): bool
     {
-        return $file === 'backend/app/Services/Commerce/ReportUnlockOptionResolver.php';
+        return in_array($file, [
+            'backend/app/Services/Access/AttemptUnlockProjectionRepairService.php',
+            'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
+        ], true);
     }
 
     private function isFreeFullReportModeFeatureFlagFile(string $file): bool
