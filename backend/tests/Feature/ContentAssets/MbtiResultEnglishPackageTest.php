@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a';
+    private const PACKAGE_SHA = '8662bc3cd22f3a00b0bb188e47fdb4247c87bca93ba355485155405af058358f';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -280,7 +280,20 @@ final class MbtiResultEnglishPackageTest extends TestCase
         $claimReport = $this->readPackageJson('claim_boundary_report.json');
         self::assertSame('pass_producer_self_check_only', $claimReport['result']);
         self::assertFalse($claimReport['independent_w9']);
-        self::assertSame([], $claimReport['forbidden_claim_scan']['matches']);
+
+        $actualMatches = [];
+        foreach ($claimReport['forbidden_claim_scan']['phrases'] as $phrase) {
+            if (str_contains($serialized, strtolower($phrase))) {
+                $actualMatches[] = $phrase;
+            }
+        }
+        self::assertSame(
+            $actualMatches,
+            array_column($claimReport['forbidden_claim_scan']['matches'], 'phrase'),
+        );
+        self::assertSame(['fixed identity'], $actualMatches);
+        self::assertSame('negated_boundary', $claimReport['forbidden_claim_scan']['matches'][0]['context']);
+        self::assertSame('allowed_explicit_rejection', $claimReport['forbidden_claim_scan']['matches'][0]['disposition']);
     }
 
     #[Test]

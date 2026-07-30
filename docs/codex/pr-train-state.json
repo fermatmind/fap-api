@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. Premium teaser assets follow the canonical registry bucket, and the PDF mapping truthfully requires an exact-package W9 fixture adapter because the current legacy builder does not consume candidate assets. The package retains all controlled permissions as false."
+        "evidence": "Frozen candidate package SHA 8662bc3cd22f3a00b0bb188e47fdb4247c87bca93ba355485155405af058358f reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. Premium teaser assets follow the canonical registry bucket, the PDF mapping truthfully requires an exact-package W9 fixture adapter, and the claim scan records its one negated-boundary phrase rather than suppressing the match. The package retains all controlled permissions as false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests and 795 assertions, including canonical registry bucket and real PDF payload/adapter assertions. Scoped Pint, package JSON parsing, deterministic package SHA b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a, git diff, and exact scope checks passed. After the required process guard, the isolated SQLite ci_verify wrapper again ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/798 assertions covering canonical registry buckets, real PDF payload/adapter assertions, and exact forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 8662bc3cd22f3a00b0bb188e47fdb4247c87bca93ba355485155405af058358f, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101565,9 +101565,14 @@
       {
         "at": "2026-07-30T18:44:30Z",
         "status": "review_fix_local_verified",
-        "note": "The first GitHub round passed all required checks, then exact-head review identified two valid current-scope P2 contract gaps. Four premium teaser assets now use the canonical premium_teaser bucket, and the PDF fixture mapping now names the actual mbti_pdf_payload fields, records that the legacy builder does not consume this package, and requires an exact-package W9 fixture adapter that fails on legacy-only coverage. Frozen package SHA is now b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a. Focused validation passed 7 tests/795 assertions, and the full isolated SQLite ci_verify_mbti.sh chain exited 0. No runtime, CMS, database, import, activation, release, or deploy action occurred."
+        "note": "The first GitHub round passed all required checks, then exact-head review identified two valid current-scope P2 contract gaps. Four premium teaser assets now use the canonical premium_teaser bucket, and the PDF fixture mapping now names the actual mbti_pdf_payload fields, records that the legacy builder does not consume this package, and requires an exact-package W9 fixture adapter that fails on legacy-only coverage. That review-fix head passed all required checks; a third valid P2 then identified a suppressed negated-boundary phrase match, which is now explicitly recorded and test-reconciled. Frozen package SHA is now 8662bc3cd22f3a00b0bb188e47fdb4247c87bca93ba355485155405af058358f. No runtime, CMS, database, import, activation, release, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-30T18:53:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the third valid P2 without changing candidate copy: forbidden_claim_scan now records the actual fixed identity match as an allowed explicit rejection with row and JSON-pointer evidence. The test derives matches from assets.json and requires exact agreement with the report. Focused validation passed 7 tests/798 assertions, Pint, deterministic package hashing, and diff checks. Package SHA is 8662bc3cd22f3a00b0bb188e47fdb4247c87bca93ba355485155405af058358f."
       }
     ],
-    "updated_at": "2026-07-30T18:44:30Z"
+    "updated_at": "2026-07-30T18:53:30Z"
   }
 }
