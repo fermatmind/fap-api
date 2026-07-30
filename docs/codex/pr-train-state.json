@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "0cc2578c99fd7edd5bb0edfbf0cbdf42536d8c44",
+    "commit_sha": "d1993f1d25a6ba620d6e9063c4f2a35841c271d6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101591,8 +101591,13 @@
         "at": "2026-07-30T19:36:32Z",
         "status": "review_fix_local_verified",
         "note": "Exact-head review found and this scope repaired two valid P2 evidence mismatches. The W9 mapping now partitions the 20 PDF-consumable candidates from the single non-PDF offer CTA and requires separate locked-upsell result-page QA for that CTA. Producer editorial evidence now describes the final single commercial_spec cta_copy object and explicitly records that this package produces no preview variant. Focused validation passed 7 tests/923 assertions, scoped Pint, JSON parsing, deterministic package SHA, diff, and exact changed-file scope checks. Candidate package SHA is 62f54bbd440c2adca15adb1867a977c1224c4fdc83f827111e8c763216b6acea."
+      },
+      {
+        "at": "2026-07-30T19:37:40Z",
+        "status": "github_checks_pending",
+        "note": "Committed the two review repairs as exact implementation commit d1993f1d25a6ba620d6e9063c4f2a35841c271d6. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T19:36:32Z"
+    "updated_at": "2026-07-30T19:37:40Z"
   }
 }
