@@ -6,6 +6,7 @@ namespace Tests\Feature\Console;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Services\BigFive\AuthorityV2\ReleaseGate\BigFiveAuthorityV2DraftImportWriter;
 use App\Services\BigFive\AuthorityV3\ReadOnly\BigFiveEnglishDraftInventory;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
@@ -21,6 +22,9 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
     /** @var array<string,array{authority_asset_key:string,source_hash:string,attributes:array<string,mixed>,snapshot:array<string,mixed>}>|null */
     private static ?array $en52Descriptors = null;
+
+    /** @var array<string,array<string,mixed>>|null */
+    private static ?array $historicalSnapshots = null;
 
     public function test_empty_authority_emits_exact_historical_slots_fail_closed_without_writes(): void
     {
@@ -307,6 +311,30 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('current_published_revision_not_locked_en52_authority', $row['blocker']);
     }
 
+    public function test_locked_en52_revision_requires_exact_publisher_operator(): void
+    {
+        $asset = $this->createAsset();
+        $current = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $current->forceFill(['created_by_admin_user_id' => null])->saveQuietly();
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($row['published_en52_lineage_locked']);
+        $this->assertFalse($row['published_projection_exists']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('current_published_revision_not_locked_en52_authority', $row['blocker']);
+    }
+
     public function test_historical_slot_requires_exact_draft_import_source_hash(): void
     {
         $asset = $this->createAsset();
@@ -335,6 +363,39 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertNull($row['historical_draft_revision_id']);
         $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
         $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
+    }
+
+    public function test_historical_slot_requires_exact_transformed_snapshot(): void
+    {
+        $asset = $this->createAsset();
+        $historical = $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            [
+                ...$this->completeSnapshot('Substituted clean snapshot'),
+                'clean_note' => 'not part of the registered Authority V2 snapshot',
+            ],
+        );
+        $current = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertSame($historical->id, $row['historical_draft_revision_id']);
+        $this->assertFalse($row['historical_snapshot_locked']);
+        $this->assertSame('snapshot_mismatch', $row['historical_slot_resolution']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('registered_historical_slot_snapshot_mismatch', $row['blocker']);
     }
 
     public function test_registered_historical_revision_survives_later_unreferenced_revisions(): void
@@ -698,6 +759,16 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 (string) $asset->entity_key,
             );
             $snapshot = $descriptor['snapshot'] ?? [];
+        } elseif ($historical && array_keys($snapshot) === [
+            'title',
+            'summary',
+            'content_sections_json',
+            'faq_json',
+        ]) {
+            $snapshot = $this->historicalSnapshot(
+                (string) $asset->entity_type,
+                (string) $asset->entity_key,
+            ) ?? $snapshot;
         }
 
         return PersonalityPublicContentAssetRevision::query()->create([
@@ -723,6 +794,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'workflow_state' => $en52 ? BigFiveEn52Publisher::WORKFLOW_STATE : 'draft',
             'public_runtime_fingerprint_before' => str_repeat('c', 64),
             'snapshot_json' => $snapshot,
+            'created_by_admin_user_id' => $en52 ? BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID : null,
         ]);
     }
 
@@ -795,6 +867,41 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'facet_detail:imagination' => '13c2d7135423a730f1a929f14f53b6e6e5443fbf154ec13d5aae11f0cc7f7365',
             default => hash('sha256', 'historical-test:'.$asset->entity_type.':'.$asset->entity_key),
         };
+    }
+
+    /** @return array<string,mixed>|null */
+    private function historicalSnapshot(string $entityType, string $entityKey): ?array
+    {
+        if (self::$historicalSnapshots === null) {
+            $path = dirname(__DIR__, 4)
+                .'/generated/big-five-authority-v2/big5-authority-v2-release-gate-37/draft-import-package.json';
+            $package = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+            $wanted = [
+                PersonalityPublicContentAsset::ENTITY_DOMAIN.':openness' => true,
+                PersonalityPublicContentAsset::ENTITY_FACET_DETAIL.':imagination' => true,
+            ];
+            $writer = new BigFiveAuthorityV2DraftImportWriter;
+            $method = (new \ReflectionClass($writer))->getMethod('descriptor');
+            $snapshots = [];
+            foreach ($package['assets'] as $entry) {
+                if (($entry['authority_surface'] ?? null) !== 'CMS personality_public_content_assets') {
+                    continue;
+                }
+                $descriptor = $method->invoke($writer, $entry);
+                $attributes = $descriptor['attributes'];
+                if (($attributes['locale'] ?? null) !== 'en') {
+                    continue;
+                }
+                $identity = $attributes['entity_type'].':'.$attributes['entity_key'];
+                if (isset($wanted[$identity])) {
+                    $snapshots[$identity] = $attributes;
+                }
+            }
+            unset($package);
+            self::$historicalSnapshots = $snapshots;
+        }
+
+        return self::$historicalSnapshots[$entityType.':'.$entityKey] ?? null;
     }
 
     private function fingerprint(): string

@@ -131,6 +131,60 @@ final class BigFiveEnglishDraftInventory
         'facet_detail:warmth' => '37023425ec12320e7f1a3779917f032de2d1e1dc8ec026af568be2e702fff3e7',
     ];
 
+    /** @var array<string,string> logical identity => stable transformed Authority V2 snapshot hash */
+    private const HISTORICAL_SNAPSHOT_HASHES = [
+        'domain:agreeableness' => 'fb6dee35f2a1f1ffac016ee9d4c23a8acdc45bb439ca81fb3b9b101e68f94e88',
+        'domain:conscientiousness' => '7283ec87997fcf08aedcd3818c54a64fd697eda2ac1ebacbec9785d404e95e1a',
+        'domain:extraversion' => 'a798b2255d98392a601cfcad3bea0a80eaa6ec5f8d2dcd1d0f3ff2fb3bf3bb62',
+        'domain:neuroticism' => '8e0d8d2e0655d522e515fb23b874b9660ff99c2ea02970fcf5121c3bcacd6ce6',
+        'domain:openness' => '36c7d6d6d44b27777735ba999f247aa57d91ca2135af0a6a017a6570d6a06edf',
+        'facet_detail:achievement-striving' => '669e91038a5610149fa99a60badcdd80407fbb7337af3a0977ff49444dba5a66',
+        'facet_detail:actions' => '8fd14800efc8e083b360c62242086eaf6b5cd2b308b2ed51b291482a278e4ee9',
+        'facet_detail:activity' => '50626826afb1730910c054879fcd01cc32656e3bdf5739f9352ceff506b07ec7',
+        'facet_detail:aesthetics' => 'fc349650cb9b09e36a5464c3867ca06b81da412a1c7f50a94db6f4fdd29329d5',
+        'facet_detail:altruism' => '7e4e3e00f6ee4122e1c87410eb4dd50841b480c17ed7e2c27d2986073c00fd0c',
+        'facet_detail:anger' => '7beb8e072bcaf8696ac7e28d8d3c42942187a21c1eba5e6a45f890ed90c12754',
+        'facet_detail:anxiety' => 'eb5d195a5d7abe6134557953580d235a7b7f3e144038714a977853ad71d8c696',
+        'facet_detail:assertiveness' => '38659ec1cf49bff5aea12af1b4289f73a77e28120e274d5aee301475e9edd9c8',
+        'facet_detail:competence' => '92c81ad4458d3198cf2c34ec5971305a03643616e4fe0bb33fb26f767f083d70',
+        'facet_detail:compliance' => '336d33a680cd6e011896130cfd962d73dc429ee9387fc6c2d49fcec648a62f22',
+        'facet_detail:deliberation' => '98a7fa1a15e9a2a68438a95562c6986984f87dccab6d56cd7afd3421ad9a6af5',
+        'facet_detail:depression' => 'b4721e1f9eec591ed60c133c8342be4e2e7256dc3034a1042d66f3cccdd354b2',
+        'facet_detail:dutifulness' => 'af5ab839f535269cf7c6c2f9dfaffa6b8496d38abafa34503ee354a347d448a5',
+        'facet_detail:excitement-seeking' => '437aed58c3f9776275ff896f4da7d865ae27f92500c7bc61d13fc7ee3cffc5f1',
+        'facet_detail:feelings' => 'f0ad3e6f2f23856edbfcd057fd9d6549116b968609a06204d99910adee78bdd5',
+        'facet_detail:gregariousness' => '4dfbfe3dd3feb6102bfb3b0a026dd0cac341a7d85b5b054f32c173b6615e509e',
+        'facet_detail:ideas' => '67a402661920c26753930fb048ea351bbd4d9afa69c3ccb8c51feb3e644d42ca',
+        'facet_detail:imagination' => 'a4f518a06cbddead6dc08ad1e2d313660e2fe69f073065380a73ed9086a9a25a',
+        'facet_detail:impulsiveness' => '01a3fce05106b1b9dd47e2be06c1ea0ab93e178b4d08ca9660cca53d4148fef7',
+        'facet_detail:modesty' => '157d7698e76b116f5b37ef5904471cf0e1d63b5d70f78cb976ff8c4d83e3989b',
+        'facet_detail:order' => '8658d32e7d4bd89330d9a41e6e69e1363715db7d927fb463978960514dc9f50c',
+        'facet_detail:positive-emotions' => 'c13e808f3ae78ba664e3710bedf12b8a6494f4eca105d34ed074dfb9b2deeb8a',
+        'facet_detail:self-consciousness' => '86fbddf00fb023831c35a1ee11b73c37ca57c441e0ca0b33c3d645cde84a3368',
+        'facet_detail:self-discipline' => 'b15ba1b054e8131c6db89e952f65874d624c7e070baf853fa8b537d35f88f0d7',
+        'facet_detail:straightforwardness' => '4ea504e079abf191faae0c4d0dfa9d5713efc8b25d76b3d11839a3acfb590b73',
+        'facet_detail:tender-mindedness' => 'c18c3c7fbd0b60da4f4cb8fa21ee4a632804c761eba9405895a9b9f93822688e',
+        'facet_detail:trust' => 'c5d433c413bab3315fdb728e4fc01a4679c279eeba487e5ef758c508f27473dd',
+        'facet_detail:values' => '72fb99aaba07bb6191680144af7a77fef97bfa7d525dc05ee47e462fa5de8618',
+        'facet_detail:vulnerability' => '0a5283ceba9f837b5f7be2dad00b79b30a83b6b99537bc3ae1cd1ce7d7b39dd8',
+        'facet_detail:warmth' => '3aa9e595252879c3092052664bf20ba8c3a0b94e27075de1dd89d280754be199',
+        'polarity:agreeableness-high' => 'c2626b31c28dd2ecc5c7d1114b8aae5823ace6bdefa9616e4ad8e188861f5fbb',
+        'polarity:agreeableness-low' => 'f1b326abf79b655e70e5f5165141feb80ef7117622cbdc7f11d87c3e36509d27',
+        'polarity:agreeableness-mid' => '10fd1518a10a2c4386b31249308a6666a97c1337ba20f379fdf76e8e3a184a9a',
+        'polarity:conscientiousness-high' => 'bdda353df7ffd3592bb7916d441a307fdbc1013438caf1208698cac40a435b73',
+        'polarity:conscientiousness-low' => '265c9e36c3cbee186e9776e57f3c8e3dbdff3271c2bf294667841539baafa4ab',
+        'polarity:conscientiousness-mid' => '8b247035bf9ac2585d7fe7bfab8c3f2ee9471698308b5b3713ddc6879ae1244d',
+        'polarity:extraversion-high' => 'e130a787161e157377676773e5cb7e370a9cd037fbe5d4cb4cb09d5291e8df68',
+        'polarity:extraversion-low' => 'eec013fa4d4040ea8ce4a298602e4e0919ea00badf9898f10a67d38e4eb36ed1',
+        'polarity:extraversion-mid' => '78872e525856ddf69fab8c9f6695b95d5c31200d41f5c9558d201fc58c76bfbd',
+        'polarity:neuroticism-high' => '4b89da9fedd6668c9b257cfeb50e9223c3deb118f3d571b28a1dadf4f7b58cc8',
+        'polarity:neuroticism-low' => '6dbbba24f0cc65b932075c4b4c9156c939f1ad38eef1d4b5fe4a4082a60b263c',
+        'polarity:neuroticism-mid' => '872b086efac0b3d50aafb4547e5c6a8a07e66b7666814115bfa80bf320979077',
+        'polarity:openness-high' => '72f2f203459492a4a6a863f2592c6aceae5693a1ff59f723bfdb78150ff5e4b8',
+        'polarity:openness-low' => '5052588fe14d7a091ed111ee30b75d7d40c450dc53bfc37642f928e5692b3dc9',
+        'polarity:openness-mid' => '2fd2af491e66c25d9b9e3ae4d0751be529950ccf0845b90a77a78d6438256f7c',
+    ];
+
     /** @var array<string,string> */
     private const HISTORICAL_PACKAGE_BY_DOMAIN = [
         'agreeableness' => 'big5-authority-v2-range-agreeableness-13',
@@ -306,6 +360,7 @@ final class BigFiveEnglishDraftInventory
                     'historical_draft_revision_id' => null,
                     'historical_draft_revision_status' => null,
                     'historical_draft_fingerprint_sha256' => null,
+                    'historical_snapshot_locked' => null,
                     'historical_draft_created_at' => null,
                     'historical_draft_updated_at' => null,
                     'historical_draft_pointer_active' => false,
@@ -327,6 +382,11 @@ final class BigFiveEnglishDraftInventory
             /** @var PersonalityPublicContentAssetRevision $revision */
             $revision = $registered->first();
             $historicalFingerprint = $this->fingerprint($revision->snapshot_json);
+            $historicalSnapshotLocked = isset(self::HISTORICAL_SNAPSHOT_HASHES[$row['logical_identity']])
+                && hash_equals(
+                    self::HISTORICAL_SNAPSHOT_HASHES[$row['logical_identity']],
+                    hash('sha256', $this->stableJson($revision->snapshot_json)),
+                );
             $historicalPayload = json_encode(
                 $revision->snapshot_json ?? [],
                 JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE,
@@ -349,13 +409,14 @@ final class BigFiveEnglishDraftInventory
                 'historical_draft_revision_id' => (int) $revision->id,
                 'historical_draft_revision_status' => (string) $revision->workflow_state,
                 'historical_draft_fingerprint_sha256' => $historicalFingerprint,
+                'historical_snapshot_locked' => $historicalSnapshotLocked,
                 'historical_draft_created_at' => $revision->created_at?->toAtomString(),
                 'historical_draft_updated_at' => $revision->updated_at?->toAtomString(),
                 'historical_draft_pointer_active' => $historicalWorkingPointerActive
                     || $historicalPublishedPointerActive,
                 'historical_working_pointer_active' => $historicalWorkingPointerActive,
                 'historical_published_pointer_active' => $historicalPublishedPointerActive,
-                'historical_slot_resolution' => 'resolved',
+                'historical_slot_resolution' => $historicalSnapshotLocked ? 'resolved' : 'snapshot_mismatch',
                 'historical_draft_equals_current_published' => $row['published_revision_fingerprint_sha256'] !== null
                     && hash_equals($row['published_revision_fingerprint_sha256'], $historicalFingerprint),
                 'historical_source_package' => (string) $revision->source_package,
@@ -366,12 +427,14 @@ final class BigFiveEnglishDraftInventory
                 'historical_chinese_leakage' => $historicalCjk,
                 'recommended_disposition' => match (true) {
                     $historicalProhibited && $historicalMayBlock => 'prohibited_content',
-                    $mayClassifyHistoricalLineage => 'stale_working_revision',
+                    ! $historicalSnapshotLocked && $historicalMayBlock => 'blocked_authority_unknown',
+                    $historicalSnapshotLocked && $mayClassifyHistoricalLineage => 'stale_working_revision',
                     default => $row['recommended_disposition'],
                 },
                 'blocker' => match (true) {
                     $historicalProhibited && $historicalMayBlock => 'historical_draft_prohibited_content',
-                    $mayClassifyHistoricalLineage => null,
+                    ! $historicalSnapshotLocked && $historicalMayBlock => 'registered_historical_slot_snapshot_mismatch',
+                    $historicalSnapshotLocked && $mayClassifyHistoricalLineage => null,
                     default => $row['blocker'],
                 },
             ]);
@@ -517,6 +580,7 @@ final class BigFiveEnglishDraftInventory
             && (string) $published->source_package === BigFiveEn52PackageCompiler::RELEASE_ID
             && (string) $published->authority_package_sha256 === BigFiveEn52Publisher::PACKAGE_FILE_SHA256
             && (string) $published->workflow_state === BigFiveEn52Publisher::WORKFLOW_STATE
+            && (int) $published->created_by_admin_user_id === BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID
             && (string) $published->authority_asset_key === $en52AuthorityAssetKey
             && hash_equals($descriptorLock[0], (string) $published->source_hash)
             && hash_equals($descriptorLock[1], hash('sha256', $this->stableJson($publishedSnapshot)))
